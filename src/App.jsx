@@ -20,12 +20,15 @@ export default function App() {
   const screen = useGameStore((s) => s.screen)
   const showRaceSelect = useGameStore((s) => s.showRaceSelect)
   const player = useGameStore((s) => s.player)
-  const timerState = useGameStore((s) => s.timer.state)
   const loadPlayer = useGameStore((s) => s.loadPlayer)
 
   const { user, loading, init } = useAuthStore()
   const playerRef = useRef(player)
   playerRef.current = player
+
+  const syncTimerRef = useRef(null)
+  // loadedRef: true setelah loadSave selesai, biar debounce ga fire saat loadPlayer
+  const loadedRef = useRef(false)
 
   // Track Zustand persist hydration
   const [hydrated, setHydrated] = useState(() => useGameStore.persist.hasHydrated())
@@ -33,7 +36,6 @@ export default function App() {
   useEffect(() => {
     if (hydrated) return
     const unsub = useGameStore.persist.onFinishHydration(() => setHydrated(true))
-    // Fallback: kalau sudah hydrated sebelum subscribe
     if (useGameStore.persist.hasHydrated()) setHydrated(true)
     return unsub
   }, [])
@@ -45,31 +47,26 @@ export default function App() {
   // Supabase selalu menang atas localStorage
   useEffect(() => {
     if (!user || !hydrated) return
+    loadedRef.current = false
     loadSave(user.id).then((save) => {
-      if (save) {
-        console.log('[App] cloud save loaded, overriding local state')
-        loadPlayer(save)
-      } else {
-        console.log('[App] no cloud save found, using local state')
-      }
+      if (save) loadPlayer(save)
+      // Tunggu React render selesai baru aktifkan debounce
+      setTimeout(() => { loadedRef.current = true }, 500)
     })
   }, [user?.id, hydrated])
 
-  // Sync saat session selesai (completed)
+  // Debounced sync tiap player berubah (3 detik setelah perubahan terakhir)
+  // Ini yang utama — setiap upgrade/exp/anium berubah langsung ke-push Supabase
   useEffect(() => {
-    if (!user || timerState !== 'completed') return
-    console.log('[App] session complete, syncing to cloud...')
-    syncSave(user.id, playerRef.current)
-  }, [timerState, user?.id])
-
-  // Auto-sync tiap 60 detik
-  useEffect(() => {
-    if (!user) return
-    const interval = setInterval(() => {
+    if (!user || !hydrated || !loadedRef.current) return
+    if (syncTimerRef.current) clearTimeout(syncTimerRef.current)
+    syncTimerRef.current = setTimeout(() => {
       syncSave(user.id, playerRef.current)
-    }, 60000)
-    return () => clearInterval(interval)
-  }, [user?.id])
+    }, 3000)
+    return () => {
+      if (syncTimerRef.current) clearTimeout(syncTimerRef.current)
+    }
+  }, [player, user?.id, hydrated])
 
   // Sync saat tab/browser ditutup
   useEffect(() => {
