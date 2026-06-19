@@ -69,7 +69,25 @@ export default function App() {
     return () => clearTimeout(debounceRef.current)
   }, [player, user?.id])
 
-  // Step 3: sync saat tab ditutup
+  // Step 3: poll cloud tiap 20 detik — kalau cloud lebih maju, update lokal
+  useEffect(() => {
+    if (!user) return
+    const interval = setInterval(async () => {
+      if (!readyRef.current) return
+      const cloud = await loadSave(user.id)
+      if (!cloud) return
+      const local = playerRef.current
+      const score = (p) => (p?.totalSessions || 0) * 1000 + (p?.level || 0)
+      if (score(cloud) > score(local)) {
+        readyRef.current = false
+        loadPlayer(cloud)
+        setTimeout(() => { readyRef.current = true }, 1000)
+      }
+    }, 20000)
+    return () => clearInterval(interval)
+  }, [user?.id])
+
+  // Step 4: sync saat tab ditutup
   useEffect(() => {
     if (!user) return
     const onUnload = () => syncSave(user.id, playerRef.current)
