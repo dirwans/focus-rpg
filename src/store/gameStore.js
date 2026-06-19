@@ -142,12 +142,6 @@ export const useGameStore = create(
             race: raceId,
             upgrades: { atk: 0, def: 0, hp: 0 },
             equipment: { weapon: null, armor: null, shield: null },
-            level: 1,
-            exp: 0,
-            resources: { anium: 200, credits: 10, potions: 5 },
-            sector: 1,
-            highestSector: 1,
-            inventory: [],
             savedAt: Date.now(),
           },
         }))

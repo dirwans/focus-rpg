@@ -263,6 +263,27 @@ app.get('*', (req, res) => {
   res.sendFile(join(__dirname, 'dist', 'index.html'))
 })
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   console.log(`[FocusRPG] server running on :${PORT} — ${users.length} user(s)`)
+  try {
+    const ironewanSave = loadSave('ironewan')
+    if (ironewanSave && ironewanSave.level === 1) {
+      const updated = {
+        ...ironewanSave,
+        level: 4,
+        exp: 0,
+        sector: 2,
+        highestSector: 2,
+        resources: {
+          ...ironewanSave.resources,
+          anium: (ironewanSave.resources?.anium || 200) + 3829
+        },
+        savedAt: Date.now()
+      }
+      await writeSave('ironewan', updated)
+      console.log('[restore] ironewan character progress successfully restored to Level 4 & 4029 Anium')
+    }
+  } catch (e) {
+    console.error('[restore] failed to auto-restore ironewan:', e)
+  }
 })
