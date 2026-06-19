@@ -1,29 +1,242 @@
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: #050810; color: #e0f4ff; overflow: hidden; height: 100vh; }
-#root { width: 100%; min-height: 100vh; display: flex; justify-content: center; }
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --bg-darkest: #03060f;
+  --bg-darker: #060c18;
+  --bg-dark: #0a142c;
+  --bg-glass: rgba(6, 15, 35, 0.75);
+  
+  --neon-cyan: #00e5ff;
+  --neon-orange: #ff8c00;
+  --neon-purple: #d000ff;
+  --neon-green: #39ff14;
+  --neon-red: #ff3131;
+  --neon-gold: #ffbe00;
+  
+  --border-neon: rgba(0, 229, 255, 0.25);
+  --border-neon-glow: 0 0 10px rgba(0, 229, 255, 0.15);
+  
+  --font-title: 'Orbitron', sans-serif;
+  --font-body: 'Rajdhani', sans-serif;
+  --font-mono: 'Share Tech Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg-darkest);
+  color: #e0f4ff;
+  overflow: hidden;
+  height: 100vh;
+  font-family: var(--font-body);
+  /* Cybernetic Grid Background */
+  background-image: 
+    linear-gradient(rgba(18, 30, 60, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(18, 30, 60, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: center;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
 
 /* Desktop view: styled mobile frame mockup */
 .game-root {
   min-height: 100vh;
-  background: #050810;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px 0;
   width: 100%;
+  background: radial-gradient(circle at center, #0f1c3f 0%, var(--bg-darkest) 100%);
 }
 
 .game-container {
   width: 390px;
   height: 844px;
   max-height: 95vh;
-  background: #080d1a;
-  border: 2px solid #1a3a5c;
-  border-radius: 40px;
+  background: var(--bg-darker);
+  border: 2px solid #00e5ff;
+  border-radius: 36px;
+  box-shadow: 
+    0 0 30px rgba(0, 229, 255, 0.15),
+    inset 0 0 15px rgba(0, 229, 255, 0.08);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   position: relative;
+}
+
+/* CRT Scanline Overlay Effect */
+.game-container::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+  z-index: 999;
+  background-size: 100% 4px, 6px 100%;
+  pointer-events: none;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.2);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 229, 255, 0.3);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 229, 255, 0.6);
+}
+
+/* 3D Glassmorphic Panels */
+.cyber-panel {
+  background: var(--bg-glass);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  border-radius: 14px;
+  box-shadow: 
+    inset 0 0 10px rgba(0, 229, 255, 0.05),
+    0 4px 20px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.cyber-panel:hover {
+  border-color: rgba(0, 229, 255, 0.4);
+  box-shadow: 
+    inset 0 0 15px rgba(0, 229, 255, 0.1),
+    0 0 15px rgba(0, 229, 255, 0.15);
+}
+
+/* Race specific panels */
+.panel-accretia {
+  border-color: rgba(255, 140, 0, 0.3);
+  box-shadow: inset 0 0 10px rgba(255, 140, 0, 0.05);
+}
+.panel-accretia:hover {
+  border-color: var(--neon-orange);
+  box-shadow: inset 0 0 15px rgba(255, 140, 0, 0.1), 0 0 15px rgba(255, 140, 0, 0.2);
+}
+
+.panel-bellato {
+  border-color: rgba(0, 229, 255, 0.3);
+}
+.panel-bellato:hover {
+  border-color: var(--neon-cyan);
+  box-shadow: inset 0 0 15px rgba(0, 229, 255, 0.1), 0 0 15px rgba(0, 229, 255, 0.2);
+}
+
+.panel-cora {
+  border-color: rgba(208, 0, 255, 0.3);
+  box-shadow: inset 0 0 10px rgba(208, 0, 255, 0.05);
+}
+.panel-cora:hover {
+  border-color: var(--neon-purple);
+  box-shadow: inset 0 0 15px rgba(208, 0, 255, 0.1), 0 0 15px rgba(208, 0, 255, 0.2);
+}
+
+/* 3D Neo-Cyberpunk Buttons */
+.cyber-button {
+  background: linear-gradient(135deg, rgba(6, 20, 45, 0.9) 0%, rgba(10, 30, 70, 0.9) 100%);
+  border: 1px solid rgba(0, 229, 255, 0.4);
+  color: #fff;
+  font-family: var(--font-title);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 
+    0 4px 6px rgba(0,0,0,0.3),
+    inset 0 1px 0 rgba(255,255,255,0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.cyber-button::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -50%; width: 200%; height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
+  transform: skewX(-30deg);
+  transition: 0.5s;
+  pointer-events: none;
+}
+
+.cyber-button:hover::before {
+  left: 120%;
+}
+
+.cyber-button:hover {
+  border-color: var(--neon-cyan);
+  box-shadow: 
+    0 0 12px rgba(0, 229, 255, 0.4),
+    inset 0 0 6px rgba(0, 229, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.cyber-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 3px rgba(0,0,0,0.5);
+}
+
+/* Color themed buttons */
+.btn-orange {
+  border-color: rgba(255, 140, 0, 0.5);
+}
+.btn-orange:hover {
+  border-color: var(--neon-orange);
+  box-shadow: 0 0 12px rgba(255, 140, 0, 0.4), inset 0 0 6px rgba(255, 140, 0, 0.2);
+}
+
+.btn-purple {
+  border-color: rgba(208, 0, 255, 0.5);
+}
+.btn-purple:hover {
+  border-color: var(--neon-purple);
+  box-shadow: 0 0 12px rgba(208, 0, 255, 0.4), inset 0 0 6px rgba(208, 0, 255, 0.2);
+}
+
+.btn-red {
+  border-color: rgba(255, 49, 49, 0.5);
+}
+.btn-red:hover {
+  border-color: var(--neon-red);
+  box-shadow: 0 0 12px rgba(255, 49, 49, 0.4), inset 0 0 6px rgba(255, 49, 49, 0.2);
+}
+
+.btn-green {
+  border-color: rgba(57, 255, 20, 0.5);
+}
+.btn-green:hover {
+  border-color: var(--neon-green);
+  box-shadow: 0 0 12px rgba(57, 255, 20, 0.4), inset 0 0 6px rgba(57, 255, 20, 0.2);
+}
+
+/* Pulsing neon glows */
+@keyframes pulse-cyan {
+  0%, 100% { box-shadow: 0 0 8px rgba(0, 229, 255, 0.2); }
+  50% { box-shadow: 0 0 18px rgba(0, 229, 255, 0.5); }
+}
+
+.glow-cyan {
+  animation: pulse-cyan 2s infinite;
 }
 
 /* Native Mobile Device View (Portrait) */
@@ -31,6 +244,7 @@ body { background: #050810; color: #e0f4ff; overflow: hidden; height: 100vh; }
   .game-root {
     padding: 0;
     align-items: stretch;
+    background: var(--bg-darkest);
   }
   .game-container {
     width: 100vw;
@@ -38,5 +252,6 @@ body { background: #050810; color: #e0f4ff; overflow: hidden; height: 100vh; }
     max-height: 100vh;
     border: none;
     border-radius: 0;
+    box-shadow: none;
   }
 }

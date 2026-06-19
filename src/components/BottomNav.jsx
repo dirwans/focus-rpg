@@ -25,7 +25,7 @@ export default function BottomNav() {
 }
 
 const styles = {
-  nav: { display: 'flex', borderTop: '2px solid #1a4a8a', background: '#050d1f' },
-  item: { flex: 1, padding: '10px 0 8px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, background: 'none', border: 'none', cursor: 'pointer' },
-  label: { fontFamily: 'monospace', fontSize: 11, letterSpacing: 1, fontWeight: 700 },
+  nav: { display: 'flex', borderTop: '1px solid rgba(0, 229, 255, 0.25)', background: 'rgba(4, 10, 24, 0.95)', backdropFilter: 'blur(10px)', boxShadow: '0 -4px 15px rgba(0,0,0,0.5)' },
+  item: { flex: 1, padding: '10px 0 8px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, background: 'none', border: 'none', cursor: 'pointer', transition: 'all 0.2s' },
+  label: { fontFamily: 'var(--font-title)', fontSize: 9, letterSpacing: 1.5, fontWeight: 700 },
 }
