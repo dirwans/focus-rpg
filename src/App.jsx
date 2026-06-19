@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
 import { useGameStore } from './store/gameStore'
 import { useAuthStore } from './store/authStore'
 import { useTimer } from './hooks/useTimer'
@@ -27,8 +27,8 @@ export default function App() {
   playerRef.current = player
 
   const syncTimerRef = useRef(null)
-  // loadedRef: true setelah loadSave selesai, biar debounce ga fire saat loadPlayer
   const loadedRef = useRef(false)
+  const [syncStatus, setSyncStatus] = useState('idle') // idle | syncing | ok | error
 
   // Track Zustand persist hydration
   const [hydrated, setHydrated] = useState(() => useGameStore.persist.hasHydrated())
@@ -49,19 +49,30 @@ export default function App() {
     if (!user || !hydrated) return
     loadedRef.current = false
     loadSave(user.id).then((save) => {
-      if (save) loadPlayer(save)
-      // Tunggu React render selesai baru aktifkan debounce
+      if (save) {
+        loadPlayer(save)
+      } else {
+        // Belum ada cloud save → upload state lokal sekarang
+        syncSave(user.id, playerRef.current)
+      }
       setTimeout(() => { loadedRef.current = true }, 500)
     })
   }, [user?.id, hydrated])
 
   // Debounced sync tiap player berubah (3 detik setelah perubahan terakhir)
-  // Ini yang utama — setiap upgrade/exp/anium berubah langsung ke-push Supabase
   useEffect(() => {
     if (!user || !hydrated || !loadedRef.current) return
     if (syncTimerRef.current) clearTimeout(syncTimerRef.current)
-    syncTimerRef.current = setTimeout(() => {
-      syncSave(user.id, playerRef.current)
+    setSyncStatus('idle')
+    syncTimerRef.current = setTimeout(async () => {
+      setSyncStatus('syncing')
+      try {
+        await syncSave(user.id, playerRef.current)
+        setSyncStatus('ok')
+        setTimeout(() => setSyncStatus('idle'), 3000)
+      } catch {
+        setSyncStatus('error')
+      }
     }, 3000)
     return () => {
       if (syncTimerRef.current) clearTimeout(syncTimerRef.current)
@@ -104,6 +115,11 @@ export default function App() {
   return (
     <div style={styles.root}>
       <div style={styles.phone}>
+        <div style={styles.syncBar}>
+          {syncStatus === 'syncing' && <span style={styles.sync('⏳', '#f5a623')}>⏳ syncing...</span>}
+          {syncStatus === 'ok'      && <span style={styles.sync('🟢', '#00ff88')}>🟢 saved</span>}
+          {syncStatus === 'error'   && <span style={styles.sync('🔴', '#ff4466')}>🔴 sync failed</span>}
+        </div>
         <div style={styles.content}>
           <Screen />
         </div>
@@ -117,6 +133,8 @@ export default function App() {
 const styles = {
   root: { minHeight: '100vh', background: '#050810', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '20px 0' },
   phone: { width: 390, minHeight: 844, maxHeight: '95vh', background: '#080d1a', border: '2px solid #1a3a5c', borderRadius: 40, overflow: 'hidden', display: 'flex', flexDirection: 'column' },
+  syncBar: { height: 22, display: 'flex', alignItems: 'center', justifyContent: 'flex-end', paddingRight: 16, background: '#050d1a' },
+  sync: (_, c) => ({ fontFamily: 'monospace', fontSize: 11, color: c, letterSpacing: 1 }),
   content: { flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column' },
   loadingWrap: { flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' },
 }
