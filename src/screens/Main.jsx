@@ -37,7 +37,7 @@ export default function Main() {
       <div style={styles.resBar}>
         <span style={styles.resPill('#f5a623')}>⬡ {player.resources.anium.toLocaleString()}</span>
         <span style={styles.resPill('#00e5ff')}>◈ {player.resources.credits}</span>
-        <span style={{ marginLeft: 'auto', fontFamily: 'monospace', fontSize: 11, color: '#4a8fa8' }}>
+        <span style={{ marginLeft: 'auto', fontFamily: 'monospace', fontSize: 14, color: '#7ab0d0', fontWeight: 700 }}>
           {race ? race.emoji + ' ' + race.name : '—'}
         </span>
       </div>
@@ -89,8 +89,8 @@ export default function Main() {
         {/* Battle log */}
         {battle.log.length > 0 && (
           <div style={styles.battleLog}>
-            {battle.log.slice(-4).map((l, i) => (
-              <div key={i} style={{ fontFamily: 'monospace', fontSize: 10, color: '#4a8fa8', opacity: 0.5 + (i * 0.17) }}>{l}</div>
+            {battle.log.slice(-4).map((l, i, arr) => (
+              <div key={i} style={{ fontFamily: 'monospace', fontSize: 13, color: l.includes('BOSS') || l.includes('CRIT') ? '#ffdd44' : l.includes('✅') || l.includes('🆙') ? '#00ff88' : '#c0dff0', opacity: 0.6 + (i / arr.length) * 0.4, fontWeight: i === arr.length - 1 ? 700 : 400 }}>{l}</div>
             ))}
           </div>
         )}
@@ -140,8 +140,8 @@ export default function Main() {
       {/* Session summary */}
       {(isRunning || isDone) && (
         <div style={styles.sessionSummary}>
-          <span style={{ color: '#4a8fa8', fontFamily: 'monospace', fontSize: 11 }}>
-            ⚔️ {battle.kills} kills &nbsp;|&nbsp; +{battle.sessionAnium}⬡ &nbsp;|&nbsp; +{battle.sessionExp} EXP
+          <span style={{ color: '#c0dff0', fontFamily: 'monospace', fontSize: 14, fontWeight: 700 }}>
+            ⚔️ {battle.kills} kills &nbsp;|&nbsp; <span style={{ color: '#f5a623' }}>+{battle.sessionAnium}⬡</span> &nbsp;|&nbsp; <span style={{ color: '#00e5ff' }}>+{battle.sessionExp} EXP</span>
           </span>
         </div>
       )}
@@ -150,31 +150,31 @@ export default function Main() {
 }
 
 const styles = {
-  screen: { display: 'flex', flexDirection: 'column', flex: 1, overflowY: 'auto' },
+  screen: { display: 'flex', flexDirection: 'column', flex: 1, overflowY: 'auto', gap: 0 },
   resBar: { display: 'flex', gap: 8, padding: '14px 16px 10px', alignItems: 'center' },
-  resPill: (c) => ({ background: 'rgba(0,0,0,0.5)', border: `1px solid ${c}`, borderRadius: 20, padding: '5px 12px', fontFamily: 'monospace', fontSize: 13, fontWeight: 700, color: c }),
-  expSection: { padding: '0 16px 8px' },
-  expLabel: { fontFamily: 'monospace', fontSize: 10, color: '#00c8ff', letterSpacing: 2, marginBottom: 4 },
-  expBg: { height: 6, background: '#0d1f35', borderRadius: 3, overflow: 'hidden' },
-  expFill: { height: '100%', background: 'linear-gradient(90deg,#0066ff,#00e5ff)', borderRadius: 3, boxShadow: '0 0 8px #00c8ff', transition: 'width 0.5s' },
-  expText: { fontFamily: 'monospace', fontSize: 10, color: '#4a8fa8', marginTop: 3, textAlign: 'right' },
-  statRow: { display: 'flex', gap: 8, padding: '0 16px 8px' },
-  statCard: { flex: 1, background: 'rgba(0,20,50,0.8)', border: '1px solid #0d3060', borderRadius: 10, padding: '8px', textAlign: 'center' },
-  statLabel: { fontFamily: 'monospace', fontSize: 8, letterSpacing: 1, color: '#4a8fa8', marginBottom: 4 },
-  statVal: { fontFamily: 'monospace', fontSize: 16, fontWeight: 900 },
-  arena: { margin: '0 16px 8px', background: 'linear-gradient(180deg,rgba(0,30,80,0.6) 0%,rgba(0,10,30,0.9) 100%)', border: '1px solid #0d3060', borderRadius: 16, padding: 16, position: 'relative', minHeight: 180, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' },
-  arenaBadge: { position: 'absolute', top: 10, left: 12, background: 'rgba(255,100,0,0.2)', border: '1px solid #ff6400', borderRadius: 6, padding: '3px 10px', fontFamily: 'monospace', fontSize: 9, color: '#ff8c40' },
-  arenaRight: { position: 'absolute', top: 10, right: 12, fontFamily: 'monospace', fontSize: 10, color: '#00c8ff', textAlign: 'right' },
+  resPill: (c) => ({ background: '#0a1628', border: `2px solid ${c}`, borderRadius: 20, padding: '6px 14px', fontFamily: 'monospace', fontSize: 16, fontWeight: 700, color: c }),
+  expSection: { padding: '0 16px 10px' },
+  expLabel: { fontFamily: 'monospace', fontSize: 13, color: '#00e5ff', letterSpacing: 2, marginBottom: 5, fontWeight: 700 },
+  expBg: { height: 10, background: '#0a1628', borderRadius: 5, overflow: 'hidden', border: '1px solid #1a3a6a' },
+  expFill: { height: '100%', background: 'linear-gradient(90deg,#0066ff,#00e5ff)', borderRadius: 5, transition: 'width 0.5s' },
+  expText: { fontFamily: 'monospace', fontSize: 12, color: '#7ab0d0', marginTop: 4, textAlign: 'right' },
+  statRow: { display: 'flex', gap: 8, padding: '0 16px 10px' },
+  statCard: { flex: 1, background: '#0a1628', border: '2px solid #1a3a6a', borderRadius: 10, padding: '10px 8px', textAlign: 'center' },
+  statLabel: { fontFamily: 'monospace', fontSize: 11, letterSpacing: 1, color: '#7ab0d0', marginBottom: 4, fontWeight: 700 },
+  statVal: { fontFamily: 'monospace', fontSize: 20, fontWeight: 900 },
+  arena: { margin: '0 16px 10px', background: '#060f20', border: '2px solid #1a3a6a', borderRadius: 16, padding: 16, position: 'relative', minHeight: 190, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' },
+  arenaBadge: { position: 'absolute', top: 10, left: 12, background: '#1a0800', border: '2px solid #ff6400', borderRadius: 6, padding: '4px 10px', fontFamily: 'monospace', fontSize: 12, color: '#ff8c40', fontWeight: 700 },
+  arenaRight: { position: 'absolute', top: 10, right: 12, fontFamily: 'monospace', fontSize: 12, color: '#00e5ff', textAlign: 'right', fontWeight: 700 },
   timerDisplay: { display: 'flex', flexDirection: 'column', alignItems: 'center' },
-  battleLog: { marginTop: 10, width: '100%', display: 'flex', flexDirection: 'column', gap: 2 },
-  modeRow: { display: 'flex', gap: 8, padding: '0 16px 8px' },
-  modeBtn: (active) => ({ flex: 1, padding: 10, borderRadius: 10, fontFamily: 'monospace', fontSize: 12, cursor: 'pointer', border: `1px solid ${active ? '#00c8ff' : '#0d3a80'}`, background: active ? 'rgba(0,100,200,0.2)' : 'rgba(0,20,60,0.8)', color: active ? '#00e5ff' : '#4a8fa8', boxShadow: active ? '0 0 10px rgba(0,180,255,0.2)' : 'none' }),
-  combatStats: { margin: '0 16px 8px', background: 'rgba(0,10,30,0.8)', border: '1px solid #0d2a50', borderRadius: 10, padding: 12, display: 'flex', justifyContent: 'space-around' },
+  battleLog: { marginTop: 10, width: '100%', display: 'flex', flexDirection: 'column', gap: 3 },
+  modeRow: { display: 'flex', gap: 8, padding: '0 16px 10px' },
+  modeBtn: (active) => ({ flex: 1, padding: 12, borderRadius: 10, fontFamily: 'monospace', fontSize: 15, fontWeight: 700, cursor: 'pointer', border: `2px solid ${active ? '#00c8ff' : '#1a3a6a'}`, background: active ? '#0a2a4a' : '#080f1e', color: active ? '#00e5ff' : '#7ab0d0' }),
+  combatStats: { margin: '0 16px 10px', background: '#060f20', border: '2px solid #1a3a6a', borderRadius: 12, padding: 14, display: 'flex', justifyContent: 'space-around' },
   cstat: { textAlign: 'center' },
-  cstatLabel: { fontFamily: 'monospace', fontSize: 8, letterSpacing: 1, color: '#4a8fa8', marginBottom: 4 },
-  cstatVal: { fontFamily: 'monospace', fontSize: 18, fontWeight: 900 },
-  timerRow: { display: 'flex', gap: 8, padding: '0 16px 8px' },
-  timerBtn: (active) => ({ flex: 1, padding: 10, borderRadius: 10, fontFamily: 'monospace', fontSize: 12, cursor: 'pointer', border: `1px solid ${active ? '#00c8ff' : '#0d3a80'}`, background: active ? 'rgba(0,100,200,0.2)' : 'rgba(0,20,60,0.8)', color: active ? '#00e5ff' : '#4a8fa8' }),
-  deployBtn: { margin: '0 16px 8px', padding: 16, borderRadius: 12, border: 'none', background: 'linear-gradient(90deg,#0050cc,#00a8ff)', fontFamily: 'monospace', fontSize: 16, fontWeight: 900, color: '#fff', letterSpacing: 2, cursor: 'pointer', boxShadow: '0 0 20px rgba(0,150,255,0.4)' },
-  sessionSummary: { textAlign: 'center', padding: '0 16px 8px' },
+  cstatLabel: { fontFamily: 'monospace', fontSize: 11, letterSpacing: 1, color: '#7ab0d0', marginBottom: 4, fontWeight: 700 },
+  cstatVal: { fontFamily: 'monospace', fontSize: 22, fontWeight: 900 },
+  timerRow: { display: 'flex', gap: 8, padding: '0 16px 10px' },
+  timerBtn: (active) => ({ flex: 1, padding: 12, borderRadius: 10, fontFamily: 'monospace', fontSize: 15, fontWeight: 700, cursor: 'pointer', border: `2px solid ${active ? '#00c8ff' : '#1a3a6a'}`, background: active ? '#0a2a4a' : '#080f1e', color: active ? '#fff' : '#7ab0d0' }),
+  deployBtn: { margin: '0 16px 10px', padding: 18, borderRadius: 12, border: 'none', background: 'linear-gradient(90deg,#0050cc,#00a8ff)', fontFamily: 'monospace', fontSize: 18, fontWeight: 900, color: '#fff', letterSpacing: 2, cursor: 'pointer' },
+  sessionSummary: { textAlign: 'center', padding: '0 16px 10px' },
 }

@@ -17,7 +17,7 @@ export default function BottomNav() {
       {NAV.map((n) => (
         <button key={n.id} style={styles.item} onClick={() => setScreen(n.id)}>
           <span style={{ fontSize: 22, opacity: screen === n.id ? 1 : 0.4 }}>{n.icon}</span>
-          <span style={{ ...styles.label, color: screen === n.id ? '#f5a623' : '#4a8fa8' }}>{n.label}</span>
+          <span style={{ ...styles.label, color: screen === n.id ? '#f5a623' : '#7ab0d0' }}>{n.label}</span>
         </button>
       ))}
     </nav>
@@ -25,7 +25,7 @@ export default function BottomNav() {
 }
 
 const styles = {
-  nav: { display: 'flex', borderTop: '1px solid #0d2a50', background: 'rgba(5,10,25,0.98)' },
-  item: { flex: 1, padding: '10px 0 8px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, background: 'none', border: 'none', cursor: 'pointer' },
-  label: { fontFamily: 'monospace', fontSize: 8, letterSpacing: 1 },
+  nav: { display: 'flex', borderTop: '2px solid #1a4a8a', background: '#050d1f' },
+  item: { flex: 1, padding: '10px 0 8px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, background: 'none', border: 'none', cursor: 'pointer' },
+  label: { fontFamily: 'monospace', fontSize: 11, letterSpacing: 1, fontWeight: 700 },
 }
