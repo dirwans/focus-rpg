@@ -79,8 +79,8 @@ export default function Ranks() {
           <div style={styles.myRankHandle}>{player.name}</div>
         </div>
         <div style={{ textAlign: 'right' }}>
-          <div style={{ fontFamily: 'monospace', fontSize: 13, color: '#00e5ff' }}>{fmtMin(myMinutes)}</div>
-          <div style={{ fontFamily: 'monospace', fontSize: 9, color: '#4a8fa8' }}>{myMinutes}m total</div>
+          <div style={{ fontFamily: 'monospace', fontSize: 14, color: '#00e5ff', fontWeight: 800 }}>{fmtMin(myMinutes)}</div>
+          <div style={{ fontFamily: 'monospace', fontSize: 14, color: '#4a8fa8', fontWeight: 800 }}>{myMinutes}m total</div>
         </div>
       </div>
     </div>
@@ -100,7 +100,7 @@ const styles = {
   rankRow: { display: 'flex', alignItems: 'center', gap: 10, padding: '10px 0', borderBottom: '1px solid rgba(0, 229, 255, 0.1)' },
   rankNum: { fontFamily: 'var(--font-mono)', fontSize: 14, color: '#4a8fa8', width: 20, textAlign: 'center', fontWeight: 800 },
   rankAvatar: { width: 38, height: 38, borderRadius: '50%', border: '1.5px solid rgba(0, 229, 255, 0.25)', background: 'linear-gradient(135deg, #001030, #002060)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, position: 'relative' },
-  flag: { position: 'absolute', bottom: -2, right: -2, fontSize: 12 },
+  flag: { position: 'absolute', bottom: -2, right: -2, fontSize: 14 },
   rankName: { fontFamily: 'var(--font-body)', fontSize: 14, color: '#e0f4ff', fontWeight: 700 },
   rankBadge: { fontFamily: 'var(--font-title)', fontSize: 14, color: '#4a8fa8', marginTop: 2, fontWeight: 800 },
   rankTime: { fontFamily: 'var(--font-mono)', fontSize: 14, color: '#00c8ff', fontWeight: 800 },

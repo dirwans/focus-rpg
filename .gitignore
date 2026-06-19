@@ -16,6 +16,8 @@ dist-ssr
 
 # Server data (user saves, sessions) — jangan di-commit
 data/
+vps_key
+deploy.ps1
 
 # Editor directories and files
 .vscode/*

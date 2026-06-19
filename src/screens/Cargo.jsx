@@ -78,7 +78,7 @@ export default function Cargo() {
         <div style={styles.empty}>
           <div style={{ fontSize: 40 }}>📦</div>
           <div style={{ fontFamily: 'monospace', fontSize: 14, color: '#7ab0d0', marginTop: 8 }}>No items yet</div>
-          <div style={{ fontFamily: 'monospace', fontSize: 13, color: '#4a8fa8', marginTop: 4 }}>Complete fight sessions to drop items</div>
+          <div style={{ fontFamily: 'monospace', fontSize: 14, color: '#4a8fa8', marginTop: 4, fontWeight: 800 }}>Complete fight sessions to drop items</div>
         </div>
       ) : (
         <div style={styles.grid}>

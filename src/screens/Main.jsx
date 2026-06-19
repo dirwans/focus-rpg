@@ -70,7 +70,7 @@ export default function Main() {
       {/* Battle arena */}
       <div style={styles.arena}>
         <div style={styles.arenaBadge}>🔥 {enemy.name}</div>
-        <div style={styles.arenaRight}>SECTOR {player.sector}<br /><span style={{ color: '#4a8fa8', fontSize: 9 }}>HIGHEST: S-{player.highestSector}</span></div>
+        <div style={styles.arenaRight}>SECTOR {player.sector}<br /><span style={{ color: '#4a8fa8', fontSize: 14, fontWeight: 800 }}>HIGHEST: S-{player.highestSector}</span></div>
 
         {/* Big timer display */}
         <div style={styles.timerDisplay}>
