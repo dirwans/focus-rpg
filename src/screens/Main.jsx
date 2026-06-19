@@ -1,4 +1,5 @@
 import { useGameStore } from '../store/gameStore'
+import { useAuthStore } from '../store/authStore'
 import races from '../data/races.json'
 import enemies from '../data/enemies.json'
 
@@ -21,6 +22,9 @@ export default function Main() {
   const setMode      = useGameStore((s) => s.setMode)
   const openRaceSelect = useGameStore((s) => s.openRaceSelect)
 
+  const { user } = useAuthStore()
+  const username = user?.user_metadata?.username || user?.email?.split('@')[0] || '—'
+
   const stats   = getStats()
   const expMax  = getExpToNext()
   const expPct  = Math.floor((player.exp / expMax) * 100)
@@ -37,8 +41,13 @@ export default function Main() {
       <div style={styles.resBar}>
         <span style={styles.resPill('#f5a623')}>⬡ {player.resources.anium.toLocaleString()}</span>
         <span style={styles.resPill('#00e5ff')}>◈ {player.resources.credits}</span>
-        <span style={{ marginLeft: 'auto', fontFamily: 'monospace', fontSize: 14, color: '#7ab0d0', fontWeight: 700 }}>
-          {race ? race.emoji + ' ' + race.name : '—'}
+        <span style={{ marginLeft: 'auto', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 2 }}>
+          <span style={{ fontFamily: 'monospace', fontSize: 14, color: '#7ab0d0', fontWeight: 700 }}>
+            {race ? race.emoji + ' ' + race.name : '—'}
+          </span>
+          <span style={{ fontFamily: 'monospace', fontSize: 11, color: '#4a8fa8', fontWeight: 400 }}>
+            @{username}
+          </span>
         </span>
       </div>
 
