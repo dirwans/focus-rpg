@@ -5,9 +5,9 @@ export async function loadSave(userId) {
     .from('player_saves')
     .select('game_state')
     .eq('user_id', userId)
-    .single()
+    .maybeSingle()
   if (error) {
-    if (error.code !== 'PGRST116') console.error('[saveSync] loadSave error:', error)
+    console.error('[saveSync] loadSave error:', error)
     return null
   }
   return data?.game_state ?? null
