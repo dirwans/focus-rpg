@@ -66,10 +66,22 @@ export default function Main() {
           <div style={{ fontSize: 48, fontFamily: 'monospace', fontWeight: 900, color: isRunning ? '#00e5ff' : isDone ? '#f5a623' : '#e0f4ff', textShadow: isRunning ? '0 0 20px #00c8ff' : 'none' }}>
             {fmt(timer.secondsLeft)}
           </div>
-          {isRunning && (
-            <div style={{ fontFamily: 'monospace', fontSize: 11, color: '#4a8fa8', marginTop: 4 }}>
-              {timer.mode === 'fight' ? `⚔️ ${enemy.emoji} HP: ${battle.enemyHp}/${battle.enemyMaxHp}` : `⛏️ Gathering resources...`}
+          {isRunning && timer.mode === 'fight' && battle.currentMob && (
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, marginTop: 6 }}>
+              <div style={{ fontFamily: 'monospace', fontSize: battle.isBoss ? 13 : 11, color: battle.isBoss ? '#ff4466' : '#4a8fa8', fontWeight: battle.isBoss ? 900 : 400 }}>
+                {battle.isBoss ? `⚠️ BOSS: ${battle.currentMob.emoji} ${battle.currentMob.name}` : `${battle.currentMob.emoji} ${battle.currentMob.name}`}
+              </div>
+              <div style={{ width: '80%', height: 4, background: '#0d1f35', borderRadius: 2, overflow: 'hidden' }}>
+                <div style={{ height: '100%', width: `${Math.max(0, (battle.enemyHp / battle.enemyMaxHp) * 100)}%`, background: battle.isBoss ? '#ff4466' : '#00c8ff', borderRadius: 2, transition: 'width 0.3s' }} />
+              </div>
+              <div style={{ fontFamily: 'monospace', fontSize: 9, color: '#4a8fa8' }}>
+                HP {battle.enemyHp}/{battle.enemyMaxHp}
+                {battle.killStreak > 2 && <span style={{ color: '#f5a623', marginLeft: 8 }}>🔥 {battle.killStreak}x STREAK</span>}
+              </div>
             </div>
+          )}
+          {isRunning && timer.mode === 'gather' && (
+            <div style={{ fontFamily: 'monospace', fontSize: 11, color: '#4a8fa8', marginTop: 4 }}>⛏️ Gathering resources...</div>
           )}
           {isDone && <div style={{ color: '#f5a623', fontFamily: 'monospace', fontSize: 13, marginTop: 4 }}>✅ SESSION COMPLETE!</div>}
         </div>

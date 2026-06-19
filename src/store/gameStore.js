@@ -5,8 +5,6 @@ import enemies from '../data/enemies.json'
 import upgradesConfig from '../data/upgrades.json'
 import itemsData from '../data/items.json'
 
-const TIMER_OPTIONS = [10, 25, 60]
-
 function calcUpgradeCost(key, level) {
   const cfg = upgradesConfig[key]
   return Math.floor(cfg.baseCost * Math.pow(cfg.costMultiplier, level))
@@ -29,7 +27,20 @@ function calcExpToNext(level) {
 }
 
 function getSector(level) {
-  return Math.min(level, enemies.sectors.length)
+  return Math.min(Math.ceil(level / 2), enemies.sectors.length)
+}
+
+function randomMob(sectorIdx) {
+  const sector = enemies.sectors[sectorIdx]
+  const mobs = sector.mobs
+  return mobs[Math.floor(Math.random() * mobs.length)]
+}
+
+function spawnEnemy(sectorIdx, forceBoss = false) {
+  const sector = enemies.sectors[sectorIdx]
+  const isBoss = forceBoss || Math.random() < 0.08
+  const mob = isBoss ? sector.boss : randomMob(sectorIdx)
+  return { mob, isBoss, hp: mob.hp }
 }
 
 const initialPlayer = {
@@ -59,9 +70,13 @@ const initialBattle = {
   log: [],
   enemyHp: 0,
   enemyMaxHp: 0,
+  currentMob: null,
+  isBoss: false,
   kills: 0,
+  killStreak: 0,
   sessionExp: 0,
   sessionAnium: 0,
+  levelUps: 0,
 }
 
 export const useGameStore = create(
@@ -70,7 +85,7 @@ export const useGameStore = create(
       player: initialPlayer,
       timer: initialTimer,
       battle: initialBattle,
-      screen: 'main',   // main | unit | ranks | forge | cargo
+      screen: 'main',
       showRaceSelect: false,
 
       // ── Navigation ──────────────────────────────────────
@@ -79,13 +94,11 @@ export const useGameStore = create(
       // ── Race Selection ───────────────────────────────────
       openRaceSelect: () => set({ showRaceSelect: true }),
       selectRace: (raceId) => {
-        const race = races[raceId]
         set((s) => ({
           showRaceSelect: false,
           player: {
             ...s.player,
             race: raceId,
-            name: s.player.name,
             upgrades: { atk: 0, def: 0, hp: 0 },
             level: 1,
             exp: 0,
@@ -113,97 +126,135 @@ export const useGameStore = create(
         const { player, timer } = get()
         if (!player.race) { set({ showRaceSelect: true }); return }
         if (timer.state !== 'idle') return
-        const enemy = enemies.sectors[getSector(player.level) - 1]
+        const sectorIdx = getSector(player.level) - 1
+        const sector = enemies.sectors[sectorIdx]
+        const { mob, isBoss, hp } = spawnEnemy(sectorIdx)
         set({
           timer: { ...timer, state: 'running', secondsLeft: timer.selectedMinutes * 60 },
           battle: {
-            log: [`⚔️ Entering ${enemy.name}...`],
-            enemyHp: enemy.hp,
-            enemyMaxHp: enemy.hp,
-            kills: 0,
-            sessionExp: 0,
-            sessionAnium: 0,
+            ...initialBattle,
+            log: [isBoss
+              ? `⚠️ BOSS DETECTED: ${mob.emoji} ${mob.name}!`
+              : `⚔️ Entering ${sector.name}...`],
+            enemyHp: hp,
+            enemyMaxHp: hp,
+            currentMob: mob,
+            isBoss,
           },
         })
       },
 
       stopTimer: () => {
-        const { timer, battle, player } = get()
+        const { timer, player } = get()
         if (timer.state !== 'running') return
         const elapsed = timer.selectedMinutes * 60 - timer.secondsLeft
         const elapsedMin = Math.floor(elapsed / 60)
         set((s) => ({
           timer: { ...s.timer, state: 'idle', secondsLeft: s.timer.selectedMinutes * 60 },
-          player: {
-            ...s.player,
-            totalMinutes: s.player.totalMinutes + elapsedMin,
-          },
+          player: { ...s.player, totalMinutes: s.player.totalMinutes + elapsedMin },
           battle: { ...initialBattle },
         }))
       },
 
-      // called every second by useTimer hook
       tick: () => {
-        const { timer, battle, player } = get()
+        const { timer } = get()
         if (timer.state !== 'running') return
-
         const newSecondsLeft = timer.secondsLeft - 1
-
         if (newSecondsLeft <= 0) {
           get().completeSession()
           return
         }
-
-        if (timer.mode === 'fight') {
-          get()._combatTick()
-        } else {
-          get()._gatherTick()
-        }
-
+        if (timer.mode === 'fight') get()._combatTick()
+        else get()._gatherTick()
         set((s) => ({ timer: { ...s.timer, secondsLeft: newSecondsLeft } }))
       },
 
       _combatTick: () => {
         const { player, battle } = get()
+        if (!battle.currentMob) return
+
         const race = races[player.race]
         const playerAtk = calcStat('atk', player.upgrades.atk, player.race)
-        const playerDef = calcStat('def', player.upgrades.def, player.race)
-        const sectorIdx = getSector(player.level) - 1
-        const enemy = enemies.sectors[sectorIdx]
+        const mob = battle.currentMob
 
-        const dmgToEnemy = Math.max(1, playerAtk - enemy.def + Math.floor(Math.random() * 5))
-        const dmgToPlayer = 0  // idle — player doesn't die, just tracks kills
+        // Crit: 12% base, Human bonus +3%
+        const critChance = player.race === 'human' ? 0.15 : 0.12
+        const isCrit = Math.random() < critChance
+        const variance = 0.8 + Math.random() * 0.4
+        const rawDmg = Math.max(1, playerAtk - mob.def + Math.floor(Math.random() * 8))
+        const dmgToEnemy = Math.floor(rawDmg * variance * (isCrit ? 1.8 : 1))
 
         let newEnemyHp = battle.enemyHp - dmgToEnemy
         let newKills = battle.kills
+        let newStreak = battle.killStreak
         let newExp = battle.sessionExp
         let newAnium = battle.sessionAnium
         let newLog = [...battle.log]
+        let nextMob = mob
+        let nextIsBoss = battle.isBoss
+        let nextMaxHp = battle.enemyMaxHp
 
         if (newEnemyHp <= 0) {
           newKills += 1
-          const expGain = Math.floor(enemy.expReward * race.bonuses.expMultiplier)
-          const aniumGain = Math.floor(enemy.aniumReward * (0.8 + Math.random() * 0.4))
+          newStreak += 1
+
+          // Streak bonus: +10% per kill streak, max 2x
+          const streakMult = Math.min(1 + newStreak * 0.1, 2.0)
+          const expGain = Math.floor(mob.expReward * race.bonuses.expMultiplier * streakMult * (battle.isBoss ? 3 : 1))
+          const aniumGain = Math.floor(mob.aniumReward * (0.8 + Math.random() * 0.4) * streakMult * (battle.isBoss ? 3 : 1))
           newExp += expGain
           newAnium += aniumGain
-          newEnemyHp = enemy.hp
-          if (newLog.length > 6) newLog = newLog.slice(-6)
-          newLog.push(`💥 Killed ${enemy.emoji} +${expGain}EXP +${aniumGain}⬡`)
+
+          if (newLog.length > 7) newLog = newLog.slice(-7)
+
+          if (battle.isBoss) {
+            newLog.push(`🏆 BOSS SLAIN! ${mob.emoji} +${expGain}EXP +${aniumGain}⬡`)
+          } else if (isCrit) {
+            newLog.push(`💥 CRIT! ${mob.emoji} ${mob.name} [x${newStreak > 1 ? newStreak + ' STREAK' : ''}] +${expGain}EXP`)
+          } else {
+            newLog.push(`⚔️ Killed ${mob.emoji} ${newStreak > 2 ? `[${newStreak}x🔥]` : ''} +${expGain}EXP +${aniumGain}⬡`)
+          }
+
+          // Spawn next enemy
+          const sectorIdx = getSector(player.level) - 1
+          const next = spawnEnemy(sectorIdx)
+          nextMob = next.mob
+          nextIsBoss = next.isBoss
+          nextMaxHp = next.hp
+          newEnemyHp = next.hp
+
+          if (next.isBoss) newLog.push(`⚠️ BOSS INCOMING: ${next.mob.emoji} ${next.mob.name}!`)
+        } else if (isCrit) {
+          if (newLog.length > 7) newLog = newLog.slice(-7)
+          newLog.push(`✨ CRIT! -${dmgToEnemy} to ${mob.emoji}`)
         }
 
-        set({ battle: { ...battle, enemyHp: newEnemyHp, kills: newKills, sessionExp: newExp, sessionAnium: newAnium, log: newLog } })
+        set({
+          battle: {
+            ...battle,
+            enemyHp: newEnemyHp,
+            enemyMaxHp: nextMaxHp,
+            currentMob: nextMob,
+            isBoss: nextIsBoss,
+            kills: newKills,
+            killStreak: newStreak,
+            sessionExp: newExp,
+            sessionAnium: newAnium,
+            log: newLog,
+          }
+        })
       },
 
       _gatherTick: () => {
         const { player, battle } = get()
         const race = races[player.race]
-        if (Math.random() > 0.85) {
-          const base = Math.floor(2 + Math.random() * 4)
+        if (Math.random() > 0.82) {
+          const base = Math.floor(2 + Math.random() * 5)
           const aniumGain = Math.floor(base * race.bonuses.gatherMultiplier)
           const expGain = Math.floor(1 * race.bonuses.expMultiplier)
           let newLog = [...battle.log]
-          if (newLog.length > 6) newLog = newLog.slice(-6)
-          newLog.push(`⛏️ Gathered +${aniumGain}⬡`)
+          if (newLog.length > 7) newLog = newLog.slice(-7)
+          newLog.push(`⛏️ Gathered +${aniumGain}⬡ +${expGain}EXP`)
           set({ battle: { ...battle, sessionAnium: battle.sessionAnium + aniumGain, sessionExp: battle.sessionExp + expGain, log: newLog } })
         }
       },
@@ -217,22 +268,29 @@ export const useGameStore = create(
         let newExp = player.exp + battle.sessionExp
         let newLevel = player.level
         let expToNext = calcExpToNext(newLevel)
+        let levelUps = 0
 
         while (newExp >= expToNext) {
           newExp -= expToNext
           newLevel += 1
+          levelUps += 1
           expToNext = calcExpToNext(newLevel)
         }
 
         const newSector = getSector(newLevel)
 
-        // random item drop
+        // Item drop: boss = 60%, fight = 25%, gather = 10%
+        const dropRate = battle.isBoss ? 0.6 : timer.mode === 'fight' ? 0.25 : 0.1
         const newInventory = [...player.inventory]
-        if (timer.mode === 'fight' && Math.random() < 0.3) {
+        if (Math.random() < dropRate) {
           const drops = itemsData.items.filter(i => i.type !== 'consumable')
           const drop = drops[Math.floor(Math.random() * drops.length)]
           newInventory.push({ ...drop, uid: Date.now() })
         }
+
+        const finalLog = [...battle.log]
+        if (levelUps > 0) finalLog.push(`🆙 LEVEL UP! LV.${newLevel} — Sector ${newSector} unlocked!`)
+        finalLog.push(`✅ Done! ${battle.kills} kills | +${battle.sessionAnium}⬡ | +${battle.sessionExp}EXP`)
 
         set((s) => ({
           timer: { ...s.timer, state: 'completed', secondsLeft: 0 },
@@ -252,7 +310,7 @@ export const useGameStore = create(
             totalMinutes: s.player.totalMinutes + timer.selectedMinutes,
             inventory: newInventory,
           },
-          battle: { ...battle, log: [...battle.log, `✅ Session complete! +${battle.sessionAnium}⬡ +${battle.sessionExp}EXP`] },
+          battle: { ...battle, levelUps, log: finalLog },
         }))
       },
 
@@ -276,7 +334,7 @@ export const useGameStore = create(
         }))
       },
 
-      // ── Helpers (exposed for UI) ─────────────────────────
+      // ── Helpers ──────────────────────────────────────────
       getStats: () => {
         const { player } = get()
         if (!player.race) return { atk: 0, def: 0, hp: 0 }

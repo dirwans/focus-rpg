@@ -1,14 +1,94 @@
 {
   "sectors": [
-    { "id": 1,  "name": "Rusted Outpost",   "emoji": "🤖", "hp": 120,  "atk": 8,  "def": 3,  "expReward": 12, "aniumReward": 8,  "dropChance": 0.15 },
-    { "id": 2,  "name": "Scrap Yard",        "emoji": "⚙️", "hp": 200,  "atk": 14, "def": 5,  "expReward": 20, "aniumReward": 14, "dropChance": 0.14 },
-    { "id": 3,  "name": "Iron Trenches",     "emoji": "🦾", "hp": 320,  "atk": 22, "def": 8,  "expReward": 30, "aniumReward": 20, "dropChance": 0.13 },
-    { "id": 4,  "name": "Plasma Fields",     "emoji": "⚡", "hp": 480,  "atk": 32, "def": 12, "expReward": 42, "aniumReward": 28, "dropChance": 0.12 },
-    { "id": 5,  "name": "Void Gate Alpha",   "emoji": "🌀", "hp": 700,  "atk": 44, "def": 18, "expReward": 58, "aniumReward": 38, "dropChance": 0.12 },
-    { "id": 6,  "name": "Neural Core",       "emoji": "🧠", "hp": 980,  "atk": 58, "def": 25, "expReward": 76, "aniumReward": 50, "dropChance": 0.11 },
-    { "id": 7,  "name": "Crimson Citadel",   "emoji": "🏰", "hp": 1320, "atk": 74, "def": 34, "expReward": 96, "aniumReward": 64, "dropChance": 0.11 },
-    { "id": 8,  "name": "Singularity Rift",  "emoji": "🌌", "hp": 1750, "atk": 92, "def": 45, "expReward": 120,"aniumReward": 80, "dropChance": 0.10 },
-    { "id": 9,  "name": "Omega Station",     "emoji": "🛸", "hp": 2300, "atk": 115,"def": 58, "expReward": 150,"aniumReward": 100,"dropChance": 0.10 },
-    { "id": 10, "name": "TITAN CORE",        "emoji": "💀", "hp": 3000, "atk": 140,"def": 75, "expReward": 190,"aniumReward": 130,"dropChance": 0.09 }
+    {
+      "id": 1, "name": "Rusted Outpost", "emoji": "🤖",
+      "mobs": [
+        { "name": "Rust Drone",     "emoji": "🤖", "hp": 100, "atk": 7,  "def": 2,  "expReward": 10, "aniumReward": 6 },
+        { "name": "Scrap Golem",    "emoji": "⚙️", "hp": 140, "atk": 9,  "def": 4,  "expReward": 14, "aniumReward": 9 },
+        { "name": "Junk Sentinel",  "emoji": "🦿", "hp": 80,  "atk": 12, "def": 1,  "expReward": 12, "aniumReward": 8 }
+      ],
+      "boss": { "name": "IRON WARDEN",   "emoji": "💢", "hp": 600,  "atk": 20, "def": 8,  "expReward": 80,  "aniumReward": 60 }
+    },
+    {
+      "id": 2, "name": "Scrap Yard", "emoji": "⚙️",
+      "mobs": [
+        { "name": "Acid Crawler",   "emoji": "🐛", "hp": 180, "atk": 13, "def": 4,  "expReward": 18, "aniumReward": 12 },
+        { "name": "Volt Striker",   "emoji": "⚡", "hp": 220, "atk": 10, "def": 7,  "expReward": 22, "aniumReward": 15 },
+        { "name": "Slag Hound",     "emoji": "🐺", "hp": 160, "atk": 16, "def": 3,  "expReward": 20, "aniumReward": 13 }
+      ],
+      "boss": { "name": "SCRAP TITAN",   "emoji": "🔩", "hp": 900,  "atk": 32, "def": 12, "expReward": 120, "aniumReward": 90 }
+    },
+    {
+      "id": 3, "name": "Iron Trenches", "emoji": "🦾",
+      "mobs": [
+        { "name": "Trench Mauler",  "emoji": "🦾", "hp": 300, "atk": 20, "def": 7,  "expReward": 28, "aniumReward": 18 },
+        { "name": "Mine Bot",       "emoji": "💣", "hp": 260, "atk": 25, "def": 5,  "expReward": 32, "aniumReward": 22 },
+        { "name": "Iron Shade",     "emoji": "👥", "hp": 340, "atk": 18, "def": 10, "expReward": 30, "aniumReward": 20 }
+      ],
+      "boss": { "name": "SIEGE COMMANDER","emoji": "🎖️","hp": 1400, "atk": 50, "def": 20, "expReward": 180, "aniumReward": 130 }
+    },
+    {
+      "id": 4, "name": "Plasma Fields", "emoji": "⚡",
+      "mobs": [
+        { "name": "Plasma Wasp",    "emoji": "⚡", "hp": 420, "atk": 30, "def": 10, "expReward": 40, "aniumReward": 26 },
+        { "name": "Volt Hydra",     "emoji": "🐉", "hp": 500, "atk": 25, "def": 14, "expReward": 44, "aniumReward": 30 },
+        { "name": "Arc Fiend",      "emoji": "😈", "hp": 380, "atk": 36, "def": 8,  "expReward": 42, "aniumReward": 28 }
+      ],
+      "boss": { "name": "PLASMA OVERLORD","emoji": "🌩️","hp": 2000, "atk": 70, "def": 28, "expReward": 250, "aniumReward": 180 }
+    },
+    {
+      "id": 5, "name": "Void Gate Alpha", "emoji": "🌀",
+      "mobs": [
+        { "name": "Void Wraith",    "emoji": "👻", "hp": 620, "atk": 42, "def": 16, "expReward": 55, "aniumReward": 36 },
+        { "name": "Gate Stalker",   "emoji": "🌀", "hp": 700, "atk": 38, "def": 20, "expReward": 60, "aniumReward": 40 },
+        { "name": "Rift Walker",    "emoji": "🔮", "hp": 560, "atk": 50, "def": 12, "expReward": 58, "aniumReward": 38 }
+      ],
+      "boss": { "name": "VOID SOVEREIGN", "emoji": "🌑", "hp": 2800, "atk": 95, "def": 38, "expReward": 340, "aniumReward": 240 }
+    },
+    {
+      "id": 6, "name": "Neural Core", "emoji": "🧠",
+      "mobs": [
+        { "name": "Synapse Drone",  "emoji": "🧠", "hp": 880, "atk": 55, "def": 22, "expReward": 72, "aniumReward": 48 },
+        { "name": "Data Phantom",   "emoji": "💻", "hp": 960, "atk": 50, "def": 28, "expReward": 78, "aniumReward": 52 },
+        { "name": "Core Hacker",    "emoji": "🔓", "hp": 820, "atk": 64, "def": 18, "expReward": 76, "aniumReward": 50 }
+      ],
+      "boss": { "name": "NEURAL APEX",    "emoji": "🔴", "hp": 3800, "atk": 120, "def": 50, "expReward": 450, "aniumReward": 320 }
+    },
+    {
+      "id": 7, "name": "Crimson Citadel", "emoji": "🏰",
+      "mobs": [
+        { "name": "Blood Knight",   "emoji": "⚔️", "hp": 1200,"atk": 70, "def": 30, "expReward": 92, "aniumReward": 62 },
+        { "name": "Crimson Beast",  "emoji": "🩸", "hp": 1350,"atk": 65, "def": 36, "expReward": 98, "aniumReward": 66 },
+        { "name": "Tower Demon",    "emoji": "🏰", "hp": 1100,"atk": 80, "def": 26, "expReward": 96, "aniumReward": 64 }
+      ],
+      "boss": { "name": "CRIMSON TYRANT", "emoji": "👑", "hp": 5000, "atk": 155, "def": 65, "expReward": 580, "aniumReward": 420 }
+    },
+    {
+      "id": 8, "name": "Singularity Rift", "emoji": "🌌",
+      "mobs": [
+        { "name": "Rift Abomination","emoji":"🌌", "hp": 1600,"atk": 88, "def": 42, "expReward": 115, "aniumReward": 78 },
+        { "name": "Dark Matter",    "emoji": "⬛", "hp": 1800,"atk": 82, "def": 48, "expReward": 122, "aniumReward": 82 },
+        { "name": "Singularity Eye","emoji": "👁️", "hp": 1500,"atk": 100,"def": 38, "expReward": 118, "aniumReward": 80 }
+      ],
+      "boss": { "name": "RIFT COLOSSUS",  "emoji": "🌠", "hp": 6500, "atk": 195, "def": 80, "expReward": 720, "aniumReward": 540 }
+    },
+    {
+      "id": 9, "name": "Omega Station", "emoji": "🛸",
+      "mobs": [
+        { "name": "Omega Guard",    "emoji": "🛸", "hp": 2100,"atk": 110,"def": 55, "expReward": 144, "aniumReward": 96 },
+        { "name": "Star Leviathan", "emoji": "🐋", "hp": 2400,"atk": 100,"def": 62, "expReward": 152, "aniumReward": 104 },
+        { "name": "Void Admiral",   "emoji": "🚀", "hp": 2000,"atk": 122,"def": 50, "expReward": 148, "aniumReward": 100 }
+      ],
+      "boss": { "name": "OMEGA PRIME",    "emoji": "🌟", "hp": 8500, "atk": 245, "def": 100, "expReward": 900, "aniumReward": 680 }
+    },
+    {
+      "id": 10, "name": "TITAN CORE", "emoji": "💀",
+      "mobs": [
+        { "name": "Titan Enforcer", "emoji": "💀", "hp": 2800,"atk": 135,"def": 72, "expReward": 182, "aniumReward": 124 },
+        { "name": "Dread Machine",  "emoji": "🤯", "hp": 3200,"atk": 125,"def": 80, "expReward": 192, "aniumReward": 132 },
+        { "name": "Annihilator",    "emoji": "💥", "hp": 2600,"atk": 148,"def": 68, "expReward": 188, "aniumReward": 128 }
+      ],
+      "boss": { "name": "TITAN GOD",      "emoji": "☠️", "hp": 12000,"atk": 310, "def": 130,"expReward": 1200,"aniumReward": 900 }
+    }
   ]
 }
