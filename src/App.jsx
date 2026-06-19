@@ -117,8 +117,8 @@ export default function App() {
 
   if (loading || !hydrated) {
     return (
-      <div style={styles.root}>
-        <div style={styles.phone}>
+      <div className="game-root">
+        <div className="game-container">
           <div style={styles.center}>
             <div style={{ fontSize: 48 }}>⚡</div>
             <div style={{ fontFamily: 'monospace', fontSize: 16, color: '#00e5ff', letterSpacing: 3, marginTop: 12 }}>LOADING...</div>
@@ -130,8 +130,10 @@ export default function App() {
 
   if (!user) {
     return (
-      <div style={styles.root}>
-        <div style={styles.phone}><Auth /></div>
+      <div className="game-root">
+        <div className="game-container">
+          <Auth />
+        </div>
       </div>
     )
   }
