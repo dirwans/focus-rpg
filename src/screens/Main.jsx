@@ -22,7 +22,7 @@ export default function Main() {
   const setMode      = useGameStore((s) => s.setMode)
   const openRaceSelect = useGameStore((s) => s.openRaceSelect)
 
-  const { user } = useAuthStore()
+  const { user, signOut } = useAuthStore()
   const username = user?.user_metadata?.username || user?.email?.split('@')[0] || '—'
 
   const stats   = getStats()
@@ -41,13 +41,16 @@ export default function Main() {
       <div style={styles.resBar}>
         <span style={styles.resPill('#f5a623')}>⬡ {player.resources.anium.toLocaleString()}</span>
         <span style={styles.resPill('#00e5ff')}>◈ {player.resources.credits}</span>
-        <span style={{ marginLeft: 'auto', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 2 }}>
-          <span style={{ fontFamily: 'monospace', fontSize: 14, color: '#7ab0d0', fontWeight: 700 }}>
-            {race ? race.emoji + ' ' + race.name : '—'}
+        <span style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 8 }}>
+          <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 2 }}>
+            <span style={{ fontFamily: 'monospace', fontSize: 14, color: '#7ab0d0', fontWeight: 700 }}>
+              {race ? race.emoji + ' ' + race.name : '—'}
+            </span>
+            <span style={{ fontFamily: 'monospace', fontSize: 11, color: '#4a8fa8' }}>
+              @{username}
+            </span>
           </span>
-          <span style={{ fontFamily: 'monospace', fontSize: 11, color: '#4a8fa8', fontWeight: 400 }}>
-            @{username}
-          </span>
+          <button onClick={signOut} style={styles.logoutBtn} title="Logout">⏏</button>
         </span>
       </div>
 
@@ -186,4 +189,5 @@ const styles = {
   timerBtn: (active) => ({ flex: 1, padding: 12, borderRadius: 10, fontFamily: 'monospace', fontSize: 15, fontWeight: 700, cursor: 'pointer', border: `2px solid ${active ? '#00c8ff' : '#1a3a6a'}`, background: active ? '#0a2a4a' : '#080f1e', color: active ? '#fff' : '#7ab0d0' }),
   deployBtn: { margin: '0 16px 10px', padding: 18, borderRadius: 12, border: 'none', background: 'linear-gradient(90deg,#0050cc,#00a8ff)', fontFamily: 'monospace', fontSize: 18, fontWeight: 900, color: '#fff', letterSpacing: 2, cursor: 'pointer' },
   sessionSummary: { textAlign: 'center', padding: '0 16px 10px' },
+  logoutBtn: { background: '#0a1628', border: '2px solid #1a3a6a', borderRadius: 8, color: '#4a8fa8', fontSize: 16, cursor: 'pointer', padding: '4px 8px', lineHeight: 1 },
 }
