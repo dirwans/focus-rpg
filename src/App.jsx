@@ -123,8 +123,8 @@ export default function App() {
   const Screen = SCREENS[screen] || Main
 
   return (
-    <div style={styles.root}>
-      <div style={styles.phone}>
+    <div className="game-root">
+      <div className="game-container">
         <div style={styles.content}><Screen /></div>
         <BottomNav />
       </div>
@@ -134,8 +134,6 @@ export default function App() {
 }
 
 const styles = {
-  root:    { minHeight: '100vh', background: '#050810', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '20px 0' },
-  phone:   { width: 390, minHeight: 844, maxHeight: '95vh', background: '#080d1a', border: '2px solid #1a3a5c', borderRadius: 40, overflow: 'hidden', display: 'flex', flexDirection: 'column' },
   content: { flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column' },
   center:  { flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' },
 }
