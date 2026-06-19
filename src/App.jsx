@@ -14,7 +14,14 @@ import Cargo from './screens/Cargo'
 
 const SCREENS = { main: Main, unit: Unit, ranks: Ranks, forge: Forge, cargo: Cargo }
 
-const score = (p) => (p?.totalSessions || 0) * 1000 + (p?.level || 0)
+// field yang ikut sync (exclude timer/battle yang memang per-device)
+const snap = (p) => JSON.stringify({
+  race: p?.race, level: p?.level, exp: p?.exp,
+  resources: p?.resources, upgrades: p?.upgrades,
+  sector: p?.sector, highestSector: p?.highestSector,
+  streak: p?.streak, lastSessionDate: p?.lastSessionDate,
+  inventory: p?.inventory, totalSessions: p?.totalSessions, totalMinutes: p?.totalMinutes,
+})
 
 export default function App() {
   useTimer()
@@ -29,6 +36,8 @@ export default function App() {
   playerRef.current = player
   const debounceRef = useRef(null)
   const readyRef    = useRef(false)
+  // snapshot terakhir yang sudah sinkron dengan server — anti echo-loop
+  const lastSyncRef = useRef('')
 
   const [hydrated, setHydrated] = useState(() => useGameStore.persist.hasHydrated())
 
@@ -41,36 +50,44 @@ export default function App() {
     return unsub
   }, [])
 
-  // Load save saat login + hydrated, lalu aktifkan sync
+  // Login + hydrated → server jadi sumber kebenaran. Ada save server → pakai itu.
   useEffect(() => {
     if (!user || !hydrated) return
     readyRef.current = false
     loadSave().then((cloud) => {
-      const local = playerRef.current
-      if (cloud && score(cloud) >= score(local)) loadPlayer(cloud)
-      else syncSave(local)
-      setTimeout(() => { readyRef.current = true }, 800)
+      if (cloud) {
+        loadPlayer(cloud)
+        lastSyncRef.current = snap(cloud)
+      } else {
+        const local = playerRef.current
+        syncSave(local)
+        lastSyncRef.current = snap(local)
+      }
+      setTimeout(() => { readyRef.current = true }, 600)
     })
   }, [user?.username, hydrated])
 
-  // Debounced sync tiap player berubah (1.5s)
+  // Sync tiap player berubah (debounce 800ms) — skip kalau sama dgn snapshot terakhir
   useEffect(() => {
     if (!user || !readyRef.current) return
+    const cur = snap(playerRef.current)
+    if (cur === lastSyncRef.current) return // ga ada perubahan riil / baru terima remote
     if (debounceRef.current) clearTimeout(debounceRef.current)
-    debounceRef.current = setTimeout(() => syncSave(playerRef.current), 1500)
+    debounceRef.current = setTimeout(() => {
+      lastSyncRef.current = snap(playerRef.current)
+      syncSave(playerRef.current)
+    }, 800)
     return () => clearTimeout(debounceRef.current)
   }, [player, user?.username])
 
-  // SSE realtime — update instan saat device lain nyimpen
+  // SSE realtime — device lain nyimpen → selalu terapkan (server source of truth)
   useEffect(() => {
     if (!user) return
     const unsub = subscribeSave((cloud) => {
-      if (!readyRef.current) return
-      if (score(cloud) > score(playerRef.current)) {
-        readyRef.current = false
-        loadPlayer(cloud)
-        setTimeout(() => { readyRef.current = true }, 800)
-      }
+      const incoming = snap(cloud)
+      if (incoming === snap(playerRef.current)) return // sudah sama
+      lastSyncRef.current = incoming // tandai biar ga di-push balik (anti echo)
+      loadPlayer(cloud)
     })
     return unsub
   }, [user?.username])
