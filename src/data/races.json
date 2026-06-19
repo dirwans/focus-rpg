@@ -49,15 +49,15 @@
     "id": "cora",
     "name": "Holy Alliance Cora",
     "emoji": "🧝‍♀️",
-    "description": "A spiritual, elf-like race utilizing the magical arts and summoning.",
+    "description": "A spiritual alliance of elf-like beings blessed with supreme Force magic power.",
     "strengths": [
-      "🆙 +30% Focus EXP Rate",
-      "⚡ +15% Base Firepower (ATK)",
-      "🔮 Exclusive staves & high crit chance"
+      "🔮 +30% Force Magic Power (ATK)",
+      "🆙 +30% Focus EXP Rate (Meditation)",
+      "✨ Exclusive staves/wands & high crit rate"
     ],
     "weaknesses": [
       "🛡️ -15% Armor (DEF)",
-      "💔 -10% Shield HP"
+      "💔 -10% Shield HP (Fragile body)"
     ],
     "bonuses": {
       "expMultiplier": 1.3,
