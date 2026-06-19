@@ -1,44 +1,44 @@
 {
-  "human": {
-    "id": "human",
-    "name": "Human",
-    "emoji": "🧑",
-    "description": "Balanced warrior. Gains bonus EXP from every session.",
-    "bonuses": {
-      "expMultiplier": 1.25,
-      "atkMultiplier": 1.0,
-      "defMultiplier": 1.0,
-      "hpMultiplier": 1.0,
-      "gatherMultiplier": 1.0
-    },
-    "baseStats": { "hp": 800, "atk": 50, "def": 30, "spd": 10, "luk": 10 }
-  },
-  "elf": {
-    "id": "elf",
-    "name": "Elf",
-    "emoji": "🧝",
-    "description": "Swift and agile. Excels at resource gathering and has high luck.",
+  "accretia": {
+    "id": "accretia",
+    "name": "Accretia Empire",
+    "emoji": "🤖",
+    "description": "Mechanical cyborgs. High firepower and defense, lower luck/magic. Excels at combat.",
     "bonuses": {
       "expMultiplier": 1.0,
-      "atkMultiplier": 0.9,
-      "defMultiplier": 0.85,
-      "hpMultiplier": 0.85,
-      "gatherMultiplier": 1.6
-    },
-    "baseStats": { "hp": 600, "atk": 45, "def": 22, "spd": 18, "luk": 20 }
-  },
-  "orc": {
-    "id": "orc",
-    "name": "Orc",
-    "emoji": "👹",
-    "description": "Brutal and tanky. Deals massive damage and absorbs hits.",
-    "bonuses": {
-      "expMultiplier": 1.0,
-      "atkMultiplier": 1.35,
-      "defMultiplier": 1.3,
-      "hpMultiplier": 1.4,
+      "atkMultiplier": 1.3,
+      "defMultiplier": 1.25,
+      "hpMultiplier": 1.15,
       "gatherMultiplier": 0.75
     },
-    "baseStats": { "hp": 1200, "atk": 70, "def": 48, "spd": 6, "luk": 5 }
+    "baseStats": { "hp": 1200, "atk": 70, "def": 48, "spd": 8, "luk": 5 }
+  },
+  "bellato": {
+    "id": "bellato",
+    "name": "Bellato Union",
+    "emoji": "⚙️",
+    "description": "Scientific inventors. High resource gathering and balanced progression.",
+    "bonuses": {
+      "expMultiplier": 1.1,
+      "atkMultiplier": 1.0,
+      "defMultiplier": 1.05,
+      "hpMultiplier": 1.0,
+      "gatherMultiplier": 1.5
+    },
+    "baseStats": { "hp": 850, "atk": 50, "def": 30, "spd": 10, "luk": 12 }
+  },
+  "cora": {
+    "id": "cora",
+    "name": "Holy Alliance Cora",
+    "emoji": "🧝‍♀️",
+    "description": "Spiritual summoners. High experience gain and critical rating, lower defense.",
+    "bonuses": {
+      "expMultiplier": 1.3,
+      "atkMultiplier": 1.15,
+      "defMultiplier": 0.85,
+      "hpMultiplier": 0.9,
+      "gatherMultiplier": 1.0
+    },
+    "baseStats": { "hp": 750, "atk": 58, "def": 24, "spd": 12, "luk": 18 }
   }
 }

@@ -6,8 +6,8 @@ export async function loadSave() {
 }
 
 export async function syncSave(gameState) {
-  try { await apiSyncSave(gameState) }
-  catch (e) { console.error('[saveSync] sync error:', e.message) }
+  try { return await apiSyncSave(gameState) }
+  catch (e) { console.error('[saveSync] sync error:', e.message); return null }
 }
 
 // SSE realtime — panggil onUpdate tiap save berubah dari device lain

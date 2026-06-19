@@ -1,94 +1,434 @@
 {
   "sectors": [
     {
-      "id": 1, "name": "Rusted Outpost", "emoji": "🤖",
+      "id": 1,
+      "name": "HQ Outpost",
+      "emoji": "🤖",
       "mobs": [
-        { "name": "Rust Drone",     "emoji": "🤖", "hp": 100, "atk": 7,  "def": 2,  "expReward": 10, "aniumReward": 6 },
-        { "name": "Scrap Golem",    "emoji": "⚙️", "hp": 140, "atk": 9,  "def": 4,  "expReward": 14, "aniumReward": 9 },
-        { "name": "Junk Sentinel",  "emoji": "🦿", "hp": 80,  "atk": 12, "def": 1,  "expReward": 12, "aniumReward": 8 }
+        {
+          "name": "Young Flem",
+          "emoji": "🦟",
+          "hp": 80,
+          "atk": 7,
+          "def": 1,
+          "expReward": 10,
+          "aniumReward": 6
+        },
+        {
+          "name": "Wing",
+          "emoji": "🦇",
+          "hp": 110,
+          "atk": 9,
+          "def": 2,
+          "expReward": 12,
+          "aniumReward": 7
+        },
+        {
+          "name": "Clod",
+          "emoji": "🐗",
+          "hp": 140,
+          "atk": 11,
+          "def": 3,
+          "expReward": 14,
+          "aniumReward": 9
+        }
       ],
-      "boss": { "name": "IRON WARDEN",   "emoji": "💢", "hp": 600,  "atk": 20, "def": 8,  "expReward": 80,  "aniumReward": 60 }
+      "boss": {
+        "name": "BULKY LUNKER",
+        "emoji": "👹",
+        "hp": 600,
+        "atk": 20,
+        "def": 8,
+        "expReward": 80,
+        "aniumReward": 60
+      }
     },
     {
-      "id": 2, "name": "Scrap Yard", "emoji": "⚙️",
+      "id": 2,
+      "name": "Crag Mine",
+      "emoji": "💎",
       "mobs": [
-        { "name": "Acid Crawler",   "emoji": "🐛", "hp": 180, "atk": 13, "def": 4,  "expReward": 18, "aniumReward": 12 },
-        { "name": "Volt Striker",   "emoji": "⚡", "hp": 220, "atk": 10, "def": 7,  "expReward": 22, "aniumReward": 15 },
-        { "name": "Slag Hound",     "emoji": "🐺", "hp": 160, "atk": 16, "def": 3,  "expReward": 20, "aniumReward": 13 }
+        {
+          "name": "Mine Crawler",
+          "emoji": "🕷️",
+          "hp": 118,
+          "atk": 9,
+          "def": 2,
+          "expReward": 13,
+          "aniumReward": 8
+        },
+        {
+          "name": "Lazward Ward",
+          "emoji": "🤖",
+          "hp": 178,
+          "atk": 13,
+          "def": 4,
+          "expReward": 17,
+          "aniumReward": 11
+        },
+        {
+          "name": "Mine Driller",
+          "emoji": "🐛",
+          "hp": 238,
+          "atk": 17,
+          "def": 6,
+          "expReward": 21,
+          "aniumReward": 14
+        }
       ],
-      "boss": { "name": "SCRAP TITAN",   "emoji": "🔩", "hp": 900,  "atk": 32, "def": 12, "expReward": 120, "aniumReward": 90 }
+      "boss": {
+        "name": "MINING REAVER",
+        "emoji": "🌋",
+        "hp": 840,
+        "atk": 27,
+        "def": 10,
+        "expReward": 108,
+        "aniumReward": 81
+      }
     },
     {
-      "id": 3, "name": "Iron Trenches", "emoji": "🦾",
+      "id": 3,
+      "name": "Sette Desert",
+      "emoji": "🏜️",
       "mobs": [
-        { "name": "Trench Mauler",  "emoji": "🦾", "hp": 300, "atk": 20, "def": 7,  "expReward": 28, "aniumReward": 18 },
-        { "name": "Mine Bot",       "emoji": "💣", "hp": 260, "atk": 25, "def": 5,  "expReward": 32, "aniumReward": 22 },
-        { "name": "Iron Shade",     "emoji": "👥", "hp": 340, "atk": 18, "def": 10, "expReward": 30, "aniumReward": 20 }
+        {
+          "name": "Sand Ingress",
+          "emoji": "🦂",
+          "hp": 175,
+          "atk": 13,
+          "def": 3,
+          "expReward": 19,
+          "aniumReward": 11
+        },
+        {
+          "name": "Desert Demolith",
+          "emoji": "🗿",
+          "hp": 265,
+          "atk": 19,
+          "def": 6,
+          "expReward": 25,
+          "aniumReward": 16
+        },
+        {
+          "name": "Desert Hummer",
+          "emoji": "🏜️",
+          "hp": 355,
+          "atk": 25,
+          "def": 9,
+          "expReward": 31,
+          "aniumReward": 20
+        }
       ],
-      "boss": { "name": "SIEGE COMMANDER","emoji": "🎖️","hp": 1400, "atk": 50, "def": 20, "expReward": 180, "aniumReward": 130 }
+      "boss": {
+        "name": "DESERT PREDATOR",
+        "emoji": "🐲",
+        "hp": 1175,
+        "atk": 36,
+        "def": 14,
+        "expReward": 145,
+        "aniumReward": 109
+      }
     },
     {
-      "id": 4, "name": "Plasma Fields", "emoji": "⚡",
+      "id": 4,
+      "name": "Ether Platform",
+      "emoji": "❄️",
       "mobs": [
-        { "name": "Plasma Wasp",    "emoji": "⚡", "hp": 420, "atk": 30, "def": 10, "expReward": 40, "aniumReward": 26 },
-        { "name": "Volt Hydra",     "emoji": "🐉", "hp": 500, "atk": 25, "def": 14, "expReward": 44, "aniumReward": 30 },
-        { "name": "Arc Fiend",      "emoji": "😈", "hp": 380, "atk": 36, "def": 8,  "expReward": 42, "aniumReward": 28 }
+        {
+          "name": "Caliana Archer",
+          "emoji": "🧝‍♀️",
+          "hp": 259,
+          "atk": 18,
+          "def": 5,
+          "expReward": 26,
+          "aniumReward": 16
+        },
+        {
+          "name": "Caliana Atro",
+          "emoji": "🧚",
+          "hp": 379,
+          "atk": 26,
+          "def": 9,
+          "expReward": 34,
+          "aniumReward": 22
+        },
+        {
+          "name": "Caliana Crew",
+          "emoji": "🧜‍♀️",
+          "hp": 499,
+          "atk": 34,
+          "def": 13,
+          "expReward": 42,
+          "aniumReward": 28
+        }
       ],
-      "boss": { "name": "PLASMA OVERLORD","emoji": "🌩️","hp": 2000, "atk": 70, "def": 28, "expReward": 250, "aniumReward": 180 }
+      "boss": {
+        "name": "CALIANA PRINCESS",
+        "emoji": "👑",
+        "hp": 1646,
+        "atk": 49,
+        "def": 20,
+        "expReward": 196,
+        "aniumReward": 147
+      }
     },
     {
-      "id": 5, "name": "Void Gate Alpha", "emoji": "🌀",
+      "id": 5,
+      "name": "Volcanic Cauldron",
+      "emoji": "🌋",
       "mobs": [
-        { "name": "Void Wraith",    "emoji": "👻", "hp": 620, "atk": 42, "def": 16, "expReward": 55, "aniumReward": 36 },
-        { "name": "Gate Stalker",   "emoji": "🌀", "hp": 700, "atk": 38, "def": 20, "expReward": 60, "aniumReward": 40 },
-        { "name": "Rift Walker",    "emoji": "🔮", "hp": 560, "atk": 50, "def": 12, "expReward": 58, "aniumReward": 38 }
+        {
+          "name": "Lava Ingress",
+          "emoji": "🕷️",
+          "hp": 383,
+          "atk": 25,
+          "def": 7,
+          "expReward": 36,
+          "aniumReward": 23
+        },
+        {
+          "name": "Infernal Demolith",
+          "emoji": "🧱",
+          "hp": 533,
+          "atk": 35,
+          "def": 12,
+          "expReward": 46,
+          "aniumReward": 30
+        },
+        {
+          "name": "Volcano Chariot",
+          "emoji": "🛡️",
+          "hp": 683,
+          "atk": 45,
+          "def": 17,
+          "expReward": 56,
+          "aniumReward": 38
+        }
       ],
-      "boss": { "name": "VOID SOVEREIGN", "emoji": "🌑", "hp": 2800, "atk": 95, "def": 38, "expReward": 340, "aniumReward": 240 }
+      "boss": {
+        "name": "GREAT KURR",
+        "emoji": "🔥",
+        "hp": 2304,
+        "atk": 66,
+        "def": 27,
+        "expReward": 265,
+        "aniumReward": 199
+      }
     },
     {
-      "id": 6, "name": "Neural Core", "emoji": "🧠",
+      "id": 6,
+      "name": "Elan Plateau",
+      "emoji": "⛰️",
       "mobs": [
-        { "name": "Synapse Drone",  "emoji": "🧠", "hp": 880, "atk": 55, "def": 22, "expReward": 72, "aniumReward": 48 },
-        { "name": "Data Phantom",   "emoji": "💻", "hp": 960, "atk": 50, "def": 28, "expReward": 78, "aniumReward": 52 },
-        { "name": "Core Hacker",    "emoji": "🔓", "hp": 820, "atk": 64, "def": 18, "expReward": 76, "aniumReward": 50 }
+        {
+          "name": "Plateau Scud",
+          "emoji": "🦖",
+          "hp": 568,
+          "atk": 35,
+          "def": 11,
+          "expReward": 50,
+          "aniumReward": 32
+        },
+        {
+          "name": "Turncoat Ranger",
+          "emoji": "🏹",
+          "hp": 748,
+          "atk": 47,
+          "def": 17,
+          "expReward": 62,
+          "aniumReward": 41
+        },
+        {
+          "name": "Turncoat Specialist",
+          "emoji": "🔧",
+          "hp": 928,
+          "atk": 59,
+          "def": 23,
+          "expReward": 74,
+          "aniumReward": 50
+        }
       ],
-      "boss": { "name": "NEURAL APEX",    "emoji": "🔴", "hp": 3800, "atk": 120, "def": 50, "expReward": 450, "aniumReward": 320 }
+      "boss": {
+        "name": "DAGON INCARNATE",
+        "emoji": "🐙",
+        "hp": 3226,
+        "atk": 89,
+        "def": 37,
+        "expReward": 358,
+        "aniumReward": 269
+      }
     },
     {
-      "id": 7, "name": "Crimson Citadel", "emoji": "🏰",
+      "id": 7,
+      "name": "Beast Mountain",
+      "emoji": "🌲",
       "mobs": [
-        { "name": "Blood Knight",   "emoji": "⚔️", "hp": 1200,"atk": 70, "def": 30, "expReward": 92, "aniumReward": 62 },
-        { "name": "Crimson Beast",  "emoji": "🩸", "hp": 1350,"atk": 65, "def": 36, "expReward": 98, "aniumReward": 66 },
-        { "name": "Tower Demon",    "emoji": "🏰", "hp": 1100,"atk": 80, "def": 26, "expReward": 96, "aniumReward": 64 }
+        {
+          "name": "Beast Fighter",
+          "emoji": "🦧",
+          "hp": 840,
+          "atk": 48,
+          "def": 17,
+          "expReward": 69,
+          "aniumReward": 45
+        },
+        {
+          "name": "Mountain Crawler",
+          "emoji": "🦂",
+          "hp": 1050,
+          "atk": 62,
+          "def": 24,
+          "expReward": 83,
+          "aniumReward": 55
+        },
+        {
+          "name": "Beast Gargoyle",
+          "emoji": "🦅",
+          "hp": 1260,
+          "atk": 76,
+          "def": 31,
+          "expReward": 97,
+          "aniumReward": 66
+        }
       ],
-      "boss": { "name": "CRIMSON TYRANT", "emoji": "👑", "hp": 5000, "atk": 155, "def": 65, "expReward": 580, "aniumReward": 420 }
+      "boss": {
+        "name": "BEAST KING",
+        "emoji": "🦁",
+        "hp": 4517,
+        "atk": 121,
+        "def": 50,
+        "expReward": 484,
+        "aniumReward": 363
+      }
     },
     {
-      "id": 8, "name": "Singularity Rift", "emoji": "🌌",
+      "id": 8,
+      "name": "Outcast Land",
+      "emoji": "🍂",
       "mobs": [
-        { "name": "Rift Abomination","emoji":"🌌", "hp": 1600,"atk": 88, "def": 42, "expReward": 115, "aniumReward": 78 },
-        { "name": "Dark Matter",    "emoji": "⬛", "hp": 1800,"atk": 82, "def": 48, "expReward": 122, "aniumReward": 82 },
-        { "name": "Singularity Eye","emoji": "👁️", "hp": 1500,"atk": 100,"def": 38, "expReward": 118, "aniumReward": 80 }
+        {
+          "name": "Outcast Warrior",
+          "emoji": "⚔️",
+          "hp": 1244,
+          "atk": 66,
+          "def": 25,
+          "expReward": 95,
+          "aniumReward": 63
+        },
+        {
+          "name": "Outcast Sorcerer",
+          "emoji": "🔮",
+          "hp": 1484,
+          "atk": 82,
+          "def": 33,
+          "expReward": 111,
+          "aniumReward": 75
+        },
+        {
+          "name": "Lizardman Guard",
+          "emoji": "🦎",
+          "hp": 1724,
+          "atk": 98,
+          "def": 41,
+          "expReward": 127,
+          "aniumReward": 87
+        }
       ],
-      "boss": { "name": "RIFT COLOSSUS",  "emoji": "🌠", "hp": 6500, "atk": 195, "def": 80, "expReward": 720, "aniumReward": 540 }
+      "boss": {
+        "name": "OUTCAST CHIEFTAIN",
+        "emoji": "👑",
+        "hp": 6324,
+        "atk": 163,
+        "def": 68,
+        "expReward": 653,
+        "aniumReward": 490
+      }
     },
     {
-      "id": 9, "name": "Omega Station", "emoji": "🛸",
+      "id": 9,
+      "name": "Bio Lab",
+      "emoji": "🧬",
       "mobs": [
-        { "name": "Omega Guard",    "emoji": "🛸", "hp": 2100,"atk": 110,"def": 55, "expReward": 144, "aniumReward": 96 },
-        { "name": "Star Leviathan", "emoji": "🐋", "hp": 2400,"atk": 100,"def": 62, "expReward": 152, "aniumReward": 104 },
-        { "name": "Void Admiral",   "emoji": "🚀", "hp": 2000,"atk": 122,"def": 50, "expReward": 148, "aniumReward": 100 }
+        {
+          "name": "Mutant Soldier",
+          "emoji": "🧟",
+          "hp": 1841,
+          "atk": 92,
+          "def": 38,
+          "expReward": 131,
+          "aniumReward": 88
+        },
+        {
+          "name": "Lab Abomination",
+          "emoji": "🧬",
+          "hp": 2111,
+          "atk": 110,
+          "def": 47,
+          "expReward": 149,
+          "aniumReward": 102
+        },
+        {
+          "name": "Android Sentinel",
+          "emoji": "🤖",
+          "hp": 2381,
+          "atk": 128,
+          "def": 56,
+          "expReward": 167,
+          "aniumReward": 115
+        }
       ],
-      "boss": { "name": "OMEGA PRIME",    "emoji": "🌟", "hp": 8500, "atk": 245, "def": 100, "expReward": 900, "aniumReward": 680 }
+      "boss": {
+        "name": "DR. FRANKEN",
+        "emoji": "🥼",
+        "hp": 8854,
+        "atk": 220,
+        "def": 93,
+        "expReward": 882,
+        "aniumReward": 661
+      }
     },
     {
-      "id": 10, "name": "TITAN CORE", "emoji": "💀",
+      "id": 10,
+      "name": "Titan Core",
+      "emoji": "💀",
       "mobs": [
-        { "name": "Titan Enforcer", "emoji": "💀", "hp": 2800,"atk": 135,"def": 72, "expReward": 182, "aniumReward": 124 },
-        { "name": "Dread Machine",  "emoji": "🤯", "hp": 3200,"atk": 125,"def": 80, "expReward": 192, "aniumReward": 132 },
-        { "name": "Annihilator",    "emoji": "💥", "hp": 2600,"atk": 148,"def": 68, "expReward": 188, "aniumReward": 128 }
+        {
+          "name": "Dark Sentinel",
+          "emoji": "🛡️",
+          "hp": 2725,
+          "atk": 127,
+          "def": 57,
+          "expReward": 181,
+          "aniumReward": 123
+        },
+        {
+          "name": "Void Reaper",
+          "emoji": "💀",
+          "hp": 3025,
+          "atk": 147,
+          "def": 67,
+          "expReward": 201,
+          "aniumReward": 138
+        },
+        {
+          "name": "Star Devourer",
+          "emoji": "🌌",
+          "hp": 3325,
+          "atk": 167,
+          "def": 77,
+          "expReward": 221,
+          "aniumReward": 153
+        }
       ],
-      "boss": { "name": "TITAN GOD",      "emoji": "☠️", "hp": 12000,"atk": 310, "def": 130,"expReward": 1200,"aniumReward": 900 }
+      "boss": {
+        "name": "LORD DECEM",
+        "emoji": "🌟",
+        "hp": 12396,
+        "atk": 297,
+        "def": 127,
+        "expReward": 1191,
+        "aniumReward": 893
+      }
     }
   ]
 }

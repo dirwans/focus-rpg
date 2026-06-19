@@ -1,10 +1,378 @@
 {
   "items": [
-    { "id": "plasma_blade", "name": "Plasma Blade Mk.I", "emoji": "⚔️", "rarity": "rare",   "type": "weapon",  "bonus": { "atk": 15 } },
-    { "id": "carbon_rod",   "name": "Carbon Rod",        "emoji": "🔩", "rarity": "common", "type": "material","bonus": {} },
-    { "id": "nano_kit",     "name": "Nano Repair Kit",   "emoji": "💉", "rarity": "consumable","type": "consumable","bonus": { "hp": 500 } },
-    { "id": "iron_shield",  "name": "Iron Shield",       "emoji": "🛡", "rarity": "uncommon","type": "armor",   "bonus": { "def": 10 } },
-    { "id": "void_core",    "name": "Void Core",         "emoji": "🌀", "rarity": "rare",   "type": "material","bonus": {} },
-    { "id": "quantum_core", "name": "Quantum Core",      "emoji": "🔴", "rarity": "epic",   "type": "material","bonus": {} }
+    {
+      "id": "novice_sword",
+      "name": "Novice Beam Saber",
+      "emoji": "⚔️",
+      "rarity": "common",
+      "type": "weapon",
+      "race": "All",
+      "level": 1,
+      "bonus": {
+        "atk": 14
+      }
+    },
+    {
+      "id": "intense_blade",
+      "name": "Intense Blade",
+      "emoji": "⚔️",
+      "rarity": "uncommon",
+      "type": "weapon",
+      "race": "All",
+      "level": 15,
+      "bonus": {
+        "atk": 105
+      }
+    },
+    {
+      "id": "leons_gunblade",
+      "name": "Leon's Gunblade",
+      "emoji": "🗡️",
+      "rarity": "rare",
+      "type": "weapon",
+      "race": "All",
+      "level": 40,
+      "bonus": {
+        "atk": 425
+      }
+    },
+    {
+      "id": "relic_greatsword",
+      "name": "Relic Greatsword",
+      "emoji": "⚔️",
+      "rarity": "epic",
+      "type": "weapon",
+      "race": "All",
+      "level": 55,
+      "bonus": {
+        "atk": 1035
+      }
+    },
+    {
+      "id": "hora_spear",
+      "name": "Hora Spear",
+      "emoji": "🔱",
+      "rarity": "epic",
+      "type": "weapon",
+      "race": "All",
+      "level": 70,
+      "bonus": {
+        "atk": 1305
+      }
+    },
+    {
+      "id": "novice_launcher",
+      "name": "Novice Launcher",
+      "emoji": "🚀",
+      "rarity": "common",
+      "type": "weapon",
+      "race": "accretia",
+      "level": 1,
+      "bonus": {
+        "atk": 14
+      }
+    },
+    {
+      "id": "intense_gatling",
+      "name": "Intense Gatling",
+      "emoji": "🔫",
+      "rarity": "uncommon",
+      "type": "weapon",
+      "race": "accretia",
+      "level": 25,
+      "bonus": {
+        "atk": 165
+      }
+    },
+    {
+      "id": "doom_launcher",
+      "name": "Doom Launcher",
+      "emoji": "🚀",
+      "rarity": "rare",
+      "type": "weapon",
+      "race": "accretia",
+      "level": 40,
+      "bonus": {
+        "atk": 425
+      }
+    },
+    {
+      "id": "relic_vulcan",
+      "name": "Relic Vulcan",
+      "emoji": "🔫",
+      "rarity": "epic",
+      "type": "weapon",
+      "race": "accretia",
+      "level": 55,
+      "bonus": {
+        "atk": 1035
+      }
+    },
+    {
+      "id": "archon_doom_blast",
+      "name": "Archon Doom Blast",
+      "emoji": "🚀",
+      "rarity": "epic",
+      "type": "weapon",
+      "race": "accretia",
+      "level": 70,
+      "bonus": {
+        "atk": 1305
+      }
+    },
+    {
+      "id": "novice_bow",
+      "name": "Novice Short Bow",
+      "emoji": "🏹",
+      "rarity": "common",
+      "type": "weapon",
+      "race": "bellato",
+      "level": 1,
+      "bonus": {
+        "atk": 14
+      }
+    },
+    {
+      "id": "intense_composite_bow",
+      "name": "Intense Composite Bow",
+      "emoji": "🏹",
+      "rarity": "uncommon",
+      "type": "weapon",
+      "race": "bellato",
+      "level": 25,
+      "bonus": {
+        "atk": 165
+      }
+    },
+    {
+      "id": "leons_gun_bow",
+      "name": "Leon's Gun Bow",
+      "emoji": "🏹",
+      "rarity": "rare",
+      "type": "weapon",
+      "race": "bellato",
+      "level": 40,
+      "bonus": {
+        "atk": 425
+      }
+    },
+    {
+      "id": "saint_bow",
+      "name": "Saint Compound Bow",
+      "emoji": "🏹",
+      "rarity": "epic",
+      "type": "weapon",
+      "race": "bellato",
+      "level": 55,
+      "bonus": {
+        "atk": 1035
+      }
+    },
+    {
+      "id": "hora_crossbow",
+      "name": "Hora Heavy Crossbow",
+      "emoji": "🏹",
+      "rarity": "epic",
+      "type": "weapon",
+      "race": "bellato",
+      "level": 70,
+      "bonus": {
+        "atk": 1305
+      }
+    },
+    {
+      "id": "novice_wand",
+      "name": "Novice Wand",
+      "emoji": "🔮",
+      "rarity": "common",
+      "type": "weapon",
+      "race": "cora",
+      "level": 1,
+      "bonus": {
+        "atk": 14
+      }
+    },
+    {
+      "id": "intense_staff",
+      "name": "Intense Staff",
+      "emoji": "🔮",
+      "rarity": "uncommon",
+      "type": "weapon",
+      "race": "cora",
+      "level": 25,
+      "bonus": {
+        "atk": 165
+      }
+    },
+    {
+      "id": "leons_scepter",
+      "name": "Leon's Divine Scepter",
+      "emoji": "🔮",
+      "rarity": "rare",
+      "type": "weapon",
+      "race": "cora",
+      "level": 40,
+      "bonus": {
+        "atk": 425
+      }
+    },
+    {
+      "id": "darkray_staff",
+      "name": "Darkray Staff",
+      "emoji": "🔮",
+      "rarity": "epic",
+      "type": "weapon",
+      "race": "cora",
+      "level": 55,
+      "bonus": {
+        "atk": 1035
+      }
+    },
+    {
+      "id": "hora_scepter",
+      "name": "Hora Staff",
+      "emoji": "🔮",
+      "rarity": "epic",
+      "type": "weapon",
+      "race": "cora",
+      "level": 70,
+      "bonus": {
+        "atk": 1305
+      }
+    },
+    {
+      "id": "compound_shield",
+      "name": "Compound Shield",
+      "emoji": "🛡️",
+      "rarity": "uncommon",
+      "type": "armor",
+      "race": "All",
+      "level": 15,
+      "bonus": {
+        "def": 63
+      }
+    },
+    {
+      "id": "defiance_shield",
+      "name": "Defiance Aegis Shield",
+      "emoji": "🛡️",
+      "rarity": "rare",
+      "type": "armor",
+      "race": "All",
+      "level": 40,
+      "bonus": {
+        "def": 231
+      }
+    },
+    {
+      "id": "accretia_doom_frame",
+      "name": "Accretia Doom Frame",
+      "emoji": "🦾",
+      "rarity": "rare",
+      "type": "armor",
+      "race": "accretia",
+      "level": 50,
+      "bonus": {
+        "def": 286
+      }
+    },
+    {
+      "id": "bellato_explorer_suit",
+      "name": "Bellato Scout Suit",
+      "emoji": "🧥",
+      "rarity": "rare",
+      "type": "armor",
+      "race": "bellato",
+      "level": 50,
+      "bonus": {
+        "def": 286
+      }
+    },
+    {
+      "id": "cora_covenant_robe",
+      "name": "Cora Covenant Robe",
+      "emoji": "👘",
+      "rarity": "rare",
+      "type": "armor",
+      "race": "cora",
+      "level": 50,
+      "bonus": {
+        "def": 286
+      }
+    },
+    {
+      "id": "carbon_plate",
+      "name": "Carbon Micro-Plate",
+      "emoji": "🔩",
+      "rarity": "common",
+      "type": "material",
+      "race": "All",
+      "level": 1,
+      "bonus": {}
+    },
+    {
+      "id": "excelsior_black",
+      "name": "Excelsior Black Piece",
+      "emoji": "🔴",
+      "rarity": "rare",
+      "type": "material",
+      "race": "All",
+      "level": 1,
+      "bonus": {}
+    },
+    {
+      "id": "excelsior_blue",
+      "name": "Excelsior Blue Piece",
+      "emoji": "🔵",
+      "rarity": "rare",
+      "type": "material",
+      "race": "All",
+      "level": 1,
+      "bonus": {}
+    },
+    {
+      "id": "herodian_chip",
+      "name": "Herodian Control Chip",
+      "emoji": "🎛️",
+      "rarity": "epic",
+      "type": "material",
+      "race": "All",
+      "level": 1,
+      "bonus": {}
+    },
+    {
+      "id": "red_stone",
+      "name": "Red Crystal Stone",
+      "emoji": "🧱",
+      "rarity": "epic",
+      "type": "material",
+      "race": "All",
+      "level": 1,
+      "bonus": {}
+    },
+    {
+      "id": "recovery_pot",
+      "name": "HQ Recovery Potion",
+      "emoji": "🧪",
+      "rarity": "consumable",
+      "type": "consumable",
+      "race": "All",
+      "level": 1,
+      "bonus": {
+        "hp": 1000
+      }
+    },
+    {
+      "id": "nano_repair_kit",
+      "name": "Nano Field Repair Kit",
+      "emoji": "🧰",
+      "rarity": "consumable",
+      "type": "consumable",
+      "race": "All",
+      "level": 1,
+      "bonus": {
+        "hp": 3000
+      }
+    }
   ]
 }

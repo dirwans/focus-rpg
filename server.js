@@ -148,8 +148,17 @@ app.post('/api/save', async (req, res) => {
   if (!s) return
   const gameState = req.body?.game_state
   if (!gameState) return res.status(400).json({ error: 'game_state wajib' })
+
+  // Guard: tolak save yang LEBIH LAMA dari yang tersimpan (cegah clobber lintas device)
+  const current = loadSave(s.username)
+  const inTs = gameState.savedAt || 0
+  const curTs = current?.savedAt || 0
+  if (current && inTs < curTs) {
+    // kirim balik state terbaru biar pengirim mengoreksi diri
+    return res.json({ ok: true, stale: true, game_state: current })
+  }
+
   await writeSave(s.username, gameState)
-  // push ke device lain milik user yang sama (kecuali pengirim)
   const clientId = req.headers['x-client-id'] || null
   broadcast(s.username, gameState, clientId)
   res.json({ ok: true })
@@ -185,6 +194,51 @@ app.get('/api/save/stream', (req, res) => {
       if (set.size === 0) sseClients.delete(s.username)
     }
   })
+})
+
+// ── Admin: key dari data/admin_key.txt (auto-generate, gitignored) ────────────
+const ADMIN_KEY_FILE = join(DATA_DIR, 'admin_key.txt')
+let ADMIN_KEY = ''
+try { ADMIN_KEY = readFileSync(ADMIN_KEY_FILE, 'utf8').trim() } catch {}
+if (!ADMIN_KEY) {
+  ADMIN_KEY = randomBytes(16).toString('hex')
+  try { writeFileSync(ADMIN_KEY_FILE, ADMIN_KEY) } catch {}
+  console.log('[admin] generated key:', ADMIN_KEY)
+}
+function requireAdmin(req, res) {
+  if (req.query.key !== ADMIN_KEY) { res.status(403).json({ error: 'forbidden' }); return false }
+  return true
+}
+
+// Ringkasan seluruh state server — buat debug dari cloud/HP tanpa SSH
+app.get('/api/admin/state', (req, res) => {
+  if (!requireAdmin(req, res)) return
+  const userList = users.map(u => {
+    const sv = loadSave(u.username)
+    return {
+      username: u.username,
+      createdAt: u.createdAt,
+      save: sv ? {
+        race: sv.race, level: sv.level, exp: sv.exp,
+        anium: sv.resources?.anium, sector: sv.sector, highestSector: sv.highestSector,
+        upgrades: sv.upgrades, totalSessions: sv.totalSessions, totalMinutes: sv.totalMinutes,
+        session: sv.__session ?? null, savedAt: sv.savedAt,
+      } : null,
+    }
+  })
+  res.json({
+    userCount: users.length,
+    sessionCount: sessions.size,
+    sseConnections: [...sseClients.entries()].map(([u, set]) => ({ username: u, devices: set.size })),
+    uptimeSec: Math.floor(process.uptime()),
+    users: userList,
+  })
+})
+
+// Lihat save mentah 1 user
+app.get('/api/admin/save/:username', (req, res) => {
+  if (!requireAdmin(req, res)) return
+  res.json({ username: req.params.username, game_state: loadSave(req.params.username) })
 })
 
 // ── Leaderboard (bonus — manfaat server) ────────────────────────────────────

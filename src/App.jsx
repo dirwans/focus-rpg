@@ -68,7 +68,13 @@ export default function App() {
     debounceRef.current = setTimeout(() => {
       const gs = getSyncState()
       lastSyncRef.current = snap(gs)
-      syncSave(gs)
+      syncSave(gs).then((resp) => {
+        // server nolak karena state kita lebih lama → adopsi yg terbaru
+        if (resp?.stale && resp.game_state) {
+          lastSyncRef.current = snap(resp.game_state)
+          applySyncState(resp.game_state)
+        }
+      })
     }, 800)
     return () => clearTimeout(debounceRef.current)
   }, [player, user?.username])

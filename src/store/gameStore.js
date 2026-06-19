@@ -229,7 +229,7 @@ export const useGameStore = create(
         }
         const playerAtk = calcStat('atk', player.upgrades.atk, player.race)
         const mob = battle.currentMob
-        const isCrit = Math.random() < (player.race === 'human' ? 0.15 : 0.12)
+        const isCrit = Math.random() < (player.race === 'cora' ? 0.15 : 0.12)
         const variance = 0.8 + Math.random() * 0.4
         const rawDmg = Math.max(1, playerAtk - mob.def + Math.floor(Math.random() * 8))
         const dmgToEnemy = Math.floor(rawDmg * variance * (isCrit ? 1.8 : 1))
