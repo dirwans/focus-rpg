@@ -48,15 +48,19 @@ export default function App() {
   useEffect(() => {
     if (!user || !hydrated) return
     loadedRef.current = false
-    loadSave(user.id).then((save) => {
+    setSyncStatus('syncing')
+    loadSave(user.id).then(async (save) => {
       if (save) {
         loadPlayer(save)
-      } else {
-        // Belum ada cloud save → upload state lokal sekarang
-        syncSave(user.id, playerRef.current)
       }
-      setTimeout(() => { loadedRef.current = true }, 500)
-    })
+      // Selalu upload state terbaru ke cloud saat login
+      await syncSave(user.id, save ? save : playerRef.current)
+      setSyncStatus('ok')
+      setTimeout(() => {
+        loadedRef.current = true
+        setSyncStatus('idle')
+      }, 2000)
+    }).catch(() => setSyncStatus('error'))
   }, [user?.id, hydrated])
 
   // Debounced sync tiap player berubah (3 detik setelah perubahan terakhir)
@@ -116,9 +120,9 @@ export default function App() {
     <div style={styles.root}>
       <div style={styles.phone}>
         <div style={styles.syncBar}>
-          {syncStatus === 'syncing' && <span style={styles.sync('⏳', '#f5a623')}>⏳ syncing...</span>}
-          {syncStatus === 'ok'      && <span style={styles.sync('🟢', '#00ff88')}>🟢 saved</span>}
-          {syncStatus === 'error'   && <span style={styles.sync('🔴', '#ff4466')}>🔴 sync failed</span>}
+          <span style={styles.syncDot(syncStatus)}>
+            {syncStatus === 'syncing' ? '⏳ syncing...' : syncStatus === 'error' ? '🔴 sync error' : '☁️ cloud save'}
+          </span>
         </div>
         <div style={styles.content}>
           <Screen />
@@ -133,8 +137,8 @@ export default function App() {
 const styles = {
   root: { minHeight: '100vh', background: '#050810', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '20px 0' },
   phone: { width: 390, minHeight: 844, maxHeight: '95vh', background: '#080d1a', border: '2px solid #1a3a5c', borderRadius: 40, overflow: 'hidden', display: 'flex', flexDirection: 'column' },
-  syncBar: { height: 22, display: 'flex', alignItems: 'center', justifyContent: 'flex-end', paddingRight: 16, background: '#050d1a' },
-  sync: (_, c) => ({ fontFamily: 'monospace', fontSize: 11, color: c, letterSpacing: 1 }),
+  syncBar: { height: 20, display: 'flex', alignItems: 'center', justifyContent: 'flex-end', paddingRight: 16, background: '#050d1a' },
+  syncDot: (s) => ({ fontFamily: 'monospace', fontSize: 11, letterSpacing: 1, color: s === 'syncing' ? '#f5a623' : s === 'error' ? '#ff4466' : s === 'ok' ? '#00ff88' : '#1a4a6a' }),
   content: { flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column' },
   loadingWrap: { flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' },
 }
