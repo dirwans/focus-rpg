@@ -3,7 +3,16 @@
     "id": "accretia",
     "name": "Accretia Empire",
     "emoji": "🤖",
-    "description": "Mechanical cyborgs. High firepower and defense, lower luck/magic. Excels at combat.",
+    "description": "A militaristic empire of mechanical cyborgs seeking supreme firepower.",
+    "strengths": [
+      "💪 +30% Firepower (ATK)",
+      "🛡️ +25% Armor & +15% Shield HP",
+      "🚀 Exclusive heavy launchers"
+    ],
+    "weaknesses": [
+      "⛏️ -25% Resource Gathering Rate",
+      "🔮 Cannot equip wands or staves"
+    ],
     "bonuses": {
       "expMultiplier": 1.0,
       "atkMultiplier": 1.3,
@@ -17,7 +26,16 @@
     "id": "bellato",
     "name": "Bellato Union",
     "emoji": "⚙️",
-    "description": "Scientific inventors. High resource gathering and balanced progression.",
+    "description": "Scientific inventors who utilize mechanical ingenuity and trade.",
+    "strengths": [
+      "⛏️ +50% Resource Gathering Rate",
+      "⚖️ Balanced stats progression",
+      "🏹 Exclusive composite bows"
+    ],
+    "weaknesses": [
+      "💥 No extreme combat damage multipliers",
+      "🛡️ Standard base health"
+    ],
     "bonuses": {
       "expMultiplier": 1.1,
       "atkMultiplier": 1.0,
@@ -31,7 +49,16 @@
     "id": "cora",
     "name": "Holy Alliance Cora",
     "emoji": "🧝‍♀️",
-    "description": "Spiritual summoners. High experience gain and critical rating, lower defense.",
+    "description": "A spiritual, elf-like race utilizing the magical arts and summoning.",
+    "strengths": [
+      "🆙 +30% Focus EXP Rate",
+      "⚡ +15% Base Firepower (ATK)",
+      "🔮 Exclusive staves & high crit chance"
+    ],
+    "weaknesses": [
+      "🛡️ -15% Armor (DEF)",
+      "💔 -10% Shield HP"
+    ],
     "bonuses": {
       "expMultiplier": 1.3,
       "atkMultiplier": 1.15,

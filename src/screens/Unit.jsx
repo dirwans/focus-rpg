@@ -50,13 +50,16 @@ export default function Unit() {
       {/* Race bonuses */}
       {race && (
         <div style={styles.section}>
-          <div style={styles.sectionLabel}>RACE BONUSES — {race.name.toUpperCase()}</div>
+          <div style={styles.sectionLabel}>RACE SPECIALIZATION — {race.name.toUpperCase()}</div>
           <div style={styles.desc}>{race.description}</div>
-          <div style={styles.bonusRow}>
-            {Object.entries(race.bonuses).map(([k, v]) => (
-              <div key={k} style={styles.bonusChip(v > 1)}>
-                {k.replace('Multiplier', '').toUpperCase()} ×{v}
-              </div>
+          <div style={styles.specSection}>
+            <div style={styles.specTitle}>ADVANTAGES:</div>
+            {race.strengths.map((str, i) => (
+              <div key={i} style={styles.specItem('#44ff88')}>{str}</div>
+            ))}
+            <div style={styles.specTitle}>DISADVANTAGES:</div>
+            {race.weaknesses.map((weak, i) => (
+              <div key={i} style={styles.specItem('#ff4444')}>{weak}</div>
             ))}
           </div>
         </div>
@@ -94,8 +97,9 @@ const styles = {
   statBox: { flex: 1, background: 'rgba(0,0,0,0.3)', borderRadius: 8, padding: '8px', display: 'flex', flexDirection: 'column', gap: 4, fontFamily: 'monospace', fontSize: 11, alignItems: 'center' },
   statNum: { fontFamily: 'monospace', fontSize: 18, fontWeight: 900, color: '#e0f4ff' },
   desc: { fontFamily: 'monospace', fontSize: 11, color: '#6a9ab8', marginBottom: 8, lineHeight: 1.5 },
-  bonusRow: { display: 'flex', flexWrap: 'wrap', gap: 6 },
-  bonusChip: (pos) => ({ border: `1px solid ${pos ? '#00c8ff' : '#0d2a50'}`, borderRadius: 10, padding: '3px 10px', fontFamily: 'monospace', fontSize: 9, color: pos ? '#00e5ff' : '#4a8fa8', background: pos ? 'rgba(0,200,255,0.08)' : 'transparent' }),
+  specSection: { display: 'flex', flexDirection: 'column', gap: 1 },
+  specTitle: { fontFamily: 'monospace', fontSize: 8, color: '#7ab0d0', letterSpacing: 0.5, marginTop: 4, fontWeight: 700 },
+  specItem: (c) => ({ fontFamily: 'monospace', fontSize: 11, color: c, lineHeight: 1.4 }),
   progRow: { display: 'flex', justifyContent: 'space-around' },
   progItem: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 },
   progNum: { fontFamily: 'monospace', fontSize: 18, fontWeight: 900, color: '#00e5ff' },
