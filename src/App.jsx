@@ -51,18 +51,17 @@ export default function App() {
     setSyncStatus('syncing')
     loadSave(user.id).then(async (cloudSave) => {
       const local = playerRef.current
-      const cloudNewer = cloudSave && (cloudSave.savedAt || 0) > (local.savedAt || 0)
+      const score = (p) => (p?.totalSessions || 0) * 1000 + (p?.level || 0) + (p?.savedAt || 0) / 1e12
 
-      if (cloudNewer) {
-        // Cloud lebih baru → pakai cloud
+      if (cloudSave && score(cloudSave) >= score(local)) {
+        // Cloud lebih maju atau sama → pakai cloud
         loadPlayer(cloudSave)
-        setSyncStatus('ok')
       } else {
-        // Local lebih baru (atau cloud kosong) → upload local ke cloud
+        // Local lebih maju atau cloud kosong → upload local ke cloud
         await syncSave(user.id, local)
-        setSyncStatus('ok')
       }
 
+      setSyncStatus('ok')
       setTimeout(() => {
         loadedRef.current = true
         setSyncStatus('idle')

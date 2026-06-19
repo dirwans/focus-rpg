@@ -348,12 +348,7 @@ export const useGameStore = create(
         }
       },
       getUpgradeCost: (key) => calcUpgradeCost(key, get().player.upgrades[key]),
-      loadPlayer: (savedPlayer) => set((s) => {
-        const incoming = { ...initialPlayer, ...savedPlayer }
-        // Pakai yang lebih baru berdasarkan savedAt
-        if (incoming.savedAt <= s.player.savedAt) return {}
-        return { player: incoming }
-      }),
+      loadPlayer: (savedPlayer) => set({ player: { ...initialPlayer, ...savedPlayer } }),
       getExpToNext: () => calcExpToNext(get().player.level),
     }),
     { name: 'focus-rpg-save' }
