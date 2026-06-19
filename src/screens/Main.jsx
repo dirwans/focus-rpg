@@ -62,13 +62,13 @@ export default function Main() {
 
       {/* Stat cards */}
       <div style={styles.statRow}>
-        <div style={styles.statCard}><div style={styles.statLabel}>LEVEL</div><div style={{ ...styles.statVal, color: '#00e5ff' }}>{player.level}</div></div>
-        <div style={styles.statCard}><div style={styles.statLabel}>SECTOR</div><div style={{ ...styles.statVal, color: '#f5a623' }}>S-{player.sector}</div></div>
-        <div style={styles.statCard}><div style={styles.statLabel}>STREAK</div><div style={{ ...styles.statVal, color: '#ff4466' }}>🔥{player.streak}</div></div>
+        <div className={`cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.statCard}><div style={styles.statLabel}>LEVEL</div><div style={{ ...styles.statVal, color: '#00e5ff' }}>{player.level}</div></div>
+        <div className={`cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.statCard}><div style={styles.statLabel}>SECTOR</div><div style={{ ...styles.statVal, color: '#f5a623' }}>S-{player.sector}</div></div>
+        <div className={`cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.statCard}><div style={styles.statLabel}>STREAK</div><div style={{ ...styles.statVal, color: '#ff4466' }}>🔥{player.streak}</div></div>
       </div>
 
       {/* Battle arena */}
-      <div style={styles.arena}>
+      <div className={`cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.arena}>
         <div style={styles.arenaBadge}>🔥 {enemy.name}</div>
         <div style={styles.arenaRight}>SECTOR {player.sector}<br /><span style={{ color: '#4a8fa8', fontSize: 14, fontWeight: 800 }}>HIGHEST: S-{player.highestSector}</span></div>
 
@@ -114,7 +114,7 @@ export default function Main() {
       </div>
 
       {/* Combat stats */}
-      <div style={styles.combatStats}>
+      <div className={`cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.combatStats}>
         <div style={styles.cstat}><div style={styles.cstatLabel}>FIREPOWER</div><div style={{ ...styles.cstatVal, color: '#f5a623' }}>{stats.atk}</div></div>
         <div style={{ width: 1, background: '#0d2a50' }} />
         <div style={styles.cstat}><div style={styles.cstatLabel}>ARMOR</div><div style={{ ...styles.cstatVal, color: '#00c8ff' }}>{stats.def}</div></div>
@@ -170,17 +170,17 @@ const styles = {
   expFill: { height: '100%', background: 'linear-gradient(90deg, #0050cc, #00e5ff)', borderRadius: 5, transition: 'width 0.5s', boxShadow: '0 0 8px #00e5ff' },
   expText: { fontFamily: 'var(--font-mono)', fontSize: 14, color: '#7ab0d0', marginTop: 4, textAlign: 'right', fontWeight: 800 },
   statRow: { display: 'flex', gap: 8, padding: '4px 16px 12px' },
-  statCard: { flex: 1, background: 'var(--bg-glass)', border: '1px solid rgba(0, 229, 255, 0.2)', borderRadius: 12, padding: '10px 8px', textAlign: 'center', boxShadow: '0 4px 12px rgba(0,0,0,0.4), inset 0 0 8px rgba(0, 229, 255, 0.05)', backdropFilter: 'blur(8px)' },
+  statCard: { flex: 1, padding: '10px 8px', textAlign: 'center' },
   statLabel: { fontFamily: 'var(--font-title)', fontSize: 14, letterSpacing: 1.5, color: '#7ab0d0', marginBottom: 4, fontWeight: 800 },
   statVal: { fontFamily: 'var(--font-mono)', fontSize: 20, fontWeight: 900, textShadow: '0 0 8px rgba(0, 229, 255, 0.2)' },
-  arena: { margin: '0 16px 12px', background: 'rgba(4, 10, 24, 0.85)', border: '1px solid rgba(0, 229, 255, 0.3)', borderRadius: 16, padding: 16, position: 'relative', minHeight: 200, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', boxShadow: '0 6px 20px rgba(0,0,0,0.6), 0 0 15px rgba(0, 229, 255, 0.1), inset 0 0 12px rgba(0, 229, 255, 0.05)', backdropFilter: 'blur(10px)' },
+  arena: { margin: '0 16px 12px', padding: 16, position: 'relative', minHeight: 200, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' },
   arenaBadge: { position: 'absolute', top: 10, left: 12, background: 'rgba(26, 8, 0, 0.8)', border: '1px solid #ff6400', borderRadius: 6, padding: '4px 10px', fontFamily: 'var(--font-title)', fontSize: 14, color: '#ff8c40', fontWeight: 800, boxShadow: '0 0 10px rgba(255, 100, 0, 0.3)' },
   arenaRight: { position: 'absolute', top: 10, right: 12, fontFamily: 'var(--font-title)', fontSize: 14, color: '#00e5ff', textAlign: 'right', fontWeight: 800, textShadow: '0 0 6px rgba(0, 229, 255, 0.3)' },
   timerDisplay: { display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' },
   battleLog: { marginTop: 12, width: '100%', display: 'flex', flexDirection: 'column', gap: 4, background: 'rgba(0,0,0,0.3)', padding: 10, borderRadius: 8, border: '1px solid rgba(0, 229, 255, 0.1)' },
   modeRow: { display: 'flex', gap: 8, padding: '0 16px 12px' },
   modeBtn: (active) => ({ flex: 1, padding: 12, borderRadius: 10, fontFamily: 'var(--font-title)', fontSize: 14, fontWeight: 800, cursor: 'pointer', border: `1px solid ${active ? '#00e5ff' : 'rgba(0, 229, 255, 0.15)'}`, background: active ? 'linear-gradient(135deg, rgba(0, 80, 204, 0.4) 0%, rgba(0, 168, 255, 0.4) 100%)' : 'rgba(6, 15, 35, 0.6)', color: active ? '#fff' : '#7ab0d0', boxShadow: active ? '0 0 10px rgba(0, 229, 255, 0.3)' : 'none', transition: 'all 0.2s', letterSpacing: 1.5 }),
-  combatStats: { margin: '0 16px 12px', background: 'var(--bg-glass)', border: '1px solid rgba(0, 229, 255, 0.2)', borderRadius: 14, padding: 14, display: 'flex', justifyContent: 'space-around', boxShadow: '0 4px 12px rgba(0,0,0,0.4), inset 0 0 8px rgba(0, 229, 255, 0.05)' },
+  combatStats: { margin: '0 16px 12px', padding: 14, display: 'flex', justifyContent: 'space-around' },
   cstat: { textAlign: 'center' },
   cstatLabel: { fontFamily: 'var(--font-title)', fontSize: 14, letterSpacing: 1.5, color: '#7ab0d0', marginBottom: 4, fontWeight: 800 },
   cstatVal: { fontFamily: 'var(--font-mono)', fontSize: 22, fontWeight: 900, textShadow: '0 0 6px rgba(0, 229, 255, 0.2)' },

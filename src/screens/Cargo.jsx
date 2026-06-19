@@ -42,7 +42,7 @@ export default function Cargo() {
       </div>
 
       {/* Equipped Gear Section */}
-      <div style={styles.section}>
+      <div className={`cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.section}>
         <div style={styles.sectionLabel}>▸ EQUIPPED UNIT GEAR</div>
         <div style={styles.equipGrid}>
           {['weapon', 'armor', 'shield'].map((slot) => {
@@ -162,7 +162,7 @@ const styles = {
   topBar:       { display: 'flex', gap: 8, padding: '14px 16px 10px', alignItems: 'center', borderBottom: '1px solid rgba(0, 229, 255, 0.15)', background: 'rgba(3, 8, 20, 0.4)' },
   chip:         (c) => ({ background: 'rgba(3, 8, 20, 0.8)', border: `1px solid ${c}`, borderRadius: 20, padding: '6px 14px', fontFamily: 'var(--font-mono)', fontSize: 16, fontWeight: 800, color: c, boxShadow: `0 0 10px ${c}33, inset 0 0 6px ${c}22` }),
   slots:        { fontFamily: 'var(--font-mono)', fontSize: 14, color: '#7ab0d0', background: 'rgba(3, 8, 20, 0.8)', border: '1px solid #1a3a6a', borderRadius: 20, padding: '6px 14px', marginLeft: 'auto', fontWeight: 800 },
-  section:      { margin: '0 16px 14px', background: 'var(--bg-glass)', border: '1px solid rgba(0, 229, 255, 0.2)', borderRadius: 12, padding: 14, boxShadow: '0 4px 12px rgba(0,0,0,0.4)' },
+  section:      { margin: '0 16px 14px', padding: 14 },
   sectionLabel: { fontFamily: 'var(--font-title)', fontSize: 14, letterSpacing: 2, color: '#4a8fa8', marginBottom: 10, fontWeight: 800 },
   
   // Equipped HUD

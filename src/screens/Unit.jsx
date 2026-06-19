@@ -37,9 +37,9 @@ export default function Unit() {
         <div style={styles.expText}>{player.exp} / {expMax} ({expPct}%)</div>
       </div>
 
-      {/* Stats */}
-      <div style={styles.section}>
-        <div style={styles.sectionLabel}>COMBAT STATS</div>
+      {/* Level stats */}
+      <div className={`cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.section}>
+        <div style={styles.sectionLabel}>UNIT SPECIFICATIONS</div>
         <div style={styles.statsGrid}>
           <div style={styles.statBox}><span style={{ color: '#f5a623' }}>⚡ ATK</span><span style={styles.statNum}>{stats.atk}</span></div>
           <div style={styles.statBox}><span style={{ color: '#00c8ff' }}>🛡 DEF</span><span style={styles.statNum}>{stats.def}</span></div>
@@ -47,10 +47,10 @@ export default function Unit() {
         </div>
       </div>
 
-      {/* Race bonuses */}
+      {/* Race bonus details */}
       {race && (
-        <div style={styles.section}>
-          <div style={styles.sectionLabel}>RACE SPECIALIZATION — {race.name.toUpperCase()}</div>
+        <div className={`cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.section}>
+          <div style={styles.sectionLabel}>{race.name.toUpperCase()} ACCENTS</div>
           <div style={styles.desc}>{race.description}</div>
           <div style={styles.specSection}>
             <div style={styles.specTitle}>ADVANTAGES:</div>
@@ -66,7 +66,7 @@ export default function Unit() {
       )}
 
       {/* Progress */}
-      <div style={styles.section}>
+      <div className={`cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.section}>
         <div style={styles.sectionLabel}>PROGRESS</div>
         <div style={styles.progRow}>
           <div style={styles.progItem}><span style={styles.progNum}>{player.totalSessions}</span><span style={styles.progLabel}>Sessions</span></div>
@@ -88,7 +88,7 @@ const styles = {
   selectBtn: { background: 'linear-gradient(95deg, #0050cc, #00a8ff)', border: '1px solid #00e5ff', borderRadius: 8, padding: '8px 12px', fontFamily: 'var(--font-title)', fontSize: 14, color: '#fff', cursor: 'pointer', boxShadow: '0 0 10px rgba(0, 168, 255, 0.4)', transition: 'all 0.2s', fontWeight: 800 },
   resRow: { display: 'flex', gap: 8, padding: '10px 16px' },
   resChip: (c) => ({ flex: 1, background: 'rgba(3, 8, 20, 0.8)', border: `1px solid ${c}`, borderRadius: 10, padding: '8px 12px', fontFamily: 'var(--font-mono)', fontSize: 14, color: c, fontWeight: 800, boxShadow: `0 0 10px ${c}33, inset 0 0 6px ${c}22` }),
-  section: { margin: '0 16px 12px', background: 'var(--bg-glass)', border: '1px solid rgba(0, 229, 255, 0.2)', borderRadius: 14, padding: 14, boxShadow: '0 4px 12px rgba(0,0,0,0.4), inset 0 0 8px rgba(0, 229, 255, 0.05)', backdropFilter: 'blur(8px)' },
+  section: { margin: '0 16px 12px', padding: 14 },
   sectionLabel: { fontFamily: 'var(--font-title)', fontSize: 14, letterSpacing: 2, color: '#4a8fa8', marginBottom: 10, fontWeight: 800, textShadow: '0 0 6px rgba(0, 229, 255, 0.2)' },
   expBg: { height: 8, background: 'rgba(0,0,0,0.4)', borderRadius: 4, overflow: 'hidden', marginBottom: 4, border: '1px solid rgba(0, 229, 255, 0.2)' },
   expFill: { height: '100%', background: 'linear-gradient(90deg, #0066ff, #00e5ff)', borderRadius: 4, boxShadow: '0 0 8px #00e5ff' },

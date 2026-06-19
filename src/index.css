@@ -4,7 +4,7 @@
   --bg-darkest: #03060f;
   --bg-darker: #060c18;
   --bg-dark: #0a142c;
-  --bg-glass: rgba(6, 15, 35, 0.75);
+  --bg-glass: linear-gradient(180deg, rgba(14, 23, 44, 0.9) 0%, rgba(6, 12, 24, 0.95) 100%);
   
   --neon-cyan: #00e5ff;
   --neon-orange: #ff8c00;
@@ -104,49 +104,142 @@ body {
 
 /* 3D Glassmorphic Panels */
 .cyber-panel {
+  position: relative;
   background: var(--bg-glass);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(0, 229, 255, 0.2);
-  border-radius: 14px;
+  border: 1.5px solid rgba(0, 229, 255, 0.35);
+  border-radius: 12px;
   box-shadow: 
-    inset 0 0 10px rgba(0, 229, 255, 0.05),
-    0 4px 20px rgba(0, 0, 0, 0.5);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    0 0 15px rgba(0, 229, 255, 0.12),
+    inset 0 0 10px rgba(0, 229, 255, 0.08);
+  transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
+/* Corner bracket accents */
+.cyber-panel::before,
+.cyber-panel::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+  transition: all 0.25s ease;
+  z-index: 2;
+}
+
+.cyber-panel::before {
+  top: -2px;
+  left: -2px;
+  border-top: 3px solid var(--neon-cyan);
+  border-left: 3px solid var(--neon-cyan);
+  border-radius: 4px 0 0 0;
+}
+
+.cyber-panel::after {
+  bottom: -2px;
+  right: -2px;
+  border-bottom: 3px solid var(--neon-cyan);
+  border-right: 3px solid var(--neon-cyan);
+  border-radius: 0 0 4px 0;
+}
+
+/* Hover effects */
 .cyber-panel:hover {
-  border-color: rgba(0, 229, 255, 0.4);
+  border-color: rgba(0, 229, 255, 0.6);
   box-shadow: 
-    inset 0 0 15px rgba(0, 229, 255, 0.1),
-    0 0 15px rgba(0, 229, 255, 0.15);
+    0 0 25px rgba(0, 229, 255, 0.22),
+    inset 0 0 15px rgba(0, 229, 255, 0.12);
 }
 
-/* Race specific panels */
+/* Faction themed overrides */
 .panel-accretia {
-  border-color: rgba(255, 140, 0, 0.3);
-  box-shadow: inset 0 0 10px rgba(255, 140, 0, 0.05);
+  border-color: rgba(255, 140, 0, 0.45) !important;
+  box-shadow: 0 0 15px rgba(255, 140, 0, 0.15), inset 0 0 10px rgba(255, 140, 0, 0.08) !important;
 }
+.panel-accretia::before { border-top-color: var(--neon-orange) !important; border-left-color: var(--neon-orange) !important; }
+.panel-accretia::after { border-bottom-color: var(--neon-orange) !important; border-right-color: var(--neon-orange) !important; }
 .panel-accretia:hover {
-  border-color: var(--neon-orange);
-  box-shadow: inset 0 0 15px rgba(255, 140, 0, 0.1), 0 0 15px rgba(255, 140, 0, 0.2);
+  border-color: rgba(255, 140, 0, 0.7) !important;
+  box-shadow: 0 0 25px rgba(255, 140, 0, 0.25), inset 0 0 15px rgba(255, 140, 0, 0.12) !important;
 }
 
 .panel-bellato {
-  border-color: rgba(0, 229, 255, 0.3);
+  border-color: rgba(0, 229, 255, 0.45) !important;
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.15), inset 0 0 10px rgba(0, 229, 255, 0.08) !important;
 }
+.panel-bellato::before { border-top-color: var(--neon-cyan) !important; border-left-color: var(--neon-cyan) !important; }
+.panel-bellato::after { border-bottom-color: var(--neon-cyan) !important; border-right-color: var(--neon-cyan) !important; }
 .panel-bellato:hover {
-  border-color: var(--neon-cyan);
-  box-shadow: inset 0 0 15px rgba(0, 229, 255, 0.1), 0 0 15px rgba(0, 229, 255, 0.2);
+  border-color: rgba(0, 229, 255, 0.7) !important;
+  box-shadow: 0 0 25px rgba(0, 229, 255, 0.25), inset 0 0 15px rgba(0, 229, 255, 0.12) !important;
 }
 
 .panel-cora {
-  border-color: rgba(208, 0, 255, 0.3);
-  box-shadow: inset 0 0 10px rgba(208, 0, 255, 0.05);
+  border-color: rgba(208, 0, 255, 0.45) !important;
+  box-shadow: 0 0 15px rgba(208, 0, 255, 0.15), inset 0 0 10px rgba(208, 0, 255, 0.08) !important;
 }
+.panel-cora::before { border-top-color: var(--neon-purple) !important; border-left-color: var(--neon-purple) !important; }
+.panel-cora::after { border-bottom-color: var(--neon-purple) !important; border-right-color: var(--neon-purple) !important; }
 .panel-cora:hover {
-  border-color: var(--neon-purple);
-  box-shadow: inset 0 0 15px rgba(208, 0, 255, 0.1), 0 0 15px rgba(208, 0, 255, 0.2);
+  border-color: rgba(208, 0, 255, 0.7) !important;
+  box-shadow: 0 0 25px rgba(208, 0, 255, 0.25), inset 0 0 15px rgba(208, 0, 255, 0.12) !important;
+}
+
+/* Color specific utility classes */
+.panel-cyan {
+  border-color: rgba(0, 229, 255, 0.45) !important;
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.15), inset 0 0 10px rgba(0, 229, 255, 0.08) !important;
+}
+.panel-cyan::before { border-top-color: var(--neon-cyan) !important; border-left-color: var(--neon-cyan) !important; }
+.panel-cyan::after { border-bottom-color: var(--neon-cyan) !important; border-right-color: var(--neon-cyan) !important; }
+.panel-cyan:hover {
+  border-color: rgba(0, 229, 255, 0.7) !important;
+  box-shadow: 0 0 25px rgba(0, 229, 255, 0.25), inset 0 0 15px rgba(0, 229, 255, 0.12) !important;
+}
+
+.panel-orange {
+  border-color: rgba(255, 140, 0, 0.45) !important;
+  box-shadow: 0 0 15px rgba(255, 140, 0, 0.15), inset 0 0 10px rgba(255, 140, 0, 0.08) !important;
+}
+.panel-orange::before { border-top-color: var(--neon-orange) !important; border-left-color: var(--neon-orange) !important; }
+.panel-orange::after { border-bottom-color: var(--neon-orange) !important; border-right-color: var(--neon-orange) !important; }
+.panel-orange:hover {
+  border-color: rgba(255, 140, 0, 0.7) !important;
+  box-shadow: 0 0 25px rgba(255, 140, 0, 0.25), inset 0 0 15px rgba(255, 140, 0, 0.12) !important;
+}
+
+.panel-purple {
+  border-color: rgba(208, 0, 255, 0.45) !important;
+  box-shadow: 0 0 15px rgba(208, 0, 255, 0.15), inset 0 0 10px rgba(208, 0, 255, 0.08) !important;
+}
+.panel-purple::before { border-top-color: var(--neon-purple) !important; border-left-color: var(--neon-purple) !important; }
+.panel-purple::after { border-bottom-color: var(--neon-purple) !important; border-right-color: var(--neon-purple) !important; }
+.panel-purple:hover {
+  border-color: rgba(208, 0, 255, 0.7) !important;
+  box-shadow: 0 0 25px rgba(208, 0, 255, 0.25), inset 0 0 15px rgba(208, 0, 255, 0.12) !important;
+}
+
+.panel-green {
+  border-color: rgba(57, 255, 20, 0.45) !important;
+  box-shadow: 0 0 15px rgba(57, 255, 20, 0.15), inset 0 0 10px rgba(57, 255, 20, 0.08) !important;
+}
+.panel-green::before { border-top-color: var(--neon-green) !important; border-left-color: var(--neon-green) !important; }
+.panel-green::after { border-bottom-color: var(--neon-green) !important; border-right-color: var(--neon-green) !important; }
+.panel-green:hover {
+  border-color: rgba(57, 255, 20, 0.7) !important;
+  box-shadow: 0 0 25px rgba(57, 255, 20, 0.25), inset 0 0 15px rgba(57, 255, 20, 0.12) !important;
+}
+
+.panel-red {
+  border-color: rgba(255, 49, 49, 0.45) !important;
+  box-shadow: 0 0 15px rgba(255, 49, 49, 0.15), inset 0 0 10px rgba(255, 49, 49, 0.08) !important;
+}
+.panel-red::before { border-top-color: var(--neon-red) !important; border-left-color: var(--neon-red) !important; }
+.panel-red::after { border-bottom-color: var(--neon-red) !important; border-right-color: var(--neon-red) !important; }
+.panel-red:hover {
+  border-color: rgba(255, 49, 49, 0.7) !important;
+  box-shadow: 0 0 25px rgba(255, 49, 49, 0.25), inset 0 0 15px rgba(255, 49, 49, 0.12) !important;
 }
 
 /* 3D Neo-Cyberpunk Buttons */

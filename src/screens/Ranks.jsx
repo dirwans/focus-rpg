@@ -38,7 +38,7 @@ export default function Ranks() {
       </div>
 
       {/* Podium */}
-      <div style={styles.podium}>
+      <div className={`cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.podium}>
         {[MOCK_RANKS[1], MOCK_RANKS[0], MOCK_RANKS[2]].map((r, i) => {
           const isFirst = i === 1
           return (
@@ -72,7 +72,7 @@ export default function Ranks() {
       </div>
 
       {/* My rank */}
-      <div style={styles.myRank}>
+      <div className={`cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.myRank}>
         <span style={{ fontSize: 18 }}>🇮🇩</span>
         <div style={{ flex: 1 }}>
           <div style={styles.myRankPct}>Top ~70%</div>
@@ -96,7 +96,7 @@ const styles = {
   rankTitle: { fontFamily: 'var(--font-title)', fontSize: 14, color: '#f5a623', fontWeight: 800 },
   rankSub: { fontFamily: 'var(--font-body)', fontSize: 14, color: '#4a8fa8', marginTop: 2, fontWeight: 700 },
   endsIn: { fontFamily: 'var(--font-title)', fontSize: 14, color: '#ff4466', fontWeight: 800 },
-  podium: { margin: '0 16px 12px', background: 'var(--bg-glass)', border: '1px solid rgba(0, 229, 255, 0.2)', borderRadius: 14, padding: 16, display: 'flex', alignItems: 'flex-end', justifyContent: 'center', gap: 16 },
+  podium: { margin: '0 16px 12px', padding: 16, display: 'flex', alignItems: 'flex-end', justifyContent: 'center', gap: 16 },
   rankRow: { display: 'flex', alignItems: 'center', gap: 10, padding: '10px 0', borderBottom: '1px solid rgba(0, 229, 255, 0.1)' },
   rankNum: { fontFamily: 'var(--font-mono)', fontSize: 14, color: '#4a8fa8', width: 20, textAlign: 'center', fontWeight: 800 },
   rankAvatar: { width: 38, height: 38, borderRadius: '50%', border: '1.5px solid rgba(0, 229, 255, 0.25)', background: 'linear-gradient(135deg, #001030, #002060)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, position: 'relative' },
@@ -105,7 +105,7 @@ const styles = {
   rankBadge: { fontFamily: 'var(--font-title)', fontSize: 14, color: '#4a8fa8', marginTop: 2, fontWeight: 800 },
   rankTime: { fontFamily: 'var(--font-mono)', fontSize: 14, color: '#00c8ff', fontWeight: 800 },
   rankMin: { fontFamily: 'var(--font-mono)', fontSize: 14, color: '#4a8fa8', fontWeight: 700 },
-  myRank: { margin: '8px 16px', background: 'rgba(0,30,80,0.8)', border: '1px solid rgba(0, 229, 255, 0.3)', borderRadius: 10, padding: '10px 14px', display: 'flex', alignItems: 'center', gap: 10, boxShadow: '0 4px 15px rgba(0,0,0,0.5)' },
+  myRank: { margin: '8px 16px', padding: '10px 14px', display: 'flex', alignItems: 'center', gap: 10 },
   myRankPct: { fontFamily: 'var(--font-mono)', fontSize: 14, color: '#00c8ff', fontWeight: 800 },
   myRankHandle: { fontFamily: 'var(--font-body)', fontSize: 14, color: '#4a8fa8', marginTop: 2, fontWeight: 700 },
 }

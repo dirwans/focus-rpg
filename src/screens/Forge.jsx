@@ -29,7 +29,7 @@ export default function Forge() {
         const currentVal = stats[cfg.statKey]
 
         return (
-          <div key={key} style={styles.card(cfg.color)}>
+          <div key={key} className={`cyber-panel panel-${key === 'atk' ? 'orange' : key === 'def' ? 'cyan' : 'red'}`} style={styles.card}>
             <div style={{ ...styles.cardTitle, color: cfg.color }}>{cfg.emoji} {cfg.label} Upgrade</div>
             <div style={styles.statRow}>
               Current: <strong style={{ color: cfg.color }}>{currentVal?.toLocaleString()}</strong>
@@ -64,7 +64,7 @@ const styles = {
   tabs: { display: 'flex', margin: '0 16px 14px', borderRadius: 10, overflow: 'hidden', border: '2px solid #1a3a6a' },
   tab: { flex: 1, padding: 12, textAlign: 'center', fontFamily: 'var(--font-title)', fontSize: 14, fontWeight: 800, color: '#7ab0d0', background: 'rgba(6, 15, 35, 0.6)', cursor: 'pointer' },
   tabActive: { flex: 1, padding: 12, textAlign: 'center', fontFamily: 'var(--font-title)', fontSize: 14, fontWeight: 800, color: '#00e5ff', background: 'rgba(0, 80, 204, 0.3)', borderBottom: '3px solid #00c8ff' },
-  card: (c) => ({ margin: '0 16px 12px', border: `2px solid ${c}`, borderRadius: 14, padding: 16, background: '#060f20' }),
+  card: { margin: '0 16px 12px', padding: 16 },
   cardTitle: { fontFamily: 'monospace', fontSize: 17, fontWeight: 700, marginBottom: 10 },
   statRow: { fontFamily: 'monospace', fontSize: 14, color: '#c0dff0', marginBottom: 12, lineHeight: 1.8 },
   upgradeBtn: (c, canAfford) => ({
