@@ -1,33 +1,9 @@
-import { useState } from 'react'
 import { useGameStore } from '../store/gameStore'
 
 const RARITY_COLOR = { common: '#6a9ab8', uncommon: '#44ff88', rare: '#f5a623', epic: '#cc44ff', consumable: '#ff4466' }
 
 export default function Cargo() {
   const player = useGameStore((s) => s.player)
-  const loadPlayer = useGameStore((s) => s.loadPlayer)
-  const [importCode, setImportCode] = useState('')
-  const [importMsg, setImportMsg] = useState('')
-  const [showImport, setShowImport] = useState(false)
-
-  const handleExport = () => {
-    const code = btoa(JSON.stringify(player))
-    navigator.clipboard?.writeText(code).catch(() => {})
-    prompt('Copy kode save ini (Ctrl+A, Ctrl+C):', code)
-  }
-
-  const handleImport = () => {
-    try {
-      const data = JSON.parse(atob(importCode.trim()))
-      if (!data.level || !data.resources) throw new Error('invalid')
-      loadPlayer(data)
-      setImportMsg('✅ Save berhasil di-import!')
-      setImportCode('')
-      setShowImport(false)
-    } catch {
-      setImportMsg('❌ Kode tidak valid')
-    }
-  }
 
   return (
     <div style={styles.screen}>
@@ -37,28 +13,9 @@ export default function Cargo() {
         <span style={styles.slots}>📦 {player.inventory.length}/50</span>
       </div>
 
-      {/* Save Transfer */}
-      <div style={styles.saveSection}>
-        <div style={styles.sectionLabel}>▸ TRANSFER SAVE</div>
-        <div style={styles.saveRow}>
-          <button style={styles.exportBtn} onClick={handleExport}>📤 Export Save</button>
-          <button style={styles.importBtn} onClick={() => { setShowImport(!showImport); setImportMsg('') }}>
-            📥 Import Save
-          </button>
-        </div>
-        {showImport && (
-          <div style={styles.importBox}>
-            <textarea
-              style={styles.importInput}
-              placeholder="Paste kode save di sini..."
-              value={importCode}
-              onChange={(e) => setImportCode(e.target.value)}
-              rows={3}
-            />
-            <button style={styles.importConfirm} onClick={handleImport}>LOAD SAVE</button>
-          </div>
-        )}
-        {importMsg && <div style={{ fontFamily: 'monospace', fontSize: 14, color: importMsg.startsWith('✅') ? '#00ff88' : '#ff4466', padding: '4px 0' }}>{importMsg}</div>}
+      <div style={styles.actionRow}>
+        <div style={styles.expandBtn}>+ EXPAND SLOTS (+10) — 50◈</div>
+        <div style={styles.synthBtn}>SYNTHESIZE</div>
       </div>
 
       <div style={styles.sectionLabel}>▸ ALL ITEMS</div>
@@ -87,23 +44,19 @@ export default function Cargo() {
 }
 
 const styles = {
-  screen: { display: 'flex', flexDirection: 'column', flex: 1, overflowY: 'auto' },
-  topBar: { display: 'flex', gap: 8, padding: '14px 16px 10px', alignItems: 'center' },
-  chip: (c) => ({ background: '#0a1628', border: `2px solid ${c}`, borderRadius: 20, padding: '6px 14px', fontFamily: 'monospace', fontSize: 16, fontWeight: 700, color: c }),
-  slots: { fontFamily: 'monospace', fontSize: 14, color: '#7ab0d0', background: '#0a1628', border: '2px solid #1a3a6a', borderRadius: 20, padding: '6px 14px', marginLeft: 'auto', fontWeight: 700 },
-  saveSection: { margin: '0 16px 12px', background: '#060f20', border: '2px solid #1a3a6a', borderRadius: 12, padding: 14, display: 'flex', flexDirection: 'column', gap: 10 },
-  saveRow: { display: 'flex', gap: 8 },
-  exportBtn: { flex: 1, padding: 12, borderRadius: 10, border: '2px solid #00e5ff', background: '#0a2a4a', fontFamily: 'monospace', fontSize: 15, fontWeight: 700, color: '#00e5ff', cursor: 'pointer' },
-  importBtn: { flex: 1, padding: 12, borderRadius: 10, border: '2px solid #f5a623', background: '#1a1000', fontFamily: 'monospace', fontSize: 15, fontWeight: 700, color: '#f5a623', cursor: 'pointer' },
-  importBox: { display: 'flex', flexDirection: 'column', gap: 8 },
-  importInput: { background: '#0a1628', border: '2px solid #1a3a6a', borderRadius: 8, padding: '10px 12px', fontFamily: 'monospace', fontSize: 13, color: '#e0f4ff', resize: 'none', outline: 'none', width: '100%', boxSizing: 'border-box' },
-  importConfirm: { padding: 12, borderRadius: 10, border: 'none', background: 'linear-gradient(90deg,#006000,#00c840)', fontFamily: 'monospace', fontSize: 15, fontWeight: 900, color: '#fff', cursor: 'pointer' },
-  sectionLabel: { padding: '0 16px 8px', fontFamily: 'monospace', fontSize: 13, color: '#7ab0d0', letterSpacing: 2, fontWeight: 700 },
-  empty: { flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: 40 },
-  grid: { display: 'flex', flexWrap: 'wrap', gap: 10, padding: '0 16px 16px' },
-  itemCard: (c) => ({ width: 'calc(33.33% - 7px)', background: '#060f20', border: `2px solid ${c}`, borderRadius: 10, padding: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5 }),
-  itemIcon: { fontSize: 28 },
-  itemName: { fontFamily: 'monospace', fontSize: 11, color: '#e0f4ff', textAlign: 'center', lineHeight: 1.3 },
-  itemBadges: { display: 'flex', gap: 4 },
+  screen:      { display: 'flex', flexDirection: 'column', flex: 1, overflowY: 'auto' },
+  topBar:      { display: 'flex', gap: 8, padding: '14px 16px 10px', alignItems: 'center' },
+  chip:        (c) => ({ background: '#0a1628', border: `2px solid ${c}`, borderRadius: 20, padding: '6px 14px', fontFamily: 'monospace', fontSize: 16, fontWeight: 700, color: c }),
+  slots:       { fontFamily: 'monospace', fontSize: 14, color: '#7ab0d0', background: '#0a1628', border: '2px solid #1a3a6a', borderRadius: 20, padding: '6px 14px', marginLeft: 'auto', fontWeight: 700 },
+  actionRow:   { display: 'flex', gap: 8, padding: '0 16px 12px' },
+  expandBtn:   { flex: 1, background: '#0a1628', border: '2px solid #00e5ff', borderRadius: 8, padding: 12, fontFamily: 'monospace', fontSize: 13, color: '#00e5ff', textAlign: 'center', cursor: 'pointer' },
+  synthBtn:    { flex: 1, background: 'linear-gradient(90deg,#806000,#f5a623)', border: 'none', borderRadius: 8, padding: 12, fontFamily: 'monospace', fontSize: 14, fontWeight: 700, color: '#000', textAlign: 'center', cursor: 'pointer' },
+  sectionLabel:{ padding: '0 16px 10px', fontFamily: 'monospace', fontSize: 13, color: '#7ab0d0', letterSpacing: 2, fontWeight: 700 },
+  empty:       { flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: 40 },
+  grid:        { display: 'flex', flexWrap: 'wrap', gap: 10, padding: '0 16px 16px' },
+  itemCard:    (c) => ({ width: 'calc(33.33% - 7px)', background: '#060f20', border: `2px solid ${c}`, borderRadius: 10, padding: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5 }),
+  itemIcon:    { fontSize: 28 },
+  itemName:    { fontFamily: 'monospace', fontSize: 11, color: '#e0f4ff', textAlign: 'center', lineHeight: 1.3 },
+  itemBadges:  { display: 'flex', gap: 4 },
   rarityBadge: (c) => ({ fontFamily: 'monospace', fontSize: 11, color: c, fontWeight: 700 }),
 }
