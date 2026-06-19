@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useGameStore } from './store/gameStore'
 import { useAuthStore } from './store/authStore'
 import { useTimer } from './hooks/useTimer'
@@ -27,20 +27,38 @@ export default function App() {
   const playerRef = useRef(player)
   playerRef.current = player
 
+  // Track Zustand persist hydration
+  const [hydrated, setHydrated] = useState(() => useGameStore.persist.hasHydrated())
+
+  useEffect(() => {
+    if (hydrated) return
+    const unsub = useGameStore.persist.onFinishHydration(() => setHydrated(true))
+    // Fallback: kalau sudah hydrated sebelum subscribe
+    if (useGameStore.persist.hasHydrated()) setHydrated(true)
+    return unsub
+  }, [])
+
   // Init auth on mount
   useEffect(() => { init() }, [])
 
-  // Load cloud save when user logs in
+  // Load cloud save SETELAH persist hydration selesai + user ready
+  // Supabase selalu menang atas localStorage
   useEffect(() => {
-    if (!user) return
+    if (!user || !hydrated) return
     loadSave(user.id).then((save) => {
-      if (save) loadPlayer(save)
+      if (save) {
+        console.log('[App] cloud save loaded, overriding local state')
+        loadPlayer(save)
+      } else {
+        console.log('[App] no cloud save found, using local state')
+      }
     })
-  }, [user?.id])
+  }, [user?.id, hydrated])
 
   // Sync saat session selesai (completed)
   useEffect(() => {
     if (!user || timerState !== 'completed') return
+    console.log('[App] session complete, syncing to cloud...')
     syncSave(user.id, playerRef.current)
   }, [timerState, user?.id])
 
@@ -61,7 +79,7 @@ export default function App() {
     return () => window.removeEventListener('beforeunload', handleUnload)
   }, [user?.id])
 
-  if (loading) {
+  if (loading || !hydrated) {
     return (
       <div style={styles.root}>
         <div style={styles.phone}>

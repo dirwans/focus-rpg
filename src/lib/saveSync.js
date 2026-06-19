@@ -6,12 +6,19 @@ export async function loadSave(userId) {
     .select('game_state')
     .eq('user_id', userId)
     .single()
-  if (error || !data) return null
-  return data.game_state
+  if (error) {
+    if (error.code !== 'PGRST116') console.error('[saveSync] loadSave error:', error)
+    return null
+  }
+  return data?.game_state ?? null
 }
 
 export async function syncSave(userId, gameState) {
-  await supabase
+  const { error } = await supabase
     .from('player_saves')
-    .upsert({ user_id: userId, game_state: gameState, updated_at: new Date().toISOString() })
+    .upsert(
+      { user_id: userId, game_state: gameState, updated_at: new Date().toISOString() },
+      { onConflict: 'user_id' }
+    )
+  if (error) console.error('[saveSync] syncSave error:', error)
 }
