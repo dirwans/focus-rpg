@@ -3,6 +3,7 @@ import { useGameStore } from './store/gameStore'
 import { useAuthStore } from './store/authStore'
 import { useTimer } from './hooks/useTimer'
 import { loadSave, syncSave } from './lib/saveSync'
+import { supabase } from './lib/supabase'
 import BottomNav from './components/BottomNav'
 import RaceSelect from './components/RaceSelect'
 import Auth from './screens/Auth'
@@ -69,22 +70,30 @@ export default function App() {
     return () => clearTimeout(debounceRef.current)
   }, [player, user?.id])
 
-  // Step 3: poll cloud tiap 20 detik — kalau cloud lebih maju, update lokal
+  // Step 3: Realtime subscription — update otomatis saat cloud berubah
   useEffect(() => {
     if (!user) return
-    const interval = setInterval(async () => {
-      if (!readyRef.current) return
-      const cloud = await loadSave(user.id)
-      if (!cloud) return
-      const local = playerRef.current
-      const score = (p) => (p?.totalSessions || 0) * 1000 + (p?.level || 0)
-      if (score(cloud) > score(local)) {
-        readyRef.current = false
-        loadPlayer(cloud)
-        setTimeout(() => { readyRef.current = true }, 1000)
-      }
-    }, 20000)
-    return () => clearInterval(interval)
+    const channel = supabase
+      .channel(`player-save-${user.id}`)
+      .on('postgres_changes', {
+        event: '*',
+        schema: 'public',
+        table: 'player_saves',
+        filter: `user_id=eq.${user.id}`,
+      }, (payload) => {
+        if (!readyRef.current) return
+        const cloud = payload.new?.game_state
+        if (!cloud) return
+        const local = playerRef.current
+        const score = (p) => (p?.totalSessions || 0) * 1000 + (p?.level || 0)
+        if (score(cloud) > score(local)) {
+          readyRef.current = false
+          loadPlayer(cloud)
+          setTimeout(() => { readyRef.current = true }, 1000)
+        }
+      })
+      .subscribe()
+    return () => supabase.removeChannel(channel)
   }, [user?.id])
 
   // Step 4: sync saat tab ditutup
