@@ -86,6 +86,7 @@ const initialPlayer = {
   exp: 0,
   resources: { anium: 200, credits: 10, potions: 5 },
   upgrades: { atk: 0, def: 0, hp: 0 },
+  equipment: { weapon: null, armor: null, shield: null },
   sector: 1,
   highestSector: 1,
   streak: 0,
@@ -139,6 +140,7 @@ export const useGameStore = create(
             ...s.player,
             race: raceId,
             upgrades: { atk: 0, def: 0, hp: 0 },
+            equipment: { weapon: null, armor: null, shield: null },
             level: 1,
             exp: 0,
             resources: { anium: 200, credits: 10, potions: 5 },
@@ -377,11 +379,90 @@ export const useGameStore = create(
       getStats: () => {
         const { player } = get()
         if (!player.race) return { atk: 0, def: 0, hp: 0 }
+        const eq = player.equipment || { weapon: null, armor: null, shield: null }
         return {
-          atk: calcStat('atk', player.upgrades.atk, player.race),
-          def: calcStat('def', player.upgrades.def, player.race),
-          hp:  calcStat('hp',  player.upgrades.hp,  player.race),
+          atk: calcStat('atk', player.upgrades.atk, player.race) + (eq.weapon?.bonus?.atk || 0),
+          def: calcStat('def', player.upgrades.def, player.race) + (eq.armor?.bonus?.def || 0) + (eq.shield?.bonus?.def || 0),
+          hp:  calcStat('hp',  player.upgrades.hp,  player.race) + (eq.weapon?.bonus?.hp || 0) + (eq.armor?.bonus?.hp || 0) + (eq.shield?.bonus?.hp || 0),
         }
+      },
+      equipItem: (uid) => {
+        const { player } = get()
+        const item = player.inventory.find((i) => i.uid === uid)
+        if (!item) return
+
+        if (player.level < (item.level || 0)) {
+          alert(`Required level: ${item.level}`)
+          return
+        }
+
+        if (item.race && item.race !== 'All' && item.race !== player.race) {
+          alert(`This item is restricted to the ${item.race.toUpperCase()} race.`)
+          return
+        }
+
+        const slot = item.type === 'weapon' ? 'weapon' : item.type === 'armor' ? 'armor' : item.type === 'shield' ? 'shield' : null
+        if (!slot) return
+
+        const eq = player.equipment || { weapon: null, armor: null, shield: null }
+        const oldItem = eq[slot]
+
+        let newInventory = player.inventory.filter((i) => i.uid !== uid)
+        if (oldItem) {
+          newInventory.push(oldItem)
+        }
+
+        set({
+          player: {
+            ...player,
+            inventory: newInventory,
+            equipment: {
+              ...eq,
+              [slot]: item
+            },
+            savedAt: Date.now()
+          }
+        })
+      },
+      unequipItem: (slot) => {
+        const { player } = get()
+        const eq = player.equipment || { weapon: null, armor: null, shield: null }
+        const item = eq[slot]
+        if (!item) return
+
+        const newInventory = [...player.inventory, item]
+
+        set({
+          player: {
+            ...player,
+            inventory: newInventory,
+            equipment: {
+              ...eq,
+              [slot]: null
+            },
+            savedAt: Date.now()
+          }
+        })
+      },
+      sellItem: (uid) => {
+        const { player } = get()
+        const item = player.inventory.find((i) => i.uid === uid)
+        if (!item) return
+
+        const price = (item.level || 1) * 8 + (item.rarity === 'epic' ? 100 : item.rarity === 'rare' ? 50 : 10)
+        const newInventory = player.inventory.filter((i) => i.uid !== uid)
+
+        set({
+          player: {
+            ...player,
+            inventory: newInventory,
+            resources: {
+              ...player.resources,
+              anium: player.resources.anium + price
+            },
+            savedAt: Date.now()
+          }
+        })
       },
       getUpgradeCost: (key) => calcUpgradeCost(key, get().player.upgrades[key]),
       loadPlayer: (savedPlayer) => set({ player: { ...initialPlayer, ...savedPlayer } }),

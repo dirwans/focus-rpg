@@ -138,7 +138,7 @@ for (const a of armors) {
     name: a.name,
     emoji: a.emoji,
     rarity: a.rarity,
-    type: "armor",
+    type: a.id.includes('shield') ? "shield" : "armor",
     race: a.race,
     level: a.level,
     bonus: {

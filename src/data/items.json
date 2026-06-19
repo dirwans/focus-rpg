@@ -245,7 +245,7 @@
       "name": "Compound Shield",
       "emoji": "🛡️",
       "rarity": "uncommon",
-      "type": "armor",
+      "type": "shield",
       "race": "All",
       "level": 15,
       "bonus": {
@@ -257,7 +257,7 @@
       "name": "Defiance Aegis Shield",
       "emoji": "🛡️",
       "rarity": "rare",
-      "type": "armor",
+      "type": "shield",
       "race": "All",
       "level": 40,
       "bonus": {
