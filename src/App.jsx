@@ -49,13 +49,20 @@ export default function App() {
     if (!user || !hydrated) return
     loadedRef.current = false
     setSyncStatus('syncing')
-    loadSave(user.id).then(async (save) => {
-      if (save) {
-        loadPlayer(save)
+    loadSave(user.id).then(async (cloudSave) => {
+      const local = playerRef.current
+      const cloudNewer = cloudSave && (cloudSave.savedAt || 0) > (local.savedAt || 0)
+
+      if (cloudNewer) {
+        // Cloud lebih baru → pakai cloud
+        loadPlayer(cloudSave)
+        setSyncStatus('ok')
+      } else {
+        // Local lebih baru (atau cloud kosong) → upload local ke cloud
+        await syncSave(user.id, local)
+        setSyncStatus('ok')
       }
-      // Selalu upload state terbaru ke cloud saat login
-      await syncSave(user.id, save ? save : playerRef.current)
-      setSyncStatus('ok')
+
       setTimeout(() => {
         loadedRef.current = true
         setSyncStatus('idle')

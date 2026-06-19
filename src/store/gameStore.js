@@ -57,6 +57,7 @@ const initialPlayer = {
   inventory: [],
   totalSessions: 0,
   totalMinutes: 0,
+  savedAt: 0,
 }
 
 const initialTimer = {
@@ -309,6 +310,7 @@ export const useGameStore = create(
             totalSessions: s.player.totalSessions + 1,
             totalMinutes: s.player.totalMinutes + timer.selectedMinutes,
             inventory: newInventory,
+            savedAt: Date.now(),
           },
           battle: { ...battle, levelUps, log: finalLog },
         }))
@@ -330,6 +332,7 @@ export const useGameStore = create(
             ...s.player,
             resources: { ...s.player.resources, anium: s.player.resources.anium - cost },
             upgrades: { ...s.player.upgrades, [key]: currentLevel + 1 },
+            savedAt: Date.now(),
           },
         }))
       },
@@ -345,7 +348,12 @@ export const useGameStore = create(
         }
       },
       getUpgradeCost: (key) => calcUpgradeCost(key, get().player.upgrades[key]),
-      loadPlayer: (savedPlayer) => set({ player: { ...initialPlayer, ...savedPlayer } }),
+      loadPlayer: (savedPlayer) => set((s) => {
+        const incoming = { ...initialPlayer, ...savedPlayer }
+        // Pakai yang lebih baru berdasarkan savedAt
+        if (incoming.savedAt <= s.player.savedAt) return {}
+        return { player: incoming }
+      }),
       getExpToNext: () => calcExpToNext(get().player.level),
     }),
     { name: 'focus-rpg-save' }
