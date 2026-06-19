@@ -1,0 +1,10 @@
+{
+  "items": [
+    { "id": "plasma_blade", "name": "Plasma Blade Mk.I", "emoji": "⚔️", "rarity": "rare",   "type": "weapon",  "bonus": { "atk": 15 } },
+    { "id": "carbon_rod",   "name": "Carbon Rod",        "emoji": "🔩", "rarity": "common", "type": "material","bonus": {} },
+    { "id": "nano_kit",     "name": "Nano Repair Kit",   "emoji": "💉", "rarity": "consumable","type": "consumable","bonus": { "hp": 500 } },
+    { "id": "iron_shield",  "name": "Iron Shield",       "emoji": "🛡", "rarity": "uncommon","type": "armor",   "bonus": { "def": 10 } },
+    { "id": "void_core",    "name": "Void Core",         "emoji": "🌀", "rarity": "rare",   "type": "material","bonus": {} },
+    { "id": "quantum_core", "name": "Quantum Core",      "emoji": "🔴", "rarity": "epic",   "type": "material","bonus": {} }
+  ]
+}

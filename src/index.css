@@ -1,0 +1,3 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #050810; color: #e0f4ff; }
+#root { width: 100%; min-height: 100vh; display: flex; justify-content: center; }

@@ -1,0 +1,14 @@
+{
+  "sectors": [
+    { "id": 1,  "name": "Rusted Outpost",   "emoji": "🤖", "hp": 120,  "atk": 8,  "def": 3,  "expReward": 12, "aniumReward": 8,  "dropChance": 0.15 },
+    { "id": 2,  "name": "Scrap Yard",        "emoji": "⚙️", "hp": 200,  "atk": 14, "def": 5,  "expReward": 20, "aniumReward": 14, "dropChance": 0.14 },
+    { "id": 3,  "name": "Iron Trenches",     "emoji": "🦾", "hp": 320,  "atk": 22, "def": 8,  "expReward": 30, "aniumReward": 20, "dropChance": 0.13 },
+    { "id": 4,  "name": "Plasma Fields",     "emoji": "⚡", "hp": 480,  "atk": 32, "def": 12, "expReward": 42, "aniumReward": 28, "dropChance": 0.12 },
+    { "id": 5,  "name": "Void Gate Alpha",   "emoji": "🌀", "hp": 700,  "atk": 44, "def": 18, "expReward": 58, "aniumReward": 38, "dropChance": 0.12 },
+    { "id": 6,  "name": "Neural Core",       "emoji": "🧠", "hp": 980,  "atk": 58, "def": 25, "expReward": 76, "aniumReward": 50, "dropChance": 0.11 },
+    { "id": 7,  "name": "Crimson Citadel",   "emoji": "🏰", "hp": 1320, "atk": 74, "def": 34, "expReward": 96, "aniumReward": 64, "dropChance": 0.11 },
+    { "id": 8,  "name": "Singularity Rift",  "emoji": "🌌", "hp": 1750, "atk": 92, "def": 45, "expReward": 120,"aniumReward": 80, "dropChance": 0.10 },
+    { "id": 9,  "name": "Omega Station",     "emoji": "🛸", "hp": 2300, "atk": 115,"def": 58, "expReward": 150,"aniumReward": 100,"dropChance": 0.10 },
+    { "id": 10, "name": "TITAN CORE",        "emoji": "💀", "hp": 3000, "atk": 140,"def": 75, "expReward": 190,"aniumReward": 130,"dropChance": 0.09 }
+  ]
+}
