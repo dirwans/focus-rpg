@@ -80,29 +80,29 @@ export default function Main() {
           </div>
           {isRunning && timer.mode === 'fight' && battle.currentMob && (
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, marginTop: 6 }}>
-              <div style={{ fontFamily: 'monospace', fontSize: battle.isBoss ? 13 : 11, color: battle.isBoss ? '#ff4466' : '#4a8fa8', fontWeight: battle.isBoss ? 900 : 400 }}>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: battle.isBoss ? 16 : 14, color: battle.isBoss ? '#ff4466' : '#4a8fa8', fontWeight: 900 }}>
                 {battle.isBoss ? `⚠️ BOSS: ${battle.currentMob.emoji} ${battle.currentMob.name}` : `${battle.currentMob.emoji} ${battle.currentMob.name}`}
               </div>
               <div style={{ width: '80%', height: 4, background: '#0d1f35', borderRadius: 2, overflow: 'hidden' }}>
                 <div style={{ height: '100%', width: `${Math.max(0, (battle.enemyHp / battle.enemyMaxHp) * 100)}%`, background: battle.isBoss ? '#ff4466' : '#00c8ff', borderRadius: 2, transition: 'width 0.3s' }} />
               </div>
-              <div style={{ fontFamily: 'monospace', fontSize: 9, color: '#4a8fa8' }}>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 14, color: '#4a8fa8', fontWeight: 700 }}>
                 HP {battle.enemyHp}/{battle.enemyMaxHp}
                 {battle.killStreak > 2 && <span style={{ color: '#f5a623', marginLeft: 8 }}>🔥 {battle.killStreak}x STREAK</span>}
               </div>
             </div>
           )}
           {isRunning && timer.mode === 'gather' && (
-            <div style={{ fontFamily: 'monospace', fontSize: 11, color: '#4a8fa8', marginTop: 4 }}>⛏️ Gathering resources...</div>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: 14, color: '#4a8fa8', marginTop: 4, fontWeight: 700 }}>⛏️ Gathering resources...</div>
           )}
-          {isDone && <div style={{ color: '#f5a623', fontFamily: 'monospace', fontSize: 13, marginTop: 4 }}>✅ SESSION COMPLETE!</div>}
+          {isDone && <div style={{ color: '#f5a623', fontFamily: 'var(--font-title)', fontSize: 14, marginTop: 4, fontWeight: 700 }}>✅ SESSION COMPLETE!</div>}
         </div>
 
         {/* Battle log */}
         {battle.log.length > 0 && (
           <div style={styles.battleLog}>
             {battle.log.slice(-4).map((l, i, arr) => (
-              <div key={i} style={{ fontFamily: 'monospace', fontSize: 13, color: l.includes('BOSS') || l.includes('CRIT') ? '#ffdd44' : l.includes('✅') || l.includes('🆙') ? '#00ff88' : '#c0dff0', opacity: 0.6 + (i / arr.length) * 0.4, fontWeight: i === arr.length - 1 ? 700 : 400 }}>{l}</div>
+              <div key={i} style={{ fontFamily: 'var(--font-mono)', fontSize: 14, color: l.includes('BOSS') || l.includes('CRIT') ? '#ffdd44' : l.includes('✅') || l.includes('🆙') ? '#00ff88' : '#c0dff0', opacity: 0.6 + (i / arr.length) * 0.4, fontWeight: 700 }}>{l}</div>
             ))}
           </div>
         )}
@@ -164,30 +164,30 @@ export default function Main() {
 const styles = {
   screen: { display: 'flex', flexDirection: 'column', flex: 1, overflowY: 'auto', gap: 0, fontFamily: 'var(--font-body)' },
   resBar: { display: 'flex', gap: 8, padding: '16px 16px 10px', alignItems: 'center', borderBottom: '1px solid rgba(0, 229, 255, 0.15)', background: 'rgba(3, 8, 20, 0.4)' },
-  resPill: (c) => ({ background: 'rgba(3, 8, 20, 0.8)', border: `1px solid ${c}`, borderRadius: 20, padding: '6px 14px', fontFamily: 'var(--font-mono)', fontSize: 15, fontWeight: 700, color: c, boxShadow: `0 0 12px ${c}33, inset 0 0 8px ${c}22` }),
+  resPill: (c) => ({ background: 'rgba(3, 8, 20, 0.8)', border: `1px solid ${c}`, borderRadius: 20, padding: '6px 14px', fontFamily: 'var(--font-mono)', fontSize: 16, fontWeight: 800, color: c, boxShadow: `0 0 12px ${c}33, inset 0 0 8px ${c}22` }),
   expSection: { padding: '12px 16px 10px', background: 'rgba(3, 8, 20, 0.2)' },
-  expLabel: { fontFamily: 'var(--font-title)', fontSize: 11, color: '#00e5ff', letterSpacing: 2, marginBottom: 5, fontWeight: 700, textShadow: '0 0 8px rgba(0, 229, 255, 0.4)' },
+  expLabel: { fontFamily: 'var(--font-title)', fontSize: 14, color: '#00e5ff', letterSpacing: 2, marginBottom: 5, fontWeight: 800, textShadow: '0 0 8px rgba(0, 229, 255, 0.4)' },
   expBg: { height: 10, background: 'rgba(0,0,0,0.4)', borderRadius: 5, overflow: 'hidden', border: '1px solid rgba(0, 229, 255, 0.25)' },
   expFill: { height: '100%', background: 'linear-gradient(90deg, #0050cc, #00e5ff)', borderRadius: 5, transition: 'width 0.5s', boxShadow: '0 0 8px #00e5ff' },
-  expText: { fontFamily: 'var(--font-mono)', fontSize: 11, color: '#7ab0d0', marginTop: 4, textAlign: 'right' },
+  expText: { fontFamily: 'var(--font-mono)', fontSize: 14, color: '#7ab0d0', marginTop: 4, textAlign: 'right', fontWeight: 800 },
   statRow: { display: 'flex', gap: 8, padding: '4px 16px 12px' },
   statCard: { flex: 1, background: 'var(--bg-glass)', border: '1px solid rgba(0, 229, 255, 0.2)', borderRadius: 12, padding: '10px 8px', textAlign: 'center', boxShadow: '0 4px 12px rgba(0,0,0,0.4), inset 0 0 8px rgba(0, 229, 255, 0.05)', backdropFilter: 'blur(8px)' },
-  statLabel: { fontFamily: 'var(--font-title)', fontSize: 9, letterSpacing: 1.5, color: '#7ab0d0', marginBottom: 4, fontWeight: 700 },
+  statLabel: { fontFamily: 'var(--font-title)', fontSize: 14, letterSpacing: 1.5, color: '#7ab0d0', marginBottom: 4, fontWeight: 800 },
   statVal: { fontFamily: 'var(--font-mono)', fontSize: 20, fontWeight: 900, textShadow: '0 0 8px rgba(0, 229, 255, 0.2)' },
   arena: { margin: '0 16px 12px', background: 'rgba(4, 10, 24, 0.85)', border: '1px solid rgba(0, 229, 255, 0.3)', borderRadius: 16, padding: 16, position: 'relative', minHeight: 200, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', boxShadow: '0 6px 20px rgba(0,0,0,0.6), 0 0 15px rgba(0, 229, 255, 0.1), inset 0 0 12px rgba(0, 229, 255, 0.05)', backdropFilter: 'blur(10px)' },
-  arenaBadge: { position: 'absolute', top: 10, left: 12, background: 'rgba(26, 8, 0, 0.8)', border: '1px solid #ff6400', borderRadius: 6, padding: '4px 10px', fontFamily: 'var(--font-title)', fontSize: 10, color: '#ff8c40', fontWeight: 700, boxShadow: '0 0 10px rgba(255, 100, 0, 0.3)' },
-  arenaRight: { position: 'absolute', top: 10, right: 12, fontFamily: 'var(--font-title)', fontSize: 10, color: '#00e5ff', textAlign: 'right', fontWeight: 700, textShadow: '0 0 6px rgba(0, 229, 255, 0.3)' },
+  arenaBadge: { position: 'absolute', top: 10, left: 12, background: 'rgba(26, 8, 0, 0.8)', border: '1px solid #ff6400', borderRadius: 6, padding: '4px 10px', fontFamily: 'var(--font-title)', fontSize: 14, color: '#ff8c40', fontWeight: 800, boxShadow: '0 0 10px rgba(255, 100, 0, 0.3)' },
+  arenaRight: { position: 'absolute', top: 10, right: 12, fontFamily: 'var(--font-title)', fontSize: 14, color: '#00e5ff', textAlign: 'right', fontWeight: 800, textShadow: '0 0 6px rgba(0, 229, 255, 0.3)' },
   timerDisplay: { display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' },
   battleLog: { marginTop: 12, width: '100%', display: 'flex', flexDirection: 'column', gap: 4, background: 'rgba(0,0,0,0.3)', padding: 10, borderRadius: 8, border: '1px solid rgba(0, 229, 255, 0.1)' },
   modeRow: { display: 'flex', gap: 8, padding: '0 16px 12px' },
-  modeBtn: (active) => ({ flex: 1, padding: 12, borderRadius: 10, fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 700, cursor: 'pointer', border: `1px solid ${active ? '#00e5ff' : 'rgba(0, 229, 255, 0.15)'}`, background: active ? 'linear-gradient(135deg, rgba(0, 80, 204, 0.4) 0%, rgba(0, 168, 255, 0.4) 100%)' : 'rgba(6, 15, 35, 0.6)', color: active ? '#fff' : '#7ab0d0', boxShadow: active ? '0 0 10px rgba(0, 229, 255, 0.3)' : 'none', transition: 'all 0.2s', letterSpacing: 1.5 }),
+  modeBtn: (active) => ({ flex: 1, padding: 12, borderRadius: 10, fontFamily: 'var(--font-title)', fontSize: 14, fontWeight: 800, cursor: 'pointer', border: `1px solid ${active ? '#00e5ff' : 'rgba(0, 229, 255, 0.15)'}`, background: active ? 'linear-gradient(135deg, rgba(0, 80, 204, 0.4) 0%, rgba(0, 168, 255, 0.4) 100%)' : 'rgba(6, 15, 35, 0.6)', color: active ? '#fff' : '#7ab0d0', boxShadow: active ? '0 0 10px rgba(0, 229, 255, 0.3)' : 'none', transition: 'all 0.2s', letterSpacing: 1.5 }),
   combatStats: { margin: '0 16px 12px', background: 'var(--bg-glass)', border: '1px solid rgba(0, 229, 255, 0.2)', borderRadius: 14, padding: 14, display: 'flex', justifyContent: 'space-around', boxShadow: '0 4px 12px rgba(0,0,0,0.4), inset 0 0 8px rgba(0, 229, 255, 0.05)' },
   cstat: { textAlign: 'center' },
-  cstatLabel: { fontFamily: 'var(--font-title)', fontSize: 9, letterSpacing: 1.5, color: '#7ab0d0', marginBottom: 4, fontWeight: 700 },
+  cstatLabel: { fontFamily: 'var(--font-title)', fontSize: 14, letterSpacing: 1.5, color: '#7ab0d0', marginBottom: 4, fontWeight: 800 },
   cstatVal: { fontFamily: 'var(--font-mono)', fontSize: 22, fontWeight: 900, textShadow: '0 0 6px rgba(0, 229, 255, 0.2)' },
   timerRow: { display: 'flex', gap: 8, padding: '0 16px 12px' },
-  timerBtn: (active) => ({ flex: 1, padding: 12, borderRadius: 10, fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 700, cursor: 'pointer', border: `1px solid ${active ? '#00e5ff' : 'rgba(0, 229, 255, 0.15)'}`, background: active ? 'linear-gradient(135deg, rgba(0, 80, 204, 0.4) 0%, rgba(0, 168, 255, 0.4) 100%)' : 'rgba(6, 15, 35, 0.6)', color: active ? '#fff' : '#7ab0d0', boxShadow: active ? '0 0 10px rgba(0, 229, 255, 0.3)' : 'none', transition: 'all 0.2s', letterSpacing: 1 }),
-  deployBtn: { margin: '0 16px 12px', padding: 18, borderRadius: 12, border: '1px solid #00e5ff', background: 'linear-gradient(135deg, #0050cc 0%, #00a8ff 100%)', fontFamily: 'var(--font-title)', fontSize: 16, fontWeight: 900, color: '#fff', letterSpacing: 2, cursor: 'pointer', boxShadow: '0 0 15px rgba(0, 168, 255, 0.4), inset 0 1px 0 rgba(255,255,255,0.2)', transition: 'all 0.2s', textTransform: 'uppercase' },
+  timerBtn: (active) => ({ flex: 1, padding: 12, borderRadius: 10, fontFamily: 'var(--font-title)', fontSize: 14, fontWeight: 800, cursor: 'pointer', border: `1px solid ${active ? '#00e5ff' : 'rgba(0, 229, 255, 0.15)'}`, background: active ? 'linear-gradient(135deg, rgba(0, 80, 204, 0.4) 0%, rgba(0, 168, 255, 0.4) 100%)' : 'rgba(6, 15, 35, 0.6)', color: active ? '#fff' : '#7ab0d0', boxShadow: active ? '0 0 10px rgba(0, 229, 255, 0.3)' : 'none', transition: 'all 0.2s', letterSpacing: 1 }),
+  deployBtn: { margin: '0 16px 12px', padding: 18, borderRadius: 12, border: '1px solid #00e5ff', background: 'linear-gradient(135deg, #0050cc 0%, #00a8ff 100%)', fontFamily: 'var(--font-title)', fontSize: 18, fontWeight: 900, color: '#fff', letterSpacing: 2, cursor: 'pointer', boxShadow: '0 0 15px rgba(0, 168, 255, 0.4), inset 0 1px 0 rgba(255,255,255,0.2)', transition: 'all 0.2s', textTransform: 'uppercase' },
   sessionSummary: { textAlign: 'center', padding: '0 16px 12px' },
   logoutBtn: { background: 'rgba(6, 15, 35, 0.6)', border: '1px solid rgba(0, 229, 255, 0.2)', borderRadius: 8, color: '#4a8fa8', fontSize: 16, cursor: 'pointer', padding: '6px 10px', lineHeight: 1, transition: 'all 0.2s' },
 }
