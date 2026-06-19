@@ -11,11 +11,13 @@ export const getToken = () => localStorage.getItem(TOKEN_KEY)
 export const setToken = (t) => localStorage.setItem(TOKEN_KEY, t)
 export const clearToken = () => localStorage.removeItem(TOKEN_KEY)
 
+const API_BASE = import.meta.env.VITE_API_URL || ''
+
 async function api(path, { method = 'GET', body } = {}) {
   const headers = { 'Content-Type': 'application/json', 'X-Client-Id': CLIENT_ID }
   const token = getToken()
   if (token) headers.Authorization = `Bearer ${token}`
-  const res = await fetch(`/api${path}`, {
+  const res = await fetch(`${API_BASE}/api${path}`, {
     method,
     headers,
     body: body ? JSON.stringify(body) : undefined,

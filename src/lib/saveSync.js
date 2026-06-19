@@ -10,11 +10,11 @@ export async function syncSave(gameState) {
   catch (e) { console.error('[saveSync] sync error:', e.message); return null }
 }
 
-// SSE realtime — panggil onUpdate tiap save berubah dari device lain
 export function subscribeSave(onUpdate) {
   const token = getToken()
   if (!token) return () => {}
-  const es = new EventSource(`/api/save/stream?token=${encodeURIComponent(token)}&cid=${CLIENT_ID}`)
+  const API_BASE = import.meta.env.VITE_API_URL || ''
+  const es = new EventSource(`${API_BASE}/api/save/stream?token=${encodeURIComponent(token)}&cid=${CLIENT_ID}`)
   es.onmessage = (e) => {
     try {
       const gameState = JSON.parse(e.data)
