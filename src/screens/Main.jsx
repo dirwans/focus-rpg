@@ -42,11 +42,11 @@ export default function Main() {
         <span style={styles.resPill('#f5a623')}>⬡ {player.resources.anium.toLocaleString()}</span>
         <span style={styles.resPill('#00e5ff')}>◈ {player.resources.credits}</span>
         <span style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 2 }}>
-            <span style={{ fontFamily: 'monospace', fontSize: 14, color: '#7ab0d0', fontWeight: 700 }}>
+          <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 3 }}>
+            <span style={{ fontFamily: 'monospace', fontSize: 16, color: '#7ab0d0', fontWeight: 700 }}>
               {race ? race.emoji + ' ' + race.name : '—'}
             </span>
-            <span style={{ fontFamily: 'monospace', fontSize: 11, color: '#4a8fa8' }}>
+            <span style={{ fontFamily: 'monospace', fontSize: 14, color: '#00e5ff', fontWeight: 700 }}>
               @{username}
             </span>
           </span>
