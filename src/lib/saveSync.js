@@ -19,7 +19,9 @@ export function subscribeSave(onUpdate) {
     try {
       const gameState = JSON.parse(e.data)
       if (gameState) onUpdate(gameState)
-    } catch {}
+    } catch (err) {
+      console.warn('[saveSync] SSE parse fail', err)
+    }
   }
   es.onerror = () => { /* EventSource auto-reconnect */ }
   return () => es.close()

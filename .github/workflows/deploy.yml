@@ -40,5 +40,6 @@ jobs:
           script: |
             cd ~/focus-rpg
             npm ci --omit=dev
-            pm2 restart focus-rpg || pm2 start server.js --name focus-rpg
+            pm2 delete focus-rpg || true
+            pm2 start server.js --name focus-rpg
             pm2 save

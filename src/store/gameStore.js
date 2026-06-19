@@ -188,7 +188,7 @@ export const useGameStore = create(
       },
 
       stopTimer: () => {
-        const { timer, player } = get()
+        const { timer } = get()
         if (timer.state !== 'running') return
         const elapsedMin = Math.floor((timer.selectedMinutes * 60 - timer.secondsLeft) / 60)
         set((s) => ({

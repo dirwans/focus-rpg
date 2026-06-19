@@ -44,7 +44,7 @@ export const useAuthStore = create((set) => ({
   },
 
   signOut: async () => {
-    try { await apiLogout() } catch {}
+    try { await apiLogout() } catch (err) { console.warn('[authStore] logout request fail:', err) }
     clearToken()
     set({ user: null })
   },

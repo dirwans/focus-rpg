@@ -31,7 +31,6 @@ export default function Main() {
   const race    = player.race ? races[player.race] : null
   const sectorIdx = Math.min(player.sector, enemies.sectors.length) - 1
   const enemy   = enemies.sectors[sectorIdx]
-  const enemyPct = battle.enemyMaxHp > 0 ? Math.floor((battle.enemyHp / battle.enemyMaxHp) * 100) : 100
   const isRunning = timer.state === 'running'
   const isDone    = timer.state === 'completed'
 
