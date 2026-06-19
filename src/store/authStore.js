@@ -1,42 +1,51 @@
 import { create } from 'zustand'
-import { supabase } from '../lib/supabase'
+import { apiRegister, apiLogin, apiMe, apiLogout, setToken, clearToken, getToken } from '../lib/api'
 
-export const useAuthStore = create((set, get) => ({
-  user: null,
+export const useAuthStore = create((set) => ({
+  user: null,      // { username }
   loading: true,
   error: null,
 
   init: async () => {
-    const { data: { session } } = await supabase.auth.getSession()
-    set({ user: session?.user ?? null, loading: false })
-
-    supabase.auth.onAuthStateChange((_event, session) => {
-      set({ user: session?.user ?? null })
-    })
+    if (!getToken()) { set({ user: null, loading: false }); return }
+    try {
+      const { username } = await apiMe()
+      set({ user: { username }, loading: false })
+    } catch {
+      clearToken()
+      set({ user: null, loading: false })
+    }
   },
 
-  signUp: async (email, password, username) => {
+  signUp: async (username, password) => {
     set({ error: null, loading: true })
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: { data: { username } },
-    })
-    if (error) { set({ error: error.message, loading: false }); return false }
-    set({ user: data.user, loading: false })
-    return true
+    try {
+      const { token, username: u } = await apiRegister(username, password)
+      setToken(token)
+      set({ user: { username: u }, loading: false })
+      return true
+    } catch (e) {
+      set({ error: e.message, loading: false })
+      return false
+    }
   },
 
-  signIn: async (email, password) => {
+  signIn: async (username, password) => {
     set({ error: null, loading: true })
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password })
-    if (error) { set({ error: error.message, loading: false }); return false }
-    set({ user: data.user, loading: false })
-    return true
+    try {
+      const { token, username: u } = await apiLogin(username, password)
+      setToken(token)
+      set({ user: { username: u }, loading: false })
+      return true
+    } catch (e) {
+      set({ error: e.message, loading: false })
+      return false
+    }
   },
 
   signOut: async () => {
-    await supabase.auth.signOut()
+    try { await apiLogout() } catch {}
+    clearToken()
     set({ user: null })
   },
 

@@ -1,24 +1,26 @@
-import { supabase } from './supabase'
+import { apiLoadSave, apiSyncSave, getToken, CLIENT_ID } from './api'
 
-export async function loadSave(userId) {
-  const { data, error } = await supabase
-    .from('player_saves')
-    .select('game_state')
-    .eq('user_id', userId)
-    .maybeSingle()
-  if (error) {
-    console.error('[saveSync] loadSave error:', error)
-    return null
-  }
-  return data?.game_state ?? null
+export async function loadSave() {
+  try { return await apiLoadSave() }
+  catch (e) { console.error('[saveSync] load error:', e.message); return null }
 }
 
-export async function syncSave(userId, gameState) {
-  const { error } = await supabase
-    .from('player_saves')
-    .upsert(
-      { user_id: userId, game_state: gameState, updated_at: new Date().toISOString() },
-      { onConflict: 'user_id' }
-    )
-  if (error) console.error('[saveSync] syncSave error:', error)
+export async function syncSave(gameState) {
+  try { await apiSyncSave(gameState) }
+  catch (e) { console.error('[saveSync] sync error:', e.message) }
+}
+
+// SSE realtime — panggil onUpdate tiap save berubah dari device lain
+export function subscribeSave(onUpdate) {
+  const token = getToken()
+  if (!token) return () => {}
+  const es = new EventSource(`/api/save/stream?token=${encodeURIComponent(token)}&cid=${CLIENT_ID}`)
+  es.onmessage = (e) => {
+    try {
+      const gameState = JSON.parse(e.data)
+      if (gameState) onUpdate(gameState)
+    } catch {}
+  }
+  es.onerror = () => { /* EventSource auto-reconnect */ }
+  return () => es.close()
 }

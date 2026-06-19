@@ -23,7 +23,7 @@ export default function Main() {
   const openRaceSelect = useGameStore((s) => s.openRaceSelect)
 
   const { user, signOut } = useAuthStore()
-  const username = user?.user_metadata?.username || user?.email?.split('@')[0] || '—'
+  const username = user?.username || '—'
 
   const stats   = getStats()
   const expMax  = getExpToNext()

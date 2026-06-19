@@ -2,8 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useGameStore } from './store/gameStore'
 import { useAuthStore } from './store/authStore'
 import { useTimer } from './hooks/useTimer'
-import { loadSave, syncSave } from './lib/saveSync'
-import { supabase } from './lib/supabase'
+import { loadSave, syncSave, subscribeSave } from './lib/saveSync'
 import BottomNav from './components/BottomNav'
 import RaceSelect from './components/RaceSelect'
 import Auth from './screens/Auth'
@@ -15,20 +14,21 @@ import Cargo from './screens/Cargo'
 
 const SCREENS = { main: Main, unit: Unit, ranks: Ranks, forge: Forge, cargo: Cargo }
 
+const score = (p) => (p?.totalSessions || 0) * 1000 + (p?.level || 0)
+
 export default function App() {
   useTimer()
 
-  const screen      = useGameStore((s) => s.screen)
+  const screen         = useGameStore((s) => s.screen)
   const showRaceSelect = useGameStore((s) => s.showRaceSelect)
-  const player      = useGameStore((s) => s.player)
-  const loadPlayer  = useGameStore((s) => s.loadPlayer)
+  const player         = useGameStore((s) => s.player)
+  const loadPlayer     = useGameStore((s) => s.loadPlayer)
   const { user, loading, init } = useAuthStore()
 
   const playerRef   = useRef(player)
   playerRef.current = player
-
   const debounceRef = useRef(null)
-  const readyRef    = useRef(false)  // true setelah cloud load selesai
+  const readyRef    = useRef(false)
 
   const [hydrated, setHydrated] = useState(() => useGameStore.persist.hasHydrated())
 
@@ -41,68 +41,47 @@ export default function App() {
     return unsub
   }, [])
 
-  // Step 1: saat login + hydrated → load cloud, lalu aktifkan sync
+  // Load save saat login + hydrated, lalu aktifkan sync
   useEffect(() => {
     if (!user || !hydrated) return
     readyRef.current = false
-    loadSave(user.id).then((cloud) => {
+    loadSave().then((cloud) => {
       const local = playerRef.current
-      const score = (p) => (p?.totalSessions || 0) * 1000 + (p?.level || 0)
-      if (cloud && score(cloud) >= score(local)) {
-        // Cloud lebih maju atau sama → pakai cloud
-        loadPlayer(cloud)
-      } else {
-        // Local lebih maju → push ke cloud sekarang
-        syncSave(user.id, local)
-      }
-      // Baru aktifkan debounced sync setelah 1 detik
-      setTimeout(() => { readyRef.current = true }, 1000)
+      if (cloud && score(cloud) >= score(local)) loadPlayer(cloud)
+      else syncSave(local)
+      setTimeout(() => { readyRef.current = true }, 800)
     })
-  }, [user?.id, hydrated])
+  }, [user?.username, hydrated])
 
-  // Step 2: tiap player berubah → debounce 4 detik → push ke cloud
+  // Debounced sync tiap player berubah (1.5s)
   useEffect(() => {
     if (!user || !readyRef.current) return
     if (debounceRef.current) clearTimeout(debounceRef.current)
-    debounceRef.current = setTimeout(() => {
-      syncSave(user.id, playerRef.current)
-    }, 4000)
+    debounceRef.current = setTimeout(() => syncSave(playerRef.current), 1500)
     return () => clearTimeout(debounceRef.current)
-  }, [player, user?.id])
+  }, [player, user?.username])
 
-  // Step 3: Realtime subscription — update otomatis saat cloud berubah
+  // SSE realtime — update instan saat device lain nyimpen
   useEffect(() => {
     if (!user) return
-    const channel = supabase
-      .channel(`player-save-${user.id}`)
-      .on('postgres_changes', {
-        event: '*',
-        schema: 'public',
-        table: 'player_saves',
-        filter: `user_id=eq.${user.id}`,
-      }, (payload) => {
-        if (!readyRef.current) return
-        const cloud = payload.new?.game_state
-        if (!cloud) return
-        const local = playerRef.current
-        const score = (p) => (p?.totalSessions || 0) * 1000 + (p?.level || 0)
-        if (score(cloud) > score(local)) {
-          readyRef.current = false
-          loadPlayer(cloud)
-          setTimeout(() => { readyRef.current = true }, 1000)
-        }
-      })
-      .subscribe()
-    return () => supabase.removeChannel(channel)
-  }, [user?.id])
+    const unsub = subscribeSave((cloud) => {
+      if (!readyRef.current) return
+      if (score(cloud) > score(playerRef.current)) {
+        readyRef.current = false
+        loadPlayer(cloud)
+        setTimeout(() => { readyRef.current = true }, 800)
+      }
+    })
+    return unsub
+  }, [user?.username])
 
-  // Step 4: sync saat tab ditutup
+  // Sync saat tab ditutup
   useEffect(() => {
     if (!user) return
-    const onUnload = () => syncSave(user.id, playerRef.current)
+    const onUnload = () => syncSave(playerRef.current)
     window.addEventListener('beforeunload', onUnload)
     return () => window.removeEventListener('beforeunload', onUnload)
-  }, [user?.id])
+  }, [user?.username])
 
   if (loading || !hydrated) {
     return (
