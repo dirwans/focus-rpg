@@ -4,6 +4,7 @@ import { useAuthStore } from './store/authStore'
 import { useTimer } from './hooks/useTimer'
 import { loadSave, syncSave, subscribeSave } from './lib/saveSync'
 import BottomNav from './components/BottomNav'
+import races from './data/races.json'
 import RaceSelect from './components/RaceSelect'
 import Auth from './screens/Auth'
 import Main from './screens/Main'
@@ -41,6 +42,21 @@ export default function App() {
     if (useGameStore.persist.hasHydrated()) setHydrated(true)
     return unsub
   }, [])
+
+  useEffect(() => {
+    if (!hydrated) return
+    const curPlayer = useGameStore.getState().player
+    if (curPlayer.race && !races[curPlayer.race]) {
+      useGameStore.setState((s) => ({
+        player: {
+          ...s.player,
+          race: null,
+          upgrades: { atk: 0, def: 0, hp: 0 },
+          equipment: { weapon: null, armor: null, shield: null }
+        }
+      }))
+    }
+  }, [hydrated])
 
   // Login + hydrated → server jadi sumber kebenaran. Ada save server → pakai itu.
   useEffect(() => {

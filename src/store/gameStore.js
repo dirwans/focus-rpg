@@ -14,6 +14,7 @@ function calcStat(key, upgradeLevel, raceId) {
   const cfg = upgradesConfig[key]
   const race = races[raceId]
   const base = cfg.baseValue + cfg.perLevel * upgradeLevel
+  if (!race) return base
   const multiplier = key === 'hp'
     ? race.bonuses.hpMultiplier
     : key === 'atk'
@@ -357,6 +358,14 @@ export const useGameStore = create(
         const { __session, ...playerPart } = gs
         set((s) => {
           const next = { player: { ...initialPlayer, ...playerPart } }
+          
+          // Force reset if the loaded race is obsolete
+          if (next.player.race && !races[next.player.race]) {
+            next.player.race = null
+            next.player.upgrades = { atk: 0, def: 0, hp: 0 }
+            next.player.equipment = { weapon: null, armor: null, shield: null }
+          }
+
           if (__session) {
             const remaining = __session.state === 'running'
               ? Math.max(0, Math.ceil((__session.endsAt - Date.now()) / 1000))
