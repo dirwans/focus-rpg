@@ -43,6 +43,42 @@ function spawnEnemy(sectorIdx, forceBoss = false) {
   return { mob, isBoss, hp: mob.hp }
 }
 
+// Frac 0..1 deterministik dari seed integer (buat item drop yg sama di semua device)
+function seededFrac(seed) {
+  const x = Math.sin(seed) * 10000
+  return x - Math.floor(x)
+}
+
+// Reward DETERMINISTIK berdasar lama waktu + stats → semua device hitung sama
+function computeRewards(player, mode, minutes) {
+  const race = races[player.race]
+  if (!race) return { kills: 0, exp: 0, anium: 0 }
+  const elapsedSec = Math.max(0, Math.floor(minutes * 60))
+  if (mode === 'gather') {
+    return {
+      kills: 0,
+      exp: Math.floor(elapsedSec * 0.18 * race.bonuses.expMultiplier),
+      anium: Math.floor(elapsedSec * 0.72 * race.bonuses.gatherMultiplier),
+    }
+  }
+  const sectorIdx = getSector(player.level) - 1
+  const mobs = enemies.sectors[sectorIdx].mobs
+  const avg = (f) => mobs.reduce((a, m) => a + f(m), 0) / mobs.length
+  const avgHp = avg((m) => m.hp)
+  const avgDef = avg((m) => m.def)
+  const avgExp = avg((m) => m.expReward)
+  const avgAni = avg((m) => m.aniumReward)
+  const atk = calcStat('atk', player.upgrades.atk, player.race)
+  const dps = Math.max(1, atk - avgDef + 3.5) * 1.096 // ~rata2 crit/variance
+  const secPerKill = Math.max(1, avgHp / dps)
+  const kills = Math.floor(elapsedSec / secPerKill)
+  return {
+    kills,
+    exp: Math.floor(kills * avgExp * race.bonuses.expMultiplier * 1.3),
+    anium: Math.floor(kills * avgAni * 1.3),
+  }
+}
+
 const initialPlayer = {
   name: 'PILOT #1',
   race: null,
@@ -65,6 +101,8 @@ const initialTimer = {
   secondsLeft: 25 * 60,
   state: 'idle',   // idle | running | completed
   mode: 'fight',   // fight | gather
+  startedAt: 0,    // epoch ms — sumber kebenaran countdown (sync antar device)
+  endsAt: 0,       // epoch ms
 }
 
 const initialBattle = {
@@ -107,6 +145,7 @@ export const useGameStore = create(
             sector: 1,
             highestSector: 1,
             inventory: [],
+            savedAt: Date.now(),
           },
         }))
       },
@@ -115,28 +154,34 @@ export const useGameStore = create(
       setTimerMinutes: (min) => {
         const { timer } = get()
         if (timer.state !== 'idle') return
-        set({ timer: { ...timer, selectedMinutes: min, secondsLeft: min * 60 } })
+        set({ timer: { ...timer, selectedMinutes: min, secondsLeft: min * 60 }, player: { ...get().player, savedAt: Date.now() } })
       },
       setMode: (mode) => {
         const { timer } = get()
         if (timer.state !== 'idle') return
-        set({ timer: { ...timer, mode } })
+        set({ timer: { ...timer, mode }, player: { ...get().player, savedAt: Date.now() } })
       },
 
       startTimer: () => {
         const { player, timer } = get()
         if (!player.race) { set({ showRaceSelect: true }); return }
         if (timer.state !== 'idle') return
+        const now = Date.now()
         const sectorIdx = getSector(player.level) - 1
         const sector = enemies.sectors[sectorIdx]
         const { mob, isBoss, hp } = spawnEnemy(sectorIdx)
         set({
-          timer: { ...timer, state: 'running', secondsLeft: timer.selectedMinutes * 60 },
+          timer: {
+            ...timer,
+            state: 'running',
+            secondsLeft: timer.selectedMinutes * 60,
+            startedAt: now,
+            endsAt: now + timer.selectedMinutes * 60 * 1000,
+          },
+          player: { ...player, savedAt: now },
           battle: {
             ...initialBattle,
-            log: [isBoss
-              ? `⚠️ BOSS DETECTED: ${mob.emoji} ${mob.name}!`
-              : `⚔️ Entering ${sector.name}...`],
+            log: [isBoss ? `⚠️ BOSS: ${mob.emoji} ${mob.name}!` : `⚔️ Entering ${sector.name}...`],
             enemyHp: hp,
             enemyMaxHp: hp,
             currentMob: mob,
@@ -148,150 +193,104 @@ export const useGameStore = create(
       stopTimer: () => {
         const { timer, player } = get()
         if (timer.state !== 'running') return
-        const elapsed = timer.selectedMinutes * 60 - timer.secondsLeft
-        const elapsedMin = Math.floor(elapsed / 60)
+        const elapsedMin = Math.floor((timer.selectedMinutes * 60 - timer.secondsLeft) / 60)
         set((s) => ({
-          timer: { ...s.timer, state: 'idle', secondsLeft: s.timer.selectedMinutes * 60 },
-          player: { ...s.player, totalMinutes: s.player.totalMinutes + elapsedMin },
+          timer: { ...s.timer, state: 'idle', secondsLeft: s.timer.selectedMinutes * 60, startedAt: 0, endsAt: 0 },
+          player: { ...s.player, totalMinutes: s.player.totalMinutes + elapsedMin, savedAt: Date.now() },
           battle: { ...initialBattle },
         }))
       },
 
       tick: () => {
-        const { timer } = get()
+        const { timer, player } = get()
         if (timer.state !== 'running') return
-        const newSecondsLeft = timer.secondsLeft - 1
-        if (newSecondsLeft <= 0) {
-          get().completeSession()
-          return
-        }
+        const remaining = Math.max(0, Math.ceil((timer.endsAt - Date.now()) / 1000))
+        if (remaining <= 0) { get().completeSession(); return }
+        // visual combat (cosmetic, lokal)
         if (timer.mode === 'fight') get()._combatTick()
         else get()._gatherTick()
-        set((s) => ({ timer: { ...s.timer, secondsLeft: newSecondsLeft } }))
+        // reward DETERMINISTIK (sama di semua device) — override angka cosmetic
+        const total = timer.selectedMinutes * 60
+        const r = computeRewards(player, timer.mode, (total - remaining) / 60)
+        set((s) => ({
+          timer: { ...s.timer, secondsLeft: remaining },
+          battle: { ...s.battle, kills: r.kills, sessionExp: r.exp, sessionAnium: r.anium },
+        }))
       },
 
       _combatTick: () => {
         const { player, battle } = get()
-        if (!battle.currentMob) return
-
-        const race = races[player.race]
+        if (!battle.currentMob) {
+          // device yg nerima session via sync belum punya mob → spawn cosmetic
+          const sectorIdx = getSector(player.level) - 1
+          const { mob, isBoss, hp } = spawnEnemy(sectorIdx)
+          set({ battle: { ...battle, currentMob: mob, isBoss, enemyHp: hp, enemyMaxHp: hp } })
+          return
+        }
         const playerAtk = calcStat('atk', player.upgrades.atk, player.race)
         const mob = battle.currentMob
-
-        // Crit: 12% base, Human bonus +3%
-        const critChance = player.race === 'human' ? 0.15 : 0.12
-        const isCrit = Math.random() < critChance
+        const isCrit = Math.random() < (player.race === 'human' ? 0.15 : 0.12)
         const variance = 0.8 + Math.random() * 0.4
         const rawDmg = Math.max(1, playerAtk - mob.def + Math.floor(Math.random() * 8))
         const dmgToEnemy = Math.floor(rawDmg * variance * (isCrit ? 1.8 : 1))
-
         let newEnemyHp = battle.enemyHp - dmgToEnemy
-        let newKills = battle.kills
-        let newStreak = battle.killStreak
-        let newExp = battle.sessionExp
-        let newAnium = battle.sessionAnium
         let newLog = [...battle.log]
-        let nextMob = mob
-        let nextIsBoss = battle.isBoss
-        let nextMaxHp = battle.enemyMaxHp
+        let nextMob = mob, nextIsBoss = battle.isBoss, nextMaxHp = battle.enemyMaxHp
 
         if (newEnemyHp <= 0) {
-          newKills += 1
-          newStreak += 1
-
-          // Streak bonus: +10% per kill streak, max 2x
-          const streakMult = Math.min(1 + newStreak * 0.1, 2.0)
-          const expGain = Math.floor(mob.expReward * race.bonuses.expMultiplier * streakMult * (battle.isBoss ? 3 : 1))
-          const aniumGain = Math.floor(mob.aniumReward * (0.8 + Math.random() * 0.4) * streakMult * (battle.isBoss ? 3 : 1))
-          newExp += expGain
-          newAnium += aniumGain
-
           if (newLog.length > 7) newLog = newLog.slice(-7)
-
-          if (battle.isBoss) {
-            newLog.push(`🏆 BOSS SLAIN! ${mob.emoji} +${expGain}EXP +${aniumGain}⬡`)
-          } else if (isCrit) {
-            newLog.push(`💥 CRIT! ${mob.emoji} ${mob.name} [x${newStreak > 1 ? newStreak + ' STREAK' : ''}] +${expGain}EXP`)
-          } else {
-            newLog.push(`⚔️ Killed ${mob.emoji} ${newStreak > 2 ? `[${newStreak}x🔥]` : ''} +${expGain}EXP +${aniumGain}⬡`)
-          }
-
-          // Spawn next enemy
+          newLog.push(battle.isBoss ? `🏆 BOSS SLAIN! ${mob.emoji}` : `⚔️ Killed ${mob.emoji} ${mob.name}`)
           const sectorIdx = getSector(player.level) - 1
           const next = spawnEnemy(sectorIdx)
-          nextMob = next.mob
-          nextIsBoss = next.isBoss
-          nextMaxHp = next.hp
-          newEnemyHp = next.hp
-
+          nextMob = next.mob; nextIsBoss = next.isBoss; nextMaxHp = next.hp; newEnemyHp = next.hp
           if (next.isBoss) newLog.push(`⚠️ BOSS INCOMING: ${next.mob.emoji} ${next.mob.name}!`)
         } else if (isCrit) {
           if (newLog.length > 7) newLog = newLog.slice(-7)
-          newLog.push(`✨ CRIT! -${dmgToEnemy} to ${mob.emoji}`)
+          newLog.push(`💥 CRIT! -${dmgToEnemy} ${mob.emoji}`)
         }
-
-        set({
-          battle: {
-            ...battle,
-            enemyHp: newEnemyHp,
-            enemyMaxHp: nextMaxHp,
-            currentMob: nextMob,
-            isBoss: nextIsBoss,
-            kills: newKills,
-            killStreak: newStreak,
-            sessionExp: newExp,
-            sessionAnium: newAnium,
-            log: newLog,
-          }
-        })
+        set({ battle: { ...battle, enemyHp: newEnemyHp, enemyMaxHp: nextMaxHp, currentMob: nextMob, isBoss: nextIsBoss, log: newLog } })
       },
 
       _gatherTick: () => {
-        const { player, battle } = get()
-        const race = races[player.race]
+        const { battle } = get()
         if (Math.random() > 0.82) {
-          const base = Math.floor(2 + Math.random() * 5)
-          const aniumGain = Math.floor(base * race.bonuses.gatherMultiplier)
-          const expGain = Math.floor(1 * race.bonuses.expMultiplier)
           let newLog = [...battle.log]
           if (newLog.length > 7) newLog = newLog.slice(-7)
-          newLog.push(`⛏️ Gathered +${aniumGain}⬡ +${expGain}EXP`)
-          set({ battle: { ...battle, sessionAnium: battle.sessionAnium + aniumGain, sessionExp: battle.sessionExp + expGain, log: newLog } })
+          newLog.push(`⛏️ Gathering resources...`)
+          set({ battle: { ...battle, log: newLog } })
         }
       },
 
       completeSession: () => {
-        const { player, timer, battle } = get()
+        const { player, timer } = get()
+        if (timer.state !== 'running') return // hindari double-complete (sudah completed via sync)
+
+        const r = computeRewards(player, timer.mode, timer.selectedMinutes)
         const today = new Date().toDateString()
         const isNewDay = player.lastSessionDate !== today
         const newStreak = isNewDay ? player.streak + 1 : player.streak
 
-        let newExp = player.exp + battle.sessionExp
+        let newExp = player.exp + r.exp
         let newLevel = player.level
         let expToNext = calcExpToNext(newLevel)
         let levelUps = 0
-
         while (newExp >= expToNext) {
-          newExp -= expToNext
-          newLevel += 1
-          levelUps += 1
-          expToNext = calcExpToNext(newLevel)
+          newExp -= expToNext; newLevel += 1; levelUps += 1; expToNext = calcExpToNext(newLevel)
         }
-
         const newSector = getSector(newLevel)
 
-        // Item drop: boss = 60%, fight = 25%, gather = 10%
-        const dropRate = battle.isBoss ? 0.6 : timer.mode === 'fight' ? 0.25 : 0.1
+        // Item drop deterministik (seed dari startedAt → sama di semua device)
+        const dropRate = timer.mode === 'fight' ? 0.25 : 0.1
         const newInventory = [...player.inventory]
-        if (Math.random() < dropRate) {
-          const drops = itemsData.items.filter(i => i.type !== 'consumable')
-          const drop = drops[Math.floor(Math.random() * drops.length)]
-          newInventory.push({ ...drop, uid: Date.now() })
+        if (seededFrac(timer.startedAt) < dropRate) {
+          const drops = itemsData.items.filter((i) => i.type !== 'consumable')
+          const drop = drops[Math.floor(seededFrac(timer.startedAt + 1) * drops.length)]
+          if (drop) newInventory.push({ ...drop, uid: timer.startedAt })
         }
 
-        const finalLog = [...battle.log]
-        if (levelUps > 0) finalLog.push(`🆙 LEVEL UP! LV.${newLevel} — Sector ${newSector} unlocked!`)
-        finalLog.push(`✅ Done! ${battle.kills} kills | +${battle.sessionAnium}⬡ | +${battle.sessionExp}EXP`)
+        const finalLog = []
+        if (levelUps > 0) finalLog.push(`🆙 LEVEL UP! LV.${newLevel} — Sector ${newSector}!`)
+        finalLog.push(`✅ Done! ${r.kills} kills | +${r.anium}⬡ | +${r.exp}EXP`)
 
         set((s) => ({
           timer: { ...s.timer, state: 'completed', secondsLeft: 0 },
@@ -301,10 +300,7 @@ export const useGameStore = create(
             level: newLevel,
             sector: newSector,
             highestSector: Math.max(s.player.highestSector, newSector),
-            resources: {
-              ...s.player.resources,
-              anium: s.player.resources.anium + battle.sessionAnium,
-            },
+            resources: { ...s.player.resources, anium: s.player.resources.anium + r.anium },
             streak: newStreak,
             lastSessionDate: today,
             totalSessions: s.player.totalSessions + 1,
@@ -312,13 +308,16 @@ export const useGameStore = create(
             inventory: newInventory,
             savedAt: Date.now(),
           },
-          battle: { ...battle, levelUps, log: finalLog },
+          battle: { ...s.battle, kills: r.kills, sessionExp: r.exp, sessionAnium: r.anium, levelUps, log: finalLog },
         }))
       },
 
       resetTimer: () => {
-        const { timer } = get()
-        set({ timer: { ...timer, state: 'idle', secondsLeft: timer.selectedMinutes * 60 }, battle: initialBattle })
+        set((s) => ({
+          timer: { ...s.timer, state: 'idle', secondsLeft: s.timer.selectedMinutes * 60, startedAt: 0, endsAt: 0 },
+          player: { ...s.player, savedAt: Date.now() },
+          battle: initialBattle,
+        }))
       },
 
       // ── Upgrade ──────────────────────────────────────────
@@ -335,6 +334,43 @@ export const useGameStore = create(
             savedAt: Date.now(),
           },
         }))
+      },
+
+      // ── Sync (player + session) ──────────────────────────
+      getSyncState: () => {
+        const { player, timer } = get()
+        return {
+          ...player,
+          __session: {
+            state: timer.state,
+            mode: timer.mode,
+            selectedMinutes: timer.selectedMinutes,
+            startedAt: timer.startedAt,
+            endsAt: timer.endsAt,
+          },
+        }
+      },
+      applySyncState: (gs) => {
+        if (!gs) return
+        const { __session, ...playerPart } = gs
+        set((s) => {
+          const next = { player: { ...initialPlayer, ...playerPart } }
+          if (__session) {
+            const remaining = __session.state === 'running'
+              ? Math.max(0, Math.ceil((__session.endsAt - Date.now()) / 1000))
+              : __session.state === 'completed' ? 0 : __session.selectedMinutes * 60
+            next.timer = {
+              ...s.timer,
+              state: __session.state,
+              mode: __session.mode,
+              selectedMinutes: __session.selectedMinutes,
+              startedAt: __session.startedAt,
+              endsAt: __session.endsAt,
+              secondsLeft: remaining,
+            }
+          }
+          return next
+        })
       },
 
       // ── Helpers ──────────────────────────────────────────

@@ -14,14 +14,7 @@ import Cargo from './screens/Cargo'
 
 const SCREENS = { main: Main, unit: Unit, ranks: Ranks, forge: Forge, cargo: Cargo }
 
-// field yang ikut sync (exclude timer/battle yang memang per-device)
-const snap = (p) => JSON.stringify({
-  race: p?.race, level: p?.level, exp: p?.exp,
-  resources: p?.resources, upgrades: p?.upgrades,
-  sector: p?.sector, highestSector: p?.highestSector,
-  streak: p?.streak, lastSessionDate: p?.lastSessionDate,
-  inventory: p?.inventory, totalSessions: p?.totalSessions, totalMinutes: p?.totalMinutes,
-})
+const snap = (gs) => JSON.stringify(gs ?? {})
 
 export default function App() {
   useTimer()
@@ -29,11 +22,10 @@ export default function App() {
   const screen         = useGameStore((s) => s.screen)
   const showRaceSelect = useGameStore((s) => s.showRaceSelect)
   const player         = useGameStore((s) => s.player)
-  const loadPlayer     = useGameStore((s) => s.loadPlayer)
+  const getSyncState   = useGameStore((s) => s.getSyncState)
+  const applySyncState = useGameStore((s) => s.applySyncState)
   const { user, loading, init } = useAuthStore()
 
-  const playerRef   = useRef(player)
-  playerRef.current = player
   const debounceRef = useRef(null)
   const readyRef    = useRef(false)
   // snapshot terakhir yang sudah sinkron dengan server — anti echo-loop
@@ -56,10 +48,10 @@ export default function App() {
     readyRef.current = false
     loadSave().then((cloud) => {
       if (cloud) {
-        loadPlayer(cloud)
+        applySyncState(cloud)
         lastSyncRef.current = snap(cloud)
       } else {
-        const local = playerRef.current
+        const local = getSyncState()
         syncSave(local)
         lastSyncRef.current = snap(local)
       }
@@ -67,15 +59,16 @@ export default function App() {
     })
   }, [user?.username, hydrated])
 
-  // Sync tiap player berubah (debounce 800ms) — skip kalau sama dgn snapshot terakhir
+  // Sync tiap state berubah (debounce 800ms) — skip kalau sama dgn snapshot terakhir
   useEffect(() => {
     if (!user || !readyRef.current) return
-    const cur = snap(playerRef.current)
+    const cur = snap(getSyncState())
     if (cur === lastSyncRef.current) return // ga ada perubahan riil / baru terima remote
     if (debounceRef.current) clearTimeout(debounceRef.current)
     debounceRef.current = setTimeout(() => {
-      lastSyncRef.current = snap(playerRef.current)
-      syncSave(playerRef.current)
+      const gs = getSyncState()
+      lastSyncRef.current = snap(gs)
+      syncSave(gs)
     }, 800)
     return () => clearTimeout(debounceRef.current)
   }, [player, user?.username])
@@ -85,9 +78,9 @@ export default function App() {
     if (!user) return
     const unsub = subscribeSave((cloud) => {
       const incoming = snap(cloud)
-      if (incoming === snap(playerRef.current)) return // sudah sama
+      if (incoming === snap(getSyncState())) return // sudah sama
       lastSyncRef.current = incoming // tandai biar ga di-push balik (anti echo)
-      loadPlayer(cloud)
+      applySyncState(cloud)
     })
     return unsub
   }, [user?.username])
@@ -95,7 +88,7 @@ export default function App() {
   // Sync saat tab ditutup
   useEffect(() => {
     if (!user) return
-    const onUnload = () => syncSave(playerRef.current)
+    const onUnload = () => syncSave(getSyncState())
     window.addEventListener('beforeunload', onUnload)
     return () => window.removeEventListener('beforeunload', onUnload)
   }, [user?.username])
