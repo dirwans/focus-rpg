@@ -29,34 +29,29 @@ export default function TransparentSprite({ src, alt, size = 120, glowColor = '#
         const W = canvas.width
         const H = canvas.height
         
-        // 1. Force outer 6% edge transparent to completely erase hard border frames
+        // Check if the image already has transparent pixels (e.g., PNG with transparency)
+        let hasTransparency = false
+        for (let i = 0; i < W * H; i++) {
+          if (data[i * 4 + 3] < 150) {
+            hasTransparency = true
+            break
+          }
+        }
+
         const borderThreshX = Math.floor(W * 0.06)
         const borderThreshY = Math.floor(H * 0.06)
-        
-        for (let y = 0; y < H; y++) {
-          for (let x = 0; x < W; x++) {
-            if (x < borderThreshX || x > (W - borderThreshX) || y < borderThreshY || y > (H - borderThreshY)) {
-              const idx = (y * W + x) * 4
-              data[idx + 3] = 0 // force transparent
-            }
-          }
-        }
-
-        // Check if the image already has transparent pixels (e.g., PNG with transparency)
-        // We check the source pixels (excluding the 6% edge we forced transparent in step 1)
-        let hasTransparency = false
-        for (let y = borderThreshY; y < H - borderThreshY; y++) {
-          for (let x = borderThreshX; x < W - borderThreshX; x++) {
-            const idx = (y * W + x) * 4
-            if (data[idx + 3] < 150) { // Alpha is semi-transparent or fully transparent
-              hasTransparency = true
-              break
-            }
-          }
-          if (hasTransparency) break
-        }
 
         if (!hasTransparency) {
+          // 1. Force outer 6% edge transparent to completely erase hard border frames
+          for (let y = 0; y < H; y++) {
+            for (let x = 0; x < W; x++) {
+              if (x < borderThreshX || x > (W - borderThreshX) || y < borderThreshY || y > (H - borderThreshY)) {
+                const idx = (y * W + x) * 4
+                data[idx + 3] = 0 // force transparent
+              }
+            }
+          }
+
           // 2. Queue-based Flood Fill (BFS) to remove background while keeping the body solid
           const queue = []
           const visited = new Uint8Array(W * H)
