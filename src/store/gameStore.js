@@ -230,6 +230,21 @@ export const useGameStore = create(
         }))
       },
 
+      reclassJob: (jobId, cost = 5000) => {
+        set((s) => ({
+          player: {
+            ...s.player,
+            job: jobId,
+            resources: {
+              ...s.player.resources,
+              anium: Math.max(0, s.player.resources.anium - cost),
+            },
+            savedAt: Date.now(),
+          },
+        }))
+      },
+
+
       // ── Timer ────────────────────────────────────────────
       setTimerMinutes: (min) => {
         const { timer } = get()

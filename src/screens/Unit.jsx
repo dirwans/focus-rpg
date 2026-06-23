@@ -17,6 +17,8 @@ function getJobInfo(raceId, jobId) {
   return { tier: 0, job: null }
 }
 
+const RECLASS_COST = 5000
+
 // Reusable accordion section
 function AccordionSection({ label, raceClass, defaultOpen = false, children }) {
   const [open, setOpen] = useState(defaultOpen)
@@ -46,8 +48,10 @@ export default function Unit() {
   const openRaceSelect = useGameStore((s) => s.openRaceSelect)
   const defectRace = useGameStore((s) => s.defectRace)
   const selectJob = useGameStore((s) => s.selectJob)
+  const reclassJob = useGameStore((s) => s.reclassJob)
 
   const [showPromo, setShowPromo] = useState(false)
+  const [showReclass, setShowReclass] = useState(false)
 
   const stats = getStats()
   const expMax = getExpToNext()
@@ -60,6 +64,22 @@ export default function Unit() {
     (tier === 1 && player.level >= 30) ||
     (tier === 2 && player.level >= 50)
   )
+
+  // Reclass: ganti job dalam tier yang sama, hanya jika sudah punya job (tier >= 1)
+  const canReclass = tier >= 1 && player.resources.anium >= RECLASS_COST
+  const sameTierJobs = () => {
+    if (!player.race || !jobs[player.race]) return []
+    if (tier === 1) return jobs[player.race].tier1
+    if (tier === 2) return jobs[player.race].tier2
+    if (tier === 3) return jobs[player.race].tier3
+    return []
+  }
+
+  const handleReclass = (jobId) => {
+    if (jobId === player.job) { setShowReclass(false); return }
+    reclassJob(jobId, RECLASS_COST)
+    setShowReclass(false)
+  }
 
   const getAvailableJobs = () => {
     if (!player.race || !jobs[player.race]) return []
@@ -92,11 +112,22 @@ export default function Unit() {
           </div>
           <div style={styles.sub}>{job ? job.name : (race ? race.name : 'Not selected')} · LV.{player.level}</div>
         </div>
-        {!player.race ? (
-          <button style={styles.actionBtn('#00e5ff', '#0050cc')} onClick={openRaceSelect}>SELECT RACE</button>
-        ) : eligibleForPromo ? (
-          <button style={{ ...styles.actionBtn('#ffe500', '#cc8000'), animation: 'pulse 1.5s infinite' }} onClick={() => setShowPromo(true)}>PROMOTE</button>
-        ) : null}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 6, alignItems: 'flex-end' }}>
+          {!player.race ? (
+            <button style={styles.actionBtn('#00e5ff', '#0050cc')} onClick={openRaceSelect}>SELECT RACE</button>
+          ) : eligibleForPromo ? (
+            <button style={{ ...styles.actionBtn('#ffe500', '#cc8000'), animation: 'pulse 1.5s infinite' }} onClick={() => setShowPromo(true)}>PROMOTE</button>
+          ) : null}
+          {tier >= 1 && (
+            <button
+              style={canReclass ? styles.actionBtn('#bb88ff', '#6600cc') : { ...styles.actionBtn('#555', '#333'), cursor: 'not-allowed', opacity: 0.5 }}
+              onClick={() => canReclass && setShowReclass(true)}
+              title={canReclass ? `Ganti job (${RECLASS_COST.toLocaleString()} Anium)` : `Butuh ${RECLASS_COST.toLocaleString()} Anium`}
+            >
+              🔄 RECLASS
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Resources */}
@@ -243,8 +274,8 @@ export default function Unit() {
       {showPromo && (
         <div style={styles.modalOverlay}>
           <div className={`glass-panel cyber-panel ${raceClass}`} style={styles.modalBox}>
-            <h2 style={styles.modalTitle}>JOB PROMOTION</h2>
-            <p style={styles.modalDesc}>Select your class path carefully. Each job provides unique stat bonuses.</p>
+            <h2 style={styles.modalTitle}>⬆️ JOB PROMOTION</h2>
+            <p style={styles.modalDesc}>Pilih class path dengan hati-hati. Setiap job memberi bonus stat unik.</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 15 }}>
               {getAvailableJobs().map(j => (
                 <button key={j.id} style={styles.jobBtn} onClick={() => handlePromote(j.id)}>
@@ -257,6 +288,45 @@ export default function Unit() {
               ))}
             </div>
             <button style={{ ...styles.actionBtn('#00e5ff', '#0050cc'), marginTop: 15, width: '100%' }} onClick={() => setShowPromo(false)}>CANCEL</button>
+          </div>
+        </div>
+      )}
+
+      {/* Reclass Modal */}
+      {showReclass && (
+        <div style={styles.modalOverlay}>
+          <div className={`glass-panel cyber-panel ${raceClass}`} style={styles.modalBox}>
+            <h2 style={styles.modalTitle}>🔄 RECLASS JOB</h2>
+            <p style={styles.modalDesc}>
+              Ganti job dalam tier yang sama. Biaya:{' '}
+              <span style={{ color: '#f5a623', fontWeight: 800 }}>{RECLASS_COST.toLocaleString()} ⬡ Anium</span>
+            </p>
+            <p style={{ textAlign: 'center', fontSize: 12, color: '#6a9ab8', margin: '4px 0 12px' }}>
+              Job aktif: <span style={{ color: '#00e5ff', fontWeight: 800 }}>{job?.name}</span>
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              {sameTierJobs().map(j => (
+                <button
+                  key={j.id}
+                  style={j.id === player.job
+                    ? { ...styles.jobBtn, border: '1px solid #bb88ff', background: 'rgba(100,0,200,0.2)' }
+                    : styles.jobBtn
+                  }
+                  onClick={() => handleReclass(j.id)}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div style={{ fontWeight: 'bold', fontSize: 15, color: j.id === player.job ? '#bb88ff' : '#00e5ff' }}>
+                      {j.name} {j.id === player.job ? '✓ AKTIF' : ''}
+                    </div>
+                  </div>
+                  <div style={{ fontSize: 13, color: '#ccc', marginBottom: 4, lineHeight: 1.4 }}>{j.desc}</div>
+                  <div style={{ fontSize: 13, color: '#ff8c40', fontWeight: 'bold' }}>
+                    +{j.bonus.hp} HP | +{j.bonus.atk} ATK | +{j.bonus.def} DEF
+                  </div>
+                </button>
+              ))}
+            </div>
+            <button style={{ ...styles.actionBtn('#888', '#333'), marginTop: 15, width: '100%' }} onClick={() => setShowReclass(false)}>CANCEL</button>
           </div>
         </div>
       )}
