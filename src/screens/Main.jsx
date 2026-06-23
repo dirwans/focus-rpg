@@ -42,6 +42,7 @@ export default function Main() {
   const [isCritHit, setIsCritHit] = useState(false)
   const [isEnemyHit, setIsEnemyHit] = useState(false)
   const lastHpRef = useRef(battle.enemyHp)
+  const lastPlayerHpRef = useRef(battle.playerHp)
 
   // Trigger floating damage popup
   const spawnDamage = (amount, isCrit) => {
@@ -51,7 +52,8 @@ export default function Main() {
       text: isCrit ? `💥-${amount}` : `-${amount}`,
       x: 55 + Math.random() * 15,
       y: 35 + Math.random() * 15,
-      isCrit
+      isCrit,
+      isPlayerDmg: false
     }
     setParticles((prev) => [...prev, newP])
     setTimeout(() => {
@@ -87,6 +89,32 @@ export default function Main() {
 
     lastHpRef.current = currentHp
   }, [battle.enemyHp, isRunning, battle.currentMob])
+
+  // Monitor player damage events
+  useEffect(() => {
+    if (!isRunning || battle.playerHp === undefined) return
+
+    const currentHp = battle.playerHp
+    const prevHp = lastPlayerHpRef.current
+
+    if (currentHp > 0 && currentHp < prevHp) {
+      const diff = prevHp - currentHp
+      const id = Math.random().toString()
+      const newP = {
+        id,
+        text: `💥-${diff}`,
+        x: 18 + Math.random() * 12,
+        y: 35 + Math.random() * 15,
+        isPlayerDmg: true
+      }
+      setParticles((prev) => [...prev, newP])
+      setTimeout(() => {
+        setParticles((prev) => prev.filter((p) => p.id !== id))
+      }, 800)
+    }
+
+    lastPlayerHpRef.current = currentHp
+  }, [battle.playerHp, isRunning])
 
   // Confirm Abandon Session
   const handleAbandon = () => {
@@ -218,7 +246,12 @@ export default function Main() {
                 style={{
                   left: `${p.x}%`,
                   top: `${p.y - 12}%`,
-                  textShadow: p.isCrit ? '0 0 10px #ff3131, 0 0 20px #ff0000' : '0 0 8px var(--neon-glow)'
+                  color: p.isPlayerDmg ? '#ff4444' : '#fff',
+                  textShadow: p.isPlayerDmg 
+                    ? '0 0 8px #ff0033, 0 0 15px #ff0000' 
+                    : p.isCrit 
+                    ? '0 0 10px #ff3131, 0 0 20px #ff0000' 
+                    : '0 0 8px var(--neon-glow)'
                 }}
               >
                 {p.text}
