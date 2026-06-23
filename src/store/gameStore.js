@@ -414,9 +414,17 @@ export const useGameStore = create(
           return
         }
 
-        // 2. Passive FP regeneration (+10 FP per tick, capped at 200)
+        // 2. Passive FP regeneration (RF Online style based on Race)
+        let fpRegenRate = 12 // Default standard
+        if (player.race === 'coralis') {
+          fpRegenRate = 25 // Coralis: high magic affinity
+        } else if (player.race === 'belterra') {
+          fpRegenRate = 15 // Bellato: hybrid
+        } else if (player.race === 'acreton') {
+          fpRegenRate = 5  // Accretia: android, low natural flow
+        }
         const playerMaxFp = battle.playerMaxFp || 200
-        let nextPlayerFp = Math.min(playerMaxFp, (battle.playerFp ?? playerMaxFp) + 10)
+        let nextPlayerFp = Math.min(playerMaxFp, (battle.playerFp ?? playerMaxFp) + fpRegenRate)
 
         // 3. Player attacks enemy turn
         const playerAtk = get().getStats().atk
@@ -478,21 +486,22 @@ export const useGameStore = create(
                 if (newLog.length > 7) newLog = newLog.slice(-7)
                 newLog.push(`✨ [Skill] Pilot menggunakan ${skillName}! (+${healAmount} HP, -50 FP)`)
               } else {
-                // FP depleted -> fallback to auto-potion
-                const potionIdx = player.inventory.findIndex(item => item.id === 'pot_hp')
-                if (potionIdx !== -1) {
-                  const potion = player.inventory[potionIdx]
+                // FP depleted -> fallback to auto-potion using resources.potions
+                if ((player.resources.potions || 0) > 0) {
                   const healAmount = 1000
                   nextPlayerHp = Math.min(playerMaxHp, nextPlayerHp + healAmount)
+                  const remainingPotions = Math.max(0, player.resources.potions - 1)
                   
-                  const newInventory = player.inventory.filter((_, idx) => idx !== potionIdx)
                   if (newLog.length > 7) newLog = newLog.slice(-7)
-                  newLog.push(`🧪 [Auto-Potion] Menggunakan ${potion.name}! (+${healAmount} Shield HP)`)
+                  newLog.push(`🧪 [Auto-Potion] Menggunakan Potion! (+${healAmount} HP, Sisa: ${remainingPotions})`)
                   
                   set({
                     player: {
                       ...player,
-                      inventory: newInventory,
+                      resources: {
+                        ...player.resources,
+                        potions: remainingPotions
+                      },
                       savedAt: Date.now()
                     }
                   })
@@ -502,21 +511,22 @@ export const useGameStore = create(
                 }
               }
             } else {
-              // Direct auto-potion for non-healing jobs
-              const potionIdx = player.inventory.findIndex(item => item.id === 'pot_hp')
-              if (potionIdx !== -1) {
-                const potion = player.inventory[potionIdx]
+              // Direct auto-potion for non-healing jobs using resources.potions
+              if ((player.resources.potions || 0) > 0) {
                 const healAmount = 1000
                 nextPlayerHp = Math.min(playerMaxHp, nextPlayerHp + healAmount)
+                const remainingPotions = Math.max(0, player.resources.potions - 1)
                 
-                const newInventory = player.inventory.filter((_, idx) => idx !== potionIdx)
                 if (newLog.length > 7) newLog = newLog.slice(-7)
-                newLog.push(`🧪 [Auto-Potion] Menggunakan ${potion.name}! (+${healAmount} Shield HP)`)
+                newLog.push(`🧪 [Auto-Potion] Menggunakan Potion! (+${healAmount} Shield HP, Sisa: ${remainingPotions})`)
                 
                 set({
                   player: {
                     ...player,
-                    inventory: newInventory,
+                    resources: {
+                      ...player.resources,
+                      potions: remainingPotions
+                    },
                     savedAt: Date.now()
                   }
                 })
@@ -1001,6 +1011,26 @@ export const useGameStore = create(
             savedAt: Date.now()
           }
         })
+      },
+      buyPotions: (count = 10) => {
+        const { player } = get()
+        const cost = count * 20 // 20 Anium per potion
+        if ((player.resources.anium || 0) < cost) {
+          alert(`Not enough Anium! Required: ${cost} Anium.`)
+          return false
+        }
+        set((s) => ({
+          player: {
+            ...s.player,
+            resources: {
+              ...s.player.resources,
+              anium: s.player.resources.anium - cost,
+              potions: (s.player.resources.potions || 0) + count
+            },
+            savedAt: Date.now()
+          }
+        }))
+        return true
       },
       useItem: (uid) => {
         const { player, battle, timer } = get()

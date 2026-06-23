@@ -78,6 +78,38 @@ export default function Cargo() {
       <div style={styles.topBar}>
         <span style={styles.chip('#f5a623')}>⬡ {player.resources.anium.toLocaleString()}</span>
         <span style={styles.chip('#00e5ff')}>◈ {player.resources.credits}</span>
+        <span style={styles.chip('#ff4466')}>🧪 {player.resources.potions || 0}</span>
+        <button 
+          onClick={() => {
+            const buyPotions = useGameStore.getState().buyPotions
+            if (buyPotions(10)) {
+              alert("Successfully bought 10 Potions!")
+            }
+          }}
+          style={{
+            background: 'rgba(3, 8, 20, 0.8)',
+            border: '1px solid #ff4466',
+            borderRadius: 20,
+            padding: '6px 12px',
+            fontFamily: 'var(--font-mono)',
+            fontSize: 12,
+            fontWeight: 800,
+            color: '#ff4466',
+            cursor: 'pointer',
+            boxShadow: '0 0 10px rgba(255, 68, 102, 0.2)',
+            transition: 'all 0.2s',
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.background = '#ff4466'
+            e.target.style.color = '#000'
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.background = 'rgba(3, 8, 20, 0.8)'
+            e.target.style.color = '#ff4466'
+          }}
+        >
+          +10 (200⬡)
+        </button>
         <span style={styles.slots}>📦 {player.inventory.length}/50</span>
       </div>
 
