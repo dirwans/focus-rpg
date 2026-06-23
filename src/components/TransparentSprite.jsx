@@ -74,12 +74,11 @@ export default function TransparentSprite({ src, alt, size = 120, glowColor = '#
           const g = data[pixelIdx+1]
           const b = data[pixelIdx+2]
           
-          // Check if this pixel is background (black background, or purple/grey border remnants)
-          const isBlackBg = r < 60 && g < 60 && b < 60
-          const isPurpleFrame = (r > 30 && b > 30 && g < 100 && Math.abs(r - b) < 80)
-          const isGreyFrame = Math.abs(r - g) < 15 && Math.abs(g - b) < 15 && r < 80
+          // Check if this pixel is background (black background, or green chroma key background)
+          const isBlackBg = r < 20 && g < 20 && b < 20
+          const isGreenBg = Math.abs(r - 71) < 15 && Math.abs(g - 112) < 15 && Math.abs(b - 76) < 15
           
-          if (isBlackBg || isPurpleFrame || isGreyFrame) {
+          if (isBlackBg || isGreenBg) {
             data[pixelIdx + 3] = 0 // transparent
             
             // Push 4 neighbors
