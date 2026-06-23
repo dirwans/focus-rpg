@@ -108,7 +108,7 @@ export default function TransparentSprite({ src, alt, size = 120, glowColor = '#
   const isFallback = displaySrc === src
 
   return (
-    <div style={{ width: size, height: size, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'visible', filter: isFallback ? 'none' : `drop-shadow(0 0 5px ${glowColor})`, flexShrink: 0 }}>
+    <div style={{ width: size, height: size, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'visible', filter: 'none', flexShrink: 0 }}>
       {displaySrc && (
         <img 
           src={displaySrc} 

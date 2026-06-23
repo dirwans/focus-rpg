@@ -15,7 +15,7 @@ export function AcretonSprite({ size = 60 }) {
 
 export function BelterraSprite({ size = 60 }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 16 16" className="pixel-art" style={{ filter: 'drop-shadow(0 0 8px #00e5ff)', flexShrink: 0 }}>
+    <svg width={size} height={size} viewBox="0 0 16 16" className="pixel-art" style={{ flexShrink: 0 }}>
       {/* Head / Helmet */}
       <rect x="5" y="2" width="6" height="5" fill="#3b82f6" />
       <rect x="4" y="3" width="1" height="3" fill="#eab308" />
@@ -63,7 +63,7 @@ export function EnemySprite({ size = 60, isBoss = false, isPitBoss = false }) {
     eyeColor = '#ff0000'
   }
   return (
-    <svg width={size} height={size} viewBox="0 0 16 16" className="pixel-art" style={{ filter: `drop-shadow(0 0 8px ${color})` }}>
+    <svg width={size} height={size} viewBox="0 0 16 16" className="pixel-art">
       {/* Horns */}
       <rect x="3" y="1" width="2" height="3" fill={color} />
       <rect x="11" y="1" width="2" height="3" fill={color} />
