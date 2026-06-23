@@ -611,29 +611,50 @@ export const useGameStore = create(
         // Item drop deterministik berdasar sistem Rarity
         const newInventory = [...player.inventory]
         let dropLog = ''
+
+        // Stage saat sesi berlangsung (untuk gate loot berdasar minStage)
+        const fightSector = getSector(player.level)
+
+        // Elite monster: 15% chance muncul di stage 5+ saat mode fight
+        // Kalau ada elite → drop tier naik 1 level (seperti Stage Boss)
+        const eliteRoll = seededFrac(timer.startedAt * 7 + 13)
+        const killedElite = timer.mode === 'fight' && fightSector >= 5 && eliteRoll < 0.15 && finalKills > 0
         
-        // Cek apa bos mati (finalKills > 0)
+        // Cek apakah boss mati (finalKills > 0)
         const killedPitBoss = timer.mode === 'fight' && battle.isPitBoss && finalKills > 0
         const killedStageBoss = timer.mode === 'fight' && battle.isBoss && !battle.isPitBoss && finalKills > 0
+
+        // Elite memperlakukan dirinya seperti Stage Boss untuk drop (tapi bukan Pit Boss)
+        const effectiveStageBoss = killedStageBoss || killedElite
         
-        // Jumlah drop item: 1 item per session, tapi kalau gathering bisa 2 material
-        const numDrops = timer.mode === 'gather' ? 2 : 1
+        // Jumlah drop item: 1 item per session, gathering 2 material, elite/boss bisa 2
+        const numDrops = timer.mode === 'gather' ? 2 : (killedPitBoss || killedElite ? 2 : 1)
+
+        if (killedElite) {
+            dropLog += `\n⚡ ELITE MONSTER appeared! Bonus drop!`
+        }
         
         for (let i=0; i<numDrops; i++) {
             const seed = timer.startedAt + i
-            const tier = getDropTier(seed, timer.mode, killedPitBoss, killedStageBoss)
+            const tier = getDropTier(seed, timer.mode, killedPitBoss, effectiveStageBoss)
             
             if (tier) {
                 let pool = []
                 if (tier === 'material') {
-                    pool = itemsData.items.filter(it => it.type === 'material' || it.type === 'consumable')
+                    // Material juga digate berdasar minStage
+                    pool = itemsData.items.filter(it =>
+                      (it.type === 'material' || it.type === 'consumable') &&
+                      (it.minStage === undefined || it.minStage <= fightSector)
+                    )
                 } else {
                     pool = itemsData.items.filter(it => 
                       (it.type === 'weapon' || it.type === 'armor' || it.type === 'shield' || it.type === 'helmet' || it.type === 'mantle' || it.type === 'gloves' || it.type === 'boots') &&
                       it.rarity === tier &&
                       (it.race === 'All' || it.race === player.race) &&
                       it.level <= player.level + 10 &&
-                      (it.type !== 'weapon' || !it.job || it.job === player.job)
+                      (it.type !== 'weapon' || !it.job || it.job === player.job) &&
+                      // ── STAGE GATE: item hanya bisa drop kalau stage cukup tinggi
+                      (it.minStage === undefined || it.minStage <= fightSector)
                     )
                 }
                 
