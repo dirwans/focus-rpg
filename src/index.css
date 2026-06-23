@@ -4,7 +4,7 @@
   --bg-darkest: #03060f;
   --bg-darker: #060c18;
   --bg-dark: #0a142c;
-  --bg-glass: linear-gradient(180deg, rgba(14, 23, 44, 0.9) 0%, rgba(6, 12, 24, 0.95) 100%);
+  --bg-glass: linear-gradient(180deg, rgba(14, 23, 44, 0.8) 0%, rgba(6, 12, 24, 0.9) 100%);
   
   --neon-cyan: #00e5ff;
   --neon-orange: #ff8c00;
@@ -19,6 +19,32 @@
   --font-title: 'Orbitron', sans-serif;
   --font-body: 'Rajdhani', sans-serif;
   --font-mono: 'Share Tech Mono', monospace;
+
+  /* Default theme values */
+  --bg-color: #03060f;
+  --neon-glow: #00e5ff;
+  --grid-color: rgba(0, 229, 255, 0.15);
+}
+
+:root[data-faction="acreton"] {
+  --bg-color: #1e1e1e;
+  --neon-glow: #ff6400;
+  --grid-color: rgba(255, 100, 0, 0.15);
+  --border-neon: rgba(255, 100, 0, 0.35);
+}
+
+:root[data-faction="belterra"] {
+  --bg-color: #08102a;
+  --neon-glow: #00e5ff;
+  --grid-color: rgba(0, 229, 255, 0.15);
+  --border-neon: rgba(0, 229, 255, 0.35);
+}
+
+:root[data-faction="coralis"] {
+  --bg-color: #12061e;
+  --neon-glow: #d000ff;
+  --grid-color: rgba(208, 0, 255, 0.15);
+  --border-neon: rgba(208, 0, 255, 0.35);
 }
 
 * {
@@ -153,35 +179,35 @@ body {
 }
 
 /* Faction themed overrides */
-.panel-accretia {
+.panel-acreton {
   border-color: rgba(255, 140, 0, 0.45) !important;
   box-shadow: 0 0 15px rgba(255, 140, 0, 0.15), inset 0 0 10px rgba(255, 140, 0, 0.08) !important;
 }
-.panel-accretia::before { border-top-color: var(--neon-orange) !important; border-left-color: var(--neon-orange) !important; }
-.panel-accretia::after { border-bottom-color: var(--neon-orange) !important; border-right-color: var(--neon-orange) !important; }
-.panel-accretia:hover {
+.panel-acreton::before { border-top-color: var(--neon-orange) !important; border-left-color: var(--neon-orange) !important; }
+.panel-acreton::after { border-bottom-color: var(--neon-orange) !important; border-right-color: var(--neon-orange) !important; }
+.panel-acreton:hover {
   border-color: rgba(255, 140, 0, 0.7) !important;
   box-shadow: 0 0 25px rgba(255, 140, 0, 0.25), inset 0 0 15px rgba(255, 140, 0, 0.12) !important;
 }
 
-.panel-bellato {
+.panel-belterra {
   border-color: rgba(0, 229, 255, 0.45) !important;
   box-shadow: 0 0 15px rgba(0, 229, 255, 0.15), inset 0 0 10px rgba(0, 229, 255, 0.08) !important;
 }
-.panel-bellato::before { border-top-color: var(--neon-cyan) !important; border-left-color: var(--neon-cyan) !important; }
-.panel-bellato::after { border-bottom-color: var(--neon-cyan) !important; border-right-color: var(--neon-cyan) !important; }
-.panel-bellato:hover {
+.panel-belterra::before { border-top-color: var(--neon-cyan) !important; border-left-color: var(--neon-cyan) !important; }
+.panel-belterra::after { border-bottom-color: var(--neon-cyan) !important; border-right-color: var(--neon-cyan) !important; }
+.panel-belterra:hover {
   border-color: rgba(0, 229, 255, 0.7) !important;
   box-shadow: 0 0 25px rgba(0, 229, 255, 0.25), inset 0 0 15px rgba(0, 229, 255, 0.12) !important;
 }
 
-.panel-cora {
+.panel-coralis {
   border-color: rgba(208, 0, 255, 0.45) !important;
   box-shadow: 0 0 15px rgba(208, 0, 255, 0.15), inset 0 0 10px rgba(208, 0, 255, 0.08) !important;
 }
-.panel-cora::before { border-top-color: var(--neon-purple) !important; border-left-color: var(--neon-purple) !important; }
-.panel-cora::after { border-bottom-color: var(--neon-purple) !important; border-right-color: var(--neon-purple) !important; }
-.panel-cora:hover {
+.panel-coralis::before { border-top-color: var(--neon-purple) !important; border-left-color: var(--neon-purple) !important; }
+.panel-coralis::after { border-bottom-color: var(--neon-purple) !important; border-right-color: var(--neon-purple) !important; }
+.panel-coralis:hover {
   border-color: rgba(208, 0, 255, 0.7) !important;
   box-shadow: 0 0 25px rgba(208, 0, 255, 0.25), inset 0 0 15px rgba(208, 0, 255, 0.12) !important;
 }
@@ -347,4 +373,242 @@ body {
     border-radius: 0;
     box-shadow: none;
   }
+}
+
+/* ------------------------------------------------ */
+/* BACKGROUND PARALLAX NEBULA (HD-Anime Vibe)       */
+/* ------------------------------------------------ */
+.parallax-bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 150%;
+  height: 150%;
+  background: url('/assets/hd-space-nebula.jpg') no-repeat center center;
+  background-size: cover;
+  animation: slowPan 40s linear infinite alternate;
+  z-index: 0;
+  opacity: 0.22;
+  pointer-events: none;
+}
+
+@keyframes slowPan {
+  0% { transform: translate(-10%, -10%); }
+  100% { transform: translate(0%, 0%); }
+}
+
+/* ------------------------------------------------ */
+/* GLASSMORPHISM PANELS                             */
+/* ------------------------------------------------ */
+.glass-panel {
+  background: rgba(6, 12, 28, 0.45) !important;
+  backdrop-filter: blur(20px) saturate(220%);
+  -webkit-backdrop-filter: blur(20px) saturate(220%);
+  border: 1.5px solid var(--border-neon) !important;
+  border-radius: 16px;
+  box-shadow: 
+    0 8px 32px 0 rgba(0, 0, 0, 0.7),
+    inset 0 1px 2.5px rgba(255, 255, 255, 0.25),
+    inset 0 0 12px var(--border-neon),
+    0 0 25px var(--border-neon);
+  position: relative;
+  overflow: hidden;
+
+  /* Holographic Scanline Overlay & Grid */
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 50%, rgba(0, 0, 0, 0.25) 50%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.01) 50%, rgba(0, 0, 0, 0.08) 50%);
+  background-size: 100% 4px, 4px 100%;
+}
+
+/* Shimmer shine animation across panels */
+.glass-panel::after {
+  content: "";
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(45deg);
+  animation: shimmerEffect 6s infinite linear;
+  pointer-events: none;
+}
+
+@keyframes shimmerEffect {
+  0% { transform: translateX(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) rotate(45deg); }
+}
+
+.panel-acreton.glass-panel { 
+  border-color: rgba(255, 100, 0, 0.65) !important; 
+  box-shadow: 
+    0 8px 32px 0 rgba(0, 0, 0, 0.7), 
+    inset 0 1px 2.5px rgba(255, 255, 255, 0.25), 
+    inset 0 0 12px rgba(255, 100, 0, 0.3),
+    0 0 25px rgba(255, 100, 0, 0.5) !important; 
+}
+.panel-belterra.glass-panel { 
+  border-color: rgba(0, 229, 255, 0.65) !important; 
+  box-shadow: 
+    0 8px 32px 0 rgba(0, 0, 0, 0.7), 
+    inset 0 1px 2.5px rgba(255, 255, 255, 0.25), 
+    inset 0 0 12px rgba(0, 229, 255, 0.3),
+    0 0 25px rgba(0, 229, 255, 0.5) !important; 
+}
+.panel-coralis.glass-panel { 
+  border-color: rgba(208, 0, 255, 0.65) !important; 
+  box-shadow: 
+    0 8px 32px 0 rgba(0, 0, 0, 0.7), 
+    inset 0 1px 2.5px rgba(255, 255, 255, 0.25), 
+    inset 0 0 12px rgba(208, 0, 255, 0.3),
+    0 0 25px rgba(208, 0, 255, 0.5) !important; 
+}
+
+/* ------------------------------------------------ */
+/* ORB TIMER & COMBAT EFFECTS                       */
+/* ------------------------------------------------ */
+.orb-timer {
+  border: 4px solid var(--neon-glow);
+  border-radius: 50%;
+  background: rgba(3, 8, 20, 0.85);
+  box-shadow: 0 0 15px var(--neon-glow), inset 0 0 15px var(--neon-glow);
+  animation: heartbeatPulse 2s infinite ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+@keyframes heartbeatPulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 12px var(--neon-glow), inset 0 0 8px var(--neon-glow); }
+  50% { transform: scale(1.03); box-shadow: 0 0 24px var(--neon-glow), inset 0 0 16px var(--neon-glow); }
+}
+
+@keyframes spritePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+
+.damage-particle {
+  position: absolute;
+  color: #fff;
+  font-family: var(--font-title);
+  font-size: 20px;
+  font-weight: 900;
+  text-shadow: 0 0 8px #ff2222, 0 0 12px #ff0000;
+  animation: floatUpFade 1.2s forwards cubic-bezier(0.25, 0.8, 0.25, 1);
+  pointer-events: none;
+  z-index: 10;
+}
+
+@keyframes floatUpFade {
+  0% { transform: translateY(0) scale(0.8); opacity: 1; }
+  30% { transform: translateY(-15px) scale(1.2); opacity: 1; }
+  100% { transform: translateY(-60px) scale(1.4); opacity: 0; }
+}
+
+.screen-shake {
+  animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-2px, 0, 0); }
+  20%, 80% { transform: translate3d(3px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+.hit-flash {
+  animation: flashWhite 0.25s ease-out;
+}
+
+@keyframes flashWhite {
+  0% { filter: brightness(1) contrast(1); }
+  50% { filter: brightness(2.5) contrast(1.3); }
+  100% { filter: brightness(1) contrast(1); }
+}
+
+.pixel-art {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+/* ------------------------------------------------ */
+/* CARGO ISOMETRIC HUMANOID GEAR GRID               */
+/* ------------------------------------------------ */
+.humanoid-gear-grid {
+  display: grid;
+  grid-template-areas:
+    ".       helmet  .      "
+    "weapon  armor   shield "
+    "mantle  gloves  .      "
+    ".       boots   .      ";
+  grid-template-columns: 1fr 1.2fr 1fr;
+  gap: 12px;
+  max-width: 340px;
+  margin: 0 auto;
+  padding: 10px 0;
+}
+
+.gear-slot-wrapper {
+  background: rgba(3, 8, 20, 0.65);
+  border: 1.5px solid #1a3a6a;
+  border-radius: 10px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 86px;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.gear-slot-wrapper:hover {
+  border-color: var(--neon-glow);
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+}
+
+.gear-slot-filled {
+  border-width: 2px;
+}
+
+/* ------------------------------------------------ */
+/* SPECIAL EFFECTS & ANIMATIONS                     */
+/* ------------------------------------------------ */
+.spark-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background-color: #00e5ff;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #00e5ff, 0 0 10px #00e5ff;
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0;
+  animation: sparkExplosion 0.8s ease-out forwards;
+}
+
+@keyframes sparkExplosion {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.hologram-crystal {
+  animation: crystalPulse 3s infinite ease-in-out;
+  transform-origin: bottom center;
+}
+
+@keyframes crystalPulse {
+  0%, 100% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.04); filter: brightness(1.3); }
+}
+
+@keyframes rotateClockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
