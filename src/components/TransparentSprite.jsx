@@ -12,7 +12,10 @@ export default function TransparentSprite({ src, alt, size = 120, glowColor = '#
       : src
 
     const img = new Image()
-    // Do not set crossOrigin for same-origin or data URLs to avoid canvas CORS errors
+    if (isRemote) {
+      img.crossOrigin = 'anonymous'
+    }
+    
     img.onload = () => {
       const canvas = document.createElement('canvas')
       canvas.width = img.naturalWidth || img.width
@@ -86,6 +89,44 @@ export default function TransparentSprite({ src, alt, size = 120, glowColor = '#
             if (x + 1 < W - borderThreshX) pushPixel(x + 1, y)
             if (y - 1 >= borderThreshY) pushPixel(x, y - 1)
             if (y + 1 < H - borderThreshY) pushPixel(x, y + 1)
+          }
+        }
+
+        // 3. Draw a 2px solid black outline outside the removed background boundaries
+        const originalAlpha = new Uint8Array(W * H)
+        for (let i = 0; i < W * H; i++) {
+          originalAlpha[i] = data[i * 4 + 3]
+        }
+        
+        const outlineWidth = 2
+        for (let y = 0; y < H; y++) {
+          for (let x = 0; x < W; x++) {
+            const idx = y * W + x
+            if (originalAlpha[idx] === 0) {
+              let hasSolidNeighbor = false
+              for (let dy = -outlineWidth; dy <= outlineWidth; dy++) {
+                for (let dx = -outlineWidth; dx <= outlineWidth; dx++) {
+                  const nx = x + dx
+                  const ny = y + dy
+                  if (nx >= 0 && nx < W && ny >= 0 && ny < H) {
+                    const nIdx = ny * W + nx
+                    if (originalAlpha[nIdx] > 0) {
+                      hasSolidNeighbor = true
+                      break
+                    }
+                  }
+                }
+                if (hasSolidNeighbor) break
+              }
+              
+              if (hasSolidNeighbor) {
+                const pixelIdx = idx * 4
+                data[pixelIdx] = 0     // R
+                data[pixelIdx + 1] = 0 // G
+                data[pixelIdx + 2] = 0 // B
+                data[pixelIdx + 3] = 255 // A (solid black outline)
+              }
+            }
           }
         }
 
