@@ -26,46 +26,70 @@ export default function TransparentSprite({ src, alt, size = 120, glowColor = '#
         const W = canvas.width
         const H = canvas.height
         
-        // 6% outer border thresh to completely clear hard border frames
-        const borderThreshX = W * 0.06
-        const borderThreshY = H * 0.06
+        // 1. Force outer 6% edge transparent to completely erase hard border frames
+        const borderThreshX = Math.floor(W * 0.06)
+        const borderThreshY = Math.floor(H * 0.06)
         
-        // 28% margin zone for relaxed black/purple/grey keying
-        const marginX = W * 0.28
-        const marginY = H * 0.28
-
         for (let y = 0; y < H; y++) {
           for (let x = 0; x < W; x++) {
-            const idx = (y * W + x) * 4
-            const r = data[idx]
-            const g = data[idx+1]
-            const b = data[idx+2]
-
-            // 1. Force outer 6% edge transparent to erase any border boxes
             if (x < borderThreshX || x > (W - borderThreshX) || y < borderThreshY || y > (H - borderThreshY)) {
-              data[idx+3] = 0
-              continue
-            }
-
-            const isBorderZone = x < marginX || x > (W - marginX) || y < marginY || y > (H - marginY)
-
-            if (isBorderZone) {
-              // Key out black background, purple/pink frames, or grey frames
-              const isBlack = r < 55 && g < 55 && b < 55
-              const isPurple = (r > 30 && b > 30 && g < 100 && Math.abs(r - b) < 80)
-              const isGrey = Math.abs(r - g) < 15 && Math.abs(g - b) < 15 && r < 80
-              if (isBlack || isPurple || isGrey) {
-                data[idx+3] = 0 // transparent
-              }
-            } else {
-              // Center zone: only key out black background
-              const isBlack = r < 25 && g < 25 && b < 25
-              if (isBlack) {
-                data[idx+3] = 0 // transparent
-              }
+              const idx = (y * W + x) * 4
+              data[idx + 3] = 0 // force transparent
             }
           }
         }
+
+        // 2. Queue-based Flood Fill (BFS) to remove background while keeping the body solid
+        const queue = []
+        const visited = new Uint8Array(W * H)
+        
+        const pushPixel = (x, y) => {
+          if (x < borderThreshX || x >= W - borderThreshX || y < borderThreshY || y >= H - borderThreshY) return
+          const idx = y * W + x
+          if (!visited[idx]) {
+            visited[idx] = 1
+            queue.push(idx)
+          }
+        }
+        
+        // Seed the queue with all pixels along the new boundary
+        for (let x = borderThreshX; x < W - borderThreshX; x++) {
+          pushPixel(x, borderThreshY)
+          pushPixel(x, H - borderThreshY - 1)
+        }
+        for (let y = borderThreshY; y < H - borderThreshY; y++) {
+          pushPixel(borderThreshX, y)
+          pushPixel(W - borderThreshX - 1, y)
+        }
+
+        // Run BFS
+        let qHead = 0
+        while (qHead < queue.length) {
+          const idx = queue[qHead++]
+          const x = idx % W
+          const y = Math.floor(idx / W)
+          
+          const pixelIdx = idx * 4
+          const r = data[pixelIdx]
+          const g = data[pixelIdx+1]
+          const b = data[pixelIdx+2]
+          
+          // Check if this pixel is background (black background, or purple/grey border remnants)
+          const isBlackBg = r < 60 && g < 60 && b < 60
+          const isPurpleFrame = (r > 30 && b > 30 && g < 100 && Math.abs(r - b) < 80)
+          const isGreyFrame = Math.abs(r - g) < 15 && Math.abs(g - b) < 15 && r < 80
+          
+          if (isBlackBg || isPurpleFrame || isGreyFrame) {
+            data[pixelIdx + 3] = 0 // transparent
+            
+            // Push 4 neighbors
+            if (x - 1 >= borderThreshX) pushPixel(x - 1, y)
+            if (x + 1 < W - borderThreshX) pushPixel(x + 1, y)
+            if (y - 1 >= borderThreshY) pushPixel(x, y - 1)
+            if (y + 1 < H - borderThreshY) pushPixel(x, y + 1)
+          }
+        }
+
         ctx.putImageData(imgData, 0, 0)
         setProcessedSrc(canvas.toDataURL())
       } catch (err) {
@@ -84,7 +108,7 @@ export default function TransparentSprite({ src, alt, size = 120, glowColor = '#
   const isFallback = displaySrc === src
 
   return (
-    <div style={{ width: size, height: size, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'visible', filter: isFallback ? 'none' : `drop-shadow(0 0 10px ${glowColor})`, flexShrink: 0 }}>
+    <div style={{ width: size, height: size, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'visible', filter: isFallback ? 'none' : `drop-shadow(0 0 5px ${glowColor})`, flexShrink: 0 }}>
       {displaySrc && (
         <img 
           src={displaySrc} 
