@@ -120,19 +120,13 @@ export default function Main() {
           </button>
         </div>
 
-        {/* 1. Circular SVG Timer (Top portion) */}
-        <div style={styles.timerDisplayActive}>
-          <div className="orb-timer" style={{ width: 140, height: 140 }}>
-            <svg width="140" height="140" style={{ transform: 'rotate(-90deg)' }}>
-              <circle cx="70" cy="70" r={radius} fill="transparent" stroke="rgba(255, 255, 255, 0.05)" strokeWidth={strokeWidth} />
-              <circle cx="70" cy="70" r={radius} fill="transparent" stroke="var(--neon-glow)" strokeWidth={strokeWidth} strokeDasharray={circ} strokeDashoffset={strokeDashoffsetActive} strokeLinecap="round" style={{ transition: 'stroke-dashoffset 0.5s linear' }} />
-            </svg>
-            <div style={{ position: 'absolute', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-              <span style={{ fontSize: 28, fontFamily: 'monospace', fontWeight: 900, color: '#fff', textShadow: '0 0 10px var(--neon-glow)' }}>{fmt(timer.secondsLeft)}</span>
-            </div>
-          </div>
-          {timer.mode === 'gather' && (
+        {/* 1. Sleek Compact Text Timer (Top portion) */}
+        <div style={styles.timerDisplayActiveCompact}>
+          <span style={styles.activeTimerDigits}>{fmt(timer.secondsLeft)}</span>
+          {timer.mode === 'gather' ? (
             <div style={styles.activeGatherBadge}>⛏️ GATHERING RESOURCES...</div>
+          ) : (
+            <div style={{ ...styles.activeGatherBadge, color: '#ffaa00', borderColor: 'rgba(255, 170, 0, 0.5)', boxShadow: '0 0 8px rgba(255, 170, 0, 0.3)' }}>⚔️ COMBAT ENGAGED</div>
           )}
         </div>
 
@@ -185,33 +179,33 @@ export default function Main() {
             {/* Player sprite (Enlarged and border-cropped) */}
             <div style={styles.playerSprite}>
               <div style={{ animation: 'spritePulse 1.2s infinite ease-in-out', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                <PilotSprite race={player.race} size={120} />
+                <PilotSprite race={player.race} size={160} />
               </div>
               <div style={styles.spriteLabel}>PILOT</div>
             </div>
 
-            <div style={{ fontSize: 20, color: 'var(--neon-glow)', fontFamily: 'var(--font-title)', fontWeight: 900, textShadow: '0 0 8px var(--neon-glow)', zIndex: 1, paddingBottom: 28 }}>VS</div>
+            <div style={{ fontSize: 24, color: 'var(--neon-glow)', fontFamily: 'var(--font-title)', fontWeight: 900, textShadow: '0 0 8px var(--neon-glow)', zIndex: 1, paddingBottom: 40 }}>VS</div>
 
             {/* Enemy sprite (Enlarged and border-cropped) */}
             {battle.currentMob ? (
               <div className={isEnemyHit ? 'hit-flash' : ''} style={styles.enemySprite}>
-                <div style={{ animation: 'spritePulse 1.5s infinite ease-in-out', display: 'flex', alignItems: 'center', justifyContent: 'center', width: 120, height: 120, flexShrink: 0 }}>
+                <div style={{ animation: 'spritePulse 1.5s infinite ease-in-out', display: 'flex', alignItems: 'center', justifyContent: 'center', width: 160, height: 160, flexShrink: 0 }}>
                   {battle.currentMob.image ? (
                     <TransparentSprite 
                       src={battle.currentMob.image} 
                       alt={battle.currentMob.name} 
-                      size={120} 
+                      size={160} 
                       glowColor="var(--neon-glow)" 
                     />
                   ) : (
-                    <EnemySprite isBoss={battle.isBoss} isPitBoss={battle.isPitBoss} size={120} />
+                    <EnemySprite isBoss={battle.isBoss} isPitBoss={battle.isPitBoss} size={160} />
                   )}
                 </div>
                 <div style={styles.spriteLabel}>{battle.currentMob.name?.split(' ')[0]}</div>
               </div>
             ) : (
               <div style={styles.enemySprite}>
-                <div style={{ fontSize: 56, opacity: 0.3 }}>💤</div>
+                <div style={{ fontSize: 64, opacity: 0.3 }}>💤</div>
                 <div style={styles.spriteLabel}>DEBRIS</div>
               </div>
             )}
@@ -361,13 +355,14 @@ const styles = {
   arenaBadge: { position: 'absolute', top: 12, left: 12, background: 'rgba(26, 8, 0, 0.8)', border: '1px solid #ff6400', borderRadius: 6, padding: '3px 8px', fontFamily: 'var(--font-title)', fontSize: 13, color: '#ff8c40', fontWeight: 800, boxShadow: '0 0 10px rgba(255, 100, 0, 0.3)', zIndex: 2 },
   arenaRight: { position: 'absolute', top: 12, right: 12, fontFamily: 'var(--font-title)', fontSize: 13, color: '#00e5ff', textAlign: 'right', fontWeight: 800, textShadow: '0 0 6px rgba(0, 229, 255, 0.3)', zIndex: 2 },
   arenaVisualContainer: { width: '100%', margin: '12px 0 6px 0', padding: '16px 16px 0 16px', position: 'relative', minHeight: 120, display: 'flex', alignItems: 'flex-end', justifyContent: 'space-around', overflow: 'hidden', background: 'transparent', border: 'none' },
-  arenaVisualContainerActive: { width: '100%', margin: '16px 0 10px 0', padding: '32px 16px 0 16px', position: 'relative', minHeight: 200, display: 'flex', alignItems: 'flex-end', justifyContent: 'space-around', overflow: 'visible', background: 'transparent', border: 'none' },
+  arenaVisualContainerActive: { width: '100%', margin: '16px 0 10px 0', padding: '32px 16px 0 16px', position: 'relative', minHeight: 240, display: 'flex', alignItems: 'flex-end', justifyContent: 'space-around', overflow: 'visible', background: 'transparent', border: 'none' },
   arenaGridOverlay: { position: 'absolute', bottom: 0, left: 0, right: 0, height: '40px', backgroundImage: 'linear-gradient(rgba(0, 229, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 229, 255, 0.1) 1px, transparent 1px)', backgroundSize: '12px 12px', transform: 'perspective(40px) rotateX(60deg)', transformOrigin: 'bottom center', opacity: 0.8, pointerEvents: 'none' },
   playerSprite: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, zIndex: 1, paddingBottom: 6 },
   enemySprite: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, zIndex: 1, paddingBottom: 6 },
   spriteLabel: { fontFamily: 'var(--font-title)', fontSize: 11, letterSpacing: 0.5, color: '#7ab0d0', textTransform: 'uppercase', fontWeight: 800, background: 'rgba(3, 8, 20, 0.65)', padding: '1px 6px', borderRadius: 4, border: '1px solid rgba(0, 229, 255, 0.15)' },
   timerDisplay: { display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', zIndex: 2, marginTop: 12 },
-  timerDisplayActive: { display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', zIndex: 2, margin: '24px 0', justifyContent: 'center', flex: 1 },
+  timerDisplayActiveCompact: { display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', zIndex: 2, margin: '12px 0 6px 0', justifyContent: 'center' },
+  activeTimerDigits: { fontSize: 44, fontFamily: 'monospace', fontWeight: 900, color: '#fff', textShadow: '0 0 10px var(--neon-glow), 0 0 20px var(--neon-glow)' },
   battleLog: { marginTop: 10, width: '100%', display: 'flex', flexDirection: 'column', gap: 4, background: 'rgba(0,0,0,0.35)', padding: 8, borderRadius: 8, border: '1px solid rgba(0, 229, 255, 0.1)' },
   battleLogActive: { width: '90%', display: 'flex', flexDirection: 'column', gap: 6, background: 'rgba(3, 8, 20, 0.9)', padding: 12, borderRadius: 10, border: '1.5px solid var(--neon-glow)', margin: '12px auto', boxShadow: '0 0 10px rgba(0,0,0,0.5)' },
   modeRow: { display: 'flex', gap: 8, padding: '0 16px 10px' },
@@ -390,6 +385,6 @@ const styles = {
   activeHeader: { display: 'flex', justifyContent: 'space-between', padding: '10px 16px', alignItems: 'center', width: '100%', zIndex: 10, background: 'rgba(3, 8, 20, 0.9)', borderBottom: '2.5px solid rgba(0, 229, 255, 0.35)', boxShadow: '0 0 15px rgba(0, 0, 0, 0.5)' },
   activeStageBadge: { background: 'rgba(3, 8, 20, 0.95)', border: '1.5px solid var(--neon-glow)', borderRadius: '8px', padding: '6px 12px', fontFamily: 'var(--font-title)', fontSize: 13, color: '#fff', fontWeight: 800, boxShadow: '0 0 8px var(--neon-glow)', textShadow: '0 0 4px #000' },
   activeSectorLabel: { fontFamily: 'var(--font-title)', fontSize: 13, color: 'var(--neon-glow)', fontWeight: 800, textShadow: '0 0 8px var(--neon-glow)', background: 'rgba(3, 8, 20, 0.95)', border: '1.5px solid var(--neon-glow)', borderRadius: '8px', padding: '6px 12px', boxShadow: '0 0 8px var(--neon-glow)' },
-  activeGatherBadge: { fontFamily: 'var(--font-mono)', fontSize: 13, color: '#00e5ff', marginTop: 12, fontWeight: 700, zIndex: 2, letterSpacing: 1, background: 'rgba(3, 8, 20, 0.95)', padding: '6px 16px', borderRadius: '8px', border: '1.5px solid rgba(0, 229, 255, 0.5)', boxShadow: '0 0 8px rgba(0, 229, 255, 0.3)', textShadow: '0 0 4px #000' },
+  activeGatherBadge: { fontFamily: 'var(--font-mono)', fontSize: 11, color: '#00e5ff', marginTop: 6, fontWeight: 800, zIndex: 2, letterSpacing: 1, background: 'rgba(3, 8, 20, 0.95)', padding: '3px 10px', borderRadius: '6px', border: '1px solid rgba(0, 229, 255, 0.4)', boxShadow: '0 0 8px rgba(0, 229, 255, 0.2)', textShadow: '0 0 4px #000' },
   activeHealthBarWrapper: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, width: '90%', marginTop: 8, zIndex: 2, background: 'rgba(3, 8, 20, 0.95)', padding: '10px 16px', borderRadius: '10px', border: '1.5px solid rgba(0, 229, 255, 0.35)', boxShadow: '0 0 10px rgba(0,0,0,0.5)', margin: '12px auto' }
 }
