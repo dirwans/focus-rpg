@@ -41,6 +41,8 @@ export default function Main() {
   const [particles, setParticles] = useState([])
   const [isCritHit, setIsCritHit] = useState(false)
   const [isEnemyHit, setIsEnemyHit] = useState(false)
+  const [playerAnim, setPlayerAnim] = useState('')
+  const [enemyAnim, setEnemyAnim] = useState('')
   const lastHpRef = useRef(battle.enemyHp)
   const lastPlayerHpRef = useRef(battle.playerHp)
 
@@ -76,15 +78,28 @@ export default function Main() {
       setIsEnemyHit(true)
       const hitTimer = setTimeout(() => setIsEnemyHit(false), 200)
 
+      // Attack and hit animations
+      setPlayerAnim('anim-attack-lunge')
+      const animPlayerTimer = setTimeout(() => setPlayerAnim(''), 300)
+      
+      setEnemyAnim('anim-hit-shake')
+      const animEnemyTimer = setTimeout(() => setEnemyAnim(''), 250)
+
       if (isCrit) {
         setIsCritHit(true)
         const shakeTimer = setTimeout(() => setIsCritHit(false), 300)
         return () => {
           clearTimeout(hitTimer)
+          clearTimeout(animPlayerTimer)
+          clearTimeout(animEnemyTimer)
           clearTimeout(shakeTimer)
         }
       }
-      return () => clearTimeout(hitTimer)
+      return () => {
+        clearTimeout(hitTimer)
+        clearTimeout(animPlayerTimer)
+        clearTimeout(animEnemyTimer)
+      }
     }
 
     lastHpRef.current = currentHp
@@ -108,9 +123,22 @@ export default function Main() {
         isPlayerDmg: true
       }
       setParticles((prev) => [...prev, newP])
-      setTimeout(() => {
+      const particleTimer = setTimeout(() => {
         setParticles((prev) => prev.filter((p) => p.id !== id))
       }, 800)
+
+      // Enemy attacks, player gets hit animations
+      setEnemyAnim('anim-attack-lunge-reverse')
+      const animEnemyTimer = setTimeout(() => setEnemyAnim(''), 300)
+      
+      setPlayerAnim('anim-hit-shake')
+      const animPlayerTimer = setTimeout(() => setPlayerAnim(''), 250)
+
+      return () => {
+        clearTimeout(particleTimer)
+        clearTimeout(animEnemyTimer)
+        clearTimeout(animPlayerTimer)
+      }
     }
 
     lastPlayerHpRef.current = currentHp
@@ -205,7 +233,7 @@ export default function Main() {
             <div style={styles.arenaGridOverlay} />
 
             {/* Player sprite (Enlarged and border-cropped) */}
-            <div style={styles.playerSprite}>
+            <div style={styles.playerSprite} className={playerAnim}>
               <div style={{ animation: 'spritePulse 1.2s infinite ease-in-out', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                 <PilotSprite race={player.race} size={160} />
               </div>
@@ -216,7 +244,7 @@ export default function Main() {
 
             {/* Enemy sprite (Enlarged and border-cropped) */}
             {battle.currentMob ? (
-              <div className={isEnemyHit ? 'hit-flash' : ''} style={styles.enemySprite}>
+              <div className={`${isEnemyHit ? 'hit-flash' : ''} ${enemyAnim}`} style={styles.enemySprite}>
                 <div style={{ animation: 'spritePulse 1.5s infinite ease-in-out', display: 'flex', alignItems: 'center', justifyContent: 'center', width: 160, height: 160, flexShrink: 0 }}>
                   {battle.currentMob.image ? (
                     <TransparentSprite 
