@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { useAuthStore } from '../store/authStore'
+import PrologueModal from '../components/PrologueModal'
 
 export default function Auth() {
   const [mode, setMode] = useState('login') // login | register
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [showPrologue, setShowPrologue] = useState(false)
 
   const signIn = useAuthStore((s) => s.signIn)
   const signUp = useAuthStore((s) => s.signUp)
@@ -27,6 +29,15 @@ export default function Auth() {
           <div style={styles.logoText}>FOCUS RPG</div>
           <div style={styles.logoSub}>IDLE BATTLE SYSTEM</div>
         </div>
+
+        <button 
+          type="button" 
+          style={styles.loreBtn} 
+          onClick={() => setShowPrologue(true)}
+        >
+          📖 BACA SEJARAH DUNIA (LORE PROLOGUE)
+        </button>
+
 
         <div style={styles.tabs}>
           <button style={styles.tab(mode === 'login')} onClick={() => { setMode('login'); clearError() }}>LOGIN</button>
@@ -72,6 +83,7 @@ export default function Auth() {
           {mode === 'login' ? 'Belum punya akun? Pilih REGISTER' : 'Progress tersimpan di server — sync semua device'}
         </div>
       </div>
+      {showPrologue && <PrologueModal onClose={() => setShowPrologue(false)} />}
     </div>
   )
 }
@@ -83,6 +95,7 @@ const styles = {
   logoIcon: { fontSize: 48, marginBottom: 8 },
   logoText: { fontFamily: 'var(--font-title)', fontSize: 28, fontWeight: 900, color: '#00e5ff', letterSpacing: 4 },
   logoSub:  { fontFamily: 'var(--font-title)', fontSize: 14, color: '#7ab0d0', letterSpacing: 3, marginTop: 4, fontWeight: 800 },
+  loreBtn:  { background: 'rgba(3,8,20,0.6)', border: '1px solid rgba(0, 229, 255, 0.35)', borderRadius: 8, padding: '10px 14px', color: '#00e5ff', fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 800, letterSpacing: 1.5, cursor: 'pointer', transition: 'all 0.2s', width: '100%', outline: 'none' },
   tabs:     { display: 'flex', border: '1px solid rgba(0, 229, 255, 0.25)', borderRadius: 10, overflow: 'hidden' },
   tab:      (active) => ({ flex: 1, padding: '12px', border: 'none', fontFamily: 'var(--font-title)', fontSize: 15, fontWeight: 800, letterSpacing: 1, cursor: 'pointer', background: active ? 'rgba(0,100,200,0.3)' : 'rgba(6, 15, 35, 0.6)', color: active ? '#00e5ff' : '#7ab0d0', borderBottom: active ? '3px solid #00c8ff' : 'none' }),
   form:     { display: 'flex', flexDirection: 'column', gap: 14 },

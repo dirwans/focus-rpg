@@ -8,7 +8,8 @@
     "defMax": 9,
     "hp": 14533,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/leather-cap"
+    "url": "https://rfdatabase.net/armor/leather-cap",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/ihbwa04.png"
   },
   {
     "name": "Normal Parsal Circlet",
@@ -19,7 +20,8 @@
     "defMax": 9,
     "hp": 14552,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/normal-parsal-circlet"
+    "url": "https://rfdatabase.net/armor/normal-parsal-circlet",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/ihbwa13.png"
   },
   {
     "name": "Parsal Circlet",
@@ -30,7 +32,8 @@
     "defMax": 9,
     "hp": 15305,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/parsal-circlet"
+    "url": "https://rfdatabase.net/armor/parsal-circlet",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/ihbwa13.png"
   },
   {
     "name": "Light Enamel Circlet",
@@ -41,7 +44,8 @@
     "defMax": 9,
     "hp": 15307,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/light-enamel-circlet"
+    "url": "https://rfdatabase.net/armor/light-enamel-circlet",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/09/rfonline-helmet.jpg"
   },
   {
     "name": "Enamel Helmet",
@@ -52,7 +56,8 @@
     "defMax": 9,
     "hp": 15312,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/enamel-helmet"
+    "url": "https://rfdatabase.net/armor/enamel-helmet",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/09/rfonline-helmet.jpg"
   },
   {
     "name": "Intense Enamel Helmet",
@@ -63,7 +68,8 @@
     "defMax": 9,
     "hp": 15313,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/intense-enamel-helmet"
+    "url": "https://rfdatabase.net/armor/intense-enamel-helmet",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/09/rfonline-helmet.jpg"
   },
   {
     "name": "Rust Duple Helmet",
@@ -74,7 +80,8 @@
     "defMax": 9,
     "hp": 15314,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/rust-duple-helmet"
+    "url": "https://rfdatabase.net/armor/rust-duple-helmet",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/09/rfonline-helmet.jpg"
   },
   {
     "name": "Intense Rust Duple Helmet",
@@ -85,7 +92,8 @@
     "defMax": 9,
     "hp": 15315,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/intense-rust-duple-helmet"
+    "url": "https://rfdatabase.net/armor/intense-rust-duple-helmet",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/09/rfonline-helmet.jpg"
   },
   {
     "name": "Duple Helmet",
@@ -96,7 +104,8 @@
     "defMax": 9,
     "hp": 15316,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/duple-helmet"
+    "url": "https://rfdatabase.net/armor/duple-helmet",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/09/rfonline-helmet.jpg"
   },
   {
     "name": "Intense Duple Helmet",
@@ -107,7 +116,8 @@
     "defMax": 9,
     "hp": 15317,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/intense-duple-helmet"
+    "url": "https://rfdatabase.net/armor/intense-duple-helmet",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/09/rfonline-helmet.jpg"
   },
   {
     "name": "Glim Helmet",
@@ -118,7 +128,8 @@
     "defMax": 9,
     "hp": 15320,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/glim-helmet"
+    "url": "https://rfdatabase.net/armor/glim-helmet",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/09/rfonline-helmet.jpg"
   },
   {
     "name": "Intense Glim Helmet",
@@ -129,7 +140,8 @@
     "defMax": 9,
     "hp": 15321,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/intense-glim-helmet"
+    "url": "https://rfdatabase.net/armor/intense-glim-helmet",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/09/rfonline-helmet.jpg"
   },
   {
     "name": "Siege HeadGear",
@@ -250,7 +262,8 @@
     "defMax": 9,
     "hp": 14504,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/training-cap"
+    "url": "https://rfdatabase.net/armor/training-cap",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/ihbwa04.png"
   },
   {
     "name": "Intense Training Cap",
@@ -261,7 +274,8 @@
     "defMax": 9,
     "hp": 14530,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/intense-training-cap"
+    "url": "https://rfdatabase.net/armor/intense-training-cap",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/ihbwa04.png"
   },
   {
     "name": "Rag Cap",
@@ -272,7 +286,8 @@
     "defMax": 9,
     "hp": 14531,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/rag-cap"
+    "url": "https://rfdatabase.net/armor/rag-cap",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/ihbwa04.png"
   },
   {
     "name": "Intense Rag Cap",
@@ -283,7 +298,8 @@
     "defMax": 9,
     "hp": 14532,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/intense-rag-cap"
+    "url": "https://rfdatabase.net/armor/intense-rag-cap",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/ihbwa04.png"
   },
   {
     "name": "Normal Uniform Headgear (ArchonOnly)",
@@ -66338,7 +66354,8 @@
     "defMax": null,
     "hp": null,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/mysterious-cartella-full-helm-bellato"
+    "url": "https://rfdatabase.net/armor/mysterious-cartella-full-helm-bellato",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/ihbwa13.png"
   },
   {
     "name": "Sorry, you have been blocked",
@@ -117477,7 +117494,8 @@
     "defMax": null,
     "hp": null,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/intense-soul-helmet"
+    "url": "https://rfdatabase.net/armor/intense-soul-helmet",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/09/rfonline-helmet.jpg"
   },
   {
     "name": "Sorry, you have been blocked",
@@ -117488,7 +117506,8 @@
     "defMax": null,
     "hp": null,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/soul-render-headgear"
+    "url": "https://rfdatabase.net/armor/soul-render-headgear",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/09/rfonline-helmet.jpg"
   },
   {
     "name": "Sorry, you have been blocked",
@@ -117499,7 +117518,8 @@
     "defMax": null,
     "hp": null,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/intense-soul-render-headgear"
+    "url": "https://rfdatabase.net/armor/intense-soul-render-headgear",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/09/rfonline-helmet.jpg"
   },
   {
     "name": "Sorry, you have been blocked",
@@ -119259,7 +119279,8 @@
     "defMax": null,
     "hp": null,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/endgame"
+    "url": "https://rfdatabase.net/armor/endgame",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/04/iuawm80.png"
   },
   {
     "name": "Sorry, you have been blocked",
@@ -119270,7 +119291,8 @@
     "defMax": null,
     "hp": null,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/snowman-hat-and-tree-cloak"
+    "url": "https://rfdatabase.net/armor/snowman-hat-and-tree-cloak",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/tree-cloaks.png"
   },
   {
     "name": "Sorry, you have been blocked",
@@ -119281,7 +119303,8 @@
     "defMax": null,
     "hp": null,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/halloween"
+    "url": "https://rfdatabase.net/armor/halloween",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/accretia.png"
   },
   {
     "name": "Sorry, you have been blocked",
@@ -119292,7 +119315,8 @@
     "defMax": null,
     "hp": null,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/drop-list"
+    "url": "https://rfdatabase.net/armor/drop-list",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihawd70.png"
   },
   {
     "name": "Sorry, you have been blocked",
@@ -119303,7 +119327,8 @@
     "defMax": null,
     "hp": null,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/event"
+    "url": "https://rfdatabase.net/armor/event",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/09/iheaw24.png"
   },
   {
     "name": "Sorry, you have been blocked",
@@ -119402,7 +119427,8 @@
     "defMax": null,
     "hp": null,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/patron"
+    "url": "https://rfdatabase.net/armor/patron",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihawd70.png"
   },
   {
     "name": "Sorry, you have been blocked",
@@ -119413,7 +119439,8 @@
     "defMax": null,
     "hp": null,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/elite-racial-helmet-and-wings"
+    "url": "https://rfdatabase.net/armor/elite-racial-helmet-and-wings",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
   },
   {
     "name": "Sorry, you have been blocked",
@@ -119424,7 +119451,8 @@
     "defMax": null,
     "hp": null,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/intense-leather-cap"
+    "url": "https://rfdatabase.net/armor/intense-leather-cap",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/ihbwa04.png"
   },
   {
     "name": "Sorry, you have been blocked",
@@ -119435,7 +119463,8 @@
     "defMax": null,
     "hp": null,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/gloves"
+    "url": "https://rfdatabase.net/armor/gloves",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile030.png"
   },
   {
     "name": "Sorry, you have been blocked",
@@ -120546,7 +120575,8 @@
     "defMax": null,
     "hp": null,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/golden-and-saint-golden"
+    "url": "https://rfdatabase.net/armor/golden-and-saint-golden",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iuawg55.png"
   },
   {
     "name": "Sorry, you have been blocked",
@@ -120612,7 +120642,8 @@
     "defMax": null,
     "hp": null,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/black-tiger"
+    "url": "https://rfdatabase.net/armor/black-tiger",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/03/wise-red-tiger.png"
   },
   {
     "name": "Sorry, you have been blocked",
@@ -120766,7 +120797,8 @@
     "defMax": null,
     "hp": null,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/archon"
+    "url": "https://rfdatabase.net/armor/archon",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iubcf55.png"
   },
   {
     "name": "Sorry, you have been blocked",
@@ -120865,7 +120897,8 @@
     "defMax": null,
     "hp": null,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/rare-m"
+    "url": "https://rfdatabase.net/armor/rare-m",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iubwm75.png"
   },
   {
     "name": "Sorry, you have been blocked",
@@ -120876,7 +120909,8 @@
     "defMax": null,
     "hp": null,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/mythic"
+    "url": "https://rfdatabase.net/armor/mythic",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/04/iuawm80.png"
   },
   {
     "name": "Sorry, you have been blocked",
@@ -121481,7 +121515,8 @@
     "defMax": null,
     "hp": null,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/intense-normal-parsal-circlet"
+    "url": "https://rfdatabase.net/armor/intense-normal-parsal-circlet",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/ihbwa13.png"
   },
   {
     "name": "Sorry, you have been blocked",
@@ -121932,7 +121967,8 @@
     "defMax": null,
     "hp": null,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/intense-parsal-circlet"
+    "url": "https://rfdatabase.net/armor/intense-parsal-circlet",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/09/rfonline-helmet.jpg"
   },
   {
     "name": "Sorry, you have been blocked",
@@ -122427,7 +122463,8 @@
     "defMax": null,
     "hp": null,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/intense-light-enamel-circlet"
+    "url": "https://rfdatabase.net/armor/intense-light-enamel-circlet",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/09/rfonline-helmet.jpg"
   },
   {
     "name": "Sorry, you have been blocked",
@@ -122658,7 +122695,8 @@
     "defMax": null,
     "hp": null,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/helmet"
+    "url": "https://rfdatabase.net/armor/helmet",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/09/iheaw24.png"
   },
   {
     "name": "Sorry, you have been blocked",
@@ -122669,7 +122707,8 @@
     "defMax": null,
     "hp": null,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/upper"
+    "url": "https://rfdatabase.net/armor/upper",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iuacr50.png"
   },
   {
     "name": "Sorry, you have been blocked",
@@ -122680,7 +122719,8 @@
     "defMax": null,
     "hp": null,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/lower"
+    "url": "https://rfdatabase.net/armor/lower",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile002.png"
   },
   {
     "name": "Sorry, you have been blocked",
@@ -122691,7 +122731,8 @@
     "defMax": null,
     "hp": null,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/shoes"
+    "url": "https://rfdatabase.net/armor/shoes",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iscrc50.png"
   },
   {
     "name": "Sorry, you have been blocked",
@@ -124715,7 +124756,8 @@
     "defMax": null,
     "hp": null,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/rfonline-lanlan-collaboration"
+    "url": "https://rfdatabase.net/armor/rfonline-lanlan-collaboration",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/rf-online-lanlan-event-collaboration.jpg"
   },
   {
     "name": "Sorry, you have been blocked",
@@ -124847,7 +124889,8 @@
     "defMax": null,
     "hp": null,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/baalzebub"
+    "url": "https://rfdatabase.net/armor/baalzebub",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
   },
   {
     "name": "Sorry, you have been blocked",
@@ -124869,7 +124912,8 @@
     "defMax": null,
     "hp": null,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/dragonborn"
+    "url": "https://rfdatabase.net/armor/dragonborn",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ilarm75.png"
   },
   {
     "name": "Sorry, you have been blocked",
@@ -124880,7 +124924,8 @@
     "defMax": null,
     "hp": null,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/absolute-zero"
+    "url": "https://rfdatabase.net/armor/absolute-zero",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/04/iuawm80.png"
   },
   {
     "name": "Sorry, you have been blocked",
@@ -125353,7 +125398,8 @@
     "defMax": null,
     "hp": null,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/black-dragon"
+    "url": "https://rfdatabase.net/armor/black-dragon",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/black-dragon-update-rf-online-ccr.jpg"
   },
   {
     "name": "Sorry, you have been blocked",
@@ -125661,7 +125707,8 @@
     "defMax": null,
     "hp": null,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/70"
+    "url": "https://rfdatabase.net/armor/70",
+    "image": "https://rfdb.rfdatabase.net/uploads/2026/04/armor-stealth-53-accretia-hd.webp"
   },
   {
     "name": "Sorry, you have been blocked",
@@ -126035,7 +126082,8 @@
     "defMax": null,
     "hp": null,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/white-dragon-rising"
+    "url": "https://rfdatabase.net/armor/white-dragon-rising",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2026/05/iuawf75.png"
   },
   {
     "name": "Sorry, you have been blocked",
@@ -126046,6 +126094,7 @@
     "defMax": null,
     "hp": null,
     "race": "All",
-    "url": "https://rfdatabase.net/armor/ancient"
+    "url": "https://rfdatabase.net/armor/ancient",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihbwc55.png"
   }
 ]

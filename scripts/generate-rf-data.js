@@ -1,9 +1,109 @@
-import { writeFileSync } from 'fs';
+import { writeFileSync, readFileSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = join(__dirname, '..', 'src', 'data');
+
+// Load filtered monsters if they exist to match images
+let monsterImageMap = {};
+const filteredMonstersPath = join(__dirname, 'rfdb-filtered', 'monsters.json');
+if (existsSync(filteredMonstersPath)) {
+  try {
+    const fm = JSON.parse(readFileSync(filteredMonstersPath, 'utf8'));
+    for (const m of fm) {
+      if (m.name && m.image) {
+        monsterImageMap[m.name.toLowerCase().trim()] = m.image;
+      }
+    }
+  } catch (e) {
+    console.error('Failed to load filtered monsters:', e);
+  }
+}
+
+// Smart lookup function to map game monster names to scraped monster images
+function findMonsterImage(name) {
+  const norm = name.toLowerCase().trim();
+  if (monsterImageMap[norm]) return monsterImageMap[norm];
+
+  const keys = Object.keys(monsterImageMap);
+
+  if (norm.includes('flem') || norm.includes('flym')) {
+    const match = keys.find(k => k.includes('flym') || k.includes('flem'));
+    if (match) return monsterImageMap[match];
+  }
+  if (norm.includes('wing')) {
+    const match = keys.find(k => k.includes('wing') || k.includes('flym') || k.includes('bat'));
+    if (match) return monsterImageMap[match];
+  }
+  if (norm.includes('lunker')) {
+    const match = keys.find(k => k.includes('lunker'));
+    if (match) return monsterImageMap[match];
+  }
+  if (norm.includes('reaver')) {
+    const match = keys.find(k => k.includes('reaver') || k.includes('digger'));
+    if (match) return monsterImageMap[match];
+  }
+  if (norm.includes('crawler')) {
+    const match = keys.find(k => k.includes('crawler'));
+    if (match) return monsterImageMap[match];
+  }
+  if (norm.includes('driller')) {
+    const match = keys.find(k => k.includes('driller') || k.includes('digger') || k.includes('crawler'));
+    if (match) return monsterImageMap[match];
+  }
+  if (norm.includes('ward') || norm.includes('lazward')) {
+    const match = keys.find(k => k.includes('lazhuardian') || k.includes('guard'));
+    if (match) return monsterImageMap[match];
+  }
+  if (norm.includes('demolith')) {
+    const match = keys.find(k => k.includes('demolith'));
+    if (match) return monsterImageMap[match];
+  }
+  if (norm.includes('ingress')) {
+    const match = keys.find(k => k.includes('ingress') || k.includes('snatcher') || k.includes('scorpion'));
+    if (match) return monsterImageMap[match];
+  }
+  if (norm.includes('caliana')) {
+    const match = keys.find(k => k.includes('caliana'));
+    if (match) return monsterImageMap[match];
+  }
+  if (norm.includes('lizard') || norm.includes('lizardman')) {
+    const match = keys.find(k => k.includes('lizard') || k.includes('khan'));
+    if (match) return monsterImageMap[match];
+  }
+  if (norm.includes('dagon')) {
+    const match = keys.find(k => k.includes('dagon'));
+    if (match) return monsterImageMap[match];
+  }
+  if (norm.includes('sentinel')) {
+    const match = keys.find(k => k.includes('sentinel'));
+    if (match) return monsterImageMap[match];
+  }
+  if (norm.includes('franken')) {
+    const match = keys.find(k => k.includes('franken') || k.includes('robo'));
+    if (match) return monsterImageMap[match];
+  }
+  if (norm.includes('kurr')) {
+    const match = keys.find(k => k.includes('kurr') || k.includes('lava'));
+    if (match) return monsterImageMap[match];
+  }
+  if (norm.includes('decem')) {
+    const match = keys.find(k => k.includes('decem') || k.includes('lord'));
+    if (match) return monsterImageMap[match];
+  }
+
+  // Substring matching
+  for (const word of norm.split(/\s+/)) {
+    if (word.length > 3) {
+      const match = keys.find(k => k.includes(word));
+      if (match) return monsterImageMap[match];
+    }
+  }
+
+  // Fallback to flym/unknown if completely missing
+  return null;
+}
 
 // ── ENEMIES & SECTORS GENERATOR ──────────────────────────────────────────────
 const sectorsConfig = [
@@ -41,7 +141,8 @@ const enemies = {
           atk,
           def,
           expReward,
-          aniumReward
+          aniumReward,
+          image: findMonsterImage(name)
         };
       }),
       boss: {
@@ -51,7 +152,8 @@ const enemies = {
         atk: Math.floor(20 * Math.pow(1.35, sLevel - 1)),
         def: Math.floor(8 * Math.pow(1.36, sLevel - 1)),
         expReward: Math.floor(80 * Math.pow(1.35, sLevel - 1)),
-        aniumReward: Math.floor(60 * Math.pow(1.35, sLevel - 1))
+        aniumReward: Math.floor(60 * Math.pow(1.35, sLevel - 1)),
+        image: findMonsterImage(s.boss)
       }
     };
   })

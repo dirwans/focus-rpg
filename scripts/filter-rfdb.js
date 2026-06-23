@@ -76,6 +76,7 @@ const filteredWeapons = rawWeapons
     atkMax: w.atkMax,
     race: (w.race || 'All').replace(/\s*Required Skill.*/i, '').trim(),
     effects: cleanEffects(w.effects),
+    image: w.image || null,
   }))
   // Hanya buang duplikat persis (slug sama)
   .filter((w, idx, arr) => arr.findIndex(x => x.id === w.id) === idx)
@@ -104,17 +105,18 @@ if (existsSync(join(RAW, 'armors.json'))) {
   console.log(`Total raw armors: ${rawArmors.length}`)
 
   const filteredArmors = rawArmors
-    .filter(a => a.name && a.level && a.defMax && a.level >= 40)
+    .filter(a => a.name && a.image)
     .filter(a => !SKIP_KEYWORDS.some(k => a.slug.includes(k)))
     .map(a => ({
       id: a.slug,
-      name: a.name,
+      name: a.name.includes('blocked') || a.name.includes('Sorry') ? slugToName(a.slug) : a.name,
       slot: a.slot || 'unknown',
       tier: getTier(a.slug),
       level: a.level,
       defMin: a.defMin,
       defMax: a.defMax,
       race: a.race || 'All',
+      image: a.image || null,
     }))
     .reduce((acc, a) => {
       const baseSlug = a.id.replace(/-(low|med|medium|high|rare-[abcd])$/i, '')
@@ -148,6 +150,7 @@ if (existsSync(join(RAW, 'monsters.json'))) {
       atk: m.atk || Math.floor(m.hp * 0.05),
       def: m.def || Math.floor(m.hp * 0.02),
       exp: m.exp || Math.floor(m.hp * 0.3),
+      image: m.image || null,
     }))
     .sort((a, b) => a.level - b.level)
 

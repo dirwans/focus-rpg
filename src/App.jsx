@@ -3,6 +3,7 @@ import { useGameStore } from './store/gameStore'
 import { useAuthStore } from './store/authStore'
 import { useTimer } from './hooks/useTimer'
 import { loadSave, syncSave, subscribeSave } from './lib/saveSync'
+import { apiGetArchon } from './lib/api'
 import BottomNav from './components/BottomNav'
 import races from './data/races.json'
 import RaceSelect from './components/RaceSelect'
@@ -12,8 +13,10 @@ import Unit from './screens/Unit'
 import Ranks from './screens/Ranks'
 import Forge from './screens/Forge'
 import Cargo from './screens/Cargo'
+import Trade from './screens/Trade'
+import Battle from './screens/Battle'
 
-const SCREENS = { main: Main, unit: Unit, ranks: Ranks, forge: Forge, cargo: Cargo }
+const SCREENS = { main: Main, unit: Unit, ranks: Ranks, forge: Forge, cargo: Cargo, trade: Trade, battle: Battle }
 
 const snap = (gs) => JSON.stringify(gs ?? {})
 
@@ -46,6 +49,38 @@ export default function App() {
   useEffect(() => {
     if (!hydrated) return
     const curPlayer = useGameStore.getState().player
+    
+    // Migration from old names
+    const raceMap = { 
+      'accretians': 'acreton', 'accretia': 'acreton', 'acreton': 'acreton',
+      'bellians': 'belterra', 'bellato': 'belterra', 'belterra': 'belterra',
+      'corvus': 'coralis', 'cora': 'coralis', 'coralis': 'coralis'
+    }
+    
+    let nextPlayer = { ...curPlayer }
+    let dirty = false
+    
+    if (nextPlayer.race && raceMap[nextPlayer.race]) {
+      nextPlayer.race = raceMap[nextPlayer.race]
+      dirty = true
+    }
+    
+    if (nextPlayer.inventory) {
+       nextPlayer.inventory = nextPlayer.inventory.map(i => raceMap[i.race] ? { ...i, race: raceMap[i.race] } : i)
+       dirty = true
+    }
+    if (nextPlayer.equipment) {
+       nextPlayer.equipment = { ...nextPlayer.equipment }
+       if (nextPlayer.equipment.weapon && raceMap[nextPlayer.equipment.weapon.race]) { nextPlayer.equipment.weapon.race = raceMap[nextPlayer.equipment.weapon.race]; dirty = true; }
+       if (nextPlayer.equipment.armor && raceMap[nextPlayer.equipment.armor.race]) { nextPlayer.equipment.armor.race = raceMap[nextPlayer.equipment.armor.race]; dirty = true; }
+       if (nextPlayer.equipment.shield && raceMap[nextPlayer.equipment.shield.race]) { nextPlayer.equipment.shield.race = raceMap[nextPlayer.equipment.shield.race]; dirty = true; }
+    }
+
+    if (dirty) {
+      useGameStore.setState((s) => ({ player: nextPlayer }))
+      return
+    }
+
     if (curPlayer.race && !races[curPlayer.race]) {
       useGameStore.setState((s) => ({
         player: {
@@ -73,6 +108,13 @@ export default function App() {
       }
       setTimeout(() => { readyRef.current = true }, 600)
     })
+    
+    // Load archon data early to apply Auras & Mantles
+    apiGetArchon().then(res => {
+      if (res && res.archons) {
+        useGameStore.getState().setArchons(res.archons)
+      }
+    }).catch(e => console.error('[Archon] fetch error', e))
   }, [user?.username, hydrated])
 
   // Sync tiap state berubah (debounce 800ms) — skip kalau sama dgn snapshot terakhir
@@ -115,10 +157,33 @@ export default function App() {
     return () => window.removeEventListener('beforeunload', onUnload)
   }, [user?.username])
 
+  // Set data-faction dynamically on root element for theme styling
+  useEffect(() => {
+    if (player?.race) {
+      document.documentElement.setAttribute('data-faction', player.race)
+    } else {
+      document.documentElement.removeAttribute('data-faction')
+    }
+  }, [player?.race])
+
+  const currentSector = player?.sector || 1
+  let bgImage = '/assets/hd-space-nebula.jpg'
+  if (currentSector === 1) bgImage = '/assets/hq_outpost_bg.png'
+  else if (currentSector === 2) bgImage = '/assets/crag_mine_bg.png'
+  else if (currentSector === 3) bgImage = '/assets/sette_desert_bg.png'
+  else if (currentSector === 4) bgImage = '/assets/hq_outpost_bg.png'
+  else if (currentSector === 5) bgImage = '/assets/crag_mine_bg.png'
+  else if (currentSector === 6) bgImage = '/assets/sette_desert_bg.png'
+  else if (currentSector === 7) bgImage = '/assets/crag_mine_bg.png'
+  else if (currentSector === 8) bgImage = '/assets/sette_desert_bg.png'
+  else if (currentSector === 9) bgImage = '/assets/hq_outpost_bg.png'
+  else if (currentSector === 10) bgImage = '/assets/hq_outpost_bg.png'
+
   if (loading || !hydrated) {
     return (
       <div className="game-root">
         <div className="game-container">
+          <div className="parallax-bg" style={{ backgroundImage: `url('${bgImage}')` }} />
           <div style={styles.center}>
             <div style={{ fontSize: 48 }}>⚡</div>
             <div style={{ fontFamily: 'monospace', fontSize: 16, color: '#00e5ff', letterSpacing: 3, marginTop: 12 }}>LOADING...</div>
@@ -132,6 +197,7 @@ export default function App() {
     return (
       <div className="game-root">
         <div className="game-container">
+          <div className="parallax-bg" style={{ backgroundImage: `url('${bgImage}')` }} />
           <Auth />
         </div>
       </div>
@@ -143,6 +209,7 @@ export default function App() {
   return (
     <div className="game-root">
       <div className="game-container">
+        <div className="parallax-bg" style={{ backgroundImage: `url('${bgImage}')` }} />
         <div style={styles.content}><Screen /></div>
         <BottomNav />
       </div>
@@ -152,6 +219,6 @@ export default function App() {
 }
 
 const styles = {
-  content: { flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column' },
+  content: { flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', position: 'relative', zIndex: 1 },
   center:  { flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' },
 }

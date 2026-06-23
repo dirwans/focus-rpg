@@ -145,14 +145,34 @@ export default function Main() {
           </div>
         )}
 
-        {/* 3. Health bar (Fight mode details) */}
+        {/* 3. Health & Mana bars (Fight mode details) */}
         {timer.mode === 'fight' && battle.currentMob && (
           <div style={styles.activeHealthBarWrapper}>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: '#fff', fontWeight: 900, textShadow: '0 0 4px #000' }}>
-              {battle.currentMob.name}
+            {/* Enemy HP */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', width: '90%', fontFamily: 'var(--font-mono)', fontSize: 11, color: '#ffaa00', fontWeight: 800, textShadow: '0 0 4px #000' }}>
+              <span>{battle.currentMob.emoji} {battle.currentMob.name}</span>
+              <span>{Math.max(0, battle.enemyHp)} / {battle.enemyMaxHp} HP</span>
             </div>
-            <div style={{ width: '80%', height: 8, background: '#0a1020', borderRadius: 4, overflow: 'hidden', border: '1.5px solid var(--border-neon)' }}>
-              <div style={{ height: '100%', width: `${Math.max(0, (battle.enemyHp / battle.enemyMaxHp) * 100)}%`, background: battle.isBoss ? 'linear-gradient(90deg, #ff1133, #ff4466)' : 'linear-gradient(90deg, #0088ff, #00e5ff)', borderRadius: 4, transition: 'width 0.2s' }} />
+            <div style={{ width: '90%', height: 6, background: '#0a1020', borderRadius: 3, overflow: 'hidden', border: '1px solid rgba(255, 170, 0, 0.5)', marginBottom: 8 }}>
+              <div style={{ height: '100%', width: `${Math.max(0, (battle.enemyHp / battle.enemyMaxHp) * 100)}%`, background: battle.isBoss ? 'linear-gradient(90deg, #ff1133, #ff4466)' : 'linear-gradient(90deg, #ff5500, #ffcc00)', borderRadius: 3, transition: 'width 0.2s' }} />
+            </div>
+
+            {/* Player HP */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', width: '90%', fontFamily: 'var(--font-mono)', fontSize: 11, color: '#00e5ff', fontWeight: 800, textShadow: '0 0 4px #000' }}>
+              <span>🛡️ Pilot Shield HP</span>
+              <span>{(battle.playerHp !== undefined && !isNaN(battle.playerHp)) ? battle.playerHp : stats.hp} / {battle.playerMaxHp || stats.hp} HP</span>
+            </div>
+            <div style={{ width: '90%', height: 6, background: '#0a1020', borderRadius: 3, overflow: 'hidden', border: '1px solid rgba(0, 229, 255, 0.5)', marginBottom: 8 }}>
+              <div style={{ height: '100%', width: `${Math.max(0, (((battle.playerHp !== undefined && !isNaN(battle.playerHp)) ? battle.playerHp : stats.hp) / (battle.playerMaxHp || stats.hp || 1)) * 100)}%`, background: 'linear-gradient(90deg, #0050cc, #00e5ff)', borderRadius: 3, transition: 'width 0.2s' }} />
+            </div>
+
+            {/* Player FP */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', width: '90%', fontFamily: 'var(--font-mono)', fontSize: 11, color: '#da70d6', fontWeight: 800, textShadow: '0 0 4px #000' }}>
+              <span>🔮 Force Point (FP)</span>
+              <span>{(battle.playerFp !== undefined && !isNaN(battle.playerFp)) ? battle.playerFp : 200} / {battle.playerMaxFp || 200} FP</span>
+            </div>
+            <div style={{ width: '90%', height: 6, background: '#0a1020', borderRadius: 3, overflow: 'hidden', border: '1px solid rgba(218, 112, 214, 0.5)' }}>
+              <div style={{ height: '100%', width: `${Math.max(0, (((battle.playerFp !== undefined && !isNaN(battle.playerFp)) ? battle.playerFp : 200) / (battle.playerMaxFp || 200 || 1)) * 100)}%`, background: 'linear-gradient(90deg, #7b1fa2, #da70d6)', borderRadius: 3, transition: 'width 0.2s' }} />
             </div>
           </div>
         )}

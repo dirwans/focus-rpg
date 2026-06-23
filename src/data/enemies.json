@@ -12,7 +12,8 @@
           "atk": 7,
           "def": 1,
           "expReward": 10,
-          "aniumReward": 6
+          "aniumReward": 6,
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_1.png"
         },
         {
           "name": "Wing",
@@ -21,7 +22,8 @@
           "atk": 9,
           "def": 2,
           "expReward": 12,
-          "aniumReward": 7
+          "aniumReward": 7,
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_1.png"
         },
         {
           "name": "Clod",
@@ -30,7 +32,8 @@
           "atk": 11,
           "def": 3,
           "expReward": 14,
-          "aniumReward": 9
+          "aniumReward": 9,
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/clod-monster.png"
         }
       ],
       "boss": {
@@ -40,7 +43,8 @@
         "atk": 20,
         "def": 8,
         "expReward": 80,
-        "aniumReward": 60
+        "aniumReward": 60,
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_10.png"
       }
     },
     {
@@ -55,7 +59,8 @@
           "atk": 9,
           "def": 2,
           "expReward": 13,
-          "aniumReward": 8
+          "aniumReward": 8,
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_17.png"
         },
         {
           "name": "Lazward Ward",
@@ -64,7 +69,8 @@
           "atk": 13,
           "def": 4,
           "expReward": 17,
-          "aniumReward": 11
+          "aniumReward": 11,
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_1.png"
         },
         {
           "name": "Mine Driller",
@@ -73,7 +79,8 @@
           "atk": 17,
           "def": 6,
           "expReward": 21,
-          "aniumReward": 14
+          "aniumReward": 14,
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster-digger-clan.png"
         }
       ],
       "boss": {
@@ -83,7 +90,8 @@
         "atk": 27,
         "def": 10,
         "expReward": 108,
-        "aniumReward": 81
+        "aniumReward": 81,
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster-digger-clan.png"
       }
     },
     {
@@ -98,7 +106,8 @@
           "atk": 13,
           "def": 3,
           "expReward": 19,
-          "aniumReward": 11
+          "aniumReward": 11,
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_6.png"
         },
         {
           "name": "Desert Demolith",
@@ -107,7 +116,8 @@
           "atk": 19,
           "def": 6,
           "expReward": 25,
-          "aniumReward": 16
+          "aniumReward": 16,
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/demolith-monster.png"
         },
         {
           "name": "Desert Hummer",
@@ -116,7 +126,8 @@
           "atk": 25,
           "def": 9,
           "expReward": 31,
-          "aniumReward": 20
+          "aniumReward": 20,
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/turncoat-champion-sette.png"
         }
       ],
       "boss": {
@@ -126,7 +137,8 @@
         "atk": 36,
         "def": 14,
         "expReward": 145,
-        "aniumReward": 109
+        "aniumReward": 109,
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/turncoat-champion-sette.png"
       }
     },
     {
@@ -141,7 +153,8 @@
           "atk": 18,
           "def": 5,
           "expReward": 26,
-          "aniumReward": 16
+          "aniumReward": 16,
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/archer-sette.png"
         },
         {
           "name": "Caliana Atro",
@@ -150,7 +163,8 @@
           "atk": 26,
           "def": 9,
           "expReward": 34,
-          "aniumReward": 22
+          "aniumReward": 22,
+          "image": null
         },
         {
           "name": "Caliana Crew",
@@ -159,7 +173,8 @@
           "atk": 34,
           "def": 13,
           "expReward": 42,
-          "aniumReward": 28
+          "aniumReward": 28,
+          "image": null
         }
       ],
       "boss": {
@@ -169,7 +184,8 @@
         "atk": 49,
         "def": 20,
         "expReward": 196,
-        "aniumReward": 147
+        "aniumReward": 147,
+        "image": null
       }
     },
     {
@@ -184,7 +200,8 @@
           "atk": 25,
           "def": 7,
           "expReward": 36,
-          "aniumReward": 23
+          "aniumReward": 23,
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_6.png"
         },
         {
           "name": "Infernal Demolith",
@@ -193,7 +210,8 @@
           "atk": 35,
           "def": 12,
           "expReward": 46,
-          "aniumReward": 30
+          "aniumReward": 30,
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/demolith-monster.png"
         },
         {
           "name": "Volcano Chariot",
@@ -202,7 +220,8 @@
           "atk": 45,
           "def": 17,
           "expReward": 56,
-          "aniumReward": 38
+          "aniumReward": 38,
+          "image": null
         }
       ],
       "boss": {
@@ -212,7 +231,8 @@
         "atk": 66,
         "def": 27,
         "expReward": 265,
-        "aniumReward": 199
+        "aniumReward": 199,
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_23.png"
       }
     },
     {
@@ -227,7 +247,8 @@
           "atk": 35,
           "def": 11,
           "expReward": 50,
-          "aniumReward": 32
+          "aniumReward": 32,
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/10/scud-monster-elan.png"
         },
         {
           "name": "Turncoat Ranger",
@@ -236,7 +257,8 @@
           "atk": 47,
           "def": 17,
           "expReward": 62,
-          "aniumReward": 41
+          "aniumReward": 41,
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/turncoat-archer-monster.png"
         },
         {
           "name": "Turncoat Specialist",
@@ -245,7 +267,8 @@
           "atk": 59,
           "def": 23,
           "expReward": 74,
-          "aniumReward": 50
+          "aniumReward": 50,
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/turncoat-archer-monster.png"
         }
       ],
       "boss": {
@@ -255,7 +278,8 @@
         "atk": 89,
         "def": 37,
         "expReward": 358,
-        "aniumReward": 269
+        "aniumReward": 269,
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_27.png"
       }
     },
     {
@@ -270,7 +294,8 @@
           "atk": 48,
           "def": 17,
           "expReward": 69,
-          "aniumReward": 45
+          "aniumReward": 45,
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_8.png"
         },
         {
           "name": "Mountain Crawler",
@@ -279,7 +304,8 @@
           "atk": 62,
           "def": 24,
           "expReward": 83,
-          "aniumReward": 55
+          "aniumReward": 55,
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_17.png"
         },
         {
           "name": "Beast Gargoyle",
@@ -288,7 +314,8 @@
           "atk": 76,
           "def": 31,
           "expReward": 97,
-          "aniumReward": 66
+          "aniumReward": 66,
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_8.png"
         }
       ],
       "boss": {
@@ -298,7 +325,8 @@
         "atk": 121,
         "def": 50,
         "expReward": 484,
-        "aniumReward": 363
+        "aniumReward": 363,
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_8.png"
       }
     },
     {
@@ -313,7 +341,8 @@
           "atk": 66,
           "def": 25,
           "expReward": 95,
-          "aniumReward": 63
+          "aniumReward": 63,
+          "image": null
         },
         {
           "name": "Outcast Sorcerer",
@@ -322,7 +351,8 @@
           "atk": 82,
           "def": 33,
           "expReward": 111,
-          "aniumReward": 75
+          "aniumReward": 75,
+          "image": null
         },
         {
           "name": "Lizardman Guard",
@@ -331,7 +361,8 @@
           "atk": 98,
           "def": 41,
           "expReward": 127,
-          "aniumReward": 87
+          "aniumReward": 87,
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_42.png"
         }
       ],
       "boss": {
@@ -341,7 +372,8 @@
         "atk": 163,
         "def": 68,
         "expReward": 653,
-        "aniumReward": 490
+        "aniumReward": 490,
+        "image": null
       }
     },
     {
@@ -356,7 +388,8 @@
           "atk": 92,
           "def": 38,
           "expReward": 131,
-          "aniumReward": 88
+          "aniumReward": 88,
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/curr-monster.png"
         },
         {
           "name": "Lab Abomination",
@@ -365,7 +398,8 @@
           "atk": 110,
           "def": 47,
           "expReward": 149,
-          "aniumReward": 102
+          "aniumReward": 102,
+          "image": null
         },
         {
           "name": "Android Sentinel",
@@ -374,7 +408,8 @@
           "atk": 128,
           "def": 56,
           "expReward": 167,
-          "aniumReward": 115
+          "aniumReward": 115,
+          "image": null
         }
       ],
       "boss": {
@@ -384,7 +419,8 @@
         "atk": 220,
         "def": 93,
         "expReward": 882,
-        "aniumReward": 661
+        "aniumReward": 661,
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/monster_60.png"
       }
     },
     {
@@ -399,7 +435,8 @@
           "atk": 127,
           "def": 57,
           "expReward": 181,
-          "aniumReward": 123
+          "aniumReward": 123,
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/caster-sette.png"
         },
         {
           "name": "Void Reaper",
@@ -408,7 +445,8 @@
           "atk": 147,
           "def": 67,
           "expReward": 201,
-          "aniumReward": 138
+          "aniumReward": 138,
+          "image": null
         },
         {
           "name": "Star Devourer",
@@ -417,7 +455,8 @@
           "atk": 167,
           "def": 77,
           "expReward": 221,
-          "aniumReward": 153
+          "aniumReward": 153,
+          "image": null
         }
       ],
       "boss": {
@@ -427,7 +466,8 @@
         "atk": 297,
         "def": 127,
         "expReward": 1191,
-        "aniumReward": 893
+        "aniumReward": 893,
+        "image": null
       }
     }
   ]

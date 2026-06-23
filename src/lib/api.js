@@ -33,3 +33,16 @@ export const apiMe       = () => api('/me')
 export const apiLogout   = () => api('/logout', { method: 'POST' })
 export const apiLoadSave = () => api('/save').then((d) => d.game_state)
 export const apiSyncSave = (gameState) => api('/save', { method: 'POST', body: { game_state: gameState } })
+
+export const apiGetMarket = () => api('/market')
+export const apiSellMarket = (item, price) => api('/market/sell', { method: 'POST', body: { item, price } })
+export const apiBuyMarket = (marketId) => api('/market/buy', { method: 'POST', body: { marketId } })
+
+export const apiPvpTargets = () => api('/pvp/targets')
+export const apiPvpBattle = (target) => api('/pvp/battle', { method: 'POST', body: { target } })
+export const apiPvpWar = () => api('/pvp/war')
+
+export const apiGetArchon = () => api('/archon')
+export const apiVoteArchon = (candidate) => api('/archon/vote', { method: 'POST', body: { candidate } })
+export const apiForceEndArchon = () => api('/archon/force-end', { method: 'POST' })
+

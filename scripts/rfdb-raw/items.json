@@ -1,1 +1,1602 @@
-[]
+[
+  {
+    "name": "basic-amulet-and-ring",
+    "slug": "basic-amulet-and-ring",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/basic-amulet-and-ring",
+    "image": null
+  },
+  {
+    "name": "Level 40 Award Box [Warrior]",
+    "slug": "level-40-award-box-warrior",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/level-40-award-box-warrior",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_356.png"
+  },
+  {
+    "name": "Level 45 Award Box [Ranger]",
+    "slug": "level-45-award-box-ranger",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/level-45-award-box-ranger",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_360.png"
+  },
+  {
+    "name": "Level 40 Award Box [Force]",
+    "slug": "level-40-award-box-force",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/level-40-award-box-force",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_358.png"
+  },
+  {
+    "name": "Level 45 Award Box [Force]",
+    "slug": "level-45-award-box-force",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/level-45-award-box-force",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_361.png"
+  },
+  {
+    "name": "Bamboo in a Lover",
+    "slug": "bamboo-in-a-lover",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/bamboo-in-a-lover",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Pill_EXPA.gif"
+  },
+  {
+    "name": "Small GiftBox",
+    "slug": "small-giftbox",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/small-giftbox",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxchr01.png"
+  },
+  {
+    "name": "GiftBox",
+    "slug": "giftbox",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/giftbox",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxchr02.png"
+  },
+  {
+    "name": "GiftBox",
+    "slug": "giftbox-1",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/giftbox-1",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxchr02.png"
+  },
+  {
+    "name": "Walnut",
+    "slug": "walnut",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/walnut",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxdbr01.png"
+  },
+  {
+    "name": "Big GiftBox",
+    "slug": "big-giftbox",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/big-giftbox",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxchr03.png"
+  },
+  {
+    "name": "Box of Triumph",
+    "slug": "box-of-triumph",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/box-of-triumph",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbch01.png"
+  },
+  {
+    "name": "Box of Kesar",
+    "slug": "box-of-kesar",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/box-of-kesar",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbch01.png"
+  },
+  {
+    "name": "Box of Dicem",
+    "slug": "box-of-dicem",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/box-of-dicem",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbch01.png"
+  },
+  {
+    "name": "Celebration of Item Sale Base Luck Box (Small)",
+    "slug": "celebration-of-item-sale-base-luck-box-small",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/celebration-of-item-sale-base-luck-box-small",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa01.png"
+  },
+  {
+    "name": "ThanksGiving LargeGift Set",
+    "slug": "thanksgiving-largegift-set",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/thanksgiving-largegift-set",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbch01.png"
+  },
+  {
+    "name": "ThanksGiving Gift Set",
+    "slug": "thanksgiving-gift-set",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/thanksgiving-gift-set",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxchr02.png"
+  },
+  {
+    "name": "Inventor&#8217;s Toolbox",
+    "slug": "inventor-toolbox",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/inventor-toolbox",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcjh01.png"
+  },
+  {
+    "name": "Favor Received Box (Small)",
+    "slug": "favor-received-box-small",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/favor-received-box-small",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa10.png"
+  },
+  {
+    "name": "Favor Received Box (Medium)",
+    "slug": "favor-received-box-medium",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/favor-received-box-medium",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa11.png"
+  },
+  {
+    "name": "Socket Box",
+    "slug": "socket-box",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/socket-box",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa28.png"
+  },
+  {
+    "name": "Hora DarkHall&#8217;s WeaponBox",
+    "slug": "hora-darkhalls-weaponbox",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/hora-darkhalls-weaponbox",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxdha18.png"
+  },
+  {
+    "name": "Hidden Magical Dark Beam Saber",
+    "slug": "hidden-magical-dark-beam-saber",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/hidden-magical-dark-beam-saber",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxknb01.png"
+  },
+  {
+    "name": "Hidden Magical Dark Beam Sword",
+    "slug": "hidden-magical-dark-beam-sword",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/hidden-magical-dark-beam-sword",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxswb01.png"
+  },
+  {
+    "name": "Hidden Magical Dark Bullova",
+    "slug": "hidden-magical-dark-bullova",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/hidden-magical-dark-bullova",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxaxb01.png"
+  },
+  {
+    "name": "Hidden Magical Dark Beam Pressure",
+    "slug": "hidden-magical-dark-beam-pressure",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/hidden-magical-dark-beam-pressure",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxmab01.png"
+  },
+  {
+    "name": "Hidden Magical Black Lance",
+    "slug": "hidden-magical-black-lance",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/hidden-magical-black-lance",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxspb01.png"
+  },
+  {
+    "name": "Hidden Magical Black Siege Bow",
+    "slug": "hidden-magical-black-siege-bow",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/hidden-magical-black-siege-bow",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbob01.png"
+  },
+  {
+    "name": "Hidden Magical Dark Gatling",
+    "slug": "hidden-magical-dark-gatling",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/hidden-magical-dark-gatling",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxfib01.png"
+  },
+  {
+    "name": "Hidden Magical Dark Flame Launcher",
+    "slug": "hidden-magical-dark-flame-launcher",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/hidden-magical-dark-flame-launcher",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxlub01.png"
+  },
+  {
+    "name": "Hidden Magical Dark Staff",
+    "slug": "hidden-magical-dark-staff",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/hidden-magical-dark-staff",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxstb01.png"
+  },
+  {
+    "name": "BeadBox",
+    "slug": "beadbox",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/beadbox",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbud01.png"
+  },
+  {
+    "name": "Union Warrior RewardBox 50LV",
+    "slug": "union-warrior-rewardbox-50lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/union-warrior-rewardbox-50lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Union Ranger RewardBox 50LV",
+    "slug": "union-ranger-rewardbox-50lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/union-ranger-rewardbox-50lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Union Force RewardBox 50LV",
+    "slug": "union-force-rewardbox-50lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/union-force-rewardbox-50lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Alliance Warrior RewardBox 50LV",
+    "slug": "alliance-warrior-rewardbox-50lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/alliance-warrior-rewardbox-50lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Alliance Ranger RewardBox 50LV",
+    "slug": "alliance-ranger-rewardbox-50lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/alliance-ranger-rewardbox-50lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Alliance Force RewardBox 50LV",
+    "slug": "alliance-force-rewardbox-50lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/alliance-force-rewardbox-50lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Emperial Warrior RewardBox 50LV",
+    "slug": "emperial-warrior-rewardbox-50lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/emperial-warrior-rewardbox-50lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Emperial Ranger RewardBox 50LV",
+    "slug": "emperial-ranger-rewardbox-50lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/emperial-ranger-rewardbox-50lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Emperial Launcher RewardBox 50LV",
+    "slug": "emperial-launcher-rewardbox-50lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/emperial-launcher-rewardbox-50lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Union Warrior RewardBox 53LV",
+    "slug": "union-warrior-rewardbox-53lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/union-warrior-rewardbox-53lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Union Ranger RewardBox 53LV",
+    "slug": "union-ranger-rewardbox-53lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/union-ranger-rewardbox-53lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Union Force RewardBox 53LV",
+    "slug": "union-force-rewardbox-53lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/union-force-rewardbox-53lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Alliance Warrior RewardBox 53LV",
+    "slug": "alliance-warrior-rewardbox-53lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/alliance-warrior-rewardbox-53lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Alliance Ranger RewardBox 53LV",
+    "slug": "alliance-ranger-rewardbox-53lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/alliance-ranger-rewardbox-53lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Alliance Force RewardBox 53LV",
+    "slug": "alliance-force-rewardbox-53lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/alliance-force-rewardbox-53lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Emperial Warrior RewardBox 53LV",
+    "slug": "emperial-warrior-rewardbox-53lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/emperial-warrior-rewardbox-53lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Emperial Ranger RewardBox 53LV",
+    "slug": "emperial-ranger-rewardbox-53lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/emperial-ranger-rewardbox-53lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Emperial Launcher RewardBox 53LV",
+    "slug": "emperial-launcher-rewardbox-53lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/emperial-launcher-rewardbox-53lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Union Warrior RewardBox 55LV",
+    "slug": "union-warrior-rewardbox-55lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/union-warrior-rewardbox-55lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Union Ranger RewardBox 55LV",
+    "slug": "union-ranger-rewardbox-55lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/union-ranger-rewardbox-55lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Union Force RewardBox 55LV",
+    "slug": "union-force-rewardbox-55lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/union-force-rewardbox-55lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Alliance Warrior RewardBox 55LV",
+    "slug": "alliance-warrior-rewardbox-55lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/alliance-warrior-rewardbox-55lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Alliance Ranger RewardBox 55LV",
+    "slug": "alliance-ranger-rewardbox-55lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/alliance-ranger-rewardbox-55lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Alliance Force RewardBox 55LV",
+    "slug": "alliance-force-rewardbox-55lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/alliance-force-rewardbox-55lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Emperial Warrior RewardBox 55LV",
+    "slug": "emperial-warrior-rewardbox-55lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/emperial-warrior-rewardbox-55lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Emperial Ranger RewardBox 55LV",
+    "slug": "emperial-ranger-rewardbox-55lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/emperial-ranger-rewardbox-55lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Emperial Launcher RewardBox 55LV",
+    "slug": "emperial-launcher-rewardbox-55lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/emperial-launcher-rewardbox-55lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Small Union RewardBox",
+    "slug": "small-union-rewardbox",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/small-union-rewardbox",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Small Alliance RewardBox",
+    "slug": "small-alliance-rewardbox",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/small-alliance-rewardbox",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Small Emperial RewardBox",
+    "slug": "small-emperial-rewardbox",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/small-emperial-rewardbox",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Superior Favor Box",
+    "slug": "superior-favor-box",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/superior-favor-box",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxspr50.png"
+  },
+  {
+    "name": "53 Superior Favor Box",
+    "slug": "53-superior-favor-box",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/53-superior-favor-box",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxspr53.png"
+  },
+  {
+    "name": "55 Superior Favor Box",
+    "slug": "55-superior-favor-box",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/55-superior-favor-box",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxspr55.png"
+  },
+  {
+    "name": "Union Normal RewardBox 50LV",
+    "slug": "union-normal-rewardbox-50lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/union-normal-rewardbox-50lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Union Normal RewardBox 53LV",
+    "slug": "union-normal-rewardbox-53lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/union-normal-rewardbox-53lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Union Normal RewardBox 55LV",
+    "slug": "union-normal-rewardbox-55lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/union-normal-rewardbox-55lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Alliance Normal RewardBox 50LV",
+    "slug": "alliance-normal-rewardbox-50lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/alliance-normal-rewardbox-50lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Alliance Normal RewardBox 55LV",
+    "slug": "alliance-normal-rewardbox-55lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/alliance-normal-rewardbox-55lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Alliance Normal RewardBox 53LV",
+    "slug": "alliance-normal-rewardbox-53lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/alliance-normal-rewardbox-53lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Emperial Normal RewardBox 50LV",
+    "slug": "emperial-normal-rewardbox-50lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/emperial-normal-rewardbox-50lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Emperial Normal RewardBox 53LV",
+    "slug": "emperial-normal-rewardbox-53lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/emperial-normal-rewardbox-53lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Emperial Normal RewardBox 55LV",
+    "slug": "emperial-normal-rewardbox-55lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/emperial-normal-rewardbox-55lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Case for Auxilliary Equipment",
+    "slug": "case-for-auxilliary-equipment",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/case-for-auxilliary-equipment",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbgb01.png"
+  },
+  {
+    "name": "Level40 C Class WeaponBox",
+    "slug": "level40-c-class-weaponbox-warrior",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/level40-c-class-weaponbox-warrior",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxqsa01.png"
+  },
+  {
+    "name": "Level40 C Class WeaponBox",
+    "slug": "level40-c-class-weaponbox-ranger",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/level40-c-class-weaponbox-ranger",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxqsa02.png"
+  },
+  {
+    "name": "Level40 C Class WeaponBox",
+    "slug": "level40-c-class-weaponbox-force",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/level40-c-class-weaponbox-force",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxqsa03.png"
+  },
+  {
+    "name": "Level40 C Class WeaponBox",
+    "slug": "level40-c-class-weaponbox-launcher",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/level40-c-class-weaponbox-launcher",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxqsa04.png"
+  },
+  {
+    "name": "Set Armor Box",
+    "slug": "set-armor-box",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/set-armor-box",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxqsa05.png"
+  },
+  {
+    "name": "Union Shield AwardBox 50LV",
+    "slug": "union-shield-awardbox-50lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/union-shield-awardbox-50lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Alliance Shield AwardBox 55LV",
+    "slug": "alliance-shield-awardbox-55lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/alliance-shield-awardbox-55lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Alliance Shield AwardBox 50LV",
+    "slug": "alliance-shield-awardbox-50lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/alliance-shield-awardbox-50lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Alliance Shield AwardBox 53LV",
+    "slug": "alliance-shield-awardbox-53lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/alliance-shield-awardbox-53lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Union Shield AwardBox 53LV",
+    "slug": "union-shield-awardbox-53lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/union-shield-awardbox-53lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Union Shield AwardBox 55LV",
+    "slug": "union-shield-awardbox-55lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/union-shield-awardbox-55lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Empire Shield AwardBox 50LV",
+    "slug": "empire-shield-awardbox-50lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/empire-shield-awardbox-50lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Empire Shield AwardBox 53LV",
+    "slug": "empire-shield-awardbox-53lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/empire-shield-awardbox-53lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Empire Shield AwardBox 55LV",
+    "slug": "empire-shield-awardbox-55lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/empire-shield-awardbox-55lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc50.png"
+  },
+  {
+    "name": "Favor Lucky Box (Small)",
+    "slug": "favor-lucky-box-small",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/favor-lucky-box-small",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa29.png"
+  },
+  {
+    "name": "Favor Lucky Box (Medium)",
+    "slug": "favor-lucky-box-medium",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/favor-lucky-box-medium",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa30.png"
+  },
+  {
+    "name": "Favor Lucky Box (Large)",
+    "slug": "favor-lucky-box-large",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/favor-lucky-box-large",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa31.png"
+  },
+  {
+    "name": "Dark Lucky Box (Small)",
+    "slug": "dark-lucky-box-small",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/dark-lucky-box-small",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa29.png"
+  },
+  {
+    "name": "Wisdom Lucky Box (Small)",
+    "slug": "wisdom-lucky-box-small",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/wisdom-lucky-box-small",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa41.png"
+  },
+  {
+    "name": "Wisdom Lucky Box (Medium)",
+    "slug": "wisdom-lucky-box-medium",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/wisdom-lucky-box-medium",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa30.png"
+  },
+  {
+    "name": "Wisdom Lucky Box (Large)",
+    "slug": "wisdom-lucky-box-large",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/wisdom-lucky-box-large",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa31.png"
+  },
+  {
+    "name": "Dark Lucky Box (Medium)",
+    "slug": "dark-lucky-box-medium",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/dark-lucky-box-medium",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa30.png"
+  },
+  {
+    "name": "Dark Lucky Box (Large)",
+    "slug": "dark-lucky-box-large",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/dark-lucky-box-large",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa31.png"
+  },
+  {
+    "name": "Grace Lucky Box (Small)",
+    "slug": "grace-lucky-box-small",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/grace-lucky-box-small",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa29.png"
+  },
+  {
+    "name": "Grace Lucky Box (Medium)",
+    "slug": "grace-lucky-box-medium",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/grace-lucky-box-medium",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa30.png"
+  },
+  {
+    "name": "Grace Lucky Box (Large)",
+    "slug": "grace-lucky-box-large",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/grace-lucky-box-large",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa31.png"
+  },
+  {
+    "name": "Mercy Lucky Box (Small)",
+    "slug": "mercy-lucky-box-small",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/mercy-lucky-box-small",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa29.png"
+  },
+  {
+    "name": "Mercy Lucky Box (Medium)",
+    "slug": "mercy-lucky-box-medium",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/mercy-lucky-box-medium",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa30.png"
+  },
+  {
+    "name": "Full Moon Box",
+    "slug": "full-moon-box",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/full-moon-box",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa83.png"
+  },
+  {
+    "name": "Lucky Chaos Box (Small)",
+    "slug": "lucky-chaos-box-small",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/lucky-chaos-box-small",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa29.png"
+  },
+  {
+    "name": "Lucky Chaos Box (Medium)",
+    "slug": "lucky-chaos-box-medium",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/lucky-chaos-box-medium",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa30.png"
+  },
+  {
+    "name": "Lucky Chaos Box (Large)",
+    "slug": "lucky-chaos-box-large",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/lucky-chaos-box-large",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa31.png"
+  },
+  {
+    "name": "National Foundation Day",
+    "slug": "national-foundation-day",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/national-foundation-day",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa95.png"
+  },
+  {
+    "name": "Christmas Socks",
+    "slug": "christmas-socks",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/christmas-socks",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa98.png"
+  },
+  {
+    "name": "Level 45 Award Box [Warrior]",
+    "slug": "level-45-award-box-warrior",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/level-45-award-box-warrior",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+  },
+  {
+    "name": "Level 40 Award Box [Ranger]",
+    "slug": "level-40-award-box-ranger",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/level-40-award-box-ranger",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_357.png"
+  },
+  {
+    "name": "Hora DarkHall&#8217;s OldBox",
+    "slug": "hora-darkhalls-oldbox",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/hora-darkhalls-oldbox",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxdha00.png"
+  },
+  {
+    "name": "Hora DarkHall&#8217;s HelmetBox",
+    "slug": "hora-darkhalls-helmetbox",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/hora-darkhalls-helmetbox",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxdha03.png"
+  },
+  {
+    "name": "Hora DarkHall&#8217;s ArmorBox",
+    "slug": "hora-darkhalls-armorbox",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/hora-darkhalls-armorbox",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxdha03.png"
+  },
+  {
+    "name": "Hora DarkHall&#8217;s LegBox",
+    "slug": "hora-darkhalls-legbox",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/hora-darkhalls-legbox",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxdha03.png"
+  },
+  {
+    "name": "Hora DarkHall&#8217;s GauntletBox",
+    "slug": "hora-darkhalls-gauntletbox",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/hora-darkhalls-gauntletbox",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxdha03.png"
+  },
+  {
+    "name": "Hora DarkHall&#8217;s ShoesBox",
+    "slug": "hora-darkhalls-shoesbox",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/hora-darkhalls-shoesbox",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxdha03.png"
+  },
+  {
+    "name": "Hidden Magical Helmet",
+    "slug": "hidden-magical-helmet",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/hidden-magical-helmet",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbih01.png"
+  },
+  {
+    "name": "Hidden Magical Shirts",
+    "slug": "hidden-magical-shirts",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/hidden-magical-shirts",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbiu01.png"
+  },
+  {
+    "name": "Hidden Magical Pants",
+    "slug": "hidden-magical-pants",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/hidden-magical-pants",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbil01.png"
+  },
+  {
+    "name": "Hidden Magical Shoes",
+    "slug": "hidden-magical-shoes",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/hidden-magical-shoes",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbis01.png"
+  },
+  {
+    "name": "Hidden Magical Gloves",
+    "slug": "hidden-magical-gloves",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/hidden-magical-gloves",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxaig01.png"
+  },
+  {
+    "name": "Blocked Magical Helmet",
+    "slug": "blocked-magical-helmet",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/blocked-magical-helmet",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbih01.png"
+  },
+  {
+    "name": "Blocked Magical Shirts",
+    "slug": "blocked-magical-shirts",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/blocked-magical-shirts",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbiu01.png"
+  },
+  {
+    "name": "Blocked Magical Pants",
+    "slug": "blocked-magical-pants",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/blocked-magical-pants",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbil01.png"
+  },
+  {
+    "name": "Blocked Magical Gloves",
+    "slug": "blocked-magical-gloves",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/blocked-magical-gloves",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxaig01.png"
+  },
+  {
+    "name": "Blocked Magical Shoes",
+    "slug": "blocked-magical-shoes",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/blocked-magical-shoes",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbis01.png"
+  },
+  {
+    "name": "Christmas Socks",
+    "slug": "christmas-socks-2",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/christmas-socks-2",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa98.png"
+  },
+  {
+    "name": "Herodian Gene information chip box",
+    "slug": "herodian-gene-information-chip-box",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/herodian-gene-information-chip-box",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsb19.png"
+  },
+  {
+    "name": "Jewelry Box",
+    "slug": "jewelry-box",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/jewelry-box",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsb38.png"
+  },
+  {
+    "name": "Red Stone Box",
+    "slug": "red-stone-box",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/red-stone-box",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxres01.png"
+  },
+  {
+    "name": "Intense Projectile Box",
+    "slug": "intense-projectile-box",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/intense-projectile-box",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsb38.png"
+  },
+  {
+    "name": "Aiming Booster part Box",
+    "slug": "aiming-booster-part-box",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/aiming-booster-part-box",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcjh01.png"
+  },
+  {
+    "name": "Medium Favor Protection Box",
+    "slug": "medium-favor-protection-box",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/medium-favor-protection-box",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa30.png"
+  },
+  {
+    "name": "Small Favor Protection Box",
+    "slug": "small-favor-protection-box",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/small-favor-protection-box",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa29.png"
+  },
+  {
+    "name": "Large Favor Protection Box",
+    "slug": "large-favor-protection-box",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/large-favor-protection-box",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa31.png"
+  },
+  {
+    "name": "Hero gold box",
+    "slug": "hero-gold-box",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/hero-gold-box",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxgol01.png"
+  },
+  {
+    "name": "Gold bar box",
+    "slug": "gold-bar-box",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/gold-bar-box",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxgol04.png"
+  },
+  {
+    "name": "Union Warrior RewardBox 57LV",
+    "slug": "union-warrior-rewardbox-57lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/union-warrior-rewardbox-57lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Union Ranger RewardBox 57LV",
+    "slug": "union-ranger-rewardbox-57lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/union-ranger-rewardbox-57lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Union Force RewardBox 57LV",
+    "slug": "union-force-rewardbox-57lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/union-force-rewardbox-57lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Alliance Warrior RewardBox 57LV",
+    "slug": "alliance-warrior-rewardbox-57lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/alliance-warrior-rewardbox-57lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Alliance Ranger RewardBox 57LV",
+    "slug": "alliance-ranger-rewardbox-57lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/alliance-ranger-rewardbox-57lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Alliance Force RewardBox 57LV",
+    "slug": "alliance-force-rewardbox-57lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/alliance-force-rewardbox-57lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Empire Warrior RewardBox 57LV",
+    "slug": "empire-warrior-rewardbox-57lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/empire-warrior-rewardbox-57lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Empire Ranger RewardBox 57LV",
+    "slug": "empire-ranger-rewardbox-57lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/empire-ranger-rewardbox-57lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Empire Force RewardBox 57LV",
+    "slug": "empire-force-rewardbox-57lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/empire-force-rewardbox-57lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Union Warrior RewardBox 60LV",
+    "slug": "union-warrior-rewardbox-60lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/union-warrior-rewardbox-60lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Union Ranger RewardBox 60LV",
+    "slug": "union-ranger-rewardbox-60lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/union-ranger-rewardbox-60lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Union Force RewardBox 60LV",
+    "slug": "union-force-rewardbox-60lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/union-force-rewardbox-60lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Alliance Warrior RewardBox 60LV",
+    "slug": "alliance-warrior-rewardbox-60lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/alliance-warrior-rewardbox-60lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Alliance Ranger RewardBox 60LV",
+    "slug": "alliance-ranger-rewardbox-60lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/alliance-ranger-rewardbox-60lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Alliance Force RewardBox 60LV",
+    "slug": "alliance-force-rewardbox-60lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/alliance-force-rewardbox-60lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Empire Warrior RewardBox 60LV",
+    "slug": "empire-warrior-rewardbox-60lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/empire-warrior-rewardbox-60lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Empire Ranger RewardBox 60LV",
+    "slug": "empire-ranger-rewardbox-60lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/empire-ranger-rewardbox-60lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Empire Force RewardBox 60LV",
+    "slug": "empire-force-rewardbox-60lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/empire-force-rewardbox-60lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Union Warrior RewardBox 63LV",
+    "slug": "union-warrior-rewardbox-63lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/union-warrior-rewardbox-63lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Union Ranger RewardBox 63LV",
+    "slug": "union-ranger-rewardbox-63lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/union-ranger-rewardbox-63lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Union Force RewardBox 63LV",
+    "slug": "union-force-rewardbox-63lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/union-force-rewardbox-63lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Alliance Warrior RewardBox 63LV",
+    "slug": "alliance-warrior-rewardbox-63lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/alliance-warrior-rewardbox-63lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Alliance Ranger RewardBox 63LV",
+    "slug": "alliance-ranger-rewardbox-63lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/alliance-ranger-rewardbox-63lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Alliance Force RewardBox 63LV",
+    "slug": "alliance-force-rewardbox-63lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/alliance-force-rewardbox-63lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Empire Warrior RewardBox 63LV",
+    "slug": "empire-warrior-rewardbox-63lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/empire-warrior-rewardbox-63lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Empire Ranger RewardBox 63LV",
+    "slug": "empire-ranger-rewardbox-63lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/empire-ranger-rewardbox-63lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Empire Force RewardBox 63LV",
+    "slug": "empire-force-rewardbox-63lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/empire-force-rewardbox-63lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Union Warrior RewardBox 65LV",
+    "slug": "union-warrior-rewardbox-65lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/union-warrior-rewardbox-65lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Union Ranger RewardBox 65LV",
+    "slug": "union-ranger-rewardbox-65lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/union-ranger-rewardbox-65lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Union Force RewardBox 65LV",
+    "slug": "union-force-rewardbox-65lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/union-force-rewardbox-65lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Alliance Warrior RewardBox 65LV",
+    "slug": "alliance-warrior-rewardbox-65lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/alliance-warrior-rewardbox-65lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Alliance Ranger RewardBox 65LV",
+    "slug": "alliance-ranger-rewardbox-65lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/alliance-ranger-rewardbox-65lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Alliance Force RewardBox 65LV",
+    "slug": "alliance-force-rewardbox-65lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/alliance-force-rewardbox-65lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Empire Warrior RewardBox 65LV",
+    "slug": "empire-warrior-rewardbox-65lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/empire-warrior-rewardbox-65lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Empire Ranger RewardBox 65LV",
+    "slug": "empire-ranger-rewardbox-65lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/empire-ranger-rewardbox-65lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Empire Force RewardBox 65LV",
+    "slug": "empire-force-rewardbox-65lv",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/empire-force-rewardbox-65lv",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxbwc57.png"
+  },
+  {
+    "name": "Blessed Jewery Box",
+    "slug": "blessed-jewery-box",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/blessed-jewery-box",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxeup01.png"
+  },
+  {
+    "name": "Mysterious TreasureBox[Offense]",
+    "slug": "mysterious-treasureboxoffense",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/mysterious-treasureboxoffense",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxtal03.png"
+  },
+  {
+    "name": "Blessed Mysterious TreasureBox[Offense]",
+    "slug": "blessed-mysterious-treasureboxoffense",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/blessed-mysterious-treasureboxoffense",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxtal04.png"
+  },
+  {
+    "name": "Lottery Box[Jade]",
+    "slug": "lottery-boxjade",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/lottery-boxjade",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/09/bxbbb01.png"
+  },
+  {
+    "name": "Lottery Box[Charm&#038;Generator]",
+    "slug": "lottery-boxcharmgenerator-small",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/lottery-boxcharmgenerator-small",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/09/bxbbb02.png"
+  },
+  {
+    "name": "Lottery Box[Charm&#038;Generator]",
+    "slug": "lottery-boxcharmgenerator-medium",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/lottery-boxcharmgenerator-medium",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/09/bxbbb03.png"
+  },
+  {
+    "name": "Lottery Box[Charm&#038;Generator]",
+    "slug": "lottery-boxcharmgenerator-large",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/lottery-boxcharmgenerator-large",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/09/bxbbb04.png"
+  },
+  {
+    "name": "Lottery Box[Cash]",
+    "slug": "lottery-boxcash",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/lottery-boxcash",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa31.png"
+  },
+  {
+    "name": "Blessed Lucky Jewelry Box",
+    "slug": "blessed-lucky-jewelry-box",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/blessed-lucky-jewelry-box",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/09/bxeup04.png"
+  },
+  {
+    "name": "Superior Lucky Box",
+    "slug": "superior-lucky-box-small",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/superior-lucky-box-small",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/09/bxsau01.png"
+  },
+  {
+    "name": "Superior Lucky Box",
+    "slug": "superior-lucky-box-medium",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/superior-lucky-box-medium",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/09/bxsau02.png"
+  },
+  {
+    "name": "Superior Lucky Box",
+    "slug": "superior-lucky-box-large",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/superior-lucky-box-large",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/09/bxsau03-1.png"
+  },
+  {
+    "name": "20X Cure Potions",
+    "slug": "20x-cure-potions-cora",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/20x-cure-potions-cora",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa31.png"
+  },
+  {
+    "name": "20X Cure Potions",
+    "slug": "20x-cure-potions",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/20x-cure-potions",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa31.png"
+  },
+  {
+    "name": "20X Cure Chargers",
+    "slug": "20x-cure-chargers",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/20x-cure-chargers",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa31.png"
+  },
+  {
+    "name": "20X Premium Cure Potions",
+    "slug": "20x-premium-cure-potions",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/20x-premium-cure-potions",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa31.png"
+  },
+  {
+    "name": "20X Premium Cure Chargers",
+    "slug": "20x-premium-cure-chargers",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/20x-premium-cure-chargers",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa31.png"
+  },
+  {
+    "name": "20X Premium Cure Potions",
+    "slug": "20x-premium-cure-potions-cora",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/20x-premium-cure-potions-cora",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa31.png"
+  },
+  {
+    "name": "5X Hissy Potions Box",
+    "slug": "5x-hissy-potions-box",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/5x-hissy-potions-box",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa31.png"
+  },
+  {
+    "name": "10X Hissy Potions Box",
+    "slug": "10x-hissy-potions-box",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/10x-hissy-potions-box",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa31.png"
+  },
+  {
+    "name": "20X Hissy Potions Box",
+    "slug": "20x-hissy-potions-box",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/20x-hissy-potions-box",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa31.png"
+  },
+  {
+    "name": "50X Hissy Potions Box",
+    "slug": "50x-hissy-potions-box",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/50x-hissy-potions-box",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa31.png"
+  },
+  {
+    "name": "99X Hissy Potions Box",
+    "slug": "99x-hissy-potions-box",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/99x-hissy-potions-box",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa31.png"
+  },
+  {
+    "name": "99X +2500 HP Potion",
+    "slug": "99x-2500-hp-potion",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/99x-2500-hp-potion",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa31.png"
+  },
+  {
+    "name": "99X +2500 HP Potion",
+    "slug": "99x-2500-hp-potion-cora",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/99x-2500-hp-potion-cora",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa31.png"
+  },
+  {
+    "name": "99X +2500 HP Charger",
+    "slug": "99x-2500-hp-charger",
+    "type": "html",
+    "description": "content=",
+    "url": "https://rfdatabase.net/item/99x-2500-hp-charger",
+    "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa31.png"
+  }
+]

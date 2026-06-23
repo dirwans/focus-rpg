@@ -1,8 +1,15 @@
+import { useState } from 'react'
 import { useGameStore } from '../store/gameStore'
 import races from '../data/races.json'
+import PrologueModal from './PrologueModal'
 
 export default function RaceSelect() {
   const selectRace = useGameStore((s) => s.selectRace)
+  const [showPrologue, setShowPrologue] = useState(true)
+
+  if (showPrologue) {
+    return <PrologueModal onClose={() => setShowPrologue(false)} />
+  }
 
   return (
     <div style={styles.overlay}>
