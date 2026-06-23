@@ -42,53 +42,69 @@ export default function TransparentSprite({ src, alt, size = 120, glowColor = '#
           }
         }
 
-        // 2. Queue-based Flood Fill (BFS) to remove background while keeping the body solid
-        const queue = []
-        const visited = new Uint8Array(W * H)
-        
-        const pushPixel = (x, y) => {
-          if (x < borderThreshX || x >= W - borderThreshX || y < borderThreshY || y >= H - borderThreshY) return
-          const idx = y * W + x
-          if (!visited[idx]) {
-            visited[idx] = 1
-            queue.push(idx)
-          }
-        }
-        
-        // Seed the queue with all pixels along the new boundary
-        for (let x = borderThreshX; x < W - borderThreshX; x++) {
-          pushPixel(x, borderThreshY)
-          pushPixel(x, H - borderThreshY - 1)
-        }
+        // Check if the image already has transparent pixels (e.g., PNG with transparency)
+        // We check the source pixels (excluding the 6% edge we forced transparent in step 1)
+        let hasTransparency = false
         for (let y = borderThreshY; y < H - borderThreshY; y++) {
-          pushPixel(borderThreshX, y)
-          pushPixel(W - borderThreshX - 1, y)
+          for (let x = borderThreshX; x < W - borderThreshX; x++) {
+            const idx = (y * W + x) * 4
+            if (data[idx + 3] < 150) { // Alpha is semi-transparent or fully transparent
+              hasTransparency = true
+              break
+            }
+          }
+          if (hasTransparency) break
         }
 
-        // Run BFS
-        let qHead = 0
-        while (qHead < queue.length) {
-          const idx = queue[qHead++]
-          const x = idx % W
-          const y = Math.floor(idx / W)
+        if (!hasTransparency) {
+          // 2. Queue-based Flood Fill (BFS) to remove background while keeping the body solid
+          const queue = []
+          const visited = new Uint8Array(W * H)
           
-          const pixelIdx = idx * 4
-          const r = data[pixelIdx]
-          const g = data[pixelIdx+1]
-          const b = data[pixelIdx+2]
+          const pushPixel = (x, y) => {
+            if (x < borderThreshX || x >= W - borderThreshX || y < borderThreshY || y >= H - borderThreshY) return
+            const idx = y * W + x
+            if (!visited[idx]) {
+              visited[idx] = 1
+              queue.push(idx)
+            }
+          }
           
-          // Check if this pixel is background (black background, or green chroma key background)
-          const isBlackBg = r < 20 && g < 20 && b < 20
-          const isGreenBg = Math.abs(r - 71) < 15 && Math.abs(g - 112) < 15 && Math.abs(b - 76) < 15
-          
-          if (isBlackBg || isGreenBg) {
-            data[pixelIdx + 3] = 0 // transparent
+          // Seed the queue with all pixels along the new boundary
+          for (let x = borderThreshX; x < W - borderThreshX; x++) {
+            pushPixel(x, borderThreshY)
+            pushPixel(x, H - borderThreshY - 1)
+          }
+          for (let y = borderThreshY; y < H - borderThreshY; y++) {
+            pushPixel(borderThreshX, y)
+            pushPixel(W - borderThreshX - 1, y)
+          }
+
+          // Run BFS
+          let qHead = 0
+          while (qHead < queue.length) {
+            const idx = queue[qHead++]
+            const x = idx % W
+            const y = Math.floor(idx / W)
             
-            // Push 4 neighbors
-            if (x - 1 >= borderThreshX) pushPixel(x - 1, y)
-            if (x + 1 < W - borderThreshX) pushPixel(x + 1, y)
-            if (y - 1 >= borderThreshY) pushPixel(x, y - 1)
-            if (y + 1 < H - borderThreshY) pushPixel(x, y + 1)
+            const pixelIdx = idx * 4
+            const r = data[pixelIdx]
+            const g = data[pixelIdx+1]
+            const b = data[pixelIdx+2]
+            
+            // Check if this pixel is background (black background, or green chroma key background)
+            const isBlackBg = r < 20 && g < 20 && b < 20
+            const isGreenBg = Math.abs(r - 71) < 15 && Math.abs(g - 112) < 15 && Math.abs(b - 76) < 15
+            
+            if (isBlackBg || isGreenBg) {
+              data[pixelIdx + 3] = 0 // transparent
+              
+              // Push 4 neighbors
+              if (x - 1 >= borderThreshX) pushPixel(x - 1, y)
+              if (x + 1 < W - borderThreshX) pushPixel(x + 1, y)
+              if (y - 1 >= borderThreshY) pushPixel(x, y - 1)
+              if (y + 1 < H - borderThreshY) pushPixel(x, y + 1)
+            }
           }
         }
 
