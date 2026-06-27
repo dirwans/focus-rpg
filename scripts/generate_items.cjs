@@ -16,83 +16,159 @@ if (fs.existsSync(sitemapImagesPath)) {
 function findItemImage(name, type, race) {
   const cleanName = name.toLowerCase().replace(/\[.*?\]\s*/i, '').replace(/lv\.\d+\s*/i, '').trim();
   const slug = cleanName.replace(/\s+/g, '-');
-  
-  // 1. Direct match by slug
-  for (const [url, img] of Object.entries(sitemapImages)) {
-    if (url.endsWith('/' + slug)) return img;
+
+  // --- 1. Base Materials & Consumables Mappings ---
+  const materialMappings = {
+    'titanium-scrap': 'https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile001.png',
+    'carbon-plate': 'https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile002.png',
+    'mecha-core': 'https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile003.png',
+    'aether-crystal': 'https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile004.png',
+    'warlord-seal': 'https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile005.png',
+    'sector-raid-ticket': 'https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxdha21.png',
+    'hp-potion': 'https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa31.png',
+    'fp-potion': 'https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa31.png',
+    'hp-potion-[s]': 'https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa31.png',
+    'fp-potion-[s]': 'https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa31.png',
+    
+    // Ores
+    'yellow-ore': 'https://img.rfdatabase.net/items/ioyel01.png',
+    'blue-ore': 'https://img.rfdatabase.net/items/ioblu01.png',
+    
+    // Talics
+    'ignorance-talic': 'https://img.rfdatabase.net/items/ircys01.png',
+    'favor-talic': 'https://img.rfdatabase.net/items/irtal06.png',
+  };
+
+  if (materialMappings[slug]) {
+    return materialMappings[slug];
   }
 
-  // 2. Slot/Type specific fallbacks
-  const urlKeys = Object.keys(sitemapImages);
-  
+  // If name contains certain keywords for talics or ores
+  if (slug.includes('ignorance') || slug.includes('keen')) return 'https://img.rfdatabase.net/items/ircys01.png';
+  if (slug.includes('favor')) return 'https://img.rfdatabase.net/items/irtal06.png';
+  if (slug.includes('yellow-ore')) return 'https://img.rfdatabase.net/items/ioyel01.png';
+  if (slug.includes('blue-ore')) return 'https://img.rfdatabase.net/items/ioblu01.png';
+
+  // --- 2. Shield Mappings (Race All) ---
+  if (type === 'shield') {
+    return 'https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png'; // Accretia Mythic shield look
+  }
+
+  // --- 3. Armors Mappings by Race and level ---
+  if (type === 'armor' || type === 'helmet' || type === 'gloves' || type === 'boots' || type === 'mantle') {
+    // Extract level if present in name
+    let level = 1;
+    const lvlMatch = name.match(/lv\.(\d+)/i);
+    if (lvlMatch) {
+      level = parseInt(lvlMatch[1]);
+    }
+
+    if (race === 'acreton') {
+      if (level <= 20) return 'https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iuacr50.png'; // Ranger chest / infant
+      if (level <= 40) return 'https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihawd70.png'; // patron / red steel look
+      if (level <= 60) return 'https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iuawg55.png'; // golden suit
+      if (level <= 80) return 'https://rfdb.rfdatabase.net/uploads/2026/04/armor-stealth-53-accretia-hd.webp'; // high-tech stealth
+      return 'https://rfdb.rfdatabase.net/wp-content/uploads/2025/04/iuawm80.png'; // mythic end-game
+    }
+    
+    if (race === 'belterra') {
+      if (level <= 20) return 'https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/ihbwa04.png'; // leather cap / classic helmet
+      if (level <= 40) return 'https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/ihbwa13.png'; // parsal circlet/helmet
+      if (level <= 60) return 'https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iubcf55.png'; // Archon light blue plate armor
+      if (level <= 80) return 'https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iubwm75.png'; // rare warrior armor
+      return 'https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihbwc55.png'; // ancient helmet/cloak
+    }
+
+    if (race === 'coralis') {
+      if (level <= 20) return 'https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile002.png'; // lower robe skirt
+      if (level <= 40) return 'https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png'; // Cora wings/circlet
+      if (level <= 60) return 'https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png'; // Baalzebub Dark helm
+      if (level <= 80) return 'https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iscrc50.png'; // Ranger shoes / twilight greaves
+      return 'https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png'; // Dark celestial Eclipse helm
+    }
+  }
+
+  // --- 4. Weapons Mappings ---
   if (type === 'weapon') {
-    // Look for weapon URL with name keywords
+    const urlKeys = Object.keys(sitemapImages);
+
+    // Specific word match fallbacks to ensure unique weapon images
+    if (slug.includes('flame') || slug.includes('thrower')) {
+      return 'https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Launcher_Flame-Thrower-min.png';
+    }
+    if (slug.includes('grenade') || slug.includes('launcher') || slug.includes('faust') || slug.includes('cannon')) {
+      if (slug.includes('missile')) {
+        return 'https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Launcher_Missile-Launcher-min.png';
+      }
+      if (slug.includes('oblivion')) {
+        return 'https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Relic_Firearm_Lv55_MetalElvenGattlingCannon.gif';
+      }
+      return 'https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png';
+    }
+    if (slug.includes('vulcan') || slug.includes('gatling') || slug.includes('gun') || slug.includes('rifle') || slug.includes('blaster') || slug.includes('railgun')) {
+      if (slug.includes('gatling')) {
+        return 'https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_GatlingGun.gif';
+      }
+      if (slug.includes('blaster') || slug.includes('laser')) {
+        return 'https://rfdb.rfdatabase.net/wp-content/uploads/2022/12/iwfig55.png';
+      }
+      if (slug.includes('dark-hall')) {
+        return 'https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_Lv55_DarkGatling.gif';
+      }
+      return 'https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif';
+    }
+    if (slug.includes('bow')) {
+      return 'https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif';
+    }
+    if (slug.includes('wand') || slug.includes('scepter')) {
+      if (slug.includes('arch')) {
+        return 'https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif';
+      }
+      return 'https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif';
+    }
+    if (slug.includes('staff')) {
+      if (slug.includes('relic')) {
+        return 'https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif';
+      }
+      if (slug.includes('salamander')) {
+        return 'https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_Lv55_DarkStaff.gif';
+      }
+      return 'https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif';
+    }
+    if (slug.includes('sickle') || slug.includes('knife') || slug.includes('sword') || slug.includes('blade')) {
+      return 'https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif';
+    }
+    if (slug.includes('hammer') || slug.includes('mace')) {
+      return 'https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif';
+    }
+    if (slug.includes('spear') || slug.includes('halberd')) {
+      if (slug.includes('halberd')) {
+        return 'https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/weapon-baalzebub-halberd.png';
+      }
+      return 'https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Spear_Lv50_HoraSpear.gif';
+    }
+
+    // Direct match by slug
+    for (const [url, img] of Object.entries(sitemapImages)) {
+      if (url.endsWith('/' + slug)) return img;
+    }
+
+    // Try keywords matching
     const keywords = cleanName.split(' ');
     const match = urlKeys.find(url => url.includes('/weapon/') && keywords.every(kw => url.includes(kw)));
     if (match) return sitemapImages[match];
-    
-    // Generic weapon type fallback
+
     const fallbackMatch = urlKeys.find(url => url.includes('/weapon/') && url.includes(keywords[keywords.length - 1]));
     if (fallbackMatch) return sitemapImages[fallbackMatch];
   }
-  
-  if (type === 'shield') {
-    const match = urlKeys.find(url => url.includes('/shield/') || (url.includes('/armor/') && url.includes('shield')));
-    if (match) return sitemapImages[match];
-  }
-  
-  if (type === 'helmet') {
-    const rKey = race === 'acreton' ? 'accretia' : race === 'belterra' ? 'bellato' : race === 'coralis' ? 'cora' : '';
-    let match = urlKeys.find(url => url.includes('/armor/') && (url.includes('helmet') || url.includes('cap') || url.includes('circlet')) && rKey && url.includes(rKey));
-    if (!match) {
-      match = urlKeys.find(url => url.includes('/armor/') && (url.includes('helmet') || url.includes('cap') || url.includes('circlet')));
-    }
-    if (match) return sitemapImages[match];
-  }
-  
-  if (type === 'mantle') {
-    const match = urlKeys.find(url => url.includes('/cloak/') || url.includes('mantle') || url.includes('cape') || url.includes('veil'));
-    if (match) return sitemapImages[match];
-  }
-  
-  if (type === 'armor') {
-    const rKey = race === 'acreton' ? 'accretia' : race === 'belterra' ? 'bellato' : race === 'coralis' ? 'cora' : '';
-    let match = urlKeys.find(url => url.includes('/armor/') && (url.includes('upper') || url.includes('suit') || url.includes('robe') || url.includes('frame') || url.includes('armor')) && rKey && url.includes(rKey));
-    if (!match) {
-      match = urlKeys.find(url => url.includes('/armor/') && (url.includes('upper') || url.includes('suit') || url.includes('robe') || url.includes('frame') || url.includes('armor')));
-    }
-    if (match) return sitemapImages[match];
-  }
-  
-  if (type === 'gloves') {
-    const rKey = race === 'acreton' ? 'accretia' : race === 'belterra' ? 'bellato' : race === 'coralis' ? 'cora' : '';
-    let match = urlKeys.find(url => url.includes('/armor/') && (url.includes('gloves') || url.includes('gauntlet') || url.includes('hands')) && rKey && url.includes(rKey));
-    if (!match) {
-      match = urlKeys.find(url => url.includes('/armor/') && (url.includes('gloves') || url.includes('gauntlet') || url.includes('hands')));
-    }
-    if (match) return sitemapImages[match];
-  }
-  
-  if (type === 'boots') {
-    const rKey = race === 'acreton' ? 'accretia' : race === 'belterra' ? 'bellato' : race === 'coralis' ? 'cora' : '';
-    let match = urlKeys.find(url => url.includes('/armor/') && (url.includes('boots') || url.includes('shoes') || url.includes('strider')) && rKey && url.includes(rKey));
-    if (!match) {
-      match = urlKeys.find(url => url.includes('/armor/') && (url.includes('boots') || url.includes('shoes') || url.includes('strider')));
-    }
-    if (match) return sitemapImages[match];
-  }
-  
-  if (type === 'material' || type === 'consumable') {
-    const keywords = cleanName.split(' ');
-    const match = urlKeys.find(url => url.includes('/item/') && keywords.every(kw => url.includes(kw)));
-    if (match) return sitemapImages[match];
-  }
 
-  // 3. Fallback to any sitemap image containing the item slug keyword
+  // 5. Fallback to first sitemap image matching slug keyword
+  const urlKeys = Object.keys(sitemapImages);
   const lastResort = urlKeys.find(url => url.includes(slug));
   if (lastResort) return sitemapImages[lastResort];
 
-  return null;
+  // Return a sensible default icon if everything fails
+  return 'https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png';
 }
 
 
@@ -199,7 +275,7 @@ levels.forEach(lvl => {
         race: race,
         level: lvl,
         bonus: { atk: Math.floor(baseAtk * r.mult) },
-        image: findItemImage(getWepName(race, lvl), 'weapon', race)
+        image: findItemImage(getWepName(race, lvl) + ' Lv.' + lvl, 'weapon', race)
       });
       // Armor / Shield
       items.push({
@@ -211,7 +287,7 @@ levels.forEach(lvl => {
         race: race,
         level: lvl,
         bonus: { def: Math.floor(baseDef * r.mult) },
-        image: findItemImage(getArmName(race, lvl), race === 'All' ? 'shield' : 'armor', race)
+        image: findItemImage(getArmName(race, lvl) + ' Lv.' + lvl, race === 'All' ? 'shield' : 'armor', race)
       });
     });
   });
@@ -242,7 +318,6 @@ Object.entries(jobWeapons).forEach(([race, list]) => {
 
 // Add Archon Sets (Ultra Rare - UR, Level 55)
 // Belterra — Solaris Sovereign Set
-// Belterra — Solaris Sovereign Set
 items.push({
   id: "archon_belterra_helmet",
   name: "Mahkota Solaris",
@@ -252,7 +327,7 @@ items.push({
   race: "belterra",
   level: 55,
   bonus: { hpPercent: 15, defPercent: 10 },
-  image: findItemImage("Mahkota Solaris", "helmet", "belterra")
+  image: "https://img.rfdatabase.net/items/ihbwd40.png"
 });
 items.push({
   id: "archon_belterra_mantle",
@@ -263,7 +338,7 @@ items.push({
   race: "belterra",
   level: 55,
   bonus: { hpPercent: 10, description: "Aura meningkatkan HP pasukan sekitar." },
-  image: findItemImage("Jubah Solaris Regalia", "mantle", "belterra")
+  image: "https://rfdb.rfdatabase.net/wp-content/uploads/2023/09/jetpackcombination.png"
 });
 items.push({
   id: "archon_belterra_armor",
@@ -274,7 +349,7 @@ items.push({
   race: "belterra",
   level: 55,
   bonus: { defPercent: 20, description: "Resist status negatif." },
-  image: findItemImage("Armor Helios Core", "armor", "belterra")
+  image: "https://img.rfdatabase.net/items/iubwd40.png"
 });
 items.push({
   id: "archon_belterra_gloves",
@@ -285,7 +360,7 @@ items.push({
   race: "belterra",
   level: 55,
   bonus: { atkPercent: 15, accPercent: 10 },
-  image: findItemImage("Sarung Tangan Aether Drive", "gloves", "belterra")
+  image: "https://img.rfdatabase.net/items/igbwd40.png"
 });
 items.push({
   id: "archon_belterra_boots",
@@ -296,7 +371,7 @@ items.push({
   race: "belterra",
   level: 55,
   bonus: { speedPercent: 20 },
-  image: findItemImage("Sepatu Quantum Strider", "boots", "belterra")
+  image: "https://img.rfdatabase.net/items/isbwd40.png"
 });
 items.push({
   id: "archon_belterra_weapon",
@@ -307,7 +382,7 @@ items.push({
   race: "belterra",
   level: 55,
   bonus: { atkPercent: 25, description: "Efek ledakan energi surya." },
-  image: findItemImage("Sunbreaker", "weapon", "belterra")
+  image: "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Relic_Sword_Lv45_ManEater.gif"
 });
 
 // Coralis — Astral Ascendant Set
@@ -320,7 +395,7 @@ items.push({
   race: "coralis",
   level: 55,
   bonus: { hpPercent: 15, defPercent: 10, description: "+15% Mana, +10% Magic Defense" },
-  image: findItemImage("Tiara Celestia", "helmet", "coralis")
+  image: "https://img.rfdatabase.net/items/ihcwd40.png"
 });
 items.push({
   id: "archon_coralis_mantle",
@@ -331,7 +406,7 @@ items.push({
   race: "coralis",
   level: 55,
   bonus: { description: "Aura regenerasi mana." },
-  image: findItemImage("Astral Veil", "mantle", "coralis")
+  image: "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/ikcm002.png"
 });
 items.push({
   id: "archon_coralis_armor",
@@ -342,7 +417,7 @@ items.push({
   race: "coralis",
   level: 55,
   bonus: { atkPercent: 20, description: "+20% Magic Power" },
-  image: findItemImage("Robe of Eternal Stars", "armor", "coralis")
+  image: "https://img.rfdatabase.net/items/iucwd40.png"
 });
 items.push({
   id: "archon_coralis_gloves",
@@ -353,7 +428,7 @@ items.push({
   race: "coralis",
   level: 55,
   bonus: { description: "+15% Critical Magic" },
-  image: findItemImage("Gauntlet of Moondust", "gloves", "coralis")
+  image: "https://img.rfdatabase.net/items/igcwc40.png"
 });
 items.push({
   id: "archon_coralis_boots",
@@ -364,7 +439,7 @@ items.push({
   race: "coralis",
   level: 55,
   bonus: { description: "+20% Evasion" },
-  image: findItemImage("Boots of Lunar Path", "boots", "coralis")
+  image: "https://img.rfdatabase.net/items/iscwd40.png"
 });
 items.push({
   id: "archon_coralis_weapon",
@@ -375,7 +450,7 @@ items.push({
   race: "coralis",
   level: 55,
   bonus: { atkPercent: 25, description: "Memanggil hujan meteor astral." },
-  image: findItemImage("Starfall Scepter", "weapon", "coralis")
+  image: "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_Lv55_DarkStaff.gif"
 });
 
 // Acreton — Iron Dominion Set
@@ -388,7 +463,7 @@ items.push({
   race: "acreton",
   level: 55,
   bonus: { defPercent: 20 },
-  image: findItemImage("Helm Dominion Prime", "helmet", "acreton")
+  image: "https://img.rfdatabase.net/items/ihawd40.png"
 });
 items.push({
   id: "archon_acreton_mantle",
@@ -399,7 +474,7 @@ items.push({
   race: "acreton",
   level: 55,
   bonus: { description: "Aura peningkatan damage pasukan." },
-  image: findItemImage("Iron Dominion Mantle", "mantle", "acreton")
+  image: "https://rfdb.rfdatabase.net/wp-content/uploads/2025/12/ikam001.png"
 });
 items.push({
   id: "archon_acreton_armor",
@@ -410,7 +485,7 @@ items.push({
   race: "acreton",
   level: 55,
   bonus: { hpPercent: 25, defPercent: 20 },
-  image: findItemImage("Titan Warframe Armor", "armor", "acreton")
+  image: "https://img.rfdatabase.net/items/iuawd40.png"
 });
 items.push({
   id: "archon_acreton_gloves",
@@ -421,7 +496,7 @@ items.push({
   race: "acreton",
   level: 55,
   bonus: { atkPercent: 15 },
-  image: findItemImage("Gauntlet of Annihilation", "gloves", "acreton")
+  image: "https://img.rfdatabase.net/items/igawd40.png"
 });
 items.push({
   id: "archon_acreton_boots",
@@ -432,7 +507,7 @@ items.push({
   race: "acreton",
   level: 55,
   bonus: { speedPercent: 15, accPercent: 10 },
-  image: findItemImage("Mag-Lev Assault Boots", "boots", "acreton")
+  image: "https://img.rfdatabase.net/items/isawd40.png"
 });
 items.push({
   id: "archon_acreton_weapon",
@@ -443,7 +518,7 @@ items.push({
   race: "acreton",
   level: 55,
   bonus: { atkPercent: 30, description: "Efek penetrasi armor." },
-  image: findItemImage("Oblivion Cannon", "weapon", "acreton")
+  image: "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Relic_Firearm_Lv55_MetalElvenGattlingCannon.gif"
 });
 
 fs.writeFileSync(path.join(__dirname, '../src/data/items.json'), JSON.stringify({ items }, null, 2));

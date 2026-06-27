@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { apiRegister, apiLogin, apiMe, apiLogout, setToken, clearToken, getToken } from '../lib/api'
+import { apiRegister, apiLogin, apiMe, apiLogout, apiGoogleAuth, setToken, clearToken, getToken } from '../lib/api'
 
 export const useAuthStore = create((set) => ({
   user: null,      // { username }
@@ -43,9 +43,23 @@ export const useAuthStore = create((set) => ({
     }
   },
 
+  signInWithGoogle: async (credential) => {
+    set({ error: null, loading: true })
+    try {
+      const { token, username } = await apiGoogleAuth(credential)
+      setToken(token)
+      set({ user: { username }, loading: false })
+      return true
+    } catch (e) {
+      set({ error: e.message, loading: false })
+      return false
+    }
+  },
+
   signOut: async () => {
     try { await apiLogout() } catch (err) { console.warn('[authStore] logout request fail:', err) }
     clearToken()
+    localStorage.removeItem('focus-rpg-save') // Prevent state bleeding to new sessions
     set({ user: null })
   },
 

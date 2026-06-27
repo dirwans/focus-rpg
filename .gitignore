@@ -8,6 +8,16 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+
+# Scratch & development scripts
+scratch/
+scripts/rfwiki-raw/
+scripts/scrape-rfwiki.js
+scripts/generate-ori-md.js
+check_image.js
+rfdatabase-ori.md
+nginx_focus_rpg.conf
+public/library.html
 dist
 dist-ssr
 *.local

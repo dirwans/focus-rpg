@@ -97,14 +97,42 @@ export default function App() {
   useEffect(() => {
     if (!user || !hydrated) return
     readyRef.current = false
+    // Immediately wipe stale state from previous user so nothing bleeds through during load
+    useGameStore.setState((s) => ({
+      player: { ...s.player, username: user.username, name: user.username, race: null },
+    }))
+    localStorage.removeItem('focus-rpg-save')
     loadSave().then((cloud) => {
       if (cloud) {
-        applySyncState(cloud)
-        lastSyncRef.current = snap(cloud)
+        // Force-apply correct username/name regardless of what's stored on server
+        const correctedCloud = { ...cloud, username: user.username, name: user.username }
+        applySyncState(correctedCloud)
+        lastSyncRef.current = snap(correctedCloud)
       } else {
-        const local = getSyncState()
-        syncSave(local)
-        lastSyncRef.current = snap(local)
+        // New user — reset to fresh state with correct username, do NOT use stale local state
+        const freshState = {
+          name: user.username,
+          username: user.username,
+          race: null,
+          job: null,
+          level: 1,
+          exp: 0,
+          resources: { anium: 200, credits: 10, potions: 5 },
+          upgrades: { atk: 0, def: 0, hp: 0 },
+          equipment: { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null },
+          sector: 1,
+          highestSector: 1,
+          streak: 0,
+          lastSessionDate: null,
+          inventory: [],
+          totalSessions: 0,
+          totalMinutes: 0,
+          savedAt: Date.now(),
+          language: 'en',
+        }
+        useGameStore.setState((s) => ({ player: freshState }))
+        syncSave({ ...freshState })
+        lastSyncRef.current = snap(freshState)
       }
       setTimeout(() => { readyRef.current = true }, 600)
     })
@@ -116,6 +144,22 @@ export default function App() {
       }
     }).catch(e => console.error('[Archon] fetch error', e))
   }, [user?.username, hydrated])
+
+  // Sync player name and username to user.username from auth store
+  useEffect(() => {
+    if (user?.username && hydrated) {
+      const curPlayer = useGameStore.getState().player
+      if (curPlayer.username !== user.username || curPlayer.name !== user.username) {
+        useGameStore.setState((s) => ({
+          player: {
+            ...s.player,
+            username: user.username,
+            name: user.username
+          }
+        }))
+      }
+    }
+  }, [user?.username, hydrated, player.username, player.name])
 
   // Sync tiap state berubah (debounce 800ms) — skip kalau sama dgn snapshot terakhir
   useEffect(() => {
@@ -210,7 +254,7 @@ export default function App() {
     <div className="game-root">
       <div className="game-container">
         <div className="parallax-bg" style={{ backgroundImage: `url('${bgImage}')` }} />
-        <div style={styles.content}><Screen /></div>
+        <div className="no-scrollbar" style={styles.content}><Screen /></div>
         <BottomNav />
       </div>
       {showRaceSelect && <RaceSelect />}

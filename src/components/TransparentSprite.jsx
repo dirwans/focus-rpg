@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-export default function TransparentSprite({ src, alt, size = 120, glowColor = '#d000ff' }) {
+export default function TransparentSprite({ src, alt, size = 120, width, height, glowColor = '#d000ff', upperBodyOnly = false, fill = false }) {
   const [processedSrc, setProcessedSrc] = useState(null)
 
   useEffect(() => {
@@ -12,9 +12,7 @@ export default function TransparentSprite({ src, alt, size = 120, glowColor = '#
       : src
 
     const img = new Image()
-    if (isRemote) {
-      img.crossOrigin = 'anonymous'
-    }
+    img.crossOrigin = 'anonymous'
     
     img.onload = () => {
       const canvas = document.createElement('canvas')
@@ -29,6 +27,17 @@ export default function TransparentSprite({ src, alt, size = 120, glowColor = '#
         const W = canvas.width
         const H = canvas.height
         
+        // 0. Clean up green screen background (chroma key) globally first
+        for (let i = 0; i < W * H; i++) {
+          const r = data[i * 4]
+          const g = data[i * 4 + 1]
+          const b = data[i * 4 + 2]
+          const isGreenBg = g > 55 && g > r + 15 && g > b + 15 && r < 190 && b < 190
+          if (isGreenBg) {
+            data[i * 4 + 3] = 0 // force transparent
+          }
+        }
+
         // Check if the image already has transparent pixels (e.g., PNG with transparency)
         let hasTransparency = false
         for (let i = 0; i < W * H; i++) {
@@ -87,11 +96,13 @@ export default function TransparentSprite({ src, alt, size = 120, glowColor = '#
             const g = data[pixelIdx+1]
             const b = data[pixelIdx+2]
             
-            // Check if this pixel is background (black background, or green chroma key background)
+            // Check if this pixel is background (black background, green chroma key background, or white background)
             const isBlackBg = r < 20 && g < 20 && b < 20
-            const isGreenBg = Math.abs(r - 71) < 15 && Math.abs(g - 112) < 15 && Math.abs(b - 76) < 15
+            // Broad green-screen detection: G channel dominates (covers dark olive-green AND bright vivid green)
+            const isGreenBg = g > 60 && g > r + 20 && g > b + 20 && r < 180 && b < 180
+            const isWhiteBg = r > 220 && g > 220 && b > 220
             
-            if (isBlackBg || isGreenBg) {
+            if (isBlackBg || isGreenBg || isWhiteBg) {
               data[pixelIdx + 3] = 0 // transparent
               
               // Push 4 neighbors
@@ -103,46 +114,113 @@ export default function TransparentSprite({ src, alt, size = 120, glowColor = '#
           }
         }
 
-        // 3. Draw a 2px solid black outline outside the removed background boundaries
-        const originalAlpha = new Uint8Array(W * H)
-        for (let i = 0; i < W * H; i++) {
-          originalAlpha[i] = data[i * 4 + 3]
-        }
-        
-        const outlineWidth = 2
-        for (let y = 0; y < H; y++) {
-          for (let x = 0; x < W; x++) {
-            const idx = y * W + x
-            if (originalAlpha[idx] === 0) {
-              let hasSolidNeighbor = false
-              for (let dy = -outlineWidth; dy <= outlineWidth; dy++) {
-                for (let dx = -outlineWidth; dx <= outlineWidth; dx++) {
-                  const nx = x + dx
-                  const ny = y + dy
-                  if (nx >= 0 && nx < W && ny >= 0 && ny < H) {
-                    const nIdx = ny * W + nx
-                    if (originalAlpha[nIdx] > 0) {
-                      hasSolidNeighbor = true
-                      break
-                    }
-                  }
-                }
-                if (hasSolidNeighbor) break
-              }
-              
-              if (hasSolidNeighbor) {
-                const pixelIdx = idx * 4
-                data[pixelIdx] = 0     // R
-                data[pixelIdx + 1] = 0 // G
-                data[pixelIdx + 2] = 0 // B
-                data[pixelIdx + 3] = 255 // A (solid black outline)
-              }
+        // 3. Find bounding box of non-transparent pixels *before* drawing the outline
+        let minX = W, minY = H, maxX = 0, maxY = 0
+        let foundAny = false
+        const boundStartX = !hasTransparency ? borderThreshX : 0
+        const boundEndX = !hasTransparency ? W - borderThreshX : W
+        const boundStartY = !hasTransparency ? borderThreshY : 0
+        const boundEndY = !hasTransparency ? H - borderThreshY : H
+
+        for (let y = boundStartY; y < boundEndY; y++) {
+          for (let x = boundStartX; x < boundEndX; x++) {
+            const idx = (y * W + x) * 4
+            const alpha = data[idx + 3]
+            if (alpha > 10) {
+              if (x < minX) minX = x
+              if (x > maxX) maxX = x
+              if (y < minY) minY = y
+              if (y > maxY) maxY = y
+              foundAny = true
             }
           }
         }
 
-        ctx.putImageData(imgData, 0, 0)
-        setProcessedSrc(canvas.toDataURL())
+        if (foundAny) {
+          const padding = 4
+          const leftCutoff = minX <= boundStartX
+          const rightCutoff = maxX >= boundEndX - 1
+          const topCutoff = minY <= boundStartY
+          
+          // Compute vertical crop: if upperBodyOnly is true, crop height to top 42% of pilot's bounding box
+          const fullHeight = maxY - minY + 1
+          const targetMaxY = upperBodyOnly
+            ? Math.min(maxY, minY + Math.floor(fullHeight * 0.42))
+            : maxY
+
+          // Treat the bottom edge as a cutoff if we are only rendering upper body, to avoid drawing outline there
+          const bottomCutoff = upperBodyOnly || (targetMaxY >= boundEndY - 1)
+
+          const cropMinX = leftCutoff ? minX : Math.max(0, minX - padding)
+          const cropMaxX = rightCutoff ? maxX : Math.min(W - 1, maxX + padding)
+          const cropMinY = topCutoff ? minY : Math.max(0, minY - padding)
+          const cropMaxY = bottomCutoff ? targetMaxY : Math.min(H - 1, targetMaxY + padding)
+
+          const cropW = cropMaxX - cropMinX + 1
+          const cropH = cropMaxY - cropMinY + 1
+
+          // Create cropped canvas
+          const cropCanvas = document.createElement('canvas')
+          cropCanvas.width = cropW
+          cropCanvas.height = cropH
+          const cropCtx = cropCanvas.getContext('2d')
+
+          // Put processed data back onto original canvas temporarily to crop from it
+          ctx.putImageData(imgData, 0, 0)
+          cropCtx.drawImage(canvas, cropMinX, cropMinY, cropW, cropH, 0, 0, cropW, cropH)
+
+          // Now draw the 2px solid black outline on the cropped canvas
+          const cropImgData = cropCtx.getImageData(0, 0, cropW, cropH)
+          const cropData = cropImgData.data
+          const cropAlpha = new Uint8Array(cropW * cropH)
+          for (let i = 0; i < cropW * cropH; i++) {
+            cropAlpha[i] = cropData[i * 4 + 3]
+          }
+
+          const outlineWidth = 2
+          for (let y = 0; y < cropH; y++) {
+            for (let x = 0; x < cropW; x++) {
+              const idx = y * cropW + x
+              if (cropAlpha[idx] === 0) {
+                // Do NOT draw outline on cutoff edges of the original image
+                if (leftCutoff && x <= outlineWidth) continue
+                if (rightCutoff && x >= cropW - 1 - outlineWidth) continue
+                if (topCutoff && y <= outlineWidth) continue
+                if (bottomCutoff && y >= cropH - 1 - outlineWidth) continue
+
+                let hasSolidNeighbor = false
+                for (let dy = -outlineWidth; dy <= outlineWidth; dy++) {
+                  for (let dx = -outlineWidth; dx <= outlineWidth; dx++) {
+                    const nx = x + dx
+                    const ny = y + dy
+                    if (nx >= 0 && nx < cropW && ny >= 0 && ny < cropH) {
+                      const nIdx = ny * cropW + nx
+                      if (cropAlpha[nIdx] > 0) {
+                        hasSolidNeighbor = true
+                        break
+                      }
+                    }
+                  }
+                  if (hasSolidNeighbor) break
+                }
+
+                if (hasSolidNeighbor) {
+                  const pixelIdx = idx * 4
+                  cropData[pixelIdx] = 0     // R
+                  cropData[pixelIdx + 1] = 0 // G
+                  cropData[pixelIdx + 2] = 0 // B
+                  cropData[pixelIdx + 3] = 255 // A
+                }
+              }
+            }
+          }
+
+          cropCtx.putImageData(cropImgData, 0, 0)
+          setProcessedSrc(cropCanvas.toDataURL())
+        } else {
+          ctx.putImageData(imgData, 0, 0)
+          setProcessedSrc(canvas.toDataURL())
+        }
       } catch (err) {
         console.error('Canvas processing error for sprite:', err)
         setProcessedSrc(src)
@@ -158,19 +236,43 @@ export default function TransparentSprite({ src, alt, size = 120, glowColor = '#
   const displaySrc = processedSrc || src
   const isFallback = displaySrc === src
 
+  if (fill) {
+    const fillH = height || 150
+    return (
+      <div style={{ width: width || size, height: fillH, overflow: 'hidden', position: 'relative', flexShrink: 0 }}>
+        {displaySrc && (
+          <img
+            src={displaySrc}
+            alt={alt}
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: '50%',
+              transform: 'translateX(-50%)',
+              height: fillH * 2,
+              width: 'auto',
+              maxWidth: 'none',
+              maxHeight: 'none',
+            }}
+          />
+        )}
+      </div>
+    )
+  }
+
   return (
-    <div style={{ width: size, height: size, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'visible', filter: 'none', flexShrink: 0 }}>
+    <div style={{ width: width || size, height: height || size, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'visible', filter: 'none', flexShrink: 0 }}>
       {displaySrc && (
-        <img 
-          src={displaySrc} 
-          alt={alt} 
-          style={{ 
-            width: '100%', 
-            height: '100%', 
+        <img
+          src={displaySrc}
+          alt={alt}
+          style={{
+            width: '100%',
+            height: '100%',
             objectFit: 'contain',
             mixBlendMode: isFallback ? 'screen' : 'normal',
             clipPath: isFallback ? 'inset(5%)' : 'none'
-          }} 
+          }}
         />
       )}
     </div>

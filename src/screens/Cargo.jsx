@@ -1,6 +1,9 @@
+// v2: faction filter
 import { useState } from 'react'
 import { useGameStore } from '../store/gameStore'
 import { getWeaponRarityColor, getWeaponRarityDisplayName } from '../lib/rarity'
+import { t } from '../lib/translate'
+
 
 const RARITY_COLOR = {
   common: '#6a9ab8',
@@ -21,14 +24,13 @@ const RARITY_COLOR = {
   d: '#6a9ab8'
 }
 
-const SLOT_AREAS = {
-  helmet: 'helmet',
-  weapon: 'weapon',
-  armor: 'armor',
-  shield: 'shield',
-  mantle: 'mantle',
-  gloves: 'gloves',
-  boots: 'boots'
+// Maps slot names to item.type for filtering
+const SLOT_TO_TYPE = {
+  weapon: 'weapon', armor: 'armor', shield: 'shield',
+  helmet: 'helmet', mantle: 'mantle', gloves: 'gloves',
+  boots: 'boots', pants: 'pants',
+  amulet1: 'amulet', amulet2: 'amulet',
+  ring1: 'ring', ring2: 'ring',
 }
 
 export default function Cargo() {
@@ -38,8 +40,10 @@ export default function Cargo() {
   const sellItem = useGameStore((s) => s.sellItem)
 
   const [selectedItem, setSelectedItem] = useState(null)
+  const [slotFilter, setSlotFilter] = useState(null)
 
-  const eq = player.equipment || { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null }
+  const eq = player.equipment || { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null }
+
 
   const handleSell = (uid) => {
     sellItem(uid)
@@ -73,6 +77,111 @@ export default function Cargo() {
     return item.name
   }
 
+  // Slot type for this slot
+  const getSlotType = (slot) => SLOT_TO_TYPE[slot] || slot
+
+  const handleSlotClick = (slot) => {
+    const type = getSlotType(slot)
+    setSlotFilter(prev => prev === type ? null : type)
+  }
+
+  const renderSlot = (slot, defaultEmoji = '➕', slotLabel = slot.toUpperCase()) => {
+    const item = eq[slot]
+    const color = getItemColor(item)
+    const slotType = getSlotType(slot)
+    const isFilterActive = slotFilter === slotType
+    const filterGlow = isFilterActive ? '#00e5ff' : null
+    return (
+      <div
+        key={slot}
+        role="button"
+        tabIndex={0}
+        style={{
+          flex: 1,
+          minHeight: 76,
+          height: 76,
+          padding: '6px 4px',
+          background: isFilterActive
+            ? 'linear-gradient(135deg, rgba(0,229,255,0.18), rgba(0,229,255,0.06))'
+            : item ? `linear-gradient(135deg, ${color}22, ${color}08)` : 'rgba(3, 8, 20, 0.55)',
+          border: `1.5px ${item ? 'solid' : 'dashed'} ${isFilterActive ? '#00e5ff' : color}`,
+          borderRadius: 10,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 3,
+          cursor: 'pointer',
+          boxShadow: isFilterActive
+            ? '0 0 14px rgba(0,229,255,0.4), inset 0 0 8px rgba(0,229,255,0.15)'
+            : item ? `0 0 10px ${color}33, inset 0 0 6px ${color}22` : 'none',
+          color: '#fff',
+          outline: 'none',
+          transition: 'all 0.2s',
+          position: 'relative',
+          zIndex: 2,
+          overflow: 'visible',
+        }}
+        onClick={() => handleSlotClick(slot)}
+      >
+        <div style={{ fontFamily: 'var(--font-title)', fontSize: 8, color: isFilterActive ? '#00e5ff' : item ? color : '#2a5a8a', letterSpacing: 0.5, fontWeight: 800, textTransform: 'uppercase' }}>
+          {slotLabel}
+        </div>
+        {item ? (
+          <>
+            {item.image ? (
+              <img referrerPolicy="no-referrer" src={item.image} style={{ width: 26, height: 26, objectFit: 'contain' }} alt={item.name} />
+            ) : (
+              <span style={{ fontSize: 20 }}>{item.emoji}</span>
+            )}
+            <div style={{ fontSize: 9, fontFamily: 'var(--font-mono)', color: color, fontWeight: 'bold', textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden', maxWidth: 80, textAlign: 'center' }}>
+              {item.name.split(' ')[0]}
+            </div>
+            
+            <button
+              onClick={(e) => {
+                e.stopPropagation()
+                setSelectedItem({ ...item, isEquipped: true, slot })
+              }}
+              style={{
+                position: 'absolute',
+                top: 4,
+                right: 4,
+                width: 14,
+                height: 14,
+                borderRadius: '50%',
+                background: 'rgba(3, 8, 20, 0.9)',
+                border: `1px solid ${color}`,
+                color: color,
+                fontSize: 8,
+                fontWeight: 'bold',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                padding: 0,
+                lineHeight: 1,
+                zIndex: 10,
+                boxShadow: `0 0 5px ${color}55`,
+              }}
+              title="Info/Unequip"
+            >
+              ℹ
+            </button>
+          </>
+        ) : (
+          <div style={{ fontSize: 14, opacity: isFilterActive ? 0.6 : 0.18 }}>{defaultEmoji}</div>
+        )}
+      </div>
+    )
+  }
+
+  // Filtered inventory
+  const filteredInventory = slotFilter
+    ? player.inventory.filter(item => item.type === slotFilter)
+    : player.inventory
+
+
   return (
     <div style={styles.screen}>
       <div style={styles.topBar}>
@@ -83,9 +192,10 @@ export default function Cargo() {
           onClick={() => {
             const buyPotions = useGameStore.getState().buyPotions
             if (buyPotions(10)) {
-              alert("Successfully bought 10 Potions!")
+              alert(t('buy_potion_success'))
             }
           }}
+
           style={{
             background: 'rgba(3, 8, 20, 0.8)',
             border: '1px solid #ff4466',
@@ -114,61 +224,62 @@ export default function Cargo() {
       </div>
 
       {/* Equipped Gear Section */}
-      <div className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.section}>
-        <div style={styles.sectionLabel}>▸ EQUIPPED UNIT GEAR</div>
-        
-        <div className="humanoid-gear-grid">
-          {['weapon', 'armor', 'shield', 'helmet', 'mantle', 'gloves', 'boots'].map((slot) => {
-            const item = eq[slot]
-            const color = getItemColor(item)
-            return (
-              <button
-                key={slot}
-                className={`gear-slot-wrapper premium-card ${item ? 'gear-slot-filled' : ''}`}
-                style={{
-                  gridArea: SLOT_AREAS[slot],
-                  borderColor: color,
-                  cursor: item ? 'pointer' : 'default',
-                  boxShadow: item ? `0 0 10px ${color}33, inset 0 0 6px ${color}22` : 'none',
-                  borderStyle: item ? 'solid' : 'dashed',
-                  color: '#fff',
-                  outline: 'none'
-                }}
-                onClick={() => item ? setSelectedItem({ ...item, isEquipped: true, slot }) : null}
-              >
-                <div style={styles.slotHeader}>{slot.toUpperCase()}</div>
-                {item ? (
-                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, marginTop: 4 }}>
-                    {item.image ? (
-                      <img referrerPolicy="no-referrer" src={item.image} style={{ width: 26, height: 26, objectFit: 'contain' }} alt={item.name} />
-                    ) : (
-                      <span style={{ fontSize: 22 }}>{item.emoji}</span>
-                    )}
-                    <div style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: color, fontWeight: 'bold', textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden', maxWidth: 84 }}>
-                      {item.name.split(' ')[0]}
-                    </div>
-                  </div>
-                ) : (
-                  <div style={{ fontSize: 18, opacity: 0.15, marginTop: 4 }}>➕</div>
-                )}
-              </button>
-            )
-          })}
+      <div style={{ ...styles.sectionLabel, paddingLeft: 16, marginBottom: 8 }}>{t('equipped_gear_title')}</div>
+      <div className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={{ margin: '0 16px 14px', padding: '10px 6px', overflow: 'visible', position: 'relative', zIndex: 1 }}>
+        {/* Row 1: Amulet | Helmet | Amulet */}
+        <div style={styles.gearRow}>
+          {renderSlot('amulet1', '💎', 'AMULET')}
+          {renderSlot('helmet', '⛑', 'HELMET')}
+          {renderSlot('amulet2', '💎', 'AMULET')}
+        </div>
+        {/* Row 2: Weapon / Armor / Shield */}
+        <div style={styles.gearRow}>
+          {renderSlot('weapon', '⚔️', 'WEAPON')}
+          {renderSlot('armor', '🛡', 'CHEST')}
+          {renderSlot('shield', '🔰', 'SHIELD')}
+        </div>
+        {/* Row 3: Gloves / Pants / Mantle */}
+        <div style={styles.gearRow}>
+          {renderSlot('gloves', '🧤', 'GLOVES')}
+          {renderSlot('pants', '👖', 'PANTS')}
+          {renderSlot('mantle', '🦺', 'MANTLE')}
+        </div>
+        {/* Row 4: Ring | Boots | Ring */}
+        <div style={styles.gearRow}>
+          {renderSlot('ring1', '💍', 'RING')}
+          {renderSlot('boots', '👟', 'LEGS')}
+          {renderSlot('ring2', '💍', 'RING')}
         </div>
       </div>
 
       {/* Inventory Section */}
-      <div style={styles.sectionLabel} style={{ paddingLeft: 16 }}>▸ ALL CARGO ITEMS</div>
+      <div style={{ display: 'flex', alignItems: 'center', padding: '0 16px', marginBottom: 10, gap: 8 }}>
+        <div style={styles.sectionLabel}>
+          {slotFilter ? `${slotFilter.toUpperCase()} ITEMS` : t('all_cargo_title')}
+        </div>
+        {slotFilter && (
+          <button
+            onClick={() => setSlotFilter(null)}
+            style={{ background: 'rgba(0,229,255,0.12)', border: '1px solid #00e5ff', borderRadius: 12, padding: '3px 10px', fontFamily: 'var(--font-mono)', fontSize: 10, fontWeight: 800, color: '#00e5ff', cursor: 'pointer', outline: 'none', marginLeft: 'auto' }}
+          >
+            ✕ SHOW ALL
+          </button>
+        )}
+      </div>
 
-      {player.inventory.length === 0 ? (
+      {filteredInventory.length === 0 ? (
         <div style={styles.empty}>
-          <div style={{ fontSize: 40 }}>📦</div>
-          <div style={{ fontFamily: 'monospace', fontSize: 14, color: '#7ab0d0', marginTop: 8 }}>No items yet</div>
-          <div style={{ fontFamily: 'monospace', fontSize: 14, color: '#4a8fa8', marginTop: 4, fontWeight: 800 }}>Complete fight sessions to drop items</div>
+          <div style={{ fontSize: 40 }}>{slotFilter ? '🔍' : '📦'}</div>
+          <div style={{ fontFamily: 'monospace', fontSize: 14, color: '#7ab0d0', marginTop: 8 }}>
+            {slotFilter ? `No ${slotFilter} items in cargo` : t('empty_inventory')}
+          </div>
+          <div style={{ fontFamily: 'monospace', fontSize: 14, color: '#4a8fa8', marginTop: 4, fontWeight: 800 }}>
+            {slotFilter ? 'Tap another slot or SHOW ALL' : t('empty_inventory_desc')}
+          </div>
         </div>
       ) : (
         <div style={styles.grid}>
-          {player.inventory.map((item) => {
+          {filteredInventory.map((item) => {
             const cardColor = getItemColor(item)
             return (
               <button
@@ -208,18 +319,18 @@ export default function Cargo() {
             </div>
             
             <div style={styles.modalGrid}>
-              <div style={styles.modalRow}><span>TYPE:</span> <span>{selectedItem.type.toUpperCase()}</span></div>
-              <div style={styles.modalRow}><span>LEVEL:</span> <span>Lv.{selectedItem.level || 1}</span></div>
-              <div style={styles.modalRow}><span>RACE:</span> <span>{(selectedItem.race || 'All').toUpperCase()}</span></div>
+              <div style={styles.modalRow}><span>{t('type_label')}:</span> <span>{selectedItem.type.toUpperCase()}</span></div>
+              <div style={styles.modalRow}><span>{t('level_label')}:</span> <span>Lv.{selectedItem.level || 1}</span></div>
+              <div style={styles.modalRow}><span>{t('race_label')}:</span> <span>{(selectedItem.race || 'All').toUpperCase()}</span></div>
               {selectedItem.job && (
-                <div style={styles.modalRow}><span>JOB:</span> <span style={{ color: '#ffb300' }}>{selectedItem.job.toUpperCase()}</span></div>
+                <div style={styles.modalRow}><span>{t('job_label')}:</span> <span style={{ color: '#ffb300' }}>{selectedItem.job.toUpperCase()}</span></div>
               )}
               {selectedItem.specialProperty && (
-                <div style={styles.modalRow}><span>EFFECT:</span> <span style={{ color: '#ff3366', fontWeight: 800 }}>{selectedItem.specialProperty.toUpperCase()}</span></div>
+                <div style={styles.modalRow}><span>{t('effect_label')}:</span> <span style={{ color: '#ff3366', fontWeight: 800 }}>{selectedItem.specialProperty.toUpperCase()}</span></div>
               )}
               {selectedItem.bonus && (
                 <div style={styles.modalRow}>
-                  <span>BONUS:</span>
+                  <span>{t('bonus_label')}:</span>
                   <span style={{ color: '#00ff88', fontWeight: 700, textAlign: 'right', display: 'inline-block', maxWidth: '65%' }}>
                     {selectedItem.bonus.atk && `+${selectedItem.bonus.atk} ATK `}
                     {selectedItem.bonus.def && `+${selectedItem.bonus.def} DEF `}
@@ -235,21 +346,27 @@ export default function Cargo() {
               )}
               {selectedItem.description && (
                 <div style={{ ...styles.modalRow, flexDirection: 'column', gap: 4, marginTop: 4 }}>
-                  <span>DESCRIPTION:</span>
+                  <span>{t('description_label')}:</span>
                   <span style={{ color: '#90caf9', fontSize: 13 }}>{selectedItem.description}</span>
+                </div>
+              )}
+              {selectedItem.id && selectedItem.id.startsWith('archon_') && (
+                <div style={{ ...styles.modalRow, flexDirection: 'column', gap: 4, marginTop: 4, background: 'rgba(245, 166, 35, 0.08)', border: '1px solid rgba(245, 166, 35, 0.2)', padding: 8, borderRadius: 6 }}>
+                  <span style={{ color: '#ffcc80', fontSize: 13, lineHeight: 1.4 }}>{t('archon_notice_cargo')}</span>
                 </div>
               )}
             </div>
 
+
             {/* Level/Race/Job requirements checks warnings */}
             {!selectedItem.isEquipped && player.level < (selectedItem.level || 0) && (
-              <div style={styles.warning}>⚠️ LV.{selectedItem.level} REQUIRED (You are Lv.{player.level})</div>
+              <div style={styles.warning}>{t('req_level_warn', { req: selectedItem.level, level: player.level })}</div>
             )}
             {!selectedItem.isEquipped && selectedItem.race && selectedItem.race !== 'All' && selectedItem.race !== player.race && (
-              <div style={styles.warning}>⚠️ RESTRICTED TO {selectedItem.race.toUpperCase()}</div>
+              <div style={styles.warning}>{t('restricted_race_warn', { race: selectedItem.race.toUpperCase() })}</div>
             )}
             {!selectedItem.isEquipped && selectedItem.job && selectedItem.job !== player.job && (
-              <div style={styles.warning}>⚠️ RESTRICTED TO {selectedItem.job.toUpperCase()} JOB</div>
+              <div style={styles.warning}>{t('restricted_job_warn', { job: selectedItem.job.toUpperCase() })}</div>
             )}
 
             <div style={styles.modalButtons}>
@@ -261,10 +378,10 @@ export default function Cargo() {
                     setSelectedItem(null)
                   }}
                 >
-                  UNEQUIP
+                  {t('unequip_btn')}
                 </button>
               ) : (
-                ['weapon', 'armor', 'shield', 'helmet', 'mantle', 'gloves', 'boots'].includes(selectedItem.type) && (
+                ['weapon', 'armor', 'shield', 'helmet', 'mantle', 'gloves', 'boots', 'pants', 'amulet', 'ring'].includes(selectedItem.type) && (
                   <button
                     style={styles.modalBtn('#00c8ff', true)}
                     onClick={() => handleEquip(selectedItem.uid)}
@@ -274,19 +391,20 @@ export default function Cargo() {
                       (selectedItem.job && selectedItem.job !== player.job)
                     }
                   >
-                    EQUIP
+                    {t('equip_btn')}
                   </button>
                 )
               )}
               {!selectedItem.isEquipped && (
                 <button style={styles.modalBtn('#ff8c40', true)} onClick={() => handleSell(selectedItem.uid)}>
-                  SELL (+{getSellPrice(selectedItem)}⬡)
+                  {t('sell_btn', { price: getSellPrice(selectedItem) })}
                 </button>
               )}
               <button style={styles.modalBtn('#7ab0d0', false)} onClick={() => setSelectedItem(null)}>
-                CLOSE
+                {t('close_btn')}
               </button>
             </div>
+
           </div>
         </div>
       )}
@@ -295,8 +413,12 @@ export default function Cargo() {
 }
 
 const styles = {
-  screen:       { display: 'flex', flexDirection: 'column', flex: 1, overflowY: 'auto', fontFamily: 'var(--font-body)', zIndex: 1 },
-  topBar:       { display: 'flex', gap: 8, padding: '14px 16px 10px', alignItems: 'center', borderBottom: '1px solid rgba(0, 229, 255, 0.15)', background: 'rgba(3, 8, 20, 0.4)' },
+  screen:    { display: 'flex', flexDirection: 'column', flex: 1, overflowY: 'auto', fontFamily: 'var(--font-body)', zIndex: 1 },
+  topBar:    { display: 'flex', gap: 8, padding: '14px 16px 10px', alignItems: 'center', borderBottom: '1px solid rgba(0, 229, 255, 0.15)', background: 'rgba(3, 8, 20, 0.4)' },
+  // Gear slot rows
+  gearRow:   { display: 'flex', gap: 5, justifyContent: 'center', marginBottom: 5, position: 'relative', zIndex: 2 },
+  gearEmpty: { flex: 1, maxWidth: 100 },
+
   chip:         (c) => ({ background: 'rgba(3, 8, 20, 0.8)', border: `1px solid ${c}`, borderRadius: 20, padding: '6px 14px', fontFamily: 'var(--font-mono)', fontSize: 16, fontWeight: 800, color: c, boxShadow: `0 0 10px ${c}33, inset 0 0 6px ${c}22` }),
   slots:        { fontFamily: 'var(--font-mono)', fontSize: 14, color: '#7ab0d0', background: 'rgba(3, 8, 20, 0.8)', border: '1px solid #1a3a6a', borderRadius: 20, padding: '6px 14px', marginLeft: 'auto', fontWeight: 800 },
   section:      { margin: '0 16px 14px', padding: 14 },

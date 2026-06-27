@@ -4,10 +4,13 @@ import { writeFile } from 'node:fs/promises'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { randomBytes, scryptSync, timingSafeEqual } from 'node:crypto'
+import { OAuth2Client } from 'google-auth-library'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const PORT = process.env.PORT || 4001
 const SESSION_TTL_MS = 1000 * 60 * 60 * 24 * 30 // 30 hari
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || '907888183137-oq3l4kpui0fc2e7rcmu1i76tlk4kmdd0.apps.googleusercontent.com'
+const googleClient = new OAuth2Client(GOOGLE_CLIENT_ID)
 
 const app = express()
 app.use(express.json({ limit: '256kb' }))
@@ -211,6 +214,44 @@ app.post('/api/register', (req, res) => {
   res.json({ ok: true, token, username })
 })
 
+// ── Google OAuth endpoint ──────────────────────────────────────────────────────
+app.post('/api/auth/google', async (req, res) => {
+  const { credential } = req.body ?? {}
+  if (!credential) return res.status(400).json({ error: 'No credential provided' })
+  try {
+    const ticket = await googleClient.verifyIdToken({ idToken: credential, audience: GOOGLE_CLIENT_ID })
+    const payload = ticket.getPayload()
+    const googleId = payload.sub
+    const displayName = payload.name || payload.email?.split('@')[0] || 'pilot'
+
+    // Find existing user by googleId
+    let user = users.find(u => u.googleId === googleId)
+
+    if (!user) {
+      // Derive username from Google display name
+      let base = displayName.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_]/g, '').toLowerCase()
+      if (base.length < 3) base = 'pilot_' + base
+      if (base.length > 20) base = base.slice(0, 20)
+      let username = base
+      let counter = 2
+      while (users.find(u => u.username.toLowerCase() === username.toLowerCase())) {
+        username = base + counter; counter++
+      }
+      user = { username, googleId, passwordHash: null, salt: null, createdAt: new Date().toISOString() }
+      users.push(user)
+      saveUsers()
+    }
+
+    const token = randomBytes(24).toString('hex')
+    sessions.set(token, { username: user.username, expiresAt: Date.now() + SESSION_TTL_MS })
+    saveSessions()
+    res.json({ ok: true, token, username: user.username })
+  } catch (e) {
+    console.error('[google-auth] verify fail:', e.message)
+    res.status(401).json({ error: 'Google token tidak valid' })
+  }
+})
+
 app.post('/api/login', (req, res) => {
   const { username, password } = req.body ?? {}
   const user = users.find(u => u.username.toLowerCase() === (username ?? '').toLowerCase())
@@ -236,6 +277,17 @@ app.post('/api/logout', (req, res) => {
   res.json({ ok: true })
 })
 
+app.get('/api/admin/reset-save/:username', (req, res) => {
+  const { username } = req.params
+  const savePath = saveFile(username)
+  if (fs.existsSync(savePath)) {
+    fs.unlinkSync(savePath)
+    res.json({ ok: true, message: `Save file for ${username} has been deleted.` })
+  } else {
+    res.json({ ok: false, message: `Save file for ${username} not found.` })
+  }
+})
+
 // ── Save endpoints ────────────────────────────────────────────────────────────
 app.get('/api/save', (req, res) => {
   const s = requireSession(req, res)
@@ -253,9 +305,34 @@ app.post('/api/save', async (req, res) => {
   const current = loadSave(s.username)
   const inTs = gameState.savedAt || 0
   const curTs = current?.savedAt || 0
+
   if (current && inTs < curTs) {
     // kirim balik state terbaru biar pengirim mengoreksi diri
     return res.json({ ok: true, stale: true, game_state: current })
+  }
+
+  // Server-side validation for cheating/level jumps
+  if (current) {
+    const levelDiff = (gameState.level || 1) - (current.level || 1)
+    const timeDiffMs = Math.max(1000, Math.abs(Date.now() - curTs))
+    
+    // Scale allowed level difference based on current level and time difference.
+    // Allow faster leveling at lower levels (under lvl 30) where early stages jump levels rapidly.
+    const maxHourDiff = current.level < 30 ? 35 : 15
+    const timeRatio = Math.min(1, timeDiffMs / 3600000)
+    // Always allow at least 15 levels difference as early levels can jump 15 levels in a single 10-minute session!
+    const maxAllowedDiff = Math.max(15, Math.floor(maxHourDiff * timeRatio) + 5)
+
+    if (levelDiff > maxAllowedDiff) {
+      console.warn(`[Anti-Cheat] User ${s.username} attempted invalid level jump. Current: ${current.level}, Requested: ${gameState.level}, Allowed: ${maxAllowedDiff}`)
+      return res.status(400).json({ error: 'Save rejected: Invalid state progression detected.' })
+    }
+  } else {
+    // New user starting condition
+    if ((gameState.level || 1) > 2) {
+      console.warn(`[Anti-Cheat] New user ${s.username} attempted to start at level ${gameState.level}`)
+      return res.status(400).json({ error: 'Save rejected: Invalid starting state.' })
+    }
   }
 
   await writeSave(s.username, gameState)
@@ -589,9 +666,29 @@ app.get('/api/proxy-image', async (req, res) => {
 })
 
 // ── Serve React build ─────────────────────────────────────────────────────────
-app.use(express.static(join(__dirname, 'dist')))
+// Hashed assets (JS/CSS) can be cached forever; index.html must revalidate
+app.use('/assets', express.static(join(__dirname, 'dist', 'assets'), {
+  maxAge: '1y',
+  immutable: true,
+  setHeaders: (res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+  }
+}))
+app.use(express.static(join(__dirname, 'dist'), {
+  maxAge: 0,
+  etag: false,
+  setHeaders: (res, filePath) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    if (filePath.endsWith('.html') || filePath.endsWith('/')) {
+      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate')
+      res.setHeader('Pragma', 'no-cache')
+      res.setHeader('Expires', '0')
+    }
+  }
+}))
 app.get('*', (req, res) => {
   if (req.path.startsWith('/api/')) return res.status(404).json({ error: 'not found' })
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate')
   res.sendFile(join(__dirname, 'dist', 'index.html'))
 })
 

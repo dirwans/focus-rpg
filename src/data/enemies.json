@@ -45,6 +45,16 @@
         "expReward": 80,
         "aniumReward": 60,
         "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_10.png"
+      },
+      "pitBoss": {
+        "name": "LEVIATHAN ALPHA",
+        "emoji": "☢️",
+        "hp": 3000,
+        "atk": 55,
+        "def": 18,
+        "expReward": 480,
+        "aniumReward": 360,
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_10.png"
       }
     },
     {
@@ -91,6 +101,16 @@
         "def": 10,
         "expReward": 108,
         "aniumReward": 81,
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster-digger-clan.png"
+      },
+      "pitBoss": {
+        "name": "DEEP EXCAVATOR REX",
+        "emoji": "☢️",
+        "hp": 4200,
+        "atk": 72,
+        "def": 24,
+        "expReward": 648,
+        "aniumReward": 486,
         "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster-digger-clan.png"
       }
     },
@@ -139,6 +159,16 @@
         "expReward": 145,
         "aniumReward": 109,
         "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/turncoat-champion-sette.png"
+      },
+      "pitBoss": {
+        "name": "SAND COLOSSUS",
+        "emoji": "☢️",
+        "hp": 5875,
+        "atk": 96,
+        "def": 32,
+        "expReward": 870,
+        "aniumReward": 654,
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/turncoat-champion-sette.png"
       }
     },
     {
@@ -164,7 +194,7 @@
           "def": 9,
           "expReward": 34,
           "aniumReward": 22,
-          "image": null
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/monster_69.png"
         },
         {
           "name": "Caliana Crew",
@@ -174,7 +204,7 @@
           "def": 13,
           "expReward": 42,
           "aniumReward": 28,
-          "image": null
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/monster_67.png"
         }
       ],
       "boss": {
@@ -185,7 +215,17 @@
         "def": 20,
         "expReward": 196,
         "aniumReward": 147,
-        "image": null
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/monster_68.png"
+      },
+      "pitBoss": {
+        "name": "CALIANA EMPRESS",
+        "emoji": "☢️",
+        "hp": 8230,
+        "atk": 130,
+        "def": 44,
+        "expReward": 1176,
+        "aniumReward": 882,
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/monster_68.png"
       }
     },
     {
@@ -221,7 +261,7 @@
           "def": 17,
           "expReward": 56,
           "aniumReward": 38,
-          "image": null
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/10/tuyul.png"
         }
       ],
       "boss": {
@@ -232,6 +272,16 @@
         "def": 27,
         "expReward": 265,
         "aniumReward": 199,
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_23.png"
+      },
+      "pitBoss": {
+        "name": "INFERNO OVERLORD",
+        "emoji": "☢️",
+        "hp": 11520,
+        "atk": 174,
+        "def": 60,
+        "expReward": 1590,
+        "aniumReward": 1194,
         "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_23.png"
       }
     },
@@ -280,6 +330,16 @@
         "expReward": 358,
         "aniumReward": 269,
         "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_27.png"
+      },
+      "pitBoss": {
+        "name": "DAGON PRIME",
+        "emoji": "☢️",
+        "hp": 16130,
+        "atk": 234,
+        "def": 82,
+        "expReward": 2148,
+        "aniumReward": 1614,
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_27.png"
       }
     },
     {
@@ -327,6 +387,16 @@
         "expReward": 484,
         "aniumReward": 363,
         "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_8.png"
+      },
+      "pitBoss": {
+        "name": "TITAN BEAST LORD",
+        "emoji": "☢️",
+        "hp": 22585,
+        "atk": 318,
+        "def": 110,
+        "expReward": 2904,
+        "aniumReward": 2178,
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_8.png"
       }
     },
     {
@@ -342,7 +412,7 @@
           "def": 25,
           "expReward": 95,
           "aniumReward": 63,
-          "image": null
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/vafer-brute-monster.png"
         },
         {
           "name": "Outcast Sorcerer",
@@ -352,7 +422,7 @@
           "def": 33,
           "expReward": 111,
           "aniumReward": 75,
-          "image": null
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/turncoat-summoner-sette.png"
         },
         {
           "name": "Lizardman Guard",
@@ -373,7 +443,17 @@
         "def": 68,
         "expReward": 653,
         "aniumReward": 490,
-        "image": null
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/10/commander-thrashoo-pb.png"
+      },
+      "pitBoss": {
+        "name": "OUTCAST WAR DEITY",
+        "emoji": "☢️",
+        "hp": 31620,
+        "atk": 426,
+        "def": 148,
+        "expReward": 3918,
+        "aniumReward": 2940,
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/10/commander-thrashoo-pb.png"
       }
     },
     {
@@ -399,7 +479,7 @@
           "def": 47,
           "expReward": 149,
           "aniumReward": 102,
-          "image": null
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/Medicallab0000.png"
         },
         {
           "name": "Android Sentinel",
@@ -409,7 +489,7 @@
           "def": 56,
           "expReward": 167,
           "aniumReward": 115,
-          "image": null
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/10/devastator-elan.png"
         }
       ],
       "boss": {
@@ -420,6 +500,16 @@
         "def": 93,
         "expReward": 882,
         "aniumReward": 661,
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/monster_60.png"
+      },
+      "pitBoss": {
+        "name": "APEX ABOMINATION",
+        "emoji": "☢️",
+        "hp": 44270,
+        "atk": 574,
+        "def": 204,
+        "expReward": 5292,
+        "aniumReward": 3966,
         "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/monster_60.png"
       }
     },
@@ -446,7 +536,7 @@
           "def": 67,
           "expReward": 201,
           "aniumReward": 138,
-          "image": null
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/necro-metal-darkhall.png"
         },
         {
           "name": "Star Devourer",
@@ -456,7 +546,7 @@
           "def": 77,
           "expReward": 221,
           "aniumReward": 153,
-          "image": null
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/CorHolyStone-monster.png"
         }
       ],
       "boss": {
@@ -467,7 +557,17 @@
         "def": 127,
         "expReward": 1191,
         "aniumReward": 893,
-        "image": null
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/baalhamon-pitboss.png"
+      },
+      "pitBoss": {
+        "name": "SOVEREIGN DECEM",
+        "emoji": "☢️",
+        "hp": 61980,
+        "atk": 774,
+        "def": 282,
+        "expReward": 7146,
+        "aniumReward": 5358,
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/baalhamon-pitboss.png"
       }
     }
   ]

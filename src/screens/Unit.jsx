@@ -4,6 +4,8 @@ import races from '../data/races.json'
 import jobs from '../data/jobs.json'
 import archonData from '../data/archon.json'
 import { PilotSprite } from '../components/PilotSprites'
+import { t } from '../lib/translate'
+
 
 function getJobInfo(raceId, jobId) {
   if (!raceId || !jobId || !jobs[raceId]) return { tier: 0, job: null }
@@ -16,8 +18,6 @@ function getJobInfo(raceId, jobId) {
   if (job) return { tier: 3, job }
   return { tier: 0, job: null }
 }
-
-const RECLASS_COST = 5000
 
 // Reusable accordion section
 function AccordionSection({ label, raceClass, defaultOpen = false, children }) {
@@ -46,58 +46,20 @@ export default function Unit() {
   const getStats = useGameStore((s) => s.getStats)
   const getExpToNext = useGameStore((s) => s.getExpToNext)
   const openRaceSelect = useGameStore((s) => s.openRaceSelect)
-  const defectRace = useGameStore((s) => s.defectRace)
-  const selectJob = useGameStore((s) => s.selectJob)
-  const reclassJob = useGameStore((s) => s.reclassJob)
-
-  const [showPromo, setShowPromo] = useState(false)
-  const [showReclass, setShowReclass] = useState(false)
-
   const stats = getStats()
   const expMax = getExpToNext()
   const expPct = Math.floor((player.exp / expMax) * 100)
   const race = player.race ? races[player.race] : null
   const { tier, job } = getJobInfo(player.race, player.job)
 
-  const eligibleForPromo = player.race && (
-    (tier === 0 && player.level >= 1) ||
-    (tier === 1 && player.level >= 30) ||
-    (tier === 2 && player.level >= 50)
-  )
-
-  // Reclass: ganti job dalam tier yang sama, hanya jika sudah punya job (tier >= 1)
-  const canReclass = tier >= 1 && player.resources.anium >= RECLASS_COST
-  const sameTierJobs = () => {
-    if (!player.race || !jobs[player.race]) return []
-    if (tier === 1) return jobs[player.race].tier1
-    if (tier === 2) return jobs[player.race].tier2
-    if (tier === 3) return jobs[player.race].tier3
-    return []
-  }
-
-  const handleReclass = (jobId) => {
-    if (jobId === player.job) { setShowReclass(false); return }
-    reclassJob(jobId, RECLASS_COST)
-    setShowReclass(false)
-  }
-
-  const getAvailableJobs = () => {
-    if (!player.race || !jobs[player.race]) return []
-    if (tier === 0) return jobs[player.race].tier1
-    if (tier === 1) return jobs[player.race].tier2
-    if (tier === 2) return jobs[player.race].tier3
-    return []
-  }
-
-  const handlePromote = (jobId) => {
-    selectJob(jobId)
-    setShowPromo(false)
-  }
+  const eq = player.equipment || {}
+  const hasArchonEquipped = Object.values(eq).some(item => item && item.id && item.id.startsWith('archon_'))
+  const isArchon = archons && player.race && archons[player.race] && player.username && archons[player.race].toLowerCase() === player.username.toLowerCase()
 
   const raceClass = player.race ? 'panel-' + player.race : ''
 
   return (
-    <div style={styles.screen}>
+    <div className="no-scrollbar" style={styles.screen}>
       {/* Header */}
       <div style={styles.header}>
         <div style={styles.avatar}>
@@ -110,22 +72,11 @@ export default function Unit() {
               <span style={styles.titleBadge(player.race)}>{stats.title.toUpperCase()}</span>
             )}
           </div>
-          <div style={styles.sub}>{job ? job.name : (race ? race.name : 'Not selected')} · LV.{player.level}</div>
+          <div style={styles.sub}>{job ? job.name : (race ? race.name : t('novice_job_name'))} · LV.{player.level}</div>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6, alignItems: 'flex-end' }}>
-          {!player.race ? (
-            <button style={styles.actionBtn('#00e5ff', '#0050cc')} onClick={openRaceSelect}>SELECT RACE</button>
-          ) : eligibleForPromo ? (
-            <button style={{ ...styles.actionBtn('#ffe500', '#cc8000'), animation: 'pulse 1.5s infinite' }} onClick={() => setShowPromo(true)}>PROMOTE</button>
-          ) : null}
-          {tier >= 1 && (
-            <button
-              style={canReclass ? styles.actionBtn('#bb88ff', '#6600cc') : { ...styles.actionBtn('#555', '#333'), cursor: 'not-allowed', opacity: 0.5 }}
-              onClick={() => canReclass && setShowReclass(true)}
-              title={canReclass ? `Ganti job (${RECLASS_COST.toLocaleString()} Anium)` : `Butuh ${RECLASS_COST.toLocaleString()} Anium`}
-            >
-              🔄 RECLASS
-            </button>
+          {!player.race && (
+            <button style={styles.actionBtn('#00e5ff', '#0050cc')} onClick={openRaceSelect}>{t('select_race')}</button>
           )}
         </div>
       </div>
@@ -137,15 +88,19 @@ export default function Unit() {
       </div>
 
       {/* PILOT EXPERIENCE - open by default */}
-      <AccordionSection label="PILOT EXPERIENCE" raceClass={raceClass} defaultOpen={true}>
+      <AccordionSection label={t('pilot_experience')} raceClass={raceClass} defaultOpen={true}>
         <div style={styles.expBg}>
           <div style={{ ...styles.expFill, width: expPct + '%' }} />
         </div>
         <div style={styles.expText}>{player.exp.toLocaleString()} / {expMax.toLocaleString()} EXP ({expPct}%)</div>
       </AccordionSection>
 
+
+
+
+
       {/* UNIT SPECIFICATIONS */}
-      <AccordionSection label="UNIT SPECIFICATIONS" raceClass={raceClass} defaultOpen={true}>
+      <AccordionSection label={t('unit_specifications')} raceClass={raceClass} defaultOpen={true}>
         <div style={styles.statsGrid}>
           <div style={styles.statBox}>
             <span style={{ color: '#f5a623', fontSize: 13 }}>⚡ ATK</span>
@@ -170,14 +125,20 @@ export default function Unit() {
 
         {player.race && (
           <div style={styles.infoBox('#00ff88')}>
-            <span style={{ fontWeight: 800 }}>🛡️ ARCHON SET STATUS:</span>{' '}
+            <span style={{ fontWeight: 800 }}>{t('archon_set_status')}</span>{' '}
             {stats.title ? (
               <span style={{ color: '#00ff88', fontWeight: 800 }}>
-                SET AKTIF ({stats.title === 'Solar Sovereign' ? 'Solaris Set' : stats.title === 'Astral Emperor' ? 'Astral Set' : 'Dominion Set'}) — Bonus +30% HP / DEF / ATK aktif!
+                {t('archon_set_active', { set: stats.title === 'Solar Sovereign' ? 'Solaris Set' : stats.title === 'Astral Emperor' ? 'Astral Set' : 'Dominion Set' })}
               </span>
             ) : (
-              <span style={{ color: '#6a9ab8' }}>Set tidak aktif (Lengkapi 6 item Archon ras Anda)</span>
+              <span style={{ color: '#6a9ab8' }}>{t('archon_set_inactive')}</span>
             )}
+          </div>
+        )}
+
+        {hasArchonEquipped && !isArchon && (
+          <div style={styles.infoBox('#f5a623')}>
+            <span style={{ fontWeight: 800 }}>ℹ️ INFO:</span> {t('archon_notice_unit')}
           </div>
         )}
 
@@ -186,7 +147,7 @@ export default function Unit() {
             {archons[player.race].toLowerCase() === player.username?.toLowerCase() && (
               <div style={{ marginBottom: 6 }}>
                 <div style={{ color: '#f5a623', fontWeight: 'bold', fontSize: 13 }}>
-                  👑 ARCHON EQUIPPED: {archonData[player.race].mantle.name}
+                  {t('archon_equipped')} {archonData[player.race].mantle.name}
                 </div>
                 <div style={{ color: '#e0f4ff', fontSize: 13, marginTop: 4 }}>
                   {archonData[player.race].mantle.bonus.atkPercent && `+${archonData[player.race].mantle.bonus.atkPercent}% ATK `}
@@ -197,7 +158,7 @@ export default function Unit() {
               </div>
             )}
             <div style={{ color: '#00e5ff', fontSize: 13 }}>
-              <span style={{ fontWeight: 'bold' }}>🌐 RACE AURA ({archonData[player.race].aura.name}):</span>{' '}
+              <span style={{ fontWeight: 'bold' }}>{t('race_aura_label', { name: archonData[player.race].aura.name })}</span>{' '}
               {archonData[player.race].aura.desc}
             </div>
           </div>
@@ -206,14 +167,14 @@ export default function Unit() {
 
       {/* RACE LORE */}
       {race && (
-        <AccordionSection label={`${race.name.toUpperCase()} LORE`} raceClass={raceClass} defaultOpen={false}>
+        <AccordionSection label={t('race_lore_title', { race: race.name.toUpperCase() })} raceClass={raceClass} defaultOpen={false}>
           <div style={styles.desc}>{race.description}</div>
           <div style={styles.specSection}>
-            <div style={styles.specTitle}>ADVANTAGES:</div>
+            <div style={styles.specTitle}>{t('advantages_label')}</div>
             {race.strengths.map((str, i) => (
               <div key={i} style={styles.specItem('#44ff88')}>✔ {str}</div>
             ))}
-            <div style={{ ...styles.specTitle, marginTop: 8 }}>DISADVANTAGES:</div>
+            <div style={{ ...styles.specTitle, marginTop: 8 }}>{t('disadvantages_label')}</div>
             {race.weaknesses.map((weak, i) => (
               <div key={i} style={styles.specItem('#ff4444')}>✘ {weak}</div>
             ))}
@@ -222,114 +183,33 @@ export default function Unit() {
       )}
 
       {/* SYSTEM PROGRESS */}
-      <AccordionSection label="SYSTEM PROGRESS" raceClass={raceClass} defaultOpen={true}>
+      <AccordionSection label={t('system_progress')} raceClass={raceClass} defaultOpen={true}>
         <div style={styles.progRow}>
           <div style={styles.progItem}>
             <span style={styles.progNum}>{player.totalSessions}</span>
-            <span style={styles.progLabel}>Sessions</span>
+            <span style={styles.progLabel}>{t('sessions_label')}</span>
           </div>
           <div style={styles.progItem}>
             <span style={styles.progNum}>{player.totalMinutes}</span>
-            <span style={styles.progLabel}>Minutes</span>
+            <span style={styles.progLabel}>{t('minutes_label')}</span>
           </div>
           <div style={styles.progItem}>
             <span style={{ ...styles.progNum, color: '#ff8c40' }}>🔥{player.streak}</span>
-            <span style={styles.progLabel}>Streak</span>
+            <span style={styles.progLabel}>{t('streak_label')}</span>
           </div>
           <div style={styles.progItem}>
             <span style={styles.progNum}>S-{player.highestSector}</span>
-            <span style={styles.progLabel}>Best Sector</span>
+            <span style={styles.progLabel}>{t('best_sector_label')}</span>
           </div>
         </div>
       </AccordionSection>
 
-      {/* DEFECT RACE */}
-      {player.race && (
-        <AccordionSection label="DEFECT RACE ⚠️" raceClass={raceClass} defaultOpen={false}>
-          <div style={styles.defectWarning}>
-            Resets semua UPGRADES dan unequip semua items. Syarat: Level 40 dan 50,000 Anium.
-          </div>
-          <button
-            style={{
-              ...(player.level >= 40 && player.resources.anium >= 50000 ? styles.defectBtn : styles.defectBtnDisabled),
-              width: '100%',
-              marginTop: 10
-            }}
-            onClick={() => {
-              if (window.confirm('Are you sure you want to defect? You will lose 50,000 Anium and ALL upgrades!')) {
-                defectRace()
-              }
-            }}
-            disabled={player.level < 40 || player.resources.anium < 50000}
-          >
-            DEFECT RACE (50,000 ⬡)
-          </button>
-        </AccordionSection>
-      )}
 
       {/* Bottom spacer */}
       <div style={{ height: 16 }} />
 
-      {/* Promotion Modal */}
-      {showPromo && (
-        <div style={styles.modalOverlay}>
-          <div className={`glass-panel cyber-panel ${raceClass}`} style={styles.modalBox}>
-            <h2 style={styles.modalTitle}>⬆️ JOB PROMOTION</h2>
-            <p style={styles.modalDesc}>Pilih class path dengan hati-hati. Setiap job memberi bonus stat unik.</p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 15 }}>
-              {getAvailableJobs().map(j => (
-                <button key={j.id} style={styles.jobBtn} onClick={() => handlePromote(j.id)}>
-                  <div style={{ fontWeight: 'bold', fontSize: 15, color: '#00e5ff' }}>{j.name}</div>
-                  <div style={{ fontSize: 13, color: '#ccc', marginBottom: 4, lineHeight: 1.4 }}>{j.desc}</div>
-                  <div style={{ fontSize: 13, color: '#ff8c40', fontWeight: 'bold' }}>
-                    +{j.bonus.hp} HP | +{j.bonus.atk} ATK | +{j.bonus.def} DEF
-                  </div>
-                </button>
-              ))}
-            </div>
-            <button style={{ ...styles.actionBtn('#00e5ff', '#0050cc'), marginTop: 15, width: '100%' }} onClick={() => setShowPromo(false)}>CANCEL</button>
-          </div>
-        </div>
-      )}
 
-      {/* Reclass Modal */}
-      {showReclass && (
-        <div style={styles.modalOverlay}>
-          <div className={`glass-panel cyber-panel ${raceClass}`} style={styles.modalBox}>
-            <h2 style={styles.modalTitle}>🔄 RECLASS JOB</h2>
-            <p style={styles.modalDesc}>
-              Ganti job dalam tier yang sama. Biaya:{' '}
-              <span style={{ color: '#f5a623', fontWeight: 800 }}>{RECLASS_COST.toLocaleString()} ⬡ Anium</span>
-            </p>
-            <p style={{ textAlign: 'center', fontSize: 12, color: '#6a9ab8', margin: '4px 0 12px' }}>
-              Job aktif: <span style={{ color: '#00e5ff', fontWeight: 800 }}>{job?.name}</span>
-            </p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              {sameTierJobs().map(j => (
-                <button
-                  key={j.id}
-                  style={j.id === player.job
-                    ? { ...styles.jobBtn, border: '1px solid #bb88ff', background: 'rgba(100,0,200,0.2)' }
-                    : styles.jobBtn
-                  }
-                  onClick={() => handleReclass(j.id)}
-                >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <div style={{ fontWeight: 'bold', fontSize: 15, color: j.id === player.job ? '#bb88ff' : '#00e5ff' }}>
-                      {j.name} {j.id === player.job ? '✓ AKTIF' : ''}
-                    </div>
-                  </div>
-                  <div style={{ fontSize: 13, color: '#ccc', marginBottom: 4, lineHeight: 1.4 }}>{j.desc}</div>
-                  <div style={{ fontSize: 13, color: '#ff8c40', fontWeight: 'bold' }}>
-                    +{j.bonus.hp} HP | +{j.bonus.atk} ATK | +{j.bonus.def} DEF
-                  </div>
-                </button>
-              ))}
-            </div>
-            <button style={{ ...styles.actionBtn('#888', '#333'), marginTop: 15, width: '100%' }} onClick={() => setShowReclass(false)}>CANCEL</button>
-          </div>
-        </div>
-      )}
+
     </div>
   )
 }
@@ -357,6 +237,19 @@ const styles = {
     flexShrink: 0,
     whiteSpace: 'nowrap'
   }),
+  actionBtnDisabled: {
+    background: 'rgba(255,255,255,0.05)',
+    border: '1px solid rgba(255,255,255,0.1)',
+    borderRadius: 8,
+    padding: '7px 10px',
+    fontFamily: 'var(--font-title)',
+    fontSize: 12,
+    color: 'rgba(255,255,255,0.3)',
+    cursor: 'not-allowed',
+    fontWeight: 800,
+    flexShrink: 0,
+    whiteSpace: 'nowrap'
+  },
 
   // Resources
   resRow: { display: 'flex', gap: 8, padding: '8px 16px', flexShrink: 0 },
@@ -375,7 +268,7 @@ const styles = {
   }),
 
   // Accordion
-  section: { margin: '0 16px 10px', padding: 0, overflow: 'hidden' },
+  section: { margin: '0 16px 10px', padding: 0, overflow: 'hidden', flexShrink: 0 },
   sectionHeader: {
     display: 'flex',
     alignItems: 'center',
@@ -423,17 +316,25 @@ const styles = {
   progNum: { fontFamily: 'var(--font-mono)', fontSize: 18, fontWeight: 900, color: '#00e5ff', textShadow: '0 0 6px rgba(0, 229, 255, 0.2)' },
   progLabel: { fontFamily: 'var(--font-title)', fontSize: 11, color: '#4a8fa8', fontWeight: 800, textAlign: 'center' },
 
-  // Defect
-  defectWarning: { fontFamily: 'var(--font-mono)', fontSize: 13, color: '#ff4444', textAlign: 'center', fontWeight: 600, lineHeight: 1.5 },
-  defectBtn: { background: 'linear-gradient(90deg, #aa0000, #ff4444)', border: '1px solid #ffaa00', borderRadius: 8, padding: '12px 24px', fontFamily: 'var(--font-title)', fontSize: 13, color: '#fff', cursor: 'pointer', fontWeight: 800, boxShadow: '0 0 15px rgba(255, 68, 68, 0.4)' },
-  defectBtnDisabled: { background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: 8, padding: '12px 24px', fontFamily: 'var(--font-title)', fontSize: 13, color: 'rgba(255,255,255,0.4)', cursor: 'not-allowed', fontWeight: 800 },
-
   // Modal
   modalOverlay: { position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.85)', zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center', backdropFilter: 'blur(5px)', padding: 16 },
   modalBox: { background: '#081020', border: '1px solid #00e5ff', borderRadius: 16, padding: 20, width: '100%', maxWidth: 400, boxShadow: '0 0 30px rgba(0,229,255,0.3)', maxHeight: '85vh', overflowY: 'auto' },
   modalTitle: { fontFamily: 'var(--font-title)', fontSize: 20, color: '#fff', textAlign: 'center', textShadow: '0 0 10px #00e5ff', margin: 0, marginBottom: 8 },
   modalDesc: { fontFamily: 'var(--font-body)', fontSize: 13, color: '#88aadd', textAlign: 'center', marginTop: 0 },
   jobBtn: { background: 'rgba(0,0,0,0.5)', border: '1px solid #00e5ff', borderRadius: 8, padding: 12, cursor: 'pointer', textAlign: 'left', transition: 'all 0.2s', width: '100%' },
+
+  // NPC dialogue box styling
+  npcDialog: {
+    fontStyle: 'italic',
+    color: '#88aadd',
+    fontSize: 13,
+    background: 'rgba(3, 8, 20, 0.7)',
+    borderLeft: '3px solid #00e5ff',
+    padding: '8px 12px',
+    borderRadius: '0 8px 8px 0',
+    lineHeight: 1.5,
+    fontFamily: 'var(--font-body)',
+  },
 
   titleBadge: (race) => {
     const colors = {
@@ -460,5 +361,30 @@ const styles = {
       display: 'inline-block',
       whiteSpace: 'nowrap'
     }
+  },
+  buyShopBtn: {
+    background: 'linear-gradient(90deg, #ff8c00, #ffaa00)',
+    border: 'none',
+    borderRadius: 6,
+    padding: '6px 12px',
+    fontFamily: 'var(--font-title)',
+    fontSize: 11,
+    color: '#fff',
+    fontWeight: 800,
+    cursor: 'pointer',
+    boxShadow: '0 0 8px rgba(255, 140, 0, 0.4)',
+    transition: 'all 0.2s',
+  },
+  buyShopBtnDisabled: {
+    background: 'rgba(255, 255, 255, 0.05)',
+    border: '1px solid rgba(255, 255, 255, 0.1)',
+    borderRadius: 6,
+    padding: '6px 12px',
+    fontFamily: 'var(--font-title)',
+    fontSize: 11,
+    color: 'rgba(255, 255, 255, 0.3)',
+    fontWeight: 800,
+    cursor: 'not-allowed',
   }
 }
+

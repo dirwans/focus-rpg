@@ -1,50 +1,51 @@
-import acretonMechImg from '../assets/acreton_mech.png'
-import coralisPilotImg from '../assets/coralis_pilot.png'
 import TransparentSprite from './TransparentSprite'
 
-export function AcretonSprite({ size = 60 }) {
+const acretonMechImg = '/assets/acreton_mech.png'
+const belterraPilotImg = '/assets/belterra_pilot_v3.png'
+const belterraPortraitImg = '/assets/belterra_pilot_portrait.png'
+const coralisPilotImg = '/assets/coralis_pilot_v2.png'
+
+export function AcretonSprite({ size = 60, width, height, upperBodyOnly = false, fill = false }) {
   return (
-    <TransparentSprite 
-      src={acretonMechImg} 
-      alt="Acreton Mech" 
-      size={size} 
-      glowColor="#ff6400" 
+    <TransparentSprite
+      src={acretonMechImg}
+      alt="Acreton Mech"
+      size={size}
+      width={width}
+      height={height}
+      glowColor="#ff6400"
+      upperBodyOnly={upperBodyOnly}
+      fill={fill}
     />
   )
 }
 
-export function BelterraSprite({ size = 60 }) {
+export function BelterraSprite({ size = 60, width, height, upperBodyOnly = false, fill = false }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 16 16" className="pixel-art" style={{ flexShrink: 0 }}>
-      {/* Head / Helmet */}
-      <rect x="5" y="2" width="6" height="5" fill="#3b82f6" />
-      <rect x="4" y="3" width="1" height="3" fill="#eab308" />
-      <rect x="11" y="3" width="1" height="3" fill="#eab308" />
-      <rect x="6" y="4" width="4" height="2" fill="#1e293b" />
-      <rect x="6" y="4" width="4" height="1" fill="#00e5ff" />
-      {/* Body */}
-      <rect x="4" y="7" width="8" height="5" fill="#00e5ff" />
-      <rect x="5" y="8" width="6" height="3" fill="#1d4ed8" />
-      <rect x="7" y="8" width="2" height="2" fill="#eab308" />
-      {/* Arms */}
-      <rect x="2" y="7" width="2" height="4" fill="#3b82f6" />
-      <rect x="12" y="7" width="2" height="4" fill="#3b82f6" />
-      {/* Legs */}
-      <rect x="4" y="12" width="3" height="3" fill="#1d4ed8" />
-      <rect x="9" y="12" width="3" height="3" fill="#1d4ed8" />
-      <rect x="3" y="15" width="2" height="1" fill="#eab308" />
-      <rect x="11" y="15" width="2" height="1" fill="#eab308" />
-    </svg>
+    <TransparentSprite
+      src={fill ? belterraPortraitImg : belterraPilotImg}
+      alt="Belterra Pilot"
+      size={size}
+      width={width}
+      height={height}
+      glowColor="#00e5ff"
+      upperBodyOnly={upperBodyOnly}
+      fill={fill}
+    />
   )
 }
 
-export function CoralisSprite({ size = 60 }) {
+export function CoralisSprite({ size = 60, width, height, upperBodyOnly = false, fill = false }) {
   return (
-    <TransparentSprite 
-      src={coralisPilotImg} 
-      alt="Coralis Pilot" 
-      size={size} 
-      glowColor="#d000ff" 
+    <TransparentSprite
+      src={coralisPilotImg}
+      alt="Coralis Pilot"
+      size={size}
+      width={width}
+      height={height}
+      glowColor="#d000ff"
+      upperBodyOnly={upperBodyOnly}
+      fill={fill}
     />
   )
 }
@@ -85,9 +86,9 @@ export function EnemySprite({ size = 60, isBoss = false, isPitBoss = false }) {
   )
 }
 
-export function PilotSprite({ race, size = 60 }) {
-  if (race === 'acreton') return <AcretonSprite size={size} />
-  if (race === 'belterra') return <BelterraSprite size={size} />
-  if (race === 'coralis') return <CoralisSprite size={size} />
-  return <div style={{ fontSize: size * 0.7 }}>❓</div>
+export function PilotSprite({ race, size = 60, width, height, upperBodyOnly = false, fill = false }) {
+  if (race === 'acreton') return <AcretonSprite size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} />
+  if (race === 'belterra') return <BelterraSprite size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} />
+  if (race === 'coralis') return <CoralisSprite size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} />
+  return null
 }

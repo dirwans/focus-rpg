@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useGameStore } from '../store/gameStore'
 import upgradesConfig from '../data/upgrades.json'
-import itemsData from '../data/items.json'
 import { getWeaponRarityDisplayName, getWeaponRarityColor } from '../lib/rarity'
+import { t } from '../lib/translate'
 
 export default function Forge() {
   const player = useGameStore((s) => s.player)
@@ -11,50 +11,14 @@ export default function Forge() {
   const getUpgradeCost = useGameStore((s) => s.getUpgradeCost)
   const refineWeapon = useGameStore((s) => s.refineWeapon)
   const combineWeapon = useGameStore((s) => s.combineWeapon)
-  const craftArchonItem = useGameStore((s) => s.craftArchonItem)
 
-  const [activeTab, setActiveTab] = useState('upgrade') // 'upgrade' | 'archon' | 'refine'
+  const [activeTab, setActiveTab] = useState('upgrade') // 'upgrade' | 'refine'
   const [selectedSacrificeUid, setSelectedSacrificeUid] = useState('')
   const [isRefining, setIsRefining] = useState(false)
   const [sparks, setSparks] = useState([])
 
   const stats = getStats()
 
-  // Archon Items for Player's Race
-  const archonItems = player.race
-    ? itemsData.items.filter(it => it.id.startsWith(`archon_${player.race}`))
-    : []
-
-  const ARCHON_RECIPES = {
-    archon_belterra_helmet: { materials: { mat_carbon: 10, mat_mecha: 5, mat_aether: 3 }, anium: 15000 },
-    archon_belterra_gloves: { materials: { mat_carbon: 10, mat_mecha: 5, mat_aether: 3 }, anium: 15000 },
-    archon_belterra_boots: { materials: { mat_carbon: 10, mat_mecha: 5, mat_aether: 3 }, anium: 15000 },
-    archon_belterra_armor: { materials: { mat_carbon: 15, mat_mecha: 8, mat_aether: 5, mat_warlord: 1 }, anium: 25000 },
-    archon_belterra_mantle: { materials: { mat_carbon: 15, mat_mecha: 8, mat_aether: 5, mat_warlord: 1 }, anium: 25000 },
-    archon_belterra_weapon: { materials: { mat_carbon: 15, mat_mecha: 8, mat_aether: 5, mat_warlord: 1 }, anium: 25000 },
-
-    archon_coralis_helmet: { materials: { mat_carbon: 10, mat_mecha: 5, mat_aether: 3 }, anium: 15000 },
-    archon_coralis_gloves: { materials: { mat_carbon: 10, mat_mecha: 5, mat_aether: 3 }, anium: 15000 },
-    archon_coralis_boots: { materials: { mat_carbon: 10, mat_mecha: 5, mat_aether: 3 }, anium: 15000 },
-    archon_coralis_armor: { materials: { mat_carbon: 15, mat_mecha: 8, mat_aether: 5, mat_warlord: 1 }, anium: 25000 },
-    archon_coralis_mantle: { materials: { mat_carbon: 15, mat_mecha: 8, mat_aether: 5, mat_warlord: 1 }, anium: 25000 },
-    archon_coralis_weapon: { materials: { mat_carbon: 15, mat_mecha: 8, mat_aether: 5, mat_warlord: 1 }, anium: 25000 },
-
-    archon_acreton_helmet: { materials: { mat_carbon: 10, mat_mecha: 5, mat_aether: 3 }, anium: 15000 },
-    archon_acreton_gloves: { materials: { mat_carbon: 10, mat_mecha: 5, mat_aether: 3 }, anium: 15000 },
-    archon_acreton_boots: { materials: { mat_carbon: 10, mat_mecha: 5, mat_aether: 3 }, anium: 15000 },
-    archon_acreton_armor: { materials: { mat_carbon: 15, mat_mecha: 8, mat_aether: 5, mat_warlord: 1 }, anium: 25000 },
-    archon_acreton_mantle: { materials: { mat_carbon: 15, mat_mecha: 8, mat_aether: 5, mat_warlord: 1 }, anium: 25000 },
-    archon_acreton_weapon: { materials: { mat_carbon: 15, mat_mecha: 8, mat_aether: 5, mat_warlord: 1 }, anium: 25000 }
-  }
-
-  const getMaterialStatus = (matId, reqAmount) => {
-    const owned = player.inventory.filter(it => it.id === matId).length
-    const matTemplate = itemsData.items.find(it => it.id === matId)
-    const name = matTemplate ? matTemplate.name : matId
-    const emoji = matTemplate ? matTemplate.emoji : '📦'
-    return { name, emoji, owned, required: reqAmount, satisfied: owned >= reqAmount }
-  }
 
   // Weapon Smith Data
   const equippedWeapon = player.equipment?.weapon
@@ -113,27 +77,25 @@ export default function Forge() {
       </div>
 
       <div style={styles.tabs}>
-        <div style={activeTab === 'upgrade' ? styles.tabActive : styles.tab} onClick={() => setActiveTab('upgrade')}>UPGRADE STATS</div>
-        <div style={activeTab === 'archon' ? styles.tabActive : styles.tab} onClick={() => setActiveTab('archon')}>ARCHON FORGE</div>
-        <div style={activeTab === 'refine' ? styles.tabActive : styles.tab} onClick={() => setActiveTab('refine')}>WEAPON SMITH</div>
+        <div style={activeTab === 'upgrade' ? styles.tabActive : styles.tab} onClick={() => setActiveTab('upgrade')}>{t('upgrade_stats_tab')}</div>
+        <div style={activeTab === 'refine' ? styles.tabActive : styles.tab} onClick={() => setActiveTab('refine')}>{t('weapon_smith_tab')}</div>
       </div>
+
 
       {/* UPGRADE STATS TAB */}
       {activeTab === 'upgrade' && (
         <div style={{ padding: '0 16px' }}>
           {Object.entries(upgradesConfig).map(([key, cfg]) => {
-            const level = player.upgrades[key]
+            const level = player.upgrades?.[key] || 0
             const cost = getUpgradeCost(key)
             const canAfford = player.resources.anium >= cost
             const currentVal = stats[cfg.statKey]
 
             return (
               <div key={key} className={`glass-panel cyber-panel panel-${key === 'atk' ? 'orange' : key === 'def' ? 'cyan' : 'red'}`} style={styles.card}>
-                <div style={{ ...styles.cardTitle, color: cfg.color }}>{cfg.emoji} {cfg.label} Upgrade</div>
+                <div style={{ ...styles.cardTitle, color: cfg.color }}>{t('upgrade_title', { emoji: cfg.emoji, label: cfg.label })}</div>
                 <div style={styles.statRow}>
-                  Current: <strong style={{ color: cfg.color }}>{currentVal?.toLocaleString()}</strong>
-                  &nbsp;|&nbsp; Stage: Lv.{level}
-                  &nbsp;|&nbsp; Next: +{cfg.perLevel}
+                  {t('upgrade_current', { val: currentVal?.toLocaleString(), level: level, next: cfg.perLevel })}
                 </div>
                 <button
                   style={styles.upgradeBtn(cfg.color, canAfford)}
@@ -142,9 +104,9 @@ export default function Forge() {
                 >
                   {player.race
                     ? canAfford
-                      ? `UPGRADE (${cost.toLocaleString()} ANIUM)`
-                      : `NEED ${(cost - player.resources.anium).toLocaleString()} MORE ⬡`
-                    : 'SELECT RACE FIRST'
+                      ? t('upgrade_btn_label', { cost: cost.toLocaleString() })
+                      : t('upgrade_need_more', { need: (cost - player.resources.anium).toLocaleString() })
+                    : t('select_race_first')
                   }
                 </button>
               </div>
@@ -153,122 +115,6 @@ export default function Forge() {
         </div>
       )}
 
-      {/* ARCHON FORGE TAB */}
-      {activeTab === 'archon' && (
-        <div style={{ padding: '0 16px' }}>
-          {!player.race ? (
-            <div style={styles.empty}>Silakan pilih Ras terlebih dahulu untuk mengakses Archon Forge.</div>
-          ) : (
-            <div>
-              <div style={styles.introHeader}>
-                FORGE ARCHON SET ({player.race.toUpperCase()})
-                <div style={{ fontSize: 13, color: '#88aadd', marginTop: 4, textTransform: 'none', fontWeight: 600 }}>
-                  Kumpulkan material langka untuk menempa 6 bagian set perlengkapan legendaris Archon. Lengkapi semuanya untuk membuka stat bonus +30% HP/Defense/Attack!
-                </div>
-              </div>
-
-              {archonItems.map(item => {
-                const recipe = ARCHON_RECIPES[item.id]
-                if (!recipe) return null
-
-                // Check materials satisfaction
-                let allMaterialsSatisfied = true
-                const materialsList = Object.entries(recipe.materials).map(([matId, amount]) => {
-                  const status = getMaterialStatus(matId, amount)
-                  if (!status.satisfied) allMaterialsSatisfied = false
-                  return status
-                })
-
-                const canCraft = allMaterialsSatisfied && player.resources.anium >= recipe.anium
-
-                return (
-                  <div key={item.id} className="glass-panel cyber-panel panel-orange" style={styles.forgeCard}>
-                    <div style={styles.forgeHeader}>
-                      {item.image ? (
-                        <img referrerPolicy="no-referrer" src={item.image} style={{ width: 24, height: 24, objectFit: 'contain' }} alt={item.name} />
-                      ) : (
-                        <span style={{ fontSize: 24 }}>{item.emoji}</span>
-                      )}
-                      <div style={{ flex: 1 }}>
-                        <div style={styles.forgeItemName}>{item.name}</div>
-                        <div style={styles.forgeItemSlot}>{item.type.toUpperCase()} · REQUIREMENT: LV.55</div>
-                      </div>
-                    </div>
-
-                    {/* SVG Drawn Recipe Tree */}
-                    <div style={styles.recipeTreeWrapper}>
-                      <div style={styles.recipeInputs}>
-                        {materialsList.map((m, idx) => (
-                          <div key={idx} style={styles.ingredientBadge(m.satisfied)}>
-                            <span>{m.emoji} {m.name}</span>
-                            <span style={{ fontFamily: 'monospace' }}>{m.owned}/{m.required}</span>
-                          </div>
-                        ))}
-                        <div style={styles.ingredientBadge(player.resources.anium >= recipe.anium)}>
-                          <span>⬡ Anium</span>
-                          <span style={{ fontFamily: 'monospace' }}>{recipe.anium.toLocaleString()}</span>
-                        </div>
-                      </div>
-
-                      {/* Connecting Paths */}
-                      <div style={styles.recipeConnectors}>
-                        <svg width="40" height={100} style={{ display: 'block' }}>
-                          <defs>
-                            <filter id="green-glow" x="-20%" y="-20%" width="140%" height="140%">
-                              <feGaussianBlur stdDeviation="2" result="blur" />
-                              <feMerge>
-                                <feMergeNode in="blur" />
-                                <feMergeNode in="SourceGraphic" />
-                              </feMerge>
-                            </filter>
-                          </defs>
-                          {/* Curved bezier paths from materials (left) to item (right) */}
-                          {materialsList.map((m, idx) => {
-                            const yStart = 15 + idx * 24
-                            const yEnd = 50
-                            const strokeColor = m.satisfied ? '#39ff14' : 'rgba(0, 229, 255, 0.15)'
-                            const glow = m.satisfied ? 'url(#green-glow)' : 'none'
-                            return (
-                              <path
-                                key={idx}
-                                d={`M 0,${yStart} C 20,${yStart} 20,${yEnd} 40,${yEnd}`}
-                                fill="transparent"
-                                stroke={strokeColor}
-                                strokeWidth="2"
-                                filter={glow}
-                                style={{ transition: 'all 0.5s' }}
-                              />
-                            )
-                          })}
-                        </svg>
-                      </div>
-
-                      <div style={styles.recipeOutput}>
-                        <div style={styles.outputSlot(canCraft)}>
-                            {item.image ? (
-                              <img referrerPolicy="no-referrer" src={item.image} style={{ width: 28, height: 28, objectFit: 'contain' }} alt={item.name} />
-                            ) : (
-                              <span style={{ fontSize: 28 }}>{item.emoji}</span>
-                            )}
-                          <span style={{ fontSize: 11, color: '#4a8fa8', fontWeight: 800 }}>READY</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <button
-                      style={styles.forgeBtn(canCraft)}
-                      disabled={!canCraft}
-                      onClick={() => craftArchonItem(item.id)}
-                    >
-                      {canCraft ? 'TEMPA ITEM ARCHON' : 'BAHAN TIDAK CUKUP'}
-                    </button>
-                  </div>
-                )
-              })}
-            </div>
-          )}
-        </div>
-      )}
 
       {/* WEAPON SMITH TAB */}
       {activeTab === 'refine' && (
@@ -276,16 +122,16 @@ export default function Forge() {
           {!equippedWeapon ? (
             <div style={styles.empty}>
               <div style={{ fontSize: 32 }}>⚠️</div>
-              <div>Anda tidak memiliki senjata yang dilengkapi.</div>
+              <div>{t('no_weapon_equipped')}</div>
               <div style={{ fontSize: 13, color: '#4a8fa8', marginTop: 4 }}>
-                Lengkapi senjata di layar <strong>Cargo</strong> terlebih dahulu untuk melakukan Weapon Refining & Combining.
+                {t('no_weapon_equipped_desc')}
               </div>
             </div>
           ) : (
             <div>
               {/* REFINEMENT PANEL */}
-              <div className="glass-panel cyber-panel panel-cyan" style={styles.refinePanel}>
-                <div style={styles.sectionTitle}>▸ WEAPON RARITY REFINEMENT</div>
+              <div style={{ ...styles.sectionTitle, paddingLeft: 8, marginBottom: 8 }}>{t('weapon_rarity_refinement')}</div>
+              <div className="glass-panel cyber-panel panel-cyan" style={{ ...styles.refinePanel, marginTop: 0 }}>
                 
                 {/* Central Tempering Chamber Display */}
                 <div style={styles.temperingChamber}>
@@ -327,7 +173,7 @@ export default function Forge() {
                     const grade = (equippedWeapon.rarityGrade || 'normal').toLowerCase()
                     const cost = REFINE_COSTS[grade]
                     if (!cost) {
-                      return <div style={styles.maxGradeMsg}>⭐ Senjata Anda telah mencapai tingkat maksimal (Mythic)!</div>
+                      return <div style={styles.maxGradeMsg}>{t('max_grade_reached')}</div>
                     }
 
                     const hasTalics = ownedIgnorance >= cost.talics
@@ -337,23 +183,23 @@ export default function Forge() {
                     return (
                       <div>
                         <div style={styles.refineNextGrade}>
-                          NEXT GRADE: <span style={{ color: getWeaponRarityColor(cost.next), fontWeight: 'bold' }}>{cost.next.toUpperCase()}</span> (+{cost.next === 'advanced' ? '5%' : cost.next === 'rare' ? '10%' : cost.next === 'epic' ? '15%' : cost.next === 'legendary' ? '20%' : '30%'} bonus ATK)
+                          {t('next_grade', { grade: cost.next.toUpperCase(), pct: cost.next === 'advanced' ? '5' : cost.next === 'rare' ? '10' : cost.next === 'epic' ? '15' : cost.next === 'legendary' ? '20' : '30' })}
                         </div>
 
                         {/* Visual connections list */}
                         <div style={styles.refineCosts}>
                           <div style={styles.costItem(hasTalics)}>
-                            <span>🔺 Ignorance Talic</span>
+                            <span>{t('talic_ignorance_label')}</span>
                             <span>{ownedIgnorance} / {cost.talics}</span>
                           </div>
                           <div style={styles.costItem(hasAnium)}>
-                            <span>⬡ Anium</span>
+                            <span>{t('anium_cost_label')}</span>
                             <span>{cost.anium.toLocaleString()}</span>
                           </div>
                         </div>
 
                         <button style={styles.smithBtn(canUpgrade)} disabled={!canUpgrade} onClick={handleRefine}>
-                          UPGRADE KELANGKAAN SENJATA
+                          {t('refine_btn')}
                         </button>
                       </div>
                     )
@@ -361,31 +207,32 @@ export default function Forge() {
                 </div>
               </div>
 
+
               {/* COMBINING PANEL */}
-              <div className="glass-panel cyber-panel panel-orange" style={styles.combinePanel}>
-                <div style={styles.sectionTitle}>▸ CRAFT VAMPIRIC WEAPON</div>
+              <div style={{ ...styles.sectionTitle, paddingLeft: 8, marginBottom: 8, marginTop: 16 }}>{t('craft_vampiric_weapon')}</div>
+              <div className="glass-panel cyber-panel panel-orange" style={{ ...styles.combinePanel, marginTop: 0 }}>
                 <div style={{ fontSize: 13, color: '#88aadd', marginBottom: 12 }}>
-                  Gabungkan senjata <strong>Epic atau lebih tinggi</strong> dengan senjata tumbal sejenis dan <strong>Favor Talics</strong> untuk menambahkan properti **Vampire** (+10% HP total & 10% Lifesteal serangan).
+                  {t('craft_vampiric_desc')}
                 </div>
 
                 {equippedWeapon.specialProperty === 'vampire' ? (
                   <div style={styles.vampireActive}>
-                    🩸 Senjata ini telah diberkati dengan kekuatan **Vampire**!
+                    {t('vampire_active')}
                   </div>
                 ) : !isEpicOrHigher(equippedWeapon) ? (
                   <div style={styles.warningBox}>
-                    ⚠️ Senjata yang Anda lengkapi harus berperingkat **Epic** atau lebih tinggi untuk ditransformasi menjadi Vampiric.
+                    {t('vampire_epic_required')}
                   </div>
                 ) : (
                   <div>
                     <div style={styles.formGroup}>
-                      <label style={styles.label}>PILIH SENJATA TUMBAL (EPIC+ DI INVENTORI):</label>
+                      <label style={styles.label}>{t('select_sacrifice_wep')}</label>
                       <select
                         value={selectedSacrificeUid}
                         onChange={(e) => setSelectedSacrificeUid(e.target.value)}
                         style={styles.select}
                       >
-                        <option value="">-- Pilih Senjata Tumbal --</option>
+                        <option value="">{t('choose_sacrifice_wep')}</option>
                         {sacrificePool.map(it => (
                           <option key={it.uid} value={it.uid}>
                             {it.emoji} {it.name} (Lv.{it.level})
@@ -396,11 +243,11 @@ export default function Forge() {
 
                     <div style={styles.refineCosts}>
                       <div style={styles.costItem(sacrificePool.length > 0)}>
-                        <span>🗡️ Sacrifice Weapon</span>
+                        <span>{t('sacrifice_weapon_label')}</span>
                         <span>{selectedSacrificeUid ? '1/1' : '0/1'}</span>
                       </div>
                       <div style={styles.costItem(ownedFavor >= 1)}>
-                        <span>🔺 Favor Talic</span>
+                        <span>{t('talic_favor_label')}</span>
                         <span>{ownedFavor} / 1</span>
                       </div>
                     </div>
@@ -410,10 +257,11 @@ export default function Forge() {
                       disabled={!selectedSacrificeUid || ownedFavor < 1}
                       onClick={handleCombine}
                     >
-                      FORGE VAMPIRIC WEAPON
+                      {t('forge_vampiric_btn')}
                     </button>
                   </div>
                 )}
+
               </div>
             </div>
           )}
@@ -441,6 +289,16 @@ const styles = {
     boxShadow: active ? `0 0 10px ${color}33` : 'none',
     transition: 'all 0.2s',
     letterSpacing: 1
+  }),
+  infoBox: (c) => ({
+    fontSize: 13,
+    color: c,
+    padding: '8px 10px',
+    borderRadius: 8,
+    background: `${c}0d`,
+    border: `1px solid ${c}33`,
+    lineHeight: 1.5,
+    marginBottom: 12
   }),
   empty: { flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: 40, color: '#7ab0d0', fontFamily: 'var(--font-body)', fontSize: 13, textAlign: 'center', gap: 10 },
   introHeader: { fontFamily: 'var(--font-title)', fontSize: 14, color: '#f5a623', letterSpacing: 1, marginBottom: 12, borderBottom: '1px solid rgba(0,229,255,0.15)', paddingBottom: 8 },

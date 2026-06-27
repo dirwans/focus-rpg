@@ -4,7 +4,7 @@
     "emoji": "⚡",
     "color": "#f5a623",
     "statKey": "atk",
-    "baseValue": 50,
+    "baseValue": 20,
     "perLevel": 8,
     "baseCost": 100,
     "costMultiplier": 1.4

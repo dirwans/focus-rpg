@@ -29,6 +29,7 @@ async function api(path, { method = 'GET', body } = {}) {
 
 export const apiRegister = (username, password) => api('/register', { method: 'POST', body: { username, password } })
 export const apiLogin    = (username, password) => api('/login',    { method: 'POST', body: { username, password } })
+export const apiGoogleAuth = (credential) => api('/auth/google',  { method: 'POST', body: { credential } })
 export const apiMe       = () => api('/me')
 export const apiLogout   = () => api('/logout', { method: 'POST' })
 export const apiLoadSave = () => api('/save').then((d) => d.game_state)
@@ -45,4 +46,6 @@ export const apiPvpWar = () => api('/pvp/war')
 export const apiGetArchon = () => api('/archon')
 export const apiVoteArchon = (candidate) => api('/archon/vote', { method: 'POST', body: { candidate } })
 export const apiForceEndArchon = () => api('/archon/force-end', { method: 'POST' })
+export const apiGetLeaderboard = () => api('/leaderboard')
+
 

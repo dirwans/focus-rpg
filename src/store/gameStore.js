@@ -7,16 +7,30 @@ import upgradesConfig from '../data/upgrades.json'
 import itemsData from '../data/items.json'
 import archonData from '../data/archon.json'
 import { getWeaponRarityBonus } from '../lib/rarity'
+import { TRANSLATIONS } from '../lib/translationData'
+
+function tStore(key, replacements = {}, playerState = null) {
+  const language = playerState?.language || 'en'
+  const dict = TRANSLATIONS[language] || TRANSLATIONS['en']
+  let text = dict[key] || TRANSLATIONS['en'][key] || key
+  Object.entries(replacements).forEach(([k, v]) => {
+    text = text.replace(`{${k}}`, v)
+  })
+  return text
+}
+
 
 function calcUpgradeCost(key, level) {
   const cfg = upgradesConfig[key]
-  return Math.floor(cfg.baseCost * Math.pow(cfg.costMultiplier, level))
+  const lvl = level || 0
+  return Math.floor(cfg.baseCost * Math.pow(cfg.costMultiplier, lvl))
 }
 
 function calcStat(key, upgradeLevel, raceId) {
   const cfg = upgradesConfig[key]
   const race = races[raceId]
-  const base = cfg.baseValue + cfg.perLevel * upgradeLevel
+  const lvl = upgradeLevel || 0
+  const base = cfg.baseValue + cfg.perLevel * lvl
   if (!race) return base
   const multiplier = key === 'hp'
     ? race.bonuses.hpMultiplier
@@ -27,7 +41,22 @@ function calcStat(key, upgradeLevel, raceId) {
 }
 
 function calcExpToNext(level) {
-  return Math.floor(100 * Math.pow(1.35, level - 1))
+  // Base increased from 500 → 800 to slow early-game progression.
+  // Factors unchanged — keep late-game steep curve from RF Online.
+  if (level <= 1) return 800
+  let exp = 800
+  for (let i = 2; i <= level; i++) {
+    let factor = 1.15
+    if (i > 65) factor = 1.55
+    else if (i > 60) factor = 1.42
+    else if (i > 50) factor = 1.35
+    else if (i > 40) factor = 1.30
+    else if (i > 30) factor = 1.25
+    else if (i > 20) factor = 1.20
+
+    exp = Math.floor(exp * factor)
+  }
+  return exp
 }
 
 function getSector(level) {
@@ -129,14 +158,62 @@ function computeRewards(player, mode, minutes) {
     avgExp = avg((m) => m.expReward) * 1.2
     avgAni = avg((m) => m.aniumReward) * 1.2
   }
-  const atk = calcStat('atk', player.upgrades.atk, player.race)
+  const atk = calcStat('atk', player.upgrades?.atk || 0, player.race)
   const dps = Math.max(1, atk - avgDef + 3.5) * 1.096 // ~rata2 crit/variance
-  const secPerKill = Math.max(1, avgHp / dps)
+  // Minimum 2 seconds per kill (was 1s). Prevents base ATK from trivializing
+  // early sectors — a level 1 player should need 2+ hits on most mobs.
+  const secPerKill = Math.max(2, avgHp / dps)
   const kills = Math.floor(elapsedSec / secPerKill)
+
+  let currentLevel = player.level
+  let currentExp = player.exp
+  let totalExpGained = 0
+  let totalAniumGained = 0
+
+  // Sector average mob level — offset +7 ensures white-name EXP cutoff (diff >= 7)
+  // never triggers before the player naturally moves to the next sector.
+  // Sector 1 (idx 0): mobLevel=7, white-name at player lv13. Player moves to sector 2 at lv11.
+  // Sector 2 (idx 1): mobLevel=17, white-name at player lv24. Player moves to sector 3 at lv21.
+  // This prevents players from getting stuck with 0 EXP mid-sector.
+  const mobLevel = sectorIdx * 10 + 7
+
+  for (let i = 0; i < kills; i++) {
+    // 1. Calculate level difference (positive = player above mob, negative = mob above player)
+    const diff = currentLevel - mobLevel
+
+    // 2. RF Online color-name EXP multiplier:
+    // White name (mob too weak): diff >= 7 → 0 EXP
+    // Blue name (mob slightly weak): diff >= 4 → 30% EXP
+    // Yellow/Purple (mob same or stronger): full 100% EXP
+    // NOTE: Purple (mob much higher level) always gives FULL EXP — fighting
+    // stronger mobs is risky but never penalized in RF Online.
+    let expMult = 1.0
+    if (diff >= 7) {
+      expMult = 0.0     // White name: 0 EXP
+    } else if (diff >= 4) {
+      expMult = 0.3     // Blue name: 30% EXP
+    }
+    // diff <= 0 or negative: mob is equal/stronger → full EXP (no penalty)
+
+    // Removed blanket 1.3x EXP multiplier — race bonuses handle EXP rate differences
+    const expFromKill = Math.floor(avgExp * race.bonuses.expMultiplier * expMult)
+    totalExpGained += expFromKill
+    totalAniumGained += Math.floor(avgAni)
+
+    // Simulate level up mid-session so currentLevel is updated for subsequent kills
+    currentExp += expFromKill
+    let expToNext = calcExpToNext(currentLevel)
+    while (currentExp >= expToNext && currentLevel < 70) {
+      currentExp -= expToNext
+      currentLevel += 1
+      expToNext = calcExpToNext(currentLevel)
+    }
+  }
+
   return {
     kills,
-    exp: Math.floor(kills * avgExp * race.bonuses.expMultiplier * 1.3),
-    anium: Math.floor(kills * avgAni * 1.3),
+    exp: totalExpGained,
+    anium: totalAniumGained,
   }
 }
 
@@ -148,7 +225,7 @@ const initialPlayer = {
   exp: 0,
   resources: { anium: 200, credits: 10, potions: 5 },
   upgrades: { atk: 0, def: 0, hp: 0 },
-  equipment: { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null },
+  equipment: { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null },
   sector: 1,
   highestSector: 1,
   streak: 0,
@@ -157,6 +234,7 @@ const initialPlayer = {
   totalSessions: 0,
   totalMinutes: 0,
   savedAt: 0,
+  language: 'en',
 }
 
 const initialTimer = {
@@ -213,7 +291,7 @@ export const useGameStore = create(
             race: raceId,
             job: null,
             upgrades: { atk: 0, def: 0, hp: 0 },
-            equipment: { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null },
+            equipment: { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null },
             savedAt: Date.now(),
           },
         }))
@@ -594,7 +672,7 @@ export const useGameStore = create(
         const { player, timer, battle } = get()
         if (timer.state !== 'running') return // hindari double-complete (sudah completed via sync)
 
-        const r = computeRewards(player, timer.mode, timer.selectedMinutes)
+        const r = computeRewards(player, timer.mode || 'fight', timer.selectedMinutes)
         const today = new Date().toDateString()
         const isNewDay = player.lastSessionDate !== today
         const newStreak = isNewDay ? player.streak + 1 : player.streak
@@ -613,7 +691,7 @@ export const useGameStore = create(
         let newLevel = player.level
         let expToNext = calcExpToNext(newLevel)
         let levelUps = 0
-        while (newExp >= expToNext && newLevel < 60) {
+        while (newExp >= expToNext && newLevel < 70) {
           newExp -= expToNext; newLevel += 1; levelUps += 1; expToNext = calcExpToNext(newLevel)
         }
         const newSector = getSector(newLevel)
@@ -628,45 +706,35 @@ export const useGameStore = create(
         // Elite monster: 15% chance muncul di stage 5+ saat mode fight
         // Kalau ada elite → drop tier naik 1 level (seperti Stage Boss)
         const eliteRoll = seededFrac(timer.startedAt * 7 + 13)
-        const killedElite = timer.mode === 'fight' && fightSector >= 5 && eliteRoll < 0.15 && finalKills > 0
+        const killedElite = fightSector >= 5 && eliteRoll < 0.15 && finalKills > 0
         
         // Cek apakah boss mati (finalKills > 0)
-        const killedPitBoss = timer.mode === 'fight' && battle.isPitBoss && finalKills > 0
-        const killedStageBoss = timer.mode === 'fight' && battle.isBoss && !battle.isPitBoss && finalKills > 0
+        const killedPitBoss = battle.isPitBoss && finalKills > 0
+        const killedStageBoss = battle.isBoss && !battle.isPitBoss && finalKills > 0
 
         // Elite memperlakukan dirinya seperti Stage Boss untuk drop (tapi bukan Pit Boss)
         const effectiveStageBoss = killedStageBoss || killedElite
         
-        // Jumlah drop item: 1 item per session, gathering 2 material, elite/boss bisa 2
-        const numDrops = timer.mode === 'gather' ? 2 : (killedPitBoss || killedElite ? 2 : 1)
-
         if (killedElite) {
             dropLog += `\n⚡ ELITE MONSTER appeared! Bonus drop!`
         }
         
-        for (let i=0; i<numDrops; i++) {
+        // Combat drops: 1 drop, or 2 drops if Boss/Elite is defeated
+        const combatDropsCount = (killedPitBoss || killedElite) ? 2 : 1
+        
+        for (let i = 0; i < combatDropsCount; i++) {
             const seed = timer.startedAt + i
-            const tier = getDropTier(seed, timer.mode, killedPitBoss, effectiveStageBoss)
+            const tier = getDropTier(seed, 'fight', killedPitBoss, effectiveStageBoss)
             
-            if (tier) {
-                let pool = []
-                if (tier === 'material') {
-                    // Material juga digate berdasar minStage
-                    pool = itemsData.items.filter(it =>
-                      (it.type === 'material' || it.type === 'consumable') &&
-                      (it.minStage === undefined || it.minStage <= fightSector)
-                    )
-                } else {
-                    pool = itemsData.items.filter(it => 
-                      (it.type === 'weapon' || it.type === 'armor' || it.type === 'shield' || it.type === 'helmet' || it.type === 'mantle' || it.type === 'gloves' || it.type === 'boots') &&
-                      it.rarity === tier &&
-                      (it.race === 'All' || it.race === player.race) &&
-                      it.level <= player.level + 10 &&
-                      (it.type !== 'weapon' || !it.job || it.job === player.job) &&
-                      // ── STAGE GATE: item hanya bisa drop kalau stage cukup tinggi
-                      (it.minStage === undefined || it.minStage <= fightSector)
-                    )
-                }
+            if (tier && tier !== 'material') {
+                const pool = itemsData.items.filter(it => 
+                  (it.type === 'weapon' || it.type === 'armor' || it.type === 'shield' || it.type === 'helmet' || it.type === 'mantle' || it.type === 'gloves' || it.type === 'boots' || it.type === 'pants' || it.type === 'amulet' || it.type === 'ring') &&
+                  it.rarity === tier &&
+                  (it.race === 'All' || it.race === player.race) &&
+                  it.level <= player.level + 10 &&
+                  (it.type !== 'weapon' || !it.job || it.job === player.job) &&
+                  (it.minStage === undefined || it.minStage <= fightSector)
+                )
                 
                 if (pool.length > 0) {
                     const drop = pool[Math.floor(seededFrac(seed * 1.5) * pool.length)]
@@ -675,6 +743,20 @@ export const useGameStore = create(
                         dropLog += ` \n🎁 Got: ${drop.emoji} ${drop.name}`
                     }
                 }
+            }
+        }
+
+        // Material/Consumable drop: always 1 drop per session
+        const matSeed = timer.startedAt + combatDropsCount
+        const matPool = itemsData.items.filter(it =>
+          (it.type === 'material' || it.type === 'consumable') &&
+          (it.minStage === undefined || it.minStage <= fightSector)
+        )
+        if (matPool.length > 0) {
+            const drop = matPool[Math.floor(seededFrac(matSeed * 1.5) * matPool.length)]
+            if (drop) {
+                newInventory.push({ ...drop, uid: Date.now() + combatDropsCount })
+                dropLog += ` \n⛏️ Gathered: ${drop.emoji} ${drop.name}`
             }
         }
 
@@ -713,17 +795,21 @@ export const useGameStore = create(
       // ── Upgrade ──────────────────────────────────────────
       upgrade: (key) => {
         const { player } = get()
-        const currentLevel = player.upgrades[key]
+        const upgrades = player.upgrades || { atk: 0, def: 0, hp: 0 }
+        const currentLevel = upgrades[key] || 0
         const cost = calcUpgradeCost(key, currentLevel)
-        if (player.resources.anium < cost) return
-        set((s) => ({
-          player: {
-            ...s.player,
-            resources: { ...s.player.resources, anium: s.player.resources.anium - cost },
-            upgrades: { ...s.player.upgrades, [key]: currentLevel + 1 },
-            savedAt: Date.now(),
-          },
-        }))
+        if (player.resources?.anium < cost) return
+        set((s) => {
+          const sUpgrades = s.player.upgrades || { atk: 0, def: 0, hp: 0 }
+          return {
+            player: {
+              ...s.player,
+              resources: { ...s.player.resources, anium: s.player.resources.anium - cost },
+              upgrades: { ...sUpgrades, [key]: (sUpgrades[key] || 0) + 1 },
+              savedAt: Date.now(),
+            },
+          }
+        })
       },
 
       // ── Sync (player + session) ──────────────────────────
@@ -745,7 +831,20 @@ export const useGameStore = create(
         if (!gs) return
         const { __session, ...playerPart } = gs
         set((s) => {
-          const next = { player: { ...initialPlayer, ...playerPart } }
+          const next = {
+            player: {
+              ...initialPlayer,
+              ...playerPart,
+              resources: {
+                ...initialPlayer.resources,
+                ...(playerPart.resources || {})
+              },
+              upgrades: {
+                ...initialPlayer.upgrades,
+                ...(playerPart.upgrades || {})
+              }
+            }
+          }
           
           // Force reset if the loaded race is obsolete
           const raceMap = { 
@@ -765,6 +864,7 @@ export const useGameStore = create(
              next.player.equipment = {
                weapon: null, armor: null, shield: null,
                helmet: null, mantle: null, gloves: null, boots: null,
+               pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null,
                ...next.player.equipment
              }
              if (next.player.equipment.weapon && raceMap[next.player.equipment.weapon.race]) next.player.equipment.weapon.race = raceMap[next.player.equipment.weapon.race]
@@ -780,7 +880,7 @@ export const useGameStore = create(
             next.player.race = null
             next.player.job = null
             next.player.upgrades = { atk: 0, def: 0, hp: 0 }
-            next.player.equipment = { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null }
+            next.player.equipment = { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null }
           }
 
           if (__session) {
@@ -806,7 +906,10 @@ export const useGameStore = create(
         const { player, archons } = get()
         if (!player.race) return { atk: 0, def: 0, hp: 0, title: '' }
         
-        const eq = player.equipment || { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null }
+        const myRaceArchon = archons ? archons[player.race] : null
+        const isArchon = myRaceArchon && myRaceArchon.toLowerCase() === player.username?.toLowerCase()
+        
+        const eq = player.equipment || { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null }
         
         // Job bonus
         let jobBonus = { atk: 0, def: 0, hp: 0 }
@@ -817,7 +920,7 @@ export const useGameStore = create(
            }
         }
 
-        const eqSlots = ['weapon', 'armor', 'shield', 'helmet', 'mantle', 'gloves', 'boots']
+        const eqSlots = ['weapon', 'armor', 'shield', 'helmet', 'mantle', 'gloves', 'boots', 'pants', 'amulet1', 'amulet2', 'ring1', 'ring2']
         let flatAtk = jobBonus.atk || 0
         let flatDef = jobBonus.def || 0
         let flatHp = jobBonus.hp || 0
@@ -829,6 +932,11 @@ export const useGameStore = create(
         eqSlots.forEach(slot => {
           const item = eq[slot]
           if (item && item.bonus) {
+            // Skip Archon gear stats if not the Archon
+            if (item.id && item.id.startsWith('archon_') && !isArchon) {
+              return
+            }
+
             let itemAtk = item.bonus.atk || 0
             
             // Apply refinement/rarity bonus if it's the weapon
@@ -848,12 +956,12 @@ export const useGameStore = create(
           }
         })
 
-        let baseAtk = calcStat('atk', player.upgrades.atk, player.race) + flatAtk
-        let baseDef = calcStat('def', player.upgrades.def, player.race) + flatDef
-        let baseHp = calcStat('hp', player.upgrades.hp, player.race) + flatHp
+        let baseAtk = calcStat('atk', player.upgrades?.atk || 0, player.race) + flatAtk
+        let baseDef = calcStat('def', player.upgrades?.def || 0, player.race) + flatDef
+        let baseHp = calcStat('hp', player.upgrades?.hp || 0, player.race) + flatHp
 
-        // Set bonus verification
-        const isBelterraSet = 
+        // Set bonus verification (requires being the Archon)
+        const isBelterraSet = isArchon &&
           eq.helmet?.id === 'archon_belterra_helmet' &&
           eq.mantle?.id === 'archon_belterra_mantle' &&
           eq.armor?.id === 'archon_belterra_armor' &&
@@ -861,7 +969,7 @@ export const useGameStore = create(
           eq.boots?.id === 'archon_belterra_boots' &&
           eq.weapon?.id === 'archon_belterra_weapon';
           
-        const isCoralisSet = 
+        const isCoralisSet = isArchon &&
           eq.helmet?.id === 'archon_coralis_helmet' &&
           eq.mantle?.id === 'archon_coralis_mantle' &&
           eq.armor?.id === 'archon_coralis_armor' &&
@@ -869,7 +977,7 @@ export const useGameStore = create(
           eq.boots?.id === 'archon_coralis_boots' &&
           eq.weapon?.id === 'archon_coralis_weapon';
 
-        const isAcretonSet = 
+        const isAcretonSet = isArchon &&
           eq.helmet?.id === 'archon_acreton_helmet' &&
           eq.mantle?.id === 'archon_acreton_mantle' &&
           eq.armor?.id === 'archon_acreton_armor' &&
@@ -930,29 +1038,38 @@ export const useGameStore = create(
         }
       },
       equipItem: (uid) => {
-        const { player } = get()
+        const { player, archons } = get()
         const item = player.inventory.find((i) => i.uid === uid)
         if (!item) return
 
         if (player.level < (item.level || 0)) {
-          alert(`Required level: ${item.level}`)
+          alert(tStore('alert_req_level', { level: item.level }, player))
           return
         }
 
         if (item.race && item.race !== 'All' && item.race !== player.race) {
-          alert(`This item is restricted to the ${item.race.toUpperCase()} race.`)
+          alert(tStore('alert_restricted_race', { race: item.race.toUpperCase() }, player))
           return
         }
 
         if (item.job && item.job !== player.job) {
-          alert(`This item is restricted to the ${item.job.toUpperCase()} job.`)
+          alert(tStore('alert_restricted_job', { job: item.job.toUpperCase() }, player))
           return
         }
 
-        const slot = (item.type === 'weapon' || item.type === 'armor' || item.type === 'shield' || item.type === 'helmet' || item.type === 'mantle' || item.type === 'gloves' || item.type === 'boots') ? item.type : null
-        if (!slot) return
 
-        const eq = player.equipment || { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null }
+        const eq = player.equipment || { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null }
+
+        // Determine target slot — amulet and ring have dual slots
+        let slot = null
+        if (item.type === 'amulet') {
+          slot = !eq.amulet1 ? 'amulet1' : 'amulet2'
+        } else if (item.type === 'ring') {
+          slot = !eq.ring1 ? 'ring1' : 'ring2'
+        } else if (['weapon','armor','shield','helmet','mantle','gloves','boots','pants'].includes(item.type)) {
+          slot = item.type
+        }
+        if (!slot) return
         const oldItem = eq[slot]
 
         let newInventory = player.inventory.filter((i) => i.uid !== uid)
@@ -974,7 +1091,7 @@ export const useGameStore = create(
       },
       unequipItem: (slot) => {
         const { player } = get()
-        const eq = player.equipment || { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null }
+        const eq = player.equipment || { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null }
         const item = eq[slot]
         if (!item) return
 
@@ -1016,9 +1133,10 @@ export const useGameStore = create(
         const { player } = get()
         const cost = count * 20 // 20 Anium per potion
         if ((player.resources.anium || 0) < cost) {
-          alert(`Not enough Anium! Required: ${cost} Anium.`)
+          alert(tStore('alert_not_enough_anium', { cost }, player))
           return false
         }
+
         set((s) => ({
           player: {
             ...s.player,
@@ -1041,7 +1159,7 @@ export const useGameStore = create(
 
         if (item.id === 'raid_ticket') {
           if (timer.state !== 'running' || timer.mode !== 'fight') {
-            alert('You must be in a fighting session to summon a Pit Boss!')
+            alert(tStore('alert_fight_session_required', {}, player))
             return
           }
           const sectorIdx = getSector(player.level) - 1
@@ -1058,52 +1176,24 @@ export const useGameStore = create(
         
         // Healing consumables
         if (item.bonus && item.bonus.hp) {
-            alert(`Used ${item.name}! (Healing not fully implemented in combat loop yet)`)
+            alert(tStore('alert_used_potion', { name: item.name }, player))
             set({
                 player: { ...player, inventory: newInventory, savedAt: Date.now() }
             })
             return
         }
+
       },
-      getUpgradeCost: (key) => calcUpgradeCost(key, get().player.upgrades[key]),
+      getUpgradeCost: (key) => calcUpgradeCost(key, get().player.upgrades?.[key] || 0),
       loadPlayer: (savedPlayer) => set({ player: { ...initialPlayer, ...savedPlayer } }),
       getExpToNext: () => calcExpToNext(get().player.level),
-      defectRace: () => {
-        const { player } = get()
-        if (player.level < 40 || player.resources.anium < 50000) return
-        
-        // Copot kabeh equipment
-        const eq = player.equipment || { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null }
-        let newInv = [...player.inventory]
-        if (eq.weapon) newInv.push(eq.weapon)
-        if (eq.armor) newInv.push(eq.armor)
-        if (eq.shield) newInv.push(eq.shield)
-        if (eq.helmet) newInv.push(eq.helmet)
-        if (eq.mantle) newInv.push(eq.mantle)
-        if (eq.gloves) newInv.push(eq.gloves)
-        if (eq.boots) newInv.push(eq.boots)
-
-        set({
-          showRaceSelect: true,
-          player: {
-            ...player,
-            race: null,
-            job: null,
-            inventory: newInv,
-            equipment: { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null },
-            upgrades: { atk: 0, def: 0, hp: 0 },
-            resources: { ...player.resources, anium: player.resources.anium - 50000 },
-            savedAt: Date.now()
-          }
-        })
-      },
 
       // ── Weapon Refining & Combining ───────────────────────
       refineWeapon: () => {
         const { player } = get()
         const weapon = player.equipment?.weapon
         if (!weapon) {
-          alert('Anda tidak memiliki senjata yang dilengkapi.')
+          alert(tStore('alert_no_equipped_weapon', {}, player))
           return
         }
         const currentGrade = (weapon.rarityGrade || 'normal').toLowerCase()
@@ -1116,19 +1206,20 @@ export const useGameStore = create(
         }
         const cost = REFINE_COSTS[currentGrade]
         if (!cost) {
-          alert('Senjata Anda sudah mencapai tingkat maksimal (Mythic).')
+          alert(tStore('alert_max_mythic', {}, player))
           return
         }
 
         const talicCount = player.inventory.filter(it => it.id === 'talic_ignorance').length
         if (talicCount < cost.talics) {
-          alert(`Anda membutuhkan ${cost.talics} Ignorance Talic. (Dimiliki: ${talicCount})`)
+          alert(tStore('alert_missing_ignorance', { talics: cost.talics, owned: talicCount }, player))
           return
         }
         if (player.resources.anium < cost.anium) {
-          alert(`Anda membutuhkan ${cost.anium} Anium. (Dimiliki: ${player.resources.anium})`)
+          alert(tStore('alert_missing_anium', { anium: cost.anium, owned: player.resources.anium }, player))
           return
         }
+
 
         let consumed = 0
         const newInventory = player.inventory.filter(it => {
@@ -1165,7 +1256,7 @@ export const useGameStore = create(
         const { player } = get()
         const weapon = player.equipment?.weapon
         if (!weapon) {
-          alert('Anda tidak memiliki senjata yang dilengkapi.')
+          alert(tStore('alert_no_equipped_weapon', {}, player))
           return
         }
         const isEpicOrHigher = (item) => {
@@ -1175,25 +1266,25 @@ export const useGameStore = create(
         }
 
         if (!isEpicOrHigher(weapon)) {
-          alert('Senjata yang dilengkapi harus memiliki tingkat Epic atau lebih tinggi.')
+          alert(tStore('alert_epic_or_higher_req', {}, player))
           return
         }
         if (weapon.specialProperty === 'vampire') {
-          alert('Senjata ini sudah memiliki properti Vampire.')
+          alert(tStore('alert_already_vampire', {}, player))
           return
         }
 
         const sacrifice = player.inventory.find(it => it.uid === sacrificeUid)
         if (!sacrifice) {
-          alert('Senjata tumbal tidak ditemukan di inventori.')
+          alert(tStore('alert_sacrifice_not_found', {}, player))
           return
         }
         if (sacrifice.type !== 'weapon') {
-          alert('Item tumbal harus berupa senjata.')
+          alert(tStore('alert_sacrifice_must_weapon', {}, player))
           return
         }
         if (!isEpicOrHigher(sacrifice)) {
-          alert('Senjata tumbal harus memiliki tingkat Epic atau lebih tinggi.')
+          alert(tStore('alert_sacrifice_epic_req', {}, player))
           return
         }
 
@@ -1202,13 +1293,14 @@ export const useGameStore = create(
         const reqAnium = 30000
 
         if (talicCount < reqTalics) {
-          alert(`Anda membutuhkan ${reqTalics} Favor Talic. (Dimiliki: ${talicCount})`)
+          alert(tStore('alert_missing_favor', { talics: reqTalics, owned: talicCount }, player))
           return
         }
         if (player.resources.anium < reqAnium) {
-          alert(`Anda membutuhkan ${reqAnium} Anium. (Dimiliki: ${player.resources.anium})`)
+          alert(tStore('alert_missing_anium', { anium: reqAnium, owned: player.resources.anium }, player))
           return
         }
+
 
         let consumedTalics = 0
         const newInventory = player.inventory.filter(it => {
@@ -1242,92 +1334,67 @@ export const useGameStore = create(
         })
       },
 
-      // ── Archon Forging ───────────────────────────────────
+      // ── Archon Purchasing (Premium Shop) ───────────────────
       craftArchonItem: (itemId) => {
         const { player } = get()
-        const ARCHON_RECIPES = {
-          archon_belterra_helmet: { materials: { mat_carbon: 10, mat_mecha: 5, mat_aether: 3 }, anium: 15000 },
-          archon_belterra_gloves: { materials: { mat_carbon: 10, mat_mecha: 5, mat_aether: 3 }, anium: 15000 },
-          archon_belterra_boots: { materials: { mat_carbon: 10, mat_mecha: 5, mat_aether: 3 }, anium: 15000 },
-          archon_belterra_armor: { materials: { mat_carbon: 15, mat_mecha: 8, mat_aether: 5, mat_warlord: 1 }, anium: 25000 },
-          archon_belterra_mantle: { materials: { mat_carbon: 15, mat_mecha: 8, mat_aether: 5, mat_warlord: 1 }, anium: 25000 },
-          archon_belterra_weapon: { materials: { mat_carbon: 15, mat_mecha: 8, mat_aether: 5, mat_warlord: 1 }, anium: 25000 },
+        const ARCHON_PRICES = {
+          archon_belterra_helmet: 15000,
+          archon_belterra_gloves: 15000,
+          archon_belterra_boots: 15000,
+          archon_belterra_armor: 25000,
+          archon_belterra_mantle: 25000,
+          archon_belterra_weapon: 25000,
 
-          archon_coralis_helmet: { materials: { mat_carbon: 10, mat_mecha: 5, mat_aether: 3 }, anium: 15000 },
-          archon_coralis_gloves: { materials: { mat_carbon: 10, mat_mecha: 5, mat_aether: 3 }, anium: 15000 },
-          archon_coralis_boots: { materials: { mat_carbon: 10, mat_mecha: 5, mat_aether: 3 }, anium: 15000 },
-          archon_coralis_armor: { materials: { mat_carbon: 15, mat_mecha: 8, mat_aether: 5, mat_warlord: 1 }, anium: 25000 },
-          archon_coralis_mantle: { materials: { mat_carbon: 15, mat_mecha: 8, mat_aether: 5, mat_warlord: 1 }, anium: 25000 },
-          archon_coralis_weapon: { materials: { mat_carbon: 15, mat_mecha: 8, mat_aether: 5, mat_warlord: 1 }, anium: 25000 },
+          archon_coralis_helmet: 15000,
+          archon_coralis_gloves: 15000,
+          archon_coralis_boots: 15000,
+          archon_coralis_armor: 25000,
+          archon_coralis_mantle: 25000,
+          archon_coralis_weapon: 25000,
 
-          archon_acreton_helmet: { materials: { mat_carbon: 10, mat_mecha: 5, mat_aether: 3 }, anium: 15000 },
-          archon_acreton_gloves: { materials: { mat_carbon: 10, mat_mecha: 5, mat_aether: 3 }, anium: 15000 },
-          archon_acreton_boots: { materials: { mat_carbon: 10, mat_mecha: 5, mat_aether: 3 }, anium: 15000 },
-          archon_acreton_armor: { materials: { mat_carbon: 15, mat_mecha: 8, mat_aether: 5, mat_warlord: 1 }, anium: 25000 },
-          archon_acreton_mantle: { materials: { mat_carbon: 15, mat_mecha: 8, mat_aether: 5, mat_warlord: 1 }, anium: 25000 },
-          archon_acreton_weapon: { materials: { mat_carbon: 15, mat_mecha: 8, mat_aether: 5, mat_warlord: 1 }, anium: 25000 }
+          archon_acreton_helmet: 15000,
+          archon_acreton_gloves: 15000,
+          archon_acreton_boots: 15000,
+          archon_acreton_armor: 25000,
+          archon_acreton_mantle: 25000,
+          archon_acreton_weapon: 25000
         }
-        const recipe = ARCHON_RECIPES[itemId]
-        if (!recipe) {
-          alert('Resep tidak valid.')
+        const price = ARCHON_PRICES[itemId]
+        if (price === undefined) {
+          alert(tStore('invalid_item', {}, player))
           return
         }
 
         const itemTemplate = itemsData.items.find(it => it.id === itemId)
         if (!itemTemplate) {
-          alert('Item tidak ditemukan di database.')
+          alert(tStore('item_not_found', {}, player))
           return
         }
         if (itemTemplate.race !== player.race) {
-          alert(`Item ini hanya dapat dibuat oleh ras ${itemTemplate.race.toUpperCase()}.`)
+          alert(tStore('restricted_race', { race: itemTemplate.race.toUpperCase() }, player))
           return
         }
 
-        if (player.resources.anium < recipe.anium) {
-          alert(`Anda membutuhkan ${recipe.anium} Anium. (Dimiliki: ${player.resources.anium})`)
+        if (player.resources.anium < price) {
+          alert(tStore('need_more_anium', { need: price.toLocaleString(), owned: player.resources.anium.toLocaleString() }, player))
           return
         }
 
-        const inventoryCounts = {}
-        player.inventory.forEach(it => {
-          inventoryCounts[it.id] = (inventoryCounts[it.id] || 0) + 1
-        })
 
-        for (const [matId, reqAmount] of Object.entries(recipe.materials)) {
-          const owned = inventoryCounts[matId] || 0
-          if (owned < reqAmount) {
-            const matTemplate = itemsData.items.find(it => it.id === matId)
-            const matName = matTemplate ? matTemplate.name : matId
-            alert(`Anda membutuhkan ${reqAmount}x ${matName}. (Dimiliki: ${owned})`)
-            return
-          }
-        }
-
-        const consumedCounts = {}
-        const newInventory = player.inventory.filter(it => {
-          const req = recipe.materials[it.id] || 0
-          if (req > 0) {
-            const consumed = consumedCounts[it.id] || 0
-            if (consumed < req) {
-              consumedCounts[it.id] = consumed + 1
-              return false // consume it
-            }
-          }
-          return true
-        })
-
-        const craftedItem = {
+        // Add item to inventory directly without consuming any materials
+        const purchasedItem = {
           ...itemTemplate,
           uid: Date.now()
         }
-        newInventory.push(craftedItem)
+        
+        const newInventory = [...player.inventory, purchasedItem]
 
         set({
           player: {
             ...player,
             resources: {
               ...player.resources,
-              anium: player.resources.anium - recipe.anium
+              anium: player.resources.anium - price
             },
             inventory: newInventory,
             savedAt: Date.now()
@@ -1336,6 +1403,39 @@ export const useGameStore = create(
       },
 
     }),
-    { name: 'focus-rpg-save' }
+    {
+      name: 'focus-rpg-save',
+      merge: (persistedState, currentState) => {
+        if (!persistedState) return currentState
+        return {
+          ...currentState,
+          ...persistedState,
+          player: {
+            ...currentState.player,
+            ...(persistedState.player || {}),
+            resources: {
+              ...currentState.player?.resources,
+              ...(persistedState.player?.resources || {})
+            },
+            upgrades: {
+              ...currentState.player?.upgrades,
+              ...(persistedState.player?.upgrades || {})
+            },
+            equipment: {
+              ...currentState.player?.equipment,
+              ...(persistedState.player?.equipment || {})
+            }
+          },
+          timer: {
+            ...currentState.timer,
+            ...(persistedState.timer || {})
+          },
+          battle: {
+            ...currentState.battle,
+            ...(persistedState.battle || {})
+          }
+        }
+      }
+    }
   )
 )

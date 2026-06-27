@@ -645,3 +645,330 @@ body {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+@keyframes laserSweep {
+  0% { top: 0%; opacity: 0.3; }
+  50% { top: 100%; opacity: 1; }
+  100% { top: 0%; opacity: 0.3; }
+}
+
+.laser-sweep {
+  animation: laserSweep 4s infinite ease-in-out;
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* ------------------------------------------------ */
+/* PILOT PROFILE ID BADGE — TACTICAL HUD            */
+/* Zero-Circle Policy: no border-radius anywhere    */
+/* ------------------------------------------------ */
+
+.profile-id-card {
+  position: relative;
+  width: calc(100% - 32px);
+  padding: 10px 12px 10px;
+  /* Angular chamfered corners — HUD style */
+  clip-path: polygon(
+    0 0,
+    calc(100% - 14px) 0,
+    100% 14px,
+    100% 100%,
+    14px 100%,
+    0 calc(100% - 14px)
+  );
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Faction themed backgrounds */
+.panel-belterra.profile-id-card {
+  background: linear-gradient(145deg, #0b1d30 0%, #040c1a 60%, #020810 100%);
+  border: 2px solid rgba(0, 229, 255, 0.5);
+  filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.18));
+}
+
+.panel-acreton.profile-id-card {
+  background: linear-gradient(145deg, #221408 0%, #0e0804 60%, #060402 100%);
+  border: 2px solid rgba(255, 100, 0, 0.5);
+  filter: drop-shadow(0 0 10px rgba(255, 100, 0, 0.18));
+}
+
+.panel-coralis.profile-id-card {
+  background: linear-gradient(145deg, #1a0828 0%, #0a0318 60%, #050110 100%);
+  border: 2px solid rgba(208, 0, 255, 0.5);
+  filter: drop-shadow(0 0 10px rgba(208, 0, 255, 0.18));
+}
+
+/* Corner bolts — square, tactical */
+.profile-id-rivet {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  background: linear-gradient(135deg, #c0c0c0, #4a4a4a);
+  border: 1px solid #666;
+  z-index: 5;
+}
+.profile-id-rivet.top-left { top: 5px; left: 5px; }
+.profile-id-rivet.top-right { top: 5px; right: 5px; }
+.profile-id-rivet.bottom-left { bottom: 5px; left: 5px; }
+.profile-id-rivet.bottom-right { bottom: 5px; right: 5px; }
+
+/* Confidential text layout */
+.profile-id-confidential {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.25);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-align: center;
+  user-select: none;
+  line-height: 1;
+  padding: 2px 0;
+}
+
+/* Card layout wrapper */
+.profile-id-body {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* KTP sci-fi portrait frame — thick bezel + neon inner line */
+.profile-avatar-glow-wrap {
+  width: 112px;
+  height: 150px;
+  position: relative;
+  background: #060d1c;
+  /* Outer metallic bezel */
+  border: 3px solid #0e2235;
+  /* Inner neon line + outer glow */
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 229, 255, 0.55),
+    0 0 14px rgba(0, 229, 255, 0.3),
+    0 0 4px rgba(0, 229, 255, 0.7);
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+.panel-acreton .profile-avatar-glow-wrap {
+  border-color: #2a1506;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 100, 0, 0.55),
+    0 0 14px rgba(255, 100, 0, 0.3),
+    0 0 4px rgba(255, 100, 0, 0.7);
+}
+
+.panel-coralis .profile-avatar-glow-wrap {
+  border-color: #1e0630;
+  box-shadow:
+    inset 0 0 0 1px rgba(208, 0, 255, 0.55),
+    0 0 14px rgba(208, 0, 255, 0.3),
+    0 0 4px rgba(208, 0, 255, 0.7);
+}
+
+.profile-avatar-inner {
+  width: 100%;
+  height: 100%;
+  background: rgba(3, 8, 20, 0.96);
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* L-shaped corner targeting brackets */
+.profile-corner {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  z-index: 10;
+  pointer-events: none;
+}
+.profile-corner.tl { top: -4px;  left: -4px;  border-top: 2px solid var(--neon-glow); border-left: 2px solid var(--neon-glow); }
+.profile-corner.tr { top: -4px;  right: -4px; border-top: 2px solid var(--neon-glow); border-right: 2px solid var(--neon-glow); }
+.profile-corner.bl { bottom: -4px; left: -4px;  border-bottom: 2px solid var(--neon-glow); border-left: 2px solid var(--neon-glow); }
+.profile-corner.br { bottom: -4px; right: -4px; border-bottom: 2px solid var(--neon-glow); border-right: 2px solid var(--neon-glow); }
+
+.profile-avatar-grid {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: 
+    radial-gradient(circle, transparent 20%, rgba(3, 8, 20, 0.5) 100%),
+    linear-gradient(rgba(0, 229, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, 0.08) 1px, transparent 1px);
+  background-size: 100% 100%, 8px 8px, 8px 8px;
+  opacity: 0.65;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Info container layout */
+.profile-details-wrap {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 5px;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.profile-details-header-badge {
+  font-family: var(--font-title);
+  font-size: 9px;
+  font-weight: 900;
+  color: var(--neon-glow);
+  border: 1px solid var(--neon-glow);
+  padding: 1px 6px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background: rgba(0, 229, 255, 0.08);
+  clip-path: polygon(0 0, calc(100% - 4px) 0, 100% 4px, 100% 100%, 4px 100%, 0 calc(100% - 4px));
+  margin-bottom: 2px;
+}
+
+.profile-details-username {
+  font-family: var(--font-title);
+  font-size: 19px;
+  font-weight: 900;
+  color: #ffffff;
+  text-shadow:
+    0 0 8px rgba(255, 255, 255, 0.8),
+    0 0 20px var(--neon-glow),
+    0 0 40px var(--neon-glow);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 1;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+/* Status display panel — sharp HUD style */
+.profile-status-panel {
+  width: 100%;
+  background: rgba(4, 9, 21, 0.8);
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  border-left: 2px solid var(--neon-glow);
+  /* No border-radius */
+  padding: 5px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-sizing: border-box;
+}
+
+.profile-status-online-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: #a8d4e8;
+  letter-spacing: 0.8px;
+  line-height: 1.2;
+}
+
+/* Square LED indicator — tactical, no rounded corners */
+.profile-status-led {
+  width: 7px;
+  height: 7px;
+  background: #39ff14;
+  box-shadow: 0 0 6px #39ff14, 0 0 12px #39ff14;
+  animation: ledBlink 1.5s infinite ease-in-out;
+  flex-shrink: 0;
+}
+
+.profile-status-label-value {
+  font-weight: bold;
+  color: #39ff14;
+  text-shadow: 0 0 6px rgba(57, 255, 20, 0.5);
+}
+
+/* Segmented progress indicators */
+.profile-status-bar {
+  display: flex;
+  gap: 3px;
+  width: 100%;
+  height: 5px;
+  margin-top: 1px;
+}
+
+.profile-status-segment {
+  flex: 1;
+  height: 100%;
+  background: var(--neon-glow);
+  opacity: 0.85;
+  box-shadow: 0 0 3px var(--neon-glow);
+}
+
+.profile-status-segment.dim {
+  opacity: 0.12;
+  box-shadow: none;
+  background: #253a4a;
+}
+
+/* Detail subgrid columns — sharp, no curves */
+.profile-stats-grid {
+  display: flex;
+  width: 100%;
+  background: rgba(3, 8, 20, 0.6);
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  border-top: 1px solid rgba(0, 229, 255, 0.35);
+  overflow: hidden;
+  margin-top: 2px;
+}
+
+.profile-stats-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 2px;
+  font-family: var(--font-mono);
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.profile-stats-col:not(:last-child) {
+  border-right: 1px solid rgba(0, 229, 255, 0.12);
+}
+
+.profile-stats-col-lbl {
+  font-size: 9px;
+  font-weight: 800;
+  color: #6ab0d4;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.profile-stats-col-val {
+  font-size: 12px;
+  font-weight: 900;
+  color: #ffffff;
+  text-shadow: 0 0 6px var(--neon-glow);
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  text-align: center;
+}
