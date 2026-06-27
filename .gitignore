@@ -25,7 +25,8 @@ dist-ssr
 .env.local
 
 # Server data (user saves, sessions) — jangan di-commit
-data/
+# NOTE: /data/ (root only) not src/data/ (game data must be committed)
+/data/
 vps_key
 deploy.ps1
 

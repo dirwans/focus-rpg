@@ -1,0 +1,35 @@
+{
+  "acreton": [
+    { "job": "cadet", "name": "Iron Rifle", "dmgMin": 60, "dmgMax": 90, "effect": "+2% Accuracy", "level": 1 },
+    { "job": "gunner", "name": "Burst Cannon", "dmgMin": 70, "dmgMax": 100, "effect": "Rapid Fire", "level": 1 },
+    { "job": "striker", "name": "Plasma Blade", "dmgMin": 65, "dmgMax": 95, "effect": "+3% Attack Speed", "level": 1 },
+    { "job": "iron_trooper", "name": "Heavy Crusher", "dmgMin": 180, "dmgMax": 260, "effect": "Knockback", "level": 30 },
+    { "job": "siege_gunner", "name": "Siege Launcher", "dmgMin": 190, "dmgMax": 280, "effect": "Area Damage", "level": 30 },
+    { "job": "cyber_assassin", "name": "Shadow Dagger", "dmgMin": 170, "dmgMax": 240, "effect": "Stealth Strike", "level": 30 },
+    { "job": "iron_vanguard", "name": "Oblivion Axe", "dmgMin": 350, "dmgMax": 500, "effect": "Defense Break", "level": 50 },
+    { "job": "nova_destroyer", "name": "Nova Launcher", "dmgMin": 380, "dmgMax": 550, "effect": "Explosion", "level": 50 },
+    { "job": "omega_reaper", "name": "Phantom Blade", "dmgMin": 360, "dmgMax": 520, "effect": "Critical Burst", "level": 50 }
+  ],
+  "belterra": [
+    { "job": "recruit", "name": "Pulse Rifle", "dmgMin": 50, "dmgMax": 80, "effect": "+2% Akurasi", "level": 1 },
+    { "job": "engineer", "name": "Arc Wrench", "dmgMin": 40, "dmgMax": 70, "effect": "+3% Repair", "level": 1 },
+    { "job": "ranger", "name": "Scout Bowgun", "dmgMin": 55, "dmgMax": 90, "effect": "+2% Crit", "level": 1 },
+    { "job": "vanguard", "name": "Titan Hammer", "dmgMin": 150, "dmgMax": 220, "effect": "Stun 1 detik", "level": 30 },
+    { "job": "mechanist", "name": "Drone Launcher", "dmgMin": 130, "dmgMax": 210, "effect": "Drone Assist", "level": 30 },
+    { "job": "sharpshooter", "name": "Long Rail Rifle", "dmgMin": 170, "dmgMax": 250, "effect": "+5% Crit", "level": 30 },
+    { "job": "titan_pilot", "name": "Nova Cannon", "dmgMin": 300, "dmgMax": 450, "effect": "Splash Damage", "level": 50 },
+    { "job": "war_engineer", "name": "Fusion Blaster", "dmgMin": 280, "dmgMax": 420, "effect": "Burn", "level": 50 },
+    { "job": "railgun_elite", "name": "Hyper Railgun", "dmgMin": 350, "dmgMax": 500, "effect": "Armor Break", "level": 50 }
+  ],
+  "coralis": [
+    { "job": "acolyte", "name": "Lumina Staff", "dmgMin": 45, "dmgMax": 85, "effect": "+5 Mana", "level": 1 },
+    { "job": "guardian", "name": "Crystal Spear", "dmgMin": 55, "dmgMax": 80, "effect": "+3% Block", "level": 1 },
+    { "job": "mystic_archer", "name": "Spirit Bow", "dmgMin": 60, "dmgMax": 90, "effect": "+2% Crit", "level": 1 },
+    { "job": "eidolon_caller", "name": "Soul Wand", "dmgMin": 140, "dmgMax": 220, "effect": "Summon Boost", "level": 30 },
+    { "job": "spirit_knight", "name": "Moonblade", "dmgMin": 160, "dmgMax": 240, "effect": "Life Steal", "level": 30 },
+    { "job": "moon_ranger", "name": "Lunar Bow", "dmgMin": 170, "dmgMax": 250, "effect": "Bleed", "level": 30 },
+    { "job": "high_summoner", "name": "Astral Scepter", "dmgMin": 280, "dmgMax": 420, "effect": "Eidolon Power", "level": 50 },
+    { "job": "lumina_paladin", "name": "Sacred Halberd", "dmgMin": 320, "dmgMax": 470, "effect": "Holy Shield", "level": 50 },
+    { "job": "star_seeker", "name": "Celestial Bow", "dmgMin": 340, "dmgMax": 500, "effect": "Star Shot", "level": 50 }
+  ]
+}

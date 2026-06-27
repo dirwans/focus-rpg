@@ -1,0 +1,25 @@
+{
+  "title": "Dunia Aetherion",
+  "prologue": "Ribuan tahun setelah keruntuhan peradaban kuno, planet Aetherion terpecah menjadi tiga bangsa besar yang memperebutkan sumber energi langka bernama Lumina Core. Energi ini mampu menggerakkan kota, senjata, dan bahkan mengubah struktur kehidupan.",
+  "factions": {
+    "belterra": {
+      "name": "Belterra Dominion",
+      "motto": "Pengetahuan adalah fondasi kekuatan.",
+      "description": "Belterra adalah bangsa yang dibangun oleh para ilmuwan dan insinyur yang selamat dari Era Kehancuran. Mereka percaya bahwa kemajuan teknologi adalah satu-satunya jalan menuju masa depan.\n\nKota-kota Belterra berdiri di atas benteng terapung dan dilindungi oleh mesin tempur raksasa yang disebut Titan Frame. Masyarakat mereka hidup disiplin, mengutamakan logika dan inovasi di atas segalanya."
+    },
+    "coralis": {
+      "name": "Coralis Covenant",
+      "motto": "Jiwa dan alam adalah satu.",
+      "description": "Coralis berasal dari hutan kristal di benua timur. Mereka meyakini bahwa Lumina Core adalah hadiah dari roh alam semesta yang harus dijaga, bukan dieksploitasi.\n\nPara penjaga Coralis mampu membentuk kontrak dengan makhluk energi bernama Eidolons, entitas kuno yang hidup di antara dimensi. Mereka lebih mengutamakan keseimbangan dan harmoni dibandingkan ekspansi."
+    },
+    "acreton": {
+      "name": "Acreton Imperium",
+      "motto": "Kesempurnaan dicapai melalui evolusi.",
+      "description": "Acreton lahir dari koloni pertambangan yang terisolasi di gurun besi bagian utara. Bertahun-tahun hidup dalam kondisi ekstrem membuat mereka mengganti sebagian besar tubuh mereka dengan augmentasi mekanis.\n\nBagi Acreton, kekuatan adalah hukum tertinggi. Mereka menciptakan pasukan elit yang dikenal sebagai Iron Vanguard, prajurit yang mampu bertarung tanpa rasa takut maupun lelah."
+    }
+  },
+  "war": {
+    "title": "Perang Lumina",
+    "description": "Selama berabad-abad ketiga bangsa hidup terpisah. Namun ketika cadangan Lumina Core mulai menipis, konflik besar yang dikenal sebagai Perang Lumina pecah.\n\nBelterra ingin menggunakan Lumina Core untuk membangun peradaban antarbintang.\nCoralis ingin menyegel sumber energi tersebut agar tidak disalahgunakan.\nAcreton ingin menguasainya untuk menyatukan seluruh Aetherion di bawah satu kekaisaran.\n\nKini, para petualang dari ketiga bangsa berjuang menentukan masa depan dunia. Tidak ada pihak yang sepenuhnya benar atau salah. Setiap bangsa memiliki cita-cita, pengorbanan, dan rahasia yang dapat mengubah nasib Aetherion selamanya."
+  }
+}

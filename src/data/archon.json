@@ -1,0 +1,56 @@
+{
+  "belterra": {
+    "mantle": {
+      "id": "mantle_solaris",
+      "name": "Solaris Regalia",
+      "desc": "Simbol persatuan teknologi dan sihir Belterra.",
+      "bonus": {
+        "defPercent": 20,
+        "gatherSpeedPercent": 15
+      }
+    },
+    "aura": {
+      "name": "Harmony Field",
+      "desc": "Meningkatkan HP seluruh anggota bangsa Belterra.",
+      "bonus": {
+        "hpPercent": 10
+      }
+    }
+  },
+  "coralis": {
+    "mantle": {
+      "id": "mantle_astral",
+      "name": "Astral Veil",
+      "desc": "Melambangkan restu Dewi Bintang Coralis.",
+      "bonus": {
+        "atkPercent": 20,
+        "defPercent": 15
+      }
+    },
+    "aura": {
+      "name": "Moon Blessing",
+      "desc": "Meningkatkan akurasi dan critical rate seluruh pasukan Coralis.",
+      "bonus": {
+        "critPercent": 10
+      }
+    }
+  },
+  "acreton": {
+    "mantle": {
+      "id": "mantle_iron",
+      "name": "Iron Dominion Mantle",
+      "desc": "Dibuat dari serat nano dan baja tempur kuno Acreton.",
+      "bonus": {
+        "atkPercent": 25,
+        "defPercent": 15
+      }
+    },
+    "aura": {
+      "name": "War Protocol",
+      "desc": "Meningkatkan damage seluruh pasukan Acreton.",
+      "bonus": {
+        "atkPercent": 10
+      }
+    }
+  }
+}

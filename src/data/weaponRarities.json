@@ -1,0 +1,38 @@
+{
+  "normal": {
+    "name": "Normal",
+    "color": "#ffffff",
+    "bonusPercent": 0,
+    "displayName": "Putih"
+  },
+  "advanced": {
+    "name": "Advanced",
+    "color": "#22c55e",
+    "bonusPercent": 5,
+    "displayName": "Hijau"
+  },
+  "rare": {
+    "name": "Rare",
+    "color": "#3b82f6",
+    "bonusPercent": 10,
+    "displayName": "Biru"
+  },
+  "epic": {
+    "name": "Epic",
+    "color": "#a855f7",
+    "bonusPercent": 15,
+    "displayName": "Ungu"
+  },
+  "legendary": {
+    "name": "Legendary",
+    "color": "#eab308",
+    "bonusPercent": 20,
+    "displayName": "Emas"
+  },
+  "mythic": {
+    "name": "Mythic",
+    "color": "#ef4444",
+    "bonusPercent": 30,
+    "displayName": "Merah"
+  }
+}
