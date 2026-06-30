@@ -1,71 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
-
-// Canvas-based chroma-key (green screen removal).
-// Works for local same-origin images served from the same origin.
-function GreenScreenSprite({ src, alt, size = 120, width, height, fill = false }) {
-  const canvasRef = useRef(null)
-  const [dataUrl, setDataUrl] = useState(null)
-  const [err, setErr] = useState(false)
-
-  useEffect(() => {
-    if (!src) return
-    setDataUrl(null)
-    setErr(false)
-    const img = new window.Image()
-    img.onload = () => {
-      try {
-        const canvas = canvasRef.current
-        if (!canvas) return
-        canvas.width = img.naturalWidth
-        canvas.height = img.naturalHeight
-        const ctx = canvas.getContext('2d')
-        ctx.drawImage(img, 0, 0)
-        const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height)
-        const d = imgData.data
-        // Remove studio green-screen backdrop (bright green #00ff00 range)
-        for (let i = 0; i < d.length; i += 4) {
-          const r = d[i], g = d[i + 1], b = d[i + 2]
-          if (g > 80 && g > r * 1.2 && g > b * 1.2 && g > 60) {
-            d[i + 3] = 0
-          }
-        }
-        ctx.putImageData(imgData, 0, 0)
-        setDataUrl(canvas.toDataURL())
-      } catch {
-        setErr(true)
-      }
-    }
-    img.onerror = () => setErr(true)
-    img.src = src
-  }, [src])
-
+// Simple image renderer — no canvas, no green screen, no magic.
+// Just renders the image as-is with object-fit: cover.
+function SimpleSprite({ src, alt, size = 120, width, height, fill = false }) {
   if (!src) return null
-
   const containerH = height || (fill ? 150 : size)
-
-  if (err || !dataUrl) {
-    // Fallback: dark background, no green removal
-    return (
-      <div style={{
-        width: width || size,
-        height: containerH,
-        background: '#060d1c',
-        overflow: 'hidden',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexShrink: 0,
-      }}>
-        <img src={src} alt={alt} style={{
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          objectPosition: fill ? 'center 20%' : 'center',
-        }} />
-      </div>
-    )
-  }
-
   return (
     <div style={{
       width: width || size,
@@ -77,7 +14,7 @@ function GreenScreenSprite({ src, alt, size = 120, width, height, fill = false }
       flexShrink: 0,
     }}>
       <img
-        src={dataUrl}
+        src={src}
         alt={alt}
         style={{
           width: '100%',
@@ -86,7 +23,6 @@ function GreenScreenSprite({ src, alt, size = 120, width, height, fill = false }
           objectPosition: fill ? 'center 15%' : 'center',
         }}
       />
-      <canvas ref={canvasRef} style={{ display: 'none' }} />
     </div>
   )
 }
@@ -97,15 +33,15 @@ import belterraPortraitImg from '../assets/belterra_pilot_portrait.png'
 import coralisPilotImg from '../assets/coralis_pilot_v2.png'
 
 export function AcretonSprite({ size = 60, width, height, fill = false }) {
-  return <GreenScreenSprite src={acretonMechImg} alt="Acreton Mech" size={size} width={width} height={height} fill={fill} />
+  return <SimpleSprite src={acretonMechImg} alt="Acreton Mech" size={size} width={width} height={height} fill={fill} />
 }
 
 export function BelterraSprite({ size = 60, width, height, fill = false }) {
-  return <GreenScreenSprite src={fill ? belterraPortraitImg : belterraPilotImg} alt="Belterra Pilot" size={size} width={width} height={height} fill={fill} />
+  return <SimpleSprite src={fill ? belterraPortraitImg : belterraPilotImg} alt="Belterra Pilot" size={size} width={width} height={height} fill={fill} />
 }
 
 export function CoralisSprite({ size = 60, width, height, fill = false }) {
-  return <GreenScreenSprite src={coralisPilotImg} alt="Coralis Pilot" size={size} width={width} height={height} fill={fill} />
+  return <SimpleSprite src={coralisPilotImg} alt="Coralis Pilot" size={size} width={width} height={height} fill={fill} />
 }
 
 export function EnemySprite({ size = 60, isBoss = false, isPitBoss = false }) {
