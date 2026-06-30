@@ -17,7 +17,7 @@ export default function TransparentSprite({ src, alt, size = 120, width, height,
 
   return (
     <div style={{ width: width || size, height: height || size, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'visible', flexShrink: 0 }}>
-      <img src={displaySrc} alt={alt} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+      <img src={displaySrc} alt={alt} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
     </div>
   )
 }
