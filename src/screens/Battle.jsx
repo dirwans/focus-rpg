@@ -56,7 +56,27 @@ export default function Battle() {
     setChipLoading(true)
     try {
       const res = await apiChipWar()
-      setChipWar(res)
+      // Transform server's {acreton:{hp,maxHp},...} → [{towerId,race,hp,maxHp,...},...]
+      const TOWER_ORDER = ['acreton', 'belterra', 'coralis']
+      const RACE_COLORS = { acreton: '#ff6400', belterra: '#00e5ff', coralis: '#d000ff' }
+      const towers = TOWER_ORDER.map((race) => {
+        const serverTower = (res.towers && res.towers[race]) || { hp: 500_000_000, maxHp: 500_000_000 }
+        const hpPct = serverTower.hp / serverTower.maxHp
+        let dmgMultiplier = 1.0
+        if (hpPct <= 0.5) dmgMultiplier = 0.7
+        if (hpPct <= 0.3) dmgMultiplier = 0.5
+        if (hpPct <= 0.1) dmgMultiplier = 0.3
+        return {
+          towerId: race,
+          race,
+          raceColor: RACE_COLORS[race] || '#fff',
+          hp: serverTower.hp,
+          maxHp: serverTower.maxHp,
+          raceDamage: (res.raceDamage && res.raceDamage[race]) || 0,
+          dmgMultiplier,
+        }
+      })
+      setChipWar({ towers, window: res.window })
     } catch (e) {
       console.error(e)
     } finally {
