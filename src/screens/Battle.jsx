@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { apiPvpTargets, apiPvpBattle, apiPvpWar } from '../lib/api'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
+import { apiPvpTargets, apiPvpBattle, apiPvpWar, apiChipWar, apiChipWarAttack } from '../lib/api'
 import { useGameStore } from '../store/gameStore'
 import jobs from '../data/jobs.json'
 import { PilotSprite } from '../components/PilotSprites'
@@ -15,13 +15,17 @@ export default function Battle() {
   const [tab, setTab] = useState('arena')
   const [targets, setTargets] = useState([])
   const [warScores, setWarScores] = useState({ acreton: 0, belterra: 0, coralis: 0 })
+  const [chipWar, setChipWar] = useState(null)
+  const [chipLog, setChipLog] = useState([])
+  const [chipLoading, setChipLoading] = useState(false)
+  const attackingTower = useRef(null)
   const [loading, setLoading] = useState(false)
   const [log, setLog] = useState([])
   const player = useGameStore((s) => s.player)
 
   useEffect(() => {
     if (tab === 'arena') loadTargets()
-    else loadWar()
+    else if (tab === 'war') loadChipWar()
   }, [tab])
 
   const loadTargets = async () => {
@@ -47,6 +51,44 @@ export default function Battle() {
       setLoading(false)
     }
   }
+
+  const loadChipWar = useCallback(async () => {
+    setChipLoading(true)
+    try {
+      const res = await apiChipWar()
+      setChipWar(res)
+    } catch (e) {
+      console.error(e)
+    } finally {
+      setChipLoading(false)
+    }
+  }, [])
+
+  const handleChipAttack = useCallback(async (towerId, attackPower) => {
+    if (chipLoading) return
+    setChipLoading(true)
+    setChipLog([])
+    attackingTower.current = towerId
+    try {
+      const res = await apiChipWarAttack(towerId, attackPower)
+      setChipLog(res.log || [])
+      setChipWar((prev) => {
+        if (!prev) return prev
+        return {
+          ...prev,
+          towers: prev.towers.map((t) =>
+            t.towerId === towerId ? { ...t, hp: res.towerHp } : t
+          ),
+        }
+      })
+      attackingTower.current = null
+    } catch (e) {
+      setChipLog([e.message])
+      attackingTower.current = null
+    } finally {
+      setChipLoading(false)
+    }
+  }, [chipLoading])
 
   const handleAttack = async (targetUser) => {
     if (loading) return
@@ -166,136 +208,93 @@ export default function Battle() {
 
       {tab === 'war' && (
         <div style={styles.content}>
-          <p style={{ textAlign: 'center', color: '#7ab0d0', fontSize: 13, marginBottom: 20, fontWeight: 600 }}>
-            Total military power aggregated from all players in the race.
-          </p>
-
-          {/* Glowing Holographic crystals visual */}
-          <div style={styles.crystalContainer}>
-            {/* Acreton (Orange) */}
-            <div style={styles.crystalWrapper}>
-              <svg width="60" height="150" viewBox="0 0 60 150">
-                <defs>
-                  <linearGradient id="acreton-crystal-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#ff6400" stopOpacity="0.85" />
-                    <stop offset="100%" stopColor="#ffbe00" stopOpacity="0.1" />
-                  </linearGradient>
-                  <filter id="orange-crystal-glow" x="-20%" y="-20%" width="140%" height="140%">
-                    <feGaussianBlur stdDeviation="3" result="blur" />
-                    <feMerge>
-                      <feMergeNode in="blur" />
-                      <feMergeNode in="SourceGraphic" />
-                    </feMerge>
-                  </filter>
-                </defs>
-                <polygon
-                  points={`30,${150 - getProportionalHeight(warScores.acreton)} 10,135 30,145 50,135`}
-                  fill="url(#acreton-crystal-grad)"
-                  stroke="#ff6400"
-                  strokeWidth="1.5"
-                  filter="url(#orange-crystal-glow)"
-                  className="hologram-crystal"
-                />
-                <polygon
-                  points={`30,${150 - getProportionalHeight(warScores.acreton)} 30,145 50,135`}
-                  fill="rgba(255, 100, 0, 0.4)"
-                />
-              </svg>
-              <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: '#ff6400', fontWeight: 800, marginTop: 6 }}>ACRETON</div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: '#e0f4ff', fontWeight: 700 }}>{warScores.acreton.toLocaleString()}</div>
+          {!chipLoading && chipWar && chipWar.phase === 'countdown' && (
+            <div style={styles.countdownBanner}>
+              <span style={{ color: '#f5a623', fontFamily: 'var(--font-title)', fontSize: 14, letterSpacing: 2 }}>
+                NEXT WINDOW IN {chipWar.countdownEnd
+                  ? Math.max(0, Math.ceil((chipWar.countdownEnd - Date.now()) / 1000))
+                  : 0}s
+              </span>
             </div>
+          )}
 
-            {/* Belterra (Cyan) */}
-            <div style={styles.crystalWrapper}>
-              <svg width="60" height="150" viewBox="0 0 60 150">
-                <defs>
-                  <linearGradient id="belterra-crystal-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#00e5ff" stopOpacity="0.85" />
-                    <stop offset="100%" stopColor="#0050cc" stopOpacity="0.1" />
-                  </linearGradient>
-                  <filter id="cyan-crystal-glow" x="-20%" y="-20%" width="140%" height="140%">
-                    <feGaussianBlur stdDeviation="3" result="blur" />
-                    <feMerge>
-                      <feMergeNode in="blur" />
-                      <feMergeNode in="SourceGraphic" />
-                    </feMerge>
-                  </filter>
-                </defs>
-                <polygon
-                  points={`30,${150 - getProportionalHeight(warScores.belterra)} 10,135 30,145 50,135`}
-                  fill="url(#belterra-crystal-grad)"
-                  stroke="#00e5ff"
-                  strokeWidth="1.5"
-                  filter="url(#cyan-crystal-glow)"
-                  className="hologram-crystal"
-                />
-                <polygon
-                  points={`30,${150 - getProportionalHeight(warScores.belterra)} 30,145 50,135`}
-                  fill="rgba(0, 229, 255, 0.4)"
-                />
-              </svg>
-              <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: '#00e5ff', fontWeight: 800, marginTop: 6 }}>BELTERRA</div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: '#e0f4ff', fontWeight: 700 }}>{warScores.belterra.toLocaleString()}</div>
+          {!chipLoading && chipWar && chipWar.phase === 'active' && (
+            <div style={styles.activeBanner}>
+              <span style={{ color: '#ff4466', fontFamily: 'var(--font-title)', fontSize: 13 }}>
+                CHIP WAR ACTIVE
+              </span>
             </div>
+          )}
 
-            {/* Coralis (Purple) */}
-            <div style={styles.crystalWrapper}>
-              <svg width="60" height="150" viewBox="0 0 60 150">
-                <defs>
-                  <linearGradient id="coralis-crystal-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#d000ff" stopOpacity="0.85" />
-                    <stop offset="100%" stopColor="#581c87" stopOpacity="0.1" />
-                  </linearGradient>
-                  <filter id="purple-crystal-glow" x="-20%" y="-20%" width="140%" height="140%">
-                    <feGaussianBlur stdDeviation="3" result="blur" />
-                    <feMerge>
-                      <feMergeNode in="blur" />
-                      <feMergeNode in="SourceGraphic" />
-                    </feMerge>
-                  </filter>
-                </defs>
-                <polygon
-                  points={`30,${150 - getProportionalHeight(warScores.coralis)} 10,135 30,145 50,135`}
-                  fill="url(#coralis-crystal-grad)"
-                  stroke="#d000ff"
-                  strokeWidth="1.5"
-                  filter="url(#purple-crystal-glow)"
-                  className="hologram-crystal"
-                />
-                <polygon
-                  points={`30,${150 - getProportionalHeight(warScores.coralis)} 30,145 50,135`}
-                  fill="rgba(208, 0, 255, 0.4)"
-                />
-              </svg>
-              <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: '#d000ff', fontWeight: 800, marginTop: 6 }}>CORALIS</div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: '#e0f4ff', fontWeight: 700 }}>{warScores.coralis.toLocaleString()}</div>
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginTop: 24 }}>
-            {Object.entries(warScores)
-              .sort(([, a], [, b]) => b - a)
-              .map(([race, score], i) => {
-                const isMyRace = player.race === race
+          {chipLoading && !chipWar ? (
+            <p style={{ textAlign: 'center', color: '#7ab0d0', padding: 32, fontSize: 13 }}>Loading war status...</p>
+          ) : chipWar && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+              {chipWar.towers.map((tower) => {
+                const hpPct = tower.hp / tower.maxHp
+                const dmgColor = hpPct > 0.5 ? '#22c55e' : hpPct > 0.3 ? '#f5a623' : hpPct > 0.1 ? '#ef4444' : '#dc2626'
                 return (
-                  <div key={race} className="glass-panel cyber-panel" style={{ ...styles.warCard, borderColor: isMyRace ? 'var(--neon-glow)' : 'rgba(255, 255, 255, 0.1)', background: isMyRace ? 'rgba(255, 255, 255, 0.05)' : 'rgba(4, 10, 24, 0.45)' }}>
-                    {isMyRace && <div style={styles.myRaceBadge}>YOUR RACE</div>}
-                    <div>
-                      <h3 style={{ margin: 0, fontSize: 18, textTransform: 'uppercase', color: '#fff', fontFamily: 'var(--font-title)' }}>
-                        {i === 0 && <span style={{ marginRight: 6 }}>🏆</span>}
-                        {race}
-                      </h3>
-                      <p style={{ margin: '4px 0 0 0', fontSize: 13, color: '#7ab0d0' }}>Total Force Power</p>
+                  <div key={tower.towerId} className="glass-panel cyber-panel" style={{ ...styles.towerCard, borderColor: tower.race === player.race ? 'rgba(0, 229, 255, 0.5)' : 'rgba(255,255,255,0.08)' }}>
+                    {tower.race === player.race && (
+                      <div style={styles.myRaceBadge}>YOUR TOWER</div>
+                    )}
+
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
+                      <div>
+                        <h3 style={{ margin: 0, fontSize: 17, textTransform: 'uppercase', color: tower.raceColor, fontFamily: 'var(--font-title)', letterSpacing: 1 }}>
+                          {tower.towerId} TOWER
+                        </h3>
+                        <p style={{ margin: '3px 0 0 0', fontSize: 12, color: '#7ab0d0' }}>{tower.race.toUpperCase()} Stronghold</p>
+                      </div>
+                      <div style={{ textAlign: 'right' }}>
+                        <span style={{ fontSize: 18, fontWeight: 'bold', color: dmgColor, fontFamily: 'var(--font-mono)' }}>
+                          {(tower.hp / 1_000_000).toFixed(1)}M
+                        </span>
+                        <p style={{ margin: '2px 0 0 0', fontSize: 11, color: '#7ab0d0' }}>/ {(tower.maxHp / 1_000_000).toFixed(0)}M HP</p>
+                      </div>
                     </div>
-                    <div style={{ textAlign: 'right' }}>
-                      <span style={{ fontSize: 20, fontWeight: 'bold', color: '#f5a623', fontFamily: 'var(--font-mono)' }}>
-                        {score.toLocaleString()}
-                      </span>
+
+                    <div style={{ width: '100%', height: 8, background: '#091424', borderRadius: 4, overflow: 'hidden', marginBottom: 12, border: '1px solid rgba(255,255,255,0.05)' }}>
+                      <div style={{ height: '100%', width: `${hpPct * 100}%`, background: `linear-gradient(90deg, ${dmgColor}, ${dmgColor}88)`, borderRadius: 4, transition: 'width 0.3s' }} />
+                    </div>
+
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 11, color: '#7ab0d0', fontFamily: 'var(--font-mono)', marginBottom: 12 }}>
+                      <span>Race Damage: <span style={{ color: '#f5a623' }}>{(tower.raceDamage / 1_000_000).toFixed(1)}M</span></span>
+                      <span>Dmg Multiplier: <span style={{ color: '#00e5ff' }}>×{tower.dmgMultiplier.toFixed(2)}</span></span>
+                    </div>
+
+                    <div style={{ display: 'flex', gap: 6 }}>
+                      {tower.raceDamage > 0 && (
+                        <button
+                          onClick={() => handleChipAttack(tower.towerId, tower.raceDamage)}
+                          disabled={chipLoading || chipWar.phase !== 'active'}
+                          style={{ ...styles.chipAttackBtn, opacity: (chipLoading || chipWar.phase !== 'active') ? 0.4 : 1 }}
+                        >
+                          {attackingTower.current === tower.towerId ? 'ATTACKING...' : `ATTACK (${(tower.raceDamage / 1_000_000).toFixed(1)}M)`}
+                        </button>
+                      )}
+                      <button
+                        onClick={() => handleChipAttack(tower.towerId, player.cp || 1000)}
+                        disabled={chipLoading || chipWar.phase !== 'active'}
+                        style={{ ...styles.chipAttackBtn, background: '#1c2e4a', borderColor: 'rgba(0,229,255,0.3)', opacity: (chipLoading || chipWar.phase !== 'active') ? 0.4 : 1 }}
+                      >
+                        {attackingTower.current === tower.towerId ? '...' : `USE CP (${((player.cp || 1000) / 1_000_000).toFixed(2)}M)`}
+                      </button>
                     </div>
                   </div>
                 )
               })}
-          </div>
+            </div>
+          )}
+
+          {chipLog.length > 0 && (
+            <div style={styles.chipLogContainer}>
+              <h3 style={{ margin: '0 0 8px 0', color: '#fff', fontWeight: 'bold', fontSize: 13, fontFamily: 'var(--font-title)' }}>ATTACK LOG</h3>
+              {chipLog.map((l, i) => (
+                <p key={i} style={{ margin: '3px 0', fontSize: 13, color: '#ff5577', fontFamily: 'var(--font-mono)' }}>{l}</p>
+              ))}
+            </div>
+          )}
         </div>
       )}
     </div>
@@ -319,8 +318,11 @@ const styles = {
   attackBtn: { background: '#ff4466', color: '#fff', border: 'none', padding: '8px 16px', borderRadius: 6, fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: 1, cursor: 'pointer', boxShadow: '0 0 10px rgba(255,68,102,0.4)', fontSize: 13, fontFamily: 'var(--font-title)' },
   warCard: { padding: 16, borderRadius: 12, border: '1px solid', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', overflow: 'hidden' },
   myRaceBadge: { position: 'absolute', top: 0, right: 0, background: '#ff4466', color: '#fff', fontSize: 10, padding: '2px 8px', fontWeight: 'bold', borderBottomLeftRadius: 8 },
-  
-  // Crystals visuals
-  crystalContainer: { display: 'flex', justifyContent: 'space-around', alignItems: 'flex-end', background: 'rgba(0, 0, 0, 0.35)', padding: 16, borderRadius: 14, border: '1.5px solid rgba(255,255,255,0.05)', marginTop: 10 },
-  crystalWrapper: { display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }
+
+  // Chip War
+  countdownBanner: { textAlign: 'center', padding: '10px 16px', background: 'rgba(245, 166, 35, 0.1)', border: '1px solid rgba(245, 166, 35, 0.3)', borderRadius: 8, marginBottom: 16 },
+  activeBanner: { textAlign: 'center', padding: '8px 16px', background: 'rgba(255, 68, 102, 0.12)', border: '1px solid rgba(255, 68, 102, 0.35)', borderRadius: 8, marginBottom: 16, animation: 'pulse 2s infinite' },
+  towerCard: { padding: 16, borderRadius: 12, border: '1px solid', position: 'relative', overflow: 'hidden' },
+  chipAttackBtn: { flex: 1, background: '#ff4466', color: '#fff', border: 'none', padding: '9px 8px', borderRadius: 6, fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: 1, cursor: 'pointer', boxShadow: '0 0 8px rgba(255,68,102,0.3)', fontSize: 12, fontFamily: 'var(--font-title)', transition: 'opacity 0.2s' },
+  chipLogContainer: { marginTop: 16, padding: 12, background: 'rgba(4, 10, 24, 0.9)', border: '1px solid rgba(255, 68, 102, 0.3)', borderRadius: 8 },
 }
