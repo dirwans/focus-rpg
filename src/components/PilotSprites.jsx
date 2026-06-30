@@ -1,64 +1,85 @@
 import { useEffect, useRef, useState } from 'react'
 
-// Canvas-based green screen removal — only for local (same-origin) images
+// Uses CSS mix-blend-mode:multiply to remove green-screen background.
+// Works reliably on Android WebView (no canvas CORS issues).
 function GreenScreenSprite({ src, alt, size = 120, width, height, fill = false }) {
-  const canvasRef = useRef(null)
   const [dataUrl, setDataUrl] = useState(null)
 
   useEffect(() => {
     if (!src) return
+    // Try canvas first (web/desktop); fall back to CSS blend mode on error
     const img = new Image()
-    img.crossOrigin = 'anonymous'
     img.onload = () => {
-      const canvas = canvasRef.current
-      if (!canvas) return
-      canvas.width = img.naturalWidth
-      canvas.height = img.naturalHeight
-      const ctx = canvas.getContext('2d')
-      ctx.drawImage(img, 0, 0)
-      const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height)
-      const d = imgData.data
-      // Remove bright green screen background (threshold-based)
-      for (let i = 0; i < d.length; i += 4) {
-        const r = d[i], g = d[i + 1], b = d[i + 2]
-        if (g > 180 && g > r * 1.8 && g > b * 1.8) {
-          d[i + 3] = 0 // alpha = transparent
+      try {
+        const canvas = document.createElement('canvas')
+        canvas.width = img.naturalWidth
+        canvas.height = img.naturalHeight
+        const ctx = canvas.getContext('2d')
+        ctx.drawImage(img, 0, 0)
+        const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+        const d = imgData.data
+        for (let i = 0; i < d.length; i += 4) {
+          const r = d[i], g = d[i + 1], b = d[i + 2]
+          if (g > 180 && g > r * 1.8 && g > b * 1.8) {
+            d[i + 3] = 0
+          }
         }
+        ctx.putImageData(imgData, 0, 0)
+        setDataUrl(canvas.toDataURL())
+      } catch {
+        // Canvas blocked (e.g. Android WebView cross-origin taint) — fall through to CSS
+        setDataUrl(null)
       }
-      ctx.putImageData(imgData, 0, 0)
-      setDataUrl(canvas.toDataURL())
     }
+    img.onerror = () => setDataUrl(null)
     img.src = src
   }, [src])
 
   if (!src) return null
 
+  const imgStyle = dataUrl
+    ? { src: dataUrl, style: { width: '100%', height: '100%', objectFit: 'cover' } }
+    : { src, style: { width: '100%', height: '100%', objectFit: 'cover', mixBlendMode: 'multiply' } }
+
   if (fill) {
     const fillH = height || 150
     return (
-      <div style={{ width: width || size, height: fillH, overflow: 'hidden', position: 'relative', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        {dataUrl ? (
-          <img
-            src={dataUrl}
-            alt={alt}
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-          />
-        ) : (
-          <img src={src} alt={alt} style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.5 }} />
-        )}
-        <canvas ref={canvasRef} style={{ display: 'none' }} />
+      <div style={{
+        width: width || size,
+        height: fillH,
+        overflow: 'hidden',
+        position: 'relative',
+        flexShrink: 0,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: '#00ff00',
+      }}>
+        <img
+          {...imgStyle}
+          alt={alt}
+          style={{
+            ...imgStyle.style,
+            objectPosition: 'center 20%',
+          }}
+        />
       </div>
     )
   }
 
   return (
-    <div style={{ width: width || size, height: height || size, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'visible', flexShrink: 0 }}>
-      {dataUrl ? (
-        <img src={dataUrl} alt={alt} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-      ) : (
-        <img src={src} alt={alt} style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.5 }} />
-      )}
-      <canvas ref={canvasRef} style={{ display: 'none' }} />
+    <div style={{
+      width: width || size,
+      height: height || size,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      position: 'relative',
+      overflow: 'visible',
+      flexShrink: 0,
+      background: '#00ff00',
+    }}>
+      <img {...imgStyle} alt={alt} />
     </div>
   )
 }
