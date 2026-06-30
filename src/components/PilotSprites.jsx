@@ -1,13 +1,16 @@
 import { useEffect, useRef, useState } from 'react'
 
-// Uses CSS mix-blend-mode:multiply to remove green-screen background.
-// Works reliably on Android WebView (no canvas CORS issues).
+// Canvas-based green screen removal for local (same-origin) pilot sprites.
+// Images come from Vite's asset pipeline so they are same-origin — no CORS issues.
 function GreenScreenSprite({ src, alt, size = 120, width, height, fill = false }) {
+  const canvasRef = useRef(null)
   const [dataUrl, setDataUrl] = useState(null)
+  const [failed, setFailed] = useState(false)
 
   useEffect(() => {
     if (!src) return
-    // Try canvas first (web/desktop); fall back to CSS blend mode on error
+    setDataUrl(null)
+    setFailed(false)
     const img = new Image()
     img.onload = () => {
       try {
@@ -18,68 +21,76 @@ function GreenScreenSprite({ src, alt, size = 120, width, height, fill = false }
         ctx.drawImage(img, 0, 0)
         const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height)
         const d = imgData.data
+        // Aggressive chroma-key: remove bright greens (the studio backdrop)
         for (let i = 0; i < d.length; i += 4) {
           const r = d[i], g = d[i + 1], b = d[i + 2]
-          if (g > 180 && g > r * 1.8 && g > b * 1.8) {
+          // Green screen: high green, at least as bright as red & blue
+          if (g > 100 && g > r * 1.2 && g > b * 1.2) {
             d[i + 3] = 0
           }
         }
         ctx.putImageData(imgData, 0, 0)
         setDataUrl(canvas.toDataURL())
-      } catch {
-        // Canvas blocked (e.g. Android WebView cross-origin taint) — fall through to CSS
-        setDataUrl(null)
+      } catch (e) {
+        // Tainted canvas (shouldn't happen for local assets, but be safe)
+        setFailed(true)
       }
     }
-    img.onerror = () => setDataUrl(null)
+    img.onerror = () => setFailed(true)
     img.src = src
   }, [src])
 
   if (!src) return null
 
-  const imgStyle = dataUrl
-    ? { src: dataUrl, style: { width: '100%', height: '100%', objectFit: 'cover' } }
-    : { src, style: { width: '100%', height: '100%', objectFit: 'cover', mixBlendMode: 'multiply' } }
-
-  if (fill) {
-    const fillH = height || 150
+  if (failed) {
+    // Fallback: show raw image, green background will be visible
+    const fillH = height || size
     return (
       <div style={{
         width: width || size,
-        height: fillH,
+        height: fill ? fillH : (height || size),
         overflow: 'hidden',
-        position: 'relative',
-        flexShrink: 0,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: '#00ff00',
+        flexShrink: 0,
       }}>
-        <img
-          {...imgStyle}
-          alt={alt}
-          style={{
-            ...imgStyle.style,
-            objectPosition: 'center 20%',
-          }}
-        />
+        <img src={src} alt={alt} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
       </div>
     )
   }
 
+  const fillH = height || 150
   return (
     <div style={{
       width: width || size,
-      height: height || size,
+      height: fill ? fillH : (height || size),
+      overflow: 'hidden',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      position: 'relative',
-      overflow: 'visible',
       flexShrink: 0,
-      background: '#00ff00',
     }}>
-      <img {...imgStyle} alt={alt} />
+      {dataUrl ? (
+        <img
+          src={dataUrl}
+          alt={alt}
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: fill ? 'center top' : 'center',
+          }}
+        />
+      ) : (
+        // Loading state — show faded raw image
+        <img
+          src={src}
+          alt={alt}
+          style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.4 }}
+        />
+      )}
+      <canvas ref={canvasRef} style={{ display: 'none' }} />
     </div>
   )
 }
