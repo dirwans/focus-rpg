@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "token-savior-recall": {
+      "command": "C:/Users/USER/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0/LocalCache/local-packages/Python313/Scripts/token-savior.exe",
+      "env": {
+        "WORKSPACE_ROOTS": "C:/projects/focus-rpg",
+        "TOKEN_SAVIOR_CLIENT": "claude-code",
+        "TOKEN_SAVIOR_PROFILE": "auto"
+      }
+    }
+  }
+}

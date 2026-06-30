@@ -1,5 +1,7 @@
 import { useGameStore } from '../store/gameStore'
 
+const API_BASE = import.meta.env.VITE_API_URL || ''
+
 const NAV = [
   { id: 'main',  icon: '🏠', label: 'BASE' },
   { id: 'unit',  icon: '⚔️', label: 'UNIT' },
@@ -16,7 +18,7 @@ export default function BottomNav() {
   return (
     <nav style={styles.nav}>
       {NAV.map((n) => (
-        <button key={n.id} style={styles.item} onClick={() => n.isExternal ? window.open('/library.html', '_blank') : setScreen(n.id)}>
+        <button key={n.id} style={styles.item} onClick={() => n.isExternal ? window.open(`${API_BASE}/library.html`, '_blank') : setScreen(n.id)}>
           <span style={{ fontSize: 22, opacity: screen === n.id ? 1 : 0.4 }}>{n.icon}</span>
           <span style={{ ...styles.label, color: screen === n.id ? '#f5a623' : '#7ab0d0' }}>{n.label}</span>
         </button>

@@ -332,7 +332,7 @@ export default function Main() {
               @{username}
             </span>
           </span>
-          <button onClick={() => window.open('/library.html', '_blank')} style={styles.logoutBtn} title="Database & Guides">📖</button>
+          <button onClick={() => window.open(`${import.meta.env.VITE_API_URL || ''}/library.html`, '_blank')} style={styles.logoutBtn} title="Database & Guides">📖</button>
           <button onClick={() => setShowSettings(true)} style={styles.logoutBtn} title="Settings">⚙️</button>
           <button onClick={signOut} style={styles.logoutBtn} title="Logout">⏏</button>
         </span>

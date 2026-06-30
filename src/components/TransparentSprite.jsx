@@ -1,15 +1,20 @@
 import { useEffect, useState } from 'react'
 
+const API_BASE = import.meta.env.VITE_API_URL || ''
+
 export default function TransparentSprite({ src, alt, size = 120, width, height, glowColor = '#d000ff', upperBodyOnly = false, fill = false }) {
   const [processedSrc, setProcessedSrc] = useState(null)
+  const [proxySrc, setProxySrc] = useState(null)
 
   useEffect(() => {
     if (!src) return
 
     const isRemote = src.startsWith('http://') || src.startsWith('https://')
-    const finalSrc = isRemote 
-      ? `/api/proxy-image?url=${encodeURIComponent(src)}` 
+    const finalSrc = isRemote
+      ? `${API_BASE}/api/proxy-image?url=${encodeURIComponent(src)}`
       : src
+
+    setProxySrc(finalSrc)
 
     const img = new Image()
     img.crossOrigin = 'anonymous'
@@ -223,18 +228,18 @@ export default function TransparentSprite({ src, alt, size = 120, width, height,
         }
       } catch (err) {
         console.error('Canvas processing error for sprite:', err)
-        setProcessedSrc(src)
+        setProcessedSrc(finalSrc)
       }
     }
     img.onerror = (err) => {
       console.error('Image load error for sprite:', err)
-      setProcessedSrc(src)
+      setProcessedSrc(finalSrc)
     }
     img.src = finalSrc
   }, [src])
 
-  const displaySrc = processedSrc || src
-  const isFallback = displaySrc === src
+  const displaySrc = processedSrc || proxySrc || src
+  const isFallback = !processedSrc
 
   if (fill) {
     const fillH = height || 150
