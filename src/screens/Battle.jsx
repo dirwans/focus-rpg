@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { apiPvpTargets, apiPvpBattle, apiPvpWar, apiChipWar, apiChipWarAttack } from '../lib/api'
+import { apiPvpTargets, apiPvpBattle, apiChipWar, apiChipWarAttack } from '../lib/api'
 import { useGameStore } from '../store/gameStore'
 import jobs from '../data/jobs.json'
 import { PilotSprite } from '../components/PilotSprites'
@@ -14,7 +14,6 @@ function getJobName(raceId, jobId) {
 export default function Battle() {
   const [tab, setTab] = useState('arena')
   const [targets, setTargets] = useState([])
-  const [warScores, setWarScores] = useState({ acreton: 0, belterra: 0, coralis: 0 })
   const [chipWar, setChipWar] = useState(null)
   const [chipLog, setChipLog] = useState([])
   const [chipLoading, setChipLoading] = useState(false)
@@ -33,18 +32,6 @@ export default function Battle() {
     try {
       const res = await apiPvpTargets()
       setTargets(res.targets || [])
-    } catch (e) {
-      console.error(e)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const loadWar = async () => {
-    setLoading(true)
-    try {
-      const res = await apiPvpWar()
-      setWarScores(res.scores || { acreton: 0, belterra: 0, coralis: 0 })
     } catch (e) {
       console.error(e)
     } finally {
@@ -74,8 +61,14 @@ export default function Battle() {
         `⚔ ${player.name} deals ${res.dealt.toLocaleString()} dmg to ${towerId.toUpperCase()} (×${res.multiplier})`,
         ...prev.slice(0, 9)
       ])
-      // Refresh chip war data
-      await loadChipWar()
+      // Update tower HP directly from response (no re-fetch needed)
+      setChipWar(prev => prev ? {
+        ...prev,
+        towers: {
+          ...prev.towers,
+          [towerId]: { hp: res.towerHp, maxHp: res.towerMaxHp },
+        },
+      } : prev)
     } catch (e) {
       setChipLog(prev => [`❌ ${e.message}`, ...prev.slice(0, 9)])
     } finally {
@@ -105,12 +98,6 @@ export default function Battle() {
     } finally {
       setLoading(false)
     }
-  }
-
-  // Calculate proportional crystal heights
-  const maxScore = Math.max(1, warScores.acreton || 0, warScores.belterra || 0, warScores.coralis || 0)
-  const getProportionalHeight = (score) => {
-    return 30 + ((score || 0) / maxScore) * 110 // Range between 30px and 140px
   }
 
   return (
