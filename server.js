@@ -541,6 +541,146 @@ app.get('/api/pvp/war', (req, res) => {
   res.json({ scores })
 })
 
+// ── Chip War System ──────────────────────────────────────────────────────────
+// Schedule: 6AM, 12PM, 10PM  (1h countdown + 2h active per wave)
+const CHIP_WAR_COUNTDOWN_MS = 60 * 60 * 1000   // 1 hour
+const CHIP_WAR_DURATION_MS  = 2 * 60 * 60 * 1000  // 2 hours
+const TOWER_HP = 500_000_000  // 500 million
+
+function getChipWarTimes() {
+  const now = new Date()
+  const times = []
+  for (const h of [6, 12, 22]) {
+    const t = new Date(now)
+    t.setHours(h, 0, 0, 0)
+    if (t <= now) t.setDate(t.getDate() + 1)
+    times.push(t)
+  }
+  times.sort((a, b) => a - b)
+  return times
+}
+
+function getNextWarWindow() {
+  const times = getChipWarTimes()
+  const next = times[0]
+  const start = next.getTime()
+  const countdownEnd = start - CHIP_WAR_COUNTDOWN_MS
+  const end = start + CHIP_WAR_DURATION_MS
+  const now = Date.now()
+  if (now < countdownEnd) return { phase: 'countdown', start, countdownEnd, end, nextAt: next }
+  if (now < start) return { phase: 'countdown', start, countdownEnd, end, nextAt: next }
+  if (now < end) return { phase: 'active', start, countdownEnd, end, nextAt: next }
+  return { phase: 'inactive', start, countdownEnd, end, nextAt: next }
+}
+
+let chipWarData = {
+  towers: {
+    acreton: { hp: TOWER_HP, maxHp: TOWER_HP },
+    belterra: { hp: TOWER_HP, maxHp: TOWER_HP },
+    coralis:  { hp: TOWER_HP, maxHp: TOWER_HP },
+  },
+  // Track damage per player per tower (for leaderboard)
+  damage: {},   // { username: { acreton: N, belterra: N, coralis: N } }
+  // Track total damage per race (sum of all players)
+  raceDamage: { acreton: 0, belterra: 0, coralis: 0 },
+  lastReset: Date.now(),
+}
+
+const CHIP_WAR_FILE = join(__dirname, 'chip_war_data.json')
+
+try {
+  if (fs.existsSync(CHIP_WAR_FILE)) {
+    const loaded = JSON.parse(fs.readFileSync(CHIP_WAR_FILE, 'utf8'))
+    // Validate structure
+    if (loaded.towers && loaded.towers.acreton) {
+      chipWarData = loaded
+    }
+  }
+} catch (e) {
+  console.error('[ChipWar] Load failed:', e.message)
+}
+
+function saveChipWar() {
+  try { fs.writeFileSync(CHIP_WAR_FILE, JSON.stringify(chipWarData)) } catch {}
+}
+
+function checkChipWarReset() {
+  const w = getNextWarWindow()
+  // If lastReset is older than the last war start, reset towers
+  if (Date.now() > w.end && chipWarData.lastReset < w.start) {
+    console.log('[ChipWar] Resetting towers for new war window')
+    chipWarData = {
+      towers: {
+        acreton: { hp: TOWER_HP, maxHp: TOWER_HP },
+        belterra: { hp: TOWER_HP, maxHp: TOWER_HP },
+        coralis:  { hp: TOWER_HP, maxHp: TOWER_HP },
+      },
+      damage: {},
+      raceDamage: { acreton: 0, belterra: 0, coralis: 0 },
+      lastReset: Date.now(),
+    }
+    saveChipWar()
+  }
+}
+
+// Check reset every minute
+setInterval(checkChipWarReset, 60000)
+checkChipWarReset()
+
+app.get('/api/chip-war', (req, res) => {
+  checkChipWarReset()
+  const window = getNextWarWindow()
+  res.json({
+    towers: chipWarData.towers,
+    raceDamage: chipWarData.raceDamage,
+    window,
+  })
+})
+
+app.post('/api/chip-war/attack', (req, res) => {
+  checkChipWarReset()
+  const { towerId, attackPower } = req.body
+  const window = getNextWarWindow()
+
+  if (window.phase !== 'active') {
+    return res.status(403).json({ error: 'Chip War is not active' })
+  }
+
+  if (!chipWarData.towers[towerId]) {
+    return res.status(400).json({ error: 'Invalid tower' })
+  }
+
+  const tower = chipWarData.towers[towerId]
+  const hpPct = tower.hp / tower.maxHp
+
+  // Damage multiplier based on tower HP %
+  let multiplier = 1.0
+  if (hpPct <= 0.10) multiplier = 0.30
+  else if (hpPct <= 0.30) multiplier = 0.50
+  else if (hpPct <= 0.50) multiplier = 0.70
+
+  const actualDmg = Math.floor(attackPower * multiplier)
+  tower.hp = Math.max(0, tower.hp - actualDmg)
+
+  // Track per-player damage
+  const username = req.session?.username || 'unknown'
+  if (!chipWarData.damage[username]) {
+    chipWarData.damage[username] = { acreton: 0, belterra: 0, coralis: 0 }
+  }
+  chipWarData.damage[username][towerId] = (chipWarData.damage[username][towerId] || 0) + actualDmg
+  chipWarData.raceDamage[towerId] = (chipWarData.raceDamage[towerId] || 0) + actualDmg
+
+  saveChipWar()
+
+  res.json({
+    dealt: actualDmg,
+    multiplier,
+    hpPct,
+    towerHp: tower.hp,
+    towerMaxHp: tower.maxHp,
+  })
+})
+
 // ── Archon System ─────────────────────────────────────────────────────────
 const ARCHON_PERIOD_MS = 7 * 24 * 60 * 60 * 1000 // 7 days
 

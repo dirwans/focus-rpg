@@ -43,6 +43,10 @@ export const apiPvpTargets = () => api('/pvp/targets')
 export const apiPvpBattle = (target) => api('/pvp/battle', { method: 'POST', body: { target } })
 export const apiPvpWar = () => api('/pvp/war')
 
+export const apiChipWar = () => api('/chip-war')
+export const apiChipWarAttack = (towerId, attackPower) =>
+  api('/chip-war/attack', { method: 'POST', body: { towerId, attackPower } })
+
 export const apiGetArchon = () => api('/archon')
 export const apiVoteArchon = (candidate) => api('/archon/vote', { method: 'POST', body: { candidate } })
 export const apiForceEndArchon = () => api('/archon/force-end', { method: 'POST' })
