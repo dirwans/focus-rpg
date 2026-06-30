@@ -1,9 +1,9 @@
 import TransparentSprite from './TransparentSprite'
+import acretonMechImg from '../assets/acreton_mech.png'
+import belterraPilotImg from '../assets/belterra_pilot.png'
+import coralisPilotImg from '../assets/coralis_pilot.png'
 
-const acretonMechImg = '/assets/acreton_mech.png'
-const belterraPilotImg = '/assets/belterra_pilot_v3.png'
-const belterraPortraitImg = '/assets/belterra_pilot_portrait.png'
-const coralisPilotImg = '/assets/coralis_pilot_v2.png'
+const belterraPortraitImg = belterraPilotImg
 
 export function AcretonSprite({ size = 60, width, height, upperBodyOnly = false, fill = false }) {
   return (
