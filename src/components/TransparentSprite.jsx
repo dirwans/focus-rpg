@@ -16,9 +16,15 @@ export default function TransparentSprite({ src, alt, size = 120, width, height,
 
     setProxySrc(finalSrc)
 
+    // Skip canvas processing on native Android (WebView blocks getImageData cross-origin)
+    if (window?.Capacitor?.isNativePlatform?.()) {
+      setProcessedSrc(finalSrc)
+      return
+    }
+
     const img = new Image()
     img.crossOrigin = 'anonymous'
-    
+
     img.onload = () => {
       const canvas = document.createElement('canvas')
       canvas.width = img.naturalWidth || img.width
