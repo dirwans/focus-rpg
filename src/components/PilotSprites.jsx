@@ -1,95 +1,91 @@
 import { useEffect, useRef, useState } from 'react'
 
-// Canvas-based green screen removal for local (same-origin) pilot sprites.
-// Images come from Vite's asset pipeline so they are same-origin — no CORS issues.
+// Canvas-based chroma-key (green screen removal).
+// Works for local same-origin images served from the same origin.
 function GreenScreenSprite({ src, alt, size = 120, width, height, fill = false }) {
   const canvasRef = useRef(null)
   const [dataUrl, setDataUrl] = useState(null)
-  const [failed, setFailed] = useState(false)
+  const [err, setErr] = useState(false)
 
   useEffect(() => {
     if (!src) return
     setDataUrl(null)
-    setFailed(false)
-    const img = new Image()
+    setErr(false)
+    const img = new window.Image()
     img.onload = () => {
       try {
-        const canvas = document.createElement('canvas')
+        const canvas = canvasRef.current
+        if (!canvas) return
         canvas.width = img.naturalWidth
         canvas.height = img.naturalHeight
         const ctx = canvas.getContext('2d')
         ctx.drawImage(img, 0, 0)
         const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height)
         const d = imgData.data
-        // Aggressive chroma-key: remove bright greens (the studio backdrop)
+        // Remove studio green-screen backdrop (bright green #00ff00 range)
         for (let i = 0; i < d.length; i += 4) {
           const r = d[i], g = d[i + 1], b = d[i + 2]
-          // Green screen: high green, at least as bright as red & blue
-          if (g > 100 && g > r * 1.2 && g > b * 1.2) {
+          if (g > 80 && g > r * 1.2 && g > b * 1.2 && g > 60) {
             d[i + 3] = 0
           }
         }
         ctx.putImageData(imgData, 0, 0)
         setDataUrl(canvas.toDataURL())
-      } catch (e) {
-        // Tainted canvas (shouldn't happen for local assets, but be safe)
-        setFailed(true)
+      } catch {
+        setErr(true)
       }
     }
-    img.onerror = () => setFailed(true)
+    img.onerror = () => setErr(true)
     img.src = src
   }, [src])
 
   if (!src) return null
 
-  if (failed) {
-    // Fallback: show raw image, green background will be visible
-    const fillH = height || size
+  const containerH = height || (fill ? 150 : size)
+
+  if (err || !dataUrl) {
+    // Fallback: dark background, no green removal
     return (
       <div style={{
         width: width || size,
-        height: fill ? fillH : (height || size),
+        height: containerH,
+        background: '#060d1c',
         overflow: 'hidden',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         flexShrink: 0,
       }}>
-        <img src={src} alt={alt} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        <img src={src} alt={alt} style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          objectPosition: fill ? 'center 20%' : 'center',
+        }} />
       </div>
     )
   }
 
-  const fillH = height || 150
   return (
     <div style={{
       width: width || size,
-      height: fill ? fillH : (height || size),
+      height: containerH,
       overflow: 'hidden',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       flexShrink: 0,
     }}>
-      {dataUrl ? (
-        <img
-          src={dataUrl}
-          alt={alt}
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            objectPosition: fill ? 'center top' : 'center',
-          }}
-        />
-      ) : (
-        // Loading state — show faded raw image
-        <img
-          src={src}
-          alt={alt}
-          style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.4 }}
-        />
-      )}
+      <img
+        src={dataUrl}
+        alt={alt}
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          objectPosition: fill ? 'center 15%' : 'center',
+        }}
+      />
       <canvas ref={canvasRef} style={{ display: 'none' }} />
     </div>
   )
