@@ -35,6 +35,18 @@ export default function Battle() {
     }
   }, [tab])
 
+  const loadTargets = async () => {
+    setLoading(true)
+    try {
+      const res = await apiPvpTargets()
+      setTargets(res.targets || [])
+    } catch (e) {
+      console.error(e)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   const handleChipAttack = async (towerId) => {
     if (chipLoading) return
     setChipLoading(true)
@@ -76,7 +88,7 @@ export default function Battle() {
         }
         return { player: next }
       })
-      setTimeout(loadTargets, 2500)
+      setTimeout(() => loadTargets(), 2500)
     } catch (e) {
       alert('Error: ' + e.message)
     } finally {
@@ -121,7 +133,7 @@ export default function Battle() {
         <div style={styles.content}>
           <div style={styles.subHeader}>
             <h2 style={{ fontSize: 14, margin: 0, color: '#c0dff0', fontFamily: 'var(--font-title)' }}>Select Opponent</h2>
-            <button onClick={loadTargets} style={styles.refreshBtn}>Refresh</button>
+            <button onClick={() => loadTargets()} style={styles.refreshBtn}>Refresh</button>
           </div>
           {loading && targets.length === 0 ? (
             <p style={{ textAlign: 'center', color: '#7ab0d0', padding: 32, fontSize: 13 }}>Scanning targets...</p>
