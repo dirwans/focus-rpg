@@ -23,33 +23,17 @@ export default function Battle() {
   const stats = useGameStore((s) => s.stats || {})
 
   useEffect(() => {
-    if (tab === 'arena') loadTargets()
-    else if (tab === 'chip') loadChipWar()
+    setTargets([])
+    setLog([])
+    setChipLog([])
+    if (tab === 'arena') {
+      setLoading(true)
+      apiPvpTargets().then(r => setTargets(r.targets || [])).catch(e => console.error(e)).finally(() => setLoading(false))
+    } else if (tab === 'chip') {
+      setChipLoading(true)
+      apiChipWar().then(r => setChipWar(r)).catch(e => console.error(e)).finally(() => setChipLoading(false))
+    }
   }, [tab])
-
-  const loadTargets = async () => {
-    setLoading(true)
-    try {
-      const res = await apiPvpTargets()
-      setTargets(res.targets || [])
-    } catch (e) {
-      console.error(e)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const loadChipWar = async () => {
-    setChipLoading(true)
-    try {
-      const res = await apiChipWar()
-      setChipWar(res)
-    } catch (e) {
-      console.error(e)
-    } finally {
-      setChipLoading(false)
-    }
-  }
 
   const handleChipAttack = async (towerId) => {
     if (chipLoading) return
