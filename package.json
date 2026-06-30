@@ -6,11 +6,15 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:android": "vite build && npx cap sync android",
+    "open:android": "npx cap open android",
     "lint": "eslint .",
     "preview": "vite preview",
     "start": "node server.js"
   },
   "dependencies": {
+    "@capacitor/android": "^8.4.1",
+    "@capacitor/core": "^8.4.1",
     "express": "^4.21.2",
     "google-auth-library": "^10.9.0",
     "react": "^19.2.6",
@@ -18,6 +22,7 @@
     "zustand": "^5.0.14"
   },
   "devDependencies": {
+    "@capacitor/cli": "^7.6.7",
     "@eslint/js": "^10.0.1",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",

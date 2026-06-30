@@ -15,6 +15,17 @@ const googleClient = new OAuth2Client(GOOGLE_CLIENT_ID)
 const app = express()
 app.use(express.json({ limit: '256kb' }))
 
+// Custom CORS middleware for Android/Capacitor requests
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Client-Id')
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200)
+  }
+  next()
+})
+
 // ── Storage paths ──────────────────────────────────────────────────────────
 const DATA_DIR      = join(__dirname, 'data')
 const USERS_FILE    = join(DATA_DIR, 'users.json')

@@ -1,0 +1,9 @@
+{
+  "appId": "com.dirwans.focusrpg",
+  "appName": "Focus RPG",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "server": {
+    "cleartext": true
+  }
+}
