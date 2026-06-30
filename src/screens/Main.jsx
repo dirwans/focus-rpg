@@ -253,7 +253,7 @@ export default function Main() {
               }}>
                 <PilotSprite race={player.race} size={160} />
               </div>
-              <div style={styles.spriteLabel}>{t('pilot_label')}</div>
+              <div style={styles.spriteLabel}>{username}</div>
             </div>
 
             <div style={{ fontSize: 24, color: 'var(--neon-glow)', fontFamily: 'var(--font-title)', fontWeight: 900, textShadow: '0 0 8px var(--neon-glow)', zIndex: 1, paddingBottom: 40 }}>VS</div>
