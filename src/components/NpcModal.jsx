@@ -518,7 +518,7 @@ const styles = {
   },
   lobbyCardDesc: {
     fontFamily: 'var(--font-body)',
-    fontSize: 11,
+    fontSize: 12,
     color: '#7ab0d0',
     lineHeight: 1.3
   },
@@ -643,7 +643,7 @@ const styles = {
   },
   activeJobLabel: {
     textAlign: 'center',
-    fontSize: 11,
+    fontSize: 12,
     fontFamily: 'var(--font-mono)',
     color: '#da70d6',
     background: 'rgba(218, 112, 214, 0.1)',
@@ -696,7 +696,7 @@ const styles = {
   },
   jobBonus: {
     fontFamily: 'var(--font-mono)',
-    fontSize: 11,
+    fontSize: 12,
     color: '#ff8c40',
     fontWeight: 700
   },
@@ -717,7 +717,7 @@ const styles = {
   },
   shopItemType: {
     fontFamily: 'var(--font-mono)',
-    fontSize: 11,
+    fontSize: 12,
     color: '#7ab0d0',
     marginTop: 2
   },
@@ -727,7 +727,7 @@ const styles = {
     borderRadius: 6,
     padding: '8px 12px',
     fontFamily: 'var(--font-title)',
-    fontSize: 11,
+    fontSize: 12,
     color: '#fff',
     fontWeight: 900,
     cursor: 'pointer',
@@ -741,7 +741,7 @@ const styles = {
     borderRadius: 6,
     padding: '8px 12px',
     fontFamily: 'var(--font-title)',
-    fontSize: 11,
+    fontSize: 12,
     color: 'rgba(255, 255, 255, 0.25)',
     fontWeight: 900,
     cursor: 'not-allowed',
@@ -804,7 +804,7 @@ const styles = {
   }),
   tabTitle: {
     fontFamily: 'var(--font-title)',
-    fontSize: 10,
+    fontSize: 12,
     fontWeight: 900,
     color: '#fff',
     letterSpacing: 0.5,
