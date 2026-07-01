@@ -10,8 +10,16 @@ import coralisRangerImg from '../assets/coralis_ranger.png'
 
 function getJobLane(jobId) {
   if (!jobId) return 'warrior'
-  const warriorJobs = ['cadet', 'iron_trooper', 'iron_vanguard']
-  const rangerJobs = ['gunner', 'siege_gunner', 'nova_destroyer']
+  const warriorJobs = [
+    'cadet', 'iron_trooper', 'iron_vanguard',
+    'recruit', 'vanguard', 'titan_pilot',
+    'guardian', 'spirit_knight', 'lumina_paladin'
+  ]
+  const rangerJobs = [
+    'gunner', 'siege_gunner', 'nova_destroyer',
+    'ranger', 'sharpshooter', 'railgun_elite',
+    'mystic_archer', 'moon_ranger', 'star_seeker'
+  ]
   if (warriorJobs.includes(jobId)) return 'warrior'
   if (rangerJobs.includes(jobId)) return 'ranger'
   return 'specialist'
