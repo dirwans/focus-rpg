@@ -15,48 +15,6 @@ function getJobLane(jobId) {
   return 'specialist'
 }
 
-// Emoji badges for job cards — no background issues
-const JOB_EMOJIS = {
-  acreton: {
-    warrior: { emoji: '🛡️', bg: '#5c1a00' },
-    ranger:  { emoji: '🎯', bg: '#5c2800' },
-    specialist: { emoji: '🔧', bg: '#0a3a00' },
-  },
-  belterra: {
-    warrior: { emoji: '⚔️', bg: '#00405c' },
-    ranger:  { emoji: '🏹', bg: '#003d5c' },
-    specialist: { emoji: '🔩', bg: '#003858' },
-  },
-  coralis: {
-    warrior: { emoji: '✨', bg: '#3a0066' },
-    ranger:  { emoji: '🌙', bg: '#2d0052' },
-    specialist: { emoji: '🔮', bg: '#1a0040' },
-  },
-}
-
-// Simple badge for job cards — no canvas processing needed
-export function JobBadge({ race, jobId, size = 44 }) {
-  const lane = getJobLane(jobId)
-  const config = JOB_EMOJIS[race]?.[lane] || { emoji: '❓', bg: '#333' }
-  return (
-    <div style={{
-      width: size,
-      height: size,
-      borderRadius: 6,
-      background: `linear-gradient(135deg, ${config.bg}, ${config.bg}88)`,
-      border: '1.5px solid rgba(255,255,255,0.12)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      fontSize: Math.floor(size * 0.5),
-      boxShadow: `0 0 8px ${config.bg}66, inset 0 1px 0 rgba(255,255,255,0.1)`,
-      flexShrink: 0,
-    }}>
-      {config.emoji}
-    </div>
-  )
-}
-
 export function AcretonSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false }) {
   const lane = getJobLane(job)
   let img = acretonWarriorImg
