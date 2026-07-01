@@ -7,8 +7,9 @@ export default function TransparentSprite({ src, alt, size = 120, width, height,
     if (!src) return
 
     const isRemote = src.startsWith('http://') || src.startsWith('https://')
+    const apiBase = import.meta.env.VITE_API_URL || ''
     const finalSrc = isRemote 
-      ? `/api/proxy-image?url=${encodeURIComponent(src)}` 
+      ? `${apiBase}/api/proxy-image?url=${encodeURIComponent(src)}` 
       : src
 
     const img = new Image()
