@@ -1162,3 +1162,8 @@ body {
 .pixel-art {
   filter: brightness(1.28) contrast(1.2) saturate(1.1) !important;
 }
+
+/* Reduced brightness and contrast specifically for faction character/pilot sprites */
+.pilot-sprite-img {
+  filter: brightness(1.06) contrast(1.08) saturate(1.02) !important;
+}

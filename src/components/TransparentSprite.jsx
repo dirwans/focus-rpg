@@ -9,7 +9,8 @@ export default function TransparentSprite({
   glowColor = '#d000ff', 
   upperBodyOnly = false, 
   fill = false,
-  disableKeying = true
+  disableKeying = true,
+  isPilot = false
 }) {
   const [processedSrc, setProcessedSrc] = useState(null)
 
@@ -303,7 +304,7 @@ export default function TransparentSprite({
           <img
             src={displaySrc}
             alt={alt}
-            className="transparent-sprite-img"
+            className={`transparent-sprite-img ${isPilot ? 'pilot-sprite-img' : ''}`}
             style={{
               position: 'absolute',
               top: topPosition,
@@ -326,7 +327,7 @@ export default function TransparentSprite({
         <img
           src={displaySrc}
           alt={alt}
-          className="transparent-sprite-img"
+          className={`transparent-sprite-img ${isPilot ? 'pilot-sprite-img' : ''}`}
           style={{
             width: '100%',
             height: '100%',

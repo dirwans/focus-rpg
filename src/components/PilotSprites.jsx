@@ -49,6 +49,7 @@ export function AcretonSprite({ job, size = 60, width, height, upperBodyOnly = f
       glowColor={glow}
       upperBodyOnly={upperBodyOnly}
       fill={fill}
+      isPilot={true}
     />
   )
 }
@@ -64,6 +65,7 @@ export function BelterraSprite({ size = 60, width, height, upperBodyOnly = false
       glowColor="#00e5ff"
       upperBodyOnly={upperBodyOnly}
       fill={fill}
+      isPilot={true}
     />
   )
 }
@@ -90,6 +92,7 @@ export function CoralisSprite({ job, size = 60, width, height, upperBodyOnly = f
       glowColor="#d000ff"
       upperBodyOnly={upperBodyOnly}
       fill={fill}
+      isPilot={true}
     />
   )
 }
