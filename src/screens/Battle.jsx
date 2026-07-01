@@ -263,7 +263,7 @@ export default function Battle() {
                 const hpPct = tower.hp / tower.maxHp
                 const dmgColor = hpPct > 0.5 ? '#22c55e' : hpPct > 0.3 ? '#f5a623' : hpPct > 0.1 ? '#ef4444' : '#dc2626'
                 return (
-                  <div key={tower.towerId} className="glass-panel cyber-panel" style={{ ...styles.towerCard, borderColor: tower.race === player.race ? 'rgba(0, 229, 255, 0.5)' : 'rgba(255,255,255,0.08)', minHeight: 155 }}>
+                  <div key={tower.towerId} className={`tower-3d-card panel-${tower.race} ${tower.race === player.race ? 'active-tower' : ''}`} style={styles.towerCard}>
                     {tower.race === player.race && (
                       <div style={styles.myRaceBadge}>YOUR TOWER</div>
                     )}
@@ -369,7 +369,7 @@ const styles = {
   // Chip War
   countdownBanner: { textAlign: 'center', padding: '10px 16px', background: 'rgba(245, 166, 35, 0.1)', border: '1px solid rgba(245, 166, 35, 0.3)', borderRadius: 8, marginBottom: 16 },
   activeBanner: { textAlign: 'center', padding: '8px 16px', background: 'rgba(255, 68, 102, 0.12)', border: '1px solid rgba(255, 68, 102, 0.35)', borderRadius: 8, marginBottom: 16, animation: 'pulse 2s infinite' },
-  towerCard: { padding: 16, borderRadius: 12, border: '1px solid', position: 'relative', overflow: 'hidden' },
+  towerCard: { padding: 16, minHeight: 155 },
   chipAttackBtn: { flex: 1, background: '#ff4466', color: '#fff', border: 'none', padding: '9px 8px', borderRadius: 6, fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: 1, cursor: 'pointer', boxShadow: '0 0 8px rgba(255,68,102,0.3)', fontSize: 12, fontFamily: 'var(--font-title)', transition: 'opacity 0.2s' },
   chipLogContainer: { marginTop: 16, padding: 12, background: 'rgba(4, 10, 24, 0.9)', border: '1px solid rgba(255, 68, 102, 0.3)', borderRadius: 8 },
 }
