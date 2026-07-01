@@ -261,12 +261,13 @@ export default function TransparentSprite({
     const isRanger = src && src.includes('coralis_ranger')
     const isSpecialist = src && src.includes('coralis_specialist')
     const isRangerPortrait = src && src.includes('coralis_ranger_portrait')
+    const isSpecialistPortrait = src && src.includes('coralis_specialist_portrait')
     
     // Zoom/position values for 3x4 ID card (Head-to-Chest view)
     let zoomHeight = fillH * 2.3
     let topPosition = '-10%'
     
-    if (isRangerPortrait) {
+    if (isRangerPortrait || isSpecialistPortrait) {
       zoomHeight = fillH * 1.05
       topPosition = '0%'
     } else if (isCoralis) {

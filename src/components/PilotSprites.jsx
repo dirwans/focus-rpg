@@ -12,6 +12,8 @@ import coralisPilotImg from '../assets/coralis_pilot_v2.png'
 import coralisWarriorImg from '../assets/coralis_warrior.png'
 import coralisRangerImg from '../assets/coralis_ranger.png'
 import coralisRangerPortraitImg from '../assets/coralis_ranger_portrait.png'
+import coralisSpecialistImg from '../assets/coralis_specialist.png'
+import coralisSpecialistPortraitImg from '../assets/coralis_specialist_portrait.png'
 
 function getJobLane(jobId) {
   if (!jobId) return 'warrior'
@@ -83,6 +85,8 @@ export function CoralisSprite({ job, size = 60, width, height, upperBodyOnly = f
       srcImg = coralisWarriorImg
     } else if (lane === 'ranger') {
       srcImg = fill ? coralisRangerPortraitImg : coralisRangerImg
+    } else if (lane === 'specialist') {
+      srcImg = fill ? coralisSpecialistPortraitImg : coralisSpecialistImg
     }
   }
   
