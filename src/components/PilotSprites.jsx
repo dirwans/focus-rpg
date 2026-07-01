@@ -27,6 +27,8 @@ function getJobLane(jobId) {
     'ranger', 'sharpshooter', 'railgun_elite',
     'mystic_archer', 'moon_ranger', 'star_seeker'
   ]
+  // specialist = all other Coralis jobs (acolyte, eidolon_caller, high_summoner,
+  //              mystic, caster, summoner, warlock, dark_priest, grazier)
   if (warriorJobs.includes(jobId)) return 'warrior'
   if (rangerJobs.includes(jobId)) return 'ranger'
   return 'specialist'

@@ -20,19 +20,26 @@
     "tier1": [
       { "id": "guardian", "name": "Guardian", "desc": "Prajurit pelindung suci", "bonus": { "hp": 60, "atk": 4, "def": 8 }, "skills": ["Sword Strike", "Divine Block"] },
       { "id": "acolyte", "name": "Acolyte", "desc": "Pendeta penyembuh dengan energi alam", "bonus": { "hp": 20, "atk": 10, "def": 2 }, "skills": ["Holy Bolt", "Minor Heal"] },
-      { "id": "mystic_archer", "name": "Mystic Archer", "desc": "Pemanah berenergi spiritual", "bonus": { "hp": 30, "atk": 12, "def": 0 }, "skills": ["Spiritual Arrow", "Wind Walk"] }
+      { "id": "mystic_archer", "name": "Mystic Archer", "desc": "Pemanah berenergi spiritual", "bonus": { "hp": 30, "atk": 12, "def": 0 }, "skills": ["Spiritual Arrow", "Wind Walk"] },
+      { "id": "mystic", "name": "Mystic", "desc": "Founders of Force use, channelling Dark Force for combat and summoning", "bonus": { "hp": 25, "atk": 10, "def": 2 }, "skills": ["Dark Touch", "Force Sense"] }
     ],
     "tier2": [
       { "id": "spirit_knight", "name": "Spirit Knight", "desc": "Ksatria berpedang energi aura", "bonus": { "hp": 300, "atk": 15, "def": 35 }, "skills": ["Spirit Blade", "Holy Aegis"] },
       { "id": "eidolon_caller", "name": "Eidolon Caller", "desc": "Pemanggil makhluk spiritual (Eidolon)", "bonus": { "hp": 100, "atk": 45, "def": 10 }, "skills": ["Summon Pixie", "Mana Burn"] },
-      { "id": "moon_ranger", "name": "Moon Ranger", "desc": "Pemanah taktis siluman bulan", "bonus": { "hp": 150, "atk": 40, "def": 15 }, "skills": ["Lunar Piercer", "Shadow Step"] }
+      { "id": "moon_ranger", "name": "Moon Ranger", "desc": "Pemanah taktis siluman bulan", "bonus": { "hp": 150, "atk": 40, "def": 15 }, "skills": ["Lunar Piercer", "Shadow Step"] },
+      { "id": "caster", "name": "Caster", "desc": "Aggressive Force combatant channelling Dark Force expressly for combat", "bonus": { "hp": 80, "atk": 50, "def": 5 }, "skills": ["Channel"] },
+      { "id": "summoner", "name": "Summoner", "desc": "Wields Force to draw and control spiritual Animus beings", "bonus": { "hp": 60, "atk": 40, "def": 8 }, "skills": ["Animus Bond", "Force Draw"] }
     ],
     "tier3": [
       { "id": "lumina_paladin", "name": "Lumina Paladin", "desc": "Ksatria pelindung abadi tak tertembus", "bonus": { "hp": 900, "atk": 50, "def": 90 }, "skills": ["Guardian Shield", "Revenge Strike"] },
       { "id": "high_summoner", "name": "High Summoner", "desc": "Pemanggil Eidolon tingkat tinggi Hecate", "bonus": { "hp": 250, "atk": 140, "def": 25 }, "skills": ["Summon Hecate", "Mana Shield"] },
-      { "id": "star_seeker", "name": "Star Seeker", "desc": "Pemburu berpanah bintang pemecah gravitasi", "bonus": { "hp": 400, "atk": 110, "def": 40 }, "skills": ["Meteor Arrow", "Gravity Bind"] }
+      { "id": "star_seeker", "name": "Star Seeker", "desc": "Pemburu berpanah bintang pemecah gravitasi", "bonus": { "hp": 400, "atk": 110, "def": 40 }, "skills": ["Meteor Arrow", "Gravity Bind"] },
+      { "id": "warlock", "name": "Warlock", "desc": "Most efficient Force users — renders foes immobile and wields Force to devastating effect", "bonus": { "hp": 200, "atk": 160, "def": 15 }, "skills": ["Focus", "Stone Curse", "Striking Force"] },
+      { "id": "dark_priest", "name": "Dark Priest", "desc": "Support Force wielder — instantly transports comrades to safety by DECEM's blessing", "bonus": { "hp": 350, "atk": 80, "def": 30 }, "skills": ["Force Shield", "Return Gate", "Escape"] },
+      { "id": "grazier", "name": "Grazier", "desc": "Trained to call and control the most powerful Anima of the spirit world", "bonus": { "hp": 300, "atk": 120, "def": 25 }, "skills": ["Animus Rest", "Fast Recall", "Anima Maxima", "Life Conflict"] }
     ]
   },
+
   "acreton": {
     "tier1": [
       { "id": "cadet", "name": "Destroyer", "desc": "Prajurit garis depan pelindung Imperium.", "bonus": { "hp": 70, "atk": 6, "def": 4 }, "skills": ["Mangle", "Shield Battery"] },

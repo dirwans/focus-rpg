@@ -22,7 +22,11 @@ const CLASS_LANES = {
   coralis: [
     { title: "Warrior Lane", indices: [0, 0, 0] },
     { title: "Mage/Summoner", indices: [1, 1, 1] },
-    { title: "Ranger Lane", indices: [2, 2, 2] }
+    { title: "Ranger Lane", indices: [2, 2, 2] },
+    { title: "Mystic → Caster → Warlock", indices: [3, 3, 3] },
+    { title: "Mystic → Caster → Dark Priest", indices: [3, 3, 4] },
+    { title: "Mystic → Summoner → Dark Priest", indices: [3, 4, 4] },
+    { title: "Mystic → Summoner → Grazier", indices: [3, 4, 5] }
   ],
   acreton: [
     { title: "Warrior Lane", indices: [0, 0, 0] },
