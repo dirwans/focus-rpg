@@ -4,9 +4,9 @@ import acretonRangerImg from '../assets/acreton_ranger.png'
 import acretonSpecialistImg from '../assets/acreton_specialist.png'
 import belterraPilotImg from '../assets/belterra_pilot_v3.png'
 import belterraPortraitImg from '../assets/belterra_pilot_portrait.png'
-import coralisWarriorImg from '../assets/coralis_warrior.png'
-import coralisRangerImg from '../assets/coralis_ranger.png'
-import coralisSpecialistImg from '../assets/coralis_specialist.png'
+import belterraWarriorImg from '../assets/belterra_warrior.png'
+import belterraRangerImg from '../assets/belterra_ranger.png'
+import belterraSpecialistImg from '../assets/belterra_specialist.png'
 
 function getJobLane(jobId) {
   if (!jobId) return 'warrior'
@@ -69,12 +69,12 @@ export function BelterraSprite({ size = 60, width, height, upperBodyOnly = false
 
 export function CoralisSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false }) {
   const lane = getJobLane(job)
-  let srcImg = coralisWarriorImg
+  let srcImg = belterraWarriorImg
   
   if (lane === 'ranger') {
-    srcImg = coralisRangerImg
+    srcImg = belterraRangerImg
   } else if (lane === 'specialist') {
-    srcImg = coralisSpecialistImg
+    srcImg = belterraSpecialistImg
   }
   
   return (
