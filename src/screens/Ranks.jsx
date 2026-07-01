@@ -176,7 +176,7 @@ export default function Ranks() {
                     return (
                       <div key={c.username} className={`glass-panel cyber-panel panel-${activeRace}`} style={{ border: `1px solid ${isMyVote ? '#f5a623' : 'rgba(0, 229, 255, 0.2)'}`, padding: 12, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                          <PilotSprite race={activeRace} size={32} />
+                          <PilotSprite race={activeRace} job={c.job} size={32} />
                           <div>
                             <div style={{ color: '#fff', fontWeight: 'bold', fontSize: 15 }}>{c.username}</div>
                             <div style={{ color: '#7ab0d0', fontSize: 13, fontFamily: 'var(--font-mono)' }}>Lv.{c.level} • {c.cp} CP</div>
@@ -224,7 +224,7 @@ export default function Ranks() {
                   <div key={r.name} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5, marginBottom: isFirst ? 20 : 0 }}>
                     {isFirst && <div style={{ fontSize: 18 }}>🏆</div>}
                     <div style={{ width: isFirst ? 56 : 46, height: isFirst ? 56 : 46, borderRadius: '50%', border: `2px solid ${BADGE_COLOR[r.badge]}`, background: 'linear-gradient(135deg,#001040,#0030a0)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <PilotSprite race={r.race} size={isFirst ? 36 : 28} />
+                      <PilotSprite race={r.race} job={r.job} size={isFirst ? 36 : 28} />
                     </div>
                     <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: '#e0f4ff', fontWeight: 800 }}>{r.name}</div>
                     <div style={{ background: `${BADGE_COLOR[r.badge]}20`, border: `1px solid ${BADGE_COLOR[r.badge]}`, borderRadius: 10, padding: '2px 8px', fontFamily: 'var(--font-title)', fontSize: 13, color: BADGE_COLOR[r.badge], fontWeight: 800 }}>★ {r.badge}</div>
@@ -241,7 +241,7 @@ export default function Ranks() {
               <div key={r.name} style={styles.rankRow}>
                 <div style={styles.rankNum}>{r.rank}</div>
                 <div style={styles.rankAvatar}>
-                  <PilotSprite race={r.race} size={28} />
+                  <PilotSprite race={r.race} job={r.job} size={28} />
                   <span style={styles.flag}>{r.flag}</span>
                 </div>
                 <div style={{ flex: 1 }}>

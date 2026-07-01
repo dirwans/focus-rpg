@@ -1,18 +1,41 @@
 import TransparentSprite from './TransparentSprite'
-import acretonMechImg from '../assets/acreton_mech.png'
+import acretonWarriorImg from '../assets/acreton_warrior.png'
+import acretonRangerImg from '../assets/acreton_ranger.png'
+import acretonSpecialistImg from '../assets/acreton_specialist.png'
 import belterraPilotImg from '../assets/belterra_pilot_v3.png'
 import belterraPortraitImg from '../assets/belterra_pilot_portrait.png'
 import coralisPilotImg from '../assets/coralis_pilot_v2.png'
 
-export function AcretonSprite({ size = 60, width, height, upperBodyOnly = false, fill = false }) {
+function getJobLane(jobId) {
+  if (!jobId) return 'warrior'
+  const warriorJobs = ['cadet', 'iron_trooper', 'iron_vanguard']
+  const rangerJobs = ['gunner', 'siege_gunner', 'nova_destroyer']
+  if (warriorJobs.includes(jobId)) return 'warrior'
+  if (rangerJobs.includes(jobId)) return 'ranger'
+  return 'specialist'
+}
+
+export function AcretonSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false }) {
+  const lane = getJobLane(job)
+  let img = acretonWarriorImg
+  let glow = '#00e5ff' // Cyan/Blue for Warrior
+  
+  if (lane === 'ranger') {
+    img = acretonRangerImg
+    glow = '#ff6400' // Orange for Ranger
+  } else if (lane === 'specialist') {
+    img = acretonSpecialistImg
+    glow = '#39ff14' // Neon Green for Specialist
+  }
+  
   return (
     <TransparentSprite
-      src={acretonMechImg}
-      alt="Acreton Mech"
+      src={img}
+      alt={`Acreton ${lane}`}
       size={size}
       width={width}
       height={height}
-      glowColor="#ff6400"
+      glowColor={glow}
       upperBodyOnly={upperBodyOnly}
       fill={fill}
     />
@@ -85,8 +108,8 @@ export function EnemySprite({ size = 60, isBoss = false, isPitBoss = false }) {
   )
 }
 
-export function PilotSprite({ race, size = 60, width, height, upperBodyOnly = false, fill = false }) {
-  if (race === 'acreton') return <AcretonSprite size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} />
+export function PilotSprite({ race, job, size = 60, width, height, upperBodyOnly = false, fill = false }) {
+  if (race === 'acreton') return <AcretonSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} />
   if (race === 'belterra') return <BelterraSprite size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} />
   if (race === 'coralis') return <CoralisSprite size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} />
   return null

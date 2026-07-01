@@ -251,7 +251,7 @@ export default function Main() {
                 position: 'relative',
                 flexShrink: 0
               }}>
-                <PilotSprite race={player.race} size={160} />
+                <PilotSprite race={player.race} job={player.job} size={160} />
               </div>
               <div style={styles.spriteLabel}>{t('pilot_label')}</div>
             </div>
@@ -410,7 +410,7 @@ export default function Main() {
             <div className="profile-avatar-inner">
               <div className="profile-avatar-grid" />
               <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', overflow: 'hidden', zIndex: 2 }}>
-                <PilotSprite race={player.race} width={112} height={150} fill={true} />
+                <PilotSprite race={player.race} job={player.job} width={112} height={150} fill={true} />
               </div>
             </div>
           </div>

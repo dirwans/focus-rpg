@@ -63,7 +63,7 @@ export default function Unit() {
       {/* Header */}
       <div style={styles.header}>
         <div style={styles.avatar}>
-          <PilotSprite race={player.race} size={40} />
+          <PilotSprite race={player.race} job={player.job} size={40} />
         </div>
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>

@@ -199,7 +199,7 @@ export default function Battle() {
                 <div key={i} className={`glass-panel cyber-panel panel-${t.race}`} style={styles.targetCard}>
                   <div style={{ display: 'flex', gap: 10, alignItems: 'center', flex: 1 }}>
                     <div style={styles.avatarCircle}>
-                      <PilotSprite race={t.race} size={36} />
+                      <PilotSprite race={t.race} job={t.job} size={36} />
                     </div>
                     <div style={{ flex: 1 }}>
                       <h3 style={{ fontSize: 15, margin: '0 0 2px 0', color: '#fff', fontFamily: 'var(--font-title)' }}>{t.username}</h3>

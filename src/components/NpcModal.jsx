@@ -180,7 +180,7 @@ export default function NpcModal({ onClose }) {
               {/* NPC avatar & bubble */}
               <div style={styles.avatarRow}>
                 <div style={styles.npcAvatar}>
-                  <PilotSprite race={player.race} size={50} />
+                  <PilotSprite race={player.race} job={player.job} size={50} />
                 </div>
                 <div style={styles.npcDialog}>"{specialistDialogue}"</div>
               </div>
@@ -274,6 +274,11 @@ export default function NpcModal({ onClose }) {
                     <div style={styles.jobBonus}>
                       +{j.bonus.hp} HP | +{j.bonus.atk} ATK | +{j.bonus.def} DEF
                     </div>
+                    {j.skills && j.skills.length > 0 && (
+                      <div style={styles.jobSkills}>
+                        ⚡ Skills: <span style={{ color: '#00e5ff' }}>{j.skills.join(', ')}</span>
+                      </div>
+                    )}
                   </button>
                 ))}
               </div>
@@ -308,6 +313,11 @@ export default function NpcModal({ onClose }) {
                     <div style={styles.jobBonus}>
                       +{j.bonus.hp} HP | +{j.bonus.atk} ATK | +{j.bonus.def} DEF
                     </div>
+                    {j.skills && j.skills.length > 0 && (
+                      <div style={styles.jobSkills}>
+                        ⚡ Skills: <span style={{ color: '#00e5ff' }}>{j.skills.join(', ')}</span>
+                      </div>
+                    )}
                   </button>
                 ))}
               </div>
@@ -677,6 +687,13 @@ const styles = {
     fontSize: 12,
     letterSpacing: 0.5,
     marginTop: 6
+  },
+  jobSkills: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: 11,
+    color: '#7ab0d0',
+    marginTop: 4,
+    textAlign: 'left'
   },
   closeBtn: {
     width: '100%',
