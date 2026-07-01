@@ -15,23 +15,20 @@ const RECLASS_COST = 5000
 
 const CLASS_LANES = {
   belterra: [
-    { title: "Warrior Lane", indices: [0, 0, 0] },
-    { title: "Specialist Lane", indices: [1, 1, 1] },
-    { title: "Ranger Lane", indices: [2, 2, 2] }
+    { title: "Warrior Lane", indices: [[0], [0], [0]] },
+    { title: "Specialist Lane", indices: [[1], [1], [1]] },
+    { title: "Ranger Lane", indices: [[2], [2], [2]] }
   ],
   coralis: [
-    { title: "Warrior Lane", indices: [0, 0, 0] },
-    { title: "Mage/Summoner", indices: [1, 1, 1] },
-    { title: "Ranger Lane", indices: [2, 2, 2] },
-    { title: "Mystic → Caster → Warlock", indices: [3, 3, 3] },
-    { title: "Mystic → Caster → Dark Priest", indices: [3, 3, 4] },
-    { title: "Mystic → Summoner → Dark Priest", indices: [3, 4, 4] },
-    { title: "Mystic → Summoner → Grazier", indices: [3, 4, 5] }
+    { title: "Warrior Lane", indices: [[0], [0], [0]] },
+    { title: "Specialist Lane", indices: [[1], [1], [1]] },
+    { title: "Ranger Lane", indices: [[2], [2], [2]] },
+    { title: "Mystic Lane", indices: [[3], [3, 4], [3, 4, 5]] }
   ],
   acreton: [
-    { title: "Warrior Lane", indices: [0, 0, 0] },
-    { title: "Ranger/Launcher", indices: [1, 1, 1] },
-    { title: "Specialist Lane", indices: [2, 2, 2] }
+    { title: "Warrior Lane", indices: [[0], [0], [0]] },
+    { title: "Ranger/Launcher", indices: [[1], [1], [1]] },
+    { title: "Specialist Lane", indices: [[2], [2], [2]] }
   ]
 }
 
@@ -52,10 +49,10 @@ function getPlayerLaneIndex(raceId, jobId) {
   const lanes = CLASS_LANES[raceId]
   for (let i = 0; i < lanes.length; i++) {
     const indices = lanes[i].indices
-    const t1 = jobs[raceId].tier1[indices[0]]?.id
-    const t2 = jobs[raceId].tier2[indices[1]]?.id
-    const t3 = jobs[raceId].tier3[indices[2]]?.id
-    if (jobId === t1 || jobId === t2 || jobId === t3) {
+    const t1s = indices[0].map(idx => jobs[raceId].tier1[idx]?.id)
+    const t2s = indices[1].map(idx => jobs[raceId].tier2[idx]?.id)
+    const t3s = indices[2].map(idx => jobs[raceId].tier3[idx]?.id)
+    if (t1s.includes(jobId) || t2s.includes(jobId) || t3s.includes(jobId)) {
       return i
     }
   }
@@ -234,7 +231,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
               {/* Lane Selector Tabs */}
               <div style={styles.tabsContainer}>
                 {CLASS_LANES[player.race]?.map((lane, laneIdx) => {
-                  const t1Job = jobs[player.race].tier1[lane.indices[0]]
+                  const t1Job = jobs[player.race].tier1[lane.indices[0][0]]
                   const isActive = activeLaneIdx === laneIdx
                   const raceColor = player.race === 'acreton' ? '#ff3d00' : player.race === 'belterra' ? '#ffd600' : '#00e5ff'
 
@@ -257,126 +254,139 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                   const lane = CLASS_LANES[player.race]?.[activeLaneIdx]
                   if (!lane) return null
 
-                  const t1Job = jobs[player.race].tier1[lane.indices[0]]
-                  const t2Job = jobs[player.race].tier2[lane.indices[1]]
-                  const t3Job = jobs[player.race].tier3[lane.indices[2]]
-                  const laneJobs = [t1Job, t2Job, t3Job]
+                  const tierJobs = [
+                    lane.indices[0].map(idx => jobs[player.race].tier1[idx]),
+                    lane.indices[1].map(idx => jobs[player.race].tier2[idx]),
+                    lane.indices[2].map(idx => jobs[player.race].tier3[idx])
+                  ]
 
                   return (
                     <div className="class-tree-col" style={{ ...styles.treeCol, width: '100%' }}>
-                      {laneJobs.map((j, tIdx) => {
+                      {tierJobs.map((jArray, tIdx) => {
                         const jTier = tIdx + 1
-                        const isActive = player.job === j.id
-                        const isUnlocked = tier >= jTier
-                        
-                        // Determine required level for this job
-                        const reqLevel = j.levelReq || (jTier === 2 ? 30 : 50);
-
-                        // Check if eligible for promotion to this node
-                        const isPromoEligible = (
-                          (tier === 0 && jTier === 1 && player.level >= (j.levelReq || 1)) ||
-                          (tier === 1 && jTier === 2 && player.level >= reqLevel && player.job === t1Job.id) ||
-                          (tier === 2 && jTier === 3 && player.level >= reqLevel && player.job === t2Job.id)
-                        )
-
-                        // Check if eligible for reclass to this node
-                        const isReclassEligible = (
-                          tier === jTier && !isActive && player.job !== null
-                        )
-
-                        // Check if locked
-                        const isLocked = !isActive && !isPromoEligible && !isReclassEligible && (!isUnlocked || jTier > tier)
-
-                        const cardClass = `job-node-card panel-${player.race} ${isActive ? 'active-job-node' : ''}`
                         
                         return (
-                          <div key={j.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
-                            {/* Vertical connector line between nodes */}
+                          <div key={jTier} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+                            {/* Vertical connector line between tiers */}
                             {tIdx > 0 && (
-                              <div className="class-tree-connector" style={styles.connectorLine(isUnlocked)} />
+                              <div className="class-tree-connector" style={styles.connectorLine(tier >= jTier)} />
                             )}
 
-                            {/* Job Card */}
-                            <div 
-                              className={cardClass} 
-                              style={{
-                                ...styles.jobNodeCard,
-                                opacity: isLocked ? 0.45 : 1,
-                                border: isActive ? `2px solid var(--neon-glow)` : '1.5px solid rgba(255,255,255,0.18)',
-                                background: isActive ? '#0d1d3d' : '#060d1f'
-                              }}
-                            >
-                              <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-                                {/* Dynamic Sprite Icon */}
-                                <div style={styles.cardSpriteWrap}>
-                                  <PilotSprite race={player.race} job={j.id} size={110} />
-                                </div>
-                                <div style={{ flex: 1, minWidth: 0 }}>
-                                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                    <span style={styles.cardJobName}>{j.name}</span>
-                                    {isActive && <span style={styles.activeBadge}>✓ ACTIVE</span>}
-                                  </div>
-                                  <div style={styles.cardJobDesc}>{j.desc}</div>
-                                  <div style={styles.cardJobBonus}>
-                                    +{j.bonus.hp} HP | +{j.bonus.atk} ATK | +{j.bonus.def} DEF
-                                  </div>
-                                  {j.skills && j.skills.length > 0 && (
-                                    <div style={styles.cardJobSkills}>
-                                      ⚡ Skills: <span style={{ color: '#00e5ff' }}>{j.skills.join(', ')}</span>
+                            <div style={{ display: 'flex', gap: 16, width: '100%', justifyContent: 'center' }}>
+                              {jArray.map(j => {
+                                if (!j) return null
+                                const isActive = player.job === j.id
+                                const isUnlocked = tier >= jTier
+                                
+                                const reqLevel = j.levelReq || (jTier === 2 ? 30 : 50);
+
+                                // Get previous tier job IDs
+                                const prevTierJobIds = tIdx > 0 ? tierJobs[tIdx - 1].map(pj => pj.id) : []
+
+                                // Check if eligible for promotion to this node
+                                const isPromoEligible = (
+                                  (tier === 0 && jTier === 1 && player.level >= (j.levelReq || 1)) ||
+                                  (tier === 1 && jTier === 2 && player.level >= reqLevel && prevTierJobIds.includes(player.job)) ||
+                                  (tier === 2 && jTier === 3 && player.level >= reqLevel && prevTierJobIds.includes(player.job))
+                                )
+
+                                // Check if eligible for reclass to this node
+                                const isReclassEligible = (
+                                  tier === jTier && !isActive && player.job !== null
+                                )
+
+                                // Check if locked
+                                const isLocked = !isActive && !isPromoEligible && !isReclassEligible && (!isUnlocked || jTier > tier)
+
+                                const cardClass = `job-node-card panel-${player.race} ${isActive ? 'active-job-node' : ''}`
+                                
+                                return (
+                                  <div 
+                                    key={j.id}
+                                    className={cardClass} 
+                                    style={{
+                                      ...styles.jobNodeCard,
+                                      flex: 1, // split space equally for branches
+                                      minWidth: jArray.length > 1 ? '240px' : 'auto', // narrower if branching
+                                      opacity: isLocked ? 0.45 : 1,
+                                      border: isActive ? `2px solid var(--neon-glow)` : '1.5px solid rgba(255,255,255,0.18)',
+                                      background: isActive ? '#0d1d3d' : '#060d1f'
+                                    }}
+                                  >
+                                    <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+                                      {/* Dynamic Sprite Icon */}
+                                      <div style={styles.cardSpriteWrap}>
+                                        <PilotSprite race={player.race} job={j.id} size={110} />
+                                      </div>
+                                      <div style={{ flex: 1, minWidth: 0 }}>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                          <span style={styles.cardJobName}>{j.name}</span>
+                                          {isActive && <span style={styles.activeBadge}>✓ ACTIVE</span>}
+                                        </div>
+                                        <div style={styles.cardJobDesc}>{j.desc}</div>
+                                        <div style={styles.cardJobBonus}>
+                                          +{j.bonus.hp} HP | +{j.bonus.atk} ATK | +{j.bonus.def} DEF
+                                        </div>
+                                        {j.skills && j.skills.length > 0 && (
+                                          <div style={styles.cardJobSkills}>
+                                            ⚡ Skills: <span style={{ color: '#00e5ff' }}>{j.skills.join(', ')}</span>
+                                          </div>
+                                        )}
+                                      </div>
                                     </div>
-                                  )}
-                                </div>
-                              </div>
 
-                              {/* Action Buttons inside Card */}
-                              {isPromoEligible && (
-                                <button 
-                                  onClick={() => handlePromote(j.id)}
-                                  className="profile-promo-btn"
-                                  style={{
-                                    margin: '8px 0 0 0',
-                                    padding: '6px 10px',
-                                    fontSize: '12px',
-                                    background: 'linear-gradient(90deg, #ffe500, #cc8000)',
-                                    border: '1.5px solid #ffe500',
-                                    boxShadow: '0 0 8px rgba(255, 229, 0, 0.4)'
-                                  }}
-                                >
-                                  🚀 UNLOCK JOB (FREE)
-                                </button>
-                              )}
+                                    {/* Action Buttons inside Card */}
+                                    {isPromoEligible && (
+                                      <button 
+                                        onClick={() => handlePromote(j.id)}
+                                        className="profile-promo-btn"
+                                        style={{
+                                          margin: '8px 0 0 0',
+                                          padding: '6px 10px',
+                                          fontSize: '12px',
+                                          background: 'linear-gradient(90deg, #ffe500, #cc8000)',
+                                          border: '1.5px solid #ffe500',
+                                          boxShadow: '0 0 8px rgba(255, 229, 0, 0.4)'
+                                        }}
+                                      >
+                                        🚀 UNLOCK JOB (FREE)
+                                      </button>
+                                    )}
 
-                              {isReclassEligible && (
-                                <button 
-                                  onClick={() => handleReclass(j.id)}
-                                  className="profile-promo-btn"
-                                  disabled={player.resources.anium < RECLASS_COST}
-                                  style={{
-                                    margin: '8px 0 0 0',
-                                    padding: '6px 10px',
-                                    fontSize: '12px',
-                                    background: player.resources.anium >= RECLASS_COST 
-                                      ? 'linear-gradient(90deg, #bb88ff, #6600cc)'
-                                      : 'rgba(255,255,255,0.05)',
-                                    border: player.resources.anium >= RECLASS_COST 
-                                      ? '1.5px solid #bb88ff'
-                                      : '1.5px solid rgba(255,255,255,0.1)',
-                                    color: player.resources.anium >= RECLASS_COST ? '#fff' : 'rgba(255,255,255,0.3)',
-                                    cursor: player.resources.anium >= RECLASS_COST ? 'pointer' : 'not-allowed',
-                                    boxShadow: player.resources.anium >= RECLASS_COST 
-                                      ? '0 0 8px rgba(187, 136, 255, 0.4)'
-                                      : 'none'
-                                  }}
-                                >
-                                  🌀 RECLASS CLASS (5K ⬡)
-                                </button>
-                              )}
+                                    {isReclassEligible && (
+                                      <button 
+                                        onClick={() => handleReclass(j.id)}
+                                        className="profile-promo-btn"
+                                        disabled={player.resources.anium < RECLASS_COST}
+                                        style={{
+                                          margin: '8px 0 0 0',
+                                          padding: '6px 10px',
+                                          fontSize: '12px',
+                                          background: player.resources.anium >= RECLASS_COST 
+                                            ? 'linear-gradient(90deg, #bb88ff, #6600cc)'
+                                            : 'rgba(255,255,255,0.05)',
+                                          border: player.resources.anium >= RECLASS_COST 
+                                            ? '1.5px solid #bb88ff'
+                                            : '1.5px solid rgba(255,255,255,0.1)',
+                                          color: player.resources.anium >= RECLASS_COST ? '#fff' : 'rgba(255,255,255,0.3)',
+                                          cursor: player.resources.anium >= RECLASS_COST ? 'pointer' : 'not-allowed',
+                                          boxShadow: player.resources.anium >= RECLASS_COST 
+                                            ? '0 0 8px rgba(187, 136, 255, 0.4)'
+                                            : 'none'
+                                        }}
+                                      >
+                                        🌀 RECLASS CLASS (5K ⬡)
+                                      </button>
+                                    )}
 
-                              {isLocked && (
-                                <div style={styles.cardLockedBadge}>
-                                  🔒 Requires LV.{reqLevel} {jTier === 3 && `& T2 Job`}
-                                </div>
-                              )}
+                                    {isLocked && (
+                                      <div style={styles.cardLockedBadge}>
+                                        🔒 Requires LV.{reqLevel} {jTier === 3 && `& T2 Job`}
+                                      </div>
+                                    )}
+                                  </div>
+                                )
+                              })}
                             </div>
                           </div>
                         )
