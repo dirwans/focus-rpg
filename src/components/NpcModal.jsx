@@ -194,11 +194,11 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
           )}
 
           {subView === 'specialist' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, height: '100%', overflow: 'hidden' }}>
               {/* NPC avatar & bubble */}
               <div style={styles.avatarRow}>
-                <div style={styles.npcAvatar}>
-                  <PilotSprite race={player.race} job={player.job} size={50} />
+                <div style={styles.npcAvatarLarge}>
+                  <PilotSprite race={player.race} job={player.job} size={80} />
                 </div>
                 <div style={styles.npcDialog}>"{specialistDialogue}"</div>
               </div>
@@ -210,83 +210,6 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                   {job ? job.name.toUpperCase() : t('novice')} ({t('tier_label')} {tier})
                 </div>
               </div>
-
-              {/* Action Choices */}
-              <div style={styles.btnStack}>
-                {eligibleForPromo && (
-                  <button
-                    onClick={() => setSubView('promote')}
-                    style={canPromote ? styles.actionBtn('#ffe500', '#cc8000') : styles.actionBtnDisabled}
-                    disabled={!canPromote}
-                  >
-                    🚀 {promoCost === 0 ? (t('promo_btn_free') || "SELECT NEXT JOB (FREE)") : t('promo_btn', { fee: promoCost.toLocaleString() })}
-                  </button>
-                )}
-
-                {!eligibleForPromo && tier < 3 && (
-                  <div style={styles.infoLabel}>
-                    ℹ {tier === 0 
-                      ? t('next_promo', { req: 1, level: player.level }) 
-                      : tier === 1 
-                      ? t('next_promo', { req: 30, level: player.level }) 
-                      : t('next_promo', { req: 50, level: player.level })}
-                  </div>
-                )}
-
-                {tier === 3 && (
-                  <div style={styles.infoLabel}>🏆 {t('max_tier')}</div>
-                )}
-
-                {tier >= 1 && (
-                  <button
-                    onClick={() => setSubView('promote')}
-                    style={canReclass ? styles.actionBtn('#bb88ff', '#6600cc') : styles.actionBtnDisabled}
-                    disabled={!canReclass}
-                  >
-                    🌀 {t('reclass_btn', { fee: RECLASS_COST.toLocaleString() })}
-                  </button>
-                )}
-              </div>
-
-              <button onClick={() => setSubView('lobby')} style={styles.backBtn}>
-                🔙 {t('cancel_btn')}
-              </button>
-            </div>
-          )}
-
-          {subView === 'hero' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              {/* Hero avatar & bubble */}
-              <div style={styles.avatarRow}>
-                <div style={{ ...styles.npcAvatar, border: '1.5px solid #ffaa00', boxShadow: '0 0 10px rgba(255, 170, 0, 0.2)' }}>
-                  <span style={{ fontSize: 32 }}>🏆</span>
-                </div>
-                <div style={{ ...styles.npcDialog, borderLeft: '3px solid #ffaa00' }}>"{heroDialogue}"</div>
-              </div>
-
-              <div style={styles.btnStack}>
-                <button
-                  onClick={() => setSubView('shop')}
-                  style={styles.actionBtn('#ffaa00', '#995500')}
-                >
-                  🏪 {t('premium_shop_title')}
-                </button>
-              </div>
-
-              <button onClick={() => setSubView('lobby')} style={styles.backBtn}>
-                🔙 {t('cancel_btn')}
-              </button>
-            </div>
-          )}
-
-          {subView === 'promote' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, height: '100%', overflow: 'hidden' }}>
-              <div style={styles.subHeader}>
-                {t('promotion_modal_title')} / {t('reclass_service')}
-              </div>
-              <p style={styles.subDesc}>
-                {player.job ? "Ketuk/klik job kanggo ganti kelas (Reclass) utawa munggah pangkat (Promote)." : "Pilih salah siji job ing ngisor kanggo miwiti karir tempur."}
-              </p>
 
               {/* Class Tree Horizontal Scroll Container */}
               <div className="class-tree-wrapper no-scrollbar" style={styles.treeWrapper}>
@@ -336,7 +259,8 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                               style={{
                                 ...styles.jobNodeCard,
                                 opacity: isLocked ? 0.45 : 1,
-                                border: isActive ? `1.5px solid var(--neon-glow)` : '1px solid rgba(255,255,255,0.1)'
+                                border: isActive ? `2px solid var(--neon-glow)` : '1.5px solid rgba(255,255,255,0.18)',
+                                background: isActive ? '#0d1d3d' : '#060d1f'
                               }}
                             >
                               <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
@@ -368,10 +292,10 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                                   className="profile-promo-btn"
                                   style={{
                                     margin: '8px 0 0 0',
-                                    padding: '5px 8px',
-                                    fontSize: '10px',
+                                    padding: '6px 10px',
+                                    fontSize: '12px',
                                     background: 'linear-gradient(90deg, #ffe500, #cc8000)',
-                                    border: '1px solid #ffe500',
+                                    border: '1.5px solid #ffe500',
                                     boxShadow: '0 0 8px rgba(255, 229, 0, 0.4)'
                                   }}
                                 >
@@ -386,14 +310,14 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                                   disabled={player.resources.anium < RECLASS_COST}
                                   style={{
                                     margin: '8px 0 0 0',
-                                    padding: '5px 8px',
-                                    fontSize: '10px',
+                                    padding: '6px 10px',
+                                    fontSize: '12px',
                                     background: player.resources.anium >= RECLASS_COST 
                                       ? 'linear-gradient(90deg, #bb88ff, #6600cc)'
                                       : 'rgba(255,255,255,0.05)',
                                     border: player.resources.anium >= RECLASS_COST 
-                                      ? '1px solid #bb88ff'
-                                      : '1px solid rgba(255,255,255,0.1)',
+                                      ? '1.5px solid #bb88ff'
+                                      : '1.5px solid rgba(255,255,255,0.1)',
                                     color: player.resources.anium >= RECLASS_COST ? '#fff' : 'rgba(255,255,255,0.3)',
                                     cursor: player.resources.anium >= RECLASS_COST ? 'pointer' : 'not-allowed',
                                     boxShadow: player.resources.anium >= RECLASS_COST 
@@ -419,7 +343,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                 })}
               </div>
 
-              <button onClick={() => setSubView('specialist')} style={styles.backBtn}>
+              <button onClick={() => setSubView('lobby')} style={styles.backBtn}>
                 🔙 {t('cancel_btn')}
               </button>
             </div>
@@ -577,6 +501,19 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     flexShrink: 0
+  },
+  npcAvatarLarge: {
+    width: 80,
+    height: 80,
+    borderRadius: '50%',
+    border: '2px solid var(--neon-glow)',
+    background: 'rgba(3, 8, 20, 0.8)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexShrink: 0,
+    overflow: 'hidden',
+    boxShadow: '0 0 12px var(--neon-glow)'
   },
   npcDialog: {
     flex: 1,
@@ -862,7 +799,7 @@ const styles = {
   },
   cardJobDesc: {
     fontFamily: 'var(--font-body)',
-    fontSize: 11,
+    fontSize: 12,
     color: '#7ab0d0',
     marginTop: 2,
     textAlign: 'left',
@@ -870,7 +807,7 @@ const styles = {
   },
   cardJobBonus: {
     fontFamily: 'var(--font-mono)',
-    fontSize: 10,
+    fontSize: 12,
     color: '#e0f4ff',
     marginTop: 4,
     fontWeight: 800,
@@ -878,7 +815,7 @@ const styles = {
   },
   cardJobSkills: {
     fontFamily: 'var(--font-mono)',
-    fontSize: 10,
+    fontSize: 12,
     color: '#6ab0d4',
     marginTop: 2,
     fontWeight: 800,
@@ -886,7 +823,7 @@ const styles = {
   },
   cardLockedBadge: {
     fontFamily: 'var(--font-mono)',
-    fontSize: 9,
+    fontSize: 12,
     fontWeight: 'bold',
     color: 'rgba(255,255,255,0.3)',
     textAlign: 'center',
@@ -894,7 +831,7 @@ const styles = {
   },
   activeBadge: {
     fontFamily: 'var(--font-title)',
-    fontSize: 9,
+    fontSize: 12,
     fontWeight: 900,
     color: '#39ff14',
     background: 'rgba(57, 255, 20, 0.1)',

@@ -479,7 +479,7 @@ export default function Main() {
               <button 
                 className={`profile-promo-btn btn-${player.race}`}
                 onClick={() => {
-                  setNpcInitialView('promote')
+                  setNpcInitialView('specialist')
                   setShowNpcModal(true)
                 }}
               >
