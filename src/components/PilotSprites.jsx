@@ -2,12 +2,16 @@ import TransparentSprite from './TransparentSprite'
 import acretonWarriorImg from '../assets/acreton_warrior.png'
 import acretonRangerImg from '../assets/acreton_ranger.png'
 import acretonSpecialistImg from '../assets/acreton_specialist.png'
+
 import belterraPilotImg from '../assets/belterra_pilot_v3.png'
 import belterraPortraitImg from '../assets/belterra_pilot_portrait.png'
 import belterraWarriorImg from '../assets/belterra_warrior.png'
 import belterraRangerImg from '../assets/belterra_ranger.png'
-import belterraRangerPortraitImg from '../assets/belterra_ranger_portrait.png'
+
 import coralisPilotImg from '../assets/coralis_pilot_v2.png'
+import coralisWarriorImg from '../assets/coralis_warrior.png'
+import coralisRangerImg from '../assets/coralis_ranger.png'
+import coralisRangerPortraitImg from '../assets/coralis_ranger_portrait.png'
 
 function getJobLane(jobId) {
   if (!jobId) return 'warrior'
@@ -76,9 +80,9 @@ export function CoralisSprite({ job, size = 60, width, height, upperBodyOnly = f
   
   if (job) {
     if (lane === 'warrior') {
-      srcImg = belterraWarriorImg
+      srcImg = coralisWarriorImg
     } else if (lane === 'ranger') {
-      srcImg = fill ? belterraRangerPortraitImg : belterraRangerImg
+      srcImg = fill ? coralisRangerPortraitImg : coralisRangerImg
     }
   }
   

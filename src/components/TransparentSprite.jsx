@@ -260,7 +260,7 @@ export default function TransparentSprite({
     const isCoralis = src && src.includes('coralis_')
     const isRanger = src && src.includes('coralis_ranger')
     const isSpecialist = src && src.includes('coralis_specialist')
-    const isRangerPortrait = src && src.includes('belterra_ranger_portrait')
+    const isRangerPortrait = src && src.includes('coralis_ranger_portrait')
     
     // Zoom/position values for 3x4 ID card (Head-to-Chest view)
     let zoomHeight = fillH * 2.3
