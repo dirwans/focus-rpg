@@ -111,9 +111,10 @@ export default function TransparentSprite({
           const a = data[pixelIdx+3]
           
           // Check if this pixel is background (black background, green chroma key, or white background)
-          // We use a threshold of 55 for dark/black pixels to completely clear card frame backgrounds
-          const isBlackBg = a === 0 || (r < 55 && g < 55 && b < 55)
-          const isGreenBg = g > 60 && g > r + 20 && g > b + 20 && r < 180 && b < 180
+          // IMPORTANT: Use VERY strict threshold for black to avoid eating into character dark areas
+          // Only treat near-pure black pixels as background (not dark pixels that are part of the character)
+          const isBlackBg = a === 0 || (r < 20 && g < 20 && b < 20)
+          const isGreenBg = g > 80 && g > r + 25 && g > b + 25 && r < 150 && b < 150
           const isWhiteBg = r > 220 && g > 220 && b > 220
           
           if (isBlackBg || isGreenBg || isWhiteBg) {
@@ -150,7 +151,7 @@ export default function TransparentSprite({
         }
 
         if (foundAny) {
-          const padding = 4
+          const padding = 8
           const leftCutoff = minX <= boundStartX
           const rightCutoff = maxX >= boundEndX - 1
           const topCutoff = minY <= boundStartY
