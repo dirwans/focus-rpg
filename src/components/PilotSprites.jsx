@@ -56,6 +56,7 @@ export function AcretonSprite({ job, size = 60, width, height, upperBodyOnly = f
       upperBodyOnly={upperBodyOnly}
       fill={fill}
       isPilot={true}
+      disableKeying={true}
     />
   )
 }
@@ -72,6 +73,7 @@ export function BelterraSprite({ size = 60, width, height, upperBodyOnly = false
       upperBodyOnly={upperBodyOnly}
       fill={fill}
       isPilot={true}
+      disableKeying={true}
     />
   )
 }
@@ -101,6 +103,7 @@ export function CoralisSprite({ job, size = 60, width, height, upperBodyOnly = f
       upperBodyOnly={upperBodyOnly}
       fill={fill}
       isPilot={true}
+      disableKeying={true}
     />
   )
 }
