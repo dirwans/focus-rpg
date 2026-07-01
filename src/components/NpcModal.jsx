@@ -13,6 +13,24 @@ const PROMO_COSTS = {
 }
 const RECLASS_COST = 5000
 
+const CLASS_LANES = {
+  belterra: [
+    { title: "Warrior Lane", indices: [0, 0, 0] },
+    { title: "Specialist Lane", indices: [1, 1, 1] },
+    { title: "Ranger Lane", indices: [2, 2, 2] }
+  ],
+  coralis: [
+    { title: "Warrior Lane", indices: [0, 0, 0] },
+    { title: "Mage/Summoner", indices: [1, 1, 1] },
+    { title: "Ranger Lane", indices: [2, 2, 2] }
+  ],
+  acreton: [
+    { title: "Warrior Lane", indices: [0, 0, 0] },
+    { title: "Ranger/Launcher", indices: [1, 1, 1] },
+    { title: "Specialist Lane", indices: [2, 2, 2] }
+  ]
+}
+
 function getJobInfo(raceId, jobId) {
   if (!raceId || !jobId || !jobs[raceId]) return { tier: 0, job: null }
   const rJobs = jobs[raceId]
@@ -221,7 +239,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
 
                 {tier >= 1 && (
                   <button
-                    onClick={() => setSubView('reclass')}
+                    onClick={() => setSubView('promote')}
                     style={canReclass ? styles.actionBtn('#bb88ff', '#6600cc') : styles.actionBtnDisabled}
                     disabled={!canReclass}
                   >
@@ -262,64 +280,143 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
           )}
 
           {subView === 'promote' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              <div style={styles.subHeader}>{t('promotion_modal_title')}</div>
-              <p style={styles.subDesc}>{t('promotion_modal_desc')}</p>
-              
-              <div style={styles.scrollList}>
-                {getAvailableJobs().map(j => (
-                  <button key={j.id} style={styles.jobCard} onClick={() => handlePromote(j.id)}>
-                    <div style={styles.jobName}>{j.name}</div>
-                    <div style={styles.jobDesc}>{j.desc}</div>
-                    <div style={styles.jobBonus}>
-                      +{j.bonus.hp} HP | +{j.bonus.atk} ATK | +{j.bonus.def} DEF
-                    </div>
-                    {j.skills && j.skills.length > 0 && (
-                      <div style={styles.jobSkills}>
-                        ⚡ Skills: <span style={{ color: '#00e5ff' }}>{j.skills.join(', ')}</span>
-                      </div>
-                    )}
-                  </button>
-                ))}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, height: '100%', overflow: 'hidden' }}>
+              <div style={styles.subHeader}>
+                {t('promotion_modal_title')} / {t('reclass_service')}
               </div>
-
-              <button onClick={() => setSubView('specialist')} style={styles.backBtn}>
-                🔙 {t('cancel_btn')}
-              </button>
-            </div>
-          )}
-
-          {subView === 'reclass' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              <div style={styles.subHeader}>{t('reclass_modal_title')}</div>
               <p style={styles.subDesc}>
-                {t('reclass_modal_desc', { fee: RECLASS_COST.toLocaleString() })}
+                {player.job ? "Ketuk/klik job kanggo ganti kelas (Reclass) utawa munggah pangkat (Promote)." : "Pilih salah siji job ing ngisor kanggo miwiti karir tempur."}
               </p>
-              <div style={styles.activeJobLabel}>
-                {t('reclass_active_job', { job: job ? job.name : t('novice_job_name') })}
-              </div>
 
-              <div style={styles.scrollList}>
-                {sameTierJobs().map(j => (
-                  <button
-                    key={j.id}
-                    style={j.id === player.job ? styles.jobCardActive : styles.jobCard}
-                    onClick={() => handleReclass(j.id)}
-                  >
-                    <div style={styles.jobName}>
-                      {j.name} {j.id === player.job ? `✓ ${t('active_badge')}` : ''}
+              {/* Class Tree Horizontal Scroll Container */}
+              <div className="class-tree-wrapper no-scrollbar" style={styles.treeWrapper}>
+                {CLASS_LANES[player.race]?.map((lane, laneIdx) => {
+                  // Fetch the three jobs for this lane
+                  const t1Job = jobs[player.race].tier1[lane.indices[0]]
+                  const t2Job = jobs[player.race].tier2[lane.indices[1]]
+                  const t3Job = jobs[player.race].tier3[lane.indices[2]]
+                  const laneJobs = [t1Job, t2Job, t3Job]
+
+                  return (
+                    <div key={laneIdx} className="class-tree-col" style={styles.treeCol}>
+                      <div style={styles.laneTitle}>{lane.title.toUpperCase()}</div>
+
+                      {laneJobs.map((j, tIdx) => {
+                        const jTier = tIdx + 1
+                        const isActive = player.job === j.id
+                        const isUnlocked = tier >= jTier
+                        
+                        // Check if eligible for promotion to this node
+                        const isPromoEligible = (
+                          (tier === 0 && jTier === 1 && player.level >= 1) ||
+                          (tier === 1 && jTier === 2 && player.level >= 30 && player.job === t1Job.id) ||
+                          (tier === 2 && jTier === 3 && player.level >= 50 && player.job === t2Job.id)
+                        )
+
+                        // Check if eligible for reclass to this node
+                        const isReclassEligible = (
+                          tier === jTier && !isActive && player.job !== null
+                        )
+
+                        // Check if locked
+                        const isLocked = !isActive && !isPromoEligible && !isReclassEligible && (!isUnlocked || jTier > tier)
+
+                        const cardClass = `job-node-card panel-${player.race} ${isActive ? 'active-job-node' : ''}`
+                        
+                        return (
+                          <div key={j.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+                            {/* Vertical connector line between nodes */}
+                            {tIdx > 0 && (
+                              <div className="class-tree-connector" style={styles.connectorLine(isUnlocked)} />
+                            )}
+
+                            {/* Job Card */}
+                            <div 
+                              className={cardClass} 
+                              style={{
+                                ...styles.jobNodeCard,
+                                opacity: isLocked ? 0.45 : 1,
+                                border: isActive ? `1.5px solid var(--neon-glow)` : '1px solid rgba(255,255,255,0.1)'
+                              }}
+                            >
+                              <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+                                {/* Dynamic Sprite Icon */}
+                                <div style={styles.cardSpriteWrap}>
+                                  <PilotSprite race={player.race} job={j.id} size={44} />
+                                </div>
+                                <div style={{ flex: 1, minWidth: 0 }}>
+                                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                    <span style={styles.cardJobName}>{j.name}</span>
+                                    {isActive && <span style={styles.activeBadge}>✓ ACTIVE</span>}
+                                  </div>
+                                  <div style={styles.cardJobDesc}>{j.desc}</div>
+                                  <div style={styles.cardJobBonus}>
+                                    +{j.bonus.hp} HP | +{j.bonus.atk} ATK | +{j.bonus.def} DEF
+                                  </div>
+                                  {j.skills && j.skills.length > 0 && (
+                                    <div style={styles.cardJobSkills}>
+                                      ⚡ Skills: <span style={{ color: '#00e5ff' }}>{j.skills.join(', ')}</span>
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+
+                              {/* Action Buttons inside Card */}
+                              {isPromoEligible && (
+                                <button 
+                                  onClick={() => handlePromote(j.id)}
+                                  className="profile-promo-btn"
+                                  style={{
+                                    margin: '8px 0 0 0',
+                                    padding: '5px 8px',
+                                    fontSize: '10px',
+                                    background: 'linear-gradient(90deg, #ffe500, #cc8000)',
+                                    border: '1px solid #ffe500',
+                                    boxShadow: '0 0 8px rgba(255, 229, 0, 0.4)'
+                                  }}
+                                >
+                                  🚀 UNLOCK JOB (FREE)
+                                </button>
+                              )}
+
+                              {isReclassEligible && (
+                                <button 
+                                  onClick={() => handleReclass(j.id)}
+                                  className="profile-promo-btn"
+                                  disabled={player.resources.anium < RECLASS_COST}
+                                  style={{
+                                    margin: '8px 0 0 0',
+                                    padding: '5px 8px',
+                                    fontSize: '10px',
+                                    background: player.resources.anium >= RECLASS_COST 
+                                      ? 'linear-gradient(90deg, #bb88ff, #6600cc)'
+                                      : 'rgba(255,255,255,0.05)',
+                                    border: player.resources.anium >= RECLASS_COST 
+                                      ? '1px solid #bb88ff'
+                                      : '1px solid rgba(255,255,255,0.1)',
+                                    color: player.resources.anium >= RECLASS_COST ? '#fff' : 'rgba(255,255,255,0.3)',
+                                    cursor: player.resources.anium >= RECLASS_COST ? 'pointer' : 'not-allowed',
+                                    boxShadow: player.resources.anium >= RECLASS_COST 
+                                      ? '0 0 8px rgba(187, 136, 255, 0.4)'
+                                      : 'none'
+                                  }}
+                                >
+                                  🌀 RECLASS CLASS (5K ⬡)
+                                </button>
+                              )}
+
+                              {isLocked && (
+                                <div style={styles.cardLockedBadge}>
+                                  🔒 Requires {jTier === 2 ? "LV.30" : "LV.50"} {jTier === 3 && `& T2 Job`}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        )
+                      })}
                     </div>
-                    <div style={styles.jobDesc}>{j.desc}</div>
-                    <div style={styles.jobBonus}>
-                      +{j.bonus.hp} HP | +{j.bonus.atk} ATK | +{j.bonus.def} DEF
-                    </div>
-                    {j.skills && j.skills.length > 0 && (
-                      <div style={styles.jobSkills}>
-                        ⚡ Skills: <span style={{ color: '#00e5ff' }}>{j.skills.join(', ')}</span>
-                      </div>
-                    )}
-                  </button>
-                ))}
+                  )
+                })}
               </div>
 
               <button onClick={() => setSubView('specialist')} style={styles.backBtn}>
@@ -394,7 +491,7 @@ const styles = {
   },
   modal: {
     width: '100%',
-    maxWidth: 380,
+    maxWidth: 420,
     padding: 20,
     display: 'flex',
     flexDirection: 'column',
@@ -694,6 +791,114 @@ const styles = {
     color: '#7ab0d0',
     marginTop: 4,
     textAlign: 'left'
+  },
+  treeWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: 16,
+    overflowX: 'auto',
+    flex: 1,
+    padding: '4px 0 12px 0',
+    width: '100%',
+    boxSizing: 'border-box'
+  },
+  treeCol: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: 0,
+    width: 250,
+    flexShrink: 0,
+    boxSizing: 'border-box'
+  },
+  laneTitle: {
+    fontFamily: 'var(--font-title)',
+    fontSize: 12,
+    fontWeight: 900,
+    color: '#00e5ff',
+    letterSpacing: 1.5,
+    marginBottom: 10,
+    textShadow: '0 0 6px rgba(0, 229, 255, 0.3)',
+    textAlign: 'center'
+  },
+  jobNodeCard: {
+    width: '100%',
+    padding: 10,
+    background: 'rgba(3, 8, 20, 0.7)',
+    borderRadius: 8,
+    boxSizing: 'border-box',
+    transition: 'all 0.2s ease-in-out',
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  connectorLine: (unlocked) => ({
+    width: 3,
+    height: 24,
+    background: unlocked ? 'var(--neon-glow)' : 'rgba(255,255,255,0.08)',
+    boxShadow: unlocked ? '0 0 8px var(--neon-glow)' : 'none',
+    zIndex: 0
+  }),
+  cardSpriteWrap: {
+    width: 44,
+    height: 44,
+    borderRadius: 6,
+    overflow: 'hidden',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    background: 'rgba(0,0,0,0.4)',
+    border: '1px solid rgba(255,255,255,0.08)',
+    flexShrink: 0
+  },
+  cardJobName: {
+    fontFamily: 'var(--font-title)',
+    fontSize: 13,
+    fontWeight: 900,
+    color: '#fff',
+    letterSpacing: 0.5
+  },
+  cardJobDesc: {
+    fontFamily: 'var(--font-body)',
+    fontSize: 11,
+    color: '#7ab0d0',
+    marginTop: 2,
+    textAlign: 'left',
+    lineHeight: 1.2
+  },
+  cardJobBonus: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: 10,
+    color: '#e0f4ff',
+    marginTop: 4,
+    fontWeight: 800,
+    textAlign: 'left'
+  },
+  cardJobSkills: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: 10,
+    color: '#6ab0d4',
+    marginTop: 2,
+    fontWeight: 800,
+    textAlign: 'left'
+  },
+  cardLockedBadge: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: 9,
+    fontWeight: 'bold',
+    color: 'rgba(255,255,255,0.3)',
+    textAlign: 'center',
+    marginTop: 6
+  },
+  activeBadge: {
+    fontFamily: 'var(--font-title)',
+    fontSize: 9,
+    fontWeight: 900,
+    color: '#39ff14',
+    background: 'rgba(57, 255, 20, 0.1)',
+    border: '1.5px solid #39ff14',
+    borderRadius: 4,
+    padding: '1px 4px',
+    boxShadow: '0 0 6px rgba(57, 255, 20, 0.2)'
   },
   closeBtn: {
     width: '100%',

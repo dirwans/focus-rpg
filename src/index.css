@@ -1085,3 +1085,40 @@ body {
   50% { opacity: 1; transform: scale(1.01); filter: brightness(1.1); }
   100% { opacity: 0.9; transform: scale(1); }
 }
+
+/* Hide scrollbars for visual class tree mapping */
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+}
+.no-scrollbar {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+/* Glowing class connector line pulse animation */
+.class-tree-connector {
+  transition: all 0.3s ease;
+}
+
+/* Hover effects for inactive, unlocked job cards */
+.job-node-card {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+.job-node-card:not(.active-job-node):hover {
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  background: rgba(10, 20, 40, 0.85) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+.job-node-card.active-job-node {
+  box-shadow: 
+    0 0 15px rgba(0, 229, 255, 0.25),
+    inset 0 0 8px rgba(0, 229, 255, 0.1);
+  animation: activeNodePulse 3s infinite ease-in-out;
+}
+
+@keyframes activeNodePulse {
+  0% { box-shadow: 0 0 10px rgba(0, 229, 255, 0.2), inset 0 0 6px rgba(0, 229, 255, 0.1); }
+  50% { box-shadow: 0 0 20px rgba(0, 229, 255, 0.45), inset 0 0 12px rgba(0, 229, 255, 0.2); }
+  100% { box-shadow: 0 0 10px rgba(0, 229, 255, 0.2), inset 0 0 6px rgba(0, 229, 255, 0.1); }
+}
