@@ -2,5 +2,9 @@
   "appId": "com.dirwans.focusrpg",
   "appName": "Focus RPG",
   "webDir": "dist",
-  "bundledWebRuntime": false
+  "bundledWebRuntime": false,
+  "server": {
+    "url": "https://103.189.234.206.nip.io",
+    "cleartext": true
+  }
 }
