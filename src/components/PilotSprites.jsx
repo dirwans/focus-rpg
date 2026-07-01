@@ -4,7 +4,9 @@ import acretonRangerImg from '../assets/acreton_ranger.png'
 import acretonSpecialistImg from '../assets/acreton_specialist.png'
 import belterraPilotImg from '../assets/belterra_pilot_v3.png'
 import belterraPortraitImg from '../assets/belterra_pilot_portrait.png'
+import belterraRangerImg from '../assets/belterra_ranger.png'
 import coralisPilotImg from '../assets/coralis_pilot_v2.png'
+import coralisRangerImg from '../assets/coralis_ranger.png'
 
 function getJobLane(jobId) {
   if (!jobId) return 'warrior'
@@ -42,11 +44,15 @@ export function AcretonSprite({ job, size = 60, width, height, upperBodyOnly = f
   )
 }
 
-export function BelterraSprite({ size = 60, width, height, upperBodyOnly = false, fill = false }) {
+export function BelterraSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false }) {
+  const lane = getJobLane(job)
+  const isRanger = lane === 'ranger' && !fill
+  const srcImg = isRanger ? belterraRangerImg : (fill ? belterraPortraitImg : belterraPilotImg)
+  
   return (
     <TransparentSprite
-      src={fill ? belterraPortraitImg : belterraPilotImg}
-      alt="Belterra Pilot"
+      src={srcImg}
+      alt={`Belterra ${isRanger ? 'Ranger' : 'Pilot'}`}
       size={size}
       width={width}
       height={height}
@@ -57,11 +63,15 @@ export function BelterraSprite({ size = 60, width, height, upperBodyOnly = false
   )
 }
 
-export function CoralisSprite({ size = 60, width, height, upperBodyOnly = false, fill = false }) {
+export function CoralisSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false }) {
+  const lane = getJobLane(job)
+  const isRanger = lane === 'ranger' && !fill
+  const srcImg = isRanger ? coralisRangerImg : coralisPilotImg
+  
   return (
     <TransparentSprite
-      src={coralisPilotImg}
-      alt="Coralis Pilot"
+      src={srcImg}
+      alt={`Coralis ${isRanger ? 'Ranger' : 'Pilot'}`}
       size={size}
       width={width}
       height={height}
@@ -110,7 +120,7 @@ export function EnemySprite({ size = 60, isBoss = false, isPitBoss = false }) {
 
 export function PilotSprite({ race, job, size = 60, width, height, upperBodyOnly = false, fill = false }) {
   if (race === 'acreton') return <AcretonSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} />
-  if (race === 'belterra') return <BelterraSprite size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} />
-  if (race === 'coralis') return <CoralisSprite size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} />
+  if (race === 'belterra') return <BelterraSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} />
+  if (race === 'coralis') return <CoralisSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} />
   return null
 }
