@@ -4,6 +4,16 @@ import { useGameStore } from '../store/gameStore'
 import jobs from '../data/jobs.json'
 import { PilotSprite } from '../components/PilotSprites'
 
+import acretonTowerImg from '../assets/acreton_tower.png'
+import belterraTowerImg from '../assets/belterra_tower.png'
+import coralisTowerImg from '../assets/coralis_tower.png'
+
+const TOWER_IMAGES = {
+  acreton: acretonTowerImg,
+  belterra: belterraTowerImg,
+  coralis: coralisTowerImg
+}
+
 function getJobName(raceId, jobId) {
   if (!raceId || !jobId || !jobs[raceId]) return null
   const rJobs = jobs[raceId]
@@ -249,41 +259,58 @@ export default function Battle() {
           {chipLoading && !chipWar ? (
             <p style={{ textAlign: 'center', color: '#7ab0d0', padding: 32, fontSize: 13 }}>Loading war status...</p>
           ) : chipWar && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-              {chipWar.towers.map((tower) => {
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>              {chipWar.towers.map((tower) => {
                 const hpPct = tower.hp / tower.maxHp
                 const dmgColor = hpPct > 0.5 ? '#22c55e' : hpPct > 0.3 ? '#f5a623' : hpPct > 0.1 ? '#ef4444' : '#dc2626'
                 return (
-                  <div key={tower.towerId} className="glass-panel cyber-panel" style={{ ...styles.towerCard, borderColor: tower.race === player.race ? 'rgba(0, 229, 255, 0.5)' : 'rgba(255,255,255,0.08)' }}>
+                  <div key={tower.towerId} className="glass-panel cyber-panel" style={{ ...styles.towerCard, borderColor: tower.race === player.race ? 'rgba(0, 229, 255, 0.5)' : 'rgba(255,255,255,0.08)', minHeight: 155 }}>
                     {tower.race === player.race && (
                       <div style={styles.myRaceBadge}>YOUR TOWER</div>
                     )}
 
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-                      <div>
-                        <h3 style={{ margin: 0, fontSize: 17, textTransform: 'uppercase', color: tower.raceColor, fontFamily: 'var(--font-title)', letterSpacing: 1 }}>
-                          {tower.towerId} TOWER
-                        </h3>
-                        <p style={{ margin: '3px 0 0 0', fontSize: 12, color: '#7ab0d0' }}>{tower.race.toUpperCase()} Stronghold</p>
+                    {/* 2.5D Tower Image with smooth edges */}
+                    <img 
+                      src={TOWER_IMAGES[tower.race]} 
+                      alt={`${tower.race} tower`} 
+                      style={{
+                        position: 'absolute',
+                        right: 8,
+                        top: 12,
+                        height: 96,
+                        width: 78,
+                        objectFit: 'contain',
+                        pointerEvents: 'none',
+                        zIndex: 0
+                      }} 
+                    />
+
+                    <div style={{ position: 'relative', zIndex: 1, marginRight: 82 }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center', marginBottom: 10 }}>
+                        <div>
+                          <h3 style={{ margin: 0, fontSize: 17, textTransform: 'uppercase', color: tower.raceColor, fontFamily: 'var(--font-title)', letterSpacing: 1 }}>
+                            {tower.towerId} TOWER
+                          </h3>
+                          <p style={{ margin: '3px 0 0 0', fontSize: 12, color: '#7ab0d0' }}>{tower.race.toUpperCase()} Stronghold</p>
+                        </div>
+                        <div style={{ textAlign: 'right' }}>
+                          <span style={{ fontSize: 18, fontWeight: 'bold', color: dmgColor, fontFamily: 'var(--font-mono)' }}>
+                            {(tower.hp / 1_000_000).toFixed(1)}M
+                          </span>
+                          <p style={{ margin: '2px 0 0 0', fontSize: 11, color: '#7ab0d0' }}>/ {(tower.maxHp / 1_000_000).toFixed(0)}M HP</p>
+                        </div>
                       </div>
-                      <div style={{ textAlign: 'right' }}>
-                        <span style={{ fontSize: 18, fontWeight: 'bold', color: dmgColor, fontFamily: 'var(--font-mono)' }}>
-                          {(tower.hp / 1_000_000).toFixed(1)}M
-                        </span>
-                        <p style={{ margin: '2px 0 0 0', fontSize: 11, color: '#7ab0d0' }}>/ {(tower.maxHp / 1_000_000).toFixed(0)}M HP</p>
+
+                      <div style={{ width: '100%', height: 8, background: '#091424', borderRadius: 4, overflow: 'hidden', marginBottom: 12, border: '1px solid rgba(255,255,255,0.05)' }}>
+                        <div style={{ height: '100%', width: `${hpPct * 100}%`, background: `linear-gradient(90deg, ${dmgColor}, ${dmgColor}88)`, borderRadius: 4, transition: 'width 0.3s' }} />
+                      </div>
+
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 11, color: '#7ab0d0', fontFamily: 'var(--font-mono)', marginBottom: 12 }}>
+                        <span>Race Damage: <span style={{ color: '#f5a623' }}>{(tower.raceDamage / 1_000_000).toFixed(1)}M</span></span>
+                        <span>Dmg Multiplier: <span style={{ color: '#00e5ff' }}>×{tower.dmgMultiplier.toFixed(2)}</span></span>
                       </div>
                     </div>
 
-                    <div style={{ width: '100%', height: 8, background: '#091424', borderRadius: 4, overflow: 'hidden', marginBottom: 12, border: '1px solid rgba(255,255,255,0.05)' }}>
-                      <div style={{ height: '100%', width: `${hpPct * 100}%`, background: `linear-gradient(90deg, ${dmgColor}, ${dmgColor}88)`, borderRadius: 4, transition: 'width 0.3s' }} />
-                    </div>
-
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 11, color: '#7ab0d0', fontFamily: 'var(--font-mono)', marginBottom: 12 }}>
-                      <span>Race Damage: <span style={{ color: '#f5a623' }}>{(tower.raceDamage / 1_000_000).toFixed(1)}M</span></span>
-                      <span>Dmg Multiplier: <span style={{ color: '#00e5ff' }}>×{tower.dmgMultiplier.toFixed(2)}</span></span>
-                    </div>
-
-                    <div style={{ display: 'flex', gap: 6 }}>
+                    <div style={{ display: 'flex', gap: 6, position: 'relative', zIndex: 1 }}>
                       {tower.raceDamage > 0 && (
                         <button
                           onClick={() => handleChipAttack(tower.towerId, tower.raceDamage)}
