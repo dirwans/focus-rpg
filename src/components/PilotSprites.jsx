@@ -6,7 +6,7 @@ import belterraPilotImg from '../assets/belterra_pilot_v3.png'
 import belterraPortraitImg from '../assets/belterra_pilot_portrait.png'
 import belterraWarriorImg from '../assets/belterra_warrior.png'
 import belterraRangerImg from '../assets/belterra_ranger.png'
-import belterraSpecialistImg from '../assets/belterra_specialist.png'
+import coralisPilotImg from '../assets/coralis_pilot_v2.png'
 
 function getJobLane(jobId) {
   if (!jobId) return 'warrior'
@@ -69,12 +69,14 @@ export function BelterraSprite({ size = 60, width, height, upperBodyOnly = false
 
 export function CoralisSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false }) {
   const lane = getJobLane(job)
-  let srcImg = belterraWarriorImg
+  let srcImg = coralisPilotImg
   
-  if (lane === 'ranger') {
-    srcImg = belterraRangerImg
-  } else if (lane === 'specialist') {
-    srcImg = belterraSpecialistImg
+  if (job) {
+    if (lane === 'warrior') {
+      srcImg = belterraWarriorImg
+    } else if (lane === 'ranger') {
+      srcImg = belterraRangerImg
+    }
   }
   
   return (
