@@ -14,6 +14,8 @@ import coralisRangerImg from '../assets/coralis_ranger.png'
 import coralisRangerPortraitImg from '../assets/coralis_ranger_portrait.png'
 import coralisSpecialistImg from '../assets/coralis_specialist.png'
 import coralisSpecialistPortraitImg from '../assets/coralis_specialist_portrait.png'
+import coralisMysticImg from '../assets/coralis_mystic.png'
+import coralisMysticPortraitImg from '../assets/coralis_mystic_portrait.png'
 
 function getJobLane(jobId) {
   if (!jobId) return 'warrior'
@@ -27,10 +29,14 @@ function getJobLane(jobId) {
     'ranger', 'sharpshooter', 'railgun_elite',
     'mystic_archer', 'moon_ranger', 'star_seeker'
   ]
-  // specialist = all other Coralis jobs (acolyte, eidolon_caller, high_summoner,
-  //              mystic, caster, summoner, warlock, dark_priest, grazier)
+  const mysticJobs = [
+    'mystic', 'caster', 'summoner',
+    'warlock', 'dark_priest', 'grazier'
+  ]
+  // specialist = all other Coralis jobs (acolyte, eidolon_caller, high_summoner)
   if (warriorJobs.includes(jobId)) return 'warrior'
   if (rangerJobs.includes(jobId)) return 'ranger'
+  if (mysticJobs.includes(jobId)) return 'mystic'
   return 'specialist'
 }
 
@@ -91,6 +97,8 @@ export function CoralisSprite({ job, size = 60, width, height, upperBodyOnly = f
       srcImg = fill ? coralisRangerPortraitImg : coralisRangerImg
     } else if (lane === 'specialist') {
       srcImg = fill ? coralisSpecialistPortraitImg : coralisSpecialistImg
+    } else if (lane === 'mystic') {
+      srcImg = fill ? coralisMysticPortraitImg : coralisMysticImg
     }
   }
   
