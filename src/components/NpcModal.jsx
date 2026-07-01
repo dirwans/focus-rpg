@@ -3,7 +3,7 @@ import { useGameStore } from '../store/gameStore'
 import races from '../data/races.json'
 import jobs from '../data/jobs.json'
 import itemsData from '../data/items.json'
-import { PilotSprite } from './PilotSprites'
+import { JobBadge } from './PilotSprites'
 import { t } from '../lib/translate'
 
 const PROMO_COSTS = {
@@ -214,7 +214,9 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
               {/* NPC avatar & bubble */}
               <div style={styles.avatarRow}>
                 <div style={styles.npcAvatarLarge}>
-                  <PilotSprite race={player.race} job={player.job} size={80} />
+                  <div style={{ fontSize: 38, textAlign: 'center', lineHeight: '80px' }}>
+                    {player.race === 'acreton' ? '🔩' : player.race === 'belterra' ? '⚙️' : '🔮'}
+                  </div>
                 </div>
                 <div style={styles.npcDialog}>"{specialistDialogue}"</div>
               </div>
@@ -235,12 +237,12 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                   const raceColor = player.race === 'acreton' ? '#ff3d00' : player.race === 'belterra' ? '#ffd600' : '#00e5ff'
 
                   return (
-                    <div 
-                      key={laneIdx} 
+                    <div
+                      key={laneIdx}
                       onClick={() => setActiveLaneIdx(laneIdx)}
                       style={styles.tabCard(isActive, raceColor)}
                     >
-                      <PilotSprite race={player.race} job={t1Job.id} size={40} />
+                      <JobBadge race={player.race} jobId={t1Job.id} size={40} />
                       <span style={styles.tabTitle}>{lane.title.replace(" Lane", "").toUpperCase()}</span>
                     </div>
                   )
@@ -300,10 +302,8 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                               }}
                             >
                               <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-                                {/* Dynamic Sprite Icon */}
-                                <div style={styles.cardSpriteWrap}>
-                                  <PilotSprite race={player.race} job={j.id} size={44} />
-                                </div>
+                                {/* Job Badge — no background issues */}
+                                <JobBadge race={player.race} jobId={j.id} size={44} />
                                 <div style={{ flex: 1, minWidth: 0 }}>
                                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                     <span style={styles.cardJobName}>{j.name}</span>
@@ -847,18 +847,6 @@ const styles = {
     boxShadow: unlocked ? '0 0 8px var(--neon-glow)' : 'none',
     zIndex: 0
   }),
-  cardSpriteWrap: {
-    width: 44,
-    height: 44,
-    borderRadius: 6,
-    overflow: 'hidden',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    background: 'rgba(0,0,0,0.4)',
-    border: '1px solid rgba(255,255,255,0.08)',
-    flexShrink: 0
-  },
   cardJobName: {
     fontFamily: 'var(--font-title)',
     fontSize: 15,
