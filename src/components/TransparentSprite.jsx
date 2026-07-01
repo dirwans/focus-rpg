@@ -245,8 +245,14 @@ export default function TransparentSprite({
     img.src = finalSrc
   }, [src, disableKeying])
 
-  const displaySrc = disableKeying ? src : (processedSrc || src)
-  const isFallback = !disableKeying && (displaySrc === src)
+  const isRemote = src && (src.startsWith('http://') || src.startsWith('https://'))
+  const apiBase = import.meta.env.VITE_API_URL || ''
+  const proxiedSrc = isRemote 
+    ? `${apiBase}/api/proxy-image?url=${encodeURIComponent(src)}` 
+    : src
+
+  const displaySrc = disableKeying ? proxiedSrc : (processedSrc || proxiedSrc)
+  const isFallback = !disableKeying && (displaySrc === proxiedSrc)
 
   if (fill) {
     const fillH = height || 150
