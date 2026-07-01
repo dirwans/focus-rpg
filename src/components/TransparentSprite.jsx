@@ -256,6 +256,32 @@ export default function TransparentSprite({
 
   if (fill) {
     const fillH = height || 150
+    const isCoralis = src && src.includes('coralis_')
+    const isRanger = src && src.includes('coralis_ranger')
+    const isSpecialist = src && src.includes('coralis_specialist')
+    
+    // Zoom/position values for 3x4 ID card (Head-to-Chest view)
+    let zoomHeight = fillH * 2.3
+    let topPosition = '-10%'
+    
+    if (isCoralis) {
+      if (isRanger) {
+        // Elf Archer needs specific zoom and center alignment to hide bow cropping & focus chest/head
+        zoomHeight = fillH * 2.05
+        topPosition = '-3%'
+      } else if (isSpecialist) {
+        zoomHeight = fillH * 2.1
+        topPosition = '-8%'
+      } else {
+        // Default Coralis Warrior (Gada/Shield)
+        zoomHeight = fillH * 2.2
+        topPosition = '-5%'
+      }
+    } else if (src && src.includes('belterra')) {
+      zoomHeight = fillH * 2.1
+      topPosition = '-5%'
+    }
+    
     return (
       <div style={{ width: width || size, height: fillH, overflow: 'hidden', position: 'relative', flexShrink: 0 }}>
         {displaySrc && (
@@ -264,10 +290,10 @@ export default function TransparentSprite({
             alt={alt}
             style={{
               position: 'absolute',
-              top: 0,
+              top: topPosition,
               left: '50%',
               transform: 'translateX(-50%)',
-              height: fillH * 2,
+              height: zoomHeight,
               width: 'auto',
               maxWidth: 'none',
               maxHeight: 'none',
