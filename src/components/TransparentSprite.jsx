@@ -278,8 +278,19 @@ export default function TransparentSprite({
         topPosition = '-5%'
       }
     } else if (src && src.includes('belterra')) {
-      zoomHeight = fillH * 2.1
-      topPosition = '-5%'
+      const isBelterraRanger = src.includes('belterra_ranger')
+      const isBelterraSpecialist = src.includes('belterra_specialist')
+      if (isBelterraRanger) {
+        zoomHeight = fillH * 2.1
+        topPosition = '-5%'
+      } else if (isBelterraSpecialist) {
+        zoomHeight = fillH * 2.15
+        topPosition = '-7%'
+      } else {
+        // Belterra Warrior
+        zoomHeight = fillH * 2.2
+        topPosition = '-6%'
+      }
     }
     
     return (

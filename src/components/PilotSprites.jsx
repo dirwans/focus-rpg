@@ -2,10 +2,10 @@ import TransparentSprite from './TransparentSprite'
 import acretonWarriorImg from '../assets/acreton_warrior.png'
 import acretonRangerImg from '../assets/acreton_ranger.png'
 import acretonSpecialistImg from '../assets/acreton_specialist.png'
-import belterraPilotImg from '../assets/belterra_pilot_v3.png'
-import belterraPortraitImg from '../assets/belterra_pilot_portrait.png'
+import belterraWarriorImg from '../assets/belterra_warrior.png'
 import belterraRangerImg from '../assets/belterra_ranger.png'
-import coralisPilotImg from '../assets/coralis_pilot_v2.png'
+import belterraSpecialistImg from '../assets/belterra_specialist.png'
+import coralisWarriorImg from '../assets/coralis_warrior.png'
 import coralisRangerImg from '../assets/coralis_ranger.png'
 import coralisSpecialistImg from '../assets/coralis_specialist.png'
 
@@ -53,11 +53,20 @@ export function AcretonSprite({ job, size = 60, width, height, upperBodyOnly = f
   )
 }
 
-export function BelterraSprite({ size = 60, width, height, upperBodyOnly = false, fill = false }) {
+export function BelterraSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false }) {
+  const lane = getJobLane(job)
+  let srcImg = belterraWarriorImg
+  
+  if (lane === 'ranger') {
+    srcImg = belterraRangerImg
+  } else if (lane === 'specialist') {
+    srcImg = belterraSpecialistImg
+  }
+  
   return (
     <TransparentSprite
-      src={fill ? belterraPortraitImg : belterraPilotImg}
-      alt="Belterra Pilot"
+      src={srcImg}
+      alt={`Belterra ${lane}`}
       size={size}
       width={width}
       height={height}
@@ -130,7 +139,7 @@ export function EnemySprite({ size = 60, isBoss = false, isPitBoss = false }) {
 
 export function PilotSprite({ race, job, size = 60, width, height, upperBodyOnly = false, fill = false }) {
   if (race === 'acreton') return <AcretonSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} />
-  if (race === 'belterra') return <BelterraSprite size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} />
+  if (race === 'belterra') return <BelterraSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} />
   if (race === 'coralis') return <CoralisSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} />
   return null
 }
