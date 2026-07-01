@@ -259,12 +259,16 @@ export default function TransparentSprite({
     const isCoralis = src && src.includes('coralis_')
     const isRanger = src && src.includes('coralis_ranger')
     const isSpecialist = src && src.includes('coralis_specialist')
+    const isRangerPortrait = src && src.includes('belterra_ranger_portrait')
     
     // Zoom/position values for 3x4 ID card (Head-to-Chest view)
     let zoomHeight = fillH * 2.3
     let topPosition = '-10%'
     
-    if (isCoralis) {
+    if (isRangerPortrait) {
+      zoomHeight = fillH * 1.05
+      topPosition = '0%'
+    } else if (isCoralis) {
       if (isRanger) {
         // Elf Archer needs specific zoom and center alignment to hide bow cropping & focus chest/head
         zoomHeight = fillH * 2.05
@@ -299,6 +303,7 @@ export default function TransparentSprite({
           <img
             src={displaySrc}
             alt={alt}
+            className="transparent-sprite-img"
             style={{
               position: 'absolute',
               top: topPosition,
@@ -321,6 +326,7 @@ export default function TransparentSprite({
         <img
           src={displaySrc}
           alt={alt}
+          className="transparent-sprite-img"
           style={{
             width: '100%',
             height: '100%',

@@ -1155,3 +1155,10 @@ body {
   z-index: 20;
   pointer-events: none;
 }
+
+/* Global brightness, contrast, and saturation enhancements for all sprites, towers, monsters, and bosses */
+.transparent-sprite-img,
+.tower-3d-card img,
+.pixel-art {
+  filter: brightness(1.28) contrast(1.2) saturate(1.1) !important;
+}
