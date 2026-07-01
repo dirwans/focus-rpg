@@ -27,16 +27,16 @@
       { "id": "spirit_knight", "name": "Spirit Knight", "desc": "Ksatria berpedang energi aura", "bonus": { "hp": 300, "atk": 15, "def": 35 }, "skills": ["Spirit Blade", "Holy Aegis"] },
       { "id": "eidolon_caller", "name": "Eidolon Caller", "desc": "Pemanggil makhluk spiritual (Eidolon)", "bonus": { "hp": 100, "atk": 45, "def": 10 }, "skills": ["Summon Pixie", "Mana Burn"] },
       { "id": "moon_ranger", "name": "Moon Ranger", "desc": "Pemanah taktis siluman bulan", "bonus": { "hp": 150, "atk": 40, "def": 15 }, "skills": ["Lunar Piercer", "Shadow Step"] },
-      { "id": "caster", "name": "Caster", "desc": "Aggressive Force combatant channelling Dark Force expressly for combat", "bonus": { "hp": 80, "atk": 50, "def": 5 }, "skills": ["Channel"] },
-      { "id": "summoner", "name": "Summoner", "desc": "Wields Force to draw and control spiritual Animus beings", "bonus": { "hp": 60, "atk": 40, "def": 8 }, "skills": ["Animus Bond", "Force Draw"] }
+      { "id": "caster", "name": "Caster", "levelReq": 30, "desc": "Aggressive Force combatant channelling Dark Force expressly for combat", "bonus": { "hp": 80, "atk": 50, "def": 5 }, "skills": ["Channel (+35% ATK with Force Attack)"] },
+      { "id": "summoner", "name": "Summoner", "levelReq": 30, "desc": "Wields Force to draw and control spiritual Animus (Grazier-path prerequisite)", "bonus": { "hp": 60, "atk": 40, "def": 8 }, "skills": ["Animus Call", "Spirit Wield"] }
     ],
     "tier3": [
       { "id": "lumina_paladin", "name": "Lumina Paladin", "desc": "Ksatria pelindung abadi tak tertembus", "bonus": { "hp": 900, "atk": 50, "def": 90 }, "skills": ["Guardian Shield", "Revenge Strike"] },
       { "id": "high_summoner", "name": "High Summoner", "desc": "Pemanggil Eidolon tingkat tinggi Hecate", "bonus": { "hp": 250, "atk": 140, "def": 25 }, "skills": ["Summon Hecate", "Mana Shield"] },
       { "id": "star_seeker", "name": "Star Seeker", "desc": "Pemburu berpanah bintang pemecah gravitasi", "bonus": { "hp": 400, "atk": 110, "def": 40 }, "skills": ["Meteor Arrow", "Gravity Bind"] },
-      { "id": "warlock", "name": "Warlock", "desc": "Most efficient Force users — renders foes immobile and wields Force to devastating effect", "bonus": { "hp": 200, "atk": 160, "def": 15 }, "skills": ["Focus", "Stone Curse", "Striking Force"] },
-      { "id": "dark_priest", "name": "Dark Priest", "desc": "Support Force wielder — instantly transports comrades to safety by DECEM's blessing", "bonus": { "hp": 350, "atk": 80, "def": 30 }, "skills": ["Force Shield", "Return Gate", "Escape"] },
-      { "id": "grazier", "name": "Grazier", "desc": "Trained to call and control the most powerful Anima of the spirit world", "bonus": { "hp": 300, "atk": 120, "def": 25 }, "skills": ["Animus Rest", "Fast Recall", "Anima Maxima", "Life Conflict"] }
+      { "id": "warlock", "name": "Warlock", "levelReq": 40, "desc": "Most efficient Force users — renders foes immobile and wields Force to devastating effect", "bonus": { "hp": 200, "atk": 160, "def": 15 }, "skills": ["Focus (+20 Crit, +10% Force ATK, +30 Force ACC)", "Stone Curse (Debuff)", "Striking Force (Non-elem Force ATK)"] },
+      { "id": "dark_priest", "name": "Dark Priest", "levelReq": 40, "desc": "Support Force wielder blessed by DECEM — instantly transports comrades to safety", "bonus": { "hp": 350, "atk": 80, "def": 30 }, "skills": ["Force Shield (Barrier, -2FP/dmg)", "Return Gate (Warp party to bind)", "Escape (Return caster to bind)"] },
+      { "id": "grazier", "name": "Grazier", "levelReq": 40, "desc": "Trained to call and control the most powerful Anima of the spirit world", "bonus": { "hp": 300, "atk": 120, "def": 25 }, "skills": ["Animus Rest (Revitalize Animus)", "Fast Recall (Cancel summon wait)", "Anima Maxima (+50% Isis ATK, +30% Paimon DEF, +10% Hecate AoE, +30% Inana Heal)", "Life Conflict (+10% HP, +5% Skill ATK)"] }
     ]
   },
 

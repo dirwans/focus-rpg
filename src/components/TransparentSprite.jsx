@@ -110,16 +110,20 @@ export default function TransparentSprite({
           const b = data[pixelIdx+2]
           const a = data[pixelIdx+3]
           
-          // Check if this pixel is background (black background, green chroma key, or white background)
-          // IMPORTANT: Use VERY strict threshold for black to avoid eating into character dark areas
-          // Only treat near-pure black pixels as background (not dark pixels that are part of the character)
-          const isBlackBg = a === 0 || (r < 20 && g < 20 && b < 20)
-          const isGreenBg = g > 80 && g > r + 25 && g > b + 25 && r < 150 && b < 150
-          const isWhiteBg = r > 220 && g > 220 && b > 220
-          
-          if (isBlackBg || isGreenBg || isWhiteBg) {
+          // Check if this pixel is background
+          // IMPORTANT: Only near-pure black pixels touching the BORDER are treated as background.
+          // Interior dark pixels are kept as character (outfit/hair). Green screen and white bg also removed.
+          const isPureBlackBg = r < 25 && g < 25 && b < 25
+          const isGreenBg = g > 90 && g > r + 30 && g > b + 30 && r < 140 && b < 140
+          const isWhiteBg = r > 225 && g > 225 && b > 225
+          const isBorder = x <= 3 || x >= W - 4 || y <= 3 || y >= H - 4
+
+          // Background = alpha=0 OR (border-touching near-black) OR green screen OR near-white
+          const isBg = a === 0 || (isBorder && isPureBlackBg) || isGreenBg || isWhiteBg
+
+          if (isBg) {
             data[pixelIdx + 3] = 0 // transparent
-            
+
             // Push 4 neighbors
             if (x - 1 >= 0) pushPixel(x - 1, y)
             if (x + 1 < W) pushPixel(x + 1, y)
