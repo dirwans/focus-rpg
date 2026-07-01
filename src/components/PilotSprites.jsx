@@ -7,6 +7,7 @@ import belterraPortraitImg from '../assets/belterra_pilot_portrait.png'
 import belterraRangerImg from '../assets/belterra_ranger.png'
 import coralisPilotImg from '../assets/coralis_pilot_v2.png'
 import coralisRangerImg from '../assets/coralis_ranger.png'
+import coralisSpecialistImg from '../assets/coralis_specialist.png'
 
 function getJobLane(jobId) {
   if (!jobId) return 'warrior'
@@ -69,13 +70,18 @@ export function BelterraSprite({ size = 60, width, height, upperBodyOnly = false
 
 export function CoralisSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false }) {
   const lane = getJobLane(job)
-  const isRanger = lane === 'ranger'
-  const srcImg = isRanger ? coralisRangerImg : coralisPilotImg
+  let srcImg = coralisPilotImg
+  
+  if (lane === 'ranger') {
+    srcImg = coralisRangerImg
+  } else if (lane === 'specialist') {
+    srcImg = coralisSpecialistImg
+  }
   
   return (
     <TransparentSprite
       src={srcImg}
-      alt={`Coralis ${isRanger ? 'Ranger' : 'Pilot'}`}
+      alt={`Coralis ${lane}`}
       size={size}
       width={width}
       height={height}
