@@ -3,6 +3,7 @@ import { useGameStore } from '../store/gameStore'
 import { useAuthStore } from '../store/authStore'
 import races from '../data/races.json'
 import enemies from '../data/enemies.json'
+import jobs from '../data/jobs.json'
 import { PilotSprite, EnemySprite } from '../components/PilotSprites'
 import TransparentSprite from '../components/TransparentSprite'
 import { t } from '../lib/translate'
@@ -34,6 +35,7 @@ export default function Main() {
 
   const [showSettings, setShowSettings] = useState(false)
   const [showNpcModal, setShowNpcModal] = useState(false)
+  const [npcInitialView, setNpcInitialView] = useState('lobby')
 
 
   const stats   = getStats()
@@ -44,6 +46,22 @@ export default function Main() {
   const enemy   = enemies.sectors[sectorIdx]
   const isRunning = timer.state === 'running'
   const isDone    = timer.state === 'completed'
+
+  const getJobTier = (raceId, jobId) => {
+    if (!raceId || !jobId || !jobs[raceId]) return 0
+    const rJobs = jobs[raceId]
+    if (rJobs.tier1.some(j => j.id === jobId)) return 1
+    if (rJobs.tier2.some(j => j.id === jobId)) return 2
+    if (rJobs.tier3.some(j => j.id === jobId)) return 3
+    return 0
+  }
+
+  const tier = getJobTier(player.race, player.job)
+  const eligibleForPromo = player.race && (
+    (tier === 0 && player.level >= 1) ||
+    (tier === 1 && player.level >= 30) ||
+    (tier === 2 && player.level >= 50)
+  )
 
   // Visual Effects State
   const [particles, setParticles] = useState([])
@@ -457,6 +475,18 @@ export default function Main() {
               </div>
             </div>
 
+            {eligibleForPromo && (
+              <button 
+                className={`profile-promo-btn btn-${player.race}`}
+                onClick={() => {
+                  setNpcInitialView('promote')
+                  setShowNpcModal(true)
+                }}
+              >
+                🚀 {tier === 0 ? (t('select_job') || "SELECT JOB") : (t('promo_unit') || "PROMOTE UNIT")}
+              </button>
+            )}
+
           </div>
         </div>
 
@@ -502,7 +532,7 @@ export default function Main() {
       )}
       
       {showSettings && <SettingsModal onClose={() => setShowSettings(false)} />}
-      {showNpcModal && <NpcModal onClose={() => setShowNpcModal(false)} />}
+      {showNpcModal && <NpcModal onClose={() => setShowNpcModal(false)} initialView={npcInitialView} />}
 
     </div>
   )

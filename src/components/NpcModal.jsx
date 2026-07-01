@@ -7,9 +7,9 @@ import { PilotSprite } from './PilotSprites'
 import { t } from '../lib/translate'
 
 const PROMO_COSTS = {
-  1: 1000,
-  2: 10000,
-  3: 30000,
+  1: 0,
+  2: 0,
+  3: 0,
 }
 const RECLASS_COST = 5000
 
@@ -25,13 +25,13 @@ function getJobInfo(raceId, jobId) {
   return { tier: 0, job: null }
 }
 
-export default function NpcModal({ onClose }) {
+export default function NpcModal({ onClose, initialView = 'lobby' }) {
   const player = useGameStore((s) => s.player)
   const getStats = useGameStore((s) => s.getStats)
   const reclassJob = useGameStore((s) => s.reclassJob)
   const craftArchonItem = useGameStore((s) => s.craftArchonItem)
 
-  const [subView, setSubView] = useState('lobby') // 'lobby', 'specialist', 'hero', 'promote', 'reclass', 'shop'
+  const [subView, setSubView] = useState(initialView) // 'lobby', 'specialist', 'hero', 'promote', 'reclass', 'shop'
 
   if (!player.race) {
     return (
@@ -201,7 +201,7 @@ export default function NpcModal({ onClose }) {
                     style={canPromote ? styles.actionBtn('#ffe500', '#cc8000') : styles.actionBtnDisabled}
                     disabled={!canPromote}
                   >
-                    🚀 {t('promo_btn', { fee: promoCost.toLocaleString() })}
+                    🚀 {promoCost === 0 ? (t('promo_btn_free') || "SELECT NEXT JOB (FREE)") : t('promo_btn', { fee: promoCost.toLocaleString() })}
                   </button>
                 )}
 

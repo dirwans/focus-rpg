@@ -1038,3 +1038,50 @@ body {
     inset 0 0 15px rgba(0, 229, 255, 0.2);
   transform: translateY(-2px);
 }
+
+/* Profile Promotion Button - Cyberpunk Themed */
+.profile-promo-btn {
+  display: block;
+  width: 100%;
+  padding: 8px 10px;
+  margin-top: 8px;
+  color: #ffffff;
+  font-family: var(--font-title);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-align: center;
+  border-radius: 4px;
+  animation: pulseGlow 2s infinite ease-in-out;
+}
+
+.profile-promo-btn.btn-acreton {
+  background: linear-gradient(90deg, #b71c1c, #d32f2f);
+  border: 1.5px solid #ff5252;
+  box-shadow: 0 0 12px rgba(244, 67, 54, 0.4);
+}
+.profile-promo-btn.btn-belterra {
+  background: linear-gradient(90deg, #fbc02d, #fdd835);
+  border: 1.5px solid #ffff8d;
+  color: #0d1e3d;
+  box-shadow: 0 0 12px rgba(253, 216, 53, 0.4);
+}
+.profile-promo-btn.btn-coralis {
+  background: linear-gradient(90deg, #00838f, #0097a7);
+  border: 1.5px solid #00e5ff;
+  box-shadow: 0 0 12px rgba(0, 188, 212, 0.4);
+}
+
+.profile-promo-btn:hover {
+  filter: brightness(1.2);
+  transform: scale(1.02);
+}
+
+@keyframes pulseGlow {
+  0% { opacity: 0.9; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.01); filter: brightness(1.1); }
+  100% { opacity: 0.9; transform: scale(1); }
+}
