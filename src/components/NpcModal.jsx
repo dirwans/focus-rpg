@@ -43,6 +43,21 @@ function getJobInfo(raceId, jobId) {
   return { tier: 0, job: null }
 }
 
+function getPlayerLaneIndex(raceId, jobId) {
+  if (!raceId || !jobId || !CLASS_LANES[raceId]) return 0
+  const lanes = CLASS_LANES[raceId]
+  for (let i = 0; i < lanes.length; i++) {
+    const indices = lanes[i].indices
+    const t1 = jobs[raceId].tier1[indices[0]]?.id
+    const t2 = jobs[raceId].tier2[indices[1]]?.id
+    const t3 = jobs[raceId].tier3[indices[2]]?.id
+    if (jobId === t1 || jobId === t2 || jobId === t3) {
+      return i
+    }
+  }
+  return 0
+}
+
 export default function NpcModal({ onClose, initialView = 'lobby' }) {
   const player = useGameStore((s) => s.player)
   const getStats = useGameStore((s) => s.getStats)
@@ -50,6 +65,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
   const craftArchonItem = useGameStore((s) => s.craftArchonItem)
 
   const [subView, setSubView] = useState(initialView) // 'lobby', 'specialist', 'hero', 'promote', 'reclass', 'shop'
+  const [activeLaneIdx, setActiveLaneIdx] = useState(() => getPlayerLaneIndex(player.race, player.job))
 
   if (!player.race) {
     return (
@@ -211,19 +227,39 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                 </div>
               </div>
 
-              {/* Class Tree Horizontal Scroll Container */}
-              <div className="class-tree-wrapper no-scrollbar" style={styles.treeWrapper}>
+              {/* Lane Selector Tabs */}
+              <div style={styles.tabsContainer}>
                 {CLASS_LANES[player.race]?.map((lane, laneIdx) => {
-                  // Fetch the three jobs for this lane
+                  const t1Job = jobs[player.race].tier1[lane.indices[0]]
+                  const isActive = activeLaneIdx === laneIdx
+                  const raceColor = player.race === 'acreton' ? '#ff3d00' : player.race === 'belterra' ? '#ffd600' : '#00e5ff'
+
+                  return (
+                    <div 
+                      key={laneIdx} 
+                      onClick={() => setActiveLaneIdx(laneIdx)}
+                      style={styles.tabCard(isActive, raceColor)}
+                    >
+                      <PilotSprite race={player.race} job={t1Job.id} size={40} />
+                      <span style={styles.tabTitle}>{lane.title.replace(" Lane", "").toUpperCase()}</span>
+                    </div>
+                  )
+                })}
+              </div>
+
+              {/* Active Class Lane Tree */}
+              <div className="class-tree-wrapper no-scrollbar" style={styles.treeWrapper}>
+                {(() => {
+                  const lane = CLASS_LANES[player.race]?.[activeLaneIdx]
+                  if (!lane) return null
+
                   const t1Job = jobs[player.race].tier1[lane.indices[0]]
                   const t2Job = jobs[player.race].tier2[lane.indices[1]]
                   const t3Job = jobs[player.race].tier3[lane.indices[2]]
                   const laneJobs = [t1Job, t2Job, t3Job]
 
                   return (
-                    <div key={laneIdx} className="class-tree-col" style={styles.treeCol}>
-                      <div style={styles.laneTitle}>{lane.title.toUpperCase()}</div>
-
+                    <div className="class-tree-col" style={{ ...styles.treeCol, width: '100%' }}>
                       {laneJobs.map((j, tIdx) => {
                         const jTier = tIdx + 1
                         const isActive = player.job === j.id
@@ -340,7 +376,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                       })}
                     </div>
                   )
-                })}
+                })()}
               </div>
 
               <button onClick={() => setSubView('lobby')} style={styles.backBtn}>
@@ -741,6 +777,39 @@ const styles = {
     padding: '4px 0 12px 0',
     width: '100%',
     boxSizing: 'border-box'
+  },
+  tabsContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    gap: 8,
+    width: '100%',
+    boxSizing: 'border-box',
+    marginBottom: 8
+  },
+  tabCard: (isActive, raceColor) => ({
+    flex: 1,
+    background: 'rgba(4, 10, 24, 0.7)',
+    border: isActive ? `2px solid ${raceColor}` : '1.5px solid rgba(255,255,255,0.1)',
+    borderRadius: 8,
+    padding: '6px 4px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 4,
+    cursor: 'pointer',
+    opacity: isActive ? 1 : 0.45,
+    boxShadow: isActive ? `0 0 10px ${raceColor}` : 'none',
+    transition: 'all 0.2s ease-in-out'
+  }),
+  tabTitle: {
+    fontFamily: 'var(--font-title)',
+    fontSize: 10,
+    fontWeight: 900,
+    color: '#fff',
+    letterSpacing: 0.5,
+    textAlign: 'center',
+    textTransform: 'uppercase'
   },
   treeCol: {
     display: 'flex',
