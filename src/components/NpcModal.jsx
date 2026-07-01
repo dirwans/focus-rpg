@@ -554,8 +554,8 @@ const styles = {
   npcDialog: {
     flex: 1,
     fontStyle: 'italic',
-    color: '#88aadd',
-    fontSize: 12,
+    color: '#ffffff',
+    fontSize: 14,
     background: 'rgba(3, 8, 20, 0.8)',
     borderLeft: '3px solid var(--neon-glow)',
     padding: '8px 10px',
@@ -861,31 +861,31 @@ const styles = {
   },
   cardJobName: {
     fontFamily: 'var(--font-title)',
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: 900,
     color: '#fff',
     letterSpacing: 0.5
   },
   cardJobDesc: {
     fontFamily: 'var(--font-body)',
-    fontSize: 12,
-    color: '#7ab0d0',
+    fontSize: 14,
+    color: '#ffffff',
     marginTop: 2,
     textAlign: 'left',
-    lineHeight: 1.2
+    lineHeight: 1.25
   },
   cardJobBonus: {
     fontFamily: 'var(--font-mono)',
-    fontSize: 12,
-    color: '#e0f4ff',
+    fontSize: 13,
+    color: '#ffd700',
     marginTop: 4,
     fontWeight: 800,
     textAlign: 'left'
   },
   cardJobSkills: {
     fontFamily: 'var(--font-mono)',
-    fontSize: 12,
-    color: '#6ab0d4',
+    fontSize: 13,
+    color: '#aae2ff',
     marginTop: 2,
     fontWeight: 800,
     textAlign: 'left'

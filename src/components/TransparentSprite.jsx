@@ -51,8 +51,8 @@ export default function TransparentSprite({ src, alt, size = 120, width, height,
         const borderThreshX = Math.floor(W * 0.06)
         const borderThreshY = Math.floor(H * 0.06)
 
+        // 1. Force outer 6% edge transparent only if the source has no transparency
         if (!hasTransparency) {
-          // 1. Force outer 6% edge transparent to completely erase hard border frames
           for (let y = 0; y < H; y++) {
             for (let x = 0; x < W; x++) {
               if (x < borderThreshX || x > (W - borderThreshX) || y < borderThreshY || y > (H - borderThreshY)) {
@@ -61,67 +61,68 @@ export default function TransparentSprite({ src, alt, size = 120, width, height,
               }
             }
           }
+        }
 
-          // 2. Queue-based Flood Fill (BFS) to remove background while keeping the body solid
-          const queue = []
-          const visited = new Uint8Array(W * H)
-          
-          const pushPixel = (x, y) => {
-            if (x < borderThreshX || x >= W - borderThreshX || y < borderThreshY || y >= H - borderThreshY) return
-            const idx = y * W + x
-            if (!visited[idx]) {
-              visited[idx] = 1
-              queue.push(idx)
-            }
+        // 2. Queue-based Flood Fill (BFS) to remove background - always run this to clean any black boxes!
+        const queue = []
+        const visited = new Uint8Array(W * H)
+        
+        const pushPixel = (x, y) => {
+          if (x < 0 || x >= W || y < 0 || y >= H) return
+          const idx = y * W + x
+          if (!visited[idx]) {
+            visited[idx] = 1
+            queue.push(idx)
           }
-          
-          // Seed the queue with all pixels along the new boundary
-          for (let x = borderThreshX; x < W - borderThreshX; x++) {
-            pushPixel(x, borderThreshY)
-            pushPixel(x, H - borderThreshY - 1)
-          }
-          for (let y = borderThreshY; y < H - borderThreshY; y++) {
-            pushPixel(borderThreshX, y)
-            pushPixel(W - borderThreshX - 1, y)
-          }
+        }
+        
+        // Seed queue from the 4 outer borders
+        for (let x = 0; x < W; x++) {
+          pushPixel(x, 0)
+          pushPixel(x, H - 1)
+        }
+        for (let y = 0; y < H; y++) {
+          pushPixel(0, y)
+          pushPixel(W - 1, y)
+        }
 
-          // Run BFS
-          let qHead = 0
-          while (qHead < queue.length) {
-            const idx = queue[qHead++]
-            const x = idx % W
-            const y = Math.floor(idx / W)
+        // Run BFS
+        let qHead = 0
+        while (qHead < queue.length) {
+          const idx = queue[qHead++]
+          const x = idx % W
+          const y = Math.floor(idx / W)
+          
+          const pixelIdx = idx * 4
+          const r = data[pixelIdx]
+          const g = data[pixelIdx+1]
+          const b = data[pixelIdx+2]
+          const a = data[pixelIdx+3]
+          
+          // Check if this pixel is background (black background, green chroma key, or white background)
+          // We use a threshold of 55 for dark/black pixels to completely clear card frame backgrounds
+          const isBlackBg = a === 0 || (r < 55 && g < 55 && b < 55)
+          const isGreenBg = g > 60 && g > r + 20 && g > b + 20 && r < 180 && b < 180
+          const isWhiteBg = r > 220 && g > 220 && b > 220
+          
+          if (isBlackBg || isGreenBg || isWhiteBg) {
+            data[pixelIdx + 3] = 0 // transparent
             
-            const pixelIdx = idx * 4
-            const r = data[pixelIdx]
-            const g = data[pixelIdx+1]
-            const b = data[pixelIdx+2]
-            
-            // Check if this pixel is background (black background, green chroma key background, or white background)
-            const isBlackBg = r < 20 && g < 20 && b < 20
-            // Broad green-screen detection: G channel dominates (covers dark olive-green AND bright vivid green)
-            const isGreenBg = g > 60 && g > r + 20 && g > b + 20 && r < 180 && b < 180
-            const isWhiteBg = r > 220 && g > 220 && b > 220
-            
-            if (isBlackBg || isGreenBg || isWhiteBg) {
-              data[pixelIdx + 3] = 0 // transparent
-              
-              // Push 4 neighbors
-              if (x - 1 >= borderThreshX) pushPixel(x - 1, y)
-              if (x + 1 < W - borderThreshX) pushPixel(x + 1, y)
-              if (y - 1 >= borderThreshY) pushPixel(x, y - 1)
-              if (y + 1 < H - borderThreshY) pushPixel(x, y + 1)
-            }
+            // Push 4 neighbors
+            if (x - 1 >= 0) pushPixel(x - 1, y)
+            if (x + 1 < W) pushPixel(x + 1, y)
+            if (y - 1 >= 0) pushPixel(x, y - 1)
+            if (y + 1 < H) pushPixel(x, y + 1)
           }
         }
 
         // 3. Find bounding box of non-transparent pixels *before* drawing the outline
         let minX = W, minY = H, maxX = 0, maxY = 0
         let foundAny = false
-        const boundStartX = !hasTransparency ? borderThreshX : 0
-        const boundEndX = !hasTransparency ? W - borderThreshX : W
-        const boundStartY = !hasTransparency ? borderThreshY : 0
-        const boundEndY = !hasTransparency ? H - borderThreshY : H
+        const boundStartX = 0
+        const boundEndX = W
+        const boundStartY = 0
+        const boundEndY = H
 
         for (let y = boundStartY; y < boundEndY; y++) {
           for (let x = boundStartX; x < boundEndX; x++) {
