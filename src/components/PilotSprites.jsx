@@ -69,7 +69,7 @@ export function BelterraSprite({ size = 60, width, height, upperBodyOnly = false
 
 export function CoralisSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false }) {
   const lane = getJobLane(job)
-  const isRanger = lane === 'ranger' && !fill
+  const isRanger = lane === 'ranger'
   const srcImg = isRanger ? coralisRangerImg : coralisPilotImg
   
   return (
