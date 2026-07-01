@@ -302,7 +302,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                               <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
                                 {/* Dynamic Sprite Icon */}
                                 <div style={styles.cardSpriteWrap}>
-                                  <PilotSprite race={player.race} job={j.id} size={44} />
+                                  <PilotSprite race={player.race} job={j.id} size={110} />
                                 </div>
                                 <div style={{ flex: 1, minWidth: 0 }}>
                                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -848,16 +848,17 @@ const styles = {
     zIndex: 0
   }),
   cardSpriteWrap: {
-    width: 44,
-    height: 44,
-    borderRadius: 6,
+    width: 100,
+    height: 120,
+    borderRadius: 8,
     overflow: 'hidden',
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     justifyContent: 'center',
-    background: 'rgba(0,0,0,0.4)',
-    border: '1px solid rgba(255,255,255,0.08)',
-    flexShrink: 0
+    background: 'rgba(0, 0, 0, 0.45)',
+    border: '1.5px solid rgba(255, 255, 255, 0.1)',
+    flexShrink: 0,
+    boxShadow: 'inset 0 0 10px rgba(0, 0, 0, 0.6)'
   },
   cardJobName: {
     fontFamily: 'var(--font-title)',

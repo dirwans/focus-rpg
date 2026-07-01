@@ -1,10 +1,20 @@
 import { useEffect, useState } from 'react'
 
-export default function TransparentSprite({ src, alt, size = 120, width, height, glowColor = '#d000ff', upperBodyOnly = false, fill = false }) {
+export default function TransparentSprite({ 
+  src, 
+  alt, 
+  size = 120, 
+  width, 
+  height, 
+  glowColor = '#d000ff', 
+  upperBodyOnly = false, 
+  fill = false,
+  disableKeying = true
+}) {
   const [processedSrc, setProcessedSrc] = useState(null)
 
   useEffect(() => {
-    if (!src) return
+    if (!src || disableKeying) return
 
     const isRemote = src.startsWith('http://') || src.startsWith('https://')
     const apiBase = import.meta.env.VITE_API_URL || ''
@@ -233,10 +243,10 @@ export default function TransparentSprite({ src, alt, size = 120, width, height,
       setProcessedSrc(src)
     }
     img.src = finalSrc
-  }, [src])
+  }, [src, disableKeying])
 
-  const displaySrc = processedSrc || src
-  const isFallback = displaySrc === src
+  const displaySrc = disableKeying ? src : (processedSrc || src)
+  const isFallback = !disableKeying && (displaySrc === src)
 
   if (fill) {
     const fillH = height || 150
