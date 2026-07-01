@@ -139,7 +139,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
   }
 
   return (
-    <div style={styles.overlay}>
+    <div style={styles.overlay} className="cyberpunk-hud-bg">
       <div className={`glass-panel cyber-panel ${raceClass}`} style={styles.modal}>
         {/* Modal Header */}
         <div style={styles.modalHeader}>
@@ -481,26 +481,29 @@ const styles = {
   overlay: {
     position: 'fixed',
     inset: 0,
-    background: 'rgba(0,0,0,0.85)',
+    background: 'rgba(3, 8, 20, 0.85)',
+    backdropFilter: 'blur(16px) saturate(180%)',
+    WebkitBackdropFilter: 'blur(16px) saturate(180%)',
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: 'column',
     zIndex: 1000,
-    padding: 16,
-    backdropFilter: 'blur(5px)'
+    padding: 0
   },
   modal: {
     width: '100%',
-    maxWidth: 420,
-    padding: 20,
+    height: '100%',
+    maxWidth: 'none',
+    maxHeight: 'none',
+    borderRadius: 0,
+    border: 'none',
+    borderTop: '3px solid var(--neon-glow)',
+    borderBottom: '3px solid var(--neon-glow)',
+    background: 'transparent',
     display: 'flex',
     flexDirection: 'column',
     gap: 16,
-    background: '#040a18',
-    border: '1.5px solid var(--neon-glow)',
-    borderRadius: 14,
-    boxShadow: '0 0 25px rgba(0, 229, 255, 0.25)',
-    maxHeight: '90vh',
+    padding: '24px 20px 40px 20px',
+    boxSizing: 'border-box',
     overflowY: 'auto'
   },
   modalHeader: {
