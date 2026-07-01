@@ -269,11 +269,14 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                         const isActive = player.job === j.id
                         const isUnlocked = tier >= jTier
                         
+                        // Determine required level for this job
+                        const reqLevel = j.levelReq || (jTier === 2 ? 30 : 50);
+
                         // Check if eligible for promotion to this node
                         const isPromoEligible = (
-                          (tier === 0 && jTier === 1 && player.level >= 1) ||
-                          (tier === 1 && jTier === 2 && player.level >= 30 && player.job === t1Job.id) ||
-                          (tier === 2 && jTier === 3 && player.level >= 50 && player.job === t2Job.id)
+                          (tier === 0 && jTier === 1 && player.level >= (j.levelReq || 1)) ||
+                          (tier === 1 && jTier === 2 && player.level >= reqLevel && player.job === t1Job.id) ||
+                          (tier === 2 && jTier === 3 && player.level >= reqLevel && player.job === t2Job.id)
                         )
 
                         // Check if eligible for reclass to this node
@@ -371,7 +374,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
 
                               {isLocked && (
                                 <div style={styles.cardLockedBadge}>
-                                  🔒 Requires {jTier === 2 ? "LV.30" : "LV.50"} {jTier === 3 && `& T2 Job`}
+                                  🔒 Requires LV.{reqLevel} {jTier === 3 && `& T2 Job`}
                                 </div>
                               )}
                             </div>
