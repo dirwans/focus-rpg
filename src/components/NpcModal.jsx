@@ -21,9 +21,9 @@ const CLASS_LANES = {
   ],
   coralis: [
     { title: "Warrior Lane", indices: [[0], [0], [0]] },
-    { title: "Specialist Lane", indices: [[1], [1], [1]] },
-    { title: "Ranger Lane", indices: [[2], [2], [2]] },
-    { title: "Mystic Lane", indices: [[3], [3, 4], [3, 4, 5]] }
+    { title: "Specialist Lane", indices: [[], [1], [1]] },
+    { title: "Ranger Lane", indices: [[1], [2], [2]] },
+    { title: "Mystic Lane", indices: [[], [3, 4], [3, 4, 5]] }
   ],
   acreton: [
     { title: "Warrior Lane", indices: [[0], [0], [0]] },
@@ -231,7 +231,14 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
               {/* Lane Selector Tabs */}
               <div style={styles.tabsContainer}>
                 {CLASS_LANES[player.race]?.map((lane, laneIdx) => {
-                  const t1Job = jobs[player.race].tier1[lane.indices[0][0]]
+                  const getTabJob = () => {
+                    const t1Idx = lane.indices[0]?.[0]
+                    if (t1Idx !== undefined && jobs[player.race].tier1[t1Idx]) return jobs[player.race].tier1[t1Idx]
+                    const t2Idx = lane.indices[1]?.[0]
+                    if (t2Idx !== undefined && jobs[player.race].tier2[t2Idx]) return jobs[player.race].tier2[t2Idx]
+                    return null
+                  }
+                  const tabJob = getTabJob()
                   const isActive = activeLaneIdx === laneIdx
                   const raceColor = player.race === 'acreton' ? '#ff3d00' : player.race === 'belterra' ? '#ffd600' : '#00e5ff'
 
@@ -241,7 +248,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                       onClick={() => setActiveLaneIdx(laneIdx)}
                       style={styles.tabCard(isActive, raceColor)}
                     >
-                      <PilotSprite race={player.race} job={t1Job.id} size={40} />
+                      {tabJob && <PilotSprite race={player.race} job={tabJob.id} size={40} />}
                       <span style={styles.tabTitle}>{lane.title.replace(" Lane", "").toUpperCase()}</span>
                     </div>
                   )
@@ -255,20 +262,21 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                   if (!lane) return null
 
                   const tierJobs = [
-                    lane.indices[0].map(idx => jobs[player.race].tier1[idx]),
-                    lane.indices[1].map(idx => jobs[player.race].tier2[idx]),
-                    lane.indices[2].map(idx => jobs[player.race].tier3[idx])
-                  ]
+                    { tier: 1, jobs: lane.indices[0].map(idx => jobs[player.race].tier1[idx]).filter(Boolean) },
+                    { tier: 2, jobs: lane.indices[1].map(idx => jobs[player.race].tier2[idx]).filter(Boolean) },
+                    { tier: 3, jobs: lane.indices[2].map(idx => jobs[player.race].tier3[idx]).filter(Boolean) }
+                  ].filter(t => t.jobs.length > 0)
 
                   return (
                     <div className="class-tree-col" style={{ ...styles.treeCol, width: '100%' }}>
-                      {tierJobs.map((jArray, tIdx) => {
-                        const jTier = tIdx + 1
+                      {tierJobs.map((tInfo, idx) => {
+                        const jArray = tInfo.jobs
+                        const jTier = tInfo.tier
                         
                         return (
                           <div key={jTier} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
                             {/* Vertical connector line between tiers */}
-                            {tIdx > 0 && (
+                            {idx > 0 && (
                               <div className="class-tree-connector" style={styles.connectorLine(tier >= jTier)} />
                             )}
 
@@ -281,11 +289,13 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                                 const reqLevel = j.levelReq || (jTier === 2 ? 30 : 50);
 
                                 // Get previous tier job IDs
-                                const prevTierJobIds = tIdx > 0 ? tierJobs[tIdx - 1].map(pj => pj.id) : []
+                                const prevTierJobs = idx > 0 ? tierJobs[idx - 1].jobs : []
+                                const prevTierJobIds = prevTierJobs.map(pj => pj.id)
 
                                 // Check if eligible for promotion to this node
                                 const isPromoEligible = (
                                   (tier === 0 && jTier === 1 && player.level >= (j.levelReq || 1)) ||
+                                  (tier === 0 && jTier === 2 && prevTierJobIds.length === 0 && player.level >= reqLevel) ||
                                   (tier === 1 && jTier === 2 && player.level >= reqLevel && prevTierJobIds.includes(player.job)) ||
                                   (tier === 2 && jTier === 3 && player.level >= reqLevel && prevTierJobIds.includes(player.job))
                                 )

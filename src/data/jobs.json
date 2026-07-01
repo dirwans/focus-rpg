@@ -1,60 +1,469 @@
 {
   "belterra": {
     "tier1": [
-      { "id": "recruit", "name": "Recruit", "desc": "Prajurit dasar pertahanan", "bonus": { "hp": 50, "atk": 5, "def": 5 }, "skills": ["Slash", "Sturdy Armor"] },
-      { "id": "engineer", "name": "Engineer", "desc": "Teknisi pembuat drone pertahanan", "bonus": { "hp": 30, "atk": 8, "def": 2 }, "skills": ["Scrap Recycle", "Tool Strike"] },
-      { "id": "ranger", "name": "Ranger", "desc": "Penembak jitu jarak jauh", "bonus": { "hp": 20, "atk": 12, "def": 0 }, "skills": ["Fast Shot", "Eagle Eye"] }
+      {
+        "id": "recruit",
+        "name": "Recruit",
+        "desc": "Prajurit dasar pertahanan",
+        "bonus": {
+          "hp": 50,
+          "atk": 5,
+          "def": 5
+        },
+        "skills": [
+          "Slash",
+          "Sturdy Armor"
+        ]
+      },
+      {
+        "id": "engineer",
+        "name": "Engineer",
+        "desc": "Teknisi pembuat drone pertahanan",
+        "bonus": {
+          "hp": 30,
+          "atk": 8,
+          "def": 2
+        },
+        "skills": [
+          "Scrap Recycle",
+          "Tool Strike"
+        ]
+      },
+      {
+        "id": "ranger",
+        "name": "Ranger",
+        "desc": "Penembak jitu jarak jauh",
+        "bonus": {
+          "hp": 20,
+          "atk": 12,
+          "def": 0
+        },
+        "skills": [
+          "Fast Shot",
+          "Eagle Eye"
+        ]
+      }
     ],
     "tier2": [
-      { "id": "vanguard", "name": "Vanguard", "desc": "Ksatria perisai garda depan", "bonus": { "hp": 250, "atk": 20, "def": 30 }, "skills": ["Shield Strike", "Taunt"] },
-      { "id": "mechanist", "name": "Mechanist", "desc": "Ahli kendali teknologi perbaikan", "bonus": { "hp": 150, "atk": 35, "def": 15 }, "skills": ["Drone Attack", "Armor Repair"] },
-      { "id": "sharpshooter", "name": "Sharpshooter", "desc": "Penembak presisi tinggi", "bonus": { "hp": 100, "atk": 50, "def": 5 }, "skills": ["Sniper Shot", "Dodge"] }
+      {
+        "id": "vanguard",
+        "name": "Vanguard",
+        "desc": "Ksatria perisai garda depan",
+        "bonus": {
+          "hp": 250,
+          "atk": 20,
+          "def": 30
+        },
+        "skills": [
+          "Shield Strike",
+          "Taunt"
+        ]
+      },
+      {
+        "id": "mechanist",
+        "name": "Mechanist",
+        "desc": "Ahli kendali teknologi perbaikan",
+        "bonus": {
+          "hp": 150,
+          "atk": 35,
+          "def": 15
+        },
+        "skills": [
+          "Drone Attack",
+          "Armor Repair"
+        ]
+      },
+      {
+        "id": "sharpshooter",
+        "name": "Sharpshooter",
+        "desc": "Penembak presisi tinggi",
+        "bonus": {
+          "hp": 100,
+          "atk": 50,
+          "def": 5
+        },
+        "skills": [
+          "Sniper Shot",
+          "Dodge"
+        ]
+      }
     ],
     "tier3": [
-      { "id": "titan_pilot", "name": "Titan Pilot", "desc": "Pilot MAU Armor Frame tak terkalahkan", "bonus": { "hp": 800, "atk": 60, "def": 80 }, "skills": ["MAU Vulcan", "MAU Core Burn"] },
-      { "id": "war_engineer", "name": "War Engineer", "desc": "Teknisi tempur pembuat meriam otomatis", "bonus": { "hp": 500, "atk": 90, "def": 40 }, "skills": ["Auto-Turret", "Nanotech Boost"] },
-      { "id": "railgun_elite", "name": "Railgun Elite", "desc": "Penembak berat bermeriam Railgun", "bonus": { "hp": 300, "atk": 130, "def": 20 }, "skills": ["Railgun Piercer", "Charged Bolt"] }
+      {
+        "id": "titan_pilot",
+        "name": "Titan Pilot",
+        "desc": "Pilot MAU Armor Frame tak terkalahkan",
+        "bonus": {
+          "hp": 800,
+          "atk": 60,
+          "def": 80
+        },
+        "skills": [
+          "MAU Vulcan",
+          "MAU Core Burn"
+        ]
+      },
+      {
+        "id": "war_engineer",
+        "name": "War Engineer",
+        "desc": "Teknisi tempur pembuat meriam otomatis",
+        "bonus": {
+          "hp": 500,
+          "atk": 90,
+          "def": 40
+        },
+        "skills": [
+          "Auto-Turret",
+          "Nanotech Boost"
+        ]
+      },
+      {
+        "id": "railgun_elite",
+        "name": "Railgun Elite",
+        "desc": "Penembak berat bermeriam Railgun",
+        "bonus": {
+          "hp": 300,
+          "atk": 130,
+          "def": 20
+        },
+        "skills": [
+          "Railgun Piercer",
+          "Charged Bolt"
+        ]
+      }
     ]
   },
   "coralis": {
     "tier1": [
-      { "id": "guardian", "name": "Guardian", "desc": "Prajurit pelindung suci", "bonus": { "hp": 60, "atk": 4, "def": 8 }, "skills": ["Sword Strike", "Divine Block"] },
-      { "id": "specialist", "name": "Specialist", "desc": "Ahli produksi dan penciptaan material penting.", "bonus": { "hp": 20, "atk": 10, "def": 2 }, "skills": ["Basic Repair", "Analyze"] },
-      { "id": "mystic_archer", "name": "Mystic Archer", "desc": "Pemanah berenergi spiritual", "bonus": { "hp": 30, "atk": 12, "def": 0 }, "skills": ["Spiritual Arrow", "Wind Walk"] },
-      { "id": "mystic", "name": "Mystic", "desc": "Founders of Force use, channelling Dark Force for combat and summoning.", "bonus": { "hp": 25, "atk": 10, "def": 2 }, "skills": ["Dark Touch", "Force Sense"] }
+      {
+        "id": "guardian",
+        "name": "Guardian",
+        "desc": "Prajurit pelindung suci",
+        "bonus": {
+          "hp": 60,
+          "atk": 4,
+          "def": 8
+        },
+        "skills": [
+          "Sword Strike",
+          "Divine Block"
+        ]
+      },
+      {
+        "id": "mystic_archer",
+        "name": "Mystic Archer",
+        "desc": "Pemanah berenergi spiritual",
+        "bonus": {
+          "hp": 30,
+          "atk": 12,
+          "def": 0
+        },
+        "skills": [
+          "Spiritual Arrow",
+          "Wind Walk"
+        ]
+      }
     ],
     "tier2": [
-      { "id": "spirit_knight", "name": "Spirit Knight", "desc": "Ksatria berpedang energi aura", "bonus": { "hp": 300, "atk": 15, "def": 35 }, "skills": ["Spirit Blade", "Holy Aegis"] },
-      { "id": "craftsman", "name": "Craftsman", "levelReq": 30, "desc": "Process, produce, and create quality items.", "bonus": { "hp": 100, "atk": 45, "def": 10 }, "skills": ["Set Guard Tower"] },
-      { "id": "moon_ranger", "name": "Moon Ranger", "desc": "Pemanah taktis siluman bulan", "bonus": { "hp": 150, "atk": 40, "def": 15 }, "skills": ["Lunar Piercer", "Shadow Step"] },
-      { "id": "caster", "name": "Caster", "levelReq": 30, "desc": "Aggressive Force combatant channelling Dark Force expressly for combat.", "bonus": { "hp": 80, "atk": 50, "def": 5 }, "skills": ["Channel (+35% ATK with Force Attack)"] },
-      { "id": "summoner", "name": "Summoner", "levelReq": 30, "desc": "Wields Force to draw and control spiritual energy and Animus.", "bonus": { "hp": 60, "atk": 40, "def": 8 }, "skills": ["Animus Call", "Spirit Wield"] }
+      {
+        "id": "spirit_knight",
+        "name": "Spirit Knight",
+        "desc": "Ksatria berpedang energi aura",
+        "bonus": {
+          "hp": 300,
+          "atk": 15,
+          "def": 35
+        },
+        "skills": [
+          "Spirit Blade",
+          "Holy Aegis"
+        ]
+      },
+      {
+        "id": "craftsman",
+        "name": "Craftsman",
+        "levelReq": 30,
+        "desc": "Process, produce, and create quality items.",
+        "bonus": {
+          "hp": 100,
+          "atk": 45,
+          "def": 10
+        },
+        "skills": [
+          "Set Guard Tower"
+        ]
+      },
+      {
+        "id": "moon_ranger",
+        "name": "Moon Ranger",
+        "desc": "Pemanah taktis siluman bulan",
+        "bonus": {
+          "hp": 150,
+          "atk": 40,
+          "def": 15
+        },
+        "skills": [
+          "Lunar Piercer",
+          "Shadow Step"
+        ]
+      },
+      {
+        "id": "caster",
+        "name": "Caster",
+        "levelReq": 30,
+        "desc": "Aggressive Force combatant channelling Dark Force expressly for combat.",
+        "bonus": {
+          "hp": 80,
+          "atk": 50,
+          "def": 5
+        },
+        "skills": [
+          "Channel (+35% ATK with Force Attack)"
+        ]
+      },
+      {
+        "id": "summoner",
+        "name": "Summoner",
+        "levelReq": 30,
+        "desc": "Wields Force to draw and control spiritual energy and Animus.",
+        "bonus": {
+          "hp": 60,
+          "atk": 40,
+          "def": 8
+        },
+        "skills": [
+          "Animus Call",
+          "Spirit Wield"
+        ]
+      }
     ],
     "tier3": [
-      { "id": "lumina_paladin", "name": "Lumina Paladin", "desc": "Ksatria pelindung abadi tak tertembus", "bonus": { "hp": 900, "atk": 50, "def": 90 }, "skills": ["Guardian Shield", "Revenge Strike"] },
-      { "id": "artist", "name": "Artist", "levelReq": 40, "desc": "Imbuing armour supply work with both functionality and artistry.", "bonus": { "hp": 250, "atk": 140, "def": 25 }, "skills": ["Gauge Recovery", "Rebirth"] },
-      { "id": "star_seeker", "name": "Star Seeker", "desc": "Pemburu berpanah bintang pemecah gravitasi", "bonus": { "hp": 400, "atk": 110, "def": 40 }, "skills": ["Meteor Arrow", "Gravity Bind"] },
-      { "id": "warlock", "name": "Warlock", "levelReq": 40, "desc": "Most efficient Force users, rendering foes immobile with devastating combat Force.", "bonus": { "hp": 200, "atk": 160, "def": 15 }, "skills": ["Focus", "Stone Curse", "Striking Force"] },
-      { "id": "dark_priest", "name": "Dark Priest", "levelReq": 40, "desc": "Support Force wielder blessed by DECEM, transports comrades to safety.", "bonus": { "hp": 350, "atk": 80, "def": 30 }, "skills": ["Force Shield", "Return Gate", "Escape"] },
-      { "id": "grazier", "name": "Grazier", "levelReq": 40, "desc": "Trained to call and control the most powerful Anima of the spirit world.", "bonus": { "hp": 300, "atk": 120, "def": 25 }, "skills": ["Animus Rest", "Fast Recall", "Anima Maxima", "Life Conflict"] }
+      {
+        "id": "lumina_paladin",
+        "name": "Lumina Paladin",
+        "desc": "Ksatria pelindung abadi tak tertembus",
+        "bonus": {
+          "hp": 900,
+          "atk": 50,
+          "def": 90
+        },
+        "skills": [
+          "Guardian Shield",
+          "Revenge Strike"
+        ]
+      },
+      {
+        "id": "artist",
+        "name": "Artist",
+        "levelReq": 40,
+        "desc": "Imbuing armour supply work with both functionality and artistry.",
+        "bonus": {
+          "hp": 250,
+          "atk": 140,
+          "def": 25
+        },
+        "skills": [
+          "Gauge Recovery",
+          "Rebirth"
+        ]
+      },
+      {
+        "id": "star_seeker",
+        "name": "Star Seeker",
+        "desc": "Pemburu berpanah bintang pemecah gravitasi",
+        "bonus": {
+          "hp": 400,
+          "atk": 110,
+          "def": 40
+        },
+        "skills": [
+          "Meteor Arrow",
+          "Gravity Bind"
+        ]
+      },
+      {
+        "id": "warlock",
+        "name": "Warlock",
+        "levelReq": 40,
+        "desc": "Most efficient Force users, rendering foes immobile with devastating combat Force.",
+        "bonus": {
+          "hp": 200,
+          "atk": 160,
+          "def": 15
+        },
+        "skills": [
+          "Focus",
+          "Stone Curse",
+          "Striking Force"
+        ]
+      },
+      {
+        "id": "dark_priest",
+        "name": "Dark Priest",
+        "levelReq": 40,
+        "desc": "Support Force wielder blessed by DECEM, transports comrades to safety.",
+        "bonus": {
+          "hp": 350,
+          "atk": 80,
+          "def": 30
+        },
+        "skills": [
+          "Force Shield",
+          "Return Gate",
+          "Escape"
+        ]
+      },
+      {
+        "id": "grazier",
+        "name": "Grazier",
+        "levelReq": 40,
+        "desc": "Trained to call and control the most powerful Anima of the spirit world.",
+        "bonus": {
+          "hp": 300,
+          "atk": 120,
+          "def": 25
+        },
+        "skills": [
+          "Animus Rest",
+          "Fast Recall",
+          "Anima Maxima",
+          "Life Conflict"
+        ]
+      }
     ]
   },
-
   "acreton": {
     "tier1": [
-      { "id": "cadet", "name": "Destroyer", "desc": "Prajurit garis depan pelindung Imperium.", "bonus": { "hp": 70, "atk": 6, "def": 4 }, "skills": ["Mangle", "Shield Battery"] },
-      { "id": "gunner", "name": "Gunner", "desc": "Ahli persenjataan berat jarak jauh.", "bonus": { "hp": 40, "atk": 10, "def": 2 }, "skills": ["Flash-Bang", "Heavy Shot"] },
-      { "id": "striker", "name": "Engineer", "desc": "Teknisi taktis pembuat struktur pertahanan.", "bonus": { "hp": 30, "atk": 12, "def": 1 }, "skills": ["Set Guard Tower", "Repair Matrix"] }
+      {
+        "id": "cadet",
+        "name": "Destroyer",
+        "desc": "Prajurit garis depan pelindung Imperium.",
+        "bonus": {
+          "hp": 70,
+          "atk": 6,
+          "def": 4
+        },
+        "skills": [
+          "Mangle",
+          "Shield Battery"
+        ]
+      },
+      {
+        "id": "gunner",
+        "name": "Gunner",
+        "desc": "Ahli persenjataan berat jarak jauh.",
+        "bonus": {
+          "hp": 40,
+          "atk": 10,
+          "def": 2
+        },
+        "skills": [
+          "Flash-Bang",
+          "Heavy Shot"
+        ]
+      },
+      {
+        "id": "striker",
+        "name": "Engineer",
+        "desc": "Teknisi taktis pembuat struktur pertahanan.",
+        "bonus": {
+          "hp": 30,
+          "atk": 12,
+          "def": 1
+        },
+        "skills": [
+          "Set Guard Tower",
+          "Repair Matrix"
+        ]
+      }
     ],
     "tier2": [
-      { "id": "iron_trooper", "name": "Assaulter", "desc": "Petarung jarak dekat dengan kekuatan penghancur mutlak.", "bonus": { "hp": 350, "atk": 25, "def": 25 }, "skills": ["Frenzy", "Final Fortress"] },
-      { "id": "siege_gunner", "name": "Striker", "desc": "Spesialis peluncur roket dan meriam Launcher.", "bonus": { "hp": 180, "atk": 45, "def": 10 }, "skills": ["Siege Mode", "Compound Siege"] },
-      { "id": "cyber_assassin", "name": "Scientist", "desc": "Spesialis pendukung nanoteknologi medan perang.", "bonus": { "hp": 120, "atk": 55, "def": 5 }, "skills": ["Gauge Recovery", "Instant Repair"] }
+      {
+        "id": "iron_trooper",
+        "name": "Assaulter",
+        "desc": "Petarung jarak dekat dengan kekuatan penghancur mutlak.",
+        "bonus": {
+          "hp": 350,
+          "atk": 25,
+          "def": 25
+        },
+        "skills": [
+          "Frenzy",
+          "Final Fortress"
+        ]
+      },
+      {
+        "id": "siege_gunner",
+        "name": "Striker",
+        "desc": "Spesialis peluncur roket dan meriam Launcher.",
+        "bonus": {
+          "hp": 180,
+          "atk": 45,
+          "def": 10
+        },
+        "skills": [
+          "Siege Mode",
+          "Compound Siege"
+        ]
+      },
+      {
+        "id": "cyber_assassin",
+        "name": "Scientist",
+        "desc": "Spesialis pendukung nanoteknologi medan perang.",
+        "bonus": {
+          "hp": 120,
+          "atk": 55,
+          "def": 5
+        },
+        "skills": [
+          "Gauge Recovery",
+          "Instant Repair"
+        ]
+      }
     ],
     "tier3": [
-      { "id": "iron_vanguard", "name": "Mercenary", "desc": "Benteng pertahanan utama, tak tergoyahkan.", "bonus": { "hp": 1000, "atk": 70, "def": 70 }, "skills": ["Excel Charger", "Solid Stance"] },
-      { "id": "nova_destroyer", "name": "Omega Striker", "desc": "Unit pembombardir artileri berat kelas tertinggi.", "bonus": { "hp": 500, "atk": 130, "def": 30 }, "skills": ["Doom Blast", "Fierce Attack"] },
-      { "id": "omega_reaper", "name": "Battle Leader", "desc": "Komandan taktis pengatur ritme pertempuran.", "bonus": { "hp": 350, "atk": 150, "def": 15 }, "skills": ["Nimble Joint", "Solid Mode"] }
+      {
+        "id": "iron_vanguard",
+        "name": "Mercenary",
+        "desc": "Benteng pertahanan utama, tak tergoyahkan.",
+        "bonus": {
+          "hp": 1000,
+          "atk": 70,
+          "def": 70
+        },
+        "skills": [
+          "Excel Charger",
+          "Solid Stance"
+        ]
+      },
+      {
+        "id": "nova_destroyer",
+        "name": "Omega Striker",
+        "desc": "Unit pembombardir artileri berat kelas tertinggi.",
+        "bonus": {
+          "hp": 500,
+          "atk": 130,
+          "def": 30
+        },
+        "skills": [
+          "Doom Blast",
+          "Fierce Attack"
+        ]
+      },
+      {
+        "id": "omega_reaper",
+        "name": "Battle Leader",
+        "desc": "Komandan taktis pengatur ritme pertempuran.",
+        "bonus": {
+          "hp": 350,
+          "atk": 150,
+          "def": 15
+        },
+        "skills": [
+          "Nimble Joint",
+          "Solid Mode"
+        ]
+      }
     ]
   }
 }
