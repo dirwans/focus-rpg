@@ -272,8 +272,8 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                               <div className="class-tree-connector" style={styles.connectorLine(tier >= jTier)} />
                             )}
 
-                            <div style={{ display: 'flex', gap: 16, width: '100%', justifyContent: 'center' }}>
-                              {jArray.map(j => {
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: 16, width: '100%', alignItems: 'center' }}>
+                              {jArray.map((j, subIdx) => {
                                 if (!j) return null
                                 const isActive = player.job === j.id
                                 const isUnlocked = tier >= jTier
@@ -301,9 +301,13 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                                 const cardClass = `job-node-card panel-${player.race} ${isActive ? 'active-job-node' : ''}`
                                 
                                 return (
-                                  <div 
-                                    key={j.id}
-                                    className={cardClass} 
+                                  <React.Fragment key={j.id}>
+                                    {/* Connector between siblings in the same tier */}
+                                    {subIdx > 0 && (
+                                      <div className="class-tree-connector" style={styles.connectorLine(tier >= jTier)} />
+                                    )}
+                                    <div 
+                                      className={cardClass} 
                                     style={{
                                       ...styles.jobNodeCard,
                                       flex: 1, // split space equally for branches
@@ -385,6 +389,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                                       </div>
                                     )}
                                   </div>
+                                  </React.Fragment>
                                 )
                               })}
                             </div>
