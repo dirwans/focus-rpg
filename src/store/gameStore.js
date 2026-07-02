@@ -251,7 +251,14 @@ const initialPlayer = {
     autoLoot: false,
     alertWorldBoss: true,
     alertCoreWar: true,
-    alertDungeon: true,
+    alertDungeon: true
+  },
+  combatStats: {
+    totalMonsterKill: 0,
+    worldBossKill: 0,
+    dungeonClear: 0,
+    coreWarVictory: 0,
+    highestEnhancement: 0
   }
 }
 
@@ -806,6 +813,12 @@ export const useGameStore = create(
             totalSessions: s.player.totalSessions + 1,
             totalMinutes: s.player.totalMinutes + timer.selectedMinutes,
             inventory: newInventory,
+            combatStats: {
+              ...(s.player.combatStats || { totalMonsterKill: 0, worldBossKill: 0, dungeonClear: 0, coreWarVictory: 0, highestEnhancement: 0 }),
+              totalMonsterKill: (s.player.combatStats?.totalMonsterKill || 0) + finalKills,
+              worldBossKill: (s.player.combatStats?.worldBossKill || 0) + (killedPitBoss ? 1 : 0),
+              dungeonClear: (s.player.combatStats?.dungeonClear || 0) + (killedStageBoss ? 1 : 0)
+            },
             savedAt: Date.now(),
           },
           battle: { ...s.battle, kills: finalKills, sessionExp: finalExp, sessionAnium: finalAnium, levelUps, log: finalLog },

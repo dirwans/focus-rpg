@@ -276,19 +276,19 @@ export default function Unit() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 14, color: '#c0dff0' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span>• Total Monster Kill:</span>
-                <span style={{ fontWeight: 'bold' }}>{player.stats?.totalMonsterKill || 0}</span>
+                <span style={{ fontWeight: 'bold' }}>{player.combatStats?.totalMonsterKill || 0}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span>• World Boss Kill:</span>
-                <span style={{ fontWeight: 'bold' }}>{player.stats?.worldBossKill || 0}</span>
+                <span style={{ fontWeight: 'bold' }}>{player.combatStats?.worldBossKill || 0}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span>• Dungeon Clear:</span>
-                <span style={{ fontWeight: 'bold' }}>{player.stats?.dungeonClear || 0}</span>
+                <span style={{ fontWeight: 'bold' }}>{player.combatStats?.dungeonClear || 0}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span>• Core War Victory:</span>
-                <span style={{ fontWeight: 'bold' }}>{player.stats?.coreWarVictory || 0}</span>
+                <span style={{ fontWeight: 'bold' }}>{player.combatStats?.coreWarVictory || 0}</span>
               </div>
             </div>
           </div>
@@ -300,11 +300,11 @@ export default function Unit() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 14, color: '#c0dff0' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span>• Total Play Time:</span>
-                <span style={{ fontWeight: 'bold' }}>{Math.floor((player.stats?.totalPlayMinutes || 0)/60)}h {(player.stats?.totalPlayMinutes || 0)%60}m</span>
+                <span style={{ fontWeight: 'bold' }}>{Math.floor((player.totalMinutes || 0)/60)}h {(player.totalMinutes || 0)%60}m</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span>• Highest Enhancement:</span>
-                <span style={{ fontWeight: 'bold' }}>+{player.stats?.highestEnhancement || 0}</span>
+                <span style={{ fontWeight: 'bold' }}>+{player.combatStats?.highestEnhancement || 0}</span>
               </div>
             </div>
           </div>
