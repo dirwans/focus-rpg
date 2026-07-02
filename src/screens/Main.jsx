@@ -478,7 +478,27 @@ export default function Main() {
             <div className="profile-avatar-inner">
               <div className="profile-avatar-grid" />
               <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', overflow: 'hidden', zIndex: 2 }}>
-                <PilotSprite race={player.race} job={player.job} width={112} height={150} fill={true} />
+                {(() => {
+                  const belterraIdSprite = player.race === 'belterra' ? getBelterraJobSprite(player.job) : null
+                  if (belterraIdSprite) {
+                    return (
+                      <img
+                        src={belterraIdSprite}
+                        alt={player.job}
+                        style={{
+                          height: 340,
+                          width: 'auto',
+                          position: 'absolute',
+                          top: -4,
+                          left: '50%',
+                          transform: 'translateX(-50%)',
+                          imageRendering: 'crisp-edges',
+                        }}
+                      />
+                    )
+                  }
+                  return <PilotSprite race={player.race} job={player.job} width={112} height={150} fill={true} />
+                })()}
               </div>
             </div>
           </div>
