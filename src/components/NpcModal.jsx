@@ -268,9 +268,8 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                       onClick={() => setActiveLaneIdx(laneIdx)}
                       style={styles.tabCard(isActive, raceColor)}
                     >
-                      {/* Tab: label only, no sprite icon */}
-                      {!belterraSprite && tabJob && <PilotSprite race={player.race} job={tabJob.id} size={40} />}
-                      <span style={styles.tabTitle}>{lane.title.replace(" Lane", "").toUpperCase()}</span>
+                      {/* Tab: label only for all factions */}
+                      <span style={styles.tabTitle}>{lane.title.replace(" Lane", "").replace(" / ", "/").toUpperCase()}</span>
                     </div>
                   )
                 })}
@@ -293,10 +292,20 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                     ? getBelterraLaneSprite(activeLane.title)
                     : null
 
+                  // Hero sprite area — Bellterra: class sprite, others: PilotSprite
+                  const raceAccent = player.race === 'acreton' ? 'rgba(255,61,0,0.18)' : player.race === 'belterra' ? 'rgba(255,214,0,0.18)' : 'rgba(0,229,255,0.18)'
+                  const tabHeroJob = activeLane ? (() => {
+                    const t1Idx = activeLane.indices[0]?.[0]
+                    if (t1Idx !== undefined && jobs[player.race]?.tier1[t1Idx]) return jobs[player.race].tier1[t1Idx]
+                    const t2Idx = activeLane.indices[1]?.[0]
+                    if (t2Idx !== undefined && jobs[player.race]?.tier2[t2Idx]) return jobs[player.race].tier2[t2Idx]
+                    return null
+                  })() : null
+
                   return (
                     <div className="class-tree-col" style={{ ...styles.treeCol, width: '100%' }}>
-                      {/* Bellterra Class Hero Sprite */}
-                      {belterraHeroSprite && (
+                      {/* Hero Sprite Area — all factions */}
+                      {(belterraHeroSprite || tabHeroJob) && (
                         <div style={{
                           width: '100%',
                           display: 'flex',
@@ -307,7 +316,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                           position: 'relative',
                           overflow: 'hidden',
                           borderRadius: 12,
-                          background: 'linear-gradient(180deg, rgba(255,214,0,0.04) 0%, rgba(0,0,0,0) 100%)',
+                          background: `linear-gradient(180deg, ${raceAccent.replace('0.18', '0.04')} 0%, rgba(0,0,0,0) 100%)`,
                         }}>
                           {/* Glow floor */}
                           <div style={{
@@ -318,23 +327,29 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                             width: 160,
                             height: 40,
                             borderRadius: '50%',
-                            background: 'radial-gradient(ellipse, rgba(255,214,0,0.18) 0%, transparent 70%)',
+                            background: `radial-gradient(ellipse, ${raceAccent} 0%, transparent 70%)`,
                             filter: 'blur(6px)',
                           }} />
-                          <img
-                            src={belterraHeroSprite}
-                            alt={activeLane.title}
-                            style={{
-                              height: 175,
-                              width: 'auto',
-                              objectFit: 'contain',
-                              objectPosition: 'bottom',
-                              opacity: 1,
-                              filter: 'brightness(1.25) contrast(1.1)',
-                              position: 'relative',
-                              zIndex: 1,
-                            }}
-                          />
+                          {belterraHeroSprite ? (
+                            <img
+                              src={belterraHeroSprite}
+                              alt={activeLane.title}
+                              style={{
+                                height: 175,
+                                width: 'auto',
+                                objectFit: 'contain',
+                                objectPosition: 'bottom',
+                                opacity: 1,
+                                filter: 'brightness(1.25) contrast(1.1)',
+                                position: 'relative',
+                                zIndex: 1,
+                              }}
+                            />
+                          ) : (
+                            <div style={{ position: 'relative', zIndex: 1, height: 175, display: 'flex', alignItems: 'flex-end' }}>
+                              <PilotSprite race={player.race} job={tabHeroJob.id} size={175} />
+                            </div>
+                          )}
                         </div>
                       )}
                       {tierJobs.map((tInfo, idx) => {

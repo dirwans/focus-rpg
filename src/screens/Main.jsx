@@ -477,7 +477,8 @@ export default function Main() {
             <div className="profile-corner br" />
             <div className="profile-avatar-inner">
               <div className="profile-avatar-grid" />
-              <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', overflow: 'hidden', zIndex: 2 }}>
+              <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', overflow: 'hidden', zIndex: 2,
+                boxShadow: 'inset 0 0 8px 4px rgba(0,0,0,0.85)' }}>
                 {(() => {
                   const belterraIdSprite = player.race === 'belterra' ? getBelterraJobSprite(player.job) : null
                   if (belterraIdSprite) {
@@ -492,7 +493,6 @@ export default function Main() {
                           top: -4,
                           left: '50%',
                           transform: 'translateX(-50%)',
-                          imageRendering: 'crisp-edges',
                         }}
                       />
                     )
