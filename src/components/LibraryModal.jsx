@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import arctronGears from '../data/gears/arctron.json'
+import bionexGears from '../data/gears/bionex.json'
 
 export default function LibraryModal({ onClose }) {
   const [tab, setTab] = useState('growth')
+  const [equipFaction, setEquipFaction] = useState('arctron')
 
   return (
     <div style={styles.overlay}>
@@ -184,58 +186,139 @@ export default function LibraryModal({ onClose }) {
 
           {tab === 'equip' && (
             <div style={styles.section}>
-              <h3 style={styles.sectionTitle}>⚔️ Arctron Equipment Database</h3>
+              <h3 style={styles.sectionTitle}>⚙️ Equipment Database</h3>
               
-              <div style={styles.itemCard}>
-                <div style={styles.itemTitle}>🛡️ Armor Sets</div>
-                {arctronGears.armorSets.map((set, i) => (
-                  <div key={i} style={{ marginBottom: 8, paddingBottom: 8, borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-                    <div style={{ color: '#00e5ff', fontWeight: 'bold' }}>{set.grade} - {set.name}</div>
-                    <div style={{ fontSize: 12, color: '#aaa' }}>Bagian: {set.parts.join(', ')}</div>
-                    <div style={{ fontSize: 12, color: '#f5a623' }}>[Status masih dikembangkan]</div>
-                  </div>
-                ))}
+              <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
+                <button 
+                  style={equipFaction === 'arctron' ? styles.subTabActive : styles.subTab}
+                  onClick={() => setEquipFaction('arctron')}
+                >Arctron</button>
+                <button 
+                  style={equipFaction === 'bionex' ? styles.subTabActive : styles.subTab}
+                  onClick={() => setEquipFaction('bionex')}
+                >Bionex</button>
+                <button style={{...styles.subTab, opacity: 0.5}} disabled>Coralis (Soon)</button>
               </div>
 
-              <div style={styles.itemCard}>
-                <div style={styles.itemTitle}>⚔️ Warrior Weapons</div>
-                {arctronGears.warrior.weapons.map((w, i) => (
-                  <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
-                    <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
-                    <span style={{ color: '#00e5ff' }}>+{w.atk} ATK</span>
+              {equipFaction === 'arctron' && (
+                <>
+                  <div style={styles.itemCard}>
+                    <div style={styles.itemTitle}>🛡️ Armor Sets</div>
+                    {arctronGears.armorSets.map((set, i) => (
+                      <div key={i} style={{ marginBottom: 8, paddingBottom: 8, borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+                        <div style={{ color: '#00e5ff', fontWeight: 'bold' }}>{set.grade} - {set.name}</div>
+                        <div style={{ fontSize: 12, color: '#aaa' }}>Bagian: {set.parts.join(', ')}</div>
+                        <div style={{ fontSize: 12, color: '#f5a623' }}>[Status masih dikembangkan]</div>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
 
-              <div style={styles.itemCard}>
-                <div style={styles.itemTitle}>🛡️ Warrior Shields</div>
-                {arctronGears.warrior.shields.map((w, i) => (
-                  <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
-                    <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
-                    <span style={{ color: '#00ff88' }}>+{w.def} DEF</span>
+                  <div style={styles.itemCard}>
+                    <div style={styles.itemTitle}>⚔️ Warrior Weapons</div>
+                    {arctronGears.warrior.weapons.map((w, i) => (
+                      <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
+                        <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
+                        <span style={{ color: '#00e5ff' }}>+{w.atk} ATK</span>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
 
-              <div style={styles.itemCard}>
-                <div style={styles.itemTitle}>🏹 Ranger Weapons</div>
-                {arctronGears.ranger.weapons.map((w, i) => (
-                  <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
-                    <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
-                    <span style={{ color: '#00e5ff' }}>+{w.atk} ATK</span>
+                  <div style={styles.itemCard}>
+                    <div style={styles.itemTitle}>🛡️ Warrior Shields</div>
+                    {arctronGears.warrior.shields.map((w, i) => (
+                      <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
+                        <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
+                        <span style={{ color: '#00ff88' }}>+{w.def} DEF</span>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
 
-              <div style={styles.itemCard}>
-                <div style={styles.itemTitle}>🔧 Technician Weapons</div>
-                {arctronGears.technician.weapons.map((w, i) => (
-                  <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
-                    <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
-                    <span style={{ color: '#00e5ff' }}>+{w.atk} ATK</span>
+                  <div style={styles.itemCard}>
+                    <div style={styles.itemTitle}>🏹 Ranger Weapons</div>
+                    {arctronGears.ranger.weapons.map((w, i) => (
+                      <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
+                        <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
+                        <span style={{ color: '#00e5ff' }}>+{w.atk} ATK</span>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+
+                  <div style={styles.itemCard}>
+                    <div style={styles.itemTitle}>🔧 Technician Weapons</div>
+                    {arctronGears.technician.weapons.map((w, i) => (
+                      <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
+                        <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
+                        <span style={{ color: '#00e5ff' }}>+{w.atk} ATK</span>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
+
+              {equipFaction === 'bionex' && (
+                <>
+                  <div style={styles.itemCard}>
+                    <div style={styles.itemTitle}>🛡️ Armor Sets</div>
+                    {bionexGears.armorSets.map((set, i) => (
+                      <div key={i} style={{ marginBottom: 8, paddingBottom: 8, borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+                        <div style={{ color: '#00e5ff', fontWeight: 'bold' }}>{set.grade} - {set.name}</div>
+                        <div style={{ fontSize: 12, color: '#aaa' }}>Bagian: {set.parts.join(', ')}</div>
+                        <div style={{ fontSize: 12, color: '#f5a623' }}>[Status masih dikembangkan]</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div style={styles.itemCard}>
+                    <div style={styles.itemTitle}>⚔️ Guardian Weapons</div>
+                    {bionexGears.guardian.weapons.map((w, i) => (
+                      <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
+                        <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
+                        <span style={{ color: '#00e5ff' }}>+{w.atk} ATK</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div style={styles.itemCard}>
+                    <div style={styles.itemTitle}>🛡️ Guardian Shields</div>
+                    {bionexGears.guardian.shields.map((w, i) => (
+                      <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
+                        <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
+                        <span style={{ color: '#00ff88' }}>+{w.def} DEF</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div style={styles.itemCard}>
+                    <div style={styles.itemTitle}>🎯 Marksman Weapons</div>
+                    {bionexGears.marksman.weapons.map((w, i) => (
+                      <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
+                        <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
+                        <span style={{ color: '#00e5ff' }}>+{w.atk} ATK</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div style={styles.itemCard}>
+                    <div style={styles.itemTitle}>🔧 Engineer Weapons</div>
+                    {bionexGears.engineer.weapons.map((w, i) => (
+                      <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
+                        <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
+                        <span style={{ color: '#00e5ff' }}>+{w.atk} ATK</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div style={styles.itemCard}>
+                    <div style={styles.itemTitle}>🔮 Psion Weapons</div>
+                    {bionexGears.psion.weapons.map((w, i) => (
+                      <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
+                        <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
+                        <span style={{ color: '#00e5ff' }}>+{w.atk} ATK</span>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
 
             </div>
           )}
@@ -250,6 +333,18 @@ const styles = {
     position: 'fixed', inset: 0, background: '#081020',
     display: 'flex', alignItems: 'flex-start', justifyContent: 'center',
     zIndex: 1000, padding: 0
+  },
+  subTab: {
+    flex: 1, padding: '6px 12px', background: 'rgba(255,255,255,0.05)', 
+    border: '1px solid rgba(255,255,255,0.1)', borderRadius: 4,
+    color: '#7ab0d0', fontFamily: 'var(--font-title)', fontSize: 13,
+    cursor: 'pointer', transition: 'all 0.2s'
+  },
+  subTabActive: {
+    flex: 1, padding: '6px 12px', background: 'rgba(0,229,255,0.15)', 
+    border: '1px solid #00e5ff', borderRadius: 4,
+    color: '#fff', fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 'bold',
+    cursor: 'pointer', transition: 'all 0.2s', boxShadow: '0 0 8px rgba(0,229,255,0.3)'
   },
   modal: {
     width: '100%', height: '100%', maxWidth: 'none', maxHeight: 'none',
