@@ -176,5 +176,20 @@
     "hp": 165,
     "atk": 32,
     "def": 13
+  },
+  "destroyer": {
+    "hp": 210,
+    "atk": 27,
+    "def": 22
+  },
+  "gunner": {
+    "hp": 175,
+    "atk": 33,
+    "def": 15
+  },
+  "engineer_arctron": {
+    "hp": 180,
+    "atk": 25,
+    "def": 18
   }
 }

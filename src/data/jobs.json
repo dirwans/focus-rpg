@@ -232,57 +232,61 @@
   "acreton": {
     "tier1": [
       {
-        "id": "cadet",
+        "id": "destroyer",
         "name": "Destroyer",
-        "desc": "Prajurit garis depan pelindung Imperium.",
+        "desc": "Frontline heavy melee unit.",
         "bonus": {
-          "hp": 70,
-          "atk": 6,
-          "def": 4
+          "hp": 210,
+          "atk": 27,
+          "def": 22
         },
         "skills": [
           "Mangle",
           "Shield Battery"
-        ]
+        ],
+        "levelReq": 1
       },
       {
         "id": "gunner",
         "name": "Gunner",
-        "desc": "Ahli persenjataan berat jarak jauh.",
+        "desc": "Heavy weapons ranged specialist.",
         "bonus": {
-          "hp": 40,
-          "atk": 10,
-          "def": 2
+          "hp": 175,
+          "atk": 33,
+          "def": 15
         },
         "skills": [
           "Flash-Bang",
           "Heavy Shot"
-        ]
+        ],
+        "levelReq": 1
       },
       {
-        "id": "striker",
+        "id": "engineer",
         "name": "Engineer",
-        "desc": "Teknisi taktis pembuat struktur pertahanan.",
+        "desc": "Tactical defense structure builder.",
         "bonus": {
-          "hp": 30,
-          "atk": 12,
-          "def": 1
+          "hp": 180,
+          "atk": 25,
+          "def": 18
         },
         "skills": [
           "Set Guard Tower",
           "Repair Matrix"
-        ]
+        ],
+        "levelReq": 1
       }
     ],
     "tier2": [
       {
-        "id": "iron_trooper",
+        "id": "assaulter",
         "name": "Assaulter",
-        "desc": "Petarung jarak dekat dengan kekuatan penghancur mutlak.",
+        "levelReq": 32,
+        "desc": "Close-range devastation specialist.",
         "bonus": {
           "hp": 350,
-          "atk": 25,
-          "def": 25
+          "atk": 50,
+          "def": 35
         },
         "skills": [
           "Frenzy",
@@ -290,13 +294,14 @@
         ]
       },
       {
-        "id": "siege_gunner",
+        "id": "striker",
         "name": "Striker",
-        "desc": "Spesialis peluncur roket dan meriam Launcher.",
+        "levelReq": 32,
+        "desc": "Rocket and launcher siege unit.",
         "bonus": {
-          "hp": 180,
-          "atk": 45,
-          "def": 10
+          "hp": 280,
+          "atk": 60,
+          "def": 25
         },
         "skills": [
           "Siege Mode",
@@ -304,13 +309,14 @@
         ]
       },
       {
-        "id": "cyber_assassin",
+        "id": "scientist",
         "name": "Scientist",
-        "desc": "Spesialis pendukung nanoteknologi medan perang.",
+        "levelReq": 32,
+        "desc": "Nanotech battlefield support unit.",
         "bonus": {
-          "hp": 120,
-          "atk": 55,
-          "def": 5
+          "hp": 250,
+          "atk": 45,
+          "def": 28
         },
         "skills": [
           "Gauge Recovery",
@@ -320,13 +326,14 @@
     ],
     "tier3": [
       {
-        "id": "iron_vanguard",
+        "id": "mercenary",
         "name": "Mercenary",
-        "desc": "Benteng pertahanan utama, tak tergoyahkan.",
+        "levelReq": 42,
+        "desc": "Unyielding main defense fortress.",
         "bonus": {
-          "hp": 1000,
-          "atk": 70,
-          "def": 70
+          "hp": 700,
+          "atk": 110,
+          "def": 80
         },
         "skills": [
           "Excel Charger",
@@ -334,13 +341,14 @@
         ]
       },
       {
-        "id": "nova_destroyer",
+        "id": "omega_striker",
         "name": "Omega Striker",
-        "desc": "Unit pembombardir artileri berat kelas tertinggi.",
+        "levelReq": 42,
+        "desc": "Supreme heavy artillery bombardier.",
         "bonus": {
-          "hp": 500,
+          "hp": 550,
           "atk": 130,
-          "def": 30
+          "def": 55
         },
         "skills": [
           "Doom Blast",
@@ -348,17 +356,62 @@
         ]
       },
       {
-        "id": "omega_reaper",
+        "id": "battle_leader",
         "name": "Battle Leader",
-        "desc": "Komandan taktis pengatur ritme pertempuran.",
+        "levelReq": 42,
+        "desc": "Tactical battlefield rhythm commander.",
         "bonus": {
-          "hp": 350,
-          "atk": 150,
-          "def": 15
+          "hp": 500,
+          "atk": 100,
+          "def": 65
         },
         "skills": [
           "Nimble Joint",
           "Solid Mode"
+        ]
+      }
+    ],
+    "tier4": [
+      {
+        "id": "warmonger",
+        "name": "Warmonger",
+        "levelReq": 55,
+        "desc": "Supreme warmachine overlord.",
+        "bonus": {
+          "hp": 1400,
+          "atk": 250,
+          "def": 180
+        },
+        "skills": [
+          "Annihilation Strike"
+        ]
+      },
+      {
+        "id": "siege_lord",
+        "name": "Siege Lord",
+        "levelReq": 55,
+        "desc": "Ultimate artillery devastation master.",
+        "bonus": {
+          "hp": 1100,
+          "atk": 290,
+          "def": 140
+        },
+        "skills": [
+          "Orbital Barrage"
+        ]
+      },
+      {
+        "id": "grand_engineer",
+        "name": "Grand Engineer",
+        "levelReq": 55,
+        "desc": "Apex nanotech warfare architect.",
+        "bonus": {
+          "hp": 1000,
+          "atk": 220,
+          "def": 160
+        },
+        "skills": [
+          "Titan Assembly"
         ]
       }
     ]

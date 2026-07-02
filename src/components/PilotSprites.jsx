@@ -27,20 +27,22 @@ function getJobLane(jobId) {
     'cadet', 'iron_trooper', 'iron_vanguard',
     'recruit', 'vanguard', 'titan_pilot',
     'guardian', 'spirit_knight', 'lumina_paladin',
-    'sentinel', 'warden', 'knight', 'blademaster'
+    'sentinel', 'warden', 'knight', 'blademaster',
+    'destroyer', 'assaulter', 'mercenary', 'warmonger'
   ]
   const rangerJobs = [
     'gunner', 'siege_gunner', 'nova_destroyer',
     'ranger', 'sharpshooter', 'railgun_elite',
     'mystic_archer', 'moon_ranger', 'star_seeker',
-    'pathfinder', 'windrunner', 'shadow_hunter', 'stargazer'
+    'pathfinder', 'windrunner', 'shadow_hunter', 'stargazer',
+    'striker', 'omega_striker', 'siege_lord'
   ]
   const mysticJobs = [
     'caster',
     'warlock', 'dark_priest', 'grazier',
     'arcanist', 'rune_caster', 'mystic', 'archmage'
   ]
-  // specialist = all other Coralis jobs (acolyte, eidolon_caller, high_summoner, oracle, celestial_oracle, conjurer, divine_summoner)
+  // specialist = engineer path (engineer, scientist, battle_leader, grand_engineer) + Coralis summoner path
   if (warriorJobs.includes(jobId)) return 'warrior'
   if (rangerJobs.includes(jobId)) return 'ranger'
   if (mysticJobs.includes(jobId)) return 'mystic'
@@ -63,7 +65,7 @@ export function AcretonSprite({ job, size = 60, width, height, upperBodyOnly = f
   return (
     <TransparentSprite
       src={img}
-      alt={`Acreton ${lane}`}
+      alt={`Arctron ${lane}`}
       size={size}
       width={width}
       height={height}

@@ -27,9 +27,9 @@ const CLASS_LANES = {
     { title: "Mage Path", indices: [[3], [3], [3], [3]] }
   ],
   acreton: [
-    { title: "Warrior Lane", indices: [[0], [0], [0]] },
-    { title: "Ranger/Launcher", indices: [[1], [1], [1]] },
-    { title: "Specialist Lane", indices: [[2], [2], [2]] }
+    { title: "Warrior Path", indices: [[0], [0], [0], [0]] },
+    { title: "Gunner Path", indices: [[1], [1], [1], [1]] },
+    { title: "Engineer Path", indices: [[2], [2], [2], [2]] }
   ]
 }
 
@@ -425,20 +425,18 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                                         </>
                                       );
                                     } else if (player.race === 'acreton') {
-                                      let str = 0, dex = 0, int = 0, vit = 0;
-                                      if (j.id === 'cadet' || j.id === 'iron_trooper') { str = 14; dex = 6; int = 2; vit = 8; }
-                                      else if (j.id === 'gunner' || j.id === 'siege_gunner') { str = 8; dex = 14; int = 2; vit = 6; }
-                                      else if (j.id === 'striker') { str = 10; dex = 10; int = 2; vit = 8; }
-                                      if (str || dex || int || vit) {
-                                        return (
-                                          <>
-                                            <span><span style={{color: '#ff4444'}}>STR</span> {str}</span>
-                                            <span><span style={{color: '#00e5ff'}}>DEX</span> {dex}</span>
-                                            <span><span style={{color: '#bb88ff'}}>INT</span> {int}</span>
-                                            <span><span style={{color: '#4caf50'}}>VIT</span> {vit}</span>
-                                          </>
-                                        );
-                                      }
+                                      let bHp = 0, bAtk = 0, bDef = 0;
+                                      const laneT = activeLane.title.toLowerCase();
+                                      if (laneT.includes('warrior')) { bHp = 210; bAtk = 27; bDef = 22; }
+                                      else if (laneT.includes('gunner')) { bHp = 175; bAtk = 33; bDef = 15; }
+                                      else if (laneT.includes('engineer')) { bHp = 180; bAtk = 25; bDef = 18; }
+                                      return (
+                                        <>
+                                          <span><span style={{color: '#ff4444'}}>HP</span> {bHp}</span>
+                                          <span><span style={{color: '#ffaa00'}}>ATK</span> {bAtk}</span>
+                                          <span><span style={{color: '#00ccff'}}>DEF</span> {bDef}</span>
+                                        </>
+                                      );
                                     }
                                   }
                                   return (
