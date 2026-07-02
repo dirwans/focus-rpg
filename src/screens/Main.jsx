@@ -448,16 +448,23 @@ export default function Main() {
         </div>
       </div>
 
-      {/* Redesigned Profile ID Card */}
+      {/* Redesigned Profile ID Card — SCI-FI HUD */}
       <div 
         className={`profile-id-card ${player.race ? 'panel-' + player.race : ''} ${isCritHit ? 'screen-shake' : ''}`}
         style={{ margin: '0 16px 12px', zIndex: 1 }}
       >
-        {/* Metal rivet corners */}
-        <div className="profile-id-rivet top-left" />
-        <div className="profile-id-rivet top-right" />
-        <div className="profile-id-rivet bottom-left" />
-        <div className="profile-id-rivet bottom-right" />
+        {/* Corner circle bolts */}
+        <div className="id-corner-circle tl" />
+        <div className="id-corner-circle tr" />
+        <div className="id-corner-circle bl" />
+        <div className="id-corner-circle br" />
+
+        {/* Center tabs top/bottom */}
+        <div className="id-tab top" />
+        <div className="id-tab bottom" />
+
+        {/* STATUS badge centered at top */}
+        <div className="id-status-badge">STATUS</div>
 
         <div className="profile-id-body">
           {/* Avatar side */}
@@ -496,43 +503,50 @@ export default function Main() {
 
           {/* Details side */}
           <div className="profile-details-wrap">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
-              <div className="profile-details-username" style={{ fontSize: 18, margin: 0 }}>{player.name.toUpperCase()}</div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, color: '#39ff14', fontWeight: 'bold', textShadow: '0 0 6px rgba(57, 255, 20, 0.5)' }}>
-                <div className="profile-status-led" style={{ margin: 0 }} /> ACTIVE
+            {/* Player name */}
+            <div className="profile-details-username">{player.name.toUpperCase()}</div>
+
+            {/* FACTION / CLASS / JOB rows */}
+            <div className="profile-data-rows">
+              <div className="profile-data-row">
+                <span className="profile-data-key">FACTION</span>
+                <span className="profile-data-val">{race ? race.name.toUpperCase() : 'UNKNOWN'}</span>
+              </div>
+              <div className="profile-data-row">
+                <span className="profile-data-key">CLASS</span>
+                <span className="profile-data-val accent">{baseClass}</span>
+              </div>
+              <div className="profile-data-row">
+                <span className="profile-data-key">JOB</span>
+                <span className="profile-data-val">{jobInfo ? jobInfo.name.toUpperCase() : 'NOVICE'}</span>
               </div>
             </div>
-            
-            <div style={{ color: '#00e5ff', fontSize: 11, fontFamily: 'var(--font-title)', marginBottom: 12, fontWeight: 'bold', lineHeight: 1.4 }}>
-              FACTION: <span style={{ color: '#fff' }}>{race ? race.name.toUpperCase() : 'UNKNOWN'}</span>
-              <br/>
-              CLASS: <span style={{ color: '#fff' }}>{baseClass}</span>
-              <br/>
-              JOB: <span style={{ color: '#fff' }}>{jobInfo ? jobInfo.name.toUpperCase() : 'NOVICE'}</span>
-            </div>
-            
-            <div className="profile-status-panel">
 
-              {/* Dynamic Experience bar */}
+            {/* STATUS: ACTIVE */}
+            <div className="profile-active-status">
+              <div className="profile-status-led" />
+              <span>STATUS: <span className="status-active-txt">ACTIVE</span></span>
+            </div>
+
+            {/* Divider */}
+            <div className="profile-data-divider" />
+
+            {/* ID Block */}
+            <div className="profile-id-block-new">
+              <span className="profile-id-lbl">{baseClass} ID</span>
+              <span className="profile-id-num">PLT-{player.level || 1}09X</span>
+            </div>
+
+            {/* EXP bar */}
+            <div className="profile-status-panel" style={{ marginTop: 6 }}>
               <div className="profile-status-bar">
                 {Array.from({ length: 12 }).map((_, idx) => {
-                  const litThreshold = (idx + 1) * (100 / 12);
-                  const isLit = expPct >= litThreshold;
+                  const litThreshold = (idx + 1) * (100 / 12)
+                  const isLit = expPct >= litThreshold
                   return (
-                    <div 
-                      key={idx} 
-                      className={`profile-status-segment ${isLit ? '' : 'dim'}`} 
-                    />
+                    <div key={idx} className={`profile-status-segment ${isLit ? '' : 'dim'}`} />
                   )
                 })}
-              </div>
-            </div>
-
-            {/* Substats boxes */}
-            <div className="profile-stats-grid">
-              <div className="profile-stats-col">
-                <div className="profile-stats-col-lbl">{baseClass} ID</div>
-                <div className="profile-stats-col-val">PLT-{player.level || 1}09X</div>
               </div>
             </div>
 
@@ -547,10 +561,8 @@ export default function Main() {
                 🚀 {tier === 0 ? (t('select_job') || "SELECT JOB") : (t('promo_unit') || "PROMOTE UNIT")}
               </button>
             )}
-
           </div>
         </div>
-
       </div>
 
 

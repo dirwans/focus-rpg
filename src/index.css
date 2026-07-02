@@ -670,37 +670,135 @@ body {
 /* Zero-Circle Policy: no border-radius anywhere    */
 /* ------------------------------------------------ */
 
+/* ============================================================
+   PROFILE ID CARD — SCI-FI HUD (matches reference image)
+   ============================================================ */
 .profile-id-card {
   position: relative;
   width: calc(100% - 32px);
-  padding: 16px;
-  /* Glassmorphism settings */
-  background: rgba(10, 20, 35, 0.4);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(0, 229, 255, 0.3);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37), 0 0 15px rgba(0, 229, 255, 0.15), inset 0 0 10px rgba(0, 229, 255, 0.1);
+  padding: 18px 14px 14px;
+  background: linear-gradient(160deg, rgba(4, 10, 28, 0.97) 0%, rgba(6, 14, 36, 0.97) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  /* Double border effect: inner border + outer glow */
+  border: 2px solid rgba(0, 229, 255, 0.85);
+  outline: 1px solid rgba(0, 229, 255, 0.25);
+  outline-offset: 3px;
+  box-shadow:
+    0 0 0 4px rgba(0, 0, 0, 0.9),
+    0 0 25px rgba(0, 229, 255, 0.45),
+    0 0 60px rgba(0, 229, 255, 0.15),
+    inset 0 0 30px rgba(0, 229, 255, 0.04),
+    inset 0 1px 0 rgba(255,255,255,0.08);
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  overflow: hidden;
+  gap: 0;
+  overflow: visible;
   box-sizing: border-box;
+  animation: cardFloat 6s ease-in-out infinite;
 }
 
-/* Faction themed backgrounds */
+@keyframes cardFloat {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-4px); }
+}
+
+/* === FACTION THEMES === */
 .panel-bionex.profile-id-card {
-  border-color: rgba(0, 229, 255, 0.5);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37), 0 0 15px rgba(0, 229, 255, 0.2), inset 0 0 15px rgba(0, 229, 255, 0.1);
+  border-color: rgba(0, 229, 255, 0.85);
+  outline-color: rgba(0, 229, 255, 0.25);
+  box-shadow:
+    0 0 0 4px rgba(0,0,0,0.9),
+    0 0 25px rgba(0, 229, 255, 0.45),
+    0 0 60px rgba(0, 229, 255, 0.15),
+    inset 0 0 30px rgba(0, 229, 255, 0.04);
+  --card-accent: #00e5ff;
+  --card-accent2: #00c0d8;
+  --card-badge-bg: rgba(0, 100, 160, 0.9);
 }
 
 .panel-arctron.profile-id-card {
-  border-color: rgba(255, 100, 0, 0.5);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37), 0 0 15px rgba(255, 100, 0, 0.2), inset 0 0 15px rgba(255, 100, 0, 0.1);
+  border-color: rgba(255, 110, 0, 0.85);
+  outline-color: rgba(255, 110, 0, 0.25);
+  box-shadow:
+    0 0 0 4px rgba(0,0,0,0.9),
+    0 0 25px rgba(255, 110, 0, 0.45),
+    0 0 60px rgba(255, 110, 0, 0.15),
+    inset 0 0 30px rgba(255, 110, 0, 0.04);
+  --card-accent: #ff8c00;
+  --card-accent2: #ff6600;
+  --card-badge-bg: rgba(120, 50, 0, 0.9);
 }
 
 .panel-celestra.profile-id-card {
-  border-color: rgba(208, 0, 255, 0.5);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37), 0 0 15px rgba(208, 0, 255, 0.2), inset 0 0 15px rgba(208, 0, 255, 0.1);
+  border-color: rgba(168, 85, 247, 0.85);
+  outline-color: rgba(168, 85, 247, 0.25);
+  box-shadow:
+    0 0 0 4px rgba(0,0,0,0.9),
+    0 0 25px rgba(168, 85, 247, 0.5),
+    0 0 60px rgba(168, 85, 247, 0.2),
+    inset 0 0 30px rgba(168, 85, 247, 0.04);
+  --card-accent: #a855f7;
+  --card-accent2: #c084fc;
+  --card-badge-bg: rgba(80, 20, 120, 0.92);
+}
+
+/* === CORNER CIRCLE BOLTS (tech rivets) === */
+.id-corner-circle {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--card-accent, #00e5ff);
+  background: rgba(0, 8, 25, 0.95);
+  z-index: 20;
+  box-shadow: 0 0 10px var(--card-accent, #00e5ff), inset 0 0 4px rgba(0,0,0,0.8);
+}
+.id-corner-circle::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--card-accent, #00e5ff);
+  box-shadow: 0 0 6px var(--card-accent, #00e5ff);
+}
+.id-corner-circle.tl { top: -8px;  left: -8px; }
+.id-corner-circle.tr { top: -8px;  right: -8px; }
+.id-corner-circle.bl { bottom: -8px; left: -8px; }
+.id-corner-circle.br { bottom: -8px; right: -8px; }
+
+/* === TOP/BOTTOM CENTER TABS === */
+.id-tab {
+  position: absolute;
+  left: 50%; transform: translateX(-50%);
+  width: 36px; height: 6px;
+  background: var(--card-accent, #00e5ff);
+  box-shadow: 0 0 8px var(--card-accent, #00e5ff);
+  z-index: 20;
+}
+.id-tab.top    { top: -4px; }
+.id-tab.bottom { bottom: -4px; }
+
+/* === STATUS BADGE (centered top) === */
+.id-status-badge {
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-title);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 5px;
+  color: #ffffff;
+  background: var(--card-badge-bg, rgba(20, 60, 100, 0.95));
+  border: 1.5px solid var(--card-accent, #00e5ff);
+  padding: 3px 16px;
+  z-index: 25;
+  white-space: nowrap;
+  box-shadow: 0 0 14px var(--card-accent, #00e5ff);
+  text-shadow: 0 0 8px rgba(255,255,255,0.6);
 }
 
 /* Corner bolts — square, tactical */
@@ -779,10 +877,10 @@ body {
   z-index: 10;
   pointer-events: none;
 }
-.profile-corner.tl { top: -4px;  left: -4px;  border-top: 2px solid var(--neon-glow); border-left: 2px solid var(--neon-glow); }
-.profile-corner.tr { top: -4px;  right: -4px; border-top: 2px solid var(--neon-glow); border-right: 2px solid var(--neon-glow); }
-.profile-corner.bl { bottom: -4px; left: -4px;  border-bottom: 2px solid var(--neon-glow); border-left: 2px solid var(--neon-glow); }
-.profile-corner.br { bottom: -4px; right: -4px; border-bottom: 2px solid var(--neon-glow); border-right: 2px solid var(--neon-glow); }
+.profile-corner.tl { top: -4px;  left: -4px;  border-top: 2px solid var(--card-accent, var(--neon-glow)); border-left: 2px solid var(--card-accent, var(--neon-glow)); }
+.profile-corner.tr { top: -4px;  right: -4px; border-top: 2px solid var(--card-accent, var(--neon-glow)); border-right: 2px solid var(--card-accent, var(--neon-glow)); }
+.profile-corner.bl { bottom: -4px; left: -4px;  border-bottom: 2px solid var(--card-accent, var(--neon-glow)); border-left: 2px solid var(--card-accent, var(--neon-glow)); }
+.profile-corner.br { bottom: -4px; right: -4px; border-bottom: 2px solid var(--card-accent, var(--neon-glow)); border-right: 2px solid var(--card-accent, var(--neon-glow)); }
 
 .profile-avatar-grid {
   position: absolute;
@@ -823,21 +921,111 @@ body {
 
 .profile-details-username {
   font-family: var(--font-title);
-  font-size: 19px;
+  font-size: 18px;
   font-weight: 900;
   color: #ffffff;
   text-shadow:
-    0 0 8px rgba(255, 255, 255, 0.8),
-    0 0 20px var(--neon-glow),
-    0 0 40px var(--neon-glow);
+    0 0 8px rgba(255, 255, 255, 0.9),
+    0 0 20px var(--card-accent, var(--neon-glow)),
+    0 0 40px var(--card-accent, var(--neon-glow));
   text-transform: uppercase;
   letter-spacing: 2px;
   line-height: 1;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   width: 100%;
+}
+
+/* === DATA ROWS (FACTION / CLASS / JOB) === */
+.profile-data-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 100%;
+  margin-bottom: 6px;
+}
+.profile-data-row {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  font-family: var(--font-title);
+  font-size: 10px;
+  line-height: 1.4;
+}
+.profile-data-key {
+  color: var(--card-accent, #00e5ff);
+  font-weight: 700;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.profile-data-key::after { content: ':'; }
+.profile-data-val {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  line-height: 1.3;
+}
+.profile-data-val.accent {
+  color: var(--card-accent2, #00e5ff);
+  text-shadow: 0 0 8px var(--card-accent, #00e5ff);
+}
+
+/* === ACTIVE STATUS ROW === */
+.profile-active-status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-title);
+  font-size: 11px;
+  font-weight: 800;
+  color: #4ade80;
+  letter-spacing: 2px;
+  margin: 2px 0;
+}
+.profile-active-status .profile-status-led {
+  margin: 0;
+  flex-shrink: 0;
+}
+.profile-active-status .status-active-txt {
+  color: #4ade80;
+  text-shadow: 0 0 8px #4ade80;
+}
+
+/* === DIVIDER === */
+.profile-data-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--card-accent, #00e5ff), transparent);
+  opacity: 0.4;
+  margin: 3px 0;
+}
+
+/* === NEW ID BLOCK === */
+.profile-id-block-new {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  width: 100%;
+}
+.profile-id-lbl {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--card-accent, #00e5ff);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+.profile-id-num {
+  font-family: var(--font-title);
+  font-size: 15px;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: 4px;
+  text-shadow: 0 0 10px var(--card-accent, #00e5ff);
 }
 
 /* Status display panel — sharp HUD style */
