@@ -2,198 +2,229 @@
   "coralis": {
     "tier1": [
       {
-        "id": "guardian",
-        "name": "Guardian",
-        "desc": "Prajurit pelindung suci",
+        "id": "sentinel",
+        "name": "Sentinel",
+        "desc": "Arcane Elven Warrior",
         "bonus": {
-          "hp": 60,
-          "atk": 4,
-          "def": 8
+          "hp": 195,
+          "atk": 29,
+          "def": 20
         },
         "skills": [
-          "Sword Strike",
-          "Divine Block"
+          "Aura Slash"
         ]
       },
       {
-        "id": "mystic_archer",
-        "name": "Mystic Archer",
-        "desc": "Pemanah berenergi spiritual",
+        "id": "pathfinder",
+        "name": "Pathfinder",
+        "desc": "Arcane Elven Ranger",
         "bonus": {
-          "hp": 30,
-          "atk": 12,
-          "def": 0
+          "hp": 170,
+          "atk": 34,
+          "def": 14
         },
         "skills": [
-          "Spiritual Arrow",
-          "Wind Walk"
+          "Wind Arrow"
+        ]
+      },
+      {
+        "id": "oracle",
+        "name": "Oracle",
+        "desc": "Arcane Elven Summoner",
+        "bonus": {
+          "hp": 160,
+          "atk": 23,
+          "def": 15
+        },
+        "skills": [
+          "Spirit Call"
+        ]
+      },
+      {
+        "id": "arcanist",
+        "name": "Arcanist",
+        "desc": "Arcane Elven Mage",
+        "bonus": {
+          "hp": 165,
+          "atk": 32,
+          "def": 13
+        },
+        "skills": [
+          "Arcane Blast"
         ]
       }
     ],
     "tier2": [
       {
-        "id": "spirit_knight",
-        "name": "Spirit Knight",
-        "desc": "Ksatria berpedang energi aura",
+        "id": "warden",
+        "name": "Warden",
+        "levelReq": 32,
+        "desc": "Advanced Arcane Warrior",
         "bonus": {
           "hp": 300,
-          "atk": 15,
+          "atk": 50,
           "def": 35
         },
         "skills": [
-          "Spirit Blade",
-          "Holy Aegis"
+          "Nature Guard"
         ]
       },
       {
-        "id": "craftsman",
-        "name": "Craftsman",
-        "levelReq": 30,
-        "desc": "Process, produce, and create quality items.",
+        "id": "windrunner",
+        "name": "Windrunner",
+        "levelReq": 32,
+        "desc": "Advanced Arcane Ranger",
         "bonus": {
-          "hp": 100,
-          "atk": 45,
-          "def": 10
+          "hp": 250,
+          "atk": 60,
+          "def": 25
         },
         "skills": [
-          "Set Guard Tower"
+          "Gale Shot"
         ]
       },
       {
-        "id": "moon_ranger",
-        "name": "Moon Ranger",
-        "desc": "Pemanah taktis siluman bulan",
+        "id": "celestial_oracle",
+        "name": "Celestial Oracle",
+        "levelReq": 32,
+        "desc": "Advanced Arcane Summoner",
         "bonus": {
-          "hp": 150,
+          "hp": 220,
           "atk": 40,
-          "def": 15
+          "def": 28
         },
         "skills": [
-          "Lunar Piercer",
-          "Shadow Step"
+          "Divine Eidolon"
         ]
       },
       {
-        "id": "caster",
-        "name": "Caster",
-        "levelReq": 30,
-        "desc": "Aggressive Force combatant channelling Dark Force expressly for combat.",
+        "id": "rune_caster",
+        "name": "Rune Caster",
+        "levelReq": 32,
+        "desc": "Advanced Arcane Mage",
         "bonus": {
-          "hp": 80,
-          "atk": 50,
-          "def": 5
+          "hp": 230,
+          "atk": 55,
+          "def": 22
         },
         "skills": [
-          "Channel (+35% ATK with Force Attack)"
-        ]
-      },
-      {
-        "id": "summoner",
-        "name": "Summoner",
-        "levelReq": 30,
-        "desc": "Wields Force to draw and control spiritual energy and Animus.",
-        "bonus": {
-          "hp": 60,
-          "atk": 40,
-          "def": 8
-        },
-        "skills": [
-          "Animus Call",
-          "Spirit Wield"
+          "Rune Explosion"
         ]
       }
     ],
     "tier3": [
       {
-        "id": "lumina_paladin",
-        "name": "Lumina Paladin",
-        "desc": "Ksatria pelindung abadi tak tertembus",
+        "id": "knight",
+        "name": "Knight",
+        "levelReq": 42,
+        "desc": "Elite Arcane Warrior",
+        "bonus": {
+          "hp": 600,
+          "atk": 110,
+          "def": 80
+        },
+        "skills": [
+          "Sacred Blade"
+        ]
+      },
+      {
+        "id": "shadow_hunter",
+        "name": "Shadow Hunter",
+        "levelReq": 42,
+        "desc": "Elite Arcane Ranger",
+        "bonus": {
+          "hp": 500,
+          "atk": 130,
+          "def": 60
+        },
+        "skills": [
+          "Eclipse Arrow"
+        ]
+      },
+      {
+        "id": "conjurer",
+        "name": "Conjurer",
+        "levelReq": 42,
+        "desc": "Elite Arcane Summoner",
+        "bonus": {
+          "hp": 450,
+          "atk": 90,
+          "def": 65
+        },
+        "skills": [
+          "Summon Behemoth"
+        ]
+      },
+      {
+        "id": "mystic",
+        "name": "Mystic",
+        "levelReq": 42,
+        "desc": "Elite Arcane Mage",
+        "bonus": {
+          "hp": 470,
+          "atk": 120,
+          "def": 50
+        },
+        "skills": [
+          "Mystic Nova"
+        ]
+      }
+    ],
+    "tier4": [
+      {
+        "id": "blademaster",
+        "name": "Blademaster",
+        "levelReq": 55,
+        "desc": "Master Arcane Warrior",
+        "bonus": {
+          "hp": 1200,
+          "atk": 250,
+          "def": 180
+        },
+        "skills": [
+          "Blade Dance"
+        ]
+      },
+      {
+        "id": "stargazer",
+        "name": "Stargazer",
+        "levelReq": 55,
+        "desc": "Master Arcane Ranger",
+        "bonus": {
+          "hp": 1000,
+          "atk": 290,
+          "def": 140
+        },
+        "skills": [
+          "Starfall Arrow"
+        ]
+      },
+      {
+        "id": "divine_summoner",
+        "name": "Divine Summoner",
+        "levelReq": 55,
+        "desc": "Master Arcane Summoner",
         "bonus": {
           "hp": 900,
-          "atk": 50,
-          "def": 90
+          "atk": 200,
+          "def": 150
         },
         "skills": [
-          "Guardian Shield",
-          "Revenge Strike"
+          "Avatar of Lumina"
         ]
       },
       {
-        "id": "artist",
-        "name": "Artist",
-        "levelReq": 40,
-        "desc": "Imbuing armour supply work with both functionality and artistry.",
+        "id": "archmage",
+        "name": "Archmage",
+        "levelReq": 55,
+        "desc": "Master Arcane Mage",
         "bonus": {
-          "hp": 250,
-          "atk": 140,
-          "def": 25
+          "hp": 950,
+          "atk": 270,
+          "def": 120
         },
         "skills": [
-          "Gauge Recovery",
-          "Rebirth"
-        ]
-      },
-      {
-        "id": "star_seeker",
-        "name": "Star Seeker",
-        "desc": "Pemburu berpanah bintang pemecah gravitasi",
-        "bonus": {
-          "hp": 400,
-          "atk": 110,
-          "def": 40
-        },
-        "skills": [
-          "Meteor Arrow",
-          "Gravity Bind"
-        ]
-      },
-      {
-        "id": "warlock",
-        "name": "Warlock",
-        "levelReq": 40,
-        "desc": "Most efficient Force users, rendering foes immobile with devastating combat Force.",
-        "bonus": {
-          "hp": 200,
-          "atk": 160,
-          "def": 15
-        },
-        "skills": [
-          "Focus",
-          "Stone Curse",
-          "Striking Force"
-        ]
-      },
-      {
-        "id": "dark_priest",
-        "name": "Dark Priest",
-        "levelReq": 40,
-        "desc": "Support Force wielder blessed by DECEM, transports comrades to safety.",
-        "bonus": {
-          "hp": 350,
-          "atk": 80,
-          "def": 30
-        },
-        "skills": [
-          "Force Shield",
-          "Return Gate",
-          "Escape"
-        ]
-      },
-      {
-        "id": "grazier",
-        "name": "Grazier",
-        "levelReq": 40,
-        "desc": "Trained to call and control the most powerful Anima of the spirit world.",
-        "bonus": {
-          "hp": 300,
-          "atk": 120,
-          "def": 25
-        },
-        "skills": [
-          "Animus Rest",
-          "Fast Recall",
-          "Anima Maxima",
-          "Life Conflict"
+          "Arcane Cataclysm"
         ]
       }
     ]

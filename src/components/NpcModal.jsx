@@ -21,10 +21,10 @@ const CLASS_LANES = {
     { title: "Psion Path", indices: [[3], [3], [3], [3]] }
   ],
   coralis: [
-    { title: "Warrior Lane", indices: [[0], [0], [0]] },
-    { title: "Specialist Lane", indices: [[], [1], [1]] },
-    { title: "Ranger Lane", indices: [[1], [2], [2]] },
-    { title: "Mystic Lane", indices: [[], [3, 4], [3, 4, 5]] }
+    { title: "Warrior Path", indices: [[0], [0], [0], [0]] },
+    { title: "Ranger Path", indices: [[1], [1], [1], [1]] },
+    { title: "Summoner Path", indices: [[2], [2], [2], [2]] },
+    { title: "Mage Path", indices: [[3], [3], [3], [3]] }
   ],
   acreton: [
     { title: "Warrior Lane", indices: [[0], [0], [0]] },
@@ -411,20 +411,19 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                                         </>
                                       );
                                     } else if (player.race === 'coralis') {
-                                      let str = 0, dex = 0, int = 0, vit = 0;
-                                      if (j.id === 'guardian' || j.id === 'spirit_knight') { str = 12; dex = 8; int = 4; vit = 6; }
-                                      else if (j.id === 'mystic_archer') { str = 6; dex = 14; int = 6; vit = 4; }
-                                      else if (j.id === 'caster') { str = 2; dex = 6; int = 16; vit = 6; }
-                                      if (str || dex || int || vit) {
-                                        return (
-                                          <>
-                                            <span><span style={{color: '#ff4444'}}>STR</span> {str}</span>
-                                            <span><span style={{color: '#00e5ff'}}>DEX</span> {dex}</span>
-                                            <span><span style={{color: '#bb88ff'}}>INT</span> {int}</span>
-                                            <span><span style={{color: '#4caf50'}}>VIT</span> {vit}</span>
-                                          </>
-                                        );
-                                      }
+                                      let bHp = 0, bAtk = 0, bDef = 0;
+                                      const laneT = activeLane.title.toLowerCase();
+                                      if (laneT.includes('warrior')) { bHp = 195; bAtk = 29; bDef = 20; }
+                                      else if (laneT.includes('ranger')) { bHp = 170; bAtk = 34; bDef = 14; }
+                                      else if (laneT.includes('summoner')) { bHp = 160; bAtk = 23; bDef = 15; }
+                                      else if (laneT.includes('mage')) { bHp = 165; bAtk = 32; bDef = 13; }
+                                      return (
+                                        <>
+                                          <span><span style={{color: '#ff4444'}}>HP</span> {bHp}</span>
+                                          <span><span style={{color: '#ffaa00'}}>ATK</span> {bAtk}</span>
+                                          <span><span style={{color: '#00ccff'}}>DEF</span> {bDef}</span>
+                                        </>
+                                      );
                                     } else if (player.race === 'acreton') {
                                       let str = 0, dex = 0, int = 0, vit = 0;
                                       if (j.id === 'cadet' || j.id === 'iron_trooper') { str = 14; dex = 6; int = 2; vit = 8; }

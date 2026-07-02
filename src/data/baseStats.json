@@ -156,5 +156,25 @@
       "atk": 31,
       "def": 14
     }
+  },
+  "sentinel": {
+    "hp": 195,
+    "atk": 29,
+    "def": 20
+  },
+  "pathfinder": {
+    "hp": 170,
+    "atk": 34,
+    "def": 14
+  },
+  "oracle": {
+    "hp": 160,
+    "atk": 23,
+    "def": 15
+  },
+  "arcanist": {
+    "hp": 165,
+    "atk": 32,
+    "def": 13
   }
 }
