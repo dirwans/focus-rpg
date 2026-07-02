@@ -1,0 +1,170 @@
+{
+  "acreton": {
+    "name": "ARES",
+    "icon": "🤖",
+    "description": "Drone rapuh tetapi memberikan DPS paling tinggi.",
+    "componentsTitle": "ARES Assembly Components",
+    "totalLabel": "Total Perakitan",
+    "components": [
+      { "name": "ARES Core", "cost": 500000 },
+      { "name": "Twin Frame", "cost": 750000 },
+      { "name": "Flight Module", "cost": 1000000 },
+      { "name": "Weapon System", "cost": 1250000 },
+      { "name": "Synchronizer", "cost": 1500000 }
+    ],
+    "evolutions": [
+      {
+        "id": "ares_x",
+        "name": "ARES X",
+        "levelReq": 32,
+        "atk": 150,
+        "hp": 5000,
+        "crit": 5,
+        "cost": 5000000,
+        "costLabel": "Gratis (setelah seluruh part selesai dirakit)"
+      },
+      {
+        "id": "ares_nemesis",
+        "name": "ARES Nemesis",
+        "levelReq": 42,
+        "atk": 320,
+        "hp": 15000,
+        "crit": 10,
+        "cost": 100000000,
+        "costLabel": "100,000,000 CRD"
+      },
+      {
+        "id": "ares_dominator",
+        "name": "ARES Dominator",
+        "levelReq": 55,
+        "atk": 600,
+        "hp": 35000,
+        "crit": 15,
+        "cost": 500000000,
+        "costLabel": "500,000,000 CRD"
+      },
+      {
+        "id": "ares_apocalypse",
+        "name": "ARES Apocalypse",
+        "levelReq": 65,
+        "atk": 1000,
+        "hp": 75000,
+        "crit": 20,
+        "cost": 2000000000,
+        "costLabel": "2,000,000,000 CRD"
+      }
+    ]
+  },
+  "bionex": {
+    "name": "M.E.U.",
+    "icon": "⚙️",
+    "description": "Mecha dengan HP luar biasa besar, menjadi tank sejati.",
+    "componentsTitle": "M.E.U. Components",
+    "totalLabel": "Total Perakitan",
+    "components": [
+      { "name": "MEU Chassis", "cost": 500000 },
+      { "name": "MEU Cockpit", "cost": 750000 },
+      { "name": "MEU Core", "cost": 1000000 },
+      { "name": "MEU Armament", "cost": 1250000 },
+      { "name": "MEU Ignition Key", "cost": 1500000 }
+    ],
+    "evolutions": [
+      {
+        "id": "meu_atlas",
+        "name": "M.E.U. Atlas",
+        "levelReq": 32,
+        "atk": 120,
+        "hp": 100000,
+        "crit": 3,
+        "cost": 5000000,
+        "costLabel": "Gratis (setelah seluruh part selesai dirakit)"
+      },
+      {
+        "id": "meu_goliath",
+        "name": "M.E.U. Goliath",
+        "levelReq": 42,
+        "atk": 280,
+        "hp": 250000,
+        "crit": 6,
+        "cost": 100000000,
+        "costLabel": "100,000,000 CRD"
+      },
+      {
+        "id": "meu_colossus",
+        "name": "M.E.U. Colossus",
+        "levelReq": 55,
+        "atk": 500,
+        "hp": 500000,
+        "crit": 10,
+        "cost": 500000000,
+        "costLabel": "500,000,000 CRD"
+      },
+      {
+        "id": "meu_titan",
+        "name": "M.E.U. Titan",
+        "levelReq": 65,
+        "atk": 800,
+        "hp": 1000000,
+        "crit": 15,
+        "cost": 2000000000,
+        "costLabel": "2,000,000,000 CRD"
+      }
+    ]
+  },
+  "coralis": {
+    "name": "Ancient Spirit",
+    "icon": "🌿",
+    "description": "HP rendah, tetapi peluang critical sangat tinggi sehingga menghasilkan burst damage.",
+    "componentsTitle": "Ancient Spirit Components",
+    "totalLabel": "Total Ritual",
+    "components": [
+      { "name": "Spirit Essence", "cost": 500000 },
+      { "name": "Soul Crystal", "cost": 750000 },
+      { "name": "Ancient Relic", "cost": 1000000 },
+      { "name": "Spirit Sigil", "cost": 1250000 },
+      { "name": "Spirit Covenant", "cost": 1500000 }
+    ],
+    "evolutions": [
+      {
+        "id": "spirit_sylph",
+        "name": "Sylph",
+        "levelReq": 32,
+        "atk": 140,
+        "hp": 4000,
+        "crit": 10,
+        "cost": 5000000,
+        "costLabel": "Gratis (setelah seluruh part selesai dirakit)"
+      },
+      {
+        "id": "spirit_sanctus",
+        "name": "Sanctus",
+        "levelReq": 42,
+        "atk": 300,
+        "hp": 12000,
+        "crit": 18,
+        "cost": 100000000,
+        "costLabel": "100,000,000 CRD"
+      },
+      {
+        "id": "spirit_seraph",
+        "name": "Seraph",
+        "levelReq": 55,
+        "atk": 550,
+        "hp": 30000,
+        "crit": 28,
+        "cost": 500000000,
+        "costLabel": "500,000,000 CRD"
+      },
+      {
+        "id": "spirit_empyrean",
+        "name": "Empyrean",
+        "levelReq": 65,
+        "atk": 900,
+        "hp": 60000,
+        "crit": 40,
+        "cost": 2000000000,
+        "costLabel": "2,000,000,000 CRD"
+      }
+    ]
+  }
+}

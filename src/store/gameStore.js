@@ -1432,6 +1432,49 @@ export const useGameStore = create(
         })
       },
 
+      craftAscensionArms: (evoData, raceAresName) => {
+        const { player } = get()
+        if (player.resources.credits < evoData.cost) {
+          alert('Credits (◈) tidak cukup!')
+          return false
+        }
+        if (player.level < evoData.levelReq) {
+          alert(`Level ${evoData.levelReq} dibutuhkan!`)
+          return false
+        }
+
+        const newItem = {
+          uid: Date.now(),
+          id: evoData.id,
+          name: evoData.name,
+          type: 'ascension_arms',
+          rarity: 'ssr', // Always SSR equivalent
+          emoji: raceAresName === 'ARES' ? '🤖' : raceAresName === 'M.E.U.' ? '⚙️' : '🌿',
+          bonus: {
+            atk: evoData.atk,
+            hp: evoData.hp,
+            crit: evoData.crit
+          },
+          isEquipped: true
+        }
+
+        set({
+          player: {
+            ...player,
+            resources: {
+              ...player.resources,
+              credits: player.resources.credits - evoData.cost
+            },
+            equipment: {
+              ...player.equipment,
+              ascension_arms: newItem
+            },
+            savedAt: Date.now()
+          }
+        })
+        return true
+      },
+
       // ── Archon Purchasing (Premium Shop) ───────────────────
       craftArchonItem: (itemId) => {
         const { player } = get()
