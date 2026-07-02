@@ -418,9 +418,9 @@
         "desc": "Warrior spesialis pertahanan.",
         "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/myrmidon_class.jpg",
         "bonus": {
-          "hp": 250,
-          "atk": 40,
-          "def": 15
+          "hp": 95,
+          "atk": 11,
+          "def": 10
         },
         "skills": [],
         "levelReq": 32
@@ -431,9 +431,9 @@
         "desc": "Penembak jitu jarak jauh menengah.",
         "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_vigilante.jpg",
         "bonus": {
-          "hp": 150,
-          "atk": 40,
-          "def": 15
+          "hp": 50,
+          "atk": 20,
+          "def": 3
         },
         "skills": [],
         "levelReq": 32
@@ -444,9 +444,9 @@
         "desc": "Ahli pembuat mesin tempur.",
         "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_aengineer.jpg",
         "bonus": {
-          "hp": 150,
-          "atk": 35,
-          "def": 15
+          "hp": 65,
+          "atk": 11,
+          "def": 8
         },
         "skills": [],
         "levelReq": 32
@@ -457,9 +457,9 @@
         "desc": "Spiritualist dengan Force menengah.",
         "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_mage.jpg",
         "bonus": {
-          "hp": 80,
-          "atk": 50,
-          "def": 5
+          "hp": 45,
+          "atk": 17,
+          "def": 4
         },
         "skills": [],
         "levelReq": 32
@@ -472,9 +472,9 @@
         "desc": "Pertahanan garda terdepan elit.",
         "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_berserker.jpg",
         "bonus": {
-          "hp": 800,
-          "atk": 120,
-          "def": 40
+          "hp": 145,
+          "atk": 19,
+          "def": 18
         },
         "skills": [],
         "levelReq": 42
@@ -485,9 +485,9 @@
         "desc": "Penembak jitu dengan akurasi mematikan.",
         "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_infiltrator.jpg",
         "bonus": {
-          "hp": 600,
-          "atk": 150,
-          "def": 20
+          "hp": 75,
+          "atk": 30,
+          "def": 6
         },
         "skills": [],
         "levelReq": 42
@@ -498,9 +498,9 @@
         "desc": "Ahli teknologi terkemuka Bionex.",
         "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_mental_smith.jpg",
         "bonus": {
-          "hp": 500,
-          "atk": 100,
-          "def": 40
+          "hp": 100,
+          "atk": 18,
+          "def": 14
         },
         "skills": [],
         "levelReq": 42
@@ -511,9 +511,9 @@
         "desc": "Master Force Bionex.",
         "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_wizard.jpg",
         "bonus": {
-          "hp": 400,
-          "atk": 160,
-          "def": 25
+          "hp": 65,
+          "atk": 28,
+          "def": 7
         },
         "skills": [],
         "levelReq": 42
@@ -526,9 +526,9 @@
         "desc": "Komandan tertinggi militer Bionex.",
         "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_sentinel.jpg",
         "bonus": {
-          "hp": 1200,
-          "atk": 200,
-          "def": 100
+          "hp": 215,
+          "atk": 29,
+          "def": 28
         },
         "skills": [],
         "levelReq": 55
@@ -539,9 +539,9 @@
         "desc": "Pembunuh bayaran senyap tak kasat mata.",
         "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_sniper.jpg",
         "bonus": {
-          "hp": 900,
-          "atk": 250,
-          "def": 50
+          "hp": 110,
+          "atk": 42,
+          "def": 10
         },
         "skills": [],
         "levelReq": 55
@@ -552,9 +552,9 @@
         "desc": "Direktur persenjataan dan mesin super.",
         "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_armor_rider.jpg",
         "bonus": {
-          "hp": 1000,
-          "atk": 180,
-          "def": 80
+          "hp": 150,
+          "atk": 27,
+          "def": 22
         },
         "skills": [],
         "levelReq": 55
@@ -565,9 +565,9 @@
         "desc": "Wujud murni energi Force tak terbatas.",
         "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_astralist.jpg",
         "bonus": {
-          "hp": 800,
-          "atk": 300,
-          "def": 60
+          "hp": 90,
+          "atk": 42,
+          "def": 11
         },
         "skills": [],
         "levelReq": 55
