@@ -177,47 +177,6 @@ export default function LibraryModal({ onClose }) {
                 </ul>
               </div>
 
-              <div style={styles.itemCard}>
-                <div style={styles.itemTitle}>📋 Ringkasan (Settings)</div>
-                <table style={{ width: '100%', fontSize: '13px', marginTop: '8px', borderCollapse: 'collapse' }}>
-                  <tbody>
-                    <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-                      <td style={{ padding: '4px 0' }}>❤️ Auto HP Potion</td>
-                      <td style={{ textAlign: 'right' }}>OFF / 30% / 50% / 70%</td>
-                    </tr>
-                    <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-                      <td style={{ padding: '4px 0' }}>🔷 Auto FP Potion</td>
-                      <td style={{ textAlign: 'right' }}>OFF / 20% / 40% / 60%</td>
-                    </tr>
-                    <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-                      <td style={{ padding: '4px 0' }}>⚔️ Auto Skill</td>
-                      <td style={{ textAlign: 'right' }}>ON / OFF</td>
-                    </tr>
-                    <tr>
-                      <td style={{ padding: '4px 0' }}>🎒 Auto Loot</td>
-                      <td style={{ textAlign: 'right' }}>ON / OFF</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <div style={styles.itemCard}>
-                <div style={styles.itemTitle}>🗑️ Delete Character</div>
-                <ul style={styles.list}>
-                  <li>Karakter dapat dihapus oleh pemain.</li>
-                  <li>Setelah konfirmasi, karakter akan <strong>terhapus permanen</strong> beserta seluruh progresnya.</li>
-                </ul>
-              </div>
-
-              <div style={styles.itemCard}>
-                <div style={styles.itemTitle}>📝 Rename Character</div>
-                <ul style={styles.list}>
-                  <li>Dapat mengganti nama karakter.</li>
-                  <li>Membutuhkan item <strong>Rename Card</strong>.</li>
-                  <li><strong>Rename Card</strong> hanya tersedia di <strong>Premium Shop (NXC)</strong>.</li>
-                </ul>
-              </div>
-
             </div>
           )}
         </div>
