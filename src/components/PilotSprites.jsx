@@ -26,18 +26,21 @@ function getJobLane(jobId) {
   const warriorJobs = [
     'cadet', 'iron_trooper', 'iron_vanguard',
     'recruit', 'vanguard', 'titan_pilot',
-    'guardian', 'spirit_knight', 'lumina_paladin'
+    'guardian', 'spirit_knight', 'lumina_paladin',
+    'sentinel', 'warden', 'knight', 'blademaster'
   ]
   const rangerJobs = [
     'gunner', 'siege_gunner', 'nova_destroyer',
     'ranger', 'sharpshooter', 'railgun_elite',
-    'mystic_archer', 'moon_ranger', 'star_seeker'
+    'mystic_archer', 'moon_ranger', 'star_seeker',
+    'pathfinder', 'windrunner', 'shadow_hunter', 'stargazer'
   ]
   const mysticJobs = [
-    'mystic', 'caster', 'summoner',
-    'warlock', 'dark_priest', 'grazier'
+    'caster',
+    'warlock', 'dark_priest', 'grazier',
+    'arcanist', 'rune_caster', 'mystic', 'archmage'
   ]
-  // specialist = all other Coralis jobs (acolyte, eidolon_caller, high_summoner)
+  // specialist = all other Coralis jobs (acolyte, eidolon_caller, high_summoner, oracle, celestial_oracle, conjurer, divine_summoner)
   if (warriorJobs.includes(jobId)) return 'warrior'
   if (rangerJobs.includes(jobId)) return 'ranger'
   if (mysticJobs.includes(jobId)) return 'mystic'
