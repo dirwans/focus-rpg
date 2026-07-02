@@ -41,31 +41,15 @@ function calcStat(key, upgradeLevel, raceId) {
   return Math.floor(base * multiplier)
 }
 
-function calcExpToNext(level) {
-  // Waktu Idle per Level based on user curve
-  let targetMins = 5
-  if (level <= 10) targetMins = 5
-  else if (level <= 20) targetMins = 10
-  else if (level <= 30) targetMins = 20
-  else if (level === 31) targetMins = 30
-  else if (level <= 41) targetMins = 3 * 60
-  else if (level <= 54) targetMins = 8 * 60
-  else if (level <= 65) targetMins = 16 * 60
-  else targetMins = 24 * 60
-
-  const sectorStats = [
-    { exp: 14 }, { exp: 20 }, { exp: 30 }, { exp: 40 },
-    { exp: 55 }, { exp: 74 }, { exp: 99 }, { exp: 133 },
-    { exp: 178 }, { exp: 241 }
-  ]
-
-  const sectorIdx = Math.min(Math.max(1, Math.ceil(level / 10)), 10) - 1
-  const s = sectorStats[sectorIdx]
-  
-  // Assume a standard un-upgraded player kills roughly 12 mobs per minute
-  const expPerMin = 12 * s.exp
-  
-  return Math.floor(expPerMin * targetMins)
+function getMinutesToNextLevel(level) {
+  if (level <= 10) return 5
+  if (level <= 20) return 10
+  if (level <= 30) return 20
+  if (level === 31) return 30
+  if (level <= 41) return 180
+  if (level <= 54) return 480
+  if (level <= 65) return 960
+  return 1440
 }
 
 function getSector(level) {
@@ -150,78 +134,35 @@ function computeRewards(player, mode, minutes) {
   if (mode === 'gather') {
     return {
       kills: 0,
-      exp: Math.floor(elapsedSec * 0.18 * race.bonuses.expMultiplier),
+      exp: Math.floor(elapsedSec / 60),
       anium: Math.floor(elapsedSec * 0.72 * race.bonuses.gatherMultiplier),
     }
   }
   const sectorIdx = getSector(player.level) - 1
   const mobs = enemies.sectors[sectorIdx].mobs
   const avg = (f) => mobs.reduce((a, m) => a + f(m), 0) / mobs.length
-  let avgHp, avgDef, avgExp, avgAni
+  let avgHp, avgDef, avgAni
   if (player.level % 10 === 0) {
     const boss = enemies.sectors[sectorIdx].boss
-    avgHp = boss.hp; avgDef = boss.def; avgExp = boss.expReward; avgAni = boss.aniumReward
+    avgHp = boss.hp; avgDef = boss.def; avgAni = boss.aniumReward
   } else {
     avgHp = avg((m) => m.hp) * 1.2
     avgDef = avg((m) => m.def)
-    avgExp = avg((m) => m.expReward) * 1.2
     avgAni = avg((m) => m.aniumReward) * 1.2
   }
   const atk = calcStat('atk', player.upgrades?.atk || 0, player.race)
   const dps = Math.max(1, atk - avgDef + 3.5) * 1.096 // ~rata2 crit/variance
-  // Minimum 2 seconds per kill (was 1s). Prevents base ATK from trivializing
-  // early sectors — a level 1 player should need 2+ hits on most mobs.
   const secPerKill = Math.max(2, avgHp / dps)
   const kills = Math.floor(elapsedSec / secPerKill)
 
-  let currentLevel = player.level
-  let currentExp = player.exp
-  let totalExpGained = 0
   let totalAniumGained = 0
-
-  // Sector average mob level — offset +7 ensures white-name EXP cutoff (diff >= 7)
-  // never triggers before the player naturally moves to the next sector.
-  // Sector 1 (idx 0): mobLevel=7, white-name at player lv13. Player moves to sector 2 at lv11.
-  // Sector 2 (idx 1): mobLevel=17, white-name at player lv24. Player moves to sector 3 at lv21.
-  // This prevents players from getting stuck with 0 EXP mid-sector.
-  const mobLevel = sectorIdx * 10 + 7
-
   for (let i = 0; i < kills; i++) {
-    // 1. Calculate level difference (positive = player above mob, negative = mob above player)
-    const diff = currentLevel - mobLevel
-
-    // 2. RF Online color-name EXP multiplier:
-    // White name (mob too weak): diff >= 7 → 0 EXP
-    // Blue name (mob slightly weak): diff >= 4 → 30% EXP
-    // Yellow/Purple (mob same or stronger): full 100% EXP
-    // NOTE: Purple (mob much higher level) always gives FULL EXP — fighting
-    // stronger mobs is risky but never penalized in RF Online.
-    let expMult = 1.0
-    if (diff >= 7) {
-      expMult = 0.0     // White name: 0 EXP
-    } else if (diff >= 4) {
-      expMult = 0.3     // Blue name: 30% EXP
-    }
-    // diff <= 0 or negative: mob is equal/stronger → full EXP (no penalty)
-
-    // Removed blanket 1.3x EXP multiplier — race bonuses handle EXP rate differences
-    const expFromKill = Math.floor(avgExp * race.bonuses.expMultiplier * expMult)
-    totalExpGained += expFromKill
     totalAniumGained += Math.floor(avgAni)
-
-    // Simulate level up mid-session so currentLevel is updated for subsequent kills
-    currentExp += expFromKill
-    let expToNext = calcExpToNext(currentLevel)
-    while (currentExp >= expToNext && currentLevel < 70) {
-      currentExp -= expToNext
-      currentLevel += 1
-      expToNext = calcExpToNext(currentLevel)
-    }
   }
 
   return {
     kills,
-    exp: totalExpGained,
+    exp: Math.floor(elapsedSec / 60), // EXP now represents Idle Minutes
     anium: totalAniumGained,
   }
 }
@@ -762,7 +703,7 @@ export const useGameStore = create(
 
         // Apply death penalties
         const deaths = battle.deaths || 0
-        const deathPenaltyExp = deaths * 15
+        const deathPenaltyExp = deaths * 2 // 2 minutes penalty per death
         const deathPenaltyAnium = deaths * 30
         const deathPenaltyKills = deaths * 1
 
@@ -772,10 +713,10 @@ export const useGameStore = create(
 
         let newExp = player.exp + finalExp
         let newLevel = player.level
-        let expToNext = calcExpToNext(newLevel)
+        let expToNext = getMinutesToNextLevel(newLevel)
         let levelUps = 0
         while (newExp >= expToNext && newLevel < 70) {
-          newExp -= expToNext; newLevel += 1; levelUps += 1; expToNext = calcExpToNext(newLevel)
+          newExp -= expToNext; newLevel += 1; levelUps += 1; expToNext = getMinutesToNextLevel(newLevel)
         }
         const newSector = getSector(newLevel)
 
@@ -845,7 +786,7 @@ export const useGameStore = create(
 
         const finalLog = []
         if (levelUps > 0) finalLog.push(`🆙 LEVEL UP! LV.${newLevel} — Sector ${newSector}!`)
-        finalLog.push(`✅ Done! ${finalKills} kills | +${finalAnium}⬡ | +${finalExp}EXP${deaths > 0 ? ` (Died ${deaths} times)` : ''}${dropLog}`)
+        finalLog.push(`✅ Done! ${finalKills} kills | +${finalAnium}⬡ | +${finalExp} Menit${deaths > 0 ? ` (Died ${deaths} times)` : ''}${dropLog}`)
 
         set((s) => ({
           timer: { ...s.timer, state: 'completed', secondsLeft: 0 },
@@ -1363,7 +1304,7 @@ export const useGameStore = create(
       },
       getUpgradeCost: (key) => calcUpgradeCost(key, get().player.upgrades?.[key] || 0),
       loadPlayer: (savedPlayer) => set({ player: { ...initialPlayer, ...savedPlayer } }),
-      getExpToNext: () => calcExpToNext(get().player.level),
+      getExpToNext: () => getMinutesToNextLevel(get().player.level),
 
       // ── Weapon Refining & Combining ───────────────────────
       refineWeapon: () => {

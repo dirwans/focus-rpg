@@ -102,7 +102,7 @@ export default function Unit() {
         <div style={styles.expBg}>
           <div style={{ ...styles.expFill, width: expPct + '%' }} />
         </div>
-        <div style={styles.expText}>{player.exp.toLocaleString()} / {expMax.toLocaleString()} EXP ({expPct}%)</div>
+        <div style={styles.expText}>{player.exp.toLocaleString()} / {expMax.toLocaleString()} Menit ({expPct}%)</div>
       </AccordionSection>
 
 

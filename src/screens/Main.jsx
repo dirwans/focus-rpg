@@ -377,7 +377,7 @@ export default function Main() {
         {/* 5. Session summary (Bottom-most bar) */}
         <div style={styles.sessionSummaryActive}>
           <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 13, fontWeight: 700, textShadow: '0 0 4px #000' }}>
-            ⚔️ {t('kills_label', { kills: battle.kills })} &nbsp;|&nbsp; <span style={{ color: '#f5a623' }}>+{battle.sessionAnium}⬡</span> &nbsp;|&nbsp; <span style={{ color: '#00e5ff' }}>+{battle.sessionExp} EXP</span>
+            ⚔️ {t('kills_label', { kills: battle.kills })} &nbsp;|&nbsp; <span style={{ color: '#f5a623' }}>+{battle.sessionAnium}⬡</span> &nbsp;|&nbsp; <span style={{ color: '#00e5ff' }}>+{battle.sessionExp} Menit</span>
           </span>
         </div>
       </div>
@@ -403,9 +403,9 @@ export default function Main() {
 
       {/* EXP bar */}
       <div style={styles.expSection}>
-        <div style={styles.expLabel}>LV.{player.level} — {t('to_next_exp', { pct: expPct })}</div>
+        <div style={styles.expLabel}>LV.{player.level} — {t('to_next_exp', { pct: 100 - expPct })}</div>
         <div style={styles.expBg}><div style={{ ...styles.expFill, width: expPct + '%' }} /></div>
-        <div style={styles.expText}>{player.exp} / {expMax} EXP</div>
+        <div style={styles.expText}>{player.exp} / {expMax} Menit</div>
       </div>
 
 

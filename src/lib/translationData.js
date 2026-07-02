@@ -63,7 +63,6 @@ export const TRANSLATIONS = {
     pilot_label: "PILOT",
     ready_label: "READY",
     debris_label: "DEBRIS",
-    to_next_exp: "{pct}% to next",
 
     // Cargo screen
     empty_inventory: "No items yet",
@@ -110,7 +109,7 @@ export const TRANSLATIONS = {
     anium_cost_label: "⬡ Anium",
 
     // Unit screen
-    pilot_experience: "PILOT EXPERIENCE",
+    pilot_experience: "LEVEL PROGRESS",
     unit_specifications: "UNIT SPECIFICATIONS",
     race_lore_title: "{race} LORE",
     system_progress: "SYSTEM PROGRESS",
@@ -223,10 +222,12 @@ export const TRANSLATIONS = {
     focus_active: "⚔️ SESI FOKUS AKTIF",
     pilot_shield: "🛡️ Pelindung HP Pilot",
     force_point: "🔮 Force Point (FP)",
-    kills_label: "{kills} kill",
+    kills_label: "{kills} KILLS",
+    session_time: "WAKTU SESI",
+    to_next_exp: "Sisa {pct}%",
     deploy_unit: "⚡ LUNCURKAN UNIT",
     select_race: "⚡ PILIH RAS",
-    new_session: "🔄 SESI BARU",
+    new_session: "MULAI GRIND BARU",
     level_lbl: "LEVEL",
     sector_lbl: "SEKTOR",
     location_lbl: "LOKASI",
@@ -239,7 +240,6 @@ export const TRANSLATIONS = {
     pilot_label: "PILOT",
     ready_label: "SIAP",
     debris_label: "DEBRIS",
-    to_next_exp: "{pct}% ke level berikutnya",
 
     // Cargo screen
     empty_inventory: "Belum ada item",
@@ -286,7 +286,7 @@ export const TRANSLATIONS = {
     anium_cost_label: "⬡ Anium",
 
     // Unit screen
-    pilot_experience: "PENGALAMAN PILOT",
+    pilot_experience: "PROGRESS LEVEL",
     unit_specifications: "SPESIFIKASI UNIT",
     race_lore_title: "SEJARAH RAS {race}",
     system_progress: "PERKEMBANGAN SISTEM",
