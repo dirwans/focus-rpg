@@ -121,6 +121,7 @@ export default function LibraryModal({ onClose }) {
             </div>
           )}
 
+          {tab === 'war' && (
             <div style={styles.section}>
               <div style={styles.itemCard}>
                 <div style={styles.itemTitle}>📌 Ringkasan</div>
