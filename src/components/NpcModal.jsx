@@ -391,7 +391,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                                 {isActive && <span style={styles.activeBadge}>✓ ACTIVE</span>}
                               </div>
                               <div style={styles.cardJobDesc}>{j.desc}</div>
-                              <div style={{ ...styles.cardJobBonus, display: 'flex', flexWrap: 'wrap', gap: 12 }}>
+                              <div style={{ ...styles.cardJobBonus, display: 'flex', flexWrap: 'wrap', gap: 12, fontSize: 14 }}>
                                 {(() => {
                                   if (player.race === 'bionex' && jTier === 1) {
                                     let bHp = 0, bAtk = 0, bDef = 0;
@@ -402,7 +402,6 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                                     else if (laneT.includes('psion')) { bHp = 165; bAtk = 31; bDef = 14; }
                                     return (
                                       <>
-                                        <div style={{ position: 'absolute', top: 12, right: 12, fontSize: 10, color: 'rgba(0,229,255,0.7)', border: '1px solid rgba(0,229,255,0.3)', padding: '2px 6px', borderRadius: 4, letterSpacing: 1 }}>BASE STATS</div>
                                         <span><span style={{color: '#ff4444'}}>HP</span> {bHp}</span>
                                         <span><span style={{color: '#ffaa00'}}>ATK</span> {bAtk}</span>
                                         <span><span style={{color: '#00ccff'}}>DEF</span> {bDef}</span>
