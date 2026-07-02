@@ -102,7 +102,7 @@ export function BionexSprite({ job, size = 60, width, height, upperBodyOnly = fa
   return (
     <TransparentSprite
       src={img}
-      alt={Bionex }
+      alt={`Bionex ${job || 'pilot'}`}
       size={size}
       width={width}
       height={height}
