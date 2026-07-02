@@ -1633,9 +1633,11 @@ export const useGameStore = create(
       name: 'focus-rpg-save',
       merge: (persistedState, currentState) => {
         if (!persistedState) return currentState
-        if (persistedState.player && persistedState.player.race === 'bionex') {
-          persistedState.player.race = 'bionex'
-          persistedState.player.job = null // Reset to novice
+        if (persistedState.player) {
+          // Migrasi nama Faction lama -> baru
+          if (persistedState.player.race === 'acreton') persistedState.player.race = 'arctron';
+          if (persistedState.player.race === 'belterra') persistedState.player.race = 'bionex';
+          if (persistedState.player.race === 'coralis') persistedState.player.race = 'celestra';
         }
         const mergedPlayer = {
           ...currentState.player,
