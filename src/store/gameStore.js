@@ -284,6 +284,7 @@ export const useGameStore = create(
 
       // ── Race Selection ───────────────────────────────────
       openRaceSelect: () => set({ showRaceSelect: true }),
+      closeRaceSelect: () => set({ showRaceSelect: false }),
       selectRace: (raceId) => {
         set((s) => ({
           showRaceSelect: false,

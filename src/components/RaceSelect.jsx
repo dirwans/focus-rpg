@@ -13,7 +13,10 @@ export default function RaceSelect() {
 
   return (
     <div style={styles.overlay}>
-      <div style={styles.modal}>
+      <div style={{ ...styles.modal, position: 'relative' }}>
+        {useGameStore.getState().player.race && (
+          <button onClick={() => useGameStore.getState().closeRaceSelect()} style={{position:'absolute', top: 20, left: 16, background:'transparent', border:'none', color:'#00e5ff', fontSize: 20, cursor:'pointer', display:'flex', alignItems:'center'}}>❮</button>
+        )}
         <div style={styles.title}>⚔️ CHOOSE YOUR RACE</div>
         <div style={styles.sub}>This cannot be changed later</div>
         {Object.values(races).map((race) => (

@@ -178,6 +178,12 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
       <div className={`glass-panel cyber-panel ${raceClass}`} style={styles.modal}>
         {/* Modal Header */}
         <div style={styles.modalHeader}>
+          <button 
+            onClick={() => subView === 'lobby' ? onClose() : setSubView('lobby')} 
+            style={{background:'transparent', border:'none', color:'#00e5ff', fontSize: 20, cursor:'pointer', padding: '0 8px 0 0', display:'flex', alignItems:'center'}}
+          >
+            ❮
+          </button>
           <span style={styles.npcTitle}>
             {subView === 'lobby' && t('town_square')}
             {subView === 'specialist' && specialistName}
