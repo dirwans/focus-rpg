@@ -127,6 +127,14 @@ export default function Ranks() {
   const electionEndsInDays = archonData ? Math.floor(Math.max(0, archonData.endAt - Date.now()) / (1000 * 60 * 60 * 24)) : 7
   const candidatesList = archonData?.candidates?.[activeRace] || []
 
+  const COUNCIL_POSITIONS = [
+    { id: 'eminence', title: 'Eminence', icon: '👑', bonus: 'HP +10%, ATK +10%, DEF +10%, Acc +8%, Crit +5%, Skill Dmg +8%' },
+    { id: 'vice_eminence', title: 'Vice Eminence', icon: '⭐', bonus: 'HP +7%, ATK +7%, DEF +7%, Acc +5%, Crit +3%' },
+    { id: 'offensive', title: 'Offensive Council', icon: '⚔️', bonus: 'ATK +10%, Crit +6%, Acc +8%, Def Pen +5%' },
+    { id: 'defensive', title: 'Defensive Council', icon: '🛡️', bonus: 'HP +10%, DEF +12%, Block +6%, HP Rec +5%' },
+    { id: 'support', title: 'Support Council', icon: '🤝', bonus: 'Skill Dmg +5%, Max FP/MP +10%, CDR +5%, Heal +10%' }
+  ]
+
   return (
     <div style={styles.screen}>
       <div style={styles.tabs}>
@@ -140,26 +148,41 @@ export default function Ranks() {
         <div style={{ textAlign: 'center', color: '#7ab0d0', padding: 40, fontSize: 14 }}>Loading race data...</div>
       ) : (
         <>
-          {/* Archon Section */}
+          {/* Council Section */}
           {archonData && (
             <div style={{ padding: '16px 16px 8px' }}>
-              {/* Current Archon Banner */}
-              <div className={`glass-panel cyber-panel panel-${activeRace}`} style={{ padding: 16, marginBottom: 16, textAlign: 'center', position: 'relative' }}>
-                <div style={{ color: '#f5a623', fontSize: 13, fontWeight: 'bold', letterSpacing: 2, marginBottom: 8 }}>👑 PATRIARCH / ARCHON</div>
-                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 8 }}>
-                  <PilotSprite race={activeRace} size={48} />
-                </div>
-                <div style={{ fontSize: 20, fontWeight: 'bold', color: '#fff', marginBottom: 4, fontFamily: 'var(--font-title)' }}>
-                  {currentArchonName}
-                </div>
-                <div style={{ color: '#00c8ff', fontSize: 13, fontFamily: 'var(--font-mono)' }}>
-                  Period ends in: {electionEndsInDays} days
-                </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+                <h3 style={{ margin: 0, color: '#f5a623', fontSize: 16, fontFamily: 'var(--font-title)' }}>CURRENT COUNCIL</h3>
+                <span style={{ fontSize: 13, color: '#00c8ff', fontFamily: 'var(--font-mono)' }}>Ends in: {electionEndsInDays}d</span>
+              </div>
+              
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 20 }}>
+                {COUNCIL_POSITIONS.map((pos, idx) => {
+                  const sortedCandidates = [...candidatesList].sort((a,b) => (archonData.tallies?.[activeRace]?.[b.username]||0) - (archonData.tallies?.[activeRace]?.[a.username]||0))
+                  
+                  let occupantName = '— VACANT —'
+                  if (idx === 0) {
+                    occupantName = currentArchonName
+                  } else if (sortedCandidates[idx]) {
+                    occupantName = sortedCandidates[idx].username
+                  }
+
+                  return (
+                    <div key={pos.id} className={`glass-panel cyber-panel panel-${activeRace}`} style={{ padding: 12, borderRadius: 8, display: 'flex', alignItems: 'center', gap: 12 }}>
+                      <div style={{ fontSize: 32 }}>{pos.icon}</div>
+                      <div style={{ flex: 1 }}>
+                        <div style={{ color: '#f5a623', fontSize: 14, fontWeight: 'bold', fontFamily: 'var(--font-title)' }}>{pos.title}</div>
+                        <div style={{ color: '#fff', fontSize: 15, fontWeight: 'bold', margin: '2px 0' }}>{occupantName}</div>
+                        <div style={{ color: '#44ff88', fontSize: 11, fontFamily: 'var(--font-mono)', lineHeight: 1.3 }}>{pos.bonus}</div>
+                      </div>
+                    </div>
+                  )
+                })}
               </div>
 
               {/* Candidates List */}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-                <h3 style={{ margin: 0, color: '#f5a623', fontSize: 15, fontFamily: 'var(--font-title)' }}>Election Candidates</h3>
+                <h3 style={{ margin: 0, color: '#f5a623', fontSize: 15, fontFamily: 'var(--font-title)' }}>Council Candidates</h3>
                 <span style={{ fontSize: 13, color: '#7ab0d0' }}>Lv 30+ Only</span>
               </div>
 
