@@ -183,6 +183,54 @@ export default function LibraryModal({ onClose }) {
                 </ul>
               </div>
 
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>🧪 Potion Database</div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '4px' }}>
+                    <span>⚪ Small HP Potion</span>
+                    <span style={{ color: '#00ff88', textAlign: 'right' }}>+1,000 HP<br/><span style={{ fontSize: '11px', color: '#aaa' }}>2,500 CRD | CD: 3s</span></span>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '4px' }}>
+                    <span>🔵 Medium HP Potion</span>
+                    <span style={{ color: '#00ff88', textAlign: 'right' }}>+2,500 HP<br/><span style={{ fontSize: '11px', color: '#aaa' }}>8,000 CRD | CD: 3s</span></span>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '4px' }}>
+                    <span>🔴 Large HP Potion</span>
+                    <span style={{ color: '#00ff88', textAlign: 'right' }}>+5,000 HP<br/><span style={{ fontSize: '11px', color: '#aaa' }}>20,000 CRD | CD: 3s</span></span>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '4px' }}>
+                    <span>🔷 FP Potion</span>
+                    <span style={{ color: '#00e5ff', textAlign: 'right' }}>+2,500 FP<br/><span style={{ fontSize: '11px', color: '#aaa' }}>10,000 CRD | CD: 3s</span></span>
+                  </div>
+                </div>
+              </div>
+
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>✨ Enhancement System</div>
+                <ul style={styles.list}>
+                  <li><strong>Maximum Enhancement:</strong> +8</li>
+                  <li><strong>Required Materials:</strong></li>
+                  <ul style={{ paddingLeft: '16px', marginTop: '4px', marginBottom: '8px', color: '#ddd' }}>
+                    <li>🪨 Arcanite x1</li>
+                    <li>🛡️ Divine Crest</li>
+                    <li>🍀 Lucky Relic <span style={{ color: '#aaa', fontStyle: 'italic' }}>(Optional - Increase Success Rate)</span></li>
+                  </ul>
+                </ul>
+                
+                <div style={{ marginTop: '12px' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '4px', borderBottom: '1px solid rgba(255,255,255,0.2)', paddingBottom: '4px', color: '#00e5ff', fontWeight: 'bold' }}>
+                    <span>Level</span>
+                    <span>Divine Crest Cost</span>
+                  </div>
+                  {[20, 40, 60, 80, 100, 120, 150, 200].map((cost, idx) => (
+                    <div key={idx} style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '4px', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
+                      <span>+{idx + 1}</span>
+                      <span>x{cost}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
             </div>
           )}
 
