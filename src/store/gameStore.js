@@ -551,7 +551,7 @@ export const useGameStore = create(
           const playerMaxHp = battle.playerMaxHp || get().getStats().hp
           // Trigger heal only when health is critical (below 35%)
           if (nextPlayerHp > 0 && nextPlayerHp < playerMaxHp * 0.35) {
-            const hasSkill = ['acolyte', 'eidolon_caller', 'high_summoner', 'guardian', 'lumina_paladin', 'engineer', 'mechanist', 'war_engineer'].includes(player.job)
+            const hasSkill = ['acolyte', 'eidolon_caller', 'high_summoner', 'guardian', 'lumina_paladin', 'engineer', 'mechanist', 'war_engineer', 'belterra_specialist', 'craftsman', 'mental_smith', 'chandra', 'holy_chandra'].includes(player.job)
             
             if (hasSkill) {
               if (nextPlayerFp >= 50) {
@@ -560,7 +560,7 @@ export const useGameStore = create(
                 const healAmount = Math.floor(playerMaxHp * 0.35)
                 nextPlayerHp = Math.min(playerMaxHp, nextPlayerHp + healAmount)
                 
-                const skillName = ['engineer', 'mechanist', 'war_engineer'].includes(player.job) ? 'Repair Matrix' : 'Spiritual Heal'
+                const skillName = ['engineer', 'mechanist', 'war_engineer', 'belterra_specialist', 'craftsman', 'mental_smith'].includes(player.job) ? 'Repair Matrix' : 'Spiritual Heal'
                 if (newLog.length > 7) newLog = newLog.slice(-7)
                 newLog.push(`✨ [Skill] Pilot menggunakan ${skillName}! (+${healAmount} HP, -50 FP)`)
               } else {
@@ -1407,25 +1407,38 @@ export const useGameStore = create(
       name: 'focus-rpg-save',
       merge: (persistedState, currentState) => {
         if (!persistedState) return currentState
+        const mergedPlayer = {
+          ...currentState.player,
+          ...(persistedState.player || {}),
+          resources: {
+            ...currentState.player?.resources,
+            ...(persistedState.player?.resources || {})
+          },
+          upgrades: {
+            ...currentState.player?.upgrades,
+            ...(persistedState.player?.upgrades || {})
+          },
+          equipment: {
+            ...currentState.player?.equipment,
+            ...(persistedState.player?.equipment || {})
+          }
+        }
+        if (mergedPlayer.race && mergedPlayer.job) {
+          const validJobs = jobs[mergedPlayer.race]
+            ? [
+                ...jobs[mergedPlayer.race].tier1.map(j => j.id),
+                ...jobs[mergedPlayer.race].tier2.map(j => j.id),
+                ...jobs[mergedPlayer.race].tier3.map(j => j.id)
+              ]
+            : []
+          if (!validJobs.includes(mergedPlayer.job)) {
+            mergedPlayer.job = null
+          }
+        }
         return {
           ...currentState,
           ...persistedState,
-          player: {
-            ...currentState.player,
-            ...(persistedState.player || {}),
-            resources: {
-              ...currentState.player?.resources,
-              ...(persistedState.player?.resources || {})
-            },
-            upgrades: {
-              ...currentState.player?.upgrades,
-              ...(persistedState.player?.upgrades || {})
-            },
-            equipment: {
-              ...currentState.player?.equipment,
-              ...(persistedState.player?.equipment || {})
-            }
-          },
+          player: mergedPlayer,
           timer: {
             ...currentState.timer,
             ...(persistedState.timer || {})

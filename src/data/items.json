@@ -15008,163 +15008,463 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "wep_job_recruit_D",
-      "name": "[D] Pulse Rifle",
+      "id": "wep_job_belterra_warrior_D",
+      "name": "[D] Broadsword",
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
       "race": "belterra",
-      "job": "recruit",
+      "job": "belterra_warrior",
       "level": 1,
       "bonus": {
-        "atk": 65
+        "atk": 67
       },
-      "description": "Efek: +2% Akurasi (Damage: 50-80)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "description": "Efek: +3% Block (Damage: 55-80)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "wep_job_recruit_C",
-      "name": "[C] Pulse Rifle",
+      "id": "wep_job_belterra_warrior_C",
+      "name": "[C] Broadsword",
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
       "race": "belterra",
-      "job": "recruit",
+      "job": "belterra_warrior",
       "level": 1,
       "bonus": {
-        "atk": 78
+        "atk": 80
       },
-      "description": "Efek: +2% Akurasi (Damage: 50-80)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "description": "Efek: +3% Block (Damage: 55-80)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "wep_job_recruit_B",
-      "name": "[B] Pulse Rifle",
+      "id": "wep_job_belterra_warrior_B",
+      "name": "[B] Broadsword",
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
       "race": "belterra",
-      "job": "recruit",
+      "job": "belterra_warrior",
       "level": 1,
       "bonus": {
-        "atk": 97
+        "atk": 100
       },
-      "description": "Efek: +2% Akurasi (Damage: 50-80)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "description": "Efek: +3% Block (Damage: 55-80)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "wep_job_recruit_A",
-      "name": "[A] Pulse Rifle",
+      "id": "wep_job_belterra_warrior_A",
+      "name": "[A] Broadsword",
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
       "race": "belterra",
-      "job": "recruit",
+      "job": "belterra_warrior",
       "level": 1,
       "bonus": {
-        "atk": 130
+        "atk": 134
       },
-      "description": "Efek: +2% Akurasi (Damage: 50-80)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "description": "Efek: +3% Block (Damage: 55-80)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "wep_job_recruit_S",
-      "name": "[S] Pulse Rifle",
+      "id": "wep_job_belterra_warrior_S",
+      "name": "[S] Broadsword",
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
       "race": "belterra",
-      "job": "recruit",
+      "job": "belterra_warrior",
       "level": 1,
       "bonus": {
-        "atk": 195
+        "atk": 201
       },
-      "description": "Efek: +2% Akurasi (Damage: 50-80)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "description": "Efek: +3% Block (Damage: 55-80)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "wep_job_recruit_SS",
-      "name": "[SS] Pulse Rifle",
+      "id": "wep_job_belterra_warrior_SS",
+      "name": "[SS] Broadsword",
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
       "race": "belterra",
-      "job": "recruit",
+      "job": "belterra_warrior",
       "level": 1,
       "bonus": {
-        "atk": 292
+        "atk": 301
       },
-      "description": "Efek: +2% Akurasi (Damage: 50-80)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "description": "Efek: +3% Block (Damage: 55-80)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "wep_job_recruit_SSS",
-      "name": "[SSS] Pulse Rifle",
+      "id": "wep_job_belterra_warrior_SSS",
+      "name": "[SSS] Broadsword",
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
       "race": "belterra",
-      "job": "recruit",
+      "job": "belterra_warrior",
       "level": 1,
       "bonus": {
-        "atk": 455
+        "atk": 469
       },
-      "description": "Efek: +2% Akurasi (Damage: 50-80)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "description": "Efek: +3% Block (Damage: 55-80)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "wep_job_recruit_SR",
-      "name": "[SR] Pulse Rifle",
+      "id": "wep_job_belterra_warrior_SR",
+      "name": "[SR] Broadsword",
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
       "race": "belterra",
-      "job": "recruit",
+      "job": "belterra_warrior",
       "level": 1,
       "bonus": {
-        "atk": 650
+        "atk": 670
       },
-      "description": "Efek: +2% Akurasi (Damage: 50-80)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "description": "Efek: +3% Block (Damage: 55-80)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "wep_job_recruit_SSR",
-      "name": "[SSR] Pulse Rifle",
+      "id": "wep_job_belterra_warrior_SSR",
+      "name": "[SSR] Broadsword",
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
       "race": "belterra",
-      "job": "recruit",
+      "job": "belterra_warrior",
       "level": 1,
       "bonus": {
-        "atk": 975
+        "atk": 1005
       },
-      "description": "Efek: +2% Akurasi (Damage: 50-80)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "description": "Efek: +3% Block (Damage: 55-80)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "wep_job_recruit_UR",
-      "name": "[UR] Pulse Rifle",
+      "id": "wep_job_belterra_warrior_UR",
+      "name": "[UR] Broadsword",
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
       "race": "belterra",
-      "job": "recruit",
+      "job": "belterra_warrior",
       "level": 1,
       "bonus": {
-        "atk": 1625
+        "atk": 1675
       },
-      "description": "Efek: +2% Akurasi (Damage: 50-80)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "description": "Efek: +3% Block (Damage: 55-80)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "wep_job_engineer_D",
-      "name": "[D] Arc Wrench",
+      "id": "wep_job_belterra_ranger_D",
+      "name": "[D] Composite Bow",
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
       "race": "belterra",
-      "job": "engineer",
+      "job": "belterra_ranger",
+      "level": 1,
+      "bonus": {
+        "atk": 67
+      },
+      "description": "Efek: +2% Crit (Damage: 50-85)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+      "id": "wep_job_belterra_ranger_C",
+      "name": "[C] Composite Bow",
+      "emoji": "🔫",
+      "rarity": "C",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "belterra_ranger",
+      "level": 1,
+      "bonus": {
+        "atk": 80
+      },
+      "description": "Efek: +2% Crit (Damage: 50-85)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+      "id": "wep_job_belterra_ranger_B",
+      "name": "[B] Composite Bow",
+      "emoji": "🔫",
+      "rarity": "B",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "belterra_ranger",
+      "level": 1,
+      "bonus": {
+        "atk": 100
+      },
+      "description": "Efek: +2% Crit (Damage: 50-85)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+      "id": "wep_job_belterra_ranger_A",
+      "name": "[A] Composite Bow",
+      "emoji": "🔫",
+      "rarity": "A",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "belterra_ranger",
+      "level": 1,
+      "bonus": {
+        "atk": 134
+      },
+      "description": "Efek: +2% Crit (Damage: 50-85)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+      "id": "wep_job_belterra_ranger_S",
+      "name": "[S] Composite Bow",
+      "emoji": "🔫",
+      "rarity": "S",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "belterra_ranger",
+      "level": 1,
+      "bonus": {
+        "atk": 201
+      },
+      "description": "Efek: +2% Crit (Damage: 50-85)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+      "id": "wep_job_belterra_ranger_SS",
+      "name": "[SS] Composite Bow",
+      "emoji": "🔫",
+      "rarity": "SS",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "belterra_ranger",
+      "level": 1,
+      "bonus": {
+        "atk": 301
+      },
+      "description": "Efek: +2% Crit (Damage: 50-85)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+      "id": "wep_job_belterra_ranger_SSS",
+      "name": "[SSS] Composite Bow",
+      "emoji": "🔫",
+      "rarity": "SSS",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "belterra_ranger",
+      "level": 1,
+      "bonus": {
+        "atk": 469
+      },
+      "description": "Efek: +2% Crit (Damage: 50-85)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+      "id": "wep_job_belterra_ranger_SR",
+      "name": "[SR] Composite Bow",
+      "emoji": "🔫",
+      "rarity": "SR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "belterra_ranger",
+      "level": 1,
+      "bonus": {
+        "atk": 670
+      },
+      "description": "Efek: +2% Crit (Damage: 50-85)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+      "id": "wep_job_belterra_ranger_SSR",
+      "name": "[SSR] Composite Bow",
+      "emoji": "🔫",
+      "rarity": "SSR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "belterra_ranger",
+      "level": 1,
+      "bonus": {
+        "atk": 1005
+      },
+      "description": "Efek: +2% Crit (Damage: 50-85)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+      "id": "wep_job_belterra_ranger_UR",
+      "name": "[UR] Composite Bow",
+      "emoji": "🔫",
+      "rarity": "UR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "belterra_ranger",
+      "level": 1,
+      "bonus": {
+        "atk": 1675
+      },
+      "description": "Efek: +2% Crit (Damage: 50-85)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+      "id": "wep_job_belterra_spiritualist_D",
+      "name": "[D] Mental Staff",
+      "emoji": "🔫",
+      "rarity": "D",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "belterra_spiritualist",
+      "level": 1,
+      "bonus": {
+        "atk": 60
+      },
+      "description": "Efek: +5 Mana (Damage: 45-75)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+      "id": "wep_job_belterra_spiritualist_C",
+      "name": "[C] Mental Staff",
+      "emoji": "🔫",
+      "rarity": "C",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "belterra_spiritualist",
+      "level": 1,
+      "bonus": {
+        "atk": 72
+      },
+      "description": "Efek: +5 Mana (Damage: 45-75)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+      "id": "wep_job_belterra_spiritualist_B",
+      "name": "[B] Mental Staff",
+      "emoji": "🔫",
+      "rarity": "B",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "belterra_spiritualist",
+      "level": 1,
+      "bonus": {
+        "atk": 90
+      },
+      "description": "Efek: +5 Mana (Damage: 45-75)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+      "id": "wep_job_belterra_spiritualist_A",
+      "name": "[A] Mental Staff",
+      "emoji": "🔫",
+      "rarity": "A",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "belterra_spiritualist",
+      "level": 1,
+      "bonus": {
+        "atk": 120
+      },
+      "description": "Efek: +5 Mana (Damage: 45-75)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+      "id": "wep_job_belterra_spiritualist_S",
+      "name": "[S] Mental Staff",
+      "emoji": "🔫",
+      "rarity": "S",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "belterra_spiritualist",
+      "level": 1,
+      "bonus": {
+        "atk": 180
+      },
+      "description": "Efek: +5 Mana (Damage: 45-75)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+      "id": "wep_job_belterra_spiritualist_SS",
+      "name": "[SS] Mental Staff",
+      "emoji": "🔫",
+      "rarity": "SS",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "belterra_spiritualist",
+      "level": 1,
+      "bonus": {
+        "atk": 270
+      },
+      "description": "Efek: +5 Mana (Damage: 45-75)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+      "id": "wep_job_belterra_spiritualist_SSS",
+      "name": "[SSS] Mental Staff",
+      "emoji": "🔫",
+      "rarity": "SSS",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "belterra_spiritualist",
+      "level": 1,
+      "bonus": {
+        "atk": 420
+      },
+      "description": "Efek: +5 Mana (Damage: 45-75)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+      "id": "wep_job_belterra_spiritualist_SR",
+      "name": "[SR] Mental Staff",
+      "emoji": "🔫",
+      "rarity": "SR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "belterra_spiritualist",
+      "level": 1,
+      "bonus": {
+        "atk": 600
+      },
+      "description": "Efek: +5 Mana (Damage: 45-75)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+      "id": "wep_job_belterra_spiritualist_SSR",
+      "name": "[SSR] Mental Staff",
+      "emoji": "🔫",
+      "rarity": "SSR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "belterra_spiritualist",
+      "level": 1,
+      "bonus": {
+        "atk": 900
+      },
+      "description": "Efek: +5 Mana (Damage: 45-75)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+      "id": "wep_job_belterra_spiritualist_UR",
+      "name": "[UR] Mental Staff",
+      "emoji": "🔫",
+      "rarity": "UR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "belterra_spiritualist",
+      "level": 1,
+      "bonus": {
+        "atk": 1500
+      },
+      "description": "Efek: +5 Mana (Damage: 45-75)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+      "id": "wep_job_belterra_specialist_D",
+      "name": "[D] Laser Spanner",
+      "emoji": "🔫",
+      "rarity": "D",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "belterra_specialist",
       "level": 1,
       "bonus": {
         "atk": 55
@@ -15173,13 +15473,13 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
     },
     {
-      "id": "wep_job_engineer_C",
-      "name": "[C] Arc Wrench",
+      "id": "wep_job_belterra_specialist_C",
+      "name": "[C] Laser Spanner",
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
       "race": "belterra",
-      "job": "engineer",
+      "job": "belterra_specialist",
       "level": 1,
       "bonus": {
         "atk": 66
@@ -15188,13 +15488,13 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
     },
     {
-      "id": "wep_job_engineer_B",
-      "name": "[B] Arc Wrench",
+      "id": "wep_job_belterra_specialist_B",
+      "name": "[B] Laser Spanner",
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
       "race": "belterra",
-      "job": "engineer",
+      "job": "belterra_specialist",
       "level": 1,
       "bonus": {
         "atk": 82
@@ -15203,13 +15503,13 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
     },
     {
-      "id": "wep_job_engineer_A",
-      "name": "[A] Arc Wrench",
+      "id": "wep_job_belterra_specialist_A",
+      "name": "[A] Laser Spanner",
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
       "race": "belterra",
-      "job": "engineer",
+      "job": "belterra_specialist",
       "level": 1,
       "bonus": {
         "atk": 110
@@ -15218,13 +15518,13 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
     },
     {
-      "id": "wep_job_engineer_S",
-      "name": "[S] Arc Wrench",
+      "id": "wep_job_belterra_specialist_S",
+      "name": "[S] Laser Spanner",
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
       "race": "belterra",
-      "job": "engineer",
+      "job": "belterra_specialist",
       "level": 1,
       "bonus": {
         "atk": 165
@@ -15233,13 +15533,13 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
     },
     {
-      "id": "wep_job_engineer_SS",
-      "name": "[SS] Arc Wrench",
+      "id": "wep_job_belterra_specialist_SS",
+      "name": "[SS] Laser Spanner",
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
       "race": "belterra",
-      "job": "engineer",
+      "job": "belterra_specialist",
       "level": 1,
       "bonus": {
         "atk": 247
@@ -15248,13 +15548,13 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
     },
     {
-      "id": "wep_job_engineer_SSS",
-      "name": "[SSS] Arc Wrench",
+      "id": "wep_job_belterra_specialist_SSS",
+      "name": "[SSS] Laser Spanner",
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
       "race": "belterra",
-      "job": "engineer",
+      "job": "belterra_specialist",
       "level": 1,
       "bonus": {
         "atk": 385
@@ -15263,13 +15563,13 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
     },
     {
-      "id": "wep_job_engineer_SR",
-      "name": "[SR] Arc Wrench",
+      "id": "wep_job_belterra_specialist_SR",
+      "name": "[SR] Laser Spanner",
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
       "race": "belterra",
-      "job": "engineer",
+      "job": "belterra_specialist",
       "level": 1,
       "bonus": {
         "atk": 550
@@ -15278,13 +15578,13 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
     },
     {
-      "id": "wep_job_engineer_SSR",
-      "name": "[SSR] Arc Wrench",
+      "id": "wep_job_belterra_specialist_SSR",
+      "name": "[SSR] Laser Spanner",
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
       "race": "belterra",
-      "job": "engineer",
+      "job": "belterra_specialist",
       "level": 1,
       "bonus": {
         "atk": 825
@@ -15293,13 +15593,13 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
     },
     {
-      "id": "wep_job_engineer_UR",
-      "name": "[UR] Arc Wrench",
+      "id": "wep_job_belterra_specialist_UR",
+      "name": "[UR] Laser Spanner",
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
       "race": "belterra",
-      "job": "engineer",
+      "job": "belterra_specialist",
       "level": 1,
       "bonus": {
         "atk": 1375
@@ -15308,1054 +15608,2854 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
     },
     {
-      "id": "wep_job_ranger_D",
-      "name": "[D] Scout Bowgun",
+      "id": "wep_job_commando_D",
+      "name": "[D] Greatsword",
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
       "race": "belterra",
-      "job": "ranger",
-      "level": 1,
+      "job": "commando",
+      "level": 30,
       "bonus": {
-        "atk": 72
+        "atk": 220
       },
-      "description": "Efek: +2% Crit (Damage: 55-90)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "description": "Efek: +5% Attack (Damage: 180-260)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "wep_job_ranger_C",
-      "name": "[C] Scout Bowgun",
+      "id": "wep_job_commando_C",
+      "name": "[C] Greatsword",
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
       "race": "belterra",
-      "job": "ranger",
-      "level": 1,
+      "job": "commando",
+      "level": 30,
       "bonus": {
-        "atk": 86
+        "atk": 264
       },
-      "description": "Efek: +2% Crit (Damage: 55-90)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "description": "Efek: +5% Attack (Damage: 180-260)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "wep_job_ranger_B",
-      "name": "[B] Scout Bowgun",
+      "id": "wep_job_commando_B",
+      "name": "[B] Greatsword",
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
       "race": "belterra",
-      "job": "ranger",
-      "level": 1,
+      "job": "commando",
+      "level": 30,
       "bonus": {
-        "atk": 108
+        "atk": 330
       },
-      "description": "Efek: +2% Crit (Damage: 55-90)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "description": "Efek: +5% Attack (Damage: 180-260)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "wep_job_ranger_A",
-      "name": "[A] Scout Bowgun",
+      "id": "wep_job_commando_A",
+      "name": "[A] Greatsword",
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
       "race": "belterra",
-      "job": "ranger",
-      "level": 1,
+      "job": "commando",
+      "level": 30,
       "bonus": {
-        "atk": 144
+        "atk": 440
       },
-      "description": "Efek: +2% Crit (Damage: 55-90)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "description": "Efek: +5% Attack (Damage: 180-260)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "wep_job_ranger_S",
-      "name": "[S] Scout Bowgun",
+      "id": "wep_job_commando_S",
+      "name": "[S] Greatsword",
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
       "race": "belterra",
-      "job": "ranger",
-      "level": 1,
+      "job": "commando",
+      "level": 30,
       "bonus": {
-        "atk": 216
+        "atk": 660
       },
-      "description": "Efek: +2% Crit (Damage: 55-90)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "description": "Efek: +5% Attack (Damage: 180-260)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "wep_job_ranger_SS",
-      "name": "[SS] Scout Bowgun",
+      "id": "wep_job_commando_SS",
+      "name": "[SS] Greatsword",
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
       "race": "belterra",
-      "job": "ranger",
-      "level": 1,
+      "job": "commando",
+      "level": 30,
       "bonus": {
-        "atk": 324
+        "atk": 990
       },
-      "description": "Efek: +2% Crit (Damage: 55-90)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "description": "Efek: +5% Attack (Damage: 180-260)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "wep_job_ranger_SSS",
-      "name": "[SSS] Scout Bowgun",
+      "id": "wep_job_commando_SSS",
+      "name": "[SSS] Greatsword",
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
       "race": "belterra",
-      "job": "ranger",
-      "level": 1,
+      "job": "commando",
+      "level": 30,
       "bonus": {
-        "atk": 504
+        "atk": 1540
       },
-      "description": "Efek: +2% Crit (Damage: 55-90)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "description": "Efek: +5% Attack (Damage: 180-260)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "wep_job_ranger_SR",
-      "name": "[SR] Scout Bowgun",
+      "id": "wep_job_commando_SR",
+      "name": "[SR] Greatsword",
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
       "race": "belterra",
-      "job": "ranger",
-      "level": 1,
+      "job": "commando",
+      "level": 30,
       "bonus": {
-        "atk": 720
+        "atk": 2200
       },
-      "description": "Efek: +2% Crit (Damage: 55-90)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "description": "Efek: +5% Attack (Damage: 180-260)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "wep_job_ranger_SSR",
-      "name": "[SSR] Scout Bowgun",
+      "id": "wep_job_commando_SSR",
+      "name": "[SSR] Greatsword",
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
       "race": "belterra",
-      "job": "ranger",
-      "level": 1,
+      "job": "commando",
+      "level": 30,
       "bonus": {
-        "atk": 1080
+        "atk": 3300
       },
-      "description": "Efek: +2% Crit (Damage: 55-90)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "description": "Efek: +5% Attack (Damage: 180-260)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "wep_job_ranger_UR",
-      "name": "[UR] Scout Bowgun",
+      "id": "wep_job_commando_UR",
+      "name": "[UR] Greatsword",
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
       "race": "belterra",
-      "job": "ranger",
-      "level": 1,
+      "job": "commando",
+      "level": 30,
       "bonus": {
-        "atk": 1800
+        "atk": 5500
       },
-      "description": "Efek: +2% Crit (Damage: 55-90)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "description": "Efek: +5% Attack (Damage: 180-260)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "wep_job_vanguard_D",
-      "name": "[D] Titan Hammer",
+      "id": "wep_job_miller_D",
+      "name": "[D] Buckler Mace",
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
       "race": "belterra",
-      "job": "vanguard",
-      "level": 30,
-      "bonus": {
-        "atk": 185
-      },
-      "description": "Efek: Stun 1 detik (Damage: 150-220)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
-    },
-    {
-      "id": "wep_job_vanguard_C",
-      "name": "[C] Titan Hammer",
-      "emoji": "🔫",
-      "rarity": "C",
-      "type": "weapon",
-      "race": "belterra",
-      "job": "vanguard",
-      "level": 30,
-      "bonus": {
-        "atk": 222
-      },
-      "description": "Efek: Stun 1 detik (Damage: 150-220)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
-    },
-    {
-      "id": "wep_job_vanguard_B",
-      "name": "[B] Titan Hammer",
-      "emoji": "🔫",
-      "rarity": "B",
-      "type": "weapon",
-      "race": "belterra",
-      "job": "vanguard",
-      "level": 30,
-      "bonus": {
-        "atk": 277
-      },
-      "description": "Efek: Stun 1 detik (Damage: 150-220)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
-    },
-    {
-      "id": "wep_job_vanguard_A",
-      "name": "[A] Titan Hammer",
-      "emoji": "🔫",
-      "rarity": "A",
-      "type": "weapon",
-      "race": "belterra",
-      "job": "vanguard",
-      "level": 30,
-      "bonus": {
-        "atk": 370
-      },
-      "description": "Efek: Stun 1 detik (Damage: 150-220)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
-    },
-    {
-      "id": "wep_job_vanguard_S",
-      "name": "[S] Titan Hammer",
-      "emoji": "🔫",
-      "rarity": "S",
-      "type": "weapon",
-      "race": "belterra",
-      "job": "vanguard",
-      "level": 30,
-      "bonus": {
-        "atk": 555
-      },
-      "description": "Efek: Stun 1 detik (Damage: 150-220)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
-    },
-    {
-      "id": "wep_job_vanguard_SS",
-      "name": "[SS] Titan Hammer",
-      "emoji": "🔫",
-      "rarity": "SS",
-      "type": "weapon",
-      "race": "belterra",
-      "job": "vanguard",
-      "level": 30,
-      "bonus": {
-        "atk": 832
-      },
-      "description": "Efek: Stun 1 detik (Damage: 150-220)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
-    },
-    {
-      "id": "wep_job_vanguard_SSS",
-      "name": "[SSS] Titan Hammer",
-      "emoji": "🔫",
-      "rarity": "SSS",
-      "type": "weapon",
-      "race": "belterra",
-      "job": "vanguard",
-      "level": 30,
-      "bonus": {
-        "atk": 1295
-      },
-      "description": "Efek: Stun 1 detik (Damage: 150-220)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
-    },
-    {
-      "id": "wep_job_vanguard_SR",
-      "name": "[SR] Titan Hammer",
-      "emoji": "🔫",
-      "rarity": "SR",
-      "type": "weapon",
-      "race": "belterra",
-      "job": "vanguard",
-      "level": 30,
-      "bonus": {
-        "atk": 1850
-      },
-      "description": "Efek: Stun 1 detik (Damage: 150-220)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
-    },
-    {
-      "id": "wep_job_vanguard_SSR",
-      "name": "[SSR] Titan Hammer",
-      "emoji": "🔫",
-      "rarity": "SSR",
-      "type": "weapon",
-      "race": "belterra",
-      "job": "vanguard",
-      "level": 30,
-      "bonus": {
-        "atk": 2775
-      },
-      "description": "Efek: Stun 1 detik (Damage: 150-220)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
-    },
-    {
-      "id": "wep_job_vanguard_UR",
-      "name": "[UR] Titan Hammer",
-      "emoji": "🔫",
-      "rarity": "UR",
-      "type": "weapon",
-      "race": "belterra",
-      "job": "vanguard",
-      "level": 30,
-      "bonus": {
-        "atk": 4625
-      },
-      "description": "Efek: Stun 1 detik (Damage: 150-220)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
-    },
-    {
-      "id": "wep_job_mechanist_D",
-      "name": "[D] Drone Launcher",
-      "emoji": "🔫",
-      "rarity": "D",
-      "type": "weapon",
-      "race": "belterra",
-      "job": "mechanist",
+      "job": "miller",
       "level": 30,
       "bonus": {
         "atk": 170
       },
-      "description": "Efek: Drone Assist (Damage: 130-210)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
+      "description": "Efek: +5% Block (Damage: 140-200)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
     },
     {
-      "id": "wep_job_mechanist_C",
-      "name": "[C] Drone Launcher",
+      "id": "wep_job_miller_C",
+      "name": "[C] Buckler Mace",
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
       "race": "belterra",
-      "job": "mechanist",
+      "job": "miller",
       "level": 30,
       "bonus": {
         "atk": 204
       },
-      "description": "Efek: Drone Assist (Damage: 130-210)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
+      "description": "Efek: +5% Block (Damage: 140-200)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
     },
     {
-      "id": "wep_job_mechanist_B",
-      "name": "[B] Drone Launcher",
+      "id": "wep_job_miller_B",
+      "name": "[B] Buckler Mace",
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
       "race": "belterra",
-      "job": "mechanist",
+      "job": "miller",
       "level": 30,
       "bonus": {
         "atk": 255
       },
-      "description": "Efek: Drone Assist (Damage: 130-210)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
+      "description": "Efek: +5% Block (Damage: 140-200)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
     },
     {
-      "id": "wep_job_mechanist_A",
-      "name": "[A] Drone Launcher",
+      "id": "wep_job_miller_A",
+      "name": "[A] Buckler Mace",
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
       "race": "belterra",
-      "job": "mechanist",
+      "job": "miller",
       "level": 30,
       "bonus": {
         "atk": 340
       },
-      "description": "Efek: Drone Assist (Damage: 130-210)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
+      "description": "Efek: +5% Block (Damage: 140-200)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
     },
     {
-      "id": "wep_job_mechanist_S",
-      "name": "[S] Drone Launcher",
+      "id": "wep_job_miller_S",
+      "name": "[S] Buckler Mace",
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
       "race": "belterra",
-      "job": "mechanist",
+      "job": "miller",
       "level": 30,
       "bonus": {
         "atk": 510
       },
-      "description": "Efek: Drone Assist (Damage: 130-210)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
+      "description": "Efek: +5% Block (Damage: 140-200)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
     },
     {
-      "id": "wep_job_mechanist_SS",
-      "name": "[SS] Drone Launcher",
+      "id": "wep_job_miller_SS",
+      "name": "[SS] Buckler Mace",
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
       "race": "belterra",
-      "job": "mechanist",
+      "job": "miller",
       "level": 30,
       "bonus": {
         "atk": 765
       },
-      "description": "Efek: Drone Assist (Damage: 130-210)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
+      "description": "Efek: +5% Block (Damage: 140-200)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
     },
     {
-      "id": "wep_job_mechanist_SSS",
-      "name": "[SSS] Drone Launcher",
+      "id": "wep_job_miller_SSS",
+      "name": "[SSS] Buckler Mace",
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
       "race": "belterra",
-      "job": "mechanist",
+      "job": "miller",
       "level": 30,
       "bonus": {
         "atk": 1190
       },
-      "description": "Efek: Drone Assist (Damage: 130-210)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
+      "description": "Efek: +5% Block (Damage: 140-200)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
     },
     {
-      "id": "wep_job_mechanist_SR",
-      "name": "[SR] Drone Launcher",
+      "id": "wep_job_miller_SR",
+      "name": "[SR] Buckler Mace",
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
       "race": "belterra",
-      "job": "mechanist",
+      "job": "miller",
       "level": 30,
       "bonus": {
         "atk": 1700
       },
-      "description": "Efek: Drone Assist (Damage: 130-210)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
+      "description": "Efek: +5% Block (Damage: 140-200)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
     },
     {
-      "id": "wep_job_mechanist_SSR",
-      "name": "[SSR] Drone Launcher",
+      "id": "wep_job_miller_SSR",
+      "name": "[SSR] Buckler Mace",
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
       "race": "belterra",
-      "job": "mechanist",
+      "job": "miller",
       "level": 30,
       "bonus": {
         "atk": 2550
       },
-      "description": "Efek: Drone Assist (Damage: 130-210)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
+      "description": "Efek: +5% Block (Damage: 140-200)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
     },
     {
-      "id": "wep_job_mechanist_UR",
-      "name": "[UR] Drone Launcher",
+      "id": "wep_job_miller_UR",
+      "name": "[UR] Buckler Mace",
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
       "race": "belterra",
-      "job": "mechanist",
+      "job": "miller",
       "level": 30,
       "bonus": {
         "atk": 4250
       },
-      "description": "Efek: Drone Assist (Damage: 130-210)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
+      "description": "Efek: +5% Block (Damage: 140-200)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
     },
     {
-      "id": "wep_job_sharpshooter_D",
-      "name": "[D] Long Rail Rifle",
+      "id": "wep_job_desperado_D",
+      "name": "[D] Dual Vulcan",
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
       "race": "belterra",
-      "job": "sharpshooter",
+      "job": "desperado",
+      "level": 30,
+      "bonus": {
+        "atk": 195
+      },
+      "description": "Efek: Rapid Fire (Damage: 160-230)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+    },
+    {
+      "id": "wep_job_desperado_C",
+      "name": "[C] Dual Vulcan",
+      "emoji": "🔫",
+      "rarity": "C",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "desperado",
+      "level": 30,
+      "bonus": {
+        "atk": 234
+      },
+      "description": "Efek: Rapid Fire (Damage: 160-230)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+    },
+    {
+      "id": "wep_job_desperado_B",
+      "name": "[B] Dual Vulcan",
+      "emoji": "🔫",
+      "rarity": "B",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "desperado",
+      "level": 30,
+      "bonus": {
+        "atk": 292
+      },
+      "description": "Efek: Rapid Fire (Damage: 160-230)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+    },
+    {
+      "id": "wep_job_desperado_A",
+      "name": "[A] Dual Vulcan",
+      "emoji": "🔫",
+      "rarity": "A",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "desperado",
+      "level": 30,
+      "bonus": {
+        "atk": 390
+      },
+      "description": "Efek: Rapid Fire (Damage: 160-230)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+    },
+    {
+      "id": "wep_job_desperado_S",
+      "name": "[S] Dual Vulcan",
+      "emoji": "🔫",
+      "rarity": "S",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "desperado",
+      "level": 30,
+      "bonus": {
+        "atk": 585
+      },
+      "description": "Efek: Rapid Fire (Damage: 160-230)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+    },
+    {
+      "id": "wep_job_desperado_SS",
+      "name": "[SS] Dual Vulcan",
+      "emoji": "🔫",
+      "rarity": "SS",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "desperado",
+      "level": 30,
+      "bonus": {
+        "atk": 877
+      },
+      "description": "Efek: Rapid Fire (Damage: 160-230)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+    },
+    {
+      "id": "wep_job_desperado_SSS",
+      "name": "[SSS] Dual Vulcan",
+      "emoji": "🔫",
+      "rarity": "SSS",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "desperado",
+      "level": 30,
+      "bonus": {
+        "atk": 1365
+      },
+      "description": "Efek: Rapid Fire (Damage: 160-230)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+    },
+    {
+      "id": "wep_job_desperado_SR",
+      "name": "[SR] Dual Vulcan",
+      "emoji": "🔫",
+      "rarity": "SR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "desperado",
+      "level": 30,
+      "bonus": {
+        "atk": 1950
+      },
+      "description": "Efek: Rapid Fire (Damage: 160-230)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+    },
+    {
+      "id": "wep_job_desperado_SSR",
+      "name": "[SSR] Dual Vulcan",
+      "emoji": "🔫",
+      "rarity": "SSR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "desperado",
+      "level": 30,
+      "bonus": {
+        "atk": 2925
+      },
+      "description": "Efek: Rapid Fire (Damage: 160-230)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+    },
+    {
+      "id": "wep_job_desperado_UR",
+      "name": "[UR] Dual Vulcan",
+      "emoji": "🔫",
+      "rarity": "UR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "desperado",
+      "level": 30,
+      "bonus": {
+        "atk": 4875
+      },
+      "description": "Efek: Rapid Fire (Damage: 160-230)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+    },
+    {
+      "id": "wep_job_sniper_D",
+      "name": "[D] Laser Rifle",
+      "emoji": "🔫",
+      "rarity": "D",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "sniper",
       "level": 30,
       "bonus": {
         "atk": 210
       },
       "description": "Efek: +5% Crit (Damage: 170-250)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/12/iwfig55.png"
     },
     {
-      "id": "wep_job_sharpshooter_C",
-      "name": "[C] Long Rail Rifle",
+      "id": "wep_job_sniper_C",
+      "name": "[C] Laser Rifle",
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
       "race": "belterra",
-      "job": "sharpshooter",
+      "job": "sniper",
       "level": 30,
       "bonus": {
         "atk": 252
       },
       "description": "Efek: +5% Crit (Damage: 170-250)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/12/iwfig55.png"
     },
     {
-      "id": "wep_job_sharpshooter_B",
-      "name": "[B] Long Rail Rifle",
+      "id": "wep_job_sniper_B",
+      "name": "[B] Laser Rifle",
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
       "race": "belterra",
-      "job": "sharpshooter",
+      "job": "sniper",
       "level": 30,
       "bonus": {
         "atk": 315
       },
       "description": "Efek: +5% Crit (Damage: 170-250)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/12/iwfig55.png"
     },
     {
-      "id": "wep_job_sharpshooter_A",
-      "name": "[A] Long Rail Rifle",
+      "id": "wep_job_sniper_A",
+      "name": "[A] Laser Rifle",
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
       "race": "belterra",
-      "job": "sharpshooter",
+      "job": "sniper",
       "level": 30,
       "bonus": {
         "atk": 420
       },
       "description": "Efek: +5% Crit (Damage: 170-250)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/12/iwfig55.png"
     },
     {
-      "id": "wep_job_sharpshooter_S",
-      "name": "[S] Long Rail Rifle",
+      "id": "wep_job_sniper_S",
+      "name": "[S] Laser Rifle",
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
       "race": "belterra",
-      "job": "sharpshooter",
+      "job": "sniper",
       "level": 30,
       "bonus": {
         "atk": 630
       },
       "description": "Efek: +5% Crit (Damage: 170-250)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/12/iwfig55.png"
     },
     {
-      "id": "wep_job_sharpshooter_SS",
-      "name": "[SS] Long Rail Rifle",
+      "id": "wep_job_sniper_SS",
+      "name": "[SS] Laser Rifle",
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
       "race": "belterra",
-      "job": "sharpshooter",
+      "job": "sniper",
       "level": 30,
       "bonus": {
         "atk": 945
       },
       "description": "Efek: +5% Crit (Damage: 170-250)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/12/iwfig55.png"
     },
     {
-      "id": "wep_job_sharpshooter_SSS",
-      "name": "[SSS] Long Rail Rifle",
+      "id": "wep_job_sniper_SSS",
+      "name": "[SSS] Laser Rifle",
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
       "race": "belterra",
-      "job": "sharpshooter",
+      "job": "sniper",
       "level": 30,
       "bonus": {
         "atk": 1470
       },
       "description": "Efek: +5% Crit (Damage: 170-250)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/12/iwfig55.png"
     },
     {
-      "id": "wep_job_sharpshooter_SR",
-      "name": "[SR] Long Rail Rifle",
+      "id": "wep_job_sniper_SR",
+      "name": "[SR] Laser Rifle",
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
       "race": "belterra",
-      "job": "sharpshooter",
+      "job": "sniper",
       "level": 30,
       "bonus": {
         "atk": 2100
       },
       "description": "Efek: +5% Crit (Damage: 170-250)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/12/iwfig55.png"
     },
     {
-      "id": "wep_job_sharpshooter_SSR",
-      "name": "[SSR] Long Rail Rifle",
+      "id": "wep_job_sniper_SSR",
+      "name": "[SSR] Laser Rifle",
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
       "race": "belterra",
-      "job": "sharpshooter",
+      "job": "sniper",
       "level": 30,
       "bonus": {
         "atk": 3150
       },
       "description": "Efek: +5% Crit (Damage: 170-250)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/12/iwfig55.png"
     },
     {
-      "id": "wep_job_sharpshooter_UR",
-      "name": "[UR] Long Rail Rifle",
+      "id": "wep_job_sniper_UR",
+      "name": "[UR] Laser Rifle",
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
       "race": "belterra",
-      "job": "sharpshooter",
+      "job": "sniper",
       "level": 30,
       "bonus": {
         "atk": 5250
       },
       "description": "Efek: +5% Crit (Damage: 170-250)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/12/iwfig55.png"
     },
     {
-      "id": "wep_job_titan_pilot_D",
-      "name": "[D] Nova Cannon",
+      "id": "wep_job_psyper_D",
+      "name": "[D] Force Staff",
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
       "race": "belterra",
-      "job": "titan_pilot",
-      "level": 50,
+      "job": "psyper",
+      "level": 30,
       "bonus": {
-        "atk": 375
+        "atk": 185
       },
-      "description": "Efek: Splash Damage (Damage: 300-450)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
+      "description": "Efek: +15 Force ATK (Damage: 150-220)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
     },
     {
-      "id": "wep_job_titan_pilot_C",
-      "name": "[C] Nova Cannon",
+      "id": "wep_job_psyper_C",
+      "name": "[C] Force Staff",
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
       "race": "belterra",
-      "job": "titan_pilot",
-      "level": 50,
+      "job": "psyper",
+      "level": 30,
+      "bonus": {
+        "atk": 222
+      },
+      "description": "Efek: +15 Force ATK (Damage: 150-220)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+      "id": "wep_job_psyper_B",
+      "name": "[B] Force Staff",
+      "emoji": "🔫",
+      "rarity": "B",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "psyper",
+      "level": 30,
+      "bonus": {
+        "atk": 277
+      },
+      "description": "Efek: +15 Force ATK (Damage: 150-220)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+      "id": "wep_job_psyper_A",
+      "name": "[A] Force Staff",
+      "emoji": "🔫",
+      "rarity": "A",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "psyper",
+      "level": 30,
+      "bonus": {
+        "atk": 370
+      },
+      "description": "Efek: +15 Force ATK (Damage: 150-220)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+      "id": "wep_job_psyper_S",
+      "name": "[S] Force Staff",
+      "emoji": "🔫",
+      "rarity": "S",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "psyper",
+      "level": 30,
+      "bonus": {
+        "atk": 555
+      },
+      "description": "Efek: +15 Force ATK (Damage: 150-220)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+      "id": "wep_job_psyper_SS",
+      "name": "[SS] Force Staff",
+      "emoji": "🔫",
+      "rarity": "SS",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "psyper",
+      "level": 30,
+      "bonus": {
+        "atk": 832
+      },
+      "description": "Efek: +15 Force ATK (Damage: 150-220)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+      "id": "wep_job_psyper_SSS",
+      "name": "[SSS] Force Staff",
+      "emoji": "🔫",
+      "rarity": "SSS",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "psyper",
+      "level": 30,
+      "bonus": {
+        "atk": 1295
+      },
+      "description": "Efek: +15 Force ATK (Damage: 150-220)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+      "id": "wep_job_psyper_SR",
+      "name": "[SR] Force Staff",
+      "emoji": "🔫",
+      "rarity": "SR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "psyper",
+      "level": 30,
+      "bonus": {
+        "atk": 1850
+      },
+      "description": "Efek: +15 Force ATK (Damage: 150-220)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+      "id": "wep_job_psyper_SSR",
+      "name": "[SSR] Force Staff",
+      "emoji": "🔫",
+      "rarity": "SSR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "psyper",
+      "level": 30,
+      "bonus": {
+        "atk": 2775
+      },
+      "description": "Efek: +15 Force ATK (Damage: 150-220)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+      "id": "wep_job_psyper_UR",
+      "name": "[UR] Force Staff",
+      "emoji": "🔫",
+      "rarity": "UR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "psyper",
+      "level": 30,
+      "bonus": {
+        "atk": 4625
+      },
+      "description": "Efek: +15 Force ATK (Damage: 150-220)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+      "id": "wep_job_chandra_D",
+      "name": "[D] Restoration Wand",
+      "emoji": "🔫",
+      "rarity": "D",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "chandra",
+      "level": 30,
+      "bonus": {
+        "atk": 150
+      },
+      "description": "Efek: +10% Heal (Damage: 120-180)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+      "id": "wep_job_chandra_C",
+      "name": "[C] Restoration Wand",
+      "emoji": "🔫",
+      "rarity": "C",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "chandra",
+      "level": 30,
+      "bonus": {
+        "atk": 180
+      },
+      "description": "Efek: +10% Heal (Damage: 120-180)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+      "id": "wep_job_chandra_B",
+      "name": "[B] Restoration Wand",
+      "emoji": "🔫",
+      "rarity": "B",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "chandra",
+      "level": 30,
+      "bonus": {
+        "atk": 225
+      },
+      "description": "Efek: +10% Heal (Damage: 120-180)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+      "id": "wep_job_chandra_A",
+      "name": "[A] Restoration Wand",
+      "emoji": "🔫",
+      "rarity": "A",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "chandra",
+      "level": 30,
+      "bonus": {
+        "atk": 300
+      },
+      "description": "Efek: +10% Heal (Damage: 120-180)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+      "id": "wep_job_chandra_S",
+      "name": "[S] Restoration Wand",
+      "emoji": "🔫",
+      "rarity": "S",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "chandra",
+      "level": 30,
       "bonus": {
         "atk": 450
       },
-      "description": "Efek: Splash Damage (Damage: 300-450)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
+      "description": "Efek: +10% Heal (Damage: 120-180)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
     },
     {
-      "id": "wep_job_titan_pilot_B",
-      "name": "[B] Nova Cannon",
-      "emoji": "🔫",
-      "rarity": "B",
-      "type": "weapon",
-      "race": "belterra",
-      "job": "titan_pilot",
-      "level": 50,
-      "bonus": {
-        "atk": 562
-      },
-      "description": "Efek: Splash Damage (Damage: 300-450)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
-    },
-    {
-      "id": "wep_job_titan_pilot_A",
-      "name": "[A] Nova Cannon",
-      "emoji": "🔫",
-      "rarity": "A",
-      "type": "weapon",
-      "race": "belterra",
-      "job": "titan_pilot",
-      "level": 50,
-      "bonus": {
-        "atk": 750
-      },
-      "description": "Efek: Splash Damage (Damage: 300-450)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
-    },
-    {
-      "id": "wep_job_titan_pilot_S",
-      "name": "[S] Nova Cannon",
-      "emoji": "🔫",
-      "rarity": "S",
-      "type": "weapon",
-      "race": "belterra",
-      "job": "titan_pilot",
-      "level": 50,
-      "bonus": {
-        "atk": 1125
-      },
-      "description": "Efek: Splash Damage (Damage: 300-450)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
-    },
-    {
-      "id": "wep_job_titan_pilot_SS",
-      "name": "[SS] Nova Cannon",
+      "id": "wep_job_chandra_SS",
+      "name": "[SS] Restoration Wand",
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
       "race": "belterra",
-      "job": "titan_pilot",
-      "level": 50,
+      "job": "chandra",
+      "level": 30,
       "bonus": {
-        "atk": 1687
+        "atk": 675
       },
-      "description": "Efek: Splash Damage (Damage: 300-450)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
+      "description": "Efek: +10% Heal (Damage: 120-180)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
     },
     {
-      "id": "wep_job_titan_pilot_SSS",
-      "name": "[SSS] Nova Cannon",
+      "id": "wep_job_chandra_SSS",
+      "name": "[SSS] Restoration Wand",
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
       "race": "belterra",
-      "job": "titan_pilot",
-      "level": 50,
-      "bonus": {
-        "atk": 2625
-      },
-      "description": "Efek: Splash Damage (Damage: 300-450)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
-    },
-    {
-      "id": "wep_job_titan_pilot_SR",
-      "name": "[SR] Nova Cannon",
-      "emoji": "🔫",
-      "rarity": "SR",
-      "type": "weapon",
-      "race": "belterra",
-      "job": "titan_pilot",
-      "level": 50,
-      "bonus": {
-        "atk": 3750
-      },
-      "description": "Efek: Splash Damage (Damage: 300-450)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
-    },
-    {
-      "id": "wep_job_titan_pilot_SSR",
-      "name": "[SSR] Nova Cannon",
-      "emoji": "🔫",
-      "rarity": "SSR",
-      "type": "weapon",
-      "race": "belterra",
-      "job": "titan_pilot",
-      "level": 50,
-      "bonus": {
-        "atk": 5625
-      },
-      "description": "Efek: Splash Damage (Damage: 300-450)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
-    },
-    {
-      "id": "wep_job_titan_pilot_UR",
-      "name": "[UR] Nova Cannon",
-      "emoji": "🔫",
-      "rarity": "UR",
-      "type": "weapon",
-      "race": "belterra",
-      "job": "titan_pilot",
-      "level": 50,
-      "bonus": {
-        "atk": 9375
-      },
-      "description": "Efek: Splash Damage (Damage: 300-450)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
-    },
-    {
-      "id": "wep_job_war_engineer_D",
-      "name": "[D] Fusion Blaster",
-      "emoji": "🔫",
-      "rarity": "D",
-      "type": "weapon",
-      "race": "belterra",
-      "job": "war_engineer",
-      "level": 50,
-      "bonus": {
-        "atk": 350
-      },
-      "description": "Efek: Burn (Damage: 280-420)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/12/iwfig55.png"
-    },
-    {
-      "id": "wep_job_war_engineer_C",
-      "name": "[C] Fusion Blaster",
-      "emoji": "🔫",
-      "rarity": "C",
-      "type": "weapon",
-      "race": "belterra",
-      "job": "war_engineer",
-      "level": 50,
-      "bonus": {
-        "atk": 420
-      },
-      "description": "Efek: Burn (Damage: 280-420)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/12/iwfig55.png"
-    },
-    {
-      "id": "wep_job_war_engineer_B",
-      "name": "[B] Fusion Blaster",
-      "emoji": "🔫",
-      "rarity": "B",
-      "type": "weapon",
-      "race": "belterra",
-      "job": "war_engineer",
-      "level": 50,
-      "bonus": {
-        "atk": 525
-      },
-      "description": "Efek: Burn (Damage: 280-420)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/12/iwfig55.png"
-    },
-    {
-      "id": "wep_job_war_engineer_A",
-      "name": "[A] Fusion Blaster",
-      "emoji": "🔫",
-      "rarity": "A",
-      "type": "weapon",
-      "race": "belterra",
-      "job": "war_engineer",
-      "level": 50,
-      "bonus": {
-        "atk": 700
-      },
-      "description": "Efek: Burn (Damage: 280-420)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/12/iwfig55.png"
-    },
-    {
-      "id": "wep_job_war_engineer_S",
-      "name": "[S] Fusion Blaster",
-      "emoji": "🔫",
-      "rarity": "S",
-      "type": "weapon",
-      "race": "belterra",
-      "job": "war_engineer",
-      "level": 50,
+      "job": "chandra",
+      "level": 30,
       "bonus": {
         "atk": 1050
       },
-      "description": "Efek: Burn (Damage: 280-420)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/12/iwfig55.png"
+      "description": "Efek: +10% Heal (Damage: 120-180)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
     },
     {
-      "id": "wep_job_war_engineer_SS",
-      "name": "[SS] Fusion Blaster",
-      "emoji": "🔫",
-      "rarity": "SS",
-      "type": "weapon",
-      "race": "belterra",
-      "job": "war_engineer",
-      "level": 50,
-      "bonus": {
-        "atk": 1575
-      },
-      "description": "Efek: Burn (Damage: 280-420)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/12/iwfig55.png"
-    },
-    {
-      "id": "wep_job_war_engineer_SSS",
-      "name": "[SSS] Fusion Blaster",
-      "emoji": "🔫",
-      "rarity": "SSS",
-      "type": "weapon",
-      "race": "belterra",
-      "job": "war_engineer",
-      "level": 50,
-      "bonus": {
-        "atk": 2450
-      },
-      "description": "Efek: Burn (Damage: 280-420)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/12/iwfig55.png"
-    },
-    {
-      "id": "wep_job_war_engineer_SR",
-      "name": "[SR] Fusion Blaster",
+      "id": "wep_job_chandra_SR",
+      "name": "[SR] Restoration Wand",
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
       "race": "belterra",
-      "job": "war_engineer",
-      "level": 50,
+      "job": "chandra",
+      "level": 30,
       "bonus": {
-        "atk": 3500
+        "atk": 1500
       },
-      "description": "Efek: Burn (Damage: 280-420)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/12/iwfig55.png"
+      "description": "Efek: +10% Heal (Damage: 120-180)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
     },
     {
-      "id": "wep_job_war_engineer_SSR",
-      "name": "[SSR] Fusion Blaster",
+      "id": "wep_job_chandra_SSR",
+      "name": "[SSR] Restoration Wand",
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
       "race": "belterra",
-      "job": "war_engineer",
-      "level": 50,
+      "job": "chandra",
+      "level": 30,
       "bonus": {
-        "atk": 5250
+        "atk": 2250
       },
-      "description": "Efek: Burn (Damage: 280-420)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/12/iwfig55.png"
+      "description": "Efek: +10% Heal (Damage: 120-180)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
     },
     {
-      "id": "wep_job_war_engineer_UR",
-      "name": "[UR] Fusion Blaster",
+      "id": "wep_job_chandra_UR",
+      "name": "[UR] Restoration Wand",
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
       "race": "belterra",
-      "job": "war_engineer",
-      "level": 50,
+      "job": "chandra",
+      "level": 30,
       "bonus": {
-        "atk": 8750
+        "atk": 3750
       },
-      "description": "Efek: Burn (Damage: 280-420)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/12/iwfig55.png"
+      "description": "Efek: +10% Heal (Damage: 120-180)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
     },
     {
-      "id": "wep_job_railgun_elite_D",
-      "name": "[D] Hyper Railgun",
+      "id": "wep_job_craftsman_D",
+      "name": "[D] Auto Wrench",
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
       "race": "belterra",
-      "job": "railgun_elite",
-      "level": 50,
+      "job": "craftsman",
+      "level": 30,
       "bonus": {
-        "atk": 425
+        "atk": 160
       },
-      "description": "Efek: Armor Break (Damage: 350-500)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "description": "Efek: Drone Assist (Damage: 130-190)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
     },
     {
-      "id": "wep_job_railgun_elite_C",
-      "name": "[C] Hyper Railgun",
+      "id": "wep_job_craftsman_C",
+      "name": "[C] Auto Wrench",
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
       "race": "belterra",
-      "job": "railgun_elite",
-      "level": 50,
+      "job": "craftsman",
+      "level": 30,
       "bonus": {
-        "atk": 510
+        "atk": 192
       },
-      "description": "Efek: Armor Break (Damage: 350-500)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "description": "Efek: Drone Assist (Damage: 130-190)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
     },
     {
-      "id": "wep_job_railgun_elite_B",
-      "name": "[B] Hyper Railgun",
+      "id": "wep_job_craftsman_B",
+      "name": "[B] Auto Wrench",
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
       "race": "belterra",
-      "job": "railgun_elite",
-      "level": 50,
+      "job": "craftsman",
+      "level": 30,
       "bonus": {
-        "atk": 637
+        "atk": 240
       },
-      "description": "Efek: Armor Break (Damage: 350-500)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "description": "Efek: Drone Assist (Damage: 130-190)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
     },
     {
-      "id": "wep_job_railgun_elite_A",
-      "name": "[A] Hyper Railgun",
+      "id": "wep_job_craftsman_A",
+      "name": "[A] Auto Wrench",
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
       "race": "belterra",
-      "job": "railgun_elite",
-      "level": 50,
+      "job": "craftsman",
+      "level": 30,
       "bonus": {
-        "atk": 850
+        "atk": 320
       },
-      "description": "Efek: Armor Break (Damage: 350-500)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "description": "Efek: Drone Assist (Damage: 130-190)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
     },
     {
-      "id": "wep_job_railgun_elite_S",
-      "name": "[S] Hyper Railgun",
+      "id": "wep_job_craftsman_S",
+      "name": "[S] Auto Wrench",
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
       "race": "belterra",
-      "job": "railgun_elite",
-      "level": 50,
+      "job": "craftsman",
+      "level": 30,
       "bonus": {
-        "atk": 1275
+        "atk": 480
       },
-      "description": "Efek: Armor Break (Damage: 350-500)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "description": "Efek: Drone Assist (Damage: 130-190)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
     },
     {
-      "id": "wep_job_railgun_elite_SS",
-      "name": "[SS] Hyper Railgun",
+      "id": "wep_job_craftsman_SS",
+      "name": "[SS] Auto Wrench",
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
       "race": "belterra",
-      "job": "railgun_elite",
-      "level": 50,
+      "job": "craftsman",
+      "level": 30,
       "bonus": {
-        "atk": 1912
+        "atk": 720
       },
-      "description": "Efek: Armor Break (Damage: 350-500)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "description": "Efek: Drone Assist (Damage: 130-190)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
     },
     {
-      "id": "wep_job_railgun_elite_SSS",
-      "name": "[SSS] Hyper Railgun",
+      "id": "wep_job_craftsman_SSS",
+      "name": "[SSS] Auto Wrench",
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
       "race": "belterra",
-      "job": "railgun_elite",
-      "level": 50,
+      "job": "craftsman",
+      "level": 30,
       "bonus": {
-        "atk": 2975
+        "atk": 1120
       },
-      "description": "Efek: Armor Break (Damage: 350-500)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "description": "Efek: Drone Assist (Damage: 130-190)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
     },
     {
-      "id": "wep_job_railgun_elite_SR",
-      "name": "[SR] Hyper Railgun",
+      "id": "wep_job_craftsman_SR",
+      "name": "[SR] Auto Wrench",
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
       "race": "belterra",
-      "job": "railgun_elite",
-      "level": 50,
+      "job": "craftsman",
+      "level": 30,
       "bonus": {
-        "atk": 4250
+        "atk": 1600
       },
-      "description": "Efek: Armor Break (Damage: 350-500)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "description": "Efek: Drone Assist (Damage: 130-190)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
     },
     {
-      "id": "wep_job_railgun_elite_SSR",
-      "name": "[SSR] Hyper Railgun",
+      "id": "wep_job_craftsman_SSR",
+      "name": "[SSR] Auto Wrench",
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
       "race": "belterra",
-      "job": "railgun_elite",
-      "level": 50,
+      "job": "craftsman",
+      "level": 30,
       "bonus": {
-        "atk": 6375
+        "atk": 2400
       },
-      "description": "Efek: Armor Break (Damage: 350-500)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "description": "Efek: Drone Assist (Damage: 130-190)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
     },
     {
-      "id": "wep_job_railgun_elite_UR",
-      "name": "[UR] Hyper Railgun",
+      "id": "wep_job_craftsman_UR",
+      "name": "[UR] Auto Wrench",
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
       "race": "belterra",
-      "job": "railgun_elite",
-      "level": 50,
+      "job": "craftsman",
+      "level": 30,
+      "bonus": {
+        "atk": 4000
+      },
+      "description": "Efek: Drone Assist (Damage: 130-190)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+      "id": "wep_job_driver_D",
+      "name": "[D] Titan Key",
+      "emoji": "🔫",
+      "rarity": "D",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "driver",
+      "level": 30,
+      "bonus": {
+        "atk": 175
+      },
+      "description": "Efek: +10% MAU Speed (Damage: 140-210)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+      "id": "wep_job_driver_C",
+      "name": "[C] Titan Key",
+      "emoji": "🔫",
+      "rarity": "C",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "driver",
+      "level": 30,
+      "bonus": {
+        "atk": 210
+      },
+      "description": "Efek: +10% MAU Speed (Damage: 140-210)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+      "id": "wep_job_driver_B",
+      "name": "[B] Titan Key",
+      "emoji": "🔫",
+      "rarity": "B",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "driver",
+      "level": 30,
+      "bonus": {
+        "atk": 262
+      },
+      "description": "Efek: +10% MAU Speed (Damage: 140-210)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+      "id": "wep_job_driver_A",
+      "name": "[A] Titan Key",
+      "emoji": "🔫",
+      "rarity": "A",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "driver",
+      "level": 30,
+      "bonus": {
+        "atk": 350
+      },
+      "description": "Efek: +10% MAU Speed (Damage: 140-210)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+      "id": "wep_job_driver_S",
+      "name": "[S] Titan Key",
+      "emoji": "🔫",
+      "rarity": "S",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "driver",
+      "level": 30,
+      "bonus": {
+        "atk": 525
+      },
+      "description": "Efek: +10% MAU Speed (Damage: 140-210)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+      "id": "wep_job_driver_SS",
+      "name": "[SS] Titan Key",
+      "emoji": "🔫",
+      "rarity": "SS",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "driver",
+      "level": 30,
+      "bonus": {
+        "atk": 787
+      },
+      "description": "Efek: +10% MAU Speed (Damage: 140-210)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+      "id": "wep_job_driver_SSS",
+      "name": "[SSS] Titan Key",
+      "emoji": "🔫",
+      "rarity": "SSS",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "driver",
+      "level": 30,
+      "bonus": {
+        "atk": 1225
+      },
+      "description": "Efek: +10% MAU Speed (Damage: 140-210)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+      "id": "wep_job_driver_SR",
+      "name": "[SR] Titan Key",
+      "emoji": "🔫",
+      "rarity": "SR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "driver",
+      "level": 30,
+      "bonus": {
+        "atk": 1750
+      },
+      "description": "Efek: +10% MAU Speed (Damage: 140-210)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+      "id": "wep_job_driver_SSR",
+      "name": "[SSR] Titan Key",
+      "emoji": "🔫",
+      "rarity": "SSR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "driver",
+      "level": 30,
+      "bonus": {
+        "atk": 2625
+      },
+      "description": "Efek: +10% MAU Speed (Damage: 140-210)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+      "id": "wep_job_driver_UR",
+      "name": "[UR] Titan Key",
+      "emoji": "🔫",
+      "rarity": "UR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "driver",
+      "level": 30,
+      "bonus": {
+        "atk": 4375
+      },
+      "description": "Efek: +10% MAU Speed (Damage: 140-210)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+      "id": "wep_job_berserker_D",
+      "name": "[D] Oblivion Greatsword",
+      "emoji": "🔫",
+      "rarity": "D",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "berserker",
+      "level": 40,
+      "bonus": {
+        "atk": 465
+      },
+      "description": "Efek: Crit Damage Boost (Damage: 380-550)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+      "id": "wep_job_berserker_C",
+      "name": "[C] Oblivion Greatsword",
+      "emoji": "🔫",
+      "rarity": "C",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "berserker",
+      "level": 40,
+      "bonus": {
+        "atk": 558
+      },
+      "description": "Efek: Crit Damage Boost (Damage: 380-550)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+      "id": "wep_job_berserker_B",
+      "name": "[B] Oblivion Greatsword",
+      "emoji": "🔫",
+      "rarity": "B",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "berserker",
+      "level": 40,
+      "bonus": {
+        "atk": 697
+      },
+      "description": "Efek: Crit Damage Boost (Damage: 380-550)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+      "id": "wep_job_berserker_A",
+      "name": "[A] Oblivion Greatsword",
+      "emoji": "🔫",
+      "rarity": "A",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "berserker",
+      "level": 40,
+      "bonus": {
+        "atk": 930
+      },
+      "description": "Efek: Crit Damage Boost (Damage: 380-550)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+      "id": "wep_job_berserker_S",
+      "name": "[S] Oblivion Greatsword",
+      "emoji": "🔫",
+      "rarity": "S",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "berserker",
+      "level": 40,
+      "bonus": {
+        "atk": 1395
+      },
+      "description": "Efek: Crit Damage Boost (Damage: 380-550)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+      "id": "wep_job_berserker_SS",
+      "name": "[SS] Oblivion Greatsword",
+      "emoji": "🔫",
+      "rarity": "SS",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "berserker",
+      "level": 40,
+      "bonus": {
+        "atk": 2092
+      },
+      "description": "Efek: Crit Damage Boost (Damage: 380-550)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+      "id": "wep_job_berserker_SSS",
+      "name": "[SSS] Oblivion Greatsword",
+      "emoji": "🔫",
+      "rarity": "SSS",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "berserker",
+      "level": 40,
+      "bonus": {
+        "atk": 3255
+      },
+      "description": "Efek: Crit Damage Boost (Damage: 380-550)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+      "id": "wep_job_berserker_SR",
+      "name": "[SR] Oblivion Greatsword",
+      "emoji": "🔫",
+      "rarity": "SR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "berserker",
+      "level": 40,
+      "bonus": {
+        "atk": 4650
+      },
+      "description": "Efek: Crit Damage Boost (Damage: 380-550)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+      "id": "wep_job_berserker_SSR",
+      "name": "[SSR] Oblivion Greatsword",
+      "emoji": "🔫",
+      "rarity": "SSR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "berserker",
+      "level": 40,
+      "bonus": {
+        "atk": 6975
+      },
+      "description": "Efek: Crit Damage Boost (Damage: 380-550)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+      "id": "wep_job_berserker_UR",
+      "name": "[UR] Oblivion Greatsword",
+      "emoji": "🔫",
+      "rarity": "UR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "berserker",
+      "level": 40,
+      "bonus": {
+        "atk": 11625
+      },
+      "description": "Efek: Crit Damage Boost (Damage: 380-550)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+      "id": "wep_job_armsman_D",
+      "name": "[D] Buster Lance",
+      "emoji": "🔫",
+      "rarity": "D",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "armsman",
+      "level": 40,
+      "bonus": {
+        "atk": 440
+      },
+      "description": "Efek: +10% Accuracy (Damage: 360-520)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Spear_Lv45_FieldLance.gif"
+    },
+    {
+      "id": "wep_job_armsman_C",
+      "name": "[C] Buster Lance",
+      "emoji": "🔫",
+      "rarity": "C",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "armsman",
+      "level": 40,
+      "bonus": {
+        "atk": 528
+      },
+      "description": "Efek: +10% Accuracy (Damage: 360-520)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Spear_Lv45_FieldLance.gif"
+    },
+    {
+      "id": "wep_job_armsman_B",
+      "name": "[B] Buster Lance",
+      "emoji": "🔫",
+      "rarity": "B",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "armsman",
+      "level": 40,
+      "bonus": {
+        "atk": 660
+      },
+      "description": "Efek: +10% Accuracy (Damage: 360-520)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Spear_Lv45_FieldLance.gif"
+    },
+    {
+      "id": "wep_job_armsman_A",
+      "name": "[A] Buster Lance",
+      "emoji": "🔫",
+      "rarity": "A",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "armsman",
+      "level": 40,
+      "bonus": {
+        "atk": 880
+      },
+      "description": "Efek: +10% Accuracy (Damage: 360-520)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Spear_Lv45_FieldLance.gif"
+    },
+    {
+      "id": "wep_job_armsman_S",
+      "name": "[S] Buster Lance",
+      "emoji": "🔫",
+      "rarity": "S",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "armsman",
+      "level": 40,
+      "bonus": {
+        "atk": 1320
+      },
+      "description": "Efek: +10% Accuracy (Damage: 360-520)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Spear_Lv45_FieldLance.gif"
+    },
+    {
+      "id": "wep_job_armsman_SS",
+      "name": "[SS] Buster Lance",
+      "emoji": "🔫",
+      "rarity": "SS",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "armsman",
+      "level": 40,
+      "bonus": {
+        "atk": 1980
+      },
+      "description": "Efek: +10% Accuracy (Damage: 360-520)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Spear_Lv45_FieldLance.gif"
+    },
+    {
+      "id": "wep_job_armsman_SSS",
+      "name": "[SSS] Buster Lance",
+      "emoji": "🔫",
+      "rarity": "SSS",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "armsman",
+      "level": 40,
+      "bonus": {
+        "atk": 3080
+      },
+      "description": "Efek: +10% Accuracy (Damage: 360-520)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Spear_Lv45_FieldLance.gif"
+    },
+    {
+      "id": "wep_job_armsman_SR",
+      "name": "[SR] Buster Lance",
+      "emoji": "🔫",
+      "rarity": "SR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "armsman",
+      "level": 40,
+      "bonus": {
+        "atk": 4400
+      },
+      "description": "Efek: +10% Accuracy (Damage: 360-520)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Spear_Lv45_FieldLance.gif"
+    },
+    {
+      "id": "wep_job_armsman_SSR",
+      "name": "[SSR] Buster Lance",
+      "emoji": "🔫",
+      "rarity": "SSR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "armsman",
+      "level": 40,
+      "bonus": {
+        "atk": 6600
+      },
+      "description": "Efek: +10% Accuracy (Damage: 360-520)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Spear_Lv45_FieldLance.gif"
+    },
+    {
+      "id": "wep_job_armsman_UR",
+      "name": "[UR] Buster Lance",
+      "emoji": "🔫",
+      "rarity": "UR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "armsman",
+      "level": 40,
+      "bonus": {
+        "atk": 11000
+      },
+      "description": "Efek: +10% Accuracy (Damage: 360-520)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Spear_Lv45_FieldLance.gif"
+    },
+    {
+      "id": "wep_job_shield_miller_D",
+      "name": "[D] Aegis Mace",
+      "emoji": "🔫",
+      "rarity": "D",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "shield_miller",
+      "level": 40,
+      "bonus": {
+        "atk": 370
+      },
+      "description": "Efek: +15% Block (Damage: 300-440)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
+    },
+    {
+      "id": "wep_job_shield_miller_C",
+      "name": "[C] Aegis Mace",
+      "emoji": "🔫",
+      "rarity": "C",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "shield_miller",
+      "level": 40,
+      "bonus": {
+        "atk": 444
+      },
+      "description": "Efek: +15% Block (Damage: 300-440)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
+    },
+    {
+      "id": "wep_job_shield_miller_B",
+      "name": "[B] Aegis Mace",
+      "emoji": "🔫",
+      "rarity": "B",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "shield_miller",
+      "level": 40,
+      "bonus": {
+        "atk": 555
+      },
+      "description": "Efek: +15% Block (Damage: 300-440)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
+    },
+    {
+      "id": "wep_job_shield_miller_A",
+      "name": "[A] Aegis Mace",
+      "emoji": "🔫",
+      "rarity": "A",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "shield_miller",
+      "level": 40,
+      "bonus": {
+        "atk": 740
+      },
+      "description": "Efek: +15% Block (Damage: 300-440)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
+    },
+    {
+      "id": "wep_job_shield_miller_S",
+      "name": "[S] Aegis Mace",
+      "emoji": "🔫",
+      "rarity": "S",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "shield_miller",
+      "level": 40,
+      "bonus": {
+        "atk": 1110
+      },
+      "description": "Efek: +15% Block (Damage: 300-440)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
+    },
+    {
+      "id": "wep_job_shield_miller_SS",
+      "name": "[SS] Aegis Mace",
+      "emoji": "🔫",
+      "rarity": "SS",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "shield_miller",
+      "level": 40,
+      "bonus": {
+        "atk": 1665
+      },
+      "description": "Efek: +15% Block (Damage: 300-440)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
+    },
+    {
+      "id": "wep_job_shield_miller_SSS",
+      "name": "[SSS] Aegis Mace",
+      "emoji": "🔫",
+      "rarity": "SSS",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "shield_miller",
+      "level": 40,
+      "bonus": {
+        "atk": 2590
+      },
+      "description": "Efek: +15% Block (Damage: 300-440)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
+    },
+    {
+      "id": "wep_job_shield_miller_SR",
+      "name": "[SR] Aegis Mace",
+      "emoji": "🔫",
+      "rarity": "SR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "shield_miller",
+      "level": 40,
+      "bonus": {
+        "atk": 3700
+      },
+      "description": "Efek: +15% Block (Damage: 300-440)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
+    },
+    {
+      "id": "wep_job_shield_miller_SSR",
+      "name": "[SSR] Aegis Mace",
+      "emoji": "🔫",
+      "rarity": "SSR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "shield_miller",
+      "level": 40,
+      "bonus": {
+        "atk": 5550
+      },
+      "description": "Efek: +15% Block (Damage: 300-440)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
+    },
+    {
+      "id": "wep_job_shield_miller_UR",
+      "name": "[UR] Aegis Mace",
+      "emoji": "🔫",
+      "rarity": "UR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "shield_miller",
+      "level": 40,
+      "bonus": {
+        "atk": 9250
+      },
+      "description": "Efek: +15% Block (Damage: 300-440)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
+    },
+    {
+      "id": "wep_job_hidden_soldier_D",
+      "name": "[D] Stealth Bow",
+      "emoji": "🔫",
+      "rarity": "D",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "hidden_soldier",
+      "level": 40,
+      "bonus": {
+        "atk": 425
+      },
+      "description": "Efek: Invisibility Assist (Damage: 350-500)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+      "id": "wep_job_hidden_soldier_C",
+      "name": "[C] Stealth Bow",
+      "emoji": "🔫",
+      "rarity": "C",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "hidden_soldier",
+      "level": 40,
+      "bonus": {
+        "atk": 510
+      },
+      "description": "Efek: Invisibility Assist (Damage: 350-500)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+      "id": "wep_job_hidden_soldier_B",
+      "name": "[B] Stealth Bow",
+      "emoji": "🔫",
+      "rarity": "B",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "hidden_soldier",
+      "level": 40,
+      "bonus": {
+        "atk": 637
+      },
+      "description": "Efek: Invisibility Assist (Damage: 350-500)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+      "id": "wep_job_hidden_soldier_A",
+      "name": "[A] Stealth Bow",
+      "emoji": "🔫",
+      "rarity": "A",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "hidden_soldier",
+      "level": 40,
+      "bonus": {
+        "atk": 850
+      },
+      "description": "Efek: Invisibility Assist (Damage: 350-500)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+      "id": "wep_job_hidden_soldier_S",
+      "name": "[S] Stealth Bow",
+      "emoji": "🔫",
+      "rarity": "S",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "hidden_soldier",
+      "level": 40,
+      "bonus": {
+        "atk": 1275
+      },
+      "description": "Efek: Invisibility Assist (Damage: 350-500)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+      "id": "wep_job_hidden_soldier_SS",
+      "name": "[SS] Stealth Bow",
+      "emoji": "🔫",
+      "rarity": "SS",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "hidden_soldier",
+      "level": 40,
+      "bonus": {
+        "atk": 1912
+      },
+      "description": "Efek: Invisibility Assist (Damage: 350-500)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+      "id": "wep_job_hidden_soldier_SSS",
+      "name": "[SSS] Stealth Bow",
+      "emoji": "🔫",
+      "rarity": "SSS",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "hidden_soldier",
+      "level": 40,
+      "bonus": {
+        "atk": 2975
+      },
+      "description": "Efek: Invisibility Assist (Damage: 350-500)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+      "id": "wep_job_hidden_soldier_SR",
+      "name": "[SR] Stealth Bow",
+      "emoji": "🔫",
+      "rarity": "SR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "hidden_soldier",
+      "level": 40,
+      "bonus": {
+        "atk": 4250
+      },
+      "description": "Efek: Invisibility Assist (Damage: 350-500)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+      "id": "wep_job_hidden_soldier_SSR",
+      "name": "[SSR] Stealth Bow",
+      "emoji": "🔫",
+      "rarity": "SSR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "hidden_soldier",
+      "level": 40,
+      "bonus": {
+        "atk": 6375
+      },
+      "description": "Efek: Invisibility Assist (Damage: 350-500)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+      "id": "wep_job_hidden_soldier_UR",
+      "name": "[UR] Stealth Bow",
+      "emoji": "🔫",
+      "rarity": "UR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "hidden_soldier",
+      "level": 40,
       "bonus": {
         "atk": 10625
       },
-      "description": "Efek: Armor Break (Damage: 350-500)",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
+      "description": "Efek: Invisibility Assist (Damage: 350-500)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+      "id": "wep_job_sentinel_D",
+      "name": "[D] Gatling Launcher",
+      "emoji": "🔫",
+      "rarity": "D",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "sentinel",
+      "level": 40,
+      "bonus": {
+        "atk": 470
+      },
+      "description": "Efek: Splash Damage (Damage: 380-560)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
+    },
+    {
+      "id": "wep_job_sentinel_C",
+      "name": "[C] Gatling Launcher",
+      "emoji": "🔫",
+      "rarity": "C",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "sentinel",
+      "level": 40,
+      "bonus": {
+        "atk": 564
+      },
+      "description": "Efek: Splash Damage (Damage: 380-560)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
+    },
+    {
+      "id": "wep_job_sentinel_B",
+      "name": "[B] Gatling Launcher",
+      "emoji": "🔫",
+      "rarity": "B",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "sentinel",
+      "level": 40,
+      "bonus": {
+        "atk": 705
+      },
+      "description": "Efek: Splash Damage (Damage: 380-560)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
+    },
+    {
+      "id": "wep_job_sentinel_A",
+      "name": "[A] Gatling Launcher",
+      "emoji": "🔫",
+      "rarity": "A",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "sentinel",
+      "level": 40,
+      "bonus": {
+        "atk": 940
+      },
+      "description": "Efek: Splash Damage (Damage: 380-560)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
+    },
+    {
+      "id": "wep_job_sentinel_S",
+      "name": "[S] Gatling Launcher",
+      "emoji": "🔫",
+      "rarity": "S",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "sentinel",
+      "level": 40,
+      "bonus": {
+        "atk": 1410
+      },
+      "description": "Efek: Splash Damage (Damage: 380-560)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
+    },
+    {
+      "id": "wep_job_sentinel_SS",
+      "name": "[SS] Gatling Launcher",
+      "emoji": "🔫",
+      "rarity": "SS",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "sentinel",
+      "level": 40,
+      "bonus": {
+        "atk": 2115
+      },
+      "description": "Efek: Splash Damage (Damage: 380-560)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
+    },
+    {
+      "id": "wep_job_sentinel_SSS",
+      "name": "[SSS] Gatling Launcher",
+      "emoji": "🔫",
+      "rarity": "SSS",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "sentinel",
+      "level": 40,
+      "bonus": {
+        "atk": 3290
+      },
+      "description": "Efek: Splash Damage (Damage: 380-560)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
+    },
+    {
+      "id": "wep_job_sentinel_SR",
+      "name": "[SR] Gatling Launcher",
+      "emoji": "🔫",
+      "rarity": "SR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "sentinel",
+      "level": 40,
+      "bonus": {
+        "atk": 4700
+      },
+      "description": "Efek: Splash Damage (Damage: 380-560)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
+    },
+    {
+      "id": "wep_job_sentinel_SSR",
+      "name": "[SSR] Gatling Launcher",
+      "emoji": "🔫",
+      "rarity": "SSR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "sentinel",
+      "level": 40,
+      "bonus": {
+        "atk": 7050
+      },
+      "description": "Efek: Splash Damage (Damage: 380-560)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
+    },
+    {
+      "id": "wep_job_sentinel_UR",
+      "name": "[UR] Gatling Launcher",
+      "emoji": "🔫",
+      "rarity": "UR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "sentinel",
+      "level": 40,
+      "bonus": {
+        "atk": 11750
+      },
+      "description": "Efek: Splash Damage (Damage: 380-560)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
+    },
+    {
+      "id": "wep_job_infiltrator_D",
+      "name": "[D] Beam Sniper",
+      "emoji": "🔫",
+      "rarity": "D",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "infiltrator",
+      "level": 40,
+      "bonus": {
+        "atk": 490
+      },
+      "description": "Efek: Critical Burst (Damage: 400-580)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+      "id": "wep_job_infiltrator_C",
+      "name": "[C] Beam Sniper",
+      "emoji": "🔫",
+      "rarity": "C",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "infiltrator",
+      "level": 40,
+      "bonus": {
+        "atk": 588
+      },
+      "description": "Efek: Critical Burst (Damage: 400-580)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+      "id": "wep_job_infiltrator_B",
+      "name": "[B] Beam Sniper",
+      "emoji": "🔫",
+      "rarity": "B",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "infiltrator",
+      "level": 40,
+      "bonus": {
+        "atk": 735
+      },
+      "description": "Efek: Critical Burst (Damage: 400-580)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+      "id": "wep_job_infiltrator_A",
+      "name": "[A] Beam Sniper",
+      "emoji": "🔫",
+      "rarity": "A",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "infiltrator",
+      "level": 40,
+      "bonus": {
+        "atk": 980
+      },
+      "description": "Efek: Critical Burst (Damage: 400-580)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+      "id": "wep_job_infiltrator_S",
+      "name": "[S] Beam Sniper",
+      "emoji": "🔫",
+      "rarity": "S",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "infiltrator",
+      "level": 40,
+      "bonus": {
+        "atk": 1470
+      },
+      "description": "Efek: Critical Burst (Damage: 400-580)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+      "id": "wep_job_infiltrator_SS",
+      "name": "[SS] Beam Sniper",
+      "emoji": "🔫",
+      "rarity": "SS",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "infiltrator",
+      "level": 40,
+      "bonus": {
+        "atk": 2205
+      },
+      "description": "Efek: Critical Burst (Damage: 400-580)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+      "id": "wep_job_infiltrator_SSS",
+      "name": "[SSS] Beam Sniper",
+      "emoji": "🔫",
+      "rarity": "SSS",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "infiltrator",
+      "level": 40,
+      "bonus": {
+        "atk": 3430
+      },
+      "description": "Efek: Critical Burst (Damage: 400-580)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+      "id": "wep_job_infiltrator_SR",
+      "name": "[SR] Beam Sniper",
+      "emoji": "🔫",
+      "rarity": "SR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "infiltrator",
+      "level": 40,
+      "bonus": {
+        "atk": 4900
+      },
+      "description": "Efek: Critical Burst (Damage: 400-580)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+      "id": "wep_job_infiltrator_SSR",
+      "name": "[SSR] Beam Sniper",
+      "emoji": "🔫",
+      "rarity": "SSR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "infiltrator",
+      "level": 40,
+      "bonus": {
+        "atk": 7350
+      },
+      "description": "Efek: Critical Burst (Damage: 400-580)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+      "id": "wep_job_infiltrator_UR",
+      "name": "[UR] Beam Sniper",
+      "emoji": "🔫",
+      "rarity": "UR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "infiltrator",
+      "level": 40,
+      "bonus": {
+        "atk": 12250
+      },
+      "description": "Efek: Critical Burst (Damage: 400-580)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+      "id": "wep_job_wizard_D",
+      "name": "[D] Meteor Staff",
+      "emoji": "🔫",
+      "rarity": "D",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "wizard",
+      "level": 40,
+      "bonus": {
+        "atk": 435
+      },
+      "description": "Efek: Flame Strike (Damage: 350-520)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+      "id": "wep_job_wizard_C",
+      "name": "[C] Meteor Staff",
+      "emoji": "🔫",
+      "rarity": "C",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "wizard",
+      "level": 40,
+      "bonus": {
+        "atk": 522
+      },
+      "description": "Efek: Flame Strike (Damage: 350-520)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+      "id": "wep_job_wizard_B",
+      "name": "[B] Meteor Staff",
+      "emoji": "🔫",
+      "rarity": "B",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "wizard",
+      "level": 40,
+      "bonus": {
+        "atk": 652
+      },
+      "description": "Efek: Flame Strike (Damage: 350-520)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+      "id": "wep_job_wizard_A",
+      "name": "[A] Meteor Staff",
+      "emoji": "🔫",
+      "rarity": "A",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "wizard",
+      "level": 40,
+      "bonus": {
+        "atk": 870
+      },
+      "description": "Efek: Flame Strike (Damage: 350-520)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+      "id": "wep_job_wizard_S",
+      "name": "[S] Meteor Staff",
+      "emoji": "🔫",
+      "rarity": "S",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "wizard",
+      "level": 40,
+      "bonus": {
+        "atk": 1305
+      },
+      "description": "Efek: Flame Strike (Damage: 350-520)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+      "id": "wep_job_wizard_SS",
+      "name": "[SS] Meteor Staff",
+      "emoji": "🔫",
+      "rarity": "SS",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "wizard",
+      "level": 40,
+      "bonus": {
+        "atk": 1957
+      },
+      "description": "Efek: Flame Strike (Damage: 350-520)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+      "id": "wep_job_wizard_SSS",
+      "name": "[SSS] Meteor Staff",
+      "emoji": "🔫",
+      "rarity": "SSS",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "wizard",
+      "level": 40,
+      "bonus": {
+        "atk": 3045
+      },
+      "description": "Efek: Flame Strike (Damage: 350-520)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+      "id": "wep_job_wizard_SR",
+      "name": "[SR] Meteor Staff",
+      "emoji": "🔫",
+      "rarity": "SR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "wizard",
+      "level": 40,
+      "bonus": {
+        "atk": 4350
+      },
+      "description": "Efek: Flame Strike (Damage: 350-520)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+      "id": "wep_job_wizard_SSR",
+      "name": "[SSR] Meteor Staff",
+      "emoji": "🔫",
+      "rarity": "SSR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "wizard",
+      "level": 40,
+      "bonus": {
+        "atk": 6525
+      },
+      "description": "Efek: Flame Strike (Damage: 350-520)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+      "id": "wep_job_wizard_UR",
+      "name": "[UR] Meteor Staff",
+      "emoji": "🔫",
+      "rarity": "UR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "wizard",
+      "level": 40,
+      "bonus": {
+        "atk": 10875
+      },
+      "description": "Efek: Flame Strike (Damage: 350-520)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+      "id": "wep_job_astralist_D",
+      "name": "[D] Void Wand",
+      "emoji": "🔫",
+      "rarity": "D",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "astralist",
+      "level": 40,
+      "bonus": {
+        "atk": 400
+      },
+      "description": "Efek: Time Lock (Damage: 320-480)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+      "id": "wep_job_astralist_C",
+      "name": "[C] Void Wand",
+      "emoji": "🔫",
+      "rarity": "C",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "astralist",
+      "level": 40,
+      "bonus": {
+        "atk": 480
+      },
+      "description": "Efek: Time Lock (Damage: 320-480)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+      "id": "wep_job_astralist_B",
+      "name": "[B] Void Wand",
+      "emoji": "🔫",
+      "rarity": "B",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "astralist",
+      "level": 40,
+      "bonus": {
+        "atk": 600
+      },
+      "description": "Efek: Time Lock (Damage: 320-480)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+      "id": "wep_job_astralist_A",
+      "name": "[A] Void Wand",
+      "emoji": "🔫",
+      "rarity": "A",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "astralist",
+      "level": 40,
+      "bonus": {
+        "atk": 800
+      },
+      "description": "Efek: Time Lock (Damage: 320-480)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+      "id": "wep_job_astralist_S",
+      "name": "[S] Void Wand",
+      "emoji": "🔫",
+      "rarity": "S",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "astralist",
+      "level": 40,
+      "bonus": {
+        "atk": 1200
+      },
+      "description": "Efek: Time Lock (Damage: 320-480)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+      "id": "wep_job_astralist_SS",
+      "name": "[SS] Void Wand",
+      "emoji": "🔫",
+      "rarity": "SS",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "astralist",
+      "level": 40,
+      "bonus": {
+        "atk": 1800
+      },
+      "description": "Efek: Time Lock (Damage: 320-480)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+      "id": "wep_job_astralist_SSS",
+      "name": "[SSS] Void Wand",
+      "emoji": "🔫",
+      "rarity": "SSS",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "astralist",
+      "level": 40,
+      "bonus": {
+        "atk": 2800
+      },
+      "description": "Efek: Time Lock (Damage: 320-480)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+      "id": "wep_job_astralist_SR",
+      "name": "[SR] Void Wand",
+      "emoji": "🔫",
+      "rarity": "SR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "astralist",
+      "level": 40,
+      "bonus": {
+        "atk": 4000
+      },
+      "description": "Efek: Time Lock (Damage: 320-480)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+      "id": "wep_job_astralist_SSR",
+      "name": "[SSR] Void Wand",
+      "emoji": "🔫",
+      "rarity": "SSR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "astralist",
+      "level": 40,
+      "bonus": {
+        "atk": 6000
+      },
+      "description": "Efek: Time Lock (Damage: 320-480)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+      "id": "wep_job_astralist_UR",
+      "name": "[UR] Void Wand",
+      "emoji": "🔫",
+      "rarity": "UR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "astralist",
+      "level": 40,
+      "bonus": {
+        "atk": 10000
+      },
+      "description": "Efek: Time Lock (Damage: 320-480)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+      "id": "wep_job_holy_chandra_D",
+      "name": "[D] Archangel Scepter",
+      "emoji": "🔫",
+      "rarity": "D",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "holy_chandra",
+      "level": 40,
+      "bonus": {
+        "atk": 350
+      },
+      "description": "Efek: +20% Heal (Damage: 280-420)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
+    },
+    {
+      "id": "wep_job_holy_chandra_C",
+      "name": "[C] Archangel Scepter",
+      "emoji": "🔫",
+      "rarity": "C",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "holy_chandra",
+      "level": 40,
+      "bonus": {
+        "atk": 420
+      },
+      "description": "Efek: +20% Heal (Damage: 280-420)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
+    },
+    {
+      "id": "wep_job_holy_chandra_B",
+      "name": "[B] Archangel Scepter",
+      "emoji": "🔫",
+      "rarity": "B",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "holy_chandra",
+      "level": 40,
+      "bonus": {
+        "atk": 525
+      },
+      "description": "Efek: +20% Heal (Damage: 280-420)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
+    },
+    {
+      "id": "wep_job_holy_chandra_A",
+      "name": "[A] Archangel Scepter",
+      "emoji": "🔫",
+      "rarity": "A",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "holy_chandra",
+      "level": 40,
+      "bonus": {
+        "atk": 700
+      },
+      "description": "Efek: +20% Heal (Damage: 280-420)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
+    },
+    {
+      "id": "wep_job_holy_chandra_S",
+      "name": "[S] Archangel Scepter",
+      "emoji": "🔫",
+      "rarity": "S",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "holy_chandra",
+      "level": 40,
+      "bonus": {
+        "atk": 1050
+      },
+      "description": "Efek: +20% Heal (Damage: 280-420)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
+    },
+    {
+      "id": "wep_job_holy_chandra_SS",
+      "name": "[SS] Archangel Scepter",
+      "emoji": "🔫",
+      "rarity": "SS",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "holy_chandra",
+      "level": 40,
+      "bonus": {
+        "atk": 1575
+      },
+      "description": "Efek: +20% Heal (Damage: 280-420)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
+    },
+    {
+      "id": "wep_job_holy_chandra_SSS",
+      "name": "[SSS] Archangel Scepter",
+      "emoji": "🔫",
+      "rarity": "SSS",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "holy_chandra",
+      "level": 40,
+      "bonus": {
+        "atk": 2450
+      },
+      "description": "Efek: +20% Heal (Damage: 280-420)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
+    },
+    {
+      "id": "wep_job_holy_chandra_SR",
+      "name": "[SR] Archangel Scepter",
+      "emoji": "🔫",
+      "rarity": "SR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "holy_chandra",
+      "level": 40,
+      "bonus": {
+        "atk": 3500
+      },
+      "description": "Efek: +20% Heal (Damage: 280-420)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
+    },
+    {
+      "id": "wep_job_holy_chandra_SSR",
+      "name": "[SSR] Archangel Scepter",
+      "emoji": "🔫",
+      "rarity": "SSR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "holy_chandra",
+      "level": 40,
+      "bonus": {
+        "atk": 5250
+      },
+      "description": "Efek: +20% Heal (Damage: 280-420)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
+    },
+    {
+      "id": "wep_job_holy_chandra_UR",
+      "name": "[UR] Archangel Scepter",
+      "emoji": "🔫",
+      "rarity": "UR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "holy_chandra",
+      "level": 40,
+      "bonus": {
+        "atk": 8750
+      },
+      "description": "Efek: +20% Heal (Damage: 280-420)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
+    },
+    {
+      "id": "wep_job_mental_smith_D",
+      "name": "[D] Nano Forge",
+      "emoji": "🔫",
+      "rarity": "D",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "mental_smith",
+      "level": 40,
+      "bonus": {
+        "atk": 375
+      },
+      "description": "Efek: Armor Boost (Damage: 300-450)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+      "id": "wep_job_mental_smith_C",
+      "name": "[C] Nano Forge",
+      "emoji": "🔫",
+      "rarity": "C",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "mental_smith",
+      "level": 40,
+      "bonus": {
+        "atk": 450
+      },
+      "description": "Efek: Armor Boost (Damage: 300-450)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+      "id": "wep_job_mental_smith_B",
+      "name": "[B] Nano Forge",
+      "emoji": "🔫",
+      "rarity": "B",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "mental_smith",
+      "level": 40,
+      "bonus": {
+        "atk": 562
+      },
+      "description": "Efek: Armor Boost (Damage: 300-450)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+      "id": "wep_job_mental_smith_A",
+      "name": "[A] Nano Forge",
+      "emoji": "🔫",
+      "rarity": "A",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "mental_smith",
+      "level": 40,
+      "bonus": {
+        "atk": 750
+      },
+      "description": "Efek: Armor Boost (Damage: 300-450)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+      "id": "wep_job_mental_smith_S",
+      "name": "[S] Nano Forge",
+      "emoji": "🔫",
+      "rarity": "S",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "mental_smith",
+      "level": 40,
+      "bonus": {
+        "atk": 1125
+      },
+      "description": "Efek: Armor Boost (Damage: 300-450)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+      "id": "wep_job_mental_smith_SS",
+      "name": "[SS] Nano Forge",
+      "emoji": "🔫",
+      "rarity": "SS",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "mental_smith",
+      "level": 40,
+      "bonus": {
+        "atk": 1687
+      },
+      "description": "Efek: Armor Boost (Damage: 300-450)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+      "id": "wep_job_mental_smith_SSS",
+      "name": "[SSS] Nano Forge",
+      "emoji": "🔫",
+      "rarity": "SSS",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "mental_smith",
+      "level": 40,
+      "bonus": {
+        "atk": 2625
+      },
+      "description": "Efek: Armor Boost (Damage: 300-450)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+      "id": "wep_job_mental_smith_SR",
+      "name": "[SR] Nano Forge",
+      "emoji": "🔫",
+      "rarity": "SR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "mental_smith",
+      "level": 40,
+      "bonus": {
+        "atk": 3750
+      },
+      "description": "Efek: Armor Boost (Damage: 300-450)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+      "id": "wep_job_mental_smith_SSR",
+      "name": "[SSR] Nano Forge",
+      "emoji": "🔫",
+      "rarity": "SSR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "mental_smith",
+      "level": 40,
+      "bonus": {
+        "atk": 5625
+      },
+      "description": "Efek: Armor Boost (Damage: 300-450)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+      "id": "wep_job_mental_smith_UR",
+      "name": "[UR] Nano Forge",
+      "emoji": "🔫",
+      "rarity": "UR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "mental_smith",
+      "level": 40,
+      "bonus": {
+        "atk": 9375
+      },
+      "description": "Efek: Armor Boost (Damage: 300-450)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+      "id": "wep_job_armor_rider_D",
+      "name": "[D] Giga Hammer",
+      "emoji": "🔫",
+      "rarity": "D",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "armor_rider",
+      "level": 40,
+      "bonus": {
+        "atk": 425
+      },
+      "description": "Efek: +20% MAU Stats (Damage: 350-500)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
+    },
+    {
+      "id": "wep_job_armor_rider_C",
+      "name": "[C] Giga Hammer",
+      "emoji": "🔫",
+      "rarity": "C",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "armor_rider",
+      "level": 40,
+      "bonus": {
+        "atk": 510
+      },
+      "description": "Efek: +20% MAU Stats (Damage: 350-500)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
+    },
+    {
+      "id": "wep_job_armor_rider_B",
+      "name": "[B] Giga Hammer",
+      "emoji": "🔫",
+      "rarity": "B",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "armor_rider",
+      "level": 40,
+      "bonus": {
+        "atk": 637
+      },
+      "description": "Efek: +20% MAU Stats (Damage: 350-500)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
+    },
+    {
+      "id": "wep_job_armor_rider_A",
+      "name": "[A] Giga Hammer",
+      "emoji": "🔫",
+      "rarity": "A",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "armor_rider",
+      "level": 40,
+      "bonus": {
+        "atk": 850
+      },
+      "description": "Efek: +20% MAU Stats (Damage: 350-500)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
+    },
+    {
+      "id": "wep_job_armor_rider_S",
+      "name": "[S] Giga Hammer",
+      "emoji": "🔫",
+      "rarity": "S",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "armor_rider",
+      "level": 40,
+      "bonus": {
+        "atk": 1275
+      },
+      "description": "Efek: +20% MAU Stats (Damage: 350-500)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
+    },
+    {
+      "id": "wep_job_armor_rider_SS",
+      "name": "[SS] Giga Hammer",
+      "emoji": "🔫",
+      "rarity": "SS",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "armor_rider",
+      "level": 40,
+      "bonus": {
+        "atk": 1912
+      },
+      "description": "Efek: +20% MAU Stats (Damage: 350-500)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
+    },
+    {
+      "id": "wep_job_armor_rider_SSS",
+      "name": "[SSS] Giga Hammer",
+      "emoji": "🔫",
+      "rarity": "SSS",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "armor_rider",
+      "level": 40,
+      "bonus": {
+        "atk": 2975
+      },
+      "description": "Efek: +20% MAU Stats (Damage: 350-500)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
+    },
+    {
+      "id": "wep_job_armor_rider_SR",
+      "name": "[SR] Giga Hammer",
+      "emoji": "🔫",
+      "rarity": "SR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "armor_rider",
+      "level": 40,
+      "bonus": {
+        "atk": 4250
+      },
+      "description": "Efek: +20% MAU Stats (Damage: 350-500)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
+    },
+    {
+      "id": "wep_job_armor_rider_SSR",
+      "name": "[SSR] Giga Hammer",
+      "emoji": "🔫",
+      "rarity": "SSR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "armor_rider",
+      "level": 40,
+      "bonus": {
+        "atk": 6375
+      },
+      "description": "Efek: +20% MAU Stats (Damage: 350-500)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
+    },
+    {
+      "id": "wep_job_armor_rider_UR",
+      "name": "[UR] Giga Hammer",
+      "emoji": "🔫",
+      "rarity": "UR",
+      "type": "weapon",
+      "race": "belterra",
+      "job": "armor_rider",
+      "level": 40,
+      "bonus": {
+        "atk": 10625
+      },
+      "description": "Efek: +20% MAU Stats (Damage: 350-500)",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Mace_BeamGreatHammer.gif"
     },
     {
       "id": "wep_job_acolyte_D",

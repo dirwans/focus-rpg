@@ -15,9 +15,10 @@ const RECLASS_COST = 5000
 
 const CLASS_LANES = {
   belterra: [
-    { title: "Warrior Lane", indices: [[0], [0], [0]] },
-    { title: "Specialist Lane", indices: [[1], [1], [1]] },
-    { title: "Ranger Lane", indices: [[2], [2], [2]] }
+    { title: "Warrior Lane", indices: [[0], [0, 1], [0, 1, 2]] },
+    { title: "Ranger Lane", indices: [[1], [2, 3], [3, 4, 5]] },
+    { title: "Spiritualist Lane", indices: [[2], [4, 5], [6, 7, 8]] },
+    { title: "Specialist Lane", indices: [[3], [6, 7], [9, 10]] }
   ],
   coralis: [
     { title: "Warrior Lane", indices: [[0], [0], [0]] },
@@ -99,7 +100,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
   const eligibleForPromo = (
     (tier === 0 && player.level >= 1) ||
     (tier === 1 && player.level >= 30) ||
-    (tier === 2 && player.level >= 50)
+    (tier === 2 && player.level >= 40)
   )
 
   const promoCost = eligibleForPromo ? PROMO_COSTS[tier + 1] : 0
@@ -286,7 +287,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                                 const isActive = player.job === j.id
                                 const isUnlocked = tier >= jTier
                                 
-                                const reqLevel = j.levelReq || (jTier === 2 ? 30 : 50);
+                                const reqLevel = j.levelReq || (jTier === 2 ? 30 : 40);
 
                                 // Get previous tier job IDs
                                 const prevTierJobs = idx > 0 ? tierJobs[idx - 1].jobs : []
@@ -330,7 +331,11 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                                     <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
                                       {/* Dynamic Sprite Icon */}
                                       <div style={styles.cardSpriteWrap}>
-                                        <PilotSprite race={player.race} job={j.id} size={110} />
+                                        {j.icon ? (
+                                          <img src={j.icon} style={{ width: 68, height: 68, borderRadius: 8, border: '2px solid rgba(255,255,255,0.2)', objectFit: 'cover' }} alt={j.name} />
+                                        ) : (
+                                          <PilotSprite race={player.race} job={j.id} size={110} />
+                                        )}
                                       </div>
                                       <div style={{ flex: 1, minWidth: 0 }}>
                                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -343,7 +348,26 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                                         </div>
                                         {j.skills && j.skills.length > 0 && (
                                           <div style={styles.cardJobSkills}>
-                                            ⚡ Skills: <span style={{ color: '#00e5ff' }}>{j.skills.join(', ')}</span>
+                                            <div style={{ fontWeight: 'bold', marginBottom: 6, fontSize: 10, color: '#aaa', letterSpacing: 0.5 }}>⚡ SKILLS:</div>
+                                            <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                                              {j.skills.map((sk, skIdx) => {
+                                                const isObj = typeof sk === 'object';
+                                                const skName = isObj ? sk.name : sk;
+                                                const skDesc = isObj ? sk.desc : '';
+                                                const skIcon = isObj ? sk.icon : null;
+                                                return (
+                                                  <div key={skIdx} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                                                    {skIcon && (
+                                                      <img src={skIcon} style={{ width: 24, height: 24, borderRadius: 4, border: '1px solid rgba(255,255,255,0.15)', background: '#111' }} alt={skName} />
+                                                    )}
+                                                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                                      <span style={{ color: '#00e5ff', fontWeight: 700, fontSize: 11.5 }}>{skName}</span>
+                                                      {skDesc && <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: 10, lineHeight: 1.2 }}>{skDesc}</span>}
+                                                    </div>
+                                                  </div>
+                                                );
+                                              })}
+                                            </div>
                                           </div>
                                         )}
                                       </div>
