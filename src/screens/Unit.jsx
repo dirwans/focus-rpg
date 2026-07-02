@@ -62,6 +62,7 @@ export default function Unit() {
     <div className="no-scrollbar" style={styles.screen}>
       {/* Header */}
       <div style={styles.header}>
+        <button onClick={() => useGameStore.getState().setScreen('main')} style={{background:'transparent', border:'none', color:'#00e5ff', fontSize: 20, cursor:'pointer', padding: '0 8px 0 0', display:'flex', alignItems:'center'}}>❮</button>
         <div style={styles.avatar}>
           <PilotSprite race={player.race} job={player.job} size={40} />
         </div>

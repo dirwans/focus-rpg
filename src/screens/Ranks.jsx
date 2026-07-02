@@ -130,6 +130,7 @@ export default function Ranks() {
   return (
     <div style={styles.screen}>
       <div style={styles.tabs}>
+        <button onClick={() => useGameStore.getState().setScreen('main')} style={{background:'transparent', border:'none', color:'#00e5ff', fontSize: 20, cursor:'pointer', padding: '0 8px 0 0', display:'flex', alignItems:'center'}}>❮</button>
         <div style={tab === 'acreton' ? styles.tabActive : styles.tab} onClick={() => setTab('acreton')}>🤖 ACRETON</div>
         <div style={tab === 'belterra' ? styles.tabActive : styles.tab} onClick={() => setTab('belterra')}>⚙️ BELTERRA</div>
         <div style={tab === 'coralis' ? styles.tabActive : styles.tab} onClick={() => setTab('coralis')}>🧝‍♀️ CORALIS</div>

@@ -76,6 +76,7 @@ export default function Trade() {
   return (
     <div style={styles.screen}>
       <div style={styles.header}>
+        <button onClick={() => useGameStore.getState().setScreen('main')} style={{background:'transparent', border:'none', color:'#00e5ff', fontSize: 20, cursor:'pointer', padding: '0 8px 0 0', display:'flex', alignItems:'center'}}>❮</button>
         <div style={styles.title}>ASTRUM MERCATUS</div>
         <div style={styles.subTitle}>Galactic Exchange Network</div>
       </div>

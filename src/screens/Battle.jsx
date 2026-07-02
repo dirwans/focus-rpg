@@ -153,6 +153,7 @@ export default function Battle() {
   return (
     <div style={styles.screen}>
       <div style={styles.header}>
+        <button onClick={() => useGameStore.getState().setScreen('main')} style={{background:'transparent', border:'none', color:'#00e5ff', fontSize: 20, cursor:'pointer', padding: '0 8px 0 0', display:'flex', alignItems:'center'}}>❮</button>
         <h1 style={styles.title}>BATTLEFRONT</h1>
         <p style={{ fontSize: 13, color: '#7ab0d0', margin: 0, fontFamily: 'var(--font-mono)' }}>
           Combat Points: <span style={{ color: '#fff', fontWeight: 'bold' }}>{player.cp || 1000}</span> CP

@@ -72,6 +72,7 @@ export default function Forge() {
   return (
     <div style={styles.screen}>
       <div style={styles.resBar}>
+        <button onClick={() => useGameStore.getState().setScreen('main')} style={{background:'transparent', border:'none', color:'#00e5ff', fontSize: 20, cursor:'pointer', padding: '0 8px 0 0', display:'flex', alignItems:'center'}}>❮</button>
         <span style={styles.chip('#f5a623')}>⬡ {player.resources.anium.toLocaleString()}</span>
         <span style={styles.chip('#00e5ff')}>◈ {player.resources.credits}</span>
       </div>

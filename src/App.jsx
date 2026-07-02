@@ -4,6 +4,8 @@ import { useAuthStore } from './store/authStore'
 import { useTimer } from './hooks/useTimer'
 import { loadSave, syncSave, subscribeSave } from './lib/saveSync'
 import { apiGetArchon } from './lib/api'
+import { t } from './lib/translate'
+import { App as CapApp } from '@capacitor/app'
 import BottomNav from './components/BottomNav'
 import races from './data/races.json'
 import RaceSelect from './components/RaceSelect'
@@ -36,6 +38,24 @@ export default function App() {
   const lastSyncRef = useRef('')
 
   const [hydrated, setHydrated] = useState(() => useGameStore.persist.hasHydrated())
+
+  // Capacitor hardware back button handler
+  useEffect(() => {
+    const listener = CapApp.addListener('backButton', () => {
+      const state = useGameStore.getState()
+      if (state.screen !== 'main') {
+        state.setScreen('main')
+      } else {
+        const confirmExit = window.confirm(t('confirm_exit', 'Are you sure you want to logout / exit app?', state.player))
+        if (confirmExit) {
+          CapApp.exitApp()
+        }
+      }
+    })
+    return () => {
+      listener.then(l => l.remove()).catch(() => {})
+    }
+  }, [])
 
   useEffect(() => { init() }, [])
 
