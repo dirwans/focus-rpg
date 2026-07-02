@@ -421,8 +421,8 @@
         "name": "Revenant",
         "desc": "Intermediate long-range sniper.",
         "bonus": {
-          "hp": 50,
-          "atk": 20,
+          "hp": 20,
+          "atk": 8,
           "def": 3
         },
         "skills": [],
@@ -471,9 +471,9 @@
         "name": "Deadeye",
         "desc": "Sniper with deadly accuracy.",
         "bonus": {
-          "hp": 75,
-          "atk": 30,
-          "def": 6
+          "hp": 25,
+          "atk": 10,
+          "def": 3
         },
         "skills": [],
         "levelReq": 42
@@ -521,9 +521,9 @@
         "name": "Predator",
         "desc": "Invisible silent assassin.",
         "bonus": {
-          "hp": 110,
-          "atk": 42,
-          "def": 10
+          "hp": 35,
+          "atk": 12,
+          "def": 4
         },
         "skills": [],
         "levelReq": 55
