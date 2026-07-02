@@ -192,7 +192,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
         <div style={styles.modalBody}>
           {subView === 'lobby' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              <p style={{ margin: '0 0 4px', fontSize: 13, color: '#7ab0d0', textAlign: 'center', fontFamily: 'var(--font-body)', fontWeight: 600 }}>
+              <p style={{ margin: '0 0 8px', fontSize: 14, color: '#ffffff', textAlign: 'center', fontFamily: 'var(--font-mono)', fontWeight: 600, letterSpacing: 0.5 }}>
                 Select an NPC in the headquarters:
               </p>
 
@@ -648,17 +648,18 @@ const styles = {
   },
   lobbyCardTitle: {
     fontFamily: 'var(--font-title)',
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: 800,
     color: '#fff',
     letterSpacing: 0.5,
     marginBottom: 4
   },
   lobbyCardDesc: {
-    fontFamily: 'var(--font-body)',
-    fontSize: 13,
-    color: '#7ab0d0',
-    lineHeight: 1.3
+    fontFamily: 'var(--font-mono)',
+    fontSize: 14,
+    color: '#e8f4ff',
+    lineHeight: 1.4,
+    fontWeight: 500
   },
   avatarRow: {
     display: 'flex',
