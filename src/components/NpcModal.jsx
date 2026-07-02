@@ -314,75 +314,129 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
 
                   return (
                     <div className="class-tree-col" style={{ ...styles.treeCol, width: '100%' }}>
-                      {/* Hero Sprite Area — all factions */}
-                      {(bionexHeroSprite || tabHeroJob) && (
-                        <div style={{
-                          width: '100%',
-                          display: 'flex',
-                          justifyContent: 'center',
-                          alignItems: 'flex-end',
-                          marginBottom: 12,
-                          height: 180,
-                          position: 'relative',
-                          overflow: 'hidden',
-                          borderRadius: 12,
-                          background: `linear-gradient(180deg, ${raceAccent.replace('0.18', '0.04')} 0%, rgba(0,0,0,0) 100%)`,
-                        }}>
-                          {/* Glow floor */}
+                      {/* Hero Sprite & Tier 1 Card Area */}
+                      {(bionexHeroSprite || tabHeroJob) && (() => {
+                        const j = tabHeroJob;
+                        if (!j) return null;
+                        const jTier = 1;
+                        
+                        const isActive = player.job === j.id;
+                        const isUnlocked = tier >= jTier;
+                        const reqLevel = j.levelReq || 1;
+                        
+                        const isPromoEligible = tier === 0 && player.level >= reqLevel;
+                        const isReclassEligible = tier === 1 && !isActive && player.job !== null;
+                        const isLocked = !isActive && !isPromoEligible && !isReclassEligible && (!isUnlocked || jTier > tier);
+                        const cardClass = `job-node-card panel-${player.race} ${isActive ? 'active-job-node' : ''}`;
+                        
+                        return (
                           <div style={{
-                            position: 'absolute',
-                            bottom: 0,
-                            left: '50%',
-                            transform: 'translateX(-50%)',
-                            width: 160,
-                            height: 40,
-                            borderRadius: '50%',
-                            background: `radial-gradient(ellipse, ${raceAccent} 0%, transparent 70%)`,
-                            filter: 'blur(6px)',
-                          }} />
-                          {bionexHeroSprite ? (
-                            <img
-                              src={bionexHeroSprite}
-                              alt={activeLane.title}
-                              style={{
-                                height: 175,
-                                width: 'auto',
-                                objectFit: 'contain',
-                                objectPosition: 'bottom',
-                                opacity: 1,
-                                filter: 'brightness(1.25) contrast(1.1)',
-                                position: 'relative',
-                                zIndex: 1,
-                              }}
-                            />
-                          ) : (
-                            <div style={{ position: 'relative', zIndex: 1, height: 175, display: 'flex', alignItems: 'flex-end' }}>
-                              <PilotSprite race={player.race} job={tabHeroJob.id} size={175} />
+                            width: '100%',
+                            display: 'flex',
+                            flexDirection: 'row',
+                            gap: 16,
+                            marginBottom: 12,
+                          }}>
+                            {/* Left Side: BIG SPRITE */}
+                            <div style={{
+                              flex: '0 0 160px',
+                              display: 'flex',
+                              justifyContent: 'center',
+                              alignItems: 'flex-end',
+                              height: 'auto',
+                              minHeight: 180,
+                              position: 'relative',
+                              overflow: 'hidden',
+                              borderRadius: 12,
+                              background: `linear-gradient(180deg, ${raceAccent.replace('0.18', '0.04')} 0%, rgba(0,0,0,0) 100%)`,
+                            }}>
+                              <div style={{
+                                position: 'absolute',
+                                bottom: 0,
+                                left: '50%',
+                                transform: 'translateX(-50%)',
+                                width: 160,
+                                height: 40,
+                                borderRadius: '50%',
+                                background: `radial-gradient(ellipse, ${raceAccent} 0%, transparent 70%)`,
+                                filter: 'blur(6px)',
+                              }} />
+                              {bionexHeroSprite ? (
+                                <img
+                                  src={bionexHeroSprite}
+                                  alt={activeLane.title}
+                                  style={{ height: 175, width: 'auto', objectFit: 'contain', objectPosition: 'bottom', opacity: 1, filter: 'brightness(1.25) contrast(1.1)', position: 'relative', zIndex: 1 }}
+                                />
+                              ) : (
+                                <div style={{ position: 'relative', zIndex: 1, height: 175, display: 'flex', alignItems: 'flex-end' }}>
+                                  <PilotSprite race={player.race} job={tabHeroJob.id} size={175} />
+                                </div>
+                              )}
                             </div>
-                          )}
-                          {player.race === 'bionex' && (
-                            <div style={{ position: 'absolute', right: 20, top: '50%', transform: 'translateY(-50%)', zIndex: 2, background: 'rgba(3,8,20,0.8)', padding: 12, borderRadius: 8, border: '1px solid rgba(0,229,255,0.2)', minWidth: 120 }}>
-                              <div style={{ fontFamily: 'var(--font-title)', color: '#00e5ff', fontSize: 12, marginBottom: 8, letterSpacing: 1, textAlign: 'center' }}>BASE STATS</div>
-                              {(() => {
-                                let bHp = 0, bAtk = 0, bDef = 0;
-                                const laneT = activeLane.title.toLowerCase();
-                                if (laneT.includes('guardian')) { bHp = 210; bAtk = 27; bDef = 22; }
-                                else if (laneT.includes('marksman')) { bHp = 175; bAtk = 33; bDef = 15; }
-                                else if (laneT.includes('engineer')) { bHp = 175; bAtk = 25; bDef = 17; }
-                                else if (laneT.includes('psion')) { bHp = 165; bAtk = 31; bDef = 14; }
-                                return (
-                                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: '#fff', display: 'flex', flexDirection: 'column', gap: 6 }}>
-                                    <div style={{ display: 'flex', justifyContent: 'space-between' }}><span style={{color: '#ff4444'}}>HP</span> <span>{bHp}</span></div>
-                                    <div style={{ display: 'flex', justifyContent: 'space-between' }}><span style={{color: '#ffaa00'}}>ATK</span> <span>{bAtk}</span></div>
-                                    <div style={{ display: 'flex', justifyContent: 'space-between' }}><span style={{color: '#00ccff'}}>DEF</span> <span>{bDef}</span></div>
+                            
+                            {/* Right Side: Tier 1 Job Node */}
+                            <div className={cardClass} style={{
+                              ...styles.jobNodeCard,
+                              flex: 1,
+                              opacity: isLocked ? 0.45 : 1,
+                              border: isActive ? `2px solid var(--neon-glow)` : '1.5px solid rgba(255,255,255,0.18)',
+                              background: isActive ? '#0d1d3d' : '#060d1f',
+                              display: 'flex',
+                              flexDirection: 'column',
+                              justifyContent: 'center'
+                            }}>
+                              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <span style={styles.cardJobName}>{j.name}</span>
+                                {isActive && <span style={styles.activeBadge}>✓ ACTIVE</span>}
+                              </div>
+                              <div style={styles.cardJobDesc}>{j.desc}</div>
+                              <div style={{ ...styles.cardJobBonus, display: 'flex', flexWrap: 'wrap', gap: 12 }}>
+                                <span><span style={{color: '#ff4444'}}>HP</span> +{j.bonus.hp}</span>
+                                <span><span style={{color: '#ffaa00'}}>ATK</span> +{j.bonus.atk}</span>
+                                <span><span style={{color: '#00ccff'}}>DEF</span> +{j.bonus.def}</span>
+                              </div>
+                              {j.skills && j.skills.length > 0 && (
+                                <div style={styles.cardJobSkills}>
+                                  <div style={{ fontWeight: 'bold', marginBottom: 6, fontSize: 13, color: '#aaa', letterSpacing: 0.5 }}>⚡ SKILLS:</div>
+                                  <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                                    {j.skills.map((sk, skIdx) => {
+                                      const isObj = typeof sk === 'object';
+                                      const skName = isObj ? sk.name : sk;
+                                      const skDesc = isObj ? sk.desc : '';
+                                      return (
+                                        <div key={skIdx} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                                          <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                            <span style={{ color: '#00e5ff', fontWeight: 700, fontSize: 13.5 }}>{skName}</span>
+                                            {skDesc && <span style={{ color: 'rgba(255,255,255,0.85)', fontSize: 13, lineHeight: 1.2 }}>{skDesc}</span>}
+                                          </div>
+                                        </div>
+                                      );
+                                    })}
                                   </div>
-                                )
-                              })()}
+                                </div>
+                              )}
+                              
+                              {/* Action Buttons for Tier 1 */}
+                              <div style={{ marginTop: 12, display: 'flex', justifyContent: 'center' }}>
+                                {isLocked && !isPromoEligible && !isReclassEligible && (
+                                  <div style={styles.lockedBadge}>🔒 Requires LV.{reqLevel}</div>
+                                )}
+                                {isPromoEligible && (
+                                  <button style={{...styles.actionBtn('#00e5ff', '#007482'), width: '100%'}} onClick={() => handlePromote(j.id)}>
+                                    {canPromote ? (promoCost > 0 ? t('promo_btn').replace('{fee}', promoCost) : t('promo_btn_free')) : t('insufficient_anium_warn')}
+                                  </button>
+                                )}
+                                {isReclassEligible && (
+                                  <button style={{...styles.actionBtn('#da70d6', '#7a3e78'), width: '100%'}} onClick={() => handleReclass(j.id)}>
+                                    {canReclass ? t('reclass_btn').replace('{fee}', RECLASS_COST) : t('insufficient_anium_warn')}
+                                  </button>
+                                )}
+                              </div>
                             </div>
-                          )}
-                        </div>
-                      )}
-                      {tierJobs.map((tInfo, idx) => {
+                          </div>
+                        );
+                      })()}
+                      {tierJobs.filter(tInfo => tInfo.tier > 1).map((tInfo, idx) => {
                         const jArray = tInfo.jobs
                         const jTier = tInfo.tier
                         

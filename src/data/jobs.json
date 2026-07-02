@@ -337,7 +337,7 @@
       {
         "id": "guardian",
         "name": "Guardian",
-        "desc": "Prajurit pertahanan melee dasar Bionex.",
+        "desc": "Basic Bionex melee defense unit.",
         "bonus": {
           "hp": 60,
           "atk": 5,
@@ -346,7 +346,7 @@
         "skills": [
           {
             "name": "Slash",
-            "desc": "Serangan tebasan beruntun dasar."
+            "desc": "Basic consecutive slash attack."
           }
         ],
         "levelReq": 1
@@ -354,7 +354,7 @@
       {
         "id": "marksman",
         "name": "Marksman",
-        "desc": "Penembak jarak jauh taktis dasar Bionex.",
+        "desc": "Basic Bionex tactical ranged shooter.",
         "bonus": {
           "hp": 30,
           "atk": 12,
@@ -363,7 +363,7 @@
         "skills": [
           {
             "name": "Eagle Eye",
-            "desc": "Meningkatkan jangkauan tembak."
+            "desc": "Increases shooting range."
           }
         ],
         "levelReq": 1
@@ -371,7 +371,7 @@
       {
         "id": "engineer",
         "name": "Engineer",
-        "desc": "Spesialis craft & driver dasar Bionex.",
+        "desc": "Basic Bionex crafting & driving specialist.",
         "bonus": {
           "hp": 40,
           "atk": 6,
@@ -380,7 +380,7 @@
         "skills": [
           {
             "name": "Scrap Recycle",
-            "desc": "Memanfaatkan besi tua menjadi resource."
+            "desc": "Utilizes scrap metal into resources."
           }
         ],
         "levelReq": 1
@@ -388,7 +388,7 @@
       {
         "id": "psion",
         "name": "Psion",
-        "desc": "Pangguna energi spiritual/Force dasar Bionex.",
+        "desc": "Basic Bionex spiritual/Force energy user.",
         "bonus": {
           "hp": 30,
           "atk": 8,
@@ -407,7 +407,7 @@
       {
         "id": "centurion",
         "name": "Centurion",
-        "desc": "Warrior spesialis pertahanan.",
+        "desc": "Defense specialist warrior.",
         "bonus": {
           "hp": 95,
           "atk": 11,
@@ -419,7 +419,7 @@
       {
         "id": "revenant",
         "name": "Revenant",
-        "desc": "Penembak jitu jarak jauh menengah.",
+        "desc": "Intermediate long-range sniper.",
         "bonus": {
           "hp": 50,
           "atk": 20,
@@ -431,7 +431,7 @@
       {
         "id": "mechanist",
         "name": "Mechanist",
-        "desc": "Ahli pembuat mesin tempur.",
+        "desc": "Combat machine crafting expert.",
         "bonus": {
           "hp": 65,
           "atk": 11,
@@ -443,7 +443,7 @@
       {
         "id": "esper",
         "name": "Esper",
-        "desc": "Spiritualist dengan Force menengah.",
+        "desc": "Spiritualist with intermediate Force.",
         "bonus": {
           "hp": 45,
           "atk": 17,
@@ -457,7 +457,7 @@
       {
         "id": "protector",
         "name": "Protector",
-        "desc": "Pertahanan garda terdepan elit.",
+        "desc": "Elite vanguard defense.",
         "bonus": {
           "hp": 145,
           "atk": 19,
@@ -469,7 +469,7 @@
       {
         "id": "deadeye",
         "name": "Deadeye",
-        "desc": "Penembak jitu dengan akurasi mematikan.",
+        "desc": "Sniper with deadly accuracy.",
         "bonus": {
           "hp": 75,
           "atk": 30,
@@ -481,7 +481,7 @@
       {
         "id": "techmaster",
         "name": "Techmaster",
-        "desc": "Ahli teknologi terkemuka Bionex.",
+        "desc": "Leading Bionex technology expert.",
         "bonus": {
           "hp": 100,
           "atk": 18,
@@ -493,7 +493,7 @@
       {
         "id": "ascendant",
         "name": "Ascendant",
-        "desc": "Master Force Bionex.",
+        "desc": "Bionex Force master.",
         "bonus": {
           "hp": 65,
           "atk": 28,
@@ -507,7 +507,7 @@
       {
         "id": "imperator",
         "name": "Imperator",
-        "desc": "Komandan tertinggi militer Bionex.",
+        "desc": "Supreme Bionex military commander.",
         "bonus": {
           "hp": 215,
           "atk": 29,
@@ -519,7 +519,7 @@
       {
         "id": "predator",
         "name": "Predator",
-        "desc": "Pembunuh bayaran senyap tak kasat mata.",
+        "desc": "Invisible silent assassin.",
         "bonus": {
           "hp": 110,
           "atk": 42,
@@ -531,7 +531,7 @@
       {
         "id": "overseer",
         "name": "Overseer",
-        "desc": "Direktur persenjataan dan mesin super.",
+        "desc": "Director of weaponry and super machines.",
         "bonus": {
           "hp": 150,
           "atk": 27,
@@ -543,7 +543,7 @@
       {
         "id": "transcendent",
         "name": "Transcendent",
-        "desc": "Wujud murni energi Force tak terbatas.",
+        "desc": "Pure manifestation of limitless Force energy.",
         "bonus": {
           "hp": 90,
           "atk": 42,
