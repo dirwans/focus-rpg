@@ -986,10 +986,19 @@ export const useGameStore = create(
           const psionJobs = ['psion', 'esper', 'ascendant', 'transcendent'];
           
           let growth = null;
-          if (guardianJobs.includes(player.job)) growth = { hp: 13, atk: 2, def: 2 }
-          else if (marksmanJobs.includes(player.job)) growth = { hp: 10, atk: 3, def: 1 }
-          else if (engineerJobs.includes(player.job)) growth = { hp: 9, atk: 2, def: 1.5 }
-          else if (psionJobs.includes(player.job)) growth = { hp: 8, atk: 3, def: 1 }
+          if (guardianJobs.includes(player.job)) {
+            growth = { hp: 13, atk: 2, def: 2 }
+            baseHpScaling = 210; baseAtkScaling = 27; baseDefScaling = 22;
+          } else if (marksmanJobs.includes(player.job)) {
+            growth = { hp: 10, atk: 3, def: 1 }
+            baseHpScaling = 175; baseAtkScaling = 33; baseDefScaling = 15;
+          } else if (engineerJobs.includes(player.job)) {
+            growth = { hp: 9, atk: 2, def: 1.5 }
+            baseHpScaling = 175; baseAtkScaling = 25; baseDefScaling = 17;
+          } else if (psionJobs.includes(player.job)) {
+            growth = { hp: 8, atk: 3, def: 1 }
+            baseHpScaling = 165; baseAtkScaling = 31; baseDefScaling = 14;
+          }
 
           if (growth) {
             const levelUps = Math.max(0, (player.level || 1) - 1)

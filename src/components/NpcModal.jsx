@@ -360,6 +360,26 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                               <PilotSprite race={player.race} job={tabHeroJob.id} size={175} />
                             </div>
                           )}
+                          {player.race === 'bionex' && (
+                            <div style={{ position: 'absolute', right: 20, top: '50%', transform: 'translateY(-50%)', zIndex: 2, background: 'rgba(3,8,20,0.8)', padding: 12, borderRadius: 8, border: '1px solid rgba(0,229,255,0.2)', minWidth: 120 }}>
+                              <div style={{ fontFamily: 'var(--font-title)', color: '#00e5ff', fontSize: 12, marginBottom: 8, letterSpacing: 1, textAlign: 'center' }}>BASE STATS</div>
+                              {(() => {
+                                let bHp = 0, bAtk = 0, bDef = 0;
+                                const laneT = activeLane.title.toLowerCase();
+                                if (laneT.includes('guardian')) { bHp = 210; bAtk = 27; bDef = 22; }
+                                else if (laneT.includes('marksman')) { bHp = 175; bAtk = 33; bDef = 15; }
+                                else if (laneT.includes('engineer')) { bHp = 175; bAtk = 25; bDef = 17; }
+                                else if (laneT.includes('psion')) { bHp = 165; bAtk = 31; bDef = 14; }
+                                return (
+                                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: '#fff', display: 'flex', flexDirection: 'column', gap: 6 }}>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between' }}><span style={{color: '#ff4444'}}>HP</span> <span>{bHp}</span></div>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between' }}><span style={{color: '#ffaa00'}}>ATK</span> <span>{bAtk}</span></div>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between' }}><span style={{color: '#00ccff'}}>DEF</span> <span>{bDef}</span></div>
+                                  </div>
+                                )
+                              })()}
+                            </div>
+                          )}
                         </div>
                       )}
                       {tierJobs.map((tInfo, idx) => {
@@ -421,14 +441,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                                     }}
                                   >
                                     <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-                                      {/* Dynamic Sprite Icon */}
-                                      <div style={styles.cardSpriteWrap}>
-                                        {j.icon ? (
-                                          <img src={j.icon} style={{ width: 68, height: 68, borderRadius: 8, border: '2px solid rgba(255,255,255,0.2)', objectFit: 'cover', opacity: 1, filter: 'brightness(1.15) contrast(1.05)' }} alt={j.name} />
-                                        ) : (
-                                          <PilotSprite race={player.race} job={j.id} size={110} />
-                                        )}
-                                      </div>
+
                                       <div style={{ flex: 1, minWidth: 0 }}>
                                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                           <span style={styles.cardJobName}>{j.name}</span>
