@@ -4,13 +4,13 @@ import { apiGetArchon, apiVoteArchon, apiGetLeaderboard } from '../lib/api'
 import { PilotSprite } from '../components/PilotSprites'
 
 const MOCK_FACTION_RANKS = {
-  acreton: [
-    { name: '익명', race: 'acreton', minutes: 3600, flag: '🌐' },
-    { name: '[Divine] Syrent', race: 'acreton', minutes: 3290, flag: '🇻🇳' },
-    { name: 'Ironclad', race: 'acreton', minutes: 3100, flag: '🌐' },
-    { name: 'CyberZero', race: 'acreton', minutes: 2900, flag: '🇰🇷' },
-    { name: 'SteelPulse', race: 'acreton', minutes: 2750, flag: '🇯🇵' },
-    { name: 'MechaStorm', race: 'acreton', minutes: 2600, flag: '🌐' },
+  arctron: [
+    { name: '익명', race: 'arctron', minutes: 3600, flag: '🌐' },
+    { name: '[Divine] Syrent', race: 'arctron', minutes: 3290, flag: '🇻🇳' },
+    { name: 'Ironclad', race: 'arctron', minutes: 3100, flag: '🌐' },
+    { name: 'CyberZero', race: 'arctron', minutes: 2900, flag: '🇰🇷' },
+    { name: 'SteelPulse', race: 'arctron', minutes: 2750, flag: '🇯🇵' },
+    { name: 'MechaStorm', race: 'arctron', minutes: 2600, flag: '🌐' },
   ],
   bionex: [
     { name: 'TeMa89', race: 'bionex', minutes: 3560, flag: '🇯🇵' },
@@ -20,13 +20,13 @@ const MOCK_FACTION_RANKS = {
     { name: 'GearHead', race: 'bionex', minutes: 2600, flag: '🇨🇦' },
     { name: 'VoltFrame', race: 'bionex', minutes: 2450, flag: '🌐' },
   ],
-  coralis: [
-    { name: 'MOB', race: 'coralis', minutes: 3300, flag: '🇺🇸' },
-    { name: 'THE GREAT CAT', race: 'coralis', minutes: 3185, flag: '🌐' },
-    { name: 'ManaVortex', race: 'coralis', minutes: 3000, flag: '🇬🇧' },
-    { name: 'EidolonSage', race: 'coralis', minutes: 2850, flag: '🌐' },
-    { name: 'CrystalAura', race: 'coralis', minutes: 2700, flag: '🇫🇷' },
-    { name: 'StarWand', race: 'coralis', minutes: 2550, flag: '🌐' },
+  celestra: [
+    { name: 'MOB', race: 'celestra', minutes: 3300, flag: '🇺🇸' },
+    { name: 'THE GREAT CAT', race: 'celestra', minutes: 3185, flag: '🌐' },
+    { name: 'ManaVortex', race: 'celestra', minutes: 3000, flag: '🇬🇧' },
+    { name: 'EidolonSage', race: 'celestra', minutes: 2850, flag: '🌐' },
+    { name: 'CrystalAura', race: 'celestra', minutes: 2700, flag: '🇫🇷' },
+    { name: 'StarWand', race: 'celestra', minutes: 2550, flag: '🌐' },
   ]
 }
 
@@ -40,8 +40,8 @@ const BADGE_COLOR = { gold: '#f5a623', silver: '#aaaaaa', bronze: '#b87333' }
 
 export default function Ranks() {
   const player = useGameStore((s) => s.player)
-  const defaultTab = player.race || 'acreton'
-  const [tab, setTab] = useState(defaultTab) // 'acreton', 'bionex', 'coralis'
+  const defaultTab = player.race || 'arctron'
+  const [tab, setTab] = useState(defaultTab) // 'arctron', 'bionex', 'celestra'
   const myMinutes = player.totalMinutes
 
   // Server data
@@ -139,9 +139,9 @@ export default function Ranks() {
     <div style={styles.screen}>
       <div style={styles.tabs}>
         <button onClick={() => useGameStore.getState().setScreen('main')} style={{background:'transparent', border:'none', color:'#00e5ff', fontSize: 20, cursor:'pointer', padding: '0 8px 0 0', display:'flex', alignItems:'center'}}>❮</button>
-        <div style={tab === 'acreton' ? styles.tabActive : styles.tab} onClick={() => setTab('acreton')}>🤖 ACRETON</div>
+        <div style={tab === 'arctron' ? styles.tabActive : styles.tab} onClick={() => setTab('arctron')}>🤖 ACRETON</div>
         <div style={tab === 'bionex' ? styles.tabActive : styles.tab} onClick={() => setTab('bionex')}>⚙️ BIONEX</div>
-        <div style={tab === 'coralis' ? styles.tabActive : styles.tab} onClick={() => setTab('coralis')}>🧝‍♀️ CORALIS</div>
+        <div style={tab === 'celestra' ? styles.tabActive : styles.tab} onClick={() => setTab('celestra')}>🧝‍♀️ CORALIS</div>
       </div>
 
       {loading && !archonData ? (

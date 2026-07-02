@@ -195,14 +195,14 @@ export default function Unit() {
                     <tr><td style={styles.td}>Psion</td><td style={styles.td}>+8</td><td style={styles.td}>+3</td><td style={styles.td}>+1</td></tr>
                   </>
                 )}
-                {player.race === 'acreton' && (
+                {player.race === 'arctron' && (
                   <>
                     <tr><td style={styles.td}>Warrior</td><td style={styles.td}>+14</td><td style={styles.td}>+2</td><td style={styles.td}>+2</td></tr>
                     <tr><td style={styles.td}>Ranger</td><td style={styles.td}>+10</td><td style={styles.td}>+3</td><td style={styles.td}>+1</td></tr>
                     <tr><td style={styles.td}>Technician</td><td style={styles.td}>+9</td><td style={styles.td}>+2</td><td style={styles.td}>+1.5</td></tr>
                   </>
                 )}
-                {player.race === 'coralis' && (
+                {player.race === 'celestra' && (
                   <>
                     <tr><td style={styles.td}>Sentinel</td><td style={styles.td}>+12</td><td style={styles.td}>+2</td><td style={styles.td}>+2</td></tr>
                     <tr><td style={styles.td}>Pathfinder</td><td style={styles.td}>+9</td><td style={styles.td}>+3</td><td style={styles.td}>+1</td></tr>
@@ -223,14 +223,14 @@ export default function Unit() {
                   <div style={styles.filosofiItem}><strong>🔮 Psion:</strong> HP paling rendah. DEF terendah. ATK tinggi. Area damage.</div>
                 </>
               )}
-              {player.race === 'acreton' && (
+              {player.race === 'arctron' && (
                 <>
                   <div style={styles.filosofiItem}><strong>⚔️ Warrior:</strong> HP & DEF tertinggi. ATK sedang. Fokus menjadi tank/frontliner.</div>
                   <div style={styles.filosofiItem}><strong>🎯 Ranger:</strong> HP terendah kedua. DEF paling rendah. ATK dasar tertinggi. DPS tinggi tetapi lebih rapuh.</div>
                   <div style={styles.filosofiItem}><strong>🔧 Technician:</strong> HP paling rendah. DEF sedang. ATK paling rendah. Kelebihan berasal dari ARES mulai level 32, bukan dari status dasar.</div>
                 </>
               )}
-              {player.race === 'coralis' && (
+              {player.race === 'celestra' && (
                 <>
                   <div style={styles.filosofiItem}><strong>⚔️ Sentinel:</strong> HP tertinggi di Celestra. DEF tertinggi. ATK sedang. Petarung garis depan yang menggabungkan pedang dan energi arcane.</div>
                   <div style={styles.filosofiItem}><strong>🏹 Pathfinder:</strong> HP rendah. DEF rendah. ATK fisik tertinggi. Mengandalkan kecepatan dan serangan kritikal.</div>
@@ -472,13 +472,13 @@ const styles = {
   titleBadge: (race) => {
     const colors = {
       bionex: 'linear-gradient(135deg, #eab308, #ca8a04)',
-      coralis: 'linear-gradient(135deg, #a855f7, #7e22ce)',
-      acreton: 'linear-gradient(135deg, #ef4444, #b91c1c)'
+      celestra: 'linear-gradient(135deg, #a855f7, #7e22ce)',
+      arctron: 'linear-gradient(135deg, #ef4444, #b91c1c)'
     }
     const borderColors = {
       bionex: '#eab308',
-      coralis: '#a855f7',
-      acreton: '#ef4444'
+      celestra: '#a855f7',
+      arctron: '#ef4444'
     }
     return {
       background: colors[race] || 'linear-gradient(135deg, #00e5ff, #008bbb)',

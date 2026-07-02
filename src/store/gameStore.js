@@ -471,11 +471,11 @@ export const useGameStore = create(
 
         // 2. Passive FP regeneration (RF Online style based on Race)
         let fpRegenRate = 12 // Default standard
-        if (player.race === 'coralis') {
-          fpRegenRate = 25 // Coralis: high magic affinity
+        if (player.race === 'celestra') {
+          fpRegenRate = 25 // Celestra: high magic affinity
         } else if (player.race === 'bionex') {
           fpRegenRate = 15 // Bellato: hybrid
-        } else if (player.race === 'acreton') {
+        } else if (player.race === 'arctron') {
           fpRegenRate = 5  // Accretia: android, low natural flow
         }
         const playerMaxFp = battle.playerMaxFp || 200
@@ -495,7 +495,7 @@ export const useGameStore = create(
           newLog.push(`💨 MISS! Serangan ke ${mob.emoji} meleset (Dodge).`)
         } else {
           // Normal Attack Damage Formula
-          isCrit = Math.random() < (player.race === 'coralis' ? 0.15 : 0.12)
+          isCrit = Math.random() < (player.race === 'celestra' ? 0.15 : 0.12)
           let rawDmg = Math.max(1, playerAtk - mob.def)
 
           // Auto-Skill Logic
@@ -879,9 +879,9 @@ export const useGameStore = create(
           
           // Force reset if the loaded race is obsolete
           const raceMap = { 
-            'accretians': 'acreton', 'accretia': 'acreton', 'acreton': 'acreton',
-            'bellians': 'belterra', 'bellato': 'belterra', 'belterra': 'belterra',
-            'corvus': 'coralis', 'cora': 'coralis', 'coralis': 'coralis'
+            'accretians': 'arctron', 'accretia': 'arctron', 'arctron': 'arctron',
+            'bellians': 'bionex', 'bellato': 'bionex', 'bionex': 'bionex',
+            'corvus': 'celestra', 'cora': 'celestra', 'celestra': 'celestra'
           }
           if (next.player.race && raceMap[next.player.race]) {
             next.player.race = raceMap[next.player.race]
@@ -1029,7 +1029,7 @@ export const useGameStore = create(
               growth = { hp: 8, atk: 3, def: 1 }
               baseHpScaling = 165; baseAtkScaling = 31; baseDefScaling = 14;
             }
-          } else if (player.race === 'acreton') {
+          } else if (player.race === 'arctron') {
             const warriorJobs = ['destroyer', 'vanguard', 'juggernaut', 'dreadnought'];
             const rangerJobs = ['gunner', 'marksman', 'railgunner', 'annihilator'];
             const techJobs = ['engineer', 'architect', 'core_engineer', 'cybermancer'];
@@ -1043,7 +1043,7 @@ export const useGameStore = create(
               growth = { hp: 9, atk: 2, def: 1.5 }
               baseHpScaling = 170; baseAtkScaling = 24; baseDefScaling = 18;
             }
-          } else if (player.race === 'coralis') {
+          } else if (player.race === 'celestra') {
             const sentinelJobs = ['sentinel', 'warden', 'knight', 'blademaster'];
             const pathfinderJobs = ['pathfinder', 'windrunner', 'shadow_hunter', 'stargazer'];
             const oracleJobs = ['oracle', 'celestial_oracle', 'conjurer', 'divine_summoner'];
@@ -1076,7 +1076,7 @@ export const useGameStore = create(
         let baseHp = baseHpScaling + calcStat('hp', player.upgrades?.hp || 0, player.race) + flatHp + levelGrowth.hp
 
         // Set bonus verification (requires being the Archon)
-        const isBelterraSet = isArchon &&
+        const isBionexSet = isArchon &&
           eq.helmet?.id === 'archon_bionex_helmet' &&
           eq.mantle?.id === 'archon_bionex_mantle' &&
           eq.armor?.id === 'archon_bionex_armor' &&
@@ -1084,29 +1084,29 @@ export const useGameStore = create(
           eq.boots?.id === 'archon_bionex_boots' &&
           eq.weapon?.id === 'archon_bionex_weapon';
           
-        const isCoralisSet = isArchon &&
-          eq.helmet?.id === 'archon_coralis_helmet' &&
-          eq.mantle?.id === 'archon_coralis_mantle' &&
-          eq.armor?.id === 'archon_coralis_armor' &&
-          eq.gloves?.id === 'archon_coralis_gloves' &&
-          eq.boots?.id === 'archon_coralis_boots' &&
-          eq.weapon?.id === 'archon_coralis_weapon';
+        const isCelestraSet = isArchon &&
+          eq.helmet?.id === 'archon_celestra_helmet' &&
+          eq.mantle?.id === 'archon_celestra_mantle' &&
+          eq.armor?.id === 'archon_celestra_armor' &&
+          eq.gloves?.id === 'archon_celestra_gloves' &&
+          eq.boots?.id === 'archon_celestra_boots' &&
+          eq.weapon?.id === 'archon_celestra_weapon';
 
-        const isAcretonSet = isArchon &&
-          eq.helmet?.id === 'archon_acreton_helmet' &&
-          eq.mantle?.id === 'archon_acreton_mantle' &&
-          eq.armor?.id === 'archon_acreton_armor' &&
-          eq.gloves?.id === 'archon_acreton_gloves' &&
-          eq.boots?.id === 'archon_acreton_boots' &&
-          eq.weapon?.id === 'archon_acreton_weapon';
+        const isArctronSet = isArchon &&
+          eq.helmet?.id === 'archon_arctron_helmet' &&
+          eq.mantle?.id === 'archon_arctron_mantle' &&
+          eq.armor?.id === 'archon_arctron_armor' &&
+          eq.gloves?.id === 'archon_arctron_gloves' &&
+          eq.boots?.id === 'archon_arctron_boots' &&
+          eq.weapon?.id === 'archon_arctron_weapon';
 
-        if (isBelterraSet && player.race === 'bionex') {
+        if (isBionexSet && player.race === 'bionex') {
           percentHp += 30
           percentDef += 20
-        } else if (isCoralisSet && player.race === 'coralis') {
+        } else if (isCelestraSet && player.race === 'celestra') {
           percentAtk += 30 // Magic Power mapped to ATK
           percentDef += 20 // Mana Regen mapped to DEF
-        } else if (isAcretonSet && player.race === 'acreton') {
+        } else if (isArctronSet && player.race === 'arctron') {
           percentAtk += 30
           percentDef += 20
         }
@@ -1150,11 +1150,11 @@ export const useGameStore = create(
         }
 
         let activeTitle = ''
-        if (isBelterraSet && player.race === 'bionex') {
+        if (isBionexSet && player.race === 'bionex') {
           activeTitle = 'Solar Sovereign'
-        } else if (isCoralisSet && player.race === 'coralis') {
+        } else if (isCelestraSet && player.race === 'celestra') {
           activeTitle = 'Astral Emperor'
-        } else if (isAcretonSet && player.race === 'acreton') {
+        } else if (isArctronSet && player.race === 'arctron') {
           activeTitle = 'Iron Overlord'
         }
 
@@ -1571,19 +1571,19 @@ export const useGameStore = create(
           archon_bionex_mantle: 25000,
           archon_bionex_weapon: 25000,
 
-          archon_coralis_helmet: 15000,
-          archon_coralis_gloves: 15000,
-          archon_coralis_boots: 15000,
-          archon_coralis_armor: 25000,
-          archon_coralis_mantle: 25000,
-          archon_coralis_weapon: 25000,
+          archon_celestra_helmet: 15000,
+          archon_celestra_gloves: 15000,
+          archon_celestra_boots: 15000,
+          archon_celestra_armor: 25000,
+          archon_celestra_mantle: 25000,
+          archon_celestra_weapon: 25000,
 
-          archon_acreton_helmet: 15000,
-          archon_acreton_gloves: 15000,
-          archon_acreton_boots: 15000,
-          archon_acreton_armor: 25000,
-          archon_acreton_mantle: 25000,
-          archon_acreton_weapon: 25000
+          archon_arctron_helmet: 15000,
+          archon_arctron_gloves: 15000,
+          archon_arctron_boots: 15000,
+          archon_arctron_armor: 25000,
+          archon_arctron_mantle: 25000,
+          archon_arctron_weapon: 25000
         }
         const price = ARCHON_PRICES[itemId]
         if (price === undefined) {
@@ -1633,7 +1633,7 @@ export const useGameStore = create(
       name: 'focus-rpg-save',
       merge: (persistedState, currentState) => {
         if (!persistedState) return currentState
-        if (persistedState.player && persistedState.player.race === 'belterra') {
+        if (persistedState.player && persistedState.player.race === 'bionex') {
           persistedState.player.race = 'bionex'
           persistedState.player.job = null // Reset to novice
         }

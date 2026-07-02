@@ -20,13 +20,13 @@ const CLASS_LANES = {
     { title: "Engineer Path", indices: [[2], [2], [2], [2]] },
     { title: "Psion Path", indices: [[3], [3], [3], [3]] }
   ],
-  coralis: [
+  celestra: [
     { title: "Warrior Path", indices: [[0], [0], [0], [0]] },
     { title: "Ranger Path", indices: [[1], [1], [1], [1]] },
     { title: "Summoner Path", indices: [[2], [2], [2], [2]] },
     { title: "Mage Path", indices: [[3], [3], [3], [3]] }
   ],
-  acreton: [
+  arctron: [
     { title: "Warrior Path", indices: [[0], [0], [0], [0]] },
     { title: "Ranger Path", indices: [[1], [1], [1], [1]] },
     { title: "Technician Path", indices: [[2], [2], [2], [2]] }
@@ -267,7 +267,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                   }
                   const tabJob = getTabJob()
                   const isActive = activeLaneIdx === laneIdx
-                  const raceColor = player.race === 'acreton' ? '#ff3d00' : player.race === 'bionex' ? '#ffd600' : '#00e5ff'
+                  const raceColor = player.race === 'arctron' ? '#ff3d00' : player.race === 'bionex' ? '#ffd600' : '#00e5ff'
 
                   const bionexSprite = player.race === 'bionex' ? getBionexLaneSprite(lane.title) : null
 
@@ -303,7 +303,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                     : null
 
                   // Hero sprite area — Bellterra: class sprite, others: PilotSprite
-                  const raceAccent = player.race === 'acreton' ? 'rgba(255,61,0,0.18)' : player.race === 'bionex' ? 'rgba(255,214,0,0.18)' : 'rgba(0,229,255,0.18)'
+                  const raceAccent = player.race === 'arctron' ? 'rgba(255,61,0,0.18)' : player.race === 'bionex' ? 'rgba(255,214,0,0.18)' : 'rgba(0,229,255,0.18)'
                   const tabHeroJob = activeLane ? (() => {
                     const t1Idx = activeLane.indices[0]?.[0]
                     if (t1Idx !== undefined && jobs[player.race]?.tier1[t1Idx]) return { tier: 1, job: jobs[player.race].tier1[t1Idx] }
@@ -410,7 +410,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                                           <span><span style={{color: '#00ccff'}}>DEF</span> {bDef}</span>
                                         </>
                                       );
-                                    } else if (player.race === 'coralis') {
+                                    } else if (player.race === 'celestra') {
                                       let bHp = 0, bAtk = 0, bDef = 0;
                                       const laneT = activeLane.title.toLowerCase();
                                       if (laneT.includes('warrior')) { bHp = 195; bAtk = 29; bDef = 20; }
@@ -424,7 +424,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                                           <span><span style={{color: '#00ccff'}}>DEF</span> {bDef}</span>
                                         </>
                                       );
-                                    } else if (player.race === 'acreton') {
+                                    } else if (player.race === 'arctron') {
                                       let bHp = 0, bAtk = 0, bDef = 0;
                                       const laneT = activeLane.title.toLowerCase();
                                       if (laneT.includes('warrior')) { bHp = 220; bAtk = 28; bDef = 24; }

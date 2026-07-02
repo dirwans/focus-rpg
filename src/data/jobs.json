@@ -1,5 +1,5 @@
 {
-  "coralis": {
+  "celestra": {
     "tier1": [
       {
         "id": "sentinel",
@@ -345,7 +345,7 @@
       }
     ]
   },
-  "acreton": {
+  "arctron": {
     "tier1": [
       {
         "id": "destroyer",

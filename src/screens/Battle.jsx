@@ -4,14 +4,14 @@ import { useGameStore } from '../store/gameStore'
 import jobs from '../data/jobs.json'
 import { PilotSprite } from '../components/PilotSprites'
 
-import acretonTowerImg from '../assets/acreton_tower.png'
-import belterraTowerImg from '../assets/belterra_tower.png'
-import coralisTowerImg from '../assets/coralis_tower.png'
+import arctronTowerImg from '../assets/arctron_tower.png'
+import bionexTowerImg from '../assets/bionex_tower.png'
+import celestraTowerImg from '../assets/celestra_tower.png'
 
 const TOWER_IMAGES = {
-  acreton: acretonTowerImg,
-  bionex: belterraTowerImg,
-  coralis: coralisTowerImg
+  arctron: arctronTowerImg,
+  bionex: bionexTowerImg,
+  celestra: celestraTowerImg
 }
 
 function getJobName(raceId, jobId) {
@@ -24,7 +24,7 @@ function getJobName(raceId, jobId) {
 export default function Battle() {
   const [tab, setTab] = useState('arena')
   const [targets, setTargets] = useState([])
-  const [warScores, setWarScores] = useState({ acreton: 0, bionex: 0, coralis: 0 })
+  const [warScores, setWarScores] = useState({ arctron: 0, bionex: 0, celestra: 0 })
   const [chipWar, setChipWar] = useState(null)
   const [chipLog, setChipLog] = useState([])
   const [chipLoading, setChipLoading] = useState(false)
@@ -54,7 +54,7 @@ export default function Battle() {
     setLoading(true)
     try {
       const res = await apiPvpWar()
-      setWarScores(res.scores || { acreton: 0, bionex: 0, coralis: 0 })
+      setWarScores(res.scores || { arctron: 0, bionex: 0, celestra: 0 })
     } catch (e) {
       console.error(e)
     } finally {
@@ -66,9 +66,9 @@ export default function Battle() {
     setChipLoading(true)
     try {
       const res = await apiChipWar()
-      // Transform server's {acreton:{hp,maxHp},...} → [{towerId,race,hp,maxHp,...},...]
-      const TOWER_ORDER = ['acreton', 'bionex', 'coralis']
-      const RACE_COLORS = { acreton: '#ff6400', bionex: '#00e5ff', coralis: '#d000ff' }
+      // Transform server's {arctron:{hp,maxHp},...} → [{towerId,race,hp,maxHp,...},...]
+      const TOWER_ORDER = ['arctron', 'bionex', 'celestra']
+      const RACE_COLORS = { arctron: '#ff6400', bionex: '#00e5ff', celestra: '#d000ff' }
       const towers = TOWER_ORDER.map((race) => {
         const serverTower = (res.towers && res.towers[race]) || { hp: 500_000_000, maxHp: 500_000_000 }
         const hpPct = serverTower.hp / serverTower.maxHp
@@ -145,7 +145,7 @@ export default function Battle() {
   }
 
   // Calculate proportional crystal heights
-  const maxScore = Math.max(1, warScores.acreton || 0, warScores.bionex || 0, warScores.coralis || 0)
+  const maxScore = Math.max(1, warScores.arctron || 0, warScores.bionex || 0, warScores.celestra || 0)
   const getProportionalHeight = (score) => {
     return 30 + ((score || 0) / maxScore) * 110 // Range between 30px and 140px
   }

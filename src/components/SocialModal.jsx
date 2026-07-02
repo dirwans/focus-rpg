@@ -8,7 +8,7 @@ export default function SocialModal({ onClose }) {
 
   // Dummy friend list for now
   const [friends, setFriends] = useState([
-    { id: 'f1', username: 'xiao', race: 'acreton', job: 'Tech', level: 42, online: true },
+    { id: 'f1', username: 'xiao', race: 'arctron', job: 'Tech', level: 42, online: true },
     { id: 'f2', username: 'budi', race: 'bionex', job: 'Commando', level: 32, online: false }
   ])
 

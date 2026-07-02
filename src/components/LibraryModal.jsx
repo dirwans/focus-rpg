@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import arctronGears from '../data/gears/arctron.json'
 import bionexGears from '../data/gears/bionex.json'
-import coralisGears from '../data/gears/coralis.json'
+import celestraGears from '../data/gears/celestra.json'
 
 export default function LibraryModal({ onClose }) {
   const [tab, setTab] = useState('growth')
@@ -199,9 +199,9 @@ export default function LibraryModal({ onClose }) {
                   onClick={() => setEquipFaction('bionex')}
                 >Bionex</button>
                 <button 
-                  style={equipFaction === 'coralis' ? styles.subTabActive : styles.subTab}
-                  onClick={() => setEquipFaction('coralis')}
-                >Coralis</button>
+                  style={equipFaction === 'celestra' ? styles.subTabActive : styles.subTab}
+                  onClick={() => setEquipFaction('celestra')}
+                >Celestra</button>
               </div>
 
               {equipFaction === 'arctron' && (
@@ -324,11 +324,11 @@ export default function LibraryModal({ onClose }) {
                 </>
               )}
 
-              {equipFaction === 'coralis' && (
+              {equipFaction === 'celestra' && (
                 <>
                   <div style={styles.itemCard}>
                     <div style={styles.itemTitle}>🛡️ Armor Sets</div>
-                    {coralisGears.armorSets.map((set, i) => (
+                    {celestraGears.armorSets.map((set, i) => (
                       <div key={i} style={{ marginBottom: 8, paddingBottom: 8, borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
                         <div style={{ color: '#00e5ff', fontWeight: 'bold' }}>{set.grade} - {set.name}</div>
                         <div style={{ fontSize: 12, color: '#aaa' }}>Bagian: {set.parts.join(', ')}</div>
@@ -339,7 +339,7 @@ export default function LibraryModal({ onClose }) {
 
                   <div style={styles.itemCard}>
                     <div style={styles.itemTitle}>⚔️ Sentinel Weapons</div>
-                    {coralisGears.sentinel.weapons.map((w, i) => (
+                    {celestraGears.sentinel.weapons.map((w, i) => (
                       <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
                         <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
                         <span style={{ color: '#00e5ff' }}>+{w.atk} ATK</span>
@@ -349,7 +349,7 @@ export default function LibraryModal({ onClose }) {
 
                   <div style={styles.itemCard}>
                     <div style={styles.itemTitle}>🛡️ Sentinel Shields</div>
-                    {coralisGears.sentinel.shields.map((w, i) => (
+                    {celestraGears.sentinel.shields.map((w, i) => (
                       <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
                         <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
                         <span style={{ color: '#00ff88' }}>+{w.def} DEF</span>
@@ -359,7 +359,7 @@ export default function LibraryModal({ onClose }) {
 
                   <div style={styles.itemCard}>
                     <div style={styles.itemTitle}>🏹 Pathfinder Weapons</div>
-                    {coralisGears.pathfinder.weapons.map((w, i) => (
+                    {celestraGears.pathfinder.weapons.map((w, i) => (
                       <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
                         <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
                         <span style={{ color: '#00e5ff' }}>+{w.atk} ATK</span>
@@ -369,7 +369,7 @@ export default function LibraryModal({ onClose }) {
 
                   <div style={styles.itemCard}>
                     <div style={styles.itemTitle}>🔮 Oracle Weapons</div>
-                    {coralisGears.oracle.weapons.map((w, i) => (
+                    {celestraGears.oracle.weapons.map((w, i) => (
                       <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
                         <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
                         <span style={{ color: '#00e5ff' }}>+{w.atk} ATK</span>
@@ -379,7 +379,7 @@ export default function LibraryModal({ onClose }) {
 
                   <div style={styles.itemCard}>
                     <div style={styles.itemTitle}>✨ Arcanist Weapons</div>
-                    {coralisGears.arcanist.weapons.map((w, i) => (
+                    {celestraGears.arcanist.weapons.map((w, i) => (
                       <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
                         <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
                         <span style={{ color: '#00e5ff' }}>+{w.atk} ATK</span>

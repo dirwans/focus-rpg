@@ -1,5 +1,5 @@
 {
-  "acreton": {
+  "arctron": {
     "name": "ARES",
     "icon": "🤖",
     "description": "Drone rapuh tetapi memberikan DPS paling tinggi.",
@@ -111,7 +111,7 @@
       }
     ]
   },
-  "coralis": {
+  "celestra": {
     "name": "Ancient Spirit",
     "icon": "🌿",
     "description": "HP rendah, tetapi peluang critical sangat tinggi sehingga menghasilkan burst damage.",

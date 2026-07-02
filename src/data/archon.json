@@ -17,11 +17,11 @@
       }
     }
   },
-  "coralis": {
+  "celestra": {
     "mantle": {
       "id": "mantle_astral",
       "name": "Astral Veil",
-      "desc": "Melambangkan restu Dewi Bintang Coralis.",
+      "desc": "Melambangkan restu Dewi Bintang Celestra.",
       "bonus": {
         "atkPercent": 20,
         "defPercent": 15
@@ -29,17 +29,17 @@
     },
     "aura": {
       "name": "Moon Blessing",
-      "desc": "Meningkatkan akurasi dan critical rate seluruh pasukan Coralis.",
+      "desc": "Meningkatkan akurasi dan critical rate seluruh pasukan Celestra.",
       "bonus": {
         "critPercent": 10
       }
     }
   },
-  "acreton": {
+  "arctron": {
     "mantle": {
       "id": "mantle_iron",
       "name": "Iron Dominion Mantle",
-      "desc": "Dibuat dari serat nano dan baja tempur kuno Acreton.",
+      "desc": "Dibuat dari serat nano dan baja tempur kuno Arctron.",
       "bonus": {
         "atkPercent": 25,
         "defPercent": 15
@@ -47,7 +47,7 @@
     },
     "aura": {
       "name": "War Protocol",
-      "desc": "Meningkatkan damage seluruh pasukan Acreton.",
+      "desc": "Meningkatkan damage seluruh pasukan Arctron.",
       "bonus": {
         "atkPercent": 10
       }

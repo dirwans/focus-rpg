@@ -1,25 +1,25 @@
 import TransparentSprite from './TransparentSprite'
-import acretonWarriorImg from '../assets/acreton_warrior.png'
-import acretonRangerImg from '../assets/acreton_ranger.png'
-import acretonSpecialistImg from '../assets/acreton_specialist.png'
+import arctronWarriorImg from '../assets/arctron_warrior.png'
+import arctronRangerImg from '../assets/arctron_ranger.png'
+import arctronSpecialistImg from '../assets/arctron_specialist.png'
 
-import belterraPilotImg from '../assets/belterra_pilot_v3.png'
-import belterraPortraitImg from '../assets/belterra_pilot_portrait.png'
-import belterraWarriorImg from '../assets/belterra_warrior.png'
-import belterraRangerImg from '../assets/belterra_ranger.png'
-import belterraTitanPilotImg from '../assets/belterra_titan_pilot.png'
-import belterraMechanistImg from '../assets/belterra_mechanist.png'
-import belterraRailgunEliteImg from '../assets/belterra_railgun_elite.png'
-import belterraWarEngineerImg from '../assets/belterra_war_engineer.png'
+import bionexPilotImg from '../assets/bionex_pilot_v3.png'
+import bionexPortraitImg from '../assets/bionex_pilot_portrait.png'
+import bionexWarriorImg from '../assets/bionex_warrior.png'
+import bionexRangerImg from '../assets/bionex_ranger.png'
+import bionexTitanPilotImg from '../assets/bionex_titan_pilot.png'
+import bionexMechanistImg from '../assets/bionex_mechanist.png'
+import bionexRailgunEliteImg from '../assets/bionex_railgun_elite.png'
+import bionexWarEngineerImg from '../assets/bionex_war_engineer.png'
 
-import coralisPilotImg from '../assets/coralis_pilot_v2.png'
-import coralisWarriorImg from '../assets/coralis_warrior.png'
-import coralisRangerImg from '../assets/coralis_ranger.png'
-import coralisRangerPortraitImg from '../assets/coralis_ranger_portrait.png'
-import coralisSpecialistImg from '../assets/coralis_specialist.png'
-import coralisSpecialistPortraitImg from '../assets/coralis_specialist_portrait.png'
-import coralisMysticImg from '../assets/coralis_mystic.png'
-import coralisMysticPortraitImg from '../assets/coralis_mystic_portrait.png'
+import celestraPilotImg from '../assets/celestra_pilot_v2.png'
+import celestraWarriorImg from '../assets/celestra_warrior.png'
+import celestraRangerImg from '../assets/celestra_ranger.png'
+import celestraRangerPortraitImg from '../assets/celestra_ranger_portrait.png'
+import celestraSpecialistImg from '../assets/celestra_specialist.png'
+import celestraSpecialistPortraitImg from '../assets/celestra_specialist_portrait.png'
+import celestraMysticImg from '../assets/celestra_mystic.png'
+import celestraMysticPortraitImg from '../assets/celestra_mystic_portrait.png'
 
 function getJobLane(jobId) {
   if (!jobId) return 'warrior'
@@ -42,23 +42,23 @@ function getJobLane(jobId) {
     'warlock', 'dark_priest', 'grazier',
     'arcanist', 'rune_caster', 'mystic', 'archmage'
   ]
-  // specialist = engineer path (engineer, scientist, battle_leader, grand_engineer) + Coralis summoner path
+  // specialist = engineer path (engineer, scientist, battle_leader, grand_engineer) + Celestra summoner path
   if (warriorJobs.includes(jobId)) return 'warrior'
   if (rangerJobs.includes(jobId)) return 'ranger'
   if (mysticJobs.includes(jobId)) return 'mystic'
   return 'specialist'
 }
 
-export function AcretonSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false }) {
+export function ArctronSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false }) {
   const lane = getJobLane(job)
-  let img = acretonWarriorImg
+  let img = arctronWarriorImg
   let glow = '#00e5ff' // Cyan/Blue for Warrior
   
   if (lane === 'ranger') {
-    img = acretonRangerImg
+    img = arctronRangerImg
     glow = '#ff6400' // Orange for Ranger
   } else if (lane === 'specialist') {
-    img = acretonSpecialistImg
+    img = arctronSpecialistImg
     glow = '#39ff14' // Neon Green for Specialist
   }
   
@@ -86,22 +86,22 @@ export function BionexSprite({ job, size = 60, width, height, upperBodyOnly = fa
 
   let img = null;
   if (guardianJobs.includes(job)) {
-    if (job === 'imperator' || job === 'protector') img = belterraTitanPilotImg;
-    else img = belterraWarriorImg;
+    if (job === 'imperator' || job === 'protector') img = bionexTitanPilotImg;
+    else img = bionexWarriorImg;
   } else if (marksmanJobs.includes(job)) {
-    if (job === 'predator' || job === 'deadeye') img = belterraRailgunEliteImg;
-    else img = belterraRangerImg;
+    if (job === 'predator' || job === 'deadeye') img = bionexRailgunEliteImg;
+    else img = bionexRangerImg;
   } else if (engineerJobs.includes(job)) {
-    if (job === 'overseer' || job === 'techmaster') img = belterraWarEngineerImg;
-    else if (job === 'mechanist') img = belterraMechanistImg;
-    else img = belterraPilotImg;
+    if (job === 'overseer' || job === 'techmaster') img = bionexWarEngineerImg;
+    else if (job === 'mechanist') img = bionexMechanistImg;
+    else img = bionexPilotImg;
   } else if (psionJobs.includes(job)) {
-    img = belterraPilotImg;
+    img = bionexPilotImg;
   }
 
   if (!img) {
-    if (fill) img = belterraPortraitImg;
-    else img = belterraPilotImg;
+    if (fill) img = bionexPortraitImg;
+    else img = bionexPilotImg;
   }
 
   return (
@@ -120,26 +120,26 @@ export function BionexSprite({ job, size = 60, width, height, upperBodyOnly = fa
   )
 }
 
-export function CoralisSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false }) {
+export function CelestraSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false }) {
   const lane = getJobLane(job)
-  let srcImg = coralisPilotImg
+  let srcImg = celestraPilotImg
   
   if (job) {
     if (lane === 'warrior') {
-      srcImg = coralisWarriorImg
+      srcImg = celestraWarriorImg
     } else if (lane === 'ranger') {
-      srcImg = fill ? coralisRangerPortraitImg : coralisRangerImg
+      srcImg = fill ? celestraRangerPortraitImg : celestraRangerImg
     } else if (lane === 'specialist') {
-      srcImg = fill ? coralisSpecialistPortraitImg : coralisSpecialistImg
+      srcImg = fill ? celestraSpecialistPortraitImg : celestraSpecialistImg
     } else if (lane === 'mystic') {
-      srcImg = fill ? coralisMysticPortraitImg : coralisMysticImg
+      srcImg = fill ? celestraMysticPortraitImg : celestraMysticImg
     }
   }
   
   return (
     <TransparentSprite
       src={srcImg}
-      alt={`Coralis ${lane}`}
+      alt={`Celestra ${lane}`}
       size={size}
       width={width}
       height={height}
@@ -189,8 +189,8 @@ export function EnemySprite({ size = 60, isBoss = false, isPitBoss = false }) {
 }
 
 export function PilotSprite({ race, job, size = 60, width, height, upperBodyOnly = false, fill = false }) {
-  if (race === 'acreton') return <AcretonSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} />
-  if (race === 'bionex' || race === 'belterra') return <BionexSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} />
-  if (race === 'coralis') return <CoralisSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} />
+  if (race === 'arctron') return <ArctronSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} />
+  if (race === 'bionex' || race === 'bionex') return <BionexSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} />
+  if (race === 'celestra') return <CelestraSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} />
   return null
 }

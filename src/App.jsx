@@ -72,9 +72,9 @@ export default function App() {
     
     // Migration from old names
     const raceMap = { 
-      'accretians': 'acreton', 'accretia': 'acreton', 'acreton': 'acreton',
-      'bellians': 'belterra', 'bellato': 'belterra', 'belterra': 'belterra',
-      'corvus': 'coralis', 'cora': 'coralis', 'coralis': 'coralis'
+      'accretians': 'arctron', 'accretia': 'arctron', 'arctron': 'arctron',
+      'bellians': 'bionex', 'bellato': 'bionex', 'bionex': 'bionex',
+      'corvus': 'celestra', 'cora': 'celestra', 'celestra': 'celestra'
     }
     
     let nextPlayer = { ...curPlayer }

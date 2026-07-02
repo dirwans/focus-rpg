@@ -1,5 +1,5 @@
 {
-  "acreton": [
+  "arctron": [
     { "job": "cadet", "name": "Iron Rifle", "dmgMin": 60, "dmgMax": 90, "effect": "+2% Accuracy", "level": 1 },
     { "job": "gunner", "name": "Burst Cannon", "dmgMin": 70, "dmgMax": 100, "effect": "Rapid Fire", "level": 1 },
     { "job": "striker", "name": "Plasma Blade", "dmgMin": 65, "dmgMax": 95, "effect": "+3% Attack Speed", "level": 1 },
@@ -10,11 +10,11 @@
     { "job": "nova_destroyer", "name": "Nova Launcher", "dmgMin": 380, "dmgMax": 550, "effect": "Explosion", "level": 50 },
     { "job": "omega_reaper", "name": "Phantom Blade", "dmgMin": 360, "dmgMax": 520, "effect": "Critical Burst", "level": 50 }
   ],
-  "belterra": [
-    { "job": "belterra_warrior", "name": "Broadsword", "dmgMin": 55, "dmgMax": 80, "effect": "+3% Block", "level": 1 },
-    { "job": "belterra_ranger", "name": "Composite Bow", "dmgMin": 50, "dmgMax": 85, "effect": "+2% Crit", "level": 1 },
-    { "job": "belterra_spiritualist", "name": "Mental Staff", "dmgMin": 45, "dmgMax": 75, "effect": "+5 Mana", "level": 1 },
-    { "job": "belterra_specialist", "name": "Laser Spanner", "dmgMin": 40, "dmgMax": 70, "effect": "+3% Repair", "level": 1 },
+  "bionex": [
+    { "job": "bionex_warrior", "name": "Broadsword", "dmgMin": 55, "dmgMax": 80, "effect": "+3% Block", "level": 1 },
+    { "job": "bionex_ranger", "name": "Composite Bow", "dmgMin": 50, "dmgMax": 85, "effect": "+2% Crit", "level": 1 },
+    { "job": "bionex_spiritualist", "name": "Mental Staff", "dmgMin": 45, "dmgMax": 75, "effect": "+5 Mana", "level": 1 },
+    { "job": "bionex_specialist", "name": "Laser Spanner", "dmgMin": 40, "dmgMax": 70, "effect": "+3% Repair", "level": 1 },
     { "job": "commando", "name": "Greatsword", "dmgMin": 180, "dmgMax": 260, "effect": "+5% Attack", "level": 30 },
     { "job": "miller", "name": "Buckler Mace", "dmgMin": 140, "dmgMax": 200, "effect": "+5% Block", "level": 30 },
     { "job": "desperado", "name": "Dual Vulcan", "dmgMin": 160, "dmgMax": 230, "effect": "Rapid Fire", "level": 30 },
@@ -35,7 +35,7 @@
     { "job": "mental_smith", "name": "Nano Forge", "dmgMin": 300, "dmgMax": 450, "effect": "Armor Boost", "level": 40 },
     { "job": "armor_rider", "name": "Giga Hammer", "dmgMin": 350, "dmgMax": 500, "effect": "+20% MAU Stats", "level": 40 }
   ],
-  "coralis": [
+  "celestra": [
     { "job": "acolyte", "name": "Lumina Staff", "dmgMin": 45, "dmgMax": 85, "effect": "+5 Mana", "level": 1 },
     { "job": "guardian", "name": "Crystal Spear", "dmgMin": 55, "dmgMax": 80, "effect": "+3% Block", "level": 1 },
     { "job": "mystic_archer", "name": "Spirit Bow", "dmgMin": 60, "dmgMax": 90, "effect": "+2% Crit", "level": 1 },

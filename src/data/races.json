@@ -1,6 +1,6 @@
 {
-  "acreton": {
-    "id": "acreton",
+  "arctron": {
+    "id": "arctron",
     "name": "Arctron – Cybernetic War Imperium",
     "emoji": "🤖",
     "description": "Lahir dari koloni pertambangan yang terisolasi di gurun besi bagian utara. Bertahun-tahun hidup dalam kondisi ekstrem membuat mereka mengganti sebagian besar tubuh mereka dengan augmentasi mekanis. Mereka menciptakan pasukan elit Iron Vanguard yang bertarung tanpa rasa takut. \n\nMoto: \"Kesempurnaan dicapai melalui evolusi.\"",
@@ -45,8 +45,8 @@
     },
     "baseStats": { "hp": 850, "atk": 50, "def": 30, "spd": 10, "luk": 12 }
   },
-  "coralis": {
-    "id": "coralis",
+  "celestra": {
+    "id": "celestra",
     "name": "Celestra – Arcane Elven Dominion",
     "emoji": "🧝‍♀️",
     "description": "Berasal dari hutan kristal di benua timur. Meyakini bahwa Lumina Core adalah hadiah roh alam semesta. Mereka mampu membentuk kontrak dengan makhluk energi bernama Eidolons. Mengutamakan keseimbangan alam. \n\nMoto: \"Jiwa dan alam adalah satu.\"",

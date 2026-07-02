@@ -262,11 +262,11 @@ export default function TransparentSprite({
 
   if (fill) {
     const fillH = height || 150
-    const isCoralis = src && src.includes('coralis_')
-    const isRanger = src && src.includes('coralis_ranger')
-    const isSpecialist = src && src.includes('coralis_specialist')
-    const isRangerPortrait = src && src.includes('coralis_ranger_portrait')
-    const isSpecialistPortrait = src && src.includes('coralis_specialist_portrait')
+    const isCelestra = src && src.includes('celestra_')
+    const isRanger = src && src.includes('celestra_ranger')
+    const isSpecialist = src && src.includes('celestra_specialist')
+    const isRangerPortrait = src && src.includes('celestra_ranger_portrait')
+    const isSpecialistPortrait = src && src.includes('celestra_specialist_portrait')
     
     // Zoom/position values for 3x4 ID card (Head-to-Chest view)
     let zoomHeight = fillH * 2.3
@@ -275,7 +275,7 @@ export default function TransparentSprite({
     if (isRangerPortrait || isSpecialistPortrait) {
       zoomHeight = fillH * 1.05
       topPosition = '0%'
-    } else if (isCoralis) {
+    } else if (isCelestra) {
       if (isRanger) {
         // Elf Archer needs specific zoom and center alignment to hide bow cropping & focus chest/head
         zoomHeight = fillH * 2.05
@@ -284,21 +284,21 @@ export default function TransparentSprite({
         zoomHeight = fillH * 2.1
         topPosition = '-8%'
       } else {
-        // Default Coralis Warrior (Gada/Shield)
+        // Default Celestra Warrior (Gada/Shield)
         zoomHeight = fillH * 2.2
         topPosition = '-5%'
       }
-    } else if (src && src.includes('belterra')) {
-      const isBelterraRanger = src.includes('belterra_ranger')
-      const isBelterraSpecialist = src.includes('belterra_specialist')
-      if (isBelterraRanger) {
+    } else if (src && src.includes('bionex')) {
+      const isBionexRanger = src.includes('bionex_ranger')
+      const isBionexSpecialist = src.includes('bionex_specialist')
+      if (isBionexRanger) {
         zoomHeight = fillH * 2.1
         topPosition = '-5%'
-      } else if (isBelterraSpecialist) {
+      } else if (isBionexSpecialist) {
         zoomHeight = fillH * 2.15
         topPosition = '-7%'
       } else {
-        // Belterra Warrior
+        // Bionex Warrior
         zoomHeight = fillH * 2.2
         topPosition = '-6%'
       }

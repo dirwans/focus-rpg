@@ -1,5 +1,5 @@
 {
-  "coralis": {
+  "celestra": {
     "guardian": {
       "str": 12,
       "dex": 8,
@@ -79,7 +79,7 @@
       "vit": 6
     }
   },
-  "acreton": {
+  "arctron": {
     "cadet": {
       "str": 14,
       "dex": 6,
