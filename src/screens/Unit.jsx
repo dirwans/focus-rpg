@@ -225,8 +225,8 @@ export default function Unit() {
                 <>
                   <div style={styles.filosofiItem}><strong>⚔️ Sentinel:</strong> HP tertinggi di Celestra. DEF tertinggi. ATK sedang. Petarung garis depan yang menggabungkan pedang dan energi arcane.</div>
                   <div style={styles.filosofiItem}><strong>🏹 Pathfinder:</strong> HP rendah. DEF rendah. ATK fisik tertinggi. Mengandalkan kecepatan dan serangan kritikal.</div>
-                  <div style={styles.filosofiItem}><strong>🔮 Oracle:</strong> HP terendah. DEF sedang. ATK terendah. Fokus menggunakan Animasi pemanggilan makhluk gaib.</div>
-                  <div style={styles.filosofiItem}><strong>✨ Arcanist:</strong> HP terendah. DEF terendah. ATK magic tinggi. Penyerang area.</div>
+                  <div style={styles.filosofiItem}><strong>🌿 Oracle:</strong> HP paling rendah. DEF sedang. ATK dasar paling rendah. Kekuatan utama berasal dari Ancient Spirit mulai Lv.32.</div>
+                  <div style={styles.filosofiItem}><strong>🔮 Arcanist:</strong> HP rendah. DEF terendah. ATK sihir sangat tinggi. Burst damage dan AoE.</div>
                 </>
               )}
             </div>

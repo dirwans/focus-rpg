@@ -935,7 +935,7 @@ export const useGameStore = create(
            }
         }
 
-        const eqSlots = ['weapon', 'armor', 'shield', 'helmet', 'mantle', 'gloves', 'boots', 'pants', 'amulet1', 'amulet2', 'ring1', 'ring2']
+        const eqSlots = ['weapon', 'armor', 'shield', 'helmet', 'mantle', 'gloves', 'boots', 'pants', 'amulet1', 'amulet2', 'ring1', 'ring2', 'ascension_arms']
         let flatAtk = jobBonus.atk || 0
         let flatDef = jobBonus.def || 0
         let flatHp = jobBonus.hp || 0

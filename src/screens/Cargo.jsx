@@ -31,6 +31,7 @@ const SLOT_TO_TYPE = {
   boots: 'boots', pants: 'pants',
   amulet1: 'amulet', amulet2: 'amulet',
   ring1: 'ring', ring2: 'ring',
+  ascension_arms: 'ascension_arms'
 }
 
 export default function Cargo() {
@@ -42,7 +43,7 @@ export default function Cargo() {
   const [selectedItem, setSelectedItem] = useState(null)
   const [slotFilter, setSlotFilter] = useState(null)
 
-  const eq = player.equipment || { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null }
+  const eq = player.equipment || { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null, ascension_arms: null }
 
 
   const handleSell = (uid) => {
@@ -229,27 +230,35 @@ export default function Cargo() {
       <div className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={{ margin: '0 16px 14px', padding: '10px 6px', overflow: 'visible', position: 'relative', zIndex: 1 }}>
         {/* Row 1: Amulet | Helmet | Amulet */}
         <div style={styles.gearRow}>
-          {renderSlot('amulet1', '💎', 'AMULET')}
+          {renderSlot('amulet1', '💎', 'AMULET I')}
           {renderSlot('helmet', '⛑', 'HELMET')}
-          {renderSlot('amulet2', '💎', 'AMULET')}
+          {renderSlot('amulet2', '💎', 'AMULET II')}
         </div>
         {/* Row 2: Weapon / Armor / Shield */}
         <div style={styles.gearRow}>
           {renderSlot('weapon', '⚔️', 'WEAPON')}
-          {renderSlot('armor', '🛡', 'CHEST')}
+          {renderSlot('armor', '🛡', 'ARMOR')}
           {renderSlot('shield', '🔰', 'SHIELD')}
         </div>
-        {/* Row 3: Gloves / Pants / Mantle */}
+        {/* Row 3: Gloves / Pants / Cape */}
         <div style={styles.gearRow}>
           {renderSlot('gloves', '🧤', 'GLOVES')}
           {renderSlot('pants', '👖', 'PANTS')}
-          {renderSlot('mantle', '🦺', 'MANTLE')}
+          {renderSlot('mantle', '🦺', 'CAPE')}
         </div>
         {/* Row 4: Ring | Boots | Ring */}
         <div style={styles.gearRow}>
-          {renderSlot('ring1', '💍', 'RING')}
-          {renderSlot('boots', '👟', 'LEGS')}
-          {renderSlot('ring2', '💍', 'RING')}
+          {renderSlot('ring1', '💍', 'RING I')}
+          {renderSlot('boots', '👢', 'BOOTS')}
+          {renderSlot('ring2', '💍', 'RING II')}
+        </div>
+      </div>
+
+      {/* Ascension Arms Special Panel */}
+      <div className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.ascensionPanel}>
+        <div style={styles.ascensionTitle}>✧ ASCENSION ARMS ✧</div>
+        <div style={{ display: 'flex', width: '100%', maxWidth: 220, margin: '0 auto' }}>
+          {renderSlot('ascension_arms', '⚙️', 'ARES')}
         </div>
       </div>
 
@@ -419,6 +428,8 @@ const styles = {
   // Gear slot rows
   gearRow:   { display: 'flex', gap: 5, justifyContent: 'center', marginBottom: 5, position: 'relative', zIndex: 2 },
   gearEmpty: { flex: 1, maxWidth: 100 },
+  ascensionPanel: { margin: '0 16px 14px', padding: '12px 10px', overflow: 'visible', position: 'relative', zIndex: 1, border: '1px solid rgba(255, 170, 0, 0.4)', boxShadow: '0 0 10px rgba(255, 170, 0, 0.1)', background: 'linear-gradient(180deg, rgba(255,170,0,0.05) 0%, rgba(0,0,0,0) 100%)' },
+  ascensionTitle: { fontFamily: 'var(--font-title)', fontSize: 14, color: '#ffcc00', letterSpacing: 1.5, fontWeight: 900, textAlign: 'center', marginBottom: 12, textShadow: '0 0 8px rgba(255, 204, 0, 0.6)' },
 
   chip:         (c) => ({ background: 'rgba(3, 8, 20, 0.8)', border: `1px solid ${c}`, borderRadius: 20, padding: '6px 14px', fontFamily: 'var(--font-mono)', fontSize: 16, fontWeight: 800, color: c, boxShadow: `0 0 10px ${c}33, inset 0 0 6px ${c}22` }),
   slots:        { fontFamily: 'var(--font-mono)', fontSize: 14, color: '#7ab0d0', background: 'rgba(3, 8, 20, 0.8)', border: '1px solid #1a3a6a', borderRadius: 20, padding: '6px 14px', marginLeft: 'auto', fontWeight: 800 },
@@ -435,9 +446,8 @@ const styles = {
   itemName:     { fontFamily: 'var(--font-body)', fontSize: 13, color: '#e0f4ff', height: 34, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', lineHeight: 1.3, fontWeight: 700 },
   itemBadges:   { display: 'flex', gap: 4 },
   rarityBadge:  (c) => ({ fontFamily: 'var(--font-title)', fontSize: 13, color: c, fontWeight: 800 }),
-  empty:        { flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: 40 },
+  empty:        { display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '40px 20px', textAlign: 'center', opacity: 0.6 },
   
-  // Modal
   modalOverlay: { position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.85)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 100 },
   modal:        { border: '1px solid rgba(0, 229, 255, 0.3)', borderRadius: 16, padding: 20, width: 320, display: 'flex', flexDirection: 'column', gap: 14, boxShadow: '0 10px 25px rgba(0,0,0,0.8)' },
   modalName:    { fontFamily: 'var(--font-title)', fontSize: 16, fontWeight: 900, textAlign: 'center', borderBottom: '1px solid rgba(0, 229, 255, 0.2)', paddingBottom: 8 },
