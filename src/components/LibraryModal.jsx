@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import arctronGears from '../data/gears/arctron.json'
 
 export default function LibraryModal({ onClose }) {
   const [tab, setTab] = useState('growth')
@@ -16,6 +17,7 @@ export default function LibraryModal({ onClose }) {
           <button style={tab === 'trade' ? styles.tabActive : styles.tab} onClick={() => setTab('trade')}>Trade</button>
           <button style={tab === 'war' ? styles.tabActive : styles.tab} onClick={() => setTab('war')}>War</button>
           <button style={tab === 'system' ? styles.tabActive : styles.tab} onClick={() => setTab('system')}>System</button>
+          <button style={tab === 'equip' ? styles.tabActive : styles.tab} onClick={() => setTab('equip')}>Equipment</button>
         </div>
 
         <div style={styles.content} className="no-scrollbar">
@@ -175,6 +177,64 @@ export default function LibraryModal({ onClose }) {
                   <li>• Event Reward.</li>
                   <li>• Compensation.</li>
                 </ul>
+              </div>
+
+            </div>
+          )}
+
+          {tab === 'equip' && (
+            <div style={styles.section}>
+              <h3 style={styles.sectionTitle}>⚔️ Arctron Equipment Database</h3>
+              
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>🛡️ Armor Sets</div>
+                {arctronGears.armorSets.map((set, i) => (
+                  <div key={i} style={{ marginBottom: 8, paddingBottom: 8, borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+                    <div style={{ color: '#00e5ff', fontWeight: 'bold' }}>{set.grade} - {set.name}</div>
+                    <div style={{ fontSize: 12, color: '#aaa' }}>Bagian: {set.parts.join(', ')}</div>
+                    <div style={{ fontSize: 12, color: '#f5a623' }}>[Status masih dikembangkan]</div>
+                  </div>
+                ))}
+              </div>
+
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>⚔️ Warrior Weapons</div>
+                {arctronGears.warrior.weapons.map((w, i) => (
+                  <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
+                    <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
+                    <span style={{ color: '#00e5ff' }}>+{w.atk} ATK</span>
+                  </div>
+                ))}
+              </div>
+
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>🛡️ Warrior Shields</div>
+                {arctronGears.warrior.shields.map((w, i) => (
+                  <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
+                    <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
+                    <span style={{ color: '#00ff88' }}>+{w.def} DEF</span>
+                  </div>
+                ))}
+              </div>
+
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>🏹 Ranger Weapons</div>
+                {arctronGears.ranger.weapons.map((w, i) => (
+                  <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
+                    <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
+                    <span style={{ color: '#00e5ff' }}>+{w.atk} ATK</span>
+                  </div>
+                ))}
+              </div>
+
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>🔧 Technician Weapons</div>
+                {arctronGears.technician.weapons.map((w, i) => (
+                  <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
+                    <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
+                    <span style={{ color: '#00e5ff' }}>+{w.atk} ATK</span>
+                  </div>
+                ))}
               </div>
 
             </div>

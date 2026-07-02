@@ -1,0 +1,48 @@
+{
+  "warrior": {
+    "weapons": [
+      { "id": "wpn_arc_war_0", "name": "Iron Blade", "grade": "Common", "atk": 20 },
+      { "id": "wpn_arc_war_1", "name": "Steel Saber", "grade": "Uncommon", "atk": 45 },
+      { "id": "wpn_arc_war_2", "name": "Titan Edge", "grade": "Rare", "atk": 80 },
+      { "id": "wpn_arc_war_3", "name": "Crimson Reaver", "grade": "Epic", "atk": 130 },
+      { "id": "wpn_arc_war_4", "name": "Oblivion Fang", "grade": "Legendary", "atk": 200 },
+      { "id": "wpn_arc_war_5", "name": "Excalion", "grade": "Mythic", "atk": 300 }
+    ],
+    "shields": [
+      { "id": "shd_arc_0", "name": "Iron Bulwark", "grade": "Common", "def": 15 },
+      { "id": "shd_arc_1", "name": "Titan Guard", "grade": "Uncommon", "def": 35 },
+      { "id": "shd_arc_2", "name": "Aegis Core", "grade": "Rare", "def": 65 },
+      { "id": "shd_arc_3", "name": "Plasma Bastion", "grade": "Epic", "def": 100 },
+      { "id": "shd_arc_4", "name": "Nova Fortress", "grade": "Legendary", "def": 150 },
+      { "id": "shd_arc_5", "name": "Eclipse Aegis", "grade": "Mythic", "def": 220 }
+    ]
+  },
+  "ranger": {
+    "weapons": [
+      { "id": "wpn_arc_ran_0", "name": "Hunter Bow", "grade": "Common", "atk": 20 },
+      { "id": "wpn_arc_ran_1", "name": "Falcon Bow", "grade": "Uncommon", "atk": 45 },
+      { "id": "wpn_arc_ran_2", "name": "Phantom Bow", "grade": "Rare", "atk": 80 },
+      { "id": "wpn_arc_ran_3", "name": "Tempest Bow", "grade": "Epic", "atk": 130 },
+      { "id": "wpn_arc_ran_4", "name": "Eclipse Bow", "grade": "Legendary", "atk": 200 },
+      { "id": "wpn_arc_ran_5", "name": "Celestial Arc", "grade": "Mythic", "atk": 300 }
+    ]
+  },
+  "technician": {
+    "weapons": [
+      { "id": "wpn_arc_tec_0", "name": "Pulse Controller", "grade": "Common", "atk": 18 },
+      { "id": "wpn_arc_tec_1", "name": "Vector Controller", "grade": "Uncommon", "atk": 40 },
+      { "id": "wpn_arc_tec_2", "name": "Quantum Controller", "grade": "Rare", "atk": 75 },
+      { "id": "wpn_arc_tec_3", "name": "Nova Controller", "grade": "Epic", "atk": 125 },
+      { "id": "wpn_arc_tec_4", "name": "Singularity Controller", "grade": "Legendary", "atk": 195 },
+      { "id": "wpn_arc_tec_5", "name": "Genesis Controller", "grade": "Mythic", "atk": 290 }
+    ]
+  },
+  "armorSets": [
+    { "id": "set_arc_0", "name": "Sentinel Set", "grade": "Common", "parts": ["Helmet", "Armor", "Pants", "Gloves", "Boots"], "stats": {} },
+    { "id": "set_arc_1", "name": "Vanguard Set", "grade": "Uncommon", "parts": ["Helmet", "Armor", "Pants", "Gloves", "Boots"], "stats": {} },
+    { "id": "set_arc_2", "name": "Phantom Set", "grade": "Rare", "parts": ["Helmet", "Armor", "Pants", "Gloves", "Boots"], "stats": {} },
+    { "id": "set_arc_3", "name": "Overlord Set", "grade": "Epic", "parts": ["Helmet", "Armor", "Pants", "Gloves", "Boots"], "stats": {} },
+    { "id": "set_arc_4", "name": "Dominator Set", "grade": "Legendary", "parts": ["Helmet", "Armor", "Pants", "Gloves", "Boots"], "stats": {} },
+    { "id": "set_arc_5", "name": "Apocalypse Set", "grade": "Mythic", "parts": ["Helmet", "Armor", "Pants", "Gloves", "Boots"], "stats": {} }
+  ]
+}
