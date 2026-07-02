@@ -50,9 +50,9 @@ export default function PrologueModal({ onClose }) {
           <h3 style={styles.sectionTitle}>▸ TIGA BANGSA BESAR</h3>
           {Object.entries(lore.factions).map(([key, f]) => {
             const colors = {
-              belterra: '#f5a623',
-              coralis: '#00e5ff',
-              acreton: '#ff4466'
+              bionex: '#00e5ff',
+              celestra: '#d000ff',
+              arctron: '#ff6400'
             }
             return (
               <div key={key} style={styles.factionBox(colors[key])}>
@@ -157,7 +157,8 @@ const styles = {
     color: '#c0dff0',
     lineHeight: 1.6,
     fontWeight: 500,
-    textAlign: 'justify'
+    textAlign: 'justify',
+    whiteSpace: 'pre-wrap'
   },
   divider: {
     height: 1,

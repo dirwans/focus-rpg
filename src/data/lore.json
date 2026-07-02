@@ -1,25 +1,25 @@
 {
-  "title": "Dunia Aetherion",
-  "prologue": "Ribuan tahun setelah keruntuhan peradaban kuno, planet Aetherion terpecah menjadi tiga bangsa besar yang memperebutkan sumber energi langka bernama Lumina Core. Energi ini mampu menggerakkan kota, senjata, dan bahkan mengubah struktur kehidupan.",
+  "title": "Rising Fantasy Chronicles",
+  "prologue": "On a planet called Nexus, there lies an ancient artifact known as the Trinity Core. Since ancient times, the Trinity Core has emitted a mysterious energy called Zero Flux, the source of power that birthed technology, magic, and life across the entire planet.\n\nFor centuries, three great factions have lived by utilizing Zero Flux according to their beliefs.\n\nArctron – Empire of Machines uses Zero Flux to develop artificial intelligence and ever-evolving war machines.\n\nBionex – Technocratic Human Alliance utilizes Zero Flux to create cutting-edge technology to lead humanity into the future.\n\nCelestra – Arcane Elven Dominion maintains the balance of nature by converting Zero Flux into arcane power and forging bonds with ancient spirits.\n\nHowever, as the reserves of Zero Flux began to decline and the Trinity Core's power grew unstable, trust among the three factions shattered.\n\nEach faction firmly believes that they alone are worthy of controlling the Trinity Core to save the future of their people.\n\nSince that time, Planet Nexus has transformed into an endless battlefield.\nAnd in the midst of this conflict... a new legend is about to begin. Rising Fantasy Chronicles.",
   "factions": {
-    "belterra": {
-      "name": "Belterra Dominion",
-      "motto": "Pengetahuan adalah fondasi kekuatan.",
-      "description": "Belterra adalah bangsa yang dibangun oleh para ilmuwan dan insinyur yang selamat dari Era Kehancuran. Mereka percaya bahwa kemajuan teknologi adalah satu-satunya jalan menuju masa depan.\n\nKota-kota Belterra berdiri di atas benteng terapung dan dilindungi oleh mesin tempur raksasa yang disebut Titan Frame. Masyarakat mereka hidup disiplin, mengutamakan logika dan inovasi di atas segalanya."
+    "bionex": {
+      "name": "Bionex",
+      "motto": "Technocratic Human Alliance",
+      "description": "Utilizes Zero Flux to create cutting-edge technology to lead humanity into the future."
     },
-    "coralis": {
-      "name": "Coralis Covenant",
-      "motto": "Jiwa dan alam adalah satu.",
-      "description": "Coralis berasal dari hutan kristal di benua timur. Mereka meyakini bahwa Lumina Core adalah hadiah dari roh alam semesta yang harus dijaga, bukan dieksploitasi.\n\nPara penjaga Coralis mampu membentuk kontrak dengan makhluk energi bernama Eidolons, entitas kuno yang hidup di antara dimensi. Mereka lebih mengutamakan keseimbangan dan harmoni dibandingkan ekspansi."
+    "celestra": {
+      "name": "Celestra",
+      "motto": "Arcane Elven Dominion",
+      "description": "Maintains the balance of nature by converting Zero Flux into arcane power and forging bonds with ancient spirits."
     },
-    "acreton": {
-      "name": "Acreton Imperium",
-      "motto": "Kesempurnaan dicapai melalui evolusi.",
-      "description": "Acreton lahir dari koloni pertambangan yang terisolasi di gurun besi bagian utara. Bertahun-tahun hidup dalam kondisi ekstrem membuat mereka mengganti sebagian besar tubuh mereka dengan augmentasi mekanis.\n\nBagi Acreton, kekuatan adalah hukum tertinggi. Mereka menciptakan pasukan elit yang dikenal sebagai Iron Vanguard, prajurit yang mampu bertarung tanpa rasa takut maupun lelah."
+    "arctron": {
+      "name": "Arctron",
+      "motto": "Empire of Machines",
+      "description": "Uses Zero Flux to develop artificial intelligence and ever-evolving war machines."
     }
   },
   "war": {
-    "title": "Perang Lumina",
-    "description": "Selama berabad-abad ketiga bangsa hidup terpisah. Namun ketika cadangan Lumina Core mulai menipis, konflik besar yang dikenal sebagai Perang Lumina pecah.\n\nBelterra ingin menggunakan Lumina Core untuk membangun peradaban antarbintang.\nCoralis ingin menyegel sumber energi tersebut agar tidak disalahgunakan.\nAcreton ingin menguasainya untuk menyatukan seluruh Aetherion di bawah satu kekaisaran.\n\nKini, para petualang dari ketiga bangsa berjuang menentukan masa depan dunia. Tidak ada pihak yang sepenuhnya benar atau salah. Setiap bangsa memiliki cita-cita, pengorbanan, dan rahasia yang dapat mengubah nasib Aetherion selamanya."
+    "title": "The Nexus Conflict",
+    "description": "The struggle for the Trinity Core has turned the planet Nexus into a perpetual battlefield. Only you can decide the fate of this world."
   }
 }
