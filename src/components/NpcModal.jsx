@@ -330,7 +330,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                               objectFit: 'contain',
                               objectPosition: 'bottom',
                               opacity: 1,
-                              filter: 'brightness(1.25) contrast(1.1) drop-shadow(0 4px 20px rgba(255,214,0,0.55)) drop-shadow(0 0 8px rgba(0,0,0,0.9))',
+                              filter: 'brightness(1.25) contrast(1.1)',
                               position: 'relative',
                               zIndex: 1,
                             }}
