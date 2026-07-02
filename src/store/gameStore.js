@@ -978,9 +978,30 @@ export const useGameStore = create(
         let baseHpScaling = (baseStats.vit * 25) + (baseStats.str * 5)
         let baseDefScaling = (baseStats.vit * 1.5) + (baseStats.str * 0.5)
 
-        let baseAtk = baseAtkScaling + calcStat('atk', player.upgrades?.atk || 0, player.race) + flatAtk
-        let baseDef = baseDefScaling + calcStat('def', player.upgrades?.def || 0, player.race) + flatDef
-        let baseHp = baseHpScaling + calcStat('hp', player.upgrades?.hp || 0, player.race) + flatHp
+        let levelGrowth = { hp: 0, atk: 0, def: 0 }
+        if (player.race === 'bionex' && player.job) {
+          const guardianJobs = ['guardian', 'centurion', 'protector', 'imperator'];
+          const marksmanJobs = ['marksman', 'revenant', 'deadeye', 'predator'];
+          const engineerJobs = ['engineer', 'mechanist', 'techmaster', 'overseer'];
+          const psionJobs = ['psion', 'esper', 'ascendant', 'transcendent'];
+          
+          let growth = null;
+          if (guardianJobs.includes(player.job)) growth = { hp: 13, atk: 2, def: 2 }
+          else if (marksmanJobs.includes(player.job)) growth = { hp: 10, atk: 3, def: 1 }
+          else if (engineerJobs.includes(player.job)) growth = { hp: 9, atk: 2, def: 1.5 }
+          else if (psionJobs.includes(player.job)) growth = { hp: 8, atk: 3, def: 1 }
+
+          if (growth) {
+            const levelUps = Math.max(0, (player.level || 1) - 1)
+            levelGrowth.hp = growth.hp * levelUps
+            levelGrowth.atk = growth.atk * levelUps
+            levelGrowth.def = growth.def * levelUps
+          }
+        }
+
+        let baseAtk = baseAtkScaling + calcStat('atk', player.upgrades?.atk || 0, player.race) + flatAtk + levelGrowth.atk
+        let baseDef = baseDefScaling + calcStat('def', player.upgrades?.def || 0, player.race) + flatDef + levelGrowth.def
+        let baseHp = baseHpScaling + calcStat('hp', player.upgrades?.hp || 0, player.race) + flatHp + levelGrowth.hp
 
         // Set bonus verification (requires being the Archon)
         const isBelterraSet = isArchon &&
