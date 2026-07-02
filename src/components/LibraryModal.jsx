@@ -139,6 +139,31 @@ export default function LibraryModal({ onClose }) {
 
           {tab === 'system' && (
             <div style={styles.section}>
+              <h3 style={styles.sectionTitle}>👤 Character Database</h3>
+              
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>🎮 Character Slot</div>
+                <ul style={styles.list}>
+                  <li><strong>1 ID = 1 Karakter</strong></li>
+                  <li>Tidak ada slot karakter tambahan.</li>
+                </ul>
+              </div>
+
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>✍️ Character Name</div>
+                <ul style={styles.list}>
+                  <li><strong>Panjang Nama:</strong> 3-16 karakter</li>
+                  <li><strong>Hanya dapat menggunakan:</strong>
+                    <ul style={{ paddingLeft: 16, marginTop: 4 }}>
+                      <li>Huruf (A-Z, a-z)</li>
+                      <li>Angka (0-9)</li>
+                    </ul>
+                  </li>
+                  <li>Tidak boleh menggunakan simbol atau spasi.</li>
+                </ul>
+              </div>
+
+              <h3 style={{ ...styles.sectionTitle, marginTop: '8px' }}>⚙️ System & Settings</h3>
               
               <div style={styles.itemCard}>
                 <div style={styles.itemTitle}>⭐ Mail Database</div>
