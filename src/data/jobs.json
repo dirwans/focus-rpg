@@ -283,8 +283,14 @@
           "def": 18
         },
         "skills": [
-          "Set Guard Tower",
-          "Repair Matrix"
+          {
+            "name": "Pulse Shot",
+            "desc": "Active: 170% ATK. Cooldown: 8 detik."
+          },
+          {
+            "name": "Energy Control",
+            "desc": "Passive: FP +20%"
+          }
         ],
         "levelReq": 1
       }
@@ -343,8 +349,18 @@
           "def": 4
         },
         "skills": [
-          "Gauge Recovery",
-          "Instant Repair"
+          {
+            "name": "EMP Burst",
+            "desc": "Active: Area damage 190% ATK. Cooldown: 8 detik."
+          },
+          {
+            "name": "Machine Sync",
+            "desc": "Passive: ARES ATK +10%"
+          },
+          {
+            "name": "Apocalypse Protocol",
+            "desc": "ARES Skill: ARES menyerang area dengan 250% ATK. Cooldown: 15 detik."
+          }
         ]
       }
     ],
@@ -402,8 +418,14 @@
           "def": 5
         },
         "skills": [
-          "Nimble Joint",
-          "Solid Mode"
+          {
+            "name": "Drone Barrage",
+            "desc": "Active: 230% ATK. Cooldown: 8 detik."
+          },
+          {
+            "name": "Tactical Processor",
+            "desc": "Passive: ARES Critical +10%"
+          }
         ]
       }
     ],
@@ -461,7 +483,14 @@
           "def": 6
         },
         "skills": [
-          "Titan Assembly"
+          {
+            "name": "Overclock",
+            "desc": "Active: 300% ATK. Cooldown: 8 detik."
+          },
+          {
+            "name": "Core Optimization",
+            "desc": "Passive: ARES HP +15%"
+          }
         ]
       }
     ]
