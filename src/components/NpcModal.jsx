@@ -268,22 +268,8 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                       onClick={() => setActiveLaneIdx(laneIdx)}
                       style={styles.tabCard(isActive, raceColor)}
                     >
-                      {belterraSprite ? (
-                        <img
-                          src={belterraSprite}
-                          alt={lane.title}
-                          style={{
-                            height: 52,
-                            width: 'auto',
-                            objectFit: 'contain',
-                            filter: isActive ? 'drop-shadow(0 0 6px #ffd600)' : 'drop-shadow(0 0 2px rgba(0,0,0,0.8)) grayscale(0.4)',
-                            transition: 'filter 0.2s',
-                            flexShrink: 0,
-                          }}
-                        />
-                      ) : (
-                        tabJob && <PilotSprite race={player.race} job={tabJob.id} size={40} />
-                      )}
+                      {/* Tab: label only, no sprite icon */}
+                      {!belterraSprite && tabJob && <PilotSprite race={player.race} job={tabJob.id} size={40} />}
                       <span style={styles.tabTitle}>{lane.title.replace(" Lane", "").toUpperCase()}</span>
                     </div>
                   )
@@ -343,7 +329,8 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                               width: 'auto',
                               objectFit: 'contain',
                               objectPosition: 'bottom',
-                              filter: 'drop-shadow(0 4px 16px rgba(255,214,0,0.35)) drop-shadow(0 0 6px rgba(0,0,0,0.8))',
+                              opacity: 1,
+                              filter: 'brightness(1.25) contrast(1.1) drop-shadow(0 4px 20px rgba(255,214,0,0.55)) drop-shadow(0 0 8px rgba(0,0,0,0.9))',
                               position: 'relative',
                               zIndex: 1,
                             }}
@@ -412,7 +399,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                                       {/* Dynamic Sprite Icon */}
                                       <div style={styles.cardSpriteWrap}>
                                         {j.icon ? (
-                                          <img src={j.icon} style={{ width: 68, height: 68, borderRadius: 8, border: '2px solid rgba(255,255,255,0.2)', objectFit: 'cover' }} alt={j.name} />
+                                          <img src={j.icon} style={{ width: 68, height: 68, borderRadius: 8, border: '2px solid rgba(255,255,255,0.2)', objectFit: 'cover', opacity: 1, filter: 'brightness(1.15) contrast(1.05)' }} alt={j.name} />
                                         ) : (
                                           <PilotSprite race={player.race} job={j.id} size={110} />
                                         )}
