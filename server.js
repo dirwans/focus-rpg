@@ -529,7 +529,7 @@ app.post('/api/pvp/battle', async (req, res) => {
 })
 
 app.get('/api/pvp/war', (req, res) => {
-  const scores = { acreton: 0, belterra: 0, coralis: 0 }
+  const scores = { arctron: 0, bionex: 0, celestra: 0 }
   users.forEach(u => {
     const sv = loadSave(u.username)
     if (!sv || !sv.race || !sv.stats) return
@@ -575,14 +575,14 @@ function getNextWarWindow() {
 
 let chipWarData = {
   towers: {
-    acreton: { hp: TOWER_HP, maxHp: TOWER_HP },
-    belterra: { hp: TOWER_HP, maxHp: TOWER_HP },
-    coralis:  { hp: TOWER_HP, maxHp: TOWER_HP },
+    arctron: { hp: TOWER_HP, maxHp: TOWER_HP },
+    bionex: { hp: TOWER_HP, maxHp: TOWER_HP },
+    celestra:  { hp: TOWER_HP, maxHp: TOWER_HP },
   },
   // Track damage per player per tower (for leaderboard)
-  damage: {},   // { username: { acreton: N, belterra: N, coralis: N } }
+  damage: {},   // { username: { arctron: N, bionex: N, celestra: N } }
   // Track total damage per race (sum of all players)
-  raceDamage: { acreton: 0, belterra: 0, coralis: 0 },
+  raceDamage: { arctron: 0, bionex: 0, celestra: 0 },
   lastReset: Date.now(),
 }
 
@@ -592,7 +592,7 @@ try {
   if (fs.existsSync(CHIP_WAR_FILE)) {
     const loaded = JSON.parse(fs.readFileSync(CHIP_WAR_FILE, 'utf8'))
     // Validate structure
-    if (loaded.towers && loaded.towers.acreton) {
+    if (loaded.towers && loaded.towers.arctron) {
       chipWarData = loaded
     }
   }
@@ -611,12 +611,12 @@ function checkChipWarReset() {
     console.log('[ChipWar] Resetting towers for new war window')
     chipWarData = {
       towers: {
-        acreton: { hp: TOWER_HP, maxHp: TOWER_HP },
-        belterra: { hp: TOWER_HP, maxHp: TOWER_HP },
-        coralis:  { hp: TOWER_HP, maxHp: TOWER_HP },
+        arctron: { hp: TOWER_HP, maxHp: TOWER_HP },
+        bionex: { hp: TOWER_HP, maxHp: TOWER_HP },
+        celestra:  { hp: TOWER_HP, maxHp: TOWER_HP },
       },
       damage: {},
-      raceDamage: { acreton: 0, belterra: 0, coralis: 0 },
+      raceDamage: { arctron: 0, bionex: 0, celestra: 0 },
       lastReset: Date.now(),
     }
     saveChipWar()
@@ -665,7 +665,7 @@ app.post('/api/chip-war/attack', (req, res) => {
   // Track per-player damage
   const username = req.session?.username || 'unknown'
   if (!chipWarData.damage[username]) {
-    chipWarData.damage[username] = { acreton: 0, belterra: 0, coralis: 0 }
+    chipWarData.damage[username] = { arctron: 0, bionex: 0, celestra: 0 }
   }
   chipWarData.damage[username][towerId] = (chipWarData.damage[username][towerId] || 0) + actualDmg
   chipWarData.raceDamage[towerId] = (chipWarData.raceDamage[towerId] || 0) + actualDmg
@@ -686,8 +686,8 @@ const ARCHON_PERIOD_MS = 7 * 24 * 60 * 60 * 1000 // 7 days
 
 let archonData = {
   endAt: Date.now() + ARCHON_PERIOD_MS,
-  archons: { belterra: null, coralis: null, acreton: null },
-  votes: { belterra: {}, coralis: {}, acreton: {} }
+  archons: { bionex: null, celestra: null, arctron: null },
+  votes: { bionex: {}, celestra: {}, arctron: {} }
 }
 
 try {
@@ -706,7 +706,7 @@ function saveArchonData() {
 
 function processArchonElection() {
   console.log('[Archon] Processing elections...')
-  const races = ['belterra', 'coralis', 'acreton']
+  const races = ['bionex', 'celestra', 'arctron']
   
   for (const r of races) {
     const voteCounts = {}
@@ -732,7 +732,7 @@ function processArchonElection() {
     }
   }
   
-  archonData.votes = { belterra: {}, coralis: {}, acreton: {} }
+  archonData.votes = { bionex: {}, celestra: {}, arctron: {} }
   archonData.endAt = Date.now() + ARCHON_PERIOD_MS
   saveArchonData()
 }
@@ -744,7 +744,7 @@ setInterval(() => {
 }, 60000)
 
 app.get('/api/archon', (req, res) => {
-  const candidates = { belterra: [], coralis: [], acreton: [] }
+  const candidates = { bionex: [], celestra: [], arctron: [] }
   users.forEach(u => {
     const sv = loadSave(u.username)
     if (sv && sv.race && sv.level >= 30) {
@@ -752,8 +752,8 @@ app.get('/api/archon', (req, res) => {
     }
   })
   
-  const tallies = { belterra: {}, coralis: {}, acreton: {} }
-  for (const r of ['belterra', 'coralis', 'acreton']) {
+  const tallies = { bionex: {}, celestra: {}, arctron: {} }
+  for (const r of ['bionex', 'celestra', 'arctron']) {
     for (const [voter, candidate] of Object.entries(archonData.votes[r] || {})) {
       if (!tallies[r][candidate]) tallies[r][candidate] = 0
       tallies[r][candidate]++

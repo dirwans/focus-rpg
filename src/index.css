@@ -26,21 +26,21 @@
   --grid-color: rgba(0, 229, 255, 0.15);
 }
 
-:root[data-faction="acreton"] {
+:root[data-faction="arctron"] {
   --bg-color: #1e1e1e;
   --neon-glow: #ff6400;
   --grid-color: rgba(255, 100, 0, 0.15);
   --border-neon: rgba(255, 100, 0, 0.35);
 }
 
-:root[data-faction="belterra"] {
+:root[data-faction="bionex"] {
   --bg-color: #08102a;
   --neon-glow: #00e5ff;
   --grid-color: rgba(0, 229, 255, 0.15);
   --border-neon: rgba(0, 229, 255, 0.35);
 }
 
-:root[data-faction="coralis"] {
+:root[data-faction="celestra"] {
   --bg-color: #12061e;
   --neon-glow: #d000ff;
   --grid-color: rgba(208, 0, 255, 0.15);
@@ -179,35 +179,35 @@ body {
 }
 
 /* Faction themed overrides */
-.panel-acreton {
+.panel-arctron {
   border-color: rgba(255, 140, 0, 0.45) !important;
   box-shadow: 0 0 15px rgba(255, 140, 0, 0.15), inset 0 0 10px rgba(255, 140, 0, 0.08) !important;
 }
-.panel-acreton::before { border-top-color: var(--neon-orange) !important; border-left-color: var(--neon-orange) !important; }
-.panel-acreton::after { border-bottom-color: var(--neon-orange) !important; border-right-color: var(--neon-orange) !important; }
-.panel-acreton:hover {
+.panel-arctron::before { border-top-color: var(--neon-orange) !important; border-left-color: var(--neon-orange) !important; }
+.panel-arctron::after { border-bottom-color: var(--neon-orange) !important; border-right-color: var(--neon-orange) !important; }
+.panel-arctron:hover {
   border-color: rgba(255, 140, 0, 0.7) !important;
   box-shadow: 0 0 25px rgba(255, 140, 0, 0.25), inset 0 0 15px rgba(255, 140, 0, 0.12) !important;
 }
 
-.panel-belterra {
+.panel-bionex {
   border-color: rgba(0, 229, 255, 0.45) !important;
   box-shadow: 0 0 15px rgba(0, 229, 255, 0.15), inset 0 0 10px rgba(0, 229, 255, 0.08) !important;
 }
-.panel-belterra::before { border-top-color: var(--neon-cyan) !important; border-left-color: var(--neon-cyan) !important; }
-.panel-belterra::after { border-bottom-color: var(--neon-cyan) !important; border-right-color: var(--neon-cyan) !important; }
-.panel-belterra:hover {
+.panel-bionex::before { border-top-color: var(--neon-cyan) !important; border-left-color: var(--neon-cyan) !important; }
+.panel-bionex::after { border-bottom-color: var(--neon-cyan) !important; border-right-color: var(--neon-cyan) !important; }
+.panel-bionex:hover {
   border-color: rgba(0, 229, 255, 0.7) !important;
   box-shadow: 0 0 25px rgba(0, 229, 255, 0.25), inset 0 0 15px rgba(0, 229, 255, 0.12) !important;
 }
 
-.panel-coralis {
+.panel-celestra {
   border-color: rgba(208, 0, 255, 0.45) !important;
   box-shadow: 0 0 15px rgba(208, 0, 255, 0.15), inset 0 0 10px rgba(208, 0, 255, 0.08) !important;
 }
-.panel-coralis::before { border-top-color: var(--neon-purple) !important; border-left-color: var(--neon-purple) !important; }
-.panel-coralis::after { border-bottom-color: var(--neon-purple) !important; border-right-color: var(--neon-purple) !important; }
-.panel-coralis:hover {
+.panel-celestra::before { border-top-color: var(--neon-purple) !important; border-left-color: var(--neon-purple) !important; }
+.panel-celestra::after { border-bottom-color: var(--neon-purple) !important; border-right-color: var(--neon-purple) !important; }
+.panel-celestra:hover {
   border-color: rgba(208, 0, 255, 0.7) !important;
   box-shadow: 0 0 25px rgba(208, 0, 255, 0.25), inset 0 0 15px rgba(208, 0, 255, 0.12) !important;
 }
@@ -442,7 +442,7 @@ body {
   100% { transform: translateX(100%) rotate(45deg); }
 }
 
-.panel-acreton.glass-panel { 
+.panel-arctron.glass-panel { 
   border-color: rgba(255, 100, 0, 0.65) !important; 
   box-shadow: 
     0 8px 32px 0 rgba(0, 0, 0, 0.7), 
@@ -450,7 +450,7 @@ body {
     inset 0 0 12px rgba(255, 100, 0, 0.3),
     0 0 25px rgba(255, 100, 0, 0.5) !important; 
 }
-.panel-belterra.glass-panel { 
+.panel-bionex.glass-panel { 
   border-color: rgba(0, 229, 255, 0.65) !important; 
   box-shadow: 
     0 8px 32px 0 rgba(0, 0, 0, 0.7), 
@@ -458,7 +458,7 @@ body {
     inset 0 0 12px rgba(0, 229, 255, 0.3),
     0 0 25px rgba(0, 229, 255, 0.5) !important; 
 }
-.panel-coralis.glass-panel { 
+.panel-celestra.glass-panel { 
   border-color: rgba(208, 0, 255, 0.65) !important; 
   box-shadow: 
     0 8px 32px 0 rgba(0, 0, 0, 0.7), 
@@ -688,17 +688,17 @@ body {
 }
 
 /* Faction themed backgrounds */
-.panel-belterra.profile-id-card {
+.panel-bionex.profile-id-card {
   border-color: rgba(0, 229, 255, 0.5);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37), 0 0 15px rgba(0, 229, 255, 0.2), inset 0 0 15px rgba(0, 229, 255, 0.1);
 }
 
-.panel-acreton.profile-id-card {
+.panel-arctron.profile-id-card {
   border-color: rgba(255, 100, 0, 0.5);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37), 0 0 15px rgba(255, 100, 0, 0.2), inset 0 0 15px rgba(255, 100, 0, 0.1);
 }
 
-.panel-coralis.profile-id-card {
+.panel-celestra.profile-id-card {
   border-color: rgba(208, 0, 255, 0.5);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37), 0 0 15px rgba(208, 0, 255, 0.2), inset 0 0 15px rgba(208, 0, 255, 0.1);
 }
@@ -752,11 +752,11 @@ body {
   overflow: visible;
 }
 
-.panel-acreton .profile-avatar-glow-wrap {
+.panel-arctron .profile-avatar-glow-wrap {
   box-shadow: inset 0 0 0 1px rgba(255, 100, 0, 0.3);
 }
 
-.panel-coralis .profile-avatar-glow-wrap {
+.panel-celestra .profile-avatar-glow-wrap {
   box-shadow: inset 0 0 0 1px rgba(208, 0, 255, 0.3);
 }
 
@@ -966,8 +966,8 @@ body {
   box-sizing: border-box;
 }
 
-/* Acreton (Red/Orange) 3D Card */
-.tower-3d-card.panel-acreton {
+/* Arctron (Red/Orange) 3D Card */
+.tower-3d-card.panel-arctron {
   border: 1px solid rgba(255, 61, 0, 0.4);
   border-top: 1.8px solid rgba(255, 120, 50, 0.65);
   border-bottom: 4.5px solid rgba(160, 20, 0, 0.85);
@@ -976,7 +976,7 @@ body {
     0 0 15px rgba(255, 61, 0, 0.25),
     inset 0 0 12px rgba(255, 61, 0, 0.12);
 }
-.tower-3d-card.panel-acreton:hover {
+.tower-3d-card.panel-arctron:hover {
   box-shadow: 
     0 12px 30px rgba(0, 0, 0, 0.8),
     0 0 25px rgba(255, 61, 0, 0.45),
@@ -984,8 +984,8 @@ body {
   transform: translateY(-2px);
 }
 
-/* Belterra (Yellow/Gold) 3D Card */
-.tower-3d-card.panel-belterra {
+/* Bionex (Yellow/Gold) 3D Card */
+.tower-3d-card.panel-bionex {
   border: 1px solid rgba(255, 214, 0, 0.4);
   border-top: 1.8px solid rgba(255, 235, 100, 0.65);
   border-bottom: 4.5px solid rgba(160, 120, 0, 0.85);
@@ -994,7 +994,7 @@ body {
     0 0 15px rgba(255, 214, 0, 0.25),
     inset 0 0 12px rgba(255, 214, 0, 0.12);
 }
-.tower-3d-card.panel-belterra:hover {
+.tower-3d-card.panel-bionex:hover {
   box-shadow: 
     0 12px 30px rgba(0, 0, 0, 0.8),
     0 0 25px rgba(255, 214, 0, 0.45),
@@ -1002,8 +1002,8 @@ body {
   transform: translateY(-2px);
 }
 
-/* Coralis (Blue/Cyan) 3D Card */
-.tower-3d-card.panel-coralis {
+/* Celestra (Blue/Cyan) 3D Card */
+.tower-3d-card.panel-celestra {
   border: 1px solid rgba(0, 229, 255, 0.4);
   border-top: 1.8px solid rgba(150, 250, 255, 0.65);
   border-bottom: 4.5px solid rgba(0, 110, 160, 0.85);
@@ -1012,7 +1012,7 @@ body {
     0 0 15px rgba(0, 229, 255, 0.25),
     inset 0 0 12px rgba(0, 229, 255, 0.12);
 }
-.tower-3d-card.panel-coralis:hover {
+.tower-3d-card.panel-celestra:hover {
   box-shadow: 
     0 12px 30px rgba(0, 0, 0, 0.8),
     0 0 25px rgba(0, 229, 255, 0.45),
@@ -1039,18 +1039,18 @@ body {
   animation: pulseGlow 2s infinite ease-in-out;
 }
 
-.profile-promo-btn.btn-acreton {
+.profile-promo-btn.btn-arctron {
   background: linear-gradient(90deg, #b71c1c, #d32f2f);
   border: 1.5px solid #ff5252;
   box-shadow: 0 0 12px rgba(244, 67, 54, 0.4);
 }
-.profile-promo-btn.btn-belterra {
+.profile-promo-btn.btn-bionex {
   background: linear-gradient(90deg, #fbc02d, #fdd835);
   border: 1.5px solid #ffff8d;
   color: #0d1e3d;
   box-shadow: 0 0 12px rgba(253, 216, 53, 0.4);
 }
-.profile-promo-btn.btn-coralis {
+.profile-promo-btn.btn-celestra {
   background: linear-gradient(90deg, #00838f, #0097a7);
   border: 1.5px solid #00e5ff;
   box-shadow: 0 0 12px rgba(0, 188, 212, 0.4);
