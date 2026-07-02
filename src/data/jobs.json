@@ -338,7 +338,6 @@
         "id": "guardian",
         "name": "Guardian",
         "desc": "Prajurit pertahanan melee dasar Bionex.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/bellwarrior.jpg",
         "bonus": {
           "hp": 60,
           "atk": 5,
@@ -347,8 +346,7 @@
         "skills": [
           {
             "name": "Slash",
-            "desc": "Serangan tebasan beruntun dasar.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/howl.png"
+            "desc": "Serangan tebasan beruntun dasar."
           }
         ],
         "levelReq": 1
@@ -357,7 +355,6 @@
         "id": "marksman",
         "name": "Marksman",
         "desc": "Penembak jarak jauh taktis dasar Bionex.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/bellranger.jpg",
         "bonus": {
           "hp": 30,
           "atk": 12,
@@ -366,8 +363,7 @@
         "skills": [
           {
             "name": "Eagle Eye",
-            "desc": "Meningkatkan jangkauan tembak.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/strength.jpg"
+            "desc": "Meningkatkan jangkauan tembak."
           }
         ],
         "levelReq": 1
@@ -376,7 +372,6 @@
         "id": "engineer",
         "name": "Engineer",
         "desc": "Spesialis craft & driver dasar Bionex.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/bellspecialist.jpg",
         "bonus": {
           "hp": 40,
           "atk": 6,
@@ -385,8 +380,7 @@
         "skills": [
           {
             "name": "Scrap Recycle",
-            "desc": "Memanfaatkan besi tua menjadi resource.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/set-guard-tower.jpg"
+            "desc": "Memanfaatkan besi tua menjadi resource."
           }
         ],
         "levelReq": 1
@@ -395,7 +389,6 @@
         "id": "psion",
         "name": "Psion",
         "desc": "Pangguna energi spiritual/Force dasar Bionex.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/bellspiritualist.jpg",
         "bonus": {
           "hp": 30,
           "atk": 8,
@@ -404,8 +397,7 @@
         "skills": [
           {
             "name": "Force Arrow",
-            "desc": "Basic Force attack.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/edian-soul.jpg"
+            "desc": "Basic Force attack."
           }
         ],
         "levelReq": 1
@@ -416,7 +408,6 @@
         "id": "centurion",
         "name": "Centurion",
         "desc": "Warrior spesialis pertahanan.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/myrmidon_class.jpg",
         "bonus": {
           "hp": 95,
           "atk": 11,
@@ -429,7 +420,6 @@
         "id": "revenant",
         "name": "Revenant",
         "desc": "Penembak jitu jarak jauh menengah.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_vigilante.jpg",
         "bonus": {
           "hp": 50,
           "atk": 20,
@@ -442,7 +432,6 @@
         "id": "mechanist",
         "name": "Mechanist",
         "desc": "Ahli pembuat mesin tempur.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_aengineer.jpg",
         "bonus": {
           "hp": 65,
           "atk": 11,
@@ -455,7 +444,6 @@
         "id": "esper",
         "name": "Esper",
         "desc": "Spiritualist dengan Force menengah.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_mage.jpg",
         "bonus": {
           "hp": 45,
           "atk": 17,
@@ -470,7 +458,6 @@
         "id": "protector",
         "name": "Protector",
         "desc": "Pertahanan garda terdepan elit.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_berserker.jpg",
         "bonus": {
           "hp": 145,
           "atk": 19,
@@ -483,7 +470,6 @@
         "id": "deadeye",
         "name": "Deadeye",
         "desc": "Penembak jitu dengan akurasi mematikan.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_infiltrator.jpg",
         "bonus": {
           "hp": 75,
           "atk": 30,
@@ -496,7 +482,6 @@
         "id": "techmaster",
         "name": "Techmaster",
         "desc": "Ahli teknologi terkemuka Bionex.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_mental_smith.jpg",
         "bonus": {
           "hp": 100,
           "atk": 18,
@@ -509,7 +494,6 @@
         "id": "ascendant",
         "name": "Ascendant",
         "desc": "Master Force Bionex.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_wizard.jpg",
         "bonus": {
           "hp": 65,
           "atk": 28,
@@ -524,7 +508,6 @@
         "id": "imperator",
         "name": "Imperator",
         "desc": "Komandan tertinggi militer Bionex.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_sentinel.jpg",
         "bonus": {
           "hp": 215,
           "atk": 29,
@@ -537,7 +520,6 @@
         "id": "predator",
         "name": "Predator",
         "desc": "Pembunuh bayaran senyap tak kasat mata.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_sniper.jpg",
         "bonus": {
           "hp": 110,
           "atk": 42,
@@ -550,7 +532,6 @@
         "id": "overseer",
         "name": "Overseer",
         "desc": "Direktur persenjataan dan mesin super.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_armor_rider.jpg",
         "bonus": {
           "hp": 150,
           "atk": 27,
@@ -563,7 +544,6 @@
         "id": "transcendent",
         "name": "Transcendent",
         "desc": "Wujud murni energi Force tak terbatas.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_astralist.jpg",
         "bonus": {
           "hp": 90,
           "atk": 42,
