@@ -262,8 +262,14 @@
           "def": 16
         },
         "skills": [
-          "Flash-Bang",
-          "Heavy Shot"
+          {
+            "name": "Piercing Shot",
+            "desc": "Active: 170% ATK. Cooldown: 8 detik."
+          },
+          {
+            "name": "Eagle Eye",
+            "desc": "Passive: Accuracy +10%"
+          }
         ],
         "levelReq": 1
       },
@@ -316,8 +322,14 @@
           "def": 3
         },
         "skills": [
-          "Siege Mode",
-          "Compound Siege"
+          {
+            "name": "Multi Shot",
+            "desc": "Active: Menyerang 3 target dengan 180% ATK. Cooldown: 8 detik."
+          },
+          {
+            "name": "Swift Reflex",
+            "desc": "Passive: Dodge +8%"
+          }
         ]
       },
       {
@@ -369,8 +381,14 @@
           "def": 3
         },
         "skills": [
-          "Doom Blast",
-          "Fierce Attack"
+          {
+            "name": "Rain of Arrows",
+            "desc": "Active: Area damage 220% ATK. Cooldown: 8 detik."
+          },
+          {
+            "name": "Critical Focus",
+            "desc": "Passive: Critical +10%"
+          }
         ]
       },
       {
@@ -422,7 +440,14 @@
           "def": 4
         },
         "skills": [
-          "Orbital Barrage"
+          {
+            "name": "Fatal Arrow",
+            "desc": "Active: 300% ATK ke 1 target. Cooldown: 8 detik."
+          },
+          {
+            "name": "Deadly Precision",
+            "desc": "Passive: Final Damage +10%"
+          }
         ]
       },
       {
