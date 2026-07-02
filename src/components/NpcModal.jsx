@@ -623,7 +623,7 @@ const styles = {
     fontFamily: 'var(--font-title)',
     fontSize: 16,
     fontWeight: 900,
-    color: '#fff',
+    color: '#F3E5AB',
     letterSpacing: 1.5,
     textShadow: '0 0 8px var(--neon-glow)'
   },
@@ -660,7 +660,7 @@ const styles = {
     fontFamily: 'var(--font-title)',
     fontSize: 15,
     fontWeight: 800,
-    color: '#fff',
+    color: '#F3E5AB',
     letterSpacing: 0.5,
     marginBottom: 4
   },
