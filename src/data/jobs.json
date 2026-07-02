@@ -241,8 +241,14 @@
           "def": 22
         },
         "skills": [
-          "Mangle",
-          "Shield Battery"
+          {
+            "name": "Power Slash",
+            "desc": "Active: Menyerang 1 target dengan 180% ATK. Cooldown: 8 detik."
+          },
+          {
+            "name": "Iron Will",
+            "desc": "Passive: DEF +10%"
+          }
         ],
         "levelReq": 1
       },
@@ -289,8 +295,14 @@
           "def": 5
         },
         "skills": [
-          "Frenzy",
-          "Final Fortress"
+          {
+            "name": "Whirlwind",
+            "desc": "Active: Menyerang semua musuh di sekitar dengan 200% ATK. Cooldown: 8 detik."
+          },
+          {
+            "name": "Battle Instinct",
+            "desc": "Passive: ATK +10%"
+          }
         ]
       },
       {
@@ -336,8 +348,14 @@
           "def": 8
         },
         "skills": [
-          "Excel Charger",
-          "Solid Stance"
+          {
+            "name": "Earth Breaker",
+            "desc": "Active: Serangan area dengan 240% ATK. Cooldown: 8 detik."
+          },
+          {
+            "name": "Fortitude",
+            "desc": "Passive: HP +15%"
+          }
         ]
       },
       {
@@ -383,7 +401,14 @@
           "def": 10
         },
         "skills": [
-          "Annihilation Strike"
+          {
+            "name": "Judgment Strike",
+            "desc": "Active: Menyerang 1 target dengan 320% ATK. Cooldown: 8 detik."
+          },
+          {
+            "name": "Weapon Mastery",
+            "desc": "Passive: Final Damage +10%"
+          }
         ]
       },
       {

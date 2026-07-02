@@ -1014,13 +1014,13 @@ export const useGameStore = create(
             const techJobs = ['engineer', 'architect', 'core_engineer', 'cybermancer'];
             if (warriorJobs.includes(player.job)) {
               growth = { hp: 14, atk: 2, def: 2 }
-              baseHpScaling = 210; baseAtkScaling = 27; baseDefScaling = 22;
+              baseHpScaling = 220; baseAtkScaling = 28; baseDefScaling = 24;
             } else if (rangerJobs.includes(player.job)) {
               growth = { hp: 10, atk: 3, def: 1 }
-              baseHpScaling = 175; baseAtkScaling = 33; baseDefScaling = 15;
+              baseHpScaling = 180; baseAtkScaling = 32; baseDefScaling = 16;
             } else if (techJobs.includes(player.job)) {
               growth = { hp: 9, atk: 2, def: 1.5 }
-              baseHpScaling = 180; baseAtkScaling = 25; baseDefScaling = 18;
+              baseHpScaling = 170; baseAtkScaling = 24; baseDefScaling = 18;
             }
           } else if (player.race === 'coralis') {
             const sentinelJobs = ['sentinel', 'warden', 'knight', 'blademaster'];
