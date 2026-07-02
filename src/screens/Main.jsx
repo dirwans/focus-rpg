@@ -77,16 +77,18 @@ export default function Main() {
   const isRunning = timer.state === 'running'
   const isDone    = timer.state === 'completed'
 
-  const getJobTier = (raceId, jobId) => {
-    if (!raceId || !jobId || !jobs[raceId]) return 0
+  const getJobInfo = (raceId, jobId) => {
+    if (!raceId || !jobId || !jobs[raceId]) return { tier: 0, job: null }
     const rJobs = jobs[raceId]
-    if (rJobs.tier1.some(j => j.id === jobId)) return 1
-    if (rJobs.tier2.some(j => j.id === jobId)) return 2
-    if (rJobs.tier3.some(j => j.id === jobId)) return 3
-    return 0
+    if (rJobs.tier1.some(j => j.id === jobId)) return { tier: 1, job: rJobs.tier1.find(j => j.id === jobId) }
+    if (rJobs.tier2.some(j => j.id === jobId)) return { tier: 2, job: rJobs.tier2.find(j => j.id === jobId) }
+    if (rJobs.tier3.some(j => j.id === jobId)) return { tier: 3, job: rJobs.tier3.find(j => j.id === jobId) }
+    return { tier: 0, job: null }
   }
 
-  const tier = getJobTier(player.race, player.job)
+  const { tier, job: jobInfo } = getJobInfo(player.race, player.job)
+  const baseClass = jobInfo ? jobInfo.desc.split(' ').pop().toUpperCase() : 'NOVICE'
+
   const eligibleForPromo = player.race && (
     (tier === 0 && player.level >= 1) ||
     (tier === 1 && player.level >= 30) ||
@@ -391,14 +393,6 @@ export default function Main() {
         <span style={styles.resPill('var(--neon-glow)')}>⬡ {player.resources.anium.toLocaleString()}</span>
         <span style={styles.resPill('#00e5ff')}>◈ {player.resources.credits}</span>
         <span style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 3 }}>
-            <span style={{ fontFamily: 'monospace', fontSize: 13, color: '#7ab0d0', fontWeight: 700 }}>
-              {race ? race.emoji + ' ' + race.name : '—'}
-            </span>
-            <span style={{ fontFamily: 'monospace', fontSize: 13, color: '#00e5ff', fontWeight: 700 }}>
-              @{username}
-            </span>
-          </span>
           <button onClick={() => setShowSocialModal(true)} style={styles.logoutBtn} title="Social / Friends">👥</button>
           <button onClick={() => setShowLibrary(true)} style={styles.logoutBtn} title="Database & Guides">📖</button>
           <button onClick={() => setShowSettings(true)} style={styles.logoutBtn} title="Settings">⚙️</button>
@@ -506,12 +500,19 @@ export default function Main() {
           {/* Details side */}
           <div className="profile-details-wrap">
             <div className="profile-details-header-badge">STATUS</div>
-            <div className="profile-details-username">@{username}</div>
+            <div className="profile-details-username" style={{ fontSize: 18, marginBottom: 4 }}>{player.name.toUpperCase()}</div>
+            <div style={{ color: '#00e5ff', fontSize: 11, fontFamily: 'var(--font-title)', marginBottom: 8, fontWeight: 'bold', lineHeight: 1.4 }}>
+              FACTION: <span style={{ color: '#fff' }}>{race ? race.name.toUpperCase() : 'UNKNOWN'}</span>
+              <br/>
+              CLASS: <span style={{ color: '#fff' }}>{baseClass}</span>
+              <br/>
+              JOB: <span style={{ color: '#fff' }}>{jobInfo ? jobInfo.name.toUpperCase() : 'NOVICE'}</span>
+            </div>
             
             <div className="profile-status-panel">
               <div className="profile-status-online-row">
                 <div className="profile-status-led" />
-                STATUS: <span className="profile-status-online-val" style={{ fontWeight: 'bold', color: '#39ff14', textShadow: '0 0 6px rgba(57, 255, 20, 0.5)' }}>SYSTEM ONLINE</span>
+                STATUS: <span className="profile-status-online-val" style={{ fontWeight: 'bold', color: '#39ff14', textShadow: '0 0 6px rgba(57, 255, 20, 0.5)' }}>ACTIVE</span>
               </div>
 
               {/* Dynamic Experience bar */}
@@ -532,16 +533,8 @@ export default function Main() {
             {/* Substats boxes */}
             <div className="profile-stats-grid">
               <div className="profile-stats-col">
-                <div className="profile-stats-col-lbl">PILOT ID</div>
+                <div className="profile-stats-col-lbl">{baseClass} ID</div>
                 <div className="profile-stats-col-val">PLT-{player.level || 1}09X</div>
-              </div>
-              <div className="profile-stats-col">
-                <div className="profile-stats-col-lbl">FACTION</div>
-                <div className="profile-stats-col-val">{player.race || 'UNKNOWN'}</div>
-              </div>
-              <div className="profile-stats-col">
-                <div className="profile-stats-col-lbl">STATUS</div>
-                <div className="profile-stats-col-val">ACTIVE</div>
               </div>
             </div>
 
