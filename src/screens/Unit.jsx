@@ -372,6 +372,22 @@ const styles = {
     textAlign: 'center'
   }),
 
+  // Tabs
+  tabs: { display: 'flex', gap: 8, padding: '0 16px', margin: '8px 0', flexShrink: 0 },
+  tab: { 
+    flex: 1, padding: '10px', background: 'rgba(0,0,0,0.5)', 
+    border: '1px solid rgba(0, 229, 255, 0.2)', color: '#7ab0d0', 
+    borderRadius: 8, fontFamily: 'var(--font-title)', 
+    fontSize: 13, cursor: 'pointer', transition: 'all 0.2s', letterSpacing: 1, textAlign: 'center'
+  },
+  tabActive: { 
+    flex: 1, padding: '10px', background: 'rgba(0, 229, 255, 0.15)', 
+    border: '1px solid #00e5ff', color: '#fff', 
+    borderRadius: 8, fontFamily: 'var(--font-title)', 
+    fontSize: 13, fontWeight: 'bold', cursor: 'pointer', 
+    boxShadow: '0 0 12px rgba(0,229,255,0.4)', letterSpacing: 1, textAlign: 'center'
+  },
+
   // Accordion
   section: { margin: '0 16px 10px', padding: 0, overflow: 'hidden', flexShrink: 0 },
   sectionHeader: {
