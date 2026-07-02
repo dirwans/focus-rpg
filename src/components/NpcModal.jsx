@@ -427,9 +427,9 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                                     } else if (player.race === 'acreton') {
                                       let bHp = 0, bAtk = 0, bDef = 0;
                                       const laneT = activeLane.title.toLowerCase();
-                                      if (laneT.includes('warrior')) { bHp = 210; bAtk = 27; bDef = 22; }
-                                      else if (laneT.includes('ranger')) { bHp = 175; bAtk = 33; bDef = 15; }
-                                      else if (laneT.includes('technician')) { bHp = 180; bAtk = 25; bDef = 18; }
+                                      if (laneT.includes('warrior')) { bHp = 220; bAtk = 28; bDef = 24; }
+                                      else if (laneT.includes('ranger')) { bHp = 180; bAtk = 32; bDef = 16; }
+                                      else if (laneT.includes('technician')) { bHp = 170; bAtk = 24; bDef = 18; }
                                       return (
                                         <>
                                           <span><span style={{color: '#ff4444'}}>HP</span> {bHp}</span>
