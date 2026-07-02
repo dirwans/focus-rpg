@@ -363,12 +363,12 @@ const styles = {
 
   titleBadge: (race) => {
     const colors = {
-      belterra: 'linear-gradient(135deg, #eab308, #ca8a04)',
+      bionex: 'linear-gradient(135deg, #eab308, #ca8a04)',
       coralis: 'linear-gradient(135deg, #a855f7, #7e22ce)',
       acreton: 'linear-gradient(135deg, #ef4444, #b91c1c)'
     }
     const borderColors = {
-      belterra: '#eab308',
+      bionex: '#eab308',
       coralis: '#a855f7',
       acreton: '#ef4444'
     }

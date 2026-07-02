@@ -1,9 +1,9 @@
 {
-  "belterra": {
+  "bionex": {
     "mantle": {
       "id": "mantle_solaris",
       "name": "Solaris Regalia",
-      "desc": "Simbol persatuan teknologi dan sihir Belterra.",
+      "desc": "Simbol persatuan teknologi dan sihir Bionex.",
       "bonus": {
         "defPercent": 20,
         "gatherSpeedPercent": 15
@@ -11,7 +11,7 @@
     },
     "aura": {
       "name": "Harmony Field",
-      "desc": "Meningkatkan HP seluruh anggota bangsa Belterra.",
+      "desc": "Meningkatkan HP seluruh anggota bangsa Bionex.",
       "bonus": {
         "hpPercent": 10
       }

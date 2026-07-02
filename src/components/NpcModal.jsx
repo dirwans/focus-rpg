@@ -14,11 +14,11 @@ const PROMO_COSTS = {
 const RECLASS_COST = 5000
 
 const CLASS_LANES = {
-  belterra: [
-    { title: "Warrior Lane", indices: [[0], [0, 1], [0, 1, 2]] },
-    { title: "Ranger Lane", indices: [[1], [2, 3], [3, 4, 5]] },
-    { title: "Spiritualist Lane", indices: [[2], [4, 5], [6, 7, 8]] },
-    { title: "Specialist Lane", indices: [[3], [6, 7], [9, 10]] }
+  bionex: [
+    { title: "Guardian Path", indices: [[0], [0], [0], [0]] },
+    { title: "Marksman Path", indices: [[1], [1], [1], [1]] },
+    { title: "Engineer Path", indices: [[2], [2], [2], [2]] },
+    { title: "Psion Path", indices: [[3], [3], [3], [3]] }
   ],
   coralis: [
     { title: "Warrior Lane", indices: [[0], [0], [0]] },
@@ -41,12 +41,12 @@ const BELLTERRA_CLASS_SPRITES = {
   specialist:   '/ref/Bellterra/Class-sprites-cleaned/Bellterra-specialist-cleaned.png',
 }
 
-function getBelterraLaneSprite(laneTitle) {
+function getBionexLaneSprite(laneTitle) {
   const t = laneTitle.toLowerCase()
-  if (t.includes('warrior')) return BELLTERRA_CLASS_SPRITES.warrior
-  if (t.includes('ranger')) return BELLTERRA_CLASS_SPRITES.ranger
-  if (t.includes('spiritualist')) return BELLTERRA_CLASS_SPRITES.spiritualist
-  if (t.includes('specialist')) return BELLTERRA_CLASS_SPRITES.specialist
+  if (t.includes('guardian')) return BELLTERRA_CLASS_SPRITES.warrior
+  if (t.includes('marksman')) return BELLTERRA_CLASS_SPRITES.ranger
+  if (t.includes('psion')) return BELLTERRA_CLASS_SPRITES.spiritualist
+  if (t.includes('engineer')) return BELLTERRA_CLASS_SPRITES.specialist
   return null
 }
 
@@ -59,6 +59,8 @@ function getJobInfo(raceId, jobId) {
   if (job) return { tier: 2, job }
   job = rJobs.tier3.find(j => j.id === jobId)
   if (job) return { tier: 3, job }
+  job = rJobs.tier4?.find(j => j.id === jobId)
+  if (job) return { tier: 4, job }
   return { tier: 0, job: null }
 }
 
@@ -70,7 +72,8 @@ function getPlayerLaneIndex(raceId, jobId) {
     const t1s = indices[0].map(idx => jobs[raceId].tier1[idx]?.id)
     const t2s = indices[1].map(idx => jobs[raceId].tier2[idx]?.id)
     const t3s = indices[2].map(idx => jobs[raceId].tier3[idx]?.id)
-    if (t1s.includes(jobId) || t2s.includes(jobId) || t3s.includes(jobId)) {
+    const t4s = (indices[3] || []).map(idx => jobs[raceId].tier4?.[idx]?.id)
+    if (t1s.includes(jobId) || t2s.includes(jobId) || t3s.includes(jobId) || t4s.includes(jobId)) {
       return i
     }
   }
@@ -264,9 +267,9 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                   }
                   const tabJob = getTabJob()
                   const isActive = activeLaneIdx === laneIdx
-                  const raceColor = player.race === 'acreton' ? '#ff3d00' : player.race === 'belterra' ? '#ffd600' : '#00e5ff'
+                  const raceColor = player.race === 'acreton' ? '#ff3d00' : player.race === 'bionex' ? '#ffd600' : '#00e5ff'
 
-                  const belterraSprite = player.race === 'belterra' ? getBelterraLaneSprite(lane.title) : null
+                  const bionexSprite = player.race === 'bionex' ? getBionexLaneSprite(lane.title) : null
 
                   return (
                     <div
@@ -290,16 +293,17 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                   const tierJobs = [
                     { tier: 1, jobs: lane.indices[0].map(idx => jobs[player.race].tier1[idx]).filter(Boolean) },
                     { tier: 2, jobs: lane.indices[1].map(idx => jobs[player.race].tier2[idx]).filter(Boolean) },
-                    { tier: 3, jobs: lane.indices[2].map(idx => jobs[player.race].tier3[idx]).filter(Boolean) }
+                    { tier: 3, jobs: lane.indices[2].map(idx => jobs[player.race].tier3[idx]).filter(Boolean) },
+                    { tier: 4, jobs: (lane.indices[3] || []).map(idx => jobs[player.race].tier4?.[idx]).filter(Boolean) }
                   ].filter(t => t.jobs.length > 0)
 
                   const activeLane = CLASS_LANES[player.race]?.[activeLaneIdx]
-                  const belterraHeroSprite = player.race === 'belterra' && activeLane
-                    ? getBelterraLaneSprite(activeLane.title)
+                  const bionexHeroSprite = player.race === 'bionex' && activeLane
+                    ? getBionexLaneSprite(activeLane.title)
                     : null
 
                   // Hero sprite area — Bellterra: class sprite, others: PilotSprite
-                  const raceAccent = player.race === 'acreton' ? 'rgba(255,61,0,0.18)' : player.race === 'belterra' ? 'rgba(255,214,0,0.18)' : 'rgba(0,229,255,0.18)'
+                  const raceAccent = player.race === 'acreton' ? 'rgba(255,61,0,0.18)' : player.race === 'bionex' ? 'rgba(255,214,0,0.18)' : 'rgba(0,229,255,0.18)'
                   const tabHeroJob = activeLane ? (() => {
                     const t1Idx = activeLane.indices[0]?.[0]
                     if (t1Idx !== undefined && jobs[player.race]?.tier1[t1Idx]) return jobs[player.race].tier1[t1Idx]
@@ -311,7 +315,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                   return (
                     <div className="class-tree-col" style={{ ...styles.treeCol, width: '100%' }}>
                       {/* Hero Sprite Area — all factions */}
-                      {(belterraHeroSprite || tabHeroJob) && (
+                      {(bionexHeroSprite || tabHeroJob) && (
                         <div style={{
                           width: '100%',
                           display: 'flex',
@@ -336,9 +340,9 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                             background: `radial-gradient(ellipse, ${raceAccent} 0%, transparent 70%)`,
                             filter: 'blur(6px)',
                           }} />
-                          {belterraHeroSprite ? (
+                          {bionexHeroSprite ? (
                             <img
-                              src={belterraHeroSprite}
+                              src={bionexHeroSprite}
                               alt={activeLane.title}
                               style={{
                                 height: 175,

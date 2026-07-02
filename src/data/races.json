@@ -22,11 +22,11 @@
     },
     "baseStats": { "hp": 1200, "atk": 70, "def": 48, "spd": 8, "luk": 5 }
   },
-  "belterra": {
-    "id": "belterra",
-    "name": "Belterra Dominion",
+  "bionex": {
+    "id": "bionex",
+    "name": "Bionex – Technocratic Human Alliance",
     "emoji": "⚙️",
-    "description": "Bangsa yang dibangun oleh para ilmuwan dan insinyur yang selamat dari Era Kehancuran. Kota-kota mereka berdiri di atas benteng terapung dan dilindungi oleh mesin tempur raksasa Titan Frame. Mereka mengutamakan logika dan inovasi. \n\nMoto: \"Pengetahuan adalah fondasi kekuatan.\"",
+    "description": "Technocratic Human Alliance. Bangsa yang dibangun oleh para ilmuwan dan insinyur yang selamat dari Era Kehancuran. Kota-kota mereka berdiri di atas benteng terapung dan dilindungi oleh mesin tempur raksasa Titan Frame. Mereka mengutamakan logika dan inovasi. \n\nMoto: \"Pengetahuan adalah fondasi kekuatan.\"",
     "strengths": [
       "⛏️ +50% Resource Gathering Rate",
       "⚖️ Balanced stats progression",

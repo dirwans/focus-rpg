@@ -18,35 +18,31 @@ function fmt(s) {
 }
 
 // Bellterra class lane mapping (matches NpcModal)
-const BELTERRA_LANE_INDICES = [
-  { key: 'warrior',      t1: [0], t2: [0, 1], t3: [0, 1, 2] },
-  { key: 'ranger',       t1: [1], t2: [2, 3], t3: [3, 4, 5] },
-  { key: 'spiritualist', t1: [2], t2: [4, 5], t3: [6, 7, 8] },
-  { key: 'specialist',   t1: [3], t2: [6, 7], t3: [9, 10]   },
-]
-const BELTERRA_SPRITES = {
-  warrior:      '/ref/Bellterra/Class-sprites-cleaned/Bellterra-warrior-cleaned.png',
-  ranger:       '/ref/Bellterra/Class-sprites-cleaned/Bellterra-ranger-cleaned.png',
-  spiritualist: '/ref/Bellterra/Class-sprites-cleaned/Bellterra-Spiritualist-cleaned.png',
-  specialist:   '/ref/Bellterra/Class-sprites-cleaned/Bellterra-specialist-cleaned.png',
+const BIONEX_SPRITES = {
+  guardian:     '/ref/Bellterra/Class-sprites-cleaned/Bellterra-warrior-cleaned.png',
+  marksman:     '/ref/Bellterra/Class-sprites-cleaned/Bellterra-ranger-cleaned.png',
+  psion:        '/ref/Bellterra/Class-sprites-cleaned/Bellterra-Spiritualist-cleaned.png',
+  engineer:     '/ref/Bellterra/Class-sprites-cleaned/Bellterra-specialist-cleaned.png',
 }
 
-function getBelterraJobSprite(jobId) {
-  if (!jobId || !jobs.belterra) return null
-  const tiers = ['tier1', 'tier2', 'tier3']
-  const tierKeys = ['t1', 't2', 't3']
-  for (const lane of BELTERRA_LANE_INDICES) {
-    for (let ti = 0; ti < tiers.length; ti++) {
-      const indices = lane[tierKeys[ti]]
-      for (const idx of indices) {
-        if (jobs.belterra[tiers[ti]]?.[idx]?.id === jobId) {
-          return BELTERRA_SPRITES[lane.key]
-        }
+function getBionexJobSprite(jobId) {
+  if (!jobId || !jobs.bionex) return null
+  const tiers = ['tier1', 'tier2', 'tier3', 'tier4']
+  for (let ti = 0; ti < tiers.length; ti++) {
+    const arr = jobs.bionex[tiers[ti]]
+    if (!arr) continue
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] && arr[i].id === jobId) {
+        if (i === 0) return BIONEX_SPRITES.guardian
+        if (i === 1) return BIONEX_SPRITES.marksman
+        if (i === 2) return BIONEX_SPRITES.engineer
+        if (i === 3) return BIONEX_SPRITES.psion
       }
     }
   }
   return null
 }
+
 
 export default function Main() {
   const player   = useGameStore((s) => s.player)
@@ -301,11 +297,11 @@ export default function Main() {
                 flexShrink: 0
               }}>
               {(() => {
-                const belterraSprite = player.race === 'belterra' ? getBelterraJobSprite(player.job) : null
-                if (belterraSprite) {
+                const bionexSprite = player.race === 'bionex' ? getBionexJobSprite(player.job) : null
+                if (bionexSprite) {
                   return (
                     <img
-                      src={belterraSprite}
+                      src={bionexSprite}
                       alt={player.job}
                       style={{
                         height: 160,
@@ -480,11 +476,11 @@ export default function Main() {
               <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', overflow: 'hidden', zIndex: 2,
                 boxShadow: 'inset 0 0 8px 4px rgba(0,0,0,0.85)' }}>
                 {(() => {
-                  const belterraIdSprite = player.race === 'belterra' ? getBelterraJobSprite(player.job) : null
-                  if (belterraIdSprite) {
+                  const bionexSprite = player.race === 'bionex' ? getBionexJobSprite(player.job) : null
+                  if (bionexSprite) {
                     return (
                       <img
-                        src={belterraIdSprite}
+                        src={bionexSprite}
                         alt={player.job}
                         style={{
                           height: 340,

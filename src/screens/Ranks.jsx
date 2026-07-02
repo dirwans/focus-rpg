@@ -12,13 +12,13 @@ const MOCK_FACTION_RANKS = {
     { name: 'SteelPulse', race: 'acreton', minutes: 2750, flag: '🇯🇵' },
     { name: 'MechaStorm', race: 'acreton', minutes: 2600, flag: '🌐' },
   ],
-  belterra: [
-    { name: 'TeMa89', race: 'belterra', minutes: 3560, flag: '🇯🇵' },
-    { name: 'le giang', race: 'belterra', minutes: 3215, flag: '🇻🇳' },
-    { name: 'NovaTitan', race: 'belterra', minutes: 3050, flag: '🇺🇸' },
-    { name: 'ApexLogic', race: 'belterra', minutes: 2880, flag: '🌐' },
-    { name: 'GearHead', race: 'belterra', minutes: 2600, flag: '🇨🇦' },
-    { name: 'VoltFrame', race: 'belterra', minutes: 2450, flag: '🌐' },
+  bionex: [
+    { name: 'TeMa89', race: 'bionex', minutes: 3560, flag: '🇯🇵' },
+    { name: 'le giang', race: 'bionex', minutes: 3215, flag: '🇻🇳' },
+    { name: 'NovaTitan', race: 'bionex', minutes: 3050, flag: '🇺🇸' },
+    { name: 'ApexLogic', race: 'bionex', minutes: 2880, flag: '🌐' },
+    { name: 'GearHead', race: 'bionex', minutes: 2600, flag: '🇨🇦' },
+    { name: 'VoltFrame', race: 'bionex', minutes: 2450, flag: '🌐' },
   ],
   coralis: [
     { name: 'MOB', race: 'coralis', minutes: 3300, flag: '🇺🇸' },
@@ -41,7 +41,7 @@ const BADGE_COLOR = { gold: '#f5a623', silver: '#aaaaaa', bronze: '#b87333' }
 export default function Ranks() {
   const player = useGameStore((s) => s.player)
   const defaultTab = player.race || 'acreton'
-  const [tab, setTab] = useState(defaultTab) // 'acreton', 'belterra', 'coralis'
+  const [tab, setTab] = useState(defaultTab) // 'acreton', 'bionex', 'coralis'
   const myMinutes = player.totalMinutes
 
   // Server data
@@ -132,7 +132,7 @@ export default function Ranks() {
       <div style={styles.tabs}>
         <button onClick={() => useGameStore.getState().setScreen('main')} style={{background:'transparent', border:'none', color:'#00e5ff', fontSize: 20, cursor:'pointer', padding: '0 8px 0 0', display:'flex', alignItems:'center'}}>❮</button>
         <div style={tab === 'acreton' ? styles.tabActive : styles.tab} onClick={() => setTab('acreton')}>🤖 ACRETON</div>
-        <div style={tab === 'belterra' ? styles.tabActive : styles.tab} onClick={() => setTab('belterra')}>⚙️ BELTERRA</div>
+        <div style={tab === 'bionex' ? styles.tabActive : styles.tab} onClick={() => setTab('bionex')}>⚙️ BIONEX</div>
         <div style={tab === 'coralis' ? styles.tabActive : styles.tab} onClick={() => setTab('coralis')}>🧝‍♀️ CORALIS</div>
       </div>
 

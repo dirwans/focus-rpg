@@ -1,444 +1,4 @@
 {
-  "belterra": {
-    "tier1": [
-      {
-        "id": "belterra_warrior",
-        "name": "Warrior",
-        "desc": "Prajurit pertahanan melee dasar Bellato.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/bellwarrior.jpg",
-        "bonus": { "hp": 60, "atk": 5, "def": 5 },
-        "skills": [
-          {
-            "name": "Slash",
-            "desc": "Serangan tebasan beruntun dasar.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/howl.png"
-          }
-        ]
-      },
-      {
-        "id": "belterra_ranger",
-        "name": "Ranger",
-        "desc": "Penembak jarak jauh taktis dasar Bellato.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/bellranger.jpg",
-        "bonus": { "hp": 30, "atk": 12, "def": 0 },
-        "skills": [
-          {
-            "name": "Eagle Eye",
-            "desc": "Meningkatkan jangkauan tembak.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/strength.jpg"
-          }
-        ]
-      },
-      {
-        "id": "belterra_spiritualist",
-        "name": "Spiritualist",
-        "desc": "Pangguna energi spiritual/Force dasar Bellato.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/bellspiritualist.jpg",
-        "bonus": { "hp": 30, "atk": 8, "def": 2 },
-        "skills": [
-          {
-            "name": "Force Arrow",
-            "desc": "Basic Force attack.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/edian-soul.jpg"
-          }
-        ]
-      },
-      {
-        "id": "belterra_specialist",
-        "name": "Specialist",
-        "desc": "Spesialis craft & driver dasar Bellato.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/bellspecialist.jpg",
-        "bonus": { "hp": 40, "atk": 6, "def": 4 },
-        "skills": [
-          {
-            "name": "Scrap Recycle",
-            "desc": "Memanfaatkan besi tua menjadi resource.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/set-guard-tower.jpg"
-          }
-        ]
-      }
-    ],
-    "tier2": [
-      {
-        "id": "commando",
-        "name": "Commando",
-        "desc": "Warrior spesialis serangan melee offensive senjata dua-tangan.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/myrmidon_class.jpg",
-        "bonus": { "hp": 250, "atk": 40, "def": 15 },
-        "skills": [
-          {
-            "name": "Howl",
-            "desc": "Mengurangi attack power musuh.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/howl.png"
-          }
-        ]
-      },
-      {
-        "id": "miller",
-        "name": "Miller",
-        "desc": "Warrior defensif perisai garda depan pertahanan Federasi.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_sentry.jpg",
-        "bonus": { "hp": 350, "atk": 20, "def": 30 },
-        "skills": [
-          {
-            "name": "Defend",
-            "desc": "Meningkatkan defense pertahanan.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/defend.png"
-          },
-          {
-            "name": "Provoke",
-            "desc": "Menarik perhatian musuh.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/provoke.png"
-          }
-        ]
-      },
-      {
-        "id": "desperado",
-        "name": "Desperado",
-        "desc": "Ranger lincah yang andal dalam melee maupun ranged combat.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_vigilante.jpg",
-        "bonus": { "hp": 150, "atk": 40, "def": 15 },
-        "skills": [
-          {
-            "name": "Stretch",
-            "desc": "+30% Attack & +50 Akurasi jarak jauh.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/strength.jpg"
-          }
-        ]
-      },
-      {
-        "id": "sniper",
-        "name": "Sniper",
-        "desc": "Ranger penembak jitu, ahli jebakan (trap) dan menyusup.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_sharpshooter.jpg",
-        "bonus": { "hp": 120, "atk": 50, "def": 5 },
-        "skills": [
-          {
-            "name": "Hide",
-            "desc": "Membuat diri menghilang/invisible.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/hide.jpg"
-          },
-          {
-            "name": "Find Trap",
-            "desc": "Mendeteksi jebakan di sekitar.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/rskill_findtrap.png"
-          },
-          {
-            "name": "Trapping",
-            "desc": "Memasang proximity mine.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/rskill_trapping.png"
-          }
-        ]
-      },
-      {
-        "id": "psyper",
-        "name": "Psyper",
-        "desc": "Spiritualist agresif pengguna Force penghancur garis depan.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_mage.jpg",
-        "bonus": { "hp": 80, "atk": 50, "def": 5 },
-        "skills": [
-          {
-            "name": "Edian's Soul",
-            "desc": "+35% Force Attack power.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/edian-soul.jpg"
-          }
-        ]
-      },
-      {
-        "id": "chandra",
-        "name": "Chandra",
-        "desc": "Spiritualist pendukung, fokus pada healing dan Light Force.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_chandra.jpg",
-        "bonus": { "hp": 120, "atk": 30, "def": 15 },
-        "skills": [
-          {
-            "name": "Recall",
-            "desc": "Memanggil teman satu tim.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/recall.jpg"
-          },
-          {
-            "name": "Heal Wind",
-            "desc": "Penyembuhan area hembusan angin.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/heal-wind.jpg"
-          }
-        ]
-      },
-      {
-        "id": "craftsman",
-        "name": "Craftsman",
-        "desc": "Specialist pembuat/pengupgrade item tempur dan menara.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_aengineer.jpg",
-        "bonus": { "hp": 150, "atk": 35, "def": 15 },
-        "skills": [
-          {
-            "name": "Set Guard Tower",
-            "desc": "Mendirikan menara pertahanan otomatis.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/set-guard-tower.jpg"
-          }
-        ]
-      },
-      {
-        "id": "driver",
-        "name": "Driver",
-        "desc": "Specialist terlatih khusus mengendalikan unit tempur MAU.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_rider.jpg",
-        "bonus": { "hp": 200, "atk": 40, "def": 20 },
-        "skills": [
-          {
-            "name": "MAU Operation",
-            "desc": "Kecakapan dasar mengendalikan MAU.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_rider.jpg"
-          }
-        ]
-      }
-    ],
-    "tier3": [
-      {
-        "id": "berserker",
-        "name": "Berserker",
-        "desc": "Warrior penghancur ekstrim dengan serangan super agresif.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_berserker.jpg",
-        "bonus": { "hp": 800, "atk": 120, "def": 40 },
-        "skills": [
-          {
-            "name": "Acceleration",
-            "desc": "Meningkatkan kecepatan serang.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/acceleration.png"
-          },
-          {
-            "name": "Bash Explosion",
-            "desc": "Serangan ledakan shockwave dahsyat.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/bash_explosion.png"
-          }
-        ]
-      },
-      {
-        "id": "armsman",
-        "name": "Armsman",
-        "desc": "Warrior taktis penyeimbang ofensif dan defensif bersenjata ganda.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_warden.jpg",
-        "bonus": { "hp": 900, "atk": 90, "def": 60 },
-        "skills": [
-          {
-            "name": "Judgement",
-            "desc": "Serangan stun tanah melingkar.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/s1.jpg"
-          },
-          {
-            "name": "Stamina Zero",
-            "desc": "Menguras SP musuh hingga kritis.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/s2.jpg"
-          },
-          {
-            "name": "Perfect",
-            "desc": "Serangan presisi, akurasi +50%.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/s3.jpg"
-          }
-        ]
-      },
-      {
-        "id": "shield_miller",
-        "name": "Shield Miller",
-        "desc": "Warrior pertahanan absolut, tameng baja utama Federasi.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_sentinel.jpg",
-        "bonus": { "hp": 1100, "atk": 50, "def": 100 },
-        "skills": [
-          {
-            "name": "Taunt",
-            "desc": "Menarik kemarahan semua musuh.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/taunt.jpg"
-          },
-          {
-            "name": "Buildup",
-            "desc": "Meningkatkan defense shield maksimal.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/buildup.jpg"
-          },
-          {
-            "name": "Draining",
-            "desc": "Menghisap HP musuh secara perlahan.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/draining.jpg"
-          }
-        ]
-      },
-      {
-        "id": "hidden_soldier",
-        "name": "Hidden Soldier",
-        "desc": "Ranger artileri berat, penembak pelumpuh barisan belakang musuh.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_sniper.jpg",
-        "bonus": { "hp": 400, "atk": 120, "def": 30 },
-        "skills": [
-          {
-            "name": "Eagle Crusher",
-            "desc": "Tembakan rentetan beruntun.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/eagle-crusher.jpg"
-          },
-          {
-            "name": "Quick Attack",
-            "desc": "Mengurangi cooldown skill menembak.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/quick-attack.jpg"
-          },
-          {
-            "name": "Long Distance Firing",
-            "desc": "Tembakan jarak jauh berakurasi tinggi.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/rskill_ldfiring.png"
-          }
-        ]
-      },
-      {
-        "id": "sentinel",
-        "name": "Sentinel",
-        "desc": "Ranger hybrid pelindung bertempaan Force suci.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_harrier.jpg",
-        "bonus": { "hp": 500, "atk": 100, "def": 50 },
-        "skills": [
-          {
-            "name": "Divine",
-            "desc": "Menghapus semua debuff pada diri sendiri.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/divine.jpg"
-          },
-          {
-            "name": "Mental Assault",
-            "desc": "Mengurangi FP maksimal musuh.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/mental-assault.jpg"
-          },
-          {
-            "name": "Scamper",
-            "desc": "Akselerasi kecepatan gerak tinggi.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/scamper.jpg"
-          }
-        ]
-      },
-      {
-        "id": "infiltrator",
-        "name": "Infiltrator",
-        "desc": "Ranger penyusup mematikan spesialis kritikal jarak dekat.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_saboteur.jpg",
-        "bonus": { "hp": 350, "atk": 140, "def": 20 },
-        "skills": [
-          {
-            "name": "Fatal Stab",
-            "desc": "Tusukan mematikan dari belakang.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/fatal-stab.jpg"
-          },
-          {
-            "name": "Trap Box",
-            "desc": "Meningkatkan kapasitas jebakan.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/trapbox.jpg"
-          }
-        ]
-      },
-      {
-        "id": "wizard",
-        "name": "Wizard",
-        "desc": "Spiritualist penghancur, penguasa elemental berdaya hancur tinggi.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_archmage.jpg",
-        "bonus": { "hp": 200, "atk": 170, "def": 15 },
-        "skills": [
-          {
-            "name": "Sage Force",
-            "desc": "+10% Force ATK, +30 Hit, +50 Range.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/sage-force.jpg"
-          },
-          {
-            "name": "Deadly Staff",
-            "desc": "Stun musuh menggunakan staff.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/deadly-staff.jpg"
-          },
-          {
-            "name": "Force Impact",
-            "desc": "Serangan impak murni energi Force.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/force-impact.jpg"
-          }
-        ]
-      },
-      {
-        "id": "astralist",
-        "name": "Astralist",
-        "desc": "Spiritualist pengendali ruang, andal meloloskan diri dan crowd control.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_chronomancer.jpg",
-        "bonus": { "hp": 250, "atk": 140, "def": 30 },
-        "skills": [
-          {
-            "name": "Force Freezing",
-            "desc": "Membuat diri kebal (invulnerable) sementara.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/force-freezing.jpg"
-          },
-          {
-            "name": "Return Gate",
-            "desc": "Membuka portal kembali ke markas.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/return-gate.jpg"
-          },
-          {
-            "name": "Escape",
-            "desc": "Skill meloloskan diri instan.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/escape.jpg"
-          }
-        ]
-      },
-      {
-        "id": "holy_chandra",
-        "name": "Holy Chandra",
-        "desc": "Spiritualist pendukung murni, berkat kekuatan regenerasi Federasi.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_soulchandra.jpg",
-        "bonus": { "hp": 400, "atk": 90, "def": 50 },
-        "skills": [
-          {
-            "name": "Recovery Cycle",
-            "desc": "Penyembuhan HP target tunggal.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/recovery-cycle.jpg"
-          },
-          {
-            "name": "Nerve Palsy",
-            "desc": "Debuff mengurangi jarak serang lawan.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/nerve-palsy.jpg"
-          },
-          {
-            "name": "Judicious Brain",
-            "desc": "Mengurangi delay cooldown Force.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/judicious-brain.jpg"
-          }
-        ]
-      },
-      {
-        "id": "mental_smith",
-        "name": "Mental Smith",
-        "desc": "Specialist support medis kelas tinggi, penyembuh mesin dan sekutu.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_machinist.jpg",
-        "bonus": { "hp": 400, "atk": 100, "def": 40 },
-        "skills": [
-          {
-            "name": "Gauge Recovery",
-            "desc": "Memulihkan defense gauge teman.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/gauge-recovery.jpg"
-          },
-          {
-            "name": "Rebirth",
-            "desc": "Menghidupkan kembali rekan yang gugur.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/rebirth.jpg"
-          }
-        ]
-      },
-      {
-        "id": "armor_rider",
-        "name": "Armor Rider",
-        "desc": "Master pilot MAU tingkat tinggi, memaksimalkan potensi penuh mesin.",
-        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/armorrider.jpg",
-        "bonus": { "hp": 700, "atk": 110, "def": 70 },
-        "skills": [
-          {
-            "name": "Armored Mastery",
-            "desc": "+20% Attack MAU.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/item-1-27_91.png"
-          },
-          {
-            "name": "Repair Discount",
-            "desc": "Diskon biaya reparasi MAU -52%.",
-            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/item-1-27_92.png"
-          }
-        ]
-      }
-    ]
-  },
   "coralis": {
     "tier1": [
       {
@@ -769,6 +329,248 @@
           "Nimble Joint",
           "Solid Mode"
         ]
+      }
+    ]
+  },
+  "bionex": {
+    "tier1": [
+      {
+        "id": "guardian",
+        "name": "Guardian",
+        "desc": "Prajurit pertahanan melee dasar Bionex.",
+        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/bellwarrior.jpg",
+        "bonus": {
+          "hp": 60,
+          "atk": 5,
+          "def": 5
+        },
+        "skills": [
+          {
+            "name": "Slash",
+            "desc": "Serangan tebasan beruntun dasar.",
+            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/howl.png"
+          }
+        ],
+        "levelReq": 1
+      },
+      {
+        "id": "marksman",
+        "name": "Marksman",
+        "desc": "Penembak jarak jauh taktis dasar Bionex.",
+        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/bellranger.jpg",
+        "bonus": {
+          "hp": 30,
+          "atk": 12,
+          "def": 0
+        },
+        "skills": [
+          {
+            "name": "Eagle Eye",
+            "desc": "Meningkatkan jangkauan tembak.",
+            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/strength.jpg"
+          }
+        ],
+        "levelReq": 1
+      },
+      {
+        "id": "engineer",
+        "name": "Engineer",
+        "desc": "Spesialis craft & driver dasar Bionex.",
+        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/bellspecialist.jpg",
+        "bonus": {
+          "hp": 40,
+          "atk": 6,
+          "def": 4
+        },
+        "skills": [
+          {
+            "name": "Scrap Recycle",
+            "desc": "Memanfaatkan besi tua menjadi resource.",
+            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/set-guard-tower.jpg"
+          }
+        ],
+        "levelReq": 1
+      },
+      {
+        "id": "psion",
+        "name": "Psion",
+        "desc": "Pangguna energi spiritual/Force dasar Bionex.",
+        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/bellspiritualist.jpg",
+        "bonus": {
+          "hp": 30,
+          "atk": 8,
+          "def": 2
+        },
+        "skills": [
+          {
+            "name": "Force Arrow",
+            "desc": "Basic Force attack.",
+            "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/edian-soul.jpg"
+          }
+        ],
+        "levelReq": 1
+      }
+    ],
+    "tier2": [
+      {
+        "id": "centurion",
+        "name": "Centurion",
+        "desc": "Warrior spesialis pertahanan.",
+        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/myrmidon_class.jpg",
+        "bonus": {
+          "hp": 250,
+          "atk": 40,
+          "def": 15
+        },
+        "skills": [],
+        "levelReq": 32
+      },
+      {
+        "id": "revenant",
+        "name": "Revenant",
+        "desc": "Penembak jitu jarak jauh menengah.",
+        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_vigilante.jpg",
+        "bonus": {
+          "hp": 150,
+          "atk": 40,
+          "def": 15
+        },
+        "skills": [],
+        "levelReq": 32
+      },
+      {
+        "id": "mechanist",
+        "name": "Mechanist",
+        "desc": "Ahli pembuat mesin tempur.",
+        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_aengineer.jpg",
+        "bonus": {
+          "hp": 150,
+          "atk": 35,
+          "def": 15
+        },
+        "skills": [],
+        "levelReq": 32
+      },
+      {
+        "id": "esper",
+        "name": "Esper",
+        "desc": "Spiritualist dengan Force menengah.",
+        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_mage.jpg",
+        "bonus": {
+          "hp": 80,
+          "atk": 50,
+          "def": 5
+        },
+        "skills": [],
+        "levelReq": 32
+      }
+    ],
+    "tier3": [
+      {
+        "id": "protector",
+        "name": "Protector",
+        "desc": "Pertahanan garda terdepan elit.",
+        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_berserker.jpg",
+        "bonus": {
+          "hp": 800,
+          "atk": 120,
+          "def": 40
+        },
+        "skills": [],
+        "levelReq": 42
+      },
+      {
+        "id": "deadeye",
+        "name": "Deadeye",
+        "desc": "Penembak jitu dengan akurasi mematikan.",
+        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_infiltrator.jpg",
+        "bonus": {
+          "hp": 600,
+          "atk": 150,
+          "def": 20
+        },
+        "skills": [],
+        "levelReq": 42
+      },
+      {
+        "id": "techmaster",
+        "name": "Techmaster",
+        "desc": "Ahli teknologi terkemuka Bionex.",
+        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_mental_smith.jpg",
+        "bonus": {
+          "hp": 500,
+          "atk": 100,
+          "def": 40
+        },
+        "skills": [],
+        "levelReq": 42
+      },
+      {
+        "id": "ascendant",
+        "name": "Ascendant",
+        "desc": "Master Force Bionex.",
+        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_wizard.jpg",
+        "bonus": {
+          "hp": 400,
+          "atk": 160,
+          "def": 25
+        },
+        "skills": [],
+        "levelReq": 42
+      }
+    ],
+    "tier4": [
+      {
+        "id": "imperator",
+        "name": "Imperator",
+        "desc": "Komandan tertinggi militer Bionex.",
+        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_sentinel.jpg",
+        "bonus": {
+          "hp": 1200,
+          "atk": 200,
+          "def": 100
+        },
+        "skills": [],
+        "levelReq": 55
+      },
+      {
+        "id": "predator",
+        "name": "Predator",
+        "desc": "Pembunuh bayaran senyap tak kasat mata.",
+        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_sniper.jpg",
+        "bonus": {
+          "hp": 900,
+          "atk": 250,
+          "def": 50
+        },
+        "skills": [],
+        "levelReq": 55
+      },
+      {
+        "id": "overseer",
+        "name": "Overseer",
+        "desc": "Direktur persenjataan dan mesin super.",
+        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_armor_rider.jpg",
+        "bonus": {
+          "hp": 1000,
+          "atk": 180,
+          "def": 80
+        },
+        "skills": [],
+        "levelReq": 55
+      },
+      {
+        "id": "transcendent",
+        "name": "Transcendent",
+        "desc": "Wujud murni energi Force tak terbatas.",
+        "icon": "https://wiki.rfdatabase.net/wp-content/uploads/2025/02/class_astralist.jpg",
+        "bonus": {
+          "hp": 800,
+          "atk": 300,
+          "def": 60
+        },
+        "skills": [],
+        "levelReq": 55
       }
     ]
   }

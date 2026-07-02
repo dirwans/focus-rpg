@@ -73,32 +73,36 @@ export function AcretonSprite({ job, size = 60, width, height, upperBodyOnly = f
   )
 }
 
-export function BelterraSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false }) {
-  // Map job ID to specific sprite image
-  const JOB_SPRITES = {
-    // Tier 2 specialist
-    'mechanist': belterraMechanistImg,
-    // Tier 3 warrior
-    'titan_pilot': belterraTitanPilotImg,
-    // Tier 3 ranger
-    'railgun_elite': belterraRailgunEliteImg,
-    // Tier 3 specialist
-    'war_engineer': belterraWarEngineerImg,
+export function BionexSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false }) {
+  const guardianJobs = ['guardian', 'centurion', 'protector', 'imperator'];
+  const marksmanJobs = ['marksman', 'revenant', 'deadeye', 'predator'];
+  const engineerJobs = ['engineer', 'mechanist', 'techmaster', 'overseer'];
+  const psionJobs = ['psion', 'esper', 'ascendant', 'transcendent'];
+
+  let img = null;
+  if (guardianJobs.includes(job)) {
+    if (job === 'imperator' || job === 'protector') img = belterraTitanPilotImg;
+    else img = belterraWarriorImg;
+  } else if (marksmanJobs.includes(job)) {
+    if (job === 'predator' || job === 'deadeye') img = belterraRailgunEliteImg;
+    else img = belterraRangerImg;
+  } else if (engineerJobs.includes(job)) {
+    if (job === 'overseer' || job === 'techmaster') img = belterraWarEngineerImg;
+    else if (job === 'mechanist') img = belterraMechanistImg;
+    else img = belterraPilotImg;
+  } else if (psionJobs.includes(job)) {
+    img = belterraPilotImg;
   }
 
-  let img
-  if (job && JOB_SPRITES[job]) {
-    img = JOB_SPRITES[job]
-  } else if (fill) {
-    img = belterraPortraitImg
-  } else {
-    img = belterraPilotImg
+  if (!img) {
+    if (fill) img = belterraPortraitImg;
+    else img = belterraPilotImg;
   }
 
   return (
     <TransparentSprite
       src={img}
-      alt={`Belterra ${job || 'pilot'}`}
+      alt={Bionex }
       size={size}
       width={width}
       height={height}
@@ -181,7 +185,7 @@ export function EnemySprite({ size = 60, isBoss = false, isPitBoss = false }) {
 
 export function PilotSprite({ race, job, size = 60, width, height, upperBodyOnly = false, fill = false }) {
   if (race === 'acreton') return <AcretonSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} />
-  if (race === 'belterra') return <BelterraSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} />
+  if (race === 'bionex' || race === 'belterra') return <BionexSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} />
   if (race === 'coralis') return <CoralisSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} />
   return null
 }

@@ -403,7 +403,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 1,
       "bonus": {
         "atk": 14
@@ -416,7 +416,7 @@
       "emoji": "🧥",
       "rarity": "D",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 1,
       "bonus": {
         "def": 8
@@ -429,7 +429,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 1,
       "bonus": {
         "atk": 16
@@ -442,7 +442,7 @@
       "emoji": "🧥",
       "rarity": "C",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 1,
       "bonus": {
         "def": 9
@@ -455,7 +455,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 1,
       "bonus": {
         "atk": 21
@@ -468,7 +468,7 @@
       "emoji": "🧥",
       "rarity": "B",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 1,
       "bonus": {
         "def": 12
@@ -481,7 +481,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 1,
       "bonus": {
         "atk": 28
@@ -494,7 +494,7 @@
       "emoji": "🧥",
       "rarity": "A",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 1,
       "bonus": {
         "def": 16
@@ -507,7 +507,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 1,
       "bonus": {
         "atk": 42
@@ -520,7 +520,7 @@
       "emoji": "🧥",
       "rarity": "S",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 1,
       "bonus": {
         "def": 24
@@ -533,7 +533,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 1,
       "bonus": {
         "atk": 63
@@ -546,7 +546,7 @@
       "emoji": "🧥",
       "rarity": "SS",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 1,
       "bonus": {
         "def": 36
@@ -559,7 +559,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 1,
       "bonus": {
         "atk": 98
@@ -572,7 +572,7 @@
       "emoji": "🧥",
       "rarity": "SSS",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 1,
       "bonus": {
         "def": 56
@@ -585,7 +585,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 1,
       "bonus": {
         "atk": 140
@@ -598,7 +598,7 @@
       "emoji": "🧥",
       "rarity": "SR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 1,
       "bonus": {
         "def": 80
@@ -611,7 +611,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 1,
       "bonus": {
         "atk": 210
@@ -624,7 +624,7 @@
       "emoji": "🧥",
       "rarity": "SSR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 1,
       "bonus": {
         "def": 120
@@ -637,7 +637,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 1,
       "bonus": {
         "atk": 350
@@ -650,7 +650,7 @@
       "emoji": "🧥",
       "rarity": "UR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 1,
       "bonus": {
         "def": 200
@@ -1443,7 +1443,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 10,
       "bonus": {
         "atk": 140
@@ -1456,7 +1456,7 @@
       "emoji": "🧥",
       "rarity": "D",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 10,
       "bonus": {
         "def": 80
@@ -1469,7 +1469,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 10,
       "bonus": {
         "atk": 168
@@ -1482,7 +1482,7 @@
       "emoji": "🧥",
       "rarity": "C",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 10,
       "bonus": {
         "def": 96
@@ -1495,7 +1495,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 10,
       "bonus": {
         "atk": 210
@@ -1508,7 +1508,7 @@
       "emoji": "🧥",
       "rarity": "B",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 10,
       "bonus": {
         "def": 120
@@ -1521,7 +1521,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 10,
       "bonus": {
         "atk": 280
@@ -1534,7 +1534,7 @@
       "emoji": "🧥",
       "rarity": "A",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 10,
       "bonus": {
         "def": 160
@@ -1547,7 +1547,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 10,
       "bonus": {
         "atk": 420
@@ -1560,7 +1560,7 @@
       "emoji": "🧥",
       "rarity": "S",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 10,
       "bonus": {
         "def": 240
@@ -1573,7 +1573,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 10,
       "bonus": {
         "atk": 630
@@ -1586,7 +1586,7 @@
       "emoji": "🧥",
       "rarity": "SS",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 10,
       "bonus": {
         "def": 360
@@ -1599,7 +1599,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 10,
       "bonus": {
         "atk": 980
@@ -1612,7 +1612,7 @@
       "emoji": "🧥",
       "rarity": "SSS",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 10,
       "bonus": {
         "def": 560
@@ -1625,7 +1625,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 10,
       "bonus": {
         "atk": 1400
@@ -1638,7 +1638,7 @@
       "emoji": "🧥",
       "rarity": "SR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 10,
       "bonus": {
         "def": 800
@@ -1651,7 +1651,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 10,
       "bonus": {
         "atk": 2100
@@ -1664,7 +1664,7 @@
       "emoji": "🧥",
       "rarity": "SSR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 10,
       "bonus": {
         "def": 1200
@@ -1677,7 +1677,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 10,
       "bonus": {
         "atk": 3500
@@ -1690,7 +1690,7 @@
       "emoji": "🧥",
       "rarity": "UR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 10,
       "bonus": {
         "def": 2000
@@ -2483,7 +2483,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 20,
       "bonus": {
         "atk": 280
@@ -2496,7 +2496,7 @@
       "emoji": "🧥",
       "rarity": "D",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 20,
       "bonus": {
         "def": 160
@@ -2509,7 +2509,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 20,
       "bonus": {
         "atk": 336
@@ -2522,7 +2522,7 @@
       "emoji": "🧥",
       "rarity": "C",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 20,
       "bonus": {
         "def": 192
@@ -2535,7 +2535,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 20,
       "bonus": {
         "atk": 420
@@ -2548,7 +2548,7 @@
       "emoji": "🧥",
       "rarity": "B",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 20,
       "bonus": {
         "def": 240
@@ -2561,7 +2561,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 20,
       "bonus": {
         "atk": 560
@@ -2574,7 +2574,7 @@
       "emoji": "🧥",
       "rarity": "A",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 20,
       "bonus": {
         "def": 320
@@ -2587,7 +2587,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 20,
       "bonus": {
         "atk": 840
@@ -2600,7 +2600,7 @@
       "emoji": "🧥",
       "rarity": "S",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 20,
       "bonus": {
         "def": 480
@@ -2613,7 +2613,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 20,
       "bonus": {
         "atk": 1260
@@ -2626,7 +2626,7 @@
       "emoji": "🧥",
       "rarity": "SS",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 20,
       "bonus": {
         "def": 720
@@ -2639,7 +2639,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 20,
       "bonus": {
         "atk": 1960
@@ -2652,7 +2652,7 @@
       "emoji": "🧥",
       "rarity": "SSS",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 20,
       "bonus": {
         "def": 1120
@@ -2665,7 +2665,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 20,
       "bonus": {
         "atk": 2800
@@ -2678,7 +2678,7 @@
       "emoji": "🧥",
       "rarity": "SR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 20,
       "bonus": {
         "def": 1600
@@ -2691,7 +2691,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 20,
       "bonus": {
         "atk": 4200
@@ -2704,7 +2704,7 @@
       "emoji": "🧥",
       "rarity": "SSR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 20,
       "bonus": {
         "def": 2400
@@ -2717,7 +2717,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 20,
       "bonus": {
         "atk": 7000
@@ -2730,7 +2730,7 @@
       "emoji": "🧥",
       "rarity": "UR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 20,
       "bonus": {
         "def": 4000
@@ -3523,7 +3523,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 30,
       "bonus": {
         "atk": 420
@@ -3536,7 +3536,7 @@
       "emoji": "🧥",
       "rarity": "D",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 30,
       "bonus": {
         "def": 240
@@ -3549,7 +3549,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 30,
       "bonus": {
         "atk": 504
@@ -3562,7 +3562,7 @@
       "emoji": "🧥",
       "rarity": "C",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 30,
       "bonus": {
         "def": 288
@@ -3575,7 +3575,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 30,
       "bonus": {
         "atk": 630
@@ -3588,7 +3588,7 @@
       "emoji": "🧥",
       "rarity": "B",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 30,
       "bonus": {
         "def": 360
@@ -3601,7 +3601,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 30,
       "bonus": {
         "atk": 840
@@ -3614,7 +3614,7 @@
       "emoji": "🧥",
       "rarity": "A",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 30,
       "bonus": {
         "def": 480
@@ -3627,7 +3627,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 30,
       "bonus": {
         "atk": 1260
@@ -3640,7 +3640,7 @@
       "emoji": "🧥",
       "rarity": "S",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 30,
       "bonus": {
         "def": 720
@@ -3653,7 +3653,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 30,
       "bonus": {
         "atk": 1890
@@ -3666,7 +3666,7 @@
       "emoji": "🧥",
       "rarity": "SS",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 30,
       "bonus": {
         "def": 1080
@@ -3679,7 +3679,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 30,
       "bonus": {
         "atk": 2940
@@ -3692,7 +3692,7 @@
       "emoji": "🧥",
       "rarity": "SSS",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 30,
       "bonus": {
         "def": 1680
@@ -3705,7 +3705,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 30,
       "bonus": {
         "atk": 4200
@@ -3718,7 +3718,7 @@
       "emoji": "🧥",
       "rarity": "SR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 30,
       "bonus": {
         "def": 2400
@@ -3731,7 +3731,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 30,
       "bonus": {
         "atk": 6300
@@ -3744,7 +3744,7 @@
       "emoji": "🧥",
       "rarity": "SSR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 30,
       "bonus": {
         "def": 3600
@@ -3757,7 +3757,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 30,
       "bonus": {
         "atk": 10500
@@ -3770,7 +3770,7 @@
       "emoji": "🧥",
       "rarity": "UR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 30,
       "bonus": {
         "def": 6000
@@ -4563,7 +4563,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 40,
       "bonus": {
         "atk": 560
@@ -4576,7 +4576,7 @@
       "emoji": "🧥",
       "rarity": "D",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 40,
       "bonus": {
         "def": 320
@@ -4589,7 +4589,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 40,
       "bonus": {
         "atk": 672
@@ -4602,7 +4602,7 @@
       "emoji": "🧥",
       "rarity": "C",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 40,
       "bonus": {
         "def": 384
@@ -4615,7 +4615,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 40,
       "bonus": {
         "atk": 840
@@ -4628,7 +4628,7 @@
       "emoji": "🧥",
       "rarity": "B",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 40,
       "bonus": {
         "def": 480
@@ -4641,7 +4641,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 40,
       "bonus": {
         "atk": 1120
@@ -4654,7 +4654,7 @@
       "emoji": "🧥",
       "rarity": "A",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 40,
       "bonus": {
         "def": 640
@@ -4667,7 +4667,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 40,
       "bonus": {
         "atk": 1680
@@ -4680,7 +4680,7 @@
       "emoji": "🧥",
       "rarity": "S",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 40,
       "bonus": {
         "def": 960
@@ -4693,7 +4693,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 40,
       "bonus": {
         "atk": 2520
@@ -4706,7 +4706,7 @@
       "emoji": "🧥",
       "rarity": "SS",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 40,
       "bonus": {
         "def": 1440
@@ -4719,7 +4719,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 40,
       "bonus": {
         "atk": 3920
@@ -4732,7 +4732,7 @@
       "emoji": "🧥",
       "rarity": "SSS",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 40,
       "bonus": {
         "def": 2240
@@ -4745,7 +4745,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 40,
       "bonus": {
         "atk": 5600
@@ -4758,7 +4758,7 @@
       "emoji": "🧥",
       "rarity": "SR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 40,
       "bonus": {
         "def": 3200
@@ -4771,7 +4771,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 40,
       "bonus": {
         "atk": 8400
@@ -4784,7 +4784,7 @@
       "emoji": "🧥",
       "rarity": "SSR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 40,
       "bonus": {
         "def": 4800
@@ -4797,7 +4797,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 40,
       "bonus": {
         "atk": 14000
@@ -4810,7 +4810,7 @@
       "emoji": "🧥",
       "rarity": "UR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 40,
       "bonus": {
         "def": 8000
@@ -5603,7 +5603,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 50,
       "bonus": {
         "atk": 700
@@ -5616,7 +5616,7 @@
       "emoji": "🧥",
       "rarity": "D",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 50,
       "bonus": {
         "def": 400
@@ -5629,7 +5629,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 50,
       "bonus": {
         "atk": 840
@@ -5642,7 +5642,7 @@
       "emoji": "🧥",
       "rarity": "C",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 50,
       "bonus": {
         "def": 480
@@ -5655,7 +5655,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 50,
       "bonus": {
         "atk": 1050
@@ -5668,7 +5668,7 @@
       "emoji": "🧥",
       "rarity": "B",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 50,
       "bonus": {
         "def": 600
@@ -5681,7 +5681,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 50,
       "bonus": {
         "atk": 1400
@@ -5694,7 +5694,7 @@
       "emoji": "🧥",
       "rarity": "A",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 50,
       "bonus": {
         "def": 800
@@ -5707,7 +5707,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 50,
       "bonus": {
         "atk": 2100
@@ -5720,7 +5720,7 @@
       "emoji": "🧥",
       "rarity": "S",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 50,
       "bonus": {
         "def": 1200
@@ -5733,7 +5733,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 50,
       "bonus": {
         "atk": 3150
@@ -5746,7 +5746,7 @@
       "emoji": "🧥",
       "rarity": "SS",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 50,
       "bonus": {
         "def": 1800
@@ -5759,7 +5759,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 50,
       "bonus": {
         "atk": 4900
@@ -5772,7 +5772,7 @@
       "emoji": "🧥",
       "rarity": "SSS",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 50,
       "bonus": {
         "def": 2800
@@ -5785,7 +5785,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 50,
       "bonus": {
         "atk": 7000
@@ -5798,7 +5798,7 @@
       "emoji": "🧥",
       "rarity": "SR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 50,
       "bonus": {
         "def": 4000
@@ -5811,7 +5811,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 50,
       "bonus": {
         "atk": 10500
@@ -5824,7 +5824,7 @@
       "emoji": "🧥",
       "rarity": "SSR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 50,
       "bonus": {
         "def": 6000
@@ -5837,7 +5837,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 50,
       "bonus": {
         "atk": 17500
@@ -5850,7 +5850,7 @@
       "emoji": "🧥",
       "rarity": "UR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 50,
       "bonus": {
         "def": 10000
@@ -6643,7 +6643,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 55,
       "bonus": {
         "atk": 770
@@ -6656,7 +6656,7 @@
       "emoji": "🧥",
       "rarity": "D",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 55,
       "bonus": {
         "def": 440
@@ -6669,7 +6669,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 55,
       "bonus": {
         "atk": 924
@@ -6682,7 +6682,7 @@
       "emoji": "🧥",
       "rarity": "C",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 55,
       "bonus": {
         "def": 528
@@ -6695,7 +6695,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 55,
       "bonus": {
         "atk": 1155
@@ -6708,7 +6708,7 @@
       "emoji": "🧥",
       "rarity": "B",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 55,
       "bonus": {
         "def": 660
@@ -6721,7 +6721,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 55,
       "bonus": {
         "atk": 1540
@@ -6734,7 +6734,7 @@
       "emoji": "🧥",
       "rarity": "A",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 55,
       "bonus": {
         "def": 880
@@ -6747,7 +6747,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 55,
       "bonus": {
         "atk": 2310
@@ -6760,7 +6760,7 @@
       "emoji": "🧥",
       "rarity": "S",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 55,
       "bonus": {
         "def": 1320
@@ -6773,7 +6773,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 55,
       "bonus": {
         "atk": 3465
@@ -6786,7 +6786,7 @@
       "emoji": "🧥",
       "rarity": "SS",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 55,
       "bonus": {
         "def": 1980
@@ -6799,7 +6799,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 55,
       "bonus": {
         "atk": 5390
@@ -6812,7 +6812,7 @@
       "emoji": "🧥",
       "rarity": "SSS",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 55,
       "bonus": {
         "def": 3080
@@ -6825,7 +6825,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 55,
       "bonus": {
         "atk": 7700
@@ -6838,7 +6838,7 @@
       "emoji": "🧥",
       "rarity": "SR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 55,
       "bonus": {
         "def": 4400
@@ -6851,7 +6851,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 55,
       "bonus": {
         "atk": 11550
@@ -6864,7 +6864,7 @@
       "emoji": "🧥",
       "rarity": "SSR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 55,
       "bonus": {
         "def": 6600
@@ -6877,7 +6877,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 55,
       "bonus": {
         "atk": 19250
@@ -6890,7 +6890,7 @@
       "emoji": "🧥",
       "rarity": "UR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 55,
       "bonus": {
         "def": 11000
@@ -7683,7 +7683,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 60,
       "bonus": {
         "atk": 840
@@ -7696,7 +7696,7 @@
       "emoji": "🧥",
       "rarity": "D",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 60,
       "bonus": {
         "def": 480
@@ -7709,7 +7709,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 60,
       "bonus": {
         "atk": 1008
@@ -7722,7 +7722,7 @@
       "emoji": "🧥",
       "rarity": "C",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 60,
       "bonus": {
         "def": 576
@@ -7735,7 +7735,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 60,
       "bonus": {
         "atk": 1260
@@ -7748,7 +7748,7 @@
       "emoji": "🧥",
       "rarity": "B",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 60,
       "bonus": {
         "def": 720
@@ -7761,7 +7761,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 60,
       "bonus": {
         "atk": 1680
@@ -7774,7 +7774,7 @@
       "emoji": "🧥",
       "rarity": "A",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 60,
       "bonus": {
         "def": 960
@@ -7787,7 +7787,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 60,
       "bonus": {
         "atk": 2520
@@ -7800,7 +7800,7 @@
       "emoji": "🧥",
       "rarity": "S",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 60,
       "bonus": {
         "def": 1440
@@ -7813,7 +7813,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 60,
       "bonus": {
         "atk": 3780
@@ -7826,7 +7826,7 @@
       "emoji": "🧥",
       "rarity": "SS",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 60,
       "bonus": {
         "def": 2160
@@ -7839,7 +7839,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 60,
       "bonus": {
         "atk": 5880
@@ -7852,7 +7852,7 @@
       "emoji": "🧥",
       "rarity": "SSS",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 60,
       "bonus": {
         "def": 3360
@@ -7865,7 +7865,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 60,
       "bonus": {
         "atk": 8400
@@ -7878,7 +7878,7 @@
       "emoji": "🧥",
       "rarity": "SR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 60,
       "bonus": {
         "def": 4800
@@ -7891,7 +7891,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 60,
       "bonus": {
         "atk": 12600
@@ -7904,7 +7904,7 @@
       "emoji": "🧥",
       "rarity": "SSR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 60,
       "bonus": {
         "def": 7200
@@ -7917,7 +7917,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 60,
       "bonus": {
         "atk": 21000
@@ -7930,7 +7930,7 @@
       "emoji": "🧥",
       "rarity": "UR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 60,
       "bonus": {
         "def": 12000
@@ -8723,7 +8723,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 65,
       "bonus": {
         "atk": 910
@@ -8736,7 +8736,7 @@
       "emoji": "🧥",
       "rarity": "D",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 65,
       "bonus": {
         "def": 520
@@ -8749,7 +8749,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 65,
       "bonus": {
         "atk": 1092
@@ -8762,7 +8762,7 @@
       "emoji": "🧥",
       "rarity": "C",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 65,
       "bonus": {
         "def": 624
@@ -8775,7 +8775,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 65,
       "bonus": {
         "atk": 1365
@@ -8788,7 +8788,7 @@
       "emoji": "🧥",
       "rarity": "B",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 65,
       "bonus": {
         "def": 780
@@ -8801,7 +8801,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 65,
       "bonus": {
         "atk": 1820
@@ -8814,7 +8814,7 @@
       "emoji": "🧥",
       "rarity": "A",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 65,
       "bonus": {
         "def": 1040
@@ -8827,7 +8827,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 65,
       "bonus": {
         "atk": 2730
@@ -8840,7 +8840,7 @@
       "emoji": "🧥",
       "rarity": "S",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 65,
       "bonus": {
         "def": 1560
@@ -8853,7 +8853,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 65,
       "bonus": {
         "atk": 4095
@@ -8866,7 +8866,7 @@
       "emoji": "🧥",
       "rarity": "SS",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 65,
       "bonus": {
         "def": 2340
@@ -8879,7 +8879,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 65,
       "bonus": {
         "atk": 6370
@@ -8892,7 +8892,7 @@
       "emoji": "🧥",
       "rarity": "SSS",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 65,
       "bonus": {
         "def": 3640
@@ -8905,7 +8905,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 65,
       "bonus": {
         "atk": 9100
@@ -8918,7 +8918,7 @@
       "emoji": "🧥",
       "rarity": "SR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 65,
       "bonus": {
         "def": 5200
@@ -8931,7 +8931,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 65,
       "bonus": {
         "atk": 13650
@@ -8944,7 +8944,7 @@
       "emoji": "🧥",
       "rarity": "SSR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 65,
       "bonus": {
         "def": 7800
@@ -8957,7 +8957,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 65,
       "bonus": {
         "atk": 22750
@@ -8970,7 +8970,7 @@
       "emoji": "🧥",
       "rarity": "UR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 65,
       "bonus": {
         "def": 13000
@@ -9763,7 +9763,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 70,
       "bonus": {
         "atk": 980
@@ -9776,7 +9776,7 @@
       "emoji": "🧥",
       "rarity": "D",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 70,
       "bonus": {
         "def": 560
@@ -9789,7 +9789,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 70,
       "bonus": {
         "atk": 1176
@@ -9802,7 +9802,7 @@
       "emoji": "🧥",
       "rarity": "C",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 70,
       "bonus": {
         "def": 672
@@ -9815,7 +9815,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 70,
       "bonus": {
         "atk": 1470
@@ -9828,7 +9828,7 @@
       "emoji": "🧥",
       "rarity": "B",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 70,
       "bonus": {
         "def": 840
@@ -9841,7 +9841,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 70,
       "bonus": {
         "atk": 1960
@@ -9854,7 +9854,7 @@
       "emoji": "🧥",
       "rarity": "A",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 70,
       "bonus": {
         "def": 1120
@@ -9867,7 +9867,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 70,
       "bonus": {
         "atk": 2940
@@ -9880,7 +9880,7 @@
       "emoji": "🧥",
       "rarity": "S",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 70,
       "bonus": {
         "def": 1680
@@ -9893,7 +9893,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 70,
       "bonus": {
         "atk": 4410
@@ -9906,7 +9906,7 @@
       "emoji": "🧥",
       "rarity": "SS",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 70,
       "bonus": {
         "def": 2520
@@ -9919,7 +9919,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 70,
       "bonus": {
         "atk": 6860
@@ -9932,7 +9932,7 @@
       "emoji": "🧥",
       "rarity": "SSS",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 70,
       "bonus": {
         "def": 3920
@@ -9945,7 +9945,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 70,
       "bonus": {
         "atk": 9800
@@ -9958,7 +9958,7 @@
       "emoji": "🧥",
       "rarity": "SR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 70,
       "bonus": {
         "def": 5600
@@ -9971,7 +9971,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 70,
       "bonus": {
         "atk": 14700
@@ -9984,7 +9984,7 @@
       "emoji": "🧥",
       "rarity": "SSR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 70,
       "bonus": {
         "def": 8400
@@ -9997,7 +9997,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 70,
       "bonus": {
         "atk": 24500
@@ -10010,7 +10010,7 @@
       "emoji": "🧥",
       "rarity": "UR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 70,
       "bonus": {
         "def": 14000
@@ -10803,7 +10803,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 80,
       "bonus": {
         "atk": 1120
@@ -10816,7 +10816,7 @@
       "emoji": "🧥",
       "rarity": "D",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 80,
       "bonus": {
         "def": 640
@@ -10829,7 +10829,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 80,
       "bonus": {
         "atk": 1344
@@ -10842,7 +10842,7 @@
       "emoji": "🧥",
       "rarity": "C",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 80,
       "bonus": {
         "def": 768
@@ -10855,7 +10855,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 80,
       "bonus": {
         "atk": 1680
@@ -10868,7 +10868,7 @@
       "emoji": "🧥",
       "rarity": "B",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 80,
       "bonus": {
         "def": 960
@@ -10881,7 +10881,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 80,
       "bonus": {
         "atk": 2240
@@ -10894,7 +10894,7 @@
       "emoji": "🧥",
       "rarity": "A",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 80,
       "bonus": {
         "def": 1280
@@ -10907,7 +10907,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 80,
       "bonus": {
         "atk": 3360
@@ -10920,7 +10920,7 @@
       "emoji": "🧥",
       "rarity": "S",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 80,
       "bonus": {
         "def": 1920
@@ -10933,7 +10933,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 80,
       "bonus": {
         "atk": 5040
@@ -10946,7 +10946,7 @@
       "emoji": "🧥",
       "rarity": "SS",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 80,
       "bonus": {
         "def": 2880
@@ -10959,7 +10959,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 80,
       "bonus": {
         "atk": 7840
@@ -10972,7 +10972,7 @@
       "emoji": "🧥",
       "rarity": "SSS",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 80,
       "bonus": {
         "def": 4480
@@ -10985,7 +10985,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 80,
       "bonus": {
         "atk": 11200
@@ -10998,7 +10998,7 @@
       "emoji": "🧥",
       "rarity": "SR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 80,
       "bonus": {
         "def": 6400
@@ -11011,7 +11011,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 80,
       "bonus": {
         "atk": 16800
@@ -11024,7 +11024,7 @@
       "emoji": "🧥",
       "rarity": "SSR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 80,
       "bonus": {
         "def": 9600
@@ -11037,7 +11037,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 80,
       "bonus": {
         "atk": 28000
@@ -11050,7 +11050,7 @@
       "emoji": "🧥",
       "rarity": "UR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 80,
       "bonus": {
         "def": 16000
@@ -11843,7 +11843,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 90,
       "bonus": {
         "atk": 1260
@@ -11856,7 +11856,7 @@
       "emoji": "🧥",
       "rarity": "D",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 90,
       "bonus": {
         "def": 720
@@ -11869,7 +11869,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 90,
       "bonus": {
         "atk": 1512
@@ -11882,7 +11882,7 @@
       "emoji": "🧥",
       "rarity": "C",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 90,
       "bonus": {
         "def": 864
@@ -11895,7 +11895,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 90,
       "bonus": {
         "atk": 1890
@@ -11908,7 +11908,7 @@
       "emoji": "🧥",
       "rarity": "B",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 90,
       "bonus": {
         "def": 1080
@@ -11921,7 +11921,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 90,
       "bonus": {
         "atk": 2520
@@ -11934,7 +11934,7 @@
       "emoji": "🧥",
       "rarity": "A",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 90,
       "bonus": {
         "def": 1440
@@ -11947,7 +11947,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 90,
       "bonus": {
         "atk": 3780
@@ -11960,7 +11960,7 @@
       "emoji": "🧥",
       "rarity": "S",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 90,
       "bonus": {
         "def": 2160
@@ -11973,7 +11973,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 90,
       "bonus": {
         "atk": 5670
@@ -11986,7 +11986,7 @@
       "emoji": "🧥",
       "rarity": "SS",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 90,
       "bonus": {
         "def": 3240
@@ -11999,7 +11999,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 90,
       "bonus": {
         "atk": 8820
@@ -12012,7 +12012,7 @@
       "emoji": "🧥",
       "rarity": "SSS",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 90,
       "bonus": {
         "def": 5040
@@ -12025,7 +12025,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 90,
       "bonus": {
         "atk": 12600
@@ -12038,7 +12038,7 @@
       "emoji": "🧥",
       "rarity": "SR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 90,
       "bonus": {
         "def": 7200
@@ -12051,7 +12051,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 90,
       "bonus": {
         "atk": 18900
@@ -12064,7 +12064,7 @@
       "emoji": "🧥",
       "rarity": "SSR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 90,
       "bonus": {
         "def": 10800
@@ -12077,7 +12077,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 90,
       "bonus": {
         "atk": 31500
@@ -12090,7 +12090,7 @@
       "emoji": "🧥",
       "rarity": "UR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 90,
       "bonus": {
         "def": 18000
@@ -12883,7 +12883,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 100,
       "bonus": {
         "atk": 1400
@@ -12896,7 +12896,7 @@
       "emoji": "🧥",
       "rarity": "D",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 100,
       "bonus": {
         "def": 800
@@ -12909,7 +12909,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 100,
       "bonus": {
         "atk": 1680
@@ -12922,7 +12922,7 @@
       "emoji": "🧥",
       "rarity": "C",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 100,
       "bonus": {
         "def": 960
@@ -12935,7 +12935,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 100,
       "bonus": {
         "atk": 2100
@@ -12948,7 +12948,7 @@
       "emoji": "🧥",
       "rarity": "B",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 100,
       "bonus": {
         "def": 1200
@@ -12961,7 +12961,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 100,
       "bonus": {
         "atk": 2800
@@ -12974,7 +12974,7 @@
       "emoji": "🧥",
       "rarity": "A",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 100,
       "bonus": {
         "def": 1600
@@ -12987,7 +12987,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 100,
       "bonus": {
         "atk": 4200
@@ -13000,7 +13000,7 @@
       "emoji": "🧥",
       "rarity": "S",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 100,
       "bonus": {
         "def": 2400
@@ -13013,7 +13013,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 100,
       "bonus": {
         "atk": 6300
@@ -13026,7 +13026,7 @@
       "emoji": "🧥",
       "rarity": "SS",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 100,
       "bonus": {
         "def": 3600
@@ -13039,7 +13039,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 100,
       "bonus": {
         "atk": 9800
@@ -13052,7 +13052,7 @@
       "emoji": "🧥",
       "rarity": "SSS",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 100,
       "bonus": {
         "def": 5600
@@ -13065,7 +13065,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 100,
       "bonus": {
         "atk": 14000
@@ -13078,7 +13078,7 @@
       "emoji": "🧥",
       "rarity": "SR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 100,
       "bonus": {
         "def": 8000
@@ -13091,7 +13091,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 100,
       "bonus": {
         "atk": 21000
@@ -13104,7 +13104,7 @@
       "emoji": "🧥",
       "rarity": "SSR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 100,
       "bonus": {
         "def": 12000
@@ -13117,7 +13117,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 100,
       "bonus": {
         "atk": 35000
@@ -13130,7 +13130,7 @@
       "emoji": "🧥",
       "rarity": "UR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 100,
       "bonus": {
         "def": 20000
@@ -15013,7 +15013,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_warrior",
       "level": 1,
       "bonus": {
@@ -15028,7 +15028,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_warrior",
       "level": 1,
       "bonus": {
@@ -15043,7 +15043,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_warrior",
       "level": 1,
       "bonus": {
@@ -15058,7 +15058,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_warrior",
       "level": 1,
       "bonus": {
@@ -15073,7 +15073,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_warrior",
       "level": 1,
       "bonus": {
@@ -15088,7 +15088,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_warrior",
       "level": 1,
       "bonus": {
@@ -15103,7 +15103,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_warrior",
       "level": 1,
       "bonus": {
@@ -15118,7 +15118,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_warrior",
       "level": 1,
       "bonus": {
@@ -15133,7 +15133,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_warrior",
       "level": 1,
       "bonus": {
@@ -15148,7 +15148,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_warrior",
       "level": 1,
       "bonus": {
@@ -15163,7 +15163,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_ranger",
       "level": 1,
       "bonus": {
@@ -15178,7 +15178,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_ranger",
       "level": 1,
       "bonus": {
@@ -15193,7 +15193,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_ranger",
       "level": 1,
       "bonus": {
@@ -15208,7 +15208,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_ranger",
       "level": 1,
       "bonus": {
@@ -15223,7 +15223,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_ranger",
       "level": 1,
       "bonus": {
@@ -15238,7 +15238,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_ranger",
       "level": 1,
       "bonus": {
@@ -15253,7 +15253,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_ranger",
       "level": 1,
       "bonus": {
@@ -15268,7 +15268,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_ranger",
       "level": 1,
       "bonus": {
@@ -15283,7 +15283,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_ranger",
       "level": 1,
       "bonus": {
@@ -15298,7 +15298,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_ranger",
       "level": 1,
       "bonus": {
@@ -15313,7 +15313,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_spiritualist",
       "level": 1,
       "bonus": {
@@ -15328,7 +15328,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_spiritualist",
       "level": 1,
       "bonus": {
@@ -15343,7 +15343,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_spiritualist",
       "level": 1,
       "bonus": {
@@ -15358,7 +15358,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_spiritualist",
       "level": 1,
       "bonus": {
@@ -15373,7 +15373,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_spiritualist",
       "level": 1,
       "bonus": {
@@ -15388,7 +15388,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_spiritualist",
       "level": 1,
       "bonus": {
@@ -15403,7 +15403,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_spiritualist",
       "level": 1,
       "bonus": {
@@ -15418,7 +15418,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_spiritualist",
       "level": 1,
       "bonus": {
@@ -15433,7 +15433,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_spiritualist",
       "level": 1,
       "bonus": {
@@ -15448,7 +15448,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_spiritualist",
       "level": 1,
       "bonus": {
@@ -15463,7 +15463,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_specialist",
       "level": 1,
       "bonus": {
@@ -15478,7 +15478,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_specialist",
       "level": 1,
       "bonus": {
@@ -15493,7 +15493,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_specialist",
       "level": 1,
       "bonus": {
@@ -15508,7 +15508,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_specialist",
       "level": 1,
       "bonus": {
@@ -15523,7 +15523,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_specialist",
       "level": 1,
       "bonus": {
@@ -15538,7 +15538,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_specialist",
       "level": 1,
       "bonus": {
@@ -15553,7 +15553,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_specialist",
       "level": 1,
       "bonus": {
@@ -15568,7 +15568,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_specialist",
       "level": 1,
       "bonus": {
@@ -15583,7 +15583,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_specialist",
       "level": 1,
       "bonus": {
@@ -15598,7 +15598,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "belterra_specialist",
       "level": 1,
       "bonus": {
@@ -15613,7 +15613,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "commando",
       "level": 30,
       "bonus": {
@@ -15628,7 +15628,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "commando",
       "level": 30,
       "bonus": {
@@ -15643,7 +15643,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "commando",
       "level": 30,
       "bonus": {
@@ -15658,7 +15658,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "commando",
       "level": 30,
       "bonus": {
@@ -15673,7 +15673,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "commando",
       "level": 30,
       "bonus": {
@@ -15688,7 +15688,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "commando",
       "level": 30,
       "bonus": {
@@ -15703,7 +15703,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "commando",
       "level": 30,
       "bonus": {
@@ -15718,7 +15718,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "commando",
       "level": 30,
       "bonus": {
@@ -15733,7 +15733,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "commando",
       "level": 30,
       "bonus": {
@@ -15748,7 +15748,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "commando",
       "level": 30,
       "bonus": {
@@ -15763,7 +15763,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "miller",
       "level": 30,
       "bonus": {
@@ -15778,7 +15778,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "miller",
       "level": 30,
       "bonus": {
@@ -15793,7 +15793,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "miller",
       "level": 30,
       "bonus": {
@@ -15808,7 +15808,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "miller",
       "level": 30,
       "bonus": {
@@ -15823,7 +15823,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "miller",
       "level": 30,
       "bonus": {
@@ -15838,7 +15838,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "miller",
       "level": 30,
       "bonus": {
@@ -15853,7 +15853,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "miller",
       "level": 30,
       "bonus": {
@@ -15868,7 +15868,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "miller",
       "level": 30,
       "bonus": {
@@ -15883,7 +15883,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "miller",
       "level": 30,
       "bonus": {
@@ -15898,7 +15898,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "miller",
       "level": 30,
       "bonus": {
@@ -15913,7 +15913,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "desperado",
       "level": 30,
       "bonus": {
@@ -15928,7 +15928,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "desperado",
       "level": 30,
       "bonus": {
@@ -15943,7 +15943,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "desperado",
       "level": 30,
       "bonus": {
@@ -15958,7 +15958,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "desperado",
       "level": 30,
       "bonus": {
@@ -15973,7 +15973,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "desperado",
       "level": 30,
       "bonus": {
@@ -15988,7 +15988,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "desperado",
       "level": 30,
       "bonus": {
@@ -16003,7 +16003,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "desperado",
       "level": 30,
       "bonus": {
@@ -16018,7 +16018,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "desperado",
       "level": 30,
       "bonus": {
@@ -16033,7 +16033,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "desperado",
       "level": 30,
       "bonus": {
@@ -16048,7 +16048,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "desperado",
       "level": 30,
       "bonus": {
@@ -16063,7 +16063,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "sniper",
       "level": 30,
       "bonus": {
@@ -16078,7 +16078,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "sniper",
       "level": 30,
       "bonus": {
@@ -16093,7 +16093,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "sniper",
       "level": 30,
       "bonus": {
@@ -16108,7 +16108,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "sniper",
       "level": 30,
       "bonus": {
@@ -16123,7 +16123,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "sniper",
       "level": 30,
       "bonus": {
@@ -16138,7 +16138,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "sniper",
       "level": 30,
       "bonus": {
@@ -16153,7 +16153,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "sniper",
       "level": 30,
       "bonus": {
@@ -16168,7 +16168,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "sniper",
       "level": 30,
       "bonus": {
@@ -16183,7 +16183,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "sniper",
       "level": 30,
       "bonus": {
@@ -16198,7 +16198,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "sniper",
       "level": 30,
       "bonus": {
@@ -16213,7 +16213,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "psyper",
       "level": 30,
       "bonus": {
@@ -16228,7 +16228,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "psyper",
       "level": 30,
       "bonus": {
@@ -16243,7 +16243,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "psyper",
       "level": 30,
       "bonus": {
@@ -16258,7 +16258,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "psyper",
       "level": 30,
       "bonus": {
@@ -16273,7 +16273,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "psyper",
       "level": 30,
       "bonus": {
@@ -16288,7 +16288,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "psyper",
       "level": 30,
       "bonus": {
@@ -16303,7 +16303,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "psyper",
       "level": 30,
       "bonus": {
@@ -16318,7 +16318,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "psyper",
       "level": 30,
       "bonus": {
@@ -16333,7 +16333,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "psyper",
       "level": 30,
       "bonus": {
@@ -16348,7 +16348,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "psyper",
       "level": 30,
       "bonus": {
@@ -16363,7 +16363,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "chandra",
       "level": 30,
       "bonus": {
@@ -16378,7 +16378,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "chandra",
       "level": 30,
       "bonus": {
@@ -16393,7 +16393,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "chandra",
       "level": 30,
       "bonus": {
@@ -16408,7 +16408,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "chandra",
       "level": 30,
       "bonus": {
@@ -16423,7 +16423,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "chandra",
       "level": 30,
       "bonus": {
@@ -16438,7 +16438,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "chandra",
       "level": 30,
       "bonus": {
@@ -16453,7 +16453,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "chandra",
       "level": 30,
       "bonus": {
@@ -16468,7 +16468,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "chandra",
       "level": 30,
       "bonus": {
@@ -16483,7 +16483,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "chandra",
       "level": 30,
       "bonus": {
@@ -16498,7 +16498,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "chandra",
       "level": 30,
       "bonus": {
@@ -16513,7 +16513,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "craftsman",
       "level": 30,
       "bonus": {
@@ -16528,7 +16528,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "craftsman",
       "level": 30,
       "bonus": {
@@ -16543,7 +16543,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "craftsman",
       "level": 30,
       "bonus": {
@@ -16558,7 +16558,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "craftsman",
       "level": 30,
       "bonus": {
@@ -16573,7 +16573,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "craftsman",
       "level": 30,
       "bonus": {
@@ -16588,7 +16588,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "craftsman",
       "level": 30,
       "bonus": {
@@ -16603,7 +16603,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "craftsman",
       "level": 30,
       "bonus": {
@@ -16618,7 +16618,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "craftsman",
       "level": 30,
       "bonus": {
@@ -16633,7 +16633,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "craftsman",
       "level": 30,
       "bonus": {
@@ -16648,7 +16648,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "craftsman",
       "level": 30,
       "bonus": {
@@ -16663,7 +16663,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "driver",
       "level": 30,
       "bonus": {
@@ -16678,7 +16678,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "driver",
       "level": 30,
       "bonus": {
@@ -16693,7 +16693,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "driver",
       "level": 30,
       "bonus": {
@@ -16708,7 +16708,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "driver",
       "level": 30,
       "bonus": {
@@ -16723,7 +16723,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "driver",
       "level": 30,
       "bonus": {
@@ -16738,7 +16738,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "driver",
       "level": 30,
       "bonus": {
@@ -16753,7 +16753,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "driver",
       "level": 30,
       "bonus": {
@@ -16768,7 +16768,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "driver",
       "level": 30,
       "bonus": {
@@ -16783,7 +16783,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "driver",
       "level": 30,
       "bonus": {
@@ -16798,7 +16798,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "driver",
       "level": 30,
       "bonus": {
@@ -16813,7 +16813,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "berserker",
       "level": 40,
       "bonus": {
@@ -16828,7 +16828,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "berserker",
       "level": 40,
       "bonus": {
@@ -16843,7 +16843,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "berserker",
       "level": 40,
       "bonus": {
@@ -16858,7 +16858,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "berserker",
       "level": 40,
       "bonus": {
@@ -16873,7 +16873,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "berserker",
       "level": 40,
       "bonus": {
@@ -16888,7 +16888,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "berserker",
       "level": 40,
       "bonus": {
@@ -16903,7 +16903,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "berserker",
       "level": 40,
       "bonus": {
@@ -16918,7 +16918,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "berserker",
       "level": 40,
       "bonus": {
@@ -16933,7 +16933,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "berserker",
       "level": 40,
       "bonus": {
@@ -16948,7 +16948,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "berserker",
       "level": 40,
       "bonus": {
@@ -16963,7 +16963,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "armsman",
       "level": 40,
       "bonus": {
@@ -16978,7 +16978,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "armsman",
       "level": 40,
       "bonus": {
@@ -16993,7 +16993,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "armsman",
       "level": 40,
       "bonus": {
@@ -17008,7 +17008,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "armsman",
       "level": 40,
       "bonus": {
@@ -17023,7 +17023,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "armsman",
       "level": 40,
       "bonus": {
@@ -17038,7 +17038,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "armsman",
       "level": 40,
       "bonus": {
@@ -17053,7 +17053,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "armsman",
       "level": 40,
       "bonus": {
@@ -17068,7 +17068,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "armsman",
       "level": 40,
       "bonus": {
@@ -17083,7 +17083,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "armsman",
       "level": 40,
       "bonus": {
@@ -17098,7 +17098,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "armsman",
       "level": 40,
       "bonus": {
@@ -17113,7 +17113,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "shield_miller",
       "level": 40,
       "bonus": {
@@ -17128,7 +17128,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "shield_miller",
       "level": 40,
       "bonus": {
@@ -17143,7 +17143,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "shield_miller",
       "level": 40,
       "bonus": {
@@ -17158,7 +17158,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "shield_miller",
       "level": 40,
       "bonus": {
@@ -17173,7 +17173,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "shield_miller",
       "level": 40,
       "bonus": {
@@ -17188,7 +17188,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "shield_miller",
       "level": 40,
       "bonus": {
@@ -17203,7 +17203,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "shield_miller",
       "level": 40,
       "bonus": {
@@ -17218,7 +17218,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "shield_miller",
       "level": 40,
       "bonus": {
@@ -17233,7 +17233,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "shield_miller",
       "level": 40,
       "bonus": {
@@ -17248,7 +17248,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "shield_miller",
       "level": 40,
       "bonus": {
@@ -17263,7 +17263,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "hidden_soldier",
       "level": 40,
       "bonus": {
@@ -17278,7 +17278,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "hidden_soldier",
       "level": 40,
       "bonus": {
@@ -17293,7 +17293,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "hidden_soldier",
       "level": 40,
       "bonus": {
@@ -17308,7 +17308,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "hidden_soldier",
       "level": 40,
       "bonus": {
@@ -17323,7 +17323,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "hidden_soldier",
       "level": 40,
       "bonus": {
@@ -17338,7 +17338,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "hidden_soldier",
       "level": 40,
       "bonus": {
@@ -17353,7 +17353,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "hidden_soldier",
       "level": 40,
       "bonus": {
@@ -17368,7 +17368,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "hidden_soldier",
       "level": 40,
       "bonus": {
@@ -17383,7 +17383,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "hidden_soldier",
       "level": 40,
       "bonus": {
@@ -17398,7 +17398,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "hidden_soldier",
       "level": 40,
       "bonus": {
@@ -17413,7 +17413,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "sentinel",
       "level": 40,
       "bonus": {
@@ -17428,7 +17428,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "sentinel",
       "level": 40,
       "bonus": {
@@ -17443,7 +17443,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "sentinel",
       "level": 40,
       "bonus": {
@@ -17458,7 +17458,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "sentinel",
       "level": 40,
       "bonus": {
@@ -17473,7 +17473,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "sentinel",
       "level": 40,
       "bonus": {
@@ -17488,7 +17488,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "sentinel",
       "level": 40,
       "bonus": {
@@ -17503,7 +17503,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "sentinel",
       "level": 40,
       "bonus": {
@@ -17518,7 +17518,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "sentinel",
       "level": 40,
       "bonus": {
@@ -17533,7 +17533,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "sentinel",
       "level": 40,
       "bonus": {
@@ -17548,7 +17548,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "sentinel",
       "level": 40,
       "bonus": {
@@ -17563,7 +17563,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "infiltrator",
       "level": 40,
       "bonus": {
@@ -17578,7 +17578,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "infiltrator",
       "level": 40,
       "bonus": {
@@ -17593,7 +17593,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "infiltrator",
       "level": 40,
       "bonus": {
@@ -17608,7 +17608,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "infiltrator",
       "level": 40,
       "bonus": {
@@ -17623,7 +17623,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "infiltrator",
       "level": 40,
       "bonus": {
@@ -17638,7 +17638,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "infiltrator",
       "level": 40,
       "bonus": {
@@ -17653,7 +17653,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "infiltrator",
       "level": 40,
       "bonus": {
@@ -17668,7 +17668,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "infiltrator",
       "level": 40,
       "bonus": {
@@ -17683,7 +17683,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "infiltrator",
       "level": 40,
       "bonus": {
@@ -17698,7 +17698,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "infiltrator",
       "level": 40,
       "bonus": {
@@ -17713,7 +17713,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "wizard",
       "level": 40,
       "bonus": {
@@ -17728,7 +17728,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "wizard",
       "level": 40,
       "bonus": {
@@ -17743,7 +17743,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "wizard",
       "level": 40,
       "bonus": {
@@ -17758,7 +17758,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "wizard",
       "level": 40,
       "bonus": {
@@ -17773,7 +17773,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "wizard",
       "level": 40,
       "bonus": {
@@ -17788,7 +17788,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "wizard",
       "level": 40,
       "bonus": {
@@ -17803,7 +17803,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "wizard",
       "level": 40,
       "bonus": {
@@ -17818,7 +17818,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "wizard",
       "level": 40,
       "bonus": {
@@ -17833,7 +17833,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "wizard",
       "level": 40,
       "bonus": {
@@ -17848,7 +17848,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "wizard",
       "level": 40,
       "bonus": {
@@ -17863,7 +17863,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "astralist",
       "level": 40,
       "bonus": {
@@ -17878,7 +17878,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "astralist",
       "level": 40,
       "bonus": {
@@ -17893,7 +17893,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "astralist",
       "level": 40,
       "bonus": {
@@ -17908,7 +17908,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "astralist",
       "level": 40,
       "bonus": {
@@ -17923,7 +17923,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "astralist",
       "level": 40,
       "bonus": {
@@ -17938,7 +17938,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "astralist",
       "level": 40,
       "bonus": {
@@ -17953,7 +17953,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "astralist",
       "level": 40,
       "bonus": {
@@ -17968,7 +17968,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "astralist",
       "level": 40,
       "bonus": {
@@ -17983,7 +17983,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "astralist",
       "level": 40,
       "bonus": {
@@ -17998,7 +17998,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "astralist",
       "level": 40,
       "bonus": {
@@ -18013,7 +18013,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "holy_chandra",
       "level": 40,
       "bonus": {
@@ -18028,7 +18028,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "holy_chandra",
       "level": 40,
       "bonus": {
@@ -18043,7 +18043,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "holy_chandra",
       "level": 40,
       "bonus": {
@@ -18058,7 +18058,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "holy_chandra",
       "level": 40,
       "bonus": {
@@ -18073,7 +18073,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "holy_chandra",
       "level": 40,
       "bonus": {
@@ -18088,7 +18088,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "holy_chandra",
       "level": 40,
       "bonus": {
@@ -18103,7 +18103,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "holy_chandra",
       "level": 40,
       "bonus": {
@@ -18118,7 +18118,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "holy_chandra",
       "level": 40,
       "bonus": {
@@ -18133,7 +18133,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "holy_chandra",
       "level": 40,
       "bonus": {
@@ -18148,7 +18148,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "holy_chandra",
       "level": 40,
       "bonus": {
@@ -18163,7 +18163,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "mental_smith",
       "level": 40,
       "bonus": {
@@ -18178,7 +18178,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "mental_smith",
       "level": 40,
       "bonus": {
@@ -18193,7 +18193,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "mental_smith",
       "level": 40,
       "bonus": {
@@ -18208,7 +18208,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "mental_smith",
       "level": 40,
       "bonus": {
@@ -18223,7 +18223,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "mental_smith",
       "level": 40,
       "bonus": {
@@ -18238,7 +18238,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "mental_smith",
       "level": 40,
       "bonus": {
@@ -18253,7 +18253,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "mental_smith",
       "level": 40,
       "bonus": {
@@ -18268,7 +18268,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "mental_smith",
       "level": 40,
       "bonus": {
@@ -18283,7 +18283,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "mental_smith",
       "level": 40,
       "bonus": {
@@ -18298,7 +18298,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "mental_smith",
       "level": 40,
       "bonus": {
@@ -18313,7 +18313,7 @@
       "emoji": "🔫",
       "rarity": "D",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "armor_rider",
       "level": 40,
       "bonus": {
@@ -18328,7 +18328,7 @@
       "emoji": "🔫",
       "rarity": "C",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "armor_rider",
       "level": 40,
       "bonus": {
@@ -18343,7 +18343,7 @@
       "emoji": "🔫",
       "rarity": "B",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "armor_rider",
       "level": 40,
       "bonus": {
@@ -18358,7 +18358,7 @@
       "emoji": "🔫",
       "rarity": "A",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "armor_rider",
       "level": 40,
       "bonus": {
@@ -18373,7 +18373,7 @@
       "emoji": "🔫",
       "rarity": "S",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "armor_rider",
       "level": 40,
       "bonus": {
@@ -18388,7 +18388,7 @@
       "emoji": "🔫",
       "rarity": "SS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "armor_rider",
       "level": 40,
       "bonus": {
@@ -18403,7 +18403,7 @@
       "emoji": "🔫",
       "rarity": "SSS",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "armor_rider",
       "level": 40,
       "bonus": {
@@ -18418,7 +18418,7 @@
       "emoji": "🔫",
       "rarity": "SR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "armor_rider",
       "level": 40,
       "bonus": {
@@ -18433,7 +18433,7 @@
       "emoji": "🔫",
       "rarity": "SSR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "armor_rider",
       "level": 40,
       "bonus": {
@@ -18448,7 +18448,7 @@
       "emoji": "🔫",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "job": "armor_rider",
       "level": 40,
       "bonus": {
@@ -19808,12 +19808,12 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
     },
     {
-      "id": "archon_belterra_helmet",
+      "id": "archon_bionex_helmet",
       "name": "Mahkota Solaris",
       "emoji": "👑",
       "rarity": "UR",
       "type": "helmet",
-      "race": "belterra",
+      "race": "bionex",
       "level": 55,
       "bonus": {
         "hpPercent": 15,
@@ -19822,12 +19822,12 @@
       "image": "https://img.rfdatabase.net/items/ihbwd40.png"
     },
     {
-      "id": "archon_belterra_mantle",
+      "id": "archon_bionex_mantle",
       "name": "Jubah Solaris Regalia",
       "emoji": "🧥",
       "rarity": "UR",
       "type": "mantle",
-      "race": "belterra",
+      "race": "bionex",
       "level": 55,
       "bonus": {
         "hpPercent": 10,
@@ -19836,12 +19836,12 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/09/jetpackcombination.png"
     },
     {
-      "id": "archon_belterra_armor",
+      "id": "archon_bionex_armor",
       "name": "Armor Helios Core",
       "emoji": "🛡️",
       "rarity": "UR",
       "type": "armor",
-      "race": "belterra",
+      "race": "bionex",
       "level": 55,
       "bonus": {
         "defPercent": 20,
@@ -19850,12 +19850,12 @@
       "image": "https://img.rfdatabase.net/items/iubwd40.png"
     },
     {
-      "id": "archon_belterra_gloves",
+      "id": "archon_bionex_gloves",
       "name": "Sarung Tangan Aether Drive",
       "emoji": "🧤",
       "rarity": "UR",
       "type": "gloves",
-      "race": "belterra",
+      "race": "bionex",
       "level": 55,
       "bonus": {
         "atkPercent": 15,
@@ -19864,12 +19864,12 @@
       "image": "https://img.rfdatabase.net/items/igbwd40.png"
     },
     {
-      "id": "archon_belterra_boots",
+      "id": "archon_bionex_boots",
       "name": "Sepatu Quantum Strider",
       "emoji": "🥾",
       "rarity": "UR",
       "type": "boots",
-      "race": "belterra",
+      "race": "bionex",
       "level": 55,
       "bonus": {
         "speedPercent": 20
@@ -19877,12 +19877,12 @@
       "image": "https://img.rfdatabase.net/items/isbwd40.png"
     },
     {
-      "id": "archon_belterra_weapon",
+      "id": "archon_bionex_weapon",
       "name": "Sunbreaker",
       "emoji": "⚔️",
       "rarity": "UR",
       "type": "weapon",
-      "race": "belterra",
+      "race": "bionex",
       "level": 55,
       "bonus": {
         "atkPercent": 25,

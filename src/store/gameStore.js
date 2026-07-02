@@ -498,7 +498,7 @@ export const useGameStore = create(
         let fpRegenRate = 12 // Default standard
         if (player.race === 'coralis') {
           fpRegenRate = 25 // Coralis: high magic affinity
-        } else if (player.race === 'belterra') {
+        } else if (player.race === 'bionex') {
           fpRegenRate = 15 // Bellato: hybrid
         } else if (player.race === 'acreton') {
           fpRegenRate = 5  // Accretia: android, low natural flow
@@ -553,7 +553,7 @@ export const useGameStore = create(
           const playerMaxHp = battle.playerMaxHp || get().getStats().hp
           // Trigger heal only when health is critical (below 35%)
           if (nextPlayerHp > 0 && nextPlayerHp < playerMaxHp * 0.35) {
-            const hasSkill = ['acolyte', 'eidolon_caller', 'high_summoner', 'guardian', 'lumina_paladin', 'engineer', 'mechanist', 'war_engineer', 'belterra_specialist', 'craftsman', 'mental_smith', 'chandra', 'holy_chandra'].includes(player.job)
+            const hasSkill = ['acolyte', 'eidolon_caller', 'high_summoner', 'guardian', 'lumina_paladin', 'engineer', 'mechanist', 'war_engineer', 'bionex_specialist', 'craftsman', 'mental_smith', 'chandra', 'holy_chandra'].includes(player.job)
             
             if (hasSkill) {
               if (nextPlayerFp >= 50) {
@@ -562,7 +562,7 @@ export const useGameStore = create(
                 const healAmount = Math.floor(playerMaxHp * 0.35)
                 nextPlayerHp = Math.min(playerMaxHp, nextPlayerHp + healAmount)
                 
-                const skillName = ['engineer', 'mechanist', 'war_engineer', 'belterra_specialist', 'craftsman', 'mental_smith'].includes(player.job) ? 'Repair Matrix' : 'Spiritual Heal'
+                const skillName = ['engineer', 'mechanist', 'war_engineer', 'bionex_specialist', 'craftsman', 'mental_smith'].includes(player.job) ? 'Repair Matrix' : 'Spiritual Heal'
                 if (newLog.length > 7) newLog = newLog.slice(-7)
                 newLog.push(`✨ [Skill] Pilot menggunakan ${skillName}! (+${healAmount} HP, -50 FP)`)
               } else {
@@ -984,12 +984,12 @@ export const useGameStore = create(
 
         // Set bonus verification (requires being the Archon)
         const isBelterraSet = isArchon &&
-          eq.helmet?.id === 'archon_belterra_helmet' &&
-          eq.mantle?.id === 'archon_belterra_mantle' &&
-          eq.armor?.id === 'archon_belterra_armor' &&
-          eq.gloves?.id === 'archon_belterra_gloves' &&
-          eq.boots?.id === 'archon_belterra_boots' &&
-          eq.weapon?.id === 'archon_belterra_weapon';
+          eq.helmet?.id === 'archon_bionex_helmet' &&
+          eq.mantle?.id === 'archon_bionex_mantle' &&
+          eq.armor?.id === 'archon_bionex_armor' &&
+          eq.gloves?.id === 'archon_bionex_gloves' &&
+          eq.boots?.id === 'archon_bionex_boots' &&
+          eq.weapon?.id === 'archon_bionex_weapon';
           
         const isCoralisSet = isArchon &&
           eq.helmet?.id === 'archon_coralis_helmet' &&
@@ -1007,7 +1007,7 @@ export const useGameStore = create(
           eq.boots?.id === 'archon_acreton_boots' &&
           eq.weapon?.id === 'archon_acreton_weapon';
 
-        if (isBelterraSet && player.race === 'belterra') {
+        if (isBelterraSet && player.race === 'bionex') {
           percentHp += 30
           percentDef += 20
         } else if (isCoralisSet && player.race === 'coralis') {
@@ -1044,7 +1044,7 @@ export const useGameStore = create(
         }
 
         let activeTitle = ''
-        if (isBelterraSet && player.race === 'belterra') {
+        if (isBelterraSet && player.race === 'bionex') {
           activeTitle = 'Solar Sovereign'
         } else if (isCoralisSet && player.race === 'coralis') {
           activeTitle = 'Astral Emperor'
@@ -1364,12 +1364,12 @@ export const useGameStore = create(
       craftArchonItem: (itemId) => {
         const { player } = get()
         const ARCHON_PRICES = {
-          archon_belterra_helmet: 15000,
-          archon_belterra_gloves: 15000,
-          archon_belterra_boots: 15000,
-          archon_belterra_armor: 25000,
-          archon_belterra_mantle: 25000,
-          archon_belterra_weapon: 25000,
+          archon_bionex_helmet: 15000,
+          archon_bionex_gloves: 15000,
+          archon_bionex_boots: 15000,
+          archon_bionex_armor: 25000,
+          archon_bionex_mantle: 25000,
+          archon_bionex_weapon: 25000,
 
           archon_coralis_helmet: 15000,
           archon_coralis_gloves: 15000,
@@ -1433,6 +1433,10 @@ export const useGameStore = create(
       name: 'focus-rpg-save',
       merge: (persistedState, currentState) => {
         if (!persistedState) return currentState
+        if (persistedState.player && persistedState.player.race === 'belterra') {
+          persistedState.player.race = 'bionex'
+          persistedState.player.job = null // Reset to novice
+        }
         const mergedPlayer = {
           ...currentState.player,
           ...(persistedState.player || {}),
@@ -1454,7 +1458,8 @@ export const useGameStore = create(
             ? [
                 ...jobs[mergedPlayer.race].tier1.map(j => j.id),
                 ...jobs[mergedPlayer.race].tier2.map(j => j.id),
-                ...jobs[mergedPlayer.race].tier3.map(j => j.id)
+                ...jobs[mergedPlayer.race].tier3.map(j => j.id),
+                ...(jobs[mergedPlayer.race].tier4 ? jobs[mergedPlayer.race].tier4.map(j => j.id) : [])
               ]
             : []
           if (!validJobs.includes(mergedPlayer.job)) {
