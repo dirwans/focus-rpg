@@ -499,9 +499,14 @@ export default function Main() {
 
           {/* Details side */}
           <div className="profile-details-wrap">
-            <div className="profile-details-header-badge">STATUS</div>
-            <div className="profile-details-username" style={{ fontSize: 18, marginBottom: 4 }}>{player.name.toUpperCase()}</div>
-            <div style={{ color: '#00e5ff', fontSize: 11, fontFamily: 'var(--font-title)', marginBottom: 8, fontWeight: 'bold', lineHeight: 1.4 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
+              <div className="profile-details-username" style={{ fontSize: 18, margin: 0 }}>{player.name.toUpperCase()}</div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, color: '#39ff14', fontWeight: 'bold', textShadow: '0 0 6px rgba(57, 255, 20, 0.5)' }}>
+                <div className="profile-status-led" style={{ margin: 0 }} /> ACTIVE
+              </div>
+            </div>
+            
+            <div style={{ color: '#00e5ff', fontSize: 11, fontFamily: 'var(--font-title)', marginBottom: 12, fontWeight: 'bold', lineHeight: 1.4 }}>
               FACTION: <span style={{ color: '#fff' }}>{race ? race.name.toUpperCase() : 'UNKNOWN'}</span>
               <br/>
               CLASS: <span style={{ color: '#fff' }}>{baseClass}</span>
@@ -510,10 +515,6 @@ export default function Main() {
             </div>
             
             <div className="profile-status-panel">
-              <div className="profile-status-online-row">
-                <div className="profile-status-led" />
-                STATUS: <span className="profile-status-online-val" style={{ fontWeight: 'bold', color: '#39ff14', textShadow: '0 0 6px rgba(57, 255, 20, 0.5)' }}>ACTIVE</span>
-              </div>
 
               {/* Dynamic Experience bar */}
               <div className="profile-status-bar">
