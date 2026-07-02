@@ -236,9 +236,9 @@
         "name": "Destroyer",
         "desc": "Frontline heavy melee unit.",
         "bonus": {
-          "hp": 210,
-          "atk": 27,
-          "def": 22
+          "hp": 220,
+          "atk": 28,
+          "def": 24
         },
         "skills": [
           {
@@ -257,9 +257,9 @@
         "name": "Gunner",
         "desc": "Heavy weapons ranged specialist.",
         "bonus": {
-          "hp": 175,
-          "atk": 33,
-          "def": 15
+          "hp": 180,
+          "atk": 32,
+          "def": 16
         },
         "skills": [
           "Flash-Bang",
@@ -272,8 +272,8 @@
         "name": "Engineer",
         "desc": "Tactical defense structure builder.",
         "bonus": {
-          "hp": 180,
-          "atk": 25,
+          "hp": 170,
+          "atk": 24,
           "def": 18
         },
         "skills": [
