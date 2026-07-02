@@ -306,9 +306,9 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                   const raceAccent = player.race === 'acreton' ? 'rgba(255,61,0,0.18)' : player.race === 'bionex' ? 'rgba(255,214,0,0.18)' : 'rgba(0,229,255,0.18)'
                   const tabHeroJob = activeLane ? (() => {
                     const t1Idx = activeLane.indices[0]?.[0]
-                    if (t1Idx !== undefined && jobs[player.race]?.tier1[t1Idx]) return jobs[player.race].tier1[t1Idx]
+                    if (t1Idx !== undefined && jobs[player.race]?.tier1[t1Idx]) return { tier: 1, job: jobs[player.race].tier1[t1Idx] }
                     const t2Idx = activeLane.indices[1]?.[0]
-                    if (t2Idx !== undefined && jobs[player.race]?.tier2[t2Idx]) return jobs[player.race].tier2[t2Idx]
+                    if (t2Idx !== undefined && jobs[player.race]?.tier2[t2Idx]) return { tier: 2, job: jobs[player.race].tier2[t2Idx] }
                     return null
                   })() : null
 
@@ -316,9 +316,10 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                     <div className="class-tree-col" style={{ ...styles.treeCol, width: '100%' }}>
                       {/* Hero Sprite & Tier 1 Card Area */}
                       {(bionexHeroSprite || tabHeroJob) && (() => {
-                        const j = tabHeroJob;
+                        if (!tabHeroJob) return null;
+                        const j = tabHeroJob.job;
                         if (!j) return null;
-                        const jTier = 1;
+                        const jTier = tabHeroJob.tier;
                         
                         const isActive = player.job === j.id;
                         const isUnlocked = tier >= jTier;
@@ -369,7 +370,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                                 />
                               ) : (
                                 <div style={{ position: 'relative', zIndex: 1, height: 175, display: 'flex', alignItems: 'flex-end' }}>
-                                  <PilotSprite race={player.race} job={tabHeroJob.id} size={175} />
+                                  <PilotSprite race={player.race} job={j.id} size={175} />
                                 </div>
                               )}
                             </div>
@@ -393,20 +394,53 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                               <div style={styles.cardJobDesc}>{j.desc}</div>
                               <div style={{ ...styles.cardJobBonus, display: 'flex', flexWrap: 'wrap', gap: 12, fontSize: 14 }}>
                                 {(() => {
-                                  if (player.race === 'bionex' && jTier === 1) {
-                                    let bHp = 0, bAtk = 0, bDef = 0;
-                                    const laneT = activeLane.title.toLowerCase();
-                                    if (laneT.includes('guardian')) { bHp = 210; bAtk = 27; bDef = 22; }
-                                    else if (laneT.includes('marksman')) { bHp = 175; bAtk = 33; bDef = 15; }
-                                    else if (laneT.includes('engineer')) { bHp = 175; bAtk = 25; bDef = 17; }
-                                    else if (laneT.includes('psion')) { bHp = 165; bAtk = 31; bDef = 14; }
-                                    return (
-                                      <>
-                                        <span><span style={{color: '#ff4444'}}>HP</span> {bHp}</span>
-                                        <span><span style={{color: '#ffaa00'}}>ATK</span> {bAtk}</span>
-                                        <span><span style={{color: '#00ccff'}}>DEF</span> {bDef}</span>
-                                      </>
-                                    );
+                                  // Base stats for the first job in the lane (either T1 or T2)
+                                  if (jTier === tabHeroJob?.tier) {
+                                    if (player.race === 'bionex') {
+                                      let bHp = 0, bAtk = 0, bDef = 0;
+                                      const laneT = activeLane.title.toLowerCase();
+                                      if (laneT.includes('guardian')) { bHp = 210; bAtk = 27; bDef = 22; }
+                                      else if (laneT.includes('marksman')) { bHp = 175; bAtk = 33; bDef = 15; }
+                                      else if (laneT.includes('engineer')) { bHp = 175; bAtk = 25; bDef = 17; }
+                                      else if (laneT.includes('psion')) { bHp = 165; bAtk = 31; bDef = 14; }
+                                      return (
+                                        <>
+                                          <span><span style={{color: '#ff4444'}}>HP</span> {bHp}</span>
+                                          <span><span style={{color: '#ffaa00'}}>ATK</span> {bAtk}</span>
+                                          <span><span style={{color: '#00ccff'}}>DEF</span> {bDef}</span>
+                                        </>
+                                      );
+                                    } else if (player.race === 'coralis') {
+                                      let str = 0, dex = 0, int = 0, vit = 0;
+                                      if (j.id === 'guardian' || j.id === 'spirit_knight') { str = 12; dex = 8; int = 4; vit = 6; }
+                                      else if (j.id === 'mystic_archer') { str = 6; dex = 14; int = 6; vit = 4; }
+                                      else if (j.id === 'caster') { str = 2; dex = 6; int = 16; vit = 6; }
+                                      if (str || dex || int || vit) {
+                                        return (
+                                          <>
+                                            <span><span style={{color: '#ff4444'}}>STR</span> {str}</span>
+                                            <span><span style={{color: '#00e5ff'}}>DEX</span> {dex}</span>
+                                            <span><span style={{color: '#bb88ff'}}>INT</span> {int}</span>
+                                            <span><span style={{color: '#4caf50'}}>VIT</span> {vit}</span>
+                                          </>
+                                        );
+                                      }
+                                    } else if (player.race === 'acreton') {
+                                      let str = 0, dex = 0, int = 0, vit = 0;
+                                      if (j.id === 'cadet' || j.id === 'iron_trooper') { str = 14; dex = 6; int = 2; vit = 8; }
+                                      else if (j.id === 'gunner' || j.id === 'siege_gunner') { str = 8; dex = 14; int = 2; vit = 6; }
+                                      else if (j.id === 'striker') { str = 10; dex = 10; int = 2; vit = 8; }
+                                      if (str || dex || int || vit) {
+                                        return (
+                                          <>
+                                            <span><span style={{color: '#ff4444'}}>STR</span> {str}</span>
+                                            <span><span style={{color: '#00e5ff'}}>DEX</span> {dex}</span>
+                                            <span><span style={{color: '#bb88ff'}}>INT</span> {int}</span>
+                                            <span><span style={{color: '#4caf50'}}>VIT</span> {vit}</span>
+                                          </>
+                                        );
+                                      }
+                                    }
                                   }
                                   return (
                                     <>
@@ -458,7 +492,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                           </div>
                         );
                       })()}
-                      {tierJobs.filter(tInfo => tInfo.tier > 1).map((tInfo, idx) => {
+                      {tierJobs.filter(tInfo => tabHeroJob ? tInfo.tier > tabHeroJob.tier : tInfo.tier > 1).map((tInfo, idx) => {
                         const jArray = tInfo.jobs
                         const jTier = tInfo.tier
                         
