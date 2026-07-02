@@ -200,7 +200,8 @@ const initialPlayer = {
     dungeonClear: 0,
     coreWarVictory: 0,
     highestEnhancement: 0
-  }
+  },
+  guild: null // { name: string, level: number, role: string, members: number }
 }
 
 const initialTimer = {
@@ -1135,6 +1136,19 @@ export const useGameStore = create(
           }
         }
 
+        // Guild Role Buffs
+        if (player.guild) {
+          if (player.guild.role === 'Guildmaster') {
+            hp += baseHp * 0.03
+            atk += baseAtk * 0.03
+            def += baseDef * 0.03
+          } else if (player.guild.role === 'Vice Guildmaster') {
+            hp += baseHp * 0.02
+            atk += baseAtk * 0.02
+            def += baseDef * 0.02
+          }
+        }
+
         let activeTitle = ''
         if (isBelterraSet && player.race === 'bionex') {
           activeTitle = 'Solar Sovereign'
@@ -1368,6 +1382,57 @@ export const useGameStore = create(
             savedAt: Date.now()
           }
         })
+      },
+
+      createGuild: (name) => {
+        const { player } = get()
+        if (player.level < 30) return false
+        if (player.resources.credits < 10000000) return false
+        if (player.guild) return false
+
+        set({
+          player: {
+            ...player,
+            resources: { ...player.resources, credits: player.resources.credits - 10000000 },
+            guild: { name, level: 1, role: 'Guildmaster', members: 1 },
+            savedAt: Date.now()
+          }
+        })
+        return true
+      },
+
+      upgradeGuild: () => {
+        const { player } = get()
+        if (!player.guild || player.guild.role !== 'Guildmaster') return false
+        
+        const upgradeCosts = [
+          0, // lv 1
+          10000000, // to lv 2
+          20000000, // to lv 3
+          40000000, // to lv 4
+          80000000, // to lv 5
+          150000000, // to lv 6
+          300000000, // to lv 7
+          500000000, // to lv 8
+          750000000, // to lv 9
+          1000000000, // to lv 10
+        ]
+
+        const currentLv = player.guild.level
+        if (currentLv >= 10) return false
+        
+        const cost = upgradeCosts[currentLv]
+        if (player.resources.credits < cost) return false
+
+        set({
+          player: {
+            ...player,
+            resources: { ...player.resources, credits: player.resources.credits - cost },
+            guild: { ...player.guild, level: currentLv + 1 },
+            savedAt: Date.now()
+          }
+        })
+        return true
       },
 
       combineWeapon: (sacrificeUid) => {

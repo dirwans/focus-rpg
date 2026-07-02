@@ -11,6 +11,7 @@ import SettingsModal from '../components/SettingsModal'
 import NpcModal from '../components/NpcModal'
 import LibraryModal from '../components/LibraryModal'
 import SocialModal from '../components/SocialModal'
+import GuildPanel from '../components/GuildPanel'
 
 function fmt(s) {
   const m = Math.floor(s / 60).toString().padStart(2, '0')
@@ -553,6 +554,9 @@ export default function Main() {
       </div>
 
 
+
+      {/* Guild Panel */}
+      <GuildPanel />
 
       {/* Combat stats */}
       <div className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.combatStats}>
