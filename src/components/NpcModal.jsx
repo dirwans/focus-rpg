@@ -28,8 +28,8 @@ const CLASS_LANES = {
   ],
   acreton: [
     { title: "Warrior Path", indices: [[0], [0], [0], [0]] },
-    { title: "Gunner Path", indices: [[1], [1], [1], [1]] },
-    { title: "Engineer Path", indices: [[2], [2], [2], [2]] }
+    { title: "Ranger Path", indices: [[1], [1], [1], [1]] },
+    { title: "Technician Path", indices: [[2], [2], [2], [2]] }
   ]
 }
 
@@ -428,8 +428,8 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                                       let bHp = 0, bAtk = 0, bDef = 0;
                                       const laneT = activeLane.title.toLowerCase();
                                       if (laneT.includes('warrior')) { bHp = 210; bAtk = 27; bDef = 22; }
-                                      else if (laneT.includes('gunner')) { bHp = 175; bAtk = 33; bDef = 15; }
-                                      else if (laneT.includes('engineer')) { bHp = 180; bAtk = 25; bDef = 18; }
+                                      else if (laneT.includes('ranger')) { bHp = 175; bAtk = 33; bDef = 15; }
+                                      else if (laneT.includes('technician')) { bHp = 180; bAtk = 25; bDef = 18; }
                                       return (
                                         <>
                                           <span><span style={{color: '#ff4444'}}>HP</span> {bHp}</span>

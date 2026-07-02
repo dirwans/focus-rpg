@@ -279,14 +279,14 @@
     ],
     "tier2": [
       {
-        "id": "assaulter",
-        "name": "Assaulter",
+        "id": "vanguard",
+        "name": "Vanguard",
         "levelReq": 32,
-        "desc": "Close-range devastation specialist.",
+        "desc": "Elite frontline assault warrior.",
         "bonus": {
-          "hp": 350,
-          "atk": 50,
-          "def": 35
+          "hp": 35,
+          "atk": 6,
+          "def": 5
         },
         "skills": [
           "Frenzy",
@@ -294,14 +294,14 @@
         ]
       },
       {
-        "id": "striker",
-        "name": "Striker",
+        "id": "marksman",
+        "name": "Marksman",
         "levelReq": 32,
-        "desc": "Rocket and launcher siege unit.",
+        "desc": "Precision long-range shooter.",
         "bonus": {
-          "hp": 280,
-          "atk": 60,
-          "def": 25
+          "hp": 20,
+          "atk": 8,
+          "def": 3
         },
         "skills": [
           "Siege Mode",
@@ -309,14 +309,14 @@
         ]
       },
       {
-        "id": "scientist",
-        "name": "Scientist",
+        "id": "architect",
+        "name": "Architect",
         "levelReq": 32,
-        "desc": "Nanotech battlefield support unit.",
+        "desc": "Advanced battlefield structure engineer.",
         "bonus": {
-          "hp": 250,
-          "atk": 45,
-          "def": 28
+          "hp": 15,
+          "atk": 5,
+          "def": 4
         },
         "skills": [
           "Gauge Recovery",
@@ -326,14 +326,14 @@
     ],
     "tier3": [
       {
-        "id": "mercenary",
-        "name": "Mercenary",
+        "id": "juggernaut",
+        "name": "Juggernaut",
         "levelReq": 42,
-        "desc": "Unyielding main defense fortress.",
+        "desc": "Unstoppable armored siege warrior.",
         "bonus": {
-          "hp": 700,
-          "atk": 110,
-          "def": 80
+          "hp": 50,
+          "atk": 8,
+          "def": 8
         },
         "skills": [
           "Excel Charger",
@@ -341,14 +341,14 @@
         ]
       },
       {
-        "id": "omega_striker",
-        "name": "Omega Striker",
+        "id": "railgunner",
+        "name": "Railgunner",
         "levelReq": 42,
-        "desc": "Supreme heavy artillery bombardier.",
+        "desc": "Heavy artillery bombardment unit.",
         "bonus": {
-          "hp": 550,
-          "atk": 130,
-          "def": 55
+          "hp": 25,
+          "atk": 10,
+          "def": 3
         },
         "skills": [
           "Doom Blast",
@@ -356,14 +356,14 @@
         ]
       },
       {
-        "id": "battle_leader",
-        "name": "Battle Leader",
+        "id": "core_engineer",
+        "name": "Core Engineer",
         "levelReq": 42,
-        "desc": "Tactical battlefield rhythm commander.",
+        "desc": "Core systems warfare specialist.",
         "bonus": {
-          "hp": 500,
-          "atk": 100,
-          "def": 65
+          "hp": 20,
+          "atk": 6,
+          "def": 5
         },
         "skills": [
           "Nimble Joint",
@@ -373,42 +373,42 @@
     ],
     "tier4": [
       {
-        "id": "warmonger",
-        "name": "Warmonger",
+        "id": "dreadnought",
+        "name": "Dreadnought",
         "levelReq": 55,
         "desc": "Supreme warmachine overlord.",
         "bonus": {
-          "hp": 1400,
-          "atk": 250,
-          "def": 180
+          "hp": 70,
+          "atk": 10,
+          "def": 10
         },
         "skills": [
           "Annihilation Strike"
         ]
       },
       {
-        "id": "siege_lord",
-        "name": "Siege Lord",
+        "id": "annihilator",
+        "name": "Annihilator",
         "levelReq": 55,
-        "desc": "Ultimate artillery devastation master.",
+        "desc": "Ultimate ranged devastation master.",
         "bonus": {
-          "hp": 1100,
-          "atk": 290,
-          "def": 140
+          "hp": 35,
+          "atk": 12,
+          "def": 4
         },
         "skills": [
           "Orbital Barrage"
         ]
       },
       {
-        "id": "grand_engineer",
-        "name": "Grand Engineer",
+        "id": "cybermancer",
+        "name": "Cybermancer",
         "levelReq": 55,
         "desc": "Apex nanotech warfare architect.",
         "bonus": {
-          "hp": 1000,
-          "atk": 220,
-          "def": 160
+          "hp": 25,
+          "atk": 8,
+          "def": 6
         },
         "skills": [
           "Titan Assembly"

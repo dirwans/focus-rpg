@@ -28,14 +28,14 @@ function getJobLane(jobId) {
     'recruit', 'vanguard', 'titan_pilot',
     'guardian', 'spirit_knight', 'lumina_paladin',
     'sentinel', 'warden', 'knight', 'blademaster',
-    'destroyer', 'assaulter', 'mercenary', 'warmonger'
+    'destroyer', 'vanguard', 'juggernaut', 'dreadnought'
   ]
   const rangerJobs = [
     'gunner', 'siege_gunner', 'nova_destroyer',
     'ranger', 'sharpshooter', 'railgun_elite',
     'mystic_archer', 'moon_ranger', 'star_seeker',
     'pathfinder', 'windrunner', 'shadow_hunter', 'stargazer',
-    'striker', 'omega_striker', 'siege_lord'
+    'marksman', 'railgunner', 'annihilator'
   ]
   const mysticJobs = [
     'caster',
