@@ -383,7 +383,8 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                               background: isActive ? '#0d1d3d' : '#060d1f',
                               display: 'flex',
                               flexDirection: 'column',
-                              justifyContent: 'center'
+                              justifyContent: 'center',
+                              position: 'relative'
                             }}>
                               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                 <span style={styles.cardJobName}>{j.name}</span>
@@ -391,9 +392,31 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                               </div>
                               <div style={styles.cardJobDesc}>{j.desc}</div>
                               <div style={{ ...styles.cardJobBonus, display: 'flex', flexWrap: 'wrap', gap: 12 }}>
-                                <span><span style={{color: '#ff4444'}}>HP</span> +{j.bonus.hp}</span>
-                                <span><span style={{color: '#ffaa00'}}>ATK</span> +{j.bonus.atk}</span>
-                                <span><span style={{color: '#00ccff'}}>DEF</span> +{j.bonus.def}</span>
+                                {(() => {
+                                  if (player.race === 'bionex' && jTier === 1) {
+                                    let bHp = 0, bAtk = 0, bDef = 0;
+                                    const laneT = activeLane.title.toLowerCase();
+                                    if (laneT.includes('guardian')) { bHp = 210; bAtk = 27; bDef = 22; }
+                                    else if (laneT.includes('marksman')) { bHp = 175; bAtk = 33; bDef = 15; }
+                                    else if (laneT.includes('engineer')) { bHp = 175; bAtk = 25; bDef = 17; }
+                                    else if (laneT.includes('psion')) { bHp = 165; bAtk = 31; bDef = 14; }
+                                    return (
+                                      <>
+                                        <div style={{ position: 'absolute', top: 12, right: 12, fontSize: 10, color: 'rgba(0,229,255,0.7)', border: '1px solid rgba(0,229,255,0.3)', padding: '2px 6px', borderRadius: 4, letterSpacing: 1 }}>BASE STATS</div>
+                                        <span><span style={{color: '#ff4444'}}>HP</span> {bHp}</span>
+                                        <span><span style={{color: '#ffaa00'}}>ATK</span> {bAtk}</span>
+                                        <span><span style={{color: '#00ccff'}}>DEF</span> {bDef}</span>
+                                      </>
+                                    );
+                                  }
+                                  return (
+                                    <>
+                                      <span><span style={{color: '#ff4444'}}>HP</span> +{j.bonus.hp}</span>
+                                      <span><span style={{color: '#ffaa00'}}>ATK</span> +{j.bonus.atk}</span>
+                                      <span><span style={{color: '#00ccff'}}>DEF</span> +{j.bonus.def}</span>
+                                    </>
+                                  );
+                                })()}
                               </div>
                               {j.skills && j.skills.length > 0 && (
                                 <div style={styles.cardJobSkills}>
