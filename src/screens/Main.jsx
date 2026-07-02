@@ -417,16 +417,15 @@ export default function Main() {
       </div>
 
 
-      {/* Grind Zone location header docked above the profile card */}
+      {/* Grind Zone location header standalone */}
       <div style={{
         display: 'flex',
-        justifyContent: 'space-between',
-        margin: '0 16px -6px 16px',
-        padding: '6px 12px 8px 12px',
+        justifyContent: 'center',
+        margin: '0 16px 12px 16px',
+        padding: '6px 12px',
         background: 'rgba(4, 9, 21, 0.8)',
         border: '1.5px solid var(--border-neon)',
-        borderBottom: 'none',
-        borderRadius: '8px 8px 0 0',
+        borderRadius: '8px',
         fontFamily: 'var(--font-title)',
         fontSize: 13,
         fontWeight: 800,
@@ -445,9 +444,6 @@ export default function Main() {
             </svg>
             <span>{t('location_lbl')}:</span>
           <span style={{ color: 'var(--neon-glow)', textShadow: '0 0 6px var(--neon-glow)' }}>{enemy.name.toUpperCase()}</span>
-        </div>
-        <div>
-          {t('sector_lbl')}: <span style={{ color: '#fff' }}>S-{player.sector}</span>
         </div>
       </div>
 
