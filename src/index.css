@@ -709,18 +709,19 @@ body {
     0 0 50px rgba(var(--card-accent-rgb), 0.08);
 }
 
-/* === INNER CONTENT BOX === */
+/* === INNER CONTENT BOX — Real 3D Glass Look === */
 .profile-id-card-inner {
   position: relative;
   z-index: 2;
-  background: linear-gradient(160deg, rgba(4, 10, 28, 0.97) 0%, rgba(6, 14, 36, 0.97) 100%);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1.5px solid rgba(var(--card-accent-rgb), 0.85);
+  background: linear-gradient(135deg, rgba(4, 10, 28, 0.45) 0%, rgba(6, 14, 36, 0.55) 100%);
+  backdrop-filter: blur(12px) saturate(130%);
+  -webkit-backdrop-filter: blur(12px) saturate(130%);
+  border: 2px solid rgba(var(--card-accent-rgb), 0.95);
   box-shadow:
-    0 0 15px rgba(var(--card-accent-rgb), 0.35),
-    inset 0 0 25px rgba(var(--card-accent-rgb), 0.03),
-    inset 0 1px 0 rgba(255,255,255,0.08);
+    0 10px 30px -10px rgba(0, 0, 0, 0.7),
+    0 0 20px rgba(var(--card-accent-rgb), 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 0 15px rgba(var(--card-accent-rgb), 0.1);
   padding: 18px 14px 14px;
   overflow: visible;
 }
@@ -954,16 +955,16 @@ body {
 .profile-data-rows {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
   width: 100%;
   margin-bottom: 6px;
 }
 .profile-data-row {
   display: flex;
   align-items: baseline;
-  gap: 5px;
+  gap: 6px;
   font-family: var(--font-title);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.4;
 }
 .profile-data-key {
@@ -972,12 +973,13 @@ body {
   letter-spacing: 1px;
   white-space: nowrap;
   flex-shrink: 0;
+  font-size: 12px;
 }
 .profile-data-key::after { content: ':'; }
 .profile-data-val {
   color: #ffffff;
   font-weight: 700;
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.5px;
   line-height: 1.3;
 }
@@ -990,9 +992,9 @@ body {
 .profile-active-status {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
   font-family: var(--font-title);
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 800;
   color: #4ade80;
   letter-spacing: 2px;
@@ -1020,20 +1022,20 @@ body {
 .profile-id-block-new {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 2px;
   width: 100%;
 }
 .profile-id-lbl {
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 12px;
   color: var(--card-accent, #00e5ff);
   letter-spacing: 3px;
   text-transform: uppercase;
-  opacity: 0.85;
+  opacity: 0.95;
 }
 .profile-id-num {
   font-family: var(--font-title);
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 900;
   color: #ffffff;
   letter-spacing: 4px;

@@ -481,8 +481,7 @@ export default function Main() {
         <div className="id-edge-notch right-top" />
         <div className="id-edge-notch right-bot" />
 
-        {/* STATUS badge centered at top */}
-        <div className="id-status-badge">STATUS</div>
+
 
         {/* Inner content box with own border */}
         <div className="profile-id-card-inner">
