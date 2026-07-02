@@ -79,16 +79,28 @@ export default function Main() {
   const isDone    = timer.state === 'completed'
 
   const getJobInfo = (raceId, jobId) => {
-    if (!raceId || !jobId || !jobs[raceId]) return { tier: 0, job: null }
+    if (!raceId || !jobId || !jobs[raceId]) return { tier: 0, job: null, classIndex: -1 }
     const rJobs = jobs[raceId]
-    if (rJobs.tier1.some(j => j.id === jobId)) return { tier: 1, job: rJobs.tier1.find(j => j.id === jobId) }
-    if (rJobs.tier2.some(j => j.id === jobId)) return { tier: 2, job: rJobs.tier2.find(j => j.id === jobId) }
-    if (rJobs.tier3.some(j => j.id === jobId)) return { tier: 3, job: rJobs.tier3.find(j => j.id === jobId) }
-    return { tier: 0, job: null }
+    const tiers = ['tier1', 'tier2', 'tier3', 'tier4']
+    for (const t of tiers) {
+      if (!rJobs[t]) continue
+      const idx = rJobs[t].findIndex(j => j.id === jobId)
+      if (idx !== -1) return { tier: parseInt(t.replace('tier', '')), job: rJobs[t][idx], classIndex: idx }
+    }
+    return { tier: 0, job: null, classIndex: -1 }
   }
 
-  const { tier, job: jobInfo } = getJobInfo(player.race, player.job)
-  const baseClass = jobInfo ? jobInfo.desc.split(' ').pop().toUpperCase() : 'NOVICE'
+  // CLASS names by faction (mapped by job index position in tier arrays)
+  const CLASS_NAMES = {
+    celestra: ['Warrior', 'Ranger', 'Summoner', 'Mage'],
+    arctron:  ['Warrior', 'Ranger', 'Specialist'],
+    bionex:   ['Warrior', 'Ranger', 'Specialist', 'Mage']
+  }
+
+  const { tier, job: jobInfo, classIndex } = getJobInfo(player.race, player.job)
+  const baseClass = (classIndex >= 0 && player.race && CLASS_NAMES[player.race])
+    ? CLASS_NAMES[player.race][classIndex]?.toUpperCase() || 'NOVICE'
+    : 'NOVICE'
 
   const eligibleForPromo = player.race && (
     (tier === 0 && player.level >= 1) ||
@@ -463,9 +475,17 @@ export default function Main() {
         <div className="id-tab top" />
         <div className="id-tab bottom" />
 
+        {/* Side notch decorations */}
+        <div className="id-edge-notch left-top" />
+        <div className="id-edge-notch left-bot" />
+        <div className="id-edge-notch right-top" />
+        <div className="id-edge-notch right-bot" />
+
         {/* STATUS badge centered at top */}
         <div className="id-status-badge">STATUS</div>
 
+        {/* Inner content box with own border */}
+        <div className="profile-id-card-inner">
         <div className="profile-id-body">
           {/* Avatar side */}
           <div className="profile-avatar-glow-wrap">
@@ -562,6 +582,7 @@ export default function Main() {
               </button>
             )}
           </div>
+        </div>
         </div>
       </div>
 
