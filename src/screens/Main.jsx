@@ -17,6 +17,37 @@ function fmt(s) {
   return `${m}:${sec}`
 }
 
+// Bellterra class lane mapping (matches NpcModal)
+const BELTERRA_LANE_INDICES = [
+  { key: 'warrior',      t1: [0], t2: [0, 1], t3: [0, 1, 2] },
+  { key: 'ranger',       t1: [1], t2: [2, 3], t3: [3, 4, 5] },
+  { key: 'spiritualist', t1: [2], t2: [4, 5], t3: [6, 7, 8] },
+  { key: 'specialist',   t1: [3], t2: [6, 7], t3: [9, 10]   },
+]
+const BELTERRA_SPRITES = {
+  warrior:      '/ref/Bellterra/Class-sprites-cleaned/Bellterra-warrior-cleaned.png',
+  ranger:       '/ref/Bellterra/Class-sprites-cleaned/Bellterra-ranger-cleaned.png',
+  spiritualist: '/ref/Bellterra/Class-sprites-cleaned/Bellterra-Spiritualist-cleaned.png',
+  specialist:   '/ref/Bellterra/Class-sprites-cleaned/Bellterra-specialist-cleaned.png',
+}
+
+function getBelterraJobSprite(jobId) {
+  if (!jobId || !jobs.belterra) return null
+  const tiers = ['tier1', 'tier2', 'tier3']
+  const tierKeys = ['t1', 't2', 't3']
+  for (const lane of BELTERRA_LANE_INDICES) {
+    for (let ti = 0; ti < tiers.length; ti++) {
+      const indices = lane[tierKeys[ti]]
+      for (const idx of indices) {
+        if (jobs.belterra[tiers[ti]]?.[idx]?.id === jobId) {
+          return BELTERRA_SPRITES[lane.key]
+        }
+      }
+    }
+  }
+  return null
+}
+
 export default function Main() {
   const player   = useGameStore((s) => s.player)
   const timer    = useGameStore((s) => s.timer)
@@ -269,7 +300,26 @@ export default function Main() {
                 position: 'relative',
                 flexShrink: 0
               }}>
-                <PilotSprite race={player.race} job={player.job} size={160} />
+              {(() => {
+                const belterraSprite = player.race === 'belterra' ? getBelterraJobSprite(player.job) : null
+                if (belterraSprite) {
+                  return (
+                    <img
+                      src={belterraSprite}
+                      alt={player.job}
+                      style={{
+                        height: 160,
+                        width: 160,
+                        objectFit: 'contain',
+                        objectPosition: 'center bottom',
+                        display: 'block',
+                        filter: 'brightness(1.15) contrast(1.05)',
+                      }}
+                    />
+                  )
+                }
+                return <PilotSprite race={player.race} job={player.job} size={160} />
+              })()}
               </div>
               <div style={styles.spriteLabel}>{t('pilot_label')}</div>
             </div>
