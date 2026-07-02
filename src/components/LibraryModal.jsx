@@ -203,15 +203,15 @@ export default function LibraryModal({ onClose }) {
 
 const styles = {
   overlay: {
-    position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.85)',
-    display: 'flex', alignItems: 'center', justifyContent: 'center',
-    zIndex: 1000, padding: 16
+    position: 'fixed', inset: 0, background: '#081020',
+    display: 'flex', alignItems: 'flex-start', justifyContent: 'center',
+    zIndex: 1000, padding: 0
   },
   modal: {
-    width: '100%', maxWidth: 400, maxHeight: '80vh',
+    width: '100%', height: '100%', maxWidth: 'none', maxHeight: 'none',
     display: 'flex', flexDirection: 'column',
-    background: '#081020', border: '1px solid rgba(0, 229, 255, 0.3)',
-    borderRadius: 12, overflow: 'hidden'
+    background: '#081020', border: 'none',
+    borderRadius: 0, overflow: 'hidden'
   },
   header: {
     display: 'flex', justifyContent: 'space-between', alignItems: 'center',
