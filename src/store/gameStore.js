@@ -542,10 +542,50 @@ export const useGameStore = create(
         // 3. Player attacks enemy turn
         const playerAtk = get().getStats().atk
         const mob = battle.currentMob
-        const isCrit = Math.random() < (player.race === 'coralis' ? 0.15 : 0.12)
-        const variance = 0.8 + Math.random() * 0.4
-        const rawDmg = Math.max(1, playerAtk - mob.def + Math.floor(Math.random() * 8))
-        const dmgToEnemy = Math.floor(rawDmg * variance * (isCrit ? 1.8 : 1))
+        
+        let dmgToEnemy = 0
+        let isCrit = false
+        let isSkill = false
+        const isEnemyDodge = Math.random() < 0.05 // Base 5% Dodge for enemy
+
+        if (isEnemyDodge) {
+          if (newLog.length > 7) newLog = newLog.slice(-7)
+          newLog.push(`💨 MISS! Serangan ke ${mob.emoji} meleset (Dodge).`)
+        } else {
+          // Normal Attack Damage Formula
+          isCrit = Math.random() < (player.race === 'coralis' ? 0.15 : 0.12)
+          let rawDmg = Math.max(1, playerAtk - mob.def)
+
+          // Auto-Skill Logic
+          let skillMultiplier = 0
+          if (player.settings?.autoSkill && nextPlayerFp >= 40) {
+            // Find job skill
+            let pJob = null
+            Object.values(jobs[player.race] || {}).forEach(tier => {
+              if (Array.isArray(tier)) {
+                const j = tier.find(x => x.id === player.job)
+                if (j) pJob = j
+              }
+            })
+            if (pJob && pJob.skills && pJob.skills.length > 0) {
+              const skillDesc = pJob.skills[0].desc || ""
+              const match = skillDesc.match(/(\d+)% ATK/)
+              if (match) {
+                skillMultiplier = parseInt(match[1]) / 100
+                isSkill = true
+                nextPlayerFp -= 40
+              }
+            }
+          }
+
+          if (isSkill) {
+            rawDmg = Math.max(1, Math.floor(playerAtk * skillMultiplier) - mob.def)
+            if (newLog.length > 7) newLog = newLog.slice(-7)
+            newLog.push(`✨ [Skill Cast] Pilot melancarkan Skill! (${skillMultiplier*100}% ATK)`)
+          }
+
+          dmgToEnemy = isCrit ? Math.floor(rawDmg * 1.5) : rawDmg
+        }
         let newEnemyHp = battle.enemyHp - dmgToEnemy
         let nextMob = mob, nextIsBoss = battle.isBoss, nextMaxHp = battle.enemyMaxHp
 
@@ -565,22 +605,30 @@ export const useGameStore = create(
           const enemyAtk = mob.atk || 5
           const playerDef = get().getStats().def || 2
           
-          // Enemy crit chance scales by mob grade (Sector/Boss/Culprit)
-          const enemyCritChance = battle.isPitBoss ? 0.22 : battle.isBoss ? 0.18 : battle.isCulprit ? 0.14 : 0.08
-          const isEnemyCrit = Math.random() < enemyCritChance
-          const critMultiplier = isEnemyCrit ? 1.6 : 1.0
-
-          // Scale damage, ensure at least 5% of enemy ATK penetrates player defense as chip damage
-          const baseDmg = Math.max(1 + Math.floor(enemyAtk * 0.05), enemyAtk - Math.floor(playerDef * 0.15) + Math.floor(Math.random() * 3))
-          const dmgToPlayer = Math.floor(baseDmg * critMultiplier)
+          let dmgToPlayer = 0
+          const isPlayerDodge = Math.random() < 0.05 // Base 5% Dodge for player
+          
+          if (isPlayerDodge) {
+            if (newLog.length > 7) newLog = newLog.slice(-7)
+            newLog.push(`💨 MISS! Serangan ${mob.name} berhasil dihindari! (Dodge)`)
+          } else {
+            // Enemy crit chance scales by mob grade (Sector/Boss/Culprit)
+            const enemyCritChance = battle.isPitBoss ? 0.22 : battle.isBoss ? 0.18 : battle.isCulprit ? 0.14 : 0.08
+            const isEnemyCrit = Math.random() < enemyCritChance
+            
+            // Damage Formula: Final ATK - Final DEF
+            let baseDmg = Math.max(1, enemyAtk - playerDef)
+            dmgToPlayer = isEnemyCrit ? Math.floor(baseDmg * 1.5) : baseDmg
+            
+            if (newLog.length > 7) newLog = newLog.slice(-7)
+            if (isEnemyCrit) {
+              newLog.push(`💥 CRIT! ${mob.emoji} ${mob.name} melancarkan serangan kritis! -${dmgToPlayer} Shield HP`)
+            } else {
+              newLog.push(`💥 ${mob.emoji} ${mob.name} menyerang Pilot! -${dmgToPlayer} Shield HP`)
+            }
+          }
           
           nextPlayerHp = Math.max(0, battle.playerHp - dmgToPlayer)
-          if (newLog.length > 7) newLog = newLog.slice(-7)
-          if (isEnemyCrit) {
-            newLog.push(`💥 CRIT! ${mob.emoji} ${mob.name} melancarkan serangan kritis! -${dmgToPlayer} Shield HP`)
-          } else {
-            newLog.push(`💥 ${mob.emoji} ${mob.name} menyerang Pilot! -${dmgToPlayer} Shield HP`)
-          }
 
           // --- DUAL AUTO-HEAL SYSTEM ---
           const playerMaxHp = battle.playerMaxHp || get().getStats().hp
@@ -668,7 +716,7 @@ export const useGameStore = create(
             nextMob = next.mob; nextIsBoss = next.isBoss; nextMaxHp = next.hp; newEnemyHp = next.hp
             if (next.isPitBoss) newLog.push(`☢️ RAID INCOMING: ${next.mob.emoji} ${next.mob.name}!`)
             else if (next.isBoss) newLog.push(`⚠️ STAGE BOSS: ${next.mob.emoji} ${next.mob.name}!`)
-          } else if (isCrit) {
+          } else if (isCrit && !isEnemyDodge) {
             if (newLog.length > 7) newLog = newLog.slice(-7)
             newLog.push(`💥 CRIT! -${dmgToEnemy} ${mob.emoji}`)
           }
