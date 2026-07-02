@@ -42,22 +42,30 @@ function calcStat(key, upgradeLevel, raceId) {
 }
 
 function calcExpToNext(level) {
-  // Base increased from 500 → 800 to slow early-game progression.
-  // Factors unchanged — keep late-game steep curve from RF Online.
-  if (level <= 1) return 800
-  let exp = 800
-  for (let i = 2; i <= level; i++) {
-    let factor = 1.15
-    if (i > 65) factor = 1.55
-    else if (i > 60) factor = 1.42
-    else if (i > 50) factor = 1.35
-    else if (i > 40) factor = 1.30
-    else if (i > 30) factor = 1.25
-    else if (i > 20) factor = 1.20
+  // Waktu Idle per Level based on user curve
+  let targetMins = 5
+  if (level <= 10) targetMins = 5
+  else if (level <= 20) targetMins = 10
+  else if (level <= 30) targetMins = 20
+  else if (level === 31) targetMins = 30
+  else if (level <= 41) targetMins = 3 * 60
+  else if (level <= 54) targetMins = 8 * 60
+  else if (level <= 65) targetMins = 16 * 60
+  else targetMins = 24 * 60
 
-    exp = Math.floor(exp * factor)
-  }
-  return exp
+  const sectorStats = [
+    { exp: 14 }, { exp: 20 }, { exp: 30 }, { exp: 40 },
+    { exp: 55 }, { exp: 74 }, { exp: 99 }, { exp: 133 },
+    { exp: 178 }, { exp: 241 }
+  ]
+
+  const sectorIdx = Math.min(Math.max(1, Math.ceil(level / 10)), 10) - 1
+  const s = sectorStats[sectorIdx]
+  
+  // Assume a standard un-upgraded player kills roughly 12 mobs per minute
+  const expPerMin = 12 * s.exp
+  
+  return Math.floor(expPerMin * targetMins)
 }
 
 function getSector(level) {
