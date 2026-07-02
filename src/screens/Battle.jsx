@@ -204,7 +204,7 @@ export default function Battle() {
                     <div style={{ flex: 1 }}>
                       <h3 style={{ fontSize: 15, margin: '0 0 2px 0', color: '#fff', fontFamily: 'var(--font-title)' }}>{t.username}</h3>
                       <div style={{ display: 'flex', gap: 8, fontSize: 13, color: '#7ab0d0', fontFamily: 'var(--font-mono)' }}>
-                        <span style={{ background: 'rgba(0,0,0,0.3)', padding: '1px 5px', borderRadius: 4, color: '#f5a623', fontSize: 11 }}>
+                        <span style={{ background: 'rgba(0,0,0,0.3)', padding: '1px 5px', borderRadius: 4, color: '#f5a623', fontSize: 13 }}>
                           {getJobName(t.race, t.job) || t.race.toUpperCase()}
                         </span>
                         <span>Lv.{t.level}</span>
@@ -212,7 +212,7 @@ export default function Battle() {
 
                       {/* Combat Effectiveness Rating bar */}
                       <div style={{ marginTop: 6 }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, color: '#00e5ff', fontWeight: 800, marginBottom: 2, fontFamily: 'var(--font-mono)' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#00e5ff', fontWeight: 800, marginBottom: 2, fontFamily: 'var(--font-mono)' }}>
                           <span>EFFECTIVENESS</span>
                           <span>{t.cp || 1000} CP</span>
                         </div>
@@ -290,13 +290,13 @@ export default function Battle() {
                           <h3 style={{ margin: 0, fontSize: 17, textTransform: 'uppercase', color: tower.raceColor, fontFamily: 'var(--font-title)', letterSpacing: 1 }}>
                             {tower.towerId} TOWER
                           </h3>
-                          <p style={{ margin: '3px 0 0 0', fontSize: 12, color: '#7ab0d0' }}>{tower.race.toUpperCase()} Stronghold</p>
+                          <p style={{ margin: '3px 0 0 0', fontSize: 13, color: '#7ab0d0' }}>{tower.race.toUpperCase()} Stronghold</p>
                         </div>
                         <div style={{ textAlign: 'right' }}>
                           <span style={{ fontSize: 18, fontWeight: 'bold', color: dmgColor, fontFamily: 'var(--font-mono)' }}>
                             {(tower.hp / 1_000_000).toFixed(1)}M
                           </span>
-                          <p style={{ margin: '2px 0 0 0', fontSize: 11, color: '#7ab0d0' }}>/ {(tower.maxHp / 1_000_000).toFixed(0)}M HP</p>
+                          <p style={{ margin: '2px 0 0 0', fontSize: 13, color: '#7ab0d0' }}>/ {(tower.maxHp / 1_000_000).toFixed(0)}M HP</p>
                         </div>
                       </div>
 
@@ -304,7 +304,7 @@ export default function Battle() {
                         <div style={{ height: '100%', width: `${hpPct * 100}%`, background: `linear-gradient(90deg, ${dmgColor}, ${dmgColor}88)`, borderRadius: 4, transition: 'width 0.3s' }} />
                       </div>
 
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 11, color: '#7ab0d0', fontFamily: 'var(--font-mono)', marginBottom: 12 }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 13, color: '#7ab0d0', fontFamily: 'var(--font-mono)', marginBottom: 12 }}>
                         <span>Race Damage: <span style={{ color: '#f5a623' }}>{(tower.raceDamage / 1_000_000).toFixed(1)}M</span></span>
                         <span>Dmg Multiplier: <span style={{ color: '#00e5ff' }}>×{tower.dmgMultiplier.toFixed(2)}</span></span>
                       </div>
@@ -364,12 +364,12 @@ const styles = {
   avatarCircle: { width: 42, height: 42, borderRadius: '50%', border: '1.5px solid rgba(0,229,255,0.2)', background: 'rgba(3,8,20,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
   attackBtn: { background: '#ff4466', color: '#fff', border: 'none', padding: '8px 16px', borderRadius: 6, fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: 1, cursor: 'pointer', boxShadow: '0 0 10px rgba(255,68,102,0.4)', fontSize: 13, fontFamily: 'var(--font-title)' },
   warCard: { padding: 16, borderRadius: 12, border: '1px solid', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', overflow: 'hidden' },
-  myRaceBadge: { position: 'absolute', top: 0, right: 0, background: '#ff4466', color: '#fff', fontSize: 10, padding: '2px 8px', fontWeight: 'bold', borderBottomLeftRadius: 8 },
+  myRaceBadge: { position: 'absolute', top: 0, right: 0, background: '#ff4466', color: '#fff', fontSize: 13, padding: '2px 8px', fontWeight: 'bold', borderBottomLeftRadius: 8 },
 
   // Chip War
   countdownBanner: { textAlign: 'center', padding: '10px 16px', background: 'rgba(245, 166, 35, 0.1)', border: '1px solid rgba(245, 166, 35, 0.3)', borderRadius: 8, marginBottom: 16 },
   activeBanner: { textAlign: 'center', padding: '8px 16px', background: 'rgba(255, 68, 102, 0.12)', border: '1px solid rgba(255, 68, 102, 0.35)', borderRadius: 8, marginBottom: 16, animation: 'pulse 2s infinite' },
   towerCard: { padding: 16, minHeight: 155 },
-  chipAttackBtn: { flex: 1, background: '#ff4466', color: '#fff', border: 'none', padding: '9px 8px', borderRadius: 6, fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: 1, cursor: 'pointer', boxShadow: '0 0 8px rgba(255,68,102,0.3)', fontSize: 12, fontFamily: 'var(--font-title)', transition: 'opacity 0.2s' },
+  chipAttackBtn: { flex: 1, background: '#ff4466', color: '#fff', border: 'none', padding: '9px 8px', borderRadius: 6, fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: 1, cursor: 'pointer', boxShadow: '0 0 8px rgba(255,68,102,0.3)', fontSize: 13, fontFamily: 'var(--font-title)', transition: 'opacity 0.2s' },
   chipLogContainer: { marginTop: 16, padding: 12, background: 'rgba(4, 10, 24, 0.9)', border: '1px solid rgba(255, 68, 102, 0.3)', borderRadius: 8 },
 }

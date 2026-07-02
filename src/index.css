@@ -726,7 +726,7 @@ body {
 /* Confidential text layout */
 .profile-id-confidential {
   font-family: var(--font-mono);
-  font-size: 8px;
+  font-size: 13px;
   color: rgba(255, 255, 255, 0.25);
   text-transform: uppercase;
   letter-spacing: 4px;
@@ -828,7 +828,7 @@ body {
 
 .profile-details-header-badge {
   font-family: var(--font-title);
-  font-size: 9px;
+  font-size: 13px;
   font-weight: 900;
   color: var(--neon-glow);
   border: 1px solid var(--neon-glow);
@@ -878,7 +878,7 @@ body {
   align-items: center;
   gap: 6px;
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
   color: #a8d4e8;
   letter-spacing: 0.8px;
@@ -952,7 +952,7 @@ body {
 }
 
 .profile-stats-col-lbl {
-  font-size: 9px;
+  font-size: 13px;
   font-weight: 800;
   color: #6ab0d4;
   text-transform: uppercase;
@@ -961,7 +961,7 @@ body {
 }
 
 .profile-stats-col-val {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 900;
   color: #ffffff;
   text-shadow: 0 0 6px var(--neon-glow);
@@ -1047,7 +1047,7 @@ body {
   margin-top: 8px;
   color: #ffffff;
   font-family: var(--font-title);
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 1.5px;

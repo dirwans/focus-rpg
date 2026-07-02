@@ -221,14 +221,14 @@ const styles = {
   header: { padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 12, borderBottom: '1px solid rgba(0, 229, 255, 0.15)', background: 'rgba(3, 8, 20, 0.4)', flexShrink: 0 },
   avatar: { width: 48, height: 48, borderRadius: '50%', border: '2px solid #00e5ff', background: 'linear-gradient(135deg, #0030a0, #001040)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 10px rgba(0, 229, 255, 0.3)', flexShrink: 0 },
   name: { fontFamily: 'var(--font-title)', fontSize: 16, fontWeight: 700, color: '#e0f4ff', letterSpacing: 1 },
-  sub: { fontFamily: 'var(--font-mono)', fontSize: 12, color: '#4a8fa8', marginTop: 2, fontWeight: 800 },
+  sub: { fontFamily: 'var(--font-mono)', fontSize: 13, color: '#7ec8e3', marginTop: 2, fontWeight: 800 },
   actionBtn: (borderColor, bgStart) => ({
     background: `linear-gradient(95deg, ${bgStart}, ${borderColor})`,
     border: `1px solid ${borderColor}`,
     borderRadius: 8,
     padding: '7px 10px',
     fontFamily: 'var(--font-title)',
-    fontSize: 12,
+    fontSize: 13,
     color: '#fff',
     cursor: 'pointer',
     boxShadow: `0 0 10px ${borderColor}66`,
@@ -243,7 +243,7 @@ const styles = {
     borderRadius: 8,
     padding: '7px 10px',
     fontFamily: 'var(--font-title)',
-    fontSize: 12,
+    fontSize: 13,
     color: 'rgba(255,255,255,0.3)',
     cursor: 'not-allowed',
     fontWeight: 800,
@@ -278,14 +278,14 @@ const styles = {
     userSelect: 'none',
     WebkitUserSelect: 'none'
   },
-  sectionLabel: { fontFamily: 'var(--font-title)', fontSize: 12, letterSpacing: 1.5, color: '#4a8fa8', fontWeight: 800, textShadow: '0 0 6px rgba(0, 229, 255, 0.2)' },
+  sectionLabel: { fontFamily: 'var(--font-title)', fontSize: 13, letterSpacing: 1.5, color: '#7ec8e3', fontWeight: 800, textShadow: '0 0 6px rgba(0, 229, 255, 0.2)' },
   chevron: { fontFamily: 'var(--font-mono)', fontSize: 16, color: '#00e5ff', fontWeight: 900, lineHeight: 1 },
   sectionBody: { padding: '0 14px 12px' },
 
   // EXP
   expBg: { height: 10, background: 'rgba(0,0,0,0.4)', borderRadius: 5, overflow: 'hidden', marginBottom: 6, border: '1px solid rgba(0, 229, 255, 0.2)' },
   expFill: { height: '100%', background: 'linear-gradient(90deg, #0066ff, #00e5ff)', borderRadius: 5, boxShadow: '0 0 8px #00e5ff' },
-  expText: { fontFamily: 'var(--font-mono)', fontSize: 12, color: '#4a8fa8', textAlign: 'right', fontWeight: 800 },
+  expText: { fontFamily: 'var(--font-mono)', fontSize: 13, color: '#7ec8e3', textAlign: 'right', fontWeight: 800 },
 
   // Stats
   statsGrid: { display: 'flex', gap: 8 },
@@ -307,14 +307,14 @@ const styles = {
   // Lore / Race
   desc: { fontFamily: 'var(--font-body)', fontSize: 13, color: '#6a9ab8', marginBottom: 10, lineHeight: 1.6, fontWeight: 600 },
   specSection: { display: 'flex', flexDirection: 'column', gap: 3, background: 'rgba(0,0,0,0.2)', padding: '10px 12px', borderRadius: 8, border: '1px solid rgba(0,229,255,0.08)' },
-  specTitle: { fontFamily: 'var(--font-title)', fontSize: 12, color: '#7ab0d0', letterSpacing: 0.5, fontWeight: 800 },
+  specTitle: { fontFamily: 'var(--font-title)', fontSize: 13, color: '#7ab0d0', letterSpacing: 0.5, fontWeight: 800 },
   specItem: (c) => ({ fontFamily: 'var(--font-body)', fontSize: 13, color: c, lineHeight: 1.5, fontWeight: 600 }),
 
   // Progress
   progRow: { display: 'flex', justifyContent: 'space-around', gap: 4 },
   progItem: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, flex: 1 },
   progNum: { fontFamily: 'var(--font-mono)', fontSize: 18, fontWeight: 900, color: '#00e5ff', textShadow: '0 0 6px rgba(0, 229, 255, 0.2)' },
-  progLabel: { fontFamily: 'var(--font-title)', fontSize: 11, color: '#4a8fa8', fontWeight: 800, textAlign: 'center' },
+  progLabel: { fontFamily: 'var(--font-title)', fontSize: 13, color: '#7ec8e3', fontWeight: 800, textAlign: 'center' },
 
   // Modal
   modalOverlay: { position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.85)', zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center', backdropFilter: 'blur(5px)', padding: 16 },
@@ -352,7 +352,7 @@ const styles = {
       border: `1px solid ${borderColors[race] || '#00e5ff'}`,
       borderRadius: 4,
       padding: '2px 6px',
-      fontSize: 10,
+      fontSize: 13,
       fontFamily: 'var(--font-title)',
       fontWeight: 900,
       color: '#fff',
@@ -368,7 +368,7 @@ const styles = {
     borderRadius: 6,
     padding: '6px 12px',
     fontFamily: 'var(--font-title)',
-    fontSize: 11,
+    fontSize: 13,
     color: '#fff',
     fontWeight: 800,
     cursor: 'pointer',
@@ -381,7 +381,7 @@ const styles = {
     borderRadius: 6,
     padding: '6px 12px',
     fontFamily: 'var(--font-title)',
-    fontSize: 11,
+    fontSize: 13,
     color: 'rgba(255, 255, 255, 0.3)',
     fontWeight: 800,
     cursor: 'not-allowed',

@@ -175,7 +175,7 @@ export default function Trade() {
                 <div style={{...styles.invName, color: getRarityColor(item.rarity)}}>{item.name}</div>
               </div>
             ))}
-            {player.inventory.length === 0 && <div style={{ color: '#4a8fa8' }}>Inventory empty</div>}
+            {player.inventory.length === 0 && <div style={{ color: '#7ec8e3' }}>Inventory empty</div>}
           </div>
         </div>
       )}
@@ -200,19 +200,19 @@ const styles = {
   screen: { display: 'flex', flexDirection: 'column', flex: 1, overflowY: 'auto', fontFamily: 'var(--font-body)', background: '#02050a' },
   header: { padding: 20, textAlign: 'center', borderBottom: '1px solid rgba(0, 229, 255, 0.2)', background: 'linear-gradient(180deg, rgba(0,20,40,0.8), rgba(2,5,10,0.9))' },
   title: { fontFamily: 'var(--font-title)', fontSize: 22, color: '#00e5ff', textShadow: '0 0 10px rgba(0, 229, 255, 0.6)', letterSpacing: 3, fontWeight: 900 },
-  subTitle: { fontFamily: 'var(--font-mono)', fontSize: 12, color: '#4a8fa8', letterSpacing: 1, marginTop: 4 },
+  subTitle: { fontFamily: 'var(--font-mono)', fontSize: 13, color: '#7ec8e3', letterSpacing: 1, marginTop: 4 },
   balanceRow: { display: 'flex', justifyContent: 'space-between', padding: '12px 16px', background: 'rgba(0,0,0,0.5)', borderBottom: '1px solid rgba(0,229,255,0.1)' },
-  refreshBtn: { background: 'none', border: '1px solid #00e5ff', color: '#00e5ff', padding: '4px 8px', borderRadius: 4, fontFamily: 'var(--font-mono)', fontSize: 12, cursor: 'pointer' },
+  refreshBtn: { background: 'none', border: '1px solid #00e5ff', color: '#00e5ff', padding: '4px 8px', borderRadius: 4, fontFamily: 'var(--font-mono)', fontSize: 13, cursor: 'pointer' },
   tabs: { display: 'flex', padding: '10px 16px', gap: 10 },
-  tab: { flex: 1, padding: 10, background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(0, 229, 255, 0.2)', color: '#4a8fa8', fontFamily: 'var(--font-title)', fontWeight: 800, borderRadius: 6, cursor: 'pointer' },
+  tab: { flex: 1, padding: 10, background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(0, 229, 255, 0.2)', color: '#7ec8e3', fontFamily: 'var(--font-title)', fontWeight: 800, borderRadius: 6, cursor: 'pointer' },
   tabActive: { flex: 1, padding: 10, background: 'linear-gradient(0deg, rgba(0,229,255,0.2), transparent)', border: '1px solid #00e5ff', color: '#00e5ff', fontFamily: 'var(--font-title)', fontWeight: 800, borderRadius: 6, cursor: 'pointer', boxShadow: 'inset 0 0 10px rgba(0,229,255,0.2)' },
   list: { padding: 16, display: 'flex', flexDirection: 'column', gap: 12 },
-  centerMsg: { padding: 40, textAlign: 'center', fontFamily: 'var(--font-mono)', color: '#4a8fa8' },
+  centerMsg: { padding: 40, textAlign: 'center', fontFamily: 'var(--font-mono)', color: '#7ec8e3' },
   marketCard: { padding: 12, display: 'flex', flexDirection: 'column', gap: 10 },
   cardHeader: { display: 'flex', gap: 12, alignItems: 'center' },
   cardEmoji: { fontSize: 28, background: 'rgba(0,0,0,0.4)', padding: 10, borderRadius: 8, border: '1px solid rgba(0,229,255,0.1)' },
   itemName: { fontFamily: 'var(--font-title)', fontSize: 14, fontWeight: 800 },
-  itemMeta: { fontFamily: 'var(--font-mono)', fontSize: 12, color: '#4a8fa8', marginTop: 4 },
+  itemMeta: { fontFamily: 'var(--font-mono)', fontSize: 13, color: '#7ec8e3', marginTop: 4 },
   cardFooter: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px dashed rgba(0,229,255,0.2)', paddingTop: 10 },
   price: { color: '#f5a623', fontFamily: 'var(--font-mono)', fontSize: 16, fontWeight: 900 },
   buyBtn: { background: 'linear-gradient(90deg, #0088ff, #00e5ff)', border: 'none', color: '#000', padding: '8px 24px', borderRadius: 4, fontFamily: 'var(--font-title)', fontWeight: 900, cursor: 'pointer', boxShadow: '0 0 10px rgba(0,229,255,0.4)' },
@@ -220,15 +220,15 @@ const styles = {
   sellContainer: { padding: 16, display: 'flex', flexDirection: 'column', gap: 16 },
   sellForm: { background: 'rgba(0,20,40,0.5)', border: '1px solid #00e5ff', padding: 16, borderRadius: 8, boxShadow: '0 0 15px rgba(0,229,255,0.1)' },
   selectedBox: { display: 'flex', alignItems: 'center', gap: 10, background: 'rgba(0,0,0,0.6)', padding: 10, borderRadius: 6, border: '1px solid rgba(0,229,255,0.3)' },
-  selectedBoxEmpty: { background: 'rgba(0,0,0,0.6)', padding: 14, borderRadius: 6, border: '1px dashed rgba(0,229,255,0.3)', color: '#4a8fa8', textAlign: 'center', fontFamily: 'var(--font-mono)', fontSize: 12 },
+  selectedBoxEmpty: { background: 'rgba(0,0,0,0.6)', padding: 14, borderRadius: 6, border: '1px dashed rgba(0,229,255,0.3)', color: '#7ec8e3', textAlign: 'center', fontFamily: 'var(--font-mono)', fontSize: 13 },
   clearBtn: { marginLeft: 'auto', background: 'none', border: 'none', color: '#ff4444', cursor: 'pointer', fontSize: 18 },
   priceInput: { flex: 1, background: 'rgba(0,0,0,0.6)', border: '1px solid rgba(0,229,255,0.5)', color: '#f5a623', padding: '10px 12px', borderRadius: 4, fontFamily: 'var(--font-mono)', fontSize: 16, outline: 'none' },
   sellBtn: { background: '#00e5ff', border: 'none', color: '#000', padding: '0 20px', borderRadius: 4, fontFamily: 'var(--font-title)', fontWeight: 900, cursor: 'pointer' },
-  taxNote: { fontFamily: 'var(--font-mono)', fontSize: 10, color: '#4a8fa8', marginTop: 8 },
+  taxNote: { fontFamily: 'var(--font-mono)', fontSize: 13, color: '#7ec8e3', marginTop: 8 },
   invLabel: { fontFamily: 'var(--font-title)', color: '#00e5ff', fontSize: 14, borderBottom: '1px solid rgba(0,229,255,0.2)', paddingBottom: 8 },
   invGrid: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 },
   invBox: { background: 'rgba(3,8,20,0.6)', border: '1px solid rgba(0,229,255,0.2)', borderRadius: 8, padding: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, cursor: 'pointer' },
   invBoxSelected: { background: 'rgba(0,40,80,0.6)', border: '1px solid #00e5ff', borderRadius: 8, padding: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, boxShadow: '0 0 10px rgba(0,229,255,0.3)' },
   invEmoji: { fontSize: 32 },
-  invName: { fontFamily: 'var(--font-mono)', fontSize: 11, textAlign: 'center', fontWeight: 800 }
+  invName: { fontFamily: 'var(--font-mono)', fontSize: 13, textAlign: 'center', fontWeight: 800 }
 }

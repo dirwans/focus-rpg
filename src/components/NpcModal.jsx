@@ -430,7 +430,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                                         </div>
                                         {j.skills && j.skills.length > 0 && (
                                           <div style={styles.cardJobSkills}>
-                                            <div style={{ fontWeight: 'bold', marginBottom: 6, fontSize: 10, color: '#aaa', letterSpacing: 0.5 }}>⚡ SKILLS:</div>
+                                            <div style={{ fontWeight: 'bold', marginBottom: 6, fontSize: 13, color: '#aaa', letterSpacing: 0.5 }}>⚡ SKILLS:</div>
                                             <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                                               {j.skills.map((sk, skIdx) => {
                                                 const isObj = typeof sk === 'object';
@@ -443,8 +443,8 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                                                       <img src={skIcon} style={{ width: 24, height: 24, borderRadius: 4, border: '1px solid rgba(255,255,255,0.15)', background: '#111' }} alt={skName} />
                                                     )}
                                                     <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                                      <span style={{ color: '#00e5ff', fontWeight: 700, fontSize: 11.5 }}>{skName}</span>
-                                                      {skDesc && <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: 10, lineHeight: 1.2 }}>{skDesc}</span>}
+                                                      <span style={{ color: '#00e5ff', fontWeight: 700, fontSize: 13.5 }}>{skName}</span>
+                                                      {skDesc && <span style={{ color: 'rgba(255,255,255,0.85)', fontSize: 13, lineHeight: 1.2 }}>{skDesc}</span>}
                                                     </div>
                                                   </div>
                                                 );
@@ -656,7 +656,7 @@ const styles = {
   },
   lobbyCardDesc: {
     fontFamily: 'var(--font-body)',
-    fontSize: 12,
+    fontSize: 13,
     color: '#7ab0d0',
     lineHeight: 1.3
   },
@@ -710,7 +710,7 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
     fontFamily: 'var(--font-mono)',
-    fontSize: 12
+    fontSize: 13
   },
   statusLabel: {
     color: '#7ab0d0',
@@ -729,7 +729,7 @@ const styles = {
     padding: '8px 10px',
     textAlign: 'center',
     fontFamily: 'var(--font-mono)',
-    fontSize: 12,
+    fontSize: 13,
     color: '#6a9ab8',
     background: 'rgba(3, 8, 20, 0.3)',
     borderRadius: 8,
@@ -774,14 +774,14 @@ const styles = {
   },
   subDesc: {
     fontFamily: 'var(--font-body)',
-    fontSize: 12,
+    fontSize: 13,
     color: '#7ab0d0',
     margin: 0,
     lineHeight: 1.4
   },
   activeJobLabel: {
     textAlign: 'center',
-    fontSize: 12,
+    fontSize: 13,
     fontFamily: 'var(--font-mono)',
     color: '#da70d6',
     background: 'rgba(218, 112, 214, 0.1)',
@@ -827,14 +827,14 @@ const styles = {
   },
   jobDesc: {
     fontFamily: 'var(--font-body)',
-    fontSize: 12,
+    fontSize: 13,
     color: '#ccc',
     lineHeight: 1.3,
     marginBottom: 4
   },
   jobBonus: {
     fontFamily: 'var(--font-mono)',
-    fontSize: 12,
+    fontSize: 13,
     color: '#ff8c40',
     fontWeight: 700
   },
@@ -855,7 +855,7 @@ const styles = {
   },
   shopItemType: {
     fontFamily: 'var(--font-mono)',
-    fontSize: 12,
+    fontSize: 13,
     color: '#7ab0d0',
     marginTop: 2
   },
@@ -865,7 +865,7 @@ const styles = {
     borderRadius: 6,
     padding: '8px 12px',
     fontFamily: 'var(--font-title)',
-    fontSize: 12,
+    fontSize: 13,
     color: '#fff',
     fontWeight: 900,
     cursor: 'pointer',
@@ -879,7 +879,7 @@ const styles = {
     borderRadius: 6,
     padding: '8px 12px',
     fontFamily: 'var(--font-title)',
-    fontSize: 12,
+    fontSize: 13,
     color: 'rgba(255, 255, 255, 0.25)',
     fontWeight: 900,
     cursor: 'not-allowed',
@@ -895,13 +895,13 @@ const styles = {
     fontFamily: 'var(--font-title)',
     fontWeight: 800,
     cursor: 'pointer',
-    fontSize: 12,
+    fontSize: 13,
     letterSpacing: 0.5,
     marginTop: 6
   },
   jobSkills: {
     fontFamily: 'var(--font-mono)',
-    fontSize: 11,
+    fontSize: 13,
     color: '#7ab0d0',
     marginTop: 4,
     textAlign: 'left'
@@ -942,7 +942,7 @@ const styles = {
   }),
   tabTitle: {
     fontFamily: 'var(--font-title)',
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: 900,
     color: '#fff',
     letterSpacing: 0.5,
@@ -960,7 +960,7 @@ const styles = {
   },
   laneTitle: {
     fontFamily: 'var(--font-title)',
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: 900,
     color: '#00e5ff',
     letterSpacing: 1.5,
@@ -1031,7 +1031,7 @@ const styles = {
   },
   cardLockedBadge: {
     fontFamily: 'var(--font-mono)',
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: 'bold',
     color: 'rgba(255,255,255,0.3)',
     textAlign: 'center',
@@ -1039,7 +1039,7 @@ const styles = {
   },
   activeBadge: {
     fontFamily: 'var(--font-title)',
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: 900,
     color: '#39ff14',
     background: 'rgba(57, 255, 20, 0.1)',
@@ -1058,7 +1058,7 @@ const styles = {
     fontFamily: 'var(--font-title)',
     fontWeight: 900,
     cursor: 'pointer',
-    fontSize: 12,
+    fontSize: 13,
     letterSpacing: 1,
     textTransform: 'uppercase',
     boxShadow: 'inset 0 0 6px rgba(0, 229, 255, 0.1)',

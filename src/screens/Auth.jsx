@@ -138,10 +138,10 @@ const styles = {
   logoIcon:  { fontSize: 48, marginBottom: 8 },
   logoText:  { fontFamily: 'var(--font-title)', fontSize: 28, fontWeight: 900, color: '#00e5ff', letterSpacing: 4 },
   logoSub:   { fontFamily: 'var(--font-title)', fontSize: 14, color: '#7ab0d0', letterSpacing: 3, marginTop: 4, fontWeight: 800 },
-  loreBtn:   { background: 'rgba(3,8,20,0.6)', border: '1px solid rgba(0, 229, 255, 0.35)', borderRadius: 8, padding: '10px 14px', color: '#00e5ff', fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 800, letterSpacing: 1.5, cursor: 'pointer', transition: 'all 0.2s', width: '100%', outline: 'none' },
+  loreBtn:   { background: 'rgba(3,8,20,0.6)', border: '1px solid rgba(0, 229, 255, 0.35)', borderRadius: 8, padding: '10px 14px', color: '#00e5ff', fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 800, letterSpacing: 1.5, cursor: 'pointer', transition: 'all 0.2s', width: '100%', outline: 'none' },
   googleWrap:{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 },
   googleBtn: { width: '100%', minHeight: 44 },
-  divider:   { width: '100%', display: 'flex', alignItems: 'center', gap: 10, color: '#3a6a88', fontFamily: 'var(--font-mono)', fontSize: 12, fontWeight: 700, '::before': { content: '""', flex: 1, height: 1, background: 'rgba(0,229,255,0.15)' } },
+  divider:   { width: '100%', display: 'flex', alignItems: 'center', gap: 10, color: '#7ab0d0', fontFamily: 'var(--font-mono)', fontSize: 13, fontWeight: 700, '::before': { content: '""', flex: 1, height: 1, background: 'rgba(0,229,255,0.15)' } },
   tabs:      { display: 'flex', border: '1px solid rgba(0, 229, 255, 0.25)', borderRadius: 10, overflow: 'hidden' },
   tab:       (active) => ({ flex: 1, padding: '12px', border: 'none', fontFamily: 'var(--font-title)', fontSize: 15, fontWeight: 800, letterSpacing: 1, cursor: 'pointer', background: active ? 'rgba(0,100,200,0.3)' : 'rgba(6, 15, 35, 0.6)', color: active ? '#00e5ff' : '#7ab0d0', borderBottom: active ? '3px solid #00c8ff' : 'none' }),
   form:      { display: 'flex', flexDirection: 'column', gap: 14 },
@@ -150,6 +150,6 @@ const styles = {
   input:     { background: 'rgba(3, 8, 20, 0.8)', border: '1.5px solid rgba(0, 229, 255, 0.2)', borderRadius: 8, padding: '12px 14px', fontFamily: 'var(--font-mono)', fontSize: 16, color: '#e0f4ff', outline: 'none' },
   error:     { background: 'rgba(255,68,68,0.1)', border: '1px solid #ff4444', borderRadius: 8, padding: '10px 14px', fontFamily: 'var(--font-mono)', fontSize: 14, color: '#ff6666', fontWeight: 800 },
   submit:    { padding: '16px', borderRadius: 12, border: 'none', background: 'linear-gradient(90deg,#0050cc,#00a8ff)', fontFamily: 'var(--font-title)', fontSize: 17, fontWeight: 900, color: '#fff', letterSpacing: 2, cursor: 'pointer', marginTop: 4 },
-  hint:      { fontFamily: 'var(--font-body)', fontSize: 14, color: '#4a8fa8', textAlign: 'center', lineHeight: 1.6, fontWeight: 700 },
+  hint:      { fontFamily: 'var(--font-body)', fontSize: 14, color: '#7ec8e3', textAlign: 'center', lineHeight: 1.6, fontWeight: 700 },
 }
 

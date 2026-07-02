@@ -245,7 +245,7 @@ export default function Main() {
         {battle.log.length > 0 && (
           <div style={styles.battleLogActive}>
             {battle.log.slice(-3).map((l, i, arr) => (
-              <div key={i} style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: l.includes('BOSS') || l.includes('CRIT') || l.includes('Vampire') ? '#ffdd44' : l.includes('✅') || l.includes('🆙') ? '#00ff88' : '#c0dff0', opacity: 0.7 + (i / arr.length) * 0.3, fontWeight: 700 }}>{l}</div>
+              <div key={i} style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: l.includes('BOSS') || l.includes('CRIT') || l.includes('Vampire') ? '#ffdd44' : l.includes('✅') || l.includes('🆙') ? '#00ff88' : '#c0dff0', opacity: 0.7 + (i / arr.length) * 0.3, fontWeight: 700 }}>{l}</div>
             ))}
           </div>
         )}
@@ -254,7 +254,7 @@ export default function Main() {
         {timer.mode === 'fight' && battle.currentMob && (
           <div style={styles.activeHealthBarWrapper}>
             {/* Enemy HP */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', width: '90%', fontFamily: 'var(--font-mono)', fontSize: 11, color: '#ffaa00', fontWeight: 800, textShadow: '0 0 4px #000' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', width: '90%', fontFamily: 'var(--font-mono)', fontSize: 13, color: '#ffaa00', fontWeight: 800, textShadow: '0 0 4px #000' }}>
               <span>{battle.currentMob.emoji} {battle.currentMob.name}</span>
               <span>{Math.max(0, battle.enemyHp)} / {battle.enemyMaxHp} HP</span>
             </div>
@@ -263,7 +263,7 @@ export default function Main() {
             </div>
 
             {/* Player HP */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', width: '90%', fontFamily: 'var(--font-mono)', fontSize: 11, color: '#00e5ff', fontWeight: 800, textShadow: '0 0 4px #000' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', width: '90%', fontFamily: 'var(--font-mono)', fontSize: 13, color: '#00e5ff', fontWeight: 800, textShadow: '0 0 4px #000' }}>
               <span>{t('pilot_shield')}</span>
               <span>{(battle.playerHp !== undefined && !isNaN(battle.playerHp)) ? battle.playerHp : stats.hp} / {battle.playerMaxHp || stats.hp} HP</span>
             </div>
@@ -272,7 +272,7 @@ export default function Main() {
             </div>
 
             {/* Player FP */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', width: '90%', fontFamily: 'var(--font-mono)', fontSize: 11, color: '#da70d6', fontWeight: 800, textShadow: '0 0 4px #000' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', width: '90%', fontFamily: 'var(--font-mono)', fontSize: 13, color: '#da70d6', fontWeight: 800, textShadow: '0 0 4px #000' }}>
               <span>{t('force_point')}</span>
               <span>{(battle.playerFp !== undefined && !isNaN(battle.playerFp)) ? battle.playerFp : 200} / {battle.playerMaxFp || 200} FP</span>
             </div>
@@ -434,7 +434,7 @@ export default function Main() {
         borderBottom: 'none',
         borderRadius: '8px 8px 0 0',
         fontFamily: 'var(--font-title)',
-        fontSize: 11,
+        fontSize: 13,
         fontWeight: 800,
         color: '#7ab0d0',
         letterSpacing: '1px',
@@ -630,7 +630,7 @@ const styles = {
   arenaGridOverlay: { position: 'absolute', bottom: 0, left: 0, right: 0, height: '40px', backgroundImage: 'linear-gradient(rgba(0, 229, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 229, 255, 0.1) 1px, transparent 1px)', backgroundSize: '12px 12px', transform: 'perspective(40px) rotateX(60deg)', transformOrigin: 'bottom center', opacity: 0.8, pointerEvents: 'none' },
   playerSprite: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, zIndex: 1, paddingBottom: 6 },
   enemySprite: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, zIndex: 1, paddingBottom: 6 },
-  spriteLabel: { fontFamily: 'var(--font-title)', fontSize: 11, letterSpacing: 0.5, color: '#7ab0d0', textTransform: 'uppercase', fontWeight: 800, background: 'rgba(3, 8, 20, 0.65)', padding: '1px 6px', borderRadius: 4, border: '1px solid rgba(0, 229, 255, 0.15)' },
+  spriteLabel: { fontFamily: 'var(--font-title)', fontSize: 13, letterSpacing: 0.5, color: '#7ab0d0', textTransform: 'uppercase', fontWeight: 800, background: 'rgba(3, 8, 20, 0.65)', padding: '1px 6px', borderRadius: 4, border: '1px solid rgba(0, 229, 255, 0.15)' },
   timerDisplay: { display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', zIndex: 2, marginTop: 12 },
   timerDisplayActiveCompact: { display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', zIndex: 2, margin: '12px 0 6px 0', justifyContent: 'center', flexShrink: 0 },
   activeTimerDigits: { fontSize: 44, fontFamily: 'monospace', fontWeight: 900, color: '#fff', textShadow: '0 0 10px var(--neon-glow), 0 0 20px var(--neon-glow)' },
@@ -648,7 +648,7 @@ const styles = {
   npcBtn: { margin: '0 16px 6px', padding: 12, borderRadius: 10, border: '1.5px solid var(--neon-glow)', background: 'rgba(3, 8, 20, 0.85)', fontFamily: 'var(--font-title)', fontSize: 14, fontWeight: 900, color: '#fff', letterSpacing: 1.5, cursor: 'pointer', boxShadow: '0 0 10px rgba(255, 100, 0, 0.15), inset 0 0 8px rgba(255, 100, 0, 0.1)', transition: 'all 0.2s', textTransform: 'uppercase', textAlign: 'center', flexShrink: 0 },
   sessionSummary: { textAlign: 'center', padding: '0 16px 10px' },
   sessionSummaryActive: { textAlign: 'center', padding: '12px 16px', borderTop: '1px solid rgba(255, 255, 255, 0.05)', background: 'rgba(3, 8, 20, 0.95)', border: '1.5px solid rgba(0, 229, 255, 0.25)', boxShadow: '0 0 10px rgba(0,0,0,0.5)', margin: '12px 16px 16px 16px', borderRadius: 8, flexShrink: 0 },
-  logoutBtn: { background: 'rgba(6, 15, 35, 0.6)', border: '1px solid rgba(0, 229, 255, 0.2)', borderRadius: 6, color: '#4a8fa8', fontSize: 13, cursor: 'pointer', padding: '4px 8px', lineHeight: 1, transition: 'all 0.2s' },
+  logoutBtn: { background: 'rgba(6, 15, 35, 0.6)', border: '1px solid rgba(0, 229, 255, 0.2)', borderRadius: 6, color: '#7ec8e3', fontSize: 13, cursor: 'pointer', padding: '4px 8px', lineHeight: 1, transition: 'all 0.2s' },
   // Abandon
   topAbandonBar: { display: 'flex', justifyContent: 'flex-end', padding: '16px 16px 0 16px', zIndex: 10 },
   smallAbandonBtn: { background: 'rgba(255, 49, 49, 0.1)', border: '1px solid rgba(255, 49, 49, 0.4)', borderRadius: 6, color: '#ff4444', fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 800, padding: '6px 12px', cursor: 'pointer', letterSpacing: 1, transition: 'all 0.2s', boxShadow: '0 0 8px rgba(255, 49, 49, 0.1)' },
@@ -657,6 +657,6 @@ const styles = {
   activeHeader: { display: 'flex', justifyContent: 'space-between', padding: '10px 16px', alignItems: 'center', width: '100%', zIndex: 10, background: 'rgba(3, 8, 20, 0.9)', borderBottom: '2.5px solid rgba(0, 229, 255, 0.35)', boxShadow: '0 0 15px rgba(0, 0, 0, 0.5)', flexShrink: 0 },
   activeStageBadge: { background: 'rgba(3, 8, 20, 0.95)', border: '1.5px solid var(--neon-glow)', borderRadius: '8px', padding: '6px 12px', fontFamily: 'var(--font-title)', fontSize: 13, color: '#fff', fontWeight: 800, boxShadow: '0 0 8px var(--neon-glow)', textShadow: '0 0 4px #000' },
   activeSectorLabel: { fontFamily: 'var(--font-title)', fontSize: 13, color: 'var(--neon-glow)', fontWeight: 800, textShadow: '0 0 8px var(--neon-glow)', background: 'rgba(3, 8, 20, 0.95)', border: '1.5px solid var(--neon-glow)', borderRadius: '8px', padding: '6px 12px', boxShadow: '0 0 8px var(--neon-glow)' },
-  activeGatherBadge: { fontFamily: 'var(--font-mono)', fontSize: 11, color: '#00e5ff', marginTop: 6, fontWeight: 800, zIndex: 2, letterSpacing: 1, background: 'rgba(3, 8, 20, 0.95)', padding: '3px 10px', borderRadius: '6px', border: '1px solid rgba(0, 229, 255, 0.4)', boxShadow: '0 0 8px rgba(0, 229, 255, 0.2)', textShadow: '0 0 4px #000' },
+  activeGatherBadge: { fontFamily: 'var(--font-mono)', fontSize: 13, color: '#00e5ff', marginTop: 6, fontWeight: 800, zIndex: 2, letterSpacing: 1, background: 'rgba(3, 8, 20, 0.95)', padding: '3px 10px', borderRadius: '6px', border: '1px solid rgba(0, 229, 255, 0.4)', boxShadow: '0 0 8px rgba(0, 229, 255, 0.2)', textShadow: '0 0 4px #000' },
   activeHealthBarWrapper: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, width: '90%', marginTop: 8, zIndex: 2, background: 'rgba(3, 8, 20, 0.95)', padding: '10px 16px', borderRadius: '10px', border: '1.5px solid rgba(0, 229, 255, 0.35)', boxShadow: '0 0 10px rgba(0,0,0,0.5)', margin: '12px auto', flexShrink: 0 }
 }

@@ -78,8 +78,8 @@ const styles = {
   row: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontFamily: 'var(--font-body)', fontSize: 14, color: '#c0dff0' },
   label: { fontWeight: 800 },
   btnGroup: { display: 'flex', gap: 6 },
-  btn: { background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(0,229,255,0.2)', color: '#7ab0d0', padding: '6px 12px', borderRadius: 6, fontSize: 12, fontFamily: 'var(--font-title)', fontWeight: 800, cursor: 'pointer' },
-  btnActive: { background: '#00e5ff', border: 'none', color: '#000', padding: '6px 12px', borderRadius: 6, fontSize: 12, fontFamily: 'var(--font-title)', fontWeight: 800, cursor: 'pointer', boxShadow: '0 0 10px rgba(0,229,255,0.4)' },
+  btn: { background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(0,229,255,0.2)', color: '#7ab0d0', padding: '6px 12px', borderRadius: 6, fontSize: 13, fontFamily: 'var(--font-title)', fontWeight: 800, cursor: 'pointer' },
+  btnActive: { background: '#00e5ff', border: 'none', color: '#000', padding: '6px 12px', borderRadius: 6, fontSize: 13, fontFamily: 'var(--font-title)', fontWeight: 800, cursor: 'pointer', boxShadow: '0 0 10px rgba(0,229,255,0.4)' },
   defectBtn: {
     width: '100%',
     padding: 10,
@@ -90,12 +90,12 @@ const styles = {
     fontFamily: 'var(--font-title)',
     fontWeight: 900,
     cursor: 'pointer',
-    fontSize: 11,
+    fontSize: 13,
     letterSpacing: 0.5,
     boxShadow: '0 0 10px rgba(255, 68, 68, 0.3)',
     transition: 'all 0.2s',
     textTransform: 'uppercase',
     textAlign: 'center'
   },
-  closeBtn: { width: '100%', padding: 10, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.15)', color: '#7ab0d0', borderRadius: 8, fontFamily: 'var(--font-title)', fontWeight: 800, cursor: 'pointer', fontSize: 12, letterSpacing: 1 }
+  closeBtn: { width: '100%', padding: 10, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.15)', color: '#7ab0d0', borderRadius: 8, fontFamily: 'var(--font-title)', fontWeight: 800, cursor: 'pointer', fontSize: 13, letterSpacing: 1 }
 }

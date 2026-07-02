@@ -135,7 +135,7 @@ const styles = {
   },
   subtitle: {
     fontFamily: 'var(--font-mono)',
-    fontSize: 10,
+    fontSize: 13,
     color: '#00e5ff',
     letterSpacing: 2,
     marginTop: 4,
@@ -189,7 +189,7 @@ const styles = {
   }),
   motto: {
     fontFamily: 'var(--font-mono)',
-    fontSize: 11,
+    fontSize: 13,
     color: '#7ab0d0',
     fontStyle: 'italic',
     marginTop: 2,

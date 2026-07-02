@@ -123,7 +123,7 @@ export default function Forge() {
             <div style={styles.empty}>
               <div style={{ fontSize: 32 }}>⚠️</div>
               <div>{t('no_weapon_equipped')}</div>
-              <div style={{ fontSize: 13, color: '#4a8fa8', marginTop: 4 }}>
+              <div style={{ fontSize: 13, color: '#7ec8e3', marginTop: 4 }}>
                 {t('no_weapon_equipped_desc')}
               </div>
             </div>
@@ -276,7 +276,7 @@ const styles = {
   resBar: { display: 'flex', gap: 8, padding: '12px 16px', borderBottom: '1px solid rgba(0, 229, 255, 0.15)', background: 'rgba(3, 8, 20, 0.4)' },
   chip: (c) => ({ background: 'rgba(3, 8, 20, 0.8)', border: `1px solid ${c}`, borderRadius: 20, padding: '4px 10px', fontFamily: 'var(--font-mono)', fontSize: 13, fontWeight: 800, color: c }),
   tabs: { display: 'flex', borderBottom: '1px solid rgba(0, 229, 255, 0.2)', background: 'rgba(3, 8, 20, 0.4)', marginBottom: 12 },
-  tab: { flex: 1, padding: '10px 4px', textAlign: 'center', fontFamily: 'var(--font-title)', fontSize: 13, letterSpacing: 1, color: '#4a8fa8', fontWeight: 800, cursor: 'pointer' },
+  tab: { flex: 1, padding: '10px 4px', textAlign: 'center', fontFamily: 'var(--font-title)', fontSize: 13, letterSpacing: 1, color: '#7ec8e3', fontWeight: 800, cursor: 'pointer' },
   tabActive: { flex: 1, padding: '10px 4px', textAlign: 'center', fontFamily: 'var(--font-title)', fontSize: 13, letterSpacing: 1, color: '#f5a623', borderBottom: '2px solid #f5a623', fontWeight: 800, cursor: 'pointer' },
   card: { margin: '0 0 12px 0', padding: 14 },
   cardTitle: { fontFamily: 'var(--font-title)', fontSize: 14, fontWeight: 800, marginBottom: 8, letterSpacing: 1 },
@@ -305,7 +305,7 @@ const styles = {
   forgeCard: { margin: '0 0 12px 0', padding: 14 },
   forgeHeader: { display: 'flex', alignItems: 'center', gap: 10, borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: 8 },
   forgeItemName: { fontFamily: 'var(--font-title)', fontSize: 15, fontWeight: 800, color: '#fff' },
-  forgeItemSlot: { fontFamily: 'var(--font-mono)', fontSize: 13, color: '#4a8fa8', marginTop: 2, fontWeight: 700 },
+  forgeItemSlot: { fontFamily: 'var(--font-mono)', fontSize: 13, color: '#7ec8e3', marginTop: 2, fontWeight: 700 },
   ingredients: { marginTop: 10 },
   ingredientLabel: { fontFamily: 'var(--font-title)', fontSize: 13, color: '#7ab0d0', fontWeight: 800, marginBottom: 6 },
   ingredientsGrid: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 },

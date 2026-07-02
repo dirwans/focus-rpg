@@ -124,7 +124,7 @@ export default function Cargo() {
         }}
         onClick={() => handleSlotClick(slot)}
       >
-        <div style={{ fontFamily: 'var(--font-title)', fontSize: 8, color: isFilterActive ? '#00e5ff' : item ? color : '#2a5a8a', letterSpacing: 0.5, fontWeight: 800, textTransform: 'uppercase' }}>
+        <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: isFilterActive ? '#00e5ff' : item ? color: '#7ab0d0', letterSpacing: 0.5, fontWeight: 800, textTransform: 'uppercase' }}>
           {slotLabel}
         </div>
         {item ? (
@@ -134,7 +134,7 @@ export default function Cargo() {
             ) : (
               <span style={{ fontSize: 20 }}>{item.emoji}</span>
             )}
-            <div style={{ fontSize: 9, fontFamily: 'var(--font-mono)', color: color, fontWeight: 'bold', textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden', maxWidth: 80, textAlign: 'center' }}>
+            <div style={{ fontSize: 13, fontFamily: 'var(--font-mono)', color: color, fontWeight: 'bold', textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden', maxWidth: 80, textAlign: 'center' }}>
               {item.name.split(' ')[0]}
             </div>
             
@@ -153,7 +153,7 @@ export default function Cargo() {
                 background: 'rgba(3, 8, 20, 0.9)',
                 border: `1px solid ${color}`,
                 color: color,
-                fontSize: 8,
+                fontSize: 13,
                 fontWeight: 'bold',
                 display: 'flex',
                 alignItems: 'center',
@@ -202,7 +202,7 @@ export default function Cargo() {
             borderRadius: 20,
             padding: '6px 12px',
             fontFamily: 'var(--font-mono)',
-            fontSize: 12,
+            fontSize: 13,
             fontWeight: 800,
             color: '#ff4466',
             cursor: 'pointer',
@@ -260,7 +260,7 @@ export default function Cargo() {
         {slotFilter && (
           <button
             onClick={() => setSlotFilter(null)}
-            style={{ background: 'rgba(0,229,255,0.12)', border: '1px solid #00e5ff', borderRadius: 12, padding: '3px 10px', fontFamily: 'var(--font-mono)', fontSize: 10, fontWeight: 800, color: '#00e5ff', cursor: 'pointer', outline: 'none', marginLeft: 'auto' }}
+            style={{ background: 'rgba(0,229,255,0.12)', border: '1px solid #00e5ff', borderRadius: 12, padding: '3px 10px', fontFamily: 'var(--font-mono)', fontSize: 13, fontWeight: 800, color: '#00e5ff', cursor: 'pointer', outline: 'none', marginLeft: 'auto' }}
           >
             ✕ SHOW ALL
           </button>
@@ -273,7 +273,7 @@ export default function Cargo() {
           <div style={{ fontFamily: 'monospace', fontSize: 14, color: '#7ab0d0', marginTop: 8 }}>
             {slotFilter ? `No ${slotFilter} items in cargo` : t('empty_inventory')}
           </div>
-          <div style={{ fontFamily: 'monospace', fontSize: 14, color: '#4a8fa8', marginTop: 4, fontWeight: 800 }}>
+          <div style={{ fontFamily: 'monospace', fontSize: 14, color: '#7ec8e3', marginTop: 4, fontWeight: 800 }}>
             {slotFilter ? 'Tap another slot or SHOW ALL' : t('empty_inventory_desc')}
           </div>
         </div>
@@ -422,10 +422,10 @@ const styles = {
   chip:         (c) => ({ background: 'rgba(3, 8, 20, 0.8)', border: `1px solid ${c}`, borderRadius: 20, padding: '6px 14px', fontFamily: 'var(--font-mono)', fontSize: 16, fontWeight: 800, color: c, boxShadow: `0 0 10px ${c}33, inset 0 0 6px ${c}22` }),
   slots:        { fontFamily: 'var(--font-mono)', fontSize: 14, color: '#7ab0d0', background: 'rgba(3, 8, 20, 0.8)', border: '1px solid #1a3a6a', borderRadius: 20, padding: '6px 14px', marginLeft: 'auto', fontWeight: 800 },
   section:      { margin: '0 16px 14px', padding: 14 },
-  sectionLabel: { fontFamily: 'var(--font-title)', fontSize: 14, letterSpacing: 2, color: '#4a8fa8', marginBottom: 10, fontWeight: 800 },
+  sectionLabel: { fontFamily: 'var(--font-title)', fontSize: 14, letterSpacing: 2, color: '#7ec8e3', marginBottom: 10, fontWeight: 800 },
   
   // Equipped HUD
-  slotHeader:   { fontFamily: 'var(--font-title)', fontSize: 10, color: '#4a8fa8', letterSpacing: 0.5, fontWeight: 800 },
+  slotHeader:   { fontFamily: 'var(--font-title)', fontSize: 13, color: '#7ec8e3', letterSpacing: 0.5, fontWeight: 800 },
   
   // Inventory Grid
   grid:         { display: 'flex', flexWrap: 'wrap', gap: 10, padding: '0 16px 16px' },
@@ -433,7 +433,7 @@ const styles = {
   itemIcon:     { fontSize: 28 },
   itemName:     { fontFamily: 'var(--font-body)', fontSize: 13, color: '#e0f4ff', height: 34, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', lineHeight: 1.3, fontWeight: 700 },
   itemBadges:   { display: 'flex', gap: 4 },
-  rarityBadge:  (c) => ({ fontFamily: 'var(--font-title)', fontSize: 10, color: c, fontWeight: 800 }),
+  rarityBadge:  (c) => ({ fontFamily: 'var(--font-title)', fontSize: 13, color: c, fontWeight: 800 }),
   empty:        { flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: 40 },
   
   // Modal
