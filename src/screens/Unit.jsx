@@ -101,6 +101,25 @@ export default function Unit() {
 
       {/* UNIT SPECIFICATIONS */}
       <AccordionSection label={t('unit_specifications')} raceClass={raceClass} defaultOpen={true}>
+        <div style={styles.baseStatsGrid}>
+          <div style={styles.baseStatBox}>
+            <span style={styles.baseStatLabel}>STR</span>
+            <span style={styles.baseStatNum}>{stats.str}</span>
+          </div>
+          <div style={styles.baseStatBox}>
+            <span style={styles.baseStatLabel}>DEX</span>
+            <span style={styles.baseStatNum}>{stats.dex}</span>
+          </div>
+          <div style={styles.baseStatBox}>
+            <span style={styles.baseStatLabel}>INT</span>
+            <span style={styles.baseStatNum}>{stats.int}</span>
+          </div>
+          <div style={styles.baseStatBox}>
+            <span style={styles.baseStatLabel}>VIT</span>
+            <span style={styles.baseStatNum}>{stats.vit}</span>
+          </div>
+        </div>
+
         <div style={styles.statsGrid}>
           <div style={styles.statBox}>
             <span style={{ color: '#f5a623', fontSize: 13 }}>⚡ ATK</span>
@@ -288,6 +307,11 @@ const styles = {
   expText: { fontFamily: 'var(--font-mono)', fontSize: 13, color: '#7ec8e3', textAlign: 'right', fontWeight: 800 },
 
   // Stats
+  baseStatsGrid: { display: 'flex', gap: 6, marginBottom: 10 },
+  baseStatBox: { flex: 1, background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.1)', borderRadius: 8, padding: '8px 4px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 },
+  baseStatLabel: { fontFamily: 'var(--font-title)', fontSize: 12, color: '#88aadd', fontWeight: 800, letterSpacing: 0.5 },
+  baseStatNum: { fontFamily: 'var(--font-mono)', fontSize: 16, color: '#ffffff', fontWeight: 900 },
+
   statsGrid: { display: 'flex', gap: 8 },
   statBox: { flex: 1, background: 'rgba(3, 8, 20, 0.6)', border: '1px solid rgba(0, 229, 255, 0.15)', borderRadius: 10, padding: '10px 8px', display: 'flex', flexDirection: 'column', gap: 4, fontFamily: 'var(--font-mono)', fontSize: 13, alignItems: 'center', boxShadow: 'inset 0 0 8px rgba(0, 229, 255, 0.05)', fontWeight: 800 },
   statNum: { fontFamily: 'var(--font-mono)', fontSize: 18, fontWeight: 900, color: '#e0f4ff', textShadow: '0 0 6px rgba(0, 229, 255, 0.2)' },

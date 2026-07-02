@@ -8,6 +8,7 @@ import itemsData from '../data/items.json'
 import archonData from '../data/archon.json'
 import { getWeaponRarityBonus } from '../lib/rarity'
 import { TRANSLATIONS } from '../lib/translationData'
+import baseStatsData from '../data/baseStats.json'
 
 function tStore(key, replacements = {}, playerState = null) {
   const language = playerState?.language || 'en'
@@ -911,6 +912,11 @@ export const useGameStore = create(
         
         const eq = player.equipment || { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null }
         
+        // Base Stats Lookups
+        const baseStats = player.job && baseStatsData[player.race] && baseStatsData[player.race][player.job] 
+                          ? baseStatsData[player.race][player.job] 
+                          : { str: 5, dex: 5, int: 5, vit: 5 }
+        
         // Job bonus
         let jobBonus = { atk: 0, def: 0, hp: 0 }
         if (player.job && jobs[player.race]) {
@@ -956,9 +962,24 @@ export const useGameStore = create(
           }
         })
 
-        let baseAtk = calcStat('atk', player.upgrades?.atk || 0, player.race) + flatAtk
-        let baseDef = calcStat('def', player.upgrades?.def || 0, player.race) + flatDef
-        let baseHp = calcStat('hp', player.upgrades?.hp || 0, player.race) + flatHp
+        // Base HP, DEF, ATK Math using STR, DEX, INT, VIT
+        let baseAtkScaling = 0
+        if (baseStats.str >= 12 && baseStats.str > baseStats.dex && baseStats.str > baseStats.int) { // Warrior
+            baseAtkScaling = (baseStats.str * 2.5) + (baseStats.dex * 0.5)
+        } else if (baseStats.dex >= 12 && baseStats.dex > baseStats.str && baseStats.dex > baseStats.int) { // Ranger
+            baseAtkScaling = (baseStats.dex * 2.5) + (baseStats.str * 0.5)
+        } else if (baseStats.int >= 14) { // Spiritualist
+            baseAtkScaling = (baseStats.int * 2.5) + (baseStats.dex * 0.5)
+        } else { // Specialist
+            baseAtkScaling = (baseStats.str * 1.5) + (baseStats.dex * 1.0) + (baseStats.int * 1.0)
+        }
+
+        let baseHpScaling = (baseStats.vit * 25) + (baseStats.str * 5)
+        let baseDefScaling = (baseStats.vit * 1.5) + (baseStats.str * 0.5)
+
+        let baseAtk = baseAtkScaling + calcStat('atk', player.upgrades?.atk || 0, player.race) + flatAtk
+        let baseDef = baseDefScaling + calcStat('def', player.upgrades?.def || 0, player.race) + flatDef
+        let baseHp = baseHpScaling + calcStat('hp', player.upgrades?.hp || 0, player.race) + flatHp
 
         // Set bonus verification (requires being the Archon)
         const isBelterraSet = isArchon &&
@@ -1034,6 +1055,10 @@ export const useGameStore = create(
           atk: Math.floor(atk),
           def: Math.floor(def),
           hp: Math.floor(hp),
+          str: baseStats.str,
+          dex: baseStats.dex,
+          int: baseStats.int,
+          vit: baseStats.vit,
           title: activeTitle
         }
       },

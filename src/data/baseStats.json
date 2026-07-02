@@ -1,0 +1,278 @@
+{
+  "belterra": {
+    "belterra_warrior": {
+      "str": 12,
+      "dex": 6,
+      "int": 4,
+      "vit": 8
+    },
+    "belterra_ranger": {
+      "str": 6,
+      "dex": 12,
+      "int": 6,
+      "vit": 6
+    },
+    "belterra_spiritualist": {
+      "str": 3,
+      "dex": 5,
+      "int": 15,
+      "vit": 7
+    },
+    "belterra_specialist": {
+      "str": 8,
+      "dex": 8,
+      "int": 8,
+      "vit": 6
+    },
+    "commando": {
+      "str": 12,
+      "dex": 6,
+      "int": 4,
+      "vit": 8
+    },
+    "miller": {
+      "str": 12,
+      "dex": 6,
+      "int": 4,
+      "vit": 8
+    },
+    "desperado": {
+      "str": 6,
+      "dex": 12,
+      "int": 6,
+      "vit": 6
+    },
+    "sniper": {
+      "str": 6,
+      "dex": 12,
+      "int": 6,
+      "vit": 6
+    },
+    "psyper": {
+      "str": 3,
+      "dex": 5,
+      "int": 15,
+      "vit": 7
+    },
+    "chandra": {
+      "str": 3,
+      "dex": 5,
+      "int": 15,
+      "vit": 7
+    },
+    "craftsman": {
+      "str": 8,
+      "dex": 8,
+      "int": 8,
+      "vit": 6
+    },
+    "driver": {
+      "str": 8,
+      "dex": 8,
+      "int": 8,
+      "vit": 6
+    },
+    "berserker": {
+      "str": 12,
+      "dex": 6,
+      "int": 4,
+      "vit": 8
+    },
+    "armsman": {
+      "str": 12,
+      "dex": 6,
+      "int": 4,
+      "vit": 8
+    },
+    "shield_miller": {
+      "str": 12,
+      "dex": 6,
+      "int": 4,
+      "vit": 8
+    },
+    "hidden_soldier": {
+      "str": 6,
+      "dex": 12,
+      "int": 6,
+      "vit": 6
+    },
+    "sentinel": {
+      "str": 3,
+      "dex": 5,
+      "int": 15,
+      "vit": 7
+    },
+    "infiltrator": {
+      "str": 6,
+      "dex": 12,
+      "int": 6,
+      "vit": 6
+    },
+    "wizard": {
+      "str": 3,
+      "dex": 5,
+      "int": 15,
+      "vit": 7
+    },
+    "astralist": {
+      "str": 3,
+      "dex": 5,
+      "int": 15,
+      "vit": 7
+    },
+    "holy_chandra": {
+      "str": 3,
+      "dex": 5,
+      "int": 15,
+      "vit": 7
+    },
+    "mental_smith": {
+      "str": 8,
+      "dex": 8,
+      "int": 8,
+      "vit": 6
+    },
+    "armor_rider": {
+      "str": 12,
+      "dex": 6,
+      "int": 4,
+      "vit": 8
+    }
+  },
+  "coralis": {
+    "guardian": {
+      "str": 12,
+      "dex": 8,
+      "int": 4,
+      "vit": 6
+    },
+    "mystic_archer": {
+      "str": 6,
+      "dex": 14,
+      "int": 6,
+      "vit": 4
+    },
+    "spirit_knight": {
+      "str": 12,
+      "dex": 8,
+      "int": 4,
+      "vit": 6
+    },
+    "craftsman": {
+      "str": 12,
+      "dex": 8,
+      "int": 4,
+      "vit": 6
+    },
+    "moon_ranger": {
+      "str": 6,
+      "dex": 14,
+      "int": 6,
+      "vit": 4
+    },
+    "caster": {
+      "str": 2,
+      "dex": 6,
+      "int": 16,
+      "vit": 6
+    },
+    "summoner": {
+      "str": 2,
+      "dex": 6,
+      "int": 16,
+      "vit": 6
+    },
+    "lumina_paladin": {
+      "str": 12,
+      "dex": 8,
+      "int": 4,
+      "vit": 6
+    },
+    "artist": {
+      "str": 6,
+      "dex": 10,
+      "int": 10,
+      "vit": 4
+    },
+    "star_seeker": {
+      "str": 12,
+      "dex": 8,
+      "int": 4,
+      "vit": 6
+    },
+    "warlock": {
+      "str": 2,
+      "dex": 6,
+      "int": 16,
+      "vit": 6
+    },
+    "dark_priest": {
+      "str": 2,
+      "dex": 6,
+      "int": 16,
+      "vit": 6
+    },
+    "grazier": {
+      "str": 2,
+      "dex": 6,
+      "int": 16,
+      "vit": 6
+    }
+  },
+  "acreton": {
+    "cadet": {
+      "str": 14,
+      "dex": 6,
+      "int": 2,
+      "vit": 8
+    },
+    "gunner": {
+      "str": 8,
+      "dex": 14,
+      "int": 2,
+      "vit": 6
+    },
+    "striker": {
+      "str": 10,
+      "dex": 10,
+      "int": 2,
+      "vit": 8
+    },
+    "iron_trooper": {
+      "str": 14,
+      "dex": 6,
+      "int": 2,
+      "vit": 8
+    },
+    "siege_gunner": {
+      "str": 8,
+      "dex": 14,
+      "int": 2,
+      "vit": 6
+    },
+    "cyber_assassin": {
+      "str": 14,
+      "dex": 6,
+      "int": 2,
+      "vit": 8
+    },
+    "iron_vanguard": {
+      "str": 14,
+      "dex": 6,
+      "int": 2,
+      "vit": 8
+    },
+    "nova_destroyer": {
+      "str": 8,
+      "dex": 14,
+      "int": 2,
+      "vit": 6
+    },
+    "omega_reaper": {
+      "str": 14,
+      "dex": 6,
+      "int": 2,
+      "vit": 8
+    }
+  }
+}
