@@ -1,58 +1,343 @@
 {
   "guardian": {
     "weapons": [
-      { "id": "wpn_bio_gua_0", "name": "Guardian Blade", "grade": "Common", "atk": 20 },
-      { "id": "wpn_bio_gua_1", "name": "Aegis Saber", "grade": "Uncommon", "atk": 45 },
-      { "id": "wpn_bio_gua_2", "name": "Valor Edge", "grade": "Rare", "atk": 80 },
-      { "id": "wpn_bio_gua_3", "name": "Judicator", "grade": "Epic", "atk": 130 },
-      { "id": "wpn_bio_gua_4", "name": "Kingslayer", "grade": "Legendary", "atk": 200 },
-      { "id": "wpn_bio_gua_5", "name": "Exodus", "grade": "Mythic", "atk": 300 }
+      {
+        "id": "wpn_bio_gua_0",
+        "name": "Guardian Blade",
+        "grade": "Common",
+        "atk": 20
+      },
+      {
+        "id": "wpn_bio_gua_1",
+        "name": "Aegis Saber",
+        "grade": "Uncommon",
+        "atk": 45
+      },
+      {
+        "id": "wpn_bio_gua_2",
+        "name": "Valor Edge",
+        "grade": "Rare",
+        "atk": 80
+      },
+      {
+        "id": "wpn_bio_gua_3",
+        "name": "Judicator",
+        "grade": "Epic",
+        "atk": 130
+      },
+      {
+        "id": "wpn_bio_gua_4",
+        "name": "Kingslayer",
+        "grade": "Legendary",
+        "atk": 200
+      },
+      {
+        "id": "wpn_bio_gua_5",
+        "name": "Exodus",
+        "grade": "Mythic",
+        "atk": 300
+      }
     ],
     "shields": [
-      { "id": "shd_bio_0", "name": "Guardian Shield", "grade": "Common", "def": 15 },
-      { "id": "shd_bio_1", "name": "Bulwark Shield", "grade": "Uncommon", "def": 35 },
-      { "id": "shd_bio_2", "name": "Fortress Shield", "grade": "Rare", "def": 65 },
-      { "id": "shd_bio_3", "name": "Aegis Barrier", "grade": "Epic", "def": 100 },
-      { "id": "shd_bio_4", "name": "Titan Barrier", "grade": "Legendary", "def": 150 },
-      { "id": "shd_bio_5", "name": "Infinity Aegis", "grade": "Mythic", "def": 220 }
+      {
+        "id": "shd_bio_0",
+        "name": "Guardian Shield",
+        "grade": "Common",
+        "def": 15
+      },
+      {
+        "id": "shd_bio_1",
+        "name": "Bulwark Shield",
+        "grade": "Uncommon",
+        "def": 35
+      },
+      {
+        "id": "shd_bio_2",
+        "name": "Fortress Shield",
+        "grade": "Rare",
+        "def": 65
+      },
+      {
+        "id": "shd_bio_3",
+        "name": "Aegis Barrier",
+        "grade": "Epic",
+        "def": 100
+      },
+      {
+        "id": "shd_bio_4",
+        "name": "Titan Barrier",
+        "grade": "Legendary",
+        "def": 150
+      },
+      {
+        "id": "shd_bio_5",
+        "name": "Infinity Aegis",
+        "grade": "Mythic",
+        "def": 220
+      }
     ]
   },
   "marksman": {
     "weapons": [
-      { "id": "wpn_bio_mar_0", "name": "Falcon Rifle", "grade": "Common", "atk": 20 },
-      { "id": "wpn_bio_mar_1", "name": "Viper Rifle", "grade": "Uncommon", "atk": 45 },
-      { "id": "wpn_bio_mar_2", "name": "Specter Rifle", "grade": "Rare", "atk": 80 },
-      { "id": "wpn_bio_mar_3", "name": "Tempest Rifle", "grade": "Epic", "atk": 130 },
-      { "id": "wpn_bio_mar_4", "name": "Nemesis Rifle", "grade": "Legendary", "atk": 200 },
-      { "id": "wpn_bio_mar_5", "name": "Oblivion Rifle", "grade": "Mythic", "atk": 300 }
+      {
+        "id": "wpn_bio_mar_0",
+        "name": "Falcon Rifle",
+        "grade": "Common",
+        "atk": 20
+      },
+      {
+        "id": "wpn_bio_mar_1",
+        "name": "Viper Rifle",
+        "grade": "Uncommon",
+        "atk": 45
+      },
+      {
+        "id": "wpn_bio_mar_2",
+        "name": "Specter Rifle",
+        "grade": "Rare",
+        "atk": 80
+      },
+      {
+        "id": "wpn_bio_mar_3",
+        "name": "Tempest Rifle",
+        "grade": "Epic",
+        "atk": 130
+      },
+      {
+        "id": "wpn_bio_mar_4",
+        "name": "Nemesis Rifle",
+        "grade": "Legendary",
+        "atk": 200
+      },
+      {
+        "id": "wpn_bio_mar_5",
+        "name": "Oblivion Rifle",
+        "grade": "Mythic",
+        "atk": 300
+      }
     ]
   },
   "engineer": {
     "weapons": [
-      { "id": "wpn_bio_eng_0", "name": "Pulse Wrench", "grade": "Common", "atk": 18 },
-      { "id": "wpn_bio_eng_1", "name": "Fusion Driver", "grade": "Uncommon", "atk": 40 },
-      { "id": "wpn_bio_eng_2", "name": "Quantum Driver", "grade": "Rare", "atk": 75 },
-      { "id": "wpn_bio_eng_3", "name": "Nova Driver", "grade": "Epic", "atk": 125 },
-      { "id": "wpn_bio_eng_4", "name": "Genesis Driver", "grade": "Legendary", "atk": 195 },
-      { "id": "wpn_bio_eng_5", "name": "Infinity Driver", "grade": "Mythic", "atk": 290 }
+      {
+        "id": "wpn_bio_eng_0",
+        "name": "Pulse Wrench",
+        "grade": "Common",
+        "atk": 18
+      },
+      {
+        "id": "wpn_bio_eng_1",
+        "name": "Fusion Driver",
+        "grade": "Uncommon",
+        "atk": 40
+      },
+      {
+        "id": "wpn_bio_eng_2",
+        "name": "Quantum Driver",
+        "grade": "Rare",
+        "atk": 75
+      },
+      {
+        "id": "wpn_bio_eng_3",
+        "name": "Nova Driver",
+        "grade": "Epic",
+        "atk": 125
+      },
+      {
+        "id": "wpn_bio_eng_4",
+        "name": "Genesis Driver",
+        "grade": "Legendary",
+        "atk": 195
+      },
+      {
+        "id": "wpn_bio_eng_5",
+        "name": "Infinity Driver",
+        "grade": "Mythic",
+        "atk": 290
+      }
     ]
   },
   "psion": {
     "weapons": [
-      { "id": "wpn_bio_psi_0", "name": "Psi Rod", "grade": "Common", "atk": 20 },
-      { "id": "wpn_bio_psi_1", "name": "Mind Scepter", "grade": "Uncommon", "atk": 45 },
-      { "id": "wpn_bio_psi_2", "name": "Astral Staff", "grade": "Rare", "atk": 80 },
-      { "id": "wpn_bio_psi_3", "name": "Void Catalyst", "grade": "Epic", "atk": 130 },
-      { "id": "wpn_bio_psi_4", "name": "Soul Nexus", "grade": "Legendary", "atk": 200 },
-      { "id": "wpn_bio_psi_5", "name": "Eternity Staff", "grade": "Mythic", "atk": 300 }
+      {
+        "id": "wpn_bio_psi_0",
+        "name": "Psi Rod",
+        "grade": "Common",
+        "atk": 20
+      },
+      {
+        "id": "wpn_bio_psi_1",
+        "name": "Mind Scepter",
+        "grade": "Uncommon",
+        "atk": 45
+      },
+      {
+        "id": "wpn_bio_psi_2",
+        "name": "Astral Staff",
+        "grade": "Rare",
+        "atk": 80
+      },
+      {
+        "id": "wpn_bio_psi_3",
+        "name": "Void Catalyst",
+        "grade": "Epic",
+        "atk": 130
+      },
+      {
+        "id": "wpn_bio_psi_4",
+        "name": "Soul Nexus",
+        "grade": "Legendary",
+        "atk": 200
+      },
+      {
+        "id": "wpn_bio_psi_5",
+        "name": "Eternity Staff",
+        "grade": "Mythic",
+        "atk": 300
+      }
     ]
   },
   "armorSets": [
-    { "id": "set_bio_0", "name": "Guardian Set", "grade": "Common", "parts": ["Helmet", "Armor", "Pants", "Gloves", "Boots"], "stats": {} },
-    { "id": "set_bio_1", "name": "Centurion Set", "grade": "Uncommon", "parts": ["Helmet", "Armor", "Pants", "Gloves", "Boots"], "stats": {} },
-    { "id": "set_bio_2", "name": "Legion Set", "grade": "Rare", "parts": ["Helmet", "Armor", "Pants", "Gloves", "Boots"], "stats": {} },
-    { "id": "set_bio_3", "name": "Executor Set", "grade": "Epic", "parts": ["Helmet", "Armor", "Pants", "Gloves", "Boots"], "stats": {} },
-    { "id": "set_bio_4", "name": "Imperator Set", "grade": "Legendary", "parts": ["Helmet", "Armor", "Pants", "Gloves", "Boots"], "stats": {} },
-    { "id": "set_bio_5", "name": "Genesis Set", "grade": "Mythic", "parts": ["Helmet", "Armor", "Pants", "Gloves", "Boots"], "stats": {} }
+    {
+      "id": "set_bio_0",
+      "name": "Guardian Set",
+      "grade": "Common",
+      "parts": [
+        "Helmet",
+        "Armor",
+        "Pants",
+        "Gloves",
+        "Boots"
+      ],
+      "stats": {
+        "Helmet": {
+          "hp": 80,
+          "def": 8
+        },
+        "Armor": {
+          "hp": 180,
+          "def": 18
+        },
+        "Pants": {
+          "hp": 140,
+          "def": 14
+        },
+        "Gloves": {
+          "hp": 60,
+          "def": 6
+        },
+        "Boots": {
+          "hp": 70,
+          "def": 7
+        }
+      }
+    },
+    {
+      "id": "set_bio_1",
+      "name": "Centurion Set",
+      "grade": "Uncommon",
+      "parts": [
+        "Helmet",
+        "Armor",
+        "Pants",
+        "Gloves",
+        "Boots"
+      ],
+      "stats": {}
+    },
+    {
+      "id": "set_bio_2",
+      "name": "Legion Set",
+      "grade": "Rare",
+      "parts": [
+        "Helmet",
+        "Armor",
+        "Pants",
+        "Gloves",
+        "Boots"
+      ],
+      "stats": {}
+    },
+    {
+      "id": "set_bio_3",
+      "name": "Executor Set",
+      "grade": "Epic",
+      "parts": [
+        "Helmet",
+        "Armor",
+        "Pants",
+        "Gloves",
+        "Boots"
+      ],
+      "stats": {
+        "Helmet": {
+          "hp": 400,
+          "def": 40
+        },
+        "Armor": {
+          "hp": 900,
+          "def": 90
+        },
+        "Pants": {
+          "hp": 700,
+          "def": 70
+        },
+        "Gloves": {
+          "hp": 320,
+          "def": 32
+        },
+        "Boots": {
+          "hp": 360,
+          "def": 36
+        }
+      }
+    },
+    {
+      "id": "set_bio_4",
+      "name": "Imperator Set",
+      "grade": "Legendary",
+      "parts": [
+        "Helmet",
+        "Armor",
+        "Pants",
+        "Gloves",
+        "Boots"
+      ],
+      "stats": {
+        "Helmet": {
+          "hp": 700,
+          "def": 70
+        },
+        "Armor": {
+          "hp": 1500,
+          "def": 150
+        },
+        "Pants": {
+          "hp": 1150,
+          "def": 115
+        },
+        "Gloves": {
+          "hp": 520,
+          "def": 52
+        },
+        "Boots": {
+          "hp": 600,
+          "def": 60
+        }
+      }
+    },
+    {
+      "id": "set_bio_5",
+      "name": "Genesis Set",
+      "grade": "Mythic",
+      "parts": [
+        "Helmet",
+        "Armor",
+        "Pants",
+        "Gloves",
+        "Boots"
+      ],
+      "stats": {}
+    }
   ]
 }

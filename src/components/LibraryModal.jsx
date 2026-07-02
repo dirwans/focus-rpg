@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import arctronGears from '../data/gears/arctron.json'
 import bionexGears from '../data/gears/bionex.json'
 import celestraGears from '../data/gears/celestra.json'
+import accessoriesData from '../data/gears/accessories.json'
 
 export default function LibraryModal({ onClose }) {
   const [tab, setTab] = useState('growth')
@@ -202,6 +203,10 @@ export default function LibraryModal({ onClose }) {
                   style={equipFaction === 'celestra' ? styles.subTabActive : styles.subTab}
                   onClick={() => setEquipFaction('celestra')}
                 >Celestra</button>
+                <button 
+                  style={equipFaction === 'accessories' ? styles.subTabActive : styles.subTab}
+                  onClick={() => setEquipFaction('accessories')}
+                >Global (Acc)</button>
               </div>
 
               {equipFaction === 'arctron' && (
@@ -383,6 +388,56 @@ export default function LibraryModal({ onClose }) {
                       <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
                         <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
                         <span style={{ color: '#00e5ff' }}>+{w.atk} ATK</span>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
+
+              {equipFaction === 'accessories' && (
+                <>
+                  <div style={styles.itemCard}>
+                    <div style={styles.itemTitle}>📿 Amulets Database (HP & DEF)</div>
+                    {accessoriesData.amulets.map((w, i) => (
+                      <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
+                        <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
+                        <span style={{ color: '#00ff88' }}>+{w.hp} HP / +{w.def} DEF</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div style={styles.itemCard}>
+                    <div style={styles.itemTitle}>💍 Rings Database (ATK & Crit)</div>
+                    {accessoriesData.rings.map((w, i) => (
+                      <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
+                        <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
+                        <span style={{ color: '#00e5ff' }}>+{w.atk} ATK / +{w.critical}% Crit</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div style={styles.itemCard}>
+                    <div style={styles.itemTitle}>🦸‍♂️ Capes / Boosters</div>
+                    {accessoriesData.capes.map((w, i) => (
+                      <div key={i} style={{ borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '8px 0', display: 'flex', flexDirection: 'column', gap: 6 }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                          <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> <strong>{w.name}</strong></span>
+                          <span style={{ color: '#f5a623' }}>+{w.hp} HP / +{w.def} DEF / +{w.dodge}% Dodge</span>
+                        </div>
+                        {w.materials && (
+                          <div style={{ paddingLeft: 70, fontSize: 12, color: '#9db2c2' }}>
+                            <div style={{ marginBottom: 4 }}>
+                              <span style={{ color: '#00e5ff' }}>{w.craft_cost ? 'Craft Cost' : 'Upgrade Cost'}:</span> {(w.craft_cost || w.upgrade_cost).toLocaleString()} CRD
+                            </div>
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                              {w.materials.map((m, mi) => (
+                                <span key={mi} style={{ background: 'rgba(255,255,255,0.05)', padding: '2px 6px', borderRadius: 4 }}>
+                                  {m.name} x{m.qty}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>

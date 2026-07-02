@@ -1,0 +1,157 @@
+{
+  "amulets": [
+    {
+      "id": "amu_0",
+      "name": "Lumen Charm",
+      "grade": "Common",
+      "hp": 500,
+      "def": 20
+    },
+    {
+      "id": "amu_1",
+      "name": "Aether Charm",
+      "grade": "Uncommon",
+      "hp": 1200,
+      "def": 45
+    },
+    {
+      "id": "amu_2",
+      "name": "Astralis Charm",
+      "grade": "Rare",
+      "hp": 2500,
+      "def": 80
+    },
+    {
+      "id": "amu_3",
+      "name": "Aurora Charm",
+      "grade": "Epic",
+      "hp": 5000,
+      "def": 150
+    }
+  ],
+  "rings": [
+    {
+      "id": "rng_0",
+      "name": "Ember Ring",
+      "grade": "Common",
+      "atk": 25,
+      "critical": 2
+    },
+    {
+      "id": "rng_1",
+      "name": "Storm Ring",
+      "grade": "Uncommon",
+      "atk": 60,
+      "critical": 4
+    },
+    {
+      "id": "rng_2",
+      "name": "Obsidian Ring",
+      "grade": "Rare",
+      "atk": 120,
+      "critical": 6
+    },
+    {
+      "id": "rng_3",
+      "name": "Chronos Ring",
+      "grade": "Epic",
+      "atk": 220,
+      "critical": 10
+    }
+  ],
+  "capes": [
+    {
+      "id": "cap_0",
+      "name": "Storm Booster",
+      "grade": "Common",
+      "hp": 1000,
+      "def": 50,
+      "dodge": 3,
+      "craft_cost": 10000000,
+      "materials": [
+        {
+          "name": "Booster Frame",
+          "qty": 30
+        },
+        {
+          "name": "Flux Engine",
+          "qty": 20
+        },
+        {
+          "name": "Stabilizer Wing",
+          "qty": 40
+        },
+        {
+          "name": "Nexus Core",
+          "qty": 15
+        },
+        {
+          "name": "Flight Module",
+          "qty": 25
+        }
+      ]
+    },
+    {
+      "id": "cap_1",
+      "name": "Skybreaker Booster",
+      "grade": "Uncommon",
+      "hp": 2500,
+      "def": 100,
+      "dodge": 5,
+      "upgrade_cost": 50000000,
+      "materials": [
+        {
+          "name": "Reinforced Booster Frame",
+          "qty": 50
+        },
+        {
+          "name": "Advanced Flux Engine",
+          "qty": 35
+        },
+        {
+          "name": "Reinforced Stabilizer Wing",
+          "qty": 60
+        },
+        {
+          "name": "Refined Nexus Core",
+          "qty": 25
+        },
+        {
+          "name": "Advanced Flight Module",
+          "qty": 40
+        }
+      ]
+    },
+    {
+      "id": "cap_2",
+      "name": "Nova Booster",
+      "grade": "Rare",
+      "hp": 5000,
+      "def": 180,
+      "dodge": 8,
+      "upgrade_cost": 150000000,
+      "materials": [
+        {
+          "name": "Elite Booster Frame",
+          "qty": 80
+        },
+        {
+          "name": "Hyper Flux Engine",
+          "qty": 60
+        },
+        {
+          "name": "Elite Stabilizer Wing",
+          "qty": 100
+        },
+        {
+          "name": "Pure Nexus Core",
+          "qty": 40
+        },
+        {
+          "name": "Hyper Flight Module",
+          "qty": 70
+        }
+      ]
+    }
+  ]
+}

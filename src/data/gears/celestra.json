@@ -1,58 +1,343 @@
 {
   "sentinel": {
     "weapons": [
-      { "id": "wpn_cor_sen_0", "name": "Moonblade", "grade": "Common", "atk": 20 },
-      { "id": "wpn_cor_sen_1", "name": "Sylvan Saber", "grade": "Uncommon", "atk": 45 },
-      { "id": "wpn_cor_sen_2", "name": "Starfang", "grade": "Rare", "atk": 80 },
-      { "id": "wpn_cor_sen_3", "name": "Astralis", "grade": "Epic", "atk": 130 },
-      { "id": "wpn_cor_sen_4", "name": "Celestia", "grade": "Legendary", "atk": 200 },
-      { "id": "wpn_cor_sen_5", "name": "Elysium", "grade": "Mythic", "atk": 300 }
+      {
+        "id": "wpn_cor_sen_0",
+        "name": "Moonblade",
+        "grade": "Common",
+        "atk": 20
+      },
+      {
+        "id": "wpn_cor_sen_1",
+        "name": "Sylvan Saber",
+        "grade": "Uncommon",
+        "atk": 45
+      },
+      {
+        "id": "wpn_cor_sen_2",
+        "name": "Starfang",
+        "grade": "Rare",
+        "atk": 80
+      },
+      {
+        "id": "wpn_cor_sen_3",
+        "name": "Astralis",
+        "grade": "Epic",
+        "atk": 130
+      },
+      {
+        "id": "wpn_cor_sen_4",
+        "name": "Celestia",
+        "grade": "Legendary",
+        "atk": 200
+      },
+      {
+        "id": "wpn_cor_sen_5",
+        "name": "Elysium",
+        "grade": "Mythic",
+        "atk": 300
+      }
     ],
     "shields": [
-      { "id": "shd_cor_0", "name": "Moon Aegis", "grade": "Common", "def": 15 },
-      { "id": "shd_cor_1", "name": "Sylvan Guard", "grade": "Uncommon", "def": 35 },
-      { "id": "shd_cor_2", "name": "Astral Ward", "grade": "Rare", "def": 65 },
-      { "id": "shd_cor_3", "name": "Celestial Barrier", "grade": "Epic", "def": 100 },
-      { "id": "shd_cor_4", "name": "Divine Aegis", "grade": "Legendary", "def": 150 },
-      { "id": "shd_cor_5", "name": "Eternal Bulwark", "grade": "Mythic", "def": 220 }
+      {
+        "id": "shd_cor_0",
+        "name": "Moon Aegis",
+        "grade": "Common",
+        "def": 15
+      },
+      {
+        "id": "shd_cor_1",
+        "name": "Sylvan Guard",
+        "grade": "Uncommon",
+        "def": 35
+      },
+      {
+        "id": "shd_cor_2",
+        "name": "Astral Ward",
+        "grade": "Rare",
+        "def": 65
+      },
+      {
+        "id": "shd_cor_3",
+        "name": "Celestial Barrier",
+        "grade": "Epic",
+        "def": 100
+      },
+      {
+        "id": "shd_cor_4",
+        "name": "Divine Aegis",
+        "grade": "Legendary",
+        "def": 150
+      },
+      {
+        "id": "shd_cor_5",
+        "name": "Eternal Bulwark",
+        "grade": "Mythic",
+        "def": 220
+      }
     ]
   },
   "pathfinder": {
     "weapons": [
-      { "id": "wpn_cor_pat_0", "name": "Willow Bow", "grade": "Common", "atk": 20 },
-      { "id": "wpn_cor_pat_1", "name": "Sylph Bow", "grade": "Uncommon", "atk": 45 },
-      { "id": "wpn_cor_pat_2", "name": "Moonveil Bow", "grade": "Rare", "atk": 80 },
-      { "id": "wpn_cor_pat_3", "name": "Astral Bow", "grade": "Epic", "atk": 130 },
-      { "id": "wpn_cor_pat_4", "name": "Starlight Bow", "grade": "Legendary", "atk": 200 },
-      { "id": "wpn_cor_pat_5", "name": "Eternity Bow", "grade": "Mythic", "atk": 300 }
+      {
+        "id": "wpn_cor_pat_0",
+        "name": "Willow Bow",
+        "grade": "Common",
+        "atk": 20
+      },
+      {
+        "id": "wpn_cor_pat_1",
+        "name": "Sylph Bow",
+        "grade": "Uncommon",
+        "atk": 45
+      },
+      {
+        "id": "wpn_cor_pat_2",
+        "name": "Moonveil Bow",
+        "grade": "Rare",
+        "atk": 80
+      },
+      {
+        "id": "wpn_cor_pat_3",
+        "name": "Astral Bow",
+        "grade": "Epic",
+        "atk": 130
+      },
+      {
+        "id": "wpn_cor_pat_4",
+        "name": "Starlight Bow",
+        "grade": "Legendary",
+        "atk": 200
+      },
+      {
+        "id": "wpn_cor_pat_5",
+        "name": "Eternity Bow",
+        "grade": "Mythic",
+        "atk": 300
+      }
     ]
   },
   "oracle": {
     "weapons": [
-      { "id": "wpn_cor_ora_0", "name": "Spirit Relic", "grade": "Common", "atk": 18 },
-      { "id": "wpn_cor_ora_1", "name": "Soul Relic", "grade": "Uncommon", "atk": 40 },
-      { "id": "wpn_cor_ora_2", "name": "Astral Relic", "grade": "Rare", "atk": 75 },
-      { "id": "wpn_cor_ora_3", "name": "Divine Relic", "grade": "Epic", "atk": 125 },
-      { "id": "wpn_cor_ora_4", "name": "Celestial Relic", "grade": "Legendary", "atk": 195 },
-      { "id": "wpn_cor_ora_5", "name": "Eternal Relic", "grade": "Mythic", "atk": 290 }
+      {
+        "id": "wpn_cor_ora_0",
+        "name": "Spirit Relic",
+        "grade": "Common",
+        "atk": 18
+      },
+      {
+        "id": "wpn_cor_ora_1",
+        "name": "Soul Relic",
+        "grade": "Uncommon",
+        "atk": 40
+      },
+      {
+        "id": "wpn_cor_ora_2",
+        "name": "Astral Relic",
+        "grade": "Rare",
+        "atk": 75
+      },
+      {
+        "id": "wpn_cor_ora_3",
+        "name": "Divine Relic",
+        "grade": "Epic",
+        "atk": 125
+      },
+      {
+        "id": "wpn_cor_ora_4",
+        "name": "Celestial Relic",
+        "grade": "Legendary",
+        "atk": 195
+      },
+      {
+        "id": "wpn_cor_ora_5",
+        "name": "Eternal Relic",
+        "grade": "Mythic",
+        "atk": 290
+      }
     ]
   },
   "arcanist": {
     "weapons": [
-      { "id": "wpn_cor_arc_0", "name": "Arcane Staff", "grade": "Common", "atk": 20 },
-      { "id": "wpn_cor_arc_1", "name": "Mystic Staff", "grade": "Uncommon", "atk": 45 },
-      { "id": "wpn_cor_arc_2", "name": "Runic Staff", "grade": "Rare", "atk": 80 },
-      { "id": "wpn_cor_arc_3", "name": "Astral Staff", "grade": "Epic", "atk": 130 },
-      { "id": "wpn_cor_arc_4", "name": "Celestial Staff", "grade": "Legendary", "atk": 200 },
-      { "id": "wpn_cor_arc_5", "name": "Genesis Staff", "grade": "Mythic", "atk": 300 }
+      {
+        "id": "wpn_cor_arc_0",
+        "name": "Arcane Staff",
+        "grade": "Common",
+        "atk": 20
+      },
+      {
+        "id": "wpn_cor_arc_1",
+        "name": "Mystic Staff",
+        "grade": "Uncommon",
+        "atk": 45
+      },
+      {
+        "id": "wpn_cor_arc_2",
+        "name": "Runic Staff",
+        "grade": "Rare",
+        "atk": 80
+      },
+      {
+        "id": "wpn_cor_arc_3",
+        "name": "Astral Staff",
+        "grade": "Epic",
+        "atk": 130
+      },
+      {
+        "id": "wpn_cor_arc_4",
+        "name": "Celestial Staff",
+        "grade": "Legendary",
+        "atk": 200
+      },
+      {
+        "id": "wpn_cor_arc_5",
+        "name": "Genesis Staff",
+        "grade": "Mythic",
+        "atk": 300
+      }
     ]
   },
   "armorSets": [
-    { "id": "set_cor_0", "name": "Moonveil Set", "grade": "Common", "parts": ["Helmet", "Armor", "Pants", "Gloves", "Boots"], "stats": {} },
-    { "id": "set_cor_1", "name": "Sylvan Set", "grade": "Uncommon", "parts": ["Helmet", "Armor", "Pants", "Gloves", "Boots"], "stats": {} },
-    { "id": "set_cor_2", "name": "Astralis Set", "grade": "Rare", "parts": ["Helmet", "Armor", "Pants", "Gloves", "Boots"], "stats": {} },
-    { "id": "set_cor_3", "name": "Celestial Set", "grade": "Epic", "parts": ["Helmet", "Armor", "Pants", "Gloves", "Boots"], "stats": {} },
-    { "id": "set_cor_4", "name": "Seraphic Set", "grade": "Legendary", "parts": ["Helmet", "Armor", "Pants", "Gloves", "Boots"], "stats": {} },
-    { "id": "set_cor_5", "name": "Elysian Set", "grade": "Mythic", "parts": ["Helmet", "Armor", "Pants", "Gloves", "Boots"], "stats": {} }
+    {
+      "id": "set_cor_0",
+      "name": "Moonveil Set",
+      "grade": "Common",
+      "parts": [
+        "Helmet",
+        "Armor",
+        "Pants",
+        "Gloves",
+        "Boots"
+      ],
+      "stats": {
+        "Helmet": {
+          "hp": 80,
+          "def": 8
+        },
+        "Armor": {
+          "hp": 180,
+          "def": 18
+        },
+        "Pants": {
+          "hp": 140,
+          "def": 14
+        },
+        "Gloves": {
+          "hp": 60,
+          "def": 6
+        },
+        "Boots": {
+          "hp": 70,
+          "def": 7
+        }
+      }
+    },
+    {
+      "id": "set_cor_1",
+      "name": "Sylvan Set",
+      "grade": "Uncommon",
+      "parts": [
+        "Helmet",
+        "Armor",
+        "Pants",
+        "Gloves",
+        "Boots"
+      ],
+      "stats": {}
+    },
+    {
+      "id": "set_cor_2",
+      "name": "Astralis Set",
+      "grade": "Rare",
+      "parts": [
+        "Helmet",
+        "Armor",
+        "Pants",
+        "Gloves",
+        "Boots"
+      ],
+      "stats": {}
+    },
+    {
+      "id": "set_cor_3",
+      "name": "Celestial Set",
+      "grade": "Epic",
+      "parts": [
+        "Helmet",
+        "Armor",
+        "Pants",
+        "Gloves",
+        "Boots"
+      ],
+      "stats": {
+        "Helmet": {
+          "hp": 400,
+          "def": 40
+        },
+        "Armor": {
+          "hp": 900,
+          "def": 90
+        },
+        "Pants": {
+          "hp": 700,
+          "def": 70
+        },
+        "Gloves": {
+          "hp": 320,
+          "def": 32
+        },
+        "Boots": {
+          "hp": 360,
+          "def": 36
+        }
+      }
+    },
+    {
+      "id": "set_cor_4",
+      "name": "Seraphic Set",
+      "grade": "Legendary",
+      "parts": [
+        "Helmet",
+        "Armor",
+        "Pants",
+        "Gloves",
+        "Boots"
+      ],
+      "stats": {
+        "Helmet": {
+          "hp": 700,
+          "def": 70
+        },
+        "Armor": {
+          "hp": 1500,
+          "def": 150
+        },
+        "Pants": {
+          "hp": 1150,
+          "def": 115
+        },
+        "Gloves": {
+          "hp": 520,
+          "def": 52
+        },
+        "Boots": {
+          "hp": 600,
+          "def": 60
+        }
+      }
+    },
+    {
+      "id": "set_cor_5",
+      "name": "Elysian Set",
+      "grade": "Mythic",
+      "parts": [
+        "Helmet",
+        "Armor",
+        "Pants",
+        "Gloves",
+        "Boots"
+      ],
+      "stats": {}
+    }
   ]
 }
