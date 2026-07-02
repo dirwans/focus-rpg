@@ -508,8 +508,12 @@
         },
         "skills": [
           {
-            "name": "Slash",
-            "desc": "Basic consecutive slash attack."
+            "name": "Power Strike",
+            "desc": "Active: 180% ATK. Cooldown: 8 detik."
+          },
+          {
+            "name": "Iron Guard",
+            "desc": "Passive: DEF +10%"
           }
         ],
         "levelReq": 1
@@ -525,8 +529,12 @@
         },
         "skills": [
           {
-            "name": "Eagle Eye",
-            "desc": "Increases shooting range."
+            "name": "Rapid Shot",
+            "desc": "Active: 170% ATK. Cooldown: 8 detik."
+          },
+          {
+            "name": "Sharpshooter",
+            "desc": "Passive: Accuracy +10%"
           }
         ],
         "levelReq": 1
@@ -542,8 +550,12 @@
         },
         "skills": [
           {
-            "name": "Scrap Recycle",
-            "desc": "Utilizes scrap metal into resources."
+            "name": "Energy Bolt",
+            "desc": "Active: 170% ATK. Cooldown: 8 detik."
+          },
+          {
+            "name": "Mechanical Insight",
+            "desc": "Passive: FP +20%"
           }
         ],
         "levelReq": 1
@@ -559,8 +571,12 @@
         },
         "skills": [
           {
-            "name": "Force Arrow",
-            "desc": "Basic Force attack."
+            "name": "Mind Bolt",
+            "desc": "Active: 170% ATK. Cooldown: 8 detik."
+          },
+          {
+            "name": "Mental Focus",
+            "desc": "Passive: FP +20%"
           }
         ],
         "levelReq": 1
@@ -576,7 +592,16 @@
           "atk": 11,
           "def": 10
         },
-        "skills": [],
+        "skills": [
+          {
+            "name": "Shield Crash",
+            "desc": "Active: 200% ATK. Cooldown: 8 detik."
+          },
+          {
+            "name": "Battle Spirit",
+            "desc": "Passive: HP +10%"
+          }
+        ],
         "levelReq": 32
       },
       {
@@ -588,7 +613,16 @@
           "atk": 8,
           "def": 3
         },
-        "skills": [],
+        "skills": [
+          {
+            "name": "Burst Fire",
+            "desc": "Active: 180% ATK. Cooldown: 8 detik."
+          },
+          {
+            "name": "Combat Reflex",
+            "desc": "Passive: Dodge +8%"
+          }
+        ],
         "levelReq": 32
       },
       {
@@ -600,7 +634,20 @@
           "atk": 11,
           "def": 8
         },
-        "skills": [],
+        "skills": [
+          {
+            "name": "Pulse Mine",
+            "desc": "Active: 190% ATK. Cooldown: 8 detik."
+          },
+          {
+            "name": "Machine Link",
+            "desc": "Passive: M.E.U. ATK +10%"
+          },
+          {
+            "name": "Titan Assault",
+            "desc": "M.E.U. Skill: 250% ATK. Cooldown: 15s"
+          }
+        ],
         "levelReq": 32
       },
       {
@@ -612,7 +659,16 @@
           "atk": 17,
           "def": 4
         },
-        "skills": [],
+        "skills": [
+          {
+            "name": "Psychic Wave",
+            "desc": "Active: 190% ATK. Cooldown: 8 detik."
+          },
+          {
+            "name": "Mind Barrier",
+            "desc": "Passive: DEF +10%"
+          }
+        ],
         "levelReq": 32
       }
     ],
@@ -626,7 +682,16 @@
           "atk": 19,
           "def": 18
         },
-        "skills": [],
+        "skills": [
+          {
+            "name": "Earth Shatter",
+            "desc": "Active: 240% ATK. Cooldown: 8 detik."
+          },
+          {
+            "name": "Steel Body",
+            "desc": "Passive: DEF +10%"
+          }
+        ],
         "levelReq": 42
       },
       {
@@ -638,7 +703,16 @@
           "atk": 10,
           "def": 3
         },
-        "skills": [],
+        "skills": [
+          {
+            "name": "Explosive Round",
+            "desc": "Active: 220% ATK. Cooldown: 8 detik."
+          },
+          {
+            "name": "Critical Focus",
+            "desc": "Passive: Critical +10%"
+          }
+        ],
         "levelReq": 42
       },
       {
@@ -650,7 +724,16 @@
           "atk": 18,
           "def": 14
         },
-        "skills": [],
+        "skills": [
+          {
+            "name": "Missile Salvo",
+            "desc": "Active: 230% ATK. Cooldown: 8 detik."
+          },
+          {
+            "name": "Combat Processor",
+            "desc": "Passive: M.E.U. Critical +10%"
+          }
+        ],
         "levelReq": 42
       },
       {
@@ -662,7 +745,16 @@
           "atk": 28,
           "def": 7
         },
-        "skills": [],
+        "skills": [
+          {
+            "name": "Gravity Field",
+            "desc": "Active: 230% ATK. Cooldown: 8 detik."
+          },
+          {
+            "name": "Psychic Mastery",
+            "desc": "Passive: Critical +10%"
+          }
+        ],
         "levelReq": 42
       }
     ],
@@ -676,7 +768,16 @@
           "atk": 29,
           "def": 28
         },
-        "skills": [],
+        "skills": [
+          {
+            "name": "Final Verdict",
+            "desc": "Active: 320% ATK. Cooldown: 8 detik."
+          },
+          {
+            "name": "Guardian Soul",
+            "desc": "Passive: Final Damage +10%"
+          }
+        ],
         "levelReq": 55
       },
       {
@@ -688,7 +789,16 @@
           "atk": 12,
           "def": 4
         },
-        "skills": [],
+        "skills": [
+          {
+            "name": "Execution Shot",
+            "desc": "Active: 300% ATK. Cooldown: 8 detik."
+          },
+          {
+            "name": "Weapon Mastery",
+            "desc": "Passive: Final Damage +10%"
+          }
+        ],
         "levelReq": 55
       },
       {
@@ -700,7 +810,16 @@
           "atk": 27,
           "def": 22
         },
-        "skills": [],
+        "skills": [
+          {
+            "name": "Combat Mode",
+            "desc": "Active: 300% ATK. Cooldown: 8 detik."
+          },
+          {
+            "name": "Reinforced Frame",
+            "desc": "Passive: M.E.U. HP +15%"
+          }
+        ],
         "levelReq": 55
       },
       {
@@ -712,7 +831,16 @@
           "atk": 42,
           "def": 11
         },
-        "skills": [],
+        "skills": [
+          {
+            "name": "Astral Collapse",
+            "desc": "Active: 300% ATK. Cooldown: 8 detik."
+          },
+          {
+            "name": "Arcane Power",
+            "desc": "Passive: Final Damage +10%"
+          }
+        ],
         "levelReq": 55
       }
     ]
