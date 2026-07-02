@@ -102,25 +102,6 @@ export default function Unit() {
 
       {/* UNIT SPECIFICATIONS */}
       <AccordionSection label={t('unit_specifications')} raceClass={raceClass} defaultOpen={true}>
-        <div style={styles.baseStatsGrid}>
-          <div style={styles.baseStatBox}>
-            <span style={styles.baseStatLabel}>STR</span>
-            <span style={styles.baseStatNum}>{stats.str}</span>
-          </div>
-          <div style={styles.baseStatBox}>
-            <span style={styles.baseStatLabel}>DEX</span>
-            <span style={styles.baseStatNum}>{stats.dex}</span>
-          </div>
-          <div style={styles.baseStatBox}>
-            <span style={styles.baseStatLabel}>INT</span>
-            <span style={styles.baseStatNum}>{stats.int}</span>
-          </div>
-          <div style={styles.baseStatBox}>
-            <span style={styles.baseStatLabel}>VIT</span>
-            <span style={styles.baseStatNum}>{stats.vit}</span>
-          </div>
-        </div>
-
         <div style={styles.statsGrid}>
           <div style={styles.statBox}>
             <span style={{ color: '#f5a623', fontSize: 13 }}>⚡ ATK</span>
@@ -183,24 +164,75 @@ export default function Unit() {
             </div>
           </div>
         )}
-      </AccordionSection>
+        {/* Growth per Level & Filosofi Balance */}
+        {player.race && (
+          <div style={{ marginTop: 16 }}>
+            <div style={styles.specTitle}>Growth per Level</div>
+            <table style={styles.growthTable}>
+              <thead>
+                <tr>
+                  <th style={styles.th}>Job</th>
+                  <th style={styles.th}>HP/Lv</th>
+                  <th style={styles.th}>ATK/Lv</th>
+                  <th style={styles.th}>DEF/Lv</th>
+                </tr>
+              </thead>
+              <tbody>
+                {player.race === 'bionex' && (
+                  <>
+                    <tr><td style={styles.td}>Guardian</td><td style={styles.td}>+13</td><td style={styles.td}>+2</td><td style={styles.td}>+2</td></tr>
+                    <tr><td style={styles.td}>Marksman</td><td style={styles.td}>+10</td><td style={styles.td}>+3</td><td style={styles.td}>+1</td></tr>
+                    <tr><td style={styles.td}>Engineer</td><td style={styles.td}>+9</td><td style={styles.td}>+2</td><td style={styles.td}>+1.5</td></tr>
+                    <tr><td style={styles.td}>Psion</td><td style={styles.td}>+8</td><td style={styles.td}>+3</td><td style={styles.td}>+1</td></tr>
+                  </>
+                )}
+                {player.race === 'acreton' && (
+                  <>
+                    <tr><td style={styles.td}>Warrior</td><td style={styles.td}>+14</td><td style={styles.td}>+2</td><td style={styles.td}>+2</td></tr>
+                    <tr><td style={styles.td}>Ranger</td><td style={styles.td}>+10</td><td style={styles.td}>+3</td><td style={styles.td}>+1</td></tr>
+                    <tr><td style={styles.td}>Technician</td><td style={styles.td}>+9</td><td style={styles.td}>+2</td><td style={styles.td}>+1.5</td></tr>
+                  </>
+                )}
+                {player.race === 'coralis' && (
+                  <>
+                    <tr><td style={styles.td}>Sentinel</td><td style={styles.td}>+12</td><td style={styles.td}>+2</td><td style={styles.td}>+2</td></tr>
+                    <tr><td style={styles.td}>Pathfinder</td><td style={styles.td}>+9</td><td style={styles.td}>+3</td><td style={styles.td}>+1</td></tr>
+                    <tr><td style={styles.td}>Oracle</td><td style={styles.td}>+8</td><td style={styles.td}>+2</td><td style={styles.td}>+1.5</td></tr>
+                    <tr><td style={styles.td}>Arcanist</td><td style={styles.td}>+8</td><td style={styles.td}>+3</td><td style={styles.td}>+1</td></tr>
+                  </>
+                )}
+              </tbody>
+            </table>
 
-      {/* RACE LORE */}
-      {race && (
-        <AccordionSection label={t('race_lore_title', { race: race.name.toUpperCase() })} raceClass={raceClass} defaultOpen={false}>
-          <div style={styles.desc}>{race.description}</div>
-          <div style={styles.specSection}>
-            <div style={styles.specTitle}>{t('advantages_label')}</div>
-            {race.strengths.map((str, i) => (
-              <div key={i} style={styles.specItem('#44ff88')}>✔ {str}</div>
-            ))}
-            <div style={{ ...styles.specTitle, marginTop: 8 }}>{t('disadvantages_label')}</div>
-            {race.weaknesses.map((weak, i) => (
-              <div key={i} style={styles.specItem('#ff4444')}>✘ {weak}</div>
-            ))}
+            <div style={{ ...styles.specTitle, marginTop: 16 }}>Filosofi Balance</div>
+            <div style={styles.filosofiBox}>
+              {player.race === 'bionex' && (
+                <>
+                  <div style={styles.filosofiItem}><strong>🛡 Guardian:</strong> HP & DEF tertinggi. ATK sedang. Fokus tank/frontliner.</div>
+                  <div style={styles.filosofiItem}><strong>🎯 Marksman:</strong> HP terendah kedua, DEF paling rendah. ATK tertinggi. DPS tinggi tapi rapuh.</div>
+                  <div style={styles.filosofiItem}><strong>🔧 Engineer:</strong> HP paling rendah. DEF sedang. ATK paling rendah. Kelebihan berasal dari ARES/Summon.</div>
+                  <div style={styles.filosofiItem}><strong>🔮 Psion:</strong> HP paling rendah. DEF terendah. ATK tinggi. Area damage.</div>
+                </>
+              )}
+              {player.race === 'acreton' && (
+                <>
+                  <div style={styles.filosofiItem}><strong>⚔️ Warrior:</strong> HP & DEF tertinggi. ATK sedang. Fokus menjadi tank/frontliner.</div>
+                  <div style={styles.filosofiItem}><strong>🎯 Ranger:</strong> HP terendah kedua. DEF paling rendah. ATK dasar tertinggi. DPS tinggi tetapi lebih rapuh.</div>
+                  <div style={styles.filosofiItem}><strong>🔧 Technician:</strong> HP paling rendah. DEF sedang. ATK paling rendah. Kelebihan berasal dari ARES mulai level 32, bukan dari status dasar.</div>
+                </>
+              )}
+              {player.race === 'coralis' && (
+                <>
+                  <div style={styles.filosofiItem}><strong>⚔️ Sentinel:</strong> HP tertinggi di Celestra. DEF tertinggi. ATK sedang. Petarung garis depan yang menggabungkan pedang dan energi arcane.</div>
+                  <div style={styles.filosofiItem}><strong>🏹 Pathfinder:</strong> HP rendah. DEF rendah. ATK fisik tertinggi. Mengandalkan kecepatan dan serangan kritikal.</div>
+                  <div style={styles.filosofiItem}><strong>🔮 Oracle:</strong> HP terendah. DEF sedang. ATK terendah. Fokus menggunakan Animasi pemanggilan makhluk gaib.</div>
+                  <div style={styles.filosofiItem}><strong>✨ Arcanist:</strong> HP terendah. DEF terendah. ATK magic tinggi. Penyerang area.</div>
+                </>
+              )}
+            </div>
           </div>
-        </AccordionSection>
-      )}
+        )}
+      </AccordionSection>
 
       {/* SYSTEM PROGRESS */}
       <AccordionSection label={t('system_progress')} raceClass={raceClass} defaultOpen={true}>
@@ -332,8 +364,15 @@ const styles = {
   // Lore / Race
   desc: { fontFamily: 'var(--font-body)', fontSize: 13, color: '#6a9ab8', marginBottom: 10, lineHeight: 1.6, fontWeight: 600 },
   specSection: { display: 'flex', flexDirection: 'column', gap: 3, background: 'rgba(0,0,0,0.2)', padding: '10px 12px', borderRadius: 8, border: '1px solid rgba(0,229,255,0.08)' },
-  specTitle: { fontFamily: 'var(--font-title)', fontSize: 13, color: '#7ab0d0', letterSpacing: 0.5, fontWeight: 800 },
+  specTitle: { fontFamily: 'var(--font-title)', fontSize: 14, color: '#7ab0d0', letterSpacing: 0.5, fontWeight: 800, marginBottom: 8, borderBottom: '1px solid rgba(0,229,255,0.2)', paddingBottom: 4 },
   specItem: (c) => ({ fontFamily: 'var(--font-body)', fontSize: 13, color: c, lineHeight: 1.5, fontWeight: 600 }),
+
+  growthTable: { width: '100%', borderCollapse: 'collapse', fontSize: 13, fontFamily: 'var(--font-mono)', marginBottom: 16, background: 'rgba(0,0,0,0.2)', borderRadius: 6, overflow: 'hidden' },
+  th: { padding: '6px 8px', textAlign: 'left', borderBottom: '1px solid rgba(255,255,255,0.1)', color: '#88aadd', fontWeight: 'bold' },
+  td: { padding: '6px 8px', borderBottom: '1px solid rgba(255,255,255,0.05)', color: '#e0f4ff' },
+
+  filosofiBox: { display: 'flex', flexDirection: 'column', gap: 8, background: 'rgba(0,0,0,0.2)', padding: 10, borderRadius: 6, border: '1px solid rgba(0,229,255,0.1)' },
+  filosofiItem: { fontSize: 13, fontFamily: 'var(--font-body)', color: '#a0c4d8', lineHeight: 1.4 },
 
   // Progress
   progRow: { display: 'flex', justifyContent: 'space-around', gap: 4 },

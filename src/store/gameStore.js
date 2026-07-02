@@ -987,25 +987,59 @@ export const useGameStore = create(
         let baseDefScaling = (baseStats.vit * 1.5) + (baseStats.str * 0.5)
 
         let levelGrowth = { hp: 0, atk: 0, def: 0 }
-        if (player.race === 'bionex' && player.job) {
-          const guardianJobs = ['guardian', 'centurion', 'protector', 'imperator'];
-          const marksmanJobs = ['marksman', 'revenant', 'deadeye', 'predator'];
-          const engineerJobs = ['engineer', 'mechanist', 'techmaster', 'overseer'];
-          const psionJobs = ['psion', 'esper', 'ascendant', 'transcendent'];
-          
+        if (player.job) {
           let growth = null;
-          if (guardianJobs.includes(player.job)) {
-            growth = { hp: 13, atk: 2, def: 2 }
-            baseHpScaling = 210; baseAtkScaling = 27; baseDefScaling = 22;
-          } else if (marksmanJobs.includes(player.job)) {
-            growth = { hp: 10, atk: 3, def: 1 }
-            baseHpScaling = 175; baseAtkScaling = 33; baseDefScaling = 15;
-          } else if (engineerJobs.includes(player.job)) {
-            growth = { hp: 9, atk: 2, def: 1.5 }
-            baseHpScaling = 175; baseAtkScaling = 25; baseDefScaling = 17;
-          } else if (psionJobs.includes(player.job)) {
-            growth = { hp: 8, atk: 3, def: 1 }
-            baseHpScaling = 165; baseAtkScaling = 31; baseDefScaling = 14;
+          
+          if (player.race === 'bionex') {
+            const guardianJobs = ['guardian', 'centurion', 'protector', 'imperator'];
+            const marksmanJobs = ['marksman', 'revenant', 'deadeye', 'predator'];
+            const engineerJobs = ['engineer', 'mechanist', 'techmaster', 'overseer'];
+            const psionJobs = ['psion', 'esper', 'ascendant', 'transcendent'];
+            if (guardianJobs.includes(player.job)) {
+              growth = { hp: 13, atk: 2, def: 2 }
+              baseHpScaling = 210; baseAtkScaling = 27; baseDefScaling = 22;
+            } else if (marksmanJobs.includes(player.job)) {
+              growth = { hp: 10, atk: 3, def: 1 }
+              baseHpScaling = 175; baseAtkScaling = 33; baseDefScaling = 15;
+            } else if (engineerJobs.includes(player.job)) {
+              growth = { hp: 9, atk: 2, def: 1.5 }
+              baseHpScaling = 175; baseAtkScaling = 25; baseDefScaling = 17;
+            } else if (psionJobs.includes(player.job)) {
+              growth = { hp: 8, atk: 3, def: 1 }
+              baseHpScaling = 165; baseAtkScaling = 31; baseDefScaling = 14;
+            }
+          } else if (player.race === 'acreton') {
+            const warriorJobs = ['destroyer', 'vanguard', 'juggernaut', 'dreadnought'];
+            const rangerJobs = ['gunner', 'marksman', 'railgunner', 'annihilator'];
+            const techJobs = ['engineer', 'architect', 'core_engineer', 'cybermancer'];
+            if (warriorJobs.includes(player.job)) {
+              growth = { hp: 14, atk: 2, def: 2 }
+              baseHpScaling = 210; baseAtkScaling = 27; baseDefScaling = 22;
+            } else if (rangerJobs.includes(player.job)) {
+              growth = { hp: 10, atk: 3, def: 1 }
+              baseHpScaling = 175; baseAtkScaling = 33; baseDefScaling = 15;
+            } else if (techJobs.includes(player.job)) {
+              growth = { hp: 9, atk: 2, def: 1.5 }
+              baseHpScaling = 180; baseAtkScaling = 25; baseDefScaling = 18;
+            }
+          } else if (player.race === 'coralis') {
+            const sentinelJobs = ['sentinel', 'warden', 'knight', 'blademaster'];
+            const pathfinderJobs = ['pathfinder', 'windrunner', 'shadow_hunter', 'stargazer'];
+            const oracleJobs = ['oracle', 'celestial_oracle', 'conjurer', 'divine_summoner'];
+            const arcanistJobs = ['arcanist', 'rune_caster', 'mystic', 'archmage'];
+            if (sentinelJobs.includes(player.job)) {
+              growth = { hp: 12, atk: 2, def: 2 }
+              baseHpScaling = 195; baseAtkScaling = 29; baseDefScaling = 20;
+            } else if (pathfinderJobs.includes(player.job)) {
+              growth = { hp: 9, atk: 3, def: 1 }
+              baseHpScaling = 165; baseAtkScaling = 35; baseDefScaling = 14;
+            } else if (oracleJobs.includes(player.job)) {
+              growth = { hp: 8, atk: 2, def: 1.5 }
+              baseHpScaling = 170; baseAtkScaling = 28; baseDefScaling = 16;
+            } else if (arcanistJobs.includes(player.job)) {
+              growth = { hp: 8, atk: 3, def: 1 }
+              baseHpScaling = 160; baseAtkScaling = 34; baseDefScaling = 13;
+            }
           }
 
           if (growth) {
