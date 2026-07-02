@@ -41,6 +41,7 @@ function AccordionSection({ label, raceClass, defaultOpen = false, children }) {
 }
 
 export default function Unit() {
+  const [tab, setTab] = useState('stats')
   const player = useGameStore((s) => s.player)
   const archons = useGameStore((s) => s.archons)
   const getStats = useGameStore((s) => s.getStats)
@@ -88,7 +89,15 @@ export default function Unit() {
         <div style={styles.resChip('#00e5ff')}>◈ Credits: {player.resources.credits}</div>
       </div>
 
-      {/* PILOT EXPERIENCE - open by default */}
+      {/* Tabs */}
+      <div style={styles.tabs}>
+        <button style={tab === 'stats' ? styles.tabActive : styles.tab} onClick={() => setTab('stats')}>Unit Specs</button>
+        <button style={tab === 'profile' ? styles.tabActive : styles.tab} onClick={() => setTab('profile')}>Profile</button>
+      </div>
+
+      {tab === 'stats' && (
+        <>
+          {/* PILOT EXPERIENCE - open by default */}
       <AccordionSection label={t('pilot_experience')} raceClass={raceClass} defaultOpen={true}>
         <div style={styles.expBg}>
           <div style={{ ...styles.expFill, width: expPct + '%' }} />
@@ -255,12 +264,56 @@ export default function Unit() {
           </div>
         </div>
       </AccordionSection>
+      </>
+      )}
+
+      {tab === 'profile' && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginTop: 8 }}>
+          <div className="glass-panel cyber-panel" style={{ padding: 16 }}>
+            <h3 style={{ margin: '0 0 12px 0', color: '#fff', fontSize: 15, fontFamily: 'var(--font-title)', display: 'flex', alignItems: 'center', gap: 6 }}>
+              📊 Combat Statistics
+            </h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 14, color: '#c0dff0' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span>• Total Monster Kill:</span>
+                <span style={{ fontWeight: 'bold' }}>{player.stats?.totalMonsterKill || 0}</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span>• World Boss Kill:</span>
+                <span style={{ fontWeight: 'bold' }}>{player.stats?.worldBossKill || 0}</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span>• Dungeon Clear:</span>
+                <span style={{ fontWeight: 'bold' }}>{player.stats?.dungeonClear || 0}</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span>• Core War Victory:</span>
+                <span style={{ fontWeight: 'bold' }}>{player.stats?.coreWarVictory || 0}</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="glass-panel cyber-panel" style={{ padding: 16 }}>
+            <h3 style={{ margin: '0 0 12px 0', color: '#fff', fontSize: 15, fontFamily: 'var(--font-title)', display: 'flex', alignItems: 'center', gap: 6 }}>
+              ⏱️ General Statistics
+            </h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 14, color: '#c0dff0' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span>• Total Play Time:</span>
+                <span style={{ fontWeight: 'bold' }}>{Math.floor((player.stats?.totalPlayMinutes || 0)/60)}h {(player.stats?.totalPlayMinutes || 0)%60}m</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span>• Highest Enhancement:</span>
+                <span style={{ fontWeight: 'bold' }}>+{player.stats?.highestEnhancement || 0}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
 
       {/* Bottom spacer */}
       <div style={{ height: 16 }} />
-
-
 
     </div>
   )

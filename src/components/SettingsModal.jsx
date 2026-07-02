@@ -5,6 +5,8 @@ import { t } from '../lib/translate'
 export default function SettingsModal({ onClose }) {
   const [tab, setTab] = useState('game')
   const language = useGameStore(s => s.player.language || 'en')
+  const settings = useGameStore(s => s.player.settings || { autoHpPotion: 'OFF', autoFpPotion: 'OFF', autoSkill: false, autoLoot: false, alertWorldBoss: true, alertCoreWar: true, alertDungeon: true })
+  const updateSettings = useGameStore(s => s.updateSettings)
   const setLanguage = (lang) => {
     useGameStore.setState(s => ({
       player: {
@@ -41,6 +43,7 @@ export default function SettingsModal({ onClose }) {
 
         <div style={styles.tabs}>
           <button style={tab === 'game' ? styles.tabActive : styles.tab} onClick={() => setTab('game')}>Game</button>
+          <button style={tab === 'alerts' ? styles.tabActive : styles.tab} onClick={() => setTab('alerts')}>Alerts</button>
           <button style={tab === 'system' ? styles.tabActive : styles.tab} onClick={() => setTab('system')}>System</button>
         </div>
 
@@ -65,27 +68,84 @@ export default function SettingsModal({ onClose }) {
             </div>
             
             <div style={styles.itemCard}>
-              <div style={styles.itemTitle}>📋 Ringkasan (Settings)</div>
-              <table style={{ width: '100%', fontSize: '13px', marginTop: '8px', borderCollapse: 'collapse', color: '#c0dff0' }}>
-                <tbody>
-                  <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-                    <td style={{ padding: '8px 0' }}>❤️ Auto HP Potion</td>
-                    <td style={{ textAlign: 'right' }}>OFF / 30% / 50% / 70%</td>
-                  </tr>
-                  <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-                    <td style={{ padding: '8px 0' }}>🔷 Auto FP Potion</td>
-                    <td style={{ textAlign: 'right' }}>OFF / 20% / 40% / 60%</td>
-                  </tr>
-                  <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-                    <td style={{ padding: '8px 0' }}>⚔️ Auto Skill</td>
-                    <td style={{ textAlign: 'right' }}>ON / OFF</td>
-                  </tr>
-                  <tr>
-                    <td style={{ padding: '8px 0' }}>🎒 Auto Loot</td>
-                    <td style={{ textAlign: 'right' }}>ON / OFF</td>
-                  </tr>
-                </tbody>
-              </table>
+              <div style={styles.itemTitle}>📋 Game Settings</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 12 }}>
+                
+                <div style={styles.settingRow}>
+                  <span style={styles.settingLabel}>❤️ Auto HP</span>
+                  <div style={styles.btnGroup}>
+                    {['OFF', '30%', '50%', '70%'].map(val => (
+                      <button key={val} onClick={() => updateSettings({ autoHpPotion: val })} style={settings.autoHpPotion === val ? styles.btnOptionActive : styles.btnOption}>{val}</button>
+                    ))}
+                  </div>
+                </div>
+
+                <div style={styles.settingRow}>
+                  <span style={styles.settingLabel}>🔷 Auto FP</span>
+                  <div style={styles.btnGroup}>
+                    {['OFF', '20%', '40%', '60%'].map(val => (
+                      <button key={val} onClick={() => updateSettings({ autoFpPotion: val })} style={settings.autoFpPotion === val ? styles.btnOptionActive : styles.btnOption}>{val}</button>
+                    ))}
+                  </div>
+                </div>
+
+                <div style={styles.settingRow}>
+                  <span style={styles.settingLabel}>⚔️ Auto Skill</span>
+                  <div style={styles.btnGroup}>
+                    {[{val: true, label: 'ON'}, {val: false, label: 'OFF'}].map(opt => (
+                      <button key={opt.label} onClick={() => updateSettings({ autoSkill: opt.val })} style={settings.autoSkill === opt.val ? styles.btnOptionActive : styles.btnOption}>{opt.label}</button>
+                    ))}
+                  </div>
+                </div>
+
+                <div style={styles.settingRow}>
+                  <span style={styles.settingLabel}>🎒 Auto Loot</span>
+                  <div style={styles.btnGroup}>
+                    {[{val: true, label: 'ON'}, {val: false, label: 'OFF'}].map(opt => (
+                      <button key={opt.label} onClick={() => updateSettings({ autoLoot: opt.val })} style={settings.autoLoot === opt.val ? styles.btnOptionActive : styles.btnOption}>{opt.label}</button>
+                    ))}
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        )}
+
+        {tab === 'alerts' && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+            <div style={styles.itemCard}>
+              <div style={styles.itemTitle}>🔔 Push Notifications</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 12 }}>
+                
+                <div style={styles.settingRow}>
+                  <span style={styles.settingLabel}>World Boss Spawn</span>
+                  <div style={styles.btnGroup}>
+                    {[{val: true, label: 'ON'}, {val: false, label: 'OFF'}].map(opt => (
+                      <button key={opt.label} onClick={() => updateSettings({ alertWorldBoss: opt.val })} style={settings.alertWorldBoss === opt.val ? styles.btnOptionActive : styles.btnOption}>{opt.label}</button>
+                    ))}
+                  </div>
+                </div>
+
+                <div style={styles.settingRow}>
+                  <span style={styles.settingLabel}>Core War Reminder</span>
+                  <div style={styles.btnGroup}>
+                    {[{val: true, label: 'ON'}, {val: false, label: 'OFF'}].map(opt => (
+                      <button key={opt.label} onClick={() => updateSettings({ alertCoreWar: opt.val })} style={settings.alertCoreWar === opt.val ? styles.btnOptionActive : styles.btnOption}>{opt.label}</button>
+                    ))}
+                  </div>
+                </div>
+
+                <div style={styles.settingRow}>
+                  <span style={styles.settingLabel}>Dungeon Reset</span>
+                  <div style={styles.btnGroup}>
+                    {[{val: true, label: 'ON'}, {val: false, label: 'OFF'}].map(opt => (
+                      <button key={opt.label} onClick={() => updateSettings({ alertDungeon: opt.val })} style={settings.alertDungeon === opt.val ? styles.btnOptionActive : styles.btnOption}>{opt.label}</button>
+                    ))}
+                  </div>
+                </div>
+
+              </div>
             </div>
           </div>
         )}
@@ -143,8 +203,10 @@ const styles = {
   row: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontFamily: 'var(--font-body)', fontSize: 14, color: '#c0dff0' },
   label: { fontWeight: 800 },
   btnGroup: { display: 'flex', gap: 6 },
-  btnOption: { background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(0,229,255,0.2)', color: '#7ab0d0', padding: '6px 12px', borderRadius: 6, fontSize: 13, fontFamily: 'var(--font-title)', fontWeight: 800, cursor: 'pointer' },
-  btnOptionActive: { background: '#00e5ff', border: 'none', color: '#000', padding: '6px 12px', borderRadius: 6, fontSize: 13, fontFamily: 'var(--font-title)', fontWeight: 800, cursor: 'pointer', boxShadow: '0 0 10px rgba(0,229,255,0.4)' },
+  btnOption: { background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(0,229,255,0.2)', color: '#7ab0d0', padding: '6px 10px', borderRadius: 6, fontSize: 12, fontFamily: 'var(--font-title)', fontWeight: 800, cursor: 'pointer' },
+  btnOptionActive: { background: '#00e5ff', border: 'none', color: '#000', padding: '6px 10px', borderRadius: 6, fontSize: 12, fontFamily: 'var(--font-title)', fontWeight: 800, cursor: 'pointer', boxShadow: '0 0 10px rgba(0,229,255,0.4)' },
+  settingRow: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
+  settingLabel: { fontSize: 13, color: '#c0dff0', fontWeight: 'bold' },
   tabs: { display: 'flex', borderBottom: '1px solid rgba(0,229,255,0.1)', marginBottom: 8 },
   tab: { flex: 1, padding: '10px 0', background: 'none', border: 'none', color: '#7ab0d0', fontFamily: 'var(--font-title)', fontWeight: 800, cursor: 'pointer', transition: 'all 0.2s', borderBottom: '2px solid transparent' },
   tabActive: { flex: 1, padding: '10px 0', background: 'rgba(0,229,255,0.1)', border: 'none', color: '#00e5ff', fontFamily: 'var(--font-title)', fontWeight: 800, cursor: 'pointer', transition: 'all 0.2s', borderBottom: '2px solid #00e5ff' },

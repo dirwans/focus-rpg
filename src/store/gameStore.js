@@ -244,6 +244,15 @@ const initialPlayer = {
   totalMinutes: 0,
   savedAt: 0,
   language: 'en',
+  settings: {
+    autoHpPotion: 'OFF',
+    autoFpPotion: 'OFF',
+    autoSkill: false,
+    autoLoot: false,
+    alertWorldBoss: true,
+    alertCoreWar: true,
+    alertDungeon: true,
+  }
 }
 
 const initialTimer = {
@@ -289,6 +298,15 @@ export const useGameStore = create(
       // ── Navigation ──────────────────────────────────────
       setScreen: (screen) => set({ screen }),
       setArchons: (archons) => set({ archons }),
+      setNotification: (notif) => set({ notification: notif }),
+
+      updateSettings: (newSettings) => set((s) => ({
+        player: {
+          ...s.player,
+          settings: { ...(s.player.settings || { autoHpPotion: 'OFF', autoFpPotion: 'OFF', autoSkill: false, autoLoot: false, alertWorldBoss: true, alertCoreWar: true, alertDungeon: true }), ...newSettings },
+          savedAt: Date.now()
+        }
+      })),
 
       // ── Race Selection ───────────────────────────────────
       openRaceSelect: () => set({ showRaceSelect: true }),

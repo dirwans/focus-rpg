@@ -10,7 +10,7 @@ import { t } from '../lib/translate'
 import SettingsModal from '../components/SettingsModal'
 import NpcModal from '../components/NpcModal'
 import LibraryModal from '../components/LibraryModal'
-
+import SocialModal from '../components/SocialModal'
 
 function fmt(s) {
   const m = Math.floor(s / 60).toString().padStart(2, '0')
@@ -63,6 +63,7 @@ export default function Main() {
 
   const [showSettings, setShowSettings] = useState(false)
   const [showLibrary, setShowLibrary] = useState(false)
+  const [showSocialModal, setShowSocialModal] = useState(false)
   const [showNpcModal, setShowNpcModal] = useState(false)
   const [npcInitialView, setNpcInitialView] = useState('lobby')
 
@@ -398,6 +399,7 @@ export default function Main() {
               @{username}
             </span>
           </span>
+          <button onClick={() => setShowSocialModal(true)} style={styles.logoutBtn} title="Social / Friends">👥</button>
           <button onClick={() => setShowLibrary(true)} style={styles.logoutBtn} title="Database & Guides">📖</button>
           <button onClick={() => setShowSettings(true)} style={styles.logoutBtn} title="Settings">⚙️</button>
           <button onClick={signOut} style={styles.logoutBtn} title="Logout">⏏</button>
@@ -602,6 +604,7 @@ export default function Main() {
       {/* Modals */}
       {showSettings && <SettingsModal onClose={() => setShowSettings(false)} />}
       {showLibrary && <LibraryModal onClose={() => setShowLibrary(false)} />}
+      {showSocialModal && <SocialModal onClose={() => setShowSocialModal(false)} />}
       {showNpcModal && <NpcModal onClose={() => setShowNpcModal(false)} initialView={npcInitialView} />}
 
     </div>
