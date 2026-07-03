@@ -20,6 +20,7 @@ export default function LibraryModal({ onClose }) {
           <button style={tab === 'growth' ? styles.tabActive : styles.tab} onClick={() => setTab('growth')}>Growth</button>
           <button style={tab === 'trade' ? styles.tabActive : styles.tab} onClick={() => setTab('trade')}>Trade</button>
           <button style={tab === 'war' ? styles.tabActive : styles.tab} onClick={() => setTab('war')}>War</button>
+          <button style={tab === 'zones' ? styles.tabActive : styles.tab} onClick={() => setTab('zones')}>Zones</button>
           <button style={tab === 'system' ? styles.tabActive : styles.tab} onClick={() => setTab('system')}>System</button>
           <button style={tab === 'equip' ? styles.tabActive : styles.tab} onClick={() => setTab('equip')}>Equipment</button>
         </div>
@@ -507,6 +508,76 @@ export default function LibraryModal({ onClose }) {
                 </>
               )}
 
+            </div>
+          )}
+
+          {tab === 'zones' && (
+            <div style={styles.section}>
+              <h3 style={styles.sectionTitle}>🌍 Planet Novus Map & Monster Database</h3>
+              
+              <div style={{ fontSize: 13, color: '#aaa', fontStyle: 'italic', marginBottom: 8, borderLeft: '2px solid #00e5ff', paddingLeft: 8 }}>
+                Informasi level leveling map dan dungeon beserta monster, bos, dan item drop tahap awal.
+              </div>
+
+              <h4 style={{ color: '#00e5ff', margin: '8px 0 4px 0', fontFamily: 'var(--font-title)', fontSize: '14px' }}>🟢 Leveling Maps (Lv. 1 - 66)</h4>
+
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>🟢 Map 1 - Lumora Fields (Lv. 1 - 12)</div>
+                <div style={{ margin: '4px 0' }}><strong>Monsters:</strong> Puffling, Moss Hopper, Leaf Boar, Twig Imp</div>
+                <div style={{ margin: '4px 0' }}><strong>World Boss:</strong> Lumora Behemoth</div>
+                <div style={{ margin: '4px 0', color: '#00ff88' }}><strong>Tahap Awal Drop:</strong> Weapon/Armor (Common, Advanced), Arcanite, Potion [S]</div>
+              </div>
+
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>🟡 Map 2 - Sylvaris Wilds (Lv. 13 - 25)</div>
+                <div style={{ margin: '4px 0' }}><strong>Monsters:</strong> Fangclaw, Thornmaw, Sylvan Wolf, Vine Stalker</div>
+                <div style={{ margin: '4px 0' }}><strong>World Boss:</strong> Sylvan Fanglord</div>
+                <div style={{ margin: '4px 0', color: '#00ff88' }}><strong>Tahap Awal Drop:</strong> Weapon/Armor (Advanced, Rare), Arcanite, Potion [M]</div>
+              </div>
+
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>🧡 Map 3 - Ferrum Expanse (Lv. 26 - 38)</div>
+                <div style={{ margin: '4px 0' }}><strong>Monsters:</strong> Steel Hound, Scrap Golem, Iron Wasp, Machawarden</div>
+                <div style={{ margin: '4px 0' }}><strong>World Boss:</strong> Iron Juggernaut</div>
+                <div style={{ margin: '4px 0', color: '#00ff88' }}><strong>Tahap Awal Drop:</strong> Weapon/Armor (Rare, Epic), Arcanite, Favor Talic, Potion [M/L]</div>
+              </div>
+
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>❤️ Map 4 - Pyraxis Crater (Lv. 39 - 52)</div>
+                <div style={{ margin: '4px 0' }}><strong>Monsters:</strong> Infernox, Flame Fiend, Lava Beetle, Magma Hound</div>
+                <div style={{ margin: '4px 0' }}><strong>World Boss:</strong> Pyraxis Overlord</div>
+                <div style={{ margin: '4px 0', color: '#00ff88' }}><strong>Tahap Awal Drop:</strong> Weapon/Armor (Epic, Legendary), Arcanite, Ignorance Talic, Potion [L]</div>
+              </div>
+
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>💜 Map 5 - Trinity Nexus (Lv. 53 - 66)</div>
+                <div style={{ margin: '4px 0' }}><strong>Monsters:</strong> Trinity Sentinel, Core Phantom, Nexus Harbinger, Flux Avatar</div>
+                <div style={{ margin: '4px 0' }}><strong>World Boss:</strong> Trinity Overlord</div>
+                <div style={{ margin: '4px 0', color: '#00ff88' }}><strong>Tahap Awal Drop:</strong> Weapon/Armor (Legendary, SSR), Arcanite, Divine Crest, Lucky Relic</div>
+              </div>
+
+              <h4 style={{ color: '#ff4444', margin: '16px 0 4px 0', fontFamily: 'var(--font-title)', fontSize: '14px' }}>💀 Battle Dungeons (Lv. 67+)</h4>
+
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>💀 Dungeon 1 - Haram Stockade (Lv. 67 - 75)</div>
+                <div style={{ margin: '4px 0' }}><strong>Monsters:</strong> Deserter Trooper, Tombstone Berserker, Vafer Shrine Officer</div>
+                <div style={{ margin: '4px 0' }}><strong>Dungeon Boss:</strong> Haram Warden</div>
+                <div style={{ margin: '4px 0', color: '#00ff88' }}><strong>Tahap Awal Drop:</strong> Weapon/Armor (Legendary, SSR), Divine Crests, Lucky Relics</div>
+              </div>
+
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>🏜️ Dungeon 2 - Novasan Sandgrave (Lv. 76 - 85)</div>
+                <div style={{ margin: '4px 0' }}><strong>Monsters:</strong> Sandworm Elite, Demolith Chieftain, Desert Hummer Alpha</div>
+                <div style={{ margin: '4px 0' }}><strong>Dungeon Boss:</strong> Novasan Reaver</div>
+                <div style={{ margin: '4px 0', color: '#00ff88' }}><strong>Tahap Awal Drop:</strong> Ancient Accessories, SSR/UR Gear, Divine Crests, Lucky Relics</div>
+              </div>
+
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>🧬 Dungeon 3 - Cartella Laboratory (Lv. 86 - 100)</div>
+                <div style={{ margin: '4px 0' }}><strong>Monsters:</strong> Mutant Walker, Lab Abomination, Android Devastator</div>
+                <div style={{ margin: '4px 0' }}><strong>Dungeon Boss:</strong> Dr. Franken Elite</div>
+                <div style={{ margin: '4px 0', color: '#00ff88' }}><strong>Tahap Awal Drop:</strong> Artifact/UR Weapon/Armor, Rare Ores, Lucky Relics, Titan Keys</div>
+              </div>
             </div>
           )}
         </div>

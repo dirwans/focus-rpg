@@ -259,7 +259,9 @@ export default function Unit() {
             <span style={styles.progLabel}>{t('streak_label')}</span>
           </div>
           <div style={styles.progItem}>
-            <span style={styles.progNum}>S-{player.highestSector}</span>
+            <span style={styles.progNum}>
+              {player.highestSector <= 5 ? `M-${player.highestSector}` : `D-${player.highestSector - 5}`}
+            </span>
             <span style={styles.progLabel}>{t('best_sector_label')}</span>
           </div>
         </div>

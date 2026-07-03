@@ -242,7 +242,9 @@ export default function Main() {
         {/* Top corner discreet abandon button and Stage header */}
         <div style={styles.activeHeader}>
           <div style={styles.activeStageBadge}>📍 {enemy.name}</div>
-          <div style={styles.activeSectorLabel}>SECTOR {player.sector}</div>
+          <div style={styles.activeSectorLabel}>
+            {player.sector <= 5 ? `MAP ${player.sector}` : `DUNGEON ${player.sector - 5}`}
+          </div>
           <button onClick={handleAbandon} style={styles.smallAbandonBtn}>
             {t('abandon_btn')}
           </button>
@@ -425,7 +427,7 @@ export default function Main() {
       {/* Stat cards */}
       <div style={styles.statRow}>
         <div className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.statCard}><div style={styles.statLabel}>{t('level_lbl')}</div><div style={{ ...styles.statVal, color: '#00e5ff' }}>{player.level}</div></div>
-        <div className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.statCard}><div style={styles.statLabel}>{t('sector_lbl')}</div><div style={{ ...styles.statVal, color: '#f5a623' }}>S-{player.sector}</div></div>
+        <div className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.statCard}><div style={styles.statLabel}>{t('sector_lbl')}</div><div style={{ ...styles.statVal, color: '#f5a623' }}>{player.sector <= 5 ? `M-${player.sector}` : `D-${player.sector - 5}`}</div></div>
         <div className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.statCard}><div style={styles.statLabel}>{t('streak_lbl')}</div><div style={{ ...styles.statVal, color: '#ff4466' }}>🔥{player.streak}</div></div>
       </div>
 

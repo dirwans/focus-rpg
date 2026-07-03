@@ -53,7 +53,14 @@ function getMinutesToNextLevel(level) {
 }
 
 function getSector(level) {
-  return Math.min(Math.ceil(level / 10), enemies.sectors.length)
+  if (level <= 12) return 1
+  if (level <= 25) return 2
+  if (level <= 38) return 3
+  if (level <= 52) return 4
+  if (level <= 66) return 5
+  if (level <= 75) return 6
+  if (level <= 85) return 7
+  return 8
 }
 
 function randomMob(sectorIdx) {
@@ -69,7 +76,10 @@ function spawnEnemy(sectorIdx, playerLevel, forceRaid = false) {
     return { mob: sector.pitBoss, isBoss: true, isPitBoss: true, isCulprit: false, hp: sector.pitBoss.hp }
   }
   
-  if (playerLevel % 10 === 0) {
+  const maxLevels = [12, 25, 38, 52, 66, 75, 85, 999]
+  const isMaxLevelForMap = playerLevel === maxLevels[sectorIdx]
+  
+  if (isMaxLevelForMap || playerLevel % 10 === 0) {
     return { mob: sector.boss, isBoss: true, isPitBoss: false, isCulprit: false, hp: sector.boss.hp }
   }
 

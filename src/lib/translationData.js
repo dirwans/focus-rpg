@@ -52,7 +52,7 @@ export const TRANSLATIONS = {
     select_race: "⚡ SELECT RACE",
     new_session: "🔄 NEW SESSION",
     level_lbl: "LEVEL",
-    sector_lbl: "SECTOR",
+    sector_lbl: "ZONE",
     location_lbl: "LOCATION",
     streak_lbl: "STREAK",
     highest_sector: "HIGHEST: S-",
@@ -133,7 +133,7 @@ export const TRANSLATIONS = {
     sessions_label: "Sessions",
     minutes_label: "Minutes",
     streak_label: "Streak",
-    best_sector_label: "Best Sector",
+    best_sector_label: "Best Zone",
 
 
 
@@ -245,7 +245,7 @@ export const TRANSLATIONS = {
     select_race: "⚡ PILIH RAS",
     new_session: "MULAI GRIND BARU",
     level_lbl: "LEVEL",
-    sector_lbl: "SEKTOR",
+    sector_lbl: "ZONA",
     location_lbl: "LOKASI",
     streak_lbl: "STREAK",
     highest_sector: "TERTINGGI: S-",
@@ -326,7 +326,7 @@ export const TRANSLATIONS = {
     sessions_label: "Sesi",
     minutes_label: "Menit",
     streak_label: "Streak",
-    best_sector_label: "Sektor Terbaik",
+    best_sector_label: "Zona Terbaik",
 
 
 
