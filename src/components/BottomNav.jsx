@@ -3,14 +3,15 @@ import { useGameStore } from '../store/gameStore'
 const API_BASE = import.meta.env.VITE_API_URL || ''
 
 const NAV = [
-  { id: 'main',    icon: '🏠', label: 'BASE' },
-  { id: 'unit',    icon: '👤', label: 'UNIT' },
-  { id: 'ranks',   icon: '📊', label: 'RANKS' },
-  { id: 'battle',  icon: '⚔️', label: 'BATTLE' },
-  { id: 'mine',    icon: '⛏️', label: 'MINE' },
-  { id: 'cargo',   icon: '📦', label: 'INVENTORY' },
-  { id: 'forge',   icon: '🔧', label: 'FORGE' },
-  { id: 'premium', icon: '💎', label: 'SHOP' },
+  { id: 'main',      icon: '🏠', label: 'BASE' },
+  { id: 'unit',      icon: '👤', label: 'UNIT' },
+  { id: 'ranks',     icon: '📊', label: 'RANKS' },
+  { id: 'battle',    icon: '⚔️', label: 'BATTLE' },
+  { id: 'mine',      icon: '⛏️', label: 'MINE' },
+  { id: 'cargo',     icon: '📦', label: 'INVENTORY' },
+  { id: 'forge',     icon: '🔧', label: 'FORGE' },
+  { id: 'ascension', icon: '✧', label: 'ASCENSION' },
+  { id: 'premium',   icon: '💎', label: 'SHOP' },
 ]
 
 export default function BottomNav() {
