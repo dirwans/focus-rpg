@@ -47,6 +47,7 @@ export default function Unit() {
   const getStats = useGameStore((s) => s.getStats)
   const getExpToNext = useGameStore((s) => s.getExpToNext)
   const openRaceSelect = useGameStore((s) => s.openRaceSelect)
+  const winnerRace = useGameStore((s) => s.winnerRace)
   const stats = getStats()
   const expMax = getExpToNext()
   const expPct = Math.floor((player.exp / expMax) * 100)
@@ -138,6 +139,13 @@ export default function Unit() {
           <div style={styles.infoBox('#4a8fa8')}>
             <span style={{ fontWeight: 800 }}>{job.name} Bonus:</span>{' '}
             +{job.bonus.hp} HP | +{job.bonus.atk} ATK | +{job.bonus.def} DEF
+          </div>
+        )}
+
+        {winnerRace && winnerRace === player.race && (
+          <div style={styles.infoBox('#ffcc00')}>
+            <span style={{ fontWeight: 800 }}>🏆 CORE WAR VICTORY BUFF ACTIVE:</span>{' '}
+            +10% HP | +10% ATK | +10% DEF
           </div>
         )}
 

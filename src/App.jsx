@@ -3,7 +3,7 @@ import { useGameStore } from './store/gameStore'
 import { useAuthStore } from './store/authStore'
 import { useTimer } from './hooks/useTimer'
 import { loadSave, syncSave, subscribeSave } from './lib/saveSync'
-import { apiGetArchon } from './lib/api'
+import { apiGetArchon, apiChipWar } from './lib/api'
 import { t } from './lib/translate'
 import { App as CapApp } from '@capacitor/app'
 import BottomNav from './components/BottomNav'
@@ -112,6 +112,16 @@ export default function App() {
       }))
     }
   }, [hydrated])
+
+  // Fetch Core War winner on launch
+  useEffect(() => {
+    if (!user) return
+    apiChipWar().then(res => {
+      if (res && res.winnerRace) {
+        useGameStore.getState().setWinnerRace(res.winnerRace)
+      }
+    }).catch(() => {})
+  }, [user])
 
   // Login + hydrated → server jadi sumber kebenaran. Ada save server → pakai itu.
   useEffect(() => {

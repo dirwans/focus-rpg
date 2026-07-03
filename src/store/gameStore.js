@@ -320,12 +320,14 @@ export const useGameStore = create(
       timer: initialTimer,
       battle: initialBattle,
       archons: null,
+      winnerRace: 'bionex', // Core War winner
       screen: 'main',
       showRaceSelect: false,
 
       // ── Navigation ──────────────────────────────────────
       setScreen: (screen) => set({ screen }),
       setArchons: (archons) => set({ archons }),
+      setWinnerRace: (race) => set({ winnerRace: race }),
       setNotification: (notif) => set({ notification: notif }),
 
       updateSettings: (newSettings) => set((s) => ({
@@ -1172,7 +1174,7 @@ export const useGameStore = create(
 
       // ── Helpers ──────────────────────────────────────────
       getStats: () => {
-        const { player, archons } = get()
+        const { player, archons, winnerRace } = get()
         if (!player.race) return { atk: 0, def: 0, hp: 0, title: '' }
         
         const myRaceArchon = archons ? archons[player.race] : null
@@ -1431,6 +1433,13 @@ export const useGameStore = create(
             atk += baseAtk * 0.02
             def += baseDef * 0.02
           }
+        }
+
+        // ── Core War Victory Buff ──
+        if (winnerRace && winnerRace === player.race) {
+          hp += baseHp * 0.10
+          atk += baseAtk * 0.10
+          def += baseDef * 0.10
         }
 
         let activeTitle = ''

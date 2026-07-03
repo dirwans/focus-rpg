@@ -312,7 +312,11 @@ app.get('/api/admin/reset-save/:username', (req, res) => {
 app.get('/api/save', (req, res) => {
   const s = requireSession(req, res)
   if (!s) return
-  res.json({ game_state: loadSave(s.username) })
+  checkChipWarReset()
+  res.json({
+    game_state: loadSave(s.username),
+    winnerRace: chipWarData.winnerRace || 'bionex'
+  })
 })
 
 app.post('/api/save', async (req, res) => {
@@ -358,7 +362,10 @@ app.post('/api/save', async (req, res) => {
   await writeSave(s.username, gameState)
   const clientId = req.headers['x-client-id'] || null
   broadcast(s.username, gameState, clientId)
-  res.json({ ok: true })
+  res.json({
+    ok: true,
+    winnerRace: chipWarData.winnerRace || 'bionex'
+  })
 })
 
 // SSE stream — token & client id lewat query (EventSource ga bisa set header)
@@ -563,30 +570,99 @@ const CHIP_WAR_COUNTDOWN_MS = 60 * 60 * 1000   // 1 hour
 const CHIP_WAR_DURATION_MS  = 2 * 60 * 60 * 1000  // 2 hours
 const TOWER_HP = 500_000_000  // 500 million
 
-function getChipWarTimes() {
-  const now = new Date()
-  const times = []
-  for (const h of [6, 12, 22]) {
-    const t = new Date(now)
-    t.setHours(h, 0, 0, 0)
-    if (t <= now) t.setDate(t.getDate() + 1)
-    times.push(t)
+function getNextWarWindow() {
+  const now = Date.now()
+  const duration = 2 * 60 * 60 * 1000 // 2 hours
+  const countdown = 60 * 60 * 1000 // 1 hour
+
+  const today = new Date()
+  const candidateHours = [12, 18, 21]
+  
+  const windows = []
+  for (const dayOffset of [-1, 0, 1]) {
+    for (const h of candidateHours) {
+      const start = new Date(today)
+      start.setDate(today.getDate() + dayOffset)
+      start.setHours(h, 0, 0, 0)
+      const startTime = start.getTime()
+      windows.push({
+        start: startTime,
+        countdownEnd: startTime - countdown,
+        end: startTime + duration
+      })
+    }
   }
-  times.sort((a, b) => a - b)
-  return times
+
+  let activeWindow = null
+  let nearestWindow = null
+  let minDiff = Infinity
+
+  for (const w of windows) {
+    if (now >= w.start && now < w.end) {
+      activeWindow = w
+      break
+    }
+    if (w.countdownEnd <= now && now < w.start) {
+      activeWindow = w
+      break
+    }
+    if (w.countdownEnd > now) {
+      const diff = w.countdownEnd - now
+      if (diff < minDiff) {
+        minDiff = diff
+        nearestWindow = w
+      }
+    }
+  }
+
+  if (activeWindow) {
+    const isCountdown = now < activeWindow.start
+    return {
+      phase: isCountdown ? 'countdown' : 'active',
+      start: activeWindow.start,
+      countdownEnd: activeWindow.countdownEnd,
+      end: activeWindow.end
+    }
+  }
+
+  if (nearestWindow) {
+    return {
+      phase: 'inactive',
+      start: nearestWindow.start,
+      countdownEnd: nearestWindow.countdownEnd,
+      end: nearestWindow.end
+    }
+  }
+
+  return { phase: 'inactive', start: 0, countdownEnd: 0, end: 0 }
 }
 
-function getNextWarWindow() {
-  const times = getChipWarTimes()
-  const next = times[0]
-  const start = next.getTime()
-  const countdownEnd = start - CHIP_WAR_COUNTDOWN_MS
-  const end = start + CHIP_WAR_DURATION_MS
+function getPreviousWarWindow() {
   const now = Date.now()
-  if (now < countdownEnd) return { phase: 'countdown', start, countdownEnd, end, nextAt: next }
-  if (now < start) return { phase: 'countdown', start, countdownEnd, end, nextAt: next }
-  if (now < end) return { phase: 'active', start, countdownEnd, end, nextAt: next }
-  return { phase: 'inactive', start, countdownEnd, end, nextAt: next }
+  const duration = 2 * 60 * 60 * 1000
+  const countdown = 60 * 60 * 1000
+  const today = new Date()
+  const candidateHours = [12, 18, 21]
+  
+  const windows = []
+  for (const dayOffset of [-1, 0, 1]) {
+    for (const h of candidateHours) {
+      const start = new Date(today)
+      start.setDate(today.getDate() + dayOffset)
+      start.setHours(h, 0, 0, 0)
+      const startTime = start.getTime()
+      windows.push({
+        start: startTime,
+        countdownEnd: startTime - countdown,
+        end: startTime + duration
+      })
+    }
+  }
+
+  const ended = windows.filter(w => now >= w.end)
+  if (ended.length === 0) return null
+  ended.sort((a, b) => b.end - a.end)
+  return ended[0]
 }
 
 let chipWarData = {
@@ -599,7 +675,8 @@ let chipWarData = {
   damage: {},   // { username: { arctron: N, bionex: N, celestra: N } }
   // Track total damage per race (sum of all players)
   raceDamage: { arctron: 0, bionex: 0, celestra: 0 },
-  lastReset: Date.now(),
+  lastReset: 0,
+  winnerRace: 'bionex', // Core War winner
 }
 
 const CHIP_WAR_FILE = join(__dirname, 'chip_war_data.json')
@@ -621,10 +698,33 @@ function saveChipWar() {
 }
 
 function checkChipWarReset() {
-  const w = getNextWarWindow()
-  // If lastReset is older than the last war start, reset towers
-  if (Date.now() > w.end && chipWarData.lastReset < w.start) {
-    console.log('[ChipWar] Resetting towers for new war window')
+  const prev = getPreviousWarWindow()
+  if (prev && chipWarData.lastReset < prev.start) {
+    console.log(`[ChipWar] Processing end of war starting at ${new Date(prev.start).toLocaleTimeString()}.`)
+    
+    // Determine winner based on tower HP percent
+    let winner = null
+    let maxPct = -1
+    for (const r of ['arctron', 'bionex', 'celestra']) {
+      const pct = chipWarData.towers[r].hp / chipWarData.towers[r].maxHp
+      if (pct > maxPct) {
+        maxPct = pct
+        winner = r
+      }
+    }
+    
+    // If all towers are destroyed (0 HP), check who dealt the most damage to others
+    if (maxPct === 0) {
+      let maxDmg = -1
+      for (const r of ['arctron', 'bionex', 'celestra']) {
+        const dmg = chipWarData.raceDamage[r] || 0
+        if (dmg > maxDmg) {
+          maxDmg = dmg
+          winner = r
+        }
+      }
+    }
+
     chipWarData = {
       towers: {
         arctron: { hp: TOWER_HP, maxHp: TOWER_HP },
@@ -633,9 +733,11 @@ function checkChipWarReset() {
       },
       damage: {},
       raceDamage: { arctron: 0, bionex: 0, celestra: 0 },
-      lastReset: Date.now(),
+      lastReset: prev.start, // mark this war as reset
+      winnerRace: winner || chipWarData.winnerRace || 'bionex', // Keep previous if no winner
     }
     saveChipWar()
+    console.log(`[ChipWar] Faction ${winner} declared winner of Core War!`)
   }
 }
 
@@ -650,6 +752,7 @@ app.get('/api/chip-war', (req, res) => {
     towers: chipWarData.towers,
     raceDamage: chipWarData.raceDamage,
     window,
+    winnerRace: chipWarData.winnerRace || 'bionex',
   })
 })
 

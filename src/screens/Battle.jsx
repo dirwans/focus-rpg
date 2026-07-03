@@ -87,6 +87,9 @@ export default function Battle() {
         }
       })
       setChipWar({ towers, window: res.window })
+      if (res.winnerRace) {
+        useGameStore.getState().setWinnerRace(res.winnerRace)
+      }
     } catch (e) {
       console.error(e)
     } finally {

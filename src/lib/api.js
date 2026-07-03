@@ -1,3 +1,5 @@
+import { useGameStore } from '../store/gameStore'
+
 // Client ID unik per device/tab — biar SSE ga echo balik ke pengirim
 let clientId = localStorage.getItem('focus-rpg-client-id')
 if (!clientId) {
@@ -32,8 +34,18 @@ export const apiLogin    = (username, password) => api('/login',    { method: 'P
 export const apiGoogleAuth = (credential) => api('/auth/google',  { method: 'POST', body: { credential } })
 export const apiMe       = () => api('/me')
 export const apiLogout   = () => api('/logout', { method: 'POST' })
-export const apiLoadSave = () => api('/save').then((d) => d.game_state)
-export const apiSyncSave = (gameState) => api('/save', { method: 'POST', body: { game_state: gameState } })
+export const apiLoadSave = () => api('/save').then((d) => {
+  if (d.winnerRace) {
+    try { useGameStore.getState().setWinnerRace(d.winnerRace) } catch (e) {}
+  }
+  return d.game_state
+})
+export const apiSyncSave = (gameState) => api('/save', { method: 'POST', body: { game_state: gameState } }).then((d) => {
+  if (d.winnerRace) {
+    try { useGameStore.getState().setWinnerRace(d.winnerRace) } catch (e) {}
+  }
+  return d
+})
 
 export const apiGetMarket = () => api('/market')
 export const apiSellMarket = (item, price) => api('/market/sell', { method: 'POST', body: { item, price } })
