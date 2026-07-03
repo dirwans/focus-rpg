@@ -250,8 +250,7 @@ export default function LibraryModal({ onClose }) {
                     <span style={{ color: '#e0f4ff' }}>🏛️ {b.boss}</span>
                     <span style={{ color: '#00ff88', fontWeight: 700 }}>{b.crd}</span>
                   </div>
-                ))}
-              </div>
+                 ))}
               </div>
 
               {/* ─── Equipment Sell Price (NPC) ─── */}
