@@ -852,12 +852,13 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                           }}>
                             {/* Left Side: BIG SPRITE */}
                             <div style={{
-                              flex: '0 0 170px',
+                              flex: '0 0 clamp(110px, 35%, 160px)',
                               display: 'flex',
                               justifyContent: 'center',
                               alignItems: 'flex-end',
                               height: 'auto',
-                              minHeight: 210,
+                              minHeight: 'clamp(150px, 28vw, 210px)',
+                              maxHeight: 220,
                               position: 'relative',
                               overflow: 'hidden',
                               borderRadius: 12,
