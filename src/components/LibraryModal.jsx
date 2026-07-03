@@ -213,14 +213,15 @@ export default function LibraryModal({ onClose }) {
                   <ul style={{ paddingLeft: '16px', marginTop: '4px', marginBottom: '8px', color: '#ddd' }}>
                     <li>🪨 Arcanite x1</li>
                     <li>🛡️ Divine Crest</li>
-                    <li>🍀 Lucky Relic <span style={{ color: '#aaa', fontStyle: 'italic' }}>(Optional - Increase Success Rate & Anti-Downgrade)</span></li>
+                    <li>🍀 Lucky Relic <span style={{ color: '#aaa', fontStyle: 'italic' }}>(Optional - Increase Success Rate +10%)</span></li>
                   </ul>
                   <li><strong>Rules & Rates:</strong></li>
                   <ul style={{ paddingLeft: '16px', marginTop: '4px', marginBottom: '8px', color: '#ddd' }}>
                     <li>• Weapon Enhancement increases <strong>ATK</strong> (+10% per level).</li>
                     <li>• Armor/Shield Enhancement increases <strong>HP & DEF</strong> (+10% per level).</li>
-                    <li>• Failure has a <strong>50% chance to downgrade</strong> by 1 level (without Lucky Relic).</li>
-                    <li>• Items <strong>never break</strong> on failure.</li>
+                    <li>• <strong>Level +1 ~ +5 (Safe Levels)</strong>: Failure costs materials, but equipment remains safe.</li>
+                    <li>• <strong>Level +6 ~ +8 (Destruction Levels)</strong>: Failure costs materials and **DESTROYS** the equipment.</li>
+                    <li>• There is no downgrade mechanic. Lucky Relic does NOT prevent destruction.</li>
                   </ul>
                 </ul>
                 
@@ -231,9 +232,9 @@ export default function LibraryModal({ onClose }) {
                     <span>Success Rate (Base / Lucky)</span>
                   </div>
                   {[20, 40, 60, 80, 100, 120, 150, 200].map((cost, idx) => {
-                    const baseRates = [100, 90, 80, 70, 60, 50, 40, 30]
+                    const baseRates = [100, 90, 70, 50, 35, 20, 10, 5]
                     const baseRate = baseRates[idx]
-                    const luckyRate = Math.min(100, baseRate + 20)
+                    const luckyRate = Math.min(100, baseRate + 10)
                     return (
                       <div key={idx} style={{ display: 'grid', gridTemplateColumns: '1.2fr 2fr 2.5fr', gap: '4px', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0', fontSize: '12px' }}>
                         <span>+{idx + 1}</span>
