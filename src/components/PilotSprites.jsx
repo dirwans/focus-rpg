@@ -53,28 +53,23 @@ function getJobLane(jobId) {
 export function ArctronSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false, isBattle = false }) {
   const lane = getJobLane(job)
   let img = isBattle ? arctronWarriorBattleImg : arctronWarriorImg
-  let glow = '#00e5ff' // Cyan/Blue for Warrior
-  
-  if (lane === 'ranger') {
-    img = arctronRangerImg
-    glow = '#ff6400' // Orange for Ranger
-  } else if (lane === 'specialist') {
-    img = arctronSpecialistImg
-    glow = '#39ff14' // Neon Green for Specialist
-  }
-  
+  if (lane === 'ranger') img = arctronRangerImg
+  else if (lane === 'specialist') img = arctronSpecialistImg
+
+  const glow = '#00e5ff'
+
   return (
-    <TransparentSprite
+    <img
       src={img}
       alt={`Arctron ${lane}`}
-      size={size}
-      width={width}
-      height={height}
-      glowColor={glow}
-      upperBodyOnly={upperBodyOnly}
-      fill={fill}
-      isPilot={true}
-      disableKeying={true}
+      className="pilot-sprite-img"
+      style={{
+        width: width || size,
+        height: height || size,
+        objectFit: 'contain',
+        display: 'block',
+        filter: `brightness(1.15) contrast(1.1) saturate(1.05) drop-shadow(0 0 10px ${glow}55)`
+      }}
     />
   )
 }
@@ -105,18 +100,20 @@ export function BionexSprite({ job, size = 60, width, height, upperBodyOnly = fa
     else img = bionexPilotImg;
   }
 
+  const glow = '#39ff14'
+
   return (
-    <TransparentSprite
+    <img
       src={img}
       alt={`Bionex ${job || 'pilot'}`}
-      size={size}
-      width={width}
-      height={height}
-      glowColor="#00e5ff"
-      upperBodyOnly={upperBodyOnly}
-      fill={fill}
-      isPilot={true}
-      disableKeying={true}
+      className="pilot-sprite-img"
+      style={{
+        width: width || size,
+        height: height || size,
+        objectFit: 'contain',
+        display: 'block',
+        filter: `brightness(1.15) contrast(1.1) saturate(1.05) drop-shadow(0 0 10px ${glow}55)`
+      }}
     />
   )
 }
@@ -137,18 +134,20 @@ export function CelestraSprite({ job, size = 60, width, height, upperBodyOnly = 
     }
   }
   
+  const glow = '#d000ff'
+
   return (
-    <TransparentSprite
+    <img
       src={srcImg}
       alt={`Celestra ${lane}`}
-      size={size}
-      width={width}
-      height={height}
-      glowColor="#d000ff"
-      upperBodyOnly={upperBodyOnly}
-      fill={fill}
-      isPilot={true}
-      disableKeying={true}
+      className="pilot-sprite-img"
+      style={{
+        width: width || size,
+        height: height || size,
+        objectFit: 'contain',
+        display: 'block',
+        filter: `brightness(1.15) contrast(1.1) saturate(1.05) drop-shadow(0 0 10px ${glow}55)`
+      }}
     />
   )
 }
