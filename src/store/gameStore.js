@@ -270,7 +270,15 @@ const initialPlayer = {
     coreWarVictory: 0,
     highestEnhancement: 0
   },
-  guild: null // { name: string, level: number, role: string, members: number }
+  guild: null, // { name: string, level: number, role: string, members: number }
+  inventorySlots: 100,       // default 100, max 300 (upgrade +20 per 1M CRD)
+  warehouseSlots: 200,       // default 200, max 600 (upgrade +50 per 2.5M CRD)
+  dungeonAttempts: {         // daily dungeon entry counter — reset at 00:00 server
+    '1': 0,                  // Echo Burrow: max 3/day
+    '2': 0,                  // Infernal Forge: max 2/day
+    '3': 0,                  // Trinity Core Chamber: max 1/day
+    lastResetDate: ''
+  }
 }
 
 const initialTimer = {
@@ -399,8 +407,27 @@ export const useGameStore = create(
         
         if (isDungeon) {
           const dungeonIdx = parseInt(timer.selectedZone.split('_')[1]) - 1
+          const dungeonKey = String(dungeonIdx + 1)
           sector = enemies.dungeons[dungeonIdx]
           if (player.level < sector.minLevel) return
+
+          // ── Daily Dungeon Entry Limit check ──
+          const DUNGEON_MAX_DAILY = { '1': 3, '2': 2, '3': 1 }
+          const today = new Date().toDateString()
+          const attempts = player.dungeonAttempts || { '1': 0, '2': 0, '3': 0, lastResetDate: '' }
+          const freshAttempts = attempts.lastResetDate !== today
+            ? { '1': 0, '2': 0, '3': 0, lastResetDate: today }
+            : attempts
+          const currentCount = freshAttempts[dungeonKey] || 0
+          const maxAllowed = DUNGEON_MAX_DAILY[dungeonKey] || 1
+          if (currentCount >= maxAllowed) {
+            alert(`⏰ Batas masuk Dungeon ${dungeonKey} hari ini sudah habis (${maxAllowed}x/hari). Reset jam 00:00 Server Time.`)
+            return
+          }
+          // Increment counter
+          const newAttempts = { ...freshAttempts, [dungeonKey]: currentCount + 1 }
+          set({ player: { ...player, dungeonAttempts: newAttempts, savedAt: now } })
+
           const spawned = spawnEnemy(dungeonIdx, player.level, false, true)
           mob = spawned.mob
           isBoss = spawned.isBoss
@@ -1468,16 +1495,34 @@ export const useGameStore = create(
         const item = player.inventory.find((i) => i.uid === uid)
         if (!item) return
 
-        const price = (item.level || 1) * 8 + (item.rarity === 'epic' ? 100 : item.rarity === 'rare' ? 50 : 10)
-        const newInventory = player.inventory.filter((i) => i.uid !== uid)
+        // Cape tidak bisa dijual ke NPC
+        if (item.type === 'cape') {
+          alert('🦸 Cape tidak dapat dijual ke NPC. Gunakan Auction House atau simpan.')
+          return
+        }
 
+        // Harga jual resmi berdasar rarity + type (dalam CRD)
+        const SELL_PRICES = {
+          C: { weapon: 50000, armor: 40000, shield: 40000, helmet: 40000, mantle: 40000, gloves: 40000, boots: 40000, pants: 40000, ring: 100000, amulet: 100000 },
+          B: { weapon: 150000, armor: 120000, shield: 120000, helmet: 120000, mantle: 120000, gloves: 120000, boots: 120000, pants: 120000, ring: 300000, amulet: 300000 },
+          A: { weapon: 500000, armor: 400000, shield: 400000, helmet: 400000, mantle: 400000, gloves: 400000, boots: 400000, pants: 400000, ring: 1000000, amulet: 1000000 },
+          S: { weapon: 2000000, armor: 1500000, shield: 1500000, helmet: 1500000, mantle: 1500000, gloves: 1500000, boots: 1500000, pants: 1500000, ring: 4000000, amulet: 4000000 },
+        }
+        const rarityPrices = SELL_PRICES[item.rarity]
+        const price = rarityPrices ? (rarityPrices[item.type] || 0) : 0
+        if (price === 0) {
+          alert(`Item ini tidak dapat dijual ke NPC.`)
+          return
+        }
+
+        const newInventory = player.inventory.filter((i) => i.uid !== uid)
         set({
           player: {
             ...player,
             inventory: newInventory,
             resources: {
               ...player.resources,
-              anium: player.resources.anium + price
+              credits: (player.resources.credits || 0) + price
             },
             savedAt: Date.now()
           }

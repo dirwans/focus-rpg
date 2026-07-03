@@ -252,6 +252,90 @@ export default function LibraryModal({ onClose }) {
                   </div>
                 ))}
               </div>
+              </div>
+
+              {/* ─── Equipment Sell Price (NPC) ─── */}
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>💰 Equipment Sell Price (NPC)</div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#88aadd', marginBottom: 10 }}>
+                  Harga jual ke NPC ≈ 20–25% dari harga beli NPC. Cape tidak dapat dijual ke NPC.
+                </div>
+                {[
+                  { rarity: '⚪ Common', color: '#cccccc', weapon: '50,000', armor: '40,000', ring: '100,000', amulet: '100,000' },
+                  { rarity: '🟢 Uncommon', color: '#00cc66', weapon: '150,000', armor: '120,000', ring: '300,000', amulet: '300,000' },
+                  { rarity: '🔵 Rare', color: '#4488ff', weapon: '500,000', armor: '400,000', ring: '1,000,000', amulet: '1,000,000' },
+                  { rarity: '🟣 Epic', color: '#bb66ff', weapon: '2,000,000', armor: '1,500,000', ring: '4,000,000', amulet: '4,000,000' },
+                ].map((r, i) => (
+                  <div key={i} style={{ marginBottom: 10, paddingBottom: 10, borderBottom: i < 3 ? '1px solid rgba(255,255,255,0.07)' : 'none' }}>
+                    <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 800, color: r.color, marginBottom: 5 }}>{r.rarity}</div>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3px 12px', fontFamily: 'var(--font-mono)', fontSize: 11 }}>
+                      <span style={{ color: '#aac8ff' }}>⚔️ Weapon</span><span style={{ color: '#00ff88' }}>{r.weapon} CRD</span>
+                      <span style={{ color: '#aac8ff' }}>🛡️ Armor/Shield</span><span style={{ color: '#00ff88' }}>{r.armor} CRD</span>
+                      <span style={{ color: '#aac8ff' }}>💍 Ring</span><span style={{ color: '#00ff88' }}>{r.ring} CRD</span>
+                      <span style={{ color: '#aac8ff' }}>📿 Amulet</span><span style={{ color: '#00ff88' }}>{r.amulet} CRD</span>
+                    </div>
+                  </div>
+                ))}
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#ff6666', marginTop: 4 }}>
+                  🦸 Cape — <strong>Tidak dapat dijual ke NPC</strong> (Auction House atau simpan)
+                </div>
+              </div>
+
+              {/* ─── Respawn Database ─── */}
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>⏱️ Respawn Database</div>
+                {[
+                  { label: '👾 Normal Monster', val: '5 detik', color: '#e0f4ff' },
+                  { label: '👑 World Boss', val: '6 Jam', color: '#ffcc00' },
+                  { label: '🏛️ Dungeon Boss', val: 'Tidak ada (Dungeon Reset)', color: '#ff8888' },
+                ].map((r, i) => (
+                  <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '7px 0', borderBottom: i < 2 ? '1px solid rgba(255,255,255,0.07)' : 'none', fontFamily: 'var(--font-mono)', fontSize: 12 }}>
+                    <span style={{ color: r.color }}>{r.label}</span>
+                    <span style={{ color: '#00ff88', fontWeight: 700 }}>{r.val}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* ─── Dungeon Entry ─── */}
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>🎫 Dungeon Entry (Maks/Hari)</div>
+                {[
+                  { dungeon: '🏛️ Echo Burrow', max: '3 kali/hari' },
+                  { dungeon: '🏛️ Infernal Forge', max: '2 kali/hari' },
+                  { dungeon: '🏛️ Trinity Core Chamber', max: '1 kali/hari' },
+                ].map((d, i) => (
+                  <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '7px 0', borderBottom: i < 2 ? '1px solid rgba(255,255,255,0.07)' : 'none', fontFamily: 'var(--font-mono)', fontSize: 12 }}>
+                    <span style={{ color: '#e0f4ff' }}>{d.dungeon}</span>
+                    <span style={{ color: '#ffcc00', fontWeight: 700 }}>{d.max}</span>
+                  </div>
+                ))}
+                <div style={{ marginTop: 8, fontFamily: 'var(--font-mono)', fontSize: 11, color: '#88aadd' }}>
+                  🔄 Reset setiap <strong style={{ color: '#00e5ff' }}>00:00 Server Time</strong>
+                </div>
+              </div>
+
+              {/* ─── Inventory & Warehouse ─── */}
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>🎒 Inventory & Warehouse</div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginTop: 6 }}>
+                  <div style={{ background: 'rgba(0,229,255,0.06)', borderRadius: 8, padding: 10 }}>
+                    <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, color: '#00e5ff', fontWeight: 800, marginBottom: 6 }}>🎒 INVENTORY</div>
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, lineHeight: 1.8, color: '#e0f4ff' }}>
+                      <div>Slot Awal: <strong>100</strong></div>
+                      <div>Maksimum: <strong>300</strong></div>
+                      <div style={{ marginTop: 4, color: '#ffcc00' }}>+20 Slot → <strong>1,000,000 CRD</strong></div>
+                    </div>
+                  </div>
+                  <div style={{ background: 'rgba(255,165,0,0.06)', borderRadius: 8, padding: 10 }}>
+                    <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, color: '#ffaa00', fontWeight: 800, marginBottom: 6 }}>📦 WAREHOUSE</div>
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, lineHeight: 1.8, color: '#e0f4ff' }}>
+                      <div>Slot Awal: <strong>200</strong></div>
+                      <div>Maksimum: <strong>600</strong></div>
+                      <div style={{ marginTop: 4, color: '#ffcc00' }}>+50 Slot → <strong>2,500,000 CRD</strong></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           )}
 
