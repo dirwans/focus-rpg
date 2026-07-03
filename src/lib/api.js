@@ -36,13 +36,21 @@ export const apiMe       = () => api('/me')
 export const apiLogout   = () => api('/logout', { method: 'POST' })
 export const apiLoadSave = () => api('/save').then((d) => {
   if (d.winnerRace) {
-    try { useGameStore.getState().setWinnerRace(d.winnerRace) } catch (e) {}
+    try {
+      useGameStore.getState().setWinnerRace(d.winnerRace)
+      if (d.runnerUpRace) useGameStore.getState().setRunnerUpRace(d.runnerUpRace)
+      if (d.lastPlaceRace) useGameStore.getState().setLastPlaceRace(d.lastPlaceRace)
+    } catch (e) {}
   }
   return d.game_state
 })
 export const apiSyncSave = (gameState) => api('/save', { method: 'POST', body: { game_state: gameState } }).then((d) => {
   if (d.winnerRace) {
-    try { useGameStore.getState().setWinnerRace(d.winnerRace) } catch (e) {}
+    try {
+      useGameStore.getState().setWinnerRace(d.winnerRace)
+      if (d.runnerUpRace) useGameStore.getState().setRunnerUpRace(d.runnerUpRace)
+      if (d.lastPlaceRace) useGameStore.getState().setLastPlaceRace(d.lastPlaceRace)
+    } catch (e) {}
   }
   return d
 })

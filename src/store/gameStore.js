@@ -250,6 +250,7 @@ const initialPlayer = {
   streak: 0,
   lastSessionDate: null,
   inventory: [],
+  warehouse: [],             // Personal Warehouse inventory
   totalSessions: 0,
   totalMinutes: 0,
   savedAt: 0,
@@ -278,6 +279,12 @@ const initialPlayer = {
     '2': 0,                  // Infernal Forge: max 2/day
     '3': 0,                  // Trinity Core Chamber: max 1/day
     lastResetDate: ''
+  },
+  miningTimer: {
+    state: 'idle',           // 'idle' | 'running' | 'completed'
+    startedAt: 0,
+    endsAt: 0,
+    duration: 0              // in minutes
   }
 }
 
@@ -321,6 +328,8 @@ export const useGameStore = create(
       battle: initialBattle,
       archons: null,
       winnerRace: 'bionex', // Core War winner
+      runnerUpRace: 'arctron',
+      lastPlaceRace: 'celestra',
       screen: 'main',
       showRaceSelect: false,
 
@@ -328,9 +337,315 @@ export const useGameStore = create(
       setScreen: (screen) => set({ screen }),
       setArchons: (archons) => set({ archons }),
       setWinnerRace: (race) => set({ winnerRace: race }),
+      setRunnerUpRace: (race) => set({ runnerUpRace: race }),
+      setLastPlaceRace: (race) => set({ lastPlaceRace: race }),
       setNotification: (notif) => set({ notification: notif }),
 
+      depositToWarehouse: (itemUid) => set((s) => {
+        const { player } = s
+        const inv = player.inventory || []
+        const wh = player.warehouse || []
+        const maxWh = player.warehouseSlots || 200
+
+        if (wh.length >= maxWh) {
+          alert(`Warehouse penuh! Maksimal ${maxWh} slot.`)
+          return {}
+        }
+
+        const idx = inv.findIndex(i => i.uid === itemUid)
+        if (idx === -1) return {}
+
+        const item = inv[idx]
+        const newInv = [...inv]
+        newInv.splice(idx, 1)
+        const newWh = [...wh, item]
+
+        return {
+          player: {
+            ...player,
+            inventory: newInv,
+            warehouse: newWh,
+            savedAt: Date.now()
+          }
+        }
+      }),
+
+      withdrawFromWarehouse: (itemUid) => set((s) => {
+        const { player } = s
+        const inv = player.inventory || []
+        const wh = player.warehouse || []
+        const maxInv = player.inventorySlots || 100
+
+        if (inv.length >= maxInv) {
+          alert(`Inventory penuh! Maksimal ${maxInv} slot.`)
+          return {}
+        }
+
+        const idx = wh.findIndex(i => i.uid === itemUid)
+        if (idx === -1) return {}
+
+        const item = wh[idx]
+        const newWh = [...wh]
+        newWh.splice(idx, 1)
+        const newInv = [...inv, item]
+
+        return {
+          player: {
+            ...player,
+            inventory: newInv,
+            warehouse: newWh,
+            savedAt: Date.now()
+          }
+        }
+      }),
+
+      upgradeInventorySlots: () => set((s) => {
+        const { player } = s
+        const currentSlots = player.inventorySlots || 100
+        const credits = player.resources.credits || 0
+        const upgradeCost = 1000000
+
+        if (currentSlots >= 300) {
+          alert("Inventory sudah mencapai batas maksimum (300 slot)!")
+          return {}
+        }
+        if (credits < upgradeCost) {
+          alert(`Credits (CRD) tidak cukup! Membutuhkan ${upgradeCost.toLocaleString()} CRD.`)
+          return {}
+        }
+
+        return {
+          player: {
+            ...player,
+            inventorySlots: currentSlots + 20,
+            resources: {
+              ...player.resources,
+              credits: credits - upgradeCost
+            },
+            savedAt: Date.now()
+          }
+        }
+      }),
+
+      upgradeWarehouseSlots: () => set((s) => {
+        const { player } = s
+        const currentSlots = player.warehouseSlots || 200
+        const credits = player.resources.credits || 0
+        const upgradeCost = 2500000
+
+        if (currentSlots >= 600) {
+          alert("Warehouse sudah mencapai batas maksimum (600 slot)!")
+          return {}
+        }
+        if (credits < upgradeCost) {
+          alert(`Credits (CRD) tidak cukup! Membutuhkan ${upgradeCost.toLocaleString()} CRD.`)
+          return {}
+        }
+
+        return {
+          player: {
+            ...player,
+            warehouseSlots: currentSlots + 50,
+            resources: {
+              ...player.resources,
+              credits: credits - upgradeCost
+            },
+            savedAt: Date.now()
+          }
+        }
+      }),
+      startMining: (durationMinutes) => set((s) => {
+        const { player } = s
+        const miningTimer = player.miningTimer || { state: 'idle', startedAt: 0, endsAt: 0, duration: 0 }
+        if (miningTimer.state !== 'idle') {
+          alert("Penambangan sedang berjalan!")
+          return {}
+        }
+        return {
+          player: {
+            ...player,
+            miningTimer: {
+              state: 'running',
+              startedAt: Date.now(),
+              endsAt: Date.now() + durationMinutes * 60 * 1000,
+              duration: durationMinutes
+            },
+            savedAt: Date.now()
+          }
+        }
+      }),
+
+      cancelMining: () => set((s) => {
+        const { player } = s
+        if (!window.confirm("Apakah Anda yakin ingin membatalkan penambangan? Semua progress akan hilang.")) return {}
+        return {
+          player: {
+            ...player,
+            miningTimer: {
+              state: 'idle',
+              startedAt: 0,
+              endsAt: 0,
+              duration: 0
+            },
+            savedAt: Date.now()
+          }
+        }
+      }),
+
+      claimMiningRewards: () => set((s) => {
+        const { player, winnerRace, runnerUpRace, lastPlaceRace } = s
+        const miningTimer = player.miningTimer || { state: 'idle', startedAt: 0, endsAt: 0, duration: 0 }
+        if (miningTimer.state !== 'running') return {}
+        if (Date.now() < miningTimer.endsAt) {
+          alert("Penambangan belum selesai!")
+          return {}
+        }
+
+        const duration = miningTimer.duration || 10
+        let oreCount = 1
+        if (duration === 10) {
+          oreCount = 1 + Math.floor(Math.random() * 3) // 1-3
+        } else if (duration === 30) {
+          oreCount = 3 + Math.floor(Math.random() * 3) // 3-5
+        } else if (duration === 60) {
+          oreCount = 5 + Math.floor(Math.random() * 4) // 5-8
+        }
+
+        // Faction rankings and grade bonuses
+        const rankings = [winnerRace, runnerUpRace, lastPlaceRace]
+        const playerRankIdx = rankings.indexOf(player.race)
+        const bonus = playerRankIdx === 0 ? 5 : playerRankIdx === 1 ? 3 : 0
+
+        // Probabilities
+        let pCommon = 100, pRare = 0, pEpic = 0
+        if (duration === 10) {
+          pCommon = 100 - bonus
+          pRare = bonus - (playerRankIdx === 0 ? 1 : 0)
+          pEpic = (playerRankIdx === 0 ? 1 : 0)
+        } else if (duration === 30) {
+          pCommon = 80 - bonus
+          pRare = 20 + bonus - (playerRankIdx === 0 ? 1 : 0)
+          pEpic = (playerRankIdx === 0 ? 1 : 0)
+        } else if (duration === 60) {
+          pCommon = 60 - bonus
+          pRare = 35 + bonus - (playerRankIdx === 0 ? 1 : 0)
+          pEpic = 5 + (playerRankIdx === 0 ? 1 : 0)
+        }
+
+        const oreTypes = ['ignis', 'virel', 'kryos', 'zephra', 'umbrix']
+        const newInventory = [...player.inventory]
+        const invSlots = player.inventorySlots || 100
+        const mailbox = player.mailbox ? [...player.mailbox] : []
+
+        let claimedOres = []
+        let mailCount = 0
+
+        for (let i = 0; i < oreCount; i++) {
+          const type = oreTypes[Math.floor(Math.random() * oreTypes.length)]
+          const roll = Math.random() * 100
+          let grade = 'common'
+          if (roll < pEpic) {
+            grade = 'epic'
+          } else if (roll < pEpic + pRare) {
+            grade = 'rare'
+          }
+
+          const itemId = `ore_${type}_${grade}`
+          const itemTemplate = itemsData.items.find(it => it.id === itemId)
+          if (!itemTemplate) continue
+
+          const newItem = { ...itemTemplate, uid: Date.now() + i }
+          claimedOres.push(newItem)
+
+          if (newInventory.length < invSlots) {
+            newInventory.push(newItem)
+          } else {
+            mailbox.push({
+              id: Math.random().toString(36).slice(2) + Date.now().toString(36),
+              type: 'Mining Overflow',
+              sender: 'Mining Station',
+              subject: `Mining Overflow: ${newItem.name}`,
+              body: `Bag Anda penuh (${invSlots}/${invSlots}) saat mengklaim hasil tambang. ORE ini telah dikirim ke Mailbox.`,
+              item: newItem,
+              receivedAt: Date.now()
+            })
+            mailCount++
+          }
+        }
+
+        const report = claimedOres.map(o => `${o.emoji} ${o.name}`).join(', ')
+        alert(`🎉 Berhasil mengklaim hasil tambang!\n\nDidapatkan: ${report}${mailCount > 0 ? `\n\n⚠️ ${mailCount} Ore dikirim ke Mailbox karena bag penuh!` : ''}`)
+
+        return {
+          player: {
+            ...player,
+            inventory: newInventory,
+            mailbox,
+            miningTimer: {
+              state: 'idle',
+              startedAt: 0,
+              endsAt: 0,
+              duration: 0
+            },
+            savedAt: Date.now()
+          }
+        }
+      }),
+
+      processOreToShard: (recipeType, oreGrade) => set((s) => {
+        const { player } = s
+        const oreId = `ore_${recipeType}_${oreGrade}`
+        const shardId = `shard_${recipeType}_${oreGrade}`
+
+        const crdCost = oreGrade === 'common' ? 20000 : oreGrade === 'rare' ? 50000 : 100000
+        const credits = player.resources.credits || 0
+
+        if (credits < crdCost) {
+          alert(`Credits (CRD) tidak cukup! Membutuhkan ${crdCost.toLocaleString()} CRD.`)
+          return {}
+        }
+
+        const oreCount = player.inventory.filter(it => it.id === oreId).length
+        if (oreCount < 10) {
+          alert(`Bahan tidak cukup! Membutuhkan 10 Ore sejenis (Milik Anda: ${oreCount}/10).`)
+          return {}
+        }
+
+        const template = itemsData.items.find(it => it.id === shardId)
+        if (!template) {
+          alert("Resep tidak ditemukan.")
+          return {}
+        }
+
+        // Consume 10 ores
+        let consumed = 0
+        const newInv = player.inventory.filter(it => {
+          if (it.id === oreId && consumed < 10) {
+            consumed++
+            return false
+          }
+          return true
+        })
+
+        // Add 1 Shard
+        const newShard = { ...template, uid: Date.now() }
+        newInv.push(newShard)
+
+        return {
+          player: {
+            ...player,
+            inventory: newInv,
+            resources: {
+              ...player.resources,
+              credits: credits - crdCost
+            },
+            savedAt: Date.now()
+          }
+        }
+      }),
+
       updateSettings: (newSettings) => set((s) => ({
+
         player: {
           ...s.player,
           settings: { ...(s.player.settings || { autoHpPotion: 'OFF', autoFpPotion: 'OFF', autoSkill: false, autoLoot: false, alertWorldBoss: true, alertCoreWar: true, alertDungeon: true }), ...newSettings },
@@ -626,6 +941,28 @@ export const useGameStore = create(
           isCrit = Math.random() < playerStats.crit
           let rawDmg = Math.max(1, playerAtk - mob.def)
 
+          // Auto FP Potion logic
+          if (player.settings?.autoFpPotion === 'ON' && nextPlayerFp < 50) {
+            const fpPotIdx = player.inventory.findIndex(it => it.id === 'pot_fp')
+            if (fpPotIdx !== -1) {
+              nextPlayerFp = Math.min(playerMaxFp, nextPlayerFp + 2500)
+              const newInv = [...player.inventory]
+              newInv.splice(fpPotIdx, 1)
+              const sisa = newInv.filter(it => it.id === 'pot_fp').length
+
+              if (newLog.length > 7) newLog = newLog.slice(-7)
+              newLog.push(`🧪 [Auto-Potion] FP Potion [S]! (+2,500 FP, Sisa: ${sisa})`)
+
+              set({
+                player: {
+                  ...player,
+                  inventory: newInv,
+                  savedAt: Date.now()
+                }
+              })
+            }
+          }
+
           // Auto-Skill Logic
           let skillMultiplier = 0
           if (player.settings?.autoSkill && nextPlayerFp >= 40) {
@@ -721,7 +1058,25 @@ export const useGameStore = create(
                 newLog.push(`✨ [Skill] Pilot menggunakan ${skillName}! (+${healAmount} HP, -50 FP)`)
               } else if (player.settings?.autoHpPotion === 'ON') {
                 // Try fallback to potion if FP is empty
-                if (player.resources.potions > 0) {
+                const hpPotIdx = player.inventory.findIndex(it => it.id === 'pot_hp')
+                if (hpPotIdx !== -1) {
+                  const healAmount = 1000
+                  nextPlayerHp = Math.min(playerMaxHp, nextPlayerHp + healAmount)
+                  const newInv = [...player.inventory]
+                  newInv.splice(hpPotIdx, 1)
+                  const sisa = newInv.filter(it => it.id === 'pot_hp').length
+
+                  if (newLog.length > 7) newLog = newLog.slice(-7)
+                  newLog.push(`🧪 [Auto-Potion] HP Potion [S]! (+1,000 HP, Sisa: ${sisa})`)
+
+                  set({
+                    player: {
+                      ...player,
+                      inventory: newInv,
+                      savedAt: Date.now()
+                    }
+                  })
+                } else if (player.resources.potions > 0) {
                   const healAmount = Math.floor(playerMaxHp * 0.30)
                   nextPlayerHp = Math.min(playerMaxHp, nextPlayerHp + healAmount)
                   const remainingPotions = Math.max(0, player.resources.potions - 1)
@@ -743,7 +1098,25 @@ export const useGameStore = create(
               }
             } else if (player.settings?.autoHpPotion === 'ON') {
               // Non-healer classes potion check
-              if (player.resources.potions > 0) {
+              const hpPotIdx = player.inventory.findIndex(it => it.id === 'pot_hp')
+              if (hpPotIdx !== -1) {
+                const healAmount = 1000
+                nextPlayerHp = Math.min(playerMaxHp, nextPlayerHp + healAmount)
+                const newInv = [...player.inventory]
+                newInv.splice(hpPotIdx, 1)
+                const sisa = newInv.filter(it => it.id === 'pot_hp').length
+
+                if (newLog.length > 7) newLog = newLog.slice(-7)
+                newLog.push(`🧪 [Auto-Potion] HP Potion [S]! (+1,000 HP, Sisa: ${sisa})`)
+
+                set({
+                  player: {
+                    ...player,
+                    inventory: newInv,
+                    savedAt: Date.now()
+                  }
+                })
+              } else if (player.resources.potions > 0) {
                 const healAmount = Math.floor(playerMaxHp * 0.30)
                 nextPlayerHp = Math.min(playerMaxHp, nextPlayerHp + healAmount)
                 const remainingPotions = Math.max(0, player.resources.potions - 1)
@@ -855,7 +1228,27 @@ export const useGameStore = create(
 
         // Item drop deterministik berdasar sistem Rarity
         const newInventory = [...player.inventory]
+        const invSlots = player.inventorySlots || 100
+        const mailbox = player.mailbox ? [...player.mailbox] : []
         let dropLog = ''
+
+        const pushOrMail = (item, logString) => {
+          if (newInventory.length < invSlots) {
+            newInventory.push(item)
+            dropLog += logString
+          } else {
+            mailbox.push({
+              id: Math.random().toString(36).slice(2) + Date.now().toString(36),
+              type: 'Inventory Overflow',
+              sender: 'Trade Commissioner',
+              subject: `Bag Overflow: ${item.name}`,
+              body: `Bag Anda penuh (${invSlots}/${invSlots}) saat menerima item dari grind session.\nItem ini telah dikirim ke Mailbox.`,
+              item,
+              receivedAt: Date.now()
+            })
+            dropLog += logString + ' (📬 Ke Mailbox)'
+          }
+        }
 
         // Stage saat sesi berlangsung (untuk gate loot berdasar minStage)
         const fightSector = getSector(player.level)
@@ -916,7 +1309,7 @@ export const useGameStore = create(
             const bossEquipRoll = seededFrac(timer.startedAt + 200)
             const bossEquipRarity = bossEquipRoll < 0.5 ? RARITY_COMMON : RARITY_UNCOMMON
             const bossEquip = pickItem(bossEquipRarity, timer.startedAt + 201)
-            if (bossEquip) { newInventory.push({ ...bossEquip, uid: Date.now() + 200 }); dropLog += `\n🎁 Boss Drop: ${bossEquip.emoji} ${bossEquip.name}` }
+            if (bossEquip) { pushOrMail({ ...bossEquip, uid: Date.now() + 200 }, `\n🎁 Boss Drop: ${bossEquip.emoji} ${bossEquip.name}`) }
 
             // Boss CRD bonus
             const DUNGEON_BOSS_CRD = [
@@ -932,29 +1325,28 @@ export const useGameStore = create(
             // Random: Rare Equipment 25%
             if (seededFrac(timer.startedAt + 203) < 0.25) {
               const rareEquip = pickItem(RARITY_RARE, timer.startedAt + 204)
-              if (rareEquip) { newInventory.push({ ...rareEquip, uid: Date.now() + 203 }); dropLog += `\n🔵 Rare Drop: ${rareEquip.emoji} ${rareEquip.name}` }
+              if (rareEquip) { pushOrMail({ ...rareEquip, uid: Date.now() + 203 }, `\n🔵 Rare Drop: ${rareEquip.emoji} ${rareEquip.name}`) }
             }
             // Random: Epic Equipment 5%
             if (seededFrac(timer.startedAt + 205) < 0.05) {
               const epicEquip = pickItem(RARITY_EPIC, timer.startedAt + 206)
-              if (epicEquip) { newInventory.push({ ...epicEquip, uid: Date.now() + 205 }); dropLog += `\n🟣 Epic Drop: ${epicEquip.emoji} ${epicEquip.name}` }
+              if (epicEquip) { pushOrMail({ ...epicEquip, uid: Date.now() + 205 }, `\n🟣 Epic Drop: ${epicEquip.emoji} ${epicEquip.name}`) }
             }
             // Divine Crest: 100% (5-15 pcs)
             const crestCount = 5 + Math.floor(seededFrac(timer.startedAt + 207) * 11)
             const crestItem = pickMat('mat_divine_crest')
             if (crestItem) {
-              for (let c = 0; c < crestCount; c++) newInventory.push({ ...crestItem, uid: Date.now() + 210 + c })
-              dropLog += `\n🛡️ Divine Crest ×${crestCount}`
+              for (let c = 0; c < crestCount; c++) pushOrMail({ ...crestItem, uid: Date.now() + 210 + c }, c === 0 ? `\n🛡️ Divine Crest ×${crestCount}` : '')
             }
             // Cape Component: 20%
             if (seededFrac(timer.startedAt + 208) < 0.20) {
               const capeComp = pickMat('mat_cape_component')
-              if (capeComp) { newInventory.push({ ...capeComp, uid: Date.now() + 208 }); dropLog += `\n🦸 Cape Component` }
+              if (capeComp) { pushOrMail({ ...capeComp, uid: Date.now() + 208 }, `\n🦸 Cape Component`) }
             }
             // Arcanite: 0.10% (Super Ultra Rare)
             if (seededFrac(timer.startedAt + 209) < 0.001) {
               const arc = pickMat('mat_arcanite')
-              if (arc) { newInventory.push({ ...arc, uid: Date.now() + 209 }); dropLog += `\n🪨 ARCANITE!!! (Super Ultra Rare)` }
+              if (arc) { pushOrMail({ ...arc, uid: Date.now() + 209 }, `\n🪨 ARCANITE!!! (Super Ultra Rare)`) }
             }
           }
         } else {
@@ -965,7 +1357,7 @@ export const useGameStore = create(
             const bossEquipRoll = seededFrac(timer.startedAt + 100)
             const bossEquipRarity = bossEquipRoll < 0.5 ? RARITY_COMMON : RARITY_UNCOMMON
             const bossEquip = pickItem(bossEquipRarity, timer.startedAt + 101)
-            if (bossEquip) { newInventory.push({ ...bossEquip, uid: Date.now() + 100 }); dropLog += `\n🎁 Boss Drop: ${bossEquip.emoji} ${bossEquip.name}` }
+            if (bossEquip) { pushOrMail({ ...bossEquip, uid: Date.now() + 100 }, `\n🎁 Boss Drop: ${bossEquip.emoji} ${bossEquip.name}`) }
 
             // World Boss CRD by sector boss
             const WORLD_BOSS_CRD = [
@@ -983,40 +1375,44 @@ export const useGameStore = create(
             // Random: Rare Equipment 15%
             if (seededFrac(timer.startedAt + 103) < 0.15) {
               const rareEquip = pickItem(RARITY_RARE, timer.startedAt + 104)
-              if (rareEquip) { newInventory.push({ ...rareEquip, uid: Date.now() + 103 }); dropLog += `\n🔵 Rare Drop: ${rareEquip.emoji} ${rareEquip.name}` }
+              if (rareEquip) { pushOrMail({ ...rareEquip, uid: Date.now() + 103 }, `\n🔵 Rare Drop: ${rareEquip.emoji} ${rareEquip.name}`) }
             }
             // Divine Crest: 100% (1-5 pcs)
             const crestCount = 1 + Math.floor(seededFrac(timer.startedAt + 105) * 5)
             const crestItem = pickMat('mat_divine_crest')
             if (crestItem) {
-              for (let c = 0; c < crestCount; c++) newInventory.push({ ...crestItem, uid: Date.now() + 110 + c })
-              dropLog += `\n🛡️ Divine Crest ×${crestCount}`
+              for (let c = 0; c < crestCount; c++) pushOrMail({ ...crestItem, uid: Date.now() + 110 + c }, c === 0 ? `\n🛡️ Divine Crest ×${crestCount}` : '')
             }
             // Cape Component: 20%
             if (seededFrac(timer.startedAt + 106) < 0.20) {
               const capeComp = pickMat('mat_cape_component')
-              if (capeComp) { newInventory.push({ ...capeComp, uid: Date.now() + 106 }); dropLog += `\n🦸 Cape Component` }
+              if (capeComp) { pushOrMail({ ...capeComp, uid: Date.now() + 106 }, `\n🦸 Cape Component`) }
             }
             // Arcanite: 0.05% (Super Ultra Rare)
             if (seededFrac(timer.startedAt + 107) < 0.0005) {
               const arc = pickMat('mat_arcanite')
-              if (arc) { newInventory.push({ ...arc, uid: Date.now() + 107 }); dropLog += `\n🪨 ARCANITE!!! (Super Ultra Rare)` }
+              if (arc) { pushOrMail({ ...arc, uid: Date.now() + 107 }, `\n🪨 ARCANITE!!! (Super Ultra Rare)`) }
             }
           } else if (killedPitBoss) {
             // Pit Boss treated same as World Boss
             const bossEquip = pickItem(RARITY_UNCOMMON, timer.startedAt + 150)
-            if (bossEquip) { newInventory.push({ ...bossEquip, uid: Date.now() + 150 }); dropLog += `\n🎁 Raid Drop: ${bossEquip.emoji} ${bossEquip.name}` }
+            if (bossEquip) { pushOrMail({ ...bossEquip, uid: Date.now() + 150 }, `\n🎁 Raid Drop: ${bossEquip.emoji} ${bossEquip.name}`) }
           } else {
             // ── NORMAL MONSTER DROP ──
             // HP Potion: 25% per session
             if (finalKills > 0 && seededFrac(timer.startedAt + 50) < 0.25) {
-              const hpPotion = pickMat('consumable_hp_small')
-              if (hpPotion) { newInventory.push({ ...hpPotion, uid: Date.now() + 50 }); dropLog += `\n❤️ HP Potion` }
+              const hpPotion = pickMat('pot_hp')
+              if (hpPotion) { pushOrMail({ ...hpPotion, uid: Date.now() + 50 }, `\n❤️ HP Potion [S]`) }
+            }
+            // FP Potion: 10% per session
+            if (finalKills > 0 && seededFrac(timer.startedAt + 53) < 0.10) {
+              const fpPotion = pickMat('pot_fp')
+              if (fpPotion) { pushOrMail({ ...fpPotion, uid: Date.now() + 53 }, `\n🔷 FP Potion [S]`) }
             }
             // Common Equipment: 10% per session
             if (finalKills > 0 && seededFrac(timer.startedAt + 51) < 0.10) {
               const commonEquip = pickItem(RARITY_COMMON, timer.startedAt + 52)
-              if (commonEquip) { newInventory.push({ ...commonEquip, uid: Date.now() + 51 }); dropLog += `\n⚪ Common Drop: ${commonEquip.emoji} ${commonEquip.name}` }
+              if (commonEquip) { pushOrMail({ ...commonEquip, uid: Date.now() + 51 }, `\n⚪ Common Drop: ${commonEquip.emoji} ${commonEquip.name}`) }
             }
           }
         }
@@ -1043,6 +1439,7 @@ export const useGameStore = create(
             totalSessions: s.player.totalSessions + 1,
             totalMinutes: s.player.totalMinutes + timer.selectedMinutes,
             inventory: newInventory,
+            mailbox,
             combatStats: {
               ...(s.player.combatStats || { totalMonsterKill: 0, worldBossKill: 0, dungeonClear: 0, coreWarVictory: 0, highestEnhancement: 0 }),
               totalMonsterKill: (s.player.combatStats?.totalMonsterKill || 0) + finalKills,
@@ -1583,6 +1980,11 @@ export const useGameStore = create(
       // Harga beli Common equipment dari NPC, per sektor/level tier
       buyFromNpc: (type) => {
         const { player } = get()
+        const invSlots = player.inventorySlots || 100
+        if (player.inventory.length >= invSlots) {
+          alert(`Inventory penuh! Maksimal ${invSlots} slot. Kosongkan slot atau upgrade bag Anda.`)
+          return false
+        }
         // Base weapon price per Map (Sector)
         const NPC_BASE_WEAPON_PRICE = [125000, 225000, 450000, 900000, 1800000]
         // Multiplier per equipment type (relative to weapon price)
@@ -1671,8 +2073,15 @@ export const useGameStore = create(
         }
         
         // Healing consumables
-        if (item.bonus && item.bonus.hp) {
-            alert(tStore('alert_used_potion', { name: item.name }, player))
+        if (item.id === 'pot_hp' || (item.bonus && item.bonus.hp)) {
+            alert(`Berhasil menggunakan ${item.name}! Memulihkan 1,000 HP.`)
+            set({
+                player: { ...player, inventory: newInventory, savedAt: Date.now() }
+            })
+            return
+        }
+        if (item.id === 'pot_fp') {
+            alert(`Berhasil menggunakan ${item.name}! Memulihkan 2,500 FP.`)
             set({
                 player: { ...player, inventory: newInventory, savedAt: Date.now() }
             })

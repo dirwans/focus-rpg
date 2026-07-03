@@ -85,6 +85,10 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
   const getStats = useGameStore((s) => s.getStats)
   const reclassJob = useGameStore((s) => s.reclassJob)
   const craftArchonItem = useGameStore((s) => s.craftArchonItem)
+  const depositToWarehouse = useGameStore((s) => s.depositToWarehouse)
+  const withdrawFromWarehouse = useGameStore((s) => s.withdrawFromWarehouse)
+  const upgradeInventorySlots = useGameStore((s) => s.upgradeInventorySlots)
+  const upgradeWarehouseSlots = useGameStore((s) => s.upgradeWarehouseSlots)
 
   const [subView, setSubView] = useState(initialView) // 'lobby', 'specialist', 'hero', 'promote', 'reclass', 'shop'
   const [activeLaneIdx, setActiveLaneIdx] = useState(() => getPlayerLaneIndex(player.race, player.job))
@@ -291,12 +295,12 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
               </button>
 
               {/* Vault Keeper */}
-              <button onClick={() => setSubView('vault_keeper')} className="cyber-panel" style={{...styles.lobbyCard, opacity: 0.6}}>
+              <button onClick={() => setSubView('vault_keeper')} className="cyber-panel" style={styles.lobbyCard}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                   <div style={styles.lobbyIcon}>📦</div>
                   <div style={{ textAlign: 'left' }}>
                     <div style={styles.lobbyCardTitle}>Vault Keeper</div>
-                    <div style={styles.lobbyCardDesc}>Personal Warehouse — Coming Soon</div>
+                    <div style={styles.lobbyCardDesc}>Personal Warehouse & Upgrades</div>
                   </div>
                 </div>
               </button>
@@ -313,12 +317,23 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
               </button>
 
               {/* Trade Broker */}
-              <button onClick={() => setSubView('trade_broker')} className="cyber-panel" style={{...styles.lobbyCard, opacity: 0.6}}>
+              <button onClick={() => setSubView('trade_broker')} className="cyber-panel" style={styles.lobbyCard}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                   <div style={styles.lobbyIcon}>💰</div>
                   <div style={{ textAlign: 'left' }}>
                     <div style={styles.lobbyCardTitle}>Trade Broker</div>
-                    <div style={styles.lobbyCardDesc}>Auction House — Coming Soon</div>
+                    <div style={styles.lobbyCardDesc}>Astrum Mercatus Exchange Broker</div>
+                  </div>
+                </div>
+              </button>
+
+              {/* Potion Merchant */}
+              <button onClick={() => setSubView('potion_merchant')} className="cyber-panel" style={styles.lobbyCard}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <div style={styles.lobbyIcon}>🧪</div>
+                  <div style={{ textAlign: 'left' }}>
+                    <div style={styles.lobbyCardTitle}>Potion Merchant</div>
+                    <div style={styles.lobbyCardDesc}>Buy HP & FP Potion consumables</div>
                   </div>
                 </div>
               </button>
@@ -504,28 +519,232 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
           )}
 
           {/* ─── COMING SOON NPCs ─── */}
-          {['guild_steward', 'vault_keeper', 'grand_warden', 'trade_broker'].includes(subView) && (
+          {['guild_steward', 'grand_warden'].includes(subView) && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14, alignItems: 'center', paddingTop: 20 }}>
               <div style={{ fontSize: 64 }}>
                 {subView === 'guild_steward' && '🏰'}
-                {subView === 'vault_keeper' && '📦'}
                 {subView === 'grand_warden' && '📜'}
-                {subView === 'trade_broker' && '💰'}
               </div>
               <div style={{ fontFamily: 'var(--font-title)', fontSize: 20, color: '#00e5ff', fontWeight: 900, textAlign: 'center', letterSpacing: 1 }}>
                 {subView === 'guild_steward' && 'Guild Steward'}
-                {subView === 'vault_keeper' && 'Vault Keeper'}
                 {subView === 'grand_warden' && 'Grand Warden'}
-                {subView === 'trade_broker' && 'Trade Broker'}
               </div>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: '#88aadd', textAlign: 'center', lineHeight: 1.6 }}>
                 {subView === 'guild_steward' && '"The Guild Hall is under construction. Come back soon, Commander."'}
-                {subView === 'vault_keeper' && '"The Vault is being reinforced. Your items are safe — for now."'}
                 {subView === 'grand_warden' && '"I have quests for brave souls, but the mission board is not ready yet."'}
-                {subView === 'trade_broker' && '"The Auction House will open its doors soon. Prepare your inventory."'}
               </div>
               <div style={{ background: 'rgba(255, 204, 0, 0.1)', border: '1.5px dashed rgba(255,204,0,0.4)', borderRadius: 10, padding: '12px 20px', fontFamily: 'var(--font-title)', fontSize: 14, color: '#ffcc00', fontWeight: 800, letterSpacing: 1, textAlign: 'center' }}>
                 🚧 COMING SOON
+              </div>
+            </div>
+          )}
+
+          {/* ─── Vault Keeper / Personal Warehouse ─── */}
+          {subView === 'vault_keeper' && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12, height: '100%', overflow: 'hidden' }}>
+              {/* Header with credits */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(0,0,0,0.3)', padding: 10, borderRadius: 8, border: '1px solid rgba(0, 229, 255, 0.15)' }}>
+                <span style={{ fontSize: 12, color: '#7ab0d0', fontWeight: 'bold' }}>CREDITS BALANCE</span>
+                <span style={{ color: '#00e5ff', fontFamily: 'var(--font-mono)', fontWeight: 800 }}>◈ {(player.resources.credits || 0).toLocaleString()} CRD</span>
+              </div>
+
+              {/* Slots Upgrades Section */}
+              <div style={{ display: 'flex', gap: 8 }}>
+                <button 
+                  onClick={upgradeInventorySlots}
+                  style={{ flex: 1, padding: 8, background: 'rgba(0, 229, 255, 0.08)', border: '1px solid rgba(0, 229, 255, 0.4)', borderRadius: 6, color: '#00e5ff', fontFamily: 'var(--font-title)', fontSize: 11, fontWeight: 'bold', cursor: 'pointer' }}
+                >
+                  🎒 UPGRADE BAG (+20 Slot)<br/>
+                  <span style={{ fontSize: 9, color: '#aaa', fontWeight: 'normal' }}>{player.inventorySlots || 100}/300 Slot · 1M CRD</span>
+                </button>
+                <button 
+                  onClick={upgradeWarehouseSlots}
+                  style={{ flex: 1, padding: 8, background: 'rgba(245, 166, 35, 0.08)', border: '1px solid rgba(245, 166, 35, 0.4)', borderRadius: 6, color: '#f5a623', fontFamily: 'var(--font-title)', fontSize: 11, fontWeight: 'bold', cursor: 'pointer' }}
+                >
+                  📦 UPGRADE VAULT (+50 Slot)<br/>
+                  <span style={{ fontSize: 9, color: '#aaa', fontWeight: 'normal' }}>{player.warehouseSlots || 200}/600 Slot · 2.5M CRD</span>
+                </button>
+              </div>
+
+              {/* Columns Container */}
+              <div style={{ display: 'flex', gap: 10, flex: 1, minHeight: 0 }}>
+                {/* Left Column: Inventory */}
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', background: 'rgba(0,0,0,0.2)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 8, padding: 8, minHeight: 0 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: 6, marginBottom: 8 }}>
+                    <span style={{ fontSize: 11, fontWeight: 'bold', color: '#00e5ff', fontFamily: 'var(--font-title)' }}>🎒 INVENTORY</span>
+                    <span style={{ fontSize: 10, color: '#7ab0d0', fontFamily: 'var(--font-mono)' }}>{player.inventory.length}/{(player.inventorySlots || 100)}</span>
+                  </div>
+                  <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 6 }} className="no-scrollbar">
+                    {player.inventory.map((item) => (
+                      <div 
+                        key={item.uid} 
+                        onClick={() => depositToWarehouse(item.uid)}
+                        style={{ display: 'flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)', padding: 6, borderRadius: 6, cursor: 'pointer', transition: 'background 0.2s' }}
+                        title="Klik untuk Simpan ke Warehouse"
+                      >
+                        <span style={{ fontSize: 20 }}>{item.emoji}</span>
+                        <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
+                          <span style={{ fontSize: 11, fontWeight: 'bold', color: '#fff' }}>{item.name}</span>
+                          <span style={{ fontSize: 9, color: '#aaa' }}>{item.type} {item.enhancement ? `+${item.enhancement}` : ''}</span>
+                        </div>
+                      </div>
+                    ))}
+                    {player.inventory.length === 0 && (
+                      <div style={{ textAlign: 'center', padding: 20, fontSize: 11, color: '#aaa' }}>Inventory Kosong</div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Right Column: Warehouse */}
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', background: 'rgba(0,0,0,0.2)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 8, padding: 8, minHeight: 0 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: 6, marginBottom: 8 }}>
+                    <span style={{ fontSize: 11, fontWeight: 'bold', color: '#f5a623', fontFamily: 'var(--font-title)' }}>📦 WAREHOUSE</span>
+                    <span style={{ fontSize: 10, color: '#7ab0d0', fontFamily: 'var(--font-mono)' }}>{(player.warehouse || []).length}/{(player.warehouseSlots || 200)}</span>
+                  </div>
+                  <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 6 }} className="no-scrollbar">
+                    {(player.warehouse || []).map((item) => (
+                      <div 
+                        key={item.uid} 
+                        onClick={() => withdrawFromWarehouse(item.uid)}
+                        style={{ display: 'flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)', padding: 6, borderRadius: 6, cursor: 'pointer', transition: 'background 0.2s' }}
+                        title="Klik untuk Ambil ke Inventory"
+                      >
+                        <span style={{ fontSize: 20 }}>{item.emoji}</span>
+                        <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
+                          <span style={{ fontSize: 11, fontWeight: 'bold', color: '#fff' }}>{item.name}</span>
+                          <span style={{ fontSize: 9, color: '#aaa' }}>{item.type} {item.enhancement ? `+${item.enhancement}` : ''}</span>
+                        </div>
+                      </div>
+                    ))}
+                    {(player.warehouse || []).length === 0 && (
+                      <div style={{ textAlign: 'center', padding: 20, fontSize: 11, color: '#aaa' }}>Warehouse Kosong</div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* ─── Trade Broker / Auction House Entrance ─── */}
+          {subView === 'trade_broker' && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 14, alignItems: 'center', paddingTop: 20 }}>
+              <div style={{ fontSize: 64 }}>💰</div>
+              <div style={{ fontFamily: 'var(--font-title)', fontSize: 20, color: '#00e5ff', fontWeight: 900, textAlign: 'center', letterSpacing: 1 }}>
+                Trade Broker
+              </div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: '#88aadd', textAlign: 'center', lineHeight: 1.6, maxWidth: '85%' }}>
+                "Selamat datang di Astrum Mercatus, Galactic Exchange Network. Di sini Anda dapat memperdagangkan Equipment, Cape, dan Material Crafting dengan pilot lainnya secara real-time."
+              </div>
+              <button 
+                onClick={() => {
+                  useGameStore.getState().setScreen('trade')
+                  onClose()
+                }}
+                style={{
+                  marginTop: 10,
+                  padding: '12px 24px',
+                  borderRadius: 8,
+                  border: '1.5px solid #00e5ff',
+                  background: 'linear-gradient(135deg, #0050cc 0%, #00a8ff 100%)',
+                  color: '#fff',
+                  fontFamily: 'var(--font-title)',
+                  fontSize: 14,
+                  fontWeight: 900,
+                  letterSpacing: 1,
+                  cursor: 'pointer',
+                  boxShadow: '0 0 15px rgba(0, 229, 255, 0.4)'
+                }}
+              >
+                🤝 ENTER AUCTION HOUSE
+              </button>
+            </div>
+          )}
+
+          {/* ─── Potion Merchant ─── */}
+          {subView === 'potion_merchant' && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12, height: '100%', overflow: 'hidden' }}>
+              {/* Header with credits */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(0,0,0,0.3)', padding: 10, borderRadius: 8, border: '1px solid rgba(0, 229, 255, 0.15)' }}>
+                <span style={{ fontSize: 12, color: '#7ab0d0', fontWeight: 'bold' }}>CREDITS BALANCE</span>
+                <span style={{ color: '#00e5ff', fontFamily: 'var(--font-mono)', fontWeight: 800 }}>◈ {(player.resources.credits || 0).toLocaleString()} CRD</span>
+              </div>
+
+              {/* NPC avatar & bubble */}
+              <div style={styles.avatarRow}>
+                <div style={styles.npcAvatarLarge}>
+                  <span style={{ fontSize: 44 }}>🧪</span>
+                </div>
+                <div style={styles.npcDialog}>"Butuh ramuan penyembuh HP atau pengisi FP untuk mecha-mu, Commander? Kualitas nomor satu!"</div>
+              </div>
+
+              <div style={{ fontFamily: 'var(--font-title)', color: '#00e5ff', fontSize: 13, borderBottom: '1px solid rgba(0,229,255,0.2)', paddingBottom: 6 }}>
+                DAFTAR ITEM POTION
+              </div>
+
+              {/* Potions List */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12, overflowY: 'auto', flex: 1 }} className="no-scrollbar">
+                {[
+                  { id: 'hp', name: 'HP Potion [S]', emoji: '🧪', desc: 'Memulihkan 1,000 HP seketika.', cost: 2500 },
+                  { id: 'fp', name: 'FP Potion [S]', emoji: '🧪', desc: 'Memulihkan 2,500 FP seketika.', cost: 10000 }
+                ].map((pot) => {
+                  const hasCredits = (player.resources.credits || 0) >= pot.cost
+                  return (
+                    <div key={pot.id} style={{ display: 'flex', alignItems: 'center', gap: 12, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)', padding: 12, borderRadius: 8 }}>
+                      <div style={{ fontSize: 32, background: 'rgba(0,0,0,0.3)', padding: 8, borderRadius: 6, border: '1px solid rgba(0,229,255,0.1)' }}>{pot.emoji}</div>
+                      <div style={{ flex: 1, textAlign: 'left' }}>
+                        <div style={{ fontWeight: 'bold', color: '#fff', fontSize: 14 }}>{pot.name}</div>
+                        <div style={{ fontSize: 12, color: '#aaa', marginTop: 2 }}>{pot.desc}</div>
+                        <div style={{ fontSize: 11, color: '#00ff88', marginTop: 4, fontFamily: 'var(--font-mono)' }}>Harga: {pot.cost.toLocaleString()} CRD</div>
+                      </div>
+                      <button 
+                        onClick={() => {
+                          const invSlots = player.inventorySlots || 100
+                          if (player.inventory.length >= invSlots) {
+                            alert("Inventory penuh! Kosongkan slot atau upgrade bag Anda.")
+                            return
+                          }
+                          const credits = player.resources.credits || 0
+                          if (credits < pot.cost) {
+                            alert(`Credits (CRD) tidak cukup! Membutuhkan ${pot.cost.toLocaleString()} CRD.`)
+                            return
+                          }
+
+                          const potItem = itemsData.items.find(it => it.id === (pot.id === 'hp' ? 'pot_hp' : 'pot_fp'))
+                          if (!potItem) return
+
+                          const newItem = { ...potItem, uid: Date.now() }
+                          useGameStore.setState((s) => ({
+                            player: {
+                              ...s.player,
+                              inventory: [...s.player.inventory, newItem],
+                              resources: {
+                                ...s.player.resources,
+                                credits: credits - pot.cost
+                              },
+                              savedAt: Date.now()
+                            }
+                          }))
+                          alert(`Berhasil membeli ${pot.name}!`)
+                        }}
+                        style={{
+                          background: hasCredits ? 'linear-gradient(90deg, #0088ff, #00e5ff)' : 'rgba(255,255,255,0.1)',
+                          border: 'none',
+                          color: hasCredits ? '#000' : '#666',
+                          fontFamily: 'var(--font-title)',
+                          fontWeight: 900,
+                          fontSize: 12,
+                          padding: '8px 16px',
+                          borderRadius: 4,
+                          cursor: hasCredits ? 'pointer' : 'not-allowed',
+                          boxShadow: hasCredits ? '0 0 8px rgba(0, 229, 255, 0.3)' : 'none'
+                        }}
+                        disabled={!hasCredits}
+                      >
+                        BELI
+                      </button>
+                    </div>
+                  )
+                })}
               </div>
             </div>
           )}

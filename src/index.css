@@ -349,7 +349,7 @@ body {
 }
 
 /* Native Mobile Device View (Portrait) */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .game-root {
     padding: 0;
     align-items: stretch;
@@ -362,8 +362,11 @@ body {
     border: none;
     border-radius: 0;
     box-shadow: none;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 }
+
 
 /* ------------------------------------------------ */
 /* BACKGROUND PARALLAX NEBULA (HD-Anime Vibe)       */
@@ -1326,3 +1329,21 @@ body {
 .pilot-sprite-img {
   filter: brightness(1.06) contrast(1.08) saturate(1.02) !important;
 }
+
+/* Trinity Mine Animations */
+@keyframes mineAnimation {
+  0% { transform: rotate(0deg); }
+  15% { transform: rotate(-25deg); }
+  30% { transform: rotate(15deg); }
+  45% { transform: rotate(-20deg); }
+  60% { transform: rotate(10deg); }
+  75% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes pulse {
+  0% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.02); }
+  100% { opacity: 0.7; transform: scale(1); }
+}
+

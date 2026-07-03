@@ -32,6 +32,11 @@ export default function Trade() {
   }
   
   const handleBuy = async (marketId, price) => {
+    const invSlots = player.inventorySlots || 100
+    if (player.inventory.length >= invSlots) {
+      alert("Inventory penuh! Kosongkan slot atau upgrade bag Anda.")
+      return
+    }
     if ((player.resources.credits || 0) < price) {
       alert("Credits (CRD) tidak cukup!")
       return

@@ -88,7 +88,7 @@
       "race": "All",
       "level": 1,
       "bonus": {},
-      "description": "Restores 500 FP instantly.",
+      "description": "Restores 2500 FP instantly.",
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxcsa31.png"
     },
     {
@@ -20085,6 +20085,336 @@
         "description": "Efek penetrasi armor."
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Relic_Firearm_Lv55_MetalElvenGattlingCannon.gif"
+    },
+    {
+      "id": "ore_ignis_common",
+      "name": "Common Ignis Ore",
+      "emoji": "🟥",
+      "rarity": "common",
+      "type": "material",
+      "race": "All",
+      "level": 1,
+      "bonus": {},
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile001.png"
+    },
+    {
+      "id": "ore_ignis_rare",
+      "name": "Rare Ignis Ore",
+      "emoji": "🟥",
+      "rarity": "rare",
+      "type": "material",
+      "race": "All",
+      "level": 30,
+      "bonus": {},
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile001.png"
+    },
+    {
+      "id": "ore_ignis_epic",
+      "name": "Epic Ignis Ore",
+      "emoji": "🟥",
+      "rarity": "epic",
+      "type": "material",
+      "race": "All",
+      "level": 50,
+      "bonus": {},
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile001.png"
+    },
+    {
+      "id": "ore_virel_common",
+      "name": "Common Virel Ore",
+      "emoji": "🟦",
+      "rarity": "common",
+      "type": "material",
+      "race": "All",
+      "level": 1,
+      "bonus": {},
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile002.png"
+    },
+    {
+      "id": "ore_virel_rare",
+      "name": "Rare Virel Ore",
+      "emoji": "🟦",
+      "rarity": "rare",
+      "type": "material",
+      "race": "All",
+      "level": 30,
+      "bonus": {},
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile002.png"
+    },
+    {
+      "id": "ore_virel_epic",
+      "name": "Epic Virel Ore",
+      "emoji": "🟦",
+      "rarity": "epic",
+      "type": "material",
+      "race": "All",
+      "level": 50,
+      "bonus": {},
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile002.png"
+    },
+    {
+      "id": "ore_kryos_common",
+      "name": "Common Kryos Ore",
+      "emoji": "🟩",
+      "rarity": "common",
+      "type": "material",
+      "race": "All",
+      "level": 1,
+      "bonus": {},
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile003.png"
+    },
+    {
+      "id": "ore_kryos_rare",
+      "name": "Rare Kryos Ore",
+      "emoji": "🟩",
+      "rarity": "rare",
+      "type": "material",
+      "race": "All",
+      "level": 30,
+      "bonus": {},
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile003.png"
+    },
+    {
+      "id": "ore_kryos_epic",
+      "name": "Epic Kryos Ore",
+      "emoji": "🟩",
+      "rarity": "epic",
+      "type": "material",
+      "race": "All",
+      "level": 50,
+      "bonus": {},
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile003.png"
+    },
+    {
+      "id": "ore_zephra_common",
+      "name": "Common Zephra Ore",
+      "emoji": "🟨",
+      "rarity": "common",
+      "type": "material",
+      "race": "All",
+      "level": 1,
+      "bonus": {},
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile004.png"
+    },
+    {
+      "id": "ore_zephra_rare",
+      "name": "Rare Zephra Ore",
+      "emoji": "🟨",
+      "rarity": "rare",
+      "type": "material",
+      "race": "All",
+      "level": 30,
+      "bonus": {},
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile004.png"
+    },
+    {
+      "id": "ore_zephra_epic",
+      "name": "Epic Zephra Ore",
+      "emoji": "🟨",
+      "rarity": "epic",
+      "type": "material",
+      "race": "All",
+      "level": 50,
+      "bonus": {},
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile004.png"
+    },
+    {
+      "id": "ore_umbrix_common",
+      "name": "Common Umbrix Ore",
+      "emoji": "⬛",
+      "rarity": "common",
+      "type": "material",
+      "race": "All",
+      "level": 1,
+      "bonus": {},
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile005.png"
+    },
+    {
+      "id": "ore_umbrix_rare",
+      "name": "Rare Umbrix Ore",
+      "emoji": "⬛",
+      "rarity": "rare",
+      "type": "material",
+      "race": "All",
+      "level": 30,
+      "bonus": {},
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile005.png"
+    },
+    {
+      "id": "ore_umbrix_epic",
+      "name": "Epic Umbrix Ore",
+      "emoji": "⬛",
+      "rarity": "epic",
+      "type": "material",
+      "race": "All",
+      "level": 50,
+      "bonus": {},
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile005.png"
+    },
+    {
+      "id": "shard_ignis_common",
+      "name": "Common Ignis Shard",
+      "emoji": "🔴",
+      "rarity": "common",
+      "type": "material",
+      "race": "All",
+      "level": 1,
+      "bonus": {},
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile003.png"
+    },
+    {
+      "id": "shard_ignis_rare",
+      "name": "Rare Ignis Shard",
+      "emoji": "🔴",
+      "rarity": "rare",
+      "type": "material",
+      "race": "All",
+      "level": 30,
+      "bonus": {},
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile003.png"
+    },
+    {
+      "id": "shard_ignis_epic",
+      "name": "Epic Ignis Shard",
+      "emoji": "🔴",
+      "rarity": "epic",
+      "type": "material",
+      "race": "All",
+      "level": 50,
+      "bonus": {},
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile003.png"
+    },
+    {
+      "id": "shard_virel_common",
+      "name": "Common Virel Shard",
+      "emoji": "🔵",
+      "rarity": "common",
+      "type": "material",
+      "race": "All",
+      "level": 1,
+      "bonus": {},
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile003.png"
+    },
+    {
+      "id": "shard_virel_rare",
+      "name": "Rare Virel Shard",
+      "emoji": "🔵",
+      "rarity": "rare",
+      "type": "material",
+      "race": "All",
+      "level": 30,
+      "bonus": {},
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile003.png"
+    },
+    {
+      "id": "shard_virel_epic",
+      "name": "Epic Virel Shard",
+      "emoji": "🔵",
+      "rarity": "epic",
+      "type": "material",
+      "race": "All",
+      "level": 50,
+      "bonus": {},
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile003.png"
+    },
+    {
+      "id": "shard_kryos_common",
+      "name": "Common Kryos Shard",
+      "emoji": "🟢",
+      "rarity": "common",
+      "type": "material",
+      "race": "All",
+      "level": 1,
+      "bonus": {},
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile003.png"
+    },
+    {
+      "id": "shard_kryos_rare",
+      "name": "Rare Kryos Shard",
+      "emoji": "🟢",
+      "rarity": "rare",
+      "type": "material",
+      "race": "All",
+      "level": 30,
+      "bonus": {},
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile003.png"
+    },
+    {
+      "id": "shard_kryos_epic",
+      "name": "Epic Kryos Shard",
+      "emoji": "🟢",
+      "rarity": "epic",
+      "type": "material",
+      "race": "All",
+      "level": 50,
+      "bonus": {},
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile003.png"
+    },
+    {
+      "id": "shard_zephra_common",
+      "name": "Common Zephra Shard",
+      "emoji": "🟡",
+      "rarity": "common",
+      "type": "material",
+      "race": "All",
+      "level": 1,
+      "bonus": {},
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile003.png"
+    },
+    {
+      "id": "shard_zephra_rare",
+      "name": "Rare Zephra Shard",
+      "emoji": "🟡",
+      "rarity": "rare",
+      "type": "material",
+      "race": "All",
+      "level": 30,
+      "bonus": {},
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile003.png"
+    },
+    {
+      "id": "shard_zephra_epic",
+      "name": "Epic Zephra Shard",
+      "emoji": "🟡",
+      "rarity": "epic",
+      "type": "material",
+      "race": "All",
+      "level": 50,
+      "bonus": {},
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile003.png"
+    },
+    {
+      "id": "shard_umbrix_common",
+      "name": "Common Umbrix Shard",
+      "emoji": "⚫",
+      "rarity": "common",
+      "type": "material",
+      "race": "All",
+      "level": 1,
+      "bonus": {},
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile003.png"
+    },
+    {
+      "id": "shard_umbrix_rare",
+      "name": "Rare Umbrix Shard",
+      "emoji": "⚫",
+      "rarity": "rare",
+      "type": "material",
+      "race": "All",
+      "level": 30,
+      "bonus": {},
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile003.png"
+    },
+    {
+      "id": "shard_umbrix_epic",
+      "name": "Epic Umbrix Shard",
+      "emoji": "⚫",
+      "rarity": "epic",
+      "type": "material",
+      "race": "All",
+      "level": 50,
+      "bonus": {},
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile003.png"
     }
   ]
-}
+}

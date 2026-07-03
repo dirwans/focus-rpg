@@ -7,6 +7,7 @@ const NAV = [
   { id: 'unit',  icon: '👤', label: 'UNIT' },
   { id: 'ranks', icon: '📊', label: 'RANKS' },
   { id: 'battle', icon: '⚔️', label: 'BATTLE' },
+  { id: 'mine',  icon: '⛏️', label: 'MINE' },
   { id: 'cargo', icon: '📦', label: 'CARGO' },
   { id: 'forge', icon: '🔧', label: 'FORGE' },
 ]
@@ -16,7 +17,7 @@ export default function BottomNav() {
   const setScreen = useGameStore((s) => s.setScreen)
 
   return (
-    <nav style={styles.nav}>
+    <nav className="no-scrollbar" style={styles.nav}>
       {NAV.map((n) => (
         <button key={n.id} style={styles.item} onClick={() => n.isExternal ? window.open(`${API_BASE}/library.html`, '_blank') : setScreen(n.id)}>
           <span style={{ fontSize: 22, opacity: screen === n.id ? 1 : 0.4 }}>{n.icon}</span>

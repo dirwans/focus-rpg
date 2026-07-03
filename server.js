@@ -400,7 +400,9 @@ app.get('/api/save', (req, res) => {
   checkChipWarReset()
   res.json({
     game_state: loadSave(s.username),
-    winnerRace: chipWarData.winnerRace || 'bionex'
+    winnerRace: chipWarData.winnerRace || 'bionex',
+    runnerUpRace: chipWarData.runnerUpRace || 'arctron',
+    lastPlaceRace: chipWarData.lastPlaceRace || 'celestra'
   })
 })
 
@@ -449,7 +451,9 @@ app.post('/api/save', async (req, res) => {
   broadcast(s.username, gameState, clientId)
   res.json({
     ok: true,
-    winnerRace: chipWarData.winnerRace || 'bionex'
+    winnerRace: chipWarData.winnerRace || 'bionex',
+    runnerUpRace: chipWarData.runnerUpRace || 'arctron',
+    lastPlaceRace: chipWarData.lastPlaceRace || 'celestra'
   })
 })
 
@@ -762,6 +766,8 @@ let chipWarData = {
   raceDamage: { arctron: 0, bionex: 0, celestra: 0 },
   lastReset: 0,
   winnerRace: 'bionex', // Core War winner
+  runnerUpRace: 'arctron',
+  lastPlaceRace: 'celestra',
 }
 
 const CHIP_WAR_FILE = join(__dirname, 'chip_war_data.json')
@@ -788,27 +794,20 @@ function checkChipWarReset() {
     console.log(`[ChipWar] Processing end of war starting at ${new Date(prev.start).toLocaleTimeString()}.`)
     
     // Determine winner based on tower HP percent
-    let winner = null
-    let maxPct = -1
-    for (const r of ['arctron', 'bionex', 'celestra']) {
+    const racesOrder = ['arctron', 'bionex', 'celestra'].map(r => {
       const pct = chipWarData.towers[r].hp / chipWarData.towers[r].maxHp
-      if (pct > maxPct) {
-        maxPct = pct
-        winner = r
-      }
-    }
-    
-    // If all towers are destroyed (0 HP), check who dealt the most damage to others
-    if (maxPct === 0) {
-      let maxDmg = -1
-      for (const r of ['arctron', 'bionex', 'celestra']) {
-        const dmg = chipWarData.raceDamage[r] || 0
-        if (dmg > maxDmg) {
-          maxDmg = dmg
-          winner = r
-        }
-      }
-    }
+      return { race: r, pct, dmg: chipWarData.raceDamage[r] || 0 }
+    })
+
+    // Sort: highest tower HP % first. If tied, highest damage dealt second.
+    racesOrder.sort((a, b) => {
+      if (b.pct !== a.pct) return b.pct - a.pct
+      return b.dmg - a.dmg
+    })
+
+    const winner = racesOrder[0].race
+    const runnerUp = racesOrder[1].race
+    const lastPlace = racesOrder[2].race
 
     chipWarData = {
       towers: {
@@ -819,7 +818,9 @@ function checkChipWarReset() {
       damage: {},
       raceDamage: { arctron: 0, bionex: 0, celestra: 0 },
       lastReset: prev.start, // mark this war as reset
-      winnerRace: winner || chipWarData.winnerRace || 'bionex', // Keep previous if no winner
+      winnerRace: winner || chipWarData.winnerRace || 'bionex',
+      runnerUpRace: runnerUp || chipWarData.runnerUpRace || 'arctron',
+      lastPlaceRace: lastPlace || chipWarData.lastPlaceRace || 'celestra',
     }
     saveChipWar()
     console.log(`[ChipWar] Faction ${winner} declared winner of Core War!`)
@@ -886,6 +887,8 @@ app.get('/api/chip-war', (req, res) => {
     raceDamage: chipWarData.raceDamage,
     window,
     winnerRace: chipWarData.winnerRace || 'bionex',
+    runnerUpRace: chipWarData.runnerUpRace || 'arctron',
+    lastPlaceRace: chipWarData.lastPlaceRace || 'celestra',
   })
 })
 

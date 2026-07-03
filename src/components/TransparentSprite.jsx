@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 
+const spriteCache = new Map()
+
 export default function TransparentSprite({ 
   src, 
   alt, 
@@ -12,12 +14,22 @@ export default function TransparentSprite({
   disableKeying = true,
   isPilot = false
 }) {
-  const [processedSrc, setProcessedSrc] = useState(null)
+  const cacheKey = upperBodyOnly ? src + '_upper' : src
+
+  const [processedSrc, setProcessedSrc] = useState(() => {
+    if (!src) return null
+    return spriteCache.get(cacheKey) || null
+  })
 
   useEffect(() => {
     if (!src || disableKeying) return
+    if (spriteCache.has(cacheKey)) {
+      setProcessedSrc(spriteCache.get(cacheKey))
+      return
+    }
 
     const isRemote = src.startsWith('http://') || src.startsWith('https://')
+
     const apiBase = import.meta.env.VITE_API_URL || ''
     const finalSrc = isRemote 
       ? `${apiBase}/api/proxy-image?url=${encodeURIComponent(src)}` 
@@ -234,22 +246,29 @@ export default function TransparentSprite({
           }
 
           cropCtx.putImageData(cropImgData, 0, 0)
-          setProcessedSrc(cropCanvas.toDataURL())
+          const dataUrl = cropCanvas.toDataURL()
+          spriteCache.set(cacheKey, dataUrl)
+          setProcessedSrc(dataUrl)
         } else {
           ctx.putImageData(imgData, 0, 0)
-          setProcessedSrc(canvas.toDataURL())
+          const dataUrl = canvas.toDataURL()
+          spriteCache.set(cacheKey, dataUrl)
+          setProcessedSrc(dataUrl)
         }
       } catch (err) {
         console.error('Canvas processing error for sprite:', err)
+        spriteCache.set(cacheKey, src)
         setProcessedSrc(src)
       }
     }
     img.onerror = (err) => {
       console.error('Image load error for sprite:', err)
+      spriteCache.set(cacheKey, src)
       setProcessedSrc(src)
     }
     img.src = finalSrc
-  }, [src, disableKeying])
+  }, [src, disableKeying, cacheKey])
+
 
   const isRemote = src && (src.startsWith('http://') || src.startsWith('https://'))
   const apiBase = import.meta.env.VITE_API_URL || ''

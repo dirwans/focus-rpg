@@ -222,7 +222,7 @@ export default function Cargo() {
         >
           +10 (200⬡)
         </button>
-        <span style={styles.slots}>📦 {player.inventory.length}/50</span>
+        <span style={styles.slots}>📦 {player.inventory.length}/{player.inventorySlots || 100}</span>
       </div>
 
       {/* Equipped Gear Section */}

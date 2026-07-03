@@ -90,6 +90,8 @@ export default function Battle() {
       setChipWar({ towers, window: res.window })
       if (res.winnerRace) {
         useGameStore.getState().setWinnerRace(res.winnerRace)
+        if (res.runnerUpRace) useGameStore.getState().setRunnerUpRace(res.runnerUpRace)
+        if (res.lastPlaceRace) useGameStore.getState().setLastPlaceRace(res.lastPlaceRace)
       }
     } catch (e) {
       console.error(e)

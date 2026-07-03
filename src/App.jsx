@@ -17,8 +17,9 @@ import Forge from './screens/Forge'
 import Cargo from './screens/Cargo'
 import Trade from './screens/Trade'
 import Battle from './screens/Battle'
+import Mine from './screens/Mine'
 
-const SCREENS = { main: Main, unit: Unit, ranks: Ranks, forge: Forge, cargo: Cargo, trade: Trade, battle: Battle }
+const SCREENS = { main: Main, unit: Unit, ranks: Ranks, forge: Forge, cargo: Cargo, trade: Trade, battle: Battle, mine: Mine }
 
 const snap = (gs) => JSON.stringify(gs ?? {})
 
@@ -119,6 +120,8 @@ export default function App() {
     apiChipWar().then(res => {
       if (res && res.winnerRace) {
         useGameStore.getState().setWinnerRace(res.winnerRace)
+        if (res.runnerUpRace) useGameStore.getState().setRunnerUpRace(res.runnerUpRace)
+        if (res.lastPlaceRace) useGameStore.getState().setLastPlaceRace(res.lastPlaceRace)
       }
     }).catch(() => {})
   }, [user])
