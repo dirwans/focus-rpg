@@ -242,7 +242,7 @@ const initialPlayer = {
   job: null,
   level: 1,
   exp: 0,
-  resources: { anium: 200, credits: 10, potions: 5 },
+  resources: { anium: 200, credits: 10, potions: 5, nxc: 0 },
   upgrades: { atk: 0, def: 0, hp: 0 },
   equipment: { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null },
   sector: 1,
@@ -285,7 +285,8 @@ const initialPlayer = {
     startedAt: 0,
     endsAt: 0,
     duration: 0              // in minutes
-  }
+  },
+  activeBoosts: {}           // { expBoost: {mult:2, expiresAt:ts}, dropBoost: {pct:5, expiresAt:ts}, atkPot: {pct:25, expiresAt:ts}, defPot: {pct:25, expiresAt:ts} }
 }
 
 const initialTimer = {
@@ -416,6 +417,56 @@ export const useGameStore = create(
         return { ok: true, item: itemDef }
       },
 
+      // ── NXC Premium Currency ─────────────────────────────
+      addNxc: (amount) => set((s) => ({
+        player: { ...s.player, resources: { ...s.player.resources, nxc: (s.player.resources.nxc || 0) + amount }, savedAt: Date.now() }
+      })),
+
+      // ── Premium Shop: Buy with NXC ───────────────────────
+      buyPremiumItem: (itemId, nxcCost, meta) => {
+        const { player } = get()
+        const nxc = player.resources.nxc || 0
+        if (nxc < nxcCost) return { ok: false, msg: 'NXC tidak cukup!' }
+
+        const now = Date.now()
+        let updates = { resources: { ...player.resources, nxc: nxc - nxcCost } }
+
+        // Handle booster items
+        if (meta?.type === 'exp_boost') {
+          const current = player.activeBoosts?.expBoost
+          const base = current && current.expiresAt > now ? current.expiresAt : now
+          const boosts = { ...(player.activeBoosts || {}), expBoost: { mult: meta.mult, expiresAt: base + meta.days * 86400000 } }
+          updates.activeBoosts = boosts
+        } else if (meta?.type === 'drop_boost') {
+          const current = player.activeBoosts?.dropBoost
+          const base = current && current.expiresAt > now ? current.expiresAt : now
+          const boosts = { ...(player.activeBoosts || {}), dropBoost: { pct: meta.pct, expiresAt: base + meta.days * 86400000 } }
+          updates.activeBoosts = boosts
+        } else if (meta?.type === 'atk_pot') {
+          const boosts = { ...(player.activeBoosts || {}), atkPot: { pct: 25, expiresAt: now + 3 * 60000 } }
+          updates.activeBoosts = boosts
+        } else if (meta?.type === 'def_pot') {
+          const boosts = { ...(player.activeBoosts || {}), defPot: { pct: 25, expiresAt: now + 3 * 60000 } }
+          updates.activeBoosts = boosts
+        } else if (meta?.type === 'mystery_box') {
+          // Add mystery box to inventory
+          const uid = Date.now() + Math.floor(Math.random() * 10000)
+          const boxItem = { id: itemId, name: meta.name, emoji: '📦', rarity: 'epic', type: 'consumable', race: 'All', level: 1, bonus: {}, uid, description: meta.name }
+          updates.inventory = [...(player.inventory || []), boxItem]
+        } else if (meta?.type === 'rename_card') {
+          const uid = Date.now() + Math.floor(Math.random() * 10000)
+          const card = { id: 'rename_card', name: 'Character Rename Card', emoji: '📛', rarity: 'legendary', type: 'consumable', race: 'All', level: 1, bonus: {}, uid, description: 'Allows you to change your character name.' }
+          updates.inventory = [...(player.inventory || []), card]
+        } else if (meta?.type === 'rental') {
+          // Add rental item with expiry
+          const uid = Date.now() + Math.floor(Math.random() * 10000)
+          const rentalItem = { id: itemId, name: meta.name, emoji: meta.emoji || '⏰', rarity: 'epic', type: meta.slot || 'weapon', race: 'All', level: 1, bonus: meta.bonus || { atk: 80 }, uid, isRental: true, rentalExpiresAt: now + meta.days * 86400000, description: `Rental — expires in ${meta.days} day(s)` }
+          updates.inventory = [...(player.inventory || []), rentalItem]
+        }
+
+        set({ player: { ...player, ...updates, savedAt: Date.now() } })
+        return { ok: true }
+      },
 
       depositToWarehouse: (itemUid) => set((s) => {
         const { player } = s
