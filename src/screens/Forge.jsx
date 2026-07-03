@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useGameStore } from '../store/gameStore'
 import upgradesConfig from '../data/upgrades.json'
 import ascensionData from '../data/ascensionArms.json'
+import itemsData from '../data/items.json'
 import { getWeaponRarityDisplayName, getWeaponRarityColor } from '../lib/rarity'
 import { t } from '../lib/translate'
 
@@ -14,6 +15,8 @@ export default function Forge() {
   const combineWeapon = useGameStore((s) => s.combineWeapon)
   const craftAscensionArms = useGameStore((s) => s.craftAscensionArms)
   const enhanceItem = useGameStore((s) => s.enhanceItem)
+  const craftLegendary = useGameStore((s) => s.craftLegendary)
+  const buySetItem = useGameStore((s) => s.buySetItem)
 
   const [activeTab, setActiveTab] = useState('upgrade') // 'upgrade' | 'refine' | 'enhance'
   const [selectedSacrificeUid, setSelectedSacrificeUid] = useState('')
@@ -117,6 +120,8 @@ export default function Forge() {
         <div style={activeTab === 'refine' ? styles.tabActive : styles.tab} onClick={() => setActiveTab('refine')}>{t('weapon_smith_tab')}</div>
         <div style={activeTab === 'enhance' ? styles.tabActive : styles.tab} onClick={() => setActiveTab('enhance')}>{t('item_enhancement_tab')}</div>
         <div style={activeTab === 'ascension' ? styles.tabActive : styles.tab} onClick={() => setActiveTab('ascension')}>ASCENSION LAB</div>
+        <div style={activeTab === 'legendary' ? {...styles.tabActive, color: '#f5a623', borderBottomColor: '#f5a623'} : styles.tab} onClick={() => setActiveTab('legendary')}>⚔️ LEGENDARY</div>
+        <div style={activeTab === 'setshop' ? {...styles.tabActive, color: '#cc44ff', borderBottomColor: '#cc44ff'} : styles.tab} onClick={() => setActiveTab('setshop')}>👑 SET SHOP</div>
       </div>
 
 
@@ -646,6 +651,257 @@ export default function Forge() {
       )}
 
       <div style={{ height: 20 }} />
+
+      {/* ───────── LEGENDARY CRAFTING TAB ───────── */}
+      {activeTab === 'legendary' && (() => {
+        const allItems = itemsData.items
+        const SHARD_TYPES = [
+          { id: 'shard_ignis_epic',  label: 'Ignis',  emoji: '🔴' },
+          { id: 'shard_virel_epic',  label: 'Virel',  emoji: '🔵' },
+          { id: 'shard_kryos_epic',  label: 'Kryos',  emoji: '🟢' },
+          { id: 'shard_zephra_epic', label: 'Zephra', emoji: '🟡' },
+          { id: 'shard_umbrix_epic', label: 'Umbrix', emoji: '⚫' },
+        ]
+        const inv = player.inventory
+        const countOf = (id) => inv.filter(i => i.id === id).length
+
+        const RECIPES = [
+          { id: 'leg_weapon', label: 'Legendary Weapon',  emoji: '⚔️',  baseId: 'mat_epic_weapon',  baseLabel: 'Epic Weapon',  shards: 6 },
+          { id: 'leg_armor',  label: 'Legendary Armor',   emoji: '🦾',  baseId: 'mat_epic_armor',   baseLabel: 'Epic Armor',   shards: 4 },
+          { id: 'leg_helmet', label: 'Legendary Helmet',  emoji: '⛑️',  baseId: 'mat_epic_armor',   baseLabel: 'Epic Armor',   shards: 4 },
+          { id: 'leg_mantle', label: 'Legendary Mantle',  emoji: '🥋',  baseId: 'mat_epic_armor',   baseLabel: 'Epic Armor',   shards: 4 },
+          { id: 'leg_gloves', label: 'Legendary Gloves',  emoji: '🧤',  baseId: 'mat_epic_armor',   baseLabel: 'Epic Armor',   shards: 4 },
+          { id: 'leg_boots',  label: 'Legendary Boots',   emoji: '👢',  baseId: 'mat_epic_armor',   baseLabel: 'Epic Armor',   shards: 4 },
+          { id: 'leg_shield', label: 'Legendary Shield',  emoji: '🛡️', baseId: 'mat_epic_armor',   baseLabel: 'Epic Armor',   shards: 4 },
+          { id: 'leg_ring',   label: 'Legendary Ring',    emoji: '💍',  baseId: 'mat_epic_ring',    baseLabel: 'Epic Ring',    shards: 5 },
+          { id: 'leg_amulet', label: 'Legendary Amulet',  emoji: '📿',  baseId: 'mat_epic_amulet',  baseLabel: 'Epic Amulet',  shards: 5 },
+          { id: 'leg_cape',   label: 'Legendary Cape',    emoji: '🦸',  baseId: 'mat_epic_cape',    baseLabel: 'Epic Cape',    shards: 5 },
+        ]
+
+        const LEGEND_STATS = {
+          leg_weapon: 'ATK+200 | HP+2000 | Crit+5%',
+          leg_armor:  'DEF+120 | HP+2500 (per piece)',
+          leg_helmet: 'DEF+120 | HP+2500 (per piece)',
+          leg_mantle: 'DEF+120 | HP+2500 (per piece)',
+          leg_gloves: 'DEF+120 | HP+2500 (per piece)',
+          leg_boots:  'DEF+120 | HP+2500 (per piece)',
+          leg_shield: 'DEF+120 | HP+2500',
+          leg_ring:   'ATK+100 | HP+1500 | Crit+3% (per piece)',
+          leg_amulet: 'DEF+100 | HP+2000 (per piece)',
+          leg_cape:   'ATK+80 | DEF+80 | HP+2000 | Crit+2%',
+        }
+
+        return (
+          <div style={{ padding: '0 16px 80px' }}>
+            <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: '#f5a623', letterSpacing: 1, marginBottom: 16, textAlign: 'center', borderBottom: '1px solid rgba(245,166,35,0.3)', paddingBottom: 8 }}>
+              ⚔️ LEGENDARY FORGE — Craft equipment of legendary power
+            </div>
+            {RECIPES.map(recipe => {
+              const baseOwned = countOf(recipe.baseId)
+              const shardCounts = SHARD_TYPES.map(s => ({ ...s, owned: countOf(s.id), need: recipe.shards }))
+              const canCraft = baseOwned >= 1 && shardCounts.every(s => s.owned >= s.need)
+              return (
+                <div key={recipe.id} style={{ marginBottom: 14, background: 'rgba(3,8,20,0.6)', border: `1px solid ${canCraft ? 'rgba(245,166,35,0.4)' : 'rgba(0,229,255,0.1)'}`, borderRadius: 12, padding: 14, boxShadow: canCraft ? '0 0 12px rgba(245,166,35,0.15)' : 'none' }}>
+                  {/* Header */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
+                    <div style={{ fontSize: 28 }}>{recipe.emoji}</div>
+                    <div>
+                      <div style={{ fontFamily: 'var(--font-title)', fontSize: 15, fontWeight: 800, color: '#f5a623' }}>{recipe.label}</div>
+                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#88aadd', marginTop: 2 }}>{LEGEND_STATS[recipe.id]}</div>
+                    </div>
+                  </div>
+                  {/* Ingredients */}
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 10 }}>
+                    {/* Base material */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '4px 8px', borderRadius: 6, background: 'rgba(0,0,0,0.3)', border: `1px solid ${baseOwned >= 1 ? 'rgba(57,255,20,0.4)' : 'rgba(255,68,68,0.3)'}`, fontSize: 12, color: baseOwned >= 1 ? '#39ff14' : '#ff6666', fontWeight: 700 }}>
+                      📦 {recipe.baseLabel} ×1 ({baseOwned}/1)
+                    </div>
+                    {/* Shards */}
+                    {shardCounts.map(s => (
+                      <div key={s.id} style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '4px 8px', borderRadius: 6, background: 'rgba(0,0,0,0.3)', border: `1px solid ${s.owned >= s.need ? 'rgba(57,255,20,0.4)' : 'rgba(255,68,68,0.3)'}`, fontSize: 12, color: s.owned >= s.need ? '#39ff14' : '#ff6666', fontWeight: 700 }}>
+                        {s.emoji} {s.label} ×{s.need} ({s.owned}/{s.need})
+                      </div>
+                    ))}
+                  </div>
+                  {/* Craft Button */}
+                  <button
+                    onClick={() => {
+                      const result = craftLegendary(recipe.id)
+                      if (result?.ok) alert(`✨ ${recipe.label} berhasil dibuat!`)
+                      else alert(`❌ ${result?.msg || 'Gagal craft'}`)
+                    }}
+                    style={{ width: '100%', border: 'none', borderRadius: 8, padding: '10px 0', fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 800, cursor: canCraft ? 'pointer' : 'not-allowed', background: canCraft ? 'linear-gradient(135deg,#f5a623,#ff6b35)' : 'rgba(28,36,56,0.8)', color: canCraft ? '#000' : '#4a8fa8', letterSpacing: 1, boxShadow: canCraft ? '0 0 12px rgba(245,166,35,0.4)' : 'none', transition: 'all 0.2s' }}
+                  >
+                    {canCraft ? `⚡ CRAFT ${recipe.label.toUpperCase()}` : '🔒 BAHAN KURANG'}
+                  </button>
+                </div>
+              )
+            })}
+          </div>
+        )
+      })()}
+
+      {/* ───────── SET SHOP TAB ───────── */}
+      {activeTab === 'setshop' && (() => {
+        const credits = player.resources.credits
+        const inv = player.inventory
+        const countInInvOrEquip = (setId) => {
+          const eq = player.equipment || {}
+          const inInv = inv.filter(i => i.setId === setId).length
+          const inEq = Object.values(eq).filter(i => i && i.setId === setId).length
+          return inInv + inEq
+        }
+
+        const SETS = [
+          {
+            setId: 'eminence',
+            name: 'Eminence Set',
+            emoji: '👑',
+            color: '#f5a623',
+            total: 7,
+            fullBonus: 'ATK+100 | DEF+100 | HP+2000 | Crit+2%',
+            pieces: [
+              { id: 'eminence_helmet', name: 'Helmet',    price: 100000000 },
+              { id: 'eminence_armor',  name: 'Armor',     price: 100000000 },
+              { id: 'eminence_gloves', name: 'Gloves',    price: 100000000 },
+              { id: 'eminence_pants',  name: 'Pants',     price: 100000000 },
+              { id: 'eminence_boots',  name: 'Boots',     price: 100000000 },
+              { id: 'eminence_cape',   name: 'Cape',      price: 100000000 },
+              { id: 'eminence_staff',  name: 'Leadership Staff', price: 200000000 },
+            ]
+          },
+          {
+            setId: 'vice_eminence',
+            name: 'Vice Eminence Set',
+            emoji: '⚜️',
+            color: '#cc44ff',
+            total: 6,
+            fullBonus: 'ATK+80 | DEF+80 | HP+1500 | Crit+1%',
+            pieces: [
+              { id: 'vice_helmet', name: 'Helmet', price: 75000000 },
+              { id: 'vice_armor',  name: 'Armor',  price: 75000000 },
+              { id: 'vice_gloves', name: 'Gloves', price: 75000000 },
+              { id: 'vice_pants',  name: 'Pants',  price: 75000000 },
+              { id: 'vice_boots',  name: 'Boots',  price: 75000000 },
+              { id: 'vice_cape',   name: 'Cape',   price: 75000000 },
+            ]
+          },
+          {
+            setId: 'council_atk',
+            name: 'Attack Council Set',
+            emoji: '⚔️',
+            color: '#ff4444',
+            total: 6,
+            fullBonus: 'ATK+100 | DEF+50 | HP+1200',
+            pieces: [
+              { id: 'council_atk_helmet', name: 'Helmet', price: 50000000 },
+              { id: 'council_atk_armor',  name: 'Armor',  price: 50000000 },
+              { id: 'council_atk_gloves', name: 'Gloves', price: 50000000 },
+              { id: 'council_atk_pants',  name: 'Pants',  price: 50000000 },
+              { id: 'council_atk_boots',  name: 'Boots',  price: 50000000 },
+              { id: 'council_atk_cape',   name: 'Cape',   price: 50000000 },
+            ]
+          },
+          {
+            setId: 'council_def',
+            name: 'Defense Council Set',
+            emoji: '🛡️',
+            color: '#00aaff',
+            total: 6,
+            fullBonus: 'ATK+50 | DEF+100 | HP+1200',
+            pieces: [
+              { id: 'council_def_helmet', name: 'Helmet', price: 50000000 },
+              { id: 'council_def_armor',  name: 'Armor',  price: 50000000 },
+              { id: 'council_def_gloves', name: 'Gloves', price: 50000000 },
+              { id: 'council_def_pants',  name: 'Pants',  price: 50000000 },
+              { id: 'council_def_boots',  name: 'Boots',  price: 50000000 },
+              { id: 'council_def_cape',   name: 'Cape',   price: 50000000 },
+            ]
+          },
+          {
+            setId: 'council_sup',
+            name: 'Support Council Set',
+            emoji: '🤝',
+            color: '#00ffaa',
+            total: 6,
+            fullBonus: 'ATK+70 | DEF+70 | HP+1200',
+            pieces: [
+              { id: 'council_sup_helmet', name: 'Helmet', price: 50000000 },
+              { id: 'council_sup_armor',  name: 'Armor',  price: 50000000 },
+              { id: 'council_sup_gloves', name: 'Gloves', price: 50000000 },
+              { id: 'council_sup_pants',  name: 'Pants',  price: 50000000 },
+              { id: 'council_sup_boots',  name: 'Boots',  price: 50000000 },
+              { id: 'council_sup_cape',   name: 'Cape',   price: 50000000 },
+            ]
+          },
+        ]
+
+        return (
+          <div style={{ padding: '0 16px 80px' }}>
+            <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: '#cc44ff', letterSpacing: 1, marginBottom: 16, textAlign: 'center', borderBottom: '1px solid rgba(204,68,255,0.3)', paddingBottom: 8 }}>
+              👑 SET SHOP — Per piece: ATK+20-30 | DEF+20-30 | HP+300-500
+            </div>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#7ab0d0', textAlign: 'center', marginBottom: 16 }}>
+              ◈ CRD Kamu: <span style={{ color: '#00e5ff', fontWeight: 800 }}>{credits.toLocaleString()}</span>
+            </div>
+            {SETS.map(set => {
+              const owned = countInInvOrEquip(set.setId)
+              const isComplete = owned >= set.total
+              return (
+                <div key={set.setId} style={{ marginBottom: 18, background: 'rgba(3,8,20,0.6)', border: `1px solid ${isComplete ? set.color : 'rgba(255,255,255,0.08)'}`, borderRadius: 14, overflow: 'hidden', boxShadow: isComplete ? `0 0 16px ${set.color}33` : 'none' }}>
+                  {/* Set Header */}
+                  <div style={{ background: `linear-gradient(135deg, ${set.color}22, rgba(3,8,20,0.95))`, padding: '12px 14px', borderBottom: `1px solid ${set.color}33` }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                        <span style={{ fontSize: 22 }}>{set.emoji}</span>
+                        <div>
+                          <div style={{ fontFamily: 'var(--font-title)', fontSize: 14, fontWeight: 800, color: set.color }}>{set.name}</div>
+                          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#88aadd', marginTop: 2 }}>Full Set ({set.total}/{set.total}): {set.fullBonus}</div>
+                        </div>
+                      </div>
+                      <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, color: isComplete ? set.color : '#7ab0d0', fontWeight: 800 }}>
+                        {owned}/{set.total} {isComplete ? '✓' : ''}
+                      </div>
+                    </div>
+                  </div>
+                  {/* Pieces */}
+                  <div style={{ padding: '10px 14px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+                    {set.pieces.map(piece => {
+                      const inInv = inv.filter(i => i.id === piece.id).length
+                      const inEq = Object.values(player.equipment || {}).some(e => e && e.id === piece.id)
+                      const alreadyOwned = inInv > 0 || inEq
+                      const canAfford = credits >= piece.price
+                      return (
+                        <div key={piece.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'rgba(0,0,0,0.2)', padding: '8px 10px', borderRadius: 8, border: `1px solid ${alreadyOwned ? set.color + '44' : 'rgba(255,255,255,0.05)'}` }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                            <span style={{ fontSize: 16 }}>{set.emoji}</span>
+                            <div>
+                              <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 700, color: alreadyOwned ? set.color : '#e0f4ff' }}>{piece.name} {alreadyOwned ? '✓' : ''}</div>
+                              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: canAfford && !alreadyOwned ? '#00ff88' : '#7ab0d0' }}>◈ {(piece.price / 1000000).toFixed(0)}M CRD</div>
+                            </div>
+                          </div>
+                          <button
+                            disabled={alreadyOwned || !canAfford}
+                            onClick={() => {
+                              const result = buySetItem(piece.id)
+                              if (result?.ok) alert(`✅ ${piece.name} berhasil dibeli!`)
+                              else alert(`❌ ${result?.msg}`)
+                            }}
+                            style={{ border: 'none', borderRadius: 6, padding: '6px 12px', fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 800, cursor: alreadyOwned || !canAfford ? 'not-allowed' : 'pointer', background: alreadyOwned ? 'rgba(57,255,20,0.15)' : canAfford ? set.color : 'rgba(28,36,56,0.8)', color: alreadyOwned ? '#39ff14' : canAfford ? '#000' : '#4a8fa8', whiteSpace: 'nowrap' }}
+                          >
+                            {alreadyOwned ? 'OWNED' : canAfford ? 'BELI' : 'CRD ❌'}
+                          </button>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        )
+      })()}
+
     </div>
   )
 }

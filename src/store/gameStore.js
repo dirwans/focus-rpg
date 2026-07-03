@@ -340,6 +340,82 @@ export const useGameStore = create(
       setRunnerUpRace: (race) => set({ runnerUpRace: race }),
       setLastPlaceRace: (race) => set({ lastPlaceRace: race }),
       setNotification: (notif) => set({ notification: notif }),
+      setPvpRank: (rank) => set((s) => ({ player: { ...s.player, pvpRank: rank, savedAt: Date.now() } })),
+
+      // ── Legendary Crafting ───────────────────────────────
+      craftLegendary: (recipeId) => {
+        const { player } = get()
+        const allItems = itemsData.items
+        const RECIPES = {
+          leg_weapon:  { base: 'mat_epic_weapon', shards: 6 },
+          leg_armor:   { base: 'mat_epic_armor',  shards: 4 },
+          leg_helmet:  { base: 'mat_epic_armor',  shards: 4 },
+          leg_mantle:  { base: 'mat_epic_armor',  shards: 4 },
+          leg_gloves:  { base: 'mat_epic_armor',  shards: 4 },
+          leg_boots:   { base: 'mat_epic_armor',  shards: 4 },
+          leg_shield:  { base: 'mat_epic_armor',  shards: 4 },
+          leg_ring:    { base: 'mat_epic_ring',   shards: 5 },
+          leg_amulet:  { base: 'mat_epic_amulet', shards: 5 },
+          leg_cape:    { base: 'mat_epic_cape',   shards: 5 },
+        }
+        const recipe = RECIPES[recipeId]
+        if (!recipe) return { ok: false, msg: 'Unknown recipe' }
+
+        const SHARD_IDS = ['shard_ignis_epic','shard_virel_epic','shard_kryos_epic','shard_zephra_epic','shard_umbrix_epic']
+        const inv = player.inventory
+
+        // Check base material
+        const baseCount = inv.filter(i => i.id === recipe.base).length
+        if (baseCount < 1) return { ok: false, msg: 'Missing base material' }
+
+        // Check shards (need recipe.shards of EACH type)
+        for (const shardId of SHARD_IDS) {
+          const cnt = inv.filter(i => i.id === shardId).length
+          if (cnt < recipe.shards) return { ok: false, msg: `Need ${recipe.shards}x ${shardId}` }
+        }
+
+        // Consume ingredients
+        let newInv = [...inv]
+        // Remove 1 base
+        const baseIdx = newInv.findIndex(i => i.id === recipe.base)
+        newInv.splice(baseIdx, 1)
+        // Remove shards
+        for (const shardId of SHARD_IDS) {
+          let removed = 0
+          newInv = newInv.filter(i => {
+            if (i.id === shardId && removed < recipe.shards) { removed++; return false }
+            return true
+          })
+        }
+
+        // Add legendary output
+        const outputDef = allItems.find(i => i.id === recipeId)
+        if (!outputDef) return { ok: false, msg: 'Output item not found' }
+        const uid = Date.now() + Math.floor(Math.random() * 10000)
+        newInv.push({ ...outputDef, uid })
+
+        set({ player: { ...player, inventory: newInv, savedAt: Date.now() } })
+        return { ok: true, item: outputDef }
+      },
+
+      // ── Set Shop: Buy Eminence/Vice Eminence/Council Items ─
+      buySetItem: (itemId) => {
+        const { player } = get()
+        const allItems = itemsData.items
+        const itemDef = allItems.find(i => i.id === itemId)
+        if (!itemDef) return { ok: false, msg: 'Item not found' }
+        const price = itemDef.price || 0
+        if (player.resources.credits < price) return { ok: false, msg: 'CRD tidak cukup!' }
+        const uid = Date.now() + Math.floor(Math.random() * 10000)
+        set({ player: {
+          ...player,
+          resources: { ...player.resources, credits: player.resources.credits - price },
+          inventory: [...player.inventory, { ...itemDef, uid }],
+          savedAt: Date.now()
+        }})
+        return { ok: true, item: itemDef }
+      },
+
 
       depositToWarehouse: (itemUid) => set((s) => {
         const { player } = s
@@ -1755,14 +1831,49 @@ export const useGameStore = create(
           percentHp += 30
           percentDef += 20
         } else if (isCelestraSet && player.race === 'celestra') {
-          percentAtk += 30 // Magic Power mapped to ATK
-          percentDef += 20 // Mana Regen mapped to DEF
+          percentAtk += 30
+          percentDef += 20
         } else if (isArctronSet && player.race === 'arctron') {
           percentAtk += 30
           percentDef += 20
         }
 
-        // Character Growth Job Tier bonuses based on player level
+        // ── Premium Set Bonus Detection ──
+        const allEquipped = Object.values(eq).filter(Boolean)
+        const setCountMap = {}
+        allEquipped.forEach(item => {
+          if (item.setId) setCountMap[item.setId] = (setCountMap[item.setId] || 0) + 1
+        })
+        // Eminence Set 7/7
+        if ((setCountMap['eminence'] || 0) >= 7) {
+          flatAtk += 100; flatDef += 100; flatHp += 2000; critBonus += 2
+        }
+        // Vice Eminence Set 6/6
+        if ((setCountMap['vice_eminence'] || 0) >= 6) {
+          flatAtk += 80; flatDef += 80; flatHp += 1500; critBonus += 1
+        }
+        // Attack Council Set 6/6
+        if ((setCountMap['council_atk'] || 0) >= 6) {
+          flatAtk += 100; flatDef += 50; flatHp += 1200
+        }
+        // Defense Council Set 6/6
+        if ((setCountMap['council_def'] || 0) >= 6) {
+          flatAtk += 50; flatDef += 100; flatHp += 1200
+        }
+        // Support Council Set 6/6
+        if ((setCountMap['council_sup'] || 0) >= 6) {
+          flatAtk += 70; flatDef += 70; flatHp += 1200
+        }
+
+
+        // ── PvP Title Bonus ──
+        const pvpRank = player.pvpRank || 0
+        let titleAtk = 0, titleDef = 0, titleHp = 0
+        if (pvpRank === 1)      { titleAtk = 45; titleDef = 25; titleHp = 5000 }
+        else if (pvpRank === 2) { titleAtk = 40; titleDef = 20; titleHp = 3000 }
+        else if (pvpRank === 3) { titleAtk = 35; titleDef = 20; titleHp = 2000 }
+        flatAtk += titleAtk; flatDef += titleDef; flatHp += titleHp
+
         const lvl = player.level || 1
         let tierAtkPercent = 0
         let tierDefPercent = 0
@@ -1846,6 +1957,12 @@ export const useGameStore = create(
           activeTitle = 'Astral Emperor'
         } else if (isArctronSet && player.race === 'arctron') {
           activeTitle = 'Iron Overlord'
+        } else if (pvpRank === 1) {
+          activeTitle = '👑 Hero'
+        } else if (pvpRank === 2) {
+          activeTitle = '⚜️ Savior'
+        } else if (pvpRank === 3) {
+          activeTitle = '🤝 Benefactor'
         }
 
         // Calculate final Crit and Dodge rates (base + tier + gear)

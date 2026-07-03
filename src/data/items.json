@@ -20415,6 +20415,993 @@
       "level": 50,
       "bonus": {},
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile003.png"
+    },
+    {
+      "id": "mat_epic_weapon",
+      "name": "Epic Weapon",
+      "emoji": "⚔️",
+      "rarity": "epic",
+      "type": "material",
+      "race": "All",
+      "level": 50,
+      "bonus": {},
+      "description": "Base material for Legendary Weapon crafting."
+    },
+    {
+      "id": "mat_epic_armor",
+      "name": "Epic Armor",
+      "emoji": "🦾",
+      "rarity": "epic",
+      "type": "material",
+      "race": "All",
+      "level": 50,
+      "bonus": {},
+      "description": "Base material for Legendary Armor/Shield crafting."
+    },
+    {
+      "id": "mat_epic_ring",
+      "name": "Epic Ring",
+      "emoji": "💍",
+      "rarity": "epic",
+      "type": "material",
+      "race": "All",
+      "level": 50,
+      "bonus": {},
+      "description": "Base material for Legendary Ring crafting."
+    },
+    {
+      "id": "mat_epic_amulet",
+      "name": "Epic Amulet",
+      "emoji": "📿",
+      "rarity": "epic",
+      "type": "material",
+      "race": "All",
+      "level": 50,
+      "bonus": {},
+      "description": "Base material for Legendary Amulet crafting."
+    },
+    {
+      "id": "mat_epic_cape",
+      "name": "Epic Cape",
+      "emoji": "🦸",
+      "rarity": "epic",
+      "type": "material",
+      "race": "All",
+      "level": 50,
+      "bonus": {},
+      "description": "Base material for Legendary Cape crafting."
+    },
+    {
+      "id": "leg_weapon",
+      "name": "Legendary Weapon",
+      "emoji": "⚔️",
+      "rarity": "legendary",
+      "type": "weapon",
+      "race": "All",
+      "level": 50,
+      "bonus": {
+        "atk": 200,
+        "hp": 2000,
+        "crit": 5
+      },
+      "description": "ATK+200 | HP+2000 | Critical+5%"
+    },
+    {
+      "id": "leg_armor",
+      "name": "Legendary Armor",
+      "emoji": "🦾",
+      "type": "armor",
+      "rarity": "legendary",
+      "race": "All",
+      "level": 50,
+      "bonus": {
+        "def": 120,
+        "hp": 2500
+      },
+      "description": "DEF+120 | HP+2500 (per piece)"
+    },
+    {
+      "id": "leg_helmet",
+      "name": "Legendary Helmet",
+      "emoji": "⛑️",
+      "type": "helmet",
+      "rarity": "legendary",
+      "race": "All",
+      "level": 50,
+      "bonus": {
+        "def": 120,
+        "hp": 2500
+      },
+      "description": "DEF+120 | HP+2500 (per piece)"
+    },
+    {
+      "id": "leg_mantle",
+      "name": "Legendary Mantle",
+      "emoji": "🥋",
+      "type": "mantle",
+      "rarity": "legendary",
+      "race": "All",
+      "level": 50,
+      "bonus": {
+        "def": 120,
+        "hp": 2500
+      },
+      "description": "DEF+120 | HP+2500 (per piece)"
+    },
+    {
+      "id": "leg_gloves",
+      "name": "Legendary Gloves",
+      "emoji": "🧤",
+      "type": "gloves",
+      "rarity": "legendary",
+      "race": "All",
+      "level": 50,
+      "bonus": {
+        "def": 120,
+        "hp": 2500
+      },
+      "description": "DEF+120 | HP+2500 (per piece)"
+    },
+    {
+      "id": "leg_boots",
+      "name": "Legendary Boots",
+      "emoji": "👢",
+      "type": "boots",
+      "rarity": "legendary",
+      "race": "All",
+      "level": 50,
+      "bonus": {
+        "def": 120,
+        "hp": 2500
+      },
+      "description": "DEF+120 | HP+2500 (per piece)"
+    },
+    {
+      "id": "leg_shield",
+      "name": "Legendary Shield",
+      "emoji": "🛡️",
+      "rarity": "legendary",
+      "type": "shield",
+      "race": "All",
+      "level": 50,
+      "bonus": {
+        "def": 120,
+        "hp": 2500
+      },
+      "description": "DEF+120 | HP+2500"
+    },
+    {
+      "id": "leg_ring",
+      "name": "Legendary Ring",
+      "emoji": "💍",
+      "rarity": "legendary",
+      "type": "ring",
+      "race": "All",
+      "level": 50,
+      "bonus": {
+        "atk": 100,
+        "hp": 1500,
+        "crit": 3
+      },
+      "description": "ATK+100 | HP+1500 | Critical+3% (per piece)"
+    },
+    {
+      "id": "leg_amulet",
+      "name": "Legendary Amulet",
+      "emoji": "📿",
+      "rarity": "legendary",
+      "type": "amulet",
+      "race": "All",
+      "level": 50,
+      "bonus": {
+        "def": 100,
+        "hp": 2000
+      },
+      "description": "DEF+100 | HP+2000 (per piece)"
+    },
+    {
+      "id": "leg_cape",
+      "name": "Legendary Cape",
+      "emoji": "🦸",
+      "rarity": "legendary",
+      "type": "cape",
+      "race": "All",
+      "level": 50,
+      "bonus": {
+        "atk": 80,
+        "def": 80,
+        "hp": 2000,
+        "crit": 2
+      },
+      "description": "ATK+80 | DEF+80 | HP+2000 | Critical+2%"
+    },
+    {
+      "id": "eminence_helmet",
+      "name": "Eminence Helmet",
+      "emoji": "👑",
+      "type": "helmet",
+      "price": 100000000,
+      "rarity": "legendary",
+      "race": "All",
+      "level": 1,
+      "bonus": {
+        "atk": 30,
+        "def": 30,
+        "hp": 500
+      },
+      "setId": "eminence",
+      "setName": "Eminence Set",
+      "setTotal": 7,
+      "setBonus": {
+        "atk": 100,
+        "def": 100,
+        "hp": 2000,
+        "crit": 2
+      },
+      "description": "ATK+30 DEF+30 HP+500 | Full Set 7/7: ATK+100 DEF+100 HP+2000 Crit+2%",
+      "enhanceable": true
+    },
+    {
+      "id": "eminence_armor",
+      "name": "Eminence Armor",
+      "emoji": "👑",
+      "type": "armor",
+      "price": 100000000,
+      "rarity": "legendary",
+      "race": "All",
+      "level": 1,
+      "bonus": {
+        "atk": 30,
+        "def": 30,
+        "hp": 500
+      },
+      "setId": "eminence",
+      "setName": "Eminence Set",
+      "setTotal": 7,
+      "setBonus": {
+        "atk": 100,
+        "def": 100,
+        "hp": 2000,
+        "crit": 2
+      },
+      "description": "ATK+30 DEF+30 HP+500 | Full Set 7/7: ATK+100 DEF+100 HP+2000 Crit+2%",
+      "enhanceable": true
+    },
+    {
+      "id": "eminence_gloves",
+      "name": "Eminence Gloves",
+      "emoji": "👑",
+      "type": "gloves",
+      "price": 100000000,
+      "rarity": "legendary",
+      "race": "All",
+      "level": 1,
+      "bonus": {
+        "atk": 30,
+        "def": 30,
+        "hp": 500
+      },
+      "setId": "eminence",
+      "setName": "Eminence Set",
+      "setTotal": 7,
+      "setBonus": {
+        "atk": 100,
+        "def": 100,
+        "hp": 2000,
+        "crit": 2
+      },
+      "description": "ATK+30 DEF+30 HP+500 | Full Set 7/7: ATK+100 DEF+100 HP+2000 Crit+2%",
+      "enhanceable": true
+    },
+    {
+      "id": "eminence_pants",
+      "name": "Eminence Pants",
+      "emoji": "👑",
+      "type": "pants",
+      "price": 100000000,
+      "rarity": "legendary",
+      "race": "All",
+      "level": 1,
+      "bonus": {
+        "atk": 30,
+        "def": 30,
+        "hp": 500
+      },
+      "setId": "eminence",
+      "setName": "Eminence Set",
+      "setTotal": 7,
+      "setBonus": {
+        "atk": 100,
+        "def": 100,
+        "hp": 2000,
+        "crit": 2
+      },
+      "description": "ATK+30 DEF+30 HP+500 | Full Set 7/7: ATK+100 DEF+100 HP+2000 Crit+2%",
+      "enhanceable": true
+    },
+    {
+      "id": "eminence_boots",
+      "name": "Eminence Boots",
+      "emoji": "👑",
+      "type": "boots",
+      "price": 100000000,
+      "rarity": "legendary",
+      "race": "All",
+      "level": 1,
+      "bonus": {
+        "atk": 30,
+        "def": 30,
+        "hp": 500
+      },
+      "setId": "eminence",
+      "setName": "Eminence Set",
+      "setTotal": 7,
+      "setBonus": {
+        "atk": 100,
+        "def": 100,
+        "hp": 2000,
+        "crit": 2
+      },
+      "description": "ATK+30 DEF+30 HP+500 | Full Set 7/7: ATK+100 DEF+100 HP+2000 Crit+2%",
+      "enhanceable": true
+    },
+    {
+      "id": "eminence_cape",
+      "name": "Eminence Cape",
+      "emoji": "👑",
+      "type": "mantle",
+      "price": 100000000,
+      "rarity": "legendary",
+      "race": "All",
+      "level": 1,
+      "bonus": {
+        "atk": 30,
+        "def": 30,
+        "hp": 500
+      },
+      "setId": "eminence",
+      "setName": "Eminence Set",
+      "setTotal": 7,
+      "setBonus": {
+        "atk": 100,
+        "def": 100,
+        "hp": 2000,
+        "crit": 2
+      },
+      "description": "ATK+30 DEF+30 HP+500 | Full Set 7/7: ATK+100 DEF+100 HP+2000 Crit+2%",
+      "enhanceable": true
+    },
+    {
+      "id": "eminence_staff",
+      "name": "Eminence Leadership Staff",
+      "emoji": "👑",
+      "type": "weapon",
+      "price": 200000000,
+      "rarity": "legendary",
+      "race": "All",
+      "level": 1,
+      "bonus": {
+        "atk": 30,
+        "def": 30,
+        "hp": 500
+      },
+      "setId": "eminence",
+      "setName": "Eminence Set",
+      "setTotal": 7,
+      "setBonus": {
+        "atk": 100,
+        "def": 100,
+        "hp": 2000,
+        "crit": 2
+      },
+      "description": "ATK+30 DEF+30 HP+500 | Full Set 7/7: ATK+100 DEF+100 HP+2000 Crit+2%",
+      "enhanceable": true
+    },
+    {
+      "id": "vice_helmet",
+      "name": "Vice Eminence Helmet",
+      "emoji": "⚜️",
+      "type": "helmet",
+      "rarity": "legendary",
+      "race": "All",
+      "level": 1,
+      "bonus": {
+        "atk": 30,
+        "def": 30,
+        "hp": 500
+      },
+      "price": 75000000,
+      "setId": "vice_eminence",
+      "setName": "Vice Eminence Set",
+      "setTotal": 6,
+      "setBonus": {
+        "atk": 80,
+        "def": 80,
+        "hp": 1500,
+        "crit": 1
+      },
+      "description": "ATK+30 DEF+30 HP+500 | Full Set 6/6: ATK+80 DEF+80 HP+1500 Crit+1%",
+      "enhanceable": true
+    },
+    {
+      "id": "vice_armor",
+      "name": "Vice Eminence Armor",
+      "emoji": "⚜️",
+      "type": "armor",
+      "rarity": "legendary",
+      "race": "All",
+      "level": 1,
+      "bonus": {
+        "atk": 30,
+        "def": 30,
+        "hp": 500
+      },
+      "price": 75000000,
+      "setId": "vice_eminence",
+      "setName": "Vice Eminence Set",
+      "setTotal": 6,
+      "setBonus": {
+        "atk": 80,
+        "def": 80,
+        "hp": 1500,
+        "crit": 1
+      },
+      "description": "ATK+30 DEF+30 HP+500 | Full Set 6/6: ATK+80 DEF+80 HP+1500 Crit+1%",
+      "enhanceable": true
+    },
+    {
+      "id": "vice_gloves",
+      "name": "Vice Eminence Gloves",
+      "emoji": "⚜️",
+      "type": "gloves",
+      "rarity": "legendary",
+      "race": "All",
+      "level": 1,
+      "bonus": {
+        "atk": 30,
+        "def": 30,
+        "hp": 500
+      },
+      "price": 75000000,
+      "setId": "vice_eminence",
+      "setName": "Vice Eminence Set",
+      "setTotal": 6,
+      "setBonus": {
+        "atk": 80,
+        "def": 80,
+        "hp": 1500,
+        "crit": 1
+      },
+      "description": "ATK+30 DEF+30 HP+500 | Full Set 6/6: ATK+80 DEF+80 HP+1500 Crit+1%",
+      "enhanceable": true
+    },
+    {
+      "id": "vice_pants",
+      "name": "Vice Eminence Pants",
+      "emoji": "⚜️",
+      "type": "pants",
+      "rarity": "legendary",
+      "race": "All",
+      "level": 1,
+      "bonus": {
+        "atk": 30,
+        "def": 30,
+        "hp": 500
+      },
+      "price": 75000000,
+      "setId": "vice_eminence",
+      "setName": "Vice Eminence Set",
+      "setTotal": 6,
+      "setBonus": {
+        "atk": 80,
+        "def": 80,
+        "hp": 1500,
+        "crit": 1
+      },
+      "description": "ATK+30 DEF+30 HP+500 | Full Set 6/6: ATK+80 DEF+80 HP+1500 Crit+1%",
+      "enhanceable": true
+    },
+    {
+      "id": "vice_boots",
+      "name": "Vice Eminence Boots",
+      "emoji": "⚜️",
+      "type": "boots",
+      "rarity": "legendary",
+      "race": "All",
+      "level": 1,
+      "bonus": {
+        "atk": 30,
+        "def": 30,
+        "hp": 500
+      },
+      "price": 75000000,
+      "setId": "vice_eminence",
+      "setName": "Vice Eminence Set",
+      "setTotal": 6,
+      "setBonus": {
+        "atk": 80,
+        "def": 80,
+        "hp": 1500,
+        "crit": 1
+      },
+      "description": "ATK+30 DEF+30 HP+500 | Full Set 6/6: ATK+80 DEF+80 HP+1500 Crit+1%",
+      "enhanceable": true
+    },
+    {
+      "id": "vice_cape",
+      "name": "Vice Eminence Cape",
+      "emoji": "⚜️",
+      "type": "mantle",
+      "rarity": "legendary",
+      "race": "All",
+      "level": 1,
+      "bonus": {
+        "atk": 30,
+        "def": 30,
+        "hp": 500
+      },
+      "price": 75000000,
+      "setId": "vice_eminence",
+      "setName": "Vice Eminence Set",
+      "setTotal": 6,
+      "setBonus": {
+        "atk": 80,
+        "def": 80,
+        "hp": 1500,
+        "crit": 1
+      },
+      "description": "ATK+30 DEF+30 HP+500 | Full Set 6/6: ATK+80 DEF+80 HP+1500 Crit+1%",
+      "enhanceable": true
+    },
+    {
+      "id": "council_atk_helmet",
+      "name": "Attack Council Set Helmet",
+      "emoji": "⚔️",
+      "type": "helmet",
+      "rarity": "legendary",
+      "race": "All",
+      "level": 1,
+      "price": 50000000,
+      "bonus": {
+        "atk": 20,
+        "def": 20,
+        "hp": 300
+      },
+      "setId": "council_atk",
+      "setName": "Attack Council Set",
+      "setTotal": 6,
+      "setBonus": {
+        "atk": 100,
+        "def": 50,
+        "hp": 1200
+      },
+      "description": "ATK+20 DEF+20 HP+300 | Full Set 6/6: ATK+100 DEF+50 HP+1200",
+      "enhanceable": true
+    },
+    {
+      "id": "council_atk_armor",
+      "name": "Attack Council Set Armor",
+      "emoji": "⚔️",
+      "type": "armor",
+      "rarity": "legendary",
+      "race": "All",
+      "level": 1,
+      "price": 50000000,
+      "bonus": {
+        "atk": 20,
+        "def": 20,
+        "hp": 300
+      },
+      "setId": "council_atk",
+      "setName": "Attack Council Set",
+      "setTotal": 6,
+      "setBonus": {
+        "atk": 100,
+        "def": 50,
+        "hp": 1200
+      },
+      "description": "ATK+20 DEF+20 HP+300 | Full Set 6/6: ATK+100 DEF+50 HP+1200",
+      "enhanceable": true
+    },
+    {
+      "id": "council_atk_gloves",
+      "name": "Attack Council Set Gloves",
+      "emoji": "⚔️",
+      "type": "gloves",
+      "rarity": "legendary",
+      "race": "All",
+      "level": 1,
+      "price": 50000000,
+      "bonus": {
+        "atk": 20,
+        "def": 20,
+        "hp": 300
+      },
+      "setId": "council_atk",
+      "setName": "Attack Council Set",
+      "setTotal": 6,
+      "setBonus": {
+        "atk": 100,
+        "def": 50,
+        "hp": 1200
+      },
+      "description": "ATK+20 DEF+20 HP+300 | Full Set 6/6: ATK+100 DEF+50 HP+1200",
+      "enhanceable": true
+    },
+    {
+      "id": "council_atk_pants",
+      "name": "Attack Council Set Pants",
+      "emoji": "⚔️",
+      "type": "pants",
+      "rarity": "legendary",
+      "race": "All",
+      "level": 1,
+      "price": 50000000,
+      "bonus": {
+        "atk": 20,
+        "def": 20,
+        "hp": 300
+      },
+      "setId": "council_atk",
+      "setName": "Attack Council Set",
+      "setTotal": 6,
+      "setBonus": {
+        "atk": 100,
+        "def": 50,
+        "hp": 1200
+      },
+      "description": "ATK+20 DEF+20 HP+300 | Full Set 6/6: ATK+100 DEF+50 HP+1200",
+      "enhanceable": true
+    },
+    {
+      "id": "council_atk_boots",
+      "name": "Attack Council Set Boots",
+      "emoji": "⚔️",
+      "type": "boots",
+      "rarity": "legendary",
+      "race": "All",
+      "level": 1,
+      "price": 50000000,
+      "bonus": {
+        "atk": 20,
+        "def": 20,
+        "hp": 300
+      },
+      "setId": "council_atk",
+      "setName": "Attack Council Set",
+      "setTotal": 6,
+      "setBonus": {
+        "atk": 100,
+        "def": 50,
+        "hp": 1200
+      },
+      "description": "ATK+20 DEF+20 HP+300 | Full Set 6/6: ATK+100 DEF+50 HP+1200",
+      "enhanceable": true
+    },
+    {
+      "id": "council_atk_cape",
+      "name": "Attack Council Set Cape",
+      "emoji": "⚔️",
+      "type": "mantle",
+      "rarity": "legendary",
+      "race": "All",
+      "level": 1,
+      "price": 50000000,
+      "bonus": {
+        "atk": 20,
+        "def": 20,
+        "hp": 300
+      },
+      "setId": "council_atk",
+      "setName": "Attack Council Set",
+      "setTotal": 6,
+      "setBonus": {
+        "atk": 100,
+        "def": 50,
+        "hp": 1200
+      },
+      "description": "ATK+20 DEF+20 HP+300 | Full Set 6/6: ATK+100 DEF+50 HP+1200",
+      "enhanceable": true
+    },
+    {
+      "id": "council_def_helmet",
+      "name": "Defense Council Set Helmet",
+      "emoji": "🛡️",
+      "type": "helmet",
+      "rarity": "legendary",
+      "race": "All",
+      "level": 1,
+      "price": 50000000,
+      "bonus": {
+        "atk": 20,
+        "def": 20,
+        "hp": 300
+      },
+      "setId": "council_def",
+      "setName": "Defense Council Set",
+      "setTotal": 6,
+      "setBonus": {
+        "atk": 50,
+        "def": 100,
+        "hp": 1200
+      },
+      "description": "ATK+20 DEF+20 HP+300 | Full Set 6/6: ATK+50 DEF+100 HP+1200",
+      "enhanceable": true
+    },
+    {
+      "id": "council_def_armor",
+      "name": "Defense Council Set Armor",
+      "emoji": "🛡️",
+      "type": "armor",
+      "rarity": "legendary",
+      "race": "All",
+      "level": 1,
+      "price": 50000000,
+      "bonus": {
+        "atk": 20,
+        "def": 20,
+        "hp": 300
+      },
+      "setId": "council_def",
+      "setName": "Defense Council Set",
+      "setTotal": 6,
+      "setBonus": {
+        "atk": 50,
+        "def": 100,
+        "hp": 1200
+      },
+      "description": "ATK+20 DEF+20 HP+300 | Full Set 6/6: ATK+50 DEF+100 HP+1200",
+      "enhanceable": true
+    },
+    {
+      "id": "council_def_gloves",
+      "name": "Defense Council Set Gloves",
+      "emoji": "🛡️",
+      "type": "gloves",
+      "rarity": "legendary",
+      "race": "All",
+      "level": 1,
+      "price": 50000000,
+      "bonus": {
+        "atk": 20,
+        "def": 20,
+        "hp": 300
+      },
+      "setId": "council_def",
+      "setName": "Defense Council Set",
+      "setTotal": 6,
+      "setBonus": {
+        "atk": 50,
+        "def": 100,
+        "hp": 1200
+      },
+      "description": "ATK+20 DEF+20 HP+300 | Full Set 6/6: ATK+50 DEF+100 HP+1200",
+      "enhanceable": true
+    },
+    {
+      "id": "council_def_pants",
+      "name": "Defense Council Set Pants",
+      "emoji": "🛡️",
+      "type": "pants",
+      "rarity": "legendary",
+      "race": "All",
+      "level": 1,
+      "price": 50000000,
+      "bonus": {
+        "atk": 20,
+        "def": 20,
+        "hp": 300
+      },
+      "setId": "council_def",
+      "setName": "Defense Council Set",
+      "setTotal": 6,
+      "setBonus": {
+        "atk": 50,
+        "def": 100,
+        "hp": 1200
+      },
+      "description": "ATK+20 DEF+20 HP+300 | Full Set 6/6: ATK+50 DEF+100 HP+1200",
+      "enhanceable": true
+    },
+    {
+      "id": "council_def_boots",
+      "name": "Defense Council Set Boots",
+      "emoji": "🛡️",
+      "type": "boots",
+      "rarity": "legendary",
+      "race": "All",
+      "level": 1,
+      "price": 50000000,
+      "bonus": {
+        "atk": 20,
+        "def": 20,
+        "hp": 300
+      },
+      "setId": "council_def",
+      "setName": "Defense Council Set",
+      "setTotal": 6,
+      "setBonus": {
+        "atk": 50,
+        "def": 100,
+        "hp": 1200
+      },
+      "description": "ATK+20 DEF+20 HP+300 | Full Set 6/6: ATK+50 DEF+100 HP+1200",
+      "enhanceable": true
+    },
+    {
+      "id": "council_def_cape",
+      "name": "Defense Council Set Cape",
+      "emoji": "🛡️",
+      "type": "mantle",
+      "rarity": "legendary",
+      "race": "All",
+      "level": 1,
+      "price": 50000000,
+      "bonus": {
+        "atk": 20,
+        "def": 20,
+        "hp": 300
+      },
+      "setId": "council_def",
+      "setName": "Defense Council Set",
+      "setTotal": 6,
+      "setBonus": {
+        "atk": 50,
+        "def": 100,
+        "hp": 1200
+      },
+      "description": "ATK+20 DEF+20 HP+300 | Full Set 6/6: ATK+50 DEF+100 HP+1200",
+      "enhanceable": true
+    },
+    {
+      "id": "council_sup_helmet",
+      "name": "Support Council Set Helmet",
+      "emoji": "🤝",
+      "type": "helmet",
+      "rarity": "legendary",
+      "race": "All",
+      "level": 1,
+      "price": 50000000,
+      "bonus": {
+        "atk": 20,
+        "def": 20,
+        "hp": 300
+      },
+      "setId": "council_sup",
+      "setName": "Support Council Set",
+      "setTotal": 6,
+      "setBonus": {
+        "atk": 70,
+        "def": 70,
+        "hp": 1200
+      },
+      "description": "ATK+20 DEF+20 HP+300 | Full Set 6/6: ATK+70 DEF+70 HP+1200",
+      "enhanceable": true
+    },
+    {
+      "id": "council_sup_armor",
+      "name": "Support Council Set Armor",
+      "emoji": "🤝",
+      "type": "armor",
+      "rarity": "legendary",
+      "race": "All",
+      "level": 1,
+      "price": 50000000,
+      "bonus": {
+        "atk": 20,
+        "def": 20,
+        "hp": 300
+      },
+      "setId": "council_sup",
+      "setName": "Support Council Set",
+      "setTotal": 6,
+      "setBonus": {
+        "atk": 70,
+        "def": 70,
+        "hp": 1200
+      },
+      "description": "ATK+20 DEF+20 HP+300 | Full Set 6/6: ATK+70 DEF+70 HP+1200",
+      "enhanceable": true
+    },
+    {
+      "id": "council_sup_gloves",
+      "name": "Support Council Set Gloves",
+      "emoji": "🤝",
+      "type": "gloves",
+      "rarity": "legendary",
+      "race": "All",
+      "level": 1,
+      "price": 50000000,
+      "bonus": {
+        "atk": 20,
+        "def": 20,
+        "hp": 300
+      },
+      "setId": "council_sup",
+      "setName": "Support Council Set",
+      "setTotal": 6,
+      "setBonus": {
+        "atk": 70,
+        "def": 70,
+        "hp": 1200
+      },
+      "description": "ATK+20 DEF+20 HP+300 | Full Set 6/6: ATK+70 DEF+70 HP+1200",
+      "enhanceable": true
+    },
+    {
+      "id": "council_sup_pants",
+      "name": "Support Council Set Pants",
+      "emoji": "🤝",
+      "type": "pants",
+      "rarity": "legendary",
+      "race": "All",
+      "level": 1,
+      "price": 50000000,
+      "bonus": {
+        "atk": 20,
+        "def": 20,
+        "hp": 300
+      },
+      "setId": "council_sup",
+      "setName": "Support Council Set",
+      "setTotal": 6,
+      "setBonus": {
+        "atk": 70,
+        "def": 70,
+        "hp": 1200
+      },
+      "description": "ATK+20 DEF+20 HP+300 | Full Set 6/6: ATK+70 DEF+70 HP+1200",
+      "enhanceable": true
+    },
+    {
+      "id": "council_sup_boots",
+      "name": "Support Council Set Boots",
+      "emoji": "🤝",
+      "type": "boots",
+      "rarity": "legendary",
+      "race": "All",
+      "level": 1,
+      "price": 50000000,
+      "bonus": {
+        "atk": 20,
+        "def": 20,
+        "hp": 300
+      },
+      "setId": "council_sup",
+      "setName": "Support Council Set",
+      "setTotal": 6,
+      "setBonus": {
+        "atk": 70,
+        "def": 70,
+        "hp": 1200
+      },
+      "description": "ATK+20 DEF+20 HP+300 | Full Set 6/6: ATK+70 DEF+70 HP+1200",
+      "enhanceable": true
+    },
+    {
+      "id": "council_sup_cape",
+      "name": "Support Council Set Cape",
+      "emoji": "🤝",
+      "type": "mantle",
+      "rarity": "legendary",
+      "race": "All",
+      "level": 1,
+      "price": 50000000,
+      "bonus": {
+        "atk": 20,
+        "def": 20,
+        "hp": 300
+      },
+      "setId": "council_sup",
+      "setName": "Support Council Set",
+      "setTotal": 6,
+      "setBonus": {
+        "atk": 70,
+        "def": 70,
+        "hp": 1200
+      },
+      "description": "ATK+20 DEF+20 HP+300 | Full Set 6/6: ATK+70 DEF+70 HP+1200",
+      "enhanceable": true
     }
   ]
-}
+}

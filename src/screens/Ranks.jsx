@@ -57,8 +57,20 @@ export default function Ranks() {
         apiGetLeaderboard()
       ])
       setArchonData(archonRes)
-      setLeaderboardData(leaderboardRes.board || [])
+      const board = leaderboardRes.board || []
+      setLeaderboardData(board)
       useGameStore.getState().setArchons(archonRes.archons)
+
+      // Calculate and store player's PvP rank within their race
+      const { player } = useGameStore.getState()
+      if (player.race) {
+        const racePlayers = board
+          .filter(p => p.race === player.race)
+          .sort((a, b) => (b.totalMinutes || 0) - (a.totalMinutes || 0))
+        const myIdx = racePlayers.findIndex(p => p.username?.toLowerCase() === player.name?.toLowerCase())
+        const rank = myIdx !== -1 ? myIdx + 1 : null
+        useGameStore.getState().setPvpRank(rank && rank <= 3 ? rank : null)
+      }
     } catch (e) {
       console.error(e)
     } finally {
