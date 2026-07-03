@@ -71,6 +71,15 @@ export default function Main() {
   const [showMailbox, setShowMailbox] = useState(false)
   const [npcInitialView, setNpcInitialView] = useState('lobby')
 
+  // Register global back-button bridge for Capacitor hardware back key
+  useEffect(() => {
+    if (showNpcModal) {
+      window.__closeNpcModal = () => setShowNpcModal(false)
+    } else {
+      window.__closeNpcModal = null
+    }
+    return () => { window.__closeNpcModal = null }
+  }, [showNpcModal])
 
   const stats   = getStats()
   const expMax  = getExpToNext()

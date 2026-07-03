@@ -43,10 +43,17 @@ export default function App() {
   // Capacitor hardware back button handler
   useEffect(() => {
     const listener = CapApp.addListener('backButton', () => {
+      // 1. Lek NPC modal lagi terbuka → tutup dhisik
+      if (typeof window.__closeNpcModal === 'function') {
+        window.__closeNpcModal()
+        return
+      }
       const state = useGameStore.getState()
+      // 2. Lek dudu main screen → balik ke main
       if (state.screen !== 'main') {
         state.setScreen('main')
       } else {
+        // 3. Wes nang main → tanya confirm exit
         const confirmExit = window.confirm(t('confirm_exit', 'Are you sure you want to logout / exit app?', state.player))
         if (confirmExit) {
           CapApp.exitApp()
