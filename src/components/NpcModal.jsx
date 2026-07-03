@@ -336,15 +336,42 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                 <div style={styles.statusLabel}>ROLE</div>
                 <div style={styles.statusVal}>Weapon NPC</div>
               </div>
+              {/* Price Table */}
               <div style={{ background: 'rgba(0,229,255,0.06)', border: '1px solid rgba(0,229,255,0.2)', borderRadius: 10, padding: 14 }}>
-                <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: '#00e5ff', fontWeight: 800, marginBottom: 10 }}>SERVICES</div>
-                <ul style={{ ...styles.npcDialog, background: 'transparent', border: 'none', padding: 0, margin: 0, fontSize: 13, color: '#e0f4ff', listStyle: 'none' }}>
-                  <li style={{ marginBottom: 6 }}>⚔️ Menjual <strong>Common Weapon</strong></li>
-                  <li>💰 Membeli semua <strong>Weapon</strong> dari player</li>
-                </ul>
+                <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: '#00e5ff', fontWeight: 800, marginBottom: 10 }}>COMMON WEAPON SHOP</div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#88aadd', marginBottom: 10 }}>Harga sesuai Map/Sektor saat ini</div>
+                {[{ type: 'weapon', label: '⚔️ Weapon', mult: 1.0 }].map(({ type, label, mult }) => {
+                  const BASE = [125000, 225000, 450000, 900000, 1800000]
+                  const sec = Math.min((player.sector || 1) - 1, 4)
+                  const price = Math.round(BASE[sec] * mult)
+                  return (
+                    <div key={type} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 0', borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+                      <div>
+                        <div style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: '#e0f4ff' }}>{label}</div>
+                        <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#00ff88' }}>{price.toLocaleString()} CRD</div>
+                      </div>
+                      <button
+                        style={{ background: 'linear-gradient(135deg,#00e5ff,#0088bb)', border: 'none', borderRadius: 6, color: '#000', fontFamily: 'var(--font-title)', fontWeight: 800, fontSize: 12, padding: '7px 14px', cursor: 'pointer' }}
+                        onClick={() => { useGameStore.getState().buyFromNpc(type); }}
+                      >BUY</button>
+                    </div>
+                  )
+                })}
               </div>
-              <div style={{ background: 'rgba(255, 204, 0, 0.08)', border: '1px dashed rgba(255,204,0,0.3)', borderRadius: 8, padding: '10px 14px', fontFamily: 'var(--font-mono)', fontSize: 12, color: '#ffcc00' }}>
-                🔔 Fitur jual-beli Weapon tersedia di tab <strong>MARKET</strong> (coming soon).
+              {/* Price Reference by Map */}
+              <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, padding: 12 }}>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#88aadd', marginBottom: 8, fontWeight: 700 }}>HARGA REFERENSI PER MAP</div>
+                {[
+                  { map: '🌱 Map 1 (Lv.1-12)', weapon: '125,000' },
+                  { map: '🌿 Map 2 (Lv.13-25)', weapon: '225,000' },
+                  { map: '⚙️ Map 3 (Lv.26-38)', weapon: '450,000' },
+                  { map: '🔥 Map 4 (Lv.39-52)', weapon: '900,000' },
+                  { map: '☢️ Map 5 (Lv.53-66)', weapon: '1,800,000' },
+                ].map((m, i) => (
+                  <div key={i} style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-mono)', fontSize: 11, padding: '3px 0', color: '#e0f4ff' }}>
+                    <span>{m.map}</span><span style={{ color: '#ffcc00' }}>{m.weapon} CRD</span>
+                  </div>
+                ))}
               </div>
             </div>
           )}
@@ -360,15 +387,49 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                 <div style={styles.statusLabel}>ROLE</div>
                 <div style={styles.statusVal}>Armor NPC</div>
               </div>
+              {/* Buy Shop */}
               <div style={{ background: 'rgba(0,229,255,0.06)', border: '1px solid rgba(0,229,255,0.2)', borderRadius: 10, padding: 14 }}>
-                <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: '#00e5ff', fontWeight: 800, marginBottom: 10 }}>SERVICES</div>
-                <ul style={{ ...styles.npcDialog, background: 'transparent', border: 'none', padding: 0, margin: 0, fontSize: 13, color: '#e0f4ff', listStyle: 'none' }}>
-                  <li style={{ marginBottom: 6 }}>🛡️ Menjual <strong>Common Armor &amp; Shield</strong></li>
-                  <li>💰 Membeli semua <strong>Armor &amp; Shield</strong> dari player</li>
-                </ul>
+                <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: '#00e5ff', fontWeight: 800, marginBottom: 10 }}>COMMON ARMOR SHOP</div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#88aadd', marginBottom: 6 }}>Harga sesuai Map/Sektor saat ini</div>
+                {[
+                  { type: 'armor', label: '🛡️ Armor', mult: 1.0 },
+                  { type: 'shield', label: '🛡️ Shield', mult: 0.8 },
+                  { type: 'helmet', label: '🪖 Helmet', mult: 0.5 },
+                  { type: 'pants', label: '👖 Pants', mult: 0.8 },
+                  { type: 'gloves', label: '🧎 Gloves', mult: 0.4 },
+                  { type: 'boots', label: '👢 Boots', mult: 0.4 },
+                ].map(({ type, label, mult }) => {
+                  const BASE = [125000, 225000, 450000, 900000, 1800000]
+                  const sec = Math.min((player.sector || 1) - 1, 4)
+                  const price = Math.round(BASE[sec] * mult)
+                  return (
+                    <div key={type} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '6px 0', borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+                      <div>
+                        <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#e0f4ff' }}>{label}</div>
+                        <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#00ff88' }}>{price.toLocaleString()} CRD</div>
+                      </div>
+                      <button
+                        style={{ background: 'linear-gradient(135deg,#00e5ff,#0088bb)', border: 'none', borderRadius: 6, color: '#000', fontFamily: 'var(--font-title)', fontWeight: 800, fontSize: 11, padding: '6px 12px', cursor: 'pointer' }}
+                        onClick={() => { useGameStore.getState().buyFromNpc(type); }}
+                      >BUY</button>
+                    </div>
+                  )
+                })}
               </div>
-              <div style={{ background: 'rgba(255, 204, 0, 0.08)', border: '1px dashed rgba(255,204,0,0.3)', borderRadius: 8, padding: '10px 14px', fontFamily: 'var(--font-mono)', fontSize: 12, color: '#ffcc00' }}>
-                🔔 Fitur jual-beli Armor tersedia di tab <strong>MARKET</strong> (coming soon).
+              {/* Price Reference */}
+              <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, padding: 12 }}>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#88aadd', marginBottom: 6, fontWeight: 700 }}>HARGA PER MAP (ARMOR)</div>
+                {[
+                  { map: '🌱 Map 1', armor: '125K', helmet: '62.5K', pants: '100K', gloves: '50K', boots: '50K', shield: '100K' },
+                  { map: '🌿 Map 2', armor: '225K', helmet: '112.5K', pants: '180K', gloves: '90K', boots: '90K', shield: '180K' },
+                  { map: '⚙️ Map 3', armor: '450K', helmet: '225K', pants: '360K', gloves: '180K', boots: '180K', shield: '360K' },
+                  { map: '🔥 Map 4', armor: '900K', helmet: '450K', pants: '720K', gloves: '360K', boots: '360K', shield: '720K' },
+                  { map: '☢️ Map 5', armor: '1.8M', helmet: '900K', pants: '1.44M', gloves: '720K', boots: '720K', shield: '1.44M' },
+                ].map((m, i) => (
+                  <div key={i} style={{ fontFamily: 'var(--font-mono)', fontSize: 10, padding: '3px 0', color: '#e0f4ff', borderTop: i > 0 ? '1px solid rgba(255,255,255,0.05)' : 'none' }}>
+                    <span style={{ color: '#88aadd' }}>{m.map}</span> — Armor:<span style={{ color: '#ffcc00' }}>{m.armor}</span> Helmet:<span style={{ color: '#ffcc00' }}>{m.helmet}</span> Pants:<span style={{ color: '#ffcc00' }}>{m.pants}</span> Gloves:<span style={{ color: '#ffcc00' }}>{m.gloves}</span> Boots:<span style={{ color: '#ffcc00' }}>{m.boots}</span> Shield:<span style={{ color: '#ffcc00' }}>{m.shield}</span>
+                  </div>
+                ))}
               </div>
             </div>
           )}

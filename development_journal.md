@@ -116,3 +116,34 @@ This journal tracks all major development milestones, technical optimizations, b
   - Ditambahkan tab **NPCs** di `LibraryModal.jsx` (📖 Database & Guides) berisi daftar lengkap 8 NPC beserta fungsinya.
   - Tab NPCs disisipkan di antara tab **Zones** dan **System**.
   - Master Artisan entry diperbarui dengan keterangan faction-exclusive craft.
+
+## Milestone 8: NPC Shop, Drop Rate, & Respawn Database
+- **NPC Equipment Shop (Arsenal & Armory)**:
+  - Mengimplementasikan `buyFromNpc` di `gameStore.js`.
+  - Arsenal Keeper dan Armory Keeper sekarang fungsional menjual Common Equipment sesuai dengan level map/sektor player saat ini (Map 1 sampai Map 5).
+  - Harga beli Common didasarkan pada base weapon price per Map tier (125K, 225K, 450K, 900K, 1.8M CRD) dikalikan dengan multiplier tipe equipment:
+    - Weapon: 1.0x
+    - Helmet: 0.5x
+    - Armor: 1.0x
+    - Pants: 0.8x
+    - Gloves: 0.4x
+    - Boots: 0.4x
+    - Shield: 0.8x
+- **Equipment Sell Prices**:
+  - Mengubah logic `sellItem` di `gameStore.js` agar memberikan CRD (bukan Anium).
+  - Harga jual disesuaikan sekitar 20-25% dari harga beli NPC berdasarkan rarity (Common, Uncommon, Rare, Epic).
+  - Cape tidak dapat dijual ke NPC (muncul alert).
+- **Dungeon Entry Limit**:
+  - Menambahkan pembatasan masuk dungeon harian (Daily Dungeon Entry Limit):
+    - Echo Burrow (Dungeon 1): Maks 3 kali/hari.
+    - Infernal Forge (Dungeon 2): Maks 2 kali/hari.
+    - Trinity Core Chamber (Dungeon 3): Maks 1 kali/hari.
+  - Reset counter otomatis setiap jam 00:00 Server Time.
+- **Library Modal Updates**:
+  - Menambahkan tab **Drops** di `LibraryModal.jsx` yang memuat seluruh informasi:
+    - Normal Monster Drop Rate (EXP, CRD, HP/FP Potion, Common Equip)
+    - World Boss Drop Rate & Boss CRD reward (Lumora Behemoth, Sylvan Fanglord, Iron Juggernaut, Pyraxis Overlord, Trinity Overlord)
+    - Dungeon Boss Drop Rate & Boss CRD reward (Echo Burrow, Infernal Forge, Trinity Core Chamber)
+    - NPC Equipment Sell Prices per Rarity
+    - Respawn Database (Normal: 5s, World Boss: 6h, Dungeon Boss: Dungeon Reset)
+    - Dungeon Entry limits & Inventory/Warehouse slot details.

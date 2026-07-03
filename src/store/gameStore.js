@@ -1528,6 +1528,52 @@ export const useGameStore = create(
           }
         })
       },
+      // ── NPC Buy (Common Equipment) ─────────────────────────
+      // Harga beli Common equipment dari NPC, per sektor/level tier
+      buyFromNpc: (type) => {
+        const { player } = get()
+        // Base weapon price per Map (Sector)
+        const NPC_BASE_WEAPON_PRICE = [125000, 225000, 450000, 900000, 1800000]
+        // Multiplier per equipment type (relative to weapon price)
+        const TYPE_MULT = {
+          weapon: 1.0, armor: 1.0, helmet: 0.5,
+          pants: 0.8, shield: 0.8, gloves: 0.4, boots: 0.4,
+          mantle: 0.5
+        }
+        const sector = Math.min((player.sector || 1) - 1, 4)
+        const baseWeapon = NPC_BASE_WEAPON_PRICE[sector]
+        const mult = TYPE_MULT[type]
+        if (mult === undefined) { alert('Item ini tidak dijual di NPC.'); return false }
+        const price = Math.round(baseWeapon * mult)
+
+        if ((player.resources.credits || 0) < price) {
+          alert(`CRD tidak cukup! Dibutuhkan ${price.toLocaleString()} CRD.`)
+          return false
+        }
+
+        // Pick a random Common item of this type from items pool
+        const pool = itemsData.items.filter(it =>
+          it.type === type && it.rarity === 'C' &&
+          (it.race === 'All' || it.race === player.race) &&
+          it.level <= player.level + 5 &&
+          (it.type !== 'weapon' || !it.job || it.job === player.job)
+        )
+        if (pool.length === 0) { alert('Stock habis untuk saat ini.'); return false }
+        const item = pool[Math.floor(Math.random() * pool.length)]
+        const newItem = { ...item, uid: Date.now() }
+        set((s) => ({
+          player: {
+            ...s.player,
+            inventory: [...s.player.inventory, newItem],
+            resources: {
+              ...s.player.resources,
+              credits: (s.player.resources.credits || 0) - price
+            },
+            savedAt: Date.now()
+          }
+        }))
+        return true
+      },
       buyPotions: (count = 10) => {
         const { player } = get()
         const cost = count * 20 // 20 Anium per potion
