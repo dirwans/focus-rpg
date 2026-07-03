@@ -305,7 +305,7 @@ export default function TransparentSprite({
     }
     
     return (
-      <div style={{ width: width || size, height: fillH, overflow: 'hidden', position: 'relative', flexShrink: 0 }}>
+      <div style={{ width: width || size, height: fillH, overflow: 'hidden', position: 'relative', flexShrink: 0, zIndex: 1000 }}>
         {displaySrc && (
           <img
             src={displaySrc}
@@ -329,7 +329,7 @@ export default function TransparentSprite({
   }
 
   return (
-    <div style={{ width: width || size, height: height || size, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'visible', filter: 'none', flexShrink: 0 }}>
+    <div style={{ width: width || size, height: height || size, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'visible', filter: 'none', flexShrink: 0, zIndex: 1000 }}>
       {displaySrc && (
         <img
           src={displaySrc}
