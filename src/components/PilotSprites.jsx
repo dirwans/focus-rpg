@@ -1,5 +1,6 @@
 import TransparentSprite from './TransparentSprite'
 import arctronWarriorImg from '../assets/arctron_warrior.png'
+import arctronWarriorBattleImg from '../assets/arctron_warrior_battle.png'
 import arctronRangerImg from '../assets/arctron_ranger.png'
 import arctronSpecialistImg from '../assets/arctron_specialist.png'
 
@@ -49,9 +50,9 @@ function getJobLane(jobId) {
   return 'specialist'
 }
 
-export function ArctronSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false }) {
+export function ArctronSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false, isBattle = false }) {
   const lane = getJobLane(job)
-  let img = arctronWarriorImg
+  let img = isBattle ? arctronWarriorBattleImg : arctronWarriorImg
   let glow = '#00e5ff' // Cyan/Blue for Warrior
   
   if (lane === 'ranger') {
@@ -188,8 +189,8 @@ export function EnemySprite({ size = 60, isBoss = false, isPitBoss = false }) {
   )
 }
 
-export function PilotSprite({ race, job, size = 60, width, height, upperBodyOnly = false, fill = false }) {
-  if (race === 'arctron') return <ArctronSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} />
+export function PilotSprite({ race, job, size = 60, width, height, upperBodyOnly = false, fill = false, isBattle = false }) {
+  if (race === 'arctron') return <ArctronSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} isBattle={isBattle} />
   if (race === 'bionex' || race === 'bionex') return <BionexSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} />
   if (race === 'celestra') return <CelestraSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} />
   return null

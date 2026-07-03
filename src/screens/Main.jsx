@@ -332,7 +332,7 @@ export default function Main() {
                     />
                   )
                 }
-                return <PilotSprite race={player.race} job={player.job} size={player.race === 'arctron' ? 190 : 160} />
+                return <PilotSprite race={player.race} job={player.job} size={player.race === 'arctron' ? 190 : 160} isBattle={true} />
               })()}
               </div>
               <div style={styles.spriteLabel}>{t('pilot_label')}</div>
