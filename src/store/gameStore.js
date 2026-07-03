@@ -63,27 +63,40 @@ function getSector(level) {
   return 8
 }
 
-function randomMob(sectorIdx) {
-  const sector = enemies.sectors[sectorIdx]
+function randomMob(sectorIdx, isDungeon = false) {
+  const sector = isDungeon ? enemies.dungeons[sectorIdx] : enemies.sectors[sectorIdx]
   const mobs = sector.mobs
   return mobs[Math.floor(Math.random() * mobs.length)]
 }
 
-function spawnEnemy(sectorIdx, playerLevel, forceRaid = false) {
-  const sector = enemies.sectors[sectorIdx]
+function spawnEnemy(sectorIdx, playerLevel, forceRaid = false, isDungeon = false) {
+  const sector = isDungeon ? enemies.dungeons[sectorIdx] : enemies.sectors[sectorIdx]
   
+  if (isDungeon) {
+    if (forceRaid) {
+      return { mob: sector.pitBoss, isBoss: true, isPitBoss: true, isCulprit: false, hp: sector.pitBoss.hp }
+    }
+    // 5% chance of dungeon boss spawn
+    if (Math.random() < 0.05) {
+      return { mob: sector.boss, isBoss: true, isPitBoss: false, isCulprit: false, hp: sector.boss.hp }
+    }
+    const baseMob = randomMob(sectorIdx, true)
+    return { mob: baseMob, isBoss: false, isPitBoss: false, isCulprit: false, hp: baseMob.hp }
+  }
+
+  // World Map
   if (forceRaid || Math.random() < 0.01) {
     return { mob: sector.pitBoss, isBoss: true, isPitBoss: true, isCulprit: false, hp: sector.pitBoss.hp }
   }
   
-  const maxLevels = [12, 25, 38, 52, 66, 75, 85, 999]
+  const maxLevels = [12, 25, 38, 52, 66, 999]
   const isMaxLevelForMap = playerLevel === maxLevels[sectorIdx]
   
   if (isMaxLevelForMap || playerLevel % 10 === 0) {
     return { mob: sector.boss, isBoss: true, isPitBoss: false, isCulprit: false, hp: sector.boss.hp }
   }
 
-  const baseMob = randomMob(sectorIdx)
+  const baseMob = randomMob(sectorIdx, false)
   const isCulprit = Math.random() < 0.20
   if (isCulprit) {
     const culpritMob = {
@@ -137,15 +150,45 @@ function getDropTier(seed, mode, isPitBoss, isStageBoss) {
 }
 
 // Reward DETERMINISTIK berdasar lama waktu + stats → semua device hitung sama
-function computeRewards(player, mode, minutes) {
+function computeRewards(player, mode, minutes, selectedZone = 'world') {
   const race = races[player.race]
-  if (!race) return { kills: 0, exp: 0, anium: 0 }
+  if (!race) return { kills: 0, exp: 0, anium: 0, credits: 0 }
   const elapsedSec = Math.max(0, Math.floor(minutes * 60))
+  const isDungeon = selectedZone && selectedZone.startsWith('dungeon_')
+
+  if (isDungeon) {
+    const dungeonIdx = parseInt(selectedZone.split('_')[1]) - 1
+    const dungeon = enemies.dungeons[dungeonIdx]
+    const mobs = dungeon.mobs
+    const avg = (f) => mobs.reduce((a, m) => a + f(m), 0) / mobs.length
+    const avgHp = avg((m) => m.hp) * 1.2
+    const avgDef = avg((m) => m.def)
+    
+    const atk = calcStat('atk', player.upgrades?.atk || 0, player.race)
+    const dps = Math.max(1, atk - avgDef + 3.5) * 1.096
+    const secPerKill = Math.max(2, avgHp / dps)
+    const kills = Math.floor(elapsedSec / secPerKill)
+
+    const baseCrdPerKill = dungeonIdx === 0 ? 3 : dungeonIdx === 1 ? 6 : 12
+    let totalCrdGained = 0
+    for (let i = 0; i < kills; i++) {
+      totalCrdGained += Math.floor(baseCrdPerKill * (0.8 + seededFrac(minutes * 100 + i) * 0.4))
+    }
+
+    return {
+      kills,
+      exp: Math.floor(elapsedSec / 60),
+      anium: 0,
+      credits: totalCrdGained
+    }
+  }
+
   if (mode === 'gather') {
     return {
       kills: 0,
       exp: Math.floor(elapsedSec / 60),
       anium: Math.floor(elapsedSec * 0.72 * race.bonuses.gatherMultiplier),
+      credits: 0
     }
   }
   const sectorIdx = getSector(player.level) - 1
@@ -174,6 +217,7 @@ function computeRewards(player, mode, minutes) {
     kills,
     exp: Math.floor(elapsedSec / 60), // EXP now represents Idle Minutes
     anium: totalAniumGained,
+    credits: 0
   }
 }
 
@@ -221,6 +265,7 @@ const initialTimer = {
   mode: 'fight',   // fight | gather
   startedAt: 0,    // epoch ms — sumber kebenaran countdown (sync antar device)
   endsAt: 0,       // epoch ms
+  selectedZone: 'world', // world | dungeon_1 | dungeon_2 | dungeon_3
 }
 
 const initialBattle = {
@@ -241,6 +286,7 @@ const initialBattle = {
   killStreak: 0,
   sessionExp: 0,
   sessionAnium: 0,
+  sessionCredits: 0,
   levelUps: 0,
 }
 
@@ -321,15 +367,40 @@ export const useGameStore = create(
         if (timer.state === 'running') return
         set({ timer: { ...timer, state: 'idle', mode }, player: { ...get().player, savedAt: Date.now() } })
       },
+      setSelectedZone: (zone) => {
+        const { timer } = get()
+        if (timer.state === 'running') return
+        set({ timer: { ...timer, state: 'idle', selectedZone: zone }, player: { ...get().player, savedAt: Date.now() } })
+      },
 
       startTimer: () => {
         const { player, timer } = get()
         if (!player.race) { set({ showRaceSelect: true }); return }
         if (timer.state !== 'idle') return
         const now = Date.now()
-        const sectorIdx = getSector(player.level) - 1
-        const sector = enemies.sectors[sectorIdx]
-        const { mob, isBoss, isPitBoss, hp } = spawnEnemy(sectorIdx, player.level)
+        
+        const isDungeon = timer.selectedZone && timer.selectedZone.startsWith('dungeon_')
+        let sector, mob, isBoss, isPitBoss, hp
+        
+        if (isDungeon) {
+          const dungeonIdx = parseInt(timer.selectedZone.split('_')[1]) - 1
+          sector = enemies.dungeons[dungeonIdx]
+          if (player.level < sector.minLevel) return
+          const spawned = spawnEnemy(dungeonIdx, player.level, false, true)
+          mob = spawned.mob
+          isBoss = spawned.isBoss
+          isPitBoss = spawned.isPitBoss
+          hp = spawned.hp
+        } else {
+          const sectorIdx = getSector(player.level) - 1
+          sector = enemies.sectors[sectorIdx]
+          const spawned = spawnEnemy(sectorIdx, player.level, false, false)
+          mob = spawned.mob
+          isBoss = spawned.isBoss
+          isPitBoss = spawned.isPitBoss
+          hp = spawned.hp
+        }
+
         const playerMaxHp = get().getStats().hp
         const playerMaxFp = 200
         set({
@@ -379,7 +450,7 @@ export const useGameStore = create(
         else get()._gatherTick()
         // reward DETERMINISTIK (sama di semua device) — override angka cosmetic
         const total = timer.selectedMinutes * 60
-        const r = computeRewards(player, timer.mode, (total - remaining) / 60)
+        const r = computeRewards(player, timer.mode, (total - remaining) / 60, timer.selectedZone)
 
         // Apply death penalties
         const deaths = battle.deaths || 0
@@ -390,6 +461,7 @@ export const useGameStore = create(
         const finalKills = Math.max(0, r.kills - deathPenaltyKills)
         const finalExp = Math.max(0, r.exp - deathPenaltyExp)
         const finalAnium = Math.max(0, r.anium - deathPenaltyAnium)
+        const finalCredits = Math.max(0, (r.credits || 0) - (deaths * 5))
 
         set((s) => ({
           timer: { ...s.timer, secondsLeft: remaining },
@@ -397,7 +469,8 @@ export const useGameStore = create(
             ...s.battle, 
             kills: finalKills, 
             sessionExp: finalExp, 
-            sessionAnium: finalAnium 
+            sessionAnium: finalAnium,
+            sessionCredits: finalCredits
           },
         }))
       },
@@ -539,6 +612,9 @@ export const useGameStore = create(
           dmgToEnemy = isCrit ? Math.floor(rawDmg * 1.5) : rawDmg
         }
         let newEnemyHp = battle.enemyHp - dmgToEnemy
+        if (newEnemyHp > 0 && mob.regen) {
+          newEnemyHp = Math.min(battle.enemyMaxHp, newEnemyHp + mob.regen)
+        }
         let nextMob = mob, nextIsBoss = battle.isBoss, nextMaxHp = battle.enemyMaxHp
 
         if (player.equipment?.weapon?.specialProperty === 'vampire') {
@@ -565,7 +641,7 @@ export const useGameStore = create(
             newLog.push(`💨 MISS! Serangan ${mob.name} berhasil dihindari! (Dodge)`)
           } else {
             // Enemy crit chance scales by mob grade (Sector/Boss/Culprit)
-            const enemyCritChance = battle.isPitBoss ? 0.22 : battle.isBoss ? 0.18 : battle.isCulprit ? 0.14 : 0.08
+            const enemyCritChance = mob.critical !== undefined ? (mob.critical / 100) : (battle.isPitBoss ? 0.22 : battle.isBoss ? 0.18 : battle.isCulprit ? 0.14 : 0.08)
             const isEnemyCrit = Math.random() < enemyCritChance
             
             // Damage Formula: Final ATK - Final DEF
@@ -598,15 +674,15 @@ export const useGameStore = create(
                 const skillName = ['engineer', 'mechanist', 'war_engineer', 'bionex_specialist', 'craftsman', 'mental_smith'].includes(player.job) ? 'Repair Matrix' : 'Spiritual Heal'
                 if (newLog.length > 7) newLog = newLog.slice(-7)
                 newLog.push(`✨ [Skill] Pilot menggunakan ${skillName}! (+${healAmount} HP, -50 FP)`)
-              } else {
-                // FP depleted -> fallback to auto-potion using resources.potions
-                if ((player.resources.potions || 0) > 0) {
-                  const healAmount = 1000
+              } else if (player.settings?.autoHpPotion === 'ON') {
+                // Try fallback to potion if FP is empty
+                if (player.resources.potions > 0) {
+                  const healAmount = Math.floor(playerMaxHp * 0.30)
                   nextPlayerHp = Math.min(playerMaxHp, nextPlayerHp + healAmount)
                   const remainingPotions = Math.max(0, player.resources.potions - 1)
                   
                   if (newLog.length > 7) newLog = newLog.slice(-7)
-                  newLog.push(`🧪 [Auto-Potion] Menggunakan Potion! (+${healAmount} HP, Sisa: ${remainingPotions})`)
+                  newLog.push(`🧪 [Auto-Potion] Menggunakan Potion! (+${healAmount} Shield HP, Sisa: ${remainingPotions})`)
                   
                   set({
                     player: {
@@ -618,15 +694,12 @@ export const useGameStore = create(
                       savedAt: Date.now()
                     }
                   })
-                } else {
-                  if (newLog.length > 7) newLog = newLog.slice(-7)
-                  newLog.push(`⚠️ FP tidak cukup & HP Potion habis!`)
                 }
               }
-            } else {
-              // Direct auto-potion for non-healing jobs using resources.potions
-              if ((player.resources.potions || 0) > 0) {
-                const healAmount = 1000
+            } else if (player.settings?.autoHpPotion === 'ON') {
+              // Non-healer classes potion check
+              if (player.resources.potions > 0) {
+                const healAmount = Math.floor(playerMaxHp * 0.30)
                 nextPlayerHp = Math.min(playerMaxHp, nextPlayerHp + healAmount)
                 const remainingPotions = Math.max(0, player.resources.potions - 1)
                 
@@ -663,8 +736,11 @@ export const useGameStore = create(
           if (newEnemyHp <= 0) {
             if (newLog.length > 7) newLog = newLog.slice(-7)
             newLog.push(battle.isPitBoss ? `☢️ RAID CLEARED! ${mob.emoji}` : battle.isBoss ? `🏆 STAGE BOSS SLAIN! ${mob.emoji}` : `⚔️ Killed ${mob.emoji} ${mob.name}`)
-            const sectorIdx = getSector(player.level) - 1
-            const next = spawnEnemy(sectorIdx, player.level)
+            
+            const isDungeon = timer.selectedZone && timer.selectedZone.startsWith('dungeon_')
+            const zoneIdx = isDungeon ? (parseInt(timer.selectedZone.split('_')[1]) - 1) : (getSector(player.level) - 1)
+            const next = spawnEnemy(zoneIdx, player.level, false, isDungeon)
+            
             nextMob = next.mob; nextIsBoss = next.isBoss; nextMaxHp = next.hp; newEnemyHp = next.hp
             if (next.isPitBoss) newLog.push(`☢️ RAID INCOMING: ${next.mob.emoji} ${next.mob.name}!`)
             else if (next.isBoss) newLog.push(`⚠️ STAGE BOSS: ${next.mob.emoji} ${next.mob.name}!`)
@@ -707,7 +783,7 @@ export const useGameStore = create(
         const { player, timer, battle } = get()
         if (timer.state !== 'running') return // hindari double-complete (sudah completed via sync)
 
-        const r = computeRewards(player, timer.mode || 'fight', timer.selectedMinutes)
+        const r = computeRewards(player, timer.mode || 'fight', timer.selectedMinutes, timer.selectedZone)
         const today = new Date().toDateString()
         const isNewDay = player.lastSessionDate !== today
         const newStreak = isNewDay ? player.streak + 1 : player.streak
@@ -721,6 +797,7 @@ export const useGameStore = create(
         const finalKills = Math.max(0, r.kills - deathPenaltyKills)
         const finalExp = Math.max(0, r.exp - deathPenaltyExp)
         const finalAnium = Math.max(0, r.anium - deathPenaltyAnium)
+        const finalCredits = r.credits || 0
 
         let newExp = player.exp + finalExp
         let newLevel = player.level
@@ -754,50 +831,55 @@ export const useGameStore = create(
             dropLog += `\n⚡ ELITE MONSTER appeared! Bonus drop!`
         }
         
-        // Combat drops: 1 drop, or 2 drops if Boss/Elite is defeated
-        const combatDropsCount = (killedPitBoss || killedElite) ? 2 : 1
-        
-        for (let i = 0; i < combatDropsCount; i++) {
-            const seed = timer.startedAt + i
-            const tier = getDropTier(seed, 'fight', killedPitBoss, effectiveStageBoss)
+        const isDungeon = timer.selectedZone && timer.selectedZone.startsWith('dungeon_')
+        const killedBoss = (killedPitBoss || killedStageBoss) && finalKills > 0
+
+        if (!isDungeon || killedBoss) {
+            // Combat drops: 1 drop, or 2 drops if Boss/Elite is defeated
+            const combatDropsCount = (killedPitBoss || killedElite) ? 2 : 1
             
-            if (tier && tier !== 'material') {
-                const pool = itemsData.items.filter(it => 
-                  (it.type === 'weapon' || it.type === 'armor' || it.type === 'shield' || it.type === 'helmet' || it.type === 'mantle' || it.type === 'gloves' || it.type === 'boots' || it.type === 'pants' || it.type === 'amulet' || it.type === 'ring') &&
-                  it.rarity === tier &&
-                  (it.race === 'All' || it.race === player.race) &&
-                  it.level <= player.level + 10 &&
-                  (it.type !== 'weapon' || !it.job || it.job === player.job) &&
-                  (it.minStage === undefined || it.minStage <= fightSector)
-                )
+            for (let i = 0; i < combatDropsCount; i++) {
+                const seed = timer.startedAt + i
+                const tier = getDropTier(seed, 'fight', killedPitBoss, effectiveStageBoss)
                 
-                if (pool.length > 0) {
-                    const drop = pool[Math.floor(seededFrac(seed * 1.5) * pool.length)]
-                    if (drop) {
-                        newInventory.push({ ...drop, uid: Date.now() + i })
-                        dropLog += ` \n🎁 Got: ${drop.emoji} ${drop.name}`
+                if (tier && tier !== 'material') {
+                    const pool = itemsData.items.filter(it => 
+                      (it.type === 'weapon' || it.type === 'armor' || it.type === 'shield' || it.type === 'helmet' || it.type === 'mantle' || it.type === 'gloves' || it.type === 'boots' || it.type === 'pants' || it.type === 'amulet' || it.type === 'ring') &&
+                      it.rarity === tier &&
+                      (it.race === 'All' || it.race === player.race) &&
+                      it.level <= player.level + 10 &&
+                      (it.type !== 'weapon' || !it.job || it.job === player.job) &&
+                      (it.minStage === undefined || it.minStage <= fightSector)
+                    )
+                    
+                    if (pool.length > 0) {
+                        const drop = pool[Math.floor(seededFrac(seed * 1.5) * pool.length)]
+                        if (drop) {
+                            newInventory.push({ ...drop, uid: Date.now() + i })
+                            dropLog += ` \n🎁 Got: ${drop.emoji} ${drop.name}`
+                        }
                     }
                 }
             }
-        }
 
-        // Material/Consumable drop: always 1 drop per session
-        const matSeed = timer.startedAt + combatDropsCount
-        const matPool = itemsData.items.filter(it =>
-          (it.type === 'material' || it.type === 'consumable') &&
-          (it.minStage === undefined || it.minStage <= fightSector)
-        )
-        if (matPool.length > 0) {
-            const drop = matPool[Math.floor(seededFrac(matSeed * 1.5) * matPool.length)]
-            if (drop) {
-                newInventory.push({ ...drop, uid: Date.now() + combatDropsCount })
-                dropLog += ` \n⛏️ Gathered: ${drop.emoji} ${drop.name}`
+            // Material/Consumable drop: always 1 drop per session
+            const matSeed = timer.startedAt + 10
+            const matPool = itemsData.items.filter(it =>
+              (it.type === 'material' || it.type === 'consumable') &&
+              (it.minStage === undefined || it.minStage <= fightSector)
+            )
+            if (matPool.length > 0) {
+                const drop = matPool[Math.floor(seededFrac(matSeed * 1.5) * matPool.length)]
+                if (drop) {
+                    newInventory.push({ ...drop, uid: Date.now() + 10 })
+                    dropLog += ` \n⛏️ Gathered: ${drop.emoji} ${drop.name}`
+                }
             }
         }
 
         const finalLog = []
         if (levelUps > 0) finalLog.push(`🆙 LEVEL UP! LV.${newLevel} — Sector ${newSector}!`)
-        finalLog.push(`✅ Done! ${finalKills} kills | +${finalAnium}⬡ | +${finalExp} Menit${deaths > 0 ? ` (Died ${deaths} times)` : ''}${dropLog}`)
+        finalLog.push(`✅ Done! ${finalKills} kills | +${finalAnium}⬡ | +${finalCredits} Credits | +${finalExp} Menit${deaths > 0 ? ` (Died ${deaths} times)` : ''}${dropLog}`)
 
         set((s) => ({
           timer: { ...s.timer, state: 'completed', secondsLeft: 0 },
@@ -807,7 +889,11 @@ export const useGameStore = create(
             level: newLevel,
             sector: newSector,
             highestSector: Math.max(s.player.highestSector, newSector),
-            resources: { ...s.player.resources, anium: s.player.resources.anium + finalAnium },
+            resources: { 
+              ...s.player.resources, 
+              anium: s.player.resources.anium + finalAnium,
+              credits: s.player.resources.credits + finalCredits
+            },
             streak: newStreak,
             lastSessionDate: today,
             totalSessions: s.player.totalSessions + 1,

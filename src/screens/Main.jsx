@@ -57,6 +57,7 @@ export default function Main() {
   const resetTimer   = useGameStore((s) => s.resetTimer)
   const setTimerMinutes = useGameStore((s) => s.setTimerMinutes)
   const setMode      = useGameStore((s) => s.setMode)
+  const setSelectedZone = useGameStore((s) => s.setSelectedZone)
   const openRaceSelect = useGameStore((s) => s.openRaceSelect)
 
   const { user, signOut } = useAuthStore()
@@ -73,8 +74,15 @@ export default function Main() {
   const expMax  = getExpToNext()
   const expPct  = Math.floor((player.exp / expMax) * 100)
   const race    = player.race ? races[player.race] : null
-  const sectorIdx = Math.min(player.sector, enemies.sectors.length) - 1
-  const enemy   = enemies.sectors[sectorIdx]
+  const isDungeon = timer.selectedZone && timer.selectedZone.startsWith('dungeon_')
+  let enemy
+  if (isDungeon) {
+    const dungeonIdx = parseInt(timer.selectedZone.split('_')[1]) - 1
+    enemy = enemies.dungeons[dungeonIdx]
+  } else {
+    const sectorIdx = Math.min(player.sector, enemies.sectors.length) - 1
+    enemy = enemies.sectors[sectorIdx]
+  }
   const isRunning = timer.state === 'running'
   const isDone    = timer.state === 'completed'
 
@@ -243,7 +251,7 @@ export default function Main() {
         <div style={styles.activeHeader}>
           <div style={styles.activeStageBadge}>📍 {enemy.name}</div>
           <div style={styles.activeSectorLabel}>
-            {player.sector <= 5 ? `MAP ${player.sector}` : `DUNGEON ${player.sector - 5}`}
+            {isDungeon ? `DUNGEON ${timer.selectedZone.split('_')[1]}` : `MAP ${player.sector}`}
           </div>
           <button onClick={handleAbandon} style={styles.smallAbandonBtn}>
             {t('abandon_btn')}
@@ -610,6 +618,42 @@ export default function Main() {
         ))}
       </div>
 
+      {/* Target Zone Selector */}
+      {!isRunning && !isDone && player.race && (
+        <div style={styles.zoneSelectorContainer}>
+          <div style={styles.zoneSelectorLabel}>📍 Target Zone</div>
+          <div style={styles.zoneRow}>
+            <button 
+              style={(!timer.selectedZone || timer.selectedZone === 'world') ? styles.zoneBtnActive : styles.zoneBtn} 
+              onClick={() => setSelectedZone('world')}
+            >
+              🌍 World Map (Auto)
+            </button>
+            <button 
+              style={timer.selectedZone === 'dungeon_1' ? styles.zoneBtnActive : (player.level < 30 ? styles.zoneBtnLocked : styles.zoneBtn)} 
+              disabled={player.level < 30}
+              onClick={() => setSelectedZone('dungeon_1')}
+            >
+              💀 Echo Burrow {player.level < 30 ? "(Lv.30)" : ""}
+            </button>
+            <button 
+              style={timer.selectedZone === 'dungeon_2' ? styles.zoneBtnActive : (player.level < 50 ? styles.zoneBtnLocked : styles.zoneBtn)} 
+              disabled={player.level < 50}
+              onClick={() => setSelectedZone('dungeon_2')}
+            >
+              🔥 Infernal Forge {player.level < 50 ? "(Lv.50)" : ""}
+            </button>
+            <button 
+              style={timer.selectedZone === 'dungeon_3' ? styles.zoneBtnActive : (player.level < 65 ? styles.zoneBtnLocked : styles.zoneBtn)} 
+              disabled={player.level < 65}
+              onClick={() => setSelectedZone('dungeon_3')}
+            >
+              ⚡ Trinity Core {player.level < 65 ? "(Lv.65)" : ""}
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Faction NPC Access Button */}
       {!isRunning && player.race && (
         <button style={styles.npcBtn} onClick={() => setShowNpcModal(true)}>
@@ -689,5 +733,12 @@ const styles = {
   activeStageBadge: { background: 'rgba(3, 8, 20, 0.95)', border: '1.5px solid var(--neon-glow)', borderRadius: '8px', padding: '6px 12px', fontFamily: 'var(--font-title)', fontSize: 13, color: '#fff', fontWeight: 800, boxShadow: '0 0 8px var(--neon-glow)', textShadow: '0 0 4px #000' },
   activeSectorLabel: { fontFamily: 'var(--font-title)', fontSize: 13, color: 'var(--neon-glow)', fontWeight: 800, textShadow: '0 0 8px var(--neon-glow)', background: 'rgba(3, 8, 20, 0.95)', border: '1.5px solid var(--neon-glow)', borderRadius: '8px', padding: '6px 12px', boxShadow: '0 0 8px var(--neon-glow)' },
   activeGatherBadge: { fontFamily: 'var(--font-mono)', fontSize: 13, color: '#00e5ff', marginTop: 6, fontWeight: 800, zIndex: 2, letterSpacing: 1, background: 'rgba(3, 8, 20, 0.95)', padding: '3px 10px', borderRadius: '6px', border: '1px solid rgba(0, 229, 255, 0.4)', boxShadow: '0 0 8px rgba(0, 229, 255, 0.2)', textShadow: '0 0 4px #000' },
-  activeHealthBarWrapper: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, width: '90%', marginTop: 8, zIndex: 2, background: 'rgba(3, 8, 20, 0.95)', padding: '10px 16px', borderRadius: '10px', border: '1.5px solid rgba(0, 229, 255, 0.35)', boxShadow: '0 0 10px rgba(0,0,0,0.5)', margin: '12px auto', flexShrink: 0 }
+  activeHealthBarWrapper: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, width: '90%', marginTop: 8, zIndex: 2, background: 'rgba(3, 8, 20, 0.95)', padding: '10px 16px', borderRadius: '10px', border: '1.5px solid rgba(0, 229, 255, 0.35)', boxShadow: '0 0 10px rgba(0,0,0,0.5)', margin: '12px auto', flexShrink: 0 },
+  // Zone Selector Styles
+  zoneSelectorContainer: { margin: '0 16px 8px', padding: '10px 12px', background: 'rgba(3, 8, 20, 0.8)', border: '1px solid rgba(0, 229, 255, 0.2)', borderRadius: 10, flexShrink: 0 },
+  zoneSelectorLabel: { fontFamily: 'var(--font-title)', fontSize: 11, color: '#7ab0d0', fontWeight: 800, letterSpacing: 1.5, marginBottom: 8, textTransform: 'uppercase' },
+  zoneRow: { display: 'flex', gap: 6, flexWrap: 'wrap' },
+  zoneBtn: { flex: '1 1 calc(50% - 3px)', padding: '8px 6px', borderRadius: 8, fontFamily: 'var(--font-title)', fontSize: 11, fontWeight: 800, cursor: 'pointer', border: '1px solid rgba(0, 229, 255, 0.2)', background: 'rgba(6, 15, 35, 0.7)', color: '#7ab0d0', transition: 'all 0.2s', letterSpacing: 0.5, textAlign: 'center', minWidth: 0 },
+  zoneBtnActive: { flex: '1 1 calc(50% - 3px)', padding: '8px 6px', borderRadius: 8, fontFamily: 'var(--font-title)', fontSize: 11, fontWeight: 800, cursor: 'pointer', border: '1.5px solid #00e5ff', background: 'linear-gradient(135deg, rgba(0, 80, 204, 0.5) 0%, rgba(0, 168, 255, 0.5) 100%)', color: '#fff', boxShadow: '0 0 10px rgba(0, 229, 255, 0.3)', transition: 'all 0.2s', letterSpacing: 0.5, textAlign: 'center', minWidth: 0 },
+  zoneBtnLocked: { flex: '1 1 calc(50% - 3px)', padding: '8px 6px', borderRadius: 8, fontFamily: 'var(--font-title)', fontSize: 11, fontWeight: 800, cursor: 'not-allowed', border: '1px solid rgba(255, 68, 68, 0.25)', background: 'rgba(6, 15, 35, 0.4)', color: 'rgba(255, 68, 68, 0.5)', transition: 'all 0.2s', letterSpacing: 0.5, textAlign: 'center', minWidth: 0 }
 }
