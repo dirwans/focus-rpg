@@ -21,6 +21,7 @@ export default function LibraryModal({ onClose }) {
           <button style={tab === 'trade' ? styles.tabActive : styles.tab} onClick={() => setTab('trade')}>Trade</button>
           <button style={tab === 'war' ? styles.tabActive : styles.tab} onClick={() => setTab('war')}>War</button>
           <button style={tab === 'zones' ? styles.tabActive : styles.tab} onClick={() => setTab('zones')}>Zones</button>
+          <button style={tab === 'drops' ? styles.tabActive : styles.tab} onClick={() => setTab('drops')}>Drops</button>
           <button style={tab === 'npc' ? styles.tabActive : styles.tab} onClick={() => setTab('npc')}>NPCs</button>
           <button style={tab === 'system' ? styles.tabActive : styles.tab} onClick={() => setTab('system')}>System</button>
           <button style={tab === 'equip' ? styles.tabActive : styles.tab} onClick={() => setTab('equip')}>Equipment</button>
@@ -141,6 +142,115 @@ export default function LibraryModal({ onClose }) {
                   <li>🌍 Tanpa batas minimum level</li>
                   <li>🏆 Buff kemenangan berlaku hingga perang berikutnya.</li>
                 </ul>
+              </div>
+            </div>
+          )}
+
+          {tab === 'drops' && (
+            <div style={styles.section}>
+              <h3 style={styles.sectionTitle}>📦 Drop Rate Database</h3>
+
+              {/* Normal Monster */}
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>👾 Normal Monster Drop</div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#00ff88', fontWeight: 700, marginBottom: 6 }}>GUARANTEED</div>
+                <ul style={styles.list}>
+                  <li>⭐ EXP</li>
+                  <li>💰 CRD <span style={{ color: '#88aadd' }}>(sesuai Map)</span></li>
+                </ul>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#ffcc00', fontWeight: 700, margin: '8px 0 6px' }}>RANDOM DROP</div>
+                <ul style={styles.list}>
+                  <li>❤️ HP Potion — <strong>25%</strong></li>
+                  <li>💙 FP Potion — <strong>10%</strong></li>
+                  <li>⚪ Common Equipment <span style={{ color: '#88aadd', fontSize: 11 }}>(1 Random Part)</span> — <strong>10%</strong></li>
+                </ul>
+                <div style={{ marginTop: 8, fontFamily: 'var(--font-mono)', fontSize: 11, color: '#ff6666' }}>
+                  ❌ Tidak drop Uncommon &bull; Rare &bull; Epic &bull; Divine Crest &bull; Arcanite &bull; Cape Component
+                </div>
+              </div>
+
+              {/* CRD per Map */}
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>💰 CRD Drop — Normal Monster</div>
+                {[
+                  { map: '🌱 Map 1', lvl: 'Lv.1–12', crd: '500 ~ 1,000 CRD' },
+                  { map: '🌿 Map 2', lvl: 'Lv.13–25', crd: '1,500 ~ 3,000 CRD' },
+                  { map: '⚙️ Map 3', lvl: 'Lv.26–38', crd: '4,000 ~ 8,000 CRD' },
+                  { map: '🔥 Map 4', lvl: 'Lv.39–52', crd: '10,000 ~ 18,000 CRD' },
+                  { map: '☢️ Map 5', lvl: 'Lv.53–66', crd: '20,000 ~ 35,000 CRD' },
+                ].map((m, i) => (
+                  <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: i < 4 ? '1px solid rgba(255,255,255,0.07)' : 'none', fontFamily: 'var(--font-mono)', fontSize: 12 }}>
+                    <span>{m.map} <span style={{ color: '#88aadd' }}>({m.lvl})</span></span>
+                    <span style={{ color: '#00ff88', fontWeight: 700 }}>{m.crd}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* World Boss */}
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>👑 World Boss Drop</div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#00ff88', fontWeight: 700, marginBottom: 6 }}>GUARANTEED</div>
+                <ul style={styles.list}>
+                  <li>💰 CRD <span style={{ color: '#88aadd' }}>(sesuai Boss)</span></li>
+                  <li>🎁 1 Random Equipment <span style={{ color: '#88aadd', fontSize: 11 }}>(⚪ Common <strong>atau</strong> 🟢 Uncommon)</span></li>
+                </ul>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#ffcc00', fontWeight: 700, margin: '8px 0 6px' }}>RANDOM DROP</div>
+                <ul style={styles.list}>
+                  <li>🔵 Rare Equipment — <strong>15%</strong></li>
+                  <li>🛡️ Divine Crest — <strong>100%</strong> <span style={{ color: '#88aadd' }}>(1–5 pcs)</span></li>
+                  <li>🦸 Cape Component — <strong>20%</strong></li>
+                  <li>🪨 Arcanite — <strong style={{ color: '#ff4444' }}>0.05%</strong> <span style={{ color: '#ff8888', fontSize: 11 }}>(Super Ultra Rare)</span></li>
+                </ul>
+              </div>
+
+              {/* World Boss CRD */}
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>👑 World Boss CRD</div>
+                {[
+                  { boss: '🌱 Lumora Behemoth', crd: '100,000 ~ 200,000 CRD' },
+                  { boss: '🌿 Sylvan Fanglord', crd: '300,000 ~ 500,000 CRD' },
+                  { boss: '⚙️ Iron Juggernaut', crd: '700,000 ~ 1,000,000 CRD' },
+                  { boss: '🔥 Pyraxis Overlord', crd: '1,500,000 ~ 2,500,000 CRD' },
+                  { boss: '☢️ Trinity Overlord', crd: '4,000,000 ~ 6,000,000 CRD' },
+                ].map((b, i) => (
+                  <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: i < 4 ? '1px solid rgba(255,255,255,0.07)' : 'none', fontFamily: 'var(--font-mono)', fontSize: 12 }}>
+                    <span>{b.boss}</span>
+                    <span style={{ color: '#00ff88', fontWeight: 700 }}>{b.crd}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Dungeon Boss */}
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>🏛️ Dungeon Boss Drop</div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#00ff88', fontWeight: 700, marginBottom: 6 }}>GUARANTEED</div>
+                <ul style={styles.list}>
+                  <li>💰 CRD <span style={{ color: '#88aadd' }}>(sesuai Dungeon)</span></li>
+                  <li>🎁 1 Random Equipment <span style={{ color: '#88aadd', fontSize: 11 }}>(⚪ Common <strong>atau</strong> 🟢 Uncommon)</span></li>
+                </ul>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#ffcc00', fontWeight: 700, margin: '8px 0 6px' }}>RANDOM DROP</div>
+                <ul style={styles.list}>
+                  <li>🔵 Rare Equipment — <strong>25%</strong></li>
+                  <li>🟣 Epic Equipment — <strong>5%</strong></li>
+                  <li>🛡️ Divine Crest — <strong>100%</strong> <span style={{ color: '#88aadd' }}>(5–15 pcs)</span></li>
+                  <li>🦸 Cape Component — <strong>20%</strong></li>
+                  <li>🪨 Arcanite — <strong style={{ color: '#ff4444' }}>0.10%</strong> <span style={{ color: '#ff8888', fontSize: 11 }}>(Super Ultra Rare)</span></li>
+                </ul>
+              </div>
+
+              {/* Dungeon Boss CRD */}
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>🏛️ Dungeon Boss CRD</div>
+                {[
+                  { boss: 'Echo Burrow', crd: '500,000 ~ 800,000 CRD' },
+                  { boss: 'Infernal Forge', crd: '2,000,000 ~ 3,500,000 CRD' },
+                  { boss: 'Trinity Core Chamber', crd: '7,000,000 ~ 10,000,000 CRD' },
+                ].map((b, i) => (
+                  <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: i < 2 ? '1px solid rgba(255,255,255,0.07)' : 'none', fontFamily: 'var(--font-mono)', fontSize: 12 }}>
+                    <span style={{ color: '#e0f4ff' }}>🏛️ {b.boss}</span>
+                    <span style={{ color: '#00ff88', fontWeight: 700 }}>{b.crd}</span>
+                  </div>
+                ))}
               </div>
             </div>
           )}

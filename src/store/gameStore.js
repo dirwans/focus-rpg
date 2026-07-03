@@ -213,11 +213,26 @@ function computeRewards(player, mode, minutes, selectedZone = 'world') {
     totalAniumGained += Math.floor(avgAni)
   }
 
+  // CRD per kill sesuai map level
+  const MAP_CRD_RANGES = [
+    [500, 1000],       // Map 1 Lv.1-12
+    [1500, 3000],      // Map 2 Lv.13-25
+    [4000, 8000],      // Map 3 Lv.26-38
+    [10000, 18000],    // Map 4 Lv.39-52
+    [20000, 35000],    // Map 5 Lv.53-66
+  ]
+  const crdRange = MAP_CRD_RANGES[Math.min(sectorIdx, 4)]
+  let totalCrdGained = 0
+  for (let i = 0; i < kills; i++) {
+    const frac = seededFrac(minutes * 100 + i + 77)
+    totalCrdGained += Math.floor(crdRange[0] + frac * (crdRange[1] - crdRange[0]))
+  }
+
   return {
     kills,
-    exp: Math.floor(elapsedSec / 60), // EXP now represents Idle Minutes
+    exp: Math.floor(elapsedSec / 60),
     anium: totalAniumGained,
-    credits: 0
+    credits: totalCrdGained
   }
 }
 
@@ -797,7 +812,7 @@ export const useGameStore = create(
         const finalKills = Math.max(0, r.kills - deathPenaltyKills)
         const finalExp = Math.max(0, r.exp - deathPenaltyExp)
         const finalAnium = Math.max(0, r.anium - deathPenaltyAnium)
-        const finalCredits = r.credits || 0
+        let finalCredits = r.credits || 0
 
         let newExp = player.exp + finalExp
         let newLevel = player.level
@@ -831,50 +846,149 @@ export const useGameStore = create(
             dropLog += `\n⚡ ELITE MONSTER appeared! Bonus drop!`
         }
         
+        // ────────────────────────────────────────────────────────────────
+        // OFFICIAL DROP RATE SYSTEM
+        // ────────────────────────────────────────────────────────────────
         const isDungeon = timer.selectedZone && timer.selectedZone.startsWith('dungeon_')
+        const dungeonIdx = isDungeon ? parseInt(timer.selectedZone.split('_')[1]) - 1 : -1
         const killedBoss = (killedPitBoss || killedStageBoss) && finalKills > 0
 
-        if (!isDungeon || killedBoss) {
-            // Combat drops: 1 drop, or 2 drops if Boss/Elite is defeated
-            const combatDropsCount = (killedPitBoss || killedElite) ? 2 : 1
-            
-            for (let i = 0; i < combatDropsCount; i++) {
-                const seed = timer.startedAt + i
-                const tier = getDropTier(seed, 'fight', killedPitBoss, effectiveStageBoss)
-                
-                if (tier && tier !== 'material') {
-                    const pool = itemsData.items.filter(it => 
-                      (it.type === 'weapon' || it.type === 'armor' || it.type === 'shield' || it.type === 'helmet' || it.type === 'mantle' || it.type === 'gloves' || it.type === 'boots' || it.type === 'pants' || it.type === 'amulet' || it.type === 'ring') &&
-                      it.rarity === tier &&
-                      (it.race === 'All' || it.race === player.race) &&
-                      it.level <= player.level + 10 &&
-                      (it.type !== 'weapon' || !it.job || it.job === player.job) &&
-                      (it.minStage === undefined || it.minStage <= fightSector)
-                    )
-                    
-                    if (pool.length > 0) {
-                        const drop = pool[Math.floor(seededFrac(seed * 1.5) * pool.length)]
-                        if (drop) {
-                            newInventory.push({ ...drop, uid: Date.now() + i })
-                            dropLog += ` \n🎁 Got: ${drop.emoji} ${drop.name}`
-                        }
-                    }
-                }
-            }
+        // Helper: random item from pool by type+rarity
+        const pickItem = (rarity, seed) => {
+          const pool = itemsData.items.filter(it =>
+            (it.type === 'weapon' || it.type === 'armor' || it.type === 'shield' ||
+             it.type === 'helmet' || it.type === 'mantle' || it.type === 'gloves' ||
+             it.type === 'boots' || it.type === 'pants' || it.type === 'amulet' || it.type === 'ring') &&
+            it.rarity === rarity &&
+            (it.race === 'All' || it.race === player.race) &&
+            it.level <= player.level + 10 &&
+            (it.type !== 'weapon' || !it.job || it.job === player.job) &&
+            (it.minStage === undefined || it.minStage <= fightSector)
+          )
+          if (pool.length === 0) return null
+          return pool[Math.floor(seededFrac(seed) * pool.length)]
+        }
 
-            // Material/Consumable drop: always 1 drop per session
-            const matSeed = timer.startedAt + 10
-            const matPool = itemsData.items.filter(it =>
-              (it.type === 'material' || it.type === 'consumable') &&
-              (it.minStage === undefined || it.minStage <= fightSector)
-            )
-            if (matPool.length > 0) {
-                const drop = matPool[Math.floor(seededFrac(matSeed * 1.5) * matPool.length)]
-                if (drop) {
-                    newInventory.push({ ...drop, uid: Date.now() + 10 })
-                    dropLog += ` \n⛏️ Gathered: ${drop.emoji} ${drop.name}`
-                }
+        const pickMat = (id) => itemsData.items.find(it => it.id === id)
+
+        const RARITY_COMMON = 'C'     // Common
+        const RARITY_UNCOMMON = 'B'   // Uncommon
+        const RARITY_RARE = 'A'       // Rare
+        const RARITY_EPIC = 'S'       // Epic
+
+        if (isDungeon) {
+          // ── DUNGEON MONSTER (normal): EXP + CRD only, NO gear, NO material ──
+          // (loot already handled via credits in computeRewards)
+
+          if (killedBoss) {
+            // ── DUNGEON BOSS DROP ──
+            // Guaranteed: CRD (handled via computeRewards), 1 Random Equipment (Common or Uncommon)
+            const bossEquipRoll = seededFrac(timer.startedAt + 200)
+            const bossEquipRarity = bossEquipRoll < 0.5 ? RARITY_COMMON : RARITY_UNCOMMON
+            const bossEquip = pickItem(bossEquipRarity, timer.startedAt + 201)
+            if (bossEquip) { newInventory.push({ ...bossEquip, uid: Date.now() + 200 }); dropLog += `\n🎁 Boss Drop: ${bossEquip.emoji} ${bossEquip.name}` }
+
+            // Boss CRD bonus
+            const DUNGEON_BOSS_CRD = [
+              [500000, 800000],       // Echo Burrow
+              [2000000, 3500000],     // Infernal Forge
+              [7000000, 10000000],    // Trinity Core Chamber
+            ]
+            const brdRange = DUNGEON_BOSS_CRD[Math.min(dungeonIdx, 2)]
+            const bossCrd = Math.floor(brdRange[0] + seededFrac(timer.startedAt + 202) * (brdRange[1] - brdRange[0]))
+            finalCredits += bossCrd
+            dropLog += `\n💰 Boss CRD: ${bossCrd.toLocaleString()}`
+
+            // Random: Rare Equipment 25%
+            if (seededFrac(timer.startedAt + 203) < 0.25) {
+              const rareEquip = pickItem(RARITY_RARE, timer.startedAt + 204)
+              if (rareEquip) { newInventory.push({ ...rareEquip, uid: Date.now() + 203 }); dropLog += `\n🔵 Rare Drop: ${rareEquip.emoji} ${rareEquip.name}` }
             }
+            // Random: Epic Equipment 5%
+            if (seededFrac(timer.startedAt + 205) < 0.05) {
+              const epicEquip = pickItem(RARITY_EPIC, timer.startedAt + 206)
+              if (epicEquip) { newInventory.push({ ...epicEquip, uid: Date.now() + 205 }); dropLog += `\n🟣 Epic Drop: ${epicEquip.emoji} ${epicEquip.name}` }
+            }
+            // Divine Crest: 100% (5-15 pcs)
+            const crestCount = 5 + Math.floor(seededFrac(timer.startedAt + 207) * 11)
+            const crestItem = pickMat('mat_divine_crest')
+            if (crestItem) {
+              for (let c = 0; c < crestCount; c++) newInventory.push({ ...crestItem, uid: Date.now() + 210 + c })
+              dropLog += `\n🛡️ Divine Crest ×${crestCount}`
+            }
+            // Cape Component: 20%
+            if (seededFrac(timer.startedAt + 208) < 0.20) {
+              const capeComp = pickMat('mat_cape_component')
+              if (capeComp) { newInventory.push({ ...capeComp, uid: Date.now() + 208 }); dropLog += `\n🦸 Cape Component` }
+            }
+            // Arcanite: 0.10% (Super Ultra Rare)
+            if (seededFrac(timer.startedAt + 209) < 0.001) {
+              const arc = pickMat('mat_arcanite')
+              if (arc) { newInventory.push({ ...arc, uid: Date.now() + 209 }); dropLog += `\n🪨 ARCANITE!!! (Super Ultra Rare)` }
+            }
+          }
+        } else {
+          // ── WORLD MAP ──
+          if (killedStageBoss) {
+            // ── WORLD BOSS DROP ──
+            // Guaranteed: CRD (below) + 1 Random Equipment (Common or Uncommon)
+            const bossEquipRoll = seededFrac(timer.startedAt + 100)
+            const bossEquipRarity = bossEquipRoll < 0.5 ? RARITY_COMMON : RARITY_UNCOMMON
+            const bossEquip = pickItem(bossEquipRarity, timer.startedAt + 101)
+            if (bossEquip) { newInventory.push({ ...bossEquip, uid: Date.now() + 100 }); dropLog += `\n🎁 Boss Drop: ${bossEquip.emoji} ${bossEquip.name}` }
+
+            // World Boss CRD by sector boss
+            const WORLD_BOSS_CRD = [
+              [100000, 200000],       // Lumora Behemoth
+              [300000, 500000],       // Sylvan Fanglord
+              [700000, 1000000],      // Iron Juggernaut
+              [1500000, 2500000],     // Pyraxis Overlord
+              [4000000, 6000000],     // Trinity Overlord
+            ]
+            const wrdRange = WORLD_BOSS_CRD[Math.min(fightSector - 1, 4)]
+            const bossCrd = Math.floor(wrdRange[0] + seededFrac(timer.startedAt + 102) * (wrdRange[1] - wrdRange[0]))
+            finalCredits += bossCrd
+            dropLog += `\n💰 Boss CRD: ${bossCrd.toLocaleString()}`
+
+            // Random: Rare Equipment 15%
+            if (seededFrac(timer.startedAt + 103) < 0.15) {
+              const rareEquip = pickItem(RARITY_RARE, timer.startedAt + 104)
+              if (rareEquip) { newInventory.push({ ...rareEquip, uid: Date.now() + 103 }); dropLog += `\n🔵 Rare Drop: ${rareEquip.emoji} ${rareEquip.name}` }
+            }
+            // Divine Crest: 100% (1-5 pcs)
+            const crestCount = 1 + Math.floor(seededFrac(timer.startedAt + 105) * 5)
+            const crestItem = pickMat('mat_divine_crest')
+            if (crestItem) {
+              for (let c = 0; c < crestCount; c++) newInventory.push({ ...crestItem, uid: Date.now() + 110 + c })
+              dropLog += `\n🛡️ Divine Crest ×${crestCount}`
+            }
+            // Cape Component: 20%
+            if (seededFrac(timer.startedAt + 106) < 0.20) {
+              const capeComp = pickMat('mat_cape_component')
+              if (capeComp) { newInventory.push({ ...capeComp, uid: Date.now() + 106 }); dropLog += `\n🦸 Cape Component` }
+            }
+            // Arcanite: 0.05% (Super Ultra Rare)
+            if (seededFrac(timer.startedAt + 107) < 0.0005) {
+              const arc = pickMat('mat_arcanite')
+              if (arc) { newInventory.push({ ...arc, uid: Date.now() + 107 }); dropLog += `\n🪨 ARCANITE!!! (Super Ultra Rare)` }
+            }
+          } else if (killedPitBoss) {
+            // Pit Boss treated same as World Boss
+            const bossEquip = pickItem(RARITY_UNCOMMON, timer.startedAt + 150)
+            if (bossEquip) { newInventory.push({ ...bossEquip, uid: Date.now() + 150 }); dropLog += `\n🎁 Raid Drop: ${bossEquip.emoji} ${bossEquip.name}` }
+          } else {
+            // ── NORMAL MONSTER DROP ──
+            // HP Potion: 25% per session
+            if (finalKills > 0 && seededFrac(timer.startedAt + 50) < 0.25) {
+              const hpPotion = pickMat('consumable_hp_small')
+              if (hpPotion) { newInventory.push({ ...hpPotion, uid: Date.now() + 50 }); dropLog += `\n❤️ HP Potion` }
+            }
+            // Common Equipment: 10% per session
+            if (finalKills > 0 && seededFrac(timer.startedAt + 51) < 0.10) {
+              const commonEquip = pickItem(RARITY_COMMON, timer.startedAt + 52)
+              if (commonEquip) { newInventory.push({ ...commonEquip, uid: Date.now() + 51 }); dropLog += `\n⚪ Common Drop: ${commonEquip.emoji} ${commonEquip.name}` }
+            }
+          }
         }
 
         const finalLog = []
