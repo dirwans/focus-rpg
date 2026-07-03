@@ -142,6 +142,12 @@ app.post('/api/market/sell', async (req, res) => {
   const { item, price } = req.body ?? {}
   if (!item || !price || price < 1) return res.status(400).json({ error: 'Invalid item or price' })
 
+  // Verify 10 listings limit
+  const myListings = marketItems.filter(m => m.seller === s.username).length
+  if (myListings >= 10) {
+    return res.status(400).json({ error: 'Maksimal listing Anda adalah 10 item!' })
+  }
+
   // Verify user has the item
   const sv = loadSave(s.username)
   if (!sv || !sv.inventory) return res.status(400).json({ error: 'No save found' })
@@ -163,10 +169,47 @@ app.post('/api/market/sell', async (req, res) => {
   marketItems.push(marketItem)
   
   saveMarket()
+  sv.savedAt = Date.now()
   await writeSave(s.username, sv)
   broadcast(s.username, sv, null)
   
   res.json({ ok: true, game_state: sv })
+})
+
+app.post('/api/market/cancel', async (req, res) => {
+  const s = requireSession(req, res)
+  if (!s) return
+  const { marketId } = req.body ?? {}
+
+  const mIdx = marketItems.findIndex(m => m.marketId === marketId)
+  if (mIdx === -1) return res.status(404).json({ error: 'Item tidak ditemukan di market' })
+  const mItem = marketItems[mIdx]
+
+  if (mItem.seller !== s.username) {
+    return res.status(403).json({ error: 'Bukan item milik Anda!' })
+  }
+
+  // Remove from market
+  marketItems.splice(mIdx, 1)
+  saveMarket()
+
+  // Return to inventory
+  const sv = loadSave(s.username)
+  if (sv) {
+    if (!sv.inventory) sv.inventory = []
+    const returnedItem = { ...mItem }
+    delete returnedItem.marketId
+    delete returnedItem.seller
+    delete returnedItem.price
+    delete returnedItem.listedAt
+    returnedItem.uid = Date.now()
+    sv.inventory.push(returnedItem)
+    sv.savedAt = Date.now()
+    await writeSave(s.username, sv)
+    broadcast(s.username, sv, null)
+    return res.json({ ok: true, game_state: sv })
+  }
+  res.status(500).json({ error: 'Gagal membatalkan listing' })
 })
 
 app.post('/api/market/buy', async (req, res) => {
@@ -180,14 +223,14 @@ app.post('/api/market/buy', async (req, res) => {
   
   if (mItem.seller === s.username) return res.status(400).json({ error: 'Cannot buy your own item' })
   
-  // Verify buyer has enough anium
+  // Verify buyer has enough CRD (credits)
   const buyerSv = loadSave(s.username)
-  if (!buyerSv || !buyerSv.resources || buyerSv.resources.anium < mItem.price) {
-    return res.status(400).json({ error: 'Not enough Anium' })
+  if (!buyerSv || !buyerSv.resources || (buyerSv.resources.credits || 0) < mItem.price) {
+    return res.status(400).json({ error: 'Credits (CRD) tidak cukup!' })
   }
   
-  // Subtract anium, add item
-  buyerSv.resources.anium -= mItem.price
+  // Subtract credits, add item
+  buyerSv.resources.credits = (buyerSv.resources.credits || 0) - mItem.price
   
   // Strip market metadata before giving item
   const purchasedItem = { ...mItem, uid: Date.now() }
@@ -197,6 +240,7 @@ app.post('/api/market/buy', async (req, res) => {
   delete purchasedItem.listedAt
   
   buyerSv.inventory.push(purchasedItem)
+  buyerSv.savedAt = Date.now()
   
   // Remove from market
   marketItems.splice(mIdx, 1)
@@ -204,16 +248,57 @@ app.post('/api/market/buy', async (req, res) => {
   await writeSave(s.username, buyerSv)
   broadcast(s.username, buyerSv, null)
   
-  // Credit seller (95% after 5% tax)
+  // Send mail to seller containing the credits (95% after 5% tax)
   const sellerSv = loadSave(mItem.seller)
   if (sellerSv) {
-    if (!sellerSv.resources) sellerSv.resources = { anium: 0 }
-    sellerSv.resources.anium += Math.floor(mItem.price * 0.95)
+    if (!sellerSv.mailbox) sellerSv.mailbox = []
+    const netCredits = Math.floor(mItem.price * 0.95)
+    sellerSv.mailbox.push({
+      id: Math.random().toString(36).slice(2) + Date.now().toString(36),
+      type: 'Auction Sold',
+      sender: 'Trade Commissioner',
+      subject: `Item Sold: ${mItem.name}`,
+      body: `Item Anda "${mItem.name}" berhasil terjual seharga ${mItem.price.toLocaleString()} CRD.\nSetelah dipotong pajak transaksi 5% CRD, Anda menerima ${netCredits.toLocaleString()} CRD.`,
+      credits: netCredits,
+      receivedAt: Date.now()
+    })
+    sellerSv.savedAt = Date.now()
     await writeSave(mItem.seller, sellerSv)
     broadcast(mItem.seller, sellerSv, null)
   }
   
   res.json({ ok: true, game_state: buyerSv })
+})
+
+app.post('/api/mailbox/claim', async (req, res) => {
+  const s = requireSession(req, res)
+  if (!s) return
+  const { mailId } = req.body ?? {}
+
+  const sv = loadSave(s.username)
+  if (!sv || !sv.mailbox) return res.status(400).json({ error: 'Mailbox kosong' })
+
+  const mIdx = sv.mailbox.findIndex(m => m.id === mailId)
+  if (mIdx === -1) return res.status(404).json({ error: 'Mail tidak ditemukan' })
+  const mail = sv.mailbox[mIdx]
+
+  // Claim logic
+  if (mail.item) {
+    if (!sv.inventory) sv.inventory = []
+    sv.inventory.push(mail.item)
+  }
+  if (mail.credits) {
+    if (!sv.resources) sv.resources = {}
+    sv.resources.credits = (sv.resources.credits || 0) + mail.credits
+  }
+
+  // Delete mail after claim
+  sv.mailbox.splice(mIdx, 1)
+  sv.savedAt = Date.now()
+  await writeSave(s.username, sv)
+  broadcast(s.username, sv, null)
+
+  res.json({ ok: true, game_state: sv })
 })
 
 // ── Auth endpoints ──────────────────────────────────────────────────────────
@@ -741,9 +826,57 @@ function checkChipWarReset() {
   }
 }
 
-// Check reset every minute
+function checkMarketExpirations() {
+  const now = Date.now()
+  const expirationTime = 24 * 60 * 60 * 1000 // 24 hours
+  let changed = false
+
+  for (let i = marketItems.length - 1; i >= 0; i--) {
+    const item = marketItems[i]
+    if (now - item.listedAt > expirationTime) {
+      console.log(`[Auction] Listing expired for ${item.name} (Seller: ${item.seller})`)
+      
+      // Remove from market list
+      marketItems.splice(i, 1)
+      changed = true
+
+      // Send item to seller's mailbox
+      const sellerSv = loadSave(item.seller)
+      if (sellerSv) {
+        if (!sellerSv.mailbox) sellerSv.mailbox = []
+        const returnedItem = { ...item }
+        delete returnedItem.marketId
+        delete returnedItem.seller
+        delete returnedItem.price
+        delete returnedItem.listedAt
+        returnedItem.uid = Date.now()
+
+        sellerSv.mailbox.push({
+          id: Math.random().toString(36).slice(2) + Date.now().toString(36),
+          type: 'Auction Return',
+          sender: 'Trade Commissioner',
+          subject: `Expired Listing: ${item.name}`,
+          body: `Listing Anda untuk "${item.name}" telah kedaluwarsa setelah 24 jam.\nItem telah dikembalikan ke Mailbox Anda.`,
+          item: returnedItem,
+          receivedAt: Date.now()
+        })
+        sellerSv.savedAt = Date.now()
+        writeSave(item.seller, sellerSv).catch(() => {})
+        broadcast(item.seller, sellerSv, null)
+      }
+    }
+  }
+
+  if (changed) {
+    saveMarket()
+  }
+}
+
+// Check reset and expirations
 setInterval(checkChipWarReset, 60000)
 checkChipWarReset()
+setInterval(checkMarketExpirations, 5 * 60 * 1000) // check every 5 mins
+checkMarketExpirations()
 
 app.get('/api/chip-war', (req, res) => {
   checkChipWarReset()

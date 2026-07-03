@@ -12,6 +12,7 @@ import NpcModal from '../components/NpcModal'
 import LibraryModal from '../components/LibraryModal'
 import SocialModal from '../components/SocialModal'
 import GuildPanel from '../components/GuildPanel'
+import MailboxModal from '../components/MailboxModal'
 
 function fmt(s) {
   const m = Math.floor(s / 60).toString().padStart(2, '0')
@@ -67,6 +68,7 @@ export default function Main() {
   const [showLibrary, setShowLibrary] = useState(false)
   const [showSocialModal, setShowSocialModal] = useState(false)
   const [showNpcModal, setShowNpcModal] = useState(false)
+  const [showMailbox, setShowMailbox] = useState(false)
   const [npcInitialView, setNpcInitialView] = useState('lobby')
 
 
@@ -416,6 +418,18 @@ export default function Main() {
         <span style={styles.resPill('var(--neon-glow)')}>⬡ {player.resources.anium.toLocaleString()}</span>
         <span style={styles.resPill('#00e5ff')}>◈ {player.resources.credits}</span>
         <span style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 8 }}>
+          {player.race && (
+            <button 
+              onClick={() => setShowMailbox(true)} 
+              style={{ ...styles.logoutBtn, position: 'relative' }} 
+              title="Mailbox"
+            >
+              ✉️
+              {player.mailbox && player.mailbox.length > 0 && (
+                <div style={{ position: 'absolute', top: -3, right: -3, width: 8, height: 8, borderRadius: '50%', background: '#ff3333', boxShadow: '0 0 6px #ff3333' }} />
+              )}
+            </button>
+          )}
           <button onClick={() => setShowSocialModal(true)} style={styles.logoutBtn} title="Social / Friends">👥</button>
           <button onClick={() => setShowLibrary(true)} style={styles.logoutBtn} title="Database & Guides">📖</button>
           <button onClick={() => setShowSettings(true)} style={styles.logoutBtn} title="Settings">⚙️</button>
@@ -678,6 +692,7 @@ export default function Main() {
       {showLibrary && <LibraryModal onClose={() => setShowLibrary(false)} />}
       {showSocialModal && <SocialModal onClose={() => setShowSocialModal(false)} />}
       {showNpcModal && <NpcModal onClose={() => setShowNpcModal(false)} initialView={npcInitialView} />}
+      {showMailbox && <MailboxModal onClose={() => setShowMailbox(false)} />}
 
     </div>
   )

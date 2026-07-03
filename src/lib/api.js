@@ -50,6 +50,8 @@ export const apiSyncSave = (gameState) => api('/save', { method: 'POST', body: {
 export const apiGetMarket = () => api('/market')
 export const apiSellMarket = (item, price) => api('/market/sell', { method: 'POST', body: { item, price } })
 export const apiBuyMarket = (marketId) => api('/market/buy', { method: 'POST', body: { marketId } })
+export const apiCancelMarket = (marketId) => api('/market/cancel', { method: 'POST', body: { marketId } })
+export const apiClaimMail = (mailId) => api('/mailbox/claim', { method: 'POST', body: { mailId } })
 
 export const apiPvpTargets = () => api('/pvp/targets')
 export const apiPvpBattle = (target) => api('/pvp/battle', { method: 'POST', body: { target } })

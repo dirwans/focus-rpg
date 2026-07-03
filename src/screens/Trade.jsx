@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useGameStore } from '../store/gameStore'
-import { apiGetMarket, apiBuyMarket, apiSellMarket } from '../lib/api'
+import { apiGetMarket, apiBuyMarket, apiSellMarket, apiCancelMarket } from '../lib/api'
 
 export default function Trade() {
   const player = useGameStore((s) => s.player)
@@ -32,17 +32,31 @@ export default function Trade() {
   }
   
   const handleBuy = async (marketId, price) => {
-    if (player.resources.anium < price) {
-      alert("Not enough Anium!")
+    if ((player.resources.credits || 0) < price) {
+      alert("Credits (CRD) tidak cukup!")
       return
     }
-    if (!window.confirm(`Buy this item for ${price} Anium?`)) return
+    if (!window.confirm(`Beli item ini seharga ${price.toLocaleString()} CRD?`)) return
     
     try {
       const res = await apiBuyMarket(marketId)
       if (res.ok && res.game_state) {
         applySyncState(res.game_state)
-        alert("Purchase successful!")
+        alert("Pembelian berhasil!")
+        fetchMarket()
+      }
+    } catch (e) {
+      alert(e.message)
+    }
+  }
+
+  const handleCancel = async (marketId, name) => {
+    if (!window.confirm(`Batalkan listing untuk ${name} dan kembalikan ke Inventory?`)) return
+    try {
+      const res = await apiCancelMarket(marketId)
+      if (res.ok && res.game_state) {
+        applySyncState(res.game_state)
+        alert("Listing berhasil dibatalkan!")
         fetchMarket()
       }
     } catch (e) {
@@ -51,18 +65,24 @@ export default function Trade() {
   }
   
   const handleSell = async () => {
+    const myListings = marketItems.filter(m => m.seller === player.username).length
+    if (myListings >= 10) {
+      alert("Maksimal listing Anda adalah 10 item!")
+      return
+    }
+
     if (!selectedItem || !sellPrice || isNaN(sellPrice) || sellPrice < 1) {
-      alert("Select an item and enter a valid price!")
+      alert("Pilih item dan masukkan harga yang valid!")
       return
     }
     const p = parseInt(sellPrice, 10)
-    if (!window.confirm(`List ${selectedItem.name} for ${p} Anium? (5% tax applies when sold)`)) return
+    if (!window.confirm(`List ${selectedItem.name} seharga ${p.toLocaleString()} CRD? (Pajak 5% dipotong jika terjual)`)) return
     
     try {
       const res = await apiSellMarket(selectedItem, p)
       if (res.ok && res.game_state) {
         applySyncState(res.game_state)
-        alert("Item listed successfully!")
+        alert("Item berhasil dilisting!")
         setSelectedItem(null)
         setSellPrice('')
         setTab('buy')
@@ -82,7 +102,7 @@ export default function Trade() {
       </div>
       
       <div style={styles.balanceRow}>
-        <span style={{ color: '#f5a623', fontFamily: 'var(--font-mono)', fontWeight: 800 }}>⬡ {player.resources.anium.toLocaleString()} Anium</span>
+        <span style={{ color: '#00e5ff', fontFamily: 'var(--font-mono)', fontWeight: 800 }}>◈ {(player.resources.credits || 0).toLocaleString()} CRD</span>
         <button style={styles.refreshBtn} onClick={fetchMarket}>⟳ REFRESH</button>
       </div>
       
@@ -114,14 +134,22 @@ export default function Trade() {
                   </div>
                 </div>
                 <div style={styles.cardFooter}>
-                  <div style={styles.price}>⬡ {m.price.toLocaleString()}</div>
-                  <button 
-                    style={player.username === m.seller ? styles.buyBtnDisabled : styles.buyBtn} 
-                    disabled={player.username === m.seller}
-                    onClick={() => handleBuy(m.marketId, m.price)}
-                  >
-                    {player.username === m.seller ? 'YOUR ITEM' : 'BUY'}
-                  </button>
+                  <div style={styles.price}>◈ {m.price.toLocaleString()} CRD</div>
+                  {player.username === m.seller ? (
+                    <button 
+                      style={{ ...styles.buyBtn, background: 'linear-gradient(90deg, #ff4400, #ff6666)', boxShadow: '0 0 10px rgba(255,68,0,0.4)' }}
+                      onClick={() => handleCancel(m.marketId, m.name)}
+                    >
+                      CANCEL
+                    </button>
+                  ) : (
+                    <button 
+                      style={styles.buyBtn} 
+                      onClick={() => handleBuy(m.marketId, m.price)}
+                    >
+                      BUY
+                    </button>
+                  )}
                 </div>
               </div>
             ))
@@ -149,13 +177,13 @@ export default function Trade() {
               <input 
                 style={styles.priceInput} 
                 type="number" 
-                placeholder="Price (Anium)" 
+                placeholder="Harga (CRD)" 
                 value={sellPrice} 
                 onChange={(e) => setSellPrice(e.target.value)} 
               />
               <button style={styles.sellBtn} onClick={handleSell}>LIST ITEM</button>
             </div>
-            <div style={styles.taxNote}>* 5% exchange tax applies on successful sale.</div>
+            <div style={styles.taxNote}>* Pajak transaksi 5% CRD hanya dipotong jika item berhasil terjual.</div>
           </div>
           
           <div style={styles.invLabel}>YOUR INVENTORY</div>
