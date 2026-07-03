@@ -136,9 +136,9 @@ export default function Mine() {
                     <div style={styles.optionTime}>⏱️ 10 MENIT</div>
                     <div style={styles.optionYield}>Hasil: 1-3 Ore</div>
                     <div style={styles.optionRates}>
-                      <div>Common: <span style={{ color: '#fff' }}>{100 - rankBonus}%</span></div>
-                      <div>Rare: <span style={{ color: '#4488ff' }}>{rankBonus - (rankNumber === 1 ? 1 : 0)}%</span></div>
-                      {rankNumber === 1 && <div>Epic: <span style={{ color: '#a335ee' }}>1%</span></div>}
+                      <div>Common: <span style={{ color: '#e0f0ff' }}>{100 - rankBonus}%</span></div>
+                      <div>Rare: <span style={{ color: '#66ccff', fontWeight: 700, textShadow: '0 0 6px rgba(102,204,255,0.6)' }}>{rankBonus - (rankNumber === 1 ? 1 : 0)}%</span></div>
+                      {rankNumber === 1 && <div>Epic: <span style={{ color: '#dd88ff', fontWeight: 700, textShadow: '0 0 6px rgba(221,136,255,0.6)' }}>1%</span></div>}
                     </div>
                     <button style={styles.startButton} onClick={() => startMining(10)}>MULAI</button>
                   </div>
@@ -148,9 +148,9 @@ export default function Mine() {
                     <div style={styles.optionTime}>⏱️ 30 MENIT</div>
                     <div style={styles.optionYield}>Hasil: 3-5 Ore</div>
                     <div style={styles.optionRates}>
-                      <div>Common: <span style={{ color: '#fff' }}>{80 - rankBonus}%</span></div>
-                      <div>Rare: <span style={{ color: '#4488ff' }}>{20 + rankBonus - (rankNumber === 1 ? 1 : 0)}%</span></div>
-                      {rankNumber === 1 && <div>Epic: <span style={{ color: '#a335ee' }}>1%</span></div>}
+                      <div>Common: <span style={{ color: '#e0f0ff' }}>{80 - rankBonus}%</span></div>
+                      <div>Rare: <span style={{ color: '#66ccff', fontWeight: 700, textShadow: '0 0 6px rgba(102,204,255,0.6)' }}>{20 + rankBonus - (rankNumber === 1 ? 1 : 0)}%</span></div>
+                      {rankNumber === 1 && <div>Epic: <span style={{ color: '#dd88ff', fontWeight: 700, textShadow: '0 0 6px rgba(221,136,255,0.6)' }}>1%</span></div>}
                     </div>
                     <button style={styles.startButton} onClick={() => startMining(30)}>MULAI</button>
                   </div>
@@ -160,9 +160,9 @@ export default function Mine() {
                     <div style={styles.optionTime}>⏱️ 60 MENIT</div>
                     <div style={styles.optionYield}>Hasil: 5-8 Ore</div>
                     <div style={styles.optionRates}>
-                      <div>Common: <span style={{ color: '#fff' }}>{60 - rankBonus}%</span></div>
-                      <div>Rare: <span style={{ color: '#4488ff' }}>{35 + rankBonus - (rankNumber === 1 ? 1 : 0)}%</span></div>
-                      <div>Epic: <span style={{ color: '#a335ee' }}>{5 + (rankNumber === 1 ? 1 : 0)}%</span></div>
+                      <div>Common: <span style={{ color: '#e0f0ff' }}>{60 - rankBonus}%</span></div>
+                      <div>Rare: <span style={{ color: '#66ccff', fontWeight: 700, textShadow: '0 0 6px rgba(102,204,255,0.6)' }}>{35 + rankBonus - (rankNumber === 1 ? 1 : 0)}%</span></div>
+                      <div>Epic: <span style={{ color: '#dd88ff', fontWeight: 700, textShadow: '0 0 6px rgba(221,136,255,0.6)' }}>{5 + (rankNumber === 1 ? 1 : 0)}%</span></div>
                     </div>
                     <button style={styles.startButton} onClick={() => startMining(60)}>MULAI</button>
                   </div>
@@ -474,16 +474,21 @@ const styles = {
   },
   startButton: {
     width: '100%',
-    padding: '6px 0',
-    background: 'linear-gradient(180deg, #ffcc00 0%, #ff8800 100%)',
-    border: 'none',
-    borderRadius: 4,
-    color: '#000',
+    padding: '8px 0',
+    background: 'linear-gradient(135deg, rgba(255,204,0,0.18) 0%, rgba(255,136,0,0.22) 100%)',
+    border: '1px solid rgba(255,204,0,0.55)',
+    borderRadius: 8,
+    color: '#ffe066',
     fontFamily: 'var(--font-title)',
     fontWeight: 900,
-    fontSize: 11,
+    fontSize: 13,
+    letterSpacing: 1.5,
     cursor: 'pointer',
-    boxShadow: '0 2px 5px rgba(0,0,0,0.3)'
+    backdropFilter: 'blur(8px)',
+    WebkitBackdropFilter: 'blur(8px)',
+    boxShadow: '0 0 12px rgba(255,180,0,0.25), inset 0 1px 0 rgba(255,255,255,0.12)',
+    textShadow: '0 0 8px rgba(255,220,0,0.7)',
+    transition: 'all 0.2s'
   },
   miningActiveArea: {
     display: 'flex',
