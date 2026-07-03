@@ -32,6 +32,7 @@ export default function Battle() {
   const [loading, setLoading] = useState(false)
   const [log, setLog] = useState([])
   const player = useGameStore((s) => s.player)
+  const winnerRace = useGameStore((s) => s.winnerRace)
 
   useEffect(() => {
     if (tab === 'arena') loadTargets()
@@ -174,7 +175,7 @@ export default function Battle() {
           onClick={() => setTab('war')}
           style={{ ...styles.tabBtn, ...(tab === 'war' ? styles.tabActive : styles.tabInactive) }}
         >
-          Chip War
+          Core War
         </button>
       </div>
 
@@ -255,10 +256,24 @@ export default function Battle() {
           {!chipLoading && chipWar && chipWar.phase === 'active' && (
             <div style={styles.activeBanner}>
               <span style={{ color: '#ff4466', fontFamily: 'var(--font-title)', fontSize: 13 }}>
-                CHIP WAR ACTIVE
+                CORE WAR ACTIVE
               </span>
             </div>
           )}
+
+          {/* 🏆 Core War Victory Buff Details */}
+          <div className="glass-panel" style={{ padding: 14, borderRadius: 10, border: '1px solid rgba(245, 166, 35, 0.35)', background: 'rgba(245, 166, 35, 0.06)', display: 'flex', gap: 12, alignItems: 'center', marginBottom: 12 }}>
+            <span style={{ fontSize: 28 }}>🏆</span>
+            <div>
+              <div style={{ color: '#ffcc00', fontSize: 12, fontWeight: 800, fontFamily: 'var(--font-title)', letterSpacing: 0.5 }}>CURRENT CORE WAR WINNER</div>
+              <div style={{ color: '#fff', fontSize: 14, fontWeight: 900, textTransform: 'uppercase', margin: '2px 0' }}>
+                {winnerRace === 'arctron' ? '🤖 Arctron' : winnerRace === 'bionex' ? '⚙️ Bionex' : winnerRace === 'celestra' ? '🌿 Celestra' : '— NONE —'}
+              </div>
+              <div style={{ color: '#88aadd', fontSize: 11, fontFamily: 'var(--font-mono)', lineHeight: 1.3 }}>
+                Victory Buff: <span style={{ color: '#00ff88', fontWeight: 700 }}>+10% ATK, +10% DEF, +10% HP</span> active for all {winnerRace ? (winnerRace === 'arctron' ? 'Arctron' : winnerRace === 'bionex' ? 'Bionex' : 'Celestra') : 'winner'} pilots.
+              </div>
+            </div>
+          </div>
 
           {chipLoading && !chipWar ? (
             <p style={{ textAlign: 'center', color: '#7ab0d0', padding: 32, fontSize: 13 }}>Loading war status...</p>

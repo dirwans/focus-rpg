@@ -4,7 +4,7 @@ const API_BASE = import.meta.env.VITE_API_URL || ''
 
 const NAV = [
   { id: 'main',  icon: '🏠', label: 'BASE' },
-  { id: 'unit',  icon: '⚔️', label: 'UNIT' },
+  { id: 'unit',  icon: '👤', label: 'UNIT' },
   { id: 'ranks', icon: '📊', label: 'RANKS' },
   { id: 'battle', icon: '⚔️', label: 'BATTLE' },
   { id: 'cargo', icon: '📦', label: 'CARGO' },
