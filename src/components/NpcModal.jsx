@@ -421,14 +421,23 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
               <div style={{ background: 'rgba(0,229,255,0.06)', border: '1px solid rgba(0,229,255,0.2)', borderRadius: 10, padding: 14 }}>
                 <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: '#00e5ff', fontWeight: 800, marginBottom: 10 }}>SERVICES</div>
                 <ul style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: '#e0f4ff', listStyle: 'none', padding: 0, margin: 0 }}>
-                  <li style={{ marginBottom: 6 }}>🦸 Craft <strong>Cape</strong></li>
-                  <li style={{ marginBottom: 6 }}>⚙️ Craft <strong>ARES Components</strong></li>
-                  <li style={{ marginBottom: 6 }}>🤖 Craft <strong>M.E.U. Components</strong></li>
-                  <li>👻 Craft <strong>Ancient Spirit Components</strong></li>
+                  <li style={{ marginBottom: 8 }}>🦸 Craft <strong>Cape</strong> <span style={{ color: '#88aadd', fontSize: 11 }}>(semua bangsa)</span></li>
+                  <li style={{ marginBottom: 8, borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 8 }}>
+                    ⚙️ Craft <strong>ARES Components</strong>
+                    <span style={{ display: 'block', fontSize: 11, color: '#ff3d00', fontWeight: 700, marginTop: 2 }}>⚠️ Khusus bangsa ARCTRON</span>
+                  </li>
+                  <li style={{ marginBottom: 8, borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 8 }}>
+                    🤖 Craft <strong>M.E.U. Components</strong>
+                    <span style={{ display: 'block', fontSize: 11, color: '#ffd600', fontWeight: 700, marginTop: 2 }}>⚠️ Khusus bangsa BIONEX</span>
+                  </li>
+                  <li style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 8 }}>
+                    👻 Craft <strong>Ancient Spirit Components</strong>
+                    <span style={{ display: 'block', fontSize: 11, color: '#00e5ff', fontWeight: 700, marginTop: 2 }}>⚠️ Khusus bangsa CELESTRA</span>
+                  </li>
                 </ul>
               </div>
               <div style={{ background: 'rgba(0,229,255,0.1)', border: '1px solid rgba(0,229,255,0.3)', borderRadius: 8, padding: '10px 14px', fontFamily: 'var(--font-mono)', fontSize: 12, color: '#00e5ff', textAlign: 'center' }}>
-                🔨 Buka tab <strong>FORGE → Crafting</strong> untuk memulai!
+                🔨 Buka tab <strong>FORGE → Ascension Lab</strong> untuk memulai!
               </div>
             </div>
           )}

@@ -185,10 +185,10 @@ export default function LibraryModal({ onClose }) {
               <div style={styles.itemCard}>
                 <div style={styles.itemTitle}>🔨 Master Artisan — <span style={{ color: '#88aadd', fontSize: 13, fontWeight: 400 }}>Crafting NPC</span></div>
                 <ul style={styles.list}>
-                  <li>Craft <strong>Cape</strong>.</li>
-                  <li>Craft <strong>ARES Components</strong>.</li>
-                  <li>Craft <strong>M.E.U. Components</strong>.</li>
-                  <li>Craft <strong>Ancient Spirit Components</strong>.</li>
+                  <li>Craft <strong>Cape</strong> <span style={{ color: '#88aadd', fontSize: 12 }}>(semua bangsa)</span>.</li>
+                  <li>Craft <strong>ARES Components</strong> <span style={{ color: '#ff3d00', fontSize: 12, fontWeight: 700 }}>— Khusus Arctron</span>.</li>
+                  <li>Craft <strong>M.E.U. Components</strong> <span style={{ color: '#ffd600', fontSize: 12, fontWeight: 700 }}>— Khusus Bionex</span>.</li>
+                  <li>Craft <strong>Ancient Spirit Components</strong> <span style={{ color: '#00e5ff', fontSize: 12, fontWeight: 700 }}>— Khusus Celestra</span>.</li>
                 </ul>
               </div>
 
