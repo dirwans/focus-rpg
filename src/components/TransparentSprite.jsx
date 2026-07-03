@@ -279,16 +279,6 @@ export default function TransparentSprite({
   const displaySrc = disableKeying ? proxiedSrc : (processedSrc || proxiedSrc)
   const isFallback = !disableKeying && (displaySrc === proxiedSrc)
 
-  if (src && src.includes('celestra_ranger')) {
-    console.log('--- CELESTRA RANGER DEBUG --- ' + JSON.stringify({
-      disableKeying,
-      isFallback,
-      displaySrc,
-      proxiedSrc,
-      processedSrc: processedSrc ? processedSrc.substring(0, 100) + '...' : null
-    }))
-  }
-
 
 
   if (fill) {
