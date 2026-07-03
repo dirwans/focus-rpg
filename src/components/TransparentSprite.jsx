@@ -320,6 +320,7 @@ export default function TransparentSprite({
               width: 'auto',
               maxWidth: 'none',
               maxHeight: 'none',
+              filter: `brightness(1.28) contrast(1.15) saturate(1.05) drop-shadow(0 0 12px ${glowColor}4d)`
             }}
           />
         )}
@@ -339,7 +340,8 @@ export default function TransparentSprite({
             height: '100%',
             objectFit: 'contain',
             mixBlendMode: isFallback ? 'screen' : 'normal',
-            clipPath: isFallback ? 'inset(5%)' : 'none'
+            clipPath: isFallback ? 'inset(5%)' : 'none',
+            filter: `brightness(1.28) contrast(1.15) saturate(1.05) drop-shadow(0 0 12px ${glowColor}4d)`
           }}
         />
       )}

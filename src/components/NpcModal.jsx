@@ -340,37 +340,39 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                           }}>
                             {/* Left Side: BIG SPRITE */}
                             <div style={{
-                              flex: '0 0 160px',
+                              flex: '0 0 170px',
                               display: 'flex',
                               justifyContent: 'center',
                               alignItems: 'flex-end',
                               height: 'auto',
-                              minHeight: 180,
+                              minHeight: 210,
                               position: 'relative',
                               overflow: 'hidden',
                               borderRadius: 12,
-                              background: `linear-gradient(180deg, ${raceAccent.replace('0.18', '0.04')} 0%, rgba(0,0,0,0) 100%)`,
+                              border: `1.5px solid ${player.race === 'arctron' ? 'rgba(255,87,34,0.4)' : player.race === 'bionex' ? 'rgba(255,214,0,0.4)' : 'rgba(0,229,255,0.4)'}`,
+                              background: 'rgba(3, 8, 20, 0.55)',
+                              boxShadow: `inset 0 0 16px ${player.race === 'arctron' ? 'rgba(255,87,34,0.15)' : player.race === 'bionex' ? 'rgba(255,214,0,0.15)' : 'rgba(0,229,255,0.15)'}`,
                             }}>
                               <div style={{
                                 position: 'absolute',
                                 bottom: 0,
                                 left: '50%',
                                 transform: 'translateX(-50%)',
-                                width: 160,
-                                height: 40,
+                                width: 170,
+                                height: 50,
                                 borderRadius: '50%',
-                                background: `radial-gradient(ellipse, ${raceAccent} 0%, transparent 70%)`,
-                                filter: 'blur(6px)',
+                                background: `radial-gradient(ellipse, ${player.race === 'arctron' ? 'rgba(255,87,34,0.65)' : player.race === 'bionex' ? 'rgba(255,214,0,0.65)' : 'rgba(0,229,255,0.65)'} 0%, transparent 70%)`,
+                                filter: 'blur(8px)',
                               }} />
                               {bionexHeroSprite ? (
                                 <img
                                   src={bionexHeroSprite}
                                   alt={activeLane.title}
-                                  style={{ height: 175, width: 'auto', objectFit: 'contain', objectPosition: 'bottom', opacity: 1, filter: 'brightness(1.25) contrast(1.1)', position: 'relative', zIndex: 1 }}
+                                  style={{ height: 200, width: 'auto', objectFit: 'contain', objectPosition: 'bottom', opacity: 1, filter: 'brightness(1.25) contrast(1.1)', position: 'relative', zIndex: 1 }}
                                 />
                               ) : (
-                                <div style={{ position: 'relative', zIndex: 1, height: 175, display: 'flex', alignItems: 'flex-end' }}>
-                                  <PilotSprite race={player.race} job={j.id} size={175} />
+                                <div style={{ position: 'relative', zIndex: 1, height: 200, display: 'flex', alignItems: 'flex-end' }}>
+                                  <PilotSprite race={player.race} job={j.id} size={200} />
                                 </div>
                               )}
                             </div>
