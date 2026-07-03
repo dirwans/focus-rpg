@@ -22,7 +22,7 @@ const CLASS_LANES = {
   ],
   celestra: [
     { title: "Warrior Path", indices: [[0], [0], [0], [0]] },
-    { title: "Ranger Path", indices: [[1], [1], [1], [1]] },
+    { title: "Pathfinder Path", indices: [[1], [1], [1], [1]] },
     { title: "Summoner Path", indices: [[2], [2], [2], [2]] },
     { title: "Mage Path", indices: [[3], [3], [3], [3]] }
   ],
