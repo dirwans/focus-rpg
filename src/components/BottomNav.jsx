@@ -8,7 +8,7 @@ const NAV = [
   { id: 'ranks',   icon: '📊', label: 'RANKS' },
   { id: 'battle',  icon: '⚔️', label: 'BATTLE' },
   { id: 'mine',    icon: '⛏️', label: 'MINE' },
-  { id: 'cargo',   icon: '📦', label: 'CARGO' },
+  { id: 'cargo',   icon: '📦', label: 'INVENTORY' },
   { id: 'forge',   icon: '🔧', label: 'FORGE' },
   { id: 'premium', icon: '💎', label: 'SHOP' },
 ]

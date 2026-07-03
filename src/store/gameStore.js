@@ -468,6 +468,45 @@ export const useGameStore = create(
         return { ok: true }
       },
 
+      changeCharacterName: (newName, useCard = false) => {
+        const { player } = get()
+        if (!newName || newName.trim().length < 3) {
+          return { ok: false, msg: 'Nama terlalu pendek (minimal 3 karakter)' }
+        }
+        const cleanedName = newName.trim()
+
+        if (!useCard) {
+          if (player.hasChangedName) {
+            return { ok: false, msg: 'Ganti nama gratis sudah terpakai! Gunakan Rename Card.' }
+          }
+          set({
+            player: {
+              ...player,
+              name: cleanedName,
+              hasChangedName: true,
+              savedAt: Date.now()
+            }
+          })
+          return { ok: true }
+        } else {
+          const cardIdx = player.inventory.findIndex(i => i.id === 'rename_card')
+          if (cardIdx === -1) {
+            return { ok: false, msg: 'Kamu tidak memiliki Character Rename Card!' }
+          }
+          const newInv = [...player.inventory]
+          newInv.splice(cardIdx, 1)
+          set({
+            player: {
+              ...player,
+              name: cleanedName,
+              inventory: newInv,
+              savedAt: Date.now()
+            }
+          })
+          return { ok: true }
+        }
+      },
+
       depositToWarehouse: (itemUid) => set((s) => {
         const { player } = s
         const inv = player.inventory || []

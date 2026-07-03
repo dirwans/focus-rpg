@@ -556,7 +556,24 @@ export default function Main() {
           {/* Details side */}
           <div className="profile-details-wrap">
             {/* Player name */}
-            <div className="profile-details-username">{player.name.toUpperCase()}</div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              <div className="profile-details-username">{player.name.toUpperCase()}</div>
+              {!player.hasChangedName && (
+                <button
+                  onClick={() => {
+                    const newName = window.prompt("Masukkan nama karakter baru (Gratis 1x):", player.name)
+                    if (newName) {
+                      const res = useGameStore.getState().changeCharacterName(newName, false)
+                      if (res.ok) alert("Berhasil ganti nama!")
+                      else alert(res.msg)
+                    }
+                  }}
+                  style={{ background: 'rgba(0,229,255,0.1)', border: '1px solid rgba(0,229,255,0.3)', color: '#00e5ff', borderRadius: 4, padding: '2px 6px', fontSize: 11, cursor: 'pointer', fontFamily: 'var(--font-title)', fontWeight: 800 }}
+                >
+                  ✏️ EDIT
+                </button>
+              )}
+            </div>
 
             {/* FACTION / CLASS / JOB rows */}
             <div className="profile-data-rows">

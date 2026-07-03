@@ -171,9 +171,38 @@ export default function SettingsModal({ onClose }) {
                 <li>Membutuhkan item <strong>Rename Card</strong>.</li>
                 <li><strong>Rename Card</strong> hanya tersedia di <strong>Premium Shop (NXC)</strong>.</li>
               </ul>
-              <button style={{...styles.defectBtn, marginTop: 12, opacity: 0.5, cursor: 'not-allowed', background: '#333', border: '1px solid #555', boxShadow: 'none'}}>
-                📝 Rename (Soon)
-              </button>
+              {(() => {
+                const player = useGameStore.getState().player
+                const hasCard = player.inventory?.some(i => i.id === 'rename_card')
+                return (
+                  <button
+                    onClick={() => {
+                      const newName = window.prompt("Masukkan nama karakter baru (Menggunakan Rename Card):", player.name)
+                      if (newName) {
+                        const res = useGameStore.getState().changeCharacterName(newName, true)
+                        if (res.ok) {
+                          alert("Berhasil ganti nama!")
+                          onClose()
+                        } else {
+                          alert(res.msg)
+                        }
+                      }
+                    }}
+                    style={{
+                      ...styles.defectBtn,
+                      marginTop: 12,
+                      background: hasCard ? 'linear-gradient(90deg, #0088ff, #00e5ff)' : '#333',
+                      border: hasCard ? '1px solid #00e5ff' : '1px solid #555',
+                      color: hasCard ? '#000' : '#888',
+                      cursor: hasCard ? 'pointer' : 'not-allowed',
+                      boxShadow: hasCard ? '0 0 10px rgba(0,229,255,0.3)' : 'none'
+                    }}
+                    disabled={!hasCard}
+                  >
+                    {hasCard ? '📝 GUNAKAN RENAME CARD' : '🔒 BUTUH RENAME CARD'}
+                  </button>
+                )
+              })()}
             </div>
 
           </div>
