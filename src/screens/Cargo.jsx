@@ -42,6 +42,7 @@ export default function Cargo() {
 
   const [selectedItem, setSelectedItem] = useState(null)
   const [slotFilter, setSlotFilter] = useState(null)
+  const [tooltipItem, setTooltipItem] = useState(null)
 
   const eq = player.equipment || { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null, ascension_arms: null }
 
@@ -125,9 +126,11 @@ export default function Cargo() {
         }}
         onClick={() => handleSlotClick(slot)}
       >
-        <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: isFilterActive ? '#00e5ff' : item ? color: '#7ab0d0', letterSpacing: 0.5, fontWeight: 800, textTransform: 'uppercase' }}>
-          {slotLabel}
-        </div>
+        {!item && (
+          <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: isFilterActive ? '#00e5ff' : '#7ab0d0', letterSpacing: 0.5, fontWeight: 800, textTransform: 'uppercase' }}>
+            {slotLabel}
+          </div>
+        )}
         {item ? (
           <>
             {item.image ? (
@@ -139,7 +142,8 @@ export default function Cargo() {
             <button
               onClick={(e) => {
                 e.stopPropagation()
-                setSelectedItem({ ...item, isEquipped: true, slot })
+                // Toggle balloon tooltip
+                setTooltipItem(tooltipItem?.uid === item.uid ? null : { ...item, slot })
               }}
               style={{
                 position: 'absolute',
@@ -148,10 +152,10 @@ export default function Cargo() {
                 width: 14,
                 height: 14,
                 borderRadius: '50%',
-                background: 'rgba(3, 8, 20, 0.9)',
+                background: 'rgba(3, 8, 20, 0.95)',
                 border: `1px solid ${color}`,
                 color: color,
-                fontSize: 13,
+                fontSize: 12,
                 fontWeight: 'bold',
                 display: 'flex',
                 alignItems: 'center',
@@ -159,17 +163,79 @@ export default function Cargo() {
                 cursor: 'pointer',
                 padding: 0,
                 lineHeight: 1,
-                zIndex: 10,
+                zIndex: 15,
                 boxShadow: `0 0 5px ${color}55`,
               }}
               title="Info/Unequip"
             >
               ℹ
             </button>
+
+            {/* Balloon Tooltip */}
+            {tooltipItem?.uid === item.uid && (
+              <div 
+                style={{
+                  position: 'absolute',
+                  bottom: '105%',
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  background: 'rgba(5, 12, 28, 0.98)',
+                  border: `1.5px solid ${color}`,
+                  borderRadius: 10,
+                  padding: 10,
+                  width: 170,
+                  zIndex: 100,
+                  boxShadow: `0 8px 24px rgba(0,0,0,0.8), 0 0 10px ${color}44`,
+                  color: '#fff',
+                  fontFamily: 'var(--font-body)',
+                  fontSize: 12,
+                  textAlign: 'left',
+                  cursor: 'default'
+                }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div style={{ fontWeight: 800, color: color, fontSize: 13, borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: 4, marginBottom: 6, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
+                  {item.name.toUpperCase()}
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 2, fontFamily: 'var(--font-mono)', fontSize: 11, color: '#a0c0d8' }}>
+                  <div>Type: {item.type.toUpperCase()}</div>
+                  <div>Rarity: {item.rarity.toUpperCase()}</div>
+                  {item.bonus && (
+                    <div style={{ color: '#00ff88', marginTop: 2, fontWeight: 700 }}>
+                      {item.bonus.atk && `ATK +${item.bonus.atk} `}
+                      {item.bonus.def && `DEF +${item.bonus.def} `}
+                      {item.bonus.hp && `HP +${item.bonus.hp} `}
+                    </div>
+                  )}
+                </div>
+                <button
+                  onClick={() => {
+                    unequipItem(slot)
+                    setTooltipItem(null)
+                  }}
+                  style={{
+                    width: '100%',
+                    background: 'linear-gradient(90deg, #ff2255, #ff5588)',
+                    border: 'none',
+                    borderRadius: 4,
+                    color: '#fff',
+                    padding: '4px 0',
+                    fontFamily: 'var(--font-title)',
+                    fontSize: 11,
+                    fontWeight: 800,
+                    marginTop: 8,
+                    cursor: 'pointer'
+                  }}
+                >
+                  UNEQUIP
+                </button>
+              </div>
+            )}
           </>
         ) : (
           <div style={{ fontSize: 14, opacity: isFilterActive ? 0.6 : 0.18 }}>{defaultEmoji}</div>
         )}
+
       </div>
     )
   }
