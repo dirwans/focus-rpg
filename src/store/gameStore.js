@@ -1588,61 +1588,74 @@ export const useGameStore = create(
         })
 
         // Enhancement math
-        const BASE_SUCCESS_RATES = [1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3]
-        let successChance = BASE_SUCCESS_RATES[currentEnhancement]
+        // Rates: +1 (100%), +2 (90%), +3 (70%), +4 (50%), +5 (35%), +6 (20%), +7 (10%), +8 (5%)
+        const BASE_SUCCESS_RATES = [1.0, 0.9, 0.7, 0.5, 0.35, 0.20, 0.10, 0.05]
+        let successChance = BASE_SUCCESS_RATES[currentEnhancement] || 0.0
         if (useLuckyRelic) {
-          successChance += 0.20
+          successChance += 0.10
         }
         successChance = Math.min(1.0, successChance)
 
         const roll = Math.random()
         let isSuccess = roll < successChance
-        let isDowngraded = false
-        let nextEnhancement = currentEnhancement
 
         if (isSuccess) {
-          nextEnhancement = currentEnhancement + 1
-        } else {
-          if (!useLuckyRelic) {
-            // 50% chance to downgrade by 1
-            if (currentEnhancement > 0 && Math.random() < 0.5) {
-              nextEnhancement = currentEnhancement - 1
-              isDowngraded = true
+          const nextEnhancement = currentEnhancement + 1
+          const updatedItem = {
+            ...item,
+            enhancement: nextEnhancement
+          }
+
+          const newCombatStats = {
+            ...(player.combatStats || { totalMonsterKill: 0, worldBossKill: 0, dungeonClear: 0, coreWarVictory: 0, highestEnhancement: 0 }),
+          }
+          if (nextEnhancement > (newCombatStats.highestEnhancement || 0)) {
+            newCombatStats.highestEnhancement = nextEnhancement
+          }
+
+          set({
+            player: {
+              ...player,
+              inventory: newInventory,
+              equipment: {
+                ...player.equipment,
+                [slot]: updatedItem
+              },
+              combatStats: newCombatStats,
+              savedAt: Date.now()
             }
-          }
-        }
+          })
 
-        const updatedItem = {
-          ...item,
-          enhancement: nextEnhancement
-        }
-
-        const newCombatStats = {
-          ...(player.combatStats || { totalMonsterKill: 0, worldBossKill: 0, dungeonClear: 0, coreWarVictory: 0, highestEnhancement: 0 }),
-        }
-        if (isSuccess && nextEnhancement > (newCombatStats.highestEnhancement || 0)) {
-          newCombatStats.highestEnhancement = nextEnhancement
-        }
-
-        set({
-          player: {
-            ...player,
-            inventory: newInventory,
-            equipment: {
-              ...player.equipment,
-              [slot]: updatedItem
-            },
-            combatStats: newCombatStats,
-            savedAt: Date.now()
-          }
-        })
-
-        if (isSuccess) {
           return { success: true, status: 'success', level: nextEnhancement }
-        } else if (isDowngraded) {
-          return { success: false, status: 'downgraded', level: nextEnhancement }
         } else {
-          return { success: false, status: 'fail', level: nextEnhancement }
+          // Failure outcome:
+          // If current level is 5, 6, or 7 (target level is 6, 7, 8): destruction!
+          const isDestructionLevel = currentEnhancement >= 5
+          if (isDestructionLevel) {
+            const updatedEquipment = { ...player.equipment }
+            delete updatedEquipment[slot] // Completely delete item from slot
+
+            set({
+              player: {
+                ...player,
+                inventory: newInventory,
+                equipment: updatedEquipment,
+                savedAt: Date.now()
+              }
+            })
+
+            return { success: false, status: 'destroyed', level: 0 }
+          } else {
+            // Safe level (0 to 4): level remains the same
+            set({
+              player: {
+                ...player,
+                inventory: newInventory,
+                savedAt: Date.now()
+              }
+            })
+            return { success: false, status: 'fail', level: currentEnhancement }
+          }
         }
       },
 

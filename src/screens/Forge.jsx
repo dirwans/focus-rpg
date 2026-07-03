@@ -97,6 +97,9 @@ export default function Forge() {
       setSparks([])
       if (res && res.status !== 'error') {
         setEnhanceResult(res)
+        if (res.status === 'destroyed') {
+          setSelectedEnhanceSlot('')
+        }
       }
     }, 1000)
   }
@@ -328,6 +331,26 @@ export default function Forge() {
             </select>
           </div>
 
+          {/* Result notification */}
+          {enhanceResult && (
+            <div style={{
+              padding: 10,
+              borderRadius: 8,
+              fontFamily: 'monospace',
+              fontSize: 13,
+              fontWeight: 'bold',
+              textAlign: 'center',
+              background: enhanceResult.status === 'success' ? 'rgba(0,255,136,0.1)' : 'rgba(255,68,68,0.1)',
+              border: `1px solid ${enhanceResult.status === 'success' ? '#00ff88' : '#ff4444'}`,
+              color: enhanceResult.status === 'success' ? '#00ff88' : '#ff4444',
+              marginBottom: 12
+            }}>
+              {enhanceResult.status === 'success' && t('enhance_success_msg', { level: enhanceResult.level })}
+              {enhanceResult.status === 'fail' && t('enhance_fail_msg')}
+              {enhanceResult.status === 'destroyed' && t('enhance_destroyed_msg')}
+            </div>
+          )}
+
           {selectedEnhanceSlot && player.equipment?.[selectedEnhanceSlot] ? (() => {
             const item = player.equipment[selectedEnhanceSlot]
             const currentEnh = item.enhancement || 0
@@ -342,10 +365,10 @@ export default function Forge() {
             const crestOwned = player.inventory.filter(it => it.id === 'mat_divine_crest').length
             const relicOwned = player.inventory.filter(it => it.id === 'mat_lucky_relic').length
 
-            // Rates
-            const BASE_SUCCESS_RATES = [100, 90, 80, 70, 60, 50, 40, 30]
+            // Rates: +1 (100%), +2 (90%), +3 (70%), +4 (50%), +5 (35%), +6 (20%), +7 (10%), +8 (5%)
+            const BASE_SUCCESS_RATES = [100, 90, 70, 50, 35, 20, 10, 5]
             const baseRate = BASE_SUCCESS_RATES[currentEnh] || 0
-            const finalRate = useLuckyRelic ? Math.min(100, baseRate + 20) : baseRate
+            const finalRate = useLuckyRelic ? Math.min(100, baseRate + 10) : baseRate
 
             // Validity checks
             const hasArcanite = arcaniteOwned >= 1
@@ -427,8 +450,28 @@ export default function Forge() {
                     {/* Success Rate */}
                     <div style={{ fontFamily: 'monospace', fontSize: 13, color: '#ffcc00', marginBottom: 12, display: 'flex', justifyContent: 'space-between' }}>
                       <span>Success Rate:</span>
-                      <span style={{ fontWeight: 'bold' }}>{finalRate}% {useLuckyRelic && <span style={{ fontSize: 11, color: '#00ff88' }}>(+20% Boosted)</span>}</span>
+                      <span style={{ fontWeight: 'bold' }}>{finalRate}% {useLuckyRelic && <span style={{ fontSize: 11, color: '#00ff88' }}>(+10% Boosted)</span>}</span>
                     </div>
+
+                    {/* Destruction Warning Alert */}
+                    {currentEnh >= 5 && (
+                      <div style={{
+                        background: 'rgba(255, 68, 68, 0.15)',
+                        border: '1.5px dashed #ff4444',
+                        color: '#ff6666',
+                        padding: '10px 12px',
+                        borderRadius: 8,
+                        fontSize: 12,
+                        fontFamily: 'monospace',
+                        fontWeight: 'bold',
+                        marginBottom: 12,
+                        textAlign: 'center',
+                        lineHeight: 1.4,
+                        boxShadow: '0 0 10px rgba(255, 68, 68, 0.2)'
+                      }}>
+                        {t('enhance_destroy_warning')}
+                      </div>
+                    )}
 
                     {/* Checkbox Lucky Relic */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
@@ -463,25 +506,7 @@ export default function Forge() {
                       )}
                     </div>
 
-                    {/* Result notification */}
-                    {enhanceResult && (
-                      <div style={{
-                        marginTop: 10,
-                        padding: 10,
-                        borderRadius: 8,
-                        fontFamily: 'monospace',
-                        fontSize: 13,
-                        fontWeight: 'bold',
-                        textAlign: 'center',
-                        background: enhanceResult.status === 'success' ? 'rgba(0,255,136,0.1)' : 'rgba(255,68,68,0.1)',
-                        border: `1px solid ${enhanceResult.status === 'success' ? '#00ff88' : '#ff4444'}`,
-                        color: enhanceResult.status === 'success' ? '#00ff88' : '#ff4444'
-                      }}>
-                        {enhanceResult.status === 'success' && t('enhance_success_msg', { level: enhanceResult.level })}
-                        {enhanceResult.status === 'fail' && t('enhance_fail_msg')}
-                        {enhanceResult.status === 'downgraded' && t('enhance_downgrade_msg', { level: enhanceResult.level })}
-                      </div>
-                    )}
+
 
                     <button
                       style={styles.smithBtn(canAfford && !isEnhancing)}
