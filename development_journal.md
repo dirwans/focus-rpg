@@ -86,3 +86,22 @@ This journal tracks all major development milestones, technical optimizations, b
   - Synchronized updated Vite assets to Android (`npx cap sync android`).
   - Compiled the native Java wrapper packages using Gradle (`gradlew assembleDebug`).
   - Copied the compiled package to the root directory as `focus-rpg-debug.apk`.
+
+---
+
+### 🏛️ Milestone 7: NPC Base System & Database Documentation
+
+- **NPC Roster (8 NPCs di NPC Base)**:
+  Semua NPC berlokasi di **NPC Base** — pusat layanan utama Headquarters. Berikut daftar resmi:
+  1. ⚔️ **Arsenal Keeper** — Weapon NPC: Menjual Common Weapon, membeli semua Weapon.
+  2. 🛡️ **Armory Keeper** — Armor NPC: Menjual Common Armor & Shield, membeli semua Armor & Shield.
+  3. ✨ **Forge Master** — Enhancement NPC: Enhancement Equipment +1~+8. Material: Arcanite x1 + Divine Crest (20–200) + Lucky Relic (opsional, +10% rate). Failure +1~+5 equipment aman; failure +6~+8 equipment hancur.
+  4. 🔨 **Master Artisan** — Crafting NPC: Craft Cape, ARES Components, M.E.U. Components, Ancient Spirit Components.
+  5. 🏰 **Guild Steward** — Guild NPC: Membuat, bergabung, keluar, upgrade, dan mengelola Guild.
+  6. 📦 **Vault Keeper** — Warehouse NPC: Menyimpan dan mengambil item dari Personal Warehouse.
+  7. 📜 **Grand Warden** — Quest NPC: Main Quest, Daily Quest, Weekly Quest, Achievement Reward.
+  8. 💰 **Trade Broker** — Auction NPC: Auction House, jual beli item antar pemain.
+
+- **Library Database Update**:
+  - Ditambahkan tab **NPCs** di `LibraryModal.jsx` (📖 Database & Guides) berisi daftar lengkap 8 NPC beserta fungsinya.
+  - Tab NPCs disisipkan di antara tab **Zones** dan **System**.

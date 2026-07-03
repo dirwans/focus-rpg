@@ -21,6 +21,7 @@ export default function LibraryModal({ onClose }) {
           <button style={tab === 'trade' ? styles.tabActive : styles.tab} onClick={() => setTab('trade')}>Trade</button>
           <button style={tab === 'war' ? styles.tabActive : styles.tab} onClick={() => setTab('war')}>War</button>
           <button style={tab === 'zones' ? styles.tabActive : styles.tab} onClick={() => setTab('zones')}>Zones</button>
+          <button style={tab === 'npc' ? styles.tabActive : styles.tab} onClick={() => setTab('npc')}>NPCs</button>
           <button style={tab === 'system' ? styles.tabActive : styles.tab} onClick={() => setTab('system')}>System</button>
           <button style={tab === 'equip' ? styles.tabActive : styles.tab} onClick={() => setTab('equip')}>Equipment</button>
         </div>
@@ -139,6 +140,94 @@ export default function LibraryModal({ onClose }) {
                   <li>⏳ Durasi 2 Jam</li>
                   <li>🌍 Tanpa batas minimum level</li>
                   <li>🏆 Buff kemenangan berlaku hingga perang berikutnya.</li>
+                </ul>
+              </div>
+            </div>
+          )}
+
+          {tab === 'npc' && (
+            <div style={styles.section}>
+              <h3 style={styles.sectionTitle}>🏛️ NPC Database</h3>
+              <p style={{ color: '#88aadd', fontFamily: 'var(--font-mono)', fontSize: 12, marginBottom: 12 }}>
+                Semua NPC berada di <strong style={{ color: '#00e5ff' }}>NPC Base</strong> — pusat layanan utama Headquarters.
+              </p>
+
+              {/* Arsenal Keeper */}
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>⚔️ Arsenal Keeper — <span style={{ color: '#88aadd', fontSize: 13, fontWeight: 400 }}>Weapon NPC</span></div>
+                <ul style={styles.list}>
+                  <li>Menjual <strong>Common Weapon</strong>.</li>
+                  <li>Membeli semua <strong>Weapon</strong>.</li>
+                </ul>
+              </div>
+
+              {/* Armory Keeper */}
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>🛡️ Armory Keeper — <span style={{ color: '#88aadd', fontSize: 13, fontWeight: 400 }}>Armor NPC</span></div>
+                <ul style={styles.list}>
+                  <li>Menjual <strong>Common Armor &amp; Shield</strong>.</li>
+                  <li>Membeli semua <strong>Armor &amp; Shield</strong>.</li>
+                </ul>
+              </div>
+
+              {/* Forge Master */}
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>✨ Forge Master — <span style={{ color: '#88aadd', fontSize: 13, fontWeight: 400 }}>Enhancement NPC</span></div>
+                <ul style={styles.list}>
+                  <li>Enhancement Equipment <strong>+1 hingga +8</strong>.</li>
+                  <li>Menggunakan <strong>Arcanite</strong>, <strong>Divine Crest</strong>, dan <strong>Lucky Relic</strong> (opsional).</li>
+                  <li>Failure +1~+5: Material hilang, Equipment <strong style={{ color: '#00ff88' }}>aman</strong>.</li>
+                  <li>Failure +6~+8: Material hilang, Equipment <strong style={{ color: '#ff4444' }}>hancur (Destroyed)</strong>.</li>
+                </ul>
+              </div>
+
+              {/* Master Artisan */}
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>🔨 Master Artisan — <span style={{ color: '#88aadd', fontSize: 13, fontWeight: 400 }}>Crafting NPC</span></div>
+                <ul style={styles.list}>
+                  <li>Craft <strong>Cape</strong>.</li>
+                  <li>Craft <strong>ARES Components</strong>.</li>
+                  <li>Craft <strong>M.E.U. Components</strong>.</li>
+                  <li>Craft <strong>Ancient Spirit Components</strong>.</li>
+                </ul>
+              </div>
+
+              {/* Guild Steward */}
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>🏰 Guild Steward — <span style={{ color: '#88aadd', fontSize: 13, fontWeight: 400 }}>Guild NPC</span></div>
+                <ul style={styles.list}>
+                  <li>Membuat Guild.</li>
+                  <li>Bergabung &amp; keluar Guild.</li>
+                  <li>Upgrade Guild.</li>
+                  <li>Mengelola Guild.</li>
+                </ul>
+              </div>
+
+              {/* Vault Keeper */}
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>📦 Vault Keeper — <span style={{ color: '#88aadd', fontSize: 13, fontWeight: 400 }}>Warehouse NPC</span></div>
+                <ul style={styles.list}>
+                  <li>Menyimpan dan mengambil semua item dari <strong>Personal Warehouse</strong>.</li>
+                </ul>
+              </div>
+
+              {/* Grand Warden */}
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>📜 Grand Warden — <span style={{ color: '#88aadd', fontSize: 13, fontWeight: 400 }}>Quest NPC</span></div>
+                <ul style={styles.list}>
+                  <li>Main Quest.</li>
+                  <li>Daily Quest.</li>
+                  <li>Weekly Quest.</li>
+                  <li>Achievement Reward.</li>
+                </ul>
+              </div>
+
+              {/* Trade Broker */}
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>💰 Trade Broker — <span style={{ color: '#88aadd', fontSize: 13, fontWeight: 400 }}>Auction NPC</span></div>
+                <ul style={styles.list}>
+                  <li>Auction House.</li>
+                  <li>Jual beli item antar pemain.</li>
                 </ul>
               </div>
             </div>
