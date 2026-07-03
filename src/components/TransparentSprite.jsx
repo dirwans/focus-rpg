@@ -279,6 +279,17 @@ export default function TransparentSprite({
   const displaySrc = disableKeying ? proxiedSrc : (processedSrc || proxiedSrc)
   const isFallback = !disableKeying && (displaySrc === proxiedSrc)
 
+  if (src && src.includes('celestra_ranger')) {
+    console.log('--- CELESTRA RANGER DEBUG ---', {
+      disableKeying,
+      isFallback,
+      displaySrc,
+      proxiedSrc,
+      processedSrc
+    })
+  }
+
+
   if (fill) {
     const fillH = height || 150
     const isCelestra = src && src.includes('celestra_')

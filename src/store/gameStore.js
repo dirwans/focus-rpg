@@ -1001,7 +1001,7 @@ export const useGameStore = create(
       },
 
       _combatTick: () => {
-        const { player, battle } = get()
+        const { player, battle, timer } = get()
         
         // Initialize if state hasn't been set for combat yet
         if (!battle.currentMob) {
