@@ -313,7 +313,7 @@ const styles = {
     overflowY: 'auto',
     fontFamily: 'var(--font-body)',
     paddingBottom: 85,
-    background: '#02050a'
+    background: 'linear-gradient(rgba(2,5,10,0.78) 0%, rgba(2,5,10,0.85) 100%), url("/assets/crag_mine_bg.png") center/cover no-repeat fixed'
   },
   header: {
     display: 'flex',
@@ -409,8 +409,8 @@ const styles = {
     background: 'rgba(255,255,255,0.02)',
     border: '1px solid rgba(255,255,255,0.04)',
     borderRadius: 6,
-    fontSize: 12,
-    color: '#cbddeb'
+    fontSize: 13,
+    color: '#d8eaf6'
   },
   rankRowActive: {
     background: 'rgba(0, 229, 255, 0.06)',
@@ -420,7 +420,7 @@ const styles = {
   },
   badgeBanner: {
     textAlign: 'center',
-    fontSize: 12,
+    fontSize: 13,
     background: 'rgba(0,0,0,0.3)',
     padding: '6px 10px',
     borderRadius: 6,
@@ -432,8 +432,8 @@ const styles = {
     gap: 10
   },
   infoText: {
-    fontSize: 12,
-    color: '#cbddeb',
+    fontSize: 13,
+    color: '#d8eaf6',
     lineHeight: 1.4
   },
   durationOptions: {
@@ -454,19 +454,19 @@ const styles = {
   },
   optionTime: {
     fontFamily: 'var(--font-title)',
-    fontSize: 11,
+    fontSize: 14,
     color: '#00e5ff',
-    fontWeight: 800
+    fontWeight: 900
   },
   optionYield: {
-    fontSize: 10,
-    color: '#fff',
+    fontSize: 13,
+    color: '#ffffff',
     fontWeight: 700
   },
   optionRates: {
-    fontSize: 9,
-    color: '#88aadd',
-    lineHeight: 1.3,
+    fontSize: 13,
+    color: '#c8ddf0',
+    lineHeight: 1.5,
     display: 'flex',
     flexDirection: 'column',
     gap: 2,
