@@ -113,16 +113,24 @@ export default function Unit() {
       <AccordionSection label={t('unit_specifications')} raceClass={raceClass} defaultOpen={true}>
         <div style={styles.statsGrid}>
           <div style={styles.statBox}>
-            <span style={{ color: '#f5a623', fontSize: 13 }}>⚡ ATK</span>
+            <span style={{ color: '#f5a623', fontSize: 11 }}>⚡ ATK</span>
             <span style={styles.statNum}>{stats.atk}</span>
           </div>
           <div style={styles.statBox}>
-            <span style={{ color: '#00c8ff', fontSize: 13 }}>🛡 DEF</span>
+            <span style={{ color: '#00c8ff', fontSize: 11 }}>🛡️ DEF</span>
             <span style={styles.statNum}>{stats.def}</span>
           </div>
           <div style={styles.statBox}>
-            <span style={{ color: '#ff4466', fontSize: 13 }}>❤ HP</span>
+            <span style={{ color: '#ff4466', fontSize: 11 }}>❤️ HP</span>
             <span style={styles.statNum}>{stats.hp.toLocaleString()}</span>
+          </div>
+          <div style={styles.statBox}>
+            <span style={{ color: '#ffaa00', fontSize: 11 }}>💥 CRIT</span>
+            <span style={styles.statNum}>{Math.round((stats.crit || 0.12) * 100)}%</span>
+          </div>
+          <div style={styles.statBox}>
+            <span style={{ color: '#00e5ff', fontSize: 11 }}>🌀 DODGE</span>
+            <span style={styles.statNum}>{Math.round((stats.dodge || 0.05) * 100)}%</span>
           </div>
         </div>
 

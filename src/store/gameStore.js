@@ -607,7 +607,8 @@ export const useGameStore = create(
         let nextPlayerFp = Math.min(playerMaxFp, (battle.playerFp ?? playerMaxFp) + fpRegenRate)
 
         // 3. Player attacks enemy turn
-        const playerAtk = get().getStats().atk
+        const playerStats = get().getStats()
+        const playerAtk = playerStats.atk
         const mob = battle.currentMob
         
         let dmgToEnemy = 0
@@ -620,7 +621,7 @@ export const useGameStore = create(
           newLog.push(`💨 MISS! Serangan ke ${mob.emoji} meleset (Dodge).`)
         } else {
           // Normal Attack Damage Formula
-          isCrit = Math.random() < (player.race === 'celestra' ? 0.15 : 0.12)
+          isCrit = Math.random() < playerStats.crit
           let rawDmg = Math.max(1, playerAtk - mob.def)
 
           // Auto-Skill Logic
@@ -673,10 +674,10 @@ export const useGameStore = create(
         // Enemy action: 45% attack chance
         if (Math.random() < 0.45) {
           const enemyAtk = mob.atk || 5
-          const playerDef = get().getStats().def || 2
+          const playerDef = playerStats.def || 2
           
           let dmgToPlayer = 0
-          const isPlayerDodge = Math.random() < 0.05 // Base 5% Dodge for player
+          const isPlayerDodge = Math.random() < playerStats.dodge
           
           if (isPlayerDodge) {
             if (newLog.length > 7) newLog = newLog.slice(-7)
@@ -1201,6 +1202,7 @@ export const useGameStore = create(
         let percentAtk = 0
         let percentDef = 0
         let percentHp = 0
+        let critBonus = 0
         eqSlots.forEach(slot => {
           const item = eq[slot]
           if (item && item.bonus) {
@@ -1238,6 +1240,7 @@ export const useGameStore = create(
             if (item.bonus.atkPercent) percentAtk += item.bonus.atkPercent
             if (item.bonus.defPercent) percentDef += item.bonus.defPercent
             if (item.bonus.hpPercent) percentHp += item.bonus.hpPercent
+            if (item.bonus.crit) critBonus += item.bonus.crit
           }
         })
 
@@ -1360,6 +1363,38 @@ export const useGameStore = create(
           percentDef += 20
         }
 
+        // Character Growth Job Tier bonuses based on player level
+        const lvl = player.level || 1
+        let tierAtkPercent = 0
+        let tierDefPercent = 0
+        let tierHpPercent = 0
+        let tierCrit = 0
+        let tierDodge = 0
+
+        if (lvl >= 55) {
+          tierAtkPercent = 20
+          tierDefPercent = 20
+          tierHpPercent = 20
+          tierCrit = 10
+          tierDodge = 5
+        } else if (lvl >= 42) {
+          tierAtkPercent = 15
+          tierDefPercent = 15
+          tierHpPercent = 15
+          tierCrit = 5
+          tierDodge = 0
+        } else if (lvl >= 32) {
+          tierAtkPercent = 10
+          tierDefPercent = 10
+          tierHpPercent = 10
+          tierCrit = 0
+          tierDodge = 0
+        }
+
+        percentAtk += tierAtkPercent
+        percentDef += tierDefPercent
+        percentHp += tierHpPercent
+
         let atk = baseAtk * (1 + percentAtk / 100)
         let def = baseDef * (1 + percentDef / 100)
         let hp = baseHp * (1 + percentHp / 100)
@@ -1407,10 +1442,17 @@ export const useGameStore = create(
           activeTitle = 'Iron Overlord'
         }
 
+        // Calculate final Crit and Dodge rates (base + tier + gear)
+        const baseCrit = player.race === 'celestra' ? 15 : 12
+        const critRate = (baseCrit + tierCrit + critBonus) / 100
+        const dodgeRate = (5 + tierDodge) / 100
+
         return {
           atk: Math.floor(atk),
           def: Math.floor(def),
           hp: Math.floor(hp),
+          crit: critRate,
+          dodge: dodgeRate,
           str: baseStats.str,
           dex: baseStats.dex,
           int: baseStats.int,
