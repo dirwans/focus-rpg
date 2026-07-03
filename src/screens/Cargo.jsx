@@ -131,13 +131,10 @@ export default function Cargo() {
         {item ? (
           <>
             {item.image ? (
-              <img referrerPolicy="no-referrer" src={item.image} style={{ width: 26, height: 26, objectFit: 'contain' }} alt={item.name} />
+              <img referrerPolicy="no-referrer" src={item.image} style={{ width: 42, height: 42, objectFit: 'contain' }} alt={item.name} />
             ) : (
-              <span style={{ fontSize: 20 }}>{item.emoji}</span>
+              <span style={{ fontSize: 32 }}>{item.emoji}</span>
             )}
-            <div style={{ fontSize: 13, fontFamily: 'var(--font-mono)', color: color, fontWeight: 'bold', textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden', maxWidth: 80, textAlign: 'center' }}>
-              {item.name.split(' ')[0]}
-            </div>
             
             <button
               onClick={(e) => {
