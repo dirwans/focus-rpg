@@ -13,11 +13,18 @@ export default function Forge() {
   const refineWeapon = useGameStore((s) => s.refineWeapon)
   const combineWeapon = useGameStore((s) => s.combineWeapon)
   const craftAscensionArms = useGameStore((s) => s.craftAscensionArms)
+  const enhanceItem = useGameStore((s) => s.enhanceItem)
 
-  const [activeTab, setActiveTab] = useState('upgrade') // 'upgrade' | 'refine'
+  const [activeTab, setActiveTab] = useState('upgrade') // 'upgrade' | 'refine' | 'enhance'
   const [selectedSacrificeUid, setSelectedSacrificeUid] = useState('')
   const [isRefining, setIsRefining] = useState(false)
   const [sparks, setSparks] = useState([])
+
+  // Enhancement States
+  const [selectedEnhanceSlot, setSelectedEnhanceSlot] = useState('')
+  const [useLuckyRelic, setUseLuckyRelic] = useState(false)
+  const [isEnhancing, setIsEnhancing] = useState(false)
+  const [enhanceResult, setEnhanceResult] = useState(null)
 
   const stats = getStats()
 
@@ -71,6 +78,29 @@ export default function Forge() {
     setSelectedSacrificeUid('')
   }
 
+  const handleEnhance = () => {
+    if (!selectedEnhanceSlot) return
+    setIsEnhancing(true)
+    setEnhanceResult(null)
+
+    const newSparks = Array.from({ length: 20 }).map((_, i) => ({
+      id: i,
+      angle: Math.random() * 360,
+      dist: 25 + Math.random() * 50,
+      scale: 0.4 + Math.random() * 0.8
+    }))
+    setSparks(newSparks)
+
+    setTimeout(() => {
+      const res = enhanceItem(selectedEnhanceSlot, useLuckyRelic)
+      setIsEnhancing(false)
+      setSparks([])
+      if (res && res.status !== 'error') {
+        setEnhanceResult(res)
+      }
+    }, 1000)
+  }
+
   return (
     <div style={styles.screen}>
       <div style={styles.resBar}>
@@ -82,6 +112,7 @@ export default function Forge() {
       <div style={styles.tabs}>
         <div style={activeTab === 'upgrade' ? styles.tabActive : styles.tab} onClick={() => setActiveTab('upgrade')}>{t('upgrade_stats_tab')}</div>
         <div style={activeTab === 'refine' ? styles.tabActive : styles.tab} onClick={() => setActiveTab('refine')}>{t('weapon_smith_tab')}</div>
+        <div style={activeTab === 'enhance' ? styles.tabActive : styles.tab} onClick={() => setActiveTab('enhance')}>{t('item_enhancement_tab')}</div>
         <div style={activeTab === 'ascension' ? styles.tabActive : styles.tab} onClick={() => setActiveTab('ascension')}>ASCENSION LAB</div>
       </div>
 
@@ -266,6 +297,209 @@ export default function Forge() {
                   </div>
                 )}
 
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* ENHANCEMENT TAB */}
+      {activeTab === 'enhance' && (
+        <div style={{ padding: '0 16px' }}>
+          <div style={styles.formGroup}>
+            <label style={styles.label}>{t('select_equip_to_enhance')}</label>
+            <select
+              value={selectedEnhanceSlot}
+              onChange={(e) => {
+                setSelectedEnhanceSlot(e.target.value)
+                setEnhanceResult(null)
+              }}
+              style={styles.select}
+            >
+              <option value="">{t('choose_equip_slot')}</option>
+              {player.equipment && Object.entries(player.equipment).map(([slot, item]) => {
+                if (!item || ['amulet1', 'amulet2', 'ring1', 'ring2', 'ascension_arms'].includes(slot)) return null
+                return (
+                  <option key={slot} value={slot}>
+                    {slot.toUpperCase()}: {item.emoji} {item.name} (+{item.enhancement || 0})
+                  </option>
+                )
+              })}
+            </select>
+          </div>
+
+          {selectedEnhanceSlot && player.equipment?.[selectedEnhanceSlot] ? (() => {
+            const item = player.equipment[selectedEnhanceSlot]
+            const currentEnh = item.enhancement || 0
+            const maxed = currentEnh >= 8
+
+            // Costs
+            const DIVINE_CREST_COSTS = [20, 40, 60, 80, 100, 120, 150, 200]
+            const crestCost = DIVINE_CREST_COSTS[currentEnh] || 0
+            
+            // Owned materials
+            const arcaniteOwned = player.inventory.filter(it => it.id === 'mat_arcanite').length
+            const crestOwned = player.inventory.filter(it => it.id === 'mat_divine_crest').length
+            const relicOwned = player.inventory.filter(it => it.id === 'mat_lucky_relic').length
+
+            // Rates
+            const BASE_SUCCESS_RATES = [100, 90, 80, 70, 60, 50, 40, 30]
+            const baseRate = BASE_SUCCESS_RATES[currentEnh] || 0
+            const finalRate = useLuckyRelic ? Math.min(100, baseRate + 20) : baseRate
+
+            // Validity checks
+            const hasArcanite = arcaniteOwned >= 1
+            const hasCrests = crestOwned >= crestCost
+            const hasRelic = !useLuckyRelic || relicOwned >= 1
+            const canAfford = hasArcanite && hasCrests && hasRelic && !maxed
+
+            return (
+              <div className="glass-panel cyber-panel panel-cyan" style={{ padding: 14, marginBottom: 12 }}>
+                {/* Central Tempering Chamber Display */}
+                <div style={styles.temperingChamber}>
+                  <div style={styles.chamberRing(isEnhancing)}>
+                    <svg width="110" height="110" style={styles.chamberSvg(isEnhancing)}>
+                      <circle cx="55" cy="55" r="46" fill="transparent" stroke="var(--neon-glow)" strokeWidth="1.5" strokeDasharray="6,4" />
+                      <circle cx="55" cy="55" r="38" fill="transparent" stroke="var(--neon-glow)" strokeWidth="1" strokeDasharray="30,8" />
+                    </svg>
+                    <div style={styles.chamberSlot}>
+                      {item.image ? (
+                        <img referrerPolicy="no-referrer" src={item.image} style={{ width: 36, height: 36, objectFit: 'contain' }} alt={item.name} />
+                      ) : (
+                        <span style={{ fontSize: 36 }}>{item.emoji}</span>
+                      )}
+                    </div>
+
+                    {/* Sparks */}
+                    {(isEnhancing || isRefining) && sparks.map(s => (
+                      <div
+                        key={s.id}
+                        className="spark-particle"
+                        style={{
+                          transform: `rotate(${s.angle}deg) translate(${s.dist}px) scale(${s.scale})`
+                        }}
+                      />
+                    ))}
+                  </div>
+
+                  <div style={{ textAlign: 'center', marginTop: 8 }}>
+                    <div style={styles.wepName}>{item.name} <span style={{ color: '#00e5ff', fontWeight: 'bold' }}>+{currentEnh}</span></div>
+                    <div style={{ fontSize: 13, color: '#88aadd', marginTop: 4 }}>
+                      Slot: {selectedEnhanceSlot.toUpperCase()}
+                    </div>
+                  </div>
+                </div>
+
+                {maxed ? (
+                  <div style={styles.maxGradeMsg}>⭐ Maximum enhancement level (+8) reached!</div>
+                ) : (
+                  <div>
+                    {/* Stat changes preview */}
+                    <div style={{ ...styles.refineCosts, background: 'rgba(0, 229, 255, 0.05)', border: '1px solid rgba(0, 229, 255, 0.1)', padding: 10, marginBottom: 12 }}>
+                      <div style={{ fontFamily: 'monospace', fontSize: 13, color: '#e0f4ff', fontWeight: 'bold', marginBottom: 6, borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: 4 }}>
+                        📈 STATS PREVIEW (+{currentEnh} ➜ +{currentEnh + 1}):
+                      </div>
+                      {item.type === 'weapon' ? (
+                        <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'monospace', fontSize: 13, color: '#fff' }}>
+                          <span>ATK Bonus:</span>
+                          <span>
+                            {Math.floor((item.bonus?.atk || 0) * (1 + currentEnh * 0.1))} ➜ <span style={{ color: '#00ff88', fontWeight: 'bold' }}>{Math.floor((item.bonus?.atk || 0) * (1 + (currentEnh + 1) * 0.1))}</span>
+                          </span>
+                        </div>
+                      ) : (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'monospace', fontSize: 13, color: '#fff' }}>
+                            <span>DEF Bonus:</span>
+                            <span>
+                              {Math.floor((item.bonus?.def || 0) * (1 + currentEnh * 0.1))} ➜ <span style={{ color: '#00ff88', fontWeight: 'bold' }}>{Math.floor((item.bonus?.def || 0) * (1 + (currentEnh + 1) * 0.1))}</span>
+                            </span>
+                          </div>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'monospace', fontSize: 13, color: '#fff' }}>
+                            <span>HP Bonus:</span>
+                            <span>
+                              {Math.floor((item.bonus?.hp || 0) * (1 + currentEnh * 0.1))} ➜ <span style={{ color: '#00ff88', fontWeight: 'bold' }}>{Math.floor((item.bonus?.hp || 0) * (1 + (currentEnh + 1) * 0.1))}</span>
+                            </span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Success Rate */}
+                    <div style={{ fontFamily: 'monospace', fontSize: 13, color: '#ffcc00', marginBottom: 12, display: 'flex', justifyContent: 'space-between' }}>
+                      <span>Success Rate:</span>
+                      <span style={{ fontWeight: 'bold' }}>{finalRate}% {useLuckyRelic && <span style={{ fontSize: 11, color: '#00ff88' }}>(+20% Boosted)</span>}</span>
+                    </div>
+
+                    {/* Checkbox Lucky Relic */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
+                      <input
+                        type="checkbox"
+                        id="useLuckyRelic"
+                        checked={useLuckyRelic}
+                        onChange={(e) => setUseLuckyRelic(e.target.checked)}
+                        style={{ cursor: 'pointer', width: 16, height: 16 }}
+                      />
+                      <label htmlFor="useLuckyRelic" style={{ fontFamily: 'monospace', fontSize: 13, color: '#fff', cursor: 'pointer', userSelect: 'none' }}>
+                        {t('lucky_relic_shield_label')}
+                      </label>
+                    </div>
+
+                    {/* Materials Display */}
+                    <div style={{ ...styles.sectionTitle, marginBottom: 6 }}>REQUIRED MATERIALS</div>
+                    <div style={styles.refineCosts}>
+                      <div style={styles.costItem(hasArcanite)}>
+                        <span>{t('mat_arcanite_label')}</span>
+                        <span>{arcaniteOwned} / 1</span>
+                      </div>
+                      <div style={styles.costItem(hasCrests)}>
+                        <span>{t('mat_divine_crest_label')}</span>
+                        <span>{crestOwned} / {crestCost}</span>
+                      </div>
+                      {useLuckyRelic && (
+                        <div style={styles.costItem(hasRelic)}>
+                          <span>{t('mat_lucky_relic_label')}</span>
+                          <span>{relicOwned} / 1</span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Result notification */}
+                    {enhanceResult && (
+                      <div style={{
+                        marginTop: 10,
+                        padding: 10,
+                        borderRadius: 8,
+                        fontFamily: 'monospace',
+                        fontSize: 13,
+                        fontWeight: 'bold',
+                        textAlign: 'center',
+                        background: enhanceResult.status === 'success' ? 'rgba(0,255,136,0.1)' : 'rgba(255,68,68,0.1)',
+                        border: `1px solid ${enhanceResult.status === 'success' ? '#00ff88' : '#ff4444'}`,
+                        color: enhanceResult.status === 'success' ? '#00ff88' : '#ff4444'
+                      }}>
+                        {enhanceResult.status === 'success' && t('enhance_success_msg', { level: enhanceResult.level })}
+                        {enhanceResult.status === 'fail' && t('enhance_fail_msg')}
+                        {enhanceResult.status === 'downgraded' && t('enhance_downgrade_msg', { level: enhanceResult.level })}
+                      </div>
+                    )}
+
+                    <button
+                      style={styles.smithBtn(canAfford && !isEnhancing)}
+                      disabled={!canAfford || isEnhancing}
+                      onClick={handleEnhance}
+                    >
+                      {isEnhancing ? 'ENHANCING...' : t('enhance_btn_label')}
+                    </button>
+                  </div>
+                )}
+              </div>
+            )
+          })() : (
+            <div style={styles.empty}>
+              <div style={{ fontSize: 32 }}>🛡️</div>
+              <div>No item selected.</div>
+              <div style={{ fontSize: 13, color: '#7ec8e3', marginTop: 4 }}>
+                Select an equipped weapon or armor piece above to enhance its stats.
               </div>
             </div>
           )}

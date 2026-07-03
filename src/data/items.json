@@ -114,6 +114,39 @@
       "image": "https://img.rfdatabase.net/items/ioblu01.png"
     },
     {
+      "id": "mat_arcanite",
+      "name": "Arcanite",
+      "emoji": "🪨",
+      "rarity": "rare",
+      "type": "material",
+      "race": "All",
+      "level": 1,
+      "bonus": {},
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile003.png"
+    },
+    {
+      "id": "mat_divine_crest",
+      "name": "Divine Crest",
+      "emoji": "🛡️",
+      "rarity": "epic",
+      "type": "material",
+      "race": "All",
+      "level": 1,
+      "bonus": {},
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile004.png"
+    },
+    {
+      "id": "mat_lucky_relic",
+      "name": "Lucky Relic",
+      "emoji": "🍀",
+      "rarity": "legendary",
+      "type": "material",
+      "race": "All",
+      "level": 1,
+      "bonus": {},
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile005.png"
+    },
+    {
       "id": "talic_ignorance",
       "name": "Ignorance Talic",
       "emoji": "🔺",

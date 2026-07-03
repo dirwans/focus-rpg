@@ -93,7 +93,7 @@ export default function Auth() {
             <input
               style={styles.input}
               type="text"
-              placeholder="ironewan"
+              placeholder="pilot123"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               autoCapitalize="none"

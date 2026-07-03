@@ -964,7 +964,6 @@ export const useGameStore = create(
         let percentAtk = 0
         let percentDef = 0
         let percentHp = 0
-
         eqSlots.forEach(slot => {
           const item = eq[slot]
           if (item && item.bonus) {
@@ -974,17 +973,30 @@ export const useGameStore = create(
             }
 
             let itemAtk = item.bonus.atk || 0
-            
+            let itemDef = item.bonus.def || 0
+            let itemHp = item.bonus.hp || 0
+
             // Apply refinement/rarity bonus if it's the weapon
             if (slot === 'weapon' && item.rarityGrade) {
               const rBonus = getWeaponRarityBonus(item.rarityGrade)
               itemAtk = Math.floor(itemAtk * (1 + rBonus / 100))
             }
 
+            // Apply enhancement bonus (+1 to +8)
+            if (item.enhancement) {
+              const mult = 1 + (item.enhancement * 0.1)
+              if (item.type === 'weapon') {
+                itemAtk = Math.floor(itemAtk * mult)
+              } else {
+                itemDef = Math.floor(itemDef * mult)
+                itemHp = Math.floor(itemHp * mult)
+              }
+            }
+
             flatAtk += itemAtk
-            flatDef += item.bonus.def || 0
-            flatHp += item.bonus.hp || 0
-            
+            flatDef += itemDef
+            flatHp += itemHp
+
             // Percent upgrades
             if (item.bonus.atkPercent) percentAtk += item.bonus.atkPercent
             if (item.bonus.defPercent) percentDef += item.bonus.defPercent
@@ -1515,6 +1527,123 @@ export const useGameStore = create(
             savedAt: Date.now()
           }
         })
+      },
+
+      enhanceItem: (slot, useLuckyRelic) => {
+        const { player } = get()
+        const item = player.equipment?.[slot]
+        if (!item) {
+          alert('Tidak ada item terpasang di slot ini.')
+          return { success: false, status: 'error' }
+        }
+
+        const currentEnhancement = item.enhancement || 0
+        if (currentEnhancement >= 8) {
+          alert(tStore('alert_max_enhancement', {}, player))
+          return { success: false, status: 'error' }
+        }
+
+        // Materials verification
+        const arcaniteCount = player.inventory.filter(it => it.id === 'mat_arcanite').length
+        if (arcaniteCount < 1) {
+          alert(tStore('alert_missing_arcanite', { owned: arcaniteCount }, player))
+          return { success: false, status: 'error' }
+        }
+
+        const DIVINE_CREST_COSTS = [20, 40, 60, 80, 100, 120, 150, 200]
+        const crestCost = DIVINE_CREST_COSTS[currentEnhancement]
+        const crestCount = player.inventory.filter(it => it.id === 'mat_divine_crest').length
+        if (crestCount < crestCost) {
+          alert(tStore('alert_missing_crests', { required: crestCost, owned: crestCount }, player))
+          return { success: false, status: 'error' }
+        }
+
+        if (useLuckyRelic) {
+          const relicCount = player.inventory.filter(it => it.id === 'mat_lucky_relic').length
+          if (relicCount < 1) {
+            alert(tStore('alert_missing_relics', { owned: relicCount }, player))
+            return { success: false, status: 'error' }
+          }
+        }
+
+        // Consume materials
+        let consumedArcanite = 0
+        let consumedCrests = 0
+        let consumedRelics = 0
+
+        const newInventory = player.inventory.filter(it => {
+          if (it.id === 'mat_arcanite' && consumedArcanite < 1) {
+            consumedArcanite++
+            return false
+          }
+          if (it.id === 'mat_divine_crest' && consumedCrests < crestCost) {
+            consumedCrests++
+            return false
+          }
+          if (useLuckyRelic && it.id === 'mat_lucky_relic' && consumedRelics < 1) {
+            consumedRelics++
+            return false
+          }
+          return true
+        })
+
+        // Enhancement math
+        const BASE_SUCCESS_RATES = [1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3]
+        let successChance = BASE_SUCCESS_RATES[currentEnhancement]
+        if (useLuckyRelic) {
+          successChance += 0.20
+        }
+        successChance = Math.min(1.0, successChance)
+
+        const roll = Math.random()
+        let isSuccess = roll < successChance
+        let isDowngraded = false
+        let nextEnhancement = currentEnhancement
+
+        if (isSuccess) {
+          nextEnhancement = currentEnhancement + 1
+        } else {
+          if (!useLuckyRelic) {
+            // 50% chance to downgrade by 1
+            if (currentEnhancement > 0 && Math.random() < 0.5) {
+              nextEnhancement = currentEnhancement - 1
+              isDowngraded = true
+            }
+          }
+        }
+
+        const updatedItem = {
+          ...item,
+          enhancement: nextEnhancement
+        }
+
+        const newCombatStats = {
+          ...(player.combatStats || { totalMonsterKill: 0, worldBossKill: 0, dungeonClear: 0, coreWarVictory: 0, highestEnhancement: 0 }),
+        }
+        if (isSuccess && nextEnhancement > (newCombatStats.highestEnhancement || 0)) {
+          newCombatStats.highestEnhancement = nextEnhancement
+        }
+
+        set({
+          player: {
+            ...player,
+            inventory: newInventory,
+            equipment: {
+              ...player.equipment,
+              [slot]: updatedItem
+            },
+            combatStats: newCombatStats,
+            savedAt: Date.now()
+          }
+        })
+
+        if (isSuccess) {
+          return { success: true, status: 'success', level: nextEnhancement }
+        } else if (isDowngraded) {
+          return { success: false, status: 'downgraded', level: nextEnhancement }
+        } else {
+          return { success: false, status: 'fail', level: nextEnhancement }
+        }
       },
 
       craftAscensionArms: (evoData, raceAresName) => {

@@ -213,21 +213,35 @@ export default function LibraryModal({ onClose }) {
                   <ul style={{ paddingLeft: '16px', marginTop: '4px', marginBottom: '8px', color: '#ddd' }}>
                     <li>🪨 Arcanite x1</li>
                     <li>🛡️ Divine Crest</li>
-                    <li>🍀 Lucky Relic <span style={{ color: '#aaa', fontStyle: 'italic' }}>(Optional - Increase Success Rate)</span></li>
+                    <li>🍀 Lucky Relic <span style={{ color: '#aaa', fontStyle: 'italic' }}>(Optional - Increase Success Rate & Anti-Downgrade)</span></li>
+                  </ul>
+                  <li><strong>Rules & Rates:</strong></li>
+                  <ul style={{ paddingLeft: '16px', marginTop: '4px', marginBottom: '8px', color: '#ddd' }}>
+                    <li>• Weapon Enhancement increases <strong>ATK</strong> (+10% per level).</li>
+                    <li>• Armor/Shield Enhancement increases <strong>HP & DEF</strong> (+10% per level).</li>
+                    <li>• Failure has a <strong>50% chance to downgrade</strong> by 1 level (without Lucky Relic).</li>
+                    <li>• Items <strong>never break</strong> on failure.</li>
                   </ul>
                 </ul>
                 
                 <div style={{ marginTop: '12px' }}>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '4px', borderBottom: '1px solid rgba(255,255,255,0.2)', paddingBottom: '4px', color: '#00e5ff', fontWeight: 'bold' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 2fr 2.5fr', gap: '4px', borderBottom: '1px solid rgba(255,255,255,0.2)', paddingBottom: '4px', color: '#00e5ff', fontWeight: 'bold', fontSize: '12px' }}>
                     <span>Level</span>
-                    <span>Divine Crest Cost</span>
+                    <span>Crest Cost</span>
+                    <span>Success Rate (Base / Lucky)</span>
                   </div>
-                  {[20, 40, 60, 80, 100, 120, 150, 200].map((cost, idx) => (
-                    <div key={idx} style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '4px', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
-                      <span>+{idx + 1}</span>
-                      <span>x{cost}</span>
-                    </div>
-                  ))}
+                  {[20, 40, 60, 80, 100, 120, 150, 200].map((cost, idx) => {
+                    const baseRates = [100, 90, 80, 70, 60, 50, 40, 30]
+                    const baseRate = baseRates[idx]
+                    const luckyRate = Math.min(100, baseRate + 20)
+                    return (
+                      <div key={idx} style={{ display: 'grid', gridTemplateColumns: '1.2fr 2fr 2.5fr', gap: '4px', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0', fontSize: '12px' }}>
+                        <span>+{idx + 1}</span>
+                        <span>x{cost}</span>
+                        <span>{baseRate}% / <span style={{ color: '#00ff88' }}>{luckyRate}%</span></span>
+                      </div>
+                    )
+                  })}
                 </div>
               </div>
 

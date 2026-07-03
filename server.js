@@ -77,6 +77,15 @@ function getSession(req) {
   const s = sessions.get(token)
   if (!s) return null
   if (s.expiresAt && s.expiresAt < Date.now()) { sessions.delete(token); saveSessions(); return null }
+
+  // Guard: pastikan user terdaftar di database
+  const userExists = users.some(u => u.username.toLowerCase() === s.username.toLowerCase())
+  if (!userExists) {
+    sessions.delete(token)
+    saveSessions()
+    return null
+  }
+
   return s
 }
 function requireSession(req, res) {
@@ -357,6 +366,13 @@ app.get('/api/save/stream', (req, res) => {
   const token = req.query.token
   const s = token ? sessions.get(token) : null
   if (!s || (s.expiresAt && s.expiresAt < Date.now())) {
+    res.status(401).end()
+    return
+  }
+  // Guard: pastikan user terdaftar di database
+  const userExists = users.some(u => u.username.toLowerCase() === s.username.toLowerCase())
+  if (!userExists) {
+    if (token) { sessions.delete(token); saveSessions() }
     res.status(401).end()
     return
   }
@@ -845,25 +861,4 @@ app.get('*', (req, res) => {
 
 app.listen(PORT, async () => {
   console.log(`[FocusRPG] server running on :${PORT} — ${users.length} user(s)`)
-  try {
-    const ironewanSave = loadSave('ironewan')
-    if (ironewanSave && ironewanSave.level === 1) {
-      const updated = {
-        ...ironewanSave,
-        level: 4,
-        exp: 0,
-        sector: 2,
-        highestSector: 2,
-        resources: {
-          ...ironewanSave.resources,
-          anium: (ironewanSave.resources?.anium || 200) + 3829
-        },
-        savedAt: Date.now()
-      }
-      await writeSave('ironewan', updated)
-      console.log('[restore] ironewan character progress successfully restored to Level 4 & 4029 Anium')
-    }
-  } catch (e) {
-    console.error('[restore] failed to auto-restore ironewan:', e)
-  }
 })
