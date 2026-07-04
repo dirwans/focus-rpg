@@ -65,10 +65,7 @@ export default function Auth() {
     try {
       clearError()
       const response = await SocialLogin.login({
-        provider: 'google',
-        options: {
-          scopes: ['email', 'profile']
-        }
+        provider: 'google'
       })
       const idToken = response.result?.idToken || response.authentication?.idToken
       if (idToken) {
