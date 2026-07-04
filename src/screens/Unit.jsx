@@ -716,11 +716,11 @@ export default function Unit() {
       <div className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={{ margin: '0 16px 14px', padding: '14px 10px', overflow: 'visible', position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 6, justifyItems: 'center', alignItems: 'center' }}>
         
         {/* Row 1 */}
-        <div style={styles.stackedSlots}>
+        <div style={cargoStyles.stackedSlots}>
           {renderSlot('amulet1', '💎', 'AMU I', true)}
         </div>
         {renderSlot('helmet', '⛑', 'HELMET')}
-        <div style={styles.stackedSlots}>
+        <div style={cargoStyles.stackedSlots}>
           {renderSlot('amulet2', '💎', 'AMU II', true)}
         </div>
 
@@ -735,12 +735,12 @@ export default function Unit() {
         {renderSlot('mantle', '🦺', 'CAPE')}
 
         {/* Row 4 */}
-        <div style={styles.ascensionCorner}>
+        <div style={cargoStyles.ascensionCorner}>
           {renderSlot('ring1', '💍', 'RNG I', true)}
           {renderSlot('ascension_arms', '⚙️', 'ARES', true)}
         </div>
         {renderSlot('boots', '👢', 'BOOTS')}
-        <div style={styles.ascensionCorner}>
+        <div style={cargoStyles.ascensionCorner}>
           {renderSlot('ring2', '💍', 'RNG II', true)}
         </div>
       </div>
@@ -808,7 +808,7 @@ export default function Unit() {
         )}
       </div>
 
-      <div style={styles.grid}>
+      <div style={cargoStyles.grid}>
         {Array.from({ length: 25 }).map((_, index) => {
           const item = filteredInventory[index];
           if (item) {
@@ -817,19 +817,19 @@ export default function Unit() {
               <button
                 key={item.uid}
                 className="premium-card glass-panel"
-                style={styles.itemCard(cardColor)}
+                style={cargoStyles.itemCard(cardColor)}
                 onClick={() => setSelectedItem(item)}
               >
-                <div style={styles.itemIcon}>
+                <div style={cargoStyles.itemIcon}>
                   {item.image ? (
                     <img referrerPolicy="no-referrer" src={item.image} style={{ width: 34, height: 28, fontSize: 10, objectFit: 'contain' }} alt={item.name} />
                   ) : (
                     item.emoji
                   )}
                 </div>
-                <div style={styles.itemName}>{getItemName(item)}</div>
-                <div style={styles.itemBadges}>
-                  <span style={styles.rarityBadge(cardColor)}>{(item.rarityGrade || item.rarity).toUpperCase()}</span>
+                <div style={cargoStyles.itemName}>{getItemName(item)}</div>
+                <div style={cargoStyles.itemBadges}>
+                  <span style={cargoStyles.rarityBadge(cardColor)}>{(item.rarityGrade || item.rarity).toUpperCase()}</span>
                 </div>
                 {item.qty > 1 && (
                   <span style={{ position: 'absolute', bottom: 4, right: 6, fontSize: 11, fontWeight: 900, color: '#00ffaa', fontFamily: 'var(--font-mono)', textShadow: '0 0 4px #000, 1px 1px 2px #000' }}>
@@ -843,7 +843,7 @@ export default function Unit() {
               <div
                 key={`empty-${index}`}
                 style={{
-                  ...styles.itemCard('rgba(0,0,0,0)'),
+                  ...cargoStyles.itemCard('rgba(0,0,0,0)'),
                   background: 'rgba(10, 15, 30, 0.4)',
                   border: '1.5px solid rgba(40, 50, 70, 0.5)',
                   cursor: 'default'
@@ -856,9 +856,9 @@ export default function Unit() {
 
       {/* Item Actions Modal */}
       {selectedItem && (
-        <div style={styles.modalOverlay}>
-          <div className="glass-panel" style={styles.modal}>
-            <div style={{ ...styles.modalName, color: getItemColor(selectedItem), display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+        <div style={cargoStyles.modalOverlay}>
+          <div className="glass-panel" style={cargoStyles.modal}>
+            <div style={{ ...cargoStyles.modalName, color: getItemColor(selectedItem), display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
               {selectedItem.image ? (
                 <img referrerPolicy="no-referrer" src={selectedItem.image} style={{ width: 32, height: 32, objectFit: 'contain' }} alt={selectedItem.name} />
               ) : (
@@ -867,18 +867,18 @@ export default function Unit() {
               <span>{selectedItem.name.toUpperCase()}</span>
             </div>
             
-            <div style={styles.modalGrid}>
-              <div style={styles.modalRow}><span>{t('type_label')}:</span> <span>{selectedItem.type.toUpperCase()}</span></div>
-              <div style={styles.modalRow}><span>{t('level_label')}:</span> <span>Lv.{selectedItem.level || 1}</span></div>
-              <div style={styles.modalRow}><span>{t('race_label')}:</span> <span>{(selectedItem.race || 'All').toUpperCase()}</span></div>
+            <div style={cargoStyles.modalGrid}>
+              <div style={cargoStyles.modalRow}><span>{t('type_label')}:</span> <span>{selectedItem.type.toUpperCase()}</span></div>
+              <div style={cargoStyles.modalRow}><span>{t('level_label')}:</span> <span>Lv.{selectedItem.level || 1}</span></div>
+              <div style={cargoStyles.modalRow}><span>{t('race_label')}:</span> <span>{(selectedItem.race || 'All').toUpperCase()}</span></div>
               {selectedItem.job && (
-                <div style={styles.modalRow}><span>{t('job_label')}:</span> <span style={{ color: '#ffb300' }}>{selectedItem.job.toUpperCase()}</span></div>
+                <div style={cargoStyles.modalRow}><span>{t('job_label')}:</span> <span style={{ color: '#ffb300' }}>{selectedItem.job.toUpperCase()}</span></div>
               )}
               {selectedItem.specialProperty && (
-                <div style={styles.modalRow}><span>{t('effect_label')}:</span> <span style={{ color: '#ff3366', fontWeight: 800 }}>{selectedItem.specialProperty.toUpperCase()}</span></div>
+                <div style={cargoStyles.modalRow}><span>{t('effect_label')}:</span> <span style={{ color: '#ff3366', fontWeight: 800 }}>{selectedItem.specialProperty.toUpperCase()}</span></div>
               )}
               {selectedItem.bonus && (
-                <div style={styles.modalRow}>
+                <div style={cargoStyles.modalRow}>
                   <span>{t('bonus_label')}:</span>
                   <span style={{ color: '#00ff88', fontWeight: 700, textAlign: 'right', display: 'inline-block', maxWidth: '65%' }}>
                     {selectedItem.bonus.atk && `+${selectedItem.bonus.atk} ATK `}
@@ -894,13 +894,13 @@ export default function Unit() {
                 </div>
               )}
               {selectedItem.description && (
-                <div style={{ ...styles.modalRow, flexDirection: 'column', gap: 4, marginTop: 4 }}>
+                <div style={{ ...cargoStyles.modalRow, flexDirection: 'column', gap: 4, marginTop: 4 }}>
                   <span>{t('description_label')}:</span>
                   <span style={{ color: '#90caf9', fontSize: 13 }}>{selectedItem.description}</span>
                 </div>
               )}
               {selectedItem.id && selectedItem.id.startsWith('archon_') && (
-                <div style={{ ...styles.modalRow, flexDirection: 'column', gap: 4, marginTop: 4, background: 'rgba(245, 166, 35, 0.08)', border: '1px solid rgba(245, 166, 35, 0.2)', padding: 8, borderRadius: 6 }}>
+                <div style={{ ...cargoStyles.modalRow, flexDirection: 'column', gap: 4, marginTop: 4, background: 'rgba(245, 166, 35, 0.08)', border: '1px solid rgba(245, 166, 35, 0.2)', padding: 8, borderRadius: 6 }}>
                   <span style={{ color: '#ffcc80', fontSize: 13, lineHeight: 1.4 }}>{t('archon_notice_cargo')}</span>
                 </div>
               )}
@@ -909,19 +909,19 @@ export default function Unit() {
 
             {/* Level/Race/Job requirements checks warnings */}
             {!selectedItem.isEquipped && player.level < (selectedItem.level || 0) && (
-              <div style={styles.warning}>{t('req_level_warn', { req: selectedItem.level, level: player.level })}</div>
+              <div style={cargoStyles.warning}>{t('req_level_warn', { req: selectedItem.level, level: player.level })}</div>
             )}
             {!selectedItem.isEquipped && selectedItem.race && selectedItem.race !== 'All' && selectedItem.race !== player.race && (
-              <div style={styles.warning}>{t('restricted_race_warn', { race: selectedItem.race.toUpperCase() })}</div>
+              <div style={cargoStyles.warning}>{t('restricted_race_warn', { race: selectedItem.race.toUpperCase() })}</div>
             )}
             {!selectedItem.isEquipped && selectedItem.job && selectedItem.job !== player.job && (
-              <div style={styles.warning}>{t('restricted_job_warn', { job: selectedItem.job.toUpperCase() })}</div>
+              <div style={cargoStyles.warning}>{t('restricted_job_warn', { job: selectedItem.job.toUpperCase() })}</div>
             )}
 
-            <div style={styles.modalButtons}>
+            <div style={cargoStyles.modalButtons}>
               {selectedItem.isEquipped ? (
                 <button
-                  style={styles.modalBtn('#ff4466', true)}
+                  style={cargoStyles.modalBtn('#ff4466', true)}
                   onClick={() => {
                     unequipItem(selectedItem.slot)
                     setSelectedItem(null)
@@ -932,7 +932,7 @@ export default function Unit() {
               ) : (
                 ['weapon', 'armor', 'shield', 'helmet', 'mantle', 'gloves', 'boots', 'pants', 'amulet', 'ring'].includes(selectedItem.type) && (
                   <button
-                    style={styles.modalBtn('#00c8ff', true)}
+                    style={cargoStyles.modalBtn('#00c8ff', true)}
                     onClick={() => handleEquip(selectedItem.uid)}
                     disabled={
                       player.level < (selectedItem.level || 0) ||
@@ -945,11 +945,11 @@ export default function Unit() {
                 )
               )}
               {!selectedItem.isEquipped && (
-                <button style={styles.modalBtn('#ff8c40', true)} onClick={() => handleSell(selectedItem.uid)}>
+                <button style={cargoStyles.modalBtn('#ff8c40', true)} onClick={() => handleSell(selectedItem.uid)}>
                   {t('sell_btn', { price: getSellPrice(selectedItem) })}
                 </button>
               )}
-              <button style={styles.modalBtn('#7ab0d0', false)} onClick={() => setSelectedItem(null)}>
+              <button style={cargoStyles.modalBtn('#7ab0d0', false)} onClick={() => setSelectedItem(null)}>
                 {t('close_btn')}
               </button>
             </div>
@@ -1275,4 +1275,32 @@ const styles = {
     color: '#eab308'
   }
 }
+
+const cargoStyles = {
+  chip:         (c) => ({ background: 'rgba(3, 8, 20, 0.8)', border: `1px solid ${c}`, borderRadius: 20, padding: '6px 14px', fontFamily: 'var(--font-mono)', fontSize: 16, fontWeight: 800, color: c, boxShadow: `0 0 10px ${c}33, inset 0 0 6px ${c}22` }),
+  slots:        { fontFamily: 'var(--font-mono)', fontSize: 14, color: '#7ab0d0', background: 'rgba(3, 8, 20, 0.8)', border: '1px solid #1a3a6a', borderRadius: 20, padding: '6px 14px', marginLeft: 'auto', fontWeight: 800 },
+  section:      { margin: '0 16px 14px', padding: 14 },
+  sectionLabel: { fontFamily: 'var(--font-title)', fontSize: 14, letterSpacing: 2, color: '#7ec8e3', marginBottom: 10, fontWeight: 800 },
+  slotHeader:   { fontFamily: 'var(--font-title)', fontSize: 13, color: '#7ec8e3', letterSpacing: 0.5, fontWeight: 800 },
+  grid:         { display: 'flex', flexWrap: 'wrap', gap: 8, padding: '0 16px 16px' },
+  itemCard:     (c) => ({ width: 'calc(20% - 8px)', padding: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5, position: 'relative', cursor: 'pointer', textAlign: 'center', border: `1.5px solid ${c}` }),
+  itemIcon:     { fontSize: 28 },
+  itemName:     { fontFamily: 'var(--font-body)', fontSize: 13, color: '#e0f4ff', height: 28, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', lineHeight: 1.3, fontWeight: 700 },
+  itemBadges:   { display: 'flex', gap: 4 },
+  rarityBadge:  (c) => ({ fontFamily: 'var(--font-title)', fontSize: 13, color: c, fontWeight: 800 }),
+  empty:        { display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '40px 20px', textAlign: 'center', opacity: 0.6 },
+  modalOverlay: { position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.85)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 100 },
+  modal:        { border: '1px solid rgba(0, 229, 255, 0.3)', borderRadius: 16, padding: 20, width: 320, display: 'flex', flexDirection: 'column', gap: 14, boxShadow: '0 10px 25px rgba(0,0,0,0.8)' },
+  modalName:    { fontFamily: 'var(--font-title)', fontSize: 16, fontWeight: 900, textAlign: 'center', borderBottom: '1px solid rgba(0, 229, 255, 0.2)', paddingBottom: 8 },
+  modalGrid:    { display: 'flex', flexDirection: 'column', gap: 6 },
+  modalRow:     { display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-mono)', fontSize: 14, color: '#c0dff0', fontWeight: 700 },
+  warning:      { background: 'rgba(255,50,50,0.1)', border: '1px solid #ff4444', borderRadius: 6, padding: '6px 10px', fontFamily: 'var(--font-mono)', fontSize: 14, color: '#ff4444', textAlign: 'center', fontWeight: 800 },
+  modalButtons: { display: 'flex', flexDirection: 'column', gap: 8, marginTop: 4 },
+  modalBtn:     (c, active) => ({ width: '100%', padding: 12, borderRadius: 8, border: active ? 'none' : `1px solid ${c}`, background: active ? c : 'transparent', color: active ? '#000' : c, fontFamily: 'var(--font-title)', fontSize: 14, fontWeight: 800, cursor: 'pointer', transition: 'all 0.2s' }),
+  gearRow:      { display: 'flex', gap: 5, justifyContent: 'center', marginBottom: 5, position: 'relative', zIndex: 2 },
+  gearEmpty:    { flex: 1, maxWidth: 100 },
+  stackedSlots: { display: 'flex', flexDirection: 'column', gap: 6, justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%' },
+  ascensionCorner: { display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%' },
+}
+
 
