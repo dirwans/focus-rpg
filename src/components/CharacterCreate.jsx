@@ -351,12 +351,12 @@ export default function CharacterCreate() {
               <input
                 type="text"
                 value={charName}
-                onChange={(e) => setCharName(e.target.value.replace(/[^a-zA-Z0-9_]/g, ''))}
+                onChange={(e) => setCharName(e.target.value.replace(/[^a-zA-Z0-9_\-@#]/g, ''))}
                 placeholder="Nama Karakter"
                 maxLength={16}
                 style={styles.input}
               />
-              <div style={styles.inputHint}>Hanya huruf, angka, dan underscore (_). Minimal 3 karakter.</div>
+              <div style={styles.inputHint}>Hanya huruf, angka, dan simbol (_, -, @, #). Minimal 3 karakter.</div>
             </div>
           </div>
         )}
