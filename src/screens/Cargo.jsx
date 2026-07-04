@@ -129,8 +129,17 @@ export default function Cargo() {
         onClick={() => handleSlotClick(slot)}
       >
         {!item && (
-          <div style={{ fontFamily: 'var(--font-title)', fontSize: isSmall ? 10 : 12, color: isFilterActive ? '#00e5ff' : '#7ab0d0', letterSpacing: 0.5, fontWeight: 800, textTransform: 'uppercase' }}>
-            {slotLabel}
+          <div style={{ 
+            fontSize: isSmall ? 28 : 48, 
+            opacity: isFilterActive ? 0.4 : 0.1, 
+            filter: isFilterActive ? 'drop-shadow(0 0 8px #00e5ff)' : 'grayscale(100%) brightness(0.5)',
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center',
+            position: 'absolute',
+            inset: 0
+          }}>
+            {defaultEmoji}
           </div>
         )}
         {item ? (
@@ -234,8 +243,6 @@ export default function Cargo() {
               </div>
             )}
           </>
-        ) : (
-          <div style={{ fontSize: isSmall ? 16 : 22, opacity: isFilterActive ? 0.6 : 0.18 }}>{defaultEmoji}</div>
         )}
 
       </div>
