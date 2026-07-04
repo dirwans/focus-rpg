@@ -141,13 +141,13 @@ export default function App() {
     readyRef.current = false
     // Immediately wipe stale state from previous user so nothing bleeds through during load
     useGameStore.setState((s) => ({
-      player: { ...s.player, username: user.username, name: user.username, race: null },
+      player: { ...s.player, username: user.username, name: s.player.username === user.username ? s.player.name : user.username, race: null },
     }))
     localStorage.removeItem('focus-rpg-save')
     loadSave().then((cloud) => {
       if (cloud) {
-        // Force-apply correct username/name regardless of what's stored on server
-        const correctedCloud = { ...cloud, username: user.username, name: user.username }
+        // Force-apply correct username regardless of what's stored on server, preserve custom name
+        const correctedCloud = { ...cloud, username: user.username, name: cloud.name || user.username }
         applySyncState(correctedCloud)
         lastSyncRef.current = snap(correctedCloud)
       } else {
@@ -187,21 +187,20 @@ export default function App() {
     }).catch(e => console.error('[Archon] fetch error', e))
   }, [user?.username, hydrated])
 
-  // Sync player name and username to user.username from auth store
+  // Sync player username to user.username from auth store
   useEffect(() => {
     if (user?.username && hydrated) {
       const curPlayer = useGameStore.getState().player
-      if (curPlayer.username !== user.username || curPlayer.name !== user.username) {
+      if (curPlayer.username !== user.username) {
         useGameStore.setState((s) => ({
           player: {
             ...s.player,
-            username: user.username,
-            name: user.username
+            username: user.username
           }
         }))
       }
     }
-  }, [user?.username, hydrated, player.username, player.name])
+  }, [user?.username, hydrated, player.username])
 
   // Sync tiap state berubah (debounce 800ms) — skip kalau sama dgn snapshot terakhir
   useEffect(() => {
