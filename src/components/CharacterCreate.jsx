@@ -98,6 +98,27 @@ export default function CharacterCreate() {
     useGameStore.getState().setScreen('main')
   }
 
+  const getClassPathName = (race, job_id) => {
+    if (race === 'celestra') {
+      if (job_id === 'sentinel') return 'Warrior'
+      if (job_id === 'pathfinder') return 'Ranger'
+      if (job_id === 'oracle') return 'Summoner'
+      if (job_id === 'arcanist') return 'Mage'
+    }
+    if (race === 'bionex') {
+      if (job_id === 'guardian') return 'Warrior'
+      if (job_id === 'marksman') return 'Ranger'
+      if (job_id === 'engineer') return 'Specialist'
+      if (job_id === 'psion') return 'Mage'
+    }
+    if (race === 'arctron') {
+      if (job_id === 'destroyer') return 'Warrior'
+      if (job_id === 'gunner') return 'Ranger'
+      if (job_id === 'engineer') return 'Specialist'
+    }
+    return 'Novice'
+  }
+
   const selectedRace = races[raceId]
   const tier1Jobs = raceId ? (jobs[raceId]?.tier1 || []) : []
   const selectedJob = tier1Jobs.find(j => j.id === jobId)
@@ -217,8 +238,9 @@ export default function CharacterCreate() {
                   }}
                 >
                   <div style={{ textAlign: 'left', width: '100%' }}>
-                    <div style={styles.cardTitle}>{jb.name}</div>
-                    <div style={styles.cardSub}>{jb.desc}</div>
+                    <div style={styles.cardTitle}>{getClassPathName(raceId, jb.id).toUpperCase()}</div>
+                    <div style={styles.cardSub}>Initial Job: <span style={{ color: '#00e5ff', fontWeight: 'bold' }}>{jb.name}</span></div>
+                    <div style={{ ...styles.description, marginTop: 4 }}>{jb.desc}</div>
                     <div style={styles.bonusRow}>
                       <span style={styles.bonusTag}>❤️ +{jb.bonus.hp} HP</span>
                       <span style={styles.bonusTag}>⚡ +{jb.bonus.atk} ATK</span>
@@ -265,7 +287,7 @@ export default function CharacterCreate() {
                 }} />
               </div>
               <div style={styles.previewMeta}>
-                <div style={styles.previewName}>{selectedJob?.name}</div>
+                <div style={styles.previewName}>{getClassPathName(raceId, jobId).toUpperCase()} ({selectedJob?.name})</div>
                 <div style={styles.previewRace}>{selectedRace?.name.split(' – ')[0]} Faction</div>
               </div>
             </div>
@@ -355,8 +377,8 @@ export default function CharacterCreate() {
                 <span style={styles.recapVal}>{selectedRace?.name.split(' – ')[0]}</span>
               </div>
               <div style={styles.recapRow}>
-                <span style={styles.recapKey}>⚔️ Class:</span>
-                <span style={styles.recapVal}>{selectedJob?.name}</span>
+                <span style={styles.recapKey}>⚔️ Class / Path:</span>
+                <span style={styles.recapVal}>{getClassPathName(raceId, jobId)} ({selectedJob?.name})</span>
               </div>
               <div style={styles.recapRow}>
                 <span style={styles.recapKey}>📛 Name:</span>
