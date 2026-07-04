@@ -189,74 +189,7 @@ export default function Unit() {
             </div>
           </div>
         )}
-        {/* Growth per Level & Filosofi Balance */}
-        {player.race && (
-          <div style={{ marginTop: 16 }}>
-            <div style={styles.specTitle}>Growth per Level</div>
-            <table style={styles.growthTable}>
-              <thead>
-                <tr>
-                  <th style={styles.th}>Job</th>
-                  <th style={styles.th}>HP/Lv</th>
-                  <th style={styles.th}>ATK/Lv</th>
-                  <th style={styles.th}>DEF/Lv</th>
-                </tr>
-              </thead>
-              <tbody>
-                {player.race === 'bionex' && (
-                  <>
-                    <tr><td style={styles.td}>Guardian</td><td style={styles.td}>+13</td><td style={styles.td}>+2</td><td style={styles.td}>+2</td></tr>
-                    <tr><td style={styles.td}>Marksman</td><td style={styles.td}>+10</td><td style={styles.td}>+3</td><td style={styles.td}>+1</td></tr>
-                    <tr><td style={styles.td}>Engineer</td><td style={styles.td}>+9</td><td style={styles.td}>+2</td><td style={styles.td}>+1.5</td></tr>
-                    <tr><td style={styles.td}>Psion</td><td style={styles.td}>+8</td><td style={styles.td}>+3</td><td style={styles.td}>+1</td></tr>
-                  </>
-                )}
-                {player.race === 'arctron' && (
-                  <>
-                    <tr><td style={styles.td}>Warrior</td><td style={styles.td}>+14</td><td style={styles.td}>+2</td><td style={styles.td}>+2</td></tr>
-                    <tr><td style={styles.td}>Ranger</td><td style={styles.td}>+10</td><td style={styles.td}>+3</td><td style={styles.td}>+1</td></tr>
-                    <tr><td style={styles.td}>Technician</td><td style={styles.td}>+9</td><td style={styles.td}>+2</td><td style={styles.td}>+1.5</td></tr>
-                  </>
-                )}
-                {player.race === 'celestra' && (
-                  <>
-                    <tr><td style={styles.td}>Sentinel</td><td style={styles.td}>+12</td><td style={styles.td}>+2</td><td style={styles.td}>+2</td></tr>
-                    <tr><td style={styles.td}>Pathfinder</td><td style={styles.td}>+9</td><td style={styles.td}>+3</td><td style={styles.td}>+1</td></tr>
-                    <tr><td style={styles.td}>Oracle</td><td style={styles.td}>+8</td><td style={styles.td}>+2</td><td style={styles.td}>+1.5</td></tr>
-                    <tr><td style={styles.td}>Arcanist</td><td style={styles.td}>+8</td><td style={styles.td}>+3</td><td style={styles.td}>+1</td></tr>
-                  </>
-                )}
-              </tbody>
-            </table>
 
-            <div style={{ ...styles.specTitle, marginTop: 16 }}>Filosofi Balance</div>
-            <div style={styles.filosofiBox}>
-              {player.race === 'bionex' && (
-                <>
-                  <div style={styles.filosofiItem}><strong>🛡 Guardian:</strong> HP & DEF tertinggi. ATK sedang. Fokus tank/frontliner.</div>
-                  <div style={styles.filosofiItem}><strong>🎯 Marksman:</strong> HP terendah kedua, DEF paling rendah. ATK tertinggi. DPS tinggi tapi rapuh.</div>
-                  <div style={styles.filosofiItem}><strong>🔧 Engineer:</strong> HP paling rendah. DEF sedang. ATK paling rendah. Kelebihan berasal dari ARES/Summon.</div>
-                  <div style={styles.filosofiItem}><strong>🔮 Psion:</strong> HP paling rendah. DEF terendah. ATK tinggi. Area damage.</div>
-                </>
-              )}
-              {player.race === 'arctron' && (
-                <>
-                  <div style={styles.filosofiItem}><strong>⚔️ Warrior:</strong> HP & DEF tertinggi. ATK sedang. Fokus menjadi tank/frontliner.</div>
-                  <div style={styles.filosofiItem}><strong>🎯 Ranger:</strong> HP terendah kedua. DEF paling rendah. ATK dasar tertinggi. DPS tinggi tetapi lebih rapuh.</div>
-                  <div style={styles.filosofiItem}><strong>🔧 Technician:</strong> HP paling rendah. DEF sedang. ATK paling rendah. Kelebihan berasal dari ARES mulai level 32, bukan dari status dasar.</div>
-                </>
-              )}
-              {player.race === 'celestra' && (
-                <>
-                  <div style={styles.filosofiItem}><strong>⚔️ Sentinel:</strong> HP tertinggi di Celestra. DEF tertinggi. ATK sedang. Petarung garis depan yang menggabungkan pedang dan energi arcane.</div>
-                  <div style={styles.filosofiItem}><strong>🏹 Pathfinder:</strong> HP rendah. DEF rendah. ATK fisik tertinggi. Mengandalkan kecepatan dan serangan kritikal.</div>
-                  <div style={styles.filosofiItem}><strong>🌿 Oracle:</strong> HP paling rendah. DEF sedang. ATK dasar paling rendah. Kekuatan utama berasal dari Ancient Spirit mulai Lv.32.</div>
-                  <div style={styles.filosofiItem}><strong>🔮 Arcanist:</strong> HP rendah. DEF terendah. ATK sihir sangat tinggi. Burst damage dan AoE.</div>
-                </>
-              )}
-            </div>
-          </div>
-        )}
       </AccordionSection>
 
       {/* SYSTEM PROGRESS */}
