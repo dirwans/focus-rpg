@@ -243,7 +243,7 @@ export default function Cargo() {
               </div>
             )}
           </>
-        )}
+        ) : null}
 
       </div>
     )
