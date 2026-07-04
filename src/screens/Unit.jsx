@@ -100,6 +100,20 @@ function AccordionSection({ label, raceClass, defaultOpen = false, children }) {
 }
 
 export default function Unit() {
+
+// Add hero animation keyframes to document (once)
+if (typeof document !== 'undefined' && !document.getElementById('hero-stage-kf')) {
+  const styleEl = document.createElement('style')
+  styleEl.id = 'hero-stage-kf'
+  styleEl.textContent = `
+    @keyframes heroFloat { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-9px); } }
+    @keyframes heroRune  { from { transform: translate(-50%,-50%) rotate(0deg); } to { transform: translate(-50%,-50%) rotate(360deg); } }
+    @keyframes heroRuneRev { from { transform: translate(-50%,-50%) rotate(0deg); } to { transform: translate(-50%,-50%) rotate(-360deg); } }
+    @keyframes ledBlink  { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+  `
+  document.head.appendChild(styleEl)
+}
+
   const [tab, setTab] = useState('stats')
 
   const [selectedItem, setSelectedItem] = useState(null)
@@ -369,65 +383,401 @@ export default function Unit() {
 
   return (
     <div className="no-scrollbar" style={styles.screen}>
-      {/* Header */}
-      <div style={styles.header}>
-        <button onClick={() => useGameStore.getState().setScreen('main')} style={{background:'transparent', border:'none', color:'#00e5ff', fontSize: 20, cursor:'pointer', padding: '0 8px 0 0', display:'flex', alignItems:'center'}}>❮</button>
-        <div style={{ flex: 1, textAlign: 'center', marginRight: 24 }}>
-          <span style={{ fontFamily: 'var(--font-title)', fontSize: 18, fontWeight: 900, color: '#fff', letterSpacing: 2, textShadow: '0 0 10px var(--neon-glow)' }}>CHARACTER</span>
-        </div>
-      </div>
+      {/* ===== HEADER ===== */}
+      {(() => {
+        const fp = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
+        return (
+          <div style={{ position: 'relative', zIndex: 4, display: 'flex', alignItems: 'center', gap: 10, padding: '14px 16px 8px' }}>
+            <button onClick={() => useGameStore.getState().setScreen('main')} style={{
+              width: 32, height: 32, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              background: 'rgba(8,22,36,0.5)', border: `1px solid ${fp}55`, cursor: 'pointer', color: fp, fontSize: 16, flexShrink: 0,
+            }}>❮</button>
+            <div style={{ flex: 1, textAlign: 'center', marginRight: 32, fontFamily: 'var(--font-title)', fontSize: 18, fontWeight: 800, letterSpacing: 2, color: '#fff', textShadow: `0 0 10px ${fp}80` }}>
+              CHARACTER
+            </div>
+          </div>
+        )
+      })()}
 
-      {/* Resources */}
-      <div style={styles.resRow}>
-        <div style={styles.resChip('#f5a623')}>⬡ Anium: {player.resources.anium.toLocaleString()}</div>
-        <div style={styles.resChip('#00e5ff')}>◈ Credits: {player.resources.credits}</div>
-      </div>
+      {/* ===== RESOURCES ===== */}
+      {(() => {
+        const fp = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
+        return (
+          <div style={{ position: 'relative', zIndex: 4, display: 'flex', gap: 8, padding: '0 16px 8px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'rgba(8,22,36,0.5)', backdropFilter: 'blur(8px)', border: `1px solid ${fp}55`, borderRadius: 20, padding: '4px 12px 4px 9px' }}>
+              <svg width="13" height="15" viewBox="0 0 14 16"><polygon points="7,0 14,4 14,12 7,16 0,12 0,4" fill="none" stroke={fp} strokeWidth="1.4"/></svg>
+              <span style={{ fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 700, color: { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3' }}>
+                {(player.resources?.anium || 0).toLocaleString()}
+              </span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'rgba(8,22,36,0.5)', backdropFilter: 'blur(8px)', border: '1px solid rgba(199,204,214,0.4)', borderRadius: 20, padding: '4px 12px 4px 9px' }}>
+              <svg width="12" height="12" viewBox="0 0 13 13"><rect x="1.5" y="1.5" width="10" height="10" transform="rotate(45 6.5 6.5)" fill="none" stroke="#c7ccd6" strokeWidth="1.4"/></svg>
+              <span style={{ fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 700, color: '#c7ccd6' }}>
+                {(player.resources?.credits || 0).toLocaleString()}
+              </span>
+            </div>
+          </div>
+        )
+      })()}
 
-      {/* Tabs */}
-      <div style={styles.tabs}>
-        <button style={tab === 'stats' ? styles.tabActive : styles.tab} onClick={() => setTab('stats')}>Character Info</button>
-        <button style={tab === 'profile' ? styles.tabActive : styles.tab} onClick={() => setTab('profile')}>Profile</button>
-      </div>
+      {/* ===== CHARACTER INFO / PROFILE TABS ===== */}
+      {(() => {
+        const fp = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
+        return (
+          <div style={{ display: 'flex', gap: 8, padding: '2px 16px 8px', position: 'relative', zIndex: 4 }}>
+            <div onClick={() => setTab('stats')} style={{
+              flex: 1, textAlign: 'center', padding: '8px 0', borderRadius: 9, cursor: 'pointer',
+              fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 800, letterSpacing: 1,
+              color: tab === 'stats' ? '#fff' : '#8a94a3',
+              background: tab === 'stats' ? `${fp}22` : 'transparent',
+              border: `1px solid ${fp}44`,
+            }}>CHARACTER INFO</div>
+            <div onClick={() => setTab('profile')} style={{
+              flex: 1, textAlign: 'center', padding: '8px 0', borderRadius: 9, cursor: 'pointer',
+              fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 800, letterSpacing: 1,
+              color: tab === 'profile' ? '#fff' : '#8a94a3',
+              background: tab === 'profile' ? `${fp}22` : 'transparent',
+              border: `1px solid ${fp}44`,
+            }}>PROFILE</div>
+          </div>
+        )
+      })()}
+
+      {/* =============================================
+          HERO INSPECTION STAGE — always visible
+         ============================================= */}
+      {(() => {
+        const factionPrimary = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
+        const factionAccent  = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
+        const factionLabel   = player.race ? player.race.toUpperCase() : 'UNKNOWN'
+        const hexSymbol      = { arctron: '⬡', bionex: '◎', celestra: '✦' }[player.race] || '◈'
+
+        // Detect sprite to show
+        const bionexSprite = player.race === 'bionex' ? getBionexJobSprite(player.job) : null
+
+        return (
+          <div style={{
+            position:   'relative',
+            height:     290,
+            margin:     '0 16px 0',
+            borderRadius: 16,
+            overflow:   'hidden',
+            background: `radial-gradient(90% 70% at 50% 28%, ${factionPrimary}18, transparent 70%)`,
+            border:     `1px solid ${factionPrimary}22`,
+          }}>
+            {/* Animated rune rings */}
+            <div style={{
+              position:  'absolute', top: '46%', left: '50%',
+              width: 200, height: 200,
+              animation: 'heroRune 26s linear infinite',
+              opacity: 0.35,
+              pointerEvents: 'none',
+            }}>
+              <svg width="200" height="200" viewBox="0 0 200 200">
+                <circle cx="100" cy="100" r="96" fill="none" stroke={factionPrimary} strokeWidth="1" opacity="0.5"/>
+                <circle cx="100" cy="100" r="78" fill="none" stroke={factionAccent} strokeWidth="1" strokeDasharray="3 8" opacity="0.4"/>
+              </svg>
+            </div>
+            <div style={{
+              position:  'absolute', top: '46%', left: '50%',
+              width: 200, height: 200,
+              animation: 'heroRuneRev 18s linear infinite',
+              opacity: 0.2,
+              pointerEvents: 'none',
+            }}>
+              <svg width="200" height="200" viewBox="0 0 200 200">
+                <circle cx="100" cy="100" r="60" fill="none" stroke={factionPrimary} strokeWidth="1.5" strokeDasharray="5 12"/>
+              </svg>
+            </div>
+
+            {/* Grid floor perspective */}
+            <div style={{
+              position:   'absolute', bottom: 0, left: 0, right: 0,
+              height:     70,
+              backgroundImage: `linear-gradient(${factionPrimary}18 1px, transparent 1px), linear-gradient(90deg, ${factionPrimary}14 1px, transparent 1px)`,
+              backgroundSize: '18px 18px',
+              transform:  'perspective(220px) rotateX(64deg)',
+              transformOrigin: 'bottom',
+              WebkitMaskImage: 'linear-gradient(to top, #000, transparent)',
+              maskImage:  'linear-gradient(to top, #000, transparent)',
+              pointerEvents: 'none',
+            }}/>
+
+            {/* Top gradient overlay */}
+            <div style={{
+              position: 'absolute', top: 0, left: 0, right: 0, height: 60,
+              background: 'linear-gradient(to bottom, rgba(8,8,12,0.5), transparent)',
+              pointerEvents: 'none', zIndex: 3,
+            }}/>
+
+            {/* LV badge — top left */}
+            <div style={{
+              position: 'absolute', top: 12, left: 12, zIndex: 4,
+              display: 'flex', alignItems: 'center', gap: 6,
+              background: 'rgba(8,22,36,0.6)',
+              backdropFilter: 'blur(6px)',
+              border: `1px solid ${factionPrimary}55`,
+              borderRadius: 22, padding: '3px 4px 3px 11px',
+            }}>
+              <span style={{ fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 700, letterSpacing: 1, color: factionAccent }}>LV</span>
+              <span style={{
+                width: 30, height: 30, borderRadius: '50%',
+                background: 'linear-gradient(135deg, #dde2ea, #9aa2ae)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontFamily: 'var(--font-title)', fontSize: 14, fontWeight: 800,
+                color: '#16181c', boxShadow: '0 0 12px rgba(199,204,214,0.5)',
+              }}>{player.level || 1}</span>
+            </div>
+
+            {/* Faction badge — top right */}
+            <div style={{
+              position: 'absolute', top: 14, right: 14, zIndex: 4,
+              display: 'flex', alignItems: 'center', gap: 5,
+            }}>
+              <span style={{ fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 800, letterSpacing: 2, color: factionAccent }}>
+                {hexSymbol} {factionLabel}
+              </span>
+            </div>
+
+            {/* Hero sprite (floating) */}
+            <div style={{
+              position:  'absolute', bottom: 0, left: '50%',
+              transform: 'translateX(-50%)',
+              animation: 'heroFloat 5.4s ease-in-out infinite',
+              zIndex: 2,
+            }}>
+              {bionexSprite ? (
+                <img src={bionexSprite} alt={player.job}
+                  style={{ height: 272, width: 'auto', filter: `drop-shadow(0 16px 24px rgba(0,0,0,0.7)) drop-shadow(0 0 28px ${factionPrimary}33)` }}
+                />
+              ) : (
+                <PilotSprite race={player.race} job={player.job} width={112} height={150} fill={true}
+                  style={{ filter: `drop-shadow(0 0 20px ${factionPrimary}55)` }}
+                />
+              )}
+            </div>
+          </div>
+        )
+      })()}
+
 
       {tab === 'stats' && (
         <>
-          {/* Skill Slots */}
-          <div style={{ display: 'flex', gap: 16, justifyContent: 'center', margin: '8px 16px 12px' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+          {/* ===== GENERAL INFO (new design) ===== */}
+          {(() => {
+            const factionPrimary = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
+            const factionAccent  = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
+            const jobName = job ? job.name : (player.job || 'NOVICE')
+            const EXP_SEGS = 12
+            const filledSegs = Math.round((player.exp / expMax) * EXP_SEGS)
+            const playerId = `${baseClass.slice(0,3)}-${(player.username || 'PLT').slice(0,3).toUpperCase()}X`
+
+            return (
               <div style={{
-                width: 48,
-                height: 48,
-                borderRadius: 8,
-                border: '1.5px solid var(--border-neon)',
-                background: 'linear-gradient(135deg, rgba(0,229,255,0.1), rgba(0,0,0,0.6))',
-                boxShadow: '0 0 10px rgba(0,229,255,0.2)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: 20
-              }} title={activeSkill.name}>
-                ⚔️
+                position: 'relative', margin: '0 16px 10px',
+                padding: '12px 15px 13px', borderRadius: 14,
+                background: 'linear-gradient(180deg, rgba(24,23,26,0.42), rgba(16,15,17,0.88))',
+                border: `1px solid ${factionPrimary}44`,
+                boxShadow: '0 8px 30px rgba(0,0,0,0.5)',
+              }}>
+                {/* Name + ACTIVE */}
+                <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 10 }}>
+                  <span style={{ fontFamily: 'var(--font-title)', fontSize: 22, fontWeight: 800, color: '#fff', letterSpacing: 0.5, textShadow: `0 0 16px ${factionPrimary}80` }}>
+                    {(player.name || 'UNNAMED').toUpperCase()}
+                  </span>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: 5, fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 700, color: '#5fe08a' }}>
+                    <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#5fe08a', boxShadow: '0 0 8px #5fe08a', display: 'inline-block', animation: 'ledBlink 1.6s infinite' }}/>
+                    ACTIVE
+                  </span>
+                </div>
+
+                {/* FACTION | CLASS | JOB row */}
+                <div style={{ display: 'flex', margin: '0 -15px', borderTop: `1px solid ${factionPrimary}22`, borderBottom: `1px solid ${factionPrimary}22` }}>
+                  {[
+                    { label: 'FACTION', value: player.race ? player.race.toUpperCase() : 'UNKNOWN', color: '#eef3fb' },
+                    { label: 'CLASS',   value: baseClass,  color: factionAccent },
+                    { label: 'JOB',     value: (jobName || 'NOVICE').toUpperCase(), color: '#eef3fb' },
+                  ].map((col, i, arr) => (
+                    <div key={col.label} style={{
+                      flex: 1, padding: '7px 0', textAlign: 'center',
+                      borderRight: i < arr.length - 1 ? `1px solid ${factionPrimary}18` : 'none',
+                    }}>
+                      <div style={{ fontFamily: 'var(--font-title)', fontSize: 10, letterSpacing: 1, color: '#8a94a3' }}>{col.label}</div>
+                      <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 700, color: col.color, marginTop: 2 }}>{col.value}</div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Player ID + % TO NEXT */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 8 }}>
+                  <span style={{ fontFamily: 'var(--font-title)', fontSize: 11, color: '#8a94a3' }}>
+                    {baseClass} ID · <span style={{ color: '#c7ccd6' }}>{playerId}</span>
+                  </span>
+                  <span style={{ fontFamily: 'var(--font-title)', fontSize: 11, color: '#b9c0c9' }}>{expPct}% TO NEXT</span>
+                </div>
+
+                {/* EXP 12-segment bar */}
+                <div style={{ display: 'flex', gap: 3, marginTop: 7 }}>
+                  {Array.from({ length: EXP_SEGS }).map((_, i) => (
+                    <div key={i} style={{
+                      flex: 1, height: 7, borderRadius: 2,
+                      background: i < filledSegs
+                        ? `linear-gradient(90deg, ${factionPrimary}bb, ${factionPrimary})`
+                        : `${factionPrimary}22`,
+                      boxShadow: i < filledSegs && i === filledSegs - 1 ? `0 0 6px ${factionPrimary}` : 'none',
+                    }}/>
+                  ))}
+                </div>
               </div>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: '#7ec8e3', fontWeight: 800 }}>{activeSkill.name.toUpperCase()}</span>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+            )
+          })()}
+
+          {/* ===== CLASS PATH — Dynamic from jobs.json ===== */}
+          {(() => {
+            const factionPrimary = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
+            const factionAccent  = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
+
+            // Tier unlock levels
+            const TIER_UNLOCK = { tier1: 1, tier2: 15, tier3: 32, tier4: 55 }
+            const TIER_LABELS = ['I', 'II', 'III', 'IV']
+            const TIER_KEYS   = ['tier1', 'tier2', 'tier3', 'tier4']
+
+            const raceJobs = jobs[player.race] || {}
+            // Get names for classIndex column
+            const tierNames = TIER_KEYS.map(tk => {
+              const arr = raceJobs[tk] || []
+              const j = arr[classIndex >= 0 ? classIndex : 0]
+              return j ? j.name : tk
+            })
+
+            // Which tier is the player currently on?
+            const currentTierKey = tier || 'tier1'
+            const currentTierIdx = TIER_KEYS.indexOf(currentTierKey)
+
+            return (
               <div style={{
-                width: 48,
-                height: 48,
-                borderRadius: 8,
-                border: '1.5px solid var(--border-neon)',
-                background: 'linear-gradient(135deg, rgba(0,229,255,0.1), rgba(0,0,0,0.6))',
-                boxShadow: '0 0 10px rgba(0,229,255,0.2)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: 20
-              }} title={passiveSkill.name}>
-                🛡️
+                margin: '0 16px 10px',
+                padding: '12px 12px 13px',
+                background: 'rgba(8,22,36,0.42)',
+                backdropFilter: 'blur(8px)',
+                border: `1px solid ${factionPrimary}33`,
+                borderRadius: 12,
+              }}>
+                <div style={{
+                  fontFamily: 'var(--font-title)', fontSize: 11, fontWeight: 700,
+                  letterSpacing: 1.5, color: '#8a94a3', marginBottom: 12,
+                }}>
+                  CLASS PATH · {baseClass}
+                </div>
+                <div style={{ position: 'relative', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                  {/* Progress line */}
+                  <div style={{
+                    position: 'absolute', top: 16, left: '12%', right: '12%', height: 2,
+                    background: `linear-gradient(90deg, ${factionPrimary} 0%, ${factionPrimary} ${(currentTierIdx / 3) * 100}%, ${factionPrimary}22 ${(currentTierIdx / 3) * 100}%, ${factionPrimary}22 100%)`,
+                  }}/>
+                  {TIER_KEYS.map((tk, idx) => {
+                    const isActive = idx === currentTierIdx
+                    const isPast   = idx < currentTierIdx
+                    const isLocked = idx > currentTierIdx
+                    const unlockLv = TIER_UNLOCK[tk]
+                    return (
+                      <div key={tk} style={{
+                        position: 'relative', zIndex: 2,
+                        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5,
+                        width: '24%',
+                      }}>
+                        {/* Diamond node */}
+                        <div style={{
+                          width:        isActive ? 38 : 32,
+                          height:       isActive ? 38 : 32,
+                          borderRadius: isActive ? 9 : 8,
+                          transform:    'rotate(45deg)',
+                          background:   isActive
+                            ? 'linear-gradient(135deg, #dde2ea, #9aa2ae)'
+                            : isPast
+                            ? `${factionPrimary}30`
+                            : 'rgba(8,22,36,0.6)',
+                          border:  isLocked
+                            ? `1.5px dashed ${factionPrimary}40`
+                            : `1.5px solid ${isPast ? factionPrimary : factionPrimary}`,
+                          boxShadow: isActive ? '0 0 16px rgba(199,204,214,0.6)' : isPast ? `0 0 6px ${factionPrimary}66` : 'none',
+                          display: 'flex', alignItems: 'center', justifyContent: 'center',
+                          marginTop: isActive ? -3 : 0,
+                        }}>
+                          <span style={{
+                            transform: 'rotate(-45deg)',
+                            fontFamily: 'var(--font-title)', fontSize: isActive ? 12 : 11, fontWeight: 800,
+                            color: isActive ? '#16181c' : isLocked ? `${factionAccent}66` : factionAccent,
+                          }}>{TIER_LABELS[idx]}</span>
+                        </div>
+                        {/* Name */}
+                        <span style={{
+                          fontFamily: 'var(--font-title)', fontSize: 10, textAlign: 'center', lineHeight: 1.1,
+                          color: isActive ? '#fff' : isLocked ? 'rgba(138,148,163,0.5)' : factionAccent,
+                          fontWeight: isActive ? 800 : 400,
+                        }}>{tierNames[idx]}</span>
+                        {/* Sub-label */}
+                        {isActive && (
+                          <span style={{ fontFamily: 'var(--font-title)', fontSize: 9, color: factionAccent }}>◆ ACTIVE</span>
+                        )}
+                        {isLocked && (
+                          <span style={{ fontFamily: 'var(--font-title)', fontSize: 9, color: 'rgba(138,148,163,0.45)' }}>LV.{unlockLv}</span>
+                        )}
+                      </div>
+                    )
+                  })}
+                </div>
               </div>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: '#da70d6', fontWeight: 800 }}>{passiveSkill.name.toUpperCase()}</span>
-            </div>
-          </div>
+            )
+          })()}
+
+          {/* ===== SKILL LOADOUT (redesign) ===== */}
+          {(() => {
+            const factionPrimary = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
+            const factionAccent  = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
+            const skills = [
+              { kind: 'ACTIVE',  skill: activeSkill, icon: (
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={factionAccent} strokeWidth="2">
+                  <path d="M14.5 17.5L3 6M17.5 14.5L6 3M19 19v-4M19 19h-4M5 5v4M5 5h4"/>
+                </svg>
+              )},
+              { kind: 'PASSIVE', skill: passiveSkill, icon: (
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c7ccd6" strokeWidth="2">
+                  <path d="M12 2l8 3.5v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10v-6L12 2z"/>
+                </svg>
+              )},
+            ]
+            return (
+              <div style={{ display: 'flex', gap: 10, margin: '0 16px 10px' }}>
+                {skills.map(({ kind, skill, icon }) => (
+                  <div key={kind} style={{
+                    flex: 1, display: 'flex', alignItems: 'center', gap: 9,
+                    padding: '9px 11px', borderRadius: 11,
+                    background: kind === 'ACTIVE'
+                      ? `linear-gradient(135deg, ${factionPrimary}28, rgba(0,0,0,0.4))`
+                      : 'linear-gradient(135deg, rgba(199,204,214,0.14), rgba(0,0,0,0.4))',
+                    border: kind === 'ACTIVE'
+                      ? `1.5px solid ${factionPrimary}55`
+                      : '1.5px solid rgba(199,204,214,0.35)',
+                  }}>
+                    <div style={{
+                      width: 36, height: 36, flexShrink: 0, borderRadius: 7,
+                      background: kind === 'ACTIVE' ? `${factionPrimary}22` : 'rgba(199,204,214,0.12)',
+                      border: kind === 'ACTIVE' ? `1px solid ${factionPrimary}55` : '1px solid rgba(199,204,214,0.35)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    }}>{icon}</div>
+                    <div>
+                      <div style={{ fontFamily: 'var(--font-title)', fontSize: 9, letterSpacing: 1, color: '#8a94a3' }}>{kind}</div>
+                      <div style={{ fontFamily: 'var(--font-title)', fontSize: 11, fontWeight: 700, color: kind === 'ACTIVE' ? factionAccent : '#c7ccd6' }}>
+                        {(skill.name || kind).toUpperCase()}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )
+          })()}
+
 
           {/* GENERAL INFO (Profile ID Card relocated inside) */}
           <AccordionSection label="General Info" raceClass={raceClass} defaultOpen={true}>
