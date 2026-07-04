@@ -8,7 +8,7 @@ import { t } from './lib/translate'
 import { App as CapApp } from '@capacitor/app'
 import BottomNav from './components/BottomNav'
 import races from './data/races.json'
-import RaceSelect from './components/RaceSelect'
+import CharacterCreate from './components/CharacterCreate'
 import Auth from './screens/Auth'
 import Main from './screens/Main'
 import Unit from './screens/Unit'
@@ -289,6 +289,18 @@ export default function App() {
     )
   }
 
+  // Lock user in Character Creator if no active character exists
+  if (!player?.race) {
+    return (
+      <div className="game-root">
+        <div className="game-container">
+          <div className="parallax-bg" style={{ backgroundImage: `url('${bgImage}')` }} />
+          <CharacterCreate />
+        </div>
+      </div>
+    )
+  }
+
   const Screen = SCREENS[screen] || Main
 
   return (
@@ -298,7 +310,6 @@ export default function App() {
         <div className="no-scrollbar" style={styles.content}><Screen /></div>
         <BottomNav />
       </div>
-      {showRaceSelect && <RaceSelect />}
     </div>
   )
 }
