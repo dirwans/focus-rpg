@@ -6,9 +6,8 @@ import archonData from '../data/archon.json'
 import { PilotSprite } from '../components/PilotSprites'
 import { t } from '../lib/translate'
 // v2: faction filter
-import { getWeaponRarityColor, getWeaponRarityDisplayName } from '../lib/rarity'
-
-
+import { getWeaponRarityColor, getWeaponRarityDisplayName } from '../lib/rarity'
+
 const RARITY_COLOR = {
   common: '#6a9ab8',
   uncommon: '#44ff88',
@@ -36,10 +35,8 @@ const SLOT_TO_TYPE = {
   amulet1: 'amulet', amulet2: 'amulet',
   ring1: 'ring', ring2: 'ring',
   ascension_arms: 'ascension_arms'
-}
-
-
-
+}
+
 const BIONEX_SPRITES = {
   guardian:     '/ref/Bellterra/Class-sprites-cleaned/Bellterra-warrior-cleaned.png',
   marksman:     '/ref/Bellterra/Class-sprites-cleaned/Bellterra-ranger-cleaned.png',
@@ -443,126 +440,90 @@ if (typeof document !== 'undefined' && !document.getElementById('hero-stage-kf')
         )
       })()}
 
-      {/* =============================================
-          HERO INSPECTION STAGE — always visible
-         ============================================= */}
-      {(() => {
-        const factionPrimary = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
-        const factionAccent  = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
-        const factionLabel   = player.race ? player.race.toUpperCase() : 'UNKNOWN'
-        const hexSymbol      = { arctron: '⬡', bionex: '◎', celestra: '✦' }[player.race] || '◈'
-
-        // Detect sprite to show
-        const bionexSprite = player.race === 'bionex' ? getBionexJobSprite(player.job) : null
-
-        return (
-          <div style={{
-            position:   'relative',
-            height:     290,
-            margin:     '0 16px 0',
-            borderRadius: 16,
-            overflow:   'hidden',
-            background: `radial-gradient(90% 70% at 50% 28%, ${factionPrimary}18, transparent 70%)`,
-            border:     `1px solid ${factionPrimary}22`,
-          }}>
-            {/* Animated rune rings */}
-            <div style={{
-              position:  'absolute', top: '46%', left: '50%',
-              width: 200, height: 200,
-              animation: 'heroRune 26s linear infinite',
-              opacity: 0.35,
-              pointerEvents: 'none',
-            }}>
-              <svg width="200" height="200" viewBox="0 0 200 200">
-                <circle cx="100" cy="100" r="96" fill="none" stroke={factionPrimary} strokeWidth="1" opacity="0.5"/>
-                <circle cx="100" cy="100" r="78" fill="none" stroke={factionAccent} strokeWidth="1" strokeDasharray="3 8" opacity="0.4"/>
-              </svg>
-            </div>
-            <div style={{
-              position:  'absolute', top: '46%', left: '50%',
-              width: 200, height: 200,
-              animation: 'heroRuneRev 18s linear infinite',
-              opacity: 0.2,
-              pointerEvents: 'none',
-            }}>
-              <svg width="200" height="200" viewBox="0 0 200 200">
-                <circle cx="100" cy="100" r="60" fill="none" stroke={factionPrimary} strokeWidth="1.5" strokeDasharray="5 12"/>
-              </svg>
-            </div>
-
-            {/* Grid floor perspective */}
-            <div style={{
-              position:   'absolute', bottom: 0, left: 0, right: 0,
-              height:     70,
-              backgroundImage: `linear-gradient(${factionPrimary}18 1px, transparent 1px), linear-gradient(90deg, ${factionPrimary}14 1px, transparent 1px)`,
-              backgroundSize: '18px 18px',
-              transform:  'perspective(220px) rotateX(64deg)',
-              transformOrigin: 'bottom',
-              WebkitMaskImage: 'linear-gradient(to top, #000, transparent)',
-              maskImage:  'linear-gradient(to top, #000, transparent)',
-              pointerEvents: 'none',
-            }}/>
-
-            {/* Top gradient overlay */}
-            <div style={{
-              position: 'absolute', top: 0, left: 0, right: 0, height: 60,
-              background: 'linear-gradient(to bottom, rgba(8,8,12,0.5), transparent)',
-              pointerEvents: 'none', zIndex: 3,
-            }}/>
-
-            {/* LV badge — top left */}
-            <div style={{
-              position: 'absolute', top: 12, left: 12, zIndex: 4,
-              display: 'flex', alignItems: 'center', gap: 6,
-              background: 'rgba(8,22,36,0.6)',
-              backdropFilter: 'blur(6px)',
-              border: `1px solid ${factionPrimary}55`,
-              borderRadius: 22, padding: '3px 4px 3px 11px',
-            }}>
-              <span style={{ fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 700, letterSpacing: 1, color: factionAccent }}>LV</span>
-              <span style={{
-                width: 30, height: 30, borderRadius: '50%',
-                background: 'linear-gradient(135deg, #dde2ea, #9aa2ae)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontFamily: 'var(--font-title)', fontSize: 14, fontWeight: 800,
-                color: '#16181c', boxShadow: '0 0 12px rgba(199,204,214,0.5)',
-              }}>{player.level || 1}</span>
-            </div>
-
-            {/* Faction badge — top right */}
-            <div style={{
-              position: 'absolute', top: 14, right: 14, zIndex: 4,
-              display: 'flex', alignItems: 'center', gap: 5,
-            }}>
-              <span style={{ fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 800, letterSpacing: 2, color: factionAccent }}>
-                {hexSymbol} {factionLabel}
-              </span>
-            </div>
-
-            {/* Hero sprite (floating) */}
-            <div style={{
-              position:  'absolute', bottom: 0, left: '50%',
-              transform: 'translateX(-50%)',
-              animation: 'heroFloat 5.4s ease-in-out infinite',
-              zIndex: 2,
-            }}>
-              {bionexSprite ? (
-                <img src={bionexSprite} alt={player.job}
-                  style={{ height: 272, width: 'auto', filter: `drop-shadow(0 16px 24px rgba(0,0,0,0.7)) drop-shadow(0 0 28px ${factionPrimary}33)` }}
-                />
-              ) : (
-                <PilotSprite race={player.race} job={player.job} width={112} height={150} fill={true}
-                  style={{ filter: `drop-shadow(0 0 20px ${factionPrimary}55)` }}
-                />
-              )}
-            </div>
-          </div>
-        )
-      })()}
-
-
       {tab === 'stats' && (
         <>
+          {/* =============================================
+              HERO INSPECTION STAGE
+             ============================================= */}
+          {(() => {
+            const factionPrimary = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
+            const factionAccent  = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
+            const factionLabel   = player.race ? player.race.toUpperCase() : 'UNKNOWN'
+            const hexSymbol      = { arctron: '●', bionex: '●', celestra: '✦' }[player.race] || '●'
+            const bionexSprite   = player.race === 'bionex' ? getBionexJobSprite(player.job) : null
+            return (
+              <div style={{
+                position: 'relative', height: 280, marginBottom: 0, overflow: 'hidden',
+                background: `radial-gradient(80% 60% at 50% 30%, ${factionPrimary}22, transparent 70%)`,
+              }}>
+                {/* Rune ring 1 */}
+                <div style={{ position: 'absolute', top: '42%', left: '50%', width: 240, height: 240,
+                  transform: 'translate(-50%,-50%)', animation: 'heroRune 26s linear infinite', opacity: 0.3, pointerEvents: 'none' }}>
+                  <svg width="240" height="240" viewBox="0 0 240 240">
+                    <circle cx="120" cy="120" r="116" fill="none" stroke={factionPrimary} strokeWidth="1" opacity="0.6"/>
+                    <circle cx="120" cy="120" r="94" fill="none" stroke={factionAccent} strokeWidth="1" strokeDasharray="4 10" opacity="0.4"/>
+                  </svg>
+                </div>
+                {/* Rune ring 2 */}
+                <div style={{ position: 'absolute', top: '42%', left: '50%', width: 160, height: 160,
+                  transform: 'translate(-50%,-50%)', animation: 'heroRuneRev 18s linear infinite', opacity: 0.15, pointerEvents: 'none' }}>
+                  <svg width="160" height="160" viewBox="0 0 160 160">
+                    <circle cx="80" cy="80" r="76" fill="none" stroke={factionPrimary} strokeWidth="1.5" strokeDasharray="6 14"/>
+                  </svg>
+                </div>
+                {/* Grid floor */}
+                <div style={{
+                  position: 'absolute', bottom: 0, left: 0, right: 0, height: 80,
+                  backgroundImage: `linear-gradient(${factionPrimary}20 1px, transparent 1px), linear-gradient(90deg, ${factionPrimary}16 1px, transparent 1px)`,
+                  backgroundSize: '22px 22px',
+                  transform: 'perspective(280px) rotateX(68deg)', transformOrigin: 'bottom',
+                  WebkitMaskImage: 'linear-gradient(to top, #000 20%, transparent)', maskImage: 'linear-gradient(to top, #000 20%, transparent)',
+                  pointerEvents: 'none',
+                }}/>
+                {/* Bottom fade */}
+                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 60,
+                  background: 'linear-gradient(to top, rgba(10,10,16,0.7), transparent)', pointerEvents: 'none', zIndex: 3 }}/>
+                {/* LV badge */}
+                <div style={{
+                  position: 'absolute', top: 10, left: 16, zIndex: 5,
+                  display: 'flex', alignItems: 'center', gap: 5,
+                  background: 'rgba(8,18,32,0.55)', backdropFilter: 'blur(6px)',
+                  border: `1px solid ${factionPrimary}55`, borderRadius: 22, padding: '3px 5px 3px 10px',
+                }}>
+                  <span style={{ fontFamily: 'var(--font-title)', fontSize: 11, fontWeight: 700, letterSpacing: 1, color: factionAccent }}>LV</span>
+                  <span style={{
+                    width: 28, height: 28, borderRadius: '50%',
+                    background: 'linear-gradient(135deg,#dde2ea,#9aa2ae)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 800,
+                    color: '#16181c', boxShadow: '0 0 10px rgba(200,210,220,0.5)',
+                  }}>{player.level || 1}</span>
+                </div>
+                {/* Faction badge */}
+                <div style={{ position: 'absolute', top: 14, right: 16, zIndex: 5, display: 'flex', alignItems: 'center', gap: 5 }}>
+                  <span style={{ width: 9, height: 9, borderRadius: '50%', background: factionPrimary, boxShadow: `0 0 8px ${factionPrimary}`, display: 'inline-block' }}/>
+                  <span style={{ fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 800, letterSpacing: 2, color: factionAccent }}>{factionLabel}</span>
+                </div>
+                {/* Hero sprite */}
+                <div style={{
+                  position: 'absolute', bottom: 0, left: '50%',
+                  transform: 'translateX(-50%)',
+                  animation: 'heroFloat 5.4s ease-in-out infinite', zIndex: 4,
+                }}>
+                  {bionexSprite ? (
+                    <img src={bionexSprite} alt={player.job}
+                      style={{ height: 268, width: 'auto', filter: `drop-shadow(0 20px 28px rgba(0,0,0,0.8)) drop-shadow(0 0 30px ${factionPrimary}44)` }}
+                    />
+                  ) : (
+                    <PilotSprite race={player.race} job={player.job} width={120} height={160} fill={true}
+                      style={{ filter: `drop-shadow(0 0 22px ${factionPrimary}66)` }}
+                    />
+                  )}
+                </div>
+              </div>
+            )
+          })()}
+
           {/* ===== GENERAL INFO (new design) ===== */}
           {(() => {
             const factionPrimary = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
@@ -776,114 +737,9 @@ if (typeof document !== 'undefined' && !document.getElementById('hero-stage-kf')
                 ))}
               </div>
             )
-          })()}
-
-
-          {/* GENERAL INFO (Profile ID Card relocated inside) */}
-          <AccordionSection label="General Info" raceClass={raceClass} defaultOpen={true}>
-            <div 
-              className={`profile-id-card ${player.race ? 'panel-' + player.race : ''}`}
-              style={{ margin: '4px 0', zIndex: 1 }}
-            >
-              <div className="id-corner-circle tl" />
-              <div className="id-corner-circle tr" />
-              <div className="id-corner-circle bl" />
-              <div className="id-corner-circle br" />
-
-              <div className="id-tab top" />
-              <div className="id-tab bottom" />
-
-              <div className="id-edge-notch left-top" />
-              <div className="id-edge-notch left-bot" />
-              <div className="id-edge-notch right-top" />
-              <div className="id-edge-notch right-bot" />
-
-              <div className="profile-id-card-inner">
-                <div className="profile-id-body">
-                  {/* Avatar side */}
-                  <div className="profile-avatar-glow-wrap">
-                    <div className="profile-corner tl" />
-                    <div className="profile-corner tr" />
-                    <div className="profile-corner bl" />
-                    <div className="profile-corner br" />
-                    <div className="profile-avatar-inner">
-                      <div className="profile-avatar-grid" />
-                      <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', overflow: 'hidden', zIndex: 2,
-                        boxShadow: 'inset 0 0 8px 4px rgba(0,0,0,0.85)' }}>
-                        {(() => {
-                          const bionexSprite = player.race === 'bionex' ? getBionexJobSprite(player.job) : null
-                          if (bionexSprite) {
-                            return (
-                              <img
-                                src={bionexSprite}
-                                alt={player.job}
-                                style={{
-                                  height: 340,
-                                  width: 'auto',
-                                  position: 'absolute',
-                                  top: -4,
-                                  left: '50%',
-                                  transform: 'translateX(-50%)',
-                                }}
-                              />
-                            )
-                          }
-                          return <PilotSprite race={player.race} job={player.job} width={112} height={150} fill={true} />
-                        })()}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Details side */}
-                  <div className="profile-details-wrap">
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                      <div className="profile-details-username">{player.name.toUpperCase()}</div>
-                    </div>
-
-                    <div className="profile-data-rows">
-                      <div className="profile-data-row">
-                        <span className="profile-data-key">FACTION</span>
-                        <span style={{ fontSize: 11 }} className="profile-data-val">{race ? race.name.toUpperCase() : 'UNKNOWN'}</span>
-                      </div>
-                      <div className="profile-data-row">
-                        <span className="profile-data-key">CLASS</span>
-                        <span style={{ fontSize: 11 }} className="profile-data-val accent">{baseClass}</span>
-                      </div>
-                      <div className="profile-data-row">
-                        <span className="profile-data-key">JOB</span>
-                        <span style={{ fontSize: 11 }} className="profile-data-val">{job ? job.name.toUpperCase() : 'NOVICE'}</span>
-                      </div>
-                    </div>
-
-                    <div className="profile-active-status">
-                      <div className="profile-status-led" />
-                      <span>STATUS: <span className="status-active-txt">ACTIVE</span></span>
-                    </div>
-
-                    <div className="profile-data-divider" />
-
-                    <div className="profile-id-block-new">
-                      <span className="profile-id-lbl">{baseClass} ID</span>
-                      <span className="profile-id-num">PLT-{player.level || 1}09X</span>
-                    </div>
-
-                    {/* EXP bar */}
-                    <div className="profile-status-panel" style={{ marginTop: 6 }}>
-                      <div className="profile-status-bar">
-                        {Array.from({ length: 12 }).map((_, idx) => {
-                          const litThreshold = (idx + 1) * (100 / 12)
-                          const isLit = expPct >= litThreshold
-                          return (
-                            <div key={idx} className={`profile-status-segment ${isLit ? '' : 'dim'}`} />
-                          )
-                        })}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </AccordionSection>
+          })()}
+
+          
 
           {/* STATUS INFO */}
           <AccordionSection label="Status Info" raceClass={raceClass} defaultOpen={true}>
@@ -1253,9 +1109,8 @@ if (typeof document !== 'undefined' && !document.getElementById('hero-stage-kf')
                   <span style={{ color: '#ffcc80', fontSize: 13, lineHeight: 1.4 }}>{t('archon_notice_cargo')}</span>
                 </div>
               )}
-            </div>
-
-
+            </div>
+
             {/* Level/Race/Job requirements checks warnings */}
             {!selectedItem.isEquipped && player.level < (selectedItem.level || 0) && (
               <div style={cargoStyles.warning}>{t('req_level_warn', { req: selectedItem.level, level: player.level })}</div>
@@ -1355,9 +1210,8 @@ if (typeof document !== 'undefined' && !document.getElementById('hero-stage-kf')
             </div>
           </div>
         </div>
-      )}
-
-
+      )}
+
       {/* Bottom spacer */}
       <div style={{ height: 16 }} />
 
@@ -1650,6 +1504,5 @@ const cargoStyles = {
   gearEmpty:    { flex: 1, maxWidth: 100 },
   stackedSlots: { display: 'flex', flexDirection: 'column', gap: 6, justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%' },
   ascensionCorner: { display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%' },
-}
-
-
+}
+
