@@ -63,7 +63,7 @@ export default function Cargo() {
   }
 
   const getItemColor = (item) => {
-    if (!item) return '#1a3a6a'
+    if (!item) return '#4a6a9a'
     if (item.type === 'weapon') {
       return getWeaponRarityColor(item.rarityGrade || item.rarity)
     }
@@ -131,8 +131,8 @@ export default function Cargo() {
         {!item && (
           <div style={{ 
             fontSize: isSmall ? 28 : 48, 
-            opacity: isFilterActive ? 0.4 : 0.1, 
-            filter: isFilterActive ? 'drop-shadow(0 0 8px #00e5ff)' : 'grayscale(100%) brightness(0.5)',
+            opacity: isFilterActive ? 0.6 : 0.35, 
+            filter: isFilterActive ? 'drop-shadow(0 0 8px #00e5ff)' : 'grayscale(100%) brightness(0.9)',
             display: 'flex', 
             alignItems: 'center', 
             justifyContent: 'center',
