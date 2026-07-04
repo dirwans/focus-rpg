@@ -528,7 +528,89 @@ export default function Unit() {
               </>
             )
           })()}
-        </>
+                  {/* ============ EQUIPMENT ============ */}
+          {(() => {
+            const fp = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
+            const fa = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
+            return (
+              <>
+                <div style={{ margin: '0 16px 8px', fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 700, letterSpacing: 1.5, color: '#8a94a3' }}>
+                  <span style={{ fontSize: 9 }}>▼</span> EQUIPMENT & INVENTORY
+                </div>
+                <div style={{ margin: '0 16px 12px', padding: '12px 10px', background: 'rgba(8,22,36,0.4)', border: `1px solid ${fp}33`, borderRadius: 12, display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 7, justifyItems: 'center' }}>
+                  {/* Row 1 */}
+                  <div style={{ width: 48, height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+                    <svg width="16" height="16" viewBox="0 0 13 13"><rect x="1.5" y="1.5" width="10" height="10" transform="rotate(45 6.5 6.5)" fill={fa} fillOpacity="0.6" stroke={fa} strokeWidth="1"/></svg>
+                    <span style={{ fontFamily: 'var(--font-title)', fontSize: 9, color: fa }}>AM1</span>
+                  </div>
+                  <div style={{ width: '100%', height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2 }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={fa} strokeWidth="1.8"><path d="M12 2l3 6 6 .5-4.5 4 1.4 6L12 15l-5.9 3.5 1.4-6L3 8.5 9 8z"/></svg>
+                    <span style={{ fontFamily: 'var(--font-title)', fontSize: 9, color: fa }}>HELM</span>
+                  </div>
+                  <div style={{ width: 48, height: 48, borderRadius: 7, background: 'rgba(3,8,20,0.55)', border: `1.5px dashed ${fp}4d`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+                    <span style={{ fontFamily: 'var(--font-title)', fontSize: 16, color: 'rgba(255,183,119,0.35)' }}>+</span>
+                    <span style={{ fontFamily: 'var(--font-title)', fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>AM2</span>
+                  </div>
+                  
+                  {/* Row 2 */}
+                  <div style={{ width: '100%', height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2 }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={fa} strokeWidth="1.8"><path d="M14.5 17.5L3 6M17.5 14.5L6 3M19 19v-4M19 19h-4M5 5v4M5 5h4"/></svg>
+                    <span style={{ fontFamily: 'var(--font-title)', fontSize: 9, color: fa }}>WPN</span>
+                  </div>
+                  <div style={{ width: '100%', height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2 }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={fa} strokeWidth="1.8"><path d="M12 2l8 3.5v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10v-6L12 2z"/></svg>
+                    <span style={{ fontFamily: 'var(--font-title)', fontSize: 9, color: fa }}>ARM</span>
+                  </div>
+                  <div style={{ width: 48, height: 48, borderRadius: 7, background: 'rgba(3,8,20,0.55)', border: `1.5px dashed ${fp}4d`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+                    <span style={{ fontFamily: 'var(--font-title)', fontSize: 16, color: 'rgba(255,183,119,0.35)' }}>+</span>
+                    <span style={{ fontFamily: 'var(--font-title)', fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>SHD</span>
+                  </div>
+                  
+                  {/* Row 3 */}
+                  <div style={{ width: 48, height: 48, borderRadius: 7, background: 'rgba(3,8,20,0.55)', border: `1.5px dashed ${fp}4d`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+                    <span style={{ fontFamily: 'var(--font-title)', fontSize: 16, color: 'rgba(255,183,119,0.35)' }}>+</span>
+                    <span style={{ fontFamily: 'var(--font-title)', fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>GLV</span>
+                  </div>
+                  <div style={{ width: '100%', height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2 }}>
+                    <svg width="16" height="16" viewBox="0 0 13 13"><rect x="1.5" y="1.5" width="10" height="10" transform="rotate(45 6.5 6.5)" fill={fa} fillOpacity="0.6" stroke={fa} strokeWidth="1"/></svg>
+                    <span style={{ fontFamily: 'var(--font-title)', fontSize: 9, color: fa }}>PNT</span>
+                  </div>
+                  <div style={{ width: 48, height: 48, borderRadius: 7, background: 'rgba(3,8,20,0.55)', border: `1.5px dashed ${fp}4d`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+                    <span style={{ fontFamily: 'var(--font-title)', fontSize: 16, color: 'rgba(255,183,119,0.35)' }}>+</span>
+                    <span style={{ fontFamily: 'var(--font-title)', fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>CPE</span>
+                  </div>
+                  
+                  {/* Row 4 */}
+                  <div style={{ width: 48, height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={fa} strokeWidth="2"><circle cx="12" cy="14" r="6"/><path d="M9 8l3-5 3 5"/></svg>
+                    <span style={{ fontFamily: 'var(--font-title)', fontSize: 9, color: fa }}>RG1</span>
+                  </div>
+                  <div style={{ width: '100%', height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2 }}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={fa} strokeWidth="1.8"><path d="M9 20h6M8 20V10l4-4 4 4v10M6 10h12"/></svg>
+                    <span style={{ fontFamily: 'var(--font-title)', fontSize: 9, color: fa }}>BTS</span>
+                  </div>
+                  <div style={{ width: 48, height: 48, borderRadius: 7, background: 'rgba(3,8,20,0.55)', border: `1.5px dashed ${fp}4d`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,183,119,0.4)" strokeWidth="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>
+                    <span style={{ fontFamily: 'var(--font-title)', fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>ARES</span>
+                  </div>
+                </div>
+
+                {/* bags */}
+                <div style={{ display: 'flex', gap: 7, justifyContent: 'center', margin: '0 16px 14px' }}>
+                  {[1, 2, 3, 4, 5].map((bagNum) => (
+                    bagNum === 1 ? (
+                      <div key={bagNum} style={{ width: 44, height: 44, borderRadius: 7, background: `${fp}24`, border: `1.5px solid ${fp}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 800, color: fa, boxShadow: `0 0 10px ${fp}4d` }}>{bagNum}</div>
+                    ) : bagNum === 5 ? (
+                      <div key={bagNum} style={{ width: 44, height: 44, borderRadius: 7, background: 'rgba(10,15,30,0.55)', border: '1.5px solid #2a333f', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 800, color: '#555', opacity: 0.5 }}>{bagNum}</div>
+                    ) : (
+                      <div key={bagNum} style={{ width: 44, height: 44, borderRadius: 7, background: 'rgba(10,15,30,0.8)', border: '1.5px solid #445566', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 800, color: '#8899aa' }}>{bagNum}</div>
+                    )
+                  ))}
+                </div>
+              </>
+            )
+          })()}
+</>
 
       )}
 
