@@ -87,7 +87,7 @@ export default function Cargo() {
     setSlotFilter(prev => prev === type ? null : type)
   }
 
-  const renderSlot = (slot, defaultEmoji = '➕', slotLabel = slot.toUpperCase()) => {
+  const renderSlot = (slot, defaultEmoji = '➕', slotLabel = slot.toUpperCase(), isSmall = false) => {
     const item = eq[slot]
     const color = getItemColor(item)
     const slotType = getSlotType(slot)
@@ -99,20 +99,21 @@ export default function Cargo() {
         role="button"
         tabIndex={0}
         style={{
-          flex: 1,
-          minHeight: 76,
-          height: 76,
-          padding: '6px 4px',
+          flex: isSmall ? 'none' : 1,
+          width: isSmall ? 52 : '100%',
+          minHeight: isSmall ? 52 : 90,
+          height: isSmall ? 52 : 90,
+          padding: '4px 2px',
           background: isFilterActive
             ? 'linear-gradient(135deg, rgba(0,229,255,0.18), rgba(0,229,255,0.06))'
             : item ? `linear-gradient(135deg, ${color}22, ${color}08)` : 'rgba(3, 8, 20, 0.55)',
           border: `1.5px ${item ? 'solid' : 'dashed'} ${isFilterActive ? '#00e5ff' : color}`,
-          borderRadius: 10,
+          borderRadius: 6,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: 3,
+          gap: 2,
           cursor: 'pointer',
           boxShadow: isFilterActive
             ? '0 0 14px rgba(0,229,255,0.4), inset 0 0 8px rgba(0,229,255,0.15)'
@@ -127,16 +128,16 @@ export default function Cargo() {
         onClick={() => handleSlotClick(slot)}
       >
         {!item && (
-          <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: isFilterActive ? '#00e5ff' : '#7ab0d0', letterSpacing: 0.5, fontWeight: 800, textTransform: 'uppercase' }}>
+          <div style={{ fontFamily: 'var(--font-title)', fontSize: isSmall ? 10 : 12, color: isFilterActive ? '#00e5ff' : '#7ab0d0', letterSpacing: 0.5, fontWeight: 800, textTransform: 'uppercase' }}>
             {slotLabel}
           </div>
         )}
         {item ? (
           <>
             {item.image ? (
-              <img referrerPolicy="no-referrer" src={item.image} style={{ width: 42, height: 42, objectFit: 'contain' }} alt={item.name} />
+              <img referrerPolicy="no-referrer" src={item.image} style={{ width: isSmall ? 32 : 56, height: isSmall ? 32 : 56, objectFit: 'contain' }} alt={item.name} />
             ) : (
-              <span style={{ fontSize: 32 }}>{item.emoji}</span>
+              <span style={{ fontSize: isSmall ? 22 : 36 }}>{item.emoji}</span>
             )}
             
             <button
@@ -233,7 +234,7 @@ export default function Cargo() {
             )}
           </>
         ) : (
-          <div style={{ fontSize: 14, opacity: isFilterActive ? 0.6 : 0.18 }}>{defaultEmoji}</div>
+          <div style={{ fontSize: isSmall ? 16 : 22, opacity: isFilterActive ? 0.6 : 0.18 }}>{defaultEmoji}</div>
         )}
 
       </div>
@@ -288,40 +289,38 @@ export default function Cargo() {
         <span style={styles.slots}>📦 {player.inventory.length}/{player.inventorySlots || 100}</span>
       </div>
 
-      {/* Equipped Gear Section */}
+      {/* Equipped Gear Section (Humanoid Grid) */}
       <div style={{ ...styles.sectionLabel, paddingLeft: 16, marginBottom: 8 }}>{t('equipped_gear_title')}</div>
-      <div className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={{ margin: '0 16px 14px', padding: '10px 6px', overflow: 'visible', position: 'relative', zIndex: 1 }}>
-        {/* Row 1: Amulet | Helmet | Amulet */}
-        <div style={styles.gearRow}>
-          {renderSlot('amulet1', '💎', 'AMULET I')}
-          {renderSlot('helmet', '⛑', 'HELMET')}
-          {renderSlot('amulet2', '💎', 'AMULET II')}
+      <div className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={{ margin: '0 16px 14px', padding: '14px 10px', overflow: 'visible', position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 6, justifyItems: 'center', alignItems: 'center' }}>
+        
+        {/* Row 1 */}
+        <div style={styles.stackedSlots}>
+          {renderSlot('amulet1', '💎', 'AMU I', true)}
+          {renderSlot('ring1', '💍', 'RNG I', true)}
         </div>
-        {/* Row 2: Weapon / Armor / Shield */}
-        <div style={styles.gearRow}>
-          {renderSlot('weapon', '⚔️', 'WEAPON')}
-          {renderSlot('armor', '🛡', 'ARMOR')}
-          {renderSlot('shield', '🔰', 'SHIELD')}
+        {renderSlot('helmet', '⛑', 'HELMET')}
+        <div style={styles.stackedSlots}>
+          {renderSlot('amulet2', '💎', 'AMU II', true)}
+          {renderSlot('ring2', '💍', 'RNG II', true)}
         </div>
-        {/* Row 3: Gloves / Pants / Cape */}
-        <div style={styles.gearRow}>
-          {renderSlot('gloves', '🧤', 'GLOVES')}
-          {renderSlot('pants', '👖', 'PANTS')}
-          {renderSlot('mantle', '🦺', 'CAPE')}
-        </div>
-        {/* Row 4: Ring | Boots | Ring */}
-        <div style={styles.gearRow}>
-          {renderSlot('ring1', '💍', 'RING I')}
-          {renderSlot('boots', '👢', 'BOOTS')}
-          {renderSlot('ring2', '💍', 'RING II')}
-        </div>
-      </div>
 
-      {/* Ascension Arms Special Panel */}
-      <div className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.ascensionPanel}>
-        <div style={styles.ascensionTitle}>✧ ASCENSION ARMS ✧</div>
-        <div style={{ display: 'flex', width: '100%', maxWidth: 220, margin: '0 auto' }}>
-          {renderSlot('ascension_arms', '⚙️', 'ARES')}
+        {/* Row 2 */}
+        {renderSlot('weapon', '⚔️', 'WEAPON')}
+        {renderSlot('armor', '🛡', 'ARMOR')}
+        {renderSlot('shield', '🔰', 'SHIELD')}
+
+        {/* Row 3 */}
+        {renderSlot('gloves', '🧤', 'GLOVES')}
+        {renderSlot('pants', '👖', 'PANTS')}
+        {renderSlot('mantle', '🦺', 'CAPE')}
+
+        {/* Row 4 */}
+        <div style={styles.ascensionCorner}>
+          {renderSlot('ascension_arms', '⚙️', 'ARES', true)}
+        </div>
+        {renderSlot('boots', '👢', 'BOOTS')}
+        <div style={styles.ascensionCorner}>
+          {/* Empty slot for radar/other in future */}
         </div>
       </div>
 
@@ -491,8 +490,8 @@ const styles = {
   // Gear slot rows
   gearRow:   { display: 'flex', gap: 5, justifyContent: 'center', marginBottom: 5, position: 'relative', zIndex: 2 },
   gearEmpty: { flex: 1, maxWidth: 100 },
-  ascensionPanel: { margin: '0 16px 14px', padding: '12px 10px', overflow: 'visible', position: 'relative', zIndex: 1, border: '1px solid rgba(255, 170, 0, 0.4)', boxShadow: '0 0 10px rgba(255, 170, 0, 0.1)', background: 'linear-gradient(180deg, rgba(255,170,0,0.05) 0%, rgba(0,0,0,0) 100%)' },
-  ascensionTitle: { fontFamily: 'var(--font-title)', fontSize: 14, color: '#ffcc00', letterSpacing: 1.5, fontWeight: 900, textAlign: 'center', marginBottom: 12, textShadow: '0 0 8px rgba(255, 204, 0, 0.6)' },
+  stackedSlots: { display: 'flex', flexDirection: 'column', gap: 6, justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%' },
+  ascensionCorner: { display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%' },
 
   chip:         (c) => ({ background: 'rgba(3, 8, 20, 0.8)', border: `1px solid ${c}`, borderRadius: 20, padding: '6px 14px', fontFamily: 'var(--font-mono)', fontSize: 16, fontWeight: 800, color: c, boxShadow: `0 0 10px ${c}33, inset 0 0 6px ${c}22` }),
   slots:        { fontFamily: 'var(--font-mono)', fontSize: 14, color: '#7ab0d0', background: 'rgba(3, 8, 20, 0.8)', border: '1px solid #1a3a6a', borderRadius: 20, padding: '6px 14px', marginLeft: 'auto', fontWeight: 800 },
