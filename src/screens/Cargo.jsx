@@ -325,9 +325,43 @@ export default function Cargo() {
       </div>
 
       {/* Currency Display */}
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', padding: '0 24px 16px', fontFamily: 'var(--font-mono)', fontSize: 14, color: '#e0f4ff', fontWeight: 600, letterSpacing: 0.5, lineHeight: 1.4, marginTop: -4 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', padding: '0 24px 12px', fontFamily: 'var(--font-mono)', fontSize: 14, color: '#e0f4ff', fontWeight: 600, letterSpacing: 0.5, lineHeight: 1.4, marginTop: -4 }}>
         <div>{player.resources.credits?.toLocaleString() || 0} <span style={{ color: '#00e5ff', fontWeight: 800, marginLeft: 4 }}>CRD</span></div>
         <div>{player.resources.nxc?.toLocaleString() || 0} <span style={{ color: '#ffcc00', fontWeight: 800, marginLeft: 4 }}>NXC</span></div>
+      </div>
+
+      {/* Bag Slots (Red Box Reference) */}
+      <div style={{ display: 'flex', gap: 8, padding: '0 16px 16px', justifyContent: 'center' }}>
+        {[1, 2, 3, 4, 5].map(num => {
+          const bagKey = `bag${num}`
+          const isEquipped = true // Default all 5 bags are equipped as base slots
+          const isActive = activeBag === bagKey && !slotFilter
+          return (
+            <button
+              key={bagKey}
+              onClick={() => {
+                setActiveBag(bagKey)
+                setSlotFilter(null)
+              }}
+              style={{
+                width: 52, height: 52,
+                background: isActive ? 'rgba(0,229,255,0.15)' : 'rgba(10, 15, 30, 0.8)',
+                border: `1.5px solid ${isActive ? '#00e5ff' : '#445566'}`,
+                borderRadius: 6,
+                display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                cursor: 'pointer',
+                boxShadow: isActive ? '0 0 12px rgba(0,229,255,0.4), inset 0 0 6px rgba(0,229,255,0.2)' : 'none',
+                position: 'relative',
+                outline: 'none'
+              }}
+            >
+              <div style={{ fontSize: 24, opacity: isEquipped ? 1 : 0.2 }}>🎒</div>
+              <div style={{ position: 'absolute', bottom: 2, right: 4, fontSize: 10, fontWeight: 900, color: isActive ? '#00e5ff' : '#8899aa', fontFamily: 'var(--font-mono)' }}>
+                {num}
+              </div>
+            </button>
+          )
+        })}
       </div>
 
       {/* Inventory Section */}
@@ -376,12 +410,12 @@ export default function Cargo() {
                 <div style={styles.itemName}>{getItemName(item)}</div>
                 <div style={styles.itemBadges}>
                   <span style={styles.rarityBadge(cardColor)}>{(item.rarityGrade || item.rarity).toUpperCase()}</span>
-                  {item.qty > 1 && (
-                    <span style={{ position: 'absolute', bottom: 4, right: 6, fontSize: 13, fontWeight: 900, color: '#00ffaa', fontFamily: 'var(--font-mono)', textShadow: '0 0 4px #000, 1px 1px 2px #000' }}>
-                      x{item.qty}
-                    </span>
-                  )}
                 </div>
+                {item.qty > 1 && (
+                  <span style={{ position: 'absolute', bottom: 4, right: 6, fontSize: 13, fontWeight: 900, color: '#00ffaa', fontFamily: 'var(--font-mono)', textShadow: '0 0 4px #000, 1px 1px 2px #000' }}>
+                    x{item.qty}
+                  </span>
+                )}
               </button>
             )
           })}
