@@ -371,180 +371,165 @@ export default function Unit() {
               </div>
             )
           })()}
-{/* STATUS INFO */}
-          <AccordionSection label="Status Info" raceClass={raceClass} defaultOpen={true}>
-            <div style={styles.statsGrid}>
-              <div style={styles.statBox}>
-                <span style={{ color: '#f5a623', fontSize: 10 }}>⚡ ATK</span>
-                <span style={styles.statNum}>{stats.atk}</span>
-              </div>
-              <div style={styles.statBox}>
-                <span style={{ color: '#00c8ff', fontSize: 10 }}>🛡️ DEF</span>
-                <span style={styles.statNum}>{stats.def}</span>
-              </div>
-              <div style={styles.statBox}>
-                <span style={{ color: '#ff4466', fontSize: 10 }}>❤️ HP</span>
-                <span style={styles.statNum}>{stats.hp.toLocaleString()}</span>
-              </div>
-              <div style={styles.statBox}>
-                <span style={{ color: '#ffaa00', fontSize: 10 }}>💥 CRIT</span>
-                <span style={styles.statNum}>{Math.round((stats.crit || 0.12) * 100)}%</span>
-              </div>
-              <div style={styles.statBox}>
-                <span style={{ color: '#da70d6', fontSize: 10 }}>🔷 FP</span>
-                <span style={styles.statNum}>{200 + (player.level * 5)}</span>
-              </div>
-              <div style={styles.statBox}>
-                <span style={{ color: '#00e5ff', fontSize: 10 }}>🌀 DODGE</span>
-                <span style={styles.statNum}>{Math.round((stats.dodge || 0.05) * 100)}%</span>
-              </div>
-            </div>
-          </AccordionSection>
-
-          {/* ABILITY INFO */}
-          <AccordionSection label="Ability Info" raceClass={raceClass} defaultOpen={false}>
-            {job && (
-              <div style={styles.infoBox('#4a8fa8')}>
-                <span style={{ fontWeight: 800 }}>{job.name} Bonus:</span>{' '}
-                +{job.bonus.hp} HP | +{job.bonus.atk} ATK | +{job.bonus.def} DEF
-              </div>
-            )}
-
-            {winnerRace && winnerRace === player.race && (
-              <div style={styles.infoBox('#ffcc00')}>
-                <span style={{ fontWeight: 800 }}>🏆 CORE WAR VICTORY BUFF ACTIVE:</span>{' '}
-                +10% HP | +10% ATK | +10% DEF
-              </div>
-            )}
-
-            {player.race && (
-              <div style={styles.infoBox('#00ff88')}>
-                <span style={{ fontWeight: 800 }}>{t('archon_set_status')}</span>{' '}
-                {stats.title ? (
-                  <span style={{ color: '#00ff88', fontWeight: 800 }}>
-                    {t('archon_set_active', { set: stats.title === 'Solar Sovereign' ? 'Solaris Set' : stats.title === 'Astral Emperor' ? 'Astral Set' : 'Dominion Set' })}
-                  </span>
-                ) : (
-                  <span style={{ color: '#6a9ab8' }}>{t('archon_set_inactive')}</span>
-                )}
-              </div>
-            )}
-
-            {hasArchonEquipped && !isArchon && (
-              <div style={styles.infoBox('#f5a623')}>
-                <span style={{ fontWeight: 800 }}>ℹ️ INFO:</span> {t('archon_notice_unit')}
-              </div>
-            )}
-
-            {archons && archons[player.race] && archonData[player.race] && (
-              <div style={styles.infoBox('#f5a623')}>
-                {archons[player.race].toLowerCase() === player.username?.toLowerCase() && (
-                  <div style={{ marginBottom: 6 }}>
-                    <div style={{ color: '#f5a623', fontWeight: 'bold', fontSize: 13 }}>
-                      {t('archon_equipped')} {archonData[player.race].mantle.name}
+          {/* ============ STATUS INFO ============ */}
+          {(() => {
+            const fp = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
+            const fa = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
+            return (
+              <div style={{ margin: '0 16px 10px' }}>
+                <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 700, letterSpacing: 1.5, color: '#8a94a3', marginBottom: 7 }}>
+                  <span style={{ fontSize: 9 }}>▼</span> STATUS INFO
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 7 }}>
+                  {[
+                    { lbl: 'ATK', val: stats.atk, c1: fp, c2: '#8a94a3' },
+                    { lbl: 'DEF', val: stats.def, c1: '#eef3fb', c2: '#8a94a3' },
+                    { lbl: 'HP', val: stats.hp.toLocaleString(), c1: '#ff6a4d', c2: '#8a94a3', b: 'rgba(255,110,60,0.28)' },
+                    { lbl: 'CRIT', val: Math.round((stats.crit || 0.12)*100)+'%', c1: '#c7ccd6', c2: '#8a94a3', b: 'rgba(199,204,214,0.25)' },
+                    { lbl: 'FP', val: 200+(player.level*5), c1: '#c7ccd6', c2: '#8a94a3', b: 'rgba(199,204,214,0.25)' },
+                    { lbl: 'DODGE', val: Math.round((stats.dodge || 0.05)*100)+'%', c1: '#c7ccd6', c2: '#8a94a3', b: 'rgba(199,204,214,0.25)' }
+                  ].map((s, idx) => (
+                    <div key={idx} style={{ padding: '8px 4px', textAlign: 'center', background: 'rgba(8,22,36,0.5)', border: `1px solid ${s.b || fp+'40'}`, borderRadius: 10 }}>
+                      <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 700, color: s.c2 }}>{s.lbl}</div>
+                      <div style={{ fontFamily: 'var(--font-title)', fontSize: 17, fontWeight: 800, color: s.c1, textShadow: idx===0 ? `0 0 8px ${fp}66` : 'none' }}>{s.val}</div>
                     </div>
-                    <div style={{ color: '#e0f4ff', fontSize: 13, marginTop: 4 }}>
-                      {archonData[player.race].mantle.bonus.atkPercent && `+${archonData[player.race].mantle.bonus.atkPercent}% ATK `}
-                      {archonData[player.race].mantle.bonus.defPercent && `+${archonData[player.race].mantle.bonus.defPercent}% DEF `}
-                      {archonData[player.race].mantle.bonus.gatherSpeedPercent && `+${archonData[player.race].mantle.bonus.gatherSpeedPercent}% Gather Spd `}
-                      {archonData[player.race].mantle.bonus.atkSpeedPercent && `+${archonData[player.race].mantle.bonus.atkSpeedPercent}% ATK Spd `}
+                  ))}
+                </div>
+              </div>
+            )
+          })()}
+
+          {/* ============ ABILITY INFO ============ */}
+          {(() => {
+            const fp = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
+            const fa = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
+            
+            const InfoCard = ({ title, titleColor, desc, bg, border, titleColorHex }) => (
+              <div style={{ padding: '9px 12px', borderRadius: 10, background: bg || 'rgba(74,143,168,0.08)', border: border || `1px solid ${fp}38`, fontFamily: 'var(--font-body)', fontSize: 13, color: '#cdd5e0', marginBottom: 6 }}>
+                <b style={{ color: titleColorHex || fa }}>{title}</b> {desc}
+              </div>
+            )
+
+            return (
+              <div style={{ margin: '0 16px 10px' }}>
+                <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 700, letterSpacing: 1.5, color: '#8a94a3', marginBottom: 7 }}>
+                  <span style={{ fontSize: 9 }}>▶</span> ABILITY INFO
+                </div>
+                {job && (
+                  <InfoCard title={`${job.name} Bonus:`} desc={`+${job.bonus.hp} HP ╖ +${job.bonus.atk} ATK ╖ +${job.bonus.def} DEF`} bg={`linear-gradient(90deg, ${fp}1a, transparent)`} border={`1px solid ${fp}40`} titleColorHex={fp} />
+                )}
+                {winnerRace && winnerRace === player.race && (
+                  <InfoCard title="🏆 CORE WAR VICTORY BUFF ACTIVE:" desc="+10% HP ╖ +10% ATK ╖ +10% DEF" bg="rgba(255,204,0,0.08)" border="1px solid rgba(255,204,0,0.3)" titleColorHex="#ffcc00" />
+                )}
+                {player.race && (
+                  <InfoCard title={t('archon_set_status')} desc={stats.title ? <><span style={{color:'#5fe08a', fontWeight: 800}}>{stats.title === 'Solar Sovereign' ? 'Solaris Set' : stats.title === 'Astral Emperor' ? 'Astral Set' : 'Dominion Set'}</span> ╖ <span style={{color:'#5fe08a'}}>ACTIVE</span></> : <span style={{color:'#6a9ab8'}}>{t('archon_set_inactive')}</span>} bg="rgba(95,224,138,0.06)" border="1px solid rgba(95,224,138,0.25)" titleColorHex="#5fe08a" />
+                )}
+                {hasArchonEquipped && !isArchon && (
+                  <InfoCard title="ℹ️ INFO:" desc={t('archon_notice_unit')} bg="rgba(245,166,35,0.08)" border="1px solid rgba(245,166,35,0.3)" titleColorHex="#f5a623" />
+                )}
+                {archons && archons[player.race] && archonData[player.race] && (
+                  <div style={{ padding: '9px 12px', borderRadius: 10, background: 'rgba(245,166,35,0.08)', border: '1px solid rgba(245,166,35,0.3)', fontFamily: 'var(--font-body)', fontSize: 13, color: '#cdd5e0', marginBottom: 6 }}>
+                    {archons[player.race].toLowerCase() === player.username?.toLowerCase() && (
+                      <div style={{ marginBottom: 4 }}>
+                        <b style={{ color: '#f5a623' }}>{t('archon_equipped')} {archonData[player.race].mantle.name}</b>
+                        <div style={{ color: '#e0f4ff', fontSize: 12, marginTop: 2 }}>
+                          {archonData[player.race].mantle.bonus.atkPercent && `+${archonData[player.race].mantle.bonus.atkPercent}% ATK `}
+                          {archonData[player.race].mantle.bonus.defPercent && `+${archonData[player.race].mantle.bonus.defPercent}% DEF `}
+                          {archonData[player.race].mantle.bonus.gatherSpeedPercent && `+${archonData[player.race].mantle.bonus.gatherSpeedPercent}% Gather Spd `}
+                          {archonData[player.race].mantle.bonus.atkSpeedPercent && `+${archonData[player.race].mantle.bonus.atkSpeedPercent}% ATK Spd `}
+                        </div>
+                      </div>
+                    )}
+                    <div>
+                      <b style={{ color: '#00e5ff' }}>{t('race_aura_label', { name: archonData[player.race].aura.name })}</b> {archonData[player.race].aura.desc}
                     </div>
                   </div>
                 )}
-                <div style={{ color: '#00e5ff', fontSize: 13 }}>
-                  <span style={{ fontWeight: 'bold' }}>{t('race_aura_label', { name: archonData[player.race].aura.name })}</span>{' '}
-                  {archonData[player.race].aura.desc}
+                {gmMelee && <InfoCard title="⚔️ MELEE PT GM ACTIVE:" desc="+50 ATK ╖ +1% Critical" bg="rgba(0,255,136,0.08)" border="1px solid rgba(0,255,136,0.3)" titleColorHex="#00ff88" />}
+                {gmRange && <InfoCard title="🏹 RANGED PT GM ACTIVE:" desc="+50 ATK ╖ +1% Critical" bg="rgba(0,255,136,0.08)" border="1px solid rgba(0,255,136,0.3)" titleColorHex="#00ff88" />}
+                {gmForce && <InfoCard title="✨ FORCE PT GM ACTIVE:" desc="+50 Force ATK ╖ +1% Critical" bg="rgba(0,255,136,0.08)" border="1px solid rgba(0,255,136,0.3)" titleColorHex="#00ff88" />}
+                {gmShield && <InfoCard title="🛡️ SHIELD PT GM ACTIVE:" desc="+50 DEF ╖ +500 HP" bg="rgba(0,255,136,0.08)" border="1px solid rgba(0,255,136,0.3)" titleColorHex="#00ff88" />}
+                {allGMMaxed && <InfoCard title="🔥 ASCENSION ARMS ACTIVE:" desc="+50 ATK ╖ +50 DEF ╖ +500 HP ╖ +1% Critical" bg="rgba(234,179,8,0.08)" border="1px solid rgba(234,179,8,0.3)" titleColorHex="#eab308" />}
+              </div>
+            )
+          })()}
+
+          {/* ============ COMBAT PT ============ */}
+          {(() => {
+            const fp = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
+            const fa = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
+            return (
+              <>
+                <div style={{ margin: '0 16px 4px', fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 800, letterSpacing: 1, color: fp, textTransform: 'uppercase' }}>Combat</div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 5, margin: '0 16px 10px' }}>
+                  {[
+                    { key: 'melee', label: 'Close Range PT' },
+                    { key: 'range', label: 'Long Range PT' },
+                    { key: 'special', label: 'Race Special PT' },
+                    { key: 'force', label: 'Force PT' },
+                    { key: 'shield', label: 'Shield PT' },
+                    { key: 'defense', label: 'Defense PT' }
+                  ].map((item) => {
+                    const currentVal = pt[item.key]?.val || 1
+                    const currentPct = pt[item.key]?.pct || 0
+                    const capVal = caps[item.key] || 0
+                    if (capVal === 0) return null
+                    
+                    return (
+                      <div key={item.key} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 12px', borderRadius: 9, background: 'rgba(8,22,36,0.45)', border: `1px solid ${fp}2e` }}>
+                        <span style={{ fontFamily: 'var(--font-body)', fontSize: 13, color: '#cdd5e0' }}>{item.label}</span>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                          <span style={{ fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 700, color: currentPct >= 50 ? '#16181c' : fp, background: currentPct >= 50 ? 'linear-gradient(135deg,#dde2ea,#9aa2ae)' : `${fp}24`, padding: '2px 7px', borderRadius: 5 }}>
+                            {currentPct.toFixed(2)}%
+                          </span>
+                          <span style={{ fontFamily: 'var(--font-title)', fontSize: 12, color: '#8a94a3' }}>
+                            {currentVal} / {capVal} Pt
+                          </span>
+                        </div>
+                      </div>
+                    )
+                  })}
                 </div>
-              </div>
-            )}
+              </>
+            )
+          })()}
 
-            {gmMelee && (
-              <div style={styles.infoBox('#00ff88')}>
-                <span style={{ fontWeight: 800 }}>⚔️ MELEE PT GM ACTIVE:</span> +50 ATK | +1% Critical
-              </div>
-            )}
-            {gmRange && (
-              <div style={styles.infoBox('#00ff88')}>
-                <span style={{ fontWeight: 800 }}>🏹 RANGED PT GM ACTIVE:</span> +50 ATK | +1% Critical
-              </div>
-            )}
-            {gmForce && (
-              <div style={styles.infoBox('#00ff88')}>
-                <span style={{ fontWeight: 800 }}>✨ FORCE PT GM ACTIVE:</span> +50 Force ATK | +1% Critical
-              </div>
-            )}
-            {gmShield && (
-              <div style={styles.infoBox('#00ff88')}>
-                <span style={{ fontWeight: 800 }}>🛡️ SHIELD PT GM ACTIVE:</span> +50 DEF | +500 HP
-              </div>
-            )}
-            {allGMMaxed && (
-              <div style={styles.infoBox('#eab308')}>
-                <span style={{ fontWeight: 800 }}>🔥 ASCENSION ARMS ACTIVE:</span> +50 ATK | +50 DEF | +500 HP | +1% Critical
-              </div>
-            )}
-          </AccordionSection>
-
-          {/* Combat PT */}
-          <div style={styles.ptCategoryHeader}>Combat</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 4, margin: '0 16px 12px' }}>
-            {[
-              { key: 'melee', label: 'Close Range PT' },
-              { key: 'range', label: 'Long Range PT' },
-              { key: 'special', label: 'Race Special PT' },
-              { key: 'force', label: 'Force PT' },
-              { key: 'shield', label: 'Shield PT' },
-              { key: 'defense', label: 'Defense PT' }
-            ].map((item) => {
-              const currentVal = pt[item.key]?.val || 1
-              const currentPct = pt[item.key]?.pct || 0
-              const capVal = caps[item.key] || 0
-              if (capVal === 0) return null // Hide unavailable PTs for the race
-              
-              return (
-                <div key={item.key} style={styles.ptRow}>
-                  <span style={styles.ptLabel}>{item.label}</span>
-                  <div style={styles.ptValueContainer}>
-                    <div style={styles.ptPctBox}>
-                      {currentPct.toFixed(2)}%
-                    </div>
-                    <span style={styles.ptPoints}>
-                      {currentVal} / {capVal} Pt
-                    </span>
-                  </div>
+          {/* ============ CRAFTING PT ============ */}
+          {(() => {
+            const fp = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
+            const fa = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
+            return (
+              <>
+                <div style={{ margin: '0 16px 4px', fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 800, letterSpacing: 1, color: fp, textTransform: 'uppercase' }}>Crafting</div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 5, margin: '0 16px 12px' }}>
+                  {[
+                    { key: 'production', label: 'Production PT' }
+                  ].map((item) => {
+                    const currentVal = pt[item.key]?.val || 1
+                    const currentPct = pt[item.key]?.pct || 0
+                    const capVal = caps[item.key] || 0
+                    if (capVal === 0) return null
+                    
+                    return (
+                      <div key={item.key} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 12px', borderRadius: 9, background: 'rgba(8,22,36,0.45)', border: `1px solid ${fp}2e` }}>
+                        <span style={{ fontFamily: 'var(--font-body)', fontSize: 13, color: '#cdd5e0' }}>{item.label}</span>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                          <span style={{ fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 700, color: currentPct >= 50 ? '#16181c' : fp, background: currentPct >= 50 ? 'linear-gradient(135deg,#dde2ea,#9aa2ae)' : `${fp}24`, padding: '2px 7px', borderRadius: 5 }}>
+                            {currentPct.toFixed(2)}%
+                          </span>
+                          <span style={{ fontFamily: 'var(--font-title)', fontSize: 12, color: '#8a94a3' }}>
+                            {currentVal} / {capVal} Pt
+                          </span>
+                        </div>
+                      </div>
+                    )
+                  })}
                 </div>
-              )
-            })}
-          </div>
-
-          {/* Crafting PT */}
-          <div style={styles.ptCategoryHeader}>Crafting</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 4, margin: '0 16px 12px' }}>
-            {[
-              { key: 'production', label: 'Production PT' }
-            ].map((item) => {
-              const currentVal = pt[item.key]?.val || 1
-              const currentPct = pt[item.key]?.pct || 0
-              const capVal = caps[item.key] || 0
-              if (capVal === 0) return null
-              
-              return (
-                <div key={item.key} style={styles.ptRow}>
-                  <span style={styles.ptLabel}>{item.label}</span>
-                  <div style={styles.ptValueContainer}>
-                    <div style={styles.ptPctBox}>
-                      {currentPct.toFixed(2)}%
-                    </div>
-                    <span style={styles.ptPoints}>
-                      {currentVal} / {capVal} Pt
-                    </span>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-
+              </>
+            )
+          })()}
         </>
+
       )}
 
       {tab === 'profile' && (
