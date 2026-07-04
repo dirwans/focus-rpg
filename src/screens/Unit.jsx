@@ -133,7 +133,7 @@ export default function Unit() {
       <div style={styles.header}>
         <button onClick={() => useGameStore.getState().setScreen('main')} style={{background:'transparent', border:'none', color:'#00e5ff', fontSize: 20, cursor:'pointer', padding: '0 8px 0 0', display:'flex', alignItems:'center'}}>❮</button>
         <div style={{ flex: 1, textAlign: 'center', marginRight: 24 }}>
-          <span style={{ fontFamily: 'var(--font-title)', fontSize: 18, fontWeight: 900, color: '#fff', letterSpacing: 2, textShadow: '0 0 10px var(--neon-glow)' }}>CHARACTER</span>
+          <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 18, fontWeight: 900, color: '#fff', letterSpacing: 2, textShadow: '0 0 10px var(--neon-glow)' }}>CHARACTER</span>
         </div>
       </div>
 
@@ -145,13 +145,13 @@ export default function Unit() {
           <div style={{ position: 'relative', zIndex: 4, display: 'flex', gap: 8, padding: '0 16px 8px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'rgba(8,22,36,0.5)', backdropFilter: 'blur(8px)', border: `1px solid ${fp}59`, borderRadius: 20, padding: '4px 12px 4px 9px' }}>
               <svg width="13" height="15" viewBox="0 0 14 16"><polygon points="7,0 14,4 14,12 7,16 0,12 0,4" fill="none" stroke={fp} strokeWidth="1.4"/></svg>
-              <span style={{ fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 700, color: fa }}>
+              <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 700, color: fa }}>
                 {(player.resources?.anium || 0).toLocaleString()}
               </span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'rgba(8,22,36,0.5)', backdropFilter: 'blur(8px)', border: '1px solid rgba(199,204,214,0.4)', borderRadius: 20, padding: '4px 12px 4px 9px' }}>
               <svg width="12" height="12" viewBox="0 0 13 13"><rect x="1.5" y="1.5" width="10" height="10" transform="rotate(45 6.5 6.5)" fill="none" stroke="#c7ccd6" strokeWidth="1.4"/></svg>
-              <span style={{ fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 700, color: '#c7ccd6' }}>
+              <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 700, color: '#c7ccd6' }}>
                 {(player.resources?.credits || 0).toLocaleString()}
               </span>
             </div>
@@ -166,14 +166,14 @@ export default function Unit() {
           <div style={{ position: 'relative', zIndex: 4, display: 'flex', gap: 8, padding: '2px 16px 8px' }}>
             <div onClick={() => setTab('stats')} style={{
               flex: 1, textAlign: 'center', padding: '8px 0', borderRadius: 9, cursor: 'pointer',
-              fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 800, letterSpacing: 1,
+              fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, letterSpacing: 1,
               color: tab === 'stats' ? '#fff' : '#8a94a3',
               background: tab === 'stats' ? `${fp}33` : 'transparent',
               border: `1px solid ${fp}4d`,
             }}>CHARACTER INFO</div>
             <div onClick={() => setTab('profile')} style={{
               flex: 1, textAlign: 'center', padding: '8px 0', borderRadius: 9, cursor: 'pointer',
-              fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 800, letterSpacing: 1,
+              fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, letterSpacing: 1,
               color: tab === 'profile' ? '#fff' : '#8a94a3',
               background: tab === 'profile' ? `${fp}33` : 'transparent',
               border: `1px solid ${fp}4d`,
@@ -215,14 +215,14 @@ export default function Unit() {
                   position: 'absolute', top: 12, left: 12, zIndex: 4, display: 'flex', alignItems: 'center', gap: 7,
                   background: 'rgba(8,22,36,0.55)', backdropFilter: 'blur(6px)', border: `1px solid ${fp}59`, borderRadius: 22, padding: '3px 4px 3px 11px',
                 }}>
-                  <span style={{ fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 700, letterSpacing: 1, color: fa }}>LV</span>
-                  <span style={{ width: 30, height: 30, borderRadius: '50%', background: 'linear-gradient(135deg,#dde2ea,#9aa2ae)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-title)', fontSize: 14, fontWeight: 800, color: '#16181c', boxShadow: '0 0 12px rgba(199,204,214,0.5)' }}>
+                  <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 700, letterSpacing: 1, color: fa }}>LV</span>
+                  <span style={{ width: 30, height: 30, borderRadius: '50%', background: 'linear-gradient(135deg,#dde2ea,#9aa2ae)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Orbitron', sans-serif", fontSize: 14, fontWeight: 800, color: '#16181c', boxShadow: '0 0 12px rgba(199,204,214,0.5)' }}>
                     {player.level || 1}
                   </span>
                 </div>
                 <div style={{ position: 'absolute', top: 14, right: 14, zIndex: 4, display: 'flex', alignItems: 'center', gap: 6 }}>
                   <svg width="15" height="17" viewBox="0 0 16 18"><polygon points="8,0 16,4.5 16,13.5 8,18 0,13.5 0,4.5" fill={fp} fillOpacity="0.85" stroke={fp} strokeWidth="1"/></svg>
-                  <span style={{ fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 800, letterSpacing: 2, color: fa }}>{label}</span>
+                  <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 800, letterSpacing: 2, color: fa }}>{label}</span>
                 </div>
                 <div style={{ position: 'absolute', bottom: 6, left: '50%', transform: 'translateX(-50%)', animation: 'heroFloat 5.4s ease-in-out infinite', zIndex: 2 }}>
                   {bionexSprite ? (
@@ -250,33 +250,33 @@ export default function Unit() {
                 border: `1px solid ${fp}4d`, boxShadow: '0 8px 30px rgba(0,0,0,0.5)',
               }}>
                 <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between' }}>
-                  <span style={{ fontFamily: 'var(--font-title)', fontSize: 21, fontWeight: 800, letterSpacing: 0.5, color: '#fff', textShadow: `0 0 16px ${fp}80` }}>
+                  <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 21, fontWeight: 800, letterSpacing: 0.5, color: '#fff', textShadow: `0 0 16px ${fp}80` }}>
                     {(player.name || 'UNNAMED').toUpperCase()}
                   </span>
-                  <span style={{ display: 'flex', alignItems: 'center', gap: 5, fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 700, color: '#5fe08a' }}>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: 5, fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 700, color: '#5fe08a' }}>
                     <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#5fe08a', boxShadow: '0 0 8px #5fe08a', animation: 'ledBlink 1.6s infinite' }}/>
                     ACTIVE
                   </span>
                 </div>
                 <div style={{ display: 'flex', gap: 0, marginTop: 10, borderTop: `1px solid ${fp}29`, borderBottom: `1px solid ${fp}29` }}>
                   <div style={{ flex: 1, padding: '7px 0', textAlign: 'center', borderRight: `1px solid ${fp}1f` }}>
-                    <div style={{ fontFamily: 'var(--font-title)', fontSize: 11, letterSpacing: 1, color: '#8a94a3' }}>FACTION</div>
-                    <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 700, color: '#eef3fb', marginTop: 2 }}>{player.race ? player.race.toUpperCase() : 'UNKNOWN'}</div>
+                    <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 11, letterSpacing: 1, color: '#8a94a3' }}>FACTION</div>
+                    <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 700, color: '#eef3fb', marginTop: 2 }}>{player.race ? player.race.toUpperCase() : 'UNKNOWN'}</div>
                   </div>
                   <div style={{ flex: 1, padding: '7px 0', textAlign: 'center', borderRight: `1px solid ${fp}1f` }}>
-                    <div style={{ fontFamily: 'var(--font-title)', fontSize: 11, letterSpacing: 1, color: '#8a94a3' }}>CLASS</div>
-                    <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 700, color: fa, marginTop: 2 }}>{baseClass.toUpperCase()}</div>
+                    <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 11, letterSpacing: 1, color: '#8a94a3' }}>CLASS</div>
+                    <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 700, color: fa, marginTop: 2 }}>{baseClass.toUpperCase()}</div>
                   </div>
                   <div style={{ flex: 1, padding: '7px 0', textAlign: 'center' }}>
-                    <div style={{ fontFamily: 'var(--font-title)', fontSize: 11, letterSpacing: 1, color: '#8a94a3' }}>JOB</div>
-                    <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 700, color: '#eef3fb', marginTop: 2 }}>{job ? job.name.toUpperCase() : 'NOVICE'}</div>
+                    <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 11, letterSpacing: 1, color: '#8a94a3' }}>JOB</div>
+                    <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 700, color: '#eef3fb', marginTop: 2 }}>{job ? job.name.toUpperCase() : 'NOVICE'}</div>
                   </div>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 10 }}>
-                  <span style={{ fontFamily: 'var(--font-title)', fontSize: 12, color: '#8a94a3' }}>
+                  <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 12, color: '#8a94a3' }}>
                     {baseClass.toUpperCase()} ID · <span style={{ color: '#c7ccd6' }}>{idPrefix}-{idSuffix}X</span>
                   </span>
-                  <span style={{ fontFamily: 'var(--font-title)', fontSize: 12, color: '#b9c0c9' }}>{expPct}% TO NEXT</span>
+                  <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 12, color: '#b9c0c9' }}>{expPct}% TO NEXT</span>
                 </div>
                 <div style={{ display: 'flex', gap: 3, marginTop: 7 }}>
                   {Array.from({ length: EXP_SEGS }).map((_, i) => (
@@ -309,7 +309,7 @@ export default function Unit() {
             const linePct = currentTierIdx > 0 ? `${Math.round((currentTierIdx / 3) * 100)}%` : '0%'
             return (
               <div style={{ margin: '0 16px 10px', padding: '12px 12px 13px', background: 'rgba(8,22,36,0.4)', backdropFilter: 'blur(8px)', border: `1px solid ${fp}38`, borderRadius: 12 }}>
-                <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 700, letterSpacing: 1.5, color: '#8a94a3', marginBottom: 11 }}>
+                <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 700, letterSpacing: 1.5, color: '#8a94a3', marginBottom: 11 }}>
                   CLASS PATH · {baseClass.toUpperCase()}
                 </div>
                 <div style={{ position: 'relative', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -327,15 +327,15 @@ export default function Unit() {
                           boxShadow: isActive ? '0 0 16px rgba(199,204,214,0.6)' : 'none',
                           display: 'flex', alignItems: 'center', justifyContent: 'center'
                         }}>
-                          <span style={{ transform: 'rotate(-45deg)', fontFamily: 'var(--font-title)', fontWeight: 800, fontSize: isActive ? 12 : 11, color: isActive ? '#16181c' : isLocked ? `${fa}73` : fa }}>
+                          <span style={{ transform: 'rotate(-45deg)', fontFamily: "'Orbitron', sans-serif", fontWeight: 800, fontSize: isActive ? 12 : 11, color: isActive ? '#16181c' : isLocked ? `${fa}73` : fa }}>
                             {TIER_LABELS[idx]}
                           </span>
                         </div>
-                        <span style={{ fontFamily: 'var(--font-title)', fontSize: 11, textAlign: 'center', lineHeight: 1.1, color: isActive ? '#fff' : isLocked ? 'rgba(138,148,163,0.6)' : '#8a94a3', fontWeight: isActive ? 800 : 400 }}>
+                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 11, textAlign: 'center', lineHeight: 1.1, color: isActive ? '#fff' : isLocked ? 'rgba(138,148,163,0.6)' : '#8a94a3', fontWeight: isActive ? 800 : 400 }}>
                           {tierNames[idx]}
                         </span>
-                        {isActive && <span style={{ fontFamily: 'var(--font-title)', fontSize: 10, color: fa }}>◆ ACTIVE</span>}
-                        {isLocked && <span style={{ fontFamily: 'var(--font-title)', fontSize: 10, color: 'rgba(138,148,163,0.5)' }}>LV.{TIER_UNLOCK[tk]}</span>}
+                        {isActive && <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 10, color: fa }}>◆ ACTIVE</span>}
+                        {isLocked && <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 10, color: 'rgba(138,148,163,0.5)' }}>LV.{TIER_UNLOCK[tk]}</span>}
                       </div>
                     )
                   })}
@@ -355,8 +355,8 @@ export default function Unit() {
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={fa} strokeWidth="2"><path d="M14.5 17.5L3 6M17.5 14.5L6 3M19 19v-4M19 19h-4M5 5v4M5 5h4"/></svg>
                   </div>
                   <div>
-                    <div style={{ fontFamily: 'var(--font-title)', fontSize: 10, letterSpacing: 1, color: '#8a94a3' }}>ACTIVE</div>
-                    <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 700, color: fa }}>{activeSkill.name.toUpperCase()}</div>
+                    <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 10, letterSpacing: 1, color: '#8a94a3' }}>ACTIVE</div>
+                    <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 700, color: fa }}>{activeSkill.name.toUpperCase()}</div>
                   </div>
                 </div>
                 <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 9, padding: '9px 11px', borderRadius: 11, background: 'linear-gradient(135deg,rgba(199,204,214,0.14),rgba(0,0,0,0.4))', border: '1.5px solid rgba(199,204,214,0.35)' }}>
@@ -364,8 +364,8 @@ export default function Unit() {
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c7ccd6" strokeWidth="2"><path d="M12 2l8 3.5v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10v-6L12 2z"/></svg>
                   </div>
                   <div>
-                    <div style={{ fontFamily: 'var(--font-title)', fontSize: 10, letterSpacing: 1, color: '#8a94a3' }}>PASSIVE</div>
-                    <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 700, color: '#c7ccd6' }}>{passiveSkill.name.toUpperCase()}</div>
+                    <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 10, letterSpacing: 1, color: '#8a94a3' }}>PASSIVE</div>
+                    <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 700, color: '#c7ccd6' }}>{passiveSkill.name.toUpperCase()}</div>
                   </div>
                 </div>
               </div>
@@ -377,7 +377,7 @@ export default function Unit() {
             const fa = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
             return (
               <div style={{ margin: '0 16px 10px' }}>
-                <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 700, letterSpacing: 1.5, color: '#8a94a3', marginBottom: 7 }}>
+                <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 700, letterSpacing: 1.5, color: '#8a94a3', marginBottom: 7 }}>
                   <span style={{ fontSize: 9 }}>▼</span> STATUS INFO
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 7 }}>
@@ -390,8 +390,8 @@ export default function Unit() {
                     { lbl: 'DODGE', val: Math.round((stats.dodge || 0.05)*100)+'%', c1: '#c7ccd6', c2: '#8a94a3', b: 'rgba(199,204,214,0.25)' }
                   ].map((s, idx) => (
                     <div key={idx} style={{ padding: '8px 4px', textAlign: 'center', background: 'rgba(8,22,36,0.5)', border: `1px solid ${s.b || fp+'40'}`, borderRadius: 10 }}>
-                      <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 700, color: s.c2 }}>{s.lbl}</div>
-                      <div style={{ fontFamily: 'var(--font-title)', fontSize: 17, fontWeight: 800, color: s.c1, textShadow: idx===0 ? `0 0 8px ${fp}66` : 'none' }}>{s.val}</div>
+                      <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 700, color: s.c2 }}>{s.lbl}</div>
+                      <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 17, fontWeight: 800, color: s.c1, textShadow: idx===0 ? `0 0 8px ${fp}66` : 'none' }}>{s.val}</div>
                     </div>
                   ))}
                 </div>
@@ -405,14 +405,14 @@ export default function Unit() {
             const fa = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
             
             const InfoCard = ({ title, titleColor, desc, bg, border, titleColorHex }) => (
-              <div style={{ padding: '9px 12px', borderRadius: 10, background: bg || 'rgba(74,143,168,0.08)', border: border || `1px solid ${fp}38`, fontFamily: 'var(--font-body)', fontSize: 13, color: '#cdd5e0', marginBottom: 6 }}>
+              <div style={{ padding: '9px 12px', borderRadius: 10, background: bg || 'rgba(74,143,168,0.08)', border: border || `1px solid ${fp}38`, fontFamily: "'Saira', sans-serif", fontSize: 13, color: '#cdd5e0', marginBottom: 6 }}>
                 <b style={{ color: titleColorHex || fa }}>{title}</b> {desc}
               </div>
             )
 
             return (
               <div style={{ margin: '0 16px 10px' }}>
-                <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 700, letterSpacing: 1.5, color: '#8a94a3', marginBottom: 7 }}>
+                <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 700, letterSpacing: 1.5, color: '#8a94a3', marginBottom: 7 }}>
                   <span style={{ fontSize: 9 }}>▶</span> ABILITY INFO
                 </div>
                 {job && (
@@ -428,7 +428,7 @@ export default function Unit() {
                   <InfoCard title="ℹ️ INFO:" desc={t('archon_notice_unit')} bg="rgba(245,166,35,0.08)" border="1px solid rgba(245,166,35,0.3)" titleColorHex="#f5a623" />
                 )}
                 {archons && archons[player.race] && archonData[player.race] && (
-                  <div style={{ padding: '9px 12px', borderRadius: 10, background: 'rgba(245,166,35,0.08)', border: '1px solid rgba(245,166,35,0.3)', fontFamily: 'var(--font-body)', fontSize: 13, color: '#cdd5e0', marginBottom: 6 }}>
+                  <div style={{ padding: '9px 12px', borderRadius: 10, background: 'rgba(245,166,35,0.08)', border: '1px solid rgba(245,166,35,0.3)', fontFamily: "'Saira', sans-serif", fontSize: 13, color: '#cdd5e0', marginBottom: 6 }}>
                     {archons[player.race].toLowerCase() === player.username?.toLowerCase() && (
                       <div style={{ marginBottom: 4 }}>
                         <b style={{ color: '#f5a623' }}>{t('archon_equipped')} {archonData[player.race].mantle.name}</b>
@@ -460,7 +460,7 @@ export default function Unit() {
             const fa = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
             return (
               <>
-                <div style={{ margin: '0 16px 4px', fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 800, letterSpacing: 1, color: fp, textTransform: 'uppercase' }}>Combat</div>
+                <div style={{ margin: '0 16px 4px', fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, letterSpacing: 1, color: fa, textTransform: 'uppercase' }}>Combat</div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 5, margin: '0 16px 10px' }}>
                   {[
                     { key: 'melee', label: 'Close Range PT' },
@@ -477,12 +477,12 @@ export default function Unit() {
                     
                     return (
                       <div key={item.key} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 12px', borderRadius: 9, background: 'rgba(8,22,36,0.45)', border: `1px solid ${fp}2e` }}>
-                        <span style={{ fontFamily: 'var(--font-body)', fontSize: 13, color: '#cdd5e0' }}>{item.label}</span>
+                        <span style={{ fontFamily: "'Saira', sans-serif", fontSize: 13, color: '#cdd5e0' }}>{item.label}</span>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                          <span style={{ fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 700, color: currentPct >= 50 ? '#16181c' : fp, background: currentPct >= 50 ? 'linear-gradient(135deg,#dde2ea,#9aa2ae)' : `${fp}24`, padding: '2px 7px', borderRadius: 5 }}>
+                          <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 700, color: currentPct >= 50 ? '#16181c' : fa, background: currentPct >= 50 ? 'linear-gradient(135deg,#dde2ea,#9aa2ae)' : `${fp}24`, padding: '2px 7px', borderRadius: 5 }}>
                             {currentPct.toFixed(2)}%
                           </span>
-                          <span style={{ fontFamily: 'var(--font-title)', fontSize: 12, color: '#8a94a3' }}>
+                          <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 12, color: '#8a94a3' }}>
                             {currentVal} / {capVal} Pt
                           </span>
                         </div>
@@ -500,7 +500,7 @@ export default function Unit() {
             const fa = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
             return (
               <>
-                <div style={{ margin: '0 16px 4px', fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 800, letterSpacing: 1, color: fp, textTransform: 'uppercase' }}>Crafting</div>
+                <div style={{ margin: '0 16px 4px', fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, letterSpacing: 1, color: fa, textTransform: 'uppercase' }}>Crafting</div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 5, margin: '0 16px 12px' }}>
                   {[
                     { key: 'production', label: 'Production PT' }
@@ -512,12 +512,12 @@ export default function Unit() {
                     
                     return (
                       <div key={item.key} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 12px', borderRadius: 9, background: 'rgba(8,22,36,0.45)', border: `1px solid ${fp}2e` }}>
-                        <span style={{ fontFamily: 'var(--font-body)', fontSize: 13, color: '#cdd5e0' }}>{item.label}</span>
+                        <span style={{ fontFamily: "'Saira', sans-serif", fontSize: 13, color: '#cdd5e0' }}>{item.label}</span>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                          <span style={{ fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 700, color: currentPct >= 50 ? '#16181c' : fp, background: currentPct >= 50 ? 'linear-gradient(135deg,#dde2ea,#9aa2ae)' : `${fp}24`, padding: '2px 7px', borderRadius: 5 }}>
+                          <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 700, color: currentPct >= 50 ? '#16181c' : fa, background: currentPct >= 50 ? 'linear-gradient(135deg,#dde2ea,#9aa2ae)' : `${fp}24`, padding: '2px 7px', borderRadius: 5 }}>
                             {currentPct.toFixed(2)}%
                           </span>
-                          <span style={{ fontFamily: 'var(--font-title)', fontSize: 12, color: '#8a94a3' }}>
+                          <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 12, color: '#8a94a3' }}>
                             {currentVal} / {capVal} Pt
                           </span>
                         </div>
@@ -534,64 +534,64 @@ export default function Unit() {
             const fa = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
             return (
               <>
-                <div style={{ margin: '0 16px 8px', fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 700, letterSpacing: 1.5, color: '#8a94a3' }}>
+                <div style={{ margin: '0 16px 8px', fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 700, letterSpacing: 1.5, color: '#8a94a3' }}>
                   <span style={{ fontSize: 9 }}>▼</span> EQUIPMENT & INVENTORY
                 </div>
                 <div style={{ margin: '0 16px 12px', padding: '12px 10px', background: 'rgba(8,22,36,0.4)', border: `1px solid ${fp}33`, borderRadius: 12, display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 7, justifyItems: 'center' }}>
                   {/* Row 1 */}
                   <div style={{ width: 48, height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
                     <svg width="16" height="16" viewBox="0 0 13 13"><rect x="1.5" y="1.5" width="10" height="10" transform="rotate(45 6.5 6.5)" fill={fa} fillOpacity="0.6" stroke={fa} strokeWidth="1"/></svg>
-                    <span style={{ fontFamily: 'var(--font-title)', fontSize: 9, color: fa }}>AM1</span>
+                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: fa }}>AM1</span>
                   </div>
                   <div style={{ width: '100%', height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2 }}>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={fa} strokeWidth="1.8"><path d="M12 2l3 6 6 .5-4.5 4 1.4 6L12 15l-5.9 3.5 1.4-6L3 8.5 9 8z"/></svg>
-                    <span style={{ fontFamily: 'var(--font-title)', fontSize: 9, color: fa }}>HELM</span>
+                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: fa }}>HELM</span>
                   </div>
                   <div style={{ width: 48, height: 48, borderRadius: 7, background: 'rgba(3,8,20,0.55)', border: `1.5px dashed ${fp}4d`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
-                    <span style={{ fontFamily: 'var(--font-title)', fontSize: 16, color: 'rgba(255,183,119,0.35)' }}>+</span>
-                    <span style={{ fontFamily: 'var(--font-title)', fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>AM2</span>
+                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: 'rgba(255,183,119,0.35)' }}>+</span>
+                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>AM2</span>
                   </div>
                   
                   {/* Row 2 */}
                   <div style={{ width: '100%', height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2 }}>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={fa} strokeWidth="1.8"><path d="M14.5 17.5L3 6M17.5 14.5L6 3M19 19v-4M19 19h-4M5 5v4M5 5h4"/></svg>
-                    <span style={{ fontFamily: 'var(--font-title)', fontSize: 9, color: fa }}>WPN</span>
+                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: fa }}>WPN</span>
                   </div>
                   <div style={{ width: '100%', height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2 }}>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={fa} strokeWidth="1.8"><path d="M12 2l8 3.5v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10v-6L12 2z"/></svg>
-                    <span style={{ fontFamily: 'var(--font-title)', fontSize: 9, color: fa }}>ARM</span>
+                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: fa }}>ARM</span>
                   </div>
                   <div style={{ width: 48, height: 48, borderRadius: 7, background: 'rgba(3,8,20,0.55)', border: `1.5px dashed ${fp}4d`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
-                    <span style={{ fontFamily: 'var(--font-title)', fontSize: 16, color: 'rgba(255,183,119,0.35)' }}>+</span>
-                    <span style={{ fontFamily: 'var(--font-title)', fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>SHD</span>
+                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: 'rgba(255,183,119,0.35)' }}>+</span>
+                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>SHD</span>
                   </div>
                   
                   {/* Row 3 */}
                   <div style={{ width: 48, height: 48, borderRadius: 7, background: 'rgba(3,8,20,0.55)', border: `1.5px dashed ${fp}4d`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
-                    <span style={{ fontFamily: 'var(--font-title)', fontSize: 16, color: 'rgba(255,183,119,0.35)' }}>+</span>
-                    <span style={{ fontFamily: 'var(--font-title)', fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>GLV</span>
+                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: 'rgba(255,183,119,0.35)' }}>+</span>
+                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>GLV</span>
                   </div>
                   <div style={{ width: '100%', height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2 }}>
                     <svg width="16" height="16" viewBox="0 0 13 13"><rect x="1.5" y="1.5" width="10" height="10" transform="rotate(45 6.5 6.5)" fill={fa} fillOpacity="0.6" stroke={fa} strokeWidth="1"/></svg>
-                    <span style={{ fontFamily: 'var(--font-title)', fontSize: 9, color: fa }}>PNT</span>
+                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: fa }}>PNT</span>
                   </div>
                   <div style={{ width: 48, height: 48, borderRadius: 7, background: 'rgba(3,8,20,0.55)', border: `1.5px dashed ${fp}4d`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
-                    <span style={{ fontFamily: 'var(--font-title)', fontSize: 16, color: 'rgba(255,183,119,0.35)' }}>+</span>
-                    <span style={{ fontFamily: 'var(--font-title)', fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>CPE</span>
+                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: 'rgba(255,183,119,0.35)' }}>+</span>
+                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>CPE</span>
                   </div>
                   
                   {/* Row 4 */}
                   <div style={{ width: 48, height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={fa} strokeWidth="2"><circle cx="12" cy="14" r="6"/><path d="M9 8l3-5 3 5"/></svg>
-                    <span style={{ fontFamily: 'var(--font-title)', fontSize: 9, color: fa }}>RG1</span>
+                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: fa }}>RG1</span>
                   </div>
                   <div style={{ width: '100%', height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2 }}>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={fa} strokeWidth="1.8"><path d="M9 20h6M8 20V10l4-4 4 4v10M6 10h12"/></svg>
-                    <span style={{ fontFamily: 'var(--font-title)', fontSize: 9, color: fa }}>BTS</span>
+                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: fa }}>BTS</span>
                   </div>
                   <div style={{ width: 48, height: 48, borderRadius: 7, background: 'rgba(3,8,20,0.55)', border: `1.5px dashed ${fp}4d`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,183,119,0.4)" strokeWidth="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>
-                    <span style={{ fontFamily: 'var(--font-title)', fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>ARES</span>
+                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>ARES</span>
                   </div>
                 </div>
 
@@ -599,11 +599,11 @@ export default function Unit() {
                 <div style={{ display: 'flex', gap: 7, justifyContent: 'center', margin: '0 16px 14px' }}>
                   {[1, 2, 3, 4, 5].map((bagNum) => (
                     bagNum === 1 ? (
-                      <div key={bagNum} style={{ width: 44, height: 44, borderRadius: 7, background: `${fp}24`, border: `1.5px solid ${fp}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 800, color: fa, boxShadow: `0 0 10px ${fp}4d` }}>{bagNum}</div>
+                      <div key={bagNum} style={{ width: 44, height: 44, borderRadius: 7, background: `${fp}24`, border: `1.5px solid ${fp}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, color: fa, boxShadow: `0 0 10px ${fp}4d` }}>{bagNum}</div>
                     ) : bagNum === 5 ? (
-                      <div key={bagNum} style={{ width: 44, height: 44, borderRadius: 7, background: 'rgba(10,15,30,0.55)', border: '1.5px solid #2a333f', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 800, color: '#555', opacity: 0.5 }}>{bagNum}</div>
+                      <div key={bagNum} style={{ width: 44, height: 44, borderRadius: 7, background: 'rgba(10,15,30,0.55)', border: '1.5px solid #2a333f', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, color: '#555', opacity: 0.5 }}>{bagNum}</div>
                     ) : (
-                      <div key={bagNum} style={{ width: 44, height: 44, borderRadius: 7, background: 'rgba(10,15,30,0.8)', border: '1.5px solid #445566', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 800, color: '#8899aa' }}>{bagNum}</div>
+                      <div key={bagNum} style={{ width: 44, height: 44, borderRadius: 7, background: 'rgba(10,15,30,0.8)', border: '1.5px solid #445566', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, color: '#8899aa' }}>{bagNum}</div>
                     )
                   ))}
                 </div>
@@ -617,7 +617,7 @@ export default function Unit() {
       {tab === 'profile' && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginTop: 8 }}>
           <div className="glass-panel cyber-panel" style={{ padding: 16 }}>
-            <h3 style={{ margin: '0 0 12px 0', color: '#fff', fontSize: 15, fontFamily: 'var(--font-title)', display: 'flex', alignItems: 'center', gap: 6 }}>
+            <h3 style={{ margin: '0 0 12px 0', color: '#fff', fontSize: 15, fontFamily: "'Orbitron', sans-serif", display: 'flex', alignItems: 'center', gap: 6 }}>
               📊 Combat Statistics
             </h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 14, color: '#c0dff0' }}>
@@ -641,7 +641,7 @@ export default function Unit() {
           </div>
 
           <div className="glass-panel cyber-panel" style={{ padding: 16 }}>
-            <h3 style={{ margin: '0 0 12px 0', color: '#fff', fontSize: 15, fontFamily: 'var(--font-title)', display: 'flex', alignItems: 'center', gap: 6 }}>
+            <h3 style={{ margin: '0 0 12px 0', color: '#fff', fontSize: 15, fontFamily: "'Orbitron', sans-serif", display: 'flex', alignItems: 'center', gap: 6 }}>
               ⏱️ General Statistics
             </h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 14, color: '#c0dff0' }}>
@@ -667,19 +667,19 @@ export default function Unit() {
 }
 
 const styles = {
-  screen: { display: 'flex', flexDirection: 'column', flex: 1, overflowY: 'auto', fontFamily: 'var(--font-body)', background: '#0e1116' },
+  screen: { display: 'flex', flexDirection: 'column', flex: 1, overflowY: 'auto', fontFamily: "'Saira', sans-serif", background: '#0e1116' },
 
   // Header
   header: { padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 12, borderBottom: '1px solid rgba(0, 229, 255, 0.15)', background: 'rgba(3, 8, 20, 0.4)', flexShrink: 0 },
   avatar: { width: 48, height: 48, borderRadius: '50%', border: '2px solid #00e5ff', background: 'linear-gradient(135deg, #0030a0, #001040)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 10px rgba(0, 229, 255, 0.3)', flexShrink: 0 },
-  name: { fontFamily: 'var(--font-title)', fontSize: 16, fontWeight: 700, color: '#e0f4ff', letterSpacing: 1 },
+  name: { fontFamily: "'Orbitron', sans-serif", fontSize: 16, fontWeight: 700, color: '#e0f4ff', letterSpacing: 1 },
   sub: { fontFamily: 'var(--font-mono)', fontSize: 13, color: '#7ec8e3', marginTop: 2, fontWeight: 800 },
   actionBtn: (borderColor, bgStart) => ({
     background: `linear-gradient(95deg, ${bgStart}, ${borderColor})`,
     border: `1px solid ${borderColor}`,
     borderRadius: 8,
     padding: '7px 10px',
-    fontFamily: 'var(--font-title)',
+    fontFamily: "'Orbitron', sans-serif",
     fontSize: 13,
     color: '#fff',
     cursor: 'pointer',
@@ -694,7 +694,7 @@ const styles = {
     border: '1px solid rgba(255,255,255,0.1)',
     borderRadius: 8,
     padding: '7px 10px',
-    fontFamily: 'var(--font-title)',
+    fontFamily: "'Orbitron', sans-serif",
     fontSize: 13,
     color: 'rgba(255,255,255,0.3)',
     cursor: 'not-allowed',
@@ -724,13 +724,13 @@ const styles = {
   tab: { 
     flex: 1, padding: '10px', background: 'rgba(0,0,0,0.5)', 
     border: '1px solid rgba(0, 229, 255, 0.2)', color: '#7ab0d0', 
-    borderRadius: 8, fontFamily: 'var(--font-title)', 
+    borderRadius: 8, fontFamily: "'Orbitron', sans-serif", 
     fontSize: 13, cursor: 'pointer', transition: 'all 0.2s', letterSpacing: 1, textAlign: 'center'
   },
   tabActive: { 
     flex: 1, padding: '10px', background: 'rgba(0, 229, 255, 0.15)', 
     border: '1px solid #00e5ff', color: '#fff', 
-    borderRadius: 8, fontFamily: 'var(--font-title)', 
+    borderRadius: 8, fontFamily: "'Orbitron', sans-serif", 
     fontSize: 13, fontWeight: 'bold', cursor: 'pointer', 
     boxShadow: '0 0 12px rgba(0,229,255,0.4)', letterSpacing: 1, textAlign: 'center'
   },
@@ -746,7 +746,7 @@ const styles = {
     userSelect: 'none',
     WebkitUserSelect: 'none'
   },
-  sectionLabel: { fontFamily: 'var(--font-title)', fontSize: 13, letterSpacing: 1.5, color: '#7ec8e3', fontWeight: 800, textShadow: '0 0 6px rgba(0, 229, 255, 0.2)' },
+  sectionLabel: { fontFamily: "'Orbitron', sans-serif", fontSize: 13, letterSpacing: 1.5, color: '#7ec8e3', fontWeight: 800, textShadow: '0 0 6px rgba(0, 229, 255, 0.2)' },
   chevron: { fontFamily: 'var(--font-mono)', fontSize: 16, color: '#00e5ff', fontWeight: 900, lineHeight: 1 },
   sectionBody: { padding: '0 14px 12px' },
 
@@ -758,7 +758,7 @@ const styles = {
   // Stats
   baseStatsGrid: { display: 'flex', gap: 6, marginBottom: 10 },
   baseStatBox: { flex: 1, background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.1)', borderRadius: 8, padding: '8px 4px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 },
-  baseStatLabel: { fontFamily: 'var(--font-title)', fontSize: 12, color: '#88aadd', fontWeight: 800, letterSpacing: 0.5 },
+  baseStatLabel: { fontFamily: "'Orbitron', sans-serif", fontSize: 12, color: '#88aadd', fontWeight: 800, letterSpacing: 0.5 },
   baseStatNum: { fontFamily: 'var(--font-mono)', fontSize: 16, color: '#ffffff', fontWeight: 900 },
 
   statsGrid: { display: 'flex', gap: 8 },
@@ -778,29 +778,29 @@ const styles = {
   }),
 
   // Lore / Race
-  desc: { fontFamily: 'var(--font-body)', fontSize: 13, color: '#6a9ab8', marginBottom: 10, lineHeight: 1.6, fontWeight: 600 },
+  desc: { fontFamily: "'Saira', sans-serif", fontSize: 13, color: '#6a9ab8', marginBottom: 10, lineHeight: 1.6, fontWeight: 600 },
   specSection: { display: 'flex', flexDirection: 'column', gap: 3, background: 'rgba(0,0,0,0.2)', padding: '10px 12px', borderRadius: 8, border: '1px solid rgba(0,229,255,0.08)' },
-  specTitle: { fontFamily: 'var(--font-title)', fontSize: 14, color: '#7ab0d0', letterSpacing: 0.5, fontWeight: 800, marginBottom: 8, borderBottom: '1px solid rgba(0,229,255,0.2)', paddingBottom: 4 },
-  specItem: (c) => ({ fontFamily: 'var(--font-body)', fontSize: 13, color: c, lineHeight: 1.5, fontWeight: 600 }),
+  specTitle: { fontFamily: "'Orbitron', sans-serif", fontSize: 14, color: '#7ab0d0', letterSpacing: 0.5, fontWeight: 800, marginBottom: 8, borderBottom: '1px solid rgba(0,229,255,0.2)', paddingBottom: 4 },
+  specItem: (c) => ({ fontFamily: "'Saira', sans-serif", fontSize: 13, color: c, lineHeight: 1.5, fontWeight: 600 }),
 
   growthTable: { width: '100%', borderCollapse: 'collapse', fontSize: 13, fontFamily: 'var(--font-mono)', marginBottom: 16, background: 'rgba(0,0,0,0.2)', borderRadius: 6, overflow: 'hidden' },
   th: { padding: '6px 8px', textAlign: 'left', borderBottom: '1px solid rgba(255,255,255,0.1)', color: '#88aadd', fontWeight: 'bold' },
   td: { padding: '6px 8px', borderBottom: '1px solid rgba(255,255,255,0.05)', color: '#e0f4ff' },
 
   filosofiBox: { display: 'flex', flexDirection: 'column', gap: 8, background: 'rgba(0,0,0,0.2)', padding: 10, borderRadius: 6, border: '1px solid rgba(0,229,255,0.1)' },
-  filosofiItem: { fontSize: 13, fontFamily: 'var(--font-body)', color: '#a0c4d8', lineHeight: 1.4 },
+  filosofiItem: { fontSize: 13, fontFamily: "'Saira', sans-serif", color: '#a0c4d8', lineHeight: 1.4 },
 
   // Progress
   progRow: { display: 'flex', justifyContent: 'space-around', gap: 4 },
   progItem: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, flex: 1 },
   progNum: { fontFamily: 'var(--font-mono)', fontSize: 18, fontWeight: 900, color: '#00e5ff', textShadow: '0 0 6px rgba(0, 229, 255, 0.2)' },
-  progLabel: { fontFamily: 'var(--font-title)', fontSize: 13, color: '#7ec8e3', fontWeight: 800, textAlign: 'center' },
+  progLabel: { fontFamily: "'Orbitron', sans-serif", fontSize: 13, color: '#7ec8e3', fontWeight: 800, textAlign: 'center' },
 
   // Modal
   modalOverlay: { position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.85)', zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center', backdropFilter: 'blur(5px)', padding: 16 },
   modalBox: { background: '#081020', border: '1px solid #00e5ff', borderRadius: 16, padding: 20, width: '100%', maxWidth: 400, boxShadow: '0 0 30px rgba(0,229,255,0.3)', maxHeight: '85vh', overflowY: 'auto' },
-  modalTitle: { fontFamily: 'var(--font-title)', fontSize: 20, color: '#fff', textAlign: 'center', textShadow: '0 0 10px #00e5ff', margin: 0, marginBottom: 8 },
-  modalDesc: { fontFamily: 'var(--font-body)', fontSize: 13, color: '#88aadd', textAlign: 'center', marginTop: 0 },
+  modalTitle: { fontFamily: "'Orbitron', sans-serif", fontSize: 20, color: '#fff', textAlign: 'center', textShadow: '0 0 10px #00e5ff', margin: 0, marginBottom: 8 },
+  modalDesc: { fontFamily: "'Saira', sans-serif", fontSize: 13, color: '#88aadd', textAlign: 'center', marginTop: 0 },
   jobBtn: { background: 'rgba(0,0,0,0.5)', border: '1px solid #00e5ff', borderRadius: 8, padding: 12, cursor: 'pointer', textAlign: 'left', transition: 'all 0.2s', width: '100%' },
 
   // NPC dialogue box styling
@@ -813,7 +813,7 @@ const styles = {
     padding: '8px 12px',
     borderRadius: '0 8px 8px 0',
     lineHeight: 1.5,
-    fontFamily: 'var(--font-body)',
+    fontFamily: "'Saira', sans-serif",
   },
 
   titleBadge: (race) => {
@@ -833,7 +833,7 @@ const styles = {
       borderRadius: 4,
       padding: '2px 6px',
       fontSize: 13,
-      fontFamily: 'var(--font-title)',
+      fontFamily: "'Orbitron', sans-serif",
       fontWeight: 900,
       color: '#fff',
       textShadow: '0 1px 2px rgba(0,0,0,0.6)',
@@ -847,7 +847,7 @@ const styles = {
     border: 'none',
     borderRadius: 6,
     padding: '6px 12px',
-    fontFamily: 'var(--font-title)',
+    fontFamily: "'Orbitron', sans-serif",
     fontSize: 13,
     color: '#fff',
     fontWeight: 800,
@@ -860,7 +860,7 @@ const styles = {
     border: '1px solid rgba(255, 255, 255, 0.1)',
     borderRadius: 6,
     padding: '6px 12px',
-    fontFamily: 'var(--font-title)',
+    fontFamily: "'Orbitron', sans-serif",
     fontSize: 13,
     color: 'rgba(255, 255, 255, 0.3)',
     fontWeight: 800,
@@ -875,7 +875,7 @@ const styles = {
     background: 'rgba(4, 9, 21, 0.9)',
     border: '1px solid rgba(0, 229, 255, 0.25)',
     borderRadius: '15px',
-    fontFamily: 'var(--font-title)',
+    fontFamily: "'Orbitron', sans-serif",
     fontSize: 12,
     fontWeight: 800,
     color: '#00e5ff',
@@ -894,7 +894,7 @@ const styles = {
     marginBottom: '2px'
   },
   ptLabel: {
-    fontFamily: 'var(--font-body)',
+    fontFamily: "'Saira', sans-serif",
     fontSize: 13,
     fontWeight: 700,
     color: '#e0f4ff'
