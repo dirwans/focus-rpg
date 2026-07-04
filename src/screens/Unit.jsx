@@ -736,12 +736,11 @@ export default function Unit() {
 
         {/* Row 4 */}
         <div style={cargoStyles.ascensionCorner}>
-          {renderSlot('ring1', '💍', 'RNG I', true)}
-          {renderSlot('ascension_arms', '⚙️', 'ARES', true)}
+          {renderSlot('ring1', '💍', 'RING', true)}
         </div>
         {renderSlot('boots', '👢', 'BOOTS')}
         <div style={cargoStyles.ascensionCorner}>
-          {renderSlot('ring2', '💍', 'RNG II', true)}
+          {renderSlot('ascension_arms', '⚙️', 'ARES', true)}
         </div>
       </div>
 
