@@ -147,3 +147,27 @@ This journal tracks all major development milestones, technical optimizations, b
     - NPC Equipment Sell Prices per Rarity
     - Respawn Database (Normal: 5s, World Boss: 6h, Dungeon Boss: Dungeon Reset)
     - Dungeon Entry limits & Inventory/Warehouse slot details.
+
+---
+
+### 🌐 Milestone 9: Google Sign-In Integration, Character Rename Fixes & Touch Scrolling
+- **Google Sign-In Implementation**:
+  - Integrated Capacitor Social Login natively on Android and Web using `@capgo/capacitor-social-login`.
+  - Solved native SocialLogin callback crash by removing custom scope arrays (forcing default email/profile scopes), resolving Java Activity modification errors on Android.
+  - Crafted multi-colored official Google icon branding in Auth.jsx to match styling guidelines.
+- **Character Name Restore Guard**:
+  - Modified App.jsx save initialization to prevent registration names from overriding custom character names during save hydration.
+- **NPC Promotion Path Horizontal Scroll**:
+  - Added horizontal swipe layouts (`overflowX: 'auto'` and flex-shrink blocks) to the NPC specialist promotion selection tabs, resolving touch displacement limits for Cora and Bellato 4th paths on mobile screens.
+
+---
+
+### 🎨 Milestone 10: Scanline Cleanup, Character Creation Flow & Name Symbols Support
+- **Scanline Layer Removal**:
+  - Disabled the absolute holographic scanline layer overlay (`display: none` in `.cyberpunk-hud-bg::before`) from the NPC Base modal container, resolving sprite brightness loss, screen dimming, and moiré blurring on high-density viewports.
+- **Dedicated Character Creation Flow**:
+  - Locked new accounts without selected races into a full-screen wizard component (`CharacterCreate.jsx`).
+  - Implemented 6-step creation flow: Server Selection (Nova-Core, Desolation, Solitude), Race selection (Arctron, Bionex, Celestra), Class Path selection (Warrior, Ranger, Specialist, Mage/Summoner), Live Customization (Aura Glow Colors and Portrait/Full Sprite modes), Custom Name, and Final VPS Sync.
+- **Character Naming Symbols Support**:
+  - Extended character name character sanitization checks (`/[^a-zA-Z0-9_\-@#]/g`) to support dashes `-`, at-signs `@`, and hashes `#` to permit customized tag formatting.
+
