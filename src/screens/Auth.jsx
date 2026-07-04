@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import { useAuthStore } from '../store/authStore'
 import PrologueModal from '../components/PrologueModal'
+import { Capacitor } from '@capacitor/core'
+import { SocialLogin } from '@capgo/capacitor-social-login'
 
 const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID
 
@@ -19,6 +21,15 @@ export default function Auth() {
   const clearError = useAuthStore((s) => s.clearError)
 
   useEffect(() => {
+    if (Capacitor.isNativePlatform()) {
+      SocialLogin.initialize({
+        google: {
+          webClientId: GOOGLE_CLIENT_ID,
+        }
+      }).catch(err => console.error("SocialLogin init fail:", err))
+      return
+    }
+
     const initGoogle = () => {
       if (!window.google || !GOOGLE_CLIENT_ID) return
       window.google.accounts.id.initialize({
@@ -50,6 +61,26 @@ export default function Auth() {
     }
   }, [])
 
+  const handleNativeGoogle = async () => {
+    try {
+      clearError()
+      const response = await SocialLogin.login({
+        provider: 'google',
+        options: {
+          scopes: ['email', 'profile']
+        }
+      })
+      const idToken = response.result?.idToken || response.authentication?.idToken
+      if (idToken) {
+        await signInWithGoogle(idToken)
+      } else {
+        alert("Gagal mengambil Google Token.")
+      }
+    } catch (err) {
+      console.error("Native Google login error:", err)
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     clearError()
@@ -77,7 +108,21 @@ export default function Auth() {
         {/* Google Sign-In Button */}
         {GOOGLE_CLIENT_ID && (
           <div style={styles.googleWrap}>
-            <div ref={googleBtnRef} style={styles.googleBtn} />
+            {Capacitor.isNativePlatform() ? (
+              <button
+                type="button"
+                style={styles.nativeGoogleBtn}
+                onClick={handleNativeGoogle}
+                disabled={loading}
+              >
+                <svg style={styles.googleIconSvg} viewBox="0 0 24 24">
+                  <path fill="currentColor" d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.114-5.136 4.114-3.478 0-6.3-2.823-6.3-6.3 0-3.478 2.822-6.3 6.3-6.3 1.637 0 3.125.626 4.256 1.646l3.056-3.056C19.414 2.862 16.023 1.5 12.24 1.5 6.42 1.5 1.7 6.22 1.7 12s4.72 10.5 10.54 10.5c6.07 0 10.096-4.267 10.096-10.286 0-.693-.082-1.371-.22-1.929H12.24z"/>
+                </svg>
+                CONTINUE WITH GOOGLE
+              </button>
+            ) : (
+              <div ref={googleBtnRef} style={styles.googleBtn} />
+            )}
             <div style={styles.divider}><span>atau</span></div>
           </div>
         )}
@@ -141,6 +186,31 @@ const styles = {
   loreBtn:   { background: 'rgba(3,8,20,0.6)', border: '1px solid rgba(0, 229, 255, 0.35)', borderRadius: 8, padding: '10px 14px', color: '#00e5ff', fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 800, letterSpacing: 1.5, cursor: 'pointer', transition: 'all 0.2s', width: '100%', outline: 'none' },
   googleWrap:{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 },
   googleBtn: { width: '100%', minHeight: 44 },
+  nativeGoogleBtn: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 12,
+    width: '100%',
+    minHeight: 44,
+    padding: '10px 16px',
+    borderRadius: 8,
+    border: '1px solid rgba(0, 229, 255, 0.35)',
+    background: 'rgba(3,8,20,0.6)',
+    color: '#00e5ff',
+    fontFamily: 'var(--font-title)',
+    fontSize: 13,
+    fontWeight: 800,
+    letterSpacing: 1.5,
+    cursor: 'pointer',
+    transition: 'all 0.2s',
+    outline: 'none',
+  },
+  googleIconSvg: {
+    width: 18,
+    height: 18,
+    fill: 'currentColor',
+  },
   divider:   { width: '100%', display: 'flex', alignItems: 'center', gap: 10, color: '#7ab0d0', fontFamily: 'var(--font-mono)', fontSize: 13, fontWeight: 700, '::before': { content: '""', flex: 1, height: 1, background: 'rgba(0,229,255,0.15)' } },
   tabs:      { display: 'flex', border: '1px solid rgba(0, 229, 255, 0.25)', borderRadius: 10, overflow: 'hidden' },
   tab:       (active) => ({ flex: 1, padding: '12px', border: 'none', fontFamily: 'var(--font-title)', fontSize: 15, fontWeight: 800, letterSpacing: 1, cursor: 'pointer', background: active ? 'rgba(0,100,200,0.3)' : 'rgba(6, 15, 35, 0.6)', color: active ? '#00e5ff' : '#7ab0d0', borderBottom: active ? '3px solid #00c8ff' : 'none' }),

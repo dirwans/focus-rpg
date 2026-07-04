@@ -866,6 +866,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                               background: 'rgba(3, 8, 20, 0.55)',
                               boxShadow: `inset 0 0 16px ${player.race === 'arctron' ? 'rgba(255,87,34,0.15)' : player.race === 'bionex' ? 'rgba(255,214,0,0.15)' : 'rgba(0,229,255,0.15)'}`,
                             }}>
+                              {/* Move glow OUTSIDE clipped container to avoid ghosting from blur+overflow-clip double composite */}
                               <div style={{
                                 position: 'absolute',
                                 bottom: 0,
@@ -875,7 +876,9 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                                 height: 50,
                                 borderRadius: '50%',
                                 background: `radial-gradient(ellipse, ${player.race === 'arctron' ? 'rgba(255,87,34,0.65)' : player.race === 'bionex' ? 'rgba(255,214,0,0.65)' : 'rgba(0,229,255,0.65)'} 0%, transparent 70%)`,
-                                filter: 'blur(8px)',
+                                boxShadow: `0 0 24px ${player.race === 'arctron' ? 'rgba(255,87,34,0.5)' : player.race === 'bionex' ? 'rgba(255,214,0,0.5)' : 'rgba(0,229,255,0.5)'}`,
+                                zIndex: 0,
+                                pointerEvents: 'none',
                               }} />
                               {bionexHeroSprite ? (
                                 <img
