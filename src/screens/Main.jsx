@@ -109,7 +109,10 @@ export default function Main() {
     return { tier: 0, job: null, classIndex: -1 }
   }
 
-  // CLASS names by faction (mapped by job index position in tier arrays)
+  // Focus-session label per faction (Arctron fights, Bionex gathers, Celestra channels)
+const FOCUS_MODE_LABEL = { arctron: 'FIGHT', bionex: 'GATHER', celestra: 'CHANNEL' }
+
+// CLASS names by faction (mapped by job index position in tier arrays)
   const CLASS_NAMES = {
     celestra: ['Warrior', 'Ranger', 'Summoner', 'Mage'],
     arctron:  ['Warrior', 'Ranger', 'Specialist'],
@@ -420,122 +423,78 @@ export default function Main() {
   }
 
   // Normal / Lobby Layout
+  const ringRadius = 26
+  const ringStrokeWidth = 4
+  const ringCirc = 2 * Math.PI * ringRadius
+  const focusModeLabel = FOCUS_MODE_LABEL[player.race] || 'FOCUS'
+
   return (
     <div className="no-scrollbar" style={styles.screen}>
-      {/* Resource bar */}
-      <div style={styles.resBar}>
-        <span style={styles.resPill('var(--neon-glow)')}>⬡ {player.resources.anium.toLocaleString()}</span>
-        <span style={styles.resPill('#00e5ff')}>◈ {player.resources.credits}</span>
-        <span style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 8 }}>
+      {/* Top HUD bar */}
+      <div style={styles.hudBar}>
+        <span className="hud-pill">⬡ {player.resources.anium.toLocaleString()}</span>
+        <span className="hud-pill secondary">◈ {player.resources.credits.toLocaleString()}</span>
+        <span style={styles.iconRow}>
           {player.race && (
-            <button 
-              onClick={() => setShowMailbox(true)} 
-              style={{ ...styles.logoutBtn, position: 'relative' }} 
-              title="Mailbox"
-            >
+            <button onClick={() => setShowMailbox(true)} className="icon-btn-circle" title="Mailbox">
               ✉️
               {player.mailbox && player.mailbox.length > 0 && (
-                <div style={{ position: 'absolute', top: -3, right: -3, width: 8, height: 8, borderRadius: '50%', background: '#ff3333', boxShadow: '0 0 6px #ff3333' }} />
+                <div style={styles.mailDot} />
               )}
             </button>
           )}
-          <button onClick={() => setShowSocialModal(true)} style={styles.logoutBtn} title="Social / Friends">👥</button>
-          <button onClick={() => setShowLibrary(true)} style={styles.logoutBtn} title="Database & Guides">📖</button>
-          <button onClick={() => setShowSettings(true)} style={styles.logoutBtn} title="Settings">⚙️</button>
-          <button onClick={signOut} style={styles.logoutBtn} title="Logout">⏏</button>
+          <button onClick={() => setShowSocialModal(true)} className="icon-btn-circle" title="Social / Friends">👥</button>
+          <button onClick={() => setShowLibrary(true)} className="icon-btn-circle" title="Database & Guides">📖</button>
+          <button onClick={() => setShowSettings(true)} className="icon-btn-circle" title="Settings">⚙️</button>
+          <button onClick={signOut} className="icon-btn-circle" title="Logout">⏏</button>
         </span>
       </div>
 
-
-      {/* EXP bar */}
-      <div style={styles.expSection}>
-        <div style={styles.expLabel}>LV.{player.level} — {t('to_next_exp', { pct: 100 - expPct })}</div>
-        <div style={styles.expBg}><div style={{ ...styles.expFill, width: expPct + '%' }} /></div>
-        <div style={styles.expText}>{player.exp} / {expMax} Menit</div>
-      </div>
-
-
-      {/* Stat cards */}
-      <div style={styles.statRow}>
-        <div className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.statCard}><div style={styles.statLabel}>{t('level_lbl')}</div><div style={{ ...styles.statVal, color: '#00e5ff' }}>{player.level}</div></div>
-        <div className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.statCard}><div style={styles.statLabel}>{t('sector_lbl')}</div><div style={{ ...styles.statVal, color: '#f5a623' }}>{player.sector <= 5 ? `M-${player.sector}` : `D-${player.sector - 5}`}</div></div>
-        <div className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.statCard}><div style={styles.statLabel}>{t('streak_lbl')}</div><div style={{ ...styles.statVal, color: '#ff4466' }}>🔥{player.streak}</div></div>
-      </div>
-
-
-      {/* Grind Zone location header standalone */}
-      <div style={{
-        display: 'flex',
-        justifyContent: 'center',
-        margin: '0 16px 12px 16px',
-        padding: '6px 12px',
-        background: 'rgba(4, 9, 21, 0.8)',
-        border: '1.5px solid var(--border-neon)',
-        borderRadius: '8px',
-        fontFamily: 'var(--font-title)',
-        fontSize: 13,
-        fontWeight: 800,
-        color: '#7ab0d0',
-        letterSpacing: '1px',
-        position: 'relative',
-        zIndex: 2,
-        boxShadow: 'inset 0 3px 6px rgba(0,0,0,0.5)'
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+      {/* Location pill + streak */}
+      <div style={styles.locationRow}>
+        <div className="location-pill">
           <svg width="11" height="13" viewBox="0 0 11 13" fill="none" style={{ flexShrink: 0 }}>
-              <polygon points="5.5,0 11,3 11,8.5 5.5,13 0,8.5 0,3" stroke="currentColor" strokeWidth="1.2" fill="none"/>
-              <circle cx="5.5" cy="6" r="1.8" fill="currentColor"/>
-              <line x1="5.5" y1="0" x2="5.5" y2="2.2" stroke="currentColor" strokeWidth="1"/>
-              <line x1="5.5" y1="9.8" x2="5.5" y2="13" stroke="currentColor" strokeWidth="1"/>
-            </svg>
-            <span>{t('location_lbl')}:</span>
+            <polygon points="5.5,0 11,3 11,8.5 5.5,13 0,8.5 0,3" stroke="currentColor" strokeWidth="1.2" fill="none" />
+            <circle cx="5.5" cy="6" r="1.8" fill="currentColor" />
+            <line x1="5.5" y1="0" x2="5.5" y2="2.2" stroke="currentColor" strokeWidth="1" />
+            <line x1="5.5" y1="9.8" x2="5.5" y2="13" stroke="currentColor" strokeWidth="1" />
+          </svg>
+          <span>{t('location_lbl')}:</span>
           <span style={{ color: 'var(--neon-glow)', textShadow: '0 0 6px var(--neon-glow)' }}>{enemy.name.toUpperCase()}</span>
         </div>
+        <div className="location-pill" style={{ color: '#ff5f7a' }} title={t('streak_lbl')}>🔥{player.streak}</div>
       </div>
 
       {/* Simplified Player Status HUD */}
-      <div 
-        className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`}
-        style={{
-          margin: '0 16px 12px',
-          padding: '10px 14px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: 12,
-          border: '1px solid var(--border-neon)',
-          background: 'rgba(4, 9, 21, 0.7)',
-          zIndex: 2,
-          position: 'relative'
-        }}
-      >
-        <div style={{ width: 44, height: 44, borderRadius: '50%', border: '1.5px solid var(--neon-glow)', background: 'rgba(0,0,0,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', flexShrink: 0 }}>
+      <div className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.statusStrip}>
+        <div style={styles.avatarRing}>
           <PilotSprite race={player.race} job={player.job} size={36} />
         </div>
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
-            <span style={{ fontFamily: 'var(--font-title)', fontSize: 14, fontWeight: 'bold', color: '#e0f4ff', letterSpacing: 0.5 }}>{player.name.toUpperCase()}</span>
+            <span style={{ fontFamily: 'var(--font-title)', fontSize: 15, fontWeight: 'bold', color: '#e0f4ff', letterSpacing: 0.5 }}>{player.name.toUpperCase()}</span>
             {stats.title && (
               <span style={{ fontSize: 9, background: 'rgba(0, 229, 255, 0.1)', color: 'var(--neon-glow)', border: '1px solid var(--neon-glow)', borderRadius: 4, padding: '1px 4px', fontFamily: 'var(--font-title)', fontWeight: 800 }}>
                 {stats.title.toUpperCase()}
               </span>
             )}
           </div>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#7ec8e3', marginTop: 2, fontWeight: 700 }}>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: '#7ec8e3', marginTop: 2, fontWeight: 700 }}>
             {jobInfo ? jobInfo.name.toUpperCase() : 'NOVICE'} · LV.{player.level}
           </div>
         </div>
         {eligibleForPromo && (
-          <button 
+          <button
             className={`profile-promo-btn btn-${player.race}`}
             style={{
               padding: '6px 10px',
-              fontSize: 11,
+              fontSize: 13,
               fontFamily: 'var(--font-title)',
               fontWeight: 800,
               borderRadius: 6,
               cursor: 'pointer',
               border: 'none',
-              boxShadow: '0 0 8px var(--neon-glow)88'
+              boxShadow: '0 0 8px var(--neon-glow)'
             }}
             onClick={() => {
               setNpcInitialView('specialist')
@@ -547,83 +506,117 @@ export default function Main() {
         )}
       </div>
 
-
+      {/* EXP bar */}
+      <div style={styles.expSection}>
+        <div style={styles.expLabelRow}>
+          <span>LV.{player.level}</span>
+          <span>{100 - expPct}% TO NEXT</span>
+        </div>
+        <div style={styles.expBg}><div style={{ ...styles.expFill, width: expPct + '%' }} /></div>
+        <div style={styles.expText}>{player.exp} / {expMax} Menit</div>
+      </div>
 
       {/* Guild Panel */}
       <GuildPanel />
 
       {/* Combat stats */}
       <div className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.combatStats}>
-        <div style={styles.cstat}><div style={styles.cstatLabel}>{t('firepower')}</div><div style={{ ...styles.cstatVal, color: '#f5a623' }}>{stats.atk}</div></div>
-        <div style={{ width: 1, background: '#0d2a50' }} />
-        <div style={styles.cstat}><div style={styles.cstatLabel}>{t('armor')}</div><div style={{ ...styles.cstatVal, color: '#00c8ff' }}>{stats.def}</div></div>
-        <div style={{ width: 1, background: '#0d2a50' }} />
-        <div style={styles.cstat}><div style={styles.cstatLabel}>{t('shield_hp')}</div><div style={{ ...styles.cstatVal, color: '#ff4466' }}>{stats.hp.toLocaleString()}</div></div>
+        <div style={styles.cstat}><div style={styles.cstatLabel}>{t('firepower')}</div><div style={{ ...styles.cstatVal, color: 'var(--neon-glow)' }}>{stats.atk}</div></div>
+        <div style={styles.statDivider} />
+        <div style={styles.cstat}><div style={styles.cstatLabel}>{t('armor')}</div><div style={{ ...styles.cstatVal, color: '#eef3fb' }}>{stats.def}</div></div>
+        <div style={styles.statDivider} />
+        <div style={styles.cstat}><div style={styles.cstatLabel}>{t('shield_hp')}</div><div style={{ ...styles.cstatVal, color: '#ff5f7a' }}>{stats.hp.toLocaleString()}</div></div>
       </div>
 
-      {/* Timer options */}
-      <div style={styles.timerRow}>
-        {[10, 25, 60].map((m) => (
-          <button key={m} style={styles.timerBtn(timer.selectedMinutes === m)} onClick={() => setTimerMinutes(m)}>
-            {t('minutes_short', { m })}
-          </button>
-        ))}
-      </div>
-
-      {/* Target Zone Selector */}
-      {!isRunning && !isDone && player.race && (
-        <div style={styles.zoneSelectorContainer}>
-          <div style={styles.zoneSelectorLabel}>📍 Target Zone</div>
-          <div style={styles.zoneRow}>
-            <button 
-              style={(!timer.selectedZone || timer.selectedZone === 'world') ? styles.zoneBtnActive : styles.zoneBtn} 
-              onClick={() => setSelectedZone('world')}
-            >
-              🌍 World Map (Auto)
-            </button>
-            <button 
-              style={timer.selectedZone === 'dungeon_1' ? styles.zoneBtnActive : (player.level < 30 ? styles.zoneBtnLocked : styles.zoneBtn)} 
-              disabled={player.level < 30}
-              onClick={() => setSelectedZone('dungeon_1')}
-            >
-              💀 Echo Burrow {player.level < 30 ? "(Lv.30)" : ""}
-            </button>
-            <button 
-              style={timer.selectedZone === 'dungeon_2' ? styles.zoneBtnActive : (player.level < 50 ? styles.zoneBtnLocked : styles.zoneBtn)} 
-              disabled={player.level < 50}
-              onClick={() => setSelectedZone('dungeon_2')}
-            >
-              🔥 Infernal Forge {player.level < 50 ? "(Lv.50)" : ""}
-            </button>
-            <button 
-              style={timer.selectedZone === 'dungeon_3' ? styles.zoneBtnActive : (player.level < 65 ? styles.zoneBtnLocked : styles.zoneBtn)} 
-              disabled={player.level < 65}
-              onClick={() => setSelectedZone('dungeon_3')}
-            >
-              ⚡ Trinity Core {player.level < 65 ? "(Lv.65)" : ""}
-            </button>
+      {/* Focus timer + Target zone card */}
+      <div className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.focusCard}>
+        <div style={styles.focusTopRow}>
+          <div style={styles.ringWrap}>
+            <svg width={64} height={64} viewBox="0 0 64 64">
+              <circle cx={32} cy={32} r={ringRadius} stroke="rgba(255,255,255,0.12)" strokeWidth={ringStrokeWidth} fill="none" />
+              <circle
+                cx={32} cy={32} r={ringRadius}
+                stroke="var(--neon-secondary-1)"
+                strokeWidth={ringStrokeWidth}
+                fill="none"
+                strokeDasharray={ringCirc}
+                strokeDashoffset={0}
+                strokeLinecap="round"
+                transform="rotate(-90 32 32)"
+                style={{ filter: 'drop-shadow(0 0 4px var(--neon-secondary-2))' }}
+              />
+            </svg>
+            <div style={styles.ringText}>{fmt(timer.selectedMinutes * 60)}</div>
+          </div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={styles.focusLabel}>FOCUS SESSION · {focusModeLabel}</div>
+            <div style={styles.pillRow}>
+              {[10, 25, 60].map((m) => (
+                <button
+                  key={m}
+                  className={`focus-pill${timer.selectedMinutes === m ? ' selected' : ''}`}
+                  onClick={() => setTimerMinutes(m)}
+                >
+                  {m}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
-      )}
 
-      {/* Faction NPC Access Button */}
-      {!isRunning && player.race && (
-        <button style={styles.npcBtn} onClick={() => setShowNpcModal(true)}>
-          🏪 {t('visit_npc')}
-        </button>
-      )}
+        {!isRunning && !isDone && player.race && (
+          <>
+            <div style={styles.divider} />
+            <div style={styles.focusLabel}>TARGET ZONE</div>
+            <div style={styles.pillRow}>
+              <button
+                className={`focus-pill${(!timer.selectedZone || timer.selectedZone === 'world') ? ' selected' : ''}`}
+                onClick={() => setSelectedZone('world')}
+              >
+                WORLD
+              </button>
+              <button
+                className={`focus-pill${timer.selectedZone === 'dungeon_1' ? ' selected' : (player.level < 30 ? ' locked' : '')}`}
+                disabled={player.level < 30}
+                onClick={() => setSelectedZone('dungeon_1')}
+              >
+                ECHO L30
+              </button>
+              <button
+                className={`focus-pill${timer.selectedZone === 'dungeon_2' ? ' selected' : (player.level < 50 ? ' locked' : '')}`}
+                disabled={player.level < 50}
+                onClick={() => setSelectedZone('dungeon_2')}
+              >
+                FORGE L50
+              </button>
+              <button
+                className={`focus-pill${timer.selectedZone === 'dungeon_3' ? ' selected' : (player.level < 65 ? ' locked' : '')}`}
+                disabled={player.level < 65}
+                onClick={() => setSelectedZone('dungeon_3')}
+              >
+                CORE L65
+              </button>
+            </div>
+          </>
+        )}
+      </div>
 
-      {/* Main action button */}
-      {!isRunning && !isDone && (
-        <button style={styles.deployBtn} onClick={player.race ? startTimer : openRaceSelect}>
-          {player.race ? t('deploy_unit') : t('select_race')}
-        </button>
-      )}
-      {isDone && (
-        <button style={{ ...styles.deployBtn, background: 'linear-gradient(90deg,#006000,#00c840)' }} onClick={resetTimer}>
-          {t('new_session')}
-        </button>
-      )}
+      {/* Deploy row */}
+      <div style={styles.deployRow}>
+        {!isRunning && player.race && (
+          <button className="npc-circle-btn" onClick={() => setShowNpcModal(true)} title={t('visit_npc')}>🏪</button>
+        )}
+        {!isRunning && !isDone && (
+          <button className="deploy-btn" onClick={player.race ? startTimer : openRaceSelect}>
+            {player.race ? t('deploy_unit') : t('select_race')}
+          </button>
+        )}
+        {isDone && (
+          <button className="deploy-btn" style={{ background: 'linear-gradient(90deg,#006000,#00c840)', color: '#fff' }} onClick={resetTimer}>
+            {t('new_session')}
+          </button>
+        )}
+      </div>
 
       {/* Modals */}
       {showSettings && <SettingsModal onClose={() => setShowSettings(false)} />}
@@ -638,17 +631,26 @@ export default function Main() {
 
 const styles = {
   screen: { display: 'flex', flexDirection: 'column', flex: 1, gap: 0, fontFamily: 'var(--font-body)', zIndex: 1 },
-  resBar: { display: 'flex', gap: 8, padding: '8px 16px 6px', alignItems: 'center', borderBottom: '1px solid rgba(0, 229, 255, 0.15)', background: 'rgba(3, 8, 20, 0.4)', flexShrink: 0 },
-  resPill: (c) => ({ background: 'rgba(3, 8, 20, 0.8)', border: `1px solid ${c}`, borderRadius: 20, padding: '4px 10px', fontFamily: 'var(--font-mono)', fontSize: 13, fontWeight: 800, color: c, boxShadow: `0 0 12px ${c}33, inset 0 0 8px ${c}22` }),
-  expSection: { padding: '6px 16px', background: 'rgba(3, 8, 20, 0.2)', flexShrink: 0 },
-  expLabel: { fontFamily: 'var(--font-title)', fontSize: 13, color: '#00e5ff', letterSpacing: 2, marginBottom: 5, fontWeight: 800, textShadow: '0 0 8px rgba(0, 229, 255, 0.4)' },
-  expBg: { height: 8, background: 'rgba(0,0,0,0.4)', borderRadius: 4, overflow: 'hidden', border: '1px solid rgba(0, 229, 255, 0.25)' },
-  expFill: { height: '100%', background: 'linear-gradient(90deg, #0050cc, #00e5ff)', borderRadius: 4, transition: 'width 0.5s', boxShadow: '0 0 8px #00e5ff' },
+  hudBar: { display: 'flex', gap: 8, padding: '15px 16px 10px', alignItems: 'center', flexShrink: 0 },
+  iconRow: { marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 7 },
+  mailDot: { position: 'absolute', top: -3, right: -3, width: 8, height: 8, borderRadius: '50%', background: '#ff3333', boxShadow: '0 0 6px #ff3333' },
+  locationRow: { display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 8, margin: '0 16px 12px' },
+  statusStrip: { margin: '0 16px 12px', padding: '10px 14px', display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 },
+  avatarRing: { width: 44, height: 44, borderRadius: '50%', border: '1.5px solid var(--neon-glow)', background: 'radial-gradient(circle, rgba(255,255,255,0.08), rgba(0,0,0,0.4))', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', flexShrink: 0 },
+  expSection: { padding: '0 16px 12px', flexShrink: 0 },
+  expLabelRow: { display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-title)', fontSize: 13, color: '#7ab0d0', letterSpacing: 1, marginBottom: 5, fontWeight: 800 },
+  expBg: { height: 8, background: 'color-mix(in srgb, var(--neon-glow) 14%, transparent)', borderRadius: 4, overflow: 'hidden', border: '1px solid rgba(0, 229, 255, 0.25)' },
+  expFill: { height: '100%', background: 'linear-gradient(90deg, color-mix(in srgb, var(--neon-glow) 60%, black), var(--neon-glow))', borderRadius: 4, transition: 'width 0.5s', boxShadow: '0 0 8px var(--neon-glow)' },
   expText: { fontFamily: 'var(--font-mono)', fontSize: 13, color: '#7ab0d0', marginTop: 4, textAlign: 'right', fontWeight: 800 },
-  statRow: { display: 'flex', gap: 8, padding: '4px 16px 4px', flexShrink: 0 },
-  statCard: { flex: 1, padding: '8px 6px', textAlign: 'center' },
-  statLabel: { fontFamily: 'var(--font-title)', fontSize: 13, letterSpacing: 1, color: '#7ab0d0', marginBottom: 4, fontWeight: 800 },
-  statVal: { fontFamily: 'var(--font-mono)', fontSize: 18, fontWeight: 900, textShadow: '0 0 8px rgba(0, 229, 255, 0.2)' },
+  statDivider: { width: 1, background: '#0d2a50' },
+  focusCard: { margin: '0 16px 10px', padding: 12, flexShrink: 0 },
+  focusTopRow: { display: 'flex', gap: 12, alignItems: 'center' },
+  ringWrap: { position: 'relative', width: 64, height: 64, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' },
+  ringText: { position: 'absolute', fontFamily: 'var(--font-mono)', fontSize: 13, fontWeight: 800, color: '#fff' },
+  focusLabel: { fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 800, letterSpacing: 1.5, color: '#7ab0d0', marginBottom: 8 },
+  pillRow: { display: 'flex', gap: 6 },
+  divider: { height: 1, background: 'color-mix(in srgb, var(--neon-glow) 16%, transparent)', margin: '10px 0' },
+  deployRow: { margin: '0 16px 12px', display: 'flex', gap: 8, flexShrink: 0 },
   arena: { margin: '0 16px 12px', padding: '22px 12px 12px', position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', overflow: 'hidden', flexShrink: 0 },
   arenaActive: { margin: '16px', padding: '44px 16px 20px', position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', overflow: 'hidden', flex: 1, justifyContent: 'center' },
   arenaBadge: { position: 'absolute', top: 12, left: 12, background: 'rgba(26, 8, 0, 0.8)', border: '1px solid #ff6400', borderRadius: 6, padding: '3px 8px', fontFamily: 'var(--font-title)', fontSize: 13, color: '#ff8c40', fontWeight: 800, boxShadow: '0 0 10px rgba(255, 100, 0, 0.3)', zIndex: 2 },
@@ -664,19 +666,12 @@ const styles = {
   activeTimerDigits: { fontSize: 44, fontFamily: 'monospace', fontWeight: 900, color: '#fff', textShadow: '0 0 10px var(--neon-glow), 0 0 20px var(--neon-glow)' },
   battleLog: { marginTop: 10, width: '100%', display: 'flex', flexDirection: 'column', gap: 4, background: 'rgba(0,0,0,0.35)', padding: 8, borderRadius: 8, border: '1px solid rgba(0, 229, 255, 0.1)' },
   battleLogActive: { width: '90%', display: 'flex', flexDirection: 'column', gap: 6, background: 'rgba(3, 8, 20, 0.9)', padding: 12, borderRadius: 10, border: '1.5px solid var(--neon-glow)', margin: '12px auto', boxShadow: '0 0 10px rgba(0,0,0,0.5)', flexShrink: 0 },
-  modeRow: { display: 'flex', gap: 8, padding: '0 16px 10px' },
-  modeBtn: (active) => ({ flex: 1, padding: 10, borderRadius: 8, fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 800, cursor: 'pointer', border: `1px solid ${active ? '#00e5ff' : 'rgba(0, 229, 255, 0.15)'}`, background: active ? 'linear-gradient(135deg, rgba(0, 80, 204, 0.4) 0%, rgba(0, 168, 255, 0.4) 100%)' : 'rgba(6, 15, 35, 0.6)', color: active ? '#fff' : '#7ab0d0', boxShadow: active ? '0 0 10px rgba(0, 229, 255, 0.3)' : 'none', transition: 'all 0.2s', letterSpacing: 1 }),
   combatStats: { margin: '0 16px 6px', padding: 8, display: 'flex', justifyContent: 'space-around', flexShrink: 0 },
   cstat: { textAlign: 'center' },
   cstatLabel: { fontFamily: 'var(--font-title)', fontSize: 13, letterSpacing: 1, color: '#7ab0d0', marginBottom: 2, fontWeight: 800 },
   cstatVal: { fontFamily: 'var(--font-mono)', fontSize: 18, fontWeight: 900, textShadow: '0 0 6px rgba(0, 229, 255, 0.2)' },
-  timerRow: { display: 'flex', gap: 8, padding: '0 16px 6px', flexShrink: 0 },
-  timerBtn: (active) => ({ flex: 1, padding: 10, borderRadius: 8, fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 800, cursor: 'pointer', border: `1px solid ${active ? '#00e5ff' : 'rgba(0, 229, 255, 0.15)'}`, background: active ? 'linear-gradient(135deg, rgba(0, 80, 204, 0.4) 0%, rgba(0, 168, 255, 0.4) 100%)' : 'rgba(6, 15, 35, 0.6)', color: active ? '#fff' : '#7ab0d0', boxShadow: active ? '0 0 10px rgba(0, 229, 255, 0.3)' : 'none', transition: 'all 0.2s', letterSpacing: 0.5 }),
-  deployBtn: { margin: '0 16px 10px', padding: 14, borderRadius: 10, border: '1px solid #00e5ff', background: 'linear-gradient(135deg, #0050cc 0%, #00a8ff 100%)', fontFamily: 'var(--font-title)', fontSize: 15, fontWeight: 900, color: '#fff', letterSpacing: 2, cursor: 'pointer', boxShadow: '0 0 12px rgba(0, 168, 255, 0.3)', transition: 'all 0.2s', textTransform: 'uppercase', flexShrink: 0 },
-  npcBtn: { margin: '0 16px 6px', padding: 12, borderRadius: 10, border: '1.5px solid var(--neon-glow)', background: 'rgba(3, 8, 20, 0.85)', fontFamily: 'var(--font-title)', fontSize: 14, fontWeight: 900, color: '#fff', letterSpacing: 1.5, cursor: 'pointer', boxShadow: '0 0 10px rgba(255, 100, 0, 0.15), inset 0 0 8px rgba(255, 100, 0, 0.1)', transition: 'all 0.2s', textTransform: 'uppercase', textAlign: 'center', flexShrink: 0 },
   sessionSummary: { textAlign: 'center', padding: '0 16px 10px' },
   sessionSummaryActive: { textAlign: 'center', padding: '12px 16px', borderTop: '1px solid rgba(255, 255, 255, 0.05)', background: 'rgba(3, 8, 20, 0.95)', border: '1.5px solid rgba(0, 229, 255, 0.25)', boxShadow: '0 0 10px rgba(0,0,0,0.5)', margin: '12px 16px 16px 16px', borderRadius: 8, flexShrink: 0 },
-  logoutBtn: { background: 'rgba(6, 15, 35, 0.6)', border: '1px solid rgba(0, 229, 255, 0.2)', borderRadius: 6, color: '#7ec8e3', fontSize: 13, cursor: 'pointer', padding: '4px 8px', lineHeight: 1, transition: 'all 0.2s' },
   // Abandon
   topAbandonBar: { display: 'flex', justifyContent: 'flex-end', padding: '16px 16px 0 16px', zIndex: 10 },
   smallAbandonBtn: { background: 'rgba(255, 49, 49, 0.1)', border: '1px solid rgba(255, 49, 49, 0.4)', borderRadius: 6, color: '#ff4444', fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 800, padding: '6px 12px', cursor: 'pointer', letterSpacing: 1, transition: 'all 0.2s', boxShadow: '0 0 8px rgba(255, 49, 49, 0.1)' },
@@ -686,12 +681,5 @@ const styles = {
   activeStageBadge: { background: 'rgba(3, 8, 20, 0.95)', border: '1.5px solid var(--neon-glow)', borderRadius: '8px', padding: '6px 12px', fontFamily: 'var(--font-title)', fontSize: 13, color: '#fff', fontWeight: 800, boxShadow: '0 0 8px var(--neon-glow)', textShadow: '0 0 4px #000' },
   activeSectorLabel: { fontFamily: 'var(--font-title)', fontSize: 13, color: 'var(--neon-glow)', fontWeight: 800, textShadow: '0 0 8px var(--neon-glow)', background: 'rgba(3, 8, 20, 0.95)', border: '1.5px solid var(--neon-glow)', borderRadius: '8px', padding: '6px 12px', boxShadow: '0 0 8px var(--neon-glow)' },
   activeGatherBadge: { fontFamily: 'var(--font-mono)', fontSize: 13, color: '#00e5ff', marginTop: 6, fontWeight: 800, zIndex: 2, letterSpacing: 1, background: 'rgba(3, 8, 20, 0.95)', padding: '3px 10px', borderRadius: '6px', border: '1px solid rgba(0, 229, 255, 0.4)', boxShadow: '0 0 8px rgba(0, 229, 255, 0.2)', textShadow: '0 0 4px #000' },
-  activeHealthBarWrapper: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, width: '90%', marginTop: 8, zIndex: 2, background: 'rgba(3, 8, 20, 0.95)', padding: '10px 16px', borderRadius: '10px', border: '1.5px solid rgba(0, 229, 255, 0.35)', boxShadow: '0 0 10px rgba(0,0,0,0.5)', margin: '12px auto', flexShrink: 0 },
-  // Zone Selector Styles
-  zoneSelectorContainer: { margin: '0 16px 8px', padding: '10px 12px', background: 'rgba(3, 8, 20, 0.8)', border: '1px solid rgba(0, 229, 255, 0.2)', borderRadius: 10, flexShrink: 0 },
-  zoneSelectorLabel: { fontFamily: 'var(--font-title)', fontSize: 11, color: '#7ab0d0', fontWeight: 800, letterSpacing: 1.5, marginBottom: 8, textTransform: 'uppercase' },
-  zoneRow: { display: 'flex', gap: 6, flexWrap: 'wrap' },
-  zoneBtn: { flex: '1 1 calc(50% - 3px)', padding: '8px 6px', borderRadius: 8, fontFamily: 'var(--font-title)', fontSize: 11, fontWeight: 800, cursor: 'pointer', border: '1px solid rgba(0, 229, 255, 0.2)', background: 'rgba(6, 15, 35, 0.7)', color: '#7ab0d0', transition: 'all 0.2s', letterSpacing: 0.5, textAlign: 'center', minWidth: 0 },
-  zoneBtnActive: { flex: '1 1 calc(50% - 3px)', padding: '8px 6px', borderRadius: 8, fontFamily: 'var(--font-title)', fontSize: 11, fontWeight: 800, cursor: 'pointer', border: '1.5px solid #00e5ff', background: 'linear-gradient(135deg, rgba(0, 80, 204, 0.5) 0%, rgba(0, 168, 255, 0.5) 100%)', color: '#fff', boxShadow: '0 0 10px rgba(0, 229, 255, 0.3)', transition: 'all 0.2s', letterSpacing: 0.5, textAlign: 'center', minWidth: 0 },
-  zoneBtnLocked: { flex: '1 1 calc(50% - 3px)', padding: '8px 6px', borderRadius: 8, fontFamily: 'var(--font-title)', fontSize: 11, fontWeight: 800, cursor: 'not-allowed', border: '1px solid rgba(255, 68, 68, 0.25)', background: 'rgba(6, 15, 35, 0.4)', color: 'rgba(255, 68, 68, 0.5)', transition: 'all 0.2s', letterSpacing: 0.5, textAlign: 'center', minWidth: 0 }
+  activeHealthBarWrapper: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, width: '90%', marginTop: 8, zIndex: 2, background: 'rgba(3, 8, 20, 0.95)', padding: '10px 16px', borderRadius: '10px', border: '1.5px solid rgba(0, 229, 255, 0.35)', boxShadow: '0 0 10px rgba(0,0,0,0.5)', margin: '12px auto', flexShrink: 0 }
 }

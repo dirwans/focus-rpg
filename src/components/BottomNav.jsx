@@ -3,9 +3,11 @@ import { useGameStore } from '../store/gameStore'
 const API_BASE = import.meta.env.VITE_API_URL || ''
 
 // Dynamic Faction themed SVG Icons component
+const FACTION_GLOW = { arctron: '#ff6400', bionex: '#00e5ff', celestra: '#d000ff' }
+
 const FactionIcon = ({ id, race, active }) => {
-  const color = active ? '#f5a623' : '#7ab0d0'
-  const glowColor = race === 'arctron' ? '#00e5ff' : race === 'bionex' ? '#39ff14' : race === 'celestra' ? '#cc44ff' : '#00e5ff'
+  const glowColor = FACTION_GLOW[race] || '#00e5ff'
+  const color = active ? glowColor : '#7ab0d0'
   const glow = active ? `drop-shadow(0 0 5px ${glowColor})` : 'none'
 
   // Arctron mecha icons (sharp edges, cybernetic vectors)
@@ -313,11 +315,11 @@ export default function BottomNav() {
       {NAV_ITEMS.map((n) => {
         const isActive = screen === n.id
         return (
-          <button key={n.id} style={styles.item} onClick={() => n.isExternal ? window.open(`${API_BASE}/library.html`, '_blank') : setScreen(n.id)}>
+          <button key={n.id} style={{ ...styles.item, ...(isActive ? styles.itemActive : null) }} onClick={() => n.isExternal ? window.open(`${API_BASE}/library.html`, '_blank') : setScreen(n.id)}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 26 }}>
               <FactionIcon id={n.id} race={race} active={isActive} />
             </div>
-            <span style={{ ...styles.label, color: isActive ? '#f5a623' : '#7ab0d0', marginTop: 2 }}>{n.label}</span>
+            <span style={{ ...styles.label, color: isActive ? 'var(--neon-glow)' : '#7ab0d0', marginTop: 2 }}>{n.label}</span>
           </button>
         )
       })}
@@ -330,5 +332,6 @@ export default function BottomNav() {
 const styles = {
   nav: { display: 'flex', overflowX: 'auto', WebkitOverflowScrolling: 'touch', scrollbarWidth: 'none', borderTop: '1px solid rgba(0, 229, 255, 0.25)', background: 'rgba(4, 10, 24, 0.95)', backdropFilter: 'blur(10px)', boxShadow: '0 -4px 15px rgba(0,0,0,0.5)' },
   item: { minWidth: 60, flex: '1 0 auto', padding: '10px 4px 8px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, background: 'none', border: 'none', cursor: 'pointer', transition: 'all 0.2s' },
+  itemActive: { background: 'color-mix(in srgb, var(--neon-glow) 10%, transparent)', boxShadow: 'inset 0 0 12px color-mix(in srgb, var(--neon-glow) 12%, transparent)' },
   label: { fontFamily: 'var(--font-title)', fontSize: 13, letterSpacing: 0.5, fontWeight: 800 },
 }
