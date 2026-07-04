@@ -296,12 +296,10 @@ export default function Cargo() {
         {/* Row 1 */}
         <div style={styles.stackedSlots}>
           {renderSlot('amulet1', '💎', 'AMU I', true)}
-          {renderSlot('ring1', '💍', 'RNG I', true)}
         </div>
         {renderSlot('helmet', '⛑', 'HELMET')}
         <div style={styles.stackedSlots}>
           {renderSlot('amulet2', '💎', 'AMU II', true)}
-          {renderSlot('ring2', '💍', 'RNG II', true)}
         </div>
 
         {/* Row 2 */}
@@ -316,11 +314,12 @@ export default function Cargo() {
 
         {/* Row 4 */}
         <div style={styles.ascensionCorner}>
+          {renderSlot('ring1', '💍', 'RNG I', true)}
           {renderSlot('ascension_arms', '⚙️', 'ARES', true)}
         </div>
         {renderSlot('boots', '👢', 'BOOTS')}
         <div style={styles.ascensionCorner}>
-          {/* Empty slot for radar/other in future */}
+          {renderSlot('ring2', '💍', 'RNG II', true)}
         </div>
       </div>
 
