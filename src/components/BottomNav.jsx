@@ -297,7 +297,7 @@ const NAV_ITEMS = [
   { id: 'ranks',     label: 'RANKS' },
   { id: 'battle',    label: 'BATTLE' },
   { id: 'mine',      label: 'MINE' },
-  { id: 'cargo',     label: 'INVENTORY' },
+  
   { id: 'forge',     label: 'FORGE' },
   { id: 'ascension', label: 'ASCENSION' },
   { id: 'premium',   label: 'SHOP' },
