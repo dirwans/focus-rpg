@@ -42,6 +42,7 @@ export default function Cargo() {
 
   const [selectedItem, setSelectedItem] = useState(null)
   const [slotFilter, setSlotFilter] = useState(null)
+  const [activeBag, setActiveBag] = useState('bag1')
   const [tooltipItem, setTooltipItem] = useState(null)
 
   const eq = player.equipment || { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null, ascension_arms: null }
@@ -375,6 +376,11 @@ export default function Cargo() {
                 <div style={styles.itemName}>{getItemName(item)}</div>
                 <div style={styles.itemBadges}>
                   <span style={styles.rarityBadge(cardColor)}>{(item.rarityGrade || item.rarity).toUpperCase()}</span>
+                  {item.qty > 1 && (
+                    <span style={{ position: 'absolute', bottom: 4, right: 6, fontSize: 13, fontWeight: 900, color: '#00ffaa', fontFamily: 'var(--font-mono)', textShadow: '0 0 4px #000, 1px 1px 2px #000' }}>
+                      x{item.qty}
+                    </span>
+                  )}
                 </div>
               </button>
             )
@@ -508,7 +514,7 @@ const styles = {
   
   // Inventory Grid
   grid:         { display: 'flex', flexWrap: 'wrap', gap: 10, padding: '0 16px 16px' },
-  itemCard:     (c) => ({ width: 'calc(33.33% - 7px)', padding: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5, cursor: 'pointer', textAlign: 'center', border: `1.5px solid ${c}` }),
+  itemCard:     (c) => ({ width: 'calc(33.33% - 7px)', padding: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5, position: 'relative', cursor: 'pointer', textAlign: 'center', border: `1.5px solid ${c}` }),
   itemIcon:     { fontSize: 28 },
   itemName:     { fontFamily: 'var(--font-body)', fontSize: 13, color: '#e0f4ff', height: 34, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', lineHeight: 1.3, fontWeight: 700 },
   itemBadges:   { display: 'flex', gap: 4 },

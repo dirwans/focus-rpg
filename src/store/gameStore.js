@@ -2448,7 +2448,7 @@ export const useGameStore = create(
         const item = eq[slot]
         if (!item) return
 
-        const newInventory = [...player.inventory, item]
+        const newInventory = addToInventory(player.inventory, item)
 
         set({
           player: {
@@ -2487,7 +2487,7 @@ export const useGameStore = create(
           return
         }
 
-        const newInventory = player.inventory.filter((i) => i.uid !== uid)
+        const newInventory = removeFromInventory(player.inventory, uid, 1)
         set({
           player: {
             ...player,
@@ -2541,7 +2541,7 @@ export const useGameStore = create(
         set((s) => ({
           player: {
             ...s.player,
-            inventory: [...s.player.inventory, newItem],
+            inventory: addToInventory(s.player.inventory, newItem),
             resources: {
               ...s.player.resources,
               credits: (s.player.resources.credits || 0) - price
@@ -2559,14 +2559,16 @@ export const useGameStore = create(
           return false
         }
 
+        const potionItem = itemsData.items.find(i => i.id === 'pot_hp')
+        
         set((s) => ({
           player: {
             ...s.player,
             resources: {
               ...s.player.resources,
-              anium: s.player.resources.anium - cost,
-              potions: (s.player.resources.potions || 0) + count
+              anium: s.player.resources.anium - cost
             },
+            inventory: addToInventory(s.player.inventory, potionItem, count),
             savedAt: Date.now()
           }
         }))
@@ -2577,7 +2579,7 @@ export const useGameStore = create(
         const item = player.inventory.find((i) => i.uid === uid)
         if (!item || item.type !== 'consumable') return
         
-        const newInventory = player.inventory.filter((i) => i.uid !== uid)
+        const newInventory = removeFromInventory(player.inventory, uid, 1)
 
         if (item.id === 'raid_ticket') {
           if (timer.state !== 'running' || timer.mode !== 'fight') {
@@ -3040,7 +3042,7 @@ export const useGameStore = create(
           uid: Date.now()
         }
         
-        const newInventory = [...player.inventory, purchasedItem]
+        const newInventory = addToInventory(player.inventory, purchasedItem)
 
         set({
           player: {
