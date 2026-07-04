@@ -423,27 +423,6 @@ export default function Unit() {
             })}
           </div>
 
-          {/* ELEM RESIST INFO */}
-          <AccordionSection label="Elem. Resist Info" raceClass={raceClass} defaultOpen={false}>
-            <div style={{ display: 'flex', gap: 8, justifyContent: 'space-around', padding: '4px 0' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1, background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 6, padding: '6px 4px' }}>
-                <span style={{ color: '#ff3b30', fontSize: 10, fontFamily: 'var(--font-title)', fontWeight: 800 }}>🔥 FIRE</span>
-                <span style={{ color: '#fff', fontSize: 14, fontFamily: 'var(--font-mono)', fontWeight: 900, marginTop: 4 }}>0</span>
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1, background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 6, padding: '6px 4px' }}>
-                <span style={{ color: '#007aff', fontSize: 10, fontFamily: 'var(--font-title)', fontWeight: 800 }}>💧 WATER</span>
-                <span style={{ color: '#fff', fontSize: 14, fontFamily: 'var(--font-mono)', fontWeight: 900, marginTop: 4 }}>0</span>
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1, background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 6, padding: '6px 4px' }}>
-                <span style={{ color: '#4cd964', fontSize: 10, fontFamily: 'var(--font-title)', fontWeight: 800 }}>🪵 EARTH</span>
-                <span style={{ color: '#fff', fontSize: 14, fontFamily: 'var(--font-mono)', fontWeight: 900, marginTop: 4 }}>0</span>
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1, background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 6, padding: '6px 4px' }}>
-                <span style={{ color: '#ffcc00', fontSize: 10, fontFamily: 'var(--font-title)', fontWeight: 800 }}>💨 WIND</span>
-                <span style={{ color: '#fff', fontSize: 14, fontFamily: 'var(--font-mono)', fontWeight: 900, marginTop: 4 }}>0</span>
-              </div>
-            </div>
-          </AccordionSection>
         </>
       )}
 
