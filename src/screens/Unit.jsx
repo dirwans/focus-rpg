@@ -1,22 +1,47 @@
 import React, { useState } from 'react'
-import { useGameStore } from '../store/gameStore'
+import { useGameStore, getPTCaps } from '../store/gameStore'
 import races from '../data/races.json'
 import jobs from '../data/jobs.json'
 import archonData from '../data/archon.json'
 import { PilotSprite } from '../components/PilotSprites'
 import { t } from '../lib/translate'
 
+const BIONEX_SPRITES = {
+  guardian:     '/ref/Bellterra/Class-sprites-cleaned/Bellterra-warrior-cleaned.png',
+  marksman:     '/ref/Bellterra/Class-sprites-cleaned/Bellterra-ranger-cleaned.png',
+  psion:        '/ref/Bellterra/Class-sprites-cleaned/Bellterra-Spiritualist-cleaned.png',
+  engineer:     '/ref/Bellterra/Class-sprites-cleaned/Bellterra-specialist-cleaned.png',
+}
+
+function getBionexJobSprite(jobId) {
+  if (!jobId || !jobs.bionex) return null
+  const tiers = ['tier1', 'tier2', 'tier3', 'tier4']
+  for (let ti = 0; ti < tiers.length; ti++) {
+    const arr = jobs.bionex[tiers[ti]]
+    if (!arr) continue
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] && arr[i].id === jobId) {
+        if (i === 0) return BIONEX_SPRITES.guardian
+        if (i === 1) return BIONEX_SPRITES.marksman
+        if (i === 2) return BIONEX_SPRITES.engineer
+        if (i === 3) return BIONEX_SPRITES.psion
+      }
+    }
+  }
+  return null
+}
 
 function getJobInfo(raceId, jobId) {
-  if (!raceId || !jobId || !jobs[raceId]) return { tier: 0, job: null }
+  if (!raceId || !jobs[raceId]) return { tier: 0, job: null, classIndex: -1 }
   const rJobs = jobs[raceId]
-  let job = rJobs.tier1.find(j => j.id === jobId)
-  if (job) return { tier: 1, job }
-  job = rJobs.tier2.find(j => j.id === jobId)
-  if (job) return { tier: 2, job }
-  job = rJobs.tier3.find(j => j.id === jobId)
-  if (job) return { tier: 3, job }
-  return { tier: 0, job: null }
+  const tiers = ['tier1', 'tier2', 'tier3', 'tier4']
+  for (let ti = 0; ti < tiers.length; ti++) {
+    const t = tiers[ti]
+    if (!rJobs[t]) continue
+    const idx = rJobs[t].findIndex(j => j.id === jobId)
+    if (idx !== -1) return { tier: parseInt(t.replace('tier', '')), job: rJobs[t][idx], classIndex: idx }
+  }
+  return { tier: 0, job: null, classIndex: -1 }
 }
 
 // Reusable accordion section
@@ -52,7 +77,30 @@ export default function Unit() {
   const expMax = getExpToNext()
   const expPct = Math.floor((player.exp / expMax) * 100)
   const race = player.race ? races[player.race] : null
-  const { tier, job } = getJobInfo(player.race, player.job)
+  const { tier, job, classIndex } = getJobInfo(player.race, player.job)
+
+  const CLASS_NAMES = {
+    celestra: ['Warrior', 'Ranger', 'Summoner', 'Mage'],
+    arctron:  ['Warrior', 'Ranger', 'Specialist'],
+    bionex:   ['Warrior', 'Ranger', 'Specialist', 'Mage']
+  }
+  const baseClass = (classIndex >= 0 && player.race && CLASS_NAMES[player.race])
+    ? CLASS_NAMES[player.race][classIndex]?.toUpperCase() || 'NOVICE'
+    : 'NOVICE'
+
+  const pt = player.pt || {
+    melee: { val: 1, pct: 0 },
+    range: { val: 1, pct: 0 },
+    force: { val: 1, pct: 0 },
+    shield: { val: 1, pct: 0 },
+    defense: { val: 1, pct: 0 },
+    special: { val: 1, pct: 0 },
+    production: { val: 1, pct: 0 },
+  }
+  const caps = getPTCaps(player.race, player.job, player.level)
+
+  const activeSkill = job && job.skills && job.skills[0] ? job.skills[0] : { name: 'Basic Attack', desc: 'Active' }
+  const passiveSkill = job && job.skills && job.skills[1] ? job.skills[1] : { name: 'Defense Focus', desc: 'Passive' }
 
   const eq = player.equipment || {}
   const hasArchonEquipped = Object.values(eq).some(item => item && item.id && item.id.startsWith('archon_'))
@@ -65,22 +113,8 @@ export default function Unit() {
       {/* Header */}
       <div style={styles.header}>
         <button onClick={() => useGameStore.getState().setScreen('main')} style={{background:'transparent', border:'none', color:'#00e5ff', fontSize: 20, cursor:'pointer', padding: '0 8px 0 0', display:'flex', alignItems:'center'}}>❮</button>
-        <div style={styles.avatar}>
-          <PilotSprite race={player.race} job={player.job} size={40} />
-        </div>
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
-            <span style={styles.name}>{player.name}</span>
-            {stats.title && (
-              <span style={styles.titleBadge(player.race)}>{stats.title.toUpperCase()}</span>
-            )}
-          </div>
-          <div style={styles.sub}>{job ? job.name : (race ? race.name : t('novice_job_name'))} · LV.{player.level}</div>
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 6, alignItems: 'flex-end' }}>
-          {!player.race && (
-            <button style={styles.actionBtn('#00e5ff', '#0050cc')} onClick={openRaceSelect}>{t('select_race')}</button>
-          )}
+        <div style={{ flex: 1, textAlign: 'center', marginRight: 24 }}>
+          <span style={{ fontFamily: 'var(--font-title)', fontSize: 18, fontWeight: 900, color: '#fff', letterSpacing: 2, textShadow: '0 0 10px var(--neon-glow)' }}>CHARACTER</span>
         </div>
       </div>
 
@@ -92,130 +126,338 @@ export default function Unit() {
 
       {/* Tabs */}
       <div style={styles.tabs}>
-        <button style={tab === 'stats' ? styles.tabActive : styles.tab} onClick={() => setTab('stats')}>Unit Specs</button>
+        <button style={tab === 'stats' ? styles.tabActive : styles.tab} onClick={() => setTab('stats')}>Character Info</button>
         <button style={tab === 'profile' ? styles.tabActive : styles.tab} onClick={() => setTab('profile')}>Profile</button>
       </div>
 
       {tab === 'stats' && (
         <>
-          {/* PILOT EXPERIENCE - open by default */}
-      <AccordionSection label={t('pilot_experience')} raceClass={raceClass} defaultOpen={true}>
-        <div style={styles.expBg}>
-          <div style={{ ...styles.expFill, width: expPct + '%' }} />
-        </div>
-        <div style={styles.expText}>{player.exp.toLocaleString()} / {expMax.toLocaleString()} Menit ({expPct}%)</div>
-      </AccordionSection>
+          {/* Detailed Profile ID Card (relocated from Main.jsx) */}
+          <div 
+            className={`profile-id-card ${player.race ? 'panel-' + player.race : ''}`}
+            style={{ margin: '8px 16px 12px', zIndex: 1 }}
+          >
+            <div className="id-corner-circle tl" />
+            <div className="id-corner-circle tr" />
+            <div className="id-corner-circle bl" />
+            <div className="id-corner-circle br" />
 
+            <div className="id-tab top" />
+            <div className="id-tab bottom" />
 
+            <div className="id-edge-notch left-top" />
+            <div className="id-edge-notch left-bot" />
+            <div className="id-edge-notch right-top" />
+            <div className="id-edge-notch right-bot" />
 
-
-
-      {/* UNIT SPECIFICATIONS */}
-      <AccordionSection label={t('unit_specifications')} raceClass={raceClass} defaultOpen={true}>
-        <div style={styles.statsGrid}>
-          <div style={styles.statBox}>
-            <span style={{ color: '#f5a623', fontSize: 11 }}>⚡ ATK</span>
-            <span style={styles.statNum}>{stats.atk}</span>
-          </div>
-          <div style={styles.statBox}>
-            <span style={{ color: '#00c8ff', fontSize: 11 }}>🛡️ DEF</span>
-            <span style={styles.statNum}>{stats.def}</span>
-          </div>
-          <div style={styles.statBox}>
-            <span style={{ color: '#ff4466', fontSize: 11 }}>❤️ HP</span>
-            <span style={styles.statNum}>{stats.hp.toLocaleString()}</span>
-          </div>
-          <div style={styles.statBox}>
-            <span style={{ color: '#ffaa00', fontSize: 11 }}>💥 CRIT</span>
-            <span style={styles.statNum}>{Math.round((stats.crit || 0.12) * 100)}%</span>
-          </div>
-          <div style={styles.statBox}>
-            <span style={{ color: '#00e5ff', fontSize: 11 }}>🌀 DODGE</span>
-            <span style={styles.statNum}>{Math.round((stats.dodge || 0.05) * 100)}%</span>
-          </div>
-        </div>
-
-        {job && (
-          <div style={styles.infoBox('#4a8fa8')}>
-            <span style={{ fontWeight: 800 }}>{job.name} Bonus:</span>{' '}
-            +{job.bonus.hp} HP | +{job.bonus.atk} ATK | +{job.bonus.def} DEF
-          </div>
-        )}
-
-        {winnerRace && winnerRace === player.race && (
-          <div style={styles.infoBox('#ffcc00')}>
-            <span style={{ fontWeight: 800 }}>🏆 CORE WAR VICTORY BUFF ACTIVE:</span>{' '}
-            +10% HP | +10% ATK | +10% DEF
-          </div>
-        )}
-
-        {player.race && (
-          <div style={styles.infoBox('#00ff88')}>
-            <span style={{ fontWeight: 800 }}>{t('archon_set_status')}</span>{' '}
-            {stats.title ? (
-              <span style={{ color: '#00ff88', fontWeight: 800 }}>
-                {t('archon_set_active', { set: stats.title === 'Solar Sovereign' ? 'Solaris Set' : stats.title === 'Astral Emperor' ? 'Astral Set' : 'Dominion Set' })}
-              </span>
-            ) : (
-              <span style={{ color: '#6a9ab8' }}>{t('archon_set_inactive')}</span>
-            )}
-          </div>
-        )}
-
-        {hasArchonEquipped && !isArchon && (
-          <div style={styles.infoBox('#f5a623')}>
-            <span style={{ fontWeight: 800 }}>ℹ️ INFO:</span> {t('archon_notice_unit')}
-          </div>
-        )}
-
-        {archons && archons[player.race] && archonData[player.race] && (
-          <div style={styles.infoBox('#f5a623')}>
-            {archons[player.race].toLowerCase() === player.username?.toLowerCase() && (
-              <div style={{ marginBottom: 6 }}>
-                <div style={{ color: '#f5a623', fontWeight: 'bold', fontSize: 13 }}>
-                  {t('archon_equipped')} {archonData[player.race].mantle.name}
+            <div className="profile-id-card-inner">
+              <div className="profile-id-body">
+                {/* Avatar side */}
+                <div className="profile-avatar-glow-wrap">
+                  <div className="profile-corner tl" />
+                  <div className="profile-corner tr" />
+                  <div className="profile-corner bl" />
+                  <div className="profile-corner br" />
+                  <div className="profile-avatar-inner">
+                    <div className="profile-avatar-grid" />
+                    <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', overflow: 'hidden', zIndex: 2,
+                      boxShadow: 'inset 0 0 8px 4px rgba(0,0,0,0.85)' }}>
+                      {(() => {
+                        const bionexSprite = player.race === 'bionex' ? getBionexJobSprite(player.job) : null
+                        if (bionexSprite) {
+                          return (
+                            <img
+                              src={bionexSprite}
+                              alt={player.job}
+                              style={{
+                                height: 340,
+                                width: 'auto',
+                                position: 'absolute',
+                                top: -4,
+                                left: '50%',
+                                transform: 'translateX(-50%)',
+                              }}
+                            />
+                          )
+                        }
+                        return <PilotSprite race={player.race} job={player.job} width={112} height={150} fill={true} />
+                      })()}
+                    </div>
+                  </div>
                 </div>
-                <div style={{ color: '#e0f4ff', fontSize: 13, marginTop: 4 }}>
-                  {archonData[player.race].mantle.bonus.atkPercent && `+${archonData[player.race].mantle.bonus.atkPercent}% ATK `}
-                  {archonData[player.race].mantle.bonus.defPercent && `+${archonData[player.race].mantle.bonus.defPercent}% DEF `}
-                  {archonData[player.race].mantle.bonus.gatherSpeedPercent && `+${archonData[player.race].mantle.bonus.gatherSpeedPercent}% Gather Spd `}
-                  {archonData[player.race].mantle.bonus.atkSpeedPercent && `+${archonData[player.race].mantle.bonus.atkSpeedPercent}% ATK Spd `}
+
+                {/* Details side */}
+                <div className="profile-details-wrap">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <div className="profile-details-username">{player.name.toUpperCase()}</div>
+                  </div>
+
+                  <div className="profile-data-rows">
+                    <div className="profile-data-row">
+                      <span className="profile-data-key">FACTION</span>
+                      <span className="profile-data-val">{race ? race.name.toUpperCase() : 'UNKNOWN'}</span>
+                    </div>
+                    <div className="profile-data-row">
+                      <span className="profile-data-key">CLASS</span>
+                      <span className="profile-data-val accent">{baseClass}</span>
+                    </div>
+                    <div className="profile-data-row">
+                      <span className="profile-data-key">JOB</span>
+                      <span className="profile-data-val">{job ? job.name.toUpperCase() : 'NOVICE'}</span>
+                    </div>
+                  </div>
+
+                  <div className="profile-active-status">
+                    <div className="profile-status-led" />
+                    <span>STATUS: <span className="status-active-txt">ACTIVE</span></span>
+                  </div>
+
+                  <div className="profile-data-divider" />
+
+                  <div className="profile-id-block-new">
+                    <span className="profile-id-lbl">{baseClass} ID</span>
+                    <span className="profile-id-num">PLT-{player.level || 1}09X</span>
+                  </div>
+
+                  {/* EXP bar */}
+                  <div className="profile-status-panel" style={{ marginTop: 6 }}>
+                    <div className="profile-status-bar">
+                      {Array.from({ length: 12 }).map((_, idx) => {
+                        const litThreshold = (idx + 1) * (100 / 12)
+                        const isLit = expPct >= litThreshold
+                        return (
+                          <div key={idx} className={`profile-status-segment ${isLit ? '' : 'dim'}`} />
+                        )
+                      })}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Skill Slots */}
+          <div style={{ display: 'flex', gap: 16, justifyContent: 'center', margin: '8px 16px 12px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+              <div style={{
+                width: 48,
+                height: 48,
+                borderRadius: 8,
+                border: '1.5px solid var(--border-neon)',
+                background: 'linear-gradient(135deg, rgba(0,229,255,0.1), rgba(0,0,0,0.6))',
+                boxShadow: '0 0 10px rgba(0,229,255,0.2)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: 20
+              }} title={activeSkill.name}>
+                ⚔️
+              </div>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: '#7ec8e3', fontWeight: 800 }}>{activeSkill.name.toUpperCase()}</span>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+              <div style={{
+                width: 48,
+                height: 48,
+                borderRadius: 8,
+                border: '1.5px solid var(--border-neon)',
+                background: 'linear-gradient(135deg, rgba(0,229,255,0.1), rgba(0,0,0,0.6))',
+                boxShadow: '0 0 10px rgba(0,229,255,0.2)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: 20
+              }} title={passiveSkill.name}>
+                🛡️
+              </div>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: '#da70d6', fontWeight: 800 }}>{passiveSkill.name.toUpperCase()}</span>
+            </div>
+          </div>
+
+          {/* GENERAL INFO */}
+          <AccordionSection label="General Info" raceClass={raceClass} defaultOpen={true}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 13, fontFamily: 'var(--font-body)', fontWeight: 600, color: '#c0dff0' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span>Pilot Name:</span>
+                <span style={{ fontWeight: 'bold', color: '#fff' }}>{player.name}</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span>Faction:</span>
+                <span style={{ fontWeight: 'bold', color: '#fff' }}>{race ? race.name : 'Unknown'}</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span>Class Path:</span>
+                <span style={{ fontWeight: 'bold', color: '#fff' }}>{baseClass}</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span>Job Name:</span>
+                <span style={{ fontWeight: 'bold', color: '#fff' }}>{job ? job.name : t('novice_job_name')}</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span>Current Level:</span>
+                <span style={{ fontWeight: 'bold', color: '#fff' }}>LV.{player.level}</span>
+              </div>
+              <div style={{ marginTop: 6 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4, fontSize: 11, fontFamily: 'var(--font-mono)' }}>
+                  <span>EXP PROGRESS</span>
+                  <span>{player.exp.toLocaleString()} / {expMax.toLocaleString()} Min ({expPct}%)</span>
+                </div>
+                <div style={styles.expBg}>
+                  <div style={{ ...styles.expFill, width: expPct + '%' }} />
+                </div>
+              </div>
+            </div>
+          </AccordionSection>
+
+          {/* STATUS INFO */}
+          <AccordionSection label="Status Info" raceClass={raceClass} defaultOpen={true}>
+            <div style={styles.statsGrid}>
+              <div style={styles.statBox}>
+                <span style={{ color: '#f5a623', fontSize: 10 }}>⚡ ATK</span>
+                <span style={styles.statNum}>{stats.atk}</span>
+              </div>
+              <div style={styles.statBox}>
+                <span style={{ color: '#00c8ff', fontSize: 10 }}>🛡️ DEF</span>
+                <span style={styles.statNum}>{stats.def}</span>
+              </div>
+              <div style={styles.statBox}>
+                <span style={{ color: '#ff4466', fontSize: 10 }}>❤️ HP</span>
+                <span style={styles.statNum}>{stats.hp.toLocaleString()}</span>
+              </div>
+              <div style={styles.statBox}>
+                <span style={{ color: '#ffaa00', fontSize: 10 }}>💥 CRIT</span>
+                <span style={styles.statNum}>{Math.round((stats.crit || 0.12) * 100)}%</span>
+              </div>
+              <div style={styles.statBox}>
+                <span style={{ color: '#da70d6', fontSize: 10 }}>🔷 FP</span>
+                <span style={styles.statNum}>{200 + (player.level * 5)}</span>
+              </div>
+              <div style={styles.statBox}>
+                <span style={{ color: '#00e5ff', fontSize: 10 }}>🌀 DODGE</span>
+                <span style={styles.statNum}>{Math.round((stats.dodge || 0.05) * 100)}%</span>
+              </div>
+            </div>
+          </AccordionSection>
+
+          {/* ABILITY INFO */}
+          <AccordionSection label="Ability Info" raceClass={raceClass} defaultOpen={false}>
+            {job && (
+              <div style={styles.infoBox('#4a8fa8')}>
+                <span style={{ fontWeight: 800 }}>{job.name} Bonus:</span>{' '}
+                +{job.bonus.hp} HP | +{job.bonus.atk} ATK | +{job.bonus.def} DEF
+              </div>
+            )}
+
+            {winnerRace && winnerRace === player.race && (
+              <div style={styles.infoBox('#ffcc00')}>
+                <span style={{ fontWeight: 800 }}>🏆 CORE WAR VICTORY BUFF ACTIVE:</span>{' '}
+                +10% HP | +10% ATK | +10% DEF
+              </div>
+            )}
+
+            {player.race && (
+              <div style={styles.infoBox('#00ff88')}>
+                <span style={{ fontWeight: 800 }}>{t('archon_set_status')}</span>{' '}
+                {stats.title ? (
+                  <span style={{ color: '#00ff88', fontWeight: 800 }}>
+                    {t('archon_set_active', { set: stats.title === 'Solar Sovereign' ? 'Solaris Set' : stats.title === 'Astral Emperor' ? 'Astral Set' : 'Dominion Set' })}
+                  </span>
+                ) : (
+                  <span style={{ color: '#6a9ab8' }}>{t('archon_set_inactive')}</span>
+                )}
+              </div>
+            )}
+
+            {hasArchonEquipped && !isArchon && (
+              <div style={styles.infoBox('#f5a623')}>
+                <span style={{ fontWeight: 800 }}>ℹ️ INFO:</span> {t('archon_notice_unit')}
+              </div>
+            )}
+
+            {archons && archons[player.race] && archonData[player.race] && (
+              <div style={styles.infoBox('#f5a623')}>
+                {archons[player.race].toLowerCase() === player.username?.toLowerCase() && (
+                  <div style={{ marginBottom: 6 }}>
+                    <div style={{ color: '#f5a623', fontWeight: 'bold', fontSize: 13 }}>
+                      {t('archon_equipped')} {archonData[player.race].mantle.name}
+                    </div>
+                    <div style={{ color: '#e0f4ff', fontSize: 13, marginTop: 4 }}>
+                      {archonData[player.race].mantle.bonus.atkPercent && `+${archonData[player.race].mantle.bonus.atkPercent}% ATK `}
+                      {archonData[player.race].mantle.bonus.defPercent && `+${archonData[player.race].mantle.bonus.defPercent}% DEF `}
+                      {archonData[player.race].mantle.bonus.gatherSpeedPercent && `+${archonData[player.race].mantle.bonus.gatherSpeedPercent}% Gather Spd `}
+                      {archonData[player.race].mantle.bonus.atkSpeedPercent && `+${archonData[player.race].mantle.bonus.atkSpeedPercent}% ATK Spd `}
+                    </div>
+                  </div>
+                )}
+                <div style={{ color: '#00e5ff', fontSize: 13 }}>
+                  <span style={{ fontWeight: 'bold' }}>{t('race_aura_label', { name: archonData[player.race].aura.name })}</span>{' '}
+                  {archonData[player.race].aura.desc}
                 </div>
               </div>
             )}
-            <div style={{ color: '#00e5ff', fontSize: 13 }}>
-              <span style={{ fontWeight: 'bold' }}>{t('race_aura_label', { name: archonData[player.race].aura.name })}</span>{' '}
-              {archonData[player.race].aura.desc}
+          </AccordionSection>
+
+          {/* PT List Section */}
+          <div className={`glass-panel cyber-panel ${raceClass}`} style={{ margin: '0 16px 10px', padding: '12px' }}>
+            <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: 'var(--neon-glow)', textShadow: '0 0 6px var(--neon-glow)', letterSpacing: 1.5, fontWeight: 800, marginBottom: 12, borderBottom: '1px solid rgba(0, 229, 255, 0.2)', paddingBottom: 6, display: 'flex', justifyContent: 'center' }}>
+              PLAYER TRAINING (PT)
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+              {[
+                { key: 'melee', label: 'Close Range PT' },
+                { key: 'range', label: 'Long Range PT' },
+                { key: 'force', label: 'Force PT' },
+                { key: 'shield', label: 'Shield PT' },
+                { key: 'defense', label: 'Defense PT' },
+                { key: 'special', label: 'Race Special PT' },
+                { key: 'production', label: 'Production PT' }
+              ].map((item) => {
+                const currentVal = pt[item.key]?.val || 1
+                const currentPct = pt[item.key]?.pct || 0
+                const capVal = caps[item.key] || 0
+                if (capVal === 0) return null // Hide unavailable PTs for the race (e.g. Force/Special for Accretia)
+                
+                return (
+                  <div key={item.key} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '6px 8px', background: 'rgba(3, 8, 20, 0.6)', border: '1px solid rgba(0, 229, 255, 0.1)', borderRadius: 6 }}>
+                    <span style={{ fontFamily: 'var(--font-body)', fontSize: 13, fontWeight: 700, color: '#c0dff0' }}>
+                      {item.label}
+                    </span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                      <div style={{ width: 64, textAlign: 'center', background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(0, 229, 255, 0.2)', borderRadius: 4, padding: '2px 4px', fontFamily: 'var(--font-mono)', fontSize: 11, color: '#00ff88', fontWeight: 800 }}>
+                        {currentPct.toFixed(2)}%
+                      </div>
+                      <span style={{ width: 68, textAlign: 'right', fontFamily: 'var(--font-mono)', fontSize: 12, fontWeight: 800, color: '#eab308' }}>
+                        {currentVal} / {capVal} Pt
+                      </span>
+                    </div>
+                  </div>
+                )
+              })}
             </div>
           </div>
-        )}
 
-      </AccordionSection>
-
-      {/* SYSTEM PROGRESS */}
-      <AccordionSection label={t('system_progress')} raceClass={raceClass} defaultOpen={true}>
-        <div style={styles.progRow}>
-          <div style={styles.progItem}>
-            <span style={styles.progNum}>{player.totalSessions}</span>
-            <span style={styles.progLabel}>{t('sessions_label')}</span>
-          </div>
-          <div style={styles.progItem}>
-            <span style={styles.progNum}>{player.totalMinutes}</span>
-            <span style={styles.progLabel}>{t('minutes_label')}</span>
-          </div>
-          <div style={styles.progItem}>
-            <span style={{ ...styles.progNum, color: '#ff8c40' }}>🔥{player.streak}</span>
-            <span style={styles.progLabel}>{t('streak_label')}</span>
-          </div>
-          <div style={styles.progItem}>
-            <span style={styles.progNum}>
-              {player.highestSector <= 5 ? `M-${player.highestSector}` : `D-${player.highestSector - 5}`}
-            </span>
-            <span style={styles.progLabel}>{t('best_sector_label')}</span>
-          </div>
-        </div>
-      </AccordionSection>
-      </>
+          {/* ELEM RESIST INFO */}
+          <AccordionSection label="Elem. Resist Info" raceClass={raceClass} defaultOpen={false}>
+            <div style={{ display: 'flex', gap: 8, justifyContent: 'space-around', padding: '4px 0' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1, background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 6, padding: '6px 4px' }}>
+                <span style={{ color: '#ff3b30', fontSize: 10, fontFamily: 'var(--font-title)', fontWeight: 800 }}>🔥 FIRE</span>
+                <span style={{ color: '#fff', fontSize: 14, fontFamily: 'var(--font-mono)', fontWeight: 900, marginTop: 4 }}>0</span>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1, background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 6, padding: '6px 4px' }}>
+                <span style={{ color: '#007aff', fontSize: 10, fontFamily: 'var(--font-title)', fontWeight: 800 }}>💧 WATER</span>
+                <span style={{ color: '#fff', fontSize: 14, fontFamily: 'var(--font-mono)', fontWeight: 900, marginTop: 4 }}>0</span>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1, background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 6, padding: '6px 4px' }}>
+                <span style={{ color: '#4cd964', fontSize: 10, fontFamily: 'var(--font-title)', fontWeight: 800 }}>🪵 EARTH</span>
+                <span style={{ color: '#fff', fontSize: 14, fontFamily: 'var(--font-mono)', fontWeight: 900, marginTop: 4 }}>0</span>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1, background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 6, padding: '6px 4px' }}>
+                <span style={{ color: '#ffcc00', fontSize: 10, fontFamily: 'var(--font-title)', fontWeight: 800 }}>💨 WIND</span>
+                <span style={{ color: '#fff', fontSize: 14, fontFamily: 'var(--font-mono)', fontWeight: 900, marginTop: 4 }}>0</span>
+              </div>
+            </div>
+          </AccordionSection>
+        </>
       )}
 
       {tab === 'profile' && (

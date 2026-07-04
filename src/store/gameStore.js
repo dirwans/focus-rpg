@@ -236,12 +236,240 @@ function computeRewards(player, mode, minutes, selectedZone = 'world') {
   }
 }
 
+export function getPlayerClassGroup(jobId, raceId) {
+  const job = jobId ? jobId.toLowerCase() : '';
+  const race = raceId ? raceId.toLowerCase() : '';
+  
+  if (job.includes('sentinel') || job.includes('warden') || job.includes('knight') || job.includes('blademaster') ||
+      job.includes('destroyer') || job.includes('vanguard') || job.includes('juggernaut') || job.includes('dreadnought') ||
+      job.includes('guardian') || job.includes('centurion') || job.includes('protector') || job.includes('imperator')) {
+    return 'warrior';
+  }
+  if (job.includes('pathfinder') || job.includes('windrunner') || job.includes('shadow_hunter') || job.includes('stargazer') ||
+      job.includes('gunner') || job.includes('marksman') || job.includes('railgunner') || job.includes('annihilator') ||
+      job.includes('revenant') || job.includes('deadeye') || job.includes('predator')) {
+    return 'ranger';
+  }
+  if (job.includes('arcanist') || job.includes('rune_caster') || job.includes('mystic') || job.includes('archmage') ||
+      job.includes('psion') || job.includes('esper') || job.includes('ascendant') || job.includes('transcendent')) {
+    return 'mage';
+  }
+  if (job.includes('oracle') || job.includes('celestial_oracle') || job.includes('conjurer') || job.includes('divine_summoner') ||
+      job.includes('engineer') || job.includes('architect') || job.includes('core_engineer') || job.includes('cybermancer') ||
+      job.includes('mechanist') || job.includes('techmaster') || job.includes('overseer')) {
+    return 'specialist';
+  }
+  return 'novice';
+}
+
+export function getPTCaps(race, job, level) {
+  const r = (race || '').toLowerCase()
+  const group = getPlayerClassGroup(job, race)
+  const maxPTAtLevel = Math.min(99, Math.floor((level || 1) * 1.5) + 3)
+
+  const caps = {
+    melee: 99,
+    range: 99,
+    force: 99,
+    shield: 99,
+    defense: 99,
+    special: 99,
+    production: 99
+  }
+
+  // Set limits based on class group
+  if (group === 'warrior') {
+    caps.melee = 99
+    caps.defense = 99
+    caps.shield = 99
+    caps.range = 30
+    caps.force = 30
+    caps.special = 10
+    caps.production = 50
+  } else if (group === 'ranger') {
+    caps.range = 99
+    caps.defense = 80
+    caps.melee = 30
+    caps.shield = 30
+    caps.force = 30
+    caps.special = 10
+    caps.production = 50
+  } else if (group === 'mage') {
+    caps.force = 99
+    caps.defense = 60
+    caps.melee = 10
+    caps.range = 10
+    caps.shield = 10
+    caps.special = 50
+    caps.production = 30
+  } else if (group === 'specialist') {
+    caps.special = 99
+    caps.defense = 80
+    caps.melee = 50
+    caps.range = 50
+    caps.shield = 50
+    caps.force = 50
+    caps.production = 99
+  } else {
+    // Novice
+    caps.melee = 30
+    caps.range = 30
+    caps.defense = 30
+    caps.shield = 30
+    caps.force = 30
+    caps.special = 10
+    caps.production = 30
+  }
+
+  // Arctron has no Force or Summon (Special)
+  if (r === 'arctron') {
+    caps.force = 0
+    caps.special = 0
+  }
+
+  // Apply level scaling to caps
+  return {
+    melee: Math.min(caps.melee, maxPTAtLevel),
+    range: Math.min(caps.range, maxPTAtLevel),
+    force: Math.min(caps.force, maxPTAtLevel),
+    shield: Math.min(caps.shield, maxPTAtLevel),
+    defense: Math.min(caps.defense, maxPTAtLevel),
+    special: Math.min(caps.special, maxPTAtLevel),
+    production: Math.min(caps.production, maxPTAtLevel),
+  }
+}
+
+export function getInitialPT(race, job, level) {
+  const caps = getPTCaps(race, job, level)
+  
+  return {
+    melee: { val: Math.min(caps.melee, 1), pct: 0 },
+    range: { val: Math.min(caps.range, 1), pct: 0 },
+    force: { val: Math.min(caps.force, 1), pct: 0 },
+    shield: { val: Math.min(caps.shield, 1), pct: 0 },
+    defense: { val: Math.min(caps.defense, 1), pct: 0 },
+    special: { val: Math.min(caps.special, 1), pct: 0 },
+    production: { val: Math.min(caps.production, 1), pct: 0 }
+  }
+}
+
+export function advancePT(ptState, mode, minutes, race, job, level, hasShield) {
+  const caps = getPTCaps(race, job, level)
+  const nextPt = { ...ptState }
+  
+  const rates = {
+    melee: 0.5,
+    range: 0.5,
+    force: 0.5,
+    shield: 0.5,
+    defense: 0.5,
+    special: 0.5,
+    production: 1.0
+  }
+
+  const group = getPlayerClassGroup(job, race)
+
+  if (mode === 'fight') {
+    if (group === 'warrior') {
+      rates.melee = 5.0
+      rates.defense = 3.0
+      rates.shield = hasShield ? 4.0 : 1.0
+    } else if (group === 'ranger') {
+      rates.range = 5.0
+      rates.defense = 2.0
+    } else if (group === 'mage') {
+      rates.force = 5.0
+      rates.defense = 1.5
+    } else if (group === 'specialist') {
+      rates.special = 4.0
+      rates.defense = 2.0
+      rates.shield = hasShield ? 3.0 : 1.0
+    } else {
+      rates.melee = 2.0
+      rates.range = 2.0
+      rates.defense = 2.0
+    }
+  } else {
+    // Gather / Crafting mode
+    if (group === 'specialist') {
+      rates.production = 8.0
+    } else {
+      rates.production = 3.0
+    }
+  }
+
+  // Disable force/special for arctron
+  if (race === 'arctron') {
+    rates.force = 0
+    rates.special = 0
+  }
+
+  const logs = []
+  const ptLabels = {
+    melee: 'Close Range PT',
+    range: 'Long Range PT',
+    force: 'Force PT',
+    shield: 'Shield PT',
+    defense: 'Defense PT',
+    special: 'Race Special PT',
+    production: 'Production PT'
+  }
+
+  Object.keys(ptLabels).forEach((key) => {
+    const cap = caps[key] || 0
+    if (cap <= 0) {
+      nextPt[key] = { val: 0, pct: 0 }
+      return
+    }
+
+    const current = ptState?.[key] || { val: 1, pct: 0 }
+    if (current.val >= cap) {
+      nextPt[key] = { val: cap, pct: 0 }
+      return
+    }
+
+    const rate = rates[key] || 0.5
+    const addedPct = rate * minutes
+    let newPct = current.pct + addedPct
+    let newVal = current.val
+    let levelsGained = 0
+
+    while (newPct >= 100 && newVal < cap) {
+      newPct -= 100
+      newVal += 1
+      levelsGained += 1
+    }
+
+    if (newVal >= cap) {
+      newVal = cap
+      newPct = 0
+    }
+
+    nextPt[key] = { val: newVal, pct: parseFloat(newPct.toFixed(2)) }
+
+    if (levelsGained > 0) {
+      logs.push(`${ptLabels[key]} Up! Level ${newVal}/${cap} Pt`)
+    }
+  })
+
+  return { nextPt, logs }
+}
+
 const initialPlayer = {
   name: 'PILOT #1',
   race: null,
   job: null,
   level: 1,
   exp: 0,
+  pt: {
+    melee: { val: 1, pct: 0 },
+    range: { val: 1, pct: 0 },
+    force: { val: 1, pct: 0 },
+    shield: { val: 1, pct: 0 },
+    defense: { val: 1, pct: 0 },
+    special: { val: 1, pct: 0 },
+    production: { val: 1, pct: 0 }
+  },
   resources: { anium: 200, credits: 10, potions: 5, nxc: 0 },
   upgrades: { atk: 0, def: 0, hp: 0 },
   equipment: { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null },
@@ -1582,9 +1810,24 @@ export const useGameStore = create(
             }
           }
         }
+        let currentPt = player.pt
+        if (!currentPt) {
+          currentPt = getInitialPT(player.race, player.job, player.level)
+        }
+        const hasShield = !!(player.equipment && player.equipment.shield)
+        const { nextPt, logs: ptLogs } = advancePT(
+          currentPt,
+          timer.mode || 'fight',
+          timer.selectedMinutes,
+          player.race,
+          player.job,
+          player.level,
+          hasShield
+        )
 
         const finalLog = []
         if (levelUps > 0) finalLog.push(`🆙 LEVEL UP! LV.${newLevel} — Sector ${newSector}!`)
+        ptLogs.forEach((l) => finalLog.push(`📈 ${l}`))
         finalLog.push(`✅ Done! ${finalKills} kills | +${finalAnium}⬡ | +${finalCredits} Credits | +${finalExp} Menit${deaths > 0 ? ` (Died ${deaths} times)` : ''}${dropLog}`)
 
         set((s) => ({
@@ -1593,6 +1836,7 @@ export const useGameStore = create(
             ...s.player,
             exp: newExp,
             level: newLevel,
+            pt: nextPt,
             sector: newSector,
             highestSector: Math.max(s.player.highestSector, newSector),
             resources: { 
@@ -1677,6 +1921,18 @@ export const useGameStore = create(
                 ...initialPlayer.upgrades,
                 ...(playerPart.upgrades || {})
               }
+            }
+          }
+
+          // Hydrate / Migrate PT stats
+          if (!next.player.pt) {
+            next.player.pt = getInitialPT(next.player.race, next.player.job, next.player.level)
+          } else {
+            // Ensure all 7 keys are present
+            const defaultPt = getInitialPT(next.player.race, next.player.job, next.player.level)
+            next.player.pt = {
+              ...defaultPt,
+              ...next.player.pt
             }
           }
           

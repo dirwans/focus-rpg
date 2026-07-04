@@ -493,146 +493,58 @@ export default function Main() {
         </div>
       </div>
 
-      {/* Redesigned Profile ID Card — SCI-FI HUD */}
+      {/* Simplified Player Status HUD */}
       <div 
-        className={`profile-id-card ${player.race ? 'panel-' + player.race : ''} ${isCritHit ? 'screen-shake' : ''}`}
-        style={{ margin: '0 16px 12px', zIndex: 1 }}
+        className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`}
+        style={{
+          margin: '0 16px 12px',
+          padding: '10px 14px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 12,
+          border: '1px solid var(--border-neon)',
+          background: 'rgba(4, 9, 21, 0.7)',
+          zIndex: 2,
+          position: 'relative'
+        }}
       >
-        {/* Corner circle bolts */}
-        <div className="id-corner-circle tl" />
-        <div className="id-corner-circle tr" />
-        <div className="id-corner-circle bl" />
-        <div className="id-corner-circle br" />
-
-        {/* Center tabs top/bottom */}
-        <div className="id-tab top" />
-        <div className="id-tab bottom" />
-
-        {/* Side notch decorations */}
-        <div className="id-edge-notch left-top" />
-        <div className="id-edge-notch left-bot" />
-        <div className="id-edge-notch right-top" />
-        <div className="id-edge-notch right-bot" />
-
-
-
-        {/* Inner content box with own border */}
-        <div className="profile-id-card-inner">
-        <div className="profile-id-body">
-          {/* Avatar side */}
-          <div className="profile-avatar-glow-wrap">
-            <div className="profile-corner tl" />
-            <div className="profile-corner tr" />
-            <div className="profile-corner bl" />
-            <div className="profile-corner br" />
-            <div className="profile-avatar-inner">
-              <div className="profile-avatar-grid" />
-              <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', overflow: 'hidden', zIndex: 2,
-                boxShadow: 'inset 0 0 8px 4px rgba(0,0,0,0.85)' }}>
-                {(() => {
-                  const bionexSprite = player.race === 'bionex' ? getBionexJobSprite(player.job) : null
-                  if (bionexSprite) {
-                    return (
-                      <img
-                        src={bionexSprite}
-                        alt={player.job}
-                        style={{
-                          height: 340,
-                          width: 'auto',
-                          position: 'absolute',
-                          top: -4,
-                          left: '50%',
-                          transform: 'translateX(-50%)',
-                        }}
-                      />
-                    )
-                  }
-                  return <PilotSprite race={player.race} job={player.job} width={112} height={150} fill={true} />
-                })()}
-              </div>
-            </div>
-          </div>
-
-          {/* Details side */}
-          <div className="profile-details-wrap">
-            {/* Player name */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <div className="profile-details-username">{player.name.toUpperCase()}</div>
-              {!player.hasChangedName && (
-                <button
-                  onClick={() => {
-                    const newName = window.prompt("Masukkan nama karakter baru (Gratis 1x):", player.name)
-                    if (newName) {
-                      const res = useGameStore.getState().changeCharacterName(newName, false)
-                      if (res.ok) alert("Berhasil ganti nama!")
-                      else alert(res.msg)
-                    }
-                  }}
-                  style={{ background: 'rgba(0,229,255,0.1)', border: '1px solid rgba(0,229,255,0.3)', color: '#00e5ff', borderRadius: 4, padding: '2px 6px', fontSize: 11, cursor: 'pointer', fontFamily: 'var(--font-title)', fontWeight: 800 }}
-                >
-                  ✏️ EDIT
-                </button>
-              )}
-            </div>
-
-            {/* FACTION / CLASS / JOB rows */}
-            <div className="profile-data-rows">
-              <div className="profile-data-row">
-                <span className="profile-data-key">FACTION</span>
-                <span className="profile-data-val">{race ? race.name.toUpperCase() : 'UNKNOWN'}</span>
-              </div>
-              <div className="profile-data-row">
-                <span className="profile-data-key">CLASS</span>
-                <span className="profile-data-val accent">{baseClass}</span>
-              </div>
-              <div className="profile-data-row">
-                <span className="profile-data-key">JOB</span>
-                <span className="profile-data-val">{jobInfo ? jobInfo.name.toUpperCase() : 'NOVICE'}</span>
-              </div>
-            </div>
-
-            {/* STATUS: ACTIVE */}
-            <div className="profile-active-status">
-              <div className="profile-status-led" />
-              <span>STATUS: <span className="status-active-txt">ACTIVE</span></span>
-            </div>
-
-            {/* Divider */}
-            <div className="profile-data-divider" />
-
-            {/* ID Block */}
-            <div className="profile-id-block-new">
-              <span className="profile-id-lbl">{baseClass} ID</span>
-              <span className="profile-id-num">PLT-{player.level || 1}09X</span>
-            </div>
-
-            {/* EXP bar */}
-            <div className="profile-status-panel" style={{ marginTop: 6 }}>
-              <div className="profile-status-bar">
-                {Array.from({ length: 12 }).map((_, idx) => {
-                  const litThreshold = (idx + 1) * (100 / 12)
-                  const isLit = expPct >= litThreshold
-                  return (
-                    <div key={idx} className={`profile-status-segment ${isLit ? '' : 'dim'}`} />
-                  )
-                })}
-              </div>
-            </div>
-
-            {eligibleForPromo && (
-              <button 
-                className={`profile-promo-btn btn-${player.race}`}
-                onClick={() => {
-                  setNpcInitialView('specialist')
-                  setShowNpcModal(true)
-                }}
-              >
-                🚀 {tier === 0 ? (t('select_job') || "SELECT JOB") : (t('promo_unit') || "PROMOTE UNIT")}
-              </button>
+        <div style={{ width: 44, height: 44, borderRadius: '50%', border: '1.5px solid var(--neon-glow)', background: 'rgba(0,0,0,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', flexShrink: 0 }}>
+          <PilotSprite race={player.race} job={player.job} size={36} />
+        </div>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
+            <span style={{ fontFamily: 'var(--font-title)', fontSize: 14, fontWeight: 'bold', color: '#e0f4ff', letterSpacing: 0.5 }}>{player.name.toUpperCase()}</span>
+            {stats.title && (
+              <span style={{ fontSize: 9, background: 'rgba(0, 229, 255, 0.1)', color: 'var(--neon-glow)', border: '1px solid var(--neon-glow)', borderRadius: 4, padding: '1px 4px', fontFamily: 'var(--font-title)', fontWeight: 800 }}>
+                {stats.title.toUpperCase()}
+              </span>
             )}
           </div>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#7ec8e3', marginTop: 2, fontWeight: 700 }}>
+            {jobInfo ? jobInfo.name.toUpperCase() : 'NOVICE'} · LV.{player.level}
+          </div>
         </div>
-        </div>
+        {eligibleForPromo && (
+          <button 
+            className={`profile-promo-btn btn-${player.race}`}
+            style={{
+              padding: '6px 10px',
+              fontSize: 11,
+              fontFamily: 'var(--font-title)',
+              fontWeight: 800,
+              borderRadius: 6,
+              cursor: 'pointer',
+              border: 'none',
+              boxShadow: '0 0 8px var(--neon-glow)88'
+            }}
+            onClick={() => {
+              setNpcInitialView('specialist')
+              setShowNpcModal(true)
+            }}
+          >
+            🚀 PROMO
+          </button>
+        )}
       </div>
 
 

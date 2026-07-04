@@ -291,7 +291,7 @@ const FactionIcon = ({ id, race, active }) => {
 
 const NAV_ITEMS = [
   { id: 'main',      label: 'BASE' },
-  { id: 'unit',      label: 'UNIT' },
+  { id: 'unit',      label: 'CHARACTER' },
   { id: 'ranks',     label: 'RANKS' },
   { id: 'battle',    label: 'BATTLE' },
   { id: 'mine',      label: 'MINE' },
