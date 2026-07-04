@@ -19866,7 +19866,7 @@
         "hpPercent": 10,
         "description": "Aura meningkatkan HP pasukan sekitar."
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/09/jetpackcombination.png"
+      "image": "/assets/bionex_cape_upscaled.png"
     },
     {
       "id": "archon_bionex_armor",
@@ -19949,7 +19949,7 @@
       "bonus": {
         "description": "Aura regenerasi mana."
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/ikcm002.png"
+      "image": "/assets/celestra_cape_upscaled.png"
     },
     {
       "id": "archon_celestra_armor",
