@@ -99,6 +99,15 @@ export default function Unit() {
   }
   const caps = getPTCaps(player.race, player.job, player.level)
 
+  const gmMelee = pt.melee?.val >= 99
+  const gmRange = pt.range?.val >= 99
+  const gmForce = pt.force?.val >= 99
+  const gmShield = pt.shield?.val >= 99
+
+  const absoluteCaps = getPTCaps(player.race, player.job, 70)
+  const eligibleGMKeys = Object.keys(absoluteCaps).filter(key => absoluteCaps[key] >= 99)
+  const allGMMaxed = eligibleGMKeys.length > 0 && eligibleGMKeys.every(key => pt[key]?.val >= 99)
+
   const activeSkill = job && job.skills && job.skills[0] ? job.skills[0] : { name: 'Basic Attack', desc: 'Active' }
   const passiveSkill = job && job.skills && job.skills[1] ? job.skills[1] : { name: 'Defense Focus', desc: 'Passive' }
 
@@ -360,6 +369,32 @@ export default function Unit() {
                   <span style={{ fontWeight: 'bold' }}>{t('race_aura_label', { name: archonData[player.race].aura.name })}</span>{' '}
                   {archonData[player.race].aura.desc}
                 </div>
+              </div>
+            )}
+
+            {gmMelee && (
+              <div style={styles.infoBox('#00ff88')}>
+                <span style={{ fontWeight: 800 }}>⚔️ MELEE PT GM ACTIVE:</span> +50 ATK | +1% Critical
+              </div>
+            )}
+            {gmRange && (
+              <div style={styles.infoBox('#00ff88')}>
+                <span style={{ fontWeight: 800 }}>🏹 RANGED PT GM ACTIVE:</span> +50 ATK | +1% Critical
+              </div>
+            )}
+            {gmForce && (
+              <div style={styles.infoBox('#00ff88')}>
+                <span style={{ fontWeight: 800 }}>✨ FORCE PT GM ACTIVE:</span> +50 Force ATK | +1% Critical
+              </div>
+            )}
+            {gmShield && (
+              <div style={styles.infoBox('#00ff88')}>
+                <span style={{ fontWeight: 800 }}>🛡️ SHIELD PT GM ACTIVE:</span> +50 DEF | +500 HP
+              </div>
+            )}
+            {allGMMaxed && (
+              <div style={styles.infoBox('#eab308')}>
+                <span style={{ fontWeight: 800 }}>🔥 ASCENSION ARMS ACTIVE:</span> +50 ATK | +50 DEF | +500 HP | +1% Critical
               </div>
             )}
           </AccordionSection>

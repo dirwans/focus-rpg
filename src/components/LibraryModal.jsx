@@ -75,6 +75,7 @@ export default function LibraryModal({ onClose }) {
 
               <div style={styles.itemCard}>
                 <div style={styles.itemTitle}>🏋️ Player Training (PT) System</div>
+                
                 <div style={styles.subTitle}>Daftar PT &amp; Fungsi</div>
                 <ul style={styles.list}>
                   <li><strong>Close Range PT:</strong> Meningkatkan kemampuan menggunakan senjata melee.</li>
@@ -84,6 +85,32 @@ export default function LibraryModal({ onClose }) {
                   <li><strong>Defense PT:</strong> Meningkatkan pertahanan dan HP.</li>
                   <li><strong>Race Special PT:</strong> PT khusus tiap bangsa: Launcher (Accretia), MAU (Bellato), Animus (Cora).</li>
                   <li><strong>Production PT:</strong> Meningkatkan kemampuan crafting (khusus Specialist).</li>
+                </ul>
+
+                <div style={{...styles.subTitle, marginTop: 12}}>Watesan Level &amp; Syarat Monster Kill per PT</div>
+                <ul style={styles.list}>
+                  <li><strong>Lv. 1-10:</strong> Maks. PT = 10 | Butuh 100 kills / PT point</li>
+                  <li><strong>Lv. 11-20:</strong> Maks. PT = 20 | Butuh 200 kills / PT point</li>
+                  <li><strong>Lv. 21-30:</strong> Maks. PT = 30 | Butuh 350 kills / PT point</li>
+                  <li><strong>Lv. 31-40:</strong> Maks. PT = 45 | Butuh 500 kills / PT point</li>
+                  <li><strong>Lv. 41-50:</strong> Maks. PT = 60 | Butuh 700 kills / PT point</li>
+                  <li><strong>Lv. 51-55:</strong> Maks. PT = 75 | Butuh 1.000 kills / PT point</li>
+                  <li><strong>Lv. 56-60:</strong> Maks. PT = 90 | Butuh 1.500 kills / PT point</li>
+                  <li><strong>Lv. 61+:</strong> Maks. PT = 99 | Butuh 2.000 kills / PT point</li>
+                </ul>
+
+                <div style={{...styles.subTitle, marginTop: 12}}>Grand Master (GM) PT Bonuses (PT Level 99)</div>
+                <ul style={styles.list}>
+                  <li><strong>Melee PT GM:</strong> ⚔️ ATK +50, 💥 Critical +1%</li>
+                  <li><strong>Ranged PT GM:</strong> ⚔️ ATK +50, 💥 Critical +1%</li>
+                  <li><strong>Force PT GM:</strong> ⚔️ Force ATK +50, 💥 Critical +1%</li>
+                  <li><strong>Shield PT GM:</strong> 🛡️ DEF +50, ❤️ HP +500</li>
+                </ul>
+
+                <div style={{...styles.subTitle, marginTop: 12}}>🚀 Bonus Ascension Arms</div>
+                <ul style={styles.list}>
+                  <li>Aktif otomatis nalika kabeh PT utama (sing nduweni cap kelas 99) wis tekan level 99 (GM).</li>
+                  <li><strong>Bonus Stats:</strong> ⚔️ ATK +50, 🛡️ DEF +50, ❤️ HP +500, 💥 Critical +1%</li>
                 </ul>
               </div>
             </div>

@@ -261,11 +261,33 @@ export function getPlayerClassGroup(jobId, raceId) {
   }
   return 'novice';
 }
+export function getKillsPerPT(level) {
+  const lvl = level || 1
+  if (lvl <= 10) return 100
+  if (lvl <= 20) return 200
+  if (lvl <= 30) return 350
+  if (lvl <= 40) return 500
+  if (lvl <= 50) return 700
+  if (lvl <= 55) return 1000
+  if (lvl <= 60) return 1500
+  return 2000
+}
 
 export function getPTCaps(race, job, level) {
   const r = (race || '').toLowerCase()
   const group = getPlayerClassGroup(job, race)
-  const maxPTAtLevel = Math.min(99, Math.floor((level || 1) * 1.5) + 3)
+
+  // Max PT cap at level group (from Image 1 table)
+  const lvl = level || 1
+  let maxPTAtLevel = 99
+  if (lvl <= 10) maxPTAtLevel = 10
+  else if (lvl <= 20) maxPTAtLevel = 20
+  else if (lvl <= 30) maxPTAtLevel = 30
+  else if (lvl <= 40) maxPTAtLevel = 45
+  else if (lvl <= 50) maxPTAtLevel = 60
+  else if (lvl <= 55) maxPTAtLevel = 75
+  else if (lvl <= 60) maxPTAtLevel = 90
+  else maxPTAtLevel = 99
 
   const caps = {
     melee: 99,
@@ -341,7 +363,6 @@ export function getPTCaps(race, job, level) {
 
 export function getInitialPT(race, job, level) {
   const caps = getPTCaps(race, job, level)
-  
   return {
     melee: { val: Math.min(caps.melee, 1), pct: 0 },
     range: { val: Math.min(caps.range, 1), pct: 0 },
@@ -353,7 +374,7 @@ export function getInitialPT(race, job, level) {
   }
 }
 
-export function advancePT(ptState, mode, minutes, race, job, level, hasShield) {
+export function advancePT(ptState, mode, minutes, race, job, level, hasShield, kills) {
   const caps = getPTCaps(race, job, level)
   const nextPt = { ...ptState }
   
@@ -404,6 +425,9 @@ export function advancePT(ptState, mode, minutes, race, job, level, hasShield) {
     rates.special = 0
   }
 
+  const actions = mode === 'fight' ? (kills || 0) : Math.max(0, Math.floor(minutes * 15))
+  const requiredActions = getKillsPerPT(level)
+
   const logs = []
   const ptLabels = {
     melee: 'Close Range PT',
@@ -429,7 +453,7 @@ export function advancePT(ptState, mode, minutes, race, job, level, hasShield) {
     }
 
     const rate = rates[key] || 0.5
-    const addedPct = rate * minutes
+    const addedPct = (100 / requiredActions) * rate * actions
     let newPct = current.pct + addedPct
     let newVal = current.val
     let levelsGained = 0
@@ -1822,7 +1846,8 @@ export const useGameStore = create(
           player.race,
           player.job,
           player.level,
-          hasShield
+          hasShield,
+          finalKills
         )
 
         const finalLog = []
@@ -2064,6 +2089,42 @@ export const useGameStore = create(
             if (item.bonus.crit) critBonus += item.bonus.crit
           }
         })
+
+        // GM PT and Ascension Arms Bonuses
+        const pt = player.pt || {}
+        const gmMelee = pt.melee?.val >= 99
+        const gmRange = pt.range?.val >= 99
+        const gmForce = pt.force?.val >= 99
+        const gmShield = pt.shield?.val >= 99
+
+        if (gmMelee) {
+          flatAtk += 50
+          critBonus += 1
+        }
+        if (gmRange) {
+          flatAtk += 50
+          critBonus += 1
+        }
+        if (gmForce) {
+          flatAtk += 50
+          critBonus += 1
+        }
+        if (gmShield) {
+          flatDef += 50
+          flatHp += 500
+        }
+
+        // Ascension Arms Bonus: active if all eligible GM PTs (class cap at max level >= 99) are at 99
+        const absoluteCaps = getPTCaps(player.race, player.job, 70)
+        const eligibleGMKeys = Object.keys(absoluteCaps).filter(key => absoluteCaps[key] >= 99)
+        const allGMMaxed = eligibleGMKeys.length > 0 && eligibleGMKeys.every(key => pt[key]?.val >= 99)
+
+        if (allGMMaxed) {
+          flatAtk += 50
+          flatDef += 50
+          flatHp += 500
+          critBonus += 1
+        }
 
         // Base HP, DEF, ATK Math using STR, DEX, INT, VIT
         let baseAtkScaling = 0
