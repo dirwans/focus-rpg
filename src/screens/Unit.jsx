@@ -141,6 +141,38 @@ export default function Unit() {
       {(() => {
         const fp = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
         const fa = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
+
+                const renderEquipSlot = (slotKey, label, svgIcon, styleType = 'full') => {
+                  const item = player.equipment && player.equipment[slotKey];
+                  const isEmpty = !item;
+                  
+                  if (isEmpty) {
+                    return (
+                      <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: 'rgba(3,8,20,0.55)', border: `1.5px dashed ${fp}4d`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: 'rgba(255,183,119,0.35)' }}>+</span>
+                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>{label}</span>
+                      </div>
+                    );
+                  }
+                  
+                  return (
+                    <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2, position: 'relative' }}>
+                      {item.image ? (
+                        <img referrerPolicy="no-referrer" src={item.image} style={{ width: 22, height: 22, objectFit: 'contain' }} alt={item.name} />
+                      ) : item.emoji ? (
+                        <span style={{ fontSize: 18, marginTop: -2 }}>{item.emoji}</span>
+                      ) : (
+                        svgIcon
+                      )}
+                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: fa }}>{label}</span>
+                      {item.enhancement_level > 0 && (
+                         <span style={{ position: 'absolute', top: 2, right: 3, fontSize: 8, fontWeight: 900, color: '#00ffaa', fontFamily: 'var(--font-mono)' }}>
+                           +{item.enhancement_level}
+                         </span>
+                      )}
+                    </div>
+                  );
+                };
         return (
           <div style={{ position: 'relative', zIndex: 4, display: 'flex', gap: 8, padding: '0 16px 8px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'rgba(8,22,36,0.5)', backdropFilter: 'blur(8px)', border: `1px solid ${fp}59`, borderRadius: 20, padding: '4px 12px 4px 9px' }}>
@@ -188,6 +220,38 @@ export default function Unit() {
           {(() => {
             const fp = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
             const fa = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
+
+                const renderEquipSlot = (slotKey, label, svgIcon, styleType = 'full') => {
+                  const item = player.equipment && player.equipment[slotKey];
+                  const isEmpty = !item;
+                  
+                  if (isEmpty) {
+                    return (
+                      <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: 'rgba(3,8,20,0.55)', border: `1.5px dashed ${fp}4d`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: 'rgba(255,183,119,0.35)' }}>+</span>
+                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>{label}</span>
+                      </div>
+                    );
+                  }
+                  
+                  return (
+                    <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2, position: 'relative' }}>
+                      {item.image ? (
+                        <img referrerPolicy="no-referrer" src={item.image} style={{ width: 22, height: 22, objectFit: 'contain' }} alt={item.name} />
+                      ) : item.emoji ? (
+                        <span style={{ fontSize: 18, marginTop: -2 }}>{item.emoji}</span>
+                      ) : (
+                        svgIcon
+                      )}
+                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: fa }}>{label}</span>
+                      {item.enhancement_level > 0 && (
+                         <span style={{ position: 'absolute', top: 2, right: 3, fontSize: 8, fontWeight: 900, color: '#00ffaa', fontFamily: 'var(--font-mono)' }}>
+                           +{item.enhancement_level}
+                         </span>
+                      )}
+                    </div>
+                  );
+                };
             const label = player.race ? player.race.toUpperCase() : 'UNKNOWN'
             const bionexSprite = player.race === 'bionex' ? getBionexJobSprite(player.job) : null
             return (
@@ -239,6 +303,38 @@ export default function Unit() {
           {(() => {
             const fp = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
             const fa = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
+
+                const renderEquipSlot = (slotKey, label, svgIcon, styleType = 'full') => {
+                  const item = player.equipment && player.equipment[slotKey];
+                  const isEmpty = !item;
+                  
+                  if (isEmpty) {
+                    return (
+                      <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: 'rgba(3,8,20,0.55)', border: `1.5px dashed ${fp}4d`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: 'rgba(255,183,119,0.35)' }}>+</span>
+                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>{label}</span>
+                      </div>
+                    );
+                  }
+                  
+                  return (
+                    <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2, position: 'relative' }}>
+                      {item.image ? (
+                        <img referrerPolicy="no-referrer" src={item.image} style={{ width: 22, height: 22, objectFit: 'contain' }} alt={item.name} />
+                      ) : item.emoji ? (
+                        <span style={{ fontSize: 18, marginTop: -2 }}>{item.emoji}</span>
+                      ) : (
+                        svgIcon
+                      )}
+                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: fa }}>{label}</span>
+                      {item.enhancement_level > 0 && (
+                         <span style={{ position: 'absolute', top: 2, right: 3, fontSize: 8, fontWeight: 900, color: '#00ffaa', fontFamily: 'var(--font-mono)' }}>
+                           +{item.enhancement_level}
+                         </span>
+                      )}
+                    </div>
+                  );
+                };
             const EXP_SEGS = 12
             const filledSegs = Math.min(EXP_SEGS, Math.round((player.exp / expMax) * EXP_SEGS))
             const idPrefix = baseClass.slice(0,3).toUpperCase()
@@ -295,6 +391,38 @@ export default function Unit() {
           {(() => {
             const fp = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
             const fa = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
+
+                const renderEquipSlot = (slotKey, label, svgIcon, styleType = 'full') => {
+                  const item = player.equipment && player.equipment[slotKey];
+                  const isEmpty = !item;
+                  
+                  if (isEmpty) {
+                    return (
+                      <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: 'rgba(3,8,20,0.55)', border: `1.5px dashed ${fp}4d`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: 'rgba(255,183,119,0.35)' }}>+</span>
+                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>{label}</span>
+                      </div>
+                    );
+                  }
+                  
+                  return (
+                    <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2, position: 'relative' }}>
+                      {item.image ? (
+                        <img referrerPolicy="no-referrer" src={item.image} style={{ width: 22, height: 22, objectFit: 'contain' }} alt={item.name} />
+                      ) : item.emoji ? (
+                        <span style={{ fontSize: 18, marginTop: -2 }}>{item.emoji}</span>
+                      ) : (
+                        svgIcon
+                      )}
+                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: fa }}>{label}</span>
+                      {item.enhancement_level > 0 && (
+                         <span style={{ position: 'absolute', top: 2, right: 3, fontSize: 8, fontWeight: 900, color: '#00ffaa', fontFamily: 'var(--font-mono)' }}>
+                           +{item.enhancement_level}
+                         </span>
+                      )}
+                    </div>
+                  );
+                };
             const TIER_KEYS   = ['tier1', 'tier2', 'tier3', 'tier4']
             const TIER_LABELS = ['I', 'II', 'III', 'IV']
             const TIER_UNLOCK = { tier1: 1, tier2: 15, tier3: 32, tier4: 55 }
@@ -348,6 +476,38 @@ export default function Unit() {
           {(() => {
             const fp = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
             const fa = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
+
+                const renderEquipSlot = (slotKey, label, svgIcon, styleType = 'full') => {
+                  const item = player.equipment && player.equipment[slotKey];
+                  const isEmpty = !item;
+                  
+                  if (isEmpty) {
+                    return (
+                      <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: 'rgba(3,8,20,0.55)', border: `1.5px dashed ${fp}4d`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: 'rgba(255,183,119,0.35)' }}>+</span>
+                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>{label}</span>
+                      </div>
+                    );
+                  }
+                  
+                  return (
+                    <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2, position: 'relative' }}>
+                      {item.image ? (
+                        <img referrerPolicy="no-referrer" src={item.image} style={{ width: 22, height: 22, objectFit: 'contain' }} alt={item.name} />
+                      ) : item.emoji ? (
+                        <span style={{ fontSize: 18, marginTop: -2 }}>{item.emoji}</span>
+                      ) : (
+                        svgIcon
+                      )}
+                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: fa }}>{label}</span>
+                      {item.enhancement_level > 0 && (
+                         <span style={{ position: 'absolute', top: 2, right: 3, fontSize: 8, fontWeight: 900, color: '#00ffaa', fontFamily: 'var(--font-mono)' }}>
+                           +{item.enhancement_level}
+                         </span>
+                      )}
+                    </div>
+                  );
+                };
             return (
               <div style={{ display: 'flex', gap: 12, margin: '0 16px 10px' }}>
                 <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 9, padding: '9px 11px', borderRadius: 11, background: `linear-gradient(135deg,${fp}29,rgba(0,0,0,0.4))`, border: `1.5px solid ${fp}66` }}>
@@ -375,6 +535,38 @@ export default function Unit() {
           {(() => {
             const fp = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
             const fa = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
+
+                const renderEquipSlot = (slotKey, label, svgIcon, styleType = 'full') => {
+                  const item = player.equipment && player.equipment[slotKey];
+                  const isEmpty = !item;
+                  
+                  if (isEmpty) {
+                    return (
+                      <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: 'rgba(3,8,20,0.55)', border: `1.5px dashed ${fp}4d`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: 'rgba(255,183,119,0.35)' }}>+</span>
+                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>{label}</span>
+                      </div>
+                    );
+                  }
+                  
+                  return (
+                    <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2, position: 'relative' }}>
+                      {item.image ? (
+                        <img referrerPolicy="no-referrer" src={item.image} style={{ width: 22, height: 22, objectFit: 'contain' }} alt={item.name} />
+                      ) : item.emoji ? (
+                        <span style={{ fontSize: 18, marginTop: -2 }}>{item.emoji}</span>
+                      ) : (
+                        svgIcon
+                      )}
+                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: fa }}>{label}</span>
+                      {item.enhancement_level > 0 && (
+                         <span style={{ position: 'absolute', top: 2, right: 3, fontSize: 8, fontWeight: 900, color: '#00ffaa', fontFamily: 'var(--font-mono)' }}>
+                           +{item.enhancement_level}
+                         </span>
+                      )}
+                    </div>
+                  );
+                };
             return (
               <div style={{ margin: '0 16px 10px' }}>
                 <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 700, letterSpacing: 1.5, color: '#8a94a3', marginBottom: 7 }}>
@@ -403,6 +595,38 @@ export default function Unit() {
           {(() => {
             const fp = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
             const fa = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
+
+                const renderEquipSlot = (slotKey, label, svgIcon, styleType = 'full') => {
+                  const item = player.equipment && player.equipment[slotKey];
+                  const isEmpty = !item;
+                  
+                  if (isEmpty) {
+                    return (
+                      <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: 'rgba(3,8,20,0.55)', border: `1.5px dashed ${fp}4d`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: 'rgba(255,183,119,0.35)' }}>+</span>
+                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>{label}</span>
+                      </div>
+                    );
+                  }
+                  
+                  return (
+                    <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2, position: 'relative' }}>
+                      {item.image ? (
+                        <img referrerPolicy="no-referrer" src={item.image} style={{ width: 22, height: 22, objectFit: 'contain' }} alt={item.name} />
+                      ) : item.emoji ? (
+                        <span style={{ fontSize: 18, marginTop: -2 }}>{item.emoji}</span>
+                      ) : (
+                        svgIcon
+                      )}
+                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: fa }}>{label}</span>
+                      {item.enhancement_level > 0 && (
+                         <span style={{ position: 'absolute', top: 2, right: 3, fontSize: 8, fontWeight: 900, color: '#00ffaa', fontFamily: 'var(--font-mono)' }}>
+                           +{item.enhancement_level}
+                         </span>
+                      )}
+                    </div>
+                  );
+                };
             
             const InfoCard = ({ title, titleColor, desc, bg, border, titleColorHex }) => (
               <div style={{ padding: '9px 12px', borderRadius: 10, background: bg || 'rgba(74,143,168,0.08)', border: border || `1px solid ${fp}38`, fontFamily: "'Saira', sans-serif", fontSize: 13, color: '#cdd5e0', marginBottom: 6 }}>
@@ -458,8 +682,41 @@ export default function Unit() {
           {(() => {
             const fp = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
             const fa = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
+
+                const renderEquipSlot = (slotKey, label, svgIcon, styleType = 'full') => {
+                  const item = player.equipment && player.equipment[slotKey];
+                  const isEmpty = !item;
+                  
+                  if (isEmpty) {
+                    return (
+                      <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: 'rgba(3,8,20,0.55)', border: `1.5px dashed ${fp}4d`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: 'rgba(255,183,119,0.35)' }}>+</span>
+                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>{label}</span>
+                      </div>
+                    );
+                  }
+                  
+                  return (
+                    <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2, position: 'relative' }}>
+                      {item.image ? (
+                        <img referrerPolicy="no-referrer" src={item.image} style={{ width: 22, height: 22, objectFit: 'contain' }} alt={item.name} />
+                      ) : item.emoji ? (
+                        <span style={{ fontSize: 18, marginTop: -2 }}>{item.emoji}</span>
+                      ) : (
+                        svgIcon
+                      )}
+                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: fa }}>{label}</span>
+                      {item.enhancement_level > 0 && (
+                         <span style={{ position: 'absolute', top: 2, right: 3, fontSize: 8, fontWeight: 900, color: '#00ffaa', fontFamily: 'var(--font-mono)' }}>
+                           +{item.enhancement_level}
+                         </span>
+                      )}
+                    </div>
+                  );
+                };
             return (
-              <>
+<>
+
                 <div style={{ margin: '0 16px 4px', fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, letterSpacing: 1, color: fa, textTransform: 'uppercase' }}>Combat</div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 5, margin: '0 16px 10px' }}>
                   {[
@@ -498,8 +755,41 @@ export default function Unit() {
           {(() => {
             const fp = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
             const fa = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
+
+                const renderEquipSlot = (slotKey, label, svgIcon, styleType = 'full') => {
+                  const item = player.equipment && player.equipment[slotKey];
+                  const isEmpty = !item;
+                  
+                  if (isEmpty) {
+                    return (
+                      <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: 'rgba(3,8,20,0.55)', border: `1.5px dashed ${fp}4d`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: 'rgba(255,183,119,0.35)' }}>+</span>
+                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>{label}</span>
+                      </div>
+                    );
+                  }
+                  
+                  return (
+                    <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2, position: 'relative' }}>
+                      {item.image ? (
+                        <img referrerPolicy="no-referrer" src={item.image} style={{ width: 22, height: 22, objectFit: 'contain' }} alt={item.name} />
+                      ) : item.emoji ? (
+                        <span style={{ fontSize: 18, marginTop: -2 }}>{item.emoji}</span>
+                      ) : (
+                        svgIcon
+                      )}
+                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: fa }}>{label}</span>
+                      {item.enhancement_level > 0 && (
+                         <span style={{ position: 'absolute', top: 2, right: 3, fontSize: 8, fontWeight: 900, color: '#00ffaa', fontFamily: 'var(--font-mono)' }}>
+                           +{item.enhancement_level}
+                         </span>
+                      )}
+                    </div>
+                  );
+                };
             return (
-              <>
+<>
+
                 <div style={{ margin: '0 16px 4px', fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, letterSpacing: 1, color: fa, textTransform: 'uppercase' }}>Crafting</div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 5, margin: '0 16px 12px' }}>
                   {[
@@ -532,80 +822,80 @@ export default function Unit() {
           {(() => {
             const fp = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
             const fa = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
+
+                const renderEquipSlot = (slotKey, label, svgIcon, styleType = 'full') => {
+                  const item = player.equipment && player.equipment[slotKey];
+                  const isEmpty = !item;
+                  
+                  if (isEmpty) {
+                    return (
+                      <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: 'rgba(3,8,20,0.55)', border: `1.5px dashed ${fp}4d`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: 'rgba(255,183,119,0.35)' }}>+</span>
+                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>{label}</span>
+                      </div>
+                    );
+                  }
+                  
+                  return (
+                    <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2, position: 'relative' }}>
+                      {item.image ? (
+                        <img referrerPolicy="no-referrer" src={item.image} style={{ width: 22, height: 22, objectFit: 'contain' }} alt={item.name} />
+                      ) : item.emoji ? (
+                        <span style={{ fontSize: 18, marginTop: -2 }}>{item.emoji}</span>
+                      ) : (
+                        svgIcon
+                      )}
+                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: fa }}>{label}</span>
+                      {item.enhancement_level > 0 && (
+                         <span style={{ position: 'absolute', top: 2, right: 3, fontSize: 8, fontWeight: 900, color: '#00ffaa', fontFamily: 'var(--font-mono)' }}>
+                           +{item.enhancement_level}
+                         </span>
+                      )}
+                    </div>
+                  );
+                };
             return (
-              <>
+<>
+
                 <div style={{ margin: '0 16px 8px', fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 700, letterSpacing: 1.5, color: '#8a94a3' }}>
                   <span style={{ fontSize: 9 }}>▼</span> EQUIPMENT & INVENTORY
                 </div>
                 <div style={{ margin: '0 16px 12px', padding: '12px 10px', background: 'rgba(8,22,36,0.4)', border: `1px solid ${fp}33`, borderRadius: 12, display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 7, justifyItems: 'center' }}>
-                  {/* Row 1 */}
-                  <div style={{ width: 48, height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
-                    <svg width="16" height="16" viewBox="0 0 13 13"><rect x="1.5" y="1.5" width="10" height="10" transform="rotate(45 6.5 6.5)" fill={fa} fillOpacity="0.6" stroke={fa} strokeWidth="1"/></svg>
-                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: fa }}>AM1</span>
-                  </div>
-                  <div style={{ width: '100%', height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2 }}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={fa} strokeWidth="1.8"><path d="M12 2l3 6 6 .5-4.5 4 1.4 6L12 15l-5.9 3.5 1.4-6L3 8.5 9 8z"/></svg>
-                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: fa }}>HELM</span>
-                  </div>
-                  <div style={{ width: 48, height: 48, borderRadius: 7, background: 'rgba(3,8,20,0.55)', border: `1.5px dashed ${fp}4d`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
-                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: 'rgba(255,183,119,0.35)' }}>+</span>
-                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>AM2</span>
-                  </div>
-                  
-                  {/* Row 2 */}
-                  <div style={{ width: '100%', height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2 }}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={fa} strokeWidth="1.8"><path d="M14.5 17.5L3 6M17.5 14.5L6 3M19 19v-4M19 19h-4M5 5v4M5 5h4"/></svg>
-                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: fa }}>WPN</span>
-                  </div>
-                  <div style={{ width: '100%', height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2 }}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={fa} strokeWidth="1.8"><path d="M12 2l8 3.5v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10v-6L12 2z"/></svg>
-                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: fa }}>ARM</span>
-                  </div>
-                  <div style={{ width: 48, height: 48, borderRadius: 7, background: 'rgba(3,8,20,0.55)', border: `1.5px dashed ${fp}4d`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
-                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: 'rgba(255,183,119,0.35)' }}>+</span>
-                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>SHD</span>
-                  </div>
-                  
-                  {/* Row 3 */}
-                  <div style={{ width: 48, height: 48, borderRadius: 7, background: 'rgba(3,8,20,0.55)', border: `1.5px dashed ${fp}4d`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
-                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: 'rgba(255,183,119,0.35)' }}>+</span>
-                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>GLV</span>
-                  </div>
-                  <div style={{ width: '100%', height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2 }}>
-                    <svg width="16" height="16" viewBox="0 0 13 13"><rect x="1.5" y="1.5" width="10" height="10" transform="rotate(45 6.5 6.5)" fill={fa} fillOpacity="0.6" stroke={fa} strokeWidth="1"/></svg>
-                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: fa }}>PNT</span>
-                  </div>
-                  <div style={{ width: 48, height: 48, borderRadius: 7, background: 'rgba(3,8,20,0.55)', border: `1.5px dashed ${fp}4d`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
-                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: 'rgba(255,183,119,0.35)' }}>+</span>
-                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>CPE</span>
-                  </div>
-                  
-                  {/* Row 4 */}
-                  <div style={{ width: 48, height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={fa} strokeWidth="2"><circle cx="12" cy="14" r="6"/><path d="M9 8l3-5 3 5"/></svg>
-                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: fa }}>RG1</span>
-                  </div>
-                  <div style={{ width: '100%', height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2 }}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={fa} strokeWidth="1.8"><path d="M9 20h6M8 20V10l4-4 4 4v10M6 10h12"/></svg>
-                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: fa }}>BTS</span>
-                  </div>
-                  <div style={{ width: 48, height: 48, borderRadius: 7, background: 'rgba(3,8,20,0.55)', border: `1.5px dashed ${fp}4d`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,183,119,0.4)" strokeWidth="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>
-                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>ARES</span>
-                  </div>
-                </div>
+                  {renderEquipSlot('amulet1', 'AM1', <svg width="16" height="16" viewBox="0 0 13 13"><rect x="1.5" y="1.5" width="10" height="10" transform="rotate(45 6.5 6.5)" fill={fa} fillOpacity="0.6" stroke={fa} strokeWidth="1"/></svg>, 'box')}
+                  {renderEquipSlot('helmet', 'HELM', <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={fa} strokeWidth="1.8"><path d="M12 2l3 6 6 .5-4.5 4 1.4 6L12 15l-5.9 3.5 1.4-6L3 8.5 9 8z"/></svg>, 'full')}
+                  {renderEquipSlot('amulet2', 'AM2', <svg width="16" height="16" viewBox="0 0 13 13"><rect x="1.5" y="1.5" width="10" height="10" transform="rotate(45 6.5 6.5)" fill={fa} fillOpacity="0.6" stroke={fa} strokeWidth="1"/></svg>, 'box')}
 
+                  {renderEquipSlot('weapon', 'WPN', <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={fa} strokeWidth="1.8"><path d="M14.5 17.5L3 6M17.5 14.5L6 3M19 19v-4M19 19h-4M5 5v4M5 5h4"/></svg>, 'full')}
+                  {renderEquipSlot('armor', 'ARM', <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={fa} strokeWidth="1.8"><path d="M12 2l8 3.5v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10v-6L12 2z"/></svg>, 'full')}
+                  {renderEquipSlot('shield', 'SHD', <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={fa} strokeWidth="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>, 'box')}
+
+                  {renderEquipSlot('gloves', 'GLV', <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={fa} strokeWidth="1.8"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/></svg>, 'box')}
+                  {renderEquipSlot('pants', 'PNT', <svg width="16" height="16" viewBox="0 0 13 13"><rect x="1.5" y="1.5" width="10" height="10" transform="rotate(45 6.5 6.5)" fill={fa} fillOpacity="0.6" stroke={fa} strokeWidth="1"/></svg>, 'full')}
+                  {renderEquipSlot('mantle', 'CPE', <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={fa} strokeWidth="1.8"><path d="M4 14l8 7 8-7V4H4z"/></svg>, 'box')}
+
+                  {renderEquipSlot('ring1', 'RG1', <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={fa} strokeWidth="2"><circle cx="12" cy="14" r="6"/><path d="M9 8l3-5 3 5"/></svg>, 'box')}
+                  {renderEquipSlot('boots', 'BTS', <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={fa} strokeWidth="1.8"><path d="M9 20h6M8 20V10l4-4 4 4v10M6 10h12"/></svg>, 'full')}
+                  {renderEquipSlot('ascension_arms', 'ARES', <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,183,119,0.4)" strokeWidth="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>, 'box')}
+                </div>
                 {/* bags */}
                 <div style={{ display: 'flex', gap: 7, justifyContent: 'center', margin: '0 16px 14px' }}>
-                  {[1, 2, 3, 4, 5].map((bagNum) => (
-                    bagNum === 1 ? (
-                      <div key={bagNum} style={{ width: 44, height: 44, borderRadius: 7, background: `${fp}24`, border: `1.5px solid ${fp}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, color: fa, boxShadow: `0 0 10px ${fp}4d` }}>{bagNum}</div>
-                    ) : bagNum === 5 ? (
-                      <div key={bagNum} style={{ width: 44, height: 44, borderRadius: 7, background: 'rgba(10,15,30,0.55)', border: '1.5px solid #2a333f', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, color: '#555', opacity: 0.5 }}>{bagNum}</div>
-                    ) : (
-                      <div key={bagNum} style={{ width: 44, height: 44, borderRadius: 7, background: 'rgba(10,15,30,0.8)', border: '1.5px solid #445566', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, color: '#8899aa' }}>{bagNum}</div>
-                    )
-                  ))}
+                  {[1, 2, 3, 4, 5].map((bagNum) => {
+                    let isUnlocked = false;
+                    if (bagNum <= 2) isUnlocked = true;
+                    else if (bagNum === 3 && player.level >= 32) isUnlocked = true;
+                    else if (bagNum === 4 && player.level >= 42) isUnlocked = true;
+                    else if (bagNum === 5 && player.level >= 55) isUnlocked = true;
+
+                    if (isUnlocked) {
+                      return (
+                        <div key={bagNum} style={{ width: 44, height: 44, borderRadius: 7, background: `${fp}24`, border: `1.5px solid ${fp}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, color: fa, boxShadow: `0 0 10px ${fp}4d` }}>{bagNum}</div>
+                      );
+                    } else {
+                      return (
+                        <div key={bagNum} style={{ width: 44, height: 44, borderRadius: 7, background: 'rgba(10,15,30,0.55)', border: '1.5px solid #2a333f', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, color: '#555', opacity: 0.5 }}>{bagNum}</div>
+                      );
+                    }
+                  })}
                 </div>
               </>
             )
