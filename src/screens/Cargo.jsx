@@ -334,14 +334,21 @@ export default function Cargo() {
       <div style={{ display: 'flex', gap: 8, padding: '0 16px 16px', justifyContent: 'center' }}>
         {[1, 2, 3, 4, 5].map(num => {
           const bagKey = `bag${num}`
-          const isEquipped = true // Default all 5 bags are equipped as base slots
+          let isEquipped = false;
+          if (num <= 2) isEquipped = true;
+          else if (num === 3 && player.level >= 32) isEquipped = true;
+          else if (num === 4 && player.level >= 42) isEquipped = true;
+          else if (num === 5 && player.level >= 55) isEquipped = true;
+          
           const isActive = activeBag === bagKey && !slotFilter
           return (
             <button
               key={bagKey}
               onClick={() => {
-                setActiveBag(bagKey)
-                setSlotFilter(null)
+                if (isEquipped) {
+                  setActiveBag(bagKey)
+                  setSlotFilter(null)
+                }
               }}
               style={{
                 width: 52, height: 52,
@@ -349,14 +356,15 @@ export default function Cargo() {
                 border: `1.5px solid ${isActive ? '#00e5ff' : '#445566'}`,
                 borderRadius: 6,
                 display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-                cursor: 'pointer',
+                cursor: isEquipped ? 'pointer' : 'not-allowed',
                 boxShadow: isActive ? '0 0 12px rgba(0,229,255,0.4), inset 0 0 6px rgba(0,229,255,0.2)' : 'none',
                 position: 'relative',
-                outline: 'none'
+                outline: 'none',
+                opacity: isEquipped ? 1 : 0.4
               }}
             >
               <div style={{ fontSize: 24, opacity: isEquipped ? 1 : 0.2 }}>🎒</div>
-              <div style={{ position: 'absolute', bottom: 2, right: 4, fontSize: 10, fontWeight: 900, color: isActive ? '#00e5ff' : '#8899aa', fontFamily: 'var(--font-mono)' }}>
+              <div style={{ position: 'absolute', bottom: 2, right: 4, fontSize: 10, fontWeight: 900, color: isActive ? '#00e5ff' : (isEquipped ? '#8899aa' : '#555555'), fontFamily: 'var(--font-mono)' }}>
                 {num}
               </div>
             </button>
@@ -379,19 +387,10 @@ export default function Cargo() {
         )}
       </div>
 
-      {filteredInventory.length === 0 ? (
-        <div style={styles.empty}>
-          <div style={{ fontSize: 40 }}>{slotFilter ? '🔍' : '📦'}</div>
-          <div style={{ fontFamily: 'monospace', fontSize: 14, color: '#7ab0d0', marginTop: 8 }}>
-            {slotFilter ? `No ${slotFilter} items in cargo` : t('empty_inventory')}
-          </div>
-          <div style={{ fontFamily: 'monospace', fontSize: 14, color: '#7ec8e3', marginTop: 4, fontWeight: 800 }}>
-            {slotFilter ? 'Tap another slot or SHOW ALL' : t('empty_inventory_desc')}
-          </div>
-        </div>
-      ) : (
-        <div style={styles.grid}>
-          {filteredInventory.map((item) => {
+      <div style={styles.grid}>
+        {Array.from({ length: 25 }).map((_, index) => {
+          const item = filteredInventory[index];
+          if (item) {
             const cardColor = getItemColor(item)
             return (
               <button
@@ -402,7 +401,7 @@ export default function Cargo() {
               >
                 <div style={styles.itemIcon}>
                   {item.image ? (
-                    <img referrerPolicy="no-referrer" src={item.image} style={{ width: 34, height: 34, objectFit: 'contain' }} alt={item.name} />
+                    <img referrerPolicy="no-referrer" src={item.image} style={{ width: 34, height: 28, fontSize: 10, objectFit: 'contain' }} alt={item.name} />
                   ) : (
                     item.emoji
                   )}
@@ -412,15 +411,27 @@ export default function Cargo() {
                   <span style={styles.rarityBadge(cardColor)}>{(item.rarityGrade || item.rarity).toUpperCase()}</span>
                 </div>
                 {item.qty > 1 && (
-                  <span style={{ position: 'absolute', bottom: 4, right: 6, fontSize: 13, fontWeight: 900, color: '#00ffaa', fontFamily: 'var(--font-mono)', textShadow: '0 0 4px #000, 1px 1px 2px #000' }}>
+                  <span style={{ position: 'absolute', bottom: 4, right: 6, fontSize: 11, fontWeight: 900, color: '#00ffaa', fontFamily: 'var(--font-mono)', textShadow: '0 0 4px #000, 1px 1px 2px #000' }}>
                     x{item.qty}
                   </span>
                 )}
               </button>
             )
-          })}
-        </div>
-      )}
+          } else {
+            return (
+              <div
+                key={`empty-${index}`}
+                style={{
+                  ...styles.itemCard('rgba(0,0,0,0)'),
+                  background: 'rgba(10, 15, 30, 0.4)',
+                  border: '1.5px solid rgba(40, 50, 70, 0.5)',
+                  cursor: 'default'
+                }}
+              />
+            )
+          }
+        })}
+      </div>
 
       {/* Item Actions Modal */}
       {selectedItem && (
@@ -547,10 +558,10 @@ const styles = {
   slotHeader:   { fontFamily: 'var(--font-title)', fontSize: 13, color: '#7ec8e3', letterSpacing: 0.5, fontWeight: 800 },
   
   // Inventory Grid
-  grid:         { display: 'flex', flexWrap: 'wrap', gap: 10, padding: '0 16px 16px' },
-  itemCard:     (c) => ({ width: 'calc(33.33% - 7px)', padding: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5, position: 'relative', cursor: 'pointer', textAlign: 'center', border: `1.5px solid ${c}` }),
+  grid:         { display: 'flex', flexWrap: 'wrap', gap: 8, padding: '0 16px 16px' },
+  itemCard:     (c) => ({ width: 'calc(20% - 8px)', padding: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5, position: 'relative', cursor: 'pointer', textAlign: 'center', border: `1.5px solid ${c}` }),
   itemIcon:     { fontSize: 28 },
-  itemName:     { fontFamily: 'var(--font-body)', fontSize: 13, color: '#e0f4ff', height: 34, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', lineHeight: 1.3, fontWeight: 700 },
+  itemName:     { fontFamily: 'var(--font-body)', fontSize: 13, color: '#e0f4ff', height: 28, fontSize: 10, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', lineHeight: 1.3, fontWeight: 700 },
   itemBadges:   { display: 'flex', gap: 4 },
   rarityBadge:  (c) => ({ fontFamily: 'var(--font-title)', fontSize: 13, color: c, fontWeight: 800 }),
   empty:        { display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '40px 20px', textAlign: 'center', opacity: 0.6 },
