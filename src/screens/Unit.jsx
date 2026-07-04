@@ -361,6 +361,9 @@ export default function Unit() {
   }
 
   // Filtered inventory
+  const filteredInventory = slotFilter
+    ? (player.inventory || []).filter(item => item.type === slotFilter)
+    : (player.inventory || [])
 
   const raceClass = player.race ? 'panel-' + player.race : ''
 
