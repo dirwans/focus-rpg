@@ -323,6 +323,12 @@ export default function Cargo() {
         </div>
       </div>
 
+      {/* Currency Display */}
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', padding: '0 24px 16px', fontFamily: 'var(--font-mono)', fontSize: 14, color: '#e0f4ff', fontWeight: 600, letterSpacing: 0.5, lineHeight: 1.4, marginTop: -4 }}>
+        <div>{player.resources.credits?.toLocaleString() || 0} <span style={{ color: '#00e5ff', fontWeight: 800, marginLeft: 4 }}>CRD</span></div>
+        <div>{player.resources.nxc?.toLocaleString() || 0} <span style={{ color: '#ffcc00', fontWeight: 800, marginLeft: 4 }}>NXC</span></div>
+      </div>
+
       {/* Inventory Section */}
       <div style={{ display: 'flex', alignItems: 'center', padding: '0 16px', marginBottom: 10, gap: 8 }}>
         <div style={styles.sectionLabel}>
