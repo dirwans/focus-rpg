@@ -768,7 +768,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
               </div>
 
               {/* Lane Selector Tabs */}
-              <div style={styles.tabsContainer}>
+              <div style={styles.tabsContainer} className="no-scrollbar">
                 {CLASS_LANES[player.race]?.map((lane, laneIdx) => {
                   const getTabJob = () => {
                     const t1Idx = lane.indices[0]?.[0]
@@ -1567,14 +1567,16 @@ const styles = {
   },
   tabsContainer: {
     display: 'flex',
-    justifyContent: 'space-between',
+    overflowX: 'auto',
     gap: 8,
     width: '100%',
     boxSizing: 'border-box',
-    marginBottom: 8
+    marginBottom: 8,
+    paddingBottom: 4
   },
   tabCard: (isActive, raceColor) => ({
     flex: 1,
+    minWidth: 95,
     background: 'rgba(4, 10, 24, 0.7)',
     border: isActive ? `2px solid ${raceColor}` : '1.5px solid rgba(255,255,255,0.1)',
     borderRadius: 8,
@@ -1587,7 +1589,8 @@ const styles = {
     cursor: 'pointer',
     opacity: isActive ? 1 : 0.45,
     boxShadow: isActive ? `0 0 10px ${raceColor}` : 'none',
-    transition: 'all 0.2s ease-in-out'
+    transition: 'all 0.2s ease-in-out',
+    flexShrink: 0
   }),
   tabTitle: {
     fontFamily: 'var(--font-title)',
