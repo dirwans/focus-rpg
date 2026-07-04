@@ -132,110 +132,6 @@ export default function Unit() {
 
       {tab === 'stats' && (
         <>
-          {/* Detailed Profile ID Card (relocated from Main.jsx) */}
-          <div 
-            className={`profile-id-card ${player.race ? 'panel-' + player.race : ''}`}
-            style={{ margin: '8px 16px 12px', zIndex: 1 }}
-          >
-            <div className="id-corner-circle tl" />
-            <div className="id-corner-circle tr" />
-            <div className="id-corner-circle bl" />
-            <div className="id-corner-circle br" />
-
-            <div className="id-tab top" />
-            <div className="id-tab bottom" />
-
-            <div className="id-edge-notch left-top" />
-            <div className="id-edge-notch left-bot" />
-            <div className="id-edge-notch right-top" />
-            <div className="id-edge-notch right-bot" />
-
-            <div className="profile-id-card-inner">
-              <div className="profile-id-body">
-                {/* Avatar side */}
-                <div className="profile-avatar-glow-wrap">
-                  <div className="profile-corner tl" />
-                  <div className="profile-corner tr" />
-                  <div className="profile-corner bl" />
-                  <div className="profile-corner br" />
-                  <div className="profile-avatar-inner">
-                    <div className="profile-avatar-grid" />
-                    <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', overflow: 'hidden', zIndex: 2,
-                      boxShadow: 'inset 0 0 8px 4px rgba(0,0,0,0.85)' }}>
-                      {(() => {
-                        const bionexSprite = player.race === 'bionex' ? getBionexJobSprite(player.job) : null
-                        if (bionexSprite) {
-                          return (
-                            <img
-                              src={bionexSprite}
-                              alt={player.job}
-                              style={{
-                                height: 340,
-                                width: 'auto',
-                                position: 'absolute',
-                                top: -4,
-                                left: '50%',
-                                transform: 'translateX(-50%)',
-                              }}
-                            />
-                          )
-                        }
-                        return <PilotSprite race={player.race} job={player.job} width={112} height={150} fill={true} />
-                      })()}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Details side */}
-                <div className="profile-details-wrap">
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                    <div className="profile-details-username">{player.name.toUpperCase()}</div>
-                  </div>
-
-                  <div className="profile-data-rows">
-                    <div className="profile-data-row">
-                      <span className="profile-data-key">FACTION</span>
-                      <span className="profile-data-val">{race ? race.name.toUpperCase() : 'UNKNOWN'}</span>
-                    </div>
-                    <div className="profile-data-row">
-                      <span className="profile-data-key">CLASS</span>
-                      <span className="profile-data-val accent">{baseClass}</span>
-                    </div>
-                    <div className="profile-data-row">
-                      <span className="profile-data-key">JOB</span>
-                      <span className="profile-data-val">{job ? job.name.toUpperCase() : 'NOVICE'}</span>
-                    </div>
-                  </div>
-
-                  <div className="profile-active-status">
-                    <div className="profile-status-led" />
-                    <span>STATUS: <span className="status-active-txt">ACTIVE</span></span>
-                  </div>
-
-                  <div className="profile-data-divider" />
-
-                  <div className="profile-id-block-new">
-                    <span className="profile-id-lbl">{baseClass} ID</span>
-                    <span className="profile-id-num">PLT-{player.level || 1}09X</span>
-                  </div>
-
-                  {/* EXP bar */}
-                  <div className="profile-status-panel" style={{ marginTop: 6 }}>
-                    <div className="profile-status-bar">
-                      {Array.from({ length: 12 }).map((_, idx) => {
-                        const litThreshold = (idx + 1) * (100 / 12)
-                        const isLit = expPct >= litThreshold
-                        return (
-                          <div key={idx} className={`profile-status-segment ${isLit ? '' : 'dim'}`} />
-                        )
-                      })}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
           {/* Skill Slots */}
           <div style={{ display: 'flex', gap: 16, justifyContent: 'center', margin: '8px 16px 12px' }}>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
@@ -274,36 +170,107 @@ export default function Unit() {
             </div>
           </div>
 
-          {/* GENERAL INFO */}
+          {/* GENERAL INFO (Profile ID Card relocated inside) */}
           <AccordionSection label="General Info" raceClass={raceClass} defaultOpen={true}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 13, fontFamily: 'var(--font-body)', fontWeight: 600, color: '#c0dff0' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span>Pilot Name:</span>
-                <span style={{ fontWeight: 'bold', color: '#fff' }}>{player.name}</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span>Faction:</span>
-                <span style={{ fontWeight: 'bold', color: '#fff' }}>{race ? race.name : 'Unknown'}</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span>Class Path:</span>
-                <span style={{ fontWeight: 'bold', color: '#fff' }}>{baseClass}</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span>Job Name:</span>
-                <span style={{ fontWeight: 'bold', color: '#fff' }}>{job ? job.name : t('novice_job_name')}</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span>Current Level:</span>
-                <span style={{ fontWeight: 'bold', color: '#fff' }}>LV.{player.level}</span>
-              </div>
-              <div style={{ marginTop: 6 }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4, fontSize: 11, fontFamily: 'var(--font-mono)' }}>
-                  <span>EXP PROGRESS</span>
-                  <span>{player.exp.toLocaleString()} / {expMax.toLocaleString()} Min ({expPct}%)</span>
-                </div>
-                <div style={styles.expBg}>
-                  <div style={{ ...styles.expFill, width: expPct + '%' }} />
+            <div 
+              className={`profile-id-card ${player.race ? 'panel-' + player.race : ''}`}
+              style={{ margin: '4px 0', zIndex: 1 }}
+            >
+              <div className="id-corner-circle tl" />
+              <div className="id-corner-circle tr" />
+              <div className="id-corner-circle bl" />
+              <div className="id-corner-circle br" />
+
+              <div className="id-tab top" />
+              <div className="id-tab bottom" />
+
+              <div className="id-edge-notch left-top" />
+              <div className="id-edge-notch left-bot" />
+              <div className="id-edge-notch right-top" />
+              <div className="id-edge-notch right-bot" />
+
+              <div className="profile-id-card-inner">
+                <div className="profile-id-body">
+                  {/* Avatar side */}
+                  <div className="profile-avatar-glow-wrap">
+                    <div className="profile-corner tl" />
+                    <div className="profile-corner tr" />
+                    <div className="profile-corner bl" />
+                    <div className="profile-corner br" />
+                    <div className="profile-avatar-inner">
+                      <div className="profile-avatar-grid" />
+                      <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', overflow: 'hidden', zIndex: 2,
+                        boxShadow: 'inset 0 0 8px 4px rgba(0,0,0,0.85)' }}>
+                        {(() => {
+                          const bionexSprite = player.race === 'bionex' ? getBionexJobSprite(player.job) : null
+                          if (bionexSprite) {
+                            return (
+                              <img
+                                src={bionexSprite}
+                                alt={player.job}
+                                style={{
+                                  height: 340,
+                                  width: 'auto',
+                                  position: 'absolute',
+                                  top: -4,
+                                  left: '50%',
+                                  transform: 'translateX(-50%)',
+                                }}
+                              />
+                            )
+                          }
+                          return <PilotSprite race={player.race} job={player.job} width={112} height={150} fill={true} />
+                        })()}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Details side */}
+                  <div className="profile-details-wrap">
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                      <div className="profile-details-username">{player.name.toUpperCase()}</div>
+                    </div>
+
+                    <div className="profile-data-rows">
+                      <div className="profile-data-row">
+                        <span className="profile-data-key">FACTION</span>
+                        <span style={{ fontSize: 11 }} className="profile-data-val">{race ? race.name.toUpperCase() : 'UNKNOWN'}</span>
+                      </div>
+                      <div className="profile-data-row">
+                        <span className="profile-data-key">CLASS</span>
+                        <span style={{ fontSize: 11 }} className="profile-data-val accent">{baseClass}</span>
+                      </div>
+                      <div className="profile-data-row">
+                        <span className="profile-data-key">JOB</span>
+                        <span style={{ fontSize: 11 }} className="profile-data-val">{job ? job.name.toUpperCase() : 'NOVICE'}</span>
+                      </div>
+                    </div>
+
+                    <div className="profile-active-status">
+                      <div className="profile-status-led" />
+                      <span>STATUS: <span className="status-active-txt">ACTIVE</span></span>
+                    </div>
+
+                    <div className="profile-data-divider" />
+
+                    <div className="profile-id-block-new">
+                      <span className="profile-id-lbl">{baseClass} ID</span>
+                      <span className="profile-id-num">PLT-{player.level || 1}09X</span>
+                    </div>
+
+                    {/* EXP bar */}
+                    <div className="profile-status-panel" style={{ marginTop: 6 }}>
+                      <div className="profile-status-bar">
+                        {Array.from({ length: 12 }).map((_, idx) => {
+                          const litThreshold = (idx + 1) * (100 / 12)
+                          const isLit = expPct >= litThreshold
+                          return (
+                            <div key={idx} className={`profile-status-segment ${isLit ? '' : 'dim'}`} />
+                          )
+                        })}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -397,43 +364,63 @@ export default function Unit() {
             )}
           </AccordionSection>
 
-          {/* PT List Section */}
-          <div className={`glass-panel cyber-panel ${raceClass}`} style={{ margin: '0 16px 10px', padding: '12px' }}>
-            <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: 'var(--neon-glow)', textShadow: '0 0 6px var(--neon-glow)', letterSpacing: 1.5, fontWeight: 800, marginBottom: 12, borderBottom: '1px solid rgba(0, 229, 255, 0.2)', paddingBottom: 6, display: 'flex', justifyContent: 'center' }}>
-              PLAYER TRAINING (PT)
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              {[
-                { key: 'melee', label: 'Close Range PT' },
-                { key: 'range', label: 'Long Range PT' },
-                { key: 'force', label: 'Force PT' },
-                { key: 'shield', label: 'Shield PT' },
-                { key: 'defense', label: 'Defense PT' },
-                { key: 'special', label: 'Race Special PT' },
-                { key: 'production', label: 'Production PT' }
-              ].map((item) => {
-                const currentVal = pt[item.key]?.val || 1
-                const currentPct = pt[item.key]?.pct || 0
-                const capVal = caps[item.key] || 0
-                if (capVal === 0) return null // Hide unavailable PTs for the race (e.g. Force/Special for Accretia)
-                
-                return (
-                  <div key={item.key} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '6px 8px', background: 'rgba(3, 8, 20, 0.6)', border: '1px solid rgba(0, 229, 255, 0.1)', borderRadius: 6 }}>
-                    <span style={{ fontFamily: 'var(--font-body)', fontSize: 13, fontWeight: 700, color: '#c0dff0' }}>
-                      {item.label}
-                    </span>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                      <div style={{ width: 64, textAlign: 'center', background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(0, 229, 255, 0.2)', borderRadius: 4, padding: '2px 4px', fontFamily: 'var(--font-mono)', fontSize: 11, color: '#00ff88', fontWeight: 800 }}>
-                        {currentPct.toFixed(2)}%
-                      </div>
-                      <span style={{ width: 68, textAlign: 'right', fontFamily: 'var(--font-mono)', fontSize: 12, fontWeight: 800, color: '#eab308' }}>
-                        {currentVal} / {capVal} Pt
-                      </span>
+          {/* Combat PT */}
+          <div style={styles.ptCategoryHeader}>Combat</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 4, margin: '0 16px 12px' }}>
+            {[
+              { key: 'melee', label: 'Close Range PT' },
+              { key: 'range', label: 'Long Range PT' },
+              { key: 'special', label: 'Race Special PT' },
+              { key: 'force', label: 'Force PT' },
+              { key: 'shield', label: 'Shield PT' },
+              { key: 'defense', label: 'Defense PT' }
+            ].map((item) => {
+              const currentVal = pt[item.key]?.val || 1
+              const currentPct = pt[item.key]?.pct || 0
+              const capVal = caps[item.key] || 0
+              if (capVal === 0) return null // Hide unavailable PTs for the race
+              
+              return (
+                <div key={item.key} style={styles.ptRow}>
+                  <span style={styles.ptLabel}>{item.label}</span>
+                  <div style={styles.ptValueContainer}>
+                    <div style={styles.ptPctBox}>
+                      {currentPct.toFixed(2)}%
                     </div>
+                    <span style={styles.ptPoints}>
+                      {currentVal} / {capVal} Pt
+                    </span>
                   </div>
-                )
-              })}
-            </div>
+                </div>
+              )
+            })}
+          </div>
+
+          {/* Crafting PT */}
+          <div style={styles.ptCategoryHeader}>Crafting</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 4, margin: '0 16px 12px' }}>
+            {[
+              { key: 'production', label: 'Production PT' }
+            ].map((item) => {
+              const currentVal = pt[item.key]?.val || 1
+              const currentPct = pt[item.key]?.pct || 0
+              const capVal = caps[item.key] || 0
+              if (capVal === 0) return null
+              
+              return (
+                <div key={item.key} style={styles.ptRow}>
+                  <span style={styles.ptLabel}>{item.label}</span>
+                  <div style={styles.ptValueContainer}>
+                    <div style={styles.ptPctBox}>
+                      {currentPct.toFixed(2)}%
+                    </div>
+                    <span style={styles.ptPoints}>
+                      {currentVal} / {capVal} Pt
+                    </span>
+                  </div>
+                </div>
+              )
+            })}
           </div>
 
           {/* ELEM RESIST INFO */}
@@ -711,6 +698,64 @@ const styles = {
     color: 'rgba(255, 255, 255, 0.3)',
     fontWeight: 800,
     cursor: 'not-allowed',
+  },
+  ptCategoryHeader: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: '10px 16px 8px',
+    padding: '4px 12px',
+    background: 'rgba(4, 9, 21, 0.9)',
+    border: '1px solid rgba(0, 229, 255, 0.25)',
+    borderRadius: '15px',
+    fontFamily: 'var(--font-title)',
+    fontSize: 12,
+    fontWeight: 800,
+    color: '#00e5ff',
+    letterSpacing: '1.5px',
+    textShadow: '0 0 5px rgba(0, 229, 255, 0.3)',
+    boxShadow: '0 0 8px rgba(0, 229, 255, 0.1)',
+  },
+  ptRow: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: '6px 10px',
+    background: 'rgba(3, 8, 20, 0.5)',
+    border: '1px solid rgba(255, 255, 255, 0.05)',
+    borderRadius: '6px',
+    marginBottom: '2px'
+  },
+  ptLabel: {
+    fontFamily: 'var(--font-body)',
+    fontSize: 13,
+    fontWeight: 700,
+    color: '#e0f4ff'
+  },
+  ptValueContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 12
+  },
+  ptPctBox: {
+    width: 64,
+    textAlign: 'center',
+    background: '#000000',
+    border: '1px solid rgba(0, 229, 255, 0.15)',
+    borderRadius: '4px',
+    padding: '2px 4px',
+    fontFamily: 'var(--font-mono)',
+    fontSize: 11,
+    color: '#00ff88',
+    fontWeight: 800
+  },
+  ptPoints: {
+    width: 68,
+    textAlign: 'right',
+    fontFamily: 'var(--font-mono)',
+    fontSize: 12,
+    fontWeight: 800,
+    color: '#eab308'
   }
 }
 

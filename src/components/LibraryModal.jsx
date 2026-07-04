@@ -72,6 +72,20 @@ export default function LibraryModal({ onClose }) {
                   <li>🌀 Dodge +5%</li>
                 </ul>
               </div>
+
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>🏋️ Player Training (PT) System</div>
+                <div style={styles.subTitle}>Daftar PT &amp; Fungsi</div>
+                <ul style={styles.list}>
+                  <li><strong>Close Range PT:</strong> Meningkatkan kemampuan menggunakan senjata melee.</li>
+                  <li><strong>Long Range PT:</strong> Meningkatkan kemampuan menggunakan senjata jarak jauh.</li>
+                  <li><strong>Force PT:</strong> Meningkatkan kemampuan menggunakan Force/sihir.</li>
+                  <li><strong>Shield PT:</strong> Meningkatkan kemampuan bertahan menggunakan shield.</li>
+                  <li><strong>Defense PT:</strong> Meningkatkan pertahanan dan HP.</li>
+                  <li><strong>Race Special PT:</strong> PT khusus tiap bangsa: Launcher (Accretia), MAU (Bellato), Animus (Cora).</li>
+                  <li><strong>Production PT:</strong> Meningkatkan kemampuan crafting (khusus Specialist).</li>
+                </ul>
+              </div>
             </div>
           )}
 
