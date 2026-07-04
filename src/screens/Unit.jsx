@@ -228,7 +228,7 @@ export default function Unit() {
                   {bionexSprite ? (
                     <img src={bionexSprite} alt={player.job} style={{ height: 298, width: 'auto', filter: `drop-shadow(0 18px 24px rgba(0,0,0,0.6)) drop-shadow(0 0 30px ${fp}33)` }} />
                   ) : (
-                    <PilotSprite race={player.race} job={player.job} width={120} height={298} fill={true} style={{ filter: `drop-shadow(0 18px 24px rgba(0,0,0,0.6)) drop-shadow(0 0 30px ${fp}33)` }} />
+                    <PilotSprite race={player.race} job={player.job} width={'auto'} height={298} fill={true} style={{ filter: `drop-shadow(0 18px 24px rgba(0,0,0,0.6)) drop-shadow(0 0 30px ${fp}33)` }} />
                   )}
                 </div>
               </div>
