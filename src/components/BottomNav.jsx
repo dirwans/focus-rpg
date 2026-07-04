@@ -1,6 +1,8 @@
 import { useGameStore } from '../store/gameStore'
 
-// Faction primary colors – plek karo screenshot
+const API_BASE = import.meta.env.VITE_API_URL || ''
+
+// Faction primary colors
 const FACTION_PRIMARY = {
   arctron:  '#ff5222',
   bionex:   '#3b82f6',
@@ -8,13 +10,16 @@ const FACTION_PRIMARY = {
 }
 const getFactionPrimary = (race) => FACTION_PRIMARY[race] || '#00e5ff'
 
-// 5 tabs from design: BASE | CHARACTER | BATTLE | GEAR | FORGE
+// Original tabs — TIDAK DIUBAH
 const NAV_ITEMS = [
-  { id: 'main',    label: 'BASE' },
-  { id: 'unit',    label: 'CHARACTER' },
-  { id: 'battle',  label: 'BATTLE' },
-  { id: 'forge',   label: 'GEAR' },
-  { id: 'ranks',   label: 'FORGE' },
+  { id: 'main',      label: 'BASE' },
+  { id: 'unit',      label: 'CHARACTER' },
+  { id: 'ranks',     label: 'RANKS' },
+  { id: 'battle',    label: 'BATTLE' },
+  { id: 'mine',      label: 'MINE' },
+  { id: 'forge',     label: 'FORGE' },
+  { id: 'ascension', label: 'ASC' },
+  { id: 'premium',   label: 'SHOP' },
 ]
 
 // Exact SVG icons from design handoff
@@ -52,7 +57,33 @@ function NavIcon({ id, active, color }) {
     case 'ranks':
       return (
         <svg style={s} width="21" height="21" viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <line x1="18" y1="20" x2="18" y2="10"/>
+          <line x1="12" y1="20" x2="12" y2="4"/>
+          <line x1="6" y1="20" x2="6" y2="14"/>
+        </svg>
+      )
+    case 'mine':
+      return (
+        <svg style={s} width="21" height="21" viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M14.5 2L22 9.5m-5.5-4L11 11M3 21l8-8m-5.5.5l5 5"/>
+        </svg>
+      )
+    case 'forge':
+      return (
+        <svg style={s} width="21" height="21" viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+        </svg>
+      )
+    case 'ascension':
+      return (
+        <svg style={s} width="21" height="21" viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </svg>
+      )
+    case 'premium':
+      return (
+        <svg style={s} width="21" height="21" viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M6 3h12l4 6-10 12L2 9z"/>
         </svg>
       )
     default:
