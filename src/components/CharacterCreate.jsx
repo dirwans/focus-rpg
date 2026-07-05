@@ -232,33 +232,7 @@ export default function CharacterCreate() {
         </>
       )}
 
-      {/* 2. Class Select & Character Creation Pilot Sprite */}
-      {(step === 2 || step === 3) && (
-        <>
-          <div style={{ 
-            position: 'absolute', 
-            left: '50%', 
-            top: '12%', 
-            height: '42%', 
-            maxHeight: '380px',
-            transform: 'translateX(-50%)', 
-            animation: 'heroFloat 6s ease-in-out infinite', 
-            zIndex: 2,
-            pointerEvents: 'none'
-          }}>
-            <PilotSprite 
-              race={raceId} 
-              job={jobId} 
-              gender={gender}
-              size={380} 
-              height="100%"
-              width="auto"
-            />
-          </div>
-          {/* Shadow vignette overlay */}
-          <div style={{ position: 'absolute', inset: 0, background: `radial-gradient(circle at 50% 28%, transparent 34%, rgba(6,5,6,0.85) 100%)`, pointerEvents: 'none', zIndex: 3 }} />
-        </>
-      )}
+
 
       {/* 2. Left Rail Progress / Faction Tabs */}
       <div style={{ 
@@ -404,10 +378,7 @@ export default function CharacterCreate() {
         {step === 2 && (
           <>
             <div style={{ fontFamily: "'Share Tech Mono', monospace", fontStyle: 'italic', fontSize: 13, letterSpacing: '2px', color: '#ffffff', textTransform: 'uppercase' }}>
-              {finalTheme.name} · Class
-            </div>
-            <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 26, fontWeight: 900, letterSpacing: '1px', color: '#fff', textShadow: `0 0 18px ${finalTheme.primary}80`, transform: 'skewX(-8deg)', marginTop: 2 }}>
-              CHOOSE CLASS
+              {finalTheme.name} · CLASS SELECTION
             </div>
           </>
         )}
@@ -415,10 +386,7 @@ export default function CharacterCreate() {
         {step === 3 && (
           <>
             <div style={{ fontFamily: "'Share Tech Mono', monospace", fontStyle: 'italic', fontSize: 13, letterSpacing: '2px', color: '#ffffff', textTransform: 'uppercase' }}>
-              Step 3 of 3 · Pilot
-            </div>
-            <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 32, fontWeight: 900, letterSpacing: '1px', color: '#fff', textShadow: `0 0 18px ${finalTheme.primary}80`, transform: 'skewX(-8deg)', marginTop: 2 }}>
-              PILOT SETUP
+              Step 3 of 3 · PILOT REGISTRATION
             </div>
           </>
         )}
@@ -433,15 +401,46 @@ export default function CharacterCreate() {
           zIndex: 6, 
           display: 'flex', 
           flexDirection: 'column', 
-          gap: 10, 
-          padding: '16px 18px 120px 82px',
-          height: 'calc(100% - 150px)',
-          overflowY: 'auto'
-        }} className="no-scrollbar">
-          
+          gap: 12, 
+          padding: '16px 18px 110px 82px',
+          height: 'calc(100% - 130px)',
+          overflow: 'hidden'
+        }}>
+          {/* Top Preview Box */}
+          <div style={{ 
+            position: 'relative', 
+            width: '100%', 
+            height: '220px', 
+            background: 'rgba(8,22,36,0.3)',
+            border: `1.5px solid ${finalTheme.primary}4D`,
+            boxShadow: `inset 0 0 20px ${finalTheme.primary}1A`,
+            clipPath: 'polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0
+          }}>
+            <div style={{ animation: 'heroFloat 6s ease-in-out infinite' }}>
+              <PilotSprite 
+                race={raceId} 
+                job={jobId} 
+                gender={gender}
+                size={180} 
+                height="170px"
+                width="auto"
+              />
+            </div>
+            <span style={{ position: 'absolute', bottom: 10, left: 14, fontFamily: "'Share Tech Mono', monospace", fontSize: 13, color: finalTheme.light, opacity: 0.8, letterSpacing: '1px' }}>
+              PREVIEW
+            </span>
+            <span style={{ position: 'absolute', bottom: 10, right: 14, fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 900, color: '#ffffff', letterSpacing: '1px' }}>
+              {getClassBaseName(jobId)} ({activeJobs.find(j => j.id === jobId)?.name.toUpperCase()})
+            </span>
+          </div>
+
           {/* Gender Selector (Celestra & Bionex Only) */}
           {(raceId === 'celestra' || raceId === 'bionex') && (
-            <div style={{ display: 'flex', gap: 8, marginBottom: 4 }}>
+            <div style={{ display: 'flex', gap: 8, flexShrink: 0 }}>
               {['male', 'female'].map((g) => {
                 const isSel = gender === g
                 return (
@@ -472,65 +471,119 @@ export default function CharacterCreate() {
             </div>
           )}
 
-          {activeJobs.map((jb) => {
-            const isSelected = jobId === jb.id
-            const monogram = getClassMonogram(jb.id)
-            const role = getClassRoleTag(jb.id)
-            const customDesc = CLASS_DESCRIPTIONS[jb.id] || jb.desc
-            
-            return (
-              <div 
-                key={jb.id}
-                onClick={() => setJobId(jb.id)}
-                style={{ 
-                  display: 'flex', 
-                  gap: 12, 
-                  alignItems: 'center', 
-                  padding: 12, 
-                  background: isSelected ? `${finalTheme.primary}1A` : 'rgba(8,22,36,0.4)', 
-                  border: isSelected ? `1.5px solid ${finalTheme.primary}` : `1px solid ${finalTheme.primary}2E`, 
-                  boxShadow: isSelected ? `0 0 20px ${finalTheme.primary}40` : 'none', 
-                  clipPath: 'polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease'
-                }}
-              >
-                {/* Hexagon Monogram */}
-                <div style={{ 
-                  width: 40, 
-                  height: 40, 
-                  flexShrink: 0, 
-                  background: isSelected ? `linear-gradient(135deg, ${finalTheme.light}, ${finalTheme.primary})` : 'rgba(255,255,255,0.06)', 
-                  border: isSelected ? 'none' : `1px solid ${finalTheme.primary}4D`,
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'center', 
-                  boxShadow: isSelected ? `0 0 12px ${finalTheme.primary}99` : 'none', 
-                  clipPath: 'polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)'
-                }}>
-                  <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: monogram.length > 1 ? 13 : 15, fontWeight: 900, color: isSelected ? finalTheme.onSecondary : '#ffffff' }}>
-                    {monogram}
-                  </span>
-                </div>
-                
-                {/* Details */}
-                <div style={{ flex: 1 }}>
-                  <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 14, fontWeight: 900, color: '#fff' }}>
-                    {getClassBaseName(jb.id)}{' '}
-                    <span style={{ fontSize: 13, fontStyle: 'italic', fontWeight: 700, color: isSelected ? finalTheme.light : '#a9c8ff', marginLeft: 4 }}>
-                      {role}
-                    </span>
-                    <span style={{ fontSize: 13, color: isSelected ? '#ffffff' : '#a9c8ff', fontWeight: 500, marginLeft: 6, opacity: 0.9 }}>
-                      ({jb.name})
+          <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 18, fontWeight: 900, color: '#fff', letterSpacing: '1px', textShadow: `0 0 10px ${finalTheme.primary}4D`, marginTop: 4, flexShrink: 0 }}>
+            CHOOSE CLASS
+          </div>
+
+          {/* Scrollable Class Cards wrapper */}
+          <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 10 }} className="no-scrollbar">
+            {activeJobs.map((jb) => {
+              const isSelected = jobId === jb.id
+              const monogram = getClassMonogram(jb.id)
+              const role = getClassRoleTag(jb.id)
+              const customDesc = CLASS_DESCRIPTIONS[jb.id] || jb.desc
+              
+              return (
+                <div 
+                  key={jb.id}
+                  onClick={() => setJobId(jb.id)}
+                  style={{ 
+                    display: 'flex', 
+                    gap: 12, 
+                    alignItems: 'center', 
+                    padding: 12, 
+                    background: isSelected ? `${finalTheme.primary}1A` : 'rgba(8,22,36,0.4)', 
+                    border: isSelected ? `1.5px solid ${finalTheme.primary}` : `1px solid ${finalTheme.primary}2E`, 
+                    boxShadow: isSelected ? `0 0 20px ${finalTheme.primary}40` : 'none', 
+                    clipPath: 'polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease'
+                  }}
+                >
+                  {/* Hexagon Monogram */}
+                  <div style={{ 
+                    width: 40, 
+                    height: 40, 
+                    flexShrink: 0, 
+                    background: isSelected ? `linear-gradient(135deg, ${finalTheme.light}, ${finalTheme.primary})` : 'rgba(255,255,255,0.06)', 
+                    border: isSelected ? 'none' : `1px solid ${finalTheme.primary}4D`,
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'center', 
+                    boxShadow: isSelected ? `0 0 12px ${finalTheme.primary}99` : 'none', 
+                    clipPath: 'polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)'
+                  }}>
+                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: monogram.length > 1 ? 13 : 15, fontWeight: 900, color: isSelected ? finalTheme.onSecondary : '#ffffff' }}>
+                      {monogram}
                     </span>
                   </div>
-                  <div style={{ fontFamily: "'Saira', sans-serif", fontSize: 13, color: isSelected ? '#ffffff' : '#cdd5e0', marginTop: 2, lineHeight: 1.35 }}>
-                    {customDesc}
+                  
+                  {/* Details */}
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 14, fontWeight: 900, color: '#fff' }}>
+                      {getClassBaseName(jb.id)}{' '}
+                      <span style={{ fontSize: 13, fontStyle: 'italic', fontWeight: 700, color: isSelected ? finalTheme.light : '#a9c8ff', marginLeft: 4 }}>
+                        {role}
+                      </span>
+                      <span style={{ fontSize: 13, color: isSelected ? '#ffffff' : '#a9c8ff', fontWeight: 500, marginLeft: 6, opacity: 0.9 }}>
+                        ({jb.name})
+                      </span>
+                    </div>
+                    <div style={{ fontFamily: "'Saira', sans-serif", fontSize: 13, color: isSelected ? '#ffffff' : '#cdd5e0', marginTop: 2, lineHeight: 1.35 }}>
+                      {customDesc}
+                    </div>
                   </div>
                 </div>
-              </div>
-            )
-          })}
+              )
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* ───────── STEP 3: PREVIEW CONTAINER ───────── */}
+      {step === 3 && (
+        <div style={{ 
+          position: 'relative', 
+          zIndex: 6, 
+          display: 'flex', 
+          flexDirection: 'column', 
+          gap: 12, 
+          padding: '16px 18px 110px 82px',
+          height: 'calc(100% - 130px)',
+          overflow: 'hidden'
+        }}>
+          {/* Top Preview Box */}
+          <div style={{ 
+            position: 'relative', 
+            width: '100%', 
+            height: '240px', 
+            background: 'rgba(8,22,36,0.3)',
+            border: `1.5px solid ${finalTheme.primary}4D`,
+            boxShadow: `inset 0 0 20px ${finalTheme.primary}1A`,
+            clipPath: 'polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0,
+            marginTop: 10
+          }}>
+            <div style={{ animation: 'heroFloat 6s ease-in-out infinite' }}>
+              <PilotSprite 
+                race={raceId} 
+                job={jobId} 
+                gender={gender}
+                size={200} 
+                height="190px"
+                width="auto"
+              />
+            </div>
+            <span style={{ position: 'absolute', bottom: 10, left: 14, fontFamily: "'Share Tech Mono', monospace", fontSize: 13, color: finalTheme.light, opacity: 0.8, letterSpacing: '1px' }}>
+              PREVIEW
+            </span>
+            <span style={{ position: 'absolute', bottom: 10, right: 14, fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 900, color: '#ffffff', letterSpacing: '1px' }}>
+              {getClassBaseName(jobId)} ({activeJobs.find(j => j.id === jobId)?.name.toUpperCase()})
+            </span>
+          </div>
         </div>
       )}
 
