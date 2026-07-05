@@ -18,7 +18,7 @@ export default function Forge() {
   const craftLegendary = useGameStore((s) => s.craftLegendary)
   const buySetItem = useGameStore((s) => s.buySetItem)
 
-  const [activeTab, setActiveTab] = useState('upgrade') // 'upgrade' | 'refine' | 'enhance'
+  const [activeTab, setActiveTab] = useState('refine') // 'refine' | 'enhance'
   const [selectedSacrificeUid, setSelectedSacrificeUid] = useState('')
   const [isRefining, setIsRefining] = useState(false)
   const [sparks, setSparks] = useState([])
@@ -240,7 +240,6 @@ export default function Forge() {
 
       {/* Sub-tabs Row */}
       <div style={{ position: 'relative', zIndex: 4, display: 'flex', gap: 3, padding: '2px 12px 8px' }}>
-        <div onClick={() => setActiveTab('upgrade')} style={tabStyle('upgrade')}>UPGRADE</div>
         <div onClick={() => setActiveTab('refine')} style={tabStyle('refine')}>SMITH</div>
         <div onClick={() => setActiveTab('enhance')} style={tabStyle('enhance')}>ENHANCE</div>
         <div onClick={() => setActiveTab('legendary')} style={tabStyle('legendary')}>LEGEND</div>
@@ -249,72 +248,6 @@ export default function Forge() {
 
       {/* Scrollable Main Content */}
       <div className="fg-scroll" style={{ position: 'relative', zIndex: 3, flex: 1, overflowY: 'auto', padding: '2px 0 6px' }}>
-
-
-        {/* ───────── UPGRADE STATS TAB ───────── */}
-        {activeTab === 'upgrade' && (
-          <div style={{ padding: '2px 16px' }}>
-            <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '12px', fontWeight: '700', letterSpacing: '1.5px', color: theme.light, margin: '2px 0 10px' }}>CORE STAT UPGRADES</div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              {Object.entries(upgradesConfig).map(([key, cfg]) => {
-                const level = player.upgrades?.[key] || 0
-                const cost = getUpgradeCost(key)
-                const canAfford = player.resources.anium >= cost
-                const currentVal = stats[cfg.statKey]
-
-                const statCardBorder = key === 'atk'
-                  ? `1.5px solid ${theme.primary}52`
-                  : key === 'def'
-                  ? '1.5px solid rgba(199, 204, 214, 0.32)'
-                  : '1.5px solid rgba(255, 110, 60, 0.34)'
-
-                const statTitleColor = key === 'atk'
-                  ? theme.light
-                  : key === 'def'
-                  ? '#eef3fb'
-                  : '#ff6a4d'
-
-                return (
-                  <div key={key} style={{ padding: '12px 14px', borderRadius: '12px', background: 'rgba(6, 9, 14, 0.72)', border: statCardBorder }}>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
-                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '13px', fontWeight: '800', color: statTitleColor, letterSpacing: '1px' }}>
-                        {cfg.emoji} {cfg.label.toUpperCase()}
-                      </span>
-                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '11px', color: '#8a94a3' }}>
-                        LV {level}
-                      </span>
-                    </div>
-                    <div style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: '13px', color: '#cdd5e0', marginBottom: '10px' }}>
-                      Current: <b style={{ color: '#fff' }}>{currentVal?.toLocaleString()} {cfg.statKey.toUpperCase()}</b> · +{cfg.perLevel} per level
-                    </div>
-                    {player.race ? (
-                      canAfford ? (
-                        <button
-                          onClick={() => upgrade(key)}
-                          style={{ width: '100%', border: 'none', padding: '9px 0', textAlign: 'center', borderRadius: '9px', background: `linear-gradient(135deg, ${theme.primary}, #b32c0d)`, boxShadow: `0 0 12px ${theme.primary}66`, fontFamily: "'Orbitron', sans-serif", fontSize: '12px', fontWeight: '800', color: '#fff', letterSpacing: '0.5px', cursor: 'pointer' }}
-                        >
-                          UPGRADE · {cost.toLocaleString()} ⬡
-                        </button>
-                      ) : (
-                        <div
-                          style={{ width: '100%', padding: '9px 0', textAlign: 'center', borderRadius: '9px', background: 'rgba(30, 20, 20, 0.8)', border: '1px solid rgba(255, 95, 122, 0.3)', fontFamily: "'Orbitron', sans-serif", fontSize: '12px', fontWeight: '800', color: 'rgba(255, 110, 60, 0.6)', letterSpacing: '0.5px' }}
-                        >
-                          NEED {(cost - player.resources.anium).toLocaleString()} MORE ⬡
-                        </div>
-                      )
-                    ) : (
-                      <div
-                        style={{ width: '100%', padding: '9px 0', textAlign: 'center', borderRadius: '9px', background: 'rgba(30, 20, 20, 0.8)', border: '1px solid rgba(255, 95, 122, 0.3)', fontFamily: "'Orbitron', sans-serif", fontSize: '12px', fontWeight: '800', color: 'rgba(255, 110, 60, 0.6)', letterSpacing: '0.5px' }}
-                      >
-                        SELECT RACE FIRST
-                      </div>
-                    )}
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-        )}
 
 
         {/* ───────── WEAPON SMITH TAB ───────── */}
