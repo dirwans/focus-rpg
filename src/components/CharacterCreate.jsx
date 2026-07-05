@@ -573,7 +573,7 @@ export default function CharacterCreate() {
             <div style={{ 
               position: 'absolute', 
               bottom: 0, 
-              left: '50%', 
+              left: '40%', 
               transform: 'translateX(-50%)', 
               animation: 'heroFloat 6s ease-in-out infinite', 
               zIndex: 2 
@@ -582,48 +582,23 @@ export default function CharacterCreate() {
                 race={raceId}
                 job={jobId}
                 gender={gender}
-                height="300px"
+                height="270px"
                 width="auto"
               />
             </div>
             {/* Soft ground shadow */}
-            <div style={{ position: 'absolute', bottom: -10, left: '50%', transform: 'translateX(-50%)', width: 140, height: 20, background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.8) 0%, transparent 70%)', zIndex: 1 }} />
+            <div style={{ position: 'absolute', bottom: -10, left: '40%', transform: 'translateX(-50%)', width: 140, height: 20, background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.8) 0%, transparent 70%)', zIndex: 1 }} />
           </div>
 
           {/* Right side: Registration Details */}
           <div style={{ flex: 1.2, display: 'flex', flexDirection: 'column', gap: 14, overflowY: 'auto' }} className="no-scrollbar">
             
-            {/* Gender Selector (Celestra & Bionex Only) */}
+            {/* Gender Static Text (Celestra & Bionex Only) */}
             {(raceId === 'celestra' || raceId === 'bionex') && (
               <div>
-                <div style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 13, color: '#eef3fb', marginBottom: 4 }}>GENDER :</div>
-                <div style={{ display: 'flex', gap: 6 }}>
-                  {['male', 'female'].map((g) => {
-                    const isSel = gender === g
-                    return (
-                      <div
-                        key={g}
-                        onClick={() => setGender(g)}
-                        style={{
-                          flex: 1,
-                          padding: '6px 0',
-                          textAlign: 'center',
-                          background: isSel ? `${finalTheme.primary}22` : 'rgba(8,22,36,0.4)',
-                          border: isSel ? `1px solid ${finalTheme.primary}` : `1px solid ${finalTheme.primary}22`,
-                          borderRadius: 4,
-                          color: isSel ? '#fff' : '#a9c8ff',
-                          fontFamily: "'Orbitron', sans-serif",
-                          fontSize: 13,
-                          fontWeight: 800,
-                          cursor: 'pointer',
-                          transition: 'all 0.2s',
-                          textTransform: 'uppercase'
-                        }}
-                      >
-                        {g === 'male' ? 'MALE' : 'FEMALE'}
-                      </div>
-                    )
-                  })}
+                <div style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 13, color: '#eef3fb', marginBottom: 2 }}>GENDER :</div>
+                <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, fontWeight: 900, color: finalTheme.light, letterSpacing: '1px' }}>
+                  {gender === 'male' ? 'MALE' : 'FEMALE'}
                 </div>
               </div>
             )}
