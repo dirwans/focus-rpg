@@ -110,7 +110,8 @@ function WorldMapModal({ onClose }) {
   ]
 
   const selectedSector = enemies.sectors[selectedNode]
-  const isLocked = player.level < mapCoordinates[selectedNode].minLevel
+  const isUnderleveled = player.level < mapCoordinates[selectedNode].minLevel
+  const isLocked = false // player.level < mapCoordinates[selectedNode].minLevel
   const isActive = player.selectedMapIdx === selectedNode || (player.selectedMapIdx === null && selectedNode === defaultIdx)
 
   return (
@@ -186,7 +187,7 @@ function WorldMapModal({ onClose }) {
 
         {/* Interactive Hotspot Map Nodes */}
         {mapCoordinates.map((coord, idx) => {
-          const mapLocked = player.level < coord.minLevel
+          const mapLocked = false // player.level < coord.minLevel
           const mapActive = player.selectedMapIdx === idx || (player.selectedMapIdx === null && idx === defaultIdx)
           const isSelected = selectedNode === idx
           
@@ -238,7 +239,7 @@ function WorldMapModal({ onClose }) {
 
         {/* Small floating HUD labels next to nodes */}
         {mapCoordinates.map((coord, idx) => {
-          const mapLocked = player.level < coord.minLevel
+          const mapLocked = false // player.level < coord.minLevel
           const isSelected = selectedNode === idx
           return (
             <div
@@ -303,14 +304,14 @@ function WorldMapModal({ onClose }) {
         </div>
 
         {/* Row 2: Level Requirements */}
-        {isLocked && (
+        {isUnderleveled && (
           <div style={{
-            background: 'rgba(255, 60, 60, 0.1)', border: '1px solid rgba(255, 60, 60, 0.3)',
-            borderRadius: '8px', padding: '8px 12px', color: '#ff6666', fontSize: 12,
+            background: 'rgba(255, 160, 60, 0.1)', border: '1px solid rgba(255, 160, 60, 0.3)',
+            borderRadius: '8px', padding: '8px 12px', color: '#ffcc66', fontSize: 12,
             fontFamily: 'monospace', display: 'flex', alignItems: 'center', gap: 8
           }}>
             <span>⚠️</span>
-            <span>Pilot Level is too low! Requires Level {mapCoordinates[selectedNode].minLevel} (Current: Level {player.level}).</span>
+            <span>Recommended Level is {mapCoordinates[selectedNode].minLevel} (Current: Level {player.level}). You can enter, but enemies are dangerous!</span>
           </div>
         )}
 
