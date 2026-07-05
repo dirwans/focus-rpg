@@ -236,10 +236,11 @@ export default function CharacterCreate() {
       {(step === 2 || step === 3) && (
         <div style={{ 
           position: 'absolute', 
-          left: '58%', 
+          left: '50%', 
           top: '12%', 
           height: '42%', 
           maxHeight: '380px',
+          transform: 'translateX(-50%)', 
           zIndex: 2,
           pointerEvents: 'none'
         }}>
