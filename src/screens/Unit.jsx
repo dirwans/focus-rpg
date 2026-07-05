@@ -77,6 +77,8 @@ export default function Unit() {
     document.head.appendChild(s)
   }
   const [tab, setTab] = useState('stats')
+  const [activeTooltip, setActiveTooltip] = useState(null)
+  const unequipItem = useGameStore((s) => s.unequipItem)
   const player = useGameStore((s) => s.player)
   const archons = useGameStore((s) => s.archons)
   const getStats = useGameStore((s) => s.getStats)
@@ -128,7 +130,7 @@ export default function Unit() {
   const raceClass = player.race ? 'panel-' + player.race : ''
 
   return (
-    <div className="no-scrollbar" style={styles.screen}>
+    <div className="no-scrollbar" style={styles.screen} onClick={() => setActiveTooltip(null)}>
       {/* Header */}
       <div style={styles.header}>
         <button onClick={() => useGameStore.getState().setScreen('main')} style={{background:'transparent', border:'none', color:'#00e5ff', fontSize: 20, cursor:'pointer', padding: '0 8px 0 0', display:'flex', alignItems:'center'}}>❮</button>
@@ -141,38 +143,6 @@ export default function Unit() {
       {(() => {
         const fp = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
         const fa = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
-
-                const renderEquipSlot = (slotKey, label, svgIcon, styleType = 'full') => {
-                  const item = player.equipment && player.equipment[slotKey];
-                  const isEmpty = !item;
-                  
-                  if (isEmpty) {
-                    return (
-                      <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: 'rgba(3,8,20,0.55)', border: `1.5px dashed ${fp}4d`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
-                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: 'rgba(255,183,119,0.35)' }}>+</span>
-                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>{label}</span>
-                      </div>
-                    );
-                  }
-                  
-                  return (
-                    <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2, position: 'relative' }}>
-                      {item.image ? (
-                        <img referrerPolicy="no-referrer" src={item.image} style={{ width: 22, height: 22, objectFit: 'contain' }} alt={item.name} />
-                      ) : item.emoji ? (
-                        <span style={{ fontSize: 18, marginTop: -2 }}>{item.emoji}</span>
-                      ) : (
-                        svgIcon
-                      )}
-                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: fa }}>{label}</span>
-                      {item.enhancement_level > 0 && (
-                         <span style={{ position: 'absolute', top: 2, right: 3, fontSize: 8, fontWeight: 900, color: '#00ffaa', fontFamily: 'var(--font-mono)' }}>
-                           +{item.enhancement_level}
-                         </span>
-                      )}
-                    </div>
-                  );
-                };
         return (
           <div style={{ position: 'relative', zIndex: 4, display: 'flex', gap: 8, padding: '0 16px 8px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'rgba(8,22,36,0.5)', backdropFilter: 'blur(8px)', border: `1px solid ${fp}59`, borderRadius: 20, padding: '4px 12px 4px 9px' }}>
@@ -220,38 +190,6 @@ export default function Unit() {
           {(() => {
             const fp = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
             const fa = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
-
-                const renderEquipSlot = (slotKey, label, svgIcon, styleType = 'full') => {
-                  const item = player.equipment && player.equipment[slotKey];
-                  const isEmpty = !item;
-                  
-                  if (isEmpty) {
-                    return (
-                      <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: 'rgba(3,8,20,0.55)', border: `1.5px dashed ${fp}4d`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
-                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: 'rgba(255,183,119,0.35)' }}>+</span>
-                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>{label}</span>
-                      </div>
-                    );
-                  }
-                  
-                  return (
-                    <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2, position: 'relative' }}>
-                      {item.image ? (
-                        <img referrerPolicy="no-referrer" src={item.image} style={{ width: 22, height: 22, objectFit: 'contain' }} alt={item.name} />
-                      ) : item.emoji ? (
-                        <span style={{ fontSize: 18, marginTop: -2 }}>{item.emoji}</span>
-                      ) : (
-                        svgIcon
-                      )}
-                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: fa }}>{label}</span>
-                      {item.enhancement_level > 0 && (
-                         <span style={{ position: 'absolute', top: 2, right: 3, fontSize: 8, fontWeight: 900, color: '#00ffaa', fontFamily: 'var(--font-mono)' }}>
-                           +{item.enhancement_level}
-                         </span>
-                      )}
-                    </div>
-                  );
-                };
             const label = player.race ? player.race.toUpperCase() : 'UNKNOWN'
             const bionexSprite = player.race === 'bionex' ? getBionexJobSprite(player.job) : null
             return (
@@ -304,37 +242,6 @@ export default function Unit() {
             const fp = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
             const fa = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
 
-                const renderEquipSlot = (slotKey, label, svgIcon, styleType = 'full') => {
-                  const item = player.equipment && player.equipment[slotKey];
-                  const isEmpty = !item;
-                  
-                  if (isEmpty) {
-                    return (
-                      <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: 'rgba(3,8,20,0.55)', border: `1.5px dashed ${fp}4d`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
-                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: 'rgba(255,183,119,0.35)' }}>+</span>
-                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>{label}</span>
-                      </div>
-                    );
-                  }
-                  
-                  return (
-                    <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2, position: 'relative' }}>
-                      {item.image ? (
-                        <img referrerPolicy="no-referrer" src={item.image} style={{ width: 22, height: 22, objectFit: 'contain' }} alt={item.name} />
-                      ) : item.emoji ? (
-                        <span style={{ fontSize: 18, marginTop: -2 }}>{item.emoji}</span>
-                      ) : (
-                        svgIcon
-                      )}
-                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: fa }}>{label}</span>
-                      {item.enhancement_level > 0 && (
-                         <span style={{ position: 'absolute', top: 2, right: 3, fontSize: 8, fontWeight: 900, color: '#00ffaa', fontFamily: 'var(--font-mono)' }}>
-                           +{item.enhancement_level}
-                         </span>
-                      )}
-                    </div>
-                  );
-                };
             const EXP_SEGS = 12
             const filledSegs = Math.min(EXP_SEGS, Math.round((player.exp / expMax) * EXP_SEGS))
             const idPrefix = baseClass.slice(0,3).toUpperCase()
@@ -756,37 +663,6 @@ export default function Unit() {
             const fp = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
             const fa = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
 
-                const renderEquipSlot = (slotKey, label, svgIcon, styleType = 'full') => {
-                  const item = player.equipment && player.equipment[slotKey];
-                  const isEmpty = !item;
-                  
-                  if (isEmpty) {
-                    return (
-                      <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: 'rgba(3,8,20,0.55)', border: `1.5px dashed ${fp}4d`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
-                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: 'rgba(255,183,119,0.35)' }}>+</span>
-                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>{label}</span>
-                      </div>
-                    );
-                  }
-                  
-                  return (
-                    <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2, position: 'relative' }}>
-                      {item.image ? (
-                        <img referrerPolicy="no-referrer" src={item.image} style={{ width: 22, height: 22, objectFit: 'contain' }} alt={item.name} />
-                      ) : item.emoji ? (
-                        <span style={{ fontSize: 18, marginTop: -2 }}>{item.emoji}</span>
-                      ) : (
-                        svgIcon
-                      )}
-                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: fa }}>{label}</span>
-                      {item.enhancement_level > 0 && (
-                         <span style={{ position: 'absolute', top: 2, right: 3, fontSize: 8, fontWeight: 900, color: '#00ffaa', fontFamily: 'var(--font-mono)' }}>
-                           +{item.enhancement_level}
-                         </span>
-                      )}
-                    </div>
-                  );
-                };
             return (
 <>
 
@@ -819,63 +695,258 @@ export default function Unit() {
             )
           })()}
                   {/* ============ EQUIPMENT ============ */}
+
+          {/* ============ EQUIPMENT ============ */}
           {(() => {
             const fp = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
             const fa = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
+            
+            // Silhouettes
+            const amuletSvg = <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M6 3c0 6 3 10 6 13 3-3 6-7 6-13" /><polygon points="12,15 9,19 12,22 15,19" fill="currentColor" fillOpacity="0.25" /></svg>;
+            const helmetSvg = <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a10 10 0 0 0-10 10c0 5.5 6 8 10 10 4-2 10-4.5 10-10A10 10 0 0 0 12 2z" /><path d="M12 6a4 4 0 0 0-4 4h8a4 4 0 0 0-4-4z" /><path d="M8 14h8" /></svg>;
+            const weaponSvg = <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 17.5L3 6M17.5 14.5L6 3" /><path d="M13 3l8 8M19 19v-4M19 19h-4" /><path d="M5 5v4M5 5h4" /></svg>;
+            const armorSvg = <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5L12 2z" /><path d="M12 6v10M8 9h8" /></svg>;
+            const shieldSvg = <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>;
+            const glovesSvg = <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 10V8a3 3 0 0 0-6 0v2" /><path d="M14 10V6a2 2 0 0 0-4 0v4" /><path d="M10 10V5a2 2 0 0 0-4 0v5" /><path d="M6 10v7a6 6 0 0 0 12 0v-7" /></svg>;
+            const pantsSvg = <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M6 2h12v7l-2 1v12h-3v-7h-2v7H8V10L6 9V2z" /></svg>;
+            const mantleSvg = <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 3h16l-2 8 2 10-8-3-8 3 2-10L4 3z" /></svg>;
+            const ringSvg = <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="14" r="6" /><path d="M9 8l3-5 3 5" /></svg>;
+            const bootsSvg = <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7 4h3v10l3 2v4H5v-4l2-2V4z" /><path d="M14 4h3v10l3 2v4h-8v-4l2-2V4z" /></svg>;
+            const aresSvg = <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9" strokeDasharray="3 3" /><circle cx="12" cy="12" r="5" /><polygon points="12,4 14,9 19,10 15,13 16,19 12,16 8,19 9,13 5,10 10,9" fill="currentColor" fillOpacity="0.2" /></svg>;
 
-                const renderEquipSlot = (slotKey, label, svgIcon, styleType = 'full') => {
-                  const item = player.equipment && player.equipment[slotKey];
-                  const isEmpty = !item;
-                  
-                  if (isEmpty) {
-                    return (
-                      <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: 'rgba(3,8,20,0.55)', border: `1.5px dashed ${fp}4d`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
-                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: 'rgba(255,183,119,0.35)' }}>+</span>
-                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>{label}</span>
-                      </div>
-                    );
-                  }
-                  
-                  return (
-                    <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2, position: 'relative' }}>
-                      {item.image ? (
-                        <img referrerPolicy="no-referrer" src={item.image} style={{ width: 22, height: 22, objectFit: 'contain' }} alt={item.name} />
-                      ) : item.emoji ? (
-                        <span style={{ fontSize: 18, marginTop: -2 }}>{item.emoji}</span>
-                      ) : (
-                        svgIcon
-                      )}
-                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: fa }}>{label}</span>
-                      {item.enhancement_level > 0 && (
-                         <span style={{ position: 'absolute', top: 2, right: 3, fontSize: 8, fontWeight: 900, color: '#00ffaa', fontFamily: 'var(--font-mono)' }}>
-                           +{item.enhancement_level}
-                         </span>
-                      )}
+            const renderEquipSlot = (slotKey, label, svgIcon, isCircle = false, width = 48, height = 48) => {
+              const item = player.equipment && player.equipment[slotKey];
+              const isEmpty = !item;
+              const showTooltip = activeTooltip === slotKey;
+
+              const slotStyle = {
+                width: width,
+                height: height,
+                borderRadius: isCircle ? '50%' : 7,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                position: 'relative',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+              };
+
+              if (isEmpty) {
+                return (
+                  <div
+                    style={{
+                      ...slotStyle,
+                      background: 'rgba(3,8,20,0.55)',
+                      border: `1.5px dashed ${fp}4d`,
+                      color: fa + '4d',
+                    }}
+                  >
+                    <div style={{ opacity: 0.18, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      {svgIcon}
                     </div>
-                  );
-                };
-            return (
-<>
+                    <span style={{
+                      fontFamily: "'Orbitron', sans-serif",
+                      fontSize: 8,
+                      fontWeight: 700,
+                      color: 'rgba(138,148,163,0.5)',
+                      position: 'absolute',
+                      bottom: isCircle ? 6 : 3,
+                      textTransform: 'uppercase',
+                      letterSpacing: 0.5,
+                    }}>{label}</span>
+                  </div>
+                );
+              }
 
+              return (
+                <div
+                  style={{
+                    ...slotStyle,
+                    background: `linear-gradient(135deg, ${fp}33, rgba(0,0,0,0.6))`,
+                    border: `1.5px solid ${fp}80`,
+                    boxShadow: `0 0 10px ${fp}40`,
+                    color: fa,
+                  }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveTooltip(activeTooltip === slotKey ? null : slotKey);
+                  }}
+                  onMouseEnter={() => {
+                    if (window.matchMedia('(hover: hover)').matches) {
+                      setActiveTooltip(slotKey);
+                    }
+                  }}
+                  onMouseLeave={() => {
+                    if (window.matchMedia('(hover: hover)').matches) {
+                      setActiveTooltip(null);
+                    }
+                  }}
+                >
+                  {item.image ? (
+                    <img referrerPolicy="no-referrer" src={item.image} style={{ width: Math.min(width, height) * 0.5, height: Math.min(width, height) * 0.5, objectFit: 'contain' }} alt={item.name} />
+                  ) : item.emoji ? (
+                    <span style={{ fontSize: Math.min(width, height) * 0.42, marginTop: -2 }}>{item.emoji}</span>
+                  ) : (
+                    svgIcon
+                  )}
+                  <span style={{
+                    fontFamily: "'Orbitron', sans-serif",
+                    fontSize: 8,
+                    fontWeight: 800,
+                    color: fa,
+                    position: 'absolute',
+                    bottom: isCircle ? 6 : 3,
+                    letterSpacing: 0.5,
+                  }}>{label}</span>
+                  {item.enhancement_level > 0 && (
+                    <span style={{ position: 'absolute', top: 2, right: 3, fontSize: 8, fontWeight: 900, color: '#00ffaa', fontFamily: 'var(--font-mono)' }}>
+                      +{item.enhancement_level}
+                    </span>
+                  )}
+
+                  {/* Info Icon Indicator */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: -1,
+                      right: -1,
+                      width: 13,
+                      height: 13,
+                      borderRadius: '50%',
+                      background: 'rgba(3, 8, 20, 0.95)',
+                      border: `1px solid ${fp}`,
+                      color: fa,
+                      fontSize: 8,
+                      fontWeight: 'bold',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      boxShadow: `0 0 5px ${fp}55`,
+                      zIndex: 10,
+                    }}
+                  >
+                    i
+                  </div>
+
+                  {/* Tooltip Popup */}
+                  {showTooltip && (
+                    <div 
+                      style={{
+                        position: 'absolute',
+                        bottom: '110%',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        background: 'rgba(5, 12, 28, 0.98)',
+                        border: `1.5px solid ${fp}`,
+                        borderRadius: 10,
+                        padding: 10,
+                        width: 170,
+                        zIndex: 100,
+                        boxShadow: `0 8px 24px rgba(0,0,0,0.8), 0 0 10px ${fp}44`,
+                        color: '#fff',
+                        fontFamily: 'var(--font-body)',
+                        fontSize: 12,
+                        textAlign: 'left',
+                        cursor: 'default'
+                      }}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <div style={{ fontWeight: 800, color: fa, fontSize: 13, borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: 4, marginBottom: 6, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
+                        {item.name.toUpperCase()}
+                      </div>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 2, fontFamily: 'var(--font-mono)', fontSize: 11, color: '#a0c0d8' }}>
+                        <div>Type: {item.type.toUpperCase()}</div>
+                        <div>Rarity: {item.rarity.toUpperCase()}</div>
+                        {item.bonus && (
+                          <div style={{ color: '#00ff88', marginTop: 2, fontWeight: 700 }}>
+                            {item.bonus.atk && `ATK +${item.bonus.atk} `}
+                            {item.bonus.def && `DEF +${item.bonus.def} `}
+                            {item.bonus.hp && `HP +${item.bonus.hp} `}
+                          </div>
+                        )}
+                      </div>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          unequipItem(slotKey);
+                          setActiveTooltip(null);
+                        }}
+                        style={{
+                          width: '100%',
+                          background: 'linear-gradient(90deg, #ff2255, #ff5588)',
+                          border: 'none',
+                          borderRadius: 4,
+                          color: '#fff',
+                          padding: '4px 0',
+                          fontFamily: 'var(--font-title)',
+                          fontSize: 10,
+                          fontWeight: 800,
+                          marginTop: 8,
+                          cursor: 'pointer'
+                        }}
+                      >
+                        UNEQUIP
+                      </button>
+                    </div>
+                  )}
+                </div>
+              );
+            };
+            return (
+              <>
                 <div style={{ margin: '0 16px 8px', fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 700, letterSpacing: 1.5, color: '#8a94a3' }}>
                   <span style={{ fontSize: 9 }}>▼</span> EQUIPMENT & INVENTORY
                 </div>
-                <div style={{ margin: '0 16px 12px', padding: '12px 10px', background: 'rgba(8,22,36,0.4)', border: `1px solid ${fp}33`, borderRadius: 12, display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 7, justifyItems: 'center' }}>
-                  {renderEquipSlot('amulet1', 'AM1', <svg width="16" height="16" viewBox="0 0 13 13"><rect x="1.5" y="1.5" width="10" height="10" transform="rotate(45 6.5 6.5)" fill={fa} fillOpacity="0.6" stroke={fa} strokeWidth="1"/></svg>, 'box')}
-                  {renderEquipSlot('helmet', 'HELM', <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={fa} strokeWidth="1.8"><path d="M12 2l3 6 6 .5-4.5 4 1.4 6L12 15l-5.9 3.5 1.4-6L3 8.5 9 8z"/></svg>, 'full')}
-                  {renderEquipSlot('amulet2', 'AM2', <svg width="16" height="16" viewBox="0 0 13 13"><rect x="1.5" y="1.5" width="10" height="10" transform="rotate(45 6.5 6.5)" fill={fa} fillOpacity="0.6" stroke={fa} strokeWidth="1"/></svg>, 'box')}
+                <div style={{ margin: '0 16px 12px', padding: '12px 10px', background: 'rgba(8,22,36,0.4)', border: `1px solid ${fp}33`, borderRadius: 12, display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 10, justifyItems: 'center', alignItems: 'center', overflow: 'visible' }}>
+                  {/* Row 1 */}
+                  <div style={{ display: 'flex', gap: 4, justifyContent: 'center' }}>
+                    {renderEquipSlot('amulet1', 'AM1', amuletSvg, false, 42, 42)}
+                    {renderEquipSlot('amulet2', 'AM2', amuletSvg, false, 42, 42)}
+                  </div>
+                  {renderEquipSlot('helmet', 'HELM', helmetSvg, false, 48, 48)}
+                  <div style={{ display: 'flex', gap: 4, justifyContent: 'center' }}>
+                    {renderEquipSlot('ascension_arms', 'ARES', aresSvg, false, 42, 42)}
+                    {/* Decorative Core Slot for Symmetry */}
+                    <div style={{
+                      width: 42,
+                      height: 42,
+                      borderRadius: 7,
+                      background: 'rgba(3,8,20,0.3)',
+                      border: '1.5px dashed rgba(138,148,163,0.2)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      position: 'relative',
+                    }}>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(138,148,163,0.20)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
+                      <span style={{
+                        fontFamily: "'Orbitron', sans-serif",
+                        fontSize: 7,
+                        fontWeight: 700,
+                        color: 'rgba(138,148,163,0.25)',
+                        position: 'absolute',
+                        bottom: 2,
+                        textTransform: 'uppercase',
+                      }}>CORE</span>
+                    </div>
+                  </div>
 
-                  {renderEquipSlot('weapon', 'WPN', <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={fa} strokeWidth="1.8"><path d="M14.5 17.5L3 6M17.5 14.5L6 3M19 19v-4M19 19h-4M5 5v4M5 5h4"/></svg>, 'full')}
-                  {renderEquipSlot('armor', 'ARM', <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={fa} strokeWidth="1.8"><path d="M12 2l8 3.5v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10v-6L12 2z"/></svg>, 'full')}
-                  {renderEquipSlot('shield', 'SHD', <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={fa} strokeWidth="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>, 'box')}
+                  {/* Row 2 */}
+                  {renderEquipSlot('weapon', 'WPN', weaponSvg, false, 48, 64)}
+                  {renderEquipSlot('armor', 'ARM', armorSvg, false, 48, 64)}
+                  {renderEquipSlot('shield', 'SHD', shieldSvg, false, 48, 64)}
 
-                  {renderEquipSlot('gloves', 'GLV', <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={fa} strokeWidth="1.8"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/></svg>, 'box')}
-                  {renderEquipSlot('pants', 'PNT', <svg width="16" height="16" viewBox="0 0 13 13"><rect x="1.5" y="1.5" width="10" height="10" transform="rotate(45 6.5 6.5)" fill={fa} fillOpacity="0.6" stroke={fa} strokeWidth="1"/></svg>, 'full')}
-                  {renderEquipSlot('mantle', 'CPE', <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={fa} strokeWidth="1.8"><path d="M4 14l8 7 8-7V4H4z"/></svg>, 'box')}
+                  {/* Row 3 */}
+                  {renderEquipSlot('gloves', 'GLV', glovesSvg, false, 48, 48)}
+                  {renderEquipSlot('pants', 'PNT', pantsSvg, false, 48, 48)}
+                  {renderEquipSlot('mantle', 'CPE', mantleSvg, false, 48, 48)}
 
-                  {renderEquipSlot('ring1', 'RG1', <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={fa} strokeWidth="2"><circle cx="12" cy="14" r="6"/><path d="M9 8l3-5 3 5"/></svg>, 'box')}
-                  {renderEquipSlot('boots', 'BTS', <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={fa} strokeWidth="1.8"><path d="M9 20h6M8 20V10l4-4 4 4v10M6 10h12"/></svg>, 'full')}
-                  {renderEquipSlot('ascension_arms', 'ARES', <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,183,119,0.4)" strokeWidth="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>, 'box')}
+                  {/* Row 4 */}
+                  {renderEquipSlot('ring1', 'RG1', ringSvg, true, 44, 44)}
+                  {renderEquipSlot('boots', 'BTS', bootsSvg, false, 48, 48)}
+                  {renderEquipSlot('ring2', 'RG2', ringSvg, true, 44, 44)}
                 </div>
                 {/* bags */}
                 <div style={{ display: 'flex', gap: 7, justifyContent: 'center', margin: '0 16px 14px' }}>
