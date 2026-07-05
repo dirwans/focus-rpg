@@ -260,24 +260,20 @@ export default function App() {
     }
   }, [player?.race])
 
-  const currentSector = player?.sector || 1
-  let bgImage = '/assets/hd-space-nebula.jpg'
-  if (currentSector === 1) bgImage = '/assets/hq_outpost_bg.png'
-  else if (currentSector === 2) bgImage = '/assets/crag_mine_bg.png'
-  else if (currentSector === 3) bgImage = '/assets/sette_desert_bg.png'
-  else if (currentSector === 4) bgImage = '/assets/hq_outpost_bg.png'
-  else if (currentSector === 5) bgImage = '/assets/crag_mine_bg.png'
-  else if (currentSector === 6) bgImage = '/assets/sette_desert_bg.png'
-  else if (currentSector === 7) bgImage = '/assets/crag_mine_bg.png'
-  else if (currentSector === 8) bgImage = '/assets/sette_desert_bg.png'
-  else if (currentSector === 9) bgImage = '/assets/hq_outpost_bg.png'
-  else if (currentSector === 10) bgImage = '/assets/hq_outpost_bg.png'
+  const race = (player?.race || '').toLowerCase()
+  let containerBg = 'radial-gradient(120% 65% at 50% -5%, #0f1c3f 0%, #080f24 50%, #03060f 100%)' // default deep space blue
+  if (race === 'arctron') {
+    containerBg = 'radial-gradient(120% 65% at 50% -5%, #201f22 0%, #141317 50%, #0a0a0c 100%)'
+  } else if (race === 'bionex') {
+    containerBg = 'radial-gradient(120% 65% at 50% -5%, #0c1f48 0%, #07132c 50%, #040a1c 100%)'
+  } else if (race === 'celestra') {
+    containerBg = 'radial-gradient(120% 65% at 50% -5%, #1a1642 0%, #100e2c 50%, #07061a 100%)'
+  }
 
   if (loading || !hydrated) {
     return (
       <div className="game-root">
-        <div className="game-container">
-          <div className="parallax-bg" style={{ backgroundImage: `url('${bgImage}')` }} />
+        <div className="game-container" style={{ background: containerBg }}>
           <div style={styles.center}>
             <div style={{ fontSize: 48 }}>⚡</div>
             <div style={{ fontFamily: 'monospace', fontSize: 16, color: '#00e5ff', letterSpacing: 3, marginTop: 12 }}>LOADING...</div>
@@ -290,8 +286,7 @@ export default function App() {
   if (!user) {
     return (
       <div className="game-root">
-        <div className="game-container">
-          <div className="parallax-bg" style={{ backgroundImage: `url('${bgImage}')` }} />
+        <div className="game-container" style={{ background: containerBg }}>
           <Auth />
         </div>
       </div>
@@ -302,8 +297,7 @@ export default function App() {
   if (!player?.race) {
     return (
       <div className="game-root">
-        <div className="game-container">
-          <div className="parallax-bg" style={{ backgroundImage: `url('${bgImage}')` }} />
+        <div className="game-container" style={{ background: containerBg }}>
           <CharacterCreate />
         </div>
       </div>
@@ -314,8 +308,7 @@ export default function App() {
 
   return (
     <div className="game-root">
-      <div className="game-container">
-        <div className="parallax-bg" style={{ backgroundImage: `url('${bgImage}')` }} />
+      <div className="game-container" style={{ background: containerBg }}>
         <div className="no-scrollbar" style={styles.content}><Screen /></div>
         <BottomNav />
       </div>
