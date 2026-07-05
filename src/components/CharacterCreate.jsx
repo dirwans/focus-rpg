@@ -281,9 +281,9 @@ export default function CharacterCreate() {
                   alignItems: 'center', 
                   justifyContent: 'center', 
                   fontFamily: "'Orbitron', sans-serif", 
-                  fontSize: isSelected ? 12 : 11, 
+                  fontSize: isSelected ? 14 : 13, 
                   fontWeight: 800, 
-                  color: isSelected ? theme.onSecondary : '#5a6b82',
+                  color: isSelected ? theme.onSecondary : '#a9c8ff',
                   cursor: 'pointer',
                   transition: 'all 0.2s ease'
                 }}
@@ -297,7 +297,7 @@ export default function CharacterCreate() {
           <>
             <div 
               onClick={() => { if (step > 1) { setStep(1); setFocusedRace(raceId); } }}
-              style={{ width: 24, height: 24, borderRadius: '50%', background: `${finalTheme.primary}33`, border: `1.5px solid ${finalTheme.primary}`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: finalTheme.light, fontSize: 12, fontWeight: 'bold', cursor: 'pointer' }}
+              style={{ width: 24, height: 24, borderRadius: '50%', background: `${finalTheme.primary}33`, border: `1.5px solid ${finalTheme.primary}`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: finalTheme.light, fontSize: 13, fontWeight: 'bold', cursor: 'pointer' }}
             >
               ✓
             </div>
@@ -315,7 +315,7 @@ export default function CharacterCreate() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 color: step > 2 ? finalTheme.light : finalTheme.onSecondary,
-                fontSize: 11,
+                fontSize: 13,
                 fontWeight: 800,
                 cursor: step > 2 ? 'pointer' : 'default'
               }}
@@ -335,7 +335,7 @@ export default function CharacterCreate() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 color: finalTheme.onSecondary,
-                fontSize: 11,
+                fontSize: 13,
                 fontWeight: 800
               }}
             >
@@ -374,13 +374,13 @@ export default function CharacterCreate() {
       <div style={{ position: 'relative', zIndex: 6, margin: step === 2 ? '18px 0 0 82px' : '64px 0 0 82px' }}>
         {step === 1 && (
           <>
-            <div style={{ fontFamily: "'Share Tech Mono', monospace", fontStyle: 'italic', fontSize: 11, letterSpacing: '3px', color: '#c7ccd6', textTransform: 'uppercase' }}>
+            <div style={{ fontFamily: "'Share Tech Mono', monospace", fontStyle: 'italic', fontSize: 13, letterSpacing: '3px', color: '#ffffff', textTransform: 'uppercase' }}>
               Step 1 of 3 · Faction
             </div>
             <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 40, fontWeight: 900, letterSpacing: '2px', color: '#fff', textShadow: `0 0 24px ${currentTheme.primary}B3, 0 4px 12px rgba(0,0,0,0.8)`, transform: 'skewX(-8deg)', marginTop: 4 }}>
               {currentTheme.name}
             </div>
-            <div style={{ fontFamily: "'Share Tech Mono', monospace", fontStyle: 'italic', fontSize: 12, letterSpacing: '3px', color: currentTheme.light, marginTop: 6 }}>
+            <div style={{ fontFamily: "'Share Tech Mono', monospace", fontStyle: 'italic', fontSize: 13, letterSpacing: '3px', color: currentTheme.light, marginTop: 6, fontWeight: 600 }}>
               {currentTheme.tagline}
             </div>
           </>
@@ -388,7 +388,7 @@ export default function CharacterCreate() {
 
         {step === 2 && (
           <>
-            <div style={{ fontFamily: "'Share Tech Mono', monospace", fontStyle: 'italic', fontSize: 11, letterSpacing: '2px', color: '#c7ccd6', textTransform: 'uppercase' }}>
+            <div style={{ fontFamily: "'Share Tech Mono', monospace", fontStyle: 'italic', fontSize: 13, letterSpacing: '2px', color: '#ffffff', textTransform: 'uppercase' }}>
               {finalTheme.name} · Class
             </div>
             <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 26, fontWeight: 900, letterSpacing: '1px', color: '#fff', textShadow: `0 0 18px ${finalTheme.primary}80`, transform: 'skewX(-8deg)', marginTop: 2 }}>
@@ -399,7 +399,7 @@ export default function CharacterCreate() {
 
         {step === 3 && (
           <>
-            <div style={{ fontFamily: "'Share Tech Mono', monospace", fontStyle: 'italic', fontSize: 11, letterSpacing: '2px', color: '#c7ccd6', textTransform: 'uppercase' }}>
+            <div style={{ fontFamily: "'Share Tech Mono', monospace", fontStyle: 'italic', fontSize: 13, letterSpacing: '2px', color: '#ffffff', textTransform: 'uppercase' }}>
               Step 3 of 3 · Pilot
             </div>
             <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 32, fontWeight: 900, letterSpacing: '1px', color: '#fff', textShadow: `0 0 18px ${finalTheme.primary}80`, transform: 'skewX(-8deg)', marginTop: 2 }}>
@@ -459,23 +459,23 @@ export default function CharacterCreate() {
                   boxShadow: isSelected ? `0 0 12px ${finalTheme.primary}99` : 'none', 
                   clipPath: 'polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)'
                 }}>
-                  <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: monogram.length > 1 ? 12 : 14, fontWeight: 900, color: isSelected ? finalTheme.onSecondary : '#8a94a3' }}>
+                  <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: monogram.length > 1 ? 13 : 15, fontWeight: 900, color: isSelected ? finalTheme.onSecondary : '#ffffff' }}>
                     {monogram}
                   </span>
                 </div>
                 
                 {/* Details */}
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 900, color: '#fff' }}>
+                  <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 14, fontWeight: 900, color: '#fff' }}>
                     {getClassBaseName(jb.id)}{' '}
-                    <span style={{ fontSize: 9, fontStyle: 'italic', fontWeight: 700, color: isSelected ? finalTheme.light : '#8a94a3', marginLeft: 4 }}>
+                    <span style={{ fontSize: 13, fontStyle: 'italic', fontWeight: 700, color: isSelected ? finalTheme.light : '#a9c8ff', marginLeft: 4 }}>
                       {role}
                     </span>
-                    <span style={{ fontSize: 10, color: isSelected ? '#fff' : '#8a94a3', fontWeight: 500, marginLeft: 6, opacity: 0.8 }}>
+                    <span style={{ fontSize: 13, color: isSelected ? '#ffffff' : '#a9c8ff', fontWeight: 500, marginLeft: 6, opacity: 0.9 }}>
                       ({jb.name})
                     </span>
                   </div>
-                  <div style={{ fontFamily: "'Saira', sans-serif", fontSize: 11, color: isSelected ? '#b9c0c9' : '#8a94a3', marginTop: 2, lineHeight: 1.3 }}>
+                  <div style={{ fontFamily: "'Saira', sans-serif", fontSize: 13, color: isSelected ? '#ffffff' : '#cdd5e0', marginTop: 2, lineHeight: 1.35 }}>
                     {customDesc}
                   </div>
                 </div>
@@ -503,10 +503,10 @@ export default function CharacterCreate() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 16 }}>
             {currentTheme.traits.map((trait) => (
               <div key={trait.name} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <span style={{ width: 84, fontFamily: "'Orbitron', sans-serif", fontSize: 9, fontWeight: 700, letterSpacing: 0.5, color: currentTheme.muted }}>
+                <span style={{ width: 84, fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, letterSpacing: 0.5, color: '#ffffff' }}>
                   {trait.name}
                 </span>
-                <div style={{ flex: 1, height: 6, borderRadius: 3, background: `${currentTheme.primary}26`, position: 'relative', top: 1 }}>
+                <div style={{ flex: 1, height: 6, borderRadius: 3, background: `${currentTheme.primary}26`, position: 'relative', top: 3 }}>
                   <div style={{ width: `${trait.val}%`, height: '100%', borderRadius: 3, background: `linear-gradient(90deg, ${currentTheme.dark}, ${currentTheme.primary})`, boxShadow: `0 0 6px ${currentTheme.primary}` }} />
                 </div>
               </div>
@@ -591,7 +591,7 @@ export default function CharacterCreate() {
           
           {/* Appearance Variants Segmented Control */}
           <div style={{ marginBottom: 14 }}>
-            <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, fontWeight: 800, color: finalTheme.light, letterSpacing: 1, marginBottom: 5 }}>
+            <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, color: '#ffffff', letterSpacing: 1, marginBottom: 5 }}>
               APPEARANCE
             </div>
             <div style={{ display: 'flex', gap: 6 }}>
@@ -607,9 +607,9 @@ export default function CharacterCreate() {
                       background: isSelected ? `${finalTheme.primary}22` : 'rgba(8,22,36,0.4)',
                       border: isSelected ? `1.5px solid ${finalTheme.primary}` : `1px solid ${finalTheme.primary}22`,
                       borderRadius: 6,
-                      color: isSelected ? '#fff' : '#8a94a3',
+                      color: isSelected ? '#fff' : '#ffffff',
                       fontFamily: "'Orbitron', sans-serif",
-                      fontSize: 11,
+                      fontSize: 13,
                       fontWeight: 800,
                       cursor: 'pointer',
                       transition: 'all 0.2s'
@@ -624,7 +624,7 @@ export default function CharacterCreate() {
 
           {/* Callsign Input */}
           <div style={{ marginBottom: 20 }}>
-            <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, fontWeight: 800, color: finalTheme.light, letterSpacing: 1, marginBottom: 5 }}>
+            <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, color: '#ffffff', letterSpacing: 1, marginBottom: 5 }}>
               CALLSIGN
             </div>
             <input 
