@@ -472,7 +472,18 @@ export default function CharacterCreate() {
             </div>
           )}
 
-          <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 18, fontWeight: 900, color: '#fff', letterSpacing: '1px', textShadow: `0 0 10px ${finalTheme.primary}4D`, marginTop: 4, flexShrink: 0 }}>
+          <div style={{ 
+            fontFamily: "'Orbitron', sans-serif", 
+            fontSize: 26, 
+            fontWeight: 900, 
+            letterSpacing: '1px', 
+            color: '#ffffff', 
+            textShadow: `0 0 18px ${finalTheme.primary}80`, 
+            transform: 'skewX(-8deg)', 
+            transformOrigin: 'left',
+            marginTop: 4, 
+            flexShrink: 0 
+          }}>
             CHOOSE CLASS
           </div>
 
