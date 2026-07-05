@@ -212,3 +212,6 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   </div>
 </div>
 ```
+
+## Design Rule: Boss Sprite Scaling
+- **Gameplay Visuals**: Boss sprites (World Map, Dungeons, Pit Bosses, etc.) must always be rendered at **1.5x to 2.0x** the size of the character sprites. Currently, character sprites are around 160px, so boss sprites are scaled to 240px-256px (1.5x - 1.6x).

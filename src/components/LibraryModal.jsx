@@ -313,10 +313,10 @@ export default function LibraryModal({ onClose }) {
                 ))}
               </div>
 
-              {/* World Boss: Kaelgorath */}
+              {/* Mining Boss: Kaelgorath */}
               <div style={styles.itemCard}>
-                <div style={styles.itemTitle}>🔮 World Boss — Kaelgorath</div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#ff5f7a', fontWeight: 700, marginBottom: 8 }}>LEGENDARY WORLD BOSS — OPEN WORLD EVENT</div>
+                <div style={styles.itemTitle}>⛏️ Mining Boss — Kaelgorath</div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#ff5f7a', fontWeight: 700, marginBottom: 8 }}>LEGENDARY MINING BOSS — TRINITY CORE MINE</div>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px 12px', fontFamily: 'var(--font-mono)', fontSize: 12, marginBottom: 10 }}>
                   <span style={{ color: '#88aadd' }}>❤️ HP</span><span style={{ color: '#ff4444', fontWeight: 700 }}>1,000,000,000 (1 Milyar)</span>
                   <span style={{ color: '#88aadd' }}>⚔️ ATK</span><span style={{ color: '#ff985a', fontWeight: 700 }}>3,500</span>
