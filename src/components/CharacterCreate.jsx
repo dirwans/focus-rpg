@@ -236,9 +236,13 @@ export default function CharacterCreate() {
       {(step === 2 || step === 3) && (
         <div style={{
           position: 'absolute',
-          left: '58%',
-          bottom: '-10px',
-          transform: 'translateX(-50%)',
+          left: 64,
+          right: 0,
+          top: 0,
+          bottom: 0,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
           zIndex: 2,
           pointerEvents: 'none'
         }}>
@@ -248,7 +252,7 @@ export default function CharacterCreate() {
             gender={gender}
             height="350px"
             width="auto"
-            style={{ animation: 'heroFloat 6s ease-in-out infinite' }}
+            style={{ animation: 'heroFloat 6s ease-in-out infinite', marginBottom: '-20px' }}
           />
         </div>
       )}
