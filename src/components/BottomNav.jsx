@@ -127,24 +127,47 @@ export default function BottomNav() {
             }}
           >
             <NavIcon id={n.id} active={isActive} color={primary} />
-            <span style={{
-              fontFamily:  'var(--font-title)',
-              fontSize:    10,
-              fontWeight:  800,
-              letterSpacing: 1,
-              color:       isActive ? '#fff' : '#8a94a3',
-              textShadow:  isActive ? `0 0 8px ${primary}99` : 'none',
-              whiteSpace:  'nowrap',
+            <div style={{
+              display:        'flex',
+              alignItems:     'flex-start',
+              justifyContent: 'center',
+              height:         22,
+              width:          '100%',
+              overflow:       'hidden',
             }}>
-              {n.label}
-            </span>
-            {isActive && (
-              <div style={{
-                width: 4, height: 4, borderRadius: '50%',
-                background: primary, boxShadow: `0 0 6px ${primary}`,
-                marginTop: -2,
-              }}/>
-            )}
+              <span style={{
+                fontFamily:  'var(--font-title)',
+                fontSize:    9,
+                fontWeight:  800,
+                letterSpacing: 0.5,
+                color:       isActive ? '#fff' : '#8a94a3',
+                textShadow:  isActive ? `0 0 8px ${primary}99` : 'none',
+                whiteSpace:  'normal',
+                wordBreak:   'break-word',
+                textAlign:   'center',
+                lineHeight:  1.1,
+              }}>
+                {n.label === 'CHARACTER' ? (
+                  <>
+                    CHAR<wbr />ACTER
+                  </>
+                ) : n.label === 'BATTLE' ? (
+                  <>
+                    BAT<wbr />TLE
+                  </>
+                ) : (
+                  n.label
+                )}
+              </span>
+            </div>
+            <div style={{
+              width: 4, height: 4, borderRadius: '50%',
+              background: primary, boxShadow: `0 0 6px ${primary}`,
+              marginTop: -2,
+              opacity: isActive ? 1 : 0,
+              transform: isActive ? 'scale(1)' : 'scale(0)',
+              transition: 'opacity 0.2s ease, transform 0.2s ease',
+            }}/>
           </button>
         )
       })}
