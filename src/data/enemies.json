@@ -16,7 +16,7 @@
           "def": 1,
           "expReward": 10,
           "aniumReward": 6,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_1.png"
+          "image": "/ref/World-Map/Lumora/puffling.png"
         },
         {
           "name": "Moss Hopper",
@@ -26,7 +26,7 @@
           "def": 2,
           "expReward": 12,
           "aniumReward": 7,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_1.png"
+          "image": "/ref/World-Map/Lumora/moss_hopper.png"
         },
         {
           "name": "Leaf Boar",
@@ -36,7 +36,7 @@
           "def": 3,
           "expReward": 14,
           "aniumReward": 9,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/clod-monster.png"
+          "image": "/ref/World-Map/Lumora/leaf_boar.png"
         },
         {
           "name": "Twig Imp",
@@ -46,7 +46,7 @@
           "def": 3,
           "expReward": 15,
           "aniumReward": 10,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/clod-monster.png"
+          "image": "/ref/World-Map/Lumora/twig_imp.png"
         }
       ],
       "boss": {
@@ -59,7 +59,7 @@
         "regen": 80,
         "expReward": 150,
         "aniumReward": 100,
-        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_10.png"
+        "image": "/ref/World-Map/Lumora/lumora_behemoth.png"
       },
       "pitBoss": {
         "name": "LUMORA OVERLORD",
@@ -71,7 +71,7 @@
         "regen": 400,
         "expReward": 750,
         "aniumReward": 500,
-        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_10.png"
+        "image": "/ref/World-Map/Lumora/lumora_behemoth.png"
       }
     },
     {
