@@ -247,7 +247,7 @@ export default function Forge() {
       </div>
 
       {/* Scrollable Main Content */}
-      <div className="fg-scroll" style={{ position: 'relative', zIndex: 3, flex: 1, overflowY: 'auto', padding: '2px 0 6px' }}>
+      <div className="fg-scroll" style={{ position: 'relative', zIndex: 3, flex: 1, overflowY: 'auto', padding: '2px 0 90px' }}>
 
 
         {/* ───────── WEAPON SMITH TAB ───────── */}
@@ -996,7 +996,7 @@ export default function Forge() {
 
 
 const styles = {
-  screen: { display: 'flex', flexDirection: 'column', flex: 1, minHeight: '100%', fontFamily: 'var(--font-body)' },
+  screen: { display: 'flex', flexDirection: 'column', flex: 1, height: '100%', minHeight: '100%', fontFamily: 'var(--font-body)' },
   resBar: { display: 'flex', gap: 8, padding: '12px 16px', borderBottom: '1px solid rgba(0, 229, 255, 0.15)', background: 'rgba(3, 8, 20, 0.4)' },
   chip: (c) => ({ background: 'rgba(3, 8, 20, 0.8)', border: `1px solid ${c}`, borderRadius: 20, padding: '4px 10px', fontFamily: 'var(--font-mono)', fontSize: 13, fontWeight: 800, color: c }),
   tabs: { display: 'flex', borderBottom: '1px solid rgba(0, 229, 255, 0.2)', background: 'rgba(3, 8, 20, 0.4)', marginBottom: 12, overflowX: 'auto', WebkitOverflowScrolling: 'touch', scrollbarWidth: 'none' },

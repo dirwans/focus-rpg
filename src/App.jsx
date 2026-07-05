@@ -324,6 +324,6 @@ export default function App() {
 }
 
 const styles = {
-  content: { flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', position: 'relative', zIndex: 1, paddingBottom: 100 },
+  content: { flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', position: 'relative', zIndex: 1, height: '100%' },
   center:  { flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' },
 }
