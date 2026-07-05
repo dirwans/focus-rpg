@@ -487,9 +487,10 @@ export default function LibraryModal({ onClose }) {
                     <ul style={{ paddingLeft: 16, marginTop: 4 }}>
                       <li>Huruf (A-Z, a-z)</li>
                       <li>Angka (0-9)</li>
+                      <li>Simbol khusus: Dash (-), At-sign (@), Hash (#)</li>
                     </ul>
                   </li>
-                  <li>Tidak boleh menggunakan simbol atau spasi.</li>
+                  <li>Tidak boleh menggunakan spasi atau simbol lain.</li>
                 </ul>
               </div>
 
@@ -544,7 +545,7 @@ export default function LibraryModal({ onClose }) {
                     <li>• Weapon Enhancement increases <strong>ATK</strong> (+10% per level).</li>
                     <li>• Armor/Shield Enhancement increases <strong>HP & DEF</strong> (+10% per level).</li>
                     <li>• <strong>Level +1 ~ +5 (Safe Levels)</strong>: Failure costs materials, but equipment remains safe.</li>
-                    <li>• <strong>Level +6 ~ +8 (Destruction Levels)</strong>: Failure costs materials and **DESTROYS** the equipment.</li>
+                    <li>• <strong>Level +6 ~ +8 (Destruction Levels)</strong>: Failure costs materials and <strong>DESTROYS</strong> the equipment.</li>
                     <li>• There is no downgrade mechanic. Lucky Relic does NOT prevent destruction.</li>
                   </ul>
                 </ul>

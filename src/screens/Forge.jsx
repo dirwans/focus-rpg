@@ -31,7 +31,86 @@ export default function Forge() {
 
   const stats = getStats()
 
+  // Faction thematic mappings
+  const faction = player.race || 'arctron'
+  const theme = {
+    arctron: {
+      primary: '#ff5222',
+      light: '#ffb48f',
+      glowColor: 'rgba(255, 82, 34, 0.5)',
+      tabInactiveColor: '#8a94a3',
+      bgGradient: 'radial-gradient(120% 65% at 50% -5%, #201f22 0%, #141317 50%, #0a0a0c 100%)',
+      glowBorder: 'rgba(255, 82, 34, 0.22)',
+      bgDotColor: 'rgba(255, 82, 34, 0.06)',
+      weaponSmithSvg: (
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#ffb48f" strokeWidth="1.7">
+          <path d="M14.5 17.5L3 6M17.5 14.5L6 3M19 19v-4M19 19h-4M5 5v4M5 5h4" />
+        </svg>
+      )
+    },
+    bionex: {
+      primary: '#3b82f6',
+      light: '#a9c8ff',
+      glowColor: 'rgba(59, 130, 246, 0.5)',
+      tabInactiveColor: '#7d92a3',
+      bgGradient: 'radial-gradient(120% 65% at 50% -5%, #0c1f48 0%, #07132c 50%, #040a1c 100%)',
+      glowBorder: 'rgba(59, 130, 246, 0.22)',
+      bgDotColor: 'rgba(59, 130, 246, 0.06)',
+      weaponSmithSvg: (
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#a9c8ff" strokeWidth="1.7">
+          <path d="M12 2v20M4 12h16" />
+          <circle cx="12" cy="12" r="4" />
+        </svg>
+      )
+    },
+    celestra: {
+      primary: '#9b4dff',
+      light: '#c9aeff',
+      glowColor: 'rgba(155, 77, 255, 0.5)',
+      tabInactiveColor: '#8188c2',
+      bgGradient: 'radial-gradient(120% 65% at 50% -5%, #1a1642 0%, #100e2c 50%, #07061a 100%)',
+      glowBorder: 'rgba(155, 77, 255, 0.22)',
+      bgDotColor: 'rgba(155, 77, 255, 0.06)',
+      weaponSmithSvg: (
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#c9aeff" strokeWidth="1.7">
+          <path d="M12 2l2.5 6.5L21 11l-6.5 2.5L12 20l-2.5-6.5L3 11l6.5-2.5z" />
+        </svg>
+      )
+    }
+  }[faction] || {
+    primary: '#ff5222',
+    light: '#ffb48f',
+    glowColor: 'rgba(255, 82, 34, 0.5)',
+    tabInactiveColor: '#8a94a3',
+    bgGradient: 'radial-gradient(120% 65% at 50% -5%, #201f22 0%, #141317 50%, #0a0a0c 100%)',
+    glowBorder: 'rgba(255, 82, 34, 0.22)',
+    bgDotColor: 'rgba(255, 82, 34, 0.06)',
+    weaponSmithSvg: (
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#ffb48f" strokeWidth="1.7">
+        <path d="M14.5 17.5L3 6M17.5 14.5L6 3M19 19v-4M19 19h-4M5 5v4M5 5h4" />
+      </svg>
+    )
+  }
 
+  const tabStyle = (tabId) => {
+    const on = activeTab === tabId
+    return {
+      flex: 1,
+      textAlign: 'center',
+      padding: '7px 2px',
+      borderRadius: '7px',
+      cursor: 'pointer',
+      fontFamily: "'Orbitron', sans-serif",
+      fontSize: '10px',
+      fontWeight: '800',
+      letterSpacing: '0.3px',
+      color: on ? '#fff' : theme.tabInactiveColor,
+      background: on ? `${theme.primary}33` : 'transparent',
+      border: `1px solid ${on ? theme.primary : 'rgba(255,255,255,0.08)'}`,
+      transition: 'all 0.2s',
+      whiteSpace: 'nowrap'
+    }
+  }
   // Weapon Smith Data
   const equippedWeapon = player.equipment?.weapon
   const REFINE_COSTS = {
@@ -108,85 +187,211 @@ export default function Forge() {
   }
 
   return (
-    <div style={styles.screen}>
-      <div style={styles.resBar}>
-        <button onClick={() => useGameStore.getState().setScreen('main')} style={{background:'transparent', border:'none', color:'#00e5ff', fontSize: 20, cursor:'pointer', padding: '0 8px 0 0', display:'flex', alignItems:'center'}}>❮</button>
-        <span style={styles.chip('#f5a623')}>⬡ {player.resources.anium.toLocaleString()}</span>
-        <span style={styles.chip('#00e5ff')}>◈ {player.resources.credits}</span>
-      </div>
+    <div style={{ ...styles.screen, background: theme.bgGradient }}>
+      {/* Background Dots Overlay */}
+      <div style={{ position: 'absolute', inset: 0, backgroundImage: `radial-gradient(${theme.bgDotColor} 1px, transparent 1px)`, backgroundSize: '20px 20px', pointerEvents: 'none' }}></div>
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: `linear-gradient(90deg, transparent, ${theme.primary}, transparent)`, boxShadow: `0 0 12px ${theme.primary}`, zIndex: 5 }}></div>
 
-      <div className="no-scrollbar" style={styles.tabs}>
-        <div style={activeTab === 'upgrade' ? styles.tabActive : styles.tab} onClick={() => setActiveTab('upgrade')}>{t('upgrade_stats_tab')}</div>
-        <div style={activeTab === 'refine' ? styles.tabActive : styles.tab} onClick={() => setActiveTab('refine')}>{t('weapon_smith_tab')}</div>
-        <div style={activeTab === 'enhance' ? styles.tabActive : styles.tab} onClick={() => setActiveTab('enhance')}>{t('item_enhancement_tab')}</div>
-        <div style={activeTab === 'legendary' ? {...styles.tabActive, color: '#f5a623', borderBottomColor: '#f5a623'} : styles.tab} onClick={() => setActiveTab('legendary')}>⚔️ LEGENDARY</div>
-        <div style={activeTab === 'setshop' ? {...styles.tabActive, color: '#cc44ff', borderBottomColor: '#cc44ff'} : styles.tab} onClick={() => setActiveTab('setshop')}>👑 SET SHOP</div>
-      </div>
-
-
-      {/* UPGRADE STATS TAB */}
-      {activeTab === 'upgrade' && (
-        <div style={{ padding: '0 16px' }}>
-          {Object.entries(upgradesConfig).map(([key, cfg]) => {
-            const level = player.upgrades?.[key] || 0
-            const cost = getUpgradeCost(key)
-            const canAfford = player.resources.anium >= cost
-            const currentVal = stats[cfg.statKey]
-
-            return (
-              <div key={key} className={`glass-panel cyber-panel panel-${key === 'atk' ? 'orange' : key === 'def' ? 'cyan' : 'red'}`} style={styles.card}>
-                <div style={{ ...styles.cardTitle, color: cfg.color }}>{t('upgrade_title', { emoji: cfg.emoji, label: cfg.label })}</div>
-                <div style={styles.statRow}>
-                  {t('upgrade_current', { val: currentVal?.toLocaleString(), level: level, next: cfg.perLevel })}
-                </div>
-                <button
-                  style={styles.upgradeBtn(cfg.color, canAfford)}
-                  onClick={() => upgrade(key)}
-                  disabled={!canAfford || !player.race}
-                >
-                  {player.race
-                    ? canAfford
-                      ? t('upgrade_btn_label', { cost: cost.toLocaleString() })
-                      : t('upgrade_need_more', { need: (cost - player.resources.anium).toLocaleString() })
-                    : t('select_race_first')
-                  }
-                </button>
-              </div>
-            )
-          })}
+      {/* Header */}
+      <div style={{ position: 'relative', zIndex: 4, display: 'flex', alignItems: 'center', gap: '10px', padding: '14px 16px 8px' }}>
+        <div
+          onClick={() => useGameStore.getState().setScreen('main')}
+          style={{
+            width: '32px',
+            height: '32px',
+            borderRadius: '50%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: 'rgba(8,22,36,0.5)',
+            border: `1px solid ${theme.primary}59`,
+            cursor: 'pointer',
+            color: theme.light,
+            fontSize: '16px',
+            flexShrink: 0
+          }}
+        >
+          ❮
         </div>
-      )}
+        <div style={{ flex: 1, textAlign: 'center', marginRight: '32px', fontFamily: "'Orbitron', sans-serif", fontSize: '18px', fontWeight: '800', letterSpacing: '2px', color: '#fff', textShadow: `0 0 10px ${theme.glowColor}` }}>FORGE</div>
+      </div>
+
+      {/* Resources bar */}
+      <div style={{ position: 'relative', zIndex: 4, display: 'flex', gap: 8, padding: '0 16px 8px' }}>
+        {/* Anium */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'rgba(8,22,36,0.5)', backdropFilter: 'blur(8px)', border: `1px solid ${theme.primary}59`, borderRadius: '20px', padding: '4px 12px 4px 9px' }}>
+          <svg width="13" height="15" viewBox="0 0 14 16">
+            <polygon points="7,0 14,4 14,12 7,16 0,12 0,4" fill="none" stroke={theme.primary} strokeWidth="1.4"/>
+          </svg>
+          <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '13px', fontWeight: '700', color: theme.light }}>
+            {(player.resources?.anium || 0).toLocaleString()}
+          </span>
+        </div>
+        {/* Credits */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'rgba(8,22,36,0.5)', backdropFilter: 'blur(8px)', border: '1px solid rgba(199,204,214,0.4)', borderRadius: '20px', padding: '4px 12px 4px 9px' }}>
+          <svg width="12" height="12" viewBox="0 0 13 13">
+            <rect x="1.5" y="1.5" width="10" height="10" transform="rotate(45 6.5 6.5)" fill="none" stroke="#c7ccd6" strokeWidth="1.4"/>
+          </svg>
+          <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '13px', fontWeight: '700', color: '#c7ccd6' }}>
+            {(player.resources?.credits || 0).toLocaleString()}
+          </span>
+        </div>
+      </div>
+
+      {/* Sub-tabs Row */}
+      <div style={{ position: 'relative', zIndex: 4, display: 'flex', gap: 3, padding: '2px 12px 8px' }}>
+        <div onClick={() => setActiveTab('upgrade')} style={tabStyle('upgrade')}>UPGRADE</div>
+        <div onClick={() => setActiveTab('refine')} style={tabStyle('refine')}>SMITH</div>
+        <div onClick={() => setActiveTab('enhance')} style={tabStyle('enhance')}>ENHANCE</div>
+        <div onClick={() => setActiveTab('legendary')} style={tabStyle('legendary')}>LEGEND</div>
+        <div onClick={() => setActiveTab('setshop')} style={tabStyle('setshop')}>SET SHOP</div>
+      </div>
+
+      {/* Scrollable Main Content */}
+      <div className="fg-scroll" style={{ position: 'relative', zIndex: 3, flex: 1, overflowY: 'auto', padding: '2px 0 6px' }}>
 
 
-      {/* WEAPON SMITH TAB */}
-      {activeTab === 'refine' && (
-        <div style={{ padding: '0 16px' }}>
-          {!equippedWeapon ? (
-            <div style={styles.empty}>
-              <div style={{ fontSize: 32 }}>⚠️</div>
-              <div>{t('no_weapon_equipped')}</div>
-              <div style={{ fontSize: 13, color: '#7ec8e3', marginTop: 4 }}>
-                {t('no_weapon_equipped_desc')}
-              </div>
+        {/* ───────── UPGRADE STATS TAB ───────── */}
+        {activeTab === 'upgrade' && (
+          <div style={{ padding: '2px 16px' }}>
+            <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '12px', fontWeight: '700', letterSpacing: '1.5px', color: theme.light, margin: '2px 0 10px' }}>CORE STAT UPGRADES</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              {Object.entries(upgradesConfig).map(([key, cfg]) => {
+                const level = player.upgrades?.[key] || 0
+                const cost = getUpgradeCost(key)
+                const canAfford = player.resources.anium >= cost
+                const currentVal = stats[cfg.statKey]
+
+                const statCardBorder = key === 'atk'
+                  ? `1.5px solid ${theme.primary}52`
+                  : key === 'def'
+                  ? '1.5px solid rgba(199, 204, 214, 0.32)'
+                  : '1.5px solid rgba(255, 110, 60, 0.34)'
+
+                const statTitleColor = key === 'atk'
+                  ? theme.light
+                  : key === 'def'
+                  ? '#eef3fb'
+                  : '#ff6a4d'
+
+                return (
+                  <div key={key} style={{ padding: '12px 14px', borderRadius: '12px', background: 'rgba(6, 9, 14, 0.72)', border: statCardBorder }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
+                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '13px', fontWeight: '800', color: statTitleColor, letterSpacing: '1px' }}>
+                        {cfg.emoji} {cfg.label.toUpperCase()}
+                      </span>
+                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '11px', color: '#8a94a3' }}>
+                        LV {level}
+                      </span>
+                    </div>
+                    <div style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: '13px', color: '#cdd5e0', marginBottom: '10px' }}>
+                      Current: <b style={{ color: '#fff' }}>{currentVal?.toLocaleString()} {cfg.statKey.toUpperCase()}</b> · +{cfg.perLevel} per level
+                    </div>
+                    {player.race ? (
+                      canAfford ? (
+                        <button
+                          onClick={() => upgrade(key)}
+                          style={{ width: '100%', border: 'none', padding: '9px 0', textAlign: 'center', borderRadius: '9px', background: `linear-gradient(135deg, ${theme.primary}, #b32c0d)`, boxShadow: `0 0 12px ${theme.primary}66`, fontFamily: "'Orbitron', sans-serif", fontSize: '12px', fontWeight: '800', color: '#fff', letterSpacing: '0.5px', cursor: 'pointer' }}
+                        >
+                          UPGRADE · {cost.toLocaleString()} ⬡
+                        </button>
+                      ) : (
+                        <div
+                          style={{ width: '100%', padding: '9px 0', textAlign: 'center', borderRadius: '9px', background: 'rgba(30, 20, 20, 0.8)', border: '1px solid rgba(255, 95, 122, 0.3)', fontFamily: "'Orbitron', sans-serif", fontSize: '12px', fontWeight: '800', color: 'rgba(255, 110, 60, 0.6)', letterSpacing: '0.5px' }}
+                        >
+                          NEED {(cost - player.resources.anium).toLocaleString()} MORE ⬡
+                        </div>
+                      )
+                    ) : (
+                      <div
+                        style={{ width: '100%', padding: '9px 0', textAlign: 'center', borderRadius: '9px', background: 'rgba(30, 20, 20, 0.8)', border: '1px solid rgba(255, 95, 122, 0.3)', fontFamily: "'Orbitron', sans-serif", fontSize: '12px', fontWeight: '800', color: 'rgba(255, 110, 60, 0.6)', letterSpacing: '0.5px' }}
+                      >
+                        SELECT RACE FIRST
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
             </div>
-          ) : (
-            <div>
-              {/* REFINEMENT PANEL */}
-              <div style={{ ...styles.sectionTitle, paddingLeft: 8, marginBottom: 8 }}>{t('weapon_rarity_refinement')}</div>
-              <div className="glass-panel cyber-panel panel-cyan" style={{ ...styles.refinePanel, marginTop: 0 }}>
+          </div>
+        )}
+
+
+        {/* ───────── WEAPON SMITH TAB ───────── */}
+        {activeTab === 'refine' && (
+          <div style={{ padding: '2px 16px' }}>
+            {!equippedWeapon ? (
+              <div style={styles.empty}>
+                <div style={{ fontSize: 32 }}>⚠️</div>
+                <div style={{ fontFamily: "'Orbitron', sans-serif", color: '#fff', fontWeight: 'bold' }}>NO WEAPON EQUIPPED</div>
+                <div style={{ fontSize: 13, color: theme.tabInactiveColor, marginTop: 4 }}>
+                  Equip a weapon in the Cargo screen first to perform Weapon Refining & Combining.
+                </div>
+              </div>
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+                <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '12px', fontWeight: '700', letterSpacing: '1.5px', color: theme.light }}>WEAPON SMITH & REFINE</div>
                 
-                {/* Central Tempering Chamber Display */}
-                <div style={styles.temperingChamber}>
-                  <div style={styles.chamberRing(isRefining)}>
-                    <svg width="110" height="110" style={styles.chamberSvg(isRefining)}>
-                      <circle cx="55" cy="55" r="46" fill="transparent" stroke="var(--neon-glow)" strokeWidth="1.5" strokeDasharray="6,4" />
-                      <circle cx="55" cy="55" r="38" fill="transparent" stroke="var(--neon-glow)" strokeWidth="1" strokeDasharray="30,8" />
+                {/* Refining Section */}
+                <div style={{ padding: '16px 14px 14px', borderRadius: '14px', background: 'rgba(6, 9, 14, 0.75)', border: `1.5px solid ${theme.primary}52`, boxShadow: '0 8px 24px rgba(0,0,0,0.5)' }}>
+                  
+                  {/* Rotating Circle SVG Chamber */}
+                  <div style={{ position: 'relative', width: 220, height: 220, margin: '0 auto 12px' }}>
+                    <svg width="220" height="220" style={{ position: 'absolute', top: 0, left: 0, animation: 'runeSpinRev 14s linear infinite' }}>
+                      <circle cx="110" cy="110" r="100" fill="none" stroke={`${theme.primary}4d`} strokeWidth="1.5" strokeDasharray="6,4"/>
                     </svg>
-                    <div style={styles.chamberSlot}>
-                      {equippedWeapon.image ? (
+                    <div style={{ position: 'absolute', top: 14, left: 14, width: 192, height: 192, borderRadius: '50%', background: `conic-gradient(from 0deg, transparent 0deg, ${theme.primary} 55deg, transparent 130deg, transparent 360deg)`, animation: 'spinFlow 4s linear infinite' }}></div>
+                    <div style={{ position: 'absolute', top: 25, left: 25, width: 170, height: 170, borderRadius: '50%', background: '#06090e' }}></div>
+                    <svg width="220" height="220" style={{ position: 'absolute', top: 0, left: 0, animation: 'runeSpin 20s linear infinite' }}>
+                      <circle cx="110" cy="110" r="85" fill="none" stroke="rgba(199,204,214,0.3)" strokeWidth="1" strokeDasharray="20,6"/>
+                    </svg>
+
+                    {/* Indicators */}
+                    {/* Top: Next Rarity */}
+                    <div style={{ position: 'absolute', top: 0, left: 88, width: 44, height: 44, borderRadius: 9, background: 'rgba(10,15,25,0.95)', border: '2px solid rgba(245,166,35,0.6)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 3 }}>
+                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 7, fontWeight: 800, color: '#8a94a3', letterSpacing: '0.3px' }}>NEXT</span>
+                      <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 9, fontWeight: 800, color: '#f5a623' }}>
+                        {(() => {
+                          const nextMap = { normal: 'ADV', advanced: 'RARE', rare: 'EPIC', epic: 'LEGEND', legendary: 'MYTHIC' }
+                          return nextMap[(equippedWeapon.rarityGrade || '').toLowerCase()] || 'MAX'
+                        })()}
+                      </span>
+                    </div>
+
+                    {/* Right: Required Talics */}
+                    <div style={{ position: 'absolute', top: 132, left: 164, width: 44, height: 44, borderRadius: 9, background: 'rgba(10,15,25,0.95)', border: '2px solid rgba(95,224,138,0.6)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 3 }}>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5fe08a" strokeWidth="1.8">
+                        <path d="M12 2C8 8 5 12 5 15a7 7 0 0 0 14 0c0-3-3-7-7-13z"/>
+                      </svg>
+                      <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 8, fontWeight: 800, color: '#5fe08a' }}>
+                        {(() => {
+                          const cost = REFINE_COSTS[(equippedWeapon.rarityGrade || '').toLowerCase()]
+                          return cost ? `${ownedIgnorance}/${cost.talics}` : 'MAX'
+                        })()}
+                      </span>
+                    </div>
+
+                    {/* Left: Required Anium */}
+                    <div style={{ position: 'absolute', top: 132, left: 12, width: 44, height: 44, borderRadius: 9, background: 'rgba(10,15,25,0.95)', border: '2px solid rgba(255,95,122,0.6)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 3 }}>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ff8080" strokeWidth="1.8">
+                        <polygon points="7,0 14,4 14,12 7,16 0,12 0,4" transform="translate(5,4)"/>
+                      </svg>
+                      <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 7, fontWeight: 800, color: '#ff8080' }}>
+                        {(() => {
+                          const cost = REFINE_COSTS[(equippedWeapon.rarityGrade || '').toLowerCase()]
+                          return cost ? `${(cost.anium / 1000).toFixed(0)}K` : '0'
+                        })()}
+                      </span>
+                    </div>
+
+                    {/* Center slot */}
+                    <div style={{ position: 'absolute', top: 74, left: 74, width: 72, height: 72, borderRadius: 14, background: `linear-gradient(135deg, ${theme.primary}47, rgba(0,0,0,0.65))`, border: `2.5px solid ${theme.primary}`, boxShadow: `0 0 16px ${theme.primary}66`, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 4 }}>
+                      {isRefining ? (
+                        theme.weaponSmithSvg
+                      ) : equippedWeapon.image ? (
                         <img referrerPolicy="no-referrer" src={equippedWeapon.image} style={{ width: 36, height: 36, objectFit: 'contain' }} alt={equippedWeapon.name} />
                       ) : (
-                        <span style={{ fontSize: 36 }}>{equippedWeapon.emoji}</span>
+                        <span style={{ fontSize: 32 }}>{equippedWeapon.emoji}</span>
                       )}
                     </div>
 
@@ -196,26 +401,36 @@ export default function Forge() {
                         key={s.id}
                         className="spark-particle"
                         style={{
-                          transform: `rotate(${s.angle}deg) translate(${s.dist}px) scale(${s.scale})`
+                          position: 'absolute',
+                          top: 110,
+                          left: 110,
+                          width: 4,
+                          height: 4,
+                          borderRadius: '50%',
+                          background: theme.primary,
+                          boxShadow: `0 0 8px ${theme.primary}`,
+                          pointerEvents: 'none',
+                          transform: `rotate(${s.angle}deg) translate(${s.dist}px) scale(${s.scale})`,
+                          transition: 'transform 1s cubic-bezier(0.1, 0.8, 0.3, 1), opacity 1s',
                         }}
                       />
                     ))}
                   </div>
 
-                  <div style={{ textAlign: 'center', marginTop: 8 }}>
-                    <div style={styles.wepName}>{equippedWeapon.name}</div>
-                    <div style={{ ...styles.wepRarity, color: getWeaponRarityColor(equippedWeapon.rarityGrade || equippedWeapon.rarity) }}>
-                      Grade: {getWeaponRarityDisplayName(equippedWeapon.rarityGrade || equippedWeapon.rarity)}
+                  <div style={{ textAlign: 'center', marginBottom: 12 }}>
+                    <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '15px', fontWeight: '800', color: '#fff' }}>{equippedWeapon.name}</div>
+                    <div style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: '12px', color: '#f5a623', marginTop: '2px' }}>
+                      Grade: {getWeaponRarityDisplayName(equippedWeapon.rarityGrade || equippedWeapon.rarity).toUpperCase()}
                     </div>
                   </div>
-                </div>
 
-                <div style={styles.refineDetails}>
+                  <div style={{ height: '1px', background: 'rgba(255,255,255,0.08)', margin: '14px 0' }}></div>
+
                   {(() => {
                     const grade = (equippedWeapon.rarityGrade || 'normal').toLowerCase()
                     const cost = REFINE_COSTS[grade]
                     if (!cost) {
-                      return <div style={styles.maxGradeMsg}>{t('max_grade_reached')}</div>
+                      return <div style={{ color: '#00ff88', fontFamily: "'Share Tech Mono', monospace", fontSize: '13px', fontWeight: 'bold', textAlign: 'center', padding: '10px 0' }}>MAX RARITY GRADE REACHED</div>
                     }
 
                     const hasTalics = ownedIgnorance >= cost.talics
@@ -224,173 +439,239 @@ export default function Forge() {
 
                     return (
                       <div>
-                        <div style={styles.refineNextGrade}>
-                          {t('next_grade', { grade: cost.next.toUpperCase(), pct: cost.next === 'advanced' ? '5' : cost.next === 'rare' ? '10' : cost.next === 'epic' ? '15' : cost.next === 'legendary' ? '20' : '30' })}
+                        <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '12px', fontWeight: '700', color: theme.light, letterSpacing: '0.5px', marginBottom: '12px' }}>
+                          NEXT GRADE: {cost.next.toUpperCase()} (+{cost.next === 'advanced' ? '5%' : cost.next === 'rare' ? '10%' : cost.next === 'epic' ? '15%' : cost.next === 'legendary' ? '20%' : '30%'} ATK)
                         </div>
-
-                        {/* Visual connections list */}
-                        <div style={styles.refineCosts}>
-                          <div style={styles.costItem(hasTalics)}>
-                            <span>{t('talic_ignorance_label')}</span>
-                            <span>{ownedIgnorance} / {cost.talics}</span>
-                          </div>
-                          <div style={styles.costItem(hasAnium)}>
-                            <span>{t('anium_cost_label')}</span>
-                            <span>{cost.anium.toLocaleString()}</span>
-                          </div>
-                        </div>
-
-                        <button style={styles.smithBtn(canUpgrade)} disabled={!canUpgrade} onClick={handleRefine}>
-                          {t('refine_btn')}
+                        <button
+                          disabled={!canUpgrade || isRefining}
+                          onClick={handleRefine}
+                          style={{
+                            width: '100%',
+                            border: 'none',
+                            borderRadius: '10px',
+                            padding: '11px 0',
+                            textAlign: 'center',
+                            background: canUpgrade ? `linear-gradient(135deg, ${theme.primary}, #b32c0d)` : 'rgba(28,36,56,0.8)',
+                            boxShadow: canUpgrade ? `0 0 14px ${theme.primary}66` : 'none',
+                            fontFamily: "'Orbitron', sans-serif",
+                            fontSize: '13px',
+                            fontWeight: '800',
+                            color: canUpgrade ? '#fff' : '#4a8fa8',
+                            letterSpacing: '1px',
+                            cursor: canUpgrade ? 'pointer' : 'not-allowed'
+                          }}
+                        >
+                          {isRefining ? 'SMITHING...' : canUpgrade ? 'REFINE WEAPON' : 'LACKING MATERIALS'}
                         </button>
                       </div>
                     )
                   })()}
                 </div>
-              </div>
 
-
-              {/* COMBINING PANEL */}
-              <div style={{ ...styles.sectionTitle, paddingLeft: 8, marginBottom: 8, marginTop: 16 }}>{t('craft_vampiric_weapon')}</div>
-              <div className="glass-panel cyber-panel panel-orange" style={{ ...styles.combinePanel, marginTop: 0 }}>
-                <div style={{ fontSize: 13, color: '#88aadd', marginBottom: 12 }}>
-                  {t('craft_vampiric_desc')}
-                </div>
-
-                {equippedWeapon.specialProperty === 'vampire' ? (
-                  <div style={styles.vampireActive}>
-                    {t('vampire_active')}
+                {/* Combining Section */}
+                <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '12px', fontWeight: '700', letterSpacing: '1.5px', color: theme.light, marginTop: 10 }}>CRAFT VAMPIRIC WEAPON</div>
+                <div style={{ padding: '14px', borderRadius: '14px', background: 'rgba(6,9,14,0.72)', border: `1.5px solid ${theme.primary}4d` }}>
+                  <div style={{ fontFamily: "'Saira', sans-serif", fontSize: '13px', color: '#a8b4c4', lineHeight: 1.5, marginBottom: '12px' }}>
+                    Sacrifice an Epic+ weapon to imbue {equippedWeapon.name} with a lifesteal property.
                   </div>
-                ) : !isEpicOrHigher(equippedWeapon) ? (
-                  <div style={styles.warningBox}>
-                    {t('vampire_epic_required')}
-                  </div>
-                ) : (
-                  <div>
-                    <div style={styles.formGroup}>
-                      <label style={styles.label}>{t('select_sacrifice_wep')}</label>
-                      <select
-                        value={selectedSacrificeUid}
-                        onChange={(e) => setSelectedSacrificeUid(e.target.value)}
-                        style={styles.select}
+
+                  {equippedWeapon.specialProperty === 'vampire' ? (
+                    <div style={{ background: 'rgba(95,224,138,0.1)', border: '1px solid #5fe08a', color: '#5fe08a', borderRadius: '8px', padding: '12px', fontFamily: 'monospace', fontSize: '13px', fontWeight: 'bold', textAlign: 'center' }}>
+                      VAMPIRIC EFFECT ALREADY ACTIVE
+                    </div>
+                  ) : !isEpicOrHigher(equippedWeapon) ? (
+                    <div style={{ background: 'rgba(255, 68, 68, 0.1)', border: '1px solid #ff4444', color: '#ff4444', borderRadius: '8px', padding: '12px', fontFamily: 'monospace', fontSize: '13px', textAlign: 'center', lineHeight: 1.4 }}>
+                      WEAPON OF EPIC GRADE OR HIGHER REQUIRED
+                    </div>
+                  ) : (
+                    <div>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 10 }}>
+                        <label style={{ fontFamily: 'monospace', fontSize: '13px', color: '#88aadd' }}>Select Sacrificial Weapon</label>
+                        <select
+                          value={selectedSacrificeUid}
+                          onChange={(e) => setSelectedSacrificeUid(e.target.value)}
+                          style={{ width: '100%', padding: '10px', background: '#0a1628', border: '1px solid #1a3a6a', borderRadius: '8px', color: '#e0f4ff', fontFamily: 'monospace', fontSize: '13px' }}
+                        >
+                          <option value="">-- Choose Weapon --</option>
+                          {sacrificePool.map(it => (
+                            <option key={it.uid} value={it.uid}>
+                              {it.emoji} {it.name} (Lv.{it.level})
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 6, margin: '12px 0' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 11px', borderRadius: '8px', background: 'rgba(0,0,0,0.3)', border: `1px solid ${selectedSacrificeUid ? '#5fe08a' : 'rgba(255,255,255,0.08)'}` }}>
+                          <span style={{ fontFamily: "'Saira', sans-serif", fontSize: '13px', color: '#cdd5e0' }}>Sacrifice Weapon</span>
+                          <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: '13px', color: selectedSacrificeUid ? '#5fe08a' : '#ff8080', fontWeight: 700 }}>{selectedSacrificeUid ? '1 / 1' : '0 / 1'}</span>
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 11px', borderRadius: '8px', background: 'rgba(0,0,0,0.3)', border: `1px solid ${ownedFavor >= 1 ? '#5fe08a' : 'rgba(255,255,255,0.08)'}` }}>
+                          <span style={{ fontFamily: "'Saira', sans-serif", fontSize: '13px', color: '#cdd5e0' }}>Favor Talic</span>
+                          <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: '13px', color: ownedFavor >= 1 ? '#5fe08a' : '#ff8080', fontWeight: 700 }}>{ownedFavor} / 1</span>
+                        </div>
+                      </div>
+
+                      <button
+                        onClick={handleCombine}
+                        disabled={!selectedSacrificeUid || ownedFavor < 1}
+                        style={{
+                          width: '100%',
+                          border: 'none',
+                          borderRadius: '10px',
+                          padding: '11px 0',
+                          textAlign: 'center',
+                          background: (selectedSacrificeUid && ownedFavor >= 1) ? `linear-gradient(135deg, ${theme.primary}, #b32c0d)` : 'rgba(28,36,56,0.8)',
+                          boxShadow: (selectedSacrificeUid && ownedFavor >= 1) ? `0 0 14px ${theme.primary}66` : 'none',
+                          fontFamily: "'Orbitron', sans-serif",
+                          fontSize: '13px',
+                          fontWeight: '800',
+                          color: (selectedSacrificeUid && ownedFavor >= 1) ? '#fff' : '#4a8fa8',
+                          letterSpacing: '1px',
+                          cursor: (selectedSacrificeUid && ownedFavor >= 1) ? 'pointer' : 'not-allowed'
+                        }}
                       >
-                        <option value="">{t('choose_sacrifice_wep')}</option>
-                        {sacrificePool.map(it => (
-                          <option key={it.uid} value={it.uid}>
-                            {it.emoji} {it.name} (Lv.{it.level})
-                          </option>
-                        ))}
-                      </select>
+                        FORGE VAMPIRIC WEAPON
+                      </button>
                     </div>
-
-                    <div style={styles.refineCosts}>
-                      <div style={styles.costItem(sacrificePool.length > 0)}>
-                        <span>{t('sacrifice_weapon_label')}</span>
-                        <span>{selectedSacrificeUid ? '1/1' : '0/1'}</span>
-                      </div>
-                      <div style={styles.costItem(ownedFavor >= 1)}>
-                        <span>{t('talic_favor_label')}</span>
-                        <span>{ownedFavor} / 1</span>
-                      </div>
-                    </div>
-
-                    <button
-                      style={styles.smithBtn(selectedSacrificeUid && ownedFavor >= 1)}
-                      disabled={!selectedSacrificeUid || ownedFavor < 1}
-                      onClick={handleCombine}
-                    >
-                      {t('forge_vampiric_btn')}
-                    </button>
-                  </div>
-                )}
-
+                  )}
+                </div>
               </div>
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* ENHANCEMENT TAB */}
-      {activeTab === 'enhance' && (
-        <div style={{ padding: '0 16px' }}>
-          <div style={styles.formGroup}>
-            <label style={styles.label}>{t('select_equip_to_enhance')}</label>
-            <select
-              value={selectedEnhanceSlot}
-              onChange={(e) => {
-                setSelectedEnhanceSlot(e.target.value)
-                setEnhanceResult(null)
-              }}
-              style={styles.select}
-            >
-              <option value="">{t('choose_equip_slot')}</option>
-              {player.equipment && Object.entries(player.equipment).map(([slot, item]) => {
-                if (!item || ['amulet1', 'amulet2', 'ring1', 'ring2', 'ascension_arms'].includes(slot)) return null
-                return (
-                  <option key={slot} value={slot}>
-                    {slot.toUpperCase()}: {item.emoji} {item.name} (+{item.enhancement || 0})
-                  </option>
-                )
-              })}
-            </select>
+            )}
           </div>
+        )}
 
-          {/* Result notification */}
-          {enhanceResult && (
-            <div style={{
-              padding: 10,
-              borderRadius: 8,
-              fontFamily: 'monospace',
-              fontSize: 13,
-              fontWeight: 'bold',
-              textAlign: 'center',
-              background: enhanceResult.status === 'success' ? 'rgba(0,255,136,0.1)' : 'rgba(255,68,68,0.1)',
-              border: `1px solid ${enhanceResult.status === 'success' ? '#00ff88' : '#ff4444'}`,
-              color: enhanceResult.status === 'success' ? '#00ff88' : '#ff4444',
-              marginBottom: 12
-            }}>
-              {enhanceResult.status === 'success' && t('enhance_success_msg', { level: enhanceResult.level })}
-              {enhanceResult.status === 'fail' && t('enhance_fail_msg')}
-              {enhanceResult.status === 'destroyed' && t('enhance_destroyed_msg')}
+        {/* ───────── ITEM ENHANCEMENT TAB ───────── */}
+        {activeTab === 'enhance' && (
+          <div style={{ padding: '2px 16px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 14 }}>
+              <label style={{ fontFamily: 'monospace', fontSize: '13px', color: '#88aadd' }}>Select Equipment to Enhance</label>
+              <select
+                value={selectedEnhanceSlot}
+                onChange={(e) => {
+                  setSelectedEnhanceSlot(e.target.value)
+                  setEnhanceResult(null)
+                }}
+                style={{ width: '100%', padding: '10px', background: '#0a1628', border: '1px solid #1a3a6a', borderRadius: '8px', color: '#e0f4ff', fontFamily: 'monospace', fontSize: '13px' }}
+              >
+                <option value="">-- Choose Slot --</option>
+                {player.equipment && Object.entries(player.equipment).map(([slot, item]) => {
+                  if (!item || ['amulet1', 'amulet2', 'ring1', 'ring2', 'ascension_arms'].includes(slot)) return null
+                  return (
+                    <option key={slot} value={slot}>
+                      {slot.toUpperCase()}: {item.emoji} {item.name} (+{item.enhancement || 0})
+                    </option>
+                  )
+                })}
+              </select>
             </div>
-          )}
 
-          {selectedEnhanceSlot && player.equipment?.[selectedEnhanceSlot] ? (() => {
-            const item = player.equipment[selectedEnhanceSlot]
-            const currentEnh = item.enhancement || 0
-            const maxed = currentEnh >= 8
+            {/* Results display */}
+            {enhanceResult && (
+              <div style={{
+                padding: 10,
+                borderRadius: 8,
+                fontFamily: 'monospace',
+                fontSize: 13,
+                fontWeight: 'bold',
+                textAlign: 'center',
+                background: enhanceResult.status === 'success' ? 'rgba(0,255,136,0.1)' : 'rgba(255,68,68,0.1)',
+                border: `1px solid ${enhanceResult.status === 'success' ? '#00ff88' : '#ff4444'}`,
+                color: enhanceResult.status === 'success' ? '#00ff88' : '#ff4444',
+                marginBottom: 12
+              }}>
+                {enhanceResult.status === 'success' && t('enhance_success_msg', { level: enhanceResult.level })}
+                {enhanceResult.status === 'fail' && t('enhance_fail_msg')}
+                {enhanceResult.status === 'destroyed' && t('enhance_destroyed_msg')}
+              </div>
+            )}
 
-            // Costs
-            const DIVINE_CREST_COSTS = [20, 40, 60, 80, 100, 120, 150, 200]
-            const crestCost = DIVINE_CREST_COSTS[currentEnh] || 0
-            
-            // Owned materials
-            const arcaniteOwned = player.inventory.filter(it => it.id === 'mat_arcanite').length
-            const crestOwned = player.inventory.filter(it => it.id === 'mat_divine_crest').length
-            const relicOwned = player.inventory.filter(it => it.id === 'mat_lucky_relic').length
+            {selectedEnhanceSlot && player.equipment?.[selectedEnhanceSlot] ? (() => {
+              const item = player.equipment[selectedEnhanceSlot]
+              const currentEnh = item.enhancement || 0
+              const maxed = currentEnh >= 8
 
-            // Rates: +1 (100%), +2 (90%), +3 (70%), +4 (50%), +5 (35%), +6 (20%), +7 (10%), +8 (5%)
-            const BASE_SUCCESS_RATES = [100, 90, 70, 50, 35, 20, 10, 5]
-            const baseRate = BASE_SUCCESS_RATES[currentEnh] || 0
-            const finalRate = useLuckyRelic ? Math.min(100, baseRate + 10) : baseRate
+              // Costs
+              const DIVINE_CREST_COSTS = [20, 40, 60, 80, 100, 120, 150, 200]
+              const crestCost = DIVINE_CREST_COSTS[currentEnh] || 0
+              
+              // Owned materials
+              const arcaniteOwned = player.inventory.filter(it => it.id === 'mat_arcanite').length
+              const crestOwned = player.inventory.filter(it => it.id === 'mat_divine_crest').length
+              const relicOwned = player.inventory.filter(it => it.id === 'mat_lucky_relic').length
 
-            // Validity checks
-            const hasArcanite = arcaniteOwned >= 1
-            const hasCrests = crestOwned >= crestCost
-            const hasRelic = !useLuckyRelic || relicOwned >= 1
-            const canAfford = hasArcanite && hasCrests && hasRelic && !maxed
+              // Rates: +1 (100%), +2 (90%), +3 (70%), +4 (50%), +5 (35%), +6 (20%), +7 (10%), +8 (5%)
+              const BASE_SUCCESS_RATES = [100, 90, 70, 50, 35, 20, 10, 5]
+              const baseRate = BASE_SUCCESS_RATES[currentEnh] || 0
+              const finalRate = useLuckyRelic ? Math.min(100, baseRate + 10) : baseRate
 
-            return (
-              <div className="glass-panel cyber-panel panel-cyan" style={{ padding: 14, marginBottom: 12 }}>
-                {/* Central Tempering Chamber Display */}
-                <div style={styles.temperingChamber}>
-                  <div style={styles.chamberRing(isEnhancing)}>
-                    <svg width="110" height="110" style={styles.chamberSvg(isEnhancing)}>
-                      <circle cx="55" cy="55" r="46" fill="transparent" stroke="var(--neon-glow)" strokeWidth="1.5" strokeDasharray="6,4" />
-                      <circle cx="55" cy="55" r="38" fill="transparent" stroke="var(--neon-glow)" strokeWidth="1" strokeDasharray="30,8" />
+              // Validity checks
+              const hasArcanite = arcaniteOwned >= 1
+              const hasCrests = crestOwned >= crestCost
+              const hasRelic = !useLuckyRelic || relicOwned >= 1
+              const canAfford = hasArcanite && hasCrests && hasRelic && !maxed
+
+              return (
+                <div style={{ padding: '16px 14px 14px', borderRadius: '14px', background: 'rgba(6,9,14,0.75)', border: `1.5px solid ${theme.primary}52`, boxShadow: '0 8px 24px rgba(0,0,0,0.5)' }}>
+                  
+                  {/* Large SVGs tempering circle */}
+                  <div style={{ position: 'relative', width: 260, height: 260, margin: '0 auto 12px' }}>
+                    <svg width="260" height="260" style={{ position: 'absolute', top: 0, left: 0, animation: 'runeSpinRev 14s linear infinite' }}>
+                      <circle cx="130" cy="130" r="120" fill="none" stroke={`${theme.primary}4d`} strokeWidth="1.5" strokeDasharray="6,4"/>
                     </svg>
-                    <div style={styles.chamberSlot}>
-                      {item.image ? (
+                    <div style={{ position: 'absolute', top: 20, left: 20, width: 220, height: 220, borderRadius: '50%', background: `conic-gradient(from 0deg, transparent 0deg, ${theme.primary} 55deg, transparent 130deg, transparent 360deg)`, animation: 'spinFlow 4s linear infinite' }}></div>
+                    <div style={{ position: 'absolute', top: 32, left: 32, width: 196, height: 196, borderRadius: '50%', background: '#06090e' }}></div>
+                    <svg width="260" height="260" style={{ position: 'absolute', top: 0, left: 0, animation: 'runeSpin 20s linear infinite' }}>
+                      <circle cx="130" cy="130" r="100" fill="none" stroke="rgba(199,204,214,0.3)" strokeWidth="1" strokeDasharray="20,6"/>
+                    </svg>
+
+                    {/* Orbit Indicators */}
+                    {/* Top: SUCCESS RATE */}
+                    <div style={{ position: 'absolute', top: 10, left: 108, width: 44, height: 44, borderRadius: 9, background: 'rgba(10,15,25,0.95)', border: '2px solid rgba(95,224,138,0.6)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 3 }}>
+                      <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 11, fontWeight: 800, color: '#5fe08a' }}>{finalRate}%</span>
+                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 6, fontWeight: 800, color: '#8a94a3', letterSpacing: '0.3px' }}>RATE</span>
+                    </div>
+
+                    {/* Right: CREST SLOTS */}
+                    <div style={{ position: 'absolute', top: 78, left: 201, width: 44, height: 44, borderRadius: 9, background: 'rgba(10,15,25,0.95)', border: '2px solid rgba(255,95,122,0.6)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 3 }}>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ff8080" strokeWidth="1.8">
+                        <polygon points="12 2 20 7 20 17 12 22 4 17 4 7"/>
+                      </svg>
+                      <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 8, fontWeight: 800, color: '#ff8080' }}>{crestOwned}/{crestCost}</span>
+                    </div>
+
+                    {/* Right Bottom: ARCANITE CHECK */}
+                    <div style={{ position: 'absolute', top: 187, left: 166, width: 44, height: 44, borderRadius: 9, background: 'rgba(10,15,25,0.95)', border: '2px solid rgba(95,224,138,0.6)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 3 }}>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5fe08a" strokeWidth="1.8">
+                        <path d="M12 2C8 8 5 12 5 15a7 7 0 0 0 14 0c0-3-3-7-7-13z"/>
+                      </svg>
+                      <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 8, fontWeight: 800, color: '#5fe08a' }}>{arcaniteOwned}/1</span>
+                    </div>
+
+                    {/* Left Bottom: LUCKY RELIC */}
+                    <div
+                      onClick={() => !maxed && setUseLuckyRelic(!useLuckyRelic)}
+                      style={{ position: 'absolute', top: 187, left: 50, width: 44, height: 44, borderRadius: 9, background: 'rgba(10,15,25,0.95)', border: `2px solid ${useLuckyRelic ? theme.primary : 'rgba(255,255,255,0.2)'}`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 3, cursor: 'pointer' }}
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={useLuckyRelic ? theme.primary : '#8a94a3'} strokeWidth="1.8">
+                        <circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/>
+                      </svg>
+                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 6, fontWeight: 800, color: useLuckyRelic ? theme.light : '#8a94a3', letterSpacing: '0.2px' }}>
+                        {useLuckyRelic ? 'RELIC ON' : 'RELIC'}
+                      </span>
+                    </div>
+
+                    {/* Left: CURRENT LEVEL */}
+                    <div style={{ position: 'absolute', top: 78, left: 15, width: 44, height: 44, borderRadius: 9, background: 'rgba(10,15,25,0.95)', border: '2px solid rgba(199,204,214,0.5)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 3 }}>
+                      <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 11, fontWeight: 900, color: '#c7ccd6' }}>+{currentEnh}</span>
+                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 6, fontWeight: 800, color: '#8a94a3' }}>LEVEL</span>
+                    </div>
+
+                    {/* Center equipped slot */}
+                    <div style={{ position: 'absolute', top: 90, left: 90, width: 80, height: 80, borderRadius: 14, background: `linear-gradient(135deg, ${theme.primary}47, rgba(0,0,0,0.65))`, border: `2.5px solid ${theme.primary}`, boxShadow: `0 0 16px ${theme.primary}66`, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 4 }}>
+                      {isEnhancing ? (
+                        theme.weaponSmithSvg
+                      ) : item.image ? (
                         <img referrerPolicy="no-referrer" src={item.image} style={{ width: 36, height: 36, objectFit: 'contain' }} alt={item.name} />
                       ) : (
                         <span style={{ fontSize: 36 }}>{item.emoji}</span>
@@ -398,400 +679,354 @@ export default function Forge() {
                     </div>
 
                     {/* Sparks */}
-                    {(isEnhancing || isRefining) && sparks.map(s => (
+                    {isEnhancing && sparks.map(s => (
                       <div
                         key={s.id}
                         className="spark-particle"
                         style={{
-                          transform: `rotate(${s.angle}deg) translate(${s.dist}px) scale(${s.scale})`
+                          position: 'absolute',
+                          top: 130,
+                          left: 130,
+                          width: 4,
+                          height: 4,
+                          borderRadius: '50%',
+                          background: theme.primary,
+                          boxShadow: `0 0 8px ${theme.primary}`,
+                          pointerEvents: 'none',
+                          transform: `rotate(${s.angle}deg) translate(${s.dist}px) scale(${s.scale})`,
+                          transition: 'transform 1s cubic-bezier(0.1, 0.8, 0.3, 1), opacity 1s',
                         }}
                       />
                     ))}
                   </div>
 
-                  <div style={{ textAlign: 'center', marginTop: 8 }}>
-                    <div style={styles.wepName}>{item.name} <span style={{ color: '#00e5ff', fontWeight: 'bold' }}>+{currentEnh}</span></div>
-                    <div style={{ fontSize: 13, color: '#88aadd', marginTop: 4 }}>
-                      Slot: {selectedEnhanceSlot.toUpperCase()}
+                  <div style={{ textAlign: 'center', marginBottom: 12 }}>
+                    <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '15px', fontWeight: '800', color: '#fff' }}>
+                      {item.name} <span style={{ color: '#00ff88' }}>+{currentEnh} ➜ +{currentEnh + 1}</span>
                     </div>
                   </div>
-                </div>
 
-                {maxed ? (
-                  <div style={styles.maxGradeMsg}>⭐ Maximum enhancement level (+8) reached!</div>
-                ) : (
-                  <div>
-                    {/* Stat changes preview */}
-                    <div style={{ ...styles.refineCosts, background: 'rgba(0, 229, 255, 0.05)', border: '1px solid rgba(0, 229, 255, 0.1)', padding: 10, marginBottom: 12 }}>
-                      <div style={{ fontFamily: 'monospace', fontSize: 13, color: '#e0f4ff', fontWeight: 'bold', marginBottom: 6, borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: 4 }}>
-                        📈 STATS PREVIEW (+{currentEnh} ➜ +{currentEnh + 1}):
-                      </div>
-                      {item.type === 'weapon' ? (
-                        <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'monospace', fontSize: 13, color: '#fff' }}>
-                          <span>ATK Bonus:</span>
-                          <span>
-                            {Math.floor((item.bonus?.atk || 0) * (1 + currentEnh * 0.1))} ➜ <span style={{ color: '#00ff88', fontWeight: 'bold' }}>{Math.floor((item.bonus?.atk || 0) * (1 + (currentEnh + 1) * 0.1))}</span>
-                          </span>
-                        </div>
-                      ) : (
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                          <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'monospace', fontSize: 13, color: '#fff' }}>
-                            <span>DEF Bonus:</span>
-                            <span>
-                              {Math.floor((item.bonus?.def || 0) * (1 + currentEnh * 0.1))} ➜ <span style={{ color: '#00ff88', fontWeight: 'bold' }}>{Math.floor((item.bonus?.def || 0) * (1 + (currentEnh + 1) * 0.1))}</span>
-                            </span>
-                          </div>
-                          <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'monospace', fontSize: 13, color: '#fff' }}>
-                            <span>HP Bonus:</span>
-                            <span>
-                              {Math.floor((item.bonus?.hp || 0) * (1 + currentEnh * 0.1))} ➜ <span style={{ color: '#00ff88', fontWeight: 'bold' }}>{Math.floor((item.bonus?.hp || 0) * (1 + (currentEnh + 1) * 0.1))}</span>
-                            </span>
-                          </div>
-                        </div>
-                      )}
+                  {maxed ? (
+                    <div style={{ color: '#00ff88', fontFamily: "'Share Tech Mono', monospace", fontSize: '13px', fontWeight: 'bold', textAlign: 'center', padding: '10px 0' }}>
+                      ⭐ MAXIMUM ENHANCEMENT LEVEL (+8) REACHED!
                     </div>
-
-                    {/* Success Rate */}
-                    <div style={{ fontFamily: 'monospace', fontSize: 13, color: '#ffcc00', marginBottom: 12, display: 'flex', justifyContent: 'space-between' }}>
-                      <span>Success Rate:</span>
-                      <span style={{ fontWeight: 'bold' }}>{finalRate}% {useLuckyRelic && <span style={{ fontSize: 11, color: '#00ff88' }}>(+10% Boosted)</span>}</span>
-                    </div>
-
-                    {/* Destruction Warning Alert */}
-                    {currentEnh >= 5 && (
-                      <div style={{
-                        background: 'rgba(255, 68, 68, 0.15)',
-                        border: '1.5px dashed #ff4444',
-                        color: '#ff6666',
-                        padding: '10px 12px',
-                        borderRadius: 8,
-                        fontSize: 12,
-                        fontFamily: 'monospace',
-                        fontWeight: 'bold',
-                        marginBottom: 12,
-                        textAlign: 'center',
-                        lineHeight: 1.4,
-                        boxShadow: '0 0 10px rgba(255, 68, 68, 0.2)'
-                      }}>
-                        {t('enhance_destroy_warning')}
-                      </div>
-                    )}
-
-                    {/* Checkbox Lucky Relic */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
-                      <input
-                        type="checkbox"
-                        id="useLuckyRelic"
-                        checked={useLuckyRelic}
-                        onChange={(e) => setUseLuckyRelic(e.target.checked)}
-                        style={{ cursor: 'pointer', width: 16, height: 16 }}
-                      />
-                      <label htmlFor="useLuckyRelic" style={{ fontFamily: 'monospace', fontSize: 13, color: '#fff', cursor: 'pointer', userSelect: 'none' }}>
-                        {t('lucky_relic_shield_label')}
-                      </label>
-                    </div>
-
-                    {/* Materials Display */}
-                    <div style={{ ...styles.sectionTitle, marginBottom: 6 }}>REQUIRED MATERIALS</div>
-                    <div style={styles.refineCosts}>
-                      <div style={styles.costItem(hasArcanite)}>
-                        <span>{t('mat_arcanite_label')}</span>
-                        <span>{arcaniteOwned} / 1</span>
-                      </div>
-                      <div style={styles.costItem(hasCrests)}>
-                        <span>{t('mat_divine_crest_label')}</span>
-                        <span>{crestOwned} / {crestCost}</span>
-                      </div>
-                      {useLuckyRelic && (
-                        <div style={styles.costItem(hasRelic)}>
-                          <span>{t('mat_lucky_relic_label')}</span>
-                          <span>{relicOwned} / 1</span>
-                        </div>
-                      )}
-                    </div>
-
-
-
-                    <button
-                      style={styles.smithBtn(canAfford && !isEnhancing)}
-                      disabled={!canAfford || isEnhancing}
-                      onClick={handleEnhance}
-                    >
-                      {isEnhancing ? 'ENHANCING...' : t('enhance_btn_label')}
-                    </button>
-                  </div>
-                )}
-              </div>
-            )
-          })() : (
-            <div style={styles.empty}>
-              <div style={{ fontSize: 32 }}>🛡️</div>
-              <div>No item selected.</div>
-              <div style={{ fontSize: 13, color: '#7ec8e3', marginTop: 4 }}>
-                Select an equipped weapon or armor piece above to enhance its stats.
-              </div>
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* Content spacer */}
-
-      <div style={{ height: 20 }} />
-
-      {/* ───────── LEGENDARY CRAFTING TAB ───────── */}
-      {activeTab === 'legendary' && (() => {
-        const allItems = itemsData.items
-        const SHARD_TYPES = [
-          { id: 'shard_ignis_epic',  label: 'Ignis',  emoji: '🔴' },
-          { id: 'shard_virel_epic',  label: 'Virel',  emoji: '🔵' },
-          { id: 'shard_kryos_epic',  label: 'Kryos',  emoji: '🟢' },
-          { id: 'shard_zephra_epic', label: 'Zephra', emoji: '🟡' },
-          { id: 'shard_umbrix_epic', label: 'Umbrix', emoji: '⚫' },
-        ]
-        const inv = player.inventory
-        const countOf = (id) => inv.filter(i => i.id === id).length
-
-        const RECIPES = [
-          { id: 'leg_weapon', label: 'Legendary Weapon',  emoji: '⚔️',  baseId: 'mat_epic_weapon',  baseLabel: 'Epic Weapon',  shards: 6 },
-          { id: 'leg_armor',  label: 'Legendary Armor',   emoji: '🦾',  baseId: 'mat_epic_armor',   baseLabel: 'Epic Armor',   shards: 4 },
-          { id: 'leg_helmet', label: 'Legendary Helmet',  emoji: '⛑️',  baseId: 'mat_epic_armor',   baseLabel: 'Epic Armor',   shards: 4 },
-          { id: 'leg_mantle', label: 'Legendary Mantle',  emoji: '🥋',  baseId: 'mat_epic_armor',   baseLabel: 'Epic Armor',   shards: 4 },
-          { id: 'leg_gloves', label: 'Legendary Gloves',  emoji: '🧤',  baseId: 'mat_epic_armor',   baseLabel: 'Epic Armor',   shards: 4 },
-          { id: 'leg_boots',  label: 'Legendary Boots',   emoji: '👢',  baseId: 'mat_epic_armor',   baseLabel: 'Epic Armor',   shards: 4 },
-          { id: 'leg_shield', label: 'Legendary Shield',  emoji: '🛡️', baseId: 'mat_epic_armor',   baseLabel: 'Epic Armor',   shards: 4 },
-          { id: 'leg_ring',   label: 'Legendary Ring',    emoji: '💍',  baseId: 'mat_epic_ring',    baseLabel: 'Epic Ring',    shards: 5 },
-          { id: 'leg_amulet', label: 'Legendary Amulet',  emoji: '📿',  baseId: 'mat_epic_amulet',  baseLabel: 'Epic Amulet',  shards: 5 },
-          { id: 'leg_cape',   label: 'Legendary Cape',    emoji: '🦸',  baseId: 'mat_epic_cape',    baseLabel: 'Epic Cape',    shards: 5 },
-        ]
-
-        const LEGEND_STATS = {
-          leg_weapon: 'ATK+200 | HP+2000 | Crit+5%',
-          leg_armor:  'DEF+120 | HP+2500 (per piece)',
-          leg_helmet: 'DEF+120 | HP+2500 (per piece)',
-          leg_mantle: 'DEF+120 | HP+2500 (per piece)',
-          leg_gloves: 'DEF+120 | HP+2500 (per piece)',
-          leg_boots:  'DEF+120 | HP+2500 (per piece)',
-          leg_shield: 'DEF+120 | HP+2500',
-          leg_ring:   'ATK+100 | HP+1500 | Crit+3% (per piece)',
-          leg_amulet: 'DEF+100 | HP+2000 (per piece)',
-          leg_cape:   'ATK+80 | DEF+80 | HP+2000 | Crit+2%',
-        }
-
-        return (
-          <div style={{ padding: '0 16px 80px' }}>
-            <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: '#f5a623', letterSpacing: 1, marginBottom: 16, textAlign: 'center', borderBottom: '1px solid rgba(245,166,35,0.3)', paddingBottom: 8 }}>
-              ⚔️ LEGENDARY FORGE — Craft equipment of legendary power
-            </div>
-            {RECIPES.map(recipe => {
-              const baseOwned = countOf(recipe.baseId)
-              const shardCounts = SHARD_TYPES.map(s => ({ ...s, owned: countOf(s.id), need: recipe.shards }))
-              const canCraft = baseOwned >= 1 && shardCounts.every(s => s.owned >= s.need)
-              return (
-                <div key={recipe.id} style={{ marginBottom: 14, background: 'rgba(3,8,20,0.6)', border: `1px solid ${canCraft ? 'rgba(245,166,35,0.4)' : 'rgba(0,229,255,0.1)'}`, borderRadius: 12, padding: 14, boxShadow: canCraft ? '0 0 12px rgba(245,166,35,0.15)' : 'none' }}>
-                  {/* Header */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
-                    <div style={{ fontSize: 28 }}>{recipe.emoji}</div>
+                  ) : (
                     <div>
-                      <div style={{ fontFamily: 'var(--font-title)', fontSize: 15, fontWeight: 800, color: '#f5a623' }}>{recipe.label}</div>
-                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#88aadd', marginTop: 2 }}>{LEGEND_STATS[recipe.id]}</div>
-                    </div>
-                  </div>
-                  {/* Ingredients */}
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 10 }}>
-                    {/* Base material */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '4px 8px', borderRadius: 6, background: 'rgba(0,0,0,0.3)', border: `1px solid ${baseOwned >= 1 ? 'rgba(57,255,20,0.4)' : 'rgba(255,68,68,0.3)'}`, fontSize: 12, color: baseOwned >= 1 ? '#39ff14' : '#ff6666', fontWeight: 700 }}>
-                      📦 {recipe.baseLabel} ×1 ({baseOwned}/1)
-                    </div>
-                    {/* Shards */}
-                    {shardCounts.map(s => (
-                      <div key={s.id} style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '4px 8px', borderRadius: 6, background: 'rgba(0,0,0,0.3)', border: `1px solid ${s.owned >= s.need ? 'rgba(57,255,20,0.4)' : 'rgba(255,68,68,0.3)'}`, fontSize: 12, color: s.owned >= s.need ? '#39ff14' : '#ff6666', fontWeight: 700 }}>
-                        {s.emoji} {s.label} ×{s.need} ({s.owned}/{s.need})
-                      </div>
-                    ))}
-                  </div>
-                  {/* Craft Button */}
-                  <button
-                    onClick={() => {
-                      const result = craftLegendary(recipe.id)
-                      if (result?.ok) alert(`✨ ${recipe.label} berhasil dibuat!`)
-                      else alert(`❌ ${result?.msg || 'Gagal craft'}`)
-                    }}
-                    style={{ width: '100%', border: 'none', borderRadius: 8, padding: '10px 0', fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 800, cursor: canCraft ? 'pointer' : 'not-allowed', background: canCraft ? 'linear-gradient(135deg,#f5a623,#ff6b35)' : 'rgba(28,36,56,0.8)', color: canCraft ? '#000' : '#4a8fa8', letterSpacing: 1, boxShadow: canCraft ? '0 0 12px rgba(245,166,35,0.4)' : 'none', transition: 'all 0.2s' }}
-                  >
-                    {canCraft ? `⚡ CRAFT ${recipe.label.toUpperCase()}` : '🔒 BAHAN KURANG'}
-                  </button>
-                </div>
-              )
-            })}
-          </div>
-        )
-      })()}
-
-      {/* ───────── SET SHOP TAB ───────── */}
-      {activeTab === 'setshop' && (() => {
-        const credits = player.resources.credits
-        const inv = player.inventory
-        const countInInvOrEquip = (setId) => {
-          const eq = player.equipment || {}
-          const inInv = inv.filter(i => i.setId === setId).length
-          const inEq = Object.values(eq).filter(i => i && i.setId === setId).length
-          return inInv + inEq
-        }
-
-        const SETS = [
-          {
-            setId: 'eminence',
-            name: 'Eminence Set',
-            emoji: '👑',
-            color: '#f5a623',
-            total: 7,
-            fullBonus: 'ATK+100 | DEF+100 | HP+2000 | Crit+2%',
-            pieces: [
-              { id: 'eminence_helmet', name: 'Helmet',    price: 100000000 },
-              { id: 'eminence_armor',  name: 'Armor',     price: 100000000 },
-              { id: 'eminence_gloves', name: 'Gloves',    price: 100000000 },
-              { id: 'eminence_pants',  name: 'Pants',     price: 100000000 },
-              { id: 'eminence_boots',  name: 'Boots',     price: 100000000 },
-              { id: 'eminence_cape',   name: 'Cape',      price: 100000000 },
-              { id: 'eminence_staff',  name: 'Leadership Staff', price: 200000000 },
-            ]
-          },
-          {
-            setId: 'vice_eminence',
-            name: 'Vice Eminence Set',
-            emoji: '⚜️',
-            color: '#cc44ff',
-            total: 6,
-            fullBonus: 'ATK+80 | DEF+80 | HP+1500 | Crit+1%',
-            pieces: [
-              { id: 'vice_helmet', name: 'Helmet', price: 75000000 },
-              { id: 'vice_armor',  name: 'Armor',  price: 75000000 },
-              { id: 'vice_gloves', name: 'Gloves', price: 75000000 },
-              { id: 'vice_pants',  name: 'Pants',  price: 75000000 },
-              { id: 'vice_boots',  name: 'Boots',  price: 75000000 },
-              { id: 'vice_cape',   name: 'Cape',   price: 75000000 },
-            ]
-          },
-          {
-            setId: 'council_atk',
-            name: 'Attack Council Set',
-            emoji: '⚔️',
-            color: '#ff4444',
-            total: 6,
-            fullBonus: 'ATK+100 | DEF+50 | HP+1200',
-            pieces: [
-              { id: 'council_atk_helmet', name: 'Helmet', price: 50000000 },
-              { id: 'council_atk_armor',  name: 'Armor',  price: 50000000 },
-              { id: 'council_atk_gloves', name: 'Gloves', price: 50000000 },
-              { id: 'council_atk_pants',  name: 'Pants',  price: 50000000 },
-              { id: 'council_atk_boots',  name: 'Boots',  price: 50000000 },
-              { id: 'council_atk_cape',   name: 'Cape',   price: 50000000 },
-            ]
-          },
-          {
-            setId: 'council_def',
-            name: 'Defense Council Set',
-            emoji: '🛡️',
-            color: '#00aaff',
-            total: 6,
-            fullBonus: 'ATK+50 | DEF+100 | HP+1200',
-            pieces: [
-              { id: 'council_def_helmet', name: 'Helmet', price: 50000000 },
-              { id: 'council_def_armor',  name: 'Armor',  price: 50000000 },
-              { id: 'council_def_gloves', name: 'Gloves', price: 50000000 },
-              { id: 'council_def_pants',  name: 'Pants',  price: 50000000 },
-              { id: 'council_def_boots',  name: 'Boots',  price: 50000000 },
-              { id: 'council_def_cape',   name: 'Cape',   price: 50000000 },
-            ]
-          },
-          {
-            setId: 'council_sup',
-            name: 'Support Council Set',
-            emoji: '🤝',
-            color: '#00ffaa',
-            total: 6,
-            fullBonus: 'ATK+70 | DEF+70 | HP+1200',
-            pieces: [
-              { id: 'council_sup_helmet', name: 'Helmet', price: 50000000 },
-              { id: 'council_sup_armor',  name: 'Armor',  price: 50000000 },
-              { id: 'council_sup_gloves', name: 'Gloves', price: 50000000 },
-              { id: 'council_sup_pants',  name: 'Pants',  price: 50000000 },
-              { id: 'council_sup_boots',  name: 'Boots',  price: 50000000 },
-              { id: 'council_sup_cape',   name: 'Cape',   price: 50000000 },
-            ]
-          },
-        ]
-
-        return (
-          <div style={{ padding: '0 16px 80px' }}>
-            <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: '#cc44ff', letterSpacing: 1, marginBottom: 16, textAlign: 'center', borderBottom: '1px solid rgba(204,68,255,0.3)', paddingBottom: 8 }}>
-              👑 SET SHOP — Per piece: ATK+20-30 | DEF+20-30 | HP+300-500
-            </div>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#7ab0d0', textAlign: 'center', marginBottom: 16 }}>
-              ◈ CRD Kamu: <span style={{ color: '#00e5ff', fontWeight: 800 }}>{credits.toLocaleString()}</span>
-            </div>
-            {SETS.map(set => {
-              const owned = countInInvOrEquip(set.setId)
-              const isComplete = owned >= set.total
-              return (
-                <div key={set.setId} style={{ marginBottom: 18, background: 'rgba(3,8,20,0.6)', border: `1px solid ${isComplete ? set.color : 'rgba(255,255,255,0.08)'}`, borderRadius: 14, overflow: 'hidden', boxShadow: isComplete ? `0 0 16px ${set.color}33` : 'none' }}>
-                  {/* Set Header */}
-                  <div style={{ background: `linear-gradient(135deg, ${set.color}22, rgba(3,8,20,0.95))`, padding: '12px 14px', borderBottom: `1px solid ${set.color}33` }}>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                        <span style={{ fontSize: 22 }}>{set.emoji}</span>
-                        <div>
-                          <div style={{ fontFamily: 'var(--font-title)', fontSize: 14, fontWeight: 800, color: set.color }}>{set.name}</div>
-                          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#88aadd', marginTop: 2 }}>Full Set ({set.total}/{set.total}): {set.fullBonus}</div>
-                        </div>
-                      </div>
-                      <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, color: isComplete ? set.color : '#7ab0d0', fontWeight: 800 }}>
-                        {owned}/{set.total} {isComplete ? '✓' : ''}
-                      </div>
-                    </div>
-                  </div>
-                  {/* Pieces */}
-                  <div style={{ padding: '10px 14px', display: 'flex', flexDirection: 'column', gap: 8 }}>
-                    {set.pieces.map(piece => {
-                      const inInv = inv.filter(i => i.id === piece.id).length
-                      const inEq = Object.values(player.equipment || {}).some(e => e && e.id === piece.id)
-                      const alreadyOwned = inInv > 0 || inEq
-                      const canAfford = credits >= piece.price
-                      return (
-                        <div key={piece.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'rgba(0,0,0,0.2)', padding: '8px 10px', borderRadius: 8, border: `1px solid ${alreadyOwned ? set.color + '44' : 'rgba(255,255,255,0.05)'}` }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                            <span style={{ fontSize: 16 }}>{set.emoji}</span>
-                            <div>
-                              <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 700, color: alreadyOwned ? set.color : '#e0f4ff' }}>{piece.name} {alreadyOwned ? '✓' : ''}</div>
-                              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: canAfford && !alreadyOwned ? '#00ff88' : '#7ab0d0' }}>◈ {(piece.price / 1000000).toFixed(0)}M CRD</div>
+                      {/* Stat Preview Panel */}
+                      <div style={{ padding: '10px 12px', borderRadius: '8px', background: `${theme.primary}12`, border: `1px solid ${theme.primary}47`, margin: '14px 0 12px' }}>
+                        <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '11px', fontWeight: '800', color: theme.light, letterSpacing: '0.5px', marginBottom: '6px' }}>STATS PREVIEW (+{currentEnh} ➜ +{currentEnh + 1})</div>
+                        {item.type === 'weapon' ? (
+                          <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'monospace', fontSize: '13px', color: '#cdd5e0' }}>
+                            <span>ATK Bonus:</span>
+                            <span>{Math.floor((item.bonus?.atk || 0) * (1 + currentEnh * 0.1))} ➜ <b style={{ color: '#5fe08a' }}>{Math.floor((item.bonus?.atk || 0) * (1 + (currentEnh + 1) * 0.1))}</b></span>
+                          </div>
+                        ) : (
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'monospace', fontSize: '13px', color: '#cdd5e0' }}>
+                              <span>DEF Bonus:</span>
+                              <span>{Math.floor((item.bonus?.def || 0) * (1 + currentEnh * 0.1))} ➜ <b style={{ color: '#5fe08a' }}>{Math.floor((item.bonus?.def || 0) * (1 + (currentEnh + 1) * 0.1))}</b></span>
+                            </div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'monospace', fontSize: '13px', color: '#cdd5e0' }}>
+                              <span>HP Bonus:</span>
+                              <span>{Math.floor((item.bonus?.hp || 0) * (1 + currentEnh * 0.1))} ➜ <b style={{ color: '#5fe08a' }}>{Math.floor((item.bonus?.hp || 0) * (1 + (currentEnh + 1) * 0.1))}</b></span>
                             </div>
                           </div>
-                          <button
-                            disabled={alreadyOwned || !canAfford}
-                            onClick={() => {
-                              const result = buySetItem(piece.id)
-                              if (result?.ok) alert(`✅ ${piece.name} berhasil dibeli!`)
-                              else alert(`❌ ${result?.msg}`)
-                            }}
-                            style={{ border: 'none', borderRadius: 6, padding: '6px 12px', fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 800, cursor: alreadyOwned || !canAfford ? 'not-allowed' : 'pointer', background: alreadyOwned ? 'rgba(57,255,20,0.15)' : canAfford ? set.color : 'rgba(28,36,56,0.8)', color: alreadyOwned ? '#39ff14' : canAfford ? '#000' : '#4a8fa8', whiteSpace: 'nowrap' }}
-                          >
-                            {alreadyOwned ? 'OWNED' : canAfford ? 'BELI' : 'CRD ❌'}
-                          </button>
+                        )}
+                      </div>
+
+                      {/* Destruction warning alert */}
+                      {currentEnh >= 5 && (
+                        <div style={{ padding: '10px 12px', borderRadius: '8px', background: 'rgba(255,68,68,0.12)', border: '1.5px dashed #ff4444', fontFamily: "'Share Tech Mono', monospace", fontSize: '11px', color: '#ff8080', textAlign: 'center', lineHeight: 1.4, marginBottom: '12px' }}>
+                          ⚠ +5 AND ABOVE RISKS ITEM DESTRUCTION ON FAILURE
                         </div>
-                      )
-                    })}
-                  </div>
+                      )}
+
+                      {/* Checkbox Lucky Relic in form */}
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}>
+                        <input
+                          type="checkbox"
+                          id="useLuckyRelicChk"
+                          checked={useLuckyRelic}
+                          onChange={(e) => setUseLuckyRelic(e.target.checked)}
+                          style={{ cursor: 'pointer', width: 15, height: 15 }}
+                        />
+                        <label htmlFor="useLuckyRelicChk" style={{ fontFamily: 'monospace', fontSize: '13px', color: '#fff', cursor: 'pointer', userSelect: 'none' }}>
+                          Gunakan Lucky Relic (+10% Success Rate)
+                        </label>
+                      </div>
+
+                      <button
+                        onClick={handleEnhance}
+                        disabled={!canAfford || isEnhancing}
+                        style={{
+                          width: '100%',
+                          border: 'none',
+                          borderRadius: '10px',
+                          padding: '11px 0',
+                          textAlign: 'center',
+                          background: canAfford ? `linear-gradient(135deg, ${theme.primary}, #b32c0d)` : 'rgba(28,36,56,0.8)',
+                          boxShadow: canAfford ? `0 0 14px ${theme.primary}66` : 'none',
+                          fontFamily: "'Orbitron', sans-serif",
+                          fontSize: '13px',
+                          fontWeight: '800',
+                          color: canAfford ? '#fff' : '#4a8fa8',
+                          letterSpacing: '1px',
+                          cursor: canAfford ? 'pointer' : 'not-allowed'
+                        }}
+                      >
+                        {isEnhancing ? 'ENHANCING...' : 'ENHANCE ITEM'}
+                      </button>
+                    </div>
+                  )}
+
                 </div>
               )
-            })}
+            })() : (
+              <div style={styles.empty}>
+                <div style={{ fontSize: 32 }}>🛡️</div>
+                <div style={{ fontFamily: "'Orbitron', sans-serif", color: '#fff', fontWeight: 'bold' }}>NO ITEM SELECTED</div>
+                <div style={{ fontSize: 13, color: theme.tabInactiveColor, marginTop: 4 }}>
+                  Select an equipped weapon or armor piece above to enhance its stats.
+                </div>
+              </div>
+            )}
           </div>
-        )
-      })()}
+        )}
 
+        {activeTab === 'legendary' && (() => {
+          const SHARD_TYPES = [
+            { id: 'shard_ignis_epic',  label: 'Ignis',  emoji: '🔴' },
+            { id: 'shard_virel_epic',  label: 'Virel',  emoji: '🔵' },
+            { id: 'shard_kryos_epic',  label: 'Kryos',  emoji: '🟢' },
+            { id: 'shard_zephra_epic', label: 'Zephra', emoji: '🟡' },
+            { id: 'shard_umbrix_epic', label: 'Umbrix', emoji: '⚫' },
+          ]
+          const inv = player.inventory
+          const countOf = (id) => inv.filter(i => i.id === id).length
+
+          const RECIPES = [
+            { id: 'leg_weapon', label: 'Legendary Weapon',  emoji: '⚔️',  baseId: 'mat_epic_weapon',  baseLabel: 'Epic Weapon',  shards: 6 },
+            { id: 'leg_armor',  label: 'Legendary Armor',   emoji: '🦾',  baseId: 'mat_epic_armor',   baseLabel: 'Epic Armor',   shards: 4 },
+            { id: 'leg_helmet', label: 'Legendary Helmet',  emoji: '⛑️',  baseId: 'mat_epic_armor',   baseLabel: 'Epic Armor',   shards: 4 },
+            { id: 'leg_mantle', label: 'Legendary Mantle',  emoji: '🥋',  baseId: 'mat_epic_armor',   baseLabel: 'Epic Armor',   shards: 4 },
+            { id: 'leg_gloves', label: 'Legendary Gloves',  emoji: '🧤',  baseId: 'mat_epic_armor',   baseLabel: 'Epic Armor',   shards: 4 },
+            { id: 'leg_boots',  label: 'Legendary Boots',   emoji: '👢',  baseId: 'mat_epic_armor',   baseLabel: 'Epic Armor',   shards: 4 },
+            { id: 'leg_shield', label: 'Legendary Shield',  emoji: '🛡️',  baseId: 'mat_epic_armor',   baseLabel: 'Epic Armor',   shards: 4 },
+            { id: 'leg_ring',   label: 'Legendary Ring',    emoji: '💍',  baseId: 'mat_epic_ring',    baseLabel: 'Epic Ring',    shards: 5 },
+            { id: 'leg_amulet', label: 'Legendary Amulet',  emoji: '📿',  baseId: 'mat_epic_amulet',  baseLabel: 'Epic Amulet',  shards: 5 },
+            { id: 'leg_cape',   label: 'Legendary Cape',    emoji: '🦸',  baseId: 'mat_epic_cape',    baseLabel: 'Epic Cape',    shards: 5 },
+          ]
+
+          const LEGEND_STATS = {
+            leg_weapon: 'ATK+200 | HP+2000 | Crit+5%',
+            leg_armor:  'DEF+120 | HP+2500 (per piece)',
+            leg_helmet: 'DEF+120 | HP+2500 (per piece)',
+            leg_mantle: 'DEF+120 | HP+2500 (per piece)',
+            leg_gloves: 'DEF+120 | HP+2500 (per piece)',
+            leg_boots:  'DEF+120 | HP+2500 (per piece)',
+            leg_shield: 'DEF+120 | HP+2500',
+            leg_ring:   'ATK+100 | HP+1500 | Crit+3% (per piece)',
+            leg_amulet: 'DEF+100 | HP+2000 (per piece)',
+            leg_cape:   'ATK+80 | DEF+80 | HP+2000 | Crit+2%',
+          }
+
+          return (
+            <div style={{ padding: '0 16px 80px' }}>
+              <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, color: '#f5a623', letterSpacing: 1, marginBottom: 14, textAlign: 'center', borderBottom: '1px solid rgba(245,166,35,0.3)', paddingBottom: 8 }}>
+                ⚔️ LEGENDARY FORGE — Craft equipment of legendary power
+              </div>
+              {RECIPES.map(recipe => {
+                const baseOwned = countOf(recipe.baseId)
+                const shardCounts = SHARD_TYPES.map(s => ({ ...s, owned: countOf(s.id), need: recipe.shards }))
+                const canCraft = baseOwned >= 1 && shardCounts.every(s => s.owned >= s.need)
+                return (
+                  <div key={recipe.id} style={{ marginBottom: 14, background: 'rgba(3,8,20,0.6)', border: `1.5px solid ${canCraft ? '#f5a623' : 'rgba(255,255,255,0.08)'}`, borderRadius: 12, padding: 14 }}>
+                    {/* Header */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
+                      <div style={{ fontSize: 28 }}>{recipe.emoji}</div>
+                      <div>
+                        <div style={{ fontFamily: 'var(--font-title)', fontSize: 15, fontWeight: 800, color: '#f5a623' }}>{recipe.label}</div>
+                        <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#88aadd', marginTop: 2 }}>{LEGEND_STATS[recipe.id]}</div>
+                      </div>
+                    </div>
+                    {/* Ingredients */}
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 10 }}>
+                      {/* Base material */}
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '4px 8px', borderRadius: 6, background: 'rgba(0,0,0,0.3)', border: `1px solid ${baseOwned >= 1 ? 'rgba(95,224,138,0.4)' : 'rgba(255,95,122,0.3)'}`, fontSize: 12, color: baseOwned >= 1 ? '#5fe08a' : '#ff6a4d', fontWeight: 700 }}>
+                        📦 {recipe.baseLabel} ×1 ({baseOwned}/1)
+                      </div>
+                      {/* Shards */}
+                      {shardCounts.map(s => (
+                        <div key={s.id} style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '4px 8px', borderRadius: 6, background: 'rgba(0,0,0,0.3)', border: `1px solid ${s.owned >= s.need ? 'rgba(95,224,138,0.4)' : 'rgba(255,95,122,0.3)'}`, fontSize: 12, color: s.owned >= s.need ? '#5fe08a' : '#ff6a4d', fontWeight: 700 }}>
+                          {s.emoji} {s.label} ×{s.need} ({s.owned}/{s.need})
+                        </div>
+                      ))}
+                    </div>
+                    {/* Craft Button */}
+                    <button
+                      onClick={() => {
+                        const result = craftLegendary(recipe.id)
+                        if (result?.ok) alert(`✨ ${recipe.label} berhasil dibuat!`)
+                        else alert(`❌ ${result?.msg || 'Gagal craft'}`)
+                      }}
+                      disabled={!canCraft}
+                      style={{ width: '100%', border: 'none', borderRadius: 8, padding: '10px 0', fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 800, cursor: canCraft ? 'pointer' : 'not-allowed', background: canCraft ? 'linear-gradient(135deg,#f5a623,#ff6b35)' : 'rgba(28,36,56,0.8)', color: canCraft ? '#1a0f00' : '#4a8fa8', letterSpacing: 1, boxShadow: canCraft ? '0 0 12px rgba(245,166,35,0.4)' : 'none', transition: 'all 0.2s' }}
+                    >
+                      {canCraft ? `⚡ CRAFT ${recipe.label.toUpperCase()}` : '🔒 MATERIALS MISSING'}
+                    </button>
+                  </div>
+                )
+              })}
+            </div>
+          )
+        })()}
+
+        {/* ───────── SET SHOP TAB ───────── */}
+        {activeTab === 'setshop' && (() => {
+          const credits = player.resources.credits
+          const inv = player.inventory
+          const countInInvOrEquip = (setId) => {
+            const eq = player.equipment || {}
+            const inInv = inv.filter(i => i.setId === setId).length
+            const inEq = Object.values(eq).filter(i => i && i.setId === setId).length
+            return inInv + inEq
+          }
+
+          const SETS = [
+            {
+              setId: 'eminence',
+              name: 'Eminence Set',
+              emoji: '👑',
+              color: '#f5a623',
+              total: 7,
+              fullBonus: 'ATK+100 | DEF+100 | HP+2000 | Crit+2%',
+              pieces: [
+                { id: 'emi_helmet', name: 'Helmet', price: 100000000 },
+                { id: 'emi_armor',  name: 'Armor',  price: 100000000 },
+                { id: 'emi_pants',  name: 'Pants',  price: 100000000 },
+                { id: 'emi_gloves', name: 'Gloves', price: 100000000 },
+                { id: 'emi_boots',  name: 'Boots',  price: 100000000 },
+                { id: 'emi_ring',   name: 'Ring',   price: 100000000 },
+                { id: 'emi_amulet', name: 'Amulet', price: 100000000 },
+              ]
+            },
+            {
+              setId: 'council_atk',
+              name: 'Attack Council Set',
+              emoji: '⚔️',
+              color: '#ff4444',
+              total: 6,
+              fullBonus: 'ATK+100 | DEF+50 | HP+1200',
+              pieces: [
+                { id: 'council_atk_helmet', name: 'Helmet', price: 50000000 },
+                { id: 'council_atk_armor',  name: 'Armor',  price: 50000000 },
+                { id: 'council_atk_gloves', name: 'Gloves', price: 50000000 },
+                { id: 'council_atk_pants',  name: 'Pants',  price: 50000000 },
+                { id: 'council_atk_boots',  name: 'Boots',  price: 50000000 },
+                { id: 'council_atk_cape',   name: 'Cape',   price: 50000000 },
+              ]
+            },
+            {
+              setId: 'council_def',
+              name: 'Defense Council Set',
+              emoji: '🛡️',
+              color: '#00aaff',
+              total: 6,
+              fullBonus: 'ATK+50 | DEF+100 | HP+1200',
+              pieces: [
+                { id: 'council_def_helmet', name: 'Helmet', price: 50000000 },
+                { id: 'council_def_armor',  name: 'Armor',  price: 50000000 },
+                { id: 'council_def_gloves', name: 'Gloves', price: 50000000 },
+                { id: 'council_def_pants',  name: 'Pants',  price: 50000000 },
+                { id: 'council_def_boots',  name: 'Boots',  price: 50000000 },
+                { id: 'council_def_cape',   name: 'Cape',   price: 50000000 },
+              ]
+            },
+            {
+              setId: 'council_sup',
+              name: 'Support Council Set',
+              emoji: '🤝',
+              color: '#00ffaa',
+              total: 6,
+              fullBonus: 'ATK+70 | DEF+70 | HP+1200',
+              pieces: [
+                { id: 'council_sup_helmet', name: 'Helmet', price: 50000000 },
+                { id: 'council_sup_armor',  name: 'Armor',  price: 50000000 },
+                { id: 'council_sup_gloves', name: 'Gloves', price: 50000000 },
+                { id: 'council_sup_pants',  name: 'Pants',  price: 50000000 },
+                { id: 'council_sup_boots',  name: 'Boots',  price: 50000000 },
+                { id: 'council_sup_cape',   name: 'Cape',   price: 50000000 },
+              ]
+            },
+          ]
+
+          return (
+            <div style={{ padding: '0 16px 80px' }}>
+              <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: '#cc44ff', letterSpacing: 1, marginBottom: 16, textAlign: 'center', borderBottom: '1px solid rgba(204,68,255,0.3)', paddingBottom: 8 }}>
+                👑 SET SHOP — Per piece: ATK+20-30 | DEF+20-30 | HP+300-500
+              </div>
+              {SETS.map(set => {
+                const owned = countInInvOrEquip(set.setId)
+                const isComplete = owned >= set.total
+                return (
+                  <div key={set.setId} style={{ marginBottom: 18, background: 'rgba(3,8,20,0.6)', border: `1px solid ${isComplete ? set.color : 'rgba(255,255,255,0.08)'}`, borderRadius: 14, overflow: 'hidden', boxShadow: isComplete ? `0 0 16px ${set.color}33` : 'none' }}>
+                    {/* Set Header */}
+                    <div style={{ background: `linear-gradient(135deg, ${set.color}22, rgba(3,8,20,0.95))`, padding: '12px 14px', borderBottom: `1px solid ${set.color}33` }}>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                          <span style={{ fontSize: 22 }}>{set.emoji}</span>
+                          <div>
+                            <div style={{ fontFamily: 'var(--font-title)', fontSize: 14, fontWeight: 800, color: set.color }}>{set.name}</div>
+                            <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#88aadd', marginTop: 2 }}>Full Set ({set.total}/{set.total}): {set.fullBonus}</div>
+                          </div>
+                        </div>
+                        <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, color: isComplete ? set.color : '#7ab0d0', fontWeight: 800 }}>
+                          {owned}/{set.total} {isComplete ? '✓' : ''}
+                        </div>
+                      </div>
+                    </div>
+                    {/* Pieces */}
+                    <div style={{ padding: '10px 14px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+                      {set.pieces.map(piece => {
+                        const inInv = inv.filter(i => i.id === piece.id).length
+                        const inEq = Object.values(player.equipment || {}).some(e => e && e.id === piece.id)
+                        const alreadyOwned = inInv > 0 || inEq
+                        const canAfford = credits >= piece.price
+                        return (
+                          <div key={piece.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'rgba(0,0,0,0.2)', padding: '8px 10px', borderRadius: 8, border: `1px solid ${alreadyOwned ? set.color + '44' : 'rgba(255,255,255,0.05)'}` }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                              <span style={{ fontSize: 16 }}>{set.emoji}</span>
+                              <div>
+                                <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 700, color: alreadyOwned ? set.color : '#e0f4ff' }}>{piece.name} {alreadyOwned ? '✓' : ''}</div>
+                                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: canAfford && !alreadyOwned ? '#00ff88' : '#7ab0d0' }}>◈ {(piece.price / 1000000).toFixed(0)}M CRD</div>
+                              </div>
+                            </div>
+                            <button
+                              disabled={alreadyOwned || !canAfford}
+                              onClick={() => {
+                                const result = buySetItem(piece.id)
+                                if (result?.ok) alert(`✅ ${piece.name} berhasil dibeli!`)
+                                else alert(`❌ ${result?.msg}`)
+                              }}
+                              style={{ border: 'none', borderRadius: 6, padding: '6px 12px', fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 800, cursor: alreadyOwned || !canAfford ? 'not-allowed' : 'pointer', background: alreadyOwned ? 'rgba(57,255,20,0.15)' : canAfford ? set.color : 'rgba(28,36,56,0.8)', color: alreadyOwned ? '#39ff14' : canAfford ? '#000' : '#4a8fa8', whiteSpace: 'nowrap' }}
+                            >
+                              {alreadyOwned ? 'OWNED' : canAfford ? 'BELI' : 'CRD ❌'}
+                            </button>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          )
+        })()}
+      </div>
     </div>
   )
 }
+
 
 const styles = {
   screen: { display: 'flex', flexDirection: 'column', flex: 1, overflowY: 'auto', fontFamily: 'var(--font-body)', paddingBottom: 80 },

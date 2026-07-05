@@ -21,6 +21,21 @@ function tStore(key, replacements = {}, playerState = null) {
 }
 
 
+function addToInventory(inventory, item, count = 1) {
+  const newInv = [...inventory]
+  for (let i = 0; i < count; i++) {
+    const uid = i === 0 && item.uid ? item.uid : Date.now() + Math.floor(Math.random() * 1000000)
+    newInv.push({ ...item, uid })
+  }
+  return newInv
+}
+
+function removeFromInventory(inventory, uid, count = 1) {
+  return inventory.filter((i) => i.uid !== uid)
+}
+
+
+
 function calcUpgradeCost(key, level) {
   const cfg = upgradesConfig[key]
   const lvl = level || 0
