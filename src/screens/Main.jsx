@@ -672,7 +672,7 @@ const FOCUS_MODE_LABEL = { arctron: 'FIGHT', bionex: 'GATHER', celestra: 'CHANNE
                     <EnemySprite isBoss={battle.isBoss} isPitBoss={battle.isPitBoss} size={160} />
                   )}
                 </div>
-                <div style={styles.spriteLabel}>{battle.currentMob.name?.split(' ')[0]}</div>
+                <div style={styles.spriteLabel}>{battle.currentMob.name?.toUpperCase()}</div>
               </div>
             ) : (
               <div style={styles.enemySprite}>
