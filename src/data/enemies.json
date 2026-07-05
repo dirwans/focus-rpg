@@ -89,42 +89,46 @@
         {
           "name": "Fangclaw",
           "emoji": "🐺",
-          "hp": 118,
-          "atk": 9,
-          "def": 2,
+          "hp": 3000,
+          "atk": 80,
+          "def": 50,
           "expReward": 13,
           "aniumReward": 8,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_17.png"
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_17.png",
+          "critical": 5
         },
         {
           "name": "Thornmaw",
           "emoji": "🥀",
-          "hp": 178,
-          "atk": 13,
-          "def": 4,
+          "hp": 5000,
+          "atk": 100,
+          "def": 65,
           "expReward": 17,
           "aniumReward": 11,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_1.png"
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_1.png",
+          "critical": 6
         },
         {
           "name": "Sylvan Wolf",
           "emoji": "🐺",
-          "hp": 238,
-          "atk": 17,
-          "def": 6,
+          "hp": 8000,
+          "atk": 130,
+          "def": 80,
           "expReward": 21,
           "aniumReward": 14,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster-digger-clan.png"
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster-digger-clan.png",
+          "critical": 7
         },
         {
           "name": "Vine Stalker",
           "emoji": "🌿",
-          "hp": 250,
-          "atk": 18,
-          "def": 6,
+          "hp": 12000,
+          "atk": 160,
+          "def": 100,
           "expReward": 22,
           "aniumReward": 15,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster-digger-clan.png"
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster-digger-clan.png",
+          "critical": 8
         }
       ],
       "boss": {
@@ -163,42 +167,46 @@
         {
           "name": "Steel Hound",
           "emoji": "🐕",
-          "hp": 175,
-          "atk": 13,
-          "def": 3,
+          "hp": 18000,
+          "atk": 200,
+          "def": 130,
           "expReward": 19,
           "aniumReward": 11,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_6.png"
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_6.png",
+          "critical": 9
         },
         {
           "name": "Scrap Golem",
           "emoji": "🤖",
-          "hp": 265,
-          "atk": 19,
-          "def": 6,
+          "hp": 25000,
+          "atk": 240,
+          "def": 155,
           "expReward": 25,
           "aniumReward": 16,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/demolith-monster.png"
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/demolith-monster.png",
+          "critical": 10
         },
         {
           "name": "Iron Wasp",
           "emoji": "🐝",
-          "hp": 355,
-          "atk": 25,
-          "def": 9,
+          "hp": 35000,
+          "atk": 290,
+          "def": 185,
           "expReward": 31,
           "aniumReward": 20,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/turncoat-champion-sette.png"
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/turncoat-champion-sette.png",
+          "critical": 11
         },
         {
           "name": "Machawarden",
           "emoji": "🦾",
-          "hp": 380,
-          "atk": 27,
-          "def": 10,
+          "hp": 50000,
+          "atk": 350,
+          "def": 220,
           "expReward": 33,
           "aniumReward": 22,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/turncoat-champion-sette.png"
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/turncoat-champion-sette.png",
+          "critical": 12
         }
       ],
       "boss": {
@@ -237,42 +245,46 @@
         {
           "name": "Infernox",
           "emoji": "🕷️",
-          "hp": 259,
-          "atk": 18,
-          "def": 5,
+          "hp": 70000,
+          "atk": 450,
+          "def": 280,
           "expReward": 26,
           "aniumReward": 16,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/archer-sette.png"
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/archer-sette.png",
+          "critical": 13
         },
         {
           "name": "Flame Fiend",
           "emoji": "🔥",
-          "hp": 379,
-          "atk": 26,
-          "def": 9,
+          "hp": 100000,
+          "atk": 520,
+          "def": 330,
           "expReward": 34,
           "aniumReward": 22,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/monster_69.png"
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/monster_69.png",
+          "critical": 14
         },
         {
           "name": "Lava Beetle",
           "emoji": "🐞",
-          "hp": 499,
-          "atk": 34,
-          "def": 13,
+          "hp": 140000,
+          "atk": 600,
+          "def": 380,
           "expReward": 42,
           "aniumReward": 28,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/monster_67.png"
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/monster_67.png",
+          "critical": 15
         },
         {
           "name": "Magma Hound",
           "emoji": "🐕",
-          "hp": 520,
-          "atk": 36,
-          "def": 14,
+          "hp": 200000,
+          "atk": 700,
+          "def": 450,
           "expReward": 44,
           "aniumReward": 30,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/monster_67.png"
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/monster_67.png",
+          "critical": 16
         }
       ],
       "boss": {
@@ -311,42 +323,46 @@
         {
           "name": "Trinity Sentinel",
           "emoji": "🛡️",
-          "hp": 383,
-          "atk": 25,
-          "def": 7,
+          "hp": 300000,
+          "atk": 850,
+          "def": 550,
           "expReward": 36,
           "aniumReward": 23,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_6.png"
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_6.png",
+          "critical": 17
         },
         {
           "name": "Core Phantom",
           "emoji": "👻",
-          "hp": 533,
-          "atk": 35,
-          "def": 12,
+          "hp": 450000,
+          "atk": 950,
+          "def": 650,
           "expReward": 46,
           "aniumReward": 30,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/demolith-monster.png"
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/demolith-monster.png",
+          "critical": 18
         },
         {
           "name": "Nexus Harbinger",
           "emoji": "🔮",
-          "hp": 683,
-          "atk": 45,
-          "def": 17,
+          "hp": 650000,
+          "atk": 1100,
+          "def": 750,
           "expReward": 56,
           "aniumReward": 38,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/10/tuyul.png"
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/10/tuyul.png",
+          "critical": 19
         },
         {
           "name": "Flux Avatar",
           "emoji": "🌀",
-          "hp": 710,
-          "atk": 47,
-          "def": 18,
+          "hp": 900000,
+          "atk": 1250,
+          "def": 850,
           "expReward": 58,
           "aniumReward": 40,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/10/tuyul.png"
+          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/10/tuyul.png",
+          "critical": 20
         }
       ],
       "boss": {
@@ -415,11 +431,11 @@
       ],
       "boss": {
         "name": "Burrow King",
-        "emoji": "🏛️",
-        "hp": 1200000,
-        "atk": 1000,
-        "def": 650,
-        "critical": 5,
+        "emoji": "🏗️",
+        "hp": 2000000,
+        "atk": 400,
+        "def": 250,
+        "critical": 8,
         "regen": 500,
         "expReward": 1200,
         "aniumReward": 800,
@@ -478,10 +494,10 @@
       "boss": {
         "name": "Inferno Colossus",
         "emoji": "🔥",
-        "hp": 4000000,
-        "atk": 2500,
-        "def": 1600,
-        "critical": 10,
+        "hp": 10000000,
+        "atk": 800,
+        "def": 500,
+        "critical": 12,
         "regen": 2000,
         "expReward": 4000,
         "aniumReward": 2500,
@@ -540,10 +556,10 @@
       "boss": {
         "name": "Trinity Guardian",
         "emoji": "☢️",
-        "hp": 10000000,
-        "atk": 5000,
-        "def": 3500,
-        "critical": 15,
+        "hp": 50000000,
+        "atk": 1500,
+        "def": 900,
+        "critical": 18,
         "regen": 5000,
         "expReward": 10000,
         "aniumReward": 6000,
@@ -562,5 +578,17 @@
         "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/baalhamon-pitboss.png"
       }
     }
-  ]
+  ],
+  "worldBoss": {
+    "name": "Kaelgorath",
+    "emoji": "🔮",
+    "hp": 1000000000,
+    "atk": 3500,
+    "def": 2000,
+    "critical": 25,
+    "regen": 500000,
+    "expReward": 100000,
+    "aniumReward": 50000,
+    "image": ""
+  }
 }

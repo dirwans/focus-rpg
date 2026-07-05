@@ -300,15 +300,54 @@ export default function LibraryModal({ onClose }) {
               <div style={styles.itemCard}>
                 <div style={styles.itemTitle}>⚔️ Pit Boss (Overlord) Roster &amp; Stats</div>
                 {[
-                  { name: '🌱 LUMORA OVERLORD (Map 1)', stats: 'HP: 750,000 | ATK: 1,100' },
-                  { name: '🌿 SYLVAN OVERLORD (Map 2)', stats: 'HP: 1,750,000 | ATK: 2,250' },
-                  { name: '⚙️ IRON OVERLORD (Map 3)', stats: 'HP: 3,500,000 | ATK: 4,250' },
-                  { name: '🔥 PYRAXIS ELITE (Map 4)', stats: 'HP: 7,500,000 | ATK: 7,500' },
-                  { name: '☢️ TRINITY SOVEREIGN (Map 5)', stats: 'HP: 15,000,000 | ATK: 10,000' },
+                  { name: '🌱 LUMORA OVERLORD (Map 1)', stats: 'HP: 750,000 | ATK: 1,100 | DEF: 600 | CRIT: 5%' },
+                  { name: '🌿 SYLVAN OVERLORD (Map 2)', stats: 'HP: 1,750,000 | ATK: 2,250 | DEF: 1,250 | CRIT: 5%' },
+                  { name: '⚙️ IRON OVERLORD (Map 3)', stats: 'HP: 3,500,000 | ATK: 4,250 | DEF: 2,500 | CRIT: 10%' },
+                  { name: '🔥 PYRAXIS ELITE (Map 4)', stats: 'HP: 7,500,000 | ATK: 7,500 | DEF: 4,500 | CRIT: 12%' },
+                  { name: '☢️ TRINITY SOVEREIGN (Map 5)', stats: 'HP: 15,000,000 | ATK: 10,000 | DEF: 6,000 | CRIT: 5%' },
                 ].map((b, i) => (
                   <div key={i} style={{ display: 'flex', flexDirection: 'column', padding: '6px 0', borderBottom: i < 4 ? '1px solid rgba(255,255,255,0.07)' : 'none', fontFamily: 'var(--font-mono)', fontSize: 12 }}>
                     <span style={{ color: '#ff985a', fontWeight: 'bold' }}>{b.name}</span>
                     <span style={{ color: '#88aadd', fontSize: 11, marginTop: 2 }}>{b.stats}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* World Boss: Kaelgorath */}
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>🔮 World Boss — Kaelgorath</div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#ff5f7a', fontWeight: 700, marginBottom: 8 }}>LEGENDARY WORLD BOSS — OPEN WORLD EVENT</div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px 12px', fontFamily: 'var(--font-mono)', fontSize: 12, marginBottom: 10 }}>
+                  <span style={{ color: '#88aadd' }}>❤️ HP</span><span style={{ color: '#ff4444', fontWeight: 700 }}>1,000,000,000 (1 Milyar)</span>
+                  <span style={{ color: '#88aadd' }}>⚔️ ATK</span><span style={{ color: '#ff985a', fontWeight: 700 }}>3,500</span>
+                  <span style={{ color: '#88aadd' }}>🛡️ DEF</span><span style={{ color: '#00e5ff', fontWeight: 700 }}>2,000</span>
+                  <span style={{ color: '#88aadd' }}>💥 CRIT</span><span style={{ color: '#ffd700', fontWeight: 700 }}>25%</span>
+                </div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#ffd700', fontWeight: 700, marginBottom: 4 }}>SPECIAL RULES</div>
+                <ul style={styles.list}>
+                  <li>👥 Harus dilawan secara <strong>multiplayer</strong> atau guild.</li>
+                  <li>🏆 Drop <strong>Legendary Equipment</strong> eksklusif.</li>
+                  <li>⏰ Respawn setiap <strong>24 jam</strong> server time.</li>
+                </ul>
+              </div>
+
+              {/* Dungeon Boss Stats */}
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>🏗️ Dungeon Boss Stats</div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 0.8fr 0.8fr 0.8fr', gap: '4px', borderBottom: '1px solid rgba(0,229,255,0.3)', paddingBottom: '6px', marginBottom: '6px', fontFamily: 'var(--font-mono)', fontSize: 11, color: '#00e5ff', fontWeight: 700 }}>
+                  <span>Dungeon</span><span>HP</span><span>ATK</span><span>DEF</span><span>CRIT</span>
+                </div>
+                {[
+                  { name: '🏗️ Echo Burrow', level: 'Lv.30', hp: '2 Juta', atk: '400', def: '250', crit: '8%' },
+                  { name: '🔥 Infernal Forge', level: 'Lv.50', hp: '10 Juta', atk: '800', def: '500', crit: '12%' },
+                  { name: '☢️ Trinity Core', level: 'Lv.65', hp: '50 Juta', atk: '1,500', def: '900', crit: '18%' },
+                ].map((b, i) => (
+                  <div key={i} style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 0.8fr 0.8fr 0.8fr', gap: '4px', padding: '5px 0', borderBottom: i < 2 ? '1px solid rgba(255,255,255,0.07)' : 'none', fontFamily: 'var(--font-mono)', fontSize: 11 }}>
+                    <span style={{ color: '#e0f4ff', fontWeight: 700 }}>{b.name}<br/><span style={{ color: '#88aadd', fontSize: 10 }}>{b.level}</span></span>
+                    <span style={{ color: '#ff4444' }}>{b.hp}</span>
+                    <span style={{ color: '#ff985a' }}>{b.atk}</span>
+                    <span style={{ color: '#00e5ff' }}>{b.def}</span>
+                    <span style={{ color: '#ffd700' }}>{b.crit}</span>
                   </div>
                 ))}
               </div>
