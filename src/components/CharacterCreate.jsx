@@ -232,30 +232,7 @@ export default function CharacterCreate() {
         </>
       )}
 
-      {/* 2. Class Select & Character Creation Pilot Sprite */}
-      {(step === 2 || step === 3) && (
-        <div style={{
-          position: 'absolute',
-          left: 64,
-          right: 0,
-          top: 0,
-          bottom: 0,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          zIndex: 2,
-          pointerEvents: 'none'
-        }}>
-          <PilotSprite
-            race={raceId}
-            job={jobId}
-            gender={gender}
-            height="350px"
-            width="auto"
-            style={{ animation: 'heroFloat 6s ease-in-out infinite', marginBottom: '-20px' }}
-          />
-        </div>
-      )}
+      {/* 2. Class Select & Character Creation — remove floating background sprite */}
 
 
       {/* 2. Left Rail Progress / Faction Tabs */}
@@ -430,18 +407,35 @@ export default function CharacterCreate() {
           height: 'calc(100% - 130px)',
           overflow: 'hidden'
         }}>
-          {/* Top Preview Space Spacer */}
+          {/* Framed Sprite Preview Box — matches reference design */}
           <div style={{ 
-            position: 'relative', 
+            position: 'relative',
             width: '100%', 
-            height: '240px', 
-            flexShrink: 0
+            height: '220px',
+            flexShrink: 0,
+            background: `radial-gradient(ellipse at 50% 100%, ${finalTheme.primary}33 0%, rgba(6,5,6,0.6) 70%)`,
+            border: `1px solid ${finalTheme.primary}44`,
+            clipPath: 'polygon(0 14px, 14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%)',
+            overflow: 'hidden',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'flex-end'
           }}>
-            <span style={{ position: 'absolute', bottom: 5, left: 0, fontFamily: "'Share Tech Mono', monospace", fontSize: 13, color: finalTheme.light, opacity: 0.8, letterSpacing: '1px' }}>
-              PREVIEW
-            </span>
-            <span style={{ position: 'absolute', bottom: 5, right: 0, fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 900, color: '#ffffff', letterSpacing: '1px' }}>
-              {getClassBaseName(jobId)} ({activeJobs.find(j => j.id === jobId)?.name.toUpperCase()})
+            {/* Sprite inside preview box */}
+            <div style={{ animation: 'heroFloat 6s ease-in-out infinite' }}>
+              <PilotSprite
+                race={raceId}
+                job={jobId}
+                gender={gender}
+                height="210px"
+                width="auto"
+              />
+            </div>
+            {/* PREVIEW label bottom-left */}
+            <span style={{ position: 'absolute', bottom: 8, left: 10, fontFamily: "'Share Tech Mono', monospace", fontSize: 12, color: finalTheme.light, opacity: 0.7, letterSpacing: '2px' }}>PREVIEW</span>
+            {/* Class name bottom-right */}
+            <span style={{ position: 'absolute', bottom: 8, right: 10, fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 900, color: '#ffffff', letterSpacing: '1px' }}>
+              {getClassBaseName(jobId)}
             </span>
           </div>
 
@@ -570,19 +564,33 @@ export default function CharacterCreate() {
           height: 'calc(100% - 130px)',
           overflow: 'hidden'
         }}>
-          {/* Top Preview Space Spacer */}
+          {/* Framed Sprite Preview Box — matches reference design */}
           <div style={{ 
-            position: 'relative', 
+            position: 'relative',
             width: '100%', 
-            height: '240px', 
+            height: '220px',
             flexShrink: 0,
-            marginTop: 10
+            marginTop: 10,
+            background: `radial-gradient(ellipse at 50% 100%, ${finalTheme.primary}33 0%, rgba(6,5,6,0.6) 70%)`,
+            border: `1px solid ${finalTheme.primary}44`,
+            clipPath: 'polygon(0 14px, 14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%)',
+            overflow: 'hidden',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'flex-end'
           }}>
-            <span style={{ position: 'absolute', bottom: 5, left: 0, fontFamily: "'Share Tech Mono', monospace", fontSize: 13, color: finalTheme.light, opacity: 0.8, letterSpacing: '1px' }}>
-              PREVIEW
-            </span>
-            <span style={{ position: 'absolute', bottom: 5, right: 0, fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 900, color: '#ffffff', letterSpacing: '1px' }}>
-              {getClassBaseName(jobId)} ({activeJobs.find(j => j.id === jobId)?.name.toUpperCase()})
+            <div style={{ animation: 'heroFloat 6s ease-in-out infinite' }}>
+              <PilotSprite
+                race={raceId}
+                job={jobId}
+                gender={gender}
+                height="210px"
+                width="auto"
+              />
+            </div>
+            <span style={{ position: 'absolute', bottom: 8, left: 10, fontFamily: "'Share Tech Mono', monospace", fontSize: 12, color: finalTheme.light, opacity: 0.7, letterSpacing: '2px' }}>PREVIEW</span>
+            <span style={{ position: 'absolute', bottom: 8, right: 10, fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 900, color: '#ffffff', letterSpacing: '1px' }}>
+              {getClassBaseName(jobId)}
             </span>
           </div>
         </div>
