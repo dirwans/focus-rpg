@@ -21402,6 +21402,54 @@
       },
       "description": "ATK+20 DEF+20 HP+300 | Full Set 6/6: ATK+70 DEF+70 HP+1200",
       "enhanceable": true
+    },
+    {
+      "id": "tool_mining_pickaxe",
+      "name": "Standard Mining Pickaxe",
+      "emoji": "⛏️",
+      "rarity": "common",
+      "type": "tool",
+      "race": "All",
+      "level": 1,
+      "bonus": {},
+      "description": "Alat standar untuk menambang di Trinity Core Mine.",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile001.png"
+    },
+    {
+      "id": "pot_mining_battery_s",
+      "name": "Mining Battery [S]",
+      "emoji": "🔋",
+      "rarity": "common",
+      "type": "consumable",
+      "race": "All",
+      "level": 1,
+      "bonus": {},
+      "description": "Baterai kecil untuk menyuplai energi penambangan.",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile003.png"
+    },
+    {
+      "id": "pot_mining_battery_m",
+      "name": "Mining Battery [M]",
+      "emoji": "🔋",
+      "rarity": "uncommon",
+      "type": "consumable",
+      "race": "All",
+      "level": 10,
+      "bonus": {},
+      "description": "Baterai sedang untuk menyuplai energi penambangan.",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile003.png"
+    },
+    {
+      "id": "pot_mining_battery_l",
+      "name": "Mining Battery [L]",
+      "emoji": "🔋",
+      "rarity": "rare",
+      "type": "consumable",
+      "race": "All",
+      "level": 30,
+      "bonus": {},
+      "description": "Baterai besar untuk menyuplai energi penambangan.",
+      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile003.png"
     }
   ]
 }

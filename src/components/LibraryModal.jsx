@@ -438,82 +438,100 @@ export default function LibraryModal({ onClose }) {
                 Semua NPC berada di <strong style={{ color: '#00e5ff' }}>NPC Base</strong> — pusat layanan utama Headquarters.
               </p>
 
-              {/* Arsenal Keeper */}
+              {/* 1. Weapon Master */}
               <div style={styles.itemCard}>
-                <div style={styles.itemTitle}>⚔️ Arsenal Keeper — <span style={{ color: '#88aadd', fontSize: 13, fontWeight: 400 }}>Weapon NPC</span></div>
+                <div style={styles.itemTitle}>⚔️ Weapon Master — <span style={{ color: '#88aadd', fontSize: 13, fontWeight: 400 }}>Weapon NPC</span></div>
                 <ul style={styles.list}>
-                  <li>Menjual <strong>Common Weapon</strong>.</li>
-                  <li>Membeli semua <strong>Weapon</strong>.</li>
+                  <li>Menjual seluruh Weapon grade Common.</li>
                 </ul>
               </div>
 
-              {/* Armory Keeper */}
+              {/* 2. Armor Master */}
               <div style={styles.itemCard}>
-                <div style={styles.itemTitle}>🛡️ Armory Keeper — <span style={{ color: '#88aadd', fontSize: 13, fontWeight: 400 }}>Armor NPC</span></div>
+                <div style={styles.itemTitle}>🛡️ Armor Master — <span style={{ color: '#88aadd', fontSize: 13, fontWeight: 400 }}>Armor NPC</span></div>
                 <ul style={styles.list}>
-                  <li>Menjual <strong>Common Armor &amp; Shield</strong>.</li>
-                  <li>Membeli semua <strong>Armor &amp; Shield</strong>.</li>
+                  <li>Menjual seluruh Armor grade Common (Helmet, Armor, Gloves, Pants, Boots, dan Shield).</li>
                 </ul>
               </div>
 
-              {/* Forge Master */}
+              {/* 3. Potion Merchant */}
               <div style={styles.itemCard}>
-                <div style={styles.itemTitle}>✨ Forge Master — <span style={{ color: '#88aadd', fontSize: 13, fontWeight: 400 }}>Enhancement NPC</span></div>
+                <div style={styles.itemTitle}>🧪 Potion Merchant — <span style={{ color: '#88aadd', fontSize: 13, fontWeight: 400 }}>Consumable NPC</span></div>
                 <ul style={styles.list}>
-                  <li>Enhancement Equipment <strong>+1 hingga +8</strong>.</li>
-                  <li>Menggunakan <strong>Arcanite</strong>, <strong>Divine Crest</strong>, dan <strong>Lucky Relic</strong> (opsional).</li>
-                  <li>Failure +1~+5: Material hilang, Equipment <strong style={{ color: '#00ff88' }}>aman</strong>.</li>
-                  <li>Failure +6~+8: Material hilang, Equipment <strong style={{ color: '#ff4444' }}>hancur (Destroyed)</strong>.</li>
+                  <li>Menjual HP Potion dan FP Potion.</li>
                 </ul>
               </div>
 
-              {/* Master Artisan */}
+              {/* 4. Mining Supplier */}
               <div style={styles.itemCard}>
-                <div style={styles.itemTitle}>🔨 Master Artisan — <span style={{ color: '#88aadd', fontSize: 13, fontWeight: 400 }}>Crafting NPC</span></div>
+                <div style={styles.itemTitle}>⛏️ Mining Supplier — <span style={{ color: '#88aadd', fontSize: 13, fontWeight: 400 }}>Mining Supplier NPC</span></div>
                 <ul style={styles.list}>
-                  <li>Craft <strong>Cape</strong> <span style={{ color: '#88aadd', fontSize: 12 }}>(semua bangsa)</span>.</li>
-                  <li>Craft <strong>ARES Components</strong> <span style={{ color: '#ff3d00', fontSize: 12, fontWeight: 700 }}>— Khusus Arctron</span>.</li>
-                  <li>Craft <strong>M.E.U. Components</strong> <span style={{ color: '#ffd600', fontSize: 12, fontWeight: 700 }}>— Khusus Bionex</span>.</li>
-                  <li>Craft <strong>Ancient Spirit Components</strong> <span style={{ color: '#00e5ff', fontSize: 12, fontWeight: 700 }}>— Khusus Celestra</span>.</li>
+                  <li>Menjual seluruh peralatan Mining, Mining Battery, dan perlengkapan yang dibutuhkan untuk Trinity Core Mine.</li>
                 </ul>
               </div>
 
-              {/* Guild Steward */}
+              {/* 5. Eminence Quartermaster */}
               <div style={styles.itemCard}>
-                <div style={styles.itemTitle}>🏰 Guild Steward — <span style={{ color: '#88aadd', fontSize: 13, fontWeight: 400 }}>Guild NPC</span></div>
+                <div style={styles.itemTitle}>🎖️ Eminence Quartermaster — <span style={{ color: '#88aadd', fontSize: 13, fontWeight: 400 }}>Government Equipment NPC</span></div>
                 <ul style={styles.list}>
-                  <li>Membuat Guild.</li>
-                  <li>Bergabung &amp; keluar Guild.</li>
-                  <li>Upgrade Guild.</li>
-                  <li>Mengelola Guild.</li>
+                  <li>Menjual Government Equipment (Eminence, Vice Eminence, Attack Council, Defense Council, dan Support Council Set).</li>
                 </ul>
               </div>
 
-              {/* Vault Keeper */}
+              {/* 6. Enchantment Master */}
               <div style={styles.itemCard}>
-                <div style={styles.itemTitle}>📦 Vault Keeper — <span style={{ color: '#88aadd', fontSize: 13, fontWeight: 400 }}>Warehouse NPC</span></div>
+                <div style={styles.itemTitle}>✨ Enchantment Master — <span style={{ color: '#88aadd', fontSize: 13, fontWeight: 400 }}>Enhancement NPC</span></div>
                 <ul style={styles.list}>
-                  <li>Menyimpan dan mengambil semua item dari <strong>Personal Warehouse</strong>.</li>
+                  <li>Melakukan Enhancement/Enchant seluruh Equipment.</li>
                 </ul>
               </div>
 
-              {/* Grand Warden */}
+              {/* 7. Craft Master */}
               <div style={styles.itemCard}>
-                <div style={styles.itemTitle}>📜 Grand Warden — <span style={{ color: '#88aadd', fontSize: 13, fontWeight: 400 }}>Quest NPC</span></div>
+                <div style={styles.itemTitle}>🔨 Craft Master — <span style={{ color: '#88aadd', fontSize: 13, fontWeight: 400 }}>Crafting NPC</span></div>
                 <ul style={styles.list}>
-                  <li>Main Quest.</li>
-                  <li>Daily Quest.</li>
-                  <li>Weekly Quest.</li>
-                  <li>Achievement Reward.</li>
+                  <li>Crafting Shard, Arcanite, Legendary Equipment, dan seluruh sistem crafting lainnya.</li>
                 </ul>
               </div>
 
-              {/* Trade Broker */}
+              {/* 8. Warehouse Keeper */}
               <div style={styles.itemCard}>
-                <div style={styles.itemTitle}>💰 Trade Broker — <span style={{ color: '#88aadd', fontSize: 13, fontWeight: 400 }}>Auction NPC</span></div>
+                <div style={styles.itemTitle}>📦 Warehouse Keeper — <span style={{ color: '#88aadd', fontSize: 13, fontWeight: 400 }}>Warehouse NPC</span></div>
                 <ul style={styles.list}>
-                  <li>Auction House.</li>
-                  <li>Jual beli item antar pemain.</li>
+                  <li>Menyimpan seluruh item pemain.</li>
+                </ul>
+              </div>
+
+              {/* 9. Quest Manager */}
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>📜 Quest Manager — <span style={{ color: '#88aadd', fontSize: 13, fontWeight: 400 }}>Quest &amp; Job Promotion NPC</span></div>
+                <ul style={styles.list}>
+                  <li>Memberikan, menerima, dan menyelesaikan Quest.</li>
+                  <li>Mengelola kenaikan pangkat (Job Class Promotion) &amp; Reclass.</li>
+                </ul>
+              </div>
+
+              {/* 10. Auction Manager */}
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>💰 Auction Manager — <span style={{ color: '#88aadd', fontSize: 13, fontWeight: 400 }}>Auction NPC</span></div>
+                <ul style={styles.list}>
+                  <li>Mengelola Auction House, pembelian, penjualan, dan pembatalan listing.</li>
+                </ul>
+              </div>
+
+              {/* 11. Guild Manager */}
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>🏰 Guild Manager — <span style={{ color: '#88aadd', fontSize: 13, fontWeight: 400 }}>Guild NPC</span></div>
+                <ul style={styles.list}>
+                  <li>Membuat Guild dan mengelola seluruh fitur Guild.</li>
+                </ul>
+              </div>
+
+              {/* 12. Premium Shop Manager */}
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>💎 Premium Shop Manager — <span style={{ color: '#88aadd', fontSize: 13, fontWeight: 400 }}>Premium NPC</span></div>
+                <ul style={styles.list}>
+                  <li>Menjual seluruh item Premium Shop menggunakan mata uang NXC.</li>
                 </ul>
               </div>
             </div>

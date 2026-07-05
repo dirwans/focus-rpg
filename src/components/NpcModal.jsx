@@ -88,6 +88,16 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
 
   const [subView, setSubView] = useState(initialView) // 'lobby', 'specialist', 'hero', 'promote', 'reclass', 'shop'
   const [activeLaneIdx, setActiveLaneIdx] = useState(() => getPlayerLaneIndex(player.race, player.job))
+  const [premiumTab, setPremiumTab] = useState('shop') // 'topup' | 'shop'
+  const [premiumCat, setPremiumCat] = useState('all')
+  const [premiumNow, setPremiumNow] = useState(Date.now())
+  const [premiumTestMode, setPremiumTestMode] = useState(false)
+  const [questTab, setQuestTab] = useState('quests') // 'quests' | 'promotion'
+
+  React.useEffect(() => {
+    const iv = setInterval(() => setPremiumNow(Date.now()), 1000)
+    return () => clearInterval(iv)
+  }, [])
 
   if (!player.race) {
     return (
@@ -194,14 +204,18 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
             {subView === 'promote' && specialistName}
             {subView === 'reclass' && specialistName}
             {subView === 'shop' && heroName}
-            {subView === 'arsenal_keeper' && '⚔️ Arsenal Keeper'}
-            {subView === 'armory_keeper' && '🛡️ Armory Keeper'}
-            {subView === 'forge_master' && '✨ Forge Master'}
-            {subView === 'master_artisan' && '🔨 Master Artisan'}
-            {subView === 'guild_steward' && '🏰 Guild Steward'}
-            {subView === 'vault_keeper' && '📦 Vault Keeper'}
-            {subView === 'grand_warden' && '📜 Grand Warden'}
-            {subView === 'trade_broker' && '💰 Trade Broker'}
+            {subView === 'arsenal_keeper' && '⚔️ Weapon Master'}
+            {subView === 'armory_keeper' && '🛡️ Armor Master'}
+            {subView === 'potion_merchant' && '🧪 Potion Merchant'}
+            {subView === 'mining_supplier' && '⛏️ Mining Supplier'}
+            {subView === 'eminence_qm' && '🎖️ Eminence Quartermaster'}
+            {subView === 'forge_master' && '✨ Enchantment Master'}
+            {subView === 'master_artisan' && '🔨 Craft Master'}
+            {subView === 'vault_keeper' && '📦 Warehouse Keeper'}
+            {subView === 'grand_warden' && '📜 Quest Manager'}
+            {subView === 'trade_broker' && '💰 Auction Manager'}
+            {subView === 'guild_steward' && '🏰 Guild Manager'}
+            {subView === 'premium_shop_mgr' && '💎 Premium Shop Manager'}
           </span>
         </div>
 
@@ -213,19 +227,151 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                 🏛️ NPC BASE — Headquarters
               </p>
 
-              {/* Faction Specialist */}
-              <button onClick={() => setSubView('specialist')} className="cyber-panel" style={styles.lobbyCard}>
+              {/* 1. Weapon Master */}
+              <button onClick={() => setSubView('arsenal_keeper')} className="cyber-panel" style={styles.lobbyCard}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <div style={styles.lobbyIcon}>🤖</div>
+                  <div style={styles.lobbyIcon}>⚔️</div>
                   <div style={{ textAlign: 'left' }}>
-                    <div style={styles.lobbyCardTitle}>{specialistName}</div>
-                    <div style={styles.lobbyCardDesc}>Job Class & Promotion</div>
+                    <div style={styles.lobbyCardTitle}>Weapon Master</div>
+                    <div style={styles.lobbyCardDesc}>Common Weapon Shop</div>
                   </div>
                 </div>
               </button>
 
-              {/* Race Hero */}
-              <button onClick={() => setSubView('hero')} className="cyber-panel" style={styles.lobbyCard}>
+              {/* 2. Armor Master */}
+              <button onClick={() => setSubView('armory_keeper')} className="cyber-panel" style={styles.lobbyCard}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <div style={styles.lobbyIcon}>🛡️</div>
+                  <div style={{ textAlign: 'left' }}>
+                    <div style={styles.lobbyCardTitle}>Armor Master</div>
+                    <div style={styles.lobbyCardDesc}>Common Armor &amp; Shield Shop</div>
+                  </div>
+                </div>
+              </button>
+
+              {/* 3. Potion Merchant */}
+              <button onClick={() => setSubView('potion_merchant')} className="cyber-panel" style={styles.lobbyCard}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <div style={styles.lobbyIcon}>🧪</div>
+                  <div style={{ textAlign: 'left' }}>
+                    <div style={styles.lobbyCardTitle}>Potion Merchant</div>
+                    <div style={styles.lobbyCardDesc}>HP Potion &amp; FP Potion</div>
+                  </div>
+                </div>
+              </button>
+
+              {/* 4. Mining Supplier */}
+              <button onClick={() => setSubView('mining_supplier')} className="cyber-panel" style={styles.lobbyCard}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <div style={styles.lobbyIcon}>⛏️</div>
+                  <div style={{ textAlign: 'left' }}>
+                    <div style={styles.lobbyCardTitle}>Mining Supplier</div>
+                    <div style={styles.lobbyCardDesc}>Mining Tools &amp; Trinity Core Mine</div>
+                  </div>
+                </div>
+              </button>
+
+              {/* 5. Eminence Quartermaster */}
+              <button onClick={() => setSubView('eminence_qm')} className="cyber-panel" style={{...styles.lobbyCard, opacity: 0.6}}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <div style={styles.lobbyIcon}>🎖️</div>
+                  <div style={{ textAlign: 'left' }}>
+                    <div style={styles.lobbyCardTitle}>Eminence Quartermaster</div>
+                    <div style={styles.lobbyCardDesc}>Government Equipment — Coming Soon</div>
+                  </div>
+                </div>
+              </button>
+
+              {/* 6. Enchantment Master */}
+              <button onClick={() => setSubView('forge_master')} className="cyber-panel" style={styles.lobbyCard}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <div style={styles.lobbyIcon}>✨</div>
+                  <div style={{ textAlign: 'left' }}>
+                    <div style={styles.lobbyCardTitle}>Enchantment Master</div>
+                    <div style={styles.lobbyCardDesc}>Enhancement / Enchant Equipment</div>
+                  </div>
+                </div>
+              </button>
+
+              {/* 7. Craft Master */}
+              <button onClick={() => setSubView('master_artisan')} className="cyber-panel" style={styles.lobbyCard}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <div style={styles.lobbyIcon}>🔨</div>
+                  <div style={{ textAlign: 'left' }}>
+                    <div style={styles.lobbyCardTitle}>Craft Master</div>
+                    <div style={styles.lobbyCardDesc}>Shard, Arcanite &amp; Legendary Crafting</div>
+                  </div>
+                </div>
+              </button>
+
+              {/* 8. Warehouse Keeper */}
+              <button onClick={() => setSubView('vault_keeper')} className="cyber-panel" style={styles.lobbyCard}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <div style={styles.lobbyIcon}>📦</div>
+                  <div style={{ textAlign: 'left' }}>
+                    <div style={styles.lobbyCardTitle}>Warehouse Keeper</div>
+                    <div style={styles.lobbyCardDesc}>Personal Warehouse &amp; Upgrades</div>
+                  </div>
+                </div>
+              </button>
+
+              {/* 9. Quest Manager */}
+              <button onClick={() => setSubView('grand_warden')} className="cyber-panel" style={{...styles.lobbyCard, opacity: 0.6}}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <div style={styles.lobbyIcon}>📜</div>
+                  <div style={{ textAlign: 'left' }}>
+                    <div style={styles.lobbyCardTitle}>Quest Manager</div>
+                    <div style={styles.lobbyCardDesc}>Quest &amp; Promotion — Coming Soon</div>
+                  </div>
+                </div>
+              </button>
+
+              {/* 10. Auction Manager */}
+              <button onClick={() => setSubView('trade_broker')} className="cyber-panel" style={styles.lobbyCard}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <div style={styles.lobbyIcon}>💰</div>
+                  <div style={{ textAlign: 'left' }}>
+                    <div style={styles.lobbyCardTitle}>Auction Manager</div>
+                    <div style={styles.lobbyCardDesc}>Auction House — Buy, Sell, List</div>
+                  </div>
+                </div>
+              </button>
+
+              {/* 11. Guild Manager */}
+              <button onClick={() => setSubView('guild_steward')} className="cyber-panel" style={{...styles.lobbyCard, opacity: 0.6}}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <div style={styles.lobbyIcon}>🏰</div>
+                  <div style={{ textAlign: 'left' }}>
+                    <div style={styles.lobbyCardTitle}>Guild Manager</div>
+                    <div style={styles.lobbyCardDesc}>Guild Management — Coming Soon</div>
+                  </div>
+                </div>
+              </button>
+
+              {/* 12. Premium Shop Manager */}
+              <button onClick={() => setSubView('premium_shop_mgr')} className="cyber-panel" style={styles.lobbyCard}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <div style={styles.lobbyIcon}>💎</div>
+                  <div style={{ textAlign: 'left' }}>
+                    <div style={styles.lobbyCardTitle}>Premium Shop Manager</div>
+                    <div style={styles.lobbyCardDesc}>Premium Items — NXC Currency</div>
+                  </div>
+                </div>
+              </button>
+
+              {/* Faction Specialist (internal) */}
+              <button onClick={() => setSubView('specialist')} className="cyber-panel" style={{...styles.lobbyCard, background: 'rgba(0,0,0,0.2)', borderColor: 'rgba(255,255,255,0.08)'}}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <div style={styles.lobbyIcon}>🤖</div>
+                  <div style={{ textAlign: 'left' }}>
+                    <div style={styles.lobbyCardTitle}>{specialistName}</div>
+                    <div style={styles.lobbyCardDesc}>Job Class &amp; Promotion</div>
+                  </div>
+                </div>
+              </button>
+
+              {/* Race Hero (internal) */}
+              <button onClick={() => setSubView('hero')} className="cyber-panel" style={{...styles.lobbyCard, background: 'rgba(0,0,0,0.2)', borderColor: 'rgba(255,255,255,0.08)'}}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                   <div style={styles.lobbyIcon}>🏆</div>
                   <div style={{ textAlign: 'left' }}>
@@ -234,109 +380,10 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                   </div>
                 </div>
               </button>
-
-              {/* Arsenal Keeper */}
-              <button onClick={() => setSubView('arsenal_keeper')} className="cyber-panel" style={styles.lobbyCard}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <div style={styles.lobbyIcon}>⚔️</div>
-                  <div style={{ textAlign: 'left' }}>
-                    <div style={styles.lobbyCardTitle}>Arsenal Keeper</div>
-                    <div style={styles.lobbyCardDesc}>Buy / Sell Weapons</div>
-                  </div>
-                </div>
-              </button>
-
-              {/* Armory Keeper */}
-              <button onClick={() => setSubView('armory_keeper')} className="cyber-panel" style={styles.lobbyCard}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <div style={styles.lobbyIcon}>🛡️</div>
-                  <div style={{ textAlign: 'left' }}>
-                    <div style={styles.lobbyCardTitle}>Armory Keeper</div>
-                    <div style={styles.lobbyCardDesc}>Buy / Sell Armor & Shield</div>
-                  </div>
-                </div>
-              </button>
-
-              {/* Forge Master */}
-              <button onClick={() => setSubView('forge_master')} className="cyber-panel" style={styles.lobbyCard}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <div style={styles.lobbyIcon}>✨</div>
-                  <div style={{ textAlign: 'left' }}>
-                    <div style={styles.lobbyCardTitle}>Forge Master</div>
-                    <div style={styles.lobbyCardDesc}>Enhancement Equipment +1~+8</div>
-                  </div>
-                </div>
-              </button>
-
-              {/* Master Artisan */}
-              <button onClick={() => setSubView('master_artisan')} className="cyber-panel" style={styles.lobbyCard}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <div style={styles.lobbyIcon}>🔨</div>
-                  <div style={{ textAlign: 'left' }}>
-                    <div style={styles.lobbyCardTitle}>Master Artisan</div>
-                    <div style={styles.lobbyCardDesc}>Craft Cape & Ascension Components</div>
-                  </div>
-                </div>
-              </button>
-
-              {/* Guild Steward */}
-              <button onClick={() => setSubView('guild_steward')} className="cyber-panel" style={{...styles.lobbyCard, opacity: 0.6}}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <div style={styles.lobbyIcon}>🏰</div>
-                  <div style={{ textAlign: 'left' }}>
-                    <div style={styles.lobbyCardTitle}>Guild Steward</div>
-                    <div style={styles.lobbyCardDesc}>Guild Management — Coming Soon</div>
-                  </div>
-                </div>
-              </button>
-
-              {/* Vault Keeper */}
-              <button onClick={() => setSubView('vault_keeper')} className="cyber-panel" style={styles.lobbyCard}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <div style={styles.lobbyIcon}>📦</div>
-                  <div style={{ textAlign: 'left' }}>
-                    <div style={styles.lobbyCardTitle}>Vault Keeper</div>
-                    <div style={styles.lobbyCardDesc}>Personal Warehouse & Upgrades</div>
-                  </div>
-                </div>
-              </button>
-
-              {/* Grand Warden */}
-              <button onClick={() => setSubView('grand_warden')} className="cyber-panel" style={{...styles.lobbyCard, opacity: 0.6}}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <div style={styles.lobbyIcon}>📜</div>
-                  <div style={{ textAlign: 'left' }}>
-                    <div style={styles.lobbyCardTitle}>Grand Warden</div>
-                    <div style={styles.lobbyCardDesc}>Quest & Achievement — Coming Soon</div>
-                  </div>
-                </div>
-              </button>
-
-              {/* Trade Broker */}
-              <button onClick={() => setSubView('trade_broker')} className="cyber-panel" style={styles.lobbyCard}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <div style={styles.lobbyIcon}>💰</div>
-                  <div style={{ textAlign: 'left' }}>
-                    <div style={styles.lobbyCardTitle}>Trade Broker</div>
-                    <div style={styles.lobbyCardDesc}>Astrum Mercatus Exchange Broker</div>
-                  </div>
-                </div>
-              </button>
-
-              {/* Potion Merchant */}
-              <button onClick={() => setSubView('potion_merchant')} className="cyber-panel" style={styles.lobbyCard}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <div style={styles.lobbyIcon}>🧪</div>
-                  <div style={{ textAlign: 'left' }}>
-                    <div style={styles.lobbyCardTitle}>Potion Merchant</div>
-                    <div style={styles.lobbyCardDesc}>Buy HP & FP Potion consumables</div>
-                  </div>
-                </div>
-              </button>
             </div>
           )}
 
-          {/* ─── ARSENAL KEEPER ─── */}
+          {/* ─── WEAPON MASTER ─── */}
           {subView === 'arsenal_keeper' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               <div style={styles.avatarRow}>
@@ -387,7 +434,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
             </div>
           )}
 
-          {/* ─── ARMORY KEEPER ─── */}
+          {/* ─── ARMOR MASTER ─── */}
           {subView === 'armory_keeper' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               <div style={styles.avatarRow}>
@@ -445,7 +492,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
             </div>
           )}
 
-          {/* ─── FORGE MASTER ─── */}
+          {/* ─── ENCHANTMENT MASTER ─── */}
           {subView === 'forge_master' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               <div style={styles.avatarRow}>
@@ -479,7 +526,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
             </div>
           )}
 
-          {/* ─── MASTER ARTISAN ─── */}
+          {/* ─── CRAFT MASTER ─── */}
           {subView === 'master_artisan' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               <div style={styles.avatarRow}>
@@ -515,22 +562,119 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
           )}
 
           {/* ─── COMING SOON NPCs ─── */}
-          {['guild_steward', 'grand_warden'].includes(subView) && (
+          {['guild_steward', 'grand_warden', 'eminence_qm'].includes(subView) && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14, alignItems: 'center', paddingTop: 20 }}>
               <div style={{ fontSize: 64 }}>
                 {subView === 'guild_steward' && '🏰'}
                 {subView === 'grand_warden' && '📜'}
+                {subView === 'eminence_qm' && '🎖️'}
               </div>
               <div style={{ fontFamily: 'var(--font-title)', fontSize: 20, color: '#00e5ff', fontWeight: 900, textAlign: 'center', letterSpacing: 1 }}>
-                {subView === 'guild_steward' && 'Guild Steward'}
-                {subView === 'grand_warden' && 'Grand Warden'}
+                {subView === 'guild_steward' && 'Guild Manager'}
+                {subView === 'grand_warden' && 'Quest Manager'}
+                {subView === 'eminence_qm' && 'Eminence Quartermaster'}
               </div>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: '#88aadd', textAlign: 'center', lineHeight: 1.6 }}>
                 {subView === 'guild_steward' && '"The Guild Hall is under construction. Come back soon, Commander."'}
-                {subView === 'grand_warden' && '"I have quests for brave souls, but the mission board is not ready yet."'}
+                {subView === 'grand_warden' && '"I handle all Guild, faction, and quest assignments. Mission board coming soon."'}
+                {subView === 'eminence_qm' && '"Government equipment is reserved for council members. Access coming soon."'}
               </div>
               <div style={{ background: 'rgba(255, 204, 0, 0.1)', border: '1.5px dashed rgba(255,204,0,0.4)', borderRadius: 10, padding: '12px 20px', fontFamily: 'var(--font-title)', fontSize: 14, color: '#ffcc00', fontWeight: 800, letterSpacing: 1, textAlign: 'center' }}>
                 🚧 COMING SOON
+              </div>
+            </div>
+          )}
+
+          {/* ─── MINING SUPPLIER ─── */}
+          {subView === 'mining_supplier' && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+              <div style={styles.avatarRow}>
+                <div style={styles.npcAvatarLarge}><span style={{ fontSize: 52 }}>⛏️</span></div>
+                <div style={styles.npcDialog}>"Stock up on supplies before heading into Trinity Core Mine. I have everything you need."</div>
+              </div>
+              <div style={styles.statusBox}>
+                <div style={styles.statusLabel}>ROLE</div>
+                <div style={styles.statusVal}>Mining Supply NPC</div>
+              </div>
+              <div style={{ background: 'rgba(0,229,255,0.06)', border: '1px solid rgba(0,229,255,0.2)', borderRadius: 10, padding: 14 }}>
+                <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: '#00e5ff', fontWeight: 800, marginBottom: 10 }}>MINING SUPPLIES SHOP</div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#88aadd', marginBottom: 10 }}>Peralatan Mining &amp; Trinity Core Mine</div>
+                {[
+                  { id: 'tool_mining_pickaxe', label: '⛏️ Pickaxe (Mining Tool)', price: 50000 },
+                  { id: 'pot_mining_battery_s', label: '🔋 Battery S (Mining Fuel x1)', price: 25000 },
+                  { id: 'pot_mining_battery_m', label: '🔋 Battery M (Mining Fuel x3)', price: 60000 },
+                  { id: 'pot_mining_battery_l', label: '🔋 Battery L (Mining Fuel x10)', price: 150000 },
+                ].map(({ id, label, price }) => (
+                  <div key={id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 0', borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+                    <div>
+                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#e0f4ff' }}>{label}</div>
+                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#00ff88' }}>{price.toLocaleString()} CRD</div>
+                    </div>
+                    <button
+                      style={{ background: 'linear-gradient(135deg,#00e5ff,#0088bb)', border: 'none', borderRadius: 6, color: '#000', fontFamily: 'var(--font-title)', fontWeight: 800, fontSize: 11, padding: '6px 12px', cursor: 'pointer' }}
+                      onClick={() => { useGameStore.getState().buyFromNpc(id); }}
+                    >BUY</button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* ─── PREMIUM SHOP MANAGER ─── */}
+          {subView === 'premium_shop_mgr' && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+              <div style={styles.avatarRow}>
+                <div style={styles.npcAvatarLarge}><span style={{ fontSize: 52 }}>💎</span></div>
+                <div style={styles.npcDialog}>"Looking for premium items? You've come to the right place. NXC accepted here."</div>
+              </div>
+              <div style={styles.statusBox}>
+                <div style={styles.statusLabel}>ROLE</div>
+                <div style={styles.statusVal}>Premium Shop NPC</div>
+              </div>
+              <div style={{ background: 'rgba(255,215,0,0.06)', border: '1px solid rgba(255,215,0,0.25)', borderRadius: 10, padding: 14 }}>
+                <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: '#ffd700', fontWeight: 800, marginBottom: 6 }}>💎 PREMIUM SHOP — NXC</div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#88aadd', marginBottom: 10 }}>Mata uang: NXC (Nova Exchange Credit)</div>
+                {[
+                  { label: '🌟 EXP Boost x2 (1 Jam)', price: 50 },
+                  { label: '⚡ Drop Rate +5% (1 Jam)', price: 75 },
+                  { label: '💊 ATK Potion 25% (3 Min)', price: 30 },
+                  { label: '🇮🇱 Inventory Slot +20', price: 200 },
+                  { label: '🏷️ Custom Title Slot', price: 500 },
+                ].map(({ label, price }, idx) => (
+                  <div key={idx} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 0', borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#e0f4ff' }}>{label}</div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                      <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#ffd700', fontWeight: 700 }}>{price} NXC</span>
+                      <button
+                        style={{ background: 'linear-gradient(135deg,#ffd700,#cc8800)', border: 'none', borderRadius: 6, color: '#000', fontFamily: 'var(--font-title)', fontWeight: 800, fontSize: 11, padding: '5px 10px', cursor: 'pointer' }}
+                        onClick={() => alert('Premium Shop: Feature coming soon!')}
+                      >BUY</button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div style={{ background: 'rgba(255,215,0,0.06)', border: '1px solid rgba(255,215,0,0.2)', borderRadius: 8, padding: 12 }}>
+                <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, color: '#ffd700', fontWeight: 700, marginBottom: 8 }}>💳 TOP UP NXC</div>
+                {[
+                  { label: 'Starter Pack', nxc: 100, price: 'Rp 10.000' },
+                  { label: 'Value Pack', nxc: 550, price: 'Rp 50.000' },
+                  { label: 'Premium Pack', nxc: 1200, price: 'Rp 100.000' },
+                  { label: 'Elite Pack', nxc: 2600, price: 'Rp 200.000' },
+                ].map(({ label, nxc, price }, idx) => (
+                  <div key={idx} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '6px 0', borderTop: idx > 0 ? '1px solid rgba(255,215,0,0.1)' : 'none' }}>
+                    <div>
+                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#ffd700', fontWeight: 700 }}>{label}</div>
+                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: '#88aadd' }}>{nxc} NXC</div>
+                    </div>
+                    <button
+                      style={{ background: 'linear-gradient(135deg,#ffe500,#cc8000)', border: 'none', borderRadius: 6, color: '#000', fontFamily: 'var(--font-title)', fontWeight: 800, fontSize: 11, padding: '5px 10px', cursor: 'pointer' }}
+                      onClick={() => alert('Top Up: Coming soon via payment gateway!')}
+                    >{price}</button>
+                  </div>
+                ))}
+              </div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: '#667799', textAlign: 'center' }}>
+                Saldo NXC kamu: <strong style={{ color: '#ffd700' }}>{(player.resources?.nxc || 0).toLocaleString()} NXC</strong>
               </div>
             </div>
           )}

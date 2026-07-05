@@ -11,42 +11,46 @@
         {
           "name": "Puffling",
           "emoji": "🦟",
-          "hp": 80,
-          "atk": 7,
-          "def": 1,
+          "hp": 300,
+          "atk": 20,
+          "def": 10,
           "expReward": 10,
           "aniumReward": 6,
-          "image": "/ref/World-Map/Lumora/puffling.png"
+          "image": "/ref/World-Map/Lumora/puffling.png",
+          "critical": 1
         },
         {
           "name": "Moss Hopper",
           "emoji": "🦗",
-          "hp": 110,
-          "atk": 9,
-          "def": 2,
+          "hp": 600,
+          "atk": 30,
+          "def": 18,
           "expReward": 12,
           "aniumReward": 7,
-          "image": "/ref/World-Map/Lumora/moss_hopper.png"
+          "image": "/ref/World-Map/Lumora/moss_hopper.png",
+          "critical": 2
         },
         {
           "name": "Leaf Boar",
           "emoji": "🐗",
-          "hp": 140,
-          "atk": 11,
-          "def": 3,
+          "hp": 1000,
+          "atk": 45,
+          "def": 28,
           "expReward": 14,
           "aniumReward": 9,
-          "image": "/ref/World-Map/Lumora/leaf_boar.png"
+          "image": "/ref/World-Map/Lumora/leaf_boar.png",
+          "critical": 3
         },
         {
           "name": "Twig Imp",
           "emoji": "🧚",
-          "hp": 150,
-          "atk": 12,
-          "def": 3,
+          "hp": 1800,
+          "atk": 65,
+          "def": 40,
           "expReward": 15,
           "aniumReward": 10,
-          "image": "/ref/World-Map/Lumora/twig_imp.png"
+          "image": "/ref/World-Map/Lumora/twig_imp.png",
+          "critical": 4
         }
       ],
       "boss": {
