@@ -206,7 +206,9 @@ function computeRewards(player, mode, minutes, selectedZone = 'world') {
       credits: 0
     }
   }
-  const sectorIdx = getSector(player.level) - 1
+  const sectorIdx = (player.selectedMapIdx !== undefined && player.selectedMapIdx !== null)
+    ? player.selectedMapIdx
+    : (getSector(player.level) - 1)
   const mobs = enemies.sectors[sectorIdx].mobs
   const avg = (f) => mobs.reduce((a, m) => a + f(m), 0) / mobs.length
   let avgHp, avgDef, avgAni
@@ -553,7 +555,8 @@ const initialPlayer = {
     endsAt: 0,
     duration: 0              // in minutes
   },
-  activeBoosts: {}           // { expBoost: {mult:2, expiresAt:ts}, dropBoost: {pct:5, expiresAt:ts}, atkPot: {pct:25, expiresAt:ts}, defPot: {pct:25, expiresAt:ts} }
+  activeBoosts: {},          // { expBoost: {mult:2, expiresAt:ts}, dropBoost: {pct:5, expiresAt:ts}, atkPot: {pct:25, expiresAt:ts}, defPot: {pct:25, expiresAt:ts} }
+  selectedMapIdx: null
 }
 
 const initialTimer = {
@@ -610,6 +613,10 @@ export const useGameStore = create(
       setRunnerUpRace: (race) => set({ runnerUpRace: race }),
       setLastPlaceRace: (race) => set({ lastPlaceRace: race }),
       setNotification: (notif) => set({ notification: notif }),
+      setSelectedMapIdx: (idx) => {
+        set((s) => ({ player: { ...s.player, selectedMapIdx: idx, savedAt: Date.now() } }))
+      },
+
       setPvpRank: (rank) => set((s) => ({ player: { ...s.player, pvpRank: rank, savedAt: Date.now() } })),
 
       // ── Legendary Crafting ───────────────────────────────
@@ -1186,7 +1193,9 @@ export const useGameStore = create(
           isPitBoss = spawned.isPitBoss
           hp = spawned.hp
         } else {
-          const sectorIdx = getSector(player.level) - 1
+          const sectorIdx = (player.selectedMapIdx !== undefined && player.selectedMapIdx !== null)
+            ? player.selectedMapIdx
+            : (getSector(player.level) - 1)
           sector = enemies.sectors[sectorIdx]
           const spawned = spawnEnemy(sectorIdx, player.level, false, false)
           mob = spawned.mob

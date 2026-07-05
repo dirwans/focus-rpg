@@ -33,6 +33,234 @@ function getBionexJobSprite(jobId) {
   return null;
 }
 
+// Full Screen Interactive World Map Modal
+function WorldMapModal({ onClose }) {
+  const player = useGameStore((s) => s.player)
+  const setSelectedMapIdx = useGameStore((s) => s.setSelectedMapIdx)
+  
+  // Default selected node index
+  const defaultIdx = (player.selectedMapIdx !== undefined && player.selectedMapIdx !== null)
+    ? player.selectedMapIdx
+    : Math.min(player.sector - 1, enemies.sectors.length - 1)
+  
+  const [selectedNode, setSelectedNode] = useState(defaultIdx)
+
+  const activeColor = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
+
+  const mapCoordinates = [
+    { name: 'Lumora Fields', left: '21%', top: '25.5%', minLevel: 1 },
+    { name: 'Sylvaris Wilds', left: '62%', top: '27%', minLevel: 13 },
+    { name: 'Ferrum Expanse', left: '39%', top: '44.5%', minLevel: 26 },
+    { name: 'Pyraxis Crater', left: '30%', top: '70.5%', minLevel: 39 },
+    { name: 'Trinity Nexus', left: '69%', top: '81.5%', minLevel: 53 }
+  ]
+
+  const selectedSector = enemies.sectors[selectedNode]
+  const isLocked = player.level < mapCoordinates[selectedNode].minLevel
+  const isActive = player.selectedMapIdx === selectedNode || (player.selectedMapIdx === null && selectedNode === defaultIdx)
+
+  return (
+    <div style={{
+      position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+      zIndex: 1000, background: 'rgba(5, 5, 8, 0.9)',
+      display: 'flex', justifyContent: 'center', alignItems: 'center',
+      backdropFilter: 'blur(8px)', padding: '10px'
+    }}>
+      {/* Container with JRPG mockup aspect ratio */}
+      <div style={{
+        position: 'relative', width: '100%', maxWidth: '850px',
+        aspectRatio: '1402 / 1122', background: '#020205',
+        borderRadius: '16px', border: '1.5px solid rgba(255,255,255,0.1)',
+        boxShadow: '0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(0,229,255,0.05)',
+        overflow: 'hidden', display: 'flex', flexDirection: 'column'
+      }}>
+        {/* Background Image Map */}
+        <img 
+          src="/ref/World-Map/world_map_ui_mockup.png" 
+          alt="World Map Grid" 
+          style={{
+            position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
+            objectFit: 'cover', opacity: 0.65, pointerEvents: 'none'
+          }}
+        />
+
+        {/* Holographic Header Bar */}
+        <div style={{
+          position: 'absolute', top: 12, left: 16, zIndex: 10,
+          background: 'rgba(2, 6, 15, 0.75)', backdropFilter: 'blur(4px)',
+          border: '1px solid rgba(0, 229, 255, 0.35)', borderRadius: '10px',
+          padding: '6px 14px', display: 'flex', alignItems: 'center', gap: 10
+        }}>
+          <span style={{ fontSize: 16 }}>🗺️</span>
+          <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 900, letterSpacing: 2, color: '#e0f4ff' }}>TACTICAL MAP SCREEN</span>
+        </div>
+
+        {/* Sleek Close Button */}
+        <button 
+          onClick={onClose}
+          style={{
+            position: 'absolute', top: 12, right: 16, zIndex: 10,
+            width: 32, height: 32, borderRadius: '50%',
+            background: 'rgba(255, 60, 60, 0.15)', border: '1.5px solid rgba(255, 60, 60, 0.4)',
+            color: '#ff4444', fontFamily: 'monospace', fontSize: 16, fontWeight: 900,
+            cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+            transition: 'all 0.2s', boxShadow: '0 0 10px rgba(255,60,60,0.2)'
+          }}
+          onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255, 60, 60, 0.3)'; e.currentTarget.style.transform = 'scale(1.1)' }}
+          onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255, 60, 60, 0.15)'; e.currentTarget.style.transform = 'scale(1)' }}
+        >
+          ✕
+        </button>
+
+        {/* 5 Map Interactive Hotspot Nodes */}
+        {mapCoordinates.map((coord, idx) => {
+          const mapLocked = player.level < coord.minLevel
+          const mapActive = player.selectedMapIdx === idx || (player.selectedMapIdx === null && idx === defaultIdx)
+          const isSelected = selectedNode === idx
+          
+          let glowColor = '#8a94a3' // locked
+          if (!mapLocked) {
+            glowColor = mapActive ? activeColor : '#00e5ff'
+          }
+
+          return (
+            <button
+              key={idx}
+              onClick={() => setSelectedNode(idx)}
+              style={{
+                position: 'absolute',
+                left: coord.left,
+                top: coord.top,
+                transform: 'translate(-50%, -50%)',
+                width: isSelected ? '40px' : '30px',
+                height: isSelected ? '40px' : '30px',
+                borderRadius: '50%',
+                background: mapLocked ? 'rgba(40,40,40,0.8)' : (mapActive ? activeColor : 'rgba(0, 229, 255, 0.2)'),
+                border: `2px solid ${glowColor}`,
+                boxShadow: isSelected 
+                  ? `0 0 20px ${glowColor}, inset 0 0 10px ${glowColor}` 
+                  : (mapActive ? `0 0 12px ${glowColor}` : 'none'),
+                cursor: 'pointer',
+                zIndex: isSelected ? 50 : 20,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'all 0.25s ease-out'
+              }}
+              title={coord.name}
+            >
+              {mapLocked ? (
+                <span style={{ fontSize: 10 }}>🔒</span>
+              ) : (
+                <div style={{
+                  width: 8, height: 8, borderRadius: '50%',
+                  background: isSelected ? '#fff' : glowColor,
+                  boxShadow: isSelected ? '0 0 8px #fff' : 'none',
+                  animation: mapActive ? 'spritePulse 1.2s infinite ease-in-out' : 'none'
+                }} />
+              )}
+            </button>
+          )
+        })}
+
+        {/* Holographic Tactical Info Panel Overlay */}
+        <div style={{
+          position: 'absolute', bottom: 16, left: 16, right: 16,
+          background: 'rgba(3, 8, 20, 0.88)', backdropFilter: 'blur(8px)',
+          border: `1.5px solid ${isLocked ? '#8a94a3' : activeColor}`,
+          boxShadow: `0 8px 32px rgba(0,0,0,0.8), 0 0 16px ${isLocked ? 'rgba(0,0,0,0)' : activeColor}22`,
+          borderRadius: '12px', padding: '14px 18px', zIndex: 100,
+          display: 'flex', flexDirection: 'row', gap: 16, alignItems: 'center',
+          minHeight: '120px'
+        }}>
+          {/* Left panel: Map details */}
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+              <span style={{
+                fontFamily: "'Orbitron', sans-serif", fontSize: 14, fontWeight: 900,
+                color: isLocked ? '#8a94a3' : '#fff', letterSpacing: 1
+              }}>
+                MAP {selectedNode + 1} — {selectedSector.name.toUpperCase()}
+              </span>
+              <span style={{
+                fontSize: 10, background: isLocked ? 'rgba(255,255,255,0.08)' : (isActive ? `${activeColor}20` : 'rgba(0, 229, 255, 0.15)'),
+                color: isLocked ? '#8a94a3' : (isActive ? activeColor : '#00e5ff'),
+                border: `1px solid ${isLocked ? '#8a94a3' : (isActive ? activeColor : '#00e5ff')}`,
+                borderRadius: '4px', padding: '1px 6px', fontWeight: 800
+              }}>
+                {isLocked ? 'LOCKED' : (isActive ? 'ACTIVE' : 'UNLOCKED')}
+              </span>
+            </div>
+            
+            <div style={{ fontFamily: 'monospace', fontSize: 12, color: '#7ab0d0', display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+              <span>Bracket: Lv. {selectedSector.minLevel} - {selectedSector.maxLevel}</span>
+              <span>Req: Lv. {mapCoordinates[selectedNode].minLevel}</span>
+            </div>
+
+            {/* Mobs info */}
+            <div style={{ marginTop: 8, display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
+              <span style={{ fontSize: 11, fontWeight: 'bold', color: '#5f8da3', textTransform: 'uppercase' }}>Monsters:</span>
+              {selectedSector.mobs.map((m, idx) => (
+                <span key={idx} style={{
+                  fontSize: 12, background: 'rgba(255,255,255,0.04)',
+                  padding: '2px 8px', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.05)',
+                  color: isLocked ? '#7a8593' : '#dde2ea', display: 'inline-flex', alignItems: 'center', gap: 4
+                }}>
+                  <span>{m.emoji}</span>
+                  <span>{m.name}</span>
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Right Panel: Deploy button */}
+          <div style={{ flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <button
+              disabled={isLocked}
+              onClick={() => {
+                setSelectedMapIdx(selectedNode)
+                onClose()
+              }}
+              style={{
+                padding: '12px 20px',
+                fontFamily: "'Orbitron', sans-serif",
+                fontSize: 13,
+                fontWeight: 900,
+                letterSpacing: 2,
+                borderRadius: '8px',
+                cursor: isLocked ? 'not-allowed' : 'pointer',
+                border: 'none',
+                background: isLocked 
+                  ? 'rgba(40, 40, 40, 0.4)' 
+                  : (isActive ? 'rgba(255,255,255,0.05)' : `linear-gradient(90deg, ${activeColor}, color-mix(in srgb, ${activeColor} 60%, white))`),
+                border: isActive ? `1.5px dashed ${activeColor}` : 'none',
+                color: isLocked ? '#7a8593' : (isActive ? activeColor : '#fff'),
+                boxShadow: isLocked ? 'none' : `0 0 15px ${activeColor}55`,
+                transition: 'all 0.2s'
+              }}
+              onMouseEnter={(e) => {
+                if (!isLocked && !isActive) {
+                  e.currentTarget.style.transform = 'scale(1.04)'
+                  e.currentTarget.style.boxShadow = `0 0 25px ${activeColor}88`
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!isLocked && !isActive) {
+                  e.currentTarget.style.transform = 'scale(1)'
+                  e.currentTarget.style.boxShadow = `0 0 15px ${activeColor}55`
+                }
+              }}
+            >
+              {isLocked ? '🔒 SECURE LOCK' : (isActive ? 'CURRENT ZONE' : '⚡ DEPLOY UNIT')}
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  )
+}
+
 
 export default function Main() {
   const player   = useGameStore((s) => s.player)
@@ -56,6 +284,7 @@ export default function Main() {
   const [showSocialModal, setShowSocialModal] = useState(false)
   const [showNpcModal, setShowNpcModal] = useState(false)
   const [showMailbox, setShowMailbox] = useState(false)
+  const [showMapModal, setShowMapModal] = useState(false)
   const [npcInitialView, setNpcInitialView] = useState('lobby')
 
   // Register global back-button bridge for Capacitor hardware back key
@@ -78,7 +307,9 @@ export default function Main() {
     const dungeonIdx = parseInt(timer.selectedZone.split('_')[1]) - 1
     enemy = enemies.dungeons[dungeonIdx]
   } else {
-    const sectorIdx = Math.min(player.sector, enemies.sectors.length) - 1
+    const sectorIdx = (player.selectedMapIdx !== undefined && player.selectedMapIdx !== null)
+      ? player.selectedMapIdx
+      : (Math.min(player.sector, enemies.sectors.length) - 1)
     enemy = enemies.sectors[sectorIdx]
   }
   const isRunning = timer.state === 'running'
@@ -446,7 +677,14 @@ const FOCUS_MODE_LABEL = { arctron: 'FIGHT', bionex: 'GATHER', celestra: 'CHANNE
 
       {/* Location pill + streak */}
       <div style={styles.locationRow}>
-        <div className="location-pill">
+        <div 
+          className="location-pill"
+          style={{ cursor: 'pointer', transition: 'transform 0.2s' }}
+          onClick={() => setShowMapModal(true)}
+          onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
+          onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+          title="Click to select Leveling Map"
+        >
           <svg width="11" height="13" viewBox="0 0 11 13" fill="none" style={{ flexShrink: 0 }}>
             <polygon points="5.5,0 11,3 11,8.5 5.5,13 0,8.5 0,3" stroke="currentColor" strokeWidth="1.2" fill="none" />
             <circle cx="5.5" cy="6" r="1.8" fill="currentColor" />
@@ -454,7 +692,7 @@ const FOCUS_MODE_LABEL = { arctron: 'FIGHT', bionex: 'GATHER', celestra: 'CHANNE
             <line x1="5.5" y1="9.8" x2="5.5" y2="13" stroke="currentColor" strokeWidth="1" />
           </svg>
           <span>{t('location_lbl')}:</span>
-          <span style={{ color: 'var(--neon-glow)', textShadow: '0 0 6px var(--neon-glow)' }}>{enemy.name.toUpperCase()}</span>
+          <span style={{ color: 'var(--neon-glow)', textShadow: '0 0 6px var(--neon-glow)' }}>{enemy.name.toUpperCase()} 🗺️</span>
         </div>
         <div className="location-pill" style={{ color: '#ff5f7a' }} title={t('streak_lbl')}>🔥{player.streak}</div>
       </div>
@@ -639,6 +877,7 @@ const FOCUS_MODE_LABEL = { arctron: 'FIGHT', bionex: 'GATHER', celestra: 'CHANNE
       {showSocialModal && <SocialModal onClose={() => setShowSocialModal(false)} />}
       {showNpcModal && <NpcModal onClose={() => setShowNpcModal(false)} initialView={npcInitialView} />}
       {showMailbox && <MailboxModal onClose={() => setShowMailbox(false)} />}
+      {showMapModal && <WorldMapModal onClose={() => setShowMapModal(false)} />}
 
     </div>
   )
