@@ -3,65 +3,140 @@ import { useGameStore } from '../store/gameStore'
 import { useAuthStore } from '../store/authStore'
 import races from '../data/races.json'
 import jobs from '../data/jobs.json'
-import { PilotSprite } from './PilotSprites'
 import { syncSave } from '../lib/saveSync'
 import { t } from '../lib/translate'
 
+// Import faction hero art assets
+import arctronWarrior from '../assets/arctron_warrior.png'
+import bionexPilot from '../assets/bionex_pilot_v3.png'
+import celestraMystic from '../assets/celestra_mystic.png'
+
+const HERO_IMAGES = {
+  arctron: arctronWarrior,
+  bionex: bionexPilot,
+  celestra: celestraMystic
+}
+
+const FACTION_THEMES = {
+  arctron: {
+    id: 'arctron',
+    name: 'ARCTRON',
+    primary: '#ff5222',
+    dark: '#b32c0d',
+    light: '#ffb48f',
+    secondary: 'linear-gradient(135deg, #dde2ea, #9aa2ae)',
+    onSecondary: '#16181c',
+    muted: '#8a94a3',
+    bg: 'radial-gradient(120% 70% at 62% 8%, #201f22 0%, #141317 55%, #0a0a0c 100%)',
+    particle: '#ffd3ae',
+    crest: 'AR',
+    tagline: 'STEEL BODY. UNBREAKABLE WILL.',
+    traits: [
+      { name: 'FIREPOWER', val: 78 },
+      { name: 'ARMOR', val: 96 },
+      { name: 'HULL HP', val: 58 }
+    ],
+    confirmText: 'ENTER THE WAR'
+  },
+  bionex: {
+    id: 'bionex',
+    name: 'BIONEX',
+    primary: '#3b82f6',
+    dark: '#1c4fa8',
+    light: '#a9c8ff',
+    secondary: 'linear-gradient(135deg, #e8c07a, #b5883a)',
+    onSecondary: '#2c1f08',
+    muted: '#7d92a3',
+    bg: 'radial-gradient(120% 70% at 62% 8%, #0c1f48 0%, #07132c 55%, #040a1c 100%)',
+    particle: '#cfe0ff',
+    crest: 'BX',
+    tagline: 'ENGINEERED FOR VICTORY.',
+    traits: [
+      { name: 'FIREPOWER', val: 94 },
+      { name: 'ARMOR', val: 52 },
+      { name: 'SHIELD HP', val: 76 }
+    ],
+    confirmText: 'LAUNCH SEQUENCE'
+  },
+  celestra: {
+    id: 'celestra',
+    name: 'CELESTRA',
+    primary: '#9b4dff',
+    dark: '#5b1799',
+    light: '#c9aeff',
+    secondary: 'linear-gradient(135deg, #e8c07a, #b5883a)',
+    onSecondary: '#2c1f08',
+    muted: '#8188c2',
+    bg: 'radial-gradient(120% 70% at 62% 8%, #1a1642 0%, #100e2c 55%, #07061a 100%)',
+    particle: '#f0d9ff',
+    crest: 'CL',
+    tagline: 'MAGIC BENDS TO THOSE WHO DARE.',
+    traits: [
+      { name: 'SPELL POWER', val: 96 },
+      { name: 'WARD', val: 36 },
+      { name: 'VITALITY', val: 58 }
+    ],
+    confirmText: 'AWAKEN THE PATH'
+  }
+}
+
+const CLASS_DESCRIPTIONS = {
+  destroyer: 'Frontline juggernaut, soaks damage, holds the line.',
+  gunner: 'Long-range marksman, outguns from a distance.',
+  engineer: 'Tactical support, gadgets and battlefield control.',
+  guardian: 'Basic defense unit, leads the charge with force.',
+  marksman: 'Precision marksman for high-speed strikes.',
+  psion: 'Arcane-tech caster, channels blasts of energy.',
+  sentinel: 'Blade-bound fighter sworn to the old rites.',
+  pathfinder: 'Shadow hunter striking with deadly precision.',
+  oracle: 'Calls spirits and beasts to fight at her side.',
+  arcanist: 'Wields forbidden magic to scorch the field.'
+}
+
+const getClassMonogram = (jobId) => {
+  if (jobId === 'destroyer' || jobId === 'guardian' || jobId === 'sentinel') return 'W'
+  if (jobId === 'gunner' || jobId === 'marksman' || jobId === 'pathfinder') return 'R'
+  if (jobId === 'engineer') return 'S'
+  if (jobId === 'psion' || jobId === 'arcanist') return 'M'
+  if (jobId === 'oracle') return 'SU'
+  return 'N'
+}
+
+const getClassRoleTag = (jobId) => {
+  if (jobId === 'destroyer' || jobId === 'guardian' || jobId === 'sentinel') return 'MELEE · TANK'
+  if (jobId === 'gunner' || jobId === 'marksman' || jobId === 'pathfinder') return 'RANGED'
+  if (jobId === 'engineer') return 'TECH · SUPPORT'
+  if (jobId === 'psion' || jobId === 'arcanist') return 'CASTER'
+  if (jobId === 'oracle') return 'SUMMON'
+  return 'NOVICE'
+}
+
 export default function CharacterCreate() {
-  const [step, setStep] = useState(1)
   const { signOut, user } = useAuthStore()
-  
-  // Selections state
-  const [server, setServer] = useState('nova_core')
-  const [raceId, setRaceId] = useState(null)
-  const [jobId, setJobId] = useState(null)
-  const [auraColor, setAuraColor] = useState('#00e5ff')
-  const [avatarMode, setAvatarMode] = useState('full') // 'full' or 'portrait'
+
+  // Steps: 1 (RaceSelect), 2 (ClassSelect), 3 (CharacterCreation)
+  const [step, setStep] = useState(1)
+  const [focusedRace, setFocusedRace] = useState('arctron')
+  const [raceId, setRaceId] = useState('arctron')
+  const [jobId, setJobId] = useState('destroyer')
+  const [appearance, setAppearance] = useState('A')
   const [charName, setCharName] = useState(user?.username || '')
 
-  const serverList = [
-    { id: 'nova_core', name: 'Nova-Core [Main]', ping: '45ms', status: 'ONLINE', recommended: true },
-    { id: 'desolation', name: 'Desolation [Test]', ping: '120ms', status: 'ONLINE', recommended: false },
-    { id: 'solitude', name: 'Solitude [Event]', ping: '250ms', status: 'MAINTENANCE', recommended: false }
-  ]
+  const currentTheme = FACTION_THEMES[focusedRace] || FACTION_THEMES.arctron
+  const finalTheme = FACTION_THEMES[raceId] || FACTION_THEMES.arctron
 
-  const auraOptions = [
-    { name: 'Neon Cyan', value: '#00e5ff' },
-    { name: 'Neon Orange', value: '#ff8c00' },
-    { name: 'Neon Purple', value: '#d000ff' },
-    { name: 'Neon Green', value: '#39ff14' },
-    { name: 'Neon Red', value: '#ff3131' }
-  ]
-
-  const handleNext = () => {
-    if (step === 1 && !server) return
-    if (step === 2 && !raceId) return
-    if (step === 3 && !jobId) return
-    if (step === 5) {
-      if (charName.trim().length < 3) {
-        alert("Nama karakter terlalu pendek (minimal 3 karakter)!")
-        return
-      }
-      if (charName.trim().length > 16) {
-        alert("Nama karakter terlalu panjang (maksimal 16 karakter)!")
-        return
-      }
-    }
-    setStep(step + 1)
-  }
-
-  const handleBack = () => {
-    setStep(step - 1)
-  }
-
+  // Sync / create character handler
   const handleCreate = async () => {
     const cleanedName = charName.trim()
     if (cleanedName.length < 3) {
-      alert("Nama karakter terlalu pendek!")
+      alert("Callsign too short (min 3 characters)!")
+      return
+    }
+    if (cleanedName.length > 16) {
+      alert("Callsign too long (max 16 characters)!")
       return
     }
 
-    // Update locally in zustand store
     useGameStore.setState((s) => {
       const freshPlayer = {
         ...s.player,
@@ -82,703 +157,514 @@ export default function CharacterCreate() {
         totalSessions: 0,
         totalMinutes: 0,
         savedAt: Date.now(),
-        // Save appearance custom choices
-        auraColor: auraColor,
-        avatarMode: avatarMode,
-        server: server,
-        hasChangedName: true // Consumes the free rename
+        auraColor: '#00e5ff',
+        avatarMode: 'full',
+        server: 'nova_core',
+        hasChangedName: true
       }
-
-      // Sync directly with VPS
       syncSave(freshPlayer)
       return { player: freshPlayer }
     })
 
-    // Load main game screen
     useGameStore.getState().setScreen('main')
   }
 
-  const getClassPathName = (race, job_id) => {
-    if (race === 'celestra') {
-      if (job_id === 'sentinel') return 'Warrior'
-      if (job_id === 'pathfinder') return 'Ranger'
-      if (job_id === 'oracle') return 'Summoner'
-      if (job_id === 'arcanist') return 'Mage'
+  // Swap to first job of race
+  const selectRaceAndNext = (raceKey) => {
+    setRaceId(raceKey)
+    const availableJobs = jobs[raceKey]?.tier1 || []
+    if (availableJobs.length > 0) {
+      setJobId(availableJobs[0].id)
     }
-    if (race === 'bionex') {
-      if (job_id === 'guardian') return 'Warrior'
-      if (job_id === 'marksman') return 'Ranger'
-      if (job_id === 'engineer') return 'Specialist'
-      if (job_id === 'psion') return 'Mage'
-    }
-    if (race === 'arctron') {
-      if (job_id === 'destroyer') return 'Warrior'
-      if (job_id === 'gunner') return 'Ranger'
-      if (job_id === 'engineer') return 'Specialist'
-    }
-    return 'Novice'
+    setStep(2)
   }
 
-  const selectedRace = races[raceId]
-  const tier1Jobs = raceId ? (jobs[raceId]?.tier1 || []) : []
-  const selectedJob = tier1Jobs.find(j => j.id === jobId)
+  const activeJobs = jobs[raceId]?.tier1 || []
 
   return (
-    <div style={styles.overlay}>
-      {/* Header */}
-      <div style={styles.header}>
-        <div style={styles.headerLogo}>✨ FOCUS RPG</div>
-        <button onClick={signOut} style={styles.logoutBtn}>SIGN OUT</button>
-      </div>
+    <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden', background: currentTheme.bg }}>
+      
+      {/* Drifting Embers & Twinkling Particles */}
+      <div style={{ position: 'absolute', right: '10%', top: '60%', width: 3, height: 3, borderRadius: '50%', background: currentTheme.particle, boxShadow: `0 0 6px ${currentTheme.particle}`, animation: 'emberRise 4.2s ease-in infinite' }} />
+      <div style={{ position: 'absolute', right: '30%', top: '52%', width: 3, height: 3, borderRadius: '50%', background: currentTheme.particle, boxShadow: `0 0 6px ${currentTheme.particle}`, animation: 'emberRise 3.4s ease-in infinite 0.8s' }} />
+      <div style={{ position: 'absolute', right: '16%', top: '20%', width: 3, height: 3, borderRadius: '50%', background: currentTheme.particle, opacity: 0.7, animation: 'twinkle 2.6s ease-in-out infinite' }} />
+      
+      {/* Faction glow backdrop */}
+      <div style={{ position: 'absolute', left: '64%', top: '38%', width: 300, height: 300, transform: 'translate(-50%, -50%)', background: `radial-gradient(circle, ${currentTheme.primary}59, transparent 70%)`, filter: 'blur(20px)', animation: 'glowPulse 3.6s ease-in-out infinite', zIndex: 1 }} />
 
-      {/* Progress Bar */}
-      <div style={styles.progressBar}>
-        {[1, 2, 3, 4, 5, 6].map((i) => (
-          <div
-            key={i}
-            style={{
-              ...styles.progressStep,
-              background: i <= step ? 'linear-gradient(90deg, #00e5ff, #0088ff)' : '#222',
-              boxShadow: i <= step ? '0 0 8px rgba(0, 229, 255, 0.4)' : 'none'
-            }}
+      {/* 1. Hero Full Bleed Art (Race Select & Character Creation Only) */}
+      {(step === 1 || step === 3) && (
+        <>
+          <img 
+            src={HERO_IMAGES[focusedRace]} 
+            alt={focusedRace} 
+            style={{ 
+              position: 'absolute', 
+              left: '64%', 
+              bottom: step === 3 ? '-60px' : '-10px', 
+              height: step === 3 ? '540px' : '660px', 
+              transform: 'translateX(-50%)', 
+              animation: 'heroFloat 6s ease-in-out infinite', 
+              filter: `drop-shadow(0 30px 40px rgba(0,0,0,0.8)) drop-shadow(0 0 40px ${currentTheme.primary}4D)`,
+              zIndex: 2
+            }} 
           />
-        ))}
+          {/* Shadow vignette overlay */}
+          <div style={{ position: 'absolute', inset: 0, background: `radial-gradient(circle at 64% 32%, transparent 34%, rgba(6,5,6,0.85) 100%)`, pointerEvents: 'none', zIndex: 3 }} />
+        </>
+      )}
+
+      {/* Class Select Watermarked Hero BG */}
+      {step === 2 && (
+        <>
+          <img 
+            src={HERO_IMAGES[raceId]} 
+            alt="" 
+            style={{ 
+              position: 'absolute', 
+              right: '-50px', 
+              bottom: 0, 
+              height: '480px', 
+              opacity: 0.09, 
+              pointerEvents: 'none',
+              zIndex: 1
+            }} 
+          />
+          <div style={{ position: 'absolute', inset: 0, background: `radial-gradient(circle at 62% 20%, transparent 26%, rgba(6,5,6,0.6) 100%)`, pointerEvents: 'none', zIndex: 2 }} />
+        </>
+      )}
+
+      {/* 2. Left Rail Progress / Faction Tabs */}
+      <div style={{ 
+        position: 'absolute', 
+        left: 0, 
+        top: 0, 
+        bottom: 0, 
+        width: 64, 
+        zIndex: 9, 
+        background: 'linear-gradient(180deg, rgba(6,5,6,0.92), rgba(6,5,6,0.8))', 
+        borderRight: `1px solid ${currentTheme.primary}52`, 
+        display: 'flex', 
+        flexDirection: 'column', 
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        gap: step === 1 ? '22px' : 0 
+      }}>
+        {step === 1 ? (
+          // Race Select: Monogram faction selector
+          ['arctron', 'bionex', 'celestra'].map((key) => {
+            const theme = FACTION_THEMES[key]
+            const isSelected = focusedRace === key
+            return (
+              <div 
+                key={key}
+                onClick={() => setFocusedRace(key)}
+                style={{ 
+                  width: isSelected ? 42 : 36, 
+                  height: isSelected ? 42 : 36, 
+                  clipPath: 'polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)', 
+                  background: isSelected ? `linear-gradient(135deg, ${theme.light}, ${theme.primary})` : 'rgba(255,255,255,0.06)', 
+                  border: isSelected ? 'none' : '1px solid rgba(255,255,255,0.15)',
+                  boxShadow: isSelected ? `0 0 16px ${theme.primary}B3` : 'none',
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  fontFamily: "'Orbitron', sans-serif", 
+                  fontSize: isSelected ? 12 : 11, 
+                  fontWeight: 800, 
+                  color: isSelected ? theme.onSecondary : '#5a6b82',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease'
+                }}
+              >
+                {theme.crest}
+              </div>
+            )
+          })
+        ) : (
+          // Class Select & Character Creation: Vertical Steps Indicator
+          <>
+            <div 
+              onClick={() => { if (step > 1) { setStep(1); setFocusedRace(raceId); } }}
+              style={{ width: 24, height: 24, borderRadius: '50%', background: `${finalTheme.primary}33`, border: `1.5px solid ${finalTheme.primary}`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: finalTheme.light, fontSize: 12, fontWeight: 'bold', cursor: 'pointer' }}
+            >
+              ✓
+            </div>
+            <div style={{ width: 2, height: 30, background: `${finalTheme.primary}66` }} />
+            <div 
+              onClick={() => { if (step > 2) setStep(2) }}
+              style={{ 
+                width: step === 2 ? 28 : 24, 
+                height: step === 2 ? 28 : 24, 
+                borderRadius: '50%', 
+                background: step >= 2 ? (step === 2 ? `linear-gradient(135deg, ${finalTheme.light}, ${finalTheme.primary})` : `rgba(0,0,0,0)`) : 'rgba(255,255,255,0.05)', 
+                border: step >= 2 ? `1.5px solid ${finalTheme.primary}` : `1.5px dashed ${finalTheme.primary}66`,
+                boxShadow: step === 2 ? `0 0 14px ${finalTheme.primary}B3` : 'none',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: step > 2 ? finalTheme.light : finalTheme.onSecondary,
+                fontSize: 11,
+                fontWeight: 800,
+                cursor: step > 2 ? 'pointer' : 'default'
+              }}
+            >
+              {step > 2 ? '✓' : '2'}
+            </div>
+            <div style={{ width: 2, height: 30, background: step >= 2 ? `${finalTheme.primary}66` : `${finalTheme.primary}40` }} />
+            <div 
+              style={{ 
+                width: step === 3 ? 28 : 22, 
+                height: step === 3 ? 28 : 22, 
+                borderRadius: '50%', 
+                background: step === 3 ? `linear-gradient(135deg, ${finalTheme.light}, ${finalTheme.primary})` : 'rgba(255,255,255,0.05)', 
+                border: step === 3 ? `1.5px solid ${finalTheme.primary}` : `1.5px dashed ${finalTheme.primary}40`,
+                boxShadow: step === 3 ? `0 0 14px ${finalTheme.primary}B3` : 'none',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: finalTheme.onSecondary,
+                fontSize: 11,
+                fontWeight: 800
+              }}
+            >
+              3
+            </div>
+          </>
+        )}
       </div>
 
-      {/* Content Area */}
-      <div style={styles.content}>
-        {/* STEP 1: SERVER SELECTION */}
+      {/* 3. Top Right Close / Sign Out */}
+      <div style={{ position: 'relative', zIndex: 6, display: 'flex', justifyContent: 'flex-end', padding: '16px 16px 0' }}>
+        <button 
+          onClick={signOut}
+          style={{ 
+            width: 32, 
+            height: 32, 
+            borderRadius: '50%', 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center', 
+            background: 'rgba(8,22,36,0.6)', 
+            border: `1px solid ${currentTheme.primary}59`, 
+            color: currentTheme.light, 
+            fontSize: 14,
+            fontWeight: 800,
+            cursor: 'pointer',
+            transition: 'all 0.2s'
+          }}
+          title={t('logout')}
+        >
+          ✕
+        </button>
+      </div>
+
+      {/* 4. Page Header Section */}
+      <div style={{ position: 'relative', zIndex: 6, margin: step === 2 ? '18px 0 0 82px' : '64px 0 0 82px' }}>
         {step === 1 && (
-          <div style={styles.stepContainer}>
-            <div style={styles.title}>SELECT SERVER</div>
-            <div style={styles.subTitle}>Pilih server terdekat untuk kestabilan koneksi</div>
-            <div style={styles.optionsList}>
-              {serverList.map((srv) => (
-                <button
-                  key={srv.id}
-                  onClick={() => setServer(srv.id)}
-                  style={{
-                    ...styles.card,
-                    borderColor: server === srv.id ? '#00e5ff' : 'rgba(0, 229, 255, 0.15)',
-                    background: server === srv.id ? 'rgba(0, 229, 255, 0.08)' : 'rgba(3, 8, 20, 0.6)',
-                    cursor: srv.status === 'MAINTENANCE' ? 'not-allowed' : 'pointer',
-                    opacity: srv.status === 'MAINTENANCE' ? 0.6 : 1
-                  }}
-                  disabled={srv.status === 'MAINTENANCE'}
-                >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
-                    <div style={{ textAlign: 'left' }}>
-                      <div style={styles.cardTitle}>{srv.name}</div>
-                      <div style={styles.cardSub}>Ping: {srv.ping}</div>
-                    </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 4 }}>
-                      <span style={{
-                        ...styles.badge,
-                        color: srv.status === 'ONLINE' ? '#39ff14' : '#ff3131',
-                        borderColor: srv.status === 'ONLINE' ? '#39ff14' : '#ff3131'
-                      }}>
-                        {srv.status}
-                      </span>
-                      {srv.recommended && <span style={styles.recBadge}>RECOMMENDED</span>}
-                    </div>
-                  </div>
-                </button>
-              ))}
+          <>
+            <div style={{ fontFamily: "'Share Tech Mono', monospace", fontStyle: 'italic', fontSize: 11, letterSpacing: '3px', color: '#c7ccd6', textTransform: 'uppercase' }}>
+              Step 1 of 3 · Faction
             </div>
-          </div>
+            <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 40, fontWeight: 900, letterSpacing: '2px', color: '#fff', textShadow: `0 0 24px ${currentTheme.primary}B3, 0 4px 12px rgba(0,0,0,0.8)`, transform: 'skewX(-8deg)', marginTop: 4 }}>
+              {currentTheme.name}
+            </div>
+            <div style={{ fontFamily: "'Share Tech Mono', monospace", fontStyle: 'italic', fontSize: 12, letterSpacing: '3px', color: currentTheme.light, marginTop: 6 }}>
+              {currentTheme.tagline}
+            </div>
+          </>
         )}
 
-        {/* STEP 2: RACE SELECTION */}
         {step === 2 && (
-          <div style={styles.stepContainer}>
-            <div style={styles.title}>CHOOSE FACTION</div>
-            <div style={styles.subTitle}>Setiap bangsa memiliki lore, bonus status, dan persenjataan unik</div>
-            <div style={styles.optionsList}>
-              {Object.values(races).map((rc) => (
-                <button
-                  key={rc.id}
-                  onClick={() => {
-                    setRaceId(rc.id)
-                    setJobId(null) // Reset job selection if race changes
-                  }}
-                  style={{
-                    ...styles.card,
-                    borderColor: raceId === rc.id ? '#00e5ff' : 'rgba(0, 229, 255, 0.15)',
-                    background: raceId === rc.id ? 'rgba(0, 229, 255, 0.08)' : 'rgba(3, 8, 20, 0.6)'
-                  }}
-                >
-                  <div style={styles.raceCardHeader}>
-                    <span style={styles.emoji}>{rc.emoji}</span>
-                    <div style={{ textAlign: 'left' }}>
-                      <div style={styles.cardTitle}>{rc.name.split(' – ')[0].toUpperCase()}</div>
-                      <div style={styles.cardTag}>{rc.name.split(' – ')[1]}</div>
-                    </div>
-                  </div>
-                  <div style={styles.description}>{rc.description.slice(0, 140)}...</div>
-                </button>
-              ))}
+          <>
+            <div style={{ fontFamily: "'Share Tech Mono', monospace", fontStyle: 'italic', fontSize: 11, letterSpacing: '2px', color: '#c7ccd6', textTransform: 'uppercase' }}>
+              {finalTheme.name} · Class
             </div>
-          </div>
+            <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 26, fontWeight: 900, letterSpacing: '1px', color: '#fff', textShadow: `0 0 18px ${finalTheme.primary}80`, transform: 'skewX(-8deg)', marginTop: 2 }}>
+              CHOOSE CLASS
+            </div>
+          </>
         )}
 
-        {/* STEP 3: CLASS SELECTION */}
         {step === 3 && (
-          <div style={styles.stepContainer}>
-            <div style={styles.title}>SELECT CLASS</div>
-            <div style={styles.subTitle}>Pilih spesialisasi tempur awal karakter Anda</div>
-            <div style={{
-              ...styles.optionsList,
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gap: 10,
-              maxHeight: '56vh'
-            }}>
-              {tier1Jobs.map((jb) => (
-                <button
-                  key={jb.id}
-                  onClick={() => setJobId(jb.id)}
-                  style={{
-                    ...styles.card,
-                    padding: '10px 12px',
-                    borderColor: jobId === jb.id ? '#00e5ff' : 'rgba(0, 229, 255, 0.15)',
-                    background: jobId === jb.id ? 'rgba(0, 229, 255, 0.08)' : 'rgba(3, 8, 20, 0.6)'
-                  }}
-                >
-                  <div style={{ textAlign: 'left', width: '100%', display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between' }}>
-                    <div>
-                      <div style={styles.cardTitle}>{getClassPathName(raceId, jb.id).toUpperCase()}</div>
-                      <div style={{ ...styles.cardSub, fontSize: 11 }}>Initial Job: <span style={{ color: '#00e5ff', fontWeight: 'bold' }}>{jb.name}</span></div>
-                      <div style={{ ...styles.description, fontSize: 11, marginTop: 4, minHeight: 42 }}>{jb.desc}</div>
-                    </div>
-                    <div style={{ ...styles.bonusRow, marginTop: 6, gap: 4 }}>
-                      <span style={{ ...styles.bonusTag, fontSize: 10, padding: '1px 4px' }}>❤️+{jb.bonus.hp}</span>
-                      <span style={{ ...styles.bonusTag, fontSize: 10, padding: '1px 4px' }}>⚡+{jb.bonus.atk}</span>
-                      <span style={{ ...styles.bonusTag, fontSize: 10, padding: '1px 4px' }}>🛡️+{jb.bonus.def}</span>
-                    </div>
-                  </div>
-                </button>
-              ))}
+          <>
+            <div style={{ fontFamily: "'Share Tech Mono', monospace", fontStyle: 'italic', fontSize: 11, letterSpacing: '2px', color: '#c7ccd6', textTransform: 'uppercase' }}>
+              Step 3 of 3 · Pilot
             </div>
-          </div>
+            <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 32, fontWeight: 900, letterSpacing: '1px', color: '#fff', textShadow: `0 0 18px ${finalTheme.primary}80`, transform: 'skewX(-8deg)', marginTop: 2 }}>
+              PILOT SETUP
+            </div>
+          </>
         )}
+      </div>
 
-        {/* STEP 4: APPEARANCE CUSTOMIZATION */}
-        {step === 4 && (
-          <div style={styles.stepContainer}>
-            <div style={styles.title}>APPEARANCE CUSTOMIZATION</div>
-            <div style={styles.subTitle}>Sesuaikan warna aura dan tipe avatar tampilan karakter</div>
+      {/* 5. Main Component Views */}
+      
+      {/* ───────── STEP 2: CLASS SELECT LIST ───────── */}
+      {step === 2 && (
+        <div style={{ 
+          position: 'relative', 
+          zIndex: 6, 
+          display: 'flex', 
+          flexDirection: 'column', 
+          gap: 10, 
+          padding: '16px 18px 120px 82px',
+          height: 'calc(100% - 150px)',
+          overflowY: 'auto'
+        }} className="no-scrollbar">
+          {activeJobs.map((jb) => {
+            const isSelected = jobId === jb.id
+            const monogram = getClassMonogram(jb.id)
+            const role = getClassRoleTag(jb.id)
+            const customDesc = CLASS_DESCRIPTIONS[jb.id] || jb.desc
             
-            {/* Live Character Preview Card */}
-            <div style={styles.previewContainer}>
-              <div style={{
-                ...styles.previewSpriteBox,
-                borderColor: auraColor,
-                boxShadow: `inset 0 0 20px ${auraColor}33, 0 0 15px ${auraColor}22`
-              }}>
-                <div style={{ position: 'relative', zIndex: 2 }}>
-                  <PilotSprite
-                    race={raceId}
-                    job={jobId}
-                    size={140}
-                    fill={avatarMode === 'portrait'}
-                  />
+            return (
+              <div 
+                key={jb.id}
+                onClick={() => setJobId(jb.id)}
+                style={{ 
+                  display: 'flex', 
+                  gap: 12, 
+                  alignItems: 'center', 
+                  padding: 12, 
+                  background: isSelected ? `${finalTheme.primary}1A` : 'rgba(8,22,36,0.4)', 
+                  border: isSelected ? `1.5px solid ${finalTheme.primary}` : `1px solid ${finalTheme.primary}2E`, 
+                  boxShadow: isSelected ? `0 0 20px ${finalTheme.primary}40` : 'none', 
+                  clipPath: 'polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease'
+                }}
+              >
+                {/* Hexagon Monogram */}
+                <div style={{ 
+                  width: 40, 
+                  height: 40, 
+                  flexShrink: 0, 
+                  background: isSelected ? `linear-gradient(135deg, ${finalTheme.light}, ${finalTheme.primary})` : 'rgba(255,255,255,0.06)', 
+                  border: isSelected ? 'none' : `1px solid ${finalTheme.primary}4D`,
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  boxShadow: isSelected ? `0 0 12px ${finalTheme.primary}99` : 'none', 
+                  clipPath: 'polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)'
+                }}>
+                  <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: monogram.length > 1 ? 12 : 14, fontWeight: 900, color: isSelected ? finalTheme.onSecondary : '#8a94a3' }}>
+                    {monogram}
+                  </span>
                 </div>
-                {/* Glowing Background Backdrop */}
-                <div style={{
-                  position: 'absolute',
-                  width: '90px',
-                  height: '90px',
-                  borderRadius: '50%',
-                  background: auraColor,
-                  filter: 'blur(35px)',
-                  opacity: 0.45,
-                  zIndex: 1
-                }} />
-              </div>
-              <div style={styles.previewMeta}>
-                <div style={styles.previewName}>{getClassPathName(raceId, jobId).toUpperCase()} ({selectedJob?.name})</div>
-                <div style={styles.previewRace}>{selectedRace?.name.split(' – ')[0]} Faction</div>
-              </div>
-            </div>
-
-            {/* Controls */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 14, width: '100%' }}>
-              <div>
-                <div style={styles.optionTitle}>🌈 Aura Glow Color</div>
-                <div style={styles.auraColorsRow}>
-                  {auraOptions.map((opt) => (
-                    <button
-                      key={opt.value}
-                      onClick={() => setAuraColor(opt.value)}
-                      style={{
-                        ...styles.auraBtn,
-                        backgroundColor: opt.value,
-                        borderColor: auraColor === opt.value ? '#ffffff' : 'transparent',
-                        transform: auraColor === opt.value ? 'scale(1.15)' : 'scale(1)'
-                      }}
-                      title={opt.name}
-                    />
-                  ))}
+                
+                {/* Details */}
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 900, color: '#fff' }}>
+                    {jb.name.toUpperCase()}{' '}
+                    <span style={{ fontSize: 9, fontStyle: 'italic', fontWeight: 700, color: isSelected ? finalTheme.light : '#8a94a3', marginLeft: 4 }}>
+                      {role}
+                    </span>
+                  </div>
+                  <div style={{ fontFamily: "'Saira', sans-serif", fontSize: 11, color: isSelected ? '#b9c0c9' : '#8a94a3', marginTop: 2, lineHeight: 1.3 }}>
+                    {customDesc}
+                  </div>
                 </div>
               </div>
+            )
+          })}
+        </div>
+      )}
 
-              <div>
-                <div style={styles.optionTitle}>🖼️ Avatar Mode</div>
-                <div style={{ display: 'flex', gap: 10 }}>
-                  <button
-                    onClick={() => setAvatarMode('full')}
-                    style={{
-                      ...styles.modeBtn,
-                      borderColor: avatarMode === 'full' ? '#00e5ff' : '#333',
-                      background: avatarMode === 'full' ? 'rgba(0, 229, 255, 0.1)' : 'rgba(0,0,0,0.3)'
-                    }}
-                  >
-                    🕴️ Full Body
-                  </button>
-                  <button
-                    onClick={() => setAvatarMode('portrait')}
-                    style={{
-                      ...styles.modeBtn,
-                      borderColor: avatarMode === 'portrait' ? '#00e5ff' : '#333',
-                      background: avatarMode === 'portrait' ? 'rgba(0, 229, 255, 0.1)' : 'rgba(0,0,0,0.3)'
-                    }}
-                  >
-                    👤 Face Close-up
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+      {/* 6. Bottom Console Panel */}
 
-        {/* STEP 5: CHARACTER NAME INPUT */}
-        {step === 5 && (
-          <div style={styles.stepContainer}>
-            <div style={styles.title}>CHARACTER NAME</div>
-            <div style={styles.subTitle}>Masukkan nama karakter Anda (bisa diubah nanti ngganti Rename Card)</div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, width: '100%', marginTop: 20 }}>
-              <input
-                type="text"
-                value={charName}
-                onChange={(e) => setCharName(e.target.value.replace(/[^a-zA-Z0-9_\-@#]/g, ''))}
-                placeholder="Nama Karakter"
-                maxLength={16}
-                style={styles.input}
-              />
-              <div style={styles.inputHint}>Hanya huruf, angka, dan simbol (_, -, @, #). Minimal 3 karakter.</div>
-            </div>
-          </div>
-        )}
-
-        {/* STEP 6: CONFIRMATION & CREATION */}
-        {step === 6 && (
-          <div style={styles.stepContainer}>
-            <div style={styles.title}>CONFIRMATION</div>
-            <div style={styles.subTitle}>Periksa kembali spesifikasi karakter Anda sebelum memulai</div>
-
-            <div style={styles.recapCard}>
-              <div style={styles.recapRow}>
-                <span style={styles.recapKey}>🌐 Server:</span>
-                <span style={styles.recapVal}>{serverList.find(s => s.id === server)?.name}</span>
-              </div>
-              <div style={styles.recapRow}>
-                <span style={styles.recapKey}>🤖 Faction:</span>
-                <span style={styles.recapVal}>{selectedRace?.name.split(' – ')[0]}</span>
-              </div>
-              <div style={styles.recapRow}>
-                <span style={styles.recapKey}>⚔️ Class / Path:</span>
-                <span style={styles.recapVal}>{getClassPathName(raceId, jobId)} ({selectedJob?.name})</span>
-              </div>
-              <div style={styles.recapRow}>
-                <span style={styles.recapKey}>📛 Name:</span>
-                <span style={styles.recapVal}>{charName.trim()}</span>
-              </div>
-              <div style={styles.recapRow}>
-                <span style={styles.recapKey}>🌈 Aura:</span>
-                <span style={{ ...styles.recapVal, color: auraColor }}>
-                  {auraOptions.find(o => o.value === auraColor)?.name}
+      {/* ───────── STEP 1: FACTION CONSOLE ───────── */}
+      {step === 1 && (
+        <div style={{ 
+          position: 'absolute', 
+          left: 0, 
+          right: 0, 
+          bottom: 0, 
+          zIndex: 7, 
+          padding: '24px 20px 24px 82px', 
+          background: 'linear-gradient(180deg, transparent, rgba(6,5,6,0.82) 26%, rgba(6,5,6,0.96) 100%)', 
+          clipPath: 'polygon(0 14px, 20px 0, 100% 0, 100% 100%, 0 100%)' 
+        }}>
+          {/* Qualitative Traits */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 16 }}>
+            {currentTheme.traits.map((trait) => (
+              <div key={trait.name} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <span style={{ width: 84, fontFamily: "'Orbitron', sans-serif", fontSize: 9, fontWeight: 700, letterSpacing: 0.5, color: currentTheme.muted }}>
+                  {trait.name}
                 </span>
+                <div style={{ flex: 1, height: 6, borderRadius: 3, background: `${currentTheme.primary}26`, position: 'relative', top: 1 }}>
+                  <div style={{ width: `${trait.val}%`, height: '100%', borderRadius: 3, background: `linear-gradient(90deg, ${currentTheme.dark}, ${currentTheme.primary})`, boxShadow: `0 0 6px ${currentTheme.primary}` }} />
+                </div>
               </div>
-            </div>
-
-            <button onClick={handleCreate} style={styles.createBtn}>
-              🛠️ CREATE CHARACTER
-            </button>
+            ))}
           </div>
-        )}
-      </div>
 
-      {/* Footer Navigation Buttons */}
-      <div style={styles.footer}>
-        {step > 1 ? (
-          <button onClick={handleBack} style={styles.navBtn}>
-            ❮ BACK
-          </button>
-        ) : <div />}
-        
-        {step < 6 ? (
-          <button
-            onClick={handleNext}
-            style={{
-              ...styles.navBtnActive,
-              opacity: (
-                (step === 1 && !server) ||
-                (step === 2 && !raceId) ||
-                (step === 3 && !jobId)
-              ) ? 0.5 : 1
+          {/* Confirm Select CTA */}
+          <div 
+            onClick={() => selectRaceAndNext(focusedRace)}
+            style={{ 
+              position: 'relative', 
+              padding: 16, 
+              textAlign: 'center', 
+              background: currentTheme.secondary, 
+              border: `1px solid ${currentTheme.primary}66`, 
+              overflow: 'hidden', 
+              fontFamily: "'Orbitron', sans-serif", 
+              fontSize: 15, 
+              fontWeight: 900, 
+              letterSpacing: '3px', 
+              color: currentTheme.onSecondary, 
+              clipPath: 'polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px)',
+              cursor: 'pointer',
+              boxShadow: `0 0 15px ${currentTheme.primary}40`
             }}
-            disabled={
-              (step === 1 && !server) ||
-              (step === 2 && !raceId) ||
-              (step === 3 && !jobId)
-            }
           >
-            NEXT ❯
+            {/* Gloss shine sweep */}
+            <div style={{ position: 'absolute', top: 0, bottom: 0, left: '-70%', width: '50%', background: 'linear-gradient(100deg, transparent, rgba(255,255,255,0.65), transparent)', animation: 'energySweep 3.2s linear infinite' }} />
+            SELECT {currentTheme.name}
+          </div>
+        </div>
+      )}
+
+      {/* ───────── STEP 2: CLASS CONTINUE CONSOLE ───────── */}
+      {step === 2 && (
+        <div style={{ 
+          position: 'absolute', 
+          left: 0, 
+          right: 0, 
+          bottom: 0, 
+          zIndex: 7, 
+          padding: '18px 20px 24px 82px', 
+          background: 'linear-gradient(180deg, transparent, rgba(6,5,6,0.9) 55%, rgba(6,5,6,0.98) 100%)' 
+        }}>
+          <div 
+            onClick={() => setStep(3)}
+            style={{ 
+              position: 'relative', 
+              padding: 15, 
+              textAlign: 'center', 
+              background: finalTheme.secondary, 
+              border: `1px solid ${finalTheme.primary}66`, 
+              overflow: 'hidden', 
+              fontFamily: "'Orbitron', sans-serif", 
+              fontSize: 15, 
+              fontWeight: 900, 
+              letterSpacing: '3px', 
+              color: finalTheme.onSecondary, 
+              clipPath: 'polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px)',
+              cursor: 'pointer',
+              boxShadow: `0 0 15px ${finalTheme.primary}40`
+            }}
+          >
+            <div style={{ position: 'absolute', top: 0, bottom: 0, left: '-70%', width: '50%', background: 'linear-gradient(100deg, transparent, rgba(255,255,255,0.65), transparent)', animation: 'energySweep 3.2s linear infinite' }} />
+            CONTINUE
+          </div>
+        </div>
+      )}
+
+      {/* ───────── STEP 3: CREATION SETUP CONSOLE ───────── */}
+      {step === 3 && (
+        <div style={{ 
+          position: 'absolute', 
+          left: 0, 
+          right: 0, 
+          bottom: 0, 
+          zIndex: 7, 
+          padding: '24px 20px 24px 82px', 
+          background: 'linear-gradient(180deg, transparent, rgba(6,5,6,0.85) 30%, rgba(6,5,6,0.98) 100%)', 
+          clipPath: 'polygon(0 14px, 20px 0, 100% 0, 100% 100%, 0 100%)' 
+        }}>
+          
+          {/* Appearance Variants Segmented Control */}
+          <div style={{ marginBottom: 14 }}>
+            <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, fontWeight: 800, color: finalTheme.light, letterSpacing: 1, marginBottom: 5 }}>
+              APPEARANCE
+            </div>
+            <div style={{ display: 'flex', gap: 6 }}>
+              {['A', 'B', 'C'].map((variant) => {
+                const isSelected = appearance === variant
+                return (
+                  <button
+                    key={variant}
+                    onClick={() => setAppearance(variant)}
+                    style={{
+                      flex: 1,
+                      padding: '8px 0',
+                      background: isSelected ? `${finalTheme.primary}22` : 'rgba(8,22,36,0.4)',
+                      border: isSelected ? `1.5px solid ${finalTheme.primary}` : `1px solid ${finalTheme.primary}22`,
+                      borderRadius: 6,
+                      color: isSelected ? '#fff' : '#8a94a3',
+                      fontFamily: "'Orbitron', sans-serif",
+                      fontSize: 11,
+                      fontWeight: 800,
+                      cursor: 'pointer',
+                      transition: 'all 0.2s'
+                    }}
+                  >
+                    MODEL {variant}
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+
+          {/* Callsign Input */}
+          <div style={{ marginBottom: 20 }}>
+            <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, fontWeight: 800, color: finalTheme.light, letterSpacing: 1, marginBottom: 5 }}>
+              CALLSIGN
+            </div>
+            <input 
+              type="text"
+              value={charName}
+              onChange={(e) => setCharName(e.target.value.replace(/[^a-zA-Z0-9_\-@#]/g, ''))}
+              placeholder="ENTER NAME..."
+              maxLength={16}
+              style={{
+                width: '100%',
+                background: 'rgba(8,22,36,0.5)',
+                border: `1.5px solid ${finalTheme.primary}66`,
+                borderRadius: 8,
+                padding: '11px 16px',
+                color: '#fff',
+                fontFamily: "'Share Tech Mono', monospace",
+                fontSize: 15,
+                textAlign: 'center',
+                outline: 'none',
+                boxShadow: `inset 0 0 10px rgba(0,0,0,0.4), 0 0 8px ${finalTheme.primary}1A`
+              }}
+            />
+          </div>
+
+          {/* Create Confirmation CTA */}
+          <button 
+            onClick={handleCreate}
+            disabled={charName.trim().length < 3}
+            style={{ 
+              position: 'relative', 
+              width: '100%',
+              padding: 16, 
+              border: `1px solid ${charName.trim().length >= 3 ? finalTheme.primary + '66' : 'rgba(255,255,255,0.1)'}`, 
+              background: charName.trim().length >= 3 ? finalTheme.secondary : 'rgba(255,255,255,0.06)', 
+              color: charName.trim().length >= 3 ? finalTheme.onSecondary : 'rgba(255,255,255,0.25)', 
+              overflow: 'hidden', 
+              fontFamily: "'Orbitron', sans-serif", 
+              fontSize: 15, 
+              fontWeight: 900, 
+              letterSpacing: '3px', 
+              clipPath: 'polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px)',
+              cursor: charName.trim().length >= 3 ? 'pointer' : 'not-allowed',
+              boxShadow: charName.trim().length >= 3 ? `0 0 15px ${finalTheme.primary}40` : 'none',
+              transition: 'all 0.2s ease'
+            }}
+          >
+            {charName.trim().length >= 3 && (
+              <div style={{ position: 'absolute', top: 0, bottom: 0, left: '-70%', width: '50%', background: 'linear-gradient(100deg, transparent, rgba(255,255,255,0.65), transparent)', animation: 'energySweep 3.2s linear infinite' }} />
+            )}
+            {finalTheme.confirmText}
           </button>
-        ) : <div />}
-      </div>
+        </div>
+      )}
+
     </div>
   )
-}
-
-const styles = {
-  overlay: {
-    display: 'flex',
-    flexDirection: 'column',
-    height: '100%',
-    width: '100%',
-    background: '#040814',
-    padding: '16px 20px',
-    color: '#e0f4ff',
-    fontFamily: 'var(--font-body)',
-    position: 'relative'
-  },
-  header: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 14
-  },
-  headerLogo: {
-    fontFamily: 'var(--font-title)',
-    fontSize: 15,
-    fontWeight: 900,
-    letterSpacing: 2,
-    color: '#00e5ff',
-    textShadow: '0 0 10px rgba(0, 229, 255, 0.4)'
-  },
-  logoutBtn: {
-    background: 'rgba(255, 49, 49, 0.1)',
-    border: '1px solid rgba(255, 49, 49, 0.4)',
-    borderRadius: 6,
-    color: '#ff3131',
-    fontFamily: 'var(--font-title)',
-    fontSize: 10,
-    fontWeight: 800,
-    padding: '5px 10px',
-    cursor: 'pointer',
-    letterSpacing: 1
-  },
-  progressBar: {
-    display: 'flex',
-    gap: 6,
-    marginBottom: 20
-  },
-  progressStep: {
-    flex: 1,
-    height: 4,
-    borderRadius: 2,
-    transition: 'all 0.3s ease'
-  },
-  content: {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    overflowY: 'auto'
-  },
-  stepContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: 6,
-    animation: 'fadeIn 0.3s ease'
-  },
-  title: {
-    fontFamily: 'var(--font-title)',
-    fontSize: 17,
-    fontWeight: 800,
-    color: '#00e5ff',
-    letterSpacing: 1.5,
-    textAlign: 'center',
-    marginTop: 4
-  },
-  subTitle: {
-    fontSize: 13,
-    color: '#7ec8e3',
-    textAlign: 'center',
-    marginBottom: 16,
-    fontWeight: 500,
-    lineHeight: 1.4
-  },
-  optionsList: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 12,
-    width: '100%',
-    maxHeight: '52vh',
-    overflowY: 'auto'
-  },
-  card: {
-    borderWidth: 1.5,
-    borderStyle: 'solid',
-    borderRadius: 12,
-    padding: '12px 14px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    gap: 8,
-    width: '100%',
-    boxShadow: '0 4px 10px rgba(0,0,0,0.35)',
-    transition: 'all 0.2s ease',
-    color: '#e0f4ff',
-    fontFamily: 'var(--font-body)'
-  },
-  cardTitle: {
-    fontFamily: 'var(--font-title)',
-    fontSize: 14,
-    fontWeight: 800,
-    color: '#ffffff',
-    textAlign: 'left'
-  },
-  cardSub: {
-    fontSize: 12,
-    color: '#7ec8e3',
-    textAlign: 'left',
-    marginTop: 2
-  },
-  badge: {
-    fontSize: 10,
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderRadius: 4,
-    padding: '2px 6px',
-    fontWeight: 800,
-    letterSpacing: 0.5
-  },
-  recBadge: {
-    fontSize: 9,
-    color: '#00e5ff',
-    fontWeight: 800,
-    background: 'rgba(0, 229, 255, 0.1)',
-    borderRadius: 4,
-    padding: '2px 6px',
-    letterSpacing: 0.5
-  },
-  raceCardHeader: {
-    display: 'flex',
-    gap: 12,
-    alignItems: 'center'
-  },
-  emoji: {
-    fontSize: 32
-  },
-  cardTag: {
-    fontSize: 11,
-    color: '#00e5ff',
-    fontWeight: 700,
-    marginTop: 2
-  },
-  description: {
-    fontSize: 12.5,
-    color: '#a0cce0',
-    textAlign: 'left',
-    lineHeight: 1.45,
-    fontWeight: 500
-  },
-  bonusRow: {
-    display: 'flex',
-    gap: 8,
-    marginTop: 8,
-    flexWrap: 'wrap'
-  },
-  bonusTag: {
-    fontSize: 11,
-    background: 'rgba(0, 229, 255, 0.1)',
-    border: '1px solid rgba(0, 229, 255, 0.2)',
-    borderRadius: 4,
-    padding: '2px 6px',
-    color: '#7ec8e3',
-    fontWeight: 700
-  },
-  previewContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: 10,
-    background: 'rgba(3, 8, 20, 0.5)',
-    border: '1.5px solid rgba(0, 229, 255, 0.15)',
-    borderRadius: 14,
-    padding: '16px 20px',
-    width: '100%',
-    marginBottom: 14
-  },
-  previewSpriteBox: {
-    width: 140,
-    height: 140,
-    borderRadius: 12,
-    borderWidth: 1.5,
-    borderStyle: 'solid',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'relative',
-    background: '#040a17',
-    overflow: 'hidden'
-  },
-  previewMeta: {
-    textAlign: 'center'
-  },
-  previewName: {
-    fontFamily: 'var(--font-title)',
-    fontSize: 15,
-    fontWeight: 800,
-    color: '#ffffff'
-  },
-  previewRace: {
-    fontSize: 12,
-    color: '#7ec8e3',
-    marginTop: 2,
-    fontWeight: 700
-  },
-  optionTitle: {
-    fontFamily: 'var(--font-title)',
-    fontSize: 13,
-    fontWeight: 800,
-    color: '#00e5ff',
-    letterSpacing: 1,
-    marginBottom: 8
-  },
-  auraColorsRow: {
-    display: 'flex',
-    gap: 14,
-    alignItems: 'center'
-  },
-  auraBtn: {
-    width: 32,
-    height: 32,
-    borderRadius: '50%',
-    borderWidth: 2,
-    borderStyle: 'solid',
-    cursor: 'pointer',
-    boxShadow: '0 4px 8px rgba(0,0,0,0.4)',
-    transition: 'all 0.2s ease'
-  },
-  modeBtn: {
-    flex: 1,
-    padding: '10px',
-    borderRadius: 8,
-    borderWidth: 1,
-    borderStyle: 'solid',
-    color: '#ffffff',
-    fontFamily: 'var(--font-body)',
-    fontWeight: 700,
-    fontSize: 13,
-    cursor: 'pointer',
-    transition: 'all 0.2s ease'
-  },
-  input: {
-    background: 'rgba(3, 8, 20, 0.8)',
-    border: '1.5px solid #00e5ff',
-    borderRadius: 10,
-    color: '#ffffff',
-    fontFamily: 'var(--font-mono)',
-    fontSize: 16,
-    padding: '12px 16px',
-    width: '100%',
-    textAlign: 'center',
-    boxShadow: '0 0 10px rgba(0, 229, 255, 0.15)',
-    outline: 'none'
-  },
-  inputHint: {
-    fontSize: 11,
-    color: '#7ec8e3',
-    textAlign: 'center',
-    fontWeight: 500
-  },
-  recapCard: {
-    background: 'rgba(3, 8, 20, 0.7)',
-    border: '1.5px solid rgba(0, 229, 255, 0.2)',
-    borderRadius: 14,
-    padding: '16px 20px',
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 10,
-    marginBottom: 20,
-    boxShadow: '0 4px 12px rgba(0,0,0,0.4)'
-  },
-  recapRow: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    borderBottom: '1px solid rgba(0,229,255,0.06)',
-    paddingBottom: 8
-  },
-  recapKey: {
-    fontSize: 13,
-    color: '#7ec8e3',
-    fontWeight: 700
-  },
-  recapVal: {
-    fontSize: 13,
-    color: '#ffffff',
-    fontWeight: 800
-  },
-  createBtn: {
-    width: '100%',
-    background: 'linear-gradient(90deg, #00e5ff, #0088ff)',
-    border: 'none',
-    borderRadius: 12,
-    color: '#000000',
-    fontFamily: 'var(--font-title)',
-    fontSize: 14,
-    fontWeight: 900,
-    padding: '14px 20px',
-    cursor: 'pointer',
-    boxShadow: '0 0 15px rgba(0, 229, 255, 0.45)',
-    letterSpacing: 1.5,
-    transition: 'all 0.2s ease',
-    textAlign: 'center'
-  },
-  footer: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    marginTop: 20,
-    borderTop: '1px solid rgba(255,255,255,0.06)',
-    paddingTop: 16
-  },
-  navBtn: {
-    background: 'transparent',
-    border: '1px solid rgba(0, 229, 255, 0.3)',
-    borderRadius: 8,
-    color: '#00e5ff',
-    fontFamily: 'var(--font-title)',
-    fontSize: 12,
-    fontWeight: 800,
-    padding: '8px 16px',
-    cursor: 'pointer',
-    letterSpacing: 1
-  },
-  navBtnActive: {
-    background: 'rgba(0, 229, 255, 0.1)',
-    border: '1.5px solid #00e5ff',
-    borderRadius: 8,
-    color: '#00e5ff',
-    fontFamily: 'var(--font-title)',
-    fontSize: 12,
-    fontWeight: 800,
-    padding: '8px 16px',
-    cursor: 'pointer',
-    letterSpacing: 1,
-    boxShadow: '0 0 8px rgba(0, 229, 255, 0.2)'
-  }
 }
