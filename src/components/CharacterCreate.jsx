@@ -596,7 +596,7 @@ export default function CharacterCreate() {
             {/* Gender Selector (Celestra & Bionex Only) */}
             {(raceId === 'celestra' || raceId === 'bionex') && (
               <div>
-                <div style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 11, color: '#8a94a3', marginBottom: 4 }}>GENDER :</div>
+                <div style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 13, color: '#eef3fb', marginBottom: 4 }}>GENDER :</div>
                 <div style={{ display: 'flex', gap: 6 }}>
                   {['male', 'female'].map((g) => {
                     const isSel = gender === g
@@ -613,7 +613,7 @@ export default function CharacterCreate() {
                           borderRadius: 4,
                           color: isSel ? '#fff' : '#a9c8ff',
                           fontFamily: "'Orbitron', sans-serif",
-                          fontSize: 11,
+                          fontSize: 13,
                           fontWeight: 800,
                           cursor: 'pointer',
                           transition: 'all 0.2s',
@@ -630,7 +630,7 @@ export default function CharacterCreate() {
 
             {/* Char Name */}
             <div>
-              <div style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 11, color: '#8a94a3', marginBottom: 4 }}>CHAR NAME :</div>
+              <div style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 13, color: '#eef3fb', marginBottom: 4 }}>CHAR NAME :</div>
               <input 
                 type="text"
                 value={charName}
@@ -645,7 +645,7 @@ export default function CharacterCreate() {
                   padding: '8px 12px',
                   color: '#fff',
                   fontFamily: "'Share Tech Mono', monospace",
-                  fontSize: 14,
+                  fontSize: 15,
                   outline: 'none',
                   boxShadow: `inset 0 0 10px rgba(0,0,0,0.4), 0 0 8px ${finalTheme.primary}1A`
                 }}
@@ -654,39 +654,39 @@ export default function CharacterCreate() {
 
             {/* Class */}
             <div>
-              <div style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 11, color: '#8a94a3', marginBottom: 2 }}>CLASS :</div>
-              <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 14, fontWeight: 900, color: finalTheme.light, letterSpacing: '1px' }}>
+              <div style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 13, color: '#eef3fb', marginBottom: 2 }}>CLASS :</div>
+              <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, fontWeight: 900, color: finalTheme.light, letterSpacing: '1px' }}>
                 {getClassBaseName(jobId)}
               </div>
             </div>
 
             {/* Jobs (Tier 1) */}
             <div>
-              <div style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 11, color: '#8a94a3', marginBottom: 2 }}>JOBS (LV 1) :</div>
-              <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 14, fontWeight: 900, color: '#fff', letterSpacing: '1px' }}>
+              <div style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 13, color: '#eef3fb', marginBottom: 2 }}>JOBS (LV 1) :</div>
+              <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, fontWeight: 900, color: '#fff', letterSpacing: '1px' }}>
                 {jobs[raceId]?.tier1?.find(j => j.id === jobId)?.name || getClassBaseName(jobId)}
               </div>
             </div>
 
             {/* Basic Stats */}
             <div>
-              <div style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 11, color: '#8a94a3', marginBottom: 4 }}>BASIC STAT :</div>
+              <div style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 13, color: '#eef3fb', marginBottom: 4 }}>BASIC STAT :</div>
               {(() => {
                 const jobData = jobs[raceId]?.tier1?.find(j => j.id === jobId)
                 if (!jobData) return null
                 return (
                   <div style={{ display: 'flex', gap: 12 }}>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 2, background: 'rgba(8,22,36,0.4)', padding: '6px 10px', borderRadius: 4, border: `1px solid ${finalTheme.primary}22`, flex: 1 }}>
-                      <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 10, color: '#7ec8e3' }}>HP</span>
-                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, color: '#fff' }}>{jobData.bonus.hp}</span>
+                      <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 13, color: '#7ec8e3' }}>HP</span>
+                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, fontWeight: 800, color: '#fff' }}>{jobData.bonus.hp}</span>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 2, background: 'rgba(8,22,36,0.4)', padding: '6px 10px', borderRadius: 4, border: `1px solid ${finalTheme.primary}22`, flex: 1 }}>
-                      <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 10, color: '#ffb48f' }}>ATK</span>
-                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, color: '#fff' }}>{jobData.bonus.atk}</span>
+                      <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 13, color: '#ffb48f' }}>ATK</span>
+                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, fontWeight: 800, color: '#fff' }}>{jobData.bonus.atk}</span>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 2, background: 'rgba(8,22,36,0.4)', padding: '6px 10px', borderRadius: 4, border: `1px solid ${finalTheme.primary}22`, flex: 1 }}>
-                      <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 10, color: '#c7ccd6' }}>DEF</span>
-                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, color: '#fff' }}>{jobData.bonus.def}</span>
+                      <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 13, color: '#c7ccd6' }}>DEF</span>
+                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, fontWeight: 800, color: '#fff' }}>{jobData.bonus.def}</span>
                     </div>
                   </div>
                 )
