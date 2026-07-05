@@ -226,25 +226,34 @@ export default function CharacterCreate() {
           <div style={styles.stepContainer}>
             <div style={styles.title}>SELECT CLASS</div>
             <div style={styles.subTitle}>Pilih spesialisasi tempur awal karakter Anda</div>
-            <div style={styles.optionsList}>
+            <div style={{
+              ...styles.optionsList,
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: 10,
+              maxHeight: '56vh'
+            }}>
               {tier1Jobs.map((jb) => (
                 <button
                   key={jb.id}
                   onClick={() => setJobId(jb.id)}
                   style={{
                     ...styles.card,
+                    padding: '10px 12px',
                     borderColor: jobId === jb.id ? '#00e5ff' : 'rgba(0, 229, 255, 0.15)',
                     background: jobId === jb.id ? 'rgba(0, 229, 255, 0.08)' : 'rgba(3, 8, 20, 0.6)'
                   }}
                 >
-                  <div style={{ textAlign: 'left', width: '100%' }}>
-                    <div style={styles.cardTitle}>{getClassPathName(raceId, jb.id).toUpperCase()}</div>
-                    <div style={styles.cardSub}>Initial Job: <span style={{ color: '#00e5ff', fontWeight: 'bold' }}>{jb.name}</span></div>
-                    <div style={{ ...styles.description, marginTop: 4 }}>{jb.desc}</div>
-                    <div style={styles.bonusRow}>
-                      <span style={styles.bonusTag}>❤️ +{jb.bonus.hp} HP</span>
-                      <span style={styles.bonusTag}>⚡ +{jb.bonus.atk} ATK</span>
-                      <span style={styles.bonusTag}>🛡️ +{jb.bonus.def} DEF</span>
+                  <div style={{ textAlign: 'left', width: '100%', display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between' }}>
+                    <div>
+                      <div style={styles.cardTitle}>{getClassPathName(raceId, jb.id).toUpperCase()}</div>
+                      <div style={{ ...styles.cardSub, fontSize: 11 }}>Initial Job: <span style={{ color: '#00e5ff', fontWeight: 'bold' }}>{jb.name}</span></div>
+                      <div style={{ ...styles.description, fontSize: 11, marginTop: 4, minHeight: 42 }}>{jb.desc}</div>
+                    </div>
+                    <div style={{ ...styles.bonusRow, marginTop: 6, gap: 4 }}>
+                      <span style={{ ...styles.bonusTag, fontSize: 10, padding: '1px 4px' }}>❤️+{jb.bonus.hp}</span>
+                      <span style={{ ...styles.bonusTag, fontSize: 10, padding: '1px 4px' }}>⚡+{jb.bonus.atk}</span>
+                      <span style={{ ...styles.bonusTag, fontSize: 10, padding: '1px 4px' }}>🛡️+{jb.bonus.def}</span>
                     </div>
                   </div>
                 </button>
