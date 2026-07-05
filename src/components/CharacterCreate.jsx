@@ -232,7 +232,33 @@ export default function CharacterCreate() {
         </>
       )}
 
-
+      {/* 2. Class Select & Character Creation Pilot Sprite (Perfectly aligned with Step 1 center) */}
+      {(step === 2 || step === 3) && (
+        <div style={{ 
+          position: 'absolute', 
+          left: '58%', 
+          top: '12%', 
+          height: '42%', 
+          maxHeight: '380px',
+          transform: 'translateX(-50%)', 
+          zIndex: 2,
+          pointerEvents: 'none',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}>
+          <div style={{ animation: 'heroFloat 6s ease-in-out infinite' }}>
+            <PilotSprite 
+              race={raceId} 
+              job={jobId} 
+              gender={gender}
+              size={380} 
+              height="100%"
+              width="auto"
+            />
+          </div>
+        </div>
+      )}
 
       {/* 2. Left Rail Progress / Faction Tabs */}
       <div style={{ 
@@ -406,33 +432,13 @@ export default function CharacterCreate() {
           height: 'calc(100% - 130px)',
           overflow: 'hidden'
         }}>
-          {/* Top Preview Space (Completely transparent, no frame/border) */}
+          {/* Top Preview Space Spacer */}
           <div style={{ 
             position: 'relative', 
             width: '100%', 
             height: '240px', 
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
             flexShrink: 0
           }}>
-            {/* Native Flex Centerer to prevent transform animation conflict */}
-            <div style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center'
-            }}>
-              <div style={{ animation: 'heroFloat 6s ease-in-out infinite' }}>
-                <PilotSprite 
-                  race={raceId} 
-                  job={jobId} 
-                  gender={gender}
-                  size={220} 
-                  height="210px"
-                  width="auto"
-                />
-              </div>
-            </div>
             <span style={{ position: 'absolute', bottom: 5, left: 0, fontFamily: "'Share Tech Mono', monospace", fontSize: 13, color: finalTheme.light, opacity: 0.8, letterSpacing: '1px' }}>
               PREVIEW
             </span>
@@ -566,34 +572,14 @@ export default function CharacterCreate() {
           height: 'calc(100% - 130px)',
           overflow: 'hidden'
         }}>
-          {/* Top Preview Space (Completely transparent, no frame/border) */}
+          {/* Top Preview Space Spacer */}
           <div style={{ 
             position: 'relative', 
             width: '100%', 
             height: '240px', 
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
             flexShrink: 0,
             marginTop: 10
           }}>
-            {/* Native Flex Centerer to prevent transform animation conflict */}
-            <div style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center'
-            }}>
-              <div style={{ animation: 'heroFloat 6s ease-in-out infinite' }}>
-                <PilotSprite 
-                  race={raceId} 
-                  job={jobId} 
-                  gender={gender}
-                  size={220} 
-                  height="210px"
-                  width="auto"
-                />
-              </div>
-            </div>
             <span style={{ position: 'absolute', bottom: 5, left: 0, fontFamily: "'Share Tech Mono', monospace", fontSize: 13, color: finalTheme.light, opacity: 0.8, letterSpacing: '1px' }}>
               PREVIEW
             </span>
