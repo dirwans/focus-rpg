@@ -261,6 +261,23 @@ export default function LibraryModal({ onClose }) {
                 ))}
               </div>
 
+              {/* World Boss Stats */}
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>⚔️ World Boss (Sector Boss) Roster &amp; Stats</div>
+                {[
+                  { name: '🌱 Lumora Behemoth (Lv. 12)', stats: 'HP: 500,000 | ATK: 150 | DEF: 100 | CRIT: 8%' },
+                  { name: '🌿 Sylvan Fanglord (Lv. 25)', stats: 'HP: 2,500,000 | ATK: 280 | DEF: 180 | CRIT: 10%' },
+                  { name: '⚙️ Iron Juggernaut (Lv. 38)', stats: 'HP: 10,000,000 | ATK: 500 | DEF: 320 | CRIT: 12%' },
+                  { name: '🔥 Pyraxis Overlord (Lv. 52)', stats: 'HP: 50,000,000 | ATK: 850 | DEF: 550 | CRIT: 15%' },
+                  { name: '☢️ Trinity Overlord (Lv. 66)', stats: 'HP: 250,000,000 | ATK: 1,500 | DEF: 900 | CRIT: 20%' },
+                ].map((b, i) => (
+                  <div key={i} style={{ display: 'flex', flexDirection: 'column', padding: '6px 0', borderBottom: i < 4 ? '1px solid rgba(255,255,255,0.07)' : 'none', fontFamily: 'var(--font-mono)', fontSize: 12 }}>
+                    <span style={{ color: '#00e5ff', fontWeight: 'bold' }}>{b.name}</span>
+                    <span style={{ color: '#88aadd', fontSize: 11, marginTop: 2 }}>{b.stats}</span>
+                  </div>
+                ))}
+              </div>
+
               {/* World Map Pit Boss (Overlord) */}
               <div style={styles.itemCard}>
                 <div style={styles.itemTitle}>👾 World Map Pit Boss (Overlord)</div>

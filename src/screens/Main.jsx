@@ -478,6 +478,7 @@ const FOCUS_MODE_LABEL = { arctron: 'FIGHT', bionex: 'GATHER', celestra: 'CHANNE
   const [enemyAnim, setEnemyAnim] = useState('')
   const lastHpRef = useRef(battle.enemyHp)
   const lastPlayerHpRef = useRef(battle.playerHp)
+  const lastMobIdRef = useRef(null)
 
   // Trigger floating damage popup
   const spawnDamage = (amount, isCrit) => {
@@ -498,12 +499,23 @@ const FOCUS_MODE_LABEL = { arctron: 'FIGHT', bionex: 'GATHER', celestra: 'CHANNE
 
   // Monitor damage events
   useEffect(() => {
-    if (!isRunning || !battle.currentMob) return
+    if (!isRunning || !battle.currentMob) {
+      lastHpRef.current = null
+      lastMobIdRef.current = null
+      return
+    }
+
+    const mobId = battle.currentMob.name
+    if (lastMobIdRef.current !== mobId) {
+      lastMobIdRef.current = mobId
+      lastHpRef.current = battle.enemyHp
+      return
+    }
 
     const currentHp = battle.enemyHp
     const prevHp = lastHpRef.current
 
-    if (currentHp < prevHp) {
+    if (prevHp !== null && prevHp !== undefined && currentHp < prevHp) {
       const diff = prevHp - currentHp
       const group = getPlayerClassGroup(player.job, player.race)
       let activeAtk = stats.atk
@@ -547,12 +559,15 @@ const FOCUS_MODE_LABEL = { arctron: 'FIGHT', bionex: 'GATHER', celestra: 'CHANNE
 
   // Monitor player damage events
   useEffect(() => {
-    if (!isRunning || battle.playerHp === undefined) return
+    if (!isRunning || battle.playerHp === undefined) {
+      lastPlayerHpRef.current = null
+      return
+    }
 
     const currentHp = battle.playerHp
     const prevHp = lastPlayerHpRef.current
 
-    if (currentHp > 0 && currentHp < prevHp) {
+    if (prevHp !== null && prevHp !== undefined && currentHp > 0 && currentHp < prevHp) {
       const diff = prevHp - currentHp
       const id = Math.random().toString()
       const newP = {
@@ -719,20 +734,20 @@ const FOCUS_MODE_LABEL = { arctron: 'FIGHT', bionex: 'GATHER', celestra: 'CHANNE
                   display: 'flex',
                   alignItems: 'flex-end', // Stand on the grid floor
                   justifyContent: 'center',
-                  width: (battle.isBoss || battle.isPitBoss) ? 185 : 160,
-                  height: (battle.isBoss || battle.isPitBoss) ? 185 : 160,
+                  width: (battle.isBoss || battle.isPitBoss) ? 240 : 160,
+                  height: (battle.isBoss || battle.isPitBoss) ? 240 : 160,
                   flexShrink: 0
                 }}>
                   {battle.currentMob.image ? (
                     <TransparentSprite 
                       src={battle.currentMob.image} 
                       alt={battle.currentMob.name} 
-                      size={(battle.isBoss || battle.isPitBoss) ? 185 : 160} 
-                      height={(battle.isBoss || battle.isPitBoss) ? 185 : 160}
+                      size={(battle.isBoss || battle.isPitBoss) ? 240 : 160} 
+                      height={(battle.isBoss || battle.isPitBoss) ? 240 : 160}
                       glowColor="var(--neon-glow)" 
                     />
                   ) : (
-                    <EnemySprite isBoss={battle.isBoss} isPitBoss={battle.isPitBoss} size={(battle.isBoss || battle.isPitBoss) ? 185 : 160} />
+                    <EnemySprite isBoss={battle.isBoss} isPitBoss={battle.isPitBoss} size={(battle.isBoss || battle.isPitBoss) ? 240 : 160} />
                   )}
                 </div>
                 <div style={styles.spriteLabel}>{battle.currentMob.name?.toUpperCase()}</div>
