@@ -675,18 +675,18 @@ export default function CharacterCreate() {
                 const jobData = jobs[raceId]?.tier1?.find(j => j.id === jobId)
                 if (!jobData) return null
                 return (
-                  <div style={{ display: 'flex', gap: 12 }}>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 2, background: 'rgba(8,22,36,0.4)', padding: '6px 10px', borderRadius: 4, border: `1px solid ${finalTheme.primary}22`, flex: 1 }}>
-                      <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 13, color: '#7ec8e3' }}>HP</span>
-                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, fontWeight: 800, color: '#fff' }}>{jobData.bonus.hp}</span>
+                  <div style={{ display: 'flex', gap: 6 }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 2, background: 'rgba(8,22,36,0.4)', padding: '6px 6px', borderRadius: 4, border: `1px solid ${finalTheme.primary}22`, flex: 1, minWidth: 0 }}>
+                      <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 12, color: '#7ec8e3' }}>HP</span>
+                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 15, fontWeight: 800, color: '#fff', whiteSpace: 'nowrap' }}>{jobData.bonus.hp}</span>
                     </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 2, background: 'rgba(8,22,36,0.4)', padding: '6px 10px', borderRadius: 4, border: `1px solid ${finalTheme.primary}22`, flex: 1 }}>
-                      <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 13, color: '#ffb48f' }}>ATK</span>
-                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, fontWeight: 800, color: '#fff' }}>{jobData.bonus.atk}</span>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 2, background: 'rgba(8,22,36,0.4)', padding: '6px 6px', borderRadius: 4, border: `1px solid ${finalTheme.primary}22`, flex: 1, minWidth: 0 }}>
+                      <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 12, color: '#ffb48f' }}>ATK</span>
+                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 15, fontWeight: 800, color: '#fff', whiteSpace: 'nowrap' }}>{jobData.bonus.atk}</span>
                     </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 2, background: 'rgba(8,22,36,0.4)', padding: '6px 10px', borderRadius: 4, border: `1px solid ${finalTheme.primary}22`, flex: 1 }}>
-                      <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 13, color: '#c7ccd6' }}>DEF</span>
-                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, fontWeight: 800, color: '#fff' }}>{jobData.bonus.def}</span>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 2, background: 'rgba(8,22,36,0.4)', padding: '6px 6px', borderRadius: 4, border: `1px solid ${finalTheme.primary}22`, flex: 1, minWidth: 0 }}>
+                      <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 12, color: '#c7ccd6' }}>DEF</span>
+                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 15, fontWeight: 800, color: '#fff', whiteSpace: 'nowrap' }}>{jobData.bonus.def}</span>
                     </div>
                   </div>
                 )
