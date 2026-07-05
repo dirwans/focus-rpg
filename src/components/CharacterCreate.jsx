@@ -572,8 +572,8 @@ export default function CharacterCreate() {
           <div style={{ flex: 1, position: 'relative' }}>
             <div style={{ 
               position: 'absolute', 
-              bottom: 0, 
-              left: '40%', 
+              top: 10, 
+              left: '50%', 
               transform: 'translateX(-50%)', 
               animation: 'heroFloat 6s ease-in-out infinite', 
               zIndex: 2 
@@ -587,7 +587,7 @@ export default function CharacterCreate() {
               />
             </div>
             {/* Soft ground shadow */}
-            <div style={{ position: 'absolute', bottom: -10, left: '40%', transform: 'translateX(-50%)', width: 140, height: 20, background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.8) 0%, transparent 70%)', zIndex: 1 }} />
+            <div style={{ position: 'absolute', top: 275, left: '50%', transform: 'translateX(-50%)', width: 140, height: 20, background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.8) 0%, transparent 70%)', zIndex: 1 }} />
           </div>
 
           {/* Right side: Registration Details */}
