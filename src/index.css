@@ -615,6 +615,49 @@ body {
 }
 
 /* ------------------------------------------------ */
+/* AMBIENT SCENE LAYER (twinkle stars, sigil        */
+/* watermark, top glow — pure CSS/SVG, no assets)   */
+/* ------------------------------------------------ */
+.ambient-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.ambient-topglow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--neon-glow), transparent);
+  box-shadow: 0 0 12px var(--neon-glow);
+  opacity: 0.7;
+}
+.ambient-sigil {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 480px;
+  height: 480px;
+  opacity: 0.08;
+  color: var(--neon-glow);
+}
+.ambient-twinkle {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--neon-glow);
+  box-shadow: 0 0 4px 1px var(--neon-glow);
+  animation: twinkleFade 3.2s ease-in-out infinite;
+}
+@keyframes twinkleFade {
+  0%, 100% { opacity: 0.15; transform: scale(0.7); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+/* ------------------------------------------------ */
 /* ORB TIMER & COMBAT EFFECTS                       */
 /* ------------------------------------------------ */
 .orb-timer {

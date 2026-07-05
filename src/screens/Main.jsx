@@ -33,6 +33,60 @@ function getBionexJobSprite(jobId) {
   return null;
 }
 
+// Generic thin-line HUD icons (replace emoji utility icons — no image assets needed)
+function UtilIcon({ id, size = 15 }) {
+  const common = { width: size, height: size, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round' }
+  switch (id) {
+    case 'mail':
+      return <svg {...common}><rect x="2" y="4" width="20" height="16" rx="2" /><path d="M22 6 12 13 2 6" /></svg>
+    case 'social':
+      return <svg {...common}><circle cx="9" cy="8" r="3.5" /><path d="M2.5 20c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5" /><circle cx="17.5" cy="9" r="2.5" /><path d="M15.5 14.2c2.7.4 4.5 2.2 4.5 5.3" /></svg>
+    case 'library':
+      return <svg {...common}><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H11v18H5.5A1.5 1.5 0 0 1 4 19.5z" /><path d="M20 4.5A1.5 1.5 0 0 0 18.5 3H13v18h5.5a1.5 1.5 0 0 0 1.5-1.5z" /></svg>
+    case 'settings':
+      return <svg {...common}><circle cx="12" cy="12" r="3" /><path d="M19.4 13a7.97 7.97 0 0 0 0-2l2-1.5-2-3.5-2.4 1a8 8 0 0 0-1.7-1L15 3h-4l-.3 2.5a8 8 0 0 0-1.7 1l-2.4-1-2 3.5L6.6 11a7.97 7.97 0 0 0 0 2l-2 1.5 2 3.5 2.4-1c.5.4 1.1.75 1.7 1L11 21h4l.3-2.5c.6-.25 1.2-.6 1.7-1l2.4 1 2-3.5z" /></svg>
+    case 'logout':
+      return <svg {...common}><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" /></svg>
+    case 'shop':
+      return <svg {...common}><path d="M3 9l1-5h16l1 5" /><path d="M3 9a2 2 0 0 0 4 0 2 2 0 0 0 4 0 2 2 0 0 0 4 0 2 2 0 0 0 4 0" /><path d="M5 9v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9" /><path d="M9 20v-6h6v6" /></svg>
+    default:
+      return null
+  }
+}
+
+// Large low-opacity faction sigil, reused from the bottom-nav icon language, for the BASE ambient layer
+function renderSigil(race, className) {
+  const common = { className, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 0.5 }
+  if (race === 'arctron') {
+    return <svg {...common}><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M12 2v9M8 5h8M10 8h4" /></svg>
+  }
+  if (race === 'bionex') {
+    return <svg {...common}><path d="M4.5 10.5C4.5 6.36 7.86 3 12 3C16.14 3 19.5 6.36 19.5 10.5C19.5 13.5 17 17 12 21C7 17 4.5 13.5 4.5 10.5Z" /><circle cx="12" cy="10" r="3" /></svg>
+  }
+  if (race === 'celestra') {
+    return <svg {...common}><polygon points="12 2 2 22 22 22" /><circle cx="12" cy="13" r="3" /></svg>
+  }
+  return <svg {...common}><circle cx="12" cy="12" r="9" /></svg>
+}
+
+// Scattered twinkle-dot positions for the ambient layer (fixed layout, pure CSS animation)
+const TWINKLE_DOTS = [
+  { top: '4%', left: '12%', size: 3, delay: '0s' },
+  { top: '9%', left: '78%', size: 2, delay: '0.6s' },
+  { top: '15%', left: '35%', size: 3.5, delay: '1.2s' },
+  { top: '22%', left: '60%', size: 2, delay: '0.3s' },
+  { top: '28%', left: '85%', size: 3, delay: '1.8s' },
+  { top: '34%', left: '8%', size: 2, delay: '0.9s' },
+  { top: '40%', left: '45%', size: 3, delay: '2.4s' },
+  { top: '48%', left: '70%', size: 2, delay: '1.5s' },
+  { top: '55%', left: '20%', size: 3.5, delay: '0.5s' },
+  { top: '63%', left: '90%', size: 2, delay: '2.1s' },
+  { top: '70%', left: '38%', size: 3, delay: '1.1s' },
+  { top: '78%', left: '65%', size: 2, delay: '2.7s' },
+  { top: '85%', left: '15%', size: 3, delay: '0.2s' },
+  { top: '92%', left: '55%', size: 2, delay: '1.7s' },
+]
+
 // Full Screen Interactive World Map Modal (Portrait-optimized with clean dynamic HTML/CSS overlay)
 function WorldMapModal({ onClose }) {
   const player = useGameStore((s) => s.player)
@@ -723,6 +777,15 @@ const FOCUS_MODE_LABEL = { arctron: 'FIGHT', bionex: 'GATHER', celestra: 'CHANNE
 
   return (
     <div className="no-scrollbar" style={styles.screen}>
+      {/* Ambient decorative layer — pure CSS/SVG, no image assets */}
+      <div className="ambient-layer">
+        <div className="ambient-topglow" />
+        {renderSigil(player.race, 'ambient-sigil')}
+        {TWINKLE_DOTS.map((d, i) => (
+          <div key={i} className="ambient-twinkle" style={{ top: d.top, left: d.left, width: d.size, height: d.size, animationDelay: d.delay }} />
+        ))}
+      </div>
+
       {/* Top HUD bar */}
       <div style={styles.hudBar}>
         <span className="hud-pill">⬡ {player.resources.anium.toLocaleString()}</span>
@@ -730,16 +793,16 @@ const FOCUS_MODE_LABEL = { arctron: 'FIGHT', bionex: 'GATHER', celestra: 'CHANNE
         <span style={styles.iconRow}>
           {player.race && (
             <button onClick={() => setShowMailbox(true)} className="icon-btn-circle" title="Mailbox">
-              ✉️
+              <UtilIcon id="mail" />
               {player.mailbox && player.mailbox.length > 0 && (
                 <div style={styles.mailDot} />
               )}
             </button>
           )}
-          <button onClick={() => setShowSocialModal(true)} className="icon-btn-circle" title="Social / Friends">👥</button>
-          <button onClick={() => setShowLibrary(true)} className="icon-btn-circle" title="Database & Guides">📖</button>
-          <button onClick={() => setShowSettings(true)} className="icon-btn-circle" title="Settings">⚙️</button>
-          <button onClick={signOut} className="icon-btn-circle" title="Logout">⏏</button>
+          <button onClick={() => setShowSocialModal(true)} className="icon-btn-circle" title="Social / Friends"><UtilIcon id="social" /></button>
+          <button onClick={() => setShowLibrary(true)} className="icon-btn-circle" title="Database & Guides"><UtilIcon id="library" /></button>
+          <button onClick={() => setShowSettings(true)} className="icon-btn-circle" title="Settings"><UtilIcon id="settings" /></button>
+          <button onClick={signOut} className="icon-btn-circle" title="Logout"><UtilIcon id="logout" /></button>
         </span>
       </div>
 
@@ -928,7 +991,7 @@ const FOCUS_MODE_LABEL = { arctron: 'FIGHT', bionex: 'GATHER', celestra: 'CHANNE
       {/* Deploy row */}
       <div style={styles.deployRow}>
         {!isRunning && player.race && (
-          <button className="npc-circle-btn" onClick={() => setShowNpcModal(true)} title={t('visit_npc')}>🏪</button>
+          <button className="npc-circle-btn" onClick={() => setShowNpcModal(true)} title={t('visit_npc')}><UtilIcon id="shop" size={22} /></button>
         )}
         {!isRunning && !isDone && (
           <button className="deploy-btn" onClick={player.race ? startTimer : openRaceSelect}>
@@ -955,7 +1018,7 @@ const FOCUS_MODE_LABEL = { arctron: 'FIGHT', bionex: 'GATHER', celestra: 'CHANNE
 }
 
 const styles = {
-  screen: { display: 'flex', flexDirection: 'column', flex: 1, gap: 0, fontFamily: 'var(--font-body)', zIndex: 1 },
+  screen: { display: 'flex', flexDirection: 'column', flex: 1, gap: 0, fontFamily: 'var(--font-body)', zIndex: 1, position: 'relative' },
   hudBar: { display: 'flex', gap: 8, padding: '15px 16px 10px', alignItems: 'center', flexShrink: 0 },
   iconRow: { marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 7 },
   mailDot: { position: 'absolute', top: -3, right: -3, width: 8, height: 8, borderRadius: '50%', background: '#ff3333', boxShadow: '0 0 6px #ff3333' },
