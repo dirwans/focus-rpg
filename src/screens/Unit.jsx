@@ -714,7 +714,7 @@ export default function Unit() {
             const bootsSvg = <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7 4h3v10l3 2v4H5v-4l2-2V4z" /><path d="M14 4h3v10l3 2v4h-8v-4l2-2V4z" /></svg>;
             const aresSvg = <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9" strokeDasharray="3 3" /><circle cx="12" cy="12" r="5" /><polygon points="12,4 14,9 19,10 15,13 16,19 12,16 8,19 9,13 5,10 10,9" fill="currentColor" fillOpacity="0.2" /></svg>;
 
-            const renderEquipSlot = (slotKey, label, svgIcon, isCircle = false, width = 48, height = 48) => {
+            const renderEquipSlot = (slotKey, label, svgIcon, isCircle = false, width = '100%', height = 'auto', aspectRatio = '1 / 1') => {
               const item = player.equipment && player.equipment[slotKey];
               const isEmpty = !item;
               const showTooltip = activeTooltip === slotKey;
@@ -722,6 +722,7 @@ export default function Unit() {
               const slotStyle = {
                 width: width,
                 height: height,
+                aspectRatio: aspectRatio,
                 borderRadius: isCircle ? '50%' : 7,
                 display: 'flex',
                 flexDirection: 'column',
@@ -742,21 +743,21 @@ export default function Unit() {
                       color: fa + '4d',
                     }}
                   >
-                    <div style={{ opacity: 0.18, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <div style={{ opacity: 0.18, display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
                       {svgIcon}
                     </div>
-                    {width >= 40 && (
+                    {parseInt(width) >= 40 || width === '100%' ? (
                       <span style={{
                         fontFamily: "'Orbitron', sans-serif",
                         fontSize: 8,
                         fontWeight: 700,
                         color: 'rgba(138,148,163,0.5)',
                         position: 'absolute',
-                        bottom: isCircle ? 6 : 3,
+                        bottom: isCircle ? '12%' : '8%',
                         textTransform: 'uppercase',
                         letterSpacing: 0.5,
                       }}>{label}</span>
-                    )}
+                    ) : null}
                   </div>
                 );
               }
@@ -786,23 +787,23 @@ export default function Unit() {
                   }}
                 >
                   {item.image ? (
-                    <img referrerPolicy="no-referrer" src={item.image} style={{ width: Math.min(width, height) * 0.5, height: Math.min(width, height) * 0.5, objectFit: 'contain' }} alt={item.name} />
+                    <img referrerPolicy="no-referrer" src={item.image} style={{ width: '48%', height: '48%', objectFit: 'contain' }} alt={item.name} />
                   ) : item.emoji ? (
-                    <span style={{ fontSize: Math.min(width, height) * 0.42, marginTop: -2 }}>{item.emoji}</span>
+                    <span style={{ fontSize: '1.6rem', marginTop: -2 }}>{item.emoji}</span>
                   ) : (
                     svgIcon
                   )}
-                  {width >= 40 && (
+                  {parseInt(width) >= 40 || width === '100%' ? (
                     <span style={{
                       fontFamily: "'Orbitron', sans-serif",
                       fontSize: 8,
                       fontWeight: 800,
                       color: fa,
                       position: 'absolute',
-                      bottom: isCircle ? 6 : 3,
+                      bottom: isCircle ? '12%' : '8%',
                       letterSpacing: 0.5,
                     }}>{label}</span>
-                  )}
+                  ) : null}
                   {item.enhancement_level > 0 && (
                     <span style={{ position: 'absolute', top: 2, right: 3, fontSize: 8, fontWeight: 900, color: '#00ffaa', fontFamily: 'var(--font-mono)' }}>
                       +{item.enhancement_level}
@@ -912,50 +913,51 @@ export default function Unit() {
                   justifyContent: 'center',
                   gap: 12,
                   overflow: 'visible',
-                  width: 'fit-content',
+                  width: 'calc(100% - 32px)',
+                  maxWidth: 320,
                 }}>
                   {/* Left Column */}
-                  <div style={{ display: 'flex', flexDirection: 'column', width: 60, alignItems: 'center' }}>
-                    <div style={{ display: 'flex', gap: 4, height: 28, width: 60, justifyContent: 'center', marginBottom: 16 }}>
-                      {renderEquipSlot('amulet1', 'AM1', amuletSvg, false, 28, 28)}
-                      {renderEquipSlot('amulet2', 'AM2', amuletSvg, false, 28, 28)}
+                  <div style={{ display: 'flex', flexDirection: 'column', flex: 1, alignItems: 'center' }}>
+                    <div style={{ display: 'flex', gap: 4, width: '100%', marginBottom: 'calc(10% + 8px)' }}>
+                      {renderEquipSlot('amulet1', 'AM1', amuletSvg, false, 'calc(50% - 2px)', 'auto', '1 / 1')}
+                      {renderEquipSlot('amulet2', 'AM2', amuletSvg, false, 'calc(50% - 2px)', 'auto', '1 / 1')}
                     </div>
-                    <div style={{ marginBottom: 8 }}>
-                      {renderEquipSlot('weapon', 'WPN', weaponSvg, false, 60, 84)}
+                    <div style={{ marginBottom: 8, width: '100%' }}>
+                      {renderEquipSlot('weapon', 'WPN', weaponSvg, false, '100%', 'auto', '1 / 1.4')}
                     </div>
-                    <div style={{ marginBottom: 8 }}>
-                      {renderEquipSlot('gloves', 'GLV', glovesSvg, false, 60, 60)}
+                    <div style={{ marginBottom: 8, width: '100%' }}>
+                      {renderEquipSlot('gloves', 'GLV', glovesSvg, false, '100%', 'auto', '1 / 1')}
                     </div>
-                    <div style={{ marginTop: 20 }}>
-                      {renderEquipSlot('ring1', 'RG1', ringSvg, false, 36, 36)}
+                    <div style={{ marginTop: 'calc(20% + 8px)', width: '100%', display: 'flex', justifyContent: 'center' }}>
+                      {renderEquipSlot('ring1', 'RG1', ringSvg, false, '60%', 'auto', '1 / 1')}
                     </div>
                   </div>
 
                   {/* Center Column */}
-                  <div style={{ display: 'flex', flexDirection: 'column', width: 60, alignItems: 'center' }}>
-                    <div style={{ marginBottom: 8 }}>
-                      {renderEquipSlot('helmet', 'HELM', helmetSvg, false, 60, 60)}
+                  <div style={{ display: 'flex', flexDirection: 'column', flex: 1, alignItems: 'center' }}>
+                    <div style={{ marginBottom: 8, width: '100%' }}>
+                      {renderEquipSlot('helmet', 'HELM', helmetSvg, false, '100%', 'auto', '1 / 1')}
                     </div>
-                    <div style={{ marginBottom: 8 }}>
-                      {renderEquipSlot('armor', 'ARM', armorSvg, false, 60, 60)}
+                    <div style={{ marginBottom: 8, width: '100%' }}>
+                      {renderEquipSlot('armor', 'ARM', armorSvg, false, '100%', 'auto', '1 / 1')}
                     </div>
-                    <div style={{ marginBottom: 8 }}>
-                      {renderEquipSlot('pants', 'PNT', pantsSvg, false, 60, 60)}
+                    <div style={{ marginBottom: 8, width: '100%' }}>
+                      {renderEquipSlot('pants', 'PNT', pantsSvg, false, '100%', 'auto', '1 / 1')}
                     </div>
-                    <div>
-                      {renderEquipSlot('boots', 'BTS', bootsSvg, false, 60, 60)}
+                    <div style={{ width: '100%' }}>
+                      {renderEquipSlot('boots', 'BTS', bootsSvg, false, '100%', 'auto', '1 / 1')}
                     </div>
                   </div>
 
                   {/* Right Column */}
-                  <div style={{ display: 'flex', flexDirection: 'column', width: 60, alignItems: 'center' }}>
-                    <div style={{ display: 'flex', gap: 4, height: 28, width: 60, justifyContent: 'center', marginBottom: 16 }}>
-                      {renderEquipSlot('ascension_arms', 'ARES', aresSvg, false, 28, 28)}
+                  <div style={{ display: 'flex', flexDirection: 'column', flex: 1, alignItems: 'center' }}>
+                    <div style={{ display: 'flex', gap: 4, width: '100%', marginBottom: 'calc(10% + 8px)' }}>
+                      {renderEquipSlot('ascension_arms', 'ARES', aresSvg, false, 'calc(50% - 2px)', 'auto', '1 / 1')}
                       {/* Decorative Core Slot for Symmetry */}
                       <div style={{
-                        width: 28,
-                        height: 28,
-                        borderRadius: 4,
+                        width: 'calc(50% - 2px)',
+                        aspectRatio: '1 / 1',
+                        borderRadius: 7,
                         background: 'rgba(3,8,20,0.3)',
                         border: '1px dashed rgba(138,148,163,0.2)',
                         display: 'flex',
@@ -966,19 +968,19 @@ export default function Unit() {
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(138,148,163,0.20)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
                       </div>
                     </div>
-                    <div style={{ marginBottom: 8 }}>
-                      {renderEquipSlot('shield', 'SHD', shieldSvg, false, 60, 84)}
+                    <div style={{ marginBottom: 8, width: '100%' }}>
+                      {renderEquipSlot('shield', 'SHD', shieldSvg, false, '100%', 'auto', '1 / 1.4')}
                     </div>
-                    <div style={{ marginBottom: 8 }}>
-                      {renderEquipSlot('mantle', 'CPE', mantleSvg, false, 60, 60)}
+                    <div style={{ marginBottom: 8, width: '100%' }}>
+                      {renderEquipSlot('mantle', 'CPE', mantleSvg, false, '100%', 'auto', '1 / 1')}
                     </div>
-                    <div style={{ marginTop: 20 }}>
-                      {renderEquipSlot('ring2', 'RG2', ringSvg, false, 36, 36)}
+                    <div style={{ marginTop: 'calc(20% + 8px)', width: '100%', display: 'flex', justifyContent: 'center' }}>
+                      {renderEquipSlot('ring2', 'RG2', ringSvg, false, '60%', 'auto', '1 / 1')}
                     </div>
                   </div>
                 </div>
                 {/* bags */}
-                <div style={{ display: 'flex', gap: 7, justifyContent: 'center', margin: '0 16px 14px' }}>
+                <div style={{ display: 'flex', gap: 10, justifyContent: 'center', margin: '0 auto 14px', width: 'calc(100% - 32px)', maxWidth: 320 }}>
                   {[1, 2, 3, 4, 5].map((bagNum) => {
                     let isUnlocked = false;
                     if (bagNum <= 2) isUnlocked = true;
@@ -988,11 +990,11 @@ export default function Unit() {
 
                     if (isUnlocked) {
                       return (
-                        <div key={bagNum} style={{ width: 44, height: 44, borderRadius: 7, background: `${fp}24`, border: `1.5px solid ${fp}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, color: fa, boxShadow: `0 0 10px ${fp}4d` }}>{bagNum}</div>
+                        <div key={bagNum} style={{ flex: 1, aspectRatio: '1 / 1', borderRadius: 7, background: `${fp}24`, border: `1.5px solid ${fp}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, color: fa, boxShadow: `0 0 10px ${fp}4d`, cursor: 'pointer' }}>{bagNum}</div>
                       );
                     } else {
                       return (
-                        <div key={bagNum} style={{ width: 44, height: 44, borderRadius: 7, background: 'rgba(10,15,30,0.55)', border: '1.5px solid #2a333f', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, color: '#555', opacity: 0.5 }}>{bagNum}</div>
+                        <div key={bagNum} style={{ flex: 1, aspectRatio: '1 / 1', borderRadius: 7, background: 'rgba(10,15,30,0.55)', border: '1.5px solid #2a333f', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, color: '#555', opacity: 0.5 }}>{bagNum}</div>
                       );
                     }
                   })}
