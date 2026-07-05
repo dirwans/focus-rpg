@@ -597,43 +597,10 @@ export default function CharacterCreate() {
           clipPath: 'polygon(0 14px, 20px 0, 100% 0, 100% 100%, 0 100%)' 
         }}>
           
-          {/* Appearance Variants Segmented Control */}
-          <div style={{ marginBottom: 14 }}>
-            <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, color: '#ffffff', letterSpacing: 1, marginBottom: 5 }}>
-              APPEARANCE
-            </div>
-            <div style={{ display: 'flex', gap: 6 }}>
-              {['A', 'B', 'C'].map((variant) => {
-                const isSelected = appearance === variant
-                return (
-                  <button
-                    key={variant}
-                    onClick={() => setAppearance(variant)}
-                    style={{
-                      flex: 1,
-                      padding: '8px 0',
-                      background: isSelected ? `${finalTheme.primary}22` : 'rgba(8,22,36,0.4)',
-                      border: isSelected ? `1.5px solid ${finalTheme.primary}` : `1px solid ${finalTheme.primary}22`,
-                      borderRadius: 6,
-                      color: isSelected ? '#fff' : '#ffffff',
-                      fontFamily: "'Orbitron', sans-serif",
-                      fontSize: 13,
-                      fontWeight: 800,
-                      cursor: 'pointer',
-                      transition: 'all 0.2s'
-                    }}
-                  >
-                    MODEL {variant}
-                  </button>
-                )
-              })}
-            </div>
-          </div>
-
-          {/* Callsign Input */}
+          {/* Callsign / Pilot Name Input */}
           <div style={{ marginBottom: 20 }}>
             <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, color: '#ffffff', letterSpacing: 1, marginBottom: 5 }}>
-              CALLSIGN
+              NAMA PILOT
             </div>
             <input 
               type="text"
