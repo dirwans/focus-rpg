@@ -553,7 +553,8 @@ app.get('/api/leaderboard', (_req, res) => {
       totalSessions: sv.totalSessions ?? 0,
       totalMinutes: sv.totalMinutes ?? 0,
       cp: sv.cp ?? 1000,
-      race: sv.race
+      race: sv.race,
+      gender: sv.gender ?? 'male'
     }
   }).filter(Boolean).sort((a, b) => (b.cp || 0) - (a.cp || 0) || b.level - a.level).slice(0, 50)
   res.json({ board })
@@ -576,7 +577,8 @@ app.get('/api/pvp/targets', (req, res) => {
       race: sv.race ?? 'unknown',
       job: sv.job ?? null,
       cp: sv.cp ?? 1000,
-      stats: sv.stats
+      stats: sv.stats,
+      gender: sv.gender ?? 'male'
     }
   }).filter(Boolean)
 

@@ -42,11 +42,7 @@ const BELLTERRA_CLASS_SPRITES = {
 }
 
 function getBionexLaneSprite(laneTitle) {
-  const t = laneTitle.toLowerCase()
-  if (t.includes('guardian')) return BELLTERRA_CLASS_SPRITES.warrior
-  if (t.includes('marksman')) return BELLTERRA_CLASS_SPRITES.ranger
-  if (t.includes('psion')) return BELLTERRA_CLASS_SPRITES.spiritualist
-  if (t.includes('engineer')) return BELLTERRA_CLASS_SPRITES.specialist
+  // Return null to use Bionex-specific gender-differentiated sprites from PilotSprite
   return null
 }
 
@@ -754,7 +750,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
               {/* NPC avatar & bubble */}
               <div style={styles.avatarRow}>
                 <div style={styles.npcAvatarLarge}>
-                  <PilotSprite race={player.race} job={player.job} size={80} />
+                  <PilotSprite race={player.race} job={player.job} gender={player.gender} size={80} />
                 </div>
                 <div style={styles.npcDialog}>"{specialistDialogue}"</div>
               </div>
@@ -888,7 +884,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                                 />
                               ) : (
                                 <div style={{ position: 'relative', zIndex: 1, height: 200, display: 'flex', alignItems: 'flex-end' }}>
-                                  <PilotSprite race={player.race} job={j.id} size={200} />
+                                  <PilotSprite race={player.race} job={j.id} gender={player.gender} size={200} />
                                 </div>
                               )}
                             </div>

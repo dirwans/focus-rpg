@@ -29,21 +29,8 @@ const BIONEX_SPRITES = {
 }
 
 function getBionexJobSprite(jobId) {
-  if (!jobId || !jobs.bionex) return null
-  const tiers = ['tier1', 'tier2', 'tier3', 'tier4']
-  for (let ti = 0; ti < tiers.length; ti++) {
-    const arr = jobs.bionex[tiers[ti]]
-    if (!arr) continue
-    for (let i = 0; i < arr.length; i++) {
-      if (arr[i] && arr[i].id === jobId) {
-        if (i === 0) return BIONEX_SPRITES.guardian
-        if (i === 1) return BIONEX_SPRITES.marksman
-        if (i === 2) return BIONEX_SPRITES.engineer
-        if (i === 3) return BIONEX_SPRITES.psion
-      }
-    }
-  }
-  return null
+  // Return null to use Bionex-specific gender-differentiated sprites from PilotSprite
+  return null;
 }
 
 
@@ -363,7 +350,7 @@ const FOCUS_MODE_LABEL = { arctron: 'FIGHT', bionex: 'GATHER', celestra: 'CHANNE
                     />
                   )
                 }
-                return <PilotSprite race={player.race} job={player.job} size={player.race === 'arctron' ? 190 : 160} isBattle={true} />
+                return <PilotSprite race={player.race} job={player.job} gender={player.gender} size={player.race === 'arctron' ? 190 : 160} isBattle={true} />
               })()}
               </div>
               <div style={styles.spriteLabel}>{t('pilot_label')}</div>
@@ -475,7 +462,7 @@ const FOCUS_MODE_LABEL = { arctron: 'FIGHT', bionex: 'GATHER', celestra: 'CHANNE
       {/* Simplified Player Status HUD */}
       <div className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.statusStrip}>
         <div style={styles.avatarRing}>
-          <PilotSprite race={player.race} job={player.job} size={36} />
+          <PilotSprite race={player.race} job={player.job} gender={player.gender} size={36} />
         </div>
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>

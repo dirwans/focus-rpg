@@ -25,21 +25,8 @@ const BAG_ICONS = {
 }
 
 function getBionexJobSprite(jobId) {
-  if (!jobId || !jobs.bionex) return null
-  const tiers = ['tier1', 'tier2', 'tier3', 'tier4']
-  for (let ti = 0; ti < tiers.length; ti++) {
-    const arr = jobs.bionex[tiers[ti]]
-    if (!arr) continue
-    for (let i = 0; i < arr.length; i++) {
-      if (arr[i] && arr[i].id === jobId) {
-        if (i === 0) return BIONEX_SPRITES.guardian
-        if (i === 1) return BIONEX_SPRITES.marksman
-        if (i === 2) return BIONEX_SPRITES.engineer
-        if (i === 3) return BIONEX_SPRITES.psion
-      }
-    }
-  }
-  return null
+  // Return null to use Bionex-specific gender-differentiated sprites from PilotSprite
+  return null;
 }
 
 function getJobInfo(raceId, jobId) {
@@ -290,7 +277,7 @@ export default function Unit() {
                   {bionexSprite ? (
                     <img src={bionexSprite} alt={player.job} style={{ height: 298, width: 'auto', filter: `drop-shadow(0 18px 24px rgba(0,0,0,0.6)) drop-shadow(0 0 30px ${fp}33)` }} />
                   ) : (
-                    <PilotSprite race={player.race} job={player.job} width={'auto'} height={298} fill={true} style={{ filter: `drop-shadow(0 18px 24px rgba(0,0,0,0.6)) drop-shadow(0 0 30px ${fp}33)` }} />
+                    <PilotSprite race={player.race} job={player.job} gender={player.gender} width={'auto'} height={298} fill={true} style={{ filter: `drop-shadow(0 18px 24px rgba(0,0,0,0.6)) drop-shadow(0 0 30px ${fp}33)` }} />
                   )}
                 </div>
               </div>

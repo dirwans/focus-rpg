@@ -260,7 +260,7 @@ export default function Ranks() {
                   <div key={r.name} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5, marginBottom: isFirst ? 20 : 0 }}>
                     {isFirst && <div style={{ fontSize: 18 }}>🏆</div>}
                     <div style={{ width: isFirst ? 56 : 46, height: isFirst ? 56 : 46, borderRadius: '50%', border: `2px solid ${BADGE_COLOR[r.badge]}`, background: 'linear-gradient(135deg,#001040,#0030a0)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <PilotSprite race={r.race} job={r.job} size={isFirst ? 36 : 28} />
+                      <PilotSprite race={r.race} job={r.job} gender={r.gender} size={isFirst ? 36 : 28} />
                     </div>
                     <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: '#e0f4ff', fontWeight: 800 }}>{r.name}</div>
                     <div style={{ background: `${BADGE_COLOR[r.badge]}20`, border: `1px solid ${BADGE_COLOR[r.badge]}`, borderRadius: 10, padding: '2px 8px', fontFamily: 'var(--font-title)', fontSize: 13, color: BADGE_COLOR[r.badge], fontWeight: 800 }}>★ {r.badge}</div>
@@ -277,7 +277,7 @@ export default function Ranks() {
               <div key={r.name} style={styles.rankRow}>
                 <div style={styles.rankNum}>{r.rank}</div>
                 <div style={styles.rankAvatar}>
-                  <PilotSprite race={r.race} job={r.job} size={28} />
+                  <PilotSprite race={r.race} job={r.job} gender={r.gender} size={28} />
                   <span style={styles.flag}>{r.flag}</span>
                 </div>
                 <div style={{ flex: 1 }}>
