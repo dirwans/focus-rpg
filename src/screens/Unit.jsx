@@ -298,41 +298,9 @@ export default function Unit() {
           {(() => {
             const fp = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
             const fa = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
-
-                const renderEquipSlot = (slotKey, label, svgIcon, styleType = 'full') => {
-                  const item = player.equipment && player.equipment[slotKey];
-                  const isEmpty = !item;
-                  
-                  if (isEmpty) {
-                    return (
-                      <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: 'rgba(3,8,20,0.55)', border: `1.5px dashed ${fp}4d`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
-                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: 'rgba(255,183,119,0.35)' }}>+</span>
-                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: 'rgba(138,148,163,0.5)' }}>{label}</span>
-                      </div>
-                    );
-                  }
-                  
-                  return (
-                    <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2, position: 'relative' }}>
-                      {item.image ? (
-                        <img referrerPolicy="no-referrer" src={item.image} style={{ width: 22, height: 22, objectFit: 'contain' }} alt={item.name} />
-                      ) : item.emoji ? (
-                        <span style={{ fontSize: 18, marginTop: -2 }}>{item.emoji}</span>
-                      ) : (
-                        svgIcon
-                      )}
-                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: fa }}>{label}</span>
-                      {item.enhancement_level > 0 && (
-                         <span style={{ position: 'absolute', top: 2, right: 3, fontSize: 8, fontWeight: 900, color: '#00ffaa', fontFamily: 'var(--font-mono)' }}>
-                           +{item.enhancement_level}
-                         </span>
-                      )}
-                    </div>
-                  );
-                };
             const TIER_KEYS   = ['tier1', 'tier2', 'tier3', 'tier4']
             const TIER_LABELS = ['I', 'II', 'III', 'IV']
-            const TIER_UNLOCK = { tier1: 1, tier2: 15, tier3: 32, tier4: 55 }
+            const TIER_UNLOCK = { tier1: 1, tier2: 32, tier3: 42, tier4: 55 }
             // Dynamic job names from classIndex
             const raceJobs  = jobs[player.race] || {}
             const ci = classIndex >= 0 ? classIndex : 0
@@ -340,12 +308,20 @@ export default function Unit() {
               const arr = raceJobs[tk] || []
               return arr[ci] ? arr[ci].name : tk
             })
-            const currentTierIdx = TIER_KEYS.indexOf(tier || 'tier1')
+            const currentTierIdx = TIER_KEYS.indexOf('tier' + (tier || 1))
             const linePct = currentTierIdx > 0 ? `${Math.round((currentTierIdx / 3) * 100)}%` : '0%'
+
+            // Faction-based dark backgrounds for past nodes
+            const pastBg = {
+              arctron: 'rgba(255, 82, 34, 0.25)',
+              bionex: 'rgba(59, 130, 246, 0.25)',
+              celestra: 'rgba(168, 85, 247, 0.25)'
+            }[player.race] || 'rgba(0, 229, 255, 0.25)'
+
             return (
               <div style={{ margin: '0 16px 10px', padding: '12px 12px 13px', background: 'rgba(8,22,36,0.4)', backdropFilter: 'blur(8px)', border: `1px solid ${fp}38`, borderRadius: 12 }}>
                 <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 700, letterSpacing: 1.5, color: '#8a94a3', marginBottom: 11 }}>
-                  CLASS PATH · {baseClass.toUpperCase()}
+                  CLASS PATH - {baseClass.toUpperCase()}
                 </div>
                 <div style={{ position: 'relative', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                   <div style={{ position: 'absolute', top: 16, left: '12%', right: '12%', height: 2, background: `linear-gradient(90deg, ${fp} 0%, ${fp} ${linePct}, ${fp}33 ${linePct}, ${fp}33 100%)` }}/>
@@ -357,20 +333,20 @@ export default function Unit() {
                       <div key={tk} style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5, width: '24%' }}>
                         <div style={{
                           width: isActive ? 38 : 32, height: isActive ? 38 : 32, marginTop: isActive ? -3 : 0, borderRadius: isActive ? 9 : 8, transform: 'rotate(45deg)',
-                          background: isActive ? 'linear-gradient(135deg,#dde2ea,#9aa2ae)' : isPast ? `${fp}2e` : 'rgba(8,22,36,0.6)',
-                          border: isLocked ? `1.5px dashed ${fp}59` : `1.5px solid ${fp}99`,
-                          boxShadow: isActive ? '0 0 16px rgba(199,204,214,0.6)' : 'none',
+                          background: isActive ? 'linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%)' : isPast ? pastBg : 'rgba(8,22,36,0.6)',
+                          border: isLocked ? `1.5px dashed ${fp}4d` : `1.5px solid ${fp}`,
+                          boxShadow: isActive ? `0 0 15px 4px rgba(255, 255, 255, 0.65), 0 0 8px 2px ${fp}` : 'none',
                           display: 'flex', alignItems: 'center', justifyContent: 'center'
                         }}>
-                          <span style={{ transform: 'rotate(-45deg)', fontFamily: "'Orbitron', sans-serif", fontWeight: 800, fontSize: isActive ? 12 : 11, color: isActive ? '#16181c' : isLocked ? `${fa}73` : fa }}>
+                          <span style={{ transform: 'rotate(-45deg)', fontFamily: "'Orbitron', sans-serif", fontWeight: 800, fontSize: isActive ? 12 : 11, color: isActive ? '#16181c' : isLocked ? `${fa}4d` : fa }}>
                             {TIER_LABELS[idx]}
                           </span>
                         </div>
-                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 11, textAlign: 'center', lineHeight: 1.1, color: isActive ? '#fff' : isLocked ? 'rgba(138,148,163,0.6)' : '#8a94a3', fontWeight: isActive ? 800 : 400 }}>
+                        <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 11, textAlign: 'center', lineHeight: 1.1, color: isActive ? '#fff' : isLocked ? 'rgba(138,148,163,0.4)' : '#8a94a3', fontWeight: isActive ? 800 : 400 }}>
                           {tierNames[idx]}
                         </span>
-                        {isActive && <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 10, color: fa }}>◆ ACTIVE</span>}
-                        {isLocked && <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 10, color: 'rgba(138,148,163,0.5)' }}>LV.{TIER_UNLOCK[tk]}</span>}
+                        {isActive && <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 10, color: fp, fontWeight: 700 }}>◆ ACTIVE</span>}
+                        {isLocked && <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 10, color: 'rgba(138,148,163,0.4)' }}>LV.{TIER_UNLOCK[tk]}</span>}
                       </div>
                     )
                   })}
