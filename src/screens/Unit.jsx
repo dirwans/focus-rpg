@@ -1093,7 +1093,7 @@ export default function Unit() {
 }
 
 const styles = {
-  screen: { display: 'flex', flexDirection: 'column', flex: 1, overflowY: 'auto', fontFamily: "'Saira', sans-serif", background: '#0e1116' },
+  screen: { display: 'flex', flexDirection: 'column', flex: 1, fontFamily: "'Saira', sans-serif", background: '#0e1116' },
 
   // Header
   header: { padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 12, borderBottom: '1px solid rgba(0, 229, 255, 0.15)', background: 'rgba(3, 8, 20, 0.4)', flexShrink: 0 },

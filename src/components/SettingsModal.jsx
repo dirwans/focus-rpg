@@ -226,7 +226,7 @@ const styles = {
     width: '100%', height: '100%', maxWidth: 'none', maxHeight: 'none',
     display: 'flex', flexDirection: 'column', gap: 16,
     background: '#081020', border: 'none',
-    borderRadius: 0, overflow: 'hidden', padding: 20
+    borderRadius: 0, overflowY: 'auto', padding: '20px 20px 120px 20px'
   },
   title: { margin: 0, fontFamily: 'var(--font-title)', fontSize: 18, color: '#fff', textAlign: 'center', letterSpacing: 1, width: '100%' },
   row: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontFamily: 'var(--font-body)', fontSize: 14, color: '#c0dff0' },

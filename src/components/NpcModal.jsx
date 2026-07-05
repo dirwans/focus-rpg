@@ -1248,7 +1248,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     gap: 16,
-    padding: '24px 20px 40px 20px',
+    padding: '24px 20px 120px 20px',
     boxSizing: 'border-box',
     overflowY: 'auto'
   },

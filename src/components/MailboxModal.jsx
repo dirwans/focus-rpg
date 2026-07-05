@@ -121,7 +121,7 @@ const styles = {
   header: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 18px', borderBottom: '1px solid rgba(0, 229, 255, 0.2)', background: 'rgba(0, 0, 0, 0.4)' },
   title: { fontFamily: 'var(--font-title)', fontSize: 15, color: '#00e5ff', fontWeight: 900, letterSpacing: 1 },
   closeBtn: { background: 'none', border: 'none', color: '#ff4444', fontSize: 16, cursor: 'pointer' },
-  body: { padding: 16, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 12 },
+  body: { padding: '16px 16px 80px 16px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 12 },
   emptyText: { textAlign: 'center', padding: '40px 0', color: '#7ec8e3', fontFamily: 'var(--font-mono)', fontSize: 13 },
   claimAllBtn: { padding: 10, borderRadius: 6, background: 'linear-gradient(90deg, #0088ff, #00e5ff)', border: 'none', color: '#000', fontFamily: 'var(--font-title)', fontWeight: 900, fontSize: 12, cursor: 'pointer', letterSpacing: 1, boxShadow: '0 0 10px rgba(0, 229, 255, 0.3)' },
   mailCard: { background: 'rgba(0, 0, 0, 0.4)', border: '1px solid rgba(0, 229, 255, 0.1)', borderRadius: 8, padding: 12, display: 'flex', flexDirection: 'column', gap: 4 },

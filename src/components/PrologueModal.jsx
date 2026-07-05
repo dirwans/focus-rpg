@@ -145,6 +145,7 @@ const styles = {
     flex: 1,
     overflowY: 'auto',
     paddingRight: 8,
+    paddingBottom: 80,
     marginBottom: 20,
     scrollBehavior: 'smooth',
     display: 'flex',

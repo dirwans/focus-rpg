@@ -958,7 +958,7 @@ const styles = {
     cursor: 'pointer', transition: 'all 0.2s', borderBottom: '2px solid #00e5ff'
   },
   content: {
-    padding: '16px 20px', overflowY: 'auto', flex: 1
+    padding: '16px 20px 120px 20px', overflowY: 'auto', flex: 1
   },
   section: {
     display: 'flex', flexDirection: 'column', gap: 16
