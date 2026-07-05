@@ -416,20 +416,26 @@ export default function CharacterCreate() {
             justifyContent: 'center',
             flexShrink: 0
           }}>
-            <div style={{ 
-              animation: 'heroFloat 6s ease-in-out infinite',
+            {/* Outer Centerer to prevent transform animation conflict */}
+            <div style={{
+              position: 'absolute',
+              left: '50%',
+              top: '50%',
+              transform: 'translate(-50%, -50%)',
               display: 'flex',
               justifyContent: 'center',
-              width: '100%'
+              alignItems: 'center'
             }}>
-              <PilotSprite 
-                race={raceId} 
-                job={jobId} 
-                gender={gender}
-                size={220} 
-                height="210px"
-                width="auto"
-              />
+              <div style={{ animation: 'heroFloat 6s ease-in-out infinite' }}>
+                <PilotSprite 
+                  race={raceId} 
+                  job={jobId} 
+                  gender={gender}
+                  size={220} 
+                  height="210px"
+                  width="auto"
+                />
+              </div>
             </div>
             <span style={{ position: 'absolute', bottom: 5, left: 0, fontFamily: "'Share Tech Mono', monospace", fontSize: 13, color: finalTheme.light, opacity: 0.8, letterSpacing: '1px' }}>
               PREVIEW
@@ -575,20 +581,26 @@ export default function CharacterCreate() {
             flexShrink: 0,
             marginTop: 10
           }}>
-            <div style={{ 
-              animation: 'heroFloat 6s ease-in-out infinite',
+            {/* Outer Centerer to prevent transform animation conflict */}
+            <div style={{
+              position: 'absolute',
+              left: '50%',
+              top: '50%',
+              transform: 'translate(-50%, -50%)',
               display: 'flex',
               justifyContent: 'center',
-              width: '100%'
+              alignItems: 'center'
             }}>
-              <PilotSprite 
-                race={raceId} 
-                job={jobId} 
-                gender={gender}
-                size={220} 
-                height="210px"
-                width="auto"
-              />
+              <div style={{ animation: 'heroFloat 6s ease-in-out infinite' }}>
+                <PilotSprite 
+                  race={raceId} 
+                  job={jobId} 
+                  gender={gender}
+                  size={220} 
+                  height="210px"
+                  width="auto"
+                />
+              </div>
             </div>
             <span style={{ position: 'absolute', bottom: 5, left: 0, fontFamily: "'Share Tech Mono', monospace", fontSize: 13, color: finalTheme.light, opacity: 0.8, letterSpacing: '1px' }}>
               PREVIEW
