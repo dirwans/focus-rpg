@@ -261,6 +261,41 @@ export default function LibraryModal({ onClose }) {
                 ))}
               </div>
 
+              {/* World Map Pit Boss (Overlord) */}
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>👾 World Map Pit Boss (Overlord)</div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#ff5f7a', fontWeight: 700, marginBottom: 6 }}>1% RANDOM INVASION RATE</div>
+                <ul style={styles.list}>
+                  <li>Mempunyai HP dan ATK yang sangat tinggi dibandingkan monster biasa.</li>
+                  <li>🎁 Drop 1 Guaranteed High-Tier Equipment (SS atau lebih tinggi).</li>
+                </ul>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#ffcc00', fontWeight: 700, margin: '8px 0 6px' }}>EQUIPMENT DROP RATE</div>
+                <ul style={styles.list}>
+                  <li>🔴 UR Equipment — <strong style={{ color: '#ff4444' }}>5%</strong></li>
+                  <li>🟡 SSR Equipment — <strong>10%</strong></li>
+                  <li>🔵 SR Equipment — <strong>20%</strong></li>
+                  <li>🟢 SSS Equipment — <strong>30%</strong></li>
+                  <li>⚪ SS Equipment — <strong>35%</strong></li>
+                </ul>
+              </div>
+
+              {/* World Map Pit Boss Stats */}
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>⚔️ Pit Boss (Overlord) Roster &amp; Stats</div>
+                {[
+                  { name: '🌱 LUMORA OVERLORD (Map 1)', stats: 'HP: 750,000 | ATK: 1,100' },
+                  { name: '🌿 SYLVAN OVERLORD (Map 2)', stats: 'HP: 1,750,000 | ATK: 2,250' },
+                  { name: '⚙️ IRON OVERLORD (Map 3)', stats: 'HP: 3,500,000 | ATK: 4,250' },
+                  { name: '🔥 PYRAXIS ELITE (Map 4)', stats: 'HP: 7,500,000 | ATK: 7,500' },
+                  { name: '☢️ TRINITY SOVEREIGN (Map 5)', stats: 'HP: 15,000,000 | ATK: 10,000' },
+                ].map((b, i) => (
+                  <div key={i} style={{ display: 'flex', flexDirection: 'column', padding: '6px 0', borderBottom: i < 4 ? '1px solid rgba(255,255,255,0.07)' : 'none', fontFamily: 'var(--font-mono)', fontSize: 12 }}>
+                    <span style={{ color: '#ff985a', fontWeight: 'bold' }}>{b.name}</span>
+                    <span style={{ color: '#88aadd', fontSize: 11, marginTop: 2 }}>{b.stats}</span>
+                  </div>
+                ))}
+              </div>
+
               {/* Dungeon Boss */}
               <div style={styles.itemCard}>
                 <div style={styles.itemTitle}>🏛️ Dungeon Boss Drop</div>
