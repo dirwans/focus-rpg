@@ -562,28 +562,17 @@ export default function CharacterCreate() {
           position: 'relative', 
           zIndex: 6, 
           display: 'flex', 
-          flexDirection: 'column', 
-          gap: 12, 
-          padding: '16px 18px 110px 82px',
-          height: 'calc(100% - 130px)',
+          flexDirection: 'row', 
+          gap: 16, 
+          padding: '24px 18px 100px 82px',
+          height: 'calc(100% - 90px)',
           overflow: 'hidden'
         }}>
-          {/* Framed Sprite Preview Box — matches Unit.jsx layout */}
-          <div style={{ 
-            position: 'relative',
-            width: '100%', 
-            height: '240px',
-            flexShrink: 0,
-            marginTop: 10,
-            background: `radial-gradient(ellipse at 50% 100%, ${finalTheme.primary}33 0%, rgba(6,5,6,0.6) 70%)`,
-            border: `1px solid ${finalTheme.primary}44`,
-            clipPath: 'polygon(0 14px, 14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%)',
-            overflow: 'hidden'
-          }}>
-            {/* Sprite inside preview box - Unit.jsx style */}
+          {/* Left side: Avatar (No Frame, Full Body View) */}
+          <div style={{ flex: 1, position: 'relative' }}>
             <div style={{ 
               position: 'absolute', 
-              bottom: 6, 
+              bottom: 0, 
               left: '50%', 
               transform: 'translateX(-50%)', 
               animation: 'heroFloat 6s ease-in-out infinite', 
@@ -593,14 +582,117 @@ export default function CharacterCreate() {
                 race={raceId}
                 job={jobId}
                 gender={gender}
-                height="230px"
+                height="300px"
                 width="auto"
               />
             </div>
-            <span style={{ position: 'absolute', bottom: 8, left: 10, fontFamily: "'Share Tech Mono', monospace", fontSize: 12, color: finalTheme.light, opacity: 0.7, letterSpacing: '2px', zIndex: 3 }}>PREVIEW</span>
-            <span style={{ position: 'absolute', bottom: 8, right: 10, fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 900, color: '#ffffff', letterSpacing: '1px', zIndex: 3 }}>
-              {getClassBaseName(jobId)}
-            </span>
+            {/* Soft ground shadow */}
+            <div style={{ position: 'absolute', bottom: -10, left: '50%', transform: 'translateX(-50%)', width: 140, height: 20, background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.8) 0%, transparent 70%)', zIndex: 1 }} />
+          </div>
+
+          {/* Right side: Registration Details */}
+          <div style={{ flex: 1.2, display: 'flex', flexDirection: 'column', gap: 14, overflowY: 'auto' }} className="no-scrollbar">
+            
+            {/* Gender Selector (Celestra & Bionex Only) */}
+            {(raceId === 'celestra' || raceId === 'bionex') && (
+              <div>
+                <div style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 11, color: '#8a94a3', marginBottom: 4 }}>GENDER :</div>
+                <div style={{ display: 'flex', gap: 6 }}>
+                  {['male', 'female'].map((g) => {
+                    const isSel = gender === g
+                    return (
+                      <div
+                        key={g}
+                        onClick={() => setGender(g)}
+                        style={{
+                          flex: 1,
+                          padding: '6px 0',
+                          textAlign: 'center',
+                          background: isSel ? `${finalTheme.primary}22` : 'rgba(8,22,36,0.4)',
+                          border: isSel ? `1px solid ${finalTheme.primary}` : `1px solid ${finalTheme.primary}22`,
+                          borderRadius: 4,
+                          color: isSel ? '#fff' : '#a9c8ff',
+                          fontFamily: "'Orbitron', sans-serif",
+                          fontSize: 11,
+                          fontWeight: 800,
+                          cursor: 'pointer',
+                          transition: 'all 0.2s',
+                          textTransform: 'uppercase'
+                        }}
+                      >
+                        {g === 'male' ? 'MALE' : 'FEMALE'}
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* Char Name */}
+            <div>
+              <div style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 11, color: '#8a94a3', marginBottom: 4 }}>CHAR NAME :</div>
+              <input 
+                type="text"
+                value={charName}
+                onChange={(e) => setCharName(e.target.value.replace(/[^a-zA-Z0-9_\-@#]/g, ''))}
+                placeholder="ENTER NAME"
+                maxLength={16}
+                style={{
+                  width: '100%',
+                  background: 'rgba(8,22,36,0.5)',
+                  border: `1px solid ${finalTheme.primary}66`,
+                  borderRadius: 4,
+                  padding: '8px 12px',
+                  color: '#fff',
+                  fontFamily: "'Share Tech Mono', monospace",
+                  fontSize: 14,
+                  outline: 'none',
+                  boxShadow: `inset 0 0 10px rgba(0,0,0,0.4), 0 0 8px ${finalTheme.primary}1A`
+                }}
+              />
+            </div>
+
+            {/* Class */}
+            <div>
+              <div style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 11, color: '#8a94a3', marginBottom: 2 }}>CLASS :</div>
+              <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 14, fontWeight: 900, color: finalTheme.light, letterSpacing: '1px' }}>
+                {getClassBaseName(jobId)}
+              </div>
+            </div>
+
+            {/* Jobs (Tier 1) */}
+            <div>
+              <div style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 11, color: '#8a94a3', marginBottom: 2 }}>JOBS (LV 1) :</div>
+              <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 14, fontWeight: 900, color: '#fff', letterSpacing: '1px' }}>
+                {jobs[raceId]?.tier1?.find(j => j.id === jobId)?.name || getClassBaseName(jobId)}
+              </div>
+            </div>
+
+            {/* Basic Stats */}
+            <div>
+              <div style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 11, color: '#8a94a3', marginBottom: 4 }}>BASIC STAT :</div>
+              {(() => {
+                const jobData = jobs[raceId]?.tier1?.find(j => j.id === jobId)
+                if (!jobData) return null
+                return (
+                  <div style={{ display: 'flex', gap: 12 }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 2, background: 'rgba(8,22,36,0.4)', padding: '6px 10px', borderRadius: 4, border: `1px solid ${finalTheme.primary}22`, flex: 1 }}>
+                      <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 10, color: '#7ec8e3' }}>HP</span>
+                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, color: '#fff' }}>{jobData.bonus.hp}</span>
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 2, background: 'rgba(8,22,36,0.4)', padding: '6px 10px', borderRadius: 4, border: `1px solid ${finalTheme.primary}22`, flex: 1 }}>
+                      <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 10, color: '#ffb48f' }}>ATK</span>
+                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, color: '#fff' }}>{jobData.bonus.atk}</span>
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 2, background: 'rgba(8,22,36,0.4)', padding: '6px 10px', borderRadius: 4, border: `1px solid ${finalTheme.primary}22`, flex: 1 }}>
+                      <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 10, color: '#c7ccd6' }}>DEF</span>
+                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, color: '#fff' }}>{jobData.bonus.def}</span>
+                    </div>
+                  </div>
+                )
+              })()}
+            </div>
+
           </div>
         </div>
       )}
@@ -725,75 +817,9 @@ export default function CharacterCreate() {
           right: 0, 
           bottom: 0, 
           zIndex: 7, 
-          padding: '24px 20px 24px 82px', 
-          background: 'linear-gradient(180deg, transparent, rgba(6,5,6,0.85) 30%, rgba(6,5,6,0.98) 100%)', 
-          clipPath: 'polygon(0 14px, 20px 0, 100% 0, 100% 100%, 0 100%)' 
+          padding: '18px 20px 24px 82px', 
+          background: 'linear-gradient(180deg, transparent, rgba(6,5,6,0.9) 55%, rgba(6,5,6,0.98) 100%)' 
         }}>
-          
-          {/* Gender Selector (Celestra & Bionex Only) */}
-          {(raceId === 'celestra' || raceId === 'bionex') && (
-            <div style={{ marginBottom: 14 }}>
-              <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, color: '#ffffff', letterSpacing: 1, marginBottom: 5 }}>
-                GENDER
-              </div>
-              <div style={{ display: 'flex', gap: 6 }}>
-                {['male', 'female'].map((g) => {
-                  const isSel = gender === g
-                  return (
-                    <div
-                      key={g}
-                      onClick={() => setGender(g)}
-                      style={{
-                        flex: 1,
-                        padding: '8px 0',
-                        textAlign: 'center',
-                        background: isSel ? `${finalTheme.primary}22` : 'rgba(8,22,36,0.4)',
-                        border: isSel ? `1.5px solid ${finalTheme.primary}` : `1px solid ${finalTheme.primary}22`,
-                        borderRadius: 6,
-                        color: isSel ? '#fff' : '#a9c8ff',
-                        fontFamily: "'Orbitron', sans-serif",
-                        fontSize: 13,
-                        fontWeight: 800,
-                        cursor: 'pointer',
-                        transition: 'all 0.2s',
-                        textTransform: 'uppercase'
-                      }}
-                    >
-                      {g === 'male' ? 'MALE ♂' : 'FEMALE ♀'}
-                    </div>
-                  )
-                })}
-              </div>
-            </div>
-          )}
-
-          {/* Callsign / Pilot Name Input */}
-          <div style={{ marginBottom: 20 }}>
-            <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, color: '#ffffff', letterSpacing: 1, marginBottom: 5 }}>
-              NAMA PILOT
-            </div>
-            <input 
-              type="text"
-              value={charName}
-              onChange={(e) => setCharName(e.target.value.replace(/[^a-zA-Z0-9_\-@#]/g, ''))}
-              placeholder="ENTER NAME..."
-              maxLength={16}
-              style={{
-                width: '100%',
-                background: 'rgba(8,22,36,0.5)',
-                border: `1.5px solid ${finalTheme.primary}66`,
-                borderRadius: 8,
-                padding: '11px 16px',
-                color: '#fff',
-                fontFamily: "'Share Tech Mono', monospace",
-                fontSize: 15,
-                textAlign: 'center',
-                outline: 'none',
-                boxShadow: `inset 0 0 10px rgba(0,0,0,0.4), 0 0 8px ${finalTheme.primary}1A`
-              }}
-            />
-          </div>
-
           {/* Buttons Row: Back & Confirmation */}
           <div style={{ display: 'flex', gap: 12 }}>
             <div 

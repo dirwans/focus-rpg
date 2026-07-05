@@ -171,3 +171,44 @@ This journal tracks all major development milestones, technical optimizations, b
 - **Character Naming Symbols Support**:
   - Extended character name character sanitization checks (`/[^a-zA-Z0-9_\-@#]/g`) to support dashes `-`, at-signs `@`, and hashes `#` to permit customized tag formatting.
 
+
+---
+
+### 🖼️ Milestone 11: Character Creation Sprite Layout Fixes & Asset Trimming
+- **Sprite Padding Trimming**: 
+  - Created a python script (	rim_sprites.py) to systematically trim asymmetrical transparent padding from all faction sprites (Arctron, Bionex, Celestra). This ensures CSS positioning calculates the true center of mass rather than the center of a padded PNG.
+- **CSS Animation & Transform Resolution**: 
+  - Discovered that the @keyframes heroFloat animation inherently contains 	ransform: translateX(-50%), which caused conflicts when attempting to center sprites using Flexbox in CharacterCreate.jsx.
+  - Resolved by abandoning Flexbox centering for the sprite and explicitly adopting the Unit.jsx layout pattern: a position: absolute wrapper element with left: '50%' to correctly stack the inline positioning and the animation's internal transform, perfectly aligning the sprite within the Step 2 and 3 preview boxes as per the DC HTML mockups.
+
+#### Sprite Layout Architecture Pattern (For Dynamic/Responsive Usage)
+To prevent sprite misalignment and clipping inside frames (like the Character Info or Creation previews), the layout must follow this exact CSS pattern. Do not just copy-paste without understanding the interplay between layout, transforms, and animations:
+```jsx
+// 1. The Container (Preview Frame)
+// Must be `relative` to contain the absolute sprite.
+// `overflow: hidden` ensures the sprite does not break out of the frame bounds.
+<div style={{ position: "relative", width: "100%", height: "240px", overflow: "hidden" }}>
+
+  // 2. The Sprite Wrapper
+  // Must be `absolute` to break out of flex flows that cause centering bugs.
+  // Positioned at `bottom: 6px` so the feet align near the floor of the frame.
+  // Centered using `left: 50%` + `transform: translateX(-50%)` (if no animation overrides it).
+  // CRITICAL: If an animation like `heroFloat` is applied here, the animation keyframes MUST include `transform: translateX(-50%)` inside them, otherwise the animation will wipe out the centering.
+  <div style={{
+    position: "absolute",
+    bottom: 6,
+    left: "50%",
+    transform: "translateX(-50%)", // Safety fallback
+    animation: "heroFloat 6s ease-in-out infinite", // (heroFloat inherently translates -50%)
+    zIndex: 2
+  }}>
+
+    // 3. The Image Element
+    // Uses a fixed height based on the container (e.g. 230px for a 240px container).
+    // `width: auto` ensures aspect ratio is maintained.
+    // MUST use tightly-cropped PNGs (no asymmetrical transparent padding) for true center.
+    <img src={...} style={{ height: "230px", width: "auto" }} />
+
+  </div>
+</div>
+```
