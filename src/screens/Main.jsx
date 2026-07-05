@@ -33,7 +33,7 @@ function getBionexJobSprite(jobId) {
   return null;
 }
 
-// Full Screen Interactive World Map Modal
+// Full Screen Interactive World Map Modal (Portrait-optimized with clean dynamic HTML/CSS overlay)
 function WorldMapModal({ onClose }) {
   const player = useGameStore((s) => s.player)
   const setSelectedMapIdx = useGameStore((s) => s.setSelectedMapIdx)
@@ -45,14 +45,14 @@ function WorldMapModal({ onClose }) {
   
   const [selectedNode, setSelectedNode] = useState(defaultIdx)
 
-  const activeColor = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
+  const activeColor = { arctron: '#ff5222', bionex: '#00e5ff', celestra: '#a855f7' }[player.race] || '#00e5ff'
 
   const mapCoordinates = [
-    { name: 'Lumora Fields', left: '21%', top: '25.5%', minLevel: 1 },
-    { name: 'Sylvaris Wilds', left: '62%', top: '27%', minLevel: 13 },
-    { name: 'Ferrum Expanse', left: '39%', top: '44.5%', minLevel: 26 },
-    { name: 'Pyraxis Crater', left: '30%', top: '70.5%', minLevel: 39 },
-    { name: 'Trinity Nexus', left: '69%', top: '81.5%', minLevel: 53 }
+    { name: 'Lumora Fields', left: '30%', top: '20%', minLevel: 1 },
+    { name: 'Sylvaris Wilds', left: '70%', top: '35%', minLevel: 13 },
+    { name: 'Ferrum Expanse', left: '25%', top: '50%', minLevel: 26 },
+    { name: 'Pyraxis Crater', left: '75%', top: '65%', minLevel: 39 },
+    { name: 'Trinity Nexus', left: '50%', top: '80%', minLevel: 53 }
   ]
 
   const selectedSector = enemies.sectors[selectedNode]
@@ -62,63 +62,81 @@ function WorldMapModal({ onClose }) {
   return (
     <div style={{
       position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-      zIndex: 1000, background: 'rgba(5, 5, 8, 0.9)',
-      display: 'flex', justifyContent: 'center', alignItems: 'center',
-      backdropFilter: 'blur(8px)', padding: '10px'
+      zIndex: 1000, background: 'rgba(2, 4, 10, 0.95)',
+      display: 'flex', flexDirection: 'column',
+      backdropFilter: 'blur(10px)', fontFamily: 'var(--font-body)'
     }}>
-      {/* Container with JRPG mockup aspect ratio */}
+      
+      {/* Sleek Tactical Header */}
       <div style={{
-        position: 'relative', width: '100%', maxWidth: '850px',
-        aspectRatio: '1402 / 1122', background: '#020205',
-        borderRadius: '16px', border: '1.5px solid rgba(255,255,255,0.1)',
-        boxShadow: '0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(0,229,255,0.05)',
-        overflow: 'hidden', display: 'flex', flexDirection: 'column'
+        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+        padding: '16px 20px', background: 'rgba(5, 10, 25, 0.9)',
+        borderBottom: '2.5px solid rgba(0, 229, 255, 0.35)',
+        boxShadow: '0 4px 15px rgba(0,0,0,0.5)', zIndex: 10
       }}>
-        {/* Background Image Map */}
-        <img 
-          src="/assets/world_map_ui_mockup_1783259357697.png" 
-          alt="World Map Grid" 
-          style={{
-            position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
-            objectFit: 'cover', opacity: 0.65, pointerEvents: 'none'
-          }}
-        />
-
-        {/* Holographic Header Bar */}
-        <div style={{
-          position: 'absolute', top: 12, left: 16, zIndex: 10,
-          background: 'rgba(2, 6, 15, 0.75)', backdropFilter: 'blur(4px)',
-          border: '1px solid rgba(0, 229, 255, 0.35)', borderRadius: '10px',
-          padding: '6px 14px', display: 'flex', alignItems: 'center', gap: 10
-        }}>
-          <span style={{ fontSize: 16 }}>🗺️</span>
-          <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 900, letterSpacing: 2, color: '#e0f4ff' }}>TACTICAL MAP SCREEN</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <span style={{ fontSize: 18 }}>🗺️</span>
+          <span style={{
+            fontFamily: "'Orbitron', sans-serif", fontSize: 14, fontWeight: 900,
+            letterSpacing: 2, color: '#00e5ff', textShadow: '0 0 10px rgba(0, 229, 255, 0.4)'
+          }}>
+            TACTICAL MAP SCREEN
+          </span>
         </div>
-
-        {/* Sleek Close Button */}
         <button 
           onClick={onClose}
           style={{
-            position: 'absolute', top: 12, right: 16, zIndex: 10,
             width: 32, height: 32, borderRadius: '50%',
-            background: 'rgba(255, 60, 60, 0.15)', border: '1.5px solid rgba(255, 60, 60, 0.4)',
+            background: 'rgba(255, 60, 60, 0.12)', border: '1.5px solid rgba(255, 60, 60, 0.4)',
             color: '#ff4444', fontFamily: 'monospace', fontSize: 16, fontWeight: 900,
             cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
-            transition: 'all 0.2s', boxShadow: '0 0 10px rgba(255,60,60,0.2)'
+            boxShadow: '0 0 8px rgba(255,60,60,0.1)'
           }}
-          onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255, 60, 60, 0.3)'; e.currentTarget.style.transform = 'scale(1.1)' }}
-          onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255, 60, 60, 0.15)'; e.currentTarget.style.transform = 'scale(1)' }}
         >
           ✕
         </button>
+      </div>
 
-        {/* 5 Map Interactive Hotspot Nodes */}
+      {/* Main Map Viewport */}
+      <div style={{
+        position: 'relative', flex: 1, overflow: 'hidden', background: '#020205'
+      }}>
+        {/* Background Image Map - Portrait clean version */}
+        <img 
+          src="/assets/world_map_portrait_clean.png" 
+          alt="World Map Portrait Grid" 
+          style={{
+            position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
+            objectFit: 'cover', opacity: 0.72, pointerEvents: 'none'
+          }}
+        />
+
+        {/* Dynamic Holographic Connection Lines Path */}
+        <svg 
+          viewBox="0 0 100 100" 
+          preserveAspectRatio="none" 
+          style={{
+            position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
+            pointerEvents: 'none', zIndex: 12
+          }}
+        >
+          <path 
+            d="M 30 20 L 70 35 L 25 50 L 75 65 L 50 80" 
+            stroke="rgba(0, 229, 255, 0.45)" 
+            strokeWidth="0.8" 
+            fill="none" 
+            strokeDasharray="2 1.5" 
+            style={{ filter: 'drop-shadow(0 0 3px rgba(0,229,255,0.4))' }}
+          />
+        </svg>
+
+        {/* Interactive Hotspot Map Nodes */}
         {mapCoordinates.map((coord, idx) => {
           const mapLocked = player.level < coord.minLevel
           const mapActive = player.selectedMapIdx === idx || (player.selectedMapIdx === null && idx === defaultIdx)
           const isSelected = selectedNode === idx
           
-          let glowColor = '#8a94a3' // locked
+          let glowColor = '#5e6875' // locked
           if (!mapLocked) {
             glowColor = mapActive ? activeColor : '#00e5ff'
           }
@@ -132,30 +150,31 @@ function WorldMapModal({ onClose }) {
                 left: coord.left,
                 top: coord.top,
                 transform: 'translate(-50%, -50%)',
-                width: isSelected ? '40px' : '30px',
-                height: isSelected ? '40px' : '30px',
+                width: isSelected ? '44px' : '34px',
+                height: isSelected ? '44px' : '34px',
                 borderRadius: '50%',
-                background: mapLocked ? 'rgba(40,40,40,0.8)' : (mapActive ? activeColor : 'rgba(0, 229, 255, 0.2)'),
-                border: `2px solid ${glowColor}`,
+                background: mapLocked ? 'rgba(30,30,40,0.85)' : (isSelected ? 'rgba(255,255,255,0.1)' : 'rgba(0, 229, 255, 0.15)'),
+                border: isSelected ? `2.5px solid ${glowColor}` : `1.8px solid ${glowColor}`,
                 boxShadow: isSelected 
-                  ? `0 0 20px ${glowColor}, inset 0 0 10px ${glowColor}` 
-                  : (mapActive ? `0 0 12px ${glowColor}` : 'none'),
+                  ? `0 0 25px ${glowColor}, inset 0 0 10px ${glowColor}` 
+                  : (mapActive ? `0 0 15px ${glowColor}` : 'none'),
                 cursor: 'pointer',
                 zIndex: isSelected ? 50 : 20,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                transition: 'all 0.25s ease-out'
+                transition: 'all 0.2s ease-out'
               }}
-              title={coord.name}
             >
               {mapLocked ? (
-                <span style={{ fontSize: 10 }}>🔒</span>
+                <span style={{ fontSize: 12 }}>🔒</span>
               ) : (
                 <div style={{
-                  width: 8, height: 8, borderRadius: '50%',
+                  width: isSelected ? '12px' : '8px',
+                  height: isSelected ? '12px' : '8px',
+                  borderRadius: '50%',
                   background: isSelected ? '#fff' : glowColor,
-                  boxShadow: isSelected ? '0 0 8px #fff' : 'none',
+                  boxShadow: isSelected ? '0 0 10px #fff' : 'none',
                   animation: mapActive ? 'spritePulse 1.2s infinite ease-in-out' : 'none'
                 }} />
               )}
@@ -163,100 +182,149 @@ function WorldMapModal({ onClose }) {
           )
         })}
 
-        {/* Holographic Tactical Info Panel Overlay */}
-        <div style={{
-          position: 'absolute', bottom: 16, left: 16, right: 16,
-          background: 'rgba(3, 8, 20, 0.88)', backdropFilter: 'blur(8px)',
-          border: `1.5px solid ${isLocked ? '#8a94a3' : activeColor}`,
-          boxShadow: `0 8px 32px rgba(0,0,0,0.8), 0 0 16px ${isLocked ? 'rgba(0,0,0,0)' : activeColor}22`,
-          borderRadius: '12px', padding: '14px 18px', zIndex: 100,
-          display: 'flex', flexDirection: 'row', gap: 16, alignItems: 'center',
-          minHeight: '120px'
-        }}>
-          {/* Left panel: Map details */}
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-              <span style={{
-                fontFamily: "'Orbitron', sans-serif", fontSize: 14, fontWeight: 900,
-                color: isLocked ? '#8a94a3' : '#fff', letterSpacing: 1
-              }}>
-                MAP {selectedNode + 1} — {selectedSector.name.toUpperCase()}
-              </span>
-              <span style={{
-                fontSize: 10, background: isLocked ? 'rgba(255,255,255,0.08)' : (isActive ? `${activeColor}20` : 'rgba(0, 229, 255, 0.15)'),
-                color: isLocked ? '#8a94a3' : (isActive ? activeColor : '#00e5ff'),
-                border: `1px solid ${isLocked ? '#8a94a3' : (isActive ? activeColor : '#00e5ff')}`,
-                borderRadius: '4px', padding: '1px 6px', fontWeight: 800
-              }}>
-                {isLocked ? 'LOCKED' : (isActive ? 'ACTIVE' : 'UNLOCKED')}
-              </span>
-            </div>
-            
-            <div style={{ fontFamily: 'monospace', fontSize: 12, color: '#7ab0d0', display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              <span>Bracket: Lv. {selectedSector.minLevel} - {selectedSector.maxLevel}</span>
-              <span>Req: Lv. {mapCoordinates[selectedNode].minLevel}</span>
-            </div>
-
-            {/* Mobs info */}
-            <div style={{ marginTop: 8, display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
-              <span style={{ fontSize: 11, fontWeight: 'bold', color: '#5f8da3', textTransform: 'uppercase' }}>Monsters:</span>
-              {selectedSector.mobs.map((m, idx) => (
-                <span key={idx} style={{
-                  fontSize: 12, background: 'rgba(255,255,255,0.04)',
-                  padding: '2px 8px', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.05)',
-                  color: isLocked ? '#7a8593' : '#dde2ea', display: 'inline-flex', alignItems: 'center', gap: 4
-                }}>
-                  <span>{m.emoji}</span>
-                  <span>{m.name}</span>
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* Right Panel: Deploy button */}
-          <div style={{ flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <button
-              disabled={isLocked}
-              onClick={() => {
-                setSelectedMapIdx(selectedNode)
-                onClose()
-              }}
+        {/* Small floating HUD labels next to nodes */}
+        {mapCoordinates.map((coord, idx) => {
+          const mapLocked = player.level < coord.minLevel
+          const isSelected = selectedNode === idx
+          return (
+            <div
+              key={`lbl-${idx}`}
+              onClick={() => setSelectedNode(idx)}
               style={{
-                padding: '12px 20px',
-                fontFamily: "'Orbitron', sans-serif",
-                fontSize: 13,
-                fontWeight: 900,
-                letterSpacing: 2,
-                borderRadius: '8px',
-                cursor: isLocked ? 'not-allowed' : 'pointer',
-                border: 'none',
-                background: isLocked 
-                  ? 'rgba(40, 40, 40, 0.4)' 
-                  : (isActive ? 'rgba(255,255,255,0.05)' : `linear-gradient(90deg, ${activeColor}, color-mix(in srgb, ${activeColor} 60%, white))`),
-                border: isActive ? `1.5px dashed ${activeColor}` : 'none',
-                color: isLocked ? '#7a8593' : (isActive ? activeColor : '#fff'),
-                boxShadow: isLocked ? 'none' : `0 0 15px ${activeColor}55`,
-                transition: 'all 0.2s'
-              }}
-              onMouseEnter={(e) => {
-                if (!isLocked && !isActive) {
-                  e.currentTarget.style.transform = 'scale(1.04)'
-                  e.currentTarget.style.boxShadow = `0 0 25px ${activeColor}88`
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (!isLocked && !isActive) {
-                  e.currentTarget.style.transform = 'scale(1)'
-                  e.currentTarget.style.boxShadow = `0 0 15px ${activeColor}55`
-                }
+                position: 'absolute',
+                left: `calc(${coord.left} + ${coord.left.startsWith('7') ? '-65px' : '26px'})`,
+                top: `calc(${coord.top} - 10px)`,
+                background: isSelected ? 'rgba(3, 8, 20, 0.92)' : 'rgba(3, 8, 20, 0.72)',
+                border: isSelected ? `1.5px solid ${activeColor}` : '1px solid rgba(255,255,255,0.15)',
+                borderRadius: '4px',
+                padding: '2px 6px',
+                fontFamily: 'monospace',
+                fontSize: 10,
+                fontWeight: isSelected ? 'bold' : 'normal',
+                color: mapLocked ? '#7a8593' : '#fff',
+                textShadow: isSelected ? `0 0 5px ${activeColor}` : 'none',
+                cursor: 'pointer',
+                zIndex: 30,
+                pointerEvents: 'auto',
+                boxShadow: isSelected ? `0 0 8px ${activeColor}40` : 'none'
               }}
             >
-              {isLocked ? '🔒 SECURE LOCK' : (isActive ? 'CURRENT ZONE' : '⚡ DEPLOY UNIT')}
-            </button>
+              M{idx + 1}: {coord.name.split(' ')[0]}
+            </div>
+          )
+        })}
+      </div>
+
+      {/* Holographic Tactical Info Panel Overlay - Portrait Dynamic Grid Terminal */}
+      <div style={{
+        background: 'rgba(3, 8, 20, 0.96)',
+        borderTop: `3px solid ${isLocked ? '#8a94a3' : activeColor}`,
+        boxShadow: `0 -10px 30px rgba(0,0,0,0.85), 0 0 20px ${isLocked ? 'rgba(0,0,0,0)' : activeColor}18`,
+        padding: '18px 20px 24px', zIndex: 10,
+        display: 'flex', flexDirection: 'column', gap: 14,
+        flexShrink: 0
+      }}>
+        {/* Row 1: Title and Lock status */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div>
+            <div style={{
+              fontFamily: "'Orbitron', sans-serif", fontSize: 15, fontWeight: 900,
+              color: isLocked ? '#8a94a3' : '#fff', letterSpacing: 1, textTransform: 'uppercase'
+            }}>
+              MAP {selectedNode + 1} — {selectedSector.name}
+            </div>
+            <div style={{ fontFamily: 'monospace', fontSize: 12, color: '#7ab0d0', marginTop: 2 }}>
+              Level Bracket: Lv. {selectedSector.minLevel} - {selectedSector.maxLevel}
+            </div>
+          </div>
+          
+          <span style={{
+            fontSize: 11, background: isLocked ? 'rgba(255,255,255,0.06)' : (isActive ? `${activeColor}20` : 'rgba(0, 229, 255, 0.12)'),
+            color: isLocked ? '#8a94a3' : (isActive ? activeColor : '#00e5ff'),
+            border: `1.5px solid ${isLocked ? '#8a94a3' : (isActive ? activeColor : '#00e5ff')}`,
+            borderRadius: '6px', padding: '3px 10px', fontWeight: 900, fontFamily: 'monospace'
+          }}>
+            {isLocked ? '🔒 LOCKED' : (isActive ? 'ACTIVE' : 'SELECTABLE')}
+          </span>
+        </div>
+
+        {/* Row 2: Level Requirements */}
+        {isLocked && (
+          <div style={{
+            background: 'rgba(255, 60, 60, 0.1)', border: '1px solid rgba(255, 60, 60, 0.3)',
+            borderRadius: '8px', padding: '8px 12px', color: '#ff6666', fontSize: 12,
+            fontFamily: 'monospace', display: 'flex', alignItems: 'center', gap: 8
+          }}>
+            <span>⚠️</span>
+            <span>Pilot Level is too low! Requires Level {mapCoordinates[selectedNode].minLevel} (Current: Level {player.level}).</span>
+          </div>
+        )}
+
+        {/* Row 3: Monsters list (Dynamic layout) */}
+        <div>
+          <div style={{
+            fontSize: 11, fontWeight: 'bold', color: '#5f8da3',
+            textTransform: 'uppercase', letterSpacing: 1, marginBottom: 6,
+            fontFamily: "'Orbitron', sans-serif"
+          }}>
+            Zone Inhabitants
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+            {selectedSector.mobs.map((m, idx) => (
+              <span key={idx} style={{
+                fontSize: 13, background: 'rgba(255,255,255,0.03)',
+                padding: '5px 10px', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.06)',
+                color: isLocked ? '#7a8593' : '#dde2ea', display: 'inline-flex', alignItems: 'center', gap: 6,
+                fontFamily: 'monospace'
+              }}>
+                <span>{m.emoji}</span>
+                <span>{m.name}</span>
+              </span>
+            ))}
+            <span style={{
+              fontSize: 13, background: 'rgba(255, 100, 0, 0.05)',
+              padding: '5px 10px', borderRadius: '6px', border: '1px solid rgba(255, 100, 0, 0.25)',
+              color: isLocked ? '#7a8593' : '#ff985a', display: 'inline-flex', alignItems: 'center', gap: 6,
+              fontFamily: 'monospace', fontWeight: 'bold'
+            }}>
+              <span>💀</span>
+              <span>{selectedSector.boss.name} (Boss)</span>
+            </span>
           </div>
         </div>
 
+        {/* Row 4: Select / Deploy Button */}
+        <button
+          disabled={isLocked}
+          onClick={() => {
+            setSelectedMapIdx(selectedNode)
+            onClose()
+          }}
+          style={{
+            marginTop: 4,
+            padding: '14px',
+            width: '100%',
+            fontFamily: "'Orbitron', sans-serif",
+            fontSize: 14,
+            fontWeight: 900,
+            letterSpacing: 2.5,
+            borderRadius: '10px',
+            cursor: isLocked ? 'not-allowed' : 'pointer',
+            border: 'none',
+            background: isLocked 
+              ? 'rgba(40, 40, 50, 0.5)' 
+              : (isActive ? 'rgba(255,255,255,0.05)' : `linear-gradient(90deg, ${activeColor}, color-mix(in srgb, ${activeColor} 65%, white))`),
+            border: isActive ? `1.5px dashed ${activeColor}` : 'none',
+            color: isLocked ? '#7a8593' : (isActive ? activeColor : '#fff'),
+            boxShadow: isLocked ? 'none' : `0 4px 20px ${activeColor}44`,
+            transition: 'all 0.25s',
+            textAlign: 'center'
+          }}
+        >
+          {isLocked ? '🔒 TRANSMISSION LOCKED' : (isActive ? 'CURRENT LEVELING ZONE' : '⚡ DEPLOY PILOT UNIT HERE')}
+        </button>
       </div>
+
     </div>
   )
 }
