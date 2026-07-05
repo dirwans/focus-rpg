@@ -416,12 +416,8 @@ export default function CharacterCreate() {
             justifyContent: 'center',
             flexShrink: 0
           }}>
-            {/* Outer Centerer to prevent transform animation conflict */}
+            {/* Native Flex Centerer to prevent transform animation conflict */}
             <div style={{
-              position: 'absolute',
-              left: '50%',
-              top: '50%',
-              transform: 'translate(-50%, -50%)',
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center'
@@ -581,12 +577,8 @@ export default function CharacterCreate() {
             flexShrink: 0,
             marginTop: 10
           }}>
-            {/* Outer Centerer to prevent transform animation conflict */}
+            {/* Native Flex Centerer to prevent transform animation conflict */}
             <div style={{
-              position: 'absolute',
-              left: '50%',
-              top: '50%',
-              transform: 'translate(-50%, -50%)',
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center'
