@@ -5,6 +5,7 @@ import races from '../data/races.json'
 import jobs from '../data/jobs.json'
 import { syncSave } from '../lib/saveSync'
 import { t } from '../lib/translate'
+import { PilotSprite } from './PilotSprites'
 
 // Import faction hero art assets
 import arctronWarrior from '../assets/arctron_warrior.png'
@@ -201,8 +202,8 @@ export default function CharacterCreate() {
       {/* Faction glow backdrop */}
       <div style={{ position: 'absolute', left: '64%', top: '38%', width: 300, height: 300, transform: 'translate(-50%, -50%)', background: `radial-gradient(circle, ${currentTheme.primary}59, transparent 70%)`, filter: 'blur(20px)', animation: 'glowPulse 3.6s ease-in-out infinite', zIndex: 1 }} />
 
-      {/* 1. Hero Full Bleed Art (Race Select & Character Creation Only) */}
-      {(step === 1 || step === 3) && (
+      {/* 1. Hero Full Bleed Art (Race Select Only) */}
+      {step === 1 && (
         <>
           <img 
             src={HERO_IMAGES[focusedRace]} 
@@ -210,10 +211,10 @@ export default function CharacterCreate() {
             style={{ 
               position: 'absolute', 
               left: '58%', 
-              bottom: step === 3 ? '-40px' : '-10px', 
-              height: step === 3 ? '52%' : '62%', 
+              bottom: '-10px', 
+              height: '62%', 
               width: 'auto',
-              maxHeight: step === 3 ? '440px' : '530px',
+              maxHeight: '530px',
               transform: 'translateX(-50%)', 
               animation: 'heroFloat 6s ease-in-out infinite', 
               filter: `drop-shadow(0 30px 40px rgba(0,0,0,0.8)) drop-shadow(0 0 40px ${currentTheme.primary}4D)`,
@@ -225,23 +226,30 @@ export default function CharacterCreate() {
         </>
       )}
 
-      {/* Class Select Watermarked Hero BG */}
-      {step === 2 && (
+      {/* 2. Class Select & Character Creation Pilot Sprite */}
+      {(step === 2 || step === 3) && (
         <>
-          <img 
-            src={HERO_IMAGES[raceId]} 
-            alt="" 
-            style={{ 
-              position: 'absolute', 
-              right: '-50px', 
-              bottom: 0, 
-              height: '480px', 
-              opacity: 0.09, 
-              pointerEvents: 'none',
-              zIndex: 1
-            }} 
-          />
-          <div style={{ position: 'absolute', inset: 0, background: `radial-gradient(circle at 62% 20%, transparent 26%, rgba(6,5,6,0.6) 100%)`, pointerEvents: 'none', zIndex: 2 }} />
+          <div style={{ 
+            position: 'absolute', 
+            left: '58%', 
+            bottom: step === 3 ? '-40px' : '-10px', 
+            height: step === 3 ? '52%' : '62%', 
+            maxHeight: step === 3 ? '440px' : '530px',
+            transform: 'translateX(-50%)', 
+            animation: 'heroFloat 6s ease-in-out infinite', 
+            zIndex: 2,
+            pointerEvents: 'none'
+          }}>
+            <PilotSprite 
+              race={raceId} 
+              job={jobId} 
+              size={530} 
+              height="100%"
+              width="auto"
+            />
+          </div>
+          {/* Shadow vignette overlay */}
+          <div style={{ position: 'absolute', inset: 0, background: `radial-gradient(circle at 64% 32%, transparent 34%, rgba(6,5,6,0.85) 100%)`, pointerEvents: 'none', zIndex: 3 }} />
         </>
       )}
 
