@@ -416,7 +416,12 @@ export default function CharacterCreate() {
             justifyContent: 'center',
             flexShrink: 0
           }}>
-            <div style={{ animation: 'heroFloat 6s ease-in-out infinite' }}>
+            <div style={{ 
+              animation: 'heroFloat 6s ease-in-out infinite',
+              display: 'flex',
+              justifyContent: 'center',
+              width: '100%'
+            }}>
               <PilotSprite 
                 race={raceId} 
                 job={jobId} 
@@ -559,7 +564,12 @@ export default function CharacterCreate() {
             flexShrink: 0,
             marginTop: 10
           }}>
-            <div style={{ animation: 'heroFloat 6s ease-in-out infinite' }}>
+            <div style={{ 
+              animation: 'heroFloat 6s ease-in-out infinite',
+              display: 'flex',
+              justifyContent: 'center',
+              width: '100%'
+            }}>
               <PilotSprite 
                 race={raceId} 
                 job={jobId} 
