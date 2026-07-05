@@ -236,7 +236,7 @@ export default function CharacterCreate() {
       {(step === 2 || step === 3) && (
         <div style={{ 
           position: 'absolute', 
-          left: '50%', 
+          left: '58%', 
           top: '12%', 
           height: '42%', 
           maxHeight: '380px',
