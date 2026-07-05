@@ -32,9 +32,9 @@ const FACTION_THEMES = {
     crest: 'AR',
     tagline: 'STEEL BODY. UNBREAKABLE WILL.',
     traits: [
-      { name: 'FIREPOWER', val: 78 },
-      { name: 'ARMOR', val: 96 },
-      { name: 'HULL HP', val: 58 }
+      { name: 'ATTACK', val: 78 },
+      { name: 'DEFENSE', val: 96 },
+      { name: 'FP', val: 58 }
     ],
     confirmText: 'ENTER THE WAR'
   },
@@ -52,9 +52,9 @@ const FACTION_THEMES = {
     crest: 'BX',
     tagline: 'ENGINEERED FOR VICTORY.',
     traits: [
-      { name: 'FIREPOWER', val: 94 },
-      { name: 'ARMOR', val: 52 },
-      { name: 'SHIELD HP', val: 76 }
+      { name: 'ATTACK', val: 94 },
+      { name: 'DEFENSE', val: 52 },
+      { name: 'FP', val: 76 }
     ],
     confirmText: 'LAUNCH SEQUENCE'
   },
@@ -72,9 +72,9 @@ const FACTION_THEMES = {
     crest: 'CL',
     tagline: 'MAGIC BENDS TO THOSE WHO DARE.',
     traits: [
-      { name: 'SPELL POWER', val: 96 },
-      { name: 'WARD', val: 36 },
-      { name: 'VITALITY', val: 58 }
+      { name: 'ATTACK', val: 96 },
+      { name: 'DEFENSE', val: 36 },
+      { name: 'FP', val: 58 }
     ],
     confirmText: 'AWAKEN THE PATH'
   }
@@ -108,6 +108,15 @@ const getClassRoleTag = (jobId) => {
   if (jobId === 'engineer') return 'TECH · SUPPORT'
   if (jobId === 'psion' || jobId === 'arcanist') return 'CASTER'
   if (jobId === 'oracle') return 'SUMMON'
+  return 'NOVICE'
+}
+
+const getClassBaseName = (jobId) => {
+  if (jobId === 'destroyer' || jobId === 'guardian' || jobId === 'sentinel') return 'WARRIOR'
+  if (jobId === 'gunner' || jobId === 'marksman' || jobId === 'pathfinder') return 'RANGER'
+  if (jobId === 'engineer') return 'SPECIALIST'
+  if (jobId === 'psion' || jobId === 'arcanist') return 'MAGE'
+  if (jobId === 'oracle') return 'SUMMONER'
   return 'NOVICE'
 }
 
@@ -200,9 +209,11 @@ export default function CharacterCreate() {
             alt={focusedRace} 
             style={{ 
               position: 'absolute', 
-              left: '64%', 
-              bottom: step === 3 ? '-60px' : '-10px', 
-              height: step === 3 ? '540px' : '660px', 
+              left: '58%', 
+              bottom: step === 3 ? '-40px' : '-10px', 
+              height: step === 3 ? '52%' : '62%', 
+              width: 'auto',
+              maxHeight: step === 3 ? '440px' : '530px',
               transform: 'translateX(-50%)', 
               animation: 'heroFloat 6s ease-in-out infinite', 
               filter: `drop-shadow(0 30px 40px rgba(0,0,0,0.8)) drop-shadow(0 0 40px ${currentTheme.primary}4D)`,
@@ -456,9 +467,12 @@ export default function CharacterCreate() {
                 {/* Details */}
                 <div style={{ flex: 1 }}>
                   <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 900, color: '#fff' }}>
-                    {jb.name.toUpperCase()}{' '}
+                    {getClassBaseName(jb.id)}{' '}
                     <span style={{ fontSize: 9, fontStyle: 'italic', fontWeight: 700, color: isSelected ? finalTheme.light : '#8a94a3', marginLeft: 4 }}>
                       {role}
+                    </span>
+                    <span style={{ fontSize: 10, color: isSelected ? '#fff' : '#8a94a3', fontWeight: 500, marginLeft: 6, opacity: 0.8 }}>
+                      ({jb.name})
                     </span>
                   </div>
                   <div style={{ fontFamily: "'Saira', sans-serif", fontSize: 11, color: isSelected ? '#b9c0c9' : '#8a94a3', marginTop: 2, lineHeight: 1.3 }}>
