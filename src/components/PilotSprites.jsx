@@ -16,7 +16,8 @@ import bionexWarEngineerImg from '../assets/bionex_war_engineer.png'
 
 import celestraPilotImg from '../assets/celestra_pilot_v2.png'
 import celestraPilotMaleImg from '../assets/celestra_pilot.png'
-import celestraWarriorImg from '../assets/celestra_warrior.png'
+import celestraWarriorImg from '../assets/celestra_warrior_female.png'
+import celestraWarriorMaleImg from '../assets/celestra_warrior_male.png'
 import celestraRangerImg from '../assets/celestra_ranger.png'
 import celestraRangerPortraitImg from '../assets/celestra_ranger_portrait.png'
 import celestraSpecialistImg from '../assets/celestra_specialist.png'
@@ -135,7 +136,7 @@ export function CelestraSprite({ job, size = 60, width, height, upperBodyOnly = 
   
   if (job) {
     if (lane === 'warrior') {
-      srcImg = gender === 'female' ? celestraPilotImg : celestraWarriorImg
+      srcImg = gender === 'female' ? celestraWarriorImg : celestraWarriorMaleImg
     } else if (lane === 'ranger') {
       srcImg = gender === 'female' ? (fill ? celestraRangerPortraitImg : celestraRangerImg) : celestraPilotMaleImg
     } else if (lane === 'specialist') {
