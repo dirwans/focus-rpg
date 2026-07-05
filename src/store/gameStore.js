@@ -574,6 +574,8 @@ const initialBattle = {
   playerMaxHp: 0,
   playerFp: 0,
   playerMaxFp: 0,
+  playerSp: 0,
+  playerMaxSp: 0,
   deaths: 0,
   respawnTicks: 0,
   currentMob: null,
@@ -1193,8 +1195,10 @@ export const useGameStore = create(
           hp = spawned.hp
         }
 
-        const playerMaxHp = get().getStats().hp
-        const playerMaxFp = 200
+        const playerStats = get().getStats()
+        const playerMaxHp = playerStats.hp
+        const playerMaxFp = playerStats.fp
+        const playerMaxSp = playerStats.sp
         set({
           timer: {
             ...timer,
@@ -1213,6 +1217,8 @@ export const useGameStore = create(
             playerMaxHp: playerMaxHp,
             playerFp: playerMaxFp,
             playerMaxFp: playerMaxFp,
+            playerSp: playerMaxSp,
+            playerMaxSp: playerMaxSp,
             currentMob: mob,
             isBoss,
             isPitBoss,
@@ -1274,8 +1280,10 @@ export const useGameStore = create(
         if (!battle.currentMob) {
           const sectorIdx = getSector(player.level) - 1
           const { mob, isBoss, isPitBoss, hp } = spawnEnemy(sectorIdx, player.level)
-          const playerMaxHp = get().getStats().hp
-          const playerMaxFp = 200
+          const playerStats = get().getStats()
+          const playerMaxHp = playerStats.hp
+          const playerMaxFp = playerStats.fp
+          const playerMaxSp = playerStats.sp
           set({ 
             battle: { 
               ...battle, 
@@ -1289,6 +1297,8 @@ export const useGameStore = create(
               playerMaxHp: playerMaxHp,
               playerFp: playerMaxFp,
               playerMaxFp: playerMaxFp,
+              playerSp: playerMaxSp,
+              playerMaxSp: playerMaxSp,
               deaths: 0,
               respawnTicks: 0
             } 
@@ -1298,15 +1308,19 @@ export const useGameStore = create(
 
         // Auto-initialize player HP and FP if they are missing or NaN in synced session
         if (!battle.playerHp || !battle.playerMaxHp || isNaN(battle.playerHp) || isNaN(battle.playerMaxHp)) {
-          const playerMaxHp = get().getStats().hp
-          const playerMaxFp = 200
+          const playerStats = get().getStats()
+          const playerMaxHp = playerStats.hp
+          const playerMaxFp = playerStats.fp
+          const playerMaxSp = playerStats.sp
           set({
             battle: {
               ...battle,
               playerHp: playerMaxHp,
               playerMaxHp: playerMaxHp,
               playerFp: battle.playerFp || playerMaxFp,
-              playerMaxFp: playerMaxFp
+              playerMaxFp: playerMaxFp,
+              playerSp: battle.playerSp || playerMaxSp,
+              playerMaxSp: playerMaxSp
             }
           })
           return
@@ -1319,15 +1333,21 @@ export const useGameStore = create(
           const remainingTicks = battle.respawnTicks - 1
           if (newLog.length > 7) newLog = newLog.slice(-7)
           if (remainingTicks === 0) {
-            const playerMaxHp = get().getStats().hp
-            const playerMaxFp = 200
+            const playerStats = get().getStats()
+            const playerMaxHp = playerStats.hp
+            const playerMaxFp = playerStats.fp
+            const playerMaxSp = playerStats.sp
             newLog.push(`⚡ Systems online! Pilot ready for battle!`)
             set({ 
               battle: { 
                 ...battle, 
                 respawnTicks: 0, 
                 playerHp: playerMaxHp, 
+                playerMaxHp: playerMaxHp,
                 playerFp: playerMaxFp,
+                playerMaxFp: playerMaxFp,
+                playerSp: playerMaxSp,
+                playerMaxSp: playerMaxSp,
                 log: newLog 
               } 
             })
@@ -1358,7 +1378,17 @@ export const useGameStore = create(
 
         // 3. Player attacks enemy turn
         const playerStats = get().getStats()
-        const playerAtk = playerStats.atk
+        const group = getPlayerClassGroup(player.job, player.race)
+        let playerAtk = playerStats.atk
+        if (group === 'warrior') {
+          playerAtk = playerStats.meleeAtk
+        } else if (group === 'ranger') {
+          playerAtk = playerStats.rangedAtk
+        } else if (group === 'mage') {
+          playerAtk = playerStats.forceAtk
+        } else {
+          playerAtk = Math.max(playerStats.meleeAtk, playerStats.rangedAtk)
+        }
         const mob = battle.currentMob
         
         let dmgToEnemy = 0
@@ -1450,6 +1480,8 @@ export const useGameStore = create(
           
           let dmgToPlayer = 0
           const isPlayerDodge = Math.random() < playerStats.dodge
+          const hasShield = !!player.equipment?.shield
+          const isPlayerBlock = hasShield && (Math.random() < playerStats.blockRate)
           
           if (isPlayerDodge) {
             if (newLog.length > 7) newLog = newLog.slice(-7)
@@ -1461,13 +1493,25 @@ export const useGameStore = create(
             
             // Damage Formula: Final ATK - Final DEF
             let baseDmg = Math.max(1, enemyAtk - playerDef)
-            dmgToPlayer = isEnemyCrit ? Math.floor(baseDmg * 1.5) : baseDmg
+            let baseDmgPlayer = isEnemyCrit ? Math.floor(baseDmg * 1.5) : baseDmg
+
+            // Apply Elemental Resist mitigation
+            const avgResist = (playerStats.resistances.fire + playerStats.resistances.water + playerStats.resistances.earth + playerStats.resistances.wind) / 4
+            baseDmgPlayer = Math.max(1, Math.floor(baseDmgPlayer * (1 - avgResist / 100)))
             
-            if (newLog.length > 7) newLog = newLog.slice(-7)
-            if (isEnemyCrit) {
-              newLog.push(`💥 CRIT! ${mob.emoji} ${mob.name} melancarkan serangan kritis! -${dmgToPlayer} Shield HP`)
+            if (isPlayerBlock) {
+              // Block reduces final damage by 60%
+              dmgToPlayer = Math.max(1, Math.floor(baseDmgPlayer * 0.40))
+              if (newLog.length > 7) newLog = newLog.slice(-7)
+              newLog.push(`🛡️ BLOCK! Tameng menahan serangan! Damage berkurang 60% (-${dmgToPlayer} Shield HP)`)
             } else {
-              newLog.push(`💥 ${mob.emoji} ${mob.name} menyerang Pilot! -${dmgToPlayer} Shield HP`)
+              dmgToPlayer = baseDmgPlayer
+              if (newLog.length > 7) newLog = newLog.slice(-7)
+              if (isEnemyCrit) {
+                newLog.push(`💥 CRIT! ${mob.emoji} ${mob.name} melancarkan serangan kritis! -${dmgToPlayer} Shield HP`)
+              } else {
+                newLog.push(`💥 ${mob.emoji} ${mob.name} menyerang Pilot! -${dmgToPlayer} Shield HP`)
+              }
             }
           }
           
@@ -2387,21 +2431,64 @@ export const useGameStore = create(
           activeTitle = '🤝 Benefactor'
         }
 
+        // Fallback for baseStats attributes (specifically for Bionex where they aren't STR/DEX/INT/VIT based)
+        const str = baseStats.str || 5
+        const dex = baseStats.dex || 5
+        const int = baseStats.int || 5
+        const vit = baseStats.vit || 5
+
+        // Calculate Block Rate (5% base + 0.5% per Shield PT) if shield equipped
+        const hasShield = !!eq.shield
+        const blockRate = hasShield ? (0.05 + (pt.shield?.val || 1) * 0.005) : 0
+
+        // Calculate Elemental Resistances based on class group and equipment
+        let fireResist = 0
+        let waterResist = 0
+        let earthResist = 0
+        let windResist = 0
+        const classGroup = getPlayerClassGroup(player.job, player.race)
+        if (classGroup === 'mage') {
+          fireResist = 15; waterResist = 15; earthResist = 15; windResist = 15;
+        } else if (classGroup === 'ranger' || classGroup === 'specialist') {
+          fireResist = 5; waterResist = 5; earthResist = 5; windResist = 5;
+        }
+        eqSlots.forEach(slot => {
+          const item = eq[slot]
+          if (item && item.bonus) {
+            if (item.bonus.fireResist) fireResist += item.bonus.fireResist
+            if (item.bonus.waterResist) waterResist += item.bonus.waterResist
+            if (item.bonus.earthResist) earthResist += item.bonus.earthResist
+            if (item.bonus.windResist) windResist += item.bonus.windResist
+          }
+        })
+
         // Calculate final Crit and Dodge rates (base + tier + gear)
         const baseCrit = player.race === 'celestra' ? 15 : 12
         const critRate = (baseCrit + tierCrit + critBonus) / 100
         const dodgeRate = (5 + tierDodge) / 100
 
         return {
+          meleeAtk: Math.floor(atk * (1 + (pt.melee?.val || 1) * 0.015) + (str * 3)),
+          rangedAtk: Math.floor(atk * (1 + (pt.range?.val || 1) * 0.015) + (dex * 3)),
+          forceAtk: player.race === 'arctron' ? 0 : Math.floor(atk * (1 + (pt.force?.val || 1) * 0.015) + (int * 3)),
           atk: Math.floor(atk),
-          def: Math.floor(def),
-          hp: Math.floor(hp),
+          def: Math.floor(def * (1 + (pt.defense?.val || 1) * 0.01) + (vit * 0.5)),
+          hp: Math.floor(hp * (1 + (pt.defense?.val || 1) * 0.005 + (pt.shield?.val || 1) * 0.005) + (vit * 10)),
+          fp: Math.floor(200 + (lvl * 5) + (int * 5)),
+          sp: Math.floor(100 + (lvl * 3) + (dex * 2)),
+          blockRate: Math.min(0.75, blockRate), // Cap at 75%
+          resistances: {
+            fire: fireResist,
+            water: waterResist,
+            earth: earthResist,
+            wind: windResist
+          },
           crit: critRate,
           dodge: dodgeRate,
-          str: baseStats.str,
-          dex: baseStats.dex,
-          int: baseStats.int,
-          vit: baseStats.vit,
+          str: str,
+          dex: dex,
+          int: int,
+          vit: vit,
           title: activeTitle
         }
       },

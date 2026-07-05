@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
-import { useGameStore } from '../store/gameStore'
+import { useGameStore, getPlayerClassGroup } from '../store/gameStore'
 import { useAuthStore } from '../store/authStore'
 import races from '../data/races.json'
 import enemies from '../data/enemies.json'
@@ -165,7 +165,14 @@ const FOCUS_MODE_LABEL = { arctron: 'FIGHT', bionex: 'GATHER', celestra: 'CHANNE
 
     if (currentHp < prevHp) {
       const diff = prevHp - currentHp
-      const isCrit = diff > (stats.atk * 1.3)
+      const group = getPlayerClassGroup(player.job, player.race)
+      let activeAtk = stats.atk
+      if (group === 'warrior') activeAtk = stats.meleeAtk
+      else if (group === 'ranger') activeAtk = stats.rangedAtk
+      else if (group === 'mage') activeAtk = stats.forceAtk
+      else activeAtk = Math.max(stats.meleeAtk, stats.rangedAtk)
+
+      const isCrit = diff > (activeAtk * 1.3)
       spawnDamage(diff, isCrit)
 
       setIsEnemyHit(true)
@@ -520,13 +527,34 @@ const FOCUS_MODE_LABEL = { arctron: 'FIGHT', bionex: 'GATHER', celestra: 'CHANNE
       <GuildPanel />
 
       {/* Combat stats */}
-      <div className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.combatStats}>
-        <div style={styles.cstat}><div style={styles.cstatLabel}>{t('firepower')}</div><div style={{ ...styles.cstatVal, color: 'var(--neon-glow)' }}>{stats.atk}</div></div>
-        <div style={styles.statDivider} />
-        <div style={styles.cstat}><div style={styles.cstatLabel}>{t('armor')}</div><div style={{ ...styles.cstatVal, color: '#eef3fb' }}>{stats.def}</div></div>
-        <div style={styles.statDivider} />
-        <div style={styles.cstat}><div style={styles.cstatLabel}>{t('shield_hp')}</div><div style={{ ...styles.cstatVal, color: '#ff5f7a' }}>{stats.hp.toLocaleString()}</div></div>
-      </div>
+      {(() => {
+        const group = getPlayerClassGroup(player.job, player.race)
+        let activeAtk = stats.atk
+        let atkLabel = 'FIREPOWER'
+        if (group === 'warrior') {
+          activeAtk = stats.meleeAtk
+          atkLabel = 'MELEE ATK'
+        } else if (group === 'ranger') {
+          activeAtk = stats.rangedAtk
+          atkLabel = 'RANGED ATK'
+        } else if (group === 'mage') {
+          activeAtk = stats.forceAtk
+          atkLabel = 'FORCE ATK'
+        } else {
+          activeAtk = Math.max(stats.meleeAtk, stats.rangedAtk)
+          atkLabel = 'ACTIVE ATK'
+        }
+
+        return (
+          <div className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.combatStats}>
+            <div style={styles.cstat}><div style={styles.cstatLabel}>{atkLabel}</div><div style={{ ...styles.cstatVal, color: 'var(--neon-glow)' }}>{activeAtk}</div></div>
+            <div style={styles.statDivider} />
+            <div style={styles.cstat}><div style={styles.cstatLabel}>{t('armor')}</div><div style={{ ...styles.cstatVal, color: '#eef3fb' }}>{stats.def}</div></div>
+            <div style={styles.statDivider} />
+            <div style={styles.cstat}><div style={styles.cstatLabel}>{t('shield_hp')}</div><div style={{ ...styles.cstatVal, color: '#ff5f7a' }}>{stats.hp.toLocaleString()}</div></div>
+          </div>
+        )
+      })()}
 
       {/* Focus timer + Target zone card */}
       <div className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.focusCard}>

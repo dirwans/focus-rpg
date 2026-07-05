@@ -488,20 +488,91 @@ export default function Unit() {
                   <span style={{ fontSize: 9 }}>{statusOpen ? '▼' : '▶'}</span> STATUS INFO
                 </div>
                 {statusOpen && (
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 7 }}>
-                    {[
-                      { lbl: 'ATK', val: stats.atk, c1: fp, c2: '#8a94a3' },
-                      { lbl: 'DEF', val: stats.def, c1: '#eef3fb', c2: '#8a94a3' },
-                      { lbl: 'HP', val: stats.hp.toLocaleString(), c1: '#ff6a4d', c2: '#8a94a3', b: 'rgba(255,110,60,0.28)' },
-                      { lbl: 'CRIT', val: Math.round((stats.crit || 0.12)*100)+'%', c1: '#c7ccd6', c2: '#8a94a3', b: 'rgba(199,204,214,0.25)' },
-                      { lbl: 'FP', val: 200+(player.level*5), c1: '#c7ccd6', c2: '#8a94a3', b: 'rgba(199,204,214,0.25)' },
-                      { lbl: 'DODGE', val: Math.round((stats.dodge || 0.05)*100)+'%', c1: '#c7ccd6', c2: '#8a94a3', b: 'rgba(199,204,214,0.25)' }
-                    ].map((s, idx) => (
-                      <div key={idx} style={{ padding: '8px 4px', textAlign: 'center', background: 'rgba(8,22,36,0.45)', border: `1px solid ${s.b || fp+'40'}`, borderRadius: 10 }}>
-                        <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 700, color: s.c2 }}>{s.lbl}</div>
-                        <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 17, fontWeight: 800, color: s.c1, textShadow: idx===0 ? `0 0 8px ${fp}66` : 'none' }}>{s.val}</div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                    
+                    {/* 1. BASIC POOLS & ATTRIBUTES */}
+                    <div>
+                      <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 10, fontWeight: 800, letterSpacing: 1, color: fa, marginBottom: 5, borderLeft: `3px solid ${fp}`, paddingLeft: 6 }}>
+                        BASIC ATTRIBUTES
                       </div>
-                    ))}
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 6 }}>
+                        {[
+                          { lbl: 'HP', val: stats.hp.toLocaleString(), color: '#ff4466' },
+                          { lbl: 'FP', val: stats.fp.toLocaleString(), color: '#00c8ff' },
+                          { lbl: 'SP', val: stats.sp.toLocaleString(), color: '#ffcc00' },
+                          { lbl: 'DEF', val: stats.def.toLocaleString(), color: '#eef3fb' },
+                          { lbl: 'STR', val: stats.str, color: fa },
+                          { lbl: 'DEX', val: stats.dex, color: fa },
+                          { lbl: 'INT', val: stats.int, color: fa },
+                          { lbl: 'VIT', val: stats.vit, color: fa }
+                        ].map((s, idx) => (
+                          <div key={idx} style={{ padding: '6px 2px', textAlign: 'center', background: 'rgba(8,22,36,0.5)', border: `1px solid ${fp}22`, borderRadius: 8 }}>
+                            <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, fontWeight: 700, color: '#8a94a3' }}>{s.lbl}</div>
+                            <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, color: s.color }}>{s.val}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* 2. OFFENSIVE RATINGS */}
+                    <div>
+                      <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 10, fontWeight: 800, letterSpacing: 1, color: fa, marginBottom: 5, borderLeft: `3px solid ${fp}`, paddingLeft: 6 }}>
+                        OFFENSIVE RATINGS
+                      </div>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 6 }}>
+                        {[
+                          { lbl: '⚔️ MELEE', val: stats.meleeAtk, color: '#ff6a4d' },
+                          { lbl: '🏹 RANGED', val: stats.rangedAtk, color: '#5fe08a' },
+                          { lbl: '⚡ FORCE', val: player.race === 'arctron' ? '-' : stats.forceAtk, color: '#a855f7' }
+                        ].map((s, idx) => (
+                          <div key={idx} style={{ padding: '8px 4px', textAlign: 'center', background: 'rgba(8,22,36,0.5)', border: `1px solid ${fp}22`, borderRadius: 8 }}>
+                            <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, fontWeight: 700, color: '#8a94a3' }}>{s.lbl}</div>
+                            <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 14, fontWeight: 800, color: s.color, textShadow: `0 0 6px ${s.color}40` }}>{s.val}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* 3. COMBAT PERFORMANCE */}
+                    <div>
+                      <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 10, fontWeight: 800, letterSpacing: 1, color: fa, marginBottom: 5, borderLeft: `3px solid ${fp}`, paddingLeft: 6 }}>
+                        COMBAT PERFORMANCE
+                      </div>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 6 }}>
+                        {[
+                          { lbl: 'ACCURACY', val: '100%', color: '#eef3fb' },
+                          { lbl: 'EVASION', val: Math.round(stats.dodge * 100) + '%', color: '#00e5ff' },
+                          { lbl: 'CRITICAL', val: Math.round(stats.crit * 100) + '%', color: '#ffaa00' },
+                          { lbl: 'BLOCK RATE', val: player.equipment?.shield ? Math.round(stats.blockRate * 100) + '%' : '0%', color: '#ff4466' }
+                        ].map((s, idx) => (
+                          <div key={idx} style={{ padding: '6px 2px', textAlign: 'center', background: 'rgba(8,22,36,0.5)', border: `1px solid ${fp}22`, borderRadius: 8 }}>
+                            <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 8, fontWeight: 700, color: '#8a94a3' }}>{s.lbl}</div>
+                            <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 800, color: s.color }}>{s.val}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* 4. ELEMENTAL RESISTANCES */}
+                    <div>
+                      <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 10, fontWeight: 800, letterSpacing: 1, color: fa, marginBottom: 5, borderLeft: `3px solid ${fp}`, paddingLeft: 6 }}>
+                        ELEMENTAL RESISTANCES
+                      </div>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 6 }}>
+                        {[
+                          { lbl: '🔥 FIRE', val: (stats.resistances?.fire || 0) + '%', color: '#ff6a4d' },
+                          { lbl: '❄️ WATER', val: (stats.resistances?.water || 0) + '%', color: '#3b82f6' },
+                          { lbl: '⛰️ EARTH', val: (stats.resistances?.earth || 0) + '%', color: '#f5a623' },
+                          { lbl: '🌀 WIND', val: (stats.resistances?.wind || 0) + '%', color: '#5fe08a' }
+                        ].map((s, idx) => (
+                          <div key={idx} style={{ padding: '6px 2px', textAlign: 'center', background: 'rgba(8,22,36,0.5)', border: `1px solid ${fp}22`, borderRadius: 8 }}>
+                            <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, fontWeight: 700, color: '#8a94a3' }}>{s.lbl}</div>
+                            <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 800, color: s.color }}>{s.val}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
                   </div>
                 )}
               </div>
