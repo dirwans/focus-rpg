@@ -94,7 +94,7 @@
           "def": 50,
           "expReward": 13,
           "aniumReward": 8,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_17.png",
+          "image": "/ref/World-Map/Sylvan/Fangclaw.png",
           "critical": 5
         },
         {
@@ -105,7 +105,7 @@
           "def": 65,
           "expReward": 17,
           "aniumReward": 11,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_1.png",
+          "image": "/ref/World-Map/Sylvan/Thornmaw.png",
           "critical": 6
         },
         {
@@ -116,7 +116,7 @@
           "def": 80,
           "expReward": 21,
           "aniumReward": 14,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster-digger-clan.png",
+          "image": "/ref/World-Map/Sylvan/Sylvan-Wolf.png",
           "critical": 7
         },
         {
@@ -127,7 +127,7 @@
           "def": 100,
           "expReward": 22,
           "aniumReward": 15,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster-digger-clan.png",
+          "image": "/ref/World-Map/Sylvan/Vine-Stalker.png",
           "critical": 8
         }
       ],
@@ -141,7 +141,7 @@
         "regen": 180,
         "expReward": 350,
         "aniumReward": 250,
-        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster-digger-clan.png"
+        "image": "/ref/World-Map/Sylvan/Sylva-Fanglord.png"
       },
       "pitBoss": {
         "name": "SYLVAN OVERLORD",
@@ -153,7 +153,7 @@
         "regen": 900,
         "expReward": 1750,
         "aniumReward": 1250,
-        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster-digger-clan.png"
+        "image": "/ref/World-Map/Sylvan/Sylva-Fanglord.png"
       }
     },
     {
