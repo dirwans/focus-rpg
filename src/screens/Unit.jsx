@@ -745,16 +745,18 @@ export default function Unit() {
                     <div style={{ opacity: 0.18, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       {svgIcon}
                     </div>
-                    <span style={{
-                      fontFamily: "'Orbitron', sans-serif",
-                      fontSize: 8,
-                      fontWeight: 700,
-                      color: 'rgba(138,148,163,0.5)',
-                      position: 'absolute',
-                      bottom: isCircle ? 6 : 3,
-                      textTransform: 'uppercase',
-                      letterSpacing: 0.5,
-                    }}>{label}</span>
+                    {width >= 40 && (
+                      <span style={{
+                        fontFamily: "'Orbitron', sans-serif",
+                        fontSize: 8,
+                        fontWeight: 700,
+                        color: 'rgba(138,148,163,0.5)',
+                        position: 'absolute',
+                        bottom: isCircle ? 6 : 3,
+                        textTransform: 'uppercase',
+                        letterSpacing: 0.5,
+                      }}>{label}</span>
+                    )}
                   </div>
                 );
               }
@@ -790,15 +792,17 @@ export default function Unit() {
                   ) : (
                     svgIcon
                   )}
-                  <span style={{
-                    fontFamily: "'Orbitron', sans-serif",
-                    fontSize: 8,
-                    fontWeight: 800,
-                    color: fa,
-                    position: 'absolute',
-                    bottom: isCircle ? 6 : 3,
-                    letterSpacing: 0.5,
-                  }}>{label}</span>
+                  {width >= 40 && (
+                    <span style={{
+                      fontFamily: "'Orbitron', sans-serif",
+                      fontSize: 8,
+                      fontWeight: 800,
+                      color: fa,
+                      position: 'absolute',
+                      bottom: isCircle ? 6 : 3,
+                      letterSpacing: 0.5,
+                    }}>{label}</span>
+                  )}
                   {item.enhancement_level > 0 && (
                     <span style={{ position: 'absolute', top: 2, right: 3, fontSize: 8, fontWeight: 900, color: '#00ffaa', fontFamily: 'var(--font-mono)' }}>
                       +{item.enhancement_level}
@@ -898,55 +902,80 @@ export default function Unit() {
                 <div style={{ margin: '0 16px 8px', fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 700, letterSpacing: 1.5, color: '#8a94a3' }}>
                   <span style={{ fontSize: 9 }}>▼</span> EQUIPMENT & INVENTORY
                 </div>
-                <div style={{ margin: '0 16px 12px', padding: '12px 10px', background: 'rgba(8,22,36,0.4)', border: `1px solid ${fp}33`, borderRadius: 12, display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 10, justifyItems: 'center', alignItems: 'center', overflow: 'visible' }}>
-                  {/* Row 1 */}
-                  <div style={{ display: 'flex', gap: 4, justifyContent: 'center' }}>
-                    {renderEquipSlot('amulet1', 'AM1', amuletSvg, false, 42, 42)}
-                    {renderEquipSlot('amulet2', 'AM2', amuletSvg, false, 42, 42)}
-                  </div>
-                  {renderEquipSlot('helmet', 'HELM', helmetSvg, false, 48, 48)}
-                  <div style={{ display: 'flex', gap: 4, justifyContent: 'center' }}>
-                    {renderEquipSlot('ascension_arms', 'ARES', aresSvg, false, 42, 42)}
-                    {/* Decorative Core Slot for Symmetry */}
-                    <div style={{
-                      width: 42,
-                      height: 42,
-                      borderRadius: 7,
-                      background: 'rgba(3,8,20,0.3)',
-                      border: '1.5px dashed rgba(138,148,163,0.2)',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      position: 'relative',
-                    }}>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(138,148,163,0.20)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
-                      <span style={{
-                        fontFamily: "'Orbitron', sans-serif",
-                        fontSize: 7,
-                        fontWeight: 700,
-                        color: 'rgba(138,148,163,0.25)',
-                        position: 'absolute',
-                        bottom: 2,
-                        textTransform: 'uppercase',
-                      }}>CORE</span>
+                <div style={{
+                  margin: '0 auto 12px',
+                  padding: '16px 14px',
+                  background: 'rgba(8,22,36,0.4)',
+                  border: `1px solid ${fp}33`,
+                  borderRadius: 12,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  gap: 12,
+                  overflow: 'visible',
+                  width: 'fit-content',
+                }}>
+                  {/* Left Column */}
+                  <div style={{ display: 'flex', flexDirection: 'column', width: 60, alignItems: 'center' }}>
+                    <div style={{ display: 'flex', gap: 4, height: 28, width: 60, justifyContent: 'center', marginBottom: 16 }}>
+                      {renderEquipSlot('amulet1', 'AM1', amuletSvg, false, 28, 28)}
+                      {renderEquipSlot('amulet2', 'AM2', amuletSvg, false, 28, 28)}
+                    </div>
+                    <div style={{ marginBottom: 8 }}>
+                      {renderEquipSlot('weapon', 'WPN', weaponSvg, false, 60, 84)}
+                    </div>
+                    <div style={{ marginBottom: 8 }}>
+                      {renderEquipSlot('gloves', 'GLV', glovesSvg, false, 60, 60)}
+                    </div>
+                    <div style={{ marginTop: 20 }}>
+                      {renderEquipSlot('ring1', 'RG1', ringSvg, false, 36, 36)}
                     </div>
                   </div>
 
-                  {/* Row 2 */}
-                  {renderEquipSlot('weapon', 'WPN', weaponSvg, false, 48, 64)}
-                  {renderEquipSlot('armor', 'ARM', armorSvg, false, 48, 64)}
-                  {renderEquipSlot('shield', 'SHD', shieldSvg, false, 48, 64)}
+                  {/* Center Column */}
+                  <div style={{ display: 'flex', flexDirection: 'column', width: 60, alignItems: 'center' }}>
+                    <div style={{ marginBottom: 8 }}>
+                      {renderEquipSlot('helmet', 'HELM', helmetSvg, false, 60, 60)}
+                    </div>
+                    <div style={{ marginBottom: 8 }}>
+                      {renderEquipSlot('armor', 'ARM', armorSvg, false, 60, 60)}
+                    </div>
+                    <div style={{ marginBottom: 8 }}>
+                      {renderEquipSlot('pants', 'PNT', pantsSvg, false, 60, 60)}
+                    </div>
+                    <div>
+                      {renderEquipSlot('boots', 'BTS', bootsSvg, false, 60, 60)}
+                    </div>
+                  </div>
 
-                  {/* Row 3 */}
-                  {renderEquipSlot('gloves', 'GLV', glovesSvg, false, 48, 48)}
-                  {renderEquipSlot('pants', 'PNT', pantsSvg, false, 48, 48)}
-                  {renderEquipSlot('mantle', 'CPE', mantleSvg, false, 48, 48)}
-
-                  {/* Row 4 */}
-                  {renderEquipSlot('ring1', 'RG1', ringSvg, true, 44, 44)}
-                  {renderEquipSlot('boots', 'BTS', bootsSvg, false, 48, 48)}
-                  {renderEquipSlot('ring2', 'RG2', ringSvg, true, 44, 44)}
+                  {/* Right Column */}
+                  <div style={{ display: 'flex', flexDirection: 'column', width: 60, alignItems: 'center' }}>
+                    <div style={{ display: 'flex', gap: 4, height: 28, width: 60, justifyContent: 'center', marginBottom: 16 }}>
+                      {renderEquipSlot('ascension_arms', 'ARES', aresSvg, false, 28, 28)}
+                      {/* Decorative Core Slot for Symmetry */}
+                      <div style={{
+                        width: 28,
+                        height: 28,
+                        borderRadius: 4,
+                        background: 'rgba(3,8,20,0.3)',
+                        border: '1px dashed rgba(138,148,163,0.2)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        position: 'relative',
+                      }}>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(138,148,163,0.20)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
+                      </div>
+                    </div>
+                    <div style={{ marginBottom: 8 }}>
+                      {renderEquipSlot('shield', 'SHD', shieldSvg, false, 60, 84)}
+                    </div>
+                    <div style={{ marginBottom: 8 }}>
+                      {renderEquipSlot('mantle', 'CPE', mantleSvg, false, 60, 60)}
+                    </div>
+                    <div style={{ marginTop: 20 }}>
+                      {renderEquipSlot('ring2', 'RG2', ringSvg, false, 36, 36)}
+                    </div>
+                  </div>
                 </div>
                 {/* bags */}
                 <div style={{ display: 'flex', gap: 7, justifyContent: 'center', margin: '0 16px 14px' }}>
