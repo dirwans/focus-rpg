@@ -598,8 +598,7 @@ export default function Unit() {
                   );
                 };
             return (
-<>
-
+              <>
                 <div style={{ margin: '0 16px 4px', fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, letterSpacing: 1, color: fa, textTransform: 'uppercase' }}>Combat</div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 5, margin: '0 16px 10px' }}>
                   {[
@@ -612,7 +611,9 @@ export default function Unit() {
                   ].map((item) => {
                     const currentVal = pt[item.key]?.val || 1
                     const currentPct = pt[item.key]?.pct || 0
-                    const capVal = caps[item.key] || 0
+                    const capVal = absoluteCaps[item.key] || 0
+                    const levelCap = caps[item.key] || 0
+                    const isCapped = currentVal >= levelCap
                     if (capVal === 0) return null
                     
                     return (
@@ -622,8 +623,8 @@ export default function Unit() {
                           <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 700, color: currentPct >= 50 ? '#16181c' : fa, background: currentPct >= 50 ? 'linear-gradient(135deg,#dde2ea,#9aa2ae)' : `${fp}24`, padding: '2px 7px', borderRadius: 5 }}>
                             {currentPct.toFixed(2)}%
                           </span>
-                          <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 12, color: '#8a94a3' }}>
-                            {currentVal} / {capVal} Pt
+                          <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 12, color: isCapped ? '#ffa500' : '#8a94a3' }}>
+                            {currentVal} / {capVal} Pt {isCapped && <span style={{ fontSize: 9, color: '#ffa500', fontWeight: 'bold', marginLeft: 2 }}>[CAP]</span>}
                           </span>
                         </div>
                       </div>
@@ -640,8 +641,7 @@ export default function Unit() {
             const fa = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
 
             return (
-<>
-
+              <>
                 <div style={{ margin: '0 16px 4px', fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, letterSpacing: 1, color: fa, textTransform: 'uppercase' }}>Crafting</div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 5, margin: '0 16px 12px' }}>
                   {[
@@ -649,7 +649,9 @@ export default function Unit() {
                   ].map((item) => {
                     const currentVal = pt[item.key]?.val || 1
                     const currentPct = pt[item.key]?.pct || 0
-                    const capVal = caps[item.key] || 0
+                    const capVal = absoluteCaps[item.key] || 0
+                    const levelCap = caps[item.key] || 0
+                    const isCapped = currentVal >= levelCap
                     if (capVal === 0) return null
                     
                     return (
@@ -659,8 +661,8 @@ export default function Unit() {
                           <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 700, color: currentPct >= 50 ? '#16181c' : fa, background: currentPct >= 50 ? 'linear-gradient(135deg,#dde2ea,#9aa2ae)' : `${fp}24`, padding: '2px 7px', borderRadius: 5 }}>
                             {currentPct.toFixed(2)}%
                           </span>
-                          <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 12, color: '#8a94a3' }}>
-                            {currentVal} / {capVal} Pt
+                          <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 12, color: isCapped ? '#ffa500' : '#8a94a3' }}>
+                            {currentVal} / {capVal} Pt {isCapped && <span style={{ fontSize: 9, color: '#ffa500', fontWeight: 'bold', marginLeft: 2 }}>[CAP]</span>}
                           </span>
                         </div>
                       </div>
@@ -670,7 +672,6 @@ export default function Unit() {
               </>
             )
           })()}
-                  {/* ============ EQUIPMENT ============ */}
 
           {/* ============ EQUIPMENT ============ */}
           {(() => {
