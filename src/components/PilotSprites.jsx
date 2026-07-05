@@ -52,7 +52,7 @@ function getJobLane(jobId) {
   return 'specialist'
 }
 
-export function ArctronSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false, isBattle = false }) {
+export function ArctronSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false, isBattle = false, style: extraStyle }) {
   const lane = getJobLane(job)
   let img = isBattle ? arctronWarriorBattleImg : arctronWarriorImg
   if (lane === 'ranger') img = arctronRangerImg
@@ -70,13 +70,14 @@ export function ArctronSprite({ job, size = 60, width, height, upperBodyOnly = f
         height: height || size,
         objectFit: 'contain',
         display: 'block',
-        filter: `brightness(1.15) contrast(1.1) saturate(1.05) drop-shadow(0 0 10px ${glow}55)`
+        filter: `brightness(1.15) contrast(1.1) saturate(1.05) drop-shadow(0 0 10px ${glow}55)`,
+        ...extraStyle
       }}
     />
   )
 }
 
-export function BionexSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false, gender = 'male' }) {
+export function BionexSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false, gender = 'male', style: extraStyle }) {
   const guardianJobs = ['guardian', 'centurion', 'protector', 'imperator'];
   const marksmanJobs = ['marksman', 'revenant', 'deadeye', 'predator'];
   const engineerJobs = ['engineer', 'mechanist', 'techmaster', 'overseer'];
@@ -121,13 +122,14 @@ export function BionexSprite({ job, size = 60, width, height, upperBodyOnly = fa
         height: height || size,
         objectFit: 'contain',
         display: 'block',
-        filter: `brightness(1.15) contrast(1.1) saturate(1.05) drop-shadow(0 0 10px ${glow}55)`
+        filter: `brightness(1.15) contrast(1.1) saturate(1.05) drop-shadow(0 0 10px ${glow}55)`,
+        ...extraStyle
       }}
     />
   )
 }
 
-export function CelestraSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false, gender = 'female' }) {
+export function CelestraSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false, gender = 'female', style: extraStyle }) {
   const lane = getJobLane(job)
   let srcImg = gender === 'female' ? celestraPilotImg : celestraPilotMaleImg
   
@@ -155,7 +157,8 @@ export function CelestraSprite({ job, size = 60, width, height, upperBodyOnly = 
         height: height || size,
         objectFit: 'contain',
         display: 'block',
-        filter: `brightness(1.15) contrast(1.1) saturate(1.05) drop-shadow(0 0 10px ${glow}55)`
+        filter: `brightness(1.15) contrast(1.1) saturate(1.05) drop-shadow(0 0 10px ${glow}55)`,
+        ...extraStyle
       }}
     />
   )
@@ -197,9 +200,9 @@ export function EnemySprite({ size = 60, isBoss = false, isPitBoss = false }) {
   )
 }
 
-export function PilotSprite({ race, job, size = 60, width, height, upperBodyOnly = false, fill = false, isBattle = false, gender = 'male' }) {
-  if (race === 'arctron') return <ArctronSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} isBattle={isBattle} />
-  if (race === 'bionex') return <BionexSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} gender={gender} />
-  if (race === 'celestra') return <CelestraSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} gender={gender} />
+export function PilotSprite({ race, job, size = 60, width, height, upperBodyOnly = false, fill = false, isBattle = false, gender = 'male', style }) {
+  if (race === 'arctron') return <ArctronSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} isBattle={isBattle} style={style} />
+  if (race === 'bionex') return <BionexSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} gender={gender} style={style} />
+  if (race === 'celestra') return <CelestraSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} gender={gender} style={style} />
   return null
 }

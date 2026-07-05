@@ -232,30 +232,26 @@ export default function CharacterCreate() {
         </>
       )}
 
-      {/* 2. Class Select & Character Creation Pilot Sprite (Perfectly aligned with Step 1 center) */}
+      {/* 2. Class Select & Character Creation Pilot Sprite — mirrors Step 1 img exactly */}
       {(step === 2 || step === 3) && (
-        <div style={{ 
-          position: 'absolute', 
-          left: '58%', 
-          top: '12%', 
-          height: '42%', 
-          maxHeight: '380px',
-          transform: 'translateX(-50%)', 
-          zIndex: 2,
-          pointerEvents: 'none'
-        }}>
-          <div style={{ animation: 'heroFloat 6s ease-in-out infinite' }}>
-            <PilotSprite 
-              race={raceId} 
-              job={jobId} 
-              gender={gender}
-              size={380} 
-              height="100%"
-              width="auto"
-            />
-          </div>
-        </div>
+        <PilotSprite 
+          race={raceId} 
+          job={jobId} 
+          gender={gender}
+          height="52%"
+          width="auto"
+          style={{ 
+            position: 'absolute', 
+            left: '58%', 
+            bottom: '-10px', 
+            transform: 'translateX(-50%)', 
+            animation: 'heroFloat 6s ease-in-out infinite', 
+            zIndex: 2,
+            pointerEvents: 'none'
+          }}
+        />
       )}
+
 
       {/* 2. Left Rail Progress / Faction Tabs */}
       <div style={{ 
