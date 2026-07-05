@@ -406,15 +406,11 @@ export default function CharacterCreate() {
           height: 'calc(100% - 130px)',
           overflow: 'hidden'
         }}>
-          {/* Top Preview Box */}
+          {/* Top Preview Space (Completely transparent, no frame/border) */}
           <div style={{ 
             position: 'relative', 
             width: '100%', 
-            height: '220px', 
-            background: 'rgba(8,22,36,0.3)',
-            border: `1.5px solid ${finalTheme.primary}4D`,
-            boxShadow: `inset 0 0 20px ${finalTheme.primary}1A`,
-            clipPath: 'polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)',
+            height: '240px', 
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -425,15 +421,15 @@ export default function CharacterCreate() {
                 race={raceId} 
                 job={jobId} 
                 gender={gender}
-                size={180} 
-                height="170px"
+                size={220} 
+                height="210px"
                 width="auto"
               />
             </div>
-            <span style={{ position: 'absolute', bottom: 10, left: 14, fontFamily: "'Share Tech Mono', monospace", fontSize: 13, color: finalTheme.light, opacity: 0.8, letterSpacing: '1px' }}>
+            <span style={{ position: 'absolute', bottom: 5, left: 0, fontFamily: "'Share Tech Mono', monospace", fontSize: 13, color: finalTheme.light, opacity: 0.8, letterSpacing: '1px' }}>
               PREVIEW
             </span>
-            <span style={{ position: 'absolute', bottom: 10, right: 14, fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 900, color: '#ffffff', letterSpacing: '1px' }}>
+            <span style={{ position: 'absolute', bottom: 5, right: 0, fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 900, color: '#ffffff', letterSpacing: '1px' }}>
               {getClassBaseName(jobId)} ({activeJobs.find(j => j.id === jobId)?.name.toUpperCase()})
             </span>
           </div>
@@ -552,15 +548,11 @@ export default function CharacterCreate() {
           height: 'calc(100% - 130px)',
           overflow: 'hidden'
         }}>
-          {/* Top Preview Box */}
+          {/* Top Preview Space (Completely transparent, no frame/border) */}
           <div style={{ 
             position: 'relative', 
             width: '100%', 
             height: '240px', 
-            background: 'rgba(8,22,36,0.3)',
-            border: `1.5px solid ${finalTheme.primary}4D`,
-            boxShadow: `inset 0 0 20px ${finalTheme.primary}1A`,
-            clipPath: 'polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -572,15 +564,15 @@ export default function CharacterCreate() {
                 race={raceId} 
                 job={jobId} 
                 gender={gender}
-                size={200} 
-                height="190px"
+                size={220} 
+                height="210px"
                 width="auto"
               />
             </div>
-            <span style={{ position: 'absolute', bottom: 10, left: 14, fontFamily: "'Share Tech Mono', monospace", fontSize: 13, color: finalTheme.light, opacity: 0.8, letterSpacing: '1px' }}>
+            <span style={{ position: 'absolute', bottom: 5, left: 0, fontFamily: "'Share Tech Mono', monospace", fontSize: 13, color: finalTheme.light, opacity: 0.8, letterSpacing: '1px' }}>
               PREVIEW
             </span>
-            <span style={{ position: 'absolute', bottom: 10, right: 14, fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 900, color: '#ffffff', letterSpacing: '1px' }}>
+            <span style={{ position: 'absolute', bottom: 5, right: 0, fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 900, color: '#ffffff', letterSpacing: '1px' }}>
               {getClassBaseName(jobId)} ({activeJobs.find(j => j.id === jobId)?.name.toUpperCase()})
             </span>
           </div>
