@@ -18,11 +18,14 @@ import celestraPilotImg from '../assets/celestra_pilot_v2.png'
 import celestraPilotMaleImg from '../assets/celestra_pilot.png'
 import celestraWarriorImg from '../assets/celestra_warrior_female.png'
 import celestraWarriorMaleImg from '../assets/celestra_warrior_male.png'
-import celestraRangerImg from '../assets/celestra_ranger.png'
+import celestraRangerImg from '../assets/celestra_ranger_female.png'
+import celestraRangerMaleImg from '../assets/celestra_ranger_male.png'
 import celestraRangerPortraitImg from '../assets/celestra_ranger_portrait.png'
-import celestraSpecialistImg from '../assets/celestra_specialist.png'
+import celestraSpecialistImg from '../assets/celestra_specialist_female.png'
+import celestraSpecialistMaleImg from '../assets/celestra_specialist_male.png'
 import celestraSpecialistPortraitImg from '../assets/celestra_specialist_portrait.png'
-import celestraMysticImg from '../assets/celestra_mystic.png'
+import celestraMysticImg from '../assets/celestra_mystic_female.png'
+import celestraMysticMaleImg from '../assets/celestra_mystic_male.png'
 import celestraMysticPortraitImg from '../assets/celestra_mystic_portrait.png'
 
 function getJobLane(jobId) {
@@ -138,11 +141,11 @@ export function CelestraSprite({ job, size = 60, width, height, upperBodyOnly = 
     if (lane === 'warrior') {
       srcImg = gender === 'female' ? celestraWarriorImg : celestraWarriorMaleImg
     } else if (lane === 'ranger') {
-      srcImg = gender === 'female' ? (fill ? celestraRangerPortraitImg : celestraRangerImg) : celestraPilotMaleImg
+      srcImg = gender === 'female' ? (fill ? celestraRangerPortraitImg : celestraRangerImg) : celestraRangerMaleImg
     } else if (lane === 'specialist') {
-      srcImg = gender === 'female' ? (fill ? celestraSpecialistPortraitImg : celestraSpecialistImg) : celestraPilotMaleImg
+      srcImg = gender === 'female' ? (fill ? celestraSpecialistPortraitImg : celestraSpecialistImg) : celestraSpecialistMaleImg
     } else if (lane === 'mystic') {
-      srcImg = gender === 'female' ? (fill ? celestraMysticPortraitImg : celestraMysticImg) : celestraPilotMaleImg
+      srcImg = gender === 'female' ? (fill ? celestraMysticPortraitImg : celestraMysticImg) : celestraMysticMaleImg
     }
   }
   
