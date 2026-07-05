@@ -76,7 +76,7 @@ function WorldMapModal({ onClose }) {
       }}>
         {/* Background Image Map */}
         <img 
-          src="/ref/World-Map/world_map_ui_mockup.png" 
+          src="/assets/world_map_ui_mockup_1783259357697.png" 
           alt="World Map Grid" 
           style={{
             position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
@@ -824,7 +824,10 @@ const FOCUS_MODE_LABEL = { arctron: 'FIGHT', bionex: 'GATHER', celestra: 'CHANNE
             <div style={styles.pillRow}>
               <button
                 className={`focus-pill${(!timer.selectedZone || timer.selectedZone === 'world') ? ' selected' : ''}`}
-                onClick={() => setSelectedZone('world')}
+                onClick={() => {
+                  setSelectedZone('world')
+                  setShowMapModal(true)
+                }}
               >
                 WORLD
               </button>
