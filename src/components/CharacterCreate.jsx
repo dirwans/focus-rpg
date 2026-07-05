@@ -407,34 +407,38 @@ export default function CharacterCreate() {
           height: 'calc(100% - 130px)',
           overflow: 'hidden'
         }}>
-          {/* Framed Sprite Preview Box — matches reference design */}
+          {/* Framed Sprite Preview Box — matches Unit.jsx layout */}
           <div style={{ 
             position: 'relative',
             width: '100%', 
-            height: '220px',
+            height: '240px',
             flexShrink: 0,
             background: `radial-gradient(ellipse at 50% 100%, ${finalTheme.primary}33 0%, rgba(6,5,6,0.6) 70%)`,
             border: `1px solid ${finalTheme.primary}44`,
             clipPath: 'polygon(0 14px, 14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%)',
-            overflow: 'hidden',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'flex-end'
+            overflow: 'hidden'
           }}>
-            {/* Sprite inside preview box */}
-            <div style={{ animation: 'heroFloat 6s ease-in-out infinite' }}>
+            {/* Sprite inside preview box - Unit.jsx style */}
+            <div style={{ 
+              position: 'absolute', 
+              bottom: 6, 
+              left: '50%', 
+              transform: 'translateX(-50%)', 
+              animation: 'heroFloat 6s ease-in-out infinite', 
+              zIndex: 2 
+            }}>
               <PilotSprite
                 race={raceId}
                 job={jobId}
                 gender={gender}
-                height="210px"
+                height="230px"
                 width="auto"
               />
             </div>
             {/* PREVIEW label bottom-left */}
-            <span style={{ position: 'absolute', bottom: 8, left: 10, fontFamily: "'Share Tech Mono', monospace", fontSize: 12, color: finalTheme.light, opacity: 0.7, letterSpacing: '2px' }}>PREVIEW</span>
+            <span style={{ position: 'absolute', bottom: 8, left: 10, fontFamily: "'Share Tech Mono', monospace", fontSize: 12, color: finalTheme.light, opacity: 0.7, letterSpacing: '2px', zIndex: 3 }}>PREVIEW</span>
             {/* Class name bottom-right */}
-            <span style={{ position: 'absolute', bottom: 8, right: 10, fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 900, color: '#ffffff', letterSpacing: '1px' }}>
+            <span style={{ position: 'absolute', bottom: 8, right: 10, fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 900, color: '#ffffff', letterSpacing: '1px', zIndex: 3 }}>
               {getClassBaseName(jobId)}
             </span>
           </div>
@@ -564,32 +568,37 @@ export default function CharacterCreate() {
           height: 'calc(100% - 130px)',
           overflow: 'hidden'
         }}>
-          {/* Framed Sprite Preview Box — matches reference design */}
+          {/* Framed Sprite Preview Box — matches Unit.jsx layout */}
           <div style={{ 
             position: 'relative',
             width: '100%', 
-            height: '220px',
+            height: '240px',
             flexShrink: 0,
             marginTop: 10,
             background: `radial-gradient(ellipse at 50% 100%, ${finalTheme.primary}33 0%, rgba(6,5,6,0.6) 70%)`,
             border: `1px solid ${finalTheme.primary}44`,
             clipPath: 'polygon(0 14px, 14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%)',
-            overflow: 'hidden',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'flex-end'
+            overflow: 'hidden'
           }}>
-            <div style={{ animation: 'heroFloat 6s ease-in-out infinite' }}>
+            {/* Sprite inside preview box - Unit.jsx style */}
+            <div style={{ 
+              position: 'absolute', 
+              bottom: 6, 
+              left: '50%', 
+              transform: 'translateX(-50%)', 
+              animation: 'heroFloat 6s ease-in-out infinite', 
+              zIndex: 2 
+            }}>
               <PilotSprite
                 race={raceId}
                 job={jobId}
                 gender={gender}
-                height="210px"
+                height="230px"
                 width="auto"
               />
             </div>
-            <span style={{ position: 'absolute', bottom: 8, left: 10, fontFamily: "'Share Tech Mono', monospace", fontSize: 12, color: finalTheme.light, opacity: 0.7, letterSpacing: '2px' }}>PREVIEW</span>
-            <span style={{ position: 'absolute', bottom: 8, right: 10, fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 900, color: '#ffffff', letterSpacing: '1px' }}>
+            <span style={{ position: 'absolute', bottom: 8, left: 10, fontFamily: "'Share Tech Mono', monospace", fontSize: 12, color: finalTheme.light, opacity: 0.7, letterSpacing: '2px', zIndex: 3 }}>PREVIEW</span>
+            <span style={{ position: 'absolute', bottom: 8, right: 10, fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 900, color: '#ffffff', letterSpacing: '1px', zIndex: 3 }}>
               {getClassBaseName(jobId)}
             </span>
           </div>
