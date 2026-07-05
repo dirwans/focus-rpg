@@ -714,16 +714,25 @@ const FOCUS_MODE_LABEL = { arctron: 'FIGHT', bionex: 'GATHER', celestra: 'CHANNE
             {/* Enemy sprite (Enlarged and border-cropped) */}
             {battle.currentMob ? (
               <div className={`${isEnemyHit ? 'hit-flash' : ''} ${enemyAnim}`} style={styles.enemySprite}>
-                <div style={{ animation: 'spritePulse 1.5s infinite ease-in-out', display: 'flex', alignItems: 'center', justifyContent: 'center', width: 160, height: 160, flexShrink: 0 }}>
+                <div style={{
+                  animation: 'spritePulse 1.5s infinite ease-in-out',
+                  display: 'flex',
+                  alignItems: 'flex-end', // Stand on the grid floor
+                  justifyContent: 'center',
+                  width: (battle.isBoss || battle.isPitBoss) ? 185 : 160,
+                  height: (battle.isBoss || battle.isPitBoss) ? 185 : 160,
+                  flexShrink: 0
+                }}>
                   {battle.currentMob.image ? (
                     <TransparentSprite 
                       src={battle.currentMob.image} 
                       alt={battle.currentMob.name} 
-                      size={160} 
+                      size={(battle.isBoss || battle.isPitBoss) ? 185 : 160} 
+                      height={(battle.isBoss || battle.isPitBoss) ? 185 : 160}
                       glowColor="var(--neon-glow)" 
                     />
                   ) : (
-                    <EnemySprite isBoss={battle.isBoss} isPitBoss={battle.isPitBoss} size={160} />
+                    <EnemySprite isBoss={battle.isBoss} isPitBoss={battle.isPitBoss} size={(battle.isBoss || battle.isPitBoss) ? 185 : 160} />
                   )}
                 </div>
                 <div style={styles.spriteLabel}>{battle.currentMob.name?.toUpperCase()}</div>
