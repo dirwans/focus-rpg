@@ -545,16 +545,17 @@ app.get('/api/admin/save/:username', (req, res) => {
 app.get('/api/leaderboard', (_req, res) => {
   const board = users.map(u => {
     const sv = loadSave(u.username)
+    if (!sv || !sv.race || sv.race === 'unknown') return null
     return {
       username: u.username,
-      level: sv?.level ?? 1,
-      sector: sv?.highestSector ?? 1,
-      totalSessions: sv?.totalSessions ?? 0,
-      totalMinutes: sv?.totalMinutes ?? 0,
-      cp: sv?.cp ?? 1000,
-      race: sv?.race || 'unknown'
+      level: sv.level ?? 1,
+      sector: sv.highestSector ?? 1,
+      totalSessions: sv.totalSessions ?? 0,
+      totalMinutes: sv.totalMinutes ?? 0,
+      cp: sv.cp ?? 1000,
+      race: sv.race
     }
-  }).sort((a, b) => (b.cp || 0) - (a.cp || 0) || b.level - a.level).slice(0, 50)
+  }).filter(Boolean).sort((a, b) => (b.cp || 0) - (a.cp || 0) || b.level - a.level).slice(0, 50)
   res.json({ board })
 })
 

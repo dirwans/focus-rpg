@@ -5,6 +5,7 @@ import arctronRangerImg from '../assets/arctron_ranger.png'
 import arctronSpecialistImg from '../assets/arctron_specialist.png'
 
 import bionexPilotImg from '../assets/bionex_pilot_v3.png'
+import bionexPilotMaleImg from '../assets/bionex_pilot.png'
 import bionexPortraitImg from '../assets/bionex_pilot_portrait.png'
 import bionexWarriorImg from '../assets/bionex_warrior.png'
 import bionexRangerImg from '../assets/bionex_ranger.png'
@@ -14,6 +15,7 @@ import bionexRailgunEliteImg from '../assets/bionex_railgun_elite.png'
 import bionexWarEngineerImg from '../assets/bionex_war_engineer.png'
 
 import celestraPilotImg from '../assets/celestra_pilot_v2.png'
+import celestraPilotMaleImg from '../assets/celestra_pilot.png'
 import celestraWarriorImg from '../assets/celestra_warrior.png'
 import celestraRangerImg from '../assets/celestra_ranger.png'
 import celestraRangerPortraitImg from '../assets/celestra_ranger_portrait.png'
@@ -74,30 +76,37 @@ export function ArctronSprite({ job, size = 60, width, height, upperBodyOnly = f
   )
 }
 
-export function BionexSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false }) {
+export function BionexSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false, gender = 'male' }) {
   const guardianJobs = ['guardian', 'centurion', 'protector', 'imperator'];
   const marksmanJobs = ['marksman', 'revenant', 'deadeye', 'predator'];
   const engineerJobs = ['engineer', 'mechanist', 'techmaster', 'overseer'];
   const psionJobs = ['psion', 'esper', 'ascendant', 'transcendent'];
 
   let img = null;
-  if (guardianJobs.includes(job)) {
-    if (job === 'imperator' || job === 'protector') img = bionexTitanPilotImg;
-    else img = bionexWarriorImg;
-  } else if (marksmanJobs.includes(job)) {
-    if (job === 'predator' || job === 'deadeye') img = bionexRailgunEliteImg;
-    else img = bionexRangerImg;
-  } else if (engineerJobs.includes(job)) {
-    if (job === 'overseer' || job === 'techmaster') img = bionexWarEngineerImg;
-    else if (job === 'mechanist') img = bionexMechanistImg;
-    else img = bionexPilotImg;
-  } else if (psionJobs.includes(job)) {
+
+  if (gender === 'female') {
+    // Show female pilot sprite for female Bellato (Bionex)
     img = bionexPilotImg;
+  } else {
+    // Show male mechas and pilots
+    if (guardianJobs.includes(job)) {
+      if (job === 'imperator' || job === 'protector') img = bionexTitanPilotImg;
+      else img = bionexWarriorImg;
+    } else if (marksmanJobs.includes(job)) {
+      if (job === 'predator' || job === 'deadeye') img = bionexRailgunEliteImg;
+      else img = bionexRangerImg;
+    } else if (engineerJobs.includes(job)) {
+      if (job === 'overseer' || job === 'techmaster') img = bionexWarEngineerImg;
+      else if (job === 'mechanist') img = bionexMechanistImg;
+      else img = bionexPilotMaleImg;
+    } else if (psionJobs.includes(job)) {
+      img = bionexPilotMaleImg;
+    }
   }
 
   if (!img) {
     if (fill) img = bionexPortraitImg;
-    else img = bionexPilotImg;
+    else img = gender === 'female' ? bionexPilotImg : bionexPilotMaleImg;
   }
 
   const glow = '#39ff14'
@@ -118,19 +127,19 @@ export function BionexSprite({ job, size = 60, width, height, upperBodyOnly = fa
   )
 }
 
-export function CelestraSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false }) {
+export function CelestraSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false, gender = 'female' }) {
   const lane = getJobLane(job)
-  let srcImg = celestraPilotImg
+  let srcImg = gender === 'female' ? celestraPilotImg : celestraPilotMaleImg
   
   if (job) {
     if (lane === 'warrior') {
-      srcImg = celestraWarriorImg
+      srcImg = gender === 'female' ? celestraPilotImg : celestraWarriorImg
     } else if (lane === 'ranger') {
-      srcImg = fill ? celestraRangerPortraitImg : celestraRangerImg
+      srcImg = gender === 'female' ? (fill ? celestraRangerPortraitImg : celestraRangerImg) : celestraPilotMaleImg
     } else if (lane === 'specialist') {
-      srcImg = fill ? celestraSpecialistPortraitImg : celestraSpecialistImg
+      srcImg = gender === 'female' ? (fill ? celestraSpecialistPortraitImg : celestraSpecialistImg) : celestraPilotMaleImg
     } else if (lane === 'mystic') {
-      srcImg = fill ? celestraMysticPortraitImg : celestraMysticImg
+      srcImg = gender === 'female' ? (fill ? celestraMysticPortraitImg : celestraMysticImg) : celestraPilotMaleImg
     }
   }
   
@@ -188,9 +197,9 @@ export function EnemySprite({ size = 60, isBoss = false, isPitBoss = false }) {
   )
 }
 
-export function PilotSprite({ race, job, size = 60, width, height, upperBodyOnly = false, fill = false, isBattle = false }) {
+export function PilotSprite({ race, job, size = 60, width, height, upperBodyOnly = false, fill = false, isBattle = false, gender = 'male' }) {
   if (race === 'arctron') return <ArctronSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} isBattle={isBattle} />
-  if (race === 'bionex' || race === 'bionex') return <BionexSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} />
-  if (race === 'celestra') return <CelestraSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} />
+  if (race === 'bionex') return <BionexSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} gender={gender} />
+  if (race === 'celestra') return <CelestraSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} gender={gender} />
   return null
 }

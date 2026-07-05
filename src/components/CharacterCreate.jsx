@@ -129,7 +129,7 @@ export default function CharacterCreate() {
   const [focusedRace, setFocusedRace] = useState('arctron')
   const [raceId, setRaceId] = useState('arctron')
   const [jobId, setJobId] = useState('destroyer')
-  const [appearance, setAppearance] = useState('A')
+  const [gender, setGender] = useState('male')
   const [charName, setCharName] = useState(user?.username || '')
 
   const currentTheme = FACTION_THEMES[focusedRace] || FACTION_THEMES.arctron
@@ -154,6 +154,7 @@ export default function CharacterCreate() {
         username: user?.username || cleanedName.toLowerCase(),
         race: raceId,
         job: jobId,
+        gender: gender,
         level: 1,
         exp: 0,
         resources: { anium: 200, credits: 10, potions: 5, nxc: 0 },
@@ -182,6 +183,11 @@ export default function CharacterCreate() {
   // Swap to first job of race
   const selectRaceAndNext = (raceKey) => {
     setRaceId(raceKey)
+    if (raceKey === 'celestra') {
+      setGender('female')
+    } else {
+      setGender('male')
+    }
     const availableJobs = jobs[raceKey]?.tier1 || []
     if (availableJobs.length > 0) {
       setJobId(availableJobs[0].id)
@@ -231,10 +237,10 @@ export default function CharacterCreate() {
         <>
           <div style={{ 
             position: 'absolute', 
-            left: '58%', 
-            bottom: step === 3 ? '-40px' : '-10px', 
-            height: step === 3 ? '52%' : '62%', 
-            maxHeight: step === 3 ? '440px' : '530px',
+            left: '50%', 
+            top: '12%', 
+            height: '42%', 
+            maxHeight: '380px',
             transform: 'translateX(-50%)', 
             animation: 'heroFloat 6s ease-in-out infinite', 
             zIndex: 2,
@@ -243,13 +249,14 @@ export default function CharacterCreate() {
             <PilotSprite 
               race={raceId} 
               job={jobId} 
-              size={530} 
+              gender={gender}
+              size={380} 
               height="100%"
               width="auto"
             />
           </div>
           {/* Shadow vignette overlay */}
-          <div style={{ position: 'absolute', inset: 0, background: `radial-gradient(circle at 64% 32%, transparent 34%, rgba(6,5,6,0.85) 100%)`, pointerEvents: 'none', zIndex: 3 }} />
+          <div style={{ position: 'absolute', inset: 0, background: `radial-gradient(circle at 50% 28%, transparent 34%, rgba(6,5,6,0.85) 100%)`, pointerEvents: 'none', zIndex: 3 }} />
         </>
       )}
 
@@ -431,6 +438,40 @@ export default function CharacterCreate() {
           height: 'calc(100% - 150px)',
           overflowY: 'auto'
         }} className="no-scrollbar">
+          
+          {/* Gender Selector (Celestra & Bionex Only) */}
+          {(raceId === 'celestra' || raceId === 'bionex') && (
+            <div style={{ display: 'flex', gap: 8, marginBottom: 4 }}>
+              {['male', 'female'].map((g) => {
+                const isSel = gender === g
+                return (
+                  <div
+                    key={g}
+                    onClick={() => setGender(g)}
+                    style={{
+                      flex: 1,
+                      padding: '8px 0',
+                      textAlign: 'center',
+                      background: isSel ? `${finalTheme.primary}22` : 'rgba(8,22,36,0.3)',
+                      border: isSel ? `1.5px solid ${finalTheme.primary}` : `1px solid ${finalTheme.primary}22`,
+                      borderRadius: 6,
+                      color: isSel ? '#fff' : '#a9c8ff',
+                      fontFamily: "'Orbitron', sans-serif",
+                      fontSize: 13,
+                      fontWeight: 800,
+                      cursor: 'pointer',
+                      transition: 'all 0.2s',
+                      textTransform: 'uppercase',
+                      boxShadow: isSel ? `0 0 10px ${finalTheme.primary}33` : 'none'
+                    }}
+                  >
+                    {g === 'male' ? 'MALE ♂' : 'FEMALE ♀'}
+                  </div>
+                )
+              })}
+            </div>
+          )}
+
           {activeJobs.map((jb) => {
             const isSelected = jobId === jb.id
             const monogram = getClassMonogram(jb.id)
@@ -559,27 +600,48 @@ export default function CharacterCreate() {
           padding: '18px 20px 24px 82px', 
           background: 'linear-gradient(180deg, transparent, rgba(6,5,6,0.9) 55%, rgba(6,5,6,0.98) 100%)' 
         }}>
-          <div 
-            onClick={() => setStep(3)}
-            style={{ 
-              position: 'relative', 
-              padding: 15, 
-              textAlign: 'center', 
-              background: finalTheme.secondary, 
-              border: `1px solid ${finalTheme.primary}66`, 
-              overflow: 'hidden', 
-              fontFamily: "'Orbitron', sans-serif", 
-              fontSize: 15, 
-              fontWeight: 900, 
-              letterSpacing: '3px', 
-              color: finalTheme.onSecondary, 
-              clipPath: 'polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px)',
-              cursor: 'pointer',
-              boxShadow: `0 0 15px ${finalTheme.primary}40`
-            }}
-          >
-            <div style={{ position: 'absolute', top: 0, bottom: 0, left: '-70%', width: '50%', background: 'linear-gradient(100deg, transparent, rgba(255,255,255,0.65), transparent)', animation: 'energySweep 3.2s linear infinite' }} />
-            CONTINUE
+          <div style={{ display: 'flex', gap: 12 }}>
+            <div 
+              onClick={() => { setStep(1); setFocusedRace(raceId); }}
+              style={{ 
+                padding: 15, 
+                textAlign: 'center', 
+                background: 'rgba(8,22,36,0.4)', 
+                border: `1px solid ${finalTheme.primary}33`, 
+                fontFamily: "'Orbitron', sans-serif", 
+                fontSize: 15, 
+                fontWeight: 800, 
+                color: finalTheme.light, 
+                clipPath: 'polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)',
+                cursor: 'pointer',
+                flex: 1
+              }}
+            >
+              ❮ BACK
+            </div>
+            <div 
+              onClick={() => setStep(3)}
+              style={{ 
+                position: 'relative', 
+                padding: 15, 
+                textAlign: 'center', 
+                background: finalTheme.secondary, 
+                border: `1px solid ${finalTheme.primary}66`, 
+                overflow: 'hidden', 
+                fontFamily: "'Orbitron', sans-serif", 
+                fontSize: 15, 
+                fontWeight: 900, 
+                letterSpacing: '3px', 
+                color: finalTheme.onSecondary, 
+                clipPath: 'polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px)',
+                cursor: 'pointer',
+                boxShadow: `0 0 15px ${finalTheme.primary}40`,
+                flex: 2
+              }}
+            >
+              <div style={{ position: 'absolute', top: 0, bottom: 0, left: '-70%', width: '50%', background: 'linear-gradient(100deg, transparent, rgba(255,255,255,0.65), transparent)', animation: 'energySweep 3.2s linear infinite' }} />
+              CONTINUE
+            </div>
           </div>
         </div>
       )}
@@ -597,6 +659,43 @@ export default function CharacterCreate() {
           clipPath: 'polygon(0 14px, 20px 0, 100% 0, 100% 100%, 0 100%)' 
         }}>
           
+          {/* Gender Selector (Celestra & Bionex Only) */}
+          {(raceId === 'celestra' || raceId === 'bionex') && (
+            <div style={{ marginBottom: 14 }}>
+              <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, color: '#ffffff', letterSpacing: 1, marginBottom: 5 }}>
+                GENDER
+              </div>
+              <div style={{ display: 'flex', gap: 6 }}>
+                {['male', 'female'].map((g) => {
+                  const isSel = gender === g
+                  return (
+                    <div
+                      key={g}
+                      onClick={() => setGender(g)}
+                      style={{
+                        flex: 1,
+                        padding: '8px 0',
+                        textAlign: 'center',
+                        background: isSel ? `${finalTheme.primary}22` : 'rgba(8,22,36,0.4)',
+                        border: isSel ? `1.5px solid ${finalTheme.primary}` : `1px solid ${finalTheme.primary}22`,
+                        borderRadius: 6,
+                        color: isSel ? '#fff' : '#a9c8ff',
+                        fontFamily: "'Orbitron', sans-serif",
+                        fontSize: 13,
+                        fontWeight: 800,
+                        cursor: 'pointer',
+                        transition: 'all 0.2s',
+                        textTransform: 'uppercase'
+                      }}
+                    >
+                      {g === 'male' ? 'MALE ♂' : 'FEMALE ♀'}
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          )}
+
           {/* Callsign / Pilot Name Input */}
           <div style={{ marginBottom: 20 }}>
             <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, color: '#ffffff', letterSpacing: 1, marginBottom: 5 }}>
@@ -624,33 +723,53 @@ export default function CharacterCreate() {
             />
           </div>
 
-          {/* Create Confirmation CTA */}
-          <button 
-            onClick={handleCreate}
-            disabled={charName.trim().length < 3}
-            style={{ 
-              position: 'relative', 
-              width: '100%',
-              padding: 16, 
-              border: `1px solid ${charName.trim().length >= 3 ? finalTheme.primary + '66' : 'rgba(255,255,255,0.1)'}`, 
-              background: charName.trim().length >= 3 ? finalTheme.secondary : 'rgba(255,255,255,0.06)', 
-              color: charName.trim().length >= 3 ? finalTheme.onSecondary : 'rgba(255,255,255,0.25)', 
-              overflow: 'hidden', 
-              fontFamily: "'Orbitron', sans-serif", 
-              fontSize: 15, 
-              fontWeight: 900, 
-              letterSpacing: '3px', 
-              clipPath: 'polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px)',
-              cursor: charName.trim().length >= 3 ? 'pointer' : 'not-allowed',
-              boxShadow: charName.trim().length >= 3 ? `0 0 15px ${finalTheme.primary}40` : 'none',
-              transition: 'all 0.2s ease'
-            }}
-          >
-            {charName.trim().length >= 3 && (
-              <div style={{ position: 'absolute', top: 0, bottom: 0, left: '-70%', width: '50%', background: 'linear-gradient(100deg, transparent, rgba(255,255,255,0.65), transparent)', animation: 'energySweep 3.2s linear infinite' }} />
-            )}
-            {finalTheme.confirmText}
-          </button>
+          {/* Buttons Row: Back & Confirmation */}
+          <div style={{ display: 'flex', gap: 12 }}>
+            <div 
+              onClick={() => setStep(2)}
+              style={{ 
+                padding: 15, 
+                textAlign: 'center', 
+                background: 'rgba(8,22,36,0.4)', 
+                border: `1px solid ${finalTheme.primary}33`, 
+                fontFamily: "'Orbitron', sans-serif", 
+                fontSize: 15, 
+                fontWeight: 800, 
+                color: finalTheme.light, 
+                clipPath: 'polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)',
+                cursor: 'pointer',
+                flex: 1
+              }}
+            >
+              ❮ BACK
+            </div>
+            <button 
+              onClick={handleCreate}
+              disabled={charName.trim().length < 3}
+              style={{ 
+                position: 'relative', 
+                flex: 2,
+                padding: 16, 
+                border: `1px solid ${charName.trim().length >= 3 ? finalTheme.primary + '66' : 'rgba(255,255,255,0.1)'}`, 
+                background: charName.trim().length >= 3 ? finalTheme.secondary : 'rgba(255,255,255,0.06)', 
+                color: charName.trim().length >= 3 ? finalTheme.onSecondary : 'rgba(255,255,255,0.25)', 
+                overflow: 'hidden', 
+                fontFamily: "'Orbitron', sans-serif", 
+                fontSize: 15, 
+                fontWeight: 900, 
+                letterSpacing: '3px', 
+                clipPath: 'polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px)',
+                cursor: charName.trim().length >= 3 ? 'pointer' : 'not-allowed',
+                boxShadow: charName.trim().length >= 3 ? `0 0 15px ${finalTheme.primary}40` : 'none',
+                transition: 'all 0.2s ease'
+              }}
+            >
+              {charName.trim().length >= 3 && (
+                <div style={{ position: 'absolute', top: 0, bottom: 0, left: '-70%', width: '50%', background: 'linear-gradient(100deg, transparent, rgba(255,255,255,0.65), transparent)', animation: 'energySweep 3.2s linear infinite' }} />
+              )}
+              {finalTheme.confirmText}
+            </button>
+          </div>
         </div>
       )}
 
