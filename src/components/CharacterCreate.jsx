@@ -232,24 +232,25 @@ export default function CharacterCreate() {
         </>
       )}
 
-      {/* 2. Class Select & Character Creation Pilot Sprite — mirrors Step 1 img exactly */}
+      {/* 2. Class Select & Character Creation Pilot Sprite */}
       {(step === 2 || step === 3) && (
-        <PilotSprite 
-          race={raceId} 
-          job={jobId} 
-          gender={gender}
-          height="52%"
-          width="auto"
-          style={{ 
-            position: 'absolute', 
-            left: '58%', 
-            bottom: '-10px', 
-            transform: 'translateX(-50%)', 
-            animation: 'heroFloat 6s ease-in-out infinite', 
-            zIndex: 2,
-            pointerEvents: 'none'
-          }}
-        />
+        <div style={{
+          position: 'absolute',
+          left: '58%',
+          bottom: '-10px',
+          transform: 'translateX(-50%)',
+          zIndex: 2,
+          pointerEvents: 'none'
+        }}>
+          <PilotSprite
+            race={raceId}
+            job={jobId}
+            gender={gender}
+            height="350px"
+            width="auto"
+            style={{ animation: 'heroFloat 6s ease-in-out infinite' }}
+          />
+        </div>
       )}
 
 
