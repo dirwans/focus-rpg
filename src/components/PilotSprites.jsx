@@ -7,8 +7,12 @@ import arctronSpecialistImg from '../assets/arctron_specialist.png'
 import bionexPilotImg from '../assets/bionex_pilot_v3.png'
 import bionexPilotMaleImg from '../assets/bionex_pilot.png'
 import bionexPortraitImg from '../assets/bionex_pilot_portrait.png'
-import bionexWarriorImg from '../assets/bionex_warrior.png'
-import bionexRangerImg from '../assets/bionex_ranger.png'
+import bionexWarriorFemaleImg from '../assets/bionex_warrior_female.png'
+import bionexWarriorMaleImg from '../assets/bionex_warrior_male.png'
+import bionexRangerFemaleImg from '../assets/bionex_ranger_female.png'
+import bionexRangerMaleImg from '../assets/bionex_ranger_male.png'
+import bionexEngineerFemaleImg from '../assets/bionex_engineer_female.png'
+import bionexEngineerMaleImg from '../assets/bionex_engineer_male.png'
 import bionexTitanPilotImg from '../assets/bionex_titan_pilot.png'
 import bionexMechanistImg from '../assets/bionex_mechanist.png'
 import bionexRailgunEliteImg from '../assets/bionex_railgun_elite.png'
@@ -88,25 +92,20 @@ export function BionexSprite({ job, size = 60, width, height, upperBodyOnly = fa
   const psionJobs = ['psion', 'esper', 'ascendant', 'transcendent'];
 
   let img = null;
+  const isFemale = gender === 'female';
 
-  if (gender === 'female') {
-    // Show female pilot sprite for female Bellato (Bionex)
-    img = bionexPilotImg;
-  } else {
-    // Show male mechas and pilots
-    if (guardianJobs.includes(job)) {
-      if (job === 'imperator' || job === 'protector') img = bionexTitanPilotImg;
-      else img = bionexWarriorImg;
-    } else if (marksmanJobs.includes(job)) {
-      if (job === 'predator' || job === 'deadeye') img = bionexRailgunEliteImg;
-      else img = bionexRangerImg;
-    } else if (engineerJobs.includes(job)) {
-      if (job === 'overseer' || job === 'techmaster') img = bionexWarEngineerImg;
-      else if (job === 'mechanist') img = bionexMechanistImg;
-      else img = bionexPilotMaleImg;
-    } else if (psionJobs.includes(job)) {
-      img = bionexPilotMaleImg;
-    }
+  if (guardianJobs.includes(job)) {
+    if (job === 'imperator' || job === 'protector') img = bionexTitanPilotImg;
+    else img = isFemale ? bionexWarriorFemaleImg : bionexWarriorMaleImg;
+  } else if (marksmanJobs.includes(job)) {
+    if (job === 'predator' || job === 'deadeye') img = bionexRailgunEliteImg;
+    else img = isFemale ? bionexRangerFemaleImg : bionexRangerMaleImg;
+  } else if (engineerJobs.includes(job)) {
+    if (job === 'overseer' || job === 'techmaster') img = bionexWarEngineerImg;
+    else if (job === 'mechanist') img = bionexMechanistImg;
+    else img = isFemale ? bionexEngineerFemaleImg : bionexEngineerMaleImg;
+  } else if (psionJobs.includes(job)) {
+    img = isFemale ? bionexPilotImg : bionexPilotMaleImg;
   }
 
   if (!img) {
