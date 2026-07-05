@@ -240,12 +240,8 @@ export default function CharacterCreate() {
           top: '12%', 
           height: '42%', 
           maxHeight: '380px',
-          transform: 'translateX(-50%)', 
           zIndex: 2,
-          pointerEvents: 'none',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center'
+          pointerEvents: 'none'
         }}>
           <div style={{ animation: 'heroFloat 6s ease-in-out infinite' }}>
             <PilotSprite 
