@@ -334,8 +334,8 @@ export default function Unit() {
                         <div style={{
                           width: isActive ? 38 : 32, height: isActive ? 38 : 32, marginTop: isActive ? -3 : 0, borderRadius: isActive ? 9 : 8, transform: 'rotate(45deg)',
                           background: isActive ? 'linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%)' : isPast ? pastBg : 'rgba(8,22,36,0.6)',
-                          border: isLocked ? `1.5px dashed ${fp}4d` : `1.5px solid ${fp}`,
-                          boxShadow: isActive ? `0 0 15px 4px rgba(255, 255, 255, 0.65), 0 0 8px 2px ${fp}` : 'none',
+                          border: isActive ? '1px solid #ffffff' : isLocked ? `1.5px dashed ${fp}4d` : `1.5px solid ${fp}`,
+                          boxShadow: isActive ? '0 0 16px 3px rgba(255, 255, 255, 0.6)' : 'none',
                           display: 'flex', alignItems: 'center', justifyContent: 'center'
                         }}>
                           <span style={{ transform: 'rotate(-45deg)', fontFamily: "'Orbitron', sans-serif", fontWeight: 800, fontSize: isActive ? 12 : 11, color: isActive ? '#16181c' : isLocked ? `${fa}4d` : fa }}>
