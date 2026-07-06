@@ -10,12 +10,12 @@ import { PilotSprite } from './PilotSprites'
 // Import faction hero art assets
 import arctronWarrior from '../assets/arctron_warrior.png'
 import bionexWarriorMale from '../assets/bionex_warrior_male.png'
-import celestraWarriorMale from '../assets/celestra_warrior_male.png'
+import celestraLogo from '../assets/celestra_logo.png'
 
 const HERO_IMAGES = {
   arctron: arctronWarrior,
   bionex: bionexWarriorMale,
-  celestra: celestraWarriorMale
+  celestra: celestraLogo
 }
 
 const FACTION_THEMES = {
