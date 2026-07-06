@@ -151,7 +151,7 @@ export default function SettingsModal({ onClose }) {
         )}
 
         {tab === 'system' && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 16, overflowY: 'auto', maxHeight: '50vh' }} className="no-scrollbar">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             
             <div style={styles.itemCard}>
               <div style={styles.itemTitle}>🗑️ Delete Character</div>
