@@ -250,7 +250,7 @@
           "def": 280,
           "expReward": 26,
           "aniumReward": 16,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/archer-sette.png",
+          "image": "/ref/World-Map/Pyraxis Crater/infernox.png",
           "critical": 13
         },
         {
@@ -261,7 +261,7 @@
           "def": 330,
           "expReward": 34,
           "aniumReward": 22,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/monster_69.png",
+          "image": "/ref/World-Map/Pyraxis Crater/flame_fiend.png",
           "critical": 14
         },
         {
@@ -272,7 +272,7 @@
           "def": 380,
           "expReward": 42,
           "aniumReward": 28,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/monster_67.png",
+          "image": "/ref/World-Map/Pyraxis Crater/lava_beetle.png",
           "critical": 15
         },
         {
@@ -283,7 +283,7 @@
           "def": 450,
           "expReward": 44,
           "aniumReward": 30,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/monster_67.png",
+          "image": "/ref/World-Map/Pyraxis Crater/magma_hound.png",
           "critical": 16
         }
       ],
@@ -297,7 +297,7 @@
         "regen": 700,
         "expReward": 1500,
         "aniumReward": 1000,
-        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/monster_68.png"
+        "image": "/ref/World-Map/Pyraxis Crater/pyraxis_overlord.png"
       },
       "pitBoss": {
         "name": "PYRAXIS ELITE",
@@ -309,7 +309,7 @@
         "regen": 3500,
         "expReward": 7500,
         "aniumReward": 5000,
-        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/monster_68.png"
+        "image": "/ref/World-Map/Pyraxis Crater/pyraxis_overlord.png"
       }
     },
     {
