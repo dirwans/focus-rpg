@@ -8,13 +8,13 @@ import { t } from '../lib/translate'
 import { PilotSprite } from './PilotSprites'
 
 // Import faction hero art assets
-import bionexWarriorMale from '../assets/bionex_warrior_male.png'
 import celestraLogo from '../assets/celestra_logo.png'
 import arctronLogo from '../assets/arctron_logo.png'
+import bionexLogo from '../assets/bionex_logo.png'
 
 const HERO_IMAGES = {
   arctron: arctronLogo,
-  bionex: bionexWarriorMale,
+  bionex: bionexLogo,
   celestra: celestraLogo
 }
 
@@ -23,7 +23,8 @@ const HERO_IMAGES = {
 // (outermost first so later ones layer on top).
 const LOGO_RACE_CONFIG = {
   celestra: { rings: ['r3', 'r2', 'r1'], floatAnim: 'celestraLogoFloat 6s ease-in-out infinite' },
-  arctron: { rings: ['r2', 'r1'], floatAnim: 'arctronLogoFloat 6s ease-in-out infinite' }
+  arctron: { rings: ['r2', 'r1'], floatAnim: 'arctronLogoFloat 6s ease-in-out infinite' },
+  bionex: { rings: ['r2', 'r1'], floatAnim: 'bionexLogoFloat 6s ease-in-out infinite' }
 }
 
 const FACTION_THEMES = {

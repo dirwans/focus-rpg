@@ -1569,6 +1569,44 @@ body {
   100% { filter: brightness(0) invert(1) sepia(1) saturate(6) hue-rotate(340deg) brightness(.7) drop-shadow(0 0 5px rgba(255,30,0,.8)) drop-shadow(0 0 14px rgba(200,0,0,.55)) drop-shadow(0 0 30px rgba(150,0,0,.3)); }
 }
 
+/* ------------------------------------------------ */
+/* BIONEX LOGO — vivid yellow glow + rings           */
+/* (reference handoff used a muted amber/blueprint    */
+/* glow; boosted alpha/blur here for a punchier vivid */
+/* yellow per request, same black-art recolor trick) */
+/* ------------------------------------------------ */
+.bionex-logo-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@keyframes bionexLogoFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+.bionex-logo-ring {
+  position: absolute;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: bionexRingPulse 5s ease-in-out infinite;
+}
+.bionex-logo-ring.r1 { width: 90%; height: 90%; border: 1.5px solid rgba(255, 221, 0, 0.45); }
+.bionex-logo-ring.r2 { width: 106%; height: 106%; border: 1px solid rgba(255, 200, 0, 0.28); animation-delay: 2.5s; }
+@keyframes bionexRingPulse {
+  0%, 100% { opacity: 0.25; transform: translate(-50%, -50%) scale(1); }
+  50%      { opacity: 0.65; transform: translate(-50%, -50%) scale(1.08); }
+}
+.bionex-logo-img {
+  animation: bionexGlowPulse 5s ease-in-out infinite;
+}
+@keyframes bionexGlowPulse {
+  0%, 100% { filter: brightness(0) invert(1) sepia(1) saturate(8) hue-rotate(5deg) brightness(1) drop-shadow(0 0 6px rgba(255,221,0,.85)) drop-shadow(0 0 16px rgba(255,204,0,.6)) drop-shadow(0 0 34px rgba(255,187,0,.35)); }
+  50%      { filter: brightness(0) invert(1) sepia(1) saturate(8) hue-rotate(5deg) brightness(1.25) drop-shadow(0 0 12px rgba(255,238,60,1)) drop-shadow(0 0 28px rgba(255,221,20,.85)) drop-shadow(0 0 55px rgba(255,200,0,.5)); }
+}
+
 /* Hide scrollbars for visual class tree mapping */
 .no-scrollbar::-webkit-scrollbar {
   display: none !important;
