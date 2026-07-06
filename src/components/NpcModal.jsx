@@ -980,6 +980,8 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
               </div>
               {/* ───────── WEAPON SMITH TAB ───────── */}
         {(() => {
+          const equippedWeapon = player.equipment?.weapon
+          const ownedIgnorance = player.inventory.filter(it => it.id === 'talic_ignorance').length
           const hasWeapon = !!equippedWeapon
           const weaponName = hasWeapon ? equippedWeapon.name : 'NO WEAPON EQUIPPED'
           const weaponGrade = hasWeapon ? getWeaponRarityDisplayName(equippedWeapon.rarityGrade || equippedWeapon.rarity).toUpperCase() : 'NONE'

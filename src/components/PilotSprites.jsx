@@ -1,4 +1,5 @@
 import TransparentSprite from './TransparentSprite'
+import jobsData from '../data/jobs.json'
 import arctronWarriorImg from '../assets/arctron_warrior.png'
 import arctronWarriorBattleImg from '../assets/arctron_warrior_battle.png'
 import arctronRangerImg from '../assets/arctron_ranger.png'
