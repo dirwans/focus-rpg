@@ -211,22 +211,48 @@ export default function CharacterCreate() {
       {/* 1. Hero Full Bleed Art (Race Select Only) */}
       {step === 1 && (
         <>
-          <img 
-            src={HERO_IMAGES[focusedRace]} 
-            alt={focusedRace} 
-            style={{ 
-              position: 'absolute', 
-              left: '58%', 
-              bottom: '-10px', 
-              height: '62%', 
-              width: 'auto',
-              maxHeight: '530px',
-              transform: 'translateX(-50%)', 
-              animation: 'heroFloat 6s ease-in-out infinite', 
-              filter: `drop-shadow(0 30px 40px rgba(0,0,0,0.8)) drop-shadow(0 0 40px ${currentTheme.primary}4D)`,
-              zIndex: 2
-            }} 
-          />
+          {focusedRace === 'celestra' ? (
+            <div
+              className="celestra-logo-wrap"
+              style={{
+                left: '58%',
+                bottom: '18%',
+                height: '46%',
+                aspectRatio: '1 / 1',
+                maxHeight: '380px',
+                transform: 'translateX(-50%)',
+                animation: 'heroFloat 6s ease-in-out infinite',
+                zIndex: 2
+              }}
+            >
+              <div className="celestra-logo-ring r3" />
+              <div className="celestra-logo-ring r2" />
+              <div className="celestra-logo-ring r1" />
+              <img
+                src={HERO_IMAGES.celestra}
+                alt="celestra"
+                className="celestra-logo-img"
+                style={{ width: '62%', height: '62%', objectFit: 'contain' }}
+              />
+            </div>
+          ) : (
+            <img
+              src={HERO_IMAGES[focusedRace]}
+              alt={focusedRace}
+              style={{
+                position: 'absolute',
+                left: '58%',
+                bottom: '-10px',
+                height: '62%',
+                width: 'auto',
+                maxHeight: '530px',
+                transform: 'translateX(-50%)',
+                animation: 'heroFloat 6s ease-in-out infinite',
+                filter: `drop-shadow(0 30px 40px rgba(0,0,0,0.8)) drop-shadow(0 0 40px ${currentTheme.primary}4D)`,
+                zIndex: 2
+              }}
+            />
+          )}
           {/* Shadow vignette overlay */}
           <div style={{ position: 'absolute', inset: 0, background: `radial-gradient(circle at 64% 32%, transparent 34%, rgba(6,5,6,0.85) 100%)`, pointerEvents: 'none', zIndex: 3 }} />
         </>

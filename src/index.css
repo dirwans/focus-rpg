@@ -1492,6 +1492,40 @@ body {
   100% { opacity: 0.9; transform: scale(1); }
 }
 
+/* ------------------------------------------------ */
+/* CELESTRA LOGO — color-cycling glow + pulsing rings*/
+/* (race-select hero art, from the reference sigil)  */
+/* ------------------------------------------------ */
+.celestra-logo-wrap {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.celestra-logo-ring {
+  position: absolute;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: celestraRingPulse 3.5s ease-in-out infinite;
+}
+.celestra-logo-ring.r1 { width: 78%; height: 78%; border: 1.5px solid rgba(0, 229, 255, 0.4); }
+.celestra-logo-ring.r2 { width: 94%; height: 94%; border: 1px solid rgba(130, 50, 255, 0.25); animation-delay: 1.75s; }
+.celestra-logo-ring.r3 { width: 112%; height: 112%; border: 1px dashed rgba(0, 229, 255, 0.1); animation-duration: 5s; animation-delay: 0.8s; }
+@keyframes celestraRingPulse {
+  0%, 100% { opacity: 0.15; transform: translate(-50%, -50%) scale(1); }
+  50%      { opacity: 0.55; transform: translate(-50%, -50%) scale(1.15); }
+}
+.celestra-logo-img {
+  animation: celestraGlowPulse 4s ease-in-out infinite;
+}
+@keyframes celestraGlowPulse {
+  0%, 100% { filter: drop-shadow(0 0 8px #00e5ffcc) drop-shadow(0 0 20px #00e5ff77) drop-shadow(0 0 40px #0055ff44); }
+  33%      { filter: drop-shadow(0 0 18px #00e5ffff) drop-shadow(0 0 36px #00e5ffaa) drop-shadow(0 0 70px #0088ff88); }
+  66%      { filter: drop-shadow(0 0 12px #9933ffbb) drop-shadow(0 0 28px #9933ff66) drop-shadow(0 0 55px #00e5ff55); }
+}
+
 /* Hide scrollbars for visual class tree mapping */
 .no-scrollbar::-webkit-scrollbar {
   display: none !important;
