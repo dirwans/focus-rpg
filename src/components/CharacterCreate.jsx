@@ -33,9 +33,9 @@ const FACTION_THEMES = {
     crest: 'AR',
     tagline: 'STEEL BODY. UNBREAKABLE WILL.',
     traits: [
-      { name: 'ATTACK', val: 78 },
-      { name: 'DEFENSE', val: 96 },
-      { name: 'FP', val: 58 }
+      { name: 'ATTACK', val: 5 },
+      { name: 'DEFENSE', val: 4 },
+      { name: 'HEALTH', val: 4 }
     ],
     confirmText: 'ENTER THE WAR'
   },
@@ -53,9 +53,9 @@ const FACTION_THEMES = {
     crest: 'BX',
     tagline: 'ENGINEERED FOR VICTORY.',
     traits: [
-      { name: 'ATTACK', val: 94 },
-      { name: 'DEFENSE', val: 52 },
-      { name: 'FP', val: 76 }
+      { name: 'ATTACK', val: 3 },
+      { name: 'DEFENSE', val: 4 },
+      { name: 'HEALTH', val: 5 }
     ],
     confirmText: 'LAUNCH SEQUENCE'
   },
@@ -73,9 +73,9 @@ const FACTION_THEMES = {
     crest: 'CL',
     tagline: 'MAGIC BENDS TO THOSE WHO DARE.',
     traits: [
-      { name: 'ATTACK', val: 96 },
-      { name: 'DEFENSE', val: 36 },
-      { name: 'FP', val: 58 }
+      { name: 'ATTACK', val: 4 },
+      { name: 'DEFENSE', val: 2 },
+      { name: 'HEALTH', val: 2 }
     ],
     confirmText: 'AWAKEN THE PATH'
   }
@@ -686,15 +686,29 @@ export default function CharacterCreate() {
           background: 'linear-gradient(180deg, transparent, rgba(6,5,6,0.82) 26%, rgba(6,5,6,0.96) 100%)', 
           clipPath: 'polygon(0 14px, 20px 0, 100% 0, 100% 100%, 0 100%)' 
         }}>
-          {/* Qualitative Traits */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 16 }}>
             {currentTheme.traits.map((trait) => (
               <div key={trait.name} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                 <span style={{ width: 84, fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 800, letterSpacing: 0.5, color: '#ffffff' }}>
                   {trait.name}
                 </span>
-                <div style={{ flex: 1, height: 6, borderRadius: 3, background: `${currentTheme.primary}26`, position: 'relative', top: 3 }}>
-                  <div style={{ width: `${trait.val}%`, height: '100%', borderRadius: 3, background: `linear-gradient(90deg, ${currentTheme.dark}, ${currentTheme.primary})`, boxShadow: `0 0 6px ${currentTheme.primary}` }} />
+                <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+                  {[1, 2, 3, 4, 5].map((starNum) => {
+                    const active = starNum <= trait.val
+                    return (
+                      <span 
+                        key={starNum}
+                        style={{
+                          fontSize: 16,
+                          color: active ? '#ffd700' : 'rgba(255,255,255,0.12)',
+                          textShadow: active ? '0 0 10px #ffd700, 0 0 5px #ffaa00' : 'none',
+                          transition: 'all 0.3s'
+                        }}
+                      >
+                        ★
+                      </span>
+                    )
+                  })}
                 </div>
               </div>
             ))}
