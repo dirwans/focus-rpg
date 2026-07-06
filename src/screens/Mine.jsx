@@ -10,6 +10,16 @@ import spriteF4 from '../assets/4F-OrcDementor_rembg.png'
 import spriteF5 from '../assets/5F-GhostDementor_rembg.png'
 import spriteF6 from '../assets/6F-Kaelgorath_rembg.png'
 
+import miningToolArctron  from '../assets/mining_tool_arctron_rembg.png'
+import miningToolBionex   from '../assets/mining_tool_bionex_rembg.png'
+import miningToolCelestra from '../assets/mining_tool_celestra_rembg.png'
+
+const MINING_TOOLS = {
+  arctron:  miningToolArctron,
+  bionex:   miningToolBionex,
+  celestra: miningToolCelestra,
+}
+
 import shardIgnis from '../assets/ignis_shard.png'
 import shardVirel from '../assets/virel_shard.png'
 import shardKryos from '../assets/kryos_shard.png'
@@ -274,6 +284,13 @@ export default function Mine() {
       <div style={s.header}>
         <button onClick={() => useGameStore.getState().setScreen('main')} style={s.backBtn}>❮</button>
         <span style={s.headerTitle}>⛏ TRINITY MINE STATION</span>
+        {MINING_TOOLS[player?.race] && (
+          <img
+            src={MINING_TOOLS[player.race]}
+            alt="mining tool"
+            style={{ width: 36, height: 36, objectFit: 'contain', marginLeft: 'auto', filter: 'drop-shadow(0 0 6px rgba(0,229,255,0.6))' }}
+          />
+        )}
       </div>
 
       {/* ── Main Tabs ── */}
@@ -573,6 +590,22 @@ export default function Mine() {
             {/* RUNNING */}
             {miningTimer.state === 'running' && secondsLeft > 0 && (
               <div style={s.activeArea}>
+                {/* Mining Tool Sprite (faction-specific) */}
+                {MINING_TOOLS[player?.race] && (
+                  <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 8 }}>
+                    <img
+                      src={MINING_TOOLS[player.race]}
+                      alt={`${player.race} mining tool`}
+                      style={{
+                        width: 110,
+                        height: 'auto',
+                        objectFit: 'contain',
+                        filter: 'drop-shadow(0 0 14px rgba(0,229,255,0.5))',
+                        animation: 'ledBlink 3s ease-in-out infinite',
+                      }}
+                    />
+                  </div>
+                )}
                 {activeMiningFloor && (
                   <div style={s.activeFloorWrap}>
                     <div style={s.activeFloorBadge}>{activeMiningFloor.floor}</div>

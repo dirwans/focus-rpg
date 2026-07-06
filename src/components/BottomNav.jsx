@@ -18,7 +18,6 @@ const NAV_ITEMS = [
   { id: 'ranks',     label: 'RANKS' },
   { id: 'battle',    label: 'BATTLE' },
   { id: 'mine',      label: 'T-MINE' },
-  { id: 'forge',     label: 'FORGE' },
   { id: 'ascension', label: 'ASC' },
   { id: 'premium',   label: 'SHOP' },
 ]
@@ -54,14 +53,6 @@ function NavIcon({ id, active, color }) {
           <path d="M14.5 17.5L3 6M17.5 14.5L6 3M19 19v-4M19 19h-4M5 5v4M5 5h4"/>
         </svg>
       )
-    case 'forge':
-      return (
-        <svg style={s} width="21" height="21" viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="2" y="3" width="20" height="14" rx="2"/>
-          <line x1="8" y1="21" x2="16" y2="21"/>
-          <line x1="12" y1="17" x2="12" y2="21"/>
-        </svg>
-      )
     case 'ranks':
       return (
         <svg style={s} width="21" height="21" viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -74,12 +65,6 @@ function NavIcon({ id, active, color }) {
       return (
         <svg style={s} width="21" height="21" viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M14.5 2L22 9.5m-5.5-4L11 11M3 21l8-8m-5.5.5l5 5"/>
-        </svg>
-      )
-    case 'forge':
-      return (
-        <svg style={s} width="21" height="21" viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
         </svg>
       )
     case 'ascension':
