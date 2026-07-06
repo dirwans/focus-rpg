@@ -816,12 +816,8 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                     ) : hasItem ? (
                       item.image ? (
                         <img referrerPolicy="no-referrer" src={item.image} style={{ width: 36, height: 36, objectFit: 'contain' }} alt={item.name} />
-                      ) : (
-                        <span style={{ fontSize: 36 }}>{item.emoji}</span>
-                      )
-                    ) : (
-                      <span style={{ fontSize: 36, opacity: 0.45 }}>🛡️</span>
-                    )}
+                      ) : null
+                    ) : null}
                   </div>
 
                   {/* Sparks */}
@@ -1055,12 +1051,8 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                       ) : hasWeapon ? (
                         equippedWeapon.image ? (
                           <img referrerPolicy="no-referrer" src={equippedWeapon.image} style={{ width: 36, height: 36, objectFit: 'contain' }} alt={equippedWeapon.name} />
-                        ) : (
-                          <span style={{ fontSize: 32 }}>{equippedWeapon.emoji}</span>
-                        )
-                      ) : (
-                        <span style={{ fontSize: 32, opacity: 0.45 }}>⚔️</span>
-                      )}
+                        ) : null
+                      ) : null}
                     </div>
 
                     {/* Sparks */}
