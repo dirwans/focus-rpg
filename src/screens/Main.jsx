@@ -99,7 +99,7 @@ function WorldMapModal({ onClose }) {
   
   const [selectedNode, setSelectedNode] = useState(defaultIdx)
 
-  const activeColor = { arctron: '#ff5222', bionex: '#00e5ff', celestra: '#a855f7' }[player.race] || '#00e5ff'
+  const activeColor = { arctron: '#ff5222', bionex: '#ffd600', celestra: '#00e5ff' }[player.race] || '#00e5ff'
 
   const mapCoordinates = [
     { name: 'Lumora Fields', left: '30%', top: '20%', minLevel: 1 },

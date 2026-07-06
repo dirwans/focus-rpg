@@ -5,8 +5,8 @@ const API_BASE = import.meta.env.VITE_API_URL || ''
 // Faction primary colors
 const FACTION_PRIMARY = {
   arctron:  '#ff5222',
-  bionex:   '#3b82f6',
-  celestra: '#a855f7',
+  bionex:   '#ffd600',
+  celestra: '#00e5ff',
 }
 const getFactionPrimary = (race) => FACTION_PRIMARY[race] || '#00e5ff'
 
