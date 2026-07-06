@@ -1525,9 +1525,16 @@ body {
   animation: celestraGlowPulse 4s ease-in-out infinite;
 }
 @keyframes celestraGlowPulse {
-  0%, 100% { filter: drop-shadow(0 0 8px #00e5ffcc) drop-shadow(0 0 20px #00e5ff77) drop-shadow(0 0 40px #0055ff44); }
-  33%      { filter: drop-shadow(0 0 18px #00e5ffff) drop-shadow(0 0 36px #00e5ffaa) drop-shadow(0 0 70px #0088ff88); }
-  66%      { filter: drop-shadow(0 0 12px #9933ffbb) drop-shadow(0 0 28px #9933ff66) drop-shadow(0 0 55px #00e5ff55); }
+  0%, 100% { 
+    filter: brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(190deg) brightness(1.05)
+            drop-shadow(0 0 5px rgba(0, 229, 255, 0.8)) 
+            drop-shadow(0 0 12px rgba(0, 85, 255, 0.4)); 
+  }
+  50% { 
+    filter: brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(190deg) brightness(1.2)
+            drop-shadow(0 0 8px rgba(0, 229, 255, 1.0)) 
+            drop-shadow(0 0 18px rgba(0, 85, 255, 0.6)); 
+  }
 }
 
 /* ------------------------------------------------ */
