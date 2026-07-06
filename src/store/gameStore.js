@@ -209,7 +209,8 @@ function computeRewards(player, mode, minutes, selectedZone = 'world') {
   const mobs = enemies.sectors[sectorIdx].mobs
   const avg = (f) => mobs.reduce((a, m) => a + f(m), 0) / mobs.length
   let avgHp, avgDef, avgAni
-  if (player.level % 10 === 0) {
+  const maxLevels = [12, 25, 38, 52, 66, 999]
+  if (player.level === maxLevels[sectorIdx]) {
     const boss = enemies.sectors[sectorIdx].boss
     avgHp = boss.hp; avgDef = boss.def; avgAni = boss.aniumReward
   } else {
