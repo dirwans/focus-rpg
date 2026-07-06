@@ -235,17 +235,44 @@ export default function SettingsModal({ onClose }) {
                     fontFamily: 'var(--font-title)', fontWeight: 900, cursor: 'pointer'
                   }}
                 >
-                  ⚡ SET LEVEL
+                  ⚡ LEVEL 66
                 </button>
                 <button
                   onClick={() => {
                     useGameStore.setState(s => ({
                       player: {
                         ...s.player,
-                        currency: {
-                          ...s.player.currency,
-                          anium: (s.player.currency?.anium || 0) + 1000000,
-                          credits: (s.player.currency?.credits || 0) + 10000
+                        level: 66,
+                        upgrades: { atk: 250, def: 250, hp: 250 },
+                        resources: {
+                          ...s.player.resources,
+                          anium: (s.player.resources?.anium || 0) + 1000000,
+                          credits: (s.player.resources?.credits || 0) + 100000
+                        },
+                        selectedMapIdx: 4,
+                        savedAt: Date.now()
+                      }
+                    }))
+                    alert("God Mode Enabled: Level 66, Max Upgrades (250), +1M Anium, Map 5 Selected!")
+                    onClose()
+                  }}
+                  style={{
+                    flex: 1, padding: 8, background: 'linear-gradient(90deg, #ff007f, #ff00ff)',
+                    border: 'none', color: '#fff', borderRadius: 8,
+                    fontFamily: 'var(--font-title)', fontWeight: 900, cursor: 'pointer'
+                  }}
+                >
+                  💪 GOD MODE
+                </button>
+                <button
+                  onClick={() => {
+                    useGameStore.setState(s => ({
+                      player: {
+                        ...s.player,
+                        resources: {
+                          ...s.player.resources,
+                          anium: (s.player.resources?.anium || 0) + 1000000,
+                          credits: (s.player.resources?.credits || 0) + 10000
                         },
                         savedAt: Date.now()
                       }
@@ -258,7 +285,7 @@ export default function SettingsModal({ onClose }) {
                     fontFamily: 'var(--font-title)', fontWeight: 900, cursor: 'pointer'
                   }}
                 >
-                  💰 +1M ANIUM
+                  💰 +1M CASH
                 </button>
               </div>
             </div>
