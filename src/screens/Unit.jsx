@@ -326,7 +326,7 @@ export default function Unit() {
                   <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 12, color: '#8a94a3' }}>
                     {baseClass.toUpperCase()} ID · <span style={{ color: '#c7ccd6' }}>{idPrefix}-{idSuffix}X</span>
                   </span>
-                  <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 12, color: '#b9c0c9' }}>{expPct}% TO NEXT</span>
+                  <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 12, color: '#b9c0c9' }}>{100 - expPct}% TO NEXT</span>
                 </div>
                 <div style={{ display: 'flex', gap: 3, marginTop: 7 }}>
                   {Array.from({ length: EXP_SEGS }).map((_, i) => (
