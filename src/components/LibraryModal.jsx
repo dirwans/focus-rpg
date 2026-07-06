@@ -989,27 +989,27 @@ export default function LibraryModal({ onClose }) {
                 <div style={{ margin: '4px 0', color: '#00ff88' }}><strong>Tahap Awal Drop:</strong> Weapon/Armor (Legendary, SSR), Arcanite, Divine Crest, Lucky Relic</div>
               </div>
 
-              <h4 style={{ color: '#ff4444', margin: '16px 0 4px 0', fontFamily: 'var(--font-title)', fontSize: '14px' }}>💀 Battle Dungeons (Lv. 67+)</h4>
+              <h4 style={{ color: '#ff4444', margin: '16px 0 4px 0', fontFamily: 'var(--font-title)', fontSize: '14px' }}>💀 Battle Dungeons (Lv. 30+)</h4>
 
               <div style={styles.itemCard}>
-                <div style={styles.itemTitle}>💀 Dungeon 1 - Haram Stockade (Lv. 67 - 75)</div>
-                <div style={{ margin: '4px 0' }}><strong>Monsters:</strong> Deserter Trooper, Tombstone Berserker, Vafer Shrine Officer</div>
-                <div style={{ margin: '4px 0' }}><strong>Dungeon Boss:</strong> Haram Warden</div>
-                <div style={{ margin: '4px 0', color: '#00ff88' }}><strong>Tahap Awal Drop:</strong> Weapon/Armor (Legendary, SSR), Divine Crests, Lucky Relics</div>
+                <div style={styles.itemTitle}>💀 Dungeon 1 - Echo Burrow (Lv. 30+)</div>
+                <div style={{ margin: '4px 0' }}><strong>Monsters:</strong> Burrow Scorpion, Echo Larva, Cave Imp</div>
+                <div style={{ margin: '4px 0' }}><strong>Dungeon Boss:</strong> Burrow King</div>
+                <div style={{ margin: '4px 0', color: '#00ff88' }}><strong>Tahap Awal Drop:</strong> Weapon/Armor (Rare, Epic), Arcanite, Divine Crests, Lucky Relics, Cape Components</div>
               </div>
 
               <div style={styles.itemCard}>
-                <div style={styles.itemTitle}>🏜️ Dungeon 2 - Novasan Sandgrave (Lv. 76 - 85)</div>
-                <div style={{ margin: '4px 0' }}><strong>Monsters:</strong> Sandworm Elite, Demolith Chieftain, Desert Hummer Alpha</div>
-                <div style={{ margin: '4px 0' }}><strong>Dungeon Boss:</strong> Novasan Reaver</div>
-                <div style={{ margin: '4px 0', color: '#00ff88' }}><strong>Tahap Awal Drop:</strong> Ancient Accessories, SSR/UR Gear, Divine Crests, Lucky Relics</div>
+                <div style={styles.itemTitle}>🏜️ Dungeon 2 - Infernal Forge (Lv. 50+)</div>
+                <div style={{ margin: '4px 0' }}><strong>Monsters:</strong> Forge Imp, Fire Slag, Ash Sentinel</div>
+                <div style={{ margin: '4px 0' }}><strong>Dungeon Boss:</strong> Inferno Colossus</div>
+                <div style={{ margin: '4px 0', color: '#00ff88' }}><strong>Tahap Awal Drop:</strong> Weapon/Armor (Epic, Legendary), Arcanite, Divine Crests, Lucky Relics, Cape Components</div>
               </div>
 
               <div style={styles.itemCard}>
-                <div style={styles.itemTitle}>🧬 Dungeon 3 - Cartella Laboratory (Lv. 86 - 100)</div>
-                <div style={{ margin: '4px 0' }}><strong>Monsters:</strong> Mutant Walker, Lab Abomination, Android Devastator</div>
-                <div style={{ margin: '4px 0' }}><strong>Dungeon Boss:</strong> Dr. Franken Elite</div>
-                <div style={{ margin: '4px 0', color: '#00ff88' }}><strong>Tahap Awal Drop:</strong> Artifact/UR Weapon/Armor, Rare Ores, Lucky Relics, Titan Keys</div>
+                <div style={styles.itemTitle}>🧬 Dungeon 3 - Trinity Core Chamber (Lv. 65+)</div>
+                <div style={{ margin: '4px 0' }}><strong>Monsters:</strong> Core Sentinel, Trinity Sentry, Flux Phantom</div>
+                <div style={{ margin: '4px 0' }}><strong>Dungeon Boss:</strong> Trinity Guardian</div>
+                <div style={{ margin: '4px 0', color: '#00ff88' }}><strong>Tahap Awal Drop:</strong> Weapon/Armor (Legendary, SSR), Arcanite, Divine Crests, Lucky Relics, Cape Components</div>
               </div>
             </div>
           )}

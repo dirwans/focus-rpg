@@ -172,7 +172,7 @@
           "def": 130,
           "expReward": 19,
           "aniumReward": 11,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_6.png",
+          "image": "/ref/World-Map/Ferrum Expanse/Steel-hound.png",
           "critical": 9
         },
         {
@@ -183,7 +183,7 @@
           "def": 155,
           "expReward": 25,
           "aniumReward": 16,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/demolith-monster.png",
+          "image": "/ref/World-Map/Ferrum Expanse/Scrap-Golem.png",
           "critical": 10
         },
         {
@@ -194,7 +194,7 @@
           "def": 185,
           "expReward": 31,
           "aniumReward": 20,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/turncoat-champion-sette.png",
+          "image": "/ref/World-Map/Ferrum Expanse/Iron-wasp.png",
           "critical": 11
         },
         {
@@ -205,7 +205,7 @@
           "def": 220,
           "expReward": 33,
           "aniumReward": 22,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/turncoat-champion-sette.png",
+          "image": "/ref/World-Map/Ferrum Expanse/machawarden.png",
           "critical": 12
         }
       ],
@@ -219,7 +219,7 @@
         "regen": 350,
         "expReward": 700,
         "aniumReward": 500,
-        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/turncoat-champion-sette.png"
+        "image": "/ref/World-Map/Ferrum Expanse/Boss-Iron-Juggernaut.png"
       },
       "pitBoss": {
         "name": "IRON OVERLORD",
@@ -231,7 +231,7 @@
         "regen": 1750,
         "expReward": 3500,
         "aniumReward": 2500,
-        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/turncoat-champion-sette.png"
+        "image": "/ref/World-Map/Ferrum Expanse/Boss-Iron-Juggernaut.png"
       }
     },
     {

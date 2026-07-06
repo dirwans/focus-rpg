@@ -72,10 +72,7 @@ function getSector(level) {
   if (level <= 25) return 2
   if (level <= 38) return 3
   if (level <= 52) return 4
-  if (level <= 66) return 5
-  if (level <= 75) return 6
-  if (level <= 85) return 7
-  return 8
+  return 5
 }
 
 function randomMob(sectorIdx, isDungeon = false) {
