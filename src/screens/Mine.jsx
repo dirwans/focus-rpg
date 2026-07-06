@@ -10,12 +10,18 @@ import spriteF4 from '../assets/4F-OrcDementor_rembg.png'
 import spriteF5 from '../assets/5F-GhostDementor_rembg.png'
 import spriteF6 from '../assets/6F-Kaelgorath_rembg.png'
 
+import shardIgnis from '../assets/ignis_shard.png'
+import shardVirel from '../assets/virel_shard.png'
+import shardKryos from '../assets/kryos_shard.png'
+import shardZephra from '../assets/zephra_shard.png'
+import shardUmbrix from '../assets/umbrix_shard.png'
+
 const ORE_TYPES = [
-  { key: 'ignis',  name: 'Ignis',  color: '#ff4444', emoji: '🟥', shardEmoji: '🔴' },
-  { key: 'virel',  name: 'Virel',  color: '#4488ff', emoji: '🟦', shardEmoji: '🔵' },
-  { key: 'kryos',  name: 'Kryos',  color: '#44ff88', emoji: '🟩', shardEmoji: '🟢' },
-  { key: 'zephra', name: 'Zephra', color: '#ffcc00', emoji: '🟨', shardEmoji: '🟡' },
-  { key: 'umbrix', name: 'Umbrix', color: '#888888', emoji: '⬛', shardEmoji: '⚫' },
+  { key: 'ignis',  name: 'Ignis',  color: '#ff4444', emoji: '🟥', shardEmoji: '🔴', shardSprite: shardIgnis },
+  { key: 'virel',  name: 'Virel',  color: '#4488ff', emoji: '🟦', shardEmoji: '🔵', shardSprite: shardVirel },
+  { key: 'kryos',  name: 'Kryos',  color: '#44ff88', emoji: '🟩', shardEmoji: '🟢', shardSprite: shardKryos },
+  { key: 'zephra', name: 'Zephra', color: '#ffcc00', emoji: '🟨', shardEmoji: '🟡', shardSprite: shardZephra },
+  { key: 'umbrix', name: 'Umbrix', color: '#888888', emoji: '⬛', shardEmoji: '⚫', shardSprite: shardUmbrix },
 ]
 
 const MINE_FLOORS = [
@@ -628,7 +634,7 @@ export default function Mine() {
               return (
                 <div key={ore.key} className="glass-panel cyber-panel" style={s.recipeCard}>
                   <div style={s.recipeProduct}>
-                    <span style={{ fontSize: 32 }}>{ore.shardEmoji}</span>
+                    <img src={ore.shardSprite} alt={ore.name} style={{ width: 42, height: 42, objectFit: 'contain', filter: 'drop-shadow(0 0 5px rgba(255,255,255,0.15))' }} />
                     <div>
                       <div style={{ ...s.recipeItemName, color: ore.color }}>{ore.name} Shard [{processGrade === 'common' ? 'C' : processGrade === 'rare' ? 'R' : 'E'}]</div>
                       <div style={s.recipeOwned}>Dimiliki: <span style={{ color: '#fff', fontWeight: 700 }}>{ownedShard}</span></div>
