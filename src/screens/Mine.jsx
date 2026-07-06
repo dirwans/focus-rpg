@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useGameStore } from '../store/gameStore'
 import itemsData from '../data/items.json'
+import enemiesData from '../data/enemies.json'
 
 import spriteF1 from '../assets/1F-SentryDementor_rembg.png'
 import spriteF2 from '../assets/2F-BorgDementor_rembg.png'
@@ -106,6 +107,8 @@ export default function Mine() {
   const miningTimer = player?.miningTimer || { state: 'idle', startedAt: 0, endsAt: 0, duration: 0 }
   const [secondsLeft, setSecondsLeft] = useState(0)
 
+  const [encounterState, setEncounterState] = useState(null)
+
   useEffect(() => {
     if (miningTimer.state === 'running') {
       const update = () => setSecondsLeft(Math.max(0, Math.floor((miningTimer.endsAt - Date.now()) / 1000)))
@@ -136,8 +139,123 @@ export default function Mine() {
 
   const activeMiningFloor = MINE_FLOORS.find(f => f.duration === miningTimer.duration)
 
+  const handleStartMining = (floorData) => {
+    const isBoss = floorData.floor === '6F'
+    const encounterChance = isBoss ? 1.0 : 0.25
+    if (Math.random() <= encounterChance) {
+      const floorNum = parseInt(floorData.floor.replace('F', ''))
+      const guardian = enemiesData.miningGuardians.find(g => g.floor === floorNum)
+      if (guardian) {
+        const stats = useGameStore.getState().getStats()
+        
+        // INSTANT CALCULATION
+        const pDps = Math.max(1, stats.atk - guardian.def)
+        const eDps = Math.max(1, guardian.atk - stats.def)
+        
+        const ttkPlayer = Math.ceil(guardian.hp / pDps)
+        const ttkEnemy = Math.ceil(stats.hp / eDps)
+        
+        // Survive if player kills enemy first OR enemy takes longer than timer duration to kill player
+        const isWin = ttkPlayer <= ttkEnemy || ttkEnemy > (floorData.duration * 60)
+        
+        const pRemHp = isWin ? Math.max(1, stats.hp - (eDps * ttkPlayer)) : 0
+        const eRemHp = isWin ? 0 : Math.max(1, guardian.hp - (pDps * ttkEnemy))
+
+        setEncounterState({
+          active: true,
+          floorData,
+          guardian,
+          stats,
+          result: 'simulating',
+          isWin,
+          pRemHpPct: (pRemHp / stats.hp) * 100,
+          eRemHpPct: (eRemHp / guardian.hp) * 100
+        })
+        
+        // Trigger result after 2.5 seconds
+        setTimeout(() => {
+          setEncounterState(prev => prev ? {
+            ...prev,
+            result: prev.isWin ? 'win' : 'lose'
+          } : null)
+        }, 2500)
+        
+        return
+      }
+    }
+    startMining(floorData.duration)
+  }
+
   return (
     <div style={s.screen} className="no-scrollbar">
+
+      {/* ── BATTLE OVERLAY ── */}
+      {encounterState && encounterState.active && (
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.9)', zIndex: 9999, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
+          <div className="glass-panel cyber-panel" style={{ width: '100%', maxWidth: 400, padding: 20, textAlign: 'center', border: `1px solid ${encounterState.result === 'win' ? '#00ff88' : encounterState.result === 'lose' ? '#ff3366' : '#ffaa00'}`, transition: 'border 0.3s' }}>
+            <h2 style={{ color: '#ffaa00', textShadow: '0 0 10px #ffaa00', margin: '0 0 15px', fontFamily: "'Orbitron', sans-serif" }}>⚠️ GUARDIAN ENCOUNTER!</h2>
+            <p style={{ color: '#c7ccd6', fontSize: 14, marginBottom: 20 }}>{encounterState.guardian.name} muncul menghadang proses penambangan di lantai {encounterState.floorData.floor}!</p>
+            
+            {/* Guardian Bar */}
+            <div style={{ marginBottom: 15, textAlign: 'left' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, color: '#ff3366', fontWeight: 'bold' }}>
+                <span>{encounterState.guardian.name}</span>
+                <span>{encounterState.result === 'simulating' ? '???' : (encounterState.eRemHpPct === 0 ? '0' : 'Alive')} HP</span>
+              </div>
+              <div style={{ width: '100%', height: 12, backgroundColor: '#331111', borderRadius: 6, overflow: 'hidden', marginTop: 4 }}>
+                <div style={{ width: encounterState.result === 'simulating' ? '100%' : `${encounterState.eRemHpPct}%`, height: '100%', backgroundColor: '#ff3366', transition: 'width 2s ease-out' }} />
+              </div>
+            </div>
+
+            <div style={{ fontSize: 24, margin: '10px 0' }}>⚡ VS ⚡</div>
+
+            {/* Player Bar */}
+            <div style={{ marginBottom: 25, textAlign: 'left' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, color: '#00e5ff', fontWeight: 'bold' }}>
+                <span>Pilot (ATK: {encounterState.stats.atk})</span>
+                <span>{encounterState.result === 'simulating' ? '???' : (encounterState.pRemHpPct === 0 ? '0' : 'Alive')} HP</span>
+              </div>
+              <div style={{ width: '100%', height: 12, backgroundColor: '#0a1a2a', borderRadius: 6, overflow: 'hidden', marginTop: 4 }}>
+                <div style={{ width: encounterState.result === 'simulating' ? '100%' : `${encounterState.pRemHpPct}%`, height: '100%', backgroundColor: '#00e5ff', transition: 'width 2s ease-out' }} />
+              </div>
+            </div>
+
+            {/* Result Message */}
+            {encounterState.result === 'simulating' && (
+              <div style={{ color: '#ffaa00', fontSize: 14, animation: 'ledBlink 1s infinite' }}>Menghitung simulasi pertarungan...</div>
+            )}
+            {encounterState.result === 'win' && (
+              <div style={{ color: '#00ff88', fontSize: 15, fontWeight: 'bold', textShadow: '0 0 8px #00ff88' }}>🏆 VICTORY! Guardian dikalahkan!</div>
+            )}
+            {encounterState.result === 'lose' && (
+              <div style={{ color: '#ff3366', fontSize: 15, fontWeight: 'bold', textShadow: '0 0 8px #ff3366' }}>☠️ DEFEAT! Anda gagal bertahan hidup!</div>
+            )}
+
+            {/* Action Buttons */}
+            <div style={{ marginTop: 20 }}>
+              {encounterState.result === 'win' && (
+                <button 
+                  style={{ ...s.mulaiBtn, width: '100%' }} 
+                  onClick={() => {
+                    setEncounterState(null)
+                    startMining(encounterState.floorData.duration)
+                  }}
+                >
+                  MULAI PENAMBANGAN
+                </button>
+              )}
+              {encounterState.result === 'lose' && (
+                <button 
+                  style={{ ...s.mulaiBtn, width: '100%', backgroundColor: '#551111', color: '#ffaaaa', border: '1px solid #ff3366' }} 
+                  onClick={() => setEncounterState(null)}
+                >
+                  KEMBALI
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ── Header ── */}
       <div style={s.header}>
@@ -234,7 +352,7 @@ export default function Mine() {
                       {/* MULAI button */}
                       <button
                         style={isBoss ? s.mulaiBtn : s.mulaiBtn}
-                        onClick={() => startMining(floor.duration)}
+                        onClick={() => handleStartMining(floor)}
                       >
                         MULAI
                       </button>

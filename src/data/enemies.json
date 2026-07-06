@@ -590,5 +590,67 @@
     "expReward": 100000,
     "crdReward": 50000,
     "image": ""
-  }
+  },
+  "miningGuardians": [
+    {
+      "floor": 1,
+      "name": "Sentry Dementor",
+      "hp": 1000000,
+      "atk": 1350,
+      "def": 900,
+      "critical": 10,
+      "dodge": 8,
+      "stun": 2
+    },
+    {
+      "floor": 2,
+      "name": "Borg Dementor",
+      "hp": 1800000,
+      "atk": 1500,
+      "def": 1000,
+      "critical": 12,
+      "dodge": 10,
+      "stun": 3
+    },
+    {
+      "floor": 3,
+      "name": "Mutation Dementor",
+      "hp": 3000000,
+      "atk": 1700,
+      "def": 1150,
+      "critical": 15,
+      "dodge": 12,
+      "stun": 5
+    },
+    {
+      "floor": 4,
+      "name": "Ork Dementor",
+      "hp": 5000000,
+      "atk": 1950,
+      "def": 1300,
+      "critical": 18,
+      "dodge": 15,
+      "stun": 7
+    },
+    {
+      "floor": 5,
+      "name": "Ghost Dementor",
+      "hp": 8000000,
+      "atk": 2200,
+      "def": 1500,
+      "critical": 20,
+      "dodge": 18,
+      "stun": 10
+    },
+    {
+      "floor": 6,
+      "name": "Kaelgorath",
+      "hp": 1000000000,
+      "atk": 3500,
+      "def": 2000,
+      "critical": 25,
+      "dodge": 25,
+      "stun": 20
+    }
+  ]
 }
