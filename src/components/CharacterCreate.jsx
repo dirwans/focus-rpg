@@ -34,8 +34,8 @@ const FACTION_THEMES = {
     tagline: 'STEEL BODY. UNBREAKABLE WILL.',
     traits: [
       { name: 'ATTACK', val: 5 },
-      { name: 'DEFENSE', val: 4 },
-      { name: 'HEALTH', val: 4 }
+      { name: 'DEFENSE', val: 5 },
+      { name: 'HEALTH', val: 5 }
     ],
     confirmText: 'ENTER THE WAR'
   },
@@ -55,7 +55,7 @@ const FACTION_THEMES = {
     traits: [
       { name: 'ATTACK', val: 3 },
       { name: 'DEFENSE', val: 4 },
-      { name: 'HEALTH', val: 5 }
+      { name: 'HEALTH', val: 4 }
     ],
     confirmText: 'LAUNCH SEQUENCE'
   },
@@ -74,8 +74,8 @@ const FACTION_THEMES = {
     tagline: 'MAGIC BENDS TO THOSE WHO DARE.',
     traits: [
       { name: 'ATTACK', val: 4 },
-      { name: 'DEFENSE', val: 2 },
-      { name: 'HEALTH', val: 2 }
+      { name: 'DEFENSE', val: 3 },
+      { name: 'HEALTH', val: 3 }
     ],
     confirmText: 'AWAKEN THE PATH'
   }
