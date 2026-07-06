@@ -860,31 +860,21 @@ export default function Main() {
           <PilotSprite race={player.race} job={player.job} gender={player.gender} size={36} />
         </div>
         <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
-            <span style={{ fontFamily: 'var(--font-title)', fontSize: 15, fontWeight: 'bold', color: '#e0f4ff', letterSpacing: 0.5 }}>{player.name.toUpperCase()}</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, minWidth: 0 }}>
+            <span style={{ fontFamily: 'var(--font-title)', fontSize: 15, fontWeight: 'bold', color: '#e0f4ff', letterSpacing: 0.5, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0 }}>{player.name.toUpperCase()}</span>
             {stats.title && (
-              <span style={{ fontSize: 9, background: 'rgba(0, 229, 255, 0.1)', color: 'var(--neon-glow)', border: '1px solid var(--neon-glow)', borderRadius: 4, padding: '1px 4px', fontFamily: 'var(--font-title)', fontWeight: 800 }}>
+              <span style={{ fontSize: 9, background: 'rgba(0, 229, 255, 0.1)', color: 'var(--neon-glow)', border: '1px solid var(--neon-glow)', borderRadius: 4, padding: '1px 4px', fontFamily: 'var(--font-title)', fontWeight: 800, flexShrink: 0 }}>
                 {stats.title.toUpperCase()}
               </span>
             )}
           </div>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: '#7ec8e3', marginTop: 2, fontWeight: 700 }}>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: '#7ec8e3', marginTop: 2, fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
             {jobInfo ? jobInfo.name.toUpperCase() : 'NOVICE'} · LV.{player.level}
           </div>
         </div>
         {eligibleForPromo && (
           <button
-            className={`profile-promo-btn btn-${player.race}`}
-            style={{
-              padding: '6px 10px',
-              fontSize: 13,
-              fontFamily: 'var(--font-title)',
-              fontWeight: 800,
-              borderRadius: 6,
-              cursor: 'pointer',
-              border: 'none',
-              boxShadow: '0 0 8px var(--neon-glow)'
-            }}
+            className="promo-glass-btn"
             onClick={() => {
               setNpcInitialView('specialist')
               setShowNpcModal(true)

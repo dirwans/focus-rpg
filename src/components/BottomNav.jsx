@@ -99,13 +99,16 @@ export default function BottomNav() {
 
   return (
     <nav style={{
-      display:        'flex',
-      flexShrink:      0,
-      background:     'rgba(14,14,16,0.92)',
-      backdropFilter: 'blur(10px)',
-      borderTop:      `1px solid ${primary}40`,
-      padding:        '9px 6px 11px',
-      gap:            4,
+      display:              'flex',
+      flexShrink:            0,
+      position:              'relative',
+      background:            'rgba(12,14,20,0.55)',
+      backdropFilter:        'blur(14px) saturate(180%)',
+      WebkitBackdropFilter:  'blur(14px) saturate(180%)',
+      borderTop:             `1px solid ${primary}55`,
+      boxShadow:             `inset 0 1px 0 rgba(255,255,255,0.08), 0 -6px 24px ${primary}22`,
+      padding:               '9px 6px 11px',
+      gap:                   4,
     }}>
       {NAV_ITEMS.map((n) => {
         const isActive = screen === n.id
