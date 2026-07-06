@@ -108,6 +108,7 @@ export default function Mine() {
   const [secondsLeft, setSecondsLeft] = useState(0)
 
   const [encounterState, setEncounterState] = useState(null)
+  const [selectedFloor, setSelectedFloor] = useState(MINE_FLOORS[0])
 
   useEffect(() => {
     if (miningTimer.state === 'running') {
@@ -301,64 +302,259 @@ export default function Mine() {
           <div className="glass-panel cyber-panel" style={s.card}>
             <div style={s.cardHeader}>⛏ STATUS PENAMBANGAN</div>
 
-            {/* IDLE — Floor Selector Grid */}
+            {/* IDLE — Tactical Map Floor Selector */}
             {miningTimer.state === 'idle' && (
-              <div style={s.floorGrid}>
-                {MINE_FLOORS.map((floor) => {
-                  const rates = computeRates(floor.baseRates, rankBonus, rankNumber)
-                  const isBoss = floor.boss
-                  return (
-                    <div key={floor.floor} style={isBoss ? s.floorCardBoss : s.floorCard}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                
+                {/* ── TACTICAL MAP AREA ── */}
+                <div style={{ 
+                  position: 'relative', 
+                  width: '100%', 
+                  height: 250, 
+                  background: 'radial-gradient(circle at 50% 50%, #150f2b 0%, #06040e 90%)', 
+                  border: '2px solid #ffd700', 
+                  borderRadius: 12, 
+                  overflow: 'hidden',
+                  boxShadow: '0 0 15px rgba(255, 215, 0, 0.15), inset 0 0 20px rgba(168, 85, 247, 0.2)'
+                }}>
+                  {/* Grid Lines */}
+                  <div style={{
+                    position: 'absolute',
+                    top: 0, left: 0, right: 0, bottom: 0,
+                    backgroundImage: 'linear-gradient(rgba(168, 85, 247, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(168, 85, 247, 0.08) 1px, transparent 1px)',
+                    backgroundSize: '20px 20px',
+                    pointerEvents: 'none'
+                  }} />
 
-                      {/* Floor badge */}
-                      <div style={isBoss ? s.floorBadgeBoss : s.floorBadge}>{floor.floor}</div>
-                      {isBoss && <div style={s.bossBadge}>BOSS</div>}
+                  {/* Blueprint circular sonar effect */}
+                  <div style={{
+                    position: 'absolute',
+                    top: '50%', left: '50%',
+                    width: 200, height: 200,
+                    transform: 'translate(-50%, -50%)',
+                    border: '1px dashed rgba(168, 85, 247, 0.25)',
+                    borderRadius: '50%',
+                    pointerEvents: 'none'
+                  }} />
+                  <div style={{
+                    position: 'absolute',
+                    top: '50%', left: '50%',
+                    width: 100, height: 100,
+                    transform: 'translate(-50%, -50%)',
+                    border: '1px dashed rgba(168, 85, 247, 0.15)',
+                    borderRadius: '50%',
+                    pointerEvents: 'none'
+                  }} />
 
-                      {/* Sprite */}
-                      <div style={s.spriteWrap}>
-                        <img
-                          src={floor.sprite}
-                          alt={floor.name}
-                          style={s.sprite}
-                          draggable={false}
-                        />
-                      </div>
+                  {/* SVG Paths representing mining tunnels */}
+                  <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }} viewBox="0 0 100 100" preserveAspectRatio="none">
+                    {/* Path 1: 1F -> 2F -> 4F -> 6F */}
+                    <path d="M 25 25 L 70 20 L 75 50 L 70 80" stroke="#a855f7" strokeWidth="1.5" strokeDasharray="3 2" fill="none" opacity="0.6" />
+                    {/* Path 2: 1F -> 3F -> 5F -> 6F */}
+                    <path d="M 25 25 L 35 55 L 25 80 L 70 80" stroke="#a855f7" strokeWidth="1.5" strokeDasharray="3 2" fill="none" opacity="0.6" />
+                    {/* Cross-tunnel: 2F -> 3F */}
+                    <path d="M 70 20 L 35 55" stroke="#a855f7" strokeWidth="1" strokeDasharray="2 2" fill="none" opacity="0.4" />
+                  </svg>
 
-                      {/* Floor name */}
-                      <div style={isBoss ? s.floorNameBoss : s.floorName}>{floor.name}</div>
-
-                      {/* Duration badge */}
-                      <div style={s.durationBadge}>⏱ {floor.durationLabel}</div>
-
-                      {/* Yield */}
-                      <div style={s.yieldLabel}>Hasil: <span style={s.yieldVal}>{floor.yieldLabel}</span></div>
-
-                      {/* Drop rates */}
-                      <div style={s.ratesBlock}>
-                        <div style={s.rateRow}>
-                          <span style={s.rateLabel}>Com:</span>
-                          <span style={s.rateCommon}>{rates.common}%</span>
-                        </div>
-                        <div style={s.rateRow}>
-                          <span style={s.rateLabel}>Rare:</span>
-                          <span style={rates.rare > 0 ? s.rateRare : s.rateDim}>{rates.rare}%</span>
-                        </div>
-                        <div style={s.rateRow}>
-                          <span style={s.rateLabel}>Epic:</span>
-                          <span style={rates.epic > 0 ? s.rateEpic : s.rateDim}>{rates.epic}%</span>
-                        </div>
-                      </div>
-
-                      {/* MULAI button */}
-                      <button
-                        style={isBoss ? s.mulaiBtn : s.mulaiBtn}
-                        onClick={() => handleStartMining(floor)}
+                  {/* MAP NODES */}
+                  {[
+                    { floor: '1F', left: '25%', top: '25%', xOffset: -12, yOffset: -12 },
+                    { floor: '2F', left: '70%', top: '20%', xOffset: -12, yOffset: -12 },
+                    { floor: '3F', left: '35%', top: '55%', xOffset: -12, yOffset: -12 },
+                    { floor: '4F', left: '75%', top: '50%', xOffset: -12, yOffset: -12 },
+                    { floor: '5F', left: '25%', top: '80%', xOffset: -12, yOffset: -12 },
+                    { floor: '6F', left: '70%', top: '80%', xOffset: -15, yOffset: -15, isBoss: true }
+                  ].map((node) => {
+                    const isSelected = selectedFloor.floor === node.floor
+                    const fData = MINE_FLOORS.find(f => f.floor === node.floor)
+                    const size = node.isBoss ? 30 : 24
+                    
+                    return (
+                      <div 
+                        key={node.floor}
+                        onClick={() => setSelectedFloor(fData)}
+                        style={{
+                          position: 'absolute',
+                          left: node.left,
+                          top: node.top,
+                          transform: 'translate(-50%, -50%)',
+                          width: size,
+                          height: size,
+                          borderRadius: '50%',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          cursor: 'pointer',
+                          fontSize: node.isBoss ? 11 : 12,
+                          fontWeight: 'bold',
+                          fontFamily: "'Orbitron', sans-serif",
+                          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                          
+                          // Styling
+                          background: isSelected 
+                            ? 'radial-gradient(circle, #ffe066 0%, #ff8800 100%)' 
+                            : '#0e0b1f',
+                          border: isSelected 
+                            ? '2px solid #ffffff' 
+                            : node.isBoss 
+                              ? '2px solid #ff4400' 
+                              : '2px solid #a855f7',
+                          color: isSelected 
+                            ? '#000' 
+                            : node.isBoss 
+                              ? '#ff6600' 
+                              : '#d9acff',
+                          boxShadow: isSelected 
+                            ? '0 0 15px #ffd700, 0 0 5px #ff8800' 
+                            : 'none',
+                          zIndex: isSelected ? 10 : 5
+                        }}
                       >
-                        MULAI
+                        {node.isBoss ? '💀' : node.floor}
+                      </div>
+                    )
+                  })}
+                  
+                  {/* Map Label Overlay */}
+                  <div style={{
+                    position: 'absolute',
+                    top: 10,
+                    left: 12,
+                    color: '#ffd700',
+                    fontFamily: "'Orbitron', sans-serif",
+                    fontSize: 10,
+                    fontWeight: 'bold',
+                    letterSpacing: 2,
+                    textShadow: '0 0 5px rgba(255, 215, 0, 0.5)'
+                  }}>
+                    MAP PROTOCOL SYSTEM: ACTIVE
+                  </div>
+                </div>
+
+                {/* ── SELECTED FLOOR DETAIL PANEL ── */}
+                {(() => {
+                  const rates = computeRates(selectedFloor.baseRates, rankBonus, rankNumber)
+                  const isBoss = selectedFloor.boss
+                  
+                  return (
+                    <div className="glass-panel cyber-panel" style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 12,
+                      padding: 16,
+                      background: 'rgba(10, 6, 22, 0.85)',
+                      border: '1px solid #ffd700',
+                      borderRadius: 10,
+                      boxShadow: '0 4px 15px rgba(0,0,0,0.6)'
+                    }}>
+                      
+                      {/* Panel Header */}
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255, 215, 0, 0.2)', paddingBottom: 8 }}>
+                        <div>
+                          <div style={{ fontSize: 10, color: '#a855f7', fontWeight: 'bold', letterSpacing: 1.5 }}>
+                            DETEKSI SEKTOR PENAMBANGAN
+                          </div>
+                          <div style={{ fontSize: 16, fontWeight: 'bold', color: isBoss ? '#ffaa00' : '#ffffff', fontFamily: "'Orbitron', sans-serif" }}>
+                            {selectedFloor.floor} - {selectedFloor.name}
+                          </div>
+                        </div>
+                        <div style={{ 
+                          fontSize: 11, 
+                          color: '#ffd700', 
+                          background: 'rgba(255, 215, 0, 0.1)', 
+                          border: '1px solid #ffd700', 
+                          padding: '2px 8px', 
+                          borderRadius: 4, 
+                          fontWeight: 'bold' 
+                        }}>
+                          ⏱ {selectedFloor.durationLabel}
+                        </div>
+                      </div>
+
+                      {/* Content Row: Sprite + Stats */}
+                      <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
+                        {/* Sprite Render */}
+                        <div style={{ 
+                          width: 80, 
+                          height: 80, 
+                          display: 'flex', 
+                          alignItems: 'center', 
+                          justifyContent: 'center',
+                          background: 'radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 70%)',
+                          border: '1px solid rgba(168, 85, 247, 0.25)',
+                          borderRadius: 8,
+                          padding: 4
+                        }}>
+                          <img 
+                            src={selectedFloor.sprite} 
+                            alt={selectedFloor.name} 
+                            style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', filter: 'drop-shadow(0 0 8px rgba(168, 85, 247, 0.6))' }} 
+                          />
+                        </div>
+
+                        {/* Floor Stats & Yield */}
+                        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 6 }}>
+                          <div style={{ fontSize: 13, color: '#c7ccd6' }}>
+                            Potensi Hasil: <span style={{ color: '#00ff88', fontWeight: 'bold' }}>{selectedFloor.yieldLabel}</span>
+                          </div>
+                          
+                          {/* Rates Block */}
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11 }}>
+                              <span style={{ color: '#8aaabb' }}>Common Ore:</span>
+                              <span style={{ color: '#fff' }}>{rates.common}%</span>
+                            </div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11 }}>
+                              <span style={{ color: '#44bbff' }}>Rare Ore:</span>
+                              <span style={{ color: '#44bbff', fontWeight: rates.rare > 0 ? 'bold' : 'normal' }}>{rates.rare}%</span>
+                            </div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11 }}>
+                              <span style={{ color: '#a855f7' }}>Epic Ore:</span>
+                              <span style={{ color: '#a855f7', fontWeight: rates.epic > 0 ? 'bold' : 'normal' }}>{rates.epic}%</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Deployment Warning */}
+                      <div style={{ 
+                        fontSize: 11, 
+                        color: isBoss ? '#ffaa00' : '#a855f7', 
+                        background: isBoss ? 'rgba(255, 170, 0, 0.05)' : 'rgba(168, 85, 247, 0.05)',
+                        border: isBoss ? '1px solid rgba(255, 170, 0, 0.2)' : '1px solid rgba(168, 85, 247, 0.2)',
+                        padding: 8, 
+                        borderRadius: 6,
+                        lineHeight: 1.3,
+                        textAlign: 'left'
+                      }}>
+                        ⚠️ <strong>Protokol Pertahanan:</strong> {isBoss ? 'Wajib bertarung melawan BOSS Kaelgorath (100% Encounter).' : 'Peluang disergap Guardian Dementor sebesar 25% saat mulai.'} Jika kalah simulasi tempur, penambangan akan gagal dideploy.
+                      </div>
+
+                      {/* MULAI BUTTON */}
+                      <button
+                        style={{
+                          width: '100%',
+                          padding: '10px 0',
+                          background: 'linear-gradient(135deg, #ffe066 0%, #ff8800 100%)',
+                          border: '1px solid #ffffff',
+                          borderRadius: 6,
+                          color: '#000000',
+                          fontWeight: 'bold',
+                          fontFamily: "'Orbitron', sans-serif",
+                          fontSize: 14,
+                          letterSpacing: 2,
+                          cursor: 'pointer',
+                          boxShadow: '0 0 10px rgba(255, 215, 0, 0.3)',
+                          transition: 'all 0.2s'
+                        }}
+                        onClick={() => handleStartMining(selectedFloor)}
+                      >
+                        MULAI DEPLOY MINER
                       </button>
                     </div>
                   )
-                })}
+                })()}
+
               </div>
             )}
 
