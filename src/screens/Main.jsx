@@ -425,14 +425,15 @@ export default function Main() {
   const expPct  = Math.floor((player.exp / expMax) * 100)
   const race    = player.race ? races[player.race] : null
   const isDungeon = timer.selectedZone && timer.selectedZone.startsWith('dungeon_')
+  const sectorIdx = (player.selectedMapIdx !== undefined && player.selectedMapIdx !== null)
+    ? player.selectedMapIdx
+    : (Math.min(player.sector, enemies.sectors.length) - 1)
+
   let enemy
   if (isDungeon) {
     const dungeonIdx = parseInt(timer.selectedZone.split('_')[1]) - 1
     enemy = enemies.dungeons[dungeonIdx]
   } else {
-    const sectorIdx = (player.selectedMapIdx !== undefined && player.selectedMapIdx !== null)
-      ? player.selectedMapIdx
-      : (Math.min(player.sector, enemies.sectors.length) - 1)
     enemy = enemies.sectors[sectorIdx]
   }
   const isRunning = timer.state === 'running'
@@ -451,9 +452,9 @@ export default function Main() {
   }
 
   // Focus-session label per faction (Arctron fights, Bionex gathers, Celestra channels)
-const FOCUS_MODE_LABEL = { arctron: 'FIGHT', bionex: 'GATHER', celestra: 'CHANNEL' }
+  const FOCUS_MODE_LABEL = { arctron: 'FIGHT', bionex: 'GATHER', celestra: 'CHANNEL' }
 
-// CLASS names by faction (mapped by job index position in tier arrays)
+  // CLASS names by faction (mapped by job index position in tier arrays)
   const CLASS_NAMES = {
     celestra: ['Warrior', 'Ranger', 'Summoner', 'Mage'],
     arctron:  ['Warrior', 'Ranger', 'Specialist'],
@@ -628,7 +629,7 @@ const FOCUS_MODE_LABEL = { arctron: 'FIGHT', bionex: 'GATHER', celestra: 'CHANNE
         <div style={styles.activeHeader}>
           <div style={styles.activeStageBadge}>📍 {enemy.name}</div>
           <div style={styles.activeSectorLabel}>
-            {isDungeon ? `DUNGEON ${timer.selectedZone.split('_')[1]}` : `MAP ${player.sector}`}
+            {isDungeon ? `DUNGEON ${timer.selectedZone.split('_')[1]}` : `MAP ${sectorIdx + 1}`}
           </div>
           <button onClick={handleAbandon} style={styles.smallAbandonBtn}>
             {t('abandon_btn')}
