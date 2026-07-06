@@ -66,7 +66,7 @@
         "image": "/ref/World-Map/Lumora/lumora_behemoth.png"
       },
       "pitBoss": {
-        "name": "LUMORA OVERLORD",
+        "name": "LUMORA BEHEMOTH",
         "emoji": "☢️",
         "hp": 750000,
         "atk": 1100,
@@ -144,7 +144,7 @@
         "image": "/ref/World-Map/Sylvan/Sylva-Fanglord.png"
       },
       "pitBoss": {
-        "name": "SYLVAN OVERLORD",
+        "name": "SYLVAN FANGLORD",
         "emoji": "☢️",
         "hp": 1750000,
         "atk": 2250,
@@ -222,7 +222,7 @@
         "image": "/ref/World-Map/Ferrum Expanse/Boss-Iron-Juggernaut.png"
       },
       "pitBoss": {
-        "name": "IRON OVERLORD",
+        "name": "IRON JUGGERNAUT",
         "emoji": "☢️",
         "hp": 3500000,
         "atk": 4250,
