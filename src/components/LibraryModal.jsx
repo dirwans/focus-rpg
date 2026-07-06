@@ -279,24 +279,6 @@ export default function LibraryModal({ onClose }) {
                 ))}
               </div>
 
-              {/* Mining Boss: Kaelgorath */}
-              <div style={styles.itemCard}>
-                <div style={styles.itemTitle}>⛏️ Mining Boss — Kaelgorath</div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#ff5f7a', fontWeight: 700, marginBottom: 8 }}>LEGENDARY MINING BOSS — TRINITY CORE MINE</div>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px 12px', fontFamily: 'var(--font-mono)', fontSize: 12, marginBottom: 10 }}>
-                  <span style={{ color: '#88aadd' }}>❤️ HP</span><span style={{ color: '#ff4444', fontWeight: 700 }}>1,000,000,000 (1 Milyar)</span>
-                  <span style={{ color: '#88aadd' }}>⚔️ ATK</span><span style={{ color: '#ff985a', fontWeight: 700 }}>3,500</span>
-                  <span style={{ color: '#88aadd' }}>🛡️ DEF</span><span style={{ color: '#00e5ff', fontWeight: 700 }}>2,000</span>
-                  <span style={{ color: '#88aadd' }}>💥 CRIT</span><span style={{ color: '#ffd700', fontWeight: 700 }}>25%</span>
-                </div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#ffd700', fontWeight: 700, marginBottom: 4 }}>SPECIAL RULES</div>
-                <ul style={styles.list}>
-                  <li>👥 Harus dilawan secara <strong>multiplayer</strong> atau guild.</li>
-                  <li>🏆 Drop <strong>Legendary Equipment</strong> eksklusif.</li>
-                  <li>⏰ Respawn setiap <strong>24 jam</strong> server time.</li>
-                </ul>
-              </div>
-
               {/* Dungeon Boss Stats */}
               <div style={styles.itemCard}>
                 <div style={styles.itemTitle}>🏗️ Dungeon Boss Stats</div>
@@ -976,6 +958,22 @@ export default function LibraryModal({ onClose }) {
                 <div style={{ margin: '4px 0' }}><strong>Monsters:</strong> Core Sentinel, Trinity Sentry, Flux Phantom</div>
                 <div style={{ margin: '4px 0' }}><strong>Dungeon Boss:</strong> Trinity Guardian</div>
                 <div style={{ margin: '4px 0', color: '#00ff88' }}><strong>Tahap Awal Drop:</strong> Weapon/Armor (Legendary, SSR), Arcanite, Divine Crests, Lucky Relics, Cape Components</div>
+              </div>
+
+              <h4 style={{ color: '#ffcc00', margin: '16px 0 4px 0', fontFamily: 'var(--font-title)', fontSize: '14px' }}>⛏️ Mining Zone (Trinity Core Mine)</h4>
+              <div style={{ fontSize: 12, color: '#aaa', fontStyle: 'italic', marginBottom: 8, borderLeft: '2px solid #ffcc00', paddingLeft: 8 }}>
+                Zona terpisah dari World Map & Dungeon di atas — diakses lewat tab MINE, bukan lewat pilihan Target Zone di layar BASE.
+              </div>
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>⛏️ Trinity Core Mine</div>
+                <div style={{ margin: '4px 0' }}><strong>Aktivitas:</strong> Penambangan Ore (Ignis, Virel, Kryos, Zephra, Umbrix) — bukan combat grinding.</div>
+                <div style={{ margin: '4px 0' }}><strong>Mining Boss:</strong> Kaelgorath 🔮</div>
+                <div style={{ margin: '4px 0', color: '#88aadd', fontSize: 12 }}>HP: 1,000,000,000 | ATK: 3,500 | DEF: 2,000 | CRIT: 25%</div>
+                <ul style={{ ...styles.list, marginTop: 6 }}>
+                  <li>👥 Harus dilawan secara <strong>multiplayer</strong> atau guild.</li>
+                  <li>🏆 Drop <strong>Legendary Equipment</strong> eksklusif.</li>
+                  <li>⏰ Respawn setiap <strong>24 jam</strong> server time.</li>
+                </ul>
               </div>
             </div>
           )}
