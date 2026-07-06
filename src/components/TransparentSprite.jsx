@@ -2,17 +2,18 @@ import { useEffect, useState } from 'react'
 
 const spriteCache = new Map()
 
-export default function TransparentSprite({ 
-  src, 
-  alt, 
-  size = 120, 
-  width, 
-  height, 
-  glowColor = '#d000ff', 
-  upperBodyOnly = false, 
+export default function TransparentSprite({
+  src,
+  alt,
+  size = 120,
+  width,
+  height,
+  glowColor = '#d000ff',
+  upperBodyOnly = false,
   fill = false,
   disableKeying = true,
-  isPilot = false
+  isPilot = false,
+  bleed = false
 }) {
   const cacheKey = upperBodyOnly ? src + '_upper' : src
 
@@ -341,6 +342,39 @@ export default function TransparentSprite({
               width: 'auto',
               maxWidth: 'none',
               maxHeight: 'none',
+              filter: `brightness(1.28) contrast(1.15) saturate(1.05) drop-shadow(0 0 12px ${glowColor}4d)`
+            }}
+          />
+        )}
+      </div>
+    )
+  }
+
+  // Bleed mode: the wrapper's width is only a layout footprint (for flex spacing
+  // among siblings) — the image itself is scaled by HEIGHT alone and allowed to
+  // overflow that footprint horizontally. This lets wide/landscape-cropped art
+  // (e.g. a boss swinging a huge sword) reach its full intended height without
+  // being width-limited by object-fit:contain, and without blowing out sibling
+  // layout the way a wider box would.
+  if (bleed) {
+    return (
+      <div style={{ width: width || size, height: height || size, position: 'relative', overflow: 'visible', flexShrink: 0, zIndex: 1000 }}>
+        {displaySrc && (
+          <img
+            src={displaySrc}
+            alt={alt}
+            className={`transparent-sprite-img ${isPilot ? 'pilot-sprite-img' : ''}`}
+            style={{
+              position: 'absolute',
+              bottom: 0,
+              left: '50%',
+              transform: 'translateX(-50%)',
+              height: '100%',
+              width: 'auto',
+              maxWidth: 'none',
+              objectFit: 'contain',
+              mixBlendMode: isFallback ? 'screen' : 'normal',
+              clipPath: isFallback ? 'inset(5%)' : 'none',
               filter: `brightness(1.28) contrast(1.15) saturate(1.05) drop-shadow(0 0 12px ${glowColor}4d)`
             }}
           />

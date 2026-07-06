@@ -740,7 +740,12 @@ export default function Main() {
                   display: 'flex',
                   alignItems: 'flex-end', // Stand on the grid floor
                   justifyContent: 'center',
-                  width: battle.isBoss ? bossSpriteSize : 160,
+                  // The wrapper width is only a layout footprint (for flex spacing next
+                  // to the pilot) — with bleed mode the art itself scales by height alone
+                  // and is allowed to overflow that footprint, so a landscape-cropped
+                  // boss (e.g. a wide sword swing) still reaches the full 1.6x height
+                  // without shrinking pilot's space or overflowing the phone frame.
+                  width: battle.isBoss ? 150 : 160,
                   height: battle.isBoss ? bossSpriteSize : 160,
                   flexShrink: 0
                 }}>
@@ -748,8 +753,9 @@ export default function Main() {
                     <TransparentSprite
                       src={battle.currentMob.image}
                       alt={battle.currentMob.name}
-                      size={battle.isBoss ? bossSpriteSize : 160}
+                      size={battle.isBoss ? 150 : 160}
                       height={battle.isBoss ? bossSpriteSize : 160}
+                      bleed={battle.isBoss}
                       glowColor="var(--neon-glow)"
                     />
                   ) : (
