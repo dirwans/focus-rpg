@@ -205,6 +205,64 @@ export default function SettingsModal({ onClose }) {
               })()}
             </div>
 
+            <div style={styles.itemCard}>
+              <div style={styles.itemTitle}>🧪 Developer Cheats</div>
+              <ul style={styles.list}>
+                <li>Set level untuk testing dungeon, map, dan monsters.</li>
+              </ul>
+              <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
+                <button
+                  onClick={() => {
+                    const level = window.prompt("Set player level (1 - 100):", "66")
+                    if (level) {
+                      const lvl = parseInt(level)
+                      if (!isNaN(lvl) && lvl >= 1 && lvl <= 100) {
+                        useGameStore.setState(s => ({
+                          player: {
+                            ...s.player,
+                            level: lvl,
+                            savedAt: Date.now()
+                          }
+                        }))
+                        alert(`Level set to ${lvl}`)
+                        onClose()
+                      }
+                    }
+                  }}
+                  style={{
+                    flex: 1, padding: 8, background: 'linear-gradient(90deg, #0088ff, #00e5ff)',
+                    border: 'none', color: '#000', borderRadius: 8,
+                    fontFamily: 'var(--font-title)', fontWeight: 900, cursor: 'pointer'
+                  }}
+                >
+                  ⚡ SET LEVEL
+                </button>
+                <button
+                  onClick={() => {
+                    useGameStore.setState(s => ({
+                      player: {
+                        ...s.player,
+                        currency: {
+                          ...s.player.currency,
+                          anium: (s.player.currency?.anium || 0) + 1000000,
+                          credits: (s.player.currency?.credits || 0) + 10000
+                        },
+                        savedAt: Date.now()
+                      }
+                    }))
+                    alert("Added 1,000,000 Anium and 10,000 Credits!")
+                  }}
+                  style={{
+                    flex: 1, padding: 8, background: 'linear-gradient(90deg, #ffaa00, #ff5500)',
+                    border: 'none', color: '#fff', borderRadius: 8,
+                    fontFamily: 'var(--font-title)', fontWeight: 900, cursor: 'pointer'
+                  }}
+                >
+                  💰 +1M ANIUM
+                </button>
+              </div>
+            </div>
+
           </div>
         )}
 
