@@ -61,6 +61,67 @@ function getJobLane(jobId) {
   return 'specialist'
 }
 
+// Which of the 4 job tiers (jobs.json) a given job id belongs to for a race.
+function getJobTier(raceId, jobId) {
+  if (!raceId || !jobId || !jobsData[raceId]) return 1
+  const tierKeys = ['tier1', 'tier2', 'tier3', 'tier4']
+  for (let i = 0; i < tierKeys.length; i++) {
+    const arr = jobsData[raceId][tierKeys[i]]
+    if (arr && arr.some((j) => j.id === jobId)) return i + 1
+  }
+  return 1
+}
+
+// Dedicated tier-specific art doesn't exist yet for every race/job — this layers
+// a progressively stronger gold+glow treatment on top of the existing lane
+// sprite so promotions still read as "stronger" in the meantime.
+function getTierBoost(tier, glowColor) {
+  if (tier <= 1) return { filter: '', frame: null }
+  if (tier === 2) {
+    return {
+      filter: ' sepia(0.25) saturate(1.15) drop-shadow(0 0 6px rgba(255,215,0,0.6))',
+      frame: { border: '1px solid rgba(255,215,0,0.4)', boxShadow: '0 0 10px rgba(255,215,0,0.27)' }
+    }
+  }
+  if (tier === 3) {
+    return {
+      filter: ` sepia(0.15) saturate(1.25) drop-shadow(0 0 8px rgba(255,215,0,0.73)) drop-shadow(0 0 16px ${glowColor}77)`,
+      frame: { border: `1.5px solid ${glowColor}99`, boxShadow: `0 0 16px ${glowColor}66, inset 0 0 10px rgba(255,215,0,0.2)` }
+    }
+  }
+  return {
+    filter: ` brightness(1.08) saturate(1.4) drop-shadow(0 0 10px rgba(255,224,102,0.87)) drop-shadow(0 0 22px ${glowColor}aa) drop-shadow(0 0 40px ${glowColor}55)`,
+    frame: { border: `2px solid ${glowColor}`, boxShadow: `0 0 26px ${glowColor}99, inset 0 0 16px rgba(255,215,0,0.27)` }
+  }
+}
+
+function TieredSpriteImg({ src, alt, size, width, height, glow, tier, extraStyle }) {
+  const boost = getTierBoost(tier, glow)
+  const w = width || size
+  const h = height || size
+  const img = (
+    <img
+      src={src}
+      alt={alt}
+      className="pilot-sprite-img"
+      style={{
+        width: w,
+        height: h,
+        objectFit: 'contain',
+        display: 'block',
+        filter: `brightness(1.15) contrast(1.1) saturate(1.05) drop-shadow(0 0 10px ${glow}55)${boost.filter}`,
+        ...extraStyle
+      }}
+    />
+  )
+  if (!boost.frame) return img
+  return (
+    <div style={{ position: 'relative', width: w, height: h, display: 'inline-block', borderRadius: 8, ...boost.frame }}>
+      {img}
+    </div>
+  )
+}
+
 export function ArctronSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false, isBattle = false, style: extraStyle }) {
   const lane = getJobLane(job)
   let img = isBattle ? arctronWarriorBattleImg : arctronWarriorImg
@@ -68,22 +129,9 @@ export function ArctronSprite({ job, size = 60, width, height, upperBodyOnly = f
   else if (lane === 'specialist') img = arctronSpecialistImg
 
   const glow = '#00e5ff'
+  const tier = getJobTier('arctron', job)
 
-  return (
-    <img
-      src={img}
-      alt={`Arctron ${lane}`}
-      className="pilot-sprite-img"
-      style={{
-        width: width || size,
-        height: height || size,
-        objectFit: 'contain',
-        display: 'block',
-        filter: `brightness(1.15) contrast(1.1) saturate(1.05) drop-shadow(0 0 10px ${glow}55)`,
-        ...extraStyle
-      }}
-    />
-  )
+  return <TieredSpriteImg src={img} alt={`Arctron ${lane}`} size={size} width={width} height={height} glow={glow} tier={tier} extraStyle={extraStyle} />
 }
 
 export function BionexSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false, gender = 'male', style: extraStyle }) {
@@ -115,22 +163,9 @@ export function BionexSprite({ job, size = 60, width, height, upperBodyOnly = fa
   }
 
   const glow = '#39ff14'
+  const tier = getJobTier('bionex', job)
 
-  return (
-    <img
-      src={img}
-      alt={`Bionex ${job || 'pilot'}`}
-      className="pilot-sprite-img"
-      style={{
-        width: width || size,
-        height: height || size,
-        objectFit: 'contain',
-        display: 'block',
-        filter: `brightness(1.15) contrast(1.1) saturate(1.05) drop-shadow(0 0 10px ${glow}55)`,
-        ...extraStyle
-      }}
-    />
-  )
+  return <TieredSpriteImg src={img} alt={`Bionex ${job || 'pilot'}`} size={size} width={width} height={height} glow={glow} tier={tier} extraStyle={extraStyle} />
 }
 
 export function CelestraSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false, gender = 'female', style: extraStyle }) {
@@ -150,22 +185,9 @@ export function CelestraSprite({ job, size = 60, width, height, upperBodyOnly = 
   }
   
   const glow = '#d000ff'
+  const tier = getJobTier('celestra', job)
 
-  return (
-    <img
-      src={srcImg}
-      alt={`Celestra ${lane}`}
-      className="pilot-sprite-img"
-      style={{
-        width: width || size,
-        height: height || size,
-        objectFit: 'contain',
-        display: 'block',
-        filter: `brightness(1.15) contrast(1.1) saturate(1.05) drop-shadow(0 0 10px ${glow}55)`,
-        ...extraStyle
-      }}
-    />
-  )
+  return <TieredSpriteImg src={srcImg} alt={`Celestra ${lane}`} size={size} width={width} height={height} glow={glow} tier={tier} extraStyle={extraStyle} />
 }
 
 export function EnemySprite({ size = 60, isBoss = false }) {

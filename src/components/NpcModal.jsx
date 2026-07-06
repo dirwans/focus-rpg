@@ -1325,23 +1325,146 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                 <div style={styles.statusLabel}>ROLE</div>
                 <div style={styles.statusVal}>Eminence Quartermaster</div>
               </div>
-              ${setJsx}
-            </div>
-          )}
+              {(() => {
+          const credits = player.resources.credits
+          const inv = player.inventory
+          const countInInvOrEquip = (setId) => {
+            const eq = player.equipment || {}
+            const inInv = inv.filter(i => i.setId === setId).length
+            const inEq = Object.values(eq).filter(i => i && i.setId === setId).length
+            return inInv + inEq
+          }
 
-          
-          {/* ─── EMINENCE QUARTERMASTER ─── */}
-          {subView === 'eminence_qm' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-              <div style={styles.avatarRow}>
-                <div style={styles.npcAvatarLarge}><span style={{ fontSize: 52 }}>🎖️</span></div>
-                <div style={styles.npcDialog}>"Government equipment and Faction Sets are available here."</div>
+          const SETS = [
+            {
+              setId: 'eminence',
+              name: 'Eminence Set',
+              emoji: '👑',
+              color: '#f5a623',
+              total: 7,
+              fullBonus: 'ATK+100 | DEF+100 | HP+2000 | Crit+2%',
+              pieces: [
+                { id: 'emi_helmet', name: 'Helmet', price: 100000000 },
+                { id: 'emi_armor',  name: 'Armor',  price: 100000000 },
+                { id: 'emi_pants',  name: 'Pants',  price: 100000000 },
+                { id: 'emi_gloves', name: 'Gloves', price: 100000000 },
+                { id: 'emi_boots',  name: 'Boots',  price: 100000000 },
+                { id: 'emi_ring',   name: 'Ring',   price: 100000000 },
+                { id: 'emi_amulet', name: 'Amulet', price: 100000000 },
+              ]
+            },
+            {
+              setId: 'council_atk',
+              name: 'Attack Council Set',
+              emoji: '⚔️',
+              color: '#ff4444',
+              total: 6,
+              fullBonus: 'ATK+100 | DEF+50 | HP+1200',
+              pieces: [
+                { id: 'council_atk_helmet', name: 'Helmet', price: 50000000 },
+                { id: 'council_atk_armor',  name: 'Armor',  price: 50000000 },
+                { id: 'council_atk_gloves', name: 'Gloves', price: 50000000 },
+                { id: 'council_atk_pants',  name: 'Pants',  price: 50000000 },
+                { id: 'council_atk_boots',  name: 'Boots',  price: 50000000 },
+                { id: 'council_atk_cape',   name: 'Cape',   price: 50000000 },
+              ]
+            },
+            {
+              setId: 'council_def',
+              name: 'Defense Council Set',
+              emoji: '🛡️',
+              color: '#00aaff',
+              total: 6,
+              fullBonus: 'ATK+50 | DEF+100 | HP+1200',
+              pieces: [
+                { id: 'council_def_helmet', name: 'Helmet', price: 50000000 },
+                { id: 'council_def_armor',  name: 'Armor',  price: 50000000 },
+                { id: 'council_def_gloves', name: 'Gloves', price: 50000000 },
+                { id: 'council_def_pants',  name: 'Pants',  price: 50000000 },
+                { id: 'council_def_boots',  name: 'Boots',  price: 50000000 },
+                { id: 'council_def_cape',   name: 'Cape',   price: 50000000 },
+              ]
+            },
+            {
+              setId: 'council_sup',
+              name: 'Support Council Set',
+              emoji: '🤝',
+              color: '#00ffaa',
+              total: 6,
+              fullBonus: 'ATK+70 | DEF+70 | HP+1200',
+              pieces: [
+                { id: 'council_sup_helmet', name: 'Helmet', price: 50000000 },
+                { id: 'council_sup_armor',  name: 'Armor',  price: 50000000 },
+                { id: 'council_sup_gloves', name: 'Gloves', price: 50000000 },
+                { id: 'council_sup_pants',  name: 'Pants',  price: 50000000 },
+                { id: 'council_sup_boots',  name: 'Boots',  price: 50000000 },
+                { id: 'council_sup_cape',   name: 'Cape',   price: 50000000 },
+              ]
+            },
+          ]
+
+          return (
+            <div style={{ padding: '0 16px 80px' }}>
+              <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: '#cc44ff', letterSpacing: 1, marginBottom: 16, textAlign: 'center', borderBottom: '1px solid rgba(204,68,255,0.3)', paddingBottom: 8 }}>
+                👑 SET SHOP — Per piece: ATK+20-30 | DEF+20-30 | HP+300-500
               </div>
-              <div style={styles.statusBox}>
-                <div style={styles.statusLabel}>ROLE</div>
-                <div style={styles.statusVal}>Eminence Quartermaster</div>
-              </div>
-              ${setJsx}
+              {SETS.map(set => {
+                const owned = countInInvOrEquip(set.setId)
+                const isComplete = owned >= set.total
+                return (
+                  <div key={set.setId} style={{ marginBottom: 18, background: 'rgba(3,8,20,0.6)', border: `1px solid ${isComplete ? set.color : 'rgba(255,255,255,0.08)'}`, borderRadius: 14, overflow: 'hidden', boxShadow: isComplete ? `0 0 16px ${set.color}33` : 'none' }}>
+                    {/* Set Header */}
+                    <div style={{ background: `linear-gradient(135deg, ${set.color}22, rgba(3,8,20,0.95))`, padding: '12px 14px', borderBottom: `1px solid ${set.color}33` }}>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                          <span style={{ fontSize: 22 }}>{set.emoji}</span>
+                          <div>
+                            <div style={{ fontFamily: 'var(--font-title)', fontSize: 14, fontWeight: 800, color: set.color }}>{set.name}</div>
+                            <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#88aadd', marginTop: 2 }}>Full Set ({set.total}/{set.total}): {set.fullBonus}</div>
+                          </div>
+                        </div>
+                        <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, color: isComplete ? set.color : '#7ab0d0', fontWeight: 800 }}>
+                          {owned}/{set.total} {isComplete ? '✓' : ''}
+                        </div>
+                      </div>
+                    </div>
+                    {/* Pieces */}
+                    <div style={{ padding: '10px 14px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+                      {set.pieces.map(piece => {
+                        const inInv = inv.filter(i => i.id === piece.id).length
+                        const inEq = Object.values(player.equipment || {}).some(e => e && e.id === piece.id)
+                        const alreadyOwned = inInv > 0 || inEq
+                        const canAfford = credits >= piece.price
+                        return (
+                          <div key={piece.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'rgba(0,0,0,0.2)', padding: '8px 10px', borderRadius: 8, border: `1px solid ${alreadyOwned ? set.color + '44' : 'rgba(255,255,255,0.05)'}` }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                              <span style={{ fontSize: 16 }}>{set.emoji}</span>
+                              <div>
+                                <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 700, color: alreadyOwned ? set.color : '#e0f4ff' }}>{piece.name} {alreadyOwned ? '✓' : ''}</div>
+                                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: canAfford && !alreadyOwned ? '#00ff88' : '#7ab0d0' }}>◈ {(piece.price / 1000000).toFixed(0)}M CRD</div>
+                              </div>
+                            </div>
+                            <button
+                              disabled={alreadyOwned || !canAfford}
+                              onClick={() => {
+                                const result = buySetItem(piece.id)
+                                if (result?.ok) alert(`✅ ${piece.name} berhasil dibeli!`)
+                                else alert(`❌ ${result?.msg}`)
+                              }}
+                              style={{ border: 'none', borderRadius: 6, padding: '6px 12px', fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 800, cursor: alreadyOwned || !canAfford ? 'not-allowed' : 'pointer', background: alreadyOwned ? 'rgba(57,255,20,0.15)' : canAfford ? set.color : 'rgba(28,36,56,0.8)', color: alreadyOwned ? '#39ff14' : canAfford ? '#000' : '#4a8fa8', whiteSpace: 'nowrap' }}
+                            >
+                              {alreadyOwned ? 'OWNED' : canAfford ? 'BELI' : 'CRD ❌'}
+                            </button>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          )
+        })()}
             </div>
           )}
 
