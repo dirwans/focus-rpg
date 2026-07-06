@@ -736,7 +736,7 @@ export default function Main() {
                   display: 'flex',
                   alignItems: 'flex-end', // Stand on the grid floor
                   justifyContent: 'center',
-                  width: (battle.isBoss || battle.isPitBoss) ? 256 : 160,
+                  width: (battle.isBoss || battle.isPitBoss) ? 320 : 160,
                   height: (battle.isBoss || battle.isPitBoss) ? 256 : 160,
                   flexShrink: 0
                 }}>
@@ -744,12 +744,12 @@ export default function Main() {
                     <TransparentSprite 
                       src={battle.currentMob.image} 
                       alt={battle.currentMob.name} 
-                      size={(battle.isBoss || battle.isPitBoss) ? 256 : 160} 
+                      size={(battle.isBoss || battle.isPitBoss) ? 320 : 160} 
                       height={(battle.isBoss || battle.isPitBoss) ? 256 : 160}
                       glowColor="var(--neon-glow)" 
                     />
                   ) : (
-                    <EnemySprite isBoss={battle.isBoss} isPitBoss={battle.isPitBoss} size={(battle.isBoss || battle.isPitBoss) ? 256 : 160} />
+                    <EnemySprite isBoss={battle.isBoss} isPitBoss={battle.isPitBoss} size={(battle.isBoss || battle.isPitBoss) ? 320 : 160} />
                   )}
                 </div>
                 <div style={styles.spriteLabel}>{battle.currentMob.name?.toUpperCase()}</div>

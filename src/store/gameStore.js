@@ -97,12 +97,12 @@ function spawnEnemy(sectorIdx, playerLevel, forceRaid = false, isDungeon = false
   }
 
   // World Map
-  if (forceRaid || Math.random() < 0.01) {
-    return { mob: sector.pitBoss, isBoss: true, isPitBoss: true, isCulprit: false, hp: sector.pitBoss.hp }
-  }
-  
   const maxLevels = [12, 25, 38, 52, 66, 999]
   const isMaxLevelForMap = playerLevel === maxLevels[sectorIdx]
+  
+  if (forceRaid || (Math.random() < 0.01 && playerLevel >= maxLevels[sectorIdx] - 3)) {
+    return { mob: sector.pitBoss, isBoss: true, isPitBoss: true, isCulprit: false, hp: sector.pitBoss.hp }
+  }
   
   if (isMaxLevelForMap || playerLevel % 10 === 0) {
     return { mob: sector.boss, isBoss: true, isPitBoss: false, isCulprit: false, hp: sector.boss.hp }
