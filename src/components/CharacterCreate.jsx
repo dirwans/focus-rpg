@@ -8,14 +8,22 @@ import { t } from '../lib/translate'
 import { PilotSprite } from './PilotSprites'
 
 // Import faction hero art assets
-import arctronWarrior from '../assets/arctron_warrior.png'
 import bionexWarriorMale from '../assets/bionex_warrior_male.png'
 import celestraLogo from '../assets/celestra_logo.png'
+import arctronLogo from '../assets/arctron_logo.png'
 
 const HERO_IMAGES = {
-  arctron: arctronWarrior,
+  arctron: arctronLogo,
   bionex: bionexWarriorMale,
   celestra: celestraLogo
+}
+
+// Races that render as a glowing emblem (rings + recolor animation) instead of
+// a standing character sprite during race select. Ring order = paint order
+// (outermost first so later ones layer on top).
+const LOGO_RACE_CONFIG = {
+  celestra: { rings: ['r3', 'r2', 'r1'], floatAnim: 'celestraLogoFloat 6s ease-in-out infinite' },
+  arctron: { rings: ['r2', 'r1'], floatAnim: 'arctronLogoFloat 6s ease-in-out infinite' }
 }
 
 const FACTION_THEMES = {
@@ -211,24 +219,24 @@ export default function CharacterCreate() {
       {/* 1. Hero Full Bleed Art (Race Select Only) */}
       {step === 1 && (
         <>
-          {focusedRace === 'celestra' ? (
+          {LOGO_RACE_CONFIG[focusedRace] ? (
             <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2, pointerEvents: 'none' }}>
               <div
-                className="celestra-logo-wrap"
+                className={`${focusedRace}-logo-wrap`}
                 style={{
                   height: '46%',
                   aspectRatio: '1 / 1',
                   maxHeight: '380px',
-                  animation: 'celestraLogoFloat 6s ease-in-out infinite'
+                  animation: LOGO_RACE_CONFIG[focusedRace].floatAnim
                 }}
               >
-                <div className="celestra-logo-ring r3" />
-                <div className="celestra-logo-ring r2" />
-                <div className="celestra-logo-ring r1" />
+                {LOGO_RACE_CONFIG[focusedRace].rings.map((r) => (
+                  <div key={r} className={`${focusedRace}-logo-ring ${r}`} />
+                ))}
                 <img
-                  src={HERO_IMAGES.celestra}
-                  alt="celestra"
-                  className="celestra-logo-img"
+                  src={HERO_IMAGES[focusedRace]}
+                  alt={focusedRace}
+                  className={`${focusedRace}-logo-img`}
                   style={{ width: '62%', height: '62%', objectFit: 'contain' }}
                 />
               </div>
