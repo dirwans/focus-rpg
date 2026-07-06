@@ -20,7 +20,6 @@ export default function Inventory() {
   const player = useGameStore((s) => s.player)
   const equipItem = useGameStore((s) => s.equipItem)
   const unequipItem = useGameStore((s) => s.unequipItem)
-  const stats = useGameStore((s) => s.getStats())
   
   if (!player) return null;
 
