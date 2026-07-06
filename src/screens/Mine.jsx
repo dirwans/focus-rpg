@@ -87,7 +87,7 @@ export default function Mine() {
           style={activeTab === 'mine' ? styles.tabActive : styles.tab}
           onClick={() => setActiveTab('mine')}
         >
-          CORE MINE
+          TRINITY MINE
         </button>
         <button
           style={activeTab === 'process' ? styles.tabActive : styles.tab}
@@ -130,42 +130,85 @@ export default function Mine() {
               <div style={styles.miningSelector}>
                 <div style={styles.infoText}>Pilih durasi penambangan untuk memulai eksploitasi bijih di Trinity Core:</div>
                 
-                <div style={styles.durationOptions}>
-                  {/* 10 Min */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '10px' }}>
+                  {/* 1F */}
                   <div style={styles.optionCard}>
-                    <div style={styles.optionTime}>⏱️ 10 MENIT</div>
+                    <img src="/ref/Trinity-Mine/1F-SentryDementor.png" style={{ height: 60, objectFit: 'contain', marginBottom: 4 }} alt="1F" />
+                    <div style={{...styles.optionTime, fontSize: 12}}>1F - Sentry (10m)</div>
                     <div style={styles.optionYield}>Hasil: 1-3 Ore</div>
                     <div style={styles.optionRates}>
-                      <div>Common: <span style={{ color: '#e0f0ff' }}>{100 - rankBonus}%</span></div>
-                      <div>Rare: <span style={{ color: '#66ccff', fontWeight: 700, textShadow: '0 0 6px rgba(102,204,255,0.6)' }}>{rankBonus - (rankNumber === 1 ? 1 : 0)}%</span></div>
-                      {rankNumber === 1 && <div>Epic: <span style={{ color: '#dd88ff', fontWeight: 700, textShadow: '0 0 6px rgba(221,136,255,0.6)' }}>1%</span></div>}
+                      <div>Com: <span style={{ color: '#e0f0ff' }}>{100 - rankBonus}%</span></div>
+                      <div>Rare: <span style={{ color: '#66ccff', fontWeight: 700 }}>{rankBonus - (rankNumber === 1 ? 1 : 0)}%</span></div>
+                      {rankNumber === 1 && <div>Epic: <span style={{ color: '#dd88ff', fontWeight: 700 }}>1%</span></div>}
                     </div>
-                    <button style={styles.startButton} onClick={() => startMining(10)}>MULAI</button>
+                    <button style={styles.startButton} onClick={() => startMining(1, 10)}>MULAI</button>
                   </div>
 
-                  {/* 30 Min */}
+                  {/* 2F */}
                   <div style={styles.optionCard}>
-                    <div style={styles.optionTime}>⏱️ 30 MENIT</div>
+                    <img src="/ref/Trinity-Mine/2F-BorgDementor.png" style={{ height: 60, objectFit: 'contain', marginBottom: 4 }} alt="2F" />
+                    <div style={{...styles.optionTime, fontSize: 12}}>2F - Borg (30m)</div>
                     <div style={styles.optionYield}>Hasil: 3-5 Ore</div>
                     <div style={styles.optionRates}>
-                      <div>Common: <span style={{ color: '#e0f0ff' }}>{80 - rankBonus}%</span></div>
-                      <div>Rare: <span style={{ color: '#66ccff', fontWeight: 700, textShadow: '0 0 6px rgba(102,204,255,0.6)' }}>{20 + rankBonus - (rankNumber === 1 ? 1 : 0)}%</span></div>
-                      {rankNumber === 1 && <div>Epic: <span style={{ color: '#dd88ff', fontWeight: 700, textShadow: '0 0 6px rgba(221,136,255,0.6)' }}>1%</span></div>}
+                      <div>Com: <span style={{ color: '#e0f0ff' }}>{80 - rankBonus}%</span></div>
+                      <div>Rare: <span style={{ color: '#66ccff', fontWeight: 700 }}>{20 + rankBonus - (rankNumber === 1 ? 1 : 0)}%</span></div>
+                      {rankNumber === 1 && <div>Epic: <span style={{ color: '#dd88ff', fontWeight: 700 }}>1%</span></div>}
                     </div>
-                    <button style={styles.startButton} onClick={() => startMining(30)}>MULAI</button>
+                    <button style={styles.startButton} onClick={() => startMining(2, 30)}>MULAI</button>
                   </div>
 
-                  {/* 60 Min */}
+                  {/* 3F */}
                   <div style={styles.optionCard}>
-                    <div style={styles.optionTime}>⏱️ 60 MENIT</div>
+                    <img src="/ref/Trinity-Mine/3F-MutationDementor.png" style={{ height: 60, objectFit: 'contain', marginBottom: 4 }} alt="3F" />
+                    <div style={{...styles.optionTime, fontSize: 12}}>3F - Mutation (1h)</div>
                     <div style={styles.optionYield}>Hasil: 5-8 Ore</div>
                     <div style={styles.optionRates}>
-                      <div>Common: <span style={{ color: '#e0f0ff' }}>{60 - rankBonus}%</span></div>
-                      <div>Rare: <span style={{ color: '#66ccff', fontWeight: 700, textShadow: '0 0 6px rgba(102,204,255,0.6)' }}>{35 + rankBonus - (rankNumber === 1 ? 1 : 0)}%</span></div>
-                      <div>Epic: <span style={{ color: '#dd88ff', fontWeight: 700, textShadow: '0 0 6px rgba(221,136,255,0.6)' }}>{5 + (rankNumber === 1 ? 1 : 0)}%</span></div>
+                      <div>Com: <span style={{ color: '#e0f0ff' }}>{60 - rankBonus}%</span></div>
+                      <div>Rare: <span style={{ color: '#66ccff', fontWeight: 700 }}>{35 + rankBonus - (rankNumber === 1 ? 1 : 0)}%</span></div>
+                      <div>Epic: <span style={{ color: '#dd88ff', fontWeight: 700 }}>{5 + (rankNumber === 1 ? 1 : 0)}%</span></div>
                     </div>
-                    <button style={styles.startButton} onClick={() => startMining(60)}>MULAI</button>
+                    <button style={styles.startButton} onClick={() => startMining(3, 60)}>MULAI</button>
                   </div>
+
+                  {/* 4F */}
+                  <div style={styles.optionCard}>
+                    <img src="/ref/Trinity-Mine/4F-OrcDementor.png" style={{ height: 60, objectFit: 'contain', marginBottom: 4 }} alt="4F" />
+                    <div style={{...styles.optionTime, fontSize: 12}}>4F - Orc (2h)</div>
+                    <div style={styles.optionYield}>Hasil: 8-12 Ore</div>
+                    <div style={styles.optionRates}>
+                      <div>Com: <span style={{ color: '#e0f0ff' }}>{45 - rankBonus}%</span></div>
+                      <div>Rare: <span style={{ color: '#66ccff', fontWeight: 700 }}>{45 + rankBonus - (rankNumber === 1 ? 2 : 0)}%</span></div>
+                      <div>Epic: <span style={{ color: '#dd88ff', fontWeight: 700 }}>{10 + (rankNumber === 1 ? 2 : 0)}%</span></div>
+                    </div>
+                    <button style={styles.startButton} onClick={() => startMining(4, 120)}>MULAI</button>
+                  </div>
+
+                  {/* 5F */}
+                  <div style={styles.optionCard}>
+                    <img src="/ref/Trinity-Mine/5F-GhostDementor.png" style={{ height: 60, objectFit: 'contain', marginBottom: 4 }} alt="5F" />
+                    <div style={{...styles.optionTime, fontSize: 12}}>5F - Ghost (4h)</div>
+                    <div style={styles.optionYield}>Hasil: 12-18 Ore</div>
+                    <div style={styles.optionRates}>
+                      <div>Com: <span style={{ color: '#e0f0ff' }}>{30 - rankBonus}%</span></div>
+                      <div>Rare: <span style={{ color: '#66ccff', fontWeight: 700 }}>{50 + rankBonus - (rankNumber === 1 ? 3 : 0)}%</span></div>
+                      <div>Epic: <span style={{ color: '#dd88ff', fontWeight: 700 }}>{20 + (rankNumber === 1 ? 3 : 0)}%</span></div>
+                    </div>
+                    <button style={styles.startButton} onClick={() => startMining(5, 240)}>MULAI</button>
+                  </div>
+
+                  {/* 6F Boss */}
+                  <div style={styles.optionCard}>
+                    <img src="/ref/Trinity-Mine/Trinity-Core-Keeper-Boss-Kaelgorath.png" style={{ height: 75, objectFit: 'contain', filter: 'drop-shadow(0 0 5px red)', marginBottom: 4 }} alt="6F" />
+                    <div style={{...styles.optionTime, fontSize: 11, color: '#ff4444'}}>6F - KAELGORATH (8h)</div>
+                    <div style={styles.optionYield}>Hasil: 20-30 Ore</div>
+                    <div style={styles.optionRates}>
+                      <div>Com: <span style={{ color: '#e0f0ff' }}>{15 - rankBonus}%</span></div>
+                      <div>Rare: <span style={{ color: '#66ccff', fontWeight: 700 }}>{50 + rankBonus - (rankNumber === 1 ? 5 : 0)}%</span></div>
+                      <div>Epic: <span style={{ color: '#dd88ff', fontWeight: 700 }}>{35 + (rankNumber === 1 ? 5 : 0)}%</span></div>
+                    </div>
+                    <button style={{...styles.startButton, background: 'linear-gradient(135deg, #ff4444 0%, #aa0000 100%)', color: '#fff', textShadow: 'none', border: '1px solid #ff4444'}} onClick={() => startMining(6, 480)}>LAWAN BOSS</button>
+                  </div>
+
                 </div>
               </div>
             )}

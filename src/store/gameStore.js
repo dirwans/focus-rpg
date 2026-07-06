@@ -871,9 +871,9 @@ export const useGameStore = create(
           }
         }
       }),
-      startMining: (durationMinutes) => set((s) => {
+      startMining: (floor, durationMinutes) => set((s) => {
         const { player } = s
-        const miningTimer = player.miningTimer || { state: 'idle', startedAt: 0, endsAt: 0, duration: 0 }
+        const miningTimer = player.miningTimer || { state: 'idle', startedAt: 0, endsAt: 0, duration: 0, floor: 0 }
         if (miningTimer.state !== 'idle') {
           alert("Penambangan sedang berjalan!")
           return {}
@@ -885,7 +885,8 @@ export const useGameStore = create(
               state: 'running',
               startedAt: Date.now(),
               endsAt: Date.now() + durationMinutes * 60 * 1000,
-              duration: durationMinutes
+              duration: durationMinutes,
+              floor: floor
             },
             savedAt: Date.now()
           }
@@ -902,7 +903,8 @@ export const useGameStore = create(
               state: 'idle',
               startedAt: 0,
               endsAt: 0,
-              duration: 0
+              duration: 0,
+              floor: 0
             },
             savedAt: Date.now()
           }
@@ -911,21 +913,27 @@ export const useGameStore = create(
 
       claimMiningRewards: () => set((s) => {
         const { player, winnerRace, runnerUpRace, lastPlaceRace } = s
-        const miningTimer = player.miningTimer || { state: 'idle', startedAt: 0, endsAt: 0, duration: 0 }
+        const miningTimer = player.miningTimer || { state: 'idle', startedAt: 0, endsAt: 0, duration: 0, floor: 0 }
         if (miningTimer.state !== 'running') return {}
         if (Date.now() < miningTimer.endsAt) {
           alert("Penambangan belum selesai!")
           return {}
         }
 
-        const duration = miningTimer.duration || 10
+        const floor = miningTimer.floor || 1
         let oreCount = 1
-        if (duration === 10) {
+        if (floor === 1) { // 10 min
           oreCount = 1 + Math.floor(Math.random() * 3) // 1-3
-        } else if (duration === 30) {
+        } else if (floor === 2) { // 30 min
           oreCount = 3 + Math.floor(Math.random() * 3) // 3-5
-        } else if (duration === 60) {
+        } else if (floor === 3) { // 60 min
           oreCount = 5 + Math.floor(Math.random() * 4) // 5-8
+        } else if (floor === 4) { // 120 min
+          oreCount = 8 + Math.floor(Math.random() * 5) // 8-12
+        } else if (floor === 5) { // 240 min
+          oreCount = 12 + Math.floor(Math.random() * 7) // 12-18
+        } else if (floor === 6) { // 480 min
+          oreCount = 20 + Math.floor(Math.random() * 11) // 20-30
         }
 
         // Faction rankings and grade bonuses
@@ -935,18 +943,30 @@ export const useGameStore = create(
 
         // Probabilities
         let pCommon = 100, pRare = 0, pEpic = 0
-        if (duration === 10) {
+        if (floor === 1) {
           pCommon = 100 - bonus
           pRare = bonus - (playerRankIdx === 0 ? 1 : 0)
           pEpic = (playerRankIdx === 0 ? 1 : 0)
-        } else if (duration === 30) {
+        } else if (floor === 2) {
           pCommon = 80 - bonus
           pRare = 20 + bonus - (playerRankIdx === 0 ? 1 : 0)
           pEpic = (playerRankIdx === 0 ? 1 : 0)
-        } else if (duration === 60) {
+        } else if (floor === 3) {
           pCommon = 60 - bonus
           pRare = 35 + bonus - (playerRankIdx === 0 ? 1 : 0)
           pEpic = 5 + (playerRankIdx === 0 ? 1 : 0)
+        } else if (floor === 4) {
+          pCommon = 45 - bonus
+          pRare = 45 + bonus - (playerRankIdx === 0 ? 2 : 0)
+          pEpic = 10 + (playerRankIdx === 0 ? 2 : 0)
+        } else if (floor === 5) {
+          pCommon = 30 - bonus
+          pRare = 50 + bonus - (playerRankIdx === 0 ? 3 : 0)
+          pEpic = 20 + (playerRankIdx === 0 ? 3 : 0)
+        } else if (floor === 6) {
+          pCommon = 15 - bonus
+          pRare = 50 + bonus - (playerRankIdx === 0 ? 5 : 0)
+          pEpic = 35 + (playerRankIdx === 0 ? 5 : 0)
         }
 
         const oreTypes = ['ignis', 'virel', 'kryos', 'zephra', 'umbrix']
@@ -1002,7 +1022,8 @@ export const useGameStore = create(
               state: 'idle',
               startedAt: 0,
               endsAt: 0,
-              duration: 0
+              duration: 0,
+              floor: 0
             },
             savedAt: Date.now()
           }

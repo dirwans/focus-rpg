@@ -16,7 +16,7 @@ const NAV_ITEMS = [
   { id: 'unit',      label: 'CHARACTER' },
   { id: 'ranks',     label: 'RANKS' },
   { id: 'battle',    label: 'BATTLE' },
-  { id: 'mine',      label: 'MINE' },
+  { id: 'mine',      label: 'T-MINE' },
   { id: 'forge',     label: 'FORGE' },
   { id: 'ascension', label: 'ASC' },
   { id: 'premium',   label: 'SHOP' },
