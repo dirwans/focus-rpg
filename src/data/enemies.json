@@ -328,7 +328,7 @@
           "def": 550,
           "expReward": 36,
           "aniumReward": 23,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_6.png",
+          "image": "/ref/World-Map/Trinity/trinity_sentinel.png",
           "critical": 17
         },
         {
@@ -339,7 +339,7 @@
           "def": 650,
           "expReward": 46,
           "aniumReward": 30,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/demolith-monster.png",
+          "image": "/ref/World-Map/Trinity/core_phantom.png",
           "critical": 18
         },
         {
@@ -350,7 +350,7 @@
           "def": 750,
           "expReward": 56,
           "aniumReward": 38,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/10/tuyul.png",
+          "image": "/ref/World-Map/Trinity/nexus_harbinger.png",
           "critical": 19
         },
         {
@@ -361,7 +361,7 @@
           "def": 850,
           "expReward": 58,
           "aniumReward": 40,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/10/tuyul.png",
+          "image": "/ref/World-Map/Trinity/flux_avatar.png",
           "critical": 20
         }
       ],
@@ -375,7 +375,7 @@
         "regen": 1500,
         "expReward": 3500,
         "aniumReward": 2000,
-        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_23.png"
+        "image": "/ref/World-Map/Trinity/trinity_overlord.png"
       },
       "pitBoss": {
         "name": "TRINITY SOVEREIGN",
@@ -387,7 +387,7 @@
         "regen": 5000,
         "expReward": 15000,
         "aniumReward": 10000,
-        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_23.png"
+        "image": "/ref/World-Map/Trinity/trinity_overlord.png"
       }
     }
   ],
