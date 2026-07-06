@@ -16,12 +16,18 @@ import shardKryos from '../assets/kryos_shard.png'
 import shardZephra from '../assets/zephra_shard.png'
 import shardUmbrix from '../assets/umbrix_shard.png'
 
+import oreIgnis from '../assets/ignis_ore.png'
+import oreVirel from '../assets/virel_ore.png'
+import oreKryos from '../assets/kryos_ore.png'
+import oreZephra from '../assets/zephra_ore.png'
+import oreUmbrix from '../assets/umbrix_ore.png'
+
 const ORE_TYPES = [
-  { key: 'ignis',  name: 'Ignis',  color: '#ff4444', emoji: '🟥', shardEmoji: '🔴', shardSprite: shardIgnis },
-  { key: 'virel',  name: 'Virel',  color: '#4488ff', emoji: '🟦', shardEmoji: '🔵', shardSprite: shardVirel },
-  { key: 'kryos',  name: 'Kryos',  color: '#44ff88', emoji: '🟩', shardEmoji: '🟢', shardSprite: shardKryos },
-  { key: 'zephra', name: 'Zephra', color: '#ffcc00', emoji: '🟨', shardEmoji: '🟡', shardSprite: shardZephra },
-  { key: 'umbrix', name: 'Umbrix', color: '#888888', emoji: '⬛', shardEmoji: '⚫', shardSprite: shardUmbrix },
+  { key: 'ignis',  name: 'Ignis',  color: '#ff4444', emoji: '🟥', shardEmoji: '🔴', shardSprite: shardIgnis, oreSprite: oreIgnis },
+  { key: 'virel',  name: 'Virel',  color: '#4488ff', emoji: '🟦', shardEmoji: '🔵', shardSprite: shardVirel, oreSprite: oreVirel },
+  { key: 'kryos',  name: 'Kryos',  color: '#44ff88', emoji: '🟩', shardEmoji: '🟢', shardSprite: shardKryos, oreSprite: oreKryos },
+  { key: 'zephra', name: 'Zephra', color: '#ffcc00', emoji: '🟨', shardEmoji: '🟡', shardSprite: shardZephra, oreSprite: oreZephra },
+  { key: 'umbrix', name: 'Umbrix', color: '#888888', emoji: '⬛', shardEmoji: '⚫', shardSprite: shardUmbrix, oreSprite: oreUmbrix },
 ]
 
 const MINE_FLOORS = [
@@ -642,7 +648,10 @@ export default function Mine() {
                   </div>
                   <div style={s.recipeIngredients}>
                     <div style={s.ingredientRow}>
-                      <span>{ore.emoji} {ore.name} Ore</span>
+                      <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                        <img src={ore.oreSprite} alt={ore.name} style={{ width: 20, height: 20, objectFit: 'contain' }} />
+                        {ore.name} Ore
+                      </span>
                       <span style={{ color: isOreEnough ? '#00ff88' : '#ff4444', fontWeight: 700 }}>{ownedOre} / 10</span>
                     </div>
                     <div style={s.ingredientRow}>
