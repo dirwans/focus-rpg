@@ -221,6 +221,7 @@ export default function SettingsModal({ onClose }) {
                           player: {
                             ...s.player,
                             level: lvl,
+                            isDeveloper: true,
                             savedAt: Date.now()
                           }
                         }))
@@ -243,6 +244,7 @@ export default function SettingsModal({ onClose }) {
                       player: {
                         ...s.player,
                         level: 66,
+                        isDeveloper: true,
                         upgrades: { atk: 250, def: 250, hp: 250 },
                         resources: {
                           ...s.player.resources,
@@ -269,6 +271,7 @@ export default function SettingsModal({ onClose }) {
                     useGameStore.setState(s => ({
                       player: {
                         ...s.player,
+                        isDeveloper: true,
                         resources: {
                           ...s.player.resources,
                           anium: (s.player.resources?.anium || 0) + 1000000,

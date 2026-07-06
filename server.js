@@ -434,13 +434,13 @@ app.post('/api/save', async (req, res) => {
     // Always allow at least 15 levels difference as early levels can jump 15 levels in a single 10-minute session!
     const maxAllowedDiff = Math.max(15, Math.floor(maxHourDiff * timeRatio) + 5)
 
-    if (levelDiff > maxAllowedDiff) {
+    if (levelDiff > maxAllowedDiff && !gameState.isDeveloper) {
       console.warn(`[Anti-Cheat] User ${s.username} attempted invalid level jump. Current: ${current.level}, Requested: ${gameState.level}, Allowed: ${maxAllowedDiff}`)
       return res.status(400).json({ error: 'Save rejected: Invalid state progression detected.' })
     }
   } else {
     // New user starting condition
-    if ((gameState.level || 1) > 2) {
+    if ((gameState.level || 1) > 2 && !gameState.isDeveloper) {
       console.warn(`[Anti-Cheat] New user ${s.username} attempted to start at level ${gameState.level}`)
       return res.status(400).json({ error: 'Save rejected: Invalid starting state.' })
     }
