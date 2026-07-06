@@ -10,6 +10,7 @@ const PROMO_COSTS = {
   1: 0,
   2: 0,
   3: 0,
+  4: 0
 }
 const RECLASS_COST = 5000
 
@@ -130,7 +131,8 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
   const eligibleForPromo = (
     (tier === 0 && player.level >= 1) ||
     (tier === 1 && player.level >= 30) ||
-    (tier === 2 && player.level >= 40)
+    (tier === 2 && player.level >= 40) ||
+    (tier === 3 && player.level >= 50)
   )
 
   const promoCost = eligibleForPromo ? PROMO_COSTS[tier + 1] : 0
@@ -1164,9 +1166,10 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                                 const isActive = player.job === j.id
                                 const isUnlocked = tier >= jTier
                                 
-                                const reqLevel = j.levelReq || (jTier === 2 ? 30 : 40);
+                                const reqLevel = j.levelReq || (jTier === 2 ? 32 : jTier === 3 ? 42 : 55);
 
-                                const prevTierJobs = idx > 0 ? tierJobs[idx - 1].jobs : (tabHeroJob ? [tabHeroJob.job] : [])
+                                const prevTierInfo = tierJobs.find(t => t.tier === jTier - 1)
+                                const prevTierJobs = prevTierInfo ? prevTierInfo.jobs : (tabHeroJob ? [tabHeroJob.job] : [])
                                 const prevTierJobIds = prevTierJobs.map(pj => pj.id)
 
                                 // Check if eligible for promotion to this node
@@ -1174,7 +1177,8 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                                   (tier === 0 && jTier === 1 && player.level >= (j.levelReq || 1)) ||
                                   (tier === 0 && jTier === 2 && prevTierJobIds.length === 0 && player.level >= reqLevel) ||
                                   (tier === 1 && jTier === 2 && player.level >= reqLevel && prevTierJobIds.includes(player.job)) ||
-                                  (tier === 2 && jTier === 3 && player.level >= reqLevel && prevTierJobIds.includes(player.job))
+                                  (tier === 2 && jTier === 3 && player.level >= reqLevel && prevTierJobIds.includes(player.job)) ||
+                                  (tier === 3 && jTier === 4 && player.level >= reqLevel && prevTierJobIds.includes(player.job))
                                 )
 
                                 // Check if eligible for reclass to this node
