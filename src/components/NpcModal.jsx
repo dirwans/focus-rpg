@@ -1166,8 +1166,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                                 
                                 const reqLevel = j.levelReq || (jTier === 2 ? 30 : 40);
 
-                                // Get previous tier job IDs
-                                const prevTierJobs = idx > 0 ? tierJobs[idx - 1].jobs : []
+                                const prevTierJobs = idx > 0 ? tierJobs[idx - 1].jobs : (tabHeroJob ? [tabHeroJob.job] : [])
                                 const prevTierJobIds = prevTierJobs.map(pj => pj.id)
 
                                 // Check if eligible for promotion to this node
