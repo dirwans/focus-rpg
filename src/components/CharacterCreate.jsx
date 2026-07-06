@@ -157,6 +157,7 @@ export default function CharacterCreate() {
     }
 
     useGameStore.setState((s) => {
+      const isDefect = s.player?.level > 1
       const freshPlayer = {
         ...s.player,
         name: cleanedName,
@@ -164,22 +165,23 @@ export default function CharacterCreate() {
         race: raceId,
         job: jobId,
         gender: gender,
-        level: 1,
-        exp: 0,
-        resources: { crd: 200, credits: 10, potions: 5, nxc: 0 },
+        level: isDefect ? s.player.level : 1,
+        exp: isDefect ? s.player.exp : 0,
+        resources: isDefect ? s.player.resources : { crd: 200, credits: 10, potions: 5, nxc: 0 },
         upgrades: { atk: 0, def: 0, hp: 0 },
         equipment: { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null },
-        sector: 1,
-        highestSector: 1,
-        streak: 0,
-        lastSessionDate: null,
-        inventory: [],
-        totalSessions: 0,
-        totalMinutes: 0,
+        sector: isDefect ? s.player.sector : 1,
+        highestSector: isDefect ? s.player.highestSector : 1,
+        streak: isDefect ? s.player.streak : 0,
+        lastSessionDate: s.player?.lastSessionDate || null,
+        inventory: isDefect ? s.player.inventory : [],
+        warehouse: s.player?.warehouse || [],
+        totalSessions: s.player?.totalSessions || 0,
+        totalMinutes: s.player?.totalMinutes || 0,
         savedAt: Date.now(),
-        auraColor: '#00e5ff',
-        avatarMode: 'full',
-        server: 'nova_core',
+        auraColor: s.player?.auraColor || '#00e5ff',
+        avatarMode: s.player?.avatarMode || 'full',
+        server: s.player?.server || 'nova_core',
         hasChangedName: true
       }
       syncSave(freshPlayer)
