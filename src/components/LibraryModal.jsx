@@ -233,7 +233,7 @@ export default function LibraryModal({ onClose }) {
                 <div style={styles.itemTitle}>👑 World Boss Drop</div>
                 <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#00ff88', fontWeight: 700, marginBottom: 6 }}>GUARANTEED</div>
                 <ul style={styles.list}>
-                  <li>◈ Credits <span style={{ color: '#88aadd' }}>(sesuai Boss)</span></li>
+                  <li>💰 CRD <span style={{ color: '#88aadd' }}>(sesuai Boss)</span></li>
                   <li>🎁 1 Random Equipment <span style={{ color: '#88aadd', fontSize: 11 }}>(⚪ Common <strong>atau</strong> 🟢 Uncommon)</span></li>
                 </ul>
                 <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#ffcc00', fontWeight: 700, margin: '8px 0 6px' }}>RANDOM DROP</div>
@@ -249,11 +249,11 @@ export default function LibraryModal({ onClose }) {
               <div style={styles.itemCard}>
                 <div style={styles.itemTitle}>👑 World Boss CRD</div>
                 {[
-                  { boss: '🌱 Lumora Behemoth', crd: '100,000 ~ 200,000 Credits' },
-                  { boss: '🌿 Sylvan Fanglord', crd: '300,000 ~ 500,000 Credits' },
-                  { boss: '⚙️ Iron Juggernaut', crd: '700,000 ~ 1,000,000 Credits' },
-                  { boss: '🔥 Pyraxis Overlord', crd: '1,500,000 ~ 2,500,000 Credits' },
-                  { boss: '☢️ Trinity Overlord', crd: '4,000,000 ~ 6,000,000 Credits' },
+                  { boss: '🌱 Lumora Behemoth', crd: '100,000 ~ 200,000 CRD' },
+                  { boss: '🌿 Sylvan Fanglord', crd: '300,000 ~ 500,000 CRD' },
+                  { boss: '⚙️ Iron Juggernaut', crd: '700,000 ~ 1,000,000 CRD' },
+                  { boss: '🔥 Pyraxis Overlord', crd: '1,500,000 ~ 2,500,000 CRD' },
+                  { boss: '☢️ Trinity Overlord', crd: '4,000,000 ~ 6,000,000 CRD' },
                 ].map((b, i) => (
                   <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: i < 4 ? '1px solid rgba(255,255,255,0.07)' : 'none', fontFamily: 'var(--font-mono)', fontSize: 12 }}>
                     <span>{b.boss}</span>
@@ -305,7 +305,7 @@ export default function LibraryModal({ onClose }) {
                 <div style={styles.itemTitle}>🏛️ Dungeon Boss Drop</div>
                 <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#00ff88', fontWeight: 700, marginBottom: 6 }}>GUARANTEED</div>
                 <ul style={styles.list}>
-                  <li>◈ Credits <span style={{ color: '#88aadd' }}>(sesuai Dungeon)</span></li>
+                  <li>💰 CRD <span style={{ color: '#88aadd' }}>(sesuai Dungeon)</span></li>
                   <li>🎁 1 Random Equipment <span style={{ color: '#88aadd', fontSize: 11 }}>(⚪ Common <strong>atau</strong> 🟢 Uncommon)</span></li>
                 </ul>
                 <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#ffcc00', fontWeight: 700, margin: '8px 0 6px' }}>RANDOM DROP</div>
@@ -320,11 +320,11 @@ export default function LibraryModal({ onClose }) {
 
               {/* Dungeon Boss CRD */}
               <div style={styles.itemCard}>
-                <div style={styles.itemTitle}>🏛️ Dungeon Boss Credits</div>
+                <div style={styles.itemTitle}>🏛️ Dungeon Boss CRD</div>
                 {[
-                  { boss: 'Echo Burrow', crd: '500,000 ~ 800,000 Credits' },
-                  { boss: 'Infernal Forge', crd: '2,000,000 ~ 3,500,000 Credits' },
-                  { boss: 'Trinity Core Chamber', crd: '7,000,000 ~ 10,000,000 Credits' },
+                  { boss: 'Echo Burrow', crd: '500,000 ~ 800,000 CRD' },
+                  { boss: 'Infernal Forge', crd: '2,000,000 ~ 3,500,000 CRD' },
+                  { boss: 'Trinity Core Chamber', crd: '7,000,000 ~ 10,000,000 CRD' },
                 ].map((b, i) => (
                   <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: i < 2 ? '1px solid rgba(255,255,255,0.07)' : 'none', fontFamily: 'var(--font-mono)', fontSize: 12 }}>
                     <span style={{ color: '#e0f4ff' }}>🏛️ {b.boss}</span>

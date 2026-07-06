@@ -64,6 +64,18 @@
         "expReward": 150,
         "crdReward": 100,
         "image": "/ref/World-Map/Lumora/lumora_behemoth.png"
+      },
+      "pitBoss": {
+        "name": "LUMORA BEHEMOTH",
+        "emoji": "☢️",
+        "hp": 750000,
+        "atk": 1100,
+        "def": 600,
+        "critical": 5,
+        "regen": 400,
+        "expReward": 750,
+        "crdReward": 500,
+        "image": "/ref/World-Map/Lumora/lumora_behemoth.png"
       }
     },
     {
@@ -129,6 +141,18 @@
         "regen": 180,
         "expReward": 350,
         "crdReward": 250,
+        "image": "/ref/World-Map/Sylvan/Sylva-Fanglord.png"
+      },
+      "pitBoss": {
+        "name": "SYLVAN FANGLORD",
+        "emoji": "☢️",
+        "hp": 1750000,
+        "atk": 2250,
+        "def": 1250,
+        "critical": 5,
+        "regen": 900,
+        "expReward": 1750,
+        "crdReward": 1250,
         "image": "/ref/World-Map/Sylvan/Sylva-Fanglord.png"
       }
     },
@@ -196,6 +220,18 @@
         "expReward": 700,
         "crdReward": 500,
         "image": "/ref/World-Map/Ferrum Expanse/Boss-Iron-Juggernaut.png"
+      },
+      "pitBoss": {
+        "name": "IRON JUGGERNAUT",
+        "emoji": "☢️",
+        "hp": 3500000,
+        "atk": 4250,
+        "def": 2500,
+        "critical": 5,
+        "regen": 1750,
+        "expReward": 3500,
+        "crdReward": 2500,
+        "image": "/ref/World-Map/Ferrum Expanse/Boss-Iron-Juggernaut.png"
       }
     },
     {
@@ -261,6 +297,18 @@
         "regen": 700,
         "expReward": 1500,
         "crdReward": 1000,
+        "image": "/ref/World-Map/Pyraxis Crater/pyraxis_overlord.png"
+      },
+      "pitBoss": {
+        "name": "PYRAXIS ELITE",
+        "emoji": "☢️",
+        "hp": 7500000,
+        "atk": 7500,
+        "def": 4500,
+        "critical": 5,
+        "regen": 3500,
+        "expReward": 7500,
+        "crdReward": 5000,
         "image": "/ref/World-Map/Pyraxis Crater/pyraxis_overlord.png"
       }
     },
@@ -328,6 +376,18 @@
         "expReward": 3500,
         "crdReward": 2000,
         "image": "/ref/World-Map/Trinity/trinity_overlord.png"
+      },
+      "pitBoss": {
+        "name": "TRINITY SOVEREIGN",
+        "emoji": "☢️",
+        "hp": 15000000,
+        "atk": 10000,
+        "def": 6000,
+        "critical": 5,
+        "regen": 5000,
+        "expReward": 15000,
+        "crdReward": 10000,
+        "image": "/ref/World-Map/Trinity/trinity_overlord.png"
       }
     }
   ],
@@ -380,6 +440,18 @@
         "expReward": 1200,
         "crdReward": 800,
         "image": "/ref/World-Map/Dungeon Echo Burrow/Burrow-King.png"
+      },
+      "pitBoss": {
+        "name": "BURROW OVERLORD",
+        "emoji": "☢️",
+        "hp": 6000000,
+        "atk": 3000,
+        "def": 1500,
+        "critical": 10,
+        "regen": 2500,
+        "expReward": 6000,
+        "crdReward": 4000,
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/baalhamon-pitboss.png"
       }
     },
     {
@@ -429,6 +501,18 @@
         "regen": 2000,
         "expReward": 4000,
         "crdReward": 2500,
+        "image": "/ref/World-Map/Dungeon-Inferno/Inferno-colosus.png"
+      },
+      "pitBoss": {
+        "name": "INFERNAL DREADNOUGHT",
+        "emoji": "☢️",
+        "hp": 20000000,
+        "atk": 10000,
+        "def": 6000,
+        "critical": 15,
+        "regen": 8000,
+        "expReward": 20000,
+        "crdReward": 12500,
         "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_23.png"
       }
     },
@@ -479,6 +563,18 @@
         "regen": 5000,
         "expReward": 10000,
         "crdReward": 6000,
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/baalhamon-pitboss.png"
+      },
+      "pitBoss": {
+        "name": "TRINITY EMPEROR",
+        "emoji": "☢️",
+        "hp": 50000000,
+        "atk": 20000,
+        "def": 12000,
+        "critical": 20,
+        "regen": 20000,
+        "expReward": 50000,
+        "crdReward": 30000,
         "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/baalhamon-pitboss.png"
       }
     }

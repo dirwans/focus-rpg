@@ -85,12 +85,7 @@ function spawnEnemy(sectorIdx, playerLevel, isDungeon = false) {
   const sector = isDungeon ? enemies.dungeons[sectorIdx] : enemies.sectors[sectorIdx]
 
   if (isDungeon) {
-    // 5% chance of dungeon boss spawn
-    if (Math.random() < 0.05) {
-      return { mob: sector.boss, isBoss: true, isCulprit: false, hp: sector.boss.hp }
-    }
-    const baseMob = randomMob(sectorIdx, true)
-    return { mob: baseMob, isBoss: false, isCulprit: false, hp: baseMob.hp }
+    return { mob: sector.boss, isBoss: true, isCulprit: false, hp: sector.boss.hp }
   }
 
   // World Map
@@ -157,10 +152,8 @@ function computeRewards(player, mode, minutes, selectedZone = 'world') {
   if (isDungeon) {
     const dungeonIdx = parseInt(selectedZone.split('_')[1]) - 1
     const dungeon = enemies.dungeons[dungeonIdx]
-    const mobs = dungeon.mobs
-    const avg = (f) => mobs.reduce((a, m) => a + f(m), 0) / mobs.length
-    const avgHp = avg((m) => m.hp) * 1.2
-    const avgDef = avg((m) => m.def)
+    const avgHp = dungeon.boss.hp
+    const avgDef = dungeon.boss.def
     
     const atk = calcStat('atk', player.upgrades?.atk || 0, player.race)
     const dps = Math.max(1, atk - avgDef + 3.5) * 1.096
@@ -1677,7 +1670,7 @@ export const useGameStore = create(
 
         const finalKills = Math.max(0, r.kills - deathPenaltyKills)
         const finalExp = Math.max(0, r.exp - deathPenaltyExp)
-        const finalCrd = Math.max(0, r.crd - deathPenaltyCrd)
+        let finalCrd = Math.max(0, r.crd - deathPenaltyCrd)
         let finalCredits = r.credits || 0
 
         let newExp = player.exp + finalExp
@@ -1781,7 +1774,7 @@ export const useGameStore = create(
             ]
             const brdRange = DUNGEON_BOSS_CRD[Math.min(dungeonIdx, 2)]
             const bossCrd = Math.floor(brdRange[0] + seededFrac(timer.startedAt + 202) * (brdRange[1] - brdRange[0]))
-            finalCredits += bossCrd
+            finalCrd += bossCrd
             dropLog += `\n💰 Boss CRD: ${bossCrd.toLocaleString()}`
 
             // Random: Rare Equipment 25%
@@ -1831,7 +1824,7 @@ export const useGameStore = create(
             ]
             const wrdRange = WORLD_BOSS_CRD[Math.min(fightSector - 1, 4)]
             const bossCrd = Math.floor(wrdRange[0] + seededFrac(timer.startedAt + 102) * (wrdRange[1] - wrdRange[0]))
-            finalCredits += bossCrd
+            finalCrd += bossCrd
             dropLog += `\n💰 Boss CRD: ${bossCrd.toLocaleString()}`
 
             // Random: Rare Equipment 15%
