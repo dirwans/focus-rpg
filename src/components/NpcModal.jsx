@@ -8,7 +8,9 @@ import { t } from '../lib/translate'
 import { getWeaponRarityDisplayName, getWeaponRarityColor } from '../lib/rarity'
 import upgradesConfig from '../data/upgrades.json'
 import ascensionData from '../data/ascensionArms.json'
-
+import miningToolArctron from '../assets/mining_tool_arctron_rembg.png'
+import miningToolBionex from '../assets/mining_tool_bionex_rembg.png'
+import miningToolCelestra from '../assets/mining_tool_celestra_rembg.png'
 const PROMO_COSTS = {
   1: 0,
   2: 0,
@@ -1388,15 +1390,27 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                 <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: '#00e5ff', fontWeight: 800, marginBottom: 10 }}>MINING SUPPLIES SHOP</div>
                 <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#88aadd', marginBottom: 10 }}>Peralatan Mining &amp; Trinity Core Mine</div>
                 {[
-                  { id: 'tool_mining_pickaxe', label: '⛏️ Pickaxe (Mining Tool)', price: 50000 },
+                  { 
+                    id: 'tool_mining_pickaxe', 
+                    label: player.race === 'arctron' ? 'Arctron Mining Tool' : player.race === 'bionex' ? 'Bionex Mining Tool' : 'Celestra Mining Tool', 
+                    price: 50000,
+                    img: player.race === 'arctron' ? miningToolArctron : player.race === 'bionex' ? miningToolBionex : miningToolCelestra
+                  },
                   { id: 'pot_mining_battery_s', label: '🔋 Battery S (Mining Fuel x1)', price: 25000 },
                   { id: 'pot_mining_battery_m', label: '🔋 Battery M (Mining Fuel x3)', price: 60000 },
                   { id: 'pot_mining_battery_l', label: '🔋 Battery L (Mining Fuel x10)', price: 150000 },
-                ].map(({ id, label, price }) => (
+                ].map(({ id, label, price, img }) => (
                   <div key={id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 0', borderTop: '1px solid rgba(255,255,255,0.07)' }}>
-                    <div>
-                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#e0f4ff' }}>{label}</div>
-                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#00ff88' }}>{price.toLocaleString()} CRD</div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                      {img && (
+                        <div style={{ width: 40, height: 40, background: 'rgba(0,0,0,0.5)', borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid rgba(255,255,255,0.1)' }}>
+                          <img src={img} alt="tool" style={{ width: 32, height: 32, objectFit: 'contain' }} />
+                        </div>
+                      )}
+                      <div>
+                        <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#e0f4ff' }}>{label}</div>
+                        <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#00ff88' }}>{price.toLocaleString()} CRD</div>
+                      </div>
                     </div>
                     <button
                       style={{ background: 'linear-gradient(135deg,#00e5ff,#0088bb)', border: 'none', borderRadius: 6, color: '#000', fontFamily: 'var(--font-title)', fontWeight: 800, fontSize: 11, padding: '6px 12px', cursor: 'pointer' }}
