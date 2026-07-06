@@ -104,7 +104,7 @@ function spawnEnemy(sectorIdx, playerLevel, forceRaid = false, isDungeon = false
     return { mob: sector.pitBoss, isBoss: true, isPitBoss: true, isCulprit: false, hp: sector.pitBoss.hp }
   }
   
-  if (isMaxLevelForMap || playerLevel % 10 === 0) {
+  if (isMaxLevelForMap) {
     return { mob: sector.boss, isBoss: true, isPitBoss: false, isCulprit: false, hp: sector.boss.hp }
   }
 
