@@ -14,6 +14,7 @@ const getFactionPrimary = (race) => FACTION_PRIMARY[race] || '#00e5ff'
 const NAV_ITEMS = [
   { id: 'main',      label: 'BASE' },
   { id: 'unit',      label: 'CHARACTER' },
+  { id: 'inventory', label: 'GEARS' },
   { id: 'ranks',     label: 'RANKS' },
   { id: 'battle',    label: 'BATTLE' },
   { id: 'mine',      label: 'T-MINE' },
@@ -38,6 +39,13 @@ function NavIcon({ id, active, color }) {
       return (
         <svg style={s} width="21" height="21" viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+      )
+    case 'inventory':
+      return (
+        <svg style={s} width="21" height="21" viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
+          <line x1="7" y1="7" x2="7.01" y2="7" />
         </svg>
       )
     case 'battle':

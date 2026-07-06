@@ -20,8 +20,9 @@ import Battle from './screens/Battle'
 import Mine from './screens/Mine'
 import PremiumShop from './screens/PremiumShop'
 import Ascension from './screens/Ascension'
+import Inventory from './screens/Inventory'
 
-const SCREENS = { main: Main, unit: Unit, ranks: Ranks, forge: Forge, cargo: Cargo, trade: Trade, battle: Battle, mine: Mine, premium: PremiumShop, ascension: Ascension }
+const SCREENS = { main: Main, unit: Unit, ranks: Ranks, forge: Forge, cargo: Cargo, trade: Trade, battle: Battle, mine: Mine, premium: PremiumShop, ascension: Ascension, inventory: Inventory }
 
 const snap = (gs) => JSON.stringify(gs ?? {})
 
