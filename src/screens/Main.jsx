@@ -609,6 +609,10 @@ export default function Main() {
   }
 
 
+  // Pilot / boss sprite sizing — boss is always 1.6x the pilot's own sprite size
+  const pilotSpriteSize = player.race === 'arctron' ? 190 : 160
+  const bossSpriteSize = Math.round(pilotSpriteSize * 1.6)
+
   // Radial Progress Calculations
   const radius = 60
   const strokeWidth = 6
@@ -687,7 +691,7 @@ export default function Main() {
 
         {/* 4. Battle Arena (Bottom portion - Unboxed sprites standing directly on grid floor!) */}
         <div className={isCritHit ? 'screen-shake' : ''} style={styles.arenaActiveUnboxed}>
-          <div style={styles.arenaVisualContainerActive}>
+          <div style={{ ...styles.arenaVisualContainerActive, justifyContent: battle.isBoss ? 'center' : 'space-around', gap: battle.isBoss ? 8 : 0 }}>
             <div style={styles.arenaGridOverlay} />
 
             {/* Player sprite (Full body) */}
@@ -736,20 +740,20 @@ export default function Main() {
                   display: 'flex',
                   alignItems: 'flex-end', // Stand on the grid floor
                   justifyContent: 'center',
-                  width: battle.isBoss ? 320 : 160,
-                  height: battle.isBoss ? 256 : 160,
+                  width: battle.isBoss ? bossSpriteSize : 160,
+                  height: battle.isBoss ? bossSpriteSize : 160,
                   flexShrink: 0
                 }}>
                   {battle.currentMob.image ? (
                     <TransparentSprite
                       src={battle.currentMob.image}
                       alt={battle.currentMob.name}
-                      size={battle.isBoss ? 320 : 160}
-                      height={battle.isBoss ? 256 : 160}
+                      size={battle.isBoss ? bossSpriteSize : 160}
+                      height={battle.isBoss ? bossSpriteSize : 160}
                       glowColor="var(--neon-glow)"
                     />
                   ) : (
-                    <EnemySprite isBoss={battle.isBoss} size={battle.isBoss ? 320 : 160} />
+                    <EnemySprite isBoss={battle.isBoss} size={battle.isBoss ? bossSpriteSize : 160} />
                   )}
                 </div>
                 <div style={styles.spriteLabel}>{battle.currentMob.name?.toUpperCase()}</div>
