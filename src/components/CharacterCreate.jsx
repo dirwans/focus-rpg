@@ -22,9 +22,9 @@ const HERO_IMAGES = {
 // a standing character sprite during race select. Ring order = paint order
 // (outermost first so later ones layer on top).
 const LOGO_RACE_CONFIG = {
-  celestra: { rings: ['r3', 'r2', 'r1'], floatAnim: 'celestraLogoFloat 6s ease-in-out infinite' },
-  arctron: { rings: ['r2', 'r1'], floatAnim: 'arctronLogoFloat 6s ease-in-out infinite' },
-  bionex: { rings: ['r2', 'r1'], floatAnim: 'bionexLogoFloat 6s ease-in-out infinite' }
+  celestra: { rings: [], floatAnim: 'celestraLogoFloat 6s ease-in-out infinite' },
+  arctron: { rings: [], floatAnim: 'arctronLogoFloat 6s ease-in-out infinite' },
+  bionex: { rings: [], floatAnim: 'bionexLogoFloat 6s ease-in-out infinite' }
 }
 
 const FACTION_THEMES = {
