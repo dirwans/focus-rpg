@@ -81,31 +81,24 @@ function randomMob(sectorIdx, isDungeon = false) {
   return mobs[Math.floor(Math.random() * mobs.length)]
 }
 
-function spawnEnemy(sectorIdx, playerLevel, forceRaid = false, isDungeon = false) {
+function spawnEnemy(sectorIdx, playerLevel, isDungeon = false) {
   const sector = isDungeon ? enemies.dungeons[sectorIdx] : enemies.sectors[sectorIdx]
-  
+
   if (isDungeon) {
-    if (forceRaid) {
-      return { mob: sector.pitBoss, isBoss: true, isPitBoss: true, isCulprit: false, hp: sector.pitBoss.hp }
-    }
     // 5% chance of dungeon boss spawn
     if (Math.random() < 0.05) {
-      return { mob: sector.boss, isBoss: true, isPitBoss: false, isCulprit: false, hp: sector.boss.hp }
+      return { mob: sector.boss, isBoss: true, isCulprit: false, hp: sector.boss.hp }
     }
     const baseMob = randomMob(sectorIdx, true)
-    return { mob: baseMob, isBoss: false, isPitBoss: false, isCulprit: false, hp: baseMob.hp }
+    return { mob: baseMob, isBoss: false, isCulprit: false, hp: baseMob.hp }
   }
 
   // World Map
   const maxLevels = [12, 25, 38, 52, 66, 999]
   const isMaxLevelForMap = playerLevel === maxLevels[sectorIdx]
-  
-  if (forceRaid || (Math.random() < 0.01 && playerLevel >= maxLevels[sectorIdx] - 3)) {
-    return { mob: sector.pitBoss, isBoss: true, isPitBoss: true, isCulprit: false, hp: sector.pitBoss.hp }
-  }
-  
+
   if (isMaxLevelForMap) {
-    return { mob: sector.boss, isBoss: true, isPitBoss: false, isCulprit: false, hp: sector.boss.hp }
+    return { mob: sector.boss, isBoss: true, isCulprit: false, hp: sector.boss.hp }
   }
 
   const baseMob = randomMob(sectorIdx, false)
@@ -117,12 +110,12 @@ function spawnEnemy(sectorIdx, playerLevel, forceRaid = false, isDungeon = false
       hp: baseMob.hp * 2,
       atk: baseMob.atk * 2,
       expReward: baseMob.expReward * 2,
-      aniumReward: baseMob.aniumReward * 2
+      crdReward: baseMob.crdReward * 2
     }
-    return { mob: culpritMob, isBoss: false, isPitBoss: false, isCulprit: true, hp: culpritMob.hp }
+    return { mob: culpritMob, isBoss: false, isCulprit: true, hp: culpritMob.hp }
   }
-  
-  return { mob: baseMob, isBoss: false, isPitBoss: false, isCulprit: false, hp: baseMob.hp }
+
+  return { mob: baseMob, isBoss: false, isCulprit: false, hp: baseMob.hp }
 }
 
 // Frac 0..1 deterministik dari seed integer (buat item drop yg sama di semua device)
@@ -131,16 +124,9 @@ function seededFrac(seed) {
   return x - Math.floor(x)
 }
 
-function getDropTier(seed, mode, isPitBoss, isStageBoss) {
+function getDropTier(seed, mode, isStageBoss) {
   const r = seededFrac(seed)
   if (mode === 'gather') return 'material'
-  if (isPitBoss) {
-    if (r < 0.05) return 'UR'
-    if (r < 0.15) return 'SSR'
-    if (r < 0.35) return 'SR'
-    if (r < 0.65) return 'SSS'
-    return 'SS'
-  }
   if (isStageBoss) {
     if (r < 0.02) return 'SSS'
     if (r < 0.10) return 'SS'
@@ -164,7 +150,7 @@ function getDropTier(seed, mode, isPitBoss, isStageBoss) {
 // Reward DETERMINISTIK berdasar lama waktu + stats → semua device hitung sama
 function computeRewards(player, mode, minutes, selectedZone = 'world') {
   const race = races[player.race]
-  if (!race) return { kills: 0, exp: 0, anium: 0, credits: 0 }
+  if (!race) return { kills: 0, exp: 0, crd: 0, credits: 0 }
   const elapsedSec = Math.max(0, Math.floor(minutes * 60))
   const isDungeon = selectedZone && selectedZone.startsWith('dungeon_')
 
@@ -182,16 +168,16 @@ function computeRewards(player, mode, minutes, selectedZone = 'world') {
     const kills = Math.floor(elapsedSec / secPerKill)
 
     const baseCrdPerKill = dungeonIdx === 0 ? 3 : dungeonIdx === 1 ? 6 : 12
-    let totalCrdGained = 0
+    let totalCreditsGained = 0
     for (let i = 0; i < kills; i++) {
-      totalCrdGained += Math.floor(baseCrdPerKill * (0.8 + seededFrac(minutes * 100 + i) * 0.4))
+      totalCreditsGained += Math.floor(baseCrdPerKill * (0.8 + seededFrac(minutes * 100 + i) * 0.4))
     }
 
     return {
       kills,
       exp: Math.floor(elapsedSec / 60),
-      anium: 0,
-      credits: totalCrdGained
+      crd: 0,
+      credits: totalCreditsGained
     }
   }
 
@@ -199,7 +185,7 @@ function computeRewards(player, mode, minutes, selectedZone = 'world') {
     return {
       kills: 0,
       exp: Math.floor(elapsedSec / 60),
-      anium: Math.floor(elapsedSec * 0.72 * race.bonuses.gatherMultiplier),
+      crd: Math.floor(elapsedSec * 0.72 * race.bonuses.gatherMultiplier),
       credits: 0
     }
   }
@@ -212,20 +198,20 @@ function computeRewards(player, mode, minutes, selectedZone = 'world') {
   const maxLevels = [12, 25, 38, 52, 66, 999]
   if (player.level === maxLevels[sectorIdx]) {
     const boss = enemies.sectors[sectorIdx].boss
-    avgHp = boss.hp; avgDef = boss.def; avgAni = boss.aniumReward
+    avgHp = boss.hp; avgDef = boss.def; avgAni = boss.crdReward
   } else {
     avgHp = avg((m) => m.hp) * 1.2
     avgDef = avg((m) => m.def)
-    avgAni = avg((m) => m.aniumReward) * 1.2
+    avgAni = avg((m) => m.crdReward) * 1.2
   }
   const atk = calcStat('atk', player.upgrades?.atk || 0, player.race)
   const dps = Math.max(1, atk - avgDef + 3.5) * 1.096 // ~rata2 crit/variance
   const secPerKill = Math.max(2, avgHp / dps)
   const kills = Math.floor(elapsedSec / secPerKill)
 
-  let totalAniumGained = 0
+  let totalCrdGained = 0
   for (let i = 0; i < kills; i++) {
-    totalAniumGained += Math.floor(avgAni)
+    totalCrdGained += Math.floor(avgAni)
   }
 
   // CRD per kill sesuai map level
@@ -237,17 +223,17 @@ function computeRewards(player, mode, minutes, selectedZone = 'world') {
     [20000, 35000],    // Map 5 Lv.53-66
   ]
   const crdRange = MAP_CRD_RANGES[Math.min(sectorIdx, 4)]
-  let totalCrdGained = 0
+  let totalCreditsGained = 0
   for (let i = 0; i < kills; i++) {
     const frac = seededFrac(minutes * 100 + i + 77)
-    totalCrdGained += Math.floor(crdRange[0] + frac * (crdRange[1] - crdRange[0]))
+    totalCreditsGained += Math.floor(crdRange[0] + frac * (crdRange[1] - crdRange[0]))
   }
 
   return {
     kills,
     exp: Math.floor(elapsedSec / 60),
-    anium: totalAniumGained,
-    credits: totalCrdGained
+    crd: totalCrdGained,
+    credits: totalCreditsGained
   }
 }
 
@@ -509,7 +495,7 @@ const initialPlayer = {
     special: { val: 1, pct: 0 },
     production: { val: 1, pct: 0 }
   },
-  resources: { anium: 200, credits: 10, potions: 5, nxc: 0 },
+  resources: { crd: 200, credits: 10, potions: 5, nxc: 0 },
   upgrades: { atk: 0, def: 0, hp: 0 },
   equipment: { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null },
   sector: 1,
@@ -533,7 +519,6 @@ const initialPlayer = {
   },
   combatStats: {
     totalMonsterKill: 0,
-    worldBossKill: 0,
     dungeonClear: 0,
     coreWarVictory: 0,
     highestEnhancement: 0
@@ -581,12 +566,11 @@ const initialBattle = {
   respawnTicks: 0,
   currentMob: null,
   isBoss: false,
-  isPitBoss: false,
   isCulprit: false,
   kills: 0,
   killStreak: 0,
   sessionExp: 0,
-  sessionAnium: 0,
+  sessionCrd: 0,
   sessionCredits: 0,
   levelUps: 0,
 }
@@ -680,7 +664,7 @@ export const useGameStore = create(
         const itemDef = allItems.find(i => i.id === itemId)
         if (!itemDef) return { ok: false, msg: 'Item not found' }
         const price = itemDef.price || 0
-        if (player.resources.credits < price) return { ok: false, msg: 'CRD tidak cukup!' }
+        if (player.resources.credits < price) return { ok: false, msg: 'Credits tidak cukup!' }
         const uid = Date.now() + Math.floor(Math.random() * 10000)
         set({ player: {
           ...player,
@@ -850,7 +834,7 @@ export const useGameStore = create(
           return {}
         }
         if (credits < upgradeCost) {
-          alert(`Credits (CRD) tidak cukup! Membutuhkan ${upgradeCost.toLocaleString()} CRD.`)
+          alert(`Credits tidak cukup! Membutuhkan ${upgradeCost.toLocaleString()} Credits.`)
           return {}
         }
 
@@ -878,7 +862,7 @@ export const useGameStore = create(
           return {}
         }
         if (credits < upgradeCost) {
-          alert(`Credits (CRD) tidak cukup! Membutuhkan ${upgradeCost.toLocaleString()} CRD.`)
+          alert(`Credits tidak cukup! Membutuhkan ${upgradeCost.toLocaleString()} Credits.`)
           return {}
         }
 
@@ -1041,7 +1025,7 @@ export const useGameStore = create(
         const credits = player.resources.credits || 0
 
         if (credits < crdCost) {
-          alert(`Credits (CRD) tidak cukup! Membutuhkan ${crdCost.toLocaleString()} CRD.`)
+          alert(`Credits tidak cukup! Membutuhkan ${crdCost.toLocaleString()} Credits.`)
           return {}
         }
 
@@ -1128,7 +1112,7 @@ export const useGameStore = create(
             job: jobId,
             resources: {
               ...s.player.resources,
-              anium: Math.max(0, s.player.resources.anium - cost),
+              crd: Math.max(0, s.player.resources.crd - cost),
             },
             savedAt: Date.now(),
           },
@@ -1160,8 +1144,8 @@ export const useGameStore = create(
         const now = Date.now()
         
         const isDungeon = timer.selectedZone && timer.selectedZone.startsWith('dungeon_')
-        let sector, mob, isBoss, isPitBoss, hp
-        
+        let sector, mob, isBoss, hp
+
         if (isDungeon) {
           const dungeonIdx = parseInt(timer.selectedZone.split('_')[1]) - 1
           const dungeonKey = String(dungeonIdx + 1)
@@ -1185,20 +1169,18 @@ export const useGameStore = create(
           const newAttempts = { ...freshAttempts, [dungeonKey]: currentCount + 1 }
           set({ player: { ...player, dungeonAttempts: newAttempts, savedAt: now } })
 
-          const spawned = spawnEnemy(dungeonIdx, player.level, false, true)
+          const spawned = spawnEnemy(dungeonIdx, player.level, true)
           mob = spawned.mob
           isBoss = spawned.isBoss
-          isPitBoss = spawned.isPitBoss
           hp = spawned.hp
         } else {
           const sectorIdx = (player.selectedMapIdx !== undefined && player.selectedMapIdx !== null)
             ? player.selectedMapIdx
             : (getSector(player.level) - 1)
           sector = enemies.sectors[sectorIdx]
-          const spawned = spawnEnemy(sectorIdx, player.level, false, false)
+          const spawned = spawnEnemy(sectorIdx, player.level, false)
           mob = spawned.mob
           isBoss = spawned.isBoss
-          isPitBoss = spawned.isPitBoss
           hp = spawned.hp
         }
 
@@ -1217,7 +1199,7 @@ export const useGameStore = create(
           player: { ...player, savedAt: now },
           battle: {
             ...initialBattle,
-            log: [(isPitBoss ? `☢️ RAID BOSS: ${mob.emoji} ${mob.name}!` : isBoss ? `⚠️ STAGE BOSS: ${mob.emoji} ${mob.name}!` : `⚔️ Entering ${sector.name}...`)],
+            log: [(isBoss ? `⚠️ STAGE BOSS: ${mob.emoji} ${mob.name}!` : `⚔️ Entering ${sector.name}...`)],
             enemyHp: hp,
             enemyMaxHp: hp,
             playerHp: playerMaxHp,
@@ -1228,7 +1210,6 @@ export const useGameStore = create(
             playerMaxSp: playerMaxSp,
             currentMob: mob,
             isBoss,
-            isPitBoss,
             isCulprit: mob.name?.startsWith('Culprit') || false
           },
         })
@@ -1260,12 +1241,12 @@ export const useGameStore = create(
         // Apply death penalties
         const deaths = battle.deaths || 0
         const deathPenaltyExp = deaths * 15
-        const deathPenaltyAnium = deaths * 30
+        const deathPenaltyCrd = deaths * 30
         const deathPenaltyKills = deaths * 1
 
         const finalKills = Math.max(0, r.kills - deathPenaltyKills)
         const finalExp = Math.max(0, r.exp - deathPenaltyExp)
-        const finalAnium = Math.max(0, r.anium - deathPenaltyAnium)
+        const finalCrd = Math.max(0, r.crd - deathPenaltyCrd)
         const finalCredits = Math.max(0, (r.credits || 0) - (deaths * 5))
 
         set((s) => ({
@@ -1274,7 +1255,7 @@ export const useGameStore = create(
             ...s.battle, 
             kills: finalKills, 
             sessionExp: finalExp, 
-            sessionAnium: finalAnium,
+            sessionCrd: finalCrd,
             sessionCredits: finalCredits
           },
         }))
@@ -1286,17 +1267,16 @@ export const useGameStore = create(
         // Initialize if state hasn't been set for combat yet
         if (!battle.currentMob) {
           const sectorIdx = getSector(player.level) - 1
-          const { mob, isBoss, isPitBoss, hp } = spawnEnemy(sectorIdx, player.level)
+          const { mob, isBoss, hp } = spawnEnemy(sectorIdx, player.level)
           const playerStats = get().getStats()
           const playerMaxHp = playerStats.hp
           const playerMaxFp = playerStats.fp
           const playerMaxSp = playerStats.sp
-          set({ 
-            battle: { 
-              ...battle, 
-              currentMob: mob, 
-              isBoss, 
-              isPitBoss, 
+          set({
+            battle: {
+              ...battle,
+              currentMob: mob,
+              isBoss,
               isCulprit: mob.name?.startsWith('Culprit') || false,
               enemyHp: hp, 
               enemyMaxHp: hp, 
@@ -1495,7 +1475,7 @@ export const useGameStore = create(
             newLog.push(`💨 MISS! Serangan ${mob.name} berhasil dihindari! (Dodge)`)
           } else {
             // Enemy crit chance scales by mob grade (Sector/Boss/Culprit)
-            const enemyCritChance = mob.critical !== undefined ? (mob.critical / 100) : (battle.isPitBoss ? 0.22 : battle.isBoss ? 0.18 : battle.isCulprit ? 0.14 : 0.08)
+            const enemyCritChance = mob.critical !== undefined ? (mob.critical / 100) : (battle.isBoss ? 0.18 : battle.isCulprit ? 0.14 : 0.08)
             const isEnemyCrit = Math.random() < enemyCritChance
             
             // Damage Formula: Final ATK - Final DEF
@@ -1637,15 +1617,14 @@ export const useGameStore = create(
         if (nextRespawnTicks === 0) {
           if (newEnemyHp <= 0) {
             if (newLog.length > 7) newLog = newLog.slice(-7)
-            newLog.push(battle.isPitBoss ? `☢️ RAID CLEARED! ${mob.emoji}` : battle.isBoss ? `🏆 STAGE BOSS SLAIN! ${mob.emoji}` : `⚔️ Killed ${mob.emoji} ${mob.name}`)
-            
+            newLog.push(battle.isBoss ? `🏆 STAGE BOSS SLAIN! ${mob.emoji}` : `⚔️ Killed ${mob.emoji} ${mob.name}`)
+
             const isDungeon = timer.selectedZone && timer.selectedZone.startsWith('dungeon_')
             const zoneIdx = isDungeon ? (parseInt(timer.selectedZone.split('_')[1]) - 1) : (getSector(player.level) - 1)
-            const next = spawnEnemy(zoneIdx, player.level, false, isDungeon)
-            
+            const next = spawnEnemy(zoneIdx, player.level, isDungeon)
+
             nextMob = next.mob; nextIsBoss = next.isBoss; nextMaxHp = next.hp; newEnemyHp = next.hp
-            if (next.isPitBoss) newLog.push(`☢️ RAID INCOMING: ${next.mob.emoji} ${next.mob.name}!`)
-            else if (next.isBoss) newLog.push(`⚠️ STAGE BOSS: ${next.mob.emoji} ${next.mob.name}!`)
+            if (next.isBoss) newLog.push(`⚠️ STAGE BOSS: ${next.mob.emoji} ${next.mob.name}!`)
           } else if (isCrit && !isEnemyDodge) {
             if (newLog.length > 7) newLog = newLog.slice(-7)
             newLog.push(`💥 CRIT! -${dmgToEnemy} ${mob.emoji}`)
@@ -1693,12 +1672,12 @@ export const useGameStore = create(
         // Apply death penalties
         const deaths = battle.deaths || 0
         const deathPenaltyExp = deaths * 2 // 2 minutes penalty per death
-        const deathPenaltyAnium = deaths * 30
+        const deathPenaltyCrd = deaths * 30
         const deathPenaltyKills = deaths * 1
 
         const finalKills = Math.max(0, r.kills - deathPenaltyKills)
         const finalExp = Math.max(0, r.exp - deathPenaltyExp)
-        const finalAnium = Math.max(0, r.anium - deathPenaltyAnium)
+        const finalCrd = Math.max(0, r.crd - deathPenaltyCrd)
         let finalCredits = r.credits || 0
 
         let newExp = player.exp + finalExp
@@ -1743,22 +1722,21 @@ export const useGameStore = create(
         const killedElite = fightSector >= 5 && eliteRoll < 0.15 && finalKills > 0
         
         // Cek apakah boss mati (finalKills > 0)
-        const killedPitBoss = battle.isPitBoss && finalKills > 0
-        const killedStageBoss = battle.isBoss && !battle.isPitBoss && finalKills > 0
+        const killedStageBoss = battle.isBoss && finalKills > 0
 
-        // Elite memperlakukan dirinya seperti Stage Boss untuk drop (tapi bukan Pit Boss)
+        // Elite memperlakukan dirinya seperti Stage Boss untuk drop
         const effectiveStageBoss = killedStageBoss || killedElite
-        
+
         if (killedElite) {
             dropLog += `\n⚡ ELITE MONSTER appeared! Bonus drop!`
         }
-        
+
         // ────────────────────────────────────────────────────────────────
         // OFFICIAL DROP RATE SYSTEM
         // ────────────────────────────────────────────────────────────────
         const isDungeon = timer.selectedZone && timer.selectedZone.startsWith('dungeon_')
         const dungeonIdx = isDungeon ? parseInt(timer.selectedZone.split('_')[1]) - 1 : -1
-        const killedBoss = (killedPitBoss || killedStageBoss) && finalKills > 0
+        const killedBoss = killedStageBoss && finalKills > 0
 
         // Helper: random item from pool by type+rarity
         const pickItem = (rarity, seed) => {
@@ -1877,10 +1855,6 @@ export const useGameStore = create(
               const arc = pickMat('mat_arcanite')
               if (arc) { pushOrMail({ ...arc, uid: Date.now() + 107 }, `\n🪨 ARCANITE!!! (Super Ultra Rare)`) }
             }
-          } else if (killedPitBoss) {
-            // Pit Boss treated same as World Boss
-            const bossEquip = pickItem(RARITY_UNCOMMON, timer.startedAt + 150)
-            if (bossEquip) { pushOrMail({ ...bossEquip, uid: Date.now() + 150 }, `\n🎁 Raid Drop: ${bossEquip.emoji} ${bossEquip.name}`) }
           } else {
             // ── NORMAL MONSTER DROP ──
             // HP Potion: 25% per session
@@ -1919,7 +1893,7 @@ export const useGameStore = create(
         const finalLog = []
         if (levelUps > 0) finalLog.push(`🆙 LEVEL UP! LV.${newLevel} — Sector ${newSector}!`)
         ptLogs.forEach((l) => finalLog.push(`📈 ${l}`))
-        finalLog.push(`✅ Done! ${finalKills} kills | +${finalAnium}⬡ | +${finalCredits} Credits | +${finalExp} Menit${deaths > 0 ? ` (Died ${deaths} times)` : ''}${dropLog}`)
+        finalLog.push(`✅ Done! ${finalKills} kills | +${finalCrd}⬡ | +${finalCredits} Credits | +${finalExp} Menit${deaths > 0 ? ` (Died ${deaths} times)` : ''}${dropLog}`)
 
         set((s) => ({
           timer: { ...s.timer, state: 'completed', secondsLeft: 0 },
@@ -1932,7 +1906,7 @@ export const useGameStore = create(
             highestSector: Math.max(s.player.highestSector, newSector),
             resources: { 
               ...s.player.resources, 
-              anium: s.player.resources.anium + finalAnium,
+              crd: s.player.resources.crd + finalCrd,
               credits: s.player.resources.credits + finalCredits
             },
             streak: newStreak,
@@ -1942,14 +1916,13 @@ export const useGameStore = create(
             inventory: newInventory,
             mailbox,
             combatStats: {
-              ...(s.player.combatStats || { totalMonsterKill: 0, worldBossKill: 0, dungeonClear: 0, coreWarVictory: 0, highestEnhancement: 0 }),
+              ...(s.player.combatStats || { totalMonsterKill: 0, dungeonClear: 0, coreWarVictory: 0, highestEnhancement: 0 }),
               totalMonsterKill: (s.player.combatStats?.totalMonsterKill || 0) + finalKills,
-              worldBossKill: (s.player.combatStats?.worldBossKill || 0) + (killedPitBoss ? 1 : 0),
               dungeonClear: (s.player.combatStats?.dungeonClear || 0) + (killedStageBoss ? 1 : 0)
             },
             savedAt: Date.now(),
           },
-          battle: { ...s.battle, kills: finalKills, sessionExp: finalExp, sessionAnium: finalAnium, levelUps, log: finalLog },
+          battle: { ...s.battle, kills: finalKills, sessionExp: finalExp, sessionCrd: finalCrd, levelUps, log: finalLog },
         }))
       },
 
@@ -1967,13 +1940,13 @@ export const useGameStore = create(
         const upgrades = player.upgrades || { atk: 0, def: 0, hp: 0 }
         const currentLevel = upgrades[key] || 0
         const cost = calcUpgradeCost(key, currentLevel)
-        if (player.resources?.anium < cost) return
+        if (player.resources?.crd < cost) return
         set((s) => {
           const sUpgrades = s.player.upgrades || { atk: 0, def: 0, hp: 0 }
           return {
             player: {
               ...s.player,
-              resources: { ...s.player.resources, anium: s.player.resources.anium - cost },
+              resources: { ...s.player.resources, crd: s.player.resources.crd - cost },
               upgrades: { ...sUpgrades, [key]: (sUpgrades[key] || 0) + 1 },
               savedAt: Date.now(),
             },
@@ -2633,7 +2606,7 @@ export const useGameStore = create(
         const price = Math.round(baseWeapon * mult)
 
         if ((player.resources.credits || 0) < price) {
-          alert(`CRD tidak cukup! Dibutuhkan ${price.toLocaleString()} CRD.`)
+          alert(`Credits tidak cukup! Dibutuhkan ${price.toLocaleString()} Credits.`)
           return false
         }
 
@@ -2662,9 +2635,9 @@ export const useGameStore = create(
       },
       buyPotions: (count = 10) => {
         const { player } = get()
-        const cost = count * 20 // 20 Anium per potion
-        if ((player.resources.anium || 0) < cost) {
-          alert(tStore('alert_not_enough_anium', { cost }, player))
+        const cost = count * 20 // 20 CRD per potion
+        if ((player.resources.crd || 0) < cost) {
+          alert(tStore('alert_not_enough_crd', { cost }, player))
           return false
         }
 
@@ -2675,7 +2648,7 @@ export const useGameStore = create(
             ...s.player,
             resources: {
               ...s.player.resources,
-              anium: s.player.resources.anium - cost
+              crd: s.player.resources.crd - cost
             },
             inventory: addToInventory(s.player.inventory, potionItem, count),
             savedAt: Date.now()
@@ -2690,23 +2663,7 @@ export const useGameStore = create(
         
         const newInventory = removeFromInventory(player.inventory, uid, 1)
 
-        if (item.id === 'raid_ticket') {
-          if (timer.state !== 'running' || timer.mode !== 'fight') {
-            alert(tStore('alert_fight_session_required', {}, player))
-            return
-          }
-          const sectorIdx = getSector(player.level) - 1
-          const { mob, isBoss, isPitBoss, hp } = spawnEnemy(sectorIdx, player.level, true)
-          let newLog = [...battle.log]
-          if (newLog.length > 7) newLog = newLog.slice(-7)
-          newLog.push(`🎫 RAID TICKET USED! Summoning ${mob.name}...`)
-          set({
-            player: { ...player, inventory: newInventory, savedAt: Date.now() },
-            battle: { ...battle, currentMob: mob, isBoss, isPitBoss, enemyHp: hp, enemyMaxHp: hp, log: newLog }
-          })
-          return
-        }
-        
+
         // Healing consumables
         if (item.id === 'pot_hp' || (item.bonus && item.bonus.hp)) {
             alert(`Berhasil menggunakan ${item.name}! Memulihkan 1,000 HP.`)
@@ -2738,11 +2695,11 @@ export const useGameStore = create(
         }
         const currentGrade = (weapon.rarityGrade || 'normal').toLowerCase()
         const REFINE_COSTS = {
-          normal: { next: 'advanced', talics: 1, anium: 5000 },
-          advanced: { next: 'rare', talics: 2, anium: 10000 },
-          rare: { next: 'epic', talics: 3, anium: 20000 },
-          epic: { next: 'legendary', talics: 5, anium: 50000 },
-          legendary: { next: 'mythic', talics: 10, anium: 100000 }
+          normal: { next: 'advanced', talics: 1, crd: 5000 },
+          advanced: { next: 'rare', talics: 2, crd: 10000 },
+          rare: { next: 'epic', talics: 3, crd: 20000 },
+          epic: { next: 'legendary', talics: 5, crd: 50000 },
+          legendary: { next: 'mythic', talics: 10, crd: 100000 }
         }
         const cost = REFINE_COSTS[currentGrade]
         if (!cost) {
@@ -2755,8 +2712,8 @@ export const useGameStore = create(
           alert(tStore('alert_missing_ignorance', { talics: cost.talics, owned: talicCount }, player))
           return
         }
-        if (player.resources.anium < cost.anium) {
-          alert(tStore('alert_missing_anium', { anium: cost.anium, owned: player.resources.anium }, player))
+        if (player.resources.crd < cost.crd) {
+          alert(tStore('alert_missing_crd', { crd: cost.crd, owned: player.resources.crd }, player))
           return
         }
 
@@ -2780,7 +2737,7 @@ export const useGameStore = create(
             ...player,
             resources: {
               ...player.resources,
-              anium: player.resources.anium - cost.anium
+              crd: player.resources.crd - cost.crd
             },
             inventory: newInventory,
             equipment: {
@@ -2881,14 +2838,14 @@ export const useGameStore = create(
 
         const talicCount = player.inventory.filter(it => it.id === 'talic_favor').length
         const reqTalics = 5
-        const reqAnium = 30000
+        const reqCrd = 30000
 
         if (talicCount < reqTalics) {
           alert(tStore('alert_missing_favor', { talics: reqTalics, owned: talicCount }, player))
           return
         }
-        if (player.resources.anium < reqAnium) {
-          alert(tStore('alert_missing_anium', { anium: reqAnium, owned: player.resources.anium }, player))
+        if (player.resources.crd < reqCrd) {
+          alert(tStore('alert_missing_crd', { crd: reqCrd, owned: player.resources.crd }, player))
           return
         }
 
@@ -2913,7 +2870,7 @@ export const useGameStore = create(
             ...player,
             resources: {
               ...player.resources,
-              anium: player.resources.anium - reqAnium
+              crd: player.resources.crd - reqCrd
             },
             inventory: newInventory,
             equipment: {
@@ -3003,7 +2960,7 @@ export const useGameStore = create(
           }
 
           const newCombatStats = {
-            ...(player.combatStats || { totalMonsterKill: 0, worldBossKill: 0, dungeonClear: 0, coreWarVictory: 0, highestEnhancement: 0 }),
+            ...(player.combatStats || { totalMonsterKill: 0, dungeonClear: 0, coreWarVictory: 0, highestEnhancement: 0 }),
           }
           if (nextEnhancement > (newCombatStats.highestEnhancement || 0)) {
             newCombatStats.highestEnhancement = nextEnhancement
@@ -3139,8 +3096,8 @@ export const useGameStore = create(
           return
         }
 
-        if (player.resources.anium < price) {
-          alert(tStore('need_more_anium', { need: price.toLocaleString(), owned: player.resources.anium.toLocaleString() }, player))
+        if (player.resources.crd < price) {
+          alert(tStore('need_more_crd', { need: price.toLocaleString(), owned: player.resources.crd.toLocaleString() }, player))
           return
         }
 
@@ -3158,7 +3115,7 @@ export const useGameStore = create(
             ...player,
             resources: {
               ...player.resources,
-              anium: player.resources.anium - price
+              crd: player.resources.crd - price
             },
             inventory: newInventory,
             savedAt: Date.now()

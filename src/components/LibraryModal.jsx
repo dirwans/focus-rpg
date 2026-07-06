@@ -165,6 +165,7 @@ export default function LibraryModal({ onClose }) {
                 <div style={styles.itemTitle}>❌ Item yang Tidak Dapat Diperdagangkan</div>
                 <ul style={styles.list}>
                   <li>💰 CRD</li>
+                  <li>◈ Credits</li>
                   <li>💎 NXC</li>
                 </ul>
               </div>
@@ -197,7 +198,7 @@ export default function LibraryModal({ onClose }) {
                 <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#00ff88', fontWeight: 700, marginBottom: 6 }}>GUARANTEED</div>
                 <ul style={styles.list}>
                   <li>⭐ EXP</li>
-                  <li>💰 CRD <span style={{ color: '#88aadd' }}>(sesuai Map)</span></li>
+                  <li>◈ Credits <span style={{ color: '#88aadd' }}>(sesuai Map)</span></li>
                 </ul>
                 <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#ffcc00', fontWeight: 700, margin: '8px 0 6px' }}>RANDOM DROP</div>
                 <ul style={styles.list}>
@@ -212,13 +213,13 @@ export default function LibraryModal({ onClose }) {
 
               {/* CRD per Map */}
               <div style={styles.itemCard}>
-                <div style={styles.itemTitle}>💰 CRD Drop — Normal Monster</div>
+                <div style={styles.itemTitle}>💰 Credits Drop — Normal Monster</div>
                 {[
-                  { map: '🌱 Map 1', lvl: 'Lv.1–12', crd: '500 ~ 1,000 CRD' },
-                  { map: '🌿 Map 2', lvl: 'Lv.13–25', crd: '1,500 ~ 3,000 CRD' },
-                  { map: '⚙️ Map 3', lvl: 'Lv.26–38', crd: '4,000 ~ 8,000 CRD' },
-                  { map: '🔥 Map 4', lvl: 'Lv.39–52', crd: '10,000 ~ 18,000 CRD' },
-                  { map: '☢️ Map 5', lvl: 'Lv.53–66', crd: '20,000 ~ 35,000 CRD' },
+                  { map: '🌱 Map 1', lvl: 'Lv.1–12', crd: '500 ~ 1,000 Credits' },
+                  { map: '🌿 Map 2', lvl: 'Lv.13–25', crd: '1,500 ~ 3,000 Credits' },
+                  { map: '⚙️ Map 3', lvl: 'Lv.26–38', crd: '4,000 ~ 8,000 Credits' },
+                  { map: '🔥 Map 4', lvl: 'Lv.39–52', crd: '10,000 ~ 18,000 Credits' },
+                  { map: '☢️ Map 5', lvl: 'Lv.53–66', crd: '20,000 ~ 35,000 Credits' },
                 ].map((m, i) => (
                   <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: i < 4 ? '1px solid rgba(255,255,255,0.07)' : 'none', fontFamily: 'var(--font-mono)', fontSize: 12 }}>
                     <span>{m.map} <span style={{ color: '#88aadd' }}>({m.lvl})</span></span>
@@ -232,7 +233,7 @@ export default function LibraryModal({ onClose }) {
                 <div style={styles.itemTitle}>👑 World Boss Drop</div>
                 <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#00ff88', fontWeight: 700, marginBottom: 6 }}>GUARANTEED</div>
                 <ul style={styles.list}>
-                  <li>💰 CRD <span style={{ color: '#88aadd' }}>(sesuai Boss)</span></li>
+                  <li>◈ Credits <span style={{ color: '#88aadd' }}>(sesuai Boss)</span></li>
                   <li>🎁 1 Random Equipment <span style={{ color: '#88aadd', fontSize: 11 }}>(⚪ Common <strong>atau</strong> 🟢 Uncommon)</span></li>
                 </ul>
                 <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#ffcc00', fontWeight: 700, margin: '8px 0 6px' }}>RANDOM DROP</div>
@@ -248,11 +249,11 @@ export default function LibraryModal({ onClose }) {
               <div style={styles.itemCard}>
                 <div style={styles.itemTitle}>👑 World Boss CRD</div>
                 {[
-                  { boss: '🌱 Lumora Behemoth', crd: '100,000 ~ 200,000 CRD' },
-                  { boss: '🌿 Sylvan Fanglord', crd: '300,000 ~ 500,000 CRD' },
-                  { boss: '⚙️ Iron Juggernaut', crd: '700,000 ~ 1,000,000 CRD' },
-                  { boss: '🔥 Pyraxis Overlord', crd: '1,500,000 ~ 2,500,000 CRD' },
-                  { boss: '☢️ Trinity Overlord', crd: '4,000,000 ~ 6,000,000 CRD' },
+                  { boss: '🌱 Lumora Behemoth', crd: '100,000 ~ 200,000 Credits' },
+                  { boss: '🌿 Sylvan Fanglord', crd: '300,000 ~ 500,000 Credits' },
+                  { boss: '⚙️ Iron Juggernaut', crd: '700,000 ~ 1,000,000 Credits' },
+                  { boss: '🔥 Pyraxis Overlord', crd: '1,500,000 ~ 2,500,000 Credits' },
+                  { boss: '☢️ Trinity Overlord', crd: '4,000,000 ~ 6,000,000 Credits' },
                 ].map((b, i) => (
                   <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: i < 4 ? '1px solid rgba(255,255,255,0.07)' : 'none', fontFamily: 'var(--font-mono)', fontSize: 12 }}>
                     <span>{b.boss}</span>
@@ -273,41 +274,6 @@ export default function LibraryModal({ onClose }) {
                 ].map((b, i) => (
                   <div key={i} style={{ display: 'flex', flexDirection: 'column', padding: '6px 0', borderBottom: i < 4 ? '1px solid rgba(255,255,255,0.07)' : 'none', fontFamily: 'var(--font-mono)', fontSize: 12 }}>
                     <span style={{ color: '#00e5ff', fontWeight: 'bold' }}>{b.name}</span>
-                    <span style={{ color: '#88aadd', fontSize: 11, marginTop: 2 }}>{b.stats}</span>
-                  </div>
-                ))}
-              </div>
-
-              {/* World Map Pit Boss (Overlord) */}
-              <div style={styles.itemCard}>
-                <div style={styles.itemTitle}>👾 World Map Pit Boss (Overlord)</div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#ff5f7a', fontWeight: 700, marginBottom: 6 }}>1% RANDOM INVASION RATE</div>
-                <ul style={styles.list}>
-                  <li>Mempunyai HP dan ATK yang sangat tinggi dibandingkan monster biasa.</li>
-                  <li>🎁 Drop 1 Guaranteed High-Tier Equipment (SS atau lebih tinggi).</li>
-                </ul>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#ffcc00', fontWeight: 700, margin: '8px 0 6px' }}>EQUIPMENT DROP RATE</div>
-                <ul style={styles.list}>
-                  <li>🔴 UR Equipment — <strong style={{ color: '#ff4444' }}>5%</strong></li>
-                  <li>🟡 SSR Equipment — <strong>10%</strong></li>
-                  <li>🔵 SR Equipment — <strong>20%</strong></li>
-                  <li>🟢 SSS Equipment — <strong>30%</strong></li>
-                  <li>⚪ SS Equipment — <strong>35%</strong></li>
-                </ul>
-              </div>
-
-              {/* World Map Pit Boss Stats */}
-              <div style={styles.itemCard}>
-                <div style={styles.itemTitle}>⚔️ Pit Boss (Overlord) Roster &amp; Stats</div>
-                {[
-                  { name: '🌱 LUMORA OVERLORD (Map 1)', stats: 'HP: 750,000 | ATK: 1,100 | DEF: 600 | CRIT: 5%' },
-                  { name: '🌿 SYLVAN OVERLORD (Map 2)', stats: 'HP: 1,750,000 | ATK: 2,250 | DEF: 1,250 | CRIT: 5%' },
-                  { name: '⚙️ IRON OVERLORD (Map 3)', stats: 'HP: 3,500,000 | ATK: 4,250 | DEF: 2,500 | CRIT: 10%' },
-                  { name: '🔥 PYRAXIS ELITE (Map 4)', stats: 'HP: 7,500,000 | ATK: 7,500 | DEF: 4,500 | CRIT: 12%' },
-                  { name: '☢️ TRINITY SOVEREIGN (Map 5)', stats: 'HP: 15,000,000 | ATK: 10,000 | DEF: 6,000 | CRIT: 5%' },
-                ].map((b, i) => (
-                  <div key={i} style={{ display: 'flex', flexDirection: 'column', padding: '6px 0', borderBottom: i < 4 ? '1px solid rgba(255,255,255,0.07)' : 'none', fontFamily: 'var(--font-mono)', fontSize: 12 }}>
-                    <span style={{ color: '#ff985a', fontWeight: 'bold' }}>{b.name}</span>
                     <span style={{ color: '#88aadd', fontSize: 11, marginTop: 2 }}>{b.stats}</span>
                   </div>
                 ))}
@@ -357,7 +323,7 @@ export default function LibraryModal({ onClose }) {
                 <div style={styles.itemTitle}>🏛️ Dungeon Boss Drop</div>
                 <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#00ff88', fontWeight: 700, marginBottom: 6 }}>GUARANTEED</div>
                 <ul style={styles.list}>
-                  <li>💰 CRD <span style={{ color: '#88aadd' }}>(sesuai Dungeon)</span></li>
+                  <li>◈ Credits <span style={{ color: '#88aadd' }}>(sesuai Dungeon)</span></li>
                   <li>🎁 1 Random Equipment <span style={{ color: '#88aadd', fontSize: 11 }}>(⚪ Common <strong>atau</strong> 🟢 Uncommon)</span></li>
                 </ul>
                 <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#ffcc00', fontWeight: 700, margin: '8px 0 6px' }}>RANDOM DROP</div>
@@ -372,11 +338,11 @@ export default function LibraryModal({ onClose }) {
 
               {/* Dungeon Boss CRD */}
               <div style={styles.itemCard}>
-                <div style={styles.itemTitle}>🏛️ Dungeon Boss CRD</div>
+                <div style={styles.itemTitle}>🏛️ Dungeon Boss Credits</div>
                 {[
-                  { boss: 'Echo Burrow', crd: '500,000 ~ 800,000 CRD' },
-                  { boss: 'Infernal Forge', crd: '2,000,000 ~ 3,500,000 CRD' },
-                  { boss: 'Trinity Core Chamber', crd: '7,000,000 ~ 10,000,000 CRD' },
+                  { boss: 'Echo Burrow', crd: '500,000 ~ 800,000 Credits' },
+                  { boss: 'Infernal Forge', crd: '2,000,000 ~ 3,500,000 Credits' },
+                  { boss: 'Trinity Core Chamber', crd: '7,000,000 ~ 10,000,000 Credits' },
                 ].map((b, i) => (
                   <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: i < 2 ? '1px solid rgba(255,255,255,0.07)' : 'none', fontFamily: 'var(--font-mono)', fontSize: 12 }}>
                     <span style={{ color: '#e0f4ff' }}>🏛️ {b.boss}</span>
@@ -400,10 +366,10 @@ export default function LibraryModal({ onClose }) {
                   <div key={i} style={{ marginBottom: 10, paddingBottom: 10, borderBottom: i < 3 ? '1px solid rgba(255,255,255,0.07)' : 'none' }}>
                     <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 800, color: r.color, marginBottom: 5 }}>{r.rarity}</div>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3px 12px', fontFamily: 'var(--font-mono)', fontSize: 11 }}>
-                      <span style={{ color: '#aac8ff' }}>⚔️ Weapon</span><span style={{ color: '#00ff88' }}>{r.weapon} CRD</span>
-                      <span style={{ color: '#aac8ff' }}>🛡️ Armor/Shield</span><span style={{ color: '#00ff88' }}>{r.armor} CRD</span>
-                      <span style={{ color: '#aac8ff' }}>💍 Ring</span><span style={{ color: '#00ff88' }}>{r.ring} CRD</span>
-                      <span style={{ color: '#aac8ff' }}>📿 Amulet</span><span style={{ color: '#00ff88' }}>{r.amulet} CRD</span>
+                      <span style={{ color: '#aac8ff' }}>⚔️ Weapon</span><span style={{ color: '#00ff88' }}>{r.weapon} Credits</span>
+                      <span style={{ color: '#aac8ff' }}>🛡️ Armor/Shield</span><span style={{ color: '#00ff88' }}>{r.armor} Credits</span>
+                      <span style={{ color: '#aac8ff' }}>💍 Ring</span><span style={{ color: '#00ff88' }}>{r.ring} Credits</span>
+                      <span style={{ color: '#aac8ff' }}>📿 Amulet</span><span style={{ color: '#00ff88' }}>{r.amulet} Credits</span>
                     </div>
                   </div>
                 ))}
@@ -454,7 +420,7 @@ export default function LibraryModal({ onClose }) {
                     <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, lineHeight: 1.8, color: '#e0f4ff' }}>
                       <div>Slot Awal: <strong>100</strong></div>
                       <div>Maksimum: <strong>300</strong></div>
-                      <div style={{ marginTop: 4, color: '#ffcc00' }}>+20 Slot → <strong>1,000,000 CRD</strong></div>
+                      <div style={{ marginTop: 4, color: '#ffcc00' }}>+20 Slot → <strong>1,000,000 Credits</strong></div>
                     </div>
                   </div>
                   <div style={{ background: 'rgba(255,165,0,0.06)', borderRadius: 8, padding: 10 }}>
@@ -462,7 +428,7 @@ export default function LibraryModal({ onClose }) {
                     <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, lineHeight: 1.8, color: '#e0f4ff' }}>
                       <div>Slot Awal: <strong>200</strong></div>
                       <div>Maksimum: <strong>600</strong></div>
-                      <div style={{ marginTop: 4, color: '#ffcc00' }}>+50 Slot → <strong>2,500,000 CRD</strong></div>
+                      <div style={{ marginTop: 4, color: '#ffcc00' }}>+50 Slot → <strong>2,500,000 Credits</strong></div>
                     </div>
                   </div>
                 </div>
@@ -622,19 +588,19 @@ export default function LibraryModal({ onClose }) {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '4px' }}>
                     <span>⚪ Small HP Potion</span>
-                    <span style={{ color: '#00ff88', textAlign: 'right' }}>+1,000 HP<br/><span style={{ fontSize: '11px', color: '#aaa' }}>2,500 CRD | CD: 3s</span></span>
+                    <span style={{ color: '#00ff88', textAlign: 'right' }}>+1,000 HP<br/><span style={{ fontSize: '11px', color: '#aaa' }}>2,500 Credits | CD: 3s</span></span>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '4px' }}>
                     <span>🔵 Medium HP Potion</span>
-                    <span style={{ color: '#00ff88', textAlign: 'right' }}>+2,500 HP<br/><span style={{ fontSize: '11px', color: '#aaa' }}>8,000 CRD | CD: 3s</span></span>
+                    <span style={{ color: '#00ff88', textAlign: 'right' }}>+2,500 HP<br/><span style={{ fontSize: '11px', color: '#aaa' }}>8,000 Credits | CD: 3s</span></span>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '4px' }}>
                     <span>🔴 Large HP Potion</span>
-                    <span style={{ color: '#00ff88', textAlign: 'right' }}>+5,000 HP<br/><span style={{ fontSize: '11px', color: '#aaa' }}>20,000 CRD | CD: 3s</span></span>
+                    <span style={{ color: '#00ff88', textAlign: 'right' }}>+5,000 HP<br/><span style={{ fontSize: '11px', color: '#aaa' }}>20,000 Credits | CD: 3s</span></span>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '4px' }}>
                     <span>🔷 FP Potion</span>
-                    <span style={{ color: '#00e5ff', textAlign: 'right' }}>+2,500 FP<br/><span style={{ fontSize: '11px', color: '#aaa' }}>10,000 CRD | CD: 3s</span></span>
+                    <span style={{ color: '#00e5ff', textAlign: 'right' }}>+2,500 FP<br/><span style={{ fontSize: '11px', color: '#aaa' }}>10,000 Credits | CD: 3s</span></span>
                   </div>
                 </div>
               </div>
@@ -924,7 +890,7 @@ export default function LibraryModal({ onClose }) {
                         {w.materials && (
                           <div style={{ paddingLeft: 70, fontSize: 12, color: '#9db2c2' }}>
                             <div style={{ marginBottom: 4 }}>
-                              <span style={{ color: '#00e5ff' }}>{w.craft_cost ? 'Craft Cost' : 'Upgrade Cost'}:</span> {(w.craft_cost || w.upgrade_cost).toLocaleString()} CRD
+                              <span style={{ color: '#00e5ff' }}>{w.craft_cost ? 'Craft Cost' : 'Upgrade Cost'}:</span> {(w.craft_cost || w.upgrade_cost).toLocaleString()} Credits
                             </div>
                             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
                               {w.materials.map((m, mi) => (

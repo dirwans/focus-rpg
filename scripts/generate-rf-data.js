@@ -132,7 +132,7 @@ const enemies = {
         const atk = Math.floor(7 * Math.pow(1.38, sLevel - 1) + (mobIdx * 2 * sLevel));
         const def = Math.floor(1.5 * Math.pow(1.5, sLevel - 1) + (mobIdx * sLevel));
         const expReward = Math.floor(10 * Math.pow(1.38, sLevel - 1) + (mobIdx * 2 * sLevel));
-        const aniumReward = Math.floor(6 * Math.pow(1.4, sLevel - 1) + (mobIdx * 1.5 * sLevel));
+        const crdReward = Math.floor(6 * Math.pow(1.4, sLevel - 1) + (mobIdx * 1.5 * sLevel));
 
         return {
           name,
@@ -141,7 +141,7 @@ const enemies = {
           atk,
           def,
           expReward,
-          aniumReward,
+          crdReward,
           image: findMonsterImage(name)
         };
       }),
@@ -152,7 +152,7 @@ const enemies = {
         atk: Math.floor(20 * Math.pow(1.35, sLevel - 1)),
         def: Math.floor(8 * Math.pow(1.36, sLevel - 1)),
         expReward: Math.floor(80 * Math.pow(1.35, sLevel - 1)),
-        aniumReward: Math.floor(60 * Math.pow(1.35, sLevel - 1)),
+        crdReward: Math.floor(60 * Math.pow(1.35, sLevel - 1)),
         image: findMonsterImage(s.boss)
       }
     };

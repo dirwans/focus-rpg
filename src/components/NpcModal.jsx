@@ -134,8 +134,8 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
   )
 
   const promoCost = eligibleForPromo ? PROMO_COSTS[tier + 1] : 0
-  const canPromote = eligibleForPromo && player.resources.anium >= promoCost
-  const canReclass = tier >= 1 && player.resources.anium >= RECLASS_COST
+  const canPromote = eligibleForPromo && player.resources.crd >= promoCost
+  const canReclass = tier >= 1 && player.resources.crd >= RECLASS_COST
 
   const archonItems = itemsData.items.filter(it => it.id.startsWith(`archon_${player.race}`))
 
@@ -146,7 +146,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
 
   const handlePromote = (jobId) => {
     const cost = PROMO_COSTS[tier + 1]
-    if (player.resources.anium < cost) return
+    if (player.resources.crd < cost) return
     reclassJob(jobId, cost)
     setSubView('specialist')
   }
@@ -159,8 +159,8 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
 
   const handleBuyArchonItem = (item) => {
     const cost = getArchonPrice(item.id)
-    if (player.resources.anium < cost) {
-      alert(t('need_more_anium', { need: cost.toLocaleString(), owned: player.resources.anium.toLocaleString() }))
+    if (player.resources.crd < cost) {
+      alert(t('need_more_crd', { need: cost.toLocaleString(), owned: player.resources.crd.toLocaleString() }))
       return
     }
 
@@ -1264,20 +1264,20 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                                       <button 
                                         onClick={() => handleReclass(j.id)}
                                         className="profile-promo-btn"
-                                        disabled={player.resources.anium < RECLASS_COST}
+                                        disabled={player.resources.crd < RECLASS_COST}
                                         style={{
                                           margin: '8px 0 0 0',
                                           padding: '6px 10px',
                                           fontSize: '12px',
-                                          background: player.resources.anium >= RECLASS_COST 
+                                          background: player.resources.crd >= RECLASS_COST 
                                             ? 'linear-gradient(90deg, #bb88ff, #6600cc)'
                                             : 'rgba(255,255,255,0.05)',
-                                          border: player.resources.anium >= RECLASS_COST 
+                                          border: player.resources.crd >= RECLASS_COST 
                                             ? '1.5px solid #bb88ff'
                                             : '1.5px solid rgba(255,255,255,0.1)',
-                                          color: player.resources.anium >= RECLASS_COST ? '#fff' : 'rgba(255,255,255,0.3)',
-                                          cursor: player.resources.anium >= RECLASS_COST ? 'pointer' : 'not-allowed',
-                                          boxShadow: player.resources.anium >= RECLASS_COST 
+                                          color: player.resources.crd >= RECLASS_COST ? '#fff' : 'rgba(255,255,255,0.3)',
+                                          cursor: player.resources.crd >= RECLASS_COST ? 'pointer' : 'not-allowed',
+                                          boxShadow: player.resources.crd >= RECLASS_COST 
                                             ? '0 0 8px rgba(187, 136, 255, 0.4)'
                                             : 'none'
                                         }}
@@ -1318,7 +1318,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
               <div style={styles.scrollList}>
                 {archonItems.map(item => {
                   const cost = getArchonPrice(item.id)
-                  const canBuy = player.resources.anium >= cost
+                  const canBuy = player.resources.crd >= cost
                   return (
                     <div key={item.id} style={styles.shopItemRow}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>

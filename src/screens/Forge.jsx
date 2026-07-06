@@ -114,11 +114,11 @@ export default function Forge() {
   // Weapon Smith Data
   const equippedWeapon = player.equipment?.weapon
   const REFINE_COSTS = {
-    normal: { next: 'advanced', talics: 1, anium: 5000 },
-    advanced: { next: 'rare', talics: 2, anium: 10000 },
-    rare: { next: 'epic', talics: 3, anium: 20000 },
-    epic: { next: 'legendary', talics: 5, anium: 50000 },
-    legendary: { next: 'mythic', talics: 10, anium: 100000 }
+    normal: { next: 'advanced', talics: 1, crd: 5000 },
+    advanced: { next: 'rare', talics: 2, crd: 10000 },
+    rare: { next: 'epic', talics: 3, crd: 20000 },
+    epic: { next: 'legendary', talics: 5, crd: 50000 },
+    legendary: { next: 'mythic', talics: 10, crd: 100000 }
   }
 
   const isEpicOrHigher = (item) => {
@@ -218,13 +218,13 @@ export default function Forge() {
 
       {/* Resources bar */}
       <div style={{ position: 'relative', zIndex: 4, display: 'flex', gap: 8, padding: '0 16px 8px' }}>
-        {/* Anium */}
+        {/* CRD */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'rgba(8,22,36,0.5)', backdropFilter: 'blur(8px)', border: `1px solid ${theme.primary}59`, borderRadius: '20px', padding: '4px 12px 4px 9px' }}>
           <svg width="13" height="15" viewBox="0 0 14 16">
             <polygon points="7,0 14,4 14,12 7,16 0,12 0,4" fill="none" stroke={theme.primary} strokeWidth="1.4"/>
           </svg>
           <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '13px', fontWeight: '700', color: theme.light }}>
-            {(player.resources?.anium || 0).toLocaleString()}
+            {(player.resources?.crd || 0).toLocaleString()}
           </span>
         </div>
         {/* Credits */}
@@ -263,10 +263,10 @@ export default function Forge() {
           const nextPercent = hasWeapon && cost ? (cost.next === 'advanced' ? '5%' : cost.next === 'rare' ? '10%' : cost.next === 'epic' ? '15%' : cost.next === 'legendary' ? '20%' : '30%') : '0%'
 
           const requiredTalicsText = hasWeapon && cost ? `${ownedIgnorance}/${cost.talics}` : `0/0`
-          const requiredAniumText = hasWeapon && cost ? `${(cost.anium / 1000).toFixed(0)}K` : '0K'
+          const requiredCrdText = hasWeapon && cost ? `${(cost.crd / 1000).toFixed(0)}K` : '0K'
           const hasTalics = hasWeapon && cost ? (ownedIgnorance >= cost.talics) : false
-          const hasAnium = hasWeapon && cost ? (player.resources.anium >= cost.anium) : false
-          const canUpgrade = hasWeapon && cost ? (hasTalics && hasAnium) : false
+          const hasCrd = hasWeapon && cost ? (player.resources.crd >= cost.crd) : false
+          const canUpgrade = hasWeapon && cost ? (hasTalics && hasCrd) : false
 
           return (
             <div style={{ padding: '2px 16px' }}>
@@ -306,13 +306,13 @@ export default function Forge() {
                       </span>
                     </div>
 
-                    {/* Left: Required Anium */}
+                    {/* Left: Required CRD */}
                     <div style={{ position: 'absolute', top: 132, left: 12, width: 44, height: 44, borderRadius: 9, background: 'rgba(10,15,25,0.95)', border: '2px solid rgba(255,95,122,0.6)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 3 }}>
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ff8080" strokeWidth="1.8">
                         <polygon points="7,0 14,4 14,12 7,16 0,12 0,4" transform="translate(5,4)"/>
                       </svg>
                       <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 7, fontWeight: 800, color: '#ff8080' }}>
-                        {requiredAniumText}
+                        {requiredCrdText}
                       </span>
                     </div>
 

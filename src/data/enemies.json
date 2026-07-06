@@ -15,7 +15,7 @@
           "atk": 20,
           "def": 10,
           "expReward": 10,
-          "aniumReward": 6,
+          "crdReward": 6,
           "image": "/ref/World-Map/Lumora/puffling.png",
           "critical": 1
         },
@@ -26,7 +26,7 @@
           "atk": 30,
           "def": 18,
           "expReward": 12,
-          "aniumReward": 7,
+          "crdReward": 7,
           "image": "/ref/World-Map/Lumora/moss_hopper.png",
           "critical": 2
         },
@@ -37,7 +37,7 @@
           "atk": 45,
           "def": 28,
           "expReward": 14,
-          "aniumReward": 9,
+          "crdReward": 9,
           "image": "/ref/World-Map/Lumora/leaf_boar.png",
           "critical": 3
         },
@@ -48,7 +48,7 @@
           "atk": 65,
           "def": 40,
           "expReward": 15,
-          "aniumReward": 10,
+          "crdReward": 10,
           "image": "/ref/World-Map/Lumora/twig_imp.png",
           "critical": 4
         }
@@ -62,19 +62,7 @@
         "critical": 8,
         "regen": 80,
         "expReward": 150,
-        "aniumReward": 100,
-        "image": "/ref/World-Map/Lumora/lumora_behemoth.png"
-      },
-      "pitBoss": {
-        "name": "LUMORA BEHEMOTH",
-        "emoji": "☢️",
-        "hp": 750000,
-        "atk": 1100,
-        "def": 600,
-        "critical": 5,
-        "regen": 400,
-        "expReward": 750,
-        "aniumReward": 500,
+        "crdReward": 100,
         "image": "/ref/World-Map/Lumora/lumora_behemoth.png"
       }
     },
@@ -93,7 +81,7 @@
           "atk": 80,
           "def": 50,
           "expReward": 13,
-          "aniumReward": 8,
+          "crdReward": 8,
           "image": "/ref/World-Map/Sylvan/Fangclaw.png",
           "critical": 5
         },
@@ -104,7 +92,7 @@
           "atk": 100,
           "def": 65,
           "expReward": 17,
-          "aniumReward": 11,
+          "crdReward": 11,
           "image": "/ref/World-Map/Sylvan/Thornmaw.png",
           "critical": 6
         },
@@ -115,7 +103,7 @@
           "atk": 130,
           "def": 80,
           "expReward": 21,
-          "aniumReward": 14,
+          "crdReward": 14,
           "image": "/ref/World-Map/Sylvan/Sylvan-Wolf.png",
           "critical": 7
         },
@@ -126,7 +114,7 @@
           "atk": 160,
           "def": 100,
           "expReward": 22,
-          "aniumReward": 15,
+          "crdReward": 15,
           "image": "/ref/World-Map/Sylvan/Vine-Stalker.png",
           "critical": 8
         }
@@ -140,19 +128,7 @@
         "critical": 10,
         "regen": 180,
         "expReward": 350,
-        "aniumReward": 250,
-        "image": "/ref/World-Map/Sylvan/Sylva-Fanglord.png"
-      },
-      "pitBoss": {
-        "name": "SYLVAN FANGLORD",
-        "emoji": "☢️",
-        "hp": 1750000,
-        "atk": 2250,
-        "def": 1250,
-        "critical": 5,
-        "regen": 900,
-        "expReward": 1750,
-        "aniumReward": 1250,
+        "crdReward": 250,
         "image": "/ref/World-Map/Sylvan/Sylva-Fanglord.png"
       }
     },
@@ -171,7 +147,7 @@
           "atk": 200,
           "def": 130,
           "expReward": 19,
-          "aniumReward": 11,
+          "crdReward": 11,
           "image": "/ref/World-Map/Ferrum Expanse/Steel-hound.png",
           "critical": 9
         },
@@ -182,7 +158,7 @@
           "atk": 240,
           "def": 155,
           "expReward": 25,
-          "aniumReward": 16,
+          "crdReward": 16,
           "image": "/ref/World-Map/Ferrum Expanse/Scrap-Golem.png",
           "critical": 10
         },
@@ -193,7 +169,7 @@
           "atk": 290,
           "def": 185,
           "expReward": 31,
-          "aniumReward": 20,
+          "crdReward": 20,
           "image": "/ref/World-Map/Ferrum Expanse/Iron-wasp.png",
           "critical": 11
         },
@@ -204,7 +180,7 @@
           "atk": 350,
           "def": 220,
           "expReward": 33,
-          "aniumReward": 22,
+          "crdReward": 22,
           "image": "/ref/World-Map/Ferrum Expanse/machawarden.png",
           "critical": 12
         }
@@ -218,19 +194,7 @@
         "critical": 12,
         "regen": 350,
         "expReward": 700,
-        "aniumReward": 500,
-        "image": "/ref/World-Map/Ferrum Expanse/Boss-Iron-Juggernaut.png"
-      },
-      "pitBoss": {
-        "name": "IRON JUGGERNAUT",
-        "emoji": "☢️",
-        "hp": 3500000,
-        "atk": 4250,
-        "def": 2500,
-        "critical": 5,
-        "regen": 1750,
-        "expReward": 3500,
-        "aniumReward": 2500,
+        "crdReward": 500,
         "image": "/ref/World-Map/Ferrum Expanse/Boss-Iron-Juggernaut.png"
       }
     },
@@ -249,7 +213,7 @@
           "atk": 450,
           "def": 280,
           "expReward": 26,
-          "aniumReward": 16,
+          "crdReward": 16,
           "image": "/ref/World-Map/Pyraxis Crater/infernox.png",
           "critical": 13
         },
@@ -260,7 +224,7 @@
           "atk": 520,
           "def": 330,
           "expReward": 34,
-          "aniumReward": 22,
+          "crdReward": 22,
           "image": "/ref/World-Map/Pyraxis Crater/flame_fiend.png",
           "critical": 14
         },
@@ -271,7 +235,7 @@
           "atk": 600,
           "def": 380,
           "expReward": 42,
-          "aniumReward": 28,
+          "crdReward": 28,
           "image": "/ref/World-Map/Pyraxis Crater/lava_beetle.png",
           "critical": 15
         },
@@ -282,7 +246,7 @@
           "atk": 700,
           "def": 450,
           "expReward": 44,
-          "aniumReward": 30,
+          "crdReward": 30,
           "image": "/ref/World-Map/Pyraxis Crater/magma_hound.png",
           "critical": 16
         }
@@ -296,19 +260,7 @@
         "critical": 15,
         "regen": 700,
         "expReward": 1500,
-        "aniumReward": 1000,
-        "image": "/ref/World-Map/Pyraxis Crater/pyraxis_overlord.png"
-      },
-      "pitBoss": {
-        "name": "PYRAXIS ELITE",
-        "emoji": "☢️",
-        "hp": 7500000,
-        "atk": 7500,
-        "def": 4500,
-        "critical": 5,
-        "regen": 3500,
-        "expReward": 7500,
-        "aniumReward": 5000,
+        "crdReward": 1000,
         "image": "/ref/World-Map/Pyraxis Crater/pyraxis_overlord.png"
       }
     },
@@ -327,7 +279,7 @@
           "atk": 850,
           "def": 550,
           "expReward": 36,
-          "aniumReward": 23,
+          "crdReward": 23,
           "image": "/ref/World-Map/Trinity/trinity_sentinel.png",
           "critical": 17
         },
@@ -338,7 +290,7 @@
           "atk": 950,
           "def": 650,
           "expReward": 46,
-          "aniumReward": 30,
+          "crdReward": 30,
           "image": "/ref/World-Map/Trinity/core_phantom.png",
           "critical": 18
         },
@@ -349,7 +301,7 @@
           "atk": 1100,
           "def": 750,
           "expReward": 56,
-          "aniumReward": 38,
+          "crdReward": 38,
           "image": "/ref/World-Map/Trinity/nexus_harbinger.png",
           "critical": 19
         },
@@ -360,7 +312,7 @@
           "atk": 1250,
           "def": 850,
           "expReward": 58,
-          "aniumReward": 40,
+          "crdReward": 40,
           "image": "/ref/World-Map/Trinity/flux_avatar.png",
           "critical": 20
         }
@@ -374,19 +326,7 @@
         "critical": 20,
         "regen": 1500,
         "expReward": 3500,
-        "aniumReward": 2000,
-        "image": "/ref/World-Map/Trinity/trinity_overlord.png"
-      },
-      "pitBoss": {
-        "name": "TRINITY SOVEREIGN",
-        "emoji": "☢️",
-        "hp": 15000000,
-        "atk": 10000,
-        "def": 6000,
-        "critical": 5,
-        "regen": 5000,
-        "expReward": 15000,
-        "aniumReward": 10000,
+        "crdReward": 2000,
         "image": "/ref/World-Map/Trinity/trinity_overlord.png"
       }
     }
@@ -405,7 +345,7 @@
           "atk": 19,
           "def": 6,
           "expReward": 25,
-          "aniumReward": 16,
+          "crdReward": 16,
           "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_6.png"
         },
         {
@@ -415,7 +355,7 @@
           "atk": 22,
           "def": 8,
           "expReward": 28,
-          "aniumReward": 18,
+          "crdReward": 18,
           "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_1.png"
         },
         {
@@ -425,7 +365,7 @@
           "atk": 25,
           "def": 9,
           "expReward": 31,
-          "aniumReward": 20,
+          "crdReward": 20,
           "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/clod-monster.png"
         }
       ],
@@ -438,19 +378,7 @@
         "critical": 8,
         "regen": 500,
         "expReward": 1200,
-        "aniumReward": 800,
-        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/baalhamon-pitboss.png"
-      },
-      "pitBoss": {
-        "name": "BURROW OVERLORD",
-        "emoji": "☢️",
-        "hp": 6000000,
-        "atk": 3000,
-        "def": 1500,
-        "critical": 10,
-        "regen": 2500,
-        "expReward": 6000,
-        "aniumReward": 4000,
+        "crdReward": 800,
         "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/baalhamon-pitboss.png"
       }
     },
@@ -467,7 +395,7 @@
           "atk": 32,
           "def": 12,
           "expReward": 42,
-          "aniumReward": 26,
+          "crdReward": 26,
           "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_10.png"
         },
         {
@@ -477,7 +405,7 @@
           "atk": 36,
           "def": 14,
           "expReward": 48,
-          "aniumReward": 32,
+          "crdReward": 32,
           "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/monster_69.png"
         },
         {
@@ -487,7 +415,7 @@
           "atk": 42,
           "def": 16,
           "expReward": 52,
-          "aniumReward": 36,
+          "crdReward": 36,
           "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_6.png"
         }
       ],
@@ -500,19 +428,7 @@
         "critical": 12,
         "regen": 2000,
         "expReward": 4000,
-        "aniumReward": 2500,
-        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_23.png"
-      },
-      "pitBoss": {
-        "name": "INFERNAL DREADNOUGHT",
-        "emoji": "☢️",
-        "hp": 20000000,
-        "atk": 10000,
-        "def": 6000,
-        "critical": 15,
-        "regen": 8000,
-        "expReward": 20000,
-        "aniumReward": 12500,
+        "crdReward": 2500,
         "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_23.png"
       }
     },
@@ -529,7 +445,7 @@
           "atk": 52,
           "def": 24,
           "expReward": 64,
-          "aniumReward": 44,
+          "crdReward": 44,
           "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/CorHolyStone-monster.png"
         },
         {
@@ -539,7 +455,7 @@
           "atk": 62,
           "def": 28,
           "expReward": 72,
-          "aniumReward": 48,
+          "crdReward": 48,
           "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/caster-sette.png"
         },
         {
@@ -549,7 +465,7 @@
           "atk": 74,
           "def": 32,
           "expReward": 84,
-          "aniumReward": 56,
+          "crdReward": 56,
           "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/10/tuyul.png"
         }
       ],
@@ -562,19 +478,7 @@
         "critical": 18,
         "regen": 5000,
         "expReward": 10000,
-        "aniumReward": 6000,
-        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/baalhamon-pitboss.png"
-      },
-      "pitBoss": {
-        "name": "TRINITY EMPEROR",
-        "emoji": "☢️",
-        "hp": 50000000,
-        "atk": 20000,
-        "def": 12000,
-        "critical": 20,
-        "regen": 20000,
-        "expReward": 50000,
-        "aniumReward": 30000,
+        "crdReward": 6000,
         "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/baalhamon-pitboss.png"
       }
     }
@@ -588,7 +492,7 @@
     "critical": 25,
     "regen": 500000,
     "expReward": 100000,
-    "aniumReward": 50000,
+    "crdReward": 50000,
     "image": ""
   }
 }

@@ -14,7 +14,7 @@ for(const f of files) {
     d.highestSector = 1;
     d.streak = 0;
     
-    d.resources = { anium: 0, credits: 0, potions: 0 };
+    d.resources = { crd: 0, credits: 0, potions: 0 };
     d.upgrades = { atk: 0, def: 0, hp: 0 };
     d.equipment = { 
         weapon: null, armor: null, shield: null, helmet: null, 

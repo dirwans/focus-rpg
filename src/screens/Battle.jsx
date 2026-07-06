@@ -137,8 +137,8 @@ export default function Battle() {
       useGameStore.setState((s) => {
         const next = { ...s.player }
         next.cp = res.p1Cp
-        if (res.win && res.rewards.anium) {
-          next.resources = { ...next.resources, anium: (next.resources?.anium || 0) + res.rewards.anium }
+        if (res.win && res.rewards.crd) {
+          next.resources = { ...next.resources, crd: (next.resources?.crd || 0) + res.rewards.crd }
         }
         return { player: next }
       })

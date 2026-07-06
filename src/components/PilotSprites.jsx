@@ -167,15 +167,11 @@ export function CelestraSprite({ job, size = 60, width, height, upperBodyOnly = 
   )
 }
 
-export function EnemySprite({ size = 60, isBoss = false, isPitBoss = false }) {
+export function EnemySprite({ size = 60, isBoss = false }) {
   let color = '#ef4444'
   let bodyColor = '#991b1b'
   let eyeColor = '#ffff00'
-  if (isPitBoss) {
-    color = '#ec4899'
-    bodyColor = '#500724'
-    eyeColor = '#00ffff'
-  } else if (isBoss) {
+  if (isBoss) {
     color = '#eab308'
     bodyColor = '#78350f'
     eyeColor = '#ff0000'

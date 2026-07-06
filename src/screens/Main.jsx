@@ -736,20 +736,20 @@ export default function Main() {
                   display: 'flex',
                   alignItems: 'flex-end', // Stand on the grid floor
                   justifyContent: 'center',
-                  width: (battle.isBoss || battle.isPitBoss) ? 320 : 160,
-                  height: (battle.isBoss || battle.isPitBoss) ? 256 : 160,
+                  width: battle.isBoss ? 320 : 160,
+                  height: battle.isBoss ? 256 : 160,
                   flexShrink: 0
                 }}>
                   {battle.currentMob.image ? (
-                    <TransparentSprite 
-                      src={battle.currentMob.image} 
-                      alt={battle.currentMob.name} 
-                      size={(battle.isBoss || battle.isPitBoss) ? 320 : 160} 
-                      height={(battle.isBoss || battle.isPitBoss) ? 256 : 160}
-                      glowColor="var(--neon-glow)" 
+                    <TransparentSprite
+                      src={battle.currentMob.image}
+                      alt={battle.currentMob.name}
+                      size={battle.isBoss ? 320 : 160}
+                      height={battle.isBoss ? 256 : 160}
+                      glowColor="var(--neon-glow)"
                     />
                   ) : (
-                    <EnemySprite isBoss={battle.isBoss} isPitBoss={battle.isPitBoss} size={(battle.isBoss || battle.isPitBoss) ? 320 : 160} />
+                    <EnemySprite isBoss={battle.isBoss} size={battle.isBoss ? 320 : 160} />
                   )}
                 </div>
                 <div style={styles.spriteLabel}>{battle.currentMob.name?.toUpperCase()}</div>
@@ -787,7 +787,7 @@ export default function Main() {
         {/* 5. Session summary (Bottom-most bar) */}
         <div style={styles.sessionSummaryActive}>
           <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 13, fontWeight: 700, textShadow: '0 0 4px #000' }}>
-            ⚔️ {t('kills_label', { kills: battle.kills })} &nbsp;|&nbsp; <span style={{ color: '#f5a623' }}>+{battle.sessionAnium}⬡</span> &nbsp;|&nbsp; <span style={{ color: '#00e5ff' }}>+{battle.sessionExp} Menit</span>
+            ⚔️ {t('kills_label', { kills: battle.kills })} &nbsp;|&nbsp; <span style={{ color: '#f5a623' }}>+{battle.sessionCrd}⬡</span> &nbsp;|&nbsp; <span style={{ color: '#00e5ff' }}>+{battle.sessionExp} Menit</span>
           </span>
         </div>
       </div>
@@ -814,7 +814,7 @@ export default function Main() {
 
       {/* Top HUD bar */}
       <div style={styles.hudBar}>
-        <span className="hud-pill">⬡ {player.resources.anium.toLocaleString()}</span>
+        <span className="hud-pill">⬡ {player.resources.crd.toLocaleString()}</span>
         <span className="hud-pill secondary">◈ {player.resources.credits.toLocaleString()}</span>
         <span style={styles.iconRow}>
           {player.race && (

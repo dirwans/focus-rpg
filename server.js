@@ -520,7 +520,7 @@ app.get('/api/admin/state', (req, res) => {
       createdAt: u.createdAt,
       save: sv ? {
         race: sv.race, level: sv.level, exp: sv.exp,
-        anium: sv.resources?.anium, sector: sv.sector, highestSector: sv.highestSector,
+        crd: sv.resources?.crd, sector: sv.sector, highestSector: sv.highestSector,
         upgrades: sv.upgrades, totalSessions: sv.totalSessions, totalMinutes: sv.totalMinutes,
         session: sv.__session ?? null, savedAt: sv.savedAt,
       } : null,
@@ -616,8 +616,8 @@ app.post('/api/pvp/battle', async (req, res) => {
   if (p1_wins) {
     p1Save.cp += 20
     p2Save.cp -= 10
-    p1Save.resources = p1Save.resources || { anium: 0 }
-    p1Save.resources.anium += 1500
+    p1Save.resources = p1Save.resources || { crd: 0 }
+    p1Save.resources.crd += 1500
     log = [`${p1Name} attacks! Deals ${p1_dmg} damage.`, `${p2Name} attacks! Deals ${p2_dmg} damage.`, `${p1Name} overpowers ${p2Name} in ${p1_turns} rounds!`]
   } else {
     p1Save.cp -= 10
@@ -637,7 +637,7 @@ app.post('/api/pvp/battle', async (req, res) => {
   res.json({
     win: p1_wins,
     log,
-    rewards: p1_wins ? { anium: 1500, cp: 20 } : { cp: -10 },
+    rewards: p1_wins ? { crd: 1500, cp: 20 } : { cp: -10 },
     p1Cp: p1Save.cp,
     p2Cp: p2Save.cp
   })

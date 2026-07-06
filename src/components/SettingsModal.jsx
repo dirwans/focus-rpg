@@ -248,14 +248,14 @@ export default function SettingsModal({ onClose }) {
                         upgrades: { atk: 250, def: 250, hp: 250 },
                         resources: {
                           ...s.player.resources,
-                          anium: (s.player.resources?.anium || 0) + 1000000,
+                          crd: (s.player.resources?.crd || 0) + 1000000,
                           credits: (s.player.resources?.credits || 0) + 100000
                         },
                         selectedMapIdx: 4,
                         savedAt: Date.now()
                       }
                     }))
-                    alert("God Mode Enabled: Level 66, Max Upgrades (250), +1M Anium, Map 5 Selected!")
+                    alert("God Mode Enabled: Level 66, Max Upgrades (250), +1M CRD, Map 5 Selected!")
                     onClose()
                   }}
                   style={{
@@ -274,13 +274,13 @@ export default function SettingsModal({ onClose }) {
                         isDeveloper: true,
                         resources: {
                           ...s.player.resources,
-                          anium: (s.player.resources?.anium || 0) + 1000000,
+                          crd: (s.player.resources?.crd || 0) + 1000000,
                           credits: (s.player.resources?.credits || 0) + 10000
                         },
                         savedAt: Date.now()
                       }
                     }))
-                    alert("Added 1,000,000 Anium and 10,000 Credits!")
+                    alert("Added 1,000,000 CRD and 10,000 Credits!")
                   }}
                   style={{
                     flex: 1, padding: 8, background: 'linear-gradient(90deg, #ffaa00, #ff5500)',

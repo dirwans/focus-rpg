@@ -106,6 +106,12 @@ export default function App() {
        if (nextPlayer.equipment.shield && raceMap[nextPlayer.equipment.shield.race]) { nextPlayer.equipment.shield.race = raceMap[nextPlayer.equipment.shield.race]; dirty = true; }
     }
 
+    if (nextPlayer.resources && nextPlayer.resources.anium !== undefined) {
+       nextPlayer.resources = { ...nextPlayer.resources, crd: nextPlayer.resources.anium }
+       delete nextPlayer.resources.anium
+       dirty = true
+    }
+
     if (dirty) {
       useGameStore.setState((s) => ({ player: nextPlayer }))
       return
@@ -168,7 +174,7 @@ export default function App() {
             special: { val: 1, pct: 0 },
             production: { val: 1, pct: 0 }
           },
-          resources: { anium: 200, credits: 10, potions: 5 },
+          resources: { crd: 200, credits: 10, potions: 5 },
           upgrades: { atk: 0, def: 0, hp: 0 },
           equipment: { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null },
           sector: 1,

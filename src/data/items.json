@@ -56,18 +56,6 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile005.png"
     },
     {
-      "id": "raid_ticket",
-      "name": "Sector Raid Ticket",
-      "emoji": "🎫",
-      "rarity": "epic",
-      "type": "consumable",
-      "race": "All",
-      "level": 1,
-      "bonus": {},
-      "description": "Use this ticket to immediately summon a Pit Boss.",
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/bxdha21.png"
-    },
-    {
       "id": "pot_hp",
       "name": "HP Potion [S]",
       "emoji": "🧪",

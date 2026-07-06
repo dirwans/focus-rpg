@@ -164,7 +164,7 @@ export default function Unit() {
             <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'rgba(8,22,36,0.5)', backdropFilter: 'blur(8px)', border: `1px solid ${fp}59`, borderRadius: 20, padding: '4px 12px 4px 9px' }}>
               <svg width="13" height="15" viewBox="0 0 14 16"><polygon points="7,0 14,4 14,12 7,16 0,12 0,4" fill="none" stroke={fp} strokeWidth="1.4"/></svg>
               <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 13, fontWeight: 700, color: fa }}>
-                {(player.resources?.anium || 0).toLocaleString()}
+                {(player.resources?.crd || 0).toLocaleString()}
               </span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'rgba(8,22,36,0.5)', backdropFilter: 'blur(8px)', border: '1px solid rgba(199,204,214,0.4)', borderRadius: 20, padding: '4px 12px 4px 9px' }}>
@@ -1332,10 +1332,6 @@ export default function Unit() {
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span>• Total Monster Kill:</span>
                 <span style={{ fontWeight: 'bold' }}>{player.combatStats?.totalMonsterKill || 0}</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span>• World Boss Kill:</span>
-                <span style={{ fontWeight: 'bold' }}>{player.combatStats?.worldBossKill || 0}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span>• Dungeon Clear:</span>

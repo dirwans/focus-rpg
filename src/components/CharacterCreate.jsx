@@ -157,7 +157,7 @@ export default function CharacterCreate() {
         gender: gender,
         level: 1,
         exp: 0,
-        resources: { anium: 200, credits: 10, potions: 5, nxc: 0 },
+        resources: { crd: 200, credits: 10, potions: 5, nxc: 0 },
         upgrades: { atk: 0, def: 0, hp: 0 },
         equipment: { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null },
         sector: 1,

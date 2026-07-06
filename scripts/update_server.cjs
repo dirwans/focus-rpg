@@ -66,14 +66,14 @@ app.post('/api/market/buy', async (req, res) => {
   
   if (mItem.seller === s.username) return res.status(400).json({ error: 'Cannot buy your own item' })
   
-  // Verify buyer has enough anium
+  // Verify buyer has enough crd
   const buyerSv = loadSave(s.username)
-  if (!buyerSv || !buyerSv.resources || buyerSv.resources.anium < mItem.price) {
-    return res.status(400).json({ error: 'Not enough Anium' })
+  if (!buyerSv || !buyerSv.resources || buyerSv.resources.crd < mItem.price) {
+    return res.status(400).json({ error: 'Not enough CRD' })
   }
   
-  // Subtract anium, add item
-  buyerSv.resources.anium -= mItem.price
+  // Subtract crd, add item
+  buyerSv.resources.crd -= mItem.price
   
   // Strip market metadata before giving item
   const purchasedItem = { ...mItem, uid: Date.now() }
@@ -93,8 +93,8 @@ app.post('/api/market/buy', async (req, res) => {
   // Credit seller (95% after 5% tax)
   const sellerSv = loadSave(mItem.seller)
   if (sellerSv) {
-    if (!sellerSv.resources) sellerSv.resources = { anium: 0 }
-    sellerSv.resources.anium += Math.floor(mItem.price * 0.95)
+    if (!sellerSv.resources) sellerSv.resources = { crd: 0 }
+    sellerSv.resources.crd += Math.floor(mItem.price * 0.95)
     await writeSave(mItem.seller, sellerSv)
     broadcast(mItem.seller, sellerSv, null)
   }
