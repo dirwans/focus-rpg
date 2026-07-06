@@ -212,28 +212,26 @@ export default function CharacterCreate() {
       {step === 1 && (
         <>
           {focusedRace === 'celestra' ? (
-            <div
-              className="celestra-logo-wrap"
-              style={{
-                left: '58%',
-                bottom: '18%',
-                height: '46%',
-                aspectRatio: '1 / 1',
-                maxHeight: '380px',
-                transform: 'translateX(-50%)',
-                animation: 'heroFloat 6s ease-in-out infinite',
-                zIndex: 2
-              }}
-            >
-              <div className="celestra-logo-ring r3" />
-              <div className="celestra-logo-ring r2" />
-              <div className="celestra-logo-ring r1" />
-              <img
-                src={HERO_IMAGES.celestra}
-                alt="celestra"
-                className="celestra-logo-img"
-                style={{ width: '62%', height: '62%', objectFit: 'contain' }}
-              />
+            <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2, pointerEvents: 'none' }}>
+              <div
+                className="celestra-logo-wrap"
+                style={{
+                  height: '46%',
+                  aspectRatio: '1 / 1',
+                  maxHeight: '380px',
+                  animation: 'celestraLogoFloat 6s ease-in-out infinite'
+                }}
+              >
+                <div className="celestra-logo-ring r3" />
+                <div className="celestra-logo-ring r2" />
+                <div className="celestra-logo-ring r1" />
+                <img
+                  src={HERO_IMAGES.celestra}
+                  alt="celestra"
+                  className="celestra-logo-img"
+                  style={{ width: '62%', height: '62%', objectFit: 'contain' }}
+                />
+              </div>
             </div>
           ) : (
             <img

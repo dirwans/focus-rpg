@@ -1497,10 +1497,14 @@ body {
 /* (race-select hero art, from the reference sigil)  */
 /* ------------------------------------------------ */
 .celestra-logo-wrap {
-  position: absolute;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+@keyframes celestraLogoFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
 }
 .celestra-logo-ring {
   position: absolute;
