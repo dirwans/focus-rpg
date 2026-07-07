@@ -408,5 +408,32 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 - **Verified end-to-end in-browser** (not just logic replication this time): logged in as an Arctron Vanguard (tier2 warrior), bought a helmet from the Armor Master NPC — correctly received `helmet_armorset_arctron_lv32`, confirmed the bag-slot thumbnail and the equip-detail popup both show the bespoke sprite (`/assets/armor/defarctronwarriorlv32helmet.png`), equipped it, and confirmed `player.equipment.helmet` updated correctly and the sprite renders in the actual equipment slot grid.
 - `npm run build` passes. Starter-gear auto-equip at character creation (mirroring the shield pattern) was intentionally left out of this milestone's scope — not requested.
 
+---
 
+### 🏹 Milestone 28: Arctron Ranger Armor Set + Starter-Gear Auto-Equip [PENDING DEPLOYMENT]
+- **Assets**: Processed 4 more reference sheets (Lv.1 white/purple, Lv.32 blue/silver/gold, Lv.42 white/orange, Lv.55 red/teal), same 5-piece structure as the Warrior set. Saved as `defarctronrangerlv{1,32,42,55}{armor,helmet,gloves,boots,pants}.png` (20 files) in `src/assets/armor/` and `public/assets/armor/`. All 4 sheets processed cleanly on the first pass with the `process_armor_set.py` pipeline from Milestone 26 — no divider-detection or truncation issues this round.
+- **Wired the same way as the Warrior set**: added `'ranger'` to `ARMOR_SET_LINEAGES.arctron` (now `['warrior', 'ranger']`), extended `resolveArmorSetImage`'s lineage detection to check `BOW_JOBS` (already existed for weapon resolution) → `'ranger'`. Added 20 matching `items.json` entries (`*_armorset_arctron_ranger_lv*`), `race: "arctron"`, `job: [gunner, marksman, railgunner, annihilator]`, same placeholder stat scaling as the Warrior set — **not balance-reviewed**.
+- **Found and fixed a real UX gap** (user caught this after seeing a freshly-created character had zero gear equipped, "polos"): starter gear was previously only ever added to *inventory* (`verifyStarterShield`), never auto-*equipped*, and the new Milestone 26/27 armor sets had no starter-gear path at all — a brand new Arctron Warrior or Ranger looked completely bare in the Gears tab. Added `verifyStarterArmorSet(player)` in [gameStore.js](file:///c:/projects/focus-rpg/src/store/gameStore.js) (mirrors `verifyStarterShield`'s race/level gating, but directly populates `player.equipment` for all 5 slots instead of just adding to inventory) and call it from [CharacterCreate.jsx](file:///c:/projects/focus-rpg/src/components/CharacterCreate.jsx)'s confirm handler alongside the existing shield grant. Falls through safely (no-op) for any race/lineage without a bespoke set yet.
+- Verified end-to-end in-browser: registered a fresh Arctron Ranger (Gunner) character, confirmed all 5 slots (`armor`/`helmet`/`gloves`/`boots`/`pants`) auto-populated in `player.equipment` with the correct Lv.1 ranger items immediately on creation, and confirmed the Gears tab visually shows the character fully geared instead of empty. `npm run build` passes.
 
+---
+
+### 🎨 Milestone 29: Arctron Ranger Lv.1 Armor Set Recolor — Plain Steel [PENDING DEPLOYMENT]
+- **Problem**: Lv.1 Ranger armor (white/silver with purple glowing orbs, gold accents, blue jets) looked too premium/mewah for a starter set — visually comparable to the Lv.32 set. The purple accent was also barely visible which made it look unintentional rather than designed.
+- **Solution**: Rewrote all 5 Lv.1 ranger pieces (`armor`, `helmet`, `gloves`, `boots`, `pants`) using a numpy-vectorized HSV recolor script (`scratch/recolor_ranger_lv1.py`):
+  - Purple/violet (hue 250–310°) → near-gray cold steel (hue 210, saturation ×0.10)
+  - Gold/yellow (hue 35–70°) → dull steel gray (saturation ×0.08, brightness ×0.75)
+  - Blue/cyan glow (hue 180–250°, includes jets and orbs) → dim gray-blue (saturation ×0.18, brightness ×0.72)
+  - All other colored pixels (sat >0.12): saturation ×0.28
+- **Result**: Full set is now dark gunmetal steel with virtually no color accent — clearly "starter" tier. Tier progression contrast is now obvious: Lv.1 plain dark → Lv.32 white+blue gem+gold trim → Lv.42 orange/white → Lv.55 red/teal.
+- Updated in both `public/assets/armor/` and `src/assets/armor/` (10 files overwritten, 5 pieces × 2 locations).
+
+---
+
+### 🔑 Milestone 30: Redesign Login Page (Auth.jsx) [PENDING DEPLOYMENT]
+- **Visuals & Layout**: Redesigned `Auth.jsx` with a premium mecha cockpit-style interface, applying transparent glassmorphism (`backdrop-filter`) and slanted cutout corners (`clip-path`).
+- **Effects**: Added radial gradient space-themed background and animated background drifting embers/particles.
+- **Typography & Colors**: Used high contrast neon/accent colors to ensure readability. Ensured all font sizes are >= 13px.
+- **Inputs**: Updated username/password inputs with custom glowing focus borders and a sleek password visibility eye toggle button.
+- **Animations**: Injected keyframe animations into the component style, including the button energy sweep animation (`energySweep`) on hover/load.
+- **Verification**: Local build passes successfully (`npm run build`).

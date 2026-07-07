@@ -103,7 +103,7 @@ const TECHNICIAN_JOBS = [
 // Extend this as more race/class armor sets get art — everything else falls
 // through to `item.image` (no dedicated per-tier sprite).
 const ARMOR_SET_LINEAGES = {
-  arctron: ['warrior'],
+  arctron: ['warrior', 'ranger'],
 }
 
 // Resolves the sprite for a bespoke default armor-set piece (armor/helmet/gloves/boots/pants),
@@ -112,6 +112,7 @@ const ARMOR_SET_LINEAGES = {
 function resolveArmorSetImage(slot, playerRace, playerJob, level) {
   const lineage = WARRIOR_JOBS.includes(playerJob) ? 'warrior'
     : TECHNICIAN_JOBS.includes(playerJob) ? 'technician'
+    : BOW_JOBS.includes(playerJob) ? 'ranger'
     : null
   if (!lineage) return null
   const available = ARMOR_SET_LINEAGES[playerRace] || []
@@ -255,6 +256,40 @@ export function verifyStarterShield(player) {
     }
   }
   return player
+}
+
+// Auto-equips the Lv.1 bespoke armor-set (armor/helmet/gloves/boots/pants) for a fresh
+// character, if their race+job-lineage has one illustrated yet (see ARMOR_SET_LINEAGES).
+// Mirrors verifyStarterShield but equips directly instead of just granting to inventory,
+// since a brand-new character otherwise looks completely bare in the Gears tab.
+export function verifyStarterArmorSet(player) {
+  if (!player || !player.race || !player.job || player.level > 1) return player
+
+  const lineage = WARRIOR_JOBS.includes(player.job) ? 'warrior'
+    : TECHNICIAN_JOBS.includes(player.job) ? 'technician'
+    : BOW_JOBS.includes(player.job) ? 'ranger'
+    : null
+  if (!lineage) return player
+  const available = ARMOR_SET_LINEAGES[player.race] || []
+  if (!available.includes(lineage)) return player
+
+  const eq = player.equipment || {}
+  const alreadyHasSet = ['armor', 'helmet', 'gloves', 'boots', 'pants'].some((slot) => eq[slot])
+  if (alreadyHasSet) return player
+
+  const slots = ['armor', 'helmet', 'gloves', 'boots', 'pants']
+  const lineageInfix = lineage === 'warrior' ? '' : `${lineage}_`
+  const newEquipment = { ...eq }
+  let changed = false
+  slots.forEach((slot, i) => {
+    const itemDef = itemsData.items.find((it) => it.id === `${slot}_armorset_${player.race}_${lineageInfix}lv1`)
+    if (itemDef) {
+      newEquipment[slot] = { ...itemDef, uid: Date.now() + i, enhancement_level: 0 }
+      changed = true
+    }
+  })
+  if (!changed) return player
+  return { ...player, equipment: newEquipment }
 }
 
 function removeFromInventory(inventory, uid, count = 1) {
