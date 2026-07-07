@@ -329,6 +329,11 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
+### 🔧 Minor Patch (Auth UI) [DEPLOYED]
+- Added a "show password" toggle (eye icon 👁️ / 👁️‍🗨️) to the manual login/register form in [Auth.jsx](file:///c:/projects/focus-rpg/src/screens/Auth.jsx) to improve user experience during registration.
+
+---
+
 ### 🧑‍🚀 Milestone 19: Job-Tier Character Sprite Fix [DEPLOYED]
 - **Bug**: Promoting a job (e.g. Destroyer → Vanguard → Juggernaut) did not change the character sprite shown on the CHARACTER navtab — `getJobLane()` in [PilotSprites.jsx](file:///c:/projects/focus-rpg/src/components/PilotSprites.jsx) only grouped jobs into 4 broad lanes (warrior/ranger/mystic/specialist) with one static image per lane, so all tiers within a lane displayed the same tier-1 art.
 - **Fix**: Confirmed the correct lane sprite already resolves properly per selected class/job (no per-tier art assets exist yet — those are being made separately by the user as proper armor/weapon assets). Removed a temporary CSS-only gold-glow/frame placeholder effect that had been added as a stand-in for missing tier art, since it wasn't wanted and real tier art is coming.
@@ -376,6 +381,22 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 - Saved as `defallfactionslv1gun.png` / `defallfactionslv32gun.png` / `defallfactionslv42gun.png` / `defallfactionslv55gun.png` in `src/assets/weapons/` and `public/assets/weapons/`, ~480px max dimension.
 - **Eligibility split by race, not just job**: Same `BOW_JOBS` ranger-lineage list as Milestone 23, but `resolveItemImage` now also branches on `playerRace` — **Celestra** rangers (fantasy elf archers) keep the **bow**, **Arctron/Bionex** rangers (sci-fi factions) get the **gun** instead, at the same level tier. User's explicit choice via AskUserQuestion ("Beda per faction") over alternatives (replace bow entirely, or random variety).
 - Verified via direct logic-replication (arctron/bionex ranger jobs → gun at all 4 tiers, celestra ranger jobs → bow at all 4 tiers) and confirmed all 4 gun asset files exist. `npm run build` passes.
+
+---
+
+### 🔴 Milestone 25: Arctron-Exclusive Special Gun (Lv.32/42/55) [PENDING DEPLOYMENT]
+- **Assets**: Processed a 3-panel sci-fi cannon/rifle reference sheet (red Lv.32, gold Lv.42, blue Lv.55 — top-to-bottom increasing level, same convention as axe/staff). Gold-tier design has an intentional open cage/lattice barrel — background shows through by design, not a rembg defect. Saved as `defarctronlv32special.png` / `defarctronlv42special.png` / `defarctronlv55special.png` in `src/assets/weapons/` and `public/assets/weapons/`, ~480px max dimension.
+- **Eligibility**: Arctron-only, and unlike the Bionex/Celestra staff or the ranger bow/gun, this covers Arctron's *remaining* lineages — warrior (vanguard/juggernaut/dreadnought) and technician (architect/core_engineer/cybermancer). Arctron has no caster class, and its ranger (gunner/marksman/railgunner/annihilator) already gets the Milestone 24 gun, so this slots in as the Arctron-specific replacement for the generic all-faction axe at Lv.32/42/55 — Bionex/Celestra warrior/specialist classes are unaffected and still get the axe. No Lv.1 variant provided; Lv.1 Arctron still falls through to the generic sword.
+- **`resolveItemImage`**: Added a `playerRace === 'arctron'` check ahead of the axe fallback (after the caster/ranger checks, so it never overrides staff or gun).
+- Verified via direct logic-replication (arctron warrior/technician jobs at Lv.32/42/55 → arctron special; arctron gunner still → gun; arctron Lv.1 → sword; bionex/celestra warrior still → axe) and confirmed all 3 asset files exist. `npm run build` passes.
+
+---
+
+### 🛡️ Milestone 26: Arctron Warrior Default Armor Set (Lv.1/32/42/55) [PENDING DEPLOYMENT]
+- **Assets**: Processed 4 reference sheets (Lv.1 silver/gold, Lv.32 silver/blue, Lv.42 dark purple, Lv.55 red/gold), each a 5-panel composite (gloves, chest/shoulder "armor", helmet, boots, hip "pants" — no cape/mantle piece). 20 files total saved to `src/assets/armor/` and `public/assets/armor/` as `defarctronwarriorlv{1,32,42,55}{armor,helmet,gloves,boots,pants}.png`, ~480px max dimension.
+- **Slot mapping** confirmed against the actual equipment slot ids in `gameStore.js`/`Inventory.jsx` (`armor`/`helmet`/`gloves`/`boots`/`pants` — `mantle` is a separate cape slot, not covered by this set).
+- **Tooling improvement**: wrote a reusable `scratch/process_armor_set.py` pipeline (divider detection via row mean+std rather than row-min, so faint/low-contrast divider lines between panels are found reliably; background removal keeps enclosed same-color holes above a size threshold so real gaps like trigger guards/eye sockets punch through, while stripping only truly tiny stray-pixel noise so paired items like gloves/boots keep both pieces). Caught and fixed a divider-detection miss on the Lv.1 sheet (armor↔helmet boundary was extremely faint, ~20/255) that had blunted the helmet's fin tips by ~4px; the 3 later tiers (32/42/55) processed cleanly on the first pass with the improved pipeline.
+- Not yet wired into `equipItem`/starter-gear/`resolveItemImage` — this milestone is asset-processing only, per explicit user instruction to hold off on the code integration until the assets are confirmed.
 
 
 

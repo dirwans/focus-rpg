@@ -86,6 +86,42 @@ const BOW_JOBS = [
   'pathfinder', 'windrunner', 'shadow_hunter', 'stargazer'
 ]
 
+// Warrior-lineage jobs across all 3 factions (used for bespoke armor-set art lookup).
+const WARRIOR_JOBS = [
+  'destroyer', 'vanguard', 'juggernaut', 'dreadnought',
+  'guardian', 'centurion', 'protector', 'imperator',
+  'sentinel', 'warden', 'knight', 'blademaster'
+]
+
+// Technician/specialist-lineage jobs (used for bespoke armor-set art lookup).
+const TECHNICIAN_JOBS = [
+  'engineer', 'architect', 'core_engineer', 'cybermancer',
+  'mechanist', 'techmaster', 'overseer'
+]
+
+// Which race+lineage combos have a bespoke 5-piece armor set illustrated so far.
+// Extend this as more race/class armor sets get art — everything else falls
+// through to `item.image` (no dedicated per-tier sprite).
+const ARMOR_SET_LINEAGES = {
+  arctron: ['warrior'],
+}
+
+// Resolves the sprite for a bespoke default armor-set piece (armor/helmet/gloves/boots/pants),
+// keyed by race + job lineage + level tier. Returns null if no bespoke set exists yet for
+// that race/lineage — callers should fall back to `item.image` in that case.
+function resolveArmorSetImage(slot, playerRace, playerJob, level) {
+  const lineage = WARRIOR_JOBS.includes(playerJob) ? 'warrior'
+    : TECHNICIAN_JOBS.includes(playerJob) ? 'technician'
+    : null
+  if (!lineage) return null
+  const available = ARMOR_SET_LINEAGES[playerRace] || []
+  if (!available.includes(lineage)) return null
+
+  const lvl = level || 1
+  const tier = lvl >= 55 ? 55 : lvl >= 42 ? 42 : lvl >= 32 ? 32 : 1
+  return `/assets/armor/def${playerRace}${lineage}lv${tier}${slot}.png`
+}
+
 export function resolveItemImage(item, playerRace, playerJob) {
   if (!item) return null
   if (item.type === 'shield' && item.id && item.id.startsWith('arm_All_')) {
@@ -134,11 +170,26 @@ export function resolveItemImage(item, playerRace, playerJob) {
       return `/assets/weapons/defallfactionslv1${weaponKind}.png`
     }
 
+    // Arctron warrior/technician (its only remaining lineages — Arctron has no caster
+    // class) get an exclusive gun at Lv.32+ instead of the generic axe.
+    if (playerRace === 'arctron') {
+      if (lvl >= 55) return '/assets/weapons/defarctronlv55special.png'
+      if (lvl >= 42) return '/assets/weapons/defarctronlv42special.png'
+      if (lvl >= 30) return '/assets/weapons/defarctronlv32special.png'
+    }
+
     if (lvl >= 55) return '/assets/weapons/defallfactionslv55axe.png'
     if (lvl >= 42) return '/assets/weapons/defallfactionslv42axe.png'
     if (lvl >= 30) return '/assets/weapons/defallfactionslv32axe.png'
     const index = (seed % 4) + 1
     return `/assets/weapons/defallfactionslv1sword${index}.png`
+  }
+  // Bespoke default armor-set pieces (id namespace `*_armorset_*`, e.g.
+  // `armor_armorset_arctron_lv1`) resolve dynamically by race/job/level tier;
+  // pre-existing per-race armor items (e.g. `arm_arctron_1_C`) are untouched.
+  if (['armor', 'helmet', 'gloves', 'boots', 'pants'].includes(item.type) && item.id && item.id.includes('_armorset_')) {
+    const bespoke = resolveArmorSetImage(item.type, playerRace, playerJob, item.level)
+    if (bespoke) return bespoke
   }
   return item.image
 }
@@ -2981,12 +3032,14 @@ export const useGameStore = create(
         }
 
         // Pick a random Common item of this type from items pool
-        const pool = itemsData.items.filter(it =>
-          it.type === type && it.rarity === 'C' &&
-          (it.race === 'All' || it.race === player.race) &&
-          it.level <= player.level + 5 &&
-          (it.type !== 'weapon' || !it.job || it.job === player.job)
-        )
+        const pool = itemsData.items.filter(it => {
+          if (it.type !== type || it.rarity !== 'C' || it.level > player.level + 5) return false
+          const allowedRaces = it.race == null ? null : (Array.isArray(it.race) ? it.race : [it.race])
+          if (allowedRaces && !allowedRaces.includes('All') && !allowedRaces.includes(player.race)) return false
+          const allowedJobs = it.job == null ? null : (Array.isArray(it.job) ? it.job : [it.job])
+          if (allowedJobs && !allowedJobs.includes(player.job)) return false
+          return true
+        })
         if (pool.length === 0) { alert('Stock habis untuk saat ini.'); return false }
         const item = pool[Math.floor(Math.random() * pool.length)]
         const newItem = { ...item, uid: Date.now() }

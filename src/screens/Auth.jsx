@@ -11,6 +11,7 @@ export default function Auth() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [showPrologue, setShowPrologue] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
   const googleBtnRef = useRef(null)
 
   const signIn = useAuthStore((s) => s.signIn)
@@ -150,15 +151,38 @@ export default function Auth() {
 
           <div style={styles.field}>
             <label style={styles.label}>PASSWORD</label>
-            <input
-              style={styles.input}
-              type="password"
-              placeholder="••••••••"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              minLength={6}
-            />
+            <div style={{ position: 'relative' }}>
+              <input
+                style={{ ...styles.input, paddingRight: '40px' }}
+                type={showPassword ? 'text' : 'password'}
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                minLength={6}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                style={{
+                  position: 'absolute',
+                  right: '10px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  background: 'transparent',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontSize: '16px',
+                  padding: 0,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  opacity: 0.8
+                }}
+              >
+                {showPassword ? '👁️' : '👁️‍🗨️'}
+              </button>
+            </div>
           </div>
 
           {error && <div style={styles.error}>⚠️ {error}</div>}
