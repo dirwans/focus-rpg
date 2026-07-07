@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useGameStore } from '../store/gameStore'
+import { useGameStore, verifyStarterShield } from '../store/gameStore'
 import { useAuthStore } from '../store/authStore'
 import races from '../data/races.json'
 import jobs from '../data/jobs.json'
@@ -169,35 +169,7 @@ export default function CharacterCreate() {
         exp: isDefect ? s.player.exp : 0,
         resources: isDefect ? s.player.resources : { crd: 200, credits: 10, potions: 5, nxc: 0 },
         upgrades: { atk: 0, def: 0, hp: 0 },
-        equipment: { 
-          weapon: null, 
-          armor: null, 
-          shield: (!isDefect && raceId === 'arctron') ? {
-            uid: Date.now() + 1,
-            id: "arm_All_1_D",
-            name: "[D] Lv.1 Carbon Shield",
-            emoji: "🛡️",
-            rarity: "D",
-            type: "shield",
-            race: "All",
-            level: 1,
-            bonus: {
-              def: 12,
-              hp: 120
-            },
-            image: "/assets/arctron_shield_1_rembg.png",
-            enhancement_level: 0
-          } : (isDefect ? s.player.equipment?.shield : null), 
-          helmet: null, 
-          mantle: null, 
-          gloves: null, 
-          boots: null, 
-          pants: null, 
-          amulet1: null, 
-          amulet2: null, 
-          ring1: null, 
-          ring2: null 
-        },
+        equipment: { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null },
         sector: isDefect ? s.player.sector : 1,
         highestSector: isDefect ? s.player.highestSector : 1,
         streak: isDefect ? s.player.streak : 0,
@@ -212,8 +184,9 @@ export default function CharacterCreate() {
         server: s.player?.server || 'nova_core',
         hasChangedName: true
       }
-      syncSave(freshPlayer)
-      return { player: freshPlayer }
+      const verifiedPlayer = verifyStarterShield(freshPlayer)
+      syncSave(verifiedPlayer)
+      return { player: verifiedPlayer }
     })
 
     useGameStore.getState().setScreen('main')

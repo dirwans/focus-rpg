@@ -264,7 +264,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🛡️ Milestone 15: Arctron Mecha Shields Integration & Deployment Safety Gates [PENDING DEPLOYMENT]
+### 🛡️ Milestone 15: Arctron Mecha Shields Integration & Deployment Safety Gates [DEPLOYED]
 - **Deployment Safety Guidelines Integration**:
   - Enforced a rule requiring a minimum of 5 modifications before compiling/deploying.
   - Created a new workspace agent skill `deployment_rules` in [.agents/skills/deployment_rules/SKILL.md](file:///c:/projects/focus-rpg/.agents/skills/deployment_rules/SKILL.md) and recorded constraints in the journal.
@@ -276,6 +276,19 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - Wrote and ran `patch_items_shields.py` to parse `items.json` and associate all 131 shield item records with the new cropped mecha shield assets according to their level tier.
 - **Arctron Starting Gear Assignment**:
   - Edited [CharacterCreate.jsx](file:///c:/projects/focus-rpg/src/components/CharacterCreate.jsx#L175-L195) to automatically equip newly created level 1 Arctron cadets with a starter shield (`[D] Lv.1 Carbon Shield` using `arctron_shield_1_rembg.png`) in their shield slot by default.
+
+---
+
+### 🛡️ Milestone 16: Starter Shields for All Factions [PENDING DEPLOYMENT]
+- **Factions Starter Shield Sprite Sheets Cropping**:
+  - Wrote and executed `process_starter_shields.py` to crop the second mecha shield vertical sprite sheet into three distinct items, remove black backgrounds, and crop bounding boxes.
+  - Saved outputs to both `src/assets` and `public/assets` as:
+    - `celestra_shield_1_rembg.png` (Shield 1)
+    - `bionex_shield_1_rembg.png` (Shield 2)
+    - `arctron_shield_starter_new_rembg.png` (Shield 3, replaces previous Arctron starter shield)
+- **Faction-Specific Initial Gear Rollout**:
+  - Updated [CharacterCreate.jsx](file:///c:/projects/focus-rpg/src/components/CharacterCreate.jsx#L172-L215) so that newly created Level 1 characters of all factions (Celestra, Bionex, Arctron) are equipped with their respective faction's beginner shield by default upon starting an expedition.
+
 
 
 

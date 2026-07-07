@@ -71,6 +71,69 @@ export function addToInventory(inventory, item, count = 1) {
   return newInv
 }
 
+export function verifyStarterShield(player) {
+  if (!player || !player.race || player.level > 1) return player
+  
+  // Check if they already have any shield (checks equipment or inventory for shield item)
+  const hasShield = !!(player.equipment?.shield || player.inventory.some(i => i.type === 'shield'))
+  if (hasShield) return player
+
+  // Generate starter shield
+  let starterShield = null
+  if (player.race === 'arctron') {
+    starterShield = {
+      uid: Date.now() + Math.floor(Math.random() * 100000),
+      id: "arm_All_1_D",
+      name: "[D] Lv.1 Arctron Bulwark",
+      emoji: "🛡️",
+      rarity: "D",
+      type: "shield",
+      race: "All",
+      level: 1,
+      bonus: { def: 12, hp: 120 },
+      image: "/assets/arctron_shield_starter_new_rembg.png",
+      enhancement_level: 0
+    }
+  } else if (player.race === 'bionex') {
+    starterShield = {
+      uid: Date.now() + Math.floor(Math.random() * 100000),
+      id: "arm_All_1_D",
+      name: "[D] Lv.1 Bionex Shield",
+      emoji: "🛡️",
+      rarity: "D",
+      type: "shield",
+      race: "All",
+      level: 1,
+      bonus: { def: 12, hp: 120 },
+      image: "/assets/bionex_shield_1_rembg.png",
+      enhancement_level: 0
+    }
+  } else if (player.race === 'celestra') {
+    starterShield = {
+      uid: Date.now() + Math.floor(Math.random() * 100000),
+      id: "arm_All_1_D",
+      name: "[D] Lv.1 Celestra Aegis",
+      emoji: "🛡️",
+      rarity: "D",
+      type: "shield",
+      race: "All",
+      level: 1,
+      bonus: { def: 12, hp: 120 },
+      image: "/assets/celestra_shield_1_rembg.png",
+      enhancement_level: 0
+    }
+  }
+
+  if (starterShield) {
+    const newInventory = [...(player.inventory || []), starterShield]
+    return {
+      ...player,
+      inventory: newInventory
+    }
+  }
+  return player
+}
+
 function removeFromInventory(inventory, uid, count = 1) {
   return inventory.filter((i) => i.uid !== uid)
 }
@@ -2279,6 +2342,7 @@ export const useGameStore = create(
               secondsLeft: remaining,
             }
           }
+          next.player = verifyStarterShield(next.player)
           return next
         })
       },
@@ -2921,7 +2985,10 @@ export const useGameStore = create(
 
       },
       getUpgradeCost: (key) => calcUpgradeCost(key, get().player.upgrades?.[key] || 0),
-      loadPlayer: (savedPlayer) => set({ player: { ...initialPlayer, ...savedPlayer } }),
+      loadPlayer: (savedPlayer) => set((s) => {
+        const player = { ...initialPlayer, ...savedPlayer }
+        return { player: verifyStarterShield(player) }
+      }),
       getExpToNext: () => getMinutesToNextLevel(get().player.level),
 
       // ── Weapon Refining & Combining ───────────────────────
