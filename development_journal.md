@@ -437,3 +437,24 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 - **Inputs**: Updated username/password inputs with custom glowing focus borders and a sleek password visibility eye toggle button.
 - **Animations**: Injected keyframe animations into the component style, including the button energy sweep animation (`energySweep`) on hover/load.
 - **Verification**: Local build passes successfully (`npm run build`).
+
+---
+
+### 🎨 Milestone 31: Restore Arctron Ranger Lv.1 Armor Set to Silver [DEPLOYED]
+- **Assets**: Executed `scratch/restore_ranger_lv1_silver.py` to restore the bright silver/white look of the Arctron Ranger Lv.1 armor set (`armor`, `helmet`, `gloves`, `boots`, `pants`), fixing the over-darkening issue from Milestone 29 while keeping the purple/gold accents desaturated.
+- **Verification**: Verified that all 10 assets (5 items × 2 directories) are updated and that `npm run build` succeeds locally.
+
+---
+
+### 🤖 Milestone 32: Bionex M.E.U. Sprites Integration [DEPLOYED]
+- **Assets**: Processed the user-uploaded mecha images (img-1, img-2, img-3) using `rembg` background removal and saved them as `meu_atlas.png`, `meu_goliath.png`, and `meu_colossus.png` in `src/assets/` and `public/assets/`.
+- **Logic**: Updated `resolveItemImage` in `src/store/gameStore.js` to return the processed mecha sprite URLs for the Bionex M.E.U. Atlas (Lv.32), Goliath (Lv.42), and Colossus (Lv.55) items.
+- **Verification**: Verified that the sprites compile correctly and that `npm run build` succeeds locally.
+
+---
+
+### 🔧 Milestone 33: Arctron Technician Armor Sets Integration [DEPLOYED]
+- **Assets**: Processed the user-uploaded composite images for Arctron Technician (lv1, lv32, lv42, lv55 sheets), cropping each into 5 separate components (armor, helmet, gloves, boots, pants) with background removal, saving 20 files total to `src/assets/armor/` and `public/assets/armor/` as `defarctrontechnicianlv{1,32,42,55}{armor,helmet,gloves,boots,pants}.png`.
+- **Items**: Added 20 new purchasable items to `src/data/items.json` for the Technician set (`*_armorset_arctron_technician_lv*`), restricted to the Arctron Specialist/Technician job lineage (`["engineer", "architect", "core_engineer", "cybermancer"]`).
+- **Logic**: Registered `'technician'` in `ARMOR_SET_LINEAGES.arctron` within `src/store/gameStore.js` to enable automatic mecha technician sprite resolution.
+- **Verification**: Verified that the files build correctly and that `npm run build` succeeds locally.

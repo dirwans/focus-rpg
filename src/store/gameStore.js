@@ -103,7 +103,7 @@ const TECHNICIAN_JOBS = [
 // Extend this as more race/class armor sets get art — everything else falls
 // through to `item.image` (no dedicated per-tier sprite).
 const ARMOR_SET_LINEAGES = {
-  arctron: ['warrior', 'ranger'],
+  arctron: ['warrior', 'ranger', 'technician'],
 }
 
 // Resolves the sprite for a bespoke default armor-set piece (armor/helmet/gloves/boots/pants),
@@ -191,6 +191,11 @@ export function resolveItemImage(item, playerRace, playerJob) {
   if (['armor', 'helmet', 'gloves', 'boots', 'pants'].includes(item.type) && item.id && item.id.includes('_armorset_')) {
     const bespoke = resolveArmorSetImage(item.type, playerRace, playerJob, item.level)
     if (bespoke) return bespoke
+  }
+  if (item.type === 'ascension_arms') {
+    if (item.id === 'meu_atlas') return '/assets/meu_atlas.png'
+    if (item.id === 'meu_goliath') return '/assets/meu_goliath.png'
+    if (item.id === 'meu_colossus') return '/assets/meu_colossus.png'
   }
   return item.image
 }
