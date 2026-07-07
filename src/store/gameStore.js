@@ -329,7 +329,7 @@ export function verifyStarterWeapon(player) {
 // Mirrors verifyStarterShield but equips directly instead of just granting to inventory,
 // since a brand-new character otherwise looks completely bare in the Gears tab.
 export function verifyStarterArmorSet(player) {
-  if (!player || !player.race || !player.job || player.level > 1) return player
+  if (!player || !player.race || !player.job) return player
 
   const lineage = WARRIOR_JOBS.includes(player.job) ? 'warrior'
     : TECHNICIAN_JOBS.includes(player.job) ? 'technician'

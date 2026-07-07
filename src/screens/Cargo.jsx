@@ -145,7 +145,7 @@ export default function Cargo() {
         {item ? (
           <>
             {resolveItemImage(item, player.race, player.job) ? (
-              <img referrerPolicy="no-referrer" src={resolveItemImage(item, player.race, player.job)} style={{ width: isSmall ? 32 : 56, height: isSmall ? 32 : 56, objectFit: 'contain', imageRendering: item.id?.includes('_armorset_') ? 'pixelated' : 'auto' }} alt={item.name} />
+              <img referrerPolicy="no-referrer" src={resolveItemImage(item, player.race, player.job)} style={{ width: isSmall ? 32 : 56, height: isSmall ? 32 : 56, objectFit: 'contain', imageRendering: 'auto' }} alt={item.name} />
             ) : (
               <span style={{ fontSize: isSmall ? 22 : 36 }}>{item.emoji}</span>
             )}
@@ -427,7 +427,7 @@ export default function Cargo() {
                 >
                   <div style={styles.itemIcon}>
                     {resolveItemImage(item, player.race, player.job) ? (
-                      <img referrerPolicy="no-referrer" src={resolveItemImage(item, player.race, player.job)} style={{ width: 34, height: 28, fontSize: 10, objectFit: 'contain', imageRendering: item.id?.includes('_armorset_') ? 'pixelated' : 'auto' }} alt={item.name} />
+                      <img referrerPolicy="no-referrer" src={resolveItemImage(item, player.race, player.job)} style={{ width: 34, height: 28, fontSize: 10, objectFit: 'contain', imageRendering: 'auto' }} alt={item.name} />
                     ) : (
                       item.emoji
                     )}
@@ -466,7 +466,7 @@ export default function Cargo() {
           <div className="glass-panel" style={styles.modal}>
             <div style={{ ...styles.modalName, color: getItemColor(selectedItem), display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
               {resolveItemImage(selectedItem, player.race, player.job) ? (
-                <img referrerPolicy="no-referrer" src={resolveItemImage(selectedItem, player.race, player.job)} style={{ width: 32, height: 32, objectFit: 'contain', imageRendering: selectedItem.id?.includes('_armorset_') ? 'pixelated' : 'auto' }} alt={selectedItem.name} />
+                <img referrerPolicy="no-referrer" src={resolveItemImage(selectedItem, player.race, player.job)} style={{ width: 32, height: 32, objectFit: 'contain', imageRendering: 'auto' }} alt={selectedItem.name} />
               ) : (
                 <span>{selectedItem.emoji}</span>
               )}

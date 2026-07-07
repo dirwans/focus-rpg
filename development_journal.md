@@ -515,19 +515,13 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - Completed **Bionex Warrior Level 1 Set** (Helmet/Bandana, Chest Armor, Pants, Gloves, Boots).
   - Completed **Celestra Warrior Level 1 Set** (Helmet/Circlet, Chest Armor, Pants, Gloves, Boots).
   - Completed **Celestra Mage (Spiritualist) Level 1 Set** (Helmet/Circlet, Upper Robe, Lower Robe/Pants, Gloves, Boots).
-  - Replaced the old pixelated assets in `src/assets/armor_bionex/` and `src/assets/armor_celestra/` with the new AI-generated HD masterpieces.
-- **Status**: First batch (Bionex & Celestra Warrior Lv1) deployed. Further regeneration paused temporarily due to AI quota limits, to be continued later.
-- **Code**: No changes needed — `resolveArmorSetImage` in `gameStore.js` already had correct paths (`/assets/armor_bionex/`, `/assets/armor_celestra/`), `ARMOR_SET_LINEAGES` already had all 3 lineages per faction, `items.json` already had all 150 `_armorset_` item entries (from Milestone 36).
-
----
-
-### ⚔️ Milestone 40: Combat Math Overhaul (PvE, PvP, & Chip War) [PENDING DEPLOYMENT]
+### ⚔️ Milestone 40: Combat Math Overhaul (PvE, PvP, & Chip War) [DEPLOYED]
 - **Issue**: The combat mechanics completely ignored weapon stats (`meleeAtk`, `rangedAtk`, `forceAtk`) and race bonuses like `Evasion` (Dodge Rate) and `Crit`. PvE Offline progression only used base `atk` upgrades, and PvP/Chip War used raw stats blindly, making all equipment and job choices meaningless in battle. Furthermore, `api/chip-war/attack` blindly trusted client's `attackPower` input.
 - **Solution**: 
   - **PvE (`gameStore.js`)**: Updated `computeRewards` to call `get().getStats()` and calculate DPS using active weapon type attacks (`meleeAtk`/`rangedAtk`/`forceAtk`), Evasion, and Critical Rate.
   - **PvP (`server.js`)**: Updated `/api/pvp/battle` to calculate actual Evasion (Miss Chance) and Critical hits based on RNG, making PvP dynamic. 
   - **Chip War (`server.js`)**: Secured `/api/chip-war/attack` to calculate DPS on the server-side from `loadSave(s.username).stats`, preventing one-shot client injection exploits. Updated power rating math in `/api/pvp/war` to include evasion and crit scores.
-- **Status**: Code implemented. Deployment pending (Rule: min 5 modifications before deployment).---
+- **Status**: Deployed to VPS alongside new AI Armor assets (Bionex Warrior Lv1, Celestra Warrior Lv1, Celestra Mage Lv1) overriding the 5-mod rule by explicit user request.---
 
 ### 🎨 Milestone 39: Arctron Ranger Lv.1 Armor Set Restored to Silver [DEPLOYED]
 - **Problem**: Previous recolor pass (Milestone 29) made the Lv.1 Ranger set too dark — full dark gunmetal, losing the white/silver base. User requested silver base with purple accent removed.
@@ -546,3 +540,31 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 - **Pipeline** (`scratch/upscale_waifu2x.py`): Restore originals from git HEAD~1 → BFS background removal at 32×32 → waifu2x 4x (32→128, denoise=0) → LANCZOS 128→320. Both factions processed in ~7s each.
 - **Status**: Kept as **placeholder** — user plans to regenerate sprites via a dedicated AI image generator ("Nano Banana Pro") for higher quality results matching Arctron's smooth render style. These waifu2x versions are an improvement over raw Scale2x in the meantime.
 - **Files updated**: 150 files across `public/assets/armor_bionex/` and `public/assets/armor_celestra/` (src copies too).
+
+---
+
+### 🔧 Milestone 41: verifyStarterArmorSet — Remove Level Guard + waifu2x Sprites Deploy [PENDING DEPLOYMENT]
+- **Bug**: `verifyStarterArmorSet` had `player.level > 1` guard that prevented existing characters (created before Milestone 28) from receiving their faction starter armor set. Only brand-new level-1 characters got the set.
+- **Fix**: Removed the `player.level > 1` check from `verifyStarterArmorSet` in `gameStore.js`. The `alreadyHasSet` guard (checks if any of the 5 armor slots already has an item) still prevents overwriting existing gear. Since `loadPlayer` already calls `verifyStarterArmorSet` on every save load, all existing bare characters will auto-receive their faction Lv.1 armor set on next login.
+- **Also included**: waifu2x upscaled sprites for all 150 Bionex & Celestra armor pieces (Milestone 40) — deployed together in this batch.
+
+---
+
+### 🖼️ Milestone 42: Armor Slot Rendering Fix — Checkerboard Background Eliminated [PENDING DEPLOYMENT]
+- **Bug**: Bionex & Celestra armor set items (IDs containing `_armorset_`) were rendered with `imageRendering: 'pixelated'` (CSS nearest-neighbor). These items are now 320×320 waifu2x-upscaled PNGs (not pixel art), so nearest-neighbor downscaling from 320→~80px in the gear/inventory slots caused visible checkerboard/grid artifacts at transparent-to-opaque edges ("kotak2" as reported by user).
+- **Fix 1**: Removed conditional `imageRendering: pixelated` for `_armorset_` items across `Inventory.jsx` (3 occurrences) and `Cargo.jsx` (2 occurrences) — all set to `'auto'` (bilinear smoothing).
+- **Fix 2**: Ran `scratch/fill_armor_holes.py` — BFS flood from border to detect transparent pixels enclosed inside armor shapes (false holes from aggressive 32×32 BFS background removal). Filled 10 files: `defcelestramagelv1armor/boots/gloves/helmet/pants`, `defcelestramagelv42helmet`, `defcelestrawarriorlv1gloves/helmet`, `defbionexrangerlv42boots`, `defbionexwarriorlv55boots` (19,726 hole pixels total restored).
+
+---
+
+### 📁 Milestone 43: Mage Armor Files — Three-Way Slot Rename (All Tiers, Both Factions) [PENDING DEPLOYMENT]
+- **Bug**: All celestra and bionex mage armor source files had their gloves/boots/pants PNG names swapped in a cycle: file named `gloves` contained boots art, file named `boots` contained pants art, file named `pants` contained gloves art. This made all three slots display wrong items in the gear tab.
+- **Scope**: All 5 tiers (lv1/32/42/55/66) × 2 factions (celestra + bionex) × 2 directories (public/ + src/) = 20 tier-sets renamed.
+- **Fix**: `scratch/fix_mage_naming.py` — three-way swap via temp file: `gloves→temp, pants→gloves, boots→pants, temp→boots`. The cycle `(gloves content=boots) → (boots content=pants) → (pants content=gloves)` is now corrected.
+- **Note**: An earlier `fix_checker_bg.py` attempt accidentally damaged non-warrior-lv1 files by treating armor-colored border pixels as achromatic background. All damaged files were restored from git HEAD via `scratch/restore_armor_from_git.py`, which also re-applies the mage rename and re-fills interior holes.
+
+---
+
+### 🖼️ Milestone 44: Bionex Warrior Lv.1 — Checker Background Removal [PENDING DEPLOYMENT]
+- **Bug**: Bionex warrior Lv.1 armor set (5 pieces: armor/helmet/gloves/boots/pants) had a photoshop-style gray checkerboard pattern baked in as actual opaque pixels (not transparency). The original source art was saved from a render app with the checker pattern as a background placeholder. The waifu2x BFS at 32×32 only caught one shade of gray (lighter squares, within tolerance 35) and left the darker checker squares as opaque, resulting in a visible "kotak2" background in the game.
+- **Fix**: `scratch/fix_checker_bg.py` — dual-seed BFS: collects all achromatic (R≈G≈B within 20) border pixel colors, then floods inward removing any border-connected pixel matching any seed color. Removed 590k–841k pixels per piece (5 large high-res render files, not the 32×32 pixel-art pipeline). All 5 files are now fully transparent outside the armor shape.
