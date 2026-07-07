@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useGameStore } from '../store/gameStore'
+import { useGameStore, addToInventory } from '../store/gameStore'
 import races from '../data/races.json'
 import jobs from '../data/jobs.json'
 import itemsData from '../data/items.json'
@@ -174,8 +174,8 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
     return ['epic', 'legendary', 'mythic', 'ssr', 'ur'].includes(r)
   }
 
-  const ownedIgnorance = player.inventory.filter(it => it.id === 'talic_ignorance').length
-  const ownedFavor = player.inventory.filter(it => it.id === 'talic_favor').length
+  const ownedIgnorance = player.inventory.filter(it => it.id === 'talic_ignorance').reduce((sum, it) => sum + (it.count || it.qty || 1), 0)
+  const ownedFavor = player.inventory.filter(it => it.id === 'talic_favor').reduce((sum, it) => sum + (it.count || it.qty || 1), 0)
   
   // Eligible Sacrifice Weapons in Inventory
   const sacrificePool = player.inventory.filter(it => it.type === 'weapon' && isEpicOrHigher(it))
@@ -694,9 +694,9 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
           const crestCost = item ? (DIVINE_CREST_COSTS[currentEnh] || 0) : 0
           
           // Owned materials
-          const arcaniteOwned = player.inventory.filter(it => it.id === 'mat_arcanite').length
-          const crestOwned = player.inventory.filter(it => it.id === 'mat_divine_crest').length
-          const relicOwned = player.inventory.filter(it => it.id === 'mat_lucky_relic').length
+          const arcaniteOwned = player.inventory.filter(it => it.id === 'mat_arcanite').reduce((sum, it) => sum + (it.count || it.qty || 1), 0)
+          const crestOwned = player.inventory.filter(it => it.id === 'mat_divine_crest').reduce((sum, it) => sum + (it.count || it.qty || 1), 0)
+          const relicOwned = player.inventory.filter(it => it.id === 'mat_lucky_relic').reduce((sum, it) => sum + (it.count || it.qty || 1), 0)
 
           // Rates: +1 (100%), +2 (90%), +3 (70%), +4 (50%), +5 (35%), +6 (20%), +7 (10%), +8 (5%)
           const BASE_SUCCESS_RATES = [100, 90, 70, 50, 35, 20, 10, 5]
@@ -981,7 +981,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
               {/* ───────── WEAPON SMITH TAB ───────── */}
         {(() => {
           const equippedWeapon = player.equipment?.weapon
-          const ownedIgnorance = player.inventory.filter(it => it.id === 'talic_ignorance').length
+          const ownedIgnorance = player.inventory.filter(it => it.id === 'talic_ignorance').reduce((sum, it) => sum + (it.count || it.qty || 1), 0)
           const hasWeapon = !!equippedWeapon
           const weaponName = hasWeapon ? equippedWeapon.name : 'NO WEAPON EQUIPPED'
           const weaponGrade = hasWeapon ? getWeaponRarityDisplayName(equippedWeapon.rarityGrade || equippedWeapon.rarity).toUpperCase() : 'NONE'
@@ -1229,7 +1229,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
             { id: 'shard_umbrix_epic', label: 'Umbrix', emoji: '⚫' },
           ]
           const inv = player.inventory
-          const countOf = (id) => inv.filter(i => i.id === id).length
+          const countOf = (id) => inv.filter(i => i.id === id).reduce((sum, i) => sum + (i.count || i.qty || 1), 0)
 
           const RECIPES = [
             { id: 'leg_weapon', label: 'Legendary Weapon',  emoji: '⚔️',  baseId: 'mat_epic_weapon',  baseLabel: 'Epic Weapon',  shards: 6 },
@@ -1643,7 +1643,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                       >
                         <span style={{ fontSize: 20 }}>{item.emoji}</span>
                         <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
-                          <span style={{ fontSize: 11, fontWeight: 'bold', color: '#fff' }}>{item.name}</span>
+                          <span style={{ fontSize: 11, fontWeight: 'bold', color: '#fff' }}>{item.name} {(item.count || item.qty) > 1 ? `(x${item.count || item.qty})` : ''}</span>
                           <span style={{ fontSize: 9, color: '#aaa' }}>{item.type} {item.enhancement ? `+${item.enhancement}` : ''}</span>
                         </div>
                       </div>
@@ -1670,7 +1670,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                       >
                         <span style={{ fontSize: 20 }}>{item.emoji}</span>
                         <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
-                          <span style={{ fontSize: 11, fontWeight: 'bold', color: '#fff' }}>{item.name}</span>
+                          <span style={{ fontSize: 11, fontWeight: 'bold', color: '#fff' }}>{item.name} {(item.count || item.qty) > 1 ? `(x${item.count || item.qty})` : ''}</span>
                           <span style={{ fontSize: 9, color: '#aaa' }}>{item.type} {item.enhancement ? `+${item.enhancement}` : ''}</span>
                         </div>
                       </div>
@@ -1757,11 +1757,6 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                       </div>
                       <button 
                         onClick={() => {
-                          const invSlots = player.inventorySlots || 100
-                          if (player.inventory.length >= invSlots) {
-                            alert("Inventory penuh! Kosongkan slot atau upgrade bag Anda.")
-                            return
-                          }
                           const credits = player.resources.credits || 0
                           if (credits < pot.cost) {
                             alert(`Credits (CRD) tidak cukup! Membutuhkan ${pot.cost.toLocaleString()} CRD.`)
@@ -1771,11 +1766,24 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                           const potItem = itemsData.items.find(it => it.id === (pot.id === 'hp' ? 'pot_hp' : 'pot_fp'))
                           if (!potItem) return
 
-                          const newItem = { ...potItem, uid: Date.now() }
+                          const invSlots = player.inventorySlots || 100
+                          let canStack = false
+                          for (let s = 0; s < player.inventory.length; s++) {
+                            if (player.inventory[s].id === potItem.id && (player.inventory[s].count || player.inventory[s].qty || 1) < 99) {
+                              canStack = true
+                              break
+                            }
+                          }
+
+                          if (!canStack && player.inventory.length >= invSlots) {
+                            alert("Inventory penuh! Kosongkan slot atau upgrade bag Anda.")
+                            return
+                          }
+
                           useGameStore.setState((s) => ({
                             player: {
                               ...s.player,
-                              inventory: [...s.player.inventory, newItem],
+                              inventory: addToInventory(s.player.inventory, potItem, 1),
                               resources: {
                                 ...s.player.resources,
                                 credits: credits - pot.cost

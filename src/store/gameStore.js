@@ -21,12 +21,53 @@ function tStore(key, replacements = {}, playerState = null) {
 }
 
 
-function addToInventory(inventory, item, count = 1) {
+export function isStackableItem(item) {
+  if (!item) return false
+  const equipTypes = ['weapon', 'armor', 'shield', 'helmet', 'mantle', 'gloves', 'boots', 'pants', 'amulet', 'ring', 'ascension_arms']
+  return !equipTypes.includes(item.type)
+}
+
+export function addToInventory(inventory, item, count = 1) {
   const newInv = [...inventory]
-  for (let i = 0; i < count; i++) {
-    const uid = i === 0 && item.uid ? item.uid : Date.now() + Math.floor(Math.random() * 1000000)
-    newInv.push({ ...item, uid })
+  
+  if (!isStackableItem(item)) {
+    for (let i = 0; i < count; i++) {
+      const uid = i === 0 && item.uid ? item.uid : Date.now() + Math.floor(Math.random() * 1000000)
+      newInv.push({ ...item, uid, count: 1, qty: 1 })
+    }
+    return newInv
   }
+
+  let remaining = count
+  for (let i = 0; i < newInv.length; i++) {
+    if (newInv[i].id === item.id) {
+      const currentCount = newInv[i].count || newInv[i].qty || 1
+      if (currentCount < 99) {
+        const addable = 99 - currentCount
+        const toAdd = Math.min(addable, remaining)
+        newInv[i] = {
+          ...newInv[i],
+          count: currentCount + toAdd,
+          qty: currentCount + toAdd
+        }
+        remaining -= toAdd
+        if (remaining <= 0) break
+      }
+    }
+  }
+
+  while (remaining > 0) {
+    const toAdd = Math.min(99, remaining)
+    const uid = Date.now() + Math.floor(Math.random() * 1000000)
+    newInv.push({
+      ...item,
+      uid,
+      count: toAdd,
+      qty: toAdd
+    })
+    remaining -= toAdd
+  }
+
   return newInv
 }
 
@@ -703,16 +744,16 @@ export const useGameStore = create(
           // Add mystery box to inventory
           const uid = Date.now() + Math.floor(Math.random() * 10000)
           const boxItem = { id: itemId, name: meta.name, emoji: '📦', rarity: 'epic', type: 'consumable', race: 'All', level: 1, bonus: {}, uid, description: meta.name }
-          updates.inventory = [...(player.inventory || []), boxItem]
+          updates.inventory = addToInventory(player.inventory || [], boxItem, 1)
         } else if (meta?.type === 'rename_card') {
           const uid = Date.now() + Math.floor(Math.random() * 10000)
           const card = { id: 'rename_card', name: 'Character Rename Card', emoji: '📛', rarity: 'legendary', type: 'consumable', race: 'All', level: 1, bonus: {}, uid, description: 'Allows you to change your character name.' }
-          updates.inventory = [...(player.inventory || []), card]
+          updates.inventory = addToInventory(player.inventory || [], card, 1)
         } else if (meta?.type === 'rental') {
           // Add rental item with expiry
           const uid = Date.now() + Math.floor(Math.random() * 10000)
           const rentalItem = { id: itemId, name: meta.name, emoji: meta.emoji || '⏰', rarity: 'epic', type: meta.slot || 'weapon', race: 'All', level: 1, bonus: meta.bonus || { atk: 80 }, uid, isRental: true, rentalExpiresAt: now + meta.days * 86400000, description: `Rental — expires in ${meta.days} day(s)` }
-          updates.inventory = [...(player.inventory || []), rentalItem]
+          updates.inventory = addToInventory(player.inventory || [], rentalItem, 1)
         }
 
         set({ player: { ...player, ...updates, savedAt: Date.now() } })
@@ -745,7 +786,17 @@ export const useGameStore = create(
             return { ok: false, msg: 'Kamu tidak memiliki Character Rename Card!' }
           }
           const newInv = [...player.inventory]
-          newInv.splice(cardIdx, 1)
+          const cardItem = newInv[cardIdx]
+          const currentCount = cardItem.count || cardItem.qty || 1
+          if (currentCount > 1) {
+            newInv[cardIdx] = {
+              ...cardItem,
+              count: currentCount - 1,
+              qty: currentCount - 1
+            }
+          } else {
+            newInv.splice(cardIdx, 1)
+          }
           set({
             player: {
               ...player,
@@ -764,18 +815,66 @@ export const useGameStore = create(
         const wh = player.warehouse || []
         const maxWh = player.warehouseSlots || 200
 
-        if (wh.length >= maxWh) {
-          alert(`Warehouse penuh! Maksimal ${maxWh} slot.`)
-          return {}
-        }
-
         const idx = inv.findIndex(i => i.uid === itemUid)
         if (idx === -1) return {}
 
         const item = inv[idx]
+        const isStackable = isStackableItem(item)
+
+        // Check slots capacity
+        let canStack = false
+        if (isStackable) {
+          for (let i = 0; i < wh.length; i++) {
+            if (wh[i].id === item.id && (wh[i].count || wh[i].qty || 1) < 99) {
+              canStack = true
+              break
+            }
+          }
+        }
+
+        if (!canStack && wh.length >= maxWh) {
+          alert(`Warehouse penuh! Maksimal ${maxWh} slot.`)
+          return {}
+        }
+
         const newInv = [...inv]
-        newInv.splice(idx, 1)
-        const newWh = [...wh, item]
+        newInv.splice(idx, 1) // Remove from inventory
+
+        // Add/Merge to warehouse
+        let newWh = [...wh]
+        if (isStackable) {
+          let remaining = item.count || item.qty || 1
+          // Try merging to existing non-full stacks
+          for (let i = 0; i < newWh.length; i++) {
+            if (newWh[i].id === item.id) {
+              const currentCount = newWh[i].count || newWh[i].qty || 1
+              if (currentCount < 99) {
+                const addable = 99 - currentCount
+                const toAdd = Math.min(addable, remaining)
+                newWh[i] = {
+                  ...newWh[i],
+                  count: currentCount + toAdd,
+                  qty: currentCount + toAdd
+                }
+                remaining -= toAdd
+                if (remaining <= 0) break
+              }
+            }
+          }
+          // If still remaining, push new stack
+          while (remaining > 0) {
+            const toAdd = Math.min(99, remaining)
+            newWh.push({
+              ...item,
+              uid: Date.now() + Math.floor(Math.random() * 1000000),
+              count: toAdd,
+              qty: toAdd
+            })
+            remaining -= toAdd
+          }
+        } else {
+          newWh.push(item)
+        }
 
         return {
           player: {
@@ -793,18 +892,66 @@ export const useGameStore = create(
         const wh = player.warehouse || []
         const maxInv = player.inventorySlots || 100
 
-        if (inv.length >= maxInv) {
-          alert(`Inventory penuh! Maksimal ${maxInv} slot.`)
-          return {}
-        }
-
         const idx = wh.findIndex(i => i.uid === itemUid)
         if (idx === -1) return {}
 
         const item = wh[idx]
+        const isStackable = isStackableItem(item)
+
+        // Check slot capacity in inventory
+        let canStack = false
+        if (isStackable) {
+          for (let i = 0; i < inv.length; i++) {
+            if (inv[i].id === item.id && (inv[i].count || inv[i].qty || 1) < 99) {
+              canStack = true
+              break
+            }
+          }
+        }
+
+        if (!canStack && inv.length >= maxInv) {
+          alert(`Inventory penuh! Maksimal ${maxInv} slot.`)
+          return {}
+        }
+
         const newWh = [...wh]
-        newWh.splice(idx, 1)
-        const newInv = [...inv, item]
+        newWh.splice(idx, 1) // Remove from warehouse
+
+        // Add/Merge to inventory
+        let newInv = [...inv]
+        if (isStackable) {
+          let remaining = item.count || item.qty || 1
+          // Try merging to existing non-full stacks
+          for (let i = 0; i < newInv.length; i++) {
+            if (newInv[i].id === item.id) {
+              const currentCount = newInv[i].count || newInv[i].qty || 1
+              if (currentCount < 99) {
+                const addable = 99 - currentCount
+                const toAdd = Math.min(addable, remaining)
+                newInv[i] = {
+                  ...newInv[i],
+                  count: currentCount + toAdd,
+                  qty: currentCount + toAdd
+                }
+                remaining -= toAdd
+                if (remaining <= 0) break
+              }
+            }
+          }
+          // If still remaining, push new stack
+          while (remaining > 0) {
+            const toAdd = Math.min(99, remaining)
+            newInv.push({
+              ...item,
+              uid: Date.now() + Math.floor(Math.random() * 1000000),
+              count: toAdd,
+              qty: toAdd
+            })
+            remaining -= toAdd
+          }
+        } else {
+          newInv.push(item)
+        }
 
         return {
           player: {
@@ -969,7 +1116,7 @@ export const useGameStore = create(
         }
 
         const oreTypes = ['ignis', 'virel', 'kryos', 'zephra', 'umbrix']
-        const newInventory = [...player.inventory]
+        let newInventory = [...player.inventory]
         const invSlots = player.inventorySlots || 100
         const mailbox = player.mailbox ? [...player.mailbox] : []
 
@@ -990,19 +1137,29 @@ export const useGameStore = create(
           const itemTemplate = itemsData.items.find(it => it.id === itemId)
           if (!itemTemplate) continue
 
-          const newItem = { ...itemTemplate, uid: Date.now() + i }
+          const newItem = { ...itemTemplate }
           claimedOres.push(newItem)
 
-          if (newInventory.length < invSlots) {
-            newInventory.push(newItem)
+          // Stacking check
+          let canStack = false
+          for (let s = 0; s < newInventory.length; s++) {
+            if (newInventory[s].id === itemId && (newInventory[s].count || newInventory[s].qty || 1) < 99) {
+              canStack = true
+              break
+            }
+          }
+
+          if (canStack || newInventory.length < invSlots) {
+            newInventory = addToInventory(newInventory, newItem, 1)
           } else {
+            const finalNewItem = { ...newItem, uid: Date.now() + i, count: 1, qty: 1 }
             mailbox.push({
               id: Math.random().toString(36).slice(2) + Date.now().toString(36),
               type: 'Mining Overflow',
               sender: 'Mining Station',
               subject: `Mining Overflow: ${newItem.name}`,
               body: `Bag Anda penuh (${invSlots}/${invSlots}) saat mengklaim hasil tambang. ORE ini telah dikirim ke Mailbox.`,
-              item: newItem,
+              item: finalNewItem,
               receivedAt: Date.now()
             })
             mailCount++
@@ -1041,7 +1198,9 @@ export const useGameStore = create(
           return {}
         }
 
-        const oreCount = player.inventory.filter(it => it.id === oreId).length
+        const oreCount = player.inventory
+          .filter(it => it.id === oreId)
+          .reduce((sum, it) => sum + (it.count || it.qty || 1), 0)
         if (oreCount < 10) {
           alert(`Bahan tidak cukup! Membutuhkan 10 Ore sejenis (Milik Anda: ${oreCount}/10).`)
           return {}
@@ -1054,23 +1213,34 @@ export const useGameStore = create(
         }
 
         // Consume 10 ores
-        let consumed = 0
-        const newInv = player.inventory.filter(it => {
-          if (it.id === oreId && consumed < 10) {
-            consumed++
-            return false
+        let needed = 10
+        const newInv = []
+        for (let i = 0; i < player.inventory.length; i++) {
+          const it = player.inventory[i]
+          if (it.id === oreId && needed > 0) {
+            const currentCount = it.count || it.qty || 1
+            if (currentCount <= needed) {
+              needed -= currentCount
+            } else {
+              newInv.push({
+                ...it,
+                count: currentCount - needed,
+                qty: currentCount - needed
+              })
+              needed = 0
+            }
+          } else {
+            newInv.push(it)
           }
-          return true
-        })
+        }
 
         // Add 1 Shard
-        const newShard = { ...template, uid: Date.now() }
-        newInv.push(newShard)
+        const updatedInventory = addToInventory(newInv, template, 1)
 
         return {
           player: {
             ...player,
-            inventory: newInv,
+            inventory: updatedInventory,
             resources: {
               ...player.resources,
               credits: credits - crdCost
@@ -1409,8 +1579,20 @@ export const useGameStore = create(
             if (fpPotIdx !== -1) {
               nextPlayerFp = Math.min(playerMaxFp, nextPlayerFp + 2500)
               const newInv = [...player.inventory]
-              newInv.splice(fpPotIdx, 1)
-              const sisa = newInv.filter(it => it.id === 'pot_fp').length
+              const potItem = newInv[fpPotIdx]
+              const currentCount = potItem.count || potItem.qty || 1
+              if (currentCount > 1) {
+                newInv[fpPotIdx] = {
+                  ...potItem,
+                  count: currentCount - 1,
+                  qty: currentCount - 1
+                }
+              } else {
+                newInv.splice(fpPotIdx, 1)
+              }
+              const sisa = newInv
+                .filter(it => it.id === 'pot_fp')
+                .reduce((sum, it) => sum + (it.count || it.qty || 1), 0)
 
               if (newLog.length > 7) newLog = newLog.slice(-7)
               newLog.push(`🧪 [Auto-Potion] FP Potion [S]! (+2,500 FP, Sisa: ${sisa})`)
@@ -1539,8 +1721,20 @@ export const useGameStore = create(
                   const healAmount = 1000
                   nextPlayerHp = Math.min(playerMaxHp, nextPlayerHp + healAmount)
                   const newInv = [...player.inventory]
-                  newInv.splice(hpPotIdx, 1)
-                  const sisa = newInv.filter(it => it.id === 'pot_hp').length
+                  const potItem = newInv[hpPotIdx]
+                  const currentCount = potItem.count || potItem.qty || 1
+                  if (currentCount > 1) {
+                    newInv[hpPotIdx] = {
+                      ...potItem,
+                      count: currentCount - 1,
+                      qty: currentCount - 1
+                    }
+                  } else {
+                    newInv.splice(hpPotIdx, 1)
+                  }
+                  const sisa = newInv
+                    .filter(it => it.id === 'pot_hp')
+                    .reduce((sum, it) => sum + (it.count || it.qty || 1), 0)
 
                   if (newLog.length > 7) newLog = newLog.slice(-7)
                   newLog.push(`🧪 [Auto-Potion] HP Potion [S]! (+1,000 HP, Sisa: ${sisa})`)
@@ -1579,8 +1773,20 @@ export const useGameStore = create(
                 const healAmount = 1000
                 nextPlayerHp = Math.min(playerMaxHp, nextPlayerHp + healAmount)
                 const newInv = [...player.inventory]
-                newInv.splice(hpPotIdx, 1)
-                const sisa = newInv.filter(it => it.id === 'pot_hp').length
+                const potItem = newInv[hpPotIdx]
+                const currentCount = potItem.count || potItem.qty || 1
+                if (currentCount > 1) {
+                  newInv[hpPotIdx] = {
+                    ...potItem,
+                    count: currentCount - 1,
+                    qty: currentCount - 1
+                  }
+                } else {
+                  newInv.splice(hpPotIdx, 1)
+                }
+                const sisa = newInv
+                  .filter(it => it.id === 'pot_hp')
+                  .reduce((sum, it) => sum + (it.count || it.qty || 1), 0)
 
                 if (newLog.length > 7) newLog = newLog.slice(-7)
                 newLog.push(`🧪 [Auto-Potion] HP Potion [S]! (+1,000 HP, Sisa: ${sisa})`)
@@ -1702,23 +1908,33 @@ export const useGameStore = create(
         const newSector = getSector(newLevel)
 
         // Item drop deterministik berdasar sistem Rarity
-        const newInventory = [...player.inventory]
+        let newInventory = [...player.inventory]
         const invSlots = player.inventorySlots || 100
         const mailbox = player.mailbox ? [...player.mailbox] : []
         let dropLog = ''
 
         const pushOrMail = (item, logString) => {
-          if (newInventory.length < invSlots) {
-            newInventory.push(item)
+          let canStack = false
+          if (isStackableItem(item)) {
+            for (let s = 0; s < newInventory.length; s++) {
+              if (newInventory[s].id === item.id && (newInventory[s].count || newInventory[s].qty || 1) < 99) {
+                canStack = true
+                break
+              }
+            }
+          }
+          if (canStack || newInventory.length < invSlots) {
+            newInventory = addToInventory(newInventory, item, 1)
             dropLog += logString
           } else {
+            const finalItem = { ...item, count: 1, qty: 1 }
             mailbox.push({
               id: Math.random().toString(36).slice(2) + Date.now().toString(36),
               type: 'Inventory Overflow',
               sender: 'Trade Commissioner',
               subject: `Bag Overflow: ${item.name}`,
               body: `Bag Anda penuh (${invSlots}/${invSlots}) saat menerima item dari grind session.\nItem ini telah dikirim ke Mailbox.`,
-              item,
+              item: finalItem,
               receivedAt: Date.now()
             })
             dropLog += logString + ' (📬 Ke Mailbox)'
@@ -2670,11 +2886,22 @@ export const useGameStore = create(
       },
       useItem: (uid) => {
         const { player, battle, timer } = get()
-        const item = player.inventory.find((i) => i.uid === uid)
-        if (!item || item.type !== 'consumable') return
+        const itemIdx = player.inventory.findIndex((i) => i.uid === uid)
+        if (itemIdx === -1) return
+        const item = player.inventory[itemIdx]
+        if (item.type !== 'consumable') return
         
-        const newInventory = removeFromInventory(player.inventory, uid, 1)
-
+        const newInventory = [...player.inventory]
+        const currentCount = item.count || item.qty || 1
+        if (currentCount > 1) {
+          newInventory[itemIdx] = {
+            ...item,
+            count: currentCount - 1,
+            qty: currentCount - 1
+          }
+        } else {
+          newInventory.splice(itemIdx, 1)
+        }
 
         // Healing consumables
         if (item.id === 'pot_hp' || (item.bonus && item.bonus.hp)) {
@@ -2719,7 +2946,9 @@ export const useGameStore = create(
           return
         }
 
-        const talicCount = player.inventory.filter(it => it.id === 'talic_ignorance').length
+        const talicCount = player.inventory
+          .filter(it => it.id === 'talic_ignorance')
+          .reduce((sum, it) => sum + (it.count || it.qty || 1), 0)
         if (talicCount < cost.talics) {
           alert(tStore('alert_missing_ignorance', { talics: cost.talics, owned: talicCount }, player))
           return
@@ -2729,15 +2958,26 @@ export const useGameStore = create(
           return
         }
 
-
-        let consumed = 0
-        const newInventory = player.inventory.filter(it => {
-          if (it.id === 'talic_ignorance' && consumed < cost.talics) {
-            consumed++
-            return false
+        let needed = cost.talics
+        const newInventory = []
+        for (let i = 0; i < player.inventory.length; i++) {
+          const it = player.inventory[i]
+          if (it.id === 'talic_ignorance' && needed > 0) {
+            const currentCount = it.count || it.qty || 1
+            if (currentCount <= needed) {
+              needed -= currentCount
+            } else {
+              newInventory.push({
+                ...it,
+                count: currentCount - needed,
+                qty: currentCount - needed
+              })
+              needed = 0
+            }
+          } else {
+            newInventory.push(it)
           }
-          return true
-        })
+        }
 
         const upgradedWeapon = {
           ...weapon,
@@ -2848,7 +3088,9 @@ export const useGameStore = create(
           return
         }
 
-        const talicCount = player.inventory.filter(it => it.id === 'talic_favor').length
+        const talicCount = player.inventory
+          .filter(it => it.id === 'talic_favor')
+          .reduce((sum, it) => sum + (it.count || it.qty || 1), 0)
         const reqTalics = 5
         const reqCrd = 30000
 
@@ -2861,16 +3103,29 @@ export const useGameStore = create(
           return
         }
 
-
-        let consumedTalics = 0
-        const newInventory = player.inventory.filter(it => {
-          if (it.uid === sacrificeUid) return false
-          if (it.id === 'talic_favor' && consumedTalics < reqTalics) {
-            consumedTalics++
-            return false
+        let neededTalics = reqTalics
+        const newInventory = []
+        for (let i = 0; i < player.inventory.length; i++) {
+          const it = player.inventory[i]
+          if (it.uid === sacrificeUid) {
+            continue
           }
-          return true
-        })
+          if (it.id === 'talic_favor' && neededTalics > 0) {
+            const currentCount = it.count || it.qty || 1
+            if (currentCount <= neededTalics) {
+              neededTalics -= currentCount
+            } else {
+              newInventory.push({
+                ...it,
+                count: currentCount - neededTalics,
+                qty: currentCount - neededTalics
+              })
+              neededTalics = 0
+            }
+          } else {
+            newInventory.push(it)
+          }
+        }
 
         const combinedWeapon = {
           ...weapon,
@@ -2909,7 +3164,9 @@ export const useGameStore = create(
         }
 
         // Materials verification
-        const arcaniteCount = player.inventory.filter(it => it.id === 'mat_arcanite').length
+        const arcaniteCount = player.inventory
+          .filter(it => it.id === 'mat_arcanite')
+          .reduce((sum, it) => sum + (it.count || it.qty || 1), 0)
         if (arcaniteCount < 1) {
           alert(tStore('alert_missing_arcanite', { owned: arcaniteCount }, player))
           return { success: false, status: 'error' }
@@ -2917,14 +3174,18 @@ export const useGameStore = create(
 
         const DIVINE_CREST_COSTS = [20, 40, 60, 80, 100, 120, 150, 200]
         const crestCost = DIVINE_CREST_COSTS[currentEnhancement]
-        const crestCount = player.inventory.filter(it => it.id === 'mat_divine_crest').length
+        const crestCount = player.inventory
+          .filter(it => it.id === 'mat_divine_crest')
+          .reduce((sum, it) => sum + (it.count || it.qty || 1), 0)
         if (crestCount < crestCost) {
           alert(tStore('alert_missing_crests', { required: crestCost, owned: crestCount }, player))
           return { success: false, status: 'error' }
         }
 
         if (useLuckyRelic) {
-          const relicCount = player.inventory.filter(it => it.id === 'mat_lucky_relic').length
+          const relicCount = player.inventory
+            .filter(it => it.id === 'mat_lucky_relic')
+            .reduce((sum, it) => sum + (it.count || it.qty || 1), 0)
           if (relicCount < 1) {
             alert(tStore('alert_missing_relics', { owned: relicCount }, player))
             return { success: false, status: 'error' }
@@ -2932,25 +3193,52 @@ export const useGameStore = create(
         }
 
         // Consume materials
-        let consumedArcanite = 0
-        let consumedCrests = 0
-        let consumedRelics = 0
+        let neededArcanite = 1
+        let neededCrests = crestCost
+        let neededRelics = useLuckyRelic ? 1 : 0
 
-        const newInventory = player.inventory.filter(it => {
-          if (it.id === 'mat_arcanite' && consumedArcanite < 1) {
-            consumedArcanite++
-            return false
+        const newInventory = []
+        for (let i = 0; i < player.inventory.length; i++) {
+          const it = player.inventory[i]
+          let currentCount = it.count || it.qty || 1
+          
+          if (it.id === 'mat_arcanite' && neededArcanite > 0) {
+            if (currentCount <= neededArcanite) {
+              neededArcanite -= currentCount
+            } else {
+              newInventory.push({
+                ...it,
+                count: currentCount - neededArcanite,
+                qty: currentCount - neededArcanite
+              })
+              neededArcanite = 0
+            }
+          } else if (it.id === 'mat_divine_crest' && neededCrests > 0) {
+            if (currentCount <= neededCrests) {
+              neededCrests -= currentCount
+            } else {
+              newInventory.push({
+                ...it,
+                count: currentCount - neededCrests,
+                qty: currentCount - neededCrests
+              })
+              neededCrests = 0
+            }
+          } else if (useLuckyRelic && it.id === 'mat_lucky_relic' && neededRelics > 0) {
+            if (currentCount <= neededRelics) {
+              neededRelics -= currentCount
+            } else {
+              newInventory.push({
+                ...it,
+                count: currentCount - neededRelics,
+                qty: currentCount - neededRelics
+              })
+              neededRelics = 0
+            }
+          } else {
+            newInventory.push(it)
           }
-          if (it.id === 'mat_divine_crest' && consumedCrests < crestCost) {
-            consumedCrests++
-            return false
-          }
-          if (useLuckyRelic && it.id === 'mat_lucky_relic' && consumedRelics < 1) {
-            consumedRelics++
-            return false
-          }
-          return true
-        })
+        }
 
         // Enhancement math
         // Rates: +1 (100%), +2 (90%), +3 (70%), +4 (50%), +5 (35%), +6 (20%), +7 (10%), +8 (5%)

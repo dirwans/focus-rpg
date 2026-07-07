@@ -158,7 +158,7 @@ export default function Mine() {
     return `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`
   }
 
-  const countInventoryItem = (id) => player?.inventory?.filter(it => it.id === id).length ?? 0
+  const countInventoryItem = (id) => player?.inventory?.filter(it => it.id === id).reduce((sum, it) => sum + (it.count || it.qty || 1), 0) ?? 0
 
   const activeMiningFloor = MINE_FLOORS.find(f => f.duration === miningTimer.duration)
 
