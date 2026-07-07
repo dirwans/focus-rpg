@@ -346,9 +346,9 @@ export default function Inventory() {
                         return bagList.map((bagNum) => {
                           let isUnlocked = false;
                           if (bagNum <= 2) isUnlocked = true;
-                          else if (bagNum === 3 && player.level >= 32) isUnlocked = true;
-                          else if (bagNum === 4 && player.level >= 42) isUnlocked = true;
-                          else if (bagNum === 5 && player.level >= 55) isUnlocked = true;
+                          else if (bagNum === 3 && player.level >= 42) isUnlocked = true;
+                          else if (bagNum === 4 && player.level >= 55) isUnlocked = true;
+                          else if (bagNum === 5 && player.level >= 66) isUnlocked = true;
                           else if ((bagNum - 1) * 25 >= 100) isUnlocked = true;
 
                           const isBagActive = activeBag === bagNum

@@ -242,6 +242,15 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - Refactored `pushOrMail` and `claimMining` to check stack availability first. Stackable drops fill available stack space up to 99 before checking inventory limit and spilling over to the player's Mailbox.
 - **Vault/Warehouse Stacking & Display**:
   - Symmetrically updated `depositToWarehouse` and `withdrawFromWarehouse` to merge stackable items into existing warehouse stacks.
-  - Updated the warehouse and inventory columns inside `NpcModal.jsx` to append stack size labels (e.g. `(x15)`) next to item names.
+---
+
+### 🎒 Milestone 14: Bag Level Gates Calibration
+- **Custom level bracket limits**:
+  - Automatically unlocks 2 bags for free at levels 1 - 31.
+  - Level 42: Unlocks bag 3 (making 3 bags / 75 slots).
+  - Level 55: Unlocks bag 4 (making 4 bags / 100 slots).
+  - Level 66: Unlocks bag 5 (making 5 bags / 125 slots / full base bags).
+  - Configured in [Inventory.jsx](file:///c:/projects/focus-rpg/src/screens/Inventory.jsx) and synchronized with [Cargo.jsx](file:///c:/projects/focus-rpg/src/screens/Cargo.jsx).
+
 
 
