@@ -228,3 +228,20 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 - **Upgraded Slot Unlock Bypass**:
   - Implemented automatic unlocking for bag numbers 6 and above to ensure purchased storage space is immediately accessible, while keeping core level gates on bags 3 to 5.
 
+---
+
+### 📦 Milestone 13: Item Stacking Overhaul (/99)
+- **Stackable Items Guard (`isStackableItem`)**:
+  - Created a store helper function in `gameStore.js` to define stackable items (ores, shards, potions, and materials/consumables) and distinguish them from unstackable equipment.
+- **Stacking Accumulator (`addToInventory`)**:
+  - Rewrote the inventory adder function to look up existing non-full stacks (`< 99`) of the same item ID and increment their quantities. It pushes a new slot entry only when required.
+- **Stack-aware Material Check & Consumption**:
+  - **Refine / Enhance / Craft**: Rewrote material counters (for Talics, Crests, Arcanite, Relics, and Ores) to sum stack quantities instead of returning array lengths. Updated consumption logic to subtract count/qty from stacks iteratively instead of splicing out the whole array item slot.
+  - **Auto-Potions & Manual Use**: Configured auto-HP/FP combat consumption and manual item usage (`useItem` / `changeCharacterName`) to decrement stack quantities correctly and recalculate remaining items by summing stack counts.
+- **Grind Drops & Mining Claim Flow**:
+  - Refactored `pushOrMail` and `claimMining` to check stack availability first. Stackable drops fill available stack space up to 99 before checking inventory limit and spilling over to the player's Mailbox.
+- **Vault/Warehouse Stacking & Display**:
+  - Symmetrically updated `depositToWarehouse` and `withdrawFromWarehouse` to merge stackable items into existing warehouse stacks.
+  - Updated the warehouse and inventory columns inside `NpcModal.jsx` to append stack size labels (e.g. `(x15)`) next to item names.
+
+
