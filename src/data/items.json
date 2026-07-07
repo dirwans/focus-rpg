@@ -962,7 +962,7 @@
       "bonus": {
         "def": 8
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_1_rembg.png"
     },
     {
       "id": "wep_All_1_C",
@@ -988,7 +988,7 @@
       "bonus": {
         "def": 9
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_1_rembg.png"
     },
     {
       "id": "wep_All_1_B",
@@ -1014,7 +1014,7 @@
       "bonus": {
         "def": 12
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_1_rembg.png"
     },
     {
       "id": "wep_All_1_A",
@@ -1040,7 +1040,7 @@
       "bonus": {
         "def": 16
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_1_rembg.png"
     },
     {
       "id": "wep_All_1_S",
@@ -1066,7 +1066,7 @@
       "bonus": {
         "def": 24
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_1_rembg.png"
     },
     {
       "id": "wep_All_1_SS",
@@ -1092,7 +1092,7 @@
       "bonus": {
         "def": 36
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_1_rembg.png"
     },
     {
       "id": "wep_All_1_SSS",
@@ -1118,7 +1118,7 @@
       "bonus": {
         "def": 56
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_1_rembg.png"
     },
     {
       "id": "wep_All_1_SR",
@@ -1144,7 +1144,7 @@
       "bonus": {
         "def": 80
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_1_rembg.png"
     },
     {
       "id": "wep_All_1_SSR",
@@ -1170,7 +1170,7 @@
       "bonus": {
         "def": 120
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_1_rembg.png"
     },
     {
       "id": "wep_All_1_UR",
@@ -1196,7 +1196,7 @@
       "bonus": {
         "def": 200
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_1_rembg.png"
     },
     {
       "id": "wep_arctron_10_D",
@@ -2002,7 +2002,7 @@
       "bonus": {
         "def": 80
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
       "id": "wep_All_10_C",
@@ -2028,7 +2028,7 @@
       "bonus": {
         "def": 96
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
       "id": "wep_All_10_B",
@@ -2054,7 +2054,7 @@
       "bonus": {
         "def": 120
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
       "id": "wep_All_10_A",
@@ -2080,7 +2080,7 @@
       "bonus": {
         "def": 160
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
       "id": "wep_All_10_S",
@@ -2106,7 +2106,7 @@
       "bonus": {
         "def": 240
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
       "id": "wep_All_10_SS",
@@ -2132,7 +2132,7 @@
       "bonus": {
         "def": 360
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
       "id": "wep_All_10_SSS",
@@ -2158,7 +2158,7 @@
       "bonus": {
         "def": 560
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
       "id": "wep_All_10_SR",
@@ -2184,7 +2184,7 @@
       "bonus": {
         "def": 800
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
       "id": "wep_All_10_SSR",
@@ -2210,7 +2210,7 @@
       "bonus": {
         "def": 1200
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
       "id": "wep_All_10_UR",
@@ -2236,7 +2236,7 @@
       "bonus": {
         "def": 2000
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
       "id": "wep_arctron_20_D",
@@ -3042,7 +3042,7 @@
       "bonus": {
         "def": 160
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
       "id": "wep_All_20_C",
@@ -3068,7 +3068,7 @@
       "bonus": {
         "def": 192
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
       "id": "wep_All_20_B",
@@ -3094,7 +3094,7 @@
       "bonus": {
         "def": 240
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
       "id": "wep_All_20_A",
@@ -3120,7 +3120,7 @@
       "bonus": {
         "def": 320
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
       "id": "wep_All_20_S",
@@ -3146,7 +3146,7 @@
       "bonus": {
         "def": 480
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
       "id": "wep_All_20_SS",
@@ -3172,7 +3172,7 @@
       "bonus": {
         "def": 720
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
       "id": "wep_All_20_SSS",
@@ -3198,7 +3198,7 @@
       "bonus": {
         "def": 1120
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
       "id": "wep_All_20_SR",
@@ -3224,7 +3224,7 @@
       "bonus": {
         "def": 1600
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
       "id": "wep_All_20_SSR",
@@ -3250,7 +3250,7 @@
       "bonus": {
         "def": 2400
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
       "id": "wep_All_20_UR",
@@ -3276,7 +3276,7 @@
       "bonus": {
         "def": 4000
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
       "id": "wep_arctron_30_D",
@@ -4082,7 +4082,7 @@
       "bonus": {
         "def": 240
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
       "id": "wep_All_30_C",
@@ -4108,7 +4108,7 @@
       "bonus": {
         "def": 288
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
       "id": "wep_All_30_B",
@@ -4134,7 +4134,7 @@
       "bonus": {
         "def": 360
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
       "id": "wep_All_30_A",
@@ -4160,7 +4160,7 @@
       "bonus": {
         "def": 480
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
       "id": "wep_All_30_S",
@@ -4186,7 +4186,7 @@
       "bonus": {
         "def": 720
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
       "id": "wep_All_30_SS",
@@ -4212,7 +4212,7 @@
       "bonus": {
         "def": 1080
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
       "id": "wep_All_30_SSS",
@@ -4238,7 +4238,7 @@
       "bonus": {
         "def": 1680
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
       "id": "wep_All_30_SR",
@@ -4264,7 +4264,7 @@
       "bonus": {
         "def": 2400
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
       "id": "wep_All_30_SSR",
@@ -4290,7 +4290,7 @@
       "bonus": {
         "def": 3600
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
       "id": "wep_All_30_UR",
@@ -4316,7 +4316,7 @@
       "bonus": {
         "def": 6000
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
       "id": "wep_arctron_40_D",
@@ -5122,7 +5122,7 @@
       "bonus": {
         "def": 320
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_40_C",
@@ -5148,7 +5148,7 @@
       "bonus": {
         "def": 384
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_40_B",
@@ -5174,7 +5174,7 @@
       "bonus": {
         "def": 480
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_40_A",
@@ -5200,7 +5200,7 @@
       "bonus": {
         "def": 640
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_40_S",
@@ -5226,7 +5226,7 @@
       "bonus": {
         "def": 960
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_40_SS",
@@ -5252,7 +5252,7 @@
       "bonus": {
         "def": 1440
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_40_SSS",
@@ -5278,7 +5278,7 @@
       "bonus": {
         "def": 2240
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_40_SR",
@@ -5304,7 +5304,7 @@
       "bonus": {
         "def": 3200
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_40_SSR",
@@ -5330,7 +5330,7 @@
       "bonus": {
         "def": 4800
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_40_UR",
@@ -5356,7 +5356,7 @@
       "bonus": {
         "def": 8000
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_arctron_50_D",
@@ -6162,7 +6162,7 @@
       "bonus": {
         "def": 400
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_50_C",
@@ -6188,7 +6188,7 @@
       "bonus": {
         "def": 480
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_50_B",
@@ -6214,7 +6214,7 @@
       "bonus": {
         "def": 600
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_50_A",
@@ -6240,7 +6240,7 @@
       "bonus": {
         "def": 800
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_50_S",
@@ -6266,7 +6266,7 @@
       "bonus": {
         "def": 1200
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_50_SS",
@@ -6292,7 +6292,7 @@
       "bonus": {
         "def": 1800
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_50_SSS",
@@ -6318,7 +6318,7 @@
       "bonus": {
         "def": 2800
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_50_SR",
@@ -6344,7 +6344,7 @@
       "bonus": {
         "def": 4000
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_50_SSR",
@@ -6370,7 +6370,7 @@
       "bonus": {
         "def": 6000
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_50_UR",
@@ -6396,7 +6396,7 @@
       "bonus": {
         "def": 10000
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_arctron_55_D",
@@ -7202,7 +7202,7 @@
       "bonus": {
         "def": 440
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_55_C",
@@ -7228,7 +7228,7 @@
       "bonus": {
         "def": 528
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_55_B",
@@ -7254,7 +7254,7 @@
       "bonus": {
         "def": 660
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_55_A",
@@ -7280,7 +7280,7 @@
       "bonus": {
         "def": 880
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_55_S",
@@ -7306,7 +7306,7 @@
       "bonus": {
         "def": 1320
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_55_SS",
@@ -7332,7 +7332,7 @@
       "bonus": {
         "def": 1980
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_55_SSS",
@@ -7358,7 +7358,7 @@
       "bonus": {
         "def": 3080
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_55_SR",
@@ -7384,7 +7384,7 @@
       "bonus": {
         "def": 4400
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_55_SSR",
@@ -7410,7 +7410,7 @@
       "bonus": {
         "def": 6600
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_55_UR",
@@ -7436,7 +7436,7 @@
       "bonus": {
         "def": 11000
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_arctron_60_D",
@@ -8242,7 +8242,7 @@
       "bonus": {
         "def": 480
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_60_C",
@@ -8268,7 +8268,7 @@
       "bonus": {
         "def": 576
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_60_B",
@@ -8294,7 +8294,7 @@
       "bonus": {
         "def": 720
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_60_A",
@@ -8320,7 +8320,7 @@
       "bonus": {
         "def": 960
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_60_S",
@@ -8346,7 +8346,7 @@
       "bonus": {
         "def": 1440
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_60_SS",
@@ -8372,7 +8372,7 @@
       "bonus": {
         "def": 2160
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_60_SSS",
@@ -8398,7 +8398,7 @@
       "bonus": {
         "def": 3360
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_60_SR",
@@ -8424,7 +8424,7 @@
       "bonus": {
         "def": 4800
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_60_SSR",
@@ -8450,7 +8450,7 @@
       "bonus": {
         "def": 7200
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_60_UR",
@@ -8476,7 +8476,7 @@
       "bonus": {
         "def": 12000
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_arctron_65_D",
@@ -9282,7 +9282,7 @@
       "bonus": {
         "def": 520
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_65_C",
@@ -9308,7 +9308,7 @@
       "bonus": {
         "def": 624
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_65_B",
@@ -9334,7 +9334,7 @@
       "bonus": {
         "def": 780
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_65_A",
@@ -9360,7 +9360,7 @@
       "bonus": {
         "def": 1040
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_65_S",
@@ -9386,7 +9386,7 @@
       "bonus": {
         "def": 1560
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_65_SS",
@@ -9412,7 +9412,7 @@
       "bonus": {
         "def": 2340
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_65_SSS",
@@ -9438,7 +9438,7 @@
       "bonus": {
         "def": 3640
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_65_SR",
@@ -9464,7 +9464,7 @@
       "bonus": {
         "def": 5200
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_65_SSR",
@@ -9490,7 +9490,7 @@
       "bonus": {
         "def": 7800
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_65_UR",
@@ -9516,7 +9516,7 @@
       "bonus": {
         "def": 13000
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_arctron_70_D",
@@ -10322,7 +10322,7 @@
       "bonus": {
         "def": 560
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_70_C",
@@ -10348,7 +10348,7 @@
       "bonus": {
         "def": 672
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_70_B",
@@ -10374,7 +10374,7 @@
       "bonus": {
         "def": 840
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_70_A",
@@ -10400,7 +10400,7 @@
       "bonus": {
         "def": 1120
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_70_S",
@@ -10426,7 +10426,7 @@
       "bonus": {
         "def": 1680
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_70_SS",
@@ -10452,7 +10452,7 @@
       "bonus": {
         "def": 2520
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_70_SSS",
@@ -10478,7 +10478,7 @@
       "bonus": {
         "def": 3920
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_70_SR",
@@ -10504,7 +10504,7 @@
       "bonus": {
         "def": 5600
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_70_SSR",
@@ -10530,7 +10530,7 @@
       "bonus": {
         "def": 8400
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_70_UR",
@@ -10556,7 +10556,7 @@
       "bonus": {
         "def": 14000
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_arctron_80_D",
@@ -11362,7 +11362,7 @@
       "bonus": {
         "def": 640
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_80_C",
@@ -11388,7 +11388,7 @@
       "bonus": {
         "def": 768
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_80_B",
@@ -11414,7 +11414,7 @@
       "bonus": {
         "def": 960
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_80_A",
@@ -11440,7 +11440,7 @@
       "bonus": {
         "def": 1280
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_80_S",
@@ -11466,7 +11466,7 @@
       "bonus": {
         "def": 1920
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_80_SS",
@@ -11492,7 +11492,7 @@
       "bonus": {
         "def": 2880
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_80_SSS",
@@ -11518,7 +11518,7 @@
       "bonus": {
         "def": 4480
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_80_SR",
@@ -11544,7 +11544,7 @@
       "bonus": {
         "def": 6400
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_80_SSR",
@@ -11570,7 +11570,7 @@
       "bonus": {
         "def": 9600
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_80_UR",
@@ -11596,7 +11596,7 @@
       "bonus": {
         "def": 16000
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_arctron_90_D",
@@ -12402,7 +12402,7 @@
       "bonus": {
         "def": 720
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_90_C",
@@ -12428,7 +12428,7 @@
       "bonus": {
         "def": 864
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_90_B",
@@ -12454,7 +12454,7 @@
       "bonus": {
         "def": 1080
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_90_A",
@@ -12480,7 +12480,7 @@
       "bonus": {
         "def": 1440
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_90_S",
@@ -12506,7 +12506,7 @@
       "bonus": {
         "def": 2160
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_90_SS",
@@ -12532,7 +12532,7 @@
       "bonus": {
         "def": 3240
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_90_SSS",
@@ -12558,7 +12558,7 @@
       "bonus": {
         "def": 5040
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_90_SR",
@@ -12584,7 +12584,7 @@
       "bonus": {
         "def": 7200
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_90_SSR",
@@ -12610,7 +12610,7 @@
       "bonus": {
         "def": 10800
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_90_UR",
@@ -12636,7 +12636,7 @@
       "bonus": {
         "def": 18000
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_arctron_100_D",
@@ -13442,7 +13442,7 @@
       "bonus": {
         "def": 800
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_100_C",
@@ -13468,7 +13468,7 @@
       "bonus": {
         "def": 960
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_100_B",
@@ -13494,7 +13494,7 @@
       "bonus": {
         "def": 1200
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_100_A",
@@ -13520,7 +13520,7 @@
       "bonus": {
         "def": 1600
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_100_S",
@@ -13546,7 +13546,7 @@
       "bonus": {
         "def": 2400
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_100_SS",
@@ -13572,7 +13572,7 @@
       "bonus": {
         "def": 3600
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_100_SSS",
@@ -13598,7 +13598,7 @@
       "bonus": {
         "def": 5600
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_100_SR",
@@ -13624,7 +13624,7 @@
       "bonus": {
         "def": 8000
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_100_SSR",
@@ -13650,7 +13650,7 @@
       "bonus": {
         "def": 12000
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_All_100_UR",
@@ -13676,7 +13676,7 @@
       "bonus": {
         "def": 20000
       },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2025/05/idaam80.png"
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "wep_job_cadet_D",
@@ -20556,7 +20556,8 @@
         "def": 120,
         "hp": 2500
       },
-      "description": "DEF+120 | HP+2500"
+      "description": "DEF+120 | HP+2500",
+      "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
       "id": "leg_ring",

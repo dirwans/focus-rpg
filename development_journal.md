@@ -4,9 +4,19 @@ This journal tracks all major development milestones, technical optimizations, b
 
 ---
 
+## ⚙️ Deployment Guidelines & Rules
+
+Starting July 7, 2026, the following rules are enforced for all development and deployment operations:
+1. **Minimum Edit Threshold**: Any call to `deploy.ps1` must contain at least **5 separate modifications/edits** in the codebase.
+2. **Modification Status Labeling**: All milestones and modifications recorded in this journal must explicitly state their deployment state using:
+   - `[PENDING DEPLOYMENT]` — for edits completed locally but not yet deployed.
+   - `[DEPLOYED]` — for edits successfully synced to the production VPS server.
+
+---
+
 ## 📅 Session Chronological Logs
 
-### 🚀 Milestone 1: Authentication Security & Integrity Guard
+### 🚀 Milestone 1: Authentication Security & Integrity Guard [DEPLOYED]
 - **Authentication Guards (`server.js`)**:
   - Implemented an user verification check inside `getSession()` to ensure the session's username actually exists in `users.json`. If a user is deleted or does not exist, their session is immediately rejected (preventing ghost/anonymous joins).
   - Integrated the same security verification into the Server-Sent Events (SSE) `/api/save/stream` endpoint to prevent unauthorized persistent save streams.
@@ -17,7 +27,7 @@ This journal tracks all major development milestones, technical optimizations, b
 
 ---
 
-### 🎨 Milestone 2: UI Visual Polish & Scanline/CRT Removal
+### 🎨 Milestone 2: UI Visual Polish & Scanline/CRT Removal [DEPLOYED]
 - **Global Scrollbar Invisibility (`src/index.css`)**:
   - Disabled browser and container scrollbars globally using CSS vendor prefixes to maintain a clean console look.
 - **Scanline & Grid Overlay Cleanup**:
@@ -29,7 +39,7 @@ This journal tracks all major development milestones, technical optimizations, b
 
 ---
 
-### 👾 Milestone 3: Sprite Portrait Enhancement & Outline Erosion
+### 👾 Milestone 3: Sprite Portrait Enhancement & Outline Erosion [DEPLOYED]
 - **Contrast & Brightness Tuning**:
   - Adjusted the faction character portraits to be sharper and brighter.
   - Specially boosted the *Ranger* and *Technician* sprites' highlights so that they display as clearly and vividly as the *Warrior* portrait.
@@ -38,7 +48,7 @@ This journal tracks all major development milestones, technical optimizations, b
 
 ---
 
-### 🔨 Milestone 4: Forge & Equipment Enhancement Realignment
+### 🔨 Milestone 4: Forge & Equipment Enhancement Realignment [DEPLOYED]
 - **Success Probability Matrix**:
   - Re-mapped the upgrade success rate matrix: `+1 (100%)`, `+2 (90%)`, `+3 (70%)`, `+4 (50%)`, `+5 (35%)`, `+6 (20%)`, `+7 (10%)`, `+8 (5%)`.
 - **Lucky Relic Calibration**:
@@ -55,7 +65,7 @@ This journal tracks all major development milestones, technical optimizations, b
 
 ---
 
-### 🗺️ Milestone 5: Map & Dungeon Zone System
+### 🗺️ Milestone 5: Map & Dungeon Zone System [DEPLOYED]
 - **Sector Replacement**:
   - Replaced the old flat 10-Sector structure with **5 Leveling Maps** and **3 Battle Dungeons** in `enemies.json` and `gameStore.js`.
   - **Leveling Maps**:
@@ -79,7 +89,7 @@ This journal tracks all major development milestones, technical optimizations, b
 
 ---
 
-### 📱 Milestone 6: Android APK Compilation & Locking Fix
+### 📱 Milestone 6: Android APK Compilation & Locking Fix [DEPLOYED]
 - **Locked Assets Clearance**:
   - Created an attribute-clearing script to recursively strip Windows `read-only` handles on `android\app\src\main\assets\public` to resolve `EPERM` copy errors during Capacitor builds.
 - **Capacitor Sync & Gradle Build**:
@@ -89,7 +99,7 @@ This journal tracks all major development milestones, technical optimizations, b
 
 ---
 
-### 🏛️ Milestone 7: NPC Base System & Database Documentation
+### 🏛️ Milestone 7: NPC Base System & Database Documentation [DEPLOYED]
 
 - **NPC Roster (8 NPCs di NPC Base)**:
   Semua NPC berlokasi di **NPC Base** — pusat layanan utama Headquarters. Berikut daftar resmi:
@@ -117,7 +127,7 @@ This journal tracks all major development milestones, technical optimizations, b
   - Tab NPCs disisipkan di antara tab **Zones** dan **System**.
   - Master Artisan entry diperbarui dengan keterangan faction-exclusive craft.
 
-## Milestone 8: NPC Shop, Drop Rate, & Respawn Database
+## Milestone 8: NPC Shop, Drop Rate, & Respawn Database [DEPLOYED]
 - **NPC Equipment Shop (Arsenal & Armory)**:
   - Mengimplementasikan `buyFromNpc` di `gameStore.js`.
   - Arsenal Keeper dan Armory Keeper sekarang fungsional menjual Common Equipment sesuai dengan level map/sektor player saat ini (Map 1 sampai Map 5).
@@ -150,7 +160,7 @@ This journal tracks all major development milestones, technical optimizations, b
 
 ---
 
-### 🌐 Milestone 9: Google Sign-In Integration, Character Rename Fixes & Touch Scrolling
+### 🌐 Milestone 9: Google Sign-In Integration, Character Rename Fixes & Touch Scrolling [DEPLOYED]
 - **Google Sign-In Implementation**:
   - Integrated Capacitor Social Login natively on Android and Web using `@capgo/capacitor-social-login`.
   - Solved native SocialLogin callback crash by removing custom scope arrays (forcing default email/profile scopes), resolving Java Activity modification errors on Android.
@@ -162,7 +172,7 @@ This journal tracks all major development milestones, technical optimizations, b
 
 ---
 
-### 🎨 Milestone 10: Scanline Cleanup, Character Creation Flow & Name Symbols Support
+### 🎨 Milestone 10: Scanline Cleanup, Character Creation Flow & Name Symbols Support [DEPLOYED]
 - **Scanline Layer Removal**:
   - Disabled the absolute holographic scanline layer overlay (`display: none` in `.cyberpunk-hud-bg::before`) from the NPC Base modal container, resolving sprite brightness loss, screen dimming, and moiré blurring on high-density viewports.
 - **Dedicated Character Creation Flow**:
@@ -174,7 +184,7 @@ This journal tracks all major development milestones, technical optimizations, b
 
 ---
 
-### 🖼️ Milestone 11: Character Creation Sprite Layout Fixes & Asset Trimming
+### 🖼️ Milestone 11: Character Creation Sprite Layout Fixes & Asset Trimming [DEPLOYED]
 - **Sprite Padding Trimming**: 
   - Created a python script (	rim_sprites.py) to systematically trim asymmetrical transparent padding from all faction sprites (Arctron, Bionex, Celestra). This ensures CSS positioning calculates the true center of mass rather than the center of a padded PNG.
 - **CSS Animation & Transform Resolution**: 
@@ -219,7 +229,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎒 Milestone 12: 25-Slot Inventory Bags & Dynamic Upgrades
+### 🎒 Milestone 12: 25-Slot Inventory Bags & Dynamic Upgrades [DEPLOYED]
 - **Inventory Bag capacity expansion**:
   - Refactored [Inventory.jsx](file:///c:/projects/focus-rpg/src/screens/Inventory.jsx) and [Cargo.jsx](file:///c:/projects/focus-rpg/src/screens/Cargo.jsx) to increase bag slot sizes from 10 slots to 25 slots (a clean 5x5 grid layout).
   - Configured dynamic bag generation using `Math.ceil(player.inventorySlots / 25)` with a minimum baseline of 5 bags. This expands bag buttons up to 12 bags (for 300 slots max capacity).
@@ -230,7 +240,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 📦 Milestone 13: Item Stacking Overhaul (/99)
+### 📦 Milestone 13: Item Stacking Overhaul (/99) [DEPLOYED]
 - **Stackable Items Guard (`isStackableItem`)**:
   - Created a store helper function in `gameStore.js` to define stackable items (ores, shards, potions, and materials/consumables) and distinguish them from unstackable equipment.
 - **Stacking Accumulator (`addToInventory`)**:
@@ -244,13 +254,29 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - Symmetrically updated `depositToWarehouse` and `withdrawFromWarehouse` to merge stackable items into existing warehouse stacks.
 ---
 
-### 🎒 Milestone 14: Bag Level Gates Calibration
+### 🎒 Milestone 14: Bag Level Gates Calibration [DEPLOYED]
 - **Custom level bracket limits**:
   - Automatically unlocks 2 bags for free at levels 1 - 32.
   - Level 42: Unlocks bag 3 (making 3 bags / 75 slots).
   - Level 55: Unlocks bag 4 (making 4 bags / 100 slots).
   - Level 66: Unlocks bag 5 (making 5 bags / 125 slots / full base bags).
   - Configured in [Inventory.jsx](file:///c:/projects/focus-rpg/src/screens/Inventory.jsx) and synchronized with [Cargo.jsx](file:///c:/projects/focus-rpg/src/screens/Cargo.jsx).
+
+---
+
+### 🛡️ Milestone 15: Arctron Mecha Shields Integration & Deployment Safety Gates [PENDING DEPLOYMENT]
+- **Deployment Safety Guidelines Integration**:
+  - Enforced a rule requiring a minimum of 5 modifications before compiling/deploying.
+  - Created a new workspace agent skill `deployment_rules` in [.agents/skills/deployment_rules/SKILL.md](file:///c:/projects/focus-rpg/.agents/skills/deployment_rules/SKILL.md) and recorded constraints in the journal.
+  - Added status tags `[DEPLOYED]` and `[PENDING DEPLOYMENT]` to all journal milestones.
+- **Mecha Shield Assets Cropping & Background Removal**:
+  - Created `process_shields.py` to crop the mecha shield vertical sprite sheet into three distinct items, convert black backgrounds to transparent (using color thresholding), and crop them to bounding boxes.
+  - Saved outputs to both `src/assets` and `public/assets` as `arctron_shield_1_rembg.png` (Lv.1), `arctron_shield_2_rembg.png` (Lv.10-30), and `arctron_shield_3_rembg.png` (Lv.40+).
+- **Items Database Image Association**:
+  - Wrote and ran `patch_items_shields.py` to parse `items.json` and associate all 131 shield item records with the new cropped mecha shield assets according to their level tier.
+- **Arctron Starting Gear Assignment**:
+  - Edited [CharacterCreate.jsx](file:///c:/projects/focus-rpg/src/components/CharacterCreate.jsx#L175-L195) to automatically equip newly created level 1 Arctron cadets with a starter shield (`[D] Lv.1 Carbon Shield` using `arctron_shield_1_rembg.png`) in their shield slot by default.
+
 
 
 
