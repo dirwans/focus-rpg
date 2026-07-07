@@ -71,6 +71,34 @@ export function addToInventory(inventory, item, count = 1) {
   return newInv
 }
 
+export function resolveItemImage(item, playerRace) {
+  if (!item) return null
+  if (item.type === 'shield' && item.id && item.id.startsWith('arm_All_')) {
+    const lvl = item.level || 1
+    const race = playerRace || 'arctron'
+    
+    if (race === 'bionex') {
+      if (lvl >= 55) return '/assets/bionex/shields/lv55bionexshielddef.png'
+      if (lvl >= 42) return '/assets/bionex/shields/lv42bionexshielddef.png'
+      if (lvl >= 30) return '/assets/bionex/shields/lv32bionexshielddef.png'
+      return '/assets/bionex/shields/lv1bionexshielddefault.png'
+    } else if (race === 'celestra') {
+      if (lvl >= 55) return '/assets/celestra/shields/lv55celesshielddef.png'
+      if (lvl >= 42) return '/assets/celestra/shields/lv42celesshielddef.png'
+      if (lvl >= 30) return '/assets/celestra/shields/lv32celesshielddef.png'
+      return '/assets/celestra/shields/lv1celesshielddefault.png'
+    } else {
+      // Arctron
+      if (lvl >= 55) return '/assets/arctron/shields/lv55arctronshielddef.png'
+      if (lvl >= 42) return '/assets/arctron/shields/lv42arctronshielddef.png'
+      if (lvl >= 30) return '/assets/arctron/shields/lv32arctronshielddef.png'
+      if (lvl >= 10) return '/assets/arctron/shields/lv10arctronshielddefault.png'
+      return '/assets/arctron/shields/lv1arctronshielddefault.png'
+    }
+  }
+  return item.image
+}
+
 export function verifyStarterShield(player) {
   if (!player || !player.race || player.level > 1) return player
   
@@ -91,7 +119,7 @@ export function verifyStarterShield(player) {
       race: "All",
       level: 1,
       bonus: { def: 12, hp: 120 },
-      image: "/assets/arctron_shield_starter_new_rembg.png",
+      image: "/assets/arctron/shields/lv1arctronshielddefault.png",
       enhancement_level: 0
     }
   } else if (player.race === 'bionex') {
@@ -105,7 +133,7 @@ export function verifyStarterShield(player) {
       race: "All",
       level: 1,
       bonus: { def: 12, hp: 120 },
-      image: "/assets/bionex_shield_1_rembg.png",
+      image: "/assets/bionex/shields/lv1bionexshielddefault.png",
       enhancement_level: 0
     }
   } else if (player.race === 'celestra') {
@@ -119,7 +147,7 @@ export function verifyStarterShield(player) {
       race: "All",
       level: 1,
       bonus: { def: 12, hp: 120 },
-      image: "/assets/celestra_shield_1_rembg.png",
+      image: "/assets/celestra/shields/lv1celesshielddefault.png",
       enhancement_level: 0
     }
   }

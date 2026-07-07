@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useGameStore, addToInventory } from '../store/gameStore'
+import { useGameStore, addToInventory, resolveItemImage } from '../store/gameStore'
 import races from '../data/races.json'
 import jobs from '../data/jobs.json'
 import itemsData from '../data/items.json'
@@ -814,8 +814,8 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                     {isEnhancing ? (
                       theme.weaponSmithSvg
                     ) : hasItem ? (
-                      item.image ? (
-                        <img referrerPolicy="no-referrer" src={item.image} style={{ width: 36, height: 36, objectFit: 'contain' }} alt={item.name} />
+                      resolveItemImage(item, player.race) ? (
+                        <img referrerPolicy="no-referrer" src={resolveItemImage(item, player.race)} style={{ width: 36, height: 36, objectFit: 'contain' }} alt={item.name} />
                       ) : null
                     ) : null}
                   </div>

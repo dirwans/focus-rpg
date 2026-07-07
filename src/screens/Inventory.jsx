@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useGameStore } from '../store/gameStore'
+import { useGameStore, resolveItemImage } from '../store/gameStore'
 import { t } from '../lib/translate'
 import arctronBagIcon from '../assets/arctron_bag_icon_rembg.png'
 import bionexBagIcon from '../assets/bionex_bag_icon_rembg.png'
@@ -125,8 +125,8 @@ export default function Inventory() {
                     }
                   }}
                 >
-                  {item.image ? (
-                    <img referrerPolicy="no-referrer" src={item.image} style={{ width: '92%', height: '92%', objectFit: 'contain', borderRadius: 2 }} alt={item.name} />
+                  {resolveItemImage(item, player.race) ? (
+                    <img referrerPolicy="no-referrer" src={resolveItemImage(item, player.race)} style={{ width: '92%', height: '92%', objectFit: 'contain', borderRadius: 2 }} alt={item.name} />
                   ) : item.emoji ? (
                     <span style={{ fontSize: '2rem' }}>{item.emoji}</span>
                   ) : (
@@ -508,8 +508,8 @@ export default function Inventory() {
                                     cursor: 'pointer'
                                   }}
                                 >
-                                  {item.image ? (
-                                    <img referrerPolicy="no-referrer" src={item.image} style={{ width: '80%', height: '80%', objectFit: 'contain' }} alt={item.name} />
+                                  {resolveItemImage(item, player.race) ? (
+                                    <img referrerPolicy="no-referrer" src={resolveItemImage(item, player.race)} style={{ width: '80%', height: '80%', objectFit: 'contain' }} alt={item.name} />
                                   ) : item.emoji ? (
                                     <span style={{ fontSize: 18 }}>{item.emoji}</span>
                                   ) : (

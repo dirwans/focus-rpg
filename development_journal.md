@@ -279,7 +279,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🛡️ Milestone 16: Starter Shields for All Factions [PENDING DEPLOYMENT]
+### 🛡️ Milestone 16: Starter Shields for All Factions [DEPLOYED]
 - **Factions Starter Shield Sprite Sheets Cropping**:
   - Wrote and executed `process_starter_shields.py` to crop the second mecha shield vertical sprite sheet into three distinct items, remove black backgrounds, and crop bounding boxes.
   - Saved outputs to both `src/assets` and `public/assets` as:
@@ -288,6 +288,31 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
     - `arctron_shield_starter_new_rembg.png` (Shield 3, replaces previous Arctron starter shield)
 - **Faction-Specific Initial Gear Rollout**:
   - Updated [CharacterCreate.jsx](file:///c:/projects/focus-rpg/src/components/CharacterCreate.jsx#L172-L215) so that newly created Level 1 characters of all factions (Celestra, Bionex, Arctron) are equipped with their respective faction's beginner shield by default upon starting an expedition.
+
+---
+
+### 🛡️ Milestone 17: Faction Tier Shields (Lv.32/42/55) Full Integration [PENDING DEPLOYMENT]
+- **Structured Asset Folders**:
+  - Created organised shield subfolders: `src/assets/{faction}/shields/` and `public/assets/{faction}/shields/` for arctron, bionex, celestra.
+- **Celestra & Bionex Tier Shields**:
+  - Ran `process_tier_shields.py` to crop 3 shield tiers (lv32, lv42, lv55) from uploaded mecha shield sprite sheet.
+  - Bionex shields: blue energy pixels recolored to **champagne gold**.
+  - Saved as: `lv32/42/55celesshielddef.png` and `lv32/42/55bionexshielddef.png`.
+  - Also copied lv1 starter shields for all factions to the new organized folder paths.
+- **Arctron Tier Shields**:
+  - Ran `process_arctron_tier_shields.py` to crop 3 shield tiers from uploaded purple Arctron shield sprite sheet.
+  - Purple AND blue energy pixels recolored to **red-orange** (Arctron faction color).
+  - Saved as: `lv32/42/55arctronshielddef.png`.
+- **Dynamic Image Resolution (`resolveItemImage`)**:
+  - Added `export function resolveItemImage(item, playerRace)` to [gameStore.js](file:///c:/projects/focus-rpg/src/store/gameStore.js) — maps any `arm_All_*` shield to faction+level-appropriate sprite at render time.
+  - Updated Arctron tiers in `resolveItemImage` to include lv32/42/55 new sprites.
+- **UI Integration**:
+  - [Inventory.jsx](file:///c:/projects/focus-rpg/src/screens/Inventory.jsx): Equipment slots + inventory grid now use `resolveItemImage`.
+  - [Cargo.jsx](file:///c:/projects/focus-rpg/src/screens/Cargo.jsx): Cargo slot, item list, and detail modal now use `resolveItemImage`.
+  - [NpcModal.jsx](file:///c:/projects/focus-rpg/src/components/NpcModal.jsx): Enchantment Master slot + Archon Shop list now use `resolveItemImage`.
+- **`verifyStarterShield` path update**:
+  - Updated starter shield image paths in `verifyStarterShield` to use new organized folder paths.
+
 
 
 

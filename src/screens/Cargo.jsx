@@ -1,6 +1,6 @@
 // v2: faction filter
 import { useState } from 'react'
-import { useGameStore } from '../store/gameStore'
+import { useGameStore, resolveItemImage } from '../store/gameStore'
 import { getWeaponRarityColor, getWeaponRarityDisplayName } from '../lib/rarity'
 import { t } from '../lib/translate'
 
@@ -144,8 +144,8 @@ export default function Cargo() {
         )}
         {item ? (
           <>
-            {item.image ? (
-              <img referrerPolicy="no-referrer" src={item.image} style={{ width: isSmall ? 32 : 56, height: isSmall ? 32 : 56, objectFit: 'contain' }} alt={item.name} />
+            {resolveItemImage(item, player.race) ? (
+              <img referrerPolicy="no-referrer" src={resolveItemImage(item, player.race)} style={{ width: isSmall ? 32 : 56, height: isSmall ? 32 : 56, objectFit: 'contain' }} alt={item.name} />
             ) : (
               <span style={{ fontSize: isSmall ? 22 : 36 }}>{item.emoji}</span>
             )}
@@ -426,8 +426,8 @@ export default function Cargo() {
                   onClick={() => setSelectedItem(item)}
                 >
                   <div style={styles.itemIcon}>
-                    {item.image ? (
-                      <img referrerPolicy="no-referrer" src={item.image} style={{ width: 34, height: 28, fontSize: 10, objectFit: 'contain' }} alt={item.name} />
+                    {resolveItemImage(item, player.race) ? (
+                      <img referrerPolicy="no-referrer" src={resolveItemImage(item, player.race)} style={{ width: 34, height: 28, fontSize: 10, objectFit: 'contain' }} alt={item.name} />
                     ) : (
                       item.emoji
                     )}
@@ -465,8 +465,8 @@ export default function Cargo() {
         <div style={styles.modalOverlay}>
           <div className="glass-panel" style={styles.modal}>
             <div style={{ ...styles.modalName, color: getItemColor(selectedItem), display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
-              {selectedItem.image ? (
-                <img referrerPolicy="no-referrer" src={selectedItem.image} style={{ width: 32, height: 32, objectFit: 'contain' }} alt={selectedItem.name} />
+              {resolveItemImage(selectedItem, player.race) ? (
+                <img referrerPolicy="no-referrer" src={resolveItemImage(selectedItem, player.race)} style={{ width: 32, height: 32, objectFit: 'contain' }} alt={selectedItem.name} />
               ) : (
                 <span>{selectedItem.emoji}</span>
               )}
