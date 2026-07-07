@@ -142,24 +142,24 @@ export function resolveItemImage(item, playerRace, playerJob) {
   if (item.type === 'shield' && item.id && item.id.startsWith('arm_All_')) {
     const lvl = item.level || 1
     const race = playerRace || 'arctron'
-    
+
     if (race === 'bionex') {
-      if (lvl >= 55) return '/assets/bionex/shields/lv55bionexshielddef.png'
-      if (lvl >= 42) return '/assets/bionex/shields/lv42bionexshielddef.png'
-      if (lvl >= 32) return '/assets/bionex/shields/lv32bionexshielddef.png'
-      return '/assets/bionex/shields/lv1bionexshielddefault.png'
+      if (lvl >= 55) return '/assets/bionex/shields/lv55bionexshielddef.png?v=2'
+      if (lvl >= 42) return '/assets/bionex/shields/lv42bionexshielddef.png?v=2'
+      if (lvl >= 32) return '/assets/bionex/shields/lv32bionexshielddef.png?v=2'
+      return '/assets/bionex/shields/lv1bionexshielddefault.png?v=2'
     } else if (race === 'celestra') {
-      if (lvl >= 55) return '/assets/celestra/shields/lv55celesshielddef.png'
-      if (lvl >= 42) return '/assets/celestra/shields/lv42celesshielddef.png'
-      if (lvl >= 32) return '/assets/celestra/shields/lv32celesshielddef.png'
-      return '/assets/celestra/shields/lv1celesshielddefault.png'
+      if (lvl >= 55) return '/assets/celestra/shields/lv55celesshielddef.png?v=2'
+      if (lvl >= 42) return '/assets/celestra/shields/lv42celesshielddef.png?v=2'
+      if (lvl >= 32) return '/assets/celestra/shields/lv32celesshielddef.png?v=2'
+      return '/assets/celestra/shields/lv1celesshielddefault.png?v=2'
     } else {
       // Arctron
-      if (lvl >= 55) return '/assets/arctron/shields/lv55arctronshielddef.png'
-      if (lvl >= 42) return '/assets/arctron/shields/lv42arctronshielddef.png'
-      if (lvl >= 32) return '/assets/arctron/shields/lv32arctronshielddef.png'
-      if (lvl >= 10) return '/assets/arctron/shields/lv10arctronshielddefault.png'
-      return '/assets/arctron/shields/lv1arctronshielddefault.png'
+      if (lvl >= 55) return '/assets/arctron/shields/lv55arctronshielddef.png?v=2'
+      if (lvl >= 42) return '/assets/arctron/shields/lv42arctronshielddef.png?v=2'
+      if (lvl >= 32) return '/assets/arctron/shields/lv32arctronshielddef.png?v=2'
+      if (lvl >= 10) return '/assets/arctron/shields/lv10arctronshielddefault.png?v=2'
+      return '/assets/arctron/shields/lv1arctronshielddefault.png?v=2'
     }
   }
   if (item.type === 'weapon') {
@@ -168,36 +168,36 @@ export function resolveItemImage(item, playerRace, playerJob) {
     const seed = item.uid || (item.id ? item.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) : 0)
 
     if (isCaster) {
-      if (lvl >= 55) return '/assets/weapons/defbioncelestralv55staff.png'
-      if (lvl >= 42) return '/assets/weapons/defbioncelestralv42staff.png'
-      if (lvl >= 32) return '/assets/weapons/defbioncelestralv32staff.png'
+      if (lvl >= 55) return '/assets/weapons/defbioncelestralv55staff.png?v=2'
+      if (lvl >= 42) return '/assets/weapons/defbioncelestralv42staff.png?v=2'
+      if (lvl >= 32) return '/assets/weapons/defbioncelestralv32staff.png?v=2'
       const index = (seed % 2) + 1
-      return `/assets/weapons/defbioncelestralv1staff${index}.png`
+      return `/assets/weapons/defbioncelestralv1staff${index}.png?v=2`
     }
 
     const isRanger = BOW_JOBS.includes(playerJob)
     if (isRanger) {
       // Celestra rangers (fantasy elf archers) use the bow; Arctron/Bionex (sci-fi) use the gun.
       const weaponKind = playerRace === 'celestra' ? 'bow' : 'gun'
-      if (lvl >= 55) return `/assets/weapons/defallfactionslv55${weaponKind}.png`
-      if (lvl >= 42) return `/assets/weapons/defallfactionslv42${weaponKind}.png`
-      if (lvl >= 32) return `/assets/weapons/defallfactionslv32${weaponKind}.png`
-      return `/assets/weapons/defallfactionslv1${weaponKind}.png`
+      if (lvl >= 55) return `/assets/weapons/defallfactionslv55${weaponKind}.png?v=2`
+      if (lvl >= 42) return `/assets/weapons/defallfactionslv42${weaponKind}.png?v=2`
+      if (lvl >= 32) return `/assets/weapons/defallfactionslv32${weaponKind}.png?v=2`
+      return `/assets/weapons/defallfactionslv1${weaponKind}.png?v=2`
     }
 
     // Arctron warrior/technician (its only remaining lineages — Arctron has no caster
     // class) get an exclusive gun at Lv.32+ instead of the generic axe.
     if (playerRace === 'arctron') {
-      if (lvl >= 55) return '/assets/weapons/defarctronlv55special.png'
-      if (lvl >= 42) return '/assets/weapons/defarctronlv42special.png'
-      if (lvl >= 32) return '/assets/weapons/defarctronlv32special.png'
+      if (lvl >= 55) return '/assets/weapons/defarctronlv55special.png?v=2'
+      if (lvl >= 42) return '/assets/weapons/defarctronlv42special.png?v=2'
+      if (lvl >= 32) return '/assets/weapons/defarctronlv32special.png?v=2'
     }
 
-    if (lvl >= 55) return '/assets/weapons/defallfactionslv55axe.png'
-    if (lvl >= 42) return '/assets/weapons/defallfactionslv42axe.png'
-    if (lvl >= 32) return '/assets/weapons/defallfactionslv32axe.png'
+    if (lvl >= 55) return '/assets/weapons/defallfactionslv55axe.png?v=2'
+    if (lvl >= 42) return '/assets/weapons/defallfactionslv42axe.png?v=2'
+    if (lvl >= 32) return '/assets/weapons/defallfactionslv32axe.png?v=2'
     const index = (seed % 4) + 1
-    return `/assets/weapons/defallfactionslv1sword${index}.png`
+    return `/assets/weapons/defallfactionslv1sword${index}.png?v=2`
   }
   // Bespoke default armor-set pieces (id namespace `*_armorset_*`, e.g.
   // `armor_armorset_arctron_lv1`) resolve dynamically by race/job/level tier;
