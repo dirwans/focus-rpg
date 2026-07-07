@@ -495,3 +495,25 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 - **races.json**: Added `dodgeBonus` field to each race's bonuses block, updated `strengths` text to advertise the `+2%` / `+5%` Base Evasion (ADR) advantages for Bionex and Celestra respectively.
 - **Verification**: Build passed. Deployed to VPS via `deploy.ps1`.
 
+
+---
+
+### 🖼️ Milestone 38: Bionex & Celestra Armor Sprites Upscale + Background Removal [PENDING DEPLOYMENT]
+- **Problem**: The 150 Bionex & Celestra armor sprites in `src/assets/armor_bionex/` and `src/assets/armor_celestra/` were raw scrape exports at 32×32 pixels with solid backgrounds — unusable at game display sizes.
+- **Pipeline** (`scratch/upscale_rembg_armor.py`): For each of 150 files:
+  1. **BFS background removal at 32×32** — flood fill from all 4 corners + edge midpoints (tolerance 35), seeds gather background color palette before filling. Pixel-art solid backgrounds removed cleanly.
+  2. **Scale2x (EPX) ×2**: 32→64→128px — pixel-art-aware edge smoothing that preserves clean hard edges instead of blurring them.
+  3. **PIL LANCZOS 128→320px** — smooth final upscale to match Arctron armor display size (~300–400px).
+- **Output**: 75 Celestra + 75 Bionex files overwritten in-place (both `public/` and `src/` copies). Transparent PNGs, 320×320.
+- **Code**: No changes needed — `resolveArmorSetImage` in `gameStore.js` already had correct paths (`/assets/armor_bionex/`, `/assets/armor_celestra/`), `ARMOR_SET_LINEAGES` already had all 3 lineages per faction, `items.json` already had all 150 `_armorset_` item entries (from Milestone 36).
+
+---
+
+### 🎨 Milestone 39: Arctron Ranger Lv.1 Armor Set Restored to Silver [PENDING DEPLOYMENT]
+- **Problem**: Previous recolor pass (Milestone 29) made the Lv.1 Ranger set too dark — full dark gunmetal, losing the white/silver base. User requested silver base with purple accent removed.
+- **Fix** (`scratch/restore_ranger_lv1_silver.py`): Working from the dark files, HSV-targeted restore:
+  - Blue-range pixels (hue 150–250°, the silver armor's cool-tone base): val ÷ 0.72 (reverse the prior darkening), saturation ×(0.08/0.18) — brings bright silver back
+  - Near-achromatic dark pixels (sat < 0.08, val < 0.7): val ÷ 0.82 — restores shadow details
+  - Purple-hued pixels (hue 250–310°): keep as light gray (val ×1.15 capped at 0.75, sat ×0.05) — stays desaturated/no-purple
+  - Gold-hued pixels (hue 35–70°): keep as gray (val ×1.1 capped at 0.70, sat ×0.05)
+- **Result**: White/silver mech base restored; purple orbs and gold accents remain suppressed as neutral gray. Set looks clearly Lv.1 "starter" without being dull. 5 files updated in `public/assets/armor/` and `src/assets/armor/`.
