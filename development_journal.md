@@ -512,9 +512,10 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 - **Issue**: The upscaled pixel art for Bionex and Celestra armor sets still looked too blocky and digital compared to the high-end painted style of Arctron gears.
 - **Solution**: Initiated a phased approach to regenerate the armor sets using AI generation (Gemini) strictly adhering to an "Anime Realistic Art" style while maintaining the core shapes, color palettes, and identity of the original RF Online armor pieces.
 - **Implementation**: 
-  - Completed **Bionex Warrior Level 1 Set** (Helmet/Bandana, Chest Armor, Pants, Gloves). Note: Helmet explicitly designed as a sci-fi bandana/headpiece, not a full helm.
-  - Replaced the old pixelated assets in `src/assets/armor_bionex/` with the new AI-generated HD masterpieces.
-- **Status**: First batch (Bionex Warrior Lv1) deployed. Further regeneration paused temporarily due to AI quota limits, to be continued later.
+  - Completed **Bionex Warrior Level 1 Set** (Helmet/Bandana, Chest Armor, Pants, Gloves, Boots).
+  - Completed **Celestra Warrior Level 1 Set** (Helmet/Circlet, Chest Armor, Pants, Gloves, Boots).
+  - Replaced the old pixelated assets in `src/assets/armor_bionex/` and `src/assets/armor_celestra/` with the new AI-generated HD masterpieces.
+- **Status**: First batch (Bionex & Celestra Warrior Lv1) deployed. Further regeneration paused temporarily due to AI quota limits, to be continued later.
 - **Code**: No changes needed — `resolveArmorSetImage` in `gameStore.js` already had correct paths (`/assets/armor_bionex/`, `/assets/armor_celestra/`), `ARMOR_SET_LINEAGES` already had all 3 lineages per faction, `items.json` already had all 150 `_armorset_` item entries (from Milestone 36).
 
 ---
