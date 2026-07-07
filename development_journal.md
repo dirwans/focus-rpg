@@ -534,7 +534,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🖼️ Milestone 40: Bionex & Celestra Armor Sprites — waifu2x Upscale (Placeholder) [PENDING DEPLOYMENT]
+### 🖼️ Milestone 40: Bionex & Celestra Armor Sprites — waifu2x Upscale (Placeholder) [DEPLOYED]
 - **Problem**: Previous Scale2x upscale pipeline (Milestone 38) produced visibly jagged/pixelated edges on the 32x32 source sprites. Classic AI upscalers (EDSR) produced worse results (blur artifacts, wrong for pixel art).
 - **Solution**: Switched to **waifu2x-ncnn-vulkan** (nihui, v20220728) — a GPU-accelerated upscaler specifically designed for anime/game pixel art. Ran on Intel UHD GPU via Vulkan.
 - **Pipeline** (`scratch/upscale_waifu2x.py`): Restore originals from git HEAD~1 → BFS background removal at 32×32 → waifu2x 4x (32→128, denoise=0) → LANCZOS 128→320. Both factions processed in ~7s each.
@@ -543,21 +543,21 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🔧 Milestone 41: verifyStarterArmorSet — Remove Level Guard + waifu2x Sprites Deploy [PENDING DEPLOYMENT]
+### 🔧 Milestone 41: verifyStarterArmorSet — Remove Level Guard + waifu2x Sprites Deploy [DEPLOYED]
 - **Bug**: `verifyStarterArmorSet` had `player.level > 1` guard that prevented existing characters (created before Milestone 28) from receiving their faction starter armor set. Only brand-new level-1 characters got the set.
 - **Fix**: Removed the `player.level > 1` check from `verifyStarterArmorSet` in `gameStore.js`. The `alreadyHasSet` guard (checks if any of the 5 armor slots already has an item) still prevents overwriting existing gear. Since `loadPlayer` already calls `verifyStarterArmorSet` on every save load, all existing bare characters will auto-receive their faction Lv.1 armor set on next login.
 - **Also included**: waifu2x upscaled sprites for all 150 Bionex & Celestra armor pieces (Milestone 40) — deployed together in this batch.
 
 ---
 
-### 🖼️ Milestone 42: Armor Slot Rendering Fix — Checkerboard Background Eliminated [PENDING DEPLOYMENT]
+### 🖼️ Milestone 42: Armor Slot Rendering Fix — Checkerboard Background Eliminated [DEPLOYED]
 - **Bug**: Bionex & Celestra armor set items (IDs containing `_armorset_`) were rendered with `imageRendering: 'pixelated'` (CSS nearest-neighbor). These items are now 320×320 waifu2x-upscaled PNGs (not pixel art), so nearest-neighbor downscaling from 320→~80px in the gear/inventory slots caused visible checkerboard/grid artifacts at transparent-to-opaque edges ("kotak2" as reported by user).
 - **Fix 1**: Removed conditional `imageRendering: pixelated` for `_armorset_` items across `Inventory.jsx` (3 occurrences) and `Cargo.jsx` (2 occurrences) — all set to `'auto'` (bilinear smoothing).
 - **Fix 2**: Ran `scratch/fill_armor_holes.py` — BFS flood from border to detect transparent pixels enclosed inside armor shapes (false holes from aggressive 32×32 BFS background removal). Filled 10 files: `defcelestramagelv1armor/boots/gloves/helmet/pants`, `defcelestramagelv42helmet`, `defcelestrawarriorlv1gloves/helmet`, `defbionexrangerlv42boots`, `defbionexwarriorlv55boots` (19,726 hole pixels total restored).
 
 ---
 
-### 📁 Milestone 43: Mage Armor Files — Three-Way Slot Rename (All Tiers, Both Factions) [PENDING DEPLOYMENT]
+### 📁 Milestone 43: Mage Armor Files — Three-Way Slot Rename (All Tiers, Both Factions) [DEPLOYED]
 - **Bug**: All celestra and bionex mage armor source files had their gloves/boots/pants PNG names swapped in a cycle: file named `gloves` contained boots art, file named `boots` contained pants art, file named `pants` contained gloves art. This made all three slots display wrong items in the gear tab.
 - **Scope**: All 5 tiers (lv1/32/42/55/66) × 2 factions (celestra + bionex) × 2 directories (public/ + src/) = 20 tier-sets renamed.
 - **Fix**: `scratch/fix_mage_naming.py` — three-way swap via temp file: `gloves→temp, pants→gloves, boots→pants, temp→boots`. The cycle `(gloves content=boots) → (boots content=pants) → (pants content=gloves)` is now corrected.
@@ -565,6 +565,13 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🖼️ Milestone 44: Bionex Warrior Lv.1 — Checker Background Removal [PENDING DEPLOYMENT]
+### 🖼️ Milestone 44: Bionex Warrior Lv.1 — Checker Background Removal [DEPLOYED]
 - **Bug**: Bionex warrior Lv.1 armor set (5 pieces: armor/helmet/gloves/boots/pants) had a photoshop-style gray checkerboard pattern baked in as actual opaque pixels (not transparency). The original source art was saved from a render app with the checker pattern as a background placeholder. The waifu2x BFS at 32×32 only caught one shade of gray (lighter squares, within tolerance 35) and left the darker checker squares as opaque, resulting in a visible "kotak2" background in the game.
 - **Fix**: `scratch/fix_checker_bg.py` — dual-seed BFS: collects all achromatic (R≈G≈B within 20) border pixel colors, then floods inward removing any border-connected pixel matching any seed color. Removed 590k–841k pixels per piece (5 large high-res render files, not the 32×32 pixel-art pipeline). All 5 files are now fully transparent outside the armor shape.
+
+---
+
+### 🔗 Milestone 45: Armor Image URL Cache-Busting (`?v=2`) [PENDING DEPLOYMENT]
+- **Root cause**: Milestone 43 renamed the CONTENT of armor PNG files (gloves.png now truly has gloves art, boots.png truly has boots art, etc.) but kept the same URLs. Browsers and PWA service workers had cached the old content under those URLs, so the rename was invisible until the user cleared cache.
+- **Fix**: Added `?v=2` query parameter to all `resolveArmorSetImage` return values in `src/store/gameStore.js`. This changes the URL for every armor-set image, forcing all browsers/PWAs to fetch fresh content regardless of their cached version of the previous URL.
+- **Applies to**: All bionex + celestra armor set pieces (`armor_bionex/`, `armor_celestra/`, and `armor/` fallback).
