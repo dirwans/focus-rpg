@@ -498,7 +498,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🖼️ Milestone 38: Bionex & Celestra Armor Sprites Upscale + Background Removal [PENDING DEPLOYMENT]
+### 🖼️ Milestone 38: Bionex & Celestra Armor Sprites Upscale + Background Removal [DEPLOYED]
 - **Problem**: The 150 Bionex & Celestra armor sprites in `src/assets/armor_bionex/` and `src/assets/armor_celestra/` were raw scrape exports at 32×32 pixels with solid backgrounds — unusable at game display sizes.
 - **Pipeline** (`scratch/upscale_rembg_armor.py`): For each of 150 files:
   1. **BFS background removal at 32×32** — flood fill from all 4 corners + edge midpoints (tolerance 35), seeds gather background color palette before filling. Pixel-art solid backgrounds removed cleanly.
@@ -509,7 +509,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 39: Arctron Ranger Lv.1 Armor Set Restored to Silver [PENDING DEPLOYMENT]
+### 🎨 Milestone 39: Arctron Ranger Lv.1 Armor Set Restored to Silver [DEPLOYED]
 - **Problem**: Previous recolor pass (Milestone 29) made the Lv.1 Ranger set too dark — full dark gunmetal, losing the white/silver base. User requested silver base with purple accent removed.
 - **Fix** (`scratch/restore_ranger_lv1_silver.py`): Working from the dark files, HSV-targeted restore:
   - Blue-range pixels (hue 150–250°, the silver armor's cool-tone base): val ÷ 0.72 (reverse the prior darkening), saturation ×(0.08/0.18) — brings bright silver back
@@ -517,3 +517,12 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - Purple-hued pixels (hue 250–310°): keep as light gray (val ×1.15 capped at 0.75, sat ×0.05) — stays desaturated/no-purple
   - Gold-hued pixels (hue 35–70°): keep as gray (val ×1.1 capped at 0.70, sat ×0.05)
 - **Result**: White/silver mech base restored; purple orbs and gold accents remain suppressed as neutral gray. Set looks clearly Lv.1 "starter" without being dull. 5 files updated in `public/assets/armor/` and `src/assets/armor/`.
+
+---
+
+### 🖼️ Milestone 40: Bionex & Celestra Armor Sprites — waifu2x Upscale (Placeholder) [PENDING DEPLOYMENT]
+- **Problem**: Previous Scale2x upscale pipeline (Milestone 38) produced visibly jagged/pixelated edges on the 32x32 source sprites. Classic AI upscalers (EDSR) produced worse results (blur artifacts, wrong for pixel art).
+- **Solution**: Switched to **waifu2x-ncnn-vulkan** (nihui, v20220728) — a GPU-accelerated upscaler specifically designed for anime/game pixel art. Ran on Intel UHD GPU via Vulkan.
+- **Pipeline** (`scratch/upscale_waifu2x.py`): Restore originals from git HEAD~1 → BFS background removal at 32×32 → waifu2x 4x (32→128, denoise=0) → LANCZOS 128→320. Both factions processed in ~7s each.
+- **Status**: Kept as **placeholder** — user plans to regenerate sprites via a dedicated AI image generator ("Nano Banana Pro") for higher quality results matching Arctron's smooth render style. These waifu2x versions are an improvement over raw Scale2x in the meantime.
+- **Files updated**: 150 files across `public/assets/armor_bionex/` and `public/assets/armor_celestra/` (src copies too).
