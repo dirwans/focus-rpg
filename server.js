@@ -598,31 +598,72 @@ app.post('/api/pvp/battle', async (req, res) => {
   const p2Save = loadSave(p2Name)
   if (!p1Save || !p2Save) return res.status(404).json({ error: 'players not found' })
 
-  const p1Stat = p1Save.stats || { hp: 100, atk: 10, def: 5 }
-  const p2Stat = p2Save.stats || { hp: 100, atk: 10, def: 5 }
+  const p1Stat = p1Save.stats || { hp: 100, atk: 10, def: 5, meleeAtk: 10, rangedAtk: 10, forceAtk: 10, evasion: 0, crit: 0 }
+  const p2Stat = p2Save.stats || { hp: 100, atk: 10, def: 5, meleeAtk: 10, rangedAtk: 10, forceAtk: 10, evasion: 0, crit: 0 }
 
-  const p1_dmg = Math.max(1, p1Stat.atk - p2Stat.def)
-  const p2_dmg = Math.max(1, p2Stat.atk - p1Stat.def)
+  // Use the highest specific attack stat to simulate their class strength
+  const p1_activeAtk = Math.max(p1Stat.atk || 0, p1Stat.meleeAtk || 0, p1Stat.rangedAtk || 0, p1Stat.forceAtk || 0)
+  const p2_activeAtk = Math.max(p2Stat.atk || 0, p2Stat.meleeAtk || 0, p2Stat.rangedAtk || 0, p2Stat.forceAtk || 0)
 
-  const p1_turns = Math.ceil(p2Stat.hp / p1_dmg)
-  const p2_turns = Math.ceil(p1Stat.hp / p2_dmg)
+  // Basic damage
+  let p1_dmg = Math.max(1, p1_activeAtk - (p2Stat.def || 0))
+  let p2_dmg = Math.max(1, p2_activeAtk - (p1Stat.def || 0))
+  
+  let log = []
+  
+  // RNG for Miss (Evasion) and Crit
+  const p1MissChance = Math.max(0, Math.min(0.7, (p2Stat.evasion || 0))) // Max 70% miss chance
+  const p2MissChance = Math.max(0, Math.min(0.7, (p1Stat.evasion || 0)))
+  
+  let p1Hit = Math.random() > p1MissChance
+  let p2Hit = Math.random() > p2MissChance
+  
+  if (!p1Hit) {
+    p1_dmg = 0
+    log.push(`${p1Name} attacks but ${p2Name} dodged! (Miss)`)
+  } else if (Math.random() < (p1Stat.crit || 0.05)) {
+    p1_dmg = Math.floor(p1_dmg * 1.5)
+    log.push(`${p1Name} lands a CRITICAL hit! Deals ${p1_dmg} damage.`)
+  } else {
+    log.push(`${p1Name} attacks! Deals ${p1_dmg} damage.`)
+  }
+  
+  if (!p2Hit) {
+    p2_dmg = 0
+    log.push(`${p2Name} attacks but ${p1Name} dodged! (Miss)`)
+  } else if (Math.random() < (p2Stat.crit || 0.05)) {
+    p2_dmg = Math.floor(p2_dmg * 1.5)
+    log.push(`${p2Name} lands a CRITICAL hit! Deals ${p2_dmg} damage.`)
+  } else {
+    log.push(`${p2Name} attacks! Deals ${p2_dmg} damage.`)
+  }
+
+  // To prevent infinite loops if both miss, give 1 min dmg if turns go too long,
+  // but for simple calculation, we'll use average DPS over time to find turns.
+  const p1_dps = p1_activeAtk * (1.0 + (p1Stat.crit || 0.05) * 0.5) * (1.0 - p1MissChance)
+  const p2_dps = p2_activeAtk * (1.0 + (p2Stat.crit || 0.05) * 0.5) * (1.0 - p2MissChance)
+  
+  const p1_eff_dmg = Math.max(1, p1_dps - (p2Stat.def || 0))
+  const p2_eff_dmg = Math.max(1, p2_dps - (p1Stat.def || 0))
+
+  const p1_turns = Math.ceil((p2Stat.hp || 1) / p1_eff_dmg)
+  const p2_turns = Math.ceil((p1Stat.hp || 1) / p2_eff_dmg)
 
   const p1_wins = p1_turns <= p2_turns
 
   p1Save.cp = p1Save.cp || 1000
   p2Save.cp = p2Save.cp || 1000
 
-  let log = []
   if (p1_wins) {
     p1Save.cp += 20
     p2Save.cp -= 10
     p1Save.resources = p1Save.resources || { crd: 0 }
     p1Save.resources.crd += 1500
-    log = [`${p1Name} attacks! Deals ${p1_dmg} damage.`, `${p2Name} attacks! Deals ${p2_dmg} damage.`, `${p1Name} overpowers ${p2Name} in ${p1_turns} rounds!`]
+    log.push(`${p1Name} overpowers ${p2Name} in approx ${p1_turns} rounds!`)
   } else {
     p1Save.cp -= 10
     p2Save.cp += 15
-    log = [`${p1Name} attacks! Deals ${p1_dmg} damage.`, `${p2Name} attacks! Deals ${p2_dmg} damage.`, `${p1Name} was crushed by ${p2Name} in ${p2_turns} rounds!`]
+    log.push(`${p1Name} was crushed by ${p2Name} in approx ${p2_turns} rounds!`)
   }
 
   p2Save.cp = Math.max(0, p2Save.cp)
@@ -648,7 +689,13 @@ app.get('/api/pvp/war', (req, res) => {
   users.forEach(u => {
     const sv = loadSave(u.username)
     if (!sv || !sv.race || !sv.stats) return
-    const power = sv.stats.hp + sv.stats.atk + sv.stats.def
+    
+    // Consider dynamic stats for total power
+    const atk = Math.max(sv.stats.atk || 0, sv.stats.meleeAtk || 0, sv.stats.rangedAtk || 0, sv.stats.forceAtk || 0)
+    const evasionScore = (sv.stats.evasion || 0) * 100000 // Evasion is 0.0-1.0
+    const critScore = (sv.stats.crit || 0) * 100000
+    const power = (sv.stats.hp || 0) + atk + (sv.stats.def || 0) + evasionScore + critScore
+    
     if (scores[sv.race] !== undefined) {
       scores[sv.race] += power
     }
@@ -896,8 +943,11 @@ app.get('/api/chip-war', (req, res) => {
 })
 
 app.post('/api/chip-war/attack', (req, res) => {
+  const s = requireSession(req, res)
+  if (!s) return
+
   checkChipWarReset()
-  const { towerId, attackPower } = req.body
+  const { towerId } = req.body
   const window = getNextWarWindow()
 
   if (window.phase !== 'active') {
@@ -907,6 +957,17 @@ app.post('/api/chip-war/attack', (req, res) => {
   if (!chipWarData.towers[towerId]) {
     return res.status(400).json({ error: 'Invalid tower' })
   }
+
+  const sv = loadSave(s.username)
+  if (!sv || !sv.stats) {
+    return res.status(400).json({ error: 'Player stats not found' })
+  }
+
+  // Calculate actual DPS based on saved stats
+  const activeAtk = Math.max(sv.stats.atk || 0, sv.stats.meleeAtk || 0, sv.stats.rangedAtk || 0, sv.stats.forceAtk || 0)
+  const critMult = 1.0 + (sv.stats.crit || 0.05) * 0.5
+  // Tower doesn't evade, but let's just use raw DPS calculation
+  const attackPower = Math.floor(activeAtk * critMult * 2.0) // 2x multiplier for Chip War scaling
 
   const tower = chipWarData.towers[towerId]
   const hpPct = tower.hp / tower.maxHp
@@ -921,7 +982,7 @@ app.post('/api/chip-war/attack', (req, res) => {
   tower.hp = Math.max(0, tower.hp - actualDmg)
 
   // Track per-player damage
-  const username = req.session?.username || 'unknown'
+  const username = s.username
   if (!chipWarData.damage[username]) {
     chipWarData.damage[username] = { arctron: 0, bionex: 0, celestra: 0 }
   }

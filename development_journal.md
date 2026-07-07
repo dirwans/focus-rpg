@@ -514,11 +514,20 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 - **Implementation**: 
   - Completed **Bionex Warrior Level 1 Set** (Helmet/Bandana, Chest Armor, Pants, Gloves, Boots).
   - Completed **Celestra Warrior Level 1 Set** (Helmet/Circlet, Chest Armor, Pants, Gloves, Boots).
+  - Completed **Celestra Mage (Spiritualist) Level 1 Set** (Helmet/Circlet, Upper Robe, Lower Robe/Pants, Gloves, Boots).
   - Replaced the old pixelated assets in `src/assets/armor_bionex/` and `src/assets/armor_celestra/` with the new AI-generated HD masterpieces.
 - **Status**: First batch (Bionex & Celestra Warrior Lv1) deployed. Further regeneration paused temporarily due to AI quota limits, to be continued later.
 - **Code**: No changes needed — `resolveArmorSetImage` in `gameStore.js` already had correct paths (`/assets/armor_bionex/`, `/assets/armor_celestra/`), `ARMOR_SET_LINEAGES` already had all 3 lineages per faction, `items.json` already had all 150 `_armorset_` item entries (from Milestone 36).
 
 ---
+
+### ⚔️ Milestone 40: Combat Math Overhaul (PvE, PvP, & Chip War) [PENDING DEPLOYMENT]
+- **Issue**: The combat mechanics completely ignored weapon stats (`meleeAtk`, `rangedAtk`, `forceAtk`) and race bonuses like `Evasion` (Dodge Rate) and `Crit`. PvE Offline progression only used base `atk` upgrades, and PvP/Chip War used raw stats blindly, making all equipment and job choices meaningless in battle. Furthermore, `api/chip-war/attack` blindly trusted client's `attackPower` input.
+- **Solution**: 
+  - **PvE (`gameStore.js`)**: Updated `computeRewards` to call `get().getStats()` and calculate DPS using active weapon type attacks (`meleeAtk`/`rangedAtk`/`forceAtk`), Evasion, and Critical Rate.
+  - **PvP (`server.js`)**: Updated `/api/pvp/battle` to calculate actual Evasion (Miss Chance) and Critical hits based on RNG, making PvP dynamic. 
+  - **Chip War (`server.js`)**: Secured `/api/chip-war/attack` to calculate DPS on the server-side from `loadSave(s.username).stats`, preventing one-shot client injection exploits. Updated power rating math in `/api/pvp/war` to include evasion and crit scores.
+- **Status**: Code implemented. Deployment pending (Rule: min 5 modifications before deployment).---
 
 ### 🎨 Milestone 39: Arctron Ranger Lv.1 Armor Set Restored to Silver [DEPLOYED]
 - **Problem**: Previous recolor pass (Milestone 29) made the Lv.1 Ranger set too dark — full dark gunmetal, losing the white/silver base. User requested silver base with purple accent removed.

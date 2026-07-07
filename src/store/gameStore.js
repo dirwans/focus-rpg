@@ -472,7 +472,7 @@ function getDropTier(seed, mode, isStageBoss) {
 }
 
 // Reward DETERMINISTIK berdasar lama waktu + stats → semua device hitung sama
-function computeRewards(player, mode, minutes, selectedZone = 'world') {
+function computeRewards(player, stats, mode, minutes, selectedZone = 'world') {
   const race = races[player.race]
   if (!race) return { kills: 0, exp: 0, crd: 0, credits: 0 }
   const elapsedSec = Math.max(0, Math.floor(minutes * 60))
@@ -484,8 +484,19 @@ function computeRewards(player, mode, minutes, selectedZone = 'world') {
     const avgHp = dungeon.boss.hp
     const avgDef = dungeon.boss.def
     
-    const atk = calcStat('atk', player.upgrades?.atk || 0, player.race)
-    const dps = Math.max(1, atk - avgDef + 3.5) * 1.096
+    // Use actual stats from getStats()
+    const group = getPlayerClassGroup(player.job, player.race)
+    let activeAtk = stats.atk
+    if (group === 'warrior') activeAtk = stats.meleeAtk
+    else if (group === 'ranger') activeAtk = stats.rangedAtk
+    else if (group === 'mage') activeAtk = stats.forceAtk
+    else activeAtk = Math.max(stats.meleeAtk, stats.rangedAtk)
+
+    // Calculate Hit Rate (vs 5% base enemy dodge)
+    const hitRate = Math.min(1.0, 0.95 + (stats.evasion || 0))
+    // Calculate average damage per hit
+    const critMult = 1.0 + (stats.crit * 0.5) // Crits deal 1.5x
+    const dps = Math.max(1, activeAtk - avgDef) * critMult * hitRate
     const secPerKill = Math.max(2, avgHp / dps)
     const kills = Math.floor(elapsedSec / secPerKill)
 
@@ -526,8 +537,18 @@ function computeRewards(player, mode, minutes, selectedZone = 'world') {
     avgDef = avg((m) => m.def)
     avgAni = avg((m) => m.crdReward) * 1.2
   }
-  const atk = calcStat('atk', player.upgrades?.atk || 0, player.race)
-  const dps = Math.max(1, atk - avgDef + 3.5) * 1.096 // ~rata2 crit/variance
+  
+  // Use actual stats from getStats()
+  const group = getPlayerClassGroup(player.job, player.race)
+  let activeAtk = stats.atk
+  if (group === 'warrior') activeAtk = stats.meleeAtk
+  else if (group === 'ranger') activeAtk = stats.rangedAtk
+  else if (group === 'mage') activeAtk = stats.forceAtk
+  else activeAtk = Math.max(stats.meleeAtk, stats.rangedAtk)
+
+  const hitRate = Math.min(1.0, 0.95 + (stats.evasion || 0))
+  const critMult = 1.0 + (stats.crit * 0.5)
+  const dps = Math.max(1, activeAtk - avgDef) * critMult * hitRate
   const secPerKill = Math.max(2, avgHp / dps)
   const kills = Math.floor(elapsedSec / secPerKill)
 
@@ -1706,7 +1727,7 @@ export const useGameStore = create(
         else get()._gatherTick()
         // reward DETERMINISTIK (sama di semua device) — override angka cosmetic
         const total = timer.selectedMinutes * 60
-        const r = computeRewards(player, timer.mode, (total - remaining) / 60, timer.selectedZone)
+        const r = computeRewards(player, get().getStats(), timer.mode, (total - remaining) / 60, timer.selectedZone)
 
         // Apply death penalties
         const deaths = battle.deaths || 0
@@ -2170,7 +2191,7 @@ export const useGameStore = create(
         const { player, timer, battle } = get()
         if (timer.state !== 'running') return // hindari double-complete (sudah completed via sync)
 
-        const r = computeRewards(player, timer.mode || 'fight', timer.selectedMinutes, timer.selectedZone)
+        const r = computeRewards(player, get().getStats(), timer.mode || 'fight', timer.selectedMinutes, timer.selectedZone)
         const today = new Date().toDateString()
         const isNewDay = player.lastSessionDate !== today
         const newStreak = isNewDay ? player.streak + 1 : player.streak
