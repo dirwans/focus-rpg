@@ -246,7 +246,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ### 🎒 Milestone 14: Bag Level Gates Calibration
 - **Custom level bracket limits**:
-  - Automatically unlocks 2 bags for free at levels 1 - 31.
+  - Automatically unlocks 2 bags for free at levels 1 - 32.
   - Level 42: Unlocks bag 3 (making 3 bags / 75 slots).
   - Level 55: Unlocks bag 4 (making 4 bags / 100 slots).
   - Level 66: Unlocks bag 5 (making 5 bags / 125 slots / full base bags).
