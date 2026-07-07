@@ -278,11 +278,17 @@ export function verifyStarterShield(player) {
 }
 
 export function verifyStarterWeapon(player) {
-  if (!player || !player.race || !player.job || player.level > 1) return player
-  
-  // Check if they already have any weapon (checks equipment or inventory for weapon item)
-  const hasWeapon = !!(player.equipment?.weapon || player.inventory.some(i => i.type === 'weapon'))
-  if (hasWeapon) return player
+  if (!player || !player.race || !player.job) return player
+
+  const eq = player.equipment || {}
+  if (eq.weapon) return player
+
+  // If an old-style grant already left an unequipped weapon sitting in the bag,
+  // equip that instead of minting a duplicate.
+  const existingWeapon = (player.inventory || []).find((i) => i.type === 'weapon')
+  if (existingWeapon) {
+    return { ...player, equipment: { ...eq, weapon: existingWeapon } }
+  }
 
   const isCaster = STAFF_JOBS.includes(player.job)
   const isRanger = BOW_JOBS.includes(player.job)
@@ -318,7 +324,7 @@ export function verifyStarterWeapon(player) {
     const newWeapon = { ...weaponDef, uid: Date.now() + 99, enhancement_level: 0 }
     return {
       ...player,
-      inventory: [...(player.inventory || []), newWeapon]
+      equipment: { ...eq, weapon: newWeapon }
     }
   }
   return player

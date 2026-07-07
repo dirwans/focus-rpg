@@ -18519,7 +18519,7 @@
       "rarity": "D",
       "type": "weapon",
       "race": "celestra",
-      "job": "mystic_archer",
+      "job": ["pathfinder", "windrunner", "shadow_hunter", "stargazer"],
       "level": 1,
       "bonus": {
         "atk": 75
@@ -18534,7 +18534,7 @@
       "rarity": "C",
       "type": "weapon",
       "race": "celestra",
-      "job": "mystic_archer",
+      "job": ["pathfinder", "windrunner", "shadow_hunter", "stargazer"],
       "level": 1,
       "bonus": {
         "atk": 90
@@ -18549,7 +18549,7 @@
       "rarity": "B",
       "type": "weapon",
       "race": "celestra",
-      "job": "mystic_archer",
+      "job": ["pathfinder", "windrunner", "shadow_hunter", "stargazer"],
       "level": 1,
       "bonus": {
         "atk": 112
@@ -18564,7 +18564,7 @@
       "rarity": "A",
       "type": "weapon",
       "race": "celestra",
-      "job": "mystic_archer",
+      "job": ["pathfinder", "windrunner", "shadow_hunter", "stargazer"],
       "level": 1,
       "bonus": {
         "atk": 150
@@ -18579,7 +18579,7 @@
       "rarity": "S",
       "type": "weapon",
       "race": "celestra",
-      "job": "mystic_archer",
+      "job": ["pathfinder", "windrunner", "shadow_hunter", "stargazer"],
       "level": 1,
       "bonus": {
         "atk": 225
@@ -18594,7 +18594,7 @@
       "rarity": "SS",
       "type": "weapon",
       "race": "celestra",
-      "job": "mystic_archer",
+      "job": ["pathfinder", "windrunner", "shadow_hunter", "stargazer"],
       "level": 1,
       "bonus": {
         "atk": 337
@@ -18609,7 +18609,7 @@
       "rarity": "SSS",
       "type": "weapon",
       "race": "celestra",
-      "job": "mystic_archer",
+      "job": ["pathfinder", "windrunner", "shadow_hunter", "stargazer"],
       "level": 1,
       "bonus": {
         "atk": 525
@@ -18624,7 +18624,7 @@
       "rarity": "SR",
       "type": "weapon",
       "race": "celestra",
-      "job": "mystic_archer",
+      "job": ["pathfinder", "windrunner", "shadow_hunter", "stargazer"],
       "level": 1,
       "bonus": {
         "atk": 750
@@ -18639,7 +18639,7 @@
       "rarity": "SSR",
       "type": "weapon",
       "race": "celestra",
-      "job": "mystic_archer",
+      "job": ["pathfinder", "windrunner", "shadow_hunter", "stargazer"],
       "level": 1,
       "bonus": {
         "atk": 1125
@@ -18654,7 +18654,7 @@
       "rarity": "UR",
       "type": "weapon",
       "race": "celestra",
-      "job": "mystic_archer",
+      "job": ["pathfinder", "windrunner", "shadow_hunter", "stargazer"],
       "level": 1,
       "bonus": {
         "atk": 1875
