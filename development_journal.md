@@ -315,7 +315,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🛡️ Milestone 18: Faction Sword Sprites (Lv.1/32/42/55) & Inventory UI Polish [PENDING DEPLOYMENT]
+### 🛡️ Milestone 18: Faction Sword Sprites (Lv.1/32/42/55) & Inventory UI Polish [DEPLOYED]
 - **Inventory UX Polish**:
   - stretched width (removed `maxWidth: 320` from equipment slots, bag tabs, and bag drawer) for a responsive layout in [Inventory.jsx](file:///c:/projects/focus-rpg/src/screens/Inventory.jsx).
   - Unlocked bags (Level 66 has all 5 bags unlocked) now properly display the faction-specific bag icons rather than just numbers.
@@ -333,6 +333,49 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 - **Bug**: Promoting a job (e.g. Destroyer → Vanguard → Juggernaut) did not change the character sprite shown on the CHARACTER navtab — `getJobLane()` in [PilotSprites.jsx](file:///c:/projects/focus-rpg/src/components/PilotSprites.jsx) only grouped jobs into 4 broad lanes (warrior/ranger/mystic/specialist) with one static image per lane, so all tiers within a lane displayed the same tier-1 art.
 - **Fix**: Confirmed the correct lane sprite already resolves properly per selected class/job (no per-tier art assets exist yet — those are being made separately by the user as proper armor/weapon assets). Removed a temporary CSS-only gold-glow/frame placeholder effect that had been added as a stand-in for missing tier art, since it wasn't wanted and real tier art is coming.
 - Verified in-browser: promoting Arctron Destroyer (tier1) → Vanguard (tier2) → Juggernaut (tier3) correctly displays the matching lane sprite with no extraneous border/glow decoration.
+
+---
+
+### ⚔️ Milestone 20: Def Weapon Assets — Axe Tiers & Bionex/Celestra Staffs [PENDING DEPLOYMENT]
+- **All-Faction Axe (Lv.32/42/55)**:
+  - Processed a 3-panel reference sheet (green/blue/orange axe) with a tight near-black threshold + border-connected component labeling (to avoid eating the weapon's own dark recessed shading) + soft-alpha transition + color decontamination.
+  - Saved as `defallfactionslv32axe.png` / `defallfactionslv42axe.png` / `defallfactionslv55axe.png` in `src/assets/weapons/` and `public/assets/weapons/`, resized to ~480px max dimension to match existing tier-shield asset sizes.
+- **Bionex/Celestra-only Staff (Lv.1)**:
+  - Processed a 2-panel reference sheet (blue crystal staff, gold/winged staff) the same way, split into 2 files.
+  - Saved as `defbioncelestralv1staff1.png` (blue) / `defbioncelestralv1staff2.png` (gold) — **Arctron cannot use this weapon type**, intended for Bionex & Celestra Lv.1 mage/psion/summoner classes only.
+- **Bionex/Celestra-only Staff Tiers (Lv.32/42/55)**:
+  - Processed a second 3-panel reference sheet (gold Lv.32, crimson-red Lv.42, green Lv.55) with the same tight near-black threshold technique.
+  - Saved as `defbioncelestralv32staff.png` / `defbioncelestralv42staff.png` / `defbioncelestralv55staff.png` in `src/assets/weapons/` and `public/assets/weapons/`, resized to ~480px max dimension.
+- **Not yet wired up**: `resolveItemImage` in [gameStore.js](file:///c:/projects/focus-rpg/src/store/gameStore.js) still only distinguishes weapon sprites by level, not by weapon type (sword vs axe vs staff) — this logic still needs to be added before these assets actually appear in-game. Held per the 5-modification deploy threshold; more def-weapon assets are expected before the next deploy batch.
+
+---
+
+### 🔒 Milestone 21: Multi-Race/Job Equip Restriction Support [PENDING DEPLOYMENT]
+- **Rule**: Staff-type weapons (free or paid) are restricted to Celestra (Mage: arcanist/rune_caster/mystic/archmage, Summoner: oracle/celestial_oracle/conjurer/divine_summoner) and Bionex (Psion: psion/esper/ascendant/transcendent) classes only. Arctron cannot equip staffs on any class/job.
+- **`equipItem` (`gameStore.js`)**: Generalized the existing single-value `item.race` and `item.job` equip-lock checks to also accept **arrays** (`Array.isArray` check, backward-compatible with all existing single-string entries) — e.g. `"race": ["bionex","celestra"]` and `"job": ["psion","esper","arcanist",...]` now both work, so one weapon item can be restricted to multiple races and multiple specific job lineages simultaneously instead of just one of each.
+- Verified `npm run build` passes. Actual staff item entries (rarity/pricing) in `items.json` are still separate follow-up work (deferred — default/free gear takes priority).
+
+---
+
+### 🪄 Milestone 22: Default Weapon Sprite Now Sword/Axe/Staff-Aware [PENDING DEPLOYMENT]
+- **Fix**: `resolveItemImage` in [gameStore.js](file:///c:/projects/focus-rpg/src/store/gameStore.js) now takes a third `playerJob` argument and branches on a `STAFF_JOBS` lineage list (Celestra Mage + Summoner, Bionex Psion) — caster jobs get the Bionex/Celestra staff sprite at their level (Lv.1 picks 1 of 2 variants, Lv.32/42/55 use the exact tier); every other job (including all of Arctron, which has no caster lineage) gets the Lv.1 sword (1 of 4 variants) or the Lv.32/42/55 axe. Previously every weapon-type item showed the sword sprite regardless of job.
+- Updated all 9 call sites (`Cargo.jsx` ×3, `Inventory.jsx` ×3, `NpcModal.jsx` ×1 pair) to pass `player.job` alongside `player.race`.
+- Verified with a direct logic replication of the shipped branch (all 7 test cases — caster Lv.1/32/55 → staff, non-caster Lv.1/42 → sword/axe, summoner → staff) resolved to the correct existing asset files in `public/assets/weapons/`. `npm run build` passes.
+
+---
+
+### 🏹 Milestone 23: All-Faction Ranger Bow (Lv.1/32/42/55) [PENDING DEPLOYMENT]
+- **Assets**: Processed a 4-panel reference sheet (light-blue Lv.55, dark-blue Lv.42, red Lv.32, green/gold Lv.1 — bottom-to-top increasing level, opposite ordering from the axe/staff sheets) with the same background-removal technique. Saved as `defallfactionslv1bow.png` / `defallfactionslv32bow.png` / `defallfactionslv42bow.png` / `defallfactionslv55bow.png` in `src/assets/weapons/` and `public/assets/weapons/`, ~480px max dimension.
+- **Eligibility**: Usable by the Ranger/agility-ranged-attacker lineage across **all 3 factions** — added a `BOW_JOBS` list to `resolveItemImage` in [gameStore.js](file:///c:/projects/focus-rpg/src/store/gameStore.js) (Arctron: gunner/marksman/railgunner/annihilator, Bionex: marksman/revenant/deadeye/predator, Celestra: pathfinder/windrunner/shadow_hunter/stargazer). Ranger-lineage jobs now get the bow sprite at their level instead of sword/axe; caster lineage still takes priority for staff (the two lists are disjoint, no overlap).
+- Verified via the same direct logic-replication method (gunner/marksman/railgunner/pathfinder/shadow_hunter → bow at correct tier; casters still → staff; warriors still → sword/axe) and confirmed all 4 bow asset files exist. `npm run build` passes.
+
+---
+
+### 🔫 Milestone 24: Sci-Fi Gun for Arctron/Bionex Rangers (Lv.1/32/42/55) [PENDING DEPLOYMENT]
+- **Assets**: Processed a 4-panel sci-fi rifle/pistol reference sheet (white/yellow assault rifle Lv.55, blue/white sniper rifle Lv.42, blue plasma rifle Lv.32, gold/blue pistol Lv.1 — bottom-to-top increasing level). Needed a stronger hole-fill pass this time (`min_hole_size` threshold on enclosed same-color components, not just border-connected ones) to correctly punch through trigger-guard gaps that the standard border-connected removal missed — first attempt at a low size threshold over-corrected and ate legitimate panel-line shading, tuned up to 200px minimum to fix.
+- Saved as `defallfactionslv1gun.png` / `defallfactionslv32gun.png` / `defallfactionslv42gun.png` / `defallfactionslv55gun.png` in `src/assets/weapons/` and `public/assets/weapons/`, ~480px max dimension.
+- **Eligibility split by race, not just job**: Same `BOW_JOBS` ranger-lineage list as Milestone 23, but `resolveItemImage` now also branches on `playerRace` — **Celestra** rangers (fantasy elf archers) keep the **bow**, **Arctron/Bionex** rangers (sci-fi factions) get the **gun** instead, at the same level tier. User's explicit choice via AskUserQuestion ("Beda per faction") over alternatives (replace bow entirely, or random variety).
+- Verified via direct logic-replication (arctron/bionex ranger jobs → gun at all 4 tiers, celestra ranger jobs → bow at all 4 tiers) and confirmed all 4 gun asset files exist. `npm run build` passes.
 
 
 

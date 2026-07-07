@@ -814,8 +814,8 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                     {isEnhancing ? (
                       theme.weaponSmithSvg
                     ) : hasItem ? (
-                      resolveItemImage(item, player.race) ? (
-                        <img referrerPolicy="no-referrer" src={resolveItemImage(item, player.race)} style={{ width: 36, height: 36, objectFit: 'contain' }} alt={item.name} />
+                      resolveItemImage(item, player.race, player.job) ? (
+                        <img referrerPolicy="no-referrer" src={resolveItemImage(item, player.race, player.job)} style={{ width: 36, height: 36, objectFit: 'contain' }} alt={item.name} />
                       ) : null
                     ) : null}
                   </div>

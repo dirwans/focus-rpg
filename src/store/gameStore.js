@@ -71,7 +71,22 @@ export function addToInventory(inventory, item, count = 1) {
   return newInv
 }
 
-export function resolveItemImage(item, playerRace) {
+// Caster-lineage jobs (Celestra Mage + Summoner, Bionex Psion) use staffs instead of
+// the default sword/axe — Arctron has no caster lineage, so it never matches here.
+const STAFF_JOBS = [
+  'arcanist', 'rune_caster', 'mystic', 'archmage',
+  'oracle', 'celestial_oracle', 'conjurer', 'divine_summoner',
+  'psion', 'esper', 'ascendant', 'transcendent'
+]
+
+// Ranger-lineage jobs (agility/ranged attacker) across all 3 factions use bows.
+const BOW_JOBS = [
+  'gunner', 'marksman', 'railgunner', 'annihilator',
+  'revenant', 'deadeye', 'predator',
+  'pathfinder', 'windrunner', 'shadow_hunter', 'stargazer'
+]
+
+export function resolveItemImage(item, playerRace, playerJob) {
   if (!item) return null
   if (item.type === 'shield' && item.id && item.id.startsWith('arm_All_')) {
     const lvl = item.level || 1
@@ -98,17 +113,32 @@ export function resolveItemImage(item, playerRace) {
   }
   if (item.type === 'weapon') {
     const lvl = item.level || 1
-    if (lvl >= 55) {
-      return '/assets/weapons/defallfactionslv55sword.png'
-    } else if (lvl >= 42) {
-      return '/assets/weapons/defallfactionslv42sword.png'
-    } else if (lvl >= 30) {
-      return '/assets/weapons/defallfactionslv32sword.png'
-    } else {
-      const seed = item.uid || (item.id ? item.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) : 0)
-      const index = (seed % 4) + 1
-      return `/assets/weapons/defallfactionslv1sword${index}.png`
+    const isCaster = STAFF_JOBS.includes(playerJob)
+    const seed = item.uid || (item.id ? item.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) : 0)
+
+    if (isCaster) {
+      if (lvl >= 55) return '/assets/weapons/defbioncelestralv55staff.png'
+      if (lvl >= 42) return '/assets/weapons/defbioncelestralv42staff.png'
+      if (lvl >= 30) return '/assets/weapons/defbioncelestralv32staff.png'
+      const index = (seed % 2) + 1
+      return `/assets/weapons/defbioncelestralv1staff${index}.png`
     }
+
+    const isRanger = BOW_JOBS.includes(playerJob)
+    if (isRanger) {
+      // Celestra rangers (fantasy elf archers) use the bow; Arctron/Bionex (sci-fi) use the gun.
+      const weaponKind = playerRace === 'celestra' ? 'bow' : 'gun'
+      if (lvl >= 55) return `/assets/weapons/defallfactionslv55${weaponKind}.png`
+      if (lvl >= 42) return `/assets/weapons/defallfactionslv42${weaponKind}.png`
+      if (lvl >= 30) return `/assets/weapons/defallfactionslv32${weaponKind}.png`
+      return `/assets/weapons/defallfactionslv1${weaponKind}.png`
+    }
+
+    if (lvl >= 55) return '/assets/weapons/defallfactionslv55axe.png'
+    if (lvl >= 42) return '/assets/weapons/defallfactionslv42axe.png'
+    if (lvl >= 30) return '/assets/weapons/defallfactionslv32axe.png'
+    const index = (seed % 4) + 1
+    return `/assets/weapons/defallfactionslv1sword${index}.png`
   }
   return item.image
 }
@@ -2816,14 +2846,20 @@ export const useGameStore = create(
           return
         }
 
-        if (item.race && item.race !== 'All' && item.race !== player.race) {
-          alert(tStore('alert_restricted_race', { race: item.race.toUpperCase() }, player))
-          return
+        if (item.race) {
+          const allowedRaces = Array.isArray(item.race) ? item.race : [item.race]
+          if (!allowedRaces.includes('All') && !allowedRaces.includes(player.race)) {
+            alert(tStore('alert_restricted_race', { race: allowedRaces.map((r) => r.toUpperCase()).join('/') }, player))
+            return
+          }
         }
 
-        if (item.job && item.job !== player.job) {
-          alert(tStore('alert_restricted_job', { job: item.job.toUpperCase() }, player))
-          return
+        if (item.job) {
+          const allowedJobs = Array.isArray(item.job) ? item.job : [item.job]
+          if (!allowedJobs.includes(player.job)) {
+            alert(tStore('alert_restricted_job', { job: allowedJobs.map((j) => j.toUpperCase()).join('/') }, player))
+            return
+          }
         }
 
 
