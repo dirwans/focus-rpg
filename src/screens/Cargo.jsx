@@ -357,7 +357,7 @@ export default function Cargo() {
             else if (num === 3 && player.level >= 42) isEquipped = true;
             else if (num === 4 && player.level >= 55) isEquipped = true;
             else if (num === 5 && player.level >= 66) isEquipped = true;
-            else if ((num - 1) * 25 >= 100) isEquipped = true;
+            else if (player.inventorySlots > 100 && (num - 1) * 25 < player.inventorySlots) isEquipped = true;
             
             const isActive = activeBag === bagKey && !slotFilter
             return (

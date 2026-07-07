@@ -487,7 +487,7 @@ export default function Inventory() {
                           else if (bagNum === 3 && player.level >= 42) isUnlocked = true;
                           else if (bagNum === 4 && player.level >= 55) isUnlocked = true;
                           else if (bagNum === 5 && player.level >= 66) isUnlocked = true;
-                          else if ((bagNum - 1) * 25 >= 100) isUnlocked = true;
+                          else if (player.inventorySlots > 100 && (bagNum - 1) * 25 < player.inventorySlots) isUnlocked = true;
 
                           const isBagActive = activeBag === bagNum
                           const bagIcon = BAG_ICONS[player.race]
