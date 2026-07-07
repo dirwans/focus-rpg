@@ -2567,7 +2567,7 @@ export const useGameStore = create(
               secondsLeft: remaining,
             }
           }
-          next.player = verifyStarterWeapon(verifyStarterShield(next.player))
+          next.player = verifyStarterArmorSet(verifyStarterWeapon(verifyStarterShield(next.player)))
           return next
         })
       },
@@ -3222,7 +3222,7 @@ export const useGameStore = create(
       getUpgradeCost: (key) => calcUpgradeCost(key, get().player.upgrades?.[key] || 0),
       loadPlayer: (savedPlayer) => set((s) => {
         const player = { ...initialPlayer, ...savedPlayer }
-        return { player: verifyStarterWeapon(verifyStarterShield(player)) }
+        return { player: verifyStarterArmorSet(verifyStarterWeapon(verifyStarterShield(player))) }
       }),
       getExpToNext: () => getMinutesToNextLevel(get().player.level),
 
