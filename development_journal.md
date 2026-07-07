@@ -291,7 +291,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🛡️ Milestone 17: Faction Tier Shields (Lv.32/42/55) Full Integration [PENDING DEPLOYMENT]
+### 🛡️ Milestone 17: Faction Tier Shields (Lv.32/42/55) Full Integration [DEPLOYED]
 - **Structured Asset Folders**:
   - Created organised shield subfolders: `src/assets/{faction}/shields/` and `public/assets/{faction}/shields/` for arctron, bionex, celestra.
 - **Celestra & Bionex Tier Shields**:
@@ -313,8 +313,26 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 - **`verifyStarterShield` path update**:
   - Updated starter shield image paths in `verifyStarterShield` to use new organized folder paths.
 
+---
 
+### 🛡️ Milestone 18: Faction Sword Sprites (Lv.1/32/42/55) & Inventory UI Polish [PENDING DEPLOYMENT]
+- **Inventory UX Polish**:
+  - stretched width (removed `maxWidth: 320` from equipment slots, bag tabs, and bag drawer) for a responsive layout in [Inventory.jsx](file:///c:/projects/focus-rpg/src/screens/Inventory.jsx).
+  - Unlocked bags (Level 66 has all 5 bags unlocked) now properly display the faction-specific bag icons rather than just numbers.
+  - Implemented **Smart Equip Slot Picker** inside [Inventory.jsx](file:///c:/projects/focus-rpg/src/screens/Inventory.jsx): clicking an empty equipment slot displays a grid of compatible weapons/gears from the inventory below the slots for immediate equipping.
+- **Default Swords Crop & Clean**:
+  - Created [process_default_swords.py](file:///c:/projects/focus-rpg/scratch/process_default_swords.py) to crop the 4 Level 1 starter swords, utilizing a flood-fill BFS to isolate each sword and strip stray pixels.
+  - Created [process_tier_swords.py](file:///c:/projects/focus-rpg/scratch/process_tier_swords.py) to crop the Level 32, 42, and 55 swords, programmatically blanking out the magnifier zoom icon and isolating the largest contiguous component.
+  - Saved outputs to `src/assets/weapons/` and `public/assets/weapons/`.
+- **Dynamic Weapon Resolution**:
+  - Added weapon item handler inside `resolveItemImage` in [gameStore.js](file:///c:/projects/focus-rpg/src/store/gameStore.js) to dynamically map all level 1/32/42/55 weapons to their corresponding newly cropped sprites.
 
+---
+
+### 🧑‍🚀 Milestone 19: Job-Tier Character Sprite Fix [DEPLOYED]
+- **Bug**: Promoting a job (e.g. Destroyer → Vanguard → Juggernaut) did not change the character sprite shown on the CHARACTER navtab — `getJobLane()` in [PilotSprites.jsx](file:///c:/projects/focus-rpg/src/components/PilotSprites.jsx) only grouped jobs into 4 broad lanes (warrior/ranger/mystic/specialist) with one static image per lane, so all tiers within a lane displayed the same tier-1 art.
+- **Fix**: Confirmed the correct lane sprite already resolves properly per selected class/job (no per-tier art assets exist yet — those are being made separately by the user as proper armor/weapon assets). Removed a temporary CSS-only gold-glow/frame placeholder effect that had been added as a stand-in for missing tier art, since it wasn't wanted and real tier art is coming.
+- Verified in-browser: promoting Arctron Destroyer (tier1) → Vanguard (tier2) → Juggernaut (tier3) correctly displays the matching lane sprite with no extraneous border/glow decoration.
 
 
 

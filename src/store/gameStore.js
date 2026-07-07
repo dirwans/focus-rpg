@@ -96,6 +96,20 @@ export function resolveItemImage(item, playerRace) {
       return '/assets/arctron/shields/lv1arctronshielddefault.png'
     }
   }
+  if (item.type === 'weapon') {
+    const lvl = item.level || 1
+    if (lvl >= 55) {
+      return '/assets/weapons/defallfactionslv55sword.png'
+    } else if (lvl >= 42) {
+      return '/assets/weapons/defallfactionslv42sword.png'
+    } else if (lvl >= 30) {
+      return '/assets/weapons/defallfactionslv32sword.png'
+    } else {
+      const seed = item.uid || (item.id ? item.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) : 0)
+      const index = (seed % 4) + 1
+      return `/assets/weapons/defallfactionslv1sword${index}.png`
+    }
+  }
   return item.image
 }
 

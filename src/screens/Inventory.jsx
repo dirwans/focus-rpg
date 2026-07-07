@@ -16,6 +16,8 @@ export default function Inventory() {
   const [equipOpen, setEquipOpen] = useState(true)
   const [activeBag, setActiveBag] = useState(null)
   const [selectedBagItem, setSelectedBagItem] = useState(null)
+  // NEW: which empty slot was clicked for smart-equip picker
+  const [pickingSlot, setPickingSlot] = useState(null)
 
   const player = useGameStore((s) => s.player)
   const equipItem = useGameStore((s) => s.equipItem)
@@ -30,10 +32,10 @@ export default function Inventory() {
   }[player?.race] || '#08080d'
 
   return (
-    <div className="no-scrollbar" style={{ display: 'flex', flexDirection: 'column', flex: 1, fontFamily: "'Saira', sans-serif", background: screenBg, minHeight: '100vh', paddingBottom: 64 }} onClick={() => { setActiveTooltip(null); setSelectedBagItem(null); }}>
+    <div className="no-scrollbar" style={{ display: 'flex', flexDirection: 'column', flex: 1, fontFamily: "'Saira', sans-serif", background: screenBg, minHeight: '100vh', paddingBottom: 64 }} onClick={() => { setActiveTooltip(null); setSelectedBagItem(null); setPickingSlot(null); }}>
       <div style={{ padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 12, borderBottom: '1px solid rgba(0, 229, 255, 0.15)', background: 'rgba(3, 8, 20, 0.4)', flexShrink: 0 }}>
         <div style={{ flex: 1, textAlign: 'center' }}>
-          <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 18, fontWeight: 900, color: '#fff', letterSpacing: 2, textShadow: '0 0 10px #00e5ff' }}>GEAR & INVENTORY</span>
+          <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 18, fontWeight: 900, color: '#fff', letterSpacing: 2, textShadow: '0 0 10px #00e5ff' }}>GEAR &amp; INVENTORY</span>
         </div>
       </div>
       <div style={{ padding: '16px 0', display: 'flex', flexDirection: 'column' }}>
@@ -55,10 +57,32 @@ export default function Inventory() {
             const bootsSvg = <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7 4h3v10l3 2v4H5v-4l2-2V4z" /><path d="M14 4h3v10l3 2v4h-8v-4l2-2V4z" /></svg>;
             const aresSvg = <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9" strokeDasharray="3 3" /><circle cx="12" cy="12" r="5" /><polygon points="12,4 14,9 19,10 15,13 16,19 12,16 8,19 9,13 5,10 10,9" fill="currentColor" fillOpacity="0.2" /></svg>;
 
+            // Slot type → normalized equip key mapping
+            const slotTypeMap = {
+              weapon: 'weapon', armor: 'armor', shield: 'shield',
+              helmet: 'helmet', mantle: 'mantle', gloves: 'gloves',
+              boots: 'boots', pants: 'pants',
+              amulet: 'amulet', ring: 'ring', ascension_arms: 'ascension_arms'
+            }
+
+            // Get compatible items from inventory for a given slot key
+            const getCompatibleItems = (slotKey) => {
+              if (!player.inventory) return []
+              const typeTarget = slotKey.replace(/[12]$/, '') // amulet1→amulet, ring1→ring
+              return player.inventory.filter(item => {
+                if (item.type !== typeTarget) return false
+                const raceOk = !item.race || item.race === 'All' || item.race === player.race
+                const levelOk = !item.level || item.level <= player.level
+                const jobOk = !item.job || item.job === player.job
+                return raceOk && levelOk && jobOk
+              })
+            }
+
             const renderEquipSlot = (slotKey, label, svgIcon, isCircle = false, width = '100%', height = 'auto', aspectRatio = '1 / 1') => {
               const item = player.equipment && player.equipment[slotKey];
               const isEmpty = !item;
               const showTooltip = activeTooltip === slotKey;
+              const isPicking = pickingSlot === slotKey;
 
               const slotStyle = {
                 width: width,
@@ -79,15 +103,32 @@ export default function Inventory() {
                   <div
                     style={{
                       ...slotStyle,
-                      background: 'rgba(5, 10, 20, 0.85)',
-                      border: '2px solid rgba(55, 65, 80, 0.85)',
-                      boxShadow: 'inset 0 0 6px rgba(0,0,0,0.85)',
-                      color: 'rgba(138, 148, 163, 0.25)',
+                      background: isPicking ? `${fp}22` : 'rgba(5, 10, 20, 0.85)',
+                      border: isPicking ? `2px solid ${fp}` : '2px solid rgba(55, 65, 80, 0.85)',
+                      boxShadow: isPicking ? `0 0 12px ${fp}66, inset 0 0 8px ${fp}22` : 'inset 0 0 6px rgba(0,0,0,0.85)',
+                      color: isPicking ? fp : 'rgba(138, 148, 163, 0.25)',
+                    }}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      const compatible = getCompatibleItems(slotKey)
+                      if (compatible.length > 0) {
+                        setPickingSlot(isPicking ? null : slotKey)
+                        setActiveBag(null)
+                      }
                     }}
                   >
-                    <div style={{ opacity: 0.16, display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+                    <div style={{ opacity: isPicking ? 0.7 : 0.16, display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
                       {svgIcon}
                     </div>
+                    {/* Pulse indicator if compatible items exist */}
+                    {getCompatibleItems(slotKey).length > 0 && !isPicking && (
+                      <div style={{
+                        position: 'absolute', bottom: 2, right: 2,
+                        width: 6, height: 6, borderRadius: '50%',
+                        background: fp, boxShadow: `0 0 4px ${fp}`,
+                        animation: 'pulse 1.5s ease-in-out infinite'
+                      }} />
+                    )}
                   </div>
                 );
               }
@@ -112,6 +153,7 @@ export default function Inventory() {
                   }}
                   onClick={(e) => {
                     e.stopPropagation();
+                    setPickingSlot(null)
                     setActiveTooltip(activeTooltip === slotKey ? null : slotKey);
                   }}
                   onMouseEnter={() => {
@@ -246,11 +288,12 @@ export default function Inventory() {
                   onClick={() => setEquipOpen(!equipOpen)}
                   style={{ margin: '0 16px 8px', fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 700, letterSpacing: 1.5, color: '#8a94a3', cursor: 'pointer', userSelect: 'none' }}
                 >
-                  <span style={{ fontSize: 9 }}>{equipOpen ? '▼' : '▶'}</span> EQUIPMENT & INVENTORY
+                  <span style={{ fontSize: 9 }}>{equipOpen ? '▼' : '▶'}</span> EQUIPMENT &amp; INVENTORY
                 </div>
                 
                 {equipOpen && (
                   <>
+                    {/* ── Equipment Grid ─────────────────────────────── */}
                     <div style={{
                       margin: '0 auto 12px',
                       padding: '8px',
@@ -262,7 +305,6 @@ export default function Inventory() {
                       gap: 3,
                       overflow: 'visible',
                       width: 'calc(100% - 32px)',
-                      maxWidth: 320,
                       boxShadow: '0 8px 16px rgba(0,0,0,0.6)',
                     }}>
                       {/* Left Column */}
@@ -302,7 +344,7 @@ export default function Inventory() {
                       <div style={{ display: 'flex', flexDirection: 'column', flex: 1, gap: 3, alignItems: 'center' }}>
                         <div style={{ display: 'flex', gap: 3, width: '100%', marginBottom: 'calc(50% + 3px)' }}>
                           {renderEquipSlot('ascension_arms', 'ARES', aresSvg, false, 'calc(50% - 1.5px)', 'auto', '1 / 1')}
-                          {/* Decorative Core Slot for Symmetry */}
+                          {/* Decorative lock slot */}
                           <div style={{
                             width: 'calc(50% - 1.5px)',
                             aspectRatio: '1 / 1',
@@ -329,8 +371,105 @@ export default function Inventory() {
                         </div>
                       </div>
                     </div>
-                    
-                    {/* bags */}
+
+                    {/* ── Smart Equip Picker ─────────────────────────── */}
+                    {pickingSlot && (() => {
+                      const compatible = getCompatibleItems(pickingSlot)
+                      const slotLabel = pickingSlot.replace(/[12]$/, '').toUpperCase()
+                      return (
+                        <div
+                          style={{
+                            margin: '0 auto 10px',
+                            width: 'calc(100% - 32px)',
+                            background: 'rgba(6, 9, 16, 0.98)',
+                            border: `2px solid ${fp}80`,
+                            borderRadius: 8,
+                            boxShadow: `0 0 24px ${fp}33, 0 8px 20px rgba(0,0,0,0.7)`,
+                            overflow: 'hidden',
+                          }}
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          {/* Header */}
+                          <div style={{
+                            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                            padding: '8px 12px', borderBottom: `1px solid ${fp}40`,
+                            background: `linear-gradient(90deg, ${fp}18, transparent)`
+                          }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                              <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 11, fontWeight: 800, color: fp, letterSpacing: 1 }}>
+                                SELECT {slotLabel}
+                              </span>
+                              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: '#8a94a3' }}>
+                                {compatible.length} available
+                              </span>
+                            </div>
+                            <button
+                              onClick={() => setPickingSlot(null)}
+                              style={{ background: 'transparent', border: 'none', color: '#8a94a3', cursor: 'pointer', fontSize: 14, fontWeight: 'bold', padding: '0 4px' }}
+                            >✕</button>
+                          </div>
+                          {/* Item Grid */}
+                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 4, padding: 8 }}>
+                            {compatible.map(item => {
+                              const bc = {
+                                common: 'rgba(100,110,125,0.9)',
+                                uncommon: 'rgba(50,180,100,0.9)',
+                                rare: 'rgba(50,120,240,0.9)',
+                                epic: 'rgba(160,50,240,0.9)',
+                                legendary: 'rgba(240,150,30,0.9)',
+                                D: 'rgba(100,110,125,0.9)',
+                                C: 'rgba(50,180,100,0.9)',
+                                B: 'rgba(50,120,240,0.9)',
+                                A: 'rgba(160,50,240,0.9)',
+                                S: 'rgba(240,150,30,0.9)',
+                              }[item.rarity] || 'rgba(100,110,125,0.9)'
+                              return (
+                                <div
+                                  key={item.uid}
+                                  title={`${item.name} (Lv.${item.level || 1})`}
+                                  onClick={() => {
+                                    equipItem(item.uid)
+                                    setPickingSlot(null)
+                                  }}
+                                  style={{
+                                    aspectRatio: '1 / 1',
+                                    borderRadius: 5,
+                                    background: 'rgba(12, 18, 30, 0.95)',
+                                    border: `1.5px solid ${bc}`,
+                                    boxShadow: `0 0 6px ${bc}55`,
+                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                    position: 'relative', cursor: 'pointer',
+                                    transition: 'transform 0.15s, box-shadow 0.15s',
+                                  }}
+                                  onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.08)'; e.currentTarget.style.boxShadow = `0 0 12px ${bc}` }}
+                                  onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.boxShadow = `0 0 6px ${bc}55` }}
+                                >
+                                  {resolveItemImage(item, player.race) ? (
+                                    <img src={resolveItemImage(item, player.race)} style={{ width: '84%', height: '84%', objectFit: 'contain' }} alt={item.name} />
+                                  ) : item.emoji ? (
+                                    <span style={{ fontSize: 20 }}>{item.emoji}</span>
+                                  ) : (
+                                    <div style={{ color: bc, opacity: 0.6 }}>{typeSvgs[item.type] || defaultItemSvg}</div>
+                                  )}
+                                  {item.level && (
+                                    <span style={{ position: 'absolute', top: 1, left: 2, fontFamily: "'Share Tech Mono', monospace", fontSize: 7, fontWeight: 800, color: '#fff', background: 'rgba(0,0,0,0.7)', padding: '0 2px', borderRadius: 2 }}>
+                                      {item.level}LV
+                                    </span>
+                                  )}
+                                  {item.enhancement_level > 0 && (
+                                    <span style={{ position: 'absolute', bottom: 1, right: 2, fontFamily: "'Share Tech Mono', monospace", fontSize: 7, fontWeight: 900, color: '#00ffaa' }}>
+                                      +{item.enhancement_level}
+                                    </span>
+                                  )}
+                                </div>
+                              )
+                            })}
+                          </div>
+                        </div>
+                      )
+                    })()}
+
+                    {/* ── Bag Tabs ───────────────────────────────────── */}
                     <div style={{
                       display: 'grid',
                       gridTemplateColumns: 'repeat(5, 1fr)',
@@ -338,7 +477,6 @@ export default function Inventory() {
                       justifyContent: 'center',
                       margin: '0 auto 14px',
                       width: 'calc(100% - 32px)',
-                      maxWidth: 320,
                     }}>
                       {(() => {
                         const totalBags = Math.max(5, Math.ceil((player.inventorySlots || 100) / 25))
@@ -361,6 +499,7 @@ export default function Inventory() {
                                 onClick={() => {
                                   setActiveBag(isBagActive ? null : bagNum)
                                   setSelectedBagItem(null)
+                                  setPickingSlot(null)
                                 }}
                                 style={{
                                   width: '100%',
@@ -377,14 +516,23 @@ export default function Inventory() {
                                   fontWeight: 800,
                                   color: fa,
                                   cursor: 'pointer',
-                                  overflow: 'hidden'
+                                  overflow: 'hidden',
+                                  position: 'relative',
                                 }}
                               >
-                                {bagNum === 1 && bagIcon ? (
-                                  <img src={bagIcon} alt="Bag 1" style={{ width: '98%', height: '98%', objectFit: 'contain', filter: `drop-shadow(0 0 5px ${fa}4d)` }} />
+                                {/* ALL unlocked bags show faction icon */}
+                                {bagIcon ? (
+                                  <img src={bagIcon} alt={`Bag ${bagNum}`} style={{ width: '92%', height: '92%', objectFit: 'contain', filter: `drop-shadow(0 0 5px ${fa}4d)` }} />
                                 ) : (
                                   bagNum
                                 )}
+                                {/* Bag number badge */}
+                                <span style={{
+                                  position: 'absolute', bottom: 2, right: 3,
+                                  fontFamily: "'Orbitron', sans-serif", fontSize: 8, fontWeight: 900,
+                                  color: isBagActive ? fp : fa,
+                                  textShadow: '0 1px 3px rgba(0,0,0,0.9)'
+                                }}>{bagNum}</span>
                               </div>
                             );
                           } else {
@@ -415,12 +563,11 @@ export default function Inventory() {
                       })()}
                     </div>
 
-                    {/* Inventory grid panel drawer */}
+                    {/* ── Bag Contents Drawer ─────────────────────────── */}
                     {activeBag !== null && (
                       <div style={{
                         margin: '8px auto 14px',
                         width: 'calc(100% - 32px)',
-                        maxWidth: 320,
                         background: 'rgba(6, 9, 14, 0.97)',
                         border: `2px solid ${fp}73`,
                         borderRadius: 8,
@@ -535,7 +682,7 @@ export default function Inventory() {
                           })()}
                         </div>
                         
-                        {/* Selected item tooltip info inside the bag drawer */}
+                        {/* Selected item action panel */}
                         {selectedBagItem && (() => {
                           const item = selectedBagItem
                           const borderColors = {
