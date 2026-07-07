@@ -332,81 +332,87 @@ export default function Inventory() {
                     
                     {/* bags */}
                     <div style={{
-                      display: 'flex',
-                      gap: 3,
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(5, 1fr)',
+                      gap: 6,
                       justifyContent: 'center',
                       margin: '0 auto 14px',
                       width: 'calc(100% - 32px)',
                       maxWidth: 320,
                     }}>
-                      {[1, 2, 3, 4, 5].map((bagNum) => {
-                        let isUnlocked = false;
-                        if (bagNum <= 2) isUnlocked = true;
-                        else if (bagNum === 3 && player.level >= 32) isUnlocked = true;
-                        else if (bagNum === 4 && player.level >= 42) isUnlocked = true;
-                        else if (bagNum === 5 && player.level >= 55) isUnlocked = true;
+                      {(() => {
+                        const totalBags = Math.max(5, Math.ceil((player.inventorySlots || 100) / 25))
+                        const bagList = Array.from({ length: totalBags }, (_, i) => i + 1)
+                        return bagList.map((bagNum) => {
+                          let isUnlocked = false;
+                          if (bagNum <= 2) isUnlocked = true;
+                          else if (bagNum === 3 && player.level >= 32) isUnlocked = true;
+                          else if (bagNum === 4 && player.level >= 42) isUnlocked = true;
+                          else if (bagNum === 5 && player.level >= 55) isUnlocked = true;
+                          else if ((bagNum - 1) * 25 >= 100) isUnlocked = true;
 
-                        const isBagActive = activeBag === bagNum
-                        const bagIcon = BAG_ICONS[player.race]
+                          const isBagActive = activeBag === bagNum
+                          const bagIcon = BAG_ICONS[player.race]
 
-                        if (isUnlocked) {
-                          return (
-                            <div
-                              key={bagNum}
-                              onClick={() => {
-                                setActiveBag(isBagActive ? null : bagNum)
-                                setSelectedBagItem(null)
-                              }}
-                              style={{
-                                flex: 1,
-                                aspectRatio: '1 / 1',
-                                borderRadius: 4,
-                                background: isBagActive ? `rgba(8, 22, 36, 0.35)` : 'rgba(20, 25, 35, 0.9)',
-                                border: isBagActive ? `2px solid ${fp}` : '2px solid rgba(85, 95, 110, 0.85)',
-                                boxShadow: isBagActive ? `0 2px 4px rgba(0,0,0,0.4), 0 0 10px ${fp}80` : '0 2px 4px rgba(0,0,0,0.4)',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                fontFamily: "'Orbitron', sans-serif",
-                                fontSize: 13,
-                                fontWeight: 800,
-                                color: fa,
-                                cursor: 'pointer',
-                                overflow: 'hidden'
-                              }}
-                            >
-                              {bagNum === 1 && bagIcon ? (
-                                <img src={bagIcon} alt="Bag 1" style={{ width: '98%', height: '98%', objectFit: 'contain', filter: `drop-shadow(0 0 5px ${fa}4d)` }} />
-                              ) : (
-                                bagNum
-                              )}
-                            </div>
-                          );
-                        } else {
-                          return (
-                            <div
-                              key={bagNum}
-                              style={{
-                                flex: 1,
-                                aspectRatio: '1 / 1',
-                                borderRadius: 4,
-                                background: 'rgba(5, 8, 12, 0.85)',
-                                border: '2px solid rgba(40, 45, 55, 0.7)',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                fontFamily: "'Orbitron', sans-serif",
-                                fontSize: 13,
-                                fontWeight: 800,
-                                color: '#444',
-                                opacity: 0.5
-                              }}
-                            >
-                              {bagNum}
-                            </div>
-                          );
-                        }
-                      })}
+                          if (isUnlocked) {
+                            return (
+                              <div
+                                key={bagNum}
+                                onClick={() => {
+                                  setActiveBag(isBagActive ? null : bagNum)
+                                  setSelectedBagItem(null)
+                                }}
+                                style={{
+                                  width: '100%',
+                                  aspectRatio: '1 / 1',
+                                  borderRadius: 4,
+                                  background: isBagActive ? `rgba(8, 22, 36, 0.35)` : 'rgba(20, 25, 35, 0.9)',
+                                  border: isBagActive ? `2px solid ${fp}` : '2px solid rgba(85, 95, 110, 0.85)',
+                                  boxShadow: isBagActive ? `0 2px 4px rgba(0,0,0,0.4), 0 0 10px ${fp}80` : '0 2px 4px rgba(0,0,0,0.4)',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'center',
+                                  fontFamily: "'Orbitron', sans-serif",
+                                  fontSize: 13,
+                                  fontWeight: 800,
+                                  color: fa,
+                                  cursor: 'pointer',
+                                  overflow: 'hidden'
+                                }}
+                              >
+                                {bagNum === 1 && bagIcon ? (
+                                  <img src={bagIcon} alt="Bag 1" style={{ width: '98%', height: '98%', objectFit: 'contain', filter: `drop-shadow(0 0 5px ${fa}4d)` }} />
+                                ) : (
+                                  bagNum
+                                )}
+                              </div>
+                            );
+                          } else {
+                            return (
+                              <div
+                                key={bagNum}
+                                style={{
+                                  width: '100%',
+                                  aspectRatio: '1 / 1',
+                                  borderRadius: 4,
+                                  background: 'rgba(5, 8, 12, 0.85)',
+                                  border: '2px solid rgba(40, 45, 55, 0.7)',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'center',
+                                  fontFamily: "'Orbitron', sans-serif",
+                                  fontSize: 13,
+                                  fontWeight: 800,
+                                  color: '#444',
+                                  opacity: 0.5
+                                }}
+                              >
+                                {bagNum}
+                              </div>
+                            );
+                          }
+                        })
+                      })()}
                     </div>
 
                     {/* Inventory grid panel drawer */}
@@ -446,12 +452,12 @@ export default function Inventory() {
                         
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 5, padding: 10, position: 'relative' }}>
                           {(() => {
-                            const startIdx = (activeBag - 1) * 10
-                            const endIdx = activeBag * 10
+                            const startIdx = (activeBag - 1) * 25
+                            const endIdx = activeBag * 25
                             const bagItems = player.inventory ? player.inventory.slice(startIdx, endIdx) : []
                             
                             const paddedBagItems = [...bagItems]
-                            while (paddedBagItems.length < 10) {
+                            while (paddedBagItems.length < 25) {
                               paddedBagItems.push(null)
                             }
                             

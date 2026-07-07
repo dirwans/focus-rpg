@@ -215,3 +215,16 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ## Design Rule: Boss Sprite Scaling
 - **Gameplay Visuals**: Boss sprites (World Map, Dungeons, Pit Bosses, etc.) must always be rendered at **1.5x to 2.0x** the size of the character sprites. Currently, character sprites are around 160px, so boss sprites are scaled to 240px-256px (1.5x - 1.6x).
+
+
+---
+
+### 🎒 Milestone 12: 25-Slot Inventory Bags & Dynamic Upgrades
+- **Inventory Bag capacity expansion**:
+  - Refactored [Inventory.jsx](file:///c:/projects/focus-rpg/src/screens/Inventory.jsx) and [Cargo.jsx](file:///c:/projects/focus-rpg/src/screens/Cargo.jsx) to increase bag slot sizes from 10 slots to 25 slots (a clean 5x5 grid layout).
+  - Configured dynamic bag generation using `Math.ceil(player.inventorySlots / 25)` with a minimum baseline of 5 bags. This expands bag buttons up to 12 bags (for 300 slots max capacity).
+- **Responsive Bag Grid Wrap**:
+  - Upgraded the bag button wrappers to CSS grid systems with 5 columns to prevent button squashing when players purchase higher capacity upgrades.
+- **Upgraded Slot Unlock Bypass**:
+  - Implemented automatic unlocking for bag numbers 6 and above to ensure purchased storage space is immediately accessible, while keeping core level gates on bags 3 to 5.
+

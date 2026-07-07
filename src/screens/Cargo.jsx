@@ -338,45 +338,58 @@ export default function Cargo() {
       </div>
 
       {/* Bag Slots (Red Box Reference) */}
-      <div style={{ display: 'flex', gap: 8, padding: '0 16px 16px', justifyContent: 'center' }}>
-        {[1, 2, 3, 4, 5].map(num => {
-          const bagKey = `bag${num}`
-          let isEquipped = false;
-          if (num <= 2) isEquipped = true;
-          else if (num === 3 && player.level >= 32) isEquipped = true;
-          else if (num === 4 && player.level >= 42) isEquipped = true;
-          else if (num === 5 && player.level >= 55) isEquipped = true;
-          
-          const isActive = activeBag === bagKey && !slotFilter
-          return (
-            <button
-              key={bagKey}
-              onClick={() => {
-                if (isEquipped) {
-                  setActiveBag(bagKey)
-                  setSlotFilter(null)
-                }
-              }}
-              style={{
-                width: 52, height: 52,
-                background: isActive ? 'rgba(0,229,255,0.15)' : 'rgba(10, 15, 30, 0.8)',
-                border: `1.5px solid ${isActive ? '#00e5ff' : '#445566'}`,
-                borderRadius: 6,
-                display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-                cursor: isEquipped ? 'pointer' : 'not-allowed',
-                boxShadow: isActive ? '0 0 12px rgba(0,229,255,0.4), inset 0 0 6px rgba(0,229,255,0.2)' : 'none',
-                position: 'relative',
-                outline: 'none',
-                opacity: isEquipped ? 1 : 0.4
-              }}
-            >
-              <div style={{ fontSize: 24, opacity: isEquipped ? 1 : 0.2 }}>🎒</div>
-              <div style={{ position: 'absolute', bottom: 2, right: 4, fontSize: 10, fontWeight: 900, color: isActive ? '#00e5ff' : (isEquipped ? '#8899aa' : '#555555'), fontFamily: 'var(--font-mono)' }}>
-                {num}
-              </div>
-            </button>
-          )
-        })}
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(5, 1fr)',
+        gap: 8,
+        padding: '0 16px 16px',
+        justifyContent: 'center',
+        margin: '0 auto',
+        maxWidth: 320
+      }}>
+        {(() => {
+          const totalBags = Math.max(5, Math.ceil((player.inventorySlots || 100) / 25))
+          const bagList = Array.from({ length: totalBags }, (_, i) => i + 1)
+          return bagList.map(num => {
+            const bagKey = `bag${num}`
+            let isEquipped = false;
+            if (num <= 2) isEquipped = true;
+            else if (num === 3 && player.level >= 32) isEquipped = true;
+            else if (num === 4 && player.level >= 42) isEquipped = true;
+            else if (num === 5 && player.level >= 55) isEquipped = true;
+            else if ((num - 1) * 25 >= 100) isEquipped = true;
+            
+            const isActive = activeBag === bagKey && !slotFilter
+            return (
+              <button
+                key={bagKey}
+                onClick={() => {
+                  if (isEquipped) {
+                    setActiveBag(bagKey)
+                    setSlotFilter(null)
+                  }
+                }}
+                style={{
+                  width: 52, height: 52,
+                  background: isActive ? 'rgba(0,229,255,0.15)' : 'rgba(10, 15, 30, 0.8)',
+                  border: `1.5px solid ${isActive ? '#00e5ff' : '#445566'}`,
+                  borderRadius: 6,
+                  display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                  cursor: isEquipped ? 'pointer' : 'not-allowed',
+                  boxShadow: isActive ? '0 0 12px rgba(0,229,255,0.4), inset 0 0 6px rgba(0,229,255,0.2)' : 'none',
+                  position: 'relative',
+                  outline: 'none',
+                  opacity: isEquipped ? 1 : 0.4
+                }}
+              >
+                <div style={{ fontSize: 24, opacity: isEquipped ? 1 : 0.2 }}>🎒</div>
+                <div style={{ position: 'absolute', bottom: 2, right: 4, fontSize: 10, fontWeight: 900, color: isActive ? '#00e5ff' : (isEquipped ? '#8899aa' : '#555555'), fontFamily: 'var(--font-mono)' }}>
+                  {num}
+                </div>
+              </button>
+            )
+          })
+        })()}
       </div>
 
       {/* Inventory Section */}
@@ -395,36 +408,42 @@ export default function Cargo() {
       </div>
 
       <div style={styles.grid}>
-        {Array.from({ length: 25 }).map((_, index) => {
-          const item = filteredInventory[index];
-          if (item) {
-            const cardColor = getItemColor(item)
-            return (
-              <button
-                key={item.uid}
-                className="premium-card glass-panel"
-                style={styles.itemCard(cardColor)}
-                onClick={() => setSelectedItem(item)}
-              >
-                <div style={styles.itemIcon}>
-                  {item.image ? (
-                    <img referrerPolicy="no-referrer" src={item.image} style={{ width: 34, height: 28, fontSize: 10, objectFit: 'contain' }} alt={item.name} />
-                  ) : (
-                    item.emoji
+        {(() => {
+          const bagNum = slotFilter ? 1 : (parseInt(activeBag.replace('bag', '')) || 1)
+          const startIdx = (bagNum - 1) * 25
+          const endIdx = bagNum * 25
+          const slicedInventory = filteredInventory.slice(startIdx, endIdx)
+
+          return Array.from({ length: 25 }).map((_, index) => {
+            const item = slicedInventory[index];
+            if (item) {
+              const cardColor = getItemColor(item)
+              return (
+                <button
+                  key={item.uid}
+                  className="premium-card glass-panel"
+                  style={styles.itemCard(cardColor)}
+                  onClick={() => setSelectedItem(item)}
+                >
+                  <div style={styles.itemIcon}>
+                    {item.image ? (
+                      <img referrerPolicy="no-referrer" src={item.image} style={{ width: 34, height: 28, fontSize: 10, objectFit: 'contain' }} alt={item.name} />
+                    ) : (
+                      item.emoji
+                    )}
+                  </div>
+                  <div style={styles.itemName}>{getItemName(item)}</div>
+                  <div style={styles.itemBadges}>
+                    <span style={styles.rarityBadge(cardColor)}>{(item.rarityGrade || item.rarity).toUpperCase()}</span>
+                  </div>
+                  {item.qty > 1 && (
+                    <span style={{ position: 'absolute', bottom: 4, right: 6, fontSize: 11, fontWeight: 900, color: '#00ffaa', fontFamily: 'var(--font-mono)', textShadow: '0 0 4px #000, 1px 1px 2px #000' }}>
+                      x{item.qty}
+                    </span>
                   )}
-                </div>
-                <div style={styles.itemName}>{getItemName(item)}</div>
-                <div style={styles.itemBadges}>
-                  <span style={styles.rarityBadge(cardColor)}>{(item.rarityGrade || item.rarity).toUpperCase()}</span>
-                </div>
-                {item.qty > 1 && (
-                  <span style={{ position: 'absolute', bottom: 4, right: 6, fontSize: 11, fontWeight: 900, color: '#00ffaa', fontFamily: 'var(--font-mono)', textShadow: '0 0 4px #000, 1px 1px 2px #000' }}>
-                    x{item.qty}
-                  </span>
-                )}
-              </button>
-            )
-          } else {
+                </button>
+              )
+            } else {
             return (
               <div
                 key={`empty-${index}`}
@@ -437,8 +456,9 @@ export default function Cargo() {
               />
             )
           }
-        })}
-      </div>
+        })
+      })()}
+    </div>
 
       {/* Item Actions Modal */}
       {selectedItem && (
