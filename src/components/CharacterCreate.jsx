@@ -44,7 +44,9 @@ const FACTION_THEMES = {
     traits: [
       { name: 'ATTACK', val: 5 },
       { name: 'DEFENSE', val: 5 },
-      { name: 'HEALTH', val: 5 }
+      { name: 'HEALTH', val: 5 },
+      { name: 'EVASION', val: 1 },
+      { name: 'FORCE', val: 0 }
     ],
     confirmText: 'ENTER THE WAR'
   },
@@ -64,7 +66,9 @@ const FACTION_THEMES = {
     traits: [
       { name: 'ATTACK', val: 3 },
       { name: 'DEFENSE', val: 4 },
-      { name: 'HEALTH', val: 4 }
+      { name: 'HEALTH', val: 4 },
+      { name: 'EVASION', val: 3 },
+      { name: 'FORCE', val: 3 }
     ],
     confirmText: 'LAUNCH SEQUENCE'
   },
@@ -83,8 +87,10 @@ const FACTION_THEMES = {
     tagline: 'MAGIC BENDS TO THOSE WHO DARE.',
     traits: [
       { name: 'ATTACK', val: 4 },
-      { name: 'DEFENSE', val: 3 },
-      { name: 'HEALTH', val: 3 }
+      { name: 'DEFENSE', val: 2 },
+      { name: 'HEALTH', val: 2 },
+      { name: 'EVASION', val: 5 },
+      { name: 'FORCE', val: 5 }
     ],
     confirmText: 'AWAKEN THE PATH'
   }

@@ -104,6 +104,8 @@ const TECHNICIAN_JOBS = [
 // through to `item.image` (no dedicated per-tier sprite).
 const ARMOR_SET_LINEAGES = {
   arctron: ['warrior', 'ranger', 'technician'],
+  bionex: ['warrior', 'ranger', 'mage'],
+  celestra: ['warrior', 'ranger', 'mage']
 }
 
 // Resolves the sprite for a bespoke default armor-set piece (armor/helmet/gloves/boots/pants),
@@ -113,13 +115,25 @@ function resolveArmorSetImage(slot, playerRace, playerJob, level) {
   const lineage = WARRIOR_JOBS.includes(playerJob) ? 'warrior'
     : TECHNICIAN_JOBS.includes(playerJob) ? 'technician'
     : BOW_JOBS.includes(playerJob) ? 'ranger'
+    : STAFF_JOBS.includes(playerJob) ? 'mage'
     : null
   if (!lineage) return null
   const available = ARMOR_SET_LINEAGES[playerRace] || []
   if (!available.includes(lineage)) return null
 
   const lvl = level || 1
-  const tier = lvl >= 55 ? 55 : lvl >= 42 ? 42 : lvl >= 32 ? 32 : 1
+  let tier = 1
+  if (playerRace === 'arctron') {
+    tier = lvl >= 55 ? 55 : lvl >= 42 ? 42 : lvl >= 32 ? 32 : 1
+  } else {
+    tier = lvl >= 66 ? 66 : lvl >= 55 ? 55 : lvl >= 42 ? 42 : lvl >= 32 ? 32 : 1
+  }
+
+  if (playerRace === 'bionex') {
+    return `/assets/armor_bionex/defbionex${lineage}lv${tier}${slot}.png`
+  } else if (playerRace === 'celestra') {
+    return `/assets/armor_celestra/defcelestra${lineage}lv${tier}${slot}.png`
+  }
   return `/assets/armor/def${playerRace}${lineage}lv${tier}${slot}.png`
 }
 
@@ -320,6 +334,7 @@ export function verifyStarterArmorSet(player) {
   const lineage = WARRIOR_JOBS.includes(player.job) ? 'warrior'
     : TECHNICIAN_JOBS.includes(player.job) ? 'technician'
     : BOW_JOBS.includes(player.job) ? 'ranger'
+    : STAFF_JOBS.includes(player.job) ? 'mage'
     : null
   if (!lineage) return player
   const available = ARMOR_SET_LINEAGES[player.race] || []
@@ -2947,7 +2962,9 @@ export const useGameStore = create(
         // Calculate final Crit and Dodge rates (base + tier + gear)
         const baseCrit = player.race === 'celestra' ? 15 : 12
         const critRate = (baseCrit + tierCrit + critBonus) / 100
-        const dodgeRate = (5 + tierDodge) / 100
+        // Race dodge modifier: Celestra (agile/mystic) +5%, Bionex (tech/balanced) +2%, Arctron 0%
+        const raceDodgeBonus = player.race === 'celestra' ? 5 : player.race === 'bionex' ? 2 : 0
+        const dodgeRate = (5 + raceDodgeBonus + tierDodge) / 100
 
         return {
           meleeAtk: Math.floor(atk * (1 + (pt.melee?.val || 1) * 0.015) + (str * 3)),

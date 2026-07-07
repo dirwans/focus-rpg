@@ -471,3 +471,18 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 - **Starter Gear**: Added a new `verifyStarterWeapon` function that equips new level 1 players with their faction-specific starter weapon (`Force Wand` for Celestra, `Beam Bow` for Bionex, `Flame Thrower`/`Greatsword` for Arctron depending on job) in their inventory bag, integrated into the character creation pipeline.
 - **Verification**: Verified that the code and database changes compile correctly and that `npm run build` succeeds.
 
+---
+
+### ⚡ Milestone 35: Fix Hard Refresh Screen Flashing [PENDING DEPLOYMENT]
+- **Bug**: Fixed a race condition where hard-refreshing the browser briefly flashed the Character Creator (with its default Arctron background and logo theme) for split seconds before the user's actual save data loaded from the cloud.
+- **Logic**: Added a new `loadingSave` local state to `App.jsx` that remains `true` while the save file is loading. The root component renders the loading overlay until the save fetch finishes, blocking premature mounts of `CharacterCreate`.
+- **Verification**: Verified that the project builds correctly and passes the local production build check.
+
+---
+
+### 🛡️ Milestone 36: Bionex & Celestra Armor Sets Integration [PENDING DEPLOYMENT]
+- **Assets**: Extracted 150 transparent `.png` icons for Bellato (Bionex) and Cora (Celestra) Warrior, Ranger, and Mage (Force) classes at levels `1`, `32`, `42`, `55`, and `66` (extracted from levels 13, 31, 41, 45, and 50 on `rflib.ru` respectively). Placed them in `src/assets/armor_bionex/`, `src/assets/armor_celestra/` and copied to matching public folders.
+- **Database**: Registered 150 new `_armorset_` items in `src/data/items.json` for Bionex and Celestra armor sets, matching the proper stats, emojis, class names, job arrays, level requirements, and asset image paths.
+- **Logic**: Updated `resolveArmorSetImage` in `src/store/gameStore.js` to map Mage/Force (`STAFF_JOBS`) class lineage, updated Bionex/Celestra asset folder paths, and enabled level 66 tiering. Also updated `verifyStarterArmorSet` to auto-equip starting Mage armor pieces for Bionex and Celestra characters.
+- **Verification**: Verified that the local project builds correctly and passes the production compile check.
+

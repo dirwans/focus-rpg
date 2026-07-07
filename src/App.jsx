@@ -41,6 +41,7 @@ export default function App() {
   const lastSyncRef = useRef('')
 
   const [hydrated, setHydrated] = useState(() => useGameStore.persist.hasHydrated())
+  const [loadingSave, setLoadingSave] = useState(false)
 
   // Capacitor hardware back button handler
   useEffect(() => {
@@ -150,6 +151,7 @@ export default function App() {
       player: { ...s.player, username: user.username, name: s.player.username === user.username ? s.player.name : user.username, race: null },
     }))
     localStorage.removeItem('focus-rpg-save')
+    setLoadingSave(true)
     loadSave().then((cloud) => {
       if (cloud) {
         // Force-apply correct username regardless of what's stored on server, preserve custom name
@@ -191,7 +193,10 @@ export default function App() {
         syncSave({ ...freshState })
         lastSyncRef.current = snap(freshState)
       }
-      setTimeout(() => { readyRef.current = true }, 600)
+      setTimeout(() => { 
+        readyRef.current = true 
+        setLoadingSave(false)
+      }, 600)
     })
     
     // Load archon data early to apply Auras & Mantles
@@ -276,7 +281,7 @@ export default function App() {
     containerBg = 'radial-gradient(120% 65% at 50% -5%, #1a1642 0%, #100e2c 50%, #07061a 100%)'
   }
 
-  if (loading || !hydrated) {
+  if (loading || !hydrated || loadingSave) {
     return (
       <div className="game-root">
         <div className="game-container" style={{ background: containerBg }}>
