@@ -384,7 +384,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🔴 Milestone 25: Arctron-Exclusive Special Gun (Lv.32/42/55) [PENDING DEPLOYMENT]
+### 🔴 Milestone 25: Arctron-Exclusive Special Gun (Lv.32/42/55) [DEPLOYED]
 - **Assets**: Processed a 3-panel sci-fi cannon/rifle reference sheet (red Lv.32, gold Lv.42, blue Lv.55 — top-to-bottom increasing level, same convention as axe/staff). Gold-tier design has an intentional open cage/lattice barrel — background shows through by design, not a rembg defect. Saved as `defarctronlv32special.png` / `defarctronlv42special.png` / `defarctronlv55special.png` in `src/assets/weapons/` and `public/assets/weapons/`, ~480px max dimension.
 - **Eligibility**: Arctron-only, and unlike the Bionex/Celestra staff or the ranger bow/gun, this covers Arctron's *remaining* lineages — warrior (vanguard/juggernaut/dreadnought) and technician (architect/core_engineer/cybermancer). Arctron has no caster class, and its ranger (gunner/marksman/railgunner/annihilator) already gets the Milestone 24 gun, so this slots in as the Arctron-specific replacement for the generic all-faction axe at Lv.32/42/55 — Bionex/Celestra warrior/specialist classes are unaffected and still get the axe. No Lv.1 variant provided; Lv.1 Arctron still falls through to the generic sword.
 - **`resolveItemImage`**: Added a `playerRace === 'arctron'` check ahead of the axe fallback (after the caster/ranger checks, so it never overrides staff or gun).
@@ -392,11 +392,21 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🛡️ Milestone 26: Arctron Warrior Default Armor Set (Lv.1/32/42/55) [PENDING DEPLOYMENT]
+### 🛡️ Milestone 26: Arctron Warrior Default Armor Set (Lv.1/32/42/55) [DEPLOYED]
 - **Assets**: Processed 4 reference sheets (Lv.1 silver/gold, Lv.32 silver/blue, Lv.42 dark purple, Lv.55 red/gold), each a 5-panel composite (gloves, chest/shoulder "armor", helmet, boots, hip "pants" — no cape/mantle piece). 20 files total saved to `src/assets/armor/` and `public/assets/armor/` as `defarctronwarriorlv{1,32,42,55}{armor,helmet,gloves,boots,pants}.png`, ~480px max dimension.
 - **Slot mapping** confirmed against the actual equipment slot ids in `gameStore.js`/`Inventory.jsx` (`armor`/`helmet`/`gloves`/`boots`/`pants` — `mantle` is a separate cape slot, not covered by this set).
 - **Tooling improvement**: wrote a reusable `scratch/process_armor_set.py` pipeline (divider detection via row mean+std rather than row-min, so faint/low-contrast divider lines between panels are found reliably; background removal keeps enclosed same-color holes above a size threshold so real gaps like trigger guards/eye sockets punch through, while stripping only truly tiny stray-pixel noise so paired items like gloves/boots keep both pieces). Caught and fixed a divider-detection miss on the Lv.1 sheet (armor↔helmet boundary was extremely faint, ~20/255) that had blunted the helmet's fin tips by ~4px; the 3 later tiers (32/42/55) processed cleanly on the first pass with the improved pipeline.
 - Not yet wired into `equipItem`/starter-gear/`resolveItemImage` — this milestone is asset-processing only, per explicit user instruction to hold off on the code integration until the assets are confirmed.
+
+---
+
+### 🏗️ Milestone 27: Armor-Set Infrastructure (Race/Job-Aware, Multi-Slot) [DEPLOYED]
+- **Generic resolver**: Added `WARRIOR_JOBS`/`TECHNICIAN_JOBS` lineage lists, an `ARMOR_SET_LINEAGES` availability map (currently just `{ arctron: ['warrior'] }`), and `resolveArmorSetImage(slot, race, job, level)` in [gameStore.js](file:///c:/projects/focus-rpg/src/store/gameStore.js) — resolves the correct armor/helmet/gloves/boots/pants sprite by race+job-lineage+level tier, returning `null` (→ falls back to `item.image`) for any race/lineage combo without bespoke art yet. Designed so adding Bionex/Celestra warrior sets, or an Arctron technician set, later is just: add the asset files + add one entry to `ARMOR_SET_LINEAGES`.
+- **Scoped via a new id namespace** (`*_armorset_*`, e.g. `helmet_armorset_arctron_lv32`) so the pre-existing 130 `arm_arctron_*` chest-armor items (all races, all levels, no job lock, static `item.image` URLs) are completely untouched — `resolveItemImage` only intercepts items whose id contains `_armorset_`.
+- **`items.json`**: Added 20 new purchasable items (5 slots × 4 tiers: Lv.1/32/42/55), rarity `C`, `race: "arctron"`, `job: [destroyer, vanguard, juggernaut, dreadnought]` (array — reuses the Milestone 21 multi-value equip-lock support). This fills a real content gap: helmet/gloves/boots/pants previously had **zero** generic/common items in the whole game (only named unique sets like Archon/Council/Legendary existed for those slots). Bonus stats are placeholder values scaled off the existing `arm_arctron_*_C` def-per-level curve (~9.6×level) split across pieces — **not balance-reviewed, flagged for the user to tune**.
+- **Bug fix in `buyFromNpc`**: the shop's random-item-pool filter only ever checked `item.job` for `type === 'weapon'` — armor/helmet/gloves/boots/pants items could never be job-restricted at the shop even though `equipItem` already enforced it after purchase. Generalized the filter to check race+job (both array-or-string) for every equipment type, so the Armor Master NPC now correctly only offers these Warrior-locked pieces to Warrior-lineage Arctron characters.
+- **Verified end-to-end in-browser** (not just logic replication this time): logged in as an Arctron Vanguard (tier2 warrior), bought a helmet from the Armor Master NPC — correctly received `helmet_armorset_arctron_lv32`, confirmed the bag-slot thumbnail and the equip-detail popup both show the bespoke sprite (`/assets/armor/defarctronwarriorlv32helmet.png`), equipped it, and confirmed `player.equipment.helmet` updated correctly and the sprite renders in the actual equipment slot grid.
+- `npm run build` passes. Starter-gear auto-equip at character creation (mirroring the shield pattern) was intentionally left out of this milestone's scope — not requested.
 
 
 
