@@ -13,9 +13,12 @@ npm start        # Start Express server (port 4001)
 
 ## Deploy
 
-- `deploy.ps1` — builds, SCP's dist/ + server.js to VPS (`103.189.234.206`), then SSH restarts PM2
+- `deploy.ps1` (local) — commits/pushes any dirty working tree changes to `origin/main`, builds locally to validate, then SSHes into the VPS and runs `deploy.sh`.
+- `deploy.sh` (on VPS) — `git pull origin main` → `rm -rf dist` → `npm install` → `npm run build` → `pm2 restart focus-rpg --update-env`.
 - App URL: https://103.189.234.206.nip.io/
 - PM2 process name: `focus-rpg`
+- No GitHub Actions CI — a `.github/workflows/deploy.yml` existed briefly (mid-2026) but was removed as redundant with the VPS-side `deploy.sh`. Deploys are always driven manually (or by Claude Code) via `deploy.ps1`/SSH, never by pushing to `main`.
+- **Deployment governance rule** (see `development_journal.md` top section, in force since 2026-07-07): any `deploy.ps1` run must bundle **at least 5 separate modifications**, and every milestone/change must be logged in `development_journal.md` as a dated entry tagged `[PENDING DEPLOYMENT]` (committed locally, not yet synced) or `[DEPLOYED]` (synced via `deploy.ps1`). Don't ship a single isolated fix in its own deploy — queue it in the journal and batch it with other pending work first, unless explicitly told to ship immediately.
 
 ## Architecture
 
@@ -41,13 +44,22 @@ Per-user saves stored in `data/save_<username>.json` on VPS. Session tokens expi
 
 `src/components/TransparentSprite.jsx` — canvas-based green screen / BFS background removal, bounding-box crop, 2px black outline generation. Uses `/api/proxy-image` for remote URLs.
 
-`src/components/PilotSprites.jsx` — thin wrappers per race (AcretonSprite, BelterraSprite, CoralisSprite). `fill` prop triggers bust portrait mode for the profile card; battle mode uses the full sprite.
-
-**Belterra caveat**: The raw `belterra_pilot_v3.png` (1024×571 landscape) has the character centered-right with a weapon jutting left, so the bounding box is very wide. Use `belterra_pilot_portrait.png` (pre-cropped to 460×500, face-centered) for fill/profile mode only. Battle mode stays on the full image.
+`src/components/PilotSprites.jsx` — thin wrappers per race (`ArctronSprite`, `BionexSprite`, `CelestraSprite`). `fill` prop triggers bust portrait mode for the profile card; battle mode uses the full sprite. Job art is grouped by lane (`getJobLane`: warrior/ranger/mystic/specialist) rather than one image per exact job — tier2-4 promotions currently reuse the tier1 lane sprite (no dedicated per-tier character art yet).
 
 ### Race System
 
-Three races: `acreton` (mech), `belterra` (pilot), `coralis` (pilot). Equipment is race-locked: Coralis-only gear cannot be equipped by Acreton players. Race affects base stats, FP regeneration, and which items are equippable. See `src/data/races.json`.
+Three races: `arctron` (cybernetic mecha faction), `bionex` (technocratic human alliance), `celestra` (arcane elves). **Note**: older docs/code comments may refer to legacy names `acreton`/`belterra`/`coralis` — those are stale, the actual race ids used everywhere are `arctron`/`bionex`/`celestra`. Equipment can be race-locked and/or job-locked (see below). Race affects base stats, FP regeneration, and which items are equippable. See `src/data/races.json` and `src/data/jobs.json` (per-race `tier1`-`tier4` job arrays).
+
+### Equipment Restriction & Default Weapon Resolution
+
+`equipItem` (`gameStore.js`) validates `item.race` and `item.job` — both accept either a single string or an **array** (arrays let one item restrict to multiple races/jobs at once, e.g. a Bionex+Celestra-only staff).
+
+`resolveItemImage(item, playerRace, playerJob)` (`gameStore.js`) picks the sprite for generic/default weapon-type items by level tier (1/32/42/55) **and** the player's job lineage — not the item's own `image` field:
+- Caster lineage (`STAFF_JOBS`: Celestra Mage/Summoner, Bionex Psion) → staff (`defbioncelestralv*staff*.png`)
+- Ranger lineage (`BOW_JOBS`: all 3 races) → bow for Celestra, gun for Arctron/Bionex (`defallfactionslv*bow.png` / `*gun.png`)
+- Everything else → sword (Lv.1, 4 random variants) then axe (Lv.32/42/55) (`defallfactionslv1sword*.png` / `*axe.png`)
+
+Shields follow an equivalent race-keyed (not job-keyed) tier lookup for `arm_All_*` ids.
 
 ### Auth
 
