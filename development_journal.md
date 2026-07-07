@@ -458,3 +458,16 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 - **Items**: Added 20 new purchasable items to `src/data/items.json` for the Technician set (`*_armorset_arctron_technician_lv*`), restricted to the Arctron Specialist/Technician job lineage (`["engineer", "architect", "core_engineer", "cybermancer"]`).
 - **Logic**: Registered `'technician'` in `ARMOR_SET_LINEAGES.arctron` within `src/store/gameStore.js` to enable automatic mecha technician sprite resolution.
 - **Verification**: Verified that the files build correctly and that `npm run build` succeeds locally.
+
+---
+
+### 🛡️ Milestone 34: Matching Faction Equipment Level Tiers & Starter Weapon [DEPLOYED]
+- **Database**: Migrated weapon and shield level requirement tiers in `src/data/items.json` to match the exact armor level tiers:
+  - Level 30 -> Level 32 (ID modified from `_30_` to `_32_`, name updated to `Lv.32`)
+  - Level 40 -> Level 42 (ID modified from `_40_` to `_42_`, name updated to `Lv.42`)
+  - Level 50 -> Level 55 (ID modified from `_50_` to `_55_`, name updated to `Lv.55`)
+  - Duplicate item templates resulting from the migration were resolved and cleaned.
+- **Logic**: Updated `resolveItemImage` in `src/store/gameStore.js` to change the lvl check thresholds from `30` to `32` for weapon and shield assets.
+- **Starter Gear**: Added a new `verifyStarterWeapon` function that equips new level 1 players with their faction-specific starter weapon (`Force Wand` for Celestra, `Beam Bow` for Bionex, `Flame Thrower`/`Greatsword` for Arctron depending on job) in their inventory bag, integrated into the character creation pipeline.
+- **Verification**: Verified that the code and database changes compile correctly and that `npm run build` succeeds.
+

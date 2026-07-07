@@ -132,18 +132,18 @@ export function resolveItemImage(item, playerRace, playerJob) {
     if (race === 'bionex') {
       if (lvl >= 55) return '/assets/bionex/shields/lv55bionexshielddef.png'
       if (lvl >= 42) return '/assets/bionex/shields/lv42bionexshielddef.png'
-      if (lvl >= 30) return '/assets/bionex/shields/lv32bionexshielddef.png'
+      if (lvl >= 32) return '/assets/bionex/shields/lv32bionexshielddef.png'
       return '/assets/bionex/shields/lv1bionexshielddefault.png'
     } else if (race === 'celestra') {
       if (lvl >= 55) return '/assets/celestra/shields/lv55celesshielddef.png'
       if (lvl >= 42) return '/assets/celestra/shields/lv42celesshielddef.png'
-      if (lvl >= 30) return '/assets/celestra/shields/lv32celesshielddef.png'
+      if (lvl >= 32) return '/assets/celestra/shields/lv32celesshielddef.png'
       return '/assets/celestra/shields/lv1celesshielddefault.png'
     } else {
       // Arctron
       if (lvl >= 55) return '/assets/arctron/shields/lv55arctronshielddef.png'
       if (lvl >= 42) return '/assets/arctron/shields/lv42arctronshielddef.png'
-      if (lvl >= 30) return '/assets/arctron/shields/lv32arctronshielddef.png'
+      if (lvl >= 32) return '/assets/arctron/shields/lv32arctronshielddef.png'
       if (lvl >= 10) return '/assets/arctron/shields/lv10arctronshielddefault.png'
       return '/assets/arctron/shields/lv1arctronshielddefault.png'
     }
@@ -156,7 +156,7 @@ export function resolveItemImage(item, playerRace, playerJob) {
     if (isCaster) {
       if (lvl >= 55) return '/assets/weapons/defbioncelestralv55staff.png'
       if (lvl >= 42) return '/assets/weapons/defbioncelestralv42staff.png'
-      if (lvl >= 30) return '/assets/weapons/defbioncelestralv32staff.png'
+      if (lvl >= 32) return '/assets/weapons/defbioncelestralv32staff.png'
       const index = (seed % 2) + 1
       return `/assets/weapons/defbioncelestralv1staff${index}.png`
     }
@@ -167,7 +167,7 @@ export function resolveItemImage(item, playerRace, playerJob) {
       const weaponKind = playerRace === 'celestra' ? 'bow' : 'gun'
       if (lvl >= 55) return `/assets/weapons/defallfactionslv55${weaponKind}.png`
       if (lvl >= 42) return `/assets/weapons/defallfactionslv42${weaponKind}.png`
-      if (lvl >= 30) return `/assets/weapons/defallfactionslv32${weaponKind}.png`
+      if (lvl >= 32) return `/assets/weapons/defallfactionslv32${weaponKind}.png`
       return `/assets/weapons/defallfactionslv1${weaponKind}.png`
     }
 
@@ -176,12 +176,12 @@ export function resolveItemImage(item, playerRace, playerJob) {
     if (playerRace === 'arctron') {
       if (lvl >= 55) return '/assets/weapons/defarctronlv55special.png'
       if (lvl >= 42) return '/assets/weapons/defarctronlv42special.png'
-      if (lvl >= 30) return '/assets/weapons/defarctronlv32special.png'
+      if (lvl >= 32) return '/assets/weapons/defarctronlv32special.png'
     }
 
     if (lvl >= 55) return '/assets/weapons/defallfactionslv55axe.png'
     if (lvl >= 42) return '/assets/weapons/defallfactionslv42axe.png'
-    if (lvl >= 30) return '/assets/weapons/defallfactionslv32axe.png'
+    if (lvl >= 32) return '/assets/weapons/defallfactionslv32axe.png'
     const index = (seed % 4) + 1
     return `/assets/weapons/defallfactionslv1sword${index}.png`
   }
@@ -258,6 +258,53 @@ export function verifyStarterShield(player) {
     return {
       ...player,
       inventory: newInventory
+    }
+  }
+  return player
+}
+
+export function verifyStarterWeapon(player) {
+  if (!player || !player.race || !player.job || player.level > 1) return player
+  
+  // Check if they already have any weapon (checks equipment or inventory for weapon item)
+  const hasWeapon = !!(player.equipment?.weapon || player.inventory.some(i => i.type === 'weapon'))
+  if (hasWeapon) return player
+
+  const isCaster = STAFF_JOBS.includes(player.job)
+  const isRanger = BOW_JOBS.includes(player.job)
+  const isTech = TECHNICIAN_JOBS.includes(player.job)
+
+  // Default weapon: Greatsword (Melee Warrior)
+  let starterWeaponId = "wep_All_1_D"
+
+  if (player.race === 'arctron') {
+    if (isRanger) {
+      starterWeaponId = "wep_job_gunner_D"
+    } else if (isTech) {
+      starterWeaponId = "wep_arctron_1_D"
+    }
+  } else if (player.race === 'bionex') {
+    if (isRanger) {
+      starterWeaponId = "wep_bionex_1_D"
+    } else if (isTech) {
+      starterWeaponId = "wep_job_bionex_specialist_D"
+    } else if (isCaster) {
+      starterWeaponId = "wep_job_bionex_spiritualist_D"
+    }
+  } else if (player.race === 'celestra') {
+    if (isCaster) {
+      starterWeaponId = "wep_celestra_1_D"
+    } else if (isRanger) {
+      starterWeaponId = "wep_job_mystic_archer_D"
+    }
+  }
+
+  const weaponDef = itemsData.items.find((it) => it.id === starterWeaponId)
+  if (weaponDef) {
+    const newWeapon = { ...weaponDef, uid: Date.now() + 99, enhancement_level: 0 }
+    return {
+      ...player,
+      inventory: [...(player.inventory || []), newWeapon]
     }
   }
   return player
@@ -2505,7 +2552,7 @@ export const useGameStore = create(
               secondsLeft: remaining,
             }
           }
-          next.player = verifyStarterShield(next.player)
+          next.player = verifyStarterWeapon(verifyStarterShield(next.player))
           return next
         })
       },
@@ -3158,7 +3205,7 @@ export const useGameStore = create(
       getUpgradeCost: (key) => calcUpgradeCost(key, get().player.upgrades?.[key] || 0),
       loadPlayer: (savedPlayer) => set((s) => {
         const player = { ...initialPlayer, ...savedPlayer }
-        return { player: verifyStarterShield(player) }
+        return { player: verifyStarterWeapon(verifyStarterShield(player)) }
       }),
       getExpToNext: () => getMinutesToNextLevel(get().player.level),
 

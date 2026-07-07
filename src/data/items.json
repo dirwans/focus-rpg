@@ -4053,3122 +4053,2082 @@
       "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
-      "id": "wep_arctron_30_D",
-      "name": "[D] Lv.30 Grenade Launcher",
+      "id": "wep_arctron_32_D",
+      "name": "[D] Lv.32 Grenade Launcher",
       "emoji": "\ud83d\ude80",
       "rarity": "D",
       "type": "weapon",
       "race": "arctron",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 420
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
     },
     {
-      "id": "arm_arctron_30_D",
-      "name": "[D] Lv.30 Striker Frame",
+      "id": "arm_arctron_32_D",
+      "name": "[D] Lv.32 Striker Frame",
       "emoji": "\ud83e\uddbe",
       "rarity": "D",
       "type": "armor",
       "race": "arctron",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 240
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihawd70.png"
     },
     {
-      "id": "wep_arctron_30_C",
-      "name": "[C] Lv.30 Grenade Launcher",
+      "id": "wep_arctron_32_C",
+      "name": "[C] Lv.32 Grenade Launcher",
       "emoji": "\ud83d\ude80",
       "rarity": "C",
       "type": "weapon",
       "race": "arctron",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 504
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
     },
     {
-      "id": "arm_arctron_30_C",
-      "name": "[C] Lv.30 Striker Frame",
+      "id": "arm_arctron_32_C",
+      "name": "[C] Lv.32 Striker Frame",
       "emoji": "\ud83e\uddbe",
       "rarity": "C",
       "type": "armor",
       "race": "arctron",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 288
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihawd70.png"
     },
     {
-      "id": "wep_arctron_30_B",
-      "name": "[B] Lv.30 Grenade Launcher",
+      "id": "wep_arctron_32_B",
+      "name": "[B] Lv.32 Grenade Launcher",
       "emoji": "\ud83d\ude80",
       "rarity": "B",
       "type": "weapon",
       "race": "arctron",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 630
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
     },
     {
-      "id": "arm_arctron_30_B",
-      "name": "[B] Lv.30 Striker Frame",
+      "id": "arm_arctron_32_B",
+      "name": "[B] Lv.32 Striker Frame",
       "emoji": "\ud83e\uddbe",
       "rarity": "B",
       "type": "armor",
       "race": "arctron",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 360
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihawd70.png"
     },
     {
-      "id": "wep_arctron_30_A",
-      "name": "[A] Lv.30 Grenade Launcher",
+      "id": "wep_arctron_32_A",
+      "name": "[A] Lv.32 Grenade Launcher",
       "emoji": "\ud83d\ude80",
       "rarity": "A",
       "type": "weapon",
       "race": "arctron",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 840
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
     },
     {
-      "id": "arm_arctron_30_A",
-      "name": "[A] Lv.30 Striker Frame",
+      "id": "arm_arctron_32_A",
+      "name": "[A] Lv.32 Striker Frame",
       "emoji": "\ud83e\uddbe",
       "rarity": "A",
       "type": "armor",
       "race": "arctron",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 480
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihawd70.png"
     },
     {
-      "id": "wep_arctron_30_S",
-      "name": "[S] Lv.30 Grenade Launcher",
+      "id": "wep_arctron_32_S",
+      "name": "[S] Lv.32 Grenade Launcher",
       "emoji": "\ud83d\ude80",
       "rarity": "S",
       "type": "weapon",
       "race": "arctron",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 1260
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
     },
     {
-      "id": "arm_arctron_30_S",
-      "name": "[S] Lv.30 Striker Frame",
+      "id": "arm_arctron_32_S",
+      "name": "[S] Lv.32 Striker Frame",
       "emoji": "\ud83e\uddbe",
       "rarity": "S",
       "type": "armor",
       "race": "arctron",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 720
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihawd70.png"
     },
     {
-      "id": "wep_arctron_30_SS",
-      "name": "[SS] Lv.30 Grenade Launcher",
+      "id": "wep_arctron_32_SS",
+      "name": "[SS] Lv.32 Grenade Launcher",
       "emoji": "\ud83d\ude80",
       "rarity": "SS",
       "type": "weapon",
       "race": "arctron",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 1890
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
     },
     {
-      "id": "arm_arctron_30_SS",
-      "name": "[SS] Lv.30 Striker Frame",
+      "id": "arm_arctron_32_SS",
+      "name": "[SS] Lv.32 Striker Frame",
       "emoji": "\ud83e\uddbe",
       "rarity": "SS",
       "type": "armor",
       "race": "arctron",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 1080
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihawd70.png"
     },
     {
-      "id": "wep_arctron_30_SSS",
-      "name": "[SSS] Lv.30 Grenade Launcher",
+      "id": "wep_arctron_32_SSS",
+      "name": "[SSS] Lv.32 Grenade Launcher",
       "emoji": "\ud83d\ude80",
       "rarity": "SSS",
       "type": "weapon",
       "race": "arctron",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 2940
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
     },
     {
-      "id": "arm_arctron_30_SSS",
-      "name": "[SSS] Lv.30 Striker Frame",
+      "id": "arm_arctron_32_SSS",
+      "name": "[SSS] Lv.32 Striker Frame",
       "emoji": "\ud83e\uddbe",
       "rarity": "SSS",
       "type": "armor",
       "race": "arctron",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 1680
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihawd70.png"
     },
     {
-      "id": "wep_arctron_30_SR",
-      "name": "[SR] Lv.30 Grenade Launcher",
+      "id": "wep_arctron_32_SR",
+      "name": "[SR] Lv.32 Grenade Launcher",
       "emoji": "\ud83d\ude80",
       "rarity": "SR",
       "type": "weapon",
       "race": "arctron",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 4200
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
     },
     {
-      "id": "arm_arctron_30_SR",
-      "name": "[SR] Lv.30 Striker Frame",
+      "id": "arm_arctron_32_SR",
+      "name": "[SR] Lv.32 Striker Frame",
       "emoji": "\ud83e\uddbe",
       "rarity": "SR",
       "type": "armor",
       "race": "arctron",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 2400
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihawd70.png"
     },
     {
-      "id": "wep_arctron_30_SSR",
-      "name": "[SSR] Lv.30 Grenade Launcher",
+      "id": "wep_arctron_32_SSR",
+      "name": "[SSR] Lv.32 Grenade Launcher",
       "emoji": "\ud83d\ude80",
       "rarity": "SSR",
       "type": "weapon",
       "race": "arctron",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 6300
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
     },
     {
-      "id": "arm_arctron_30_SSR",
-      "name": "[SSR] Lv.30 Striker Frame",
+      "id": "arm_arctron_32_SSR",
+      "name": "[SSR] Lv.32 Striker Frame",
       "emoji": "\ud83e\uddbe",
       "rarity": "SSR",
       "type": "armor",
       "race": "arctron",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 3600
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihawd70.png"
     },
     {
-      "id": "wep_arctron_30_UR",
-      "name": "[UR] Lv.30 Grenade Launcher",
+      "id": "wep_arctron_32_UR",
+      "name": "[UR] Lv.32 Grenade Launcher",
       "emoji": "\ud83d\ude80",
       "rarity": "UR",
       "type": "weapon",
       "race": "arctron",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 10500
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
     },
     {
-      "id": "arm_arctron_30_UR",
-      "name": "[UR] Lv.30 Striker Frame",
+      "id": "arm_arctron_32_UR",
+      "name": "[UR] Lv.32 Striker Frame",
       "emoji": "\ud83e\uddbe",
       "rarity": "UR",
       "type": "armor",
       "race": "arctron",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 6000
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihawd70.png"
     },
     {
-      "id": "wep_bionex_30_D",
-      "name": "[D] Lv.30 Sniper Rifle",
+      "id": "wep_bionex_32_D",
+      "name": "[D] Lv.32 Sniper Rifle",
       "emoji": "\ud83d\udd2b",
       "rarity": "D",
       "type": "weapon",
       "race": "bionex",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 420
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
     },
     {
-      "id": "arm_bionex_30_D",
-      "name": "[D] Lv.30 Sniper Suit",
+      "id": "arm_bionex_32_D",
+      "name": "[D] Lv.32 Sniper Suit",
       "emoji": "\ud83e\udde5",
       "rarity": "D",
       "type": "armor",
       "race": "bionex",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 240
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/ihbwa13.png"
     },
     {
-      "id": "wep_bionex_30_C",
-      "name": "[C] Lv.30 Sniper Rifle",
+      "id": "wep_bionex_32_C",
+      "name": "[C] Lv.32 Sniper Rifle",
       "emoji": "\ud83d\udd2b",
       "rarity": "C",
       "type": "weapon",
       "race": "bionex",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 504
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
     },
     {
-      "id": "arm_bionex_30_C",
-      "name": "[C] Lv.30 Sniper Suit",
+      "id": "arm_bionex_32_C",
+      "name": "[C] Lv.32 Sniper Suit",
       "emoji": "\ud83e\udde5",
       "rarity": "C",
       "type": "armor",
       "race": "bionex",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 288
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/ihbwa13.png"
     },
     {
-      "id": "wep_bionex_30_B",
-      "name": "[B] Lv.30 Sniper Rifle",
+      "id": "wep_bionex_32_B",
+      "name": "[B] Lv.32 Sniper Rifle",
       "emoji": "\ud83d\udd2b",
       "rarity": "B",
       "type": "weapon",
       "race": "bionex",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 630
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
     },
     {
-      "id": "arm_bionex_30_B",
-      "name": "[B] Lv.30 Sniper Suit",
+      "id": "arm_bionex_32_B",
+      "name": "[B] Lv.32 Sniper Suit",
       "emoji": "\ud83e\udde5",
       "rarity": "B",
       "type": "armor",
       "race": "bionex",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 360
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/ihbwa13.png"
     },
     {
-      "id": "wep_bionex_30_A",
-      "name": "[A] Lv.30 Sniper Rifle",
+      "id": "wep_bionex_32_A",
+      "name": "[A] Lv.32 Sniper Rifle",
       "emoji": "\ud83d\udd2b",
       "rarity": "A",
       "type": "weapon",
       "race": "bionex",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 840
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
     },
     {
-      "id": "arm_bionex_30_A",
-      "name": "[A] Lv.30 Sniper Suit",
+      "id": "arm_bionex_32_A",
+      "name": "[A] Lv.32 Sniper Suit",
       "emoji": "\ud83e\udde5",
       "rarity": "A",
       "type": "armor",
       "race": "bionex",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 480
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/ihbwa13.png"
     },
     {
-      "id": "wep_bionex_30_S",
-      "name": "[S] Lv.30 Sniper Rifle",
+      "id": "wep_bionex_32_S",
+      "name": "[S] Lv.32 Sniper Rifle",
       "emoji": "\ud83d\udd2b",
       "rarity": "S",
       "type": "weapon",
       "race": "bionex",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 1260
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
     },
     {
-      "id": "arm_bionex_30_S",
-      "name": "[S] Lv.30 Sniper Suit",
+      "id": "arm_bionex_32_S",
+      "name": "[S] Lv.32 Sniper Suit",
       "emoji": "\ud83e\udde5",
       "rarity": "S",
       "type": "armor",
       "race": "bionex",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 720
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/ihbwa13.png"
     },
     {
-      "id": "wep_bionex_30_SS",
-      "name": "[SS] Lv.30 Sniper Rifle",
+      "id": "wep_bionex_32_SS",
+      "name": "[SS] Lv.32 Sniper Rifle",
       "emoji": "\ud83d\udd2b",
       "rarity": "SS",
       "type": "weapon",
       "race": "bionex",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 1890
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
     },
     {
-      "id": "arm_bionex_30_SS",
-      "name": "[SS] Lv.30 Sniper Suit",
+      "id": "arm_bionex_32_SS",
+      "name": "[SS] Lv.32 Sniper Suit",
       "emoji": "\ud83e\udde5",
       "rarity": "SS",
       "type": "armor",
       "race": "bionex",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 1080
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/ihbwa13.png"
     },
     {
-      "id": "wep_bionex_30_SSS",
-      "name": "[SSS] Lv.30 Sniper Rifle",
+      "id": "wep_bionex_32_SSS",
+      "name": "[SSS] Lv.32 Sniper Rifle",
       "emoji": "\ud83d\udd2b",
       "rarity": "SSS",
       "type": "weapon",
       "race": "bionex",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 2940
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
     },
     {
-      "id": "arm_bionex_30_SSS",
-      "name": "[SSS] Lv.30 Sniper Suit",
+      "id": "arm_bionex_32_SSS",
+      "name": "[SSS] Lv.32 Sniper Suit",
       "emoji": "\ud83e\udde5",
       "rarity": "SSS",
       "type": "armor",
       "race": "bionex",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 1680
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/ihbwa13.png"
     },
     {
-      "id": "wep_bionex_30_SR",
-      "name": "[SR] Lv.30 Sniper Rifle",
+      "id": "wep_bionex_32_SR",
+      "name": "[SR] Lv.32 Sniper Rifle",
       "emoji": "\ud83d\udd2b",
       "rarity": "SR",
       "type": "weapon",
       "race": "bionex",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 4200
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
     },
     {
-      "id": "arm_bionex_30_SR",
-      "name": "[SR] Lv.30 Sniper Suit",
+      "id": "arm_bionex_32_SR",
+      "name": "[SR] Lv.32 Sniper Suit",
       "emoji": "\ud83e\udde5",
       "rarity": "SR",
       "type": "armor",
       "race": "bionex",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 2400
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/ihbwa13.png"
     },
     {
-      "id": "wep_bionex_30_SSR",
-      "name": "[SSR] Lv.30 Sniper Rifle",
+      "id": "wep_bionex_32_SSR",
+      "name": "[SSR] Lv.32 Sniper Rifle",
       "emoji": "\ud83d\udd2b",
       "rarity": "SSR",
       "type": "weapon",
       "race": "bionex",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 6300
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
     },
     {
-      "id": "arm_bionex_30_SSR",
-      "name": "[SSR] Lv.30 Sniper Suit",
+      "id": "arm_bionex_32_SSR",
+      "name": "[SSR] Lv.32 Sniper Suit",
       "emoji": "\ud83e\udde5",
       "rarity": "SSR",
       "type": "armor",
       "race": "bionex",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 3600
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/ihbwa13.png"
     },
     {
-      "id": "wep_bionex_30_UR",
-      "name": "[UR] Lv.30 Sniper Rifle",
+      "id": "wep_bionex_32_UR",
+      "name": "[UR] Lv.32 Sniper Rifle",
       "emoji": "\ud83d\udd2b",
       "rarity": "UR",
       "type": "weapon",
       "race": "bionex",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 10500
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
     },
     {
-      "id": "arm_bionex_30_UR",
-      "name": "[UR] Lv.30 Sniper Suit",
+      "id": "arm_bionex_32_UR",
+      "name": "[UR] Lv.32 Sniper Suit",
       "emoji": "\ud83e\udde5",
       "rarity": "UR",
       "type": "armor",
       "race": "bionex",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 6000
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/ihbwa13.png"
     },
     {
-      "id": "wep_celestra_30_D",
-      "name": "[D] Lv.30 Arch Wand",
+      "id": "wep_celestra_32_D",
+      "name": "[D] Lv.32 Arch Wand",
       "emoji": "\ud83d\udd2e",
       "rarity": "D",
       "type": "weapon",
       "race": "celestra",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 420
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
     },
     {
-      "id": "arm_celestra_30_D",
-      "name": "[D] Lv.30 Archon Robe",
+      "id": "arm_celestra_32_D",
+      "name": "[D] Lv.32 Archon Robe",
       "emoji": "\ud83d\udc58",
       "rarity": "D",
       "type": "armor",
       "race": "celestra",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 240
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
     },
     {
-      "id": "wep_celestra_30_C",
-      "name": "[C] Lv.30 Arch Wand",
+      "id": "wep_celestra_32_C",
+      "name": "[C] Lv.32 Arch Wand",
       "emoji": "\ud83d\udd2e",
       "rarity": "C",
       "type": "weapon",
       "race": "celestra",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 504
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
     },
     {
-      "id": "arm_celestra_30_C",
-      "name": "[C] Lv.30 Archon Robe",
+      "id": "arm_celestra_32_C",
+      "name": "[C] Lv.32 Archon Robe",
       "emoji": "\ud83d\udc58",
       "rarity": "C",
       "type": "armor",
       "race": "celestra",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 288
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
     },
     {
-      "id": "wep_celestra_30_B",
-      "name": "[B] Lv.30 Arch Wand",
+      "id": "wep_celestra_32_B",
+      "name": "[B] Lv.32 Arch Wand",
       "emoji": "\ud83d\udd2e",
       "rarity": "B",
       "type": "weapon",
       "race": "celestra",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 630
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
     },
     {
-      "id": "arm_celestra_30_B",
-      "name": "[B] Lv.30 Archon Robe",
+      "id": "arm_celestra_32_B",
+      "name": "[B] Lv.32 Archon Robe",
       "emoji": "\ud83d\udc58",
       "rarity": "B",
       "type": "armor",
       "race": "celestra",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 360
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
     },
     {
-      "id": "wep_celestra_30_A",
-      "name": "[A] Lv.30 Arch Wand",
+      "id": "wep_celestra_32_A",
+      "name": "[A] Lv.32 Arch Wand",
       "emoji": "\ud83d\udd2e",
       "rarity": "A",
       "type": "weapon",
       "race": "celestra",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 840
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
     },
     {
-      "id": "arm_celestra_30_A",
-      "name": "[A] Lv.30 Archon Robe",
+      "id": "arm_celestra_32_A",
+      "name": "[A] Lv.32 Archon Robe",
       "emoji": "\ud83d\udc58",
       "rarity": "A",
       "type": "armor",
       "race": "celestra",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 480
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
     },
     {
-      "id": "wep_celestra_30_S",
-      "name": "[S] Lv.30 Arch Wand",
+      "id": "wep_celestra_32_S",
+      "name": "[S] Lv.32 Arch Wand",
       "emoji": "\ud83d\udd2e",
       "rarity": "S",
       "type": "weapon",
       "race": "celestra",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 1260
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
     },
     {
-      "id": "arm_celestra_30_S",
-      "name": "[S] Lv.30 Archon Robe",
+      "id": "arm_celestra_32_S",
+      "name": "[S] Lv.32 Archon Robe",
       "emoji": "\ud83d\udc58",
       "rarity": "S",
       "type": "armor",
       "race": "celestra",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 720
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
     },
     {
-      "id": "wep_celestra_30_SS",
-      "name": "[SS] Lv.30 Arch Wand",
+      "id": "wep_celestra_32_SS",
+      "name": "[SS] Lv.32 Arch Wand",
       "emoji": "\ud83d\udd2e",
       "rarity": "SS",
       "type": "weapon",
       "race": "celestra",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 1890
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
     },
     {
-      "id": "arm_celestra_30_SS",
-      "name": "[SS] Lv.30 Archon Robe",
+      "id": "arm_celestra_32_SS",
+      "name": "[SS] Lv.32 Archon Robe",
       "emoji": "\ud83d\udc58",
       "rarity": "SS",
       "type": "armor",
       "race": "celestra",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 1080
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
     },
     {
-      "id": "wep_celestra_30_SSS",
-      "name": "[SSS] Lv.30 Arch Wand",
+      "id": "wep_celestra_32_SSS",
+      "name": "[SSS] Lv.32 Arch Wand",
       "emoji": "\ud83d\udd2e",
       "rarity": "SSS",
       "type": "weapon",
       "race": "celestra",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 2940
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
     },
     {
-      "id": "arm_celestra_30_SSS",
-      "name": "[SSS] Lv.30 Archon Robe",
+      "id": "arm_celestra_32_SSS",
+      "name": "[SSS] Lv.32 Archon Robe",
       "emoji": "\ud83d\udc58",
       "rarity": "SSS",
       "type": "armor",
       "race": "celestra",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 1680
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
     },
     {
-      "id": "wep_celestra_30_SR",
-      "name": "[SR] Lv.30 Arch Wand",
+      "id": "wep_celestra_32_SR",
+      "name": "[SR] Lv.32 Arch Wand",
       "emoji": "\ud83d\udd2e",
       "rarity": "SR",
       "type": "weapon",
       "race": "celestra",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 4200
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
     },
     {
-      "id": "arm_celestra_30_SR",
-      "name": "[SR] Lv.30 Archon Robe",
+      "id": "arm_celestra_32_SR",
+      "name": "[SR] Lv.32 Archon Robe",
       "emoji": "\ud83d\udc58",
       "rarity": "SR",
       "type": "armor",
       "race": "celestra",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 2400
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
     },
     {
-      "id": "wep_celestra_30_SSR",
-      "name": "[SSR] Lv.30 Arch Wand",
+      "id": "wep_celestra_32_SSR",
+      "name": "[SSR] Lv.32 Arch Wand",
       "emoji": "\ud83d\udd2e",
       "rarity": "SSR",
       "type": "weapon",
       "race": "celestra",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 6300
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
     },
     {
-      "id": "arm_celestra_30_SSR",
-      "name": "[SSR] Lv.30 Archon Robe",
+      "id": "arm_celestra_32_SSR",
+      "name": "[SSR] Lv.32 Archon Robe",
       "emoji": "\ud83d\udc58",
       "rarity": "SSR",
       "type": "armor",
       "race": "celestra",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 3600
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
     },
     {
-      "id": "wep_celestra_30_UR",
-      "name": "[UR] Lv.30 Arch Wand",
+      "id": "wep_celestra_32_UR",
+      "name": "[UR] Lv.32 Arch Wand",
       "emoji": "\ud83d\udd2e",
       "rarity": "UR",
       "type": "weapon",
       "race": "celestra",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 10500
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
     },
     {
-      "id": "arm_celestra_30_UR",
-      "name": "[UR] Lv.30 Archon Robe",
+      "id": "arm_celestra_32_UR",
+      "name": "[UR] Lv.32 Archon Robe",
       "emoji": "\ud83d\udc58",
       "rarity": "UR",
       "type": "armor",
       "race": "celestra",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 6000
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
     },
     {
-      "id": "wep_All_30_D",
-      "name": "[D] Lv.30 Greatsword",
+      "id": "wep_All_32_D",
+      "name": "[D] Lv.32 Greatsword",
       "emoji": "\u2694\ufe0f",
       "rarity": "D",
       "type": "weapon",
       "race": "All",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 420
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "arm_All_30_D",
-      "name": "[D] Lv.30 Carbon Shield",
+      "id": "arm_All_32_D",
+      "name": "[D] Lv.32 Carbon Shield",
       "emoji": "\ud83d\udee1\ufe0f",
       "rarity": "D",
       "type": "shield",
       "race": "All",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 240
       },
       "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
-      "id": "wep_All_30_C",
-      "name": "[C] Lv.30 Greatsword",
+      "id": "wep_All_32_C",
+      "name": "[C] Lv.32 Greatsword",
       "emoji": "\u2694\ufe0f",
       "rarity": "C",
       "type": "weapon",
       "race": "All",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 504
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "arm_All_30_C",
-      "name": "[C] Lv.30 Carbon Shield",
+      "id": "arm_All_32_C",
+      "name": "[C] Lv.32 Carbon Shield",
       "emoji": "\ud83d\udee1\ufe0f",
       "rarity": "C",
       "type": "shield",
       "race": "All",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 288
       },
       "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
-      "id": "wep_All_30_B",
-      "name": "[B] Lv.30 Greatsword",
+      "id": "wep_All_32_B",
+      "name": "[B] Lv.32 Greatsword",
       "emoji": "\u2694\ufe0f",
       "rarity": "B",
       "type": "weapon",
       "race": "All",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 630
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "arm_All_30_B",
-      "name": "[B] Lv.30 Carbon Shield",
+      "id": "arm_All_32_B",
+      "name": "[B] Lv.32 Carbon Shield",
       "emoji": "\ud83d\udee1\ufe0f",
       "rarity": "B",
       "type": "shield",
       "race": "All",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 360
       },
       "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
-      "id": "wep_All_30_A",
-      "name": "[A] Lv.30 Greatsword",
+      "id": "wep_All_32_A",
+      "name": "[A] Lv.32 Greatsword",
       "emoji": "\u2694\ufe0f",
       "rarity": "A",
       "type": "weapon",
       "race": "All",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 840
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "arm_All_30_A",
-      "name": "[A] Lv.30 Carbon Shield",
+      "id": "arm_All_32_A",
+      "name": "[A] Lv.32 Carbon Shield",
       "emoji": "\ud83d\udee1\ufe0f",
       "rarity": "A",
       "type": "shield",
       "race": "All",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 480
       },
       "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
-      "id": "wep_All_30_S",
-      "name": "[S] Lv.30 Greatsword",
+      "id": "wep_All_32_S",
+      "name": "[S] Lv.32 Greatsword",
       "emoji": "\u2694\ufe0f",
       "rarity": "S",
       "type": "weapon",
       "race": "All",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 1260
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "arm_All_30_S",
-      "name": "[S] Lv.30 Carbon Shield",
+      "id": "arm_All_32_S",
+      "name": "[S] Lv.32 Carbon Shield",
       "emoji": "\ud83d\udee1\ufe0f",
       "rarity": "S",
       "type": "shield",
       "race": "All",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 720
       },
       "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
-      "id": "wep_All_30_SS",
-      "name": "[SS] Lv.30 Greatsword",
+      "id": "wep_All_32_SS",
+      "name": "[SS] Lv.32 Greatsword",
       "emoji": "\u2694\ufe0f",
       "rarity": "SS",
       "type": "weapon",
       "race": "All",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 1890
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "arm_All_30_SS",
-      "name": "[SS] Lv.30 Carbon Shield",
+      "id": "arm_All_32_SS",
+      "name": "[SS] Lv.32 Carbon Shield",
       "emoji": "\ud83d\udee1\ufe0f",
       "rarity": "SS",
       "type": "shield",
       "race": "All",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 1080
       },
       "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
-      "id": "wep_All_30_SSS",
-      "name": "[SSS] Lv.30 Greatsword",
+      "id": "wep_All_32_SSS",
+      "name": "[SSS] Lv.32 Greatsword",
       "emoji": "\u2694\ufe0f",
       "rarity": "SSS",
       "type": "weapon",
       "race": "All",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 2940
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "arm_All_30_SSS",
-      "name": "[SSS] Lv.30 Carbon Shield",
+      "id": "arm_All_32_SSS",
+      "name": "[SSS] Lv.32 Carbon Shield",
       "emoji": "\ud83d\udee1\ufe0f",
       "rarity": "SSS",
       "type": "shield",
       "race": "All",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 1680
       },
       "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
-      "id": "wep_All_30_SR",
-      "name": "[SR] Lv.30 Greatsword",
+      "id": "wep_All_32_SR",
+      "name": "[SR] Lv.32 Greatsword",
       "emoji": "\u2694\ufe0f",
       "rarity": "SR",
       "type": "weapon",
       "race": "All",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 4200
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "arm_All_30_SR",
-      "name": "[SR] Lv.30 Carbon Shield",
+      "id": "arm_All_32_SR",
+      "name": "[SR] Lv.32 Carbon Shield",
       "emoji": "\ud83d\udee1\ufe0f",
       "rarity": "SR",
       "type": "shield",
       "race": "All",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 2400
       },
       "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
-      "id": "wep_All_30_SSR",
-      "name": "[SSR] Lv.30 Greatsword",
+      "id": "wep_All_32_SSR",
+      "name": "[SSR] Lv.32 Greatsword",
       "emoji": "\u2694\ufe0f",
       "rarity": "SSR",
       "type": "weapon",
       "race": "All",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 6300
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "arm_All_30_SSR",
-      "name": "[SSR] Lv.30 Carbon Shield",
+      "id": "arm_All_32_SSR",
+      "name": "[SSR] Lv.32 Carbon Shield",
       "emoji": "\ud83d\udee1\ufe0f",
       "rarity": "SSR",
       "type": "shield",
       "race": "All",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 3600
       },
       "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
-      "id": "wep_All_30_UR",
-      "name": "[UR] Lv.30 Greatsword",
+      "id": "wep_All_32_UR",
+      "name": "[UR] Lv.32 Greatsword",
       "emoji": "\u2694\ufe0f",
       "rarity": "UR",
       "type": "weapon",
       "race": "All",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 10500
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "arm_All_30_UR",
-      "name": "[UR] Lv.30 Carbon Shield",
+      "id": "arm_All_32_UR",
+      "name": "[UR] Lv.32 Carbon Shield",
       "emoji": "\ud83d\udee1\ufe0f",
       "rarity": "UR",
       "type": "shield",
       "race": "All",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "def": 6000
       },
       "image": "/assets/arctron_shield_2_rembg.png"
     },
     {
-      "id": "wep_arctron_40_D",
-      "name": "[D] Lv.40 Grenade Launcher",
+      "id": "wep_arctron_42_D",
+      "name": "[D] Lv.42 Grenade Launcher",
       "emoji": "\ud83d\ude80",
       "rarity": "D",
       "type": "weapon",
       "race": "arctron",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 560
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
     },
     {
-      "id": "arm_arctron_40_D",
-      "name": "[D] Lv.40 Striker Frame",
+      "id": "arm_arctron_42_D",
+      "name": "[D] Lv.42 Striker Frame",
       "emoji": "\ud83e\uddbe",
       "rarity": "D",
       "type": "armor",
       "race": "arctron",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 320
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihawd70.png"
     },
     {
-      "id": "wep_arctron_40_C",
-      "name": "[C] Lv.40 Grenade Launcher",
+      "id": "wep_arctron_42_C",
+      "name": "[C] Lv.42 Grenade Launcher",
       "emoji": "\ud83d\ude80",
       "rarity": "C",
       "type": "weapon",
       "race": "arctron",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 672
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
     },
     {
-      "id": "arm_arctron_40_C",
-      "name": "[C] Lv.40 Striker Frame",
+      "id": "arm_arctron_42_C",
+      "name": "[C] Lv.42 Striker Frame",
       "emoji": "\ud83e\uddbe",
       "rarity": "C",
       "type": "armor",
       "race": "arctron",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 384
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihawd70.png"
     },
     {
-      "id": "wep_arctron_40_B",
-      "name": "[B] Lv.40 Grenade Launcher",
+      "id": "wep_arctron_42_B",
+      "name": "[B] Lv.42 Grenade Launcher",
       "emoji": "\ud83d\ude80",
       "rarity": "B",
       "type": "weapon",
       "race": "arctron",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 840
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
     },
     {
-      "id": "arm_arctron_40_B",
-      "name": "[B] Lv.40 Striker Frame",
+      "id": "arm_arctron_42_B",
+      "name": "[B] Lv.42 Striker Frame",
       "emoji": "\ud83e\uddbe",
       "rarity": "B",
       "type": "armor",
       "race": "arctron",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 480
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihawd70.png"
     },
     {
-      "id": "wep_arctron_40_A",
-      "name": "[A] Lv.40 Grenade Launcher",
+      "id": "wep_arctron_42_A",
+      "name": "[A] Lv.42 Grenade Launcher",
       "emoji": "\ud83d\ude80",
       "rarity": "A",
       "type": "weapon",
       "race": "arctron",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 1120
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
     },
     {
-      "id": "arm_arctron_40_A",
-      "name": "[A] Lv.40 Striker Frame",
+      "id": "arm_arctron_42_A",
+      "name": "[A] Lv.42 Striker Frame",
       "emoji": "\ud83e\uddbe",
       "rarity": "A",
       "type": "armor",
       "race": "arctron",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 640
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihawd70.png"
     },
     {
-      "id": "wep_arctron_40_S",
-      "name": "[S] Lv.40 Grenade Launcher",
+      "id": "wep_arctron_42_S",
+      "name": "[S] Lv.42 Grenade Launcher",
       "emoji": "\ud83d\ude80",
       "rarity": "S",
       "type": "weapon",
       "race": "arctron",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 1680
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
     },
     {
-      "id": "arm_arctron_40_S",
-      "name": "[S] Lv.40 Striker Frame",
+      "id": "arm_arctron_42_S",
+      "name": "[S] Lv.42 Striker Frame",
       "emoji": "\ud83e\uddbe",
       "rarity": "S",
       "type": "armor",
       "race": "arctron",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 960
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihawd70.png"
     },
     {
-      "id": "wep_arctron_40_SS",
-      "name": "[SS] Lv.40 Grenade Launcher",
+      "id": "wep_arctron_42_SS",
+      "name": "[SS] Lv.42 Grenade Launcher",
       "emoji": "\ud83d\ude80",
       "rarity": "SS",
       "type": "weapon",
       "race": "arctron",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 2520
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
     },
     {
-      "id": "arm_arctron_40_SS",
-      "name": "[SS] Lv.40 Striker Frame",
+      "id": "arm_arctron_42_SS",
+      "name": "[SS] Lv.42 Striker Frame",
       "emoji": "\ud83e\uddbe",
       "rarity": "SS",
       "type": "armor",
       "race": "arctron",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 1440
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihawd70.png"
     },
     {
-      "id": "wep_arctron_40_SSS",
-      "name": "[SSS] Lv.40 Grenade Launcher",
+      "id": "wep_arctron_42_SSS",
+      "name": "[SSS] Lv.42 Grenade Launcher",
       "emoji": "\ud83d\ude80",
       "rarity": "SSS",
       "type": "weapon",
       "race": "arctron",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 3920
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
     },
     {
-      "id": "arm_arctron_40_SSS",
-      "name": "[SSS] Lv.40 Striker Frame",
+      "id": "arm_arctron_42_SSS",
+      "name": "[SSS] Lv.42 Striker Frame",
       "emoji": "\ud83e\uddbe",
       "rarity": "SSS",
       "type": "armor",
       "race": "arctron",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 2240
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihawd70.png"
     },
     {
-      "id": "wep_arctron_40_SR",
-      "name": "[SR] Lv.40 Grenade Launcher",
+      "id": "wep_arctron_42_SR",
+      "name": "[SR] Lv.42 Grenade Launcher",
       "emoji": "\ud83d\ude80",
       "rarity": "SR",
       "type": "weapon",
       "race": "arctron",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 5600
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
     },
     {
-      "id": "arm_arctron_40_SR",
-      "name": "[SR] Lv.40 Striker Frame",
+      "id": "arm_arctron_42_SR",
+      "name": "[SR] Lv.42 Striker Frame",
       "emoji": "\ud83e\uddbe",
       "rarity": "SR",
       "type": "armor",
       "race": "arctron",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 3200
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihawd70.png"
     },
     {
-      "id": "wep_arctron_40_SSR",
-      "name": "[SSR] Lv.40 Grenade Launcher",
+      "id": "wep_arctron_42_SSR",
+      "name": "[SSR] Lv.42 Grenade Launcher",
       "emoji": "\ud83d\ude80",
       "rarity": "SSR",
       "type": "weapon",
       "race": "arctron",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 8400
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
     },
     {
-      "id": "arm_arctron_40_SSR",
-      "name": "[SSR] Lv.40 Striker Frame",
+      "id": "arm_arctron_42_SSR",
+      "name": "[SSR] Lv.42 Striker Frame",
       "emoji": "\ud83e\uddbe",
       "rarity": "SSR",
       "type": "armor",
       "race": "arctron",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 4800
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihawd70.png"
     },
     {
-      "id": "wep_arctron_40_UR",
-      "name": "[UR] Lv.40 Grenade Launcher",
+      "id": "wep_arctron_42_UR",
+      "name": "[UR] Lv.42 Grenade Launcher",
       "emoji": "\ud83d\ude80",
       "rarity": "UR",
       "type": "weapon",
       "race": "arctron",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 14000
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/10/iwgea30.png"
     },
     {
-      "id": "arm_arctron_40_UR",
-      "name": "[UR] Lv.40 Striker Frame",
+      "id": "arm_arctron_42_UR",
+      "name": "[UR] Lv.42 Striker Frame",
       "emoji": "\ud83e\uddbe",
       "rarity": "UR",
       "type": "armor",
       "race": "arctron",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 8000
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihawd70.png"
     },
     {
-      "id": "wep_bionex_40_D",
-      "name": "[D] Lv.40 Sniper Rifle",
+      "id": "wep_bionex_42_D",
+      "name": "[D] Lv.42 Sniper Rifle",
       "emoji": "\ud83d\udd2b",
       "rarity": "D",
       "type": "weapon",
       "race": "bionex",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 560
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
     },
     {
-      "id": "arm_bionex_40_D",
-      "name": "[D] Lv.40 Sniper Suit",
+      "id": "arm_bionex_42_D",
+      "name": "[D] Lv.42 Sniper Suit",
       "emoji": "\ud83e\udde5",
       "rarity": "D",
       "type": "armor",
       "race": "bionex",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 320
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/ihbwa13.png"
     },
     {
-      "id": "wep_bionex_40_C",
-      "name": "[C] Lv.40 Sniper Rifle",
+      "id": "wep_bionex_42_C",
+      "name": "[C] Lv.42 Sniper Rifle",
       "emoji": "\ud83d\udd2b",
       "rarity": "C",
       "type": "weapon",
       "race": "bionex",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 672
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
     },
     {
-      "id": "arm_bionex_40_C",
-      "name": "[C] Lv.40 Sniper Suit",
+      "id": "arm_bionex_42_C",
+      "name": "[C] Lv.42 Sniper Suit",
       "emoji": "\ud83e\udde5",
       "rarity": "C",
       "type": "armor",
       "race": "bionex",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 384
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/ihbwa13.png"
     },
     {
-      "id": "wep_bionex_40_B",
-      "name": "[B] Lv.40 Sniper Rifle",
+      "id": "wep_bionex_42_B",
+      "name": "[B] Lv.42 Sniper Rifle",
       "emoji": "\ud83d\udd2b",
       "rarity": "B",
       "type": "weapon",
       "race": "bionex",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 840
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
     },
     {
-      "id": "arm_bionex_40_B",
-      "name": "[B] Lv.40 Sniper Suit",
+      "id": "arm_bionex_42_B",
+      "name": "[B] Lv.42 Sniper Suit",
       "emoji": "\ud83e\udde5",
       "rarity": "B",
       "type": "armor",
       "race": "bionex",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 480
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/ihbwa13.png"
     },
     {
-      "id": "wep_bionex_40_A",
-      "name": "[A] Lv.40 Sniper Rifle",
+      "id": "wep_bionex_42_A",
+      "name": "[A] Lv.42 Sniper Rifle",
       "emoji": "\ud83d\udd2b",
       "rarity": "A",
       "type": "weapon",
       "race": "bionex",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 1120
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
     },
     {
-      "id": "arm_bionex_40_A",
-      "name": "[A] Lv.40 Sniper Suit",
+      "id": "arm_bionex_42_A",
+      "name": "[A] Lv.42 Sniper Suit",
       "emoji": "\ud83e\udde5",
       "rarity": "A",
       "type": "armor",
       "race": "bionex",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 640
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/ihbwa13.png"
     },
     {
-      "id": "wep_bionex_40_S",
-      "name": "[S] Lv.40 Sniper Rifle",
+      "id": "wep_bionex_42_S",
+      "name": "[S] Lv.42 Sniper Rifle",
       "emoji": "\ud83d\udd2b",
       "rarity": "S",
       "type": "weapon",
       "race": "bionex",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 1680
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
     },
     {
-      "id": "arm_bionex_40_S",
-      "name": "[S] Lv.40 Sniper Suit",
+      "id": "arm_bionex_42_S",
+      "name": "[S] Lv.42 Sniper Suit",
       "emoji": "\ud83e\udde5",
       "rarity": "S",
       "type": "armor",
       "race": "bionex",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 960
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/ihbwa13.png"
     },
     {
-      "id": "wep_bionex_40_SS",
-      "name": "[SS] Lv.40 Sniper Rifle",
+      "id": "wep_bionex_42_SS",
+      "name": "[SS] Lv.42 Sniper Rifle",
       "emoji": "\ud83d\udd2b",
       "rarity": "SS",
       "type": "weapon",
       "race": "bionex",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 2520
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
     },
     {
-      "id": "arm_bionex_40_SS",
-      "name": "[SS] Lv.40 Sniper Suit",
+      "id": "arm_bionex_42_SS",
+      "name": "[SS] Lv.42 Sniper Suit",
       "emoji": "\ud83e\udde5",
       "rarity": "SS",
       "type": "armor",
       "race": "bionex",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 1440
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/ihbwa13.png"
     },
     {
-      "id": "wep_bionex_40_SSS",
-      "name": "[SSS] Lv.40 Sniper Rifle",
+      "id": "wep_bionex_42_SSS",
+      "name": "[SSS] Lv.42 Sniper Rifle",
       "emoji": "\ud83d\udd2b",
       "rarity": "SSS",
       "type": "weapon",
       "race": "bionex",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 3920
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
     },
     {
-      "id": "arm_bionex_40_SSS",
-      "name": "[SSS] Lv.40 Sniper Suit",
+      "id": "arm_bionex_42_SSS",
+      "name": "[SSS] Lv.42 Sniper Suit",
       "emoji": "\ud83e\udde5",
       "rarity": "SSS",
       "type": "armor",
       "race": "bionex",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 2240
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/ihbwa13.png"
     },
     {
-      "id": "wep_bionex_40_SR",
-      "name": "[SR] Lv.40 Sniper Rifle",
+      "id": "wep_bionex_42_SR",
+      "name": "[SR] Lv.42 Sniper Rifle",
       "emoji": "\ud83d\udd2b",
       "rarity": "SR",
       "type": "weapon",
       "race": "bionex",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 5600
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
     },
     {
-      "id": "arm_bionex_40_SR",
-      "name": "[SR] Lv.40 Sniper Suit",
+      "id": "arm_bionex_42_SR",
+      "name": "[SR] Lv.42 Sniper Suit",
       "emoji": "\ud83e\udde5",
       "rarity": "SR",
       "type": "armor",
       "race": "bionex",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 3200
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/ihbwa13.png"
     },
     {
-      "id": "wep_bionex_40_SSR",
-      "name": "[SSR] Lv.40 Sniper Rifle",
+      "id": "wep_bionex_42_SSR",
+      "name": "[SSR] Lv.42 Sniper Rifle",
       "emoji": "\ud83d\udd2b",
       "rarity": "SSR",
       "type": "weapon",
       "race": "bionex",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 8400
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
     },
     {
-      "id": "arm_bionex_40_SSR",
-      "name": "[SSR] Lv.40 Sniper Suit",
+      "id": "arm_bionex_42_SSR",
+      "name": "[SSR] Lv.42 Sniper Suit",
       "emoji": "\ud83e\udde5",
       "rarity": "SSR",
       "type": "armor",
       "race": "bionex",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 4800
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/ihbwa13.png"
     },
     {
-      "id": "wep_bionex_40_UR",
-      "name": "[UR] Lv.40 Sniper Rifle",
+      "id": "wep_bionex_42_UR",
+      "name": "[UR] Lv.42 Sniper Rifle",
       "emoji": "\ud83d\udd2b",
       "rarity": "UR",
       "type": "weapon",
       "race": "bionex",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 14000
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_BoltRifle.gif"
     },
     {
-      "id": "arm_bionex_40_UR",
-      "name": "[UR] Lv.40 Sniper Suit",
+      "id": "arm_bionex_42_UR",
+      "name": "[UR] Lv.42 Sniper Suit",
       "emoji": "\ud83e\udde5",
       "rarity": "UR",
       "type": "armor",
       "race": "bionex",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 8000
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/ihbwa13.png"
     },
     {
-      "id": "wep_celestra_40_D",
-      "name": "[D] Lv.40 Arch Wand",
+      "id": "wep_celestra_42_D",
+      "name": "[D] Lv.42 Arch Wand",
       "emoji": "\ud83d\udd2e",
       "rarity": "D",
       "type": "weapon",
       "race": "celestra",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 560
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
     },
     {
-      "id": "arm_celestra_40_D",
-      "name": "[D] Lv.40 Archon Robe",
+      "id": "arm_celestra_42_D",
+      "name": "[D] Lv.42 Archon Robe",
       "emoji": "\ud83d\udc58",
       "rarity": "D",
       "type": "armor",
       "race": "celestra",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 320
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
     },
     {
-      "id": "wep_celestra_40_C",
-      "name": "[C] Lv.40 Arch Wand",
+      "id": "wep_celestra_42_C",
+      "name": "[C] Lv.42 Arch Wand",
       "emoji": "\ud83d\udd2e",
       "rarity": "C",
       "type": "weapon",
       "race": "celestra",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 672
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
     },
     {
-      "id": "arm_celestra_40_C",
-      "name": "[C] Lv.40 Archon Robe",
+      "id": "arm_celestra_42_C",
+      "name": "[C] Lv.42 Archon Robe",
       "emoji": "\ud83d\udc58",
       "rarity": "C",
       "type": "armor",
       "race": "celestra",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 384
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
     },
     {
-      "id": "wep_celestra_40_B",
-      "name": "[B] Lv.40 Arch Wand",
+      "id": "wep_celestra_42_B",
+      "name": "[B] Lv.42 Arch Wand",
       "emoji": "\ud83d\udd2e",
       "rarity": "B",
       "type": "weapon",
       "race": "celestra",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 840
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
     },
     {
-      "id": "arm_celestra_40_B",
-      "name": "[B] Lv.40 Archon Robe",
+      "id": "arm_celestra_42_B",
+      "name": "[B] Lv.42 Archon Robe",
       "emoji": "\ud83d\udc58",
       "rarity": "B",
       "type": "armor",
       "race": "celestra",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 480
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
     },
     {
-      "id": "wep_celestra_40_A",
-      "name": "[A] Lv.40 Arch Wand",
+      "id": "wep_celestra_42_A",
+      "name": "[A] Lv.42 Arch Wand",
       "emoji": "\ud83d\udd2e",
       "rarity": "A",
       "type": "weapon",
       "race": "celestra",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 1120
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
     },
     {
-      "id": "arm_celestra_40_A",
-      "name": "[A] Lv.40 Archon Robe",
+      "id": "arm_celestra_42_A",
+      "name": "[A] Lv.42 Archon Robe",
       "emoji": "\ud83d\udc58",
       "rarity": "A",
       "type": "armor",
       "race": "celestra",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 640
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
     },
     {
-      "id": "wep_celestra_40_S",
-      "name": "[S] Lv.40 Arch Wand",
+      "id": "wep_celestra_42_S",
+      "name": "[S] Lv.42 Arch Wand",
       "emoji": "\ud83d\udd2e",
       "rarity": "S",
       "type": "weapon",
       "race": "celestra",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 1680
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
     },
     {
-      "id": "arm_celestra_40_S",
-      "name": "[S] Lv.40 Archon Robe",
+      "id": "arm_celestra_42_S",
+      "name": "[S] Lv.42 Archon Robe",
       "emoji": "\ud83d\udc58",
       "rarity": "S",
       "type": "armor",
       "race": "celestra",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 960
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
     },
     {
-      "id": "wep_celestra_40_SS",
-      "name": "[SS] Lv.40 Arch Wand",
+      "id": "wep_celestra_42_SS",
+      "name": "[SS] Lv.42 Arch Wand",
       "emoji": "\ud83d\udd2e",
       "rarity": "SS",
       "type": "weapon",
       "race": "celestra",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 2520
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
     },
     {
-      "id": "arm_celestra_40_SS",
-      "name": "[SS] Lv.40 Archon Robe",
+      "id": "arm_celestra_42_SS",
+      "name": "[SS] Lv.42 Archon Robe",
       "emoji": "\ud83d\udc58",
       "rarity": "SS",
       "type": "armor",
       "race": "celestra",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 1440
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
     },
     {
-      "id": "wep_celestra_40_SSS",
-      "name": "[SSS] Lv.40 Arch Wand",
+      "id": "wep_celestra_42_SSS",
+      "name": "[SSS] Lv.42 Arch Wand",
       "emoji": "\ud83d\udd2e",
       "rarity": "SSS",
       "type": "weapon",
       "race": "celestra",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 3920
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
     },
     {
-      "id": "arm_celestra_40_SSS",
-      "name": "[SSS] Lv.40 Archon Robe",
+      "id": "arm_celestra_42_SSS",
+      "name": "[SSS] Lv.42 Archon Robe",
       "emoji": "\ud83d\udc58",
       "rarity": "SSS",
       "type": "armor",
       "race": "celestra",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 2240
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
     },
     {
-      "id": "wep_celestra_40_SR",
-      "name": "[SR] Lv.40 Arch Wand",
+      "id": "wep_celestra_42_SR",
+      "name": "[SR] Lv.42 Arch Wand",
       "emoji": "\ud83d\udd2e",
       "rarity": "SR",
       "type": "weapon",
       "race": "celestra",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 5600
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
     },
     {
-      "id": "arm_celestra_40_SR",
-      "name": "[SR] Lv.40 Archon Robe",
+      "id": "arm_celestra_42_SR",
+      "name": "[SR] Lv.42 Archon Robe",
       "emoji": "\ud83d\udc58",
       "rarity": "SR",
       "type": "armor",
       "race": "celestra",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 3200
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
     },
     {
-      "id": "wep_celestra_40_SSR",
-      "name": "[SSR] Lv.40 Arch Wand",
+      "id": "wep_celestra_42_SSR",
+      "name": "[SSR] Lv.42 Arch Wand",
       "emoji": "\ud83d\udd2e",
       "rarity": "SSR",
       "type": "weapon",
       "race": "celestra",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 8400
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
     },
     {
-      "id": "arm_celestra_40_SSR",
-      "name": "[SSR] Lv.40 Archon Robe",
+      "id": "arm_celestra_42_SSR",
+      "name": "[SSR] Lv.42 Archon Robe",
       "emoji": "\ud83d\udc58",
       "rarity": "SSR",
       "type": "armor",
       "race": "celestra",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 4800
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
     },
     {
-      "id": "wep_celestra_40_UR",
-      "name": "[UR] Lv.40 Arch Wand",
+      "id": "wep_celestra_42_UR",
+      "name": "[UR] Lv.42 Arch Wand",
       "emoji": "\ud83d\udd2e",
       "rarity": "UR",
       "type": "weapon",
       "race": "celestra",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 14000
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
     },
     {
-      "id": "arm_celestra_40_UR",
-      "name": "[UR] Lv.40 Archon Robe",
+      "id": "arm_celestra_42_UR",
+      "name": "[UR] Lv.42 Archon Robe",
       "emoji": "\ud83d\udc58",
       "rarity": "UR",
       "type": "armor",
       "race": "celestra",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 8000
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
     },
     {
-      "id": "wep_All_40_D",
-      "name": "[D] Lv.40 Greatsword",
+      "id": "wep_All_42_D",
+      "name": "[D] Lv.42 Greatsword",
       "emoji": "\u2694\ufe0f",
       "rarity": "D",
       "type": "weapon",
       "race": "All",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 560
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "arm_All_40_D",
-      "name": "[D] Lv.40 Carbon Shield",
+      "id": "arm_All_42_D",
+      "name": "[D] Lv.42 Carbon Shield",
       "emoji": "\ud83d\udee1\ufe0f",
       "rarity": "D",
       "type": "shield",
       "race": "All",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 320
       },
       "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
-      "id": "wep_All_40_C",
-      "name": "[C] Lv.40 Greatsword",
+      "id": "wep_All_42_C",
+      "name": "[C] Lv.42 Greatsword",
       "emoji": "\u2694\ufe0f",
       "rarity": "C",
       "type": "weapon",
       "race": "All",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 672
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "arm_All_40_C",
-      "name": "[C] Lv.40 Carbon Shield",
+      "id": "arm_All_42_C",
+      "name": "[C] Lv.42 Carbon Shield",
       "emoji": "\ud83d\udee1\ufe0f",
       "rarity": "C",
       "type": "shield",
       "race": "All",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 384
       },
       "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
-      "id": "wep_All_40_B",
-      "name": "[B] Lv.40 Greatsword",
+      "id": "wep_All_42_B",
+      "name": "[B] Lv.42 Greatsword",
       "emoji": "\u2694\ufe0f",
       "rarity": "B",
       "type": "weapon",
       "race": "All",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 840
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "arm_All_40_B",
-      "name": "[B] Lv.40 Carbon Shield",
+      "id": "arm_All_42_B",
+      "name": "[B] Lv.42 Carbon Shield",
       "emoji": "\ud83d\udee1\ufe0f",
       "rarity": "B",
       "type": "shield",
       "race": "All",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 480
       },
       "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
-      "id": "wep_All_40_A",
-      "name": "[A] Lv.40 Greatsword",
+      "id": "wep_All_42_A",
+      "name": "[A] Lv.42 Greatsword",
       "emoji": "\u2694\ufe0f",
       "rarity": "A",
       "type": "weapon",
       "race": "All",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 1120
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "arm_All_40_A",
-      "name": "[A] Lv.40 Carbon Shield",
+      "id": "arm_All_42_A",
+      "name": "[A] Lv.42 Carbon Shield",
       "emoji": "\ud83d\udee1\ufe0f",
       "rarity": "A",
       "type": "shield",
       "race": "All",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 640
       },
       "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
-      "id": "wep_All_40_S",
-      "name": "[S] Lv.40 Greatsword",
+      "id": "wep_All_42_S",
+      "name": "[S] Lv.42 Greatsword",
       "emoji": "\u2694\ufe0f",
       "rarity": "S",
       "type": "weapon",
       "race": "All",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 1680
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "arm_All_40_S",
-      "name": "[S] Lv.40 Carbon Shield",
+      "id": "arm_All_42_S",
+      "name": "[S] Lv.42 Carbon Shield",
       "emoji": "\ud83d\udee1\ufe0f",
       "rarity": "S",
       "type": "shield",
       "race": "All",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 960
       },
       "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
-      "id": "wep_All_40_SS",
-      "name": "[SS] Lv.40 Greatsword",
+      "id": "wep_All_42_SS",
+      "name": "[SS] Lv.42 Greatsword",
       "emoji": "\u2694\ufe0f",
       "rarity": "SS",
       "type": "weapon",
       "race": "All",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 2520
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "arm_All_40_SS",
-      "name": "[SS] Lv.40 Carbon Shield",
+      "id": "arm_All_42_SS",
+      "name": "[SS] Lv.42 Carbon Shield",
       "emoji": "\ud83d\udee1\ufe0f",
       "rarity": "SS",
       "type": "shield",
       "race": "All",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 1440
       },
       "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
-      "id": "wep_All_40_SSS",
-      "name": "[SSS] Lv.40 Greatsword",
+      "id": "wep_All_42_SSS",
+      "name": "[SSS] Lv.42 Greatsword",
       "emoji": "\u2694\ufe0f",
       "rarity": "SSS",
       "type": "weapon",
       "race": "All",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 3920
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "arm_All_40_SSS",
-      "name": "[SSS] Lv.40 Carbon Shield",
+      "id": "arm_All_42_SSS",
+      "name": "[SSS] Lv.42 Carbon Shield",
       "emoji": "\ud83d\udee1\ufe0f",
       "rarity": "SSS",
       "type": "shield",
       "race": "All",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 2240
       },
       "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
-      "id": "wep_All_40_SR",
-      "name": "[SR] Lv.40 Greatsword",
+      "id": "wep_All_42_SR",
+      "name": "[SR] Lv.42 Greatsword",
       "emoji": "\u2694\ufe0f",
       "rarity": "SR",
       "type": "weapon",
       "race": "All",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 5600
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "arm_All_40_SR",
-      "name": "[SR] Lv.40 Carbon Shield",
+      "id": "arm_All_42_SR",
+      "name": "[SR] Lv.42 Carbon Shield",
       "emoji": "\ud83d\udee1\ufe0f",
       "rarity": "SR",
       "type": "shield",
       "race": "All",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 3200
       },
       "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
-      "id": "wep_All_40_SSR",
-      "name": "[SSR] Lv.40 Greatsword",
+      "id": "wep_All_42_SSR",
+      "name": "[SSR] Lv.42 Greatsword",
       "emoji": "\u2694\ufe0f",
       "rarity": "SSR",
       "type": "weapon",
       "race": "All",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 8400
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "arm_All_40_SSR",
-      "name": "[SSR] Lv.40 Carbon Shield",
+      "id": "arm_All_42_SSR",
+      "name": "[SSR] Lv.42 Carbon Shield",
       "emoji": "\ud83d\udee1\ufe0f",
       "rarity": "SSR",
       "type": "shield",
       "race": "All",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 4800
       },
       "image": "/assets/arctron_shield_3_rembg.png"
     },
     {
-      "id": "wep_All_40_UR",
-      "name": "[UR] Lv.40 Greatsword",
+      "id": "wep_All_42_UR",
+      "name": "[UR] Lv.42 Greatsword",
       "emoji": "\u2694\ufe0f",
       "rarity": "UR",
       "type": "weapon",
       "race": "All",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 14000
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "arm_All_40_UR",
-      "name": "[UR] Lv.40 Carbon Shield",
+      "id": "arm_All_42_UR",
+      "name": "[UR] Lv.42 Carbon Shield",
       "emoji": "\ud83d\udee1\ufe0f",
       "rarity": "UR",
       "type": "shield",
       "race": "All",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "def": 8000
-      },
-      "image": "/assets/arctron_shield_3_rembg.png"
-    },
-    {
-      "id": "wep_arctron_50_D",
-      "name": "[D] Lv.50 Missile Launcher",
-      "emoji": "\ud83d\ude80",
-      "rarity": "D",
-      "type": "weapon",
-      "race": "arctron",
-      "level": 50,
-      "bonus": {
-        "atk": 700
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Launcher_Missile-Launcher-min.png"
-    },
-    {
-      "id": "arm_arctron_50_D",
-      "name": "[D] Lv.50 Dreadnought Suit",
-      "emoji": "\ud83e\uddbe",
-      "rarity": "D",
-      "type": "armor",
-      "race": "arctron",
-      "level": 50,
-      "bonus": {
-        "def": 400
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iuawg55.png"
-    },
-    {
-      "id": "wep_arctron_50_C",
-      "name": "[C] Lv.50 Missile Launcher",
-      "emoji": "\ud83d\ude80",
-      "rarity": "C",
-      "type": "weapon",
-      "race": "arctron",
-      "level": 50,
-      "bonus": {
-        "atk": 840
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Launcher_Missile-Launcher-min.png"
-    },
-    {
-      "id": "arm_arctron_50_C",
-      "name": "[C] Lv.50 Dreadnought Suit",
-      "emoji": "\ud83e\uddbe",
-      "rarity": "C",
-      "type": "armor",
-      "race": "arctron",
-      "level": 50,
-      "bonus": {
-        "def": 480
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iuawg55.png"
-    },
-    {
-      "id": "wep_arctron_50_B",
-      "name": "[B] Lv.50 Missile Launcher",
-      "emoji": "\ud83d\ude80",
-      "rarity": "B",
-      "type": "weapon",
-      "race": "arctron",
-      "level": 50,
-      "bonus": {
-        "atk": 1050
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Launcher_Missile-Launcher-min.png"
-    },
-    {
-      "id": "arm_arctron_50_B",
-      "name": "[B] Lv.50 Dreadnought Suit",
-      "emoji": "\ud83e\uddbe",
-      "rarity": "B",
-      "type": "armor",
-      "race": "arctron",
-      "level": 50,
-      "bonus": {
-        "def": 600
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iuawg55.png"
-    },
-    {
-      "id": "wep_arctron_50_A",
-      "name": "[A] Lv.50 Missile Launcher",
-      "emoji": "\ud83d\ude80",
-      "rarity": "A",
-      "type": "weapon",
-      "race": "arctron",
-      "level": 50,
-      "bonus": {
-        "atk": 1400
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Launcher_Missile-Launcher-min.png"
-    },
-    {
-      "id": "arm_arctron_50_A",
-      "name": "[A] Lv.50 Dreadnought Suit",
-      "emoji": "\ud83e\uddbe",
-      "rarity": "A",
-      "type": "armor",
-      "race": "arctron",
-      "level": 50,
-      "bonus": {
-        "def": 800
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iuawg55.png"
-    },
-    {
-      "id": "wep_arctron_50_S",
-      "name": "[S] Lv.50 Missile Launcher",
-      "emoji": "\ud83d\ude80",
-      "rarity": "S",
-      "type": "weapon",
-      "race": "arctron",
-      "level": 50,
-      "bonus": {
-        "atk": 2100
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Launcher_Missile-Launcher-min.png"
-    },
-    {
-      "id": "arm_arctron_50_S",
-      "name": "[S] Lv.50 Dreadnought Suit",
-      "emoji": "\ud83e\uddbe",
-      "rarity": "S",
-      "type": "armor",
-      "race": "arctron",
-      "level": 50,
-      "bonus": {
-        "def": 1200
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iuawg55.png"
-    },
-    {
-      "id": "wep_arctron_50_SS",
-      "name": "[SS] Lv.50 Missile Launcher",
-      "emoji": "\ud83d\ude80",
-      "rarity": "SS",
-      "type": "weapon",
-      "race": "arctron",
-      "level": 50,
-      "bonus": {
-        "atk": 3150
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Launcher_Missile-Launcher-min.png"
-    },
-    {
-      "id": "arm_arctron_50_SS",
-      "name": "[SS] Lv.50 Dreadnought Suit",
-      "emoji": "\ud83e\uddbe",
-      "rarity": "SS",
-      "type": "armor",
-      "race": "arctron",
-      "level": 50,
-      "bonus": {
-        "def": 1800
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iuawg55.png"
-    },
-    {
-      "id": "wep_arctron_50_SSS",
-      "name": "[SSS] Lv.50 Missile Launcher",
-      "emoji": "\ud83d\ude80",
-      "rarity": "SSS",
-      "type": "weapon",
-      "race": "arctron",
-      "level": 50,
-      "bonus": {
-        "atk": 4900
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Launcher_Missile-Launcher-min.png"
-    },
-    {
-      "id": "arm_arctron_50_SSS",
-      "name": "[SSS] Lv.50 Dreadnought Suit",
-      "emoji": "\ud83e\uddbe",
-      "rarity": "SSS",
-      "type": "armor",
-      "race": "arctron",
-      "level": 50,
-      "bonus": {
-        "def": 2800
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iuawg55.png"
-    },
-    {
-      "id": "wep_arctron_50_SR",
-      "name": "[SR] Lv.50 Missile Launcher",
-      "emoji": "\ud83d\ude80",
-      "rarity": "SR",
-      "type": "weapon",
-      "race": "arctron",
-      "level": 50,
-      "bonus": {
-        "atk": 7000
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Launcher_Missile-Launcher-min.png"
-    },
-    {
-      "id": "arm_arctron_50_SR",
-      "name": "[SR] Lv.50 Dreadnought Suit",
-      "emoji": "\ud83e\uddbe",
-      "rarity": "SR",
-      "type": "armor",
-      "race": "arctron",
-      "level": 50,
-      "bonus": {
-        "def": 4000
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iuawg55.png"
-    },
-    {
-      "id": "wep_arctron_50_SSR",
-      "name": "[SSR] Lv.50 Missile Launcher",
-      "emoji": "\ud83d\ude80",
-      "rarity": "SSR",
-      "type": "weapon",
-      "race": "arctron",
-      "level": 50,
-      "bonus": {
-        "atk": 10500
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Launcher_Missile-Launcher-min.png"
-    },
-    {
-      "id": "arm_arctron_50_SSR",
-      "name": "[SSR] Lv.50 Dreadnought Suit",
-      "emoji": "\ud83e\uddbe",
-      "rarity": "SSR",
-      "type": "armor",
-      "race": "arctron",
-      "level": 50,
-      "bonus": {
-        "def": 6000
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iuawg55.png"
-    },
-    {
-      "id": "wep_arctron_50_UR",
-      "name": "[UR] Lv.50 Missile Launcher",
-      "emoji": "\ud83d\ude80",
-      "rarity": "UR",
-      "type": "weapon",
-      "race": "arctron",
-      "level": 50,
-      "bonus": {
-        "atk": 17500
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Launcher_Missile-Launcher-min.png"
-    },
-    {
-      "id": "arm_arctron_50_UR",
-      "name": "[UR] Lv.50 Dreadnought Suit",
-      "emoji": "\ud83e\uddbe",
-      "rarity": "UR",
-      "type": "armor",
-      "race": "arctron",
-      "level": 50,
-      "bonus": {
-        "def": 10000
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iuawg55.png"
-    },
-    {
-      "id": "wep_bionex_50_D",
-      "name": "[D] Lv.50 Gatling Gun",
-      "emoji": "\ud83d\udd2b",
-      "rarity": "D",
-      "type": "weapon",
-      "race": "bionex",
-      "level": 50,
-      "bonus": {
-        "atk": 700
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_GatlingGun.gif"
-    },
-    {
-      "id": "arm_bionex_50_D",
-      "name": "[D] Lv.50 Commando Armor",
-      "emoji": "\ud83e\udde5",
-      "rarity": "D",
-      "type": "armor",
-      "race": "bionex",
-      "level": 50,
-      "bonus": {
-        "def": 400
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iubcf55.png"
-    },
-    {
-      "id": "wep_bionex_50_C",
-      "name": "[C] Lv.50 Gatling Gun",
-      "emoji": "\ud83d\udd2b",
-      "rarity": "C",
-      "type": "weapon",
-      "race": "bionex",
-      "level": 50,
-      "bonus": {
-        "atk": 840
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_GatlingGun.gif"
-    },
-    {
-      "id": "arm_bionex_50_C",
-      "name": "[C] Lv.50 Commando Armor",
-      "emoji": "\ud83e\udde5",
-      "rarity": "C",
-      "type": "armor",
-      "race": "bionex",
-      "level": 50,
-      "bonus": {
-        "def": 480
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iubcf55.png"
-    },
-    {
-      "id": "wep_bionex_50_B",
-      "name": "[B] Lv.50 Gatling Gun",
-      "emoji": "\ud83d\udd2b",
-      "rarity": "B",
-      "type": "weapon",
-      "race": "bionex",
-      "level": 50,
-      "bonus": {
-        "atk": 1050
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_GatlingGun.gif"
-    },
-    {
-      "id": "arm_bionex_50_B",
-      "name": "[B] Lv.50 Commando Armor",
-      "emoji": "\ud83e\udde5",
-      "rarity": "B",
-      "type": "armor",
-      "race": "bionex",
-      "level": 50,
-      "bonus": {
-        "def": 600
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iubcf55.png"
-    },
-    {
-      "id": "wep_bionex_50_A",
-      "name": "[A] Lv.50 Gatling Gun",
-      "emoji": "\ud83d\udd2b",
-      "rarity": "A",
-      "type": "weapon",
-      "race": "bionex",
-      "level": 50,
-      "bonus": {
-        "atk": 1400
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_GatlingGun.gif"
-    },
-    {
-      "id": "arm_bionex_50_A",
-      "name": "[A] Lv.50 Commando Armor",
-      "emoji": "\ud83e\udde5",
-      "rarity": "A",
-      "type": "armor",
-      "race": "bionex",
-      "level": 50,
-      "bonus": {
-        "def": 800
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iubcf55.png"
-    },
-    {
-      "id": "wep_bionex_50_S",
-      "name": "[S] Lv.50 Gatling Gun",
-      "emoji": "\ud83d\udd2b",
-      "rarity": "S",
-      "type": "weapon",
-      "race": "bionex",
-      "level": 50,
-      "bonus": {
-        "atk": 2100
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_GatlingGun.gif"
-    },
-    {
-      "id": "arm_bionex_50_S",
-      "name": "[S] Lv.50 Commando Armor",
-      "emoji": "\ud83e\udde5",
-      "rarity": "S",
-      "type": "armor",
-      "race": "bionex",
-      "level": 50,
-      "bonus": {
-        "def": 1200
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iubcf55.png"
-    },
-    {
-      "id": "wep_bionex_50_SS",
-      "name": "[SS] Lv.50 Gatling Gun",
-      "emoji": "\ud83d\udd2b",
-      "rarity": "SS",
-      "type": "weapon",
-      "race": "bionex",
-      "level": 50,
-      "bonus": {
-        "atk": 3150
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_GatlingGun.gif"
-    },
-    {
-      "id": "arm_bionex_50_SS",
-      "name": "[SS] Lv.50 Commando Armor",
-      "emoji": "\ud83e\udde5",
-      "rarity": "SS",
-      "type": "armor",
-      "race": "bionex",
-      "level": 50,
-      "bonus": {
-        "def": 1800
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iubcf55.png"
-    },
-    {
-      "id": "wep_bionex_50_SSS",
-      "name": "[SSS] Lv.50 Gatling Gun",
-      "emoji": "\ud83d\udd2b",
-      "rarity": "SSS",
-      "type": "weapon",
-      "race": "bionex",
-      "level": 50,
-      "bonus": {
-        "atk": 4900
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_GatlingGun.gif"
-    },
-    {
-      "id": "arm_bionex_50_SSS",
-      "name": "[SSS] Lv.50 Commando Armor",
-      "emoji": "\ud83e\udde5",
-      "rarity": "SSS",
-      "type": "armor",
-      "race": "bionex",
-      "level": 50,
-      "bonus": {
-        "def": 2800
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iubcf55.png"
-    },
-    {
-      "id": "wep_bionex_50_SR",
-      "name": "[SR] Lv.50 Gatling Gun",
-      "emoji": "\ud83d\udd2b",
-      "rarity": "SR",
-      "type": "weapon",
-      "race": "bionex",
-      "level": 50,
-      "bonus": {
-        "atk": 7000
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_GatlingGun.gif"
-    },
-    {
-      "id": "arm_bionex_50_SR",
-      "name": "[SR] Lv.50 Commando Armor",
-      "emoji": "\ud83e\udde5",
-      "rarity": "SR",
-      "type": "armor",
-      "race": "bionex",
-      "level": 50,
-      "bonus": {
-        "def": 4000
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iubcf55.png"
-    },
-    {
-      "id": "wep_bionex_50_SSR",
-      "name": "[SSR] Lv.50 Gatling Gun",
-      "emoji": "\ud83d\udd2b",
-      "rarity": "SSR",
-      "type": "weapon",
-      "race": "bionex",
-      "level": 50,
-      "bonus": {
-        "atk": 10500
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_GatlingGun.gif"
-    },
-    {
-      "id": "arm_bionex_50_SSR",
-      "name": "[SSR] Lv.50 Commando Armor",
-      "emoji": "\ud83e\udde5",
-      "rarity": "SSR",
-      "type": "armor",
-      "race": "bionex",
-      "level": 50,
-      "bonus": {
-        "def": 6000
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iubcf55.png"
-    },
-    {
-      "id": "wep_bionex_50_UR",
-      "name": "[UR] Lv.50 Gatling Gun",
-      "emoji": "\ud83d\udd2b",
-      "rarity": "UR",
-      "type": "weapon",
-      "race": "bionex",
-      "level": 50,
-      "bonus": {
-        "atk": 17500
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_GatlingGun.gif"
-    },
-    {
-      "id": "arm_bionex_50_UR",
-      "name": "[UR] Lv.50 Commando Armor",
-      "emoji": "\ud83e\udde5",
-      "rarity": "UR",
-      "type": "armor",
-      "race": "bionex",
-      "level": 50,
-      "bonus": {
-        "def": 10000
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iubcf55.png"
-    },
-    {
-      "id": "wep_celestra_50_D",
-      "name": "[D] Lv.50 Relic Staff",
-      "emoji": "\ud83d\udd2e",
-      "rarity": "D",
-      "type": "weapon",
-      "race": "celestra",
-      "level": 50,
-      "bonus": {
-        "atk": 700
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
-    },
-    {
-      "id": "arm_celestra_50_D",
-      "name": "[D] Lv.50 Dark Robe",
-      "emoji": "\ud83d\udc58",
-      "rarity": "D",
-      "type": "armor",
-      "race": "celestra",
-      "level": 50,
-      "bonus": {
-        "def": 400
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
-    },
-    {
-      "id": "wep_celestra_50_C",
-      "name": "[C] Lv.50 Relic Staff",
-      "emoji": "\ud83d\udd2e",
-      "rarity": "C",
-      "type": "weapon",
-      "race": "celestra",
-      "level": 50,
-      "bonus": {
-        "atk": 840
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
-    },
-    {
-      "id": "arm_celestra_50_C",
-      "name": "[C] Lv.50 Dark Robe",
-      "emoji": "\ud83d\udc58",
-      "rarity": "C",
-      "type": "armor",
-      "race": "celestra",
-      "level": 50,
-      "bonus": {
-        "def": 480
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
-    },
-    {
-      "id": "wep_celestra_50_B",
-      "name": "[B] Lv.50 Relic Staff",
-      "emoji": "\ud83d\udd2e",
-      "rarity": "B",
-      "type": "weapon",
-      "race": "celestra",
-      "level": 50,
-      "bonus": {
-        "atk": 1050
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
-    },
-    {
-      "id": "arm_celestra_50_B",
-      "name": "[B] Lv.50 Dark Robe",
-      "emoji": "\ud83d\udc58",
-      "rarity": "B",
-      "type": "armor",
-      "race": "celestra",
-      "level": 50,
-      "bonus": {
-        "def": 600
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
-    },
-    {
-      "id": "wep_celestra_50_A",
-      "name": "[A] Lv.50 Relic Staff",
-      "emoji": "\ud83d\udd2e",
-      "rarity": "A",
-      "type": "weapon",
-      "race": "celestra",
-      "level": 50,
-      "bonus": {
-        "atk": 1400
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
-    },
-    {
-      "id": "arm_celestra_50_A",
-      "name": "[A] Lv.50 Dark Robe",
-      "emoji": "\ud83d\udc58",
-      "rarity": "A",
-      "type": "armor",
-      "race": "celestra",
-      "level": 50,
-      "bonus": {
-        "def": 800
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
-    },
-    {
-      "id": "wep_celestra_50_S",
-      "name": "[S] Lv.50 Relic Staff",
-      "emoji": "\ud83d\udd2e",
-      "rarity": "S",
-      "type": "weapon",
-      "race": "celestra",
-      "level": 50,
-      "bonus": {
-        "atk": 2100
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
-    },
-    {
-      "id": "arm_celestra_50_S",
-      "name": "[S] Lv.50 Dark Robe",
-      "emoji": "\ud83d\udc58",
-      "rarity": "S",
-      "type": "armor",
-      "race": "celestra",
-      "level": 50,
-      "bonus": {
-        "def": 1200
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
-    },
-    {
-      "id": "wep_celestra_50_SS",
-      "name": "[SS] Lv.50 Relic Staff",
-      "emoji": "\ud83d\udd2e",
-      "rarity": "SS",
-      "type": "weapon",
-      "race": "celestra",
-      "level": 50,
-      "bonus": {
-        "atk": 3150
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
-    },
-    {
-      "id": "arm_celestra_50_SS",
-      "name": "[SS] Lv.50 Dark Robe",
-      "emoji": "\ud83d\udc58",
-      "rarity": "SS",
-      "type": "armor",
-      "race": "celestra",
-      "level": 50,
-      "bonus": {
-        "def": 1800
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
-    },
-    {
-      "id": "wep_celestra_50_SSS",
-      "name": "[SSS] Lv.50 Relic Staff",
-      "emoji": "\ud83d\udd2e",
-      "rarity": "SSS",
-      "type": "weapon",
-      "race": "celestra",
-      "level": 50,
-      "bonus": {
-        "atk": 4900
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
-    },
-    {
-      "id": "arm_celestra_50_SSS",
-      "name": "[SSS] Lv.50 Dark Robe",
-      "emoji": "\ud83d\udc58",
-      "rarity": "SSS",
-      "type": "armor",
-      "race": "celestra",
-      "level": 50,
-      "bonus": {
-        "def": 2800
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
-    },
-    {
-      "id": "wep_celestra_50_SR",
-      "name": "[SR] Lv.50 Relic Staff",
-      "emoji": "\ud83d\udd2e",
-      "rarity": "SR",
-      "type": "weapon",
-      "race": "celestra",
-      "level": 50,
-      "bonus": {
-        "atk": 7000
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
-    },
-    {
-      "id": "arm_celestra_50_SR",
-      "name": "[SR] Lv.50 Dark Robe",
-      "emoji": "\ud83d\udc58",
-      "rarity": "SR",
-      "type": "armor",
-      "race": "celestra",
-      "level": 50,
-      "bonus": {
-        "def": 4000
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
-    },
-    {
-      "id": "wep_celestra_50_SSR",
-      "name": "[SSR] Lv.50 Relic Staff",
-      "emoji": "\ud83d\udd2e",
-      "rarity": "SSR",
-      "type": "weapon",
-      "race": "celestra",
-      "level": 50,
-      "bonus": {
-        "atk": 10500
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
-    },
-    {
-      "id": "arm_celestra_50_SSR",
-      "name": "[SSR] Lv.50 Dark Robe",
-      "emoji": "\ud83d\udc58",
-      "rarity": "SSR",
-      "type": "armor",
-      "race": "celestra",
-      "level": 50,
-      "bonus": {
-        "def": 6000
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
-    },
-    {
-      "id": "wep_celestra_50_UR",
-      "name": "[UR] Lv.50 Relic Staff",
-      "emoji": "\ud83d\udd2e",
-      "rarity": "UR",
-      "type": "weapon",
-      "race": "celestra",
-      "level": 50,
-      "bonus": {
-        "atk": 17500
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
-    },
-    {
-      "id": "arm_celestra_50_UR",
-      "name": "[UR] Lv.50 Dark Robe",
-      "emoji": "\ud83d\udc58",
-      "rarity": "UR",
-      "type": "armor",
-      "race": "celestra",
-      "level": 50,
-      "bonus": {
-        "def": 10000
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
-    },
-    {
-      "id": "wep_All_50_D",
-      "name": "[D] Lv.50 Greatsword",
-      "emoji": "\u2694\ufe0f",
-      "rarity": "D",
-      "type": "weapon",
-      "race": "All",
-      "level": 50,
-      "bonus": {
-        "atk": 700
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
-    },
-    {
-      "id": "arm_All_50_D",
-      "name": "[D] Lv.50 Carbon Shield",
-      "emoji": "\ud83d\udee1\ufe0f",
-      "rarity": "D",
-      "type": "shield",
-      "race": "All",
-      "level": 50,
-      "bonus": {
-        "def": 400
-      },
-      "image": "/assets/arctron_shield_3_rembg.png"
-    },
-    {
-      "id": "wep_All_50_C",
-      "name": "[C] Lv.50 Greatsword",
-      "emoji": "\u2694\ufe0f",
-      "rarity": "C",
-      "type": "weapon",
-      "race": "All",
-      "level": 50,
-      "bonus": {
-        "atk": 840
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
-    },
-    {
-      "id": "arm_All_50_C",
-      "name": "[C] Lv.50 Carbon Shield",
-      "emoji": "\ud83d\udee1\ufe0f",
-      "rarity": "C",
-      "type": "shield",
-      "race": "All",
-      "level": 50,
-      "bonus": {
-        "def": 480
-      },
-      "image": "/assets/arctron_shield_3_rembg.png"
-    },
-    {
-      "id": "wep_All_50_B",
-      "name": "[B] Lv.50 Greatsword",
-      "emoji": "\u2694\ufe0f",
-      "rarity": "B",
-      "type": "weapon",
-      "race": "All",
-      "level": 50,
-      "bonus": {
-        "atk": 1050
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
-    },
-    {
-      "id": "arm_All_50_B",
-      "name": "[B] Lv.50 Carbon Shield",
-      "emoji": "\ud83d\udee1\ufe0f",
-      "rarity": "B",
-      "type": "shield",
-      "race": "All",
-      "level": 50,
-      "bonus": {
-        "def": 600
-      },
-      "image": "/assets/arctron_shield_3_rembg.png"
-    },
-    {
-      "id": "wep_All_50_A",
-      "name": "[A] Lv.50 Greatsword",
-      "emoji": "\u2694\ufe0f",
-      "rarity": "A",
-      "type": "weapon",
-      "race": "All",
-      "level": 50,
-      "bonus": {
-        "atk": 1400
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
-    },
-    {
-      "id": "arm_All_50_A",
-      "name": "[A] Lv.50 Carbon Shield",
-      "emoji": "\ud83d\udee1\ufe0f",
-      "rarity": "A",
-      "type": "shield",
-      "race": "All",
-      "level": 50,
-      "bonus": {
-        "def": 800
-      },
-      "image": "/assets/arctron_shield_3_rembg.png"
-    },
-    {
-      "id": "wep_All_50_S",
-      "name": "[S] Lv.50 Greatsword",
-      "emoji": "\u2694\ufe0f",
-      "rarity": "S",
-      "type": "weapon",
-      "race": "All",
-      "level": 50,
-      "bonus": {
-        "atk": 2100
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
-    },
-    {
-      "id": "arm_All_50_S",
-      "name": "[S] Lv.50 Carbon Shield",
-      "emoji": "\ud83d\udee1\ufe0f",
-      "rarity": "S",
-      "type": "shield",
-      "race": "All",
-      "level": 50,
-      "bonus": {
-        "def": 1200
-      },
-      "image": "/assets/arctron_shield_3_rembg.png"
-    },
-    {
-      "id": "wep_All_50_SS",
-      "name": "[SS] Lv.50 Greatsword",
-      "emoji": "\u2694\ufe0f",
-      "rarity": "SS",
-      "type": "weapon",
-      "race": "All",
-      "level": 50,
-      "bonus": {
-        "atk": 3150
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
-    },
-    {
-      "id": "arm_All_50_SS",
-      "name": "[SS] Lv.50 Carbon Shield",
-      "emoji": "\ud83d\udee1\ufe0f",
-      "rarity": "SS",
-      "type": "shield",
-      "race": "All",
-      "level": 50,
-      "bonus": {
-        "def": 1800
-      },
-      "image": "/assets/arctron_shield_3_rembg.png"
-    },
-    {
-      "id": "wep_All_50_SSS",
-      "name": "[SSS] Lv.50 Greatsword",
-      "emoji": "\u2694\ufe0f",
-      "rarity": "SSS",
-      "type": "weapon",
-      "race": "All",
-      "level": 50,
-      "bonus": {
-        "atk": 4900
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
-    },
-    {
-      "id": "arm_All_50_SSS",
-      "name": "[SSS] Lv.50 Carbon Shield",
-      "emoji": "\ud83d\udee1\ufe0f",
-      "rarity": "SSS",
-      "type": "shield",
-      "race": "All",
-      "level": 50,
-      "bonus": {
-        "def": 2800
-      },
-      "image": "/assets/arctron_shield_3_rembg.png"
-    },
-    {
-      "id": "wep_All_50_SR",
-      "name": "[SR] Lv.50 Greatsword",
-      "emoji": "\u2694\ufe0f",
-      "rarity": "SR",
-      "type": "weapon",
-      "race": "All",
-      "level": 50,
-      "bonus": {
-        "atk": 7000
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
-    },
-    {
-      "id": "arm_All_50_SR",
-      "name": "[SR] Lv.50 Carbon Shield",
-      "emoji": "\ud83d\udee1\ufe0f",
-      "rarity": "SR",
-      "type": "shield",
-      "race": "All",
-      "level": 50,
-      "bonus": {
-        "def": 4000
-      },
-      "image": "/assets/arctron_shield_3_rembg.png"
-    },
-    {
-      "id": "wep_All_50_SSR",
-      "name": "[SSR] Lv.50 Greatsword",
-      "emoji": "\u2694\ufe0f",
-      "rarity": "SSR",
-      "type": "weapon",
-      "race": "All",
-      "level": 50,
-      "bonus": {
-        "atk": 10500
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
-    },
-    {
-      "id": "arm_All_50_SSR",
-      "name": "[SSR] Lv.50 Carbon Shield",
-      "emoji": "\ud83d\udee1\ufe0f",
-      "rarity": "SSR",
-      "type": "shield",
-      "race": "All",
-      "level": 50,
-      "bonus": {
-        "def": 6000
-      },
-      "image": "/assets/arctron_shield_3_rembg.png"
-    },
-    {
-      "id": "wep_All_50_UR",
-      "name": "[UR] Lv.50 Greatsword",
-      "emoji": "\u2694\ufe0f",
-      "rarity": "UR",
-      "type": "weapon",
-      "race": "All",
-      "level": 50,
-      "bonus": {
-        "atk": 17500
-      },
-      "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
-    },
-    {
-      "id": "arm_All_50_UR",
-      "name": "[UR] Lv.50 Carbon Shield",
-      "emoji": "\ud83d\udee1\ufe0f",
-      "rarity": "UR",
-      "type": "shield",
-      "race": "All",
-      "level": 50,
-      "bonus": {
-        "def": 10000
       },
       "image": "/assets/arctron_shield_3_rembg.png"
     },
@@ -7181,7 +6141,7 @@
       "race": "arctron",
       "level": 55,
       "bonus": {
-        "atk": 770
+        "atk": 700
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Launcher_Missile-Launcher-min.png"
     },
@@ -7194,7 +6154,7 @@
       "race": "arctron",
       "level": 55,
       "bonus": {
-        "def": 440
+        "def": 400
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iuawg55.png"
     },
@@ -7207,7 +6167,7 @@
       "race": "arctron",
       "level": 55,
       "bonus": {
-        "atk": 924
+        "atk": 840
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Launcher_Missile-Launcher-min.png"
     },
@@ -7220,7 +6180,7 @@
       "race": "arctron",
       "level": 55,
       "bonus": {
-        "def": 528
+        "def": 480
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iuawg55.png"
     },
@@ -7233,7 +6193,7 @@
       "race": "arctron",
       "level": 55,
       "bonus": {
-        "atk": 1155
+        "atk": 1050
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Launcher_Missile-Launcher-min.png"
     },
@@ -7246,7 +6206,7 @@
       "race": "arctron",
       "level": 55,
       "bonus": {
-        "def": 660
+        "def": 600
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iuawg55.png"
     },
@@ -7259,7 +6219,7 @@
       "race": "arctron",
       "level": 55,
       "bonus": {
-        "atk": 1540
+        "atk": 1400
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Launcher_Missile-Launcher-min.png"
     },
@@ -7272,7 +6232,7 @@
       "race": "arctron",
       "level": 55,
       "bonus": {
-        "def": 880
+        "def": 800
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iuawg55.png"
     },
@@ -7285,7 +6245,7 @@
       "race": "arctron",
       "level": 55,
       "bonus": {
-        "atk": 2310
+        "atk": 2100
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Launcher_Missile-Launcher-min.png"
     },
@@ -7298,7 +6258,7 @@
       "race": "arctron",
       "level": 55,
       "bonus": {
-        "def": 1320
+        "def": 1200
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iuawg55.png"
     },
@@ -7311,7 +6271,7 @@
       "race": "arctron",
       "level": 55,
       "bonus": {
-        "atk": 3465
+        "atk": 3150
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Launcher_Missile-Launcher-min.png"
     },
@@ -7324,7 +6284,7 @@
       "race": "arctron",
       "level": 55,
       "bonus": {
-        "def": 1980
+        "def": 1800
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iuawg55.png"
     },
@@ -7337,7 +6297,7 @@
       "race": "arctron",
       "level": 55,
       "bonus": {
-        "atk": 5390
+        "atk": 4900
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Launcher_Missile-Launcher-min.png"
     },
@@ -7350,7 +6310,7 @@
       "race": "arctron",
       "level": 55,
       "bonus": {
-        "def": 3080
+        "def": 2800
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iuawg55.png"
     },
@@ -7363,7 +6323,7 @@
       "race": "arctron",
       "level": 55,
       "bonus": {
-        "atk": 7700
+        "atk": 7000
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Launcher_Missile-Launcher-min.png"
     },
@@ -7376,7 +6336,7 @@
       "race": "arctron",
       "level": 55,
       "bonus": {
-        "def": 4400
+        "def": 4000
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iuawg55.png"
     },
@@ -7389,7 +6349,7 @@
       "race": "arctron",
       "level": 55,
       "bonus": {
-        "atk": 11550
+        "atk": 10500
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Launcher_Missile-Launcher-min.png"
     },
@@ -7402,7 +6362,7 @@
       "race": "arctron",
       "level": 55,
       "bonus": {
-        "def": 6600
+        "def": 6000
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iuawg55.png"
     },
@@ -7415,7 +6375,7 @@
       "race": "arctron",
       "level": 55,
       "bonus": {
-        "atk": 19250
+        "atk": 17500
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Launcher_Missile-Launcher-min.png"
     },
@@ -7428,7 +6388,7 @@
       "race": "arctron",
       "level": 55,
       "bonus": {
-        "def": 11000
+        "def": 10000
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iuawg55.png"
     },
@@ -7441,7 +6401,7 @@
       "race": "bionex",
       "level": 55,
       "bonus": {
-        "atk": 770
+        "atk": 700
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_GatlingGun.gif"
     },
@@ -7454,7 +6414,7 @@
       "race": "bionex",
       "level": 55,
       "bonus": {
-        "def": 440
+        "def": 400
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iubcf55.png"
     },
@@ -7467,7 +6427,7 @@
       "race": "bionex",
       "level": 55,
       "bonus": {
-        "atk": 924
+        "atk": 840
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_GatlingGun.gif"
     },
@@ -7480,7 +6440,7 @@
       "race": "bionex",
       "level": 55,
       "bonus": {
-        "def": 528
+        "def": 480
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iubcf55.png"
     },
@@ -7493,7 +6453,7 @@
       "race": "bionex",
       "level": 55,
       "bonus": {
-        "atk": 1155
+        "atk": 1050
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_GatlingGun.gif"
     },
@@ -7506,7 +6466,7 @@
       "race": "bionex",
       "level": 55,
       "bonus": {
-        "def": 660
+        "def": 600
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iubcf55.png"
     },
@@ -7519,7 +6479,7 @@
       "race": "bionex",
       "level": 55,
       "bonus": {
-        "atk": 1540
+        "atk": 1400
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_GatlingGun.gif"
     },
@@ -7532,7 +6492,7 @@
       "race": "bionex",
       "level": 55,
       "bonus": {
-        "def": 880
+        "def": 800
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iubcf55.png"
     },
@@ -7545,7 +6505,7 @@
       "race": "bionex",
       "level": 55,
       "bonus": {
-        "atk": 2310
+        "atk": 2100
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_GatlingGun.gif"
     },
@@ -7558,7 +6518,7 @@
       "race": "bionex",
       "level": 55,
       "bonus": {
-        "def": 1320
+        "def": 1200
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iubcf55.png"
     },
@@ -7571,7 +6531,7 @@
       "race": "bionex",
       "level": 55,
       "bonus": {
-        "atk": 3465
+        "atk": 3150
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_GatlingGun.gif"
     },
@@ -7584,7 +6544,7 @@
       "race": "bionex",
       "level": 55,
       "bonus": {
-        "def": 1980
+        "def": 1800
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iubcf55.png"
     },
@@ -7597,7 +6557,7 @@
       "race": "bionex",
       "level": 55,
       "bonus": {
-        "atk": 5390
+        "atk": 4900
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_GatlingGun.gif"
     },
@@ -7610,7 +6570,7 @@
       "race": "bionex",
       "level": 55,
       "bonus": {
-        "def": 3080
+        "def": 2800
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iubcf55.png"
     },
@@ -7623,7 +6583,7 @@
       "race": "bionex",
       "level": 55,
       "bonus": {
-        "atk": 7700
+        "atk": 7000
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_GatlingGun.gif"
     },
@@ -7636,7 +6596,7 @@
       "race": "bionex",
       "level": 55,
       "bonus": {
-        "def": 4400
+        "def": 4000
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iubcf55.png"
     },
@@ -7649,7 +6609,7 @@
       "race": "bionex",
       "level": 55,
       "bonus": {
-        "atk": 11550
+        "atk": 10500
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_GatlingGun.gif"
     },
@@ -7662,7 +6622,7 @@
       "race": "bionex",
       "level": 55,
       "bonus": {
-        "def": 6600
+        "def": 6000
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iubcf55.png"
     },
@@ -7675,7 +6635,7 @@
       "race": "bionex",
       "level": 55,
       "bonus": {
-        "atk": 19250
+        "atk": 17500
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/FireArm_GatlingGun.gif"
     },
@@ -7688,7 +6648,7 @@
       "race": "bionex",
       "level": 55,
       "bonus": {
-        "def": 11000
+        "def": 10000
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/iubcf55.png"
     },
@@ -7701,7 +6661,7 @@
       "race": "celestra",
       "level": 55,
       "bonus": {
-        "atk": 770
+        "atk": 700
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
     },
@@ -7714,7 +6674,7 @@
       "race": "celestra",
       "level": 55,
       "bonus": {
-        "def": 440
+        "def": 400
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
     },
@@ -7727,7 +6687,7 @@
       "race": "celestra",
       "level": 55,
       "bonus": {
-        "atk": 924
+        "atk": 840
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
     },
@@ -7740,7 +6700,7 @@
       "race": "celestra",
       "level": 55,
       "bonus": {
-        "def": 528
+        "def": 480
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
     },
@@ -7753,7 +6713,7 @@
       "race": "celestra",
       "level": 55,
       "bonus": {
-        "atk": 1155
+        "atk": 1050
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
     },
@@ -7766,7 +6726,7 @@
       "race": "celestra",
       "level": 55,
       "bonus": {
-        "def": 660
+        "def": 600
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
     },
@@ -7779,7 +6739,7 @@
       "race": "celestra",
       "level": 55,
       "bonus": {
-        "atk": 1540
+        "atk": 1400
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
     },
@@ -7792,7 +6752,7 @@
       "race": "celestra",
       "level": 55,
       "bonus": {
-        "def": 880
+        "def": 800
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
     },
@@ -7805,7 +6765,7 @@
       "race": "celestra",
       "level": 55,
       "bonus": {
-        "atk": 2310
+        "atk": 2100
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
     },
@@ -7818,7 +6778,7 @@
       "race": "celestra",
       "level": 55,
       "bonus": {
-        "def": 1320
+        "def": 1200
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
     },
@@ -7831,7 +6791,7 @@
       "race": "celestra",
       "level": 55,
       "bonus": {
-        "atk": 3465
+        "atk": 3150
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
     },
@@ -7844,7 +6804,7 @@
       "race": "celestra",
       "level": 55,
       "bonus": {
-        "def": 1980
+        "def": 1800
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
     },
@@ -7857,7 +6817,7 @@
       "race": "celestra",
       "level": 55,
       "bonus": {
-        "atk": 5390
+        "atk": 4900
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
     },
@@ -7870,7 +6830,7 @@
       "race": "celestra",
       "level": 55,
       "bonus": {
-        "def": 3080
+        "def": 2800
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
     },
@@ -7883,7 +6843,7 @@
       "race": "celestra",
       "level": 55,
       "bonus": {
-        "atk": 7700
+        "atk": 7000
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
     },
@@ -7896,7 +6856,7 @@
       "race": "celestra",
       "level": 55,
       "bonus": {
-        "def": 4400
+        "def": 4000
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
     },
@@ -7909,7 +6869,7 @@
       "race": "celestra",
       "level": 55,
       "bonus": {
-        "atk": 11550
+        "atk": 10500
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
     },
@@ -7922,7 +6882,7 @@
       "race": "celestra",
       "level": 55,
       "bonus": {
-        "def": 6600
+        "def": 6000
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
     },
@@ -7935,7 +6895,7 @@
       "race": "celestra",
       "level": 55,
       "bonus": {
-        "atk": 19250
+        "atk": 17500
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
     },
@@ -7948,7 +6908,7 @@
       "race": "celestra",
       "level": 55,
       "bonus": {
-        "def": 11000
+        "def": 10000
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
     },
@@ -7961,7 +6921,7 @@
       "race": "All",
       "level": 55,
       "bonus": {
-        "atk": 770
+        "atk": 700
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
@@ -7974,7 +6934,7 @@
       "race": "All",
       "level": 55,
       "bonus": {
-        "def": 440
+        "def": 400
       },
       "image": "/assets/arctron_shield_3_rembg.png"
     },
@@ -7987,7 +6947,7 @@
       "race": "All",
       "level": 55,
       "bonus": {
-        "atk": 924
+        "atk": 840
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
@@ -8000,7 +6960,7 @@
       "race": "All",
       "level": 55,
       "bonus": {
-        "def": 528
+        "def": 480
       },
       "image": "/assets/arctron_shield_3_rembg.png"
     },
@@ -8013,7 +6973,7 @@
       "race": "All",
       "level": 55,
       "bonus": {
-        "atk": 1155
+        "atk": 1050
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
@@ -8026,7 +6986,7 @@
       "race": "All",
       "level": 55,
       "bonus": {
-        "def": 660
+        "def": 600
       },
       "image": "/assets/arctron_shield_3_rembg.png"
     },
@@ -8039,7 +6999,7 @@
       "race": "All",
       "level": 55,
       "bonus": {
-        "atk": 1540
+        "atk": 1400
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
@@ -8052,7 +7012,7 @@
       "race": "All",
       "level": 55,
       "bonus": {
-        "def": 880
+        "def": 800
       },
       "image": "/assets/arctron_shield_3_rembg.png"
     },
@@ -8065,7 +7025,7 @@
       "race": "All",
       "level": 55,
       "bonus": {
-        "atk": 2310
+        "atk": 2100
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
@@ -8078,7 +7038,7 @@
       "race": "All",
       "level": 55,
       "bonus": {
-        "def": 1320
+        "def": 1200
       },
       "image": "/assets/arctron_shield_3_rembg.png"
     },
@@ -8091,7 +7051,7 @@
       "race": "All",
       "level": 55,
       "bonus": {
-        "atk": 3465
+        "atk": 3150
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
@@ -8104,7 +7064,7 @@
       "race": "All",
       "level": 55,
       "bonus": {
-        "def": 1980
+        "def": 1800
       },
       "image": "/assets/arctron_shield_3_rembg.png"
     },
@@ -8117,7 +7077,7 @@
       "race": "All",
       "level": 55,
       "bonus": {
-        "atk": 5390
+        "atk": 4900
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
@@ -8130,7 +7090,7 @@
       "race": "All",
       "level": 55,
       "bonus": {
-        "def": 3080
+        "def": 2800
       },
       "image": "/assets/arctron_shield_3_rembg.png"
     },
@@ -8143,7 +7103,7 @@
       "race": "All",
       "level": 55,
       "bonus": {
-        "atk": 7700
+        "atk": 7000
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
@@ -8156,7 +7116,7 @@
       "race": "All",
       "level": 55,
       "bonus": {
-        "def": 4400
+        "def": 4000
       },
       "image": "/assets/arctron_shield_3_rembg.png"
     },
@@ -8169,7 +7129,7 @@
       "race": "All",
       "level": 55,
       "bonus": {
-        "atk": 11550
+        "atk": 10500
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
@@ -8182,7 +7142,7 @@
       "race": "All",
       "level": 55,
       "bonus": {
-        "def": 6600
+        "def": 6000
       },
       "image": "/assets/arctron_shield_3_rembg.png"
     },
@@ -8195,7 +7155,7 @@
       "race": "All",
       "level": 55,
       "bonus": {
-        "atk": 19250
+        "atk": 17500
       },
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
@@ -8208,7 +7168,7 @@
       "race": "All",
       "level": 55,
       "bonus": {
-        "def": 11000
+        "def": 10000
       },
       "image": "/assets/arctron_shield_3_rembg.png"
     },
@@ -14910,7 +13870,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "iron_trooper",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 220
       },
@@ -14925,7 +13885,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "iron_trooper",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 264
       },
@@ -14940,7 +13900,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "iron_trooper",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 330
       },
@@ -14955,7 +13915,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "iron_trooper",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 440
       },
@@ -14970,7 +13930,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "iron_trooper",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 660
       },
@@ -14985,7 +13945,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "iron_trooper",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 990
       },
@@ -15000,7 +13960,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "iron_trooper",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 1540
       },
@@ -15015,7 +13975,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "iron_trooper",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 2200
       },
@@ -15030,7 +13990,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "iron_trooper",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 3300
       },
@@ -15045,7 +14005,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "iron_trooper",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 5500
       },
@@ -15060,7 +14020,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "siege_gunner",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 235
       },
@@ -15075,7 +14035,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "siege_gunner",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 282
       },
@@ -15090,7 +14050,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "siege_gunner",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 352
       },
@@ -15105,7 +14065,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "siege_gunner",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 470
       },
@@ -15120,7 +14080,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "siege_gunner",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 705
       },
@@ -15135,7 +14095,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "siege_gunner",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 1057
       },
@@ -15150,7 +14110,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "siege_gunner",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 1645
       },
@@ -15165,7 +14125,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "siege_gunner",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 2350
       },
@@ -15180,7 +14140,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "siege_gunner",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 3525
       },
@@ -15195,7 +14155,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "siege_gunner",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 5875
       },
@@ -15210,7 +14170,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "cyber_assassin",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 205
       },
@@ -15225,7 +14185,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "cyber_assassin",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 246
       },
@@ -15240,7 +14200,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "cyber_assassin",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 307
       },
@@ -15255,7 +14215,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "cyber_assassin",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 410
       },
@@ -15270,7 +14230,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "cyber_assassin",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 615
       },
@@ -15285,7 +14245,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "cyber_assassin",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 922
       },
@@ -15300,7 +14260,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "cyber_assassin",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 1435
       },
@@ -15315,7 +14275,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "cyber_assassin",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 2050
       },
@@ -15330,7 +14290,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "cyber_assassin",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 3075
       },
@@ -15345,7 +14305,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "cyber_assassin",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 5125
       },
@@ -15360,7 +14320,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "iron_vanguard",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 425
       },
@@ -15375,7 +14335,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "iron_vanguard",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 510
       },
@@ -15390,7 +14350,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "iron_vanguard",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 637
       },
@@ -15405,7 +14365,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "iron_vanguard",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 850
       },
@@ -15420,7 +14380,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "iron_vanguard",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 1275
       },
@@ -15435,7 +14395,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "iron_vanguard",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 1912
       },
@@ -15450,7 +14410,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "iron_vanguard",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 2975
       },
@@ -15465,7 +14425,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "iron_vanguard",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 4250
       },
@@ -15480,7 +14440,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "iron_vanguard",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 6375
       },
@@ -15495,7 +14455,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "iron_vanguard",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 10625
       },
@@ -15510,7 +14470,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "nova_destroyer",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 465
       },
@@ -15525,7 +14485,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "nova_destroyer",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 558
       },
@@ -15540,7 +14500,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "nova_destroyer",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 697
       },
@@ -15555,7 +14515,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "nova_destroyer",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 930
       },
@@ -15570,7 +14530,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "nova_destroyer",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 1395
       },
@@ -15585,7 +14545,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "nova_destroyer",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 2092
       },
@@ -15600,7 +14560,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "nova_destroyer",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 3255
       },
@@ -15615,7 +14575,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "nova_destroyer",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 4650
       },
@@ -15630,7 +14590,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "nova_destroyer",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 6975
       },
@@ -15645,7 +14605,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "nova_destroyer",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 11625
       },
@@ -15660,7 +14620,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "omega_reaper",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 440
       },
@@ -15675,7 +14635,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "omega_reaper",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 528
       },
@@ -15690,7 +14650,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "omega_reaper",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 660
       },
@@ -15705,7 +14665,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "omega_reaper",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 880
       },
@@ -15720,7 +14680,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "omega_reaper",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 1320
       },
@@ -15735,7 +14695,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "omega_reaper",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 1980
       },
@@ -15750,7 +14710,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "omega_reaper",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 3080
       },
@@ -15765,7 +14725,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "omega_reaper",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 4400
       },
@@ -15780,7 +14740,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "omega_reaper",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 6600
       },
@@ -15795,7 +14755,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": "omega_reaper",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 11000
       },
@@ -16410,7 +15370,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "commando",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 220
       },
@@ -16425,7 +15385,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "commando",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 264
       },
@@ -16440,7 +15400,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "commando",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 330
       },
@@ -16455,7 +15415,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "commando",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 440
       },
@@ -16470,7 +15430,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "commando",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 660
       },
@@ -16485,7 +15445,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "commando",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 990
       },
@@ -16500,7 +15460,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "commando",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 1540
       },
@@ -16515,7 +15475,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "commando",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 2200
       },
@@ -16530,7 +15490,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "commando",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 3300
       },
@@ -16545,7 +15505,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "commando",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 5500
       },
@@ -16560,7 +15520,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "miller",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 170
       },
@@ -16575,7 +15535,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "miller",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 204
       },
@@ -16590,7 +15550,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "miller",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 255
       },
@@ -16605,7 +15565,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "miller",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 340
       },
@@ -16620,7 +15580,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "miller",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 510
       },
@@ -16635,7 +15595,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "miller",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 765
       },
@@ -16650,7 +15610,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "miller",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 1190
       },
@@ -16665,7 +15625,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "miller",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 1700
       },
@@ -16680,7 +15640,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "miller",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 2550
       },
@@ -16695,7 +15655,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "miller",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 4250
       },
@@ -16710,7 +15670,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "desperado",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 195
       },
@@ -16725,7 +15685,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "desperado",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 234
       },
@@ -16740,7 +15700,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "desperado",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 292
       },
@@ -16755,7 +15715,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "desperado",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 390
       },
@@ -16770,7 +15730,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "desperado",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 585
       },
@@ -16785,7 +15745,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "desperado",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 877
       },
@@ -16800,7 +15760,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "desperado",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 1365
       },
@@ -16815,7 +15775,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "desperado",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 1950
       },
@@ -16830,7 +15790,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "desperado",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 2925
       },
@@ -16845,7 +15805,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "desperado",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 4875
       },
@@ -16860,7 +15820,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "sniper",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 210
       },
@@ -16875,7 +15835,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "sniper",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 252
       },
@@ -16890,7 +15850,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "sniper",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 315
       },
@@ -16905,7 +15865,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "sniper",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 420
       },
@@ -16920,7 +15880,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "sniper",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 630
       },
@@ -16935,7 +15895,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "sniper",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 945
       },
@@ -16950,7 +15910,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "sniper",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 1470
       },
@@ -16965,7 +15925,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "sniper",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 2100
       },
@@ -16980,7 +15940,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "sniper",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 3150
       },
@@ -16995,7 +15955,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "sniper",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 5250
       },
@@ -17010,7 +15970,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "psyper",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 185
       },
@@ -17025,7 +15985,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "psyper",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 222
       },
@@ -17040,7 +16000,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "psyper",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 277
       },
@@ -17055,7 +16015,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "psyper",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 370
       },
@@ -17070,7 +16030,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "psyper",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 555
       },
@@ -17085,7 +16045,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "psyper",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 832
       },
@@ -17100,7 +16060,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "psyper",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 1295
       },
@@ -17115,7 +16075,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "psyper",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 1850
       },
@@ -17130,7 +16090,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "psyper",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 2775
       },
@@ -17145,7 +16105,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "psyper",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 4625
       },
@@ -17160,7 +16120,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "chandra",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 150
       },
@@ -17175,7 +16135,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "chandra",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 180
       },
@@ -17190,7 +16150,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "chandra",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 225
       },
@@ -17205,7 +16165,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "chandra",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 300
       },
@@ -17220,7 +16180,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "chandra",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 450
       },
@@ -17235,7 +16195,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "chandra",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 675
       },
@@ -17250,7 +16210,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "chandra",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 1050
       },
@@ -17265,7 +16225,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "chandra",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 1500
       },
@@ -17280,7 +16240,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "chandra",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 2250
       },
@@ -17295,7 +16255,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "chandra",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 3750
       },
@@ -17310,7 +16270,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "craftsman",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 160
       },
@@ -17325,7 +16285,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "craftsman",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 192
       },
@@ -17340,7 +16300,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "craftsman",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 240
       },
@@ -17355,7 +16315,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "craftsman",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 320
       },
@@ -17370,7 +16330,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "craftsman",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 480
       },
@@ -17385,7 +16345,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "craftsman",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 720
       },
@@ -17400,7 +16360,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "craftsman",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 1120
       },
@@ -17415,7 +16375,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "craftsman",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 1600
       },
@@ -17430,7 +16390,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "craftsman",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 2400
       },
@@ -17445,7 +16405,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "craftsman",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 4000
       },
@@ -17460,7 +16420,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "driver",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 175
       },
@@ -17475,7 +16435,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "driver",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 210
       },
@@ -17490,7 +16450,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "driver",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 262
       },
@@ -17505,7 +16465,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "driver",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 350
       },
@@ -17520,7 +16480,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "driver",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 525
       },
@@ -17535,7 +16495,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "driver",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 787
       },
@@ -17550,7 +16510,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "driver",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 1225
       },
@@ -17565,7 +16525,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "driver",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 1750
       },
@@ -17580,7 +16540,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "driver",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 2625
       },
@@ -17595,7 +16555,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "driver",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 4375
       },
@@ -17610,7 +16570,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "berserker",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 465
       },
@@ -17625,7 +16585,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "berserker",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 558
       },
@@ -17640,7 +16600,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "berserker",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 697
       },
@@ -17655,7 +16615,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "berserker",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 930
       },
@@ -17670,7 +16630,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "berserker",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 1395
       },
@@ -17685,7 +16645,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "berserker",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 2092
       },
@@ -17700,7 +16660,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "berserker",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 3255
       },
@@ -17715,7 +16675,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "berserker",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 4650
       },
@@ -17730,7 +16690,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "berserker",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 6975
       },
@@ -17745,7 +16705,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "berserker",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 11625
       },
@@ -17760,7 +16720,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "armsman",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 440
       },
@@ -17775,7 +16735,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "armsman",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 528
       },
@@ -17790,7 +16750,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "armsman",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 660
       },
@@ -17805,7 +16765,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "armsman",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 880
       },
@@ -17820,7 +16780,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "armsman",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 1320
       },
@@ -17835,7 +16795,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "armsman",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 1980
       },
@@ -17850,7 +16810,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "armsman",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 3080
       },
@@ -17865,7 +16825,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "armsman",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 4400
       },
@@ -17880,7 +16840,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "armsman",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 6600
       },
@@ -17895,7 +16855,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "armsman",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 11000
       },
@@ -17910,7 +16870,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "shield_miller",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 370
       },
@@ -17925,7 +16885,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "shield_miller",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 444
       },
@@ -17940,7 +16900,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "shield_miller",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 555
       },
@@ -17955,7 +16915,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "shield_miller",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 740
       },
@@ -17970,7 +16930,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "shield_miller",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 1110
       },
@@ -17985,7 +16945,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "shield_miller",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 1665
       },
@@ -18000,7 +16960,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "shield_miller",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 2590
       },
@@ -18015,7 +16975,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "shield_miller",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 3700
       },
@@ -18030,7 +16990,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "shield_miller",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 5550
       },
@@ -18045,7 +17005,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "shield_miller",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 9250
       },
@@ -18060,7 +17020,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "hidden_soldier",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 425
       },
@@ -18075,7 +17035,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "hidden_soldier",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 510
       },
@@ -18090,7 +17050,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "hidden_soldier",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 637
       },
@@ -18105,7 +17065,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "hidden_soldier",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 850
       },
@@ -18120,7 +17080,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "hidden_soldier",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 1275
       },
@@ -18135,7 +17095,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "hidden_soldier",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 1912
       },
@@ -18150,7 +17110,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "hidden_soldier",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 2975
       },
@@ -18165,7 +17125,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "hidden_soldier",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 4250
       },
@@ -18180,7 +17140,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "hidden_soldier",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 6375
       },
@@ -18195,7 +17155,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "hidden_soldier",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 10625
       },
@@ -18210,7 +17170,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "sentinel",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 470
       },
@@ -18225,7 +17185,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "sentinel",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 564
       },
@@ -18240,7 +17200,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "sentinel",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 705
       },
@@ -18255,7 +17215,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "sentinel",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 940
       },
@@ -18270,7 +17230,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "sentinel",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 1410
       },
@@ -18285,7 +17245,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "sentinel",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 2115
       },
@@ -18300,7 +17260,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "sentinel",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 3290
       },
@@ -18315,7 +17275,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "sentinel",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 4700
       },
@@ -18330,7 +17290,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "sentinel",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 7050
       },
@@ -18345,7 +17305,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "sentinel",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 11750
       },
@@ -18360,7 +17320,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "infiltrator",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 490
       },
@@ -18375,7 +17335,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "infiltrator",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 588
       },
@@ -18390,7 +17350,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "infiltrator",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 735
       },
@@ -18405,7 +17365,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "infiltrator",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 980
       },
@@ -18420,7 +17380,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "infiltrator",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 1470
       },
@@ -18435,7 +17395,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "infiltrator",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 2205
       },
@@ -18450,7 +17410,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "infiltrator",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 3430
       },
@@ -18465,7 +17425,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "infiltrator",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 4900
       },
@@ -18480,7 +17440,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "infiltrator",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 7350
       },
@@ -18495,7 +17455,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "infiltrator",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 12250
       },
@@ -18510,7 +17470,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "wizard",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 435
       },
@@ -18525,7 +17485,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "wizard",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 522
       },
@@ -18540,7 +17500,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "wizard",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 652
       },
@@ -18555,7 +17515,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "wizard",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 870
       },
@@ -18570,7 +17530,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "wizard",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 1305
       },
@@ -18585,7 +17545,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "wizard",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 1957
       },
@@ -18600,7 +17560,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "wizard",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 3045
       },
@@ -18615,7 +17575,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "wizard",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 4350
       },
@@ -18630,7 +17590,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "wizard",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 6525
       },
@@ -18645,7 +17605,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "wizard",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 10875
       },
@@ -18660,7 +17620,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "astralist",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 400
       },
@@ -18675,7 +17635,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "astralist",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 480
       },
@@ -18690,7 +17650,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "astralist",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 600
       },
@@ -18705,7 +17665,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "astralist",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 800
       },
@@ -18720,7 +17680,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "astralist",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 1200
       },
@@ -18735,7 +17695,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "astralist",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 1800
       },
@@ -18750,7 +17710,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "astralist",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 2800
       },
@@ -18765,7 +17725,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "astralist",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 4000
       },
@@ -18780,7 +17740,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "astralist",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 6000
       },
@@ -18795,7 +17755,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "astralist",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 10000
       },
@@ -18810,7 +17770,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "holy_chandra",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 350
       },
@@ -18825,7 +17785,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "holy_chandra",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 420
       },
@@ -18840,7 +17800,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "holy_chandra",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 525
       },
@@ -18855,7 +17815,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "holy_chandra",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 700
       },
@@ -18870,7 +17830,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "holy_chandra",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 1050
       },
@@ -18885,7 +17845,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "holy_chandra",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 1575
       },
@@ -18900,7 +17860,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "holy_chandra",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 2450
       },
@@ -18915,7 +17875,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "holy_chandra",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 3500
       },
@@ -18930,7 +17890,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "holy_chandra",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 5250
       },
@@ -18945,7 +17905,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "holy_chandra",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 8750
       },
@@ -18960,7 +17920,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "mental_smith",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 375
       },
@@ -18975,7 +17935,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "mental_smith",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 450
       },
@@ -18990,7 +17950,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "mental_smith",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 562
       },
@@ -19005,7 +17965,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "mental_smith",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 750
       },
@@ -19020,7 +17980,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "mental_smith",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 1125
       },
@@ -19035,7 +17995,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "mental_smith",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 1687
       },
@@ -19050,7 +18010,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "mental_smith",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 2625
       },
@@ -19065,7 +18025,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "mental_smith",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 3750
       },
@@ -19080,7 +18040,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "mental_smith",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 5625
       },
@@ -19095,7 +18055,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "mental_smith",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 9375
       },
@@ -19110,7 +18070,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "armor_rider",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 425
       },
@@ -19125,7 +18085,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "armor_rider",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 510
       },
@@ -19140,7 +18100,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "armor_rider",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 637
       },
@@ -19155,7 +18115,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "armor_rider",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 850
       },
@@ -19170,7 +18130,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "armor_rider",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 1275
       },
@@ -19185,7 +18145,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "armor_rider",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 1912
       },
@@ -19200,7 +18160,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "armor_rider",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 2975
       },
@@ -19215,7 +18175,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "armor_rider",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 4250
       },
@@ -19230,7 +18190,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "armor_rider",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 6375
       },
@@ -19245,7 +18205,7 @@
       "type": "weapon",
       "race": "bionex",
       "job": "armor_rider",
-      "level": 40,
+      "level": 42,
       "bonus": {
         "atk": 10625
       },
@@ -19710,7 +18670,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "eidolon_caller",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 180
       },
@@ -19725,7 +18685,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "eidolon_caller",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 216
       },
@@ -19740,7 +18700,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "eidolon_caller",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 270
       },
@@ -19755,7 +18715,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "eidolon_caller",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 360
       },
@@ -19770,7 +18730,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "eidolon_caller",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 540
       },
@@ -19785,7 +18745,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "eidolon_caller",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 810
       },
@@ -19800,7 +18760,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "eidolon_caller",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 1260
       },
@@ -19815,7 +18775,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "eidolon_caller",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 1800
       },
@@ -19830,7 +18790,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "eidolon_caller",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 2700
       },
@@ -19845,7 +18805,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "eidolon_caller",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 4500
       },
@@ -19860,7 +18820,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "spirit_knight",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 200
       },
@@ -19875,7 +18835,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "spirit_knight",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 240
       },
@@ -19890,7 +18850,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "spirit_knight",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 300
       },
@@ -19905,7 +18865,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "spirit_knight",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 400
       },
@@ -19920,7 +18880,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "spirit_knight",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 600
       },
@@ -19935,7 +18895,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "spirit_knight",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 900
       },
@@ -19950,7 +18910,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "spirit_knight",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 1400
       },
@@ -19965,7 +18925,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "spirit_knight",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 2000
       },
@@ -19980,7 +18940,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "spirit_knight",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 3000
       },
@@ -19995,7 +18955,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "spirit_knight",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 5000
       },
@@ -20010,7 +18970,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "moon_ranger",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 210
       },
@@ -20025,7 +18985,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "moon_ranger",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 252
       },
@@ -20040,7 +19000,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "moon_ranger",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 315
       },
@@ -20055,7 +19015,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "moon_ranger",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 420
       },
@@ -20070,7 +19030,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "moon_ranger",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 630
       },
@@ -20085,7 +19045,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "moon_ranger",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 945
       },
@@ -20100,7 +19060,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "moon_ranger",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 1470
       },
@@ -20115,7 +19075,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "moon_ranger",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 2100
       },
@@ -20130,7 +19090,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "moon_ranger",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 3150
       },
@@ -20145,7 +19105,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "moon_ranger",
-      "level": 30,
+      "level": 32,
       "bonus": {
         "atk": 5250
       },
@@ -20160,7 +19120,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "high_summoner",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 350
       },
@@ -20175,7 +19135,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "high_summoner",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 420
       },
@@ -20190,7 +19150,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "high_summoner",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 525
       },
@@ -20205,7 +19165,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "high_summoner",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 700
       },
@@ -20220,7 +19180,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "high_summoner",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 1050
       },
@@ -20235,7 +19195,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "high_summoner",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 1575
       },
@@ -20250,7 +19210,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "high_summoner",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 2450
       },
@@ -20265,7 +19225,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "high_summoner",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 3500
       },
@@ -20280,7 +19240,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "high_summoner",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 5250
       },
@@ -20295,7 +19255,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "high_summoner",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 8750
       },
@@ -20310,7 +19270,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "lumina_paladin",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 395
       },
@@ -20325,7 +19285,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "lumina_paladin",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 474
       },
@@ -20340,7 +19300,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "lumina_paladin",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 592
       },
@@ -20355,7 +19315,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "lumina_paladin",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 790
       },
@@ -20370,7 +19330,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "lumina_paladin",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 1185
       },
@@ -20385,7 +19345,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "lumina_paladin",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 1777
       },
@@ -20400,7 +19360,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "lumina_paladin",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 2765
       },
@@ -20415,7 +19375,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "lumina_paladin",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 3950
       },
@@ -20430,7 +19390,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "lumina_paladin",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 5925
       },
@@ -20445,7 +19405,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "lumina_paladin",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 9875
       },
@@ -20460,7 +19420,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "star_seeker",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 420
       },
@@ -20475,7 +19435,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "star_seeker",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 504
       },
@@ -20490,7 +19450,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "star_seeker",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 630
       },
@@ -20505,7 +19465,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "star_seeker",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 840
       },
@@ -20520,7 +19480,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "star_seeker",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 1260
       },
@@ -20535,7 +19495,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "star_seeker",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 1890
       },
@@ -20550,7 +19510,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "star_seeker",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 2940
       },
@@ -20565,7 +19525,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "star_seeker",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 4200
       },
@@ -20580,7 +19540,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "star_seeker",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 6300
       },
@@ -20595,7 +19555,7 @@
       "type": "weapon",
       "race": "celestra",
       "job": "star_seeker",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 10500
       },
@@ -21240,7 +20200,7 @@
       "rarity": "legendary",
       "type": "weapon",
       "race": "All",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "atk": 200,
         "hp": 2000,
@@ -21255,7 +20215,7 @@
       "type": "armor",
       "rarity": "legendary",
       "race": "All",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "def": 120,
         "hp": 2500
@@ -21269,7 +20229,7 @@
       "type": "helmet",
       "rarity": "legendary",
       "race": "All",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "def": 120,
         "hp": 2500
@@ -21297,7 +20257,7 @@
       "type": "gloves",
       "rarity": "legendary",
       "race": "All",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "def": 120,
         "hp": 2500
@@ -21311,7 +20271,7 @@
       "type": "boots",
       "rarity": "legendary",
       "race": "All",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "def": 120,
         "hp": 2500
@@ -21325,7 +20285,7 @@
       "rarity": "legendary",
       "type": "shield",
       "race": "All",
-      "level": 50,
+      "level": 55,
       "bonus": {
         "def": 120,
         "hp": 2500

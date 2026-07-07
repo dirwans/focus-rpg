@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useGameStore, verifyStarterShield, verifyStarterArmorSet } from '../store/gameStore'
+import { useGameStore, verifyStarterShield, verifyStarterArmorSet, verifyStarterWeapon } from '../store/gameStore'
 import { useAuthStore } from '../store/authStore'
 import races from '../data/races.json'
 import jobs from '../data/jobs.json'
@@ -184,7 +184,7 @@ export default function CharacterCreate() {
         server: s.player?.server || 'nova_core',
         hasChangedName: true
       }
-      const verifiedPlayer = verifyStarterArmorSet(verifyStarterShield(freshPlayer))
+      const verifiedPlayer = verifyStarterArmorSet(verifyStarterWeapon(verifyStarterShield(freshPlayer)))
       syncSave(verifiedPlayer)
       return { player: verifiedPlayer }
     })
