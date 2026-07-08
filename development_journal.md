@@ -822,7 +822,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 72: Celestra Mage & Ranger Tier Assets Regeneration (Lv.32 Sets) [PENDING DEPLOYMENT]
+### 🎨 Milestone 72: Celestra Mage & Ranger Tier Assets Regeneration (Lv.32 Sets) [DEPLOYED]
 - **Assets**: Regenerated 10 mecha armor pieces using the `/regenerate-2.5D-anime-realistic` custom skill:
   - Celestra Mage Level 32 set (`helmet`, `armor`, `pants`, `boots`, `gloves`) - 5 pieces matching the white/gold elven wizard robe design with glowing purple runes.
   - Celestra Ranger Level 32 set (`helmet`, `armor`, `pants`, `boots`, `gloves`) - 5 pieces matching the green/emerald organic mecha design with gold leaf trims and wind-cyan lines. (Gloves generated via OpenRouter fallback due to rate limits).
@@ -832,7 +832,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 73: Celestra Ranger Tier Assets Regeneration (Lv.42 Set) [PENDING DEPLOYMENT]
+### 🎨 Milestone 73: Celestra Ranger Tier Assets Regeneration (Lv.42 Set) [DEPLOYED]
 - **Assets**: Regenerated the full 5 pieces of the Celestra Ranger Level 42 mecha armor set (`helmet`, `armor`, `pants`, `boots`, `gloves`) using the `/regenerate-2.5D-anime-realistic` custom skill. All pieces match the ivory white and blue organic plating design with gold leaf trims and glowing wind-cyan/blue energy lines. (Generated via OpenRouter fallback).
 - **Post-processing**: Ran the script `process_gears.py` followed by low-alpha cleaning (setting Alpha < 15 to 0) to remove backgrounds, crop, center/pad, and resize to 320x320 transparent PNGs.
 - **Paths**: Overwrote files in both `public/assets/armor_celestra/` and `src/assets/armor_celestra/`.
@@ -840,7 +840,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 74: Celestra Warrior Tier Assets Regeneration (Lv.1 Set) [PENDING DEPLOYMENT]
+### 🎨 Milestone 74: Celestra Warrior Tier Assets Regeneration (Lv.1 Set) [DEPLOYED]
 - **Assets**: Regenerated the full 5 pieces of the Celestra Warrior Level 1 mecha armor set (`helmet`, `armor`, `pants`, `boots`, `gloves`) using the `/regenerate-2.5D-anime-realistic` custom skill:
   - Helmet: Redesigned as a Rust Cordovan Circlet (elegant silver/gold headband with glowing cyan/blue energy feather-wings on the sides).
   - Armor, Pants, Boots, Gloves: Designed as starter-tier gear featuring simple white and brown modern leather panels, with a clean and plain futuristic design (no complex mecha or gold plating).
