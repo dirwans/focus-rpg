@@ -665,7 +665,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🛠️ Milestone 56: Bionex Specialist & Starter Job Armor-Set Alignment [PENDING DEPLOYMENT]
+### 🛠️ Milestone 56: Bionex Specialist & Starter Job Armor-Set Alignment [DEPLOYED]
 - **Bugs**:
   1. **Bionex Specialist Empty Armor**: Bionex Specialist (Technician lineage: `engineer`/`mechanist`/`techmaster`/`overseer`) had no bespoke mecha armor set files. Character creation auto-equip checks failed for them, starting Bionex Specialists with completely bare gear slots.
   2. **Starter Job Weapon Lock**: Arctron Ranger and Bionex Specialist/Caster starter weapons in `items.json` (`wep_job_gunner_*`, `wep_job_bionex_specialist_*`, `wep_job_bionex_spiritualist_*`) were locked to legacy job string IDs that don't match active IDs in `jobs.json` or were restricted only to the level 1 job name, preventing players from equipping them at higher tiers or after unequipping.
