@@ -28,12 +28,20 @@ Use this skill when the user requests regeneration, styling, or cleanup of mecha
    - Run `npm run build` to verify Vite and React compile cleanly.
    - Log the changes as a new milestone inside `development_journal.md`.
 
-## Core Regeneration Rules
+## Core Regeneration Rules & Strict SOP
 
-1. **Preserve Form & Color**: The generated output must closely resemble the source target image. Do NOT modify the core shape or color scheme arbitrarily.
-2. **Defintion of "Regenerate"**: Regeneration means fixing, repairing, cleaning up, and smoothing pixel edges of the original design, bringing it to premium quality while preserving its identity.
-3. **Form Constraint**: Maximum custom deviation in form, shape, or structure from the source image is **20%**. Keep the silhouette and key components recognizable.
-4. **Color Constraint**: Maximum custom deviation in color from the source image is **10%**. Maintain the original color palette and shading tones.
+This strict SOP applies to all image processing endpoints, tool callbacks, and external LLM APIs (both the built-in `generate_image` tool and OpenRouter scripts):
+
+1. **Definition of "Regenerate"**: Regeneration is strictly defined as **recovery, repairing bad/pixelated edges, cleaning up compression artifacts, upscaling, and retoning/restoring colors** of the original asset. It is NOT a creative reimagining.
+2. **Object Reference Identification (MANDATORY)**: Before writing any text prompts or calling any generation API, the agent must visually inspect the original target reference file (using vision or script metadata) to identify:
+   - The exact structural components of the object.
+   - The exact color tones and their distribution.
+   - The overall simplicity/complexity of the silhouette.
+3. **Strict Preservation Gating**:
+   - **Form Constraint**: Preserve the exact shape and component layout of the original asset. Maximum custom shape deviation is **20%** (used only for correcting jagged edges or filling missing parts).
+   - **Color Constraint**: Retain the exact color scheme, shades, and lighting patterns. Maximum color tone deviation is **10%** (used only to enhance contrast or clean up color compression noise).
+   - **Simplicity Constraint**: If the original asset has a simple, plain leather or metal pattern (especially for level 1 starter gear), the generated result must maintain that clean simplicity instead of adding complex panel lines or glowing elements.
+
 
 ## Dual-Endpoint Fallback Generation Protocol
 
