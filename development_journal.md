@@ -1226,7 +1226,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### ⚔️ Milestone 91: Arcanite Enhancement System (RF Online Forge Style) [PENDING DEPLOYMENT]
+### ⚔️ Milestone 91: Arcanite Enhancement System (RF Online Forge Style) [DEPLOYED]
 - **Core Rules Integrated**:
   - Implemented 8 distinct Arcanite stones (`mat_arcanite_fury`, `ruin`, `spirit`, `vital`, `guard`, `precision`, `agility`, `focus`) into `items.json` and `translationData.js`.
   - Enhancement Success Rates maintained: 100% (+1) degrading to 5% (+8). Breakage risk active for +6 to +8 failures.

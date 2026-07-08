@@ -995,7 +995,7 @@ export const useGameStore = create(
 
         // Check shards (need recipe.shards of EACH type)
         for (const shardId of SHARD_IDS) {
-          const cnt = inv.filter(i => i.id === shardId).length
+          const cnt = inv.filter(i => i.id === shardId).reduce((sum, it) => sum + (it.count || it.qty || 1), 0)
           if (cnt < recipe.shards) return { ok: false, msg: `Need ${recipe.shards}x ${shardId}` }
         }
 
@@ -1004,13 +1004,24 @@ export const useGameStore = create(
         // Remove 1 base
         const baseIdx = newInv.findIndex(i => i.id === recipe.base)
         newInv.splice(baseIdx, 1)
-        // Remove shards
+        
+        // Remove shards using stack logic
         for (const shardId of SHARD_IDS) {
-          let removed = 0
-          newInv = newInv.filter(i => {
-            if (i.id === shardId && removed < recipe.shards) { removed++; return false }
-            return true
-          })
+          let remaining = recipe.shards
+          newInv = newInv.map(i => {
+              if (i.id === shardId && remaining > 0) {
+                  const current = i.count || i.qty || 1
+                  if (current > remaining) {
+                      const updated = { ...i, count: current - remaining }
+                      remaining = 0
+                      return updated
+                  } else {
+                      remaining -= current
+                      return null // stack fully consumed
+                  }
+              }
+              return i
+          }).filter(Boolean)
         }
 
         // Add legendary output
@@ -1021,6 +1032,97 @@ export const useGameStore = create(
 
         set({ player: { ...player, inventory: newInv, savedAt: Date.now() } })
         return { ok: true, item: outputDef }
+      },
+
+      craftShard: (element, tier) => {
+         const { player, addToInventory } = get()
+         const costCrd = tier === 'common' ? 10000 : tier === 'rare' ? 25000 : 50000;
+         if (player.resources.crd < costCrd) return { ok: false, msg: 'Not enough CRD' }
+         
+         const reqOreId = `ore_${element}_${tier}`
+         const targetShardId = `shard_${element}_${tier}`
+         
+         let totalOre = player.inventory.filter(i => i.id === reqOreId).reduce((s, i) => s + (i.count || i.qty || 1), 0)
+         if (totalOre < 5) return { ok: false, msg: 'Need 5x Ore' }
+         
+         // deduct
+         let newInv = [...player.inventory]
+         let remainingToDeduct = 5
+         newInv = newInv.map(i => {
+             if (i.id === reqOreId && remainingToDeduct > 0) {
+                 const current = i.count || i.qty || 1
+                 if (current > remainingToDeduct) {
+                     const updated = { ...i, count: current - remainingToDeduct }
+                     remainingToDeduct = 0
+                     return updated
+                 } else {
+                     remainingToDeduct -= current
+                     return null // completely consume this stack
+                 }
+             }
+             return i
+         }).filter(Boolean)
+         
+         set({ player: { ...player, resources: { ...player.resources, crd: player.resources.crd - costCrd }, inventory: newInv, savedAt: Date.now() } })
+         // Use addToInventory to properly stack the new shard
+         const allItems = itemsData.items
+         const shardDef = allItems.find(i => i.id === targetShardId)
+         if(shardDef) {
+             get().addToInventory({ ...shardDef, count: 1 })
+         }
+         return { ok: true, msg: 'Success' }
+      },
+
+      craftArcanite: (arcaniteType) => {
+         const { player, addToInventory } = get()
+         const costCrd = 100000;
+         if (player.resources.crd < costCrd) return { ok: false, msg: 'Not enough CRD' }
+         
+         const recipes = {
+             mat_arcanite_fury: [{id: 'shard_ignis_epic', req: 1}, {id: 'shard_virel_epic', req: 1}],
+             mat_arcanite_ruin: [{id: 'shard_ignis_epic', req: 2}],
+             mat_arcanite_spirit: [{id: 'shard_zephra_epic', req: 2}],
+             mat_arcanite_vital: [{id: 'shard_umbrix_epic', req: 2}],
+             mat_arcanite_guard: [{id: 'shard_kryos_epic', req: 2}],
+             mat_arcanite_precision: [{id: 'shard_zephra_epic', req: 1}, {id: 'shard_kryos_epic', req: 1}],
+             mat_arcanite_agility: [{id: 'shard_virel_epic', req: 2}],
+             mat_arcanite_focus: [{id: 'shard_ignis_epic', req: 1}, {id: 'shard_zephra_epic', req: 1}],
+         }
+         const reqs = recipes[arcaniteType]
+         if (!reqs) return { ok: false, msg: 'Unknown arcanite type' }
+         
+         // check reqs
+         for (const r of reqs) {
+            let total = player.inventory.filter(i => i.id === r.id).reduce((s, i) => s + (i.count || i.qty || 1), 0)
+            if (total < r.req) return { ok: false, msg: `Need ${r.req}x ${r.id}` }
+         }
+         
+         let newInv = [...player.inventory]
+         for (const r of reqs) {
+             let remaining = r.req
+             newInv = newInv.map(i => {
+                 if (i.id === r.id && remaining > 0) {
+                     const current = i.count || i.qty || 1
+                     if (current > remaining) {
+                         const updated = { ...i, count: current - remaining }
+                         remaining = 0
+                         return updated
+                     } else {
+                         remaining -= current
+                         return null
+                     }
+                 }
+                 return i
+             }).filter(Boolean)
+         }
+         
+         set({ player: { ...player, resources: { ...player.resources, crd: player.resources.crd - costCrd }, inventory: newInv, savedAt: Date.now() } })
+         const allItems = itemsData.items
+         const arcDef = allItems.find(i => i.id === arcaniteType)
+         if(arcDef) {
+             get().addToInventory({ ...arcDef, count: 1 })
+         }
+         return { ok: true, msg: 'Success' }
       },
 
       // ── Set Shop: Buy Eminence/Vice Eminence/Council Items ─

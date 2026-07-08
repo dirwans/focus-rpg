@@ -261,6 +261,8 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
   const craftAscensionArms = useGameStore((s) => s.craftAscensionArms)
   const enhanceItem = useGameStore((s) => s.enhanceItem)
   const craftLegendary = useGameStore((s) => s.craftLegendary)
+  const craftShard = useGameStore((s) => s.craftShard)
+  const craftArcanite = useGameStore((s) => s.craftArcanite)
   const buySetItem = useGameStore((s) => s.buySetItem)
 
   const [activeTab, setActiveTab] = useState('refine') // 'refine' | 'enhance'
@@ -273,6 +275,8 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
   const [useLuckyRelic, setUseLuckyRelic] = useState(false)
   const [isEnhancing, setIsEnhancing] = useState(false)
   const [enhanceResult, setEnhanceResult] = useState(null)
+  
+  const [craftMasterTab, setCraftMasterTab] = useState('refine') // 'refine', 'ore', 'arcanite', 'legendary', 'faction'
 
   
   const stats = getStats()
@@ -995,6 +999,38 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
           {/* ─── CRAFT MASTER ─── */}
           {subView === 'master_artisan' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+              <div style={{ display: 'flex', gap: 8, overflowX: 'auto', padding: '0 16px 8px' }}>
+                {[
+                  { id: 'refine', label: 'WEAPON SMITH', emoji: '🔨' },
+                  { id: 'ore', label: 'ORE REFINEMENT', emoji: '💎' },
+                  { id: 'arcanite', label: 'ARCANITE SYNTHESIS', emoji: '🔮' },
+                  { id: 'legendary', label: 'LEGENDARY FORGE', emoji: '⚔️' }
+                ].map(tab => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setCraftMasterTab(tab.id)}
+                    style={{
+                      flexShrink: 0,
+                      padding: '8px 12px',
+                      borderRadius: 8,
+                      background: craftMasterTab === tab.id ? 'rgba(0, 229, 255, 0.15)' : 'rgba(10, 15, 25, 0.8)',
+                      border: `1px solid ${craftMasterTab === tab.id ? '#00e5ff' : 'rgba(255,255,255,0.1)'}`,
+                      color: craftMasterTab === tab.id ? '#00e5ff' : '#88aadd',
+                      fontFamily: 'var(--font-title)',
+                      fontSize: 11,
+                      fontWeight: 800,
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 6
+                    }}
+                  >
+                    <span>{tab.emoji}</span>
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+
               <div style={styles.avatarRow}>
                 <div style={styles.npcAvatarLarge}><span style={{ fontSize: 52 }}>🔨</span></div>
                 <div style={styles.npcDialog}>"The finest crafts require the rarest components. Bring me what is needed."</div>
@@ -1022,7 +1058,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                 </ul>
               </div>
               {/* ───────── WEAPON SMITH TAB ───────── */}
-        {(() => {
+        {craftMasterTab === 'refine' && (() => {
           const equippedWeapon = player.equipment?.weapon
           const ownedIgnorance = player.inventory.filter(it => it.id === 'talic_ignorance').reduce((sum, it) => sum + (it.count || it.qty || 1), 0)
           const hasWeapon = !!equippedWeapon
@@ -1263,7 +1299,119 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
         })()}
 
         
-{(() => {
+        {craftMasterTab === 'ore' && (() => {
+           const ELEMENTS = [
+             { id: 'ignis', label: 'Ignis', emoji: '🔴', color: '#ff4444' },
+             { id: 'virel', label: 'Virel', emoji: '🔵', color: '#44aaff' },
+             { id: 'kryos', label: 'Kryos', emoji: '🟢', color: '#44ff88' },
+             { id: 'zephra', label: 'Zephra', emoji: '🟡', color: '#ffcc00' },
+             { id: 'umbrix', label: 'Umbrix', emoji: '⚫', color: '#88aadd' }
+           ]
+           const TIERS = [
+             { id: 'common', label: 'Common', reqCount: 5, cost: 10000 },
+             { id: 'rare', label: 'Rare', reqCount: 5, cost: 25000 },
+             { id: 'epic', label: 'Epic', reqCount: 5, cost: 50000 }
+           ]
+           return (
+             <div style={{ padding: '0 16px 80px' }}>
+                <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, color: '#00e5ff', letterSpacing: 1, marginBottom: 14, textAlign: 'center', borderBottom: '1px solid rgba(0,229,255,0.3)', paddingBottom: 8 }}>
+                  💎 ORE REFINEMENT — Extract Shards from Ores
+                </div>
+                {ELEMENTS.map(elem => (
+                   <div key={elem.id} style={{ marginBottom: 16 }}>
+                      <div style={{ fontFamily: 'var(--font-title)', fontSize: 14, color: elem.color, marginBottom: 8 }}>{elem.emoji} {elem.label} Ores</div>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                         {TIERS.map(tier => {
+                            const oreId = `ore_${elem.id}_${tier.id}`
+                            const ownedOre = player.inventory.filter(i => i.id === oreId).reduce((s, i) => s + (i.count || i.qty || 1), 0)
+                            const canCraft = ownedOre >= tier.reqCount && player.resources.crd >= tier.cost
+                            return (
+                              <div key={tier.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px', background: 'rgba(3,8,20,0.6)', border: `1px solid ${canCraft ? elem.color : 'rgba(255,255,255,0.08)'}`, borderRadius: 8 }}>
+                                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                                    <div style={{ fontSize: 24 }}>{elem.emoji}</div>
+                                    <div>
+                                       <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: '#fff' }}>{tier.label} {elem.label} Shard</div>
+                                       <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#88aadd' }}>Req: {tier.reqCount}x Ore | Cost: {(tier.cost/1000).toFixed(0)}k CRD</div>
+                                    </div>
+                                 </div>
+                                 <button 
+                                    onClick={() => {
+                                        const res = craftShard(elem.id, tier.id)
+                                        if (res?.ok) alert(`✨ Berhasil craft ${tier.label} ${elem.label} Shard!`)
+                                        else alert(`❌ ${res?.msg || 'Gagal craft'}`)
+                                    }}
+                                    disabled={!canCraft}
+                                    style={{ padding: '8px 14px', borderRadius: 6, background: canCraft ? elem.color : 'rgba(255,255,255,0.1)', color: canCraft ? '#000' : '#88aadd', border: 'none', fontFamily: 'var(--font-title)', fontSize: 11, fontWeight: 800, cursor: canCraft ? 'pointer' : 'not-allowed' }}
+                                 >
+                                    {ownedOre}/{tier.reqCount}
+                                 </button>
+                              </div>
+                            )
+                         })}
+                      </div>
+                   </div>
+                ))}
+             </div>
+           )
+        })()}
+
+        {craftMasterTab === 'arcanite' && (() => {
+           const ARCANITES = [
+             { id: 'mat_arcanite_fury', name: 'Fury', color: '#ffcc00', reqs: [{id: 'shard_ignis_epic', emoji:'🔴'}, {id: 'shard_virel_epic', emoji:'🔵'}] },
+             { id: 'mat_arcanite_ruin', name: 'Ruin', color: '#ff4444', reqs: [{id: 'shard_ignis_epic', count:2, emoji:'🔴'}] },
+             { id: 'mat_arcanite_spirit', name: 'Spirit', color: '#cc44ff', reqs: [{id: 'shard_zephra_epic', count:2, emoji:'🟡'}] },
+             { id: 'mat_arcanite_vital', name: 'Vital', color: '#00ff88', reqs: [{id: 'shard_umbrix_epic', count:2, emoji:'⚫'}] },
+             { id: 'mat_arcanite_guard', name: 'Guard', color: '#44aaff', reqs: [{id: 'shard_kryos_epic', count:2, emoji:'🟢'}] },
+             { id: 'mat_arcanite_precision', name: 'Precision', color: '#ffffff', reqs: [{id: 'shard_zephra_epic', emoji:'🟡'}, {id: 'shard_kryos_epic', emoji:'🟢'}] },
+             { id: 'mat_arcanite_agility', name: 'Agility', color: '#00ffff', reqs: [{id: 'shard_virel_epic', count:2, emoji:'🔵'}] },
+             { id: 'mat_arcanite_focus', name: 'Focus', color: '#ff8800', reqs: [{id: 'shard_ignis_epic', emoji:'🔴'}, {id: 'shard_zephra_epic', emoji:'🟡'}] }
+           ]
+           return (
+             <div style={{ padding: '0 16px 80px' }}>
+                <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, color: '#cc44ff', letterSpacing: 1, marginBottom: 14, textAlign: 'center', borderBottom: '1px solid rgba(204,68,255,0.3)', paddingBottom: 8 }}>
+                  🔮 ARCANITE SYNTHESIS — Create powerful enhancement stones
+                </div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#88aadd', textAlign: 'center', marginBottom: 14 }}>Cost per Arcanite: 100K CRD</div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+                   {ARCANITES.map(arc => {
+                      let canCraft = true
+                      const checkReqs = arc.reqs.map(r => {
+                          const need = r.count || 1
+                          const owned = player.inventory.filter(i => i.id === r.id).reduce((s, i) => s + (i.count || i.qty || 1), 0)
+                          if (owned < need) canCraft = false
+                          return { ...r, need, owned }
+                      })
+                      if (player.resources.crd < 100000) canCraft = false
+                      
+                      return (
+                         <div key={arc.id} style={{ padding: '10px', background: 'rgba(3,8,20,0.6)', border: `1px solid ${canCraft ? arc.color : 'rgba(255,255,255,0.08)'}`, borderRadius: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            <img src={`/assets/items/${arc.id}.png`} style={{ width: 32, height: 32, objectFit: 'contain', marginBottom: 6 }} alt={arc.name} />
+                            <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: arc.color, marginBottom: 4 }}>{arc.name}</div>
+                            <div style={{ display: 'flex', gap: 4, marginBottom: 8 }}>
+                               {checkReqs.map((cr, idx) => (
+                                  <span key={idx} style={{ fontSize: 10, color: cr.owned >= cr.need ? '#5fe08a' : '#ff4444', fontFamily: 'monospace' }}>{cr.emoji} {cr.owned}/{cr.need}</span>
+                               ))}
+                            </div>
+                            <button 
+                                onClick={() => {
+                                   const res = craftArcanite(arc.id)
+                                   if (res?.ok) alert(`✨ Berhasil craft Arcanite ${arc.name}!`)
+                                   else alert(`❌ ${res?.msg || 'Gagal craft'}`)
+                                }}
+                                disabled={!canCraft}
+                                style={{ width: '100%', padding: '6px 0', borderRadius: 4, background: canCraft ? arc.color : 'rgba(255,255,255,0.1)', color: canCraft ? '#000' : '#88aadd', border: 'none', fontFamily: 'var(--font-title)', fontSize: 10, fontWeight: 800, cursor: canCraft ? 'pointer' : 'not-allowed' }}
+                            >
+                                CRAFT
+                            </button>
+                         </div>
+                      )
+                   })}
+                </div>
+             </div>
+           )
+        })()}
+
+        {craftMasterTab === 'legendary' && (() => {
           const SHARD_TYPES = [
             { id: 'shard_ignis_epic',  label: 'Ignis',  emoji: '🔴' },
             { id: 'shard_virel_epic',  label: 'Virel',  emoji: '🔵' },
