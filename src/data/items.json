@@ -104,13 +104,101 @@
     {
       "id": "mat_arcanite",
       "name": "Arcanite",
-      "emoji": "\ud83e\udea8",
+      "emoji": "🪨",
       "rarity": "rare",
       "type": "material",
       "race": "All",
       "level": 1,
       "bonus": {},
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/08/tile003.png"
+    },
+    {
+      "id": "mat_arcanite_fury",
+      "name": "Fury Arcanite",
+      "emoji": "🪨",
+      "rarity": "rare",
+      "type": "material",
+      "race": "All",
+      "level": 1,
+      "bonus": {},
+      "image": "/assets/items/mat_arcanite_fury.png"
+    },
+    {
+      "id": "mat_arcanite_ruin",
+      "name": "Ruin Arcanite",
+      "emoji": "🪨",
+      "rarity": "rare",
+      "type": "material",
+      "race": "All",
+      "level": 1,
+      "bonus": {},
+      "image": "/assets/items/mat_arcanite_ruin.png"
+    },
+    {
+      "id": "mat_arcanite_spirit",
+      "name": "Spirit Arcanite",
+      "emoji": "🪨",
+      "rarity": "rare",
+      "type": "material",
+      "race": "All",
+      "level": 1,
+      "bonus": {},
+      "image": "/assets/items/mat_arcanite_spirit.png"
+    },
+    {
+      "id": "mat_arcanite_vital",
+      "name": "Vital Arcanite",
+      "emoji": "🪨",
+      "rarity": "rare",
+      "type": "material",
+      "race": "All",
+      "level": 1,
+      "bonus": {},
+      "image": "/assets/items/mat_arcanite_vital.png"
+    },
+    {
+      "id": "mat_arcanite_guard",
+      "name": "Guard Arcanite",
+      "emoji": "🪨",
+      "rarity": "rare",
+      "type": "material",
+      "race": "All",
+      "level": 1,
+      "bonus": {},
+      "image": "/assets/items/mat_arcanite_guard.png"
+    },
+    {
+      "id": "mat_arcanite_precision",
+      "name": "Precision Arcanite",
+      "emoji": "🪨",
+      "rarity": "rare",
+      "type": "material",
+      "race": "All",
+      "level": 1,
+      "bonus": {},
+      "image": "/assets/items/mat_arcanite_precision.png"
+    },
+    {
+      "id": "mat_arcanite_agility",
+      "name": "Agility Arcanite",
+      "emoji": "🪨",
+      "rarity": "rare",
+      "type": "material",
+      "race": "All",
+      "level": 1,
+      "bonus": {},
+      "image": "/assets/items/mat_arcanite_agility.png"
+    },
+    {
+      "id": "mat_arcanite_focus",
+      "name": "Focus Arcanite",
+      "emoji": "🪨",
+      "rarity": "rare",
+      "type": "material",
+      "race": "All",
+      "level": 1,
+      "bonus": {},
+      "image": "/assets/items/mat_arcanite_focus.png"
     },
     {
       "id": "mat_divine_crest",

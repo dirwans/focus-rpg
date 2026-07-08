@@ -310,7 +310,7 @@ export function verifyStarterWeapon(player) {
 
   if (player.race === 'arctron') {
     if (isRanger) {
-      starterWeaponId = "wep_job_ranger_D"
+      starterWeaponId = "wep_job_gunner_D"
     } else if (isTech) {
       starterWeaponId = "wep_arctron_1_D"
     }
@@ -353,6 +353,7 @@ export function verifyStarterArmorSet(player) {
     : BOW_JOBS.includes(player.job) ? 'ranger'
     : STAFF_JOBS.includes(player.job) ? 'mage'
     : null
+  const isWarriorLineage = lineage === 'warrior'
   if (player.race === 'bionex') {
     if (lineage === 'warrior') lineage = 'guardian'
     else if (lineage === 'technician' || lineage === 'ranger') lineage = 'marksman'
@@ -367,7 +368,7 @@ export function verifyStarterArmorSet(player) {
   if (alreadyHasSet) return player
 
   const slots = ['armor', 'helmet', 'gloves', 'boots', 'pants']
-  const lineageInfix = lineage === 'warrior' ? '' : `${lineage}_`
+  const lineageInfix = isWarriorLineage ? '' : `${lineage}_`
   const newEquipment = { ...eq }
   let changed = false
   slots.forEach((slot, i) => {
@@ -2666,14 +2667,30 @@ export const useGameStore = create(
               itemAtk = Math.floor(itemAtk * (1 + rBonus / 100))
             }
 
-            // Apply enhancement bonus (+1 to +8)
+            // Apply enhancement bonus (+1 to +8) using specific Arcanite rules (+5% per level)
             if (item.enhancement) {
-              const mult = 1 + (item.enhancement * 0.1)
-              if (item.type === 'weapon') {
-                itemAtk = Math.floor(itemAtk * mult)
-              } else {
-                itemDef = Math.floor(itemDef * mult)
-                itemHp = Math.floor(itemHp * mult)
+              const mult = 1 + (item.enhancement * 0.05)
+              const bonusPercent = (mult - 1) * 100
+              
+              if (item.arcanite_type === 'mat_arcanite_fury') {
+                if (itemAtk > 0) itemAtk = Math.floor(itemAtk * mult)
+                else percentAtk += bonusPercent
+              } else if (item.arcanite_type === 'mat_arcanite_vital') {
+                if (itemHp > 0) itemHp = Math.floor(itemHp * mult)
+                else percentHp += bonusPercent
+              } else if (item.arcanite_type === 'mat_arcanite_guard') {
+                if (itemDef > 0) itemDef = Math.floor(itemDef * mult)
+                else percentDef += bonusPercent
+              } else if (item.arcanite_type === 'mat_arcanite_focus') {
+                critBonus += (item.enhancement * 5)
+              } else if (!item.arcanite_type) {
+                // Legacy fallback
+                if (item.type === 'weapon') {
+                  itemAtk = Math.floor(itemAtk * mult)
+                } else {
+                  itemDef = Math.floor(itemDef * mult)
+                  itemHp = Math.floor(itemHp * mult)
+                }
               }
             }
 
@@ -3494,7 +3511,7 @@ export const useGameStore = create(
         })
       },
 
-      enhanceItem: (slot, useLuckyRelic) => {
+      enhanceItem: (slot, useLuckyRelic, arcaniteId) => {
         const { player } = get()
         const item = player.equipment?.[slot]
         if (!item) {
@@ -3508,9 +3525,11 @@ export const useGameStore = create(
           return { success: false, status: 'error' }
         }
 
+        const requiredArcaniteId = item.arcanite_type || arcaniteId || 'mat_arcanite'
+
         // Materials verification
         const arcaniteCount = player.inventory
-          .filter(it => it.id === 'mat_arcanite')
+          .filter(it => it.id === requiredArcaniteId)
           .reduce((sum, it) => sum + (it.count || it.qty || 1), 0)
         if (arcaniteCount < 1) {
           alert(tStore('alert_missing_arcanite', { owned: arcaniteCount }, player))
@@ -3547,7 +3566,7 @@ export const useGameStore = create(
           const it = player.inventory[i]
           let currentCount = it.count || it.qty || 1
           
-          if (it.id === 'mat_arcanite' && neededArcanite > 0) {
+          if (it.id === requiredArcaniteId && neededArcanite > 0) {
             if (currentCount <= neededArcanite) {
               neededArcanite -= currentCount
             } else {
@@ -3601,7 +3620,8 @@ export const useGameStore = create(
           const nextEnhancement = currentEnhancement + 1
           const updatedItem = {
             ...item,
-            enhancement: nextEnhancement
+            enhancement: nextEnhancement,
+            arcanite_type: requiredArcaniteId
           }
 
           const newCombatStats = {

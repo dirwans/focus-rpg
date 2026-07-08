@@ -1223,3 +1223,17 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 - **Result**: Shin guards now end cleanly at the calf with a proper closed outline; no boots/shoes visible.
 - **Tooling**: Plain PIL/numpy analysis + manual outline synthesis + `process_gears.py` for final crop/pad/resize-to-320. No paid generation call.
 - **Verification**: Visually confirmed via Read tool; `npm run build` passes.
+
+---
+
+### ⚔️ Milestone 91: Arcanite Enhancement System (RF Online Forge Style) [PENDING DEPLOYMENT]
+- **Core Rules Integrated**:
+  - Implemented 8 distinct Arcanite stones (`mat_arcanite_fury`, `ruin`, `spirit`, `vital`, `guard`, `precision`, `agility`, `focus`) into `items.json` and `translationData.js`.
+  - Enhancement Success Rates maintained: 100% (+1) degrading to 5% (+8). Breakage risk active for +6 to +8 failures.
+- **State Management (`gameStore.js`)**:
+  - Rewrote `enhanceItem` to accept specific Arcanite IDs. Successfully locking equipment to an `arcanite_type` path on +1.
+  - Rewrote `getStats` logic to selectively apply enhancement multipliers (+5% per level) to specific base stats (e.g., ATK for Fury, HP for Vital) based on the locked `arcanite_type`, rather than flat global buffs.
+- **UI Implementations**:
+  - **Forge NPC (`NpcModal.jsx`)**: Added a horizontal Arcanite Picker UI when enhancing +0 equipment. Auto-selects and locks UI to the required Arcanite for +1 and above.
+  - **Tooltips (`Inventory.jsx` & `Unit.jsx`)**: Tooltips and equipment displays now explicitly show the Arcanite type (e.g., `+3 [FURY] LONGSWORD`) and accurately reflect the modified stats.
+- **Verification**: `npm run build` passes.

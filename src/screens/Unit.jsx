@@ -430,9 +430,9 @@ export default function Unit() {
                         svgIcon
                       )}
                       <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: fa }}>{label}</span>
-                      {item.enhancement_level > 0 && (
+                      {(item.enhancement > 0 || item.enhancement_level > 0) && (
                          <span style={{ position: 'absolute', top: 2, right: 3, fontSize: 8, fontWeight: 900, color: '#00ffaa', fontFamily: 'var(--font-mono)' }}>
-                           +{item.enhancement_level}
+                           +{item.enhancement || item.enhancement_level}
                          </span>
                       )}
                     </div>
@@ -656,9 +656,9 @@ export default function Unit() {
                         svgIcon
                       )}
                       <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: fa }}>{label}</span>
-                      {item.enhancement_level > 0 && (
+                      {(item.enhancement > 0 || item.enhancement_level > 0) && (
                          <span style={{ position: 'absolute', top: 2, right: 3, fontSize: 8, fontWeight: 900, color: '#00ffaa', fontFamily: 'var(--font-mono)' }}>
-                           +{item.enhancement_level}
+                           +{item.enhancement || item.enhancement_level}
                          </span>
                       )}
                     </div>

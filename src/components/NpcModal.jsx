@@ -99,6 +99,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
   const [premiumNow, setPremiumNow] = useState(Date.now())
   const [premiumTestMode, setPremiumTestMode] = useState(false)
   const [questTab, setQuestTab] = useState('quests') // 'quests' | 'promotion'
+  const [selectedArcanitePath, setSelectedArcanitePath] = useState('mat_arcanite_fury')
 
   const faction = player.race || 'arctron'
   const theme = {
@@ -221,7 +222,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
     setSparks(newSparks)
 
     setTimeout(() => {
-      const res = enhanceItem(selectedEnhanceSlot, useLuckyRelic)
+      const res = enhanceItem(selectedEnhanceSlot, useLuckyRelic, selectedArcanitePath)
       setIsEnhancing(false)
       setSparks([])
       if (res && res.status !== 'error') {
@@ -694,7 +695,8 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
           const crestCost = item ? (DIVINE_CREST_COSTS[currentEnh] || 0) : 0
           
           // Owned materials
-          const arcaniteOwned = player.inventory.filter(it => it.id === 'mat_arcanite').reduce((sum, it) => sum + (it.count || it.qty || 1), 0)
+          const requiredArcaniteId = item?.arcanite_type || selectedArcanitePath || 'mat_arcanite_fury'
+          const arcaniteOwned = player.inventory.filter(it => it.id === requiredArcaniteId).reduce((sum, it) => sum + (it.count || it.qty || 1), 0)
           const crestOwned = player.inventory.filter(it => it.id === 'mat_divine_crest').reduce((sum, it) => sum + (it.count || it.qty || 1), 0)
           const relicOwned = player.inventory.filter(it => it.id === 'mat_lucky_relic').reduce((sum, it) => sum + (it.count || it.qty || 1), 0)
 
@@ -732,6 +734,46 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                   })}
                 </select>
               </div>
+
+              {hasItem && (!item.arcanite_type || currentEnh === 0) && (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 14 }}>
+                  <label style={{ fontFamily: 'monospace', fontSize: '13px', color: '#88aadd' }}>Select Arcanite Focus</label>
+                  <div style={{ display: 'flex', gap: 8, overflowX: 'auto', paddingBottom: 6 }}>
+                    {[
+                      { id: 'mat_arcanite_fury', color: '#ffcc00', name: 'Fury' },
+                      { id: 'mat_arcanite_ruin', color: '#ff4444', name: 'Ruin' },
+                      { id: 'mat_arcanite_spirit', color: '#cc44ff', name: 'Spirit' },
+                      { id: 'mat_arcanite_vital', color: '#00ff88', name: 'Vital' },
+                      { id: 'mat_arcanite_guard', color: '#44aaff', name: 'Guard' },
+                      { id: 'mat_arcanite_precision', color: '#ffffff', name: 'Prec' },
+                      { id: 'mat_arcanite_agility', color: '#00ffff', name: 'Agility' },
+                      { id: 'mat_arcanite_focus', color: '#ff8800', name: 'Focus' }
+                    ].map(arc => {
+                      const isSelected = selectedArcanitePath === arc.id
+                      const hasThisArc = player.inventory.some(it => it.id === arc.id && (it.count || it.qty || 1) >= 1)
+                      return (
+                        <div
+                          key={arc.id}
+                          onClick={() => setSelectedArcanitePath(arc.id)}
+                          style={{
+                            minWidth: 44, height: 44,
+                            borderRadius: 8,
+                            background: isSelected ? `${arc.color}22` : 'rgba(10,15,25,0.8)',
+                            border: `2px solid ${isSelected ? arc.color : 'rgba(255,255,255,0.1)'}`,
+                            display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                            cursor: 'pointer',
+                            opacity: hasThisArc ? 1 : 0.4
+                          }}
+                          title={arc.name}
+                        >
+                          <img src={`/assets/items/${arc.id}.png`} style={{ width: 20, height: 20, objectFit: 'contain' }} alt={arc.name} />
+                          <span style={{ fontSize: 9, fontFamily: 'monospace', color: isSelected ? arc.color : '#88aadd', marginTop: 2 }}>{arc.name}</span>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
 
               {/* Results display */}
               {enhanceResult && (
@@ -784,7 +826,8 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
 
                   {/* Right Bottom: ARCANITE CHECK */}
                   <div style={{ position: 'absolute', top: 187, left: 166, width: 44, height: 44, borderRadius: 9, background: 'rgba(10,15,25,0.95)', border: '2px solid rgba(95,224,138,0.6)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 3 }}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5fe08a" strokeWidth="1.8">
+                    <img src={`/assets/items/${requiredArcaniteId}.png`} alt="Arcanite" style={{ width: 14, height: 14, objectFit: 'contain' }} onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='block' }} />
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5fe08a" strokeWidth="1.8" style={{ display: 'none' }}>
                       <path d="M12 2C8 8 5 12 5 15a7 7 0 0 0 14 0c0-3-3-7-7-13z"/>
                     </svg>
                     <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 8, fontWeight: 800, color: '#5fe08a' }}>{arcaniteOwned}/1</span>

@@ -189,9 +189,9 @@ export default function Inventory() {
                   ) : (
                     svgIcon
                   )}
-                  {item.enhancement_level > 0 && (
+                  {(item.enhancement > 0 || item.enhancement_level > 0) && (
                     <span style={{ position: 'absolute', top: 2, right: 3, fontSize: 8, fontWeight: 900, color: '#00ffaa', fontFamily: 'var(--font-mono)' }}>
-                      +{item.enhancement_level}
+                      +{item.enhancement || item.enhancement_level}
                     </span>
                   )}
 
@@ -242,7 +242,13 @@ export default function Inventory() {
                       onClick={(e) => e.stopPropagation()}
                     >
                       <div style={{ fontWeight: 800, color: borderCol, fontSize: 13, borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: 4, marginBottom: 6, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
-                        {item.name.toUpperCase()}
+                        {(() => {
+                          const arcMap = { mat_arcanite_fury: 'Fury', mat_arcanite_ruin: 'Ruin', mat_arcanite_spirit: 'Spirit', mat_arcanite_vital: 'Vital', mat_arcanite_guard: 'Guard', mat_arcanite_precision: 'Precision', mat_arcanite_agility: 'Agility', mat_arcanite_focus: 'Focus' }
+                          const arcLabel = item.arcanite_type ? `[${arcMap[item.arcanite_type] || 'Arcanite'}] ` : ''
+                          const enh = item.enhancement || item.enhancement_level || 0
+                          const enhLabel = enh > 0 ? `+${enh} ` : ''
+                          return `${enhLabel}${arcLabel}${item.name.toUpperCase()}`
+                        })()}
                       </div>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: 2, fontFamily: 'var(--font-mono)', fontSize: 11, color: '#a0c0d8' }}>
                         <div>Type: {item.type.toUpperCase()}</div>
@@ -471,9 +477,9 @@ export default function Inventory() {
                                       {item.level}LV
                                     </span>
                                   )}
-                                  {item.enhancement_level > 0 && (
-                                    <span style={{ position: 'absolute', bottom: 1, right: 2, fontFamily: "'Share Tech Mono', monospace", fontSize: 7, fontWeight: 900, color: '#00ffaa' }}>
-                                      +{item.enhancement_level}
+                                  {(item.enhancement > 0 || item.enhancement_level > 0) && (
+                                    <span style={{ position: 'absolute', top: 2, right: 3, fontSize: 8, fontWeight: 900, color: '#00ffaa', fontFamily: 'var(--font-mono)' }}>
+                                      +{item.enhancement || item.enhancement_level}
                                     </span>
                                   )}
                                 </div>
