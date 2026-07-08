@@ -1288,7 +1288,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 96: Celestra Ranger Lv.55 Set Replacement (Full 5 Pieces) [PENDING DEPLOYMENT]
+### 🎨 Milestone 96: Celestra Ranger Lv.55 Set Replacement (Full 5 Pieces) [DEPLOYED]
 - **Assets**: Replaced all 5 pieces of the Celestra Ranger Lv.55 mecha armor set (`armor`, `helmet`, `pants`, `boots`, `gloves`) from the newly provided high-resolution showcase sheet `truelv55ranger.png`.
 - **Post-processing**:
   - Wrote and executed the script `extract_truelv55ranger.py` to crop each part:
