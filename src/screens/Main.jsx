@@ -458,7 +458,7 @@ export default function Main() {
   const CLASS_NAMES = {
     celestra: ['Warrior', 'Ranger', 'Summoner', 'Mage'],
     arctron:  ['Warrior', 'Ranger', 'Specialist'],
-    bionex:   ['Warrior', 'Ranger', 'Specialist', 'Mage']
+    bionex:   ['Warrior', 'Marksman', 'Specialist', 'Mage']
   }
 
   const { tier, job: jobInfo, classIndex } = getJobInfo(player.race, player.job)

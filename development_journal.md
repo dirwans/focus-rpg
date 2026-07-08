@@ -677,3 +677,16 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
      - Remapped all 10 tiers of `wep_job_bionex_spiritualist_*` to Caster job lineage array.
      - Remapped all 10 tiers of `wep_job_gunner_*` to Arctron Ranger job lineage array.
 - **Verification**: Verified that the client production build compiles successfully.
+
+---
+
+### 🛠️ Milestone 57: Bionex Ranger to Bionex Marksman Rename & Asset Alignment [PENDING DEPLOYMENT]
+- **Requirement**: The user noted that Bionex's ranged/agility class is named `Marksman` (matching `marksman` starting job in `jobs.json`) rather than `Ranger` (which is Celestra's and Arctron's ranged class name).
+- **Asset Renames**:
+  - Renamed 50 mecha armor set `.png` files (25 in `public/assets/armor_bionex/` and 25 in `src/assets/armor_bionex/`) from `defbionexrangerlv*.png` to `defbionexmarksmanlv*.png`.
+  - Renamed Bionex pilot character sprites `bionex_ranger_female.png` and `bionex_ranger_male.png` to `bionex_marksman_female.png` and `bionex_marksman_male.png`.
+- **Database & Code Updates**:
+  - Ran `scratch/rename_bionex_ranger.py` to automate remapping IDs from `bionex_ranger`/`ranger` to `bionex_marksman`/`marksman` in `items.json`, `jobWeapons.json`, `PilotSprites.jsx`, `TransparentSprite.jsx`, `Unit.jsx`, `Main.jsx`, and backup files.
+  - Updated `ARMOR_SET_LINEAGES` in `src/store/gameStore.js` to refer to `marksman` instead of `ranger` for the Bionex race.
+  - Refactored `resolveArmorSetImage` and `verifyStarterArmorSet` in `src/store/gameStore.js` to map Bionex Specialist/Marksman to `marksman` mecha set assets and item IDs.
+- **Verification**: Verified that the production client builds successfully with zero errors.

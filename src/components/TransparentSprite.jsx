@@ -311,7 +311,7 @@ export default function TransparentSprite({
         topPosition = '-5%'
       }
     } else if (src && src.includes('bionex')) {
-      const isBionexRanger = src.includes('bionex_ranger')
+      const isBionexRanger = src.includes('bionex_marksman')
       const isBionexSpecialist = src.includes('bionex_specialist')
       if (isBionexRanger) {
         zoomHeight = fillH * 2.1

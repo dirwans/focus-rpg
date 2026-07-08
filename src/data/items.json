@@ -14963,13 +14963,13 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "wep_job_bionex_ranger_D",
+      "id": "wep_job_bionex_marksman_D",
       "name": "[D] Composite Bow",
       "emoji": "\ud83d\udd2b",
       "rarity": "D",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_ranger",
+      "job": "bionex_marksman",
       "level": 1,
       "bonus": {
         "atk": 67
@@ -14978,13 +14978,13 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
     },
     {
-      "id": "wep_job_bionex_ranger_C",
+      "id": "wep_job_bionex_marksman_C",
       "name": "[C] Composite Bow",
       "emoji": "\ud83d\udd2b",
       "rarity": "C",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_ranger",
+      "job": "bionex_marksman",
       "level": 1,
       "bonus": {
         "atk": 80
@@ -14993,13 +14993,13 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
     },
     {
-      "id": "wep_job_bionex_ranger_B",
+      "id": "wep_job_bionex_marksman_B",
       "name": "[B] Composite Bow",
       "emoji": "\ud83d\udd2b",
       "rarity": "B",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_ranger",
+      "job": "bionex_marksman",
       "level": 1,
       "bonus": {
         "atk": 100
@@ -15008,13 +15008,13 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
     },
     {
-      "id": "wep_job_bionex_ranger_A",
+      "id": "wep_job_bionex_marksman_A",
       "name": "[A] Composite Bow",
       "emoji": "\ud83d\udd2b",
       "rarity": "A",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_ranger",
+      "job": "bionex_marksman",
       "level": 1,
       "bonus": {
         "atk": 134
@@ -15023,13 +15023,13 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
     },
     {
-      "id": "wep_job_bionex_ranger_S",
+      "id": "wep_job_bionex_marksman_S",
       "name": "[S] Composite Bow",
       "emoji": "\ud83d\udd2b",
       "rarity": "S",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_ranger",
+      "job": "bionex_marksman",
       "level": 1,
       "bonus": {
         "atk": 201
@@ -15038,13 +15038,13 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
     },
     {
-      "id": "wep_job_bionex_ranger_SS",
+      "id": "wep_job_bionex_marksman_SS",
       "name": "[SS] Composite Bow",
       "emoji": "\ud83d\udd2b",
       "rarity": "SS",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_ranger",
+      "job": "bionex_marksman",
       "level": 1,
       "bonus": {
         "atk": 301
@@ -15053,13 +15053,13 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
     },
     {
-      "id": "wep_job_bionex_ranger_SSS",
+      "id": "wep_job_bionex_marksman_SSS",
       "name": "[SSS] Composite Bow",
       "emoji": "\ud83d\udd2b",
       "rarity": "SSS",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_ranger",
+      "job": "bionex_marksman",
       "level": 1,
       "bonus": {
         "atk": 469
@@ -15068,13 +15068,13 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
     },
     {
-      "id": "wep_job_bionex_ranger_SR",
+      "id": "wep_job_bionex_marksman_SR",
       "name": "[SR] Composite Bow",
       "emoji": "\ud83d\udd2b",
       "rarity": "SR",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_ranger",
+      "job": "bionex_marksman",
       "level": 1,
       "bonus": {
         "atk": 670
@@ -15083,13 +15083,13 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
     },
     {
-      "id": "wep_job_bionex_ranger_SSR",
+      "id": "wep_job_bionex_marksman_SSR",
       "name": "[SSR] Composite Bow",
       "emoji": "\ud83d\udd2b",
       "rarity": "SSR",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_ranger",
+      "job": "bionex_marksman",
       "level": 1,
       "bonus": {
         "atk": 1005
@@ -15098,13 +15098,13 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
     },
     {
-      "id": "wep_job_bionex_ranger_UR",
+      "id": "wep_job_bionex_marksman_UR",
       "name": "[UR] Composite Bow",
       "emoji": "\ud83d\udd2b",
       "rarity": "UR",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_ranger",
+      "job": "bionex_marksman",
       "level": 1,
       "bonus": {
         "atk": 1675
@@ -22246,8 +22246,8 @@
       "image": "/assets/armor_bionex/defbionexwarriorlv66boots.png"
     },
     {
-      "id": "helmet_armorset_bionex_ranger_lv1",
-      "name": "[C] Lv.1 Bionex Ranger Helm",
+      "id": "helmet_armorset_bionex_marksman_lv1",
+      "name": "[C] Lv.1 Bionex Marksman Helm",
       "emoji": "\ud83e\ude96",
       "rarity": "C",
       "type": "helmet",
@@ -22266,11 +22266,11 @@
       "bonus": {
         "def": 5
       },
-      "image": "/assets/armor_bionex/defbionexrangerlv1helmet.png"
+      "image": "/assets/armor_bionex/defbionexmarksmanlv1helmet.png"
     },
     {
-      "id": "armor_armorset_bionex_ranger_lv1",
-      "name": "[C] Lv.1 Bionex Ranger Plate",
+      "id": "armor_armorset_bionex_marksman_lv1",
+      "name": "[C] Lv.1 Bionex Marksman Plate",
       "emoji": "\ud83e\uddbe",
       "rarity": "C",
       "type": "armor",
@@ -22289,11 +22289,11 @@
       "bonus": {
         "def": 6
       },
-      "image": "/assets/armor_bionex/defbionexrangerlv1armor.png"
+      "image": "/assets/armor_bionex/defbionexmarksmanlv1armor.png"
     },
     {
-      "id": "pants_armorset_bionex_ranger_lv1",
-      "name": "[C] Lv.1 Bionex Ranger Legguard",
+      "id": "pants_armorset_bionex_marksman_lv1",
+      "name": "[C] Lv.1 Bionex Marksman Legguard",
       "emoji": "\ud83d\udc56",
       "rarity": "C",
       "type": "pants",
@@ -22312,11 +22312,11 @@
       "bonus": {
         "def": 5
       },
-      "image": "/assets/armor_bionex/defbionexrangerlv1pants.png"
+      "image": "/assets/armor_bionex/defbionexmarksmanlv1pants.png"
     },
     {
-      "id": "gloves_armorset_bionex_ranger_lv1",
-      "name": "[C] Lv.1 Bionex Ranger Gauntlets",
+      "id": "gloves_armorset_bionex_marksman_lv1",
+      "name": "[C] Lv.1 Bionex Marksman Gauntlets",
       "emoji": "\ud83e\udde4",
       "rarity": "C",
       "type": "gloves",
@@ -22336,11 +22336,11 @@
         "def": 4,
         "atk": 3
       },
-      "image": "/assets/armor_bionex/defbionexrangerlv1gloves.png"
+      "image": "/assets/armor_bionex/defbionexmarksmanlv1gloves.png"
     },
     {
-      "id": "boots_armorset_bionex_ranger_lv1",
-      "name": "[C] Lv.1 Bionex Ranger Greaves",
+      "id": "boots_armorset_bionex_marksman_lv1",
+      "name": "[C] Lv.1 Bionex Marksman Greaves",
       "emoji": "\ud83d\udc62",
       "rarity": "C",
       "type": "boots",
@@ -22359,11 +22359,11 @@
       "bonus": {
         "def": 4
       },
-      "image": "/assets/armor_bionex/defbionexrangerlv1boots.png"
+      "image": "/assets/armor_bionex/defbionexmarksmanlv1boots.png"
     },
     {
-      "id": "helmet_armorset_bionex_ranger_lv32",
-      "name": "[C] Lv.32 Bionex Ranger Helm",
+      "id": "helmet_armorset_bionex_marksman_lv32",
+      "name": "[C] Lv.32 Bionex Marksman Helm",
       "emoji": "\ud83e\ude96",
       "rarity": "C",
       "type": "helmet",
@@ -22382,11 +22382,11 @@
       "bonus": {
         "def": 148
       },
-      "image": "/assets/armor_bionex/defbionexrangerlv32helmet.png"
+      "image": "/assets/armor_bionex/defbionexmarksmanlv32helmet.png"
     },
     {
-      "id": "armor_armorset_bionex_ranger_lv32",
-      "name": "[C] Lv.32 Bionex Ranger Plate",
+      "id": "armor_armorset_bionex_marksman_lv32",
+      "name": "[C] Lv.32 Bionex Marksman Plate",
       "emoji": "\ud83e\uddbe",
       "rarity": "C",
       "type": "armor",
@@ -22405,11 +22405,11 @@
       "bonus": {
         "def": 170
       },
-      "image": "/assets/armor_bionex/defbionexrangerlv32armor.png"
+      "image": "/assets/armor_bionex/defbionexmarksmanlv32armor.png"
     },
     {
-      "id": "pants_armorset_bionex_ranger_lv32",
-      "name": "[C] Lv.32 Bionex Ranger Legguard",
+      "id": "pants_armorset_bionex_marksman_lv32",
+      "name": "[C] Lv.32 Bionex Marksman Legguard",
       "emoji": "\ud83d\udc56",
       "rarity": "C",
       "type": "pants",
@@ -22429,11 +22429,11 @@
         "def": 163,
         "hp": 2038
       },
-      "image": "/assets/armor_bionex/defbionexrangerlv32pants.png"
+      "image": "/assets/armor_bionex/defbionexmarksmanlv32pants.png"
     },
     {
-      "id": "gloves_armorset_bionex_ranger_lv32",
-      "name": "[C] Lv.32 Bionex Ranger Gauntlets",
+      "id": "gloves_armorset_bionex_marksman_lv32",
+      "name": "[C] Lv.32 Bionex Marksman Gauntlets",
       "emoji": "\ud83e\udde4",
       "rarity": "C",
       "type": "gloves",
@@ -22453,11 +22453,11 @@
         "def": 133,
         "atk": 59
       },
-      "image": "/assets/armor_bionex/defbionexrangerlv32gloves.png"
+      "image": "/assets/armor_bionex/defbionexmarksmanlv32gloves.png"
     },
     {
-      "id": "boots_armorset_bionex_ranger_lv32",
-      "name": "[C] Lv.32 Bionex Ranger Greaves",
+      "id": "boots_armorset_bionex_marksman_lv32",
+      "name": "[C] Lv.32 Bionex Marksman Greaves",
       "emoji": "\ud83d\udc62",
       "rarity": "C",
       "type": "boots",
@@ -22476,11 +22476,11 @@
       "bonus": {
         "def": 126
       },
-      "image": "/assets/armor_bionex/defbionexrangerlv32boots.png"
+      "image": "/assets/armor_bionex/defbionexmarksmanlv32boots.png"
     },
     {
-      "id": "helmet_armorset_bionex_ranger_lv42",
-      "name": "[C] Lv.42 Bionex Ranger Helm",
+      "id": "helmet_armorset_bionex_marksman_lv42",
+      "name": "[C] Lv.42 Bionex Marksman Helm",
       "emoji": "\ud83e\ude96",
       "rarity": "C",
       "type": "helmet",
@@ -22499,11 +22499,11 @@
       "bonus": {
         "def": 196
       },
-      "image": "/assets/armor_bionex/defbionexrangerlv42helmet.png"
+      "image": "/assets/armor_bionex/defbionexmarksmanlv42helmet.png"
     },
     {
-      "id": "armor_armorset_bionex_ranger_lv42",
-      "name": "[C] Lv.42 Bionex Ranger Plate",
+      "id": "armor_armorset_bionex_marksman_lv42",
+      "name": "[C] Lv.42 Bionex Marksman Plate",
       "emoji": "\ud83e\uddbe",
       "rarity": "C",
       "type": "armor",
@@ -22522,11 +22522,11 @@
       "bonus": {
         "def": 225
       },
-      "image": "/assets/armor_bionex/defbionexrangerlv42armor.png"
+      "image": "/assets/armor_bionex/defbionexmarksmanlv42armor.png"
     },
     {
-      "id": "pants_armorset_bionex_ranger_lv42",
-      "name": "[C] Lv.42 Bionex Ranger Legguard",
+      "id": "pants_armorset_bionex_marksman_lv42",
+      "name": "[C] Lv.42 Bionex Marksman Legguard",
       "emoji": "\ud83d\udc56",
       "rarity": "C",
       "type": "pants",
@@ -22546,11 +22546,11 @@
         "def": 215,
         "hp": 2688
       },
-      "image": "/assets/armor_bionex/defbionexrangerlv42pants.png"
+      "image": "/assets/armor_bionex/defbionexmarksmanlv42pants.png"
     },
     {
-      "id": "gloves_armorset_bionex_ranger_lv42",
-      "name": "[C] Lv.42 Bionex Ranger Gauntlets",
+      "id": "gloves_armorset_bionex_marksman_lv42",
+      "name": "[C] Lv.42 Bionex Marksman Gauntlets",
       "emoji": "\ud83e\udde4",
       "rarity": "C",
       "type": "gloves",
@@ -22570,11 +22570,11 @@
         "def": 176,
         "atk": 81
       },
-      "image": "/assets/armor_bionex/defbionexrangerlv42gloves.png"
+      "image": "/assets/armor_bionex/defbionexmarksmanlv42gloves.png"
     },
     {
-      "id": "boots_armorset_bionex_ranger_lv42",
-      "name": "[C] Lv.42 Bionex Ranger Greaves",
+      "id": "boots_armorset_bionex_marksman_lv42",
+      "name": "[C] Lv.42 Bionex Marksman Greaves",
       "emoji": "\ud83d\udc62",
       "rarity": "C",
       "type": "boots",
@@ -22593,11 +22593,11 @@
       "bonus": {
         "def": 167
       },
-      "image": "/assets/armor_bionex/defbionexrangerlv42boots.png"
+      "image": "/assets/armor_bionex/defbionexmarksmanlv42boots.png"
     },
     {
-      "id": "helmet_armorset_bionex_ranger_lv55",
-      "name": "[C] Lv.55 Bionex Ranger Helm",
+      "id": "helmet_armorset_bionex_marksman_lv55",
+      "name": "[C] Lv.55 Bionex Marksman Helm",
       "emoji": "\ud83e\ude96",
       "rarity": "C",
       "type": "helmet",
@@ -22616,11 +22616,11 @@
       "bonus": {
         "def": 258
       },
-      "image": "/assets/armor_bionex/defbionexrangerlv55helmet.png"
+      "image": "/assets/armor_bionex/defbionexmarksmanlv55helmet.png"
     },
     {
-      "id": "armor_armorset_bionex_ranger_lv55",
-      "name": "[C] Lv.55 Bionex Ranger Plate",
+      "id": "armor_armorset_bionex_marksman_lv55",
+      "name": "[C] Lv.55 Bionex Marksman Plate",
       "emoji": "\ud83e\uddbe",
       "rarity": "C",
       "type": "armor",
@@ -22639,11 +22639,11 @@
       "bonus": {
         "def": 297
       },
-      "image": "/assets/armor_bionex/defbionexrangerlv55armor.png"
+      "image": "/assets/armor_bionex/defbionexmarksmanlv55armor.png"
     },
     {
-      "id": "pants_armorset_bionex_ranger_lv55",
-      "name": "[C] Lv.55 Bionex Ranger Legguard",
+      "id": "pants_armorset_bionex_marksman_lv55",
+      "name": "[C] Lv.55 Bionex Marksman Legguard",
       "emoji": "\ud83d\udc56",
       "rarity": "C",
       "type": "pants",
@@ -22663,11 +22663,11 @@
         "def": 284,
         "hp": 3516
       },
-      "image": "/assets/armor_bionex/defbionexrangerlv55pants.png"
+      "image": "/assets/armor_bionex/defbionexmarksmanlv55pants.png"
     },
     {
-      "id": "gloves_armorset_bionex_ranger_lv55",
-      "name": "[C] Lv.55 Bionex Ranger Gauntlets",
+      "id": "gloves_armorset_bionex_marksman_lv55",
+      "name": "[C] Lv.55 Bionex Marksman Gauntlets",
       "emoji": "\ud83e\udde4",
       "rarity": "C",
       "type": "gloves",
@@ -22687,11 +22687,11 @@
         "def": 232,
         "atk": 109
       },
-      "image": "/assets/armor_bionex/defbionexrangerlv55gloves.png"
+      "image": "/assets/armor_bionex/defbionexmarksmanlv55gloves.png"
     },
     {
-      "id": "boots_armorset_bionex_ranger_lv55",
-      "name": "[C] Lv.55 Bionex Ranger Greaves",
+      "id": "boots_armorset_bionex_marksman_lv55",
+      "name": "[C] Lv.55 Bionex Marksman Greaves",
       "emoji": "\ud83d\udc62",
       "rarity": "C",
       "type": "boots",
@@ -22710,11 +22710,11 @@
       "bonus": {
         "def": 219
       },
-      "image": "/assets/armor_bionex/defbionexrangerlv55boots.png"
+      "image": "/assets/armor_bionex/defbionexmarksmanlv55boots.png"
     },
     {
-      "id": "helmet_armorset_bionex_ranger_lv66",
-      "name": "[C] Lv.66 Bionex Ranger Helm",
+      "id": "helmet_armorset_bionex_marksman_lv66",
+      "name": "[C] Lv.66 Bionex Marksman Helm",
       "emoji": "\ud83e\ude96",
       "rarity": "C",
       "type": "helmet",
@@ -22733,11 +22733,11 @@
       "bonus": {
         "def": 320
       },
-      "image": "/assets/armor_bionex/defbionexrangerlv66helmet.png"
+      "image": "/assets/armor_bionex/defbionexmarksmanlv66helmet.png"
     },
     {
-      "id": "armor_armorset_bionex_ranger_lv66",
-      "name": "[C] Lv.66 Bionex Ranger Plate",
+      "id": "armor_armorset_bionex_marksman_lv66",
+      "name": "[C] Lv.66 Bionex Marksman Plate",
       "emoji": "\ud83e\uddbe",
       "rarity": "C",
       "type": "armor",
@@ -22756,11 +22756,11 @@
       "bonus": {
         "def": 368
       },
-      "image": "/assets/armor_bionex/defbionexrangerlv66armor.png"
+      "image": "/assets/armor_bionex/defbionexmarksmanlv66armor.png"
     },
     {
-      "id": "pants_armorset_bionex_ranger_lv66",
-      "name": "[C] Lv.66 Bionex Ranger Legguard",
+      "id": "pants_armorset_bionex_marksman_lv66",
+      "name": "[C] Lv.66 Bionex Marksman Legguard",
       "emoji": "\ud83d\udc56",
       "rarity": "C",
       "type": "pants",
@@ -22780,11 +22780,11 @@
         "def": 352,
         "hp": 4332
       },
-      "image": "/assets/armor_bionex/defbionexrangerlv66pants.png"
+      "image": "/assets/armor_bionex/defbionexmarksmanlv66pants.png"
     },
     {
-      "id": "gloves_armorset_bionex_ranger_lv66",
-      "name": "[C] Lv.66 Bionex Ranger Gauntlets",
+      "id": "gloves_armorset_bionex_marksman_lv66",
+      "name": "[C] Lv.66 Bionex Marksman Gauntlets",
       "emoji": "\ud83e\udde4",
       "rarity": "C",
       "type": "gloves",
@@ -22804,11 +22804,11 @@
         "def": 288,
         "atk": 137
       },
-      "image": "/assets/armor_bionex/defbionexrangerlv66gloves.png"
+      "image": "/assets/armor_bionex/defbionexmarksmanlv66gloves.png"
     },
     {
-      "id": "boots_armorset_bionex_ranger_lv66",
-      "name": "[C] Lv.66 Bionex Ranger Greaves",
+      "id": "boots_armorset_bionex_marksman_lv66",
+      "name": "[C] Lv.66 Bionex Marksman Greaves",
       "emoji": "\ud83d\udc62",
       "rarity": "C",
       "type": "boots",
@@ -22827,7 +22827,7 @@
       "bonus": {
         "def": 272
       },
-      "image": "/assets/armor_bionex/defbionexrangerlv66boots.png"
+      "image": "/assets/armor_bionex/defbionexmarksmanlv66boots.png"
     },
     {
       "id": "helmet_armorset_bionex_mage_lv1",

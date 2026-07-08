@@ -9,8 +9,8 @@ import bionexPilotMaleImg from '../assets/bionex_pilot.png'
 import bionexPortraitImg from '../assets/bionex_pilot_portrait.png'
 import bionexWarriorFemaleImg from '../assets/bionex_warrior_female.png'
 import bionexWarriorMaleImg from '../assets/bionex_warrior_male.png'
-import bionexRangerFemaleImg from '../assets/bionex_ranger_female.png'
-import bionexRangerMaleImg from '../assets/bionex_ranger_male.png'
+import bionexMarksmanFemaleImg from '../assets/bionex_marksman_female.png'
+import bionexMarksmanMaleImg from '../assets/bionex_marksman_male.png'
 import bionexEngineerFemaleImg from '../assets/bionex_engineer_female.png'
 import bionexEngineerMaleImg from '../assets/bionex_engineer_male.png'
 import bionexTitanPilotImg from '../assets/bionex_titan_pilot.png'
@@ -105,7 +105,7 @@ export function BionexSprite({ job, size = 60, width, height, upperBodyOnly = fa
     else img = isFemale ? bionexWarriorFemaleImg : bionexWarriorMaleImg;
   } else if (marksmanJobs.includes(job)) {
     if (job === 'predator' || job === 'deadeye') img = bionexRailgunEliteImg;
-    else img = isFemale ? bionexRangerFemaleImg : bionexRangerMaleImg;
+    else img = isFemale ? bionexMarksmanFemaleImg : bionexMarksmanMaleImg;
   } else if (engineerJobs.includes(job)) {
     if (job === 'overseer' || job === 'techmaster') img = bionexWarEngineerImg;
     else if (job === 'mechanist') img = bionexMechanistImg;

@@ -104,7 +104,7 @@ export default function Unit() {
   const CLASS_NAMES = {
     celestra: ['Warrior', 'Ranger', 'Summoner', 'Mage'],
     arctron:  ['Warrior', 'Ranger', 'Specialist'],
-    bionex:   ['Warrior', 'Ranger', 'Specialist', 'Mage']
+    bionex:   ['Warrior', 'Marksman', 'Specialist', 'Mage']
   }
   const baseClass = (classIndex >= 0 && player.race && CLASS_NAMES[player.race])
     ? CLASS_NAMES[player.race][classIndex]?.toUpperCase() || 'NOVICE'

@@ -12,7 +12,7 @@
   ],
   "bionex": [
     { "job": "bionex_warrior", "name": "Broadsword", "dmgMin": 55, "dmgMax": 80, "effect": "+3% Block", "level": 1 },
-    { "job": "bionex_ranger", "name": "Composite Bow", "dmgMin": 50, "dmgMax": 85, "effect": "+2% Crit", "level": 1 },
+    { "job": "bionex_marksman", "name": "Composite Bow", "dmgMin": 50, "dmgMax": 85, "effect": "+2% Crit", "level": 1 },
     { "job": "bionex_spiritualist", "name": "Mental Staff", "dmgMin": 45, "dmgMax": 75, "effect": "+5 Mana", "level": 1 },
     { "job": "bionex_specialist", "name": "Laser Spanner", "dmgMin": 40, "dmgMax": 70, "effect": "+3% Repair", "level": 1 },
     { "job": "commando", "name": "Greatsword", "dmgMin": 180, "dmgMax": 260, "effect": "+5% Attack", "level": 30 },
