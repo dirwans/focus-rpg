@@ -906,7 +906,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 80: Bionex Marksman Tier Assets Regeneration (Lv.55 Set) [PENDING DEPLOYMENT]
+### 🎨 Milestone 80: Bionex Marksman Tier Assets Regeneration (Lv.55 Set) [DEPLOYED]
 - **Assets**: Regenerated all 5 pieces of the Bionex Marksman Level 55 mecha armor set (`helmet`, `armor`, `pants`, `boots`, `gloves`) using the `/regenerate-2.5D-anime-realistic` custom skill. The set is based on the Bellato Ranger level 41-50 "Ell Set" references from rflib.ru:
   - Helmet: Tactical copper-brown headset/visor with tactical goggles.
   - Armor, Pants, Boots, Gloves: High-quality polished white and red-orange metallic plates with chrome-silver trims and dark titanium-steel joints, representing high-tier mecha gear.
@@ -916,7 +916,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 81: Bionex Marksman Tier Assets Regeneration (Lv.1 Set - Helmet, Gloves, Boots) [PENDING DEPLOYMENT]
+### 🎨 Milestone 81: Bionex Marksman Tier Assets Regeneration (Lv.1 Set - Helmet, Gloves, Boots) [DEPLOYED]
 - **Assets**: Regenerated 3 pieces of the Bionex Marksman Level 1 mecha armor set (`helmet`, `gloves`, `boots`) using the `/regenerate-2.5D-anime-realistic` custom skill with the built-in free image generation tool:
   - Helmet: Redesigned as a Coles Leather Cap (tactical dark brown and gray leather head strap running across the forehead, with protective metal ear covers on the sides, completely removing the dome cap shell and goggles, leaving the top of the head open/empty).
   - Gloves: Olive-green and khaki-green tactical leather ranger gauntlets/gloves featuring simple olive-green forearm metal plating with the Bionex logo.
