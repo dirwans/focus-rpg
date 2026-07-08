@@ -353,8 +353,10 @@ export function verifyStarterArmorSet(player) {
     : BOW_JOBS.includes(player.job) ? 'ranger'
     : STAFF_JOBS.includes(player.job) ? 'mage'
     : null
-  if (player.race === 'bionex' && (lineage === 'technician' || lineage === 'ranger')) {
-    lineage = 'marksman'
+  if (player.race === 'bionex') {
+    if (lineage === 'warrior') lineage = 'guardian'
+    else if (lineage === 'technician' || lineage === 'ranger') lineage = 'marksman'
+    else if (lineage === 'mage') lineage = 'psion'
   }
   if (!lineage) return player
   const available = ARMOR_SET_LINEAGES[player.race] || []
