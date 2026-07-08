@@ -30,17 +30,17 @@ Use this skill when the user requests regeneration, styling, or cleanup of mecha
 
 ## Core Regeneration Rules & Strict SOP
 
-This strict SOP applies to all image processing endpoints, tool callbacks, and external LLM APIs (both the built-in `generate_image` tool and OpenRouter scripts):
+This strict SOP applies to all image processing endpoints, tool callbacks, and external LLM APIs (both the built-in `generate_image` tool and OpenRouter scripts) across **all graphic asset types** (armor, gears, weapons, items, mobs, NPCs, monsters, bosses, and character portraits):
 
 1. **Definition of "Regenerate"**: Regeneration is strictly defined as **recovery, repairing bad/pixelated edges, cleaning up compression artifacts, upscaling, and retoning/restoring colors** of the original asset. It is NOT a creative reimagining.
 2. **Object Reference Identification (MANDATORY)**: Before writing any text prompts or calling any generation API, the agent must visually inspect the original target reference file (using vision or script metadata) to identify:
-   - The exact structural components of the object.
+   - The exact structural components of the object or entity (e.g., wings, limbs, armor plates, face).
    - The exact color tones and their distribution.
    - The overall simplicity/complexity of the silhouette.
 3. **Strict Preservation Gating**:
    - **Form Constraint**: Preserve the exact shape and component layout of the original asset. Maximum custom shape deviation is **20%** (used only for correcting jagged edges or filling missing parts).
    - **Color Constraint**: Retain the exact color scheme, shades, and lighting patterns. Maximum color tone deviation is **10%** (used only to enhance contrast or clean up color compression noise).
-   - **Simplicity Constraint**: If the original asset has a simple, plain leather or metal pattern (especially for level 1 starter gear), the generated result must maintain that clean simplicity instead of adding complex panel lines or glowing elements.
+   - **Simplicity/Design Constraint**: Keep the character or item design faithful to the original tier. Low-level entities/items must remain simple, while high-level/boss entities must retain their original design complexity without arbitrary additions.
 
 
 ## Dual-Endpoint Fallback Generation Protocol
@@ -58,11 +58,9 @@ To prevent wasting paid API tokens/credits on incorrect model interpretations:
 2. Before sending any paid API requests (OpenRouter/Endpoint 2), the agent **must**:
    - Open and analyze the target reference image using the agent's vision capabilities.
    - Write a detailed **Vision Object Identification Blueprint** in the chat using this format:
-     *   **Object Type**: (e.g., Helmet/Circlet, Chestplate, Boots, Gloves, Weapon-Staff, Monster-Dragon).
-     *   **Appearance Tier**: (e.g., Low-level / Starter gear / Simple / Plain VS High-level / Advanced / Elaborate / Glowing).
-     *   **Shape & Silhouette**: (e.g., Simple flat headband with wings, high collar, rectangular chest panel).
+     *   **Object/Entity Type**: (e.g., Helmet/Circlet, Chestplate, Weapon-Staff, Monster-Dragon, NPC-Vendor, Boss-Robot).
+     *   **Appearance Tier**: (e.g., Low-level / Starter VS High-level / Elite / Boss / Glowing).
+     *   **Shape & Silhouette**: (e.g., Simple flat headband with wings, high collar, organic dragon wings, mechanical limbs).
      *   **Color Tone & Distribution**: (e.g., Predominantly white and brown leather, silver metal, glowing cyan energy accents).
    - Draft a highly restrictive prompt based on this blueprint, specifically mandating a plain, flat, non-complex 2.5D anime style with clean outlines.
 3. The agent must wait for the user to explicitly confirm ("Gasss", "Setuju", or feedback) before invoking the script.
-
-
