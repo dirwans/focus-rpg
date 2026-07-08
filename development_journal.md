@@ -851,7 +851,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 💍 Milestone 75: Arctron Ring Database Entries (Lore/Guide Only, No Loot Wiring Yet) [PENDING DEPLOYMENT]
+### 💍 Milestone 75: Arctron Ring Database Entries (Lore/Guide Only, No Loot Wiring Yet) [DEPLOYED]
 - **Source**: User supplied a 5-ring reference sheet (`public/ref/Arctron/arctron-rings.png`, 1024×1536) inspired by rflib.ru's Accretia accessory database. Real rflib data for "Ring" is mostly elemental Bracelet items plus one 3-job-variant "Daidalos Ring" set (Launcher/Ranger/Warrior, ~25% ATK/DEF/Dodge) — no 5-tier ring set exists in the source data, so stats were improvised per explicit user direction, loosely inspired by Daidalos Ring's ATK%/DEF%/Dodge bonus shape.
 - **Scope explicitly limited by user**: drop source (which enemy/quest grants these) is undecided — these are database/lore entries only for now, NOT wired into `pickItem`'s combat loot table and NOT added to `items.json` as equippable items. Purely for the in-game "📖 Database & Guides" library screen.
 - **Image pipeline**: Reference sheet had a baked-in flat gray checkerboard (not real transparency, same failure mode as M44/M59's shield/armor issues) — used `rembg` (AI segmentation, confirmed installed this session) instead of manual BFS/threshold removal, which cleanly separated all 5 rings in one pass. Rings touched/overlapped vertically with no true empty-row gap, so used a smoothed per-row alpha-density profile (`scipy.signal.argrelextrema`) to locate the 4 local-minimum boundary rows (y=328, 638, 932, 1210) and split there. Each ring then tight-cropped, square-padded (8% margin), and LANCZOS-resized to 320×320 — matching the armor/weapon/shield convention established in M40/46/49/59.
@@ -862,7 +862,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 💍 Milestone 76: Celestra & Bionex Ring Database Entries (Lore/Guide Only) [PENDING DEPLOYMENT]
+### 💍 Milestone 76: Celestra & Bionex Ring Database Entries (Lore/Guide Only) [DEPLOYED]
 - **Source**: User supplied two more 5-ring reference sheets (`public/ref/Celestra/celestra-rings.png`, `public/ref/Bionex/bionex-rings.png`, both 1024×1536), plus rflib.ru's general (all-race) Ring database for flavor inspiration — named rings there (Baal Ring, Beast of Life Ring, Black Mist Ring, Christmas Defense/Dodge Ring, etc.) confirmed the ATK%/DEF%/Dodge/elemental bonus shape pattern already used for the M75 Arctron rings; no exact matching 5-tier set exists in the source data for either faction, so stats were improvised again per the same explicit user direction.
 - **Same scope limits as M75**: database/lore entries only, no `items.json` equippable entries, no `pickItem` loot-table wiring — drop source still undecided.
 - **Image pipeline**: Both reference sheets had the same baked-in flat black background (opaque, not real alpha). Used `rembg` to clean both in one pass each. Rings touched vertically with no true empty-row gap in either sheet, so reused the M75 smoothed-row-density-profile technique (`scipy.signal.argrelextrema`) to find 4 boundary rows per sheet: Celestra at y=318/627/920/1226, Bionex at y=321/638/939/1231. Tight-cropped, square-padded (8%), LANCZOS-resized to 320×320 each.
@@ -873,7 +873,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 💍 Milestone 77: Universal (All-Faction) Ring Database Entries — Replaces Old Placeholder Rings [PENDING DEPLOYMENT]
+### 💍 Milestone 77: Universal (All-Faction) Ring Database Entries — Replaces Old Placeholder Rings [DEPLOYED]
 - **Source**: User supplied a 5th reference sheet (`public/ref/cincin-all-factions.png`, 1024×1536, "cincin" = ring) explicitly for a **universal/race-agnostic** ring set, plus the same rflib.ru general Ring database link, with instruction to treat it identically to the M75/M76 faction rings.
 - **Found existing generic placeholder**: `src/data/gears/accessories.json`'s `rings` array already held 4 flavor-only entries (Ember/Storm/Obsidian/Chronos Ring, Common→Epic, `atk`+`critical%` stat shape, no images) rendered under `LibraryModal.jsx`'s "Global (Acc)" tab — this is the natural home for a universal ring set, so replaced these 4 placeholders outright with the 5 new image-backed entries rather than running two parallel universal-ring lists.
 - **Same scope limits as M75/M76**: database/lore entries only, no `items.json`/loot-table wiring.
@@ -885,7 +885,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 📿 Milestone 78: Amulet Database Entries — All 3 Factions + Universal (Lore/Guide Only) [PENDING DEPLOYMENT]
+### 📿 Milestone 78: Amulet Database Entries — All 3 Factions + Universal (Lore/Guide Only) [DEPLOYED]
 - **Source**: User supplied 4 amulet reference sheets (`public/ref/Arctron-amulets.png`, `bionex-amulet.png`, `Celestra-amulets.png`, `all-factions-amulets.png`) plus rflib.ru's Amulet database for stat-shape inspiration (Beast Amulet ATK%, Beginner's Amulet all-elements, Brother's Tears Amulet ATK%+DEF%+all-elements, Christmas Defense/Dodge/Warding variants, Dagon's Leash, Elemental Appendix). Same explicit instruction as M75-77: treat identically, improvise stats.
 - **Item count varied per sheet** — verified by pixel-counting, not assumption, after an initial miscount: Arctron/Bionex/all-factions each have **5** amulets, but **Celestra only has 3** (confirmed by direct re-inspection of the reference image after the row-density algorithm initially found an ambiguous boundary count).
 - **Image pipeline**: All 4 sheets had the same baked-in flat black background. `rembg` cleanup per sheet, then row-density-profile boundary detection (as in M75-77) — but this batch surfaced two new failure modes needing extra handling:
@@ -899,10 +899,32 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🏷️ Milestone 79: Ring & Amulet Renaming Pass — Real rflib.ru Naming Conventions [PENDING DEPLOYMENT]
+### 🏷️ Milestone 79: Ring & Amulet Renaming Pass — Real rflib.ru Naming Conventions [DEPLOYED]
 - **Ask**: User wanted the M75-78 ring/amulet names (which were generic invented fantasy names like "Ember Core Ring", "Solar Halo Pendant") replaced with names drawing more directly from rflib.ru's actual dramatic/mythological naming style (proper nouns, possessives — Baal, Dagon, Beast of Life, Dead Officer's, Brother's Tears, Daidalos) rather than generic gemstone/element naming.
 - **Scope**: Renamed all 38 ring/amulet `name` fields across all 4 gear JSON files — `arctron.json` (5 amulets + 5 rings), `bionex.json` (5 amulets + 5 rings), `celestra.json` (3 amulets + 5 rings), `accessories.json` (5 amulets + 5 rings). No id/image/stat changes — pure naming pass.
-- **Approach**: Directly reused several authentic rflib.ru names as homage where thematically fitting for the universal ("Global Acc") tier (Beginner's Ring, Black Mist Ring, Baal Ring, Beast of Life Ring, Daidalos Ring, Baal's Heart Amulet, Beast of Life Amulet, Dead Officer's Duality, Brother's Tears Amulet, Dagon's Leash) since those are the most direct "vanilla" equivalents. For the 3 faction-specific sets, blended the same proper-noun/possessive naming energy with faction flavor (e.g. Arctron: "Baal's Ember Ring", "Dagon's Warband Ring", "Behemoth's Crown Ring"; Bionex: "Dagon's Halo", "Ravager's Talon Ring", "Golgothan Sovereign Ring"; Celestra: "Amethyst Warden's Charm", "Moonwarden's Chain", "Wyrmfang Sovereign Cuff").
 - **Verification**: `npm run build` passes.
+
+---
+
+### 🎨 Milestone 80: Bionex Marksman Tier Assets Regeneration (Lv.55 Set) [PENDING DEPLOYMENT]
+- **Assets**: Regenerated all 5 pieces of the Bionex Marksman Level 55 mecha armor set (`helmet`, `armor`, `pants`, `boots`, `gloves`) using the `/regenerate-2.5D-anime-realistic` custom skill. The set is based on the Bellato Ranger level 41-50 "Ell Set" references from rflib.ru:
+  - Helmet: Tactical copper-brown headset/visor with tactical goggles.
+  - Armor, Pants, Boots, Gloves: High-quality polished white and red-orange metallic plates with chrome-silver trims and dark titanium-steel joints, representing high-tier mecha gear.
+  - (Generated via OpenRouter fallback).
+- **Post-processing**: Ran the script `process_gears.py` followed by alpha threshold filtering (<15 to 0) to crop, center, transparent-remove backgrounds, and resize to 320x320 PNGs.
+- **Verification**: `npm run build` succeeds locally.
+
+---
+
+### 🎨 Milestone 81: Bionex Marksman Tier Assets Regeneration (Lv.1 Set - Helmet, Gloves, Boots) [PENDING DEPLOYMENT]
+- **Assets**: Regenerated 3 pieces of the Bionex Marksman Level 1 mecha armor set (`helmet`, `gloves`, `boots`) using the `/regenerate-2.5D-anime-realistic` custom skill with the built-in free image generation tool:
+  - Helmet: Redesigned as a Coles Leather Cap (tactical dark brown and gray leather head strap running across the forehead, with protective metal ear covers on the sides, completely removing the dome cap shell and goggles, leaving the top of the head open/empty).
+  - Gloves: Olive-green and khaki-green tactical leather ranger gauntlets/gloves featuring simple olive-green forearm metal plating with the Bionex logo.
+  - Boots: Olive-green and khaki-green tactical leather ranger combat boots with dark olive-green shin guards and simple dark metal soles, matching the original starter-tier gear from rflib.ru.
+- **Post-processing**: Ran the script `process_gears.py` followed by alpha threshold filtering (<15 to 0) to crop, center, transparent-remove backgrounds, and resize to 320x320 PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
+- **Verification**: Verified that `npm run build` succeeds locally.
+
+
 
 
