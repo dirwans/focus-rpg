@@ -1272,7 +1272,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 95: Celestra Mage Lv.55 Set Reconstruction (Full 5 Pieces) [PENDING DEPLOYMENT]
+### 🎨 Milestone 95: Celestra Mage Lv.55 Set Reconstruction (Full 5 Pieces) [DEPLOYED]
 - **Assets**: Reconstructed all 5 pieces of the Celestra Mage Lv.55 mecha armor set (`armor`, `helmet`, `pants`, `boots`, `gloves`) from the newly provided high-resolution reference sheet `truelv55mage.png`.
 - **Post-processing**:
   - Wrote and executed the script `extract_truelv55mage.py` to crop each quadrant/panel:
