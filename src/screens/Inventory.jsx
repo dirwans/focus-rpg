@@ -65,18 +65,33 @@ export default function Inventory() {
               amulet: 'amulet', ring: 'ring', ascension_arms: 'ascension_arms'
             }
 
-            // Get compatible items from inventory for a given slot key
-            const getCompatibleItems = (slotKey) => {
-              if (!player.inventory) return []
-              const typeTarget = slotKey.replace(/[12]$/, '') // amulet1→amulet, ring1→ring
-              return player.inventory.filter(item => {
-                if (item.type !== typeTarget) return false
-                const raceOk = !item.race || item.race === 'All' || item.race === player.race
-                const levelOk = !item.level || item.level <= player.level
-                const jobOk = !item.job || item.job === player.job
-                return raceOk && levelOk && jobOk
-              })
-            }
+             // Get compatible items from inventory for a given slot key
+             const getCompatibleItems = (slotKey) => {
+               if (!player.inventory) return []
+               const typeTarget = slotKey.replace(/[12]$/, '') // amulet1→amulet, ring1→ring
+               return player.inventory.filter(item => {
+                 if (item.type !== typeTarget) return false
+                 
+                 // Race validation (array-aware)
+                 let raceOk = true
+                 if (item.race) {
+                   const allowedRaces = Array.isArray(item.race) ? item.race : [item.race]
+                   raceOk = allowedRaces.includes('All') || allowedRaces.includes(player.race)
+                 }
+
+                 // Level validation
+                 const levelOk = !item.level || item.level <= player.level
+
+                 // Job validation (array-aware)
+                 let jobOk = true
+                 if (item.job) {
+                   const allowedJobs = Array.isArray(item.job) ? item.job : [item.job]
+                   jobOk = allowedJobs.includes(player.job)
+                 }
+
+                 return raceOk && levelOk && jobOk
+               })
+             }
 
             const renderEquipSlot = (slotKey, label, svgIcon, isCircle = false, width = '100%', height = 'auto', aspectRatio = '1 / 1') => {
               const item = player.equipment && player.equipment[slotKey];

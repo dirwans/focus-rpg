@@ -2288,9 +2288,9 @@ export const useGameStore = create(
              it.type === 'helmet' || it.type === 'mantle' || it.type === 'gloves' ||
              it.type === 'boots' || it.type === 'pants' || it.type === 'amulet' || it.type === 'ring') &&
             it.rarity === rarity &&
-            (it.race === 'All' || it.race === player.race) &&
+            (!it.race || (Array.isArray(it.race) ? (it.race.includes('All') || it.race.includes(player.race)) : (it.race === 'All' || it.race === player.race))) &&
             it.level <= player.level + 10 &&
-            (it.type !== 'weapon' || !it.job || it.job === player.job) &&
+            (it.type !== 'weapon' || !it.job || (Array.isArray(it.job) ? it.job.includes(player.job) : it.job === player.job)) &&
             (it.minStage === undefined || it.minStage <= fightSector)
           )
           if (pool.length === 0) return null

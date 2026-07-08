@@ -461,108 +461,117 @@ export default function Cargo() {
     </div>
 
       {/* Item Actions Modal */}
-      {selectedItem && (
-        <div style={styles.modalOverlay}>
-          <div className="glass-panel" style={styles.modal}>
-            <div style={{ ...styles.modalName, color: getItemColor(selectedItem), display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
-              {resolveItemImage(selectedItem, player.race, player.job) ? (
-                <img referrerPolicy="no-referrer" src={resolveItemImage(selectedItem, player.race, player.job)} style={{ width: 32, height: 32, objectFit: 'contain', imageRendering: 'auto' }} alt={selectedItem.name} />
-              ) : (
-                <span>{selectedItem.emoji}</span>
-              )}
-              <span>{selectedItem.name.toUpperCase()}</span>
-            </div>
-            
-            <div style={styles.modalGrid}>
-              <div style={styles.modalRow}><span>{t('type_label')}:</span> <span>{selectedItem.type.toUpperCase()}</span></div>
-              <div style={styles.modalRow}><span>{t('level_label')}:</span> <span>Lv.{selectedItem.level || 1}</span></div>
-              <div style={styles.modalRow}><span>{t('race_label')}:</span> <span>{(selectedItem.race || 'All').toUpperCase()}</span></div>
-              {selectedItem.job && (
-                <div style={styles.modalRow}><span>{t('job_label')}:</span> <span style={{ color: '#ffb300' }}>{selectedItem.job.toUpperCase()}</span></div>
-              )}
-              {selectedItem.specialProperty && (
-                <div style={styles.modalRow}><span>{t('effect_label')}:</span> <span style={{ color: '#ff3366', fontWeight: 800 }}>{selectedItem.specialProperty.toUpperCase()}</span></div>
-              )}
-              {selectedItem.bonus && (
-                <div style={styles.modalRow}>
-                  <span>{t('bonus_label')}:</span>
-                  <span style={{ color: '#00ff88', fontWeight: 700, textAlign: 'right', display: 'inline-block', maxWidth: '65%' }}>
-                    {selectedItem.bonus.atk && `+${selectedItem.bonus.atk} ATK `}
-                    {selectedItem.bonus.def && `+${selectedItem.bonus.def} DEF `}
-                    {selectedItem.bonus.hp && `+${selectedItem.bonus.hp} HP `}
-                    {selectedItem.bonus.atkPercent && `+${selectedItem.bonus.atkPercent}% ATK `}
-                    {selectedItem.bonus.defPercent && `+${selectedItem.bonus.defPercent}% DEF `}
-                    {selectedItem.bonus.hpPercent && `+${selectedItem.bonus.hpPercent}% HP `}
-                    {selectedItem.bonus.speedPercent && `+${selectedItem.bonus.speedPercent}% Speed `}
-                    {selectedItem.bonus.accPercent && `+${selectedItem.bonus.accPercent}% Acc `}
-                    {selectedItem.bonus.critPercent && `+${selectedItem.bonus.critPercent}% Crit `}
-                  </span>
-                </div>
-              )}
-              {selectedItem.description && (
-                <div style={{ ...styles.modalRow, flexDirection: 'column', gap: 4, marginTop: 4 }}>
-                  <span>{t('description_label')}:</span>
-                  <span style={{ color: '#90caf9', fontSize: 13 }}>{selectedItem.description}</span>
-                </div>
-              )}
-              {selectedItem.id && selectedItem.id.startsWith('archon_') && (
-                <div style={{ ...styles.modalRow, flexDirection: 'column', gap: 4, marginTop: 4, background: 'rgba(245, 166, 35, 0.08)', border: '1px solid rgba(245, 166, 35, 0.2)', padding: 8, borderRadius: 6 }}>
-                  <span style={{ color: '#ffcc80', fontSize: 13, lineHeight: 1.4 }}>{t('archon_notice_cargo')}</span>
-                </div>
-              )}
-            </div>
+      {selectedItem && (() => {
+        const allowedRaces = selectedItem.race ? (Array.isArray(selectedItem.race) ? selectedItem.race : [selectedItem.race]) : ['All']
+        const raceMismatch = !allowedRaces.includes('All') && !allowedRaces.includes(player.race)
+        const allowedJobs = selectedItem.job ? (Array.isArray(selectedItem.job) ? selectedItem.job : [selectedItem.job]) : []
+        const jobMismatch = allowedJobs.length > 0 && !allowedJobs.includes(player.job)
+        const displayRace = Array.isArray(selectedItem.race) ? selectedItem.race.map(r => r.toUpperCase()).join('/') : (selectedItem.race || 'All').toUpperCase()
+        const displayJob = selectedItem.job ? (Array.isArray(selectedItem.job) ? selectedItem.job.map(j => j.toUpperCase()).join('/') : selectedItem.job.toUpperCase()) : null
+
+        return (
+          <div style={styles.modalOverlay}>
+            <div className="glass-panel" style={styles.modal}>
+              <div style={{ ...styles.modalName, color: getItemColor(selectedItem), display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+                {resolveItemImage(selectedItem, player.race, player.job) ? (
+                  <img referrerPolicy="no-referrer" src={resolveItemImage(selectedItem, player.race, player.job)} style={{ width: 32, height: 32, objectFit: 'contain', imageRendering: 'auto' }} alt={selectedItem.name} />
+                ) : (
+                  <span>{selectedItem.emoji}</span>
+                )}
+                <span>{selectedItem.name.toUpperCase()}</span>
+              </div>
+              
+              <div style={styles.modalGrid}>
+                <div style={styles.modalRow}><span>{t('type_label')}:</span> <span>{selectedItem.type.toUpperCase()}</span></div>
+                <div style={styles.modalRow}><span>{t('level_label')}:</span> <span>Lv.{selectedItem.level || 1}</span></div>
+                <div style={styles.modalRow}><span>{t('race_label')}:</span> <span>{displayRace}</span></div>
+                {displayJob && (
+                  <div style={styles.modalRow}><span>{t('job_label')}:</span> <span style={{ color: '#ffb300' }}>{displayJob}</span></div>
+                )}
+                {selectedItem.specialProperty && (
+                  <div style={styles.modalRow}><span>{t('effect_label')}:</span> <span style={{ color: '#ff3366', fontWeight: 800 }}>{selectedItem.specialProperty.toUpperCase()}</span></div>
+                )}
+                {selectedItem.bonus && (
+                  <div style={styles.modalRow}>
+                    <span>{t('bonus_label')}:</span>
+                    <span style={{ color: '#00ff88', fontWeight: 700, textAlign: 'right', display: 'inline-block', maxWidth: '65%' }}>
+                      {selectedItem.bonus.atk && `+${selectedItem.bonus.atk} ATK `}
+                      {selectedItem.bonus.def && `+${selectedItem.bonus.def} DEF `}
+                      {selectedItem.bonus.hp && `+${selectedItem.bonus.hp} HP `}
+                      {selectedItem.bonus.atkPercent && `+${selectedItem.bonus.atkPercent}% ATK `}
+                      {selectedItem.bonus.defPercent && `+${selectedItem.bonus.defPercent}% DEF `}
+                      {selectedItem.bonus.hpPercent && `+${selectedItem.bonus.hpPercent}% HP `}
+                      {selectedItem.bonus.speedPercent && `+${selectedItem.bonus.speedPercent}% Speed `}
+                      {selectedItem.bonus.accPercent && `+${selectedItem.bonus.accPercent}% Acc `}
+                      {selectedItem.bonus.critPercent && `+${selectedItem.bonus.critPercent}% Crit `}
+                    </span>
+                  </div>
+                )}
+                {selectedItem.description && (
+                  <div style={{ ...styles.modalRow, flexDirection: 'column', gap: 4, marginTop: 4 }}>
+                    <span>{t('description_label')}:</span>
+                    <span style={{ color: '#90caf9', fontSize: 13 }}>{selectedItem.description}</span>
+                  </div>
+                )}
+                {selectedItem.id && selectedItem.id.startsWith('archon_') && (
+                  <div style={{ ...styles.modalRow, flexDirection: 'column', gap: 4, marginTop: 4, background: 'rgba(245, 166, 35, 0.08)', border: '1px solid rgba(245, 166, 35, 0.2)', padding: 8, borderRadius: 6 }}>
+                    <span style={{ color: '#ffcc80', fontSize: 13, lineHeight: 1.4 }}>{t('archon_notice_cargo')}</span>
+                  </div>
+                )}
+              </div>
 
 
-            {/* Level/Race/Job requirements checks warnings */}
-            {!selectedItem.isEquipped && player.level < (selectedItem.level || 0) && (
-              <div style={styles.warning}>{t('req_level_warn', { req: selectedItem.level, level: player.level })}</div>
-            )}
-            {!selectedItem.isEquipped && selectedItem.race && selectedItem.race !== 'All' && selectedItem.race !== player.race && (
-              <div style={styles.warning}>{t('restricted_race_warn', { race: selectedItem.race.toUpperCase() })}</div>
-            )}
-            {!selectedItem.isEquipped && selectedItem.job && selectedItem.job !== player.job && (
-              <div style={styles.warning}>{t('restricted_job_warn', { job: selectedItem.job.toUpperCase() })}</div>
-            )}
+              {/* Level/Race/Job requirements checks warnings */}
+              {!selectedItem.isEquipped && player.level < (selectedItem.level || 0) && (
+                <div style={styles.warning}>{t('req_level_warn', { req: selectedItem.level, level: player.level })}</div>
+              )}
+              {!selectedItem.isEquipped && raceMismatch && (
+                <div style={styles.warning}>{t('restricted_race_warn', { race: displayRace })}</div>
+              )}
+              {!selectedItem.isEquipped && jobMismatch && (
+                <div style={styles.warning}>{t('restricted_job_warn', { job: displayJob })}</div>
+              )}
 
-            <div style={styles.modalButtons}>
-              {selectedItem.isEquipped ? (
-                <button
-                  style={styles.modalBtn('#ff4466', true)}
-                  onClick={() => {
-                    unequipItem(selectedItem.slot)
-                    setSelectedItem(null)
-                  }}
-                >
-                  {t('unequip_btn')}
-                </button>
-              ) : (
-                ['weapon', 'armor', 'shield', 'helmet', 'mantle', 'gloves', 'boots', 'pants', 'amulet', 'ring'].includes(selectedItem.type) && (
+              <div style={styles.modalButtons}>
+                {selectedItem.isEquipped ? (
                   <button
-                    style={styles.modalBtn('#00c8ff', true)}
-                    onClick={() => handleEquip(selectedItem.uid)}
-                    disabled={
-                      player.level < (selectedItem.level || 0) ||
-                      (selectedItem.race && selectedItem.race !== 'All' && selectedItem.race !== player.race) ||
-                      (selectedItem.job && selectedItem.job !== player.job)
-                    }
+                    style={styles.modalBtn('#ff4466', true)}
+                    onClick={() => {
+                      unequipItem(selectedItem.slot)
+                      setSelectedItem(null)
+                    }}
                   >
-                    {t('equip_btn')}
+                    {t('unequip_btn')}
                   </button>
-                )
-              )}
-              {!selectedItem.isEquipped && (
-                <button style={styles.modalBtn('#ff8c40', true)} onClick={() => handleSell(selectedItem.uid)}>
-                  {t('sell_btn', { price: getSellPrice(selectedItem) })}
+                ) : (
+                  ['weapon', 'armor', 'shield', 'helmet', 'mantle', 'gloves', 'boots', 'pants', 'amulet', 'ring'].includes(selectedItem.type) && (
+                    <button
+                      style={styles.modalBtn('#00c8ff', true)}
+                      onClick={() => handleEquip(selectedItem.uid)}
+                      disabled={
+                        player.level < (selectedItem.level || 0) ||
+                        raceMismatch ||
+                        jobMismatch
+                      }
+                    >
+                      {t('equip_btn')}
+                    </button>
+                  )
+                )}
+                {!selectedItem.isEquipped && (
+                  <button style={styles.modalBtn('#ff8c40', true)} onClick={() => handleSell(selectedItem.uid)}>
+                    {t('sell_btn', { price: getSellPrice(selectedItem) })}
+                  </button>
+                )}
+                <button style={styles.modalBtn('#7ab0d0', false)} onClick={() => setSelectedItem(null)}>
+                  {t('close_btn')}
                 </button>
-              )}
-              <button style={styles.modalBtn('#7ab0d0', false)} onClick={() => setSelectedItem(null)}>
-                {t('close_btn')}
-              </button>
-            </div>
+              </div>
 
+            </div>
           </div>
-        </div>
-      )}
+        )
+      })()}
     </div>
   )
 }

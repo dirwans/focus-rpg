@@ -649,3 +649,16 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 - **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
 - **Cache-Busting**: Updated the cache version parameter inside `resolveArmorSetImage` in `src/store/gameStore.js` from `?v=4` to `?v=5` to force client browsers to refresh and load the new assets.
 - **Verification**: Verified that the client production build succeeds.
+
+---
+
+### 🛠️ Milestone 55: Array-Aware Gear Requirement Validation in Cargo and Inventory [PENDING DEPLOYMENT]
+- **Bugs**: 
+  1. In `Inventory.jsx`, `getCompatibleItems` did string comparison `item.job === player.job` and `item.race === player.race`, filtering out all mecha armor sets and weapons where jobs/races are defined as arrays (such as all high-tier Bionex and Celestra sets in `items.json`), making them invisible in the Smart Equip Picker.
+  2. In `Cargo.jsx`, clicking a mecha set item that has job or race as arrays caused a Javascript runtime crash when rendering `.toUpperCase()` on an array. The requirement checking code also performed direct string comparison, which incorrectly disabled equipping/using those items.
+  3. In `gameStore.js`, the combat loot generator `pickItem` did string checks for race and job requirements, preventing job-restricted weapons from dropping in combat.
+- **Fixes**: 
+  1. Updated `getCompatibleItems` in [Inventory.jsx](file:///c:/projects/focus-rpg/src/screens/Inventory.jsx#L69-L80) to be array-aware using `.includes` for both race and job validations.
+  2. Refactored the selected item modal in [Cargo.jsx](file:///c:/projects/focus-rpg/src/screens/Cargo.jsx#L464-L565) to compute array-safe validations, display multiple jobs/races formatted as slash-separated strings, and prevent crashes.
+  3. Rewrote `pickItem` in [gameStore.js](file:///c:/projects/focus-rpg/src/store/gameStore.js#L2285-L2298) to support array-aware validations.
+- **Verification**: Verified that the production client builds successfully with zero errors.
