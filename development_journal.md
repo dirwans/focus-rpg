@@ -652,7 +652,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🛠️ Milestone 55: Array-Aware Gear Requirement Validation in Cargo and Inventory [PENDING DEPLOYMENT]
+### 🛠️ Milestone 55: Array-Aware Gear Requirement Validation in Cargo and Inventory [DEPLOYED]
 - **Bugs**: 
   1. In `Inventory.jsx`, `getCompatibleItems` did string comparison `item.job === player.job` and `item.race === player.race`, filtering out all mecha armor sets and weapons where jobs/races are defined as arrays (such as all high-tier Bionex and Celestra sets in `items.json`), making them invisible in the Smart Equip Picker.
   2. In `Cargo.jsx`, clicking a mecha set item that has job or race as arrays caused a Javascript runtime crash when rendering `.toUpperCase()` on an array. The requirement checking code also performed direct string comparison, which incorrectly disabled equipping/using those items.
