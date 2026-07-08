@@ -31,32 +31,45 @@
   ],
   "rings": [
     {
-      "id": "rng_0",
-      "name": "Ember Ring",
+      "id": "rng_all_0",
+      "name": "Garnet Signet Ring",
       "grade": "Common",
-      "atk": 25,
-      "critical": 2
+      "image": "/assets/accessories/rings/rng_all_0.png",
+      "atk": 8
     },
     {
-      "id": "rng_1",
-      "name": "Storm Ring",
+      "id": "rng_all_1",
+      "name": "Dragonfang Ring",
       "grade": "Uncommon",
-      "atk": 60,
-      "critical": 4
+      "image": "/assets/accessories/rings/rng_all_1.png",
+      "atk": 12,
+      "dodge": 6
     },
     {
-      "id": "rng_2",
-      "name": "Obsidian Ring",
+      "id": "rng_all_2",
+      "name": "Emerald Lock Ring",
       "grade": "Rare",
-      "atk": 120,
-      "critical": 6
+      "image": "/assets/accessories/rings/rng_all_2.png",
+      "atk": 14,
+      "def": 10
     },
     {
-      "id": "rng_3",
-      "name": "Chronos Ring",
+      "id": "rng_all_3",
+      "name": "Sapphire Shard Ring",
       "grade": "Epic",
-      "atk": 220,
-      "critical": 10
+      "image": "/assets/accessories/rings/rng_all_3.png",
+      "atk": 20,
+      "def": 10,
+      "dodge": 8
+    },
+    {
+      "id": "rng_all_4",
+      "name": "Golden Vault Ring",
+      "grade": "Legendary",
+      "image": "/assets/accessories/rings/rng_all_4.png",
+      "atk": 28,
+      "def": 16,
+      "dodge": 14
     }
   ],
   "capes": [

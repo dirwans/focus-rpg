@@ -849,15 +849,39 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 - **Paths**: Overwrote files in both `public/assets/armor_celestra/` and `src/assets/armor_celestra/`.
 - **Verification**: Verified that `npm run build` succeeds locally.
 
+---
 
+### 💍 Milestone 75: Arctron Ring Database Entries (Lore/Guide Only, No Loot Wiring Yet) [PENDING DEPLOYMENT]
+- **Source**: User supplied a 5-ring reference sheet (`public/ref/Arctron/arctron-rings.png`, 1024×1536) inspired by rflib.ru's Accretia accessory database. Real rflib data for "Ring" is mostly elemental Bracelet items plus one 3-job-variant "Daidalos Ring" set (Launcher/Ranger/Warrior, ~25% ATK/DEF/Dodge) — no 5-tier ring set exists in the source data, so stats were improvised per explicit user direction, loosely inspired by Daidalos Ring's ATK%/DEF%/Dodge bonus shape.
+- **Scope explicitly limited by user**: drop source (which enemy/quest grants these) is undecided — these are database/lore entries only for now, NOT wired into `pickItem`'s combat loot table and NOT added to `items.json` as equippable items. Purely for the in-game "📖 Database & Guides" library screen.
+- **Image pipeline**: Reference sheet had a baked-in flat gray checkerboard (not real transparency, same failure mode as M44/M59's shield/armor issues) — used `rembg` (AI segmentation, confirmed installed this session) instead of manual BFS/threshold removal, which cleanly separated all 5 rings in one pass. Rings touched/overlapped vertically with no true empty-row gap, so used a smoothed per-row alpha-density profile (`scipy.signal.argrelextrema`) to locate the 4 local-minimum boundary rows (y=328, 638, 932, 1210) and split there. Each ring then tight-cropped, square-padded (8% margin), and LANCZOS-resized to 320×320 — matching the armor/weapon/shield convention established in M40/46/49/59.
+- **Files**: 5 new PNGs at `public/assets/arctron/rings/rng_arc_{0-4}.png` (+ `src/assets/` mirror): `rng_arc_0` (Common, red ruby), `rng_arc_1` (Uncommon, blue tech triangle), `rng_arc_2` (Rare, teal/cyan organic-tech), `rng_arc_3` (Epic, dark red rectangular gem), `rng_arc_4` (Legendary, gold horned dual-gem).
+- **Data**: Added a `rings` array to `src/data/gears/arctron.json` (5 entries: id/name/grade/image/stat fields — Ember Core Ring +8 ATK, Voidsteel Ring +12 ATK/+6 DEF, Cryo Matrix Ring +15 ATK/+8 Dodge, Bloodforge Ring +20 ATK/+10 DEF, Draconis Talon Ring +28 ATK/+15 DEF/+12 Dodge), matching the flat-integer-stat convention already used by this file's `warrior`/`ranger`/`technician` weapon arrays (not the `item.bonus` object shape used in `items.json`, since this file is display-only, disconnected from equippable items).
+- **UI**: Added a new "💍 Rings" card to `LibraryModal.jsx`'s Arctron equipment tab, rendering each ring's thumbnail image + grade/name + stat line, with a "[Drop source: belum ditentukan]" placeholder note per the scoped-out drop wiring.
+- **Verification**: `npm run build` passes. (Also reinstalled `node_modules`, deleted earlier this session during a disk-cleanup pass, before building.)
 
+---
 
+### 💍 Milestone 76: Celestra & Bionex Ring Database Entries (Lore/Guide Only) [PENDING DEPLOYMENT]
+- **Source**: User supplied two more 5-ring reference sheets (`public/ref/Celestra/celestra-rings.png`, `public/ref/Bionex/bionex-rings.png`, both 1024×1536), plus rflib.ru's general (all-race) Ring database for flavor inspiration — named rings there (Baal Ring, Beast of Life Ring, Black Mist Ring, Christmas Defense/Dodge Ring, etc.) confirmed the ATK%/DEF%/Dodge/elemental bonus shape pattern already used for the M75 Arctron rings; no exact matching 5-tier set exists in the source data for either faction, so stats were improvised again per the same explicit user direction.
+- **Same scope limits as M75**: database/lore entries only, no `items.json` equippable entries, no `pickItem` loot-table wiring — drop source still undecided.
+- **Image pipeline**: Both reference sheets had the same baked-in flat black background (opaque, not real alpha). Used `rembg` to clean both in one pass each. Rings touched vertically with no true empty-row gap in either sheet, so reused the M75 smoothed-row-density-profile technique (`scipy.signal.argrelextrema`) to find 4 boundary rows per sheet: Celestra at y=318/627/920/1226, Bionex at y=321/638/939/1231. Tight-cropped, square-padded (8%), LANCZOS-resized to 320×320 each.
+- **Files**: 10 new PNGs — `public/assets/celestra/rings/rng_cor_{0-4}.png` and `public/assets/bionex/rings/rng_bio_{0-4}.png` (+ `src/assets/` mirrors).
+- **Data**: Added `rings` arrays to `src/data/gears/celestra.json` and `src/data/gears/bionex.json`, matching the M75 Arctron schema (id/name/grade/image/atk/def/dodge). Faction flavor differentiated per the existing lore stat leanings from Milestone 37 (Race Unique Stat Advantages): Celestra rings lean ATK+Dodge (Bloodthorn Cuff, Ruby Ember Ring, Sapphire Ward Ring, Solaris Crest Ring, Amber Talon Cuff — up to +26 ATK/+12 DEF/+16 Dodge at Legendary), Bionex rings lean balanced ATK+DEF (Pulse Band Ring, Crimson Core Ring, Vortex Claw Ring, Bloodline Circuit Ring, Golden Cipher Ring — up to +26 ATK/+18 DEF/+6 Dodge at Legendary).
+- **UI**: Added matching "💍 Rings" cards to `LibraryModal.jsx`'s Celestra and Bionex equipment tabs (same thumbnail + grade/name + stat line + "[Drop source: belum ditentukan]" pattern as M75's Arctron card). All 3 factions now have a Rings section in the Database & Guides library.
+- **Verification**: `npm run build` passes.
 
+---
 
-
-
-
-
+### 💍 Milestone 77: Universal (All-Faction) Ring Database Entries — Replaces Old Placeholder Rings [PENDING DEPLOYMENT]
+- **Source**: User supplied a 5th reference sheet (`public/ref/cincin-all-factions.png`, 1024×1536, "cincin" = ring) explicitly for a **universal/race-agnostic** ring set, plus the same rflib.ru general Ring database link, with instruction to treat it identically to the M75/M76 faction rings.
+- **Found existing generic placeholder**: `src/data/gears/accessories.json`'s `rings` array already held 4 flavor-only entries (Ember/Storm/Obsidian/Chronos Ring, Common→Epic, `atk`+`critical%` stat shape, no images) rendered under `LibraryModal.jsx`'s "Global (Acc)" tab — this is the natural home for a universal ring set, so replaced these 4 placeholders outright with the 5 new image-backed entries rather than running two parallel universal-ring lists.
+- **Same scope limits as M75/M76**: database/lore entries only, no `items.json`/loot-table wiring.
+- **Image pipeline**: Same baked-in flat black background (opaque). `rembg` cleanup, then the row-density-profile technique found 4 boundary rows at y=339/631/890/1197. Tight-cropped, square-padded (8%), resized to 320×320.
+- **Files**: 5 new PNGs at `public/assets/accessories/rings/rng_all_{0-4}.png` (+ `src/assets/` mirror).
+- **Data**: Rewrote `accessories.json`'s `rings` array to the same schema as M75/M76 (id/name/grade/image/atk/def/dodge, 5-tier Common→Legendary): Garnet Signet Ring (+8 ATK), Dragonfang Ring (+12 ATK/+6 Dodge), Emerald Lock Ring (+14 ATK/+10 DEF), Sapphire Shard Ring (+20 ATK/+10 DEF/+8 Dodge), Golden Vault Ring (+28 ATK/+16 DEF/+14 Dodge).
+- **UI**: Rewrote the "Global (Acc)" rings card in `LibraryModal.jsx` from the old `atk`/`critical%` two-column layout to the same image-thumbnail + grade/name + atk/def/dodge stat-line layout used by the 3 faction ring cards, for visual consistency across all 4 ring sections in the library. Renamed the card title to "💍 Rings (Universal — All Factions)".
+- **Verification**: `npm run build` passes.
 
 
 

@@ -1,4 +1,47 @@
 {
+  "rings": [
+    {
+      "id": "rng_bio_0",
+      "name": "Pulse Band Ring",
+      "grade": "Common",
+      "image": "/assets/bionex/rings/rng_bio_0.png",
+      "atk": 8,
+      "def": 4
+    },
+    {
+      "id": "rng_bio_1",
+      "name": "Crimson Core Ring",
+      "grade": "Uncommon",
+      "image": "/assets/bionex/rings/rng_bio_1.png",
+      "atk": 12,
+      "def": 8
+    },
+    {
+      "id": "rng_bio_2",
+      "name": "Vortex Claw Ring",
+      "grade": "Rare",
+      "image": "/assets/bionex/rings/rng_bio_2.png",
+      "atk": 15,
+      "def": 10
+    },
+    {
+      "id": "rng_bio_3",
+      "name": "Bloodline Circuit Ring",
+      "grade": "Epic",
+      "image": "/assets/bionex/rings/rng_bio_3.png",
+      "atk": 20,
+      "def": 14
+    },
+    {
+      "id": "rng_bio_4",
+      "name": "Golden Cipher Ring",
+      "grade": "Legendary",
+      "image": "/assets/bionex/rings/rng_bio_4.png",
+      "atk": 26,
+      "def": 18,
+      "dodge": 6
+    }
+  ],
   "guardian": {
     "weapons": [
       {

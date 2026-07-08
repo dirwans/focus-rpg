@@ -706,6 +706,26 @@ export default function LibraryModal({ onClose }) {
                       </div>
                     ))}
                   </div>
+
+                  <div style={styles.itemCard}>
+                    <div style={styles.itemTitle}>💍 Rings</div>
+                    {arctronGears.rings.map((r, i) => (
+                      <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10, borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '6px 0' }}>
+                        {r.image && (
+                          <img src={r.image} alt={r.name} style={{ width: 48, height: 48, objectFit: 'contain', flexShrink: 0 }} />
+                        )}
+                        <div style={{ flex: 1 }}>
+                          <div><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{r.grade}</span> {r.name}</div>
+                          <div style={{ fontSize: 12, color: '#00e5ff' }}>
+                            {r.atk ? `+${r.atk} ATK` : ''}
+                            {r.def ? ` / +${r.def} DEF` : ''}
+                            {r.dodge ? ` / +${r.dodge} Dodge` : ''}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                    <div style={{ fontSize: 11, color: '#f5a623', marginTop: 6 }}>[Drop source: belum ditentukan]</div>
+                  </div>
                 </>
               )}
 
@@ -770,6 +790,26 @@ export default function LibraryModal({ onClose }) {
                         <span style={{ color: '#00e5ff' }}>+{w.atk} ATK</span>
                       </div>
                     ))}
+                  </div>
+
+                  <div style={styles.itemCard}>
+                    <div style={styles.itemTitle}>💍 Rings</div>
+                    {bionexGears.rings.map((r, i) => (
+                      <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10, borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '6px 0' }}>
+                        {r.image && (
+                          <img src={r.image} alt={r.name} style={{ width: 48, height: 48, objectFit: 'contain', flexShrink: 0 }} />
+                        )}
+                        <div style={{ flex: 1 }}>
+                          <div><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{r.grade}</span> {r.name}</div>
+                          <div style={{ fontSize: 12, color: '#00e5ff' }}>
+                            {r.atk ? `+${r.atk} ATK` : ''}
+                            {r.def ? ` / +${r.def} DEF` : ''}
+                            {r.dodge ? ` / +${r.dodge} Dodge` : ''}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                    <div style={{ fontSize: 11, color: '#f5a623', marginTop: 6 }}>[Drop source: belum ditentukan]</div>
                   </div>
                 </>
               )}
@@ -836,6 +876,26 @@ export default function LibraryModal({ onClose }) {
                       </div>
                     ))}
                   </div>
+
+                  <div style={styles.itemCard}>
+                    <div style={styles.itemTitle}>💍 Rings</div>
+                    {celestraGears.rings.map((r, i) => (
+                      <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10, borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '6px 0' }}>
+                        {r.image && (
+                          <img src={r.image} alt={r.name} style={{ width: 48, height: 48, objectFit: 'contain', flexShrink: 0 }} />
+                        )}
+                        <div style={{ flex: 1 }}>
+                          <div><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{r.grade}</span> {r.name}</div>
+                          <div style={{ fontSize: 12, color: '#00e5ff' }}>
+                            {r.atk ? `+${r.atk} ATK` : ''}
+                            {r.def ? ` / +${r.def} DEF` : ''}
+                            {r.dodge ? ` / +${r.dodge} Dodge` : ''}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                    <div style={{ fontSize: 11, color: '#f5a623', marginTop: 6 }}>[Drop source: belum ditentukan]</div>
+                  </div>
                 </>
               )}
 
@@ -852,13 +912,23 @@ export default function LibraryModal({ onClose }) {
                   </div>
 
                   <div style={styles.itemCard}>
-                    <div style={styles.itemTitle}>💍 Rings Database (ATK & Crit)</div>
-                    {accessoriesData.rings.map((w, i) => (
-                      <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
-                        <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
-                        <span style={{ color: '#00e5ff' }}>+{w.atk} ATK / +{w.critical}% Crit</span>
+                    <div style={styles.itemTitle}>💍 Rings (Universal — All Factions)</div>
+                    {accessoriesData.rings.map((r, i) => (
+                      <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10, borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '6px 0' }}>
+                        {r.image && (
+                          <img src={r.image} alt={r.name} style={{ width: 48, height: 48, objectFit: 'contain', flexShrink: 0 }} />
+                        )}
+                        <div style={{ flex: 1 }}>
+                          <div><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{r.grade}</span> {r.name}</div>
+                          <div style={{ fontSize: 12, color: '#00e5ff' }}>
+                            {r.atk ? `+${r.atk} ATK` : ''}
+                            {r.def ? ` / +${r.def} DEF` : ''}
+                            {r.dodge ? ` / +${r.dodge} Dodge` : ''}
+                          </div>
+                        </div>
                       </div>
                     ))}
+                    <div style={{ fontSize: 11, color: '#f5a623', marginTop: 6 }}>[Drop source: belum ditentukan]</div>
                   </div>
 
                   <div style={styles.itemCard}>

@@ -157,6 +157,48 @@
       }
     ]
   },
+  "rings": [
+    {
+      "id": "rng_arc_0",
+      "name": "Ember Core Ring",
+      "grade": "Common",
+      "image": "/assets/arctron/rings/rng_arc_0.png",
+      "atk": 8
+    },
+    {
+      "id": "rng_arc_1",
+      "name": "Voidsteel Ring",
+      "grade": "Uncommon",
+      "image": "/assets/arctron/rings/rng_arc_1.png",
+      "atk": 12,
+      "def": 6
+    },
+    {
+      "id": "rng_arc_2",
+      "name": "Cryo Matrix Ring",
+      "grade": "Rare",
+      "image": "/assets/arctron/rings/rng_arc_2.png",
+      "atk": 15,
+      "dodge": 8
+    },
+    {
+      "id": "rng_arc_3",
+      "name": "Bloodforge Ring",
+      "grade": "Epic",
+      "image": "/assets/arctron/rings/rng_arc_3.png",
+      "atk": 20,
+      "def": 10
+    },
+    {
+      "id": "rng_arc_4",
+      "name": "Draconis Talon Ring",
+      "grade": "Legendary",
+      "image": "/assets/arctron/rings/rng_arc_4.png",
+      "atk": 28,
+      "def": 15,
+      "dodge": 12
+    }
+  ],
   "armorSets": [
     {
       "id": "set_arc_0",

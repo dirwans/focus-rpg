@@ -1,4 +1,47 @@
 {
+  "rings": [
+    {
+      "id": "rng_cor_0",
+      "name": "Bloodthorn Cuff",
+      "grade": "Common",
+      "image": "/assets/celestra/rings/rng_cor_0.png",
+      "atk": 8
+    },
+    {
+      "id": "rng_cor_1",
+      "name": "Ruby Ember Ring",
+      "grade": "Uncommon",
+      "image": "/assets/celestra/rings/rng_cor_1.png",
+      "atk": 10,
+      "dodge": 6
+    },
+    {
+      "id": "rng_cor_2",
+      "name": "Sapphire Ward Ring",
+      "grade": "Rare",
+      "image": "/assets/celestra/rings/rng_cor_2.png",
+      "atk": 14,
+      "dodge": 10
+    },
+    {
+      "id": "rng_cor_3",
+      "name": "Solaris Crest Ring",
+      "grade": "Epic",
+      "image": "/assets/celestra/rings/rng_cor_3.png",
+      "atk": 18,
+      "def": 8,
+      "dodge": 10
+    },
+    {
+      "id": "rng_cor_4",
+      "name": "Amber Talon Cuff",
+      "grade": "Legendary",
+      "image": "/assets/celestra/rings/rng_cor_4.png",
+      "atk": 26,
+      "def": 12,
+      "dodge": 16
+    }
+  ],
   "sentinel": {
     "weapons": [
       {

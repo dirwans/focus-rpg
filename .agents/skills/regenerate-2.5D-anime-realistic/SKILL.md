@@ -57,10 +57,12 @@ To prevent wasting paid API tokens/credits on incorrect model interpretations:
 1. **Never batch-generate paid assets blindly**. 
 2. Before sending any paid API requests (OpenRouter/Endpoint 2), the agent **must**:
    - Open and analyze the target reference image using the agent's vision capabilities.
-   - Write a detailed visual breakdown in the chat:
-     - **Component Structure**: (e.g., collar type, sleeve length, plate layout).
-     - **Exact Color Placement**: (e.g., base color, trim color, highlight placement).
-     - **Silhouette & Pattern Complexity**: (e.g., simple flat design, minimal decals).
-   - Draft a highly restrictive prompt based on this analysis, specifically mandating a plain, flat, non-complex 2.5D anime style.
+   - Write a detailed **Vision Object Identification Blueprint** in the chat using this format:
+     *   **Object Type**: (e.g., Helmet/Circlet, Chestplate, Boots, Gloves, Weapon-Staff, Monster-Dragon).
+     *   **Appearance Tier**: (e.g., Low-level / Starter gear / Simple / Plain VS High-level / Advanced / Elaborate / Glowing).
+     *   **Shape & Silhouette**: (e.g., Simple flat headband with wings, high collar, rectangular chest panel).
+     *   **Color Tone & Distribution**: (e.g., Predominantly white and brown leather, silver metal, glowing cyan energy accents).
+   - Draft a highly restrictive prompt based on this blueprint, specifically mandating a plain, flat, non-complex 2.5D anime style with clean outlines.
 3. The agent must wait for the user to explicitly confirm ("Gasss", "Setuju", or feedback) before invoking the script.
+
 
