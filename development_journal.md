@@ -970,6 +970,15 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 - **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
 - **Verification**: Verified that `npm run build` succeeds locally.
 
+---
+
+### 🎨 Milestone 67: Bionex Psion Tier Assets Regeneration (Lv.32 & Lv.42 Sets) [DEPLOYED]
+- **Assets**: Regenerated 10 mecha armor pieces (Bionex Psion Level 32 and Level 42 sets: `helmet`, `armor`, `pants`, `boots`, `gloves`) using the `/regenerate-2.5D-anime-realistic` custom skill to fit the golden/bronze cybernetic mecha theme with glowing neon-blue psionic energy lines.
+- **Post-processing**: Ran the script `process_gears.py` to remove backgrounds, crop, center/pad, and resize to 320x320 transparent PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
+- **Verification**: Verified that `npm run build` succeeds locally.
+
+
 
 
 
