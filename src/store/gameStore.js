@@ -104,7 +104,7 @@ const TECHNICIAN_JOBS = [
 // through to `item.image` (no dedicated per-tier sprite).
 const ARMOR_SET_LINEAGES = {
   arctron: ['warrior', 'ranger', 'technician'],
-  bionex: ['warrior', 'marksman', 'mage'],
+  bionex: ['warrior', 'marksman', 'psion'],
   celestra: ['warrior', 'ranger', 'mage']
 }
 
@@ -117,6 +117,12 @@ function resolveArmorSetImage(slot, playerRace, playerJob, level) {
     : BOW_JOBS.includes(playerJob) ? 'ranger'
     : STAFF_JOBS.includes(playerJob) ? 'mage'
     : null
+  if (playerRace === 'bionex' && lineage === 'mage') {
+    lineage = 'psion'
+  }
+  if (playerRace === 'bionex' && lineage === 'mage') {
+    lineage = 'psion'
+  }
   if (playerRace === 'bionex' && (lineage === 'technician' || lineage === 'ranger')) {
     lineage = 'marksman'
   }

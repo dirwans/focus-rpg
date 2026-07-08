@@ -22830,8 +22830,8 @@
       "image": "/assets/armor_bionex/defbionexmarksmanlv66boots.png"
     },
     {
-      "id": "helmet_armorset_bionex_mage_lv1",
-      "name": "[C] Lv.1 Bionex Mage Helm",
+      "id": "helmet_armorset_bionex_psion_lv1",
+      "name": "[C] Lv.1 Bionex Psion Helm",
       "emoji": "\ud83e\ude96",
       "rarity": "C",
       "type": "helmet",
@@ -22846,11 +22846,11 @@
       "bonus": {
         "def": 5
       },
-      "image": "/assets/armor_bionex/defbionexmagelv1helmet.png"
+      "image": "/assets/armor_bionex/defbionexpsionlv1helmet.png"
     },
     {
-      "id": "armor_armorset_bionex_mage_lv1",
-      "name": "[C] Lv.1 Bionex Mage Plate",
+      "id": "armor_armorset_bionex_psion_lv1",
+      "name": "[C] Lv.1 Bionex Psion Plate",
       "emoji": "\ud83e\uddbe",
       "rarity": "C",
       "type": "armor",
@@ -22865,11 +22865,11 @@
       "bonus": {
         "def": 6
       },
-      "image": "/assets/armor_bionex/defbionexmagelv1armor.png"
+      "image": "/assets/armor_bionex/defbionexpsionlv1armor.png"
     },
     {
-      "id": "pants_armorset_bionex_mage_lv1",
-      "name": "[C] Lv.1 Bionex Mage Legguard",
+      "id": "pants_armorset_bionex_psion_lv1",
+      "name": "[C] Lv.1 Bionex Psion Legguard",
       "emoji": "\ud83d\udc56",
       "rarity": "C",
       "type": "pants",
@@ -22884,11 +22884,11 @@
       "bonus": {
         "def": 6
       },
-      "image": "/assets/armor_bionex/defbionexmagelv1pants.png"
+      "image": "/assets/armor_bionex/defbionexpsionlv1pants.png"
     },
     {
-      "id": "gloves_armorset_bionex_mage_lv1",
-      "name": "[C] Lv.1 Bionex Mage Gauntlets",
+      "id": "gloves_armorset_bionex_psion_lv1",
+      "name": "[C] Lv.1 Bionex Psion Gauntlets",
       "emoji": "\ud83e\udde4",
       "rarity": "C",
       "type": "gloves",
@@ -22904,11 +22904,11 @@
         "def": 4,
         "atk": 3
       },
-      "image": "/assets/armor_bionex/defbionexmagelv1gloves.png"
+      "image": "/assets/armor_bionex/defbionexpsionlv1gloves.png"
     },
     {
-      "id": "boots_armorset_bionex_mage_lv1",
-      "name": "[C] Lv.1 Bionex Mage Greaves",
+      "id": "boots_armorset_bionex_psion_lv1",
+      "name": "[C] Lv.1 Bionex Psion Greaves",
       "emoji": "\ud83d\udc62",
       "rarity": "C",
       "type": "boots",
@@ -22923,11 +22923,11 @@
       "bonus": {
         "def": 4
       },
-      "image": "/assets/armor_bionex/defbionexmagelv1boots.png"
+      "image": "/assets/armor_bionex/defbionexpsionlv1boots.png"
     },
     {
-      "id": "helmet_armorset_bionex_mage_lv32",
-      "name": "[C] Lv.32 Bionex Mage Helm",
+      "id": "helmet_armorset_bionex_psion_lv32",
+      "name": "[C] Lv.32 Bionex Psion Helm",
       "emoji": "\ud83e\ude96",
       "rarity": "C",
       "type": "helmet",
@@ -22942,11 +22942,11 @@
       "bonus": {
         "def": 148
       },
-      "image": "/assets/armor_bionex/defbionexmagelv32helmet.png"
+      "image": "/assets/armor_bionex/defbionexpsionlv32helmet.png"
     },
     {
-      "id": "armor_armorset_bionex_mage_lv32",
-      "name": "[C] Lv.32 Bionex Mage Plate",
+      "id": "armor_armorset_bionex_psion_lv32",
+      "name": "[C] Lv.32 Bionex Psion Plate",
       "emoji": "\ud83e\uddbe",
       "rarity": "C",
       "type": "armor",
@@ -22961,11 +22961,11 @@
       "bonus": {
         "def": 175
       },
-      "image": "/assets/armor_bionex/defbionexmagelv32armor.png"
+      "image": "/assets/armor_bionex/defbionexpsionlv32armor.png"
     },
     {
-      "id": "pants_armorset_bionex_mage_lv32",
-      "name": "[C] Lv.32 Bionex Mage Legguard",
+      "id": "pants_armorset_bionex_psion_lv32",
+      "name": "[C] Lv.32 Bionex Psion Legguard",
       "emoji": "\ud83d\udc56",
       "rarity": "C",
       "type": "pants",
@@ -22981,11 +22981,11 @@
         "def": 163,
         "hp": 2038
       },
-      "image": "/assets/armor_bionex/defbionexmagelv32pants.png"
+      "image": "/assets/armor_bionex/defbionexpsionlv32pants.png"
     },
     {
-      "id": "gloves_armorset_bionex_mage_lv32",
-      "name": "[C] Lv.32 Bionex Mage Gauntlets",
+      "id": "gloves_armorset_bionex_psion_lv32",
+      "name": "[C] Lv.32 Bionex Psion Gauntlets",
       "emoji": "\ud83e\udde4",
       "rarity": "C",
       "type": "gloves",
@@ -23001,11 +23001,11 @@
         "def": 131,
         "atk": 58
       },
-      "image": "/assets/armor_bionex/defbionexmagelv32gloves.png"
+      "image": "/assets/armor_bionex/defbionexpsionlv32gloves.png"
     },
     {
-      "id": "boots_armorset_bionex_mage_lv32",
-      "name": "[C] Lv.32 Bionex Mage Greaves",
+      "id": "boots_armorset_bionex_psion_lv32",
+      "name": "[C] Lv.32 Bionex Psion Greaves",
       "emoji": "\ud83d\udc62",
       "rarity": "C",
       "type": "boots",
@@ -23020,11 +23020,11 @@
       "bonus": {
         "def": 123
       },
-      "image": "/assets/armor_bionex/defbionexmagelv32boots.png"
+      "image": "/assets/armor_bionex/defbionexpsionlv32boots.png"
     },
     {
-      "id": "helmet_armorset_bionex_mage_lv42",
-      "name": "[C] Lv.42 Bionex Mage Helm",
+      "id": "helmet_armorset_bionex_psion_lv42",
+      "name": "[C] Lv.42 Bionex Psion Helm",
       "emoji": "\ud83e\ude96",
       "rarity": "C",
       "type": "helmet",
@@ -23039,11 +23039,11 @@
       "bonus": {
         "def": 196
       },
-      "image": "/assets/armor_bionex/defbionexmagelv42helmet.png"
+      "image": "/assets/armor_bionex/defbionexpsionlv42helmet.png"
     },
     {
-      "id": "armor_armorset_bionex_mage_lv42",
-      "name": "[C] Lv.42 Bionex Mage Plate",
+      "id": "armor_armorset_bionex_psion_lv42",
+      "name": "[C] Lv.42 Bionex Psion Plate",
       "emoji": "\ud83e\uddbe",
       "rarity": "C",
       "type": "armor",
@@ -23058,11 +23058,11 @@
       "bonus": {
         "def": 232
       },
-      "image": "/assets/armor_bionex/defbionexmagelv42armor.png"
+      "image": "/assets/armor_bionex/defbionexpsionlv42armor.png"
     },
     {
-      "id": "pants_armorset_bionex_mage_lv42",
-      "name": "[C] Lv.42 Bionex Mage Legguard",
+      "id": "pants_armorset_bionex_psion_lv42",
+      "name": "[C] Lv.42 Bionex Psion Legguard",
       "emoji": "\ud83d\udc56",
       "rarity": "C",
       "type": "pants",
@@ -23078,11 +23078,11 @@
         "def": 216,
         "hp": 2700
       },
-      "image": "/assets/armor_bionex/defbionexmagelv42pants.png"
+      "image": "/assets/armor_bionex/defbionexpsionlv42pants.png"
     },
     {
-      "id": "gloves_armorset_bionex_mage_lv42",
-      "name": "[C] Lv.42 Bionex Mage Gauntlets",
+      "id": "gloves_armorset_bionex_psion_lv42",
+      "name": "[C] Lv.42 Bionex Psion Gauntlets",
       "emoji": "\ud83e\udde4",
       "rarity": "C",
       "type": "gloves",
@@ -23098,11 +23098,11 @@
         "def": 173,
         "atk": 79
       },
-      "image": "/assets/armor_bionex/defbionexmagelv42gloves.png"
+      "image": "/assets/armor_bionex/defbionexpsionlv42gloves.png"
     },
     {
-      "id": "boots_armorset_bionex_mage_lv42",
-      "name": "[C] Lv.42 Bionex Mage Greaves",
+      "id": "boots_armorset_bionex_psion_lv42",
+      "name": "[C] Lv.42 Bionex Psion Greaves",
       "emoji": "\ud83d\udc62",
       "rarity": "C",
       "type": "boots",
@@ -23117,11 +23117,11 @@
       "bonus": {
         "def": 163
       },
-      "image": "/assets/armor_bionex/defbionexmagelv42boots.png"
+      "image": "/assets/armor_bionex/defbionexpsionlv42boots.png"
     },
     {
-      "id": "helmet_armorset_bionex_mage_lv55",
-      "name": "[C] Lv.55 Bionex Mage Helm",
+      "id": "helmet_armorset_bionex_psion_lv55",
+      "name": "[C] Lv.55 Bionex Psion Helm",
       "emoji": "\ud83e\ude96",
       "rarity": "C",
       "type": "helmet",
@@ -23136,11 +23136,11 @@
       "bonus": {
         "def": 258
       },
-      "image": "/assets/armor_bionex/defbionexmagelv55helmet.png"
+      "image": "/assets/armor_bionex/defbionexpsionlv55helmet.png"
     },
     {
-      "id": "armor_armorset_bionex_mage_lv55",
-      "name": "[C] Lv.55 Bionex Mage Plate",
+      "id": "armor_armorset_bionex_psion_lv55",
+      "name": "[C] Lv.55 Bionex Psion Plate",
       "emoji": "\ud83e\uddbe",
       "rarity": "C",
       "type": "armor",
@@ -23155,11 +23155,11 @@
       "bonus": {
         "def": 305
       },
-      "image": "/assets/armor_bionex/defbionexmagelv55armor.png"
+      "image": "/assets/armor_bionex/defbionexpsionlv55armor.png"
     },
     {
-      "id": "pants_armorset_bionex_mage_lv55",
-      "name": "[C] Lv.55 Bionex Mage Legguard",
+      "id": "pants_armorset_bionex_psion_lv55",
+      "name": "[C] Lv.55 Bionex Psion Legguard",
       "emoji": "\ud83d\udc56",
       "rarity": "C",
       "type": "pants",
@@ -23175,11 +23175,11 @@
         "def": 284,
         "hp": 3516
       },
-      "image": "/assets/armor_bionex/defbionexmagelv55pants.png"
+      "image": "/assets/armor_bionex/defbionexpsionlv55pants.png"
     },
     {
-      "id": "gloves_armorset_bionex_mage_lv55",
-      "name": "[C] Lv.55 Bionex Mage Gauntlets",
+      "id": "gloves_armorset_bionex_psion_lv55",
+      "name": "[C] Lv.55 Bionex Psion Gauntlets",
       "emoji": "\ud83e\udde4",
       "rarity": "C",
       "type": "gloves",
@@ -23195,11 +23195,11 @@
         "def": 228,
         "atk": 107
       },
-      "image": "/assets/armor_bionex/defbionexmagelv55gloves.png"
+      "image": "/assets/armor_bionex/defbionexpsionlv55gloves.png"
     },
     {
-      "id": "boots_armorset_bionex_mage_lv55",
-      "name": "[C] Lv.55 Bionex Mage Greaves",
+      "id": "boots_armorset_bionex_psion_lv55",
+      "name": "[C] Lv.55 Bionex Psion Greaves",
       "emoji": "\ud83d\udc62",
       "rarity": "C",
       "type": "boots",
@@ -23214,11 +23214,11 @@
       "bonus": {
         "def": 215
       },
-      "image": "/assets/armor_bionex/defbionexmagelv55boots.png"
+      "image": "/assets/armor_bionex/defbionexpsionlv55boots.png"
     },
     {
-      "id": "helmet_armorset_bionex_mage_lv66",
-      "name": "[C] Lv.66 Bionex Mage Helm",
+      "id": "helmet_armorset_bionex_psion_lv66",
+      "name": "[C] Lv.66 Bionex Psion Helm",
       "emoji": "\ud83e\ude96",
       "rarity": "C",
       "type": "helmet",
@@ -23233,11 +23233,11 @@
       "bonus": {
         "def": 320
       },
-      "image": "/assets/armor_bionex/defbionexmagelv66helmet.png"
+      "image": "/assets/armor_bionex/defbionexpsionlv66helmet.png"
     },
     {
-      "id": "armor_armorset_bionex_mage_lv66",
-      "name": "[C] Lv.66 Bionex Mage Plate",
+      "id": "armor_armorset_bionex_psion_lv66",
+      "name": "[C] Lv.66 Bionex Psion Plate",
       "emoji": "\ud83e\uddbe",
       "rarity": "C",
       "type": "armor",
@@ -23252,11 +23252,11 @@
       "bonus": {
         "def": 379
       },
-      "image": "/assets/armor_bionex/defbionexmagelv66armor.png"
+      "image": "/assets/armor_bionex/defbionexpsionlv66armor.png"
     },
     {
-      "id": "pants_armorset_bionex_mage_lv66",
-      "name": "[C] Lv.66 Bionex Mage Legguard",
+      "id": "pants_armorset_bionex_psion_lv66",
+      "name": "[C] Lv.66 Bionex Psion Legguard",
       "emoji": "\ud83d\udc56",
       "rarity": "C",
       "type": "pants",
@@ -23272,11 +23272,11 @@
         "def": 352,
         "hp": 4332
       },
-      "image": "/assets/armor_bionex/defbionexmagelv66pants.png"
+      "image": "/assets/armor_bionex/defbionexpsionlv66pants.png"
     },
     {
-      "id": "gloves_armorset_bionex_mage_lv66",
-      "name": "[C] Lv.66 Bionex Mage Gauntlets",
+      "id": "gloves_armorset_bionex_psion_lv66",
+      "name": "[C] Lv.66 Bionex Psion Gauntlets",
       "emoji": "\ud83e\udde4",
       "rarity": "C",
       "type": "gloves",
@@ -23292,11 +23292,11 @@
         "def": 282,
         "atk": 134
       },
-      "image": "/assets/armor_bionex/defbionexmagelv66gloves.png"
+      "image": "/assets/armor_bionex/defbionexpsionlv66gloves.png"
     },
     {
-      "id": "boots_armorset_bionex_mage_lv66",
-      "name": "[C] Lv.66 Bionex Mage Greaves",
+      "id": "boots_armorset_bionex_psion_lv66",
+      "name": "[C] Lv.66 Bionex Psion Greaves",
       "emoji": "\ud83d\udc62",
       "rarity": "C",
       "type": "boots",
@@ -23311,7 +23311,7 @@
       "bonus": {
         "def": 267
       },
-      "image": "/assets/armor_bionex/defbionexmagelv66boots.png"
+      "image": "/assets/armor_bionex/defbionexpsionlv66boots.png"
     },
     {
       "id": "helmet_armorset_celestra_lv1",

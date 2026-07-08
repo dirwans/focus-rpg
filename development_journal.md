@@ -884,3 +884,70 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - Updated `ARMOR_SET_LINEAGES` in `src/store/gameStore.js` to refer to `marksman` instead of `ranger` for the Bionex race.
   - Refactored `resolveArmorSetImage` and `verifyStarterArmorSet` in `src/store/gameStore.js` to map Bionex Specialist/Marksman to `marksman` mecha set assets and item IDs.
 - **Verification**: Verified that the production client builds successfully with zero errors.
+
+---
+
+### 🔍 Milestone 58: Bionex Ranger→Marksman Rename Verification Pass [DEPLOYED]
+- **Context**: User asked to double-check that Milestone 57's rename was complete across the entire platform, including scripts and asset filenames — not just the main code paths.
+- **Audit**: Searched all of `src/`, `public/`, and `server.js` for any remaining `bionex_ranger`/`bionex-ranger`/`bionexranger` text or filenames.
+- **Found 2 residual items** M57 missed:
+  1. `src/components/TransparentSprite.jsx` — an internal variable was still named `isBionexRanger` even though its check already correctly read `src.includes('bionex_marksman')`. Cosmetic only (didn't affect behavior), renamed to `isBionexMarksman` for consistency.
+  2. `src/assets/bionex_ranger.png` — an orphaned, unreferenced duplicate portrait file (superseded by the `bionex_ranger_female.png`/`bionex_ranger_male.png` → `bionex_marksman_*` split done in M57). Confirmed zero references anywhere in `src/`, then deleted via `git rm`.
+- **Verification**: Confirmed zero remaining `bionex_ranger`/`bionex-ranger` matches anywhere in `src/`, `public/`, or `server.js` (excluding stale Android Gradle build-output artifacts under `android/app/build/` and `android/app/src/main/assets/`, which regenerate on next native build sync and aren't hand-maintained source). `npm run build` passes.
+
+---
+
+### 🛡️ Milestone 59: Shield Sprites — Ruler-Line Removal + Fit-to-Frame Fix (All 3 Factions) [DEPLOYED]
+- **Bug**: User reported shields across all factions still rendered tiny in the Cargo/Inventory gear slots even after M49's 320×320 normalization pass. Root cause: several shield source images (`lv1/lv32/lv55` Bionex & Celestra, `lv10` Arctron) contained a leftover 1–4px-thick, near-full-canvas-width straight line artifact — almost certainly a stray reference/ruler guide left over from the original asset-extraction tool — that got included in the tight-crop bounding box, making the actual shield content occupy only 15–19% of the padded square (squareness as low as 0.18). One file (`lv42arctronshielddef.png`) had the line *fused directly onto* the shield's main silhouette (touching pixels, same connected component), so it couldn't be isolated by simple connected-component removal.
+- **Fix**: Rebuilt the shield pipeline from the clean git HEAD (post-M49) source for all 14 shield files (3 factions × ~4–5 tiers): applied morphological opening (5×5 structuring element — erode then dilate) to strip any line/stroke thinner than 5px while preserving solid shield silhouettes, even when fused to the main shape; dropped any surviving fragment under 15% of the largest remaining blob's size (stray watermark/badge specks); then ran the same rotation-search-to-maximize-squareness technique from M47/M50, tight-crop, 10% pad, LANCZOS resize to 320×320.
+- **Result**: Squareness now 0.94–1.0 across all 14 files (up from as low as 0.18). All shields now occupy a consistent, prominent proportion of their gear slot, matching armor/weapon icon scale.
+- **Trade-off noted**: The 5px opening kernel that reliably strips the ruler-line also nibbles at a few very fine (<5px) decorative highlight strokes on some ornate shield designs, leaving faint speckle/pepper-noise texture on 2–3 files (e.g. `lv1bionexshielddefault.png`, `lv42celesshielddef.png`). Still clearly readable; considered an acceptable trade-off versus the much larger "shield looks tiny" complaint. Flagged here in case a future higher-fidelity re-pass is wanted.
+
+---
+
+### 🎨 Milestone 60: Bionex Marksman Tier Assets Regeneration (Lv.55 Set & Lv.42 Pants) [DEPLOYED]
+- **Assets**: Regenerated 5 pieces of Bionex Marksman mecha armor set: Level 55 helmet, armor, boots, and gloves, alongside the Level 42 pants. Hand-detailed to match the premium 2.5D anime style of the Bionex Warrior Level 1 set with smooth, clean outlines, carbon-fiber armor paneling, and neon cyan/blue glowing lines.
+- **Post-processing**: Created and ran `scratch/process_marksman_gears.py` utilizing `rembg` background removal, tight cropping to bounding box, padding to a square canvas with a 10% safety margin to ensure no clipping, and LANCZOS-resizing to exactly 320x320 transparent PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
+- **Verification**: Verified the processed images are transparent, centered, and correctly sized, and that `npm run build` succeeds locally.
+
+---
+
+### 🎨 Milestone 61: Bionex Mage Tier Assets Regeneration (Lv.55 Set) [DEPLOYED]
+- **Assets**: Regenerated all 5 pieces of the Bionex Mage mecha armor set (Level 55 helmet, armor, pants, boots, and gloves) using the `/regenerate-2.5D-anime-realistic` custom skill. The gear set is customized for a caster/psion archetype with gold/bronze mecha casing, dark grey plating, and glowing energy channels, matching the premium 2.5D anime style.
+- **Post-processing**: Ran the script `process_gears.py` located inside the skill's `scripts/` directory, which strips backgrounds using `rembg`, crops to content boundaries, centers and pads to square canvas (10% padding), and resizes to 320x320 transparent PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
+- **Verification**: Verified the processed images are transparent, centered, and correctly sized, and that `npm run build` succeeds locally.
+
+---
+
+### 🛠️ Milestone 62: Bionex Mage to Bionex Psion Rename and Alignment [DEPLOYED]
+- **Requirement**: Rename all occurrences of "Bionex Mage" or "bionex_mage" to "Bionex Psion" or "bionex_psion" to align with the official starting job name `psion` in `jobs.json`.
+- **Asset Renames**: Renamed 50 mecha armor set `.png` files (25 in `public/assets/armor_bionex/` and 25 in `src/assets/armor_bionex/`) from `defbionexmagelv*.png` to `defbionexpsionlv*.png`.
+- **Database & Code Updates**:
+  - Ran `scratch/rename_bionex_mage.py` to automate remapping IDs and names from `bionex_mage` to `bionex_psion` and asset paths from `defbionexmagelv` to `defbionexpsionlv` inside `items.json`.
+  - Updated `ARMOR_SET_LINEAGES` and `resolveArmorSetImage` in `src/store/gameStore.js` to map Bionex Mage to the `psion` lineage group.
+  - Refactored `CLASS_NAMES` in `src/screens/Unit.jsx`, `src/screens/Unit_orig.jsx`, and `src/screens/Main.jsx` to output `Psion` instead of `Mage` for the Bionex race.
+  - Updated the newly created skill description (`SKILL.md`) and the generated artifact walkthrough (`walkthrough.md`) to use Bionex Psion nomenclature.
+- **Verification**: Verified that the production client builds successfully with zero errors.
+
+---
+
+### 🎨 Milestone 63: Bionex Marksman Tier Assets Regeneration (Lv.66 Set & Lv.55 Pants) [DEPLOYED]
+- **Assets**: Regenerated 6 pieces of Bionex Marksman mecha armor set: Level 66 set (helmet, armor, boots, gloves, pants) and Level 55 pants. Hand-detailed to match the ultimate endgame mecha aesthetic with sleek carbon fiber panels, detailed energy tubes, and neon cyan/blue glowing lines.
+- **Post-processing**: Ran the script `process_gears.py` located inside the skill's `scripts/` directory, which strips backgrounds using `rembg`, crops to content boundaries, centers and pads to square canvas (10% padding), and resizes to 320x320 transparent PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
+- **Verification**: Verified the processed images are transparent, centered, and correctly sized, and that `npm run build` succeeds locally.
+
+---
+
+### 🎨 Milestone 64: Bionex Marksman Tier Assets Regeneration (Lv.42 Partial Set) [DEPLOYED]
+- **Assets**: Regenerated 2 of the 5 pieces of the Bionex Marksman Level 42 mecha armor set (`helmet`, `armor`) using the `/regenerate-2.5D-anime-realistic` custom skill to match the style of the Bionex Warrior Level 1 set with smooth edges, carbon fiber casing, and glowing neon blue/cyan lines. The remaining 2 pieces (`boots`, `gloves`) are pending reset of the image generation API quota. Note that the `pants` piece was already regenerated in Milestone 60.
+- **Post-processing**: Ran the script `process_gears.py` located inside the skill's `scripts/` directory, which strips backgrounds using `rembg`, crops to content boundaries, centers and pads to square canvas (10% padding), and resizes to 320x320 transparent PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
+- **Verification**: Verified the processed images are transparent, centered, and correctly sized, and that `npm run build` succeeds locally.
+
+
+
+
+
