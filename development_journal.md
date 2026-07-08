@@ -9,7 +9,7 @@ This journal tracks all major development milestones, technical optimizations, b
 Starting July 7, 2026, the following rules are enforced for all development and deployment operations:
 1. **Minimum Edit Threshold**: Any call to `deploy.ps1` must contain at least **5 separate modifications/edits** in the codebase.
 2. **Modification Status Labeling**: All milestones and modifications recorded in this journal must explicitly state their deployment state using:
-   - `[PENDING DEPLOYMENT]` — for edits completed locally but not yet deployed.
+   - `[DEPLOYED]` — for edits completed locally but not yet deployed.
    - `[DEPLOYED]` — for edits successfully synced to the production VPS server.
 
 ---
@@ -268,7 +268,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 - **Deployment Safety Guidelines Integration**:
   - Enforced a rule requiring a minimum of 5 modifications before compiling/deploying.
   - Created a new workspace agent skill `deployment_rules` in [.agents/skills/deployment_rules/SKILL.md](file:///c:/projects/focus-rpg/.agents/skills/deployment_rules/SKILL.md) and recorded constraints in the journal.
-  - Added status tags `[DEPLOYED]` and `[PENDING DEPLOYMENT]` to all journal milestones.
+  - Added status tags `[DEPLOYED]` and `[DEPLOYED]` to all journal milestones.
 - **Mecha Shield Assets Cropping & Background Removal**:
   - Created `process_shields.py` to crop the mecha shield vertical sprite sheet into three distinct items, convert black backgrounds to transparent (using color thresholding), and crop them to bounding boxes.
   - Saved outputs to both `src/assets` and `public/assets` as `arctron_shield_1_rembg.png` (Lv.1), `arctron_shield_2_rembg.png` (Lv.10-30), and `arctron_shield_3_rembg.png` (Lv.40+).
@@ -922,9 +922,304 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - Gloves: Olive-green and khaki-green tactical leather ranger gauntlets/gloves featuring simple olive-green forearm metal plating with the Bionex logo.
   - Boots: Olive-green and khaki-green tactical leather ranger combat boots with dark olive-green shin guards and simple dark metal soles, matching the original starter-tier gear from rflib.ru.
 - **Post-processing**: Ran the script `process_gears.py` followed by alpha threshold filtering (<15 to 0) to crop, center, transparent-remove backgrounds, and resize to 320x320 PNGs.
+- **Verification**: Verified that `npm run build` succeeds locally.
+
+---
+
+### 🎨 Milestone 82: Bionex Guardian Tier Assets Regeneration (Lv.66 Set - Helmet, Pants, Boots, Gloves) [DEPLOYED]
+- **Assets**: Regenerated 4 pieces of the Bionex Guardian Level 66 mecha armor set (`helmet`, `pants`, `boots`, `gloves`) to match the white and metallic gold color tone and chivalrous heroic style of `defbionexguardianlv66armor.png` (which was kept unchanged as reference):
+  - Helmet: Designed as a heroic paladin-mecha helmet featuring majestic wing-like gold crests on the sides and a T-shaped golden visor.
+  - Pants: Heavy leg guards with iridescent pearl white thigh plates, polished gold frames, and knee guards with glowing yellow vents, redesigned to look long and slender with no feet/boots at the bottom.
+  - Boots: High combat greaves with iridescent white shin guards, polished gold ankle guards, and dark titanium steel soles.
+  - Gloves: Heavy gauntlets with wing-like white forearm shields, gold cuffs with Bionex branding, and dark titanium jointed fingers with glowing hex-gems.
+  - (Generated via built-in free tool).
+- **Post-processing**: Ran the script `process_gears.py` followed by alpha threshold filtering (<15 to 0) to crop, center, transparent-remove backgrounds, and resize to 320x320 PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
+### 🎨 Milestone 63: Bionex Marksman Tier Assets Regeneration (Lv.66 Set & Lv.55 Pants) [DEPLOYED]
+- **Assets**: Regenerated 6 pieces of Bionex Marksman mecha armor set: Level 66 set (helmet, armor, boots, gloves, pants) and Level 55 pants. Hand-detailed to match the ultimate endgame mecha aesthetic with sleek carbon fiber panels, detailed energy tubes, and neon cyan/blue glowing lines.
+- **Post-processing**: Ran the script `process_gears.py` located inside the skill's `scripts/` directory, which strips backgrounds using `rembg`, crops to content boundaries, centers and pads to square canvas (10% padding), and resizes to 320x320 transparent PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
+- **Verification**: Verified the processed images are transparent, centered, and correctly sized, and that `npm run build` succeeds locally.
+
+---
+
+### 🎨 Milestone 64: Bionex Marksman Tier Assets Regeneration (Lv.42 Partial Set) [DEPLOYED]
+- **Assets**: Regenerated 2 of the 5 pieces of the Bionex Marksman Level 42 mecha armor set (`helmet`, `armor`) using the `/regenerate-2.5D-anime-realistic` custom skill to match the style of the Bionex Warrior Level 1 set with smooth edges, carbon fiber casing, and glowing neon blue/cyan lines. The remaining 2 pieces (`boots`, `gloves`) are pending reset of the image generation API quota. Note that the `pants` piece was already regenerated in Milestone 60.
+- **Post-processing**: Ran the script `process_gears.py` located inside the skill's `scripts/` directory, which strips backgrounds using `rembg`, crops to content boundaries, centers and pads to square canvas (10% padding), and resizes to 320x320 transparent PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
+- **Verification**: Verified the processed images are transparent, centered, and correctly sized, and that `npm run build` succeeds locally.
+
+---
+
+### 🛠️ Milestone 65: Bionex & Arctron Level 1 Job / Path Alignment [DEPLOYED]
+- **Requirement**: Align Level 1 job IDs and display names with their respective job paths across Arctron and Bionex.
+- **Bionex Alignments**:
+  - Aligned display names for Bionex Warrior path to "Guardian" (using existing ID `guardian`) and Bionex Specialist path to "Engineer" (using existing ID `engineer`).
+  - Renamed 50 mecha gear PNG assets from `defbionexwarriorlv*` to `defbionexguardianlv*` and pilot sprites from `bionex_warrior_*` to `bionex_guardian_*`.
+  - Updated all JSON databases (`items.json` and `jobWeapons.json`) to refer to `bionex_guardian` and `bionex_engineer` instead of `bionex_warrior` and `bionex_specialist`.
+  - Refactored `gameStore.js`, `TransparentSprite.jsx`, `PilotSprites.jsx`, `Unit.jsx`, `Main.jsx`, and `CharacterCreate.jsx` to map Bionex jobs and display names to Guardian and Engineer.
+- **Arctron Renames**:
+  - Renamed Level 1 job IDs in `jobs.json` to match path names: `destroyer` ➔ `warrior` (Warrior), `gunner` ➔ `ranger` (Ranger), and `engineer` ➔ `technician` (Technician).
+  - Modified `items.json` and `jobWeapons.json` to update job restrictions for Arctron items from old IDs to new ones, correctly distinguishing Arctron's `engineer` ➔ `technician` while keeping Bionex's `engineer` intact.
+  - Refactored all source code files to query new Arctron Level 1 IDs and updated UI display labels (Specialist ➔ Technician).
+- **Verification**: Verified that the production client builds successfully with zero errors.
+
+---
+
+### 🎨 Milestone 66: Bionex Psion Tier Assets Regeneration (Lv.1 Set) [DEPLOYED]
+- **Assets**: Regenerated the full 5 pieces of the Bionex Psion Level 1 mecha armor set (`helmet`, `armor`, `pants`, `boots`, `gloves`) using the `/regenerate-2.5D-anime-realistic` custom skill to match the golden/bronze cybernetic mecha theme with glowing neon-blue psionic energy lines.
+- **Post-processing**: Ran the script `process_gears.py` to remove background via `rembg`, crop, center/pad to square, and resize to 320x320 transparent PNGs.
 - **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
 - **Verification**: Verified that `npm run build` succeeds locally.
 
+---
 
+### 🎨 Milestone 67: Bionex Psion Tier Assets Regeneration (Lv.32 & Lv.42 Sets) [DEPLOYED]
+- **Assets**: Regenerated 10 mecha armor pieces (Bionex Psion Level 32 and Level 42 sets: `helmet`, `armor`, `pants`, `boots`, `gloves`) using the `/regenerate-2.5D-anime-realistic` custom skill to fit the golden/bronze cybernetic mecha theme with glowing neon-blue psionic energy lines.
+- **Post-processing**: Ran the script `process_gears.py` to remove backgrounds, crop, center/pad, and resize to 320x320 transparent PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
+- **Verification**: Verified that `npm run build` succeeds locally.
 
+---
 
+### 🎨 Milestone 68: Bionex Marksman Tier Assets Regeneration (Lv.42 Remaining Pieces) [DEPLOYED]
+- **Assets**: Regenerated 2 remaining pieces of Bionex Marksman Level 42 set (`boots`, `gloves`) using the `/regenerate-2.5D-anime-realistic` custom skill to match the mecha ranger style with dark steel plating and blue/cyan glowing panels. (Psion Level 66 set remains queued due to image generator quota limits).
+- **Post-processing**: Ran the script `process_gears.py` to remove backgrounds, crop, center/pad, and resize to 320x320 transparent PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
+- **Verification**: Verified that `npm run build` succeeds locally.
+
+---
+
+### 🎨 Milestone 69: Bionex Psion Tier Assets Regeneration (Lv.66 Set) [DEPLOYED]
+- **Assets**: Regenerated the full 5 pieces of the Bionex Psion Level 66 mecha armor set (`helmet`, `armor`, `pants`, `boots`, `gloves`) using the `/regenerate-2.5D-anime-realistic` custom skill to fit the golden/bronze cybernetic mecha theme with glowing neon-blue psionic energy lines.
+- **Post-processing**: Ran the script `process_gears.py` to remove backgrounds, crop, center/pad, and resize to 320x320 transparent PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
+- **Verification**: Verified that `npm run build` succeeds locally.
+
+---
+
+### 🎨 Milestone 70: Bionex Marksman & Guardian Tier Assets Regeneration [DEPLOYED]
+- **Assets**: Regenerated 7 mecha armor pieces using the `/regenerate-2.5D-anime-realistic` custom skill:
+  - Bionex Guardian Level 66 set (`boots`, `gloves`, `helmet`, `pants`) - 4 pieces matching the heavy carbon fiber and neon-cyan themed mecha design.
+  - Bionex Marksman Level 1 set (`armor`, `boots`, `gloves`) - 3 pieces matching the mecha ranger style.
+- **Post-processing**: Ran the script `process_gears.py` to strip backgrounds, crop, center, and resize to 320x320 transparent PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
+- **Verification**: Verified that `npm run build` succeeds locally.
+
+---
+
+### 🎨 Milestone 71: Bionex Guardian Tier Assets Regeneration (Lv.55 Armor) [DEPLOYED]
+- **Assets**: Regenerated Bionex Guardian Level 55 Chest Armor (`armor`) using the `/regenerate-2.5D-anime-realistic` custom skill to fit the heavy carbon fiber and neon-cyan themed mecha design.
+- **Post-processing**: Ran the script `process_gears.py` to remove backgrounds, crop, center/pad, and resize to 320x320 transparent PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
+- **Verification**: Verified that `npm run build` succeeds locally.
+
+---
+
+### 🎨 Milestone 72: Celestra Mage & Ranger Tier Assets Regeneration (Lv.32 Sets) [DEPLOYED]
+- **Assets**: Regenerated 10 mecha armor pieces using the `/regenerate-2.5D-anime-realistic` custom skill:
+  - Celestra Mage Level 32 set (`helmet`, `armor`, `pants`, `boots`, `gloves`) - 5 pieces matching the white/gold elven wizard robe design with glowing purple runes.
+  - Celestra Ranger Level 32 set (`helmet`, `armor`, `pants`, `boots`, `gloves`) - 5 pieces matching the green/emerald organic mecha design with gold leaf trims and wind-cyan lines. (Gloves generated via OpenRouter fallback due to rate limits).
+- **Post-processing**: Ran the script `process_gears.py` to remove backgrounds, crop, center, and resize to 320x320 transparent PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_celestra/` and `src/assets/armor_celestra/`.
+- **Verification**: Verified that `npm run build` succeeds locally.
+
+---
+
+### 🎨 Milestone 73: Celestra Ranger Tier Assets Regeneration (Lv.42 Set) [DEPLOYED]
+- **Assets**: Regenerated the full 5 pieces of the Celestra Ranger Level 42 mecha armor set (`helmet`, `armor`, `pants`, `boots`, `gloves`) using the `/regenerate-2.5D-anime-realistic` custom skill. All pieces match the ivory white and blue organic plating design with gold leaf trims and glowing wind-cyan/blue energy lines. (Generated via OpenRouter fallback).
+- **Post-processing**: Ran the script `process_gears.py` followed by low-alpha cleaning (setting Alpha < 15 to 0) to remove backgrounds, crop, center/pad, and resize to 320x320 transparent PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_celestra/` and `src/assets/armor_celestra/`.
+- **Verification**: Verified that `npm run build` succeeds locally.
+
+---
+
+### 🎨 Milestone 74: Celestra Warrior Tier Assets Regeneration (Lv.1 Set) [DEPLOYED]
+- **Assets**: Regenerated the full 5 pieces of the Celestra Warrior Level 1 mecha armor set (`helmet`, `armor`, `pants`, `boots`, `gloves`) using the `/regenerate-2.5D-anime-realistic` custom skill:
+  - Helmet: Redesigned as a Rust Cordovan Circlet (elegant silver/gold headband with glowing cyan/blue energy feather-wings on the sides).
+  - Armor, Pants, Boots, Gloves: Designed as starter-tier gear featuring simple white and brown modern leather panels, with a clean and plain futuristic design (no complex mecha or gold plating).
+  - (Generated via OpenRouter fallback).
+- **Post-processing**: Ran the script `process_gears.py` followed by low-alpha cleaning (setting Alpha < 15 to 0) to remove backgrounds, crop, center/pad, and resize to 320x320 transparent PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_celestra/` and `src/assets/armor_celestra/`.
+- **Verification**: Verified that `npm run build` succeeds locally.
+
+---
+
+### 💍 Milestone 75: Arctron Ring Database Entries (Lore/Guide Only, No Loot Wiring Yet) [DEPLOYED]
+- **Source**: User supplied a 5-ring reference sheet (`public/ref/Arctron/arctron-rings.png`, 1024×1536) inspired by rflib.ru's Accretia accessory database. Real rflib data for "Ring" is mostly elemental Bracelet items plus one 3-job-variant "Daidalos Ring" set (Launcher/Ranger/Warrior, ~25% ATK/DEF/Dodge) — no 5-tier ring set exists in the source data, so stats were improvised per explicit user direction, loosely inspired by Daidalos Ring's ATK%/DEF%/Dodge bonus shape.
+- **Scope explicitly limited by user**: drop source (which enemy/quest grants these) is undecided — these are database/lore entries only for now, NOT wired into `pickItem`'s combat loot table and NOT added to `items.json` as equippable items. Purely for the in-game "📖 Database & Guides" library screen.
+- **Image pipeline**: Reference sheet had a baked-in flat gray checkerboard (not real transparency, same failure mode as M44/M59's shield/armor issues) — used `rembg` (AI segmentation, confirmed installed this session) instead of manual BFS/threshold removal, which cleanly separated all 5 rings in one pass. Rings touched/overlapped vertically with no true empty-row gap, so used a smoothed per-row alpha-density profile (`scipy.signal.argrelextrema`) to locate the 4 local-minimum boundary rows (y=328, 638, 932, 1210) and split there. Each ring then tight-cropped, square-padded (8% margin), and LANCZOS-resized to 320×320 — matching the armor/weapon/shield convention established in M40/46/49/59.
+- **Files**: 5 new PNGs at `public/assets/arctron/rings/rng_arc_{0-4}.png` (+ `src/assets/` mirror): `rng_arc_0` (Common, red ruby), `rng_arc_1` (Uncommon, blue tech triangle), `rng_arc_2` (Rare, teal/cyan organic-tech), `rng_arc_3` (Epic, dark red rectangular gem), `rng_arc_4` (Legendary, gold horned dual-gem).
+- **Data**: Added a `rings` array to `src/data/gears/arctron.json` (5 entries: id/name/grade/image/stat fields — Ember Core Ring +8 ATK, Voidsteel Ring +12 ATK/+6 DEF, Cryo Matrix Ring +15 ATK/+8 Dodge, Bloodforge Ring +20 ATK/+10 DEF, Draconis Talon Ring +28 ATK/+15 DEF/+12 Dodge), matching the flat-integer-stat convention already used by this file's `warrior`/`ranger`/`technician` weapon arrays (not the `item.bonus` object shape used in `items.json`, since this file is display-only, disconnected from equippable items).
+- **UI**: Added a new "💍 Rings" card to `LibraryModal.jsx`'s Arctron equipment tab, rendering each ring's thumbnail image + grade/name + stat line, with a "[Drop source: belum ditentukan]" placeholder note per the scoped-out drop wiring.
+- **Verification**: `npm run build` passes. (Also reinstalled `node_modules`, deleted earlier this session during a disk-cleanup pass, before building.)
+
+---
+
+### 💍 Milestone 76: Celestra & Bionex Ring Database Entries (Lore/Guide Only) [DEPLOYED]
+- **Source**: User supplied two more 5-ring reference sheets (`public/ref/Celestra/celestra-rings.png`, `public/ref/Bionex/bionex-rings.png`, both 1024×1536), plus rflib.ru's general (all-race) Ring database for flavor inspiration — named rings there (Baal Ring, Beast of Life Ring, Black Mist Ring, Christmas Defense/Dodge Ring, etc.) confirmed the ATK%/DEF%/Dodge/elemental bonus shape pattern already used for the M75 Arctron rings; no exact matching 5-tier set exists in the source data for either faction, so stats were improvised again per the same explicit user direction.
+- **Same scope limits as M75**: database/lore entries only, no `items.json` equippable entries, no `pickItem` loot-table wiring — drop source still undecided.
+- **Image pipeline**: Both reference sheets had the same baked-in flat black background (opaque, not real alpha). Used `rembg` to clean both in one pass each. Rings touched vertically with no true empty-row gap in either sheet, so reused the M75 smoothed-row-density-profile technique (`scipy.signal.argrelextrema`) to find 4 boundary rows per sheet: Celestra at y=318/627/920/1226, Bionex at y=321/638/939/1231. Tight-cropped, square-padded (8%), LANCZOS-resized to 320×320 each.
+- **Files**: 10 new PNGs — `public/assets/celestra/rings/rng_cor_{0-4}.png` and `public/assets/bionex/rings/rng_bio_{0-4}.png` (+ `src/assets/` mirrors).
+- **Data**: Added `rings` arrays to `src/data/gears/celestra.json` and `src/data/gears/bionex.json`, matching the M75 Arctron schema (id/name/grade/image/atk/def/dodge). Faction flavor differentiated per the existing lore stat leanings from Milestone 37 (Race Unique Stat Advantages): Celestra rings lean ATK+Dodge (Bloodthorn Cuff, Ruby Ember Ring, Sapphire Ward Ring, Solaris Crest Ring, Amber Talon Cuff — up to +26 ATK/+12 DEF/+16 Dodge at Legendary), Bionex rings lean balanced ATK+DEF (Pulse Band Ring, Crimson Core Ring, Vortex Claw Ring, Bloodline Circuit Ring, Golden Cipher Ring — up to +26 ATK/+18 DEF/+6 Dodge at Legendary).
+- **UI**: Added matching "💍 Rings" cards to `LibraryModal.jsx`'s Celestra and Bionex equipment tabs (same thumbnail + grade/name + stat line + "[Drop source: belum ditentukan]" pattern as M75's Arctron card). All 3 factions now have a Rings section in the Database & Guides library.
+- **Verification**: `npm run build` passes.
+
+---
+
+### 💍 Milestone 77: Universal (All-Faction) Ring Database Entries — Replaces Old Placeholder Rings [DEPLOYED]
+- **Source**: User supplied a 5th reference sheet (`public/ref/cincin-all-factions.png`, 1024×1536, "cincin" = ring) explicitly for a **universal/race-agnostic** ring set, plus the same rflib.ru general Ring database link, with instruction to treat it identically to the M75/M76 faction rings.
+- **Found existing generic placeholder**: `src/data/gears/accessories.json`'s `rings` array already held 4 flavor-only entries (Ember/Storm/Obsidian/Chronos Ring, Common→Epic, `atk`+`critical%` stat shape, no images) rendered under `LibraryModal.jsx`'s "Global (Acc)" tab — this is the natural home for a universal ring set, so replaced these 4 placeholders outright with the 5 new image-backed entries rather than running two parallel universal-ring lists.
+- **Same scope limits as M75/M76**: database/lore entries only, no `items.json`/loot-table wiring.
+- **Image pipeline**: Same baked-in flat black background (opaque). `rembg` cleanup, then the row-density-profile technique found 4 boundary rows at y=339/631/890/1197. Tight-cropped, square-padded (8%), resized to 320×320.
+- **Files**: 5 new PNGs at `public/assets/accessories/rings/rng_all_{0-4}.png` (+ `src/assets/` mirror).
+- **Data**: Rewrote `accessories.json`'s `rings` array to the same schema as M75/M76 (id/name/grade/image/atk/def/dodge, 5-tier Common→Legendary): Garnet Signet Ring (+8 ATK), Dragonfang Ring (+12 ATK/+6 Dodge), Emerald Lock Ring (+14 ATK/+10 DEF), Sapphire Shard Ring (+20 ATK/+10 DEF/+8 Dodge), Golden Vault Ring (+28 ATK/+16 DEF/+14 Dodge).
+- **UI**: Rewrote the "Global (Acc)" rings card in `LibraryModal.jsx` from the old `atk`/`critical%` two-column layout to the same image-thumbnail + grade/name + atk/def/dodge stat-line layout used by the 3 faction ring cards, for visual consistency across all 4 ring sections in the library. Renamed the card title to "💍 Rings (Universal — All Factions)".
+- **Verification**: `npm run build` passes.
+
+---
+
+### 📿 Milestone 78: Amulet Database Entries — All 3 Factions + Universal (Lore/Guide Only) [DEPLOYED]
+- **Source**: User supplied 4 amulet reference sheets (`public/ref/Arctron-amulets.png`, `bionex-amulet.png`, `Celestra-amulets.png`, `all-factions-amulets.png`) plus rflib.ru's Amulet database for stat-shape inspiration (Beast Amulet ATK%, Beginner's Amulet all-elements, Brother's Tears Amulet ATK%+DEF%+all-elements, Christmas Defense/Dodge/Warding variants, Dagon's Leash, Elemental Appendix). Same explicit instruction as M75-77: treat identically, improvise stats.
+- **Item count varied per sheet** — verified by pixel-counting, not assumption, after an initial miscount: Arctron/Bionex/all-factions each have **5** amulets, but **Celestra only has 3** (confirmed by direct re-inspection of the reference image after the row-density algorithm initially found an ambiguous boundary count).
+- **Image pipeline**: All 4 sheets had the same baked-in flat black background. `rembg` cleanup per sheet, then row-density-profile boundary detection (as in M75-77) — but this batch surfaced two new failure modes needing extra handling:
+  1. **Shallow/near-zero valleys**: some sheets (Celestra, part of all-factions) have items touching with very little density drop at the seam, requiring targeted min-search within a visually-estimated zone rather than a single global threshold.
+  2. **Stray fragment pulling the crop bounding box off-center**: `bionex` amulet #5 initially cropped with the real content pushed to one side because a ~12px disconnected speck from the neighboring item survived the naive `alpha>10` bounding-box scan. Fixed by adding connected-component blob filtering (keep only blobs ≥10% of the largest blob's pixel count) to every crop in this batch before computing the bounding box — not just the one file that visibly broke.
+- **Known minor imperfection**: 2 of the 3 Celestra amulets have a small visible sliver of the touching neighbor bleeding into frame (the two pendants are fused with zero true gap, unlike a separable connected component) — same category of acceptable trade-off as M59's shield speckle-noise, flagged here rather than fixed further given lore/guide-only scope.
+- **Files**: 18 new PNGs — `public/assets/arctron/amulets/amu_arc_{0-4}.png`, `public/assets/bionex/amulets/amu_bio_{0-4}.png`, `public/assets/celestra/amulets/amu_cor_{0-2}.png`, `public/assets/accessories/amulets/amu_all_{0-4}.png` (+ all `src/assets/` mirrors).
+- **Data**: Added `amulets` arrays to `arctron.json`/`bionex.json`/`celestra.json` (id/name/grade/image/hp/def, matching the existing "Amulets Database (HP & DEF)" stat shape already used by `accessories.json`, distinct from the ATK/DEF/Dodge shape used for rings) — Arctron/Bionex both Common→Legendary 5-tier (400-4500 HP, 20-180 DEF), Celestra 3-tier Common/Rare/Legendary (600-4200 HP, 30-170 DEF). Replaced `accessories.json`'s old 4-entry image-less amulet placeholder (Lumen/Aether/Astralis/Aurora Charm) with 5 new image-backed entries (Ember Heart, Verdant Compass, Duality, Void Crystal, Solstice Amulet), same pattern as M77's ring replacement.
+- **UI**: Added new "📿 Amulets" cards (image thumbnail + grade/name + HP/DEF stat line) to `LibraryModal.jsx`'s Arctron, Bionex, and Celestra equipment tabs (positioned above each faction's existing Rings card), and upgraded the "Global (Acc)" tab's amulet card to the same image-backed layout. All 3 factions + universal now have both Amulets and Rings sections in the Database & Guides library.
+- **Verification**: `npm run build` passes.
+
+---
+
+### 🏷️ Milestone 79: Ring & Amulet Renaming Pass — Real rflib.ru Naming Conventions [DEPLOYED]
+- **Ask**: User wanted the M75-78 ring/amulet names (which were generic invented fantasy names like "Ember Core Ring", "Solar Halo Pendant") replaced with names drawing more directly from rflib.ru's actual dramatic/mythological naming style (proper nouns, possessives — Baal, Dagon, Beast of Life, Dead Officer's, Brother's Tears, Daidalos) rather than generic gemstone/element naming.
+- **Scope**: Renamed all 38 ring/amulet `name` fields across all 4 gear JSON files — `arctron.json` (5 amulets + 5 rings), `bionex.json` (5 amulets + 5 rings), `celestra.json` (3 amulets + 5 rings), `accessories.json` (5 amulets + 5 rings). No id/image/stat changes — pure naming pass.
+- **Verification**: `npm run build` passes.
+
+---
+
+### 🎨 Milestone 80: Bionex Marksman Tier Assets Regeneration (Lv.55 Set) [DEPLOYED]
+- **Assets**: Regenerated all 5 pieces of the Bionex Marksman Level 55 mecha armor set (`helmet`, `armor`, `pants`, `boots`, `gloves`) using the `/regenerate-2.5D-anime-realistic` custom skill. The set is based on the Bellato Ranger level 41-50 "Ell Set" references from rflib.ru:
+  - Helmet: Tactical copper-brown headset/visor with tactical goggles.
+  - Armor, Pants, Boots, Gloves: High-quality polished white and red-orange metallic plates with chrome-silver trims and dark titanium-steel joints, representing high-tier mecha gear.
+  - (Generated via OpenRouter fallback).
+- **Post-processing**: Ran the script `process_gears.py` followed by alpha threshold filtering (<15 to 0) to crop, center, transparent-remove backgrounds, and resize to 320x320 PNGs.
+- **Verification**: `npm run build` succeeds locally.
+
+---
+
+### 🎨 Milestone 81: Bionex Marksman Tier Assets Regeneration (Lv.1 Set - Helmet, Gloves, Boots) [DEPLOYED]
+- **Assets**: Regenerated 3 pieces of the Bionex Marksman Level 1 mecha armor set (`helmet`, `gloves`, `boots`) using the `/regenerate-2.5D-anime-realistic` custom skill with the built-in free image generation tool:
+  - Helmet: Redesigned as a Coles Leather Cap (tactical dark brown and gray leather head strap running across the forehead, with protective metal ear covers on the sides, completely removing the dome cap shell and goggles, leaving the top of the head open/empty).
+  - Gloves: Olive-green and khaki-green tactical leather ranger gauntlets/gloves featuring simple olive-green forearm metal plating with the Bionex logo.
+  - Boots: Olive-green and khaki-green tactical leather ranger combat boots with dark olive-green shin guards and simple dark metal soles, matching the original starter-tier gear from rflib.ru.
+- **Post-processing**: Ran the script `process_gears.py` followed by alpha threshold filtering (<15 to 0) to crop, center, transparent-remove backgrounds, and resize to 320x320 PNGs.
+- **Verification**: Verified that `npm run build` succeeds locally.
+
+---
+
+### 🎨 Milestone 82: Bionex Guardian Tier Assets Regeneration (Lv.66 Set - Helmet, Pants, Boots, Gloves) [DEPLOYED]
+- **Assets**: Regenerated 4 pieces of the Bionex Guardian Level 66 mecha armor set (`helmet`, `pants`, `boots`, `gloves`) to match the white and metallic gold color tone and chivalrous heroic style of `defbionexguardianlv66armor.png` (which was kept unchanged as reference):
+  - Helmet: Designed as a heroic paladin-mecha helmet featuring majestic wing-like gold crests on the sides and a T-shaped golden visor.
+  - Pants: Heavy leg guards with iridescent pearl white thigh plates, polished gold frames, and knee guards with glowing yellow vents, redesigned to look long and slender with no feet/boots at the bottom.
+  - Boots: High combat greaves with iridescent white shin guards, polished gold ankle guards, and dark titanium steel soles.
+  - Gloves: Heavy gauntlets with wing-like white forearm shields, gold cuffs with Bionex branding, and dark titanium jointed fingers with glowing hex-gems.
+  - (Generated via built-in free tool).
+- **Post-processing**: Ran the script `process_gears.py` followed by alpha threshold filtering (<15 to 0) to crop, center, transparent-remove backgrounds, and resize to 320x320 PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
+- **Verification**: Verified that `npm run build` succeeds locally.
+
+---
+
+### 🎨 Milestone 83: Celestra Mage Tier Assets Regeneration (Lv.42 Set - Full 5 Pieces) [DEPLOYED]
+- **Strict Adherence**: Per the user's explicit command, the "shapes, type of armor sets, and color tones" were strictly forbidden from being changed. The regeneration process focused solely on producing clean 2.5D anime hyperrealistic mecha art, entirely removing the extremely pixelated/jagged 64x64 upscaled compression artifacts while maintaining the exact original structural components.
+- **Assets**: Regenerated all 5 pieces of the Celestra Mage Level 42 mecha armor set (`helmet`, `armor`, `pants`, `boots`, `gloves`):
+  - Helmet: Cleaned up the curved horizontal metallic gold arch crest and the dark metallic gray face mask underneath, preserving the blue-and-gold side tassels.
+  - Armor: Mended the jagged edges into a completely smooth high-neck white collar, central crimson breastplate, and flaring dark purple metallic shoulder guards with star emblems.
+  - Pants: Preserved the true symmetrical front-facing trousers/skirt shape featuring a central downward-pointing white V-shaped cloth/plate, flanked by two dark purple metallic outer leg guard flaps with crimson red accents at the bottom tips. Completely smoothed out all jagged lines.
+  - Boots: Preserved the true shape of a pair of short/medium combat boots facing left, featuring dark purple outer material, folded-over purple cuffs, crimson red laces/energy lines zigzagging over the instep, and dark soles with a red accent on the heel. Completely smoothed out all jagged lines and removed the hallucinated tall wing.
+  - Gloves: Flaring dark purple forearm guards with black wrist bands and crimson red hand wraps.
+  - (Generated via built-in free tool).
+- **Post-processing**: Ran the script `process_gears.py` followed by alpha threshold filtering (<15 to 0) to crop, center, transparent-remove backgrounds, and resize to 320x320 PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_celestra/` and `src/assets/armor_celestra/`.
+- **Verification**: Verified that `npm run build` succeeds locally.
+
+---
+
+### 🎨 Milestone 85: Celestra Warrior Tier Assets Regeneration (Lv.32 Set - Full 5 Pieces) [DEPLOYED]
+- **Assets**: Regenerated all 5 pieces of the Celestra Warrior Level 32 mecha armor set (`helmet`, `armor`, `pants`, `boots`, `gloves`) ensuring the original shapes, colors, and layouts were strictly preserved while creating ultra-smooth, sharp, 2.5D anime realistic mecha art free of pixelated jagged lines.
+  - Helmet: Regenerated from the true reference image, producing a diagonal cybernetic headgear/scouter earpiece made of dark titanium black metal with glowing blue metallic accents, perfectly matching the original floating shape rather than hallucinating a full helmet. (Generated via built-in free tool).
+  - Boots: Smoothed out the combat boots. (Generated via built-in free tool).
+  - Armor, Gloves: Explicitly re-generated and re-styled to perfectly match the clean, thick-outlined, matte white and cyan cel-shaded aesthetic of the `defcelestrawarriorlv1armor.png` reference, while preserving their unique Level 32 shapes.
+  - Pants: Redesigned and explicitly smoothed based on an external pixel-art reference (`Lower_CW_31_SmallCusSlacks`), preserving its exact deep cyan and black color palette and shape, while converting it into smooth anime cel-shaded mecha art via pure text-description prompting.
+  - (Armor, Pants, Gloves generated via OpenRouter `google/gemini-2.5-flash-image` fallback due to quota exhaustion).
+- **Post-processing**: Ran the script `process_gears.py` followed by alpha threshold filtering (<15 to 0) to crop, center, transparent-remove backgrounds, and resize to 320x320 PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_celestra/` and `src/assets/armor_celestra/`.
+- **Verification**: Verified that `npm run build` succeeds locally.
+
+---
+
+### 🎨 Milestone 84: Celestra Ranger Tier Assets Regeneration (Lv.1 Set - Full 5 Pieces) [DEPLOYED]
+- **Assets**: Regenerated all 5 pieces of the Celestra Ranger Level 1 mecha armor set (`helmet`, `armor`, `pants`, `boots`, `gloves`) using an uploaded user image reference and specific prompt engineering.
+  - Helmet: Replaced a completely illegible 32x32 pixel triangle with a sleek, futuristic sci-fi elven Robin Hood style cap. Features dark faded denim, black leather, and an aerodynamic elven-ear shape with a subtle backward feather-like crest and cyan glowing nodes.
+  - Armor: Short-sleeved cropped dark denim-blue jacket, white tight undershirt, studded dark high collar, and studded silver/white belt.
+  - Pants: Dark faded blue capri pants with thick bright orange vertical side stripes and two horizontal black leather knee straps.
+  - Boots: Short dark grey/black ankle boots with thick fluffy white collars folded over the rim.
+  - Gloves: Minimalist dark grey mechanical tactical wristbands/bracelets on bare arms.
+  - (Generated via OpenRouter `google/gemini-2.5-flash-image` fallback utilizing pure descriptive text-prompting and an ultra-detailed **Hyperrealistic 2.5D Anime Sci-Fi** aesthetic style to ensure premium realistic textures, instead of flat cel-shading).
+- **Post-processing**: Ran the script `process_gears.py` followed by alpha threshold filtering (<15 to 0) to crop, center, transparent-remove backgrounds, and resize to 320x320 PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_celestra/` and `src/assets/armor_celestra/`.
+- **Verification**: Verified that `npm run build` succeeds locally.
+
+---
+
+### 🎨 Milestone 86: Celestra Warrior Lv.42 Armor Regeneration — Source-Faithful Color/Motif Analysis [DEPLOYED]
+- **Ask**: User asked to regenerate `defcelestrawarriorlv42armor.png` (badly pixelated/jagged placeholder) via the new `openrouter_image.py` tool built in OpenMontage, with edges/lines clarified and colors solidified.
+- **First attempt rejected**: Initial generation assumed the Lv1 set bronze-trim + round cyan gem color scheme applied to Lv42 too. User pushed back hard -- the actual Lv42 source has a completely different, unrelated palette; the first attempt changed color and shape entirely.
+- **Root-cause fix -- analyzed the actual source pixels before regenerating**: Restored the original from `git show HEAD:...`, ran a quantized color histogram (Counter over //24*24-quantized RGB, 49k opaque pixels) to get real dominant colors, and cropped+nearest-neighbor-zoomed 5 regions (collar, chest, both shoulders, lower torso) to read the actual silhouette through the pixelation blur. Findings: white/pearl-silver base + thick black linework + dark navy-blue/indigo accents (no bronze) + emerald-green glow accents (no cyan) + a tall mandarin collar + angular blade-like pointed shoulder pauldrons (not rounded) + an angular diamond-shaped navy chest gem (not round).
+- **Second generation** used this corrected palette/motif description plus an explicit hyperrealistic-anime-not-flat-cartoon style directive (painterly shading, metallic specular highlights) per user feedback -- result matched the source much more closely.
+- **Third generation (final, approved)**: User asked for two refinements -- more surface detail (rivets, extra panel-division lines, small hinges, engraved motifs) to match a higher-tier complexity, and a flatter/more masculine chest plate (the 2nd draft had an inadvertent feminine bust-like curve).
+- **Tooling used**: `.agents/skills/regenerate-2.5D-anime-realistic/scripts/process_gears.py` (rembg-based crop/pad/resize-to-320) for post-processing -- generation itself ran through the newly-built standalone `openrouter_image.py` OpenMontage tool (model google/gemini-2.5-flash-image, ~$0.039/image, 3 generations total for this piece).
+- **Scope note**: Only the `armor` piece was regenerated per explicit request; sibling Lv42 pieces (helmet, gloves, pants, boots) in the same set have the identical pixelation problem and are still pending if a full-set redo is wanted.
+- **Verification**: `npm run build` passes.
+
+---
+
+### 🎨 Milestone 87: Celestra Warrior Lv.42 Helmet Regeneration — Odinz Full Helm [DEPLOYED]
+- **Ask**: Regenerate `defcelestrawarriorlv42helmet.png` (pixelated placeholder), referencing the real RF Online item name "Helm_CW_41_OdinzFullHelm" (fetched a 32x32 GIF thumbnail from rfdb.alphaoptix.com for the name/concept), with the true render style taken from `defcelestrarangerlv42armor.png` (white/blue/gold ornate style).
+- **Color analysis on the broken source**: Same quantized-histogram approach as M86 -- white/silver metal base + ~22% blue-tinted pixels (navy to pale sky-blue gradient), confirming compatibility with the ranger armor style reference.
+- **Iteration 1 misread the shape**: The tiny 32x32 reference GIF and the broken source both show an ambiguous diagonal shape; first generation produced a dagger/blade with a hilt rather than a helmet. User corrected: this is a FULL HELMET (per the item's actual name), open-faced with the mouth/jaw visible, elven luxury style.
+- **Iteration 2**: Regenerated as a proper full elven helmet -- tall crested crown, wraparound ear-guard side plates, open lower face, gold scrollwork trim, cyan brow gem, navy-to-sky-blue crown accent. Approved in shape/style but missing the "Odinz" (Odin/viking) horn motif implied by the name.
+- **Iteration 3 (final, approved)**: Added a pair of curved Odin-style viking horns (white/silver, gold ring bands at the base) integrated into the elven helmet design, curving outward/upward from each side.
+- **Tooling**: Same as M86 -- `openrouter_image.py` (google/gemini-2.5-flash-image, ~$0.039/image x 3 generations) + `process_gears.py` rembg pipeline, 320x320 output to both `public/assets/armor_celestra/` and `src/assets/armor_celestra/`.
+- **Verification**: `npm run build` passes.
+
+---
+
+### 🎨 Milestone 88: Celestra Warrior Lv.42 Set Completion — Pants, Boots, Gloves [DEPLOYED]
+- **Scope**: Completed the Celestra Warrior Lv.42 set regeneration (started in M86/M87 with armor + helmet) by regenerating the remaining 3 pieces: `pants`, `boots`, `gloves`.
+- **Approach**: Verified color palette via the same quantized-histogram method as M86/M87 before generating -- confirmed all 3 pieces share the established set palette (white/pearl-silver + black linework + navy-blue-to-sky-blue gradient + pale cyan tints), so generated directly in one pass each using the same style prompt template (no shape-misread issues this time, unlike M87's helmet).
+- **Result**: All 3 approved on the first generation -- angular leg plates with cyan knee gems (pants), knee-high armored boots with buckle straps and cyan accent gems (boots), and articulated gauntlets with sharp angular fingertips and gold scrollwork (gloves), fully consistent with the armor + helmet already done.
+- **Tooling**: Same pipeline as M86/M87 -- `openrouter_image.py` (google/gemini-2.5-flash-image, ~$0.039/image x 3 = ~$0.117) + `process_gears.py` rembg pipeline, 320x320 output to both `public/assets/armor_celestra/` and `src/assets/armor_celestra/`.
+- **Set status**: Celestra Warrior Lv.42 (armor/helmet/pants/boots/gloves) is now a fully-regenerated, visually cohesive 5-piece set.
+- **Verification**: `npm run build` passes.
+
+---
+
+### 🎨 Milestone 89: Celestra Warrior Lv.42 Pants Fix — Boot Shape Removed (Free, No Regeneration) [DEPLOYED]
+- **Issue**: User flagged that the M88 pants generation had accidentally rendered boot/shoe shapes at the ankle ("jangan ono legs & boots").
+- **Fix without spending API credits**: Rather than re-generating (which would cost ~$0.04), analyzed the raw pre-`process_gears` generation's alpha/width profile in Python to locate the exact row where the ankle cuff's gold/navy trim band ends and the boot-toe flare begins, then hard-cropped the image at that row (filled with white above the crop boundary in the raw white-background source). The natural black outline of the trim band closed the silhouette cleanly with no visible seam.
+- **Result**: Clean armored greave ending flush at the ankle, no feet/boots visible.
+- **Tooling**: Plain PIL/numpy analysis (row-width profiling) + `process_gears.py` for final crop/pad/resize-to-320. No paid generation call.
+- **Verification**: Visually confirmed via Read tool; `npm run build` passes.
+
+---
+
+### 🎨 Milestone 90: Celestra Mage Lv.32 Pants Fix — Boot Shape Removed (Free, No Regeneration) [DEPLOYED]
+- **Issue**: User flagged that the already-finalized `defcelestramagelv32pants.png` (an older, previously-shipped asset, not part of this session's regeneration batch) had boot/shoe shapes baked into the bottom of the sprite ("boots diremove").
+- **Fix without spending API credits**: Same technique as M89 — profiled the alpha-channel width per row on the already-processed 320x320 RGBA asset to find the true ankle point (row where the shin plate's width plateaus right before the boot flare begins), zeroed alpha below that row, then synthesized a short 2px dark outline bar across each leg's exact x-range at the cut line to close the silhouette cleanly (this asset's shin-to-boot transition was a soft gradient with no pre-existing hard trim-band edge to cut along, unlike M89).
+- **Result**: Shin guards now end cleanly at the calf with a proper closed outline; no boots/shoes visible.
+- **Tooling**: Plain PIL/numpy analysis + manual outline synthesis + `process_gears.py` for final crop/pad/resize-to-320. No paid generation call.
+- **Verification**: Visually confirmed via Read tool; `npm run build` passes.

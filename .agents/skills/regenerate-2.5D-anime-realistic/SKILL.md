@@ -64,3 +64,44 @@ To prevent wasting paid API tokens/credits on incorrect model interpretations:
      *   **Color Tone & Distribution**: (e.g., Predominantly white and brown leather, silver metal, glowing cyan energy accents).
    - Draft a highly restrictive prompt based on this blueprint, specifically mandating a plain, flat, non-complex 2.5D anime style with clean outlines.
 3. The agent must wait for the user to explicitly confirm ("Gasss", "Setuju", or feedback) before invoking the script.
+
+## Claude Code Direct Path (No `generate_image` Tool Available)
+
+A standard Claude Code CLI session does **not** have the built-in `generate_image` tool (that's Antigravity/Gemini-IDE-only). Claude Code has no native image-generation capability at all. The proven working path for Claude Code is calling OpenRouter directly via a small standalone tool, `openrouter_image.py`, built in `C:\projects\OpenMontage\tools\graphics\openrouter_image.py`. This talks to OpenRouter's dedicated Images API (`POST https://openrouter.ai/api/v1/images`, model + prompt -> base64 `b64_json` in response) — **not** the OpenAI-compatible `/chat/completions` endpoint, and **not** the classic DALL-E-style `/images/generations` endpoint (OpenRouter doesn't proxy that one; pointing `OPENAI_BASE_URL` at OpenRouter and reusing `openai_image.py` silently fails for images). Reads `OPENROUTER_API_KEY` first, falls back to `OPENAI_API_KEY` (many setups already stash an OpenRouter key there via the `OPENAI_BASE_URL` hack for text calls).
+
+**Step-by-step SOP actually used and validated across multiple regenerations this session** (Celestra Warrior Lv.42 armor/helmet/pants/boots/gloves):
+
+1. **Read the target file** with the Read tool (view it directly — jagged/pixelated placeholders are usually obvious).
+2. **Extract the real source palette computationally, don't eyeball it** — pixelated placeholders lie to the naked eye. Run a quantized color histogram in Python:
+   ```python
+   from PIL import Image
+   import numpy as np
+   from collections import Counter
+   img = Image.open(path).convert('RGBA')
+   arr = np.array(img)
+   mask = arr[:,:,3] > 128
+   pixels = arr[mask][:,:3]
+   quantized = (pixels // 24) * 24
+   counter = Counter(tuple(p) for p in quantized)
+   for color, count in counter.most_common(12):
+       print('#%02x%02x%02x' % color, f'{count/len(pixels)*100:.1f}%')
+   ```
+   This catches accent colors (e.g. a 22% navy-blue tint) that are easy to miss by eye under heavy pixelation/blur.
+3. **If the silhouette is ambiguous, zoom in** — crop 4-5 regions (e.g. collar, chest, both shoulders, lower torso) and upscale with `Image.resize(..., Image.NEAREST)` (never LANCZOS/bilinear here — that adds more blur, not less) to read the actual shape through the artifacts.
+4. **If an item name is known** (e.g. from an RF Online database like rfdb.alphaoptix.com or rflib.ru), fetch the reference thumbnail via WebFetch and Read the saved file — but treat a name literally (an item called "Full Helm" is a full helmet, not a blade, even if the tiny reference sprite's silhouette is ambiguous). Getting this wrong (e.g. generating a dagger instead of a full helmet from an ambiguous diagonal silhouette) is the single most common failure mode — when in doubt, ask.
+5. **Generate via the tool**:
+   ```python
+   import sys; sys.path.insert(0, r'C:\projects\OpenMontage')
+   from tools.graphics.openrouter_image import OpenRouterImage
+   t = OpenRouterImage()
+   result = t.execute({
+       'prompt': '<detailed prompt — see below>',
+       'model': 'google/gemini-2.5-flash-image',  # "Nano Banana" — best for matching an existing style/reference precisely
+       'output_path': r'C:\projects\focus-rpg\scratch\gen_<name>_v1.png'
+   })
+   ```
+   Cost is ~$0.02-0.04/image on this model (token-metered, reported back in `result.cost_usd`). For cheaper batch-style generation where exact reference-matching matters less, `bytedance-seed/seedream-4.5` is a flat $0.04/image alternative.
+   Prompt structure that has worked well: (a) style directive ("hyperrealistic anime... painterly semi-realistic shading with real metallic reflections... NOT flat cartoon/cel-shaded" if the user says "ojo terlalu anime"/"hyperrealistic anime"), (b) exact color palette as a bullet list with "do not substitute" framing, (c) exact silhouette/motif as a bullet list, (d) "front-facing view, isolated on solid pure white background, no floor shadow" boilerplate.
+6. **Show the raw generated preview to the user before finalizing** — Read the raw output file so they see it inline, and explicitly ask for confirmation. Expect 2-3 iterations to be normal, not a failure (this session took 3 rounds for the helmet: wrong-object misread → corrected shape → added a requested horn detail). Do NOT run `process_gears.py` until the user has actually confirmed — generating a preview is not the same as approving it, and finalizing an unapproved preview just to "show progress" wastes a processing step and confuses the user about what state the files are in.
+7. **Once approved, finalize**: run `process_gears.py` (rembg crop/pad/resize-to-320, auto-mirrors `public/assets/` <-> `src/assets/`), Read the final saved file to confirm it looks right post-crop, then `npm run build` to verify.
+8. **Log to `development_journal.md`** as a new milestone — include what was rejected/corrected and why (the iteration history is genuinely useful context for future regenerations of the same faction/tier), the model + cost, and note explicitly if only some pieces of a set were done vs. the full set.
