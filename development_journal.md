@@ -603,8 +603,49 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🖼️ Milestone 49: Weapon & Shield Sprite Normalization + Cache-Bust [PENDING DEPLOYMENT]
+### 🖼️ Milestone 49: Weapon & Shield Sprite Normalization + Cache-Bust [DEPLOYED]
 - **Bug 1 (stale cache)**: User hard-refreshed and still saw the old, dead-space-heavy Bionex Lv.1 sword after M47's rotation/crop fix deployed — because M47 kept the same filenames, browsers/PWAs kept serving the cached pre-fix bytes (identical root cause to M45's armor cache issue, just not yet applied to weapon/shield URLs).
 - **Fix 1**: Added `?v=2` cache-busting query param to every weapon and shield URL returned by `resolveItemImage` in `gameStore.js` (all sword/axe/bow/gun/staff/special tiers, and all bionex/arctron/celestra shield tiers).
 - **Bug 2 (inconsistent framing)**: User also flagged that weapon/shield icons look visually smaller/inconsistent next to the armor-set icons — auditing actual canvas sizes confirmed wild inconsistency: weapons ranged from tiny 98×101 (our just-fixed swords) up to 480×466 (staffs), and shields ranged from a barely-there 56×85 (`lv42bionexshielddef.png`, `lv42celesshielddef.png`) up to 682×333 (`lv42arctronshielddef.png`) — meaning fill-ratio and aspect ratio varied wildly across items even though all render through the same `objectFit: contain` square slots.
 - **Fix 2**: Normalized all 40 weapon + shield source files (`public/assets/weapons/`, `public/assets/{bionex,arctron,celestra}/shields/`, and their `src/assets/` mirrors) with one pipeline: tight-crop to the non-transparent content bounding box, pad to a square canvas (6% margin), LANCZOS-resize to a standard 320×320 — matching the armor-set convention established in Milestones 40/46. All weapon and shield icons now occupy a consistent proportion of their gear slot.
+
+---
+
+### 🏹 Milestone 50: Bow/Gun Rotation Fix + Celestra Ranger Helmet Rescale [DEPLOYED]
+- **Bug 1**: After M49's normalization, the bow/gun weapon sprites (`defallfactionslv{1,32,42,55}bow.png`, `defallfactionslv{1,32,42,55}gun.png`) still rendered tiny in the gear slot — M49's tight-crop-and-square-pad preserved each sprite's *original* aspect ratio, and bows/guns are drawn as long shallow diagonals (squareness 0.32–0.55, i.e. width 2–3× the height), so padding to a square canvas left huge empty top/bottom margins, same root cause M47 already fixed for swords.
+- **Fix 1**: Applied the same rotation-search technique from M47 to all 8 bow/gun tiers — searched rotation angles (both directions, 0–90°) to maximize bounding-box squareness, landing on 42–66° per variant (squareness now 0.98–1.0, up from 0.32–0.55). Re-cropped and resized to 320×320 after rotating.
+- **Bug 2**: User flagged the new Celestra Ranger Lv.1 helmet (Milestone 46) looked oversized/zoomed-in compared to its 4 sibling pieces (armor/gloves/boots/pants) in the gear grid. Measured fill ratios confirmed it: helmet was 0.88 (bounding-box area ÷ canvas area) vs. 0.62–0.75 for the other 4 pieces — it had noticeably less padding around the content than its siblings.
+- **Fix 2**: Re-cropped `defcelestrarangerlv1helmet.png` from the same source reference with a larger 9% margin (up from ~3%), bringing its fill ratio down to ~0.67 — now visually consistent with its sibling pieces.
+
+---
+
+### 🎨 Milestone 51: Bionex Warrior Lv.32 Armor Set Regeneration [DEPLOYED]
+- **Assets**: Regenerated all 5 pieces of the Bionex Warrior Lv.32 armor set (`armor`, `helmet`, `gloves`, `pants`, `boots`) using image generation with a badass mecha aesthetic and champagne-gold glowing energy lines to match the style of the Bionex Warrior Lv.1 set.
+- **Post-processing**: Created and ran `scratch/process_generated_set.py` to automatically flood-fill the white background (vectorized component labeling), crop tightly, pad to square, and scale to 320x320 transparent PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
+- **Verification**: Verified that `npm run build` compiles successfully.
+
+---
+
+### 🎨 Milestone 52: Bionex Warrior Lv.42 Armor Set Regeneration [DEPLOYED]
+- **Assets**: Regenerated all 5 pieces of the Bionex Warrior Lv.42 armor set (`armor`, `helmet`, `gloves`, `pants`, `boots`) using image generation inspired by the premium Final Fantasy VII Remake sci-fi mecha style (brushed steel, heavy plating, carbon fiber textures, and glowing champagne-gold energy lines).
+- **Post-processing**: Ran the optimized vectorized background-removal and cropping pipeline in `scratch/process_generated_set.py` to produce transparent, square-padded 320x320 PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
+- **Verification**: Verified that the client production build succeeds.
+
+---
+
+### 🎨 Milestone 53: Bionex Warrior Lv.55 Armor Set Regeneration [DEPLOYED]
+- **Assets**: Regenerated all 5 pieces of the Bionex Warrior Lv.55 armor set (`armor`, `helmet`, `gloves`, `pants`, `boots`) using image generation with a hyperrealistic anime mecha style, including heavy metallic panels, defined outlines to pop out, and glowing champagne-gold pathways.
+- **Post-processing**: Ran the vectorized background-removal script in `scratch/process_generated_set.py` to produce transparent 320x320 PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
+- **Verification**: Verified that `npm run build` compiles successfully.
+
+---
+
+### 🎨 Milestone 54: Bionex Warrior Lv.66 Armor Set Regeneration (Partial) [DEPLOYED]
+- **Assets**: Successfully regenerated 2 of the 5 pieces of the ultimate endgame Bionex Warrior Lv.66 set (`armor`, `helmet`) with a majestic, heavy mecha look (including thruster highlights and glowing champagne-gold lines) before image generation API quota limits were reached. The remaining 3 pieces (`gloves`, `pants`, `boots`) are pending reset.
+- **Post-processing**: Ran the vectorized background-removal script to output these 2 pieces as clean, transparent 320x320 PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
+- **Cache-Busting**: Updated the cache version parameter inside `resolveArmorSetImage` in `src/store/gameStore.js` from `?v=4` to `?v=5` to force client browsers to refresh and load the new assets.
+- **Verification**: Verified that the client production build succeeds.
