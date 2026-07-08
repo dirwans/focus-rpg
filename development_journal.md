@@ -947,6 +947,22 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 - **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
 - **Verification**: Verified the processed images are transparent, centered, and correctly sized, and that `npm run build` succeeds locally.
 
+---
+
+### 🛠️ Milestone 65: Bionex & Arctron Level 1 Job / Path Alignment [DEPLOYED]
+- **Requirement**: Align Level 1 job IDs and display names with their respective job paths across Arctron and Bionex.
+- **Bionex Alignments**:
+  - Aligned display names for Bionex Warrior path to "Guardian" (using existing ID `guardian`) and Bionex Specialist path to "Engineer" (using existing ID `engineer`).
+  - Renamed 50 mecha gear PNG assets from `defbionexwarriorlv*` to `defbionexguardianlv*` and pilot sprites from `bionex_warrior_*` to `bionex_guardian_*`.
+  - Updated all JSON databases (`items.json` and `jobWeapons.json`) to refer to `bionex_guardian` and `bionex_engineer` instead of `bionex_warrior` and `bionex_specialist`.
+  - Refactored `gameStore.js`, `TransparentSprite.jsx`, `PilotSprites.jsx`, `Unit.jsx`, `Main.jsx`, and `CharacterCreate.jsx` to map Bionex jobs and display names to Guardian and Engineer.
+- **Arctron Renames**:
+  - Renamed Level 1 job IDs in `jobs.json` to match path names: `destroyer` ➔ `warrior` (Warrior), `gunner` ➔ `ranger` (Ranger), and `engineer` ➔ `technician` (Technician).
+  - Modified `items.json` and `jobWeapons.json` to update job restrictions for Arctron items from old IDs to new ones, correctly distinguishing Arctron's `engineer` ➔ `technician` while keeping Bionex's `engineer` intact.
+  - Refactored all source code files to query new Arctron Level 1 IDs and updated UI display labels (Specialist ➔ Technician).
+- **Verification**: Verified that the production client builds successfully with zero errors.
+
+
 
 
 

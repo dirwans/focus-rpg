@@ -1,49 +1,336 @@
 {
   "arctron": [
-    { "job": "cadet", "name": "Iron Rifle", "dmgMin": 60, "dmgMax": 90, "effect": "+2% Accuracy", "level": 1 },
-    { "job": "gunner", "name": "Burst Cannon", "dmgMin": 70, "dmgMax": 100, "effect": "Rapid Fire", "level": 1 },
-    { "job": "striker", "name": "Plasma Blade", "dmgMin": 65, "dmgMax": 95, "effect": "+3% Attack Speed", "level": 1 },
-    { "job": "iron_trooper", "name": "Heavy Crusher", "dmgMin": 180, "dmgMax": 260, "effect": "Knockback", "level": 30 },
-    { "job": "siege_gunner", "name": "Siege Launcher", "dmgMin": 190, "dmgMax": 280, "effect": "Area Damage", "level": 30 },
-    { "job": "cyber_assassin", "name": "Shadow Dagger", "dmgMin": 170, "dmgMax": 240, "effect": "Stealth Strike", "level": 30 },
-    { "job": "iron_vanguard", "name": "Oblivion Axe", "dmgMin": 350, "dmgMax": 500, "effect": "Defense Break", "level": 50 },
-    { "job": "nova_destroyer", "name": "Nova Launcher", "dmgMin": 380, "dmgMax": 550, "effect": "Explosion", "level": 50 },
-    { "job": "omega_reaper", "name": "Phantom Blade", "dmgMin": 360, "dmgMax": 520, "effect": "Critical Burst", "level": 50 }
+    {
+      "job": "cadet",
+      "name": "Iron Rifle",
+      "dmgMin": 60,
+      "dmgMax": 90,
+      "effect": "+2% Accuracy",
+      "level": 1
+    },
+    {
+      "job": "ranger",
+      "name": "Burst Cannon",
+      "dmgMin": 70,
+      "dmgMax": 100,
+      "effect": "Rapid Fire",
+      "level": 1
+    },
+    {
+      "job": "striker",
+      "name": "Plasma Blade",
+      "dmgMin": 65,
+      "dmgMax": 95,
+      "effect": "+3% Attack Speed",
+      "level": 1
+    },
+    {
+      "job": "iron_trooper",
+      "name": "Heavy Crusher",
+      "dmgMin": 180,
+      "dmgMax": 260,
+      "effect": "Knockback",
+      "level": 30
+    },
+    {
+      "job": "siege_gunner",
+      "name": "Siege Launcher",
+      "dmgMin": 190,
+      "dmgMax": 280,
+      "effect": "Area Damage",
+      "level": 30
+    },
+    {
+      "job": "cyber_assassin",
+      "name": "Shadow Dagger",
+      "dmgMin": 170,
+      "dmgMax": 240,
+      "effect": "Stealth Strike",
+      "level": 30
+    },
+    {
+      "job": "iron_vanguard",
+      "name": "Oblivion Axe",
+      "dmgMin": 350,
+      "dmgMax": 500,
+      "effect": "Defense Break",
+      "level": 50
+    },
+    {
+      "job": "nova_destroyer",
+      "name": "Nova Launcher",
+      "dmgMin": 380,
+      "dmgMax": 550,
+      "effect": "Explosion",
+      "level": 50
+    },
+    {
+      "job": "omega_reaper",
+      "name": "Phantom Blade",
+      "dmgMin": 360,
+      "dmgMax": 520,
+      "effect": "Critical Burst",
+      "level": 50
+    }
   ],
   "bionex": [
-    { "job": "bionex_warrior", "name": "Broadsword", "dmgMin": 55, "dmgMax": 80, "effect": "+3% Block", "level": 1 },
-    { "job": "bionex_marksman", "name": "Composite Bow", "dmgMin": 50, "dmgMax": 85, "effect": "+2% Crit", "level": 1 },
-    { "job": "bionex_spiritualist", "name": "Mental Staff", "dmgMin": 45, "dmgMax": 75, "effect": "+5 Mana", "level": 1 },
-    { "job": "bionex_specialist", "name": "Laser Spanner", "dmgMin": 40, "dmgMax": 70, "effect": "+3% Repair", "level": 1 },
-    { "job": "commando", "name": "Greatsword", "dmgMin": 180, "dmgMax": 260, "effect": "+5% Attack", "level": 30 },
-    { "job": "miller", "name": "Buckler Mace", "dmgMin": 140, "dmgMax": 200, "effect": "+5% Block", "level": 30 },
-    { "job": "desperado", "name": "Dual Vulcan", "dmgMin": 160, "dmgMax": 230, "effect": "Rapid Fire", "level": 30 },
-    { "job": "sniper", "name": "Laser Rifle", "dmgMin": 170, "dmgMax": 250, "effect": "+5% Crit", "level": 30 },
-    { "job": "psyper", "name": "Force Staff", "dmgMin": 150, "dmgMax": 220, "effect": "+15 Force ATK", "level": 30 },
-    { "job": "chandra", "name": "Restoration Wand", "dmgMin": 120, "dmgMax": 180, "effect": "+10% Heal", "level": 30 },
-    { "job": "craftsman", "name": "Auto Wrench", "dmgMin": 130, "dmgMax": 190, "effect": "Drone Assist", "level": 30 },
-    { "job": "driver", "name": "Titan Key", "dmgMin": 140, "dmgMax": 210, "effect": "+10% MAU Speed", "level": 30 },
-    { "job": "berserker", "name": "Oblivion Greatsword", "dmgMin": 380, "dmgMax": 550, "effect": "Crit Damage Boost", "level": 40 },
-    { "job": "armsman", "name": "Buster Lance", "dmgMin": 360, "dmgMax": 520, "effect": "+10% Accuracy", "level": 40 },
-    { "job": "shield_miller", "name": "Aegis Mace", "dmgMin": 300, "dmgMax": 440, "effect": "+15% Block", "level": 40 },
-    { "job": "hidden_soldier", "name": "Stealth Bow", "dmgMin": 350, "dmgMax": 500, "effect": "Invisibility Assist", "level": 40 },
-    { "job": "sentinel", "name": "Gatling Launcher", "dmgMin": 380, "dmgMax": 560, "effect": "Splash Damage", "level": 40 },
-    { "job": "infiltrator", "name": "Beam Sniper", "dmgMin": 400, "dmgMax": 580, "effect": "Critical Burst", "level": 40 },
-    { "job": "wizard", "name": "Meteor Staff", "dmgMin": 350, "dmgMax": 520, "effect": "Flame Strike", "level": 40 },
-    { "job": "astralist", "name": "Void Wand", "dmgMin": 320, "dmgMax": 480, "effect": "Time Lock", "level": 40 },
-    { "job": "holy_chandra", "name": "Archangel Scepter", "dmgMin": 280, "dmgMax": 420, "effect": "+20% Heal", "level": 40 },
-    { "job": "mental_smith", "name": "Nano Forge", "dmgMin": 300, "dmgMax": 450, "effect": "Armor Boost", "level": 40 },
-    { "job": "armor_rider", "name": "Giga Hammer", "dmgMin": 350, "dmgMax": 500, "effect": "+20% MAU Stats", "level": 40 }
+    {
+      "job": "bionex_guardian",
+      "name": "Broadsword",
+      "dmgMin": 55,
+      "dmgMax": 80,
+      "effect": "+3% Block",
+      "level": 1
+    },
+    {
+      "job": "bionex_marksman",
+      "name": "Composite Bow",
+      "dmgMin": 50,
+      "dmgMax": 85,
+      "effect": "+2% Crit",
+      "level": 1
+    },
+    {
+      "job": "bionex_spiritualist",
+      "name": "Mental Staff",
+      "dmgMin": 45,
+      "dmgMax": 75,
+      "effect": "+5 Mana",
+      "level": 1
+    },
+    {
+      "job": "bionex_engineer",
+      "name": "Laser Spanner",
+      "dmgMin": 40,
+      "dmgMax": 70,
+      "effect": "+3% Repair",
+      "level": 1
+    },
+    {
+      "job": "commando",
+      "name": "Greatsword",
+      "dmgMin": 180,
+      "dmgMax": 260,
+      "effect": "+5% Attack",
+      "level": 30
+    },
+    {
+      "job": "miller",
+      "name": "Buckler Mace",
+      "dmgMin": 140,
+      "dmgMax": 200,
+      "effect": "+5% Block",
+      "level": 30
+    },
+    {
+      "job": "desperado",
+      "name": "Dual Vulcan",
+      "dmgMin": 160,
+      "dmgMax": 230,
+      "effect": "Rapid Fire",
+      "level": 30
+    },
+    {
+      "job": "sniper",
+      "name": "Laser Rifle",
+      "dmgMin": 170,
+      "dmgMax": 250,
+      "effect": "+5% Crit",
+      "level": 30
+    },
+    {
+      "job": "psyper",
+      "name": "Force Staff",
+      "dmgMin": 150,
+      "dmgMax": 220,
+      "effect": "+15 Force ATK",
+      "level": 30
+    },
+    {
+      "job": "chandra",
+      "name": "Restoration Wand",
+      "dmgMin": 120,
+      "dmgMax": 180,
+      "effect": "+10% Heal",
+      "level": 30
+    },
+    {
+      "job": "craftsman",
+      "name": "Auto Wrench",
+      "dmgMin": 130,
+      "dmgMax": 190,
+      "effect": "Drone Assist",
+      "level": 30
+    },
+    {
+      "job": "driver",
+      "name": "Titan Key",
+      "dmgMin": 140,
+      "dmgMax": 210,
+      "effect": "+10% MAU Speed",
+      "level": 30
+    },
+    {
+      "job": "berserker",
+      "name": "Oblivion Greatsword",
+      "dmgMin": 380,
+      "dmgMax": 550,
+      "effect": "Crit Damage Boost",
+      "level": 40
+    },
+    {
+      "job": "armsman",
+      "name": "Buster Lance",
+      "dmgMin": 360,
+      "dmgMax": 520,
+      "effect": "+10% Accuracy",
+      "level": 40
+    },
+    {
+      "job": "shield_miller",
+      "name": "Aegis Mace",
+      "dmgMin": 300,
+      "dmgMax": 440,
+      "effect": "+15% Block",
+      "level": 40
+    },
+    {
+      "job": "hidden_soldier",
+      "name": "Stealth Bow",
+      "dmgMin": 350,
+      "dmgMax": 500,
+      "effect": "Invisibility Assist",
+      "level": 40
+    },
+    {
+      "job": "sentinel",
+      "name": "Gatling Launcher",
+      "dmgMin": 380,
+      "dmgMax": 560,
+      "effect": "Splash Damage",
+      "level": 40
+    },
+    {
+      "job": "infiltrator",
+      "name": "Beam Sniper",
+      "dmgMin": 400,
+      "dmgMax": 580,
+      "effect": "Critical Burst",
+      "level": 40
+    },
+    {
+      "job": "wizard",
+      "name": "Meteor Staff",
+      "dmgMin": 350,
+      "dmgMax": 520,
+      "effect": "Flame Strike",
+      "level": 40
+    },
+    {
+      "job": "astralist",
+      "name": "Void Wand",
+      "dmgMin": 320,
+      "dmgMax": 480,
+      "effect": "Time Lock",
+      "level": 40
+    },
+    {
+      "job": "holy_chandra",
+      "name": "Archangel Scepter",
+      "dmgMin": 280,
+      "dmgMax": 420,
+      "effect": "+20% Heal",
+      "level": 40
+    },
+    {
+      "job": "mental_smith",
+      "name": "Nano Forge",
+      "dmgMin": 300,
+      "dmgMax": 450,
+      "effect": "Armor Boost",
+      "level": 40
+    },
+    {
+      "job": "armor_rider",
+      "name": "Giga Hammer",
+      "dmgMin": 350,
+      "dmgMax": 500,
+      "effect": "+20% MAU Stats",
+      "level": 40
+    }
   ],
   "celestra": [
-    { "job": "acolyte", "name": "Lumina Staff", "dmgMin": 45, "dmgMax": 85, "effect": "+5 Mana", "level": 1 },
-    { "job": "guardian", "name": "Crystal Spear", "dmgMin": 55, "dmgMax": 80, "effect": "+3% Block", "level": 1 },
-    { "job": "mystic_archer", "name": "Spirit Bow", "dmgMin": 60, "dmgMax": 90, "effect": "+2% Crit", "level": 1 },
-    { "job": "eidolon_caller", "name": "Soul Wand", "dmgMin": 140, "dmgMax": 220, "effect": "Summon Boost", "level": 30 },
-    { "job": "spirit_knight", "name": "Moonblade", "dmgMin": 160, "dmgMax": 240, "effect": "Life Steal", "level": 30 },
-    { "job": "moon_ranger", "name": "Lunar Bow", "dmgMin": 170, "dmgMax": 250, "effect": "Bleed", "level": 30 },
-    { "job": "high_summoner", "name": "Astral Scepter", "dmgMin": 280, "dmgMax": 420, "effect": "Eidolon Power", "level": 50 },
-    { "job": "lumina_paladin", "name": "Sacred Halberd", "dmgMin": 320, "dmgMax": 470, "effect": "Holy Shield", "level": 50 },
-    { "job": "star_seeker", "name": "Celestial Bow", "dmgMin": 340, "dmgMax": 500, "effect": "Star Shot", "level": 50 }
+    {
+      "job": "acolyte",
+      "name": "Lumina Staff",
+      "dmgMin": 45,
+      "dmgMax": 85,
+      "effect": "+5 Mana",
+      "level": 1
+    },
+    {
+      "job": "guardian",
+      "name": "Crystal Spear",
+      "dmgMin": 55,
+      "dmgMax": 80,
+      "effect": "+3% Block",
+      "level": 1
+    },
+    {
+      "job": "mystic_archer",
+      "name": "Spirit Bow",
+      "dmgMin": 60,
+      "dmgMax": 90,
+      "effect": "+2% Crit",
+      "level": 1
+    },
+    {
+      "job": "eidolon_caller",
+      "name": "Soul Wand",
+      "dmgMin": 140,
+      "dmgMax": 220,
+      "effect": "Summon Boost",
+      "level": 30
+    },
+    {
+      "job": "spirit_knight",
+      "name": "Moonblade",
+      "dmgMin": 160,
+      "dmgMax": 240,
+      "effect": "Life Steal",
+      "level": 30
+    },
+    {
+      "job": "moon_ranger",
+      "name": "Lunar Bow",
+      "dmgMin": 170,
+      "dmgMax": 250,
+      "effect": "Bleed",
+      "level": 30
+    },
+    {
+      "job": "high_summoner",
+      "name": "Astral Scepter",
+      "dmgMin": 280,
+      "dmgMax": 420,
+      "effect": "Eidolon Power",
+      "level": 50
+    },
+    {
+      "job": "lumina_paladin",
+      "name": "Sacred Halberd",
+      "dmgMin": 320,
+      "dmgMax": 470,
+      "effect": "Holy Shield",
+      "level": 50
+    },
+    {
+      "job": "star_seeker",
+      "name": "Celestial Bow",
+      "dmgMin": 340,
+      "dmgMax": 500,
+      "effect": "Star Shot",
+      "level": 50
+    }
   ]
 }

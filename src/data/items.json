@@ -192,7 +192,7 @@
       "type": "armor",
       "race": "arctron",
       "job": [
-        "destroyer",
+        "warrior",
         "vanguard",
         "juggernaut",
         "dreadnought"
@@ -211,7 +211,7 @@
       "type": "helmet",
       "race": "arctron",
       "job": [
-        "destroyer",
+        "warrior",
         "vanguard",
         "juggernaut",
         "dreadnought"
@@ -230,7 +230,7 @@
       "type": "gloves",
       "race": "arctron",
       "job": [
-        "destroyer",
+        "warrior",
         "vanguard",
         "juggernaut",
         "dreadnought"
@@ -250,7 +250,7 @@
       "type": "boots",
       "race": "arctron",
       "job": [
-        "destroyer",
+        "warrior",
         "vanguard",
         "juggernaut",
         "dreadnought"
@@ -269,7 +269,7 @@
       "type": "pants",
       "race": "arctron",
       "job": [
-        "destroyer",
+        "warrior",
         "vanguard",
         "juggernaut",
         "dreadnought"
@@ -288,7 +288,7 @@
       "type": "armor",
       "race": "arctron",
       "job": [
-        "destroyer",
+        "warrior",
         "vanguard",
         "juggernaut",
         "dreadnought"
@@ -307,7 +307,7 @@
       "type": "helmet",
       "race": "arctron",
       "job": [
-        "destroyer",
+        "warrior",
         "vanguard",
         "juggernaut",
         "dreadnought"
@@ -326,7 +326,7 @@
       "type": "gloves",
       "race": "arctron",
       "job": [
-        "destroyer",
+        "warrior",
         "vanguard",
         "juggernaut",
         "dreadnought"
@@ -346,7 +346,7 @@
       "type": "boots",
       "race": "arctron",
       "job": [
-        "destroyer",
+        "warrior",
         "vanguard",
         "juggernaut",
         "dreadnought"
@@ -365,7 +365,7 @@
       "type": "pants",
       "race": "arctron",
       "job": [
-        "destroyer",
+        "warrior",
         "vanguard",
         "juggernaut",
         "dreadnought"
@@ -385,7 +385,7 @@
       "type": "armor",
       "race": "arctron",
       "job": [
-        "destroyer",
+        "warrior",
         "vanguard",
         "juggernaut",
         "dreadnought"
@@ -404,7 +404,7 @@
       "type": "helmet",
       "race": "arctron",
       "job": [
-        "destroyer",
+        "warrior",
         "vanguard",
         "juggernaut",
         "dreadnought"
@@ -423,7 +423,7 @@
       "type": "gloves",
       "race": "arctron",
       "job": [
-        "destroyer",
+        "warrior",
         "vanguard",
         "juggernaut",
         "dreadnought"
@@ -443,7 +443,7 @@
       "type": "boots",
       "race": "arctron",
       "job": [
-        "destroyer",
+        "warrior",
         "vanguard",
         "juggernaut",
         "dreadnought"
@@ -462,7 +462,7 @@
       "type": "pants",
       "race": "arctron",
       "job": [
-        "destroyer",
+        "warrior",
         "vanguard",
         "juggernaut",
         "dreadnought"
@@ -482,7 +482,7 @@
       "type": "armor",
       "race": "arctron",
       "job": [
-        "destroyer",
+        "warrior",
         "vanguard",
         "juggernaut",
         "dreadnought"
@@ -501,7 +501,7 @@
       "type": "helmet",
       "race": "arctron",
       "job": [
-        "destroyer",
+        "warrior",
         "vanguard",
         "juggernaut",
         "dreadnought"
@@ -520,7 +520,7 @@
       "type": "gloves",
       "race": "arctron",
       "job": [
-        "destroyer",
+        "warrior",
         "vanguard",
         "juggernaut",
         "dreadnought"
@@ -540,7 +540,7 @@
       "type": "boots",
       "race": "arctron",
       "job": [
-        "destroyer",
+        "warrior",
         "vanguard",
         "juggernaut",
         "dreadnought"
@@ -559,7 +559,7 @@
       "type": "pants",
       "race": "arctron",
       "job": [
-        "destroyer",
+        "warrior",
         "vanguard",
         "juggernaut",
         "dreadnought"
@@ -579,7 +579,7 @@
       "type": "armor",
       "race": "arctron",
       "job": [
-        "gunner",
+        "ranger",
         "marksman",
         "railgunner",
         "annihilator"
@@ -598,7 +598,7 @@
       "type": "helmet",
       "race": "arctron",
       "job": [
-        "gunner",
+        "ranger",
         "marksman",
         "railgunner",
         "annihilator"
@@ -617,7 +617,7 @@
       "type": "gloves",
       "race": "arctron",
       "job": [
-        "gunner",
+        "ranger",
         "marksman",
         "railgunner",
         "annihilator"
@@ -637,7 +637,7 @@
       "type": "boots",
       "race": "arctron",
       "job": [
-        "gunner",
+        "ranger",
         "marksman",
         "railgunner",
         "annihilator"
@@ -656,7 +656,7 @@
       "type": "pants",
       "race": "arctron",
       "job": [
-        "gunner",
+        "ranger",
         "marksman",
         "railgunner",
         "annihilator"
@@ -675,7 +675,7 @@
       "type": "armor",
       "race": "arctron",
       "job": [
-        "gunner",
+        "ranger",
         "marksman",
         "railgunner",
         "annihilator"
@@ -694,7 +694,7 @@
       "type": "helmet",
       "race": "arctron",
       "job": [
-        "gunner",
+        "ranger",
         "marksman",
         "railgunner",
         "annihilator"
@@ -713,7 +713,7 @@
       "type": "gloves",
       "race": "arctron",
       "job": [
-        "gunner",
+        "ranger",
         "marksman",
         "railgunner",
         "annihilator"
@@ -733,7 +733,7 @@
       "type": "boots",
       "race": "arctron",
       "job": [
-        "gunner",
+        "ranger",
         "marksman",
         "railgunner",
         "annihilator"
@@ -752,7 +752,7 @@
       "type": "pants",
       "race": "arctron",
       "job": [
-        "gunner",
+        "ranger",
         "marksman",
         "railgunner",
         "annihilator"
@@ -772,7 +772,7 @@
       "type": "armor",
       "race": "arctron",
       "job": [
-        "gunner",
+        "ranger",
         "marksman",
         "railgunner",
         "annihilator"
@@ -791,7 +791,7 @@
       "type": "helmet",
       "race": "arctron",
       "job": [
-        "gunner",
+        "ranger",
         "marksman",
         "railgunner",
         "annihilator"
@@ -810,7 +810,7 @@
       "type": "gloves",
       "race": "arctron",
       "job": [
-        "gunner",
+        "ranger",
         "marksman",
         "railgunner",
         "annihilator"
@@ -830,7 +830,7 @@
       "type": "boots",
       "race": "arctron",
       "job": [
-        "gunner",
+        "ranger",
         "marksman",
         "railgunner",
         "annihilator"
@@ -849,7 +849,7 @@
       "type": "pants",
       "race": "arctron",
       "job": [
-        "gunner",
+        "ranger",
         "marksman",
         "railgunner",
         "annihilator"
@@ -869,7 +869,7 @@
       "type": "armor",
       "race": "arctron",
       "job": [
-        "gunner",
+        "ranger",
         "marksman",
         "railgunner",
         "annihilator"
@@ -888,7 +888,7 @@
       "type": "helmet",
       "race": "arctron",
       "job": [
-        "gunner",
+        "ranger",
         "marksman",
         "railgunner",
         "annihilator"
@@ -907,7 +907,7 @@
       "type": "gloves",
       "race": "arctron",
       "job": [
-        "gunner",
+        "ranger",
         "marksman",
         "railgunner",
         "annihilator"
@@ -927,7 +927,7 @@
       "type": "boots",
       "race": "arctron",
       "job": [
-        "gunner",
+        "ranger",
         "marksman",
         "railgunner",
         "annihilator"
@@ -946,7 +946,7 @@
       "type": "pants",
       "race": "arctron",
       "job": [
-        "gunner",
+        "ranger",
         "marksman",
         "railgunner",
         "annihilator"
@@ -13570,7 +13570,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": [
-        "gunner",
+        "ranger",
         "marksman",
         "railgunner",
         "annihilator"
@@ -13590,7 +13590,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": [
-        "gunner",
+        "ranger",
         "marksman",
         "railgunner",
         "annihilator"
@@ -13610,7 +13610,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": [
-        "gunner",
+        "ranger",
         "marksman",
         "railgunner",
         "annihilator"
@@ -13630,7 +13630,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": [
-        "gunner",
+        "ranger",
         "marksman",
         "railgunner",
         "annihilator"
@@ -13650,7 +13650,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": [
-        "gunner",
+        "ranger",
         "marksman",
         "railgunner",
         "annihilator"
@@ -13670,7 +13670,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": [
-        "gunner",
+        "ranger",
         "marksman",
         "railgunner",
         "annihilator"
@@ -13690,7 +13690,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": [
-        "gunner",
+        "ranger",
         "marksman",
         "railgunner",
         "annihilator"
@@ -13710,7 +13710,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": [
-        "gunner",
+        "ranger",
         "marksman",
         "railgunner",
         "annihilator"
@@ -13730,7 +13730,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": [
-        "gunner",
+        "ranger",
         "marksman",
         "railgunner",
         "annihilator"
@@ -13750,7 +13750,7 @@
       "type": "weapon",
       "race": "arctron",
       "job": [
-        "gunner",
+        "ranger",
         "marksman",
         "railgunner",
         "annihilator"
@@ -14813,13 +14813,13 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "wep_job_bionex_warrior_D",
+      "id": "wep_job_bionex_guardian_D",
       "name": "[D] Broadsword",
       "emoji": "\ud83d\udd2b",
       "rarity": "D",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_warrior",
+      "job": "bionex_guardian",
       "level": 1,
       "bonus": {
         "atk": 67
@@ -14828,13 +14828,13 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "wep_job_bionex_warrior_C",
+      "id": "wep_job_bionex_guardian_C",
       "name": "[C] Broadsword",
       "emoji": "\ud83d\udd2b",
       "rarity": "C",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_warrior",
+      "job": "bionex_guardian",
       "level": 1,
       "bonus": {
         "atk": 80
@@ -14843,13 +14843,13 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "wep_job_bionex_warrior_B",
+      "id": "wep_job_bionex_guardian_B",
       "name": "[B] Broadsword",
       "emoji": "\ud83d\udd2b",
       "rarity": "B",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_warrior",
+      "job": "bionex_guardian",
       "level": 1,
       "bonus": {
         "atk": 100
@@ -14858,13 +14858,13 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "wep_job_bionex_warrior_A",
+      "id": "wep_job_bionex_guardian_A",
       "name": "[A] Broadsword",
       "emoji": "\ud83d\udd2b",
       "rarity": "A",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_warrior",
+      "job": "bionex_guardian",
       "level": 1,
       "bonus": {
         "atk": 134
@@ -14873,13 +14873,13 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "wep_job_bionex_warrior_S",
+      "id": "wep_job_bionex_guardian_S",
       "name": "[S] Broadsword",
       "emoji": "\ud83d\udd2b",
       "rarity": "S",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_warrior",
+      "job": "bionex_guardian",
       "level": 1,
       "bonus": {
         "atk": 201
@@ -14888,13 +14888,13 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "wep_job_bionex_warrior_SS",
+      "id": "wep_job_bionex_guardian_SS",
       "name": "[SS] Broadsword",
       "emoji": "\ud83d\udd2b",
       "rarity": "SS",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_warrior",
+      "job": "bionex_guardian",
       "level": 1,
       "bonus": {
         "atk": 301
@@ -14903,13 +14903,13 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "wep_job_bionex_warrior_SSS",
+      "id": "wep_job_bionex_guardian_SSS",
       "name": "[SSS] Broadsword",
       "emoji": "\ud83d\udd2b",
       "rarity": "SSS",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_warrior",
+      "job": "bionex_guardian",
       "level": 1,
       "bonus": {
         "atk": 469
@@ -14918,13 +14918,13 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "wep_job_bionex_warrior_SR",
+      "id": "wep_job_bionex_guardian_SR",
       "name": "[SR] Broadsword",
       "emoji": "\ud83d\udd2b",
       "rarity": "SR",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_warrior",
+      "job": "bionex_guardian",
       "level": 1,
       "bonus": {
         "atk": 670
@@ -14933,13 +14933,13 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "wep_job_bionex_warrior_SSR",
+      "id": "wep_job_bionex_guardian_SSR",
       "name": "[SSR] Broadsword",
       "emoji": "\ud83d\udd2b",
       "rarity": "SSR",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_warrior",
+      "job": "bionex_guardian",
       "level": 1,
       "bonus": {
         "atk": 1005
@@ -14948,13 +14948,13 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
     },
     {
-      "id": "wep_job_bionex_warrior_UR",
+      "id": "wep_job_bionex_guardian_UR",
       "name": "[UR] Broadsword",
       "emoji": "\ud83d\udd2b",
       "rarity": "UR",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_warrior",
+      "job": "bionex_guardian",
       "level": 1,
       "bonus": {
         "atk": 1675
@@ -15313,7 +15313,7 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
     },
     {
-      "id": "wep_job_bionex_specialist_D",
+      "id": "wep_job_bionex_engineer_D",
       "name": "[D] Laser Spanner",
       "emoji": "\ud83d\udd2b",
       "rarity": "D",
@@ -15333,7 +15333,7 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
     },
     {
-      "id": "wep_job_bionex_specialist_C",
+      "id": "wep_job_bionex_engineer_C",
       "name": "[C] Laser Spanner",
       "emoji": "\ud83d\udd2b",
       "rarity": "C",
@@ -15353,7 +15353,7 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
     },
     {
-      "id": "wep_job_bionex_specialist_B",
+      "id": "wep_job_bionex_engineer_B",
       "name": "[B] Laser Spanner",
       "emoji": "\ud83d\udd2b",
       "rarity": "B",
@@ -15373,7 +15373,7 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
     },
     {
-      "id": "wep_job_bionex_specialist_A",
+      "id": "wep_job_bionex_engineer_A",
       "name": "[A] Laser Spanner",
       "emoji": "\ud83d\udd2b",
       "rarity": "A",
@@ -15393,7 +15393,7 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
     },
     {
-      "id": "wep_job_bionex_specialist_S",
+      "id": "wep_job_bionex_engineer_S",
       "name": "[S] Laser Spanner",
       "emoji": "\ud83d\udd2b",
       "rarity": "S",
@@ -15413,7 +15413,7 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
     },
     {
-      "id": "wep_job_bionex_specialist_SS",
+      "id": "wep_job_bionex_engineer_SS",
       "name": "[SS] Laser Spanner",
       "emoji": "\ud83d\udd2b",
       "rarity": "SS",
@@ -15433,7 +15433,7 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
     },
     {
-      "id": "wep_job_bionex_specialist_SSS",
+      "id": "wep_job_bionex_engineer_SSS",
       "name": "[SSS] Laser Spanner",
       "emoji": "\ud83d\udd2b",
       "rarity": "SSS",
@@ -15453,7 +15453,7 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
     },
     {
-      "id": "wep_job_bionex_specialist_SR",
+      "id": "wep_job_bionex_engineer_SR",
       "name": "[SR] Laser Spanner",
       "emoji": "\ud83d\udd2b",
       "rarity": "SR",
@@ -15473,7 +15473,7 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
     },
     {
-      "id": "wep_job_bionex_specialist_SSR",
+      "id": "wep_job_bionex_engineer_SSR",
       "name": "[SSR] Laser Spanner",
       "emoji": "\ud83d\udd2b",
       "rarity": "SSR",
@@ -15493,7 +15493,7 @@
       "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
     },
     {
-      "id": "wep_job_bionex_specialist_UR",
+      "id": "wep_job_bionex_engineer_UR",
       "name": "[UR] Laser Spanner",
       "emoji": "\ud83d\udd2b",
       "rarity": "UR",
@@ -21382,7 +21382,7 @@
       "type": "armor",
       "race": "arctron",
       "job": [
-        "engineer",
+        "technician",
         "architect",
         "core_engineer",
         "cybermancer"
@@ -21401,7 +21401,7 @@
       "type": "helmet",
       "race": "arctron",
       "job": [
-        "engineer",
+        "technician",
         "architect",
         "core_engineer",
         "cybermancer"
@@ -21420,7 +21420,7 @@
       "type": "gloves",
       "race": "arctron",
       "job": [
-        "engineer",
+        "technician",
         "architect",
         "core_engineer",
         "cybermancer"
@@ -21440,7 +21440,7 @@
       "type": "boots",
       "race": "arctron",
       "job": [
-        "engineer",
+        "technician",
         "architect",
         "core_engineer",
         "cybermancer"
@@ -21459,7 +21459,7 @@
       "type": "pants",
       "race": "arctron",
       "job": [
-        "engineer",
+        "technician",
         "architect",
         "core_engineer",
         "cybermancer"
@@ -21478,7 +21478,7 @@
       "type": "armor",
       "race": "arctron",
       "job": [
-        "engineer",
+        "technician",
         "architect",
         "core_engineer",
         "cybermancer"
@@ -21497,7 +21497,7 @@
       "type": "helmet",
       "race": "arctron",
       "job": [
-        "engineer",
+        "technician",
         "architect",
         "core_engineer",
         "cybermancer"
@@ -21516,7 +21516,7 @@
       "type": "gloves",
       "race": "arctron",
       "job": [
-        "engineer",
+        "technician",
         "architect",
         "core_engineer",
         "cybermancer"
@@ -21536,7 +21536,7 @@
       "type": "boots",
       "race": "arctron",
       "job": [
-        "engineer",
+        "technician",
         "architect",
         "core_engineer",
         "cybermancer"
@@ -21555,7 +21555,7 @@
       "type": "pants",
       "race": "arctron",
       "job": [
-        "engineer",
+        "technician",
         "architect",
         "core_engineer",
         "cybermancer"
@@ -21575,7 +21575,7 @@
       "type": "armor",
       "race": "arctron",
       "job": [
-        "engineer",
+        "technician",
         "architect",
         "core_engineer",
         "cybermancer"
@@ -21594,7 +21594,7 @@
       "type": "helmet",
       "race": "arctron",
       "job": [
-        "engineer",
+        "technician",
         "architect",
         "core_engineer",
         "cybermancer"
@@ -21613,7 +21613,7 @@
       "type": "gloves",
       "race": "arctron",
       "job": [
-        "engineer",
+        "technician",
         "architect",
         "core_engineer",
         "cybermancer"
@@ -21633,7 +21633,7 @@
       "type": "boots",
       "race": "arctron",
       "job": [
-        "engineer",
+        "technician",
         "architect",
         "core_engineer",
         "cybermancer"
@@ -21652,7 +21652,7 @@
       "type": "pants",
       "race": "arctron",
       "job": [
-        "engineer",
+        "technician",
         "architect",
         "core_engineer",
         "cybermancer"
@@ -21672,7 +21672,7 @@
       "type": "armor",
       "race": "arctron",
       "job": [
-        "engineer",
+        "technician",
         "architect",
         "core_engineer",
         "cybermancer"
@@ -21691,7 +21691,7 @@
       "type": "helmet",
       "race": "arctron",
       "job": [
-        "engineer",
+        "technician",
         "architect",
         "core_engineer",
         "cybermancer"
@@ -21710,7 +21710,7 @@
       "type": "gloves",
       "race": "arctron",
       "job": [
-        "engineer",
+        "technician",
         "architect",
         "core_engineer",
         "cybermancer"
@@ -21730,7 +21730,7 @@
       "type": "boots",
       "race": "arctron",
       "job": [
-        "engineer",
+        "technician",
         "architect",
         "core_engineer",
         "cybermancer"
@@ -21749,7 +21749,7 @@
       "type": "pants",
       "race": "arctron",
       "job": [
-        "engineer",
+        "technician",
         "architect",
         "core_engineer",
         "cybermancer"
@@ -21763,7 +21763,7 @@
     },
     {
       "id": "helmet_armorset_bionex_lv1",
-      "name": "[C] Lv.1 Bionex Warrior Helm",
+      "name": "[C] Lv.1 Bionex Guardian Helm",
       "emoji": "\ud83e\ude96",
       "rarity": "C",
       "type": "helmet",
@@ -21778,11 +21778,11 @@
       "bonus": {
         "def": 5
       },
-      "image": "/assets/armor_bionex/defbionexwarriorlv1helmet.png"
+      "image": "/assets/armor_bionex/defbionexguardianlv1helmet.png"
     },
     {
       "id": "armor_armorset_bionex_lv1",
-      "name": "[C] Lv.1 Bionex Warrior Plate",
+      "name": "[C] Lv.1 Bionex Guardian Plate",
       "emoji": "\ud83e\uddbe",
       "rarity": "C",
       "type": "armor",
@@ -21797,11 +21797,11 @@
       "bonus": {
         "def": 6
       },
-      "image": "/assets/armor_bionex/defbionexwarriorlv1armor.png"
+      "image": "/assets/armor_bionex/defbionexguardianlv1armor.png"
     },
     {
       "id": "pants_armorset_bionex_lv1",
-      "name": "[C] Lv.1 Bionex Warrior Legguard",
+      "name": "[C] Lv.1 Bionex Guardian Legguard",
       "emoji": "\ud83d\udc56",
       "rarity": "C",
       "type": "pants",
@@ -21816,11 +21816,11 @@
       "bonus": {
         "def": 5
       },
-      "image": "/assets/armor_bionex/defbionexwarriorlv1pants.png"
+      "image": "/assets/armor_bionex/defbionexguardianlv1pants.png"
     },
     {
       "id": "gloves_armorset_bionex_lv1",
-      "name": "[C] Lv.1 Bionex Warrior Gauntlets",
+      "name": "[C] Lv.1 Bionex Guardian Gauntlets",
       "emoji": "\ud83e\udde4",
       "rarity": "C",
       "type": "gloves",
@@ -21836,11 +21836,11 @@
         "def": 4,
         "atk": 3
       },
-      "image": "/assets/armor_bionex/defbionexwarriorlv1gloves.png"
+      "image": "/assets/armor_bionex/defbionexguardianlv1gloves.png"
     },
     {
       "id": "boots_armorset_bionex_lv1",
-      "name": "[C] Lv.1 Bionex Warrior Greaves",
+      "name": "[C] Lv.1 Bionex Guardian Greaves",
       "emoji": "\ud83d\udc62",
       "rarity": "C",
       "type": "boots",
@@ -21855,11 +21855,11 @@
       "bonus": {
         "def": 4
       },
-      "image": "/assets/armor_bionex/defbionexwarriorlv1boots.png"
+      "image": "/assets/armor_bionex/defbionexguardianlv1boots.png"
     },
     {
       "id": "helmet_armorset_bionex_lv32",
-      "name": "[C] Lv.32 Bionex Warrior Helm",
+      "name": "[C] Lv.32 Bionex Guardian Helm",
       "emoji": "\ud83e\ude96",
       "rarity": "C",
       "type": "helmet",
@@ -21874,11 +21874,11 @@
       "bonus": {
         "def": 149
       },
-      "image": "/assets/armor_bionex/defbionexwarriorlv32helmet.png"
+      "image": "/assets/armor_bionex/defbionexguardianlv32helmet.png"
     },
     {
       "id": "armor_armorset_bionex_lv32",
-      "name": "[C] Lv.32 Bionex Warrior Plate",
+      "name": "[C] Lv.32 Bionex Guardian Plate",
       "emoji": "\ud83e\uddbe",
       "rarity": "C",
       "type": "armor",
@@ -21893,11 +21893,11 @@
       "bonus": {
         "def": 181
       },
-      "image": "/assets/armor_bionex/defbionexwarriorlv32armor.png"
+      "image": "/assets/armor_bionex/defbionexguardianlv32armor.png"
     },
     {
       "id": "pants_armorset_bionex_lv32",
-      "name": "[C] Lv.32 Bionex Warrior Legguard",
+      "name": "[C] Lv.32 Bionex Guardian Legguard",
       "emoji": "\ud83d\udc56",
       "rarity": "C",
       "type": "pants",
@@ -21913,11 +21913,11 @@
         "def": 159,
         "hp": 1988
       },
-      "image": "/assets/armor_bionex/defbionexwarriorlv32pants.png"
+      "image": "/assets/armor_bionex/defbionexguardianlv32pants.png"
     },
     {
       "id": "gloves_armorset_bionex_lv32",
-      "name": "[C] Lv.32 Bionex Warrior Gauntlets",
+      "name": "[C] Lv.32 Bionex Guardian Gauntlets",
       "emoji": "\ud83e\udde4",
       "rarity": "C",
       "type": "gloves",
@@ -21933,11 +21933,11 @@
         "def": 129,
         "atk": 57
       },
-      "image": "/assets/armor_bionex/defbionexwarriorlv32gloves.png"
+      "image": "/assets/armor_bionex/defbionexguardianlv32gloves.png"
     },
     {
       "id": "boots_armorset_bionex_lv32",
-      "name": "[C] Lv.32 Bionex Warrior Greaves",
+      "name": "[C] Lv.32 Bionex Guardian Greaves",
       "emoji": "\ud83d\udc62",
       "rarity": "C",
       "type": "boots",
@@ -21952,11 +21952,11 @@
       "bonus": {
         "def": 122
       },
-      "image": "/assets/armor_bionex/defbionexwarriorlv32boots.png"
+      "image": "/assets/armor_bionex/defbionexguardianlv32boots.png"
     },
     {
       "id": "helmet_armorset_bionex_lv42",
-      "name": "[C] Lv.42 Bionex Warrior Helm",
+      "name": "[C] Lv.42 Bionex Guardian Helm",
       "emoji": "\ud83e\ude96",
       "rarity": "C",
       "type": "helmet",
@@ -21971,11 +21971,11 @@
       "bonus": {
         "def": 197
       },
-      "image": "/assets/armor_bionex/defbionexwarriorlv42helmet.png"
+      "image": "/assets/armor_bionex/defbionexguardianlv42helmet.png"
     },
     {
       "id": "armor_armorset_bionex_lv42",
-      "name": "[C] Lv.42 Bionex Warrior Plate",
+      "name": "[C] Lv.42 Bionex Guardian Plate",
       "emoji": "\ud83e\uddbe",
       "rarity": "C",
       "type": "armor",
@@ -21990,11 +21990,11 @@
       "bonus": {
         "def": 239
       },
-      "image": "/assets/armor_bionex/defbionexwarriorlv42armor.png"
+      "image": "/assets/armor_bionex/defbionexguardianlv42armor.png"
     },
     {
       "id": "pants_armorset_bionex_lv42",
-      "name": "[C] Lv.42 Bionex Warrior Legguard",
+      "name": "[C] Lv.42 Bionex Guardian Legguard",
       "emoji": "\ud83d\udc56",
       "rarity": "C",
       "type": "pants",
@@ -22010,11 +22010,11 @@
         "def": 211,
         "hp": 2638
       },
-      "image": "/assets/armor_bionex/defbionexwarriorlv42pants.png"
+      "image": "/assets/armor_bionex/defbionexguardianlv42pants.png"
     },
     {
       "id": "gloves_armorset_bionex_lv42",
-      "name": "[C] Lv.42 Bionex Warrior Gauntlets",
+      "name": "[C] Lv.42 Bionex Guardian Gauntlets",
       "emoji": "\ud83e\udde4",
       "rarity": "C",
       "type": "gloves",
@@ -22030,11 +22030,11 @@
         "def": 171,
         "atk": 78
       },
-      "image": "/assets/armor_bionex/defbionexwarriorlv42gloves.png"
+      "image": "/assets/armor_bionex/defbionexguardianlv42gloves.png"
     },
     {
       "id": "boots_armorset_bionex_lv42",
-      "name": "[C] Lv.42 Bionex Warrior Greaves",
+      "name": "[C] Lv.42 Bionex Guardian Greaves",
       "emoji": "\ud83d\udc62",
       "rarity": "C",
       "type": "boots",
@@ -22049,11 +22049,11 @@
       "bonus": {
         "def": 161
       },
-      "image": "/assets/armor_bionex/defbionexwarriorlv42boots.png"
+      "image": "/assets/armor_bionex/defbionexguardianlv42boots.png"
     },
     {
       "id": "helmet_armorset_bionex_lv55",
-      "name": "[C] Lv.55 Bionex Warrior Helm",
+      "name": "[C] Lv.55 Bionex Guardian Helm",
       "emoji": "\ud83e\ude96",
       "rarity": "C",
       "type": "helmet",
@@ -22068,11 +22068,11 @@
       "bonus": {
         "def": 260
       },
-      "image": "/assets/armor_bionex/defbionexwarriorlv55helmet.png"
+      "image": "/assets/armor_bionex/defbionexguardianlv55helmet.png"
     },
     {
       "id": "armor_armorset_bionex_lv55",
-      "name": "[C] Lv.55 Bionex Warrior Plate",
+      "name": "[C] Lv.55 Bionex Guardian Plate",
       "emoji": "\ud83e\uddbe",
       "rarity": "C",
       "type": "armor",
@@ -22087,11 +22087,11 @@
       "bonus": {
         "def": 315
       },
-      "image": "/assets/armor_bionex/defbionexwarriorlv55armor.png"
+      "image": "/assets/armor_bionex/defbionexguardianlv55armor.png"
     },
     {
       "id": "pants_armorset_bionex_lv55",
-      "name": "[C] Lv.55 Bionex Warrior Legguard",
+      "name": "[C] Lv.55 Bionex Guardian Legguard",
       "emoji": "\ud83d\udc56",
       "rarity": "C",
       "type": "pants",
@@ -22107,11 +22107,11 @@
         "def": 278,
         "hp": 3442
       },
-      "image": "/assets/armor_bionex/defbionexwarriorlv55pants.png"
+      "image": "/assets/armor_bionex/defbionexguardianlv55pants.png"
     },
     {
       "id": "gloves_armorset_bionex_lv55",
-      "name": "[C] Lv.55 Bionex Warrior Gauntlets",
+      "name": "[C] Lv.55 Bionex Guardian Gauntlets",
       "emoji": "\ud83e\udde4",
       "rarity": "C",
       "type": "gloves",
@@ -22127,11 +22127,11 @@
         "def": 225,
         "atk": 105
       },
-      "image": "/assets/armor_bionex/defbionexwarriorlv55gloves.png"
+      "image": "/assets/armor_bionex/defbionexguardianlv55gloves.png"
     },
     {
       "id": "boots_armorset_bionex_lv55",
-      "name": "[C] Lv.55 Bionex Warrior Greaves",
+      "name": "[C] Lv.55 Bionex Guardian Greaves",
       "emoji": "\ud83d\udc62",
       "rarity": "C",
       "type": "boots",
@@ -22146,11 +22146,11 @@
       "bonus": {
         "def": 213
       },
-      "image": "/assets/armor_bionex/defbionexwarriorlv55boots.png"
+      "image": "/assets/armor_bionex/defbionexguardianlv55boots.png"
     },
     {
       "id": "helmet_armorset_bionex_lv66",
-      "name": "[C] Lv.66 Bionex Warrior Helm",
+      "name": "[C] Lv.66 Bionex Guardian Helm",
       "emoji": "\ud83e\ude96",
       "rarity": "C",
       "type": "helmet",
@@ -22165,11 +22165,11 @@
       "bonus": {
         "def": 322
       },
-      "image": "/assets/armor_bionex/defbionexwarriorlv66helmet.png"
+      "image": "/assets/armor_bionex/defbionexguardianlv66helmet.png"
     },
     {
       "id": "armor_armorset_bionex_lv66",
-      "name": "[C] Lv.66 Bionex Warrior Plate",
+      "name": "[C] Lv.66 Bionex Guardian Plate",
       "emoji": "\ud83e\uddbe",
       "rarity": "C",
       "type": "armor",
@@ -22184,11 +22184,11 @@
       "bonus": {
         "def": 391
       },
-      "image": "/assets/armor_bionex/defbionexwarriorlv66armor.png"
+      "image": "/assets/armor_bionex/defbionexguardianlv66armor.png"
     },
     {
       "id": "pants_armorset_bionex_lv66",
-      "name": "[C] Lv.66 Bionex Warrior Legguard",
+      "name": "[C] Lv.66 Bionex Guardian Legguard",
       "emoji": "\ud83d\udc56",
       "rarity": "C",
       "type": "pants",
@@ -22204,11 +22204,11 @@
         "def": 345,
         "hp": 4246
       },
-      "image": "/assets/armor_bionex/defbionexwarriorlv66pants.png"
+      "image": "/assets/armor_bionex/defbionexguardianlv66pants.png"
     },
     {
       "id": "gloves_armorset_bionex_lv66",
-      "name": "[C] Lv.66 Bionex Warrior Gauntlets",
+      "name": "[C] Lv.66 Bionex Guardian Gauntlets",
       "emoji": "\ud83e\udde4",
       "rarity": "C",
       "type": "gloves",
@@ -22224,11 +22224,11 @@
         "def": 279,
         "atk": 133
       },
-      "image": "/assets/armor_bionex/defbionexwarriorlv66gloves.png"
+      "image": "/assets/armor_bionex/defbionexguardianlv66gloves.png"
     },
     {
       "id": "boots_armorset_bionex_lv66",
-      "name": "[C] Lv.66 Bionex Warrior Greaves",
+      "name": "[C] Lv.66 Bionex Guardian Greaves",
       "emoji": "\ud83d\udc62",
       "rarity": "C",
       "type": "boots",
@@ -22243,7 +22243,7 @@
       "bonus": {
         "def": 264
       },
-      "image": "/assets/armor_bionex/defbionexwarriorlv66boots.png"
+      "image": "/assets/armor_bionex/defbionexguardianlv66boots.png"
     },
     {
       "id": "helmet_armorset_bionex_marksman_lv1",

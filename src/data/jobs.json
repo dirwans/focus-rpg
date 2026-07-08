@@ -348,9 +348,9 @@
   "arctron": {
     "tier1": [
       {
-        "id": "destroyer",
-        "name": "Destroyer",
-        "desc": "Frontline heavy melee unit.",
+        "id": "warrior",
+        "name": "Warrior",
+        "desc": "Basic frontline heavy melee unit.",
         "bonus": {
           "hp": 220,
           "atk": 28,
@@ -369,9 +369,9 @@
         "levelReq": 1
       },
       {
-        "id": "gunner",
-        "name": "Gunner",
-        "desc": "Heavy weapons ranged specialist.",
+        "id": "ranger",
+        "name": "Ranger",
+        "desc": "Basic heavy weapons ranged unit.",
         "bonus": {
           "hp": 180,
           "atk": 32,
@@ -390,9 +390,9 @@
         "levelReq": 1
       },
       {
-        "id": "engineer",
-        "name": "Engineer",
-        "desc": "Tactical defense structure builder.",
+        "id": "technician",
+        "name": "Technician",
+        "desc": "Basic tactical defense structure builder.",
         "bonus": {
           "hp": 170,
           "atk": 24,

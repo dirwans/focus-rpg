@@ -74,28 +74,28 @@ export function addToInventory(inventory, item, count = 1) {
 // Caster-lineage jobs (Celestra Mage + Summoner, Bionex Psion) use staffs instead of
 // the default sword/axe — Arctron has no caster lineage, so it never matches here.
 const STAFF_JOBS = [
-  'arcanist', 'rune_caster', 'mystic', 'archmage',
+  'mage', 'rune_caster', 'mystic', 'archmage',
   'oracle', 'celestial_oracle', 'conjurer', 'divine_summoner',
   'psion', 'esper', 'ascendant', 'transcendent'
 ]
 
 // Ranger-lineage jobs (agility/ranged attacker) across all 3 factions use bows.
 const BOW_JOBS = [
-  'gunner', 'marksman', 'railgunner', 'annihilator',
+  'ranger', 'marksman', 'railgunner', 'annihilator',
   'revenant', 'deadeye', 'predator',
   'pathfinder', 'windrunner', 'shadow_hunter', 'stargazer'
 ]
 
 // Warrior-lineage jobs across all 3 factions (used for bespoke armor-set art lookup).
 const WARRIOR_JOBS = [
-  'destroyer', 'vanguard', 'juggernaut', 'dreadnought',
+  'warrior', 'vanguard', 'juggernaut', 'dreadnought',
   'guardian', 'centurion', 'protector', 'imperator',
   'sentinel', 'warden', 'knight', 'blademaster'
 ]
 
 // Technician/specialist-lineage jobs (used for bespoke armor-set art lookup).
 const TECHNICIAN_JOBS = [
-  'engineer', 'architect', 'core_engineer', 'cybermancer',
+  'technician', 'architect', 'core_engineer', 'cybermancer',
   'mechanist', 'techmaster', 'overseer'
 ]
 
@@ -104,7 +104,7 @@ const TECHNICIAN_JOBS = [
 // through to `item.image` (no dedicated per-tier sprite).
 const ARMOR_SET_LINEAGES = {
   arctron: ['warrior', 'ranger', 'technician'],
-  bionex: ['warrior', 'marksman', 'psion'],
+  bionex: ['guardian', 'marksman', 'psion'],
   celestra: ['warrior', 'ranger', 'mage']
 }
 
@@ -123,8 +123,10 @@ function resolveArmorSetImage(slot, playerRace, playerJob, level) {
   if (playerRace === 'bionex' && lineage === 'mage') {
     lineage = 'psion'
   }
-  if (playerRace === 'bionex' && (lineage === 'technician' || lineage === 'ranger')) {
-    lineage = 'marksman'
+  if (playerRace === 'bionex') {
+    if (lineage === 'warrior') lineage = 'guardian'
+    else if (lineage === 'technician' || lineage === 'ranger') lineage = 'marksman'
+    else if (lineage === 'mage') lineage = 'psion'
   }
   if (!lineage) return null
   const available = ARMOR_SET_LINEAGES[playerRace] || []
@@ -308,7 +310,7 @@ export function verifyStarterWeapon(player) {
 
   if (player.race === 'arctron') {
     if (isRanger) {
-      starterWeaponId = "wep_job_gunner_D"
+      starterWeaponId = "wep_job_ranger_D"
     } else if (isTech) {
       starterWeaponId = "wep_arctron_1_D"
     }
@@ -316,7 +318,7 @@ export function verifyStarterWeapon(player) {
     if (isRanger) {
       starterWeaponId = "wep_bionex_1_D"
     } else if (isTech) {
-      starterWeaponId = "wep_job_bionex_specialist_D"
+      starterWeaponId = "wep_job_bionex_engineer_D"
     } else if (isCaster) {
       starterWeaponId = "wep_job_bionex_spiritualist_D"
     }
@@ -603,12 +605,12 @@ export function getPlayerClassGroup(jobId, raceId) {
   const race = raceId ? raceId.toLowerCase() : '';
   
   if (job.includes('sentinel') || job.includes('warden') || job.includes('knight') || job.includes('blademaster') ||
-      job.includes('destroyer') || job.includes('vanguard') || job.includes('juggernaut') || job.includes('dreadnought') ||
+      job.includes('warrior') || job.includes('vanguard') || job.includes('juggernaut') || job.includes('dreadnought') ||
       job.includes('guardian') || job.includes('centurion') || job.includes('protector') || job.includes('imperator')) {
     return 'warrior';
   }
   if (job.includes('pathfinder') || job.includes('windrunner') || job.includes('shadow_hunter') || job.includes('stargazer') ||
-      job.includes('gunner') || job.includes('marksman') || job.includes('railgunner') || job.includes('annihilator') ||
+      job.includes('ranger') || job.includes('marksman') || job.includes('railgunner') || job.includes('annihilator') ||
       job.includes('revenant') || job.includes('deadeye') || job.includes('predator')) {
     return 'ranger';
   }
@@ -617,7 +619,7 @@ export function getPlayerClassGroup(jobId, raceId) {
     return 'mage';
   }
   if (job.includes('oracle') || job.includes('celestial_oracle') || job.includes('conjurer') || job.includes('divine_summoner') ||
-      job.includes('engineer') || job.includes('architect') || job.includes('core_engineer') || job.includes('cybermancer') ||
+      job.includes('technician') || job.includes('architect') || job.includes('core_engineer') || job.includes('cybermancer') ||
       job.includes('mechanist') || job.includes('techmaster') || job.includes('overseer')) {
     return 'specialist';
   }
@@ -2029,7 +2031,7 @@ export const useGameStore = create(
           const playerMaxHp = battle.playerMaxHp || get().getStats().hp
           // Trigger heal only when health is critical (below 35%)
           if (nextPlayerHp > 0 && nextPlayerHp < playerMaxHp * 0.35) {
-            const hasSkill = ['acolyte', 'eidolon_caller', 'high_summoner', 'guardian', 'lumina_paladin', 'engineer', 'mechanist', 'war_engineer', 'bionex_specialist', 'craftsman', 'mental_smith', 'chandra', 'holy_chandra'].includes(player.job)
+            const hasSkill = ['acolyte', 'eidolon_caller', 'high_summoner', 'guardian', 'lumina_paladin', 'technician', 'mechanist', 'war_engineer', 'bionex_engineer', 'craftsman', 'mental_smith', 'chandra', 'holy_chandra'].includes(player.job)
             
             if (hasSkill) {
               if (nextPlayerFp >= 50) {
@@ -2038,7 +2040,7 @@ export const useGameStore = create(
                 const healAmount = Math.floor(playerMaxHp * 0.35)
                 nextPlayerHp = Math.min(playerMaxHp, nextPlayerHp + healAmount)
                 
-                const skillName = ['engineer', 'mechanist', 'war_engineer', 'bionex_specialist', 'craftsman', 'mental_smith'].includes(player.job) ? 'Repair Matrix' : 'Spiritual Heal'
+                const skillName = ['technician', 'mechanist', 'war_engineer', 'bionex_engineer', 'craftsman', 'mental_smith'].includes(player.job) ? 'Repair Matrix' : 'Spiritual Heal'
                 if (newLog.length > 7) newLog = newLog.slice(-7)
                 newLog.push(`✨ [Skill] Pilot menggunakan ${skillName}! (+${healAmount} HP, -50 FP)`)
               } else if (player.settings?.autoHpPotion === 'ON') {
@@ -2743,7 +2745,7 @@ export const useGameStore = create(
           if (player.race === 'bionex') {
             const guardianJobs = ['guardian', 'centurion', 'protector', 'imperator'];
             const marksmanJobs = ['marksman', 'revenant', 'deadeye', 'predator'];
-            const engineerJobs = ['engineer', 'mechanist', 'techmaster', 'overseer'];
+            const engineerJobs = ['technician', 'mechanist', 'techmaster', 'overseer'];
             const psionJobs = ['psion', 'esper', 'ascendant', 'transcendent'];
             if (guardianJobs.includes(player.job)) {
               growth = { hp: 13, atk: 2, def: 2 }
@@ -2759,9 +2761,9 @@ export const useGameStore = create(
               baseHpScaling = 165; baseAtkScaling = 31; baseDefScaling = 14;
             }
           } else if (player.race === 'arctron') {
-            const warriorJobs = ['destroyer', 'vanguard', 'juggernaut', 'dreadnought'];
-            const rangerJobs = ['gunner', 'marksman', 'railgunner', 'annihilator'];
-            const techJobs = ['engineer', 'architect', 'core_engineer', 'cybermancer'];
+            const warriorJobs = ['warrior', 'vanguard', 'juggernaut', 'dreadnought'];
+            const rangerJobs = ['ranger', 'marksman', 'railgunner', 'annihilator'];
+            const techJobs = ['technician', 'architect', 'core_engineer', 'cybermancer'];
             if (warriorJobs.includes(player.job)) {
               growth = { hp: 14, atk: 2, def: 2 }
               baseHpScaling = 220; baseAtkScaling = 28; baseDefScaling = 24;

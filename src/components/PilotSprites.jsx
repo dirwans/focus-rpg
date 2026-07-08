@@ -7,8 +7,8 @@ import arctronSpecialistImg from '../assets/arctron_specialist.png'
 import bionexPilotImg from '../assets/bionex_pilot_v3.png'
 import bionexPilotMaleImg from '../assets/bionex_pilot.png'
 import bionexPortraitImg from '../assets/bionex_pilot_portrait.png'
-import bionexWarriorFemaleImg from '../assets/bionex_warrior_female.png'
-import bionexWarriorMaleImg from '../assets/bionex_warrior_male.png'
+import bionexGuardianFemaleImg from '../assets/bionex_guardian_female.png'
+import bionexGuardianMaleImg from '../assets/bionex_guardian_male.png'
 import bionexMarksmanFemaleImg from '../assets/bionex_marksman_female.png'
 import bionexMarksmanMaleImg from '../assets/bionex_marksman_male.png'
 import bionexEngineerFemaleImg from '../assets/bionex_engineer_female.png'
@@ -39,10 +39,10 @@ function getJobLane(jobId) {
     'recruit', 'vanguard', 'titan_pilot',
     'guardian', 'spirit_knight', 'lumina_paladin',
     'sentinel', 'warden', 'knight', 'blademaster',
-    'destroyer', 'vanguard', 'juggernaut', 'dreadnought'
+    'warrior', 'vanguard', 'juggernaut', 'dreadnought'
   ]
   const rangerJobs = [
-    'gunner', 'siege_gunner', 'nova_destroyer',
+    'ranger', 'siege_gunner', 'nova_destroyer',
     'ranger', 'sharpshooter', 'railgun_elite',
     'mystic_archer', 'moon_ranger', 'star_seeker',
     'pathfinder', 'windrunner', 'shadow_hunter', 'stargazer',
@@ -102,7 +102,7 @@ export function BionexSprite({ job, size = 60, width, height, upperBodyOnly = fa
 
   if (guardianJobs.includes(job)) {
     if (job === 'imperator' || job === 'protector') img = bionexTitanPilotImg;
-    else img = isFemale ? bionexWarriorFemaleImg : bionexWarriorMaleImg;
+    else img = isFemale ? bionexGuardianFemaleImg : bionexGuardianMaleImg;
   } else if (marksmanJobs.includes(job)) {
     if (job === 'predator' || job === 'deadeye') img = bionexRailgunEliteImg;
     else img = isFemale ? bionexMarksmanFemaleImg : bionexMarksmanMaleImg;

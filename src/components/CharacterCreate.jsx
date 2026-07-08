@@ -97,10 +97,10 @@ const FACTION_THEMES = {
 }
 
 const CLASS_DESCRIPTIONS = {
-  destroyer: 'Frontline juggernaut, soaks damage, holds the line.',
-  gunner: 'Long-range marksman, outguns from a distance.',
-  engineer: 'Tactical support, gadgets and battlefield control.',
-  guardian: 'Basic defense unit, leads the charge with force.',
+  warrior: 'Frontline juggernaut, soaks damage, holds the line.',
+  ranger: 'Long-range marksman, outguns from a distance.',
+  technician: 'Tactical support, gadgets and battlefield control.',
+  guardian: 'Frontline defense unit, protects allies and leads with force.',
   marksman: 'Precision marksman for high-speed strikes.',
   psion: 'Arcane-tech caster, channels blasts of energy.',
   sentinel: 'Blade-bound fighter sworn to the old rites.',
@@ -110,27 +110,30 @@ const CLASS_DESCRIPTIONS = {
 }
 
 const getClassMonogram = (jobId) => {
-  if (jobId === 'destroyer' || jobId === 'guardian' || jobId === 'sentinel') return 'W'
-  if (jobId === 'gunner' || jobId === 'marksman' || jobId === 'pathfinder') return 'R'
-  if (jobId === 'engineer') return 'S'
+  if (jobId === 'warrior' || jobId === 'sentinel') return 'W'
+  if (jobId === 'guardian') return 'G'
+  if (jobId === 'ranger' || jobId === 'marksman' || jobId === 'pathfinder') return 'R'
+  if (jobId === 'technician') return 'S'
   if (jobId === 'psion' || jobId === 'arcanist') return 'M'
   if (jobId === 'oracle') return 'SU'
   return 'N'
 }
 
 const getClassRoleTag = (jobId) => {
-  if (jobId === 'destroyer' || jobId === 'guardian' || jobId === 'sentinel') return 'MELEE · TANK'
-  if (jobId === 'gunner' || jobId === 'marksman' || jobId === 'pathfinder') return 'RANGED'
-  if (jobId === 'engineer') return 'TECH · SUPPORT'
+  if (jobId === 'warrior' || jobId === 'sentinel') return 'MELEE · TANK'
+  if (jobId === 'guardian') return 'DEFENSE · TANK'
+  if (jobId === 'ranger' || jobId === 'marksman' || jobId === 'pathfinder') return 'RANGED'
+  if (jobId === 'technician') return 'TECH · SUPPORT'
   if (jobId === 'psion' || jobId === 'arcanist') return 'CASTER'
   if (jobId === 'oracle') return 'SUMMON'
   return 'NOVICE'
 }
 
 const getClassBaseName = (jobId) => {
-  if (jobId === 'destroyer' || jobId === 'guardian' || jobId === 'sentinel') return 'WARRIOR'
-  if (jobId === 'gunner' || jobId === 'marksman' || jobId === 'pathfinder') return 'RANGER'
-  if (jobId === 'engineer') return 'SPECIALIST'
+  if (jobId === 'warrior' || jobId === 'sentinel') return 'WARRIOR'
+  if (jobId === 'guardian') return 'GUARDIAN'
+  if (jobId === 'ranger' || jobId === 'marksman' || jobId === 'pathfinder') return 'RANGER'
+  if (jobId === 'technician') return 'ENGINEER'
   if (jobId === 'psion' || jobId === 'arcanist') return 'MAGE'
   if (jobId === 'oracle') return 'SUMMONER'
   return 'NOVICE'

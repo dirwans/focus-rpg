@@ -457,8 +457,8 @@ export default function Main() {
   // CLASS names by faction (mapped by job index position in tier arrays)
   const CLASS_NAMES = {
     celestra: ['Warrior', 'Ranger', 'Summoner', 'Mage'],
-    arctron:  ['Warrior', 'Ranger', 'Specialist'],
-    bionex:   ['Warrior', 'Marksman', 'Specialist', 'Psion']
+    arctron:  ['Warrior', 'Ranger', 'Technician'],
+    bionex:   ['Guardian', 'Marksman', 'Engineer', 'Psion']
   }
 
   const { tier, job: jobInfo, classIndex } = getJobInfo(player.race, player.job)
