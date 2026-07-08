@@ -978,6 +978,15 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 - **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
 - **Verification**: Verified that `npm run build` succeeds locally.
 
+---
+
+### 🎨 Milestone 68: Bionex Marksman Tier Assets Regeneration (Lv.42 Remaining Pieces) [DEPLOYED]
+- **Assets**: Regenerated 2 remaining pieces of Bionex Marksman Level 42 set (`boots`, `gloves`) using the `/regenerate-2.5D-anime-realistic` custom skill to match the mecha ranger style with dark steel plating and blue/cyan glowing panels. (Psion Level 66 set remains queued due to image generator quota limits).
+- **Post-processing**: Ran the script `process_gears.py` to remove backgrounds, crop, center/pad, and resize to 320x320 transparent PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
+- **Verification**: Verified that `npm run build` succeeds locally.
+
+
 
 
 
