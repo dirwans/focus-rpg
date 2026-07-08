@@ -1269,3 +1269,19 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 - **Paths**: Overwrote files in both `public/assets/armor_celestra/` and `src/assets/armor_celestra/` as `defcelestramagelv66helmet.png`.
 - **Logic**: Updated `resolveArmorSetImage` in `src/store/gameStore.js` to bump the cache version parameter from `v=7` to `v=8` for Celestra armor sets.
 - **Verification**: Verified that `npm run build` succeeds locally.
+
+---
+
+### 🎨 Milestone 95: Celestra Mage Lv.55 Set Reconstruction (Full 5 Pieces) [PENDING DEPLOYMENT]
+- **Assets**: Reconstructed all 5 pieces of the Celestra Mage Lv.55 mecha armor set (`armor`, `helmet`, `pants`, `boots`, `gloves`) from the newly provided high-resolution reference sheet `truelv55mage.png`.
+- **Post-processing**:
+  - Wrote and executed the script `extract_truelv55mage.py` to crop each quadrant/panel:
+    - **Armor**: Isolated from Top-Left panel.
+    - **Pants**: Isolated from Top-Middle panel.
+    - **Boots**: Isolated from Top-Right panel.
+    - **Helmet**: Isolated from Bottom-Right panel.
+    - **Gloves**: Isolated and combined the Right Gauntlet (Bottom-Left) and Left Gauntlet (Bottom-Middle) side-by-side with a 25% gap to form a symmetrical pair.
+  - Applied `rembg` background removal, tightly cropped, padded to square canvases, and resized each to 320x320 transparent PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_celestra/` and `src/assets/armor_celestra/` as `defcelestramagelv55{armor,helmet,pants,boots,gloves}.png`.
+- **Logic**: Updated `resolveArmorSetImage` in `src/store/gameStore.js` to bump the cache version parameter from `v=8` to `v=9` for Celestra armor sets.
+- **Verification**: Verified that `npm run build` succeeds locally.

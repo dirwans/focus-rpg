@@ -143,7 +143,7 @@ function resolveArmorSetImage(slot, playerRace, playerJob, level) {
   if (playerRace === 'bionex') {
     return `/assets/armor_bionex/defbionex${lineage}lv${tier}${slot}.png?v=5`
   } else if (playerRace === 'celestra') {
-    return `/assets/armor_celestra/defcelestra${lineage}lv${tier}${slot}.png?v=8`
+    return `/assets/armor_celestra/defcelestra${lineage}lv${tier}${slot}.png?v=9`
   }
   return `/assets/armor/def${playerRace}${lineage}lv${tier}${slot}.png?v=5`
 }
