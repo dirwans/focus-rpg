@@ -47,6 +47,12 @@ When generating image assets, always follow this prioritized endpoint hierarchy:
 
 To prevent wasting paid API tokens/credits on incorrect model interpretations:
 1. **Never batch-generate paid assets blindly**. 
-2. Before sending any paid API requests (OpenRouter/Endpoint 2), the agent **must** list out the planned prompt descriptions, target colors, and shape reference summaries in the chat.
+2. Before sending any paid API requests (OpenRouter/Endpoint 2), the agent **must**:
+   - Open and analyze the target reference image using the agent's vision capabilities.
+   - Write a detailed visual breakdown in the chat:
+     - **Component Structure**: (e.g., collar type, sleeve length, plate layout).
+     - **Exact Color Placement**: (e.g., base color, trim color, highlight placement).
+     - **Silhouette & Pattern Complexity**: (e.g., simple flat design, minimal decals).
+   - Draft a highly restrictive prompt based on this analysis, specifically mandating a plain, flat, non-complex 2.5D anime style.
 3. The agent must wait for the user to explicitly confirm ("Gasss", "Setuju", or feedback) before invoking the script.
 
