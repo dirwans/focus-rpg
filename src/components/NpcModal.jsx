@@ -707,7 +707,8 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
           // Rates: +1 (100%), +2 (90%), +3 (70%), +4 (50%), +5 (35%), +6 (20%), +7 (10%), +8 (5%)
           const BASE_SUCCESS_RATES = [100, 90, 70, 50, 35, 20, 10, 5]
           const baseRate = item ? (BASE_SUCCESS_RATES[currentEnh] || 0) : 0
-          const finalRate = hasItem ? (useLuckyRelic ? Math.min(100, baseRate + 10) : baseRate) : 0
+          const productionGM = (player.pt?.production?.val || 0) >= 99
+          const finalRate = hasItem ? Math.min(100, baseRate + (useLuckyRelic ? 10 : 0) + (productionGM ? 3 : 0)) : 0
 
           // Validity checks
           const hasArcanite = arcaniteOwned >= 1
@@ -963,6 +964,12 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                         Gunakan Lucky Relic (+10% Success Rate)
                       </label>
                     </div>
+
+                    {productionGM && (
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14, fontFamily: 'monospace', fontSize: '12px', color: '#5fe08a' }}>
+                        🏭 Production PT GM Active (+3% Success Rate)
+                      </div>
+                    )}
 
                     <button
                       onClick={handleEnhance}
@@ -1730,62 +1737,40 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
             </div>
           )}
 
-          {/* ─── PREMIUM SHOP MANAGER ─── */}
+          {/* ─── PREMIUM SHOP MANAGER (entrance → real Premium Shop screen) ─── */}
           {subView === 'premium_shop_mgr' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-              <div style={styles.avatarRow}>
-                <div style={styles.npcAvatarLarge}><span style={{ fontSize: 52 }}>💎</span></div>
-                <div style={styles.npcDialog}>"Looking for premium items? You've come to the right place. NXC accepted here."</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 14, alignItems: 'center', paddingTop: 20 }}>
+              <div style={{ fontSize: 64 }}>💎</div>
+              <div style={{ fontFamily: 'var(--font-title)', fontSize: 20, color: '#ffd700', fontWeight: 900, textAlign: 'center', letterSpacing: 1 }}>
+                Premium Shop
               </div>
-              <div style={styles.statusBox}>
-                <div style={styles.statusLabel}>ROLE</div>
-                <div style={styles.statusVal}>Premium Shop NPC</div>
-              </div>
-              <div style={{ background: 'rgba(255,215,0,0.06)', border: '1px solid rgba(255,215,0,0.25)', borderRadius: 10, padding: 14 }}>
-                <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: '#ffd700', fontWeight: 800, marginBottom: 6 }}>💎 PREMIUM SHOP — NXC</div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#88aadd', marginBottom: 10 }}>Mata uang: NXC (Nova Exchange Credit)</div>
-                {[
-                  { label: '🌟 EXP Boost x2 (1 Jam)', price: 50 },
-                  { label: '⚡ Drop Rate +5% (1 Jam)', price: 75 },
-                  { label: '💊 ATK Potion 25% (3 Min)', price: 30 },
-                  { label: '🇮🇱 Inventory Slot +20', price: 200 },
-                  { label: '🏷️ Custom Title Slot', price: 500 },
-                ].map(({ label, price }, idx) => (
-                  <div key={idx} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 0', borderTop: '1px solid rgba(255,255,255,0.07)' }}>
-                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#e0f4ff' }}>{label}</div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#ffd700', fontWeight: 700 }}>{price} NXC</span>
-                      <button
-                        style={{ background: 'linear-gradient(135deg,#ffd700,#cc8800)', border: 'none', borderRadius: 6, color: '#000', fontFamily: 'var(--font-title)', fontWeight: 800, fontSize: 11, padding: '5px 10px', cursor: 'pointer' }}
-                        onClick={() => alert('Premium Shop: Feature coming soon!')}
-                      >BUY</button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div style={{ background: 'rgba(255,215,0,0.06)', border: '1px solid rgba(255,215,0,0.2)', borderRadius: 8, padding: 12 }}>
-                <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, color: '#ffd700', fontWeight: 700, marginBottom: 8 }}>💳 TOP UP NXC</div>
-                {[
-                  { label: 'Starter Pack', nxc: 100, price: 'Rp 10.000' },
-                  { label: 'Value Pack', nxc: 550, price: 'Rp 50.000' },
-                  { label: 'Premium Pack', nxc: 1200, price: 'Rp 100.000' },
-                  { label: 'Elite Pack', nxc: 2600, price: 'Rp 200.000' },
-                ].map(({ label, nxc, price }, idx) => (
-                  <div key={idx} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '6px 0', borderTop: idx > 0 ? '1px solid rgba(255,215,0,0.1)' : 'none' }}>
-                    <div>
-                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#ffd700', fontWeight: 700 }}>{label}</div>
-                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: '#88aadd' }}>{nxc} NXC</div>
-                    </div>
-                    <button
-                      style={{ background: 'linear-gradient(135deg,#ffe500,#cc8000)', border: 'none', borderRadius: 6, color: '#000', fontFamily: 'var(--font-title)', fontWeight: 800, fontSize: 11, padding: '5px 10px', cursor: 'pointer' }}
-                      onClick={() => alert('Top Up: Coming soon via payment gateway!')}
-                    >{price}</button>
-                  </div>
-                ))}
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: '#88aadd', textAlign: 'center', lineHeight: 1.6, maxWidth: '85%' }}>
+                "Looking for premium items? You've come to the right place. NXC accepted here."
               </div>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: '#667799', textAlign: 'center' }}>
                 Saldo NXC kamu: <strong style={{ color: '#ffd700' }}>{(player.resources?.nxc || 0).toLocaleString()} NXC</strong>
               </div>
+              <button
+                onClick={() => {
+                  useGameStore.getState().setScreen('premium')
+                  onClose()
+                }}
+                style={{
+                  marginTop: 10,
+                  padding: '12px 24px',
+                  borderRadius: 8,
+                  border: '1.5px solid #ffd700',
+                  background: 'linear-gradient(135deg,#ffd700,#cc8800)',
+                  color: '#000',
+                  fontFamily: "'Orbitron', sans-serif",
+                  fontWeight: 800,
+                  fontSize: 13,
+                  letterSpacing: 1,
+                  cursor: 'pointer',
+                }}
+              >
+                💎 BUKA PREMIUM SHOP
+              </button>
             </div>
           )}
 

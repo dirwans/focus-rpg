@@ -1285,3 +1285,19 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 - **Paths**: Overwrote files in both `public/assets/armor_celestra/` and `src/assets/armor_celestra/` as `defcelestramagelv55{armor,helmet,pants,boots,gloves}.png`.
 - **Logic**: Updated `resolveArmorSetImage` in `src/store/gameStore.js` to bump the cache version parameter from `v=8` to `v=9` for Celestra armor sets.
 - **Verification**: Verified that `npm run build` succeeds locally.
+
+---
+
+### 🎨 Milestone 96: Celestra Ranger Lv.55 Set Replacement (Full 5 Pieces) [PENDING DEPLOYMENT]
+- **Assets**: Replaced all 5 pieces of the Celestra Ranger Lv.55 mecha armor set (`armor`, `helmet`, `pants`, `boots`, `gloves`) from the newly provided high-resolution showcase sheet `truelv55ranger.png`.
+- **Post-processing**:
+  - Wrote and executed the script `extract_truelv55ranger.py` to crop each part:
+    - **Armor**: Isolated from Center. Masked out the top-center dummy head and neck stand (rectangle `x: 220 -> 430`, `y: 0 -> 230` relative to crop) to preserve the high spiked shoulder plates while leaving a clean collar.
+    - **Helmet**: Isolated from Left-Top.
+    - **Pants**: Isolated from Right-Top.
+    - **Boots**: Isolated from Right-Bottom (excluding glowing base pedestal).
+    - **Gloves**: Isolated from Left-Bottom (excluding glowing armlet base).
+  - Applied `rembg` background removal, tightly cropped, padded to square canvases, and resized each to 320x320 transparent PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_celestra/` and `src/assets/armor_celestra/` as `defcelestrarangerlv55{armor,helmet,pants,boots,gloves}.png`.
+- **Logic**: Updated `resolveArmorSetImage` in `src/store/gameStore.js` to bump the cache version parameter from `v=9` to `v=10` for Celestra armor sets.
+- **Verification**: Verified that `npm run build` succeeds locally.

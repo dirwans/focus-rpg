@@ -143,7 +143,7 @@ function resolveArmorSetImage(slot, playerRace, playerJob, level) {
   if (playerRace === 'bionex') {
     return `/assets/armor_bionex/defbionex${lineage}lv${tier}${slot}.png?v=5`
   } else if (playerRace === 'celestra') {
-    return `/assets/armor_celestra/defcelestra${lineage}lv${tier}${slot}.png?v=9`
+    return `/assets/armor_celestra/defcelestra${lineage}lv${tier}${slot}.png?v=10`
   }
   return `/assets/armor/def${playerRace}${lineage}lv${tier}${slot}.png?v=5`
 }
@@ -3712,6 +3712,10 @@ export const useGameStore = create(
         let successChance = BASE_SUCCESS_RATES[currentEnhancement] || 0.0
         if (useLuckyRelic) {
           successChance += 0.10
+        }
+        // Production PT GM (val >= 99) grants +3% enchant success rate
+        if ((player.pt?.production?.val || 0) >= 99) {
+          successChance += 0.03
         }
         successChance = Math.min(1.0, successChance)
 

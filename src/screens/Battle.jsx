@@ -107,16 +107,22 @@ export default function Battle() {
     attackingTower.current = towerId
     try {
       const res = await apiChipWarAttack(towerId, attackPower)
-      setChipLog(res.log || [])
-      setChipWar((prev) => {
-        if (!prev) return prev
-        return {
-          ...prev,
-          towers: prev.towers.map((t) =>
-            t.towerId === towerId ? { ...t, hp: res.towerHp } : t
-          ),
-        }
-      })
+      if (res.warEnded) {
+        setChipLog([`🏆 Trinity Core ${towerId.toUpperCase()} hancur! ${res.winnerRace.toUpperCase()} memenangkan Core War!`])
+        useGameStore.getState().setWinnerRace(res.winnerRace)
+        await loadChipWar()
+      } else {
+        setChipLog(res.log || [])
+        setChipWar((prev) => {
+          if (!prev) return prev
+          return {
+            ...prev,
+            towers: prev.towers.map((t) =>
+              t.towerId === towerId ? { ...t, hp: res.towerHp } : t
+            ),
+          }
+        })
+      }
       attackingTower.current = null
     } catch (e) {
       setChipLog([e.message])
@@ -332,22 +338,30 @@ export default function Battle() {
                     </div>
 
                     <div style={{ display: 'flex', gap: 6, position: 'relative', zIndex: 1 }}>
-                      {tower.raceDamage > 0 && (
-                        <button
-                          onClick={() => handleChipAttack(tower.towerId, tower.raceDamage)}
-                          disabled={chipLoading || chipWar.phase !== 'active'}
-                          style={{ ...styles.chipAttackBtn, opacity: (chipLoading || chipWar.phase !== 'active') ? 0.4 : 1 }}
-                        >
-                          {attackingTower.current === tower.towerId ? 'ATTACKING...' : `ATTACK (${(tower.raceDamage / 1_000_000).toFixed(1)}M)`}
-                        </button>
+                      {tower.race === player.race ? (
+                        <div style={{ ...styles.chipAttackBtn, background: 'rgba(34,197,94,0.1)', borderColor: 'rgba(34,197,94,0.3)', color: '#22c55e', textAlign: 'center', cursor: 'default' }}>
+                          🛡️ TOWER TERLINDUNGI (Ras Sendiri)
+                        </div>
+                      ) : (
+                        <>
+                          {tower.raceDamage > 0 && (
+                            <button
+                              onClick={() => handleChipAttack(tower.towerId, tower.raceDamage)}
+                              disabled={chipLoading || chipWar.phase !== 'active'}
+                              style={{ ...styles.chipAttackBtn, opacity: (chipLoading || chipWar.phase !== 'active') ? 0.4 : 1 }}
+                            >
+                              {attackingTower.current === tower.towerId ? 'ATTACKING...' : `ATTACK (${(tower.raceDamage / 1_000_000).toFixed(1)}M)`}
+                            </button>
+                          )}
+                          <button
+                            onClick={() => handleChipAttack(tower.towerId, player.cp || 1000)}
+                            disabled={chipLoading || chipWar.phase !== 'active'}
+                            style={{ ...styles.chipAttackBtn, background: '#1c2e4a', borderColor: 'rgba(0,229,255,0.3)', opacity: (chipLoading || chipWar.phase !== 'active') ? 0.4 : 1 }}
+                          >
+                            {attackingTower.current === tower.towerId ? '...' : `USE CP (${((player.cp || 1000) / 1_000_000).toFixed(2)}M)`}
+                          </button>
+                        </>
                       )}
-                      <button
-                        onClick={() => handleChipAttack(tower.towerId, player.cp || 1000)}
-                        disabled={chipLoading || chipWar.phase !== 'active'}
-                        style={{ ...styles.chipAttackBtn, background: '#1c2e4a', borderColor: 'rgba(0,229,255,0.3)', opacity: (chipLoading || chipWar.phase !== 'active') ? 0.4 : 1 }}
-                      >
-                        {attackingTower.current === tower.towerId ? '...' : `USE CP (${((player.cp || 1000) / 1_000_000).toFixed(2)}M)`}
-                      </button>
                     </div>
                   </div>
                 )
