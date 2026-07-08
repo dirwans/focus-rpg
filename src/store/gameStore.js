@@ -6,6 +6,7 @@ import enemies from '../data/enemies.json'
 import upgradesConfig from '../data/upgrades.json'
 import itemsData from '../data/items.json'
 import archonData from '../data/archon.json'
+import titlesData from '../data/titles.json'
 import { getWeaponRarityBonus } from '../lib/rarity'
 import { TRANSLATIONS } from '../lib/translationData'
 import baseStatsData from '../data/baseStats.json'
@@ -143,7 +144,7 @@ function resolveArmorSetImage(slot, playerRace, playerJob, level) {
   if (playerRace === 'bionex') {
     return `/assets/armor_bionex/defbionex${lineage}lv${tier}${slot}.png?v=5`
   } else if (playerRace === 'celestra') {
-    return `/assets/armor_celestra/defcelestra${lineage}lv${tier}${slot}.png?v=10`
+    return `/assets/armor_celestra/defcelestra${lineage}lv${tier}${slot}.png?v=14`
   }
   return `/assets/armor/def${playerRace}${lineage}lv${tier}${slot}.png?v=5`
 }
@@ -380,6 +381,23 @@ export function verifyStarterArmorSet(player) {
   })
   if (!changed) return player
   return { ...player, equipment: newEquipment }
+}
+
+// Title/Achievement System: unlocks any Title Database entries (titles.json) the player
+// now qualifies for based on their combatStats, without touching already-unlocked ones.
+export function checkTitleUnlocks(player) {
+  if (!player || !player.race) return player
+  const raceTitles = titlesData[player.race] || []
+  const owned = player.titles || []
+  const kills = player.combatStats?.totalMonsterKill || 0
+
+  const newlyUnlocked = raceTitles
+    .filter((tt) => !owned.includes(tt.id))
+    .filter((tt) => tt.requirement?.type === 'totalMonsterKill' && kills >= tt.requirement.value)
+    .map((tt) => tt.id)
+
+  if (newlyUnlocked.length === 0) return player
+  return { ...player, titles: [...owned, ...newlyUnlocked] }
 }
 
 function removeFromInventory(inventory, uid, count = 1) {
@@ -889,6 +907,8 @@ const initialPlayer = {
     coreWarVictory: 0,
     highestEnhancement: 0
   },
+  titles: [],          // unlocked title ids, see Title Database (titles.json)
+  equippedTitle: null, // currently active title id (grants its ATK/DEF/HP bonus)
   guild: null, // { name: string, level: number, role: string, members: number }
   inventorySlots: 100,       // default 100, max 300 (upgrade +20 per 1M CRD)
   warehouseSlots: 200,       // default 200, max 600 (upgrade +50 per 2.5M CRD)
@@ -939,6 +959,8 @@ const initialBattle = {
   sessionCrd: 0,
   sessionCredits: 0,
   levelUps: 0,
+  activeSeconds: 0,      // seconds ticked while the screen was in foreground (Active Mode)
+  totalTickSeconds: 0,   // total seconds ticked this session (foreground + background)
 }
 
 export const useGameStore = create(
@@ -953,6 +975,7 @@ export const useGameStore = create(
       lastPlaceRace: 'celestra',
       screen: 'main',
       showRaceSelect: false,
+      isScreenActive: true, // Idle/AFK System: true = Active Mode (screen in foreground), false = Idle Mode
 
       // ── Navigation ──────────────────────────────────────
       setScreen: (screen) => set({ screen }),
@@ -960,12 +983,19 @@ export const useGameStore = create(
       setWinnerRace: (race) => set({ winnerRace: race }),
       setRunnerUpRace: (race) => set({ runnerUpRace: race }),
       setLastPlaceRace: (race) => set({ lastPlaceRace: race }),
+      setScreenActive: (active) => set({ isScreenActive: active }),
       setNotification: (notif) => set({ notification: notif }),
       setSelectedMapIdx: (idx) => {
         set((s) => ({ player: { ...s.player, selectedMapIdx: idx, savedAt: Date.now() } }))
       },
 
       setPvpRank: (rank) => set((s) => ({ player: { ...s.player, pvpRank: rank, savedAt: Date.now() } })),
+
+      // ── Title/Achievement System ─────────────────────────
+      equipTitle: (titleId) => set((s) => {
+        if (titleId && !(s.player.titles || []).includes(titleId)) return s
+        return { player: { ...s.player, equippedTitle: titleId, savedAt: Date.now() } }
+      }),
 
       // ── Legendary Crafting ───────────────────────────────
       craftLegendary: (recipeId) => {
@@ -1860,19 +1890,28 @@ export const useGameStore = create(
         const deathPenaltyCrd = deaths * 30
         const deathPenaltyKills = deaths * 1
 
+        // Idle/AFK System: Active Mode (screen in foreground) grants +10% EXP, applied
+        // proportionally to how much of the session so far was spent in Active Mode.
+        const totalTickSeconds = (battle.totalTickSeconds || 0) + 1
+        const activeSeconds = (battle.activeSeconds || 0) + (get().isScreenActive ? 1 : 0)
+        const activeFraction = totalTickSeconds > 0 ? activeSeconds / totalTickSeconds : 0
+        const expBonusMult = 1 + 0.10 * activeFraction
+
         const finalKills = Math.max(0, r.kills - deathPenaltyKills)
-        const finalExp = Math.max(0, r.exp - deathPenaltyExp)
+        const finalExp = Math.floor(Math.max(0, r.exp - deathPenaltyExp) * expBonusMult)
         const finalCrd = Math.max(0, r.crd - deathPenaltyCrd)
         const finalCredits = Math.max(0, (r.credits || 0) - (deaths * 5))
 
         set((s) => ({
           timer: { ...s.timer, secondsLeft: remaining },
-          battle: { 
-            ...s.battle, 
-            kills: finalKills, 
-            sessionExp: finalExp, 
+          battle: {
+            ...s.battle,
+            kills: finalKills,
+            sessionExp: finalExp,
             sessionCrd: finalCrd,
-            sessionCredits: finalCredits
+            sessionCredits: finalCredits,
+            activeSeconds,
+            totalTickSeconds,
           },
         }))
       },
@@ -2327,8 +2366,15 @@ export const useGameStore = create(
         const deathPenaltyCrd = deaths * 30
         const deathPenaltyKills = deaths * 1
 
+        // Idle/AFK System: Active Mode (screen in foreground) grants +10% EXP and +5% Drop Rate,
+        // scaled by the fraction of this session spent in Active Mode.
+        const totalTickSeconds = battle.totalTickSeconds || 0
+        const activeFraction = totalTickSeconds > 0 ? (battle.activeSeconds || 0) / totalTickSeconds : 0
+        const expBonusMult = 1 + 0.10 * activeFraction
+        const dropRateBonus = 0.05 * activeFraction
+
         const finalKills = Math.max(0, r.kills - deathPenaltyKills)
-        const finalExp = Math.max(0, r.exp - deathPenaltyExp)
+        const finalExp = Math.floor(Math.max(0, r.exp - deathPenaltyExp) * expBonusMult)
         let finalCrd = Math.max(0, r.crd - deathPenaltyCrd)
         let finalCredits = r.credits || 0
 
@@ -2447,12 +2493,12 @@ export const useGameStore = create(
             dropLog += `\n💰 Boss CRD: ${bossCrd.toLocaleString()}`
 
             // Random: Rare Equipment 25%
-            if (seededFrac(timer.startedAt + 203) < 0.25) {
+            if (seededFrac(timer.startedAt + 203) < 0.25 + dropRateBonus) {
               const rareEquip = pickItem(RARITY_RARE, timer.startedAt + 204)
               if (rareEquip) { pushOrMail({ ...rareEquip, uid: Date.now() + 203 }, `\n🔵 Rare Drop: ${rareEquip.emoji} ${rareEquip.name}`) }
             }
             // Random: Epic Equipment 5%
-            if (seededFrac(timer.startedAt + 205) < 0.05) {
+            if (seededFrac(timer.startedAt + 205) < 0.05 + dropRateBonus) {
               const epicEquip = pickItem(RARITY_EPIC, timer.startedAt + 206)
               if (epicEquip) { pushOrMail({ ...epicEquip, uid: Date.now() + 205 }, `\n🟣 Epic Drop: ${epicEquip.emoji} ${epicEquip.name}`) }
             }
@@ -2463,12 +2509,12 @@ export const useGameStore = create(
               for (let c = 0; c < crestCount; c++) pushOrMail({ ...crestItem, uid: Date.now() + 210 + c }, c === 0 ? `\n🛡️ Divine Crest ×${crestCount}` : '')
             }
             // Cape Component: 20%
-            if (seededFrac(timer.startedAt + 208) < 0.20) {
+            if (seededFrac(timer.startedAt + 208) < 0.20 + dropRateBonus) {
               const capeComp = pickMat('mat_cape_component')
               if (capeComp) { pushOrMail({ ...capeComp, uid: Date.now() + 208 }, `\n🦸 Cape Component`) }
             }
             // Arcanite: 0.10% (Super Ultra Rare)
-            if (seededFrac(timer.startedAt + 209) < 0.001) {
+            if (seededFrac(timer.startedAt + 209) < 0.001 + dropRateBonus) {
               const arc = pickMat('mat_arcanite')
               if (arc) { pushOrMail({ ...arc, uid: Date.now() + 209 }, `\n🪨 ARCANITE!!! (Super Ultra Rare)`) }
             }
@@ -2497,7 +2543,7 @@ export const useGameStore = create(
             dropLog += `\n💰 Boss CRD: ${bossCrd.toLocaleString()}`
 
             // Random: Rare Equipment 15%
-            if (seededFrac(timer.startedAt + 103) < 0.15) {
+            if (seededFrac(timer.startedAt + 103) < 0.15 + dropRateBonus) {
               const rareEquip = pickItem(RARITY_RARE, timer.startedAt + 104)
               if (rareEquip) { pushOrMail({ ...rareEquip, uid: Date.now() + 103 }, `\n🔵 Rare Drop: ${rareEquip.emoji} ${rareEquip.name}`) }
             }
@@ -2508,29 +2554,29 @@ export const useGameStore = create(
               for (let c = 0; c < crestCount; c++) pushOrMail({ ...crestItem, uid: Date.now() + 110 + c }, c === 0 ? `\n🛡️ Divine Crest ×${crestCount}` : '')
             }
             // Cape Component: 20%
-            if (seededFrac(timer.startedAt + 106) < 0.20) {
+            if (seededFrac(timer.startedAt + 106) < 0.20 + dropRateBonus) {
               const capeComp = pickMat('mat_cape_component')
               if (capeComp) { pushOrMail({ ...capeComp, uid: Date.now() + 106 }, `\n🦸 Cape Component`) }
             }
             // Arcanite: 0.05% (Super Ultra Rare)
-            if (seededFrac(timer.startedAt + 107) < 0.0005) {
+            if (seededFrac(timer.startedAt + 107) < 0.0005 + dropRateBonus) {
               const arc = pickMat('mat_arcanite')
               if (arc) { pushOrMail({ ...arc, uid: Date.now() + 107 }, `\n🪨 ARCANITE!!! (Super Ultra Rare)`) }
             }
           } else {
             // ── NORMAL MONSTER DROP ──
             // HP Potion: 25% per session
-            if (finalKills > 0 && seededFrac(timer.startedAt + 50) < 0.25) {
+            if (finalKills > 0 && seededFrac(timer.startedAt + 50) < 0.25 + dropRateBonus) {
               const hpPotion = pickMat('pot_hp')
               if (hpPotion) { pushOrMail({ ...hpPotion, uid: Date.now() + 50 }, `\n❤️ HP Potion [S]`) }
             }
             // FP Potion: 10% per session
-            if (finalKills > 0 && seededFrac(timer.startedAt + 53) < 0.10) {
+            if (finalKills > 0 && seededFrac(timer.startedAt + 53) < 0.10 + dropRateBonus) {
               const fpPotion = pickMat('pot_fp')
               if (fpPotion) { pushOrMail({ ...fpPotion, uid: Date.now() + 53 }, `\n🔷 FP Potion [S]`) }
             }
             // Common Equipment: 10% per session
-            if (finalKills > 0 && seededFrac(timer.startedAt + 51) < 0.10) {
+            if (finalKills > 0 && seededFrac(timer.startedAt + 51) < 0.10 + dropRateBonus) {
               const commonEquip = pickItem(RARITY_COMMON, timer.startedAt + 52)
               if (commonEquip) { pushOrMail({ ...commonEquip, uid: Date.now() + 51 }, `\n⚪ Common Drop: ${commonEquip.emoji} ${commonEquip.name}`) }
             }
@@ -2555,19 +2601,21 @@ export const useGameStore = create(
         const finalLog = []
         if (levelUps > 0) finalLog.push(`🆙 LEVEL UP! LV.${newLevel} — Sector ${newSector}!`)
         ptLogs.forEach((l) => finalLog.push(`📈 ${l}`))
+        if (activeFraction > 0) {
+          finalLog.push(`🎮 Active Mode: ${Math.round(activeFraction * 100)}% sesi ini | +${Math.round(activeFraction * 10)}% EXP, +${(activeFraction * 5).toFixed(1)}% Drop Rate`)
+        }
         finalLog.push(`✅ Done! ${finalKills} kills | +${finalCrd}⬡ | +${finalCredits} Credits | +${finalExp} Menit${deaths > 0 ? ` (Died ${deaths} times)` : ''}${dropLog}`)
 
-        set((s) => ({
-          timer: { ...s.timer, state: 'completed', secondsLeft: 0 },
-          player: {
+        set((s) => {
+          const updatedPlayer = checkTitleUnlocks({
             ...s.player,
             exp: newExp,
             level: newLevel,
             pt: nextPt,
             sector: newSector,
             highestSector: Math.max(s.player.highestSector, newSector),
-            resources: { 
-              ...s.player.resources, 
+            resources: {
+              ...s.player.resources,
               crd: s.player.resources.crd + finalCrd,
               credits: s.player.resources.credits + finalCredits
             },
@@ -2583,9 +2631,13 @@ export const useGameStore = create(
               dungeonClear: (s.player.combatStats?.dungeonClear || 0) + (killedStageBoss ? 1 : 0)
             },
             savedAt: Date.now(),
-          },
-          battle: { ...s.battle, kills: finalKills, sessionExp: finalExp, sessionCrd: finalCrd, levelUps, log: finalLog },
-        }))
+          })
+          return {
+            timer: { ...s.timer, state: 'completed', secondsLeft: 0 },
+            player: updatedPlayer,
+            battle: { ...s.battle, kills: finalKills, sessionExp: finalExp, sessionCrd: finalCrd, levelUps, log: finalLog },
+          }
+        })
       },
 
       resetTimer: () => {
@@ -2842,6 +2894,17 @@ export const useGameStore = create(
           flatDef += 50
           flatHp += 500
           critBonus += 1
+        }
+
+        // Title/Achievement Bonus: currently equipped title (see Title Database, titles.json)
+        if (player.equippedTitle && player.race) {
+          const raceTitles = titlesData[player.race] || []
+          const equipped = raceTitles.find((tt) => tt.id === player.equippedTitle)
+          if (equipped && (player.titles || []).includes(equipped.id)) {
+            flatAtk += equipped.bonus.atk || 0
+            flatDef += equipped.bonus.def || 0
+            flatHp += equipped.bonus.hp || 0
+          }
         }
 
         // Base HP, DEF, ATK Math using STR, DEX, INT, VIT

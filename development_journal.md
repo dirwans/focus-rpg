@@ -1288,16 +1288,80 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 96: Celestra Ranger Lv.55 Set Replacement (Full 5 Pieces) [DEPLOYED]
+### 🎨 Milestone 96: Celestra Ranger Lv.55 Set Replacement (Full 5 Pieces) [PENDING DEPLOYMENT]
 - **Assets**: Replaced all 5 pieces of the Celestra Ranger Lv.55 mecha armor set (`armor`, `helmet`, `pants`, `boots`, `gloves`) from the newly provided high-resolution showcase sheet `truelv55ranger.png`.
 - **Post-processing**:
   - Wrote and executed the script `extract_truelv55ranger.py` to crop each part:
     - **Armor**: Isolated from Center. Masked out the top-center dummy head and neck stand (rectangle `x: 220 -> 430`, `y: 0 -> 230` relative to crop) to preserve the high spiked shoulder plates while leaving a clean collar.
     - **Helmet**: Isolated from Left-Top.
-    - **Pants**: Isolated from Right-Top.
+    - **Pants**: Isolated from Right-Top, cropping the bottom y-boundary at 950 to completely exclude the feet/shins.
     - **Boots**: Isolated from Right-Bottom (excluding glowing base pedestal).
     - **Gloves**: Isolated from Left-Bottom (excluding glowing armlet base).
   - Applied `rembg` background removal, tightly cropped, padded to square canvases, and resized each to 320x320 transparent PNGs.
 - **Paths**: Overwrote files in both `public/assets/armor_celestra/` and `src/assets/armor_celestra/` as `defcelestrarangerlv55{armor,helmet,pants,boots,gloves}.png`.
 - **Logic**: Updated `resolveArmorSetImage` in `src/store/gameStore.js` to bump the cache version parameter from `v=9` to `v=10` for Celestra armor sets.
 - **Verification**: Verified that `npm run build` succeeds locally.
+
+---
+
+### 🎨 Milestone 97: Celestra Ranger Lv.66 Set Replacement (Full 5 Pieces) [PENDING DEPLOYMENT]
+- **Assets**: Replaced all 5 pieces of the Celestra Ranger Lv.66 mecha armor set (`armor`, `helmet`, `pants`, `boots`, `gloves`) from the newly provided high-resolution showcase sheet `truelv66ranger.png`.
+- **Post-processing**:
+  - Wrote and executed the script `extract_truelv66ranger.py` to crop each part:
+    - **Armor**: Isolated from Center. Masked out adjacent bleeding elements on the bottom-left corner and bottom-right corner to preserve the spikes while keeping the main chest armor.
+    - **Helmet**: Isolated from Left-Top. Masked out a bleeding shoulder spike on the bottom-right corner.
+    - **Pants**: Isolated from Right-Top. Shifted x-coordinates to avoid adjacent shoulder spikes, and cropped the bottom y-boundary at 1150 to exclude feet/shins.
+    - **Boots**: Isolated from Right-Bottom. Masked out a tiny sliver at the top.
+    - **Gloves**: Isolated from Left-Bottom. Masked out the bleeding helmet piece at the top-right.
+  - Applied `rembg` background removal, tightly cropped, padded to square canvases, and resized each to 320x320 transparent PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_celestra/` and `src/assets/armor_celestra/` as `defcelestrarangerlv66{armor,helmet,pants,boots,gloves}.png`.
+- **Logic**: Updated `resolveArmorSetImage` in `src/store/gameStore.js` to bump the cache version parameter from `v=10` to `v=11` for Celestra armor sets.
+- **Verification**: Verified that `npm run build` succeeds locally.
+
+---
+
+### 🎨 Milestone 98: Celestra Warrior Lv.55 Set Replacement (Full 5 Pieces) [PENDING DEPLOYMENT]
+- **Assets**: Replaced all 5 pieces of the Celestra Warrior Lv.55 mecha armor set (`armor`, `helmet`, `pants`, `boots`, `gloves`) from the newly provided high-resolution showcase sheet `truelv55warrior.png`.
+- **Post-processing**:
+  - Wrote and executed the script `extract_truelv55warrior.py` to crop each part:
+    - **Armor**: Isolated from Top-Middle. Masked out a frame border on the left side and a bleeding helmet piece on the bottom-right corner.
+    - **Helmet**: Isolated from Top-Left, cropping the bottom y-boundary at 765 to completely slice off the mannequin base shoulders/throat while keeping the sharp gold cheek guards.
+    - **Pants**: Isolated from Bottom-Middle. Masked out the bleeding character standee on the right.
+    - **Boots**: Isolated from Bottom-Left. Masked out frame border lines on the top and left.
+    - **Gloves**: Isolated from Top-Right. Masked out the bleeding character face on the bottom-left.
+  - Applied `rembg` background removal, tightly cropped, padded to square canvases, and resized each to 320x320 transparent PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_celestra/` and `src/assets/armor_celestra/` as `defcelestrawarriorlv55{armor,helmet,pants,boots,gloves}.png`.
+- **Logic**: Updated `resolveArmorSetImage` in `src/store/gameStore.js` to bump the cache version parameter from `v=11` to `v=12` for Celestra armor sets.
+- **Verification**: Verified that `npm run build` succeeds locally.
+
+---
+
+### 🎨 Milestone 99: Celestra Warrior Lv.66 Set Replacement (Full 5 Pieces) [PENDING DEPLOYMENT]
+- **Assets**: Replaced all 5 pieces of the Celestra Warrior Lv.66 mecha armor set (`armor`, `helmet`, `pants`, `boots`, `gloves`) from the newly provided high-resolution showcase sheet `truelv66warrior.png`.
+- **Post-processing**:
+  - Wrote and executed the script `extract_truelv66warrior.py` to crop each part:
+    - **Armor**: Isolated from Column 2. Masked out a frame border line on the left side.
+    - **Helmet**: Isolated from Column 1.
+    - **Pants**: Isolated from Column 3. Masked out a frame border line on the left side.
+    - **Boots**: Isolated from Column 5. Masked out frame border lines on the left and right.
+    - **Gloves**: Isolated from Column 4. Masked out a frame border line on the left side.
+  - Applied `rembg` background removal, tightly cropped, padded to square canvases, and resized each to 320x320 transparent PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_celestra/` and `src/assets/armor_celestra/` as `defcelestrawarriorlv66{armor,helmet,pants,boots,gloves}.png`.
+- **Logic**: Updated `resolveArmorSetImage` in `src/store/gameStore.js` to bump the cache version parameter from `v=12` to `v=13` for Celestra armor sets.
+- **Verification**: Verified that `npm run build` succeeds locally.
+
+---
+
+### 🎨 Milestone 100: Celestra Mage Lv.32 Set Replacement (Full 5 Pieces) [PENDING DEPLOYMENT]
+- **Assets**: Replaced all 5 pieces of the Celestra Mage Lv.32 armor set from the newly provided high-resolution showcase sheet `truelv32mage.png` (Hora Force set – Lv.32/33).
+- **Post-processing**:
+  - Wrote and executed `extract_truelv32mage.py` to crop each part from the labeled grid:
+    - **Helmet (Hora Headtie)**: Tight crop `y: 480→800` to exclude the plastic display stand entirely. `rembg` cleanly removes the grey background.
+    - **Armor (Hora Toga)**: Source grid cell already has transparent background (checkerboard). Skipped `rembg` to avoid destroying alpha. Direct alpha-crop only.
+    - **Pants (Hora Slacks)**: Standard rembg removal. Left bleed mask applied `x: 0→80`.
+    - **Gloves (Hora Mittens)**: L/R pair — standard rembg. Both gauntlet variants visible.
+    - **Boots (Hora Boots)**: Standard rembg removal. Pair of boots cleanly isolated.
+  - All 5 assets padded to square canvases with 10% padding and resized to 320x320 transparent PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_celestra/` and `src/assets/armor_celestra/` as `defcelestramagelv32{helmet,armor,pants,gloves,boots}.png`.
+- **Logic**: Cache version bumped to `v=14` in `src/store/gameStore.js` for instant browser refresh.
+- **Verification**: `npm run build` succeeds locally.

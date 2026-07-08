@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useGameStore } from './store/gameStore'
 import { useAuthStore } from './store/authStore'
 import { useTimer } from './hooks/useTimer'
+import { useVisibility } from './hooks/useVisibility'
 import { loadSave, syncSave, subscribeSave } from './lib/saveSync'
 import { apiGetArchon, apiChipWar } from './lib/api'
 import { t } from './lib/translate'
@@ -27,6 +28,7 @@ const snap = (gs) => JSON.stringify(gs ?? {})
 
 export default function App() {
   useTimer()
+  useVisibility()
 
   const screen         = useGameStore((s) => s.screen)
   const showRaceSelect = useGameStore((s) => s.showRaceSelect)

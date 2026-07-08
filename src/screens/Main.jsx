@@ -389,6 +389,7 @@ export default function Main() {
   const player   = useGameStore((s) => s.player)
   const timer    = useGameStore((s) => s.timer)
   const battle   = useGameStore((s) => s.battle)
+  const isScreenActive = useGameStore((s) => s.isScreenActive)
   const getStats = useGameStore((s) => s.getStats)
   const getExpToNext = useGameStore((s) => s.getExpToNext)
   const startTimer   = useGameStore((s) => s.startTimer)
@@ -644,6 +645,18 @@ export default function Main() {
         <div style={styles.timerDisplayActiveCompact}>
           <span style={styles.activeTimerDigits}>{fmt(timer.secondsLeft)}</span>
           <div style={{ ...styles.activeGatherBadge, color: '#ffaa00', borderColor: 'rgba(255, 170, 0, 0.5)', boxShadow: '0 0 8px rgba(255, 170, 0, 0.3)' }}>{t('focus_active')}</div>
+        </div>
+
+        {/* Idle/AFK System: live Active/Idle Mode indicator */}
+        <div style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, margin: '2px auto 6px',
+          padding: '4px 12px', borderRadius: 20, width: 'fit-content',
+          background: isScreenActive ? 'rgba(0,255,136,0.1)' : 'rgba(138,148,163,0.1)',
+          border: `1px solid ${isScreenActive ? 'rgba(0,255,136,0.4)' : 'rgba(138,148,163,0.3)'}`,
+          fontFamily: 'var(--font-mono)', fontSize: 11, fontWeight: 700,
+          color: isScreenActive ? '#00ff88' : '#8a94a3',
+        }}>
+          {isScreenActive ? '🎮 ACTIVE MODE (+10% EXP, +5% Drop)' : '📱 IDLE MODE'}
         </div>
 
 

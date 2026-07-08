@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useGameStore } from '../store/gameStore'
 import { apiGetArchon, apiVoteArchon, apiGetLeaderboard } from '../lib/api'
 import { PilotSprite } from '../components/PilotSprites'
+import titlesData from '../data/titles.json'
 
 const MOCK_FACTION_RANKS = {
   arctron: [
@@ -308,6 +309,58 @@ export default function Ranks() {
               </div>
             </div>
           )}
+
+          {/* Title / Achievement Database */}
+          {(() => {
+            const raceTitles = titlesData[activeRace] || []
+            const isOwnRace = player.race === activeRace
+            const ownedTitles = player.titles || []
+            const kills = player.combatStats?.totalMonsterKill || 0
+            return (
+              <div style={{ padding: '16px 16px 8px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+                  <h3 style={{ margin: 0, color: '#f5a623', fontSize: 16, fontFamily: 'var(--font-title)' }}>🏷️ TITLE DATABASE</h3>
+                  {isOwnRace && (
+                    <span style={{ fontSize: 13, color: '#7ec8e3', fontFamily: 'var(--font-mono)' }}>{kills.toLocaleString()} kills</span>
+                  )}
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 16 }}>
+                  {raceTitles.map((tt) => {
+                    const isUnlocked = ownedTitles.includes(tt.id)
+                    const isEquipped = player.equippedTitle === tt.id
+                    return (
+                      <div key={tt.id} className={`glass-panel cyber-panel panel-${activeRace}`} style={{ padding: 12, borderRadius: 8, display: 'flex', alignItems: 'center', gap: 12, opacity: isUnlocked ? 1 : 0.5 }}>
+                        <div style={{ fontSize: 28 }}>{isUnlocked ? '🏅' : '🔒'}</div>
+                        <div style={{ flex: 1 }}>
+                          <div style={{ color: isEquipped ? '#00ff88' : '#f5a623', fontSize: 14, fontWeight: 'bold', fontFamily: 'var(--font-title)' }}>
+                            {tt.name} {isEquipped && '· EQUIPPED'}
+                          </div>
+                          <div style={{ color: '#fff', fontSize: 12, margin: '2px 0', fontFamily: 'var(--font-mono)' }}>
+                            ⚔️ ATK +{tt.bonus.atk} · 🛡️ DEF +{tt.bonus.def} · ❤️ HP +{tt.bonus.hp.toLocaleString()}
+                          </div>
+                          <div style={{ color: '#7ec8e3', fontSize: 11, fontFamily: 'var(--font-mono)' }}>
+                            {isUnlocked ? '✅ Unlocked' : `Butuh ${tt.requirement.value.toLocaleString()} Total Monster Kill`}
+                          </div>
+                        </div>
+                        {isOwnRace && isUnlocked && (
+                          <button
+                            onClick={() => useGameStore.getState().equipTitle(isEquipped ? null : tt.id)}
+                            style={{
+                              background: isEquipped ? '#ff4466' : '#00c8ff',
+                              color: isEquipped ? '#fff' : '#000',
+                              border: 'none', padding: '6px 12px', borderRadius: 6, fontWeight: 'bold', cursor: 'pointer', fontSize: 13, fontFamily: 'var(--font-title)'
+                            }}
+                          >
+                            {isEquipped ? 'LEPAS' : 'PAKAI'}
+                          </button>
+                        )}
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            )
+          })()}
         </>
       )}
     </div>
