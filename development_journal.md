@@ -962,6 +962,15 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - Refactored all source code files to query new Arctron Level 1 IDs and updated UI display labels (Specialist ➔ Technician).
 - **Verification**: Verified that the production client builds successfully with zero errors.
 
+---
+
+### 🎨 Milestone 66: Bionex Psion Tier Assets Regeneration (Lv.1 Set) [DEPLOYED]
+- **Assets**: Regenerated the full 5 pieces of the Bionex Psion Level 1 mecha armor set (`helmet`, `armor`, `pants`, `boots`, `gloves`) using the `/regenerate-2.5D-anime-realistic` custom skill to match the golden/bronze cybernetic mecha theme with glowing neon-blue psionic energy lines.
+- **Post-processing**: Ran the script `process_gears.py` to remove background via `rembg`, crop, center/pad to square, and resize to 320x320 transparent PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
+- **Verification**: Verified that `npm run build` succeeds locally.
+
+
 
 
 
