@@ -1251,7 +1251,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ### 🎨 Milestone 93: Celestra Mage Lv.55 Pants & Lv.66 Armor/Boots/Gloves Sprite Replacement [DEPLOYED]
 - **Assets**:
-  - Extracted pants from `pantslv55magecelestra.jpg` (bottom-left quadrant), removed background, and replaced `defcelestramagelv55pants.png`.
+  - Extracted pants from `pantslv55magecelestra.jpg` (bottom-left quadrant), removed background, and replaced `defcelestramagelv66pants.png` (deleting the deprecated `defcelestramagelv55pants.png` file).
   - Extracted chest armor from `celestralv55magearmor.png` (using main component), removed background, and replaced `defcelestramagelv66armor.png`.
   - Extracted gloves from `glovesbootslv55magecelestra.png` (top-right quadrant), removed background, and replaced `defcelestramagelv66gloves.png`.
   - Extracted left boot from `glovesbootslv55magecelestra.png` (bottom-right quadrant), removed background, mirrored it horizontally to form a symmetrical pair, and replaced `defcelestramagelv66boots.png`.
