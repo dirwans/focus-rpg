@@ -42,3 +42,11 @@ When generating image assets, always follow this prioritized endpoint hierarchy:
 2. **Endpoint 2 (Automatic Fallback)**: If Endpoint 1 fails due to quota exhaustion (`429 Too Many Requests`), the agent must immediately:
    - Extract the OpenRouter credentials (`OPENAI_API_KEY` and `OPENAI_BASE_URL`) from `C:\projects\OpenMontage\.env`.
    - Run a temporary python script using the virtualenv `C:\projects\OpenMontage\.venv\Scripts\python` to call OpenRouter with the model ID `google/gemini-3.1-flash-image` and download the generated asset.
+
+## Wallet-Safety & Design Preview Protocol (CRITICAL)
+
+To prevent wasting paid API tokens/credits on incorrect model interpretations:
+1. **Never batch-generate paid assets blindly**. 
+2. Before sending any paid API requests (OpenRouter/Endpoint 2), the agent **must** list out the planned prompt descriptions, target colors, and shape reference summaries in the chat.
+3. The agent must wait for the user to explicitly confirm ("Gasss", "Setuju", or feedback) before invoking the script.
+
