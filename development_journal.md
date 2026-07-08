@@ -994,6 +994,37 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 - **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
 - **Verification**: Verified that `npm run build` succeeds locally.
 
+---
+
+### 🎨 Milestone 70: Bionex Marksman & Guardian Tier Assets Regeneration [DEPLOYED]
+- **Assets**: Regenerated 7 mecha armor pieces using the `/regenerate-2.5D-anime-realistic` custom skill:
+  - Bionex Guardian Level 66 set (`boots`, `gloves`, `helmet`, `pants`) - 4 pieces matching the heavy carbon fiber and neon-cyan themed mecha design.
+  - Bionex Marksman Level 1 set (`armor`, `boots`, `gloves`) - 3 pieces matching the mecha ranger style.
+- **Post-processing**: Ran the script `process_gears.py` to strip backgrounds, crop, center, and resize to 320x320 transparent PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
+- **Verification**: Verified that `npm run build` succeeds locally.
+
+---
+
+### 🎨 Milestone 71: Bionex Guardian Tier Assets Regeneration (Lv.55 Armor) [DEPLOYED]
+- **Assets**: Regenerated Bionex Guardian Level 55 Chest Armor (`armor`) using the `/regenerate-2.5D-anime-realistic` custom skill to fit the heavy carbon fiber and neon-cyan themed mecha design.
+- **Post-processing**: Ran the script `process_gears.py` to remove backgrounds, crop, center/pad, and resize to 320x320 transparent PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
+- **Verification**: Verified that `npm run build` succeeds locally.
+
+---
+
+### 🎨 Milestone 72: Celestra Mage & Ranger Tier Assets Regeneration (Lv.32 Sets) [DEPLOYED]
+- **Assets**: Regenerated 9 mecha armor pieces using the `/regenerate-2.5D-anime-realistic` custom skill:
+  - Celestra Mage Level 32 set (`helmet`, `armor`, `pants`, `boots`, `gloves`) - 5 pieces matching the white/gold elven wizard robe design with glowing purple runes.
+  - Celestra Ranger Level 32 set (`helmet`, `armor`, `pants`, `boots`) - 4 pieces matching the green/emerald organic mecha design with gold leaf trims and wind-cyan lines. (Gloves are queued due to rate limit limits).
+- **Post-processing**: Ran the script `process_gears.py` to remove backgrounds, crop, center, and resize to 320x320 transparent PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_celestra/` and `src/assets/armor_celestra/`.
+- **Verification**: Verified that `npm run build` succeeds locally.
+
+
+
+
 
 
 
