@@ -1,45 +1,57 @@
 {
   "amulets": [
     {
-      "id": "amu_0",
-      "name": "Lumen Charm",
+      "id": "amu_all_0",
+      "name": "Baal's Heart Amulet",
       "grade": "Common",
+      "image": "/assets/accessories/amulets/amu_all_0.png",
       "hp": 500,
-      "def": 20
+      "def": 25
     },
     {
-      "id": "amu_1",
-      "name": "Aether Charm",
+      "id": "amu_all_1",
+      "name": "Beast of Life Amulet",
       "grade": "Uncommon",
-      "hp": 1200,
-      "def": 45
+      "image": "/assets/accessories/amulets/amu_all_1.png",
+      "hp": 1100,
+      "def": 50
     },
     {
-      "id": "amu_2",
-      "name": "Astralis Charm",
+      "id": "amu_all_2",
+      "name": "Dead Officer's Duality",
       "grade": "Rare",
-      "hp": 2500,
-      "def": 80
+      "image": "/assets/accessories/amulets/amu_all_2.png",
+      "hp": 2000,
+      "def": 90
     },
     {
-      "id": "amu_3",
-      "name": "Aurora Charm",
+      "id": "amu_all_3",
+      "name": "Brother's Tears Amulet",
       "grade": "Epic",
-      "hp": 5000,
-      "def": 150
+      "image": "/assets/accessories/amulets/amu_all_3.png",
+      "hp": 3400,
+      "def": 140
+    },
+    {
+      "id": "amu_all_4",
+      "name": "Dagon's Leash",
+      "grade": "Legendary",
+      "image": "/assets/accessories/amulets/amu_all_4.png",
+      "hp": 5200,
+      "def": 200
     }
   ],
   "rings": [
     {
       "id": "rng_all_0",
-      "name": "Garnet Signet Ring",
+      "name": "Beginner's Ring",
       "grade": "Common",
       "image": "/assets/accessories/rings/rng_all_0.png",
       "atk": 8
     },
     {
       "id": "rng_all_1",
-      "name": "Dragonfang Ring",
+      "name": "Black Mist Ring",
       "grade": "Uncommon",
       "image": "/assets/accessories/rings/rng_all_1.png",
       "atk": 12,
@@ -47,7 +59,7 @@
     },
     {
       "id": "rng_all_2",
-      "name": "Emerald Lock Ring",
+      "name": "Baal Ring",
       "grade": "Rare",
       "image": "/assets/accessories/rings/rng_all_2.png",
       "atk": 14,
@@ -55,7 +67,7 @@
     },
     {
       "id": "rng_all_3",
-      "name": "Sapphire Shard Ring",
+      "name": "Beast of Life Ring",
       "grade": "Epic",
       "image": "/assets/accessories/rings/rng_all_3.png",
       "atk": 20,
@@ -64,7 +76,7 @@
     },
     {
       "id": "rng_all_4",
-      "name": "Golden Vault Ring",
+      "name": "Daidalos Ring",
       "grade": "Legendary",
       "image": "/assets/accessories/rings/rng_all_4.png",
       "atk": 28,

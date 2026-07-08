@@ -1,15 +1,41 @@
 {
+  "amulets": [
+    {
+      "id": "amu_cor_0",
+      "name": "Amethyst Warden's Charm",
+      "grade": "Common",
+      "image": "/assets/celestra/amulets/amu_cor_0.png",
+      "hp": 600,
+      "def": 30
+    },
+    {
+      "id": "amu_cor_1",
+      "name": "Voidfang Talisman",
+      "grade": "Rare",
+      "image": "/assets/celestra/amulets/amu_cor_1.png",
+      "hp": 1800,
+      "def": 85
+    },
+    {
+      "id": "amu_cor_2",
+      "name": "Bloodwing Sovereign Talisman",
+      "grade": "Legendary",
+      "image": "/assets/celestra/amulets/amu_cor_2.png",
+      "hp": 4200,
+      "def": 170
+    }
+  ],
   "rings": [
     {
       "id": "rng_cor_0",
-      "name": "Bloodthorn Cuff",
+      "name": "Emberkin Cuff",
       "grade": "Common",
       "image": "/assets/celestra/rings/rng_cor_0.png",
       "atk": 8
     },
     {
       "id": "rng_cor_1",
-      "name": "Ruby Ember Ring",
+      "name": "Ruby Warden Ring",
       "grade": "Uncommon",
       "image": "/assets/celestra/rings/rng_cor_1.png",
       "atk": 10,
@@ -17,7 +43,7 @@
     },
     {
       "id": "rng_cor_2",
-      "name": "Sapphire Ward Ring",
+      "name": "Moonwarden's Chain",
       "grade": "Rare",
       "image": "/assets/celestra/rings/rng_cor_2.png",
       "atk": 14,
@@ -25,7 +51,7 @@
     },
     {
       "id": "rng_cor_3",
-      "name": "Solaris Crest Ring",
+      "name": "Sunveil Crest Ring",
       "grade": "Epic",
       "image": "/assets/celestra/rings/rng_cor_3.png",
       "atk": 18,
@@ -34,7 +60,7 @@
     },
     {
       "id": "rng_cor_4",
-      "name": "Amber Talon Cuff",
+      "name": "Wyrmfang Sovereign Cuff",
       "grade": "Legendary",
       "image": "/assets/celestra/rings/rng_cor_4.png",
       "atk": 26,

@@ -1,8 +1,50 @@
 {
+  "amulets": [
+    {
+      "id": "amu_bio_0",
+      "name": "Dagon's Halo",
+      "grade": "Common",
+      "image": "/assets/bionex/amulets/amu_bio_0.png",
+      "hp": 400,
+      "def": 20
+    },
+    {
+      "id": "amu_bio_1",
+      "name": "Verdant Fang Pendant",
+      "grade": "Uncommon",
+      "image": "/assets/bionex/amulets/amu_bio_1.png",
+      "hp": 900,
+      "def": 45
+    },
+    {
+      "id": "amu_bio_2",
+      "name": "Bloodprism Talisman",
+      "grade": "Rare",
+      "image": "/assets/bionex/amulets/amu_bio_2.png",
+      "hp": 1600,
+      "def": 75
+    },
+    {
+      "id": "amu_bio_3",
+      "name": "Dead Officer's Core",
+      "grade": "Epic",
+      "image": "/assets/bionex/amulets/amu_bio_3.png",
+      "hp": 2800,
+      "def": 120
+    },
+    {
+      "id": "amu_bio_4",
+      "name": "Eclipse Sovereign Pendant",
+      "grade": "Legendary",
+      "image": "/assets/bionex/amulets/amu_bio_4.png",
+      "hp": 4500,
+      "def": 180
+    }
+  ],
   "rings": [
     {
       "id": "rng_bio_0",
-      "name": "Pulse Band Ring",
+      "name": "Beginner's Circuit Ring",
       "grade": "Common",
       "image": "/assets/bionex/rings/rng_bio_0.png",
       "atk": 8,
@@ -10,7 +52,7 @@
     },
     {
       "id": "rng_bio_1",
-      "name": "Crimson Core Ring",
+      "name": "Bloodcircuit Signet",
       "grade": "Uncommon",
       "image": "/assets/bionex/rings/rng_bio_1.png",
       "atk": 12,
@@ -18,7 +60,7 @@
     },
     {
       "id": "rng_bio_2",
-      "name": "Vortex Claw Ring",
+      "name": "Ravager's Talon Ring",
       "grade": "Rare",
       "image": "/assets/bionex/rings/rng_bio_2.png",
       "atk": 15,
@@ -26,7 +68,7 @@
     },
     {
       "id": "rng_bio_3",
-      "name": "Bloodline Circuit Ring",
+      "name": "Wraithsteel Band",
       "grade": "Epic",
       "image": "/assets/bionex/rings/rng_bio_3.png",
       "atk": 20,
@@ -34,7 +76,7 @@
     },
     {
       "id": "rng_bio_4",
-      "name": "Golden Cipher Ring",
+      "name": "Golgothan Sovereign Ring",
       "grade": "Legendary",
       "image": "/assets/bionex/rings/rng_bio_4.png",
       "atk": 26,

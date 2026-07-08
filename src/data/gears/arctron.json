@@ -157,17 +157,59 @@
       }
     ]
   },
+  "amulets": [
+    {
+      "id": "amu_arc_0",
+      "name": "Beginner's Core Pendant",
+      "grade": "Common",
+      "image": "/assets/arctron/amulets/amu_arc_0.png",
+      "hp": 400,
+      "def": 20
+    },
+    {
+      "id": "amu_arc_1",
+      "name": "Bloodthorn Pendant",
+      "grade": "Uncommon",
+      "image": "/assets/arctron/amulets/amu_arc_1.png",
+      "hp": 900,
+      "def": 45
+    },
+    {
+      "id": "amu_arc_2",
+      "name": "Ravager's Crescent",
+      "grade": "Rare",
+      "image": "/assets/arctron/amulets/amu_arc_2.png",
+      "hp": 1600,
+      "def": 75
+    },
+    {
+      "id": "amu_arc_3",
+      "name": "Deathstorm Talisman",
+      "grade": "Epic",
+      "image": "/assets/arctron/amulets/amu_arc_3.png",
+      "hp": 2800,
+      "def": 120
+    },
+    {
+      "id": "amu_arc_4",
+      "name": "Baal's Sovereign Pendant",
+      "grade": "Legendary",
+      "image": "/assets/arctron/amulets/amu_arc_4.png",
+      "hp": 4500,
+      "def": 180
+    }
+  ],
   "rings": [
     {
       "id": "rng_arc_0",
-      "name": "Ember Core Ring",
+      "name": "Baal's Ember Ring",
       "grade": "Common",
       "image": "/assets/arctron/rings/rng_arc_0.png",
       "atk": 8
     },
     {
       "id": "rng_arc_1",
-      "name": "Voidsteel Ring",
+      "name": "Cryospire Band",
       "grade": "Uncommon",
       "image": "/assets/arctron/rings/rng_arc_1.png",
       "atk": 12,
@@ -175,7 +217,7 @@
     },
     {
       "id": "rng_arc_2",
-      "name": "Cryo Matrix Ring",
+      "name": "Voidwyrm Signet",
       "grade": "Rare",
       "image": "/assets/arctron/rings/rng_arc_2.png",
       "atk": 15,
@@ -183,7 +225,7 @@
     },
     {
       "id": "rng_arc_3",
-      "name": "Bloodforge Ring",
+      "name": "Dagon's Warband Ring",
       "grade": "Epic",
       "image": "/assets/arctron/rings/rng_arc_3.png",
       "atk": 20,
@@ -191,7 +233,7 @@
     },
     {
       "id": "rng_arc_4",
-      "name": "Draconis Talon Ring",
+      "name": "Behemoth's Crown Ring",
       "grade": "Legendary",
       "image": "/assets/arctron/rings/rng_arc_4.png",
       "atk": 28,
