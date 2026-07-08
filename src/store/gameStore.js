@@ -112,11 +112,14 @@ const ARMOR_SET_LINEAGES = {
 // keyed by race + job lineage + level tier. Returns null if no bespoke set exists yet for
 // that race/lineage — callers should fall back to `item.image` in that case.
 function resolveArmorSetImage(slot, playerRace, playerJob, level) {
-  const lineage = WARRIOR_JOBS.includes(playerJob) ? 'warrior'
+  let lineage = WARRIOR_JOBS.includes(playerJob) ? 'warrior'
     : TECHNICIAN_JOBS.includes(playerJob) ? 'technician'
     : BOW_JOBS.includes(playerJob) ? 'ranger'
     : STAFF_JOBS.includes(playerJob) ? 'mage'
     : null
+  if (playerRace === 'bionex' && lineage === 'technician') {
+    lineage = 'ranger'
+  }
   if (!lineage) return null
   const available = ARMOR_SET_LINEAGES[playerRace] || []
   if (!available.includes(lineage)) return null
@@ -337,11 +340,14 @@ export function verifyStarterWeapon(player) {
 export function verifyStarterArmorSet(player) {
   if (!player || !player.race || !player.job) return player
 
-  const lineage = WARRIOR_JOBS.includes(player.job) ? 'warrior'
+  let lineage = WARRIOR_JOBS.includes(player.job) ? 'warrior'
     : TECHNICIAN_JOBS.includes(player.job) ? 'technician'
     : BOW_JOBS.includes(player.job) ? 'ranger'
     : STAFF_JOBS.includes(player.job) ? 'mage'
     : null
+  if (player.race === 'bionex' && lineage === 'technician') {
+    lineage = 'ranger'
+  }
   if (!lineage) return player
   const available = ARMOR_SET_LINEAGES[player.race] || []
   if (!available.includes(lineage)) return player

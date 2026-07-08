@@ -662,3 +662,18 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   2. Refactored the selected item modal in [Cargo.jsx](file:///c:/projects/focus-rpg/src/screens/Cargo.jsx#L464-L565) to compute array-safe validations, display multiple jobs/races formatted as slash-separated strings, and prevent crashes.
   3. Rewrote `pickItem` in [gameStore.js](file:///c:/projects/focus-rpg/src/store/gameStore.js#L2285-L2298) to support array-aware validations.
 - **Verification**: Verified that the production client builds successfully with zero errors.
+
+---
+
+### 🛠️ Milestone 56: Bionex Specialist & Starter Job Armor-Set Alignment [PENDING DEPLOYMENT]
+- **Bugs**:
+  1. **Bionex Specialist Empty Armor**: Bionex Specialist (Technician lineage: `engineer`/`mechanist`/`techmaster`/`overseer`) had no bespoke mecha armor set files. Character creation auto-equip checks failed for them, starting Bionex Specialists with completely bare gear slots.
+  2. **Starter Job Weapon Lock**: Arctron Ranger and Bionex Specialist/Caster starter weapons in `items.json` (`wep_job_gunner_*`, `wep_job_bionex_specialist_*`, `wep_job_bionex_spiritualist_*`) were locked to legacy job string IDs that don't match active IDs in `jobs.json` or were restricted only to the level 1 job name, preventing players from equipping them at higher tiers or after unequipping.
+- **Fixes**:
+  1. **Ranger Set Redirection**: Updated `resolveArmorSetImage` and `verifyStarterArmorSet` in `src/store/gameStore.js` to redirect Bionex `technician` lineage to Bionex `ranger` assets/items. Bionex Specialists now wear and render the sleek Bionex Ranger mecha set.
+  2. **Database Alignment**: Ran `scratch/patch_bionex_specialist.py` to update `src/data/items.json`:
+     - Updated all 25 Bionex Ranger mecha armor set pieces to include Bionex Specialist jobs (`"engineer"`, `"mechanist"`, `"techmaster"`, `"overseer"`) in their allowed jobs array.
+     - Remapped all 10 tiers of `wep_job_bionex_specialist_*` to Specialist job lineage array.
+     - Remapped all 10 tiers of `wep_job_bionex_spiritualist_*` to Caster job lineage array.
+     - Remapped all 10 tiers of `wep_job_gunner_*` to Arctron Ranger job lineage array.
+- **Verification**: Verified that the client production build compiles successfully.

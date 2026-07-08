@@ -13569,7 +13569,12 @@
       "rarity": "D",
       "type": "weapon",
       "race": "arctron",
-      "job": "gunner",
+      "job": [
+        "gunner",
+        "marksman",
+        "railgunner",
+        "annihilator"
+      ],
       "level": 1,
       "bonus": {
         "atk": 85
@@ -13584,7 +13589,12 @@
       "rarity": "C",
       "type": "weapon",
       "race": "arctron",
-      "job": "gunner",
+      "job": [
+        "gunner",
+        "marksman",
+        "railgunner",
+        "annihilator"
+      ],
       "level": 1,
       "bonus": {
         "atk": 102
@@ -13599,7 +13609,12 @@
       "rarity": "B",
       "type": "weapon",
       "race": "arctron",
-      "job": "gunner",
+      "job": [
+        "gunner",
+        "marksman",
+        "railgunner",
+        "annihilator"
+      ],
       "level": 1,
       "bonus": {
         "atk": 127
@@ -13614,7 +13629,12 @@
       "rarity": "A",
       "type": "weapon",
       "race": "arctron",
-      "job": "gunner",
+      "job": [
+        "gunner",
+        "marksman",
+        "railgunner",
+        "annihilator"
+      ],
       "level": 1,
       "bonus": {
         "atk": 170
@@ -13629,7 +13649,12 @@
       "rarity": "S",
       "type": "weapon",
       "race": "arctron",
-      "job": "gunner",
+      "job": [
+        "gunner",
+        "marksman",
+        "railgunner",
+        "annihilator"
+      ],
       "level": 1,
       "bonus": {
         "atk": 255
@@ -13644,7 +13669,12 @@
       "rarity": "SS",
       "type": "weapon",
       "race": "arctron",
-      "job": "gunner",
+      "job": [
+        "gunner",
+        "marksman",
+        "railgunner",
+        "annihilator"
+      ],
       "level": 1,
       "bonus": {
         "atk": 382
@@ -13659,7 +13689,12 @@
       "rarity": "SSS",
       "type": "weapon",
       "race": "arctron",
-      "job": "gunner",
+      "job": [
+        "gunner",
+        "marksman",
+        "railgunner",
+        "annihilator"
+      ],
       "level": 1,
       "bonus": {
         "atk": 595
@@ -13674,7 +13709,12 @@
       "rarity": "SR",
       "type": "weapon",
       "race": "arctron",
-      "job": "gunner",
+      "job": [
+        "gunner",
+        "marksman",
+        "railgunner",
+        "annihilator"
+      ],
       "level": 1,
       "bonus": {
         "atk": 850
@@ -13689,7 +13729,12 @@
       "rarity": "SSR",
       "type": "weapon",
       "race": "arctron",
-      "job": "gunner",
+      "job": [
+        "gunner",
+        "marksman",
+        "railgunner",
+        "annihilator"
+      ],
       "level": 1,
       "bonus": {
         "atk": 1275
@@ -13704,7 +13749,12 @@
       "rarity": "UR",
       "type": "weapon",
       "race": "arctron",
-      "job": "gunner",
+      "job": [
+        "gunner",
+        "marksman",
+        "railgunner",
+        "annihilator"
+      ],
       "level": 1,
       "bonus": {
         "atk": 2125
@@ -15069,7 +15119,12 @@
       "rarity": "D",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_spiritualist",
+      "job": [
+        "psion",
+        "esper",
+        "ascendant",
+        "transcendent"
+      ],
       "level": 1,
       "bonus": {
         "atk": 60
@@ -15084,7 +15139,12 @@
       "rarity": "C",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_spiritualist",
+      "job": [
+        "psion",
+        "esper",
+        "ascendant",
+        "transcendent"
+      ],
       "level": 1,
       "bonus": {
         "atk": 72
@@ -15099,7 +15159,12 @@
       "rarity": "B",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_spiritualist",
+      "job": [
+        "psion",
+        "esper",
+        "ascendant",
+        "transcendent"
+      ],
       "level": 1,
       "bonus": {
         "atk": 90
@@ -15114,7 +15179,12 @@
       "rarity": "A",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_spiritualist",
+      "job": [
+        "psion",
+        "esper",
+        "ascendant",
+        "transcendent"
+      ],
       "level": 1,
       "bonus": {
         "atk": 120
@@ -15129,7 +15199,12 @@
       "rarity": "S",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_spiritualist",
+      "job": [
+        "psion",
+        "esper",
+        "ascendant",
+        "transcendent"
+      ],
       "level": 1,
       "bonus": {
         "atk": 180
@@ -15144,7 +15219,12 @@
       "rarity": "SS",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_spiritualist",
+      "job": [
+        "psion",
+        "esper",
+        "ascendant",
+        "transcendent"
+      ],
       "level": 1,
       "bonus": {
         "atk": 270
@@ -15159,7 +15239,12 @@
       "rarity": "SSS",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_spiritualist",
+      "job": [
+        "psion",
+        "esper",
+        "ascendant",
+        "transcendent"
+      ],
       "level": 1,
       "bonus": {
         "atk": 420
@@ -15174,7 +15259,12 @@
       "rarity": "SR",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_spiritualist",
+      "job": [
+        "psion",
+        "esper",
+        "ascendant",
+        "transcendent"
+      ],
       "level": 1,
       "bonus": {
         "atk": 600
@@ -15189,7 +15279,12 @@
       "rarity": "SSR",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_spiritualist",
+      "job": [
+        "psion",
+        "esper",
+        "ascendant",
+        "transcendent"
+      ],
       "level": 1,
       "bonus": {
         "atk": 900
@@ -15204,7 +15299,12 @@
       "rarity": "UR",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_spiritualist",
+      "job": [
+        "psion",
+        "esper",
+        "ascendant",
+        "transcendent"
+      ],
       "level": 1,
       "bonus": {
         "atk": 1500
@@ -15219,7 +15319,12 @@
       "rarity": "D",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_specialist",
+      "job": [
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
+      ],
       "level": 1,
       "bonus": {
         "atk": 55
@@ -15234,7 +15339,12 @@
       "rarity": "C",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_specialist",
+      "job": [
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
+      ],
       "level": 1,
       "bonus": {
         "atk": 66
@@ -15249,7 +15359,12 @@
       "rarity": "B",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_specialist",
+      "job": [
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
+      ],
       "level": 1,
       "bonus": {
         "atk": 82
@@ -15264,7 +15379,12 @@
       "rarity": "A",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_specialist",
+      "job": [
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
+      ],
       "level": 1,
       "bonus": {
         "atk": 110
@@ -15279,7 +15399,12 @@
       "rarity": "S",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_specialist",
+      "job": [
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
+      ],
       "level": 1,
       "bonus": {
         "atk": 165
@@ -15294,7 +15419,12 @@
       "rarity": "SS",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_specialist",
+      "job": [
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
+      ],
       "level": 1,
       "bonus": {
         "atk": 247
@@ -15309,7 +15439,12 @@
       "rarity": "SSS",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_specialist",
+      "job": [
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
+      ],
       "level": 1,
       "bonus": {
         "atk": 385
@@ -15324,7 +15459,12 @@
       "rarity": "SR",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_specialist",
+      "job": [
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
+      ],
       "level": 1,
       "bonus": {
         "atk": 550
@@ -15339,7 +15479,12 @@
       "rarity": "SSR",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_specialist",
+      "job": [
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
+      ],
       "level": 1,
       "bonus": {
         "atk": 825
@@ -15354,7 +15499,12 @@
       "rarity": "UR",
       "type": "weapon",
       "race": "bionex",
-      "job": "bionex_specialist",
+      "job": [
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
+      ],
       "level": 1,
       "bonus": {
         "atk": 1375
@@ -18519,7 +18669,12 @@
       "rarity": "D",
       "type": "weapon",
       "race": "celestra",
-      "job": ["pathfinder", "windrunner", "shadow_hunter", "stargazer"],
+      "job": [
+        "pathfinder",
+        "windrunner",
+        "shadow_hunter",
+        "stargazer"
+      ],
       "level": 1,
       "bonus": {
         "atk": 75
@@ -18534,7 +18689,12 @@
       "rarity": "C",
       "type": "weapon",
       "race": "celestra",
-      "job": ["pathfinder", "windrunner", "shadow_hunter", "stargazer"],
+      "job": [
+        "pathfinder",
+        "windrunner",
+        "shadow_hunter",
+        "stargazer"
+      ],
       "level": 1,
       "bonus": {
         "atk": 90
@@ -18549,7 +18709,12 @@
       "rarity": "B",
       "type": "weapon",
       "race": "celestra",
-      "job": ["pathfinder", "windrunner", "shadow_hunter", "stargazer"],
+      "job": [
+        "pathfinder",
+        "windrunner",
+        "shadow_hunter",
+        "stargazer"
+      ],
       "level": 1,
       "bonus": {
         "atk": 112
@@ -18564,7 +18729,12 @@
       "rarity": "A",
       "type": "weapon",
       "race": "celestra",
-      "job": ["pathfinder", "windrunner", "shadow_hunter", "stargazer"],
+      "job": [
+        "pathfinder",
+        "windrunner",
+        "shadow_hunter",
+        "stargazer"
+      ],
       "level": 1,
       "bonus": {
         "atk": 150
@@ -18579,7 +18749,12 @@
       "rarity": "S",
       "type": "weapon",
       "race": "celestra",
-      "job": ["pathfinder", "windrunner", "shadow_hunter", "stargazer"],
+      "job": [
+        "pathfinder",
+        "windrunner",
+        "shadow_hunter",
+        "stargazer"
+      ],
       "level": 1,
       "bonus": {
         "atk": 225
@@ -18594,7 +18769,12 @@
       "rarity": "SS",
       "type": "weapon",
       "race": "celestra",
-      "job": ["pathfinder", "windrunner", "shadow_hunter", "stargazer"],
+      "job": [
+        "pathfinder",
+        "windrunner",
+        "shadow_hunter",
+        "stargazer"
+      ],
       "level": 1,
       "bonus": {
         "atk": 337
@@ -18609,7 +18789,12 @@
       "rarity": "SSS",
       "type": "weapon",
       "race": "celestra",
-      "job": ["pathfinder", "windrunner", "shadow_hunter", "stargazer"],
+      "job": [
+        "pathfinder",
+        "windrunner",
+        "shadow_hunter",
+        "stargazer"
+      ],
       "level": 1,
       "bonus": {
         "atk": 525
@@ -18624,7 +18809,12 @@
       "rarity": "SR",
       "type": "weapon",
       "race": "celestra",
-      "job": ["pathfinder", "windrunner", "shadow_hunter", "stargazer"],
+      "job": [
+        "pathfinder",
+        "windrunner",
+        "shadow_hunter",
+        "stargazer"
+      ],
       "level": 1,
       "bonus": {
         "atk": 750
@@ -18639,7 +18829,12 @@
       "rarity": "SSR",
       "type": "weapon",
       "race": "celestra",
-      "job": ["pathfinder", "windrunner", "shadow_hunter", "stargazer"],
+      "job": [
+        "pathfinder",
+        "windrunner",
+        "shadow_hunter",
+        "stargazer"
+      ],
       "level": 1,
       "bonus": {
         "atk": 1125
@@ -18654,7 +18849,12 @@
       "rarity": "UR",
       "type": "weapon",
       "race": "celestra",
-      "job": ["pathfinder", "windrunner", "shadow_hunter", "stargazer"],
+      "job": [
+        "pathfinder",
+        "windrunner",
+        "shadow_hunter",
+        "stargazer"
+      ],
       "level": 1,
       "bonus": {
         "atk": 1875
@@ -22056,7 +22256,11 @@
         "marksman",
         "revenant",
         "deadeye",
-        "predator"
+        "predator",
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
       ],
       "level": 1,
       "bonus": {
@@ -22075,7 +22279,11 @@
         "marksman",
         "revenant",
         "deadeye",
-        "predator"
+        "predator",
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
       ],
       "level": 1,
       "bonus": {
@@ -22094,7 +22302,11 @@
         "marksman",
         "revenant",
         "deadeye",
-        "predator"
+        "predator",
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
       ],
       "level": 1,
       "bonus": {
@@ -22113,7 +22325,11 @@
         "marksman",
         "revenant",
         "deadeye",
-        "predator"
+        "predator",
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
       ],
       "level": 1,
       "bonus": {
@@ -22133,7 +22349,11 @@
         "marksman",
         "revenant",
         "deadeye",
-        "predator"
+        "predator",
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
       ],
       "level": 1,
       "bonus": {
@@ -22152,7 +22372,11 @@
         "marksman",
         "revenant",
         "deadeye",
-        "predator"
+        "predator",
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
       ],
       "level": 32,
       "bonus": {
@@ -22171,7 +22395,11 @@
         "marksman",
         "revenant",
         "deadeye",
-        "predator"
+        "predator",
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
       ],
       "level": 32,
       "bonus": {
@@ -22190,7 +22418,11 @@
         "marksman",
         "revenant",
         "deadeye",
-        "predator"
+        "predator",
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
       ],
       "level": 32,
       "bonus": {
@@ -22210,7 +22442,11 @@
         "marksman",
         "revenant",
         "deadeye",
-        "predator"
+        "predator",
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
       ],
       "level": 32,
       "bonus": {
@@ -22230,7 +22466,11 @@
         "marksman",
         "revenant",
         "deadeye",
-        "predator"
+        "predator",
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
       ],
       "level": 32,
       "bonus": {
@@ -22249,7 +22489,11 @@
         "marksman",
         "revenant",
         "deadeye",
-        "predator"
+        "predator",
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
       ],
       "level": 42,
       "bonus": {
@@ -22268,7 +22512,11 @@
         "marksman",
         "revenant",
         "deadeye",
-        "predator"
+        "predator",
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
       ],
       "level": 42,
       "bonus": {
@@ -22287,7 +22535,11 @@
         "marksman",
         "revenant",
         "deadeye",
-        "predator"
+        "predator",
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
       ],
       "level": 42,
       "bonus": {
@@ -22307,7 +22559,11 @@
         "marksman",
         "revenant",
         "deadeye",
-        "predator"
+        "predator",
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
       ],
       "level": 42,
       "bonus": {
@@ -22327,7 +22583,11 @@
         "marksman",
         "revenant",
         "deadeye",
-        "predator"
+        "predator",
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
       ],
       "level": 42,
       "bonus": {
@@ -22346,7 +22606,11 @@
         "marksman",
         "revenant",
         "deadeye",
-        "predator"
+        "predator",
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
       ],
       "level": 55,
       "bonus": {
@@ -22365,7 +22629,11 @@
         "marksman",
         "revenant",
         "deadeye",
-        "predator"
+        "predator",
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
       ],
       "level": 55,
       "bonus": {
@@ -22384,7 +22652,11 @@
         "marksman",
         "revenant",
         "deadeye",
-        "predator"
+        "predator",
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
       ],
       "level": 55,
       "bonus": {
@@ -22404,7 +22676,11 @@
         "marksman",
         "revenant",
         "deadeye",
-        "predator"
+        "predator",
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
       ],
       "level": 55,
       "bonus": {
@@ -22424,7 +22700,11 @@
         "marksman",
         "revenant",
         "deadeye",
-        "predator"
+        "predator",
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
       ],
       "level": 55,
       "bonus": {
@@ -22443,7 +22723,11 @@
         "marksman",
         "revenant",
         "deadeye",
-        "predator"
+        "predator",
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
       ],
       "level": 66,
       "bonus": {
@@ -22462,7 +22746,11 @@
         "marksman",
         "revenant",
         "deadeye",
-        "predator"
+        "predator",
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
       ],
       "level": 66,
       "bonus": {
@@ -22481,7 +22769,11 @@
         "marksman",
         "revenant",
         "deadeye",
-        "predator"
+        "predator",
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
       ],
       "level": 66,
       "bonus": {
@@ -22501,7 +22793,11 @@
         "marksman",
         "revenant",
         "deadeye",
-        "predator"
+        "predator",
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
       ],
       "level": 66,
       "bonus": {
@@ -22521,7 +22817,11 @@
         "marksman",
         "revenant",
         "deadeye",
-        "predator"
+        "predator",
+        "engineer",
+        "mechanist",
+        "techmaster",
+        "overseer"
       ],
       "level": 66,
       "bonus": {

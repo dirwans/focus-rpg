@@ -423,7 +423,7 @@ export default function Unit() {
                   return (
                     <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2, position: 'relative' }}>
                       {item.image ? (
-                        <img referrerPolicy="no-referrer" src={item.image} style={{ width: 22, height: 22, objectFit: 'contain' }} alt={item.name} />
+                        <img referrerPolicy="no-referrer" src={item.image} style={{ width: 40, height: 40, objectFit: 'contain' }} alt={item.name} />
                       ) : item.emoji ? (
                         <span style={{ fontSize: 18, marginTop: -2 }}>{item.emoji}</span>
                       ) : (
@@ -649,7 +649,7 @@ export default function Unit() {
                   return (
                     <div style={{ width: styleType === 'full' ? '100%' : 48, height: 48, borderRadius: 7, background: `linear-gradient(135deg,${fp}33,rgba(0,0,0,0.5))`, border: `1.5px solid ${fp}80`, boxShadow: `0 0 10px ${fp}40`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2, position: 'relative' }}>
                       {item.image ? (
-                        <img referrerPolicy="no-referrer" src={item.image} style={{ width: 22, height: 22, objectFit: 'contain' }} alt={item.name} />
+                        <img referrerPolicy="no-referrer" src={item.image} style={{ width: 40, height: 40, objectFit: 'contain' }} alt={item.name} />
                       ) : item.emoji ? (
                         <span style={{ fontSize: 18, marginTop: -2 }}>{item.emoji}</span>
                       ) : (

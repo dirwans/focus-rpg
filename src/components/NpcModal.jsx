@@ -815,7 +815,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                       theme.weaponSmithSvg
                     ) : hasItem ? (
                       resolveItemImage(item, player.race, player.job) ? (
-                        <img referrerPolicy="no-referrer" src={resolveItemImage(item, player.race, player.job)} style={{ width: 36, height: 36, objectFit: 'contain' }} alt={item.name} />
+                        <img referrerPolicy="no-referrer" src={resolveItemImage(item, player.race, player.job)} style={{ width: 60, height: 60, objectFit: 'contain' }} alt={item.name} />
                       ) : null
                     ) : null}
                   </div>
@@ -1052,7 +1052,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                         theme.weaponSmithSvg
                       ) : hasWeapon ? (
                         equippedWeapon.image ? (
-                          <img referrerPolicy="no-referrer" src={equippedWeapon.image} style={{ width: 36, height: 36, objectFit: 'contain' }} alt={equippedWeapon.name} />
+                          <img referrerPolicy="no-referrer" src={equippedWeapon.image} style={{ width: 60, height: 60, objectFit: 'contain' }} alt={equippedWeapon.name} />
                         ) : null
                       ) : null}
                     </div>
