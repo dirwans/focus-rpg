@@ -665,6 +665,200 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
+---
+
+### ⚡ Milestone 35: Fix Hard Refresh Screen Flashing [DEPLOYED]
+- **Bug**: Fixed a race condition where hard-refreshing the browser briefly flashed the Character Creator (with its default Arctron background and logo theme) for split seconds before the user's actual save data loaded from the cloud.
+- **Logic**: Added a new `loadingSave` local state to `App.jsx` that remains `true` while the save file is loading. The root component renders the loading overlay until the save fetch finishes, blocking premature mounts of `CharacterCreate`.
+- **Verification**: Verified that the project builds correctly and passes the local production build check.
+
+---
+
+### 🛡️ Milestone 36: Bionex & Celestra Armor Sets Integration [DEPLOYED]
+- **Assets**: Extracted 150 transparent `.png` icons for Bellato (Bionex) and Cora (Celestra) Warrior, Ranger, and Mage (Force) classes at levels `1`, `32`, `42`, `55`, and `66` (extracted from levels 13, 31, 41, 45, and 50 on `rflib.ru` respectively). Placed them in `src/assets/armor_bionex/`, `src/assets/armor_celestra/` and copied to matching public folders.
+- **Stats**: Armor piece DEF values scraped from rflib.ru database and proportionally scaled (RFLIB ratios normalized to match Arctron baseline per tier). Each piece has per-class-per-tier stats rather than generic placeholder values.
+- **Database**: Registered 150 new `_armorset_` items in `src/data/items.json` for Bionex and Celestra armor sets, matching the proper stats, emojis, class names, job arrays, level requirements, and asset image paths.
+- **Logic**: Updated `resolveArmorSetImage` in `src/store/gameStore.js` to map Mage/Force (`STAFF_JOBS`) class lineage, updated Bionex/Celestra asset folder paths, and enabled level 66 tiering. Also updated `verifyStarterArmorSet` to auto-equip starting Mage armor pieces for Bionex and Celestra characters.
+- **Verification**: Build passed. Deployed to VPS via `deploy.ps1`.
+
+---
+
+### ⚔️ Milestone 37: Race Unique Stat Advantages [DEPLOYED]
+- **Dodge Rate**: Added race-specific dodge bonus in `gameStore.js` — Arctron: `5%`, Bionex: `+2% (7%)`, Celestra: `+5% (10%)`. Matches the ADR% advantage from original RF Online armor data.
+- **CharacterCreate UI**: Expanded faction trait bars from 3 to 5 stats for all races, adding EVASION and FORCE bars. Arctron shows max ATK/DEF/HP but low Evasion and zero Force. Bionex shows balanced stats with mid Evasion and Force. Celestra shows high ATK/Evasion/Force but lower DEF/HP — accurately matching actual gameplay mechanics.
+- **races.json**: Added `dodgeBonus` field to each race's bonuses block, updated `strengths` text to advertise the `+2%` / `+5%` Base Evasion (ADR) advantages for Bionex and Celestra respectively.
+- **Verification**: Build passed. Deployed to VPS via `deploy.ps1`.
+
+
+---
+
+### 🖼️ Milestone 38: Bionex & Celestra Armor Sprites Upscale + Background Removal [DEPLOYED]
+- **Problem**: The 150 Bionex & Celestra armor sprites in `src/assets/armor_bionex/` and `src/assets/armor_celestra/` were raw scrape exports at 32×32 pixels with solid backgrounds — unusable at game display sizes.
+- **Pipeline** (`scratch/upscale_rembg_armor.py`): For each of 150 files:
+  1. **BFS background removal at 32×32** — flood fill from all 4 corners + edge midpoints (tolerance 35), seeds gather background color palette before filling. Pixel-art solid backgrounds removed cleanly.
+  2. **Scale2x (EPX) ×2**: 32→64→128px — pixel-art-aware edge smoothing that preserves clean hard edges instead of blurring them.
+  3. **PIL LANCZOS 128→320px** — smooth final upscale to match Arctron armor display size (~300–400px).
+- **Output**: 75 Celestra + 75 Bionex files overwritten in-place (both `public/` and `src/` copies). Transparent PNGs, 320×320.
+
+---
+
+### 🎨 Milestone 39: AI Regeneration of Armor Sprites to Anime Realistic Art [DEPLOYED]
+- **Issue**: The upscaled pixel art for Bionex and Celestra armor sets still looked too blocky and digital compared to the high-end painted style of Arctron gears.
+- **Solution**: Initiated a phased approach to regenerate the armor sets using AI generation (Gemini) strictly adhering to an "Anime Realistic Art" style while maintaining the core shapes, color palettes, and identity of the original RF Online armor pieces.
+- **Implementation**: 
+  - Completed **Bionex Warrior Level 1 Set** (Helmet/Bandana, Chest Armor, Pants, Gloves, Boots).
+  - Completed **Celestra Warrior Level 1 Set** (Helmet/Circlet, Chest Armor, Pants, Gloves, Boots).
+  - Completed **Celestra Mage (Spiritualist) Level 1 Set** (Helmet/Circlet, Upper Robe, Lower Robe/Pants, Gloves, Boots).
+### ⚔️ Milestone 40: Combat Math Overhaul (PvE, PvP, & Chip War) [DEPLOYED]
+- **Issue**: The combat mechanics completely ignored weapon stats (`meleeAtk`, `rangedAtk`, `forceAtk`) and race bonuses like `Evasion` (Dodge Rate) and `Crit`. PvE Offline progression only used base `atk` upgrades, and PvP/Chip War used raw stats blindly, making all equipment and job choices meaningless in battle. Furthermore, `api/chip-war/attack` blindly trusted client's `attackPower` input.
+- **Solution**: 
+  - **PvE (`gameStore.js`)**: Updated `computeRewards` to call `get().getStats()` and calculate DPS using active weapon type attacks (`meleeAtk`/`rangedAtk`/`forceAtk`), Evasion, and Critical Rate.
+  - **PvP (`server.js`)**: Updated `/api/pvp/battle` to calculate actual Evasion (Miss Chance) and Critical hits based on RNG, making PvP dynamic. 
+  - **Chip War (`server.js`)**: Secured `/api/chip-war/attack` to calculate DPS on the server-side from `loadSave(s.username).stats`, preventing one-shot client injection exploits. Updated power rating math in `/api/pvp/war` to include evasion and crit scores.
+- **Status**: Deployed to VPS alongside new AI Armor assets (Bionex Warrior Lv1, Celestra Warrior Lv1, Celestra Mage Lv1) overriding the 5-mod rule by explicit user request.---
+
+### 🎨 Milestone 39: Arctron Ranger Lv.1 Armor Set Restored to Silver [DEPLOYED]
+- **Problem**: Previous recolor pass (Milestone 29) made the Lv.1 Ranger set too dark — full dark gunmetal, losing the white/silver base. User requested silver base with purple accent removed.
+- **Fix** (`scratch/restore_ranger_lv1_silver.py`): Working from the dark files, HSV-targeted restore:
+  - Blue-range pixels (hue 150–250°, the silver armor's cool-tone base): val ÷ 0.72 (reverse the prior darkening), saturation ×(0.08/0.18) — brings bright silver back
+  - Near-achromatic dark pixels (sat < 0.08, val < 0.7): val ÷ 0.82 — restores shadow details
+  - Purple-hued pixels (hue 250–310°): keep as light gray (val ×1.15 capped at 0.75, sat ×0.05) — stays desaturated/no-purple
+  - Gold-hued pixels (hue 35–70°): keep as gray (val ×1.1 capped at 0.70, sat ×0.05)
+- **Result**: White/silver mech base restored; purple orbs and gold accents remain suppressed as neutral gray. Set looks clearly Lv.1 "starter" without being dull. 5 files updated in `public/assets/armor/` and `src/assets/armor/`.
+
+---
+
+### 🖼️ Milestone 40: Bionex & Celestra Armor Sprites — waifu2x Upscale (Placeholder) [DEPLOYED]
+- **Problem**: Previous Scale2x upscale pipeline (Milestone 38) produced visibly jagged/pixelated edges on the 32x32 source sprites. Classic AI upscalers (EDSR) produced worse results (blur artifacts, wrong for pixel art).
+- **Solution**: Switched to **waifu2x-ncnn-vulkan** (nihui, v20220728) — a GPU-accelerated upscaler specifically designed for anime/game pixel art. Ran on Intel UHD GPU via Vulkan.
+- **Pipeline** (`scratch/upscale_waifu2x.py`): Restore originals from git HEAD~1 → BFS background removal at 32×32 → waifu2x 4x (32→128, denoise=0) → LANCZOS 128→320. Both factions processed in ~7s each.
+- **Status**: Kept as **placeholder** — user plans to regenerate sprites via a dedicated AI image generator ("Nano Banana Pro") for higher quality results matching Arctron's smooth render style. These waifu2x versions are an improvement over raw Scale2x in the meantime.
+- **Files updated**: 150 files across `public/assets/armor_bionex/` and `public/assets/armor_celestra/` (src copies too).
+
+---
+
+### 🔧 Milestone 41: verifyStarterArmorSet — Remove Level Guard + waifu2x Sprites Deploy [DEPLOYED]
+- **Bug**: `verifyStarterArmorSet` had `player.level > 1` guard that prevented existing characters (created before Milestone 28) from receiving their faction starter armor set. Only brand-new level-1 characters got the set.
+- **Fix**: Removed the `player.level > 1` check from `verifyStarterArmorSet` in `gameStore.js`. The `alreadyHasSet` guard (checks if any of the 5 armor slots already has an item) still prevents overwriting existing gear. Since `loadPlayer` already calls `verifyStarterArmorSet` on every save load, all existing bare characters will auto-receive their faction Lv.1 armor set on next login.
+- **Also included**: waifu2x upscaled sprites for all 150 Bionex & Celestra armor pieces (Milestone 40) — deployed together in this batch.
+
+---
+
+### 🖼️ Milestone 42: Armor Slot Rendering Fix — Checkerboard Background Eliminated [DEPLOYED]
+- **Bug**: Bionex & Celestra armor set items (IDs containing `_armorset_`) were rendered with `imageRendering: 'pixelated'` (CSS nearest-neighbor). These items are now 320×320 waifu2x-upscaled PNGs (not pixel art), so nearest-neighbor downscaling from 320→~80px in the gear/inventory slots caused visible checkerboard/grid artifacts at transparent-to-opaque edges ("kotak2" as reported by user).
+- **Fix 1**: Removed conditional `imageRendering: pixelated` for `_armorset_` items across `Inventory.jsx` (3 occurrences) and `Cargo.jsx` (2 occurrences) — all set to `'auto'` (bilinear smoothing).
+- **Fix 2**: Ran `scratch/fill_armor_holes.py` — BFS flood from border to detect transparent pixels enclosed inside armor shapes (false holes from aggressive 32×32 BFS background removal). Filled 10 files: `defcelestramagelv1armor/boots/gloves/helmet/pants`, `defcelestramagelv42helmet`, `defcelestrawarriorlv1gloves/helmet`, `defbionexrangerlv42boots`, `defbionexwarriorlv55boots` (19,726 hole pixels total restored).
+
+---
+
+### 📁 Milestone 43: Mage Armor Files — Three-Way Slot Rename (All Tiers, Both Factions) [DEPLOYED]
+- **Bug**: All celestra and bionex mage armor source files had their gloves/boots/pants PNG names swapped in a cycle: file named `gloves` contained boots art, file named `boots` contained pants art, file named `pants` contained gloves art. This made all three slots display wrong items in the gear tab.
+- **Scope**: All 5 tiers (lv1/32/42/55/66) × 2 factions (celestra + bionex) × 2 directories (public/ + src/) = 20 tier-sets renamed.
+- **Fix**: `scratch/fix_mage_naming.py` — three-way swap via temp file: `gloves→temp, pants→gloves, boots→pants, temp→boots`. The cycle `(gloves content=boots) → (boots content=pants) → (pants content=gloves)` is now corrected.
+- **Note**: An earlier `fix_checker_bg.py` attempt accidentally damaged non-warrior-lv1 files by treating armor-colored border pixels as achromatic background. All damaged files were restored from git HEAD via `scratch/restore_armor_from_git.py`, which also re-applies the mage rename and re-fills interior holes.
+
+---
+
+### 🖼️ Milestone 44: Bionex Warrior Lv.1 — Checker Background Removal [DEPLOYED]
+- **Bug**: Bionex warrior Lv.1 armor set (5 pieces: armor/helmet/gloves/boots/pants) had a photoshop-style gray checkerboard pattern baked in as actual opaque pixels (not transparency). The original source art was saved from a render app with the checker pattern as a background placeholder. The waifu2x BFS at 32×32 only caught one shade of gray (lighter squares, within tolerance 35) and left the darker checker squares as opaque, resulting in a visible "kotak2" background in the game.
+- **Fix**: `scratch/fix_checker_bg.py` — dual-seed BFS: collects all achromatic (R≈G≈B within 20) border pixel colors, then floods inward removing any border-connected pixel matching any seed color. Removed 590k–841k pixels per piece (5 large high-res render files, not the 32×32 pixel-art pipeline). All 5 files are now fully transparent outside the armor shape.
+
+---
+
+### 🔗 Milestone 45: Armor Image URL Cache-Busting (`?v=2`) [DEPLOYED]
+- **Root cause**: Milestone 43 renamed the CONTENT of armor PNG files (gloves.png now truly has gloves art, boots.png truly has boots art, etc.) but kept the same URLs. Browsers and PWA service workers had cached the old content under those URLs, so the rename was invisible until the user cleared cache.
+- **Fix**: Added `?v=2` query parameter to all `resolveArmorSetImage` return values in `src/store/gameStore.js`. This changes the URL for every armor-set image, forcing all browsers/PWAs to fetch fresh content regardless of their cached version of the previous URL.
+- **Applies to**: All bionex + celestra armor set pieces (`armor_bionex/`, `armor_celestra/`, and `armor/` fallback).
+
+---
+
+### 🎨 Milestone 46: Celestra Ranger Lv.1 — High-Res Armor Set Replacement [DEPLOYED]
+- **Source**: User supplied a high-quality reference sheet (`public/ref/Celestra/armor_celestra/ranger-lv1-armor.png`, 1080×607) containing all 5 armor pieces composited on a black background — a major quality upgrade over the previous waifu2x-upscaled 32×32-sourced placeholder art.
+- **Pipeline**: Auto-detected the 5 piece bounding boxes via connected-component labeling (`scipy.ndimage.label`, brightness threshold), merged split sub-blobs (helmet and gloves each render as 2 disconnected pieces in the source sheet), then per-piece: BFS flood-fill background removal from image border (tolerance 45, 8-directional) to cleanly eliminate the black background and JPEG-compression speckle noise, square-padded, and LANCZOS-resized to the standard 320×320.
+- **Files replaced** (same filenames, both `public/assets/armor_celestra/` and `src/assets/armor_celestra/`): `defcelestrarangerlv1armor.png`, `defcelestrarangerlv1gloves.png`, `defcelestrarangerlv1boots.png`, `defcelestrarangerlv1pants.png`.
+- **Piece identification** (chest torso = armor, leg guards = pants, mechanical hand+gauntlet = gloves, leather combat boots = boots) — confirmed against the source composite layout.
+- **Correction**: The "horned hood-shape" middle piece in the composite sheet was initially assumed to be the helmet, but the user provided a dedicated helmet reference (`public/ref/Celestra/armor_celestra/helmet-celes-ranger-lv1.png` — a crab-like techno helmet with a glowing blue crystal). `defcelestrarangerlv1helmet.png` was cropped/cleaned from that separate source instead, using the same BFS background-removal pipeline (tolerance 45, 8-directional flood from border), tight-cropped to content bounds, square-padded, and resized to 320×320.
+
+---
+
+### ⚔️ Milestone 47: All-Faction Lv.1 Sword Sprites — Removed Dead Padding [DEPLOYED]
+- **Bug**: `defallfactionslv1sword{1,2,3}.png` (the generic Lv.1 warrior-lineage weapon, used by all 3 factions incl. Bionex) had a stray 2px-wide vertical line artifact spanning the full image height at the extreme left edge (x=0), with the actual sword artwork crammed into the remaining ~35% of canvas width on the right. Since equipment slots render with `objectFit: contain`, the empty dead space scaled down the visible sword to a fraction of the slot size — reported by user as "gambar pedang cuilik" (tiny sword image).
+- **Fix**: Connected-component analysis (`scipy.ndimage.label`) isolated the stray left-edge line (thin blob touching x=0, width ≤3px, height ≥70% of canvas) from the real sword-shape blobs, zeroed its alpha, then tight-cropped to the bounding box of the remaining content with 4px padding.
+- **Result**: `sword1` 310×58→125×56, `sword2` 312×71→133×68, `sword3` 318×55→129×55 (roughly 2.5x more of the canvas is now sword instead of empty space). `sword4` was already tightly cropped (no change needed). Checked Lv.32/42/55 axe sprites for the same issue — all had healthy 87–91% fill ratios, no fix needed there.
+- **Follow-up (same milestone)**: Even after the crop, the swords still rendered small in the square gear slot because `objectFit: contain` fits to the *limiting* dimension — a long shallow-diagonal blade (e.g. 125×56, ~2.2:1 aspect) gets scaled down to fit slot width, leaving large empty top/bottom margins. Searched rotation angles 0–90° per sword to maximize bounding-box squareness (`min(w,h)/max(w,h)`), landing on 60–68° for all 4 variants (squareness 0.97–0.99, up from ~0.45–0.5 unrotated). Rotated each sword to a steeper near-vertical diagonal (blade tip up, hilt down) and re-cropped tightly: `sword1` →98×101, `sword2`→109×106, `sword3`→101×102, `sword4`→104×104. All 4 now nearly fill a square slot.
+
+---
+
+### 🏹 Milestone 48: Celestra Ranger Lv.1 — Empty Weapon Slot Fix [DEPLOYED]
+- **Bug**: `verifyStarterWeapon` (`gameStore.js`) only ever pushed the granted starter weapon into `player.inventory` — it never wrote to `player.equipment.weapon`. Every race/job got a weapon added to their bag, but nobody's Gears tab weapon slot was auto-populated, unlike `verifyStarterArmorSet` (Milestone 41) which equips directly. Reported by user as "celestra ranger lv1 weapon kosong" (empty weapon slot) — same class of bug as M41, just never caught for weapons since most players equip manually from the bag without noticing.
+- **Fix**: Rewrote `verifyStarterWeapon` to equip directly into `player.equipment.weapon` (mirroring the M41 armor-set pattern), and removed the same stale `player.level > 1` guard so existing characters get fixed retroactively on next load. If an old-style grant had already left an unequipped weapon sitting in the bag, that existing item is equipped instead of minting a duplicate.
+- **Related data bug found + fixed**: While tracing this, found `wep_job_mystic_archer_D` (the celestra ranger starter weapon, through all 10 rarity tiers `_D` to `_UR`) was job-locked to `"mystic_archer"` — a job id that doesn't exist anywhere in `jobs.json`. The actual celestra ranger lineage ids are `pathfinder`/`windrunner`/`shadow_hunter`/`stargazer` (tier1–4). This wouldn't have blocked the initial auto-equip (which bypasses `equipItem`'s validation), but would have permanently blocked *re-equipping* the weapon after any unequip, since `equipItem` checks `item.job` against `player.job` and rejects mismatches. Updated all 10 `wep_job_mystic_archer_*` items' `job` field from the string `"mystic_archer"` to the array `["pathfinder", "windrunner", "shadow_hunter", "stargazer"]` in `items.json`, using a targeted line-replace (not a full JSON re-serialize, which would've reformatted the entire 24k-line file and escaped-unicode emoji back to literal characters).
+- **Scoped out**: Discovered the broader `wep_job_*` item family (~280 items across all 3 factions) largely uses an entirely different, older job-naming scheme (`cadet`, `iron_trooper`, `bionex_warrior`, `acolyte`, etc.) unrelated to `jobs.json`'s current ids — this looks like a legacy/vestigial itemization system. Flagged separately as a background task rather than fixed inline, since auditing and remapping ~280 items across 3 factions is a much larger, separate effort from this specific bug report.
+
+---
+
+### 🖼️ Milestone 49: Weapon & Shield Sprite Normalization + Cache-Bust [DEPLOYED]
+- **Bug 1 (stale cache)**: User hard-refreshed and still saw the old, dead-space-heavy Bionex Lv.1 sword after M47's rotation/crop fix deployed — because M47 kept the same filenames, browsers/PWAs kept serving the cached pre-fix bytes (identical root cause to M45's armor cache issue, just not yet applied to weapon/shield URLs).
+- **Fix 1**: Added `?v=2` cache-busting query param to every weapon and shield URL returned by `resolveItemImage` in `gameStore.js` (all sword/axe/bow/gun/staff/special tiers, and all bionex/arctron/celestra shield tiers).
+- **Bug 2 (inconsistent framing)**: User also flagged that weapon/shield icons look visually smaller/inconsistent next to the armor-set icons — auditing actual canvas sizes confirmed wild inconsistency: weapons ranged from tiny 98×101 (our just-fixed swords) up to 480×466 (staffs), and shields ranged from a barely-there 56×85 (`lv42bionexshielddef.png`, `lv42celesshielddef.png`) up to 682×333 (`lv42arctronshielddef.png`) — meaning fill-ratio and aspect ratio varied wildly across items even though all render through the same `objectFit: contain` square slots.
+- **Fix 2**: Normalized all 40 weapon + shield source files (`public/assets/weapons/`, `public/assets/{bionex,arctron,celestra}/shields/`, and their `src/assets/` mirrors) with one pipeline: tight-crop to the non-transparent content bounding box, pad to a square canvas (6% margin), LANCZOS-resize to a standard 320×320 — matching the armor-set convention established in Milestones 40/46. All weapon and shield icons now occupy a consistent proportion of their gear slot.
+
+---
+
+### 🏹 Milestone 50: Bow/Gun Rotation Fix + Celestra Ranger Helmet Rescale [DEPLOYED]
+- **Bug 1**: After M49's normalization, the bow/gun weapon sprites (`defallfactionslv{1,32,42,55}bow.png`, `defallfactionslv{1,32,42,55}gun.png`) still rendered tiny in the gear slot — M49's tight-crop-and-square-pad preserved each sprite's *original* aspect ratio, and bows/guns are drawn as long shallow diagonals (squareness 0.32–0.55, i.e. width 2–3× the height), so padding to a square canvas left huge empty top/bottom margins, same root cause M47 already fixed for swords.
+- **Fix 1**: Applied the same rotation-search technique from M47 to all 8 bow/gun tiers — searched rotation angles (both directions, 0–90°) to maximize bounding-box squareness, landing on 42–66° per variant (squareness now 0.98–1.0, up from 0.32–0.55). Re-cropped and resized to 320×320 after rotating.
+- **Bug 2**: User flagged the new Celestra Ranger Lv.1 helmet (Milestone 46) looked oversized/zoomed-in compared to its 4 sibling pieces (armor/gloves/boots/pants) in the gear grid. Measured fill ratios confirmed it: helmet was 0.88 (bounding-box area ÷ canvas area) vs. 0.62–0.75 for the other 4 pieces — it had noticeably less padding around the content than its siblings.
+- **Fix 2**: Re-cropped `defcelestrarangerlv1helmet.png` from the same source reference with a larger 9% margin (up from ~3%), bringing its fill ratio down to ~0.67 — now visually consistent with its sibling pieces.
+
+---
+
+### 🎨 Milestone 51: Bionex Warrior Lv.32 Armor Set Regeneration [DEPLOYED]
+- **Assets**: Regenerated all 5 pieces of the Bionex Warrior Lv.32 armor set (`armor`, `helmet`, `gloves`, `pants`, `boots`) using image generation with a badass mecha aesthetic and champagne-gold glowing energy lines to match the style of the Bionex Warrior Lv.1 set.
+- **Post-processing**: Created and ran `scratch/process_generated_set.py` to automatically flood-fill the white background (vectorized component labeling), crop tightly, pad to square, and scale to 320x320 transparent PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
+- **Verification**: Verified that `npm run build` compiles successfully.
+
+---
+
+### 🎨 Milestone 52: Bionex Warrior Lv.42 Armor Set Regeneration [DEPLOYED]
+- **Assets**: Regenerated all 5 pieces of the Bionex Warrior Lv.42 armor set (`armor`, `helmet`, `gloves`, `pants`, `boots`) using image generation inspired by the premium Final Fantasy VII Remake sci-fi mecha style (brushed steel, heavy plating, carbon fiber textures, and glowing champagne-gold energy lines).
+- **Post-processing**: Ran the optimized vectorized background-removal and cropping pipeline in `scratch/process_generated_set.py` to produce transparent, square-padded 320x320 PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
+- **Verification**: Verified that the client production build succeeds.
+
+---
+
+### 🎨 Milestone 53: Bionex Warrior Lv.55 Armor Set Regeneration [DEPLOYED]
+- **Assets**: Regenerated all 5 pieces of the Bionex Warrior Lv.55 armor set (`armor`, `helmet`, `gloves`, `pants`, `boots`) using image generation with a hyperrealistic anime mecha style, including heavy metallic panels, defined outlines to pop out, and glowing champagne-gold pathways.
+- **Post-processing**: Ran the vectorized background-removal script in `scratch/process_generated_set.py` to produce transparent 320x320 PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
+- **Verification**: Verified that `npm run build` compiles successfully.
+
+---
+
+### 🎨 Milestone 54: Bionex Warrior Lv.66 Armor Set Regeneration (Partial) [DEPLOYED]
+- **Assets**: Successfully regenerated 2 of the 5 pieces of the ultimate endgame Bionex Warrior Lv.66 set (`armor`, `helmet`) with a majestic, heavy mecha look (including thruster highlights and glowing champagne-gold lines) before image generation API quota limits were reached. The remaining 3 pieces (`gloves`, `pants`, `boots`) are pending reset.
+- **Post-processing**: Ran the vectorized background-removal script to output these 2 pieces as clean, transparent 320x320 PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
+- **Cache-Busting**: Updated the cache version parameter inside `resolveArmorSetImage` in `src/store/gameStore.js` from `?v=4` to `?v=5` to force client browsers to refresh and load the new assets.
+- **Verification**: Verified that the client production build succeeds.
+
+---
+
+### 🛠️ Milestone 55: Array-Aware Gear Requirement Validation in Cargo and Inventory [DEPLOYED]
+- **Bugs**: 
+  1. In `Inventory.jsx`, `getCompatibleItems` did string comparison `item.job === player.job` and `item.race === player.race`, filtering out all mecha armor sets and weapons where jobs/races are defined as arrays (such as all high-tier Bionex and Celestra sets in `items.json`), making them invisible in the Smart Equip Picker.
+  2. In `Cargo.jsx`, clicking a mecha set item that has job or race as arrays caused a Javascript runtime crash when rendering `.toUpperCase()` on an array. The requirement checking code also performed direct string comparison, which incorrectly disabled equipping/using those items.
+  3. In `gameStore.js`, the combat loot generator `pickItem` did string checks for race and job requirements, preventing job-restricted weapons from dropping in combat.
+- **Fixes**: 
+  1. Updated `getCompatibleItems` in [Inventory.jsx](file:///c:/projects/focus-rpg/src/screens/Inventory.jsx#L69-L80) to be array-aware using `.includes` for both race and job validations.
+  2. Refactored the selected item modal in [Cargo.jsx](file:///c:/projects/focus-rpg/src/screens/Cargo.jsx#L464-L565) to compute array-safe validations, display multiple jobs/races formatted as slash-separated strings, and prevent crashes.
+  3. Rewrote `pickItem` in [gameStore.js](file:///c:/projects/focus-rpg/src/store/gameStore.js#L2285-L2298) to support array-aware validations.
+- **Verification**: Verified that the production client builds successfully with zero errors.
+
+---
+
 ### 🛠️ Milestone 56: Bionex Specialist & Starter Job Armor-Set Alignment [DEPLOYED]
 - **Bugs**:
   1. **Bionex Specialist Empty Armor**: Bionex Specialist (Technician lineage: `engineer`/`mechanist`/`techmaster`/`overseer`) had no bespoke mecha armor set files. Character creation auto-equip checks failed for them, starting Bionex Specialists with completely bare gear slots.
@@ -680,7 +874,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🛠️ Milestone 57: Bionex Ranger to Bionex Marksman Rename & Asset Alignment [PENDING DEPLOYMENT]
+### 🛠️ Milestone 57: Bionex Ranger to Bionex Marksman Rename & Asset Alignment [DEPLOYED]
 - **Requirement**: The user noted that Bionex's ranged/agility class is named `Marksman` (matching `marksman` starting job in `jobs.json`) rather than `Ranger` (which is Celestra's and Arctron's ranged class name).
 - **Asset Renames**:
   - Renamed 50 mecha armor set `.png` files (25 in `public/assets/armor_bionex/` and 25 in `src/assets/armor_bionex/`) from `defbionexrangerlv*.png` to `defbionexmarksmanlv*.png`.
