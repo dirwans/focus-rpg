@@ -1237,3 +1237,35 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - **Forge NPC (`NpcModal.jsx`)**: Added a horizontal Arcanite Picker UI when enhancing +0 equipment. Auto-selects and locks UI to the required Arcanite for +1 and above.
   - **Tooltips (`Inventory.jsx` & `Unit.jsx`)**: Tooltips and equipment displays now explicitly show the Arcanite type (e.g., `+3 [FURY] LONGSWORD`) and accurately reflect the modified stats.
 - **Verification**: `npm run build` passes.
+
+---
+
+### 🎨 Milestone 92: Celestra Warrior Lv.32 Helmet Sprite Replacement [PENDING DEPLOYMENT]
+- **Assets**: Replaced `defcelestrawarriorlv32helmet.png` with the user-supplied mask asset `lv32maskrefwar.png`.
+- **Post-processing**: Ran the script `process_gears.py` to remove the background via `rembg`, crop, center/pad, and resize to a 320x320 transparent PNG.
+- **Paths**: Overwrote files in both `public/assets/armor_celestra/` and `src/assets/armor_celestra/`.
+- **Logic**: Updated `resolveArmorSetImage` in `src/store/gameStore.js` to bump the cache version parameter from `v=5` to `v=6` for Celestra armor sets to force client browser refresh.
+- **Verification**: Verified that `npm run build` succeeds locally.
+
+---
+
+### 🎨 Milestone 93: Celestra Mage Lv.55 Pants & Lv.66 Armor/Boots/Gloves Sprite Replacement [PENDING DEPLOYMENT]
+- **Assets**:
+  - Extracted pants from `pantslv55magecelestra.jpg` (bottom-left quadrant), removed background, and replaced `defcelestramagelv55pants.png`.
+  - Extracted chest armor from `celestralv55magearmor.png` (using main component), removed background, and replaced `defcelestramagelv66armor.png`.
+  - Extracted gloves from `glovesbootslv55magecelestra.png` (top-right quadrant), removed background, and replaced `defcelestramagelv66gloves.png`.
+  - Extracted left boot from `glovesbootslv55magecelestra.png` (bottom-right quadrant), removed background, mirrored it horizontally to form a symmetrical pair, and replaced `defcelestramagelv66boots.png`.
+- **Post-processing**: Used a custom PIL and `rembg` python script (`extract_and_inspect.py` and `fix_boots.py`) to isolate, remove background, crop, pad to square, and resize all pieces to 320x320 transparent PNGs.
+- **Paths**: Overwrote files in both `public/assets/armor_celestra/` and `src/assets/armor_celestra/`.
+- **Logic**: Updated `resolveArmorSetImage` in `src/store/gameStore.js` to bump the cache version parameter from `v=6` to `v=7` for Celestra armor sets.
+- **Verification**: Verified that `npm run build` succeeds locally.
+
+---
+
+### 🎨 Milestone 94: Celestra Mage Lv.66 Helmet Sprite Regeneration & Replacement [PENDING DEPLOYMENT]
+- **Assets**: Downloaded Cora Force helmet reference thumbnail `Helm_CF_47_DissemAmice.gif` from `rfdb.alphaoptix.com`.
+- **Regeneration**: Regenerated the helmet using `generate_image` (Endpoint 1) with detailed prompt styling matching the elven winged crown design, utilizing the newly replaced Lv.66 Celestra Mage armor as a style reference.
+- **Post-processing**: Used a custom Python script (`extract_helmet.py`) to crop only the head/crown portion (removing torso/shoulders), stripped background using `rembg`, tightly cropped, padded to square canvas, and resized to `320x320` transparent PNG.
+- **Paths**: Overwrote files in both `public/assets/armor_celestra/` and `src/assets/armor_celestra/` as `defcelestramagelv66helmet.png`.
+- **Logic**: Updated `resolveArmorSetImage` in `src/store/gameStore.js` to bump the cache version parameter from `v=7` to `v=8` for Celestra armor sets.
+- **Verification**: Verified that `npm run build` succeeds locally.
