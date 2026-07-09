@@ -1368,7 +1368,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 101: Weapon Slot Scaling & Store Compilation Fix [PENDING DEPLOYMENT]
+### 🎨 Milestone 101: Weapon Slot Scaling & Store Compilation Fix [DEPLOYED]
 - **Weapon Scaling (`src/screens/Inventory.jsx`)**:
   - Scaled up the weapon sprite image in the equipped gear slot by a factor of 1.25x (`transform: scale(1.25)`).
   - This prevents long, thin weapon sprites (like bows, swords, guns, staves) from rendering too small in the box.
@@ -1379,7 +1379,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🪙 Milestone 102: Currency Consolidation (Credits to CRD) [PENDING DEPLOYMENT]
+### 🪙 Milestone 102: Currency Consolidation (Credits to CRD) [DEPLOYED]
 - **Store & Server Mechanics**:
   - Consolidated all in-game finance actions to use `crd` (representing the unified CRD currency) as the single primary currency, completely deprecating the old `credits` resource.
   - Adjusted the default player resource state to start with 5,000 CRD.
@@ -1392,7 +1392,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🧪 Milestone 103: Potion Manual Use & Auto-Potion Integration [PENDING DEPLOYMENT]
+### 🧪 Milestone 103: Potion Manual Use & Auto-Potion Integration [DEPLOYED]
 - **Inventory Use Button (`src/screens/Inventory.jsx`)**:
   - Rendered a "USE ITEM" button in the bag description panel for all consumable item types (potions).
 - **Store Action (`src/store/gameStore.js`)**:
@@ -1402,7 +1402,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### ⚙️ Milestone 104: Ascension Arms Job Restrictions [PENDING DEPLOYMENT]
+### ⚙️ Milestone 104: Ascension Arms Job Restrictions [DEPLOYED]
 - **Lineage Allowed Lists (`src/store/gameStore.js`)**:
   - Restricted crafting (`craftAscensionArms`) and equipping (`equipItem`) of Ascension Arms to their matching faction lineages:
     - **Arctron**: Technician, Architect, Core Engineer, Cybermancer.
