@@ -113,8 +113,7 @@
       "grade": "Rare",
       "def": 767,
       "defPct": 5,
-      "dmgShieldRate": 35,
-      "dodge": -100
+      "dmgShieldRate": 35
     },
     {
       "id": "shd_all_3",
@@ -122,8 +121,7 @@
       "grade": "Epic",
       "def": 2059,
       "defPct": 5,
-      "dmgShieldRate": 35,
-      "dodge": -100
+      "dmgShieldRate": 35
     }
   ],
   "capes": [
