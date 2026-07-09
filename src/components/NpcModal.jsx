@@ -536,17 +536,6 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                   </div>
                 </div>
               </button>
-
-              {/* Race Hero (internal) */}
-              <button onClick={() => setSubView('hero')} className="cyber-panel" style={{...styles.lobbyCard, background: 'rgba(0,0,0,0.2)', borderColor: 'rgba(255,255,255,0.08)'}}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <div style={styles.lobbyIcon}>🏆</div>
-                  <div style={{ textAlign: 'left' }}>
-                    <div style={styles.lobbyCardTitle}>{heroName}</div>
-                    <div style={styles.lobbyCardDesc}>Archon Equipment Shop</div>
-                  </div>
-                </div>
-              </button>
             </div>
           )}
 
