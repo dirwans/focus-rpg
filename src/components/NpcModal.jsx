@@ -1542,14 +1542,13 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
               total: 7,
               fullBonus: 'ATK+100 | DEF+100 | HP+2000 | Crit+2%',
               pieces: [
-                { id: 'emi_helmet', name: 'Helmet', price: 100000000 },
-                { id: 'emi_armor',  name: 'Armor',  price: 100000000 },
-                { id: 'emi_pants',  name: 'Pants',  price: 100000000 },
-                { id: 'emi_gloves', name: 'Gloves', price: 100000000 },
-                { id: 'emi_boots',  name: 'Boots',  price: 100000000 },
-                { id: 'emi_ring',   name: 'Ring',   price: 100000000 },
-                { id: 'emi_amulet', name: 'Amulet', price: 100000000 },
-                { id: 'eminence_staff', name: 'Leadership Staff', price: 200000000 },
+                { id: 'eminence_helmet', name: 'Helmet', price: 100000000 },
+                { id: 'eminence_armor',  name: 'Armor',  price: 100000000 },
+                { id: 'eminence_pants',  name: 'Pants',  price: 100000000 },
+                { id: 'eminence_gloves', name: 'Gloves', price: 100000000 },
+                { id: 'eminence_boots',  name: 'Boots',  price: 100000000 },
+                { id: 'eminence_cape',   name: 'Cape',   price: 100000000 },
+                { id: 'eminence_staff',  name: 'Leadership Staff', price: 200000000 },
               ]
             },
             {
