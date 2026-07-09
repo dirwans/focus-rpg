@@ -26,8 +26,8 @@ export default function EventModal({ onClose }) {
           100% { top: 100%; opacity: 0; }
         }
         @keyframes borderPulse {
-          0%, 100% { border-color: rgba(245, 166, 35, 0.4); box-shadow: 0 0 15px rgba(245, 166, 35, 0.15), inset 0 0 10px rgba(245, 166, 35, 0.08); }
-          50% { border-color: rgba(245, 166, 35, 0.95); box-shadow: 0 0 25px rgba(245, 166, 35, 0.45), inset 0 0 15px rgba(245, 166, 35, 0.2); }
+          0%, 100% { border-color: rgba(255, 183, 0, 0.4); box-shadow: 0 0 15px rgba(255, 183, 0, 0.15), inset 0 0 10px rgba(255, 183, 0, 0.08); }
+          50% { border-color: rgba(255, 183, 0, 0.95); box-shadow: 0 0 25px rgba(255, 183, 0, 0.45), inset 0 0 15px rgba(255, 183, 0, 0.2); }
         }
         .event-cyber-panel {
           animation: borderPulse 3s infinite ease-in-out;
@@ -38,8 +38,8 @@ export default function EventModal({ onClose }) {
           left: 0;
           right: 0;
           height: 3px;
-          background: linear-gradient(90deg, transparent, #ffaa00, transparent);
-          box-shadow: 0 0 8px #ffaa00;
+          background: linear-gradient(90deg, transparent, #ffd600, transparent);
+          box-shadow: 0 0 8px #ffd600;
           animation: scanSweep 3.5s infinite linear;
           pointer-events: none;
           z-index: 3;
@@ -85,7 +85,7 @@ export default function EventModal({ onClose }) {
               <img 
                 src="/assets/boss_event_1.png" 
                 alt="Event Boss" 
-                style={{ height: '170px', width: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 0 10px rgba(255, 170, 0, 0.45))' }}
+                style={{ height: '170px', width: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 0 10px rgba(255, 183, 0, 0.45))' }}
               />
             </div>
             <div style={styles.hologramGlow} />
@@ -98,7 +98,7 @@ export default function EventModal({ onClose }) {
               <span style={styles.cardTitle}>PIT BOSS INVASION</span>
             </div>
             <div style={styles.cardDesc}>
-              Sebuah retakan dimensi Zero Flux terdeteksi! **Trinity Overlord** dan gerombolan mecha anomali menyerang sektor leveling utama. Semua pilot diinstruksikan untuk segera meluncur ke pertempuran untuk meredam ancaman ini.
+              Sebuah retakan dimensi Zero Flux terdeteksi! <strong style={{ color: '#ffd600' }}>Trinity Overlord</strong> dan gerombolan mecha anomali menyerang sektor leveling utama. Semua pilot diinstruksikan untuk segera meluncur ke pertempuran untuk meredam ancaman ini.
             </div>
           </div>
 
@@ -171,7 +171,7 @@ const styles = {
     flexDirection: 'column', 
     maxHeight: '90vh', 
     background: 'rgba(5, 12, 28, 0.96)', 
-    border: '1.8px solid rgba(245, 166, 35, 0.35)', 
+    border: '1.8px solid rgba(255, 183, 0, 0.35)', 
     overflow: 'hidden' 
   },
   header: { 
@@ -179,16 +179,17 @@ const styles = {
     justifyContent: 'space-between', 
     alignItems: 'center', 
     padding: '14px 18px', 
-    borderBottom: '1px solid rgba(245, 166, 35, 0.25)', 
+    borderBottom: '1px solid rgba(255, 183, 0, 0.25)', 
     background: 'rgba(0, 0, 0, 0.5)' 
   },
   title: { 
-    fontFamily: "'Orbitron', sans-serif", 
-    fontSize: 13, 
-    color: '#ffaa00', 
+    fontFamily: "'Oxanium', sans-serif", 
+    fontStyle: 'italic',
+    fontSize: 14, 
+    color: '#ffb700', 
     fontWeight: 900, 
     letterSpacing: 1.5,
-    textShadow: '0 0 8px rgba(255, 170, 0, 0.3)'
+    textShadow: '0 0 8px rgba(255, 183, 0, 0.3)'
   },
   closeBtn: { 
     background: 'none', 
@@ -196,7 +197,8 @@ const styles = {
     color: '#ff4444', 
     fontSize: 16, 
     cursor: 'pointer',
-    fontFamily: 'var(--font-mono)'
+    fontFamily: "'Oxanium', sans-serif",
+    fontWeight: 900
   },
   body: { 
     padding: 16, 
@@ -209,7 +211,7 @@ const styles = {
     position: 'relative',
     height: 200,
     borderRadius: 10,
-    border: '1px solid rgba(255, 170, 0, 0.2)',
+    border: '1px solid rgba(255, 183, 0, 0.2)',
     background: 'radial-gradient(circle at center, rgba(20, 25, 45, 0.9) 0%, rgba(5, 8, 20, 0.98) 100%)',
     overflow: 'hidden',
     display: 'flex',
@@ -222,7 +224,7 @@ const styles = {
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundImage: 'linear-gradient(rgba(255, 170, 0, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 170, 0, 0.03) 1px, transparent 1px)',
+    backgroundImage: 'linear-gradient(rgba(255, 183, 0, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 183, 0, 0.03) 1px, transparent 1px)',
     backgroundSize: '16px 16px',
     pointerEvents: 'none'
   },
@@ -236,15 +238,17 @@ const styles = {
     textAlign: 'left'
   },
   bossSubtitle: {
-    fontFamily: 'var(--font-mono)',
+    fontFamily: "'Oxanium', sans-serif",
+    fontStyle: 'italic',
     fontSize: 9,
     fontWeight: 800,
-    color: '#ff8800',
+    color: '#ff9900',
     letterSpacing: 1
   },
   bossName: {
-    fontFamily: "'Orbitron', sans-serif",
-    fontSize: 13,
+    fontFamily: "'Oxanium', sans-serif",
+    fontStyle: 'italic',
+    fontSize: 15,
     fontWeight: 900,
     color: '#fff',
     letterSpacing: 0.5,
@@ -256,7 +260,7 @@ const styles = {
     left: 0,
     right: 0,
     height: 40,
-    background: 'linear-gradient(to top, rgba(255, 170, 0, 0.15) 0%, transparent 100%)',
+    background: 'linear-gradient(to top, rgba(255, 183, 0, 0.15) 0%, transparent 100%)',
     pointerEvents: 'none',
     zIndex: 1
   },
@@ -275,23 +279,25 @@ const styles = {
     gap: 6
   },
   cardTitle: {
-    fontFamily: "'Orbitron', sans-serif",
-    fontSize: 12,
+    fontFamily: "'Oxanium', sans-serif",
+    fontStyle: 'italic',
+    fontSize: 13,
     fontWeight: 900,
-    color: '#fff',
+    color: '#ffb700',
     letterSpacing: 1
   },
   cardDesc: {
-    fontFamily: 'var(--font-body)',
-    fontSize: 12,
-    color: '#a0bcd0',
-    lineHeight: 1.5,
+    fontFamily: "'Rajdhani', sans-serif",
+    fontWeight: 600,
+    fontSize: 13.5,
+    color: '#b0ccdb',
+    lineHeight: 1.45,
     textAlign: 'left'
   },
   buffContainer: {
     display: 'flex',
-    background: 'rgba(255, 170, 0, 0.04)',
-    border: '1.5px solid rgba(255, 170, 0, 0.25)',
+    background: 'rgba(255, 183, 0, 0.04)',
+    border: '1.5px solid rgba(255, 183, 0, 0.25)',
     borderRadius: 10,
     padding: '10px 12px',
     alignItems: 'center',
@@ -305,22 +311,25 @@ const styles = {
     gap: 2
   },
   buffLabel: {
-    fontFamily: 'var(--font-mono)',
+    fontFamily: "'Oxanium', sans-serif",
+    fontStyle: 'italic',
     fontSize: 10,
-    color: '#ffaa00',
-    fontWeight: 800
+    color: '#a0bcd0',
+    fontWeight: 700,
+    letterSpacing: 0.5
   },
   buffValue: {
-    fontFamily: 'var(--font-title)',
-    fontSize: 11,
-    color: '#fff',
-    fontWeight: 800,
+    fontFamily: "'Oxanium', sans-serif",
+    fontStyle: 'italic',
+    fontSize: 12,
+    color: '#ffb700',
+    fontWeight: 900,
     textAlign: 'center'
   },
   buffDivider: {
     width: 1,
     height: 28,
-    background: 'rgba(255, 170, 0, 0.2)'
+    background: 'rgba(255, 183, 0, 0.2)'
   },
   rewardsCard: {
     background: 'rgba(0, 0, 0, 0.35)',
@@ -332,10 +341,11 @@ const styles = {
     gap: 8
   },
   rewardsTitle: {
-    fontFamily: "'Orbitron', sans-serif",
-    fontSize: 11,
+    fontFamily: "'Oxanium', sans-serif",
+    fontStyle: 'italic',
+    fontSize: 12,
     fontWeight: 900,
-    color: '#ff8800',
+    color: '#ffb700',
     letterSpacing: 1,
     textAlign: 'left'
   },
@@ -370,16 +380,18 @@ const styles = {
     gap: 2
   },
   rewardName: {
-    fontFamily: 'var(--font-mono)',
-    fontSize: 11,
+    fontFamily: "'Chakra Petch', sans-serif",
+    fontStyle: 'italic',
+    fontSize: 12,
     color: '#fff',
-    fontWeight: 800
+    fontWeight: 700
   },
   rewardDesc: {
-    fontFamily: 'var(--font-body)',
-    fontSize: 10,
+    fontFamily: "'Rajdhani', sans-serif",
+    fontWeight: 600,
+    fontSize: 11,
     color: '#8faabf',
-    lineHeight: 1.2
+    lineHeight: 1.3
   },
   actionBtn: {
     marginTop: 6,
@@ -387,12 +399,14 @@ const styles = {
     border: 'none',
     borderRadius: 8,
     color: '#000',
-    fontFamily: "'Orbitron', sans-serif",
-    fontSize: 12,
+    fontFamily: "'Oxanium', sans-serif",
+    fontStyle: 'italic',
+    fontSize: 13.5,
     fontWeight: 900,
-    letterSpacing: 1.5,
+    letterSpacing: 2,
     cursor: 'pointer',
     transition: 'transform 0.2s',
     textAlign: 'center'
   }
 }
+

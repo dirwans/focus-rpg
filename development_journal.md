@@ -1749,3 +1749,17 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - Outlined active buff details (+50% EXP / +20% CRD) and special mythic drop associations (`mat_drop_k`/`l`).
 - **Verification**: Verified React build (`npm run build`) compiles clean with no warnings.
 
+---
+
+### 🎨 Milestone 131: Event Modal Typography & Aesthetic Alignment [DEPLOYED]
+- **Typography Standardization**:
+  - Replaced standard sans-serif font calls in [EventModal.jsx](file:///c:/projects/focus-rpg/src/components/EventModal.jsx) with `Oxanium` (slanted/italicized sci-fi display font) for all headers, subtitle tags, event descriptions titles, and the action button.
+  - Replaced standard descriptions and list detail fonts with `Rajdhani` (flat/condensed typography) set to `fontWeight: 600` and `fontSize: 13.5px` with a matching line height of `1.45` for enhanced readability.
+  - Formatted the mythic reward item titles with `Chakra Petch` (italicized, blocky sci-fi font).
+- **Color & Size Alignment**:
+  - Unified all highlight text and primary tags to use a consistent premium gold hue (`#ffb700` and `#ffd600`) and structured text shadows.
+  - Re-scaled headers (`14px`/`15px`) and content labels (`10px`/`12px`) for perfect alignment.
+  - Wrapped inline keywords with standard `<strong>` HTML tags instead of markdown `**` tags to ensure proper bolding in description blocks.
+- **Verification**: Verified React build (`npm run build`) compiles clean with no warnings.
+
+
