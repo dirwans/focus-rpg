@@ -1518,3 +1518,14 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - Replaced the invalid set piece IDs (such as `emi_helmet`, `emi_armor`, etc. and ring/amulet items) in the Eminence Quartermaster shop list with the correct IDs defined in the database (`eminence_helmet`, `eminence_armor`, `eminence_pants`, `eminence_gloves`, `eminence_boots`, `eminence_cape`, and `eminence_staff`), matching `items.json`.
 - **Verification**: Successfully builds and compiles locally.
 
+---
+
+### 🧹 Milestone 115: Orphan Assets & Unused Scripts Cleanup [PENDING DEPLOYMENT]
+- **Script & Backup Deletions (`src/screens/Unit_orig.jsx`, root dir)**:
+  - Deleted 11 old maintenance/migration scripts from the root directory that are no longer used (`fix_arctron_stats.cjs`, `fix_savedAt.cjs`, `patch_arctron.cjs`, `patch_celestra.cjs`, `reset_everything.cjs`, `reset_final.cjs`, `reset_jobs.cjs`, `reset_race.cjs`, `reset_users.cjs`, `slice.py`, `slice2.py`).
+  - Deleted the legacy screen backup file `src/screens/Unit_orig.jsx`.
+- **Orphan Assets Deletions (`src/assets/`)**:
+  - Wrote a custom Python analyzer (`check_orphans.py`) to trace code dependencies and locate inactive assets.
+  - Safely deleted 23 unused graphic assets, including draft pilot frames, obsolete boss templates, unused shield renders, and placeholder designs, reducing clean APK footprint sizes.
+- **Verification**: Successfully builds and compiles locally.
+
