@@ -1455,3 +1455,48 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - Rendered the live `World Boss Kill` stat counter on the character's profile statistics sheet.
 - **Verification**: Verified successfully with local build check.
 
+---
+
+### 👥 Milestone 109: Persistent Friend System [PENDING DEPLOYMENT]
+- **Store Array & Actions (`src/store/gameStore.js`)**:
+  - Initialized a persistent `friends` array inside `initialPlayer`.
+  - Added `addFriend(username)` store action that validates callsigns (no empty names, cannot add self, max 100 friend slots, no duplicates) and simulates random details (race, job, level, online state) for added friends.
+  - Added `removeFriend(id)` store action to delete friends by ID.
+- **UI Integration (`src/components/SocialModal.jsx`)**:
+  - Rewrote the social window to load friends from the store dynamically.
+  - Integrated the `addFriend` action with the search input and `removeFriend` with the delete button.
+  - Added handlers for sending party invites (`Party`) and whisper chat popups (`Whisper`).
+- **Verification**: Successfully builds and compiles locally.
+
+---
+
+### 🔔 Milestone 110: Simulated Event Notifications [PENDING DEPLOYMENT]
+- **Tick Event Triggers (`src/store/gameStore.js`)**:
+  - Inserted a periodic event notification check (0.5% chance per tick when active) inside the grinding simulator's `tick` loop.
+  - Checks the player's notification preferences (`alertWorldBoss`, `alertCoreWar`, `alertDungeon`) from settings and triggers simulated in-game alerts (e.g. World Boss spawning, Core War reminder, Dungeon resets) directly in the active browser view.
+- **Verification**: Successfully builds and compiles locally.
+
+---
+
+### 🏰 Milestone 111: Interactive Guild Member Management [PENDING DEPLOYMENT]
+- **Store Actions (`src/store/gameStore.js`)**:
+  - Expanded `createGuild(name)` to initialize `membersList` (containing the founder) and `applicants` (containing 2 test candidates).
+  - Added `acceptApplicant(applicantId)` to move an applicant to the guild members list and update count.
+  - Added `rejectApplicant(applicantId)` to remove an applicant.
+  - Added `kickMember(memberId)` to remove a member.
+  - Added `promoteMember(memberId)` to toggle a member's role between 'Vice Guildmaster' and 'Member'.
+- **UI Integration (`src/components/GuildPanel.jsx`)**:
+  - Connected the members list rendering to live store data.
+  - Added kick and promote/demote buttons for the Guildmaster.
+  - Rewrote the Applicants tab to show pending applicants and buttons to Accept/Reject.
+- **Verification**: Successfully builds and compiles locally.
+
+---
+
+### 👹 Milestone 112: Pit Boss (World Boss) Encounters [PENDING DEPLOYMENT]
+- **Pit Boss Spawning (`src/store/gameStore.js`)**:
+  - Modified `spawnEnemy` to introduce a 15% random chance to spawn the sector's or dungeon's `pitBoss` (World Boss) instead of the normal Boss/Mob.
+  - Linked the Pit Boss encounters to the customized battle logger (`👹 PIT BOSS: [Name]!`) and tracked the `isPitBoss` property in the active combat state.
+  - Configured successful Pit Boss elimination in combat grids to increment the player's profile `worldBossKill` count.
+- **Verification**: Successfully builds and compiles locally.
+

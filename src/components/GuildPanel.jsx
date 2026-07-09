@@ -18,6 +18,10 @@ export default function GuildPanel() {
   const player = useGameStore((s) => s.player)
   const createGuild = useGameStore((s) => s.createGuild)
   const upgradeGuild = useGameStore((s) => s.upgradeGuild)
+  const acceptApplicant = useGameStore((s) => s.acceptApplicant)
+  const rejectApplicant = useGameStore((s) => s.rejectApplicant)
+  const kickMember = useGameStore((s) => s.kickMember)
+  const promoteMember = useGameStore((s) => s.promoteMember)
 
   const [guildNameInput, setGuildNameInput] = useState('')
   const [activeTab, setActiveTab] = useState('info') // info, members, apply
@@ -141,20 +145,72 @@ export default function GuildPanel() {
 
       {activeTab === 'members' && (
         <div style={styles.content}>
-          <div style={styles.memberItem}>
-            <span>👑 {player.username || player.name} (Lv.{player.level})</span>
-            <span style={{ color: '#00ff88' }}>Online</span>
-          </div>
-          <div style={{ textAlign: 'center', fontSize: 12, color: '#7ab0d0', marginTop: 16, fontStyle: 'italic' }}>
-            Belum ada member lain. Ajak teman untuk bergabung!
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {(guild.membersList || [{ id: 'gm', name: player.username || player.name, role: 'Guildmaster', level: player.level, online: true }]).map(m => (
+              <div key={m.id} style={styles.memberItem}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <span>{m.role === 'Guildmaster' ? '👑' : m.role === 'Vice Guildmaster' ? '⭐' : '👥'}</span>
+                  <span>{m.name}</span>
+                  <span style={{ fontSize: 11, color: '#7ab0d0' }}>(Lv.{m.level})</span>
+                  <span style={{ fontSize: 10, color: '#f5a623' }}>[{m.role}]</span>
+                </div>
+                <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+                  <span style={{ color: m.online !== false ? '#00ff88' : '#666', fontSize: 11 }}>{m.online !== false ? 'Online' : 'Offline'}</span>
+                  {guild.role === 'Guildmaster' && m.id !== 'gm' && (
+                    <>
+                      <button 
+                        onClick={() => promoteMember(m.id)} 
+                        style={{ padding: '2px 6px', background: 'rgba(0, 229, 255, 0.2)', border: '1px solid #00e5ff', color: '#00e5ff', borderRadius: 4, fontSize: 10, cursor: 'pointer' }}
+                      >
+                        {m.role === 'Member' ? 'Promote' : 'Demote'}
+                      </button>
+                      <button 
+                        onClick={() => { if(window.confirm(`Kick ${m.name}?`)) kickMember(m.id) }} 
+                        style={{ padding: '2px 6px', background: 'rgba(255, 68, 102, 0.2)', border: '1px solid #ff4466', color: '#ff4466', borderRadius: 4, fontSize: 10, cursor: 'pointer' }}
+                      >
+                        Kick
+                      </button>
+                    </>
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       )}
 
       {activeTab === 'apply' && (
         <div style={styles.content}>
-          <div style={{ textAlign: 'center', fontSize: 12, color: '#7ab0d0', marginTop: 16, fontStyle: 'italic' }}>
-            Tidak ada pendaftar saat ini.
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {(!guild.applicants || guild.applicants.length === 0) ? (
+              <div style={{ textAlign: 'center', fontSize: 12, color: '#7ab0d0', padding: 8, fontStyle: 'italic' }}>
+                Tidak ada pendaftar saat ini.
+              </div>
+            ) : (
+              guild.applicants.map(a => (
+                <div key={a.id} style={styles.memberItem}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <span>👥</span>
+                    <span>{a.name}</span>
+                    <span style={{ fontSize: 11, color: '#7ab0d0' }}>(Lv.{a.level})</span>
+                  </div>
+                  <div style={{ display: 'flex', gap: 6 }}>
+                    <button 
+                      onClick={() => acceptApplicant(a.id)} 
+                      style={{ padding: '4px 8px', background: 'rgba(0, 255, 136, 0.2)', border: '1px solid #00ff88', color: '#00ff88', borderRadius: 4, fontSize: 11, cursor: 'pointer' }}
+                    >
+                      Accept
+                    </button>
+                    <button 
+                      onClick={() => rejectApplicant(a.id)} 
+                      style={{ padding: '4px 8px', background: 'rgba(255, 68, 102, 0.2)', border: '1px solid #ff4466', color: '#ff4466', borderRadius: 4, fontSize: 11, cursor: 'pointer' }}
+                    >
+                      Reject
+                    </button>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </div>
       )}

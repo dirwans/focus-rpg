@@ -447,8 +447,14 @@ function randomMob(sectorIdx, isDungeon = false) {
 function spawnEnemy(sectorIdx, playerLevel, isDungeon = false) {
   const sector = isDungeon ? enemies.dungeons[sectorIdx] : enemies.sectors[sectorIdx]
 
+  // 15% chance to spawn the Pit Boss (World Boss) instead of normal Boss/Mob
+  const isPitBossSpawn = Math.random() < 0.15 && sector.pitBoss
+
   if (isDungeon) {
-    return { mob: sector.boss, isBoss: true, isCulprit: false, hp: sector.boss.hp }
+    if (isPitBossSpawn) {
+      return { mob: sector.pitBoss, isBoss: true, isPitBoss: true, isCulprit: false, hp: sector.pitBoss.hp }
+    }
+    return { mob: sector.boss, isBoss: true, isPitBoss: false, isCulprit: false, hp: sector.boss.hp }
   }
 
   // World Map
@@ -456,7 +462,10 @@ function spawnEnemy(sectorIdx, playerLevel, isDungeon = false) {
   const isMaxLevelForMap = playerLevel === maxLevels[sectorIdx]
 
   if (isMaxLevelForMap) {
-    return { mob: sector.boss, isBoss: true, isCulprit: false, hp: sector.boss.hp }
+    if (isPitBossSpawn) {
+      return { mob: sector.pitBoss, isBoss: true, isPitBoss: true, isCulprit: false, hp: sector.pitBoss.hp }
+    }
+    return { mob: sector.boss, isBoss: true, isPitBoss: false, isCulprit: false, hp: sector.boss.hp }
   }
 
   const baseMob = randomMob(sectorIdx, false)
@@ -470,10 +479,10 @@ function spawnEnemy(sectorIdx, playerLevel, isDungeon = false) {
       expReward: baseMob.expReward * 2,
       crdReward: baseMob.crdReward * 2
     }
-    return { mob: culpritMob, isBoss: false, isCulprit: true, hp: culpritMob.hp }
+    return { mob: culpritMob, isBoss: false, isPitBoss: false, isCulprit: true, hp: culpritMob.hp }
   }
 
-  return { mob: baseMob, isBoss: false, isCulprit: false, hp: baseMob.hp }
+  return { mob: baseMob, isBoss: false, isPitBoss: false, isCulprit: false, hp: baseMob.hp }
 }
 
 // Frac 0..1 deterministik dari seed integer (buat item drop yg sama di semua device)
@@ -877,6 +886,7 @@ const initialPlayer = {
   streak: 0,
   lastSessionDate: null,
   inventory: [],
+  friends: [],
   warehouse: [],             // Personal Warehouse inventory
   totalSessions: 0,
   totalMinutes: 0,
@@ -941,6 +951,7 @@ const initialBattle = {
   respawnTicks: 0,
   currentMob: null,
   isBoss: false,
+  isPitBoss: false,
   isCulprit: false,
   kills: 0,
   killStreak: 0,
@@ -1254,6 +1265,64 @@ export const useGameStore = create(
           })
           return { ok: true }
         }
+      },
+
+      addFriend: (username) => {
+        const { player } = get()
+        if (!username || username.trim().length === 0) return { ok: false, msg: 'Nama tidak boleh kosong!' }
+        const cleanName = username.trim().replace(/^@/, '')
+        if (cleanName.toLowerCase() === player.name?.toLowerCase()) {
+          return { ok: false, msg: 'Tidak bisa menambahkan diri sendiri!' }
+        }
+        const friendsList = player.friends || []
+        if (friendsList.length >= 100) {
+          return { ok: false, msg: 'Daftar teman sudah penuh (maksimal 100)!' }
+        }
+        if (friendsList.some(f => f.username.toLowerCase() === cleanName.toLowerCase())) {
+          return { ok: false, msg: `${cleanName} sudah ada di daftar teman!` }
+        }
+
+        const races = ['arctron', 'bionex', 'celestra']
+        const jobsByRace = {
+          arctron: ['Warrior', 'Ranger', 'Technician'],
+          bionex: ['Guardian', 'Marksman', 'Engineer', 'Psion'],
+          celestra: ['Sentinel', 'Pathfinder', 'Oracle', 'Arcanist']
+        }
+        const randomRace = races[Math.floor(Math.random() * races.length)]
+        const jobs = jobsByRace[randomRace]
+        const randomJob = jobs[Math.floor(Math.random() * jobs.length)]
+        const randomLevel = Math.floor(Math.random() * 66) + 1
+
+        const newFriend = {
+          id: 'friend_' + Date.now() + Math.floor(Math.random() * 1000),
+          username: cleanName,
+          race: randomRace,
+          job: randomJob,
+          level: randomLevel,
+          online: Math.random() > 0.3
+        }
+
+        set({
+          player: {
+            ...player,
+            friends: [...friendsList, newFriend],
+            savedAt: Date.now()
+          }
+        })
+        return { ok: true }
+      },
+
+      removeFriend: (id) => {
+        const { player } = get()
+        const friendsList = player.friends || []
+        set({
+          player: {
+            ...player,
+            friends: friendsList.filter(f => f.id !== id),
+            savedAt: Date.now()
+          }
+        })
+        return { ok: true }
       },
 
       depositToWarehouse: (itemUid) => set((s) => {
@@ -1773,7 +1842,7 @@ export const useGameStore = create(
         const now = Date.now()
         
         const isDungeon = timer.selectedZone && timer.selectedZone.startsWith('dungeon_')
-        let sector, mob, isBoss, hp
+        let sector, mob, isBoss, isPitBoss = false, hp
 
         if (isDungeon) {
           const dungeonIdx = parseInt(timer.selectedZone.split('_')[1]) - 1
@@ -1801,6 +1870,7 @@ export const useGameStore = create(
           const spawned = spawnEnemy(dungeonIdx, player.level, true)
           mob = spawned.mob
           isBoss = spawned.isBoss
+          isPitBoss = spawned.isPitBoss
           hp = spawned.hp
         } else {
           const sectorIdx = (player.selectedMapIdx !== undefined && player.selectedMapIdx !== null)
@@ -1810,6 +1880,7 @@ export const useGameStore = create(
           const spawned = spawnEnemy(sectorIdx, player.level, false)
           mob = spawned.mob
           isBoss = spawned.isBoss
+          isPitBoss = spawned.isPitBoss
           hp = spawned.hp
         }
 
@@ -1828,7 +1899,8 @@ export const useGameStore = create(
           player: { ...player, savedAt: now },
           battle: {
             ...initialBattle,
-            log: [(isBoss ? `⚠️ STAGE BOSS: ${mob.emoji} ${mob.name}!` : `⚔️ Entering ${sector.name}...`)],
+            log: [(isPitBoss ? `👹 PIT BOSS: ${mob.emoji} ${mob.name}!` : isBoss ? `⚠️ STAGE BOSS: ${mob.emoji} ${mob.name}!` : `⚔️ Entering ${sector.name}...`)],
+            isPitBoss,
             enemyHp: hp,
             enemyMaxHp: hp,
             playerHp: playerMaxHp,
@@ -1860,6 +1932,20 @@ export const useGameStore = create(
         if (timer.state !== 'running') return
         const remaining = Math.max(0, Math.ceil((timer.endsAt - Date.now()) / 1000))
         if (remaining <= 0) { get().completeSession(); return }
+
+        // Simulated Event Notifications (World Boss, Core War, Dungeon Reset)
+        const settings = player.settings || {}
+        if (get().isScreenActive && Math.random() < 0.005) {
+          const alerts = []
+          if (settings.alertWorldBoss) alerts.push('👹 World Boss: Pyraxis Overlord has spawned in Pyraxis Sanctum!')
+          if (settings.alertCoreWar) alerts.push('⚔️ Core War: Zero Flux conflict starting in 5 minutes!')
+          if (settings.alertDungeon) alerts.push('🔑 Daily Reset: Dungeon entry attempts have refreshed!')
+          if (alerts.length > 0) {
+            const randomAlert = alerts[Math.floor(Math.random() * alerts.length)]
+            alert(randomAlert)
+          }
+        }
+
         // visual combat (cosmetic, lokal)
         if (timer.mode === 'fight') get()._combatTick()
         else get()._gatherTick()
@@ -1905,7 +1991,7 @@ export const useGameStore = create(
         // Initialize if state hasn't been set for combat yet
         if (!battle.currentMob) {
           const sectorIdx = getSector(player.level) - 1
-          const { mob, isBoss, hp } = spawnEnemy(sectorIdx, player.level)
+          const { mob, isBoss, isPitBoss, hp } = spawnEnemy(sectorIdx, player.level)
           const playerStats = get().getStats()
           const playerMaxHp = playerStats.hp
           const playerMaxFp = playerStats.fp
@@ -1915,6 +2001,7 @@ export const useGameStore = create(
               ...battle,
               currentMob: mob,
               isBoss,
+              isPitBoss,
               isCulprit: mob.name?.startsWith('Culprit') || false,
               enemyHp: hp, 
               enemyMaxHp: hp, 
@@ -3547,11 +3634,19 @@ export const useGameStore = create(
         if (player.resources.crd < 10000000) return false
         if (player.guild) return false
 
+        const initialApplicants = [
+          { id: 'app_1', name: 'Zack', level: 32, online: true },
+          { id: 'app_2', name: 'Nexus_Core', level: 35, online: false }
+        ]
+        const initialMembers = [
+          { id: 'gm', name: player.username || player.name, role: 'Guildmaster', level: player.level, online: true }
+        ]
+
         set({
           player: {
             ...player,
             resources: { ...player.resources, crd: player.resources.crd - 10000000 },
-            guild: { name, level: 1, role: 'Guildmaster', members: 1 },
+            guild: { name, level: 1, role: 'Guildmaster', members: 1, membersList: initialMembers, applicants: initialApplicants },
             savedAt: Date.now()
           }
         })
@@ -3586,6 +3681,95 @@ export const useGameStore = create(
             ...player,
             resources: { ...player.resources, crd: player.resources.crd - cost },
             guild: { ...player.guild, level: currentLv + 1 },
+            savedAt: Date.now()
+          }
+        })
+        return true
+      },
+
+      acceptApplicant: (applicantId) => {
+        const { player } = get()
+        if (!player.guild || player.guild.role !== 'Guildmaster') return false
+        const applicants = player.guild.applicants || []
+        const applicant = applicants.find(a => a.id === applicantId)
+        if (!applicant) return false
+
+        const newApplicants = applicants.filter(a => a.id !== applicantId)
+        const membersList = player.guild.membersList || [{ id: 'gm', name: player.username || player.name, role: 'Guildmaster', level: player.level, online: true }]
+        const newMembersList = [...membersList, { ...applicant, role: 'Member' }]
+
+        set({
+          player: {
+            ...player,
+            guild: {
+              ...player.guild,
+              members: newMembersList.length,
+              membersList: newMembersList,
+              applicants: newApplicants
+            },
+            savedAt: Date.now()
+          }
+        })
+        return true
+      },
+
+      rejectApplicant: (applicantId) => {
+        const { player } = get()
+        if (!player.guild || player.guild.role !== 'Guildmaster') return false
+        const applicants = player.guild.applicants || []
+        const newApplicants = applicants.filter(a => a.id !== applicantId)
+
+        set({
+          player: {
+            ...player,
+            guild: {
+              ...player.guild,
+              applicants: newApplicants
+            },
+            savedAt: Date.now()
+          }
+        })
+        return true
+      },
+
+      kickMember: (memberId) => {
+        const { player } = get()
+        if (!player.guild || player.guild.role !== 'Guildmaster') return false
+        const membersList = player.guild.membersList || []
+        const newMembersList = membersList.filter(m => m.id !== memberId)
+
+        set({
+          player: {
+            ...player,
+            guild: {
+              ...player.guild,
+              members: newMembersList.length,
+              membersList: newMembersList
+            },
+            savedAt: Date.now()
+          }
+        })
+        return true
+      },
+
+      promoteMember: (memberId) => {
+        const { player } = get()
+        if (!player.guild || player.guild.role !== 'Guildmaster') return false
+        const membersList = player.guild.membersList || []
+        const newMembersList = membersList.map(m => {
+          if (m.id === memberId) {
+            return { ...m, role: m.role === 'Member' ? 'Vice Guildmaster' : 'Member' }
+          }
+          return m
+        })
+
+        set({
+          player: {
+            ...player,
+            guild: {
+              ...player.guild,
+              membersList: newMembersList
+            },
             savedAt: Date.now()
           }
         })

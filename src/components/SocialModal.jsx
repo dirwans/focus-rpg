@@ -5,12 +5,36 @@ import { t } from '../lib/translate'
 export default function SocialModal({ onClose }) {
   const [searchId, setSearchId] = useState('')
   const player = useGameStore(s => s.player)
+  const addFriend = useGameStore(s => s.addFriend)
+  const removeFriend = useGameStore(s => s.removeFriend)
 
-  // Dummy friend list for now
-  const [friends, setFriends] = useState([
-    { id: 'f1', username: 'xiao', race: 'arctron', job: 'Tech', level: 42, online: true },
-    { id: 'f2', username: 'budi', race: 'bionex', job: 'Commando', level: 32, online: false }
-  ])
+  const friends = player.friends || []
+
+  const handleAdd = () => {
+    const res = addFriend(searchId)
+    if (res.ok) {
+      setSearchId('')
+    } else {
+      alert(res.msg)
+    }
+  }
+
+  const handleRemove = (id) => {
+    if (window.confirm(t('confirm_delete') || 'Apakah Anda yakin ingin menghapus teman ini?')) {
+      removeFriend(id)
+    }
+  }
+
+  const handleParty = (username) => {
+    alert(`🤝 Party invitation sent to @${username}`)
+  }
+
+  const handleWhisper = (username) => {
+    const msg = prompt(`Type your whisper message to @${username}:`)
+    if (msg && msg.trim().length > 0) {
+      alert(`💬 Whisper sent to @${username}: "${msg}"`)
+    }
+  }
 
   return (
     <div style={styles.overlay}>
@@ -30,28 +54,34 @@ export default function SocialModal({ onClose }) {
             onChange={(e) => setSearchId(e.target.value)}
             style={styles.input}
           />
-          <button style={styles.btnPrimary}>+ Add</button>
+          <button onClick={handleAdd} style={styles.btnPrimary}>+ Add</button>
         </div>
 
         {/* Friend List */}
         <div style={styles.listContainer} className="no-scrollbar">
-          {friends.map(f => (
-            <div key={f.id} style={styles.friendCard}>
-              <div style={styles.friendHeader}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                  <div style={{ width: 8, height: 8, borderRadius: '50%', background: f.online ? '#00e5ff' : '#666' }} />
-                  <span style={styles.friendName}>@{f.username}</span>
-                  <span style={styles.friendInfo}>(Lv.{f.level} {f.race})</span>
-                </div>
-                {!f.online && <span style={{ fontSize: 10, color: '#666' }}>Offline</span>}
-              </div>
-              <div style={styles.friendActions}>
-                <button style={styles.btnAction}>🤝 Party</button>
-                <button style={styles.btnAction}>💬 Whisper</button>
-                <button style={styles.btnDanger}>✖ Remove</button>
-              </div>
+          {friends.length === 0 ? (
+            <div style={{ textAlign: 'center', color: '#666', marginTop: 32, fontSize: 13 }}>
+              Belum ada teman. Tambahkan teman menggunakan Player ID di atas.
             </div>
-          ))}
+          ) : (
+            friends.map(f => (
+              <div key={f.id} style={styles.friendCard}>
+                <div style={styles.friendHeader}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <div style={{ width: 8, height: 8, borderRadius: '50%', background: f.online ? '#00e5ff' : '#666' }} />
+                    <span style={styles.friendName}>@{f.username}</span>
+                    <span style={styles.friendInfo}>(Lv.{f.level} {f.race} {f.job})</span>
+                  </div>
+                  {!f.online && <span style={{ fontSize: 10, color: '#666' }}>Offline</span>}
+                </div>
+                <div style={styles.friendActions}>
+                  <button onClick={() => handleParty(f.username)} style={styles.btnAction}>🤝 Party</button>
+                  <button onClick={() => handleWhisper(f.username)} style={styles.btnAction}>💬 Whisper</button>
+                  <button onClick={() => handleRemove(f.id)} style={styles.btnDanger}>✖ Remove</button>
+                </div>
+              </div>
+            ))
+          )}
         </div>
 
         {/* Close */}
