@@ -1505,7 +1505,9 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 ### 📖 Milestone 113: Guides & Currency Database Updates [PENDING DEPLOYMENT]
 - **Library Guide Expansion (`src/components/LibraryModal.jsx`)**:
   - Appended detailed instructional cards explaining the **Friend / Social System**, **Guild System & Management**, **World Boss / Pit Boss Encounters**, and **Premium Boosters & Potions** to the guides panel database.
-- **Currency Nomenclature Cleanup (`src/components/LibraryModal.jsx`)**:
-  - Replaced all legacy references of the token term `Credits` with `CRD` inside the drop tables, inventory, warehouse, potion, and crafting sections.
+- **Currency Nomenclature Cleanup (`src/components/LibraryModal.jsx`, `src/components/NpcModal.jsx`, `src/App.jsx`, `src/components/CharacterCreate.jsx`)**:
+  - Replaced all legacy references of the token term `Credits` with `CRD` inside the drop tables, inventory, warehouse, potion, and crafting sections of the Library.
+  - Corrected `CREDITS BALANCE` display label in `NpcModal` to read `CRD BALANCE`.
+  - Cleared legacy `credits: 10` resources initialization and assigned the starting premium balance of 10 to `nxc` (Nexus Crystal) instead.
 - **Verification**: Successfully builds and compiles locally.
 
