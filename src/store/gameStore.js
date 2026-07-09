@@ -2266,47 +2266,57 @@ export const useGameStore = create(
 
         // Enemy action: 45% attack chance
         if (Math.random() < 0.45) {
-          const enemyAtk = mob.atk || 5
-          const playerDef = playerStats.def || 2
-          
-          let dmgToPlayer = 0
-          const isPlayerDodge = Math.random() < playerStats.dodge
-          const hasShield = !!player.equipment?.shield
-          const isPlayerBlock = hasShield && (Math.random() < playerStats.blockRate)
-          
-          if (isPlayerDodge) {
-            if (newLog.length > 7) newLog = newLog.slice(-7)
-            newLog.push(`💨 MISS! Serangan ${mob.name} berhasil dihindari! (Dodge)`)
-          } else {
-            // Enemy crit chance scales by mob grade (Sector/Boss/Culprit)
-            const enemyCritChance = mob.critical !== undefined ? (mob.critical / 100) : (battle.isBoss ? 0.18 : battle.isCulprit ? 0.14 : 0.08)
-            const isEnemyCrit = Math.random() < enemyCritChance
+          const performEnemyAttack = (isDouble = false) => {
+            const enemyAtk = mob.atk || 5
+            const playerDef = playerStats.def || 2
             
-            // Damage Formula: Final ATK - Final DEF
-            let baseDmg = Math.max(1, enemyAtk - playerDef)
-            let baseDmgPlayer = isEnemyCrit ? Math.floor(baseDmg * 1.5) : baseDmg
-
-            // Apply Elemental Resist mitigation
-            const avgResist = (playerStats.resistances.fire + playerStats.resistances.water + playerStats.resistances.earth + playerStats.resistances.wind) / 4
-            baseDmgPlayer = Math.max(1, Math.floor(baseDmgPlayer * (1 - avgResist / 100)))
+            let dmgToPlayer = 0
+            const isPlayerDodge = Math.random() < playerStats.dodge
+            const hasShield = !!player.equipment?.shield
+            const isPlayerBlock = hasShield && (Math.random() < playerStats.blockRate)
             
-            if (isPlayerBlock) {
-              // Block reduces final damage by 60%
-              dmgToPlayer = Math.max(1, Math.floor(baseDmgPlayer * 0.40))
+            if (isPlayerDodge) {
               if (newLog.length > 7) newLog = newLog.slice(-7)
-              newLog.push(`🛡️ BLOCK! Tameng menahan serangan! Damage berkurang 60% (-${dmgToPlayer} Shield HP)`)
+              newLog.push(`💨 MISS! ${isDouble ? '[Double Hit] ' : ''}Serangan ${mob.name} berhasil dihindari! (Dodge)`)
             } else {
-              dmgToPlayer = baseDmgPlayer
-              if (newLog.length > 7) newLog = newLog.slice(-7)
-              if (isEnemyCrit) {
-                newLog.push(`💥 CRIT! ${mob.emoji} ${mob.name} melancarkan serangan kritis! -${dmgToPlayer} Shield HP`)
+              // Enemy crit chance scales by mob grade (Sector/Boss/Culprit)
+              const enemyCritChance = mob.critical !== undefined ? (mob.critical / 100) : (battle.isBoss ? 0.18 : battle.isCulprit ? 0.14 : 0.08)
+              const isEnemyCrit = Math.random() < enemyCritChance
+              
+              // Damage Formula: Final ATK - Final DEF
+              let baseDmg = Math.max(1, enemyAtk - playerDef)
+              let baseDmgPlayer = isEnemyCrit ? Math.floor(baseDmg * 1.5) : baseDmg
+
+              // Apply Elemental Resist mitigation
+              const avgResist = (playerStats.resistances.fire + playerStats.resistances.water + playerStats.resistances.earth + playerStats.resistances.wind) / 4
+              baseDmgPlayer = Math.max(1, Math.floor(baseDmgPlayer * (1 - avgResist / 100)))
+              
+              if (isPlayerBlock) {
+                // Block reduces final damage by 60%
+                dmgToPlayer = Math.max(1, Math.floor(baseDmgPlayer * 0.40))
+                if (newLog.length > 7) newLog = newLog.slice(-7)
+                newLog.push(`🛡️ BLOCK! ${isDouble ? '[Double Hit] ' : ''}Tameng menahan serangan! Damage berkurang 60% (-${dmgToPlayer} Shield HP)`)
               } else {
-                newLog.push(`💥 ${mob.emoji} ${mob.name} menyerang Pilot! -${dmgToPlayer} Shield HP`)
+                dmgToPlayer = baseDmgPlayer
+                if (newLog.length > 7) newLog = newLog.slice(-7)
+                if (isEnemyCrit) {
+                  newLog.push(`💥 CRIT! ${isDouble ? '[Double Hit] ' : ''}${mob.emoji} ${mob.name} melancarkan serangan kritis! -${dmgToPlayer} Shield HP`)
+                } else {
+                  newLog.push(`💥 ${isDouble ? '[Double Hit] ' : ''}${mob.emoji} ${mob.name} menyerang Pilot! -${dmgToPlayer} Shield HP`)
+                }
               }
             }
+            
+            nextPlayerHp = Math.max(0, nextPlayerHp - dmgToPlayer)
           }
-          
-          nextPlayerHp = Math.max(0, battle.playerHp - dmgToPlayer)
+
+          // First attack
+          performEnemyAttack(false)
+
+          // Check for double hit chance
+          if (mob.doubleHitChance && Math.random() < (mob.doubleHitChance / 100)) {
+            performEnemyAttack(true)
+          }
 
           // --- DUAL AUTO-HEAL SYSTEM ---
           const playerMaxHp = battle.playerMaxHp || get().getStats().hp

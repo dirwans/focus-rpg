@@ -63,7 +63,7 @@ const MINE_FLOORS = [
   },
   {
     floor: '3F',
-    name: 'Mutation Dementor',
+    name: 'Ork Dementor',
     duration: 60,
     durationLabel: '1 JAM',
     yieldLabel: '5–8 Ore',
@@ -73,7 +73,7 @@ const MINE_FLOORS = [
   },
   {
     floor: '4F',
-    name: 'Ork Dementor',
+    name: 'Ghost Dementor',
     duration: 120,
     durationLabel: '2 JAM',
     yieldLabel: '8–12 Ore',
@@ -83,7 +83,7 @@ const MINE_FLOORS = [
   },
   {
     floor: '5F',
-    name: 'Ghost Dementor',
+    name: 'Mutation Dementor',
     duration: 240,
     durationLabel: '4 JAM',
     yieldLabel: '12–18 Ore',

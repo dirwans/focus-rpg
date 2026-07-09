@@ -1773,5 +1773,101 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - Styled all bottom navigation tab labels using `Oxanium` (slanted/italicized, bold, size `10.5px`), and removed the old hardcoded word break logic (`<wbr />` / conditional wrapping) to guarantee labels render as single, clean, slanted words.
 - **Verification**: Verified React build (`npm run build`) compiles clean with no warnings.
 
+---
+
+### ⚙️ Milestone 133: Map 1 Monster & Boss Stats Calibration [PENDING DEPLOYMENT]
+- **Database Calibration (`src/data/enemies.json`)**:
+  - Re-calibrated Leveling Map 1 (Lumora Fields, Lv. 1-12) statistics to align with new gameplay progression rules:
+    - **Puffling**: HP: 300 → `77`, ATK: 20 → `37`, DEF: 10 → `11`.
+    - **Moss Hopper**: HP: 600 → `141`, ATK: 30 → `42`, DEF: 18 → `15`.
+    - **Leaf Boar**: HP: 1000 → `458`, ATK: 45 → `84`, DEF: 28 → `53`.
+    - **Twig Imp**: HP: 1800 → `280`, ATK: 65 → `57`, DEF: 40 → `29`.
+    - **Lumora Behemoth (Boss)**: HP: 500000 → `5800`, ATK: 150 → `271`, DEF: 100 → `188`.
+- **Verification**: Verified React build (`npm run build`) compiles clean with no warnings.
+
+---
+
+### ⚙️ Milestone 134: Map 2 Stats Calibration & Enemy Double Hit Combat Mechanic [PENDING DEPLOYMENT]
+- **Database Calibration (`src/data/enemies.json`)**:
+  - Re-calibrated Leveling Map 2 (Sylvaris Wilds, Lv. 13-25) statistics to align with new gameplay progression rules:
+    - **Fangclaw**: HP: 3000 → `687`, ATK: 80 → `127`, DEF: 50 → `85`.
+    - **Thornmaw**: HP: 5000 → `953`, ATK: 100 → `180`, DEF: 65 → `128`. Added `"doubleHitChance": 2` (Aggressive 2%).
+    - **Sylvan Wolf**: HP: 8000 → `1160`, ATK: 130 → `271`, DEF: 80 → `188`.
+    - **Vine Stalker**: HP: 12000 → `1310`, ATK: 160 → `404`, DEF: 100 → `264`.
+    - **Sylvan Fanglord (Boss)**: HP: 2500000 → `6300`, ATK: 280 → `352`, DEF: 180 → `238`. Added `"doubleHitChance": 3` (Aggressive 3%).
+- **Double Hit Combat Mechanic (`src/store/gameStore.js`)**:
+  - Refactored the enemy combat turn phase to encapsulate attack actions into a `performEnemyAttack` helper.
+  - Added support for checking a mob's `doubleHitChance` attribute (in percentage) to trigger a second attack in the same turn.
+- **Verification**: Verified React build (`npm run build`) compiles clean with no warnings.
+
+---
+
+### ⚙️ Milestone 135: Map 3 Stats Calibration & Aggressive Rule Memory [PENDING DEPLOYMENT]
+- **Database Calibration (`src/data/enemies.json`)**:
+  - Re-calibrated Leveling Map 3 (Ferrum Expanse, Lv. 26-38) statistics to align with new gameplay progression rules:
+    - **Iron Wasp**: HP: 35000 → `1456`, ATK: 290 → `615`, DEF: 185 → `350`. Added `"doubleHitChance": 4` (Aggressive 4%).
+    - **Steel Hound**: HP: 18000 → `1612`, ATK: 200 → `615`, DEF: 130 → `350`. Added `"doubleHitChance": 5` (Aggressive 5%).
+    - **Scrap Golem**: HP: 25000 → `1754`, ATK: 240 → `1433`, DEF: 155 → `558`.
+    - **Machawarden**: HP: 50000 → `1909`, ATK: 350 → `2194`, DEF: 220 → `678`.
+    - **Iron Juggernaut (Boss)**: HP: 10000000 → `7280`, ATK: 500 → `615`, DEF: 320 → `350`. Added `"doubleHitChance": 6` (Aggressive 6%).
+- **Rule Book Integration (`.agents/AGENTS.md`)**:
+  - Added project vocabulary definition specifying that any "aggressive" mob/boss specification maps to `doubleHitChance` property in enemy data.
+- **Verification**: Verified React build (`npm run build`) compiles clean with no warnings.
+
+---
+
+### ⚙️ Milestone 136: Map 4 Stats Calibration [PENDING DEPLOYMENT]
+- **Database Calibration (`src/data/enemies.json`)**:
+  - Re-calibrated Leveling Map 4 (Pyraxis Crater, Lv. 39-52) statistics to align with new gameplay progression rules:
+    - **Infernox**: HP: 70000 → `2059`, ATK: 450 → `3505`, DEF: 280 → `812`.
+    - **Flame Fiend**: HP: 100000 → `2220`, ATK: 520 → `5660`, DEF: 330 → `956`.
+    - **Lava Beetle**: HP: 140000 → `3386`, ATK: 600 → `6637`, DEF: 380 → `1002`.
+    - **Magma Hound**: HP: 200000 → `2313`, ATK: 700 → `7473`, DEF: 450 → `1363`.
+    - **Pyraxis Overlord (Boss)**: HP: 50000000 → `9805`, ATK: 850 → `2558`, DEF: 550 → `722`. Added `"doubleHitChance": 10` (Aggressive 10%).
+- **Verification**: Verified React build (`npm run build`) compiles clean with no warnings.
+
+---
+
+### ⚙️ Milestone 137: Map 5 Mobs & Boss Stats Calibration [PENDING DEPLOYMENT]
+- **Database Calibration (`src/data/enemies.json`)**:
+  - Re-calibrated Leveling Map 5 (Trinity Nexus, Lv. 53-66) statistics to align with new gameplay progression rules:
+    - **Trinity Sentinel**: HP: 300000 → `3855`, ATK: 850 → `13877`, DEF: 550 → `1350`.
+    - **Core Phantom**: HP: 450000 → `2621`, ATK: 950 → `19744`, DEF: 650 → `1555`. Added `"doubleHitChance": 8` (Aggressive 8%).
+    - **Nexus Harbinger**: HP: 650000 → `2073`, ATK: 1100 → `35104`, DEF: 750 → `2273`.
+    - **Flux Avatar**: HP: 900000 → `10600`, ATK: 1250 → `4090`, DEF: 850 → `859`.
+    - **Trinity Overlord (Boss)**: HP: 250000000 → `11565`, ATK: 1500 → `7867`, DEF: 900 → `1049`. Added `"doubleHitChance": 15` (Aggressive 15%).
+- **Verification**: Verified React build (`npm run build`) compiles clean with no warnings.
+
+---
+
+### ⚙️ Milestone 139: EventModal Typography Consistency with Unit.jsx [PENDING DEPLOYMENT]
+- **Typography Alignment (`src/components/EventModal.jsx`)**:
+  - Replaced all `Oxanium` font references with `Orbitron` to match Unit.jsx platform standard (no italic on headings).
+  - Updated `fontSize` values to align with Unit.jsx scale: labels → 10-11px, values → 12-13px, headings → 16-18px.
+  - Standardized label colors to `#8a94a3` (matching Unit.jsx inactive/label color).
+  - Made all primary/value colors faction-aware via `factionColors` map (`arctron: #ff5222`, `bionex: #ffd600`, `celestra: #00e5ff`).
+  - Replaced `Chakra Petch` for reward names → `Orbitron` 12px.
+  - Replaced `var(--font-mono)` on LIVE badge → `Orbitron`.
+- **Floating Widget Fix (`src/screens/Main.jsx`)**:
+  - Replaced `var(--font-mono)` (unverified CSS variable) with `Orbitron` on LIVE badge.
+- **Verification**: Verified React build (`npm run build`) compiles clean with no warnings.
+
+---
+
+### ⚙️ Milestone 138: T-MINE Guardian Stats Calibration & Floor Reorganization [PENDING DEPLOYMENT]
+- **Database Calibration (`src/data/enemies.json`)**:
+  - Re-calibrated Trinity Mine (`miningGuardians`) guardian statistics and reorganized floor assignments:
+    - **Sentry Dementor (1F)**: HP: 1.000.000 → `11.815`, ATK: 1.350 → `8.959`, DEF: 900 → `1.097`. Dodge updated to `20%`.
+    - **Borg Dementor (2F)**: HP: 1.800.000 → `13.105`, ATK: 1.500 → `16.004`, DEF: 1.000 → `1.555`. Added `"doubleHitChance": 20` (Aggressive 20%).
+    - **Ork Dementor**: Dipindah dari `4F` → `3F`. HP: 5.000.000 → `14.305`, ATK: 1.950 → `29.769`, DEF: 1.300 → `2.068`. Added `"doubleHitChance": 20` (Aggressive 20%).
+    - **Ghost Dementor**: Dipindah dari `5F` → `4F`. HP: 8.000.000 → `14.630`, ATK: 2.200 → `29.769`, DEF: 1.500 → `2.170`. Added `"doubleHitChance": 20` (Aggressive 20%).
+    - **Mutation Dementor**: Dipindah ke `5F`. HP: 3.000.000 → `19.676`, ATK: 1.700 → `39.558`, DEF: 1.150 → `1.900`. Added `"doubleHitChance": 20` (Aggressive 20%).
+    - **Kaelgorath (6F Boss)**: Tidak berubah.
+- **Floor Reorganization (`src/screens/Mine.jsx`)**:
+  - Updated `MINE_FLOORS` array to reflect new floor assignments (Ork → 3F, Ghost → 4F, Mutation → 5F).
+- **Verification**: Verified React build (`npm run build`) compiles clean with no warnings.
+
+
+
 
 

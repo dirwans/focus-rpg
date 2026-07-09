@@ -5,11 +5,13 @@ export default function EventModal({ onClose }) {
   const player = useGameStore((s) => s.player)
   const setScreen = useGameStore((s) => s.setScreen)
 
-  const activeColor = {
-    arctron: '#ff5222',
-    bionex: '#ffd600',
-    celestra: '#00e5ff'
-  }[player.race] || '#00e5ff'
+  // Faction-aware colors matching Unit.jsx style
+  const factionColors = {
+    arctron: { primary: '#ff5222', glow: 'rgba(255, 82, 34, 0.5)', text: '#eef3fb' },
+    bionex:  { primary: '#ffd600', glow: 'rgba(255, 214, 0, 0.5)',  text: '#eef3fb' },
+    celestra: { primary: '#00e5ff', glow: 'rgba(0, 229, 255, 0.5)', text: '#eef3fb' },
+  }
+  const fc = factionColors[player.race] || factionColors.celestra
 
   const handleGoToBattle = () => {
     setScreen('battle')
@@ -182,22 +184,21 @@ const styles = {
     borderBottom: '1px solid rgba(255, 183, 0, 0.25)', 
     background: 'rgba(0, 0, 0, 0.5)' 
   },
-  title: { 
-    fontFamily: "'Oxanium', sans-serif", 
-    fontStyle: 'italic',
-    fontSize: 16, 
-    color: '#ffb700', 
-    fontWeight: 900, 
+  title: {
+    fontFamily: "'Orbitron', sans-serif",
+    fontSize: 16,
+    fontWeight: 900,
+    color: fc.primary,
     letterSpacing: 1.5,
-    textShadow: '0 0 8px rgba(255, 183, 0, 0.3)'
+    textShadow: `0 0 8px ${fc.glow}`
   },
-  closeBtn: { 
-    background: 'none', 
-    border: 'none', 
-    color: '#ff4444', 
-    fontSize: 18, 
+  closeBtn: {
+    background: 'none',
+    border: 'none',
+    color: '#ff4444',
+    fontSize: 16,
     cursor: 'pointer',
-    fontFamily: "'Oxanium', sans-serif",
+    fontFamily: "'Orbitron', sans-serif",
     fontWeight: 900
   },
   body: { 
@@ -238,16 +239,14 @@ const styles = {
     textAlign: 'left'
   },
   bossSubtitle: {
-    fontFamily: "'Oxanium', sans-serif",
-    fontStyle: 'italic',
-    fontSize: 12,
+    fontFamily: "'Orbitron', sans-serif",
+    fontSize: 11,
     fontWeight: 800,
     color: '#ff9900',
     letterSpacing: 1
   },
   bossName: {
-    fontFamily: "'Oxanium', sans-serif",
-    fontStyle: 'italic',
+    fontFamily: "'Orbitron', sans-serif",
     fontSize: 18,
     fontWeight: 900,
     color: '#fff',
@@ -279,11 +278,10 @@ const styles = {
     gap: 6
   },
   cardTitle: {
-    fontFamily: "'Oxanium', sans-serif",
-    fontStyle: 'italic',
-    fontSize: 16,
-    fontWeight: 900,
-    color: '#ffb700',
+    fontFamily: "'Orbitron', sans-serif",
+    fontSize: 13,
+    fontWeight: 800,
+    color: fc.primary,
     letterSpacing: 1
   },
   cardDesc: {
@@ -311,19 +309,18 @@ const styles = {
     gap: 2
   },
   buffLabel: {
-    fontFamily: "'Oxanium', sans-serif",
-    fontStyle: 'italic',
-    fontSize: 13,
-    color: '#a0bcd0',
+    fontFamily: "'Orbitron', sans-serif",
+    fontSize: 10,
     fontWeight: 700,
-    letterSpacing: 0.5
+    color: '#8a94a3',
+    letterSpacing: 1
   },
   buffValue: {
-    fontFamily: "'Oxanium', sans-serif",
-    fontStyle: 'italic',
-    fontSize: 15,
-    color: '#ffb700',
-    fontWeight: 900,
+    fontFamily: "'Orbitron', sans-serif",
+    fontSize: 13,
+    fontWeight: 800,
+    color: fc.primary,
+    letterSpacing: 0.5,
     textAlign: 'center'
   },
   buffDivider: {
@@ -341,11 +338,10 @@ const styles = {
     gap: 8
   },
   rewardsTitle: {
-    fontFamily: "'Oxanium', sans-serif",
-    fontStyle: 'italic',
-    fontSize: 15,
-    fontWeight: 900,
-    color: '#ffb700',
+    fontFamily: "'Orbitron', sans-serif",
+    fontSize: 11,
+    fontWeight: 800,
+    color: '#8a94a3',
     letterSpacing: 1,
     textAlign: 'left'
   },
@@ -380,10 +376,9 @@ const styles = {
     gap: 2
   },
   rewardName: {
-    fontFamily: "'Chakra Petch', sans-serif",
-    fontStyle: 'italic',
-    fontSize: 14,
-    color: '#fff',
+    fontFamily: "'Orbitron', sans-serif",
+    fontSize: 12,
+    color: fc.primary,
     fontWeight: 700
   },
   rewardDesc: {
@@ -399,11 +394,10 @@ const styles = {
     border: 'none',
     borderRadius: 8,
     color: '#000',
-    fontFamily: "'Oxanium', sans-serif",
-    fontStyle: 'italic',
-    fontSize: 16,
+    fontFamily: "'Orbitron', sans-serif",
+    fontSize: 12,
     fontWeight: 900,
-    letterSpacing: 2,
+    letterSpacing: 1.5,
     cursor: 'pointer',
     transition: 'transform 0.2s',
     textAlign: 'center'

@@ -830,7 +830,7 @@ export default function Main() {
     <div className="no-scrollbar" style={styles.screen}>
       {/* Floating Event Widget */}
       {player.race && (
-        <button 
+        <button
           onClick={() => setShowEventModal(true)}
           style={{
             position: 'absolute',
@@ -873,7 +873,7 @@ export default function Main() {
             borderRadius: '3px',
             padding: '1px 4px',
             marginLeft: 2,
-            fontFamily: 'var(--font-mono)',
+            fontFamily: "'Orbitron', sans-serif",
             fontWeight: 800,
           }}>
             LIVE
