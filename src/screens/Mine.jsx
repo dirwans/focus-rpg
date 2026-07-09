@@ -669,7 +669,7 @@ export default function Mine() {
               const ownedShard = countInventoryItem(shardId)
               const isOreEnough     = ownedOre >= 10
               const costCRD         = processGrade === 'common' ? 20000 : processGrade === 'rare' ? 50000 : 100000
-              const isCreditsEnough = (player?.resources?.credits || 0) >= costCRD
+              const isCreditsEnough = (player?.resources?.crd || 0) >= costCRD
               return (
                 <div key={ore.key} className="glass-panel cyber-panel" style={s.recipeCard}>
                   <div style={s.recipeProduct}>
@@ -688,7 +688,7 @@ export default function Mine() {
                       <span style={{ color: isOreEnough ? '#00ff88' : '#ff4444', fontWeight: 700 }}>{ownedOre} / 10</span>
                     </div>
                     <div style={s.ingredientRow}>
-                      <span>💰 Credits</span>
+                      <span>💰 CRD</span>
                       <span style={{ color: isCreditsEnough ? '#00ff88' : '#ff4444', fontWeight: 700 }}>{costCRD.toLocaleString()} CRD</span>
                     </div>
                   </div>

@@ -84,7 +84,7 @@ export default function MailboxModal({ onClose }) {
                   <div style={styles.mailBody}>{mail.body}</div>
 
                   {/* Attachment Block */}
-                  {(mail.item || mail.credits) && (
+                  {(mail.item || mail.credits || mail.crd) && (
                     <div style={styles.attachmentBox}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1 }}>
                         <span style={{ fontSize: 18 }}>🎁</span>
@@ -92,7 +92,7 @@ export default function MailboxModal({ onClose }) {
                           <span style={styles.attachmentLabel}>LAMPIRAN:</span>
                           <div style={styles.attachmentName}>
                             {mail.item && `${mail.item.emoji || '📦'} ${mail.item.name}`}
-                            {mail.credits && `◈ ${mail.credits.toLocaleString()} CRD`}
+                            {(mail.credits || mail.crd) && `◈ ${(mail.credits || mail.crd).toLocaleString()} CRD`}
                           </div>
                         </div>
                       </div>

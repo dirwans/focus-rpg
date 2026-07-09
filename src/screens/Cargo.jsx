@@ -259,8 +259,7 @@ export default function Cargo() {
     <div style={styles.screen}>
       <div style={styles.topBar}>
         <button onClick={() => useGameStore.getState().setScreen('main')} style={{background:'transparent', border:'none', color:'#00e5ff', fontSize: 20, cursor:'pointer', padding: '0 8px 0 0', display:'flex', alignItems:'center'}}>❮</button>
-        <span style={styles.chip('#f5a623')}>⬡ {player.resources.crd.toLocaleString()}</span>
-        <span style={styles.chip('#00e5ff')}>◈ {player.resources.credits}</span>
+        <span style={styles.chip('#f5a623')}>◈ {player.resources.crd.toLocaleString()} CRD</span>
         <span style={styles.chip('#ff4466')}>🧪 {player.resources.potions || 0}</span>
         <button 
           onClick={() => {
@@ -333,7 +332,7 @@ export default function Cargo() {
 
       {/* Currency Display */}
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', padding: '0 24px 12px', fontFamily: 'var(--font-mono)', fontSize: 14, color: '#e0f4ff', fontWeight: 600, letterSpacing: 0.5, lineHeight: 1.4, marginTop: -4 }}>
-        <div>{player.resources.credits?.toLocaleString() || 0} <span style={{ color: '#00e5ff', fontWeight: 800, marginLeft: 4 }}>CRD</span></div>
+        <div>{player.resources.crd?.toLocaleString() || 0} <span style={{ color: '#00e5ff', fontWeight: 800, marginLeft: 4 }}>CRD</span></div>
         <div>{player.resources.nxc?.toLocaleString() || 0} <span style={{ color: '#ffcc00', fontWeight: 800, marginLeft: 4 }}>NXC</span></div>
       </div>
 

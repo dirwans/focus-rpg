@@ -383,21 +383,14 @@ export function verifyStarterArmorSet(player) {
   return { ...player, equipment: newEquipment }
 }
 
-// Title/Achievement System: unlocks any Title Database entries (titles.json) the player
-// now qualifies for based on their combatStats, without touching already-unlocked ones.
-export function checkTitleUnlocks(player) {
-  if (!player || !player.race) return player
+// Title/Achievement System: title is NOT a permanent unlock — it is derived live from the
+// player's current PvP rank (#1/#2/#3 within their own race). Per the Title Qualification
+// Database rules: separate per race, not permanent, switches automatically when rank changes,
+// and is lost immediately (with its bonus) the moment the player drops out of the top 3.
+export function getActiveTitle(player) {
+  if (!player || !player.race || !player.pvpRank) return null
   const raceTitles = titlesData[player.race] || []
-  const owned = player.titles || []
-  const kills = player.combatStats?.totalMonsterKill || 0
-
-  const newlyUnlocked = raceTitles
-    .filter((tt) => !owned.includes(tt.id))
-    .filter((tt) => tt.requirement?.type === 'totalMonsterKill' && kills >= tt.requirement.value)
-    .map((tt) => tt.id)
-
-  if (newlyUnlocked.length === 0) return player
-  return { ...player, titles: [...owned, ...newlyUnlocked] }
+  return raceTitles.find((tt) => tt.pvpRank === player.pvpRank) || null
 }
 
 function removeFromInventory(inventory, uid, count = 1) {
@@ -515,7 +508,7 @@ function getDropTier(seed, mode, isStageBoss) {
 // Reward DETERMINISTIK berdasar lama waktu + stats → semua device hitung sama
 function computeRewards(player, stats, mode, minutes, selectedZone = 'world') {
   const race = races[player.race]
-  if (!race) return { kills: 0, exp: 0, crd: 0, credits: 0 }
+  if (!race) return { kills: 0, exp: 0, crd: 0 }
   const elapsedSec = Math.max(0, Math.floor(minutes * 60))
   const isDungeon = selectedZone && selectedZone.startsWith('dungeon_')
 
@@ -550,8 +543,7 @@ function computeRewards(player, stats, mode, minutes, selectedZone = 'world') {
     return {
       kills,
       exp: Math.floor(elapsedSec / 60),
-      crd: 0,
-      credits: totalCreditsGained
+      crd: totalCreditsGained
     }
   }
 
@@ -559,8 +551,7 @@ function computeRewards(player, stats, mode, minutes, selectedZone = 'world') {
     return {
       kills: 0,
       exp: Math.floor(elapsedSec / 60),
-      crd: Math.floor(elapsedSec * 0.72 * race.bonuses.gatherMultiplier),
-      credits: 0
+      crd: Math.floor(elapsedSec * 0.72 * race.bonuses.gatherMultiplier)
     }
   }
   const sectorIdx = (player.selectedMapIdx !== undefined && player.selectedMapIdx !== null)
@@ -616,8 +607,7 @@ function computeRewards(player, stats, mode, minutes, selectedZone = 'world') {
   return {
     kills,
     exp: Math.floor(elapsedSec / 60),
-    crd: totalCrdGained,
-    credits: totalCreditsGained
+    crd: totalCrdGained + totalCreditsGained
   }
 }
 
@@ -879,7 +869,7 @@ const initialPlayer = {
     special: { val: 1, pct: 0 },
     production: { val: 1, pct: 0 }
   },
-  resources: { crd: 200, credits: 10, potions: 5, nxc: 0 },
+  resources: { crd: 5000, potions: 5, nxc: 0 },
   upgrades: { atk: 0, def: 0, hp: 0 },
   equipment: { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null },
   sector: 1,
@@ -907,8 +897,6 @@ const initialPlayer = {
     coreWarVictory: 0,
     highestEnhancement: 0
   },
-  titles: [],          // unlocked title ids, see Title Database (titles.json)
-  equippedTitle: null, // currently active title id (grants its ATK/DEF/HP bonus)
   guild: null, // { name: string, level: number, role: string, members: number }
   inventorySlots: 100,       // default 100, max 300 (upgrade +20 per 1M CRD)
   warehouseSlots: 200,       // default 200, max 600 (upgrade +50 per 2.5M CRD)
@@ -990,12 +978,6 @@ export const useGameStore = create(
       },
 
       setPvpRank: (rank) => set((s) => ({ player: { ...s.player, pvpRank: rank, savedAt: Date.now() } })),
-
-      // ── Title/Achievement System ─────────────────────────
-      equipTitle: (titleId) => set((s) => {
-        if (titleId && !(s.player.titles || []).includes(titleId)) return s
-        return { player: { ...s.player, equippedTitle: titleId, savedAt: Date.now() } }
-      }),
 
       // ── Legendary Crafting ───────────────────────────────
       craftLegendary: (recipeId) => {
@@ -1162,11 +1144,11 @@ export const useGameStore = create(
         const itemDef = allItems.find(i => i.id === itemId)
         if (!itemDef) return { ok: false, msg: 'Item not found' }
         const price = itemDef.price || 0
-        if (player.resources.credits < price) return { ok: false, msg: 'Credits tidak cukup!' }
+        if (player.resources.crd < price) return { ok: false, msg: 'CRD tidak cukup!' }
         const uid = Date.now() + Math.floor(Math.random() * 10000)
         set({ player: {
           ...player,
-          resources: { ...player.resources, credits: player.resources.credits - price },
+          resources: { ...player.resources, crd: player.resources.crd - price },
           inventory: [...player.inventory, { ...itemDef, uid }],
           savedAt: Date.now()
         }})
@@ -1430,15 +1412,15 @@ export const useGameStore = create(
       upgradeInventorySlots: () => set((s) => {
         const { player } = s
         const currentSlots = player.inventorySlots || 100
-        const credits = player.resources.credits || 0
+        const crd = player.resources.crd || 0
         const upgradeCost = 1000000
 
         if (currentSlots >= 300) {
           alert("Inventory sudah mencapai batas maksimum (300 slot)!")
           return {}
         }
-        if (credits < upgradeCost) {
-          alert(`Credits tidak cukup! Membutuhkan ${upgradeCost.toLocaleString()} Credits.`)
+        if (crd < upgradeCost) {
+          alert(`CRD tidak cukup! Membutuhkan ${upgradeCost.toLocaleString()} CRD.`)
           return {}
         }
 
@@ -1448,7 +1430,7 @@ export const useGameStore = create(
             inventorySlots: currentSlots + 20,
             resources: {
               ...player.resources,
-              credits: credits - upgradeCost
+              crd: crd - upgradeCost
             },
             savedAt: Date.now()
           }
@@ -1458,15 +1440,15 @@ export const useGameStore = create(
       upgradeWarehouseSlots: () => set((s) => {
         const { player } = s
         const currentSlots = player.warehouseSlots || 200
-        const credits = player.resources.credits || 0
+        const crd = player.resources.crd || 0
         const upgradeCost = 2500000
 
         if (currentSlots >= 600) {
           alert("Warehouse sudah mencapai batas maksimum (600 slot)!")
           return {}
         }
-        if (credits < upgradeCost) {
-          alert(`Credits tidak cukup! Membutuhkan ${upgradeCost.toLocaleString()} Credits.`)
+        if (crd < upgradeCost) {
+          alert(`CRD tidak cukup! Membutuhkan ${upgradeCost.toLocaleString()} CRD.`)
           return {}
         }
 
@@ -1476,7 +1458,7 @@ export const useGameStore = create(
             warehouseSlots: currentSlots + 50,
             resources: {
               ...player.resources,
-              credits: credits - upgradeCost
+              crd: crd - upgradeCost
             },
             savedAt: Date.now()
           }
@@ -1655,10 +1637,10 @@ export const useGameStore = create(
         const shardId = `shard_${recipeType}_${oreGrade}`
 
         const crdCost = oreGrade === 'common' ? 20000 : oreGrade === 'rare' ? 50000 : 100000
-        const credits = player.resources.credits || 0
+        const crd = player.resources.crd || 0
 
-        if (credits < crdCost) {
-          alert(`Credits tidak cukup! Membutuhkan ${crdCost.toLocaleString()} Credits.`)
+        if (crd < crdCost) {
+          alert(`CRD tidak cukup! Membutuhkan ${crdCost.toLocaleString()} CRD.`)
           return {}
         }
 
@@ -1707,7 +1689,7 @@ export const useGameStore = create(
             inventory: updatedInventory,
             resources: {
               ...player.resources,
-              credits: credits - crdCost
+              crd: crd - crdCost
             },
             savedAt: Date.now()
           }
@@ -1900,7 +1882,6 @@ export const useGameStore = create(
         const finalKills = Math.max(0, r.kills - deathPenaltyKills)
         const finalExp = Math.floor(Math.max(0, r.exp - deathPenaltyExp) * expBonusMult)
         const finalCrd = Math.max(0, r.crd - deathPenaltyCrd)
-        const finalCredits = Math.max(0, (r.credits || 0) - (deaths * 5))
 
         set((s) => ({
           timer: { ...s.timer, secondsLeft: remaining },
@@ -1909,7 +1890,6 @@ export const useGameStore = create(
             kills: finalKills,
             sessionExp: finalExp,
             sessionCrd: finalCrd,
-            sessionCredits: finalCredits,
             activeSeconds,
             totalTickSeconds,
           },
@@ -2376,7 +2356,6 @@ export const useGameStore = create(
         const finalKills = Math.max(0, r.kills - deathPenaltyKills)
         const finalExp = Math.floor(Math.max(0, r.exp - deathPenaltyExp) * expBonusMult)
         let finalCrd = Math.max(0, r.crd - deathPenaltyCrd)
-        let finalCredits = r.credits || 0
 
         let newExp = player.exp + finalExp
         let newLevel = player.level
@@ -2604,10 +2583,11 @@ export const useGameStore = create(
         if (activeFraction > 0) {
           finalLog.push(`🎮 Active Mode: ${Math.round(activeFraction * 100)}% sesi ini | +${Math.round(activeFraction * 10)}% EXP, +${(activeFraction * 5).toFixed(1)}% Drop Rate`)
         }
-        finalLog.push(`✅ Done! ${finalKills} kills | +${finalCrd}⬡ | +${finalCredits} Credits | +${finalExp} Menit${deaths > 0 ? ` (Died ${deaths} times)` : ''}${dropLog}`)
+        finalLog.push(`✅ Done! ${finalKills} kills | +${finalCrd.toLocaleString()} CRD | +${finalExp} Menit${deaths > 0 ? ` (Died ${deaths} times)` : ''}${dropLog}`)
 
-        set((s) => {
-          const updatedPlayer = checkTitleUnlocks({
+        set((s) => ({
+          timer: { ...s.timer, state: 'completed', secondsLeft: 0 },
+          player: {
             ...s.player,
             exp: newExp,
             level: newLevel,
@@ -2617,7 +2597,7 @@ export const useGameStore = create(
             resources: {
               ...s.player.resources,
               crd: s.player.resources.crd + finalCrd,
-              credits: s.player.resources.credits + finalCredits
+              credits: 0 // clean up legacy
             },
             streak: newStreak,
             lastSessionDate: today,
@@ -2631,13 +2611,9 @@ export const useGameStore = create(
               dungeonClear: (s.player.combatStats?.dungeonClear || 0) + (killedStageBoss ? 1 : 0)
             },
             savedAt: Date.now(),
-          })
-          return {
-            timer: { ...s.timer, state: 'completed', secondsLeft: 0 },
-            player: updatedPlayer,
-            battle: { ...s.battle, kills: finalKills, sessionExp: finalExp, sessionCrd: finalCrd, levelUps, log: finalLog },
-          }
-        })
+          },
+          battle: { ...s.battle, kills: finalKills, sessionExp: finalExp, sessionCrd: finalCrd, levelUps, log: finalLog },
+        }))
       },
 
       resetTimer: () => {
@@ -2896,15 +2872,13 @@ export const useGameStore = create(
           critBonus += 1
         }
 
-        // Title/Achievement Bonus: currently equipped title (see Title Database, titles.json)
-        if (player.equippedTitle && player.race) {
-          const raceTitles = titlesData[player.race] || []
-          const equipped = raceTitles.find((tt) => tt.id === player.equippedTitle)
-          if (equipped && (player.titles || []).includes(equipped.id)) {
-            flatAtk += equipped.bonus.atk || 0
-            flatDef += equipped.bonus.def || 0
-            flatHp += equipped.bonus.hp || 0
-          }
+        // Title/Achievement Bonus: derived live from current PvP rank (#1/#2/#3 in own race) —
+        // not a permanent unlock. Lost immediately if the player drops out of the top 3.
+        const activeTitleObj = getActiveTitle(player)
+        if (activeTitleObj) {
+          flatAtk += activeTitleObj.bonus.atk || 0
+          flatDef += activeTitleObj.bonus.def || 0
+          flatHp += activeTitleObj.bonus.hp || 0
         }
 
         // Base HP, DEF, ATK Math using STR, DEX, INT, VIT
@@ -3241,6 +3215,21 @@ export const useGameStore = create(
             return
           }
         }
+        
+        if (item.type === 'ascension_arms') {
+          const allowedJobs = {
+            arctron: ['technician', 'architect', 'core_engineer', 'cybermancer'],
+            bionex: ['engineer', 'mechanist', 'techmaster', 'overseer'],
+            celestra: ['oracle', 'celestial_oracle', 'conjurer', 'divine_summoner']
+          }
+          const userRace = player.race ? player.race.toLowerCase() : ''
+          const userJob = player.job ? player.job.toLowerCase() : ''
+          const allowedForRace = allowedJobs[userRace] || []
+          if (!allowedForRace.includes(userJob)) {
+            alert(`Hanya pilot dengan job kelas ARES/M.E.U./Oracle yang dapat menggunakan Ascension Arms!`)
+            return
+          }
+        }
 
 
         const eq = player.equipment || { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null }
@@ -3251,7 +3240,7 @@ export const useGameStore = create(
           slot = !eq.amulet1 ? 'amulet1' : 'amulet2'
         } else if (item.type === 'ring') {
           slot = !eq.ring1 ? 'ring1' : 'ring2'
-        } else if (['weapon','armor','shield','helmet','mantle','gloves','boots','pants'].includes(item.type)) {
+        } else if (['weapon','armor','shield','helmet','mantle','gloves','boots','pants','ascension_arms'].includes(item.type)) {
           slot = item.type
         }
         if (!slot) return
@@ -3326,7 +3315,7 @@ export const useGameStore = create(
             inventory: newInventory,
             resources: {
               ...player.resources,
-              credits: (player.resources.credits || 0) + price
+              crd: (player.resources.crd || 0) + price
             },
             savedAt: Date.now()
           }
@@ -3355,8 +3344,8 @@ export const useGameStore = create(
         if (mult === undefined) { alert('Item ini tidak dijual di NPC.'); return false }
         const price = Math.round(baseWeapon * mult)
 
-        if ((player.resources.credits || 0) < price) {
-          alert(`Credits tidak cukup! Dibutuhkan ${price.toLocaleString()} Credits.`)
+        if ((player.resources.crd || 0) < price) {
+          alert(`CRD tidak cukup! Dibutuhkan ${price.toLocaleString()} CRD.`)
           return false
         }
 
@@ -3378,7 +3367,7 @@ export const useGameStore = create(
             inventory: addToInventory(s.player.inventory, newItem),
             resources: {
               ...s.player.resources,
-              credits: (s.player.resources.credits || 0) - price
+              crd: (s.player.resources.crd || 0) - price
             },
             savedAt: Date.now()
           }
@@ -3429,17 +3418,22 @@ export const useGameStore = create(
 
         // Healing consumables
         if (item.id === 'pot_hp' || (item.bonus && item.bonus.hp)) {
-            alert(`Berhasil menggunakan ${item.name}! Memulihkan 1,000 HP.`)
+            alert(`Berhasil memindahkan ${item.name} ke Quick Potion Slot! (+1 Quick Potion)`)
             set({
-                player: { ...player, inventory: newInventory, savedAt: Date.now() }
+                player: {
+                  ...player,
+                  inventory: newInventory,
+                  resources: {
+                    ...player.resources,
+                    potions: (player.resources.potions || 0) + 1
+                  },
+                  savedAt: Date.now()
+                }
             })
             return
         }
         if (item.id === 'pot_fp') {
-            alert(`Berhasil menggunakan ${item.name}! Memulihkan 2,500 FP.`)
-            set({
-                player: { ...player, inventory: newInventory, savedAt: Date.now() }
-            })
+            alert(`FP Potion [S] otomatis digunakan dari tas saat FP kritis selama pertarungan.`)
             return
         }
 
@@ -3531,13 +3525,13 @@ export const useGameStore = create(
       createGuild: (name) => {
         const { player } = get()
         if (player.level < 30) return false
-        if (player.resources.credits < 10000000) return false
+        if (player.resources.crd < 10000000) return false
         if (player.guild) return false
 
         set({
           player: {
             ...player,
-            resources: { ...player.resources, credits: player.resources.credits - 10000000 },
+            resources: { ...player.resources, crd: player.resources.crd - 10000000 },
             guild: { name, level: 1, role: 'Guildmaster', members: 1 },
             savedAt: Date.now()
           }
@@ -3566,12 +3560,12 @@ export const useGameStore = create(
         if (currentLv >= 10) return false
         
         const cost = upgradeCosts[currentLv]
-        if (player.resources.credits < cost) return false
+        if (player.resources.crd < cost) return false
 
         set({
           player: {
             ...player,
-            resources: { ...player.resources, credits: player.resources.credits - cost },
+            resources: { ...player.resources, crd: player.resources.crd - cost },
             guild: { ...player.guild, level: currentLv + 1 },
             savedAt: Date.now()
           }
@@ -3848,12 +3842,25 @@ export const useGameStore = create(
 
       craftAscensionArms: (evoData, raceAresName) => {
         const { player } = get()
-        if (player.resources.credits < evoData.cost) {
-          alert('Credits (◈) tidak cukup!')
+        if (player.resources.crd < evoData.cost) {
+          alert('CRD tidak cukup!')
           return false
         }
         if (player.level < evoData.levelReq) {
           alert(`Level ${evoData.levelReq} dibutuhkan!`)
+          return false
+        }
+
+        const allowedJobs = {
+          arctron: ['technician', 'architect', 'core_engineer', 'cybermancer'],
+          bionex: ['engineer', 'mechanist', 'techmaster', 'overseer'],
+          celestra: ['oracle', 'celestial_oracle', 'conjurer', 'divine_summoner']
+        }
+        const userRace = player.race ? player.race.toLowerCase() : ''
+        const userJob = player.job ? player.job.toLowerCase() : ''
+        const allowedForRace = allowedJobs[userRace] || []
+        if (!allowedForRace.includes(userJob)) {
+          alert(`Hanya pilot dengan job kelas ${raceAresName === 'ARES' ? 'Technician' : raceAresName === 'M.E.U.' ? 'Engineer' : 'Oracle'} (dan lanjutannya) yang dapat merakit Ascension Arms!`)
           return false
         }
 
@@ -3877,7 +3884,7 @@ export const useGameStore = create(
             ...player,
             resources: {
               ...player.resources,
-              credits: player.resources.credits - evoData.cost
+              crd: player.resources.crd - evoData.cost
             },
             equipment: {
               ...player.equipment,

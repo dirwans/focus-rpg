@@ -20,10 +20,10 @@ export const TRANSLATIONS = {
     promotion_service: "PROMOTION SERVICE",
     reclass_desc: "Reset and switch to another job within Tier {tier}.",
     reclass_fee: "Reclass fee: {fee} CRD",
-    reclass_btn: "RECLASS JOB CLASS ({fee} ⬡)",
+    reclass_btn: "RECLASS JOB CLASS ({fee} CRD)",
     promo_req: "You meet the level requirements to promote to Tier {tier}!",
     promo_fee: "Promotion fee: {fee} CRD",
-    promo_btn: "SELECT NEXT JOB ({fee} ⬡)",
+    promo_btn: "SELECT NEXT JOB ({fee} CRD)",
     promo_btn_free: "SELECT NEXT JOB (FREE)",
     insufficient_anium_warn: "⚠️ Insufficient CRD!",
     max_tier: "✓ Maximum job tier reached!",
@@ -79,7 +79,7 @@ export const TRANSLATIONS = {
     restricted_job_warn: "⚠️ RESTRICTED TO {job} JOB",
     unequip_btn: "UNEQUIP",
     equip_btn: "EQUIP",
-    sell_btn: "SELL (+{price} Credits)",
+    sell_btn: "SELL (+{price} CRD)",
     buy_potion_success: "Successfully bought 10 Potions!",
 
     // Forge screen
@@ -88,7 +88,7 @@ export const TRANSLATIONS = {
     upgrade_title: "{emoji} {label} Upgrade",
     upgrade_current: "Current: {val} | Stage: Lv.{level} | Next: +{next}",
     upgrade_btn_label: "UPGRADE ({cost} CRD)",
-    upgrade_need_more: "NEED {need} MORE ⬡",
+    upgrade_need_more: "NEED {need} MORE CRD",
     select_race_first: "SELECT RACE FIRST",
     no_weapon_equipped: "You do not have a weapon equipped.",
     no_weapon_equipped_desc: "Equip a weapon in the Cargo screen first to perform Weapon Refining & Combining.",
@@ -106,7 +106,7 @@ export const TRANSLATIONS = {
     talic_ignorance_label: "🔺 Ignorance Talic",
     talic_favor_label: "🔺 Favor Talic",
     sacrifice_weapon_label: "🗡️ Sacrifice Weapon",
-    anium_cost_label: "⬡ CRD",
+    anium_cost_label: "CRD",
 
     // Unit screen
     pilot_experience: "LEVEL PROGRESS",
@@ -218,10 +218,10 @@ export const TRANSLATIONS = {
     promotion_service: "LAYANAN PROMOSI JOB",
     reclass_desc: "Reset dan ganti ke job lain dalam Tier {tier}.",
     reclass_fee: "Biaya reclass: {fee} CRD",
-    reclass_btn: "GANTI KELAS JOB ({fee} ⬡)",
+    reclass_btn: "GANTI KELAS JOB ({fee} CRD)",
     promo_req: "Anda memenuhi persyaratan level untuk promosi ke Tier {tier}!",
     promo_fee: "Biaya promosi: {fee} CRD",
-    promo_btn: "PILIH JOB BERIKUTNYA ({fee} ⬡)",
+    promo_btn: "PILIH JOB BERIKUTNYA ({fee} CRD)",
     promo_btn_free: "PILIH JOB BERIKUTNYA (GRATIS)",
     insufficient_anium_warn: "⚠️ CRD Tidak Cukup!",
     max_tier: "✓ Tingkat job maksimal tercapai!",
@@ -279,7 +279,7 @@ export const TRANSLATIONS = {
     restricted_job_warn: "⚠️ KHUSUS UNTUK JOB {job}",
     unequip_btn: "LEPAS GEAR",
     equip_btn: "PAKAI GEAR",
-    sell_btn: "JUAL (+{price} Credits)",
+    sell_btn: "JUAL (+{price} CRD)",
     buy_potion_success: "Berhasil membeli 10 Potion!",
 
     // Forge screen
@@ -288,7 +288,7 @@ export const TRANSLATIONS = {
     upgrade_title: "Upgrade {label} {emoji}",
     upgrade_current: "Sekarang: {val} | Tingkat: Lv.{level} | Berikutnya: +{next}",
     upgrade_btn_label: "UPGRADE ({cost} CRD)",
-    upgrade_need_more: "BUTUH {need} LAGI ⬡",
+    upgrade_need_more: "BUTUH {need} LAGI CRD",
     select_race_first: "PILIH RAS TERLEBIH DAHULU",
     no_weapon_equipped: "Anda tidak memiliki senjata yang dilengkapi.",
     no_weapon_equipped_desc: "Lengkapi senjata di layar Kargo terlebih dahulu untuk melakukan Weapon Refining & Combining.",
@@ -306,7 +306,7 @@ export const TRANSLATIONS = {
     talic_ignorance_label: "🔺 Ignorance Talic",
     talic_favor_label: "🔺 Favor Talic",
     sacrifice_weapon_label: "🗡️ Senjata Tumbal",
-    anium_cost_label: "⬡ CRD",
+    anium_cost_label: "CRD",
 
     // Unit screen
     pilot_experience: "PROGRESS LEVEL",

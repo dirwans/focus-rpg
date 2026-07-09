@@ -837,8 +837,7 @@ export default function Main() {
 
       {/* Top HUD bar */}
       <div style={styles.hudBar}>
-        <span className="hud-pill">⬡ {player.resources.crd.toLocaleString()}</span>
-        <span className="hud-pill secondary">◈ {player.resources.credits.toLocaleString()}</span>
+        <span className="hud-pill">◈ {player.resources.crd.toLocaleString()} CRD</span>
         <span style={styles.iconRow}>
           {player.race && (
             <button onClick={() => setShowMailbox(true)} className="icon-btn-circle" title="Mailbox">

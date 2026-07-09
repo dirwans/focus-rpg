@@ -37,8 +37,8 @@ export default function Trade() {
       alert("Inventory penuh! Kosongkan slot atau upgrade bag Anda.")
       return
     }
-    if ((player.resources.credits || 0) < price) {
-      alert("Credits (CRD) tidak cukup!")
+    if ((player.resources.crd || 0) < price) {
+      alert("CRD tidak cukup!")
       return
     }
     if (!window.confirm(`Beli item ini seharga ${price.toLocaleString()} CRD?`)) return
@@ -107,7 +107,7 @@ export default function Trade() {
       </div>
       
       <div style={styles.balanceRow}>
-        <span style={{ color: '#00e5ff', fontFamily: 'var(--font-mono)', fontWeight: 800 }}>◈ {(player.resources.credits || 0).toLocaleString()} CRD</span>
+        <span style={{ color: '#00e5ff', fontFamily: 'var(--font-mono)', fontWeight: 800 }}>◈ {(player.resources.crd || 0).toLocaleString()} CRD</span>
         <button style={styles.refreshBtn} onClick={fetchMarket}>⟳ REFRESH</button>
       </div>
       

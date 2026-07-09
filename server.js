@@ -223,14 +223,23 @@ app.post('/api/market/buy', async (req, res) => {
   
   if (mItem.seller === s.username) return res.status(400).json({ error: 'Cannot buy your own item' })
   
-  // Verify buyer has enough CRD (credits)
+  // Verify buyer has enough CRD
   const buyerSv = loadSave(s.username)
-  if (!buyerSv || !buyerSv.resources || (buyerSv.resources.credits || 0) < mItem.price) {
-    return res.status(400).json({ error: 'Credits (CRD) tidak cukup!' })
+  if (!buyerSv || !buyerSv.resources) {
+    return res.status(400).json({ error: 'Save file not found or empty!' })
   }
   
-  // Subtract credits, add item
-  buyerSv.resources.credits = (buyerSv.resources.credits || 0) - mItem.price
+  // Migration support
+  const buyerCrd = (buyerSv.resources.crd || 0) + (buyerSv.resources.credits || 0)
+  buyerSv.resources.credits = 0 // clean up legacy
+  buyerSv.resources.crd = buyerCrd
+
+  if (buyerSv.resources.crd < mItem.price) {
+    return res.status(400).json({ error: 'CRD tidak cukup!' })
+  }
+  
+  // Subtract CRD, add item
+  buyerSv.resources.crd -= mItem.price
   
   // Strip market metadata before giving item
   const purchasedItem = { ...mItem, uid: Date.now() }
@@ -259,7 +268,7 @@ app.post('/api/market/buy', async (req, res) => {
       sender: 'Trade Commissioner',
       subject: `Item Sold: ${mItem.name}`,
       body: `Item Anda "${mItem.name}" berhasil terjual seharga ${mItem.price.toLocaleString()} CRD.\nSetelah dipotong pajak transaksi 5% CRD, Anda menerima ${netCredits.toLocaleString()} CRD.`,
-      credits: netCredits,
+      crd: netCredits,
       receivedAt: Date.now()
     })
     sellerSv.savedAt = Date.now()
@@ -287,9 +296,11 @@ app.post('/api/mailbox/claim', async (req, res) => {
     if (!sv.inventory) sv.inventory = []
     sv.inventory.push(mail.item)
   }
-  if (mail.credits) {
+  if (mail.credits || mail.crd) {
     if (!sv.resources) sv.resources = {}
-    sv.resources.credits = (sv.resources.credits || 0) + mail.credits
+    const amount = mail.credits || mail.crd || 0
+    sv.resources.crd = (sv.resources.crd || 0) + amount
+    sv.resources.credits = 0 // clean up legacy
   }
 
   // Delete mail after claim

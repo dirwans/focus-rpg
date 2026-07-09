@@ -35,8 +35,7 @@ export default function Ascension() {
     <div style={styles.screen}>
       <div style={styles.resBar}>
         <button onClick={() => useGameStore.getState().setScreen('main')} style={{background:'transparent', border:'none', color:'#00e5ff', fontSize: 20, cursor:'pointer', padding: '0 8px 0 0', display:'flex', alignItems:'center'}}>❮</button>
-        <span style={styles.chip('#f5a623')}>⬡ {player.resources.crd.toLocaleString()}</span>
-        <span style={styles.chip('#00e5ff')}>◈ {player.resources.credits.toLocaleString()}</span>
+        <span style={styles.chip('#f5a623')}>◈ {player.resources.crd.toLocaleString()} CRD</span>
       </div>
 
       <div style={{ padding: '16px 16px 80px' }}>
@@ -81,7 +80,7 @@ export default function Ascension() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
             {data.evolutions.map((evo, i) => {
               const isUnlocked = player.equipment?.ascension_arms?.id === evo.id
-              const canAfford = player.resources.credits >= evo.cost
+              const canAfford = player.resources.crd >= evo.cost
               const levelMet = player.level >= evo.levelReq
               
               return (

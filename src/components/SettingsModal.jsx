@@ -248,8 +248,8 @@ export default function SettingsModal({ onClose }) {
                         upgrades: { atk: 250, def: 250, hp: 250 },
                         resources: {
                           ...s.player.resources,
-                          crd: (s.player.resources?.crd || 0) + 1000000,
-                          credits: (s.player.resources?.credits || 0) + 100000
+                          crd: (s.player.resources?.crd || 0) + 1100000,
+                          credits: 0
                         },
                         selectedMapIdx: 4,
                         savedAt: Date.now()
@@ -274,13 +274,13 @@ export default function SettingsModal({ onClose }) {
                         isDeveloper: true,
                         resources: {
                           ...s.player.resources,
-                          crd: (s.player.resources?.crd || 0) + 1000000,
-                          credits: (s.player.resources?.credits || 0) + 10000
+                          crd: (s.player.resources?.crd || 0) + 1010000,
+                          credits: 0
                         },
                         savedAt: Date.now()
                       }
                     }))
-                    alert("Added 1,000,000 CRD and 10,000 Credits!")
+                    alert("Added 1,010,000 CRD!")
                   }}
                   style={{
                     flex: 1, padding: 8, background: 'linear-gradient(90deg, #ffaa00, #ff5500)',

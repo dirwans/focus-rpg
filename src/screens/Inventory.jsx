@@ -22,6 +22,7 @@ export default function Inventory() {
   const player = useGameStore((s) => s.player)
   const equipItem = useGameStore((s) => s.equipItem)
   const unequipItem = useGameStore((s) => s.unequipItem)
+  const useItem = useGameStore((s) => s.useItem)
   
   if (!player) return null;
 
@@ -183,7 +184,20 @@ export default function Inventory() {
                   }}
                 >
                   {resolveItemImage(item, player.race, player.job) ? (
-                    <img referrerPolicy="no-referrer" src={resolveItemImage(item, player.race, player.job)} style={{ width: '92%', height: '92%', objectFit: 'contain', borderRadius: 2, imageRendering: 'auto' }} alt={item.name} />
+                    <img
+                      referrerPolicy="no-referrer"
+                      src={resolveItemImage(item, player.race, player.job)}
+                      style={{
+                        width: '92%',
+                        height: '92%',
+                        objectFit: 'contain',
+                        borderRadius: 2,
+                        imageRendering: 'auto',
+                        transform: slotKey === 'weapon' ? 'scale(1.25)' : 'none',
+                        transition: 'transform 0.2s ease',
+                      }}
+                      alt={item.name}
+                    />
                   ) : item.emoji ? (
                     <span style={{ fontSize: '2rem' }}>{item.emoji}</span>
                   ) : (
@@ -714,7 +728,7 @@ export default function Inventory() {
                             legendary: 'rgba(240, 150, 30, 0.95)'
                           };
                           const borderCol = borderColors[item.rarity || 'common'] || 'rgba(100, 110, 125, 0.95)';
-                          const isEquipable = ['weapon','armor','shield','helmet','mantle','gloves','boots','pants','amulet','ring'].includes(item.type)
+                          const isEquipable = ['weapon','armor','shield','helmet','mantle','gloves','boots','pants','amulet','ring','ascension_arms'].includes(item.type)
                           
                           return (
                             <div 
@@ -778,6 +792,30 @@ export default function Inventory() {
                                   }}
                                 >
                                   EQUIP ITEM
+                                </button>
+                              )}
+                              {item.type === 'consumable' && (
+                                <button
+                                  onClick={() => {
+                                    useItem(item.uid);
+                                    setSelectedBagItem(null);
+                                  }}
+                                  style={{
+                                    width: '100%',
+                                    background: 'linear-gradient(90deg, #0088ff, #00e5ff)',
+                                    border: 'none',
+                                    borderRadius: 4,
+                                    color: '#000',
+                                    padding: '6px 0',
+                                    fontFamily: "'Orbitron', sans-serif",
+                                    fontSize: 11,
+                                    fontWeight: 800,
+                                    marginTop: 8,
+                                    cursor: 'pointer',
+                                    boxShadow: '0 0 8px rgba(0, 229, 255, 0.4)'
+                                  }}
+                                >
+                                  USE ITEM
                                 </button>
                               )}
                             </div>

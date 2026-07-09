@@ -1,17 +1,17 @@
 {
   "arctron": [
-    { "id": "arctron_benefactor", "name": "Arctron Benefactor", "requirement": { "type": "totalMonsterKill", "value": 100 }, "bonus": { "atk": 35, "def": 20, "hp": 2000 } },
-    { "id": "arctron_savior", "name": "Arctron Savior", "requirement": { "type": "totalMonsterKill", "value": 500 }, "bonus": { "atk": 40, "def": 20, "hp": 3000 } },
-    { "id": "arctron_hero", "name": "Arctron Hero", "requirement": { "type": "totalMonsterKill", "value": 2000 }, "bonus": { "atk": 45, "def": 25, "hp": 5000 } }
+    { "id": "arctron_benefactor", "name": "Arctron Benefactor", "pvpRank": 3, "bonus": { "atk": 35, "def": 20, "hp": 2000 } },
+    { "id": "arctron_savior", "name": "Arctron Savior", "pvpRank": 2, "bonus": { "atk": 40, "def": 20, "hp": 3000 } },
+    { "id": "arctron_hero", "name": "Arctron Hero", "pvpRank": 1, "bonus": { "atk": 45, "def": 25, "hp": 5000 } }
   ],
   "bionex": [
-    { "id": "bionex_benefactor", "name": "Bionex Benefactor", "requirement": { "type": "totalMonsterKill", "value": 100 }, "bonus": { "atk": 35, "def": 20, "hp": 2000 } },
-    { "id": "bionex_savior", "name": "Bionex Savior", "requirement": { "type": "totalMonsterKill", "value": 500 }, "bonus": { "atk": 40, "def": 20, "hp": 3000 } },
-    { "id": "bionex_hero", "name": "Bionex Hero", "requirement": { "type": "totalMonsterKill", "value": 2000 }, "bonus": { "atk": 45, "def": 25, "hp": 5000 } }
+    { "id": "bionex_benefactor", "name": "Bionex Benefactor", "pvpRank": 3, "bonus": { "atk": 35, "def": 20, "hp": 2000 } },
+    { "id": "bionex_savior", "name": "Bionex Savior", "pvpRank": 2, "bonus": { "atk": 40, "def": 20, "hp": 3000 } },
+    { "id": "bionex_hero", "name": "Bionex Hero", "pvpRank": 1, "bonus": { "atk": 45, "def": 25, "hp": 5000 } }
   ],
   "celestra": [
-    { "id": "celestra_benefactor", "name": "Celestra Benefactor", "requirement": { "type": "totalMonsterKill", "value": 100 }, "bonus": { "atk": 35, "def": 20, "hp": 2000 } },
-    { "id": "celestra_savior", "name": "Celestra Savior", "requirement": { "type": "totalMonsterKill", "value": 500 }, "bonus": { "atk": 40, "def": 20, "hp": 3000 } },
-    { "id": "celestra_hero", "name": "Celestra Hero", "requirement": { "type": "totalMonsterKill", "value": 2000 }, "bonus": { "atk": 45, "def": 25, "hp": 5000 } }
+    { "id": "celestra_benefactor", "name": "Celestra Benefactor", "pvpRank": 3, "bonus": { "atk": 35, "def": 20, "hp": 2000 } },
+    { "id": "celestra_savior", "name": "Celestra Savior", "pvpRank": 2, "bonus": { "atk": 40, "def": 20, "hp": 3000 } },
+    { "id": "celestra_hero", "name": "Celestra Hero", "pvpRank": 1, "bonus": { "atk": 45, "def": 25, "hp": 5000 } }
   ]
 }

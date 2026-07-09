@@ -25,7 +25,7 @@ export default function GuildPanel() {
   const hasGuild = !!player.guild
 
   if (!hasGuild) {
-    const canCreate = player.level >= 30 && player.resources.credits >= 10000000
+    const canCreate = player.level >= 30 && player.resources.crd >= 10000000
     return (
       <div className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.container}>
         <div style={styles.header}>📜 GUILD CREATION</div>
@@ -36,7 +36,7 @@ export default function GuildPanel() {
           </div>
           <div style={styles.reqRow}>
             <span>Biaya Pembuatan</span>
-            <span style={{ color: player.resources.credits >= 10000000 ? '#00ff88' : '#ff4466' }}>
+            <span style={{ color: player.resources.crd >= 10000000 ? '#00ff88' : '#ff4466' }}>
               10,000,000 CRD
             </span>
           </div>
@@ -86,7 +86,7 @@ export default function GuildPanel() {
   const guild = player.guild
   const maxMembers = 15 + (guild.level * 5)
   const nextCost = guild.level < 10 ? UPGRADE_COSTS[guild.level] : null
-  const canUpgrade = nextCost && player.resources.credits >= nextCost
+  const canUpgrade = nextCost && player.resources.crd >= nextCost
 
   return (
     <div className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.container}>

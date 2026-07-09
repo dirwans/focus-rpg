@@ -1288,7 +1288,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 96: Celestra Ranger Lv.55 Set Replacement (Full 5 Pieces) [PENDING DEPLOYMENT]
+### 🎨 Milestone 96: Celestra Ranger Lv.55 Set Replacement (Full 5 Pieces) [DEPLOYED]
 - **Assets**: Replaced all 5 pieces of the Celestra Ranger Lv.55 mecha armor set (`armor`, `helmet`, `pants`, `boots`, `gloves`) from the newly provided high-resolution showcase sheet `truelv55ranger.png`.
 - **Post-processing**:
   - Wrote and executed the script `extract_truelv55ranger.py` to crop each part:
@@ -1304,7 +1304,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 97: Celestra Ranger Lv.66 Set Replacement (Full 5 Pieces) [PENDING DEPLOYMENT]
+### 🎨 Milestone 97: Celestra Ranger Lv.66 Set Replacement (Full 5 Pieces) [DEPLOYED]
 - **Assets**: Replaced all 5 pieces of the Celestra Ranger Lv.66 mecha armor set (`armor`, `helmet`, `pants`, `boots`, `gloves`) from the newly provided high-resolution showcase sheet `truelv66ranger.png`.
 - **Post-processing**:
   - Wrote and executed the script `extract_truelv66ranger.py` to crop each part:
@@ -1320,7 +1320,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 98: Celestra Warrior Lv.55 Set Replacement (Full 5 Pieces) [PENDING DEPLOYMENT]
+### 🎨 Milestone 98: Celestra Warrior Lv.55 Set Replacement (Full 5 Pieces) [DEPLOYED]
 - **Assets**: Replaced all 5 pieces of the Celestra Warrior Lv.55 mecha armor set (`armor`, `helmet`, `pants`, `boots`, `gloves`) from the newly provided high-resolution showcase sheet `truelv55warrior.png`.
 - **Post-processing**:
   - Wrote and executed the script `extract_truelv55warrior.py` to crop each part:
@@ -1336,7 +1336,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 99: Celestra Warrior Lv.66 Set Replacement (Full 5 Pieces) [PENDING DEPLOYMENT]
+### 🎨 Milestone 99: Celestra Warrior Lv.66 Set Replacement (Full 5 Pieces) [DEPLOYED]
 - **Assets**: Replaced all 5 pieces of the Celestra Warrior Lv.66 mecha armor set (`armor`, `helmet`, `pants`, `boots`, `gloves`) from the newly provided high-resolution showcase sheet `truelv66warrior.png`.
 - **Post-processing**:
   - Wrote and executed the script `extract_truelv66warrior.py` to crop each part:
@@ -1352,7 +1352,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 100: Celestra Mage Lv.32 Set Replacement (Full 5 Pieces) [PENDING DEPLOYMENT]
+### 🎨 Milestone 100: Celestra Mage Lv.32 Set Replacement (Full 5 Pieces) [DEPLOYED]
 - **Assets**: Replaced all 5 pieces of the Celestra Mage Lv.32 armor set from the newly provided high-resolution showcase sheet `truelv32mage.png` (Hora Force set – Lv.32/33).
 - **Post-processing**:
   - Wrote and executed `extract_truelv32mage.py` to crop each part from the labeled grid:
@@ -1365,3 +1365,51 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 - **Paths**: Overwrote files in both `public/assets/armor_celestra/` and `src/assets/armor_celestra/` as `defcelestramagelv32{helmet,armor,pants,gloves,boots}.png`.
 - **Logic**: Cache version bumped to `v=14` in `src/store/gameStore.js` for instant browser refresh.
 - **Verification**: `npm run build` succeeds locally.
+
+---
+
+### 🎨 Milestone 101: Weapon Slot Scaling & Store Compilation Fix [PENDING DEPLOYMENT]
+- **Weapon Scaling (`src/screens/Inventory.jsx`)**:
+  - Scaled up the weapon sprite image in the equipped gear slot by a factor of 1.25x (`transform: scale(1.25)`).
+  - This prevents long, thin weapon sprites (like bows, swords, guns, staves) from rendering too small in the box.
+- **Store Code Compilation Fix (`src/store/gameStore.js`)**:
+  - Renamed the block-scoped variable `activeTitle` inside `getPlayerStats` to `activeTitleObj`.
+  - This resolves a duplicate declaration compile-time syntax error on the existing `let activeTitle = ''` further down in the function.
+- **Verification**: Verified that `npm run build` succeeds locally.
+
+---
+
+### 🪙 Milestone 102: Currency Consolidation (Credits to CRD) [PENDING DEPLOYMENT]
+- **Store & Server Mechanics**:
+  - Consolidated all in-game finance actions to use `crd` (representing the unified CRD currency) as the single primary currency, completely deprecating the old `credits` resource.
+  - Adjusted the default player resource state to start with 5,000 CRD.
+  - Migrated server-side Auction House checks, transaction charges, and mailbox claims to operate on `sv.resources.crd` instead of `credits`, adding backwards-compatible legacy migration that converts any pre-existing `credits` directly to `crd` on save load.
+  - Consolidated AFK/Idle session completion rewards in `computeRewards` to return all currency gains as `crd` (combining the base and map bonus values).
+- **Interface & Localization**:
+  - Simplified top HUD bar and unit panels to only display the unified CRD balance.
+  - Replaced all UI references, modal texts, and translations (English & Indonesian) for `Credits` or symbol references with the unified `CRD` term.
+- **Verification**: Verified successfully with `npm run build` compiling without error.
+
+---
+
+### 🧪 Milestone 103: Potion Manual Use & Auto-Potion Integration [PENDING DEPLOYMENT]
+- **Inventory Use Button (`src/screens/Inventory.jsx`)**:
+  - Rendered a "USE ITEM" button in the bag description panel for all consumable item types (potions).
+- **Store Action (`src/store/gameStore.js`)**:
+  - Upgraded the `useItem` store action: consuming `pot_hp` (HP Potion [S]) from the inventory bag now transfers it to the global Quick Potion slot (`player.resources.potions`), preventing the item from being wasted.
+  - Warns the player that `pot_fp` (FP Potion [S]) is automatically consumed during AFK combat simulation if auto-potion is toggled ON.
+- **Verification**: Successfully builds and compiles locally.
+
+---
+
+### ⚙️ Milestone 104: Ascension Arms Job Restrictions [PENDING DEPLOYMENT]
+- **Lineage Allowed Lists (`src/store/gameStore.js`)**:
+  - Restricted crafting (`craftAscensionArms`) and equipping (`equipItem`) of Ascension Arms to their matching faction lineages:
+    - **Arctron**: Technician, Architect, Core Engineer, Cybermancer.
+    - **Bionex**: Engineer, Mechanist, Techmaster, Overseer.
+    - **Celestra**: Oracle, Celestial Oracle, Conjurer, Divine Summoner.
+  - Returns an descriptive error alert if a player attempts to assemble or equip an Ascension Arm on a different job (e.g. Warrior/Ranger).
+- **Grid Equipability (`src/screens/Inventory.jsx`)**:
+  - Added `ascension_arms` to the `isEquipable` list so that if a player manually unequips their Ascension Arms into their bag, they can easily equip them back onto the humanoid slot from the UI.
+- **Verification**: Successfully verified with local production build.
+

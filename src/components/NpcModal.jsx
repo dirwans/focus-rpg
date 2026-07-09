@@ -1524,7 +1524,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                 <div style={styles.statusVal}>Eminence Quartermaster</div>
               </div>
               {(() => {
-          const credits = player.resources.credits
+          const credits = player.resources.crd
           const inv = player.inventory
           const countInInvOrEquip = (setId) => {
             const eq = player.equipment || {}
@@ -1780,7 +1780,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
               {/* Header with credits */}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(0,0,0,0.3)', padding: 10, borderRadius: 8, border: '1px solid rgba(0, 229, 255, 0.15)' }}>
                 <span style={{ fontSize: 12, color: '#7ab0d0', fontWeight: 'bold' }}>CREDITS BALANCE</span>
-                <span style={{ color: '#00e5ff', fontFamily: 'var(--font-mono)', fontWeight: 800 }}>◈ {(player.resources.credits || 0).toLocaleString()} CRD</span>
+                <span style={{ color: '#00e5ff', fontFamily: 'var(--font-mono)', fontWeight: 800 }}>◈ {(player.resources.crd || 0).toLocaleString()} CRD</span>
               </div>
 
               {/* Slots Upgrades Section */}
@@ -1900,8 +1900,8 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12, height: '100%', overflow: 'hidden' }}>
               {/* Header with credits */}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(0,0,0,0.3)', padding: 10, borderRadius: 8, border: '1px solid rgba(0, 229, 255, 0.15)' }}>
-                <span style={{ fontSize: 12, color: '#7ab0d0', fontWeight: 'bold' }}>CREDITS BALANCE</span>
-                <span style={{ color: '#00e5ff', fontFamily: 'var(--font-mono)', fontWeight: 800 }}>◈ {(player.resources.credits || 0).toLocaleString()} CRD</span>
+                <span style={{ fontSize: 12, color: '#7ab0d0', fontWeight: 'bold' }}>CRD BALANCE</span>
+                <span style={{ color: '#00e5ff', fontFamily: 'var(--font-mono)', fontWeight: 800 }}>◈ {(player.resources.crd || 0).toLocaleString()} CRD</span>
               </div>
 
               {/* NPC avatar & bubble */}
@@ -1922,7 +1922,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                   { id: 'hp', name: 'HP Potion [S]', emoji: '🧪', desc: 'Memulihkan 1,000 HP seketika.', cost: 2500 },
                   { id: 'fp', name: 'FP Potion [S]', emoji: '🧪', desc: 'Memulihkan 2,500 FP seketika.', cost: 10000 }
                 ].map((pot) => {
-                  const hasCredits = (player.resources.credits || 0) >= pot.cost
+                  const hasCredits = (player.resources.crd || 0) >= pot.cost
                   return (
                     <div key={pot.id} style={{ display: 'flex', alignItems: 'center', gap: 12, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)', padding: 12, borderRadius: 8 }}>
                       <div style={{ fontSize: 32, background: 'rgba(0,0,0,0.3)', padding: 8, borderRadius: 6, border: '1px solid rgba(0,229,255,0.1)' }}>{pot.emoji}</div>
@@ -1933,9 +1933,9 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                       </div>
                       <button 
                         onClick={() => {
-                          const credits = player.resources.credits || 0
-                          if (credits < pot.cost) {
-                            alert(`Credits (CRD) tidak cukup! Membutuhkan ${pot.cost.toLocaleString()} CRD.`)
+                          const crd = player.resources.crd || 0
+                          if (crd < pot.cost) {
+                            alert(`CRD tidak cukup! Membutuhkan ${pot.cost.toLocaleString()} CRD.`)
                             return
                           }
 
@@ -1962,7 +1962,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                               inventory: addToInventory(s.player.inventory, potItem, 1),
                               resources: {
                                 ...s.player.resources,
-                                credits: credits - pot.cost
+                                crd: (s.player.resources.crd || 0) - pot.cost
                               },
                               savedAt: Date.now()
                             }
