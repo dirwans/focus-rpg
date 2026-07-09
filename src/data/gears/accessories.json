@@ -97,6 +97,15 @@
       "def": 58,
       "defPct": 5,
       "dmgShieldRate": 35
+    },
+    {
+      "id": "shd_all_1",
+      "name": "Heavy Carbon Shield",
+      "grade": "Uncommon",
+      "def": 472,
+      "defPct": 5,
+      "dmgShieldRate": 35,
+      "dodge": -100
     }
   ],
   "capes": [

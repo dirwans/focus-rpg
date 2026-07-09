@@ -734,7 +734,8 @@ export default function LibraryModal({ onClose }) {
                         <span style={{ color: '#00ff88' }}>
                           {w.def ? `+${w.def} DEF ` : ''}
                           {w.defPct ? `+${w.defPct}% ADR ` : ''}
-                          {w.dmgShieldRate ? `+${w.dmgShieldRate}% DSR` : ''}
+                          {w.dmgShieldRate ? `+${w.dmgShieldRate}% DSR ` : ''}
+                          {w.dodge ? (w.dodge > 0 ? `+${w.dodge}% Dodge` : `${w.dodge}% Dodge`) : ''}
                         </span>
                       </div>
                     ))}
@@ -829,7 +830,8 @@ export default function LibraryModal({ onClose }) {
                         <span style={{ color: '#00ff88' }}>
                           {w.def ? `+${w.def} DEF ` : ''}
                           {w.defPct ? `+${w.defPct}% ADR ` : ''}
-                          {w.dmgShieldRate ? `+${w.dmgShieldRate}% DSR` : ''}
+                          {w.dmgShieldRate ? `+${w.dmgShieldRate}% DSR ` : ''}
+                          {w.dodge ? (w.dodge > 0 ? `+${w.dodge}% Dodge` : `${w.dodge}% Dodge`) : ''}
                         </span>
                       </div>
                     ))}
@@ -934,7 +936,8 @@ export default function LibraryModal({ onClose }) {
                         <span style={{ color: '#00ff88' }}>
                           {w.def ? `+${w.def} DEF ` : ''}
                           {w.defPct ? `+${w.defPct}% ADR ` : ''}
-                          {w.dmgShieldRate ? `+${w.dmgShieldRate}% DSR` : ''}
+                          {w.dmgShieldRate ? `+${w.dmgShieldRate}% DSR ` : ''}
+                          {w.dodge ? (w.dodge > 0 ? `+${w.dodge}% Dodge` : `${w.dodge}% Dodge`) : ''}
                         </span>
                       </div>
                     ))}
@@ -1054,7 +1057,8 @@ export default function LibraryModal({ onClose }) {
                         <span style={{ color: '#00ff88' }}>
                           {w.def ? `+${w.def} DEF ` : ''}
                           {w.defPct ? `+${w.defPct}% ADR ` : ''}
-                          {w.dmgShieldRate ? `+${w.dmgShieldRate}% DSR` : ''}
+                          {w.dmgShieldRate ? `+${w.dmgShieldRate}% DSR ` : ''}
+                          {w.dodge ? (w.dodge > 0 ? `+${w.dodge}% Dodge` : `${w.dodge}% Dodge`) : ''}
                         </span>
                       </div>
                     ))}
