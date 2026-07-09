@@ -207,34 +207,37 @@ export default function Battle() {
           ) : targets.length === 0 ? (
             <p style={{ textAlign: 'center', color: '#7ab0d0', padding: 32, fontSize: 13 }}>No targets available.</p>
           ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              {targets.map((t, i) => (
-                <div key={i} className={`glass-panel cyber-panel panel-${t.race}`} style={styles.targetCard}>
-                  <div style={{ display: 'flex', gap: 10, alignItems: 'center', flex: 1 }}>
-                    <div style={styles.avatarCircle}>
-                      <PilotSprite race={t.race} job={t.job} gender={t.gender} size={36} />
-                    </div>
-                    <div style={{ flex: 1 }}>
-                      <h3 style={{ fontSize: 15, margin: '0 0 2px 0', color: '#fff', fontFamily: 'var(--font-title)' }}>{t.username}</h3>
-                      <div style={{ display: 'flex', gap: 8, fontSize: 13, color: '#7ab0d0', fontFamily: 'var(--font-mono)' }}>
-                        <span style={{ background: 'rgba(0,0,0,0.3)', padding: '1px 5px', borderRadius: 4, color: '#f5a623', fontSize: 13 }}>
-                          {getJobName(t.race, t.job) || t.race.toUpperCase()}
-                        </span>
-                        <span>Lv.{t.level}</span>
-                      </div>
+            (() => {
+              const maxTargetCp = Math.max(4000, ...targets.map(t => t.cp || 1000))
+              return (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                  {targets.map((t, i) => (
+                    <div key={i} className={`glass-panel cyber-panel panel-${t.race}`} style={styles.targetCard}>
+                      <div style={{ display: 'flex', gap: 10, alignItems: 'center', flex: 1 }}>
+                        <div style={styles.avatarCircle}>
+                          <PilotSprite race={t.race} job={t.job} gender={t.gender} size={36} />
+                        </div>
+                        <div style={{ flex: 1 }}>
+                          <h3 style={{ fontSize: 15, margin: '0 0 2px 0', color: '#fff', fontFamily: 'var(--font-title)' }}>{t.username}</h3>
+                          <div style={{ display: 'flex', gap: 8, fontSize: 13, color: '#7ab0d0', fontFamily: 'var(--font-mono)' }}>
+                            <span style={{ background: 'rgba(0,0,0,0.3)', padding: '1px 5px', borderRadius: 4, color: '#f5a623', fontSize: 13 }}>
+                              {getJobName(t.race, t.job) || t.race.toUpperCase()}
+                            </span>
+                            <span>Lv.{t.level}</span>
+                          </div>
 
-                      {/* Combat Effectiveness Rating bar */}
-                      <div style={{ marginTop: 6 }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#00e5ff', fontWeight: 800, marginBottom: 2, fontFamily: 'var(--font-mono)' }}>
-                          <span>EFFECTIVENESS</span>
-                          <span>{t.cp || 1000} CP</span>
-                        </div>
-                        <div style={{ width: '90%', height: 4, background: '#091424', borderRadius: 2, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.05)' }}>
-                          <div style={{ height: '100%', width: `${Math.max(10, Math.min(100, ((t.cp || 1000) / 4000) * 100))}%`, background: 'linear-gradient(90deg, #00c8ff, #a855f7)', borderRadius: 2 }} />
+                          {/* Combat Effectiveness Rating bar */}
+                          <div style={{ marginTop: 6 }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#00e5ff', fontWeight: 800, marginBottom: 2, fontFamily: 'var(--font-mono)' }}>
+                              <span>EFFECTIVENESS</span>
+                              <span>{t.cp || 1000} CP</span>
+                            </div>
+                            <div style={{ width: '90%', height: 4, background: '#091424', borderRadius: 2, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.05)' }}>
+                              <div style={{ height: '100%', width: `${Math.max(10, Math.min(100, ((t.cp || 1000) / maxTargetCp) * 100))}%`, background: 'linear-gradient(90deg, #00c8ff, #a855f7)', borderRadius: 2 }} />
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
                   <button 
                     onClick={() => handleAttack(t.username)}
                     disabled={loading}
@@ -245,6 +248,8 @@ export default function Battle() {
                 </div>
               ))}
             </div>
+              )
+            })()
           )}
         </div>
       )}

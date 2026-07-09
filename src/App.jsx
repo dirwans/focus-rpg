@@ -289,7 +289,7 @@ export default function App() {
         <div className="game-container" style={{ background: containerBg }}>
           <div style={styles.center}>
             <div style={{ fontSize: 48 }}>⚡</div>
-            <div style={{ fontFamily: 'monospace', fontSize: 16, color: '#00e5ff', letterSpacing: 3, marginTop: 12 }}>LOADING...</div>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: 16, color: '#00e5ff', letterSpacing: 3, marginTop: 12 }}>LOADING...</div>
           </div>
         </div>
       </div>

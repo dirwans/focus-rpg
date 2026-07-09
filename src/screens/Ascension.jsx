@@ -12,7 +12,7 @@ export default function Ascension() {
       <div style={styles.screen}>
         <div style={styles.empty}>
           <div style={{ fontSize: 40 }}>🔒</div>
-          <div style={{ fontFamily: 'monospace', fontSize: 14, color: '#7ab0d0', marginTop: 8 }}>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 14, color: '#7ab0d0', marginTop: 8 }}>
             Pilih bangsa (faction) terlebih dahulu untuk membuka Ascension Lab.
           </div>
         </div>

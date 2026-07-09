@@ -304,8 +304,8 @@ export default function Ranks() {
                 <div style={styles.myRankHandle}>{player.name}</div>
               </div>
               <div style={{ textAlign: 'right' }}>
-                <div style={{ fontFamily: 'monospace', fontSize: 13, color: '#00e5ff', fontWeight: 800 }}>{fmtMin(myMinutes)}</div>
-                <div style={{ fontFamily: 'monospace', fontSize: 13, color: '#7ec8e3', fontWeight: 800 }}>{myMinutes}m total</div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: '#00e5ff', fontWeight: 800 }}>{fmtMin(myMinutes)}</div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: '#7ec8e3', fontWeight: 800 }}>{myMinutes}m total</div>
               </div>
             </div>
           )}

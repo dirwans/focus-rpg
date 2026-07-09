@@ -1549,3 +1549,35 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - Deleted the Specialist (e.g. `COVENANT HIGH PRIEST`) button entry from the main NPC lobby dialog list.
 - **Verification**: Verified successfully with local build check.
 
+---
+
+### ⚔️ Milestone 118: Game Logic & Calculation Fixes (22 Findings) [PENDING DEPLOYMENT]
+- **`src/store/gameStore.js`**:
+  - Fixed Evasion/Dodge formula: changed `+stats.evasion` to `-stats.dodge` so player dodge actually reduces enemy hit rate.
+  - Fixed baseStats key alignment — all races/tiers now reference correct job IDs from `jobs.json` (warrior, ranger, technician, sentinel, pathfinder, etc.).
+  - Smoothed EXP wall at Level 31→41: increments +15min/level instead of jumping from 30min to 180min.
+  - Capped critical hit rate at 100% and dodge rate at 80% to prevent numerical exploits.
+  - Updated healer job ID list for auto-heal skill (<35% HP trigger).
+  - Implemented HP recovery for Vampire lifesteal weapon hits.
+  - Activated Special PT progression for Arctron specialist classes.
+  - Drop roll now scales linearly with `finalKills` count per session.
+- **`src/data/baseStats.json`**: Rewrote all race×tier stat blocks to use actual job IDs from `jobs.json`.
+- **`src/data/enemies.json`**:
+  - Scaled Trinity Emperor (Dungeon 3 Pit Boss) HP to 150,000,000 (3× regular boss).
+  - Scaled dungeon trash mob HP to properly match world map equivalents.
+  - Nerfed dungeon boss CRD rewards 10× to prevent economy inflation.
+- **`src/screens/Battle.jsx`**: PvP CP effectiveness bar now scales dynamically against max CP in targets list.
+- **Verification**: Successfully builds and compiles locally.
+
+---
+
+### 🔤 Milestone 119: Typography Standardization — All Panels [PENDING DEPLOYMENT]
+- **Files**: `src/screens/Main.jsx`, `src/screens/Ranks.jsx`, `src/screens/Ascension.jsx`, `src/App.jsx`, `src/components/NpcModal.jsx`
+- **Changes**:
+  - Replaced all hardcoded `fontFamily: 'monospace'` with `fontFamily: 'var(--font-mono)'` project-wide (excluding `Unit.jsx` and `Mine.jsx`).
+  - Replaced `fontFamily: "'Share Tech Mono', monospace"` in `NpcModal.jsx` with `var(--font-mono)`.
+  - Upgraded font sizes: `fontSize: 9` → `11`, `fontSize: 10` → `12` across `NpcModal.jsx`.
+  - Upgraded font sizes in `Main.jsx` map panel: node labels `10` → `12`, status badge `11` → `12`, zone header `11` → `13`, active/idle badge `11` → `13`.
+  - Replaced hardcoded `"'Orbitron', sans-serif"` strings with `var(--font-title)` CSS variable tokens.
+- **Verification**: Successfully builds and compiles locally.
+

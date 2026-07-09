@@ -629,7 +629,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                   { map: '🔥 Map 4', armor: '900K', helmet: '450K', pants: '720K', gloves: '360K', boots: '360K', shield: '720K' },
                   { map: '☢️ Map 5', armor: '1.8M', helmet: '900K', pants: '1.44M', gloves: '720K', boots: '720K', shield: '1.44M' },
                 ].map((m, i) => (
-                  <div key={i} style={{ fontFamily: 'var(--font-mono)', fontSize: 10, padding: '3px 0', color: '#e0f4ff', borderTop: i > 0 ? '1px solid rgba(255,255,255,0.05)' : 'none' }}>
+                  <div key={i} style={{ fontFamily: 'var(--font-mono)', fontSize: 12, padding: '3px 0', color: '#e0f4ff', borderTop: i > 0 ? '1px solid rgba(255,255,255,0.05)' : 'none' }}>
                     <span style={{ color: '#88aadd' }}>{m.map}</span> — Armor:<span style={{ color: '#ffcc00' }}>{m.armor}</span> Helmet:<span style={{ color: '#ffcc00' }}>{m.helmet}</span> Pants:<span style={{ color: '#ffcc00' }}>{m.pants}</span> Gloves:<span style={{ color: '#ffcc00' }}>{m.gloves}</span> Boots:<span style={{ color: '#ffcc00' }}>{m.boots}</span> Shield:<span style={{ color: '#ffcc00' }}>{m.shield}</span>
                   </div>
                 ))}
@@ -697,14 +697,14 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
           return (
             <div style={{ padding: '2px 16px' }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 14 }}>
-                <label style={{ fontFamily: 'monospace', fontSize: '13px', color: '#88aadd' }}>Select Equipment to Enhance</label>
+                <label style={{ fontFamily: 'var(--font-mono)', fontSize: '13px', color: '#88aadd' }}>Select Equipment to Enhance</label>
                 <select
                   value={selectedEnhanceSlot}
                   onChange={(e) => {
                     setSelectedEnhanceSlot(e.target.value)
                     setEnhanceResult(null)
                   }}
-                  style={{ width: '100%', padding: '10px', background: '#0a1628', border: '1px solid #1a3a6a', borderRadius: '8px', color: '#e0f4ff', fontFamily: 'monospace', fontSize: '13px' }}
+                  style={{ width: '100%', padding: '10px', background: '#0a1628', border: '1px solid #1a3a6a', borderRadius: '8px', color: '#e0f4ff', fontFamily: 'var(--font-mono)', fontSize: '13px' }}
                 >
                   <option value="">-- Choose Slot --</option>
                   {player.equipment && Object.entries(player.equipment).map(([slot, it]) => {
@@ -720,7 +720,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
 
               {hasItem && (!item.arcanite_type || currentEnh === 0) && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 14 }}>
-                  <label style={{ fontFamily: 'monospace', fontSize: '13px', color: '#88aadd' }}>Select Arcanite Focus</label>
+                  <label style={{ fontFamily: 'var(--font-mono)', fontSize: '13px', color: '#88aadd' }}>Select Arcanite Focus</label>
                   <div style={{ display: 'flex', gap: 8, overflowX: 'auto', paddingBottom: 6 }}>
                     {[
                       { id: 'mat_arcanite_fury', color: '#ffcc00', name: 'Fury' },
@@ -750,7 +750,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                           title={arc.name}
                         >
                           <img src={`/assets/items/${arc.id}.png`} style={{ width: 20, height: 20, objectFit: 'contain' }} alt={arc.name} />
-                          <span style={{ fontSize: 9, fontFamily: 'monospace', color: isSelected ? arc.color : '#88aadd', marginTop: 2 }}>{arc.name}</span>
+                          <span style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: isSelected ? arc.color : '#88aadd', marginTop: 2 }}>{arc.name}</span>
                         </div>
                       )
                     })}
@@ -763,7 +763,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                 <div style={{
                   padding: 10,
                   borderRadius: 8,
-                  fontFamily: 'monospace',
+                  fontFamily: 'var(--font-mono)',
                   fontSize: 13,
                   fontWeight: 'bold',
                   textAlign: 'center',
@@ -904,17 +904,17 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                     <div style={{ padding: '10px 12px', borderRadius: '8px', background: `${theme.primary}12`, border: `1px solid ${theme.primary}47`, margin: '14px 0 12px' }}>
                       <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '11px', fontWeight: '800', color: theme.light, letterSpacing: '0.5px', marginBottom: '6px' }}>STATS PREVIEW (+{currentEnh} ➜ +{currentEnh + 1})</div>
                       {item.type === 'weapon' ? (
-                        <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'monospace', fontSize: '13px', color: '#cdd5e0' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-mono)', fontSize: '13px', color: '#cdd5e0' }}>
                           <span>ATK Bonus:</span>
                           <span>{Math.floor((item.bonus?.atk || 0) * (1 + currentEnh * 0.1))} ➜ <b style={{ color: '#5fe08a' }}>{Math.floor((item.bonus?.atk || 0) * (1 + (currentEnh + 1) * 0.1))}</b></span>
                         </div>
                       ) : (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                          <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'monospace', fontSize: '13px', color: '#cdd5e0' }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-mono)', fontSize: '13px', color: '#cdd5e0' }}>
                             <span>DEF Bonus:</span>
                             <span>{Math.floor((item.bonus?.def || 0) * (1 + currentEnh * 0.1))} ➜ <b style={{ color: '#5fe08a' }}>{Math.floor((item.bonus?.def || 0) * (1 + (currentEnh + 1) * 0.1))}</b></span>
                           </div>
-                          <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'monospace', fontSize: '13px', color: '#cdd5e0' }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-mono)', fontSize: '13px', color: '#cdd5e0' }}>
                             <span>HP Bonus:</span>
                             <span>{Math.floor((item.bonus?.hp || 0) * (1 + currentEnh * 0.1))} ➜ <b style={{ color: '#5fe08a' }}>{Math.floor((item.bonus?.hp || 0) * (1 + (currentEnh + 1) * 0.1))}</b></span>
                           </div>
@@ -938,13 +938,13 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                         onChange={(e) => setUseLuckyRelic(e.target.checked)}
                         style={{ cursor: 'pointer', width: 15, height: 15 }}
                       />
-                      <label htmlFor="useLuckyRelicChk" style={{ fontFamily: 'monospace', fontSize: '13px', color: '#fff', cursor: 'pointer', userSelect: 'none' }}>
+                      <label htmlFor="useLuckyRelicChk" style={{ fontFamily: 'var(--font-mono)', fontSize: '13px', color: '#fff', cursor: 'pointer', userSelect: 'none' }}>
                         Gunakan Lucky Relic (+10% Success Rate)
                       </label>
                     </div>
 
                     {productionGM && (
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14, fontFamily: 'monospace', fontSize: '12px', color: '#5fe08a' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14, fontFamily: 'var(--font-mono)', fontSize: '12px', color: '#5fe08a' }}>
                         🏭 Production PT GM Active (+3% Success Rate)
                       </div>
                     )}
@@ -1085,7 +1085,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                     {/* Top: Next Rarity */}
                     <div style={{ position: 'absolute', top: 0, left: 88, width: 44, height: 44, borderRadius: 9, background: 'rgba(10,15,25,0.95)', border: '2px solid rgba(245,166,35,0.6)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 3 }}>
                       <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 7, fontWeight: 800, color: '#8a94a3', letterSpacing: '0.3px' }}>NEXT</span>
-                      <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 9, fontWeight: 800, color: '#f5a623' }}>
+                      <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 800, color: '#f5a623' }}>
                         {nextRarity}
                       </span>
                     </div>
@@ -1214,25 +1214,25 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                   </div>
 
                   {!hasWeapon ? (
-                    <div style={{ background: 'rgba(255, 68, 68, 0.1)', border: '1px solid #ff4444', color: '#ff4444', borderRadius: '8px', padding: '12px', fontFamily: 'monospace', fontSize: '13px', textAlign: 'center', lineHeight: 1.4 }}>
+                    <div style={{ background: 'rgba(255, 68, 68, 0.1)', border: '1px solid #ff4444', color: '#ff4444', borderRadius: '8px', padding: '12px', fontFamily: 'var(--font-mono)', fontSize: '13px', textAlign: 'center', lineHeight: 1.4 }}>
                       NO WEAPON EQUIPPED
                     </div>
                   ) : equippedWeapon.specialProperty === 'vampire' ? (
-                    <div style={{ background: 'rgba(95,224,138,0.1)', border: '1px solid #5fe08a', color: '#5fe08a', borderRadius: '8px', padding: '12px', fontFamily: 'monospace', fontSize: '13px', fontWeight: 'bold', textAlign: 'center' }}>
+                    <div style={{ background: 'rgba(95,224,138,0.1)', border: '1px solid #5fe08a', color: '#5fe08a', borderRadius: '8px', padding: '12px', fontFamily: 'var(--font-mono)', fontSize: '13px', fontWeight: 'bold', textAlign: 'center' }}>
                       VAMPIRIC EFFECT ALREADY ACTIVE
                     </div>
                   ) : !isEpicOrHigher(equippedWeapon) ? (
-                    <div style={{ background: 'rgba(255, 68, 68, 0.1)', border: '1px solid #ff4444', color: '#ff4444', borderRadius: '8px', padding: '12px', fontFamily: 'monospace', fontSize: '13px', textAlign: 'center', lineHeight: 1.4 }}>
+                    <div style={{ background: 'rgba(255, 68, 68, 0.1)', border: '1px solid #ff4444', color: '#ff4444', borderRadius: '8px', padding: '12px', fontFamily: 'var(--font-mono)', fontSize: '13px', textAlign: 'center', lineHeight: 1.4 }}>
                       WEAPON OF EPIC GRADE OR HIGHER REQUIRED
                     </div>
                   ) : (
                     <div>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 10 }}>
-                        <label style={{ fontFamily: 'monospace', fontSize: '13px', color: '#88aadd' }}>Select Sacrificial Weapon</label>
+                        <label style={{ fontFamily: 'var(--font-mono)', fontSize: '13px', color: '#88aadd' }}>Select Sacrificial Weapon</label>
                         <select
                           value={selectedSacrificeUid}
                           onChange={(e) => setSelectedSacrificeUid(e.target.value)}
-                          style={{ width: '100%', padding: '10px', background: '#0a1628', border: '1px solid #1a3a6a', borderRadius: '8px', color: '#e0f4ff', fontFamily: 'monospace', fontSize: '13px' }}
+                          style={{ width: '100%', padding: '10px', background: '#0a1628', border: '1px solid #1a3a6a', borderRadius: '8px', color: '#e0f4ff', fontFamily: 'var(--font-mono)', fontSize: '13px' }}
                         >
                           <option value="">-- Choose Weapon --</option>
                           {sacrificePool.map(it => (
@@ -1374,7 +1374,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                             <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: arc.color, marginBottom: 4 }}>{arc.name}</div>
                             <div style={{ display: 'flex', gap: 4, marginBottom: 8 }}>
                                {checkReqs.map((cr, idx) => (
-                                  <span key={idx} style={{ fontSize: 10, color: cr.owned >= cr.need ? '#5fe08a' : '#ff4444', fontFamily: 'monospace' }}>{cr.emoji} {cr.owned}/{cr.need}</span>
+                                  <span key={idx} style={{ fontSize: 12, color: cr.owned >= cr.need ? '#5fe08a' : '#ff4444', fontFamily: 'var(--font-mono)' }}>{cr.emoji} {cr.owned}/{cr.need}</span>
                                ))}
                             </div>
                             <button 
@@ -1384,7 +1384,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                                    else alert(`❌ ${res?.msg || 'Gagal craft'}`)
                                 }}
                                 disabled={!canCraft}
-                                style={{ width: '100%', padding: '6px 0', borderRadius: 4, background: canCraft ? arc.color : 'rgba(255,255,255,0.1)', color: canCraft ? '#000' : '#88aadd', border: 'none', fontFamily: 'var(--font-title)', fontSize: 10, fontWeight: 800, cursor: canCraft ? 'pointer' : 'not-allowed' }}
+                                style={{ width: '100%', padding: '6px 0', borderRadius: 4, background: canCraft ? arc.color : 'rgba(255,255,255,0.1)', color: canCraft ? '#000' : '#88aadd', border: 'none', fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 800, cursor: canCraft ? 'pointer' : 'not-allowed' }}
                             >
                                 CRAFT
                             </button>
@@ -1741,7 +1741,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: '#88aadd', textAlign: 'center', lineHeight: 1.6, maxWidth: '85%' }}>
                 "Looking for premium items? You've come to the right place. NXC accepted here."
               </div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: '#667799', textAlign: 'center' }}>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#667799', textAlign: 'center' }}>
                 Saldo NXC kamu: <strong style={{ color: '#ffd700' }}>{(player.resources?.nxc || 0).toLocaleString()} NXC</strong>
               </div>
               <button
@@ -1784,14 +1784,14 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                   style={{ flex: 1, padding: 8, background: 'rgba(0, 229, 255, 0.08)', border: '1px solid rgba(0, 229, 255, 0.4)', borderRadius: 6, color: '#00e5ff', fontFamily: 'var(--font-title)', fontSize: 11, fontWeight: 'bold', cursor: 'pointer' }}
                 >
                   🎒 UPGRADE BAG (+20 Slot)<br/>
-                  <span style={{ fontSize: 9, color: '#aaa', fontWeight: 'normal' }}>{player.inventorySlots || 100}/300 Slot · 1M CRD</span>
+                  <span style={{ fontSize: 11, color: '#aaa', fontWeight: 'normal' }}>{player.inventorySlots || 100}/300 Slot · 1M CRD</span>
                 </button>
                 <button 
                   onClick={upgradeWarehouseSlots}
                   style={{ flex: 1, padding: 8, background: 'rgba(245, 166, 35, 0.08)', border: '1px solid rgba(245, 166, 35, 0.4)', borderRadius: 6, color: '#f5a623', fontFamily: 'var(--font-title)', fontSize: 11, fontWeight: 'bold', cursor: 'pointer' }}
                 >
                   📦 UPGRADE VAULT (+50 Slot)<br/>
-                  <span style={{ fontSize: 9, color: '#aaa', fontWeight: 'normal' }}>{player.warehouseSlots || 200}/600 Slot · 2.5M CRD</span>
+                  <span style={{ fontSize: 11, color: '#aaa', fontWeight: 'normal' }}>{player.warehouseSlots || 200}/600 Slot · 2.5M CRD</span>
                 </button>
               </div>
 
@@ -1801,7 +1801,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                 <div style={{ flex: 1, display: 'flex', flexDirection: 'column', background: 'rgba(0,0,0,0.2)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 8, padding: 8, minHeight: 0 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: 6, marginBottom: 8 }}>
                     <span style={{ fontSize: 11, fontWeight: 'bold', color: '#00e5ff', fontFamily: 'var(--font-title)' }}>🎒 INVENTORY</span>
-                    <span style={{ fontSize: 10, color: '#7ab0d0', fontFamily: 'var(--font-mono)' }}>{player.inventory.length}/{(player.inventorySlots || 100)}</span>
+                    <span style={{ fontSize: 12, color: '#7ab0d0', fontFamily: 'var(--font-mono)' }}>{player.inventory.length}/{(player.inventorySlots || 100)}</span>
                   </div>
                   <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 6 }} className="no-scrollbar">
                     {player.inventory.map((item) => (
@@ -1814,7 +1814,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                         <span style={{ fontSize: 20 }}>{item.emoji}</span>
                         <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
                           <span style={{ fontSize: 11, fontWeight: 'bold', color: '#fff' }}>{item.name} {(item.count || item.qty) > 1 ? `(x${item.count || item.qty})` : ''}</span>
-                          <span style={{ fontSize: 9, color: '#aaa' }}>{item.type} {item.enhancement ? `+${item.enhancement}` : ''}</span>
+                          <span style={{ fontSize: 11, color: '#aaa' }}>{item.type} {item.enhancement ? `+${item.enhancement}` : ''}</span>
                         </div>
                       </div>
                     ))}
@@ -1828,7 +1828,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                 <div style={{ flex: 1, display: 'flex', flexDirection: 'column', background: 'rgba(0,0,0,0.2)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 8, padding: 8, minHeight: 0 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: 6, marginBottom: 8 }}>
                     <span style={{ fontSize: 11, fontWeight: 'bold', color: '#f5a623', fontFamily: 'var(--font-title)' }}>📦 WAREHOUSE</span>
-                    <span style={{ fontSize: 10, color: '#7ab0d0', fontFamily: 'var(--font-mono)' }}>{(player.warehouse || []).length}/{(player.warehouseSlots || 200)}</span>
+                    <span style={{ fontSize: 12, color: '#7ab0d0', fontFamily: 'var(--font-mono)' }}>{(player.warehouse || []).length}/{(player.warehouseSlots || 200)}</span>
                   </div>
                   <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 6 }} className="no-scrollbar">
                     {(player.warehouse || []).map((item) => (
@@ -1841,7 +1841,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                         <span style={{ fontSize: 20 }}>{item.emoji}</span>
                         <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
                           <span style={{ fontSize: 11, fontWeight: 'bold', color: '#fff' }}>{item.name} {(item.count || item.qty) > 1 ? `(x${item.count || item.qty})` : ''}</span>
-                          <span style={{ fontSize: 9, color: '#aaa' }}>{item.type} {item.enhancement ? `+${item.enhancement}` : ''}</span>
+                          <span style={{ fontSize: 11, color: '#aaa' }}>{item.type} {item.enhancement ? `+${item.enhancement}` : ''}</span>
                         </div>
                       </div>
                     ))}

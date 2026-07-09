@@ -1,195 +1,61 @@
 {
   "celestra": {
-    "guardian": {
-      "str": 12,
-      "dex": 8,
-      "int": 4,
-      "vit": 6
-    },
-    "mystic_archer": {
-      "str": 6,
-      "dex": 14,
-      "int": 6,
-      "vit": 4
-    },
-    "spirit_knight": {
-      "str": 12,
-      "dex": 8,
-      "int": 4,
-      "vit": 6
-    },
-    "craftsman": {
-      "str": 12,
-      "dex": 8,
-      "int": 4,
-      "vit": 6
-    },
-    "moon_ranger": {
-      "str": 6,
-      "dex": 14,
-      "int": 6,
-      "vit": 4
-    },
-    "caster": {
-      "str": 2,
-      "dex": 6,
-      "int": 16,
-      "vit": 6
-    },
-    "summoner": {
-      "str": 2,
-      "dex": 6,
-      "int": 16,
-      "vit": 6
-    },
-    "lumina_paladin": {
-      "str": 12,
-      "dex": 8,
-      "int": 4,
-      "vit": 6
-    },
-    "artist": {
-      "str": 6,
-      "dex": 10,
-      "int": 10,
-      "vit": 4
-    },
-    "star_seeker": {
-      "str": 12,
-      "dex": 8,
-      "int": 4,
-      "vit": 6
-    },
-    "warlock": {
-      "str": 2,
-      "dex": 6,
-      "int": 16,
-      "vit": 6
-    },
-    "dark_priest": {
-      "str": 2,
-      "dex": 6,
-      "int": 16,
-      "vit": 6
-    },
-    "grazier": {
-      "str": 2,
-      "dex": 6,
-      "int": 16,
-      "vit": 6
-    }
+    "sentinel": { "str": 12, "dex": 8, "int": 4, "vit": 6 },
+    "pathfinder": { "str": 6, "dex": 14, "int": 6, "vit": 4 },
+    "oracle": { "str": 2, "dex": 6, "int": 16, "vit": 6 },
+    "arcanist": { "str": 2, "dex": 6, "int": 16, "vit": 6 },
+    
+    "warden": { "str": 24, "dex": 16, "int": 8, "vit": 12 },
+    "windrunner": { "str": 12, "dex": 28, "int": 12, "vit": 8 },
+    "celestial_oracle": { "str": 4, "dex": 12, "int": 32, "vit": 12 },
+    "rune_caster": { "str": 4, "dex": 12, "int": 32, "vit": 12 },
+    
+    "knight": { "str": 48, "dex": 32, "int": 16, "vit": 24 },
+    "shadow_hunter": { "str": 24, "dex": 56, "int": 24, "vit": 16 },
+    "conjurer": { "str": 8, "dex": 24, "int": 64, "vit": 24 },
+    "mystic": { "str": 8, "dex": 24, "int": 64, "vit": 24 },
+    
+    "blademaster": { "str": 96, "dex": 64, "int": 32, "vit": 48 },
+    "stargazer": { "str": 48, "dex": 112, "int": 48, "vit": 32 },
+    "divine_summoner": { "str": 16, "dex": 48, "int": 128, "vit": 48 },
+    "archmage": { "str": 16, "dex": 48, "int": 128, "vit": 48 }
   },
   "arctron": {
-    "cadet": {
-      "str": 14,
-      "dex": 6,
-      "int": 2,
-      "vit": 8
-    },
-    "gunner": {
-      "str": 8,
-      "dex": 14,
-      "int": 2,
-      "vit": 6
-    },
-    "striker": {
-      "str": 10,
-      "dex": 10,
-      "int": 2,
-      "vit": 8
-    },
-    "iron_trooper": {
-      "str": 14,
-      "dex": 6,
-      "int": 2,
-      "vit": 8
-    },
-    "siege_gunner": {
-      "str": 8,
-      "dex": 14,
-      "int": 2,
-      "vit": 6
-    },
-    "cyber_assassin": {
-      "str": 14,
-      "dex": 6,
-      "int": 2,
-      "vit": 8
-    },
-    "iron_vanguard": {
-      "str": 14,
-      "dex": 6,
-      "int": 2,
-      "vit": 8
-    },
-    "nova_destroyer": {
-      "str": 8,
-      "dex": 14,
-      "int": 2,
-      "vit": 6
-    },
-    "omega_reaper": {
-      "str": 14,
-      "dex": 6,
-      "int": 2,
-      "vit": 8
-    }
+    "warrior": { "str": 14, "dex": 6, "int": 2, "vit": 8 },
+    "ranger": { "str": 8, "dex": 14, "int": 2, "vit": 6 },
+    "technician": { "str": 10, "dex": 10, "int": 2, "vit": 8 },
+    
+    "vanguard": { "str": 28, "dex": 12, "int": 4, "vit": 16 },
+    "marksman": { "str": 16, "dex": 28, "int": 4, "vit": 12 },
+    "architect": { "str": 20, "dex": 20, "int": 4, "vit": 16 },
+    
+    "juggernaut": { "str": 56, "dex": 24, "int": 8, "vit": 32 },
+    "railgunner": { "str": 32, "dex": 56, "int": 8, "vit": 24 },
+    "core_engineer": { "str": 40, "dex": 40, "int": 8, "vit": 32 },
+    
+    "dreadnought": { "str": 112, "dex": 48, "int": 16, "vit": 64 },
+    "annihilator": { "str": 64, "dex": 112, "int": 16, "vit": 48 },
+    "cybermancer": { "str": 80, "dex": 80, "int": 16, "vit": 64 }
   },
   "bionex": {
-    "guardian": {
-      "hp": 210,
-      "atk": 27,
-      "def": 22
-    },
-    "marksman": {
-      "hp": 175,
-      "atk": 33,
-      "def": 15
-    },
-    "engineer": {
-      "hp": 175,
-      "atk": 25,
-      "def": 17
-    },
-    "psion": {
-      "hp": 165,
-      "atk": 31,
-      "def": 14
-    }
-  },
-  "sentinel": {
-    "hp": 195,
-    "atk": 29,
-    "def": 20
-  },
-  "pathfinder": {
-    "hp": 170,
-    "atk": 34,
-    "def": 14
-  },
-  "oracle": {
-    "hp": 160,
-    "atk": 23,
-    "def": 15
-  },
-  "arcanist": {
-    "hp": 165,
-    "atk": 32,
-    "def": 13
-  },
-  "destroyer": {
-    "hp": 210,
-    "atk": 27,
-    "def": 22
-  },
-  "gunner": {
-    "hp": 175,
-    "atk": 33,
-    "def": 15
-  },
-  "engineer_arctron": {
-    "hp": 180,
-    "atk": 25,
-    "def": 18
+    "guardian": { "str": 12, "dex": 8, "int": 4, "vit": 6 },
+    "marksman": { "str": 6, "dex": 14, "int": 6, "vit": 4 },
+    "engineer": { "str": 10, "dex": 10, "int": 2, "vit": 8 },
+    "psion": { "str": 2, "dex": 6, "int": 16, "vit": 6 },
+    
+    "centurion": { "str": 24, "dex": 16, "int": 8, "vit": 12 },
+    "revenant": { "str": 12, "dex": 28, "int": 12, "vit": 8 },
+    "mechanist": { "str": 20, "dex": 20, "int": 4, "vit": 16 },
+    "esper": { "str": 4, "dex": 12, "int": 32, "vit": 12 },
+    
+    "protector": { "str": 48, "dex": 32, "int": 16, "vit": 24 },
+    "deadeye": { "str": 24, "dex": 56, "int": 24, "vit": 16 },
+    "techmaster": { "str": 40, "dex": 40, "int": 8, "vit": 32 },
+    "ascendant": { "str": 8, "dex": 24, "int": 64, "vit": 24 },
+    
+    "imperator": { "str": 96, "dex": 64, "int": 32, "vit": 48 },
+    "predator": { "str": 48, "dex": 112, "int": 48, "vit": 32 },
+    "overseer": { "str": 80, "dex": 80, "int": 16, "vit": 64 },
+    "transcendent": { "str": 16, "dex": 48, "int": 128, "vit": 48 }
   }
 }

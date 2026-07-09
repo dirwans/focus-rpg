@@ -143,7 +143,7 @@ function WorldMapModal({ onClose }) {
           style={{
             width: 32, height: 32, borderRadius: '50%',
             background: 'rgba(255, 60, 60, 0.12)', border: '1.5px solid rgba(255, 60, 60, 0.4)',
-            color: '#ff4444', fontFamily: 'monospace', fontSize: 16, fontWeight: 900,
+            color: '#ff4444', fontFamily: 'var(--font-mono)', fontSize: 16, fontWeight: 900,
             cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
             boxShadow: '0 0 8px rgba(255,60,60,0.1)'
           }}
@@ -253,8 +253,8 @@ function WorldMapModal({ onClose }) {
                 border: isSelected ? `1.5px solid ${activeColor}` : '1px solid rgba(255,255,255,0.15)',
                 borderRadius: '4px',
                 padding: '2px 6px',
-                fontFamily: 'monospace',
-                fontSize: 10,
+                fontFamily: 'var(--font-mono)',
+                fontSize: 12,
                 fontWeight: isSelected ? 'bold' : 'normal',
                 color: mapLocked ? '#7a8593' : '#fff',
                 textShadow: isSelected ? `0 0 5px ${activeColor}` : 'none',
@@ -288,16 +288,16 @@ function WorldMapModal({ onClose }) {
             }}>
               MAP {selectedNode + 1} — {selectedSector.name}
             </div>
-            <div style={{ fontFamily: 'monospace', fontSize: 12, color: '#7ab0d0', marginTop: 2 }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#7ab0d0', marginTop: 2 }}>
               Level Bracket: Lv. {selectedSector.minLevel} - {selectedSector.maxLevel}
             </div>
           </div>
           
           <span style={{
-            fontSize: 11, background: isLocked ? 'rgba(255,255,255,0.06)' : (isActive ? `${activeColor}20` : 'rgba(0, 229, 255, 0.12)'),
+            fontSize: 12, background: isLocked ? 'rgba(255,255,255,0.06)' : (isActive ? `${activeColor}20` : 'rgba(0, 229, 255, 0.12)'),
             color: isLocked ? '#8a94a3' : (isActive ? activeColor : '#00e5ff'),
             border: `1.5px solid ${isLocked ? '#8a94a3' : (isActive ? activeColor : '#00e5ff')}`,
-            borderRadius: '6px', padding: '3px 10px', fontWeight: 900, fontFamily: 'monospace'
+            borderRadius: '6px', padding: '3px 10px', fontWeight: 900, fontFamily: 'var(--font-mono)'
           }}>
             {isLocked ? '🔒 LOCKED' : (isActive ? 'ACTIVE' : 'SELECTABLE')}
           </span>
@@ -308,7 +308,7 @@ function WorldMapModal({ onClose }) {
           <div style={{
             background: 'rgba(255, 160, 60, 0.1)', border: '1px solid rgba(255, 160, 60, 0.3)',
             borderRadius: '8px', padding: '8px 12px', color: '#ffcc66', fontSize: 12,
-            fontFamily: 'monospace', display: 'flex', alignItems: 'center', gap: 8
+            fontFamily: 'var(--font-mono)', display: 'flex', alignItems: 'center', gap: 8
           }}>
             <span>⚠️</span>
             <span>Recommended Level is {mapCoordinates[selectedNode].minLevel} (Current: Level {player.level}). You can enter, but enemies are dangerous!</span>
@@ -318,9 +318,9 @@ function WorldMapModal({ onClose }) {
         {/* Row 3: Monsters list (Dynamic layout) */}
         <div>
           <div style={{
-            fontSize: 11, fontWeight: 'bold', color: '#5f8da3',
+            fontSize: 13, fontWeight: 800, color: '#5f8da3',
             textTransform: 'uppercase', letterSpacing: 1, marginBottom: 6,
-            fontFamily: "'Orbitron', sans-serif"
+            fontFamily: 'var(--font-title)'
           }}>
             Zone Inhabitants
           </div>
@@ -330,7 +330,7 @@ function WorldMapModal({ onClose }) {
                 fontSize: 13, background: 'rgba(255,255,255,0.03)',
                 padding: '5px 10px', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.06)',
                 color: isLocked ? '#7a8593' : '#dde2ea', display: 'inline-flex', alignItems: 'center', gap: 6,
-                fontFamily: 'monospace'
+                fontFamily: 'var(--font-mono)'
               }}>
                 <span>{m.emoji}</span>
                 <span>{m.name}</span>
@@ -340,7 +340,7 @@ function WorldMapModal({ onClose }) {
               fontSize: 13, background: 'rgba(255, 100, 0, 0.05)',
               padding: '5px 10px', borderRadius: '6px', border: '1px solid rgba(255, 100, 0, 0.25)',
               color: isLocked ? '#7a8593' : '#ff985a', display: 'inline-flex', alignItems: 'center', gap: 6,
-              fontFamily: 'monospace', fontWeight: 'bold'
+              fontFamily: 'var(--font-mono)', fontWeight: 'bold'
             }}>
               <span>💀</span>
               <span>{selectedSector.boss.name} (Boss)</span>
@@ -653,7 +653,7 @@ export default function Main() {
           padding: '4px 12px', borderRadius: 20, width: 'fit-content',
           background: isScreenActive ? 'rgba(0,255,136,0.1)' : 'rgba(138,148,163,0.1)',
           border: `1px solid ${isScreenActive ? 'rgba(0,255,136,0.4)' : 'rgba(138,148,163,0.3)'}`,
-          fontFamily: 'var(--font-mono)', fontSize: 11, fontWeight: 700,
+          fontFamily: 'var(--font-mono)', fontSize: 13, fontWeight: 700,
           color: isScreenActive ? '#00ff88' : '#8a94a3',
         }}>
           {isScreenActive ? '🎮 ACTIVE MODE (+10% EXP, +5% Drop)' : '📱 IDLE MODE'}
@@ -809,7 +809,7 @@ export default function Main() {
 
         {/* 5. Session summary (Bottom-most bar) */}
         <div style={styles.sessionSummaryActive}>
-          <span style={{ color: '#fff', fontFamily: 'monospace', fontSize: 13, fontWeight: 700, textShadow: '0 0 4px #000' }}>
+          <span style={{ color: '#fff', fontFamily: 'var(--font-mono)', fontSize: 13, fontWeight: 700, textShadow: '0 0 4px #000' }}>
             ⚔️ {t('kills_label', { kills: battle.kills })} &nbsp;|&nbsp; <span style={{ color: '#f5a623' }}>+{battle.sessionCrd}⬡</span> &nbsp;|&nbsp; <span style={{ color: '#00e5ff' }}>+{battle.sessionExp} Menit</span>
           </span>
         </div>
@@ -1089,7 +1089,7 @@ const styles = {
   spriteLabel: { fontFamily: 'var(--font-title)', fontSize: 13, letterSpacing: 0.5, color: '#7ab0d0', textTransform: 'uppercase', fontWeight: 800, background: 'rgba(3, 8, 20, 0.65)', padding: '1px 6px', borderRadius: 4, border: '1px solid rgba(0, 229, 255, 0.15)' },
   timerDisplay: { display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', zIndex: 2, marginTop: 12 },
   timerDisplayActiveCompact: { display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', zIndex: 2, margin: '12px 0 6px 0', justifyContent: 'center', flexShrink: 0 },
-  activeTimerDigits: { fontSize: 44, fontFamily: 'monospace', fontWeight: 900, color: '#fff', textShadow: '0 0 10px var(--neon-glow), 0 0 20px var(--neon-glow)' },
+  activeTimerDigits: { fontSize: 44, fontFamily: 'var(--font-mono)', fontWeight: 900, color: '#fff', textShadow: '0 0 10px var(--neon-glow), 0 0 20px var(--neon-glow)' },
   battleLog: { marginTop: 10, width: '100%', display: 'flex', flexDirection: 'column', gap: 4, background: 'rgba(0,0,0,0.35)', padding: 8, borderRadius: 8, border: '1px solid rgba(0, 229, 255, 0.1)' },
   battleLogActive: { width: '90%', display: 'flex', flexDirection: 'column', gap: 6, background: 'rgba(3, 8, 20, 0.9)', padding: 12, borderRadius: 10, border: '1.5px solid var(--neon-glow)', margin: '12px auto', boxShadow: '0 0 10px rgba(0,0,0,0.5)', flexShrink: 0 },
   combatStats: { margin: '0 16px 6px', padding: 8, display: 'flex', justifyContent: 'space-around', flexShrink: 0 },

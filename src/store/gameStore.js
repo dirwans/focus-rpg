@@ -424,7 +424,9 @@ function getMinutesToNextLevel(level) {
   if (level <= 20) return 10
   if (level <= 30) return 20
   if (level === 31) return 30
-  if (level <= 41) return 180
+  if (level <= 41) {
+    return 30 + (level - 31) * 15
+  }
   if (level <= 54) return 480
   if (level <= 65) return 960
   return 1440
@@ -462,13 +464,37 @@ function spawnEnemy(sectorIdx, playerLevel, isDungeon = false) {
   const isMaxLevelForMap = playerLevel === maxLevels[sectorIdx]
 
   if (isMaxLevelForMap) {
-    if (isPitBossSpawn) {
-      return { mob: sector.pitBoss, isBoss: true, isPitBoss: true, isCulprit: false, hp: sector.pitBoss.hp }
+    const isCulprit = Math.random() < 0.20
+    const targetBoss = isPitBossSpawn ? sector.pitBoss : sector.boss
+    const isPit = !!isPitBossSpawn
+    if (isCulprit) {
+      const culpritBoss = {
+        ...targetBoss,
+        name: 'Culprit ' + targetBoss.name,
+        hp: targetBoss.hp * 2,
+        atk: targetBoss.atk * 2,
+        expReward: targetBoss.expReward * 2,
+        crdReward: targetBoss.crdReward * 2
+      }
+      return { mob: culpritBoss, isBoss: true, isPitBoss: isPit, isCulprit: true, hp: culpritBoss.hp }
     }
-    return { mob: sector.boss, isBoss: true, isPitBoss: false, isCulprit: false, hp: sector.boss.hp }
+    return { mob: targetBoss, isBoss: true, isPitBoss: isPit, isCulprit: false, hp: targetBoss.hp }
   }
 
   const baseMob = randomMob(sectorIdx, false)
+  const isElite = sectorIdx >= 4 && Math.random() < 0.15
+  if (isElite) {
+    const eliteMob = {
+      ...baseMob,
+      name: 'Elite ' + baseMob.name,
+      hp: Math.floor(baseMob.hp * 1.5),
+      atk: Math.floor(baseMob.atk * 1.5),
+      expReward: Math.floor(baseMob.expReward * 1.5),
+      crdReward: Math.floor(baseMob.crdReward * 1.5)
+    }
+    return { mob: eliteMob, isBoss: false, isPitBoss: false, isCulprit: false, hp: eliteMob.hp }
+  }
+
   const isCulprit = Math.random() < 0.20
   if (isCulprit) {
     const culpritMob = {
@@ -536,9 +562,10 @@ function computeRewards(player, stats, mode, minutes, selectedZone = 'world') {
     else activeAtk = Math.max(stats.meleeAtk, stats.rangedAtk)
 
     // Calculate Hit Rate (vs 5% base enemy dodge)
-    const hitRate = Math.min(1.0, 0.95 + (stats.evasion || 0))
+    const hitRate = Math.max(0.05, Math.min(1.0, 0.95 - (stats.dodge || 0)))
     // Calculate average damage per hit
-    const critMult = 1.0 + (stats.crit * 0.5) // Crits deal 1.5x
+    const critRate = Math.min(1.0, stats.crit || 0)
+    const critMult = 1.0 + (critRate * 0.5) // Crits deal 1.5x
     const dps = Math.max(1, activeAtk - avgDef) * critMult * hitRate
     const secPerKill = Math.max(2, avgHp / dps)
     const kills = Math.floor(elapsedSec / secPerKill)
@@ -587,8 +614,9 @@ function computeRewards(player, stats, mode, minutes, selectedZone = 'world') {
   else if (group === 'mage') activeAtk = stats.forceAtk
   else activeAtk = Math.max(stats.meleeAtk, stats.rangedAtk)
 
-  const hitRate = Math.min(1.0, 0.95 + (stats.evasion || 0))
-  const critMult = 1.0 + (stats.crit * 0.5)
+  const hitRate = Math.max(0.05, Math.min(1.0, 0.95 - (stats.dodge || 0)))
+  const critRate = Math.min(1.0, stats.crit || 0)
+  const critMult = 1.0 + (critRate * 0.5)
   const dps = Math.max(1, activeAtk - avgDef) * critMult * hitRate
   const secPerKill = Math.max(2, avgHp / dps)
   const kills = Math.floor(elapsedSec / secPerKill)
@@ -622,27 +650,32 @@ function computeRewards(player, stats, mode, minutes, selectedZone = 'world') {
 
 export function getPlayerClassGroup(jobId, raceId) {
   const job = jobId ? jobId.toLowerCase() : '';
-  const race = raceId ? raceId.toLowerCase() : '';
   
-  if (job.includes('sentinel') || job.includes('warden') || job.includes('knight') || job.includes('blademaster') ||
-      job.includes('warrior') || job.includes('vanguard') || job.includes('juggernaut') || job.includes('dreadnought') ||
-      job.includes('guardian') || job.includes('centurion') || job.includes('protector') || job.includes('imperator')) {
-    return 'warrior';
-  }
-  if (job.includes('pathfinder') || job.includes('windrunner') || job.includes('shadow_hunter') || job.includes('stargazer') ||
-      job.includes('ranger') || job.includes('marksman') || job.includes('railgunner') || job.includes('annihilator') ||
-      job.includes('revenant') || job.includes('deadeye') || job.includes('predator')) {
-    return 'ranger';
-  }
-  if (job.includes('arcanist') || job.includes('rune_caster') || job.includes('mystic') || job.includes('archmage') ||
-      job.includes('psion') || job.includes('esper') || job.includes('ascendant') || job.includes('transcendent')) {
-    return 'mage';
-  }
-  if (job.includes('oracle') || job.includes('celestial_oracle') || job.includes('conjurer') || job.includes('divine_summoner') ||
-      job.includes('technician') || job.includes('architect') || job.includes('core_engineer') || job.includes('cybermancer') ||
-      job.includes('mechanist') || job.includes('techmaster') || job.includes('overseer')) {
-    return 'specialist';
-  }
+  const warriors = [
+    'sentinel', 'warden', 'knight', 'blademaster',
+    'warrior', 'vanguard', 'juggernaut', 'dreadnought',
+    'guardian', 'centurion', 'protector', 'imperator'
+  ];
+  const rangers = [
+    'pathfinder', 'windrunner', 'shadow_hunter', 'stargazer',
+    'ranger', 'marksman', 'railgunner', 'annihilator',
+    'revenant', 'deadeye', 'predator'
+  ];
+  const mages = [
+    'arcanist', 'rune_caster', 'mystic', 'archmage',
+    'psion', 'esper', 'ascendant', 'transcendent'
+  ];
+  const specialists = [
+    'oracle', 'celestial_oracle', 'conjurer', 'divine_summoner',
+    'technician', 'architect', 'core_engineer', 'cybermancer',
+    'engineer', 'mechanist', 'techmaster', 'overseer'
+  ];
+
+  if (warriors.includes(job)) return 'warrior';
+  if (rangers.includes(job)) return 'ranger';
+  if (mages.includes(job)) return 'mage';
+  if (specialists.includes(job)) return 'specialist';
+  
   return 'novice';
 }
 export function getKillsPerPT(level) {
@@ -806,7 +839,9 @@ export function advancePT(ptState, mode, minutes, race, job, level, hasShield, k
   // Disable force/special for arctron
   if (race === 'arctron') {
     rates.force = 0
-    rates.special = 0
+    if (group !== 'specialist') {
+      rates.special = 0
+    }
   }
 
   const actions = mode === 'fight' ? (kills || 0) : Math.max(0, Math.floor(minutes * 15))
@@ -2186,14 +2221,16 @@ export const useGameStore = create(
         }
         let nextMob = mob, nextIsBoss = battle.isBoss, nextMaxHp = battle.enemyMaxHp
 
+        let nextPlayerHp = battle.playerHp
         if (player.equipment?.weapon?.specialProperty === 'vampire') {
           const lifesteal = Math.floor(dmgToEnemy * 0.10)
+          const playerMaxHp = get().getStats().hp
+          nextPlayerHp = Math.min(playerMaxHp, nextPlayerHp + lifesteal)
           if (newLog.length > 7) newLog = newLog.slice(-7)
           newLog.push(`🩸 Vampire! Menyedot +${lifesteal} HP dari ${mob.emoji} ${mob.name}!`)
         }
 
         // 4. Enemy attacks player turn
-        let nextPlayerHp = battle.playerHp
         let newDeaths = battle.deaths || 0
         let nextRespawnTicks = 0
 
@@ -2245,18 +2282,18 @@ export const useGameStore = create(
           const playerMaxHp = battle.playerMaxHp || get().getStats().hp
           // Trigger heal only when health is critical (below 35%)
           if (nextPlayerHp > 0 && nextPlayerHp < playerMaxHp * 0.35) {
-            const hasSkill = ['acolyte', 'eidolon_caller', 'high_summoner', 'guardian', 'lumina_paladin', 'technician', 'mechanist', 'war_engineer', 'bionex_engineer', 'craftsman', 'mental_smith', 'chandra', 'holy_chandra'].includes(player.job)
+            const hasSkill = ['oracle', 'celestial_oracle', 'conjurer', 'divine_summoner', 'technician', 'architect', 'core_engineer', 'cybermancer', 'engineer', 'mechanist', 'techmaster', 'overseer'].includes(player.job)
             
             if (hasSkill) {
-              if (nextPlayerFp >= 50) {
-                // Cast healing skill
-                nextPlayerFp -= 50
-                const healAmount = Math.floor(playerMaxHp * 0.35)
-                nextPlayerHp = Math.min(playerMaxHp, nextPlayerHp + healAmount)
-                
-                const skillName = ['technician', 'mechanist', 'war_engineer', 'bionex_engineer', 'craftsman', 'mental_smith'].includes(player.job) ? 'Repair Matrix' : 'Spiritual Heal'
-                if (newLog.length > 7) newLog = newLog.slice(-7)
-                newLog.push(`✨ [Skill] Pilot menggunakan ${skillName}! (+${healAmount} HP, -50 FP)`)
+               if (nextPlayerFp >= 50) {
+                 // Cast healing skill
+                 nextPlayerFp -= 50
+                 const healAmount = Math.floor(playerMaxHp * 0.35)
+                 nextPlayerHp = Math.min(playerMaxHp, nextPlayerHp + healAmount)
+                 
+                 const skillName = ['technician', 'architect', 'core_engineer', 'cybermancer', 'engineer', 'mechanist', 'techmaster', 'overseer'].includes(player.job) ? 'Repair Matrix' : 'Spiritual Heal'
+                 if (newLog.length > 7) newLog = newLog.slice(-7)
+                 newLog.push(`✨ [Skill] Pilot menggunakan ${skillName}! (+${healAmount} HP, -50 FP)`)
               } else if (player.settings?.autoHpPotion === 'ON') {
                 // Try fallback to potion if FP is empty
                 const hpPotIdx = player.inventory.findIndex(it => it.id === 'pot_hp')
@@ -2467,7 +2504,7 @@ export const useGameStore = create(
         const mailbox = player.mailbox ? [...player.mailbox] : []
         let dropLog = ''
 
-        const pushOrMail = (item, logString) => {
+        const pushOrMail = (item, logString, count = 1) => {
           let canStack = false
           if (isStackableItem(item)) {
             for (let s = 0; s < newInventory.length; s++) {
@@ -2478,10 +2515,10 @@ export const useGameStore = create(
             }
           }
           if (canStack || newInventory.length < invSlots) {
-            newInventory = addToInventory(newInventory, item, 1)
+            newInventory = addToInventory(newInventory, item, count)
             dropLog += logString
           } else {
-            const finalItem = { ...item, count: 1, qty: 1 }
+            const finalItem = { ...item, count, qty: count }
             mailbox.push({
               id: Math.random().toString(36).slice(2) + Date.now().toString(36),
               type: 'Inventory Overflow',
@@ -2557,9 +2594,9 @@ export const useGameStore = create(
 
             // Boss CRD bonus
             const DUNGEON_BOSS_CRD = [
-              [500000, 800000],       // Echo Burrow
-              [2000000, 3500000],     // Infernal Forge
-              [7000000, 10000000],    // Trinity Core Chamber
+              [50000, 80000],       // Echo Burrow
+              [200000, 350000],     // Infernal Forge
+              [700000, 1000000],    // Trinity Core Chamber
             ]
             const brdRange = DUNGEON_BOSS_CRD[Math.min(dungeonIdx, 2)]
             const bossCrd = Math.floor(brdRange[0] + seededFrac(timer.startedAt + 202) * (brdRange[1] - brdRange[0]))
@@ -2639,20 +2676,40 @@ export const useGameStore = create(
             }
           } else {
             // ── NORMAL MONSTER DROP ──
-            // HP Potion: 25% per session
-            if (finalKills > 0 && seededFrac(timer.startedAt + 50) < 0.25 + dropRateBonus) {
+            // HP Potion: 0.2% chance per kill
+            let hpCount = 0
+            for (let i = 0; i < finalKills; i++) {
+              if (seededFrac(timer.startedAt + 50 + i) < 0.002 + dropRateBonus / 100) {
+                hpCount++
+              }
+            }
+            if (hpCount > 0) {
               const hpPotion = pickMat('pot_hp')
-              if (hpPotion) { pushOrMail({ ...hpPotion, uid: Date.now() + 50 }, `\n❤️ HP Potion [S]`) }
+              if (hpPotion) { pushOrMail(hpPotion, `\n❤️ HP Potion [S] ×${hpCount}`, hpCount) }
             }
-            // FP Potion: 10% per session
-            if (finalKills > 0 && seededFrac(timer.startedAt + 53) < 0.10 + dropRateBonus) {
+
+            // FP Potion: 0.1% chance per kill
+            let fpCount = 0
+            for (let i = 0; i < finalKills; i++) {
+              if (seededFrac(timer.startedAt + 53 + i) < 0.001 + dropRateBonus / 200) {
+                fpCount++
+              }
+            }
+            if (fpCount > 0) {
               const fpPotion = pickMat('pot_fp')
-              if (fpPotion) { pushOrMail({ ...fpPotion, uid: Date.now() + 53 }, `\n🔷 FP Potion [S]`) }
+              if (fpPotion) { pushOrMail(fpPotion, `\n🔷 FP Potion [S] ×${fpCount}`, fpCount) }
             }
-            // Common Equipment: 10% per session
-            if (finalKills > 0 && seededFrac(timer.startedAt + 51) < 0.10 + dropRateBonus) {
-              const commonEquip = pickItem(RARITY_COMMON, timer.startedAt + 52)
-              if (commonEquip) { pushOrMail({ ...commonEquip, uid: Date.now() + 51 }, `\n⚪ Common Drop: ${commonEquip.emoji} ${commonEquip.name}`) }
+
+            // Common Equipment: 0.1% chance per kill (max 3 items to prevent inventory flood)
+            let equipCount = 0
+            for (let i = 0; i < finalKills && equipCount < 3; i++) {
+              if (seededFrac(timer.startedAt + 51 + i) < 0.001 + dropRateBonus / 200) {
+                const commonEquip = pickItem(RARITY_COMMON, timer.startedAt + 52 + i)
+                if (commonEquip) {
+                  pushOrMail({ ...commonEquip, uid: Date.now() + 51 + i }, `\n⚪ Common Drop: ${commonEquip.emoji} ${commonEquip.name}`)
+                  equipCount++
+                }
+              }
             }
           }
         }
@@ -3266,10 +3323,10 @@ export const useGameStore = create(
 
         // Calculate final Crit and Dodge rates (base + tier + gear)
         const baseCrit = player.race === 'celestra' ? 15 : 12
-        const critRate = (baseCrit + tierCrit + critBonus) / 100
+        const critRate = Math.min(1.0, (baseCrit + tierCrit + critBonus) / 100)
         // Race dodge modifier: Celestra (agile/mystic) +5%, Bionex (tech/balanced) +2%, Arctron 0%
         const raceDodgeBonus = player.race === 'celestra' ? 5 : player.race === 'bionex' ? 2 : 0
-        const dodgeRate = (5 + raceDodgeBonus + tierDodge) / 100
+        const dodgeRate = Math.min(0.80, (5 + raceDodgeBonus + tierDodge) / 100)
 
         return {
           meleeAtk: Math.floor(atk * (1 + (pt.melee?.val || 1) * 0.015) + (str * 3)),
