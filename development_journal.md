@@ -1648,15 +1648,14 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ### 🛡️ Milestone 124: Bionex Guardian (Lv.42) Gear Assets Replacement
 - **Assets Extraction & Processing**:
-  - Cropped and extracted all 5 individual gear assets from the composite sheet reference `lv42bionexguardiarmorsets.png` (matching grid row coordinates).
-  - Processed each cropped item using the AI `rembg` background remover to cleanly erase solid backgrounds and generate transparent PNG assets.
-  - Applied contour-based noise filtering in OpenCV to discard border remnants and background dither.
+  - Cropped and extracted `helmet`, `gloves`, and `boots` from sheet reference `lv42bionexguardiarmorsets.png`, and `chestplate` (`defbionexguardianlv42armor.png`) with tech-sleeve additions.
+  - Specially processed the `pants` (`defbionexguardianlv42pants.png`) from the dedicated high-resolution, curved-waistband reference `lv42bionexguardianpants.png` for a natural and premium contour.
+  - Processed using the AI `rembg` background remover and OpenCV contour-based noise filtering to guarantee transparent PNGs.
   - Symmetrically padded, perfectly centered, and maximized sizes to fit the `320x320` frame (scaled up to fill 300px/94% of the frame dimensions).
-  - Specially connected the floating arm cuffs of the chestplate (`defbionexguardianlv42armor.png`) to the shoulders using dark grey tech-sleeves for a solid and premium mecha appearance.
 - **Gear Replacements**:
   - Helmet -> `defbionexguardianlv42helmet.png`
   - Chestplate -> `defbionexguardianlv42armor.png`
-  - Pants -> `defbionexguardianlv42pants.png`
+  - Pants -> `defbionexguardianlv42pants.png` (high-res with realistic curved metallic belt buckle).
   - Gloves -> `defbionexguardianlv42gloves.png`
   - Boots -> `defbionexguardianlv42boots.png`
 - **Verification**: Local build compiled successfully.
