@@ -1520,7 +1520,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🧹 Milestone 115: Orphan Assets & Unused Scripts Cleanup [PENDING DEPLOYMENT]
+### 🧹 Milestone 115: Orphan Assets & Unused Scripts Cleanup [DEPLOYED]
 - **Script & Backup Deletions (`src/screens/Unit_orig.jsx`, root dir)**:
   - Deleted 11 old maintenance/migration scripts from the root directory that are no longer used (`fix_arctron_stats.cjs`, `fix_savedAt.cjs`, `patch_arctron.cjs`, `patch_celestra.cjs`, `reset_everything.cjs`, `reset_final.cjs`, `reset_jobs.cjs`, `reset_race.cjs`, `reset_users.cjs`, `slice.py`, `slice2.py`).
   - Deleted the legacy screen backup file `src/screens/Unit_orig.jsx`.
