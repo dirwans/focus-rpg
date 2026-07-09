@@ -736,6 +736,7 @@ export default function LibraryModal({ onClose }) {
                           {w.defPct ? `+${w.defPct}% ADR ` : ''}
                           {w.dmgShieldRate ? `+${w.dmgShieldRate}% DSR ` : ''}
                           {w.dodge ? (w.dodge > 0 ? `+${w.dodge}% Dodge` : `${w.dodge}% Dodge`) : ''}
+                          {w.special ? ` [Special: ${w.special}]` : ''}
                         </span>
                       </div>
                     ))}
@@ -832,6 +833,7 @@ export default function LibraryModal({ onClose }) {
                           {w.defPct ? `+${w.defPct}% ADR ` : ''}
                           {w.dmgShieldRate ? `+${w.dmgShieldRate}% DSR ` : ''}
                           {w.dodge ? (w.dodge > 0 ? `+${w.dodge}% Dodge` : `${w.dodge}% Dodge`) : ''}
+                          {w.special ? ` [Special: ${w.special}]` : ''}
                         </span>
                       </div>
                     ))}
@@ -938,6 +940,7 @@ export default function LibraryModal({ onClose }) {
                           {w.defPct ? `+${w.defPct}% ADR ` : ''}
                           {w.dmgShieldRate ? `+${w.dmgShieldRate}% DSR ` : ''}
                           {w.dodge ? (w.dodge > 0 ? `+${w.dodge}% Dodge` : `${w.dodge}% Dodge`) : ''}
+                          {w.special ? ` [Special: ${w.special}]` : ''}
                         </span>
                       </div>
                     ))}
@@ -1059,6 +1062,7 @@ export default function LibraryModal({ onClose }) {
                           {w.defPct ? `+${w.defPct}% ADR ` : ''}
                           {w.dmgShieldRate ? `+${w.dmgShieldRate}% DSR ` : ''}
                           {w.dodge ? (w.dodge > 0 ? `+${w.dodge}% Dodge` : `${w.dodge}% Dodge`) : ''}
+                          {w.special ? ` [Special: ${w.special}]` : ''}
                         </span>
                       </div>
                     ))}
