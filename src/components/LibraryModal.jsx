@@ -731,7 +731,11 @@ export default function LibraryModal({ onClose }) {
                     {arctronGears.warrior.shields.map((w, i) => (
                       <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
                         <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
-                        <span style={{ color: '#00ff88' }}>+{w.def} DEF</span>
+                        <span style={{ color: '#00ff88' }}>
+                          {w.def ? `+${w.def} DEF ` : ''}
+                          {w.defPct ? `+${w.defPct}% ADR ` : ''}
+                          {w.dmgShieldRate ? `+${w.dmgShieldRate}% DSR` : ''}
+                        </span>
                       </div>
                     ))}
                   </div>
@@ -822,7 +826,11 @@ export default function LibraryModal({ onClose }) {
                     {bionexGears.guardian.shields.map((w, i) => (
                       <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
                         <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
-                        <span style={{ color: '#00ff88' }}>+{w.def} DEF</span>
+                        <span style={{ color: '#00ff88' }}>
+                          {w.def ? `+${w.def} DEF ` : ''}
+                          {w.defPct ? `+${w.defPct}% ADR ` : ''}
+                          {w.dmgShieldRate ? `+${w.dmgShieldRate}% DSR` : ''}
+                        </span>
                       </div>
                     ))}
                   </div>
@@ -923,7 +931,11 @@ export default function LibraryModal({ onClose }) {
                     {celestraGears.sentinel.shields.map((w, i) => (
                       <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
                         <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
-                        <span style={{ color: '#00ff88' }}>+{w.def} DEF</span>
+                        <span style={{ color: '#00ff88' }}>
+                          {w.def ? `+${w.def} DEF ` : ''}
+                          {w.defPct ? `+${w.defPct}% ADR ` : ''}
+                          {w.dmgShieldRate ? `+${w.dmgShieldRate}% DSR` : ''}
+                        </span>
                       </div>
                     ))}
                   </div>

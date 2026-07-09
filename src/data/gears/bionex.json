@@ -140,9 +140,11 @@
     "shields": [
       {
         "id": "shd_bio_0",
-        "name": "Guardian Shield",
+        "name": "Tactical Riot Shield",
         "grade": "Common",
-        "def": 15
+        "def": 58,
+        "defPct": 5,
+        "dmgShieldRate": 35
       },
       {
         "id": "shd_bio_1",

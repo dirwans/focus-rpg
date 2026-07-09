@@ -121,9 +121,11 @@
     "shields": [
       {
         "id": "shd_cor_0",
-        "name": "Moon Aegis",
+        "name": "Ancient Bark Buckler",
         "grade": "Common",
-        "def": 15
+        "def": 58,
+        "defPct": 5,
+        "dmgShieldRate": 35
       },
       {
         "id": "shd_cor_1",

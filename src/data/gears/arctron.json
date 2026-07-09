@@ -41,9 +41,11 @@
     "shields": [
       {
         "id": "shd_arc_0",
-        "name": "Iron Bulwark",
+        "name": "Nano-Grid Buckler",
         "grade": "Common",
-        "def": 15
+        "def": 58,
+        "defPct": 5,
+        "dmgShieldRate": 35
       },
       {
         "id": "shd_arc_1",
