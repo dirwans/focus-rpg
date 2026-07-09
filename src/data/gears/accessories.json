@@ -115,6 +115,15 @@
       "defPct": 5,
       "dmgShieldRate": 35,
       "dodge": -100
+    },
+    {
+      "id": "shd_all_3",
+      "name": "Elite Carbon Shield",
+      "grade": "Epic",
+      "def": 2059,
+      "defPct": 5,
+      "dmgShieldRate": 35,
+      "dodge": -100
     }
   ],
   "capes": [
