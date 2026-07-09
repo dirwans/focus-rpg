@@ -1047,6 +1047,20 @@ export default function LibraryModal({ onClose }) {
                   </div>
 
                   <div style={styles.itemCard}>
+                    <div style={styles.itemTitle}>🛡️ Shields (Universal — All Nations)</div>
+                    {accessoriesData.shields?.map((w, i) => (
+                      <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
+                        <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
+                        <span style={{ color: '#00ff88' }}>
+                          {w.def ? `+${w.def} DEF ` : ''}
+                          {w.defPct ? `+${w.defPct}% ADR ` : ''}
+                          {w.dmgShieldRate ? `+${w.dmgShieldRate}% DSR` : ''}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div style={styles.itemCard}>
                     <div style={styles.itemTitle}>🦸‍♂️ Capes / Boosters</div>
                     {accessoriesData.capes.map((w, i) => (
                       <div key={i} style={{ borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '8px 0', display: 'flex', flexDirection: 'column', gap: 6 }}>

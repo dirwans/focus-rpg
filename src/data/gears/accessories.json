@@ -89,6 +89,16 @@
       "defPctMax": 30
     }
   ],
+  "shields": [
+    {
+      "id": "shd_all_0",
+      "name": "Survivor's Scrapshield",
+      "grade": "Common",
+      "def": 58,
+      "defPct": 5,
+      "dmgShieldRate": 35
+    }
+  ],
   "capes": [
     {
       "id": "cap_0",
