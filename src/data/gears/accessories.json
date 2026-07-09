@@ -106,6 +106,15 @@
       "defPct": 5,
       "dmgShieldRate": 35,
       "dodge": -100
+    },
+    {
+      "id": "shd_all_2",
+      "name": "Reinforced Carbon Shield",
+      "grade": "Rare",
+      "def": 767,
+      "defPct": 5,
+      "dmgShieldRate": 35,
+      "dodge": -100
     }
   ],
   "capes": [
