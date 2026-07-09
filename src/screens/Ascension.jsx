@@ -3,6 +3,30 @@ import { useGameStore } from '../store/gameStore'
 import ascensionData from '../data/ascensionArms.json'
 import { t } from '../lib/translate'
 
+// Peta gambar per evolution ID
+const EVO_IMAGES = {
+  // Bionex M.E.U. Attacker
+  meu_atk_32:       '/assets/MEUattacklv32.png',
+  meu_atk_42:       '/assets/MEUattacklv42.png',
+  meu_atk_55:       '/assets/MEUattacklv55.png',
+  meu_atk_65:       '/assets/MEUattacklv65.png',
+  // Bionex M.E.U. Defender
+  meu_def_32:       '/assets/MEUdevlv32.png',
+  meu_def_42:       '/assets/MEUdevlv42.png',
+  meu_def_55:       '/assets/MEUdevlv55.png',
+  meu_def_65:       '/assets/MEUdevlv65.png',
+  // Arctron A.R.E.S.
+  ares_x:           '/assets/ares_x.png',
+  ares_nemesis:     '/assets/ares_nemesis.png',
+  ares_dominator:   '/assets/ares_dominator.png',
+  ares_apocalypse:  '/assets/ares_apocalypse.png',
+  // Celestra Ancient Spirit
+  spirit_sylph:     '/assets/celestra_mystic_female.png',
+  spirit_sanctus:   '/assets/celestra_mystic_male.png',
+  spirit_seraph:    '/assets/celestra_specialist_female.png',
+  spirit_empyrean:  '/assets/celestra_specialist_male.png',
+}
+
 export default function Ascension() {
   const player = useGameStore((s) => s.player)
   const craftAscensionArms = useGameStore((s) => s.craftAscensionArms)
@@ -83,6 +107,7 @@ export default function Ascension() {
               const canAfford = player.resources.crd >= evo.cost
               const levelMet = player.level >= evo.levelReq
               
+              const evoImg = EVO_IMAGES[evo.id]
               return (
                 <div key={evo.id} style={{
                   background: isUnlocked ? 'rgba(204,68,255,0.15)' : 'rgba(0,0,0,0.3)',
@@ -91,6 +116,7 @@ export default function Ascension() {
                   padding: 12,
                   position: 'relative'
                 }}>
+                  {/* Header: nama + level */}
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
                     <div style={{ fontFamily: 'var(--font-title)', fontSize: 16, color: isUnlocked ? '#fff' : '#88aadd', fontWeight: 800 }}>
                       {evo.name}
@@ -99,6 +125,31 @@ export default function Ascension() {
                       Lv. {evo.levelReq}
                     </div>
                   </div>
+
+                  {/* Gambar MEU / ARES / Spirit */}
+                  {evoImg && (
+                    <div style={{
+                      display: 'flex', justifyContent: 'center', alignItems: 'center',
+                      marginBottom: 10,
+                      background: isUnlocked ? 'rgba(204,68,255,0.08)' : 'rgba(0,0,0,0.2)',
+                      borderRadius: 8,
+                      padding: '8px 0',
+                      border: isUnlocked ? '1px solid rgba(204,68,255,0.3)' : '1px solid rgba(255,255,255,0.05)',
+                      minHeight: 120,
+                    }}>
+                      <img
+                        src={evoImg}
+                        alt={evo.name}
+                        style={{
+                          maxHeight: 120,
+                          maxWidth: '85%',
+                          objectFit: 'contain',
+                          filter: !levelMet ? 'grayscale(70%) brightness(0.6)' : isUnlocked ? 'drop-shadow(0 0 12px rgba(204,68,255,0.7))' : 'none',
+                          transition: 'filter 0.3s ease',
+                        }}
+                      />
+                    </div>
+                  )}
                   
                   <div style={{ display: 'flex', gap: 16, marginBottom: 12, fontSize: 13, fontFamily: 'var(--font-mono)', color: '#e0f4ff', flexWrap: 'wrap' }}>
                     <div><span style={{color: '#f5a623'}}>⚔️ ATK</span> +{evo.atk.toLocaleString()}</div>
@@ -106,7 +157,25 @@ export default function Ascension() {
                     <div><span style={{color: '#cc44ff'}}>💥 CRIT</span> +{evo.crit}%</div>
                   </div>
 
-                  {!isUnlocked ? (
+                  {evo.locked ? (
+                    <button
+                      disabled
+                      style={{
+                        width: '100%',
+                        padding: '10px 0',
+                        background: 'rgba(255, 68, 68, 0.1)',
+                        border: '1px solid rgba(255, 68, 68, 0.2)',
+                        borderRadius: 6,
+                        color: '#ff4444',
+                        fontFamily: 'var(--font-title)',
+                        fontSize: 14,
+                        fontWeight: 900,
+                        cursor: 'not-allowed'
+                      }}
+                    >
+                      🔒 LOCKED (BELUM DILIRIS)
+                    </button>
+                  ) : !isUnlocked ? (
                     <button
                       onClick={() => craftAscensionArms(evo, data.name)}
                       disabled={!canAfford || !levelMet}

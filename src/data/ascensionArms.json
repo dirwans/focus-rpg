@@ -70,8 +70,8 @@
     ],
     "evolutions": [
       {
-        "id": "meu_atlas",
-        "name": "M.E.U. Atlas",
+        "id": "meu_atk_32",
+        "name": "M.E.U. Attacker Lv.32",
         "levelReq": 32,
         "atk": 120,
         "hp": 100000,
@@ -80,8 +80,8 @@
         "costLabel": "Gratis (setelah seluruh part selesai dirakit)"
       },
       {
-        "id": "meu_goliath",
-        "name": "M.E.U. Goliath",
+        "id": "meu_atk_42",
+        "name": "M.E.U. Attacker Lv.42",
         "levelReq": 42,
         "atk": 280,
         "hp": 250000,
@@ -90,8 +90,8 @@
         "costLabel": "100,000,000 CRD"
       },
       {
-        "id": "meu_colossus",
-        "name": "M.E.U. Colossus",
+        "id": "meu_atk_55",
+        "name": "M.E.U. Attacker Lv.55",
         "levelReq": 55,
         "atk": 500,
         "hp": 500000,
@@ -100,14 +100,56 @@
         "costLabel": "500,000,000 CRD"
       },
       {
-        "id": "meu_titan",
-        "name": "M.E.U. Titan",
+        "id": "meu_atk_65",
+        "name": "M.E.U. Attacker Lv.65",
         "levelReq": 65,
         "atk": 800,
         "hp": 1000000,
         "crit": 15,
         "cost": 2000000000,
-        "costLabel": "2,000,000,000 CRD"
+        "costLabel": "2,000,000,000 CRD",
+        "locked": true
+      },
+      {
+        "id": "meu_def_32",
+        "name": "M.E.U. Defender Lv.32",
+        "levelReq": 32,
+        "atk": 80,
+        "hp": 150000,
+        "crit": 1,
+        "cost": 5000000,
+        "costLabel": "Gratis (setelah seluruh part selesai dirakit)"
+      },
+      {
+        "id": "meu_def_42",
+        "name": "M.E.U. Defender Lv.42",
+        "levelReq": 42,
+        "atk": 200,
+        "hp": 400000,
+        "crit": 2,
+        "cost": 100000000,
+        "costLabel": "100,000,000 CRD"
+      },
+      {
+        "id": "meu_def_55",
+        "name": "M.E.U. Defender Lv.55",
+        "levelReq": 55,
+        "atk": 350,
+        "hp": 800000,
+        "crit": 4,
+        "cost": 500000000,
+        "costLabel": "500,000,000 CRD"
+      },
+      {
+        "id": "meu_def_65",
+        "name": "M.E.U. Defender Lv.65",
+        "levelReq": 65,
+        "atk": 600,
+        "hp": 1500000,
+        "crit": 6,
+        "cost": 2000000000,
+        "costLabel": "2,000,000,000 CRD",
+        "locked": true
       }
     ]
   },

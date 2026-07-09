@@ -1571,7 +1571,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🔤 Milestone 119: Typography Standardization — All Panels [PENDING DEPLOYMENT]
+### 🔤 Milestone 119: Typography Standardization — All Panels [DEPLOYED]
 - **Files**: `src/screens/Main.jsx`, `src/screens/Ranks.jsx`, `src/screens/Ascension.jsx`, `src/App.jsx`, `src/components/NpcModal.jsx`
 - **Changes**:
   - Replaced all hardcoded `fontFamily: 'monospace'` with `fontFamily: 'var(--font-mono)'` project-wide (excluding `Unit.jsx` and `Mine.jsx`).
@@ -1583,10 +1583,26 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🖼️ Milestone 120: Auth Page Frameless Design [PENDING DEPLOYMENT]
+### 🖼️ Milestone 120: Auth Page Frameless Design [DEPLOYED]
 - **`src/screens/Auth.jsx`**:
   - Removed the glass card container frame from the login/register page: stripped `background`, `border`, `backdrop-filter`, `box-shadow`, `clip-path`, and `hover` effects from `.auth-card`.
   - The form elements (logo, lore button, Google sign-in, login/register tabs, input fields, submit button) now float freely and directly over the dark radial background without a bounding box.
   - All individual buttons retain their own glassmorphism/transparent styling (`.auth-lore-btn`, `.auth-native-google`, `.auth-submit`, `.auth-input` each keep their border + backdrop).
 - **Verification**: Change applied locally.
+
+---
+
+### ⚙️ Milestone 121: Bionex M.E.U. Attacker & Defender Multi-Track [PENDING DEPLOYMENT]
+- **`src/data/ascensionArms.json`**:
+  - Rebuilt the Bionex evolution list to feature separate **Attacker** and **Defender** tracks across Lv.32, Lv.42, and Lv.55.
+  - Added a locked flag (`"locked": true`) for the Lv.65 Titan-class mechas (both Attacker and Defender).
+  - Cleaned up named slots ("Atlas", "Goliath", "Colossus", "Titan") to simply show "Attacker" and "Defender" classification.
+- **`src/screens/Ascension.jsx`**:
+  - Mapped Attacker mechas to `/assets/MEUattacklv32.png`, `/assets/MEUattacklv42.png`, `/assets/MEUattacklv55.png`, and `/assets/MEUattacklv65.png`.
+  - Mapped Defender mechas to `/assets/MEUdevlv32.png`, `/assets/MEUdevlv42.png`, `/assets/MEUdevlv55.png`, and `/assets/MEUdevlv65.png`.
+  - Implemented locked status rendering: mechas flagged with `locked` now render a disabled crimson red button showing `🔒 LOCKED (BELUM DILIRIS)`.
+- **`src/store/gameStore.js`**:
+  - Aligned Bionex `ascension_arms` image resolver mappings to map new mecha IDs (`meu_atk_*` and `meu_def_*`) to the respective level tier sprite paths (including `/assets/MEUattacklv65.png` and `/assets/MEUdevlv65.png`).
+- **Verification**: Local build compiled successfully.
+
 

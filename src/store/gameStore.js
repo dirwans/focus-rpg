@@ -219,9 +219,16 @@ export function resolveItemImage(item, playerRace, playerJob) {
     if (bespoke) return bespoke
   }
   if (item.type === 'ascension_arms') {
-    if (item.id === 'meu_atlas') return '/assets/meu_atlas.png'
-    if (item.id === 'meu_goliath') return '/assets/meu_goliath.png'
-    if (item.id === 'meu_colossus') return '/assets/meu_colossus.png'
+    // Bionex M.E.U. Attacker
+    if (item.id === 'meu_atk_32') return '/assets/MEUattacklv32.png'
+    if (item.id === 'meu_atk_42') return '/assets/MEUattacklv42.png'
+    if (item.id === 'meu_atk_55') return '/assets/MEUattacklv55.png'
+    if (item.id === 'meu_atk_65') return '/assets/MEUattacklv65.png'
+    // Bionex M.E.U. Defender
+    if (item.id === 'meu_def_32') return '/assets/MEUdevlv32.png'
+    if (item.id === 'meu_def_42') return '/assets/MEUdevlv42.png'
+    if (item.id === 'meu_def_55') return '/assets/MEUdevlv55.png'
+    if (item.id === 'meu_def_65') return '/assets/MEUdevlv65.png'
   }
   return item.image
 }
