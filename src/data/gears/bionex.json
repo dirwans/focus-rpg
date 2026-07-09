@@ -2,43 +2,51 @@
   "amulets": [
     {
       "id": "amu_bio_0",
-      "name": "Dagon's Halo",
+      "name": "Vanguard Prism Amulet",
       "grade": "Common",
       "image": "/assets/bionex/amulets/amu_bio_0.png",
-      "hp": 400,
-      "def": 20
+      "dodgeMin": 5,
+      "dodgeMax": 10
     },
     {
       "id": "amu_bio_1",
-      "name": "Verdant Fang Pendant",
+      "name": "Biohazard Core Pendant",
       "grade": "Uncommon",
       "image": "/assets/bionex/amulets/amu_bio_1.png",
-      "hp": 900,
-      "def": 45
+      "defPctMin": 5,
+      "defPctMax": 10
     },
     {
       "id": "amu_bio_2",
-      "name": "Bloodprism Talisman",
+      "name": "Crimson Strike Matrix",
       "grade": "Rare",
       "image": "/assets/bionex/amulets/amu_bio_2.png",
-      "hp": 1600,
-      "def": 75
+      "atkPctMin": 5,
+      "atkPctMax": 10
     },
     {
       "id": "amu_bio_3",
-      "name": "Dead Officer's Core",
+      "name": "Warlord's Fury Pendant",
       "grade": "Epic",
       "image": "/assets/bionex/amulets/amu_bio_3.png",
-      "hp": 2800,
-      "def": 120
+      "atkPctMin": 10,
+      "atkPctMax": 15,
+      "defPctMin": 10,
+      "defPctMax": 20,
+      "dodgeMin": 5,
+      "dodgeMax": 10
     },
     {
       "id": "amu_bio_4",
-      "name": "Eclipse Sovereign Pendant",
+      "name": "Omega Eclipse Medal",
       "grade": "Legendary",
       "image": "/assets/bionex/amulets/amu_bio_4.png",
-      "hp": 4500,
-      "def": 180
+      "atkPctMin": 10,
+      "atkPctMax": 25,
+      "defPctMin": 10,
+      "defPctMax": 25,
+      "dodgeMin": 5,
+      "dodgeMax": 20
     }
   ],
   "rings": [

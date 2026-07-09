@@ -2,27 +2,31 @@
   "amulets": [
     {
       "id": "amu_cor_0",
-      "name": "Amethyst Warden's Charm",
-      "grade": "Common",
+      "name": "Star-Rune Charm",
+      "grade": "Rare",
       "image": "/assets/celestra/amulets/amu_cor_0.png",
-      "hp": 600,
-      "def": 30
+      "atkPctMin": 10,
+      "atkPctMax": 25,
+      "defPctMin": 10,
+      "defPctMax": 20,
+      "dodgeMin": 5,
+      "dodgeMax": 20
     },
     {
       "id": "amu_cor_1",
-      "name": "Voidfang Talisman",
-      "grade": "Rare",
+      "name": "Ancient Spirit Talisman",
+      "grade": "Epic",
       "image": "/assets/celestra/amulets/amu_cor_1.png",
-      "hp": 1800,
-      "def": 85
+      "atkPct": 25,
+      "dodge": 20
     },
     {
       "id": "amu_cor_2",
-      "name": "Bloodwing Sovereign Talisman",
+      "name": "Astral Sovereign Pendant",
       "grade": "Legendary",
       "image": "/assets/celestra/amulets/amu_cor_2.png",
-      "hp": 4200,
-      "def": 170
+      "atkPct": 25,
+      "defPct": 25
     }
   ],
   "rings": [

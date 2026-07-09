@@ -160,43 +160,51 @@
   "amulets": [
     {
       "id": "amu_arc_0",
-      "name": "Beginner's Core Pendant",
+      "name": "Quantum Spark Core",
       "grade": "Common",
       "image": "/assets/arctron/amulets/amu_arc_0.png",
-      "hp": 400,
-      "def": 20
+      "dodgeMin": 5,
+      "dodgeMax": 10
     },
     {
       "id": "amu_arc_1",
-      "name": "Bloodthorn Pendant",
+      "name": "Crimson Node Amulet",
       "grade": "Uncommon",
       "image": "/assets/arctron/amulets/amu_arc_1.png",
-      "hp": 900,
-      "def": 45
+      "defPctMin": 5,
+      "defPctMax": 10
     },
     {
       "id": "amu_arc_2",
-      "name": "Ravager's Crescent",
+      "name": "Plasma Talon Crescent",
       "grade": "Rare",
       "image": "/assets/arctron/amulets/amu_arc_2.png",
-      "hp": 1600,
-      "def": 75
+      "atkPctMin": 5,
+      "atkPctMax": 10
     },
     {
       "id": "amu_arc_3",
-      "name": "Deathstorm Talisman",
+      "name": "Vortex Engine Talisman",
       "grade": "Epic",
       "image": "/assets/arctron/amulets/amu_arc_3.png",
-      "hp": 2800,
-      "def": 120
+      "atkPctMin": 10,
+      "atkPctMax": 15,
+      "defPctMin": 10,
+      "defPctMax": 20,
+      "dodgeMin": 5,
+      "dodgeMax": 10
     },
     {
       "id": "amu_arc_4",
-      "name": "Baal's Sovereign Pendant",
+      "name": "Aegis Prime Matrix",
       "grade": "Legendary",
       "image": "/assets/arctron/amulets/amu_arc_4.png",
-      "hp": 4500,
-      "def": 180
+      "atkPctMin": 10,
+      "atkPctMax": 25,
+      "defPctMin": 10,
+      "defPctMax": 25,
+      "dodgeMin": 5,
+      "dodgeMax": 20
     }
   ],
   "rings": [

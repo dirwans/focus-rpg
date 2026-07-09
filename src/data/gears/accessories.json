@@ -2,43 +2,43 @@
   "amulets": [
     {
       "id": "amu_all_0",
-      "name": "Baal's Heart Amulet",
+      "name": "Nexus Wanderer Amulet",
       "grade": "Common",
       "image": "/assets/accessories/amulets/amu_all_0.png",
-      "hp": 500,
-      "def": 25
+      "atkPctMin": 5,
+      "atkPctMax": 10
     },
     {
       "id": "amu_all_1",
-      "name": "Beast of Life Amulet",
+      "name": "Conflict Survivor Charm",
       "grade": "Uncommon",
       "image": "/assets/accessories/amulets/amu_all_1.png",
-      "hp": 1100,
-      "def": 50
+      "atkPctMin": 10,
+      "atkPctMax": 15
     },
     {
       "id": "amu_all_2",
-      "name": "Dead Officer's Duality",
+      "name": "Zero Flux Pendant",
       "grade": "Rare",
       "image": "/assets/accessories/amulets/amu_all_2.png",
-      "hp": 2000,
-      "def": 90
+      "atkPctMin": 22,
+      "atkPctMax": 26
     },
     {
       "id": "amu_all_3",
-      "name": "Brother's Tears Amulet",
+      "name": "Trinity Covenant Core",
       "grade": "Epic",
       "image": "/assets/accessories/amulets/amu_all_3.png",
-      "hp": 3400,
-      "def": 140
+      "atkPct": 10,
+      "defPct": 30
     },
     {
       "id": "amu_all_4",
-      "name": "Dagon's Leash",
+      "name": "Sovereign of Nexus Talisman",
       "grade": "Legendary",
       "image": "/assets/accessories/amulets/amu_all_4.png",
-      "hp": 5200,
-      "def": 200
+      "atkPct": 30,
+      "defPct": 30
     }
   ],
   "rings": [
