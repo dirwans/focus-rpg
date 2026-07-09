@@ -80,12 +80,12 @@ export default function EventModal({ onClose }) {
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'flex-end',
-              height: '180px'
+              height: '200px'
             }}>
               <img 
                 src="/assets/boss_event_1.png" 
                 alt="Event Boss" 
-                style={{ height: '170px', width: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 0 10px rgba(255, 183, 0, 0.45))' }}
+                style={{ height: '190px', width: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 0 10px rgba(255, 183, 0, 0.45))' }}
               />
             </div>
             <div style={styles.hologramGlow} />
@@ -185,7 +185,7 @@ const styles = {
   title: { 
     fontFamily: "'Oxanium', sans-serif", 
     fontStyle: 'italic',
-    fontSize: 14, 
+    fontSize: 16, 
     color: '#ffb700', 
     fontWeight: 900, 
     letterSpacing: 1.5,
@@ -195,7 +195,7 @@ const styles = {
     background: 'none', 
     border: 'none', 
     color: '#ff4444', 
-    fontSize: 16, 
+    fontSize: 18, 
     cursor: 'pointer',
     fontFamily: "'Oxanium', sans-serif",
     fontWeight: 900
@@ -209,7 +209,7 @@ const styles = {
   },
   bossPreviewContainer: {
     position: 'relative',
-    height: 200,
+    height: 220,
     borderRadius: 10,
     border: '1px solid rgba(255, 183, 0, 0.2)',
     background: 'radial-gradient(circle at center, rgba(20, 25, 45, 0.9) 0%, rgba(5, 8, 20, 0.98) 100%)',
@@ -240,7 +240,7 @@ const styles = {
   bossSubtitle: {
     fontFamily: "'Oxanium', sans-serif",
     fontStyle: 'italic',
-    fontSize: 9,
+    fontSize: 12,
     fontWeight: 800,
     color: '#ff9900',
     letterSpacing: 1
@@ -248,7 +248,7 @@ const styles = {
   bossName: {
     fontFamily: "'Oxanium', sans-serif",
     fontStyle: 'italic',
-    fontSize: 15,
+    fontSize: 18,
     fontWeight: 900,
     color: '#fff',
     letterSpacing: 0.5,
@@ -281,7 +281,7 @@ const styles = {
   cardTitle: {
     fontFamily: "'Oxanium', sans-serif",
     fontStyle: 'italic',
-    fontSize: 13,
+    fontSize: 16,
     fontWeight: 900,
     color: '#ffb700',
     letterSpacing: 1
@@ -289,7 +289,7 @@ const styles = {
   cardDesc: {
     fontFamily: "'Rajdhani', sans-serif",
     fontWeight: 600,
-    fontSize: 13.5,
+    fontSize: 15.5,
     color: '#b0ccdb',
     lineHeight: 1.45,
     textAlign: 'left'
@@ -313,7 +313,7 @@ const styles = {
   buffLabel: {
     fontFamily: "'Oxanium', sans-serif",
     fontStyle: 'italic',
-    fontSize: 10,
+    fontSize: 13,
     color: '#a0bcd0',
     fontWeight: 700,
     letterSpacing: 0.5
@@ -321,7 +321,7 @@ const styles = {
   buffValue: {
     fontFamily: "'Oxanium', sans-serif",
     fontStyle: 'italic',
-    fontSize: 12,
+    fontSize: 15,
     color: '#ffb700',
     fontWeight: 900,
     textAlign: 'center'
@@ -343,7 +343,7 @@ const styles = {
   rewardsTitle: {
     fontFamily: "'Oxanium', sans-serif",
     fontStyle: 'italic',
-    fontSize: 12,
+    fontSize: 15,
     fontWeight: 900,
     color: '#ffb700',
     letterSpacing: 1,
@@ -364,8 +364,8 @@ const styles = {
     padding: 8
   },
   rewardImg: {
-    width: 34,
-    height: 34,
+    width: 38,
+    height: 38,
     objectFit: 'contain',
     background: 'rgba(0, 0, 0, 0.2)',
     border: '1px solid rgba(255, 255, 255, 0.08)',
@@ -382,14 +382,14 @@ const styles = {
   rewardName: {
     fontFamily: "'Chakra Petch', sans-serif",
     fontStyle: 'italic',
-    fontSize: 12,
+    fontSize: 14,
     color: '#fff',
     fontWeight: 700
   },
   rewardDesc: {
     fontFamily: "'Rajdhani', sans-serif",
     fontWeight: 600,
-    fontSize: 11,
+    fontSize: 13,
     color: '#8faabf',
     lineHeight: 1.3
   },
@@ -401,7 +401,7 @@ const styles = {
     color: '#000',
     fontFamily: "'Oxanium', sans-serif",
     fontStyle: 'italic',
-    fontSize: 13.5,
+    fontSize: 16,
     fontWeight: 900,
     letterSpacing: 2,
     cursor: 'pointer',

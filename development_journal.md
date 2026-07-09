@@ -1762,4 +1762,16 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - Wrapped inline keywords with standard `<strong>` HTML tags instead of markdown `**` tags to ensure proper bolding in description blocks.
 - **Verification**: Verified React build (`npm run build`) compiles clean with no warnings.
 
+---
+
+### 🎨 Milestone 132: Event Modal Text Scaling & Bottom Nav Alignment [DEPLOYED]
+- **Event Modal Font Enlargement**:
+  - Scaled up all typography sizes inside [EventModal.jsx](file:///c:/projects/focus-rpg/src/components/EventModal.jsx) to fix readability issues (enlarged headings to `16px`/`18px`, card descriptions to `15.5px`, buff values to `15px`, and item names to `14px`).
+  - Increased the holographic boss image preview panel dimensions (height expanded to `220px`) and up-scaled the boss mecha sprite to `190px` height.
+- **Bottom Navigation Layout Fixes**:
+  - Modified [BottomNav.jsx](file:///c:/projects/focus-rpg/src/components/BottomNav.jsx) to shorten the character tab label from `CHARACTER` to `CHAR` (bringing it in line with `ASC` and `T-MINE`).
+  - Styled all bottom navigation tab labels using `Oxanium` (slanted/italicized, bold, size `10.5px`), and removed the old hardcoded word break logic (`<wbr />` / conditional wrapping) to guarantee labels render as single, clean, slanted words.
+- **Verification**: Verified React build (`npm run build`) compiles clean with no warnings.
+
+
 

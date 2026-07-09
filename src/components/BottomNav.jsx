@@ -13,7 +13,7 @@ const getFactionPrimary = (race) => FACTION_PRIMARY[race] || '#00e5ff'
 // Original tabs — TIDAK DIUBAH
 const NAV_ITEMS = [
   { id: 'main',      label: 'BASE' },
-  { id: 'unit',      label: 'CHARACTER' },
+  { id: 'unit',      label: 'CHAR' },
   { id: 'inventory', label: 'GEARS' },
   { id: 'ranks',     label: 'RANKS' },
   { id: 'battle',    label: 'BATTLE' },
@@ -132,28 +132,18 @@ export default function BottomNav() {
               overflow:       'hidden',
             }}>
               <span style={{
-                fontFamily:  'var(--font-title)',
-                fontSize:    9,
+                fontFamily:  "'Oxanium', sans-serif",
+                fontStyle:   'italic',
+                fontSize:    10.5,
                 fontWeight:  800,
                 letterSpacing: 0.5,
                 color:       isActive ? '#fff' : '#8a94a3',
                 textShadow:  isActive ? `0 0 8px ${primary}99` : 'none',
-                whiteSpace:  'normal',
-                wordBreak:   'break-word',
+                whiteSpace:  'nowrap',
                 textAlign:   'center',
-                lineHeight:  1.1,
+                lineHeight:  1,
               }}>
-                {n.label === 'CHARACTER' ? (
-                  <>
-                    CHAR<wbr />ACTER
-                  </>
-                ) : n.label === 'BATTLE' ? (
-                  <>
-                    BAT<wbr />TLE
-                  </>
-                ) : (
-                  n.label
-                )}
+                {n.label}
               </span>
             </div>
             <div style={{
