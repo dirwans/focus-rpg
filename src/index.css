@@ -42,12 +42,12 @@
 
 :root[data-faction="bionex"] {
   --bg-color: #08102a;
-  --neon-glow: #00e5ff;
-  --grid-color: rgba(0, 229, 255, 0.15);
-  --border-neon: rgba(0, 229, 255, 0.35);
-  /* Secondary accent: gold */
-  --neon-secondary-1: #e8c07a;
-  --neon-secondary-2: #b5883a;
+  --neon-glow: #00bfff; /* sky blue */
+  --grid-color: rgba(0, 191, 255, 0.15);
+  --border-neon: rgba(0, 191, 255, 0.35);
+  /* Secondary accent: yellow like Bionex logo */
+  --neon-secondary-1: #ffdd00;
+  --neon-secondary-2: #ffbe00;
   --on-secondary: #2c1f08;
 }
 
@@ -196,14 +196,14 @@ body {
 }
 
 .panel-bionex {
-  border-color: rgba(0, 229, 255, 0.45) !important;
-  box-shadow: 0 0 15px rgba(0, 229, 255, 0.15), inset 0 0 10px rgba(0, 229, 255, 0.08) !important;
+  border-color: rgba(0, 191, 255, 0.45) !important;
+  box-shadow: 0 0 15px rgba(0, 191, 255, 0.15), inset 0 0 10px rgba(0, 191, 255, 0.08) !important;
 }
-.panel-bionex::before { border-top-color: var(--neon-cyan) !important; border-left-color: var(--neon-cyan) !important; }
-.panel-bionex::after { border-bottom-color: var(--neon-cyan) !important; border-right-color: var(--neon-cyan) !important; }
+.panel-bionex::before { border-top-color: #00bfff !important; border-left-color: #00bfff !important; }
+.panel-bionex::after { border-bottom-color: #00bfff !important; border-right-color: #00bfff !important; }
 .panel-bionex:hover {
-  border-color: rgba(0, 229, 255, 0.7) !important;
-  box-shadow: 0 0 25px rgba(0, 229, 255, 0.25), inset 0 0 15px rgba(0, 229, 255, 0.12) !important;
+  border-color: rgba(0, 191, 255, 0.7) !important;
+  box-shadow: 0 0 25px rgba(0, 191, 255, 0.25), inset 0 0 15px rgba(0, 191, 255, 0.12) !important;
 }
 
 .panel-celestra {

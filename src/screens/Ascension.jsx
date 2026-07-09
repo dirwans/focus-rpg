@@ -3,28 +3,52 @@ import { useGameStore } from '../store/gameStore'
 import ascensionData from '../data/ascensionArms.json'
 import { t } from '../lib/translate'
 
-// Peta gambar per evolution ID
+// Peta gambar per evolution ID dengan cache-buster ?v=2
 const EVO_IMAGES = {
   // Bionex M.E.U. Attacker
-  meu_atk_32:       '/assets/MEUattacklv32.png',
-  meu_atk_42:       '/assets/MEUattacklv42.png',
-  meu_atk_55:       '/assets/MEUattacklv55.png',
-  meu_atk_65:       '/assets/MEUattacklv65.png',
+  meu_atk_32:       '/assets/MEUattacklv32.png?v=2',
+  meu_atk_42:       '/assets/MEUattacklv42.png?v=2',
+  meu_atk_55:       '/assets/MEUattacklv55.png?v=2',
+  meu_atk_65:       '/assets/MEUattacklv65.png?v=2',
   // Bionex M.E.U. Defender
-  meu_def_32:       '/assets/MEUdevlv32.png',
-  meu_def_42:       '/assets/MEUdevlv42.png',
-  meu_def_55:       '/assets/MEUdevlv55.png',
-  meu_def_65:       '/assets/MEUdevlv65.png',
+  meu_def_32:       '/assets/MEUdevlv32.png?v=2',
+  meu_def_42:       '/assets/MEUdevlv42.png?v=2',
+  meu_def_55:       '/assets/MEUdevlv55.png?v=2',
+  meu_def_65:       '/assets/MEUdevlv65.png?v=2',
   // Arctron A.R.E.S.
-  ares_x:           '/assets/ARESlv32arctron.png',
-  ares_nemesis:     '/assets/ARESlv42arctron.png',
-  ares_dominator:   '/assets/ARESlv55arctron.png',
-  ares_apocalypse:  '/assets/ARESlv65arctron.png',
+  ares_x:           '/assets/ARESlv32arctron.png?v=2',
+  ares_nemesis:     '/assets/ARESlv42arctron.png?v=2',
+  ares_dominator:   '/assets/ARESlv55arctron.png?v=2',
+  ares_apocalypse:  '/assets/ARESlv65arctron.png?v=2',
   // Celestra Ancient Spirit
-  spirit_sylph:     '/assets/celestra_mystic_female.png',
-  spirit_sanctus:   '/assets/celestra_mystic_male.png',
-  spirit_seraph:    '/assets/celestra_specialist_female.png',
-  spirit_empyrean:  '/assets/celestra_specialist_male.png',
+  spirit_sylph:     '/assets/celestra_mystic_female.png?v=2',
+  spirit_sanctus:   '/assets/celestra_mystic_male.png?v=2',
+  spirit_seraph:    '/assets/celestra_specialist_female.png?v=2',
+  spirit_empyrean:  '/assets/celestra_specialist_male.png?v=2',
+}
+
+const RACE_COLORS = {
+  celestra: {
+    accent: '#cc44ff', // purple title
+    glow: 'rgba(204, 68, 255, 0.5)',
+    border: '#cc44ff', // purple frame
+    bg: 'rgba(204, 68, 255, 0.15)',
+    bgLight: 'rgba(204, 68, 255, 0.08)'
+  },
+  arctron: {
+    accent: '#ff8c00', // orange title
+    glow: 'rgba(255, 140, 0, 0.5)',
+    border: '#ff8c00', // orange frame
+    bg: 'rgba(255, 140, 0, 0.15)',
+    bgLight: 'rgba(255, 140, 0, 0.08)'
+  },
+  bionex: {
+    accent: '#ffdd00', // yellow title like logo
+    glow: 'rgba(255, 221, 0, 0.5)',
+    border: '#00bfff', // sky blue frame
+    bg: 'rgba(0, 191, 255, 0.15)',
+    bgLight: 'rgba(0, 191, 255, 0.08)'
+  }
 }
 
 export default function Ascension() {
@@ -43,7 +67,6 @@ export default function Ascension() {
       </div>
     )
   }
-
   const data = ascensionData[player.race]
   if (!data) {
     return (
@@ -55,26 +78,28 @@ export default function Ascension() {
     )
   }
 
+  const colors = RACE_COLORS[player.race] || RACE_COLORS.celestra
+
   return (
     <div style={styles.screen}>
       <div style={styles.resBar}>
-        <button onClick={() => useGameStore.getState().setScreen('main')} style={{background:'transparent', border:'none', color:'#00e5ff', fontSize: 20, cursor:'pointer', padding: '0 8px 0 0', display:'flex', alignItems:'center'}}>❮</button>
+        <button onClick={() => useGameStore.getState().setScreen('main')} style={{background:'transparent', border:'none', color: colors.border, fontSize: 20, cursor:'pointer', padding: '0 8px 0 0', display:'flex', alignItems:'center'}}>❮</button>
         <span style={styles.chip('#f5a623')}>◈ {player.resources.crd.toLocaleString()} CRD</span>
       </div>
 
       <div style={{ padding: '16px 16px 80px' }}>
-        <div className={`glass-panel cyber-panel panel-${player.race}`} style={{ padding: 16, border: '1px solid #cc44ff', boxShadow: 'inset 0 0 20px rgba(204,68,255,0.1)' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12, borderBottom: '1px solid rgba(204,68,255,0.3)', paddingBottom: 10 }}>
+        <div className={`glass-panel cyber-panel panel-${player.race}`} style={{ padding: 16, border: `1px solid ${colors.border}`, boxShadow: `inset 0 0 20px ${colors.bg}` }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12, borderBottom: `1px solid ${colors.border}4d`, paddingBottom: 10 }}>
             <div style={{ fontSize: 40 }}>{data.icon}</div>
             <div>
-              <div style={{ fontFamily: 'var(--font-title)', fontSize: 22, fontWeight: 900, color: '#cc44ff', letterSpacing: 1, textShadow: '0 0 10px rgba(204,68,255,0.5)' }}>{data.name}</div>
+              <div style={{ fontFamily: 'var(--font-title)', fontSize: 22, fontWeight: 900, color: colors.accent, letterSpacing: 1, textShadow: `0 0 10px ${colors.glow}` }}>{data.name}</div>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: '#e0f4ff', fontWeight: 600, marginTop: 4 }}>{data.description}</div>
             </div>
           </div>
 
           {/* COMPONENTS SECTION */}
           <div style={{ marginBottom: 20 }}>
-            <div style={{ fontFamily: 'var(--font-title)', fontSize: 16, color: '#cc44ff', marginBottom: 12, fontWeight: 800, borderBottom: '1px solid rgba(204,68,255,0.3)', paddingBottom: 6 }}>
+            <div style={{ fontFamily: 'var(--font-title)', fontSize: 16, color: colors.accent, marginBottom: 12, fontWeight: 800, borderBottom: `1px solid ${colors.border}4d`, paddingBottom: 6 }}>
               {data.componentsTitle}
             </div>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: 'var(--font-mono)', fontSize: 13 }}>
@@ -88,7 +113,7 @@ export default function Ascension() {
                 {data.components.map((c, i) => (
                   <tr key={i}>
                     <td style={{ padding: '6px 8px', borderBottom: '1px solid rgba(255,255,255,0.05)', color: '#fff', fontWeight: 600 }}>{c.name}</td>
-                    <td style={{ padding: '6px 8px', borderBottom: '1px solid rgba(255,255,255,0.05)', color: '#00e5ff', textAlign: 'right', fontWeight: 800 }}>{c.cost.toLocaleString()} CRD</td>
+                    <td style={{ padding: '6px 8px', borderBottom: '1px solid rgba(255,255,255,0.05)', color: colors.border, textAlign: 'right', fontWeight: 800 }}>{c.cost.toLocaleString()} CRD</td>
                   </tr>
                 ))}
               </tbody>
@@ -98,7 +123,7 @@ export default function Ascension() {
             </div>
           </div>
 
-          <div style={{ fontFamily: 'var(--font-title)', fontSize: 16, color: '#cc44ff', marginBottom: 12, fontWeight: 800, borderBottom: '1px solid rgba(204,68,255,0.3)', paddingBottom: 6 }}>
+          <div style={{ fontFamily: 'var(--font-title)', fontSize: 16, color: colors.accent, marginBottom: 12, fontWeight: 800, borderBottom: `1px solid ${colors.border}4d`, paddingBottom: 6 }}>
             {data.name} Evolution
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
@@ -110,8 +135,8 @@ export default function Ascension() {
               const evoImg = EVO_IMAGES[evo.id]
               return (
                 <div key={evo.id} style={{
-                  background: isUnlocked ? 'rgba(204,68,255,0.15)' : 'rgba(0,0,0,0.3)',
-                  border: isUnlocked ? '1px solid #cc44ff' : '1px solid rgba(255,255,255,0.1)',
+                  background: isUnlocked ? colors.bg : 'rgba(0,0,0,0.3)',
+                  border: isUnlocked ? `1px solid ${colors.border}` : '1px solid rgba(255,255,255,0.1)',
                   borderRadius: 8,
                   padding: 12,
                   position: 'relative'
@@ -131,10 +156,10 @@ export default function Ascension() {
                     <div style={{
                       display: 'flex', justifyContent: 'center', alignItems: 'center',
                       marginBottom: 10,
-                      background: isUnlocked ? 'rgba(204,68,255,0.08)' : 'rgba(0,0,0,0.2)',
+                      background: isUnlocked ? colors.bgLight : 'rgba(0,0,0,0.2)',
                       borderRadius: 8,
                       padding: '8px 0',
-                      border: isUnlocked ? '1px solid rgba(204,68,255,0.3)' : '1px solid rgba(255,255,255,0.05)',
+                      border: isUnlocked ? `1px solid ${colors.border}4d` : '1px solid rgba(255,255,255,0.05)',
                       minHeight: 120,
                     }}>
                       <img
@@ -144,7 +169,7 @@ export default function Ascension() {
                           maxHeight: 120,
                           maxWidth: '85%',
                           objectFit: 'contain',
-                          filter: !levelMet ? 'grayscale(70%) brightness(0.6)' : isUnlocked ? 'drop-shadow(0 0 12px rgba(204,68,255,0.7))' : 'none',
+                          filter: !levelMet ? 'grayscale(70%) brightness(0.6)' : isUnlocked ? `drop-shadow(0 0 12px ${colors.accent})` : 'none',
                           transition: 'filter 0.3s ease',
                         }}
                       />
@@ -154,7 +179,7 @@ export default function Ascension() {
                   <div style={{ display: 'flex', gap: 16, marginBottom: 12, fontSize: 13, fontFamily: 'var(--font-mono)', color: '#e0f4ff', flexWrap: 'wrap' }}>
                     <div><span style={{color: '#f5a623'}}>⚔️ ATK</span> +{evo.atk.toLocaleString()}</div>
                     <div><span style={{color: '#44ff88'}}>❤️ HP</span> +{evo.hp.toLocaleString()}</div>
-                    <div><span style={{color: '#cc44ff'}}>💥 CRIT</span> +{evo.crit}%</div>
+                    <div><span style={{color: colors.accent}}>💥 CRIT</span> +{evo.crit}%</div>
                   </div>
 
                   {evo.locked ? (
@@ -182,15 +207,15 @@ export default function Ascension() {
                       style={{
                         width: '100%',
                         padding: '10px 0',
-                        background: canAfford && levelMet ? 'linear-gradient(90deg, #cc44ff, #9900ff)' : 'rgba(255,255,255,0.05)',
+                        background: canAfford && levelMet ? `linear-gradient(90deg, ${colors.accent}, ${colors.border})` : 'rgba(255,255,255,0.05)',
                         border: canAfford && levelMet ? 'none' : '1px solid rgba(255,255,255,0.1)',
                         borderRadius: 6,
-                        color: canAfford && levelMet ? '#fff' : 'rgba(255,255,255,0.3)',
+                        color: canAfford && levelMet ? '#000' : 'rgba(255,255,255,0.3)',
                         fontFamily: 'var(--font-title)',
                         fontSize: 14,
                         fontWeight: 900,
                         cursor: canAfford && levelMet ? 'pointer' : 'not-allowed',
-                        textShadow: canAfford && levelMet ? '0 1px 3px rgba(0,0,0,0.5)' : 'none'
+                        textShadow: canAfford && levelMet ? '0 1px 1px rgba(255,255,255,0.3)' : 'none'
                       }}
                     >
                       UPGRADE: {evo.costLabel}
@@ -198,7 +223,7 @@ export default function Ascension() {
                   ) : (
                     <div style={{
                       width: '100%', padding: '10px 0', textAlign: 'center',
-                      background: 'rgba(204,68,255,0.2)', color: '#cc44ff',
+                      background: colors.bg, color: colors.accent,
                       borderRadius: 6, fontFamily: 'var(--font-title)', fontSize: 14, fontWeight: 900
                     }}>
                       ✓ EQUIPPED

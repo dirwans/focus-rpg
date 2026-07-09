@@ -1660,6 +1660,17 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - Boots -> `defbionexguardianlv42boots.png`
 - **Verification**: Local build compiled successfully.
 
+---
+
+### 🛡️ Milestone 125: Bionex Faction Theme Redesign & Cache Busting
+- **Theme Color Remapping**:
+  - Remapped Bionex's faction colors in `index.css`: changed frame/glow color (`--neon-glow`) to deep sky blue (`#00bfff`) and titles/highlights (`--neon-secondary-1`) to vibrant gold/yellow (`#ffdd00`) matching the faction logo.
+  - Refactored `Ascension.jsx` to dynamically assign UI border/accent/text-shadow colors based on faction properties rather than using hardcoded values.
+- **Cache Busting**:
+  - Appended version parameter `?v=2` to all evolution image sources in `Ascension.jsx` to bypass aggressive browser caching and ensure newly-cleaned transparent mecha PNGs load correctly instead of stale versions.
+- **Verification**: Local build compiled successfully.
+
+
 
 
 
