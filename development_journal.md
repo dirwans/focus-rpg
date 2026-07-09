@@ -1529,3 +1529,10 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - Safely deleted 23 unused graphic assets, including draft pilot frames, obsolete boss templates, unused shield renders, and placeholder designs, reducing clean APK footprint sizes.
 - **Verification**: Successfully builds and compiles locally.
 
+---
+
+### 🛡️ Milestone 116: Remove Hero Shop Entry Button [PENDING DEPLOYMENT]
+- **NPC Lobby Screen Cleanup (`src/components/NpcModal.jsx`)**:
+  - Completely removed the `Race Hero` (`CELESTRA HERO`, `BIONEX HERO`, `ARCTRON HERO`) / `Archon Equipment Shop` button entry card from the faction specialist lobby NPC list, preventing access to the old hero items shop layout.
+- **Verification**: Successfully builds and compiles locally.
+
