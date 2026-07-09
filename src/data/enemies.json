@@ -482,54 +482,43 @@
       "name": "Sentry Dementor",
       "hp": 11815,
       "atk": 8959,
-      "def": 1097,
-      "critical": 10,
-      "dodge": 20,
-      "stun": 2
+      "def": 1100,
+      "dodge": 11
     },
     {
       "floor": 2,
       "name": "Borg Dementor",
-      "hp": 13105,
-      "atk": 16004,
-      "def": 1555,
-      "critical": 12,
-      "dodge": 10,
-      "stun": 3,
-      "doubleHitChance": 20
+      "hp": 11815,
+      "atk": 8959,
+      "def": 1100,
+      "stun": 11
     },
     {
       "floor": 3,
       "name": "Ork Dementor",
-      "hp": 14305,
-      "atk": 29769,
-      "def": 2068,
-      "critical": 18,
-      "dodge": 15,
-      "stun": 7,
-      "doubleHitChance": 20
+      "hp": 11815,
+      "atk": 8959,
+      "def": 1100,
+      "selfHeal": 11
     },
     {
       "floor": 4,
       "name": "Ghost Dementor",
-      "hp": 14630,
-      "atk": 29769,
-      "def": 2170,
-      "critical": 20,
-      "dodge": 18,
-      "stun": 10,
-      "doubleHitChance": 20
+      "hp": 11815,
+      "atk": 8959,
+      "def": 1100,
+      "doubleHitChance": 11
     },
     {
       "floor": 5,
       "name": "Mutation Dementor",
-      "hp": 19676,
-      "atk": 39558,
-      "def": 1900,
-      "critical": 15,
-      "dodge": 12,
-      "stun": 5,
-      "doubleHitChance": 20
+      "hp": 11815,
+      "atk": 8959,
+      "def": 1100,
+      "dodge": 11,
+      "stun": 11,
+      "selfHeal": 11,
+      "doubleHitChance": 11
     },
     {
       "floor": 6,

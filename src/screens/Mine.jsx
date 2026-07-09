@@ -179,11 +179,20 @@ export default function Mine() {
       if (guardian) {
         const stats = useGameStore.getState().getStats()
         
-        // INSTANT CALCULATION
-        const pDps = Math.max(1, stats.atk - guardian.def)
-        const eDps = Math.max(1, guardian.atk - stats.def)
-        
-        const ttkPlayer = Math.ceil(guardian.hp / pDps)
+        // INSTANT CALCULATION with passive ability mechanics
+        const gDodge     = (guardian.dodge          || 0) / 100
+        const gStun      = (guardian.stun           || 0) / 100
+        const gSelfHeal  = (guardian.selfHeal        || 0) / 100
+        const gDoubleHit = (guardian.doubleHitChance || 0) / 100
+
+        // Player DPS reduced by guardian dodge + stun
+        const pDps = Math.max(1, (stats.atk - guardian.def) * (1 - gDodge) * (1 - gStun))
+        // Guardian DPS increased by doubleHitChance
+        const eDps = Math.max(1, (guardian.atk - stats.def) * (1 + gDoubleHit))
+        // Guardian effective HP increased by selfHeal (triggers once at <50%)
+        const effectiveHp = guardian.hp * (1 + gSelfHeal / 2)
+
+        const ttkPlayer = Math.ceil(effectiveHp / pDps)
         const ttkEnemy = Math.ceil(stats.hp / eDps)
         
         // Survive if player kills enemy first OR enemy takes longer than timer duration to kill player

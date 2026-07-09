@@ -580,8 +580,15 @@ function computeRewards(player, stats, mode, minutes, selectedZone = 'world') {
   if (isDungeon) {
     const dungeonIdx = parseInt(selectedZone.split('_')[1]) - 1
     const dungeon = enemies.dungeons[dungeonIdx]
-    const avgHp = dungeon.boss.hp
-    const avgDef = dungeon.boss.def
+    const boss = dungeon.boss
+    const avgHp = boss.hp
+    const avgDef = boss.def
+
+    // Enemy passive abilities
+    const bDodge     = (boss.dodge          || 0) / 100
+    const bStun      = (boss.stun           || 0) / 100
+    const bSelfHeal  = (boss.selfHeal        || 0) / 100
+    const bDoubleHit = (boss.doubleHitChance || 0) / 100
     
     // Use actual stats from getStats()
     const group = getPlayerClassGroup(player.job, player.race)
@@ -593,11 +600,12 @@ function computeRewards(player, stats, mode, minutes, selectedZone = 'world') {
 
     // Calculate Hit Rate (vs 5% base enemy dodge)
     const hitRate = Math.max(0.05, Math.min(1.0, 0.95 - (stats.dodge || 0)))
-    // Calculate average damage per hit
     const critRate = Math.min(1.0, stats.crit || 0)
-    const critMult = 1.0 + (critRate * 0.5) // Crits deal 1.5x
-    const dps = Math.max(1, activeAtk - avgDef) * critMult * hitRate
-    const secPerKill = Math.max(2, avgHp / dps)
+    const critMult = 1.0 + (critRate * 0.5)
+    // Passive: dodge + stun reduce player DPS, selfHeal inflates effective HP
+    const dps = Math.max(1, activeAtk - avgDef) * critMult * hitRate * (1 - bDodge) * (1 - bStun)
+    const effectiveHp = avgHp * (1 + bSelfHeal / 2)
+    const secPerKill = Math.max(2, effectiveHp / dps)
     const kills = Math.floor(elapsedSec / secPerKill)
 
     const baseCrdPerKill = dungeonIdx === 0 ? 3 : dungeonIdx === 1 ? 6 : 12
@@ -626,14 +634,23 @@ function computeRewards(player, stats, mode, minutes, selectedZone = 'world') {
   const mobs = enemies.sectors[sectorIdx].mobs
   const avg = (f) => mobs.reduce((a, m) => a + f(m), 0) / mobs.length
   let avgHp, avgDef, avgAni
+  let avgDodge = 0, avgStun = 0, avgSelfHeal = 0, avgDoubleHit = 0
   const maxLevels = [12, 25, 38, 52, 66, 999]
   if (player.level === maxLevels[sectorIdx]) {
     const boss = enemies.sectors[sectorIdx].boss
     avgHp = boss.hp; avgDef = boss.def; avgAni = boss.crdReward
+    avgDodge     = (boss.dodge          || 0) / 100
+    avgStun      = (boss.stun           || 0) / 100
+    avgSelfHeal  = (boss.selfHeal        || 0) / 100
+    avgDoubleHit = (boss.doubleHitChance || 0) / 100
   } else {
-    avgHp = avg((m) => m.hp) * 1.2
-    avgDef = avg((m) => m.def)
-    avgAni = avg((m) => m.crdReward) * 1.2
+    avgHp        = avg((m) => m.hp) * 1.2
+    avgDef       = avg((m) => m.def)
+    avgAni       = avg((m) => m.crdReward) * 1.2
+    avgDodge     = avg((m) => (m.dodge          || 0)) / 100
+    avgStun      = avg((m) => (m.stun           || 0)) / 100
+    avgSelfHeal  = avg((m) => (m.selfHeal        || 0)) / 100
+    avgDoubleHit = avg((m) => (m.doubleHitChance || 0)) / 100
   }
   
   // Use actual stats from getStats()
@@ -647,8 +664,10 @@ function computeRewards(player, stats, mode, minutes, selectedZone = 'world') {
   const hitRate = Math.max(0.05, Math.min(1.0, 0.95 - (stats.dodge || 0)))
   const critRate = Math.min(1.0, stats.crit || 0)
   const critMult = 1.0 + (critRate * 0.5)
-  const dps = Math.max(1, activeAtk - avgDef) * critMult * hitRate
-  const secPerKill = Math.max(2, avgHp / dps)
+  // Passive: dodge + stun reduce player DPS, selfHeal inflates effective HP
+  const dps = Math.max(1, activeAtk - avgDef) * critMult * hitRate * (1 - avgDodge) * (1 - avgStun)
+  const effectiveHp = avgHp * (1 + avgSelfHeal / 2)
+  const secPerKill = Math.max(2, effectiveHp / dps)
   const kills = Math.floor(elapsedSec / secPerKill)
 
   let totalCrdGained = 0
