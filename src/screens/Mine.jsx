@@ -126,6 +126,14 @@ export default function Mine() {
   const [activeTab,    setActiveTab]    = useState('mine')
   const [processGrade, setProcessGrade] = useState('common')
 
+  const AUTO_MINING_TOOLS = {
+    arctron: '/assets/auto_mining_tool_arctron.png',
+    bionex: '/assets/auto_mining_tool_bionex.png',
+    celestra: '/assets/auto_mining_tool_celestra.png'
+  }
+  const hasAutoTool = player?.inventory?.some(it => it.id === 'tool_auto_mining')
+  const toolImg = hasAutoTool ? AUTO_MINING_TOOLS[player?.race || 'arctron'] : MINING_TOOLS[player?.race || 'arctron']
+
   const miningTimer = player?.miningTimer || { state: 'idle', startedAt: 0, endsAt: 0, duration: 0 }
   const [secondsLeft, setSecondsLeft] = useState(0)
 
@@ -284,9 +292,9 @@ export default function Mine() {
       <div style={s.header}>
         <button onClick={() => useGameStore.getState().setScreen('main')} style={s.backBtn}>❮</button>
         <span style={s.headerTitle}>⛏ TRINITY MINE STATION</span>
-        {MINING_TOOLS[player?.race] && (
+        {toolImg && (
           <img
-            src={MINING_TOOLS[player.race]}
+            src={toolImg}
             alt="mining tool"
             style={{ width: 36, height: 36, objectFit: 'contain', marginLeft: 'auto', filter: 'drop-shadow(0 0 6px rgba(0,229,255,0.6))' }}
           />
@@ -559,27 +567,48 @@ export default function Mine() {
                         ⚠️ <strong>Protokol Pertahanan:</strong> {isBoss ? 'Wajib bertarung melawan BOSS Kaelgorath (100% Encounter).' : 'Peluang disergap Guardian Dementor sebesar 25% saat mulai.'} Jika kalah simulasi tempur, penambangan akan gagal dideploy.
                       </div>
 
-                      {/* MULAI BUTTON */}
-                      <button
-                        style={{
-                          width: '100%',
-                          padding: '10px 0',
-                          background: 'linear-gradient(135deg, #ffe066 0%, #ff8800 100%)',
-                          border: '1px solid #ffffff',
-                          borderRadius: 6,
-                          color: '#000000',
-                          fontWeight: 'bold',
-                          fontFamily: "'Orbitron', sans-serif",
-                          fontSize: 14,
-                          letterSpacing: 2,
-                          cursor: 'pointer',
-                          boxShadow: '0 0 10px rgba(255, 215, 0, 0.3)',
-                          transition: 'all 0.2s'
-                        }}
-                        onClick={() => handleStartMining(selectedFloor)}
-                      >
-                        MULAI DEPLOY MINER
-                      </button>
+                      {/* MULAI BUTTON OR WARNING */}
+                      {(() => {
+                        const pickaxeCount = countInventoryItem('tool_mining_pickaxe')
+                        const autoToolCount = countInventoryItem('tool_auto_mining')
+                        const hasTool = pickaxeCount > 0 || autoToolCount > 0
+                        
+                        if (!hasTool) {
+                          return (
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, padding: 10, background: 'rgba(255, 68, 68, 0.08)', border: '1px solid rgba(255, 68, 68, 0.3)', borderRadius: 6, marginTop: 4 }}>
+                              <div style={{ color: '#ff4444', fontFamily: 'var(--font-mono)', fontSize: 12, fontWeight: 'bold' }}>
+                                ⚠️ MEMBUTUHKAN MINING TOOL!
+                              </div>
+                              <div style={{ color: '#88aadd', fontSize: 10, textAlign: 'center', fontFamily: 'var(--font-mono)', lineHeight: 1.3 }}>
+                                Silakan beli Standard / Auto Mining Tool di Faction Mining Supplier NPC terlebih dahulu.
+                              </div>
+                            </div>
+                          )
+                        }
+                        
+                        return (
+                          <button
+                            style={{
+                              width: '100%',
+                              padding: '10px 0',
+                              background: 'linear-gradient(135deg, #ffe066 0%, #ff8800 100%)',
+                              border: '1px solid #ffffff',
+                              borderRadius: 6,
+                              color: '#000000',
+                              fontWeight: 'bold',
+                              fontFamily: "'Orbitron', sans-serif",
+                              fontSize: 14,
+                              letterSpacing: 2,
+                              cursor: 'pointer',
+                              boxShadow: '0 0 10px rgba(255, 215, 0, 0.3)',
+                              transition: 'all 0.2s'
+                            }}
+                            onClick={() => handleStartMining(selectedFloor)}
+                          >
+                            MULAI DEPLOY MINER
+                          </button>
+                        )
+                      })()}
                     </div>
                   )
                 })()}
@@ -591,10 +620,10 @@ export default function Mine() {
             {miningTimer.state === 'running' && secondsLeft > 0 && (
               <div style={s.activeArea}>
                 {/* Mining Tool Sprite (faction-specific) */}
-                {MINING_TOOLS[player?.race] && (
+                {toolImg && (
                   <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 8 }}>
                     <img
-                      src={MINING_TOOLS[player.race]}
+                      src={toolImg}
                       alt={`${player.race} mining tool`}
                       style={{
                         width: 110,

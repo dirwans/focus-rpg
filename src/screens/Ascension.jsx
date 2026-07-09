@@ -20,11 +20,16 @@ const EVO_IMAGES = {
   ares_nemesis:     '/assets/ARESlv42arctron.png?v=2',
   ares_dominator:   '/assets/ARESlv55arctron.png?v=2',
   ares_apocalypse:  '/assets/ARESlv65arctron.png?v=2',
-  // Celestra Ancient Spirit
-  spirit_sylph:     '/assets/celestra_mystic_female.png?v=2',
-  spirit_sanctus:   '/assets/celestra_mystic_male.png?v=2',
-  spirit_seraph:    '/assets/celestra_specialist_female.png?v=2',
-  spirit_empyrean:  '/assets/celestra_specialist_male.png?v=2',
+  // Celestra Ancient Spirit - Seraphys
+  spirit_seraphys_32: '/assets/spirit_seraphys_32.png?v=1',
+  spirit_seraphys_42: '/assets/spirit_seraphys_42.png?v=1',
+  spirit_seraphys_55: '/assets/spirit_seraphys_55.png?v=1',
+  spirit_seraphys_65: '/assets/spirit_seraphys_65.png?v=1',
+  // Celestra Ancient Spirit - Noctyrna
+  spirit_noctyrna_32: '/assets/spirit_noctyrna_32.png?v=1',
+  spirit_noctyrna_42: '/assets/spirit_noctyrna_42.png?v=1',
+  spirit_noctyrna_55: '/assets/spirit_noctyrna_55.png?v=1',
+  spirit_noctyrna_65: '/assets/spirit_noctyrna_65.png?v=1',
 }
 
 const RACE_COLORS = {

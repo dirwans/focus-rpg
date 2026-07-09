@@ -1705,9 +1705,15 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                     price: 50000,
                     img: player.race === 'arctron' ? miningToolArctron : player.race === 'bionex' ? miningToolBionex : miningToolCelestra
                   },
-                  { id: 'pot_mining_battery_s', label: '🔋 Battery S (Mining Fuel x1)', price: 25000 },
-                  { id: 'pot_mining_battery_m', label: '🔋 Battery M (Mining Fuel x3)', price: 60000 },
-                  { id: 'pot_mining_battery_l', label: '🔋 Battery L (Mining Fuel x10)', price: 150000 },
+                  { 
+                    id: 'tool_auto_mining', 
+                    label: player.race === 'arctron' ? 'Arctron Auto Mining Tool' : player.race === 'bionex' ? 'Bionex Auto Mining Tool' : 'Celestra Auto Mining Tool', 
+                    price: 150000,
+                    img: player.race === 'arctron' ? '/assets/auto_mining_tool_arctron.png' : player.race === 'bionex' ? '/assets/auto_mining_tool_bionex.png' : '/assets/auto_mining_tool_celestra.png'
+                  },
+                  { id: 'pot_mining_battery_s', label: '🔋 Battery S (Mining Fuel x1)', price: 25000, img: '/assets/mining_battery_s.png' },
+                  { id: 'pot_mining_battery_m', label: '🔋 Battery M (Mining Fuel x3)', price: 60000, img: '/assets/mining_battery_m.png' },
+                  { id: 'pot_mining_battery_l', label: '🔋 Battery L (Mining Fuel x10)', price: 150000, img: '/assets/mining_battery_l.png' },
                 ].map(({ id, label, price, img }) => (
                   <div key={id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 0', borderTop: '1px solid rgba(255,255,255,0.07)' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>

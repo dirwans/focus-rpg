@@ -1592,7 +1592,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### ⚙️ Milestone 121: Bionex M.E.U. & Arctron A.R.E.S. Ascension Realignment [PENDING DEPLOYMENT]
+### ⚙️ Milestone 121: Bionex M.E.U. & Arctron A.R.E.S. Ascension Realignment [DEPLOYED]
 - **`src/data/ascensionArms.json`**:
   - Rebuilt Bionex evolution list to feature separate **Attacker** and **Defender** tracks across Lv.32, Lv.42, and Lv.55.
   - Added a locked flag (`"locked": true`) for the Lv.65 Titan-class mechas (both Attacker and Defender).
@@ -1614,7 +1614,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🛡️ Milestone 122: Bionex Guardian Soul Render (Lv.32) Gear Assets Replacement [PENDING DEPLOYMENT]
+### 🛡️ Milestone 122: Bionex Guardian Soul Render (Lv.32) Gear Assets Replacement [DEPLOYED]
 - **Assets Extraction**:
   - Cropped and extracted all 5 individual gear assets from the composite sheet reference `lv32bionexguardianrmor.jpg`.
   - Processed each cropped item using the AI `rembg` background remover to cleanly erase solid backgrounds and generate transparent PNG assets.
@@ -1670,8 +1670,82 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - Appended version parameter `?v=2` to all evolution image sources in `Ascension.jsx` to bypass aggressive browser caching and ensure newly-cleaned transparent mecha PNGs load correctly instead of stale versions.
 - **Verification**: Local build compiled successfully.
 
+---
 
+### 🛡️ Milestone 126: Bionex Marksman (Lv.42) Gear Assets Replacement [DEPLOYED]
+- **Assets Extraction & Processing**:
+  - Cropped and extracted `helmet`, `armor`, `gloves`, and `pants` from sheet reference `lv42bionexmarksmansets.png` (cropping the bottom 120 pixels to discard text labels).
+  - Specially processed the `boots` (`defbionexmarksmanlv42boots.png`): cropped starting Y at `220` relative to the boots box to completely exclude the red circled belt markup pen from the reference. Used a custom red color mask filter in Python to erase any remaining red border pixels.
+  - Removed backgrounds using the AI `rembg` background remover and clean OpenCV contour-based noise filtering to guarantee transparent PNGs.
+  - Symmetrically padded, perfectly centered, and maximized sizes to fit the `320x320` frame (scaled up to fill 300px/94% of the frame dimensions).
+- **Gear Replacements**:
+  - Helmet -> `defbionexmarksmanlv42helmet.png`
+  - Chestplate -> `defbionexmarksmanlv42armor.png`
+  - Pants -> `defbionexmarksmanlv42pants.png`
+  - Gloves -> `defbionexmarksmanlv42gloves.png`
+  - Boots -> `defbionexmarksmanlv42boots.png`
+- **Verification**: Local build compiled successfully.
 
+---
 
+### 🌿 Milestone 127: Celestra Ancient Spirit - Seraphys & Noctyrna Branches [DEPLOYED]
+- **Assets Split & Background Removal**:
+  - Loaded side-by-side sprite composite sheets (`AnceintSpirit-Celestra-lv32.png` to `lv65.png`) from `public/assets/References/`.
+  - Wrote and executed Python script `crop_all_spirits.py` using `rembg` and Pillow:
+    - Split each level image horizontally into left and right halves.
+    - Left halves processed into transparent, centered, 800x800 square assets for **Seraphys** (`spirit_seraphys_*.png`).
+    - Right halves processed into transparent, centered, 800x800 square assets for **Noctyrna** (`spirit_noctyrna_*.png`).
+- **Ascension Arms Split Configuration**:
+  - Updated `src/data/ascensionArms.json` to define two split evolution branches: **Seraphys** (HP Healer) and **Noctyrna** (Aggressor: Critical + Stun stats design).
+  - Explicitly added `"locked": true` to the Level 65 entry for both branches (`spirit_seraphys_65` and `spirit_noctyrna_65`).
+- **UI & Store Asset Mapping**:
+  - Updated `src/screens/Ascension.jsx`'s `EVO_IMAGES` mapping to link the new evolution IDs to `/assets/spirit_*.png?v=1`.
+  - Added new evolution IDs in `src/store/gameStore.js`'s `resolveItemImage` resolver so equipped items and cargo/inventory items render correct transparent PNG files.
+- **Verification**: Verified React build (`npm run build`) compiles clean with no warnings.
 
+---
+
+### ⛏️ Milestone 128: Auto Mining Tools & Mining Batteries Replacement [DEPLOYED]
+- **Assets Extraction & Processing**:
+  - Cropped and processed `AutoMiningTools.png` from `public/assets/References/` to extract 3 faction-specific automated mining tools. Backgrounds cleanly removed using `rembg`, centered, padded to squares, and saved as `public/assets/auto_mining_tool_*.png`.
+  - Cropped and processed `Mining-Batteries.png` from `public/assets/References/` to extract 3 mining batteries (S, M, L). Backgrounds removed, centered, padded to squares, and saved as `public/assets/mining_battery_*.png`.
+  - Mirrored existing manual tools (`mining_tool_*_rembg.png`) from `src/assets/` to `public/assets/` to enable unified static serving.
+- **Items Database Updates**:
+  - Added new item `tool_auto_mining` (Auto Mining Tool) to `src/data/items.json` for 150,000 CRD.
+  - Updated `pot_mining_battery_s`, `pot_mining_battery_m`, and `pot_mining_battery_l` image paths to use new local paths `/assets/mining_battery_*.png`.
+- **NPC Shop UI Improvements**:
+  - Integrated the new `tool_auto_mining` item into the Mining Supplies vendor shop in `NpcModal.jsx`.
+  - Added `img` configurations to all battery shop items in `NpcModal.jsx` to render their newly cropped battery icons directly in the NPC supplier list view.
+- **Dynamic Asset Resolution**:
+  - Updated `resolveItemImage` in `src/store/gameStore.js` to dynamically return faction-specific mining tools (both standard pickaxes and auto mining tools) in the inventory/cargo screens.
+  - Updated `Mine.jsx` to select the active mining tool sprite (`toolImg`) based on whether the player owns `tool_auto_mining` or falls back to the manual tool.
+  - Enforced a tool requirement check in `Mine.jsx` prior to deployment: players must own either the standard mining tool or the auto mining tool to deploy miner.
+- **Verification**: Verified React build (`npm run build`) compiles clean with no warnings.
+
+---
+
+### 📦 Milestone 129: Monster Drops Material Assets Templating [DEPLOYED]
+- **Assets Slicing & Background Removal**:
+  - Sliced reference sheet `monster-drops-A-D.png` from `public/assets/References/` into 5 equal vertical parts. Cleaned background with `rembg`, centered, squared, and saved as `public/assets/items/drop_item_a.png` through `drop_item_e.png`.
+  - Sliced reference sheet `monster-drops-E-H.png` from `public/assets/References/` into 5 equal vertical parts. Cleaned background with `rembg`, centered, squared, and saved as `public/assets/items/drop_item_f.png` through `drop_item_j.png`.
+  - Sliced reference sheet `monster-drops-I-J.png` from `public/assets/References/` into 2 equal vertical parts. Cleaned background with `rembg`, centered, squared, and saved as `public/assets/items/drop_item_k.png` and `drop_item_l.png`.
+- **Items Database Mappings**:
+  - Registered 12 new material items (`mat_drop_a` through `mat_drop_l`) in `src/data/items.json`.
+  - Provided placeholder names, emojis, standard material descriptions, level requirements, and local image paths (`/assets/items/drop_item_*.png`) for all 12 drops.
+  - Aligned rarity classes: `mat_drop_a` & `b` (Common), `mat_drop_c` & `d` (Uncommon), `mat_drop_e` & `f` (Rare), `mat_drop_g` & `h` (Epic), `mat_drop_i` & `j` (Legendary), and `mat_drop_k` & `l` (Mythic).
+- **Verification**: Verified React build (`npm run build`) compiles clean with no warnings.
+
+---
+
+### 🏆 Milestone 130: Special Boss Event HUD & Holographic Modal Integration [DEPLOYED]
+- **Assets Processing**:
+  - Cropped and processed `boss-event1.png` from `public/assets/References/` to strip backgrounds using `rembg`, center, pad, and resize to 512x512 pixels. Saved as `/assets/boss_event_1.png` in both `public` and `src` asset directories.
+- **Floating HUD Trigger**:
+  - Added a floating event badge (`[🏆 EVENT LIVE]`) to the top-right section of [Main.jsx](file:///c:/projects/focus-rpg/src/screens/Main.jsx) adjacent to the location pill. Engineered responsive neon glows and scale hover micro-animations.
+- **Holographic Modal Dashboard**:
+  - Created [EventModal.jsx](file:///c:/projects/focus-rpg/src/components/EventModal.jsx) to serve as a high-fidelity cyberpunk console dashboard.
+  - Programmed a neon-orange container pulse and a vertical scanning sweeping line overlay (`event-scan-bar`) with custom CSS keyframe animations.
+  - Centered and floated the `boss_event_1.png` asset with the standard `heroFloat` animation pattern.
+  - Outlined active buff details (+50% EXP / +20% CRD) and special mythic drop associations (`mat_drop_k`/`l`).
+- **Verification**: Verified React build (`npm run build`) compiles clean with no warnings.
 

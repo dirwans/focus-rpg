@@ -151,6 +151,14 @@ function resolveArmorSetImage(slot, playerRace, playerJob, level) {
 
 export function resolveItemImage(item, playerRace, playerJob) {
   if (!item) return null
+  if (item.id === 'tool_mining_pickaxe') {
+    const race = playerRace || 'arctron'
+    return `/assets/mining_tool_${race}_rembg.png`
+  }
+  if (item.id === 'tool_auto_mining') {
+    const race = playerRace || 'arctron'
+    return `/assets/auto_mining_tool_${race}.png`
+  }
   if (item.type === 'shield' && item.id && item.id.startsWith('arm_All_')) {
     const lvl = item.level || 1
     const race = playerRace || 'arctron'
@@ -234,6 +242,16 @@ export function resolveItemImage(item, playerRace, playerJob) {
     if (item.id === 'ares_nemesis') return '/assets/ARESlv42arctron.png'
     if (item.id === 'ares_dominator') return '/assets/ARESlv55arctron.png'
     if (item.id === 'ares_apocalypse') return '/assets/ARESlv65arctron.png'
+    // Celestra Ancient Spirit - Seraphys
+    if (item.id === 'spirit_seraphys_32') return '/assets/spirit_seraphys_32.png'
+    if (item.id === 'spirit_seraphys_42') return '/assets/spirit_seraphys_42.png'
+    if (item.id === 'spirit_seraphys_55') return '/assets/spirit_seraphys_55.png'
+    if (item.id === 'spirit_seraphys_65') return '/assets/spirit_seraphys_65.png'
+    // Celestra Ancient Spirit - Noctyrna
+    if (item.id === 'spirit_noctyrna_32') return '/assets/spirit_noctyrna_32.png'
+    if (item.id === 'spirit_noctyrna_42') return '/assets/spirit_noctyrna_42.png'
+    if (item.id === 'spirit_noctyrna_55') return '/assets/spirit_noctyrna_55.png'
+    if (item.id === 'spirit_noctyrna_65') return '/assets/spirit_noctyrna_65.png'
   }
   return item.image
 }

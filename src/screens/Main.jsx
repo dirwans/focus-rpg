@@ -13,6 +13,7 @@ import LibraryModal from '../components/LibraryModal'
 import SocialModal from '../components/SocialModal'
 import GuildPanel from '../components/GuildPanel'
 import MailboxModal from '../components/MailboxModal'
+import EventModal from '../components/EventModal'
 
 function fmt(s) {
   const m = Math.floor(s / 60).toString().padStart(2, '0')
@@ -410,6 +411,7 @@ export default function Main() {
   const [showMailbox, setShowMailbox] = useState(false)
   const [showMapModal, setShowMapModal] = useState(false)
   const [npcInitialView, setNpcInitialView] = useState('lobby')
+  const [showEventModal, setShowEventModal] = useState(false)
 
   // Register global back-button bridge for Capacitor hardware back key
   useEffect(() => {
@@ -826,6 +828,59 @@ export default function Main() {
 
   return (
     <div className="no-scrollbar" style={styles.screen}>
+      {/* Floating Event Widget */}
+      {player.race && (
+        <button 
+          onClick={() => setShowEventModal(true)}
+          style={{
+            position: 'absolute',
+            top: '55px',
+            right: '16px',
+            zIndex: 100,
+            background: 'rgba(255, 153, 0, 0.12)',
+            border: '1.5px solid #ffaa00',
+            borderRadius: '8px',
+            padding: '5px 10px',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6,
+            fontFamily: "'Orbitron', sans-serif",
+            fontSize: '11px',
+            fontWeight: 900,
+            letterSpacing: '1px',
+            color: '#ffaa00',
+            boxShadow: '0 0 10px rgba(255, 170, 0, 0.2), inset 0 0 5px rgba(255, 170, 0, 0.1)',
+            transition: 'all 0.2s',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'scale(1.05)'
+            e.currentTarget.style.boxShadow = '0 0 15px rgba(255, 170, 0, 0.5), inset 0 0 8px rgba(255, 170, 0, 0.2)'
+            e.currentTarget.style.background = 'rgba(255, 153, 0, 0.18)'
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'scale(1)'
+            e.currentTarget.style.boxShadow = '0 0 10px rgba(255, 170, 0, 0.2), inset 0 0 5px rgba(255, 170, 0, 0.1)'
+            e.currentTarget.style.background = 'rgba(255, 153, 0, 0.1)'
+          }}
+        >
+          <span style={{ fontSize: 13, display: 'inline-block', transform: 'translateY(-1px)' }}>🏆</span>
+          <span style={{ textShadow: '0 0 5px rgba(255, 170, 0, 0.5)' }}>EVENT</span>
+          <span style={{
+            fontSize: '8px',
+            background: '#ff5500',
+            color: '#fff',
+            borderRadius: '3px',
+            padding: '1px 4px',
+            marginLeft: 2,
+            fontFamily: 'var(--font-mono)',
+            fontWeight: 800,
+          }}>
+            LIVE
+          </span>
+        </button>
+      )}
+
       {/* Ambient decorative layer — pure CSS/SVG, no image assets */}
       <div className="ambient-layer">
         <div className="ambient-topglow" />
@@ -1050,6 +1105,7 @@ export default function Main() {
       {showNpcModal && <NpcModal onClose={() => setShowNpcModal(false)} initialView={npcInitialView} />}
       {showMailbox && <MailboxModal onClose={() => setShowMailbox(false)} />}
       {showMapModal && <WorldMapModal onClose={() => setShowMapModal(false)} />}
+      {showEventModal && <EventModal onClose={() => setShowEventModal(false)} />}
 
     </div>
   )
