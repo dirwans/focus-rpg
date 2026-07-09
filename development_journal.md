@@ -1502,7 +1502,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 📖 Milestone 113: Guides & Currency Database Updates [PENDING DEPLOYMENT]
+### 📖 Milestone 113: Guides & Currency Database Updates [DEPLOYED]
 - **Library Guide Expansion (`src/components/LibraryModal.jsx`)**:
   - Appended detailed instructional cards explaining the **Friend / Social System**, **Guild System & Management**, **World Boss / Pit Boss Encounters**, and **Premium Boosters & Potions** to the guides panel database.
 - **Currency Nomenclature Cleanup (`src/components/LibraryModal.jsx`, `src/components/NpcModal.jsx`, `src/App.jsx`, `src/components/CharacterCreate.jsx`)**:
@@ -1513,7 +1513,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 👑 Milestone 114: Eminence Set Item ID Fixes [PENDING DEPLOYMENT]
+### 👑 Milestone 114: Eminence Set Item ID Fixes [DEPLOYED]
 - **Quartermaster Shop Correction (`src/components/NpcModal.jsx`)**:
   - Replaced the invalid set piece IDs (such as `emi_helmet`, `emi_armor`, etc. and ring/amulet items) in the Eminence Quartermaster shop list with the correct IDs defined in the database (`eminence_helmet`, `eminence_armor`, `eminence_pants`, `eminence_gloves`, `eminence_boots`, `eminence_cape`, and `eminence_staff`), matching `items.json`.
 - **Verification**: Successfully builds and compiles locally.
