@@ -1500,3 +1500,12 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - Configured successful Pit Boss elimination in combat grids to increment the player's profile `worldBossKill` count.
 - **Verification**: Successfully builds and compiles locally.
 
+---
+
+### 📖 Milestone 113: Guides & Currency Database Updates [PENDING DEPLOYMENT]
+- **Library Guide Expansion (`src/components/LibraryModal.jsx`)**:
+  - Appended detailed instructional cards explaining the **Friend / Social System**, **Guild System & Management**, **World Boss / Pit Boss Encounters**, and **Premium Boosters & Potions** to the guides panel database.
+- **Currency Nomenclature Cleanup (`src/components/LibraryModal.jsx`)**:
+  - Replaced all legacy references of the token term `Credits` with `CRD` inside the drop tables, inventory, warehouse, potion, and crafting sections.
+- **Verification**: Successfully builds and compiles locally.
+

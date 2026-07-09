@@ -165,7 +165,6 @@ export default function LibraryModal({ onClose }) {
                 <div style={styles.itemTitle}>❌ Item yang Tidak Dapat Diperdagangkan</div>
                 <ul style={styles.list}>
                   <li>💰 CRD</li>
-                  <li>◈ Credits</li>
                   <li>💎 NXC</li>
                 </ul>
               </div>
@@ -198,7 +197,7 @@ export default function LibraryModal({ onClose }) {
                 <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#00ff88', fontWeight: 700, marginBottom: 6 }}>GUARANTEED</div>
                 <ul style={styles.list}>
                   <li>⭐ EXP</li>
-                  <li>◈ Credits <span style={{ color: '#88aadd' }}>(sesuai Map)</span></li>
+                  <li>💰 CRD <span style={{ color: '#88aadd' }}>(sesuai Map)</span></li>
                 </ul>
                 <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#ffcc00', fontWeight: 700, margin: '8px 0 6px' }}>RANDOM DROP</div>
                 <ul style={styles.list}>
@@ -213,13 +212,13 @@ export default function LibraryModal({ onClose }) {
 
               {/* CRD per Map */}
               <div style={styles.itemCard}>
-                <div style={styles.itemTitle}>💰 Credits Drop — Normal Monster</div>
+                <div style={styles.itemTitle}>💰 CRD Drop — Normal Monster</div>
                 {[
-                  { map: '🌱 Map 1', lvl: 'Lv.1–12', crd: '500 ~ 1,000 Credits' },
-                  { map: '🌿 Map 2', lvl: 'Lv.13–25', crd: '1,500 ~ 3,000 Credits' },
-                  { map: '⚙️ Map 3', lvl: 'Lv.26–38', crd: '4,000 ~ 8,000 Credits' },
-                  { map: '🔥 Map 4', lvl: 'Lv.39–52', crd: '10,000 ~ 18,000 Credits' },
-                  { map: '☢️ Map 5', lvl: 'Lv.53–66', crd: '20,000 ~ 35,000 Credits' },
+                  { map: '🌱 Map 1', lvl: 'Lv.1–12', crd: '500 ~ 1,000 CRD' },
+                  { map: '🌿 Map 2', lvl: 'Lv.13–25', crd: '1,500 ~ 3,000 CRD' },
+                  { map: '⚙️ Map 3', lvl: 'Lv.26–38', crd: '4,000 ~ 8,000 CRD' },
+                  { map: '🔥 Map 4', lvl: 'Lv.39–52', crd: '10,000 ~ 18,000 CRD' },
+                  { map: '☢️ Map 5', lvl: 'Lv.53–66', crd: '20,000 ~ 35,000 CRD' },
                 ].map((m, i) => (
                   <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: i < 4 ? '1px solid rgba(255,255,255,0.07)' : 'none', fontFamily: 'var(--font-mono)', fontSize: 12 }}>
                     <span>{m.map} <span style={{ color: '#88aadd' }}>({m.lvl})</span></span>
@@ -348,10 +347,10 @@ export default function LibraryModal({ onClose }) {
                   <div key={i} style={{ marginBottom: 10, paddingBottom: 10, borderBottom: i < 3 ? '1px solid rgba(255,255,255,0.07)' : 'none' }}>
                     <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 800, color: r.color, marginBottom: 5 }}>{r.rarity}</div>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3px 12px', fontFamily: 'var(--font-mono)', fontSize: 11 }}>
-                      <span style={{ color: '#aac8ff' }}>⚔️ Weapon</span><span style={{ color: '#00ff88' }}>{r.weapon} Credits</span>
-                      <span style={{ color: '#aac8ff' }}>🛡️ Armor/Shield</span><span style={{ color: '#00ff88' }}>{r.armor} Credits</span>
-                      <span style={{ color: '#aac8ff' }}>💍 Ring</span><span style={{ color: '#00ff88' }}>{r.ring} Credits</span>
-                      <span style={{ color: '#aac8ff' }}>📿 Amulet</span><span style={{ color: '#00ff88' }}>{r.amulet} Credits</span>
+                      <span style={{ color: '#aac8ff' }}>⚔️ Weapon</span><span style={{ color: '#00ff88' }}>{r.weapon} CRD</span>
+                      <span style={{ color: '#aac8ff' }}>🛡️ Armor/Shield</span><span style={{ color: '#00ff88' }}>{r.armor} CRD</span>
+                      <span style={{ color: '#aac8ff' }}>💍 Ring</span><span style={{ color: '#00ff88' }}>{r.ring} CRD</span>
+                      <span style={{ color: '#aac8ff' }}>📿 Amulet</span><span style={{ color: '#00ff88' }}>{r.amulet} CRD</span>
                     </div>
                   </div>
                 ))}
@@ -402,7 +401,7 @@ export default function LibraryModal({ onClose }) {
                     <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, lineHeight: 1.8, color: '#e0f4ff' }}>
                       <div>Slot Awal: <strong>100</strong></div>
                       <div>Maksimum: <strong>300</strong></div>
-                      <div style={{ marginTop: 4, color: '#ffcc00' }}>+20 Slot → <strong>1,000,000 Credits</strong></div>
+                      <div style={{ marginTop: 4, color: '#ffcc00' }}>+20 Slot → <strong>1,000,000 CRD</strong></div>
                     </div>
                   </div>
                   <div style={{ background: 'rgba(255,165,0,0.06)', borderRadius: 8, padding: 10 }}>
@@ -410,7 +409,7 @@ export default function LibraryModal({ onClose }) {
                     <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, lineHeight: 1.8, color: '#e0f4ff' }}>
                       <div>Slot Awal: <strong>200</strong></div>
                       <div>Maksimum: <strong>600</strong></div>
-                      <div style={{ marginTop: 4, color: '#ffcc00' }}>+50 Slot → <strong>2,500,000 Credits</strong></div>
+                      <div style={{ marginTop: 4, color: '#ffcc00' }}>+50 Slot → <strong>2,500,000 CRD</strong></div>
                     </div>
                   </div>
                 </div>
@@ -570,19 +569,19 @@ export default function LibraryModal({ onClose }) {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '4px' }}>
                     <span>⚪ Small HP Potion</span>
-                    <span style={{ color: '#00ff88', textAlign: 'right' }}>+1,000 HP<br/><span style={{ fontSize: '11px', color: '#aaa' }}>2,500 Credits | CD: 3s</span></span>
+                    <span style={{ color: '#00ff88', textAlign: 'right' }}>+1,000 HP<br/><span style={{ fontSize: '11px', color: '#aaa' }}>2,500 CRD | CD: 3s</span></span>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '4px' }}>
                     <span>🔵 Medium HP Potion</span>
-                    <span style={{ color: '#00ff88', textAlign: 'right' }}>+2,500 HP<br/><span style={{ fontSize: '11px', color: '#aaa' }}>8,000 Credits | CD: 3s</span></span>
+                    <span style={{ color: '#00ff88', textAlign: 'right' }}>+2,500 HP<br/><span style={{ fontSize: '11px', color: '#aaa' }}>8,000 CRD | CD: 3s</span></span>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '4px' }}>
                     <span>🔴 Large HP Potion</span>
-                    <span style={{ color: '#00ff88', textAlign: 'right' }}>+5,000 HP<br/><span style={{ fontSize: '11px', color: '#aaa' }}>20,000 Credits | CD: 3s</span></span>
+                    <span style={{ color: '#00ff88', textAlign: 'right' }}>+5,000 HP<br/><span style={{ fontSize: '11px', color: '#aaa' }}>20,000 CRD | CD: 3s</span></span>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '4px' }}>
                     <span>🔷 FP Potion</span>
-                    <span style={{ color: '#00e5ff', textAlign: 'right' }}>+2,500 FP<br/><span style={{ fontSize: '11px', color: '#aaa' }}>10,000 Credits | CD: 3s</span></span>
+                    <span style={{ color: '#00e5ff', textAlign: 'right' }}>+2,500 FP<br/><span style={{ fontSize: '11px', color: '#aaa' }}>10,000 CRD | CD: 3s</span></span>
                   </div>
                 </div>
               </div>
@@ -626,6 +625,48 @@ export default function LibraryModal({ onClose }) {
                     )
                   })}
                 </div>
+              </div>
+
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>👥 Friend / Social System</div>
+                <ul style={styles.list}>
+                  <li><strong>Kapasitas Teman:</strong> Maksimal 100 teman.</li>
+                  <li><strong>Tambah Teman:</strong> Cari Player ID di tab Social lalu klik <strong>+ Add</strong>.</li>
+                  <li><strong>Whisper &amp; Party:</strong> Kirim pesan langsung (Whisper) atau undang masuk ke dalam tim (Party).</li>
+                </ul>
+              </div>
+
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>🏰 Guild System &amp; Management</div>
+                <ul style={styles.list}>
+                  <li><strong>Syarat Pembuatan:</strong> Minimal Level 30 dan biaya 10.000.000 CRD.</li>
+                  <li><strong>Jabatan &amp; Buff:</strong>
+                    <ul style={{ paddingLeft: 16, marginTop: 4 }}>
+                      <li>👑 Guildmaster: HP +3%, ATK +3%, DEF +3%</li>
+                      <li>⭐ Vice Guildmaster: HP +2%, ATK +2%, DEF +2%</li>
+                      <li>👥 Member: Standard status</li>
+                    </ul>
+                  </li>
+                  <li><strong>Guild Management:</strong> Guildmaster memiliki akses penuh untuk menyetujui (Accept) atau menolak (Reject) pendaftar di tab Applicants, mempromosikan/menurunkan jabatan (Promote/Demote), serta mengeluarkan anggota (Kick).</li>
+                </ul>
+              </div>
+
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>👹 World Boss &amp; Pit Boss Encounters</div>
+                <ul style={styles.list}>
+                  <li><strong>Peluang Spawn:</strong> Setiap grinding dan dungeon boss memiliki peluang 15% untuk memicu kemunculan <strong>Pit Boss (World Boss)</strong>.</li>
+                  <li><strong>Mekanisme Pertempuran:</strong> Pit Boss memiliki darah (HP) dan serangan (ATK) yang sangat tinggi dibandingkan bos biasa.</li>
+                  <li><strong>Statistik Profil:</strong> Mengalahkan Pit Boss akan dicatat langsung dalam statistik profil karakter di bagian <strong>World Boss Kill</strong>.</li>
+                </ul>
+              </div>
+
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>⚡ Premium Boosters &amp; Potions</div>
+                <ul style={styles.list}>
+                  <li><strong>EXP Booster:</strong> Mengalikan perolehan EXP grinding sebesar 2x (Double) atau 3x (Triple) jika booster aktif.</li>
+                  <li><strong>Drop Rate Booster:</strong> Menambahkan peluang bonus drop rate (+5% per booster) untuk meningkatkan rate item langka, potion, dan Arcanite.</li>
+                  <li><strong>ATK &amp; DEF Potions:</strong> Memberikan bonus stat masif sebesar +25% ATK dan +25% DEF secara instan selama durasi potion aktif (3 menit).</li>
+                </ul>
               </div>
 
             </div>
@@ -996,7 +1037,7 @@ export default function LibraryModal({ onClose }) {
                         {w.materials && (
                           <div style={{ paddingLeft: 70, fontSize: 12, color: '#9db2c2' }}>
                             <div style={{ marginBottom: 4 }}>
-                              <span style={{ color: '#00e5ff' }}>{w.craft_cost ? 'Craft Cost' : 'Upgrade Cost'}:</span> {(w.craft_cost || w.upgrade_cost).toLocaleString()} Credits
+                              <span style={{ color: '#00e5ff' }}>{w.craft_cost ? 'Craft Cost' : 'Upgrade Cost'}:</span> {(w.craft_cost || w.upgrade_cost).toLocaleString()} CRD
                             </div>
                             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
                               {w.materials.map((m, mi) => (
