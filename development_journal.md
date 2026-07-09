@@ -1413,3 +1413,34 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - Added `ascension_arms` to the `isEquipable` list so that if a player manually unequips their Ascension Arms into their bag, they can easily equip them back onto the humanoid slot from the UI.
 - **Verification**: Successfully verified with local production build.
 
+---
+
+### 👑 Milestone 105: Game Title & Level Cap Alignment [PENDING DEPLOYMENT]
+- **Game Title Sync (`index.html`, `src/screens/Auth.jsx`)**:
+  - Replaced the placeholder game name "FOCUS RPG" with the official blueprint title "Rising Fantasy Chronicles".
+- **Level Cap Adjustment (`src/store/gameStore.js`, `src/screens/Unit.jsx`)**:
+  - Lowered the max level cap from 70 to 66 in the leveling loop check.
+  - Adjusted absolute PT cap check level calculations from 70 to 66.
+- **Verification**: Verified successfully with local build check.
+
+---
+
+### 🛡️ Milestone 106: Faction HP Balancing & Eminence Shop Update [PENDING DEPLOYMENT]
+- **HP Specification Swap (`src/data/races.json`)**:
+  - Balanced base health to align with faksi resilience specifications: Bionex now has the highest base health (1200 HP and 1.25 multiplier) while Arctron base health was balanced down (750 HP and 0.9 multiplier).
+  - Cleaned up strengths/weaknesses list in the JSON accordingly.
+- **Eminence Shop Expansion (`src/components/NpcModal.jsx`)**:
+  - Added the **Vice Eminence Set** (Helmet, Armor, Gloves, Pants, Boots, Cape priced at 75M each) to the Eminence Quartermaster NPC Set Shop.
+  - Added the **Eminence Leadership Staff** (priced at 200M) to the Eminence Set pieces list.
+- **Verification**: Verified successfully with local build check.
+
+---
+
+### ⚡ Milestone 107: Premium Booster & Potion Activation [PENDING DEPLOYMENT]
+- **Premium Item Stat Bonuses (`src/store/gameStore.js`)**:
+  - Integrated active premium boosters and potions from `player.activeBoosts` into the game stat calculations and grinding session ticks:
+    - **EXP Boosters (Double/Triple)**: Multiplies EXP gains during periodic ticks and session finalization by `expBoost.mult` if active.
+    - **Drop Rate Booster (+5%)**: Adds `dropBoost.pct / 100` to the grinding session item roll chances if active.
+    - **ATK & DEF Potions (+25% ATK / DEF)**: Adds +25% directly to `percentAtk` and `percentDef` in `getStats` calculations if active.
+- **Verification**: Successfully builds and compiles locally.
+

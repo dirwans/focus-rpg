@@ -126,7 +126,7 @@ export default function Unit() {
   const gmForce = pt.force?.val >= 99
   const gmShield = pt.shield?.val >= 99
 
-  const absoluteCaps = getPTCaps(player.race, player.job, 70)
+  const absoluteCaps = getPTCaps(player.race, player.job, 66)
   const eligibleGMKeys = Object.keys(absoluteCaps).filter(key => absoluteCaps[key] >= 99)
   const allGMMaxed = eligibleGMKeys.length > 0 && eligibleGMKeys.every(key => pt[key]?.val >= 99)
 

@@ -1877,7 +1877,9 @@ export const useGameStore = create(
         const totalTickSeconds = (battle.totalTickSeconds || 0) + 1
         const activeSeconds = (battle.activeSeconds || 0) + (get().isScreenActive ? 1 : 0)
         const activeFraction = totalTickSeconds > 0 ? activeSeconds / totalTickSeconds : 0
-        const expBonusMult = 1 + 0.10 * activeFraction
+        const isExpBoostActive = player.activeBoosts?.expBoost && player.activeBoosts.expBoost.expiresAt > Date.now()
+        const expBoostMult = isExpBoostActive ? player.activeBoosts.expBoost.mult : 1
+        const expBonusMult = (1 + 0.10 * activeFraction) * expBoostMult
 
         const finalKills = Math.max(0, r.kills - deathPenaltyKills)
         const finalExp = Math.floor(Math.max(0, r.exp - deathPenaltyExp) * expBonusMult)
@@ -2350,8 +2352,13 @@ export const useGameStore = create(
         // scaled by the fraction of this session spent in Active Mode.
         const totalTickSeconds = battle.totalTickSeconds || 0
         const activeFraction = totalTickSeconds > 0 ? (battle.activeSeconds || 0) / totalTickSeconds : 0
-        const expBonusMult = 1 + 0.10 * activeFraction
-        const dropRateBonus = 0.05 * activeFraction
+        const isExpBoostActive = player.activeBoosts?.expBoost && player.activeBoosts.expBoost.expiresAt > Date.now()
+        const expBoostMult = isExpBoostActive ? player.activeBoosts.expBoost.mult : 1
+        const expBonusMult = (1 + 0.10 * activeFraction) * expBoostMult
+
+        const isDropBoostActive = player.activeBoosts?.dropBoost && player.activeBoosts.dropBoost.expiresAt > Date.now()
+        const dropBoostAdd = isDropBoostActive ? (player.activeBoosts.dropBoost.pct / 100) : 0
+        const dropRateBonus = 0.05 * activeFraction + dropBoostAdd
 
         const finalKills = Math.max(0, r.kills - deathPenaltyKills)
         const finalExp = Math.floor(Math.max(0, r.exp - deathPenaltyExp) * expBonusMult)
@@ -2361,7 +2368,7 @@ export const useGameStore = create(
         let newLevel = player.level
         let expToNext = getMinutesToNextLevel(newLevel)
         let levelUps = 0
-        while (newExp >= expToNext && newLevel < 70) {
+        while (newExp >= expToNext && newLevel < 66) {
           newExp -= expToNext; newLevel += 1; levelUps += 1; expToNext = getMinutesToNextLevel(newLevel)
         }
         const newSector = getSector(newLevel)
@@ -2861,7 +2868,7 @@ export const useGameStore = create(
         }
 
         // Ascension Arms Bonus: active if all eligible GM PTs (class cap at max level >= 99) are at 99
-        const absoluteCaps = getPTCaps(player.race, player.job, 70)
+        const absoluteCaps = getPTCaps(player.race, player.job, 66)
         const eligibleGMKeys = Object.keys(absoluteCaps).filter(key => absoluteCaps[key] >= 99)
         const allGMMaxed = eligibleGMKeys.length > 0 && eligibleGMKeys.every(key => pt[key]?.val >= 99)
 
@@ -3061,6 +3068,16 @@ export const useGameStore = create(
           tierHpPercent = 10
           tierCrit = 0
           tierDodge = 0
+        }
+
+        // ATK & DEF Potion Boosts
+        const isAtkPotActive = player.activeBoosts?.atkPot && player.activeBoosts.atkPot.expiresAt > Date.now()
+        if (isAtkPotActive) {
+          percentAtk += 25
+        }
+        const isDefPotActive = player.activeBoosts?.defPot && player.activeBoosts.defPot.expiresAt > Date.now()
+        if (isDefPotActive) {
+          percentDef += 25
         }
 
         percentAtk += tierAtkPercent

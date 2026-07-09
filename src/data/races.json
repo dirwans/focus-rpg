@@ -6,10 +6,11 @@
     "description": "Lahir dari koloni pertambangan yang terisolasi di gurun besi bagian utara. Bertahun-tahun hidup dalam kondisi ekstrem membuat mereka mengganti sebagian besar tubuh mereka dengan augmentasi mekanis. Mereka menciptakan pasukan elit Iron Vanguard yang bertarung tanpa rasa takut. \n\nMoto: \"Kesempurnaan dicapai melalui evolusi.\"",
     "strengths": [
       "💪 +30% Firepower (ATK)",
-      "🛡️ +25% Armor & +15% Shield HP",
+      "🛡️ +25% Defense (DEF)",
       "🚀 Exclusive heavy launchers"
     ],
     "weaknesses": [
+      "💔 Low Base Health (HP)",
       "⛏️ -25% Resource Gathering Rate",
       "🔮 Cannot equip wands or staves"
     ],
@@ -17,11 +18,11 @@
       "expMultiplier": 1.0,
       "atkMultiplier": 1.3,
       "defMultiplier": 1.25,
-      "hpMultiplier": 1.15,
+      "hpMultiplier": 0.9,
       "gatherMultiplier": 0.75,
       "dodgeBonus": 0
     },
-    "baseStats": { "hp": 1200, "atk": 70, "def": 48, "spd": 8, "luk": 5 }
+    "baseStats": { "hp": 750, "atk": 70, "def": 48, "spd": 8, "luk": 5 }
   },
   "bionex": {
     "id": "bionex",
@@ -29,24 +30,23 @@
     "emoji": "⚙️",
     "description": "Technocratic Human Alliance. Bangsa yang dibangun oleh para ilmuwan dan insinyur yang selamat dari Era Kehancuran. Kota-kota mereka berdiri di atas benteng terapung dan dilindungi oleh mesin tempur raksasa Titan Frame. Mereka mengutamakan logika dan inovasi. \n\nMoto: \"Pengetahuan adalah fondasi kekuatan.\"",
     "strengths": [
+      "❤️ Highest Health Points (HP)",
       "⛏️ +50% Resource Gathering Rate",
-      "⚖️ Balanced stats progression",
       "🏹 Exclusive composite bows",
       "💨 +2% Base Evasion (ADR)"
     ],
     "weaknesses": [
-      "💥 No extreme combat damage multipliers",
-      "🛡️ Standard base health"
+      "💥 No extreme combat damage multipliers"
     ],
     "bonuses": {
       "expMultiplier": 1.1,
       "atkMultiplier": 1.0,
       "defMultiplier": 1.05,
-      "hpMultiplier": 1.0,
+      "hpMultiplier": 1.25,
       "gatherMultiplier": 1.5,
       "dodgeBonus": 2
     },
-    "baseStats": { "hp": 850, "atk": 50, "def": 30, "spd": 10, "luk": 12 }
+    "baseStats": { "hp": 1200, "atk": 50, "def": 30, "spd": 10, "luk": 12 }
   },
   "celestra": {
     "id": "celestra",
@@ -54,7 +54,7 @@
     "emoji": "🧝‍♀️",
     "description": "Berasal dari hutan kristal di benua timur. Meyakini bahwa Lumina Core adalah hadiah roh alam semesta. Mereka mampu membentuk kontrak dengan makhluk energi bernama Eidolons. Mengutamakan keseimbangan alam. \n\nMoto: \"Jiwa dan alam adalah satu.\"",
     "strengths": [
-      "🔮 +30% Force Magic Power (ATK)",
+      "🔮 +15% Magic Power (ATK)",
       "🆙 +30% Focus EXP Rate (Meditation)",
       "✨ Exclusive staves/wands & high crit rate",
       "💨 +5% Base Evasion (ADR)"
@@ -67,10 +67,10 @@
       "expMultiplier": 1.3,
       "atkMultiplier": 1.15,
       "defMultiplier": 0.85,
-      "hpMultiplier": 0.9,
+      "hpMultiplier": 1.0,
       "gatherMultiplier": 1.0,
       "dodgeBonus": 5
     },
-    "baseStats": { "hp": 750, "atk": 58, "def": 24, "spd": 12, "luk": 18 }
+    "baseStats": { "hp": 850, "atk": 58, "def": 24, "spd": 12, "luk": 18 }
   }
 }

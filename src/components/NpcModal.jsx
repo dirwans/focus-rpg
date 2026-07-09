@@ -1549,6 +1549,23 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                 { id: 'emi_boots',  name: 'Boots',  price: 100000000 },
                 { id: 'emi_ring',   name: 'Ring',   price: 100000000 },
                 { id: 'emi_amulet', name: 'Amulet', price: 100000000 },
+                { id: 'eminence_staff', name: 'Leadership Staff', price: 200000000 },
+              ]
+            },
+            {
+              setId: 'vice_eminence',
+              name: 'Vice Eminence Set',
+              emoji: '⭐',
+              color: '#d6b85c',
+              total: 6,
+              fullBonus: 'ATK+80 | DEF+80 | HP+1500 | Crit+1%',
+              pieces: [
+                { id: 'vice_helmet', name: 'Helmet', price: 75000000 },
+                { id: 'vice_armor',  name: 'Armor',  price: 75000000 },
+                { id: 'vice_gloves', name: 'Gloves', price: 75000000 },
+                { id: 'vice_pants',  name: 'Pants',  price: 75000000 },
+                { id: 'vice_boots',  name: 'Boots',  price: 75000000 },
+                { id: 'vice_cape',   name: 'Cape',   price: 75000000 }
               ]
             },
             {

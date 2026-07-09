@@ -407,7 +407,7 @@ export default function Auth() {
       <div className="auth-card">
         <div style={{ textAlign: 'center' }}>
           <div className="auth-logo-icon">⚡</div>
-          <div className="auth-logo-text">FOCUS RPG</div>
+          <div className="auth-logo-text">RISING FANTASY CHRONICLES</div>
           <div className="auth-logo-sub">IDLE BATTLE SYSTEM</div>
         </div>
 
