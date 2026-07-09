@@ -706,6 +706,20 @@ export default function LibraryModal({ onClose }) {
               {equipFaction === 'arctron' && (
                 <>
                   <div style={styles.itemCard}>
+                    <div style={styles.itemTitle}>⚔️ Free Weapons</div>
+                    {arctronGears.genericWeapons && arctronGears.genericWeapons.map((w, i) => (
+                      <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
+                        <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
+                        <div style={{ textAlign: 'right', fontSize: 12 }}>
+                          <span style={{ color: '#00e5ff' }}>
+                            {w.atk ? (String(w.atk).includes('-') ? `${w.atk} ATK` : `+${w.atk} ATK`) : ''}
+                            {w.forceAtk ? (String(w.forceAtk).includes('-') ? ` / ${w.forceAtk} FORCE ATK` : ` / +${w.forceAtk} FORCE ATK`) : ''}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div style={styles.itemCard}>
                     <div style={styles.itemTitle}>🛡️ Armor Sets</div>
                     {arctronGears.armorSets.map((set, i) => (
                       <div key={i} style={{ marginBottom: 8, paddingBottom: 8, borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
@@ -802,6 +816,20 @@ export default function LibraryModal({ onClose }) {
 
               {equipFaction === 'bionex' && (
                 <>
+                  <div style={styles.itemCard}>
+                    <div style={styles.itemTitle}>⚔️ Free Weapons</div>
+                    {bionexGears.genericWeapons && bionexGears.genericWeapons.map((w, i) => (
+                      <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
+                        <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
+                        <div style={{ textAlign: 'right', fontSize: 12 }}>
+                          <span style={{ color: '#00e5ff' }}>
+                            {w.atk ? (String(w.atk).includes('-') ? `${w.atk} ATK` : `+${w.atk} ATK`) : ''}
+                            {w.forceAtk ? (String(w.forceAtk).includes('-') ? ` / ${w.forceAtk} FORCE ATK` : ` / +${w.forceAtk} FORCE ATK`) : ''}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                   <div style={styles.itemCard}>
                     <div style={styles.itemTitle}>🛡️ Armor Sets</div>
                     {bionexGears.armorSets.map((set, i) => (
@@ -910,6 +938,20 @@ export default function LibraryModal({ onClose }) {
               {equipFaction === 'celestra' && (
                 <>
                   <div style={styles.itemCard}>
+                    <div style={styles.itemTitle}>⚔️ Free Weapons</div>
+                    {celestraGears.genericWeapons && celestraGears.genericWeapons.map((w, i) => (
+                      <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
+                        <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
+                        <div style={{ textAlign: 'right', fontSize: 12 }}>
+                          <span style={{ color: '#00e5ff' }}>
+                            {w.atk ? (String(w.atk).includes('-') ? `${w.atk} ATK` : `+${w.atk} ATK`) : ''}
+                            {w.forceAtk ? (String(w.forceAtk).includes('-') ? ` / ${w.forceAtk} FORCE ATK` : ` / +${w.forceAtk} FORCE ATK`) : ''}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div style={styles.itemCard}>
                     <div style={styles.itemTitle}>🛡️ Armor Sets</div>
                     {celestraGears.armorSets.map((set, i) => (
                       <div key={i} style={{ marginBottom: 8, paddingBottom: 8, borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
@@ -1016,6 +1058,20 @@ export default function LibraryModal({ onClose }) {
 
               {equipFaction === 'accessories' && (
                 <>
+                  <div style={styles.itemCard}>
+                    <div style={styles.itemTitle}>⚔️ Free Weapons</div>
+                    {accessoriesData.genericWeapons && accessoriesData.genericWeapons.map((w, i) => (
+                      <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '4px 0' }}>
+                        <span><span style={{ color: '#aaa', width: 70, display: 'inline-block' }}>{w.grade}</span> {w.name}</span>
+                        <div style={{ textAlign: 'right', fontSize: 12 }}>
+                          <span style={{ color: '#00e5ff' }}>
+                            {w.atk ? (String(w.atk).includes('-') ? `${w.atk} ATK` : `+${w.atk} ATK`) : ''}
+                            {w.forceAtk ? (String(w.forceAtk).includes('-') ? ` / ${w.forceAtk} FORCE ATK` : ` / +${w.forceAtk} FORCE ATK`) : ''}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                   <div style={styles.itemCard}>
                     <div style={styles.itemTitle}>📿 Amulets (Universal — All Factions)</div>
                     {accessoriesData.amulets.map((a, i) => (

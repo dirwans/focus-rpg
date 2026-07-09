@@ -1,4 +1,24 @@
 {
+  "genericWeapons": [
+    {
+      "id": "gw_arc_launcher_30",
+      "name": "Standard Launcher",
+      "grade": "Uncommon",
+      "atk": "416 - 880"
+    },
+    {
+      "id": "gw_arc_launcher_42",
+      "name": "Heavy Launcher",
+      "grade": "Rare",
+      "atk": "706 - 1567"
+    },
+    {
+      "id": "gw_arc_launcher_55",
+      "name": "Devastator Launcher",
+      "grade": "Epic",
+      "atk": "1265 - 2714"
+    }
+  ],
   "warrior": {
     "weapons": [
       {

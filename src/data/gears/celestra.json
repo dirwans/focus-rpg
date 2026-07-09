@@ -79,6 +79,60 @@
       "defPct": 25
     }
   ],
+  "genericWeapons": [
+    {
+      "id": "gw_cel_staff_1",
+      "name": "Novice Staff",
+      "grade": "Common",
+      "atk": "28 - 41",
+      "forceAtk": "65 - 97"
+    },
+    {
+      "id": "gw_cel_staff_32",
+      "name": "Adept Staff",
+      "grade": "Uncommon",
+      "atk": "65 - 90",
+      "forceAtk": "410 - 616"
+    },
+    {
+      "id": "gw_cel_staff_42",
+      "name": "Mystic Staff",
+      "grade": "Rare",
+      "atk": "66 - 88",
+      "forceAtk": "710 - 1066"
+    },
+    {
+      "id": "gw_cel_staff_55",
+      "name": "Archmage Staff",
+      "grade": "Epic",
+      "atk": "87 - 117",
+      "forceAtk": "1248 - 1872"
+    },
+    {
+      "id": "gw_cel_bow_1",
+      "name": "Training Bow",
+      "grade": "Common",
+      "atk": "53 - 99"
+    },
+    {
+      "id": "gw_cel_bow_32",
+      "name": "Hunter Bow",
+      "grade": "Uncommon",
+      "atk": "342 - 659"
+    },
+    {
+      "id": "gw_cel_bow_42",
+      "name": "Composite Bow",
+      "grade": "Rare",
+      "atk": "592 - 1180"
+    },
+    {
+      "id": "gw_cel_bow_55",
+      "name": "Phantom Bow",
+      "grade": "Epic",
+      "atk": "1040 - 2041"
+    }
+  ],
   "sentinel": {
     "weapons": [
       {

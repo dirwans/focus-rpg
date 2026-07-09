@@ -89,6 +89,74 @@
       "defPctMax": 30
     }
   ],
+  "genericWeapons": [
+    {
+      "id": "gw_all_sword_1",
+      "name": "Rusty Sword",
+      "grade": "Common",
+      "atk": "81 - 99"
+    },
+    {
+      "id": "gw_all_sword_32",
+      "name": "Steel Sword",
+      "grade": "Uncommon",
+      "atk": "375 - 633"
+    },
+    {
+      "id": "gw_all_sword_42",
+      "name": "Reinforced Sword",
+      "grade": "Rare",
+      "atk": "652 - 1365"
+    },
+    {
+      "id": "gw_all_sword_55",
+      "name": "Titanium Sword",
+      "grade": "Epic",
+      "atk": "1180 - 1554"
+    },
+    {
+      "id": "gw_all_axe_32",
+      "name": "Heavy Axe",
+      "grade": "Uncommon",
+      "atk": "506 - 693"
+    },
+    {
+      "id": "gw_all_axe_42",
+      "name": "Battle Axe",
+      "grade": "Rare",
+      "atk": "883 - 1220"
+    },
+    {
+      "id": "gw_all_axe_55",
+      "name": "War Axe",
+      "grade": "Epic",
+      "atk": "1584 - 2068"
+    },
+    {
+      "id": "gw_all_firearm_1",
+      "name": "Basic Pistol",
+      "grade": "Common",
+      "atk": "52 - 99"
+    },
+    {
+      "id": "gw_all_firearm_32",
+      "name": "Combat Pistol",
+      "grade": "Uncommon",
+      "atk": "329 - 650"
+    },
+    {
+      "id": "gw_all_firearm_42",
+      "name": "Assault Rifle",
+      "grade": "Rare",
+      "atk": "568 - 1178"
+    },
+    {
+      "id": "gw_all_firearm_55",
+      "name": "Heavy Rifle",
+      "grade": "Epic",
+      "atk": "1021 - 2045"
+    }
+  ],
   "shields": [
     {
       "id": "shd_all_0",
