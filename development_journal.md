@@ -1531,14 +1531,14 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🛡️ Milestone 116: Remove Hero Shop Entry Button [PENDING DEPLOYMENT]
+### 🛡️ Milestone 116: Remove Hero Shop Entry Button [DEPLOYED]
 - **NPC Lobby Screen Cleanup (`src/components/NpcModal.jsx`)**:
   - Completely removed the `Race Hero` (`CELESTRA HERO`, `BIONEX HERO`, `ARCTRON HERO`) / `Archon Equipment Shop` button entry card from the faction specialist lobby NPC list, preventing access to the old hero items shop layout.
 - **Verification**: Successfully builds and compiles locally.
 
 ---
 
-### 🌀 Milestone 117: Job Class & Promotion Page Migration [PENDING DEPLOYMENT]
+### 🌀 Milestone 117: Job Class & Promotion Page Migration [DEPLOYED]
 - **Character screen integration (`src/screens/Unit.jsx`)**:
   - Relocated the Job Specialist Class Tree promotion and reclassing screen from the town NPC modal directly into the `CHARACTER INFO` tab (`tab === 'stats'`).
   - Added a small, styled `⚡ JOBS & PROMOTION` button inside the `CLASS PATH` title bar.
@@ -1551,7 +1551,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### ⚔️ Milestone 118: Game Logic & Calculation Fixes (22 Findings) [PENDING DEPLOYMENT]
+### ⚔️ Milestone 118: Game Logic & Calculation Fixes (22 Findings) [DEPLOYED]
 - **`src/store/gameStore.js`**:
   - Fixed Evasion/Dodge formula: changed `+stats.evasion` to `-stats.dodge` so player dodge actually reduces enemy hit rate.
   - Fixed baseStats key alignment — all races/tiers now reference correct job IDs from `jobs.json` (warrior, ranger, technician, sentinel, pathfinder, etc.).
@@ -1580,4 +1580,13 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - Upgraded font sizes in `Main.jsx` map panel: node labels `10` → `12`, status badge `11` → `12`, zone header `11` → `13`, active/idle badge `11` → `13`.
   - Replaced hardcoded `"'Orbitron', sans-serif"` strings with `var(--font-title)` CSS variable tokens.
 - **Verification**: Successfully builds and compiles locally.
+
+---
+
+### 🖼️ Milestone 120: Auth Page Frameless Design [PENDING DEPLOYMENT]
+- **`src/screens/Auth.jsx`**:
+  - Removed the glass card container frame from the login/register page: stripped `background`, `border`, `backdrop-filter`, `box-shadow`, `clip-path`, and `hover` effects from `.auth-card`.
+  - The form elements (logo, lore button, Google sign-in, login/register tabs, input fields, submit button) now float freely and directly over the dark radial background without a bounding box.
+  - All individual buttons retain their own glassmorphism/transparent styling (`.auth-lore-btn`, `.auth-native-google`, `.auth-submit`, `.auth-input` each keep their border + backdrop).
+- **Verification**: Change applied locally.
 

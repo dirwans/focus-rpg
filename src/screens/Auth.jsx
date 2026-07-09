@@ -136,20 +136,9 @@ export default function Auth() {
           display: flex;
           flex-direction: column;
           gap: 20px;
-          background: rgba(6, 15, 30, 0.58);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
-          border: 1px solid rgba(0, 229, 255, 0.22);
           padding: 26px 20px;
-          box-shadow: 0 0 20px rgba(0, 229, 255, 0.08), inset 0 0 12px rgba(0, 229, 255, 0.05);
-          clip-path: polygon(14px 0%, 100% 0%, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0% 100%, 0% 14px);
           z-index: 2;
           position: relative;
-          transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-        .auth-card:hover {
-          border-color: rgba(0, 229, 255, 0.35);
-          box-shadow: 0 0 30px rgba(0, 229, 255, 0.12), inset 0 0 16px rgba(0, 229, 255, 0.08);
         }
         .auth-logo-icon {
           font-size: 42px;
