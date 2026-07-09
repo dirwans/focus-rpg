@@ -13,6 +13,62 @@ export default function EventModal({ onClose }) {
   }
   const fc = factionColors[player.race] || factionColors.celestra
 
+  const s = {
+    title: {
+      fontFamily: "'Orbitron', sans-serif",
+      fontSize: 16,
+      fontWeight: 900,
+      color: fc.primary,
+      letterSpacing: 1.5,
+      textShadow: `0 0 8px ${fc.glow}`
+    },
+    closeBtn: {
+      background: 'none',
+      border: 'none',
+      color: '#ff4444',
+      fontSize: 16,
+      cursor: 'pointer',
+      fontFamily: "'Orbitron', sans-serif",
+      fontWeight: 900
+    },
+    cardTitle: {
+      fontFamily: "'Orbitron', sans-serif",
+      fontSize: 13,
+      fontWeight: 800,
+      color: fc.primary,
+      letterSpacing: 1
+    },
+    buffLabel: {
+      fontFamily: "'Orbitron', sans-serif",
+      fontSize: 10,
+      fontWeight: 700,
+      color: '#8a94a3',
+      letterSpacing: 1
+    },
+    buffValue: {
+      fontFamily: "'Orbitron', sans-serif",
+      fontSize: 13,
+      fontWeight: 800,
+      color: fc.primary,
+      letterSpacing: 0.5,
+      textAlign: 'center'
+    },
+    rewardsTitle: {
+      fontFamily: "'Orbitron', sans-serif",
+      fontSize: 11,
+      fontWeight: 800,
+      color: '#8a94a3',
+      letterSpacing: 1,
+      textAlign: 'left'
+    },
+    rewardName: {
+      fontFamily: "'Orbitron', sans-serif",
+      fontSize: 12,
+      color: fc.primary,
+      fontWeight: 700
+    },
+  }
+
   const handleGoToBattle = () => {
     setScreen('battle')
     onClose()
@@ -56,9 +112,9 @@ export default function EventModal({ onClose }) {
         <div style={styles.header}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <span style={{ fontSize: 18 }} className="event-badge-pulse">🏆</span>
-            <span style={styles.title}>SPECIAL EVENT ACTIVE</span>
+            <span style={s.title}>SPECIAL EVENT ACTIVE</span>
           </div>
-          <button style={styles.closeBtn} onClick={onClose}>✕</button>
+          <button style={s.closeBtn} onClick={onClose}>✕</button>
         </div>
 
         {/* Body */}
@@ -84,9 +140,9 @@ export default function EventModal({ onClose }) {
               alignItems: 'flex-end',
               height: '200px'
             }}>
-              <img 
-                src="/assets/boss_event_1.png" 
-                alt="Event Boss" 
+              <img
+                src="/assets/boss_event_1.png"
+                alt="Event Boss"
                 style={{ height: '190px', width: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 0 10px rgba(255, 183, 0, 0.45))' }}
               />
             </div>
@@ -97,7 +153,7 @@ export default function EventModal({ onClose }) {
           <div style={styles.eventInfoCard}>
             <div style={styles.cardHeader}>
               <span style={{ fontSize: 16 }}>🔥</span>
-              <span style={styles.cardTitle}>PIT BOSS INVASION</span>
+              <span style={s.cardTitle}>PIT BOSS INVASION</span>
             </div>
             <div style={styles.cardDesc}>
               Sebuah retakan dimensi Zero Flux terdeteksi! <strong style={{ color: '#ffd600' }}>Trinity Overlord</strong> dan gerombolan mecha anomali menyerang sektor leveling utama. Semua pilot diinstruksikan untuk segera meluncur ke pertempuran untuk meredam ancaman ini.
@@ -107,31 +163,31 @@ export default function EventModal({ onClose }) {
           {/* Event Buff Block */}
           <div style={styles.buffContainer}>
             <div style={styles.buffItem}>
-              <span style={styles.buffLabel}>⚡ BONUS EXP</span>
-              <span style={styles.buffValue}>+50% MINUTE BONUS</span>
+              <span style={s.buffLabel}>⚡ BONUS EXP</span>
+              <span style={s.buffValue}>+50% MINUTE BONUS</span>
             </div>
             <div style={styles.buffDivider} />
             <div style={styles.buffItem}>
-              <span style={styles.buffLabel}>💰 BONUS CRD</span>
-              <span style={styles.buffValue}>+20% DROP MULTIPLIER</span>
+              <span style={s.buffLabel}>💰 BONUS CRD</span>
+              <span style={s.buffValue}>+20% DROP MULTIPLIER</span>
             </div>
           </div>
 
           {/* Event Rewards Panel */}
           <div style={styles.rewardsCard}>
-            <div style={styles.rewardsTitle}>🎁 SPECIAL DROP REWARDS</div>
+            <div style={s.rewardsTitle}>🎁 SPECIAL DROP REWARDS</div>
             <div style={styles.rewardsList}>
               <div style={styles.rewardItem}>
                 <img src="/assets/items/drop_item_k.png" style={styles.rewardImg} alt="Tear of Nexus" />
                 <div style={styles.rewardInfo}>
-                  <div style={styles.rewardName}>💧 Tear of Nexus (Mythic)</div>
+                  <div style={s.rewardName}>💧 Tear of Nexus (Mythic)</div>
                   <div style={styles.rewardDesc}>Kristal Zero Flux murni dengan rate drop tinggi dari Event Boss.</div>
                 </div>
               </div>
               <div style={styles.rewardItem}>
                 <img src="/assets/items/drop_item_l.png" style={styles.rewardImg} alt="Nova Star Core" />
                 <div style={styles.rewardInfo}>
-                  <div style={styles.rewardName}>🌟 Nova Star Core (Mythic)</div>
+                  <div style={s.rewardName}>🌟 Nova Star Core (Mythic)</div>
                   <div style={styles.rewardDesc}>Bahan kerangka titanium bernilai tinggi.</div>
                 </div>
               </div>
@@ -139,8 +195,8 @@ export default function EventModal({ onClose }) {
           </div>
 
           {/* Action Button */}
-          <button 
-            style={{ ...styles.actionBtn, background: `linear-gradient(90deg, #ff9900, #ff5500)`, boxShadow: `0 4px 15px rgba(255, 85, 0, 0.4)` }} 
+          <button
+            style={{ ...styles.actionBtn, background: `linear-gradient(90deg, #ff9900, #ff5500)`, boxShadow: `0 4px 15px rgba(255, 85, 0, 0.4)` }}
             onClick={handleGoToBattle}
           >
             ⚔️ DEPLOY UNIT TO BATTLE ZONE
@@ -152,61 +208,44 @@ export default function EventModal({ onClose }) {
 }
 
 const styles = {
-  overlay: { 
-    position: 'fixed', 
-    top: 0, 
-    left: 0, 
-    right: 0, 
-    bottom: 0, 
-    background: 'rgba(2, 4, 10, 0.88)', 
-    backdropFilter: 'blur(8px)', 
-    display: 'flex', 
-    alignItems: 'center', 
-    justifyContent: 'center', 
-    zIndex: 2000, 
-    padding: 16 
+  overlay: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: 'rgba(2, 4, 10, 0.88)',
+    backdropFilter: 'blur(8px)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 2000,
+    padding: 16
   },
-  modal: { 
-    width: '100%', 
-    maxWidth: 440, 
-    display: 'flex', 
-    flexDirection: 'column', 
-    maxHeight: '90vh', 
-    background: 'rgba(5, 12, 28, 0.96)', 
-    border: '1.8px solid rgba(255, 183, 0, 0.35)', 
-    overflow: 'hidden' 
+  modal: {
+    width: '100%',
+    maxWidth: 440,
+    display: 'flex',
+    flexDirection: 'column',
+    maxHeight: '90vh',
+    background: 'rgba(5, 12, 28, 0.96)',
+    border: '1.8px solid rgba(255, 183, 0, 0.35)',
+    overflow: 'hidden'
   },
-  header: { 
-    display: 'flex', 
-    justifyContent: 'space-between', 
-    alignItems: 'center', 
-    padding: '14px 18px', 
-    borderBottom: '1px solid rgba(255, 183, 0, 0.25)', 
-    background: 'rgba(0, 0, 0, 0.5)' 
+  header: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '14px 18px',
+    borderBottom: '1px solid rgba(255, 183, 0, 0.25)',
+    background: 'rgba(0, 0, 0, 0.5)'
   },
-  title: {
-    fontFamily: "'Orbitron', sans-serif",
-    fontSize: 16,
-    fontWeight: 900,
-    color: fc.primary,
-    letterSpacing: 1.5,
-    textShadow: `0 0 8px ${fc.glow}`
-  },
-  closeBtn: {
-    background: 'none',
-    border: 'none',
-    color: '#ff4444',
-    fontSize: 16,
-    cursor: 'pointer',
-    fontFamily: "'Orbitron', sans-serif",
-    fontWeight: 900
-  },
-  body: { 
-    padding: 16, 
-    overflowY: 'auto', 
-    display: 'flex', 
-    flexDirection: 'column', 
-    gap: 14 
+  body: {
+    padding: 16,
+    overflowY: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 14
   },
   bossPreviewContainer: {
     position: 'relative',
@@ -277,13 +316,6 @@ const styles = {
     alignItems: 'center',
     gap: 6
   },
-  cardTitle: {
-    fontFamily: "'Orbitron', sans-serif",
-    fontSize: 13,
-    fontWeight: 800,
-    color: fc.primary,
-    letterSpacing: 1
-  },
   cardDesc: {
     fontFamily: "'Rajdhani', sans-serif",
     fontWeight: 600,
@@ -308,21 +340,6 @@ const styles = {
     alignItems: 'center',
     gap: 2
   },
-  buffLabel: {
-    fontFamily: "'Orbitron', sans-serif",
-    fontSize: 10,
-    fontWeight: 700,
-    color: '#8a94a3',
-    letterSpacing: 1
-  },
-  buffValue: {
-    fontFamily: "'Orbitron', sans-serif",
-    fontSize: 13,
-    fontWeight: 800,
-    color: fc.primary,
-    letterSpacing: 0.5,
-    textAlign: 'center'
-  },
   buffDivider: {
     width: 1,
     height: 28,
@@ -336,14 +353,6 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     gap: 8
-  },
-  rewardsTitle: {
-    fontFamily: "'Orbitron', sans-serif",
-    fontSize: 11,
-    fontWeight: 800,
-    color: '#8a94a3',
-    letterSpacing: 1,
-    textAlign: 'left'
   },
   rewardsList: {
     display: 'flex',
@@ -375,12 +384,6 @@ const styles = {
     textAlign: 'left',
     gap: 2
   },
-  rewardName: {
-    fontFamily: "'Orbitron', sans-serif",
-    fontSize: 12,
-    color: fc.primary,
-    fontWeight: 700
-  },
   rewardDesc: {
     fontFamily: "'Rajdhani', sans-serif",
     fontWeight: 600,
@@ -403,4 +406,3 @@ const styles = {
     textAlign: 'center'
   }
 }
-
