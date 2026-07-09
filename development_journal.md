@@ -1511,3 +1511,10 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - Cleared legacy `credits: 10` resources initialization and assigned the starting premium balance of 10 to `nxc` (Nexus Crystal) instead.
 - **Verification**: Successfully builds and compiles locally.
 
+---
+
+### 👑 Milestone 114: Eminence Set Item ID Fixes [PENDING DEPLOYMENT]
+- **Quartermaster Shop Correction (`src/components/NpcModal.jsx`)**:
+  - Replaced the invalid set piece IDs (such as `emi_helmet`, `emi_armor`, etc. and ring/amulet items) in the Eminence Quartermaster shop list with the correct IDs defined in the database (`eminence_helmet`, `eminence_armor`, `eminence_pants`, `eminence_gloves`, `eminence_boots`, `eminence_cape`, and `eminence_staff`), matching `items.json`.
+- **Verification**: Successfully builds and compiles locally.
+
