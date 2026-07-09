@@ -1536,3 +1536,16 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - Completely removed the `Race Hero` (`CELESTRA HERO`, `BIONEX HERO`, `ARCTRON HERO`) / `Archon Equipment Shop` button entry card from the faction specialist lobby NPC list, preventing access to the old hero items shop layout.
 - **Verification**: Successfully builds and compiles locally.
 
+---
+
+### 🌀 Milestone 117: Job Class & Promotion Page Migration [PENDING DEPLOYMENT]
+- **Character screen integration (`src/screens/Unit.jsx`)**:
+  - Relocated the Job Specialist Class Tree promotion and reclassing screen from the town NPC modal directly into the `CHARACTER INFO` tab (`tab === 'stats'`).
+  - Added a small, styled `⚡ JOBS & PROMOTION` button inside the `CLASS PATH` title bar.
+  - Implemented the full interactive Class Promotion Tree layout inside the stats panel when the button is clicked, including tier level checks, free promotion unlocks, and 5K CRD reclasses.
+  - Configured state variables and synchronization so that the tree view automatically switches to the lane corresponding to the player's current active class.
+  - Added a `Back` button to return to character stats seamlessly.
+- **NPC modal cleanup (`src/components/NpcModal.jsx`)**:
+  - Deleted the Specialist (e.g. `COVENANT HIGH PRIEST`) button entry from the main NPC lobby dialog list.
+- **Verification**: Verified successfully with local build check.
+

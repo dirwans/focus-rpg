@@ -29,6 +29,50 @@ function getBionexJobSprite(jobId) {
   return null;
 }
 
+const PROMO_COSTS = {
+  1: 0,
+  2: 0,
+  3: 0,
+  4: 0
+}
+const RECLASS_COST = 5000
+
+const CLASS_LANES = {
+  bionex: [
+    { title: "Guardian Path", indices: [[0], [0], [0], [0]] },
+    { title: "Marksman Path", indices: [[1], [1], [1], [1]] },
+    { title: "Engineer Path", indices: [[2], [2], [2], [2]] },
+    { title: "Psion Path", indices: [[3], [3], [3], [3]] }
+  ],
+  celestra: [
+    { title: "Warrior Path", indices: [[0], [0], [0], [0]] },
+    { title: "Pathfinder Path", indices: [[1], [1], [1], [1]] },
+    { title: "Summoner Path", indices: [[2], [2], [2], [2]] },
+    { title: "Mage Path", indices: [[3], [3], [3], [3]] }
+  ],
+  arctron: [
+    { title: "Warrior Path", indices: [[0], [0], [0], [0]] },
+    { title: "Ranger Path", indices: [[1], [1], [1], [1]] },
+    { title: "Technician Path", indices: [[2], [2], [2], [2]] }
+  ]
+}
+
+function getPlayerLaneIndex(raceId, jobId) {
+  if (!raceId || !jobId || !CLASS_LANES[raceId]) return 0
+  const lanes = CLASS_LANES[raceId]
+  for (let i = 0; i < lanes.length; i++) {
+    const indices = lanes[i].indices
+    const t1s = indices[0].map(idx => jobs[raceId]?.tier1[idx]?.id)
+    const t2s = indices[1].map(idx => jobs[raceId]?.tier2[idx]?.id)
+    const t3s = indices[2].map(idx => jobs[raceId]?.tier3[idx]?.id)
+    const t4s = (indices[3] || []).map(idx => jobs[raceId]?.tier4?.[idx]?.id)
+    if (t1s.includes(jobId) || t2s.includes(jobId) || t3s.includes(jobId) || t4s.includes(jobId)) {
+      return i
+    }
+  }
+  return 0
+}
+
 function getJobInfo(raceId, jobId) {
   if (!raceId || !jobs[raceId]) return { tier: 0, job: null, classIndex: -1 }
   const rJobs = jobs[raceId]
@@ -98,8 +142,161 @@ export default function Unit() {
   const stats = getStats()
   const expMax = getExpToNext()
   const expPct = Math.floor((player.exp / expMax) * 100)
-  const race = player.race ? races[player.race] : null
   const { tier, job, classIndex } = getJobInfo(player.race, player.job)
+  const reclassJob = useGameStore((s) => s.reclassJob)
+
+  const [showJobsClassTree, setShowJobsClassTree] = useState(false)
+  const [activeLaneIdx, setActiveLaneIdx] = useState(0)
+  const fp = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
+  const fa = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
+
+  React.useEffect(() => {
+    setActiveLaneIdx(getPlayerLaneIndex(player.race, player.job))
+  }, [player.job, player.race])
+
+  const handlePromote = (jobId) => {
+    const cost = PROMO_COSTS[tier + 1] || 0
+    if (player.resources.crd < cost) {
+      alert(`CRD tidak cukup! Membutuhkan ${cost.toLocaleString()} CRD.`)
+      return
+    }
+    reclassJob(jobId, cost)
+  }
+
+  const handleReclass = (jobId) => {
+    if (jobId === player.job) return
+    if (player.resources.crd < RECLASS_COST) {
+      alert(`CRD tidak cukup! Membutuhkan ${RECLASS_COST.toLocaleString()} CRD.`)
+      return
+    }
+    reclassJob(jobId, RECLASS_COST)
+  }
+
+  const renderHeroJobCard = (tabHeroJob, fp, fa) => {
+    if (!tabHeroJob) return null
+    const j = tabHeroJob.job
+    if (!j) return null
+    const jTier = tabHeroJob.tier
+
+    const isActive = player.job === j.id
+    const isUnlocked = tier >= jTier
+    const reqLevel = j.levelReq || 1
+
+    const eligibleForPromo = (
+      (tier === 0 && player.level >= 1) ||
+      (tier === 1 && player.level >= 32) ||
+      (tier === 2 && player.level >= 42) ||
+      (tier === 3 && player.level >= 55)
+    )
+    const promoCost = eligibleForPromo ? PROMO_COSTS[tier + 1] : 0
+    const canPromote = eligibleForPromo && player.resources.crd >= promoCost
+    const canReclass = tier >= 1 && player.resources.crd >= RECLASS_COST
+
+    const isPromoEligible = tier === 0 && player.level >= reqLevel
+    const isReclassEligible = tier === 1 && !isActive && player.job !== null
+    const isLocked = !isActive && !isPromoEligible && !isReclassEligible && (!isUnlocked || jTier > tier)
+
+    return (
+      <div style={{ width: '100%', display: 'flex', flexDirection: 'row', gap: 12, marginBottom: 12 }}>
+        {/* Left Side: BIG SPRITE */}
+        <div style={{
+          flex: '0 0 110px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'flex-end',
+          height: 150,
+          position: 'relative',
+          overflow: 'hidden',
+          borderRadius: 12,
+          border: `1.5px solid ${fp}`,
+          background: 'rgba(3, 8, 20, 0.55)',
+          boxShadow: `inset 0 0 16px ${fp}25`,
+        }}>
+          <div style={{
+            position: 'absolute', bottom: 0, left: '50%', transform: 'translateX(-50%)',
+            width: 100, height: 40, borderRadius: '50%',
+            background: `radial-gradient(ellipse, ${fp}80 0%, transparent 70%)`,
+            zIndex: 0, pointerEvents: 'none',
+          }} />
+          <div style={{ position: 'relative', zIndex: 1, height: 140, display: 'flex', alignItems: 'flex-end' }}>
+            <PilotSprite race={player.race} job={j.id} gender={player.gender} size={140} />
+          </div>
+        </div>
+        
+        {/* Right Side: Tier 1 Job Node */}
+        <div style={{
+          flex: 1, padding: 10, borderRadius: 8, boxSizing: 'border-box',
+          opacity: isLocked ? 0.45 : 1,
+          border: isActive ? `2.5px solid ${fp}` : '1.5px solid rgba(255,255,255,0.18)',
+          background: isActive ? 'rgba(13, 29, 61, 0.45)' : 'rgba(6, 13, 31, 0.45)',
+          display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative',
+          boxShadow: isActive ? `0 0 12px ${fp}40` : 'none',
+          textAlign: 'left'
+        }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span style={{ fontFamily: 'var(--font-title)', fontSize: 14, fontWeight: 900, color: '#fff', letterSpacing: 0.5 }}>{j.name.toUpperCase()}</span>
+            {isActive && <span style={{ fontFamily: 'var(--font-title)', fontSize: 10, fontWeight: 900, color: '#39ff14', background: 'rgba(57,255,20,0.1)', border: '1px solid #39ff14', borderRadius: 4, padding: '1px 4px' }}>✓ ACTIVE</span>}
+          </div>
+          <div style={{ fontFamily: 'var(--font-body)', fontSize: 12, color: '#eef3fb', marginTop: 2, lineHeight: 1.25 }}>{j.desc}</div>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#ffd700', marginTop: 4, fontWeight: 800 }}>
+            +{j.bonus.hp} HP | +{j.bonus.atk} ATK | +{j.bonus.def} DEF
+          </div>
+          {j.skills && j.skills.length > 0 && (
+            <div style={{ marginTop: 4 }}>
+              <div style={{ fontFamily: 'var(--font-mono)', fontWeight: 'bold', marginBottom: 2, fontSize: 10, color: '#aaa', letterSpacing: 0.5 }}>⚡ SKILLS:</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                {j.skills.map((sk, skIdx) => {
+                  const isObj = typeof sk === 'object';
+                  const skName = isObj ? sk.name : sk;
+                  const skDesc = isObj ? sk.desc : '';
+                  return (
+                    <div key={skIdx} style={{ display: 'flex', flexDirection: 'column' }}>
+                      <span style={{ color: '#00e5ff', fontWeight: 700, fontSize: 11 }}>{skName}</span>
+                      {skDesc && <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: 10, lineHeight: 1.2 }}>{skDesc}</span>}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+          
+          <div style={{ marginTop: 8, display: 'flex', justifyContent: 'center' }}>
+            {isLocked && !isPromoEligible && !isReclassEligible && (
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, fontWeight: 'bold', color: 'rgba(255,255,255,0.4)' }}>🔒 Requires LV.{reqLevel}</div>
+            )}
+            {isPromoEligible && (
+              <button
+                onClick={() => handlePromote(j.id)}
+                style={{
+                  width: '100%', padding: '6px 10px', fontSize: 11, fontWeight: 900, borderRadius: 6, cursor: 'pointer',
+                  border: '1.5px solid #00e5ff', background: 'linear-gradient(90deg, #00e5ff, #007482)', color: '#000',
+                  boxShadow: '0 0 8px rgba(0, 229, 255, 0.4)'
+                }}
+              >
+                {t('promo_btn_free') || '🚀 UNLOCK JOB (FREE)'}
+              </button>
+            )}
+            {isReclassEligible && (
+              <button
+                onClick={() => handleReclass(j.id)}
+                disabled={!canReclass}
+                style={{
+                  width: '100%', padding: '6px 10px', fontSize: 11, fontWeight: 900, borderRadius: 6,
+                  border: canReclass ? '1.5px solid #da70d6' : '1.5px solid rgba(255,255,255,0.1)',
+                  background: canReclass ? 'linear-gradient(90deg, #da70d6, #7a3e78)' : 'rgba(255,255,255,0.05)',
+                  color: canReclass ? '#fff' : 'rgba(255,255,255,0.3)',
+                  cursor: canReclass ? 'pointer' : 'not-allowed',
+                  boxShadow: canReclass ? '0 0 8px rgba(218, 112, 214, 0.4)' : 'none'
+                }}
+              >
+                {t('reclass_btn').replace(new RegExp('\\{fee\\}'), RECLASS_COST.toLocaleString())}
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   const CLASS_NAMES = {
     celestra: ['Warrior', 'Ranger', 'Summoner', 'Mage'],
@@ -196,8 +393,254 @@ export default function Unit() {
       })()}
 
       {tab === 'stats' && (
-        <>
-          {/* ============ HERO INSPECTION STAGE ============ */}
+        showJobsClassTree ? (
+          /* ============ JOBS & PROMOTION TREE PANEL ============ */
+          <div style={{
+            display: 'flex', flexDirection: 'column', gap: 12,
+            margin: '0 16px 15px', padding: 14, borderRadius: 16,
+            background: 'linear-gradient(180deg,rgba(24,23,26,0.42),rgba(16,15,17,0.85))',
+            border: `1px solid ${fp}4d`, boxShadow: '0 8px 30px rgba(0,0,0,0.5)',
+            boxSizing: 'border-box'
+          }}>
+            {/* Header */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: `1.5px solid ${fp}29`, paddingBottom: 8, marginBottom: 4 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'left' }}>
+                <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, fontWeight: 900, letterSpacing: 1, color: '#fff', textShadow: `0 0 10px ${fp}80` }}>
+                  ⚡ JOB TREE & PROMOTION
+                </span>
+                <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 10, color: '#8a94a3', marginTop: 2 }}>
+                  Manage promotions and class specialization paths
+                </span>
+              </div>
+              <button onClick={() => setShowJobsClassTree(false)} style={{
+                background: 'rgba(255,255,255,0.05)',
+                border: `1.5px solid ${fp}80`,
+                borderRadius: 8,
+                color: '#fff',
+                fontFamily: "'Orbitron', sans-serif",
+                fontSize: 10,
+                fontWeight: 900,
+                padding: '5px 12px',
+                cursor: 'pointer',
+                letterSpacing: 0.5,
+                boxShadow: `0 0 8px ${fp}20`
+              }}>
+                🔙 BACK
+              </button>
+            </div>
+
+            {/* Lane Selector Tabs */}
+            <div style={{ display: 'flex', overflowX: 'auto', gap: 8, width: '100%', boxSizing: 'border-box', marginBottom: 8, paddingBottom: 4 }} className="no-scrollbar">
+              {CLASS_LANES[player.race]?.map((lane, laneIdx) => {
+                const isActive = activeLaneIdx === laneIdx
+                const raceColor = player.race === 'arctron' ? '#ff3d00' : player.race === 'bionex' ? '#ffd600' : '#a855f7'
+
+                return (
+                  <div
+                    key={laneIdx}
+                    onClick={() => setActiveLaneIdx(laneIdx)}
+                    style={{
+                      flex: 1,
+                      minWidth: 100,
+                      background: 'rgba(4, 10, 24, 0.7)',
+                      border: isActive ? `2px solid ${raceColor}` : '1.5px solid rgba(255,255,255,0.1)',
+                      borderRadius: 8,
+                      padding: '8px 6px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      cursor: 'pointer',
+                      opacity: isActive ? 1 : 0.45,
+                      boxShadow: isActive ? `0 0 10px ${raceColor}` : 'none',
+                      transition: 'all 0.2s ease-in-out',
+                      flexShrink: 0
+                    }}
+                  >
+                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 11, fontWeight: 900, color: '#fff', letterSpacing: 0.5, textAlign: 'center' }}>
+                      {lane.title.replace(" Path", "").replace(" / ", "/").toUpperCase()}
+                    </span>
+                  </div>
+                )
+              })}
+            </div>
+
+            {/* Active Class Lane Tree */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, width: '100%', boxSizing: 'border-box' }}>
+              {(() => {
+                const lane = CLASS_LANES[player.race]?.[activeLaneIdx]
+                if (!lane) return null
+
+                const tierJobs = [
+                  { tier: 1, jobs: lane.indices[0].map(idx => jobs[player.race].tier1[idx]).filter(Boolean) },
+                  { tier: 2, jobs: lane.indices[1].map(idx => jobs[player.race].tier2[idx]).filter(Boolean) },
+                  { tier: 3, jobs: lane.indices[2].map(idx => jobs[player.race].tier3[idx]).filter(Boolean) },
+                  { tier: 4, jobs: (lane.indices[3] || []).map(idx => jobs[player.race].tier4?.[idx]).filter(Boolean) }
+                ].filter(t => t.jobs.length > 0)
+
+                const activeLane = CLASS_LANES[player.race]?.[activeLaneIdx]
+
+                // Hero sprite/T1 area helper
+                const tabHeroJob = activeLane ? (() => {
+                  const t1Idx = activeLane.indices[0]?.[0]
+                  if (t1Idx !== undefined && jobs[player.race]?.tier1[t1Idx]) return { tier: 1, job: jobs[player.race].tier1[t1Idx] }
+                  const t2Idx = activeLane.indices[1]?.[0]
+                  if (t2Idx !== undefined && jobs[player.race]?.tier2[t2Idx]) return { tier: 2, job: jobs[player.race].tier2[t2Idx] }
+                  return null
+                })() : null
+
+                return (
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+                    
+                    {/* Hero Sprite & Tier 1 Card Area */}
+                    {renderHeroJobCard(tabHeroJob, fp, fa)}
+                      
+                      {/* Vertical Connectors & Other Tiers */}
+                      {tierJobs.filter(tInfo => tabHeroJob ? tInfo.tier > tabHeroJob.tier : tInfo.tier > 1).map((tInfo, idx) => {
+                        const jArray = tInfo.jobs
+                        const jTier = tInfo.tier
+                        
+                        return (
+                          <div key={jTier} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+                            {/* Vertical connector line between tiers */}
+                            <div style={{
+                              width: 3, height: 20, zIndex: 0,
+                              background: tier >= jTier ? fp : 'rgba(255,255,255,0.08)',
+                              boxShadow: tier >= jTier ? `0 0 8px ${fp}` : 'none'
+                            }} />
+
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: '100%', alignItems: 'center' }}>
+                              {jArray.map((j, subIdx) => {
+                                if (!j) return null
+                                const isActive = player.job === j.id
+                                const isUnlocked = tier >= jTier
+                                const reqLevel = j.levelReq || (jTier === 2 ? 32 : jTier === 3 ? 42 : 55);
+
+                                const prevTierInfo = tierJobs.find(t => t.tier === jTier - 1)
+                                const prevTierJobs = prevTierInfo ? prevTierInfo.jobs : (tabHeroJob ? [tabHeroJob.job] : [])
+                                const prevTierJobIds = prevTierJobs.map(pj => pj.id)
+
+                                const eligibleForPromo = (
+                                  (tier === 0 && player.level >= 1) ||
+                                  (tier === 1 && player.level >= 32) ||
+                                  (tier === 2 && player.level >= 42) ||
+                                  (tier === 3 && player.level >= 55)
+                                )
+                                const promoCost = eligibleForPromo ? PROMO_COSTS[tier + 1] : 0
+                                const canPromote = eligibleForPromo && player.resources.crd >= promoCost
+                                const canReclass = tier >= 1 && player.resources.crd >= RECLASS_COST
+
+                                // Check if eligible for promotion to this node
+                                const isPromoEligible = (
+                                  (tier === 0 && jTier === 1 && player.level >= (j.levelReq || 1)) ||
+                                  (tier === 0 && jTier === 2 && prevTierJobIds.length === 0 && player.level >= reqLevel) ||
+                                  (tier === 1 && jTier === 2 && player.level >= reqLevel && prevTierJobIds.includes(player.job)) ||
+                                  (tier === 2 && jTier === 3 && player.level >= reqLevel && prevTierJobIds.includes(player.job)) ||
+                                  (tier === 3 && jTier === 4 && player.level >= reqLevel && prevTierJobIds.includes(player.job))
+                                )
+
+                                // Check if eligible for reclass to this node
+                                const isReclassEligible = (
+                                  tier === jTier && !isActive && player.job !== null
+                                )
+
+                                // Check if locked
+                                const isLocked = !isActive && !isPromoEligible && !isReclassEligible && (!isUnlocked || jTier > tier)
+
+                                return (
+                                  <React.Fragment key={j.id}>
+                                    {/* Horizontal connector line if multiple branches */}
+                                    {subIdx > 0 && (
+                                      <div style={{ width: '100%', height: 2, background: 'rgba(255,255,255,0.08)', margin: '4px 0' }} />
+                                    )}
+                                    <div style={{
+                                      width: '100%', padding: 10, borderRadius: 8, boxSizing: 'border-box',
+                                      opacity: isLocked ? 0.45 : 1,
+                                      border: isActive ? `2.5px solid ${fp}` : '1.5px solid rgba(255,255,255,0.18)',
+                                      background: isActive ? 'rgba(13, 29, 61, 0.45)' : 'rgba(6, 13, 31, 0.45)',
+                                      display: 'flex', flexDirection: 'column', position: 'relative',
+                                      boxShadow: isActive ? `0 0 12px ${fp}40` : 'none',
+                                      textAlign: 'left'
+                                    }}>
+                                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                        <span style={{ fontFamily: 'var(--font-title)', fontSize: 14, fontWeight: 900, color: '#fff', letterSpacing: 0.5 }}>{j.name.toUpperCase()}</span>
+                                        {isActive && <span style={{ fontFamily: 'var(--font-title)', fontSize: 10, fontWeight: 900, color: '#39ff14', background: 'rgba(57,255,20,0.1)', border: '1px solid #39ff14', borderRadius: 4, padding: '1px 4px' }}>✓ ACTIVE</span>}
+                                      </div>
+                                      <div style={{ fontFamily: 'var(--font-body)', fontSize: 12, color: '#eef3fb', marginTop: 2, lineHeight: 1.25 }}>{j.desc}</div>
+                                      <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#ffd700', marginTop: 4, fontWeight: 800 }}>
+                                        +{j.bonus.hp} HP | +{j.bonus.atk} ATK | +{j.bonus.def} DEF
+                                      </div>
+                                      
+                                      {j.skills && j.skills.length > 0 && (
+                                        <div style={{ marginTop: 4 }}>
+                                          <div style={{ fontFamily: 'var(--font-mono)', fontWeight: 'bold', marginBottom: 2, fontSize: 10, color: '#aaa', letterSpacing: 0.5 }}>⚡ SKILLS:</div>
+                                          <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                                            {j.skills.map((sk, skIdx) => {
+                                              const isObj = typeof sk === 'object';
+                                              const skName = isObj ? sk.name : sk;
+                                              const skDesc = isObj ? sk.desc : '';
+                                              return (
+                                                <div key={skIdx} style={{ display: 'flex', flexDirection: 'column' }}>
+                                                  <span style={{ color: '#00e5ff', fontWeight: 700, fontSize: 11 }}>{skName}</span>
+                                                  {skDesc && <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: 10, lineHeight: 1.2 }}>{skDesc}</span>}
+                                                </div>
+                                              );
+                                            })}
+                                          </div>
+                                        </div>
+                                      )}
+
+                                      <div style={{ marginTop: 8, display: 'flex', justifyContent: 'center' }}>
+                                        {isLocked && (
+                                          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, fontWeight: 'bold', color: 'rgba(255,255,255,0.4)', textAlign: 'center' }}>
+                                            🔒 Requires LV.{reqLevel} {jTier === 3 && `& T2 Job`}
+                                          </div>
+                                        )}
+                                        {isPromoEligible && (
+                                          <button
+                                            onClick={() => handlePromote(j.id)}
+                                            style={{
+                                              width: '100%', padding: '6px 10px', fontSize: 11, fontWeight: 900, borderRadius: 6, cursor: 'pointer',
+                                              border: '1.5px solid #00e5ff', background: 'linear-gradient(90deg, #00e5ff, #007482)', color: '#000',
+                                              boxShadow: '0 0 8px rgba(0, 229, 255, 0.4)'
+                                            }}
+                                          >
+                                            🚀 UNLOCK JOB (FREE)
+                                          </button>
+                                        )}
+                                        {isReclassEligible && (
+                                          <button
+                                            onClick={() => handleReclass(j.id)}
+                                            disabled={!canReclass}
+                                            style={{
+                                              width: '100%', padding: '6px 10px', fontSize: 11, fontWeight: 900, borderRadius: 6,
+                                              border: canReclass ? '1.5px solid #da70d6' : '1.5px solid rgba(255,255,255,0.1)',
+                                              background: canReclass ? 'linear-gradient(90deg, #da70d6, #7a3e78)' : 'rgba(255,255,255,0.05)',
+                                              color: canReclass ? '#fff' : 'rgba(255,255,255,0.3)',
+                                              cursor: canReclass ? 'pointer' : 'not-allowed',
+                                              boxShadow: canReclass ? '0 0 8px rgba(218, 112, 214, 0.4)' : 'none'
+                                            }}
+                                          >
+                                            🌀 RECLASS CLASS (5K ⬡)
+                                          </button>
+                                        )}
+                                      </div>
+                                    </div>
+                                  </React.Fragment>
+                                )
+                              })}
+                            </div>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  )
+                })()}
+              </div>
+            </div>
+        ) : (
+          <>
+            {/* ============ HERO INSPECTION STAGE ============ */}
           {(() => {
             const fp = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
             const fa = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
@@ -361,8 +804,28 @@ export default function Unit() {
 
             return (
               <div style={{ margin: '0 16px 10px', padding: '12px 12px 13px', background: 'rgba(8,22,36,0.4)', backdropFilter: 'blur(8px)', border: `1px solid ${fp}38`, borderRadius: 12 }}>
-                <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 700, letterSpacing: 1.5, color: '#8a94a3', marginBottom: 11 }}>
-                  CLASS PATH - {baseClass.toUpperCase()}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 11 }}>
+                  <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 700, letterSpacing: 1.5, color: '#8a94a3' }}>
+                    CLASS PATH - {baseClass.toUpperCase()}
+                  </span>
+                  <button
+                    onClick={() => setShowJobsClassTree(true)}
+                    style={{
+                      background: `linear-gradient(135deg, ${fp} 0%, rgba(0,0,0,0.6) 100%)`,
+                      border: `1.5px solid ${fp}`,
+                      borderRadius: 8,
+                      color: '#fff',
+                      fontFamily: "'Orbitron', sans-serif",
+                      fontSize: 10,
+                      fontWeight: 900,
+                      padding: '4px 10px',
+                      letterSpacing: 0.5,
+                      cursor: 'pointer',
+                      boxShadow: `0 0 8px ${fp}40`
+                    }}
+                  >
+                    ⚡ JOBS & PROMOTION
+                  </button>
                 </div>
                 <div style={{ position: 'relative', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                   <div style={{ position: 'absolute', top: 16, left: '12%', right: '12%', height: 2, background: `linear-gradient(90deg, ${fp} 0%, ${fp} ${linePct}, ${fp}33 ${linePct}, ${fp}33 100%)` }}/>
@@ -734,7 +1197,8 @@ export default function Unit() {
             )
           })()}
         </>
-      )}
+      )
+    )}
 
       {tab === 'profile' && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginTop: 8 }}>
