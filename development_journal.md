@@ -1444,3 +1444,14 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
     - **ATK & DEF Potions (+25% ATK / DEF)**: Adds +25% directly to `percentAtk` and `percentDef` in `getStats` calculations if active.
 - **Verification**: Successfully builds and compiles locally.
 
+---
+
+### 🦸 Milestone 108: Cape NPC Sell Block & World Boss Stat Tracking [PENDING DEPLOYMENT]
+- **Mantle/Cape Sell Restriction (`src/store/gameStore.js`)**:
+  - Extended the NPC sell blocker in `sellItem` to block items with type `"mantle"` in addition to `"cape"`, ensuring all capes/boosters cannot be sold to NPCs as per blueprint rules.
+- **World Boss Kill Tracking (`src/store/gameStore.js`, `src/screens/Unit.jsx`)**:
+  - Added `worldBossKill: 0` to initial `combatStats` structure.
+  - Incremented `worldBossKill` during grinding session completion when the target zone is not a dungeon and a stage boss is killed.
+  - Rendered the live `World Boss Kill` stat counter on the character's profile statistics sheet.
+- **Verification**: Verified successfully with local build check.
+

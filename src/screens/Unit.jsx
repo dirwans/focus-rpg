@@ -752,6 +752,10 @@ export default function Unit() {
                 <span style={{ fontWeight: 'bold' }}>{player.combatStats?.dungeonClear || 0}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span>• World Boss Kill:</span>
+                <span style={{ fontWeight: 'bold' }}>{player.combatStats?.worldBossKill || 0}</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span>• Core War Victory:</span>
                 <span style={{ fontWeight: 'bold' }}>{player.combatStats?.coreWarVictory || 0}</span>
               </div>

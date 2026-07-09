@@ -894,6 +894,7 @@ const initialPlayer = {
   combatStats: {
     totalMonsterKill: 0,
     dungeonClear: 0,
+    worldBossKill: 0,
     coreWarVictory: 0,
     highestEnhancement: 0
   },
@@ -2613,9 +2614,10 @@ export const useGameStore = create(
             inventory: newInventory,
             mailbox,
             combatStats: {
-              ...(s.player.combatStats || { totalMonsterKill: 0, dungeonClear: 0, coreWarVictory: 0, highestEnhancement: 0 }),
+              ...(s.player.combatStats || { totalMonsterKill: 0, dungeonClear: 0, worldBossKill: 0, coreWarVictory: 0, highestEnhancement: 0 }),
               totalMonsterKill: (s.player.combatStats?.totalMonsterKill || 0) + finalKills,
-              dungeonClear: (s.player.combatStats?.dungeonClear || 0) + (killedStageBoss ? 1 : 0)
+              dungeonClear: (s.player.combatStats?.dungeonClear || 0) + (isDungeon && killedStageBoss ? 1 : 0),
+              worldBossKill: (s.player.combatStats?.worldBossKill || 0) + (!isDungeon && killedStageBoss ? 1 : 0)
             },
             savedAt: Date.now(),
           },
@@ -3306,7 +3308,7 @@ export const useGameStore = create(
         if (!item) return
 
         // Cape tidak bisa dijual ke NPC
-        if (item.type === 'cape') {
+        if (item.type === 'cape' || item.type === 'mantle') {
           alert('🦸 Cape tidak dapat dijual ke NPC. Gunakan Auction House atau simpan.')
           return
         }
@@ -3805,7 +3807,7 @@ export const useGameStore = create(
           }
 
           const newCombatStats = {
-            ...(player.combatStats || { totalMonsterKill: 0, dungeonClear: 0, coreWarVictory: 0, highestEnhancement: 0 }),
+            ...(player.combatStats || { totalMonsterKill: 0, dungeonClear: 0, worldBossKill: 0, coreWarVictory: 0, highestEnhancement: 0 }),
           }
           if (nextEnhancement > (newCombatStats.highestEnhancement || 0)) {
             newCombatStats.highestEnhancement = nextEnhancement
