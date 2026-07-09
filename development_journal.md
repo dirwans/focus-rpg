@@ -1415,7 +1415,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 👑 Milestone 105: Game Title & Level Cap Alignment [PENDING DEPLOYMENT]
+### 👑 Milestone 105: Game Title & Level Cap Alignment [DEPLOYED]
 - **Game Title Sync (`index.html`, `src/screens/Auth.jsx`)**:
   - Replaced the placeholder game name "FOCUS RPG" with the official blueprint title "Rising Fantasy Chronicles".
 - **Level Cap Adjustment (`src/store/gameStore.js`, `src/screens/Unit.jsx`)**:
@@ -1425,7 +1425,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🛡️ Milestone 106: Faction HP Balancing & Eminence Shop Update [PENDING DEPLOYMENT]
+### 🛡️ Milestone 106: Faction HP Balancing & Eminence Shop Update [DEPLOYED]
 - **HP Specification Swap (`src/data/races.json`)**:
   - Balanced base health to align with faksi resilience specifications: Bionex now has the highest base health (1200 HP and 1.25 multiplier) while Arctron base health was balanced down (750 HP and 0.9 multiplier).
   - Cleaned up strengths/weaknesses list in the JSON accordingly.
@@ -1436,7 +1436,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### ⚡ Milestone 107: Premium Booster & Potion Activation [PENDING DEPLOYMENT]
+### ⚡ Milestone 107: Premium Booster & Potion Activation [DEPLOYED]
 - **Premium Item Stat Bonuses (`src/store/gameStore.js`)**:
   - Integrated active premium boosters and potions from `player.activeBoosts` into the game stat calculations and grinding session ticks:
     - **EXP Boosters (Double/Triple)**: Multiplies EXP gains during periodic ticks and session finalization by `expBoost.mult` if active.
