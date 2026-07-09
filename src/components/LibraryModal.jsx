@@ -164,7 +164,7 @@ export default function LibraryModal({ onClose }) {
               <div style={styles.itemCard}>
                 <div style={styles.itemTitle}>💰 Sistem Mata Uang / Currencies</div>
                 <ul style={styles.list}>
-                  <li><strong>CRD (Credits):</strong> Mata uang utama game yang diperoleh dari grinding, quest, dungeon, dan menjual equipment ke NPC. Digunakan untuk upgrade stat, crafting, enchant, dan berdagang di Auction House.</li>
+                  <li><strong>CRD:</strong> Mata uang utama game yang diperoleh dari grinding, quest, dungeon, dan menjual equipment ke NPC. Digunakan untuk upgrade stat, crafting, enchant, dan berdagang di Auction House.</li>
                   <li><strong>NXC (Nexus Crystal):</strong> Mata uang premium yang diperoleh melalui <strong>Top-Up</strong> di Premium Shop. Digunakan untuk membeli item eksklusif (seperti Premium Booster, ATK/DEF Potion, Rename Card, dan perluasan slot inventory/warehouse). ⚠️ NXC bersifat account-bound (tidak dapat ditransfer atau diperdagangkan).</li>
                 </ul>
               </div>

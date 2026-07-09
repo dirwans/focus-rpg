@@ -1524,7 +1524,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                 <div style={styles.statusVal}>Eminence Quartermaster</div>
               </div>
               {(() => {
-          const credits = player.resources.crd
+          const crd = player.resources.crd
           const inv = player.inventory
           const countInInvOrEquip = (setId) => {
             const eq = player.equipment || {}
@@ -1649,7 +1649,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                         const inInv = inv.filter(i => i.id === piece.id).length
                         const inEq = Object.values(player.equipment || {}).some(e => e && e.id === piece.id)
                         const alreadyOwned = inInv > 0 || inEq
-                        const canAfford = credits >= piece.price
+                        const canAfford = crd >= piece.price
                         return (
                           <div key={piece.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'rgba(0,0,0,0.2)', padding: '8px 10px', borderRadius: 8, border: `1px solid ${alreadyOwned ? set.color + '44' : 'rgba(255,255,255,0.05)'}` }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -1796,7 +1796,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12, height: '100%', overflow: 'hidden' }}>
               {/* Header with credits */}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(0,0,0,0.3)', padding: 10, borderRadius: 8, border: '1px solid rgba(0, 229, 255, 0.15)' }}>
-                <span style={{ fontSize: 12, color: '#7ab0d0', fontWeight: 'bold' }}>CREDITS BALANCE</span>
+                <span style={{ fontSize: 12, color: '#7ab0d0', fontWeight: 'bold' }}>CRD BALANCE</span>
                 <span style={{ color: '#00e5ff', fontFamily: 'var(--font-mono)', fontWeight: 800 }}>◈ {(player.resources.crd || 0).toLocaleString()} CRD</span>
               </div>
 

@@ -178,7 +178,7 @@ export default function App() {
             special: { val: 1, pct: 0 },
             production: { val: 1, pct: 0 }
           },
-          resources: { crd: 200, credits: 10, potions: 5 },
+          resources: { crd: 200, nxc: 10, potions: 5 },
           upgrades: { atk: 0, def: 0, hp: 0 },
           equipment: { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null },
           sector: 1,
