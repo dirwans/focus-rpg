@@ -1446,7 +1446,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🦸 Milestone 108: Cape NPC Sell Block & World Boss Stat Tracking [PENDING DEPLOYMENT]
+### 🦸 Milestone 108: Cape NPC Sell Block & World Boss Stat Tracking [DEPLOYED]
 - **Mantle/Cape Sell Restriction (`src/store/gameStore.js`)**:
   - Extended the NPC sell blocker in `sellItem` to block items with type `"mantle"` in addition to `"cape"`, ensuring all capes/boosters cannot be sold to NPCs as per blueprint rules.
 - **World Boss Kill Tracking (`src/store/gameStore.js`, `src/screens/Unit.jsx`)**:
@@ -1457,7 +1457,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 👥 Milestone 109: Persistent Friend System [PENDING DEPLOYMENT]
+### 👥 Milestone 109: Persistent Friend System [DEPLOYED]
 - **Store Array & Actions (`src/store/gameStore.js`)**:
   - Initialized a persistent `friends` array inside `initialPlayer`.
   - Added `addFriend(username)` store action that validates callsigns (no empty names, cannot add self, max 100 friend slots, no duplicates) and simulates random details (race, job, level, online state) for added friends.
@@ -1470,7 +1470,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🔔 Milestone 110: Simulated Event Notifications [PENDING DEPLOYMENT]
+### 🔔 Milestone 110: Simulated Event Notifications [DEPLOYED]
 - **Tick Event Triggers (`src/store/gameStore.js`)**:
   - Inserted a periodic event notification check (0.5% chance per tick when active) inside the grinding simulator's `tick` loop.
   - Checks the player's notification preferences (`alertWorldBoss`, `alertCoreWar`, `alertDungeon`) from settings and triggers simulated in-game alerts (e.g. World Boss spawning, Core War reminder, Dungeon resets) directly in the active browser view.
@@ -1478,7 +1478,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🏰 Milestone 111: Interactive Guild Member Management [PENDING DEPLOYMENT]
+### 🏰 Milestone 111: Interactive Guild Member Management [DEPLOYED]
 - **Store Actions (`src/store/gameStore.js`)**:
   - Expanded `createGuild(name)` to initialize `membersList` (containing the founder) and `applicants` (containing 2 test candidates).
   - Added `acceptApplicant(applicantId)` to move an applicant to the guild members list and update count.
@@ -1493,7 +1493,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 👹 Milestone 112: Pit Boss (World Boss) Encounters [PENDING DEPLOYMENT]
+### 👹 Milestone 112: Pit Boss (World Boss) Encounters [DEPLOYED]
 - **Pit Boss Spawning (`src/store/gameStore.js`)**:
   - Modified `spawnEnemy` to introduce a 15% random chance to spawn the sector's or dungeon's `pitBoss` (World Boss) instead of the normal Boss/Mob.
   - Linked the Pit Boss encounters to the customized battle logger (`👹 PIT BOSS: [Name]!`) and tracked the `isPitBoss` property in the active combat state.
