@@ -28,44 +28,51 @@
   "rings": [
     {
       "id": "rng_cor_0",
-      "name": "Emberkin Cuff",
+      "name": "Thornrune Cuff",
       "grade": "Common",
       "image": "/assets/celestra/rings/rng_cor_0.png",
-      "atk": 8
+      "atkPctMin": 5,
+      "atkPctMax": 10
     },
     {
       "id": "rng_cor_1",
-      "name": "Ruby Warden Ring",
+      "name": "Spirit Ember Seal",
       "grade": "Uncommon",
       "image": "/assets/celestra/rings/rng_cor_1.png",
-      "atk": 10,
-      "dodge": 6
+      "atkPctMin": 10,
+      "atkPctMax": 25,
+      "defPctMin": 10,
+      "defPctMax": 20,
+      "dodgeMin": 5,
+      "dodgeMax": 10
     },
     {
       "id": "rng_cor_2",
-      "name": "Moonwarden's Chain",
+      "name": "Astral Chain Signet",
       "grade": "Rare",
       "image": "/assets/celestra/rings/rng_cor_2.png",
-      "atk": 14,
-      "dodge": 10
+      "atkPct": 25,
+      "dodge": 20
     },
     {
       "id": "rng_cor_3",
-      "name": "Sunveil Crest Ring",
+      "name": "Starfall Warden Ring",
       "grade": "Epic",
       "image": "/assets/celestra/rings/rng_cor_3.png",
-      "atk": 18,
-      "def": 8,
-      "dodge": 10
+      "atkPctMin": 10,
+      "atkPctMax": 25,
+      "defPctMin": 10,
+      "defPctMax": 25,
+      "dodgeMin": 10,
+      "dodgeMax": 20
     },
     {
       "id": "rng_cor_4",
-      "name": "Wyrmfang Sovereign Cuff",
+      "name": "Ancient Sovereign Runeband",
       "grade": "Legendary",
       "image": "/assets/celestra/rings/rng_cor_4.png",
-      "atk": 26,
-      "def": 12,
-      "dodge": 16
+      "atkPct": 25,
+      "defPct": 25
     }
   ],
   "sentinel": {

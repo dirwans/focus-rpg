@@ -1867,6 +1867,39 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - Updated `MINE_FLOORS` array to reflect new floor assignments (Ork → 3F, Ghost → 4F, Mutation → 5F).
 - **Verification**: Verified React build (`npm run build`) compiles clean with no warnings.
 
+---
+
+### ⚙️ Milestone 140: Dungeon Stats Calibration & PitBoss System Removal [PENDING DEPLOYMENT]
+- **Database Calibration (`src/data/enemies.json`)**:
+  - Hapus seluruh `pitBoss` dari semua dungeon (Dungeon-1, 2, 3) — fitur ini tidak digunakan di platform.
+  - Hapus seluruh `mobs` array dari semua dungeon — dungeon bersifat boss-only.
+  - **Dungeon-1 (Echo Burrow)**: `minLevel` tetap `30`. Boss Burrow King: HP: 2.000.000 → `9.330`, ATK: 400 → `1.910`, DEF: 250 → `636`. Ditambah `doubleHitChance: 10` (Aggressive 10%).
+  - **Dungeon-2 (Infernal Forge)**: `minLevel`: 50 → `40`. Boss Inferno Colossus: HP: 10.000.000 → `12.255`, ATK: 800 → `11.107`, DEF: 500 → `1.197`. Ditambah `doubleHitChance: 15` (Aggressive 15%) dan `dodge: 15`.
+  - **Dungeon-3 (Trinity Core Chamber)**: `minLevel`: 65 → `55`. Boss Trinity Guardian: HP: 50.000.000 → `17.772`, ATK: 1.500 → `40.052`, DEF: 900 → `1.818`. Ditambah `dodge: 15` dan `stun: 10`.
+- **Verification**: Verified React build (`npm run build`) compiles clean with no warnings.
+
+---
+
+### ⚙️ Milestone 141: T-MINE Guardian Ability Overhaul & Global Passive Combat Mechanics [PENDING DEPLOYMENT]
+- **Database Calibration (`src/data/enemies.json` — `miningGuardians`)**:
+  - Semua guardian 1F–5F disamakan base stats: HP: `11.815`, ATK: `8.959`, DEF: `1.100`.
+  - Setiap floor memiliki ability unik:
+    - **1F Sentry Dementor**: `dodge: 11` — ada peluang 11% player miss menyerang.
+    - **2F Borg Dementor**: `stun: 11` — ada peluang 11% guardian skip serangan player.
+    - **3F Ork Dementor**: `selfHeal: 11` — guardian recover 11% max HP saat HP < 50%.
+    - **4F Ghost Dementor**: `doubleHitChance: 11` — ada peluang 11% guardian serang 2x.
+    - **5F Mutation Dementor**: Gabungan semua ability (dodge + stun + selfHeal + doubleHitChance masing-masing 11%).
+- **Global Passive Combat Mechanics (`src/store/gameStore.js` — `computeRewards`)**:
+  - Ditambahkan pembacaan 4 passive ability dari data musuh (berlaku untuk World Map, Dungeon, dan Mining Guardian):
+    - **`dodge`** (enemy dodge %): Mengurangi effective DPS player terhadap musuh. `playerDps *= (1 - dodge/100)`.
+    - **`stun`** (stun chance %): Mengurangi effective DPS player karena ada probabilitas serangan player di-skip. `playerDps *= (1 - stun/100)`.
+    - **`selfHeal`** (self heal %): Menambah effective HP musuh (model: musuh recover 11% HP 1x saat HP < 50%). `effectiveHp = hp * (1 + selfHeal/200)`.
+    - **`doubleHitChance`** (double hit %): Menambah effective DPS musuh terhadap player. `enemyDps *= (1 + doubleHitChance/100)`.
+- **Mining Encounter Simulation (`src/screens/Mine.jsx` — `handleStartMining`)**:
+  - Simulasi encounter mining diperbarui untuk memperhitungkan keempat passive ability guardian di atas pada kalkulasi `ttkPlayer` dan `ttkEnemy`.
+- **Verification**: Verified React build (`npm run build`) compiles clean with no warnings.
+
+
 
 
 

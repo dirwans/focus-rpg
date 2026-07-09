@@ -44,44 +44,50 @@
   "rings": [
     {
       "id": "rng_bio_0",
-      "name": "Beginner's Circuit Ring",
+      "name": "Field Operative Ring",
       "grade": "Common",
       "image": "/assets/bionex/rings/rng_bio_0.png",
-      "atk": 8,
-      "def": 4
+      "defPctMin": 5,
+      "defPctMax": 10
     },
     {
       "id": "rng_bio_1",
-      "name": "Bloodcircuit Signet",
+      "name": "Bioweapon Signet",
       "grade": "Uncommon",
       "image": "/assets/bionex/rings/rng_bio_1.png",
-      "atk": 12,
-      "def": 8
+      "atkPct": 20
     },
     {
       "id": "rng_bio_2",
-      "name": "Ravager's Talon Ring",
+      "name": "Predator Strike Band",
       "grade": "Rare",
       "image": "/assets/bionex/rings/rng_bio_2.png",
-      "atk": 15,
-      "def": 10
+      "atkPct": 20,
+      "defPct": 20
     },
     {
       "id": "rng_bio_3",
-      "name": "Wraithsteel Band",
+      "name": "Warlord Command Ring",
       "grade": "Epic",
       "image": "/assets/bionex/rings/rng_bio_3.png",
-      "atk": 20,
-      "def": 14
+      "atkPctMin": 10,
+      "atkPctMax": 20,
+      "defPctMin": 10,
+      "defPctMax": 25,
+      "dodgeMin": 5,
+      "dodgeMax": 20
     },
     {
       "id": "rng_bio_4",
-      "name": "Golgothan Sovereign Ring",
+      "name": "Omega Sovereign Ring",
       "grade": "Legendary",
       "image": "/assets/bionex/rings/rng_bio_4.png",
-      "atk": 26,
-      "def": 18,
-      "dodge": 6
+      "atkPctMin": 10,
+      "atkPctMax": 25,
+      "defPctMin": 10,
+      "defPctMax": 30,
+      "dodgeMin": 5,
+      "dodgeMax": 25
     }
   ],
   "guardian": {

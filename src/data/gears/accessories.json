@@ -44,44 +44,49 @@
   "rings": [
     {
       "id": "rng_all_0",
-      "name": "Beginner's Ring",
+      "name": "Nexus Wanderer Ring",
       "grade": "Common",
       "image": "/assets/accessories/rings/rng_all_0.png",
-      "atk": 8
+      "defPct": 10,
+      "dodge": 10
     },
     {
       "id": "rng_all_1",
-      "name": "Black Mist Ring",
+      "name": "Conflict Survivor Band",
       "grade": "Uncommon",
       "image": "/assets/accessories/rings/rng_all_1.png",
-      "atk": 12,
-      "dodge": 6
+      "dodgeMin": 40,
+      "dodgeMax": 45
     },
     {
       "id": "rng_all_2",
-      "name": "Baal Ring",
+      "name": "Zero Flux Conduit",
       "grade": "Rare",
       "image": "/assets/accessories/rings/rng_all_2.png",
-      "atk": 14,
-      "def": 10
+      "atkPctMin": 21,
+      "atkPctMax": 27,
+      "dodgeMin": 16,
+      "dodgeMax": 22
     },
     {
       "id": "rng_all_3",
-      "name": "Beast of Life Ring",
+      "name": "Trinity Covenant Ring",
       "grade": "Epic",
       "image": "/assets/accessories/rings/rng_all_3.png",
-      "atk": 20,
-      "def": 10,
-      "dodge": 8
+      "atkPctMin": 22,
+      "atkPctMax": 28,
+      "defPctMin": 10,
+      "defPctMax": 16
     },
     {
       "id": "rng_all_4",
-      "name": "Daidalos Ring",
+      "name": "Sovereign of Nexus",
       "grade": "Legendary",
       "image": "/assets/accessories/rings/rng_all_4.png",
-      "atk": 28,
-      "def": 16,
-      "dodge": 14
+      "atkPctMin": 21,
+      "atkPctMax": 30,
+      "defPctMin": 21,
+      "defPctMax": 30
     }
   ],
   "capes": [

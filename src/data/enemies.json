@@ -405,185 +405,62 @@
       "name": "Echo Burrow",
       "emoji": "🏛️",
       "minLevel": 30,
-      "mobs": [
-        {
-          "name": "Burrow Scorpion",
-          "emoji": "🦂",
-          "hp": 26500,
-          "atk": 19,
-          "def": 6,
-          "expReward": 25,
-          "crdReward": 16,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_6.png"
-        },
-        {
-          "name": "Echo Larva",
-          "emoji": "🐛",
-          "hp": 30000,
-          "atk": 22,
-          "def": 8,
-          "expReward": 28,
-          "crdReward": 18,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_1.png"
-        },
-        {
-          "name": "Cave Imp",
-          "emoji": "🧚",
-          "hp": 35000,
-          "atk": 25,
-          "def": 9,
-          "expReward": 31,
-          "crdReward": 20,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/clod-monster.png"
-        }
-      ],
+      "mobs": [],
       "boss": {
         "name": "Burrow King",
         "emoji": "🏗️",
-        "hp": 2000000,
-        "atk": 400,
-        "def": 250,
+        "hp": 9330,
+        "atk": 1910,
+        "def": 636,
         "critical": 8,
         "regen": 500,
+        "doubleHitChance": 10,
         "expReward": 1200,
         "crdReward": 800,
         "image": "/ref/World-Map/Dungeon Echo Burrow/Burrow-King.png"
-      },
-      "pitBoss": {
-        "name": "BURROW OVERLORD",
-        "emoji": "☢️",
-        "hp": 6000000,
-        "atk": 3000,
-        "def": 1500,
-        "critical": 10,
-        "regen": 2500,
-        "expReward": 6000,
-        "crdReward": 4000,
-        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/baalhamon-pitboss.png"
       }
     },
+
     {
       "id": 2,
       "name": "Infernal Forge",
       "emoji": "🔥",
-      "minLevel": 50,
-      "mobs": [
-        {
-          "name": "Forge Imp",
-          "emoji": "👹",
-          "hp": 96000,
-          "atk": 32,
-          "def": 12,
-          "expReward": 42,
-          "crdReward": 26,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_10.png"
-        },
-        {
-          "name": "Fire Slag",
-          "emoji": "🔥",
-          "hp": 110000,
-          "atk": 36,
-          "def": 14,
-          "expReward": 48,
-          "crdReward": 32,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/monster_69.png"
-        },
-        {
-          "name": "Ash Sentinel",
-          "emoji": "🤖",
-          "hp": 124000,
-          "atk": 42,
-          "def": 16,
-          "expReward": 52,
-          "crdReward": 36,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_6.png"
-        }
-      ],
+      "minLevel": 40,
+      "mobs": [],
       "boss": {
         "name": "Inferno Colossus",
         "emoji": "🔥",
-        "hp": 10000000,
-        "atk": 800,
-        "def": 500,
+        "hp": 12255,
+        "atk": 11107,
+        "def": 1197,
         "critical": 12,
         "regen": 2000,
+        "doubleHitChance": 15,
+        "dodge": 15,
         "expReward": 4000,
         "crdReward": 2500,
         "image": "/ref/World-Map/Dungeon-Inferno/Inferno-colosus.png"
-      },
-      "pitBoss": {
-        "name": "INFERNAL DREADNOUGHT",
-        "emoji": "☢️",
-        "hp": 20000000,
-        "atk": 10000,
-        "def": 6000,
-        "critical": 15,
-        "regen": 8000,
-        "expReward": 20000,
-        "crdReward": 12500,
-        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/08/monster_23.png"
       }
     },
     {
       "id": 3,
       "name": "Trinity Core Chamber",
       "emoji": "☢️",
-      "minLevel": 65,
-      "mobs": [
-        {
-          "name": "Core Sentinel",
-          "emoji": "🛡️",
-          "hp": 400000,
-          "atk": 52,
-          "def": 24,
-          "expReward": 64,
-          "crdReward": 44,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/CorHolyStone-monster.png"
-        },
-        {
-          "name": "Trinity Sentry",
-          "emoji": "🤖",
-          "hp": 475000,
-          "atk": 62,
-          "def": 28,
-          "expReward": 72,
-          "crdReward": 48,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/caster-sette.png"
-        },
-        {
-          "name": "Flux Phantom",
-          "emoji": "👻",
-          "hp": 550000,
-          "atk": 74,
-          "def": 32,
-          "expReward": 84,
-          "crdReward": 56,
-          "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/10/tuyul.png"
-        }
-      ],
+      "minLevel": 55,
+      "mobs": [],
       "boss": {
         "name": "Trinity Guardian",
         "emoji": "☢️",
-        "hp": 50000000,
-        "atk": 1500,
-        "def": 900,
+        "hp": 17772,
+        "atk": 40052,
+        "def": 1818,
         "critical": 18,
         "regen": 5000,
+        "dodge": 15,
+        "stun": 10,
         "expReward": 10000,
         "crdReward": 6000,
         "image": "/ref/World-Map/Dungeon-III-Trinity-Core-Chamber/Trinity-Guardian-Boss.png"
-      },
-      "pitBoss": {
-        "name": "TRINITY EMPEROR",
-        "emoji": "☢️",
-        "hp": 150000000,
-        "atk": 20000,
-        "def": 12000,
-        "critical": 20,
-        "regen": 20000,
-        "expReward": 50000,
-        "crdReward": 30000,
-        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/09/baalhamon-pitboss.png"
       }
     }
   ],

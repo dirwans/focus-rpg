@@ -202,43 +202,47 @@
   "rings": [
     {
       "id": "rng_arc_0",
-      "name": "Baal's Ember Ring",
+      "name": "Nano Pulse Ring",
       "grade": "Common",
       "image": "/assets/arctron/rings/rng_arc_0.png",
-      "atk": 8
+      "defMin": 5,
+      "defMax": 10
     },
     {
       "id": "rng_arc_1",
-      "name": "Cryospire Band",
+      "name": "Arc Capacitor Band",
       "grade": "Uncommon",
       "image": "/assets/arctron/rings/rng_arc_1.png",
-      "atk": 12,
-      "def": 6
+      "atkPctMin": 5,
+      "atkPctMax": 10
     },
     {
       "id": "rng_arc_2",
-      "name": "Voidwyrm Signet",
+      "name": "Phantom Grid Signet",
       "grade": "Rare",
       "image": "/assets/arctron/rings/rng_arc_2.png",
-      "atk": 15,
-      "dodge": 8
+      "atkPctMin": 10,
+      "atkPctMax": 25,
+      "defPctMin": 10,
+      "defPctMax": 25,
+      "dodgeMin": 5,
+      "dodgeMax": 20
     },
     {
       "id": "rng_arc_3",
-      "name": "Dagon's Warband Ring",
+      "name": "Neural Core Ring",
       "grade": "Epic",
       "image": "/assets/arctron/rings/rng_arc_3.png",
-      "atk": 20,
-      "def": 10
+      "atkPct": 25,
+      "dodge": 20
     },
     {
       "id": "rng_arc_4",
-      "name": "Behemoth's Crown Ring",
+      "name": "Axiom Overmind Ring",
       "grade": "Legendary",
       "image": "/assets/arctron/rings/rng_arc_4.png",
-      "atk": 28,
-      "def": 15,
-      "dodge": 12
+      "atkPct": 25,
+      "defPct": 25
     }
   ],
   "armorSets": [
