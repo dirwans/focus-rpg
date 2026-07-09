@@ -229,6 +229,11 @@ export function resolveItemImage(item, playerRace, playerJob) {
     if (item.id === 'meu_def_42') return '/assets/MEUdevlv42.png'
     if (item.id === 'meu_def_55') return '/assets/MEUdevlv55.png'
     if (item.id === 'meu_def_65') return '/assets/MEUdevlv65.png'
+    // Arctron A.R.E.S.
+    if (item.id === 'ares_x') return '/assets/ARESlv32arctron.png'
+    if (item.id === 'ares_nemesis') return '/assets/ARESlv42arctron.png'
+    if (item.id === 'ares_dominator') return '/assets/ARESlv55arctron.png'
+    if (item.id === 'ares_apocalypse') return '/assets/ARESlv65arctron.png'
   }
   return item.image
 }

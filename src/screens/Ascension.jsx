@@ -16,10 +16,10 @@ const EVO_IMAGES = {
   meu_def_55:       '/assets/MEUdevlv55.png',
   meu_def_65:       '/assets/MEUdevlv65.png',
   // Arctron A.R.E.S.
-  ares_x:           '/assets/ares_x.png',
-  ares_nemesis:     '/assets/ares_nemesis.png',
-  ares_dominator:   '/assets/ares_dominator.png',
-  ares_apocalypse:  '/assets/ares_apocalypse.png',
+  ares_x:           '/assets/ARESlv32arctron.png',
+  ares_nemesis:     '/assets/ARESlv42arctron.png',
+  ares_dominator:   '/assets/ARESlv55arctron.png',
+  ares_apocalypse:  '/assets/ARESlv65arctron.png',
   // Celestra Ancient Spirit
   spirit_sylph:     '/assets/celestra_mystic_female.png',
   spirit_sanctus:   '/assets/celestra_mystic_male.png',

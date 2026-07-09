@@ -15,7 +15,7 @@
     "evolutions": [
       {
         "id": "ares_x",
-        "name": "ARES X",
+        "name": "ARES Lv.32",
         "levelReq": 32,
         "atk": 150,
         "hp": 5000,
@@ -25,7 +25,7 @@
       },
       {
         "id": "ares_nemesis",
-        "name": "ARES Nemesis",
+        "name": "ARES Lv.42",
         "levelReq": 42,
         "atk": 320,
         "hp": 15000,
@@ -35,7 +35,7 @@
       },
       {
         "id": "ares_dominator",
-        "name": "ARES Dominator",
+        "name": "ARES Lv.55",
         "levelReq": 55,
         "atk": 600,
         "hp": 35000,
@@ -45,13 +45,14 @@
       },
       {
         "id": "ares_apocalypse",
-        "name": "ARES Apocalypse",
+        "name": "ARES Lv.65",
         "levelReq": 65,
         "atk": 1000,
         "hp": 75000,
         "crit": 20,
         "cost": 2000000000,
-        "costLabel": "2,000,000,000 CRD"
+        "costLabel": "2,000,000,000 CRD",
+        "locked": true
       }
     ]
   },

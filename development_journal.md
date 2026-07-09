@@ -1592,17 +1592,76 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### ⚙️ Milestone 121: Bionex M.E.U. Attacker & Defender Multi-Track [PENDING DEPLOYMENT]
+### ⚙️ Milestone 121: Bionex M.E.U. & Arctron A.R.E.S. Ascension Realignment [PENDING DEPLOYMENT]
 - **`src/data/ascensionArms.json`**:
-  - Rebuilt the Bionex evolution list to feature separate **Attacker** and **Defender** tracks across Lv.32, Lv.42, and Lv.55.
+  - Rebuilt Bionex evolution list to feature separate **Attacker** and **Defender** tracks across Lv.32, Lv.42, and Lv.55.
   - Added a locked flag (`"locked": true`) for the Lv.65 Titan-class mechas (both Attacker and Defender).
-  - Cleaned up named slots ("Atlas", "Goliath", "Colossus", "Titan") to simply show "Attacker" and "Defender" classification.
+  - Renamed all Bionex evolutions to simple Attacker and Defender level classification (e.g. `M.E.U. Attacker Lv.32` and `M.E.U. Defender Lv.32`).
+  - Renamed Arctron ARES evolutions to level-based classification (`ARES Lv.32`, `ARES Lv.42`, `ARES Lv.55`, `ARES Lv.65`).
+  - Added a locked flag (`"locked": true`) for the Lv.65 ARES mecha (ARES Apocalypse).
 - **`src/screens/Ascension.jsx`**:
   - Mapped Attacker mechas to `/assets/MEUattacklv32.png`, `/assets/MEUattacklv42.png`, `/assets/MEUattacklv55.png`, and `/assets/MEUattacklv65.png`.
   - Mapped Defender mechas to `/assets/MEUdevlv32.png`, `/assets/MEUdevlv42.png`, `/assets/MEUdevlv55.png`, and `/assets/MEUdevlv65.png`.
+  - Mapped Arctron ARES mechas to `/assets/ARESlv32arctron.png`, `/assets/ARESlv42arctron.png`, `/assets/ARESlv55arctron.png`, and `/assets/ARESlv65arctron.png`.
   - Implemented locked status rendering: mechas flagged with `locked` now render a disabled crimson red button showing `🔒 LOCKED (BELUM DILIRIS)`.
 - **`src/store/gameStore.js`**:
-  - Aligned Bionex `ascension_arms` image resolver mappings to map new mecha IDs (`meu_atk_*` and `meu_def_*`) to the respective level tier sprite paths (including `/assets/MEUattacklv65.png` and `/assets/MEUdevlv65.png`).
+  - Aligned Bionex `ascension_arms` image resolver mappings to map new mecha IDs (`meu_atk_*` and `meu_def_*`) to their respective sprite paths.
+  - Added Arctron `ascension_arms` image resolver mappings to map ARES mecha IDs (`ares_*`) to `/assets/ARESlv*arctron.png`.
+- **Assets Cleanup**:
+  - Processed all 8 Bionex and 4 Arctron mecha image files using the AI `rembg` background remover to cleanly erase solid backgrounds and generate flawless transparent PNG assets.
+  - Removed old mecha assets (`meu_atlas.png`, `meu_goliath.png`, `meu_colossus.png`, `meu_titan.png`, and old `ares_*` files) from both `src/assets` and `public/assets` directories to eliminate workspace bloat.
 - **Verification**: Local build compiled successfully.
+
+---
+
+### 🛡️ Milestone 122: Bionex Guardian Soul Render (Lv.32) Gear Assets Replacement [PENDING DEPLOYMENT]
+- **Assets Extraction**:
+  - Cropped and extracted all 5 individual gear assets from the composite sheet reference `lv32bionexguardianrmor.jpg`.
+  - Processed each cropped item using the AI `rembg` background remover to cleanly erase solid backgrounds and generate transparent PNG assets.
+  - Symmetrically padded to squares, resized to 320x320, and saved to `public/assets/armor_bionex/` and `src/assets/armor_bionex/` folders.
+  - Specially cropped the boots sprite (`defbionexguardianlv32boots.png`) to discard the leg/knee portion, leaving only the white boots/shoes to prevent overlaps when equipped.
+- **Gear Replacements**:
+  - Helmet -> `defbionexguardianlv32helmet.png`
+  - Chestplate -> `defbionexguardianlv32armor.png`
+  - Pants -> `defbionexguardianlv32pants.png` (replaced with the close-up High-Quality mecha 3/4 shorts reference `lv32bionexguardianpants.jpg`, with background cleanly removed using rembg to perfectly match the Specialist character layout; level 1 pants `defbionexguardianlv1pants.png` restored to original).
+  - Gloves -> `defbionexguardianlv32gloves.png`
+  - Boots -> `defbionexguardianlv32boots.png` (legs/knees cropped out).
+- **Verification**: Local build compiled successfully.
+
+---
+
+### 🛡️ Milestone 123: Bionex Guardian (Lv.55) Gear Assets Replacement
+- **Assets Extraction & Processing**:
+  - Cropped and processed `helmet`, `gloves`, `pants`, and `boots` from grid sheet `lv55guardianbionexarmor.png` using rembg and OpenCV contour noise cleaning.
+  - Specially processed the `chestplate` (`defbionexguardianlv55armor.png`) from the dedicated high-resolution, thick-edged white reference `lv55guardianbionexarmochest.png`.
+  - Drew solid dark grey tech-sleeves to connect the shoulders and cuffs, and ran rembg to output a solid, connected mecha body.
+  - Symmetrically padded, centered, and scaled all 5 assets to maximize frame size (filling 300px/94% of the `320x320` canvas).
+- **Gear Replacements**:
+  - Helmet -> `defbionexguardianlv55helmet.png` (perfectly centered tiara/wings).
+  - Chestplate -> `defbionexguardianlv55armor.png` (high-res solid chestplate with thick borders and dark connecting sleeves).
+  - Pants -> `defbionexguardianlv55pants.png` (retains the short pants and independent golden-capped knee plates representation).
+  - Gloves -> `defbionexguardianlv55gloves.png`
+  - Boots -> `defbionexguardianlv55boots.png`
+- **Verification**: Local build compiled successfully.
+
+---
+
+### 🛡️ Milestone 124: Bionex Guardian (Lv.42) Gear Assets Replacement
+- **Assets Extraction & Processing**:
+  - Cropped and extracted all 5 individual gear assets from the composite sheet reference `lv42bionexguardiarmorsets.png` (matching grid row coordinates).
+  - Processed each cropped item using the AI `rembg` background remover to cleanly erase solid backgrounds and generate transparent PNG assets.
+  - Applied contour-based noise filtering in OpenCV to discard border remnants and background dither.
+  - Symmetrically padded, perfectly centered, and maximized sizes to fit the `320x320` frame (scaled up to fill 300px/94% of the frame dimensions).
+  - Specially connected the floating arm cuffs of the chestplate (`defbionexguardianlv42armor.png`) to the shoulders using dark grey tech-sleeves for a solid and premium mecha appearance.
+- **Gear Replacements**:
+  - Helmet -> `defbionexguardianlv42helmet.png`
+  - Chestplate -> `defbionexguardianlv42armor.png`
+  - Pants -> `defbionexguardianlv42pants.png`
+  - Gloves -> `defbionexguardianlv42gloves.png`
+  - Boots -> `defbionexguardianlv42boots.png`
+- **Verification**: Local build compiled successfully.
+
+
+
 
 
