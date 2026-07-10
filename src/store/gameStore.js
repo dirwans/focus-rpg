@@ -252,7 +252,7 @@ export function resolveItemImage(item, playerRace, playerJob) {
     if (item.id === 'spirit_noctyrna_32') return '/assets/spirit_noctyrna_32.png?v=4'
     if (item.id === 'spirit_noctyrna_42') return '/assets/spirit_noctyrna_42.png?v=4'
     if (item.id === 'spirit_noctyrna_55') return '/assets/spirit_noctyrna_55.png?v=7'
-    if (item.id === 'spirit_noctyrna_65') return '/assets/spirit_noctyrna_65.png?v=11'
+    if (item.id === 'spirit_noctyrna_65') return '/assets/spirit_noctyrna_65.png?v=15'
   }
   return item.image
 }
