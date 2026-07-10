@@ -965,6 +965,7 @@ const initialPlayer = {
   resources: { crd: 5000, potions: 5, nxc: 0 },
   upgrades: { atk: 0, def: 0, hp: 0 },
   equipment: { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null },
+  ascensionLoadout: { head: null, upper: null, lower: null, arms: null, arms2: null, options: null },
   sector: 1,
   highestSector: 1,
   streak: 0,
@@ -1871,6 +1872,7 @@ export const useGameStore = create(
             job: null,
             upgrades: { atk: 0, def: 0, hp: 0 },
             equipment: { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null },
+            ascensionLoadout: { head: null, upper: null, lower: null, arms: null, arms2: null, options: null },
             savedAt: Date.now(),
           },
         }))
@@ -3047,6 +3049,21 @@ export const useGameStore = create(
             if (item.bonus.crit) critBonus += item.bonus.crit
           }
         })
+
+        // Add stats from ascensionLoadout if ascension arms is equipped
+        if (player.equipment && player.equipment.ascension_arms && player.ascensionLoadout) {
+          Object.values(player.ascensionLoadout).forEach(p => {
+            if (!p) return;
+            if (p.def) flatDef += p.def;
+            if (p.hp) flatHp += p.hp;
+            if (p.minAtk || p.maxAtk) {
+              flatAtk += Math.floor(((p.minAtk || 0) + (p.maxAtk || 0)) / 2);
+            }
+            if (p.pt) {
+              // Usually PT is handled elsewhere, but if it gives direct stats we can map it
+            }
+          })
+        }
 
         // GM PT and Ascension Arms Bonuses
         const pt = player.pt || {}

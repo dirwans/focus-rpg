@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useGameStore } from '../store/gameStore'
 import ascensionData from '../data/ascensionArms.json'
+import AscensionShopModal from '../components/AscensionShopModal'
 import { t } from '../lib/translate'
 
 // Peta gambar per evolution ID dengan cache-buster ?v=2
@@ -59,7 +60,9 @@ const RACE_COLORS = {
 export default function Ascension() {
   const player = useGameStore((s) => s.player)
   const craftAscensionArms = useGameStore((s) => s.craftAscensionArms)
-  const [bionexTab, setBionexTab] = useState('attacker') // 'attacker' or 'defender'
+  const [bionexTab, setBionexTab] = useState('attacker')
+  const [activeTab, setActiveTab] = useState('hangar')
+  const [isShopModalOpen, setIsShopModalOpen] = useState(false)
 
   if (!player.race) {
     return (
@@ -103,35 +106,39 @@ export default function Ascension() {
             </div>
           </div>
 
-          {/* COMPONENTS SECTION */}
-          <div style={{ marginBottom: 20 }}>
-            <div style={{ fontFamily: 'var(--font-title)', fontSize: 16, color: colors.accent, marginBottom: 12, fontWeight: 800, borderBottom: `1px solid ${colors.border}4d`, paddingBottom: 6 }}>
-              {data.componentsTitle}
-            </div>
-            <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: 'var(--font-title)', fontSize: 14 }}>
-              <thead>
-                <tr>
-                  <th style={{ textAlign: 'left', padding: '6px 8px', borderBottom: '1px solid rgba(255,255,255,0.1)', color: '#e0f4ff', fontWeight: 800 }}>Component</th>
-                  <th style={{ textAlign: 'right', padding: '6px 8px', borderBottom: '1px solid rgba(255,255,255,0.1)', color: '#e0f4ff', fontWeight: 800 }}>Harga</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.components.map((c, i) => (
-                  <tr key={i}>
-                    <td style={{ padding: '6px 8px', borderBottom: '1px solid rgba(255,255,255,0.05)', color: '#fff', fontWeight: 600 }}>{c.name}</td>
-                    <td style={{ padding: '6px 8px', borderBottom: '1px solid rgba(255,255,255,0.05)', color: colors.border, textAlign: 'right', fontWeight: 800 }}>{c.cost.toLocaleString()} CRD</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <div style={{ marginTop: 12, fontFamily: 'var(--font-title)', fontSize: 14, color: '#ffcc00', fontWeight: 900 }}>
-              {data.totalLabel}: 5,000,000 CRD
-            </div>
+          
+
+          {/* MAIN TABS (HANGAR vs PARTS SHOP) */}
+          <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
+            <button
+              onClick={() => setActiveTab('hangar')}
+              style={{
+                flex: 1, padding: '10px 0', fontFamily: 'var(--font-title)', fontSize: 14, fontWeight: 900,
+                background: activeTab === 'hangar' ? `linear-gradient(90deg, ${colors.accent}, ${colors.border})` : 'rgba(0,0,0,0.4)',
+                color: activeTab === 'hangar' ? '#000' : colors.accent,
+                border: `1px solid ${colors.accent}`, borderRadius: 6, cursor: 'pointer'
+              }}
+            >
+              ??? HANGAR
+            </button>
+            <button
+              onClick={() => setActiveTab('shop')}
+              style={{
+                flex: 1, padding: '10px 0', fontFamily: 'var(--font-title)', fontSize: 14, fontWeight: 900,
+                background: activeTab === 'shop' ? `linear-gradient(90deg, ${colors.accent}, ${colors.border})` : 'rgba(0,0,0,0.4)',
+                color: activeTab === 'shop' ? '#000' : colors.accent,
+                border: `1px solid ${colors.accent}`, borderRadius: 6, cursor: 'pointer'
+              }}
+            >
+              ?? PARTS SHOP
+            </button>
           </div>
 
-          <div style={{ fontFamily: 'var(--font-title)', fontSize: 16, color: colors.accent, marginBottom: 12, fontWeight: 800, borderBottom: `1px solid ${colors.border}4d`, paddingBottom: 6 }}>
-            {data.name} Evolution
-          </div>
+          {activeTab === 'hangar' ? (
+            <>
+              <div style={{ fontFamily: 'var(--font-title)', fontSize: 16, color: colors.accent, marginBottom: 12, fontWeight: 800, borderBottom: `1px solid ${colors.border}4d`, paddingBottom: 6 }}>
+                {data.name} Evolution
+              </div>
 
           {/* TAB UNTUK BIONEX */}
           {player.race === 'bionex' && (
@@ -231,22 +238,7 @@ export default function Ascension() {
                       );
                     }
 
-                    // Calculate dynamic totals for Bionex MEU
-                    const getPart = (slotKey) => {
-                      const arr = data.parts[bionexTab][slotKey];
-                      if (!arr) return null;
-                      const valid = arr.filter(p => p.lvl <= evo.levelReq + 2);
-                      return valid.length > 0 ? valid[valid.length - 1] : null;
-                    };
-
-                    const parts = {
-                      head: getPart('head'),
-                      upper: getPart('upper'),
-                      lower: getPart('lower'),
-                      arms: getPart('arms'),
-                      arms2: getPart('arms2'),
-                      options: getPart('options')
-                    };
+                    const parts = { head: player.ascensionLoadout?.head || null, upper: player.ascensionLoadout?.upper || null, lower: player.ascensionLoadout?.lower || null, arms: player.ascensionLoadout?.arms || null, arms2: player.ascensionLoadout?.arms2 || null, options: player.ascensionLoadout?.options || null };
 
                     let tPT = 0, tDef = 0, tAttM = 0, tDefM = 0;
                     let tFire = 0, tWater = 0, tSoil = 0, tWind = 0;
@@ -385,15 +377,51 @@ export default function Ascension() {
               )
             })}
           </div>
+          </>
+          ) : (
+            // PARTS SHOP TAB
+            <div style={{ background: 'rgba(0,0,0,0.4)', padding: 16, borderRadius: 8, border: `1px solid ${colors.border}` }}>
+              <div style={{ fontFamily: 'var(--font-title)', fontSize: 16, color: '#fff', marginBottom: 12, textAlign: 'center' }}>
+                {player.race === 'bionex' ? 'M.E.U. PARTS SHOP' : player.race === 'arctron' ? 'A.R.E.S. ASSEMBLY SHOP' : 'ANCIENT SPIRIT SHRINE'}
+              </div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: '#b5d4f1', textAlign: 'center', marginBottom: 20 }}>
+                {player.race === 'bionex' 
+                  ? "Beli dan rakit suku cadang untuk memperkuat M.E.U. kamu. Stats dari spare parts yang kamu beli akan langsung diakumulasikan ke mecha kamu!" 
+                  : "Shop sedang dalam persiapan. (Segera Hadir)"}
+              </div>
+              
+              {player.race === 'bionex' ? (
+                <button
+                  onClick={() => setIsShopModalOpen(true)}
+                  style={{
+                    width: '100%', padding: '12px 0', fontFamily: 'var(--font-title)', fontSize: 15, fontWeight: 900,
+                    background: `linear-gradient(90deg, ${colors.accent}, ${colors.border})`,
+                    color: '#000', border: 'none', borderRadius: 6, cursor: 'pointer',
+                    boxShadow: `0 0 10px ${colors.glow}`
+                  }}
+                >
+                  ?? BUKA KATALOG PARTS
+                </button>
+              ) : (
+                <div style={{ padding: 20, textAlign: 'center', color: '#ff4444', fontFamily: 'var(--font-title)', fontWeight: 800 }}>
+                  [ OUT OF STOCK ]
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
+      
+      {isShopModalOpen && <AscensionShopModal onClose={() => setIsShopModalOpen(false)} colors={colors} raceData={data} player={player} bionexTab={bionexTab} />}
     </div>
   )
 }
-
 const styles = {
   screen: { display: 'flex', flexDirection: 'column', flex: 1, overflowY: 'auto', fontFamily: 'var(--font-body)', background: 'linear-gradient(180deg, #030814 0%, #050d1f 100%)' },
   resBar: { display: 'flex', gap: 8, padding: '12px 16px', borderBottom: '1px solid rgba(0, 229, 255, 0.15)', background: 'rgba(3, 8, 20, 0.4)' },
   chip: (c) => ({ background: 'rgba(3, 8, 20, 0.8)', border: `1px solid ${c}`, borderRadius: 20, padding: '4px 10px', fontFamily: 'var(--font-mono)', fontSize: 13, fontWeight: 800, color: c }),
   empty: { flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: 40, color: '#7ab0d0', fontFamily: 'var(--font-body)', fontSize: 13, textAlign: 'center', gap: 10 }
 }
+
+
+
