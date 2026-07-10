@@ -266,8 +266,7 @@ export default function Ascension() {
                             transition: 'all 0.25s ease',
                           }}
                         >
-                          <div style={{ fontSize: 11, fontWeight: 900, letterSpacing: 2, color: active ? 'rgba(255,255,255,0.8)' : 'rgba(117,144,183,0.7)' }}>LV</div>
-                          <div>{lv}</div>
+                          <div style={{ fontSize: 11, fontWeight: 900, letterSpacing: 2, color: active ? 'rgba(255,255,255,0.8)' : 'rgba(117,144,183,0.7)' }}>{lv}</div>
                         </button>
                       )
                     })}
@@ -355,8 +354,8 @@ export default function Ascension() {
                                 position: 'relative',
                                 zIndex: 1,
                                 filter: isUnlocked
-                                  ? `drop-shadow(0 0 18px ${colors.accent}) brightness(1.15) contrast(1.1)`
-                                  : `brightness(0.5) saturate(0.5)`,
+                                  ? `drop-shadow(0 0 20px ${colors.accent})`
+                                  : `brightness(0.4) saturate(0.3)`,
                                 transition: 'filter 0.4s ease',
                               }}
                             />
