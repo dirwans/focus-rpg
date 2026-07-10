@@ -23,14 +23,14 @@ const EVO_IMAGES = {
   ares_dominator:   '/assets/ARESlv55arctron.png?v=2',
   ares_apocalypse:  '/assets/ARESlv65arctron.png?v=2',
   // Celestra Ancient Spirit - Seraphys
-  spirit_seraphys_32: '/assets/spirit_seraphys_32.png?v=4',
-  spirit_seraphys_42: '/assets/spirit_seraphys_42.png?v=4',
-  spirit_seraphys_55: '/assets/spirit_seraphys_55.png?v=4',
-  spirit_seraphys_65: '/assets/spirit_seraphys_65.png?v=4',
+  spirit_seraphys_32: '/assets/spirit_seraphys_32.png?v=5',
+  spirit_seraphys_42: '/assets/spirit_seraphys_42.png?v=5',
+  spirit_seraphys_55: '/assets/spirit_seraphys_55.png?v=5',
+  spirit_seraphys_65: '/assets/spirit_seraphys_65.png?v=5',
   // Celestra Ancient Spirit - Noctyrna
-  spirit_noctyrna_32: '/assets/spirit_noctyrna_32.png?v=4',
-  spirit_noctyrna_42: '/assets/spirit_noctyrna_42.png?v=4',
-  spirit_noctyrna_55: '/assets/spirit_noctyrna_55.png?v=7',
+  spirit_noctyrna_32: '/assets/spirit_noctyrna_32.png?v=5',
+  spirit_noctyrna_42: '/assets/spirit_noctyrna_42.png?v=5',
+  spirit_noctyrna_55: '/assets/spirit_noctyrna_55.png?v=5',
   spirit_noctyrna_65: '/assets/spirit_noctyrna_65.png?v=5',
 }
 
@@ -345,7 +345,7 @@ export default function Ascension() {
                               transform: 'translate(-50%, -50%)',
                             }}/>
                             <img
-                              src={EVO_IMAGES[`spirit_${spiritTab}_${spiritLevel}`] || `/assets/spirit_${spiritTab}_${spiritLevel}.png?v=1`}
+                              src={EVO_IMAGES[`spirit_${spiritTab}_${spiritLevel}`] || `/assets/spirit_${spiritTab}_${spiritLevel}.png?v=5`}
                               alt={`${aData.name} Lv.${spiritLevel}`}
                               style={{
                                 maxHeight: 280,
