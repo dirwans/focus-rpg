@@ -67,6 +67,8 @@ export default function Ascension() {
   const [isShopModalOpen, setIsShopModalOpen] = useState(false)
   const [isSpiritModalOpen, setIsSpiritModalOpen] = useState(false)
   const [kitType, setKitType] = useState('launcher')
+  const [spiritTab, setSpiritTab] = useState('seraphys') // celestra spirit type
+  const [spiritLevel, setSpiritLevel] = useState(32)     // selected preview level
 
   if (!player.race) {
     return (
@@ -175,69 +177,323 @@ export default function Ascension() {
                 )
               })()}
 
+              {/* CELESTRA SPIRIT SHOWCASE - Glass card + neon glow style */}
               {player.race === 'celestra' && (
                 <div style={{ marginTop: 24 }}>
-                  <div style={{ fontFamily: 'var(--font-title)', fontSize: 16, color: colors.accent, marginBottom: 12, fontWeight: 800, borderBottom: `1px solid ${colors.border}4d`, paddingBottom: 6 }}>
-                    Ancient Spirit Evolution (Showcase)
+                  {/* Header */}
+                  <div style={{
+                    fontFamily: 'var(--font-title)',
+                    fontSize: 18,
+                    fontWeight: 900,
+                    color: colors.accent,
+                    marginBottom: 14,
+                    letterSpacing: 2,
+                    textAlign: 'center',
+                    textShadow: `0 0 12px ${colors.glow}, 0 0 24px ${colors.glow}`,
+                    borderBottom: `2px solid ${colors.accent}44`,
+                    paddingBottom: 8
+                  }}>
+                    ✦ ANCIENT SPIRIT EVOLUTION ✦
                   </div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                    {Object.keys(data.animus).map(animusKey => {
-                      const aData = data.animus[animusKey];
-                      const milestoneLevels = [32, 42, 55, 65];
-                      
-                      return milestoneLevels.map(lv => {
-                        const isSeraphys = animusKey === 'seraphys';
-                        
-                        return (
-                          <div key={`${animusKey}-${lv}`} style={{ padding: 12, border: `1px solid ${colors.border}4d`, borderRadius: 8, background: 'rgba(255,255,255,0.02)' }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-                              <div style={{ fontFamily: 'var(--font-title)', fontSize: 14, color: '#fff' }}>
-                                {aData.name} Lv.{lv}
-                              </div>
-                              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: colors.accent, padding: '2px 6px', background: `${colors.accent}22`, borderRadius: 4 }}>
-                                Lv. {lv}
-                              </div>
-                            </div>
-                            
-                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '16px 0', background: 'transparent' }}>
-                                <img
-                                src={EVO_IMAGES[`spirit_${animusKey}_${lv}`] || `/assets/spirit_${animusKey}_${lv}.png?v=1`}
-                                alt={`${aData.name} Lv.${lv}`}
-                                style={{
-                                  width: '100%',
-                                  maxWidth: 320,
-                                  height: 320,
-                                  objectFit: 'contain',
-                                  margin: '0 auto',
-                                  display: 'block'
-                                }}
-                              />
-                            </div>
 
-                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, padding: 12, background: 'rgba(0,0,0,0.4)', borderRadius: 8, border: `1px solid ${colors.border}4d`, fontSize: 13, fontFamily: 'var(--font-mono)', marginBottom: 8 }}>
-                              {isSeraphys ? (
-                                <>
-                                  <div>✨ HEAL: <span style={{ color: '#44ff88' }}>+{(aData.baseHeal + (aData.growthHeal * (lv - 1))).toLocaleString()} HP/s</span></div>
-                                  <div>🛡️ DEF: <span style={{ color: '#4488ff' }}>+{(aData.baseDef + (aData.growthDef * (lv - 1))).toLocaleString()}</span></div>
-                                  <div>❤️ HP: <span style={{ color: '#ff4444' }}>+{(aData.baseHp + (aData.growthHp * (lv - 1))).toLocaleString()}</span></div>
-                                  <div>🩹 CURE: <span style={{ color: '#ffcc00' }}>+{(aData.baseCure + (aData.growthCure * (lv - 1))).toFixed(1)}% Rate</span></div>
-                                </>
-                              ) : (
-                                <>
-                                  <div>🌑 DPS: <span style={{ color: '#ff4444' }}>{(aData.baseForceAtkMin + (aData.growthForceAtkMin * (lv - 1))).toLocaleString()}-{(aData.baseForceAtkMax + (aData.growthForceAtkMax * (lv - 1))).toLocaleString()}</span></div>
-                                  <div>💥 CRIT: <span style={{ color: '#ffcc00' }}>+{(aData.baseCrit + (aData.growthCrit * (lv - 1))).toFixed(1)}%</span></div>
-                                  <div>⚡ STUN: <span style={{ color: '#44ccff' }}>+{(aData.baseStun + (aData.growthStun * (lv - 1))).toFixed(1)}%</span></div>
-                                  <div>❤️ HP: <span style={{ color: '#44ff88' }}>+{(aData.baseHp + (aData.growthHp * (lv - 1))).toLocaleString()}</span></div>
-                                </>
-                              )}
-                            </div>
-                            
-                            <div style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: '#888', textAlign: 'center', padding: 6, background: 'rgba(0,0,0,0.3)', borderRadius: 4 }}>
-                              Preview Target Status (Showcase)
-                            </div>
+                  {/* Spirit type tab */}
+                  <div style={{ display: 'flex', gap: 8, marginBottom: 12 }}>
+                    {[
+                      { key: 'seraphys', icon: '✨', label: 'SERAPHYS', sub: 'Healer' },
+                      { key: 'noctyrna', icon: '🌑', label: 'NOCTYRNA', sub: 'Aggressor' },
+                    ].map(tab => {
+                      const active = spiritTab === tab.key
+                      return (
+                        <button
+                          key={tab.key}
+                          onClick={() => { setSpiritTab(tab.key); setSpiritLevel(32) }}
+                          style={{
+                            flex: 1,
+                            padding: '10px 4px',
+                            fontFamily: 'var(--font-title)',
+                            fontWeight: 900,
+                            fontSize: 13,
+                            letterSpacing: 1,
+                            background: active
+                              ? `linear-gradient(135deg, ${colors.accent}33, ${colors.border}22)`
+                              : 'rgba(0,0,0,0.4)',
+                            border: active
+                              ? `2px solid ${colors.accent}`
+                              : `1px solid ${colors.border}44`,
+                            borderRadius: 8,
+                            cursor: 'pointer',
+                            color: active ? colors.accent : '#7590B7',
+                            boxShadow: active ? `0 0 16px ${colors.glow}, inset 0 0 12px ${colors.bg}` : 'none',
+                            transition: 'all 0.3s ease',
+                          }}
+                        >
+                          <div style={{ fontSize: 18, marginBottom: 2 }}>{tab.icon}</div>
+                          <div>{tab.label}</div>
+                          <div style={{ fontSize: 10, opacity: 0.7, fontWeight: 400 }}>{tab.sub}</div>
+                        </button>
+                      )
+                    })}
+                  </div>
+
+                  {/* Spirit level selector */}
+                  <div style={{ display: 'flex', gap: 6, marginBottom: 14 }}>
+                    {[32, 42, 55, 65].map(lv => {
+                      const active = spiritLevel === lv
+                      const isUnlocked = (player.celestraAnimus?.[spiritTab] || 1) >= lv
+                      return (
+                        <button
+                          key={lv}
+                          onClick={() => setSpiritLevel(lv)}
+                          style={{
+                            flex: 1,
+                            padding: '8px 2px',
+                            fontFamily: 'var(--font-title)',
+                            fontWeight: 900,
+                            fontSize: 14,
+                            letterSpacing: 1,
+                            background: active
+                              ? `linear-gradient(135deg, ${colors.accent}55, ${colors.border}33)`
+                              : 'rgba(0,0,0,0.3)',
+                            border: active
+                              ? `2px solid ${colors.accent}`
+                              : isUnlocked
+                                ? `1px solid ${colors.accent}66`
+                                : `1px solid rgba(255,68,68,0.3)`,
+                            borderRadius: 6,
+                            cursor: 'pointer',
+                            color: active ? '#fff' : isUnlocked ? colors.accent : '#555',
+                            boxShadow: active ? `0 0 14px ${colors.glow}` : 'none',
+                            transition: 'all 0.25s ease',
+                          }}
+                        >
+                          <div style={{ fontSize: 11, opacity: 0.6, fontWeight: 600 }}>LV</div>
+                          <div>{lv}</div>
+                        </button>
+                      )
+                    })}
+                  </div>
+
+                  {/* Main spirit card - glass + neon style */}
+                  {(() => {
+                    const aData = data.animus[spiritTab]
+                    const isSeraphys = spiritTab === 'seraphys'
+                    const isUnlocked = (player.celestraAnimus?.[spiritTab] || 1) >= spiritLevel
+
+                    const calc = (base, growth) => (base + growth * (spiritLevel - 1)).toLocaleString()
+                    const calcF = (base, growth) => (base + growth * (spiritLevel - 1)).toFixed(1)
+
+                    return (
+                      <div style={{
+                        borderRadius: 12,
+                        padding: 2,
+                        background: `linear-gradient(135deg, ${colors.accent}88, ${colors.border}44, ${colors.accent}88)`,
+                        boxShadow: `0 0 20px ${colors.glow}, 0 0 40px ${colors.bg}`,
+                        position: 'relative',
+                        overflow: 'hidden',
+                      }}>
+                        {/* Inner glass */}
+                        <div style={{
+                          background: 'linear-gradient(180deg, rgba(5,10,25,0.95) 0%, rgba(10,15,35,0.92) 100%)',
+                          borderRadius: 10,
+                          padding: '16px 14px',
+                          backdropFilter: 'blur(8px)',
+                          border: `1px solid ${colors.border}66`,
+                        }}>
+                          {/* Spirit name header */}
+                          <div style={{
+                            fontFamily: 'var(--font-title)',
+                            fontSize: 20,
+                            fontWeight: 900,
+                            letterSpacing: 2,
+                            textAlign: 'center',
+                            color: '#fff',
+                            textShadow: `0 0 10px ${colors.accent}, 0 0 20px ${colors.accent}, 0 0 30px ${colors.glow}`,
+                            marginBottom: 4,
+                          }}>
+                            {aData.name}
                           </div>
-                        );
-                      });
+                          <div style={{
+                            fontFamily: 'var(--font-title)',
+                            fontSize: 11,
+                            fontWeight: 700,
+                            letterSpacing: 3,
+                            textAlign: 'center',
+                            color: colors.accent,
+                            textShadow: `0 0 6px ${colors.accent}`,
+                            marginBottom: 12,
+                          }}>
+                            {isSeraphys ? 'SACRED HEALER SPIRIT' : 'DARK AGGRESSOR SPIRIT'}
+                          </div>
+
+                          {/* Sprite */}
+                          <div style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            marginBottom: 14,
+                            minHeight: 280,
+                            position: 'relative',
+                          }}>
+                            {/* Background glow */}
+                            <div style={{
+                              position: 'absolute',
+                              width: 200,
+                              height: 200,
+                              borderRadius: '50%',
+                              background: `radial-gradient(circle, ${colors.glow}44 0%, transparent 70%)`,
+                              top: '50%',
+                              left: '50%',
+                              transform: 'translate(-50%, -50%)',
+                            }}/>
+                            <img
+                              src={EVO_IMAGES[`spirit_${spiritTab}_${spiritLevel}`] || `/assets/spirit_${spiritTab}_${spiritLevel}.png?v=1`}
+                              alt={`${aData.name} Lv.${spiritLevel}`}
+                              style={{
+                                maxHeight: 280,
+                                maxWidth: '85%',
+                                objectFit: 'contain',
+                                position: 'relative',
+                                zIndex: 1,
+                                filter: isUnlocked
+                                  ? `drop-shadow(0 0 18px ${colors.accent}) brightness(1.15) contrast(1.1)`
+                                  : `brightness(0.5) saturate(0.5)`,
+                                transition: 'filter 0.4s ease',
+                              }}
+                            />
+                          </div>
+
+                          {/* Locked overlay */}
+                          {!isUnlocked && (
+                            <div style={{
+                              textAlign: 'center',
+                              fontFamily: 'var(--font-title)',
+                              fontSize: 12,
+                              fontWeight: 900,
+                              color: '#ff4444',
+                              letterSpacing: 1,
+                              marginBottom: 8,
+                              textShadow: '0 0 8px rgba(255,68,68,0.8)',
+                            }}>
+                              🔒 NOT YET UNLOCKED — RAISE SPIRIT LEVEL
+                            </div>
+                          )}
+
+                          {/* Stats panel */}
+                          <div style={{
+                            display: 'grid',
+                            gridTemplateColumns: '1fr 1fr',
+                            gap: 6,
+                            padding: 12,
+                            background: 'rgba(0,0,0,0.5)',
+                            borderRadius: 8,
+                            border: `1px solid ${colors.border}55`,
+                            marginBottom: 10,
+                          }}>
+                            {isSeraphys ? (
+                              <>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-title)', fontWeight: 800, fontSize: 13, color: '#88aadd' }}>
+                                  <span style={{ color: '#44ff88', textShadow: '0 0 6px rgba(68,255,136,0.6)' }}>✨</span>
+                                  <span>HEAL</span>
+                                  <span style={{ color: '#44ff88', textShadow: '0 0 6px rgba(68,255,136,0.6)' }}>{calc(aData.baseHeal, aData.growthHeal)} HP/s</span>
+                                </div>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-title)', fontWeight: 800, fontSize: 13, color: '#88aadd' }}>
+                                  <span style={{ color: '#4488ff', textShadow: '0 0 6px rgba(68,136,255,0.6)' }}>🛡️</span>
+                                  <span>DEF</span>
+                                  <span style={{ color: '#4488ff', textShadow: '0 0 6px rgba(68,136,255,0.6)' }}>{calc(aData.baseDef, aData.growthDef)}</span>
+                                </div>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-title)', fontWeight: 800, fontSize: 13, color: '#88aadd' }}>
+                                  <span style={{ color: '#ff4444', textShadow: '0 0 6px rgba(255,68,68,0.6)' }}>❤️</span>
+                                  <span>HP</span>
+                                  <span style={{ color: '#ff4444', textShadow: '0 0 6px rgba(255,68,68,0.6)' }}>{calc(aData.baseHp, aData.growthHp)}</span>
+                                </div>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-title)', fontWeight: 800, fontSize: 13, color: '#88aadd' }}>
+                                  <span style={{ color: '#ffcc00', textShadow: '0 0 6px rgba(255,204,0,0.6)' }}>🩹</span>
+                                  <span>CURE</span>
+                                  <span style={{ color: '#ffcc00', textShadow: '0 0 6px rgba(255,204,0,0.6)' }}>+{calcF(aData.baseCure, aData.growthCure)}%</span>
+                                </div>
+                              </>
+                            ) : (
+                              <>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-title)', fontWeight: 800, fontSize: 13, color: '#88aadd', gridColumn: '1/-1' }}>
+                                  <span style={{ color: '#ff4444', textShadow: '0 0 6px rgba(255,68,68,0.6)' }}>🌑 DPS</span>
+                                  <span style={{ color: '#ff4444', textShadow: '0 0 6px rgba(255,68,68,0.6)' }}>{calc(aData.baseForceAtkMin, aData.growthForceAtkMin)} — {calc(aData.baseForceAtkMax, aData.growthForceAtkMax)}</span>
+                                </div>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-title)', fontWeight: 800, fontSize: 13, color: '#88aadd' }}>
+                                  <span style={{ color: '#ffcc00', textShadow: '0 0 6px rgba(255,204,0,0.6)' }}>💥</span>
+                                  <span>CRIT</span>
+                                  <span style={{ color: '#ffcc00', textShadow: '0 0 6px rgba(255,204,0,0.6)' }}>+{calcF(aData.baseCrit, aData.growthCrit)}%</span>
+                                </div>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-title)', fontWeight: 800, fontSize: 13, color: '#88aadd' }}>
+                                  <span style={{ color: '#44ccff', textShadow: '0 0 6px rgba(68,204,255,0.6)' }}>⚡</span>
+                                  <span>STUN</span>
+                                  <span style={{ color: '#44ccff', textShadow: '0 0 6px rgba(68,204,255,0.6)' }}>+{calcF(aData.baseStun, aData.growthStun)}%</span>
+                                </div>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-title)', fontWeight: 800, fontSize: 13, color: '#88aadd' }}>
+                                  <span style={{ color: '#44ff88', textShadow: '0 0 6px rgba(68,255,136,0.6)' }}>❤️</span>
+                                  <span>HP</span>
+                                  <span style={{ color: '#44ff88', textShadow: '0 0 6px rgba(68,255,136,0.6)' }}>{calc(aData.baseHp, aData.growthHp)}</span>
+                                </div>
+                              </>
+                            )}
+                          </div>
+
+                          {/* Preview note */}
+                          <div style={{
+                            fontSize: 10,
+                            fontFamily: 'var(--font-title)',
+                            fontWeight: 700,
+                            letterSpacing: 2,
+                            color: '#7590B7',
+                            textAlign: 'center',
+                            padding: 6,
+                            background: 'rgba(0,0,0,0.3)',
+                            borderRadius: 4,
+                            border: `1px solid ${colors.border}22`,
+                            textShadow: '0 0 4px rgba(117,144,183,0.4)',
+                          }}>
+                            ▶ SPIRIT PREVIEW · LV.{spiritLevel} · {isUnlocked ? 'UNLOCKED' : 'LOCKED'}
+                          </div>
+                        </div>
+                      </div>
+                    )
+                  })()}
+
+                  {/* Both spirits at a glance */}
+                  <div style={{ marginTop: 16, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+                    {Object.keys(data.animus).map(animusKey => {
+                      const aData = data.animus[animusKey]
+                      const currentLv = player.celestraAnimus?.[animusKey] || 1
+                      const isSeraphys = animusKey === 'seraphys'
+                      return (
+                        <button
+                          key={animusKey}
+                          onClick={() => { setSpiritTab(animusKey); setSpiritLevel(Math.min(32, currentLv)) }}
+                          style={{
+                            padding: '10px 10px',
+                            background: spiritTab === animusKey
+                              ? `linear-gradient(135deg, ${colors.accent}22, ${colors.border}11)`
+                              : 'rgba(0,0,0,0.3)',
+                            border: spiritTab === animusKey
+                              ? `2px solid ${colors.accent}`
+                              : `1px solid ${colors.border}33`,
+                            borderRadius: 8,
+                            cursor: 'pointer',
+                            textAlign: 'left',
+                            boxShadow: spiritTab === animusKey ? `0 0 12px ${colors.glow}` : 'none',
+                            transition: 'all 0.25s ease',
+                          }}
+                        >
+                          <div style={{ fontFamily: 'var(--font-title)', fontWeight: 900, fontSize: 13, color: '#fff', letterSpacing: 1, textShadow: spiritTab === animusKey ? `0 0 8px ${colors.accent}` : 'none' }}>
+                            {isSeraphys ? '✨' : '🌑'} {aData.name}
+                          </div>
+                          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: colors.accent, marginTop: 3, textShadow: `0 0 4px ${colors.accent}` }}>
+                            Current: Lv.{currentLv}
+                          </div>
+                          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: '#7590B7', marginTop: 2 }}>
+                            {isSeraphys ? 'Healer · HP Boost' : 'Aggressor · DPS'}
+                          </div>
+                        </button>
+                      )
                     })}
                   </div>
                 </div>

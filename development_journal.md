@@ -2002,3 +2002,20 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 - **Physical Assets Renaming (`public/assets/items/`)**:
   - Renamed the PNG assets on disk to match the clean naming standard (e.g. `drop_item_f.png` -> `plasma_ignition_core.png`, etc.) and synchronized the `image` fields in `items.json` accordingly.
 - **Verification**: Verified React build (`npm run build`) compiles cleanly with no missing asset warnings.
+
+---
+
+### 🔧 Milestone 142: M.E.U. RFDB Stats Integration & Spirit Showcase UI Redesign [DEPLOYED]
+- **`src/data/ascensionArms.json` — Bionex M.E.U. Per-Part RFDB Stats**:
+  - **Goliath (defender)**: Full RFDB stats per all 6 parts (Head/Upper/Lower/Arms/Arms2/Options), Lv.30–Lv.80, Beelzebub/Baphomet tiers included. Fields: `def`, `attM`, `defM`, elemental resists (`fire`, `water`, `soil`, `wind`), `minAtk`, `maxAtk`, `boostCharge`, `boostSpeed`.
+  - **Catapult (attacker)**: Added missing high-level entries (Lv.71/72/73/74/75/76/77/78/80 — Beelzebub + Baphomet tiers) to all 6 parts.
+  - **Evolutions**: Added `Lv.75 Attacker` and `Lv.75 Defender` tiers (`meu_atk_75`, `meu_def_75`) with RFDB-sourced ATK/HP values.
+- **`src/screens/Ascension.jsx` — Celestra Spirit Showcase UI Redesign**:
+  - Replaced static grid layout with interactive glass-card + neon-glow design.
+  - Added spirit type tabs (Seraphys / Noctyrna) with active glow state.
+  - Added level selector tabs (Lv.32 / 42 / 55 / 65) — only one level shown at a time.
+  - Spirit card uses gradient neon border, `backdrop-filter: blur`, radial background glow behind sprite.
+  - Stats values displayed with `text-shadow` fluorescent glow effect.
+  - Locked spirit levels show dimmed sprite + lock message.
+  - Quick-compare bottom cards for both spirits with current level.
+- **Build**: Verified `npm run build` compiles cleanly.
