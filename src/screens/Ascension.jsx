@@ -61,6 +61,7 @@ const RACE_COLORS = {
 export default function Ascension() {
   const player = useGameStore((s) => s.player)
   const craftAscensionArms = useGameStore((s) => s.craftAscensionArms)
+  const buySiegeKit = useGameStore((s) => s.buySiegeKit)
   const [bionexTab, setBionexTab] = useState('attacker')
   const [activeTab, setActiveTab] = useState('hangar')
   const [isShopModalOpen, setIsShopModalOpen] = useState(false)
@@ -280,7 +281,8 @@ export default function Ascension() {
               })
               .map((evo, i) => {
               const isUnlocked = player.equipment?.ascension_arms?.id === evo.id
-              const canAfford = player.resources.crd >= evo.cost
+              const hasMaterial = player.race === 'arctron' ? (player.ownedSiegeKits || []).includes(evo.id) : true
+              const canAfford = player.race === 'arctron' ? hasMaterial : player.resources.crd >= evo.cost
               const levelMet = player.level >= evo.levelReq
               
               const evoImg = EVO_IMAGES[evo.id]
@@ -465,7 +467,9 @@ export default function Ascension() {
                         textShadow: canAfford && levelMet ? '0 1px 1px rgba(255,255,255,0.3)' : 'none'
                       }}
                     >
-                      UPGRADE: {evo.costLabel}
+                      {player.race === 'arctron'
+                        ? (!hasMaterial ? `BUTUH MATERIAL: ${evo.name}` : `UPGRADE & PASANG`)
+                        : `UPGRADE: ${evo.costLabel}`}
                     </button>
                   ) : (
                     <div style={{
@@ -516,14 +520,25 @@ export default function Ascension() {
                     🔧 Siege Kit Items (per Level)
                   </div>
                   {[
-                    { lv: 32, name: 'Siege Kit', rfLv: 30, atkBuff: '+20%', durability: '1,100', range: '1-50', price: '5,000,000 CRD', desc: 'Basic launcher siege kit untuk pemula.' },
-                    { lv: 42, name: 'Advanced Siege Kit', rfLv: 40, atkBuff: '+40%', durability: '1,500', range: '1-57', price: '100,000,000 CRD', desc: 'Siege kit tingkat menengah dengan jarak tembak lebih jauh.' },
-                    { lv: 55, name: 'Shining Siege Kit', rfLv: 55, atkBuff: '+55%', durability: '2,000', range: '1-65', price: '500,000,000 CRD', desc: 'Siege kit bercahaya — daya tembak sangat tinggi.' },
-                    { lv: 65, name: 'Adv. Shining Siege Kit', rfLv: 65, atkBuff: '+65%', durability: '2,500', range: '1-72', price: '2,000,000,000 CRD', desc: 'Siege kit elit. Senjata pamungkas Arctron.', locked: true },
+                    { lv: 32, name: 'Siege Kit', rfLv: 30, atkBuff: '+20%', durability: '1,100', range: '1-50', price: '5,000,000 CRD', priceVal: 5000000, desc: 'Basic launcher siege kit untuk pemula.' },
+                    { lv: 42, name: 'Advanced Siege Kit', rfLv: 40, atkBuff: '+40%', durability: '1,500', range: '1-57', price: '100,000,000 CRD', priceVal: 100000000, desc: 'Siege kit tingkat menengah dengan jarak tembak lebih jauh.' },
+                    { lv: 55, name: 'Shining Siege Kit', rfLv: 55, atkBuff: '+55%', durability: '2,000', range: '1-65', price: '500,000,000 CRD', priceVal: 500000000, desc: 'Siege kit bercahaya — daya tembak sangat tinggi.' },
+                    { lv: 65, name: 'Adv. Shining Siege Kit', rfLv: 65, atkBuff: '+65%', durability: '2,500', range: '1-72', price: '2,000,000,000 CRD', priceVal: 2000000000, desc: 'Siege kit elit. Senjata pamungkas Arctron.', locked: true },
                   ].map((kit) => {
-                    const isOwned = (player.ascensionArms || []).includes(data.evolutions?.find(e => e.levelReq === kit.lv)?.id)
+                    const evoId = kit.lv === 32 ? 'ares_x' : kit.lv === 42 ? 'ares_nemesis' : kit.lv === 55 ? 'ares_dominator' : 'ares_apocalypse'
+                    const isMaterialOwned = (player.ownedSiegeKits || []).includes(evoId)
+                    const isEquipped = player.equipment?.ascension_arms?.id === evoId
+                    const canAfford = player.resources.crd >= kit.priceVal
+                    const levelMet = player.level >= kit.lv
+
+                    const handleBuyKit = () => {
+                      if (confirm(`Beli material ${kit.name} seharga ${kit.price}?`)) {
+                        buySiegeKit(evoId, kit.priceVal)
+                      }
+                    }
+
                     return (
-                      <div key={kit.lv} style={{ padding: 12, border: `1px solid ${colors.border}4d`, borderRadius: 8, background: isOwned ? 'rgba(255,140,0,0.08)' : 'rgba(255,255,255,0.02)' }}>
+                      <div key={kit.lv} style={{ padding: 12, border: `1px solid ${colors.border}4d`, borderRadius: 8, background: isEquipped ? 'rgba(255,140,0,0.12)' : isMaterialOwned ? 'rgba(255,140,0,0.06)' : 'rgba(255,255,255,0.02)' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
                           <div style={{ fontFamily: 'var(--font-title)', fontSize: 14, color: '#fff', fontWeight: 900 }}>
                             {kit.locked ? '🔒 ' : '🚀 '}{kit.name}
@@ -535,21 +550,38 @@ export default function Ascension() {
                         <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#8899aa', marginBottom: 8 }}>
                           {kit.desc}
                         </div>
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 4, fontFamily: 'var(--font-mono)', fontSize: 12 }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 4, fontFamily: 'var(--font-mono)', fontSize: 12, marginBottom: 10 }}>
                           <div>⚔️ ATK: <span style={{ color: '#ff8c00' }}>{kit.atkBuff}</span></div>
                           <div>🎯 Range: <span style={{ color: '#44ccff' }}>{kit.range}</span></div>
                           <div>🛡️ Durability: <span style={{ color: '#88aadd' }}>{kit.durability}</span></div>
                           <div>💰 Price: <span style={{ color: '#f5a623' }}>{kit.price}</span></div>
                         </div>
-                        {isOwned && (
-                          <div style={{ marginTop: 8, padding: '4px 0', textAlign: 'center', color: '#44ff88', fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 900 }}>
-                            ✓ ACQUIRED
-                          </div>
-                        )}
-                        {kit.locked && (
-                          <div style={{ marginTop: 8, padding: '4px 0', textAlign: 'center', color: '#ff4444', fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 900 }}>
+
+                        {kit.locked ? (
+                          <div style={{ padding: '6px 0', textAlign: 'center', color: '#ff4444', fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 900, background: 'rgba(255,68,68,0.1)', borderRadius: 4 }}>
                             🔒 LOCKED (BELUM DILIRIS)
                           </div>
+                        ) : isEquipped ? (
+                          <div style={{ padding: '6px 0', textAlign: 'center', color: '#44ff88', fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 900, background: 'rgba(68,255,136,0.1)', borderRadius: 4 }}>
+                            ✓ EQUIPPED & ACTIVE
+                          </div>
+                        ) : isMaterialOwned ? (
+                          <div style={{ padding: '6px 0', textAlign: 'center', color: '#f5a623', fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 900, background: 'rgba(245,166,35,0.1)', borderRadius: 4 }}>
+                            ✓ MATERIAL OWNED (PASANG DI HANGAR)
+                          </div>
+                        ) : (
+                          <button
+                            onClick={handleBuyKit}
+                            disabled={!canAfford || !levelMet}
+                            style={{
+                              width: '100%', padding: '8px 0', fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 900,
+                              background: canAfford && levelMet ? `linear-gradient(90deg, ${colors.accent}, ${colors.border})` : 'rgba(255,255,255,0.05)',
+                              color: canAfford && levelMet ? '#000' : 'rgba(255,255,255,0.3)',
+                              border: 'none', borderRadius: 4, cursor: canAfford && levelMet ? 'pointer' : 'not-allowed'
+                            }}
+                          >
+                            {!levelMet ? `BUTUH LV.${kit.lv}` : `BELI MATERIAL SIEGE KIT`}
+                          </button>
                         )}
                       </div>
                     )

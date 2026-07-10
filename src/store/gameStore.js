@@ -4214,10 +4214,22 @@ export const useGameStore = create(
 
       craftAscensionArms: (evoData, raceAresName) => {
         const { player } = get()
-        if (player.resources.crd < evoData.cost) {
-          alert('CRD tidak cukup!')
-          return false
+        const userRace = player.race ? player.race.toLowerCase() : ''
+        const userJob = player.job ? player.job.toLowerCase() : ''
+
+        if (userRace === 'arctron') {
+          const owned = player.ownedSiegeKits || []
+          if (!owned.includes(evoData.id)) {
+            alert(`Anda belum memiliki material/item Siege Kit untuk level ini! Beli terlebih dahulu di Parts Shop.`)
+            return false
+          }
+        } else {
+          if (player.resources.crd < evoData.cost) {
+            alert('CRD tidak cukup!')
+            return false
+          }
         }
+
         if (player.level < evoData.levelReq) {
           alert(`Level ${evoData.levelReq} dibutuhkan!`)
           return false
@@ -4228,8 +4240,6 @@ export const useGameStore = create(
           bionex: ['engineer', 'mechanist', 'techmaster', 'overseer'],
           celestra: ['oracle', 'celestial_oracle', 'conjurer', 'divine_summoner']
         }
-        const userRace = player.race ? player.race.toLowerCase() : ''
-        const userJob = player.job ? player.job.toLowerCase() : ''
         const allowedForRace = allowedJobs[userRace] || []
         if (!allowedForRace.includes(userJob)) {
           alert(`Hanya pilot dengan job kelas ${raceAresName === 'ARES' ? 'Technician' : raceAresName === 'M.E.U.' ? 'Engineer' : 'Oracle'} (dan lanjutannya) yang dapat merakit Ascension Arms!`)
@@ -4253,17 +4263,44 @@ export const useGameStore = create(
           isEquipped: true
         }
 
+        const crdCost = userRace === 'arctron' ? 0 : evoData.cost
+
         set({
           player: {
             ...player,
             resources: {
               ...player.resources,
-              crd: player.resources.crd - evoData.cost
+              crd: player.resources.crd - crdCost
             },
             equipment: {
               ...player.equipment,
               ascension_arms: newItem
             },
+            savedAt: Date.now()
+          }
+        })
+        return true
+      },
+
+      buySiegeKit: (evoId, cost) => {
+        const { player } = get()
+        if (player.resources.crd < cost) {
+          alert('CRD tidak cukup!')
+          return false
+        }
+        const owned = player.ownedSiegeKits || []
+        if (owned.includes(evoId)) {
+          alert('Anda sudah membeli Siege Kit ini!')
+          return false
+        }
+        set({
+          player: {
+            ...player,
+            resources: {
+              ...player.resources,
+              crd: player.resources.crd - cost
+            },
+            ownedSiegeKits: [...owned, evoId],
             savedAt: Date.now()
           }
         })
