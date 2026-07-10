@@ -265,7 +265,7 @@ export default function Ascension() {
                               {renderSlot('🛡️', 'Core', '#88aadd', 'upper')}
                               {renderSlot('🦵', 'Legs', '#88aadd', 'lower')}
                               {renderSlot('⚔️', 'Arms', '#f5a623', 'arms')}
-                              {renderSlot('🚀', 'Sub', '#f5a623', 'arms2')}
+                              {renderSlot('🚀', 'Arms-II', '#f5a623', 'arms2')}
                               {renderSlot('⚡', 'Boost', '#44ff88', 'options')}
                             </div>
                           )
