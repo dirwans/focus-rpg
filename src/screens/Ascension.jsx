@@ -66,6 +66,7 @@ export default function Ascension() {
   const [activeTab, setActiveTab] = useState('hangar')
   const [isShopModalOpen, setIsShopModalOpen] = useState(false)
   const [isSpiritModalOpen, setIsSpiritModalOpen] = useState(false)
+  const [kitType, setKitType] = useState('launcher')
 
   if (!player.race) {
     return (
@@ -515,15 +516,138 @@ export default function Ascension() {
                 </button>
               ) : player.race === 'arctron' ? (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-                  {/* SIEGE KIT ITEMS PER LEVEL */}
-                  <div style={{ fontFamily: 'var(--font-title)', fontSize: 14, color: colors.accent, fontWeight: 800, borderBottom: `1px solid ${colors.border}4d`, paddingBottom: 6 }}>
-                    🔧 Siege Kit Items (per Level)
+                  {/* SUB-TABS: LAUNCHER vs FLAME */}
+                  <div style={{ display: 'flex', gap: 6, marginBottom: 12 }}>
+                    <button
+                      onClick={() => setKitType('launcher')}
+                      style={{
+                        flex: 1, padding: '8px 0', fontSize: 11, fontFamily: 'var(--font-title)', fontWeight: 900,
+                        background: kitType === 'launcher' ? `linear-gradient(90deg, ${colors.accent}, ${colors.border})` : 'rgba(0,0,0,0.4)',
+                        color: kitType === 'launcher' ? '#000' : colors.accent,
+                        border: `1px solid ${colors.border}`, borderRadius: 6, cursor: 'pointer'
+                      }}
+                    >
+                      🚀 LAUNCHER (PHYSICAL)
+                    </button>
+                    <button
+                      onClick={() => setKitType('fire')}
+                      style={{
+                        flex: 1, padding: '8px 0', fontSize: 11, fontFamily: 'var(--font-title)', fontWeight: 900,
+                        background: kitType === 'fire' ? `linear-gradient(90deg, ${colors.accent}, ${colors.border})` : 'rgba(0,0,0,0.4)',
+                        color: kitType === 'fire' ? '#000' : colors.accent,
+                        border: `1px solid ${colors.border}`, borderRadius: 6, cursor: 'pointer'
+                      }}
+                    >
+                      🔥 FLAME LAUNCHER (FIRE)
+                    </button>
                   </div>
+
                   {[
-                    { lv: 32, name: 'Siege Kit', rfLv: 30, atkBuff: '+20%', durability: '1,100', range: '1-50', price: '5,000,000 CRD', priceVal: 5000000, desc: 'Basic launcher siege kit untuk pemula.' },
-                    { lv: 42, name: 'Advanced Siege Kit', rfLv: 40, atkBuff: '+40%', durability: '1,500', range: '1-57', price: '100,000,000 CRD', priceVal: 100000000, desc: 'Siege kit tingkat menengah dengan jarak tembak lebih jauh.' },
-                    { lv: 55, name: 'Shining Siege Kit', rfLv: 55, atkBuff: '+55%', durability: '2,000', range: '1-65', price: '500,000,000 CRD', priceVal: 500000000, desc: 'Siege kit bercahaya — daya tembak sangat tinggi.' },
-                    { lv: 65, name: 'Adv. Shining Siege Kit', rfLv: 65, atkBuff: '+65%', durability: '2,500', range: '1-72', price: '2,000,000,000 CRD', priceVal: 2000000000, desc: 'Siege kit elit. Senjata pamungkas Arctron.', locked: true },
+                    {
+                      lv: 32,
+                      priceVal: 5000000,
+                      price: '5,000,000 CRD',
+                      desc: 'Basic launcher/flame thrower kit untuk pemula.',
+                      options: {
+                        launcher: {
+                          name: 'Sonium Siege Kit',
+                          type: 'Siege Kit (launcher)',
+                          reqLvl: 30,
+                          durability: '1,000 / 1,000',
+                          effects: ['Increase Attack Power 20% Increase', 'Launcher Attack Speed 0.10 Decrease(secs)'],
+                          distance: '1 - 50',
+                          icon: '🚀'
+                        },
+                        fire: {
+                          name: 'Magius Siege Kit',
+                          type: 'Siege Kit (fire)',
+                          reqLvl: 30,
+                          durability: '1,000 / 1,000',
+                          effects: ['Increase Attack Power 20% Increase', 'Launcher Attack Speed 0.10 Decrease(secs)'],
+                          distance: '1 - 50',
+                          icon: '🔥'
+                        }
+                      }
+                    },
+                    {
+                      lv: 42,
+                      priceVal: 100000000,
+                      price: '100,000,000 CRD',
+                      desc: 'Siege kit tingkat menengah dengan jarak tembak lebih jauh.',
+                      options: {
+                        launcher: {
+                          name: 'Advanced Siege Kit',
+                          type: 'Siege Kit (launcher)',
+                          reqLvl: 40,
+                          durability: '1,500 / 1,500',
+                          effects: ['Increase Attack Power 40% Increase', 'Launcher Attack Speed 0.10 Decrease(secs)'],
+                          distance: '1 - 57',
+                          icon: '🚀'
+                        },
+                        fire: {
+                          name: 'Advanced Flame Siege Kit',
+                          type: 'Siege Kit (fire)',
+                          reqLvl: 40,
+                          durability: '1,500 / 1,500',
+                          effects: ['Increase Attack Power 40% Increase', 'Attack Accuracy 20 Increase', 'Launcher Attack Speed 0.10 Decrease(secs)'],
+                          distance: '1 - 57',
+                          icon: '🔥'
+                        }
+                      }
+                    },
+                    {
+                      lv: 55,
+                      priceVal: 500000000,
+                      price: '500,000,000 CRD',
+                      desc: 'Siege kit bercahaya — daya tembak sangat tinggi.',
+                      options: {
+                        launcher: {
+                          name: 'Shining Siege Kit',
+                          type: 'Siege Kit (launcher)',
+                          reqLvl: 55,
+                          durability: '2,000 / 2,000',
+                          effects: ['Increase Attack Power 55% Increase', 'Launcher Attack Speed 0.10 Decrease(secs)'],
+                          distance: '1 - 65',
+                          icon: '🚀'
+                        },
+                        fire: {
+                          name: 'Fire Shining Siege Kit',
+                          type: 'Siege Kit (fire)',
+                          reqLvl: 55,
+                          durability: '1,500 / 1,500',
+                          effects: ['Increase Attack Power 50% Increase', 'Attack Accuracy 20 Increase', 'Curse Force Duration 10% Decrease', 'Launcher Attack Speed 0.10 Decrease(secs)'],
+                          distance: '1 - 57',
+                          icon: '🔥'
+                        }
+                      }
+                    },
+                    {
+                      lv: 65,
+                      priceVal: 2000000000,
+                      price: '2,000,000,000 CRD',
+                      desc: 'Siege kit elit. Senjata pamungkas Arctron.',
+                      locked: true,
+                      options: {
+                        launcher: {
+                          name: 'Adv. Shining Siege Kit',
+                          type: 'Siege Kit (launcher)',
+                          reqLvl: 65,
+                          durability: '2,500 / 2,500',
+                          effects: ['Increase Attack Power 65% Increase', 'Launcher Attack Speed 0.10 Decrease(secs)'],
+                          distance: '1 - 72',
+                          icon: '🚀'
+                        },
+                        fire: {
+                          name: 'Adv. Fire Shining Siege Kit',
+                          type: 'Siege Kit (fire)',
+                          reqLvl: 65,
+                          durability: '2,500 / 2,500',
+                          effects: ['Increase Attack Power 60% Increase', 'Attack Accuracy 20 Increase', 'Curse Force Duration 10% Decrease', 'Launcher Attack Speed 0.10 Decrease(secs)'],
+                          distance: '1 - 72',
+                          icon: '🔥'
+                        }
+                      }
+                    }
                   ].map((kit) => {
                     const evoId = kit.lv === 32 ? 'ares_x' : kit.lv === 42 ? 'ares_nemesis' : kit.lv === 55 ? 'ares_dominator' : 'ares_apocalypse'
                     const isMaterialOwned = (player.ownedSiegeKits || []).includes(evoId)
@@ -531,8 +655,10 @@ export default function Ascension() {
                     const canAfford = player.resources.crd >= kit.priceVal
                     const levelMet = player.level >= kit.lv
 
+                    const opt = kit.options[kitType] || kit.options.launcher
+
                     const handleBuyKit = () => {
-                      if (confirm(`Beli material ${kit.name} seharga ${kit.price}?`)) {
+                      if (confirm(`Beli material ${opt.name} seharga ${kit.price}?`)) {
                         buySiegeKit(evoId, kit.priceVal)
                       }
                     }
@@ -540,21 +666,55 @@ export default function Ascension() {
                     return (
                       <div key={kit.lv} style={{ padding: 12, border: `1px solid ${colors.border}4d`, borderRadius: 8, background: isEquipped ? 'rgba(255,140,0,0.12)' : isMaterialOwned ? 'rgba(255,140,0,0.06)' : 'rgba(255,255,255,0.02)' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-                          <div style={{ fontFamily: 'var(--font-title)', fontSize: 14, color: '#fff', fontWeight: 900 }}>
-                            {kit.locked ? '🔒 ' : '🚀 '}{kit.name}
+                          <div style={{ fontFamily: 'var(--font-title)', fontSize: 15, color: colors.accent, fontWeight: 900 }}>
+                            {kit.locked ? '🔒 ' : opt.icon + ' '}{opt.name}
                           </div>
-                          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: colors.accent, padding: '2px 8px', background: `${colors.accent}22`, borderRadius: 4, fontWeight: 800 }}>
+                          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#fff', padding: '2px 8px', background: 'rgba(255,255,255,0.1)', borderRadius: 4, fontWeight: 800 }}>
                             Lv.{kit.lv}
                           </div>
                         </div>
-                        <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#8899aa', marginBottom: 8 }}>
+                        <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#8899aa', marginBottom: 10 }}>
                           {kit.desc}
                         </div>
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 4, fontFamily: 'var(--font-mono)', fontSize: 12, marginBottom: 10 }}>
-                          <div>⚔️ ATK: <span style={{ color: '#ff8c00' }}>{kit.atkBuff}</span></div>
-                          <div>🎯 Range: <span style={{ color: '#44ccff' }}>{kit.range}</span></div>
-                          <div>🛡️ Durability: <span style={{ color: '#88aadd' }}>{kit.durability}</span></div>
-                          <div>💰 Price: <span style={{ color: '#f5a623' }}>{kit.price}</span></div>
+                        
+                        {/* RFDB SPECIFICATIONS TABLE */}
+                        <div style={{ marginBottom: 12, border: '1px solid #7590b74d', borderRadius: 6, overflow: 'hidden' }}>
+                          <table style={{ width: '100%', color: '#fff', fontSize: 12, fontFamily: 'var(--font-mono)', borderCollapse: 'collapse', background: '#0e1721' }}>
+                            <tbody>
+                              <tr style={{ borderBottom: '1px solid rgba(117,144,183,0.15)' }}>
+                                <td style={{ padding: '6px 8px', color: '#7590B7', textAlign: 'right', width: '130px', fontWeight: 600 }}>Type</td>
+                                <td style={{ padding: '6px 8px' }}>{opt.type}</td>
+                              </tr>
+                              <tr style={{ borderBottom: '1px solid rgba(117,144,183,0.15)' }}>
+                                <td style={{ padding: '6px 8px', color: '#7590B7', textAlign: 'right', fontWeight: 600 }}>Required Level</td>
+                                <td style={{ padding: '6px 8px' }}>{opt.reqLvl}</td>
+                              </tr>
+                              <tr style={{ borderBottom: '1px solid rgba(117,144,183,0.15)' }}>
+                                <td style={{ padding: '6px 8px', color: '#7590B7', textAlign: 'right', fontWeight: 600 }}>Race</td>
+                                <td style={{ padding: '6px 8px' }}>Accretia Empire</td>
+                              </tr>
+                              <tr style={{ borderBottom: '1px solid rgba(117,144,183,0.15)' }}>
+                                <td style={{ padding: '6px 8px', color: '#7590B7', textAlign: 'right', fontWeight: 600 }}>Durability</td>
+                                <td style={{ padding: '6px 8px' }}>{opt.durability}</td>
+                              </tr>
+                              <tr style={{ borderBottom: '1px solid rgba(117,144,183,0.15)' }}>
+                                <td style={{ padding: '6px 8px', color: '#7590B7', textAlign: 'right', fontWeight: 600, verticalAlign: 'top' }}>Special Effects</td>
+                                <td style={{ padding: '6px 8px', color: '#ffcc00', fontWeight: 'bold' }}>
+                                  {opt.effects.map((eff, index) => (
+                                    <div key={index} style={{ marginBottom: 2 }}>• {eff}</div>
+                                  ))}
+                                </td>
+                              </tr>
+                              <tr style={{ borderBottom: '1px solid rgba(117,144,183,0.15)' }}>
+                                <td style={{ padding: '6px 8px', color: '#7590B7', textAlign: 'right', fontWeight: 600 }}>Min - Max Distance</td>
+                                <td style={{ padding: '6px 8px', color: '#44ccff' }}>{opt.distance}</td>
+                              </tr>
+                              <tr>
+                                <td style={{ padding: '6px 8px', color: '#7590B7', textAlign: 'right', fontWeight: 600 }}>Std Price</td>
+                                <td style={{ padding: '6px 8px', color: '#f5a623', fontWeight: 800 }}>{kit.price}</td>
+                              </tr>
+                            </tbody>
+                          </table>
                         </div>
 
                         {kit.locked ? (
