@@ -276,17 +276,17 @@ export default function Ascension() {
                           <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: colors.accent, marginBottom: 8, letterSpacing: 1, borderBottom: '1px dashed rgba(255,255,255,0.2)', paddingBottom: 6 }}>
                             [ TOTAL STATS ]
                           </div>
-                          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6, fontSize: 13, fontFamily: 'var(--font-title)', color: '#fff' }}>
-                            <div>🛡️ DEF <span style={{color: '#44ff88'}}>{tDef.toLocaleString()}</span></div>
-                            <div>⚡ PT <span style={{color: '#f5a623'}}>{tPT.toLocaleString()}</span></div>
-                            <div>⚔️ ATK <span style={{color: '#ff4444'}}>{tMinAtk.toLocaleString()} - {tMaxAtk.toLocaleString()}</span></div>
-                            <div>🎯 AttM <span style={{color: '#88aadd'}}>{tAttM.toLocaleString()}</span></div>
-                            <div>🛡️ DefM <span style={{color: '#88aadd'}}>{tDefM.toLocaleString()}</span></div>
-                            <div>🔥 Fire <span style={{color: '#ff8844'}}>{tFire.toLocaleString()}</span></div>
-                            <div>💧 Water <span style={{color: '#44ccff'}}>{tWater.toLocaleString()}</span></div>
-                            <div>🪨 Soil <span style={{color: '#aadd88'}}>{tSoil.toLocaleString()}</span></div>
-                            <div>🌪️ Wind <span style={{color: '#dddddd'}}>{tWind.toLocaleString()}</span></div>
-                            <div>🚀 Boost <span style={{color: '#ff44ff'}}>{tBoostCharge}/{tBoostSpeed}</span></div>
+                          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6, fontSize: 13, fontFamily: 'var(--font-title)', color: '#fff', fontWeight: 800 }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}><div style={{ width: 6, height: 6, borderRadius: '50%', background: '#44ff88' }}></div>DEF <span style={{color: '#44ff88', marginLeft: 'auto'}}>{tDef.toLocaleString()}</span></div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}><div style={{ width: 6, height: 6, borderRadius: '50%', background: '#f5a623' }}></div>PT <span style={{color: '#f5a623', marginLeft: 'auto'}}>{tPT.toLocaleString()}</span></div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}><div style={{ width: 6, height: 6, borderRadius: '50%', background: '#ff4444' }}></div>ATK <span style={{color: '#ff4444', marginLeft: 'auto'}}>{tMinAtk.toLocaleString()} - {tMaxAtk.toLocaleString()}</span></div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}><div style={{ width: 6, height: 6, borderRadius: '50%', background: '#88aadd' }}></div>AttM <span style={{color: '#88aadd', marginLeft: 'auto'}}>{tAttM.toLocaleString()}</span></div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}><div style={{ width: 6, height: 6, borderRadius: '50%', background: '#88aadd' }}></div>DefM <span style={{color: '#88aadd', marginLeft: 'auto'}}>{tDefM.toLocaleString()}</span></div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}><div style={{ width: 6, height: 6, borderRadius: '50%', background: '#ff8844' }}></div>Fire <span style={{color: '#ff8844', marginLeft: 'auto'}}>{tFire.toLocaleString()}</span></div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}><div style={{ width: 6, height: 6, borderRadius: '50%', background: '#44ccff' }}></div>Water <span style={{color: '#44ccff', marginLeft: 'auto'}}>{tWater.toLocaleString()}</span></div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}><div style={{ width: 6, height: 6, borderRadius: '50%', background: '#aadd88' }}></div>Soil <span style={{color: '#aadd88', marginLeft: 'auto'}}>{tSoil.toLocaleString()}</span></div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}><div style={{ width: 6, height: 6, borderRadius: '50%', background: '#dddddd' }}></div>Wind <span style={{color: '#dddddd', marginLeft: 'auto'}}>{tWind.toLocaleString()}</span></div>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}><div style={{ width: 6, height: 6, borderRadius: '50%', background: '#ff44ff' }}></div>Boost <span style={{color: '#ff44ff', marginLeft: 'auto'}}>{tBoostCharge}/{tBoostSpeed}</span></div>
                           </div>
                         </div>
 
@@ -297,21 +297,21 @@ export default function Ascension() {
                           </summary>
                           <div style={{ padding: '0 12px 12px 12px', display: 'flex', flexDirection: 'column', gap: 12 }}>
                             {[
-                              { key: 'head', label: '1. Head', icon: '⚙️', color: '#88aadd' },
-                              { key: 'upper', label: '2. Core', icon: '🛡️', color: '#88aadd' },
-                              { key: 'lower', label: '3. Legs', icon: '🦵', color: '#88aadd' },
-                              { key: 'arms', label: '4. Arms', icon: '⚔️', color: '#f5a623' },
-                              { key: 'arms2', label: '5. Arms-II', icon: '🚀', color: '#f5a623' },
-                              { key: 'options', label: '6. Boost', icon: '⚡', color: '#44ff88' },
+                              { key: 'head', label: '1. Head', color: '#88aadd' },
+                              { key: 'upper', label: '2. Core', color: '#88aadd' },
+                              { key: 'lower', label: '3. Legs', color: '#88aadd' },
+                              { key: 'arms', label: '4. Arms', color: '#f5a623' },
+                              { key: 'arms2', label: '5. Arms-II', color: '#f5a623' },
+                              { key: 'options', label: '6. Boost', color: '#44ff88' },
                             ].map((slot) => {
                               const p = parts[slot.key];
                               if (!p) return null;
                               return (
                                 <div key={slot.key} style={{ borderLeft: `3px solid ${slot.color}`, paddingLeft: 10, background: 'rgba(255,255,255,0.02)', padding: '6px 10px', borderRadius: '0 4px 4px 0' }}>
                                   <div style={{ color: slot.color, fontWeight: 900, fontSize: 14, marginBottom: 4 }}>
-                                    {slot.icon} {slot.label} : <span style={{ color: '#fff' }}>{p.name}</span>
+                                    {slot.label} : <span style={{ color: '#fff' }}>{p.name}</span>
                                   </div>
-                                  <div style={{ display: 'grid', gridTemplateColumns: '120px 1fr', gap: 4, fontSize: 13, fontFamily: 'var(--font-mono)', color: '#b5d4f1' }}>
+                                  <div style={{ display: 'grid', gridTemplateColumns: '120px 1fr', gap: 4, fontSize: 12, fontFamily: 'var(--font-title)', fontWeight: 800, color: '#b5d4f1' }}>
                                     {p.pt !== undefined && <><div style={{ color: '#88aadd' }}>PT</div><div>{p.pt}</div></>}
                                     {p.def !== undefined && <><div style={{ color: '#88aadd' }}>DEF</div><div>{p.def.toLocaleString()}</div></>}
                                     {p.minAtk !== undefined && <><div style={{ color: '#88aadd' }}>ATK</div><div>{p.minAtk.toLocaleString()} - {p.maxAtk.toLocaleString()}</div></>}
