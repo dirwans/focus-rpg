@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
-import { useGameStore } from '../store/gameStore'
-const colors = { accent: '#cc44ff', border: '#cc44ff', bg: 'rgba(204, 68, 255, 0.15)', text: '#fff', bgLight: 'rgba(204, 68, 255, 0.25)' }
+﻿import os
+
+modal_content = """import React, { useState } from 'react'
+import useGameStore from '../store/gameStore'
+import { colors } from '../lib/theme'
 
 export default function AscensionSpiritShopModal({ player, raceData }) {
   const buyAnimusReaver = useGameStore((s) => s.buyAnimusReaver)
@@ -230,3 +232,7 @@ export default function AscensionSpiritShopModal({ player, raceData }) {
     </div>
   )
 }
+"""
+
+with open('src/components/AscensionSpiritShopModal.jsx', 'w', encoding='utf-8') as f:
+    f.write(modal_content)

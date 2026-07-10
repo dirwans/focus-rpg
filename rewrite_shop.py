@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
-import { useGameStore } from '../store/gameStore'
-const colors = { accent: '#cc44ff', border: '#cc44ff', bg: 'rgba(204, 68, 255, 0.15)', text: '#fff', bgLight: 'rgba(204, 68, 255, 0.25)' }
+﻿import os
+
+modal_content = """import React, { useState } from 'react'
+import useGameStore from '../store/gameStore'
+import { colors } from '../lib/theme'
 
 export default function AscensionSpiritShopModal({ player, raceData }) {
   const buyAnimusReaver = useGameStore((s) => s.buyAnimusReaver)
@@ -13,20 +15,20 @@ export default function AscensionSpiritShopModal({ player, raceData }) {
   const animusKeys = Object.keys(raceData.animus || {})
 
   const handleBuy = (animusKey, animusData) => {
-    if (confirm(`Panggil (Summon) ${animusData.name} seharga ${animusData.reaverCost?.toLocaleString()} CRD?`)) {
+    if (confirm(Panggil (Summon)  seharga  CRD?)) {
       buyAnimusReaver(animusKey, animusData.reaverCost)
     }
   }
 
   const handleUpgrade = (animusKey, animusData, currentLv) => {
     const upgradeCost = animusData.upgradeCostBase * currentLv
-    if (confirm(`Upgrade ${animusData.name} ke Lv.${currentLv + 1} seharga ${upgradeCost.toLocaleString()} CRD?`)) {
+    if (confirm(Upgrade  ke Lv. seharga  CRD?)) {
       upgradeAnimus(animusKey, upgradeCost)
     }
   }
   
   const handleUnseal = (animusKey, animusData, unsealTarget, cost) => {
-    if (confirm(`Beli Segel (Unseal) untuk ${animusData.name} mencapai Lv.${unsealTarget} seharga ${cost.toLocaleString()} CRD?`)) {
+    if (confirm(Beli Segel (Unseal) untuk  mencapai Lv. seharga  CRD?)) {
       buyAnimusUnseal(animusKey, unsealTarget, cost)
     }
   }
@@ -70,8 +72,8 @@ export default function AscensionSpiritShopModal({ player, raceData }) {
                   onClick={() => setActiveSlot(k)}
                   style={{
                     padding: '8px',
-                    background: activeSlot === k ? `${colors.accent}22` : 'rgba(0,0,0,0.5)',
-                    border: `1px solid ${activeSlot === k ? colors.accent : colors.border}`,
+                    background: activeSlot === k ? ${colors.accent}22 : 'rgba(0,0,0,0.5)',
+                    border: 1px solid ,
                     borderRadius: 6,
                     color: activeSlot === k ? '#fff' : '#aaa',
                     cursor: 'pointer',
@@ -80,7 +82,7 @@ export default function AscensionSpiritShopModal({ player, raceData }) {
                 >
                   <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 800 }}>{a.name}</div>
                   <div style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: isSummoned ? '#44ff88' : '#ff4444', marginTop: 4 }}>
-                    {isSummoned ? `Lv.${player.celestraAnimus[k]}` : 'Unsummoned'}
+                    {isSummoned ? Lv. : 'Unsummoned'}
                   </div>
                   {isEquipped && <div style={{ fontSize: 10, color: '#ffcc00', marginTop: 4 }}>[EQUIPPED]</div>}
                 </button>
@@ -90,7 +92,7 @@ export default function AscensionSpiritShopModal({ player, raceData }) {
         </div>
 
         {/* MAIN PANEL */}
-        <div style={{ background: 'rgba(0,0,0,0.3)', border: `1px solid ${colors.border}`, borderRadius: 8, padding: 16 }}>
+        <div style={{ background: 'rgba(0,0,0,0.3)', border: 1px solid , borderRadius: 8, padding: 16 }}>
           {activeSlot && raceData.animus[activeSlot] ? (() => {
             const aData = raceData.animus[activeSlot]
             const currentLv = player.celestraAnimus?.[activeSlot] || 0
@@ -103,7 +105,7 @@ export default function AscensionSpiritShopModal({ player, raceData }) {
                 
                 {/* HEADER INFO */}
                 <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
-                  <div style={{ width: 80, height: 80, background: 'rgba(255,255,255,0.05)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', border: `1px solid ${colors.accent}4d` }}>
+                  <div style={{ width: 80, height: 80, background: 'rgba(255,255,255,0.05)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', border: 1px solid 4d }}>
                     <span style={{ fontSize: 36 }}>{aData.type === 'inana' ? '🔮' : '🌑'}</span>
                   </div>
                   <div style={{ flex: 1 }}>
@@ -119,12 +121,12 @@ export default function AscensionSpiritShopModal({ player, raceData }) {
                   </div>
                 </div>
 
-                <hr style={{ border: 'none', borderTop: `1px solid ${colors.border}4d` }} />
+                <hr style={{ border: 'none', borderTop: 1px solid 4d }} />
 
                 {/* ACTION PANEL */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                   {!isSummoned ? (
-                    <div style={{ padding: 16, background: 'rgba(255,255,255,0.05)', borderRadius: 8, border: `1px solid ${colors.border}`, textAlign: 'center' }}>
+                    <div style={{ padding: 16, background: 'rgba(255,255,255,0.05)', borderRadius: 8, border: 1px solid , textAlign: 'center' }}>
                       <div style={{ fontFamily: 'var(--font-title)', fontSize: 14, color: '#fff', marginBottom: 8 }}>BELI SPIRIT REAVER</div>
                       <div style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: '#ffcc00', marginBottom: 12, fontWeight: 800 }}>
                         {aData.reaverCost.toLocaleString()} CRD
@@ -143,13 +145,13 @@ export default function AscensionSpiritShopModal({ player, raceData }) {
                   ) : (
                     <>
                       {/* LEVEL UP SECTION */}
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: 8, padding: 16, background: 'rgba(255,255,255,0.05)', borderRadius: 8, border: `1px solid ${colors.border}4d` }}>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 8, padding: 16, background: 'rgba(255,255,255,0.05)', borderRadius: 8, border: 1px solid 4d }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                           <div style={{ fontFamily: 'var(--font-title)', fontSize: 14, color: '#fff' }}>BERI PERSEMBAHAN (LEVEL UP)</div>
                           {!isEquipped && (
                             <button
                               onClick={() => handleEquip(activeSlot)}
-                              style={{ padding: '4px 12px', background: 'transparent', border: `1px solid ${colors.accent}`, color: colors.accent, borderRadius: 4, cursor: 'pointer', fontFamily: 'var(--font-mono)', fontSize: 11 }}
+                              style={{ padding: '4px 12px', background: 'transparent', border: 1px solid , color: colors.accent, borderRadius: 4, cursor: 'pointer', fontFamily: 'var(--font-mono)', fontSize: 11 }}
                             >
                               EQUIP ACTIVE
                             </button>
@@ -180,7 +182,7 @@ export default function AscensionSpiritShopModal({ player, raceData }) {
                       </div>
 
                       {/* UNSEAL SECTION */}
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: 8, padding: 16, background: 'rgba(255,255,255,0.02)', borderRadius: 8, border: `1px solid ${colors.border}4d` }}>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 8, padding: 16, background: 'rgba(255,255,255,0.02)', borderRadius: 8, border: 1px solid 4d }}>
                         <div style={{ fontFamily: 'var(--font-title)', fontSize: 14, color: '#ffcc00' }}>UNSEAL CRYSTAL SHOP</div>
                         <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#888', marginBottom: 8 }}>Beli Crystal untuk membuka batas maksimal level Spirit.</div>
                         
@@ -189,7 +191,7 @@ export default function AscensionSpiritShopModal({ player, raceData }) {
                           const canBuy = player.crd >= opt.cost && !isBought
                           
                           return (
-                            <div key={opt.targetLv} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(0,0,0,0.4)', padding: 8, borderRadius: 4, border: `1px solid ${isBought ? '#44ff88' : colors.border}4d` }}>
+                            <div key={opt.targetLv} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(0,0,0,0.4)', padding: 8, borderRadius: 4, border: 1px solid 4d }}>
                               <div>
                                 <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, color: isBought ? '#44ff88' : '#fff' }}>{opt.name}</div>
                                 <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: '#aaa' }}>Buka Cap Lv.{opt.targetLv}</div>
@@ -230,3 +232,7 @@ export default function AscensionSpiritShopModal({ player, raceData }) {
     </div>
   )
 }
+"""
+
+with open('src/components/AscensionSpiritShopModal.jsx', 'w', encoding='utf-8') as f:
+    f.write(modal_content)
