@@ -211,7 +211,7 @@ export default function Ascension() {
                           maxHeight: 120,
                           maxWidth: '85%',
                           objectFit: 'contain',
-                          filter: !levelMet ? 'grayscale(70%) brightness(0.6)' : isUnlocked ? `drop-shadow(0 0 12px ${colors.accent})` : 'none',
+                          filter: !levelMet ? 'brightness(0.75) drop-shadow(0 0 5px rgba(255,255,255,0.1))' : isUnlocked ? `drop-shadow(0 0 15px ${colors.accent}) brightness(1.2)` : `drop-shadow(0 0 8px ${colors.border}) brightness(1.05)`,
                           transition: 'filter 0.3s ease',
                         }}
                       />
