@@ -229,7 +229,7 @@ export default function Ascension() {
                         >
                           <div style={{ fontSize: 18, marginBottom: 2 }}>{tab.icon}</div>
                           <div>{tab.label}</div>
-                          <div style={{ fontSize: 10, opacity: 0.7, fontWeight: 400 }}>{tab.sub}</div>
+                          <div style={{ fontSize: 10, opacity: 0.9, fontWeight: 800, letterSpacing: 1 }}>{tab.sub}</div>
                         </button>
                       )
                     })}
@@ -266,7 +266,7 @@ export default function Ascension() {
                             transition: 'all 0.25s ease',
                           }}
                         >
-                          <div style={{ fontSize: 11, opacity: 0.6, fontWeight: 600 }}>LV</div>
+                          <div style={{ fontSize: 11, fontWeight: 900, letterSpacing: 2, color: active ? 'rgba(255,255,255,0.8)' : 'rgba(117,144,183,0.7)' }}>LV</div>
                           <div>{lv}</div>
                         </button>
                       )
@@ -314,15 +314,15 @@ export default function Ascension() {
                           </div>
                           <div style={{
                             fontFamily: 'var(--font-title)',
-                            fontSize: 11,
-                            fontWeight: 700,
-                            letterSpacing: 3,
+                            fontSize: 12,
+                            fontWeight: 900,
+                            letterSpacing: 4,
                             textAlign: 'center',
                             color: colors.accent,
-                            textShadow: `0 0 6px ${colors.accent}`,
+                            textShadow: `0 0 8px ${colors.accent}, 0 0 16px ${colors.glow}`,
                             marginBottom: 12,
                           }}>
-                            {isSeraphys ? 'SACRED HEALER SPIRIT' : 'DARK AGGRESSOR SPIRIT'}
+                            {isSeraphys ? '✦ SACRED HEALER SPIRIT ✦' : '✦ DARK AGGRESSOR SPIRIT ✦'}
                           </div>
 
                           {/* Sprite */}
@@ -439,19 +439,20 @@ export default function Ascension() {
 
                           {/* Preview note */}
                           <div style={{
-                            fontSize: 10,
+                            fontSize: 11,
                             fontFamily: 'var(--font-title)',
-                            fontWeight: 700,
-                            letterSpacing: 2,
-                            color: '#7590B7',
+                            fontWeight: 900,
+                            letterSpacing: 3,
+                            color: '#fff',
                             textAlign: 'center',
-                            padding: 6,
-                            background: 'rgba(0,0,0,0.3)',
+                            padding: 8,
+                            background: 'rgba(0,0,0,0.4)',
                             borderRadius: 4,
-                            border: `1px solid ${colors.border}22`,
-                            textShadow: '0 0 4px rgba(117,144,183,0.4)',
+                            border: `1px solid ${colors.border}44`,
+                            boxShadow: `inset 0 0 8px ${colors.bg}`,
+                            textShadow: `0 0 6px ${colors.accent}`,
                           }}>
-                            ▶ SPIRIT PREVIEW · LV.{spiritLevel} · {isUnlocked ? 'UNLOCKED' : 'LOCKED'}
+                            ▶ SPIRIT PREVIEW · LV.{spiritLevel} · {isUnlocked ? 'UNLOCKED ✓' : 'LOCKED 🔒'}
                           </div>
                         </div>
                       </div>
@@ -486,10 +487,10 @@ export default function Ascension() {
                           <div style={{ fontFamily: 'var(--font-title)', fontWeight: 900, fontSize: 13, color: '#fff', letterSpacing: 1, textShadow: spiritTab === animusKey ? `0 0 8px ${colors.accent}` : 'none' }}>
                             {isSeraphys ? '✨' : '🌑'} {aData.name}
                           </div>
-                          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: colors.accent, marginTop: 3, textShadow: `0 0 4px ${colors.accent}` }}>
+                          <div style={{ fontFamily: 'var(--font-title)', fontWeight: 900, fontSize: 11, color: colors.accent, marginTop: 3, letterSpacing: 1, textShadow: `0 0 6px ${colors.accent}` }}>
                             Current: Lv.{currentLv}
                           </div>
-                          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: '#7590B7', marginTop: 2 }}>
+                          <div style={{ fontFamily: 'var(--font-title)', fontWeight: 800, fontSize: 10, color: '#b5d4f1', marginTop: 2, letterSpacing: 1 }}>
                             {isSeraphys ? 'Healer · HP Boost' : 'Aggressor · DPS'}
                           </div>
                         </button>
