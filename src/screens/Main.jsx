@@ -1132,7 +1132,7 @@ const styles = {
   focusLabel: { fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 800, letterSpacing: 1.5, color: '#7ab0d0', marginBottom: 8 },
   pillRow: { display: 'flex', gap: 6 },
   divider: { height: 1, background: 'color-mix(in srgb, var(--neon-glow) 16%, transparent)', margin: '10px 0' },
-  deployRow: { margin: '0 16px 12px', display: 'flex', gap: 8, flexShrink: 0 },
+  deployRow: { margin: '0 16px 12px', display: 'flex', gap: 8, alignItems: 'center', flexShrink: 0 },
   arena: { margin: '0 16px 12px', padding: '22px 12px 12px', position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', overflow: 'hidden', flexShrink: 0 },
   arenaActive: { margin: '16px', padding: '44px 16px 20px', position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', overflow: 'hidden', flex: 1, justifyContent: 'center' },
   arenaBadge: { position: 'absolute', top: 12, left: 12, background: 'rgba(26, 8, 0, 0.8)', border: '1px solid #ff6400', borderRadius: 6, padding: '3px 8px', fontFamily: 'var(--font-title)', fontSize: 13, color: '#ff8c40', fontWeight: 800, boxShadow: '0 0 10px rgba(255, 100, 0, 0.3)', zIndex: 2 },
