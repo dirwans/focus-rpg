@@ -1921,3 +1921,12 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 
 
+- - -  
+  
+ # # #   =Ø€Ş  M i l e s t o n e   1 4 7 :   M . E . U .   D a t a   M i g r a t i o n   &   B l u e p r i n t   H a n g a r   U I   [ D E P L O Y E D ]  
+ -   * * R F D B   D a t a   M i g r a t i o n   ( s r c / d a t a / a s c e n s i o n A r m s . j s o n ) * * :  
+     -   E x t r a c t e d   M . E . U   d a t a   a n d   m a p p e d   A t t a c k e r / D e f e n d e r   p a r t s .  
+ -   * * A s c e n s i o n   U I   O v e r h a u l   ( s r c / s c r e e n s / A s c e n s i o n . j s x ) * * :  
+     -   R e b u i l t   B i o n e x   e v o l u t i o n   t r e e   i n t o   t a b b e d   l a y o u t   w i t h   B l u e p r i n t   L o a d o u t s .  
+     -   F i x e d   C S S   f i l t e r i n g   a n d   r e s t o r e d   u n c r o p p e d   D e f e n d e r   L v 4 2   i m a g e .  
+ 
