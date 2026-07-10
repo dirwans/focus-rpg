@@ -205,7 +205,7 @@ export default function Ascension() {
                                   width: 320,
                                   height: 320,
                                   objectFit: 'contain',
-                                  filter: `drop-shadow(0 0 15px ${isSeraphys ? 'rgba(68, 255, 136, 0.4)' : 'rgba(255, 68, 68, 0.4)'}) drop-shadow(0 0 3px ${isSeraphys ? '#44ff88' : '#ff4444'})`
+                                  filter: `drop-shadow(0 0 10px ${isSeraphys ? 'rgba(68, 255, 136, 0.22)' : 'rgba(255, 68, 68, 0.22)'}) drop-shadow(0 0 2px ${isSeraphys ? 'rgba(68, 255, 136, 0.45)' : 'rgba(255, 68, 68, 0.45)'})`
                                 }}
                               />
                             </div>

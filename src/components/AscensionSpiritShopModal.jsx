@@ -114,7 +114,7 @@ export default function AscensionSpiritShopModal({ player, raceData }) {
                         width: 320,
                         height: 320,
                         objectFit: 'contain',
-                        filter: `drop-shadow(0 0 15px ${activeSlot === 'seraphys' ? 'rgba(68, 255, 136, 0.4)' : 'rgba(255, 68, 68, 0.4)'}) drop-shadow(0 0 3px ${activeSlot === 'seraphys' ? '#44ff88' : '#ff4444'})`
+                        filter: `drop-shadow(0 0 10px ${activeSlot === 'seraphys' ? 'rgba(68, 255, 136, 0.22)' : 'rgba(255, 68, 68, 0.22)'}) drop-shadow(0 0 2px ${activeSlot === 'seraphys' ? 'rgba(68, 255, 136, 0.45)' : 'rgba(255, 68, 68, 0.45)'})`
                       }}
                     />
                   </div>
