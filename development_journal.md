@@ -1937,3 +1937,11 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 - **Data Cleanup**: Cleaned up M.E.U. parsing script to correctly isolate Goliath and Catapult parts, removing glitchy ghost parts.
 - **Dynamic MEU Stats UI**: Removed hardcoded ATK/HP/CRIT and implemented real-time calculation of all equipped spare parts (PT, Def, Min-Max Atk, Masteries, Elemental Res, Boost).
 - **Blueprint Accordion**: Redesigned the spare parts list into a clean, collapsible accordion layout per user specification.
+- - -  
+  
+ # # #   =Ø.Ý  M i l e s t o n e   1 4 9 :   C e l e s t r a   A s c e n s i o n   S p i r i t   S y s t e m  
+ -   * * A n i m u s   R e a v e r   M e c h a n i c s * * :   I m p l e m e n t e d   ' S h r i n e   o f   S p i r i t s '   w h e r e   p l a y e r s   b u y   S p i r i t   R e a v e r s   t o   s u m m o n   S e r a p h y s   o r   N o c t y r n a .  
+ -   * * G r o w t h   S y s t e m * * :   A s c e n s i o n   S p i r i t s   l e v e l   u p   l i n e a r l y   u s i n g   C R D .   S t a t s   d y n a m i c a l l y   s c a l e   p e r   l e v e l   i n s t e a d   o f   b u y i n g   i n d i v i d u a l   p a r t s .  
+ -   * * B a l a n c i n g * * :   L e v e l   s c a l i n g   a d j u s t e d   s o   L e v e l   5 5   S p i r i t   s t a t s   m i r r o r   R F   O n l i n e ' s   L e v e l   4 0 - 4 5   A n i m u s .   M a x   l e v e l   s e t   t o   6 5 .  
+ -   * * U I   &   L o r e   C l e a n u p * * :   A d j u s t e d   A s c e n s i o n   U I   f o r   C e l e s t r a   ( S a n c t u a r y   t a b )   a n d   p u r g e d   a l l   r e f e r e n c e s   t o   ' A n i m u s '   i n   f a v o r   o f   ' A s c e n s i o n   S p i r i t ' .  
+ 

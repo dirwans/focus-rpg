@@ -966,6 +966,8 @@ const initialPlayer = {
   upgrades: { atk: 0, def: 0, hp: 0 },
   equipment: { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null },
   ascensionLoadout: { head: null, upper: null, lower: null, arms: null, arms2: null, options: null },
+  celestraAnimus: {}, // e.g. { seraphys: 1, noctyrna: 5 }
+  activeAnimus: null,
   sector: 1,
   highestSector: 1,
   streak: 0,
@@ -1873,6 +1875,8 @@ export const useGameStore = create(
             upgrades: { atk: 0, def: 0, hp: 0 },
             equipment: { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null },
             ascensionLoadout: { head: null, upper: null, lower: null, arms: null, arms2: null, options: null },
+  celestraAnimus: {}, // e.g. { seraphys: 1, noctyrna: 5 }
+  activeAnimus: null,
             savedAt: Date.now(),
           },
         }))

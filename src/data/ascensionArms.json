@@ -1654,115 +1654,41 @@
   },
   "celestra": {
     "name": "Ancient Spirit",
-    "icon": "🌿",
-    "description": "Dua jalur spiritual: Seraphys (Healer dengan HP tinggi) & Noctyrna (Aggressor dengan Critical tinggi).",
-    "componentsTitle": "Ancient Spirit Components",
-    "totalLabel": "Total Ritual",
-    "components": [
-      {
-        "name": "Spirit Essence",
-        "cost": 500000
+    "icon": "🔮",
+    "description": "Dua jalur spiritual: Seraphys (Healer dengan HP tinggi) & Noctyrna (Aggressor dengan Critical tinggi). Beli Spirit Reaver dan tingkatkan levelnya di Shrine.",
+    "animus": {
+      "seraphys": {
+        "name": "Seraphys",
+        "type": "inana",
+        "description": "Roh penyembuh (Inana) dengan daya tahan luar biasa.",
+        "reaverCost": 5000000,
+        "baseAtk": 50,
+        "baseHp": 1000,
+        "baseDef": 500,
+        "baseCrit": 5,
+        "growthAtk": 30,
+        "growthHp": 500,
+        "growthDef": 75,
+        "growthCrit": 0.1,
+        "upgradeCostBase": 50000,
+        "maxLevel": 65
       },
-      {
-        "name": "Soul Crystal",
-        "cost": 750000
-      },
-      {
-        "name": "Ancient Relic",
-        "cost": 1000000
-      },
-      {
-        "name": "Spirit Sigil",
-        "cost": 1250000
-      },
-      {
-        "name": "Spirit Covenant",
-        "cost": 1500000
+      "noctyrna": {
+        "name": "Noctyrna",
+        "type": "hecate",
+        "description": "Roh perusak (Hecate) yang memberikan serangan mematikan.",
+        "reaverCost": 5000000,
+        "baseAtk": 200,
+        "baseHp": 500,
+        "baseDef": 200,
+        "baseCrit": 15,
+        "growthAtk": 60,
+        "growthHp": 270,
+        "growthDef": 35,
+        "growthCrit": 0.5,
+        "upgradeCostBase": 50000,
+        "maxLevel": 65
       }
-    ],
-    "evolutions": [
-      {
-        "id": "spirit_seraphys_32",
-        "name": "Seraphys Lv.32",
-        "levelReq": 32,
-        "atk": 100,
-        "hp": 8000,
-        "crit": 5,
-        "cost": 5000000,
-        "costLabel": "Gratis (setelah seluruh part selesai dirakit)"
-      },
-      {
-        "id": "spirit_seraphys_42",
-        "name": "Seraphys Lv.42",
-        "levelReq": 42,
-        "atk": 220,
-        "hp": 24000,
-        "crit": 8,
-        "cost": 100000000,
-        "costLabel": "100,000,000 CRD"
-      },
-      {
-        "id": "spirit_seraphys_55",
-        "name": "Seraphys Lv.55",
-        "levelReq": 55,
-        "atk": 400,
-        "hp": 60000,
-        "crit": 12,
-        "cost": 500000000,
-        "costLabel": "500,000,000 CRD"
-      },
-      {
-        "id": "spirit_seraphys_65",
-        "name": "Seraphys Lv.65",
-        "levelReq": 65,
-        "atk": 700,
-        "hp": 120000,
-        "crit": 18,
-        "cost": 2000000000,
-        "costLabel": "2,000,000,000 CRD",
-        "locked": true
-      },
-      {
-        "id": "spirit_noctyrna_32",
-        "name": "Noctyrna Lv.32",
-        "levelReq": 32,
-        "atk": 180,
-        "hp": 2000,
-        "crit": 15,
-        "cost": 5000000,
-        "costLabel": "Gratis (setelah seluruh part selesai dirakit)"
-      },
-      {
-        "id": "spirit_noctyrna_42",
-        "name": "Noctyrna Lv.42",
-        "levelReq": 42,
-        "atk": 380,
-        "hp": 6000,
-        "crit": 25,
-        "cost": 100000000,
-        "costLabel": "100,000,000 CRD"
-      },
-      {
-        "id": "spirit_noctyrna_55",
-        "name": "Noctyrna Lv.55",
-        "levelReq": 55,
-        "atk": 700,
-        "hp": 15000,
-        "crit": 35,
-        "cost": 500000000,
-        "costLabel": "500,000,000 CRD"
-      },
-      {
-        "id": "spirit_noctyrna_65",
-        "name": "Noctyrna Lv.65",
-        "levelReq": 65,
-        "atk": 1100,
-        "hp": 30000,
-        "crit": 50,
-        "cost": 2000000000,
-        "costLabel": "2,000,000,000 CRD",
-        "locked": true
-      }
-    ]
+    }
   }
 }
