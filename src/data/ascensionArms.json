@@ -6,11 +6,26 @@
     "componentsTitle": "ARES Assembly Components",
     "totalLabel": "Total Perakitan",
     "components": [
-      { "name": "ARES Core", "cost": 500000 },
-      { "name": "Twin Frame", "cost": 750000 },
-      { "name": "Flight Module", "cost": 1000000 },
-      { "name": "Weapon System", "cost": 1250000 },
-      { "name": "Synchronizer", "cost": 1500000 }
+      {
+        "name": "ARES Core",
+        "cost": 500000
+      },
+      {
+        "name": "Twin Frame",
+        "cost": 750000
+      },
+      {
+        "name": "Flight Module",
+        "cost": 1000000
+      },
+      {
+        "name": "Weapon System",
+        "cost": 1250000
+      },
+      {
+        "name": "Synchronizer",
+        "cost": 1500000
+      }
     ],
     "evolutions": [
       {
@@ -63,20 +78,3328 @@
     "componentsTitle": "M.E.U. Components",
     "totalLabel": "Total Perakitan",
     "components": [
-      { "name": "MEU Chassis", "cost": 500000 },
-      { "name": "MEU Cockpit", "cost": 750000 },
-      { "name": "MEU Core", "cost": 1000000 },
-      { "name": "MEU Armament", "cost": 1250000 },
-      { "name": "MEU Ignition Key", "cost": 1500000 }
+      {
+        "name": "MEU Chassis",
+        "cost": 500000
+      },
+      {
+        "name": "MEU Cockpit",
+        "cost": 750000
+      },
+      {
+        "name": "MEU Core",
+        "cost": 1000000
+      },
+      {
+        "name": "MEU Armament",
+        "cost": 1250000
+      },
+      {
+        "name": "MEU Ignition Key",
+        "cost": 1500000
+      }
     ],
+    "parts": {
+      "defender": {
+        "head": [
+          {
+            "name": "Goliath Head",
+            "lvl": 30,
+            "pt": 1,
+            "def": 607,
+            "attM": 10,
+            "defM": 10,
+            "fire": 5,
+            "water": 5,
+            "soil": 5,
+            "wind": 5,
+            "price": 100000
+          },
+          {
+            "name": "Advance Goliath Head",
+            "lvl": 30,
+            "pt": 12,
+            "def": 607,
+            "attM": 11,
+            "defM": 12,
+            "fire": 5,
+            "water": 5,
+            "soil": 5,
+            "wind": 5,
+            "price": 200000
+          },
+          {
+            "name": "Exact Head",
+            "lvl": 35,
+            "pt": 60,
+            "def": 1440,
+            "attM": 60,
+            "defM": 30,
+            "fire": 5,
+            "water": 5,
+            "soil": 5,
+            "wind": 5,
+            "price": 600000
+          },
+          {
+            "name": "Hard Exact Head",
+            "lvl": 37,
+            "pt": 65,
+            "def": 1260,
+            "attM": 80,
+            "defM": 30,
+            "fire": 5,
+            "water": 5,
+            "soil": 5,
+            "wind": 5,
+            "price": 800000
+          },
+          {
+            "name": "Flash Goliath Head",
+            "lvl": 40,
+            "pt": 72,
+            "def": 1935,
+            "attM": 110,
+            "defM": 50,
+            "fire": 5,
+            "water": 5,
+            "soil": 5,
+            "wind": 5,
+            "price": 1100000
+          },
+          {
+            "name": "Correct Eye Head",
+            "lvl": 42,
+            "pt": 88,
+            "def": 2025,
+            "attM": -126,
+            "defM": 50,
+            "fire": 5,
+            "water": 5,
+            "soil": 5,
+            "wind": 5,
+            "price": 1300000
+          },
+          {
+            "name": "Correct Image Head",
+            "lvl": 48,
+            "pt": 93,
+            "def": 2151,
+            "attM": -66,
+            "defM": 50,
+            "fire": 5,
+            "water": 5,
+            "soil": 5,
+            "wind": 5,
+            "price": 1900000
+          },
+          {
+            "name": "Peace Keeper Head",
+            "lvl": 51,
+            "pt": 99,
+            "def": 4300,
+            "attM": 30,
+            "defM": 50,
+            "fire": 5,
+            "water": 5,
+            "soil": 5,
+            "wind": 5,
+            "price": 2600000
+          },
+          {
+            "name": "Guardian Head",
+            "lvl": 52,
+            "pt": 99,
+            "def": 5000,
+            "attM": 58,
+            "defM": 50,
+            "fire": 5,
+            "water": 5,
+            "soil": 5,
+            "wind": 5,
+            "price": 8400000
+          },
+          {
+            "name": "Titan Head",
+            "lvl": 53,
+            "pt": 99,
+            "def": 5700,
+            "attM": 87,
+            "defM": 50,
+            "fire": 5,
+            "water": 5,
+            "soil": 5,
+            "wind": 5,
+            "price": 18900000
+          },
+          {
+            "name": "Venom Head",
+            "lvl": 56,
+            "pt": 99,
+            "def": 6840,
+            "attM": 121,
+            "defM": 50,
+            "fire": 5,
+            "water": 5,
+            "soil": 5,
+            "wind": 5,
+            "price": 30240000
+          },
+          {
+            "name": "Mirage Head",
+            "lvl": 61,
+            "pt": 99,
+            "def": 8208,
+            "attM": -98,
+            "defM": 50,
+            "fire": 5,
+            "water": 5,
+            "soil": 5,
+            "wind": 5,
+            "price": 37800000
+          },
+          {
+            "name": "Advanced Mirage Head",
+            "lvl": 66,
+            "pt": 99,
+            "def": 9849,
+            "attM": -16,
+            "defM": 50,
+            "fire": 5,
+            "water": 5,
+            "soil": 5,
+            "wind": 5,
+            "price": 45360000
+          }
+        ],
+        "upper": [
+          {
+            "name": "Pressed Armor",
+            "lvl": 30,
+            "pt": 1,
+            "def": 607,
+            "attM": 0,
+            "defM": 49,
+            "fire": 5,
+            "water": 5,
+            "soil": 5,
+            "wind": 5,
+            "price": 100000
+          },
+          {
+            "name": "Annex Hard Armor",
+            "lvl": 38,
+            "pt": 55,
+            "def": 2025,
+            "attM": 0,
+            "defM": 49,
+            "fire": 13,
+            "water": 13,
+            "soil": 13,
+            "wind": 13,
+            "price": 900000
+          },
+          {
+            "name": "Heavy Duty Armor",
+            "lvl": 40,
+            "pt": 70,
+            "def": 2685,
+            "attM": 0,
+            "defM": 49,
+            "fire": 15,
+            "water": 15,
+            "soil": 15,
+            "wind": 15,
+            "price": 1100000
+          },
+          {
+            "name": "F.Reflect Protect",
+            "lvl": 48,
+            "pt": 95,
+            "def": 4996,
+            "attM": 0,
+            "defM": 49,
+            "fire": 23,
+            "water": 23,
+            "soil": 23,
+            "wind": 23,
+            "price": 1900000
+          },
+          {
+            "name": "HA Gigant Body",
+            "lvl": 50,
+            "pt": 99,
+            "def": 5995,
+            "attM": 0,
+            "defM": 49,
+            "fire": 25,
+            "water": 25,
+            "soil": 25,
+            "wind": 25,
+            "price": 2100000
+          },
+          {
+            "name": "TROS Protect",
+            "lvl": 50,
+            "pt": 99,
+            "def": 7193,
+            "attM": 0,
+            "defM": 49,
+            "fire": 27,
+            "water": 27,
+            "soil": 27,
+            "wind": 27,
+            "price": 8400000
+          },
+          {
+            "name": "ARES Protect",
+            "lvl": 50,
+            "pt": 99,
+            "def": 9351,
+            "attM": 0,
+            "defM": 49,
+            "fire": 30,
+            "water": 30,
+            "soil": 30,
+            "wind": 30,
+            "price": 18900000
+          },
+          {
+            "name": "Peace Keeper Protect",
+            "lvl": 52,
+            "pt": 99,
+            "def": 10000,
+            "attM": 0,
+            "defM": 49,
+            "fire": 30,
+            "water": 30,
+            "soil": 30,
+            "wind": 30,
+            "price": 2100000
+          },
+          {
+            "name": "Guardian Protect",
+            "lvl": 53,
+            "pt": 99,
+            "def": 13000,
+            "attM": 0,
+            "defM": 49,
+            "fire": 33,
+            "water": 33,
+            "soil": 33,
+            "wind": 33,
+            "price": 8400000
+          },
+          {
+            "name": "AA01 Titan Core",
+            "lvl": 54,
+            "pt": 99,
+            "def": 16000,
+            "attM": 0,
+            "defM": 49,
+            "fire": 36,
+            "water": 36,
+            "soil": 36,
+            "wind": 36,
+            "price": 18900000
+          },
+          {
+            "name": "Venom Core",
+            "lvl": 57,
+            "pt": 99,
+            "def": 19200,
+            "attM": 0,
+            "defM": 49,
+            "fire": 37,
+            "water": 37,
+            "soil": 37,
+            "wind": 37,
+            "price": 30240000
+          },
+          {
+            "name": "Mirage Core",
+            "lvl": 62,
+            "pt": 99,
+            "def": 23040,
+            "attM": 0,
+            "defM": 49,
+            "fire": 38,
+            "water": 38,
+            "soil": 38,
+            "wind": 38,
+            "price": 37800000
+          },
+          {
+            "name": "Advanced Mirage Core",
+            "lvl": 67,
+            "pt": 99,
+            "def": 27648,
+            "attM": 0,
+            "defM": 49,
+            "fire": 38,
+            "water": 38,
+            "soil": 38,
+            "wind": 38,
+            "price": 45360000
+          }
+        ],
+        "lower": [
+          {
+            "name": "Goliath Leg",
+            "lvl": 30,
+            "pt": 1,
+            "def": 455,
+            "attM": 0,
+            "defM": 0,
+            "fire": 5,
+            "water": 5,
+            "soil": 5,
+            "wind": 5,
+            "price": 100000
+          },
+          {
+            "name": "F.Coating Leg",
+            "lvl": 37,
+            "pt": 50,
+            "def": 1462,
+            "attM": 0,
+            "defM": 0,
+            "fire": 12,
+            "water": 12,
+            "soil": 12,
+            "wind": 12,
+            "price": 800000
+          },
+          {
+            "name": "Heavy Duty Leg",
+            "lvl": 40,
+            "pt": 69,
+            "def": 2351,
+            "attM": 0,
+            "defM": 0,
+            "fire": 15,
+            "water": 15,
+            "soil": 15,
+            "wind": 15,
+            "price": 1100000
+          },
+          {
+            "name": "F.Reflect Leg",
+            "lvl": 45,
+            "pt": 78,
+            "def": 5800,
+            "attM": 0,
+            "defM": 0,
+            "fire": 20,
+            "water": 20,
+            "soil": 20,
+            "wind": 20,
+            "price": 1600000
+          },
+          {
+            "name": "HA Gigant Leg",
+            "lvl": 49,
+            "pt": 99,
+            "def": 6960,
+            "attM": 0,
+            "defM": 0,
+            "fire": 24,
+            "water": 24,
+            "soil": 24,
+            "wind": 24,
+            "price": 2000000
+          },
+          {
+            "name": "TROS Linear Leg",
+            "lvl": 49,
+            "pt": 99,
+            "def": 8351,
+            "attM": 0,
+            "defM": 0,
+            "fire": 26,
+            "water": 26,
+            "soil": 26,
+            "wind": 26,
+            "price": 8000000
+          },
+          {
+            "name": "ARES Linear Leg",
+            "lvl": 49,
+            "pt": 99,
+            "def": 10021,
+            "attM": 0,
+            "defM": 0,
+            "fire": 28,
+            "water": 28,
+            "soil": 28,
+            "wind": 28,
+            "price": 18000000
+          },
+          {
+            "name": "EA Reflect Leg",
+            "lvl": 53,
+            "pt": 99,
+            "def": 11000,
+            "attM": 0,
+            "defM": 0,
+            "fire": 29,
+            "water": 29,
+            "soil": 29,
+            "wind": 29,
+            "price": 2000000
+          },
+          {
+            "name": "Guardian Sliding Leg",
+            "lvl": 54,
+            "pt": 99,
+            "def": 13000,
+            "attM": 0,
+            "defM": 0,
+            "fire": 31,
+            "water": 31,
+            "soil": 31,
+            "wind": 31,
+            "price": 8000000
+          },
+          {
+            "name": "AA05 Titan Feet",
+            "lvl": 55,
+            "pt": 99,
+            "def": 15000,
+            "attM": 0,
+            "defM": 0,
+            "fire": 34,
+            "water": 34,
+            "soil": 34,
+            "wind": 34,
+            "price": 18000000
+          },
+          {
+            "name": "Venom Leg",
+            "lvl": 58,
+            "pt": 99,
+            "def": 18000,
+            "attM": 0,
+            "defM": 0,
+            "fire": 36,
+            "water": 36,
+            "soil": 36,
+            "wind": 36,
+            "price": 28800000
+          },
+          {
+            "name": "Mirage Leg",
+            "lvl": 63,
+            "pt": 99,
+            "def": 21600,
+            "attM": 0,
+            "defM": 0,
+            "fire": 38,
+            "water": 38,
+            "soil": 38,
+            "wind": 38,
+            "price": 36000000
+          },
+          {
+            "name": "Advanced Mirage Legs",
+            "lvl": 68,
+            "pt": 99,
+            "def": 25920,
+            "attM": 0,
+            "defM": 0,
+            "fire": 38,
+            "water": 38,
+            "soil": 38,
+            "wind": 38,
+            "price": 43200000
+          }
+        ],
+        "arms": [
+          {
+            "name": "Punch",
+            "lvl": 30,
+            "pt": 1,
+            "def": 303,
+            "attM": 20,
+            "minAtk": 822,
+            "maxAtk": 913,
+            "price": 100000
+          },
+          {
+            "name": "Earthquake Punch",
+            "lvl": 30,
+            "pt": 15,
+            "def": 303,
+            "attM": 25,
+            "minAtk": 986,
+            "maxAtk": 1096,
+            "price": 200000
+          },
+          {
+            "name": "Cutter",
+            "lvl": 30,
+            "pt": 30,
+            "def": 303,
+            "attM": 35,
+            "minAtk": 1183,
+            "maxAtk": 1315,
+            "price": 300000
+          },
+          {
+            "name": "Metal Scissors Arm",
+            "lvl": 35,
+            "pt": 52,
+            "def": 405,
+            "attM": 50,
+            "minAtk": 1520,
+            "maxAtk": 1689,
+            "price": 600000
+          },
+          {
+            "name": "Shock Wave Punch",
+            "lvl": 37,
+            "pt": 60,
+            "def": 472,
+            "attM": 50,
+            "minAtk": 2074,
+            "maxAtk": 2305,
+            "price": 800000
+          },
+          {
+            "name": "Acute Knife Arm",
+            "lvl": 40,
+            "pt": 77,
+            "def": 562,
+            "attM": 50,
+            "minAtk": 3315,
+            "maxAtk": 3683,
+            "price": 1100000
+          },
+          {
+            "name": "Elec Knife Arm",
+            "lvl": 43,
+            "pt": 81,
+            "def": 630,
+            "attM": 50,
+            "minAtk": 5449,
+            "maxAtk": 6054,
+            "price": 1400000
+          },
+          {
+            "name": "Exploding Knife Arm",
+            "lvl": 48,
+            "pt": 93,
+            "def": 697,
+            "attM": 50,
+            "minAtk": 9611,
+            "maxAtk": 10678,
+            "price": 1900000
+          },
+          {
+            "name": "Sonic Blade Arm",
+            "lvl": 50,
+            "pt": 99,
+            "def": 1302,
+            "attM": 50,
+            "minAtk": 19691,
+            "maxAtk": 21879,
+            "price": 453600000
+          },
+          {
+            "name": "Energy Knife Arm",
+            "lvl": 50,
+            "pt": 99,
+            "def": 836,
+            "attM": 50,
+            "minAtk": 13674,
+            "maxAtk": 15193,
+            "price": 147000000
+          },
+          {
+            "name": "Impact Slicer Arm",
+            "lvl": 50,
+            "pt": 99,
+            "def": 1002,
+            "attM": 50,
+            "minAtk": 16409,
+            "maxAtk": 18232,
+            "price": 298200000
+          },
+          {
+            "name": "HP Knife Arm",
+            "lvl": 51,
+            "pt": 99,
+            "def": 1562,
+            "attM": 50,
+            "minAtk": 21660,
+            "maxAtk": 24067,
+            "price": 147000000
+          },
+          {
+            "name": "Beam Slasher Arm",
+            "lvl": 53,
+            "pt": 99,
+            "def": 1875,
+            "attM": 50,
+            "minAtk": 23825,
+            "maxAtk": 26473,
+            "price": 298200000
+          },
+          {
+            "name": "Titan Impact Arm",
+            "lvl": 55,
+            "pt": 99,
+            "def": 2437,
+            "attM": 50,
+            "minAtk": 26208,
+            "maxAtk": 29120,
+            "price": 453600000
+          },
+          {
+            "name": "Venom Arm",
+            "lvl": 59,
+            "pt": 99,
+            "def": 2924,
+            "attM": 50,
+            "minAtk": 31450,
+            "maxAtk": 34945,
+            "price": 725760000
+          },
+          {
+            "name": "Mirage Arm",
+            "lvl": 64,
+            "pt": 99,
+            "def": 3509,
+            "attM": 50,
+            "minAtk": 37740,
+            "maxAtk": 41933,
+            "price": 907200000
+          },
+          {
+            "name": "Advanced Mirage Arms",
+            "lvl": 69,
+            "pt": 99,
+            "def": 4211,
+            "attM": 50,
+            "minAtk": 45288,
+            "maxAtk": 50320,
+            "price": 1088640000
+          }
+        ],
+        "arms2": [
+          {
+            "name": "Curve Web Missile",
+            "lvl": 30,
+            "pt": 40,
+            "def": 300,
+            "attM": 99,
+            "minAtk": 420,
+            "maxAtk": 470,
+            "price": 500000
+          },
+          {
+            "name": "Type C Missile Port",
+            "lvl": 45,
+            "pt": 78,
+            "def": 375,
+            "attM": 99,
+            "minAtk": 1950,
+            "maxAtk": 2150,
+            "price": 700000
+          },
+          {
+            "name": "DType Missile Port",
+            "lvl": 49,
+            "pt": 99,
+            "def": 487,
+            "attM": 99,
+            "minAtk": 3450,
+            "maxAtk": 3800,
+            "price": 2500000
+          },
+          {
+            "name": "ASS Missile Port",
+            "lvl": 54,
+            "pt": 99,
+            "def": 633,
+            "attM": 99,
+            "minAtk": 9400,
+            "maxAtk": 10400,
+            "price": 2500000
+          },
+          {
+            "name": "Venom Missile Port",
+            "lvl": 60,
+            "pt": 99,
+            "def": 760,
+            "attM": 99,
+            "minAtk": 11300,
+            "maxAtk": 12500,
+            "price": 4000000
+          },
+          {
+            "name": "Mirage Missile Port",
+            "lvl": 65,
+            "pt": 99,
+            "def": 912,
+            "attM": 99,
+            "minAtk": 13500,
+            "maxAtk": 15000,
+            "price": 5000000
+          },
+          {
+            "name": "Advanced Mirage Port",
+            "lvl": 70,
+            "pt": 99,
+            "def": 1094,
+            "attM": 99,
+            "minAtk": 16300,
+            "maxAtk": 18100,
+            "price": 6000000
+          }
+        ],
+        "options": [
+          {
+            "name": "Back Adaptor",
+            "lvl": 30,
+            "pt": 1,
+            "def": 0,
+            "boostCharge": 0,
+            "boostSpeed": 0,
+            "price": 0
+          },
+          {
+            "name": "Normal Booster",
+            "lvl": 30,
+            "pt": 15,
+            "def": 100,
+            "boostCharge": 100,
+            "boostSpeed": 2,
+            "price": 300000
+          },
+          {
+            "name": "Energy Booster",
+            "lvl": 41,
+            "pt": 80,
+            "def": 125,
+            "boostCharge": 500,
+            "boostSpeed": 3,
+            "price": 1000000
+          },
+          {
+            "name": "Energy Booster 050",
+            "lvl": 49,
+            "pt": 99,
+            "def": 324,
+            "boostCharge": 1000,
+            "boostSpeed": 3,
+            "price": 3000000
+          },
+          {
+            "name": "Hyper Booster",
+            "lvl": 54,
+            "pt": 99,
+            "def": 211,
+            "boostCharge": 1000,
+            "boostSpeed": 3,
+            "price": 3000000
+          },
+          {
+            "name": "Venom Booster",
+            "lvl": 56,
+            "pt": 99,
+            "def": 253,
+            "boostCharge": 1000,
+            "boostSpeed": 3,
+            "price": 4800000
+          },
+          {
+            "name": "Mirage Booster",
+            "lvl": 61,
+            "pt": 99,
+            "def": 304,
+            "boostCharge": 1000,
+            "boostSpeed": 3,
+            "price": 6000000
+          },
+          {
+            "name": "Advanced Mirage Booster",
+            "lvl": 66,
+            "pt": 99,
+            "def": 364,
+            "boostCharge": 1000,
+            "boostSpeed": 3,
+            "price": 7200000
+          }
+        ]
+      },
+      "attacker": {
+        "head": [
+          {
+            "name": "Catapult Head",
+            "lvl": 30,
+            "pt": 1,
+            "def": 371,
+            "attM": 13,
+            "defM": 10,
+            "price": 100000
+          },
+          {
+            "name": "Advance Catapult Head",
+            "lvl": 30,
+            "pt": 12,
+            "def": 371,
+            "attM": 14,
+            "defM": 12,
+            "price": 200000
+          },
+          {
+            "name": "Correct Brain Head",
+            "lvl": 35,
+            "pt": 57,
+            "def": 872,
+            "attM": 78,
+            "defM": 30,
+            "price": 600000
+          },
+          {
+            "name": "Far Sight Brain Head",
+            "lvl": 37,
+            "pt": 63,
+            "def": 872,
+            "attM": 104,
+            "defM": 35,
+            "price": 800000
+          },
+          {
+            "name": "Delicate Brain Head",
+            "lvl": 40,
+            "pt": 72,
+            "def": 1162,
+            "attM": -113,
+            "defM": 50,
+            "price": 1100000
+          },
+          {
+            "name": "Correct Catapult Head",
+            "lvl": 42,
+            "pt": 88,
+            "def": 1269,
+            "attM": -87,
+            "defM": 50,
+            "price": 1300000
+          },
+          {
+            "name": "Far Sight Head",
+            "lvl": 48,
+            "pt": 93,
+            "def": 1325,
+            "attM": -9,
+            "defM": 50,
+            "price": 1900000
+          },
+          {
+            "name": "Artillery Sight Head",
+            "lvl": 50,
+            "pt": 99,
+            "def": 2479,
+            "attM": 71,
+            "defM": 50,
+            "price": 18900000
+          },
+          {
+            "name": "HA Sight Head",
+            "lvl": 50,
+            "pt": 99,
+            "def": 1589,
+            "attM": 17,
+            "defM": 50,
+            "price": 2100000
+          },
+          {
+            "name": "VR Sight Head",
+            "lvl": 50,
+            "pt": 99,
+            "def": 1907,
+            "attM": 44,
+            "defM": 50,
+            "price": 8400000
+          },
+          {
+            "name": "AAA Sight Head",
+            "lvl": 51,
+            "pt": 99,
+            "def": 2700,
+            "attM": 82,
+            "defM": 50,
+            "price": 2100000
+          },
+          {
+            "name": "ASWS Head",
+            "lvl": 52,
+            "pt": 99,
+            "def": 3200,
+            "attM": 115,
+            "defM": 50,
+            "price": 8400000
+          },
+          {
+            "name": "JA Sight Head",
+            "lvl": 53,
+            "pt": 99,
+            "def": 4000,
+            "attM": -107,
+            "defM": 50,
+            "price": 18900000
+          },
+          {
+            "name": "Alter Head",
+            "lvl": 56,
+            "pt": 99,
+            "def": 4800,
+            "attM": -67,
+            "defM": 50,
+            "price": 30240000
+          },
+          {
+            "name": "Irregular Head",
+            "lvl": 61,
+            "pt": 99,
+            "def": 5760,
+            "attM": -23,
+            "defM": 50,
+            "price": 37800000
+          },
+          {
+            "name": "Advanced Unique Head",
+            "lvl": 66,
+            "pt": 99,
+            "def": 6912,
+            "attM": 74,
+            "defM": 50,
+            "price": 45360000
+          },
+          {
+            "name": "Normal Armor",
+            "lvl": 30,
+            "pt": 1,
+            "def": 371,
+            "attM": 49,
+            "defM": 3,
+            "price": 3
+          },
+          {
+            "name": "High Density Armor",
+            "lvl": 38,
+            "pt": 57,
+            "def": 1147,
+            "attM": 49,
+            "defM": 7,
+            "price": 7
+          },
+          {
+            "name": "Stock Frame Armor",
+            "lvl": 40,
+            "pt": 70,
+            "def": 1649,
+            "attM": 49,
+            "defM": 9,
+            "price": 9
+          },
+          {
+            "name": "High Density Armor",
+            "lvl": 48,
+            "pt": 95,
+            "def": 2891,
+            "attM": 49,
+            "defM": 13,
+            "price": 13
+          },
+          {
+            "name": "Artillery Protector",
+            "lvl": 50,
+            "pt": 99,
+            "def": 5411,
+            "attM": 49,
+            "defM": 18,
+            "price": 18
+          },
+          {
+            "name": "VR Strike Armor",
+            "lvl": 50,
+            "pt": 99,
+            "def": 4163,
+            "attM": 49,
+            "defM": 16,
+            "price": 16
+          },
+          {
+            "name": "HA Siege Armor",
+            "lvl": 50,
+            "pt": 99,
+            "def": 3469,
+            "attM": 49,
+            "defM": 15,
+            "price": 15
+          },
+          {
+            "name": "AAA Voltage Armor",
+            "lvl": 52,
+            "pt": 99,
+            "def": 6000,
+            "attM": 49,
+            "defM": 18,
+            "price": 18
+          },
+          {
+            "name": "ASTorr Core",
+            "lvl": 53,
+            "pt": 99,
+            "def": 6800,
+            "attM": 49,
+            "defM": 19,
+            "price": 19
+          },
+          {
+            "name": "Judgement Core",
+            "lvl": 54,
+            "pt": 99,
+            "def": 7500,
+            "attM": 49,
+            "defM": 21,
+            "price": 21
+          },
+          {
+            "name": "Alter Core",
+            "lvl": 57,
+            "pt": 99,
+            "def": 9000,
+            "attM": 49,
+            "defM": 23,
+            "price": 23
+          },
+          {
+            "name": "Irregular Core",
+            "lvl": 62,
+            "pt": 99,
+            "def": 10800,
+            "attM": 49,
+            "defM": 25,
+            "price": 25
+          },
+          {
+            "name": "Advanced Unique Core",
+            "lvl": 67,
+            "pt": 99,
+            "def": 12960,
+            "attM": 49,
+            "defM": 25,
+            "price": 25
+          },
+          {
+            "name": "Rim",
+            "lvl": 30,
+            "pt": 1,
+            "def": 277,
+            "attM": 0,
+            "defM": 3,
+            "price": 3
+          },
+          {
+            "name": "Slender Leg",
+            "lvl": 37,
+            "pt": 50,
+            "def": 841,
+            "attM": 0,
+            "defM": 7,
+            "price": 7
+          },
+          {
+            "name": "Stock Frame Leg",
+            "lvl": 40,
+            "pt": 70,
+            "def": 1093,
+            "attM": 0,
+            "defM": 9,
+            "price": 9
+          },
+          {
+            "name": "High Density Slender Leg",
+            "lvl": 45,
+            "pt": 78,
+            "def": 2876,
+            "attM": 0,
+            "defM": 12,
+            "price": 12
+          },
+          {
+            "name": "Artillery Armed Leg",
+            "lvl": 49,
+            "pt": 99,
+            "def": 5383,
+            "attM": 0,
+            "defM": 17,
+            "price": 17
+          },
+          {
+            "name": "VR Strike Landing",
+            "lvl": 49,
+            "pt": 99,
+            "def": 4141,
+            "attM": 0,
+            "defM": 15,
+            "price": 15
+          },
+          {
+            "name": "HA Siege Landing",
+            "lvl": 49,
+            "pt": 99,
+            "def": 3451,
+            "attM": 0,
+            "defM": 14,
+            "price": 14
+          },
+          {
+            "name": "AAA-GLS Leg",
+            "lvl": 53,
+            "pt": 99,
+            "def": 6000,
+            "attM": 0,
+            "defM": 17,
+            "price": 17
+          },
+          {
+            "name": "ASTorr Landing",
+            "lvl": 54,
+            "pt": 99,
+            "def": 7000,
+            "attM": 0,
+            "defM": 19,
+            "price": 19
+          },
+          {
+            "name": "S Heavy Armed Leg",
+            "lvl": 55,
+            "pt": 99,
+            "def": 8000,
+            "attM": 0,
+            "defM": 20,
+            "price": 20
+          },
+          {
+            "name": "Alter Leg",
+            "lvl": 58,
+            "pt": 99,
+            "def": 9600,
+            "attM": 0,
+            "defM": 22,
+            "price": 22
+          },
+          {
+            "name": "Irregular Leg",
+            "lvl": 63,
+            "pt": 99,
+            "def": 11520,
+            "attM": 0,
+            "defM": 24,
+            "price": 24
+          },
+          {
+            "name": "Advanced Unique Legs",
+            "lvl": 68,
+            "pt": 99,
+            "def": 13824,
+            "attM": 0,
+            "defM": 24,
+            "price": 24
+          },
+          {
+            "name": "Vulcan",
+            "lvl": 30,
+            "pt": 1,
+            "def": 185,
+            "attM": 20,
+            "defM": 1233,
+            "price": 1370
+          },
+          {
+            "name": "Fire Blaster",
+            "lvl": 30,
+            "pt": 15,
+            "def": 185,
+            "attM": 25,
+            "defM": 1479,
+            "price": 1643
+          },
+          {
+            "name": "Rocket Launcher",
+            "lvl": 30,
+            "pt": 30,
+            "def": 185,
+            "attM": 35,
+            "defM": 1726,
+            "price": 1918
+          },
+          {
+            "name": "Galvanic Dynamo",
+            "lvl": 35,
+            "pt": 52,
+            "def": 248,
+            "attM": 50,
+            "defM": 2196,
+            "price": 2440
+          },
+          {
+            "name": "Beam Bazooka",
+            "lvl": 37,
+            "pt": 60,
+            "def": 289,
+            "attM": 50,
+            "defM": 2997,
+            "price": 3330
+          },
+          {
+            "name": "Razor Gatling Arm",
+            "lvl": 40,
+            "pt": 77,
+            "def": 344,
+            "attM": 50,
+            "defM": 4788,
+            "price": 5321
+          },
+          {
+            "name": "Advanced Gatling Arm",
+            "lvl": 43,
+            "pt": 81,
+            "def": 397,
+            "attM": 50,
+            "defM": 7870,
+            "price": 8745
+          },
+          {
+            "name": "Galvanic Gatling Arm",
+            "lvl": 48,
+            "pt": 93,
+            "def": 459,
+            "attM": 50,
+            "defM": 13883,
+            "price": 15424
+          },
+          {
+            "name": "Artillery Armed Arm",
+            "lvl": 50,
+            "pt": 99,
+            "def": 858,
+            "attM": 50,
+            "defM": 27652,
+            "price": 30724
+          },
+          {
+            "name": "Volcanic Gatling Arm",
+            "lvl": 50,
+            "pt": 99,
+            "def": 550,
+            "attM": 50,
+            "defM": 19751,
+            "price": 21945
+          },
+          {
+            "name": "Hailstorm Canon Arm",
+            "lvl": 50,
+            "pt": 99,
+            "def": 660,
+            "attM": 50,
+            "defM": 23701,
+            "price": 26334
+          },
+          {
+            "name": "AAA Canon Arm",
+            "lvl": 51,
+            "pt": 99,
+            "def": 1030,
+            "attM": 50,
+            "defM": 30812,
+            "price": 34234
+          },
+          {
+            "name": "Hybrid Gatling Arm",
+            "lvl": 53,
+            "pt": 99,
+            "def": 1235,
+            "attM": 50,
+            "defM": 35947,
+            "price": 39940
+          },
+          {
+            "name": "Judgement Rail Canon Arm",
+            "lvl": 55,
+            "pt": 99,
+            "def": 1606,
+            "attM": 50,
+            "defM": 40055,
+            "price": 44504
+          },
+          {
+            "name": "Alter Arm",
+            "lvl": 59,
+            "pt": 99,
+            "def": 1927,
+            "attM": 50,
+            "defM": 48066,
+            "price": 53405
+          },
+          {
+            "name": "Irregular Arm",
+            "lvl": 64,
+            "pt": 99,
+            "def": 2312,
+            "attM": 50,
+            "defM": 57679,
+            "price": 64087
+          },
+          {
+            "name": "Advanced Unique Arms",
+            "lvl": 69,
+            "pt": 99,
+            "def": 2774,
+            "attM": 50,
+            "defM": 69215,
+            "price": 76904
+          },
+          {
+            "name": "Multi Missile",
+            "lvl": 30,
+            "pt": 40,
+            "def": 85,
+            "attM": 99,
+            "defM": 620,
+            "price": 690
+          },
+          {
+            "name": "Type C Missile Port",
+            "lvl": 45,
+            "pt": 78,
+            "def": 255,
+            "attM": 99,
+            "defM": 2800,
+            "price": 3100
+          },
+          {
+            "name": "DType Missile Port",
+            "lvl": 49,
+            "pt": 99,
+            "def": 331,
+            "attM": 99,
+            "defM": 4950,
+            "price": 5550
+          },
+          {
+            "name": "SSA Missile Port",
+            "lvl": 54,
+            "pt": 99,
+            "def": 430,
+            "attM": 99,
+            "defM": 14400,
+            "price": 16000
+          },
+          {
+            "name": "Alter Port",
+            "lvl": 60,
+            "pt": 99,
+            "def": 516,
+            "attM": 99,
+            "defM": 17300,
+            "price": 19200
+          },
+          {
+            "name": "Irregular Port",
+            "lvl": 65,
+            "pt": 99,
+            "def": 619,
+            "attM": 99,
+            "defM": 20700,
+            "price": 23000
+          },
+          {
+            "name": "Advanced Unique Port",
+            "lvl": 70,
+            "pt": 99,
+            "def": 742,
+            "attM": 99,
+            "defM": 24900,
+            "price": 27600
+          },
+          {
+            "name": "Back Adaptor",
+            "lvl": 30,
+            "pt": 1,
+            "def": 0,
+            "attM": 0,
+            "defM": 0,
+            "price": 0
+          },
+          {
+            "name": "Magazine Carrier",
+            "lvl": 30,
+            "pt": 15,
+            "def": 85,
+            "attM": 50,
+            "defM": 1,
+            "price": 300000
+          },
+          {
+            "name": "Mega Magazine Tub",
+            "lvl": 41,
+            "pt": 80,
+            "def": 85,
+            "attM": 100,
+            "defM": 2,
+            "price": 1000000
+          },
+          {
+            "name": "Mega Magazine Turbo 050",
+            "lvl": 49,
+            "pt": 99,
+            "def": 110,
+            "attM": 200,
+            "defM": 2,
+            "price": 3000000
+          },
+          {
+            "name": "AType-Magazine-Container",
+            "lvl": 54,
+            "pt": 99,
+            "def": 100,
+            "attM": 200,
+            "defM": 2,
+            "price": 3000000
+          },
+          {
+            "name": "Venom Booster",
+            "lvl": 56,
+            "pt": 99,
+            "def": 120,
+            "attM": 200,
+            "defM": 2,
+            "price": 4800000
+          },
+          {
+            "name": "Mirage Booster",
+            "lvl": 61,
+            "pt": 99,
+            "def": 144,
+            "attM": 200,
+            "defM": 2,
+            "price": 6000000
+          },
+          {
+            "name": "Advanced Unique Booster",
+            "lvl": 66,
+            "pt": 99,
+            "def": 172,
+            "attM": 200,
+            "defM": 2,
+            "price": 7200000
+          }
+        ],
+        "upper": [
+          {
+            "name": "Normal Armor",
+            "lvl": 30,
+            "pt": 1,
+            "def": 371,
+            "defM": 49,
+            "fire": 3,
+            "water": 3,
+            "soil": 3,
+            "wind": 3,
+            "price": 100000
+          },
+          {
+            "name": "High Density Armor",
+            "lvl": 38,
+            "pt": 57,
+            "def": 1147,
+            "defM": 49,
+            "fire": 7,
+            "water": 7,
+            "soil": 7,
+            "wind": 7,
+            "price": 900000
+          },
+          {
+            "name": "Stock Frame Armor",
+            "lvl": 40,
+            "pt": 70,
+            "def": 1649,
+            "defM": 49,
+            "fire": 9,
+            "water": 9,
+            "soil": 9,
+            "wind": 9,
+            "price": 1100000
+          },
+          {
+            "name": "High Density Armor",
+            "lvl": 48,
+            "pt": 95,
+            "def": 2891,
+            "defM": 49,
+            "fire": 13,
+            "water": 13,
+            "soil": 13,
+            "wind": 13,
+            "price": 1900000
+          },
+          {
+            "name": "Artillery Protector",
+            "lvl": 50,
+            "pt": 99,
+            "def": 5411,
+            "defM": 49,
+            "fire": 18,
+            "water": 18,
+            "soil": 18,
+            "wind": 18,
+            "price": 18900000
+          },
+          {
+            "name": "VR Strike Armor",
+            "lvl": 50,
+            "pt": 99,
+            "def": 4163,
+            "defM": 49,
+            "fire": 16,
+            "water": 16,
+            "soil": 16,
+            "wind": 16,
+            "price": 8400000
+          },
+          {
+            "name": "HA Siege Armor",
+            "lvl": 50,
+            "pt": 99,
+            "def": 3469,
+            "defM": 49,
+            "fire": 15,
+            "water": 15,
+            "soil": 15,
+            "wind": 15,
+            "price": 2100000
+          },
+          {
+            "name": "AAA Voltage Armor",
+            "lvl": 52,
+            "pt": 99,
+            "def": 6000,
+            "defM": 49,
+            "fire": 18,
+            "water": 18,
+            "soil": 18,
+            "wind": 18,
+            "price": 2100000
+          },
+          {
+            "name": "ASTorr Core",
+            "lvl": 53,
+            "pt": 99,
+            "def": 6800,
+            "defM": 49,
+            "fire": 19,
+            "water": 19,
+            "soil": 19,
+            "wind": 19,
+            "price": 8400000
+          },
+          {
+            "name": "Judgement Core",
+            "lvl": 54,
+            "pt": 99,
+            "def": 7500,
+            "defM": 49,
+            "fire": 21,
+            "water": 21,
+            "soil": 21,
+            "wind": 21,
+            "price": 18900000
+          },
+          {
+            "name": "Alter Core",
+            "lvl": 57,
+            "pt": 99,
+            "def": 9000,
+            "defM": 49,
+            "fire": 23,
+            "water": 23,
+            "soil": 23,
+            "wind": 23,
+            "price": 30240000
+          },
+          {
+            "name": "Irregular Core",
+            "lvl": 62,
+            "pt": 99,
+            "def": 10800,
+            "defM": 49,
+            "fire": 25,
+            "water": 25,
+            "soil": 25,
+            "wind": 25,
+            "price": 37800000
+          },
+          {
+            "name": "Advanced Unique Core",
+            "lvl": 67,
+            "pt": 99,
+            "def": 12960,
+            "defM": 49,
+            "fire": 25,
+            "water": 25,
+            "soil": 25,
+            "wind": 25,
+            "price": 45360000
+          },
+          {
+            "name": "Rim",
+            "lvl": 30,
+            "pt": 1,
+            "def": 277,
+            "defM": 0,
+            "fire": 3,
+            "water": 3,
+            "soil": 3,
+            "wind": 3,
+            "price": 100000
+          },
+          {
+            "name": "Slender Leg",
+            "lvl": 37,
+            "pt": 50,
+            "def": 841,
+            "defM": 0,
+            "fire": 7,
+            "water": 7,
+            "soil": 7,
+            "wind": 7,
+            "price": 800000
+          },
+          {
+            "name": "Stock Frame Leg",
+            "lvl": 40,
+            "pt": 70,
+            "def": 1093,
+            "defM": 0,
+            "fire": 9,
+            "water": 9,
+            "soil": 9,
+            "wind": 9,
+            "price": 1100000
+          },
+          {
+            "name": "High Density Slender Leg",
+            "lvl": 45,
+            "pt": 78,
+            "def": 2876,
+            "defM": 0,
+            "fire": 12,
+            "water": 12,
+            "soil": 12,
+            "wind": 12,
+            "price": 1600000
+          },
+          {
+            "name": "Artillery Armed Leg",
+            "lvl": 49,
+            "pt": 99,
+            "def": 5383,
+            "defM": 0,
+            "fire": 17,
+            "water": 17,
+            "soil": 17,
+            "wind": 17,
+            "price": 18000000
+          },
+          {
+            "name": "VR Strike Landing",
+            "lvl": 49,
+            "pt": 99,
+            "def": 4141,
+            "defM": 0,
+            "fire": 15,
+            "water": 15,
+            "soil": 15,
+            "wind": 15,
+            "price": 8000000
+          },
+          {
+            "name": "HA Siege Landing",
+            "lvl": 49,
+            "pt": 99,
+            "def": 3451,
+            "defM": 0,
+            "fire": 14,
+            "water": 14,
+            "soil": 14,
+            "wind": 14,
+            "price": 2000000
+          },
+          {
+            "name": "AAA-GLS Leg",
+            "lvl": 53,
+            "pt": 99,
+            "def": 6000,
+            "defM": 0,
+            "fire": 17,
+            "water": 17,
+            "soil": 17,
+            "wind": 17,
+            "price": 2000000
+          },
+          {
+            "name": "ASTorr Landing",
+            "lvl": 54,
+            "pt": 99,
+            "def": 7000,
+            "defM": 0,
+            "fire": 19,
+            "water": 19,
+            "soil": 19,
+            "wind": 19,
+            "price": 8000000
+          },
+          {
+            "name": "S Heavy Armed Leg",
+            "lvl": 55,
+            "pt": 99,
+            "def": 8000,
+            "defM": 0,
+            "fire": 20,
+            "water": 20,
+            "soil": 20,
+            "wind": 20,
+            "price": 18000000
+          },
+          {
+            "name": "Alter Leg",
+            "lvl": 58,
+            "pt": 99,
+            "def": 9600,
+            "defM": 0,
+            "fire": 22,
+            "water": 22,
+            "soil": 22,
+            "wind": 22,
+            "price": 28800000
+          },
+          {
+            "name": "Irregular Leg",
+            "lvl": 63,
+            "pt": 99,
+            "def": 11520,
+            "defM": 0,
+            "fire": 24,
+            "water": 24,
+            "soil": 24,
+            "wind": 24,
+            "price": 36000000
+          },
+          {
+            "name": "Advanced Unique Legs",
+            "lvl": 68,
+            "pt": 99,
+            "def": 13824,
+            "defM": 0,
+            "fire": 24,
+            "water": 24,
+            "soil": 24,
+            "wind": 24,
+            "price": 43200000
+          },
+          {
+            "name": "Vulcan",
+            "lvl": 30,
+            "pt": 1,
+            "def": 185,
+            "defM": 20,
+            "fire": 1233,
+            "water": 1370,
+            "soil": 100,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Fire Blaster",
+            "lvl": 30,
+            "pt": 15,
+            "def": 185,
+            "defM": 25,
+            "fire": 1479,
+            "water": 1643,
+            "soil": 200,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Rocket Launcher",
+            "lvl": 30,
+            "pt": 30,
+            "def": 185,
+            "defM": 35,
+            "fire": 1726,
+            "water": 1918,
+            "soil": 300,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Galvanic Dynamo",
+            "lvl": 35,
+            "pt": 52,
+            "def": 248,
+            "defM": 50,
+            "fire": 2196,
+            "water": 2440,
+            "soil": 600,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Beam Bazooka",
+            "lvl": 37,
+            "pt": 60,
+            "def": 289,
+            "defM": 50,
+            "fire": 2997,
+            "water": 3330,
+            "soil": 800,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Razor Gatling Arm",
+            "lvl": 40,
+            "pt": 77,
+            "def": 344,
+            "defM": 50,
+            "fire": 4788,
+            "water": 5321,
+            "soil": 1,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Advanced Gatling Arm",
+            "lvl": 43,
+            "pt": 81,
+            "def": 397,
+            "defM": 50,
+            "fire": 7870,
+            "water": 8745,
+            "soil": 1,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Galvanic Gatling Arm",
+            "lvl": 48,
+            "pt": 93,
+            "def": 459,
+            "defM": 50,
+            "fire": 13883,
+            "water": 15424,
+            "soil": 1,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Artillery Armed Arm",
+            "lvl": 50,
+            "pt": 99,
+            "def": 858,
+            "defM": 50,
+            "fire": 27652,
+            "water": 30724,
+            "soil": 453,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Volcanic Gatling Arm",
+            "lvl": 50,
+            "pt": 99,
+            "def": 550,
+            "defM": 50,
+            "fire": 19751,
+            "water": 21945,
+            "soil": 147,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Hailstorm Canon Arm",
+            "lvl": 50,
+            "pt": 99,
+            "def": 660,
+            "defM": 50,
+            "fire": 23701,
+            "water": 26334,
+            "soil": 298,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "AAA Canon Arm",
+            "lvl": 51,
+            "pt": 99,
+            "def": 1030,
+            "defM": 50,
+            "fire": 30812,
+            "water": 34234,
+            "soil": 147,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Hybrid Gatling Arm",
+            "lvl": 53,
+            "pt": 99,
+            "def": 1235,
+            "defM": 50,
+            "fire": 35947,
+            "water": 39940,
+            "soil": 298,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Judgement Rail Canon Arm",
+            "lvl": 55,
+            "pt": 99,
+            "def": 1606,
+            "defM": 50,
+            "fire": 40055,
+            "water": 44504,
+            "soil": 453,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Alter Arm",
+            "lvl": 59,
+            "pt": 99,
+            "def": 1927,
+            "defM": 50,
+            "fire": 48066,
+            "water": 53405,
+            "soil": 725,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Irregular Arm",
+            "lvl": 64,
+            "pt": 99,
+            "def": 2312,
+            "defM": 50,
+            "fire": 57679,
+            "water": 64087,
+            "soil": 907,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Advanced Unique Arms",
+            "lvl": 69,
+            "pt": 99,
+            "def": 2774,
+            "defM": 50,
+            "fire": 69215,
+            "water": 76904,
+            "soil": 1,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Multi Missile",
+            "lvl": 30,
+            "pt": 40,
+            "def": 85,
+            "defM": 99,
+            "fire": 620,
+            "water": 690,
+            "soil": 500,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Type C Missile Port",
+            "lvl": 45,
+            "pt": 78,
+            "def": 255,
+            "defM": 99,
+            "fire": 2800,
+            "water": 3100,
+            "soil": 700,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "DType Missile Port",
+            "lvl": 49,
+            "pt": 99,
+            "def": 331,
+            "defM": 99,
+            "fire": 4950,
+            "water": 5550,
+            "soil": 2,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "SSA Missile Port",
+            "lvl": 54,
+            "pt": 99,
+            "def": 430,
+            "defM": 99,
+            "fire": 14400,
+            "water": 16000,
+            "soil": 2,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Alter Port",
+            "lvl": 60,
+            "pt": 99,
+            "def": 516,
+            "defM": 99,
+            "fire": 17300,
+            "water": 19200,
+            "soil": 4,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Irregular Port",
+            "lvl": 65,
+            "pt": 99,
+            "def": 619,
+            "defM": 99,
+            "fire": 20700,
+            "water": 23000,
+            "soil": 5,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Advanced Unique Port",
+            "lvl": 70,
+            "pt": 99,
+            "def": 742,
+            "defM": 99,
+            "fire": 24900,
+            "water": 27600,
+            "soil": 6,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Back Adaptor",
+            "lvl": 30,
+            "pt": 1,
+            "def": 0,
+            "defM": 0,
+            "fire": 0,
+            "water": 0,
+            "soil": null,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Magazine Carrier",
+            "lvl": 30,
+            "pt": 15,
+            "def": 85,
+            "defM": 50,
+            "fire": 1,
+            "water": 300,
+            "soil": null,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Mega Magazine Tub",
+            "lvl": 41,
+            "pt": 80,
+            "def": 85,
+            "defM": 100,
+            "fire": 2,
+            "water": 1,
+            "soil": null,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Mega Magazine Turbo 050",
+            "lvl": 49,
+            "pt": 99,
+            "def": 110,
+            "defM": 200,
+            "fire": 2,
+            "water": 3,
+            "soil": null,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "AType-Magazine-Container",
+            "lvl": 54,
+            "pt": 99,
+            "def": 100,
+            "defM": 200,
+            "fire": 2,
+            "water": 3,
+            "soil": null,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Venom Booster",
+            "lvl": 56,
+            "pt": 99,
+            "def": 120,
+            "defM": 200,
+            "fire": 2,
+            "water": 4,
+            "soil": null,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Mirage Booster",
+            "lvl": 61,
+            "pt": 99,
+            "def": 144,
+            "defM": 200,
+            "fire": 2,
+            "water": 6,
+            "soil": null,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Advanced Unique Booster",
+            "lvl": 66,
+            "pt": 99,
+            "def": 172,
+            "defM": 200,
+            "fire": 2,
+            "water": 7,
+            "soil": null,
+            "wind": null,
+            "price": 0
+          }
+        ],
+        "lower": [
+          {
+            "name": "Rim",
+            "lvl": 30,
+            "pt": 1,
+            "def": 277,
+            "defM": 0,
+            "fire": 3,
+            "water": 3,
+            "soil": 3,
+            "wind": 3,
+            "price": 100000
+          },
+          {
+            "name": "Slender Leg",
+            "lvl": 37,
+            "pt": 50,
+            "def": 841,
+            "defM": 0,
+            "fire": 7,
+            "water": 7,
+            "soil": 7,
+            "wind": 7,
+            "price": 800000
+          },
+          {
+            "name": "Stock Frame Leg",
+            "lvl": 40,
+            "pt": 70,
+            "def": 1093,
+            "defM": 0,
+            "fire": 9,
+            "water": 9,
+            "soil": 9,
+            "wind": 9,
+            "price": 1100000
+          },
+          {
+            "name": "High Density Slender Leg",
+            "lvl": 45,
+            "pt": 78,
+            "def": 2876,
+            "defM": 0,
+            "fire": 12,
+            "water": 12,
+            "soil": 12,
+            "wind": 12,
+            "price": 1600000
+          },
+          {
+            "name": "Artillery Armed Leg",
+            "lvl": 49,
+            "pt": 99,
+            "def": 5383,
+            "defM": 0,
+            "fire": 17,
+            "water": 17,
+            "soil": 17,
+            "wind": 17,
+            "price": 18000000
+          },
+          {
+            "name": "VR Strike Landing",
+            "lvl": 49,
+            "pt": 99,
+            "def": 4141,
+            "defM": 0,
+            "fire": 15,
+            "water": 15,
+            "soil": 15,
+            "wind": 15,
+            "price": 8000000
+          },
+          {
+            "name": "HA Siege Landing",
+            "lvl": 49,
+            "pt": 99,
+            "def": 3451,
+            "defM": 0,
+            "fire": 14,
+            "water": 14,
+            "soil": 14,
+            "wind": 14,
+            "price": 2000000
+          },
+          {
+            "name": "AAA-GLS Leg",
+            "lvl": 53,
+            "pt": 99,
+            "def": 6000,
+            "defM": 0,
+            "fire": 17,
+            "water": 17,
+            "soil": 17,
+            "wind": 17,
+            "price": 2000000
+          },
+          {
+            "name": "ASTorr Landing",
+            "lvl": 54,
+            "pt": 99,
+            "def": 7000,
+            "defM": 0,
+            "fire": 19,
+            "water": 19,
+            "soil": 19,
+            "wind": 19,
+            "price": 8000000
+          },
+          {
+            "name": "S Heavy Armed Leg",
+            "lvl": 55,
+            "pt": 99,
+            "def": 8000,
+            "defM": 0,
+            "fire": 20,
+            "water": 20,
+            "soil": 20,
+            "wind": 20,
+            "price": 18000000
+          },
+          {
+            "name": "Alter Leg",
+            "lvl": 58,
+            "pt": 99,
+            "def": 9600,
+            "defM": 0,
+            "fire": 22,
+            "water": 22,
+            "soil": 22,
+            "wind": 22,
+            "price": 28800000
+          },
+          {
+            "name": "Irregular Leg",
+            "lvl": 63,
+            "pt": 99,
+            "def": 11520,
+            "defM": 0,
+            "fire": 24,
+            "water": 24,
+            "soil": 24,
+            "wind": 24,
+            "price": 36000000
+          },
+          {
+            "name": "Advanced Unique Legs",
+            "lvl": 68,
+            "pt": 99,
+            "def": 13824,
+            "defM": 0,
+            "fire": 24,
+            "water": 24,
+            "soil": 24,
+            "wind": 24,
+            "price": 43200000
+          },
+          {
+            "name": "Vulcan",
+            "lvl": 30,
+            "pt": 1,
+            "def": 185,
+            "defM": 20,
+            "fire": 1233,
+            "water": 1370,
+            "soil": 100,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Fire Blaster",
+            "lvl": 30,
+            "pt": 15,
+            "def": 185,
+            "defM": 25,
+            "fire": 1479,
+            "water": 1643,
+            "soil": 200,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Rocket Launcher",
+            "lvl": 30,
+            "pt": 30,
+            "def": 185,
+            "defM": 35,
+            "fire": 1726,
+            "water": 1918,
+            "soil": 300,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Galvanic Dynamo",
+            "lvl": 35,
+            "pt": 52,
+            "def": 248,
+            "defM": 50,
+            "fire": 2196,
+            "water": 2440,
+            "soil": 600,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Beam Bazooka",
+            "lvl": 37,
+            "pt": 60,
+            "def": 289,
+            "defM": 50,
+            "fire": 2997,
+            "water": 3330,
+            "soil": 800,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Razor Gatling Arm",
+            "lvl": 40,
+            "pt": 77,
+            "def": 344,
+            "defM": 50,
+            "fire": 4788,
+            "water": 5321,
+            "soil": 1,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Advanced Gatling Arm",
+            "lvl": 43,
+            "pt": 81,
+            "def": 397,
+            "defM": 50,
+            "fire": 7870,
+            "water": 8745,
+            "soil": 1,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Galvanic Gatling Arm",
+            "lvl": 48,
+            "pt": 93,
+            "def": 459,
+            "defM": 50,
+            "fire": 13883,
+            "water": 15424,
+            "soil": 1,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Artillery Armed Arm",
+            "lvl": 50,
+            "pt": 99,
+            "def": 858,
+            "defM": 50,
+            "fire": 27652,
+            "water": 30724,
+            "soil": 453,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Volcanic Gatling Arm",
+            "lvl": 50,
+            "pt": 99,
+            "def": 550,
+            "defM": 50,
+            "fire": 19751,
+            "water": 21945,
+            "soil": 147,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Hailstorm Canon Arm",
+            "lvl": 50,
+            "pt": 99,
+            "def": 660,
+            "defM": 50,
+            "fire": 23701,
+            "water": 26334,
+            "soil": 298,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "AAA Canon Arm",
+            "lvl": 51,
+            "pt": 99,
+            "def": 1030,
+            "defM": 50,
+            "fire": 30812,
+            "water": 34234,
+            "soil": 147,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Hybrid Gatling Arm",
+            "lvl": 53,
+            "pt": 99,
+            "def": 1235,
+            "defM": 50,
+            "fire": 35947,
+            "water": 39940,
+            "soil": 298,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Judgement Rail Canon Arm",
+            "lvl": 55,
+            "pt": 99,
+            "def": 1606,
+            "defM": 50,
+            "fire": 40055,
+            "water": 44504,
+            "soil": 453,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Alter Arm",
+            "lvl": 59,
+            "pt": 99,
+            "def": 1927,
+            "defM": 50,
+            "fire": 48066,
+            "water": 53405,
+            "soil": 725,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Irregular Arm",
+            "lvl": 64,
+            "pt": 99,
+            "def": 2312,
+            "defM": 50,
+            "fire": 57679,
+            "water": 64087,
+            "soil": 907,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Advanced Unique Arms",
+            "lvl": 69,
+            "pt": 99,
+            "def": 2774,
+            "defM": 50,
+            "fire": 69215,
+            "water": 76904,
+            "soil": 1,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Multi Missile",
+            "lvl": 30,
+            "pt": 40,
+            "def": 85,
+            "defM": 99,
+            "fire": 620,
+            "water": 690,
+            "soil": 500,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Type C Missile Port",
+            "lvl": 45,
+            "pt": 78,
+            "def": 255,
+            "defM": 99,
+            "fire": 2800,
+            "water": 3100,
+            "soil": 700,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "DType Missile Port",
+            "lvl": 49,
+            "pt": 99,
+            "def": 331,
+            "defM": 99,
+            "fire": 4950,
+            "water": 5550,
+            "soil": 2,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "SSA Missile Port",
+            "lvl": 54,
+            "pt": 99,
+            "def": 430,
+            "defM": 99,
+            "fire": 14400,
+            "water": 16000,
+            "soil": 2,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Alter Port",
+            "lvl": 60,
+            "pt": 99,
+            "def": 516,
+            "defM": 99,
+            "fire": 17300,
+            "water": 19200,
+            "soil": 4,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Irregular Port",
+            "lvl": 65,
+            "pt": 99,
+            "def": 619,
+            "defM": 99,
+            "fire": 20700,
+            "water": 23000,
+            "soil": 5,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Advanced Unique Port",
+            "lvl": 70,
+            "pt": 99,
+            "def": 742,
+            "defM": 99,
+            "fire": 24900,
+            "water": 27600,
+            "soil": 6,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Back Adaptor",
+            "lvl": 30,
+            "pt": 1,
+            "def": 0,
+            "defM": 0,
+            "fire": 0,
+            "water": 0,
+            "soil": null,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Magazine Carrier",
+            "lvl": 30,
+            "pt": 15,
+            "def": 85,
+            "defM": 50,
+            "fire": 1,
+            "water": 300,
+            "soil": null,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Mega Magazine Tub",
+            "lvl": 41,
+            "pt": 80,
+            "def": 85,
+            "defM": 100,
+            "fire": 2,
+            "water": 1,
+            "soil": null,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Mega Magazine Turbo 050",
+            "lvl": 49,
+            "pt": 99,
+            "def": 110,
+            "defM": 200,
+            "fire": 2,
+            "water": 3,
+            "soil": null,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "AType-Magazine-Container",
+            "lvl": 54,
+            "pt": 99,
+            "def": 100,
+            "defM": 200,
+            "fire": 2,
+            "water": 3,
+            "soil": null,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Venom Booster",
+            "lvl": 56,
+            "pt": 99,
+            "def": 120,
+            "defM": 200,
+            "fire": 2,
+            "water": 4,
+            "soil": null,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Mirage Booster",
+            "lvl": 61,
+            "pt": 99,
+            "def": 144,
+            "defM": 200,
+            "fire": 2,
+            "water": 6,
+            "soil": null,
+            "wind": null,
+            "price": 0
+          },
+          {
+            "name": "Advanced Unique Booster",
+            "lvl": 66,
+            "pt": 99,
+            "def": 172,
+            "defM": 200,
+            "fire": 2,
+            "water": 7,
+            "soil": null,
+            "wind": null,
+            "price": 0
+          }
+        ],
+        "arms": [
+          {
+            "name": "Vulcan",
+            "lvl": 30,
+            "pt": 1,
+            "def": 185,
+            "attM": 20,
+            "minAtk": 1233,
+            "maxAtk": 1370,
+            "price": 100000
+          },
+          {
+            "name": "Fire Blaster",
+            "lvl": 30,
+            "pt": 15,
+            "def": 185,
+            "attM": 25,
+            "minAtk": 1479,
+            "maxAtk": 1643,
+            "price": 200000
+          },
+          {
+            "name": "Rocket Launcher",
+            "lvl": 30,
+            "pt": 30,
+            "def": 185,
+            "attM": 35,
+            "minAtk": 1726,
+            "maxAtk": 1918,
+            "price": 300000
+          },
+          {
+            "name": "Galvanic Dynamo",
+            "lvl": 35,
+            "pt": 52,
+            "def": 248,
+            "attM": 50,
+            "minAtk": 2196,
+            "maxAtk": 2440,
+            "price": 600000
+          },
+          {
+            "name": "Beam Bazooka",
+            "lvl": 37,
+            "pt": 60,
+            "def": 289,
+            "attM": 50,
+            "minAtk": 2997,
+            "maxAtk": 3330,
+            "price": 800000
+          },
+          {
+            "name": "Razor Gatling Arm",
+            "lvl": 40,
+            "pt": 77,
+            "def": 344,
+            "attM": 50,
+            "minAtk": 4788,
+            "maxAtk": 5321,
+            "price": 1100000
+          },
+          {
+            "name": "Advanced Gatling Arm",
+            "lvl": 43,
+            "pt": 81,
+            "def": 397,
+            "attM": 50,
+            "minAtk": 7870,
+            "maxAtk": 8745,
+            "price": 1400000
+          },
+          {
+            "name": "Galvanic Gatling Arm",
+            "lvl": 48,
+            "pt": 93,
+            "def": 459,
+            "attM": 50,
+            "minAtk": 13883,
+            "maxAtk": 15424,
+            "price": 1900000
+          },
+          {
+            "name": "Artillery Armed Arm",
+            "lvl": 50,
+            "pt": 99,
+            "def": 858,
+            "attM": 50,
+            "minAtk": 27652,
+            "maxAtk": 30724,
+            "price": 453600000
+          },
+          {
+            "name": "Volcanic Gatling Arm",
+            "lvl": 50,
+            "pt": 99,
+            "def": 550,
+            "attM": 50,
+            "minAtk": 19751,
+            "maxAtk": 21945,
+            "price": 147000000
+          },
+          {
+            "name": "Hailstorm Canon Arm",
+            "lvl": 50,
+            "pt": 99,
+            "def": 660,
+            "attM": 50,
+            "minAtk": 23701,
+            "maxAtk": 26334,
+            "price": 298200000
+          },
+          {
+            "name": "AAA Canon Arm",
+            "lvl": 51,
+            "pt": 99,
+            "def": 1030,
+            "attM": 50,
+            "minAtk": 30812,
+            "maxAtk": 34234,
+            "price": 147000000
+          },
+          {
+            "name": "Hybrid Gatling Arm",
+            "lvl": 53,
+            "pt": 99,
+            "def": 1235,
+            "attM": 50,
+            "minAtk": 35947,
+            "maxAtk": 39940,
+            "price": 298200000
+          },
+          {
+            "name": "Judgement Rail Canon Arm",
+            "lvl": 55,
+            "pt": 99,
+            "def": 1606,
+            "attM": 50,
+            "minAtk": 40055,
+            "maxAtk": 44504,
+            "price": 453600000
+          },
+          {
+            "name": "Alter Arm",
+            "lvl": 59,
+            "pt": 99,
+            "def": 1927,
+            "attM": 50,
+            "minAtk": 48066,
+            "maxAtk": 53405,
+            "price": 725760000
+          },
+          {
+            "name": "Irregular Arm",
+            "lvl": 64,
+            "pt": 99,
+            "def": 2312,
+            "attM": 50,
+            "minAtk": 57679,
+            "maxAtk": 64087,
+            "price": 907200000
+          },
+          {
+            "name": "Advanced Unique Arms",
+            "lvl": 69,
+            "pt": 99,
+            "def": 2774,
+            "attM": 50,
+            "minAtk": 69215,
+            "maxAtk": 76904,
+            "price": 1088640000
+          },
+          {
+            "name": "Multi Missile",
+            "lvl": 30,
+            "pt": 40,
+            "def": 85,
+            "attM": 99,
+            "minAtk": 620,
+            "maxAtk": 690,
+            "price": 500000
+          },
+          {
+            "name": "Type C Missile Port",
+            "lvl": 45,
+            "pt": 78,
+            "def": 255,
+            "attM": 99,
+            "minAtk": 2800,
+            "maxAtk": 3100,
+            "price": 700000
+          },
+          {
+            "name": "DType Missile Port",
+            "lvl": 49,
+            "pt": 99,
+            "def": 331,
+            "attM": 99,
+            "minAtk": 4950,
+            "maxAtk": 5550,
+            "price": 2500000
+          },
+          {
+            "name": "SSA Missile Port",
+            "lvl": 54,
+            "pt": 99,
+            "def": 430,
+            "attM": 99,
+            "minAtk": 14400,
+            "maxAtk": 16000,
+            "price": 2500000
+          },
+          {
+            "name": "Alter Port",
+            "lvl": 60,
+            "pt": 99,
+            "def": 516,
+            "attM": 99,
+            "minAtk": 17300,
+            "maxAtk": 19200,
+            "price": 4000000
+          },
+          {
+            "name": "Irregular Port",
+            "lvl": 65,
+            "pt": 99,
+            "def": 619,
+            "attM": 99,
+            "minAtk": 20700,
+            "maxAtk": 23000,
+            "price": 5000000
+          },
+          {
+            "name": "Advanced Unique Port",
+            "lvl": 70,
+            "pt": 99,
+            "def": 742,
+            "attM": 99,
+            "minAtk": 24900,
+            "maxAtk": 27600,
+            "price": 6000000
+          },
+          {
+            "name": "Back Adaptor",
+            "lvl": 30,
+            "pt": 1,
+            "def": 0,
+            "attM": 0,
+            "minAtk": 0,
+            "maxAtk": 0,
+            "price": 0
+          },
+          {
+            "name": "Magazine Carrier",
+            "lvl": 30,
+            "pt": 15,
+            "def": 85,
+            "attM": 50,
+            "minAtk": 1,
+            "maxAtk": 300,
+            "price": 0
+          },
+          {
+            "name": "Mega Magazine Tub",
+            "lvl": 41,
+            "pt": 80,
+            "def": 85,
+            "attM": 100,
+            "minAtk": 2,
+            "maxAtk": 1,
+            "price": 0
+          },
+          {
+            "name": "Mega Magazine Turbo 050",
+            "lvl": 49,
+            "pt": 99,
+            "def": 110,
+            "attM": 200,
+            "minAtk": 2,
+            "maxAtk": 3,
+            "price": 0
+          },
+          {
+            "name": "AType-Magazine-Container",
+            "lvl": 54,
+            "pt": 99,
+            "def": 100,
+            "attM": 200,
+            "minAtk": 2,
+            "maxAtk": 3,
+            "price": 0
+          },
+          {
+            "name": "Venom Booster",
+            "lvl": 56,
+            "pt": 99,
+            "def": 120,
+            "attM": 200,
+            "minAtk": 2,
+            "maxAtk": 4,
+            "price": 0
+          },
+          {
+            "name": "Mirage Booster",
+            "lvl": 61,
+            "pt": 99,
+            "def": 144,
+            "attM": 200,
+            "minAtk": 2,
+            "maxAtk": 6,
+            "price": 0
+          },
+          {
+            "name": "Advanced Unique Booster",
+            "lvl": 66,
+            "pt": 99,
+            "def": 172,
+            "attM": 200,
+            "minAtk": 2,
+            "maxAtk": 7,
+            "price": 0
+          }
+        ],
+        "arms2": [
+          {
+            "name": "Multi Missile",
+            "lvl": 30,
+            "pt": 40,
+            "def": 85,
+            "attM": 99,
+            "minAtk": 620,
+            "maxAtk": 690,
+            "price": 500000
+          },
+          {
+            "name": "Type C Missile Port",
+            "lvl": 45,
+            "pt": 78,
+            "def": 255,
+            "attM": 99,
+            "minAtk": 2800,
+            "maxAtk": 3100,
+            "price": 700000
+          },
+          {
+            "name": "DType Missile Port",
+            "lvl": 49,
+            "pt": 99,
+            "def": 331,
+            "attM": 99,
+            "minAtk": 4950,
+            "maxAtk": 5550,
+            "price": 2500000
+          },
+          {
+            "name": "SSA Missile Port",
+            "lvl": 54,
+            "pt": 99,
+            "def": 430,
+            "attM": 99,
+            "minAtk": 14400,
+            "maxAtk": 16000,
+            "price": 2500000
+          },
+          {
+            "name": "Alter Port",
+            "lvl": 60,
+            "pt": 99,
+            "def": 516,
+            "attM": 99,
+            "minAtk": 17300,
+            "maxAtk": 19200,
+            "price": 4000000
+          },
+          {
+            "name": "Irregular Port",
+            "lvl": 65,
+            "pt": 99,
+            "def": 619,
+            "attM": 99,
+            "minAtk": 20700,
+            "maxAtk": 23000,
+            "price": 5000000
+          },
+          {
+            "name": "Advanced Unique Port",
+            "lvl": 70,
+            "pt": 99,
+            "def": 742,
+            "attM": 99,
+            "minAtk": 24900,
+            "maxAtk": 27600,
+            "price": 6000000
+          },
+          {
+            "name": "Back Adaptor",
+            "lvl": 30,
+            "pt": 1,
+            "def": 0,
+            "attM": 0,
+            "minAtk": 0,
+            "maxAtk": 0,
+            "price": 0
+          },
+          {
+            "name": "Magazine Carrier",
+            "lvl": 30,
+            "pt": 15,
+            "def": 85,
+            "attM": 50,
+            "minAtk": 1,
+            "maxAtk": 300,
+            "price": 0
+          },
+          {
+            "name": "Mega Magazine Tub",
+            "lvl": 41,
+            "pt": 80,
+            "def": 85,
+            "attM": 100,
+            "minAtk": 2,
+            "maxAtk": 1,
+            "price": 0
+          },
+          {
+            "name": "Mega Magazine Turbo 050",
+            "lvl": 49,
+            "pt": 99,
+            "def": 110,
+            "attM": 200,
+            "minAtk": 2,
+            "maxAtk": 3,
+            "price": 0
+          },
+          {
+            "name": "AType-Magazine-Container",
+            "lvl": 54,
+            "pt": 99,
+            "def": 100,
+            "attM": 200,
+            "minAtk": 2,
+            "maxAtk": 3,
+            "price": 0
+          },
+          {
+            "name": "Venom Booster",
+            "lvl": 56,
+            "pt": 99,
+            "def": 120,
+            "attM": 200,
+            "minAtk": 2,
+            "maxAtk": 4,
+            "price": 0
+          },
+          {
+            "name": "Mirage Booster",
+            "lvl": 61,
+            "pt": 99,
+            "def": 144,
+            "attM": 200,
+            "minAtk": 2,
+            "maxAtk": 6,
+            "price": 0
+          },
+          {
+            "name": "Advanced Unique Booster",
+            "lvl": 66,
+            "pt": 99,
+            "def": 172,
+            "attM": 200,
+            "minAtk": 2,
+            "maxAtk": 7,
+            "price": 0
+          }
+        ],
+        "options": [
+          {
+            "name": "Back Adaptor",
+            "lvl": 30,
+            "pt": 1,
+            "def": 0,
+            "boostCharge": 0,
+            "boostSpeed": 0,
+            "price": 0
+          },
+          {
+            "name": "Magazine Carrier",
+            "lvl": 30,
+            "pt": 15,
+            "def": 85,
+            "boostCharge": 50,
+            "boostSpeed": 1,
+            "price": 300000
+          },
+          {
+            "name": "Mega Magazine Tub",
+            "lvl": 41,
+            "pt": 80,
+            "def": 85,
+            "boostCharge": 100,
+            "boostSpeed": 2,
+            "price": 1000000
+          },
+          {
+            "name": "Mega Magazine Turbo 050",
+            "lvl": 49,
+            "pt": 99,
+            "def": 110,
+            "boostCharge": 200,
+            "boostSpeed": 2,
+            "price": 3000000
+          },
+          {
+            "name": "AType-Magazine-Container",
+            "lvl": 54,
+            "pt": 99,
+            "def": 100,
+            "boostCharge": 200,
+            "boostSpeed": 2,
+            "price": 3000000
+          },
+          {
+            "name": "Venom Booster",
+            "lvl": 56,
+            "pt": 99,
+            "def": 120,
+            "boostCharge": 200,
+            "boostSpeed": 2,
+            "price": 4800000
+          },
+          {
+            "name": "Mirage Booster",
+            "lvl": 61,
+            "pt": 99,
+            "def": 144,
+            "boostCharge": 200,
+            "boostSpeed": 2,
+            "price": 6000000
+          },
+          {
+            "name": "Advanced Unique Booster",
+            "lvl": 66,
+            "pt": 99,
+            "def": 172,
+            "boostCharge": 200,
+            "boostSpeed": 2,
+            "price": 7200000
+          }
+        ]
+      }
+    },
     "evolutions": [
       {
         "id": "meu_atk_32",
         "name": "M.E.U. Attacker Lv.32",
         "levelReq": 32,
-        "atk": 120,
-        "hp": 100000,
-        "crit": 3,
+        "atk": 913,
+        "hp": 1473,
+        "crit": 20,
         "cost": 5000000,
         "costLabel": "Gratis (setelah seluruh part selesai dirakit)"
       },
@@ -84,9 +3407,9 @@
         "id": "meu_atk_42",
         "name": "M.E.U. Attacker Lv.42",
         "levelReq": 42,
-        "atk": 280,
-        "hp": 250000,
-        "crit": 6,
+        "atk": 3683,
+        "hp": 5720,
+        "crit": 35,
         "cost": 100000000,
         "costLabel": "100,000,000 CRD"
       },
@@ -94,9 +3417,9 @@
         "id": "meu_atk_55",
         "name": "M.E.U. Attacker Lv.55",
         "levelReq": 55,
-        "atk": 500,
-        "hp": 500000,
-        "crit": 10,
+        "atk": 29120,
+        "hp": 29137,
+        "crit": 50,
         "cost": 500000000,
         "costLabel": "500,000,000 CRD"
       },
@@ -104,9 +3427,9 @@
         "id": "meu_atk_65",
         "name": "M.E.U. Attacker Lv.65",
         "levelReq": 65,
-        "atk": 800,
-        "hp": 1000000,
-        "crit": 15,
+        "atk": 41933,
+        "hp": 42020,
+        "crit": 50,
         "cost": 2000000000,
         "costLabel": "2,000,000,000 CRD",
         "locked": true
@@ -115,9 +3438,9 @@
         "id": "meu_def_32",
         "name": "M.E.U. Defender Lv.32",
         "levelReq": 32,
-        "atk": 80,
-        "hp": 150000,
-        "crit": 1,
+        "atk": 913,
+        "hp": 1473,
+        "crit": 10,
         "cost": 5000000,
         "costLabel": "Gratis (setelah seluruh part selesai dirakit)"
       },
@@ -125,9 +3448,9 @@
         "id": "meu_def_42",
         "name": "M.E.U. Defender Lv.42",
         "levelReq": 42,
-        "atk": 200,
-        "hp": 400000,
-        "crit": 2,
+        "atk": 3683,
+        "hp": 5720,
+        "crit": 20,
         "cost": 100000000,
         "costLabel": "100,000,000 CRD"
       },
@@ -135,9 +3458,9 @@
         "id": "meu_def_55",
         "name": "M.E.U. Defender Lv.55",
         "levelReq": 55,
-        "atk": 350,
-        "hp": 800000,
-        "crit": 4,
+        "atk": 29120,
+        "hp": 29137,
+        "crit": 50,
         "cost": 500000000,
         "costLabel": "500,000,000 CRD"
       },
@@ -145,9 +3468,9 @@
         "id": "meu_def_65",
         "name": "M.E.U. Defender Lv.65",
         "levelReq": 65,
-        "atk": 600,
-        "hp": 1500000,
-        "crit": 6,
+        "atk": 41933,
+        "hp": 42020,
+        "crit": 50,
         "cost": 2000000000,
         "costLabel": "2,000,000,000 CRD",
         "locked": true
@@ -161,11 +3484,26 @@
     "componentsTitle": "Ancient Spirit Components",
     "totalLabel": "Total Ritual",
     "components": [
-      { "name": "Spirit Essence", "cost": 500000 },
-      { "name": "Soul Crystal", "cost": 750000 },
-      { "name": "Ancient Relic", "cost": 1000000 },
-      { "name": "Spirit Sigil", "cost": 1250000 },
-      { "name": "Spirit Covenant", "cost": 1500000 }
+      {
+        "name": "Spirit Essence",
+        "cost": 500000
+      },
+      {
+        "name": "Soul Crystal",
+        "cost": 750000
+      },
+      {
+        "name": "Ancient Relic",
+        "cost": 1000000
+      },
+      {
+        "name": "Spirit Sigil",
+        "cost": 1250000
+      },
+      {
+        "name": "Spirit Covenant",
+        "cost": 1500000
+      }
     ],
     "evolutions": [
       {

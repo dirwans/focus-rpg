@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useGameStore } from '../store/gameStore'
 import ascensionData from '../data/ascensionArms.json'
 import { t } from '../lib/translate'
@@ -59,6 +59,7 @@ const RACE_COLORS = {
 export default function Ascension() {
   const player = useGameStore((s) => s.player)
   const craftAscensionArms = useGameStore((s) => s.craftAscensionArms)
+  const [bionexTab, setBionexTab] = useState('attacker') // 'attacker' or 'defender'
 
   if (!player.race) {
     return (
@@ -131,8 +132,44 @@ export default function Ascension() {
           <div style={{ fontFamily: 'var(--font-title)', fontSize: 16, color: colors.accent, marginBottom: 12, fontWeight: 800, borderBottom: `1px solid ${colors.border}4d`, paddingBottom: 6 }}>
             {data.name} Evolution
           </div>
+
+          {/* TAB UNTUK BIONEX */}
+          {player.race === 'bionex' && (
+            <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
+              <button
+                onClick={() => setBionexTab('attacker')}
+                style={{
+                  flex: 1, padding: '10px 0', fontFamily: 'var(--font-title)', fontSize: 14, fontWeight: 900,
+                  background: bionexTab === 'attacker' ? `linear-gradient(90deg, ${colors.accent}, ${colors.border})` : 'rgba(0,0,0,0.4)',
+                  color: bionexTab === 'attacker' ? '#000' : colors.accent,
+                  border: `1px solid ${colors.accent}`, borderRadius: 6, cursor: 'pointer'
+                }}
+              >
+                🚀 M.E.U. ATTACKER
+              </button>
+              <button
+                onClick={() => setBionexTab('defender')}
+                style={{
+                  flex: 1, padding: '10px 0', fontFamily: 'var(--font-title)', fontSize: 14, fontWeight: 900,
+                  background: bionexTab === 'defender' ? `linear-gradient(90deg, ${colors.accent}, ${colors.border})` : 'rgba(0,0,0,0.4)',
+                  color: bionexTab === 'defender' ? '#000' : colors.accent,
+                  border: `1px solid ${colors.accent}`, borderRadius: 6, cursor: 'pointer'
+                }}
+              >
+                🛡️ M.E.U. DEFENDER
+              </button>
+            </div>
+          )}
+
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            {data.evolutions.map((evo, i) => {
+            {data.evolutions
+              .filter(evo => {
+                if (player.race === 'bionex') {
+                  return bionexTab === 'attacker' ? evo.id.includes('_atk_') : evo.id.includes('_def_')
+                }
+                return true
+              })
+              .map((evo, i) => {
               const isUnlocked = player.equipment?.ascension_arms?.id === evo.id
               const canAfford = player.resources.crd >= evo.cost
               const levelMet = player.level >= evo.levelReq
@@ -186,6 +223,39 @@ export default function Ascension() {
                     <div><span style={{color: '#44ff88'}}>❤️ HP</span> +{evo.hp.toLocaleString()}</div>
                     <div><span style={{color: colors.accent}}>💥 CRIT</span> +{evo.crit}%</div>
                   </div>
+
+                  {/* BLUEPRINT HANGAR KHUSUS BIONEX */}
+                  {player.race === 'bionex' && data.parts && data.parts[bionexTab] && (
+                    <div style={{
+                      marginTop: 8, marginBottom: 16, padding: 12, background: 'rgba(0,0,0,0.4)',
+                      border: `1px dashed ${colors.border}80`, borderRadius: 6
+                    }}>
+                      <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, color: colors.accent, marginBottom: 8, letterSpacing: 1 }}>
+                        [ BLUEPRINT LOADOUT ]
+                      </div>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 6, fontSize: 11, fontFamily: 'var(--font-mono)', color: '#aabccc' }}>
+                        {(() => {
+                          // Ambil parts paling optimal untuk level ini
+                          const getPart = (slot) => {
+                            const arr = data.parts[bionexTab][slot]
+                            if (!arr) return 'N/A'
+                            const valid = arr.filter(p => p.lvl <= evo.levelReq + 2) // +2 margin
+                            return valid.length > 0 ? valid[valid.length - 1].name : 'Base Part'
+                          }
+                          return (
+                            <>
+                              <div><span style={{color: '#88aadd', width: 60, display: 'inline-block'}}>⚙️ Head</span> {getPart('head')}</div>
+                              <div><span style={{color: '#88aadd', width: 60, display: 'inline-block'}}>🛡️ Core</span> {getPart('upper')}</div>
+                              <div><span style={{color: '#88aadd', width: 60, display: 'inline-block'}}>🦵 Legs</span> {getPart('lower')}</div>
+                              <div><span style={{color: '#f5a623', width: 60, display: 'inline-block'}}>⚔️ Arms</span> {getPart('arms')}</div>
+                              <div><span style={{color: '#f5a623', width: 60, display: 'inline-block'}}>🚀 Sub</span> {getPart('arms2')}</div>
+                              <div><span style={{color: '#44ff88', width: 60, display: 'inline-block'}}>⚡ Boost</span> {getPart('options')}</div>
+                            </>
+                          )
+                        })()}
+                      </div>
+                    </div>
+                  )}
 
                   {evo.locked ? (
                     <button
