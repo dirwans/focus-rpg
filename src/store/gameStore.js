@@ -251,7 +251,7 @@ export function resolveItemImage(item, playerRace, playerJob) {
     // Celestra Ancient Spirit - Noctyrna
     if (item.id === 'spirit_noctyrna_32') return '/assets/spirit_noctyrna_32.png?v=3'
     if (item.id === 'spirit_noctyrna_42') return '/assets/spirit_noctyrna_42.png?v=3'
-    if (item.id === 'spirit_noctyrna_55') return '/assets/spirit_noctyrna_55.png?v=5'
+    if (item.id === 'spirit_noctyrna_55') return '/assets/spirit_noctyrna_55.png?v=6'
     if (item.id === 'spirit_noctyrna_65') return '/assets/spirit_noctyrna_65.png?v=3'
   }
   return item.image
