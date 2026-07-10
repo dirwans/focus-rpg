@@ -1900,7 +1900,17 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 - **Verification**: Verified React build (`npm run build`) compiles clean with no warnings.
 
 
+---
 
+### 🎨 Milestone 145: UI Aesthetics Tweaks & Live Event Badge Relocation [DEPLOYED]
+- **Aesthetic Refinements (`src/index.css`)**:
+  - Maintained original font-sizes (`13px` for `.focus-pill` and `16px` for `.deploy-btn`) to preserve legibility, but strictly reduced padding attributes to remove bulkiness and save screen space.
+  - Applied padding reduction sweeps across `.hud-pill`, `.location-pill`, and `.promo-glass-btn` to ensure all UI elements look sleeker and less intrusive.
+- **Bottom Navigation Layout (`src/components/BottomNav.jsx`)**:
+  - Reduced top and bottom padding (`padding: 5px 4px 6px`) to compress the bottom navigation panel's vertical footprint.
+- **HUD Optimization (`src/screens/Main.jsx`)**:
+  - Relocated the floating `[🏆 EVENT LIVE]` widget from the top-right to the top-left (`top: 68px, left: 16px`) to prevent it from overlapping with the location pill and clean up the aesthetic view of the dashboard.
+- **Verification**: Verified React build compiles clean with no warnings and UI is properly spaced.
 
 
 

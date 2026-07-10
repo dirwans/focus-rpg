@@ -834,8 +834,8 @@ export default function Main() {
           onClick={() => setShowEventModal(true)}
           style={{
             position: 'absolute',
-            top: '55px',
-            right: '16px',
+            top: '68px',
+            left: '16px',
             zIndex: 100,
             background: 'rgba(255, 153, 0, 0.12)',
             border: '1.5px solid #ffaa00',

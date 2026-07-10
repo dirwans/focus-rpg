@@ -100,7 +100,7 @@ export default function BottomNav() {
       WebkitBackdropFilter:  'blur(14px) saturate(180%)',
       borderTop:             `1px solid ${primary}55`,
       boxShadow:             `inset 0 1px 0 rgba(255,255,255,0.08), 0 -6px 24px ${primary}22`,
-      padding:               '9px 6px 11px',
+      padding:               '5px 4px 6px',
       gap:                   4,
     }}>
       {NAV_ITEMS.map((n) => {
