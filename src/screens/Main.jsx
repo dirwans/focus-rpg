@@ -828,59 +828,6 @@ export default function Main() {
 
   return (
     <div className="no-scrollbar" style={styles.screen}>
-      {/* Floating Event Widget */}
-      {player.race && (
-        <button
-          onClick={() => setShowEventModal(true)}
-          style={{
-            position: 'absolute',
-            top: '68px',
-            left: '16px',
-            zIndex: 100,
-            background: 'rgba(255, 153, 0, 0.12)',
-            border: '1.5px solid #ffaa00',
-            borderRadius: '8px',
-            padding: '5px 10px',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            gap: 6,
-            fontFamily: "'Orbitron', sans-serif",
-            fontSize: '11px',
-            fontWeight: 900,
-            letterSpacing: '1px',
-            color: '#ffaa00',
-            boxShadow: '0 0 10px rgba(255, 170, 0, 0.2), inset 0 0 5px rgba(255, 170, 0, 0.1)',
-            transition: 'all 0.2s',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'scale(1.05)'
-            e.currentTarget.style.boxShadow = '0 0 15px rgba(255, 170, 0, 0.5), inset 0 0 8px rgba(255, 170, 0, 0.2)'
-            e.currentTarget.style.background = 'rgba(255, 153, 0, 0.18)'
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = 'scale(1)'
-            e.currentTarget.style.boxShadow = '0 0 10px rgba(255, 170, 0, 0.2), inset 0 0 5px rgba(255, 170, 0, 0.1)'
-            e.currentTarget.style.background = 'rgba(255, 153, 0, 0.1)'
-          }}
-        >
-          <span style={{ fontSize: 13, display: 'inline-block', transform: 'translateY(-1px)' }}>🏆</span>
-          <span style={{ textShadow: '0 0 5px rgba(255, 170, 0, 0.5)' }}>EVENT</span>
-          <span style={{
-            fontSize: '8px',
-            background: '#ff5500',
-            color: '#fff',
-            borderRadius: '3px',
-            padding: '1px 4px',
-            marginLeft: 2,
-            fontFamily: "'Orbitron', sans-serif",
-            fontWeight: 800,
-          }}>
-            LIVE
-          </span>
-        </button>
-      )}
-
       {/* Ambient decorative layer — pure CSS/SVG, no image assets */}
       <div className="ambient-layer">
         <div className="ambient-topglow" />
@@ -907,28 +854,6 @@ export default function Main() {
           <button onClick={() => setShowSettings(true)} className="icon-btn-circle" title="Settings"><UtilIcon id="settings" /></button>
           <button onClick={signOut} className="icon-btn-circle" title="Logout"><UtilIcon id="logout" /></button>
         </span>
-      </div>
-
-      {/* Location pill + streak */}
-      <div style={styles.locationRow}>
-        <div 
-          className="location-pill"
-          style={{ cursor: 'pointer', transition: 'transform 0.2s' }}
-          onClick={() => setShowMapModal(true)}
-          onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
-          onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
-          title="Click to select Leveling Map"
-        >
-          <svg width="11" height="13" viewBox="0 0 11 13" fill="none" style={{ flexShrink: 0 }}>
-            <polygon points="5.5,0 11,3 11,8.5 5.5,13 0,8.5 0,3" stroke="currentColor" strokeWidth="1.2" fill="none" />
-            <circle cx="5.5" cy="6" r="1.8" fill="currentColor" />
-            <line x1="5.5" y1="0" x2="5.5" y2="2.2" stroke="currentColor" strokeWidth="1" />
-            <line x1="5.5" y1="9.8" x2="5.5" y2="13" stroke="currentColor" strokeWidth="1" />
-          </svg>
-          <span>{t('location_lbl')}:</span>
-          <span style={{ color: 'var(--neon-glow)', textShadow: '0 0 6px var(--neon-glow)' }}>{enemy.name.toUpperCase()} 🗺️</span>
-        </div>
-        <div className="location-pill" style={{ color: '#ff5f7a' }} title={t('streak_lbl')}>🔥{player.streak}</div>
       </div>
 
       {/* Simplified Player Status HUD */}
@@ -1005,8 +930,81 @@ export default function Main() {
         )
       })()}
 
-      {/* Focus timer + Target zone card */}
+      {/* Focus timer + Target zone + Deploy (Mission Terminal) */}
       <div className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.focusCard}>
+        {/* Location & Event Header */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+          <div 
+            className="location-pill"
+            style={{ cursor: 'pointer', transition: 'transform 0.2s', padding: '4px 10px' }}
+            onClick={() => setShowMapModal(true)}
+            onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
+            onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+            title="Click to select Leveling Map"
+          >
+            <svg width="11" height="13" viewBox="0 0 11 13" fill="none" style={{ flexShrink: 0 }}>
+              <polygon points="5.5,0 11,3 11,8.5 5.5,13 0,8.5 0,3" stroke="currentColor" strokeWidth="1.2" fill="none" />
+              <circle cx="5.5" cy="6" r="1.8" fill="currentColor" />
+              <line x1="5.5" y1="0" x2="5.5" y2="2.2" stroke="currentColor" strokeWidth="1" />
+              <line x1="5.5" y1="9.8" x2="5.5" y2="13" stroke="currentColor" strokeWidth="1" />
+            </svg>
+            <span>{t('location_lbl')}:</span>
+            <span style={{ color: 'var(--neon-glow)', textShadow: '0 0 6px var(--neon-glow)' }}>{enemy.name.toUpperCase()} 🗺️</span>
+          </div>
+          <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+            {player.race && (
+              <button
+                onClick={() => setShowEventModal(true)}
+                style={{
+                  background: 'rgba(255, 153, 0, 0.12)',
+                  border: '1.5px solid #ffaa00',
+                  borderRadius: '8px',
+                  padding: '3px 8px',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 4,
+                  fontFamily: "'Orbitron', sans-serif",
+                  fontSize: '11px',
+                  fontWeight: 900,
+                  letterSpacing: '1px',
+                  color: '#ffaa00',
+                  boxShadow: '0 0 10px rgba(255, 170, 0, 0.2), inset 0 0 5px rgba(255, 170, 0, 0.1)',
+                  transition: 'all 0.2s',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.05)'
+                  e.currentTarget.style.boxShadow = '0 0 15px rgba(255, 170, 0, 0.5), inset 0 0 8px rgba(255, 170, 0, 0.2)'
+                  e.currentTarget.style.background = 'rgba(255, 153, 0, 0.18)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)'
+                  e.currentTarget.style.boxShadow = '0 0 10px rgba(255, 170, 0, 0.2), inset 0 0 5px rgba(255, 170, 0, 0.1)'
+                  e.currentTarget.style.background = 'rgba(255, 153, 0, 0.12)'
+                }}
+              >
+                <span style={{ fontSize: 13, display: 'inline-block', transform: 'translateY(-1px)' }}>🏆</span>
+                <span style={{ textShadow: '0 0 5px rgba(255, 170, 0, 0.5)' }}>EVENT</span>
+                <span style={{
+                  fontSize: '8px',
+                  background: '#ff5500',
+                  color: '#fff',
+                  borderRadius: '3px',
+                  padding: '1px 3px',
+                  marginLeft: 1,
+                  fontFamily: "'Orbitron', sans-serif",
+                  fontWeight: 800,
+                }}>
+                  LIVE
+                </span>
+              </button>
+            )}
+            <div className="location-pill" style={{ color: '#ff5f7a', padding: '4px 8px' }} title={t('streak_lbl')}>🔥{player.streak}</div>
+          </div>
+        </div>
+
+        <div style={styles.divider} />
+
         <div style={styles.focusTopRow}>
           <div style={styles.ringWrap}>
             <svg width={64} height={64} viewBox="0 0 64 64">
@@ -1079,23 +1077,23 @@ export default function Main() {
             </div>
           </>
         )}
-      </div>
 
-      {/* Deploy row */}
-      <div style={styles.deployRow}>
-        {!isRunning && player.race && (
-          <button className="npc-circle-btn" onClick={() => setShowNpcModal(true)} title={t('visit_npc')}><UtilIcon id="shop" size={22} /></button>
-        )}
-        {!isRunning && !isDone && (
-          <button className="deploy-btn" onClick={player.race ? startTimer : openRaceSelect}>
-            {player.race ? t('deploy_unit') : t('select_race')}
-          </button>
-        )}
-        {isDone && (
-          <button className="deploy-btn" style={{ background: 'linear-gradient(90deg,#006000,#00c840)', color: '#fff' }} onClick={resetTimer}>
-            {t('new_session')}
-          </button>
-        )}
+        {/* Deploy row inside Focus Terminal */}
+        <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginTop: 12 }}>
+          {!isRunning && player.race && (
+            <button className="npc-circle-btn" onClick={() => setShowNpcModal(true)} title={t('visit_npc')}><UtilIcon id="shop" size={22} /></button>
+          )}
+          {!isRunning && !isDone && (
+            <button className="deploy-btn" onClick={player.race ? startTimer : openRaceSelect}>
+              {player.race ? t('deploy_unit') : t('select_race')}
+            </button>
+          )}
+          {isDone && (
+            <button className="deploy-btn" style={{ background: 'linear-gradient(90deg,#006000,#00c840)', color: '#fff' }} onClick={resetTimer}>
+              {t('new_session')}
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Modals */}

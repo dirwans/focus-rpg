@@ -1912,5 +1912,12 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - Relocated the floating `[🏆 EVENT LIVE]` widget from the top-right to the top-left (`top: 68px, left: 16px`) to prevent it from overlapping with the location pill and clean up the aesthetic view of the dashboard.
 - **Verification**: Verified React build compiles clean with no warnings and UI is properly spaced.
 
+---
+
+### 🚀 Milestone 146: Mission Control Terminal Refactor [DEPLOYED]
+- **HUD Restructuring (`src/screens/Main.jsx`)**:
+  - Consolidated the floating `Location Pill`, `Event Live Badge`, and `Deploy Unit Row` directly into the `Focus Session` panel.
+  - This unifies all mission-related activities (Location info, Duration, Target Zone, and Deploy action) into a single cohesive "Mission Control Terminal" to enhance the adventure roleplay immersion and declutter the main HUD.
+
 
 
