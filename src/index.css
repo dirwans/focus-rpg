@@ -578,8 +578,8 @@ body {
   position: relative;
   overflow: hidden;
   flex: 1;
-  padding: 10px;
-  border-radius: 14px;
+  padding: 6px 12px;
+  border-radius: 12px;
   text-align: center;
   font-family: var(--font-title);
   font-size: 16px;
