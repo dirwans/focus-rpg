@@ -108,11 +108,11 @@ export default function Ascension() {
             <div style={{ fontFamily: 'var(--font-title)', fontSize: 16, color: colors.accent, marginBottom: 12, fontWeight: 800, borderBottom: `1px solid ${colors.border}4d`, paddingBottom: 6 }}>
               {data.componentsTitle}
             </div>
-            <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: 'var(--font-mono)', fontSize: 13 }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: 'var(--font-title)', fontSize: 14 }}>
               <thead>
                 <tr>
-                  <th style={{ textAlign: 'left', padding: '6px 8px', borderBottom: '1px solid rgba(255,255,255,0.1)', color: '#88aadd' }}>Component</th>
-                  <th style={{ textAlign: 'right', padding: '6px 8px', borderBottom: '1px solid rgba(255,255,255,0.1)', color: '#88aadd' }}>Harga</th>
+                  <th style={{ textAlign: 'left', padding: '6px 8px', borderBottom: '1px solid rgba(255,255,255,0.1)', color: '#e0f4ff', fontWeight: 800 }}>Component</th>
+                  <th style={{ textAlign: 'right', padding: '6px 8px', borderBottom: '1px solid rgba(255,255,255,0.1)', color: '#e0f4ff', fontWeight: 800 }}>Harga</th>
                 </tr>
               </thead>
               <tbody>
@@ -233,7 +233,7 @@ export default function Ascension() {
                       <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, color: colors.accent, marginBottom: 8, letterSpacing: 1 }}>
                         [ BLUEPRINT LOADOUT ]
                       </div>
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 6, fontSize: 11, fontFamily: 'var(--font-mono)', color: '#aabccc' }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 10, fontSize: 13, fontFamily: 'var(--font-title)', color: '#ffffff' }}>
                         {(() => {
                           const getPart = (slot) => {
                             const arr = data.parts[bionexTab][slot]
@@ -252,9 +252,9 @@ export default function Ascension() {
                             if (slotKey === 'options') s += ` | Boost:${p.boostCharge}/${p.boostSpeed}`
 
                             return (
-                              <div style={{ marginBottom: 4 }}>
-                                <div><span style={{color, width: 60, display: 'inline-block'}}>{icon} {label}</span> <span style={{color: '#fff'}}>{p.name}</span></div>
-                                <div style={{ paddingLeft: 64, color: '#6a86a6', fontSize: 10 }}>└ {s}</div>
+                              <div style={{ marginBottom: 6 }}>
+                                <div style={{ fontWeight: 800, marginBottom: 2 }}><span style={{color, width: 70, display: 'inline-block'}}>{icon} {label}</span> <span style={{color: '#fff'}}>{p.name}</span></div>
+                                <div style={{ paddingLeft: 20, color: '#b5d4f1', fontSize: 13, fontWeight: 700 }}>└ {s}</div>
                               </div>
                             )
                           }
