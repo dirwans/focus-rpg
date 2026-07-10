@@ -216,9 +216,22 @@ export default function Ascension() {
                               </div>
                             </div>
 
-                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '16px 0', background: 'transparent' }}>
+                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '16px 0', background: 'transparent', position: 'relative' }}>
+                              {/* Cahaya dari bawah */}
+                              <div style={{
+                                position: 'absolute',
+                                bottom: 0,
+                                left: '50%',
+                                transform: 'translateX(-50%)',
+                                width: '100%',
+                                height: 120,
+                                background: `radial-gradient(ellipse at bottom, ${isSeraphys ? 'rgba(0, 255, 255, 0.25)' : 'rgba(192, 38, 211, 0.25)'}, transparent 70%)`,
+                                filter: 'blur(15px)',
+                                zIndex: 0,
+                                pointerEvents: 'none'
+                              }} />
                                 <img
-                                  src={EVO_IMAGES[`spirit_${animusKey}_${lv}`] || `/assets/spirit_${animusKey}_${lv}.png?v=4`}
+                                  src={EVO_IMAGES[`spirit_${animusKey}_${lv}`] || `/assets/spirit_${animusKey}_${lv}.png?v=6`}
                                   alt={`${aData.name} Lv.${lv}`}
                                   style={{
                                     width: '100%',
@@ -226,7 +239,9 @@ export default function Ascension() {
                                     height: 320,
                                     objectFit: 'contain',
                                     margin: '0 auto',
-                                    display: 'block'
+                                    display: 'block',
+                                    position: 'relative',
+                                    zIndex: 1
                                   }}
                                 />
                             </div>
