@@ -1970,3 +1970,18 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
  -   * * S a n c t u a r y   S h o w c a s e * * :   R e s t o r e d   t a r g e t   s t a t u s   p r e v i e w   c a r d s   f o r   L v   3 2 ,   4 2 ,   5 5 ,   a n d   6 5   i n   t h e   S a n c t u a r y   t a b .  
  -   * * S h r i n e   U n s e a l   S y s t e m * * :   A d d e d   l e v e l   c a p s   t o   A s c e n s i o n   S p i r i t s .   P l a y e r s   m u s t   n o w   p u r c h a s e   U n s e a l   C r y s t a l s   ( V e t e r a n ,   M a s t e r ,   A s c e n s i o n )   t o   b r e a k   t h r o u g h   L v   3 2 ,   4 2 ,   a n d   5 5   c a p s .  
  
+
+---
+
+### ⚙️ Milestone 151: Arctron ARES Siege Kit Shop & Assembly Mechanics [DEPLOYED]
+- **A.R.E.S. Siege Kit Material Purchasing (`src/store/gameStore.js` & `src/screens/Ascension.jsx`)**:
+  - Implemented the actual in-game purchasing of the individual **Siege Kit items** per level in the A.R.E.S. ASSEMBLY SHOP tab:
+    - **Lv.32** — **Siege Kit** (`5,000,000 CRD`)
+    - **Lv.42** — **Advanced Siege Kit** (`100,000,000 CRD`)
+    - **Lv.55** — **Shining Siege Kit** (`500,000,000 CRD`)
+    - **Lv.65** — **Adv. Shining Siege Kit** (`2,000,000,000 CRD` - Locked)
+  - Created `buySiegeKit()` store action to deduct the corresponding CRD cost and store the acquired item ID into the player's new persistent inventory state: `player.ownedSiegeKits`.
+- **Hangar Assembly Requirements check (`src/store/gameStore.js` & `src/screens/Ascension.jsx`)**:
+  - Refactored ARES upgrade check in `craftAscensionArms()`: evolution upgrades now cost **0 CRD** (free assembly) but strictly require the corresponding Siege Kit item to be owned in `player.ownedSiegeKits`.
+  - Re-labeled and updated upgrade buttons on the Hangar tab: if the material is not owned, it displays `BUTUH MATERIAL: [Siege Kit Name]` and disabled upgrade.
+- **Verification**: Verified React build (`npm run build`) compiles cleanly with zero warnings or runtime bugs.
