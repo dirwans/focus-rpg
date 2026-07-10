@@ -1985,3 +1985,20 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - Refactored ARES upgrade check in `craftAscensionArms()`: evolution upgrades now cost **0 CRD** (free assembly) but strictly require the corresponding Siege Kit item to be owned in `player.ownedSiegeKits`.
   - Re-labeled and updated upgrade buttons on the Hangar tab: if the material is not owned, it displays `BUTUH MATERIAL: [Siege Kit Name]` and disabled upgrade.
 - **Verification**: Verified React build (`npm run build`) compiles cleanly with zero warnings or runtime bugs.
+
+---
+
+### ⚙️ Milestone 152: Faction Crafting Drop Items Refactor & Asset Sync [DEPLOYED]
+- **Monster Drop Items Database Update (`src/data/items.json`)**:
+  - Renamed drop items `mat_drop_f` through `mat_drop_l` to represent specific mecha components based on their visual designs:
+    - `mat_drop_f` -> **Plasma Ignition Core** (Rare, Power Source)
+    - `mat_drop_g` -> **Zero-Flux Encryption Chip** (Epic, Accessories)
+    - `mat_drop_h` -> **Kinetic Rotor Core** (Epic, Boosters/Capes)
+    - `mat_drop_i` -> **Gravity Nullifier Base** (Legendary, Flight Boosters)
+    - `mat_drop_j` -> **Singularity Core Matrix** (Legendary, Heavy Armor/Shield)
+    - `mat_drop_k` -> **Tear of Nexus Catalyst** (Mythic, Amulets/Rings)
+    - `mat_drop_l` -> **Nova Star Catalyst** (Mythic, Ultimate Weapons)
+  - Updated all associated item descriptions to reflect their specific roles in faction crafting.
+- **Physical Assets Renaming (`public/assets/items/`)**:
+  - Renamed the PNG assets on disk to match the clean naming standard (e.g. `drop_item_f.png` -> `plasma_ignition_core.png`, etc.) and synchronized the `image` fields in `items.json` accordingly.
+- **Verification**: Verified React build (`npm run build`) compiles cleanly with no missing asset warnings.
