@@ -105,17 +105,22 @@ export default function AscensionSpiritShopModal({ player, raceData }) {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
                 
                 {/* HEADER INFO */}
-                <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
-                  <div style={{ width: 100, height: 100, background: 'rgba(255,255,255,0.05)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', border: `1px solid ${colors.accent}4d`, padding: 8 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'center', textAlign: 'center' }}>
+                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '8px 0', background: 'transparent' }}>
                     <img
                       src={`/assets/spirit_${activeSlot}_${currentLv >= 65 ? 65 : currentLv >= 55 ? 55 : currentLv >= 42 ? 42 : 32}.png?v=1`}
                       alt={aData.name}
-                      style={{ maxWidth: '100%', maxHeight: 100, objectFit: 'contain', filter: `drop-shadow(0 0 10px ${colors.accent})` }}
+                      style={{
+                        width: 320,
+                        height: 320,
+                        objectFit: 'contain',
+                        filter: `drop-shadow(0 0 15px ${activeSlot === 'seraphys' ? 'rgba(68, 255, 136, 0.4)' : 'rgba(255, 68, 68, 0.4)'}) drop-shadow(0 0 3px ${activeSlot === 'seraphys' ? '#44ff88' : '#ff4444'})`
+                      }}
                     />
                   </div>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ fontFamily: 'var(--font-title)', fontSize: 20, color: '#fff', fontWeight: 900 }}>{aData.name}</div>
-                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: colors.accent, marginBottom: 8 }}>
+                  <div>
+                    <div style={{ fontFamily: 'var(--font-title)', fontSize: 22, color: '#fff', fontWeight: 900 }}>{aData.name}</div>
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: colors.accent, margin: '8px 0' }}>
                       {aData.description}
                     </div>
                     {isSummoned && (

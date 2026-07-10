@@ -10,6 +10,7 @@ import titlesData from '../data/titles.json'
 import { getWeaponRarityBonus } from '../lib/rarity'
 import { TRANSLATIONS } from '../lib/translationData'
 import baseStatsData from '../data/baseStats.json'
+import ascensionArmsData from '../data/ascensionArms.json'
 
 function tStore(key, replacements = {}, playerState = null) {
   const language = playerState?.language || 'en'
@@ -3069,6 +3070,26 @@ export const useGameStore = create(
               // Usually PT is handled elsewhere, but if it gives direct stats we can map it
             }
           })
+        }
+
+        // Active Celestra Animus (Seraphys / Noctyrna) Bonus
+        if (player.race === 'celestra' && player.activeAnimus) {
+          const animusLv = player.celestraAnimus?.[player.activeAnimus] || 1
+          const lvBonus = Math.max(0, animusLv - 1)
+          const animusInfo = ascensionArmsData.celestra?.animus?.[player.activeAnimus]
+          if (animusInfo) {
+            if (player.activeAnimus === 'seraphys') {
+              flatHp += Math.round((animusInfo.baseHp || 0) + ((animusInfo.growthHp || 0) * lvBonus))
+              flatDef += Math.round((animusInfo.baseDef || 0) + ((animusInfo.growthDef || 0) * lvBonus))
+            } else if (player.activeAnimus === 'noctyrna') {
+              const minForce = (animusInfo.baseForceAtkMin || 0) + ((animusInfo.growthForceAtkMin || 0) * lvBonus)
+              const maxForce = (animusInfo.baseForceAtkMax || 0) + ((animusInfo.growthForceAtkMax || 0) * lvBonus)
+              flatAtk += Math.round((minForce + maxForce) / 2)
+              flatHp += Math.round((animusInfo.baseHp || 0) + ((animusInfo.growthHp || 0) * lvBonus))
+              flatDef += Math.round((animusInfo.baseDef || 0) + ((animusInfo.growthDef || 0) * lvBonus))
+              critBonus += (animusInfo.baseCrit || 0) + ((animusInfo.growthCrit || 0) * lvBonus)
+            }
+          }
         }
 
         // GM PT and Ascension Arms Bonuses

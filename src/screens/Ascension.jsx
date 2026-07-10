@@ -153,10 +153,21 @@ export default function Ascension() {
                   <div style={{ marginTop: 16, background: 'rgba(0,0,0,0.4)', padding: 12, borderRadius: 8, border: `1px solid ${colors.border}4d` }}>
                     <div style={{ fontFamily: 'var(--font-title)', fontSize: 14, color: '#44ff88', marginBottom: 8 }}>✨ ACTIVE SPIRIT: {aData.name} (Lv.{currentLv})</div>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, fontFamily: 'var(--font-mono)', fontSize: 13, color: '#fff' }}>
-                      <div>ATK: <span style={{ color: '#ff4444' }}>{(aData.baseAtk + (aData.growthAtk * lvBonus)).toLocaleString()}</span></div>
-                      <div>DEF: <span style={{ color: '#4488ff' }}>{(aData.baseDef + (aData.growthDef * lvBonus)).toLocaleString()}</span></div>
-                      <div>HP: <span style={{ color: '#44ff88' }}>{(aData.baseHp + (aData.growthHp * lvBonus)).toLocaleString()}</span></div>
-                      <div>CRIT: <span style={{ color: '#ffcc00' }}>{(aData.baseCrit + (aData.growthCrit * lvBonus)).toFixed(1)}%</span></div>
+                      {player.activeAnimus === 'seraphys' ? (
+                        <>
+                          <div>✨ HEAL: <span style={{ color: '#44ff88' }}>+{(aData.baseHeal + (aData.growthHeal * lvBonus)).toLocaleString()} HP/s</span></div>
+                          <div>🛡️ DEF: <span style={{ color: '#4488ff' }}>+{(aData.baseDef + (aData.growthDef * lvBonus)).toLocaleString()}</span></div>
+                          <div>❤️ HP: <span style={{ color: '#ff4444' }}>+{(aData.baseHp + (aData.growthHp * lvBonus)).toLocaleString()}</span></div>
+                          <div>🩹 CURE: <span style={{ color: '#ffcc00' }}>+{(aData.baseCure + (aData.growthCure * lvBonus)).toFixed(1)}% Rate</span></div>
+                        </>
+                      ) : (
+                        <>
+                          <div>🌑 DPS: <span style={{ color: '#ff4444' }}>{(aData.baseForceAtkMin + (aData.growthForceAtkMin * lvBonus)).toLocaleString()}-{(aData.baseForceAtkMax + (aData.growthForceAtkMax * lvBonus)).toLocaleString()}</span></div>
+                          <div>💥 CRIT: <span style={{ color: '#ffcc00' }}>+{(aData.baseCrit + (aData.growthCrit * lvBonus)).toFixed(1)}%</span></div>
+                          <div>⚡ STUN: <span style={{ color: '#44ccff' }}>+{(aData.baseStun + (aData.growthStun * lvBonus)).toFixed(1)}%</span></div>
+                          <div>❤️ HP: <span style={{ color: '#44ff88' }}>{(aData.baseHp + (aData.growthHp * lvBonus)).toLocaleString()}</span></div>
+                        </>
+                      )}
                     </div>
                   </div>
                 )
@@ -173,10 +184,7 @@ export default function Ascension() {
                       const milestoneLevels = [32, 42, 55, 65];
                       
                       return milestoneLevels.map(lv => {
-                        const targetAtk = aData.baseAtk + (aData.growthAtk * (lv - 1));
-                        const targetHp = aData.baseHp + (aData.growthHp * (lv - 1));
-                        const targetDef = aData.baseDef + (aData.growthDef * (lv - 1));
-                        const targetCrit = aData.baseCrit + (aData.growthCrit * (lv - 1));
+                        const isSeraphys = animusKey === 'seraphys';
                         
                         return (
                           <div key={`${animusKey}-${lv}`} style={{ padding: 12, border: `1px solid ${colors.border}4d`, borderRadius: 8, background: 'rgba(255,255,255,0.02)' }}>
@@ -189,20 +197,35 @@ export default function Ascension() {
                               </div>
                             </div>
                             
-                            <div style={{ display: 'flex', gap: 12, marginBottom: 12 }}>
-                              <div style={{ flex: 1, minHeight: 100, background: 'rgba(0,0,0,0.5)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 6, border: `1px solid ${colors.border}4d` }}>
-                                <img
-                                  src={EVO_IMAGES[`spirit_${animusKey}_${lv}`] || `/assets/spirit_${animusKey}_${lv}.png?v=1`}
-                                  alt={`${aData.name} Lv.${lv}`}
-                                  style={{ maxWidth: '100%', maxHeight: 100, objectFit: 'contain', filter: `drop-shadow(0 0 10px ${colors.accent})` }}
-                                />
-                              </div>
-                              <div style={{ flex: 3, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 4, fontSize: 12, fontFamily: 'var(--font-mono)' }}>
-                                <div style={{ color: '#fff' }}>⚔️ ATK +{targetAtk.toLocaleString()}</div>
-                                <div style={{ color: '#fff' }}>🛡️ DEF +{targetDef.toLocaleString()}</div>
-                                <div style={{ color: '#ff4444' }}>❤️ HP +{targetHp.toLocaleString()}</div>
-                                <div style={{ color: '#ffaa00' }}>💥 CRIT +{targetCrit.toFixed(1)}%</div>
-                              </div>
+                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '16px 0', background: 'transparent' }}>
+                              <img
+                                src={EVO_IMAGES[`spirit_${animusKey}_${lv}`] || `/assets/spirit_${animusKey}_${lv}.png?v=1`}
+                                alt={`${aData.name} Lv.${lv}`}
+                                style={{
+                                  width: 320,
+                                  height: 320,
+                                  objectFit: 'contain',
+                                  filter: `drop-shadow(0 0 15px ${isSeraphys ? 'rgba(68, 255, 136, 0.4)' : 'rgba(255, 68, 68, 0.4)'}) drop-shadow(0 0 3px ${isSeraphys ? '#44ff88' : '#ff4444'})`
+                                }}
+                              />
+                            </div>
+
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, padding: 12, background: 'rgba(0,0,0,0.4)', borderRadius: 8, border: `1px solid ${colors.border}4d`, fontSize: 13, fontFamily: 'var(--font-mono)', marginBottom: 8 }}>
+                              {isSeraphys ? (
+                                <>
+                                  <div>✨ HEAL: <span style={{ color: '#44ff88' }}>+{(aData.baseHeal + (aData.growthHeal * (lv - 1))).toLocaleString()} HP/s</span></div>
+                                  <div>🛡️ DEF: <span style={{ color: '#4488ff' }}>+{(aData.baseDef + (aData.growthDef * (lv - 1))).toLocaleString()}</span></div>
+                                  <div>❤️ HP: <span style={{ color: '#ff4444' }}>+{(aData.baseHp + (aData.growthHp * (lv - 1))).toLocaleString()}</span></div>
+                                  <div>🩹 CURE: <span style={{ color: '#ffcc00' }}>+{(aData.baseCure + (aData.growthCure * (lv - 1))).toFixed(1)}% Rate</span></div>
+                                </>
+                              ) : (
+                                <>
+                                  <div>🌑 DPS: <span style={{ color: '#ff4444' }}>{(aData.baseForceAtkMin + (aData.growthForceAtkMin * (lv - 1))).toLocaleString()}-{(aData.baseForceAtkMax + (aData.growthForceAtkMax * (lv - 1))).toLocaleString()}</span></div>
+                                  <div>💥 CRIT: <span style={{ color: '#ffcc00' }}>+{(aData.baseCrit + (aData.growthCrit * (lv - 1))).toFixed(1)}%</span></div>
+                                  <div>⚡ STUN: <span style={{ color: '#44ccff' }}>+{(aData.baseStun + (aData.growthStun * (lv - 1))).toFixed(1)}%</span></div>
+                                  <div>❤️ HP: <span style={{ color: '#44ff88' }}>+{(aData.baseHp + (aData.growthHp * (lv - 1))).toLocaleString()}</span></div>
+                                </>
+                              )}
                             </div>
                             
                             <div style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: '#888', textAlign: 'center', padding: 6, background: 'rgba(0,0,0,0.3)', borderRadius: 4 }}>
