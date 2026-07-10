@@ -235,22 +235,39 @@ export default function Ascension() {
                       </div>
                       <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 6, fontSize: 11, fontFamily: 'var(--font-mono)', color: '#aabccc' }}>
                         {(() => {
-                          // Ambil parts paling optimal untuk level ini
                           const getPart = (slot) => {
                             const arr = data.parts[bionexTab][slot]
-                            if (!arr) return 'N/A'
-                            const valid = arr.filter(p => p.lvl <= evo.levelReq + 2) // +2 margin
-                            return valid.length > 0 ? valid[valid.length - 1].name : 'Base Part'
+                            if (!arr) return null
+                            const valid = arr.filter(p => p.lvl <= evo.levelReq + 2)
+                            return valid.length > 0 ? valid[valid.length - 1] : null
                           }
+                          
+                          const renderSlot = (icon, label, color, slotKey) => {
+                            const p = getPart(slotKey)
+                            if (!p) return null
+                            let s = `Lvl:${p.lvl} | PT:${p.pt} | Def:${p.def}`
+                            if (slotKey === 'head') s += ` | AttM:${p.attM} | DefM:${p.defM}`
+                            if (slotKey === 'upper' || slotKey === 'lower') s += ` | DefM:${p.defM} | Fire:${p.fire} | Water:${p.water}`
+                            if (slotKey === 'arms' || slotKey === 'arms2') s += ` | AttM:${p.attM} | Atk:${p.minAtk}-${p.maxAtk}`
+                            if (slotKey === 'options') s += ` | Boost:${p.boostCharge}/${p.boostSpeed}`
+
+                            return (
+                              <div style={{ marginBottom: 4 }}>
+                                <div><span style={{color, width: 60, display: 'inline-block'}}>{icon} {label}</span> <span style={{color: '#fff'}}>{p.name}</span></div>
+                                <div style={{ paddingLeft: 64, color: '#6a86a6', fontSize: 10 }}>└ {s}</div>
+                              </div>
+                            )
+                          }
+                          
                           return (
-                            <>
-                              <div><span style={{color: '#88aadd', width: 60, display: 'inline-block'}}>⚙️ Head</span> {getPart('head')}</div>
-                              <div><span style={{color: '#88aadd', width: 60, display: 'inline-block'}}>🛡️ Core</span> {getPart('upper')}</div>
-                              <div><span style={{color: '#88aadd', width: 60, display: 'inline-block'}}>🦵 Legs</span> {getPart('lower')}</div>
-                              <div><span style={{color: '#f5a623', width: 60, display: 'inline-block'}}>⚔️ Arms</span> {getPart('arms')}</div>
-                              <div><span style={{color: '#f5a623', width: 60, display: 'inline-block'}}>🚀 Sub</span> {getPart('arms2')}</div>
-                              <div><span style={{color: '#44ff88', width: 60, display: 'inline-block'}}>⚡ Boost</span> {getPart('options')}</div>
-                            </>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                              {renderSlot('⚙️', 'Head', '#88aadd', 'head')}
+                              {renderSlot('🛡️', 'Core', '#88aadd', 'upper')}
+                              {renderSlot('🦵', 'Legs', '#88aadd', 'lower')}
+                              {renderSlot('⚔️', 'Arms', '#f5a623', 'arms')}
+                              {renderSlot('🚀', 'Sub', '#f5a623', 'arms2')}
+                              {renderSlot('⚡', 'Boost', '#44ff88', 'options')}
+                            </div>
                           )
                         })()}
                       </div>
