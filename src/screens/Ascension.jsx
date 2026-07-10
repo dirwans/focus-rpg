@@ -31,7 +31,7 @@ const EVO_IMAGES = {
   spirit_noctyrna_32: '/assets/spirit_noctyrna_32.png?v=4',
   spirit_noctyrna_42: '/assets/spirit_noctyrna_42.png?v=4',
   spirit_noctyrna_55: '/assets/spirit_noctyrna_55.png?v=4',
-  spirit_noctyrna_65: '/assets/spirit_noctyrna_65.png?v=7',
+  spirit_noctyrna_65: '/assets/spirit_noctyrna_65.png?v=8',
 }
 
 const RACE_COLORS = {
@@ -246,27 +246,74 @@ export default function Ascension() {
                                 />
                             </div>
 
-                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, padding: 12, background: 'rgba(0,0,0,0.4)', borderRadius: 8, border: `1px solid ${colors.border}4d`, fontSize: 13, fontFamily: 'var(--font-mono)', marginBottom: 8 }}>
-                              {isSeraphys ? (
-                                <>
-                                  <div>✨ HEAL: <span style={{ color: '#44ff88' }}>+{(aData.baseHeal + (aData.growthHeal * (lv - 1))).toLocaleString()} HP/s</span></div>
-                                  <div>🛡️ DEF: <span style={{ color: '#4488ff' }}>+{(aData.baseDef + (aData.growthDef * (lv - 1))).toLocaleString()}</span></div>
-                                  <div>❤️ HP: <span style={{ color: '#ff4444' }}>+{(aData.baseHp + (aData.growthHp * (lv - 1))).toLocaleString()}</span></div>
-                                  <div>🩹 CURE: <span style={{ color: '#ffcc00' }}>+{(aData.baseCure + (aData.growthCure * (lv - 1))).toFixed(1)}% Rate</span></div>
-                                </>
-                              ) : (
-                                <>
-                                  <div>🌑 DPS: <span style={{ color: '#ff4444' }}>{(aData.baseForceAtkMin + (aData.growthForceAtkMin * (lv - 1))).toLocaleString()}-{(aData.baseForceAtkMax + (aData.growthForceAtkMax * (lv - 1))).toLocaleString()}</span></div>
-                                  <div>💥 CRIT: <span style={{ color: '#ffcc00' }}>+{(aData.baseCrit + (aData.growthCrit * (lv - 1))).toFixed(1)}%</span></div>
-                                  <div>⚡ STUN: <span style={{ color: '#44ccff' }}>+{(aData.baseStun + (aData.growthStun * (lv - 1))).toFixed(1)}%</span></div>
-                                  <div>❤️ HP: <span style={{ color: '#44ff88' }}>+{(aData.baseHp + (aData.growthHp * (lv - 1))).toLocaleString()}</span></div>
-                                </>
-                              )}
-                            </div>
-
-                            <div style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: '#888', textAlign: 'center', padding: 6, background: 'rgba(0,0,0,0.3)', borderRadius: 4 }}>
-                              Preview Target Status (Showcase)
-                            </div>
+                              <div style={{
+                                display: 'grid',
+                                gridTemplateColumns: '1fr 1fr',
+                                gap: 5,
+                                padding: 10,
+                                background: 'rgba(0,0,0,0.5)',
+                                borderRadius: 6,
+                                border: `1px solid ${colors.border}44`,
+                                marginBottom: 8,
+                              }}>
+                                {isSeraphys ? (
+                                  <>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-title)', fontWeight: 900, fontSize: 12, color: '#88aadd' }}>
+                                      <span>HEAL</span>
+                                      <span style={{ color: '#44ff88', textShadow: '0 0 5px rgba(68,255,136,0.6)' }}>+{(aData.baseHeal + aData.growthHeal * (lv - 1)).toLocaleString()} HP/s</span>
+                                    </div>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-title)', fontWeight: 900, fontSize: 12, color: '#88aadd' }}>
+                                      <span>DEF</span>
+                                      <span style={{ color: '#4488ff', textShadow: '0 0 5px rgba(68,136,255,0.6)' }}>+{(aData.baseDef + aData.growthDef * (lv - 1)).toLocaleString()}</span>
+                                    </div>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-title)', fontWeight: 900, fontSize: 12, color: '#88aadd' }}>
+                                      <span>HP</span>
+                                      <span style={{ color: '#ff4444', textShadow: '0 0 5px rgba(255,68,68,0.6)' }}>+{(aData.baseHp + aData.growthHp * (lv - 1)).toLocaleString()}</span>
+                                    </div>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-title)', fontWeight: 900, fontSize: 12, color: '#88aadd' }}>
+                                      <span>CURE</span>
+                                      <span style={{ color: '#ffcc00', textShadow: '0 0 5px rgba(255,204,0,0.6)' }}>+{(aData.baseCure + aData.growthCure * (lv - 1)).toFixed(1)}%</span>
+                                    </div>
+                                  </>
+                                ) : (
+                                  <>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-title)', fontWeight: 900, fontSize: 12, color: '#88aadd', gridColumn: '1/-1' }}>
+                                      <span>DPS</span>
+                                      <span style={{ color: '#ff4444', textShadow: '0 0 5px rgba(255,68,68,0.6)' }}>
+                                        {(aData.baseForceAtkMin + aData.growthForceAtkMin * (lv - 1)).toLocaleString()} — {(aData.baseForceAtkMax + aData.growthForceAtkMax * (lv - 1)).toLocaleString()}
+                                      </span>
+                                    </div>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-title)', fontWeight: 900, fontSize: 12, color: '#88aadd' }}>
+                                      <span>CRIT</span>
+                                      <span style={{ color: '#ffcc00', textShadow: '0 0 5px rgba(255,204,0,0.6)' }}>+{(aData.baseCrit + aData.growthCrit * (lv - 1)).toFixed(1)}%</span>
+                                    </div>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-title)', fontWeight: 900, fontSize: 12, color: '#88aadd' }}>
+                                      <span>STUN</span>
+                                      <span style={{ color: '#44ccff', textShadow: '0 0 5px rgba(68,204,255,0.6)' }}>+{(aData.baseStun + aData.growthStun * (lv - 1)).toFixed(1)}%</span>
+                                    </div>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-title)', fontWeight: 900, fontSize: 12, color: '#88aadd' }}>
+                                      <span>HP</span>
+                                      <span style={{ color: '#44ff88', textShadow: '0 0 5px rgba(68,255,136,0.6)' }}>+{(aData.baseHp + aData.growthHp * (lv - 1)).toLocaleString()}</span>
+                                    </div>
+                                  </>
+                                )}
+                              </div>
+                              {/* Preview badge */}
+                              <div style={{
+                                fontSize: 10,
+                                fontFamily: 'var(--font-title)',
+                                fontWeight: 900,
+                                letterSpacing: 2,
+                                color: isUnlocked ? colors.accent : '#7590B7',
+                                textAlign: 'center',
+                                padding: 5,
+                                background: 'rgba(0,0,0,0.3)',
+                                borderRadius: 4,
+                                border: `1px solid ${colors.border}22`,
+                                textShadow: isUnlocked ? `0 0 5px ${colors.accent}` : 'none',
+                              }}>
+                                ▶ PREVIEW · LV.{lv} · {isUnlocked ? 'UNLOCKED ✓' : `NEED SPIRIT LV.${lv}`}
+                              </div>
                           </div>
                         )
                       })
