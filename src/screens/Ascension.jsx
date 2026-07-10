@@ -492,6 +492,8 @@ export default function Ascension() {
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: '#b5d4f1', textAlign: 'center', marginBottom: 20 }}>
                 {player.race === 'bionex' 
                   ? "Beli dan rakit suku cadang untuk memperkuat M.E.U. kamu. Stats dari spare parts yang kamu beli akan langsung diakumulasikan ke mecha kamu!" 
+                  : player.race === 'arctron'
+                  ? "Siege Kit untuk Launcher — senjata pemusnah eksklusif ras Arctron. Beli dari NPC vendor di bawah ini."
                   : "Shop sedang dalam persiapan. (Segera Hadir)"}
               </div>
               
@@ -507,6 +509,91 @@ export default function Ascension() {
                 >
                   🛒 BUKA KATALOG PARTS
                 </button>
+              ) : player.race === 'arctron' ? (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                  {/* SIEGE KIT ITEMS PER LEVEL */}
+                  <div style={{ fontFamily: 'var(--font-title)', fontSize: 14, color: colors.accent, fontWeight: 800, borderBottom: `1px solid ${colors.border}4d`, paddingBottom: 6 }}>
+                    🔧 Siege Kit Items (per Level)
+                  </div>
+                  {[
+                    { lv: 32, name: 'Siege Kit', rfLv: 30, atkBuff: '+20%', durability: '1,100', range: '1-50', price: '5,000,000 CRD', desc: 'Basic launcher siege kit untuk pemula.' },
+                    { lv: 42, name: 'Advanced Siege Kit', rfLv: 40, atkBuff: '+40%', durability: '1,500', range: '1-57', price: '100,000,000 CRD', desc: 'Siege kit tingkat menengah dengan jarak tembak lebih jauh.' },
+                    { lv: 55, name: 'Shining Siege Kit', rfLv: 55, atkBuff: '+55%', durability: '2,000', range: '1-65', price: '500,000,000 CRD', desc: 'Siege kit bercahaya — daya tembak sangat tinggi.' },
+                    { lv: 65, name: 'Adv. Shining Siege Kit', rfLv: 65, atkBuff: '+65%', durability: '2,500', range: '1-72', price: '2,000,000,000 CRD', desc: 'Siege kit elit. Senjata pamungkas Arctron.', locked: true },
+                  ].map((kit) => {
+                    const isOwned = (player.ascensionArms || []).includes(data.evolutions?.find(e => e.levelReq === kit.lv)?.id)
+                    return (
+                      <div key={kit.lv} style={{ padding: 12, border: `1px solid ${colors.border}4d`, borderRadius: 8, background: isOwned ? 'rgba(255,140,0,0.08)' : 'rgba(255,255,255,0.02)' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+                          <div style={{ fontFamily: 'var(--font-title)', fontSize: 14, color: '#fff', fontWeight: 900 }}>
+                            {kit.locked ? '🔒 ' : '🚀 '}{kit.name}
+                          </div>
+                          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: colors.accent, padding: '2px 8px', background: `${colors.accent}22`, borderRadius: 4, fontWeight: 800 }}>
+                            Lv.{kit.lv}
+                          </div>
+                        </div>
+                        <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#8899aa', marginBottom: 8 }}>
+                          {kit.desc}
+                        </div>
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 4, fontFamily: 'var(--font-mono)', fontSize: 12 }}>
+                          <div>⚔️ ATK: <span style={{ color: '#ff8c00' }}>{kit.atkBuff}</span></div>
+                          <div>🎯 Range: <span style={{ color: '#44ccff' }}>{kit.range}</span></div>
+                          <div>🛡️ Durability: <span style={{ color: '#88aadd' }}>{kit.durability}</span></div>
+                          <div>💰 Price: <span style={{ color: '#f5a623' }}>{kit.price}</span></div>
+                        </div>
+                        {isOwned && (
+                          <div style={{ marginTop: 8, padding: '4px 0', textAlign: 'center', color: '#44ff88', fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 900 }}>
+                            ✓ ACQUIRED
+                          </div>
+                        )}
+                        {kit.locked && (
+                          <div style={{ marginTop: 8, padding: '4px 0', textAlign: 'center', color: '#ff4444', fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 900 }}>
+                            🔒 LOCKED (BELUM DILIRIS)
+                          </div>
+                        )}
+                      </div>
+                    )
+                  })}
+
+                  {/* NPC VENDOR INFO */}
+                  {data.npcVendors && data.npcVendors.length > 0 && (
+                    <details style={{ background: 'rgba(0,0,0,0.3)', border: `1px dashed ${colors.border}80`, borderRadius: 6 }}>
+                      <summary style={{ padding: 10, cursor: 'pointer', fontFamily: 'var(--font-title)', fontSize: 13, color: colors.accent, fontWeight: 800, outline: 'none' }}>
+                        🏪 NPC VENDOR LOCATIONS ({data.npcVendors.length})
+                      </summary>
+                      <div style={{ padding: '0 12px 12px 12px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+                        {data.npcVendors.map((npc, i) => (
+                          <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, padding: 8, background: 'rgba(255,255,255,0.02)', borderRadius: 4, borderLeft: `3px solid ${colors.accent}` }}>
+                            <div style={{ flex: 1 }}>
+                              <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: '#fff', fontWeight: 800 }}>
+                                {npc.name}
+                              </div>
+                              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#ff8c00', marginTop: 2 }}>
+                                📍 {npc.location}
+                              </div>
+                              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#7590B7', marginTop: 2 }}>
+                                {npc.info}
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </details>
+                  )}
+
+                  {/* ITEM PROPERTIES */}
+                  <div style={{ padding: 10, background: 'rgba(255,140,0,0.06)', borderRadius: 6, border: `1px solid ${colors.border}33` }}>
+                    <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, color: colors.accent, marginBottom: 6, fontWeight: 800 }}>
+                      📋 ITEM PROPERTIES
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 4, fontFamily: 'var(--font-mono)', fontSize: 11, color: '#b5d4f1' }}>
+                      <div>Trade to Player: <span style={{ color: '#44ff88' }}>✓ Yes</span></div>
+                      <div>Sell to NPC: <span style={{ color: '#44ff88' }}>✓ Yes</span></div>
+                      <div>Drop to Ground: <span style={{ color: '#44ff88' }}>✓ Yes</span></div>
+                      <div>Store to Bank: <span style={{ color: '#44ff88' }}>✓ Yes</span></div>
+                    </div>
+                  </div>
+                </div>
               ) : (
                 <div style={{ padding: 20, textAlign: 'center', color: '#ff4444', fontFamily: 'var(--font-title)', fontWeight: 800 }}>
                   [ OUT OF STOCK ]

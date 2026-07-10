@@ -73,6 +73,33 @@
         "costLabel": "2,000,000,000 CRD",
         "locked": true
       }
+    ],
+    "npcVendors": [
+      {
+        "name": "MISCELLANEOUS (Porty)",
+        "location": "Ether of Heaven",
+        "info": "Sell 34 items, 3 Quests Available"
+      },
+      {
+        "name": "TOOL (TOOL)",
+        "location": "Elan Plateau",
+        "info": "Sell 40 items"
+      },
+      {
+        "name": "TOOL (Valkyrie Rootso)",
+        "location": "Outcast Land",
+        "info": "Sell 67 items, 9 Quests Available"
+      },
+      {
+        "name": "PAYBOX (Miti)",
+        "location": "Ether of Heaven",
+        "info": "Sell 48 items"
+      },
+      {
+        "name": "Projectile Consumable Vendor (AR24-33-2581)",
+        "location": "Accretia HQ",
+        "info": "Sell 100 items"
+      }
     ]
   },
   "bionex": {
