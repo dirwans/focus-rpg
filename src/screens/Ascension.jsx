@@ -218,61 +218,121 @@ export default function Ascension() {
                     </div>
                   )}
                   
-                  <div style={{ display: 'flex', gap: 16, marginBottom: 12, fontSize: 13, fontFamily: 'var(--font-mono)', color: '#e0f4ff', flexWrap: 'wrap' }}>
-                    <div><span style={{color: '#f5a623'}}>⚔️ ATK</span> +{evo.atk.toLocaleString()}</div>
-                    <div><span style={{color: '#44ff88'}}>❤️ HP</span> +{evo.hp.toLocaleString()}</div>
-                    <div><span style={{color: colors.accent}}>💥 CRIT</span> +{evo.crit}%</div>
-                  </div>
+                  {/* STATS & BLUEPRINT HANGAR */}
+                  {(() => {
+                    if (player.race !== 'bionex' || !data.parts || !data.parts[bionexTab]) {
+                      // Non-bionex or missing data, just show the hardcoded ATK/HP/CRIT
+                      return (
+                        <div style={{ display: 'flex', gap: 16, marginBottom: 12, fontSize: 13, fontFamily: 'var(--font-mono)', color: '#e0f4ff', flexWrap: 'wrap' }}>
+                          <div><span style={{color: '#f5a623'}}>⚔️ ATK</span> +{evo.atk.toLocaleString()}</div>
+                          <div><span style={{color: '#44ff88'}}>❤️ HP</span> +{evo.hp.toLocaleString()}</div>
+                          <div><span style={{color: colors.accent}}>💥 CRIT</span> +{evo.crit}%</div>
+                        </div>
+                      );
+                    }
 
-                  {/* BLUEPRINT HANGAR KHUSUS BIONEX */}
-                  {player.race === 'bionex' && data.parts && data.parts[bionexTab] && (
-                    <div style={{
-                      marginTop: 8, marginBottom: 16, padding: 12, background: 'rgba(0,0,0,0.4)',
-                      border: `1px dashed ${colors.border}80`, borderRadius: 6
-                    }}>
-                      <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, color: colors.accent, marginBottom: 8, letterSpacing: 1 }}>
-                        [ BLUEPRINT LOADOUT ]
-                      </div>
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 10, fontSize: 13, fontFamily: 'var(--font-title)', color: '#ffffff' }}>
-                        {(() => {
-                          const getPart = (slot) => {
-                            const arr = data.parts[bionexTab][slot]
-                            if (!arr) return null
-                            const valid = arr.filter(p => p.lvl <= evo.levelReq + 2)
-                            return valid.length > 0 ? valid[valid.length - 1] : null
-                          }
-                          
-                          const renderSlot = (icon, label, color, slotKey) => {
-                            const p = getPart(slotKey)
-                            if (!p) return null
-                            let s = `Lvl:${p.lvl} | PT:${p.pt} | Def:${p.def}`
-                            if (slotKey === 'head') s += ` | AttM:${p.attM} | DefM:${p.defM}`
-                            if (slotKey === 'upper' || slotKey === 'lower') s += ` | DefM:${p.defM} | Fire:${p.fire} | Water:${p.water}`
-                            if (slotKey === 'arms' || slotKey === 'arms2') s += ` | AttM:${p.attM} | Atk:${p.minAtk}-${p.maxAtk}`
-                            if (slotKey === 'options') s += ` | Boost:${p.boostCharge}/${p.boostSpeed}`
+                    // Calculate dynamic totals for Bionex MEU
+                    const getPart = (slotKey) => {
+                      const arr = data.parts[bionexTab][slotKey];
+                      if (!arr) return null;
+                      const valid = arr.filter(p => p.lvl <= evo.levelReq + 2);
+                      return valid.length > 0 ? valid[valid.length - 1] : null;
+                    };
 
-                            return (
-                              <div style={{ marginBottom: 6 }}>
-                                <div style={{ fontWeight: 800, marginBottom: 2 }}><span style={{color, width: 70, display: 'inline-block'}}>{icon} {label}</span> <span style={{color: '#fff'}}>{p.name}</span></div>
-                                <div style={{ paddingLeft: 20, color: '#b5d4f1', fontSize: 13, fontWeight: 700 }}>└ {s}</div>
-                              </div>
-                            )
-                          }
-                          
-                          return (
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                              {renderSlot('⚙️', 'Head', '#88aadd', 'head')}
-                              {renderSlot('🛡️', 'Core', '#88aadd', 'upper')}
-                              {renderSlot('🦵', 'Legs', '#88aadd', 'lower')}
-                              {renderSlot('⚔️', 'Arms', '#f5a623', 'arms')}
-                              {renderSlot('🚀', 'Arms-II', '#f5a623', 'arms2')}
-                              {renderSlot('⚡', 'Boost', '#44ff88', 'options')}
-                            </div>
-                          )
-                        })()}
+                    const parts = {
+                      head: getPart('head'),
+                      upper: getPart('upper'),
+                      lower: getPart('lower'),
+                      arms: getPart('arms'),
+                      arms2: getPart('arms2'),
+                      options: getPart('options')
+                    };
+
+                    let tPT = 0, tDef = 0, tAttM = 0, tDefM = 0;
+                    let tFire = 0, tWater = 0, tSoil = 0, tWind = 0;
+                    let tMinAtk = 0, tMaxAtk = 0;
+                    let tBoostCharge = 0, tBoostSpeed = 0;
+
+                    Object.values(parts).forEach(p => {
+                      if (!p) return;
+                      tPT += (p.pt || 0);
+                      tDef += (p.def || 0);
+                      tAttM += (p.attM || 0);
+                      tDefM += (p.defM || 0);
+                      tFire += (p.fire || 0);
+                      tWater += (p.water || 0);
+                      tSoil += (p.soil || 0);
+                      tWind += (p.wind || 0);
+                      tMinAtk += (p.minAtk || 0);
+                      tMaxAtk += (p.maxAtk || 0);
+                      tBoostCharge += (p.boostCharge || 0);
+                      tBoostSpeed += (p.boostSpeed || 0);
+                    });
+
+                    return (
+                      <div style={{ marginBottom: 16 }}>
+                        {/* TOTAL STATS */}
+                        <div style={{ padding: 12, background: 'rgba(0,0,0,0.6)', border: `1px solid ${colors.accent}`, borderRadius: 6, marginBottom: 8 }}>
+                          <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: colors.accent, marginBottom: 8, letterSpacing: 1, borderBottom: '1px dashed rgba(255,255,255,0.2)', paddingBottom: 6 }}>
+                            [ TOTAL STATS ]
+                          </div>
+                          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6, fontSize: 13, fontFamily: 'var(--font-title)', color: '#fff' }}>
+                            <div>🛡️ DEF <span style={{color: '#44ff88'}}>{tDef.toLocaleString()}</span></div>
+                            <div>⚡ PT <span style={{color: '#f5a623'}}>{tPT.toLocaleString()}</span></div>
+                            <div>⚔️ ATK <span style={{color: '#ff4444'}}>{tMinAtk.toLocaleString()} - {tMaxAtk.toLocaleString()}</span></div>
+                            <div>🎯 AttM <span style={{color: '#88aadd'}}>{tAttM.toLocaleString()}</span></div>
+                            <div>🛡️ DefM <span style={{color: '#88aadd'}}>{tDefM.toLocaleString()}</span></div>
+                            <div>🔥 Fire <span style={{color: '#ff8844'}}>{tFire.toLocaleString()}</span></div>
+                            <div>💧 Water <span style={{color: '#44ccff'}}>{tWater.toLocaleString()}</span></div>
+                            <div>🪨 Soil <span style={{color: '#aadd88'}}>{tSoil.toLocaleString()}</span></div>
+                            <div>🌪️ Wind <span style={{color: '#dddddd'}}>{tWind.toLocaleString()}</span></div>
+                            <div>🚀 Boost <span style={{color: '#ff44ff'}}>{tBoostCharge}/{tBoostSpeed}</span></div>
+                          </div>
+                        </div>
+
+                        {/* ACCORDION SPARE PARTS DETAILS */}
+                        <details style={{ background: 'rgba(0,0,0,0.4)', border: `1px dashed ${colors.border}80`, borderRadius: 6 }}>
+                          <summary style={{ padding: 10, cursor: 'pointer', fontFamily: 'var(--font-title)', fontSize: 12, color: colors.accent, fontWeight: 800, outline: 'none' }}>
+                            [ VIEW SPARE PARTS DETAILS ]
+                          </summary>
+                          <div style={{ padding: '0 12px 12px 12px', display: 'flex', flexDirection: 'column', gap: 12 }}>
+                            {[
+                              { key: 'head', label: '1. Head', icon: '⚙️', color: '#88aadd' },
+                              { key: 'upper', label: '2. Core', icon: '🛡️', color: '#88aadd' },
+                              { key: 'lower', label: '3. Legs', icon: '🦵', color: '#88aadd' },
+                              { key: 'arms', label: '4. Arms', icon: '⚔️', color: '#f5a623' },
+                              { key: 'arms2', label: '5. Arms-II', icon: '🚀', color: '#f5a623' },
+                              { key: 'options', label: '6. Boost', icon: '⚡', color: '#44ff88' },
+                            ].map((slot) => {
+                              const p = parts[slot.key];
+                              if (!p) return null;
+                              return (
+                                <div key={slot.key} style={{ borderLeft: `3px solid ${slot.color}`, paddingLeft: 10, background: 'rgba(255,255,255,0.02)', padding: '6px 10px', borderRadius: '0 4px 4px 0' }}>
+                                  <div style={{ color: slot.color, fontWeight: 900, fontSize: 14, marginBottom: 4 }}>
+                                    {slot.icon} {slot.label} : <span style={{ color: '#fff' }}>{p.name}</span>
+                                  </div>
+                                  <div style={{ display: 'grid', gridTemplateColumns: '120px 1fr', gap: 4, fontSize: 13, fontFamily: 'var(--font-mono)', color: '#b5d4f1' }}>
+                                    {p.pt !== undefined && <><div style={{ color: '#88aadd' }}>PT</div><div>{p.pt}</div></>}
+                                    {p.def !== undefined && <><div style={{ color: '#88aadd' }}>DEF</div><div>{p.def.toLocaleString()}</div></>}
+                                    {p.minAtk !== undefined && <><div style={{ color: '#88aadd' }}>ATK</div><div>{p.minAtk.toLocaleString()} - {p.maxAtk.toLocaleString()}</div></>}
+                                    {p.attM !== undefined && <><div style={{ color: '#88aadd' }}>ATT MASTERY</div><div>{p.attM}</div></>}
+                                    {p.defM !== undefined && <><div style={{ color: '#88aadd' }}>DEF MASTERY</div><div>{p.defM}</div></>}
+                                    {p.fire !== undefined && <><div style={{ color: '#88aadd' }}>FIRE RESIST</div><div>{p.fire}</div></>}
+                                    {p.water !== undefined && <><div style={{ color: '#88aadd' }}>WATER RESIST</div><div>{p.water}</div></>}
+                                    {p.soil !== undefined && <><div style={{ color: '#88aadd' }}>SOIL RESIST</div><div>{p.soil}</div></>}
+                                    {p.wind !== undefined && p.wind !== null && <><div style={{ color: '#88aadd' }}>WIND RESIST</div><div>{p.wind}</div></>}
+                                    {p.boostCharge !== undefined && <><div style={{ color: '#88aadd' }}>BOOST CHARGE</div><div>{p.boostCharge}</div></>}
+                                    {p.boostSpeed !== undefined && <><div style={{ color: '#88aadd' }}>BOOST SPEED</div><div>{p.boostSpeed}</div></>}
+                                    {p.price !== undefined && <><div style={{ color: '#88aadd' }}>STD PRICE</div><div>{p.price.toLocaleString()} CRD</div></>}
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </details>
                       </div>
-                    </div>
-                  )}
+                    );
+                  })()}
 
                   {evo.locked ? (
                     <button
