@@ -1775,7 +1775,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### ⚙️ Milestone 133: Map 1 Monster & Boss Stats Calibration [PENDING DEPLOYMENT]
+### ⚙️ Milestone 133: Map 1 Monster & Boss Stats Calibration [DEPLOYED]
 - **Database Calibration (`src/data/enemies.json`)**:
   - Re-calibrated Leveling Map 1 (Lumora Fields, Lv. 1-12) statistics to align with new gameplay progression rules:
     - **Puffling**: HP: 300 → `77`, ATK: 20 → `37`, DEF: 10 → `11`.
@@ -1787,7 +1787,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### ⚙️ Milestone 134: Map 2 Stats Calibration & Enemy Double Hit Combat Mechanic [PENDING DEPLOYMENT]
+### ⚙️ Milestone 134: Map 2 Stats Calibration & Enemy Double Hit Combat Mechanic [DEPLOYED]
 - **Database Calibration (`src/data/enemies.json`)**:
   - Re-calibrated Leveling Map 2 (Sylvaris Wilds, Lv. 13-25) statistics to align with new gameplay progression rules:
     - **Fangclaw**: HP: 3000 → `687`, ATK: 80 → `127`, DEF: 50 → `85`.
@@ -1802,7 +1802,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### ⚙️ Milestone 135: Map 3 Stats Calibration & Aggressive Rule Memory [PENDING DEPLOYMENT]
+### ⚙️ Milestone 135: Map 3 Stats Calibration & Aggressive Rule Memory [DEPLOYED]
 - **Database Calibration (`src/data/enemies.json`)**:
   - Re-calibrated Leveling Map 3 (Ferrum Expanse, Lv. 26-38) statistics to align with new gameplay progression rules:
     - **Iron Wasp**: HP: 35000 → `1456`, ATK: 290 → `615`, DEF: 185 → `350`. Added `"doubleHitChance": 4` (Aggressive 4%).
@@ -1816,7 +1816,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### ⚙️ Milestone 136: Map 4 Stats Calibration [PENDING DEPLOYMENT]
+### ⚙️ Milestone 136: Map 4 Stats Calibration [DEPLOYED]
 - **Database Calibration (`src/data/enemies.json`)**:
   - Re-calibrated Leveling Map 4 (Pyraxis Crater, Lv. 39-52) statistics to align with new gameplay progression rules:
     - **Infernox**: HP: 70000 → `2059`, ATK: 450 → `3505`, DEF: 280 → `812`.
@@ -1828,7 +1828,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### ⚙️ Milestone 137: Map 5 Mobs & Boss Stats Calibration [PENDING DEPLOYMENT]
+### ⚙️ Milestone 137: Map 5 Mobs & Boss Stats Calibration [DEPLOYED]
 - **Database Calibration (`src/data/enemies.json`)**:
   - Re-calibrated Leveling Map 5 (Trinity Nexus, Lv. 53-66) statistics to align with new gameplay progression rules:
     - **Trinity Sentinel**: HP: 300000 → `3855`, ATK: 850 → `13877`, DEF: 550 → `1350`.
@@ -1840,7 +1840,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### ⚙️ Milestone 139: EventModal Typography Consistency with Unit.jsx [PENDING DEPLOYMENT]
+### ⚙️ Milestone 139: EventModal Typography Consistency with Unit.jsx [DEPLOYED]
 - **Typography Alignment (`src/components/EventModal.jsx`)**:
   - Replaced all `Oxanium` font references with `Orbitron` to match Unit.jsx platform standard (no italic on headings).
   - Updated `fontSize` values to align with Unit.jsx scale: labels → 10-11px, values → 12-13px, headings → 16-18px.
@@ -1854,7 +1854,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### ⚙️ Milestone 138: T-MINE Guardian Stats Calibration & Floor Reorganization [PENDING DEPLOYMENT]
+### ⚙️ Milestone 138: T-MINE Guardian Stats Calibration & Floor Reorganization [DEPLOYED]
 - **Database Calibration (`src/data/enemies.json`)**:
   - Re-calibrated Trinity Mine (`miningGuardians`) guardian statistics and reorganized floor assignments:
     - **Sentry Dementor (1F)**: HP: 1.000.000 → `11.815`, ATK: 1.350 → `8.959`, DEF: 900 → `1.097`. Dodge updated to `20%`.
@@ -1869,7 +1869,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### ⚙️ Milestone 140: Dungeon Stats Calibration & PitBoss System Removal [PENDING DEPLOYMENT]
+### ⚙️ Milestone 140: Dungeon Stats Calibration & PitBoss System Removal [DEPLOYED]
 - **Database Calibration (`src/data/enemies.json`)**:
   - Hapus seluruh `pitBoss` dari semua dungeon (Dungeon-1, 2, 3) — fitur ini tidak digunakan di platform.
   - Hapus seluruh `mobs` array dari semua dungeon — dungeon bersifat boss-only.
@@ -1880,7 +1880,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### ⚙️ Milestone 141: T-MINE Guardian Ability Overhaul & Global Passive Combat Mechanics [PENDING DEPLOYMENT]
+### ⚙️ Milestone 141: T-MINE Guardian Ability Overhaul & Global Passive Combat Mechanics [DEPLOYED]
 - **Database Calibration (`src/data/enemies.json` — `miningGuardians`)**:
   - Semua guardian 1F–5F disamakan base stats: HP: `11.815`, ATK: `8.959`, DEF: `1.100`.
   - Setiap floor memiliki ability unik:
