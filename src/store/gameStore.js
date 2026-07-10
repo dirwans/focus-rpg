@@ -244,15 +244,15 @@ export function resolveItemImage(item, playerRace, playerJob) {
     if (item.id === 'ares_dominator') return '/assets/ARESlv55arctron.png'
     if (item.id === 'ares_apocalypse') return '/assets/ARESlv65arctron.png'
     // Celestra Ancient Spirit - Seraphys
-    if (item.id === 'spirit_seraphys_32') return '/assets/spirit_seraphys_32.png?v=3'
-    if (item.id === 'spirit_seraphys_42') return '/assets/spirit_seraphys_42.png?v=3'
-    if (item.id === 'spirit_seraphys_55') return '/assets/spirit_seraphys_55.png?v=3'
-    if (item.id === 'spirit_seraphys_65') return '/assets/spirit_seraphys_65.png?v=3'
+    if (item.id === 'spirit_seraphys_32') return '/assets/spirit_seraphys_32.png?v=4'
+    if (item.id === 'spirit_seraphys_42') return '/assets/spirit_seraphys_42.png?v=4'
+    if (item.id === 'spirit_seraphys_55') return '/assets/spirit_seraphys_55.png?v=4'
+    if (item.id === 'spirit_seraphys_65') return '/assets/spirit_seraphys_65.png?v=4'
     // Celestra Ancient Spirit - Noctyrna
-    if (item.id === 'spirit_noctyrna_32') return '/assets/spirit_noctyrna_32.png?v=3'
-    if (item.id === 'spirit_noctyrna_42') return '/assets/spirit_noctyrna_42.png?v=3'
-    if (item.id === 'spirit_noctyrna_55') return '/assets/spirit_noctyrna_55.png?v=6'
-    if (item.id === 'spirit_noctyrna_65') return '/assets/spirit_noctyrna_65.png?v=3'
+    if (item.id === 'spirit_noctyrna_32') return '/assets/spirit_noctyrna_32.png?v=4'
+    if (item.id === 'spirit_noctyrna_42') return '/assets/spirit_noctyrna_42.png?v=4'
+    if (item.id === 'spirit_noctyrna_55') return '/assets/spirit_noctyrna_55.png?v=7'
+    if (item.id === 'spirit_noctyrna_65') return '/assets/spirit_noctyrna_65.png?v=4'
   }
   return item.image
 }
