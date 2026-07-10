@@ -35,14 +35,17 @@ export default function AscensionSpiritShopModal({ player, raceData }) {
     setActiveAnimus(animusKey)
   }
 
-  const unsealOptions = [
-    { targetLv: 42, name: 'Veteran Crystal', cost: 150000000 },
-    { targetLv: 55, name: 'Master Crystal', cost: 750000000 },
-    { targetLv: 65, name: 'Ascension Crystal', cost: 2500000000 }
+  const unsealOptions = raceData.crystals || [
+    { targetLv: 32, name: 'Novice Soul Crystal', cost: 50000000, description: 'Membuka segel Animus pemula (Cap Lv.32)' },
+    { targetLv: 42, name: 'Veteran Soul Crystal', cost: 150000000, description: 'Membuka segel evolusi tahap 2 (Cap Lv.42)' },
+    { targetLv: 50, name: 'Master Soul Crystal', cost: 350000000, description: 'Membuka segel spiritual master (Cap Lv.50)' },
+    { targetLv: 55, name: 'Grandmaster Soul Crystal', cost: 750000000, description: 'Membuka segel evolusi tahap 3 (Cap Lv.55)' },
+    { targetLv: 60, name: 'High Ascendant Crystal', cost: 1500000000, description: 'Membuka segel suci Ascendant (Cap Lv.60)' },
+    { targetLv: 65, name: 'Zenith Ascension Crystal', cost: 2500000000, description: 'Membuka segel kosmis final (Cap Lv.65)' }
   ]
 
   return (
-    <div style={{ padding: 16 }}>
+    <div style={{ padding: 16, background: 'rgba(0,0,0,0.4)', borderRadius: 8, border: `1px solid ${colors.border}` }}>
       
       <div style={{ textAlign: 'center', marginBottom: 24 }}>
         <div style={{ fontFamily: 'var(--font-title)', fontSize: 18, color: colors.accent, fontWeight: 900 }}>
@@ -103,8 +106,12 @@ export default function AscensionSpiritShopModal({ player, raceData }) {
                 
                 {/* HEADER INFO */}
                 <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
-                  <div style={{ width: 80, height: 80, background: 'rgba(255,255,255,0.05)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', border: `1px solid ${colors.accent}4d` }}>
-                    <span style={{ fontSize: 36 }}>{aData.type === 'inana' ? '🔮' : '🌑'}</span>
+                  <div style={{ width: 100, height: 100, background: 'rgba(255,255,255,0.05)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', border: `1px solid ${colors.accent}4d`, padding: 8 }}>
+                    <img
+                      src={`/assets/spirit_${activeSlot}_${currentLv >= 65 ? 65 : currentLv >= 55 ? 55 : currentLv >= 42 ? 42 : 32}.png?v=1`}
+                      alt={aData.name}
+                      style={{ maxWidth: '100%', maxHeight: 100, objectFit: 'contain', filter: `drop-shadow(0 0 10px ${colors.accent})` }}
+                    />
                   </div>
                   <div style={{ flex: 1 }}>
                     <div style={{ fontFamily: 'var(--font-title)', fontSize: 20, color: '#fff', fontWeight: 900 }}>{aData.name}</div>
@@ -121,7 +128,6 @@ export default function AscensionSpiritShopModal({ player, raceData }) {
 
                 <hr style={{ border: 'none', borderTop: `1px solid ${colors.border}4d` }} />
 
-                {/* ACTION PANEL */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                   {!isSummoned ? (
                     <div style={{ padding: 16, background: 'rgba(255,255,255,0.05)', borderRadius: 8, border: `1px solid ${colors.border}`, textAlign: 'center' }}>
@@ -141,80 +147,77 @@ export default function AscensionSpiritShopModal({ player, raceData }) {
                       </button>
                     </div>
                   ) : (
-                    <>
-                      {/* LEVEL UP SECTION */}
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: 8, padding: 16, background: 'rgba(255,255,255,0.05)', borderRadius: 8, border: `1px solid ${colors.border}4d` }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                          <div style={{ fontFamily: 'var(--font-title)', fontSize: 14, color: '#fff' }}>BERI PERSEMBAHAN (LEVEL UP)</div>
-                          {!isEquipped && (
-                            <button
-                              onClick={() => handleEquip(activeSlot)}
-                              style={{ padding: '4px 12px', background: 'transparent', border: `1px solid ${colors.accent}`, color: colors.accent, borderRadius: 4, cursor: 'pointer', fontFamily: 'var(--font-mono)', fontSize: 11 }}
-                            >
-                              EQUIP ACTIVE
-                            </button>
-                          )}
-                        </div>
-                        
-                        {currentLv >= maxLevelCap ? (
-                          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#ff4444', textAlign: 'center', padding: 12, background: 'rgba(255,0,0,0.1)', borderRadius: 4 }}>
-                            Telah mencapai batas level maksimum (Max Cap Lv.{maxLevelCap}). Buka Segel (Unseal) untuk naik level lebih tinggi!
-                          </div>
-                        ) : currentLv >= aData.maxLevel ? (
-                          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#ffcc00', textAlign: 'center', padding: 12, background: 'rgba(255,200,0,0.1)', borderRadius: 4 }}>
-                            MAX LEVEL REACHED!
-                          </div>
-                        ) : (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 8, padding: 16, background: 'rgba(255,255,255,0.05)', borderRadius: 8, border: `1px solid ${colors.border}4d` }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <div style={{ fontFamily: 'var(--font-title)', fontSize: 14, color: '#fff' }}>BERI PERSEMBAHAN (LEVEL UP)</div>
+                        {!isEquipped && (
                           <button
-                            onClick={() => handleUpgrade(activeSlot, aData, currentLv)}
-                            disabled={player.crd < aData.upgradeCostBase * currentLv}
-                            style={{
-                              width: '100%', padding: 12, background: player.crd >= aData.upgradeCostBase * currentLv ? '#44ff88' : '#555',
-                              color: '#000', fontFamily: 'var(--font-title)', fontWeight: 900, border: 'none', borderRadius: 6, cursor: player.crd >= (aData.upgradeCostBase * currentLv) ? 'pointer' : 'not-allowed',
-                              marginTop: 8
-                            }}
+                            onClick={() => handleEquip(activeSlot)}
+                            style={{ padding: '4px 12px', background: 'transparent', border: `1px solid ${colors.accent}`, color: colors.accent, borderRadius: 4, cursor: 'pointer', fontFamily: 'var(--font-mono)', fontSize: 11 }}
                           >
-                            UPGRADE KE LV.{currentLv + 1} ({(aData.upgradeCostBase * currentLv).toLocaleString()} CRD)
+                            EQUIP ACTIVE
                           </button>
                         )}
                       </div>
-
-                      {/* UNSEAL SECTION */}
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: 8, padding: 16, background: 'rgba(255,255,255,0.02)', borderRadius: 8, border: `1px solid ${colors.border}4d` }}>
-                        <div style={{ fontFamily: 'var(--font-title)', fontSize: 14, color: '#ffcc00' }}>UNSEAL CRYSTAL SHOP</div>
-                        <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#888', marginBottom: 8 }}>Beli Crystal untuk membuka batas maksimal level Spirit.</div>
-                        
-                        {unsealOptions.map(opt => {
-                          const isBought = maxLevelCap >= opt.targetLv
-                          const canBuy = player.crd >= opt.cost && !isBought
-                          
-                          return (
-                            <div key={opt.targetLv} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(0,0,0,0.4)', padding: 8, borderRadius: 4, border: `1px solid ${isBought ? '#44ff88' : colors.border}4d` }}>
-                              <div>
-                                <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, color: isBought ? '#44ff88' : '#fff' }}>{opt.name}</div>
-                                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: '#aaa' }}>Buka Cap Lv.{opt.targetLv}</div>
-                              </div>
-                              {isBought ? (
-                                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#44ff88' }}>OWNED</div>
-                              ) : (
-                                <button
-                                  onClick={() => handleUnseal(activeSlot, aData, opt.targetLv, opt.cost)}
-                                  disabled={!canBuy}
-                                  style={{
-                                    padding: '6px 12px', background: canBuy ? colors.accent : '#333', color: canBuy ? '#000' : '#888',
-                                    border: 'none', borderRadius: 4, fontFamily: 'var(--font-mono)', fontSize: 11, fontWeight: 'bold',
-                                    cursor: canBuy ? 'pointer' : 'not-allowed'
-                                  }}
-                                >
-                                  {opt.cost.toLocaleString()} CRD
-                                </button>
-                              )}
-                            </div>
-                          )
-                        })}
-                      </div>
-                    </>
+                      
+                      {currentLv >= maxLevelCap ? (
+                        <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#ff4444', textAlign: 'center', padding: 12, background: 'rgba(255,0,0,0.1)', borderRadius: 4 }}>
+                          Telah mencapai batas level maksimum (Max Cap Lv.{maxLevelCap}). Buka Segel (Unseal) untuk naik level lebih tinggi!
+                        </div>
+                      ) : currentLv >= aData.maxLevel ? (
+                        <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#ffcc00', textAlign: 'center', padding: 12, background: 'rgba(255,200,0,0.1)', borderRadius: 4 }}>
+                          MAX LEVEL REACHED!
+                        </div>
+                      ) : (
+                        <button
+                          onClick={() => handleUpgrade(activeSlot, aData, currentLv)}
+                          disabled={player.crd < aData.upgradeCostBase * currentLv}
+                          style={{
+                            width: '100%', padding: 12, background: player.crd >= aData.upgradeCostBase * currentLv ? '#44ff88' : '#555',
+                            color: '#000', fontFamily: 'var(--font-title)', fontWeight: 900, border: 'none', borderRadius: 6, cursor: player.crd >= (aData.upgradeCostBase * currentLv) ? 'pointer' : 'not-allowed',
+                            marginTop: 8
+                          }}
+                        >
+                          UPGRADE KE LV.{currentLv + 1} ({(aData.upgradeCostBase * currentLv).toLocaleString()} CRD)
+                        </button>
+                      )}
+                    </div>
                   )}
+
+                  {/* UNSEAL SECTION */}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8, padding: 16, background: 'rgba(255,255,255,0.02)', borderRadius: 8, border: `1px solid ${colors.border}4d` }}>
+                    <div style={{ fontFamily: 'var(--font-title)', fontSize: 14, color: '#ffcc00' }}>UNSEAL CRYSTAL SHOP</div>
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#888', marginBottom: 8 }}>Beli Crystal untuk membuka batas maksimal level Spirit ini.</div>
+                    
+                    {unsealOptions.map(opt => {
+                      const isBought = maxLevelCap >= opt.targetLv
+                      const canBuy = player.crd >= opt.cost && !isBought
+                      
+                      return (
+                        <div key={opt.targetLv} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(0,0,0,0.4)', padding: 8, borderRadius: 4, border: `1px solid ${isBought ? '#44ff88' : colors.border}4d` }}>
+                          <div>
+                            <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, color: isBought ? '#44ff88' : '#fff' }}>{opt.name}</div>
+                            <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: '#aaa' }}>{opt.description || `Buka Cap Lv.${opt.targetLv}`}</div>
+                          </div>
+                          {isBought ? (
+                            <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#44ff88' }}>OWNED</div>
+                          ) : (
+                            <button
+                              onClick={() => handleUnseal(activeSlot, aData, opt.targetLv, opt.cost)}
+                              disabled={!canBuy}
+                              style={{
+                                padding: '6px 12px', background: canBuy ? colors.accent : '#333', color: canBuy ? '#000' : '#888',
+                                border: 'none', borderRadius: 4, fontFamily: 'var(--font-mono)', fontSize: 11, fontWeight: 'bold',
+                                cursor: canBuy ? 'pointer' : 'not-allowed'
+                              }}
+                            >
+                              {opt.cost.toLocaleString()} CRD
+                            </button>
+                          )}
+                        </div>
+                      )
+                    })}
+                  </div>
                 </div>
 
               </div>

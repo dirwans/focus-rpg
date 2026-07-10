@@ -1689,6 +1689,14 @@
         "upgradeCostBase": 50000,
         "maxLevel": 65
       }
-    }
+    },
+    "crystals": [
+      { "targetLv": 32, "name": "Novice Soul Crystal", "cost": 50000000, "description": "Membuka segel Animus pemula (Cap Lv.32)" },
+      { "targetLv": 42, "name": "Veteran Soul Crystal", "cost": 150000000, "description": "Membuka segel evolusi tahap 2 (Cap Lv.42)" },
+      { "targetLv": 50, "name": "Master Soul Crystal", "cost": 350000000, "description": "Membuka segel spiritual master (Cap Lv.50)" },
+      { "targetLv": 55, "name": "Grandmaster Soul Crystal", "cost": 750000000, "description": "Membuka segel evolusi tahap 3 (Cap Lv.55)" },
+      { "targetLv": 60, "name": "High Ascendant Crystal", "cost": 1500000000, "description": "Membuka segel suci Ascendant (Cap Lv.60)" },
+      { "targetLv": 65, "name": "Zenith Ascension Crystal", "cost": 2500000000, "description": "Membuka segel kosmis final (Cap Lv.65)" }
+    ]
   }
 }

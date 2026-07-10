@@ -190,8 +190,12 @@ export default function Ascension() {
                             </div>
                             
                             <div style={{ display: 'flex', gap: 12, marginBottom: 12 }}>
-                              <div style={{ flex: 1, height: 60, background: 'rgba(0,0,0,0.5)', borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                <span style={{ fontSize: 24 }}>{aData.type === 'inana' ? '🔮' : '🌑'}</span>
+                              <div style={{ flex: 1, minHeight: 100, background: 'rgba(0,0,0,0.5)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 6, border: `1px solid ${colors.border}4d` }}>
+                                <img
+                                  src={EVO_IMAGES[`spirit_${animusKey}_${lv}`] || `/assets/spirit_${animusKey}_${lv}.png?v=1`}
+                                  alt={`${aData.name} Lv.${lv}`}
+                                  style={{ maxWidth: '100%', maxHeight: 100, objectFit: 'contain', filter: `drop-shadow(0 0 10px ${colors.accent})` }}
+                                />
                               </div>
                               <div style={{ flex: 3, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 4, fontSize: 12, fontFamily: 'var(--font-mono)' }}>
                                 <div style={{ color: '#fff' }}>⚔️ ATK +{targetAtk.toLocaleString()}</div>
@@ -450,6 +454,8 @@ export default function Ascension() {
             })}
           </div>
           </>
+          ) : player.race === 'celestra' ? (
+            <AscensionSpiritShopModal colors={colors} raceData={data} player={player} />
           ) : (
             // PARTS SHOP TAB
             <div style={{ background: 'rgba(0,0,0,0.4)', padding: 16, borderRadius: 8, border: `1px solid ${colors.border}` }}>
@@ -459,8 +465,6 @@ export default function Ascension() {
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: '#b5d4f1', textAlign: 'center', marginBottom: 20 }}>
                 {player.race === 'bionex' 
                   ? "Beli dan rakit suku cadang untuk memperkuat M.E.U. kamu. Stats dari spare parts yang kamu beli akan langsung diakumulasikan ke mecha kamu!" 
-                  : player.race === 'celestra'
-                  ? "Panggil Ancient Spirit untuk mendampingimu bertempur. Beri persembahan untuk meningkatkan kekuatan roh mistis ini."
                   : "Shop sedang dalam persiapan. (Segera Hadir)"}
               </div>
               
@@ -476,18 +480,6 @@ export default function Ascension() {
                 >
                   🛒 BUKA KATALOG PARTS
                 </button>
-              ) : player.race === 'celestra' ? (
-                <button
-                  onClick={() => setIsSpiritModalOpen(true)}
-                  style={{
-                    width: '100%', padding: '12px 0', fontFamily: 'var(--font-title)', fontSize: 15, fontWeight: 900,
-                    background: `linear-gradient(90deg, ${colors.accent}, ${colors.border})`,
-                    color: '#000', border: 'none', borderRadius: 6, cursor: 'pointer',
-                    boxShadow: `0 0 10px ${colors.glow}`
-                  }}
-                >
-                  🔮 BUKA SHRINE OF SPIRITS
-                </button>
               ) : (
                 <div style={{ padding: 20, textAlign: 'center', color: '#ff4444', fontFamily: 'var(--font-title)', fontWeight: 800 }}>
                   [ OUT OF STOCK ]
@@ -498,7 +490,6 @@ export default function Ascension() {
         </div>
       </div>
       
-      {isSpiritModalOpen && <AscensionSpiritShopModal onClose={() => setIsSpiritModalOpen(false)} colors={colors} raceData={data} player={player} />}
       {isShopModalOpen && <AscensionShopModal onClose={() => setIsShopModalOpen(false)} colors={colors} raceData={data} player={player} bionexTab={bionexTab} />}
     </div>
   )
