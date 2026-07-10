@@ -3067,9 +3067,18 @@ export const useGameStore = create(
               flatAtk += Math.floor(((p.minAtk || 0) + (p.maxAtk || 0)) / 2);
             }
             if (p.pt) {
-              // Usually PT is handled elsewhere, but if it gives direct stats we can map it
             }
           })
+        }
+
+        // Active Arctron ARES Siege Multiplier Bonus (% Attack Boost)
+        if (player.race === 'arctron' && player.equipment?.ascension_arms) {
+          const aresId = player.equipment.ascension_arms.id;
+          const evolutions = ascensionArmsData.arctron?.evolutions || [];
+          const currentEvo = evolutions.find(e => e.id === aresId);
+          if (currentEvo && currentEvo.atkPercent && !player.equipment.ascension_arms.bonus?.atkPercent) {
+            percentAtk += currentEvo.atkPercent;
+          }
         }
 
         // Active Celestra Animus (Seraphys / Noctyrna) Bonus
@@ -4235,9 +4244,11 @@ export const useGameStore = create(
           rarity: 'ssr', // Always SSR equivalent
           emoji: raceAresName === 'ARES' ? '🤖' : raceAresName === 'M.E.U.' ? '⚙️' : '🌿',
           bonus: {
-            atk: evoData.atk,
-            hp: evoData.hp,
-            crit: evoData.crit
+            atk: evoData.atk || 0,
+            hp: evoData.hp || 0,
+            crit: evoData.crit || 0,
+            atkPercent: evoData.atkPercent || 0,
+            defPercent: evoData.defPercent || 0
           },
           isEquipped: true
         }

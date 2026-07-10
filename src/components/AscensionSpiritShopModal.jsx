@@ -56,13 +56,13 @@ export default function AscensionSpiritShopModal({ player, raceData }) {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '120px 1fr', gap: 16 }}>
-        {/* SIDEBAR */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+        {/* TOP SELECTOR BAR */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          <div style={{ fontSize: 12, fontFamily: 'var(--font-mono)', color: '#888', marginBottom: 4 }}>
+          <div style={{ fontSize: 12, fontFamily: 'var(--font-mono)', color: '#888', textAlign: 'center' }}>
             AVAILABLE SPIRITS
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             {animusKeys.map(k => {
               const a = raceData.animus[k]
               const isSummoned = !!player.celestraAnimus?.[k]
@@ -72,20 +72,24 @@ export default function AscensionSpiritShopModal({ player, raceData }) {
                   key={k}
                   onClick={() => setActiveSlot(k)}
                   style={{
-                    padding: '8px',
+                    flex: '1 1 140px',
+                    maxWidth: '200px',
+                    padding: '10px 14px',
                     background: activeSlot === k ? `${colors.accent}22` : 'rgba(0,0,0,0.5)',
-                    border: `1px solid ${activeSlot === k ? colors.accent : colors.border}`,
-                    borderRadius: 6,
+                    border: `1.5px solid ${activeSlot === k ? colors.accent : colors.border}`,
+                    borderRadius: 8,
                     color: activeSlot === k ? '#fff' : '#aaa',
                     cursor: 'pointer',
-                    textAlign: 'left'
+                    textAlign: 'center',
+                    boxShadow: activeSlot === k ? `0 0 12px ${colors.accent}44` : 'none',
+                    transition: 'all 0.2s'
                   }}
                 >
-                  <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 800 }}>{a.name}</div>
+                  <div style={{ fontFamily: 'var(--font-title)', fontSize: 14, fontWeight: 800 }}>{a.name}</div>
                   <div style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: isSummoned ? '#44ff88' : '#ff4444', marginTop: 4 }}>
                     {isSummoned ? `Lv.${player.celestraAnimus[k]}` : 'Unsummoned'}
                   </div>
-                  {isEquipped && <div style={{ fontSize: 10, color: '#ffcc00', marginTop: 4 }}>[EQUIPPED]</div>}
+                  {isEquipped && <div style={{ fontSize: 10, color: '#ffcc00', marginTop: 4, fontWeight: 'bold' }}>[EQUIPPED]</div>}
                 </button>
               )
             })}
@@ -106,14 +110,17 @@ export default function AscensionSpiritShopModal({ player, raceData }) {
                 
                 {/* HEADER INFO */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'center', textAlign: 'center' }}>
-                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '8px 0', background: 'transparent' }}>
+                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '8px 0', width: '100%' }}>
                     <img
                       src={`/assets/spirit_${activeSlot}_${currentLv >= 65 ? 65 : currentLv >= 55 ? 55 : currentLv >= 42 ? 42 : 32}.png?v=1`}
                       alt={aData.name}
                       style={{
-                        width: 320,
+                        width: '100%',
+                        maxWidth: 320,
                         height: 320,
                         objectFit: 'contain',
+                        margin: '0 auto',
+                        display: 'block',
                         filter: `drop-shadow(0 0 10px ${activeSlot === 'seraphys' ? 'rgba(68, 255, 136, 0.22)' : 'rgba(255, 68, 68, 0.22)'}) drop-shadow(0 0 2px ${activeSlot === 'seraphys' ? 'rgba(68, 255, 136, 0.45)' : 'rgba(255, 68, 68, 0.45)'})`
                       }}
                     />

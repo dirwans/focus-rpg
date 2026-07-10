@@ -198,13 +198,16 @@ export default function Ascension() {
                             </div>
                             
                             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '16px 0', background: 'transparent' }}>
-                              <img
+                                <img
                                 src={EVO_IMAGES[`spirit_${animusKey}_${lv}`] || `/assets/spirit_${animusKey}_${lv}.png?v=1`}
                                 alt={`${aData.name} Lv.${lv}`}
                                 style={{
-                                  width: 320,
+                                  width: '100%',
+                                  maxWidth: 320,
                                   height: 320,
                                   objectFit: 'contain',
+                                  margin: '0 auto',
+                                  display: 'block',
                                   filter: `drop-shadow(0 0 10px ${isSeraphys ? 'rgba(68, 255, 136, 0.22)' : 'rgba(255, 68, 68, 0.22)'}) drop-shadow(0 0 2px ${isSeraphys ? 'rgba(68, 255, 136, 0.45)' : 'rgba(255, 68, 68, 0.45)'})`
                                 }}
                               />
@@ -331,6 +334,7 @@ export default function Ascension() {
                       return (
                         <div style={{ display: 'flex', gap: 16, marginBottom: 12, fontSize: 13, fontFamily: 'var(--font-mono)', color: '#e0f4ff', flexWrap: 'wrap' }}>
                           <div><span style={{color: '#f5a623'}}>⚔️ ATK</span> +{evo.atk.toLocaleString()}</div>
+                          {evo.atkPercent && <div><span style={{color: '#ff6600', fontWeight: 'bold'}}>🔥 SIEGE ATK</span> +{evo.atkPercent}%</div>}
                           <div><span style={{color: '#44ff88'}}>❤️ HP</span> +{evo.hp.toLocaleString()}</div>
                           <div><span style={{color: colors.accent}}>💥 CRIT</span> +{evo.crit}%</div>
                         </div>

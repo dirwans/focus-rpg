@@ -4,19 +4,19 @@ This journal tracks all major development milestones, technical optimizations, b
 
 ---
 
-## ⚙️ Deployment Guidelines & Rules
+## âš™ï¸� Deployment Guidelines & Rules
 
 Starting July 7, 2026, the following rules are enforced for all development and deployment operations:
 1. **Minimum Edit Threshold**: Any call to `deploy.ps1` must contain at least **5 separate modifications/edits** in the codebase.
 2. **Modification Status Labeling**: All milestones and modifications recorded in this journal must explicitly state their deployment state using:
-   - `[DEPLOYED]` — for edits completed locally but not yet deployed.
-   - `[DEPLOYED]` — for edits successfully synced to the production VPS server.
+   - `[DEPLOYED]` â€” for edits completed locally but not yet deployed.
+   - `[DEPLOYED]` â€” for edits successfully synced to the production VPS server.
 
 ---
 
-## 📅 Session Chronological Logs
+## ðŸ“… Session Chronological Logs
 
-### 🚀 Milestone 1: Authentication Security & Integrity Guard [DEPLOYED]
+### ðŸš€ Milestone 1: Authentication Security & Integrity Guard [DEPLOYED]
 - **Authentication Guards (`server.js`)**:
   - Implemented an user verification check inside `getSession()` to ensure the session's username actually exists in `users.json`. If a user is deleted or does not exist, their session is immediately rejected (preventing ghost/anonymous joins).
   - Integrated the same security verification into the Server-Sent Events (SSE) `/api/save/stream` endpoint to prevent unauthorized persistent save streams.
@@ -27,11 +27,11 @@ Starting July 7, 2026, the following rules are enforced for all development and 
 
 ---
 
-### 🎨 Milestone 2: UI Visual Polish & Scanline/CRT Removal [DEPLOYED]
+### ðŸŽ¨ Milestone 2: UI Visual Polish & Scanline/CRT Removal [DEPLOYED]
 - **Global Scrollbar Invisibility (`src/index.css`)**:
   - Disabled browser and container scrollbars globally using CSS vendor prefixes to maintain a clean console look.
 - **Scanline & Grid Overlay Cleanup**:
-  - Disabled the `.game-container::before` CRT scanline overlay and the `.glass-panel` background grids. This completely eliminates Moiré pattern rendering artifacts and visual aliasing on high-density mobile screens.
+  - Disabled the `.game-container::before` CRT scanline overlay and the `.glass-panel` background grids. This completely eliminates MoirÃ© pattern rendering artifacts and visual aliasing on high-density mobile screens.
 - **Space Parallax Lock**:
   - Disabled the moving space background parallax movement, locking the position static at `100%` to prevent panning-induced blurring on mobile viewports.
 - **Disabled Glass Sweep Shimmers**:
@@ -39,7 +39,7 @@ Starting July 7, 2026, the following rules are enforced for all development and 
 
 ---
 
-### 👾 Milestone 3: Sprite Portrait Enhancement & Outline Erosion [DEPLOYED]
+### ðŸ‘¾ Milestone 3: Sprite Portrait Enhancement & Outline Erosion [DEPLOYED]
 - **Contrast & Brightness Tuning**:
   - Adjusted the faction character portraits to be sharper and brighter.
   - Specially boosted the *Ranger* and *Technician* sprites' highlights so that they display as clearly and vividly as the *Warrior* portrait.
@@ -48,7 +48,7 @@ Starting July 7, 2026, the following rules are enforced for all development and 
 
 ---
 
-### 🔨 Milestone 4: Forge & Equipment Enhancement Realignment [DEPLOYED]
+### ðŸ”¨ Milestone 4: Forge & Equipment Enhancement Realignment [DEPLOYED]
 - **Success Probability Matrix**:
   - Re-mapped the upgrade success rate matrix: `+1 (100%)`, `+2 (90%)`, `+3 (70%)`, `+4 (50%)`, `+5 (35%)`, `+6 (20%)`, `+7 (10%)`, `+8 (5%)`.
 - **Lucky Relic Calibration**:
@@ -65,7 +65,7 @@ Starting July 7, 2026, the following rules are enforced for all development and 
 
 ---
 
-### 🗺️ Milestone 5: Map & Dungeon Zone System [DEPLOYED]
+### ðŸ—ºï¸� Milestone 5: Map & Dungeon Zone System [DEPLOYED]
 - **Sector Replacement**:
   - Replaced the old flat 10-Sector structure with **5 Leveling Maps** and **3 Battle Dungeons** in `enemies.json` and `gameStore.js`.
   - **Leveling Maps**:
@@ -85,11 +85,11 @@ Starting July 7, 2026, the following rules are enforced for all development and 
   - The battle screen displays `MAP [X]` or `DUNGEON [X]` based on active index.
   - Stats pages and units badges output progression as `M-[X]` (Map) or `D-[X]` (Dungeon).
 - **In-Game Zones Database**:
-  - Integrated a dedicated `Zones` database tab to the `📖 Database & Guides` library modal containing levels, bosses, and early-stage drop lists.
+  - Integrated a dedicated `Zones` database tab to the `ðŸ“– Database & Guides` library modal containing levels, bosses, and early-stage drop lists.
 
 ---
 
-### 📱 Milestone 6: Android APK Compilation & Locking Fix [DEPLOYED]
+### ðŸ“± Milestone 6: Android APK Compilation & Locking Fix [DEPLOYED]
 - **Locked Assets Clearance**:
   - Created an attribute-clearing script to recursively strip Windows `read-only` handles on `android\app\src\main\assets\public` to resolve `EPERM` copy errors during Capacitor builds.
 - **Capacitor Sync & Gradle Build**:
@@ -99,31 +99,31 @@ Starting July 7, 2026, the following rules are enforced for all development and 
 
 ---
 
-### 🏛️ Milestone 7: NPC Base System & Database Documentation [DEPLOYED]
+### ðŸ�›ï¸� Milestone 7: NPC Base System & Database Documentation [DEPLOYED]
 
 - **NPC Roster (8 NPCs di NPC Base)**:
-  Semua NPC berlokasi di **NPC Base** — pusat layanan utama Headquarters. Berikut daftar resmi:
-  1. ⚔️ **Arsenal Keeper** — Weapon NPC: Menjual Common Weapon, membeli semua Weapon.
-  2. 🛡️ **Armory Keeper** — Armor NPC: Menjual Common Armor & Shield, membeli semua Armor & Shield.
-  3. ✨ **Forge Master** — Enhancement NPC: Enhancement Equipment +1~+8. Material: Arcanite x1 + Divine Crest (20–200) + Lucky Relic (opsional, +10% rate). Failure +1~+5 equipment aman; failure +6~+8 equipment hancur.
-  4. 🔨 **Master Artisan** — Crafting NPC:
+  Semua NPC berlokasi di **NPC Base** â€” pusat layanan utama Headquarters. Berikut daftar resmi:
+  1. âš”ï¸� **Arsenal Keeper** â€” Weapon NPC: Menjual Common Weapon, membeli semua Weapon.
+  2. ðŸ›¡ï¸� **Armory Keeper** â€” Armor NPC: Menjual Common Armor & Shield, membeli semua Armor & Shield.
+  3. âœ¨ **Forge Master** â€” Enhancement NPC: Enhancement Equipment +1~+8. Material: Arcanite x1 + Divine Crest (20â€“200) + Lucky Relic (opsional, +10% rate). Failure +1~+5 equipment aman; failure +6~+8 equipment hancur.
+  4. ðŸ”¨ **Master Artisan** â€” Crafting NPC:
      - Craft **Cape** (semua bangsa).
-     - Craft **ARES Components** → ⚠️ Khusus bangsa **Arctron** saja.
-     - Craft **M.E.U. Components** → ⚠️ Khusus bangsa **Bionex** saja.
-     - Craft **Ancient Spirit Components** → ⚠️ Khusus bangsa **Celestra** saja.
-  5. 🏰 **Guild Steward** — Guild NPC: Membuat, bergabung, keluar, upgrade, dan mengelola Guild.
-  6. 📦 **Vault Keeper** — Warehouse NPC: Menyimpan dan mengambil item dari Personal Warehouse.
-  7. 📜 **Grand Warden** — Quest NPC: Main Quest, Daily Quest, Weekly Quest, Achievement Reward.
-  8. 💰 **Trade Broker** — Auction NPC: Auction House, jual beli item antar pemain.
+     - Craft **ARES Components** â†’ âš ï¸� Khusus bangsa **Arctron** saja.
+     - Craft **M.E.U. Components** â†’ âš ï¸� Khusus bangsa **Bionex** saja.
+     - Craft **Ancient Spirit Components** â†’ âš ï¸� Khusus bangsa **Celestra** saja.
+  5. ðŸ�° **Guild Steward** â€” Guild NPC: Membuat, bergabung, keluar, upgrade, dan mengelola Guild.
+  6. ðŸ“¦ **Vault Keeper** â€” Warehouse NPC: Menyimpan dan mengambil item dari Personal Warehouse.
+  7. ðŸ“œ **Grand Warden** â€” Quest NPC: Main Quest, Daily Quest, Weekly Quest, Achievement Reward.
+  8. ðŸ’° **Trade Broker** â€” Auction NPC: Auction House, jual beli item antar pemain.
 
-- **Aturan Faction Lock — Ascension Arms (Forge → Ascension Lab)**:
+- **Aturan Faction Lock â€” Ascension Arms (Forge â†’ Ascension Lab)**:
   - Data sudah di-key berdasarkan race di `ascensionArms.json`. Forge tab otomatis hanya menampilkan Ascension Arms milik bangsa player saat itu.
-  - **Arctron** → ARES (ARES X, ARES Nemesis, ARES Dominator)
-  - **Bionex** → M.E.U. (M.E.U. Alpha, M.E.U. Omega, M.E.U. Titan)
-  - **Celestra** → Ancient Spirit (Ancient Spirit I, II, III)
+  - **Arctron** â†’ ARES (ARES X, ARES Nemesis, ARES Dominator)
+  - **Bionex** â†’ M.E.U. (M.E.U. Alpha, M.E.U. Omega, M.E.U. Titan)
+  - **Celestra** â†’ Ancient Spirit (Ancient Spirit I, II, III)
 
 - **Library Database Update**:
-  - Ditambahkan tab **NPCs** di `LibraryModal.jsx` (📖 Database & Guides) berisi daftar lengkap 8 NPC beserta fungsinya.
+  - Ditambahkan tab **NPCs** di `LibraryModal.jsx` (ðŸ“– Database & Guides) berisi daftar lengkap 8 NPC beserta fungsinya.
   - Tab NPCs disisipkan di antara tab **Zones** dan **System**.
   - Master Artisan entry diperbarui dengan keterangan faction-exclusive craft.
 
@@ -160,7 +160,7 @@ Starting July 7, 2026, the following rules are enforced for all development and 
 
 ---
 
-### 🌐 Milestone 9: Google Sign-In Integration, Character Rename Fixes & Touch Scrolling [DEPLOYED]
+### ðŸŒ� Milestone 9: Google Sign-In Integration, Character Rename Fixes & Touch Scrolling [DEPLOYED]
 - **Google Sign-In Implementation**:
   - Integrated Capacitor Social Login natively on Android and Web using `@capgo/capacitor-social-login`.
   - Solved native SocialLogin callback crash by removing custom scope arrays (forcing default email/profile scopes), resolving Java Activity modification errors on Android.
@@ -172,9 +172,9 @@ Starting July 7, 2026, the following rules are enforced for all development and 
 
 ---
 
-### 🎨 Milestone 10: Scanline Cleanup, Character Creation Flow & Name Symbols Support [DEPLOYED]
+### ðŸŽ¨ Milestone 10: Scanline Cleanup, Character Creation Flow & Name Symbols Support [DEPLOYED]
 - **Scanline Layer Removal**:
-  - Disabled the absolute holographic scanline layer overlay (`display: none` in `.cyberpunk-hud-bg::before`) from the NPC Base modal container, resolving sprite brightness loss, screen dimming, and moiré blurring on high-density viewports.
+  - Disabled the absolute holographic scanline layer overlay (`display: none` in `.cyberpunk-hud-bg::before`) from the NPC Base modal container, resolving sprite brightness loss, screen dimming, and moirÃ© blurring on high-density viewports.
 - **Dedicated Character Creation Flow**:
   - Locked new accounts without selected races into a full-screen wizard component (`CharacterCreate.jsx`).
   - Implemented 6-step creation flow: Server Selection (Nova-Core, Desolation, Solitude), Race selection (Arctron, Bionex, Celestra), Class Path selection (Warrior, Ranger, Specialist, Mage/Summoner), Live Customization (Aura Glow Colors and Portrait/Full Sprite modes), Custom Name, and Final VPS Sync.
@@ -184,7 +184,7 @@ Starting July 7, 2026, the following rules are enforced for all development and 
 
 ---
 
-### 🖼️ Milestone 11: Character Creation Sprite Layout Fixes & Asset Trimming [DEPLOYED]
+### ðŸ–¼ï¸� Milestone 11: Character Creation Sprite Layout Fixes & Asset Trimming [DEPLOYED]
 - **Sprite Padding Trimming**: 
   - Created a python script (	rim_sprites.py) to systematically trim asymmetrical transparent padding from all faction sprites (Arctron, Bionex, Celestra). This ensures CSS positioning calculates the true center of mass rather than the center of a padded PNG.
 - **CSS Animation & Transform Resolution**: 
@@ -229,7 +229,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎒 Milestone 12: 25-Slot Inventory Bags & Dynamic Upgrades [DEPLOYED]
+### ðŸŽ’ Milestone 12: 25-Slot Inventory Bags & Dynamic Upgrades [DEPLOYED]
 - **Inventory Bag capacity expansion**:
   - Refactored [Inventory.jsx](file:///c:/projects/focus-rpg/src/screens/Inventory.jsx) and [Cargo.jsx](file:///c:/projects/focus-rpg/src/screens/Cargo.jsx) to increase bag slot sizes from 10 slots to 25 slots (a clean 5x5 grid layout).
   - Configured dynamic bag generation using `Math.ceil(player.inventorySlots / 25)` with a minimum baseline of 5 bags. This expands bag buttons up to 12 bags (for 300 slots max capacity).
@@ -240,7 +240,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 📦 Milestone 13: Item Stacking Overhaul (/99) [DEPLOYED]
+### ðŸ“¦ Milestone 13: Item Stacking Overhaul (/99) [DEPLOYED]
 - **Stackable Items Guard (`isStackableItem`)**:
   - Created a store helper function in `gameStore.js` to define stackable items (ores, shards, potions, and materials/consumables) and distinguish them from unstackable equipment.
 - **Stacking Accumulator (`addToInventory`)**:
@@ -254,7 +254,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - Symmetrically updated `depositToWarehouse` and `withdrawFromWarehouse` to merge stackable items into existing warehouse stacks.
 ---
 
-### 🎒 Milestone 14: Bag Level Gates Calibration [DEPLOYED]
+### ðŸŽ’ Milestone 14: Bag Level Gates Calibration [DEPLOYED]
 - **Custom level bracket limits**:
   - Automatically unlocks 2 bags for free at levels 1 - 32.
   - Level 42: Unlocks bag 3 (making 3 bags / 75 slots).
@@ -264,7 +264,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🛡️ Milestone 15: Arctron Mecha Shields Integration & Deployment Safety Gates [DEPLOYED]
+### ðŸ›¡ï¸� Milestone 15: Arctron Mecha Shields Integration & Deployment Safety Gates [DEPLOYED]
 - **Deployment Safety Guidelines Integration**:
   - Enforced a rule requiring a minimum of 5 modifications before compiling/deploying.
   - Created a new workspace agent skill `deployment_rules` in [.agents/skills/deployment_rules/SKILL.md](file:///c:/projects/focus-rpg/.agents/skills/deployment_rules/SKILL.md) and recorded constraints in the journal.
@@ -279,7 +279,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🛡️ Milestone 16: Starter Shields for All Factions [DEPLOYED]
+### ðŸ›¡ï¸� Milestone 16: Starter Shields for All Factions [DEPLOYED]
 - **Factions Starter Shield Sprite Sheets Cropping**:
   - Wrote and executed `process_starter_shields.py` to crop the second mecha shield vertical sprite sheet into three distinct items, remove black backgrounds, and crop bounding boxes.
   - Saved outputs to both `src/assets` and `public/assets` as:
@@ -291,7 +291,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🛡️ Milestone 17: Faction Tier Shields (Lv.32/42/55) Full Integration [DEPLOYED]
+### ðŸ›¡ï¸� Milestone 17: Faction Tier Shields (Lv.32/42/55) Full Integration [DEPLOYED]
 - **Structured Asset Folders**:
   - Created organised shield subfolders: `src/assets/{faction}/shields/` and `public/assets/{faction}/shields/` for arctron, bionex, celestra.
 - **Celestra & Bionex Tier Shields**:
@@ -304,7 +304,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - Purple AND blue energy pixels recolored to **red-orange** (Arctron faction color).
   - Saved as: `lv32/42/55arctronshielddef.png`.
 - **Dynamic Image Resolution (`resolveItemImage`)**:
-  - Added `export function resolveItemImage(item, playerRace)` to [gameStore.js](file:///c:/projects/focus-rpg/src/store/gameStore.js) — maps any `arm_All_*` shield to faction+level-appropriate sprite at render time.
+  - Added `export function resolveItemImage(item, playerRace)` to [gameStore.js](file:///c:/projects/focus-rpg/src/store/gameStore.js) â€” maps any `arm_All_*` shield to faction+level-appropriate sprite at render time.
   - Updated Arctron tiers in `resolveItemImage` to include lv32/42/55 new sprites.
 - **UI Integration**:
   - [Inventory.jsx](file:///c:/projects/focus-rpg/src/screens/Inventory.jsx): Equipment slots + inventory grid now use `resolveItemImage`.
@@ -315,7 +315,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🛡️ Milestone 18: Faction Sword Sprites (Lv.1/32/42/55) & Inventory UI Polish [DEPLOYED]
+### ðŸ›¡ï¸� Milestone 18: Faction Sword Sprites (Lv.1/32/42/55) & Inventory UI Polish [DEPLOYED]
 - **Inventory UX Polish**:
   - stretched width (removed `maxWidth: 320` from equipment slots, bag tabs, and bag drawer) for a responsive layout in [Inventory.jsx](file:///c:/projects/focus-rpg/src/screens/Inventory.jsx).
   - Unlocked bags (Level 66 has all 5 bags unlocked) now properly display the faction-specific bag icons rather than just numbers.
@@ -329,108 +329,108 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🔧 Minor Patch (Auth UI) [DEPLOYED]
-- Added a "show password" toggle (eye icon 👁️ / 👁️‍🗨️) to the manual login/register form in [Auth.jsx](file:///c:/projects/focus-rpg/src/screens/Auth.jsx) to improve user experience during registration.
+### ðŸ”§ Minor Patch (Auth UI) [DEPLOYED]
+- Added a "show password" toggle (eye icon ðŸ‘�ï¸� / ðŸ‘�ï¸�â€�ðŸ—¨ï¸�) to the manual login/register form in [Auth.jsx](file:///c:/projects/focus-rpg/src/screens/Auth.jsx) to improve user experience during registration.
 
 ---
 
-### 🧑‍🚀 Milestone 19: Job-Tier Character Sprite Fix [DEPLOYED]
-- **Bug**: Promoting a job (e.g. Destroyer → Vanguard → Juggernaut) did not change the character sprite shown on the CHARACTER navtab — `getJobLane()` in [PilotSprites.jsx](file:///c:/projects/focus-rpg/src/components/PilotSprites.jsx) only grouped jobs into 4 broad lanes (warrior/ranger/mystic/specialist) with one static image per lane, so all tiers within a lane displayed the same tier-1 art.
-- **Fix**: Confirmed the correct lane sprite already resolves properly per selected class/job (no per-tier art assets exist yet — those are being made separately by the user as proper armor/weapon assets). Removed a temporary CSS-only gold-glow/frame placeholder effect that had been added as a stand-in for missing tier art, since it wasn't wanted and real tier art is coming.
-- Verified in-browser: promoting Arctron Destroyer (tier1) → Vanguard (tier2) → Juggernaut (tier3) correctly displays the matching lane sprite with no extraneous border/glow decoration.
+### ðŸ§‘â€�ðŸš€ Milestone 19: Job-Tier Character Sprite Fix [DEPLOYED]
+- **Bug**: Promoting a job (e.g. Destroyer â†’ Vanguard â†’ Juggernaut) did not change the character sprite shown on the CHARACTER navtab â€” `getJobLane()` in [PilotSprites.jsx](file:///c:/projects/focus-rpg/src/components/PilotSprites.jsx) only grouped jobs into 4 broad lanes (warrior/ranger/mystic/specialist) with one static image per lane, so all tiers within a lane displayed the same tier-1 art.
+- **Fix**: Confirmed the correct lane sprite already resolves properly per selected class/job (no per-tier art assets exist yet â€” those are being made separately by the user as proper armor/weapon assets). Removed a temporary CSS-only gold-glow/frame placeholder effect that had been added as a stand-in for missing tier art, since it wasn't wanted and real tier art is coming.
+- Verified in-browser: promoting Arctron Destroyer (tier1) â†’ Vanguard (tier2) â†’ Juggernaut (tier3) correctly displays the matching lane sprite with no extraneous border/glow decoration.
 
 ---
 
-### ⚔️ Milestone 20: Def Weapon Assets — Axe Tiers & Bionex/Celestra Staffs [DEPLOYED]
+### âš”ï¸� Milestone 20: Def Weapon Assets â€” Axe Tiers & Bionex/Celestra Staffs [DEPLOYED]
 - **All-Faction Axe (Lv.32/42/55)**:
   - Processed a 3-panel reference sheet (green/blue/orange axe) with a tight near-black threshold + border-connected component labeling (to avoid eating the weapon's own dark recessed shading) + soft-alpha transition + color decontamination.
   - Saved as `defallfactionslv32axe.png` / `defallfactionslv42axe.png` / `defallfactionslv55axe.png` in `src/assets/weapons/` and `public/assets/weapons/`, resized to ~480px max dimension to match existing tier-shield asset sizes.
 - **Bionex/Celestra-only Staff (Lv.1)**:
   - Processed a 2-panel reference sheet (blue crystal staff, gold/winged staff) the same way, split into 2 files.
-  - Saved as `defbioncelestralv1staff1.png` (blue) / `defbioncelestralv1staff2.png` (gold) — **Arctron cannot use this weapon type**, intended for Bionex & Celestra Lv.1 mage/psion/summoner classes only.
+  - Saved as `defbioncelestralv1staff1.png` (blue) / `defbioncelestralv1staff2.png` (gold) â€” **Arctron cannot use this weapon type**, intended for Bionex & Celestra Lv.1 mage/psion/summoner classes only.
 - **Bionex/Celestra-only Staff Tiers (Lv.32/42/55)**:
   - Processed a second 3-panel reference sheet (gold Lv.32, crimson-red Lv.42, green Lv.55) with the same tight near-black threshold technique.
   - Saved as `defbioncelestralv32staff.png` / `defbioncelestralv42staff.png` / `defbioncelestralv55staff.png` in `src/assets/weapons/` and `public/assets/weapons/`, resized to ~480px max dimension.
-- **Not yet wired up**: `resolveItemImage` in [gameStore.js](file:///c:/projects/focus-rpg/src/store/gameStore.js) still only distinguishes weapon sprites by level, not by weapon type (sword vs axe vs staff) — this logic still needs to be added before these assets actually appear in-game. Held per the 5-modification deploy threshold; more def-weapon assets are expected before the next deploy batch.
+- **Not yet wired up**: `resolveItemImage` in [gameStore.js](file:///c:/projects/focus-rpg/src/store/gameStore.js) still only distinguishes weapon sprites by level, not by weapon type (sword vs axe vs staff) â€” this logic still needs to be added before these assets actually appear in-game. Held per the 5-modification deploy threshold; more def-weapon assets are expected before the next deploy batch.
 
 ---
 
-### 🔒 Milestone 21: Multi-Race/Job Equip Restriction Support [DEPLOYED]
+### ðŸ”’ Milestone 21: Multi-Race/Job Equip Restriction Support [DEPLOYED]
 - **Rule**: Staff-type weapons (free or paid) are restricted to Celestra (Mage: arcanist/rune_caster/mystic/archmage, Summoner: oracle/celestial_oracle/conjurer/divine_summoner) and Bionex (Psion: psion/esper/ascendant/transcendent) classes only. Arctron cannot equip staffs on any class/job.
-- **`equipItem` (`gameStore.js`)**: Generalized the existing single-value `item.race` and `item.job` equip-lock checks to also accept **arrays** (`Array.isArray` check, backward-compatible with all existing single-string entries) — e.g. `"race": ["bionex","celestra"]` and `"job": ["psion","esper","arcanist",...]` now both work, so one weapon item can be restricted to multiple races and multiple specific job lineages simultaneously instead of just one of each.
-- Verified `npm run build` passes. Actual staff item entries (rarity/pricing) in `items.json` are still separate follow-up work (deferred — default/free gear takes priority).
+- **`equipItem` (`gameStore.js`)**: Generalized the existing single-value `item.race` and `item.job` equip-lock checks to also accept **arrays** (`Array.isArray` check, backward-compatible with all existing single-string entries) â€” e.g. `"race": ["bionex","celestra"]` and `"job": ["psion","esper","arcanist",...]` now both work, so one weapon item can be restricted to multiple races and multiple specific job lineages simultaneously instead of just one of each.
+- Verified `npm run build` passes. Actual staff item entries (rarity/pricing) in `items.json` are still separate follow-up work (deferred â€” default/free gear takes priority).
 
 ---
 
-### 🪄 Milestone 22: Default Weapon Sprite Now Sword/Axe/Staff-Aware [DEPLOYED]
-- **Fix**: `resolveItemImage` in [gameStore.js](file:///c:/projects/focus-rpg/src/store/gameStore.js) now takes a third `playerJob` argument and branches on a `STAFF_JOBS` lineage list (Celestra Mage + Summoner, Bionex Psion) — caster jobs get the Bionex/Celestra staff sprite at their level (Lv.1 picks 1 of 2 variants, Lv.32/42/55 use the exact tier); every other job (including all of Arctron, which has no caster lineage) gets the Lv.1 sword (1 of 4 variants) or the Lv.32/42/55 axe. Previously every weapon-type item showed the sword sprite regardless of job.
-- Updated all 9 call sites (`Cargo.jsx` ×3, `Inventory.jsx` ×3, `NpcModal.jsx` ×1 pair) to pass `player.job` alongside `player.race`.
-- Verified with a direct logic replication of the shipped branch (all 7 test cases — caster Lv.1/32/55 → staff, non-caster Lv.1/42 → sword/axe, summoner → staff) resolved to the correct existing asset files in `public/assets/weapons/`. `npm run build` passes.
+### ðŸª„ Milestone 22: Default Weapon Sprite Now Sword/Axe/Staff-Aware [DEPLOYED]
+- **Fix**: `resolveItemImage` in [gameStore.js](file:///c:/projects/focus-rpg/src/store/gameStore.js) now takes a third `playerJob` argument and branches on a `STAFF_JOBS` lineage list (Celestra Mage + Summoner, Bionex Psion) â€” caster jobs get the Bionex/Celestra staff sprite at their level (Lv.1 picks 1 of 2 variants, Lv.32/42/55 use the exact tier); every other job (including all of Arctron, which has no caster lineage) gets the Lv.1 sword (1 of 4 variants) or the Lv.32/42/55 axe. Previously every weapon-type item showed the sword sprite regardless of job.
+- Updated all 9 call sites (`Cargo.jsx` Ã—3, `Inventory.jsx` Ã—3, `NpcModal.jsx` Ã—1 pair) to pass `player.job` alongside `player.race`.
+- Verified with a direct logic replication of the shipped branch (all 7 test cases â€” caster Lv.1/32/55 â†’ staff, non-caster Lv.1/42 â†’ sword/axe, summoner â†’ staff) resolved to the correct existing asset files in `public/assets/weapons/`. `npm run build` passes.
 
 ---
 
-### 🏹 Milestone 23: All-Faction Ranger Bow (Lv.1/32/42/55) [DEPLOYED]
-- **Assets**: Processed a 4-panel reference sheet (light-blue Lv.55, dark-blue Lv.42, red Lv.32, green/gold Lv.1 — bottom-to-top increasing level, opposite ordering from the axe/staff sheets) with the same background-removal technique. Saved as `defallfactionslv1bow.png` / `defallfactionslv32bow.png` / `defallfactionslv42bow.png` / `defallfactionslv55bow.png` in `src/assets/weapons/` and `public/assets/weapons/`, ~480px max dimension.
-- **Eligibility**: Usable by the Ranger/agility-ranged-attacker lineage across **all 3 factions** — added a `BOW_JOBS` list to `resolveItemImage` in [gameStore.js](file:///c:/projects/focus-rpg/src/store/gameStore.js) (Arctron: gunner/marksman/railgunner/annihilator, Bionex: marksman/revenant/deadeye/predator, Celestra: pathfinder/windrunner/shadow_hunter/stargazer). Ranger-lineage jobs now get the bow sprite at their level instead of sword/axe; caster lineage still takes priority for staff (the two lists are disjoint, no overlap).
-- Verified via the same direct logic-replication method (gunner/marksman/railgunner/pathfinder/shadow_hunter → bow at correct tier; casters still → staff; warriors still → sword/axe) and confirmed all 4 bow asset files exist. `npm run build` passes.
+### ðŸ�¹ Milestone 23: All-Faction Ranger Bow (Lv.1/32/42/55) [DEPLOYED]
+- **Assets**: Processed a 4-panel reference sheet (light-blue Lv.55, dark-blue Lv.42, red Lv.32, green/gold Lv.1 â€” bottom-to-top increasing level, opposite ordering from the axe/staff sheets) with the same background-removal technique. Saved as `defallfactionslv1bow.png` / `defallfactionslv32bow.png` / `defallfactionslv42bow.png` / `defallfactionslv55bow.png` in `src/assets/weapons/` and `public/assets/weapons/`, ~480px max dimension.
+- **Eligibility**: Usable by the Ranger/agility-ranged-attacker lineage across **all 3 factions** â€” added a `BOW_JOBS` list to `resolveItemImage` in [gameStore.js](file:///c:/projects/focus-rpg/src/store/gameStore.js) (Arctron: gunner/marksman/railgunner/annihilator, Bionex: marksman/revenant/deadeye/predator, Celestra: pathfinder/windrunner/shadow_hunter/stargazer). Ranger-lineage jobs now get the bow sprite at their level instead of sword/axe; caster lineage still takes priority for staff (the two lists are disjoint, no overlap).
+- Verified via the same direct logic-replication method (gunner/marksman/railgunner/pathfinder/shadow_hunter â†’ bow at correct tier; casters still â†’ staff; warriors still â†’ sword/axe) and confirmed all 4 bow asset files exist. `npm run build` passes.
 
 ---
 
-### 🔫 Milestone 24: Sci-Fi Gun for Arctron/Bionex Rangers (Lv.1/32/42/55) [DEPLOYED]
-- **Assets**: Processed a 4-panel sci-fi rifle/pistol reference sheet (white/yellow assault rifle Lv.55, blue/white sniper rifle Lv.42, blue plasma rifle Lv.32, gold/blue pistol Lv.1 — bottom-to-top increasing level). Needed a stronger hole-fill pass this time (`min_hole_size` threshold on enclosed same-color components, not just border-connected ones) to correctly punch through trigger-guard gaps that the standard border-connected removal missed — first attempt at a low size threshold over-corrected and ate legitimate panel-line shading, tuned up to 200px minimum to fix.
+### ðŸ”« Milestone 24: Sci-Fi Gun for Arctron/Bionex Rangers (Lv.1/32/42/55) [DEPLOYED]
+- **Assets**: Processed a 4-panel sci-fi rifle/pistol reference sheet (white/yellow assault rifle Lv.55, blue/white sniper rifle Lv.42, blue plasma rifle Lv.32, gold/blue pistol Lv.1 â€” bottom-to-top increasing level). Needed a stronger hole-fill pass this time (`min_hole_size` threshold on enclosed same-color components, not just border-connected ones) to correctly punch through trigger-guard gaps that the standard border-connected removal missed â€” first attempt at a low size threshold over-corrected and ate legitimate panel-line shading, tuned up to 200px minimum to fix.
 - Saved as `defallfactionslv1gun.png` / `defallfactionslv32gun.png` / `defallfactionslv42gun.png` / `defallfactionslv55gun.png` in `src/assets/weapons/` and `public/assets/weapons/`, ~480px max dimension.
-- **Eligibility split by race, not just job**: Same `BOW_JOBS` ranger-lineage list as Milestone 23, but `resolveItemImage` now also branches on `playerRace` — **Celestra** rangers (fantasy elf archers) keep the **bow**, **Arctron/Bionex** rangers (sci-fi factions) get the **gun** instead, at the same level tier. User's explicit choice via AskUserQuestion ("Beda per faction") over alternatives (replace bow entirely, or random variety).
-- Verified via direct logic-replication (arctron/bionex ranger jobs → gun at all 4 tiers, celestra ranger jobs → bow at all 4 tiers) and confirmed all 4 gun asset files exist. `npm run build` passes.
+- **Eligibility split by race, not just job**: Same `BOW_JOBS` ranger-lineage list as Milestone 23, but `resolveItemImage` now also branches on `playerRace` â€” **Celestra** rangers (fantasy elf archers) keep the **bow**, **Arctron/Bionex** rangers (sci-fi factions) get the **gun** instead, at the same level tier. User's explicit choice via AskUserQuestion ("Beda per faction") over alternatives (replace bow entirely, or random variety).
+- Verified via direct logic-replication (arctron/bionex ranger jobs â†’ gun at all 4 tiers, celestra ranger jobs â†’ bow at all 4 tiers) and confirmed all 4 gun asset files exist. `npm run build` passes.
 
 ---
 
-### 🔴 Milestone 25: Arctron-Exclusive Special Gun (Lv.32/42/55) [DEPLOYED]
-- **Assets**: Processed a 3-panel sci-fi cannon/rifle reference sheet (red Lv.32, gold Lv.42, blue Lv.55 — top-to-bottom increasing level, same convention as axe/staff). Gold-tier design has an intentional open cage/lattice barrel — background shows through by design, not a rembg defect. Saved as `defarctronlv32special.png` / `defarctronlv42special.png` / `defarctronlv55special.png` in `src/assets/weapons/` and `public/assets/weapons/`, ~480px max dimension.
-- **Eligibility**: Arctron-only, and unlike the Bionex/Celestra staff or the ranger bow/gun, this covers Arctron's *remaining* lineages — warrior (vanguard/juggernaut/dreadnought) and technician (architect/core_engineer/cybermancer). Arctron has no caster class, and its ranger (gunner/marksman/railgunner/annihilator) already gets the Milestone 24 gun, so this slots in as the Arctron-specific replacement for the generic all-faction axe at Lv.32/42/55 — Bionex/Celestra warrior/specialist classes are unaffected and still get the axe. No Lv.1 variant provided; Lv.1 Arctron still falls through to the generic sword.
+### ðŸ”´ Milestone 25: Arctron-Exclusive Special Gun (Lv.32/42/55) [DEPLOYED]
+- **Assets**: Processed a 3-panel sci-fi cannon/rifle reference sheet (red Lv.32, gold Lv.42, blue Lv.55 â€” top-to-bottom increasing level, same convention as axe/staff). Gold-tier design has an intentional open cage/lattice barrel â€” background shows through by design, not a rembg defect. Saved as `defarctronlv32special.png` / `defarctronlv42special.png` / `defarctronlv55special.png` in `src/assets/weapons/` and `public/assets/weapons/`, ~480px max dimension.
+- **Eligibility**: Arctron-only, and unlike the Bionex/Celestra staff or the ranger bow/gun, this covers Arctron's *remaining* lineages â€” warrior (vanguard/juggernaut/dreadnought) and technician (architect/core_engineer/cybermancer). Arctron has no caster class, and its ranger (gunner/marksman/railgunner/annihilator) already gets the Milestone 24 gun, so this slots in as the Arctron-specific replacement for the generic all-faction axe at Lv.32/42/55 â€” Bionex/Celestra warrior/specialist classes are unaffected and still get the axe. No Lv.1 variant provided; Lv.1 Arctron still falls through to the generic sword.
 - **`resolveItemImage`**: Added a `playerRace === 'arctron'` check ahead of the axe fallback (after the caster/ranger checks, so it never overrides staff or gun).
-- Verified via direct logic-replication (arctron warrior/technician jobs at Lv.32/42/55 → arctron special; arctron gunner still → gun; arctron Lv.1 → sword; bionex/celestra warrior still → axe) and confirmed all 3 asset files exist. `npm run build` passes.
+- Verified via direct logic-replication (arctron warrior/technician jobs at Lv.32/42/55 â†’ arctron special; arctron gunner still â†’ gun; arctron Lv.1 â†’ sword; bionex/celestra warrior still â†’ axe) and confirmed all 3 asset files exist. `npm run build` passes.
 
 ---
 
-### 🛡️ Milestone 26: Arctron Warrior Default Armor Set (Lv.1/32/42/55) [DEPLOYED]
-- **Assets**: Processed 4 reference sheets (Lv.1 silver/gold, Lv.32 silver/blue, Lv.42 dark purple, Lv.55 red/gold), each a 5-panel composite (gloves, chest/shoulder "armor", helmet, boots, hip "pants" — no cape/mantle piece). 20 files total saved to `src/assets/armor/` and `public/assets/armor/` as `defarctronwarriorlv{1,32,42,55}{armor,helmet,gloves,boots,pants}.png`, ~480px max dimension.
-- **Slot mapping** confirmed against the actual equipment slot ids in `gameStore.js`/`Inventory.jsx` (`armor`/`helmet`/`gloves`/`boots`/`pants` — `mantle` is a separate cape slot, not covered by this set).
-- **Tooling improvement**: wrote a reusable `scratch/process_armor_set.py` pipeline (divider detection via row mean+std rather than row-min, so faint/low-contrast divider lines between panels are found reliably; background removal keeps enclosed same-color holes above a size threshold so real gaps like trigger guards/eye sockets punch through, while stripping only truly tiny stray-pixel noise so paired items like gloves/boots keep both pieces). Caught and fixed a divider-detection miss on the Lv.1 sheet (armor↔helmet boundary was extremely faint, ~20/255) that had blunted the helmet's fin tips by ~4px; the 3 later tiers (32/42/55) processed cleanly on the first pass with the improved pipeline.
-- Not yet wired into `equipItem`/starter-gear/`resolveItemImage` — this milestone is asset-processing only, per explicit user instruction to hold off on the code integration until the assets are confirmed.
+### ðŸ›¡ï¸� Milestone 26: Arctron Warrior Default Armor Set (Lv.1/32/42/55) [DEPLOYED]
+- **Assets**: Processed 4 reference sheets (Lv.1 silver/gold, Lv.32 silver/blue, Lv.42 dark purple, Lv.55 red/gold), each a 5-panel composite (gloves, chest/shoulder "armor", helmet, boots, hip "pants" â€” no cape/mantle piece). 20 files total saved to `src/assets/armor/` and `public/assets/armor/` as `defarctronwarriorlv{1,32,42,55}{armor,helmet,gloves,boots,pants}.png`, ~480px max dimension.
+- **Slot mapping** confirmed against the actual equipment slot ids in `gameStore.js`/`Inventory.jsx` (`armor`/`helmet`/`gloves`/`boots`/`pants` â€” `mantle` is a separate cape slot, not covered by this set).
+- **Tooling improvement**: wrote a reusable `scratch/process_armor_set.py` pipeline (divider detection via row mean+std rather than row-min, so faint/low-contrast divider lines between panels are found reliably; background removal keeps enclosed same-color holes above a size threshold so real gaps like trigger guards/eye sockets punch through, while stripping only truly tiny stray-pixel noise so paired items like gloves/boots keep both pieces). Caught and fixed a divider-detection miss on the Lv.1 sheet (armorâ†”helmet boundary was extremely faint, ~20/255) that had blunted the helmet's fin tips by ~4px; the 3 later tiers (32/42/55) processed cleanly on the first pass with the improved pipeline.
+- Not yet wired into `equipItem`/starter-gear/`resolveItemImage` â€” this milestone is asset-processing only, per explicit user instruction to hold off on the code integration until the assets are confirmed.
 
 ---
 
-### 🏗️ Milestone 27: Armor-Set Infrastructure (Race/Job-Aware, Multi-Slot) [DEPLOYED]
-- **Generic resolver**: Added `WARRIOR_JOBS`/`TECHNICIAN_JOBS` lineage lists, an `ARMOR_SET_LINEAGES` availability map (currently just `{ arctron: ['warrior'] }`), and `resolveArmorSetImage(slot, race, job, level)` in [gameStore.js](file:///c:/projects/focus-rpg/src/store/gameStore.js) — resolves the correct armor/helmet/gloves/boots/pants sprite by race+job-lineage+level tier, returning `null` (→ falls back to `item.image`) for any race/lineage combo without bespoke art yet. Designed so adding Bionex/Celestra warrior sets, or an Arctron technician set, later is just: add the asset files + add one entry to `ARMOR_SET_LINEAGES`.
-- **Scoped via a new id namespace** (`*_armorset_*`, e.g. `helmet_armorset_arctron_lv32`) so the pre-existing 130 `arm_arctron_*` chest-armor items (all races, all levels, no job lock, static `item.image` URLs) are completely untouched — `resolveItemImage` only intercepts items whose id contains `_armorset_`.
-- **`items.json`**: Added 20 new purchasable items (5 slots × 4 tiers: Lv.1/32/42/55), rarity `C`, `race: "arctron"`, `job: [destroyer, vanguard, juggernaut, dreadnought]` (array — reuses the Milestone 21 multi-value equip-lock support). This fills a real content gap: helmet/gloves/boots/pants previously had **zero** generic/common items in the whole game (only named unique sets like Archon/Council/Legendary existed for those slots). Bonus stats are placeholder values scaled off the existing `arm_arctron_*_C` def-per-level curve (~9.6×level) split across pieces — **not balance-reviewed, flagged for the user to tune**.
-- **Bug fix in `buyFromNpc`**: the shop's random-item-pool filter only ever checked `item.job` for `type === 'weapon'` — armor/helmet/gloves/boots/pants items could never be job-restricted at the shop even though `equipItem` already enforced it after purchase. Generalized the filter to check race+job (both array-or-string) for every equipment type, so the Armor Master NPC now correctly only offers these Warrior-locked pieces to Warrior-lineage Arctron characters.
-- **Verified end-to-end in-browser** (not just logic replication this time): logged in as an Arctron Vanguard (tier2 warrior), bought a helmet from the Armor Master NPC — correctly received `helmet_armorset_arctron_lv32`, confirmed the bag-slot thumbnail and the equip-detail popup both show the bespoke sprite (`/assets/armor/defarctronwarriorlv32helmet.png`), equipped it, and confirmed `player.equipment.helmet` updated correctly and the sprite renders in the actual equipment slot grid.
-- `npm run build` passes. Starter-gear auto-equip at character creation (mirroring the shield pattern) was intentionally left out of this milestone's scope — not requested.
+### ðŸ�—ï¸� Milestone 27: Armor-Set Infrastructure (Race/Job-Aware, Multi-Slot) [DEPLOYED]
+- **Generic resolver**: Added `WARRIOR_JOBS`/`TECHNICIAN_JOBS` lineage lists, an `ARMOR_SET_LINEAGES` availability map (currently just `{ arctron: ['warrior'] }`), and `resolveArmorSetImage(slot, race, job, level)` in [gameStore.js](file:///c:/projects/focus-rpg/src/store/gameStore.js) â€” resolves the correct armor/helmet/gloves/boots/pants sprite by race+job-lineage+level tier, returning `null` (â†’ falls back to `item.image`) for any race/lineage combo without bespoke art yet. Designed so adding Bionex/Celestra warrior sets, or an Arctron technician set, later is just: add the asset files + add one entry to `ARMOR_SET_LINEAGES`.
+- **Scoped via a new id namespace** (`*_armorset_*`, e.g. `helmet_armorset_arctron_lv32`) so the pre-existing 130 `arm_arctron_*` chest-armor items (all races, all levels, no job lock, static `item.image` URLs) are completely untouched â€” `resolveItemImage` only intercepts items whose id contains `_armorset_`.
+- **`items.json`**: Added 20 new purchasable items (5 slots Ã— 4 tiers: Lv.1/32/42/55), rarity `C`, `race: "arctron"`, `job: [destroyer, vanguard, juggernaut, dreadnought]` (array â€” reuses the Milestone 21 multi-value equip-lock support). This fills a real content gap: helmet/gloves/boots/pants previously had **zero** generic/common items in the whole game (only named unique sets like Archon/Council/Legendary existed for those slots). Bonus stats are placeholder values scaled off the existing `arm_arctron_*_C` def-per-level curve (~9.6Ã—level) split across pieces â€” **not balance-reviewed, flagged for the user to tune**.
+- **Bug fix in `buyFromNpc`**: the shop's random-item-pool filter only ever checked `item.job` for `type === 'weapon'` â€” armor/helmet/gloves/boots/pants items could never be job-restricted at the shop even though `equipItem` already enforced it after purchase. Generalized the filter to check race+job (both array-or-string) for every equipment type, so the Armor Master NPC now correctly only offers these Warrior-locked pieces to Warrior-lineage Arctron characters.
+- **Verified end-to-end in-browser** (not just logic replication this time): logged in as an Arctron Vanguard (tier2 warrior), bought a helmet from the Armor Master NPC â€” correctly received `helmet_armorset_arctron_lv32`, confirmed the bag-slot thumbnail and the equip-detail popup both show the bespoke sprite (`/assets/armor/defarctronwarriorlv32helmet.png`), equipped it, and confirmed `player.equipment.helmet` updated correctly and the sprite renders in the actual equipment slot grid.
+- `npm run build` passes. Starter-gear auto-equip at character creation (mirroring the shield pattern) was intentionally left out of this milestone's scope â€” not requested.
 
 ---
 
-### 🏹 Milestone 28: Arctron Ranger Armor Set + Starter-Gear Auto-Equip [DEPLOYED]
-- **Assets**: Processed 4 more reference sheets (Lv.1 white/purple, Lv.32 blue/silver/gold, Lv.42 white/orange, Lv.55 red/teal), same 5-piece structure as the Warrior set. Saved as `defarctronrangerlv{1,32,42,55}{armor,helmet,gloves,boots,pants}.png` (20 files) in `src/assets/armor/` and `public/assets/armor/`. All 4 sheets processed cleanly on the first pass with the `process_armor_set.py` pipeline from Milestone 26 — no divider-detection or truncation issues this round.
-- **Wired the same way as the Warrior set**: added `'ranger'` to `ARMOR_SET_LINEAGES.arctron` (now `['warrior', 'ranger']`), extended `resolveArmorSetImage`'s lineage detection to check `BOW_JOBS` (already existed for weapon resolution) → `'ranger'`. Added 20 matching `items.json` entries (`*_armorset_arctron_ranger_lv*`), `race: "arctron"`, `job: [gunner, marksman, railgunner, annihilator]`, same placeholder stat scaling as the Warrior set — **not balance-reviewed**.
-- **Found and fixed a real UX gap** (user caught this after seeing a freshly-created character had zero gear equipped, "polos"): starter gear was previously only ever added to *inventory* (`verifyStarterShield`), never auto-*equipped*, and the new Milestone 26/27 armor sets had no starter-gear path at all — a brand new Arctron Warrior or Ranger looked completely bare in the Gears tab. Added `verifyStarterArmorSet(player)` in [gameStore.js](file:///c:/projects/focus-rpg/src/store/gameStore.js) (mirrors `verifyStarterShield`'s race/level gating, but directly populates `player.equipment` for all 5 slots instead of just adding to inventory) and call it from [CharacterCreate.jsx](file:///c:/projects/focus-rpg/src/components/CharacterCreate.jsx)'s confirm handler alongside the existing shield grant. Falls through safely (no-op) for any race/lineage without a bespoke set yet.
+### ðŸ�¹ Milestone 28: Arctron Ranger Armor Set + Starter-Gear Auto-Equip [DEPLOYED]
+- **Assets**: Processed 4 more reference sheets (Lv.1 white/purple, Lv.32 blue/silver/gold, Lv.42 white/orange, Lv.55 red/teal), same 5-piece structure as the Warrior set. Saved as `defarctronrangerlv{1,32,42,55}{armor,helmet,gloves,boots,pants}.png` (20 files) in `src/assets/armor/` and `public/assets/armor/`. All 4 sheets processed cleanly on the first pass with the `process_armor_set.py` pipeline from Milestone 26 â€” no divider-detection or truncation issues this round.
+- **Wired the same way as the Warrior set**: added `'ranger'` to `ARMOR_SET_LINEAGES.arctron` (now `['warrior', 'ranger']`), extended `resolveArmorSetImage`'s lineage detection to check `BOW_JOBS` (already existed for weapon resolution) â†’ `'ranger'`. Added 20 matching `items.json` entries (`*_armorset_arctron_ranger_lv*`), `race: "arctron"`, `job: [gunner, marksman, railgunner, annihilator]`, same placeholder stat scaling as the Warrior set â€” **not balance-reviewed**.
+- **Found and fixed a real UX gap** (user caught this after seeing a freshly-created character had zero gear equipped, "polos"): starter gear was previously only ever added to *inventory* (`verifyStarterShield`), never auto-*equipped*, and the new Milestone 26/27 armor sets had no starter-gear path at all â€” a brand new Arctron Warrior or Ranger looked completely bare in the Gears tab. Added `verifyStarterArmorSet(player)` in [gameStore.js](file:///c:/projects/focus-rpg/src/store/gameStore.js) (mirrors `verifyStarterShield`'s race/level gating, but directly populates `player.equipment` for all 5 slots instead of just adding to inventory) and call it from [CharacterCreate.jsx](file:///c:/projects/focus-rpg/src/components/CharacterCreate.jsx)'s confirm handler alongside the existing shield grant. Falls through safely (no-op) for any race/lineage without a bespoke set yet.
 - Verified end-to-end in-browser: registered a fresh Arctron Ranger (Gunner) character, confirmed all 5 slots (`armor`/`helmet`/`gloves`/`boots`/`pants`) auto-populated in `player.equipment` with the correct Lv.1 ranger items immediately on creation, and confirmed the Gears tab visually shows the character fully geared instead of empty. `npm run build` passes.
 
 ---
 
-### 🎨 Milestone 29: Arctron Ranger Lv.1 Armor Set Recolor — Plain Steel [DEPLOYED]
-- **Problem**: Lv.1 Ranger armor (white/silver with purple glowing orbs, gold accents, blue jets) looked too premium/mewah for a starter set — visually comparable to the Lv.32 set. The purple accent was also barely visible which made it look unintentional rather than designed.
+### ðŸŽ¨ Milestone 29: Arctron Ranger Lv.1 Armor Set Recolor â€” Plain Steel [DEPLOYED]
+- **Problem**: Lv.1 Ranger armor (white/silver with purple glowing orbs, gold accents, blue jets) looked too premium/mewah for a starter set â€” visually comparable to the Lv.32 set. The purple accent was also barely visible which made it look unintentional rather than designed.
 - **Solution**: Rewrote all 5 Lv.1 ranger pieces (`armor`, `helmet`, `gloves`, `boots`, `pants`) using a numpy-vectorized HSV recolor script (`scratch/recolor_ranger_lv1.py`):
-  - Purple/violet (hue 250–310°) → near-gray cold steel (hue 210, saturation ×0.10)
-  - Gold/yellow (hue 35–70°) → dull steel gray (saturation ×0.08, brightness ×0.75)
-  - Blue/cyan glow (hue 180–250°, includes jets and orbs) → dim gray-blue (saturation ×0.18, brightness ×0.72)
-  - All other colored pixels (sat >0.12): saturation ×0.28
-- **Result**: Full set is now dark gunmetal steel with virtually no color accent — clearly "starter" tier. Tier progression contrast is now obvious: Lv.1 plain dark → Lv.32 white+blue gem+gold trim → Lv.42 orange/white → Lv.55 red/teal.
-- Updated in both `public/assets/armor/` and `src/assets/armor/` (10 files overwritten, 5 pieces × 2 locations).
+  - Purple/violet (hue 250â€“310Â°) â†’ near-gray cold steel (hue 210, saturation Ã—0.10)
+  - Gold/yellow (hue 35â€“70Â°) â†’ dull steel gray (saturation Ã—0.08, brightness Ã—0.75)
+  - Blue/cyan glow (hue 180â€“250Â°, includes jets and orbs) â†’ dim gray-blue (saturation Ã—0.18, brightness Ã—0.72)
+  - All other colored pixels (sat >0.12): saturation Ã—0.28
+- **Result**: Full set is now dark gunmetal steel with virtually no color accent â€” clearly "starter" tier. Tier progression contrast is now obvious: Lv.1 plain dark â†’ Lv.32 white+blue gem+gold trim â†’ Lv.42 orange/white â†’ Lv.55 red/teal.
+- Updated in both `public/assets/armor/` and `src/assets/armor/` (10 files overwritten, 5 pieces Ã— 2 locations).
 
 ---
 
-### 🔑 Milestone 30: Redesign Login Page (Auth.jsx) [DEPLOYED]
+### ðŸ”‘ Milestone 30: Redesign Login Page (Auth.jsx) [DEPLOYED]
 - **Visuals & Layout**: Redesigned `Auth.jsx` with a premium mecha cockpit-style interface, applying transparent glassmorphism (`backdrop-filter`) and slanted cutout corners (`clip-path`).
 - **Effects**: Added radial gradient space-themed background and animated background drifting embers/particles.
 - **Typography & Colors**: Used high contrast neon/accent colors to ensure readability. Ensured all font sizes are >= 13px.
@@ -440,20 +440,20 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 31: Restore Arctron Ranger Lv.1 Armor Set to Silver [DEPLOYED]
+### ðŸŽ¨ Milestone 31: Restore Arctron Ranger Lv.1 Armor Set to Silver [DEPLOYED]
 - **Assets**: Executed `scratch/restore_ranger_lv1_silver.py` to restore the bright silver/white look of the Arctron Ranger Lv.1 armor set (`armor`, `helmet`, `gloves`, `boots`, `pants`), fixing the over-darkening issue from Milestone 29 while keeping the purple/gold accents desaturated.
-- **Verification**: Verified that all 10 assets (5 items × 2 directories) are updated and that `npm run build` succeeds locally.
+- **Verification**: Verified that all 10 assets (5 items Ã— 2 directories) are updated and that `npm run build` succeeds locally.
 
 ---
 
-### 🤖 Milestone 32: Bionex M.E.U. Sprites Integration [DEPLOYED]
+### ðŸ¤– Milestone 32: Bionex M.E.U. Sprites Integration [DEPLOYED]
 - **Assets**: Processed the user-uploaded mecha images (img-1, img-2, img-3) using `rembg` background removal and saved them as `meu_atlas.png`, `meu_goliath.png`, and `meu_colossus.png` in `src/assets/` and `public/assets/`.
 - **Logic**: Updated `resolveItemImage` in `src/store/gameStore.js` to return the processed mecha sprite URLs for the Bionex M.E.U. Atlas (Lv.32), Goliath (Lv.42), and Colossus (Lv.55) items.
 - **Verification**: Verified that the sprites compile correctly and that `npm run build` succeeds locally.
 
 ---
 
-### 🔧 Milestone 33: Arctron Technician Armor Sets Integration [DEPLOYED]
+### ðŸ”§ Milestone 33: Arctron Technician Armor Sets Integration [DEPLOYED]
 - **Assets**: Processed the user-uploaded composite images for Arctron Technician (lv1, lv32, lv42, lv55 sheets), cropping each into 5 separate components (armor, helmet, gloves, boots, pants) with background removal, saving 20 files total to `src/assets/armor/` and `public/assets/armor/` as `defarctrontechnicianlv{1,32,42,55}{armor,helmet,gloves,boots,pants}.png`.
 - **Items**: Added 20 new purchasable items to `src/data/items.json` for the Technician set (`*_armorset_arctron_technician_lv*`), restricted to the Arctron Specialist/Technician job lineage (`["engineer", "architect", "core_engineer", "cybermancer"]`).
 - **Logic**: Registered `'technician'` in `ARMOR_SET_LINEAGES.arctron` within `src/store/gameStore.js` to enable automatic mecha technician sprite resolution.
@@ -461,7 +461,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🛡️ Milestone 34: Matching Faction Equipment Level Tiers & Starter Weapon [DEPLOYED]
+### ðŸ›¡ï¸� Milestone 34: Matching Faction Equipment Level Tiers & Starter Weapon [DEPLOYED]
 - **Database**: Migrated weapon and shield level requirement tiers in `src/data/items.json` to match the exact armor level tiers:
   - Level 30 -> Level 32 (ID modified from `_30_` to `_32_`, name updated to `Lv.32`)
   - Level 40 -> Level 42 (ID modified from `_40_` to `_42_`, name updated to `Lv.42`)
@@ -473,14 +473,14 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### ⚡ Milestone 35: Fix Hard Refresh Screen Flashing [DEPLOYED]
+### âš¡ Milestone 35: Fix Hard Refresh Screen Flashing [DEPLOYED]
 - **Bug**: Fixed a race condition where hard-refreshing the browser briefly flashed the Character Creator (with its default Arctron background and logo theme) for split seconds before the user's actual save data loaded from the cloud.
 - **Logic**: Added a new `loadingSave` local state to `App.jsx` that remains `true` while the save file is loading. The root component renders the loading overlay until the save fetch finishes, blocking premature mounts of `CharacterCreate`.
 - **Verification**: Verified that the project builds correctly and passes the local production build check.
 
 ---
 
-### 🛡️ Milestone 36: Bionex & Celestra Armor Sets Integration [DEPLOYED]
+### ðŸ›¡ï¸� Milestone 36: Bionex & Celestra Armor Sets Integration [DEPLOYED]
 - **Assets**: Extracted 150 transparent `.png` icons for Bellato (Bionex) and Cora (Celestra) Warrior, Ranger, and Mage (Force) classes at levels `1`, `32`, `42`, `55`, and `66` (extracted from levels 13, 31, 41, 45, and 50 on `rflib.ru` respectively). Placed them in `src/assets/armor_bionex/`, `src/assets/armor_celestra/` and copied to matching public folders.
 - **Stats**: Armor piece DEF values scraped from rflib.ru database and proportionally scaled (RFLIB ratios normalized to match Arctron baseline per tier). Each piece has per-class-per-tier stats rather than generic placeholder values.
 - **Database**: Registered 150 new `_armorset_` items in `src/data/items.json` for Bionex and Celestra armor sets, matching the proper stats, emojis, class names, job arrays, level requirements, and asset image paths.
@@ -489,33 +489,33 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### ⚔️ Milestone 37: Race Unique Stat Advantages [DEPLOYED]
-- **Dodge Rate**: Added race-specific dodge bonus in `gameStore.js` — Arctron: `5%`, Bionex: `+2% (7%)`, Celestra: `+5% (10%)`. Matches the ADR% advantage from original RF Online armor data.
-- **CharacterCreate UI**: Expanded faction trait bars from 3 to 5 stats for all races, adding EVASION and FORCE bars. Arctron shows max ATK/DEF/HP but low Evasion and zero Force. Bionex shows balanced stats with mid Evasion and Force. Celestra shows high ATK/Evasion/Force but lower DEF/HP — accurately matching actual gameplay mechanics.
+### âš”ï¸� Milestone 37: Race Unique Stat Advantages [DEPLOYED]
+- **Dodge Rate**: Added race-specific dodge bonus in `gameStore.js` â€” Arctron: `5%`, Bionex: `+2% (7%)`, Celestra: `+5% (10%)`. Matches the ADR% advantage from original RF Online armor data.
+- **CharacterCreate UI**: Expanded faction trait bars from 3 to 5 stats for all races, adding EVASION and FORCE bars. Arctron shows max ATK/DEF/HP but low Evasion and zero Force. Bionex shows balanced stats with mid Evasion and Force. Celestra shows high ATK/Evasion/Force but lower DEF/HP â€” accurately matching actual gameplay mechanics.
 - **races.json**: Added `dodgeBonus` field to each race's bonuses block, updated `strengths` text to advertise the `+2%` / `+5%` Base Evasion (ADR) advantages for Bionex and Celestra respectively.
 - **Verification**: Build passed. Deployed to VPS via `deploy.ps1`.
 
 
 ---
 
-### 🖼️ Milestone 38: Bionex & Celestra Armor Sprites Upscale + Background Removal [DEPLOYED]
-- **Problem**: The 150 Bionex & Celestra armor sprites in `src/assets/armor_bionex/` and `src/assets/armor_celestra/` were raw scrape exports at 32×32 pixels with solid backgrounds — unusable at game display sizes.
+### ðŸ–¼ï¸� Milestone 38: Bionex & Celestra Armor Sprites Upscale + Background Removal [DEPLOYED]
+- **Problem**: The 150 Bionex & Celestra armor sprites in `src/assets/armor_bionex/` and `src/assets/armor_celestra/` were raw scrape exports at 32Ã—32 pixels with solid backgrounds â€” unusable at game display sizes.
 - **Pipeline** (`scratch/upscale_rembg_armor.py`): For each of 150 files:
-  1. **BFS background removal at 32×32** — flood fill from all 4 corners + edge midpoints (tolerance 35), seeds gather background color palette before filling. Pixel-art solid backgrounds removed cleanly.
-  2. **Scale2x (EPX) ×2**: 32→64→128px — pixel-art-aware edge smoothing that preserves clean hard edges instead of blurring them.
-  3. **PIL LANCZOS 128→320px** — smooth final upscale to match Arctron armor display size (~300–400px).
-- **Output**: 75 Celestra + 75 Bionex files overwritten in-place (both `public/` and `src/` copies). Transparent PNGs, 320×320.
+  1. **BFS background removal at 32Ã—32** â€” flood fill from all 4 corners + edge midpoints (tolerance 35), seeds gather background color palette before filling. Pixel-art solid backgrounds removed cleanly.
+  2. **Scale2x (EPX) Ã—2**: 32â†’64â†’128px â€” pixel-art-aware edge smoothing that preserves clean hard edges instead of blurring them.
+  3. **PIL LANCZOS 128â†’320px** â€” smooth final upscale to match Arctron armor display size (~300â€“400px).
+- **Output**: 75 Celestra + 75 Bionex files overwritten in-place (both `public/` and `src/` copies). Transparent PNGs, 320Ã—320.
 
 ---
 
-### 🎨 Milestone 39: AI Regeneration of Armor Sprites to Anime Realistic Art [DEPLOYED]
+### ðŸŽ¨ Milestone 39: AI Regeneration of Armor Sprites to Anime Realistic Art [DEPLOYED]
 - **Issue**: The upscaled pixel art for Bionex and Celestra armor sets still looked too blocky and digital compared to the high-end painted style of Arctron gears.
 - **Solution**: Initiated a phased approach to regenerate the armor sets using AI generation (Gemini) strictly adhering to an "Anime Realistic Art" style while maintaining the core shapes, color palettes, and identity of the original RF Online armor pieces.
 - **Implementation**: 
   - Completed **Bionex Warrior Level 1 Set** (Helmet/Bandana, Chest Armor, Pants, Gloves, Boots).
   - Completed **Celestra Warrior Level 1 Set** (Helmet/Circlet, Chest Armor, Pants, Gloves, Boots).
   - Completed **Celestra Mage (Spiritualist) Level 1 Set** (Helmet/Circlet, Upper Robe, Lower Robe/Pants, Gloves, Boots).
-### ⚔️ Milestone 40: Combat Math Overhaul (PvE, PvP, & Chip War) [DEPLOYED]
+### âš”ï¸� Milestone 40: Combat Math Overhaul (PvE, PvP, & Chip War) [DEPLOYED]
 - **Issue**: The combat mechanics completely ignored weapon stats (`meleeAtk`, `rangedAtk`, `forceAtk`) and race bonuses like `Evasion` (Dodge Rate) and `Crit`. PvE Offline progression only used base `atk` upgrades, and PvP/Chip War used raw stats blindly, making all equipment and job choices meaningless in battle. Furthermore, `api/chip-war/attack` blindly trusted client's `attackPower` input.
 - **Solution**: 
   - **PvE (`gameStore.js`)**: Updated `computeRewards` to call `get().getStats()` and calculate DPS using active weapon type attacks (`meleeAtk`/`rangedAtk`/`forceAtk`), Evasion, and Critical Rate.
@@ -525,103 +525,103 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 39b: Arctron Ranger Lv.1 Armor Set Restored to Silver [DEPLOYED]
-- **Problem**: Previous recolor pass (Milestone 29) made the Lv.1 Ranger set too dark — full dark gunmetal, losing the white/silver base. User requested silver base with purple accent removed.
+### ðŸŽ¨ Milestone 39b: Arctron Ranger Lv.1 Armor Set Restored to Silver [DEPLOYED]
+- **Problem**: Previous recolor pass (Milestone 29) made the Lv.1 Ranger set too dark â€” full dark gunmetal, losing the white/silver base. User requested silver base with purple accent removed.
 - **Fix** (`scratch/restore_ranger_lv1_silver.py`): Working from the dark files, HSV-targeted restore:
-  - Blue-range pixels (hue 150–250°, the silver armor's cool-tone base): val ÷ 0.72 (reverse the prior darkening), saturation ×(0.08/0.18) — brings bright silver back
-  - Near-achromatic dark pixels (sat < 0.08, val < 0.7): val ÷ 0.82 — restores shadow details
-  - Purple-hued pixels (hue 250–310°): keep as light gray (val ×1.15 capped at 0.75, sat ×0.05) — stays desaturated/no-purple
-  - Gold-hued pixels (hue 35–70°): keep as gray (val ×1.1 capped at 0.70, sat ×0.05)
+  - Blue-range pixels (hue 150â€“250Â°, the silver armor's cool-tone base): val Ã· 0.72 (reverse the prior darkening), saturation Ã—(0.08/0.18) â€” brings bright silver back
+  - Near-achromatic dark pixels (sat < 0.08, val < 0.7): val Ã· 0.82 â€” restores shadow details
+  - Purple-hued pixels (hue 250â€“310Â°): keep as light gray (val Ã—1.15 capped at 0.75, sat Ã—0.05) â€” stays desaturated/no-purple
+  - Gold-hued pixels (hue 35â€“70Â°): keep as gray (val Ã—1.1 capped at 0.70, sat Ã—0.05)
 - **Result**: White/silver mech base restored; purple orbs and gold accents remain suppressed as neutral gray. Set looks clearly Lv.1 "starter" without being dull. 5 files updated in `public/assets/armor/` and `src/assets/armor/`.
 
 ---
 
-### 🖼️ Milestone 40b: Bionex & Celestra Armor Sprites — waifu2x Upscale (Placeholder) [DEPLOYED]
+### ðŸ–¼ï¸� Milestone 40b: Bionex & Celestra Armor Sprites â€” waifu2x Upscale (Placeholder) [DEPLOYED]
 - **Problem**: Previous Scale2x upscale pipeline (Milestone 38) produced visibly jagged/pixelated edges on the 32x32 source sprites. Classic AI upscalers (EDSR) produced worse results (blur artifacts, wrong for pixel art).
-- **Solution**: Switched to **waifu2x-ncnn-vulkan** (nihui, v20220728) — a GPU-accelerated upscaler specifically designed for anime/game pixel art. Ran on Intel UHD GPU via Vulkan.
-- **Pipeline** (`scratch/upscale_waifu2x.py`): Restore originals from git HEAD~1 → BFS background removal at 32×32 → waifu2x 4x (32→128, denoise=0) → LANCZOS 128→320. Both factions processed in ~7s each.
-- **Status**: Kept as **placeholder** — user plans to regenerate sprites via a dedicated AI image generator ("Nano Banana Pro") for higher quality results matching Arctron's smooth render style. These waifu2x versions are an improvement over raw Scale2x in the meantime.
+- **Solution**: Switched to **waifu2x-ncnn-vulkan** (nihui, v20220728) â€” a GPU-accelerated upscaler specifically designed for anime/game pixel art. Ran on Intel UHD GPU via Vulkan.
+- **Pipeline** (`scratch/upscale_waifu2x.py`): Restore originals from git HEAD~1 â†’ BFS background removal at 32Ã—32 â†’ waifu2x 4x (32â†’128, denoise=0) â†’ LANCZOS 128â†’320. Both factions processed in ~7s each.
+- **Status**: Kept as **placeholder** â€” user plans to regenerate sprites via a dedicated AI image generator ("Nano Banana Pro") for higher quality results matching Arctron's smooth render style. These waifu2x versions are an improvement over raw Scale2x in the meantime.
 - **Files updated**: 150 files across `public/assets/armor_bionex/` and `public/assets/armor_celestra/` (src copies too).
 
 ---
 
-### 🔧 Milestone 41: verifyStarterArmorSet — Remove Level Guard + waifu2x Sprites Deploy [DEPLOYED]
+### ðŸ”§ Milestone 41: verifyStarterArmorSet â€” Remove Level Guard + waifu2x Sprites Deploy [DEPLOYED]
 - **Bug**: `verifyStarterArmorSet` had `player.level > 1` guard that prevented existing characters (created before Milestone 28) from receiving their faction starter armor set. Only brand-new level-1 characters got the set.
 - **Fix**: Removed the `player.level > 1` check from `verifyStarterArmorSet` in `gameStore.js`. The `alreadyHasSet` guard (checks if any of the 5 armor slots already has an item) still prevents overwriting existing gear. Since `loadPlayer` already calls `verifyStarterArmorSet` on every save load, all existing bare characters will auto-receive their faction Lv.1 armor set on next login.
-- **Also included**: waifu2x upscaled sprites for all 150 Bionex & Celestra armor pieces (Milestone 40b) — deployed together in this batch.
+- **Also included**: waifu2x upscaled sprites for all 150 Bionex & Celestra armor pieces (Milestone 40b) â€” deployed together in this batch.
 
 ---
 
-### 🖼️ Milestone 42: Armor Slot Rendering Fix — Checkerboard Background Eliminated [DEPLOYED]
-- **Bug**: Bionex & Celestra armor set items (IDs containing `_armorset_`) were rendered with `imageRendering: 'pixelated'` (CSS nearest-neighbor). These items are now 320×320 waifu2x-upscaled PNGs (not pixel art), so nearest-neighbor downscaling from 320→~80px in the gear/inventory slots caused visible checkerboard/grid artifacts at transparent-to-opaque edges ("kotak2" as reported by user).
-- **Fix 1**: Removed conditional `imageRendering: pixelated` for `_armorset_` items across `Inventory.jsx` (3 occurrences) and `Cargo.jsx` (2 occurrences) — all set to `'auto'` (bilinear smoothing).
-- **Fix 2**: Ran `scratch/fill_armor_holes.py` — BFS flood from border to detect transparent pixels enclosed inside armor shapes (false holes from aggressive 32×32 BFS background removal). Filled 10 files: `defcelestramagelv1armor/boots/gloves/helmet/pants`, `defcelestramagelv42helmet`, `defcelestrawarriorlv1gloves/helmet`, `defbionexrangerlv42boots`, `defbionexwarriorlv55boots` (19,726 hole pixels total restored).
+### ðŸ–¼ï¸� Milestone 42: Armor Slot Rendering Fix â€” Checkerboard Background Eliminated [DEPLOYED]
+- **Bug**: Bionex & Celestra armor set items (IDs containing `_armorset_`) were rendered with `imageRendering: 'pixelated'` (CSS nearest-neighbor). These items are now 320Ã—320 waifu2x-upscaled PNGs (not pixel art), so nearest-neighbor downscaling from 320â†’~80px in the gear/inventory slots caused visible checkerboard/grid artifacts at transparent-to-opaque edges ("kotak2" as reported by user).
+- **Fix 1**: Removed conditional `imageRendering: pixelated` for `_armorset_` items across `Inventory.jsx` (3 occurrences) and `Cargo.jsx` (2 occurrences) â€” all set to `'auto'` (bilinear smoothing).
+- **Fix 2**: Ran `scratch/fill_armor_holes.py` â€” BFS flood from border to detect transparent pixels enclosed inside armor shapes (false holes from aggressive 32Ã—32 BFS background removal). Filled 10 files: `defcelestramagelv1armor/boots/gloves/helmet/pants`, `defcelestramagelv42helmet`, `defcelestrawarriorlv1gloves/helmet`, `defbionexrangerlv42boots`, `defbionexwarriorlv55boots` (19,726 hole pixels total restored).
 
 ---
 
-### 📁 Milestone 43: Mage Armor Files — Three-Way Slot Rename (All Tiers, Both Factions) [DEPLOYED]
+### ðŸ“� Milestone 43: Mage Armor Files â€” Three-Way Slot Rename (All Tiers, Both Factions) [DEPLOYED]
 - **Bug**: All celestra and bionex mage armor source files had their gloves/boots/pants PNG names swapped in a cycle: file named `gloves` contained boots art, file named `boots` contained pants art, file named `pants` contained gloves art. This made all three slots display wrong items in the gear tab.
-- **Scope**: All 5 tiers (lv1/32/42/55/66) × 2 factions (celestra + bionex) × 2 directories (public/ + src/) = 20 tier-sets renamed.
-- **Fix**: `scratch/fix_mage_naming.py` — three-way swap via temp file: `gloves→temp, pants→gloves, boots→pants, temp→boots`. The cycle `(gloves content=boots) → (boots content=pants) → (pants content=gloves)` is now corrected.
+- **Scope**: All 5 tiers (lv1/32/42/55/66) Ã— 2 factions (celestra + bionex) Ã— 2 directories (public/ + src/) = 20 tier-sets renamed.
+- **Fix**: `scratch/fix_mage_naming.py` â€” three-way swap via temp file: `glovesâ†’temp, pantsâ†’gloves, bootsâ†’pants, tempâ†’boots`. The cycle `(gloves content=boots) â†’ (boots content=pants) â†’ (pants content=gloves)` is now corrected.
 - **Note**: An earlier `fix_checker_bg.py` attempt accidentally damaged non-warrior-lv1 files by treating armor-colored border pixels as achromatic background. All damaged files were restored from git HEAD via `scratch/restore_armor_from_git.py`, which also re-applies the mage rename and re-fills interior holes.
 
 ---
 
-### 🖼️ Milestone 44: Bionex Warrior Lv.1 — Checker Background Removal [DEPLOYED]
-- **Bug**: Bionex warrior Lv.1 armor set (5 pieces: armor/helmet/gloves/boots/pants) had a photoshop-style gray checkerboard pattern baked in as actual opaque pixels (not transparency). The original source art was saved from a render app with the checker pattern as a background placeholder. The waifu2x BFS at 32×32 only caught one shade of gray (lighter squares, within tolerance 35) and left the darker checker squares as opaque, resulting in a visible "kotak2" background in the game.
-- **Fix**: `scratch/fix_checker_bg.py` — dual-seed BFS: collects all achromatic (R≈G≈B within 20) border pixel colors, then floods inward removing any border-connected pixel matching any seed color. Removed 590k–841k pixels per piece (5 large high-res render files, not the 32×32 pixel-art pipeline). All 5 files are now fully transparent outside the armor shape.
+### ðŸ–¼ï¸� Milestone 44: Bionex Warrior Lv.1 â€” Checker Background Removal [DEPLOYED]
+- **Bug**: Bionex warrior Lv.1 armor set (5 pieces: armor/helmet/gloves/boots/pants) had a photoshop-style gray checkerboard pattern baked in as actual opaque pixels (not transparency). The original source art was saved from a render app with the checker pattern as a background placeholder. The waifu2x BFS at 32Ã—32 only caught one shade of gray (lighter squares, within tolerance 35) and left the darker checker squares as opaque, resulting in a visible "kotak2" background in the game.
+- **Fix**: `scratch/fix_checker_bg.py` â€” dual-seed BFS: collects all achromatic (Râ‰ˆGâ‰ˆB within 20) border pixel colors, then floods inward removing any border-connected pixel matching any seed color. Removed 590kâ€“841k pixels per piece (5 large high-res render files, not the 32Ã—32 pixel-art pipeline). All 5 files are now fully transparent outside the armor shape.
 
 ---
 
-### 🔗 Milestone 45: Armor Image URL Cache-Busting (`?v=2`) [DEPLOYED]
+### ðŸ”— Milestone 45: Armor Image URL Cache-Busting (`?v=2`) [DEPLOYED]
 - **Root cause**: Milestone 43 renamed the CONTENT of armor PNG files (gloves.png now truly has gloves art, boots.png truly has boots art, etc.) but kept the same URLs. Browsers and PWA service workers had cached the old content under those URLs, so the rename was invisible until the user cleared cache.
 - **Fix**: Added `?v=2` query parameter to all `resolveArmorSetImage` return values in `src/store/gameStore.js`. This changes the URL for every armor-set image, forcing all browsers/PWAs to fetch fresh content regardless of their cached version of the previous URL.
 - **Applies to**: All bionex + celestra armor set pieces (`armor_bionex/`, `armor_celestra/`, and `armor/` fallback).
 
 ---
 
-### 🎨 Milestone 46: Celestra Ranger Lv.1 — High-Res Armor Set Replacement [DEPLOYED]
-- **Source**: User supplied a high-quality reference sheet (`public/ref/Celestra/armor_celestra/ranger-lv1-armor.png`, 1080×607) containing all 5 armor pieces composited on a black background — a major quality upgrade over the previous waifu2x-upscaled 32×32-sourced placeholder art.
-- **Pipeline**: Auto-detected the 5 piece bounding boxes via connected-component labeling (`scipy.ndimage.label`, brightness threshold), merged split sub-blobs (helmet and gloves each render as 2 disconnected pieces in the source sheet), then per-piece: BFS flood-fill background removal from image border (tolerance 45, 8-directional) to cleanly eliminate the black background and JPEG-compression speckle noise, square-padded, and LANCZOS-resized to the standard 320×320.
+### ðŸŽ¨ Milestone 46: Celestra Ranger Lv.1 â€” High-Res Armor Set Replacement [DEPLOYED]
+- **Source**: User supplied a high-quality reference sheet (`public/ref/Celestra/armor_celestra/ranger-lv1-armor.png`, 1080Ã—607) containing all 5 armor pieces composited on a black background â€” a major quality upgrade over the previous waifu2x-upscaled 32Ã—32-sourced placeholder art.
+- **Pipeline**: Auto-detected the 5 piece bounding boxes via connected-component labeling (`scipy.ndimage.label`, brightness threshold), merged split sub-blobs (helmet and gloves each render as 2 disconnected pieces in the source sheet), then per-piece: BFS flood-fill background removal from image border (tolerance 45, 8-directional) to cleanly eliminate the black background and JPEG-compression speckle noise, square-padded, and LANCZOS-resized to the standard 320Ã—320.
 - **Files replaced** (same filenames, both `public/assets/armor_celestra/` and `src/assets/armor_celestra/`): `defcelestrarangerlv1armor.png`, `defcelestrarangerlv1gloves.png`, `defcelestrarangerlv1boots.png`, `defcelestrarangerlv1pants.png`.
-- **Piece identification** (chest torso = armor, leg guards = pants, mechanical hand+gauntlet = gloves, leather combat boots = boots) — confirmed against the source composite layout.
-- **Correction**: The "horned hood-shape" middle piece in the composite sheet was initially assumed to be the helmet, but the user provided a dedicated helmet reference (`public/ref/Celestra/armor_celestra/helmet-celes-ranger-lv1.png` — a crab-like techno helmet with a glowing blue crystal). `defcelestrarangerlv1helmet.png` was cropped/cleaned from that separate source instead, using the same BFS background-removal pipeline (tolerance 45, 8-directional flood from border), tight-cropped to content bounds, square-padded, and resized to 320×320.
+- **Piece identification** (chest torso = armor, leg guards = pants, mechanical hand+gauntlet = gloves, leather combat boots = boots) â€” confirmed against the source composite layout.
+- **Correction**: The "horned hood-shape" middle piece in the composite sheet was initially assumed to be the helmet, but the user provided a dedicated helmet reference (`public/ref/Celestra/armor_celestra/helmet-celes-ranger-lv1.png` â€” a crab-like techno helmet with a glowing blue crystal). `defcelestrarangerlv1helmet.png` was cropped/cleaned from that separate source instead, using the same BFS background-removal pipeline (tolerance 45, 8-directional flood from border), tight-cropped to content bounds, square-padded, and resized to 320Ã—320.
 
 ---
 
-### ⚔️ Milestone 47: All-Faction Lv.1 Sword Sprites — Removed Dead Padding [DEPLOYED]
-- **Bug**: `defallfactionslv1sword{1,2,3}.png` (the generic Lv.1 warrior-lineage weapon, used by all 3 factions incl. Bionex) had a stray 2px-wide vertical line artifact spanning the full image height at the extreme left edge (x=0), with the actual sword artwork crammed into the remaining ~35% of canvas width on the right. Since equipment slots render with `objectFit: contain`, the empty dead space scaled down the visible sword to a fraction of the slot size — reported by user as "gambar pedang cuilik" (tiny sword image).
-- **Fix**: Connected-component analysis (`scipy.ndimage.label`) isolated the stray left-edge line (thin blob touching x=0, width ≤3px, height ≥70% of canvas) from the real sword-shape blobs, zeroed its alpha, then tight-cropped to the bounding box of the remaining content with 4px padding.
-- **Result**: `sword1` 310×58→125×56, `sword2` 312×71→133×68, `sword3` 318×55→129×55 (roughly 2.5x more of the canvas is now sword instead of empty space). `sword4` was already tightly cropped (no change needed). Checked Lv.32/42/55 axe sprites for the same issue — all had healthy 87–91% fill ratios, no fix needed there.
-- **Follow-up (same milestone)**: Even after the crop, the swords still rendered small in the square gear slot because `objectFit: contain` fits to the *limiting* dimension — a long shallow-diagonal blade (e.g. 125×56, ~2.2:1 aspect) gets scaled down to fit slot width, leaving large empty top/bottom margins. Searched rotation angles 0–90° per sword to maximize bounding-box squareness (`min(w,h)/max(w,h)`), landing on 60–68° for all 4 variants (squareness 0.97–0.99, up from ~0.45–0.5 unrotated). Rotated each sword to a steeper near-vertical diagonal (blade tip up, hilt down) and re-cropped tightly: `sword1` →98×101, `sword2`→109×106, `sword3`→101×102, `sword4`→104×104. All 4 now nearly fill a square slot.
+### âš”ï¸� Milestone 47: All-Faction Lv.1 Sword Sprites â€” Removed Dead Padding [DEPLOYED]
+- **Bug**: `defallfactionslv1sword{1,2,3}.png` (the generic Lv.1 warrior-lineage weapon, used by all 3 factions incl. Bionex) had a stray 2px-wide vertical line artifact spanning the full image height at the extreme left edge (x=0), with the actual sword artwork crammed into the remaining ~35% of canvas width on the right. Since equipment slots render with `objectFit: contain`, the empty dead space scaled down the visible sword to a fraction of the slot size â€” reported by user as "gambar pedang cuilik" (tiny sword image).
+- **Fix**: Connected-component analysis (`scipy.ndimage.label`) isolated the stray left-edge line (thin blob touching x=0, width â‰¤3px, height â‰¥70% of canvas) from the real sword-shape blobs, zeroed its alpha, then tight-cropped to the bounding box of the remaining content with 4px padding.
+- **Result**: `sword1` 310Ã—58â†’125Ã—56, `sword2` 312Ã—71â†’133Ã—68, `sword3` 318Ã—55â†’129Ã—55 (roughly 2.5x more of the canvas is now sword instead of empty space). `sword4` was already tightly cropped (no change needed). Checked Lv.32/42/55 axe sprites for the same issue â€” all had healthy 87â€“91% fill ratios, no fix needed there.
+- **Follow-up (same milestone)**: Even after the crop, the swords still rendered small in the square gear slot because `objectFit: contain` fits to the *limiting* dimension â€” a long shallow-diagonal blade (e.g. 125Ã—56, ~2.2:1 aspect) gets scaled down to fit slot width, leaving large empty top/bottom margins. Searched rotation angles 0â€“90Â° per sword to maximize bounding-box squareness (`min(w,h)/max(w,h)`), landing on 60â€“68Â° for all 4 variants (squareness 0.97â€“0.99, up from ~0.45â€“0.5 unrotated). Rotated each sword to a steeper near-vertical diagonal (blade tip up, hilt down) and re-cropped tightly: `sword1` â†’98Ã—101, `sword2`â†’109Ã—106, `sword3`â†’101Ã—102, `sword4`â†’104Ã—104. All 4 now nearly fill a square slot.
 
 ---
 
-### 🏹 Milestone 48: Celestra Ranger Lv.1 — Empty Weapon Slot Fix [DEPLOYED]
-- **Bug**: `verifyStarterWeapon` (`gameStore.js`) only ever pushed the granted starter weapon into `player.inventory` — it never wrote to `player.equipment.weapon`. Every race/job got a weapon added to their bag, but nobody's Gears tab weapon slot was auto-populated, unlike `verifyStarterArmorSet` (Milestone 41) which equips directly. Reported by user as "celestra ranger lv1 weapon kosong" (empty weapon slot) — same class of bug as M41, just never caught for weapons since most players equip manually from the bag without noticing.
+### ðŸ�¹ Milestone 48: Celestra Ranger Lv.1 â€” Empty Weapon Slot Fix [DEPLOYED]
+- **Bug**: `verifyStarterWeapon` (`gameStore.js`) only ever pushed the granted starter weapon into `player.inventory` â€” it never wrote to `player.equipment.weapon`. Every race/job got a weapon added to their bag, but nobody's Gears tab weapon slot was auto-populated, unlike `verifyStarterArmorSet` (Milestone 41) which equips directly. Reported by user as "celestra ranger lv1 weapon kosong" (empty weapon slot) â€” same class of bug as M41, just never caught for weapons since most players equip manually from the bag without noticing.
 - **Fix**: Rewrote `verifyStarterWeapon` to equip directly into `player.equipment.weapon` (mirroring the M41 armor-set pattern), and removed the same stale `player.level > 1` guard so existing characters get fixed retroactively on next load. If an old-style grant had already left an unequipped weapon sitting in the bag, that existing item is equipped instead of minting a duplicate.
-- **Related data bug found + fixed**: While tracing this, found `wep_job_mystic_archer_D` (the celestra ranger starter weapon, through all 10 rarity tiers `_D` to `_UR`) was job-locked to `"mystic_archer"` — a job id that doesn't exist anywhere in `jobs.json`. The actual celestra ranger lineage ids are `pathfinder`/`windrunner`/`shadow_hunter`/`stargazer` (tier1–4). This wouldn't have blocked the initial auto-equip (which bypasses `equipItem`'s validation), but would have permanently blocked *re-equipping* the weapon after any unequip, since `equipItem` checks `item.job` against `player.job` and rejects mismatches. Updated all 10 `wep_job_mystic_archer_*` items' `job` field from the string `"mystic_archer"` to the array `["pathfinder", "windrunner", "shadow_hunter", "stargazer"]` in `items.json`, using a targeted line-replace (not a full JSON re-serialize, which would've reformatted the entire 24k-line file and escaped-unicode emoji back to literal characters).
-- **Scoped out**: Discovered the broader `wep_job_*` item family (~280 items across all 3 factions) largely uses an entirely different, older job-naming scheme (`cadet`, `iron_trooper`, `bionex_warrior`, `acolyte`, etc.) unrelated to `jobs.json`'s current ids — this looks like a legacy/vestigial itemization system. Flagged separately as a background task rather than fixed inline, since auditing and remapping ~280 items across 3 factions is a much larger, separate effort from this specific bug report.
+- **Related data bug found + fixed**: While tracing this, found `wep_job_mystic_archer_D` (the celestra ranger starter weapon, through all 10 rarity tiers `_D` to `_UR`) was job-locked to `"mystic_archer"` â€” a job id that doesn't exist anywhere in `jobs.json`. The actual celestra ranger lineage ids are `pathfinder`/`windrunner`/`shadow_hunter`/`stargazer` (tier1â€“4). This wouldn't have blocked the initial auto-equip (which bypasses `equipItem`'s validation), but would have permanently blocked *re-equipping* the weapon after any unequip, since `equipItem` checks `item.job` against `player.job` and rejects mismatches. Updated all 10 `wep_job_mystic_archer_*` items' `job` field from the string `"mystic_archer"` to the array `["pathfinder", "windrunner", "shadow_hunter", "stargazer"]` in `items.json`, using a targeted line-replace (not a full JSON re-serialize, which would've reformatted the entire 24k-line file and escaped-unicode emoji back to literal characters).
+- **Scoped out**: Discovered the broader `wep_job_*` item family (~280 items across all 3 factions) largely uses an entirely different, older job-naming scheme (`cadet`, `iron_trooper`, `bionex_warrior`, `acolyte`, etc.) unrelated to `jobs.json`'s current ids â€” this looks like a legacy/vestigial itemization system. Flagged separately as a background task rather than fixed inline, since auditing and remapping ~280 items across 3 factions is a much larger, separate effort from this specific bug report.
 
 ---
 
-### 🖼️ Milestone 49: Weapon & Shield Sprite Normalization + Cache-Bust [DEPLOYED]
-- **Bug 1 (stale cache)**: User hard-refreshed and still saw the old, dead-space-heavy Bionex Lv.1 sword after M47's rotation/crop fix deployed — because M47 kept the same filenames, browsers/PWAs kept serving the cached pre-fix bytes (identical root cause to M45's armor cache issue, just not yet applied to weapon/shield URLs).
+### ðŸ–¼ï¸� Milestone 49: Weapon & Shield Sprite Normalization + Cache-Bust [DEPLOYED]
+- **Bug 1 (stale cache)**: User hard-refreshed and still saw the old, dead-space-heavy Bionex Lv.1 sword after M47's rotation/crop fix deployed â€” because M47 kept the same filenames, browsers/PWAs kept serving the cached pre-fix bytes (identical root cause to M45's armor cache issue, just not yet applied to weapon/shield URLs).
 - **Fix 1**: Added `?v=2` cache-busting query param to every weapon and shield URL returned by `resolveItemImage` in `gameStore.js` (all sword/axe/bow/gun/staff/special tiers, and all bionex/arctron/celestra shield tiers).
-- **Bug 2 (inconsistent framing)**: User also flagged that weapon/shield icons look visually smaller/inconsistent next to the armor-set icons — auditing actual canvas sizes confirmed wild inconsistency: weapons ranged from tiny 98×101 (our just-fixed swords) up to 480×466 (staffs), and shields ranged from a barely-there 56×85 (`lv42bionexshielddef.png`, `lv42celesshielddef.png`) up to 682×333 (`lv42arctronshielddef.png`) — meaning fill-ratio and aspect ratio varied wildly across items even though all render through the same `objectFit: contain` square slots.
-- **Fix 2**: Normalized all 40 weapon + shield source files (`public/assets/weapons/`, `public/assets/{bionex,arctron,celestra}/shields/`, and their `src/assets/` mirrors) with one pipeline: tight-crop to the non-transparent content bounding box, pad to a square canvas (6% margin), LANCZOS-resize to a standard 320×320 — matching the armor-set convention established in Milestones 40/46. All weapon and shield icons now occupy a consistent proportion of their gear slot.
+- **Bug 2 (inconsistent framing)**: User also flagged that weapon/shield icons look visually smaller/inconsistent next to the armor-set icons â€” auditing actual canvas sizes confirmed wild inconsistency: weapons ranged from tiny 98Ã—101 (our just-fixed swords) up to 480Ã—466 (staffs), and shields ranged from a barely-there 56Ã—85 (`lv42bionexshielddef.png`, `lv42celesshielddef.png`) up to 682Ã—333 (`lv42arctronshielddef.png`) â€” meaning fill-ratio and aspect ratio varied wildly across items even though all render through the same `objectFit: contain` square slots.
+- **Fix 2**: Normalized all 40 weapon + shield source files (`public/assets/weapons/`, `public/assets/{bionex,arctron,celestra}/shields/`, and their `src/assets/` mirrors) with one pipeline: tight-crop to the non-transparent content bounding box, pad to a square canvas (6% margin), LANCZOS-resize to a standard 320Ã—320 â€” matching the armor-set convention established in Milestones 40/46. All weapon and shield icons now occupy a consistent proportion of their gear slot.
 
 ---
 
-### 🏹 Milestone 50: Bow/Gun Rotation Fix + Celestra Ranger Helmet Rescale [DEPLOYED]
-- **Bug 1**: After M49's normalization, the bow/gun weapon sprites (`defallfactionslv{1,32,42,55}bow.png`, `defallfactionslv{1,32,42,55}gun.png`) still rendered tiny in the gear slot — M49's tight-crop-and-square-pad preserved each sprite's *original* aspect ratio, and bows/guns are drawn as long shallow diagonals (squareness 0.32–0.55, i.e. width 2–3× the height), so padding to a square canvas left huge empty top/bottom margins, same root cause M47 already fixed for swords.
-- **Fix 1**: Applied the same rotation-search technique from M47 to all 8 bow/gun tiers — searched rotation angles (both directions, 0–90°) to maximize bounding-box squareness, landing on 42–66° per variant (squareness now 0.98–1.0, up from 0.32–0.55). Re-cropped and resized to 320×320 after rotating.
-- **Bug 2**: User flagged the new Celestra Ranger Lv.1 helmet (Milestone 46) looked oversized/zoomed-in compared to its 4 sibling pieces (armor/gloves/boots/pants) in the gear grid. Measured fill ratios confirmed it: helmet was 0.88 (bounding-box area ÷ canvas area) vs. 0.62–0.75 for the other 4 pieces — it had noticeably less padding around the content than its siblings.
-- **Fix 2**: Re-cropped `defcelestrarangerlv1helmet.png` from the same source reference with a larger 9% margin (up from ~3%), bringing its fill ratio down to ~0.67 — now visually consistent with its sibling pieces.
+### ðŸ�¹ Milestone 50: Bow/Gun Rotation Fix + Celestra Ranger Helmet Rescale [DEPLOYED]
+- **Bug 1**: After M49's normalization, the bow/gun weapon sprites (`defallfactionslv{1,32,42,55}bow.png`, `defallfactionslv{1,32,42,55}gun.png`) still rendered tiny in the gear slot â€” M49's tight-crop-and-square-pad preserved each sprite's *original* aspect ratio, and bows/guns are drawn as long shallow diagonals (squareness 0.32â€“0.55, i.e. width 2â€“3Ã— the height), so padding to a square canvas left huge empty top/bottom margins, same root cause M47 already fixed for swords.
+- **Fix 1**: Applied the same rotation-search technique from M47 to all 8 bow/gun tiers â€” searched rotation angles (both directions, 0â€“90Â°) to maximize bounding-box squareness, landing on 42â€“66Â° per variant (squareness now 0.98â€“1.0, up from 0.32â€“0.55). Re-cropped and resized to 320Ã—320 after rotating.
+- **Bug 2**: User flagged the new Celestra Ranger Lv.1 helmet (Milestone 46) looked oversized/zoomed-in compared to its 4 sibling pieces (armor/gloves/boots/pants) in the gear grid. Measured fill ratios confirmed it: helmet was 0.88 (bounding-box area Ã· canvas area) vs. 0.62â€“0.75 for the other 4 pieces â€” it had noticeably less padding around the content than its siblings.
+- **Fix 2**: Re-cropped `defcelestrarangerlv1helmet.png` from the same source reference with a larger 9% margin (up from ~3%), bringing its fill ratio down to ~0.67 â€” now visually consistent with its sibling pieces.
 
 ---
 
-### 🎨 Milestone 51: Bionex Warrior Lv.32 Armor Set Regeneration [DEPLOYED]
+### ðŸŽ¨ Milestone 51: Bionex Warrior Lv.32 Armor Set Regeneration [DEPLOYED]
 - **Assets**: Regenerated all 5 pieces of the Bionex Warrior Lv.32 armor set (`armor`, `helmet`, `gloves`, `pants`, `boots`) using image generation with a badass mecha aesthetic and champagne-gold glowing energy lines to match the style of the Bionex Warrior Lv.1 set.
 - **Post-processing**: Created and ran `scratch/process_generated_set.py` to automatically flood-fill the white background (vectorized component labeling), crop tightly, pad to square, and scale to 320x320 transparent PNGs.
 - **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
@@ -629,7 +629,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 52: Bionex Warrior Lv.42 Armor Set Regeneration [DEPLOYED]
+### ðŸŽ¨ Milestone 52: Bionex Warrior Lv.42 Armor Set Regeneration [DEPLOYED]
 - **Assets**: Regenerated all 5 pieces of the Bionex Warrior Lv.42 armor set (`armor`, `helmet`, `gloves`, `pants`, `boots`) using image generation inspired by the premium Final Fantasy VII Remake sci-fi mecha style (brushed steel, heavy plating, carbon fiber textures, and glowing champagne-gold energy lines).
 - **Post-processing**: Ran the optimized vectorized background-removal and cropping pipeline in `scratch/process_generated_set.py` to produce transparent, square-padded 320x320 PNGs.
 - **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
@@ -637,7 +637,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 53: Bionex Warrior Lv.55 Armor Set Regeneration [DEPLOYED]
+### ðŸŽ¨ Milestone 53: Bionex Warrior Lv.55 Armor Set Regeneration [DEPLOYED]
 - **Assets**: Regenerated all 5 pieces of the Bionex Warrior Lv.55 armor set (`armor`, `helmet`, `gloves`, `pants`, `boots`) using image generation with a hyperrealistic anime mecha style, including heavy metallic panels, defined outlines to pop out, and glowing champagne-gold pathways.
 - **Post-processing**: Ran the vectorized background-removal script in `scratch/process_generated_set.py` to produce transparent 320x320 PNGs.
 - **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
@@ -645,7 +645,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 54: Bionex Warrior Lv.66 Armor Set Regeneration (Partial) [DEPLOYED]
+### ðŸŽ¨ Milestone 54: Bionex Warrior Lv.66 Armor Set Regeneration (Partial) [DEPLOYED]
 - **Assets**: Successfully regenerated 2 of the 5 pieces of the ultimate endgame Bionex Warrior Lv.66 set (`armor`, `helmet`) with a majestic, heavy mecha look (including thruster highlights and glowing champagne-gold lines) before image generation API quota limits were reached. The remaining 3 pieces (`gloves`, `pants`, `boots`) are pending reset.
 - **Post-processing**: Ran the vectorized background-removal script to output these 2 pieces as clean, transparent 320x320 PNGs.
 - **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
@@ -654,7 +654,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🛠️ Milestone 55: Array-Aware Gear Requirement Validation in Cargo and Inventory [DEPLOYED]
+### ðŸ› ï¸� Milestone 55: Array-Aware Gear Requirement Validation in Cargo and Inventory [DEPLOYED]
 - **Bugs**: 
   1. In `Inventory.jsx`, `getCompatibleItems` did string comparison `item.job === player.job` and `item.race === player.race`, filtering out all mecha armor sets and weapons where jobs/races are defined as arrays (such as all high-tier Bionex and Celestra sets in `items.json`), making them invisible in the Smart Equip Picker.
   2. In `Cargo.jsx`, clicking a mecha set item that has job or race as arrays caused a Javascript runtime crash when rendering `.toUpperCase()` on an array. The requirement checking code also performed direct string comparison, which incorrectly disabled equipping/using those items.
@@ -667,7 +667,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🛠️ Milestone 56: Bionex Specialist & Starter Job Armor-Set Alignment [DEPLOYED]
+### ðŸ› ï¸� Milestone 56: Bionex Specialist & Starter Job Armor-Set Alignment [DEPLOYED]
 - **Bugs**:
   1. **Bionex Specialist Empty Armor**: Bionex Specialist (Technician lineage: `engineer`/`mechanist`/`techmaster`/`overseer`) had no bespoke mecha armor set files. Character creation auto-equip checks failed for them, starting Bionex Specialists with completely bare gear slots.
   2. **Starter Job Weapon Lock**: Arctron Ranger and Bionex Specialist/Caster starter weapons in `items.json` (`wep_job_gunner_*`, `wep_job_bionex_specialist_*`, `wep_job_bionex_spiritualist_*`) were locked to legacy job string IDs that don't match active IDs in `jobs.json` or were restricted only to the level 1 job name, preventing players from equipping them at higher tiers or after unequipping.
@@ -682,7 +682,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🛠️ Milestone 57: Bionex Ranger to Bionex Marksman Rename & Asset Alignment [DEPLOYED]
+### ðŸ› ï¸� Milestone 57: Bionex Ranger to Bionex Marksman Rename & Asset Alignment [DEPLOYED]
 - **Requirement**: The user noted that Bionex's ranged/agility class is named `Marksman` (matching `marksman` starting job in `jobs.json`) rather than `Ranger` (which is Celestra's and Arctron's ranged class name).
 - **Asset Renames**:
   - Renamed 50 mecha armor set `.png` files (25 in `public/assets/armor_bionex/` and 25 in `src/assets/armor_bionex/`) from `defbionexrangerlv*.png` to `defbionexmarksmanlv*.png`.
@@ -695,25 +695,25 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🔍 Milestone 58: Bionex Ranger→Marksman Rename Verification Pass [DEPLOYED]
-- **Context**: User asked to double-check that Milestone 57's rename was complete across the entire platform, including scripts and asset filenames — not just the main code paths.
+### ðŸ”� Milestone 58: Bionex Rangerâ†’Marksman Rename Verification Pass [DEPLOYED]
+- **Context**: User asked to double-check that Milestone 57's rename was complete across the entire platform, including scripts and asset filenames â€” not just the main code paths.
 - **Audit**: Searched all of `src/`, `public/`, and `server.js` for any remaining `bionex_ranger`/`bionex-ranger`/`bionexranger` text or filenames.
 - **Found 2 residual items** M57 missed:
-  1. `src/components/TransparentSprite.jsx` — an internal variable was still named `isBionexRanger` even though its check already correctly read `src.includes('bionex_marksman')`. Cosmetic only (didn't affect behavior), renamed to `isBionexMarksman` for consistency.
-  2. `src/assets/bionex_ranger.png` — an orphaned, unreferenced duplicate portrait file (superseded by the `bionex_ranger_female.png`/`bionex_ranger_male.png` → `bionex_marksman_*` split done in M57). Confirmed zero references anywhere in `src/`, then deleted via `git rm`.
+  1. `src/components/TransparentSprite.jsx` â€” an internal variable was still named `isBionexRanger` even though its check already correctly read `src.includes('bionex_marksman')`. Cosmetic only (didn't affect behavior), renamed to `isBionexMarksman` for consistency.
+  2. `src/assets/bionex_ranger.png` â€” an orphaned, unreferenced duplicate portrait file (superseded by the `bionex_ranger_female.png`/`bionex_ranger_male.png` â†’ `bionex_marksman_*` split done in M57). Confirmed zero references anywhere in `src/`, then deleted via `git rm`.
 - **Verification**: Confirmed zero remaining `bionex_ranger`/`bionex-ranger` matches anywhere in `src/`, `public/`, or `server.js` (excluding stale Android Gradle build-output artifacts under `android/app/build/` and `android/app/src/main/assets/`, which regenerate on next native build sync and aren't hand-maintained source). `npm run build` passes.
 
 ---
 
-### 🛡️ Milestone 59: Shield Sprites — Ruler-Line Removal + Fit-to-Frame Fix (All 3 Factions) [DEPLOYED]
-- **Bug**: User reported shields across all factions still rendered tiny in the Cargo/Inventory gear slots even after M49's 320×320 normalization pass. Root cause: several shield source images (`lv1/lv32/lv55` Bionex & Celestra, `lv10` Arctron) contained a leftover 1–4px-thick, near-full-canvas-width straight line artifact — almost certainly a stray reference/ruler guide left over from the original asset-extraction tool — that got included in the tight-crop bounding box, making the actual shield content occupy only 15–19% of the padded square (squareness as low as 0.18). One file (`lv42arctronshielddef.png`) had the line *fused directly onto* the shield's main silhouette (touching pixels, same connected component), so it couldn't be isolated by simple connected-component removal.
-- **Fix**: Rebuilt the shield pipeline from the clean git HEAD (post-M49) source for all 14 shield files (3 factions × ~4–5 tiers): applied morphological opening (5×5 structuring element — erode then dilate) to strip any line/stroke thinner than 5px while preserving solid shield silhouettes, even when fused to the main shape; dropped any surviving fragment under 15% of the largest remaining blob's size (stray watermark/badge specks); then ran the same rotation-search-to-maximize-squareness technique from M47/M50, tight-crop, 10% pad, LANCZOS resize to 320×320.
-- **Result**: Squareness now 0.94–1.0 across all 14 files (up from as low as 0.18). All shields now occupy a consistent, prominent proportion of their gear slot, matching armor/weapon icon scale.
-- **Trade-off noted**: The 5px opening kernel that reliably strips the ruler-line also nibbles at a few very fine (<5px) decorative highlight strokes on some ornate shield designs, leaving faint speckle/pepper-noise texture on 2–3 files (e.g. `lv1bionexshielddefault.png`, `lv42celesshielddef.png`). Still clearly readable; considered an acceptable trade-off versus the much larger "shield looks tiny" complaint. Flagged here in case a future higher-fidelity re-pass is wanted.
+### ðŸ›¡ï¸� Milestone 59: Shield Sprites â€” Ruler-Line Removal + Fit-to-Frame Fix (All 3 Factions) [DEPLOYED]
+- **Bug**: User reported shields across all factions still rendered tiny in the Cargo/Inventory gear slots even after M49's 320Ã—320 normalization pass. Root cause: several shield source images (`lv1/lv32/lv55` Bionex & Celestra, `lv10` Arctron) contained a leftover 1â€“4px-thick, near-full-canvas-width straight line artifact â€” almost certainly a stray reference/ruler guide left over from the original asset-extraction tool â€” that got included in the tight-crop bounding box, making the actual shield content occupy only 15â€“19% of the padded square (squareness as low as 0.18). One file (`lv42arctronshielddef.png`) had the line *fused directly onto* the shield's main silhouette (touching pixels, same connected component), so it couldn't be isolated by simple connected-component removal.
+- **Fix**: Rebuilt the shield pipeline from the clean git HEAD (post-M49) source for all 14 shield files (3 factions Ã— ~4â€“5 tiers): applied morphological opening (5Ã—5 structuring element â€” erode then dilate) to strip any line/stroke thinner than 5px while preserving solid shield silhouettes, even when fused to the main shape; dropped any surviving fragment under 15% of the largest remaining blob's size (stray watermark/badge specks); then ran the same rotation-search-to-maximize-squareness technique from M47/M50, tight-crop, 10% pad, LANCZOS resize to 320Ã—320.
+- **Result**: Squareness now 0.94â€“1.0 across all 14 files (up from as low as 0.18). All shields now occupy a consistent, prominent proportion of their gear slot, matching armor/weapon icon scale.
+- **Trade-off noted**: The 5px opening kernel that reliably strips the ruler-line also nibbles at a few very fine (<5px) decorative highlight strokes on some ornate shield designs, leaving faint speckle/pepper-noise texture on 2â€“3 files (e.g. `lv1bionexshielddefault.png`, `lv42celesshielddef.png`). Still clearly readable; considered an acceptable trade-off versus the much larger "shield looks tiny" complaint. Flagged here in case a future higher-fidelity re-pass is wanted.
 
 ---
 
-### 🎨 Milestone 60: Bionex Marksman Tier Assets Regeneration (Lv.55 Set & Lv.42 Pants) [DEPLOYED]
+### ðŸŽ¨ Milestone 60: Bionex Marksman Tier Assets Regeneration (Lv.55 Set & Lv.42 Pants) [DEPLOYED]
 - **Assets**: Regenerated 5 pieces of Bionex Marksman mecha armor set: Level 55 helmet, armor, boots, and gloves, alongside the Level 42 pants. Hand-detailed to match the premium 2.5D anime style of the Bionex Warrior Level 1 set with smooth, clean outlines, carbon-fiber armor paneling, and neon cyan/blue glowing lines.
 - **Post-processing**: Created and ran `scratch/process_marksman_gears.py` utilizing `rembg` background removal, tight cropping to bounding box, padding to a square canvas with a 10% safety margin to ensure no clipping, and LANCZOS-resizing to exactly 320x320 transparent PNGs.
 - **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
@@ -721,7 +721,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 61: Bionex Mage Tier Assets Regeneration (Lv.55 Set) [DEPLOYED]
+### ðŸŽ¨ Milestone 61: Bionex Mage Tier Assets Regeneration (Lv.55 Set) [DEPLOYED]
 - **Assets**: Regenerated all 5 pieces of the Bionex Mage mecha armor set (Level 55 helmet, armor, pants, boots, and gloves) using the `/regenerate-2.5D-anime-realistic` custom skill. The gear set is customized for a caster/psion archetype with gold/bronze mecha casing, dark grey plating, and glowing energy channels, matching the premium 2.5D anime style.
 - **Post-processing**: Ran the script `process_gears.py` located inside the skill's `scripts/` directory, which strips backgrounds using `rembg`, crops to content boundaries, centers and pads to square canvas (10% padding), and resizes to 320x320 transparent PNGs.
 - **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
@@ -729,7 +729,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🛠️ Milestone 62: Bionex Mage to Bionex Psion Rename and Alignment [DEPLOYED]
+### ðŸ› ï¸� Milestone 62: Bionex Mage to Bionex Psion Rename and Alignment [DEPLOYED]
 - **Requirement**: Rename all occurrences of "Bionex Mage" or "bionex_mage" to "Bionex Psion" or "bionex_psion" to align with the official starting job name `psion` in `jobs.json`.
 - **Asset Renames**: Renamed 50 mecha armor set `.png` files (25 in `public/assets/armor_bionex/` and 25 in `src/assets/armor_bionex/`) from `defbionexmagelv*.png` to `defbionexpsionlv*.png`.
 - **Database & Code Updates**:
@@ -741,7 +741,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 63: Bionex Marksman Tier Assets Regeneration (Lv.66 Set & Lv.55 Pants) [DEPLOYED]
+### ðŸŽ¨ Milestone 63: Bionex Marksman Tier Assets Regeneration (Lv.66 Set & Lv.55 Pants) [DEPLOYED]
 - **Assets**: Regenerated 6 pieces of Bionex Marksman mecha armor set: Level 66 set (helmet, armor, boots, gloves, pants) and Level 55 pants. Hand-detailed to match the ultimate endgame mecha aesthetic with sleek carbon fiber panels, detailed energy tubes, and neon cyan/blue glowing lines.
 - **Post-processing**: Ran the script `process_gears.py` located inside the skill's `scripts/` directory, which strips backgrounds using `rembg`, crops to content boundaries, centers and pads to square canvas (10% padding), and resizes to 320x320 transparent PNGs.
 - **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
@@ -749,7 +749,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 64: Bionex Marksman Tier Assets Regeneration (Lv.42 Partial Set) [DEPLOYED]
+### ðŸŽ¨ Milestone 64: Bionex Marksman Tier Assets Regeneration (Lv.42 Partial Set) [DEPLOYED]
 - **Assets**: Regenerated 2 of the 5 pieces of the Bionex Marksman Level 42 mecha armor set (`helmet`, `armor`) using the `/regenerate-2.5D-anime-realistic` custom skill to match the style of the Bionex Warrior Level 1 set with smooth edges, carbon fiber casing, and glowing neon blue/cyan lines. The remaining 2 pieces (`boots`, `gloves`) are pending reset of the image generation API quota. Note that the `pants` piece was already regenerated in Milestone 60.
 - **Post-processing**: Ran the script `process_gears.py` located inside the skill's `scripts/` directory, which strips backgrounds using `rembg`, crops to content boundaries, centers and pads to square canvas (10% padding), and resizes to 320x320 transparent PNGs.
 - **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
@@ -757,7 +757,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🛠️ Milestone 65: Bionex & Arctron Level 1 Job / Path Alignment [DEPLOYED]
+### ðŸ› ï¸� Milestone 65: Bionex & Arctron Level 1 Job / Path Alignment [DEPLOYED]
 - **Requirement**: Align Level 1 job IDs and display names with their respective job paths across Arctron and Bionex.
 - **Bionex Alignments**:
   - Aligned display names for Bionex Warrior path to "Guardian" (using existing ID `guardian`) and Bionex Specialist path to "Engineer" (using existing ID `engineer`).
@@ -765,14 +765,14 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - Updated all JSON databases (`items.json` and `jobWeapons.json`) to refer to `bionex_guardian` and `bionex_engineer` instead of `bionex_warrior` and `bionex_specialist`.
   - Refactored `gameStore.js`, `TransparentSprite.jsx`, `PilotSprites.jsx`, `Unit.jsx`, `Main.jsx`, and `CharacterCreate.jsx` to map Bionex jobs and display names to Guardian and Engineer.
 - **Arctron Renames**:
-  - Renamed Level 1 job IDs in `jobs.json` to match path names: `destroyer` ➔ `warrior` (Warrior), `gunner` ➔ `ranger` (Ranger), and `engineer` ➔ `technician` (Technician).
-  - Modified `items.json` and `jobWeapons.json` to update job restrictions for Arctron items from old IDs to new ones, correctly distinguishing Arctron's `engineer` ➔ `technician` while keeping Bionex's `engineer` intact.
-  - Refactored all source code files to query new Arctron Level 1 IDs and updated UI display labels (Specialist ➔ Technician).
+  - Renamed Level 1 job IDs in `jobs.json` to match path names: `destroyer` âž” `warrior` (Warrior), `gunner` âž” `ranger` (Ranger), and `engineer` âž” `technician` (Technician).
+  - Modified `items.json` and `jobWeapons.json` to update job restrictions for Arctron items from old IDs to new ones, correctly distinguishing Arctron's `engineer` âž” `technician` while keeping Bionex's `engineer` intact.
+  - Refactored all source code files to query new Arctron Level 1 IDs and updated UI display labels (Specialist âž” Technician).
 - **Verification**: Verified that the production client builds successfully with zero errors.
 
 ---
 
-### 🎨 Milestone 66: Bionex Psion Tier Assets Regeneration (Lv.1 Set) [DEPLOYED]
+### ðŸŽ¨ Milestone 66: Bionex Psion Tier Assets Regeneration (Lv.1 Set) [DEPLOYED]
 - **Assets**: Regenerated the full 5 pieces of the Bionex Psion Level 1 mecha armor set (`helmet`, `armor`, `pants`, `boots`, `gloves`) using the `/regenerate-2.5D-anime-realistic` custom skill to match the golden/bronze cybernetic mecha theme with glowing neon-blue psionic energy lines.
 - **Post-processing**: Ran the script `process_gears.py` to remove background via `rembg`, crop, center/pad to square, and resize to 320x320 transparent PNGs.
 - **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
@@ -780,7 +780,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 67: Bionex Psion Tier Assets Regeneration (Lv.32 & Lv.42 Sets) [DEPLOYED]
+### ðŸŽ¨ Milestone 67: Bionex Psion Tier Assets Regeneration (Lv.32 & Lv.42 Sets) [DEPLOYED]
 - **Assets**: Regenerated 10 mecha armor pieces (Bionex Psion Level 32 and Level 42 sets: `helmet`, `armor`, `pants`, `boots`, `gloves`) using the `/regenerate-2.5D-anime-realistic` custom skill to fit the golden/bronze cybernetic mecha theme with glowing neon-blue psionic energy lines.
 - **Post-processing**: Ran the script `process_gears.py` to remove backgrounds, crop, center/pad, and resize to 320x320 transparent PNGs.
 - **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
@@ -788,7 +788,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 68: Bionex Marksman Tier Assets Regeneration (Lv.42 Remaining Pieces) [DEPLOYED]
+### ðŸŽ¨ Milestone 68: Bionex Marksman Tier Assets Regeneration (Lv.42 Remaining Pieces) [DEPLOYED]
 - **Assets**: Regenerated 2 remaining pieces of Bionex Marksman Level 42 set (`boots`, `gloves`) using the `/regenerate-2.5D-anime-realistic` custom skill to match the mecha ranger style with dark steel plating and blue/cyan glowing panels. (Psion Level 66 set remains queued due to image generator quota limits).
 - **Post-processing**: Ran the script `process_gears.py` to remove backgrounds, crop, center/pad, and resize to 320x320 transparent PNGs.
 - **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
@@ -796,7 +796,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 69: Bionex Psion Tier Assets Regeneration (Lv.66 Set) [DEPLOYED]
+### ðŸŽ¨ Milestone 69: Bionex Psion Tier Assets Regeneration (Lv.66 Set) [DEPLOYED]
 - **Assets**: Regenerated the full 5 pieces of the Bionex Psion Level 66 mecha armor set (`helmet`, `armor`, `pants`, `boots`, `gloves`) using the `/regenerate-2.5D-anime-realistic` custom skill to fit the golden/bronze cybernetic mecha theme with glowing neon-blue psionic energy lines.
 - **Post-processing**: Ran the script `process_gears.py` to remove backgrounds, crop, center/pad, and resize to 320x320 transparent PNGs.
 - **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
@@ -804,7 +804,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 70: Bionex Marksman & Guardian Tier Assets Regeneration [DEPLOYED]
+### ðŸŽ¨ Milestone 70: Bionex Marksman & Guardian Tier Assets Regeneration [DEPLOYED]
 - **Assets**: Regenerated 7 mecha armor pieces using the `/regenerate-2.5D-anime-realistic` custom skill:
   - Bionex Guardian Level 66 set (`boots`, `gloves`, `helmet`, `pants`) - 4 pieces matching the heavy carbon fiber and neon-cyan themed mecha design.
   - Bionex Marksman Level 1 set (`armor`, `boots`, `gloves`) - 3 pieces matching the mecha ranger style.
@@ -814,7 +814,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 71: Bionex Guardian Tier Assets Regeneration (Lv.55 Armor) [DEPLOYED]
+### ðŸŽ¨ Milestone 71: Bionex Guardian Tier Assets Regeneration (Lv.55 Armor) [DEPLOYED]
 - **Assets**: Regenerated Bionex Guardian Level 55 Chest Armor (`armor`) using the `/regenerate-2.5D-anime-realistic` custom skill to fit the heavy carbon fiber and neon-cyan themed mecha design.
 - **Post-processing**: Ran the script `process_gears.py` to remove backgrounds, crop, center/pad, and resize to 320x320 transparent PNGs.
 - **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
@@ -822,7 +822,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 72: Celestra Mage & Ranger Tier Assets Regeneration (Lv.32 Sets) [DEPLOYED]
+### ðŸŽ¨ Milestone 72: Celestra Mage & Ranger Tier Assets Regeneration (Lv.32 Sets) [DEPLOYED]
 - **Assets**: Regenerated 10 mecha armor pieces using the `/regenerate-2.5D-anime-realistic` custom skill:
   - Celestra Mage Level 32 set (`helmet`, `armor`, `pants`, `boots`, `gloves`) - 5 pieces matching the white/gold elven wizard robe design with glowing purple runes.
   - Celestra Ranger Level 32 set (`helmet`, `armor`, `pants`, `boots`, `gloves`) - 5 pieces matching the green/emerald organic mecha design with gold leaf trims and wind-cyan lines. (Gloves generated via OpenRouter fallback due to rate limits).
@@ -832,7 +832,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 73: Celestra Ranger Tier Assets Regeneration (Lv.42 Set) [DEPLOYED]
+### ðŸŽ¨ Milestone 73: Celestra Ranger Tier Assets Regeneration (Lv.42 Set) [DEPLOYED]
 - **Assets**: Regenerated the full 5 pieces of the Celestra Ranger Level 42 mecha armor set (`helmet`, `armor`, `pants`, `boots`, `gloves`) using the `/regenerate-2.5D-anime-realistic` custom skill. All pieces match the ivory white and blue organic plating design with gold leaf trims and glowing wind-cyan/blue energy lines. (Generated via OpenRouter fallback).
 - **Post-processing**: Ran the script `process_gears.py` followed by low-alpha cleaning (setting Alpha < 15 to 0) to remove backgrounds, crop, center/pad, and resize to 320x320 transparent PNGs.
 - **Paths**: Overwrote files in both `public/assets/armor_celestra/` and `src/assets/armor_celestra/`.
@@ -840,7 +840,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 74: Celestra Warrior Tier Assets Regeneration (Lv.1 Set) [DEPLOYED]
+### ðŸŽ¨ Milestone 74: Celestra Warrior Tier Assets Regeneration (Lv.1 Set) [DEPLOYED]
 - **Assets**: Regenerated the full 5 pieces of the Celestra Warrior Level 1 mecha armor set (`helmet`, `armor`, `pants`, `boots`, `gloves`) using the `/regenerate-2.5D-anime-realistic` custom skill:
   - Helmet: Redesigned as a Rust Cordovan Circlet (elegant silver/gold headband with glowing cyan/blue energy feather-wings on the sides).
   - Armor, Pants, Boots, Gloves: Designed as starter-tier gear featuring simple white and brown modern leather panels, with a clean and plain futuristic design (no complex mecha or gold plating).
@@ -851,62 +851,62 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 💍 Milestone 75: Arctron Ring Database Entries (Lore/Guide Only, No Loot Wiring Yet) [DEPLOYED]
-- **Source**: User supplied a 5-ring reference sheet (`public/ref/Arctron/arctron-rings.png`, 1024×1536) inspired by rflib.ru's Accretia accessory database. Real rflib data for "Ring" is mostly elemental Bracelet items plus one 3-job-variant "Daidalos Ring" set (Launcher/Ranger/Warrior, ~25% ATK/DEF/Dodge) — no 5-tier ring set exists in the source data, so stats were improvised per explicit user direction, loosely inspired by Daidalos Ring's ATK%/DEF%/Dodge bonus shape.
-- **Scope explicitly limited by user**: drop source (which enemy/quest grants these) is undecided — these are database/lore entries only for now, NOT wired into `pickItem`'s combat loot table and NOT added to `items.json` as equippable items. Purely for the in-game "📖 Database & Guides" library screen.
-- **Image pipeline**: Reference sheet had a baked-in flat gray checkerboard (not real transparency, same failure mode as M44/M59's shield/armor issues) — used `rembg` (AI segmentation, confirmed installed this session) instead of manual BFS/threshold removal, which cleanly separated all 5 rings in one pass. Rings touched/overlapped vertically with no true empty-row gap, so used a smoothed per-row alpha-density profile (`scipy.signal.argrelextrema`) to locate the 4 local-minimum boundary rows (y=328, 638, 932, 1210) and split there. Each ring then tight-cropped, square-padded (8% margin), and LANCZOS-resized to 320×320 — matching the armor/weapon/shield convention established in M40/46/49/59.
+### ðŸ’� Milestone 75: Arctron Ring Database Entries (Lore/Guide Only, No Loot Wiring Yet) [DEPLOYED]
+- **Source**: User supplied a 5-ring reference sheet (`public/ref/Arctron/arctron-rings.png`, 1024Ã—1536) inspired by rflib.ru's Accretia accessory database. Real rflib data for "Ring" is mostly elemental Bracelet items plus one 3-job-variant "Daidalos Ring" set (Launcher/Ranger/Warrior, ~25% ATK/DEF/Dodge) â€” no 5-tier ring set exists in the source data, so stats were improvised per explicit user direction, loosely inspired by Daidalos Ring's ATK%/DEF%/Dodge bonus shape.
+- **Scope explicitly limited by user**: drop source (which enemy/quest grants these) is undecided â€” these are database/lore entries only for now, NOT wired into `pickItem`'s combat loot table and NOT added to `items.json` as equippable items. Purely for the in-game "ðŸ“– Database & Guides" library screen.
+- **Image pipeline**: Reference sheet had a baked-in flat gray checkerboard (not real transparency, same failure mode as M44/M59's shield/armor issues) â€” used `rembg` (AI segmentation, confirmed installed this session) instead of manual BFS/threshold removal, which cleanly separated all 5 rings in one pass. Rings touched/overlapped vertically with no true empty-row gap, so used a smoothed per-row alpha-density profile (`scipy.signal.argrelextrema`) to locate the 4 local-minimum boundary rows (y=328, 638, 932, 1210) and split there. Each ring then tight-cropped, square-padded (8% margin), and LANCZOS-resized to 320Ã—320 â€” matching the armor/weapon/shield convention established in M40/46/49/59.
 - **Files**: 5 new PNGs at `public/assets/arctron/rings/rng_arc_{0-4}.png` (+ `src/assets/` mirror): `rng_arc_0` (Common, red ruby), `rng_arc_1` (Uncommon, blue tech triangle), `rng_arc_2` (Rare, teal/cyan organic-tech), `rng_arc_3` (Epic, dark red rectangular gem), `rng_arc_4` (Legendary, gold horned dual-gem).
-- **Data**: Added a `rings` array to `src/data/gears/arctron.json` (5 entries: id/name/grade/image/stat fields — Ember Core Ring +8 ATK, Voidsteel Ring +12 ATK/+6 DEF, Cryo Matrix Ring +15 ATK/+8 Dodge, Bloodforge Ring +20 ATK/+10 DEF, Draconis Talon Ring +28 ATK/+15 DEF/+12 Dodge), matching the flat-integer-stat convention already used by this file's `warrior`/`ranger`/`technician` weapon arrays (not the `item.bonus` object shape used in `items.json`, since this file is display-only, disconnected from equippable items).
-- **UI**: Added a new "💍 Rings" card to `LibraryModal.jsx`'s Arctron equipment tab, rendering each ring's thumbnail image + grade/name + stat line, with a "[Drop source: belum ditentukan]" placeholder note per the scoped-out drop wiring.
+- **Data**: Added a `rings` array to `src/data/gears/arctron.json` (5 entries: id/name/grade/image/stat fields â€” Ember Core Ring +8 ATK, Voidsteel Ring +12 ATK/+6 DEF, Cryo Matrix Ring +15 ATK/+8 Dodge, Bloodforge Ring +20 ATK/+10 DEF, Draconis Talon Ring +28 ATK/+15 DEF/+12 Dodge), matching the flat-integer-stat convention already used by this file's `warrior`/`ranger`/`technician` weapon arrays (not the `item.bonus` object shape used in `items.json`, since this file is display-only, disconnected from equippable items).
+- **UI**: Added a new "ðŸ’� Rings" card to `LibraryModal.jsx`'s Arctron equipment tab, rendering each ring's thumbnail image + grade/name + stat line, with a "[Drop source: belum ditentukan]" placeholder note per the scoped-out drop wiring.
 - **Verification**: `npm run build` passes. (Also reinstalled `node_modules`, deleted earlier this session during a disk-cleanup pass, before building.)
 
 ---
 
-### 💍 Milestone 76: Celestra & Bionex Ring Database Entries (Lore/Guide Only) [DEPLOYED]
-- **Source**: User supplied two more 5-ring reference sheets (`public/ref/Celestra/celestra-rings.png`, `public/ref/Bionex/bionex-rings.png`, both 1024×1536), plus rflib.ru's general (all-race) Ring database for flavor inspiration — named rings there (Baal Ring, Beast of Life Ring, Black Mist Ring, Christmas Defense/Dodge Ring, etc.) confirmed the ATK%/DEF%/Dodge/elemental bonus shape pattern already used for the M75 Arctron rings; no exact matching 5-tier set exists in the source data for either faction, so stats were improvised again per the same explicit user direction.
-- **Same scope limits as M75**: database/lore entries only, no `items.json` equippable entries, no `pickItem` loot-table wiring — drop source still undecided.
-- **Image pipeline**: Both reference sheets had the same baked-in flat black background (opaque, not real alpha). Used `rembg` to clean both in one pass each. Rings touched vertically with no true empty-row gap in either sheet, so reused the M75 smoothed-row-density-profile technique (`scipy.signal.argrelextrema`) to find 4 boundary rows per sheet: Celestra at y=318/627/920/1226, Bionex at y=321/638/939/1231. Tight-cropped, square-padded (8%), LANCZOS-resized to 320×320 each.
-- **Files**: 10 new PNGs — `public/assets/celestra/rings/rng_cor_{0-4}.png` and `public/assets/bionex/rings/rng_bio_{0-4}.png` (+ `src/assets/` mirrors).
-- **Data**: Added `rings` arrays to `src/data/gears/celestra.json` and `src/data/gears/bionex.json`, matching the M75 Arctron schema (id/name/grade/image/atk/def/dodge). Faction flavor differentiated per the existing lore stat leanings from Milestone 37 (Race Unique Stat Advantages): Celestra rings lean ATK+Dodge (Bloodthorn Cuff, Ruby Ember Ring, Sapphire Ward Ring, Solaris Crest Ring, Amber Talon Cuff — up to +26 ATK/+12 DEF/+16 Dodge at Legendary), Bionex rings lean balanced ATK+DEF (Pulse Band Ring, Crimson Core Ring, Vortex Claw Ring, Bloodline Circuit Ring, Golden Cipher Ring — up to +26 ATK/+18 DEF/+6 Dodge at Legendary).
-- **UI**: Added matching "💍 Rings" cards to `LibraryModal.jsx`'s Celestra and Bionex equipment tabs (same thumbnail + grade/name + stat line + "[Drop source: belum ditentukan]" pattern as M75's Arctron card). All 3 factions now have a Rings section in the Database & Guides library.
+### ðŸ’� Milestone 76: Celestra & Bionex Ring Database Entries (Lore/Guide Only) [DEPLOYED]
+- **Source**: User supplied two more 5-ring reference sheets (`public/ref/Celestra/celestra-rings.png`, `public/ref/Bionex/bionex-rings.png`, both 1024Ã—1536), plus rflib.ru's general (all-race) Ring database for flavor inspiration â€” named rings there (Baal Ring, Beast of Life Ring, Black Mist Ring, Christmas Defense/Dodge Ring, etc.) confirmed the ATK%/DEF%/Dodge/elemental bonus shape pattern already used for the M75 Arctron rings; no exact matching 5-tier set exists in the source data for either faction, so stats were improvised again per the same explicit user direction.
+- **Same scope limits as M75**: database/lore entries only, no `items.json` equippable entries, no `pickItem` loot-table wiring â€” drop source still undecided.
+- **Image pipeline**: Both reference sheets had the same baked-in flat black background (opaque, not real alpha). Used `rembg` to clean both in one pass each. Rings touched vertically with no true empty-row gap in either sheet, so reused the M75 smoothed-row-density-profile technique (`scipy.signal.argrelextrema`) to find 4 boundary rows per sheet: Celestra at y=318/627/920/1226, Bionex at y=321/638/939/1231. Tight-cropped, square-padded (8%), LANCZOS-resized to 320Ã—320 each.
+- **Files**: 10 new PNGs â€” `public/assets/celestra/rings/rng_cor_{0-4}.png` and `public/assets/bionex/rings/rng_bio_{0-4}.png` (+ `src/assets/` mirrors).
+- **Data**: Added `rings` arrays to `src/data/gears/celestra.json` and `src/data/gears/bionex.json`, matching the M75 Arctron schema (id/name/grade/image/atk/def/dodge). Faction flavor differentiated per the existing lore stat leanings from Milestone 37 (Race Unique Stat Advantages): Celestra rings lean ATK+Dodge (Bloodthorn Cuff, Ruby Ember Ring, Sapphire Ward Ring, Solaris Crest Ring, Amber Talon Cuff â€” up to +26 ATK/+12 DEF/+16 Dodge at Legendary), Bionex rings lean balanced ATK+DEF (Pulse Band Ring, Crimson Core Ring, Vortex Claw Ring, Bloodline Circuit Ring, Golden Cipher Ring â€” up to +26 ATK/+18 DEF/+6 Dodge at Legendary).
+- **UI**: Added matching "ðŸ’� Rings" cards to `LibraryModal.jsx`'s Celestra and Bionex equipment tabs (same thumbnail + grade/name + stat line + "[Drop source: belum ditentukan]" pattern as M75's Arctron card). All 3 factions now have a Rings section in the Database & Guides library.
 - **Verification**: `npm run build` passes.
 
 ---
 
-### 💍 Milestone 77: Universal (All-Faction) Ring Database Entries — Replaces Old Placeholder Rings [DEPLOYED]
-- **Source**: User supplied a 5th reference sheet (`public/ref/cincin-all-factions.png`, 1024×1536, "cincin" = ring) explicitly for a **universal/race-agnostic** ring set, plus the same rflib.ru general Ring database link, with instruction to treat it identically to the M75/M76 faction rings.
-- **Found existing generic placeholder**: `src/data/gears/accessories.json`'s `rings` array already held 4 flavor-only entries (Ember/Storm/Obsidian/Chronos Ring, Common→Epic, `atk`+`critical%` stat shape, no images) rendered under `LibraryModal.jsx`'s "Global (Acc)" tab — this is the natural home for a universal ring set, so replaced these 4 placeholders outright with the 5 new image-backed entries rather than running two parallel universal-ring lists.
+### ðŸ’� Milestone 77: Universal (All-Faction) Ring Database Entries â€” Replaces Old Placeholder Rings [DEPLOYED]
+- **Source**: User supplied a 5th reference sheet (`public/ref/cincin-all-factions.png`, 1024Ã—1536, "cincin" = ring) explicitly for a **universal/race-agnostic** ring set, plus the same rflib.ru general Ring database link, with instruction to treat it identically to the M75/M76 faction rings.
+- **Found existing generic placeholder**: `src/data/gears/accessories.json`'s `rings` array already held 4 flavor-only entries (Ember/Storm/Obsidian/Chronos Ring, Commonâ†’Epic, `atk`+`critical%` stat shape, no images) rendered under `LibraryModal.jsx`'s "Global (Acc)" tab â€” this is the natural home for a universal ring set, so replaced these 4 placeholders outright with the 5 new image-backed entries rather than running two parallel universal-ring lists.
 - **Same scope limits as M75/M76**: database/lore entries only, no `items.json`/loot-table wiring.
-- **Image pipeline**: Same baked-in flat black background (opaque). `rembg` cleanup, then the row-density-profile technique found 4 boundary rows at y=339/631/890/1197. Tight-cropped, square-padded (8%), resized to 320×320.
+- **Image pipeline**: Same baked-in flat black background (opaque). `rembg` cleanup, then the row-density-profile technique found 4 boundary rows at y=339/631/890/1197. Tight-cropped, square-padded (8%), resized to 320Ã—320.
 - **Files**: 5 new PNGs at `public/assets/accessories/rings/rng_all_{0-4}.png` (+ `src/assets/` mirror).
-- **Data**: Rewrote `accessories.json`'s `rings` array to the same schema as M75/M76 (id/name/grade/image/atk/def/dodge, 5-tier Common→Legendary): Garnet Signet Ring (+8 ATK), Dragonfang Ring (+12 ATK/+6 Dodge), Emerald Lock Ring (+14 ATK/+10 DEF), Sapphire Shard Ring (+20 ATK/+10 DEF/+8 Dodge), Golden Vault Ring (+28 ATK/+16 DEF/+14 Dodge).
-- **UI**: Rewrote the "Global (Acc)" rings card in `LibraryModal.jsx` from the old `atk`/`critical%` two-column layout to the same image-thumbnail + grade/name + atk/def/dodge stat-line layout used by the 3 faction ring cards, for visual consistency across all 4 ring sections in the library. Renamed the card title to "💍 Rings (Universal — All Factions)".
+- **Data**: Rewrote `accessories.json`'s `rings` array to the same schema as M75/M76 (id/name/grade/image/atk/def/dodge, 5-tier Commonâ†’Legendary): Garnet Signet Ring (+8 ATK), Dragonfang Ring (+12 ATK/+6 Dodge), Emerald Lock Ring (+14 ATK/+10 DEF), Sapphire Shard Ring (+20 ATK/+10 DEF/+8 Dodge), Golden Vault Ring (+28 ATK/+16 DEF/+14 Dodge).
+- **UI**: Rewrote the "Global (Acc)" rings card in `LibraryModal.jsx` from the old `atk`/`critical%` two-column layout to the same image-thumbnail + grade/name + atk/def/dodge stat-line layout used by the 3 faction ring cards, for visual consistency across all 4 ring sections in the library. Renamed the card title to "ðŸ’� Rings (Universal â€” All Factions)".
 - **Verification**: `npm run build` passes.
 
 ---
 
-### 📿 Milestone 78: Amulet Database Entries — All 3 Factions + Universal (Lore/Guide Only) [DEPLOYED]
+### ðŸ“¿ Milestone 78: Amulet Database Entries â€” All 3 Factions + Universal (Lore/Guide Only) [DEPLOYED]
 - **Source**: User supplied 4 amulet reference sheets (`public/ref/Arctron-amulets.png`, `bionex-amulet.png`, `Celestra-amulets.png`, `all-factions-amulets.png`) plus rflib.ru's Amulet database for stat-shape inspiration (Beast Amulet ATK%, Beginner's Amulet all-elements, Brother's Tears Amulet ATK%+DEF%+all-elements, Christmas Defense/Dodge/Warding variants, Dagon's Leash, Elemental Appendix). Same explicit instruction as M75-77: treat identically, improvise stats.
-- **Item count varied per sheet** — verified by pixel-counting, not assumption, after an initial miscount: Arctron/Bionex/all-factions each have **5** amulets, but **Celestra only has 3** (confirmed by direct re-inspection of the reference image after the row-density algorithm initially found an ambiguous boundary count).
-- **Image pipeline**: All 4 sheets had the same baked-in flat black background. `rembg` cleanup per sheet, then row-density-profile boundary detection (as in M75-77) — but this batch surfaced two new failure modes needing extra handling:
+- **Item count varied per sheet** â€” verified by pixel-counting, not assumption, after an initial miscount: Arctron/Bionex/all-factions each have **5** amulets, but **Celestra only has 3** (confirmed by direct re-inspection of the reference image after the row-density algorithm initially found an ambiguous boundary count).
+- **Image pipeline**: All 4 sheets had the same baked-in flat black background. `rembg` cleanup per sheet, then row-density-profile boundary detection (as in M75-77) â€” but this batch surfaced two new failure modes needing extra handling:
   1. **Shallow/near-zero valleys**: some sheets (Celestra, part of all-factions) have items touching with very little density drop at the seam, requiring targeted min-search within a visually-estimated zone rather than a single global threshold.
-  2. **Stray fragment pulling the crop bounding box off-center**: `bionex` amulet #5 initially cropped with the real content pushed to one side because a ~12px disconnected speck from the neighboring item survived the naive `alpha>10` bounding-box scan. Fixed by adding connected-component blob filtering (keep only blobs ≥10% of the largest blob's pixel count) to every crop in this batch before computing the bounding box — not just the one file that visibly broke.
-- **Known minor imperfection**: 2 of the 3 Celestra amulets have a small visible sliver of the touching neighbor bleeding into frame (the two pendants are fused with zero true gap, unlike a separable connected component) — same category of acceptable trade-off as M59's shield speckle-noise, flagged here rather than fixed further given lore/guide-only scope.
-- **Files**: 18 new PNGs — `public/assets/arctron/amulets/amu_arc_{0-4}.png`, `public/assets/bionex/amulets/amu_bio_{0-4}.png`, `public/assets/celestra/amulets/amu_cor_{0-2}.png`, `public/assets/accessories/amulets/amu_all_{0-4}.png` (+ all `src/assets/` mirrors).
-- **Data**: Added `amulets` arrays to `arctron.json`/`bionex.json`/`celestra.json` (id/name/grade/image/hp/def, matching the existing "Amulets Database (HP & DEF)" stat shape already used by `accessories.json`, distinct from the ATK/DEF/Dodge shape used for rings) — Arctron/Bionex both Common→Legendary 5-tier (400-4500 HP, 20-180 DEF), Celestra 3-tier Common/Rare/Legendary (600-4200 HP, 30-170 DEF). Replaced `accessories.json`'s old 4-entry image-less amulet placeholder (Lumen/Aether/Astralis/Aurora Charm) with 5 new image-backed entries (Ember Heart, Verdant Compass, Duality, Void Crystal, Solstice Amulet), same pattern as M77's ring replacement.
-- **UI**: Added new "📿 Amulets" cards (image thumbnail + grade/name + HP/DEF stat line) to `LibraryModal.jsx`'s Arctron, Bionex, and Celestra equipment tabs (positioned above each faction's existing Rings card), and upgraded the "Global (Acc)" tab's amulet card to the same image-backed layout. All 3 factions + universal now have both Amulets and Rings sections in the Database & Guides library.
+  2. **Stray fragment pulling the crop bounding box off-center**: `bionex` amulet #5 initially cropped with the real content pushed to one side because a ~12px disconnected speck from the neighboring item survived the naive `alpha>10` bounding-box scan. Fixed by adding connected-component blob filtering (keep only blobs â‰¥10% of the largest blob's pixel count) to every crop in this batch before computing the bounding box â€” not just the one file that visibly broke.
+- **Known minor imperfection**: 2 of the 3 Celestra amulets have a small visible sliver of the touching neighbor bleeding into frame (the two pendants are fused with zero true gap, unlike a separable connected component) â€” same category of acceptable trade-off as M59's shield speckle-noise, flagged here rather than fixed further given lore/guide-only scope.
+- **Files**: 18 new PNGs â€” `public/assets/arctron/amulets/amu_arc_{0-4}.png`, `public/assets/bionex/amulets/amu_bio_{0-4}.png`, `public/assets/celestra/amulets/amu_cor_{0-2}.png`, `public/assets/accessories/amulets/amu_all_{0-4}.png` (+ all `src/assets/` mirrors).
+- **Data**: Added `amulets` arrays to `arctron.json`/`bionex.json`/`celestra.json` (id/name/grade/image/hp/def, matching the existing "Amulets Database (HP & DEF)" stat shape already used by `accessories.json`, distinct from the ATK/DEF/Dodge shape used for rings) â€” Arctron/Bionex both Commonâ†’Legendary 5-tier (400-4500 HP, 20-180 DEF), Celestra 3-tier Common/Rare/Legendary (600-4200 HP, 30-170 DEF). Replaced `accessories.json`'s old 4-entry image-less amulet placeholder (Lumen/Aether/Astralis/Aurora Charm) with 5 new image-backed entries (Ember Heart, Verdant Compass, Duality, Void Crystal, Solstice Amulet), same pattern as M77's ring replacement.
+- **UI**: Added new "ðŸ“¿ Amulets" cards (image thumbnail + grade/name + HP/DEF stat line) to `LibraryModal.jsx`'s Arctron, Bionex, and Celestra equipment tabs (positioned above each faction's existing Rings card), and upgraded the "Global (Acc)" tab's amulet card to the same image-backed layout. All 3 factions + universal now have both Amulets and Rings sections in the Database & Guides library.
 - **Verification**: `npm run build` passes.
 
 ---
 
-### 🏷️ Milestone 79: Ring & Amulet Renaming Pass — Real rflib.ru Naming Conventions [DEPLOYED]
-- **Ask**: User wanted the M75-78 ring/amulet names (which were generic invented fantasy names like "Ember Core Ring", "Solar Halo Pendant") replaced with names drawing more directly from rflib.ru's actual dramatic/mythological naming style (proper nouns, possessives — Baal, Dagon, Beast of Life, Dead Officer's, Brother's Tears, Daidalos) rather than generic gemstone/element naming.
-- **Scope**: Renamed all 38 ring/amulet `name` fields across all 4 gear JSON files — `arctron.json` (5 amulets + 5 rings), `bionex.json` (5 amulets + 5 rings), `celestra.json` (3 amulets + 5 rings), `accessories.json` (5 amulets + 5 rings). No id/image/stat changes — pure naming pass.
+### ðŸ�·ï¸� Milestone 79: Ring & Amulet Renaming Pass â€” Real rflib.ru Naming Conventions [DEPLOYED]
+- **Ask**: User wanted the M75-78 ring/amulet names (which were generic invented fantasy names like "Ember Core Ring", "Solar Halo Pendant") replaced with names drawing more directly from rflib.ru's actual dramatic/mythological naming style (proper nouns, possessives â€” Baal, Dagon, Beast of Life, Dead Officer's, Brother's Tears, Daidalos) rather than generic gemstone/element naming.
+- **Scope**: Renamed all 38 ring/amulet `name` fields across all 4 gear JSON files â€” `arctron.json` (5 amulets + 5 rings), `bionex.json` (5 amulets + 5 rings), `celestra.json` (3 amulets + 5 rings), `accessories.json` (5 amulets + 5 rings). No id/image/stat changes â€” pure naming pass.
 - **Verification**: `npm run build` passes.
 
 ---
 
-### 🎨 Milestone 80: Bionex Marksman Tier Assets Regeneration (Lv.55 Set) [DEPLOYED]
+### ðŸŽ¨ Milestone 80: Bionex Marksman Tier Assets Regeneration (Lv.55 Set) [DEPLOYED]
 - **Assets**: Regenerated all 5 pieces of the Bionex Marksman Level 55 mecha armor set (`helmet`, `armor`, `pants`, `boots`, `gloves`) using the `/regenerate-2.5D-anime-realistic` custom skill. The set is based on the Bellato Ranger level 41-50 "Ell Set" references from rflib.ru:
   - Helmet: Tactical copper-brown headset/visor with tactical goggles.
   - Armor, Pants, Boots, Gloves: High-quality polished white and red-orange metallic plates with chrome-silver trims and dark titanium-steel joints, representing high-tier mecha gear.
@@ -916,7 +916,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 81: Bionex Marksman Tier Assets Regeneration (Lv.1 Set - Helmet, Gloves, Boots) [DEPLOYED]
+### ðŸŽ¨ Milestone 81: Bionex Marksman Tier Assets Regeneration (Lv.1 Set - Helmet, Gloves, Boots) [DEPLOYED]
 - **Assets**: Regenerated 3 pieces of the Bionex Marksman Level 1 mecha armor set (`helmet`, `gloves`, `boots`) using the `/regenerate-2.5D-anime-realistic` custom skill with the built-in free image generation tool:
   - Helmet: Redesigned as a Coles Leather Cap (tactical dark brown and gray leather head strap running across the forehead, with protective metal ear covers on the sides, completely removing the dome cap shell and goggles, leaving the top of the head open/empty).
   - Gloves: Olive-green and khaki-green tactical leather ranger gauntlets/gloves featuring simple olive-green forearm metal plating with the Bionex logo.
@@ -926,7 +926,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 82: Bionex Guardian Tier Assets Regeneration (Lv.66 Set - Helmet, Pants, Boots, Gloves) [DEPLOYED]
+### ðŸŽ¨ Milestone 82: Bionex Guardian Tier Assets Regeneration (Lv.66 Set - Helmet, Pants, Boots, Gloves) [DEPLOYED]
 - **Assets**: Regenerated 4 pieces of the Bionex Guardian Level 66 mecha armor set (`helmet`, `pants`, `boots`, `gloves`) to match the white and metallic gold color tone and chivalrous heroic style of `defbionexguardianlv66armor.png` (which was kept unchanged as reference):
   - Helmet: Designed as a heroic paladin-mecha helmet featuring majestic wing-like gold crests on the sides and a T-shaped golden visor.
   - Pants: Heavy leg guards with iridescent pearl white thigh plates, polished gold frames, and knee guards with glowing yellow vents, redesigned to look long and slender with no feet/boots at the bottom.
@@ -935,7 +935,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - (Generated via built-in free tool).
 - **Post-processing**: Ran the script `process_gears.py` followed by alpha threshold filtering (<15 to 0) to crop, center, transparent-remove backgrounds, and resize to 320x320 PNGs.
 - **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
-### 🎨 Milestone 63: Bionex Marksman Tier Assets Regeneration (Lv.66 Set & Lv.55 Pants) [DEPLOYED]
+### ðŸŽ¨ Milestone 63: Bionex Marksman Tier Assets Regeneration (Lv.66 Set & Lv.55 Pants) [DEPLOYED]
 - **Assets**: Regenerated 6 pieces of Bionex Marksman mecha armor set: Level 66 set (helmet, armor, boots, gloves, pants) and Level 55 pants. Hand-detailed to match the ultimate endgame mecha aesthetic with sleek carbon fiber panels, detailed energy tubes, and neon cyan/blue glowing lines.
 - **Post-processing**: Ran the script `process_gears.py` located inside the skill's `scripts/` directory, which strips backgrounds using `rembg`, crops to content boundaries, centers and pads to square canvas (10% padding), and resizes to 320x320 transparent PNGs.
 - **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
@@ -943,7 +943,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 64: Bionex Marksman Tier Assets Regeneration (Lv.42 Partial Set) [DEPLOYED]
+### ðŸŽ¨ Milestone 64: Bionex Marksman Tier Assets Regeneration (Lv.42 Partial Set) [DEPLOYED]
 - **Assets**: Regenerated 2 of the 5 pieces of the Bionex Marksman Level 42 mecha armor set (`helmet`, `armor`) using the `/regenerate-2.5D-anime-realistic` custom skill to match the style of the Bionex Warrior Level 1 set with smooth edges, carbon fiber casing, and glowing neon blue/cyan lines. The remaining 2 pieces (`boots`, `gloves`) are pending reset of the image generation API quota. Note that the `pants` piece was already regenerated in Milestone 60.
 - **Post-processing**: Ran the script `process_gears.py` located inside the skill's `scripts/` directory, which strips backgrounds using `rembg`, crops to content boundaries, centers and pads to square canvas (10% padding), and resizes to 320x320 transparent PNGs.
 - **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
@@ -951,7 +951,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🛠️ Milestone 65: Bionex & Arctron Level 1 Job / Path Alignment [DEPLOYED]
+### ðŸ› ï¸� Milestone 65: Bionex & Arctron Level 1 Job / Path Alignment [DEPLOYED]
 - **Requirement**: Align Level 1 job IDs and display names with their respective job paths across Arctron and Bionex.
 - **Bionex Alignments**:
   - Aligned display names for Bionex Warrior path to "Guardian" (using existing ID `guardian`) and Bionex Specialist path to "Engineer" (using existing ID `engineer`).
@@ -959,14 +959,14 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - Updated all JSON databases (`items.json` and `jobWeapons.json`) to refer to `bionex_guardian` and `bionex_engineer` instead of `bionex_warrior` and `bionex_specialist`.
   - Refactored `gameStore.js`, `TransparentSprite.jsx`, `PilotSprites.jsx`, `Unit.jsx`, `Main.jsx`, and `CharacterCreate.jsx` to map Bionex jobs and display names to Guardian and Engineer.
 - **Arctron Renames**:
-  - Renamed Level 1 job IDs in `jobs.json` to match path names: `destroyer` ➔ `warrior` (Warrior), `gunner` ➔ `ranger` (Ranger), and `engineer` ➔ `technician` (Technician).
-  - Modified `items.json` and `jobWeapons.json` to update job restrictions for Arctron items from old IDs to new ones, correctly distinguishing Arctron's `engineer` ➔ `technician` while keeping Bionex's `engineer` intact.
-  - Refactored all source code files to query new Arctron Level 1 IDs and updated UI display labels (Specialist ➔ Technician).
+  - Renamed Level 1 job IDs in `jobs.json` to match path names: `destroyer` âž” `warrior` (Warrior), `gunner` âž” `ranger` (Ranger), and `engineer` âž” `technician` (Technician).
+  - Modified `items.json` and `jobWeapons.json` to update job restrictions for Arctron items from old IDs to new ones, correctly distinguishing Arctron's `engineer` âž” `technician` while keeping Bionex's `engineer` intact.
+  - Refactored all source code files to query new Arctron Level 1 IDs and updated UI display labels (Specialist âž” Technician).
 - **Verification**: Verified that the production client builds successfully with zero errors.
 
 ---
 
-### 🎨 Milestone 66: Bionex Psion Tier Assets Regeneration (Lv.1 Set) [DEPLOYED]
+### ðŸŽ¨ Milestone 66: Bionex Psion Tier Assets Regeneration (Lv.1 Set) [DEPLOYED]
 - **Assets**: Regenerated the full 5 pieces of the Bionex Psion Level 1 mecha armor set (`helmet`, `armor`, `pants`, `boots`, `gloves`) using the `/regenerate-2.5D-anime-realistic` custom skill to match the golden/bronze cybernetic mecha theme with glowing neon-blue psionic energy lines.
 - **Post-processing**: Ran the script `process_gears.py` to remove background via `rembg`, crop, center/pad to square, and resize to 320x320 transparent PNGs.
 - **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
@@ -974,7 +974,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 67: Bionex Psion Tier Assets Regeneration (Lv.32 & Lv.42 Sets) [DEPLOYED]
+### ðŸŽ¨ Milestone 67: Bionex Psion Tier Assets Regeneration (Lv.32 & Lv.42 Sets) [DEPLOYED]
 - **Assets**: Regenerated 10 mecha armor pieces (Bionex Psion Level 32 and Level 42 sets: `helmet`, `armor`, `pants`, `boots`, `gloves`) using the `/regenerate-2.5D-anime-realistic` custom skill to fit the golden/bronze cybernetic mecha theme with glowing neon-blue psionic energy lines.
 - **Post-processing**: Ran the script `process_gears.py` to remove backgrounds, crop, center/pad, and resize to 320x320 transparent PNGs.
 - **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
@@ -982,7 +982,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 68: Bionex Marksman Tier Assets Regeneration (Lv.42 Remaining Pieces) [DEPLOYED]
+### ðŸŽ¨ Milestone 68: Bionex Marksman Tier Assets Regeneration (Lv.42 Remaining Pieces) [DEPLOYED]
 - **Assets**: Regenerated 2 remaining pieces of Bionex Marksman Level 42 set (`boots`, `gloves`) using the `/regenerate-2.5D-anime-realistic` custom skill to match the mecha ranger style with dark steel plating and blue/cyan glowing panels. (Psion Level 66 set remains queued due to image generator quota limits).
 - **Post-processing**: Ran the script `process_gears.py` to remove backgrounds, crop, center/pad, and resize to 320x320 transparent PNGs.
 - **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
@@ -990,7 +990,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 69: Bionex Psion Tier Assets Regeneration (Lv.66 Set) [DEPLOYED]
+### ðŸŽ¨ Milestone 69: Bionex Psion Tier Assets Regeneration (Lv.66 Set) [DEPLOYED]
 - **Assets**: Regenerated the full 5 pieces of the Bionex Psion Level 66 mecha armor set (`helmet`, `armor`, `pants`, `boots`, `gloves`) using the `/regenerate-2.5D-anime-realistic` custom skill to fit the golden/bronze cybernetic mecha theme with glowing neon-blue psionic energy lines.
 - **Post-processing**: Ran the script `process_gears.py` to remove backgrounds, crop, center/pad, and resize to 320x320 transparent PNGs.
 - **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
@@ -998,7 +998,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 70: Bionex Marksman & Guardian Tier Assets Regeneration [DEPLOYED]
+### ðŸŽ¨ Milestone 70: Bionex Marksman & Guardian Tier Assets Regeneration [DEPLOYED]
 - **Assets**: Regenerated 7 mecha armor pieces using the `/regenerate-2.5D-anime-realistic` custom skill:
   - Bionex Guardian Level 66 set (`boots`, `gloves`, `helmet`, `pants`) - 4 pieces matching the heavy carbon fiber and neon-cyan themed mecha design.
   - Bionex Marksman Level 1 set (`armor`, `boots`, `gloves`) - 3 pieces matching the mecha ranger style.
@@ -1008,7 +1008,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 71: Bionex Guardian Tier Assets Regeneration (Lv.55 Armor) [DEPLOYED]
+### ðŸŽ¨ Milestone 71: Bionex Guardian Tier Assets Regeneration (Lv.55 Armor) [DEPLOYED]
 - **Assets**: Regenerated Bionex Guardian Level 55 Chest Armor (`armor`) using the `/regenerate-2.5D-anime-realistic` custom skill to fit the heavy carbon fiber and neon-cyan themed mecha design.
 - **Post-processing**: Ran the script `process_gears.py` to remove backgrounds, crop, center/pad, and resize to 320x320 transparent PNGs.
 - **Paths**: Overwrote files in both `public/assets/armor_bionex/` and `src/assets/armor_bionex/`.
@@ -1016,7 +1016,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 72: Celestra Mage & Ranger Tier Assets Regeneration (Lv.32 Sets) [DEPLOYED]
+### ðŸŽ¨ Milestone 72: Celestra Mage & Ranger Tier Assets Regeneration (Lv.32 Sets) [DEPLOYED]
 - **Assets**: Regenerated 10 mecha armor pieces using the `/regenerate-2.5D-anime-realistic` custom skill:
   - Celestra Mage Level 32 set (`helmet`, `armor`, `pants`, `boots`, `gloves`) - 5 pieces matching the white/gold elven wizard robe design with glowing purple runes.
   - Celestra Ranger Level 32 set (`helmet`, `armor`, `pants`, `boots`, `gloves`) - 5 pieces matching the green/emerald organic mecha design with gold leaf trims and wind-cyan lines. (Gloves generated via OpenRouter fallback due to rate limits).
@@ -1026,7 +1026,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 73: Celestra Ranger Tier Assets Regeneration (Lv.42 Set) [DEPLOYED]
+### ðŸŽ¨ Milestone 73: Celestra Ranger Tier Assets Regeneration (Lv.42 Set) [DEPLOYED]
 - **Assets**: Regenerated the full 5 pieces of the Celestra Ranger Level 42 mecha armor set (`helmet`, `armor`, `pants`, `boots`, `gloves`) using the `/regenerate-2.5D-anime-realistic` custom skill. All pieces match the ivory white and blue organic plating design with gold leaf trims and glowing wind-cyan/blue energy lines. (Generated via OpenRouter fallback).
 - **Post-processing**: Ran the script `process_gears.py` followed by low-alpha cleaning (setting Alpha < 15 to 0) to remove backgrounds, crop, center/pad, and resize to 320x320 transparent PNGs.
 - **Paths**: Overwrote files in both `public/assets/armor_celestra/` and `src/assets/armor_celestra/`.
@@ -1034,7 +1034,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 74: Celestra Warrior Tier Assets Regeneration (Lv.1 Set) [DEPLOYED]
+### ðŸŽ¨ Milestone 74: Celestra Warrior Tier Assets Regeneration (Lv.1 Set) [DEPLOYED]
 - **Assets**: Regenerated the full 5 pieces of the Celestra Warrior Level 1 mecha armor set (`helmet`, `armor`, `pants`, `boots`, `gloves`) using the `/regenerate-2.5D-anime-realistic` custom skill:
   - Helmet: Redesigned as a Rust Cordovan Circlet (elegant silver/gold headband with glowing cyan/blue energy feather-wings on the sides).
   - Armor, Pants, Boots, Gloves: Designed as starter-tier gear featuring simple white and brown modern leather panels, with a clean and plain futuristic design (no complex mecha or gold plating).
@@ -1045,62 +1045,62 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 💍 Milestone 75: Arctron Ring Database Entries (Lore/Guide Only, No Loot Wiring Yet) [DEPLOYED]
-- **Source**: User supplied a 5-ring reference sheet (`public/ref/Arctron/arctron-rings.png`, 1024×1536) inspired by rflib.ru's Accretia accessory database. Real rflib data for "Ring" is mostly elemental Bracelet items plus one 3-job-variant "Daidalos Ring" set (Launcher/Ranger/Warrior, ~25% ATK/DEF/Dodge) — no 5-tier ring set exists in the source data, so stats were improvised per explicit user direction, loosely inspired by Daidalos Ring's ATK%/DEF%/Dodge bonus shape.
-- **Scope explicitly limited by user**: drop source (which enemy/quest grants these) is undecided — these are database/lore entries only for now, NOT wired into `pickItem`'s combat loot table and NOT added to `items.json` as equippable items. Purely for the in-game "📖 Database & Guides" library screen.
-- **Image pipeline**: Reference sheet had a baked-in flat gray checkerboard (not real transparency, same failure mode as M44/M59's shield/armor issues) — used `rembg` (AI segmentation, confirmed installed this session) instead of manual BFS/threshold removal, which cleanly separated all 5 rings in one pass. Rings touched/overlapped vertically with no true empty-row gap, so used a smoothed per-row alpha-density profile (`scipy.signal.argrelextrema`) to locate the 4 local-minimum boundary rows (y=328, 638, 932, 1210) and split there. Each ring then tight-cropped, square-padded (8% margin), and LANCZOS-resized to 320×320 — matching the armor/weapon/shield convention established in M40/46/49/59.
+### ðŸ’� Milestone 75: Arctron Ring Database Entries (Lore/Guide Only, No Loot Wiring Yet) [DEPLOYED]
+- **Source**: User supplied a 5-ring reference sheet (`public/ref/Arctron/arctron-rings.png`, 1024Ã—1536) inspired by rflib.ru's Accretia accessory database. Real rflib data for "Ring" is mostly elemental Bracelet items plus one 3-job-variant "Daidalos Ring" set (Launcher/Ranger/Warrior, ~25% ATK/DEF/Dodge) â€” no 5-tier ring set exists in the source data, so stats were improvised per explicit user direction, loosely inspired by Daidalos Ring's ATK%/DEF%/Dodge bonus shape.
+- **Scope explicitly limited by user**: drop source (which enemy/quest grants these) is undecided â€” these are database/lore entries only for now, NOT wired into `pickItem`'s combat loot table and NOT added to `items.json` as equippable items. Purely for the in-game "ðŸ“– Database & Guides" library screen.
+- **Image pipeline**: Reference sheet had a baked-in flat gray checkerboard (not real transparency, same failure mode as M44/M59's shield/armor issues) â€” used `rembg` (AI segmentation, confirmed installed this session) instead of manual BFS/threshold removal, which cleanly separated all 5 rings in one pass. Rings touched/overlapped vertically with no true empty-row gap, so used a smoothed per-row alpha-density profile (`scipy.signal.argrelextrema`) to locate the 4 local-minimum boundary rows (y=328, 638, 932, 1210) and split there. Each ring then tight-cropped, square-padded (8% margin), and LANCZOS-resized to 320Ã—320 â€” matching the armor/weapon/shield convention established in M40/46/49/59.
 - **Files**: 5 new PNGs at `public/assets/arctron/rings/rng_arc_{0-4}.png` (+ `src/assets/` mirror): `rng_arc_0` (Common, red ruby), `rng_arc_1` (Uncommon, blue tech triangle), `rng_arc_2` (Rare, teal/cyan organic-tech), `rng_arc_3` (Epic, dark red rectangular gem), `rng_arc_4` (Legendary, gold horned dual-gem).
-- **Data**: Added a `rings` array to `src/data/gears/arctron.json` (5 entries: id/name/grade/image/stat fields — Ember Core Ring +8 ATK, Voidsteel Ring +12 ATK/+6 DEF, Cryo Matrix Ring +15 ATK/+8 Dodge, Bloodforge Ring +20 ATK/+10 DEF, Draconis Talon Ring +28 ATK/+15 DEF/+12 Dodge), matching the flat-integer-stat convention already used by this file's `warrior`/`ranger`/`technician` weapon arrays (not the `item.bonus` object shape used in `items.json`, since this file is display-only, disconnected from equippable items).
-- **UI**: Added a new "💍 Rings" card to `LibraryModal.jsx`'s Arctron equipment tab, rendering each ring's thumbnail image + grade/name + stat line, with a "[Drop source: belum ditentukan]" placeholder note per the scoped-out drop wiring.
+- **Data**: Added a `rings` array to `src/data/gears/arctron.json` (5 entries: id/name/grade/image/stat fields â€” Ember Core Ring +8 ATK, Voidsteel Ring +12 ATK/+6 DEF, Cryo Matrix Ring +15 ATK/+8 Dodge, Bloodforge Ring +20 ATK/+10 DEF, Draconis Talon Ring +28 ATK/+15 DEF/+12 Dodge), matching the flat-integer-stat convention already used by this file's `warrior`/`ranger`/`technician` weapon arrays (not the `item.bonus` object shape used in `items.json`, since this file is display-only, disconnected from equippable items).
+- **UI**: Added a new "ðŸ’� Rings" card to `LibraryModal.jsx`'s Arctron equipment tab, rendering each ring's thumbnail image + grade/name + stat line, with a "[Drop source: belum ditentukan]" placeholder note per the scoped-out drop wiring.
 - **Verification**: `npm run build` passes. (Also reinstalled `node_modules`, deleted earlier this session during a disk-cleanup pass, before building.)
 
 ---
 
-### 💍 Milestone 76: Celestra & Bionex Ring Database Entries (Lore/Guide Only) [DEPLOYED]
-- **Source**: User supplied two more 5-ring reference sheets (`public/ref/Celestra/celestra-rings.png`, `public/ref/Bionex/bionex-rings.png`, both 1024×1536), plus rflib.ru's general (all-race) Ring database for flavor inspiration — named rings there (Baal Ring, Beast of Life Ring, Black Mist Ring, Christmas Defense/Dodge Ring, etc.) confirmed the ATK%/DEF%/Dodge/elemental bonus shape pattern already used for the M75 Arctron rings; no exact matching 5-tier set exists in the source data for either faction, so stats were improvised again per the same explicit user direction.
-- **Same scope limits as M75**: database/lore entries only, no `items.json` equippable entries, no `pickItem` loot-table wiring — drop source still undecided.
-- **Image pipeline**: Both reference sheets had the same baked-in flat black background (opaque, not real alpha). Used `rembg` to clean both in one pass each. Rings touched vertically with no true empty-row gap in either sheet, so reused the M75 smoothed-row-density-profile technique (`scipy.signal.argrelextrema`) to find 4 boundary rows per sheet: Celestra at y=318/627/920/1226, Bionex at y=321/638/939/1231. Tight-cropped, square-padded (8%), LANCZOS-resized to 320×320 each.
-- **Files**: 10 new PNGs — `public/assets/celestra/rings/rng_cor_{0-4}.png` and `public/assets/bionex/rings/rng_bio_{0-4}.png` (+ `src/assets/` mirrors).
-- **Data**: Added `rings` arrays to `src/data/gears/celestra.json` and `src/data/gears/bionex.json`, matching the M75 Arctron schema (id/name/grade/image/atk/def/dodge). Faction flavor differentiated per the existing lore stat leanings from Milestone 37 (Race Unique Stat Advantages): Celestra rings lean ATK+Dodge (Bloodthorn Cuff, Ruby Ember Ring, Sapphire Ward Ring, Solaris Crest Ring, Amber Talon Cuff — up to +26 ATK/+12 DEF/+16 Dodge at Legendary), Bionex rings lean balanced ATK+DEF (Pulse Band Ring, Crimson Core Ring, Vortex Claw Ring, Bloodline Circuit Ring, Golden Cipher Ring — up to +26 ATK/+18 DEF/+6 Dodge at Legendary).
-- **UI**: Added matching "💍 Rings" cards to `LibraryModal.jsx`'s Celestra and Bionex equipment tabs (same thumbnail + grade/name + stat line + "[Drop source: belum ditentukan]" pattern as M75's Arctron card). All 3 factions now have a Rings section in the Database & Guides library.
+### ðŸ’� Milestone 76: Celestra & Bionex Ring Database Entries (Lore/Guide Only) [DEPLOYED]
+- **Source**: User supplied two more 5-ring reference sheets (`public/ref/Celestra/celestra-rings.png`, `public/ref/Bionex/bionex-rings.png`, both 1024Ã—1536), plus rflib.ru's general (all-race) Ring database for flavor inspiration â€” named rings there (Baal Ring, Beast of Life Ring, Black Mist Ring, Christmas Defense/Dodge Ring, etc.) confirmed the ATK%/DEF%/Dodge/elemental bonus shape pattern already used for the M75 Arctron rings; no exact matching 5-tier set exists in the source data for either faction, so stats were improvised again per the same explicit user direction.
+- **Same scope limits as M75**: database/lore entries only, no `items.json` equippable entries, no `pickItem` loot-table wiring â€” drop source still undecided.
+- **Image pipeline**: Both reference sheets had the same baked-in flat black background (opaque, not real alpha). Used `rembg` to clean both in one pass each. Rings touched vertically with no true empty-row gap in either sheet, so reused the M75 smoothed-row-density-profile technique (`scipy.signal.argrelextrema`) to find 4 boundary rows per sheet: Celestra at y=318/627/920/1226, Bionex at y=321/638/939/1231. Tight-cropped, square-padded (8%), LANCZOS-resized to 320Ã—320 each.
+- **Files**: 10 new PNGs â€” `public/assets/celestra/rings/rng_cor_{0-4}.png` and `public/assets/bionex/rings/rng_bio_{0-4}.png` (+ `src/assets/` mirrors).
+- **Data**: Added `rings` arrays to `src/data/gears/celestra.json` and `src/data/gears/bionex.json`, matching the M75 Arctron schema (id/name/grade/image/atk/def/dodge). Faction flavor differentiated per the existing lore stat leanings from Milestone 37 (Race Unique Stat Advantages): Celestra rings lean ATK+Dodge (Bloodthorn Cuff, Ruby Ember Ring, Sapphire Ward Ring, Solaris Crest Ring, Amber Talon Cuff â€” up to +26 ATK/+12 DEF/+16 Dodge at Legendary), Bionex rings lean balanced ATK+DEF (Pulse Band Ring, Crimson Core Ring, Vortex Claw Ring, Bloodline Circuit Ring, Golden Cipher Ring â€” up to +26 ATK/+18 DEF/+6 Dodge at Legendary).
+- **UI**: Added matching "ðŸ’� Rings" cards to `LibraryModal.jsx`'s Celestra and Bionex equipment tabs (same thumbnail + grade/name + stat line + "[Drop source: belum ditentukan]" pattern as M75's Arctron card). All 3 factions now have a Rings section in the Database & Guides library.
 - **Verification**: `npm run build` passes.
 
 ---
 
-### 💍 Milestone 77: Universal (All-Faction) Ring Database Entries — Replaces Old Placeholder Rings [DEPLOYED]
-- **Source**: User supplied a 5th reference sheet (`public/ref/cincin-all-factions.png`, 1024×1536, "cincin" = ring) explicitly for a **universal/race-agnostic** ring set, plus the same rflib.ru general Ring database link, with instruction to treat it identically to the M75/M76 faction rings.
-- **Found existing generic placeholder**: `src/data/gears/accessories.json`'s `rings` array already held 4 flavor-only entries (Ember/Storm/Obsidian/Chronos Ring, Common→Epic, `atk`+`critical%` stat shape, no images) rendered under `LibraryModal.jsx`'s "Global (Acc)" tab — this is the natural home for a universal ring set, so replaced these 4 placeholders outright with the 5 new image-backed entries rather than running two parallel universal-ring lists.
+### ðŸ’� Milestone 77: Universal (All-Faction) Ring Database Entries â€” Replaces Old Placeholder Rings [DEPLOYED]
+- **Source**: User supplied a 5th reference sheet (`public/ref/cincin-all-factions.png`, 1024Ã—1536, "cincin" = ring) explicitly for a **universal/race-agnostic** ring set, plus the same rflib.ru general Ring database link, with instruction to treat it identically to the M75/M76 faction rings.
+- **Found existing generic placeholder**: `src/data/gears/accessories.json`'s `rings` array already held 4 flavor-only entries (Ember/Storm/Obsidian/Chronos Ring, Commonâ†’Epic, `atk`+`critical%` stat shape, no images) rendered under `LibraryModal.jsx`'s "Global (Acc)" tab â€” this is the natural home for a universal ring set, so replaced these 4 placeholders outright with the 5 new image-backed entries rather than running two parallel universal-ring lists.
 - **Same scope limits as M75/M76**: database/lore entries only, no `items.json`/loot-table wiring.
-- **Image pipeline**: Same baked-in flat black background (opaque). `rembg` cleanup, then the row-density-profile technique found 4 boundary rows at y=339/631/890/1197. Tight-cropped, square-padded (8%), resized to 320×320.
+- **Image pipeline**: Same baked-in flat black background (opaque). `rembg` cleanup, then the row-density-profile technique found 4 boundary rows at y=339/631/890/1197. Tight-cropped, square-padded (8%), resized to 320Ã—320.
 - **Files**: 5 new PNGs at `public/assets/accessories/rings/rng_all_{0-4}.png` (+ `src/assets/` mirror).
-- **Data**: Rewrote `accessories.json`'s `rings` array to the same schema as M75/M76 (id/name/grade/image/atk/def/dodge, 5-tier Common→Legendary): Garnet Signet Ring (+8 ATK), Dragonfang Ring (+12 ATK/+6 Dodge), Emerald Lock Ring (+14 ATK/+10 DEF), Sapphire Shard Ring (+20 ATK/+10 DEF/+8 Dodge), Golden Vault Ring (+28 ATK/+16 DEF/+14 Dodge).
-- **UI**: Rewrote the "Global (Acc)" rings card in `LibraryModal.jsx` from the old `atk`/`critical%` two-column layout to the same image-thumbnail + grade/name + atk/def/dodge stat-line layout used by the 3 faction ring cards, for visual consistency across all 4 ring sections in the library. Renamed the card title to "💍 Rings (Universal — All Factions)".
+- **Data**: Rewrote `accessories.json`'s `rings` array to the same schema as M75/M76 (id/name/grade/image/atk/def/dodge, 5-tier Commonâ†’Legendary): Garnet Signet Ring (+8 ATK), Dragonfang Ring (+12 ATK/+6 Dodge), Emerald Lock Ring (+14 ATK/+10 DEF), Sapphire Shard Ring (+20 ATK/+10 DEF/+8 Dodge), Golden Vault Ring (+28 ATK/+16 DEF/+14 Dodge).
+- **UI**: Rewrote the "Global (Acc)" rings card in `LibraryModal.jsx` from the old `atk`/`critical%` two-column layout to the same image-thumbnail + grade/name + atk/def/dodge stat-line layout used by the 3 faction ring cards, for visual consistency across all 4 ring sections in the library. Renamed the card title to "ðŸ’� Rings (Universal â€” All Factions)".
 - **Verification**: `npm run build` passes.
 
 ---
 
-### 📿 Milestone 78: Amulet Database Entries — All 3 Factions + Universal (Lore/Guide Only) [DEPLOYED]
+### ðŸ“¿ Milestone 78: Amulet Database Entries â€” All 3 Factions + Universal (Lore/Guide Only) [DEPLOYED]
 - **Source**: User supplied 4 amulet reference sheets (`public/ref/Arctron-amulets.png`, `bionex-amulet.png`, `Celestra-amulets.png`, `all-factions-amulets.png`) plus rflib.ru's Amulet database for stat-shape inspiration (Beast Amulet ATK%, Beginner's Amulet all-elements, Brother's Tears Amulet ATK%+DEF%+all-elements, Christmas Defense/Dodge/Warding variants, Dagon's Leash, Elemental Appendix). Same explicit instruction as M75-77: treat identically, improvise stats.
-- **Item count varied per sheet** — verified by pixel-counting, not assumption, after an initial miscount: Arctron/Bionex/all-factions each have **5** amulets, but **Celestra only has 3** (confirmed by direct re-inspection of the reference image after the row-density algorithm initially found an ambiguous boundary count).
-- **Image pipeline**: All 4 sheets had the same baked-in flat black background. `rembg` cleanup per sheet, then row-density-profile boundary detection (as in M75-77) — but this batch surfaced two new failure modes needing extra handling:
+- **Item count varied per sheet** â€” verified by pixel-counting, not assumption, after an initial miscount: Arctron/Bionex/all-factions each have **5** amulets, but **Celestra only has 3** (confirmed by direct re-inspection of the reference image after the row-density algorithm initially found an ambiguous boundary count).
+- **Image pipeline**: All 4 sheets had the same baked-in flat black background. `rembg` cleanup per sheet, then row-density-profile boundary detection (as in M75-77) â€” but this batch surfaced two new failure modes needing extra handling:
   1. **Shallow/near-zero valleys**: some sheets (Celestra, part of all-factions) have items touching with very little density drop at the seam, requiring targeted min-search within a visually-estimated zone rather than a single global threshold.
-  2. **Stray fragment pulling the crop bounding box off-center**: `bionex` amulet #5 initially cropped with the real content pushed to one side because a ~12px disconnected speck from the neighboring item survived the naive `alpha>10` bounding-box scan. Fixed by adding connected-component blob filtering (keep only blobs ≥10% of the largest blob's pixel count) to every crop in this batch before computing the bounding box — not just the one file that visibly broke.
-- **Known minor imperfection**: 2 of the 3 Celestra amulets have a small visible sliver of the touching neighbor bleeding into frame (the two pendants are fused with zero true gap, unlike a separable connected component) — same category of acceptable trade-off as M59's shield speckle-noise, flagged here rather than fixed further given lore/guide-only scope.
-- **Files**: 18 new PNGs — `public/assets/arctron/amulets/amu_arc_{0-4}.png`, `public/assets/bionex/amulets/amu_bio_{0-4}.png`, `public/assets/celestra/amulets/amu_cor_{0-2}.png`, `public/assets/accessories/amulets/amu_all_{0-4}.png` (+ all `src/assets/` mirrors).
-- **Data**: Added `amulets` arrays to `arctron.json`/`bionex.json`/`celestra.json` (id/name/grade/image/hp/def, matching the existing "Amulets Database (HP & DEF)" stat shape already used by `accessories.json`, distinct from the ATK/DEF/Dodge shape used for rings) — Arctron/Bionex both Common→Legendary 5-tier (400-4500 HP, 20-180 DEF), Celestra 3-tier Common/Rare/Legendary (600-4200 HP, 30-170 DEF). Replaced `accessories.json`'s old 4-entry image-less amulet placeholder (Lumen/Aether/Astralis/Aurora Charm) with 5 new image-backed entries (Ember Heart, Verdant Compass, Duality, Void Crystal, Solstice Amulet), same pattern as M77's ring replacement.
-- **UI**: Added new "📿 Amulets" cards (image thumbnail + grade/name + HP/DEF stat line) to `LibraryModal.jsx`'s Arctron, Bionex, and Celestra equipment tabs (positioned above each faction's existing Rings card), and upgraded the "Global (Acc)" tab's amulet card to the same image-backed layout. All 3 factions + universal now have both Amulets and Rings sections in the Database & Guides library.
+  2. **Stray fragment pulling the crop bounding box off-center**: `bionex` amulet #5 initially cropped with the real content pushed to one side because a ~12px disconnected speck from the neighboring item survived the naive `alpha>10` bounding-box scan. Fixed by adding connected-component blob filtering (keep only blobs â‰¥10% of the largest blob's pixel count) to every crop in this batch before computing the bounding box â€” not just the one file that visibly broke.
+- **Known minor imperfection**: 2 of the 3 Celestra amulets have a small visible sliver of the touching neighbor bleeding into frame (the two pendants are fused with zero true gap, unlike a separable connected component) â€” same category of acceptable trade-off as M59's shield speckle-noise, flagged here rather than fixed further given lore/guide-only scope.
+- **Files**: 18 new PNGs â€” `public/assets/arctron/amulets/amu_arc_{0-4}.png`, `public/assets/bionex/amulets/amu_bio_{0-4}.png`, `public/assets/celestra/amulets/amu_cor_{0-2}.png`, `public/assets/accessories/amulets/amu_all_{0-4}.png` (+ all `src/assets/` mirrors).
+- **Data**: Added `amulets` arrays to `arctron.json`/`bionex.json`/`celestra.json` (id/name/grade/image/hp/def, matching the existing "Amulets Database (HP & DEF)" stat shape already used by `accessories.json`, distinct from the ATK/DEF/Dodge shape used for rings) â€” Arctron/Bionex both Commonâ†’Legendary 5-tier (400-4500 HP, 20-180 DEF), Celestra 3-tier Common/Rare/Legendary (600-4200 HP, 30-170 DEF). Replaced `accessories.json`'s old 4-entry image-less amulet placeholder (Lumen/Aether/Astralis/Aurora Charm) with 5 new image-backed entries (Ember Heart, Verdant Compass, Duality, Void Crystal, Solstice Amulet), same pattern as M77's ring replacement.
+- **UI**: Added new "ðŸ“¿ Amulets" cards (image thumbnail + grade/name + HP/DEF stat line) to `LibraryModal.jsx`'s Arctron, Bionex, and Celestra equipment tabs (positioned above each faction's existing Rings card), and upgraded the "Global (Acc)" tab's amulet card to the same image-backed layout. All 3 factions + universal now have both Amulets and Rings sections in the Database & Guides library.
 - **Verification**: `npm run build` passes.
 
 ---
 
-### 🏷️ Milestone 79: Ring & Amulet Renaming Pass — Real rflib.ru Naming Conventions [DEPLOYED]
-- **Ask**: User wanted the M75-78 ring/amulet names (which were generic invented fantasy names like "Ember Core Ring", "Solar Halo Pendant") replaced with names drawing more directly from rflib.ru's actual dramatic/mythological naming style (proper nouns, possessives — Baal, Dagon, Beast of Life, Dead Officer's, Brother's Tears, Daidalos) rather than generic gemstone/element naming.
-- **Scope**: Renamed all 38 ring/amulet `name` fields across all 4 gear JSON files — `arctron.json` (5 amulets + 5 rings), `bionex.json` (5 amulets + 5 rings), `celestra.json` (3 amulets + 5 rings), `accessories.json` (5 amulets + 5 rings). No id/image/stat changes — pure naming pass.
+### ðŸ�·ï¸� Milestone 79: Ring & Amulet Renaming Pass â€” Real rflib.ru Naming Conventions [DEPLOYED]
+- **Ask**: User wanted the M75-78 ring/amulet names (which were generic invented fantasy names like "Ember Core Ring", "Solar Halo Pendant") replaced with names drawing more directly from rflib.ru's actual dramatic/mythological naming style (proper nouns, possessives â€” Baal, Dagon, Beast of Life, Dead Officer's, Brother's Tears, Daidalos) rather than generic gemstone/element naming.
+- **Scope**: Renamed all 38 ring/amulet `name` fields across all 4 gear JSON files â€” `arctron.json` (5 amulets + 5 rings), `bionex.json` (5 amulets + 5 rings), `celestra.json` (3 amulets + 5 rings), `accessories.json` (5 amulets + 5 rings). No id/image/stat changes â€” pure naming pass.
 - **Verification**: `npm run build` passes.
 
 ---
 
-### 🎨 Milestone 80: Bionex Marksman Tier Assets Regeneration (Lv.55 Set) [DEPLOYED]
+### ðŸŽ¨ Milestone 80: Bionex Marksman Tier Assets Regeneration (Lv.55 Set) [DEPLOYED]
 - **Assets**: Regenerated all 5 pieces of the Bionex Marksman Level 55 mecha armor set (`helmet`, `armor`, `pants`, `boots`, `gloves`) using the `/regenerate-2.5D-anime-realistic` custom skill. The set is based on the Bellato Ranger level 41-50 "Ell Set" references from rflib.ru:
   - Helmet: Tactical copper-brown headset/visor with tactical goggles.
   - Armor, Pants, Boots, Gloves: High-quality polished white and red-orange metallic plates with chrome-silver trims and dark titanium-steel joints, representing high-tier mecha gear.
@@ -1110,7 +1110,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 81: Bionex Marksman Tier Assets Regeneration (Lv.1 Set - Helmet, Gloves, Boots) [DEPLOYED]
+### ðŸŽ¨ Milestone 81: Bionex Marksman Tier Assets Regeneration (Lv.1 Set - Helmet, Gloves, Boots) [DEPLOYED]
 - **Assets**: Regenerated 3 pieces of the Bionex Marksman Level 1 mecha armor set (`helmet`, `gloves`, `boots`) using the `/regenerate-2.5D-anime-realistic` custom skill with the built-in free image generation tool:
   - Helmet: Redesigned as a Coles Leather Cap (tactical dark brown and gray leather head strap running across the forehead, with protective metal ear covers on the sides, completely removing the dome cap shell and goggles, leaving the top of the head open/empty).
   - Gloves: Olive-green and khaki-green tactical leather ranger gauntlets/gloves featuring simple olive-green forearm metal plating with the Bionex logo.
@@ -1120,7 +1120,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 82: Bionex Guardian Tier Assets Regeneration (Lv.66 Set - Helmet, Pants, Boots, Gloves) [DEPLOYED]
+### ðŸŽ¨ Milestone 82: Bionex Guardian Tier Assets Regeneration (Lv.66 Set - Helmet, Pants, Boots, Gloves) [DEPLOYED]
 - **Assets**: Regenerated 4 pieces of the Bionex Guardian Level 66 mecha armor set (`helmet`, `pants`, `boots`, `gloves`) to match the white and metallic gold color tone and chivalrous heroic style of `defbionexguardianlv66armor.png` (which was kept unchanged as reference):
   - Helmet: Designed as a heroic paladin-mecha helmet featuring majestic wing-like gold crests on the sides and a T-shaped golden visor.
   - Pants: Heavy leg guards with iridescent pearl white thigh plates, polished gold frames, and knee guards with glowing yellow vents, redesigned to look long and slender with no feet/boots at the bottom.
@@ -1133,7 +1133,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 83: Celestra Mage Tier Assets Regeneration (Lv.42 Set - Full 5 Pieces) [DEPLOYED]
+### ðŸŽ¨ Milestone 83: Celestra Mage Tier Assets Regeneration (Lv.42 Set - Full 5 Pieces) [DEPLOYED]
 - **Strict Adherence**: Per the user's explicit command, the "shapes, type of armor sets, and color tones" were strictly forbidden from being changed. The regeneration process focused solely on producing clean 2.5D anime hyperrealistic mecha art, entirely removing the extremely pixelated/jagged 64x64 upscaled compression artifacts while maintaining the exact original structural components.
 - **Assets**: Regenerated all 5 pieces of the Celestra Mage Level 42 mecha armor set (`helmet`, `armor`, `pants`, `boots`, `gloves`):
   - Helmet: Cleaned up the curved horizontal metallic gold arch crest and the dark metallic gray face mask underneath, preserving the blue-and-gold side tassels.
@@ -1148,7 +1148,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 85: Celestra Warrior Tier Assets Regeneration (Lv.32 Set - Full 5 Pieces) [DEPLOYED]
+### ðŸŽ¨ Milestone 85: Celestra Warrior Tier Assets Regeneration (Lv.32 Set - Full 5 Pieces) [DEPLOYED]
 - **Assets**: Regenerated all 5 pieces of the Celestra Warrior Level 32 mecha armor set (`helmet`, `armor`, `pants`, `boots`, `gloves`) ensuring the original shapes, colors, and layouts were strictly preserved while creating ultra-smooth, sharp, 2.5D anime realistic mecha art free of pixelated jagged lines.
   - Helmet: Regenerated from the true reference image, producing a diagonal cybernetic headgear/scouter earpiece made of dark titanium black metal with glowing blue metallic accents, perfectly matching the original floating shape rather than hallucinating a full helmet. (Generated via built-in free tool).
   - Boots: Smoothed out the combat boots. (Generated via built-in free tool).
@@ -1161,7 +1161,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 84: Celestra Ranger Tier Assets Regeneration (Lv.1 Set - Full 5 Pieces) [DEPLOYED]
+### ðŸŽ¨ Milestone 84: Celestra Ranger Tier Assets Regeneration (Lv.1 Set - Full 5 Pieces) [DEPLOYED]
 - **Assets**: Regenerated all 5 pieces of the Celestra Ranger Level 1 mecha armor set (`helmet`, `armor`, `pants`, `boots`, `gloves`) using an uploaded user image reference and specific prompt engineering.
   - Helmet: Replaced a completely illegible 32x32 pixel triangle with a sleek, futuristic sci-fi elven Robin Hood style cap. Features dark faded denim, black leather, and an aerodynamic elven-ear shape with a subtle backward feather-like crest and cyan glowing nodes.
   - Armor: Short-sleeved cropped dark denim-blue jacket, white tight undershirt, studded dark high collar, and studded silver/white belt.
@@ -1175,7 +1175,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 86: Celestra Warrior Lv.42 Armor Regeneration — Source-Faithful Color/Motif Analysis [DEPLOYED]
+### ðŸŽ¨ Milestone 86: Celestra Warrior Lv.42 Armor Regeneration â€” Source-Faithful Color/Motif Analysis [DEPLOYED]
 - **Ask**: User asked to regenerate `defcelestrawarriorlv42armor.png` (badly pixelated/jagged placeholder) via the new `openrouter_image.py` tool built in OpenMontage, with edges/lines clarified and colors solidified.
 - **First attempt rejected**: Initial generation assumed the Lv1 set bronze-trim + round cyan gem color scheme applied to Lv42 too. User pushed back hard -- the actual Lv42 source has a completely different, unrelated palette; the first attempt changed color and shape entirely.
 - **Root-cause fix -- analyzed the actual source pixels before regenerating**: Restored the original from `git show HEAD:...`, ran a quantized color histogram (Counter over //24*24-quantized RGB, 49k opaque pixels) to get real dominant colors, and cropped+nearest-neighbor-zoomed 5 regions (collar, chest, both shoulders, lower torso) to read the actual silhouette through the pixelation blur. Findings: white/pearl-silver base + thick black linework + dark navy-blue/indigo accents (no bronze) + emerald-green glow accents (no cyan) + a tall mandarin collar + angular blade-like pointed shoulder pauldrons (not rounded) + an angular diamond-shaped navy chest gem (not round).
@@ -1187,7 +1187,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 87: Celestra Warrior Lv.42 Helmet Regeneration — Odinz Full Helm [DEPLOYED]
+### ðŸŽ¨ Milestone 87: Celestra Warrior Lv.42 Helmet Regeneration â€” Odinz Full Helm [DEPLOYED]
 - **Ask**: Regenerate `defcelestrawarriorlv42helmet.png` (pixelated placeholder), referencing the real RF Online item name "Helm_CW_41_OdinzFullHelm" (fetched a 32x32 GIF thumbnail from rfdb.alphaoptix.com for the name/concept), with the true render style taken from `defcelestrarangerlv42armor.png` (white/blue/gold ornate style).
 - **Color analysis on the broken source**: Same quantized-histogram approach as M86 -- white/silver metal base + ~22% blue-tinted pixels (navy to pale sky-blue gradient), confirming compatibility with the ranger armor style reference.
 - **Iteration 1 misread the shape**: The tiny 32x32 reference GIF and the broken source both show an ambiguous diagonal shape; first generation produced a dagger/blade with a hilt rather than a helmet. User corrected: this is a FULL HELMET (per the item's actual name), open-faced with the mouth/jaw visible, elven luxury style.
@@ -1198,7 +1198,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 88: Celestra Warrior Lv.42 Set Completion — Pants, Boots, Gloves [DEPLOYED]
+### ðŸŽ¨ Milestone 88: Celestra Warrior Lv.42 Set Completion â€” Pants, Boots, Gloves [DEPLOYED]
 - **Scope**: Completed the Celestra Warrior Lv.42 set regeneration (started in M86/M87 with armor + helmet) by regenerating the remaining 3 pieces: `pants`, `boots`, `gloves`.
 - **Approach**: Verified color palette via the same quantized-histogram method as M86/M87 before generating -- confirmed all 3 pieces share the established set palette (white/pearl-silver + black linework + navy-blue-to-sky-blue gradient + pale cyan tints), so generated directly in one pass each using the same style prompt template (no shape-misread issues this time, unlike M87's helmet).
 - **Result**: All 3 approved on the first generation -- angular leg plates with cyan knee gems (pants), knee-high armored boots with buckle straps and cyan accent gems (boots), and articulated gauntlets with sharp angular fingertips and gold scrollwork (gloves), fully consistent with the armor + helmet already done.
@@ -1208,7 +1208,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 89: Celestra Warrior Lv.42 Pants Fix — Boot Shape Removed (Free, No Regeneration) [DEPLOYED]
+### ðŸŽ¨ Milestone 89: Celestra Warrior Lv.42 Pants Fix â€” Boot Shape Removed (Free, No Regeneration) [DEPLOYED]
 - **Issue**: User flagged that the M88 pants generation had accidentally rendered boot/shoe shapes at the ankle ("jangan ono legs & boots").
 - **Fix without spending API credits**: Rather than re-generating (which would cost ~$0.04), analyzed the raw pre-`process_gears` generation's alpha/width profile in Python to locate the exact row where the ankle cuff's gold/navy trim band ends and the boot-toe flare begins, then hard-cropped the image at that row (filled with white above the crop boundary in the raw white-background source). The natural black outline of the trim band closed the silhouette cleanly with no visible seam.
 - **Result**: Clean armored greave ending flush at the ankle, no feet/boots visible.
@@ -1217,16 +1217,16 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 90: Celestra Mage Lv.32 Pants Fix — Boot Shape Removed (Free, No Regeneration) [DEPLOYED]
+### ðŸŽ¨ Milestone 90: Celestra Mage Lv.32 Pants Fix â€” Boot Shape Removed (Free, No Regeneration) [DEPLOYED]
 - **Issue**: User flagged that the already-finalized `defcelestramagelv32pants.png` (an older, previously-shipped asset, not part of this session's regeneration batch) had boot/shoe shapes baked into the bottom of the sprite ("boots diremove").
-- **Fix without spending API credits**: Same technique as M89 — profiled the alpha-channel width per row on the already-processed 320x320 RGBA asset to find the true ankle point (row where the shin plate's width plateaus right before the boot flare begins), zeroed alpha below that row, then synthesized a short 2px dark outline bar across each leg's exact x-range at the cut line to close the silhouette cleanly (this asset's shin-to-boot transition was a soft gradient with no pre-existing hard trim-band edge to cut along, unlike M89).
+- **Fix without spending API credits**: Same technique as M89 â€” profiled the alpha-channel width per row on the already-processed 320x320 RGBA asset to find the true ankle point (row where the shin plate's width plateaus right before the boot flare begins), zeroed alpha below that row, then synthesized a short 2px dark outline bar across each leg's exact x-range at the cut line to close the silhouette cleanly (this asset's shin-to-boot transition was a soft gradient with no pre-existing hard trim-band edge to cut along, unlike M89).
 - **Result**: Shin guards now end cleanly at the calf with a proper closed outline; no boots/shoes visible.
 - **Tooling**: Plain PIL/numpy analysis + manual outline synthesis + `process_gears.py` for final crop/pad/resize-to-320. No paid generation call.
 - **Verification**: Visually confirmed via Read tool; `npm run build` passes.
 
 ---
 
-### ⚔️ Milestone 91: Arcanite Enhancement System (RF Online Forge Style) [DEPLOYED]
+### âš”ï¸� Milestone 91: Arcanite Enhancement System (RF Online Forge Style) [DEPLOYED]
 - **Core Rules Integrated**:
   - Implemented 8 distinct Arcanite stones (`mat_arcanite_fury`, `ruin`, `spirit`, `vital`, `guard`, `precision`, `agility`, `focus`) into `items.json` and `translationData.js`.
   - Enhancement Success Rates maintained: 100% (+1) degrading to 5% (+8). Breakage risk active for +6 to +8 failures.
@@ -1240,7 +1240,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 92: Celestra Warrior Lv.32 Helmet Sprite Replacement [DEPLOYED]
+### ðŸŽ¨ Milestone 92: Celestra Warrior Lv.32 Helmet Sprite Replacement [DEPLOYED]
 - **Assets**: Replaced `defcelestrawarriorlv32helmet.png` with the user-supplied mask asset `lv32maskrefwar.png`.
 - **Post-processing**: Ran the script `process_gears.py` to remove the background via `rembg`, crop, center/pad, and resize to a 320x320 transparent PNG.
 - **Paths**: Overwrote files in both `public/assets/armor_celestra/` and `src/assets/armor_celestra/`.
@@ -1249,7 +1249,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 93: Celestra Mage Lv.55 Pants & Lv.66 Armor/Boots/Gloves Sprite Replacement [DEPLOYED]
+### ðŸŽ¨ Milestone 93: Celestra Mage Lv.55 Pants & Lv.66 Armor/Boots/Gloves Sprite Replacement [DEPLOYED]
 - **Assets**:
   - Extracted pants from `pantslv55magecelestra.jpg` (bottom-left quadrant), removed background, and replaced `defcelestramagelv66pants.png` (deleting the deprecated `defcelestramagelv55pants.png` file).
   - Extracted chest armor from `celestralv55magearmor.png` (using main component), removed background, and replaced `defcelestramagelv66armor.png`.
@@ -1262,7 +1262,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 94: Celestra Mage Lv.66 Helmet Sprite Regeneration & Replacement [DEPLOYED]
+### ðŸŽ¨ Milestone 94: Celestra Mage Lv.66 Helmet Sprite Regeneration & Replacement [DEPLOYED]
 - **Assets**: Downloaded Cora Force helmet reference thumbnail `Helm_CF_47_DissemAmice.gif` from `rfdb.alphaoptix.com`.
 - **Regeneration**: Regenerated the helmet using `generate_image` (Endpoint 1) with detailed prompt styling matching the elven winged crown design, utilizing the newly replaced Lv.66 Celestra Mage armor as a style reference.
 - **Post-processing**: Used a custom Python script (`extract_helmet.py`) to crop only the head/crown portion (removing torso/shoulders), stripped background using `rembg`, tightly cropped, padded to square canvas, and resized to `320x320` transparent PNG.
@@ -1272,7 +1272,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 95: Celestra Mage Lv.55 Set Reconstruction (Full 5 Pieces) [DEPLOYED]
+### ðŸŽ¨ Milestone 95: Celestra Mage Lv.55 Set Reconstruction (Full 5 Pieces) [DEPLOYED]
 - **Assets**: Reconstructed all 5 pieces of the Celestra Mage Lv.55 mecha armor set (`armor`, `helmet`, `pants`, `boots`, `gloves`) from the newly provided high-resolution reference sheet `truelv55mage.png`.
 - **Post-processing**:
   - Wrote and executed the script `extract_truelv55mage.py` to crop each quadrant/panel:
@@ -1288,7 +1288,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 96: Celestra Ranger Lv.55 Set Replacement (Full 5 Pieces) [DEPLOYED]
+### ðŸŽ¨ Milestone 96: Celestra Ranger Lv.55 Set Replacement (Full 5 Pieces) [DEPLOYED]
 - **Assets**: Replaced all 5 pieces of the Celestra Ranger Lv.55 mecha armor set (`armor`, `helmet`, `pants`, `boots`, `gloves`) from the newly provided high-resolution showcase sheet `truelv55ranger.png`.
 - **Post-processing**:
   - Wrote and executed the script `extract_truelv55ranger.py` to crop each part:
@@ -1304,7 +1304,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 97: Celestra Ranger Lv.66 Set Replacement (Full 5 Pieces) [DEPLOYED]
+### ðŸŽ¨ Milestone 97: Celestra Ranger Lv.66 Set Replacement (Full 5 Pieces) [DEPLOYED]
 - **Assets**: Replaced all 5 pieces of the Celestra Ranger Lv.66 mecha armor set (`armor`, `helmet`, `pants`, `boots`, `gloves`) from the newly provided high-resolution showcase sheet `truelv66ranger.png`.
 - **Post-processing**:
   - Wrote and executed the script `extract_truelv66ranger.py` to crop each part:
@@ -1320,7 +1320,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 98: Celestra Warrior Lv.55 Set Replacement (Full 5 Pieces) [DEPLOYED]
+### ðŸŽ¨ Milestone 98: Celestra Warrior Lv.55 Set Replacement (Full 5 Pieces) [DEPLOYED]
 - **Assets**: Replaced all 5 pieces of the Celestra Warrior Lv.55 mecha armor set (`armor`, `helmet`, `pants`, `boots`, `gloves`) from the newly provided high-resolution showcase sheet `truelv55warrior.png`.
 - **Post-processing**:
   - Wrote and executed the script `extract_truelv55warrior.py` to crop each part:
@@ -1336,7 +1336,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 99: Celestra Warrior Lv.66 Set Replacement (Full 5 Pieces) [DEPLOYED]
+### ðŸŽ¨ Milestone 99: Celestra Warrior Lv.66 Set Replacement (Full 5 Pieces) [DEPLOYED]
 - **Assets**: Replaced all 5 pieces of the Celestra Warrior Lv.66 mecha armor set (`armor`, `helmet`, `pants`, `boots`, `gloves`) from the newly provided high-resolution showcase sheet `truelv66warrior.png`.
 - **Post-processing**:
   - Wrote and executed the script `extract_truelv66warrior.py` to crop each part:
@@ -1352,14 +1352,14 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 100: Celestra Mage Lv.32 Set Replacement (Full 5 Pieces) [DEPLOYED]
-- **Assets**: Replaced all 5 pieces of the Celestra Mage Lv.32 armor set from the newly provided high-resolution showcase sheet `truelv32mage.png` (Hora Force set – Lv.32/33).
+### ðŸŽ¨ Milestone 100: Celestra Mage Lv.32 Set Replacement (Full 5 Pieces) [DEPLOYED]
+- **Assets**: Replaced all 5 pieces of the Celestra Mage Lv.32 armor set from the newly provided high-resolution showcase sheet `truelv32mage.png` (Hora Force set â€“ Lv.32/33).
 - **Post-processing**:
   - Wrote and executed `extract_truelv32mage.py` to crop each part from the labeled grid:
-    - **Helmet (Hora Headtie)**: Tight crop `y: 480→800` to exclude the plastic display stand entirely. `rembg` cleanly removes the grey background.
+    - **Helmet (Hora Headtie)**: Tight crop `y: 480â†’800` to exclude the plastic display stand entirely. `rembg` cleanly removes the grey background.
     - **Armor (Hora Toga)**: Source grid cell already has transparent background (checkerboard). Skipped `rembg` to avoid destroying alpha. Direct alpha-crop only.
-    - **Pants (Hora Slacks)**: Standard rembg removal. Left bleed mask applied `x: 0→80`.
-    - **Gloves (Hora Mittens)**: L/R pair — standard rembg. Both gauntlet variants visible.
+    - **Pants (Hora Slacks)**: Standard rembg removal. Left bleed mask applied `x: 0â†’80`.
+    - **Gloves (Hora Mittens)**: L/R pair â€” standard rembg. Both gauntlet variants visible.
     - **Boots (Hora Boots)**: Standard rembg removal. Pair of boots cleanly isolated.
   - All 5 assets padded to square canvases with 10% padding and resized to 320x320 transparent PNGs.
 - **Paths**: Overwrote files in both `public/assets/armor_celestra/` and `src/assets/armor_celestra/` as `defcelestramagelv32{helmet,armor,pants,gloves,boots}.png`.
@@ -1368,7 +1368,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 101: Weapon Slot Scaling & Store Compilation Fix [DEPLOYED]
+### ðŸŽ¨ Milestone 101: Weapon Slot Scaling & Store Compilation Fix [DEPLOYED]
 - **Weapon Scaling (`src/screens/Inventory.jsx`)**:
   - Scaled up the weapon sprite image in the equipped gear slot by a factor of 1.25x (`transform: scale(1.25)`).
   - This prevents long, thin weapon sprites (like bows, swords, guns, staves) from rendering too small in the box.
@@ -1379,7 +1379,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🪙 Milestone 102: Currency Consolidation (Credits to CRD) [DEPLOYED]
+### ðŸª™ Milestone 102: Currency Consolidation (Credits to CRD) [DEPLOYED]
 - **Store & Server Mechanics**:
   - Consolidated all in-game finance actions to use `crd` (representing the unified CRD currency) as the single primary currency, completely deprecating the old `credits` resource.
   - Adjusted the default player resource state to start with 5,000 CRD.
@@ -1392,7 +1392,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🧪 Milestone 103: Potion Manual Use & Auto-Potion Integration [DEPLOYED]
+### ðŸ§ª Milestone 103: Potion Manual Use & Auto-Potion Integration [DEPLOYED]
 - **Inventory Use Button (`src/screens/Inventory.jsx`)**:
   - Rendered a "USE ITEM" button in the bag description panel for all consumable item types (potions).
 - **Store Action (`src/store/gameStore.js`)**:
@@ -1402,7 +1402,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### ⚙️ Milestone 104: Ascension Arms Job Restrictions [DEPLOYED]
+### âš™ï¸� Milestone 104: Ascension Arms Job Restrictions [DEPLOYED]
 - **Lineage Allowed Lists (`src/store/gameStore.js`)**:
   - Restricted crafting (`craftAscensionArms`) and equipping (`equipItem`) of Ascension Arms to their matching faction lineages:
     - **Arctron**: Technician, Architect, Core Engineer, Cybermancer.
@@ -1415,7 +1415,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 👑 Milestone 105: Game Title & Level Cap Alignment [DEPLOYED]
+### ðŸ‘‘ Milestone 105: Game Title & Level Cap Alignment [DEPLOYED]
 - **Game Title Sync (`index.html`, `src/screens/Auth.jsx`)**:
   - Replaced the placeholder game name "FOCUS RPG" with the official blueprint title "Rising Fantasy Chronicles".
 - **Level Cap Adjustment (`src/store/gameStore.js`, `src/screens/Unit.jsx`)**:
@@ -1425,7 +1425,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🛡️ Milestone 106: Faction HP Balancing & Eminence Shop Update [DEPLOYED]
+### ðŸ›¡ï¸� Milestone 106: Faction HP Balancing & Eminence Shop Update [DEPLOYED]
 - **HP Specification Swap (`src/data/races.json`)**:
   - Balanced base health to align with faksi resilience specifications: Bionex now has the highest base health (1200 HP and 1.25 multiplier) while Arctron base health was balanced down (750 HP and 0.9 multiplier).
   - Cleaned up strengths/weaknesses list in the JSON accordingly.
@@ -1436,7 +1436,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### ⚡ Milestone 107: Premium Booster & Potion Activation [DEPLOYED]
+### âš¡ Milestone 107: Premium Booster & Potion Activation [DEPLOYED]
 - **Premium Item Stat Bonuses (`src/store/gameStore.js`)**:
   - Integrated active premium boosters and potions from `player.activeBoosts` into the game stat calculations and grinding session ticks:
     - **EXP Boosters (Double/Triple)**: Multiplies EXP gains during periodic ticks and session finalization by `expBoost.mult` if active.
@@ -1446,7 +1446,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🦸 Milestone 108: Cape NPC Sell Block & World Boss Stat Tracking [DEPLOYED]
+### ðŸ¦¸ Milestone 108: Cape NPC Sell Block & World Boss Stat Tracking [DEPLOYED]
 - **Mantle/Cape Sell Restriction (`src/store/gameStore.js`)**:
   - Extended the NPC sell blocker in `sellItem` to block items with type `"mantle"` in addition to `"cape"`, ensuring all capes/boosters cannot be sold to NPCs as per blueprint rules.
 - **World Boss Kill Tracking (`src/store/gameStore.js`, `src/screens/Unit.jsx`)**:
@@ -1457,7 +1457,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 👥 Milestone 109: Persistent Friend System [DEPLOYED]
+### ðŸ‘¥ Milestone 109: Persistent Friend System [DEPLOYED]
 - **Store Array & Actions (`src/store/gameStore.js`)**:
   - Initialized a persistent `friends` array inside `initialPlayer`.
   - Added `addFriend(username)` store action that validates callsigns (no empty names, cannot add self, max 100 friend slots, no duplicates) and simulates random details (race, job, level, online state) for added friends.
@@ -1470,7 +1470,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🔔 Milestone 110: Simulated Event Notifications [DEPLOYED]
+### ðŸ”” Milestone 110: Simulated Event Notifications [DEPLOYED]
 - **Tick Event Triggers (`src/store/gameStore.js`)**:
   - Inserted a periodic event notification check (0.5% chance per tick when active) inside the grinding simulator's `tick` loop.
   - Checks the player's notification preferences (`alertWorldBoss`, `alertCoreWar`, `alertDungeon`) from settings and triggers simulated in-game alerts (e.g. World Boss spawning, Core War reminder, Dungeon resets) directly in the active browser view.
@@ -1478,7 +1478,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🏰 Milestone 111: Interactive Guild Member Management [DEPLOYED]
+### ðŸ�° Milestone 111: Interactive Guild Member Management [DEPLOYED]
 - **Store Actions (`src/store/gameStore.js`)**:
   - Expanded `createGuild(name)` to initialize `membersList` (containing the founder) and `applicants` (containing 2 test candidates).
   - Added `acceptApplicant(applicantId)` to move an applicant to the guild members list and update count.
@@ -1493,16 +1493,16 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 👹 Milestone 112: Pit Boss (World Boss) Encounters [DEPLOYED]
+### ðŸ‘¹ Milestone 112: Pit Boss (World Boss) Encounters [DEPLOYED]
 - **Pit Boss Spawning (`src/store/gameStore.js`)**:
   - Modified `spawnEnemy` to introduce a 15% random chance to spawn the sector's or dungeon's `pitBoss` (World Boss) instead of the normal Boss/Mob.
-  - Linked the Pit Boss encounters to the customized battle logger (`👹 PIT BOSS: [Name]!`) and tracked the `isPitBoss` property in the active combat state.
+  - Linked the Pit Boss encounters to the customized battle logger (`ðŸ‘¹ PIT BOSS: [Name]!`) and tracked the `isPitBoss` property in the active combat state.
   - Configured successful Pit Boss elimination in combat grids to increment the player's profile `worldBossKill` count.
 - **Verification**: Successfully builds and compiles locally.
 
 ---
 
-### 📖 Milestone 113: Guides & Currency Database Updates [DEPLOYED]
+### ðŸ“– Milestone 113: Guides & Currency Database Updates [DEPLOYED]
 - **Library Guide Expansion (`src/components/LibraryModal.jsx`)**:
   - Appended detailed instructional cards explaining the **Friend / Social System**, **Guild System & Management**, **World Boss / Pit Boss Encounters**, and **Premium Boosters & Potions** to the guides panel database.
 - **Currency Nomenclature Cleanup (`src/components/LibraryModal.jsx`, `src/components/NpcModal.jsx`, `src/App.jsx`, `src/components/CharacterCreate.jsx`)**:
@@ -1513,14 +1513,14 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 👑 Milestone 114: Eminence Set Item ID Fixes [DEPLOYED]
+### ðŸ‘‘ Milestone 114: Eminence Set Item ID Fixes [DEPLOYED]
 - **Quartermaster Shop Correction (`src/components/NpcModal.jsx`)**:
   - Replaced the invalid set piece IDs (such as `emi_helmet`, `emi_armor`, etc. and ring/amulet items) in the Eminence Quartermaster shop list with the correct IDs defined in the database (`eminence_helmet`, `eminence_armor`, `eminence_pants`, `eminence_gloves`, `eminence_boots`, `eminence_cape`, and `eminence_staff`), matching `items.json`.
 - **Verification**: Successfully builds and compiles locally.
 
 ---
 
-### 🧹 Milestone 115: Orphan Assets & Unused Scripts Cleanup [DEPLOYED]
+### ðŸ§¹ Milestone 115: Orphan Assets & Unused Scripts Cleanup [DEPLOYED]
 - **Script & Backup Deletions (`src/screens/Unit_orig.jsx`, root dir)**:
   - Deleted 11 old maintenance/migration scripts from the root directory that are no longer used (`fix_arctron_stats.cjs`, `fix_savedAt.cjs`, `patch_arctron.cjs`, `patch_celestra.cjs`, `reset_everything.cjs`, `reset_final.cjs`, `reset_jobs.cjs`, `reset_race.cjs`, `reset_users.cjs`, `slice.py`, `slice2.py`).
   - Deleted the legacy screen backup file `src/screens/Unit_orig.jsx`.
@@ -1531,17 +1531,17 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🛡️ Milestone 116: Remove Hero Shop Entry Button [DEPLOYED]
+### ðŸ›¡ï¸� Milestone 116: Remove Hero Shop Entry Button [DEPLOYED]
 - **NPC Lobby Screen Cleanup (`src/components/NpcModal.jsx`)**:
   - Completely removed the `Race Hero` (`CELESTRA HERO`, `BIONEX HERO`, `ARCTRON HERO`) / `Archon Equipment Shop` button entry card from the faction specialist lobby NPC list, preventing access to the old hero items shop layout.
 - **Verification**: Successfully builds and compiles locally.
 
 ---
 
-### 🌀 Milestone 117: Job Class & Promotion Page Migration [DEPLOYED]
+### ðŸŒ€ Milestone 117: Job Class & Promotion Page Migration [DEPLOYED]
 - **Character screen integration (`src/screens/Unit.jsx`)**:
   - Relocated the Job Specialist Class Tree promotion and reclassing screen from the town NPC modal directly into the `CHARACTER INFO` tab (`tab === 'stats'`).
-  - Added a small, styled `⚡ JOBS & PROMOTION` button inside the `CLASS PATH` title bar.
+  - Added a small, styled `âš¡ JOBS & PROMOTION` button inside the `CLASS PATH` title bar.
   - Implemented the full interactive Class Promotion Tree layout inside the stats panel when the button is clicked, including tier level checks, free promotion unlocks, and 5K CRD reclasses.
   - Configured state variables and synchronization so that the tree view automatically switches to the lane corresponding to the player's current active class.
   - Added a `Back` button to return to character stats seamlessly.
@@ -1551,39 +1551,39 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### ⚔️ Milestone 118: Game Logic & Calculation Fixes (22 Findings) [DEPLOYED]
+### âš”ï¸� Milestone 118: Game Logic & Calculation Fixes (22 Findings) [DEPLOYED]
 - **`src/store/gameStore.js`**:
   - Fixed Evasion/Dodge formula: changed `+stats.evasion` to `-stats.dodge` so player dodge actually reduces enemy hit rate.
-  - Fixed baseStats key alignment — all races/tiers now reference correct job IDs from `jobs.json` (warrior, ranger, technician, sentinel, pathfinder, etc.).
-  - Smoothed EXP wall at Level 31→41: increments +15min/level instead of jumping from 30min to 180min.
+  - Fixed baseStats key alignment â€” all races/tiers now reference correct job IDs from `jobs.json` (warrior, ranger, technician, sentinel, pathfinder, etc.).
+  - Smoothed EXP wall at Level 31â†’41: increments +15min/level instead of jumping from 30min to 180min.
   - Capped critical hit rate at 100% and dodge rate at 80% to prevent numerical exploits.
   - Updated healer job ID list for auto-heal skill (<35% HP trigger).
   - Implemented HP recovery for Vampire lifesteal weapon hits.
   - Activated Special PT progression for Arctron specialist classes.
   - Drop roll now scales linearly with `finalKills` count per session.
-- **`src/data/baseStats.json`**: Rewrote all race×tier stat blocks to use actual job IDs from `jobs.json`.
+- **`src/data/baseStats.json`**: Rewrote all raceÃ—tier stat blocks to use actual job IDs from `jobs.json`.
 - **`src/data/enemies.json`**:
-  - Scaled Trinity Emperor (Dungeon 3 Pit Boss) HP to 150,000,000 (3× regular boss).
+  - Scaled Trinity Emperor (Dungeon 3 Pit Boss) HP to 150,000,000 (3Ã— regular boss).
   - Scaled dungeon trash mob HP to properly match world map equivalents.
-  - Nerfed dungeon boss CRD rewards 10× to prevent economy inflation.
+  - Nerfed dungeon boss CRD rewards 10Ã— to prevent economy inflation.
 - **`src/screens/Battle.jsx`**: PvP CP effectiveness bar now scales dynamically against max CP in targets list.
 - **Verification**: Successfully builds and compiles locally.
 
 ---
 
-### 🔤 Milestone 119: Typography Standardization — All Panels [DEPLOYED]
+### ðŸ”¤ Milestone 119: Typography Standardization â€” All Panels [DEPLOYED]
 - **Files**: `src/screens/Main.jsx`, `src/screens/Ranks.jsx`, `src/screens/Ascension.jsx`, `src/App.jsx`, `src/components/NpcModal.jsx`
 - **Changes**:
   - Replaced all hardcoded `fontFamily: 'monospace'` with `fontFamily: 'var(--font-mono)'` project-wide (excluding `Unit.jsx` and `Mine.jsx`).
   - Replaced `fontFamily: "'Share Tech Mono', monospace"` in `NpcModal.jsx` with `var(--font-mono)`.
-  - Upgraded font sizes: `fontSize: 9` → `11`, `fontSize: 10` → `12` across `NpcModal.jsx`.
-  - Upgraded font sizes in `Main.jsx` map panel: node labels `10` → `12`, status badge `11` → `12`, zone header `11` → `13`, active/idle badge `11` → `13`.
+  - Upgraded font sizes: `fontSize: 9` â†’ `11`, `fontSize: 10` â†’ `12` across `NpcModal.jsx`.
+  - Upgraded font sizes in `Main.jsx` map panel: node labels `10` â†’ `12`, status badge `11` â†’ `12`, zone header `11` â†’ `13`, active/idle badge `11` â†’ `13`.
   - Replaced hardcoded `"'Orbitron', sans-serif"` strings with `var(--font-title)` CSS variable tokens.
 - **Verification**: Successfully builds and compiles locally.
 
 ---
 
-### 🖼️ Milestone 120: Auth Page Frameless Design [DEPLOYED]
+### ðŸ–¼ï¸� Milestone 120: Auth Page Frameless Design [DEPLOYED]
 - **`src/screens/Auth.jsx`**:
   - Removed the glass card container frame from the login/register page: stripped `background`, `border`, `backdrop-filter`, `box-shadow`, `clip-path`, and `hover` effects from `.auth-card`.
   - The form elements (logo, lore button, Google sign-in, login/register tabs, input fields, submit button) now float freely and directly over the dark radial background without a bounding box.
@@ -1592,7 +1592,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### ⚙️ Milestone 121: Bionex M.E.U. & Arctron A.R.E.S. Ascension Realignment [DEPLOYED]
+### âš™ï¸� Milestone 121: Bionex M.E.U. & Arctron A.R.E.S. Ascension Realignment [DEPLOYED]
 - **`src/data/ascensionArms.json`**:
   - Rebuilt Bionex evolution list to feature separate **Attacker** and **Defender** tracks across Lv.32, Lv.42, and Lv.55.
   - Added a locked flag (`"locked": true`) for the Lv.65 Titan-class mechas (both Attacker and Defender).
@@ -1603,7 +1603,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - Mapped Attacker mechas to `/assets/MEUattacklv32.png`, `/assets/MEUattacklv42.png`, `/assets/MEUattacklv55.png`, and `/assets/MEUattacklv65.png`.
   - Mapped Defender mechas to `/assets/MEUdevlv32.png`, `/assets/MEUdevlv42.png`, `/assets/MEUdevlv55.png`, and `/assets/MEUdevlv65.png`.
   - Mapped Arctron ARES mechas to `/assets/ARESlv32arctron.png`, `/assets/ARESlv42arctron.png`, `/assets/ARESlv55arctron.png`, and `/assets/ARESlv65arctron.png`.
-  - Implemented locked status rendering: mechas flagged with `locked` now render a disabled crimson red button showing `🔒 LOCKED (BELUM DILIRIS)`.
+  - Implemented locked status rendering: mechas flagged with `locked` now render a disabled crimson red button showing `ðŸ”’ LOCKED (BELUM DILIRIS)`.
 - **`src/store/gameStore.js`**:
   - Aligned Bionex `ascension_arms` image resolver mappings to map new mecha IDs (`meu_atk_*` and `meu_def_*`) to their respective sprite paths.
   - Added Arctron `ascension_arms` image resolver mappings to map ARES mecha IDs (`ares_*`) to `/assets/ARESlv*arctron.png`.
@@ -1614,7 +1614,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🛡️ Milestone 122: Bionex Guardian Soul Render (Lv.32) Gear Assets Replacement [DEPLOYED]
+### ðŸ›¡ï¸� Milestone 122: Bionex Guardian Soul Render (Lv.32) Gear Assets Replacement [DEPLOYED]
 - **Assets Extraction**:
   - Cropped and extracted all 5 individual gear assets from the composite sheet reference `lv32bionexguardianrmor.jpg`.
   - Processed each cropped item using the AI `rembg` background remover to cleanly erase solid backgrounds and generate transparent PNG assets.
@@ -1630,7 +1630,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🛡️ Milestone 123: Bionex Guardian (Lv.55) Gear Assets Replacement
+### ðŸ›¡ï¸� Milestone 123: Bionex Guardian (Lv.55) Gear Assets Replacement
 - **Assets Extraction & Processing**:
   - Cropped and processed `helmet`, `gloves`, `pants`, and `boots` from grid sheet `lv55guardianbionexarmor.png` using rembg and OpenCV contour noise cleaning.
   - Specially processed the `chestplate` (`defbionexguardianlv55armor.png`) from the dedicated high-resolution, thick-edged white reference `lv55guardianbionexarmochest.png`.
@@ -1646,7 +1646,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🛡️ Milestone 124: Bionex Guardian (Lv.42) Gear Assets Replacement
+### ðŸ›¡ï¸� Milestone 124: Bionex Guardian (Lv.42) Gear Assets Replacement
 - **Assets Extraction & Processing**:
   - Cropped and extracted `helmet`, `gloves`, and `boots` from sheet reference `lv42bionexguardiarmorsets.png`, and `chestplate` (`defbionexguardianlv42armor.png`) with tech-sleeve additions.
   - Specially processed the `pants` (`defbionexguardianlv42pants.png`) from the dedicated high-resolution, curved-waistband reference `lv42bionexguardianpants.png` for a natural and premium contour.
@@ -1662,7 +1662,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🛡️ Milestone 125: Bionex Faction Theme Redesign & Cache Busting
+### ðŸ›¡ï¸� Milestone 125: Bionex Faction Theme Redesign & Cache Busting
 - **Theme Color Remapping**:
   - Remapped Bionex's faction colors in `index.css`: changed frame/glow color (`--neon-glow`) to deep sky blue (`#00bfff`) and titles/highlights (`--neon-secondary-1`) to vibrant gold/yellow (`#ffdd00`) matching the faction logo.
   - Refactored `Ascension.jsx` to dynamically assign UI border/accent/text-shadow colors based on faction properties rather than using hardcoded values.
@@ -1672,7 +1672,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🛡️ Milestone 126: Bionex Marksman (Lv.42) Gear Assets Replacement [DEPLOYED]
+### ðŸ›¡ï¸� Milestone 126: Bionex Marksman (Lv.42) Gear Assets Replacement [DEPLOYED]
 - **Assets Extraction & Processing**:
   - Cropped and extracted `helmet`, `armor`, `gloves`, and `pants` from sheet reference `lv42bionexmarksmansets.png` (cropping the bottom 120 pixels to discard text labels).
   - Specially processed the `boots` (`defbionexmarksmanlv42boots.png`): cropped starting Y at `220` relative to the boots box to completely exclude the red circled belt markup pen from the reference. Used a custom red color mask filter in Python to erase any remaining red border pixels.
@@ -1688,7 +1688,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🌿 Milestone 127: Celestra Ancient Spirit - Seraphys & Noctyrna Branches [DEPLOYED]
+### ðŸŒ¿ Milestone 127: Celestra Ancient Spirit - Seraphys & Noctyrna Branches [DEPLOYED]
 - **Assets Split & Background Removal**:
   - Loaded side-by-side sprite composite sheets (`AnceintSpirit-Celestra-lv32.png` to `lv65.png`) from `public/assets/References/`.
   - Wrote and executed Python script `crop_all_spirits.py` using `rembg` and Pillow:
@@ -1705,7 +1705,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### ⛏️ Milestone 128: Auto Mining Tools & Mining Batteries Replacement [DEPLOYED]
+### â›�ï¸� Milestone 128: Auto Mining Tools & Mining Batteries Replacement [DEPLOYED]
 - **Assets Extraction & Processing**:
   - Cropped and processed `AutoMiningTools.png` from `public/assets/References/` to extract 3 faction-specific automated mining tools. Backgrounds cleanly removed using `rembg`, centered, padded to squares, and saved as `public/assets/auto_mining_tool_*.png`.
   - Cropped and processed `Mining-Batteries.png` from `public/assets/References/` to extract 3 mining batteries (S, M, L). Backgrounds removed, centered, padded to squares, and saved as `public/assets/mining_battery_*.png`.
@@ -1724,7 +1724,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 📦 Milestone 129: Monster Drops Material Assets Templating [DEPLOYED]
+### ðŸ“¦ Milestone 129: Monster Drops Material Assets Templating [DEPLOYED]
 - **Assets Slicing & Background Removal**:
   - Sliced reference sheet `monster-drops-A-D.png` from `public/assets/References/` into 5 equal vertical parts. Cleaned background with `rembg`, centered, squared, and saved as `public/assets/items/drop_item_a.png` through `drop_item_e.png`.
   - Sliced reference sheet `monster-drops-E-H.png` from `public/assets/References/` into 5 equal vertical parts. Cleaned background with `rembg`, centered, squared, and saved as `public/assets/items/drop_item_f.png` through `drop_item_j.png`.
@@ -1737,11 +1737,11 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🏆 Milestone 130: Special Boss Event HUD & Holographic Modal Integration [DEPLOYED]
+### ðŸ�† Milestone 130: Special Boss Event HUD & Holographic Modal Integration [DEPLOYED]
 - **Assets Processing**:
   - Cropped and processed `boss-event1.png` from `public/assets/References/` to strip backgrounds using `rembg`, center, pad, and resize to 512x512 pixels. Saved as `/assets/boss_event_1.png` in both `public` and `src` asset directories.
 - **Floating HUD Trigger**:
-  - Added a floating event badge (`[🏆 EVENT LIVE]`) to the top-right section of [Main.jsx](file:///c:/projects/focus-rpg/src/screens/Main.jsx) adjacent to the location pill. Engineered responsive neon glows and scale hover micro-animations.
+  - Added a floating event badge (`[ðŸ�† EVENT LIVE]`) to the top-right section of [Main.jsx](file:///c:/projects/focus-rpg/src/screens/Main.jsx) adjacent to the location pill. Engineered responsive neon glows and scale hover micro-animations.
 - **Holographic Modal Dashboard**:
   - Created [EventModal.jsx](file:///c:/projects/focus-rpg/src/components/EventModal.jsx) to serve as a high-fidelity cyberpunk console dashboard.
   - Programmed a neon-orange container pulse and a vertical scanning sweeping line overlay (`event-scan-bar`) with custom CSS keyframe animations.
@@ -1751,7 +1751,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 131: Event Modal Typography & Aesthetic Alignment [DEPLOYED]
+### ðŸŽ¨ Milestone 131: Event Modal Typography & Aesthetic Alignment [DEPLOYED]
 - **Typography Standardization**:
   - Replaced standard sans-serif font calls in [EventModal.jsx](file:///c:/projects/focus-rpg/src/components/EventModal.jsx) with `Oxanium` (slanted/italicized sci-fi display font) for all headers, subtitle tags, event descriptions titles, and the action button.
   - Replaced standard descriptions and list detail fonts with `Rajdhani` (flat/condensed typography) set to `fontWeight: 600` and `fontSize: 13.5px` with a matching line height of `1.45` for enhanced readability.
@@ -1764,7 +1764,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🎨 Milestone 132: Event Modal Text Scaling & Bottom Nav Alignment [DEPLOYED]
+### ðŸŽ¨ Milestone 132: Event Modal Text Scaling & Bottom Nav Alignment [DEPLOYED]
 - **Event Modal Font Enlargement**:
   - Scaled up all typography sizes inside [EventModal.jsx](file:///c:/projects/focus-rpg/src/components/EventModal.jsx) to fix readability issues (enlarged headings to `16px`/`18px`, card descriptions to `15.5px`, buff values to `15px`, and item names to `14px`).
   - Increased the holographic boss image preview panel dimensions (height expanded to `220px`) and up-scaled the boss mecha sprite to `190px` height.
@@ -1775,26 +1775,26 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### ⚙️ Milestone 133: Map 1 Monster & Boss Stats Calibration [DEPLOYED]
+### âš™ï¸� Milestone 133: Map 1 Monster & Boss Stats Calibration [DEPLOYED]
 - **Database Calibration (`src/data/enemies.json`)**:
   - Re-calibrated Leveling Map 1 (Lumora Fields, Lv. 1-12) statistics to align with new gameplay progression rules:
-    - **Puffling**: HP: 300 → `77`, ATK: 20 → `37`, DEF: 10 → `11`.
-    - **Moss Hopper**: HP: 600 → `141`, ATK: 30 → `42`, DEF: 18 → `15`.
-    - **Leaf Boar**: HP: 1000 → `458`, ATK: 45 → `84`, DEF: 28 → `53`.
-    - **Twig Imp**: HP: 1800 → `280`, ATK: 65 → `57`, DEF: 40 → `29`.
-    - **Lumora Behemoth (Boss)**: HP: 500000 → `5800`, ATK: 150 → `271`, DEF: 100 → `188`.
+    - **Puffling**: HP: 300 â†’ `77`, ATK: 20 â†’ `37`, DEF: 10 â†’ `11`.
+    - **Moss Hopper**: HP: 600 â†’ `141`, ATK: 30 â†’ `42`, DEF: 18 â†’ `15`.
+    - **Leaf Boar**: HP: 1000 â†’ `458`, ATK: 45 â†’ `84`, DEF: 28 â†’ `53`.
+    - **Twig Imp**: HP: 1800 â†’ `280`, ATK: 65 â†’ `57`, DEF: 40 â†’ `29`.
+    - **Lumora Behemoth (Boss)**: HP: 500000 â†’ `5800`, ATK: 150 â†’ `271`, DEF: 100 â†’ `188`.
 - **Verification**: Verified React build (`npm run build`) compiles clean with no warnings.
 
 ---
 
-### ⚙️ Milestone 134: Map 2 Stats Calibration & Enemy Double Hit Combat Mechanic [DEPLOYED]
+### âš™ï¸� Milestone 134: Map 2 Stats Calibration & Enemy Double Hit Combat Mechanic [DEPLOYED]
 - **Database Calibration (`src/data/enemies.json`)**:
   - Re-calibrated Leveling Map 2 (Sylvaris Wilds, Lv. 13-25) statistics to align with new gameplay progression rules:
-    - **Fangclaw**: HP: 3000 → `687`, ATK: 80 → `127`, DEF: 50 → `85`.
-    - **Thornmaw**: HP: 5000 → `953`, ATK: 100 → `180`, DEF: 65 → `128`. Added `"doubleHitChance": 2` (Aggressive 2%).
-    - **Sylvan Wolf**: HP: 8000 → `1160`, ATK: 130 → `271`, DEF: 80 → `188`.
-    - **Vine Stalker**: HP: 12000 → `1310`, ATK: 160 → `404`, DEF: 100 → `264`.
-    - **Sylvan Fanglord (Boss)**: HP: 2500000 → `6300`, ATK: 280 → `352`, DEF: 180 → `238`. Added `"doubleHitChance": 3` (Aggressive 3%).
+    - **Fangclaw**: HP: 3000 â†’ `687`, ATK: 80 â†’ `127`, DEF: 50 â†’ `85`.
+    - **Thornmaw**: HP: 5000 â†’ `953`, ATK: 100 â†’ `180`, DEF: 65 â†’ `128`. Added `"doubleHitChance": 2` (Aggressive 2%).
+    - **Sylvan Wolf**: HP: 8000 â†’ `1160`, ATK: 130 â†’ `271`, DEF: 80 â†’ `188`.
+    - **Vine Stalker**: HP: 12000 â†’ `1310`, ATK: 160 â†’ `404`, DEF: 100 â†’ `264`.
+    - **Sylvan Fanglord (Boss)**: HP: 2500000 â†’ `6300`, ATK: 280 â†’ `352`, DEF: 180 â†’ `238`. Added `"doubleHitChance": 3` (Aggressive 3%).
 - **Double Hit Combat Mechanic (`src/store/gameStore.js`)**:
   - Refactored the enemy combat turn phase to encapsulate attack actions into a `performEnemyAttack` helper.
   - Added support for checking a mob's `doubleHitChance` attribute (in percentage) to trigger a second attack in the same turn.
@@ -1802,102 +1802,121 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### ⚙️ Milestone 135: Map 3 Stats Calibration & Aggressive Rule Memory [DEPLOYED]
+### âš™ï¸� Milestone 135: Map 3 Stats Calibration & Aggressive Rule Memory [DEPLOYED]
 - **Database Calibration (`src/data/enemies.json`)**:
   - Re-calibrated Leveling Map 3 (Ferrum Expanse, Lv. 26-38) statistics to align with new gameplay progression rules:
-    - **Iron Wasp**: HP: 35000 → `1456`, ATK: 290 → `615`, DEF: 185 → `350`. Added `"doubleHitChance": 4` (Aggressive 4%).
-    - **Steel Hound**: HP: 18000 → `1612`, ATK: 200 → `615`, DEF: 130 → `350`. Added `"doubleHitChance": 5` (Aggressive 5%).
-    - **Scrap Golem**: HP: 25000 → `1754`, ATK: 240 → `1433`, DEF: 155 → `558`.
-    - **Machawarden**: HP: 50000 → `1909`, ATK: 350 → `2194`, DEF: 220 → `678`.
-    - **Iron Juggernaut (Boss)**: HP: 10000000 → `7280`, ATK: 500 → `615`, DEF: 320 → `350`. Added `"doubleHitChance": 6` (Aggressive 6%).
+    - **Iron Wasp**: HP: 35000 â†’ `1456`, ATK: 290 â†’ `615`, DEF: 185 â†’ `350`. Added `"doubleHitChance": 4` (Aggressive 4%).
+    - **Steel Hound**: HP: 18000 â†’ `1612`, ATK: 200 â†’ `615`, DEF: 130 â†’ `350`. Added `"doubleHitChance": 5` (Aggressive 5%).
+    - **Scrap Golem**: HP: 25000 â†’ `1754`, ATK: 240 â†’ `1433`, DEF: 155 â†’ `558`.
+    - **Machawarden**: HP: 50000 â†’ `1909`, ATK: 350 â†’ `2194`, DEF: 220 â†’ `678`.
+    - **Iron Juggernaut (Boss)**: HP: 10000000 â†’ `7280`, ATK: 500 â†’ `615`, DEF: 320 â†’ `350`. Added `"doubleHitChance": 6` (Aggressive 6%).
 - **Rule Book Integration (`.agents/AGENTS.md`)**:
   - Added project vocabulary definition specifying that any "aggressive" mob/boss specification maps to `doubleHitChance` property in enemy data.
 - **Verification**: Verified React build (`npm run build`) compiles clean with no warnings.
 
 ---
 
-### ⚙️ Milestone 136: Map 4 Stats Calibration [DEPLOYED]
+### âš™ï¸� Milestone 136: Map 4 Stats Calibration [DEPLOYED]
 - **Database Calibration (`src/data/enemies.json`)**:
   - Re-calibrated Leveling Map 4 (Pyraxis Crater, Lv. 39-52) statistics to align with new gameplay progression rules:
-    - **Infernox**: HP: 70000 → `2059`, ATK: 450 → `3505`, DEF: 280 → `812`.
-    - **Flame Fiend**: HP: 100000 → `2220`, ATK: 520 → `5660`, DEF: 330 → `956`.
-    - **Lava Beetle**: HP: 140000 → `3386`, ATK: 600 → `6637`, DEF: 380 → `1002`.
-    - **Magma Hound**: HP: 200000 → `2313`, ATK: 700 → `7473`, DEF: 450 → `1363`.
-    - **Pyraxis Overlord (Boss)**: HP: 50000000 → `9805`, ATK: 850 → `2558`, DEF: 550 → `722`. Added `"doubleHitChance": 10` (Aggressive 10%).
+    - **Infernox**: HP: 70000 â†’ `2059`, ATK: 450 â†’ `3505`, DEF: 280 â†’ `812`.
+    - **Flame Fiend**: HP: 100000 â†’ `2220`, ATK: 520 â†’ `5660`, DEF: 330 â†’ `956`.
+    - **Lava Beetle**: HP: 140000 â†’ `3386`, ATK: 600 â†’ `6637`, DEF: 380 â†’ `1002`.
+    - **Magma Hound**: HP: 200000 â†’ `2313`, ATK: 700 â†’ `7473`, DEF: 450 â†’ `1363`.
+    - **Pyraxis Overlord (Boss)**: HP: 50000000 â†’ `9805`, ATK: 850 â†’ `2558`, DEF: 550 â†’ `722`. Added `"doubleHitChance": 10` (Aggressive 10%).
 - **Verification**: Verified React build (`npm run build`) compiles clean with no warnings.
 
 ---
 
-### ⚙️ Milestone 137: Map 5 Mobs & Boss Stats Calibration [DEPLOYED]
+### âš™ï¸� Milestone 137: Map 5 Mobs & Boss Stats Calibration [DEPLOYED]
 - **Database Calibration (`src/data/enemies.json`)**:
   - Re-calibrated Leveling Map 5 (Trinity Nexus, Lv. 53-66) statistics to align with new gameplay progression rules:
-    - **Trinity Sentinel**: HP: 300000 → `3855`, ATK: 850 → `13877`, DEF: 550 → `1350`.
-    - **Core Phantom**: HP: 450000 → `2621`, ATK: 950 → `19744`, DEF: 650 → `1555`. Added `"doubleHitChance": 8` (Aggressive 8%).
-    - **Nexus Harbinger**: HP: 650000 → `2073`, ATK: 1100 → `35104`, DEF: 750 → `2273`.
-    - **Flux Avatar**: HP: 900000 → `10600`, ATK: 1250 → `4090`, DEF: 850 → `859`.
-    - **Trinity Overlord (Boss)**: HP: 250000000 → `11565`, ATK: 1500 → `7867`, DEF: 900 → `1049`. Added `"doubleHitChance": 15` (Aggressive 15%).
+    - **Trinity Sentinel**: HP: 300000 â†’ `3855`, ATK: 850 â†’ `13877`, DEF: 550 â†’ `1350`.
+    - **Core Phantom**: HP: 450000 â†’ `2621`, ATK: 950 â†’ `19744`, DEF: 650 â†’ `1555`. Added `"doubleHitChance": 8` (Aggressive 8%).
+    - **Nexus Harbinger**: HP: 650000 â†’ `2073`, ATK: 1100 â†’ `35104`, DEF: 750 â†’ `2273`.
+    - **Flux Avatar**: HP: 900000 â†’ `10600`, ATK: 1250 â†’ `4090`, DEF: 850 â†’ `859`.
+    - **Trinity Overlord (Boss)**: HP: 250000000 â†’ `11565`, ATK: 1500 â†’ `7867`, DEF: 900 â†’ `1049`. Added `"doubleHitChance": 15` (Aggressive 15%).
 - **Verification**: Verified React build (`npm run build`) compiles clean with no warnings.
 
 ---
 
-### ⚙️ Milestone 139: EventModal Typography Consistency with Unit.jsx [DEPLOYED]
+### âš™ï¸� Milestone 139: EventModal Typography Consistency with Unit.jsx [DEPLOYED]
 - **Typography Alignment (`src/components/EventModal.jsx`)**:
   - Replaced all `Oxanium` font references with `Orbitron` to match Unit.jsx platform standard (no italic on headings).
-  - Updated `fontSize` values to align with Unit.jsx scale: labels → 10-11px, values → 12-13px, headings → 16-18px.
+  - Updated `fontSize` values to align with Unit.jsx scale: labels â†’ 10-11px, values â†’ 12-13px, headings â†’ 16-18px.
   - Standardized label colors to `#8a94a3` (matching Unit.jsx inactive/label color).
   - Made all primary/value colors faction-aware via `factionColors` map (`arctron: #ff5222`, `bionex: #ffd600`, `celestra: #00e5ff`).
-  - Replaced `Chakra Petch` for reward names → `Orbitron` 12px.
-  - Replaced `var(--font-mono)` on LIVE badge → `Orbitron`.
+  - Replaced `Chakra Petch` for reward names â†’ `Orbitron` 12px.
+  - Replaced `var(--font-mono)` on LIVE badge â†’ `Orbitron`.
 - **Floating Widget Fix (`src/screens/Main.jsx`)**:
   - Replaced `var(--font-mono)` (unverified CSS variable) with `Orbitron` on LIVE badge.
 - **Verification**: Verified React build (`npm run build`) compiles clean with no warnings.
 
 ---
 
-### ⚙️ Milestone 138: T-MINE Guardian Stats Calibration & Floor Reorganization [DEPLOYED]
+### âš™ï¸� Milestone 138: T-MINE Guardian Stats Calibration & Floor Reorganization [DEPLOYED]
 - **Database Calibration (`src/data/enemies.json`)**:
   - Re-calibrated Trinity Mine (`miningGuardians`) guardian statistics and reorganized floor assignments:
-    - **Sentry Dementor (1F)**: HP: 1.000.000 → `11.815`, ATK: 1.350 → `8.959`, DEF: 900 → `1.097`. Dodge updated to `20%`.
-    - **Borg Dementor (2F)**: HP: 1.800.000 → `13.105`, ATK: 1.500 → `16.004`, DEF: 1.000 → `1.555`. Added `"doubleHitChance": 20` (Aggressive 20%).
-    - **Ork Dementor**: Dipindah dari `4F` → `3F`. HP: 5.000.000 → `14.305`, ATK: 1.950 → `29.769`, DEF: 1.300 → `2.068`. Added `"doubleHitChance": 20` (Aggressive 20%).
-    - **Ghost Dementor**: Dipindah dari `5F` → `4F`. HP: 8.000.000 → `14.630`, ATK: 2.200 → `29.769`, DEF: 1.500 → `2.170`. Added `"doubleHitChance": 20` (Aggressive 20%).
-    - **Mutation Dementor**: Dipindah ke `5F`. HP: 3.000.000 → `19.676`, ATK: 1.700 → `39.558`, DEF: 1.150 → `1.900`. Added `"doubleHitChance": 20` (Aggressive 20%).
+    - **Sentry Dementor (1F)**: HP: 1.000.000 â†’ `11.815`, ATK: 1.350 â†’ `8.959`, DEF: 900 â†’ `1.097`. Dodge updated to `20%`.
+    - **Borg Dementor (2F)**: HP: 1.800.000 â†’ `13.105`, ATK: 1.500 â†’ `16.004`, DEF: 1.000 â†’ `1.555`. Added `"doubleHitChance": 20` (Aggressive 20%).
+    - **Ork Dementor**: Dipindah dari `4F` â†’ `3F`. HP: 5.000.000 â†’ `14.305`, ATK: 1.950 â†’ `29.769`, DEF: 1.300 â†’ `2.068`. Added `"doubleHitChance": 20` (Aggressive 20%).
+    - **Ghost Dementor**: Dipindah dari `5F` â†’ `4F`. HP: 8.000.000 â†’ `14.630`, ATK: 2.200 â†’ `29.769`, DEF: 1.500 â†’ `2.170`. Added `"doubleHitChance": 20` (Aggressive 20%).
+    - **Mutation Dementor**: Dipindah ke `5F`. HP: 3.000.000 â†’ `19.676`, ATK: 1.700 â†’ `39.558`, DEF: 1.150 â†’ `1.900`. Added `"doubleHitChance": 20` (Aggressive 20%).
     - **Kaelgorath (6F Boss)**: Tidak berubah.
 - **Floor Reorganization (`src/screens/Mine.jsx`)**:
-  - Updated `MINE_FLOORS` array to reflect new floor assignments (Ork → 3F, Ghost → 4F, Mutation → 5F).
+  - Updated `MINE_FLOORS` array to reflect new floor assignments (Ork â†’ 3F, Ghost â†’ 4F, Mutation â†’ 5F).
 - **Verification**: Verified React build (`npm run build`) compiles clean with no warnings.
 
 ---
 
-### ⚙️ Milestone 140: Dungeon Stats Calibration & PitBoss System Removal [DEPLOYED]
+### âš™ï¸� Milestone 140: Dungeon Stats Calibration & PitBoss System Removal [DEPLOYED]
 - **Database Calibration (`src/data/enemies.json`)**:
-  - Hapus seluruh `pitBoss` dari semua dungeon (Dungeon-1, 2, 3) — fitur ini tidak digunakan di platform.
-  - Hapus seluruh `mobs` array dari semua dungeon — dungeon bersifat boss-only.
-  - **Dungeon-1 (Echo Burrow)**: `minLevel` tetap `30`. Boss Burrow King: HP: 2.000.000 → `9.330`, ATK: 400 → `1.910`, DEF: 250 → `636`. Ditambah `doubleHitChance: 10` (Aggressive 10%).
-  - **Dungeon-2 (Infernal Forge)**: `minLevel`: 50 → `40`. Boss Inferno Colossus: HP: 10.000.000 → `12.255`, ATK: 800 → `11.107`, DEF: 500 → `1.197`. Ditambah `doubleHitChance: 15` (Aggressive 15%) dan `dodge: 15`.
-  - **Dungeon-3 (Trinity Core Chamber)**: `minLevel`: 65 → `55`. Boss Trinity Guardian: HP: 50.000.000 → `17.772`, ATK: 1.500 → `40.052`, DEF: 900 → `1.818`. Ditambah `dodge: 15` dan `stun: 10`.
+  - Hapus seluruh `pitBoss` dari semua dungeon (Dungeon-1, 2, 3) â€” fitur ini tidak digunakan di platform.
+  - Hapus seluruh `mobs` array dari semua dungeon â€” dungeon bersifat boss-only.
+  - **Dungeon-1 (Echo Burrow)**: `minLevel` tetap `30`. Boss Burrow King: HP: 2.000.000 â†’ `9.330`, ATK: 400 â†’ `1.910`, DEF: 250 â†’ `636`. Ditambah `doubleHitChance: 10` (Aggressive 10%).
+  - **Dungeon-2 (Infernal Forge)**: `minLevel`: 50 â†’ `40`. Boss Inferno Colossus: HP: 10.000.000 â†’ `12.255`, ATK: 800 â†’ `11.107`, DEF: 500 â†’ `1.197`. Ditambah `doubleHitChance: 15` (Aggressive 15%) dan `dodge: 15`.
+  - **Dungeon-3 (Trinity Core Chamber)**: `minLevel`: 65 â†’ `55`. Boss Trinity Guardian: HP: 50.000.000 â†’ `17.772`, ATK: 1.500 â†’ `40.052`, DEF: 900 â†’ `1.818`. Ditambah `dodge: 15` dan `stun: 10`.
 - **Verification**: Verified React build (`npm run build`) compiles clean with no warnings.
 
 ---
 
-### ⚙️ Milestone 141: T-MINE Guardian Ability Overhaul & Global Passive Combat Mechanics [DEPLOYED]
-- **Database Calibration (`src/data/enemies.json` — `miningGuardians`)**:
-  - Semua guardian 1F–5F disamakan base stats: HP: `11.815`, ATK: `8.959`, DEF: `1.100`.
+### âš™ï¸� Milestone 141: T-MINE Guardian Ability Overhaul & Global Passive Combat Mechanics [DEPLOYED]
+- **Database Calibration (`src/data/enemies.json` â€” `miningGuardians`)**:
+  - Semua guardian 1Fâ€“5F disamakan base stats: HP: `11.815`, ATK: `8.959`, DEF: `1.100`.
   - Setiap floor memiliki ability unik:
-    - **1F Sentry Dementor**: `dodge: 11` — ada peluang 11% player miss menyerang.
-    - **2F Borg Dementor**: `stun: 11` — ada peluang 11% guardian skip serangan player.
-    - **3F Ork Dementor**: `selfHeal: 11` — guardian recover 11% max HP saat HP < 50%.
-    - **4F Ghost Dementor**: `doubleHitChance: 11` — ada peluang 11% guardian serang 2x.
+    - **1F Sentry Dementor**: `dodge: 11` â€” ada peluang 11% player miss menyerang.
+    - **2F Borg Dementor**: `stun: 11` â€” ada peluang 11% guardian skip serangan player.
+    - **3F Ork Dementor**: `selfHeal: 11` â€” guardian recover 11% max HP saat HP < 50%.
+    - **4F Ghost Dementor**: `doubleHitChance: 11` â€” ada peluang 11% guardian serang 2x.
     - **5F Mutation Dementor**: Gabungan semua ability (dodge + stun + selfHeal + doubleHitChance masing-masing 11%).
-- **Global Passive Combat Mechanics (`src/store/gameStore.js` — `computeRewards`)**:
+- **Global Passive Combat Mechanics (`src/store/gameStore.js` â€” `computeRewards`)**:
   - Ditambahkan pembacaan 4 passive ability dari data musuh (berlaku untuk World Map, Dungeon, dan Mining Guardian):
     - **`dodge`** (enemy dodge %): Mengurangi effective DPS player terhadap musuh. `playerDps *= (1 - dodge/100)`.
     - **`stun`** (stun chance %): Mengurangi effective DPS player karena ada probabilitas serangan player di-skip. `playerDps *= (1 - stun/100)`.
     - **`selfHeal`** (self heal %): Menambah effective HP musuh (model: musuh recover 11% HP 1x saat HP < 50%). `effectiveHp = hp * (1 + selfHeal/200)`.
     - **`doubleHitChance`** (double hit %): Menambah effective DPS musuh terhadap player. `enemyDps *= (1 + doubleHitChance/100)`.
+
 - **Mining Encounter Simulation (`src/screens/Mine.jsx` — `handleStartMining`)**:
   - Simulasi encounter mining diperbarui untuk memperhitungkan keempat passive ability guardian di atas pada kalkulasi `ttkPlayer` dan `ttkEnemy`.
 - **Verification**: Verified React build (`npm run build`) compiles clean with no warnings.
+
+
+---
+
+### 🚀 Milestone 142: Arctron ARES Siege Multiplier & Celestra Shrine Layout Calibration [DEPLOYED]
+- **Arctron ARES Siege Kit Multiplier (`src/data/ascensionArms.json` & `src/store/gameStore.js`)**:
+  - Implemented **Opsi B (Percentage-based Siege Kit Multipliers)** matching RF Online Accretia Siege Kit progression:
+    - **ARES Lv.32 (`ares_x`)**: `+20% Attack Power Booster` (`atkPercent: 20`).
+    - **ARES Lv.42 (`ares_nemesis`)**: `+40% Attack Power Booster` (`atkPercent: 40`).
+    - **ARES Lv.55 (`ares_dominator`)**: `+55% Attack Power Booster` (`atkPercent: 55`).
+    - **ARES Lv.65 (`ares_apocalypse`)**: `+65% Attack Power Booster` (`atkPercent: 65`).
+  - Updated `craftAscensionArms()` to store `atkPercent` and `defPercent` in crafted equipment `bonus` objects.
+  - Added global passive checking in `totalAtk` computation to apply the active `atkPercent` multiplier dynamically whenever an ARES weapon is equipped.
+- **Celestra Shrine & Sanctuary Layout Optimization (`src/components/AscensionSpiritShopModal.jsx` & `src/screens/Ascension.jsx`)**:
+  - Resolved the right-clipping (`ketrim / kepotong kanan`) issue of **Seraphys** and **Noctyrna** sprites in the `SHRINE OF SPIRITS` modal and `SANCTUARY` showcase.
+  - Replaced the rigid `gridTemplateColumns: 120px 1fr` layout with a responsive, stacked vertical structure featuring a centered horizontal selection pill bar (`AVAILABLE SPIRITS`) above the main container (`MAIN PANEL`).
+  - Updated `Seraphys` & `Noctyrna` sprite rendering style to `width: '100%', maxWidth: 320, height: 320, margin: '0 auto', display: block` across both `AscensionSpiritShopModal.jsx` and `Ascension.jsx`, guaranteeing 100% centered, frameless 2.5D display on all mobile viewport widths without clipping.
+- **Verification**: Verified React build (`npm run build`) compiles cleanly with zero syntax or layout errors.
 
 
 ---
@@ -1912,9 +1931,10 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - Relocated the floating `[🏆 EVENT LIVE]` widget from the top-right to the top-left (`top: 68px, left: 16px`) to prevent it from overlapping with the location pill and clean up the aesthetic view of the dashboard.
 - **Verification**: Verified React build compiles clean with no warnings and UI is properly spaced.
 
+
 ---
 
-### 🚀 Milestone 146: Mission Control Terminal Refactor [DEPLOYED]
+### ðŸš€ Milestone 146: Mission Control Terminal Refactor [DEPLOYED]
 - **HUD Restructuring (`src/screens/Main.jsx`)**:
   - Consolidated the floating `Location Pill`, `Event Live Badge`, and `Deploy Unit Row` directly into the `Focus Session` panel.
   - This unifies all mission-related activities (Location info, Duration, Target Zone, and Deploy action) into a single cohesive "Mission Control Terminal" to enhance the adventure roleplay immersion and declutter the main HUD.
@@ -1923,7 +1943,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### =؀� Milestone 147: M.E.U. Data Migration & Blueprint Hangar UI [DEPLOYED]
+### =Ø€ï¿½ Milestone 147: M.E.U. Data Migration & Blueprint Hangar UI [DEPLOYED]
 - **RFDB Data Migration (src/data/ascensionArms.json)**:
   - Extracted M.E.U data and mapped Attacker/Defender parts.
 - **Ascension UI Overhaul (src/screens/Ascension.jsx)**:
@@ -1933,20 +1953,20 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### 🚀 Milestone 148: Bionex Dynamic Stats & Data Cleanup [DEPLOYED]
+### ðŸš€ Milestone 148: Bionex Dynamic Stats & Data Cleanup [DEPLOYED]
 - **Data Cleanup**: Cleaned up M.E.U. parsing script to correctly isolate Goliath and Catapult parts, removing glitchy ghost parts.
 - **Dynamic MEU Stats UI**: Removed hardcoded ATK/HP/CRIT and implemented real-time calculation of all equipped spare parts (PT, Def, Min-Max Atk, Masteries, Elemental Res, Boost).
 - **Blueprint Accordion**: Redesigned the spare parts list into a clean, collapsible accordion layout per user specification.
 - - -  
   
- # # #   =�.�  M i l e s t o n e   1 4 9 :   C e l e s t r a   A s c e n s i o n   S p i r i t   S y s t e m  
+ # # #   =Ø.Ý  M i l e s t o n e   1 4 9 :   C e l e s t r a   A s c e n s i o n   S p i r i t   S y s t e m  
  -   * * A n i m u s   R e a v e r   M e c h a n i c s * * :   I m p l e m e n t e d   ' S h r i n e   o f   S p i r i t s '   w h e r e   p l a y e r s   b u y   S p i r i t   R e a v e r s   t o   s u m m o n   S e r a p h y s   o r   N o c t y r n a .  
  -   * * G r o w t h   S y s t e m * * :   A s c e n s i o n   S p i r i t s   l e v e l   u p   l i n e a r l y   u s i n g   C R D .   S t a t s   d y n a m i c a l l y   s c a l e   p e r   l e v e l   i n s t e a d   o f   b u y i n g   i n d i v i d u a l   p a r t s .  
  -   * * B a l a n c i n g * * :   L e v e l   s c a l i n g   a d j u s t e d   s o   L e v e l   5 5   S p i r i t   s t a t s   m i r r o r   R F   O n l i n e ' s   L e v e l   4 0 - 4 5   A n i m u s .   M a x   l e v e l   s e t   t o   6 5 .  
  -   * * U I   &   L o r e   C l e a n u p * * :   A d j u s t e d   A s c e n s i o n   U I   f o r   C e l e s t r a   ( S a n c t u a r y   t a b )   a n d   p u r g e d   a l l   r e f e r e n c e s   t o   ' A n i m u s '   i n   f a v o r   o f   ' A s c e n s i o n   S p i r i t ' .  
  - - -  
   
- # # #   =�.�  M i l e s t o n e   1 5 0 :   C e l e s t r a   S h o w c a s e   &   U n s e a l   M e c h a n i c s   [ D E P L O Y E D ]  
+ # # #   =Ø.Ý  M i l e s t o n e   1 5 0 :   C e l e s t r a   S h o w c a s e   &   U n s e a l   M e c h a n i c s   [ D E P L O Y E D ]  
  -   * * S a n c t u a r y   S h o w c a s e * * :   R e s t o r e d   t a r g e t   s t a t u s   p r e v i e w   c a r d s   f o r   L v   3 2 ,   4 2 ,   5 5 ,   a n d   6 5   i n   t h e   S a n c t u a r y   t a b .  
  -   * * S h r i n e   U n s e a l   S y s t e m * * :   A d d e d   l e v e l   c a p s   t o   A s c e n s i o n   S p i r i t s .   P l a y e r s   m u s t   n o w   p u r c h a s e   U n s e a l   C r y s t a l s   ( V e t e r a n ,   M a s t e r ,   A s c e n s i o n )   t o   b r e a k   t h r o u g h   L v   3 2 ,   4 2 ,   a n d   5 5   c a p s .  
  
