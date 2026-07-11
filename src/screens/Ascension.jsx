@@ -31,7 +31,7 @@ const EVO_IMAGES = {
   spirit_noctyrna_32: '/assets/spirit_noctyrna_32.png?v=4',
   spirit_noctyrna_42: '/assets/spirit_noctyrna_42.png?v=4',
   spirit_noctyrna_55: '/assets/spirit_noctyrna_55.png?v=4',
-  spirit_noctyrna_65: '/assets/spirit_noctyrna_65.png?v=15',
+  spirit_noctyrna_65: '/assets/spirit_noctyrna_65.png?v=16',
 }
 
 const RACE_COLORS = {
