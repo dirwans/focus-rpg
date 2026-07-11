@@ -57,12 +57,20 @@ export default function AuditorRoom() {
         }))
 
         const flattenEnemies = (d) => {
-          if (!d?.sectors) return []
           let arr = []
-          d.sectors.forEach(s => {
-            if (s.mobs) arr.push(...s.mobs.map(m => ({ ...m, _providerCat: 'Mobs', _providerDetail: s.name })))
-            if (s.bosses) arr.push(...s.bosses.map(b => ({ ...b, _providerCat: 'Bosses', _providerDetail: s.name })))
-          })
+          if (d?.sectors) {
+            d.sectors.forEach(s => {
+              if (s.mobs) arr.push(...s.mobs.map(m => ({ ...m, _providerCat: 'Mobs', _providerDetail: s.name })))
+              if (s.boss) arr.push({ ...s.boss, _providerCat: 'Bosses', _providerDetail: s.name })
+              if (s.pitBoss) arr.push({ ...s.pitBoss, _providerCat: 'Bosses', _providerDetail: s.name + ' (Pit)' })
+            })
+          }
+          if (d?.miningBoss) {
+            arr.push({ ...d.miningBoss, _providerCat: 'Bosses', _providerDetail: 'Mining Boss' })
+          }
+          if (d?.miningGuardians) {
+            arr.push(...d.miningGuardians.map(g => ({ ...g, _providerCat: 'Bosses', _providerDetail: `Dementor Floor ${g.floor}` })))
+          }
           return arr
         }
 
