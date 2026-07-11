@@ -199,81 +199,7 @@ app.post('/api/market/cancel', async (req, res) => {
     if (!sv.inventory) sv.inventory = []
     const returnedItem = { ...mItem }
 
-// ── Auditor Endpoints ───────────────────────────────────────────────────────
-const AUDIT_DRAFTS_FILE = join(DATA_DIR, 'audit_drafts.json')
-const DRAFTS_IMG_DIR = join(__dirname, 'public', 'assets', 'drafts')
-try { mkdirSync(DRAFTS_IMG_DIR, { recursive: true }) } catch {}
 
-app.get('/api/audit/all_data', (req, res) => {
-  try {
-    const readJson = (filename) => {
-      try { return JSON.parse(readFileSync(join(DATA_DIR, filename), 'utf8')) }
-      catch { return null }
-    }
-    const readGear = (filename) => {
-      try { return JSON.parse(readFileSync(join(DATA_DIR, 'gears', filename), 'utf8')) }
-      catch { return null }
-    }
-
-    const data = {
-      items: readJson('items.json'),
-      enemies: readJson('enemies.json'),
-      races: readJson('races.json'),
-      jobs: readJson('jobs.json'),
-      gears: {
-        arctron: readGear('arctron.json'),
-        bionex: readGear('bionex.json'),
-        celestra: readGear('celestra.json'),
-        accessories: readGear('accessories.json')
-      }
-    }
-    res.json(data)
-  } catch (e) {
-    res.status(500).json({ error: 'Failed to read data' })
-  }
-})
-
-app.post('/api/audit/submit', (req, res) => {
-  const { pin, data, imageBase64, imageName } = req.body
-  // Simple PIN protection for auditor
-  if (pin !== '12345') { // Tuan Muda's PIN
-    return res.status(401).json({ error: 'PIN Salah!' })
-  }
-
-  let drafts = []
-  try { drafts = JSON.parse(readFileSync(AUDIT_DRAFTS_FILE, 'utf8')) } catch {}
-
-  let savedImagePath = null
-  if (imageBase64 && imageName) {
-    try {
-      const base64Data = imageBase64.replace(/^data:image\/\w+;base64,/, '')
-      const buffer = Buffer.from(base64Data, 'base64')
-      const ext = imageName.split('.').pop() || 'png'
-      const filename = `draft_${Date.now()}_${Math.random().toString(36).substring(7)}.${ext}`
-      writeFileSync(join(DRAFTS_IMG_DIR, filename), buffer)
-      savedImagePath = `/assets/drafts/${filename}`
-    } catch (e) {
-      console.error('[audit] image save fail', e)
-    }
-  }
-
-  const draftEntry = {
-    id: Date.now().toString(),
-    submittedAt: new Date().toISOString(),
-    image: savedImagePath,
-    data: data
-  }
-  
-  drafts.push(draftEntry)
-  
-  try {
-    writeFileSync(AUDIT_DRAFTS_FILE, JSON.stringify(drafts, null, 2))
-    res.json({ ok: true, message: 'Berhasil disimpan ke ruang tunggu!' })
-  } catch (e) {
-    console.error('[audit] data save fail', e)
-    res.status(500).json({ error: 'Gagal menyimpan data' })
-  }
-})
     delete returnedItem.marketId
     delete returnedItem.seller
     delete returnedItem.price
@@ -1254,6 +1180,81 @@ app.get('/api/proxy-image', async (req, res) => {
   } catch (error) {
     console.error('Image proxy error:', error)
     res.status(500).json({ error: 'Failed to fetch image' })
+  }
+})
+
+// ── Auditor Endpoints ───────────────────────────────────────────────────────
+const AUDIT_DRAFTS_FILE = join(DATA_DIR, 'audit_drafts.json')
+const DRAFTS_IMG_DIR = join(__dirname, 'public', 'assets', 'drafts')
+try { mkdirSync(DRAFTS_IMG_DIR, { recursive: true }) } catch {}
+
+app.get('/api/audit/all_data', (req, res) => {
+  try {
+    const readJson = (filename) => {
+      try { return JSON.parse(readFileSync(join(DATA_DIR, filename), 'utf8')) }
+      catch { return null }
+    }
+    const readGear = (filename) => {
+      try { return JSON.parse(readFileSync(join(DATA_DIR, 'gears', filename), 'utf8')) }
+      catch { return null }
+    }
+
+    const data = {
+      items: readJson('items.json'),
+      enemies: readJson('enemies.json'),
+      races: readJson('races.json'),
+      jobs: readJson('jobs.json'),
+      gears: {
+        arctron: readGear('arctron.json'),
+        bionex: readGear('bionex.json'),
+        celestra: readGear('celestra.json'),
+        accessories: readGear('accessories.json')
+      }
+    }
+    res.json(data)
+  } catch (e) {
+    res.status(500).json({ error: 'Failed to read data' })
+  }
+})
+
+app.post('/api/audit/submit', (req, res) => {
+  const { pin, data, imageBase64, imageName } = req.body
+  if (pin !== '12345') {
+    return res.status(401).json({ error: 'PIN Salah!' })
+  }
+
+  let drafts = []
+  try { drafts = JSON.parse(readFileSync(AUDIT_DRAFTS_FILE, 'utf8')) } catch {}
+
+  let savedImagePath = null
+  if (imageBase64 && imageName) {
+    try {
+      const base64Data = imageBase64.replace(/^data:image\/\w+;base64,/, '')
+      const buffer = Buffer.from(base64Data, 'base64')
+      const ext = imageName.split('.').pop() || 'png'
+      const filename = `draft_${Date.now()}_${Math.random().toString(36).substring(7)}.${ext}`
+      writeFileSync(join(DRAFTS_IMG_DIR, filename), buffer)
+      savedImagePath = `/assets/drafts/${filename}`
+    } catch (e) {
+      console.error('[audit] image save fail', e)
+    }
+  }
+
+  const draftEntry = {
+    id: Date.now().toString(),
+    submittedAt: new Date().toISOString(),
+    image: savedImagePath,
+    data: data
+  }
+  
+  drafts.push(draftEntry)
+  
+  try {
+    writeFileSync(AUDIT_DRAFTS_FILE, JSON.stringify(drafts, null, 2))
+    res.json({ ok: true, message: 'Berhasil disimpan ke ruang tunggu!' })
+  } catch (e) {
+    console.error('[audit] data save fail', e)
+    res.status(500).json({ error: 'Gagal menyimpan data' })
   }
 })
 
