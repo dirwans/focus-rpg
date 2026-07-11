@@ -204,13 +204,32 @@ const AUDIT_DRAFTS_FILE = join(DATA_DIR, 'audit_drafts.json')
 const DRAFTS_IMG_DIR = join(__dirname, 'public', 'assets', 'drafts')
 try { mkdirSync(DRAFTS_IMG_DIR, { recursive: true }) } catch {}
 
-app.get('/api/audit/items', (req, res) => {
-  // Returns raw items data for the auditor
+app.get('/api/audit/all_data', (req, res) => {
   try {
-    const rawItems = JSON.parse(readFileSync(join(DATA_DIR, 'items.json'), 'utf8'))
-    res.json(rawItems)
+    const readJson = (filename) => {
+      try { return JSON.parse(readFileSync(join(DATA_DIR, filename), 'utf8')) }
+      catch { return null }
+    }
+    const readGear = (filename) => {
+      try { return JSON.parse(readFileSync(join(DATA_DIR, 'gears', filename), 'utf8')) }
+      catch { return null }
+    }
+
+    const data = {
+      items: readJson('items.json'),
+      enemies: readJson('enemies.json'),
+      races: readJson('races.json'),
+      jobs: readJson('jobs.json'),
+      gears: {
+        arctron: readGear('arctron.json'),
+        bionex: readGear('bionex.json'),
+        celestra: readGear('celestra.json'),
+        accessories: readGear('accessories.json')
+      }
+    }
+    res.json(data)
   } catch (e) {
-    res.status(500).json({ error: 'Failed to read items' })
+    res.status(500).json({ error: 'Failed to read data' })
   }
 })
 
