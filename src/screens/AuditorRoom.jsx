@@ -52,16 +52,53 @@ export default function AuditorRoom() {
           _isDirty: false
         }))
 
+        const flattenEnemies = (d) => {
+          if (!d?.sectors) return []
+          let arr = []
+          d.sectors.forEach(s => {
+            if (s.mobs) arr.push(...s.mobs.map(m => ({ ...m, _providerCat: 'Mobs', _providerDetail: s.name })))
+            if (s.bosses) arr.push(...s.bosses.map(b => ({ ...b, _providerCat: 'Bosses', _providerDetail: s.name })))
+          })
+          return arr
+        }
+
+        const flattenGears = (d) => {
+          if (!d) return []
+          let arr = []
+          Object.keys(d).forEach(k => {
+            if (Array.isArray(d[k])) arr.push(...d[k].map(i => ({ ...i, type: k })))
+          })
+          return arr
+        }
+
+        const flattenRaces = (d) => {
+          if (!d) return []
+          return Object.values(d)
+        }
+
+        const flattenJobs = (d) => {
+          if (!d) return []
+          let arr = []
+          Object.keys(d).forEach(raceKey => {
+            Object.keys(d[raceKey]).forEach(tierKey => {
+              if (Array.isArray(d[raceKey][tierKey])) {
+                arr.push(...d[raceKey][tierKey].map(j => ({ ...j, type: `${raceKey} - ${tierKey}` })))
+              }
+            })
+          })
+          return arr
+        }
+
         setAllData({
-          items: formatRows(data.items?.items || data.items),
-          enemies: formatRows(data.enemies),
-          races: formatRows(data.races),
-          jobs: formatRows(data.jobs),
+          items: formatRows(data.items?.items || data.items || []),
+          enemies: formatRows(flattenEnemies(data.enemies)),
+          races: formatRows(flattenRaces(data.races)),
+          jobs: formatRows(flattenJobs(data.jobs)),
           gears: {
-            arctron: formatRows(data.gears?.arctron),
-            bionex: formatRows(data.gears?.bionex),
-            celestra: formatRows(data.gears?.celestra),
-            accessories: formatRows(data.gears?.accessories)
+            arctron: formatRows(flattenGears(data.gears?.arctron)),
+            bionex: formatRows(flattenGears(data.gears?.bionex)),
+            celestra: formatRows(flattenGears(data.gears?.celestra)),
+            accessories: formatRows(flattenGears(data.gears?.accessories))
           }
         })
       }
