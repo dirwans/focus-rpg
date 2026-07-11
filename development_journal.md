@@ -2077,3 +2077,7 @@ fdatabase.net/crafting/ 3-column UI layout.
 - **Auditor Room Consistency**: Re-aligned the Enhancement tab layout to match the Crafting tab logic precisely (3 slots, specific target selection, accurate Arcanite filtering, and dynamically changing titles). Purged UI remnants of RF Online Talics.
 - **Material DB Scrub**: Removed legacy Favor Talic and Ignorance Talic from items.json to fully finalize the proprietary material base.
 - **Local Material Assets Generation**: Replaced external RF Online hotlinks with AI-generated, high-fidelity 2.5D Mecha Anime style images for all Ore and Shard grades (Ignis, Virel, Kryos, Zephra, Umbrix) across Common, Rare, and Epic tiers. Tinted systematically via Python color matrix. Data structure updated to strictly use local /assets/materials/... paths.
+
+### ?? Hotfix: Material Background & Tint Calibration [DEPLOYED]
+- **Background Removal**: The previous AI-generated material assets contained a fake checkerboard background which caused the Python script to tint them as solid color blocks. Ran embg on the user's reference sprite sheet (	opisshard-bottomisore.png) to extract pure alpha shard and ore.
+- **Re-Generation**: Re-applied the element color tint matrix and grade glow to the true alpha sprites, resolving the opaque square issue and restoring the intended transparent crystal aesthetic for all 30 materials.

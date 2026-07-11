@@ -412,7 +412,7 @@ export default function AuditorRoom() {
         </div>
         )}
 
-        <div style={{...((tab === 'crafting' || tab === 'enhance') ? {padding: 0} : styles.content)}} className="no-scrollbar">
+        <div style={{ ...styles.content, padding: (tab === 'crafting' || tab === 'enhance') ? 0 : '15px' }} className="no-scrollbar">
           {(tab === 'crafting' || tab === 'enhance') ? (
               <div className="simulator-container">
                  {/* LEFT COLUMN - FILTERS & LOGS */}
