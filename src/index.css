@@ -692,7 +692,7 @@ body {
   text-shadow: 0 0 8px #ff2222, 0 0 12px #ff0000;
   animation: floatUpFade 1.2s forwards cubic-bezier(0.25, 0.8, 0.25, 1);
   pointer-events: none;
-  z-index: 10;
+  
 }
 
 @keyframes floatUpFade {
@@ -811,7 +811,7 @@ body {
   border-radius: 50%;
   box-shadow: 0 0 6px #00e5ff, 0 0 10px #00e5ff;
   pointer-events: none;
-  z-index: 10;
+  
   opacity: 0;
   animation: sparkExplosion 0.8s ease-out forwards;
 }
@@ -924,7 +924,7 @@ body {
   border-radius: 50%;
   border: 2px solid var(--card-accent);
   background: rgba(0, 8, 25, 0.95);
-  z-index: 10;
+  
   box-shadow: 0 0 8px var(--card-accent), inset 0 0 3px rgba(0,0,0,0.8);
 }
 .id-corner-circle::after {
@@ -945,7 +945,7 @@ body {
 /* === SIDE NOTCH DECORATIONS (mechanical shapes on edges) === */
 .id-edge-notch {
   position: absolute;
-  z-index: 10;
+  
   pointer-events: none;
   width: 5px;
   height: 20px;
@@ -962,7 +962,7 @@ body {
 .id-tab {
   position: absolute;
   left: 50%; transform: translateX(-50%);
-  z-index: 10;
+  
   width: 50px; height: 6px;
   border: 1.5px solid var(--card-accent);
   background: rgba(0, 8, 25, 0.95);
@@ -1077,7 +1077,7 @@ body {
   position: absolute;
   width: 13px;
   height: 13px;
-  z-index: 10;
+  
   pointer-events: none;
 }
 .profile-corner.tl { top: -4px;  left: -4px;  border-top: 2px solid var(--card-accent, var(--neon-glow)); border-left: 2px solid var(--card-accent, var(--neon-glow)); }
@@ -1087,7 +1087,7 @@ body {
 
 .profile-avatar-grid {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0; left: 0; right: 0; 
   background-image: 
     radial-gradient(circle, transparent 20%, rgba(3, 8, 20, 0.5) 100%),
     linear-gradient(rgba(0, 229, 255, 0.08) 1px, transparent 1px),
@@ -1660,13 +1660,13 @@ body {
   content: " ";
   display: none;
   position: absolute;
-  top: 0; left: 0; bottom: 0; right: 0;
+  top: 0; left: 0;  right: 0;
   background: 
     linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%),
     linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
   background-size: 100% 4px, 3px 100%;
   pointer-events: none;
-  z-index: 10;
+  
   opacity: 0.7;
 }
 
@@ -1744,4 +1744,66 @@ body {
 .no-scrollbar {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+}
+
+/* =========================================
+   CRAFTING SIMULATOR RESPONSIVE UI
+   ========================================= */
+.simulator-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  background: #0a0a0a;
+  color: #ccc;
+  font-family: sans-serif;
+  min-height: 600px;
+}
+
+.simulator-filters {
+  flex: 1 1 250px;
+  max-width: 300px;
+  order: 1;
+}
+
+.simulator-grid {
+  flex: 2 1 400px;
+  order: 2;
+}
+
+.simulator-result {
+  flex: 1 1 300px;
+  order: 3;
+}
+
+@media (max-width: 768px) {
+  .simulator-container {
+    flex-direction: column;
+    padding: 10px;
+  }
+  
+  .simulator-filters {
+    max-width: 100%;
+    order: 3; /* Move filters to bottom on mobile */
+  }
+  
+  .simulator-grid {
+    flex: 1 1 auto;
+    order: 1; /* Grid at the top */
+  }
+  
+  .simulator-result {
+    flex: 1 1 auto;
+    order: 2; /* Result right below grid */
+    
+    
+    
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.5);
+  }
+
+  .simulator-result-inner {
+    max-height: 40vh;
+    overflow-y: auto;
+  }
 }

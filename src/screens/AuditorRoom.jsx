@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import arctronLogo from '../assets/arctron_logo.png'
+import bionexLogo from '../assets/bionex_logo.png'
+import celestraLogo from '../assets/celestra_logo.png'
+import defaultToolIcon from '../assets/mat_ore_refined.png'
 
 export default function AuditorRoom() {
   const [pin, setPin] = useState('')
@@ -327,9 +331,9 @@ export default function AuditorRoom() {
 
         <div style={{...(tab === 'crafting' ? {padding: 0} : styles.content)}} className="no-scrollbar">
           {tab === 'crafting' ? (
-            <div style={{ display: 'flex', gap: '20px', padding: '20px', background: '#0a0a0a', color: '#ccc', fontFamily: 'sans-serif', minHeight: '600px', flexDirection: 'row', flexWrap: 'wrap' }}>
+            <div className="simulator-container">
                {/* LEFT COLUMN - FILTERS */}
-               <div style={{ flex: '1 1 250px', maxWidth: '300px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+               <div className="simulator-filters" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                    <div style={{ border: '1px solid #333', background: '#141414', borderRadius: '4px' }}>
                        <div style={{ display: 'flex', justifyContent: 'space-between', padding: '10px', borderBottom: '1px solid #333' }}>
                            <span style={{ fontWeight: 'bold', color: '#fff', fontSize: '14px' }}>Filters</span>
@@ -366,7 +370,7 @@ export default function AuditorRoom() {
                </div>
 
                {/* CENTER COLUMN - GRID */}
-               <div style={{ flex: '2 1 400px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+               <div className="simulator-grid" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                    <div style={{ border: '1px solid #333', background: '#141414', borderRadius: '4px', display: 'flex', flexDirection: 'column', flex: 1 }}>
                        <div style={{ padding: '10px', borderBottom: '1px solid #333', fontWeight: 'bold', color: '#fff', fontSize: '14px' }}>Tool Kit</div>
                        <div style={{ padding: '15px', flex: 1, display: 'flex', flexDirection: 'column' }}>
@@ -431,8 +435,8 @@ export default function AuditorRoom() {
                </div>
 
                {/* RIGHT COLUMN - RESULT */}
-               <div style={{ flex: '1 1 300px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                   <div style={{ border: '1px solid #333', background: '#141414', borderRadius: '4px' }}>
+               <div className="simulator-result" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                   <div className="simulator-result-inner" style={{ border: '1px solid #333', background: '#141414', borderRadius: '4px' }}>
                        <div style={{ padding: '10px', borderBottom: '1px solid #333', fontWeight: 'bold', color: '#fff', fontSize: '14px' }}>Craft Result</div>
                        <div style={{ padding: '15px' }}>
                            <div style={{ display: 'flex', gap: '15px', alignItems: 'center', background: '#1a1a1a', padding: '10px', border: '1px solid #222', borderRadius: '4px' }}>

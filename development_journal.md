@@ -2066,7 +2066,7 @@ fdatabase.net/crafting/ 3-column UI layout.
 
 ---
 
-### ?? Milestone 59: Hotfix Auditor Crafting UI [PENDING DEPLOYMENT]
+### ?? Milestone 59: Hotfix Auditor Crafting UI [DEPLOYED]
 - **Bug Fixes (AuditorRoom.jsx)**:
   - Fixed broken image paths for Race logos by using direct imports (rctronLogo, ionexLogo, celestraLogo).
   - Added a visual fallback for materials without images (displays the first 8 characters of the item's name inside the box).
