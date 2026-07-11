@@ -2090,3 +2090,12 @@ fdatabase.net/crafting/ 3-column UI layout.
 ### ?? Hotfix: Noctyrna Lv.65 Sprite Bounding Box [DEPLOYED]
 - **Issue**: The spirit_noctyrna_65.png image felt too small in the UI compared to Seraphys because it had a 702x702 square canvas with massive transparent padding on the left and right. This caused it to hit the maxWidth: 85% CSS constraint before filling the container height.
 - **Fix**: Wrote a Python script to scan the alpha channel and tightly crop the image to the actual pixel bounds (401x674). It now scales correctly and fills the vertical height of the container just like Seraphys.
+
+### ?? Hotfix: Noctyrna Visual Scaling [DEPLOYED]
+- **Issue**: After cropping the bounding box, Noctyrna still felt visually smaller than Seraphys on the main Ascension display card. This is because Noctyrna's character design is more slender, so even when it hits the same 320px bounding limits, it has less 'visual bulk' than Seraphys.
+- **Fix**: Applied a CSS 	ransform: scale(1.2) specifically to the Noctyrna sprite on the main display card. This artificially boosts its size by 20% so it feels just as imposing as Seraphys without altering the underlying grid layout or image file.
+
+### ?? Hotfix: Target Specificity for Noctyrna Neon Glow [DEPLOYED]
+- **Issue**: The previous CSS update indiscriminately targeted all instances of 
+octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense drop-shadow glow and the scale(1.2) transform, resulting in bloated / swollen sprites ("gajah bengkak").
+- **Fix**: Restricted the .game-sprite-noctyrna CSS class, 	ransform: scale(1.15), and dark background injection strictly to nimusKey === 'noctyrna' && lv === 65. Removed the heavy brightness/contrast filters from index.css to make the glow much thinner ("tuipis") as requested.

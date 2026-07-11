@@ -233,9 +233,9 @@ export default function Ascension() {
                               <img
                                 src={EVO_IMAGES[`spirit_${animusKey}_${lv}`] || `/assets/spirit_${animusKey}_${lv}.png?v=6`}
                                 alt={`${aData.name} Lv.${lv}`}
-                                className={animusKey === 'noctyrna' ? 'game-sprite-noctyrna' : ''}
+                                className={animusKey === 'noctyrna' && lv === 65 ? 'game-sprite-noctyrna' : ''}
                                 style={{
-                                  imageRendering: animusKey === 'noctyrna' ? 'pixelated' : 'auto',
+                                  imageRendering: animusKey === 'noctyrna' && lv === 65 ? 'pixelated' : 'auto',
                                   width: '100%',
                                   maxWidth: 320,
                                   height: 320,
@@ -244,7 +244,7 @@ export default function Ascension() {
                                   display: 'block',
                                   position: 'relative',
                                   zIndex: 1,
-                                  transform: animusKey === 'noctyrna' ? 'scale(1.2)' : 'none'
+                                  transform: animusKey === 'noctyrna' && lv === 65 ? 'scale(1.15)' : 'none'
                                 }}
                               />
                             </div>
@@ -391,7 +391,7 @@ export default function Ascension() {
                           <div style={{
                             display: 'flex', justifyContent: 'center', alignItems: 'center',
                             marginBottom: 10,
-                            background: isUnlocked ? (evo.id.includes('noctyrna') ? '#0a0014' : colors.bgLight) : 'rgba(0,0,0,0.2)',
+                            background: isUnlocked ? (evo.id === 'spirit_noctyrna_65' ? '#0a0014' : colors.bgLight) : 'rgba(0,0,0,0.2)',
                             borderRadius: 8,
                             padding: '8px 0',
                             border: isUnlocked ? `1px solid ${colors.border}4d` : '1px solid rgba(255,255,255,0.05)',
@@ -400,13 +400,14 @@ export default function Ascension() {
                             <img
                               src={evoImg}
                               alt={evo.name}
+                              className={evo.id === 'spirit_noctyrna_65' ? 'game-sprite-noctyrna' : ''}
                               style={{
-                                imageRendering: evo.id.includes('noctyrna') ? 'pixelated' : 'auto',
+                                imageRendering: evo.id === 'spirit_noctyrna_65' ? 'pixelated' : 'auto',
                                 maxHeight: 120,
                                 maxWidth: '85%',
                                 objectFit: 'contain',
                                 opacity: isUnlocked ? 1 : 0.4,
-                                filter: isUnlocked ? (evo.id.includes('noctyrna') ? 'brightness(1.15) contrast(1.3) drop-shadow(0 0 8px #a855f7) drop-shadow(0 0 16px #7c3aed)' : `drop-shadow(0 0 15px ${colors.accent}) brightness(1.2)`) : 'grayscale(100%)',
+                                filter: isUnlocked ? (evo.id === 'spirit_noctyrna_65' ? 'drop-shadow(0 0 16px rgba(124, 58, 237, 0.5))' : `drop-shadow(0 0 15px ${colors.accent}) brightness(1.2)`) : 'grayscale(100%)',
                                 transition: 'all 0.3s ease',
                               }}
                             />
