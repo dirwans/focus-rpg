@@ -1252,7 +1252,7 @@ export default function LibraryModal({ onClose }) {
                   <li><strong>Hit Chance:</strong> Accuracy / (Accuracy + Target Dodge)</li>
                   <li><strong>Block Chance:</strong> Block / (Block + Attacker Ignore Block). Jika sukses, damage x50%.</li>
                   <li><strong>Damage (PATK/MATK):</strong> (Attack x Skill Multiplier) - Target DEF. Minimum 1.</li>
-                  <li><strong>Critical:</strong> Jika random <= Crit Rate, maka damage x150%.</li>
+                  <li><strong>Critical:</strong> Jika random &lt;= Crit Rate, maka damage x150%.</li>
                   <li><strong>Random Variation:</strong> Final Damage berfluktuasi antara 95% ~ 105%.</li>
                 </ul>
               </div>
@@ -1263,9 +1263,9 @@ export default function LibraryModal({ onClose }) {
                   <li><strong>EXP Formula:</strong> Base EXP × Level Modifier × Server Rate × Event × Premium.</li>
                   <li><strong>Level Modifier Penalty:</strong>
                     <ul style={{ paddingLeft: 16, marginTop: 4 }}>
-                      <li>Beda >= 10 level (Musuh lebih kuat): 150% EXP</li>
+                      <li>Beda &gt;= 10 level (Musuh lebih kuat): 150% EXP</li>
                       <li>Beda -4 s/d +4 level (Setara): 100% EXP</li>
-                      <li>Beda <= -10 level (Musuh lebih lemah): 50% EXP</li>
+                      <li>Beda &lt;= -10 level (Musuh lebih lemah): 50% EXP</li>
                     </ul>
                   </li>
                 </ul>
@@ -1284,7 +1284,7 @@ export default function LibraryModal({ onClose }) {
                 <ul style={styles.list}>
                   <li><strong>Syarat:</strong> Membunuh faksi musuh dengan Final Blow.</li>
                   <li><strong>Level Modifier:</strong> Membunuh level besar (+10 Lv) dapat 150% CP. Membunuh level kecil (-10 Lv) dapat 50% CP.</li>
-                  <li><strong>Anti-Farming:</strong> Membunuh player yang sama = 100% -> 50% -> 25% -> 0% (Reset per 30 menit).</li>
+                  <li><strong>Anti-Farming:</strong> Membunuh player yang sama = 100% -&gt; 50% -&gt; 25% -&gt; 0% (Reset per 30 menit).</li>
                 </ul>
               </div>
 
