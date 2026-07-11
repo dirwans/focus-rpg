@@ -9,7 +9,7 @@ const RARITY_COLOR = {
   common: '#6a9ab8',
   uncommon: '#44ff88',
   rare: '#f5a623',
-  epic: '#cc44ff',
+  epic: '#8b00ff',
   consumable: '#ff4466',
   UR: '#eab308',
   ur: '#eab308',

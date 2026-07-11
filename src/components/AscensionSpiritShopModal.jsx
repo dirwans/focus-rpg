@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useGameStore } from '../store/gameStore'
-const colors = { accent: '#cc44ff', border: '#cc44ff', bg: 'rgba(204, 68, 255, 0.15)', text: '#fff', bgLight: 'rgba(204, 68, 255, 0.25)' }
+const colors = { accent: '#8b00ff', border: '#8b00ff', bg: 'rgba(139, 0, 255, 0.15)', text: '#fff', bgLight: 'rgba(139, 0, 255, 0.25)' }
 
 export default function AscensionSpiritShopModal({ player, raceData }) {
   const buyAnimusReaver = useGameStore((s) => s.buyAnimusReaver)

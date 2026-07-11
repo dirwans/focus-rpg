@@ -23,9 +23,9 @@ const SHOP_ITEMS = [
   { id: 'exp3_7d',  cat: 'booster', name: 'Triple EXP Booster',  sub: '7 Hari',  emoji: '🔥', nxc: 2500, meta: { type:'exp_boost', mult:3, days:7 },  color: '#ff8c00' },
   { id: 'exp3_30d', cat: 'booster', name: 'Triple EXP Booster',  sub: '30 Hari', emoji: '🔥', nxc: 7500, meta: { type:'exp_boost', mult:3, days:30 }, color: '#ff8c00' },
   // Drop Boosters
-  { id: 'drop_1d',  cat: 'booster', name: 'Drop Rate Booster +5%', sub: '1 Hari',  emoji: '🎲', nxc: 500,  meta: { type:'drop_boost', pct:5, days:1 },  color: '#cc44ff' },
-  { id: 'drop_7d',  cat: 'booster', name: 'Drop Rate Booster +5%', sub: '7 Hari',  emoji: '🎲', nxc: 2500, meta: { type:'drop_boost', pct:5, days:7 },  color: '#cc44ff' },
-  { id: 'drop_30d', cat: 'booster', name: 'Drop Rate Booster +5%', sub: '30 Hari', emoji: '🎲', nxc: 7500, meta: { type:'drop_boost', pct:5, days:30 }, color: '#cc44ff' },
+  { id: 'drop_1d',  cat: 'booster', name: 'Drop Rate Booster +5%', sub: '1 Hari',  emoji: '🎲', nxc: 500,  meta: { type:'drop_boost', pct:5, days:1 },  color: '#8b00ff' },
+  { id: 'drop_7d',  cat: 'booster', name: 'Drop Rate Booster +5%', sub: '7 Hari',  emoji: '🎲', nxc: 2500, meta: { type:'drop_boost', pct:5, days:7 },  color: '#8b00ff' },
+  { id: 'drop_30d', cat: 'booster', name: 'Drop Rate Booster +5%', sub: '30 Hari', emoji: '🎲', nxc: 7500, meta: { type:'drop_boost', pct:5, days:30 }, color: '#8b00ff' },
   // Potions
   { id: 'atk_pot', cat: 'potion', name: 'ATK Potion +25%', sub: '3 Menit', emoji: '🗡️', nxc: 150, meta: { type:'atk_pot' }, color: '#ff4444' },
   { id: 'def_pot', cat: 'potion', name: 'DEF Potion +25%', sub: '3 Menit', emoji: '🛡️', nxc: 150, meta: { type:'def_pot' }, color: '#4488ff' },
@@ -129,7 +129,7 @@ export default function PremiumShop() {
               <div style={sty.boostChip('#00ff88')}>⚡ EXP ×{boosts.expBoost.mult} — {fmtMs(boosts.expBoost.expiresAt - now)}</div>
             )}
             {boosts.dropBoost?.expiresAt > now && (
-              <div style={sty.boostChip('#cc44ff')}>🎲 Drop +{boosts.dropBoost.pct}% — {fmtMs(boosts.dropBoost.expiresAt - now)}</div>
+              <div style={sty.boostChip('#8b00ff')}>🎲 Drop +{boosts.dropBoost.pct}% — {fmtMs(boosts.dropBoost.expiresAt - now)}</div>
             )}
             {boosts.atkPot?.expiresAt > now && (
               <div style={sty.boostChip('#ff4444')}>🗡️ ATK +25% — {fmtMs(boosts.atkPot.expiresAt - now)}</div>

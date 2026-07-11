@@ -30,17 +30,17 @@ const EVO_IMAGES = {
   // Celestra Ancient Spirit - Noctyrna
   spirit_noctyrna_32: '/assets/spirit_noctyrna_32.png?v=4',
   spirit_noctyrna_42: '/assets/spirit_noctyrna_42.png?v=4',
-  spirit_noctyrna_55: '/assets/spirit_noctyrna_55.png?v=4',
+  spirit_noctyrna_55: '/assets/spirit_noctyrna_55.png?v=5',
   spirit_noctyrna_65: '/assets/spirit_noctyrna_65.png?v=16',
 }
 
 const RACE_COLORS = {
   celestra: {
-    accent: '#cc44ff', // purple title
-    glow: 'rgba(204, 68, 255, 0.5)',
-    border: '#cc44ff', // purple frame
-    bg: 'rgba(204, 68, 255, 0.15)',
-    bgLight: 'rgba(204, 68, 255, 0.08)'
+    accent: '#8b00ff', // purple title
+    glow: 'rgba(139, 0, 255, 0.5)',
+    border: '#8b00ff', // purple frame
+    bg: 'rgba(139, 0, 255, 0.15)',
+    bgLight: 'rgba(139, 0, 255, 0.08)'
   },
   arctron: {
     accent: '#ff8c00', // orange title

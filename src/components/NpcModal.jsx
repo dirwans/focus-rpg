@@ -725,7 +725,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                     {[
                       { id: 'mat_arcanite_fury', color: '#ffcc00', name: 'Fury' },
                       { id: 'mat_arcanite_ruin', color: '#ff4444', name: 'Ruin' },
-                      { id: 'mat_arcanite_spirit', color: '#cc44ff', name: 'Spirit' },
+                      { id: 'mat_arcanite_spirit', color: '#8b00ff', name: 'Spirit' },
                       { id: 'mat_arcanite_vital', color: '#00ff88', name: 'Vital' },
                       { id: 'mat_arcanite_guard', color: '#44aaff', name: 'Guard' },
                       { id: 'mat_arcanite_precision', color: '#ffffff', name: 'Prec' },
@@ -992,7 +992,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
             const ARCANITES = [
               { id: 'mat_arcanite_fury', name: 'Fury', color: '#ffcc00', reqs: [{id: 'shard_ignis_epic', emoji:'🔴'}, {id: 'shard_virel_epic', emoji:'🔵'}] },
               { id: 'mat_arcanite_ruin', name: 'Ruin', color: '#ff4444', reqs: [{id: 'shard_ignis_epic', count:2, emoji:'🔴'}] },
-              { id: 'mat_arcanite_spirit', name: 'Spirit', color: '#cc44ff', reqs: [{id: 'shard_zephra_epic', count:2, emoji:'🟡'}] },
+              { id: 'mat_arcanite_spirit', name: 'Spirit', color: '#8b00ff', reqs: [{id: 'shard_zephra_epic', count:2, emoji:'🟡'}] },
               { id: 'mat_arcanite_vital', name: 'Vital', color: '#00ff88', reqs: [{id: 'shard_umbrix_epic', count:2, emoji:'⚫'}] },
               { id: 'mat_arcanite_guard', name: 'Guard', color: '#44aaff', reqs: [{id: 'shard_kryos_epic', count:2, emoji:'🟢'}] },
               { id: 'mat_arcanite_precision', name: 'Precision', color: '#ffffff', reqs: [{id: 'shard_zephra_epic', emoji:'🟡'}, {id: 'shard_kryos_epic', emoji:'🟢'}] },
@@ -1306,7 +1306,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
 
           return (
             <div style={{ padding: '0 16px 80px' }}>
-              <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: '#cc44ff', letterSpacing: 1, marginBottom: 16, textAlign: 'center', borderBottom: '1px solid rgba(204,68,255,0.3)', paddingBottom: 8 }}>
+              <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: '#8b00ff', letterSpacing: 1, marginBottom: 16, textAlign: 'center', borderBottom: '1px solid rgba(204,68,255,0.3)', paddingBottom: 8 }}>
                 👑 SET SHOP — Per piece: ATK+20-30 | DEF+20-30 | HP+300-500
               </div>
               {SETS.map(set => {
