@@ -480,14 +480,8 @@ function randomMob(sectorIdx, isDungeon = false) {
 function spawnEnemy(sectorIdx, playerLevel, isDungeon = false) {
   const sector = isDungeon ? enemies.dungeons[sectorIdx] : enemies.sectors[sectorIdx]
 
-  // 15% chance to spawn the Pit Boss (World Boss) instead of normal Boss/Mob
-  const isPitBossSpawn = Math.random() < 0.15 && sector.pitBoss
-
   if (isDungeon) {
-    if (isPitBossSpawn) {
-      return { mob: sector.pitBoss, isBoss: true, isPitBoss: true, isCulprit: false, hp: sector.pitBoss.hp }
-    }
-    return { mob: sector.boss, isBoss: true, isPitBoss: false, isCulprit: false, hp: sector.boss.hp }
+    return { mob: sector.boss, isBoss: true, isCulprit: false, hp: sector.boss.hp }
   }
 
   // World Map
@@ -496,8 +490,7 @@ function spawnEnemy(sectorIdx, playerLevel, isDungeon = false) {
 
   if (isMaxLevelForMap) {
     const isCulprit = Math.random() < 0.20
-    const targetBoss = isPitBossSpawn ? sector.pitBoss : sector.boss
-    const isPit = !!isPitBossSpawn
+    const targetBoss = sector.boss
     if (isCulprit) {
       const culpritBoss = {
         ...targetBoss,
@@ -507,9 +500,9 @@ function spawnEnemy(sectorIdx, playerLevel, isDungeon = false) {
         expReward: targetBoss.expReward * 2,
         crdReward: targetBoss.crdReward * 2
       }
-      return { mob: culpritBoss, isBoss: true, isPitBoss: isPit, isCulprit: true, hp: culpritBoss.hp }
+      return { mob: culpritBoss, isBoss: true, isCulprit: true, hp: culpritBoss.hp }
     }
-    return { mob: targetBoss, isBoss: true, isPitBoss: isPit, isCulprit: false, hp: targetBoss.hp }
+    return { mob: targetBoss, isBoss: true, isCulprit: false, hp: targetBoss.hp }
   }
 
   const baseMob = randomMob(sectorIdx, false)
@@ -523,7 +516,7 @@ function spawnEnemy(sectorIdx, playerLevel, isDungeon = false) {
       expReward: Math.floor(baseMob.expReward * 1.5),
       crdReward: Math.floor(baseMob.crdReward * 1.5)
     }
-    return { mob: eliteMob, isBoss: false, isPitBoss: false, isCulprit: false, hp: eliteMob.hp }
+    return { mob: eliteMob, isBoss: false, isCulprit: false, hp: eliteMob.hp }
   }
 
   const isCulprit = Math.random() < 0.20
@@ -536,10 +529,10 @@ function spawnEnemy(sectorIdx, playerLevel, isDungeon = false) {
       expReward: baseMob.expReward * 2,
       crdReward: baseMob.crdReward * 2
     }
-    return { mob: culpritMob, isBoss: false, isPitBoss: false, isCulprit: true, hp: culpritMob.hp }
+    return { mob: culpritMob, isBoss: false, isCulprit: true, hp: culpritMob.hp }
   }
 
-  return { mob: baseMob, isBoss: false, isPitBoss: false, isCulprit: false, hp: baseMob.hp }
+  return { mob: baseMob, isBoss: false, isCulprit: false, hp: baseMob.hp }
 }
 
 // Frac 0..1 deterministik dari seed integer (buat item drop yg sama di semua device)
@@ -1935,7 +1928,7 @@ export const useGameStore = create(
         const now = Date.now()
         
         const isDungeon = timer.selectedZone && timer.selectedZone.startsWith('dungeon_')
-        let sector, mob, isBoss, isPitBoss = false, hp
+        let sector, mob, isBoss, hp
 
         if (isDungeon) {
           const dungeonIdx = parseInt(timer.selectedZone.split('_')[1]) - 1
@@ -1963,7 +1956,6 @@ export const useGameStore = create(
           const spawned = spawnEnemy(dungeonIdx, player.level, true)
           mob = spawned.mob
           isBoss = spawned.isBoss
-          isPitBoss = spawned.isPitBoss
           hp = spawned.hp
         } else {
           const sectorIdx = (player.selectedMapIdx !== undefined && player.selectedMapIdx !== null)
@@ -1973,7 +1965,6 @@ export const useGameStore = create(
           const spawned = spawnEnemy(sectorIdx, player.level, false)
           mob = spawned.mob
           isBoss = spawned.isBoss
-          isPitBoss = spawned.isPitBoss
           hp = spawned.hp
         }
 
@@ -1992,8 +1983,7 @@ export const useGameStore = create(
           player: { ...player, savedAt: now },
           battle: {
             ...initialBattle,
-            log: [(isPitBoss ? `👹 PIT BOSS: ${mob.emoji} ${mob.name}!` : isBoss ? `⚠️ STAGE BOSS: ${mob.emoji} ${mob.name}!` : `⚔️ Entering ${sector.name}...`)],
-            isPitBoss,
+            log: [isBoss ? `⚠️ STAGE BOSS: ${mob.emoji} ${mob.name}!` : `⚔️ Entering ${sector.name}...`],
             enemyHp: hp,
             enemyMaxHp: hp,
             playerHp: playerMaxHp,

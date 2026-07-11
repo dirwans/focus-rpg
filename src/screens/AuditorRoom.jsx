@@ -21,6 +21,8 @@ export default function AuditorRoom() {
   // UI State
   const [tab, setTab] = useState('items')
   const [subTab, setSubTab] = useState('arctron')
+  const [page, setPage] = useState(0)
+  const [searchTerm, setSearchTerm] = useState('')
 
   // Modal State for Definition Editing
   const [showDefModal, setShowDefModal] = useState(false)
@@ -45,16 +47,32 @@ export default function AuditorRoom() {
         const data = await res.json()
         
         // Helper to format rows with UI states
-        const formatRows = (arr) => (arr || []).slice(0, 100).map(item => ({
-          ...item,
-          _providerCat: 'Mobs',
-          _providerDetail: '',
-          _kegunaan: 'Crafting',
-          _howToUse: item.description || '',
-          _imageFile: null,
-          _imagePreview: item.image || null,
-          _isDirty: false
-        }))
+        const formatRows = (arr, category) => (arr || []).map(item => {
+          let preview = item.image || (item.img ? `/assets/${item.img}` : null);
+          if (!preview && item.id) {
+             if (category === 'gears_arctron' || category === 'gears_bionex' || category === 'gears_celestra') {
+               if (item.id.startsWith('wpn_') || item.id.startsWith('gw_')) preview = `/assets/weapons/${item.id}.png`;
+               else if (item.id.startsWith('arm_arc')) preview = `/assets/armor/${item.id}.png`;
+               else if (item.id.startsWith('arm_bio')) preview = `/assets/armor_bionex/${item.id}.png`;
+               else if (item.id.startsWith('arm_cel')) preview = `/assets/armor_celestra/${item.id}.png`;
+               else preview = `/assets/${item.id}.png`;
+             } else if (category === 'gears_accessories') {
+               preview = `/assets/accessories/amulets/${item.id}.png`; // fallback approx
+             } else {
+               preview = `/assets/${item.id}.png`;
+             }
+          }
+          return {
+            ...item,
+            _providerCat: 'Mobs',
+            _providerDetail: '',
+            _kegunaan: 'Crafting',
+            _howToUse: item.description || '',
+            _imageFile: null,
+            _imagePreview: preview,
+            _isDirty: false
+          }
+        })
 
         const flattenEnemies = (d) => {
           let arr = []
@@ -62,7 +80,6 @@ export default function AuditorRoom() {
             d.sectors.forEach(s => {
               if (s.mobs) arr.push(...s.mobs.map(m => ({ ...m, _providerCat: 'Mobs', _providerDetail: s.name })))
               if (s.boss) arr.push({ ...s.boss, _providerCat: 'Bosses', _providerDetail: s.name })
-              if (s.pitBoss) arr.push({ ...s.pitBoss, _providerCat: 'Bosses', _providerDetail: s.name + ' (Pit)' })
             })
           }
           if (d?.miningBoss) {
@@ -102,15 +119,15 @@ export default function AuditorRoom() {
         }
 
         setAllData({
-          items: formatRows(data.items?.items || data.items || []),
-          enemies: formatRows(flattenEnemies(data.enemies)),
-          races: formatRows(flattenRaces(data.races)),
-          jobs: formatRows(flattenJobs(data.jobs)),
+          items: formatRows(data.items?.items || data.items || [], 'items'),
+          enemies: formatRows(flattenEnemies(data.enemies), 'enemies'),
+          races: formatRows(flattenRaces(data.races), 'races'),
+          jobs: formatRows(flattenJobs(data.jobs), 'jobs'),
           gears: {
-            arctron: formatRows(flattenGears(data.gears?.arctron)),
-            bionex: formatRows(flattenGears(data.gears?.bionex)),
-            celestra: formatRows(flattenGears(data.gears?.celestra)),
-            accessories: formatRows(flattenGears(data.gears?.accessories))
+            arctron: formatRows(flattenGears(data.gears?.arctron), 'gears_arctron'),
+            bionex: formatRows(flattenGears(data.gears?.bionex), 'gears_bionex'),
+            celestra: formatRows(flattenGears(data.gears?.celestra), 'gears_celestra'),
+            accessories: formatRows(flattenGears(data.gears?.accessories), 'gears_accessories')
           }
         })
       }
@@ -253,6 +270,10 @@ export default function AuditorRoom() {
   }
 
   const activeData = getActiveArray()
+  const filteredData = activeData.filter(i => !searchTerm || (i.name && i.name.toLowerCase().includes(searchTerm.toLowerCase())) || (i.id && i.id.toLowerCase().includes(searchTerm.toLowerCase())))
+  const PAGE_SIZE = 100
+  const totalPages = Math.ceil(filteredData.length / PAGE_SIZE)
+  const paginatedData = filteredData.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)
 
   return (
     <div style={styles.overlay}>
@@ -272,12 +293,28 @@ export default function AuditorRoom() {
 
         {tab === 'gears' && (
           <div style={{ display: 'flex', gap: '8px', padding: '10px 20px', background: 'rgba(255,255,255,0.02)' }}>
-            <button style={subTab === 'arctron' ? styles.subTabActive : styles.subTab} onClick={() => setSubTab('arctron')}>Arctron</button>
-            <button style={subTab === 'bionex' ? styles.subTabActive : styles.subTab} onClick={() => setSubTab('bionex')}>Bionex</button>
-            <button style={subTab === 'celestra' ? styles.subTabActive : styles.subTab} onClick={() => setSubTab('celestra')}>Celestra</button>
-            <button style={subTab === 'accessories' ? styles.subTabActive : styles.subTab} onClick={() => setSubTab('accessories')}>Accessories</button>
+            <button style={subTab === 'arctron' ? styles.subTabActive : styles.subTab} onClick={() => {setSubTab('arctron'); setPage(0)}}>Arctron</button>
+            <button style={subTab === 'bionex' ? styles.subTabActive : styles.subTab} onClick={() => {setSubTab('bionex'); setPage(0)}}>Bionex</button>
+            <button style={subTab === 'celestra' ? styles.subTabActive : styles.subTab} onClick={() => {setSubTab('celestra'); setPage(0)}}>Celestra</button>
+            <button style={subTab === 'accessories' ? styles.subTabActive : styles.subTab} onClick={() => {setSubTab('accessories'); setPage(0)}}>Accessories</button>
           </div>
         )}
+
+        <div style={{ padding: '10px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(0,0,0,0.2)' }}>
+          <input 
+            type="text" 
+            placeholder="Cari berdasarkan nama/ID..." 
+            value={searchTerm}
+            onChange={(e) => {setSearchTerm(e.target.value); setPage(0)}}
+            style={{ padding: '8px', width: '300px', backgroundColor: 'rgba(255,255,255,0.1)', color: '#fff', border: '1px solid #00e5ff', borderRadius: '4px' }}
+          />
+          <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+            <span style={{ color: '#00e5ff', fontSize: '14px' }}>Total: {filteredData.length} baris</span>
+            <button disabled={page === 0} onClick={() => setPage(page - 1)} style={{ padding: '6px 12px', background: page === 0 ? '#333' : '#00e5ff', color: '#040915', border: 'none', borderRadius: '4px', cursor: page === 0 ? 'not-allowed' : 'pointer' }}>Prev</button>
+            <span style={{ color: '#fff' }}>Halaman {page + 1} dari {totalPages || 1}</span>
+            <button disabled={page >= totalPages - 1} onClick={() => setPage(page + 1)} style={{ padding: '6px 12px', background: page >= totalPages - 1 ? '#333' : '#00e5ff', color: '#040915', border: 'none', borderRadius: '4px', cursor: page >= totalPages - 1 ? 'not-allowed' : 'pointer' }}>Next</button>
+          </div>
+        </div>
 
         <div style={styles.content} className="no-scrollbar">
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '1000px', fontSize: '13px', color: '#c0dff0' }}>
@@ -295,7 +332,9 @@ export default function AuditorRoom() {
               </tr>
             </thead>
             <tbody>
-              {activeData.map((item, idx) => (
+              {paginatedData.map((item, localIdx) => {
+                const idx = page * PAGE_SIZE + localIdx
+                return (
                 <tr key={item.id || idx} style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
                   <td style={{ padding: '10px' }}>{idx + 1}</td>
                   
@@ -384,7 +423,7 @@ export default function AuditorRoom() {
                     )}
                   </td>
                 </tr>
-              ))}
+              )})}
             </tbody>
           </table>
         </div>
