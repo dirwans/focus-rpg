@@ -25,6 +25,7 @@ export default function LibraryModal({ onClose }) {
           <button style={tab === 'npc' ? styles.tabActive : styles.tab} onClick={() => setTab('npc')}>NPCs</button>
           <button style={tab === 'system' ? styles.tabActive : styles.tab} onClick={() => setTab('system')}>System</button>
           <button style={tab === 'equip' ? styles.tabActive : styles.tab} onClick={() => setTab('equip')}>Equipment</button>
+          <button style={tab === 'logic' ? styles.tabActive : styles.tab} onClick={() => setTab('logic')}>Logic</button>
         </div>
 
         <div style={styles.content} className="no-scrollbar">
@@ -1236,6 +1237,72 @@ export default function LibraryModal({ onClose }) {
                   <li>👥 Harus dilawan secara <strong>multiplayer</strong> atau guild.</li>
                   <li>🏆 Drop <strong>Legendary Equipment</strong> eksklusif.</li>
                   <li>⏰ Respawn setiap <strong>24 jam</strong> server time.</li>
+                </ul>
+              </div>
+            </div>
+          )}
+
+          {tab === 'logic' && (
+            <div style={styles.section}>
+              <h3 style={styles.sectionTitle}>⚙️ Core Systems & Formulas (RF Classic)</h3>
+              
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>⚔️ Combat Engine</div>
+                <ul style={styles.list}>
+                  <li><strong>Hit Chance:</strong> Accuracy / (Accuracy + Target Dodge)</li>
+                  <li><strong>Block Chance:</strong> Block / (Block + Attacker Ignore Block). Jika sukses, damage x50%.</li>
+                  <li><strong>Damage (PATK/MATK):</strong> (Attack x Skill Multiplier) - Target DEF. Minimum 1.</li>
+                  <li><strong>Critical:</strong> Jika random <= Crit Rate, maka damage x150%.</li>
+                  <li><strong>Random Variation:</strong> Final Damage berfluktuasi antara 95% ~ 105%.</li>
+                </ul>
+              </div>
+
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>📈 EXP & Leveling System</div>
+                <ul style={styles.list}>
+                  <li><strong>EXP Formula:</strong> Base EXP × Level Modifier × Server Rate × Event × Premium.</li>
+                  <li><strong>Level Modifier Penalty:</strong>
+                    <ul style={{ paddingLeft: 16, marginTop: 4 }}>
+                      <li>Beda >= 10 level (Musuh lebih kuat): 150% EXP</li>
+                      <li>Beda -4 s/d +4 level (Setara): 100% EXP</li>
+                      <li>Beda <= -10 level (Musuh lebih lemah): 50% EXP</li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>📦 Drop System & CRD</div>
+                <ul style={styles.list}>
+                  <li><strong>CRD Drop Formula:</strong> Base CRD × Level Modifier × Random(90%~110%) × Server Rate. Boss x5 ~ x20.</li>
+                  <li><strong>Independent Loot Roll:</strong> Setiap item di drop table diundi terpisah (misal Equip 5% dan Potion 30% bisa drop bersamaan).</li>
+                </ul>
+              </div>
+
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>🛡️ CP (Contribution Point) PvP</div>
+                <ul style={styles.list}>
+                  <li><strong>Syarat:</strong> Membunuh faksi musuh dengan Final Blow.</li>
+                  <li><strong>Level Modifier:</strong> Membunuh level besar (+10 Lv) dapat 150% CP. Membunuh level kecil (-10 Lv) dapat 50% CP.</li>
+                  <li><strong>Anti-Farming:</strong> Membunuh player yang sama = 100% -> 50% -> 25% -> 0% (Reset per 30 menit).</li>
+                </ul>
+              </div>
+
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>🐾 Spirit Ascension System</div>
+                <ul style={styles.list}>
+                  <li>Spirit Ascension adalah <strong>Unit Independen</strong> dengan HP, PATK/MATK, DEF, dan Level sendiri.</li>
+                  <li>Jika Spirit mati, Player tetap hidup.</li>
+                  <li>Mendapatkan EXP mandiri dan memiliki siklus AI untuk menyerang target.</li>
+                </ul>
+              </div>
+
+              <div style={styles.itemCard}>
+                <div style={styles.itemTitle}>⛏️ Mining System</div>
+                <ul style={styles.list}>
+                  <li><strong>Interval:</strong> 5 detik (Default).</li>
+                  <li><strong>Biaya:</strong> Menghabiskan Battery per siklus penambangan.</li>
+                  <li><strong>Reward:</strong> Diundi berdasarkan Drop Table Node (Misal: Ore, Arcanite, Crystal). Berhenti otomatis jika tas penuh atau baterai habis.</li>
                 </ul>
               </div>
             </div>

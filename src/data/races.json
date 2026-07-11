@@ -3,7 +3,7 @@
     "id": "arctron",
     "name": "Arctron – Cybernetic War Imperium",
     "emoji": "🤖",
-    "description": "Lahir dari koloni pertambangan yang terisolasi di gurun besi bagian utara. Bertahun-tahun hidup dalam kondisi ekstrem membuat mereka mengganti sebagian besar tubuh mereka dengan augmentasi mekanis. Mereka menciptakan pasukan elit Iron Vanguard yang bertarung tanpa rasa takut. \n\nMoto: \"Kesempurnaan dicapai melalui evolusi.\"",
+    "description": "An empire of advanced machines forged through relentless innovation. Arctron warriors excel in overwhelming firepower and possess the highest Attack among all factions.",
     "strengths": [
       "💪 +30% Firepower (ATK)",
       "🛡️ +25% Defense (DEF)",
@@ -28,7 +28,7 @@
     "id": "bionex",
     "name": "Bionex – Technocratic Human Alliance",
     "emoji": "⚙️",
-    "description": "Technocratic Human Alliance. Bangsa yang dibangun oleh para ilmuwan dan insinyur yang selamat dari Era Kehancuran. Kota-kota mereka berdiri di atas benteng terapung dan dilindungi oleh mesin tempur raksasa Titan Frame. Mereka mengutamakan logika dan inovasi. \n\nMoto: \"Pengetahuan adalah fondasi kekuatan.\"",
+    "description": "A powerful human alliance that combines cutting-edge technology with unmatched resilience. Bionex boasts the highest Health Points, allowing them to endure even the toughest battles.",
     "strengths": [
       "❤️ Highest Health Points (HP)",
       "⛏️ +50% Resource Gathering Rate",
@@ -52,7 +52,7 @@
     "id": "celestra",
     "name": "Celestra – Arcane Elven Dominion",
     "emoji": "🧝‍♀️",
-    "description": "Berasal dari hutan kristal di benua timur. Meyakini bahwa Lumina Core adalah hadiah roh alam semesta. Mereka mampu membentuk kontrak dengan makhluk energi bernama Eidolons. Mengutamakan keseimbangan alam. \n\nMoto: \"Jiwa dan alam adalah satu.\"",
+    "description": "An ancient elven civilization that draws strength from arcane magic and spiritual beings. Celestra excels in swift, devastating strikes with the highest Critical Rate among all factions.",
     "strengths": [
       "🔮 +15% Magic Power (ATK)",
       "🆙 +30% Focus EXP Rate (Meditation)",

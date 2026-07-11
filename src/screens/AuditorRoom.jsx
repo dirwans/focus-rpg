@@ -29,6 +29,20 @@ export default function AuditorRoom() {
   const [page, setPage] = useState(0)
   const [searchTerm, setSearchTerm] = useState('')
   const [simItem, setSimItem] = useState(null)
+  
+  const [targetItem, setTargetItem] = useState(null)
+  const [recipeSlots, setRecipeSlots] = useState([null, null, null, null, null])
+  const [activeSlotIndex, setActiveSlotIndex] = useState(null)
+  const [chances, setChances] = useState({ success: 65, destroy: 20, great: 10, bonus: 5 })
+  const [recipeLogs, setRecipeLogs] = useState([])
+
+  const handleSaveRecipe = () => {
+    if (!targetItem) return alert("Pilih Target Item dulu di kotak kanan atas!");
+    setRecipeLogs(prev => [`> Resep ${targetItem.name || targetItem.id} disimpan!`, ...prev].slice(0, 5));
+    setTargetItem(null);
+    setRecipeSlots([null, null, null, null, null]);
+    setActiveSlotIndex(null);
+  }
 
   // Modal State for Definition Editing
   const [showDefModal, setShowDefModal] = useState(false)
