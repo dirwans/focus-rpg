@@ -24,6 +24,7 @@ export default function AuditorRoom() {
   // UI State
   const [tab, setTab] = useState('items')
   const [subTab, setSubTab] = useState('arctron')
+  const [craftSubTab, setCraftSubTab] = useState('Shards')
   const [page, setPage] = useState(0)
   const [searchTerm, setSearchTerm] = useState('')
   const [simItem, setSimItem] = useState(null)
@@ -143,7 +144,15 @@ export default function AuditorRoom() {
 
   const getActiveArray = () => {
     if (tab === 'gears') return allData.gears[subTab] || []
-    if (tab === 'crafting') return (allData.items || []).filter(i => i.type === 'material' && !i.name.includes('Talic') && !i.name.includes('Arcanite') && i.id !== 'mat_divine_crest' && i.id !== 'mat_lucky_relic')
+    if (tab === 'crafting') {
+      let base = (allData.items || []).filter(i => i.type === 'material' && !i.name.includes('Talic') && !i.name.includes('Arcanite') && i.id !== 'mat_divine_crest' && i.id !== 'mat_lucky_relic')
+      if (craftSubTab === 'Shards') return base.filter(i => i.name.toLowerCase().includes('shard'))
+      if (craftSubTab === 'Ores') return base.filter(i => i.name.toLowerCase().includes('ore'))
+      if (craftSubTab === 'Cores') return base.filter(i => i.name.toLowerCase().includes('core'))
+      if (craftSubTab === 'Mats') return base.filter(i => i.id.toLowerCase().includes('mat_') && !i.name.toLowerCase().includes('shard') && !i.name.toLowerCase().includes('ore') && !i.name.toLowerCase().includes('core'))
+      if (craftSubTab === 'Misc') return base.filter(i => !i.name.toLowerCase().includes('shard') && !i.name.toLowerCase().includes('ore') && !i.name.toLowerCase().includes('core') && !i.id.toLowerCase().includes('mat_'))
+      return base
+    }
     if (tab === 'enhance') return (allData.items || []).filter(i => i.name.includes('Talic') || i.name.includes('Arcanite') || i.id === 'mat_divine_crest' || i.id === 'mat_lucky_relic')
     return allData[tab] || []
   }
@@ -388,7 +397,7 @@ export default function AuditorRoom() {
                                
                                <div style={{ display: 'flex', width: '100%', borderBottom: '1px solid #333', padding: '2px' }}>
                                    {['Shards', 'Ores', 'Cores', 'Mats', 'Misc'].map((t, i) => (
-                                       <div key={i} style={{ flex: 1, textAlign: 'center', padding: '4px', border: i===0 ? '1px solid #d18a42' : '1px solid transparent', cursor: 'pointer', fontSize: '10px' }}>{t}</div>
+                                       <div key={i} onClick={() => {setCraftSubTab(t); setPage(0); setSimItem(null)}} style={{ flex: 1, textAlign: 'center', padding: '6px 4px', border: craftSubTab === t ? '1px solid #d18a42' : '1px solid transparent', color: craftSubTab === t ? '#d18a42' : '#888', cursor: 'pointer', fontSize: '11px', fontWeight: craftSubTab === t ? 'bold' : 'normal', transition: 'all 0.2s' }}>{t}</div>
                                    ))}
                                </div>
 
