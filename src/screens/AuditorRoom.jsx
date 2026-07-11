@@ -470,6 +470,52 @@ export default function AuditorRoom() {
                              </div>
 
                              <div>
+                                 <div style={{ fontSize: '10px', color: '#888', marginBottom: '10px', textTransform: 'uppercase' }}>Output Stats & Grade</div>
+                                 <div style={{ background: '#1a1a1a', border: '1px solid #333', borderRadius: '4px', padding: '10px' }}>
+                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                                         <span style={{ color: '#888', fontSize: '12px' }}>Item Grade</span>
+                                         <select value={outputGrade} onChange={e => setOutputGrade(e.target.value)} style={{ background: '#0a0a0a', border: '1px solid #444', color: '#fff', padding: '4px', fontSize: '12px' }}>
+                                             <option value="Normal">Normal</option>
+                                             <option value="Rare A">Rare A</option>
+                                             <option value="Rare B">Rare B</option>
+                                             <option value="Rare C">Rare C</option>
+                                             <option value="Rare D">Rare D</option>
+                                             <option value="Relic">Relic</option>
+                                             <option value="Hero">Hero</option>
+                                         </select>
+                                     </div>
+                                     <div style={{ borderTop: '1px dashed #333', paddingTop: '10px' }}>
+                                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                                             <span style={{ color: '#888', fontSize: '12px' }}>Bonus Stats</span>
+                                             <button onClick={() => setOutputStats([...outputStats, {stat: 'Max HP', val: ''}])} style={{ background: '#222', border: '1px solid #444', color: '#00e5ff', padding: '2px 8px', borderRadius: '2px', cursor: 'pointer', fontSize: '11px' }}>+ Add Stat</button>
+                                         </div>
+                                         <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                                             {outputStats.length === 0 && <div style={{ color: '#555', fontSize: '11px', fontStyle: 'italic' }}>No extra stats.</div>}
+                                             {outputStats.map((st, i) => (
+                                                 <div key={i} style={{ display: 'flex', gap: '5px' }}>
+                                                     <select value={st.stat} onChange={(e) => { const n = [...outputStats]; n[i].stat = e.target.value; setOutputStats(n); }} style={{ flex: 1, background: '#0a0a0a', border: '1px solid #444', color: '#ccc', padding: '4px', fontSize: '11px' }}>
+                                                         <option value="Max HP">Max HP (%)</option>
+                                                         <option value="Max FP">Max FP (%)</option>
+                                                         <option value="ATK">Attack (%)</option>
+                                                         <option value="DEF">Defense (%)</option>
+                                                         <option value="Crit Rate">Crit Rate</option>
+                                                         <option value="Dodge">Dodge</option>
+                                                         <option value="Accuracy">Accuracy</option>
+                                                         <option value="Block">Block</option>
+                                                         <option value="Ignore Block">Ignore Block</option>
+                                                         <option value="All Resist">All Resist</option>
+                                                         <option value="Move Speed">Move Speed</option>
+                                                     </select>
+                                                     <input type="text" placeholder="Val (e.g. 15)" value={st.val} onChange={(e) => { const n = [...outputStats]; n[i].val = e.target.value; setOutputStats(n); }} style={{ width: '60px', background: '#0a0a0a', border: '1px solid #444', color: '#fff', padding: '4px', fontSize: '11px' }} />
+                                                     <button onClick={() => { const n = [...outputStats]; n.splice(i, 1); setOutputStats(n); }} style={{ background: '#311', border: '1px solid #522', color: '#f55', padding: '0 5px', cursor: 'pointer' }}>X</button>
+                                                 </div>
+                                             ))}
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+
+                             <div>
                                  <div style={{ fontSize: '10px', color: '#888', marginBottom: '10px', textTransform: 'uppercase' }}>Set Peluang (%)</div>
                                  <div style={{ background: '#1a1a1a', border: '1px solid #333', borderRadius: '4px', overflow: 'hidden' }}>
                                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 15px', borderBottom: '1px solid #333' }}>
