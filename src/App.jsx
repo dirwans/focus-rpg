@@ -21,6 +21,7 @@ import Mine from './screens/Mine'
 import PremiumShop from './screens/PremiumShop'
 import Ascension from './screens/Ascension'
 import Inventory from './screens/Inventory'
+import AuditorRoom from './screens/AuditorRoom'
 
 const SCREENS = { main: Main, unit: Unit, ranks: Ranks, cargo: Cargo, trade: Trade, battle: Battle, mine: Mine, premium: PremiumShop, ascension: Ascension, inventory: Inventory }
 
@@ -281,6 +282,11 @@ export default function App() {
     containerBg = 'radial-gradient(120% 65% at 50% -5%, #0c1f48 0%, #07132c 50%, #040a1c 100%)'
   } else if (race === 'celestra') {
     containerBg = 'radial-gradient(120% 65% at 50% -5%, #1a1642 0%, #100e2c 50%, #07061a 100%)'
+  }
+
+  // Secret Auditor Route (bisa lewat path atau subdomain)
+  if (window.location.pathname === '/rahasia-auditor' || window.location.hostname.startsWith('audit')) {
+    return <AuditorRoom />
   }
 
   if (loading || !hydrated || loadingSave) {
