@@ -682,7 +682,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### ðŸ› ï¸� Milestone 57: Bionex Ranger to Bionex Marksman Rename & Asset Alignment [DEPLOYED]
+### ðŸ› ï¸� Milestone 153: Bionex Ranger to Bionex Marksman Rename & Asset Alignment [DEPLOYED]
 - **Requirement**: The user noted that Bionex's ranged/agility class is named `Marksman` (matching `marksman` starting job in `jobs.json`) rather than `Ranger` (which is Celestra's and Arctron's ranged class name).
 - **Asset Renames**:
   - Renamed 50 mecha armor set `.png` files (25 in `public/assets/armor_bionex/` and 25 in `src/assets/armor_bionex/`) from `defbionexrangerlv*.png` to `defbionexmarksmanlv*.png`.
@@ -695,8 +695,8 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### ðŸ”� Milestone 58: Bionex Rangerâ†’Marksman Rename Verification Pass [DEPLOYED]
-- **Context**: User asked to double-check that Milestone 57's rename was complete across the entire platform, including scripts and asset filenames â€” not just the main code paths.
+### ðŸ”� Milestone 154: Bionex Rangerâ†’Marksman Rename Verification Pass [DEPLOYED]
+- **Context**: User asked to double-check that Milestone 153's rename was complete across the entire platform, including scripts and asset filenames â€” not just the main code paths.
 - **Audit**: Searched all of `src/`, `public/`, and `server.js` for any remaining `bionex_ranger`/`bionex-ranger`/`bionexranger` text or filenames.
 - **Found 2 residual items** M57 missed:
   1. `src/components/TransparentSprite.jsx` â€” an internal variable was still named `isBionexRanger` even though its check already correctly read `src.includes('bionex_marksman')`. Cosmetic only (didn't affect behavior), renamed to `isBionexMarksman` for consistency.
@@ -705,7 +705,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 
 ---
 
-### ðŸ›¡ï¸� Milestone 59: Shield Sprites â€” Ruler-Line Removal + Fit-to-Frame Fix (All 3 Factions) [DEPLOYED]
+### ðŸ›¡ï¸� Milestone 155: Shield Sprites â€” Ruler-Line Removal + Fit-to-Frame Fix (All 3 Factions) [DEPLOYED]
 - **Bug**: User reported shields across all factions still rendered tiny in the Cargo/Inventory gear slots even after M49's 320Ã—320 normalization pass. Root cause: several shield source images (`lv1/lv32/lv55` Bionex & Celestra, `lv10` Arctron) contained a leftover 1â€“4px-thick, near-full-canvas-width straight line artifact â€” almost certainly a stray reference/ruler guide left over from the original asset-extraction tool â€” that got included in the tight-crop bounding box, making the actual shield content occupy only 15â€“19% of the padded square (squareness as low as 0.18). One file (`lv42arctronshielddef.png`) had the line *fused directly onto* the shield's main silhouette (touching pixels, same connected component), so it couldn't be isolated by simple connected-component removal.
 - **Fix**: Rebuilt the shield pipeline from the clean git HEAD (post-M49) source for all 14 shield files (3 factions Ã— ~4â€“5 tiers): applied morphological opening (5Ã—5 structuring element â€” erode then dilate) to strip any line/stroke thinner than 5px while preserving solid shield silhouettes, even when fused to the main shape; dropped any surviving fragment under 15% of the largest remaining blob's size (stray watermark/badge specks); then ran the same rotation-search-to-maximize-squareness technique from M47/M50, tight-crop, 10% pad, LANCZOS resize to 320Ã—320.
 - **Result**: Squareness now 0.94â€“1.0 across all 14 files (up from as low as 0.18). All shields now occupy a consistent, prominent proportion of their gear slot, matching armor/weapon icon scale.
@@ -2033,7 +2033,7 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
 - **Build**: Verified `npm run build` compiles cleanly.
 ---
 
-### ?? Milestone 57: Nginx SSL, Lazy Loading, and NPC UI Overhaul [DEPLOYED]
+### ?? Milestone 153: Nginx SSL, Lazy Loading, and NPC UI Overhaul [DEPLOYED]
 - **Nginx SSL Configuration (ix_nginx.conf)**:
   - Configured SSL for the 
 ip.io domain to ensure secure connections and avoid routing errors on the server.
@@ -2051,7 +2051,7 @@ ip.io domain to ensure secure connections and avoid routing errors on the server
 
 ---
 
-### ?? Milestone 58: Auditor Room Crafting Simulator Layout [DEPLOYED]
+### ?? Milestone 154: Auditor Room Crafting Simulator Layout [DEPLOYED]
 - **Responsive UI Fixes (AuditorRoom.jsx)**:
   - Implemented horizontal swipe layouts (overflowX: 'auto' and 
 owrap) to the tabs and sub-tabs.
@@ -2066,7 +2066,7 @@ fdatabase.net/crafting/ 3-column UI layout.
 
 ---
 
-### ?? Milestone 59: Hotfix Auditor Crafting UI [DEPLOYED]
+### ?? Milestone 155: Hotfix Auditor Crafting UI [DEPLOYED]
 - **Bug Fixes (AuditorRoom.jsx)**:
   - Fixed broken image paths for Race logos by using direct imports (rctronLogo, ionexLogo, celestraLogo).
   - Added a visual fallback for materials without images (displays the first 8 characters of the item's name inside the box).
