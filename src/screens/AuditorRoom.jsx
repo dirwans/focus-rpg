@@ -341,7 +341,7 @@ export default function AuditorRoom() {
                   {/* IMAGE & UPLOAD */}
                   <td style={{ padding: '10px', textAlign: 'center' }}>
                     {item._imagePreview ? (
-                      <img src={item._imagePreview} alt="item" style={{ width: '40px', height: '40px', objectFit: 'contain', backgroundColor: 'rgba(0,0,0,0.5)', borderRadius: '4px', marginBottom: '5px' }} />
+                      <img loading="lazy" src={item._imagePreview} alt="item" style={{ width: '40px', height: '40px', objectFit: 'contain', backgroundColor: 'rgba(0,0,0,0.5)', borderRadius: '4px', marginBottom: '5px' }} />
                     ) : (
                       <div style={{ width: '40px', height: '40px', backgroundColor: 'rgba(0,0,0,0.5)', borderRadius: '4px', margin: '0 auto 5px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>?</div>
                     )}

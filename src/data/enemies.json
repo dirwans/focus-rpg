@@ -413,7 +413,7 @@
     "regen": 500000,
     "expReward": 100000,
     "crdReward": 50000,
-    "image": ""
+    "image": "/ref/Trinity-Mine/Trinity-Core-Keeper-Boss-Kaelgorath.png"
   },
   "miningGuardians": [
     {
@@ -422,7 +422,8 @@
       "hp": 11815,
       "atk": 8959,
       "def": 1100,
-      "dodge": 11
+      "dodge": 11,
+      "image": "/ref/Trinity-Mine/1F-SentryDementor.png"
     },
     {
       "floor": 2,
@@ -430,7 +431,8 @@
       "hp": 11815,
       "atk": 8959,
       "def": 1100,
-      "stun": 11
+      "stun": 11,
+      "image": "/ref/Trinity-Mine/2F-BorgDementor.png"
     },
     {
       "floor": 3,
@@ -438,7 +440,8 @@
       "hp": 11815,
       "atk": 8959,
       "def": 1100,
-      "selfHeal": 11
+      "selfHeal": 11,
+      "image": "/ref/Trinity-Mine/3F-MutationDementor.png"
     },
     {
       "floor": 4,
@@ -446,7 +449,8 @@
       "hp": 11815,
       "atk": 8959,
       "def": 1100,
-      "doubleHitChance": 11
+      "doubleHitChance": 11,
+      "image": "/ref/Trinity-Mine/4F-OrcDementor.png"
     },
     {
       "floor": 5,
@@ -457,7 +461,8 @@
       "dodge": 11,
       "stun": 11,
       "selfHeal": 11,
-      "doubleHitChance": 11
+      "doubleHitChance": 11,
+      "image": "/ref/Trinity-Mine/5F-GhostDementor.png"
     },
     {
       "floor": 6,
@@ -467,7 +472,8 @@
       "def": 2000,
       "critical": 25,
       "dodge": 25,
-      "stun": 20
+      "stun": 20,
+      "image": "/ref/Trinity-Mine/undefined"
     }
   ]
 }
