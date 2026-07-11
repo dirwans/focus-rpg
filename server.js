@@ -1190,12 +1190,13 @@ try { mkdirSync(DRAFTS_IMG_DIR, { recursive: true }) } catch {}
 
 app.get('/api/audit/all_data', (req, res) => {
   try {
+    const SRC_DATA_DIR = join(__dirname, 'src', 'data')
     const readJson = (filename) => {
-      try { return JSON.parse(readFileSync(join(DATA_DIR, filename), 'utf8')) }
+      try { return JSON.parse(readFileSync(join(SRC_DATA_DIR, filename), 'utf8')) }
       catch { return null }
     }
     const readGear = (filename) => {
-      try { return JSON.parse(readFileSync(join(DATA_DIR, 'gears', filename), 'utf8')) }
+      try { return JSON.parse(readFileSync(join(SRC_DATA_DIR, 'gears', filename), 'utf8')) }
       catch { return null }
     }
 
