@@ -5,6 +5,10 @@ export default function AuditorRoom() {
   const [loggedIn, setLoggedIn] = useState(false)
   const [loading, setLoading] = useState(false)
   
+  useEffect(() => {
+    document.title = "Audit Database"
+  }, [])
+
   // All Data
   const [allData, setAllData] = useState({
     items: [],
