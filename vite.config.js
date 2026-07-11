@@ -9,4 +9,7 @@ export default defineConfig({
       '/api': { target: 'http://localhost:4001', changeOrigin: true },
     },
   },
+  build: {
+    assetsInlineLimit: 0
+  }
 })

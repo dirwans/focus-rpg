@@ -2081,3 +2081,8 @@ fdatabase.net/crafting/ 3-column UI layout.
 ### ?? Hotfix: Material Background & Tint Calibration [DEPLOYED]
 - **Background Removal**: The previous AI-generated material assets contained a fake checkerboard background which caused the Python script to tint them as solid color blocks. Ran embg on the user's reference sprite sheet (	opisshard-bottomisore.png) to extract pure alpha shard and ore.
 - **Re-Generation**: Re-applied the element color tint matrix and grade glow to the true alpha sprites, resolving the opaque square issue and restoring the intended transparent crystal aesthetic for all 30 materials.
+
+### ? Milestone 36: Neon Sprite Preservation System [DEPLOYED]
+- **Vite Build Optimization**: Updated ite.config.js to set ssetsInlineLimit: 0, completely preventing Vite from downscaling or converting high-res sprite images into base64 blobs, which was destroying thin 1-2px neon details.
+- **CSS Image Rendering Policies**: Applied image-rendering: pixelated and crisp-edges onto the Noctyrna sprite in Ascension.jsx to force the browser to maintain pixel sharpness when scaling down the 700px image to the 120px container bounds.
+- **Custom Glow Injection**: Built custom nested drop-shadow CSS filters (#a855f7 and #7c3aed) specifically for Noctyrna, and paired it with a deep-black (#0a0014) container background to amplify the glow and contrast. This prevents the semi-transparent neon from being washed out by surrounding bright UI elements.

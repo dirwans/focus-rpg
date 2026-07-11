@@ -388,7 +388,7 @@ export default function Ascension() {
                           <div style={{
                             display: 'flex', justifyContent: 'center', alignItems: 'center',
                             marginBottom: 10,
-                            background: isUnlocked ? colors.bgLight : 'rgba(0,0,0,0.2)',
+                            background: isUnlocked ? (evo.id.includes('noctyrna') ? '#0a0014' : colors.bgLight) : 'rgba(0,0,0,0.2)',
                             borderRadius: 8,
                             padding: '8px 0',
                             border: isUnlocked ? `1px solid ${colors.border}4d` : '1px solid rgba(255,255,255,0.05)',
@@ -398,11 +398,13 @@ export default function Ascension() {
                               src={evoImg}
                               alt={evo.name}
                               style={{
+                                imageRendering: evo.id.includes('noctyrna') ? 'pixelated' : 'auto',
                                 maxHeight: 120,
                                 maxWidth: '85%',
                                 objectFit: 'contain',
-                                filter: !levelMet ? 'brightness(0.75) drop-shadow(0 0 5px rgba(255,255,255,0.1))' : isUnlocked ? `drop-shadow(0 0 15px ${colors.accent}) brightness(1.2)` : `drop-shadow(0 0 8px ${colors.border}) brightness(1.05)`,
-                                transition: 'filter 0.3s ease',
+                                opacity: isUnlocked ? 1 : 0.4,
+                                filter: isUnlocked ? (evo.id.includes('noctyrna') ? 'brightness(1.15) contrast(1.3) drop-shadow(0 0 8px #a855f7) drop-shadow(0 0 16px #7c3aed)' : `drop-shadow(0 0 15px ${colors.accent}) brightness(1.2)`) : 'grayscale(100%)',
+                                transition: 'all 0.3s ease',
                               }}
                             />
                           </div>
