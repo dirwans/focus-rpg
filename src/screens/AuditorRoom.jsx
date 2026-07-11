@@ -357,159 +357,149 @@ export default function AuditorRoom() {
 
         <div style={{...(tab === 'crafting' ? {padding: 0} : styles.content)}} className="no-scrollbar">
           {tab === 'crafting' ? (
-            <div className="simulator-container">
-               {/* LEFT COLUMN - FILTERS */}
-               <div className="simulator-filters" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                   <div style={{ border: '1px solid #333', background: '#141414', borderRadius: '4px' }}>
-                       <div style={{ display: 'flex', justifyContent: 'space-between', padding: '10px', borderBottom: '1px solid #333' }}>
-                           <span style={{ fontWeight: 'bold', color: '#fff', fontSize: '14px' }}>Filters</span>
-                           <button onClick={()=>{setSearchTerm(''); setPage(0); setSimItem(null);}} style={{ background: '#222', border: '1px solid #444', color: '#aaa', padding: '2px 8px', borderRadius: '2px', cursor: 'pointer', fontSize: '12px' }}>Reset</button>
-                       </div>
-                       <div style={{ padding: '15px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
-                           <div>
-                               <div style={{ fontSize: '10px', color: '#888', marginBottom: '5px', textTransform: 'uppercase' }}>Search</div>
-                               <input type="text" placeholder="Recipe, material, output name" value={searchTerm} onChange={(e)=>{setSearchTerm(e.target.value); setPage(0)}} style={{ width: '100%', padding: '8px', background: '#1a1a1a', border: '1px solid #333', color: '#fff', borderRadius: '2px', fontSize: '12px', boxSizing: 'border-box' }}/>
-                           </div>
-                           <div>
-                               <div style={{ fontSize: '10px', color: '#888', marginBottom: '5px', textTransform: 'uppercase' }}>Crafting Mastery</div>
-                               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                   <input type="range" min="1" max="99" defaultValue="99" style={{ flex: 1, accentColor: '#d18a42' }} />
-                                   <div style={{ border: '1px solid #d18a42', color: '#d18a42', padding: '2px 6px', fontSize: '12px', borderRadius: '2px' }}>99</div>
-                               </div>
-                           </div>
-                           <div>
-                               <div style={{ fontSize: '10px', color: '#888', marginBottom: '5px', textTransform: 'uppercase' }}>Race Filter</div>
-                               <div style={{ display: 'flex', gap: '5px' }}>
+              <div className="simulator-container">
+                 {/* LEFT COLUMN - FILTERS & LOGS */}
+                 <div className="simulator-filters" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                     <div style={{ border: '1px solid #333', background: '#141414', borderRadius: '4px' }}>
+                         <div style={{ display: 'flex', justifyContent: 'space-between', padding: '10px', borderBottom: '1px solid #333' }}>
+                             <span style={{ fontWeight: 'bold', color: '#fff', fontSize: '14px' }}>Filter & Logs</span>
+                         </div>
+                         <div style={{ padding: '15px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                            <div>
+                                <div style={{ fontSize: '10px', color: '#888', marginBottom: '5px', textTransform: 'uppercase' }}>Race Filter</div>
+                                <div style={{ display: 'flex', gap: '5px' }}>
                                    <button onClick={() => setCraftRaceFilter(p => p === 'arctron' ? 'all' : 'arctron')} style={{ flex: 1, background: '#1a1a1a', border: craftRaceFilter === 'arctron' ? '1px solid #d18a42' : '1px solid #333', padding: '10px', display: 'flex', justifyContent: 'center', cursor: 'pointer', transition: 'all 0.2s', opacity: craftRaceFilter === 'arctron' || craftRaceFilter === 'all' ? 1 : 0.3 }}><img src={arctronLogo} className="arctron-logo-img" style={{height:'20px', objectFit: 'contain'}}/></button>
                                    <button onClick={() => setCraftRaceFilter(p => p === 'bionex' ? 'all' : 'bionex')} style={{ flex: 1, background: '#1a1a1a', border: craftRaceFilter === 'bionex' ? '1px solid #d18a42' : '1px solid #333', padding: '10px', display: 'flex', justifyContent: 'center', cursor: 'pointer', transition: 'all 0.2s', opacity: craftRaceFilter === 'bionex' || craftRaceFilter === 'all' ? 1 : 0.3 }}><img src={bionexLogo} className="bionex-logo-img" style={{height:'20px', objectFit: 'contain'}}/></button>
                                    <button onClick={() => setCraftRaceFilter(p => p === 'celestra' ? 'all' : 'celestra')} style={{ flex: 1, background: '#1a1a1a', border: craftRaceFilter === 'celestra' ? '1px solid #d18a42' : '1px solid #333', padding: '10px', display: 'flex', justifyContent: 'center', cursor: 'pointer', transition: 'all 0.2s', opacity: craftRaceFilter === 'celestra' || craftRaceFilter === 'all' ? 1 : 0.3 }}><img src={celestraLogo} className="celestra-logo-img" style={{height:'20px', objectFit: 'contain'}}/></button>
-                               </div>
-                           </div>
-                           <div>
-                               <div style={{ fontSize: '10px', color: '#888', marginBottom: '5px', textTransform: 'uppercase' }}>Attempts</div>
-                               <div style={{ background: '#1a1a1a', border: '1px solid #333', padding: '10px', fontSize: '12px', color: '#666', minHeight: '60px' }}>
-                                   Click an item to open Database Editor.
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-               </div>
+                                </div>
+                            </div>
+                         </div>
+                     </div>
+                     <div style={{ border: '1px solid #333', background: '#141414', borderRadius: '4px', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                         <div style={{ padding: '10px', borderBottom: '1px solid #333', color: '#fff', fontSize: '12px', fontWeight: 'bold' }}>📝 LOG PENYIMPANAN</div>
+                         <div style={{ padding: '15px', color: '#888', fontSize: '12px', flex: 1, overflowY: 'auto' }}>
+                             {recipeLogs.length === 0 ? "Belum ada resep yang disimpan." : recipeLogs.map((log, idx) => (
+                               <div key={idx} style={{ marginBottom: '8px', color: '#00ff88' }}>{log}</div>
+                             ))}
+                         </div>
+                     </div>
+                 </div>
 
-               {/* CENTER COLUMN - GRID */}
-               <div className="simulator-grid" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                   <div style={{ border: '1px solid #333', background: '#141414', borderRadius: '4px', display: 'flex', flexDirection: 'column', flex: 1 }}>
-                       <div style={{ padding: '10px', borderBottom: '1px solid #333', fontWeight: 'bold', color: '#fff', fontSize: '14px' }}>Tool Kit</div>
-                       <div style={{ padding: '15px', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                           <div style={{ display: 'flex', gap: '15px', background: '#1a1a1a', padding: '15px', border: '1px solid #222', borderRadius: '4px', alignItems: 'center' }}>
-                               <div style={{ width: '40px', height: '40px', background: '#222', border: '1px solid #444', padding: '2px', flexShrink: 0, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                   <img src="/assets/mat_ore_refined.png" style={{width:'80%', height:'80%', objectFit:'contain', filter: 'grayscale(0.5)'}} />
-                               </div>
-                               <div style={{ flex: 1 }}>
-                                   <div style={{ color: '#fff', fontWeight: 'bold', fontSize: '14px' }}>Database Craft Editor</div>
-                                   <div style={{ color: '#888', fontSize: '12px', marginTop: '4px' }}>Tool for configuring item crafting requirements and logic. Useable only by the Admin.</div>
-                               </div>
-                           </div>
+                 {/* MIDDLE COLUMN - MATERIALS DB */}
+                 <div className="simulator-middle">
+                     <div style={{ border: '1px solid #333', background: '#141414', borderRadius: '4px', display: 'flex', flexDirection: 'column', height: '100%' }}>
+                         <div style={{ padding: '10px', display: 'flex', alignItems: 'center', gap: '15px', borderBottom: '1px solid #333', background: '#1a1a1a' }}>
+                             <img src="/assets/celestra_specialist_portrait.png" style={{ width: '30px', height: '30px', objectFit: 'cover' }} />
+                             <div>
+                                 <div style={{ color: '#fff', fontSize: '14px', fontWeight: 'bold' }}>Database Craft Editor</div>
+                                 <div style={{ color: '#888', fontSize: '11px' }}>Tool for configuring item crafting requirements and logic. Useable only by the Admin.</div>
+                             </div>
+                         </div>
+                         <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1 }}>
+                             <div style={{ width: '100%', maxWidth: '350px', background: '#0a0a0a', border: '1px solid #333', borderRadius: '4px', display: 'flex', flexDirection: 'column' }}>
+                                 <div style={{ textAlign: 'center', padding: '10px', color: '#fff', fontSize: '13px', borderBottom: '1px solid #333' }}>Audit Materials</div>
+                                 <div style={{ display: 'flex', borderBottom: '1px solid #333' }}>
+                                     {['Shards', 'Ores', 'Cores', 'Mats', 'Misc'].map(cst => (
+                                         <div key={cst} onClick={() => {setCraftSubTab(cst); setPage(0)}} style={{ flex: 1, textAlign: 'center', padding: '8px 0', fontSize: '11px', cursor: 'pointer', color: craftSubTab === cst ? '#d18a42' : '#888', borderBottom: craftSubTab === cst ? '2px solid #d18a42' : '2px solid transparent' }}>{cst}</div>
+                                     ))}
+                                 </div>
+                                 <div style={{ padding: '15px', display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '8px', minHeight: '220px' }}>
+                                     {paginatedData.map((item, idx) => (
+                                         <div key={idx} onClick={() => {
+                                            if (activeSlotIndex !== null) {
+                                                const newSlots = [...recipeSlots];
+                                                newSlots[activeSlotIndex] = item;
+                                                setRecipeSlots(newSlots);
+                                                setActiveSlotIndex(null); 
+                                            } else {
+                                                setTargetItem(item);
+                                            }
+                                         }} style={{ aspectRatio: '1/1', background: '#1a1a1a', border: '1px solid #444', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
+                                             {item._imagePreview && <img src={item._imagePreview} style={{ width: '80%', height: '80%', objectFit: 'contain' }} />}
+                                         </div>
+                                     ))}
+                                     {Array.from({length: Math.max(0, 20 - paginatedData.length)}).map((_, i) => (
+                                         <div key={`empty-${i}`} style={{ aspectRatio: '1/1', border: '1px solid #222' }}></div>
+                                     ))}
+                                 </div>
+                                 <div style={{ display: 'flex', padding: '10px', borderTop: '1px solid #333', color: '#888', fontSize: '12px' }}>
+                                     <button disabled={page === 0} onClick={() => setPage(p => p - 1)} style={{ background: 'none', border: 'none', color: page === 0 ? '#444' : '#888', cursor: page === 0 ? 'default' : 'pointer' }}>Back</button>
+                                     <div style={{ flex: 1, textAlign: 'center', color: '#d18a42' }}>{page + 1} / {totalPages || 1}</div>
+                                     <button disabled={page >= totalPages - 1} onClick={() => setPage(p => p + 1)} style={{ background: 'none', border: 'none', color: page >= totalPages - 1 ? '#444' : '#888', cursor: page >= totalPages - 1 ? 'default' : 'pointer' }}>Next</button>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
 
-                           <div style={{ marginTop: '20px', background: '#1a1a1a', border: '1px solid #333', width: '280px', margin: '20px auto 0', display: 'flex', flexDirection: 'column', alignItems: 'center', flexShrink: 0 }}>
-                               <div style={{ padding: '8px', borderBottom: '1px solid #333', width: '100%', textAlign: 'center', fontSize: '12px', color: '#aaa', fontWeight: 'bold' }}>Audit Materials</div>
-                               
-                               <div style={{ display: 'flex', width: '100%', borderBottom: '1px solid #333', padding: '2px' }}>
-                                   {['Shards', 'Ores', 'Cores', 'Mats', 'Misc'].map((t, i) => (
-                                       <div key={i} onClick={() => {setCraftSubTab(t); setPage(0); setSimItem(null)}} style={{ flex: 1, textAlign: 'center', padding: '6px 4px', border: craftSubTab === t ? '1px solid #d18a42' : '1px solid transparent', color: craftSubTab === t ? '#d18a42' : '#888', cursor: 'pointer', fontSize: '11px', fontWeight: craftSubTab === t ? 'bold' : 'normal', transition: 'all 0.2s' }}>{t}</div>
-                                   ))}
-                               </div>
+                 {/* RIGHT COLUMN - RECIPE EDITOR */}
+                 <div className="simulator-right">
+                     <div style={{ border: '1px solid #333', background: '#141414', borderRadius: '4px', height: '100%', display: 'flex', flexDirection: 'column' }}>
+                         <div style={{ padding: '10px', borderBottom: '1px solid #333', color: '#fff', fontSize: '14px', fontWeight: 'bold' }}>Recipe Editor</div>
+                         <div style={{ padding: '20px', flex: 1, display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                             
+                             <div style={{ display: 'flex', alignItems: 'center', gap: '15px', background: '#1a1a1a', border: '1px solid #333', padding: '15px', borderRadius: '4px' }}>
+                                 <div onClick={() => setTargetItem(null)} style={{ width: '40px', height: '40px', border: '1px solid #444', background: '#0a0a0a', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
+                                     {targetItem ? (targetItem._imagePreview ? <img src={targetItem._imagePreview} style={{ width: '80%', height: '80%', objectFit: 'contain' }} /> : 'X') : <span style={{color: '#444'}}>?</span>}
+                                 </div>
+                                 <div style={{ flex: 1 }}>
+                                     <div style={{ fontSize: '10px', color: '#888', textTransform: 'uppercase' }}>Target Item (Hasil)</div>
+                                     <div style={{ color: '#fff', fontSize: '16px', fontWeight: 'bold' }}>{targetItem ? targetItem.name || targetItem.id : 'Pilih dari Database'}</div>
+                                 </div>
+                             </div>
 
-                               <div style={{ padding: '10px', display: 'grid', gridTemplateColumns: 'repeat(5, 40px)', gap: '4px' }}>
-                                   {Array.from({length: 20}).map((_, i) => {
-                                       const item = paginatedData[i];
-                                       const hasImage = item && (item._imagePreview || item.image || item.icon);
-                                       return (
-                                           <div key={i} title={item?.name || 'Empty Slot'} onClick={() => {
-                                               if (item) {
-                                                   setSimItem(item);
-                                                   const actIdx = activeData.findIndex(d => d.id === item.id);
-                                                   if (actIdx >= 0) openDefModal(actIdx);
-                                               }
-                                           }} style={{ width: '40px', height: '40px', background: '#222', border: simItem?.id === item?.id ? '1px solid #d18a42' : '1px solid #444', cursor: item ? 'pointer' : 'default', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
-                                               {item && hasImage && <img loading="lazy" src={item._imagePreview || item.image || item.icon} style={{ width: '80%', height: '80%', objectFit: 'contain' }} />}
-                                               {item && !hasImage && <div style={{ fontSize: '9px', color: '#888', textAlign: 'center', lineHeight: '1', wordBreak: 'break-all', padding: '2px' }}>{item.name?.substring(0, 8)}</div>}
-                                               {!item && <div style={{width:'100%', height:'100%', background: `linear-gradient(135deg, #22a 0%, #222 49%, #333 50%, #222 51%)`, opacity: 0.2}}></div>}
-                                           </div>
-                                       )
-                                   })}
-                               </div>
+                             <div>
+                                 <div style={{ fontSize: '10px', color: '#888', marginBottom: '10px', textTransform: 'uppercase' }}>Required Materials</div>
+                                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                                     {recipeSlots.map((slot, idx) => (
+                                         <div key={idx} onClick={() => setActiveSlotIndex(idx === activeSlotIndex ? null : idx)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: activeSlotIndex === idx ? '#2a2a2a' : '#1a1a1a', border: activeSlotIndex === idx ? '1px solid #00e5ff' : '1px solid #333', padding: '10px', borderRadius: '4px', cursor: 'pointer', minHeight: '60px' }}>
+                                            {slot ? (
+                                                <>
+                                                  {slot._imagePreview && <img src={slot._imagePreview} style={{ width: '25px', height: '25px', objectFit: 'contain', marginBottom: '5px' }} />}
+                                                  <div style={{ color: '#ccc', fontSize: '11px', textAlign: 'center' }}>{slot.name || slot.id}</div>
+                                                </>
+                                            ) : (
+                                                <>
+                                                  <div style={{ color: activeSlotIndex === idx ? '#00e5ff' : '#444', fontSize: '20px', marginBottom: '2px' }}>+</div>
+                                                  <div style={{ color: '#666', fontSize: '11px' }}>Slot {idx + 1}</div>
+                                                </>
+                                            )}
+                                         </div>
+                                     ))}
+                                 </div>
+                             </div>
 
-                               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', padding: '5px 15px', borderTop: '1px solid #333', fontSize: '12px' }}>
-                                   <span onClick={() => page > 0 && setPage(page - 1)} style={{ cursor: page > 0 ? 'pointer' : 'default', color: page > 0 ? '#fff' : '#555', padding: '4px 8px' }}>Back</span>
-                                   <span style={{ color: '#d18a42', fontWeight: 'bold' }}>{page + 1} / {totalPages || 1}</span>
-                                   <span onClick={() => page < totalPages - 1 && setPage(page + 1)} style={{ cursor: page < totalPages - 1 ? 'pointer' : 'default', color: page < totalPages - 1 ? '#fff' : '#555', padding: '4px 8px' }}>Next</span>
-                               </div>
+                             <div>
+                                 <div style={{ fontSize: '10px', color: '#888', marginBottom: '10px', textTransform: 'uppercase' }}>Set Peluang (%)</div>
+                                 <div style={{ background: '#1a1a1a', border: '1px solid #333', borderRadius: '4px', overflow: 'hidden' }}>
+                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 15px', borderBottom: '1px solid #333' }}>
+                                         <div style={{ color: '#7ab0d0', fontSize: '13px' }}>Success Base</div>
+                                         <input type="number" value={chances.success} onChange={(e) => setChances(p => ({...p, success: e.target.value}))} style={{ background: '#0a0a0a', border: '1px solid #444', color: '#fff', width: '50px', textAlign: 'right', padding: '4px' }} />
+                                     </div>
+                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 15px', borderBottom: '1px solid #333' }}>
+                                         <div style={{ color: '#888', fontSize: '13px' }}>Failure Destroy</div>
+                                         <input type="number" value={chances.destroy} onChange={(e) => setChances(p => ({...p, destroy: e.target.value}))} style={{ background: '#0a0a0a', border: '1px solid #444', color: '#fff', width: '50px', textAlign: 'right', padding: '4px' }} />
+                                     </div>
+                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 15px', borderBottom: '1px solid #333' }}>
+                                         <div style={{ color: '#888', fontSize: '13px' }}>Great Success</div>
+                                         <input type="number" value={chances.great} onChange={(e) => setChances(p => ({...p, great: e.target.value}))} style={{ background: '#0a0a0a', border: '1px solid #444', color: '#fff', width: '50px', textAlign: 'right', padding: '4px' }} />
+                                     </div>
+                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 15px' }}>
+                                         <div style={{ color: '#888', fontSize: '13px' }}>Bonus Roll</div>
+                                         <input type="number" value={chances.bonus} onChange={(e) => setChances(p => ({...p, bonus: e.target.value}))} style={{ background: '#0a0a0a', border: '1px solid #444', color: '#fff', width: '50px', textAlign: 'right', padding: '4px' }} />
+                                     </div>
+                                 </div>
+                             </div>
 
-                               <div style={{ width: '100%', borderTop: '1px solid #333', fontSize: '12px' }}>
-                                   <div style={{ display: 'flex', borderBottom: '1px solid #333' }}>
-                                       <div style={{ padding: '6px 10px', color: '#aaa', width: '60px' }}>Main</div>
-                                       <div style={{ padding: '6px 10px', color: '#fff', flex: 1, textAlign: 'right', background: '#111', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{simItem ? `1 ${simItem.name}` : '-'}</div>
-                                   </div>
-                                   <div style={{ display: 'flex' }}>
-                                       <div style={{ padding: '6px 10px', color: '#aaa', width: '60px' }}>Sub</div>
-                                       <div style={{ padding: '6px 10px', color: '#fff', flex: 1, textAlign: 'right', background: '#111', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>-</div>
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-               </div>
+                             <button onClick={handleSaveRecipe} style={{ background: '#00e5ff', color: '#040915', border: 'none', padding: '15px', borderRadius: '4px', fontWeight: 'bold', fontSize: '14px', cursor: 'pointer', marginTop: 'auto' }}>
+                                 💾 SAVE RECIPE
+                             </button>
+                         </div>
+                     </div>
+                 </div>
+              </div>
 
-               {/* RIGHT COLUMN - RESULT */}
-               <div className="simulator-result" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                   <div className="simulator-result-inner" style={{ border: '1px solid #333', background: '#141414', borderRadius: '4px' }}>
-                       <div style={{ padding: '10px', borderBottom: '1px solid #333', fontWeight: 'bold', color: '#fff', fontSize: '14px' }}>Craft Result</div>
-                       <div style={{ padding: '15px' }}>
-                           <div style={{ display: 'flex', gap: '15px', alignItems: 'center', background: '#1a1a1a', padding: '10px', border: '1px solid #222', borderRadius: '4px' }}>
-                               <div style={{ width: '48px', height: '48px', background: '#222', border: '1px solid #444', display: 'flex', justifyContent: 'center', alignItems: 'center', flexShrink: 0 }}>
-                                   {simItem && <img src={simItem._imagePreview || simItem.image || simItem.icon} style={{ width: '80%', height: '80%', objectFit: 'contain' }} />}
-                               </div>
-                               <div style={{ flex: 1, minWidth: 0 }}>
-                                   <div style={{ fontSize: '10px', color: '#888', textTransform: 'uppercase' }}>{simItem?.type || 'TYPE'}</div>
-                                   <div style={{ fontSize: '15px', fontWeight: 'bold', color: '#fff', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{simItem?.name || 'Select an item'}</div>
-                               </div>
-                           </div>
-
-                           <div style={{ marginTop: '20px' }}>
-                               <div style={{ fontSize: '10px', color: '#888', marginBottom: '10px', textTransform: 'uppercase', fontWeight: 'bold', letterSpacing: '0.5px' }}>Materials</div>
-                               <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-                                   <div style={{ flex: '1 1 100px', background: '#1a1a1a', border: '1px solid #333', padding: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px', borderRadius: '4px' }}>
-                                       <div style={{ width: '32px', height: '32px', background: '#222', border: '1px solid #444', borderRadius: '2px' }}></div>
-                                       <div style={{ fontSize: '11px', color: '#ccc', textAlign: 'center', lineHeight: '1.2' }}>Stat Block A</div>
-                                       <div style={{ fontSize: '10px', color: '#666' }}>1 required</div>
-                                   </div>
-                                   <div style={{ flex: '1 1 100px', background: '#1a1a1a', border: '1px solid #333', padding: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px', borderRadius: '4px' }}>
-                                       <div style={{ width: '32px', height: '32px', background: '#222', border: '1px solid #444', borderRadius: '2px' }}></div>
-                                       <div style={{ fontSize: '11px', color: '#ccc', textAlign: 'center', lineHeight: '1.2' }}>Stat Block B</div>
-                                       <div style={{ fontSize: '10px', color: '#666' }}>1 required</div>
-                                   </div>
-                               </div>
-                           </div>
-
-                           <div style={{ marginTop: '20px' }}>
-                               <div style={{ fontSize: '10px', color: '#888', marginBottom: '10px', textTransform: 'uppercase', fontWeight: 'bold', letterSpacing: '0.5px' }}>Output Formula</div>
-                               <div style={{ border: '1px solid #333', borderRadius: '4px', overflow: 'hidden' }}>
-                                   {['Success Base', 'Failure Destroy', 'Great Success', 'Bonus Roll'].map((outc, idx) => (
-                                       <div key={idx} style={{ display: 'flex', alignItems: 'center', padding: '8px 12px', borderBottom: idx < 3 ? '1px solid #333' : 'none', background: idx === 0 ? 'linear-gradient(90deg, rgba(30,50,90,0.5) 0%, transparent 100%)' : '#1a1a1a' }}>
-                                           <div style={{ width: '20px', height: '20px', background: '#222', border: '1px solid #444', marginRight: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                              {simItem && idx === 0 && <img src={simItem._imagePreview || simItem.image || simItem.icon} style={{ width: '80%', height: '80%', objectFit: 'contain' }} />}
-                                           </div>
-                                           <div style={{ flex: 1, fontSize: '12px', color: idx === 0 ? '#4da6ff' : '#aaa' }}>{outc}</div>
-                                           <div style={{ fontSize: '12px', color: idx === 0 ? '#fff' : '#888', fontWeight: idx === 0 ? 'bold' : 'normal' }}>{['65.3%', '20.0%', '10.0%', '4.7%'][idx]}</div>
-                                       </div>
-                                   ))}
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-               </div>
-            </div>
-          ) : tab === 'enhance' ? (
+) : tab === 'enhance' ? (
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))', gap: '15px', padding: '10px' }}>
               {paginatedData.map((item, idx) => (
                 <div key={item.id || idx} style={{ display: 'flex', backgroundColor: '#111520', border: '1px solid #1a2a40', borderRadius: '4px', padding: '12px', gap: '15px', boxShadow: 'inset 0 0 10px rgba(0,0,0,0.5)', alignItems: 'center' }}>
