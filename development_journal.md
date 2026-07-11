@@ -2086,3 +2086,7 @@ fdatabase.net/crafting/ 3-column UI layout.
 - **Vite Build Optimization**: Updated ite.config.js to set ssetsInlineLimit: 0, completely preventing Vite from downscaling or converting high-res sprite images into base64 blobs, which was destroying thin 1-2px neon details.
 - **CSS Image Rendering Policies**: Applied image-rendering: pixelated and crisp-edges onto the Noctyrna sprite in Ascension.jsx to force the browser to maintain pixel sharpness when scaling down the 700px image to the 120px container bounds.
 - **Custom Glow Injection**: Built custom nested drop-shadow CSS filters (#a855f7 and #7c3aed) specifically for Noctyrna, and paired it with a deep-black (#0a0014) container background to amplify the glow and contrast. This prevents the semi-transparent neon from being washed out by surrounding bright UI elements.
+
+### ?? Hotfix: Noctyrna Lv.65 Sprite Bounding Box [DEPLOYED]
+- **Issue**: The spirit_noctyrna_65.png image felt too small in the UI compared to Seraphys because it had a 702x702 square canvas with massive transparent padding on the left and right. This caused it to hit the maxWidth: 85% CSS constraint before filling the container height.
+- **Fix**: Wrote a Python script to scan the alpha channel and tightly crop the image to the actual pixel bounds (401x674). It now scales correctly and fills the vertical height of the container just like Seraphys.
