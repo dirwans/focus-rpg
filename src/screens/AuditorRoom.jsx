@@ -24,6 +24,7 @@ export default function AuditorRoom() {
   // UI State
   const [tab, setTab] = useState('items')
   const [subTab, setSubTab] = useState('arctron')
+  const [craftCategory, setCraftCategory] = useState('materials')
   const [craftSubTab, setCraftSubTab] = useState('Shards')
   const [craftRaceFilter, setCraftRaceFilter] = useState('all')
   const [page, setPage] = useState(0)
@@ -75,14 +76,36 @@ export default function AuditorRoom() {
         const formatRows = (arr, category) => (arr || []).map(item => {
           let preview = item.image || (item.img ? `/assets/${item.img}` : null);
           if (!preview && item.id) {
+             const idStr = item.id.toLowerCase();
+             let genericPath = null;
+             
              if (category === 'gears_arctron' || category === 'gears_bionex' || category === 'gears_celestra') {
-               if (item.id.startsWith('wpn_') || item.id.startsWith('gw_')) preview = `/assets/weapons/${item.id}.png`;
-               else if (item.id.startsWith('arm_arc')) preview = `/assets/armor/${item.id}.png`;
-               else if (item.id.startsWith('arm_bio')) preview = `/assets/armor_bionex/${item.id}.png`;
-               else if (item.id.startsWith('arm_cel')) preview = `/assets/armor_celestra/${item.id}.png`;
-               else preview = `/assets/${item.id}.png`;
+                if (idStr.includes('wpn_') || idStr.includes('gw_')) {
+                    if (idStr.includes('ran') || idStr.includes('bow')) genericPath = '/assets/weapons/defallfactionslv32bow.png';
+                    else if (idStr.includes('spe') || idStr.includes('gun') || idStr.includes('launcher')) genericPath = '/assets/weapons/defallfactionslv32gun.png';
+                    else if (idStr.includes('mys') || idStr.includes('staff')) genericPath = '/assets/weapons/defbioncelestralv32staff.png';
+                    else genericPath = '/assets/weapons/defallfactionslv32sword.png';
+                } else if (idStr.includes('set_') || idStr.includes('arm_') || idStr.includes('shd_')) {
+                    let job = 'warrior';
+                    if (idStr.includes('ran') || (item.type && item.type.includes('ranger'))) job = 'ranger';
+                    if (idStr.includes('spe') || idStr.includes('mys') || (item.type && (item.type.includes('specialist') || item.type.includes('mystic')))) job = 'technician';
+                    
+                    let piece = 'armor';
+                    if (item.type) {
+                        if (item.type.toLowerCase().includes('helmet')) piece = 'helmet';
+                        if (item.type.toLowerCase().includes('pants')) piece = 'pants';
+                        if (item.type.toLowerCase().includes('gloves')) piece = 'gloves';
+                        if (item.type.toLowerCase().includes('boots')) piece = 'boots';
+                    }
+                    if (idStr.includes('shd_')) piece = 'helmet'; // Temporary fallback for shield
+                    genericPath = `/assets/armor/defarctron${job}lv32${piece}.png`;
+                } else {
+                    genericPath = '/assets/armor/defarctronwarriorlv32armor.png';
+                }
+                preview = genericPath;
              } else if (category === 'gears_accessories') {
-               preview = `/assets/accessories/amulets/${item.id}.png`; // fallback approx
+               if (idStr.includes('rng') || idStr.includes('ring')) preview = `/assets/arctron/rings/rng_arc_0.png`;
+               else preview = `/assets/arctron/amulets/amu_arc_0.png`;
              } else {
                preview = `/assets/${item.id}.png`;
              }
@@ -116,12 +139,16 @@ export default function AuditorRoom() {
           return arr
         }
 
-        const flattenGears = (d) => {
-          if (!d) return []
+        const flattenGears = (obj, prefix = '') => {
+          if (!obj) return []
           let arr = []
-          Object.keys(d).forEach(k => {
-            if (Array.isArray(d[k])) arr.push(...d[k].map(i => ({ ...i, type: k })))
-          })
+          if (Array.isArray(obj)) {
+            return obj.map(i => ({ ...i, type: prefix || 'gear' }))
+          } else if (typeof obj === 'object') {
+            Object.keys(obj).forEach(k => {
+              arr.push(...flattenGears(obj[k], prefix ? prefix + '_' + k : k))
+            })
+          }
           return arr
         }
 
@@ -164,19 +191,44 @@ export default function AuditorRoom() {
 
   const getActiveArray = () => {
     if (tab === 'gears') return allData.gears[subTab] || []
-    if (tab === 'crafting') {
-      let base = (allData.items || []).filter(i => i.type === 'material' && !i.name.includes('Talic') && !i.name.includes('Arcanite') && i.id !== 'mat_divine_crest' && i.id !== 'mat_lucky_relic')
-      if (craftRaceFilter !== 'all') {
-        base = base.filter(i => !i.faction || i.faction === craftRaceFilter || i.name.toLowerCase().includes(craftRaceFilter) || i.id.toLowerCase().includes(craftRaceFilter))
+    if (tab === 'crafting' || tab === 'enhance') {
+      let base = [];
+      if (craftCategory === 'materials') {
+        if (tab === 'enhance') {
+          base = (allData.items || []).filter(i => i.name.includes('Arcanite') || i.id === 'mat_divine_crest' || i.id === 'mat_lucky_relic');
+          if (craftSubTab === 'Arcanites') return base.filter(i => i.name.includes('Arcanite'));
+          if (craftSubTab === 'Specials') return base.filter(i => i.id === 'mat_divine_crest' || i.id === 'mat_lucky_relic');
+          return base;
+        }
+
+        base = (allData.items || []).filter(i => i.type === 'material' && !i.name.includes('Arcanite') && i.id !== 'mat_divine_crest' && i.id !== 'mat_lucky_relic')
+        if (craftRaceFilter !== 'all') {
+          base = base.filter(i => !i.faction || i.faction === craftRaceFilter || i.name.toLowerCase().includes(craftRaceFilter) || i.id.toLowerCase().includes(craftRaceFilter))
+        }
+        if (craftSubTab === 'Shards') return base.filter(i => i.name.toLowerCase().includes('shard'))
+        if (craftSubTab === 'Ores') return base.filter(i => i.name.toLowerCase().includes('ore'))
+        if (craftSubTab === 'Cores') return base.filter(i => i.name.toLowerCase().includes('core'))
+        if (craftSubTab === 'Mats') return base.filter(i => i.id.toLowerCase().includes('mat_') && !i.name.toLowerCase().includes('shard') && !i.name.toLowerCase().includes('ore') && !i.name.toLowerCase().includes('core'))
+        if (craftSubTab === 'Misc') return base.filter(i => !i.name.toLowerCase().includes('shard') && !i.name.toLowerCase().includes('ore') && !i.name.toLowerCase().includes('core') && !i.id.toLowerCase().includes('mat_'))
+        return base
+      } else {
+        if (craftCategory === 'gears_arctron') base = allData.gears.arctron || [];
+        if (craftCategory === 'gears_bionex') base = allData.gears.bionex || [];
+        if (craftCategory === 'gears_celestra') base = allData.gears.celestra || [];
+        if (craftCategory === 'accessories') base = allData.gears.accessories || [];
+        
+        if (craftSubTab && craftSubTab !== 'All') {
+           const sLower = craftSubTab.toLowerCase();
+           base = base.filter(i => {
+              if (sLower === 'weapons' || sLower === 'weapon') return i.type && (i.type.toLowerCase().includes('weapon') || (i.id && i.id.startsWith('wpn_')) || (i.id && i.id.startsWith('gw_')));
+              if (sLower === 'amulet') return i.type && i.type.toLowerCase().includes('amulet');
+              if (sLower === 'ring') return i.type && i.type.toLowerCase().includes('ring');
+              return i.type && i.type.toLowerCase().includes(sLower);
+           });
+        }
+        return base;
       }
-      if (craftSubTab === 'Shards') return base.filter(i => i.name.toLowerCase().includes('shard'))
-      if (craftSubTab === 'Ores') return base.filter(i => i.name.toLowerCase().includes('ore'))
-      if (craftSubTab === 'Cores') return base.filter(i => i.name.toLowerCase().includes('core'))
-      if (craftSubTab === 'Mats') return base.filter(i => i.id.toLowerCase().includes('mat_') && !i.name.toLowerCase().includes('shard') && !i.name.toLowerCase().includes('ore') && !i.name.toLowerCase().includes('core'))
-      if (craftSubTab === 'Misc') return base.filter(i => !i.name.toLowerCase().includes('shard') && !i.name.toLowerCase().includes('ore') && !i.name.toLowerCase().includes('core') && !i.id.toLowerCase().includes('mat_'))
-      return base
     }
-    if (tab === 'enhance') return (allData.items || []).filter(i => i.name.includes('Talic') || i.name.includes('Arcanite') || i.id === 'mat_divine_crest' || i.id === 'mat_lucky_relic')
     return allData[tab] || []
   }
 
@@ -327,8 +379,8 @@ export default function AuditorRoom() {
           <button style={tab === 'gears' ? styles.tabActive : styles.tab} onClick={() => {setTab('gears'); setPage(0); setSimItem(null)}}>Gears</button>
           <button style={tab === 'races' ? styles.tabActive : styles.tab} onClick={() => {setTab('races'); setPage(0); setSimItem(null)}}>Races</button>
           <button style={tab === 'jobs' ? styles.tabActive : styles.tab} onClick={() => {setTab('jobs'); setPage(0); setSimItem(null)}}>Jobs</button>
-          <button style={tab === 'crafting' ? styles.tabActive : styles.tab} onClick={() => {setTab('crafting'); setPage(0); setSimItem(null)}}>Crafting</button>
-          <button style={tab === 'enhance' ? styles.tabActive : styles.tab} onClick={() => {setTab('enhance'); setPage(0); setSimItem(null)}}>Enhance</button>
+          <button style={tab === 'crafting' ? styles.tabActive : styles.tab} onClick={() => {setTab('crafting'); setPage(0); setSimItem(null); setCraftCategory('materials'); setCraftSubTab('Shards');}}>Crafting</button>
+          <button style={tab === 'enhance' ? styles.tabActive : styles.tab} onClick={() => {setTab('enhance'); setPage(0); setSimItem(null); setCraftCategory('materials'); setCraftSubTab('All');}}>Enhance</button>
         </div>
 
         {tab === 'gears' && (
@@ -360,8 +412,8 @@ export default function AuditorRoom() {
         </div>
         )}
 
-        <div style={{...(tab === 'crafting' ? {padding: 0} : styles.content)}} className="no-scrollbar">
-          {tab === 'crafting' ? (
+        <div style={{...((tab === 'crafting' || tab === 'enhance') ? {padding: 0} : styles.content)}} className="no-scrollbar">
+          {(tab === 'crafting' || tab === 'enhance') ? (
               <div className="simulator-container">
                  {/* LEFT COLUMN - FILTERS & LOGS */}
                  <div className="simulator-filters" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
@@ -396,18 +448,53 @@ export default function AuditorRoom() {
                          <div style={{ padding: '10px', display: 'flex', alignItems: 'center', gap: '15px', borderBottom: '1px solid #333', background: '#1a1a1a' }}>
                              <img src="/assets/celestra_specialist_portrait.png" style={{ width: '30px', height: '30px', objectFit: 'cover' }} />
                              <div>
-                                 <div style={{ color: '#fff', fontSize: '14px', fontWeight: 'bold' }}>Database Craft Editor</div>
-                                 <div style={{ color: '#888', fontSize: '11px' }}>Tool for configuring item crafting requirements and logic. Useable only by the Admin.</div>
+                                 <div style={{ color: '#fff', fontSize: '14px', fontWeight: 'bold' }}>{tab === 'enhance' ? 'Database Enhance Editor' : 'Database Craft Editor'}</div>
+                                 <div style={{ color: '#888', fontSize: '11px' }}>{tab === 'enhance' ? 'Tool for configuring enhancement rules. Useable only by Admin.' : 'Tool for configuring item crafting requirements and logic. Useable only by the Admin.'}</div>
                              </div>
                          </div>
                          <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1 }}>
                              <div style={{ width: '100%', maxWidth: '350px', background: '#0a0a0a', border: '1px solid #333', borderRadius: '4px', display: 'flex', flexDirection: 'column' }}>
-                                 <div style={{ textAlign: 'center', padding: '10px', color: '#fff', fontSize: '13px', borderBottom: '1px solid #333' }}>Audit Materials</div>
-                                 <div style={{ display: 'flex', borderBottom: '1px solid #333' }}>
-                                     {['Shards', 'Ores', 'Cores', 'Mats', 'Misc'].map(cst => (
-                                         <div key={cst} onClick={() => {setCraftSubTab(cst); setPage(0)}} style={{ flex: 1, textAlign: 'center', padding: '8px 0', fontSize: '11px', cursor: 'pointer', color: craftSubTab === cst ? '#d18a42' : '#888', borderBottom: craftSubTab === cst ? '2px solid #d18a42' : '2px solid transparent' }}>{cst}</div>
-                                     ))}
+                                 <div style={{ textAlign: 'center', padding: '10px', borderBottom: '1px solid #333' }}>
+                                     <select value={craftCategory} onChange={e => {
+                                         setCraftCategory(e.target.value);
+                                         setPage(0);
+                                         setCraftSubTab(e.target.value === 'materials' ? (tab === 'enhance' ? 'All' : 'Shards') : 'All');
+                                     }} style={{ background: '#1a1a1a', border: '1px solid #444', color: '#fff', padding: '5px', borderRadius: '4px', outline: 'none', cursor: 'pointer', fontSize: '12px', width: '90%' }}>
+                                         <option value="materials">{tab === 'enhance' ? 'Enhance Materials' : 'Crafting Materials'}</option>
+                                         <option value="gears_arctron">{tab === 'enhance' ? 'Enhance Armor Arctron' : 'Crafting Armor Arctron'}</option>
+                                         <option value="gears_bionex">{tab === 'enhance' ? 'Enhance Armor Bionex' : 'Crafting Armor Bionex'}</option>
+                                         <option value="gears_celestra">{tab === 'enhance' ? 'Enhance Armor Celestra' : 'Crafting Armor Celestra'}</option>
+                                         <option value="accessories">{tab === 'enhance' ? 'Enhance Accessories' : 'Crafting Accessories'}</option>
+                                     </select>
                                  </div>
+                                 {craftCategory === 'materials' && tab === 'crafting' && (
+                                   <div style={{ display: 'flex', borderBottom: '1px solid #333' }}>
+                                       {['Shards', 'Ores', 'Cores', 'Mats', 'Misc'].map(cst => (
+                                           <div key={cst} onClick={() => {setCraftSubTab(cst); setPage(0)}} style={{ flex: 1, textAlign: 'center', padding: '8px 0', fontSize: '11px', cursor: 'pointer', color: craftSubTab === cst ? '#d18a42' : '#888', borderBottom: craftSubTab === cst ? '2px solid #d18a42' : '2px solid transparent' }}>{cst}</div>
+                                       ))}
+                                   </div>
+                                 )}
+                                 {craftCategory === 'materials' && tab === 'enhance' && (
+                                   <div style={{ display: 'flex', borderBottom: '1px solid #333' }}>
+                                       {['All', 'Arcanites', 'Specials'].map(cst => (
+                                           <div key={cst} onClick={() => {setCraftSubTab(cst); setPage(0)}} style={{ flex: 1, textAlign: 'center', padding: '8px 0', fontSize: '11px', cursor: 'pointer', color: craftSubTab === cst ? '#d18a42' : '#888', borderBottom: craftSubTab === cst ? '2px solid #d18a42' : '2px solid transparent' }}>{cst}</div>
+                                       ))}
+                                   </div>
+                                 )}
+                                 {craftCategory.startsWith('gears_') && (
+                                   <div style={{ display: 'flex', flexWrap: 'wrap', borderBottom: '1px solid #333' }}>
+                                       {['All', 'Weapons', 'Helmet', 'Armor', 'Pants', 'Gloves', 'Boots', 'Shield'].map(cst => (
+                                           <div key={cst} onClick={() => {setCraftSubTab(cst); setPage(0)}} style={{ flex: '1 1 20%', textAlign: 'center', padding: '6px 0', fontSize: '10px', cursor: 'pointer', color: craftSubTab === cst ? '#d18a42' : '#888', borderBottom: craftSubTab === cst ? '2px solid #d18a42' : '2px solid transparent' }}>{cst}</div>
+                                       ))}
+                                   </div>
+                                 )}
+                                 {craftCategory === 'accessories' && (
+                                   <div style={{ display: 'flex', borderBottom: '1px solid #333' }}>
+                                       {['All', 'Amulet', 'Ring'].map(cst => (
+                                           <div key={cst} onClick={() => {setCraftSubTab(cst); setPage(0)}} style={{ flex: 1, textAlign: 'center', padding: '8px 0', fontSize: '11px', cursor: 'pointer', color: craftSubTab === cst ? '#d18a42' : '#888', borderBottom: craftSubTab === cst ? '2px solid #d18a42' : '2px solid transparent' }}>{cst}</div>
+                                       ))}
+                                   </div>
+                                 )}
                                  <div style={{ padding: '15px', display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '8px', minHeight: '220px' }}>
                                      {paginatedData.map((item, idx) => (
                                          <div key={idx} onClick={() => {
@@ -440,7 +527,7 @@ export default function AuditorRoom() {
                  {/* RIGHT COLUMN - RECIPE EDITOR */}
                  <div className="simulator-right">
                      <div style={{ border: '1px solid #333', background: '#141414', borderRadius: '4px', height: '100%', display: 'flex', flexDirection: 'column' }}>
-                         <div style={{ padding: '10px', borderBottom: '1px solid #333', color: '#fff', fontSize: '14px', fontWeight: 'bold' }}>Recipe Editor</div>
+                         <div style={{ padding: '10px', borderBottom: '1px solid #333', color: '#fff', fontSize: '14px', fontWeight: 'bold' }}>{tab === 'enhance' ? 'Enhancement Editor' : 'Recipe Editor'}</div>
                          <div style={{ padding: '20px', flex: 1, display: 'flex', flexDirection: 'column', gap: '20px' }}>
                              
                              <div style={{ display: 'flex', alignItems: 'center', gap: '15px', background: '#1a1a1a', border: '1px solid #333', padding: '15px', borderRadius: '4px' }}>
@@ -448,7 +535,7 @@ export default function AuditorRoom() {
                                      {targetItem ? (targetItem._imagePreview ? <img src={targetItem._imagePreview} style={{ width: '80%', height: '80%', objectFit: 'contain' }} /> : 'X') : <span style={{color: '#444'}}>?</span>}
                                  </div>
                                  <div style={{ flex: 1 }}>
-                                     <div style={{ fontSize: '10px', color: '#888', textTransform: 'uppercase' }}>Target Item (Hasil)</div>
+                                     <div style={{ fontSize: '10px', color: '#888', textTransform: 'uppercase' }}>{tab === 'enhance' ? 'Target Item (To Enhance)' : 'Target Item (Hasil)'}</div>
                                      <div style={{ color: '#fff', fontSize: '16px', fontWeight: 'bold' }}>{targetItem ? targetItem.name || targetItem.id : 'Pilih dari Database'}</div>
                                  </div>
                              </div>
@@ -456,7 +543,7 @@ export default function AuditorRoom() {
                              <div>
                                  <div style={{ fontSize: '10px', color: '#888', marginBottom: '10px', textTransform: 'uppercase' }}>Required Materials</div>
                                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-                                     {recipeSlots.map((slot, idx) => (
+                                     {recipeSlots.slice(0, tab === 'enhance' ? 3 : 5).map((slot, idx) => (
                                          <div key={idx} onClick={() => setActiveSlotIndex(idx === activeSlotIndex ? null : idx)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: activeSlotIndex === idx ? '#2a2a2a' : '#1a1a1a', border: activeSlotIndex === idx ? '1px solid #00e5ff' : '1px solid #333', padding: '10px', borderRadius: '4px', cursor: 'pointer', minHeight: '60px' }}>
                                             {slot ? (
                                                 <>
@@ -475,18 +562,33 @@ export default function AuditorRoom() {
                              </div>
 
                              <div>
-                                 <div style={{ fontSize: '10px', color: '#888', marginBottom: '10px', textTransform: 'uppercase' }}>Output Stats & Grade</div>
+                                 <div style={{ fontSize: '10px', color: '#888', marginBottom: '10px', textTransform: 'uppercase' }}>{tab === 'enhance' ? 'Enhancement Target Level' : 'Output Stats & Grade'}</div>
                                  <div style={{ background: '#1a1a1a', border: '1px solid #333', borderRadius: '4px', padding: '10px' }}>
                                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-                                         <span style={{ color: '#888', fontSize: '12px' }}>Item Grade</span>
+                                         <span style={{ color: '#888', fontSize: '12px' }}>{tab === 'enhance' ? 'Target Level' : 'Item Grade'}</span>
                                          <select value={outputGrade} onChange={e => setOutputGrade(e.target.value)} style={{ background: '#0a0a0a', border: '1px solid #444', color: '#fff', padding: '4px', fontSize: '12px' }}>
-                                             <option value="Normal">Normal</option>
-                                             <option value="Rare A">Rare A</option>
-                                             <option value="Rare B">Rare B</option>
-                                             <option value="Rare C">Rare C</option>
-                                             <option value="Rare D">Rare D</option>
-                                             <option value="Relic">Relic</option>
-                                             <option value="Hero">Hero</option>
+                                             {tab === 'enhance' ? (
+                                                 <>
+                                                     <option value="+1">+1</option>
+                                                     <option value="+2">+2</option>
+                                                     <option value="+3">+3</option>
+                                                     <option value="+4">+4</option>
+                                                     <option value="+5">+5</option>
+                                                     <option value="+6">+6</option>
+                                                     <option value="+7">+7</option>
+                                                     <option value="+8">+8</option>
+                                                 </>
+                                             ) : (
+                                                 <>
+                                                     <option value="Normal">Normal</option>
+                                                     <option value="Rare A">Rare A</option>
+                                                     <option value="Rare B">Rare B</option>
+                                                     <option value="Rare C">Rare C</option>
+                                                     <option value="Rare D">Rare D</option>
+                                                     <option value="Relic">Relic</option>
+                                                     <option value="Hero">Hero</option>
+                                                 </>
+                                             )}
                                          </select>
                                      </div>
                                      <div style={{ borderTop: '1px dashed #333', paddingTop: '10px' }}>
@@ -543,41 +645,14 @@ export default function AuditorRoom() {
                              </div>
 
                              <button onClick={handleSaveRecipe} style={{ background: '#00e5ff', color: '#040915', border: 'none', padding: '15px', borderRadius: '4px', fontWeight: 'bold', fontSize: '14px', cursor: 'pointer', marginTop: 'auto' }}>
-                                 💾 SAVE RECIPE
+                                 {tab === 'enhance' ? '💾 SAVE ENHANCEMENT' : '💾 SAVE RECIPE'}
                              </button>
                          </div>
                      </div>
                  </div>
               </div>
 
-) : tab === 'enhance' ? (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))', gap: '15px', padding: '10px' }}>
-              {paginatedData.map((item, idx) => (
-                <div key={item.id || idx} style={{ display: 'flex', backgroundColor: '#111520', border: '1px solid #1a2a40', borderRadius: '4px', padding: '12px', gap: '15px', boxShadow: 'inset 0 0 10px rgba(0,0,0,0.5)', alignItems: 'center' }}>
-                  <div style={{ width: '56px', height: '56px', backgroundColor: '#050a12', border: '1px solid #334460', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', flexShrink: 0 }}>
-                    <img loading="lazy" src={item._imagePreview || item.image || item.icon || '/assets/placeholder.png'} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-                  </div>
-                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', minWidth: 0 }}>
-                    <div style={{ fontSize: '15px', fontWeight: 'bold', color: item.rarity === 'legendary' ? '#ffaa00' : item.rarity === 'mythic' ? '#ff0055' : item.rarity === 'epic' ? '#a335ee' : item.rarity === 'rare' ? '#0070dd' : item.rarity === 'uncommon' ? '#1eff00' : '#ffffff', textShadow: '1px 1px 2px rgba(0,0,0,0.8)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                      {item.name}
-                    </div>
-                    <div style={{ fontSize: '12px', color: '#7ab0d0', marginTop: '2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                      [Level {item.level || 1}] • {item.type}
-                    </div>
-                    <div style={{ fontSize: '12px', color: '#aaaaaa', marginTop: '4px', lineHeight: '1.3', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
-                      {item.description || item._kegunaan || "Material resources for upgrading and crafting."}
-                    </div>
-                  </div>
-                  <div style={{ flex: '0 0 auto', width: '80px', borderLeft: '1px solid #1a2a40', paddingLeft: '10px', display: 'flex', flexDirection: 'column', justifyContent: 'center', fontSize: '11px', color: '#5588aa' }}>
-                    <strong>Rarity:</strong>
-                    <span style={{ textTransform: 'capitalize', color: '#fff' }}>{item.rarity || 'Common'}</span>
-                    <strong style={{ marginTop: '5px' }}>Uses:</strong>
-                    <span style={{ color: '#fff' }}>{item._kegunaan || tab}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
+) : (
           <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch', width: '100%' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '1000px', fontSize: '13px', color: '#c0dff0' }}>
               <thead>

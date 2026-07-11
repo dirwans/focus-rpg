@@ -2072,3 +2072,8 @@ fdatabase.net/crafting/ 3-column UI layout.
   - Added a visual fallback for materials without images (displays the first 8 characters of the item's name inside the box).
   - Removed the "Operation" button.
   - Refactored the grid item onClick to immediately invoke openDefModal and setSimItem, streamlining the admin workflow (one-click edit).
+
+### ?? Milestone 35: Material Database Overhaul & Auditor Room Consistency [DEPLOYED]
+- **Auditor Room Consistency**: Re-aligned the Enhancement tab layout to match the Crafting tab logic precisely (3 slots, specific target selection, accurate Arcanite filtering, and dynamically changing titles). Purged UI remnants of RF Online Talics.
+- **Material DB Scrub**: Removed legacy Favor Talic and Ignorance Talic from items.json to fully finalize the proprietary material base.
+- **Local Material Assets Generation**: Replaced external RF Online hotlinks with AI-generated, high-fidelity 2.5D Mecha Anime style images for all Ore and Shard grades (Ignis, Virel, Kryos, Zephra, Umbrix) across Common, Rare, and Epic tiers. Tinted systematically via Python color matrix. Data structure updated to strictly use local /assets/materials/... paths.
