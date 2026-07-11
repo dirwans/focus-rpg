@@ -25,6 +25,7 @@ export default function AuditorRoom() {
   const [tab, setTab] = useState('items')
   const [subTab, setSubTab] = useState('arctron')
   const [craftSubTab, setCraftSubTab] = useState('Shards')
+  const [craftRaceFilter, setCraftRaceFilter] = useState('all')
   const [page, setPage] = useState(0)
   const [searchTerm, setSearchTerm] = useState('')
   const [simItem, setSimItem] = useState(null)
@@ -146,6 +147,9 @@ export default function AuditorRoom() {
     if (tab === 'gears') return allData.gears[subTab] || []
     if (tab === 'crafting') {
       let base = (allData.items || []).filter(i => i.type === 'material' && !i.name.includes('Talic') && !i.name.includes('Arcanite') && i.id !== 'mat_divine_crest' && i.id !== 'mat_lucky_relic')
+      if (craftRaceFilter !== 'all') {
+        base = base.filter(i => i.name.toLowerCase().includes(craftRaceFilter) || i.id.toLowerCase().includes(craftRaceFilter))
+      }
       if (craftSubTab === 'Shards') return base.filter(i => i.name.toLowerCase().includes('shard'))
       if (craftSubTab === 'Ores') return base.filter(i => i.name.toLowerCase().includes('ore'))
       if (craftSubTab === 'Cores') return base.filter(i => i.name.toLowerCase().includes('core'))
@@ -360,11 +364,11 @@ export default function AuditorRoom() {
                                </div>
                            </div>
                            <div>
-                               <div style={{ fontSize: '10px', color: '#888', marginBottom: '5px', textTransform: 'uppercase' }}>Race</div>
+                               <div style={{ fontSize: '10px', color: '#888', marginBottom: '5px', textTransform: 'uppercase' }}>Race Filter</div>
                                <div style={{ display: 'flex', gap: '5px' }}>
-                                   <button style={{ flex: 1, background: '#1a1a1a', border: '1px solid #d18a42', padding: '10px', display: 'flex', justifyContent: 'center', cursor: 'pointer' }}><img src={arctronLogo} style={{height:'20px', filter:'grayscale(1) brightness(2)', objectFit: 'contain'}}/></button>
-                                   <button style={{ flex: 1, background: '#1a1a1a', border: '1px solid #333', padding: '10px', display: 'flex', justifyContent: 'center', cursor: 'pointer' }}><img src={bionexLogo} style={{height:'20px', filter:'grayscale(1) brightness(0.5)', objectFit: 'contain'}}/></button>
-                                   <button style={{ flex: 1, background: '#1a1a1a', border: '1px solid #333', padding: '10px', display: 'flex', justifyContent: 'center', cursor: 'pointer' }}><img src={celestraLogo} style={{height:'20px', filter:'grayscale(1) brightness(0.5)', objectFit: 'contain'}}/></button>
+                                   <button onClick={() => setCraftRaceFilter(p => p === 'arctron' ? 'all' : 'arctron')} style={{ flex: 1, background: '#1a1a1a', border: craftRaceFilter === 'arctron' ? '1px solid #d18a42' : '1px solid #333', padding: '10px', display: 'flex', justifyContent: 'center', cursor: 'pointer', transition: 'all 0.2s' }}><img src={arctronLogo} style={{height:'20px', objectFit: 'contain', opacity: craftRaceFilter === 'arctron' || craftRaceFilter === 'all' ? 1 : 0.3}}/></button>
+                                   <button onClick={() => setCraftRaceFilter(p => p === 'bionex' ? 'all' : 'bionex')} style={{ flex: 1, background: '#1a1a1a', border: craftRaceFilter === 'bionex' ? '1px solid #d18a42' : '1px solid #333', padding: '10px', display: 'flex', justifyContent: 'center', cursor: 'pointer', transition: 'all 0.2s' }}><img src={bionexLogo} style={{height:'20px', objectFit: 'contain', opacity: craftRaceFilter === 'bionex' || craftRaceFilter === 'all' ? 1 : 0.3}}/></button>
+                                   <button onClick={() => setCraftRaceFilter(p => p === 'celestra' ? 'all' : 'celestra')} style={{ flex: 1, background: '#1a1a1a', border: craftRaceFilter === 'celestra' ? '1px solid #d18a42' : '1px solid #333', padding: '10px', display: 'flex', justifyContent: 'center', cursor: 'pointer', transition: 'all 0.2s' }}><img src={celestraLogo} style={{height:'20px', objectFit: 'contain', opacity: craftRaceFilter === 'celestra' || craftRaceFilter === 'all' ? 1 : 0.3}}/></button>
                                </div>
                            </div>
                            <div>
