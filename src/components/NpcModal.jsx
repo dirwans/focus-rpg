@@ -793,22 +793,8 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                   </svg>
 
                   {/* Orbit Indicators */}
-                  {/* Top: SUCCESS RATE */}
-                  <div style={{ position: 'absolute', top: 10, left: 108, width: 44, height: 44, borderRadius: 9, background: 'rgba(10,15,25,0.95)', border: '2px solid rgba(95,224,138,0.6)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 3 }}>
-                    <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 11, fontWeight: 800, color: '#5fe08a' }}>{finalRate}%</span>
-                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 6, fontWeight: 800, color: '#8a94a3', letterSpacing: '0.3px' }}>RATE</span>
-                  </div>
-
-                  {/* Right: CREST SLOTS */}
-                  <div style={{ position: 'absolute', top: 78, left: 201, width: 44, height: 44, borderRadius: 9, background: 'rgba(10,15,25,0.95)', border: '2px solid rgba(255,95,122,0.6)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 3 }}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ff8080" strokeWidth="1.8">
-                      <polygon points="12 2 20 7 20 17 12 22 4 17 4 7"/>
-                    </svg>
-                    <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 8, fontWeight: 800, color: '#ff8080' }}>{crestOwned}/{crestCost}</span>
-                  </div>
-
-                  {/* Right Bottom: ARCANITE CHECK */}
-                  <div style={{ position: 'absolute', top: 187, left: 166, width: 44, height: 44, borderRadius: 9, background: 'rgba(10,15,25,0.95)', border: '2px solid rgba(95,224,138,0.6)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 3 }}>
+                  {/* Top: ARCANITE CHECK */}
+                  <div style={{ position: 'absolute', top: 18, left: 108, width: 44, height: 44, borderRadius: 9, background: 'rgba(10,15,25,0.95)', border: '2px solid rgba(95,224,138,0.6)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 3 }}>
                     <img src={`/assets/items/${requiredArcaniteId}.png`} alt="Arcanite" style={{ width: 14, height: 14, objectFit: 'contain' }} onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='block' }} />
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5fe08a" strokeWidth="1.8" style={{ display: 'none' }}>
                       <path d="M12 2C8 8 5 12 5 15a7 7 0 0 0 14 0c0-3-3-7-7-13z"/>
@@ -816,10 +802,18 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                     <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 8, fontWeight: 800, color: '#5fe08a' }}>{arcaniteOwned}/1</span>
                   </div>
 
-                  {/* Left Bottom: LUCKY RELIC */}
+                  {/* Bottom Right: CREST SLOTS */}
+                  <div style={{ position: 'absolute', top: 153, left: 186, width: 44, height: 44, borderRadius: 9, background: 'rgba(10,15,25,0.95)', border: '2px solid rgba(255,95,122,0.6)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 3 }}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ff8080" strokeWidth="1.8">
+                      <polygon points="12 2 20 7 20 17 12 22 4 17 4 7"/>
+                    </svg>
+                    <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 8, fontWeight: 800, color: '#ff8080' }}>{crestOwned}/{crestCost}</span>
+                  </div>
+
+                  {/* Bottom Left: LUCKY RELIC */}
                   <div
                     onClick={() => hasItem && !maxed && setUseLuckyRelic(!useLuckyRelic)}
-                    style={{ position: 'absolute', top: 187, left: 50, width: 44, height: 44, borderRadius: 9, background: 'rgba(10,15,25,0.95)', border: `2px solid ${useLuckyRelic ? theme.primary : 'rgba(255,255,255,0.2)'}`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 3, cursor: hasItem ? 'pointer' : 'default' }}
+                    style={{ position: 'absolute', top: 153, left: 30, width: 44, height: 44, borderRadius: 9, background: 'rgba(10,15,25,0.95)', border: `2px solid ${useLuckyRelic ? theme.primary : 'rgba(255,255,255,0.2)'}`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 3, cursor: hasItem ? 'pointer' : 'default' }}
                   >
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={useLuckyRelic ? theme.primary : '#8a94a3'} strokeWidth="1.8">
                       <circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/>
@@ -827,12 +821,6 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                     <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 6, fontWeight: 800, color: useLuckyRelic ? theme.light : '#8a94a3', letterSpacing: '0.2px' }}>
                       {useLuckyRelic ? 'RELIC ON' : 'RELIC'}
                     </span>
-                  </div>
-
-                  {/* Left: CURRENT LEVEL */}
-                  <div style={{ position: 'absolute', top: 78, left: 15, width: 44, height: 44, borderRadius: 9, background: 'rgba(10,15,25,0.95)', border: '2px solid rgba(199,204,214,0.5)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 3 }}>
-                    <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 11, fontWeight: 900, color: '#c7ccd6' }}>+{currentEnh}</span>
-                    <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 6, fontWeight: 800, color: '#8a94a3' }}>LEVEL</span>
                   </div>
 
                   {/* Center equipped slot */}
@@ -902,7 +890,13 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                   <div>
                     {/* Stat Preview Panel */}
                     <div style={{ padding: '10px 12px', borderRadius: '8px', background: `${theme.primary}12`, border: `1px solid ${theme.primary}47`, margin: '14px 0 12px' }}>
-                      <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '11px', fontWeight: '800', color: theme.light, letterSpacing: '0.5px', marginBottom: '6px' }}>STATS PREVIEW (+{currentEnh} ➜ +{currentEnh + 1})</div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '6px' }}>
+                        <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '12px', fontWeight: '800', color: theme.light, letterSpacing: '0.5px' }}>STATS PREVIEW</div>
+                        <div style={{ display: 'flex', gap: 12 }}>
+                          <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: '12px', color: '#8a94a3' }}>Level: <strong style={{ color: '#c7ccd6' }}>+{currentEnh}</strong></span>
+                          <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: '12px', color: '#8a94a3' }}>Rate: <strong style={{ color: '#5fe08a' }}>{finalRate}%</strong></span>
+                        </div>
+                      </div>
                       {item.type === 'weapon' ? (
                         <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-mono)', fontSize: '13px', color: '#cdd5e0' }}>
                           <span>ATK Bonus:</span>
@@ -982,512 +976,227 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
           )}
 
           {/* ─── CRAFT MASTER ─── */}
-          {subView === 'master_artisan' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-              <div style={{ display: 'flex', gap: 8, overflowX: 'auto', padding: '0 16px 8px' }}>
-                {[
-                  { id: 'refine', label: 'WEAPON SMITH', emoji: '🔨' },
-                  { id: 'ore', label: 'ORE REFINEMENT', emoji: '💎' },
-                  { id: 'arcanite', label: 'ARCANITE SYNTHESIS', emoji: '🔮' },
-                  { id: 'legendary', label: 'LEGENDARY FORGE', emoji: '⚔️' }
-                ].map(tab => (
-                  <button
-                    key={tab.id}
-                    onClick={() => setCraftMasterTab(tab.id)}
-                    style={{
-                      flexShrink: 0,
-                      padding: '8px 12px',
-                      borderRadius: 8,
-                      background: craftMasterTab === tab.id ? 'rgba(0, 229, 255, 0.15)' : 'rgba(10, 15, 25, 0.8)',
-                      border: `1px solid ${craftMasterTab === tab.id ? '#00e5ff' : 'rgba(255,255,255,0.1)'}`,
-                      color: craftMasterTab === tab.id ? '#00e5ff' : '#88aadd',
-                      fontFamily: 'var(--font-title)',
-                      fontSize: 11,
-                      fontWeight: 800,
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 6
-                    }}
-                  >
-                    <span>{tab.emoji}</span>
-                    {tab.label}
-                  </button>
-                ))}
-              </div>
+          {subView === 'master_artisan' && (() => {
+            const ELEMENTS = [
+              { id: 'ignis', label: 'Ignis', emoji: '🔴', color: '#ff4444' },
+              { id: 'virel', label: 'Virel', emoji: '🔵', color: '#44aaff' },
+              { id: 'kryos', label: 'Kryos', emoji: '🟢', color: '#44ff88' },
+              { id: 'zephra', label: 'Zephra', emoji: '🟡', color: '#ffcc00' },
+              { id: 'umbrix', label: 'Umbrix', emoji: '⚫', color: '#88aadd' }
+            ]
+            const TIERS = [
+              { id: 'common', label: 'Common', reqCount: 5, cost: 10000 },
+              { id: 'rare', label: 'Rare', reqCount: 5, cost: 25000 },
+              { id: 'epic', label: 'Epic', reqCount: 5, cost: 50000 }
+            ]
+            const ARCANITES = [
+              { id: 'mat_arcanite_fury', name: 'Fury', color: '#ffcc00', reqs: [{id: 'shard_ignis_epic', emoji:'🔴'}, {id: 'shard_virel_epic', emoji:'🔵'}] },
+              { id: 'mat_arcanite_ruin', name: 'Ruin', color: '#ff4444', reqs: [{id: 'shard_ignis_epic', count:2, emoji:'🔴'}] },
+              { id: 'mat_arcanite_spirit', name: 'Spirit', color: '#cc44ff', reqs: [{id: 'shard_zephra_epic', count:2, emoji:'🟡'}] },
+              { id: 'mat_arcanite_vital', name: 'Vital', color: '#00ff88', reqs: [{id: 'shard_umbrix_epic', count:2, emoji:'⚫'}] },
+              { id: 'mat_arcanite_guard', name: 'Guard', color: '#44aaff', reqs: [{id: 'shard_kryos_epic', count:2, emoji:'🟢'}] },
+              { id: 'mat_arcanite_precision', name: 'Precision', color: '#ffffff', reqs: [{id: 'shard_zephra_epic', emoji:'🟡'}, {id: 'shard_kryos_epic', emoji:'🟢'}] },
+              { id: 'mat_arcanite_agility', name: 'Agility', color: '#00ffff', reqs: [{id: 'shard_virel_epic', count:2, emoji:'🔵'}] },
+              { id: 'mat_arcanite_focus', name: 'Focus', color: '#ff8800', reqs: [{id: 'shard_ignis_epic', emoji:'🔴'}, {id: 'shard_zephra_epic', emoji:'🟡'}] }
+            ]
+            const SHARD_TYPES = [
+              { id: 'shard_ignis_epic',  label: 'Ignis',  emoji: '🔴' },
+              { id: 'shard_virel_epic',  label: 'Virel',  emoji: '🔵' },
+              { id: 'shard_kryos_epic',  label: 'Kryos',  emoji: '🟢' },
+              { id: 'shard_zephra_epic', label: 'Zephra', emoji: '🟡' },
+              { id: 'shard_umbrix_epic', label: 'Umbrix', emoji: '⚫' },
+            ]
+            const LEGENDARY_RECIPES = [
+              { id: 'leg_weapon', label: 'Legendary Weapon',  emoji: '⚔️',  baseId: 'mat_epic_weapon',  baseLabel: 'Epic Weapon',  shards: 6 },
+              { id: 'leg_armor',  label: 'Legendary Armor',   emoji: '🦾',  baseId: 'mat_epic_armor',   baseLabel: 'Epic Armor',   shards: 4 },
+              { id: 'leg_helmet', label: 'Legendary Helmet',  emoji: '⛑️',  baseId: 'mat_epic_armor',   baseLabel: 'Epic Armor',   shards: 4 },
+              { id: 'leg_mantle', label: 'Legendary Mantle',  emoji: '🥋',  baseId: 'mat_epic_armor',   baseLabel: 'Epic Armor',   shards: 4 },
+              { id: 'leg_gloves', label: 'Legendary Gloves',  emoji: '🧤',  baseId: 'mat_epic_armor',   baseLabel: 'Epic Armor',   shards: 4 },
+              { id: 'leg_boots',  label: 'Legendary Boots',   emoji: '👢',  baseId: 'mat_epic_armor',   baseLabel: 'Epic Armor',   shards: 4 },
+              { id: 'leg_shield', label: 'Legendary Shield',  emoji: '🛡️',  baseId: 'mat_epic_armor',   baseLabel: 'Epic Armor',   shards: 4 },
+              { id: 'leg_ring',   label: 'Legendary Ring',    emoji: '💍',  baseId: 'mat_epic_ring',    baseLabel: 'Epic Ring',    shards: 5 },
+              { id: 'leg_amulet', label: 'Legendary Amulet',  emoji: '📿',  baseId: 'mat_epic_amulet',  baseLabel: 'Epic Amulet',  shards: 5 },
+              { id: 'leg_cape',   label: 'Legendary Cape',    emoji: '🦸',  baseId: 'mat_epic_cape',    baseLabel: 'Epic Cape',    shards: 5 },
+            ]
 
-              <div style={styles.avatarRow}>
-                <div style={styles.npcAvatarLarge}><span style={{ fontSize: 52 }}>🔨</span></div>
-                <div style={styles.npcDialog}>"The finest crafts require the rarest components. Bring me what is needed."</div>
-              </div>
-              <div style={styles.statusBox}>
-                <div style={styles.statusLabel}>ROLE</div>
-                <div style={styles.statusVal}>Crafting NPC</div>
-              </div>
-              <div style={{ background: 'rgba(0,229,255,0.06)', border: '1px solid rgba(0,229,255,0.2)', borderRadius: 10, padding: 14 }}>
-                <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: '#00e5ff', fontWeight: 800, marginBottom: 10 }}>SERVICES</div>
-                <ul style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: '#e0f4ff', listStyle: 'none', padding: 0, margin: 0 }}>
-                  <li style={{ marginBottom: 8 }}>🦸 Craft <strong>Cape</strong> <span style={{ color: '#88aadd', fontSize: 11 }}>(semua bangsa)</span></li>
-                  <li style={{ marginBottom: 8, borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 8 }}>
-                    ⚙️ Craft <strong>ARES Components</strong>
-                    <span style={{ display: 'block', fontSize: 11, color: '#ff3d00', fontWeight: 700, marginTop: 2 }}>⚠️ Khusus bangsa ARCTRON</span>
-                  </li>
-                  <li style={{ marginBottom: 8, borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 8 }}>
-                    🤖 Craft <strong>M.E.U. Components</strong>
-                    <span style={{ display: 'block', fontSize: 11, color: '#ffd600', fontWeight: 700, marginTop: 2 }}>⚠️ Khusus bangsa BIONEX</span>
-                  </li>
-                  <li style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 8 }}>
-                    👻 Craft <strong>Ancient Spirit Components</strong>
-                    <span style={{ display: 'block', fontSize: 11, color: '#00e5ff', fontWeight: 700, marginTop: 2 }}>⚠️ Khusus bangsa CELESTRA</span>
-                  </li>
-                </ul>
-              </div>
-              {/* ───────── WEAPON SMITH TAB ───────── */}
-        {craftMasterTab === 'refine' && (() => {
-          const equippedWeapon = player.equipment?.weapon
-          const ownedIgnorance = player.inventory.filter(it => it.id === 'talic_ignorance').reduce((sum, it) => sum + (it.count || it.qty || 1), 0)
-          const hasWeapon = !!equippedWeapon
-          const weaponName = hasWeapon ? equippedWeapon.name : 'NO WEAPON EQUIPPED'
-          const weaponGrade = hasWeapon ? getWeaponRarityDisplayName(equippedWeapon.rarityGrade || equippedWeapon.rarity).toUpperCase() : 'NONE'
-          
-          const grade = hasWeapon ? (equippedWeapon.rarityGrade || 'normal').toLowerCase() : 'normal'
-          const cost = REFINE_COSTS[grade]
-          
-          const nextRarity = hasWeapon && cost ? cost.next.toUpperCase() : (hasWeapon ? 'MAX' : 'NONE')
-          const nextPercent = hasWeapon && cost ? (cost.next === 'advanced' ? '5%' : cost.next === 'rare' ? '10%' : cost.next === 'epic' ? '15%' : cost.next === 'legendary' ? '20%' : '30%') : '0%'
+            const MASTER_RECIPES = [
+              ...ELEMENTS.flatMap(elem => TIERS.map(tier => ({
+                id: `shard_${elem.id}_${tier.id}`,
+                category: 'Ore Refinement',
+                name: `${tier.label} ${elem.label} Shard`,
+                emoji: elem.emoji,
+                color: elem.color,
+                action: () => craftShard(elem.id, tier.id),
+                materials: [
+                  { id: `ore_${elem.id}_${tier.id}`, count: tier.reqCount, emoji: '🪨', name: `${tier.label} ${elem.label} Ore` }
+                ],
+                cost: tier.cost
+              }))),
+              ...ARCANITES.map(arc => ({
+                id: arc.id,
+                category: 'Arcanite Synthesis',
+                name: `Arcanite ${arc.name}`,
+                emoji: '🔮',
+                color: arc.color,
+                action: () => craftArcanite(arc.id),
+                materials: arc.reqs.map(r => ({ id: r.id, count: r.count || 1, emoji: r.emoji, name: `${r.id.split('_')[1]} Shard` })),
+                cost: 100000
+              })),
+              ...LEGENDARY_RECIPES.map(rec => ({
+                id: rec.id,
+                category: 'Legendary Forge',
+                name: rec.label,
+                emoji: rec.emoji,
+                color: '#f5a623',
+                action: () => craftLegendary(rec.id),
+                materials: [
+                  { id: rec.baseId, count: 1, emoji: '📦', name: rec.baseLabel },
+                  ...SHARD_TYPES.slice(0, 4).map(s => ({ id: s.id, count: rec.shards, emoji: s.emoji, name: s.label + ' Shard' }))
+                ],
+                cost: 0
+              }))
+            ]
 
-          const requiredTalicsText = hasWeapon && cost ? `${ownedIgnorance}/${cost.talics}` : `0/0`
-          const requiredCrdText = hasWeapon && cost ? `${(cost.crd / 1000).toFixed(0)}K` : '0K'
-          const hasTalics = hasWeapon && cost ? (ownedIgnorance >= cost.talics) : false
-          const hasCrd = hasWeapon && cost ? (player.resources.crd >= cost.crd) : false
-          const canUpgrade = hasWeapon && cost ? (hasTalics && hasCrd) : false
+            const selectedRecipe = MASTER_RECIPES.find(r => r.id === craftMasterTab) || null;
+            const SLOT_POSITIONS = [
+              { top: 18, left: 108 },
+              { top: 80, left: 193 },
+              { top: 181, left: 161 },
+              { top: 181, left: 55 },
+              { top: 80, left: 23 }
+            ]
 
-          return (
-            <div style={{ padding: '2px 16px' }}>
+            const inv = player.inventory;
+            const countOf = (id) => inv.filter(i => i.id === id).reduce((sum, i) => sum + (i.count || i.qty || 1), 0);
+            
+            // Validate requirements
+            let canCraft = false;
+            let reqs = [];
+            if (selectedRecipe) {
+              canCraft = true;
+              reqs = selectedRecipe.materials.map(m => {
+                const owned = countOf(m.id);
+                if (owned < m.count) canCraft = false;
+                return { ...m, owned };
+              });
+              if (selectedRecipe.cost > 0 && player.resources.crd < selectedRecipe.cost) {
+                canCraft = false;
+              }
+            }
+
+            return (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-                <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '12px', fontWeight: '700', letterSpacing: '1.5px', color: theme.light }}>WEAPON SMITH & REFINE</div>
+                <div style={styles.avatarRow}>
+                  <div style={styles.npcAvatarLarge}><span style={{ fontSize: 52 }}>🔨</span></div>
+                  <div style={styles.npcDialog}>"The finest crafts require the rarest components. Select a blueprint, and bring me the materials."</div>
+                </div>
+                <div style={styles.statusBox}>
+                  <div style={styles.statusLabel}>ROLE</div>
+                  <div style={styles.statusVal}>Master Artisan</div>
+                </div>
                 
-                {/* Refining Section */}
-                <div style={{ padding: '16px 14px 14px', borderRadius: '14px', background: 'rgba(6, 9, 14, 0.75)', border: `1.5px solid ${theme.primary}52`, boxShadow: '0 8px 24px rgba(0,0,0,0.5)' }}>
-                  
-                  {/* Rotating Circle SVG Chamber */}
-                  <div style={{ position: 'relative', width: 220, height: 220, margin: '0 auto 12px' }}>
-                    <svg width="220" height="220" style={{ position: 'absolute', top: 0, left: 0, animation: 'runeSpinRev 14s linear infinite' }}>
-                      <circle cx="110" cy="110" r="100" fill="none" stroke={`${theme.primary}4d`} strokeWidth="1.5" strokeDasharray="6,4"/>
+                {/* Unified Crafting Chamber */}
+                <div style={{ padding: '16px 14px 14px', borderRadius: '14px', background: 'rgba(6,9,14,0.75)', border: `1.5px solid ${theme.primary}52`, boxShadow: '0 8px 24px rgba(0,0,0,0.5)' }}>
+                  <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '12px', fontWeight: '800', color: '#00e5ff', letterSpacing: '1px', marginBottom: 16, textAlign: 'center' }}>
+                    UNIFIED CRAFTING FORGE
+                  </div>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 14 }}>
+                    <select
+                      value={selectedRecipe ? selectedRecipe.id : ''}
+                      onChange={(e) => setCraftMasterTab(e.target.value)}
+                      style={{ width: '100%', padding: '10px', background: '#0a1628', border: '1px solid #00e5ff', borderRadius: '8px', color: '#e0f4ff', fontFamily: 'var(--font-mono)', fontSize: '13px' }}
+                    >
+                      <option value="">-- SELECT CRAFTING BLUEPRINT --</option>
+                      <optgroup label="Ore Refinement">
+                        {MASTER_RECIPES.filter(r => r.category === 'Ore Refinement').map(r => (
+                          <option key={r.id} value={r.id}>{r.emoji} {r.name}</option>
+                        ))}
+                      </optgroup>
+                      <optgroup label="Arcanite Synthesis">
+                        {MASTER_RECIPES.filter(r => r.category === 'Arcanite Synthesis').map(r => (
+                          <option key={r.id} value={r.id}>{r.emoji} {r.name}</option>
+                        ))}
+                      </optgroup>
+                      <optgroup label="Legendary Forge">
+                        {MASTER_RECIPES.filter(r => r.category === 'Legendary Forge').map(r => (
+                          <option key={r.id} value={r.id}>{r.emoji} {r.name}</option>
+                        ))}
+                      </optgroup>
+                    </select>
+                  </div>
+
+                  <div style={{ position: 'relative', width: 260, height: 260, margin: '0 auto 12px' }}>
+                    <svg width="260" height="260" style={{ position: 'absolute', top: 0, left: 0, animation: 'runeSpinRev 14s linear infinite' }}>
+                      <circle cx="130" cy="130" r="120" fill="none" stroke={`${theme.primary}4d`} strokeWidth="1.5" strokeDasharray="6,4"/>
                     </svg>
-                    <div style={{ position: 'absolute', top: 14, left: 14, width: 192, height: 192, borderRadius: '50%', background: `conic-gradient(from 0deg, transparent 0deg, ${theme.primary} 55deg, transparent 130deg, transparent 360deg)`, animation: 'spinFlow 4s linear infinite' }}></div>
-                    <div style={{ position: 'absolute', top: 25, left: 25, width: 170, height: 170, borderRadius: '50%', background: '#06090e' }}></div>
-                    <svg width="220" height="220" style={{ position: 'absolute', top: 0, left: 0, animation: 'runeSpin 20s linear infinite' }}>
-                      <circle cx="110" cy="110" r="85" fill="none" stroke="rgba(199,204,214,0.3)" strokeWidth="1" strokeDasharray="20,6"/>
+                    <div style={{ position: 'absolute', top: 20, left: 20, width: 220, height: 220, borderRadius: '50%', background: `conic-gradient(from 0deg, transparent 0deg, ${theme.primary} 55deg, transparent 130deg, transparent 360deg)`, animation: 'spinFlow 4s linear infinite' }}></div>
+                    <div style={{ position: 'absolute', top: 32, left: 32, width: 196, height: 196, borderRadius: '50%', background: '#06090e' }}></div>
+                    <svg width="260" height="260" style={{ position: 'absolute', top: 0, left: 0, animation: 'runeSpin 20s linear infinite' }}>
+                      <circle cx="130" cy="130" r="100" fill="none" stroke="rgba(199,204,214,0.3)" strokeWidth="1" strokeDasharray="20,6"/>
                     </svg>
 
-                    {/* Indicators */}
-                    {/* Top: Next Rarity */}
-                    <div style={{ position: 'absolute', top: 0, left: 88, width: 44, height: 44, borderRadius: 9, background: 'rgba(10,15,25,0.95)', border: '2px solid rgba(245,166,35,0.6)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 3 }}>
-                      <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 7, fontWeight: 800, color: '#8a94a3', letterSpacing: '0.3px' }}>NEXT</span>
-                      <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 800, color: '#f5a623' }}>
-                        {nextRarity}
-                      </span>
-                    </div>
+                    {/* 5 Material Slots */}
+                    {SLOT_POSITIONS.map((pos, idx) => {
+                      const mat = reqs[idx];
+                      if (!mat) {
+                        return (
+                          <div key={idx} style={{ position: 'absolute', top: pos.top, left: pos.left, width: 44, height: 44, borderRadius: 9, background: 'rgba(10,15,25,0.6)', border: '2px solid rgba(255,255,255,0.1)', zIndex: 3 }}></div>
+                        );
+                      }
+                      const hasEnough = mat.owned >= mat.count;
+                      return (
+                        <div key={idx} style={{ position: 'absolute', top: pos.top, left: pos.left, width: 44, height: 44, borderRadius: 9, background: 'rgba(10,15,25,0.95)', border: `2px solid ${hasEnough ? '#5fe08a' : '#ff4444'}`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 3 }} title={mat.name}>
+                          <span style={{ fontSize: 16 }}>{mat.emoji || '📦'}</span>
+                          <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 8, fontWeight: 800, color: hasEnough ? '#5fe08a' : '#ff4444' }}>{mat.owned}/{mat.count}</span>
+                        </div>
+                      );
+                    })}
 
-                    {/* Right: Required Talics */}
-                    <div style={{ position: 'absolute', top: 132, left: 164, width: 44, height: 44, borderRadius: 9, background: 'rgba(10,15,25,0.95)', border: '2px solid rgba(95,224,138,0.6)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 3 }}>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5fe08a" strokeWidth="1.8">
-                        <path d="M12 2C8 8 5 12 5 15a7 7 0 0 0 14 0c0-3-3-7-7-13z"/>
-                      </svg>
-                      <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 8, fontWeight: 800, color: '#5fe08a' }}>
-                        {requiredTalicsText}
-                      </span>
-                    </div>
-
-                    {/* Left: Required CRD */}
-                    <div style={{ position: 'absolute', top: 132, left: 12, width: 44, height: 44, borderRadius: 9, background: 'rgba(10,15,25,0.95)', border: '2px solid rgba(255,95,122,0.6)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 3 }}>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ff8080" strokeWidth="1.8">
-                        <polygon points="7,0 14,4 14,12 7,16 0,12 0,4" transform="translate(5,4)"/>
-                      </svg>
-                      <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 7, fontWeight: 800, color: '#ff8080' }}>
-                        {requiredCrdText}
-                      </span>
-                    </div>
-
-                    {/* Center slot */}
-                    <div style={{ position: 'absolute', top: 74, left: 74, width: 72, height: 72, borderRadius: 14, background: `linear-gradient(135deg, ${theme.primary}47, rgba(0,0,0,0.65))`, border: `2.5px solid ${theme.primary}`, boxShadow: `0 0 16px ${theme.primary}66`, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 4 }}>
-                      {isRefining ? (
+                    {/* Center Result Slot */}
+                    <div style={{ position: 'absolute', top: 90, left: 90, width: 80, height: 80, borderRadius: 14, background: `linear-gradient(135deg, ${theme.primary}47, rgba(0,0,0,0.65))`, border: `2.5px solid ${selectedRecipe ? selectedRecipe.color : theme.primary}`, boxShadow: `0 0 16px ${selectedRecipe ? selectedRecipe.color : theme.primary}66`, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 4 }}>
+                      {selectedRecipe ? (
+                        <div style={{ fontSize: 40 }}>{selectedRecipe.emoji}</div>
+                      ) : (
                         theme.weaponSmithSvg
-                      ) : hasWeapon ? (
-                        equippedWeapon.image ? (
-                          <img referrerPolicy="no-referrer" src={equippedWeapon.image} style={{ width: 60, height: 60, objectFit: 'contain' }} alt={equippedWeapon.name} />
-                        ) : null
-                      ) : null}
+                      )}
                     </div>
-
-                    {/* Sparks */}
-                    {isRefining && sparks.map(s => (
-                      <div
-                        key={s.id}
-                        className="spark-particle"
-                        style={{
-                          position: 'absolute',
-                          top: 110,
-                          left: 110,
-                          width: 4,
-                          height: 4,
-                          borderRadius: '50%',
-                          background: theme.primary,
-                          boxShadow: `0 0 8px ${theme.primary}`,
-                          pointerEvents: 'none',
-                          transform: `rotate(${s.angle}deg) translate(${s.dist}px) scale(${s.scale})`,
-                          transition: 'transform 1s cubic-bezier(0.1, 0.8, 0.3, 1), opacity 1s',
-                        }}
-                      />
-                    ))}
                   </div>
 
                   <div style={{ textAlign: 'center', marginBottom: 12 }}>
-                    <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '15px', fontWeight: '800', color: '#fff' }}>{weaponName}</div>
-                    <div style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: '12px', color: '#f5a623', marginTop: '2px' }}>
-                      Grade: {weaponGrade}
+                    <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '15px', fontWeight: '800', color: selectedRecipe ? selectedRecipe.color : '#fff' }}>
+                      {selectedRecipe ? selectedRecipe.name : 'NO BLUEPRINT SELECTED'}
                     </div>
                   </div>
 
-                  <div style={{ height: '1px', background: 'rgba(255,255,255,0.08)', margin: '14px 0' }}></div>
-
-                  {!hasWeapon ? (
-                    <button
-                      disabled={true}
-                      style={{
-                        width: '100%',
-                        border: 'none',
-                        borderRadius: '10px',
-                        padding: '11px 0',
-                        textAlign: 'center',
-                        background: 'rgba(28,36,56,0.8)',
-                        fontFamily: "'Orbitron', sans-serif",
-                        fontSize: '13px',
-                        fontWeight: '800',
-                        color: '#4a8fa8',
-                        letterSpacing: '1px',
-                        cursor: 'not-allowed'
-                      }}
-                    >
-                      NO WEAPON EQUIPPED
+                  {!selectedRecipe ? (
+                    <button disabled style={{ width: '100%', border: 'none', borderRadius: '10px', padding: '11px 0', textAlign: 'center', background: 'rgba(28,36,56,0.8)', fontFamily: "'Orbitron', sans-serif", fontSize: '13px', fontWeight: '800', color: '#4a8fa8', letterSpacing: '1px', cursor: 'not-allowed' }}>
+                      SELECT A BLUEPRINT FIRST
                     </button>
-                  ) : !cost ? (
-                    <div style={{ color: '#00ff88', fontFamily: "'Share Tech Mono', monospace", fontSize: '13px', fontWeight: 'bold', textAlign: 'center', padding: '10px 0' }}>
-                      MAX RARITY GRADE REACHED
-                    </div>
                   ) : (
                     <div>
-                      <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '12px', fontWeight: '700', color: theme.light, letterSpacing: '0.5px', marginBottom: '12px' }}>
-                        NEXT GRADE: {cost.next.toUpperCase()} (+{nextPercent} ATK)
-                      </div>
-                      <button
-                        disabled={!canUpgrade || isRefining}
-                        onClick={handleRefine}
-                        style={{
-                          width: '100%',
-                          border: 'none',
-                          borderRadius: '10px',
-                          padding: '11px 0',
-                          textAlign: 'center',
-                          background: canUpgrade ? `linear-gradient(135deg, ${theme.primary}, #b32c0d)` : 'rgba(28,36,56,0.8)',
-                          boxShadow: canUpgrade ? `0 0 14px ${theme.primary}66` : 'none',
-                          fontFamily: "'Orbitron', sans-serif",
-                          fontSize: '13px',
-                          fontWeight: '800',
-                          color: canUpgrade ? '#fff' : '#4a8fa8',
-                          letterSpacing: '1px',
-                          cursor: canUpgrade ? 'pointer' : 'not-allowed'
-                        }}
-                      >
-                        {isRefining ? 'SMITHING...' : canUpgrade ? 'REFINE WEAPON' : 'LACKING MATERIALS'}
-                      </button>
-                    </div>
-                  )}
-                </div>
-
-                {/* Combining Section */}
-                <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '12px', fontWeight: '700', letterSpacing: '1.5px', color: theme.light, marginTop: 10 }}>CRAFT VAMPIRIC WEAPON</div>
-                <div style={{ padding: '14px', borderRadius: '14px', background: 'rgba(6,9,14,0.72)', border: `1.5px solid ${theme.primary}4d` }}>
-                  <div style={{ fontFamily: "'Saira', sans-serif", fontSize: '13px', color: '#a8b4c4', lineHeight: 1.5, marginBottom: '12px' }}>
-                    Sacrifice an Epic+ weapon to imbue your weapon with a lifesteal property.
-                  </div>
-
-                  {!hasWeapon ? (
-                    <div style={{ background: 'rgba(255, 68, 68, 0.1)', border: '1px solid #ff4444', color: '#ff4444', borderRadius: '8px', padding: '12px', fontFamily: 'var(--font-mono)', fontSize: '13px', textAlign: 'center', lineHeight: 1.4 }}>
-                      NO WEAPON EQUIPPED
-                    </div>
-                  ) : equippedWeapon.specialProperty === 'vampire' ? (
-                    <div style={{ background: 'rgba(95,224,138,0.1)', border: '1px solid #5fe08a', color: '#5fe08a', borderRadius: '8px', padding: '12px', fontFamily: 'var(--font-mono)', fontSize: '13px', fontWeight: 'bold', textAlign: 'center' }}>
-                      VAMPIRIC EFFECT ALREADY ACTIVE
-                    </div>
-                  ) : !isEpicOrHigher(equippedWeapon) ? (
-                    <div style={{ background: 'rgba(255, 68, 68, 0.1)', border: '1px solid #ff4444', color: '#ff4444', borderRadius: '8px', padding: '12px', fontFamily: 'var(--font-mono)', fontSize: '13px', textAlign: 'center', lineHeight: 1.4 }}>
-                      WEAPON OF EPIC GRADE OR HIGHER REQUIRED
-                    </div>
-                  ) : (
-                    <div>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 10 }}>
-                        <label style={{ fontFamily: 'var(--font-mono)', fontSize: '13px', color: '#88aadd' }}>Select Sacrificial Weapon</label>
-                        <select
-                          value={selectedSacrificeUid}
-                          onChange={(e) => setSelectedSacrificeUid(e.target.value)}
-                          style={{ width: '100%', padding: '10px', background: '#0a1628', border: '1px solid #1a3a6a', borderRadius: '8px', color: '#e0f4ff', fontFamily: 'var(--font-mono)', fontSize: '13px' }}
-                        >
-                          <option value="">-- Choose Weapon --</option>
-                          {sacrificePool.map(it => (
-                            <option key={it.uid} value={it.uid}>
-                              {it.emoji} {it.name} (Lv.{it.level})
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: 6, margin: '12px 0' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 11px', borderRadius: '8px', background: 'rgba(0,0,0,0.3)', border: `1px solid ${selectedSacrificeUid ? '#5fe08a' : 'rgba(255,255,255,0.08)'}` }}>
-                          <span style={{ fontFamily: "'Saira', sans-serif", fontSize: '13px', color: '#cdd5e0' }}>Sacrifice Weapon</span>
-                          <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: '13px', color: selectedSacrificeUid ? '#5fe08a' : '#ff8080', fontWeight: 700 }}>{selectedSacrificeUid ? '1 / 1' : '0 / 1'}</span>
+                      {selectedRecipe.cost > 0 && (
+                        <div style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: '12px', color: player.resources.crd >= selectedRecipe.cost ? '#5fe08a' : '#ff4444', textAlign: 'center', marginBottom: 12 }}>
+                          Crafting Fee: {(selectedRecipe.cost / 1000).toFixed(0)}K CRD
                         </div>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 11px', borderRadius: '8px', background: 'rgba(0,0,0,0.3)', border: `1px solid ${ownedFavor >= 1 ? '#5fe08a' : 'rgba(255,255,255,0.08)'}` }}>
-                          <span style={{ fontFamily: "'Saira', sans-serif", fontSize: '13px', color: '#cdd5e0' }}>Favor Talic</span>
-                          <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: '13px', color: ownedFavor >= 1 ? '#5fe08a' : '#ff8080', fontWeight: 700 }}>{ownedFavor} / 1</span>
-                        </div>
-                      </div>
-
+                      )}
                       <button
-                        onClick={handleCombine}
-                        disabled={!selectedSacrificeUid || ownedFavor < 1}
-                        style={{
-                          width: '100%',
-                          border: 'none',
-                          borderRadius: '10px',
-                          padding: '11px 0',
-                          textAlign: 'center',
-                          background: (selectedSacrificeUid && ownedFavor >= 1) ? `linear-gradient(135deg, ${theme.primary}, #b32c0d)` : 'rgba(28,36,56,0.8)',
-                          boxShadow: (selectedSacrificeUid && ownedFavor >= 1) ? `0 0 14px ${theme.primary}66` : 'none',
-                          fontFamily: "'Orbitron', sans-serif",
-                          fontSize: '13px',
-                          fontWeight: '800',
-                          color: (selectedSacrificeUid && ownedFavor >= 1) ? '#fff' : '#4a8fa8',
-                          letterSpacing: '1px',
-                          cursor: (selectedSacrificeUid && ownedFavor >= 1) ? 'pointer' : 'not-allowed'
+                        onClick={() => {
+                          const res = selectedRecipe.action();
+                          if (res?.ok) alert(`✨ Berhasil craft ${selectedRecipe.name}!`);
+                          else alert(`❌ ${res?.msg || 'Gagal craft'}`);
                         }}
+                        disabled={!canCraft}
+                        style={{ width: '100%', border: 'none', borderRadius: '10px', padding: '11px 0', textAlign: 'center', background: canCraft ? `linear-gradient(135deg, ${theme.primary}, #b32c0d)` : 'rgba(28,36,56,0.8)', boxShadow: canCraft ? `0 0 14px ${theme.primary}66` : 'none', fontFamily: "'Orbitron', sans-serif", fontSize: '13px', fontWeight: '800', color: canCraft ? '#fff' : '#4a8fa8', letterSpacing: '1px', cursor: canCraft ? 'pointer' : 'not-allowed' }}
                       >
-                        FORGE VAMPIRIC WEAPON
+                        {canCraft ? `CRAFT ${selectedRecipe.name.toUpperCase()}` : 'INSUFFICIENT MATERIALS'}
                       </button>
                     </div>
                   )}
                 </div>
               </div>
-            </div>
-          )
-        })()}
-
-        
-        {craftMasterTab === 'ore' && (() => {
-           const ELEMENTS = [
-             { id: 'ignis', label: 'Ignis', emoji: '🔴', color: '#ff4444' },
-             { id: 'virel', label: 'Virel', emoji: '🔵', color: '#44aaff' },
-             { id: 'kryos', label: 'Kryos', emoji: '🟢', color: '#44ff88' },
-             { id: 'zephra', label: 'Zephra', emoji: '🟡', color: '#ffcc00' },
-             { id: 'umbrix', label: 'Umbrix', emoji: '⚫', color: '#88aadd' }
-           ]
-           const TIERS = [
-             { id: 'common', label: 'Common', reqCount: 5, cost: 10000 },
-             { id: 'rare', label: 'Rare', reqCount: 5, cost: 25000 },
-             { id: 'epic', label: 'Epic', reqCount: 5, cost: 50000 }
-           ]
-           return (
-             <div style={{ padding: '0 16px 80px' }}>
-                <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, color: '#00e5ff', letterSpacing: 1, marginBottom: 14, textAlign: 'center', borderBottom: '1px solid rgba(0,229,255,0.3)', paddingBottom: 8 }}>
-                  💎 ORE REFINEMENT — Extract Shards from Ores
-                </div>
-                {ELEMENTS.map(elem => (
-                   <div key={elem.id} style={{ marginBottom: 16 }}>
-                      <div style={{ fontFamily: 'var(--font-title)', fontSize: 14, color: elem.color, marginBottom: 8 }}>{elem.emoji} {elem.label} Ores</div>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                         {TIERS.map(tier => {
-                            const oreId = `ore_${elem.id}_${tier.id}`
-                            const ownedOre = player.inventory.filter(i => i.id === oreId).reduce((s, i) => s + (i.count || i.qty || 1), 0)
-                            const canCraft = ownedOre >= tier.reqCount && player.resources.crd >= tier.cost
-                            return (
-                              <div key={tier.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px', background: 'rgba(3,8,20,0.6)', border: `1px solid ${canCraft ? elem.color : 'rgba(255,255,255,0.08)'}`, borderRadius: 8 }}>
-                                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                                    <div style={{ fontSize: 24 }}>{elem.emoji}</div>
-                                    <div>
-                                       <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: '#fff' }}>{tier.label} {elem.label} Shard</div>
-                                       <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#88aadd' }}>Req: {tier.reqCount}x Ore | Cost: {(tier.cost/1000).toFixed(0)}k CRD</div>
-                                    </div>
-                                 </div>
-                                 <button 
-                                    onClick={() => {
-                                        const res = craftShard(elem.id, tier.id)
-                                        if (res?.ok) alert(`✨ Berhasil craft ${tier.label} ${elem.label} Shard!`)
-                                        else alert(`❌ ${res?.msg || 'Gagal craft'}`)
-                                    }}
-                                    disabled={!canCraft}
-                                    style={{ padding: '8px 14px', borderRadius: 6, background: canCraft ? elem.color : 'rgba(255,255,255,0.1)', color: canCraft ? '#000' : '#88aadd', border: 'none', fontFamily: 'var(--font-title)', fontSize: 11, fontWeight: 800, cursor: canCraft ? 'pointer' : 'not-allowed' }}
-                                 >
-                                    {ownedOre}/{tier.reqCount}
-                                 </button>
-                              </div>
-                            )
-                         })}
-                      </div>
-                   </div>
-                ))}
-             </div>
-           )
-        })()}
-
-        {craftMasterTab === 'arcanite' && (() => {
-           const ARCANITES = [
-             { id: 'mat_arcanite_fury', name: 'Fury', color: '#ffcc00', reqs: [{id: 'shard_ignis_epic', emoji:'🔴'}, {id: 'shard_virel_epic', emoji:'🔵'}] },
-             { id: 'mat_arcanite_ruin', name: 'Ruin', color: '#ff4444', reqs: [{id: 'shard_ignis_epic', count:2, emoji:'🔴'}] },
-             { id: 'mat_arcanite_spirit', name: 'Spirit', color: '#cc44ff', reqs: [{id: 'shard_zephra_epic', count:2, emoji:'🟡'}] },
-             { id: 'mat_arcanite_vital', name: 'Vital', color: '#00ff88', reqs: [{id: 'shard_umbrix_epic', count:2, emoji:'⚫'}] },
-             { id: 'mat_arcanite_guard', name: 'Guard', color: '#44aaff', reqs: [{id: 'shard_kryos_epic', count:2, emoji:'🟢'}] },
-             { id: 'mat_arcanite_precision', name: 'Precision', color: '#ffffff', reqs: [{id: 'shard_zephra_epic', emoji:'🟡'}, {id: 'shard_kryos_epic', emoji:'🟢'}] },
-             { id: 'mat_arcanite_agility', name: 'Agility', color: '#00ffff', reqs: [{id: 'shard_virel_epic', count:2, emoji:'🔵'}] },
-             { id: 'mat_arcanite_focus', name: 'Focus', color: '#ff8800', reqs: [{id: 'shard_ignis_epic', emoji:'🔴'}, {id: 'shard_zephra_epic', emoji:'🟡'}] }
-           ]
-           return (
-             <div style={{ padding: '0 16px 80px' }}>
-                <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, color: '#cc44ff', letterSpacing: 1, marginBottom: 14, textAlign: 'center', borderBottom: '1px solid rgba(204,68,255,0.3)', paddingBottom: 8 }}>
-                  🔮 ARCANITE SYNTHESIS — Create powerful enhancement stones
-                </div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#88aadd', textAlign: 'center', marginBottom: 14 }}>Cost per Arcanite: 100K CRD</div>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-                   {ARCANITES.map(arc => {
-                      let canCraft = true
-                      const checkReqs = arc.reqs.map(r => {
-                          const need = r.count || 1
-                          const owned = player.inventory.filter(i => i.id === r.id).reduce((s, i) => s + (i.count || i.qty || 1), 0)
-                          if (owned < need) canCraft = false
-                          return { ...r, need, owned }
-                      })
-                      if (player.resources.crd < 100000) canCraft = false
-                      
-                      return (
-                         <div key={arc.id} style={{ padding: '10px', background: 'rgba(3,8,20,0.6)', border: `1px solid ${canCraft ? arc.color : 'rgba(255,255,255,0.08)'}`, borderRadius: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                            <img src={`/assets/items/${arc.id}.png`} style={{ width: 32, height: 32, objectFit: 'contain', marginBottom: 6 }} alt={arc.name} />
-                            <div style={{ fontFamily: 'var(--font-title)', fontSize: 13, color: arc.color, marginBottom: 4 }}>{arc.name}</div>
-                            <div style={{ display: 'flex', gap: 4, marginBottom: 8 }}>
-                               {checkReqs.map((cr, idx) => (
-                                  <span key={idx} style={{ fontSize: 12, color: cr.owned >= cr.need ? '#5fe08a' : '#ff4444', fontFamily: 'var(--font-mono)' }}>{cr.emoji} {cr.owned}/{cr.need}</span>
-                               ))}
-                            </div>
-                            <button 
-                                onClick={() => {
-                                   const res = craftArcanite(arc.id)
-                                   if (res?.ok) alert(`✨ Berhasil craft Arcanite ${arc.name}!`)
-                                   else alert(`❌ ${res?.msg || 'Gagal craft'}`)
-                                }}
-                                disabled={!canCraft}
-                                style={{ width: '100%', padding: '6px 0', borderRadius: 4, background: canCraft ? arc.color : 'rgba(255,255,255,0.1)', color: canCraft ? '#000' : '#88aadd', border: 'none', fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 800, cursor: canCraft ? 'pointer' : 'not-allowed' }}
-                            >
-                                CRAFT
-                            </button>
-                         </div>
-                      )
-                   })}
-                </div>
-             </div>
-           )
-        })()}
-
-        {craftMasterTab === 'legendary' && (() => {
-          const SHARD_TYPES = [
-            { id: 'shard_ignis_epic',  label: 'Ignis',  emoji: '🔴' },
-            { id: 'shard_virel_epic',  label: 'Virel',  emoji: '🔵' },
-            { id: 'shard_kryos_epic',  label: 'Kryos',  emoji: '🟢' },
-            { id: 'shard_zephra_epic', label: 'Zephra', emoji: '🟡' },
-            { id: 'shard_umbrix_epic', label: 'Umbrix', emoji: '⚫' },
-          ]
-          const inv = player.inventory
-          const countOf = (id) => inv.filter(i => i.id === id).reduce((sum, i) => sum + (i.count || i.qty || 1), 0)
-
-          const RECIPES = [
-            { id: 'leg_weapon', label: 'Legendary Weapon',  emoji: '⚔️',  baseId: 'mat_epic_weapon',  baseLabel: 'Epic Weapon',  shards: 6 },
-            { id: 'leg_armor',  label: 'Legendary Armor',   emoji: '🦾',  baseId: 'mat_epic_armor',   baseLabel: 'Epic Armor',   shards: 4 },
-            { id: 'leg_helmet', label: 'Legendary Helmet',  emoji: '⛑️',  baseId: 'mat_epic_armor',   baseLabel: 'Epic Armor',   shards: 4 },
-            { id: 'leg_mantle', label: 'Legendary Mantle',  emoji: '🥋',  baseId: 'mat_epic_armor',   baseLabel: 'Epic Armor',   shards: 4 },
-            { id: 'leg_gloves', label: 'Legendary Gloves',  emoji: '🧤',  baseId: 'mat_epic_armor',   baseLabel: 'Epic Armor',   shards: 4 },
-            { id: 'leg_boots',  label: 'Legendary Boots',   emoji: '👢',  baseId: 'mat_epic_armor',   baseLabel: 'Epic Armor',   shards: 4 },
-            { id: 'leg_shield', label: 'Legendary Shield',  emoji: '🛡️',  baseId: 'mat_epic_armor',   baseLabel: 'Epic Armor',   shards: 4 },
-            { id: 'leg_ring',   label: 'Legendary Ring',    emoji: '💍',  baseId: 'mat_epic_ring',    baseLabel: 'Epic Ring',    shards: 5 },
-            { id: 'leg_amulet', label: 'Legendary Amulet',  emoji: '📿',  baseId: 'mat_epic_amulet',  baseLabel: 'Epic Amulet',  shards: 5 },
-            { id: 'leg_cape',   label: 'Legendary Cape',    emoji: '🦸',  baseId: 'mat_epic_cape',    baseLabel: 'Epic Cape',    shards: 5 },
-          ]
-
-          const LEGEND_STATS = {
-            leg_weapon: 'ATK+200 | HP+2000 | Crit+5%',
-            leg_armor:  'DEF+120 | HP+2500 (per piece)',
-            leg_helmet: 'DEF+120 | HP+2500 (per piece)',
-            leg_mantle: 'DEF+120 | HP+2500 (per piece)',
-            leg_gloves: 'DEF+120 | HP+2500 (per piece)',
-            leg_boots:  'DEF+120 | HP+2500 (per piece)',
-            leg_shield: 'DEF+120 | HP+2500',
-            leg_ring:   'ATK+100 | HP+1500 | Crit+3% (per piece)',
-            leg_amulet: 'DEF+100 | HP+2000 (per piece)',
-            leg_cape:   'ATK+80 | DEF+80 | HP+2000 | Crit+2%',
-          }
-
-          return (
-            <div style={{ padding: '0 16px 80px' }}>
-              <div style={{ fontFamily: 'var(--font-title)', fontSize: 12, color: '#f5a623', letterSpacing: 1, marginBottom: 14, textAlign: 'center', borderBottom: '1px solid rgba(245,166,35,0.3)', paddingBottom: 8 }}>
-                ⚔️ LEGENDARY FORGE — Craft equipment of legendary power
-              </div>
-              {RECIPES.map(recipe => {
-                const baseOwned = countOf(recipe.baseId)
-                const shardCounts = SHARD_TYPES.map(s => ({ ...s, owned: countOf(s.id), need: recipe.shards }))
-                const canCraft = baseOwned >= 1 && shardCounts.every(s => s.owned >= s.need)
-                return (
-                  <div key={recipe.id} style={{ marginBottom: 14, background: 'rgba(3,8,20,0.6)', border: `1.5px solid ${canCraft ? '#f5a623' : 'rgba(255,255,255,0.08)'}`, borderRadius: 12, padding: 14 }}>
-                    {/* Header */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
-                      <div style={{ fontSize: 28 }}>{recipe.emoji}</div>
-                      <div>
-                        <div style={{ fontFamily: 'var(--font-title)', fontSize: 15, fontWeight: 800, color: '#f5a623' }}>{recipe.label}</div>
-                        <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#88aadd', marginTop: 2 }}>{LEGEND_STATS[recipe.id]}</div>
-                      </div>
-                    </div>
-                    {/* Ingredients */}
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 10 }}>
-                      {/* Base material */}
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '4px 8px', borderRadius: 6, background: 'rgba(0,0,0,0.3)', border: `1px solid ${baseOwned >= 1 ? 'rgba(95,224,138,0.4)' : 'rgba(255,95,122,0.3)'}`, fontSize: 12, color: baseOwned >= 1 ? '#5fe08a' : '#ff6a4d', fontWeight: 700 }}>
-                        📦 {recipe.baseLabel} ×1 ({baseOwned}/1)
-                      </div>
-                      {/* Shards */}
-                      {shardCounts.map(s => (
-                        <div key={s.id} style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '4px 8px', borderRadius: 6, background: 'rgba(0,0,0,0.3)', border: `1px solid ${s.owned >= s.need ? 'rgba(95,224,138,0.4)' : 'rgba(255,95,122,0.3)'}`, fontSize: 12, color: s.owned >= s.need ? '#5fe08a' : '#ff6a4d', fontWeight: 700 }}>
-                          {s.emoji} {s.label} ×{s.need} ({s.owned}/{s.need})
-                        </div>
-                      ))}
-                    </div>
-                    {/* Craft Button */}
-                    <button
-                      onClick={() => {
-                        const result = craftLegendary(recipe.id)
-                        if (result?.ok) alert(`✨ ${recipe.label} berhasil dibuat!`)
-                        else alert(`❌ ${result?.msg || 'Gagal craft'}`)
-                      }}
-                      disabled={!canCraft}
-                      style={{ width: '100%', border: 'none', borderRadius: 8, padding: '10px 0', fontFamily: 'var(--font-title)', fontSize: 12, fontWeight: 800, cursor: canCraft ? 'pointer' : 'not-allowed', background: canCraft ? 'linear-gradient(135deg,#f5a623,#ff6b35)' : 'rgba(28,36,56,0.8)', color: canCraft ? '#1a0f00' : '#4a8fa8', letterSpacing: 1, boxShadow: canCraft ? '0 0 12px rgba(245,166,35,0.4)' : 'none', transition: 'all 0.2s' }}
-                    >
-                      {canCraft ? `⚡ CRAFT ${recipe.label.toUpperCase()}` : '🔒 MATERIALS MISSING'}
-                    </button>
-                  </div>
-                )
-              })}
-            </div>
-          )
-        })()}
-
-        {/* ───────── SET SHOP TAB ───────── */}
-        
-            </div>
-          )}
+            );
+          })()}
 
           
           {/* ─── EMINENCE QUARTERMASTER ─── */}

@@ -8,3 +8,6 @@ Setiap kali melakukan pemeliharaan kode (maintenance), pembersihan file (cleanup
 
 # Combat Rules & Vocabulary
 - **Aggressive (Musuh/Boss Aggressive)**: Menandakan musuh memiliki peluang serangan ganda (**Double Hit Chance**). Peluang ini didefinisikan dalam JSON data musuh (`doubleHitChance` dalam persentase) dan diproses dalam perhitungan pertempuran di `gameStore.js`.
+
+# Communication Rules
+- **Plan Presentation**: Jangan pernah menyuruh User untuk membaca file `.md` (seperti `implementation_plan.md`). Selalu rangkum dan tampilkan isi rencana (plan) atau pertanyaan secara langsung di dalam pesan chat/balasan.

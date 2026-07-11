@@ -139,6 +139,8 @@ export default function AuditorRoom() {
 
   const getActiveArray = () => {
     if (tab === 'gears') return allData.gears[subTab] || []
+    if (tab === 'crafting') return (allData.items || []).filter(i => i.type === 'material' && !i.name.includes('Talic') && !i.name.includes('Arcanite') && i.id !== 'mat_divine_crest' && i.id !== 'mat_lucky_relic')
+    if (tab === 'enhance') return (allData.items || []).filter(i => i.name.includes('Talic') || i.name.includes('Arcanite') || i.id === 'mat_divine_crest' || i.id === 'mat_lucky_relic')
     return allData[tab] || []
   }
 
@@ -284,11 +286,13 @@ export default function AuditorRoom() {
         </div>
 
         <div style={styles.tabs}>
-          <button style={tab === 'items' ? styles.tabActive : styles.tab} onClick={() => setTab('items')}>Items</button>
-          <button style={tab === 'enemies' ? styles.tabActive : styles.tab} onClick={() => setTab('enemies')}>Enemies</button>
-          <button style={tab === 'gears' ? styles.tabActive : styles.tab} onClick={() => setTab('gears')}>Gears</button>
-          <button style={tab === 'races' ? styles.tabActive : styles.tab} onClick={() => setTab('races')}>Races</button>
-          <button style={tab === 'jobs' ? styles.tabActive : styles.tab} onClick={() => setTab('jobs')}>Jobs</button>
+          <button style={tab === 'items' ? styles.tabActive : styles.tab} onClick={() => {setTab('items'); setPage(0)}}>Items</button>
+          <button style={tab === 'enemies' ? styles.tabActive : styles.tab} onClick={() => {setTab('enemies'); setPage(0)}}>Enemies</button>
+          <button style={tab === 'gears' ? styles.tabActive : styles.tab} onClick={() => {setTab('gears'); setPage(0)}}>Gears</button>
+          <button style={tab === 'races' ? styles.tabActive : styles.tab} onClick={() => {setTab('races'); setPage(0)}}>Races</button>
+          <button style={tab === 'jobs' ? styles.tabActive : styles.tab} onClick={() => {setTab('jobs'); setPage(0)}}>Jobs</button>
+          <button style={tab === 'crafting' ? styles.tabActive : styles.tab} onClick={() => {setTab('crafting'); setPage(0)}}>Crafting</button>
+          <button style={tab === 'enhance' ? styles.tabActive : styles.tab} onClick={() => {setTab('enhance'); setPage(0)}}>Enhance</button>
         </div>
 
         {tab === 'gears' && (
@@ -317,6 +321,34 @@ export default function AuditorRoom() {
         </div>
 
         <div style={styles.content} className="no-scrollbar">
+          {(tab === 'crafting' || tab === 'enhance') ? (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '15px', padding: '10px' }}>
+              {paginatedData.map((item, idx) => (
+                <div key={item.id || idx} style={{ display: 'flex', backgroundColor: '#111520', border: '1px solid #1a2a40', borderRadius: '4px', padding: '12px', gap: '15px', boxShadow: 'inset 0 0 10px rgba(0,0,0,0.5)' }}>
+                  <div style={{ width: '56px', height: '56px', backgroundColor: '#050a12', border: '1px solid #334460', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', flexShrink: 0 }}>
+                    <img loading="lazy" src={item._imagePreview || item.image || item.icon || '/assets/placeholder.png'} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                  </div>
+                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                    <div style={{ fontSize: '15px', fontWeight: 'bold', color: item.rarity === 'legendary' ? '#ffaa00' : item.rarity === 'mythic' ? '#ff0055' : item.rarity === 'epic' ? '#a335ee' : item.rarity === 'rare' ? '#0070dd' : item.rarity === 'uncommon' ? '#1eff00' : '#ffffff', textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>
+                      {item.name}
+                    </div>
+                    <div style={{ fontSize: '12px', color: '#7ab0d0', marginTop: '2px' }}>
+                      [Level {item.level || 1}] • {item.type}
+                    </div>
+                    <div style={{ fontSize: '12px', color: '#aaaaaa', marginTop: '4px', lineHeight: '1.3' }}>
+                      {item.description || item._kegunaan || "Material resources for upgrading and crafting."}
+                    </div>
+                  </div>
+                  <div style={{ width: '80px', borderLeft: '1px solid #1a2a40', paddingLeft: '10px', display: 'flex', flexDirection: 'column', justifyContent: 'center', fontSize: '11px', color: '#5588aa' }}>
+                    <strong>Rarity:</strong>
+                    <span style={{ textTransform: 'capitalize', color: '#fff' }}>{item.rarity || 'Common'}</span>
+                    <strong style={{ marginTop: '5px' }}>Uses:</strong>
+                    <span style={{ color: '#fff' }}>{item._kegunaan || tab}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '1000px', fontSize: '13px', color: '#c0dff0' }}>
             <thead>
               <tr style={{ borderBottom: '2px solid rgba(0,229,255,0.3)', backgroundColor: 'rgba(0,229,255,0.05)' }}>
@@ -426,6 +458,7 @@ export default function AuditorRoom() {
               )})}
             </tbody>
           </table>
+          )}
         </div>
       </div>
 

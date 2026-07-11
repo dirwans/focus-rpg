@@ -2019,3 +2019,20 @@ To prevent sprite misalignment and clipping inside frames (like the Character In
   - Locked spirit levels show dimmed sprite + lock message.
   - Quick-compare bottom cards for both spirits with current level.
 - **Build**: Verified `npm run build` compiles cleanly.
+---
+
+### ?? Milestone 57: Nginx SSL, Lazy Loading, and NPC UI Overhaul [PENDING DEPLOYMENT]
+- **Nginx SSL Configuration (ix_nginx.conf)**:
+  - Configured SSL for the 
+ip.io domain to ensure secure connections and avoid routing errors on the server.
+- **AuditorRoom Lazy Loading (AuditorRoom.jsx)**:
+  - Implemented lazy loading for image assets in the Auditor Room and filtered map data to prevent memory overload during rapid rendering.
+- **Agent Communication Rules (AGENTS.md)**:
+  - Added strict rules forbidding agents from forcing the user to read .md files directly. Agents must summarize all plans in the chat explicitly.
+- **Enhancement Master NPC UI Overhaul (NpcModal.jsx)**:
+  - Removed Rate and Level floating text from the orbital ring, moving them to a dedicated stats preview section.
+  - Refactored the enhancement orbit to use a perfect 3-slot triangular layout for Arcanite, Divine Crest, and Lucky Relic.
+- **Master Artisan Crafting NPC Overhaul (NpcModal.jsx)**:
+  - Removed all separate tabs (Weapon Smith, Ore Refinement, Arcanite Synthesis, Legendary Forge).
+  - Implemented a unified 5-slot circular UI with a single dropdown recipe/blueprint selector.
+  - Re-mapped the existing gameStore.js logic seamlessly so that unused material slots intelligently hide depending on the recipe requirements.
