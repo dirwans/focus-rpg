@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import arctronLogo from '../assets/arctron_logo.png'
 import bionexLogo from '../assets/bionex_logo.png'
 import celestraLogo from '../assets/celestra_logo.png'
-import defaultToolIcon from '../assets/mat_ore_refined.png'
 
 export default function AuditorRoom() {
   const [pin, setPin] = useState('')
@@ -376,7 +375,7 @@ export default function AuditorRoom() {
                        <div style={{ padding: '15px', flex: 1, display: 'flex', flexDirection: 'column' }}>
                            <div style={{ display: 'flex', gap: '15px', background: '#1a1a1a', padding: '15px', border: '1px solid #222', borderRadius: '4px', alignItems: 'center' }}>
                                <div style={{ width: '40px', height: '40px', background: '#222', border: '1px solid #444', padding: '2px', flexShrink: 0, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                   <img src={defaultToolIcon} style={{width:'80%', height:'80%', objectFit:'contain', filter: 'grayscale(0.5)'}} />
+                                   <img src="/assets/mat_ore_refined.png" style={{width:'80%', height:'80%', objectFit:'contain', filter: 'grayscale(0.5)'}} />
                                </div>
                                <div style={{ flex: 1 }}>
                                    <div style={{ color: '#fff', fontWeight: 'bold', fontSize: '14px' }}>Database Craft Editor</div>
