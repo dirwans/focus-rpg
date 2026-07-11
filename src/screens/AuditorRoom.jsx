@@ -350,15 +350,15 @@ export default function AuditorRoom() {
                            <div>
                                <div style={{ fontSize: '10px', color: '#888', marginBottom: '5px', textTransform: 'uppercase' }}>Race</div>
                                <div style={{ display: 'flex', gap: '5px' }}>
-                                   <button style={{ flex: 1, background: '#1a1a1a', border: '1px solid #d18a42', padding: '10px', display: 'flex', justifyContent: 'center', cursor: 'pointer' }}><img src="/assets/arctron_logo.png" style={{height:'20px', filter:'grayscale(1) brightness(2)', objectFit: 'contain'}}/></button>
-                                   <button style={{ flex: 1, background: '#1a1a1a', border: '1px solid #333', padding: '10px', display: 'flex', justifyContent: 'center', cursor: 'pointer' }}><img src="/assets/bionex_logo.png" style={{height:'20px', filter:'grayscale(1) brightness(0.5)', objectFit: 'contain'}}/></button>
-                                   <button style={{ flex: 1, background: '#1a1a1a', border: '1px solid #333', padding: '10px', display: 'flex', justifyContent: 'center', cursor: 'pointer' }}><img src="/assets/celestra_logo.png" style={{height:'20px', filter:'grayscale(1) brightness(0.5)', objectFit: 'contain'}}/></button>
+                                   <button style={{ flex: 1, background: '#1a1a1a', border: '1px solid #d18a42', padding: '10px', display: 'flex', justifyContent: 'center', cursor: 'pointer' }}><img src={arctronLogo} style={{height:'20px', filter:'grayscale(1) brightness(2)', objectFit: 'contain'}}/></button>
+                                   <button style={{ flex: 1, background: '#1a1a1a', border: '1px solid #333', padding: '10px', display: 'flex', justifyContent: 'center', cursor: 'pointer' }}><img src={bionexLogo} style={{height:'20px', filter:'grayscale(1) brightness(0.5)', objectFit: 'contain'}}/></button>
+                                   <button style={{ flex: 1, background: '#1a1a1a', border: '1px solid #333', padding: '10px', display: 'flex', justifyContent: 'center', cursor: 'pointer' }}><img src={celestraLogo} style={{height:'20px', filter:'grayscale(1) brightness(0.5)', objectFit: 'contain'}}/></button>
                                </div>
                            </div>
                            <div>
                                <div style={{ fontSize: '10px', color: '#888', marginBottom: '5px', textTransform: 'uppercase' }}>Attempts</div>
                                <div style={{ background: '#1a1a1a', border: '1px solid #333', padding: '10px', fontSize: '12px', color: '#666', minHeight: '60px' }}>
-                                   Select a recipe and press Operation.
+                                   Click an item to open Database Editor.
                                </div>
                            </div>
                        </div>
@@ -372,7 +372,7 @@ export default function AuditorRoom() {
                        <div style={{ padding: '15px', flex: 1, display: 'flex', flexDirection: 'column' }}>
                            <div style={{ display: 'flex', gap: '15px', background: '#1a1a1a', padding: '15px', border: '1px solid #222', borderRadius: '4px', alignItems: 'center' }}>
                                <div style={{ width: '40px', height: '40px', background: '#222', border: '1px solid #444', padding: '2px', flexShrink: 0, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                   <img src="/assets/mat_ore_refined.png" style={{width:'80%', height:'80%', objectFit:'contain', filter: 'grayscale(0.5)'}} />
+                                   <img src={defaultToolIcon} style={{width:'80%', height:'80%', objectFit:'contain', filter: 'grayscale(0.5)'}} />
                                </div>
                                <div style={{ flex: 1 }}>
                                    <div style={{ color: '#fff', fontWeight: 'bold', fontSize: '14px' }}>Database Craft Editor</div>
@@ -392,9 +392,17 @@ export default function AuditorRoom() {
                                <div style={{ padding: '10px', display: 'grid', gridTemplateColumns: 'repeat(5, 40px)', gap: '4px' }}>
                                    {Array.from({length: 20}).map((_, i) => {
                                        const item = paginatedData[i];
+                                       const hasImage = item && (item._imagePreview || item.image || item.icon);
                                        return (
-                                           <div key={i} onClick={() => item && setSimItem(item)} style={{ width: '40px', height: '40px', background: '#222', border: simItem?.id === item?.id ? '1px solid #d18a42' : '1px solid #444', cursor: item ? 'pointer' : 'default', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
-                                               {item && <img loading="lazy" src={item._imagePreview || item.image || item.icon} style={{ width: '80%', height: '80%', objectFit: 'contain' }} />}
+                                           <div key={i} title={item?.name || 'Empty Slot'} onClick={() => {
+                                               if (item) {
+                                                   setSimItem(item);
+                                                   const actIdx = activeData.findIndex(d => d.id === item.id);
+                                                   if (actIdx >= 0) openDefModal(actIdx);
+                                               }
+                                           }} style={{ width: '40px', height: '40px', background: '#222', border: simItem?.id === item?.id ? '1px solid #d18a42' : '1px solid #444', cursor: item ? 'pointer' : 'default', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
+                                               {item && hasImage && <img loading="lazy" src={item._imagePreview || item.image || item.icon} style={{ width: '80%', height: '80%', objectFit: 'contain' }} />}
+                                               {item && !hasImage && <div style={{ fontSize: '9px', color: '#888', textAlign: 'center', lineHeight: '1', wordBreak: 'break-all', padding: '2px' }}>{item.name?.substring(0, 8)}</div>}
                                                {!item && <div style={{width:'100%', height:'100%', background: `linear-gradient(135deg, #22a 0%, #222 49%, #333 50%, #222 51%)`, opacity: 0.2}}></div>}
                                            </div>
                                        )
@@ -416,21 +424,6 @@ export default function AuditorRoom() {
                                        <div style={{ padding: '6px 10px', color: '#aaa', width: '60px' }}>Sub</div>
                                        <div style={{ padding: '6px 10px', color: '#fff', flex: 1, textAlign: 'right', background: '#111', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>-</div>
                                    </div>
-                               </div>
-
-                               <div style={{ padding: '12px' }}>
-                                   <button 
-                                       onClick={() => {
-                                           if (simItem) {
-                                               const actIdx = activeData.findIndex(d => d.id === simItem.id);
-                                               if (actIdx >= 0) openDefModal(actIdx);
-                                           }
-                                       }} 
-                                       disabled={!simItem}
-                                       style={{ background: simItem ? '#1a1a1a' : '#111', border: simItem ? '1px solid #d18a42' : '1px solid #333', color: simItem ? '#d18a42' : '#555', padding: '8px 30px', cursor: simItem ? 'pointer' : 'not-allowed', fontWeight: 'bold', fontSize: '13px', borderRadius: '2px', transition: 'all 0.2s' }}
-                                   >
-                                       Operation
-                                   </button>
                                </div>
                            </div>
                        </div>

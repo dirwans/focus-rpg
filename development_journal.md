@@ -2051,14 +2051,24 @@ ip.io domain to ensure secure connections and avoid routing errors on the server
 
 ---
 
-### ?? Milestone 58: Auditor Room Crafting Simulator Layout [PENDING DEPLOYMENT]
+### ?? Milestone 58: Auditor Room Crafting Simulator Layout [DEPLOYED]
 - **Responsive UI Fixes (AuditorRoom.jsx)**:
   - Implemented horizontal swipe layouts (overflowX: 'auto' and 
 owrap) to the tabs and sub-tabs.
   - Implemented .no-scrollbar across all browsers via index.css.
   - Re-architected grid columns to use dynamic minimum width scaling minmax(min(100%, 280px), 1fr).
 - **Crafting Simulator Clone (AuditorRoom.jsx)**:
-  - Completely rewrote the 	ab === 'crafting' interface to perfectly replicate the fdatabase.net/crafting/ 3-column UI layout.
+  - Completely rewrote the 	ab === 'crafting' interface to perfectly replicate the 
+fdatabase.net/crafting/ 3-column UI layout.
   - **Left Filter Panel**: Added search, mock mastery slider, and race icons.
   - **Center Grid Panel**: Transformed into a 5x4 slot grid (20 items per page). Selected items highlight automatically. "Operation" button securely triggers the openDefModal JSON Editor for admin configuration.
   - **Right Details Panel**: Added detailed item rendering, mock materials placeholders, and a success rate formula table matching the classic RF visual aesthetic.
+
+---
+
+### ?? Milestone 59: Hotfix Auditor Crafting UI [PENDING DEPLOYMENT]
+- **Bug Fixes (AuditorRoom.jsx)**:
+  - Fixed broken image paths for Race logos by using direct imports (rctronLogo, ionexLogo, celestraLogo).
+  - Added a visual fallback for materials without images (displays the first 8 characters of the item's name inside the box).
+  - Removed the "Operation" button.
+  - Refactored the grid item onClick to immediately invoke openDefModal and setSimItem, streamlining the admin workflow (one-click edit).
