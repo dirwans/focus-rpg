@@ -148,7 +148,7 @@ export default function AuditorRoom() {
     if (tab === 'crafting') {
       let base = (allData.items || []).filter(i => i.type === 'material' && !i.name.includes('Talic') && !i.name.includes('Arcanite') && i.id !== 'mat_divine_crest' && i.id !== 'mat_lucky_relic')
       if (craftRaceFilter !== 'all') {
-        base = base.filter(i => i.name.toLowerCase().includes(craftRaceFilter) || i.id.toLowerCase().includes(craftRaceFilter))
+        base = base.filter(i => !i.faction || i.faction === craftRaceFilter || i.name.toLowerCase().includes(craftRaceFilter) || i.id.toLowerCase().includes(craftRaceFilter))
       }
       if (craftSubTab === 'Shards') return base.filter(i => i.name.toLowerCase().includes('shard'))
       if (craftSubTab === 'Ores') return base.filter(i => i.name.toLowerCase().includes('ore'))
