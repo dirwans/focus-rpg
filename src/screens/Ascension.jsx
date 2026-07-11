@@ -233,7 +233,9 @@ export default function Ascension() {
                               <img
                                 src={EVO_IMAGES[`spirit_${animusKey}_${lv}`] || `/assets/spirit_${animusKey}_${lv}.png?v=6`}
                                 alt={`${aData.name} Lv.${lv}`}
+                                className={animusKey === 'noctyrna' ? 'game-sprite-noctyrna' : ''}
                                 style={{
+                                  imageRendering: animusKey === 'noctyrna' ? 'pixelated' : 'auto',
                                   width: '100%',
                                   maxWidth: 320,
                                   height: 320,
@@ -241,7 +243,8 @@ export default function Ascension() {
                                   margin: '0 auto',
                                   display: 'block',
                                   position: 'relative',
-                                  zIndex: 1
+                                  zIndex: 1,
+                                  transform: animusKey === 'noctyrna' ? 'scale(1.2)' : 'none'
                                 }}
                               />
                             </div>
