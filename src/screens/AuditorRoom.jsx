@@ -156,25 +156,107 @@ export default function AuditorRoom() {
              let genericPath = null;
              
              if (category === 'gears_arctron' || category === 'gears_bionex' || category === 'gears_celestra') {
+                // Determine level/tier (1, 32, 42, 55, 66)
+                let level = '32';
+                const lastChar = idStr.substring(idStr.length - 1);
+                if (lastChar === '0' || lastChar === '1') {
+                    level = '1';
+                } else if (lastChar === '2') {
+                    level = '32';
+                } else if (lastChar === '3') {
+                    level = '42';
+                } else if (lastChar === '4') {
+                    level = '55';
+                } else if (lastChar === '5') {
+                    level = '66';
+                }
+                
+                // Parse numeric suffix if present (e.g. gw_arc_launcher_30)
+                const numMatch = idStr.match(/_(\d+)$/);
+                if (numMatch) {
+                    const val = parseInt(numMatch[1], 10);
+                    if (val === 1 || val === 0) level = '1';
+                    else if (val === 30 || val === 32) level = '32';
+                    else if (val === 40 || val === 42) level = '42';
+                    else if (val === 50 || val === 55) level = '55';
+                    else if (val === 60 || val === 65 || val === 66) level = '66';
+                }
+
+                // Clamp level 66 to 55 for Arctron since Arctron has no lv66 files
+                if (category === 'gears_arctron' && level === '66') {
+                    level = '55';
+                }
+
                 if (idStr.includes('wpn_') || idStr.includes('gw_')) {
-                    if (idStr.includes('ran') || idStr.includes('bow')) genericPath = '/assets/weapons/defallfactionslv32bow.png';
-                    else if (idStr.includes('spe') || idStr.includes('gun') || idStr.includes('launcher')) genericPath = '/assets/weapons/defallfactionslv32gun.png';
-                    else if (idStr.includes('mys') || idStr.includes('staff')) genericPath = '/assets/weapons/defbioncelestralv32staff.png';
-                    else genericPath = '/assets/weapons/defallfactionslv32sword.png';
-                } else if (idStr.includes('set_') || idStr.includes('arm_') || idStr.includes('shd_')) {
+                    // WEAPONS
+                    const isBow = idStr.includes('ran') || idStr.includes('bow') || idStr.includes('arrow');
+                    const isStaff = idStr.includes('mys') || idStr.includes('staff') || idStr.includes('force');
+                    const isGun = idStr.includes('spe') || idStr.includes('gun') || idStr.includes('launcher');
+                    const isAxe = idStr.includes('axe') || idStr.includes('reaver') || idStr.includes('cleaver') || idStr.includes('scythe') || idStr.includes('hatchet');
+                    
+                    if (isBow) {
+                        genericPath = `/assets/weapons/defallfactionslv${level}bow.png`;
+                    } else if (isGun) {
+                        if (category === 'gears_arctron') {
+                            genericPath = `/assets/weapons/defarctronlv${level}special.png`;
+                        } else {
+                            genericPath = `/assets/weapons/defallfactionslv${level}gun.png`;
+                        }
+                    } else if (isStaff) {
+                        genericPath = `/assets/weapons/defbioncelestralv${level}staff.png`;
+                    } else if (isAxe && level !== '1') {
+                        genericPath = `/assets/weapons/defallfactionslv${level}axe.png`;
+                    } else {
+                        // Sword
+                        if (level === '1') {
+                            const charCodeSum = idStr.split('').reduce((sum, ch) => sum + ch.charCodeAt(0), 0);
+                            const swordIndex = (charCodeSum % 4) + 1;
+                            genericPath = `/assets/weapons/defallfactionslv1sword${swordIndex}.png`;
+                        } else {
+                            genericPath = `/assets/weapons/defallfactionslv${level}sword.png`;
+                        }
+                    }
+                } else if (idStr.includes('shd_') || idStr.includes('shield')) {
+                    // SHIELDS
+                    if (level === '1') {
+                        genericPath = '/assets/arctron_shield_1_rembg.png';
+                    } else if (level === '32' || level === '42') {
+                        genericPath = '/assets/arctron_shield_2_rembg.png';
+                    } else {
+                        genericPath = '/assets/arctron_shield_3_rembg.png';
+                    }
+                } else if (idStr.includes('set_') || idStr.includes('arm_')) {
+                    // ARMORS
+                    let isRanger = idStr.includes('ran') || (item.type && item.type.toLowerCase().includes('ranger'));
+                    let isSpecialist = idStr.includes('spe') || idStr.includes('mys') || idStr.includes('psi') || idStr.includes('mage') || (item.type && (item.type.toLowerCase().includes('specialist') || item.type.toLowerCase().includes('mystic') || item.type.toLowerCase().includes('force')));
+                    
+                    let folder = 'armor';
+                    let prefix = 'defarctron';
                     let job = 'warrior';
-                    if (idStr.includes('ran') || (item.type && item.type.includes('ranger'))) job = 'ranger';
-                    if (idStr.includes('spe') || idStr.includes('mys') || (item.type && (item.type.includes('specialist') || item.type.includes('mystic')))) job = 'technician';
+                    
+                    if (category === 'gears_arctron') {
+                        folder = 'armor';
+                        prefix = 'defarctron';
+                        job = isRanger ? 'ranger' : (isSpecialist ? 'technician' : 'warrior');
+                    } else if (category === 'gears_bionex') {
+                        folder = 'armor_bionex';
+                        prefix = 'defbionex';
+                        job = isRanger ? 'marksman' : (isSpecialist ? 'psion' : 'guardian');
+                    } else if (category === 'gears_celestra') {
+                        folder = 'armor_celestra';
+                        prefix = 'defcelestra';
+                        job = isRanger ? 'ranger' : (isSpecialist ? 'mage' : 'warrior');
+                    }
                     
                     let piece = 'armor';
                     if (item.type) {
-                        if (item.type.toLowerCase().includes('helmet')) piece = 'helmet';
-                        if (item.type.toLowerCase().includes('pants')) piece = 'pants';
-                        if (item.type.toLowerCase().includes('gloves')) piece = 'gloves';
-                        if (item.type.toLowerCase().includes('boots')) piece = 'boots';
+                        const tLower = item.type.toLowerCase();
+                        if (tLower.includes('helmet')) piece = 'helmet';
+                        else if (tLower.includes('pants')) piece = 'pants';
+                        else if (tLower.includes('gloves')) piece = 'gloves';
+                        else if (tLower.includes('boots')) piece = 'boots';
                     }
-                    if (idStr.includes('shd_')) piece = 'helmet'; // Temporary fallback for shield
-                    genericPath = `/assets/armor/defarctron${job}lv32${piece}.png`;
+                    genericPath = `/assets/${folder}/${prefix}${job}lv${level}${piece}.png`;
                 } else {
                     genericPath = '/assets/armor/defarctronwarriorlv32armor.png';
                 }
