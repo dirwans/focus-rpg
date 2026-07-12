@@ -143,11 +143,11 @@ function resolveArmorSetImage(slot, playerRace, playerJob, level) {
   }
 
   if (playerRace === 'bionex') {
-    return `/assets/armor_bionex/defbionex${lineage}lv${tier}${slot}.png?v=5`
+    return `/assets/bionex_gears/defbionex${lineage}lv${tier}${slot}.png?v=5`
   } else if (playerRace === 'celestra') {
-    return `/assets/armor_celestra/defcelestra${lineage}lv${tier}${slot}.png?v=14`
+    return `/assets/celestra_gears/defcelestra${lineage}lv${tier}${slot}.png?v=14`
   }
-  return `/assets/armor/def${playerRace}${lineage}lv${tier}${slot}.png?v=5`
+  return `/assets/arctron_gears/def${playerRace}${lineage}lv${tier}${slot}.png?v=5`
 }
 
 export function resolveItemImage(item, playerRace, playerJob) {
@@ -305,7 +305,17 @@ export function resolveItemImage(item, playerRace, playerJob) {
     if (item.id === 'spirit_noctyrna_55') return '/assets/spirit_noctyrna_55.png?v=7'
     if (item.id === 'spirit_noctyrna_65') return '/assets/spirit_noctyrna_65.png?v=17'
   }
-  return item.image
+  let imgPath = item.image;
+  if (imgPath && typeof imgPath === 'string') {
+    if (imgPath.startsWith('/assets/armor_bionex/')) {
+      imgPath = imgPath.replace('/assets/armor_bionex/', '/assets/bionex_gears/');
+    } else if (imgPath.startsWith('/assets/armor_celestra/')) {
+      imgPath = imgPath.replace('/assets/armor_celestra/', '/assets/celestra_gears/');
+    } else if (imgPath.startsWith('/assets/armor/')) {
+      imgPath = imgPath.replace('/assets/armor/', '/assets/arctron_gears/');
+    }
+  }
+  return imgPath;
 }
 
 export function verifyStarterShield(player) {
