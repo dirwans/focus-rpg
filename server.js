@@ -1226,13 +1226,15 @@ const syncGearToGameGears = (gearPieceId, stats) => {
   } else if (fact === 'bio') {
     race = 'bionex';
     if (lin === 'guardian') suffix = '';
-    else if (lin === 'marksman' || lin === 'engineer') suffix = '_marksman';
+    else if (lin === 'marksman') suffix = '_marksman';
+    else if (lin === 'engineer') suffix = '_engineer';
     else if (lin === 'psion') suffix = '_psion';
   } else if (fact === 'cor') {
     race = 'celestra';
     if (lin === 'sentinel') suffix = '';
     else if (lin === 'pathfinder') suffix = '_ranger';
-    else if (lin === 'oracle' || lin === 'arcanist') suffix = '_mage';
+    else if (lin === 'oracle') suffix = '_summoner';
+    else if (lin === 'arcanist') suffix = '_mage';
   }
 
   const gameItemId = `${piece}_armorset_${race}${suffix}_lv${level}`;

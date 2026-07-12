@@ -4618,7 +4618,7 @@
     "bonus": {
       "def": 5
     },
-    "image": "/assets/armor_celestra/defcelestrawarriorlv1helmet.png"
+    "image": "/assets/celestra/defcelestrawarriorlv1helmet.png"
   },
   {
     "id": "armor_armorset_celestra_lv1",
@@ -4637,7 +4637,7 @@
     "bonus": {
       "def": 6
     },
-    "image": "/assets/armor_celestra/defcelestrawarriorlv1armor.png"
+    "image": "/assets/celestra/defcelestrawarriorlv1armor.png"
   },
   {
     "id": "pants_armorset_celestra_lv1",
@@ -4656,7 +4656,7 @@
     "bonus": {
       "def": 5
     },
-    "image": "/assets/armor_celestra/defcelestrawarriorlv1pants.png"
+    "image": "/assets/celestra/defcelestrawarriorlv1pants.png"
   },
   {
     "id": "gloves_armorset_celestra_lv1",
@@ -4676,7 +4676,7 @@
       "def": 4,
       "atk": 3
     },
-    "image": "/assets/armor_celestra/defcelestrawarriorlv1gloves.png"
+    "image": "/assets/celestra/defcelestrawarriorlv1gloves.png"
   },
   {
     "id": "boots_armorset_celestra_lv1",
@@ -4695,7 +4695,7 @@
     "bonus": {
       "def": 4
     },
-    "image": "/assets/armor_celestra/defcelestrawarriorlv1boots.png"
+    "image": "/assets/celestra/defcelestrawarriorlv1boots.png"
   },
   {
     "id": "helmet_armorset_celestra_lv32",
@@ -4714,7 +4714,7 @@
     "bonus": {
       "def": 149
     },
-    "image": "/assets/armor_celestra/defcelestrawarriorlv32helmet.png"
+    "image": "/assets/celestra/defcelestrawarriorlv32helmet.png"
   },
   {
     "id": "armor_armorset_celestra_lv32",
@@ -4733,7 +4733,7 @@
     "bonus": {
       "def": 181
     },
-    "image": "/assets/armor_celestra/defcelestrawarriorlv32armor.png"
+    "image": "/assets/celestra/defcelestrawarriorlv32armor.png"
   },
   {
     "id": "pants_armorset_celestra_lv32",
@@ -4753,7 +4753,7 @@
       "def": 159,
       "hp": 1988
     },
-    "image": "/assets/armor_celestra/defcelestrawarriorlv32pants.png"
+    "image": "/assets/celestra/defcelestrawarriorlv32pants.png"
   },
   {
     "id": "gloves_armorset_celestra_lv32",
@@ -4773,7 +4773,7 @@
       "def": 129,
       "atk": 57
     },
-    "image": "/assets/armor_celestra/defcelestrawarriorlv32gloves.png"
+    "image": "/assets/celestra/defcelestrawarriorlv32gloves.png"
   },
   {
     "id": "boots_armorset_celestra_lv32",
@@ -4792,7 +4792,7 @@
     "bonus": {
       "def": 122
     },
-    "image": "/assets/armor_celestra/defcelestrawarriorlv32boots.png"
+    "image": "/assets/celestra/defcelestrawarriorlv32boots.png"
   },
   {
     "id": "helmet_armorset_celestra_lv42",
@@ -4811,7 +4811,7 @@
     "bonus": {
       "def": 197
     },
-    "image": "/assets/armor_celestra/defcelestrawarriorlv42helmet.png"
+    "image": "/assets/celestra/defcelestrawarriorlv42helmet.png"
   },
   {
     "id": "armor_armorset_celestra_lv42",
@@ -4830,7 +4830,7 @@
     "bonus": {
       "def": 239
     },
-    "image": "/assets/armor_celestra/defcelestrawarriorlv42armor.png"
+    "image": "/assets/celestra/defcelestrawarriorlv42armor.png"
   },
   {
     "id": "pants_armorset_celestra_lv42",
@@ -4850,7 +4850,7 @@
       "def": 211,
       "hp": 2638
     },
-    "image": "/assets/armor_celestra/defcelestrawarriorlv42pants.png"
+    "image": "/assets/celestra/defcelestrawarriorlv42pants.png"
   },
   {
     "id": "gloves_armorset_celestra_lv42",
@@ -4870,7 +4870,7 @@
       "def": 171,
       "atk": 78
     },
-    "image": "/assets/armor_celestra/defcelestrawarriorlv42gloves.png"
+    "image": "/assets/celestra/defcelestrawarriorlv42gloves.png"
   },
   {
     "id": "boots_armorset_celestra_lv42",
@@ -4889,7 +4889,7 @@
     "bonus": {
       "def": 161
     },
-    "image": "/assets/armor_celestra/defcelestrawarriorlv42boots.png"
+    "image": "/assets/celestra/defcelestrawarriorlv42boots.png"
   },
   {
     "id": "helmet_armorset_celestra_lv55",
@@ -4908,7 +4908,7 @@
     "bonus": {
       "def": 260
     },
-    "image": "/assets/armor_celestra/defcelestrawarriorlv55helmet.png"
+    "image": "/assets/celestra/defcelestrawarriorlv55helmet.png"
   },
   {
     "id": "armor_armorset_celestra_lv55",
@@ -4927,7 +4927,7 @@
     "bonus": {
       "def": 315
     },
-    "image": "/assets/armor_celestra/defcelestrawarriorlv55armor.png"
+    "image": "/assets/celestra/defcelestrawarriorlv55armor.png"
   },
   {
     "id": "pants_armorset_celestra_lv55",
@@ -4947,7 +4947,7 @@
       "def": 278,
       "hp": 3442
     },
-    "image": "/assets/armor_celestra/defcelestrawarriorlv55pants.png"
+    "image": "/assets/celestra/defcelestrawarriorlv55pants.png"
   },
   {
     "id": "gloves_armorset_celestra_lv55",
@@ -4967,7 +4967,7 @@
       "def": 225,
       "atk": 105
     },
-    "image": "/assets/armor_celestra/defcelestrawarriorlv55gloves.png"
+    "image": "/assets/celestra/defcelestrawarriorlv55gloves.png"
   },
   {
     "id": "boots_armorset_celestra_lv55",
@@ -4986,7 +4986,7 @@
     "bonus": {
       "def": 213
     },
-    "image": "/assets/armor_celestra/defcelestrawarriorlv55boots.png"
+    "image": "/assets/celestra/defcelestrawarriorlv55boots.png"
   },
   {
     "id": "helmet_armorset_celestra_lv66",
@@ -5005,7 +5005,7 @@
     "bonus": {
       "def": 322
     },
-    "image": "/assets/armor_celestra/defcelestrawarriorlv66helmet.png"
+    "image": "/assets/celestra/defcelestrawarriorlv66helmet.png"
   },
   {
     "id": "armor_armorset_celestra_lv66",
@@ -5024,7 +5024,7 @@
     "bonus": {
       "def": 391
     },
-    "image": "/assets/armor_celestra/defcelestrawarriorlv66armor.png"
+    "image": "/assets/celestra/defcelestrawarriorlv66armor.png"
   },
   {
     "id": "pants_armorset_celestra_lv66",
@@ -5044,7 +5044,7 @@
       "def": 345,
       "hp": 4246
     },
-    "image": "/assets/armor_celestra/defcelestrawarriorlv66pants.png"
+    "image": "/assets/celestra/defcelestrawarriorlv66pants.png"
   },
   {
     "id": "gloves_armorset_celestra_lv66",
@@ -5064,7 +5064,7 @@
       "def": 279,
       "atk": 133
     },
-    "image": "/assets/armor_celestra/defcelestrawarriorlv66gloves.png"
+    "image": "/assets/celestra/defcelestrawarriorlv66gloves.png"
   },
   {
     "id": "boots_armorset_celestra_lv66",
@@ -5083,7 +5083,7 @@
     "bonus": {
       "def": 264
     },
-    "image": "/assets/armor_celestra/defcelestrawarriorlv66boots.png"
+    "image": "/assets/celestra/defcelestrawarriorlv66boots.png"
   },
   {
     "id": "helmet_armorset_celestra_ranger_lv1",
@@ -5102,7 +5102,7 @@
     "bonus": {
       "def": 5
     },
-    "image": "/assets/armor_celestra/defcelestrarangerlv1helmet.png"
+    "image": "/assets/celestra/defcelestrarangerlv1helmet.png"
   },
   {
     "id": "armor_armorset_celestra_ranger_lv1",
@@ -5121,7 +5121,7 @@
     "bonus": {
       "def": 6
     },
-    "image": "/assets/armor_celestra/defcelestrarangerlv1armor.png"
+    "image": "/assets/celestra/defcelestrarangerlv1armor.png"
   },
   {
     "id": "pants_armorset_celestra_ranger_lv1",
@@ -5140,7 +5140,7 @@
     "bonus": {
       "def": 5
     },
-    "image": "/assets/armor_celestra/defcelestrarangerlv1pants.png"
+    "image": "/assets/celestra/defcelestrarangerlv1pants.png"
   },
   {
     "id": "gloves_armorset_celestra_ranger_lv1",
@@ -5160,7 +5160,7 @@
       "def": 4,
       "atk": 3
     },
-    "image": "/assets/armor_celestra/defcelestrarangerlv1gloves.png"
+    "image": "/assets/celestra/defcelestrarangerlv1gloves.png"
   },
   {
     "id": "boots_armorset_celestra_ranger_lv1",
@@ -5179,7 +5179,7 @@
     "bonus": {
       "def": 4
     },
-    "image": "/assets/armor_celestra/defcelestrarangerlv1boots.png"
+    "image": "/assets/celestra/defcelestrarangerlv1boots.png"
   },
   {
     "id": "helmet_armorset_celestra_ranger_lv32",
@@ -5198,7 +5198,7 @@
     "bonus": {
       "def": 148
     },
-    "image": "/assets/armor_celestra/defcelestrarangerlv32helmet.png"
+    "image": "/assets/celestra/defcelestrarangerlv32helmet.png"
   },
   {
     "id": "armor_armorset_celestra_ranger_lv32",
@@ -5217,7 +5217,7 @@
     "bonus": {
       "def": 170
     },
-    "image": "/assets/armor_celestra/defcelestrarangerlv32armor.png"
+    "image": "/assets/celestra/defcelestrarangerlv32armor.png"
   },
   {
     "id": "pants_armorset_celestra_ranger_lv32",
@@ -5237,7 +5237,7 @@
       "def": 163,
       "hp": 2038
     },
-    "image": "/assets/armor_celestra/defcelestrarangerlv32pants.png"
+    "image": "/assets/celestra/defcelestrarangerlv32pants.png"
   },
   {
     "id": "gloves_armorset_celestra_ranger_lv32",
@@ -5257,7 +5257,7 @@
       "def": 133,
       "atk": 59
     },
-    "image": "/assets/armor_celestra/defcelestrarangerlv32gloves.png"
+    "image": "/assets/celestra/defcelestrarangerlv32gloves.png"
   },
   {
     "id": "boots_armorset_celestra_ranger_lv32",
@@ -5276,7 +5276,7 @@
     "bonus": {
       "def": 126
     },
-    "image": "/assets/armor_celestra/defcelestrarangerlv32boots.png"
+    "image": "/assets/celestra/defcelestrarangerlv32boots.png"
   },
   {
     "id": "helmet_armorset_celestra_ranger_lv42",
@@ -5295,7 +5295,7 @@
     "bonus": {
       "def": 196
     },
-    "image": "/assets/armor_celestra/defcelestrarangerlv42helmet.png"
+    "image": "/assets/celestra/defcelestrarangerlv42helmet.png"
   },
   {
     "id": "armor_armorset_celestra_ranger_lv42",
@@ -5314,7 +5314,7 @@
     "bonus": {
       "def": 225
     },
-    "image": "/assets/armor_celestra/defcelestrarangerlv42armor.png"
+    "image": "/assets/celestra/defcelestrarangerlv42armor.png"
   },
   {
     "id": "pants_armorset_celestra_ranger_lv42",
@@ -5334,7 +5334,7 @@
       "def": 215,
       "hp": 2688
     },
-    "image": "/assets/armor_celestra/defcelestrarangerlv42pants.png"
+    "image": "/assets/celestra/defcelestrarangerlv42pants.png"
   },
   {
     "id": "gloves_armorset_celestra_ranger_lv42",
@@ -5354,7 +5354,7 @@
       "def": 176,
       "atk": 81
     },
-    "image": "/assets/armor_celestra/defcelestrarangerlv42gloves.png"
+    "image": "/assets/celestra/defcelestrarangerlv42gloves.png"
   },
   {
     "id": "boots_armorset_celestra_ranger_lv42",
@@ -5373,7 +5373,7 @@
     "bonus": {
       "def": 167
     },
-    "image": "/assets/armor_celestra/defcelestrarangerlv42boots.png"
+    "image": "/assets/celestra/defcelestrarangerlv42boots.png"
   },
   {
     "id": "helmet_armorset_celestra_ranger_lv55",
@@ -5392,7 +5392,7 @@
     "bonus": {
       "def": 258
     },
-    "image": "/assets/armor_celestra/defcelestrarangerlv55helmet.png"
+    "image": "/assets/celestra/defcelestrarangerlv55helmet.png"
   },
   {
     "id": "armor_armorset_celestra_ranger_lv55",
@@ -5411,7 +5411,7 @@
     "bonus": {
       "def": 297
     },
-    "image": "/assets/armor_celestra/defcelestrarangerlv55armor.png"
+    "image": "/assets/celestra/defcelestrarangerlv55armor.png"
   },
   {
     "id": "pants_armorset_celestra_ranger_lv55",
@@ -5431,7 +5431,7 @@
       "def": 284,
       "hp": 3516
     },
-    "image": "/assets/armor_celestra/defcelestrarangerlv55pants.png"
+    "image": "/assets/celestra/defcelestrarangerlv55pants.png"
   },
   {
     "id": "gloves_armorset_celestra_ranger_lv55",
@@ -5451,7 +5451,7 @@
       "def": 232,
       "atk": 109
     },
-    "image": "/assets/armor_celestra/defcelestrarangerlv55gloves.png"
+    "image": "/assets/celestra/defcelestrarangerlv55gloves.png"
   },
   {
     "id": "boots_armorset_celestra_ranger_lv55",
@@ -5470,7 +5470,7 @@
     "bonus": {
       "def": 219
     },
-    "image": "/assets/armor_celestra/defcelestrarangerlv55boots.png"
+    "image": "/assets/celestra/defcelestrarangerlv55boots.png"
   },
   {
     "id": "helmet_armorset_celestra_ranger_lv66",
@@ -5489,7 +5489,7 @@
     "bonus": {
       "def": 320
     },
-    "image": "/assets/armor_celestra/defcelestrarangerlv66helmet.png"
+    "image": "/assets/celestra/defcelestrarangerlv66helmet.png"
   },
   {
     "id": "armor_armorset_celestra_ranger_lv66",
@@ -5508,7 +5508,7 @@
     "bonus": {
       "def": 368
     },
-    "image": "/assets/armor_celestra/defcelestrarangerlv66armor.png"
+    "image": "/assets/celestra/defcelestrarangerlv66armor.png"
   },
   {
     "id": "pants_armorset_celestra_ranger_lv66",
@@ -5528,7 +5528,7 @@
       "def": 352,
       "hp": 4332
     },
-    "image": "/assets/armor_celestra/defcelestrarangerlv66pants.png"
+    "image": "/assets/celestra/defcelestrarangerlv66pants.png"
   },
   {
     "id": "gloves_armorset_celestra_ranger_lv66",
@@ -5548,7 +5548,7 @@
       "def": 288,
       "atk": 137
     },
-    "image": "/assets/armor_celestra/defcelestrarangerlv66gloves.png"
+    "image": "/assets/celestra/defcelestrarangerlv66gloves.png"
   },
   {
     "id": "boots_armorset_celestra_ranger_lv66",
@@ -5567,965 +5567,965 @@
     "bonus": {
       "def": 272
     },
-    "image": "/assets/armor_celestra/defcelestrarangerlv66boots.png"
+    "image": "/assets/celestra/defcelestrarangerlv66boots.png"
   },
   {
     "id": "helmet_armorset_celestra_mage_lv1",
+    "name": "[C] Lv.1 Celestra Summoner Helm",
+    "emoji": "🪖",
+    "rarity": "C",
+    "type": "helmet",
+    "race": "celestra",
+    "job": [
+      "oracle",
+      "celestial_oracle",
+      "conjurer",
+      "divine_summoner"
+    ],
+    "level": 1,
+    "bonus": {
+      "def": 5
+    },
+    "image": "/assets/celestra/defcelestramagelv1helmet.png"
+  },
+  {
+    "id": "armor_armorset_celestra_mage_lv1",
+    "name": "[C] Lv.1 Celestra Summoner Plate",
+    "emoji": "🦾",
+    "rarity": "C",
+    "type": "armor",
+    "race": "celestra",
+    "job": [
+      "oracle",
+      "celestial_oracle",
+      "conjurer",
+      "divine_summoner"
+    ],
+    "level": 1,
+    "bonus": {
+      "def": 6
+    },
+    "image": "/assets/celestra/defcelestramagelv1armor.png"
+  },
+  {
+    "id": "pants_armorset_celestra_mage_lv1",
+    "name": "[C] Lv.1 Celestra Summoner Legguard",
+    "emoji": "👖",
+    "rarity": "C",
+    "type": "pants",
+    "race": "celestra",
+    "job": [
+      "oracle",
+      "celestial_oracle",
+      "conjurer",
+      "divine_summoner"
+    ],
+    "level": 1,
+    "bonus": {
+      "def": 6
+    },
+    "image": "/assets/celestra/defcelestramagelv1pants.png"
+  },
+  {
+    "id": "gloves_armorset_celestra_mage_lv1",
+    "name": "[C] Lv.1 Celestra Summoner Gauntlets",
+    "emoji": "🧤",
+    "rarity": "C",
+    "type": "gloves",
+    "race": "celestra",
+    "job": [
+      "oracle",
+      "celestial_oracle",
+      "conjurer",
+      "divine_summoner"
+    ],
+    "level": 1,
+    "bonus": {
+      "def": 4,
+      "atk": 3
+    },
+    "image": "/assets/celestra/defcelestramagelv1gloves.png"
+  },
+  {
+    "id": "boots_armorset_celestra_mage_lv1",
+    "name": "[C] Lv.1 Celestra Summoner Greaves",
+    "emoji": "👢",
+    "rarity": "C",
+    "type": "boots",
+    "race": "celestra",
+    "job": [
+      "oracle",
+      "celestial_oracle",
+      "conjurer",
+      "divine_summoner"
+    ],
+    "level": 1,
+    "bonus": {
+      "def": 4
+    },
+    "image": "/assets/celestra/defcelestramagelv1boots.png"
+  },
+  {
+    "id": "helmet_armorset_celestra_mage_lv32",
+    "name": "[C] Lv.32 Celestra Summoner Helm",
+    "emoji": "🪖",
+    "rarity": "C",
+    "type": "helmet",
+    "race": "celestra",
+    "job": [
+      "oracle",
+      "celestial_oracle",
+      "conjurer",
+      "divine_summoner"
+    ],
+    "level": 32,
+    "bonus": {
+      "def": 148
+    },
+    "image": "/assets/celestra/defcelestramagelv32helmet.png"
+  },
+  {
+    "id": "armor_armorset_celestra_mage_lv32",
+    "name": "[C] Lv.32 Celestra Summoner Plate",
+    "emoji": "🦾",
+    "rarity": "C",
+    "type": "armor",
+    "race": "celestra",
+    "job": [
+      "oracle",
+      "celestial_oracle",
+      "conjurer",
+      "divine_summoner"
+    ],
+    "level": 32,
+    "bonus": {
+      "def": 175
+    },
+    "image": "/assets/celestra/defcelestramagelv32armor.png"
+  },
+  {
+    "id": "pants_armorset_celestra_mage_lv32",
+    "name": "[C] Lv.32 Celestra Summoner Legguard",
+    "emoji": "👖",
+    "rarity": "C",
+    "type": "pants",
+    "race": "celestra",
+    "job": [
+      "oracle",
+      "celestial_oracle",
+      "conjurer",
+      "divine_summoner"
+    ],
+    "level": 32,
+    "bonus": {
+      "def": 163,
+      "hp": 2038
+    },
+    "image": "/assets/celestra/defcelestramagelv32pants.png"
+  },
+  {
+    "id": "gloves_armorset_celestra_mage_lv32",
+    "name": "[C] Lv.32 Celestra Summoner Gauntlets",
+    "emoji": "🧤",
+    "rarity": "C",
+    "type": "gloves",
+    "race": "celestra",
+    "job": [
+      "oracle",
+      "celestial_oracle",
+      "conjurer",
+      "divine_summoner"
+    ],
+    "level": 32,
+    "bonus": {
+      "def": 131,
+      "atk": 58
+    },
+    "image": "/assets/celestra/defcelestramagelv32gloves.png"
+  },
+  {
+    "id": "boots_armorset_celestra_mage_lv32",
+    "name": "[C] Lv.32 Celestra Summoner Greaves",
+    "emoji": "👢",
+    "rarity": "C",
+    "type": "boots",
+    "race": "celestra",
+    "job": [
+      "oracle",
+      "celestial_oracle",
+      "conjurer",
+      "divine_summoner"
+    ],
+    "level": 32,
+    "bonus": {
+      "def": 123
+    },
+    "image": "/assets/celestra/defcelestramagelv32boots.png"
+  },
+  {
+    "id": "helmet_armorset_celestra_mage_lv42",
+    "name": "[C] Lv.42 Celestra Summoner Helm",
+    "emoji": "🪖",
+    "rarity": "C",
+    "type": "helmet",
+    "race": "celestra",
+    "job": [
+      "oracle",
+      "celestial_oracle",
+      "conjurer",
+      "divine_summoner"
+    ],
+    "level": 42,
+    "bonus": {
+      "def": 196
+    },
+    "image": "/assets/celestra/defcelestramagelv42helmet.png"
+  },
+  {
+    "id": "armor_armorset_celestra_mage_lv42",
+    "name": "[C] Lv.42 Celestra Summoner Plate",
+    "emoji": "🦾",
+    "rarity": "C",
+    "type": "armor",
+    "race": "celestra",
+    "job": [
+      "oracle",
+      "celestial_oracle",
+      "conjurer",
+      "divine_summoner"
+    ],
+    "level": 42,
+    "bonus": {
+      "def": 232
+    },
+    "image": "/assets/celestra/defcelestramagelv42armor.png"
+  },
+  {
+    "id": "pants_armorset_celestra_mage_lv42",
+    "name": "[C] Lv.42 Celestra Summoner Legguard",
+    "emoji": "👖",
+    "rarity": "C",
+    "type": "pants",
+    "race": "celestra",
+    "job": [
+      "oracle",
+      "celestial_oracle",
+      "conjurer",
+      "divine_summoner"
+    ],
+    "level": 42,
+    "bonus": {
+      "def": 216,
+      "hp": 2700
+    },
+    "image": "/assets/celestra/defcelestramagelv42pants.png"
+  },
+  {
+    "id": "gloves_armorset_celestra_mage_lv42",
+    "name": "[C] Lv.42 Celestra Summoner Gauntlets",
+    "emoji": "🧤",
+    "rarity": "C",
+    "type": "gloves",
+    "race": "celestra",
+    "job": [
+      "oracle",
+      "celestial_oracle",
+      "conjurer",
+      "divine_summoner"
+    ],
+    "level": 42,
+    "bonus": {
+      "def": 173,
+      "atk": 79
+    },
+    "image": "/assets/celestra/defcelestramagelv42gloves.png"
+  },
+  {
+    "id": "boots_armorset_celestra_mage_lv42",
+    "name": "[C] Lv.42 Celestra Summoner Greaves",
+    "emoji": "👢",
+    "rarity": "C",
+    "type": "boots",
+    "race": "celestra",
+    "job": [
+      "oracle",
+      "celestial_oracle",
+      "conjurer",
+      "divine_summoner"
+    ],
+    "level": 42,
+    "bonus": {
+      "def": 163
+    },
+    "image": "/assets/celestra/defcelestramagelv42boots.png"
+  },
+  {
+    "id": "helmet_armorset_celestra_mage_lv55",
+    "name": "[C] Lv.55 Celestra Summoner Helm",
+    "emoji": "🪖",
+    "rarity": "C",
+    "type": "helmet",
+    "race": "celestra",
+    "job": [
+      "oracle",
+      "celestial_oracle",
+      "conjurer",
+      "divine_summoner"
+    ],
+    "level": 55,
+    "bonus": {
+      "def": 258
+    },
+    "image": "/assets/celestra/defcelestramagelv55helmet.png"
+  },
+  {
+    "id": "armor_armorset_celestra_mage_lv55",
+    "name": "[C] Lv.55 Celestra Summoner Plate",
+    "emoji": "🦾",
+    "rarity": "C",
+    "type": "armor",
+    "race": "celestra",
+    "job": [
+      "oracle",
+      "celestial_oracle",
+      "conjurer",
+      "divine_summoner"
+    ],
+    "level": 55,
+    "bonus": {
+      "def": 305
+    },
+    "image": "/assets/celestra/defcelestramagelv55armor.png"
+  },
+  {
+    "id": "pants_armorset_celestra_mage_lv55",
+    "name": "[C] Lv.55 Celestra Summoner Legguard",
+    "emoji": "👖",
+    "rarity": "C",
+    "type": "pants",
+    "race": "celestra",
+    "job": [
+      "oracle",
+      "celestial_oracle",
+      "conjurer",
+      "divine_summoner"
+    ],
+    "level": 55,
+    "bonus": {
+      "def": 284,
+      "hp": 3516
+    },
+    "image": "/assets/celestra/defcelestramagelv55pants.png"
+  },
+  {
+    "id": "gloves_armorset_celestra_mage_lv55",
+    "name": "[C] Lv.55 Celestra Summoner Gauntlets",
+    "emoji": "🧤",
+    "rarity": "C",
+    "type": "gloves",
+    "race": "celestra",
+    "job": [
+      "oracle",
+      "celestial_oracle",
+      "conjurer",
+      "divine_summoner"
+    ],
+    "level": 55,
+    "bonus": {
+      "def": 228,
+      "atk": 107
+    },
+    "image": "/assets/celestra/defcelestramagelv55gloves.png"
+  },
+  {
+    "id": "boots_armorset_celestra_mage_lv55",
+    "name": "[C] Lv.55 Celestra Summoner Greaves",
+    "emoji": "👢",
+    "rarity": "C",
+    "type": "boots",
+    "race": "celestra",
+    "job": [
+      "oracle",
+      "celestial_oracle",
+      "conjurer",
+      "divine_summoner"
+    ],
+    "level": 55,
+    "bonus": {
+      "def": 215
+    },
+    "image": "/assets/celestra/defcelestramagelv55boots.png"
+  },
+  {
+    "id": "helmet_armorset_celestra_mage_lv66",
+    "name": "[C] Lv.66 Celestra Summoner Helm",
+    "emoji": "🪖",
+    "rarity": "C",
+    "type": "helmet",
+    "race": "celestra",
+    "job": [
+      "oracle",
+      "celestial_oracle",
+      "conjurer",
+      "divine_summoner"
+    ],
+    "level": 66,
+    "bonus": {
+      "def": 320
+    },
+    "image": "/assets/celestra/defcelestramagelv66helmet.png"
+  },
+  {
+    "id": "armor_armorset_celestra_mage_lv66",
+    "name": "[C] Lv.66 Celestra Summoner Plate",
+    "emoji": "🦾",
+    "rarity": "C",
+    "type": "armor",
+    "race": "celestra",
+    "job": [
+      "oracle",
+      "celestial_oracle",
+      "conjurer",
+      "divine_summoner"
+    ],
+    "level": 66,
+    "bonus": {
+      "def": 379
+    },
+    "image": "/assets/celestra/defcelestramagelv66armor.png"
+  },
+  {
+    "id": "pants_armorset_celestra_mage_lv66",
+    "name": "[C] Lv.66 Celestra Summoner Legguard",
+    "emoji": "👖",
+    "rarity": "C",
+    "type": "pants",
+    "race": "celestra",
+    "job": [
+      "oracle",
+      "celestial_oracle",
+      "conjurer",
+      "divine_summoner"
+    ],
+    "level": 66,
+    "bonus": {
+      "def": 352,
+      "hp": 4332
+    },
+    "image": "/assets/celestra/defcelestramagelv66pants.png"
+  },
+  {
+    "id": "gloves_armorset_celestra_mage_lv66",
+    "name": "[C] Lv.66 Celestra Summoner Gauntlets",
+    "emoji": "🧤",
+    "rarity": "C",
+    "type": "gloves",
+    "race": "celestra",
+    "job": [
+      "oracle",
+      "celestial_oracle",
+      "conjurer",
+      "divine_summoner"
+    ],
+    "level": 66,
+    "bonus": {
+      "def": 282,
+      "atk": 134
+    },
+    "image": "/assets/celestra/defcelestramagelv66gloves.png"
+  },
+  {
+    "id": "boots_armorset_celestra_mage_lv66",
+    "name": "[C] Lv.66 Celestra Summoner Greaves",
+    "emoji": "👢",
+    "rarity": "C",
+    "type": "boots",
+    "race": "celestra",
+    "job": [
+      "oracle",
+      "celestial_oracle",
+      "conjurer",
+      "divine_summoner"
+    ],
+    "level": 66,
+    "bonus": {
+      "def": 267
+    },
+    "image": "/assets/celestra/defcelestramagelv66boots.png"
+  },
+  {
+    "id": "helmet_armorset_celestra_arcanist_lv1",
     "name": "[C] Lv.1 Celestra Mage Helm",
     "emoji": "🪖",
     "rarity": "C",
     "type": "helmet",
     "race": "celestra",
     "job": [
-      "oracle",
-      "celestial_oracle",
-      "conjurer",
-      "divine_summoner"
+      "arcanist",
+      "rune_caster",
+      "mystic",
+      "archmage"
     ],
     "level": 1,
     "bonus": {
       "def": 5
     },
-    "image": "/assets/armor_celestra/defcelestramagelv1helmet.png"
+    "image": "/assets/celestra/defcelestramagelv1helmet.png"
   },
   {
-    "id": "armor_armorset_celestra_mage_lv1",
+    "id": "armor_armorset_celestra_arcanist_lv1",
     "name": "[C] Lv.1 Celestra Mage Plate",
     "emoji": "🦾",
     "rarity": "C",
     "type": "armor",
     "race": "celestra",
     "job": [
-      "oracle",
-      "celestial_oracle",
-      "conjurer",
-      "divine_summoner"
+      "arcanist",
+      "rune_caster",
+      "mystic",
+      "archmage"
     ],
     "level": 1,
     "bonus": {
       "def": 6
     },
-    "image": "/assets/armor_celestra/defcelestramagelv1armor.png"
+    "image": "/assets/celestra/defcelestramagelv1armor.png"
   },
   {
-    "id": "pants_armorset_celestra_mage_lv1",
+    "id": "pants_armorset_celestra_arcanist_lv1",
     "name": "[C] Lv.1 Celestra Mage Legguard",
     "emoji": "👖",
     "rarity": "C",
     "type": "pants",
     "race": "celestra",
     "job": [
-      "oracle",
-      "celestial_oracle",
-      "conjurer",
-      "divine_summoner"
+      "arcanist",
+      "rune_caster",
+      "mystic",
+      "archmage"
     ],
     "level": 1,
     "bonus": {
       "def": 6
     },
-    "image": "/assets/armor_celestra/defcelestramagelv1pants.png"
+    "image": "/assets/celestra/defcelestramagelv1pants.png"
   },
   {
-    "id": "gloves_armorset_celestra_mage_lv1",
+    "id": "gloves_armorset_celestra_arcanist_lv1",
     "name": "[C] Lv.1 Celestra Mage Gauntlets",
     "emoji": "🧤",
     "rarity": "C",
     "type": "gloves",
     "race": "celestra",
     "job": [
-      "oracle",
-      "celestial_oracle",
-      "conjurer",
-      "divine_summoner"
+      "arcanist",
+      "rune_caster",
+      "mystic",
+      "archmage"
     ],
     "level": 1,
     "bonus": {
       "def": 4,
       "atk": 3
     },
-    "image": "/assets/armor_celestra/defcelestramagelv1gloves.png"
+    "image": "/assets/celestra/defcelestramagelv1gloves.png"
   },
   {
-    "id": "boots_armorset_celestra_mage_lv1",
+    "id": "boots_armorset_celestra_arcanist_lv1",
     "name": "[C] Lv.1 Celestra Mage Greaves",
     "emoji": "👢",
     "rarity": "C",
     "type": "boots",
     "race": "celestra",
     "job": [
-      "oracle",
-      "celestial_oracle",
-      "conjurer",
-      "divine_summoner"
+      "arcanist",
+      "rune_caster",
+      "mystic",
+      "archmage"
     ],
     "level": 1,
     "bonus": {
       "def": 4
     },
-    "image": "/assets/armor_celestra/defcelestramagelv1boots.png"
+    "image": "/assets/celestra/defcelestramagelv1boots.png"
   },
   {
-    "id": "helmet_armorset_celestra_mage_lv32",
+    "id": "helmet_armorset_celestra_arcanist_lv32",
     "name": "[C] Lv.32 Celestra Mage Helm",
     "emoji": "🪖",
     "rarity": "C",
     "type": "helmet",
     "race": "celestra",
     "job": [
-      "oracle",
-      "celestial_oracle",
-      "conjurer",
-      "divine_summoner"
+      "arcanist",
+      "rune_caster",
+      "mystic",
+      "archmage"
     ],
     "level": 32,
     "bonus": {
       "def": 148
     },
-    "image": "/assets/armor_celestra/defcelestramagelv32helmet.png"
+    "image": "/assets/celestra/defcelestramagelv32helmet.png"
   },
   {
-    "id": "armor_armorset_celestra_mage_lv32",
+    "id": "armor_armorset_celestra_arcanist_lv32",
     "name": "[C] Lv.32 Celestra Mage Plate",
     "emoji": "🦾",
     "rarity": "C",
     "type": "armor",
     "race": "celestra",
     "job": [
-      "oracle",
-      "celestial_oracle",
-      "conjurer",
-      "divine_summoner"
+      "arcanist",
+      "rune_caster",
+      "mystic",
+      "archmage"
     ],
     "level": 32,
     "bonus": {
       "def": 175
     },
-    "image": "/assets/armor_celestra/defcelestramagelv32armor.png"
+    "image": "/assets/celestra/defcelestramagelv32armor.png"
   },
   {
-    "id": "pants_armorset_celestra_mage_lv32",
+    "id": "pants_armorset_celestra_arcanist_lv32",
     "name": "[C] Lv.32 Celestra Mage Legguard",
     "emoji": "👖",
     "rarity": "C",
     "type": "pants",
     "race": "celestra",
     "job": [
-      "oracle",
-      "celestial_oracle",
-      "conjurer",
-      "divine_summoner"
+      "arcanist",
+      "rune_caster",
+      "mystic",
+      "archmage"
     ],
     "level": 32,
     "bonus": {
       "def": 163,
       "hp": 2038
     },
-    "image": "/assets/armor_celestra/defcelestramagelv32pants.png"
+    "image": "/assets/celestra/defcelestramagelv32pants.png"
   },
   {
-    "id": "gloves_armorset_celestra_mage_lv32",
+    "id": "gloves_armorset_celestra_arcanist_lv32",
     "name": "[C] Lv.32 Celestra Mage Gauntlets",
     "emoji": "🧤",
     "rarity": "C",
     "type": "gloves",
     "race": "celestra",
     "job": [
-      "oracle",
-      "celestial_oracle",
-      "conjurer",
-      "divine_summoner"
+      "arcanist",
+      "rune_caster",
+      "mystic",
+      "archmage"
     ],
     "level": 32,
     "bonus": {
       "def": 131,
       "atk": 58
     },
-    "image": "/assets/armor_celestra/defcelestramagelv32gloves.png"
+    "image": "/assets/celestra/defcelestramagelv32gloves.png"
   },
   {
-    "id": "boots_armorset_celestra_mage_lv32",
+    "id": "boots_armorset_celestra_arcanist_lv32",
     "name": "[C] Lv.32 Celestra Mage Greaves",
     "emoji": "👢",
     "rarity": "C",
     "type": "boots",
     "race": "celestra",
     "job": [
-      "oracle",
-      "celestial_oracle",
-      "conjurer",
-      "divine_summoner"
+      "arcanist",
+      "rune_caster",
+      "mystic",
+      "archmage"
     ],
     "level": 32,
     "bonus": {
       "def": 123
     },
-    "image": "/assets/armor_celestra/defcelestramagelv32boots.png"
+    "image": "/assets/celestra/defcelestramagelv32boots.png"
   },
   {
-    "id": "helmet_armorset_celestra_mage_lv42",
+    "id": "helmet_armorset_celestra_arcanist_lv42",
     "name": "[C] Lv.42 Celestra Mage Helm",
     "emoji": "🪖",
     "rarity": "C",
     "type": "helmet",
     "race": "celestra",
     "job": [
-      "oracle",
-      "celestial_oracle",
-      "conjurer",
-      "divine_summoner"
+      "arcanist",
+      "rune_caster",
+      "mystic",
+      "archmage"
     ],
     "level": 42,
     "bonus": {
       "def": 196
     },
-    "image": "/assets/armor_celestra/defcelestramagelv42helmet.png"
+    "image": "/assets/celestra/defcelestramagelv42helmet.png"
   },
   {
-    "id": "armor_armorset_celestra_mage_lv42",
+    "id": "armor_armorset_celestra_arcanist_lv42",
     "name": "[C] Lv.42 Celestra Mage Plate",
     "emoji": "🦾",
     "rarity": "C",
     "type": "armor",
     "race": "celestra",
     "job": [
-      "oracle",
-      "celestial_oracle",
-      "conjurer",
-      "divine_summoner"
+      "arcanist",
+      "rune_caster",
+      "mystic",
+      "archmage"
     ],
     "level": 42,
     "bonus": {
       "def": 232
     },
-    "image": "/assets/armor_celestra/defcelestramagelv42armor.png"
+    "image": "/assets/celestra/defcelestramagelv42armor.png"
   },
   {
-    "id": "pants_armorset_celestra_mage_lv42",
+    "id": "pants_armorset_celestra_arcanist_lv42",
     "name": "[C] Lv.42 Celestra Mage Legguard",
     "emoji": "👖",
     "rarity": "C",
     "type": "pants",
     "race": "celestra",
     "job": [
-      "oracle",
-      "celestial_oracle",
-      "conjurer",
-      "divine_summoner"
+      "arcanist",
+      "rune_caster",
+      "mystic",
+      "archmage"
     ],
     "level": 42,
     "bonus": {
       "def": 216,
       "hp": 2700
     },
-    "image": "/assets/armor_celestra/defcelestramagelv42pants.png"
+    "image": "/assets/celestra/defcelestramagelv42pants.png"
   },
   {
-    "id": "gloves_armorset_celestra_mage_lv42",
+    "id": "gloves_armorset_celestra_arcanist_lv42",
     "name": "[C] Lv.42 Celestra Mage Gauntlets",
     "emoji": "🧤",
     "rarity": "C",
     "type": "gloves",
     "race": "celestra",
     "job": [
-      "oracle",
-      "celestial_oracle",
-      "conjurer",
-      "divine_summoner"
+      "arcanist",
+      "rune_caster",
+      "mystic",
+      "archmage"
     ],
     "level": 42,
     "bonus": {
       "def": 173,
       "atk": 79
     },
-    "image": "/assets/armor_celestra/defcelestramagelv42gloves.png"
+    "image": "/assets/celestra/defcelestramagelv42gloves.png"
   },
   {
-    "id": "boots_armorset_celestra_mage_lv42",
+    "id": "boots_armorset_celestra_arcanist_lv42",
     "name": "[C] Lv.42 Celestra Mage Greaves",
     "emoji": "👢",
     "rarity": "C",
     "type": "boots",
     "race": "celestra",
     "job": [
-      "oracle",
-      "celestial_oracle",
-      "conjurer",
-      "divine_summoner"
+      "arcanist",
+      "rune_caster",
+      "mystic",
+      "archmage"
     ],
     "level": 42,
     "bonus": {
       "def": 163
     },
-    "image": "/assets/armor_celestra/defcelestramagelv42boots.png"
+    "image": "/assets/celestra/defcelestramagelv42boots.png"
   },
   {
-    "id": "helmet_armorset_celestra_mage_lv55",
+    "id": "helmet_armorset_celestra_arcanist_lv55",
     "name": "[C] Lv.55 Celestra Mage Helm",
     "emoji": "🪖",
     "rarity": "C",
     "type": "helmet",
     "race": "celestra",
     "job": [
-      "oracle",
-      "celestial_oracle",
-      "conjurer",
-      "divine_summoner"
+      "arcanist",
+      "rune_caster",
+      "mystic",
+      "archmage"
     ],
     "level": 55,
     "bonus": {
       "def": 258
     },
-    "image": "/assets/armor_celestra/defcelestramagelv55helmet.png"
+    "image": "/assets/celestra/defcelestramagelv55helmet.png"
   },
   {
-    "id": "armor_armorset_celestra_mage_lv55",
+    "id": "armor_armorset_celestra_arcanist_lv55",
     "name": "[C] Lv.55 Celestra Mage Plate",
     "emoji": "🦾",
     "rarity": "C",
     "type": "armor",
     "race": "celestra",
     "job": [
-      "oracle",
-      "celestial_oracle",
-      "conjurer",
-      "divine_summoner"
+      "arcanist",
+      "rune_caster",
+      "mystic",
+      "archmage"
     ],
     "level": 55,
     "bonus": {
       "def": 305
     },
-    "image": "/assets/armor_celestra/defcelestramagelv55armor.png"
+    "image": "/assets/celestra/defcelestramagelv55armor.png"
   },
   {
-    "id": "pants_armorset_celestra_mage_lv55",
+    "id": "pants_armorset_celestra_arcanist_lv55",
     "name": "[C] Lv.55 Celestra Mage Legguard",
     "emoji": "👖",
     "rarity": "C",
     "type": "pants",
     "race": "celestra",
     "job": [
-      "oracle",
-      "celestial_oracle",
-      "conjurer",
-      "divine_summoner"
+      "arcanist",
+      "rune_caster",
+      "mystic",
+      "archmage"
     ],
     "level": 55,
     "bonus": {
       "def": 284,
       "hp": 3516
     },
-    "image": "/assets/armor_celestra/defcelestramagelv55pants.png"
+    "image": "/assets/celestra/defcelestramagelv55pants.png"
   },
   {
-    "id": "gloves_armorset_celestra_mage_lv55",
+    "id": "gloves_armorset_celestra_arcanist_lv55",
     "name": "[C] Lv.55 Celestra Mage Gauntlets",
     "emoji": "🧤",
     "rarity": "C",
     "type": "gloves",
     "race": "celestra",
     "job": [
-      "oracle",
-      "celestial_oracle",
-      "conjurer",
-      "divine_summoner"
+      "arcanist",
+      "rune_caster",
+      "mystic",
+      "archmage"
     ],
     "level": 55,
     "bonus": {
       "def": 228,
       "atk": 107
     },
-    "image": "/assets/armor_celestra/defcelestramagelv55gloves.png"
+    "image": "/assets/celestra/defcelestramagelv55gloves.png"
   },
   {
-    "id": "boots_armorset_celestra_mage_lv55",
+    "id": "boots_armorset_celestra_arcanist_lv55",
     "name": "[C] Lv.55 Celestra Mage Greaves",
     "emoji": "👢",
     "rarity": "C",
     "type": "boots",
     "race": "celestra",
     "job": [
-      "oracle",
-      "celestial_oracle",
-      "conjurer",
-      "divine_summoner"
+      "arcanist",
+      "rune_caster",
+      "mystic",
+      "archmage"
     ],
     "level": 55,
     "bonus": {
       "def": 215
     },
-    "image": "/assets/armor_celestra/defcelestramagelv55boots.png"
+    "image": "/assets/celestra/defcelestramagelv55boots.png"
   },
   {
-    "id": "helmet_armorset_celestra_mage_lv66",
+    "id": "helmet_armorset_celestra_arcanist_lv66",
     "name": "[C] Lv.66 Celestra Mage Helm",
     "emoji": "🪖",
     "rarity": "C",
     "type": "helmet",
     "race": "celestra",
     "job": [
-      "oracle",
-      "celestial_oracle",
-      "conjurer",
-      "divine_summoner"
+      "arcanist",
+      "rune_caster",
+      "mystic",
+      "archmage"
     ],
     "level": 66,
     "bonus": {
       "def": 320
     },
-    "image": "/assets/armor_celestra/defcelestramagelv66helmet.png"
+    "image": "/assets/celestra/defcelestramagelv66helmet.png"
   },
   {
-    "id": "armor_armorset_celestra_mage_lv66",
+    "id": "armor_armorset_celestra_arcanist_lv66",
     "name": "[C] Lv.66 Celestra Mage Plate",
     "emoji": "🦾",
     "rarity": "C",
     "type": "armor",
     "race": "celestra",
     "job": [
-      "oracle",
-      "celestial_oracle",
-      "conjurer",
-      "divine_summoner"
+      "arcanist",
+      "rune_caster",
+      "mystic",
+      "archmage"
     ],
     "level": 66,
     "bonus": {
       "def": 379
     },
-    "image": "/assets/armor_celestra/defcelestramagelv66armor.png"
+    "image": "/assets/celestra/defcelestramagelv66armor.png"
   },
   {
-    "id": "pants_armorset_celestra_mage_lv66",
+    "id": "pants_armorset_celestra_arcanist_lv66",
     "name": "[C] Lv.66 Celestra Mage Legguard",
     "emoji": "👖",
     "rarity": "C",
     "type": "pants",
     "race": "celestra",
     "job": [
-      "oracle",
-      "celestial_oracle",
-      "conjurer",
-      "divine_summoner"
+      "arcanist",
+      "rune_caster",
+      "mystic",
+      "archmage"
     ],
     "level": 66,
     "bonus": {
       "def": 352,
       "hp": 4332
     },
-    "image": "/assets/armor_celestra/defcelestramagelv66pants.png"
+    "image": "/assets/celestra/defcelestramagelv66pants.png"
   },
   {
-    "id": "gloves_armorset_celestra_mage_lv66",
+    "id": "gloves_armorset_celestra_arcanist_lv66",
     "name": "[C] Lv.66 Celestra Mage Gauntlets",
     "emoji": "🧤",
     "rarity": "C",
     "type": "gloves",
     "race": "celestra",
     "job": [
-      "oracle",
-      "celestial_oracle",
-      "conjurer",
-      "divine_summoner"
+      "arcanist",
+      "rune_caster",
+      "mystic",
+      "archmage"
     ],
     "level": 66,
     "bonus": {
       "def": 282,
       "atk": 134
     },
-    "image": "/assets/armor_celestra/defcelestramagelv66gloves.png"
+    "image": "/assets/celestra/defcelestramagelv66gloves.png"
   },
   {
-    "id": "boots_armorset_celestra_mage_lv66",
+    "id": "boots_armorset_celestra_arcanist_lv66",
     "name": "[C] Lv.66 Celestra Mage Greaves",
     "emoji": "👢",
     "rarity": "C",
     "type": "boots",
     "race": "celestra",
     "job": [
-      "oracle",
-      "celestial_oracle",
-      "conjurer",
-      "divine_summoner"
-    ],
-    "level": 66,
-    "bonus": {
-      "def": 267
-    },
-    "image": "/assets/armor_celestra/defcelestramagelv66boots.png"
-  },
-  {
-    "id": "helmet_armorset_celestra_arcanist_lv1",
-    "name": "[C] Lv.1 Celestra Arcanist Helm",
-    "emoji": "🪖",
-    "rarity": "C",
-    "type": "helmet",
-    "race": "celestra",
-    "job": [
-      "arcanist",
-      "rune_caster",
-      "mystic",
-      "archmage"
-    ],
-    "level": 1,
-    "bonus": {
-      "def": 5
-    },
-    "image": "/assets/armor_celestra/defcelestramagelv1helmet.png"
-  },
-  {
-    "id": "armor_armorset_celestra_arcanist_lv1",
-    "name": "[C] Lv.1 Celestra Arcanist Plate",
-    "emoji": "🦾",
-    "rarity": "C",
-    "type": "armor",
-    "race": "celestra",
-    "job": [
-      "arcanist",
-      "rune_caster",
-      "mystic",
-      "archmage"
-    ],
-    "level": 1,
-    "bonus": {
-      "def": 6
-    },
-    "image": "/assets/armor_celestra/defcelestramagelv1armor.png"
-  },
-  {
-    "id": "pants_armorset_celestra_arcanist_lv1",
-    "name": "[C] Lv.1 Celestra Arcanist Legguard",
-    "emoji": "👖",
-    "rarity": "C",
-    "type": "pants",
-    "race": "celestra",
-    "job": [
-      "arcanist",
-      "rune_caster",
-      "mystic",
-      "archmage"
-    ],
-    "level": 1,
-    "bonus": {
-      "def": 6
-    },
-    "image": "/assets/armor_celestra/defcelestramagelv1pants.png"
-  },
-  {
-    "id": "gloves_armorset_celestra_arcanist_lv1",
-    "name": "[C] Lv.1 Celestra Arcanist Gauntlets",
-    "emoji": "🧤",
-    "rarity": "C",
-    "type": "gloves",
-    "race": "celestra",
-    "job": [
-      "arcanist",
-      "rune_caster",
-      "mystic",
-      "archmage"
-    ],
-    "level": 1,
-    "bonus": {
-      "def": 4,
-      "atk": 3
-    },
-    "image": "/assets/armor_celestra/defcelestramagelv1gloves.png"
-  },
-  {
-    "id": "boots_armorset_celestra_arcanist_lv1",
-    "name": "[C] Lv.1 Celestra Arcanist Greaves",
-    "emoji": "👢",
-    "rarity": "C",
-    "type": "boots",
-    "race": "celestra",
-    "job": [
-      "arcanist",
-      "rune_caster",
-      "mystic",
-      "archmage"
-    ],
-    "level": 1,
-    "bonus": {
-      "def": 4
-    },
-    "image": "/assets/armor_celestra/defcelestramagelv1boots.png"
-  },
-  {
-    "id": "helmet_armorset_celestra_arcanist_lv32",
-    "name": "[C] Lv.32 Celestra Arcanist Helm",
-    "emoji": "🪖",
-    "rarity": "C",
-    "type": "helmet",
-    "race": "celestra",
-    "job": [
-      "arcanist",
-      "rune_caster",
-      "mystic",
-      "archmage"
-    ],
-    "level": 32,
-    "bonus": {
-      "def": 148
-    },
-    "image": "/assets/armor_celestra/defcelestramagelv32helmet.png"
-  },
-  {
-    "id": "armor_armorset_celestra_arcanist_lv32",
-    "name": "[C] Lv.32 Celestra Arcanist Plate",
-    "emoji": "🦾",
-    "rarity": "C",
-    "type": "armor",
-    "race": "celestra",
-    "job": [
-      "arcanist",
-      "rune_caster",
-      "mystic",
-      "archmage"
-    ],
-    "level": 32,
-    "bonus": {
-      "def": 175
-    },
-    "image": "/assets/armor_celestra/defcelestramagelv32armor.png"
-  },
-  {
-    "id": "pants_armorset_celestra_arcanist_lv32",
-    "name": "[C] Lv.32 Celestra Arcanist Legguard",
-    "emoji": "👖",
-    "rarity": "C",
-    "type": "pants",
-    "race": "celestra",
-    "job": [
-      "arcanist",
-      "rune_caster",
-      "mystic",
-      "archmage"
-    ],
-    "level": 32,
-    "bonus": {
-      "def": 163,
-      "hp": 2038
-    },
-    "image": "/assets/armor_celestra/defcelestramagelv32pants.png"
-  },
-  {
-    "id": "gloves_armorset_celestra_arcanist_lv32",
-    "name": "[C] Lv.32 Celestra Arcanist Gauntlets",
-    "emoji": "🧤",
-    "rarity": "C",
-    "type": "gloves",
-    "race": "celestra",
-    "job": [
-      "arcanist",
-      "rune_caster",
-      "mystic",
-      "archmage"
-    ],
-    "level": 32,
-    "bonus": {
-      "def": 131,
-      "atk": 58
-    },
-    "image": "/assets/armor_celestra/defcelestramagelv32gloves.png"
-  },
-  {
-    "id": "boots_armorset_celestra_arcanist_lv32",
-    "name": "[C] Lv.32 Celestra Arcanist Greaves",
-    "emoji": "👢",
-    "rarity": "C",
-    "type": "boots",
-    "race": "celestra",
-    "job": [
-      "arcanist",
-      "rune_caster",
-      "mystic",
-      "archmage"
-    ],
-    "level": 32,
-    "bonus": {
-      "def": 123
-    },
-    "image": "/assets/armor_celestra/defcelestramagelv32boots.png"
-  },
-  {
-    "id": "helmet_armorset_celestra_arcanist_lv42",
-    "name": "[C] Lv.42 Celestra Arcanist Helm",
-    "emoji": "🪖",
-    "rarity": "C",
-    "type": "helmet",
-    "race": "celestra",
-    "job": [
-      "arcanist",
-      "rune_caster",
-      "mystic",
-      "archmage"
-    ],
-    "level": 42,
-    "bonus": {
-      "def": 196
-    },
-    "image": "/assets/armor_celestra/defcelestramagelv42helmet.png"
-  },
-  {
-    "id": "armor_armorset_celestra_arcanist_lv42",
-    "name": "[C] Lv.42 Celestra Arcanist Plate",
-    "emoji": "🦾",
-    "rarity": "C",
-    "type": "armor",
-    "race": "celestra",
-    "job": [
-      "arcanist",
-      "rune_caster",
-      "mystic",
-      "archmage"
-    ],
-    "level": 42,
-    "bonus": {
-      "def": 232
-    },
-    "image": "/assets/armor_celestra/defcelestramagelv42armor.png"
-  },
-  {
-    "id": "pants_armorset_celestra_arcanist_lv42",
-    "name": "[C] Lv.42 Celestra Arcanist Legguard",
-    "emoji": "👖",
-    "rarity": "C",
-    "type": "pants",
-    "race": "celestra",
-    "job": [
-      "arcanist",
-      "rune_caster",
-      "mystic",
-      "archmage"
-    ],
-    "level": 42,
-    "bonus": {
-      "def": 216,
-      "hp": 2700
-    },
-    "image": "/assets/armor_celestra/defcelestramagelv42pants.png"
-  },
-  {
-    "id": "gloves_armorset_celestra_arcanist_lv42",
-    "name": "[C] Lv.42 Celestra Arcanist Gauntlets",
-    "emoji": "🧤",
-    "rarity": "C",
-    "type": "gloves",
-    "race": "celestra",
-    "job": [
-      "arcanist",
-      "rune_caster",
-      "mystic",
-      "archmage"
-    ],
-    "level": 42,
-    "bonus": {
-      "def": 173,
-      "atk": 79
-    },
-    "image": "/assets/armor_celestra/defcelestramagelv42gloves.png"
-  },
-  {
-    "id": "boots_armorset_celestra_arcanist_lv42",
-    "name": "[C] Lv.42 Celestra Arcanist Greaves",
-    "emoji": "👢",
-    "rarity": "C",
-    "type": "boots",
-    "race": "celestra",
-    "job": [
-      "arcanist",
-      "rune_caster",
-      "mystic",
-      "archmage"
-    ],
-    "level": 42,
-    "bonus": {
-      "def": 163
-    },
-    "image": "/assets/armor_celestra/defcelestramagelv42boots.png"
-  },
-  {
-    "id": "helmet_armorset_celestra_arcanist_lv55",
-    "name": "[C] Lv.55 Celestra Arcanist Helm",
-    "emoji": "🪖",
-    "rarity": "C",
-    "type": "helmet",
-    "race": "celestra",
-    "job": [
-      "arcanist",
-      "rune_caster",
-      "mystic",
-      "archmage"
-    ],
-    "level": 55,
-    "bonus": {
-      "def": 258
-    },
-    "image": "/assets/armor_celestra/defcelestramagelv55helmet.png"
-  },
-  {
-    "id": "armor_armorset_celestra_arcanist_lv55",
-    "name": "[C] Lv.55 Celestra Arcanist Plate",
-    "emoji": "🦾",
-    "rarity": "C",
-    "type": "armor",
-    "race": "celestra",
-    "job": [
-      "arcanist",
-      "rune_caster",
-      "mystic",
-      "archmage"
-    ],
-    "level": 55,
-    "bonus": {
-      "def": 305
-    },
-    "image": "/assets/armor_celestra/defcelestramagelv55armor.png"
-  },
-  {
-    "id": "pants_armorset_celestra_arcanist_lv55",
-    "name": "[C] Lv.55 Celestra Arcanist Legguard",
-    "emoji": "👖",
-    "rarity": "C",
-    "type": "pants",
-    "race": "celestra",
-    "job": [
-      "arcanist",
-      "rune_caster",
-      "mystic",
-      "archmage"
-    ],
-    "level": 55,
-    "bonus": {
-      "def": 284,
-      "hp": 3516
-    },
-    "image": "/assets/armor_celestra/defcelestramagelv55pants.png"
-  },
-  {
-    "id": "gloves_armorset_celestra_arcanist_lv55",
-    "name": "[C] Lv.55 Celestra Arcanist Gauntlets",
-    "emoji": "🧤",
-    "rarity": "C",
-    "type": "gloves",
-    "race": "celestra",
-    "job": [
-      "arcanist",
-      "rune_caster",
-      "mystic",
-      "archmage"
-    ],
-    "level": 55,
-    "bonus": {
-      "def": 228,
-      "atk": 107
-    },
-    "image": "/assets/armor_celestra/defcelestramagelv55gloves.png"
-  },
-  {
-    "id": "boots_armorset_celestra_arcanist_lv55",
-    "name": "[C] Lv.55 Celestra Arcanist Greaves",
-    "emoji": "👢",
-    "rarity": "C",
-    "type": "boots",
-    "race": "celestra",
-    "job": [
-      "arcanist",
-      "rune_caster",
-      "mystic",
-      "archmage"
-    ],
-    "level": 55,
-    "bonus": {
-      "def": 215
-    },
-    "image": "/assets/armor_celestra/defcelestramagelv55boots.png"
-  },
-  {
-    "id": "helmet_armorset_celestra_arcanist_lv66",
-    "name": "[C] Lv.66 Celestra Arcanist Helm",
-    "emoji": "🪖",
-    "rarity": "C",
-    "type": "helmet",
-    "race": "celestra",
-    "job": [
-      "arcanist",
-      "rune_caster",
-      "mystic",
-      "archmage"
-    ],
-    "level": 66,
-    "bonus": {
-      "def": 320
-    },
-    "image": "/assets/armor_celestra/defcelestramagelv66helmet.png"
-  },
-  {
-    "id": "armor_armorset_celestra_arcanist_lv66",
-    "name": "[C] Lv.66 Celestra Arcanist Plate",
-    "emoji": "🦾",
-    "rarity": "C",
-    "type": "armor",
-    "race": "celestra",
-    "job": [
-      "arcanist",
-      "rune_caster",
-      "mystic",
-      "archmage"
-    ],
-    "level": 66,
-    "bonus": {
-      "def": 379
-    },
-    "image": "/assets/armor_celestra/defcelestramagelv66armor.png"
-  },
-  {
-    "id": "pants_armorset_celestra_arcanist_lv66",
-    "name": "[C] Lv.66 Celestra Arcanist Legguard",
-    "emoji": "👖",
-    "rarity": "C",
-    "type": "pants",
-    "race": "celestra",
-    "job": [
-      "arcanist",
-      "rune_caster",
-      "mystic",
-      "archmage"
-    ],
-    "level": 66,
-    "bonus": {
-      "def": 352,
-      "hp": 4332
-    },
-    "image": "/assets/armor_celestra/defcelestramagelv66pants.png"
-  },
-  {
-    "id": "gloves_armorset_celestra_arcanist_lv66",
-    "name": "[C] Lv.66 Celestra Arcanist Gauntlets",
-    "emoji": "🧤",
-    "rarity": "C",
-    "type": "gloves",
-    "race": "celestra",
-    "job": [
-      "arcanist",
-      "rune_caster",
-      "mystic",
-      "archmage"
-    ],
-    "level": 66,
-    "bonus": {
-      "def": 282,
-      "atk": 134
-    },
-    "image": "/assets/armor_celestra/defcelestramagelv66gloves.png"
-  },
-  {
-    "id": "boots_armorset_celestra_arcanist_lv66",
-    "name": "[C] Lv.66 Celestra Arcanist Greaves",
-    "emoji": "👢",
-    "rarity": "C",
-    "type": "boots",
-    "race": "celestra",
-    "job": [
       "arcanist",
       "rune_caster",
       "mystic",
@@ -6535,6 +6535,6 @@
     "bonus": {
       "def": 267
     },
-    "image": "/assets/armor_celestra/defcelestramagelv66boots.png"
+    "image": "/assets/celestra/defcelestramagelv66boots.png"
   }
 ]

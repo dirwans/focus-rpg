@@ -6769,7 +6769,7 @@
     "bonus": {
       "def": 5
     },
-    "image": "/assets/armor_bionex/defbionexguardianlv1helmet.png"
+    "image": "/assets/bionex/defbionexguardianlv1helmet.png"
   },
   {
     "id": "armor_armorset_bionex_lv1",
@@ -6788,7 +6788,7 @@
     "bonus": {
       "def": 6
     },
-    "image": "/assets/armor_bionex/defbionexguardianlv1armor.png"
+    "image": "/assets/bionex/defbionexguardianlv1armor.png"
   },
   {
     "id": "pants_armorset_bionex_lv1",
@@ -6807,7 +6807,7 @@
     "bonus": {
       "def": 5
     },
-    "image": "/assets/armor_bionex/defbionexguardianlv1pants.png"
+    "image": "/assets/bionex/defbionexguardianlv1pants.png"
   },
   {
     "id": "gloves_armorset_bionex_lv1",
@@ -6827,7 +6827,7 @@
       "def": 4,
       "atk": 3
     },
-    "image": "/assets/armor_bionex/defbionexguardianlv1gloves.png"
+    "image": "/assets/bionex/defbionexguardianlv1gloves.png"
   },
   {
     "id": "boots_armorset_bionex_lv1",
@@ -6846,7 +6846,7 @@
     "bonus": {
       "def": 4
     },
-    "image": "/assets/armor_bionex/defbionexguardianlv1boots.png"
+    "image": "/assets/bionex/defbionexguardianlv1boots.png"
   },
   {
     "id": "helmet_armorset_bionex_lv32",
@@ -6865,7 +6865,7 @@
     "bonus": {
       "def": 149
     },
-    "image": "/assets/armor_bionex/defbionexguardianlv32helmet.png"
+    "image": "/assets/bionex/defbionexguardianlv32helmet.png"
   },
   {
     "id": "armor_armorset_bionex_lv32",
@@ -6884,7 +6884,7 @@
     "bonus": {
       "def": 181
     },
-    "image": "/assets/armor_bionex/defbionexguardianlv32armor.png"
+    "image": "/assets/bionex/defbionexguardianlv32armor.png"
   },
   {
     "id": "pants_armorset_bionex_lv32",
@@ -6904,7 +6904,7 @@
       "def": 159,
       "hp": 1988
     },
-    "image": "/assets/armor_bionex/defbionexguardianlv32pants.png"
+    "image": "/assets/bionex/defbionexguardianlv32pants.png"
   },
   {
     "id": "gloves_armorset_bionex_lv32",
@@ -6924,7 +6924,7 @@
       "def": 129,
       "atk": 57
     },
-    "image": "/assets/armor_bionex/defbionexguardianlv32gloves.png"
+    "image": "/assets/bionex/defbionexguardianlv32gloves.png"
   },
   {
     "id": "boots_armorset_bionex_lv32",
@@ -6943,7 +6943,7 @@
     "bonus": {
       "def": 122
     },
-    "image": "/assets/armor_bionex/defbionexguardianlv32boots.png"
+    "image": "/assets/bionex/defbionexguardianlv32boots.png"
   },
   {
     "id": "helmet_armorset_bionex_lv42",
@@ -6962,7 +6962,7 @@
     "bonus": {
       "def": 197
     },
-    "image": "/assets/armor_bionex/defbionexguardianlv42helmet.png"
+    "image": "/assets/bionex/defbionexguardianlv42helmet.png"
   },
   {
     "id": "armor_armorset_bionex_lv42",
@@ -6981,7 +6981,7 @@
     "bonus": {
       "def": 239
     },
-    "image": "/assets/armor_bionex/defbionexguardianlv42armor.png"
+    "image": "/assets/bionex/defbionexguardianlv42armor.png"
   },
   {
     "id": "pants_armorset_bionex_lv42",
@@ -7001,7 +7001,7 @@
       "def": 211,
       "hp": 2638
     },
-    "image": "/assets/armor_bionex/defbionexguardianlv42pants.png"
+    "image": "/assets/bionex/defbionexguardianlv42pants.png"
   },
   {
     "id": "gloves_armorset_bionex_lv42",
@@ -7021,7 +7021,7 @@
       "def": 171,
       "atk": 78
     },
-    "image": "/assets/armor_bionex/defbionexguardianlv42gloves.png"
+    "image": "/assets/bionex/defbionexguardianlv42gloves.png"
   },
   {
     "id": "boots_armorset_bionex_lv42",
@@ -7040,7 +7040,7 @@
     "bonus": {
       "def": 161
     },
-    "image": "/assets/armor_bionex/defbionexguardianlv42boots.png"
+    "image": "/assets/bionex/defbionexguardianlv42boots.png"
   },
   {
     "id": "helmet_armorset_bionex_lv55",
@@ -7059,7 +7059,7 @@
     "bonus": {
       "def": 260
     },
-    "image": "/assets/armor_bionex/defbionexguardianlv55helmet.png"
+    "image": "/assets/bionex/defbionexguardianlv55helmet.png"
   },
   {
     "id": "armor_armorset_bionex_lv55",
@@ -7078,7 +7078,7 @@
     "bonus": {
       "def": 315
     },
-    "image": "/assets/armor_bionex/defbionexguardianlv55armor.png"
+    "image": "/assets/bionex/defbionexguardianlv55armor.png"
   },
   {
     "id": "pants_armorset_bionex_lv55",
@@ -7098,7 +7098,7 @@
       "def": 278,
       "hp": 3442
     },
-    "image": "/assets/armor_bionex/defbionexguardianlv55pants.png"
+    "image": "/assets/bionex/defbionexguardianlv55pants.png"
   },
   {
     "id": "gloves_armorset_bionex_lv55",
@@ -7118,7 +7118,7 @@
       "def": 225,
       "atk": 105
     },
-    "image": "/assets/armor_bionex/defbionexguardianlv55gloves.png"
+    "image": "/assets/bionex/defbionexguardianlv55gloves.png"
   },
   {
     "id": "boots_armorset_bionex_lv55",
@@ -7137,7 +7137,7 @@
     "bonus": {
       "def": 213
     },
-    "image": "/assets/armor_bionex/defbionexguardianlv55boots.png"
+    "image": "/assets/bionex/defbionexguardianlv55boots.png"
   },
   {
     "id": "helmet_armorset_bionex_lv66",
@@ -7156,7 +7156,7 @@
     "bonus": {
       "def": 322
     },
-    "image": "/assets/armor_bionex/defbionexguardianlv66helmet.png"
+    "image": "/assets/bionex/defbionexguardianlv66helmet.png"
   },
   {
     "id": "armor_armorset_bionex_lv66",
@@ -7175,7 +7175,7 @@
     "bonus": {
       "def": 391
     },
-    "image": "/assets/armor_bionex/defbionexguardianlv66armor.png"
+    "image": "/assets/bionex/defbionexguardianlv66armor.png"
   },
   {
     "id": "pants_armorset_bionex_lv66",
@@ -7195,7 +7195,7 @@
       "def": 345,
       "hp": 4246
     },
-    "image": "/assets/armor_bionex/defbionexguardianlv66pants.png"
+    "image": "/assets/bionex/defbionexguardianlv66pants.png"
   },
   {
     "id": "gloves_armorset_bionex_lv66",
@@ -7215,7 +7215,7 @@
       "def": 279,
       "atk": 133
     },
-    "image": "/assets/armor_bionex/defbionexguardianlv66gloves.png"
+    "image": "/assets/bionex/defbionexguardianlv66gloves.png"
   },
   {
     "id": "boots_armorset_bionex_lv66",
@@ -7234,7 +7234,7 @@
     "bonus": {
       "def": 264
     },
-    "image": "/assets/armor_bionex/defbionexguardianlv66boots.png"
+    "image": "/assets/bionex/defbionexguardianlv66boots.png"
   },
   {
     "id": "helmet_armorset_bionex_marksman_lv1",
@@ -7256,7 +7256,7 @@
     "bonus": {
       "def": 5
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv1helmet.png"
+    "image": "/assets/bionex/defbionexmarksmanlv1helmet.png"
   },
   {
     "id": "armor_armorset_bionex_marksman_lv1",
@@ -7278,7 +7278,7 @@
     "bonus": {
       "def": 6
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv1armor.png"
+    "image": "/assets/bionex/defbionexmarksmanlv1armor.png"
   },
   {
     "id": "pants_armorset_bionex_marksman_lv1",
@@ -7300,7 +7300,7 @@
     "bonus": {
       "def": 5
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv1pants.png"
+    "image": "/assets/bionex/defbionexmarksmanlv1pants.png"
   },
   {
     "id": "gloves_armorset_bionex_marksman_lv1",
@@ -7323,7 +7323,7 @@
       "def": 4,
       "atk": 3
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv1gloves.png"
+    "image": "/assets/bionex/defbionexmarksmanlv1gloves.png"
   },
   {
     "id": "boots_armorset_bionex_marksman_lv1",
@@ -7345,7 +7345,7 @@
     "bonus": {
       "def": 4
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv1boots.png"
+    "image": "/assets/bionex/defbionexmarksmanlv1boots.png"
   },
   {
     "id": "helmet_armorset_bionex_marksman_lv32",
@@ -7367,7 +7367,7 @@
     "bonus": {
       "def": 148
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv32helmet.png"
+    "image": "/assets/bionex/defbionexmarksmanlv32helmet.png"
   },
   {
     "id": "armor_armorset_bionex_marksman_lv32",
@@ -7389,7 +7389,7 @@
     "bonus": {
       "def": 170
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv32armor.png"
+    "image": "/assets/bionex/defbionexmarksmanlv32armor.png"
   },
   {
     "id": "pants_armorset_bionex_marksman_lv32",
@@ -7412,7 +7412,7 @@
       "def": 163,
       "hp": 2038
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv32pants.png"
+    "image": "/assets/bionex/defbionexmarksmanlv32pants.png"
   },
   {
     "id": "gloves_armorset_bionex_marksman_lv32",
@@ -7435,7 +7435,7 @@
       "def": 133,
       "atk": 59
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv32gloves.png"
+    "image": "/assets/bionex/defbionexmarksmanlv32gloves.png"
   },
   {
     "id": "boots_armorset_bionex_marksman_lv32",
@@ -7457,7 +7457,7 @@
     "bonus": {
       "def": 126
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv32boots.png"
+    "image": "/assets/bionex/defbionexmarksmanlv32boots.png"
   },
   {
     "id": "helmet_armorset_bionex_marksman_lv42",
@@ -7479,7 +7479,7 @@
     "bonus": {
       "def": 196
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv42helmet.png"
+    "image": "/assets/bionex/defbionexmarksmanlv42helmet.png"
   },
   {
     "id": "armor_armorset_bionex_marksman_lv42",
@@ -7501,7 +7501,7 @@
     "bonus": {
       "def": 225
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv42armor.png"
+    "image": "/assets/bionex/defbionexmarksmanlv42armor.png"
   },
   {
     "id": "pants_armorset_bionex_marksman_lv42",
@@ -7524,7 +7524,7 @@
       "def": 215,
       "hp": 2688
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv42pants.png"
+    "image": "/assets/bionex/defbionexmarksmanlv42pants.png"
   },
   {
     "id": "gloves_armorset_bionex_marksman_lv42",
@@ -7547,7 +7547,7 @@
       "def": 176,
       "atk": 81
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv42gloves.png"
+    "image": "/assets/bionex/defbionexmarksmanlv42gloves.png"
   },
   {
     "id": "boots_armorset_bionex_marksman_lv42",
@@ -7569,7 +7569,7 @@
     "bonus": {
       "def": 167
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv42boots.png"
+    "image": "/assets/bionex/defbionexmarksmanlv42boots.png"
   },
   {
     "id": "helmet_armorset_bionex_marksman_lv55",
@@ -7591,7 +7591,7 @@
     "bonus": {
       "def": 258
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv55helmet.png"
+    "image": "/assets/bionex/defbionexmarksmanlv55helmet.png"
   },
   {
     "id": "armor_armorset_bionex_marksman_lv55",
@@ -7613,7 +7613,7 @@
     "bonus": {
       "def": 297
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv55armor.png"
+    "image": "/assets/bionex/defbionexmarksmanlv55armor.png"
   },
   {
     "id": "pants_armorset_bionex_marksman_lv55",
@@ -7636,7 +7636,7 @@
       "def": 284,
       "hp": 3516
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv55pants.png"
+    "image": "/assets/bionex/defbionexmarksmanlv55pants.png"
   },
   {
     "id": "gloves_armorset_bionex_marksman_lv55",
@@ -7659,7 +7659,7 @@
       "def": 232,
       "atk": 109
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv55gloves.png"
+    "image": "/assets/bionex/defbionexmarksmanlv55gloves.png"
   },
   {
     "id": "boots_armorset_bionex_marksman_lv55",
@@ -7681,7 +7681,7 @@
     "bonus": {
       "def": 219
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv55boots.png"
+    "image": "/assets/bionex/defbionexmarksmanlv55boots.png"
   },
   {
     "id": "helmet_armorset_bionex_marksman_lv66",
@@ -7703,7 +7703,7 @@
     "bonus": {
       "def": 320
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv66helmet.png"
+    "image": "/assets/bionex/defbionexmarksmanlv66helmet.png"
   },
   {
     "id": "armor_armorset_bionex_marksman_lv66",
@@ -7725,7 +7725,7 @@
     "bonus": {
       "def": 368
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv66armor.png"
+    "image": "/assets/bionex/defbionexmarksmanlv66armor.png"
   },
   {
     "id": "pants_armorset_bionex_marksman_lv66",
@@ -7748,7 +7748,7 @@
       "def": 352,
       "hp": 4332
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv66pants.png"
+    "image": "/assets/bionex/defbionexmarksmanlv66pants.png"
   },
   {
     "id": "gloves_armorset_bionex_marksman_lv66",
@@ -7771,7 +7771,7 @@
       "def": 288,
       "atk": 137
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv66gloves.png"
+    "image": "/assets/bionex/defbionexmarksmanlv66gloves.png"
   },
   {
     "id": "boots_armorset_bionex_marksman_lv66",
@@ -7793,7 +7793,7 @@
     "bonus": {
       "def": 272
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv66boots.png"
+    "image": "/assets/bionex/defbionexmarksmanlv66boots.png"
   },
   {
     "id": "helmet_armorset_bionex_psion_lv1",
@@ -7812,7 +7812,7 @@
     "bonus": {
       "def": 5
     },
-    "image": "/assets/armor_bionex/defbionexpsionlv1helmet.png"
+    "image": "/assets/bionex/defbionexpsionlv1helmet.png"
   },
   {
     "id": "armor_armorset_bionex_psion_lv1",
@@ -7831,7 +7831,7 @@
     "bonus": {
       "def": 6
     },
-    "image": "/assets/armor_bionex/defbionexpsionlv1armor.png"
+    "image": "/assets/bionex/defbionexpsionlv1armor.png"
   },
   {
     "id": "pants_armorset_bionex_psion_lv1",
@@ -7850,7 +7850,7 @@
     "bonus": {
       "def": 6
     },
-    "image": "/assets/armor_bionex/defbionexpsionlv1pants.png"
+    "image": "/assets/bionex/defbionexpsionlv1pants.png"
   },
   {
     "id": "gloves_armorset_bionex_psion_lv1",
@@ -7870,7 +7870,7 @@
       "def": 4,
       "atk": 3
     },
-    "image": "/assets/armor_bionex/defbionexpsionlv1gloves.png"
+    "image": "/assets/bionex/defbionexpsionlv1gloves.png"
   },
   {
     "id": "boots_armorset_bionex_psion_lv1",
@@ -7889,7 +7889,7 @@
     "bonus": {
       "def": 4
     },
-    "image": "/assets/armor_bionex/defbionexpsionlv1boots.png"
+    "image": "/assets/bionex/defbionexpsionlv1boots.png"
   },
   {
     "id": "helmet_armorset_bionex_psion_lv32",
@@ -7908,7 +7908,7 @@
     "bonus": {
       "def": 148
     },
-    "image": "/assets/armor_bionex/defbionexpsionlv32helmet.png"
+    "image": "/assets/bionex/defbionexpsionlv32helmet.png"
   },
   {
     "id": "armor_armorset_bionex_psion_lv32",
@@ -7927,7 +7927,7 @@
     "bonus": {
       "def": 175
     },
-    "image": "/assets/armor_bionex/defbionexpsionlv32armor.png"
+    "image": "/assets/bionex/defbionexpsionlv32armor.png"
   },
   {
     "id": "pants_armorset_bionex_psion_lv32",
@@ -7947,7 +7947,7 @@
       "def": 163,
       "hp": 2038
     },
-    "image": "/assets/armor_bionex/defbionexpsionlv32pants.png"
+    "image": "/assets/bionex/defbionexpsionlv32pants.png"
   },
   {
     "id": "gloves_armorset_bionex_psion_lv32",
@@ -7967,7 +7967,7 @@
       "def": 131,
       "atk": 58
     },
-    "image": "/assets/armor_bionex/defbionexpsionlv32gloves.png"
+    "image": "/assets/bionex/defbionexpsionlv32gloves.png"
   },
   {
     "id": "boots_armorset_bionex_psion_lv32",
@@ -7986,7 +7986,7 @@
     "bonus": {
       "def": 123
     },
-    "image": "/assets/armor_bionex/defbionexpsionlv32boots.png"
+    "image": "/assets/bionex/defbionexpsionlv32boots.png"
   },
   {
     "id": "helmet_armorset_bionex_psion_lv42",
@@ -8005,7 +8005,7 @@
     "bonus": {
       "def": 196
     },
-    "image": "/assets/armor_bionex/defbionexpsionlv42helmet.png"
+    "image": "/assets/bionex/defbionexpsionlv42helmet.png"
   },
   {
     "id": "armor_armorset_bionex_psion_lv42",
@@ -8024,7 +8024,7 @@
     "bonus": {
       "def": 232
     },
-    "image": "/assets/armor_bionex/defbionexpsionlv42armor.png"
+    "image": "/assets/bionex/defbionexpsionlv42armor.png"
   },
   {
     "id": "pants_armorset_bionex_psion_lv42",
@@ -8044,7 +8044,7 @@
       "def": 216,
       "hp": 2700
     },
-    "image": "/assets/armor_bionex/defbionexpsionlv42pants.png"
+    "image": "/assets/bionex/defbionexpsionlv42pants.png"
   },
   {
     "id": "gloves_armorset_bionex_psion_lv42",
@@ -8064,7 +8064,7 @@
       "def": 173,
       "atk": 79
     },
-    "image": "/assets/armor_bionex/defbionexpsionlv42gloves.png"
+    "image": "/assets/bionex/defbionexpsionlv42gloves.png"
   },
   {
     "id": "boots_armorset_bionex_psion_lv42",
@@ -8083,7 +8083,7 @@
     "bonus": {
       "def": 163
     },
-    "image": "/assets/armor_bionex/defbionexpsionlv42boots.png"
+    "image": "/assets/bionex/defbionexpsionlv42boots.png"
   },
   {
     "id": "helmet_armorset_bionex_psion_lv55",
@@ -8102,7 +8102,7 @@
     "bonus": {
       "def": 258
     },
-    "image": "/assets/armor_bionex/defbionexpsionlv55helmet.png"
+    "image": "/assets/bionex/defbionexpsionlv55helmet.png"
   },
   {
     "id": "armor_armorset_bionex_psion_lv55",
@@ -8121,7 +8121,7 @@
     "bonus": {
       "def": 305
     },
-    "image": "/assets/armor_bionex/defbionexpsionlv55armor.png"
+    "image": "/assets/bionex/defbionexpsionlv55armor.png"
   },
   {
     "id": "pants_armorset_bionex_psion_lv55",
@@ -8141,7 +8141,7 @@
       "def": 284,
       "hp": 3516
     },
-    "image": "/assets/armor_bionex/defbionexpsionlv55pants.png"
+    "image": "/assets/bionex/defbionexpsionlv55pants.png"
   },
   {
     "id": "gloves_armorset_bionex_psion_lv55",
@@ -8161,7 +8161,7 @@
       "def": 228,
       "atk": 107
     },
-    "image": "/assets/armor_bionex/defbionexpsionlv55gloves.png"
+    "image": "/assets/bionex/defbionexpsionlv55gloves.png"
   },
   {
     "id": "boots_armorset_bionex_psion_lv55",
@@ -8180,7 +8180,7 @@
     "bonus": {
       "def": 215
     },
-    "image": "/assets/armor_bionex/defbionexpsionlv55boots.png"
+    "image": "/assets/bionex/defbionexpsionlv55boots.png"
   },
   {
     "id": "helmet_armorset_bionex_psion_lv66",
@@ -8199,7 +8199,7 @@
     "bonus": {
       "def": 320
     },
-    "image": "/assets/armor_bionex/defbionexpsionlv66helmet.png"
+    "image": "/assets/bionex/defbionexpsionlv66helmet.png"
   },
   {
     "id": "armor_armorset_bionex_psion_lv66",
@@ -8218,7 +8218,7 @@
     "bonus": {
       "def": 379
     },
-    "image": "/assets/armor_bionex/defbionexpsionlv66armor.png"
+    "image": "/assets/bionex/defbionexpsionlv66armor.png"
   },
   {
     "id": "pants_armorset_bionex_psion_lv66",
@@ -8238,7 +8238,7 @@
       "def": 352,
       "hp": 4332
     },
-    "image": "/assets/armor_bionex/defbionexpsionlv66pants.png"
+    "image": "/assets/bionex/defbionexpsionlv66pants.png"
   },
   {
     "id": "gloves_armorset_bionex_psion_lv66",
@@ -8258,7 +8258,7 @@
       "def": 282,
       "atk": 134
     },
-    "image": "/assets/armor_bionex/defbionexpsionlv66gloves.png"
+    "image": "/assets/bionex/defbionexpsionlv66gloves.png"
   },
   {
     "id": "boots_armorset_bionex_psion_lv66",
@@ -8277,7 +8277,7 @@
     "bonus": {
       "def": 267
     },
-    "image": "/assets/armor_bionex/defbionexpsionlv66boots.png"
+    "image": "/assets/bionex/defbionexpsionlv66boots.png"
   },
   {
     "id": "helmet_armorset_bionex_engineer_lv1",
@@ -8296,7 +8296,7 @@
     "bonus": {
       "def": 5
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv1helmet.png"
+    "image": "/assets/bionex/defbionexmarksmanlv1helmet.png"
   },
   {
     "id": "armor_armorset_bionex_engineer_lv1",
@@ -8315,7 +8315,7 @@
     "bonus": {
       "def": 6
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv1armor.png"
+    "image": "/assets/bionex/defbionexmarksmanlv1armor.png"
   },
   {
     "id": "pants_armorset_bionex_engineer_lv1",
@@ -8334,7 +8334,7 @@
     "bonus": {
       "def": 5
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv1pants.png"
+    "image": "/assets/bionex/defbionexmarksmanlv1pants.png"
   },
   {
     "id": "gloves_armorset_bionex_engineer_lv1",
@@ -8354,7 +8354,7 @@
       "def": 4,
       "atk": 3
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv1gloves.png"
+    "image": "/assets/bionex/defbionexmarksmanlv1gloves.png"
   },
   {
     "id": "boots_armorset_bionex_engineer_lv1",
@@ -8373,7 +8373,7 @@
     "bonus": {
       "def": 4
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv1boots.png"
+    "image": "/assets/bionex/defbionexmarksmanlv1boots.png"
   },
   {
     "id": "helmet_armorset_bionex_engineer_lv32",
@@ -8392,7 +8392,7 @@
     "bonus": {
       "def": 148
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv32helmet.png"
+    "image": "/assets/bionex/defbionexmarksmanlv32helmet.png"
   },
   {
     "id": "armor_armorset_bionex_engineer_lv32",
@@ -8411,7 +8411,7 @@
     "bonus": {
       "def": 170
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv32armor.png"
+    "image": "/assets/bionex/defbionexmarksmanlv32armor.png"
   },
   {
     "id": "pants_armorset_bionex_engineer_lv32",
@@ -8431,7 +8431,7 @@
       "def": 163,
       "hp": 2038
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv32pants.png"
+    "image": "/assets/bionex/defbionexmarksmanlv32pants.png"
   },
   {
     "id": "gloves_armorset_bionex_engineer_lv32",
@@ -8451,7 +8451,7 @@
       "def": 133,
       "atk": 59
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv32gloves.png"
+    "image": "/assets/bionex/defbionexmarksmanlv32gloves.png"
   },
   {
     "id": "boots_armorset_bionex_engineer_lv32",
@@ -8470,7 +8470,7 @@
     "bonus": {
       "def": 126
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv32boots.png"
+    "image": "/assets/bionex/defbionexmarksmanlv32boots.png"
   },
   {
     "id": "helmet_armorset_bionex_engineer_lv42",
@@ -8489,7 +8489,7 @@
     "bonus": {
       "def": 196
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv42helmet.png"
+    "image": "/assets/bionex/defbionexmarksmanlv42helmet.png"
   },
   {
     "id": "armor_armorset_bionex_engineer_lv42",
@@ -8508,7 +8508,7 @@
     "bonus": {
       "def": 225
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv42armor.png"
+    "image": "/assets/bionex/defbionexmarksmanlv42armor.png"
   },
   {
     "id": "pants_armorset_bionex_engineer_lv42",
@@ -8528,7 +8528,7 @@
       "def": 215,
       "hp": 2688
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv42pants.png"
+    "image": "/assets/bionex/defbionexmarksmanlv42pants.png"
   },
   {
     "id": "gloves_armorset_bionex_engineer_lv42",
@@ -8548,7 +8548,7 @@
       "def": 176,
       "atk": 81
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv42gloves.png"
+    "image": "/assets/bionex/defbionexmarksmanlv42gloves.png"
   },
   {
     "id": "boots_armorset_bionex_engineer_lv42",
@@ -8567,7 +8567,7 @@
     "bonus": {
       "def": 167
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv42boots.png"
+    "image": "/assets/bionex/defbionexmarksmanlv42boots.png"
   },
   {
     "id": "helmet_armorset_bionex_engineer_lv55",
@@ -8586,7 +8586,7 @@
     "bonus": {
       "def": 258
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv55helmet.png"
+    "image": "/assets/bionex/defbionexmarksmanlv55helmet.png"
   },
   {
     "id": "armor_armorset_bionex_engineer_lv55",
@@ -8605,7 +8605,7 @@
     "bonus": {
       "def": 297
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv55armor.png"
+    "image": "/assets/bionex/defbionexmarksmanlv55armor.png"
   },
   {
     "id": "pants_armorset_bionex_engineer_lv55",
@@ -8625,7 +8625,7 @@
       "def": 284,
       "hp": 3516
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv55pants.png"
+    "image": "/assets/bionex/defbionexmarksmanlv55pants.png"
   },
   {
     "id": "gloves_armorset_bionex_engineer_lv55",
@@ -8645,7 +8645,7 @@
       "def": 232,
       "atk": 109
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv55gloves.png"
+    "image": "/assets/bionex/defbionexmarksmanlv55gloves.png"
   },
   {
     "id": "boots_armorset_bionex_engineer_lv55",
@@ -8664,7 +8664,7 @@
     "bonus": {
       "def": 219
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv55boots.png"
+    "image": "/assets/bionex/defbionexmarksmanlv55boots.png"
   },
   {
     "id": "helmet_armorset_bionex_engineer_lv66",
@@ -8683,7 +8683,7 @@
     "bonus": {
       "def": 320
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv66helmet.png"
+    "image": "/assets/bionex/defbionexmarksmanlv66helmet.png"
   },
   {
     "id": "armor_armorset_bionex_engineer_lv66",
@@ -8702,7 +8702,7 @@
     "bonus": {
       "def": 368
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv66armor.png"
+    "image": "/assets/bionex/defbionexmarksmanlv66armor.png"
   },
   {
     "id": "pants_armorset_bionex_engineer_lv66",
@@ -8722,7 +8722,7 @@
       "def": 352,
       "hp": 4332
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv66pants.png"
+    "image": "/assets/bionex/defbionexmarksmanlv66pants.png"
   },
   {
     "id": "gloves_armorset_bionex_engineer_lv66",
@@ -8742,7 +8742,7 @@
       "def": 288,
       "atk": 137
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv66gloves.png"
+    "image": "/assets/bionex/defbionexmarksmanlv66gloves.png"
   },
   {
     "id": "boots_armorset_bionex_engineer_lv66",
@@ -8761,6 +8761,6 @@
     "bonus": {
       "def": 272
     },
-    "image": "/assets/armor_bionex/defbionexmarksmanlv66boots.png"
+    "image": "/assets/bionex/defbionexmarksmanlv66boots.png"
   }
 ]
