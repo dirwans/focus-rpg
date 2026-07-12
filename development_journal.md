@@ -2151,3 +2151,11 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
    - Fixed a bug in the in-game weapon image resolver where Bionex Engineer (`engineer`) and Celestra Arcanist (`arcanist`) mecha weapons resolved to generic sword sprites instead of their respective gun/staff sprites.
    - Updated `isCaster` and `isRanger` checks in `resolveItemImage` to look at both `playerJob` and item ID patterns (`_eng_`, `_mar_`, `_ran_`, `_pat_` for guns/bows, and `_psi_`, `_ora_`, `_cor_arc_` for staves).
 - **Verification**: Verified React build compiles cleanly (`npm run build`).
+
+---
+
+### 🔧 Milestone 158: Fix Auditor Room Gear Pagination Clamping [PENDING DEPLOYMENT]
+- **Auditor Room Gear Pagination Fix (`src/screens/AuditorRoom.jsx`)**:
+   - Increased the `PAGE_SIZE` specifically for the `Gears` tab in the Master Console / Auditor Room to `250` (up from `100`).
+   - This ensures all 128 mecha gear items (including weapons, shields, and the 100 job-specific armor pieces) for Bionex and Celestra fit entirely on the first page, preventing the level 66 sets (Genesis and Elysian) and parts of level 55 sets from being cut off or hidden on Page 2.
+- **Verification**: Verified React build compiles cleanly (`npm run build`).

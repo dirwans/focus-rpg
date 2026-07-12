@@ -910,7 +910,7 @@ export default function AuditorRoom() {
 
   const activeData = getActiveArray()
   const filteredData = activeData.filter(i => !searchTerm || (i.name && i.name.toLowerCase().includes(searchTerm.toLowerCase())) || (i.id && i.id.toLowerCase().includes(searchTerm.toLowerCase())))
-  const PAGE_SIZE = tab === 'crafting' ? 20 : 100
+  const PAGE_SIZE = tab === 'crafting' ? 20 : (tab === 'gears' ? 250 : 100)
   const totalPages = Math.ceil(filteredData.length / PAGE_SIZE)
   const paginatedData = filteredData.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)
 
