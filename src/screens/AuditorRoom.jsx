@@ -298,8 +298,24 @@ export default function AuditorRoom() {
         if (craftRaceFilter !== 'all') {
           base = base.filter(i => !i.faction || i.faction === craftRaceFilter || i.name.toLowerCase().includes(craftRaceFilter) || i.id.toLowerCase().includes(craftRaceFilter))
         }
-        if (craftSubTab === 'Shards') return base.filter(i => (i.name && i.name.toLowerCase().includes('shard')) || (i.id && i.id.toLowerCase().includes('shard')))
-        if (craftSubTab === 'Ores') return base.filter(i => ((i.name && i.name.toLowerCase().includes('ore')) || (i.id && i.id.toLowerCase().includes('ore'))) && !i.name.toLowerCase().includes('core') && !i.name.toLowerCase().includes('spore') && !i.name.toLowerCase().includes('store'))
+        if (craftSubTab === 'Shards') {
+          const list = base.filter(i => (i.name && i.name.toLowerCase().includes('shard')) || (i.id && i.id.toLowerCase().includes('shard')));
+          const seen = new Set();
+          return list.filter(i => {
+            if (seen.has(i.name)) return false;
+            seen.add(i.name);
+            return true;
+          });
+        }
+        if (craftSubTab === 'Ores') {
+          const list = base.filter(i => ((i.name && i.name.toLowerCase().includes('ore')) || (i.id && i.id.toLowerCase().includes('ore'))) && !i.name.toLowerCase().includes('core') && !i.name.toLowerCase().includes('spore') && !i.name.toLowerCase().includes('store'));
+          const seen = new Set();
+          return list.filter(i => {
+            if (seen.has(i.name)) return false;
+            seen.add(i.name);
+            return true;
+          });
+        }
         if (craftSubTab === 'Cores') return base.filter(i => (i.name && i.name.toLowerCase().includes('core')) || (i.id && i.id.toLowerCase().includes('core')))
         if (craftSubTab === 'Mats') return base.filter(i => i.id.toLowerCase().includes('mat_') && !i.name.toLowerCase().includes('shard') && !i.name.toLowerCase().includes('ore') && !i.name.toLowerCase().includes('core'))
         if (craftSubTab === 'Misc') return base.filter(i => !i.name.toLowerCase().includes('shard') && !((i.name && i.name.toLowerCase().includes('ore')) && !i.name.toLowerCase().includes('core') && !i.name.toLowerCase().includes('spore')) && !i.name.toLowerCase().includes('core') && !i.id.toLowerCase().includes('mat_'))
