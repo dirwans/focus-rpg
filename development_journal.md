@@ -2154,8 +2154,13 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 
 ---
 
-### 🔧 Milestone 158: Fix Auditor Room Gear Pagination Clamping [PENDING DEPLOYMENT]
+### 🔧 Milestone 158: Fix Auditor Room Gear Pagination Clamping & Implement Live Game Data Sync [PENDING DEPLOYMENT]
 - **Auditor Room Gear Pagination Fix (`src/screens/AuditorRoom.jsx`)**:
    - Increased the `PAGE_SIZE` specifically for the `Gears` tab in the Master Console / Auditor Room to `250` (up from `100`).
    - This ensures all 128 mecha gear items (including weapons, shields, and the 100 job-specific armor pieces) for Bionex and Celestra fit entirely on the first page, preventing the level 66 sets (Genesis and Elysian) and parts of level 55 sets from being cut off or hidden on Page 2.
+- **Mecha Gear Stats Sync (`server.js`)**:
+   - Implemented `syncGearToGameGears(gearPieceId, stats)` which translates metadata gear IDs (e.g. `set_cor_1_helmet_sentinel`) to active character game item IDs (e.g. `helmet_armorset_celestra_lv1`) and updates the `bonus` property directly inside `celestra_gears.json`, `bionex_gears.json`, or `arctron_gears.json`.
+   - Integrated this sync call into both the direct save route (`/api/audit/save_item_direct`) and the draft publishing route (`/api/audit/publish_draft`) for category `gears`.
+- **Items Tab Armor Set Image Path Fix (`src/screens/AuditorRoom.jsx`)**:
+   - Fixed broken mecha armor images in the Items tab by adding string replacement rules in `formatRows` to map `/assets/armor_celestra/` and `/assets/armor_bionex/` to their active locations (`/assets/celestra/` and `/assets/bionex/`).
 - **Verification**: Verified React build compiles cleanly (`npm run build`).

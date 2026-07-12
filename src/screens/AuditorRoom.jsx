@@ -145,6 +145,13 @@ export default function AuditorRoom() {
         // Helper to format rows with UI states
         const formatRows = (arr, category) => (arr || []).map(item => {
           let preview = item.image || (item.img ? (item.img.startsWith('/') || item.img.startsWith('http') ? item.img : `/assets/${item.img}`) : null);
+          if (preview && typeof preview === 'string') {
+            if (preview.startsWith('/assets/armor_celestra/')) {
+              preview = preview.replace('/assets/armor_celestra/', '/assets/celestra/');
+            } else if (preview.startsWith('/assets/armor_bionex/')) {
+              preview = preview.replace('/assets/armor_bionex/', '/assets/bionex/');
+            }
+          }
           if (preview && !preview.startsWith('http') && !preview.startsWith('/')) {
             preview = '/' + preview;
           }

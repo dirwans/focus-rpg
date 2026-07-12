@@ -1200,6 +1200,71 @@ const resolveGearFile = (id) => {
   return 'accessories.json';
 };
 
+const syncGearToGameGears = (gearPieceId, stats) => {
+  if (!gearPieceId || !stats) return;
+  const match = gearPieceId.match(/^set_([a-z]+)_(\d)_([a-z]+)_([a-z]+)/);
+  if (!match) return;
+  const fact = match[1];
+  const tier = match[2];
+  const piece = match[3];
+  const lin = match[4];
+
+  let race = '';
+  let level = '1';
+  if (tier === '1') level = '1';
+  else if (tier === '2') level = '32';
+  else if (tier === '3') level = '42';
+  else if (tier === '4') level = '55';
+  else if (tier === '5') level = '66';
+
+  let suffix = '';
+  if (fact === 'arc') {
+    race = 'arctron';
+    if (lin === 'warrior') suffix = '';
+    else if (lin === 'ranger') suffix = '_ranger';
+    else if (lin === 'technician') suffix = '_technician';
+  } else if (fact === 'bio') {
+    race = 'bionex';
+    if (lin === 'guardian') suffix = '';
+    else if (lin === 'marksman' || lin === 'engineer') suffix = '_marksman';
+    else if (lin === 'psion') suffix = '_psion';
+  } else if (fact === 'cor') {
+    race = 'celestra';
+    if (lin === 'sentinel') suffix = '';
+    else if (lin === 'pathfinder') suffix = '_ranger';
+    else if (lin === 'oracle' || lin === 'arcanist') suffix = '_mage';
+  }
+
+  const gameItemId = `${piece}_armorset_${race}${suffix}_lv${level}`;
+  let gameGearsFile = '';
+  if (gameItemId.includes('celestra')) gameGearsFile = join(__dirname, 'src', 'data', 'celestra_gears.json');
+  else if (gameItemId.includes('bionex')) gameGearsFile = join(__dirname, 'src', 'data', 'bionex_gears.json');
+  else if (gameItemId.includes('arctron')) gameGearsFile = join(__dirname, 'src', 'data', 'arctron_gears.json');
+
+  if (gameGearsFile) {
+    try {
+      const gameContent = JSON.parse(readFileSync(gameGearsFile, 'utf8'));
+      const idx = gameContent.findIndex(i => i.id === gameItemId);
+      if (idx >= 0) {
+        const cleanStats = {};
+        Object.keys(stats).forEach(k => {
+          if (typeof stats[k] === 'number' || (typeof stats[k] === 'string' && stats[k].trim() !== '')) {
+            const val = parseInt(stats[k], 10);
+            if (!isNaN(val)) cleanStats[k] = val;
+            else cleanStats[k] = stats[k];
+          }
+        });
+        gameContent[idx].bonus = cleanStats;
+        writeFileSync(gameGearsFile, JSON.stringify(gameContent, null, 2));
+        console.log(`[audit] Synced gear piece ${gearPieceId} stats to game item ${gameItemId}`);
+      }
+    } catch (err) {
+      console.error(`[audit] Failed to sync gear piece stats to game item:`, err);
+    }
+  }
+};
+
+
 app.get('/api/audit/all_data', (req, res) => {
   try {
     const SRC_DATA_DIR = join(__dirname, 'src', 'data')
@@ -1417,6 +1482,7 @@ app.post('/api/audit/save_item_direct', (req, res) => {
               if (!obj[parentIdx].stats) obj[parentIdx].stats = {};
               obj[parentIdx].stats[pieceName] = { ...obj[parentIdx].stats[pieceName], ...cleanData.stats };
               updated = true;
+              syncGearToGameGears(cleanData.id, cleanData.stats);
               return;
             }
           }
@@ -1520,6 +1586,7 @@ app.post('/api/audit/publish_draft', (req, res) => {
             if (parentIdx >= 0) {
               if (!o[parentIdx].stats) o[parentIdx].stats = {};
               o[parentIdx].stats[pieceName] = { ...o[parentIdx].stats[pieceName], ...cleanDef.stats };
+              syncGearToGameGears(cleanDef.id, cleanDef.stats);
               return;
             }
           }
