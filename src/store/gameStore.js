@@ -184,41 +184,69 @@ export function resolveItemImage(item, playerRace, playerJob) {
     }
   }
   if (item.type === 'weapon') {
-    const lvl = item.level || 1
+    let lvl = item.level || 1
+    const idStr = (item.id || '').toLowerCase();
+    
+    // Parse level from ID suffix if level is not explicitly defined (e.g. wpn_arc_war_3)
+    if (!item.level && item.id) {
+      const numMatch = idStr.match(/_(\d+)$/);
+      if (numMatch) {
+        const val = parseInt(numMatch[1], 10);
+        if (val === 1 || val === 0) lvl = 1;
+        else if (val === 30 || val === 32) lvl = 32;
+        else if (val === 40 || val === 42) lvl = 42;
+        else if (val === 50 || val === 55) lvl = 55;
+        else if (val === 60 || val === 65 || val === 66) lvl = 66;
+        else if (idStr.includes('war_') || idStr.includes('ran_') || idStr.includes('mys_') || idStr.includes('spe_')) {
+          if (val === 2) lvl = 32;
+          else if (val === 3) lvl = 42;
+          else if (val === 4) lvl = 55;
+          else if (val === 5) lvl = 66;
+        }
+      }
+    }
+
     const isCaster = STAFF_JOBS.includes(playerJob)
     const seed = item.uid || (item.id ? item.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) : 0)
 
     if (isCaster) {
-      if (lvl >= 55) return '/assets/weapons/defbioncelestralv55staff.png?v=2'
-      if (lvl >= 42) return '/assets/weapons/defbioncelestralv42staff.png?v=2'
-      if (lvl >= 32) return '/assets/weapons/defbioncelestralv32staff.png?v=2'
-      const index = (seed % 2) + 1
-      return `/assets/weapons/defbioncelestralv1staff${index}.png?v=2`
+      const tier = lvl >= 55 ? '55' : (lvl >= 42 ? '42' : (lvl >= 32 ? '32' : '1'));
+      if (tier === '1') {
+        const index = (seed % 2) + 1;
+        return `/assets/weapons/defbioncelestralv1staff${index}.png?v=2`;
+      }
+      return `/assets/weapons/defbioncelestralv${tier}staff.png?v=2`;
     }
 
     const isRanger = BOW_JOBS.includes(playerJob)
     if (isRanger) {
-      // Celestra rangers (fantasy elf archers) use the bow; Arctron/Bionex (sci-fi) use the gun.
       const weaponKind = playerRace === 'celestra' ? 'bow' : 'gun'
-      if (lvl >= 55) return `/assets/weapons/defallfactionslv55${weaponKind}.png?v=2`
-      if (lvl >= 42) return `/assets/weapons/defallfactionslv42${weaponKind}.png?v=2`
-      if (lvl >= 32) return `/assets/weapons/defallfactionslv32${weaponKind}.png?v=2`
-      return `/assets/weapons/defallfactionslv1${weaponKind}.png?v=2`
+      const tier = lvl >= 55 ? '55' : (lvl >= 42 ? '42' : (lvl >= 32 ? '32' : '1'));
+      return `/assets/weapons/defallfactionslv${tier}${weaponKind}.png?v=2`
     }
 
-    // Arctron warrior/technician (its only remaining lineages — Arctron has no caster
-    // class) get an exclusive gun at Lv.32+ instead of the generic axe.
-    if (playerRace === 'arctron') {
-      if (lvl >= 55) return '/assets/weapons/defarctronlv55special.png?v=2'
-      if (lvl >= 42) return '/assets/weapons/defarctronlv42special.png?v=2'
-      if (lvl >= 32) return '/assets/weapons/defarctronlv32special.png?v=2'
+    // Arctron warrior/technician exclusive special launcher at Lv.32+
+    if (playerRace === 'arctron' && !idStr?.includes('war_') && !item.name?.toLowerCase().includes('blade') && !item.name?.toLowerCase().includes('edge')) {
+      const tier = lvl >= 55 ? '55' : (lvl >= 42 ? '42' : (lvl >= 32 ? '32' : '1'));
+      if (tier !== '1') {
+        return `/assets/weapons/defarctronlv${tier}special.png?v=2`;
+      }
     }
 
-    if (lvl >= 55) return '/assets/weapons/defallfactionslv55axe.png?v=2'
-    if (lvl >= 42) return '/assets/weapons/defallfactionslv42axe.png?v=2'
-    if (lvl >= 32) return '/assets/weapons/defallfactionslv32axe.png?v=2'
-    const index = (seed % 4) + 1
-    return `/assets/weapons/defallfactionslv1sword${index}.png?v=2`
+    const nameLower = (item.name || '').toLowerCase();
+    const idLower = (item.id || '').toLowerCase();
+    const isAxe = idLower.includes('axe') || idLower.includes('reaver') || idLower.includes('cleaver') || idLower.includes('scythe') || idLower.includes('hatchet') || nameLower.includes('axe') || nameLower.includes('reaver') || nameLower.includes('cleaver') || nameLower.includes('scythe');
+
+    const tier = lvl >= 55 ? '55' : (lvl >= 42 ? '42' : (lvl >= 32 ? '32' : '1'));
+    if (isAxe && tier !== '1') {
+      return `/assets/weapons/defallfactionslv${tier}axe.png?v=2`
+    }
+
+    if (tier === '1') {
+      const index = (seed % 4) + 1
+      return `/assets/weapons/defallfactionslv1sword${index}.png?v=2`
+    }
+    return `/assets/weapons/defallfactionslv${tier}sword.png?v=2`
   }
   // Bespoke default armor-set pieces (id namespace `*_armorset_*`, e.g.
   // `armor_armorset_arctron_lv1`) resolve dynamically by race/job/level tier;
