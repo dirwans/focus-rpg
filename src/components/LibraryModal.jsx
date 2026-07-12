@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import arctronGears from '../data/gears/arctron.json'
 import bionexGears from '../data/gears/bionex.json'
 import celestraGears from '../data/gears/celestra.json'
@@ -7,6 +7,14 @@ import accessoriesData from '../data/gears/accessories.json'
 export default function LibraryModal({ onClose }) {
   const [tab, setTab] = useState('growth')
   const [equipFaction, setEquipFaction] = useState('arctron')
+  const [liveData, setLiveData] = useState(null)
+
+  useEffect(() => {
+    fetch('/api/audit/all_data')
+      .then(res => res.json())
+      .then(d => setLiveData(d))
+      .catch(() => {})
+  }, [])
 
   return (
     <div style={styles.overlay}>
@@ -26,6 +34,7 @@ export default function LibraryModal({ onClose }) {
           <button style={tab === 'system' ? styles.tabActive : styles.tab} onClick={() => setTab('system')}>System</button>
           <button style={tab === 'equip' ? styles.tabActive : styles.tab} onClick={() => setTab('equip')}>Equipment</button>
           <button style={tab === 'logic' ? styles.tabActive : styles.tab} onClick={() => setTab('logic')}>Logic</button>
+          <button style={tab === 'recipes' ? styles.tabActive : styles.tab} onClick={() => setTab('recipes')}>Crafting</button>
         </div>
 
         <div style={styles.content} className="no-scrollbar">
@@ -1305,6 +1314,75 @@ export default function LibraryModal({ onClose }) {
                   <li><strong>Reward:</strong> Diundi berdasarkan Drop Table Node (Misal: Ore, Arcanite, Crystal). Berhenti otomatis jika tas penuh atau baterai habis.</li>
                 </ul>
               </div>
+            </div>
+          )}
+
+          {tab === 'recipes' && (
+            <div style={styles.section}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px dashed rgba(0,229,255,0.3)', paddingBottom: 8 }}>
+                <h3 style={{ margin: 0, color: '#00e5ff', fontSize: 16 }}>🛠️ Crafting & Enhancement Recipes Database</h3>
+                <span style={{ fontSize: 11, color: '#00ff88', background: 'rgba(0,255,136,0.1)', padding: '4px 8px', borderRadius: 4, border: '1px solid #00ff88' }}>
+                  ⚡ Live Synchronized with Auditor Room
+                </span>
+              </div>
+              <p style={{ color: '#aaa', fontSize: 13, margin: '4px 0 12px 0' }}>
+                Berikut adalah daftar resep perakitan item dan peluang enhancement yang dikonfigurasi langsung oleh Game Master / Admin:
+              </p>
+
+              {(!liveData?.recipes || liveData.recipes.length === 0) ? (
+                <div style={{ padding: 40, textAlign: 'center', color: '#666', border: '1px dashed #333', borderRadius: 8 }}>
+                  Belum ada resep khusus yang dipublish dari Ruang Auditor (`/rahasia-auditor`).
+                </div>
+              ) : (
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 16 }}>
+                  {liveData.recipes.map((rec, idx) => (
+                    <div key={idx} style={{ background: 'rgba(0,229,255,0.04)', border: '1px solid rgba(0,229,255,0.2)', borderRadius: 8, padding: 14, display: 'flex', flexDirection: 'column', gap: 10 }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: 8 }}>
+                        <span style={{ color: '#fff', fontWeight: 'bold', fontSize: 15 }}>{rec.name || rec.id}</span>
+                        <span style={{ fontSize: 11, padding: '2px 6px', borderRadius: 4, background: rec.grade === 'SSS' ? '#f00' : rec.grade === 'SR' ? '#a0f' : '#00e5ff', color: '#000', fontWeight: 'bold' }}>{rec.grade || 'Normal'}</span>
+                      </div>
+
+                      {rec.materials && rec.materials.length > 0 && (
+                        <div>
+                          <div style={{ fontSize: 12, color: '#7ab0d0', fontWeight: 'bold', marginBottom: 6 }}>📦 Bahan / Syarat Material:</div>
+                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                            {rec.materials.map((mat, mIdx) => (
+                              <span key={mIdx} style={{ fontSize: 11, background: 'rgba(255,255,255,0.08)', padding: '4px 8px', borderRadius: 4, border: '1px solid rgba(255,255,255,0.15)', color: '#fff' }}>
+                                • {mat.name || mat.id}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {rec.chances && (
+                        <div>
+                          <div style={{ fontSize: 12, color: '#7ab0d0', fontWeight: 'bold', marginBottom: 6 }}>🎲 Peluang (Success / Destroy / Great / Bonus):</div>
+                          <div style={{ display: 'flex', gap: 8, fontSize: 11 }}>
+                            <span style={{ color: '#00ff88' }}>Sukses: {rec.chances.success}%</span> |
+                            <span style={{ color: '#ff4444' }}>Hancur: {rec.chances.destroy}%</span> |
+                            <span style={{ color: '#ffff00' }}>Great: {rec.chances.great}%</span> |
+                            <span style={{ color: '#00e5ff' }}>Bonus: {rec.chances.bonus}%</span>
+                          </div>
+                        </div>
+                      )}
+
+                      {rec.stats && rec.stats.length > 0 && (
+                        <div style={{ marginTop: 4 }}>
+                          <div style={{ fontSize: 12, color: '#00ff88', fontWeight: 'bold' }}>✨ Hasil Status Tambahan:</div>
+                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 4 }}>
+                            {rec.stats.map((s, sIdx) => (
+                              <span key={sIdx} style={{ fontSize: 11, background: 'rgba(0,255,136,0.1)', color: '#00ff88', padding: '2px 6px', borderRadius: 4 }}>
+                                {s.stat} +{s.val}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           )}
         </div>

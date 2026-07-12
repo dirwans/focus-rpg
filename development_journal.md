@@ -4,19 +4,32 @@ This journal tracks all major development milestones, technical optimizations, b
 
 ---
 
-## âš™ï¸� Deployment Guidelines & Rules
+## ⚙️ Deployment Guidelines & Rules
 
 Starting July 7, 2026, the following rules are enforced for all development and deployment operations:
 1. **Minimum Edit Threshold**: Any call to `deploy.ps1` must contain at least **5 separate modifications/edits** in the codebase.
 2. **Modification Status Labeling**: All milestones and modifications recorded in this journal must explicitly state their deployment state using:
-   - `[DEPLOYED]` â€” for edits completed locally but not yet deployed.
-   - `[DEPLOYED]` â€” for edits successfully synced to the production VPS server.
+   - `[DEPLOYED]` — for edits completed locally but not yet deployed.
+   - `[DEPLOYED]` — for edits successfully synced to the production VPS server.
 
 ---
 
-## ðŸ“… Session Chronological Logs
+## 📅 Session Chronological Logs
 
-### ðŸš€ Milestone 1: Authentication Security & Integrity Guard [DEPLOYED]
+### 🕹️ Milestone 19: No-Code Master Console, Crafting Sync <=> Guides & Anti-Relogin [DEPLOYED]
+- **No-Code Master Console & Asset Studio (`server.js`, `AuditorRoom.jsx`)**:
+  - Added REST endpoints `POST /api/audit/upload_asset`, `POST /api/audit/save_monster`, `POST /api/audit/save_item_direct`, `POST /api/audit/save_recipe`, and draft publishing routes (`publish_draft` / `delete_draft`).
+  - Created interactive **Upload Sprite Studio** modal in `/rahasia-auditor` to directly upload image files (`.png`, `.webp`, `.jpg`) into `public/assets/` and `dist/assets/` without file explorer access.
+  - Created **+ Add Candidate Monster** UI form with map selection, mob/boss toggle, stats (`doubleHitChance` for Aggressive, `critChance`), and image preview.
+  - Added **Review Drafts** tab to inspect and approve staged changes (`audit_drafts.json`) live into game data.
+- **Two-Way Crafting Sync <=> Database & Guides (`LibraryModal.jsx`, `recipes.json`)**:
+  - Created persistent `src/data/recipes.json` store.
+  - Added new **Crafting** tab inside the player-facing `LibraryModal` that fetches live data (`/api/audit/all_data`) to display custom recipes created by GMs.
+- **Anti-Relogin & Session Persistence (`AuditorRoom.jsx`)**:
+  - Implemented `localStorage` persistence for Auditor Room login state (`audit_logged_in`, `audit_pin`), preventing forced relogins on hard refresh or browser reload.
+  - Added a dedicated **🚪 Logout** button to clear stored credentials securely when exiting the admin console.
+
+### 🚀 Milestone 1: Authentication Security & Integrity Guard [DEPLOYED]
 - **Authentication Guards (`server.js`)**:
   - Implemented an user verification check inside `getSession()` to ensure the session's username actually exists in `users.json`. If a user is deleted or does not exist, their session is immediately rejected (preventing ghost/anonymous joins).
   - Integrated the same security verification into the Server-Sent Events (SSE) `/api/save/stream` endpoint to prevent unauthorized persistent save streams.

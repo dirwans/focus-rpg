@@ -4,12 +4,19 @@ import bionexLogo from '../assets/bionex_logo.png'
 import celestraLogo from '../assets/celestra_logo.png'
 
 export default function AuditorRoom() {
-  const [pin, setPin] = useState('')
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [pin, setPin] = useState(() => localStorage.getItem('audit_pin') || '')
+  const [loggedIn, setLoggedIn] = useState(() => localStorage.getItem('audit_logged_in') === 'true')
   const [loading, setLoading] = useState(false)
   
   useEffect(() => {
     document.title = "Audit Database"
+    const savedPin = localStorage.getItem('audit_pin')
+    const savedLoggedIn = localStorage.getItem('audit_logged_in')
+    if (savedLoggedIn === 'true' && savedPin === '12345') {
+      setPin('12345')
+      setLoggedIn(true)
+      fetchData()
+    }
   }, [])
 
   // All Data
@@ -18,7 +25,34 @@ export default function AuditorRoom() {
     enemies: [],
     races: [],
     jobs: [],
+    recipes: [],
+    drafts: [],
     gears: { arctron: [], bionex: [], celestra: [], accessories: [] }
+  })
+
+  const [rawEnemies, setRawEnemies] = useState(null)
+  const [showAddMonsterModal, setShowAddMonsterModal] = useState(false)
+  const [showUploadAssetModal, setShowUploadAssetModal] = useState(false)
+  const [newMonster, setNewMonster] = useState({
+    name: '',
+    level: 1,
+    hp: 100,
+    atk: 50,
+    def: 10,
+    expReward: 10,
+    crdReward: 10,
+    image: '',
+    critical: 5,
+    doubleHitChance: 0,
+    isBoss: false,
+    isDungeon: false,
+    sectorIndex: 0
+  })
+  const [uploadAssetData, setUploadAssetData] = useState({
+    subDir: '',
+    imageName: '',
+    preview: null,
+    base64: null
   })
 
   // UI State
@@ -39,10 +73,39 @@ export default function AuditorRoom() {
   const [outputStats, setOutputStats] = useState([])
   const [recipeLogs, setRecipeLogs] = useState([])
 
-  const handleSaveRecipe = () => {
+  const handleSaveRecipe = async () => {
     if (!targetItem) return alert("Pilih Target Item dulu di kotak kanan atas!");
     const statsSummary = outputStats.length > 0 ? ` [${outputStats.map(s => `${s.stat} +${s.val}`).join(', ')}]` : '';
     setRecipeLogs(prev => [`> Resep ${targetItem.name || targetItem.id} (${outputGrade}) disimpan!${statsSummary}`, ...prev].slice(0, 5));
+    
+    const recPayload = {
+      id: targetItem.id || targetItem.code || targetItem.name,
+      name: targetItem.name || targetItem.id,
+      category: tab,
+      grade: outputGrade,
+      chances,
+      stats: outputStats,
+      materials: recipeSlots.filter(Boolean).map(s => ({
+        id: s.id || s.code || s.name,
+        name: s.name || s.id,
+        img: s._imagePreview || s.image || s.img
+      })),
+      targetImg: targetItem._imagePreview || targetItem.image || targetItem.img
+    };
+
+    try {
+      await fetch('/api/audit/save_recipe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ pin, recipeData: recPayload })
+      });
+    } catch {}
+
+    setTargetItem(null);
+    setRecipeSlots([null, null, null, null, null]);
+    setActiveSlotIndex(null);
+    setOutputStats([]);
+    setOutputGrade('Normal');
     setTargetItem(null);
     setRecipeSlots([null, null, null, null, null]);
     setActiveSlotIndex(null);
@@ -55,9 +118,19 @@ export default function AuditorRoom() {
   const [activeItemIndex, setActiveItemIndex] = useState(null)
   const [activeDefStr, setActiveDefStr] = useState('{}')
 
+  const handleLogout = () => {
+    if (!confirm('Keluar dari Ruang Auditor?')) return
+    localStorage.removeItem('audit_pin')
+    localStorage.removeItem('audit_logged_in')
+    setLoggedIn(false)
+    setPin('')
+  }
+
   const handleLogin = (e) => {
     e.preventDefault()
     if (pin === '12345') {
+      localStorage.setItem('audit_pin', '12345')
+      localStorage.setItem('audit_logged_in', 'true')
       setLoggedIn(true)
       fetchData()
     } else {
@@ -125,16 +198,22 @@ export default function AuditorRoom() {
         const flattenEnemies = (d) => {
           let arr = []
           if (d?.sectors) {
-            d.sectors.forEach(s => {
-              if (s.mobs) arr.push(...s.mobs.map(m => ({ ...m, _providerCat: 'Mobs', _providerDetail: s.name })))
-              if (s.boss) arr.push({ ...s.boss, _providerCat: 'Bosses', _providerDetail: s.name })
+            d.sectors.forEach((s, sIdx) => {
+              if (s.mobs) arr.push(...s.mobs.map((m, mIdx) => ({ ...m, _providerCat: 'Mobs', _providerDetail: s.name, _editIndex: mIdx, _sectorIndex: sIdx, _isDungeon: false, _isBoss: false })))
+              if (s.boss) arr.push({ ...s.boss, _providerCat: 'Bosses', _providerDetail: s.name, _sectorIndex: sIdx, _isDungeon: false, _isBoss: true })
+            })
+          }
+          if (d?.dungeons) {
+            d.dungeons.forEach((s, sIdx) => {
+              if (s.mobs) arr.push(...s.mobs.map((m, mIdx) => ({ ...m, _providerCat: 'Mobs', _providerDetail: `Dungeon: ${s.name}`, _editIndex: mIdx, _sectorIndex: sIdx, _isDungeon: true, _isBoss: false })))
+              if (s.boss) arr.push({ ...s.boss, _providerCat: 'Bosses', _providerDetail: `Dungeon: ${s.name}`, _sectorIndex: sIdx, _isDungeon: true, _isBoss: true })
             })
           }
           if (d?.miningBoss) {
-            arr.push({ ...d.miningBoss, _providerCat: 'Bosses', _providerDetail: 'Mining Boss' })
+            arr.push({ ...d.miningBoss, _providerCat: 'Bosses', _providerDetail: 'Mining Boss', _isBoss: true })
           }
           if (d?.miningGuardians) {
-            arr.push(...d.miningGuardians.map(g => ({ ...g, _providerCat: 'Bosses', _providerDetail: `Dementor Floor ${g.floor}` })))
+            arr.push(...d.miningGuardians.map(g => ({ ...g, _providerCat: 'Bosses', _providerDetail: `Dementor Floor ${g.floor}`, _isBoss: true })))
           }
           return arr
         }
@@ -170,11 +249,14 @@ export default function AuditorRoom() {
           return arr
         }
 
+        setRawEnemies(data.enemies)
         setAllData({
           items: formatRows(data.items?.items || data.items || [], 'items'),
           enemies: formatRows(flattenEnemies(data.enemies), 'enemies'),
           races: formatRows(flattenRaces(data.races), 'races'),
           jobs: formatRows(flattenJobs(data.jobs), 'jobs'),
+          recipes: data.recipes || [],
+          drafts: data.drafts || [],
           gears: {
             arctron: formatRows(flattenGears(data.gears?.arctron), 'gears_arctron'),
             bionex: formatRows(flattenGears(data.gears?.bionex), 'gears_bionex'),
@@ -337,6 +419,170 @@ export default function AuditorRoom() {
     setLoading(false)
   }
 
+  const handleSaveLiveDirect = async (index) => {
+    const arr = getActiveArray()
+    const item = arr[index]
+    if (!confirm(`SINKRONISASI LIVE: Ubah ${item.name || item.id} langsung ke database utama?`)) return
+
+    setLoading(true)
+    try {
+      if (tab === 'enemies') {
+        if (item._sectorIndex === undefined) {
+          alert('Hanya musuh pada Sector/Dungeon yang bisa diupdate langsung!')
+          setLoading(false)
+          return
+        }
+        const cleanData = { ...item }
+        Object.keys(cleanData).forEach(k => { if (k.startsWith('_') && k !== '_editIndex') delete cleanData[k] })
+
+        const res = await fetch('/api/audit/save_monster', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            pin,
+            sectorIndex: item._sectorIndex,
+            isDungeon: item._isDungeon,
+            isBoss: item._isBoss,
+            monsterData: cleanData
+          })
+        })
+        if (res.ok) {
+          alert('✅ Sukses disinkronkan langsung ke live enemies.json!')
+          const newArr = [...arr]
+          newArr[index]._isDirty = false
+          updateActiveArray(newArr)
+        } else {
+          alert('Gagal update live monster!')
+        }
+      } else {
+        const cleanData = { ...item }
+        Object.keys(cleanData).forEach(k => { if (k.startsWith('_')) delete cleanData[k] })
+
+        const res = await fetch('/api/audit/save_item_direct', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            pin,
+            category: tab,
+            subCategory: tab === 'gears' ? subTab : null,
+            itemData: cleanData
+          })
+        })
+        if (res.ok) {
+          alert(`✅ Sukses disinkronkan langsung ke live ${tab === 'gears' ? subTab + '.json' : tab + '.json'}!`)
+          const newArr = [...arr]
+          newArr[index]._isDirty = false
+          updateActiveArray(newArr)
+        } else {
+          alert('Gagal update live item!')
+        }
+      }
+    } catch {
+      alert('Terjadi kesalahan jaringan!')
+    }
+    setLoading(false)
+  }
+
+  const handleSaveNewCandidateMonster = async () => {
+    if (!newMonster.name) return alert('Nama monster wajib diisi!')
+    setLoading(true)
+    try {
+      const res = await fetch('/api/audit/save_monster', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          pin,
+          sectorIndex: Number(newMonster.sectorIndex),
+          isDungeon: newMonster.isDungeon,
+          isBoss: newMonster.isBoss,
+          monsterData: {
+            name: newMonster.name,
+            emoji: '👾',
+            level: Number(newMonster.level),
+            hp: Number(newMonster.hp),
+            atk: Number(newMonster.atk),
+            def: Number(newMonster.def),
+            expReward: Number(newMonster.expReward),
+            crdReward: Number(newMonster.crdReward),
+            image: newMonster.image || `/assets/monsters/${newMonster.name.toLowerCase().replace(/\s+/g, '_')}.png`,
+            critical: Number(newMonster.critical),
+            doubleHitChance: Number(newMonster.doubleHitChance)
+          }
+        })
+      })
+      if (res.ok) {
+        alert('✅ Candidate Monster berhasil disinkronkan ke database!')
+        setShowAddMonsterModal(false)
+        fetchData()
+      } else {
+        alert('Gagal menyimpan candidate monster!')
+      }
+    } catch {
+      alert('Kesalahan jaringan!')
+    }
+    setLoading(false)
+  }
+
+  const handleUploadAssetStudio = async () => {
+    if (!uploadAssetData.preview || !uploadAssetData.imageName) return alert('Pilih gambar dulu!')
+    setLoading(true)
+    try {
+      const res = await fetch('/api/audit/upload_asset', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          pin,
+          imageBase64: uploadAssetData.preview,
+          imageName: uploadAssetData.imageName,
+          subDir: uploadAssetData.subDir
+        })
+      })
+      const r = await res.json()
+      if (res.ok && r.ok) {
+        alert(`✅ Sprite berhasil diupload ke: ${r.path}`)
+        if (showAddMonsterModal) setNewMonster(p => ({ ...p, image: r.path }))
+        setShowUploadAssetModal(false)
+        setUploadAssetData({ subDir: '', imageName: '', preview: null, base64: null })
+      } else {
+        alert('Gagal upload sprite!')
+      }
+    } catch {
+      alert('Kesalahan jaringan!')
+    }
+    setLoading(false)
+  }
+
+  const handlePublishDraft = async (draftId) => {
+    if (!confirm('Publish draft ini ke live database?')) return
+    setLoading(true)
+    try {
+      const res = await fetch('/api/audit/publish_draft', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ pin, draftId })
+      })
+      if (res.ok) {
+        alert('✅ Draft berhasil dipublish!')
+        fetchData()
+      } else alert('Gagal publish draft')
+    } catch { alert('Kesalahan jaringan') }
+    setLoading(false)
+  }
+
+  const handleDeleteDraft = async (draftId) => {
+    if (!confirm('Hapus draft ini?')) return
+    setLoading(true)
+    try {
+      await fetch('/api/audit/delete_draft', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ pin, draftId })
+      })
+      fetchData()
+    } catch {}
+    setLoading(false)
+  }
+
   if (!loggedIn) {
     return (
       <div style={styles.overlay}>
@@ -368,9 +614,18 @@ export default function AuditorRoom() {
   return (
     <div style={styles.overlay}>
       <div className="glass-panel cyber-panel" style={styles.modal}>
-        <div style={styles.header}>
-          <h2 style={styles.title}>📖 Database Editor</h2>
-          {loading && <span style={{ color: '#00e5ff' }}>Loading...</span>}
+        <div style={{ ...styles.header, flexWrap: 'wrap', gap: 10 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <h2 style={styles.title}>🕹️ Master Console & Auditor</h2>
+            {loading && <span style={{ color: '#00e5ff' }}>Loading...</span>}
+          </div>
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+            <button onClick={() => setShowUploadAssetModal(true)} style={{ padding: '8px 14px', background: '#d18a42', color: '#fff', border: 'none', borderRadius: 4, fontWeight: 'bold', cursor: 'pointer', fontSize: 13 }}>📁 Upload Sprite Studio</button>
+            {tab === 'enemies' && (
+              <button onClick={() => setShowAddMonsterModal(true)} style={{ padding: '8px 14px', background: '#00ff88', color: '#040915', border: 'none', borderRadius: 4, fontWeight: 'bold', cursor: 'pointer', fontSize: 13 }}>+ Add Candidate Monster</button>
+            )}
+            <button onClick={handleLogout} style={{ padding: '8px 14px', background: '#e53935', color: '#fff', border: 'none', borderRadius: 4, fontWeight: 'bold', cursor: 'pointer', fontSize: 13 }}>🚪 Logout</button>
+          </div>
         </div>
 
         <div style={styles.tabs} className="no-scrollbar">
@@ -381,6 +636,7 @@ export default function AuditorRoom() {
           <button style={tab === 'jobs' ? styles.tabActive : styles.tab} onClick={() => {setTab('jobs'); setPage(0); setSimItem(null)}}>Jobs</button>
           <button style={tab === 'crafting' ? styles.tabActive : styles.tab} onClick={() => {setTab('crafting'); setPage(0); setSimItem(null); setCraftCategory('materials'); setCraftSubTab('Shards');}}>Crafting</button>
           <button style={tab === 'enhance' ? styles.tabActive : styles.tab} onClick={() => {setTab('enhance'); setPage(0); setSimItem(null); setCraftCategory('materials'); setCraftSubTab('All');}}>Enhance</button>
+          <button style={tab === 'drafts' ? styles.tabActive : styles.tab} onClick={() => {setTab('drafts'); setPage(0); setSimItem(null)}}>📋 Review Drafts ({allData.drafts?.length || 0})</button>
         </div>
 
         {tab === 'gears' && (
@@ -392,7 +648,7 @@ export default function AuditorRoom() {
           </div>
         )}
 
-        {tab !== 'crafting' && (
+        {tab !== 'crafting' && tab !== 'enhance' && tab !== 'drafts' && (
         <div style={{ padding: '10px 20px', display: 'flex', flexWrap: 'wrap', gap: '15px', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(0,0,0,0.2)' }}>
           <input 
             type="text" 
@@ -647,11 +903,45 @@ export default function AuditorRoom() {
                              <button onClick={handleSaveRecipe} style={{ background: '#00e5ff', color: '#040915', border: 'none', padding: '15px', borderRadius: '4px', fontWeight: 'bold', fontSize: '14px', cursor: 'pointer', marginTop: 'auto' }}>
                                  {tab === 'enhance' ? '💾 SAVE ENHANCEMENT' : '💾 SAVE RECIPE'}
                              </button>
-                         </div>
-                     </div>
-                 </div>
-              </div>
+                          </div>
+                      </div>
+                  </div>
+               </div>
 
+) : tab === 'drafts' ? (
+               <div style={{ padding: 20 }}>
+                 <h3 style={{ color: '#00e5ff', marginTop: 0 }}>📋 Draft & Staging Review ({allData.drafts?.length || 0} usulan)</h3>
+                 <p style={{ color: '#888', fontSize: 13 }}>Perubahan atau usulan yang disimpan ke Ruang Tunggu dapat diperiksa di sini sebelum diterpakan ke Live Database.</p>
+                 
+                 {(!allData.drafts || allData.drafts.length === 0) ? (
+                   <div style={{ padding: 40, textAlign: 'center', color: '#666', border: '1px dashed #333', borderRadius: 8, marginTop: 20 }}>
+                     Belum ada draft di Ruang Tunggu.
+                   </div>
+                 ) : (
+                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 16, marginTop: 20 }}>
+                     {allData.drafts.map((d, i) => (
+                       <div key={d.id || i} style={{ background: '#121622', border: '1px solid #2a3a5a', borderRadius: 8, padding: 16, display: 'flex', flexDirection: 'column', gap: 10 }}>
+                         <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #223', paddingBottom: 8 }}>
+                           <span style={{ color: '#00e5ff', fontWeight: 'bold' }}>[{d.data?.category?.toUpperCase()}] {d.data?.name || d.data?.id}</span>
+                           <span style={{ fontSize: 10, color: '#888' }}>{new Date(d.submittedAt || Date.now()).toLocaleTimeString()}</span>
+                         </div>
+                         {d.image && (
+                           <div style={{ textAlign: 'center', background: '#080a10', padding: 10, borderRadius: 6 }}>
+                             <img src={d.image} alt="draft preview" style={{ maxHeight: 80, objectFit: 'contain' }} />
+                           </div>
+                         )}
+                         <div style={{ fontSize: 11, color: '#aaa', background: '#0a0d14', padding: 8, borderRadius: 4, maxHeight: 120, overflowY: 'auto', fontFamily: 'monospace' }}>
+                           {typeof d.data?.definition === 'string' ? d.data.definition : JSON.stringify(d.data?.definition, null, 2)}
+                         </div>
+                         <div style={{ display: 'flex', gap: 8, marginTop: 'auto' }}>
+                           <button onClick={() => handleDeleteDraft(d.id)} style={{ flex: 1, padding: '8px', background: '#311', color: '#f55', border: '1px solid #522', borderRadius: 4, cursor: 'pointer', fontWeight: 'bold', fontSize: 12 }}>🗑️ Hapus</button>
+                           <button onClick={() => handlePublishDraft(d.id)} style={{ flex: 2, padding: '8px', background: '#00ff88', color: '#040915', border: 'none', borderRadius: 4, cursor: 'pointer', fontWeight: 'bold', fontSize: 12 }}>✅ Approve & Publish Live</button>
+                         </div>
+                       </div>
+                     ))}
+                   </div>
+                 )}
+               </div>
 ) : (
           <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch', width: '100%' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '1000px', fontSize: '13px', color: '#c0dff0' }}>
@@ -754,9 +1044,14 @@ export default function AuditorRoom() {
                   {/* ACTION */}
                   <td style={{ padding: '10px', textAlign: 'center' }}>
                     {item._isDirty && (
-                      <button onClick={() => handleSaveDraft(idx)} style={{ padding: '6px 10px', backgroundColor: '#00e5ff', color: '#040915', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>
-                        Save
-                      </button>
+                      <div style={{ display: 'flex', gap: 5, justifyContent: 'center' }}>
+                        <button onClick={() => handleSaveDraft(idx)} style={{ padding: '6px 10px', backgroundColor: '#334', color: '#00e5ff', border: '1px solid #00e5ff', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', fontSize: 11 }}>
+                          Save Draft
+                        </button>
+                        <button onClick={() => handleSaveLiveDirect(idx)} style={{ padding: '6px 10px', backgroundColor: '#00ff88', color: '#040915', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', fontSize: 11 }}>
+                          ⚡ Live Apply
+                        </button>
+                      </div>
                     )}
                   </td>
                 </tr>
@@ -781,6 +1076,143 @@ export default function AuditorRoom() {
             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '15px' }}>
               <button onClick={() => setShowDefModal(false)} style={{ padding: '8px 15px', backgroundColor: 'transparent', color: '#7ab0d0', border: '1px solid rgba(255,255,255,0.3)', borderRadius: '5px', cursor: 'pointer' }}>Batal</button>
               <button onClick={saveDefModal} style={{ padding: '8px 15px', backgroundColor: '#00e5ff', color: '#040915', border: 'none', borderRadius: '5px', cursor: 'pointer', fontWeight: 'bold' }}>Simpan Sementara</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ADD CANDIDATE MONSTER MODAL */}
+      {showAddMonsterModal && (
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.85)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999 }}>
+          <div style={{ backgroundColor: '#0b162c', padding: '24px', borderRadius: '12px', width: '90%', maxWidth: '550px', border: '1px solid #00ff88', maxHeight: '90vh', overflowY: 'auto' }}>
+            <h3 style={{ marginTop: 0, color: '#00ff88', borderBottom: '1px solid rgba(0,255,136,0.3)', paddingBottom: 10 }}>👾 Add Candidate Monster / Pit Boss</h3>
+            
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 15 }}>
+              <div style={{ display: 'flex', gap: 10 }}>
+                <div style={{ flex: 1 }}>
+                  <label style={{ fontSize: 11, color: '#aaa' }}>Lokasi / Map</label>
+                  <select value={newMonster.sectorIndex} onChange={e => setNewMonster(p => ({ ...p, sectorIndex: e.target.value }))} style={{ ...styles.input, width: '100%', padding: 8 }}>
+                    {rawEnemies?.sectors?.map((s, i) => (
+                      <option key={i} value={i}>Map {s.id}: {s.name} (Lv {s.minLevel}-{s.maxLevel})</option>
+                    ))}
+                  </select>
+                </div>
+                <div style={{ flex: 1 }}>
+                  <label style={{ fontSize: 11, color: '#aaa' }}>Tipe Enemy</label>
+                  <select value={newMonster.isBoss ? 'boss' : 'mob'} onChange={e => setNewMonster(p => ({ ...p, isBoss: e.target.value === 'boss' }))} style={{ ...styles.input, width: '100%', padding: 8 }}>
+                    <option value="mob">👾 Normal Mob</option>
+                    <option value="boss">👑 Sector Boss / Pit Boss</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label style={{ fontSize: 11, color: '#aaa' }}>Nama Monster</label>
+                <input type="text" value={newMonster.name} onChange={e => setNewMonster(p => ({ ...p, name: e.target.value }))} placeholder="Contoh: Armored Orc Boss" style={{ ...styles.input, width: '100%', padding: 8 }} />
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10 }}>
+                <div>
+                  <label style={{ fontSize: 11, color: '#aaa' }}>Level</label>
+                  <input type="number" value={newMonster.level} onChange={e => setNewMonster(p => ({ ...p, level: e.target.value }))} style={{ ...styles.input, width: '100%', padding: 8 }} />
+                </div>
+                <div>
+                  <label style={{ fontSize: 11, color: '#aaa' }}>HP</label>
+                  <input type="number" value={newMonster.hp} onChange={e => setNewMonster(p => ({ ...p, hp: e.target.value }))} style={{ ...styles.input, width: '100%', padding: 8 }} />
+                </div>
+                <div>
+                  <label style={{ fontSize: 11, color: '#aaa' }}>ATK</label>
+                  <input type="number" value={newMonster.atk} onChange={e => setNewMonster(p => ({ ...p, atk: e.target.value }))} style={{ ...styles.input, width: '100%', padding: 8 }} />
+                </div>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10 }}>
+                <div>
+                  <label style={{ fontSize: 11, color: '#aaa' }}>DEF</label>
+                  <input type="number" value={newMonster.def} onChange={e => setNewMonster(p => ({ ...p, def: e.target.value }))} style={{ ...styles.input, width: '100%', padding: 8 }} />
+                </div>
+                <div>
+                  <label style={{ fontSize: 11, color: '#aaa' }}>EXP Reward</label>
+                  <input type="number" value={newMonster.expReward} onChange={e => setNewMonster(p => ({ ...p, expReward: e.target.value }))} style={{ ...styles.input, width: '100%', padding: 8 }} />
+                </div>
+                <div>
+                  <label style={{ fontSize: 11, color: '#aaa' }}>CRD Reward</label>
+                  <input type="number" value={newMonster.crdReward} onChange={e => setNewMonster(p => ({ ...p, crdReward: e.target.value }))} style={{ ...styles.input, width: '100%', padding: 8 }} />
+                </div>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+                <div>
+                  <label style={{ fontSize: 11, color: '#aaa' }}>Aggressive (Double Hit %)</label>
+                  <input type="number" value={newMonster.doubleHitChance} onChange={e => setNewMonster(p => ({ ...p, doubleHitChance: e.target.value }))} placeholder="0-100" style={{ ...styles.input, width: '100%', padding: 8 }} />
+                </div>
+                <div>
+                  <label style={{ fontSize: 11, color: '#aaa' }}>Critical Chance %</label>
+                  <input type="number" value={newMonster.critical} onChange={e => setNewMonster(p => ({ ...p, critical: e.target.value }))} placeholder="0-100" style={{ ...styles.input, width: '100%', padding: 8 }} />
+                </div>
+              </div>
+
+              <div>
+                <label style={{ fontSize: 11, color: '#aaa' }}>Sprite Image URL (atau pilih dari Upload Studio)</label>
+                <div style={{ display: 'flex', gap: 8 }}>
+                  <input type="text" value={newMonster.image} onChange={e => setNewMonster(p => ({ ...p, image: e.target.value }))} placeholder="/assets/monsters/name.png" style={{ ...styles.input, flex: 1, padding: 8 }} />
+                  <button type="button" onClick={() => setShowUploadAssetModal(true)} style={{ padding: '8px 12px', background: '#d18a42', color: '#fff', border: 'none', borderRadius: 4, fontWeight: 'bold', cursor: 'pointer', fontSize: 11 }}>📁 Upload</button>
+                </div>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10, marginTop: 20 }}>
+              <button onClick={() => setShowAddMonsterModal(false)} style={{ padding: '8px 15px', background: 'transparent', color: '#aaa', border: '1px solid #444', borderRadius: 5, cursor: 'pointer' }}>Batal</button>
+              <button onClick={handleSaveNewCandidateMonster} style={{ padding: '8px 15px', background: '#00ff88', color: '#040915', border: 'none', borderRadius: 5, cursor: 'pointer', fontWeight: 'bold' }}>⚡ Simpan & Sinkron Live</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* UPLOAD ASSET STUDIO MODAL */}
+      {showUploadAssetModal && (
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.85)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10000 }}>
+          <div style={{ backgroundColor: '#181226', padding: '24px', borderRadius: '12px', width: '90%', maxWidth: '450px', border: '1px solid #d18a42' }}>
+            <h3 style={{ marginTop: 0, color: '#d18a42', borderBottom: '1px solid rgba(209,138,66,0.3)', paddingBottom: 10 }}>📁 Asset & Sprite Uploader</h3>
+            
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginTop: 15 }}>
+              <div>
+                <label style={{ fontSize: 11, color: '#aaa' }}>Folder Tujuan (Subfolder di /assets/)</label>
+                <input type="text" value={uploadAssetData.subDir} onChange={e => setUploadAssetData(p => ({ ...p, subDir: e.target.value }))} placeholder="monsters atau weapons atau armor" style={{ ...styles.input, width: '100%', padding: 8 }} />
+              </div>
+
+              <div>
+                <label style={{ fontSize: 11, color: '#aaa' }}>Nama File (dengan ekstensi, misal: orc_boss.png)</label>
+                <input type="text" value={uploadAssetData.imageName} onChange={e => setUploadAssetData(p => ({ ...p, imageName: e.target.value }))} placeholder="orc_boss.png" style={{ ...styles.input, width: '100%', padding: 8 }} />
+              </div>
+
+              <div>
+                <label style={{ fontSize: 11, color: '#aaa', display: 'block', marginBottom: 6 }}>Pilih Gambar dari Device</label>
+                <input type="file" accept="image/*" onChange={(e) => {
+                  const file = e.target.files[0]
+                  if (!file) return
+                  const reader = new FileReader()
+                  reader.onloadend = () => {
+                    setUploadAssetData(p => ({
+                      ...p,
+                      imageName: p.imageName || file.name.replace(/\s+/g, '_'),
+                      preview: reader.result
+                    }))
+                  }
+                  reader.readAsDataURL(file)
+                }} style={{ color: '#fff', fontSize: 12 }} />
+              </div>
+
+              {uploadAssetData.preview && (
+                <div style={{ textAlign: 'center', padding: 10, background: 'rgba(0,0,0,0.5)', borderRadius: 8, border: '1px dashed #444' }}>
+                  <img src={uploadAssetData.preview} alt="preview" style={{ maxHeight: 100, objectFit: 'contain' }} />
+                </div>
+              )}
+            </div>
+
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10, marginTop: 20 }}>
+              <button onClick={() => setShowUploadAssetModal(false)} style={{ padding: '8px 15px', background: 'transparent', color: '#aaa', border: '1px solid #444', borderRadius: 5, cursor: 'pointer' }}>Batal</button>
+              <button onClick={handleUploadAssetStudio} style={{ padding: '8px 15px', background: '#d18a42', color: '#fff', border: 'none', borderRadius: 5, cursor: 'pointer', fontWeight: 'bold' }}>📤 Upload Sekarang</button>
             </div>
           </div>
         </div>

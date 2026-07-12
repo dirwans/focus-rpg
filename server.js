@@ -1200,11 +1200,16 @@ app.get('/api/audit/all_data', (req, res) => {
       catch { return null }
     }
 
+    let drafts = []
+    try { drafts = JSON.parse(readFileSync(AUDIT_DRAFTS_FILE, 'utf8')) } catch {}
+
     const data = {
       items: readJson('items.json'),
       enemies: readJson('enemies.json'),
       races: readJson('races.json'),
       jobs: readJson('jobs.json'),
+      recipes: readJson('recipes.json') || [],
+      drafts: drafts || [],
       gears: {
         arctron: readGear('arctron.json'),
         bionex: readGear('bionex.json'),
@@ -1256,6 +1261,209 @@ app.post('/api/audit/submit', (req, res) => {
   } catch (e) {
     console.error('[audit] data save fail', e)
     res.status(500).json({ error: 'Gagal menyimpan data' })
+  }
+})
+
+// ── Master Console Direct Endpoints (No-Code GM Tools) ──────────────────────
+app.post('/api/audit/upload_asset', (req, res) => {
+  const { pin, imageBase64, imageName, subDir } = req.body
+  if (pin !== '12345') return res.status(401).json({ error: 'PIN Salah!' })
+  if (!imageBase64 || !imageName) return res.status(400).json({ error: 'Gambar tidak valid!' })
+
+  try {
+    const base64Data = imageBase64.replace(/^data:image\/\w+;base64,/, '')
+    const buffer = Buffer.from(base64Data, 'base64')
+    const safeSubDir = (subDir || '').replace(/\.\./g, '')
+    const targetDir = join(__dirname, 'public', 'assets', safeSubDir)
+    try { mkdirSync(targetDir, { recursive: true }) } catch {}
+
+    const filename = imageName.replace(/[^a-zA-Z0-9_.-]/g, '_')
+    writeFileSync(join(targetDir, filename), buffer)
+
+    // Sync to dist if exists so live app sees it immediately
+    try {
+      const distDir = join(__dirname, 'dist', 'assets', safeSubDir)
+      mkdirSync(distDir, { recursive: true })
+      writeFileSync(join(distDir, filename), buffer)
+    } catch {}
+
+    const webPath = `/assets/${safeSubDir ? safeSubDir + '/' : ''}${filename}`
+    res.json({ ok: true, path: webPath, message: 'Aset berhasil diupload!' })
+  } catch (e) {
+    console.error('[audit] upload_asset fail', e)
+    res.status(500).json({ error: 'Gagal upload gambar ke server' })
+  }
+})
+
+app.post('/api/audit/save_monster', (req, res) => {
+  const { pin, sectorIndex, isDungeon, isBoss, monsterData } = req.body
+  if (pin !== '12345') return res.status(401).json({ error: 'PIN Salah!' })
+
+  try {
+    const enemiesPath = join(__dirname, 'src', 'data', 'enemies.json')
+    const enemies = JSON.parse(readFileSync(enemiesPath, 'utf8'))
+    const listKey = isDungeon ? 'dungeons' : 'sectors'
+    const targetSector = enemies[listKey] && enemies[listKey][sectorIndex]
+
+    if (!targetSector) return res.status(404).json({ error: 'Sector tidak ditemukan!' })
+
+    if (isBoss) {
+      targetSector.boss = { ...targetSector.boss, ...monsterData }
+    } else if (monsterData._editIndex !== undefined && targetSector.mobs[monsterData._editIndex]) {
+      const idx = monsterData._editIndex
+      const clean = { ...monsterData }
+      delete clean._editIndex
+      targetSector.mobs[idx] = clean
+    } else {
+      const clean = { ...monsterData }
+      delete clean._editIndex
+      targetSector.mobs.push(clean)
+    }
+
+    writeFileSync(enemiesPath, JSON.stringify(enemies, null, 2))
+    res.json({ ok: true, message: 'Candidate Monster berhasil disinkronkan ke enemies.json!' })
+  } catch (e) {
+    console.error('[audit] save_monster fail', e)
+    res.status(500).json({ error: 'Gagal menyimpan monster' })
+  }
+})
+
+app.post('/api/audit/save_item_direct', (req, res) => {
+  const { pin, category, subCategory, itemData } = req.body
+  if (pin !== '12345') return res.status(401).json({ error: 'PIN Salah!' })
+
+  try {
+    const SRC_DATA_DIR = join(__dirname, 'src', 'data')
+    let targetFile = ''
+    if (category === 'items') targetFile = join(SRC_DATA_DIR, 'items.json')
+    else if (category === 'gears') targetFile = join(SRC_DATA_DIR, 'gears', `${subCategory}.json`)
+    else if (category === 'races') targetFile = join(SRC_DATA_DIR, 'races.json')
+    else if (category === 'jobs') targetFile = join(SRC_DATA_DIR, 'jobs.json')
+    else return res.status(400).json({ error: 'Kategori tidak valid' })
+
+    const fileContent = JSON.parse(readFileSync(targetFile, 'utf8'))
+    const cleanData = { ...itemData }
+    Object.keys(cleanData).forEach(k => { if (k.startsWith('_')) delete cleanData[k] })
+
+    if (Array.isArray(fileContent)) {
+      const idx = fileContent.findIndex(i => (i.id && i.id === cleanData.id) || (i.code && i.code === cleanData.code))
+      if (idx >= 0) fileContent[idx] = { ...fileContent[idx], ...cleanData }
+      else fileContent.push(cleanData)
+    } else if (category === 'items' && Array.isArray(fileContent.items)) {
+      const idx = fileContent.items.findIndex(i => i.id === cleanData.id)
+      if (idx >= 0) fileContent.items[idx] = { ...fileContent.items[idx], ...cleanData }
+      else fileContent.items.push(cleanData)
+    } else if (typeof fileContent === 'object') {
+      // Find where key is located
+      let updated = false
+      const updateRecursive = (obj) => {
+        if (!obj || typeof obj !== 'object') return
+        if (Array.isArray(obj)) {
+          const idx = obj.findIndex(i => (i.id && i.id === cleanData.id) || (i.name && i.name === cleanData.name))
+          if (idx >= 0) { obj[idx] = { ...obj[idx], ...cleanData }; updated = true; }
+        } else {
+          Object.keys(obj).forEach(k => {
+            if (k === cleanData.id || (obj[k] && obj[k].id === cleanData.id)) {
+              obj[k] = { ...obj[k], ...cleanData }
+              updated = true
+            } else {
+              updateRecursive(obj[k])
+            }
+          })
+        }
+      }
+      updateRecursive(fileContent)
+    }
+
+    writeFileSync(targetFile, JSON.stringify(fileContent, null, 2))
+    res.json({ ok: true, message: 'Balancing stat berhasil disimpan langsung ke database!' })
+  } catch (e) {
+    console.error('[audit] save_item_direct fail', e)
+    res.status(500).json({ error: 'Gagal update database langsung' })
+  }
+})
+
+app.post('/api/audit/save_recipe', (req, res) => {
+  const { pin, recipeData } = req.body
+  if (pin !== '12345') return res.status(401).json({ error: 'PIN Salah!' })
+
+  try {
+    const recipesPath = join(__dirname, 'src', 'data', 'recipes.json')
+    let recipes = []
+    try { recipes = JSON.parse(readFileSync(recipesPath, 'utf8')) } catch {}
+
+    const idx = recipes.findIndex(r => r.id === recipeData.id || r.name === recipeData.name)
+    if (idx >= 0) recipes[idx] = { ...recipes[idx], ...recipeData, updatedAt: new Date().toISOString() }
+    else recipes.push({ ...recipeData, id: recipeData.id || `recipe_${Date.now()}`, updatedAt: new Date().toISOString() })
+
+    writeFileSync(recipesPath, JSON.stringify(recipes, null, 2))
+    res.json({ ok: true, message: 'Resep tersimpan & sinkron <=> ke Database & Guides!' })
+  } catch (e) {
+    console.error('[audit] save_recipe fail', e)
+    res.status(500).json({ error: 'Gagal menyimpan resep' })
+  }
+})
+
+app.post('/api/audit/publish_draft', (req, res) => {
+  const { pin, draftId } = req.body
+  if (pin !== '12345') return res.status(401).json({ error: 'PIN Salah!' })
+
+  try {
+    let drafts = JSON.parse(readFileSync(AUDIT_DRAFTS_FILE, 'utf8'))
+    const draftIdx = drafts.findIndex(d => d.id === draftId)
+    if (draftIdx < 0) return res.status(404).json({ error: 'Draft tidak ditemukan!' })
+
+    const draft = drafts[draftIdx]
+    const dData = draft.data
+    const cat = dData.category
+    const sub = dData.subCategory
+    let cleanDef = {}
+    try { cleanDef = typeof dData.definition === 'string' ? JSON.parse(dData.definition) : dData.definition } catch {}
+
+    const SRC_DATA_DIR = join(__dirname, 'src', 'data')
+    if (cat === 'items') {
+      const p = join(SRC_DATA_DIR, 'items.json')
+      const obj = JSON.parse(readFileSync(p, 'utf8'))
+      const arr = Array.isArray(obj) ? obj : (obj.items || [])
+      const idx = arr.findIndex(i => i.id === (cleanDef.id || dData.id))
+      if (idx >= 0) arr[idx] = { ...arr[idx], ...cleanDef }
+      else arr.push(cleanDef)
+      writeFileSync(p, JSON.stringify(Array.isArray(obj) ? arr : { ...obj, items: arr }, null, 2))
+    } else if (cat === 'gears' && sub) {
+      const p = join(SRC_DATA_DIR, 'gears', `${sub}.json`)
+      const obj = JSON.parse(readFileSync(p, 'utf8'))
+      const updateRec = (o) => {
+        if (Array.isArray(o)) {
+          const idx = o.findIndex(i => (i.id && i.id === cleanDef.id) || (i.name && i.name === cleanDef.name))
+          if (idx >= 0) o[idx] = { ...o[idx], ...cleanDef }
+        } else if (o && typeof o === 'object') {
+          Object.keys(o).forEach(k => updateRec(o[k]))
+        }
+      }
+      updateRec(obj)
+      writeFileSync(p, JSON.stringify(obj, null, 2))
+    }
+
+    drafts.splice(draftIdx, 1)
+    writeFileSync(AUDIT_DRAFTS_FILE, JSON.stringify(drafts, null, 2))
+    res.json({ ok: true, message: 'Draft berhasil di-publish & di-apply ke Live Database!' })
+  } catch (e) {
+    console.error('[audit] publish_draft fail', e)
+    res.status(500).json({ error: 'Gagal publish draft' })
+  }
+})
+
+app.post('/api/audit/delete_draft', (req, res) => {
+  const { pin, draftId } = req.body
+  if (pin !== '12345') return res.status(401).json({ error: 'PIN Salah!' })
+
+  try {
+    let drafts = JSON.parse(readFileSync(AUDIT_DRAFTS_FILE, 'utf8'))
+    drafts = drafts.filter(d => d.id !== draftId)
+    writeFileSync(AUDIT_DRAFTS_FILE, JSON.stringify(drafts, null, 2))
+    res.json({ ok: true })
+  } catch (e) {
+    res.status(500).json({ error: 'Gagal menghapus draft' })
   }
 })
 
