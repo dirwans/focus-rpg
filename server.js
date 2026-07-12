@@ -1190,7 +1190,7 @@ try { mkdirSync(DRAFTS_IMG_DIR, { recursive: true }) } catch {}
 
 const resolveGearFile = (id) => {
   const idLower = (id || '').toLowerCase();
-  if (idLower.includes('_arc_') || idLower.includes('arctron') || idLower.includes('_arc')) {
+  if ((idLower.includes('_arc_') || idLower.includes('arctron') || idLower.includes('_arc')) && !idLower.includes('_cor_arc_')) {
     return 'arctron.json';
   } else if (idLower.includes('_bio_') || idLower.includes('bionex') || idLower.includes('_bio')) {
     return 'bionex.json';
@@ -1408,6 +1408,18 @@ app.post('/api/audit/save_item_direct', (req, res) => {
       const updateRecursive = (obj) => {
         if (!obj || typeof obj !== 'object') return
         if (Array.isArray(obj)) {
+          const match = (cleanData.id || '').match(/^(set_[a-z]+_\d+)_(helmet|armor|pants|gloves|boots)/);
+          if (match) {
+            const parentId = match[1];
+            const pieceName = match[2].charAt(0).toUpperCase() + match[2].slice(1);
+            const parentIdx = obj.findIndex(i => i.id === parentId);
+            if (parentIdx >= 0) {
+              if (!obj[parentIdx].stats) obj[parentIdx].stats = {};
+              obj[parentIdx].stats[pieceName] = { ...obj[parentIdx].stats[pieceName], ...cleanData.stats };
+              updated = true;
+              return;
+            }
+          }
           const idx = obj.findIndex(i => (i.id && i.id === cleanData.id) || (i.name && i.name === cleanData.name))
           if (idx >= 0) { obj[idx] = { ...obj[idx], ...cleanData }; updated = true; }
         } else {
@@ -1500,6 +1512,17 @@ app.post('/api/audit/publish_draft', (req, res) => {
       const obj = JSON.parse(readFileSync(p, 'utf8'))
       const updateRec = (o) => {
         if (Array.isArray(o)) {
+          const match = (cleanDef.id || '').match(/^(set_[a-z]+_\d+)_(helmet|armor|pants|gloves|boots)/);
+          if (match) {
+            const parentId = match[1];
+            const pieceName = match[2].charAt(0).toUpperCase() + match[2].slice(1);
+            const parentIdx = o.findIndex(i => i.id === parentId);
+            if (parentIdx >= 0) {
+              if (!o[parentIdx].stats) o[parentIdx].stats = {};
+              o[parentIdx].stats[pieceName] = { ...o[parentIdx].stats[pieceName], ...cleanDef.stats };
+              return;
+            }
+          }
           const idx = o.findIndex(i => (i.id && i.id === cleanDef.id) || (i.name && i.name === cleanDef.name))
           if (idx >= 0) o[idx] = { ...o[idx], ...cleanDef }
         } else if (o && typeof o === 'object') {

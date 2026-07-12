@@ -181,7 +181,7 @@ export function resolveItemImage(item, playerRace, playerJob) {
   const idStr = (item.id || '').toLowerCase();
   if (item.type === 'ring' || item.type === 'amulet' || idStr.startsWith('rng_') || idStr.startsWith('amu_')) {
     let race = 'all';
-    if (idStr.includes('_arc_') || idStr.includes('arctron')) race = 'arctron';
+    if ((idStr.includes('_arc_') || idStr.includes('arctron')) && !idStr.includes('_cor_arc_')) race = 'arctron';
     else if (idStr.includes('_bio_') || idStr.includes('bionex')) race = 'bionex';
     else if (idStr.includes('_cor_') || idStr.includes('_cel_') || idStr.includes('celestra') || idStr.includes('cora')) race = 'celestra';
     

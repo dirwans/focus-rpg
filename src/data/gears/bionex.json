@@ -161,12 +161,6 @@
         "name": "Kingslayer",
         "grade": "Legendary",
         "atk": 200
-      },
-      {
-        "id": "wpn_bio_gua_5",
-        "name": "Exodus",
-        "grade": "Mythic",
-        "atk": 300
       }
     ],
     "shields": [
@@ -193,12 +187,6 @@
         "name": "Titan Barrier",
         "grade": "Legendary",
         "def": 150
-      },
-      {
-        "id": "shd_bio_5",
-        "name": "Infinity Aegis",
-        "grade": "Mythic",
-        "def": 220
       }
     ]
   },
@@ -227,12 +215,6 @@
         "name": "Nemesis Rifle",
         "grade": "Legendary",
         "atk": 200
-      },
-      {
-        "id": "wpn_bio_mar_5",
-        "name": "Oblivion Rifle",
-        "grade": "Mythic",
-        "atk": 300
       }
     ]
   },
@@ -261,12 +243,6 @@
         "name": "Genesis Driver",
         "grade": "Legendary",
         "atk": 195
-      },
-      {
-        "id": "wpn_bio_eng_5",
-        "name": "Infinity Driver",
-        "grade": "Mythic",
-        "atk": 290
       }
     ]
   },
@@ -295,12 +271,6 @@
         "name": "Soul Nexus",
         "grade": "Legendary",
         "atk": 200
-      },
-      {
-        "id": "wpn_bio_psi_5",
-        "name": "Eternity Staff",
-        "grade": "Mythic",
-        "atk": 300
       }
     ]
   },

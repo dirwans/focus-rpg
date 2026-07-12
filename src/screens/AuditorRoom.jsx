@@ -180,7 +180,7 @@ export default function AuditorRoom() {
              
              // Clamp level 66 to 55 for weapons (all factions) or Arctron armors since there are no level 66 weapon/Arctron files
              const isWeapon = idStr.includes('wpn_') || idStr.includes('gw_');
-             if (level === '66' && (isWeapon || idStr.includes('_arc_') || idStr.includes('arctron'))) {
+             if (level === '66' && (isWeapon || (idStr.includes('_arc_') && !idStr.includes('_cor_arc_')) || idStr.includes('arctron'))) {
                  level = '55';
              }
              resolvedLevel = level;
@@ -217,7 +217,7 @@ export default function AuditorRoom() {
                  if (isBow) {
                      genericPath = `/assets/weapons/defallfactionslv${level}bow.png`;
                  } else if (isGun) {
-                     if (isSpecial || idStr.includes('_arc_') || idStr.includes('arctron')) {
+                     if (isSpecial || (idStr.includes('_arc_') && !idStr.includes('_cor_arc_')) || idStr.includes('arctron')) {
                          genericPath = `/assets/weapons/defarctronlv${level}special.png`;
                      } else {
                          genericPath = `/assets/weapons/defallfactionslv${level}gun.png`;
@@ -300,14 +300,14 @@ export default function AuditorRoom() {
                  else genericPath = `/assets/arctron/amulets/amu_arc_${idxStr}.png`;
              } else if (idStr.includes('set_') || idStr.includes('arm_')) {
                  // ARMORS — detect job class from ID patterns
-                 let isRanger = idStr.includes('ran') || idStr.includes('mar') || idStr.includes('pat') || (item.type && (item.type.toLowerCase().includes('ranger') || item.type.toLowerCase().includes('marksman') || item.type.toLowerCase().includes('pathfinder')));
-                 let isSpecialist = idStr.includes('spe') || idStr.includes('mys') || idStr.includes('psi') || idStr.includes('mage') || idStr.includes('eng') || idStr.includes('ora') || (item.type && (item.type.toLowerCase().includes('specialist') || item.type.toLowerCase().includes('mystic') || item.type.toLowerCase().includes('force') || item.type.toLowerCase().includes('engineer') || item.type.toLowerCase().includes('oracle') || item.type.toLowerCase().includes('arcanist')));
+                 let isRanger = idStr.includes('ran') || idStr.includes('mar') || idStr.includes('pat') || idStr.includes('eng') || (item.type && (item.type.toLowerCase().includes('ranger') || item.type.toLowerCase().includes('marksman') || item.type.toLowerCase().includes('pathfinder') || item.type.toLowerCase().includes('engineer')));
+                 let isSpecialist = idStr.includes('spe') || idStr.includes('mys') || idStr.includes('psi') || idStr.includes('mage') || idStr.includes('ora') || idStr.includes('tec') || idStr.includes('arcanist') || (item.type && (item.type.toLowerCase().includes('specialist') || item.type.toLowerCase().includes('mystic') || item.type.toLowerCase().includes('force') || item.type.toLowerCase().includes('oracle') || item.type.toLowerCase().includes('arcanist')));
                  
                  let folder = 'arctron';
                  let imgPrefix = 'defarctron';
                  let job = 'warrior';
                  
-                 if (idStr.includes('_arc_') || idStr.includes('arctron')) {
+                 if ((idStr.includes('_arc_') && !idStr.includes('_cor_arc_')) || idStr.includes('arctron')) {
                      folder = 'arctron';
                      imgPrefix = 'defarctron';
                      job = isRanger ? 'ranger' : (isSpecialist ? 'technician' : 'warrior');
@@ -393,18 +393,25 @@ export default function AuditorRoom() {
           let arr = []
           if (Array.isArray(obj)) {
             if (prefix.endsWith('armorSets')) {
+              const lineages = factionName === 'arctron' ? ['warrior', 'ranger', 'technician']
+                             : factionName === 'bionex' ? ['guardian', 'marksman', 'engineer', 'psion']
+                             : factionName === 'celestra' ? ['sentinel', 'pathfinder', 'oracle', 'arcanist']
+                             : ['warrior'];
               obj.forEach(set => {
                 const parts = set.parts || ['Helmet', 'Armor', 'Pants', 'Gloves', 'Boots'];
                 parts.forEach(part => {
                   const partLower = part.toLowerCase();
-                  arr.push({
-                    id: `${set.id}_${partLower}`,
-                    name: `${set.name.replace(' Set', '')} ${part}`,
-                    grade: set.grade,
-                    type: partLower,
-                    stats: set.stats?.[part] || {},
-                    faction: factionName,
-                    _isPiece: true
+                  lineages.forEach(lin => {
+                    const linLabel = lin.charAt(0).toUpperCase() + lin.slice(1);
+                    arr.push({
+                      id: `${set.id}_${partLower}_${lin}`,
+                      name: `${set.name.replace(' Set', '')} ${part} (${linLabel})`,
+                      grade: set.grade,
+                      type: partLower,
+                      stats: set.stats?.[part] || {},
+                      faction: factionName,
+                      _isPiece: true
+                    });
                   });
                 });
               });
@@ -533,7 +540,7 @@ export default function AuditorRoom() {
               const r = (i.faction || i.race || i._providerCat || '').toLowerCase();
               if (r.includes(craftRaceFilter)) return true;
               const idStr = (i.id || '').toLowerCase();
-              if (craftRaceFilter === 'arctron' && (idStr.includes('_arc_') || idStr.includes('arctron'))) return true;
+              if (craftRaceFilter === 'arctron' && ((idStr.includes('_arc_') && !idStr.includes('_cor_arc_')) || idStr.includes('arctron'))) return true;
               if (craftRaceFilter === 'bionex' && (idStr.includes('_bio_') || idStr.includes('bionex'))) return true;
               if (craftRaceFilter === 'celestra' && (idStr.includes('_cel_') || idStr.includes('_cor_') || idStr.includes('celestra'))) return true;
               return false;
@@ -555,7 +562,7 @@ export default function AuditorRoom() {
                if (craftRaceFilter === 'all') return true;
                const r = (i.faction || i.race || i._providerCat || '').toLowerCase();
                const idStr = (i.id || '').toLowerCase();
-               if (craftRaceFilter === 'arctron') return r.includes('arctron') || idStr.includes('_arc_') || idStr.includes('arctron');
+               if (craftRaceFilter === 'arctron') return r.includes('arctron') || ((idStr.includes('_arc_') && !idStr.includes('_cor_arc_')) || idStr.includes('arctron'));
                if (craftRaceFilter === 'bionex') return r.includes('bionex') || idStr.includes('_bio_') || idStr.includes('bionex');
                if (craftRaceFilter === 'celestra') return r.includes('celestra') || idStr.includes('_cel_') || idStr.includes('_cor_') || idStr.includes('celestra');
                return false;
@@ -576,7 +583,7 @@ export default function AuditorRoom() {
                  const r = (i.faction || i.race || i._providerCat || '').toLowerCase();
                  if (r.includes(craftRaceFilter)) return true;
                  const idStr = (i.id || '').toLowerCase();
-                 if (craftRaceFilter === 'arctron' && (idStr.includes('_arc_') || idStr.includes('arctron'))) return true;
+                 if (craftRaceFilter === 'arctron' && ((idStr.includes('_arc_') && !idStr.includes('_cor_arc_')) || idStr.includes('arctron'))) return true;
                  if (craftRaceFilter === 'bionex' && (idStr.includes('_bio_') || idStr.includes('bionex'))) return true;
                  if (craftRaceFilter === 'celestra' && (idStr.includes('_cel_') || idStr.includes('_cor_') || idStr.includes('celestra'))) return true;
                  return false;

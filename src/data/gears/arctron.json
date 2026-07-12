@@ -44,12 +44,6 @@
         "name": "Oblivion Fang",
         "grade": "Legendary",
         "atk": 200
-      },
-      {
-        "id": "wpn_arc_war_5",
-        "name": "Excalion",
-        "grade": "Mythic",
-        "atk": 300
       }
     ],
     "shields": [
@@ -76,12 +70,6 @@
         "name": "Nova Fortress",
         "grade": "Legendary",
         "def": 150
-      },
-      {
-        "id": "shd_arc_5",
-        "name": "Eclipse Aegis",
-        "grade": "Mythic",
-        "def": 220
       }
     ]
   },
@@ -110,12 +98,6 @@
         "name": "Eclipse Bow",
         "grade": "Legendary",
         "atk": 200
-      },
-      {
-        "id": "wpn_arc_ran_5",
-        "name": "Celestial Arc",
-        "grade": "Mythic",
-        "atk": 300
       }
     ]
   },
@@ -144,12 +126,6 @@
         "name": "Singularity Controller",
         "grade": "Legendary",
         "atk": 195
-      },
-      {
-        "id": "wpn_arc_tec_5",
-        "name": "Genesis Controller",
-        "grade": "Mythic",
-        "atk": 290
       }
     ]
   },
@@ -327,19 +303,6 @@
           "def": 60
         }
       }
-    },
-    {
-      "id": "set_arc_5",
-      "name": "Apocalypse Set",
-      "grade": "Mythic",
-      "parts": [
-        "Helmet",
-        "Armor",
-        "Pants",
-        "Gloves",
-        "Boots"
-      ],
-      "stats": {}
     }
   ]
 }

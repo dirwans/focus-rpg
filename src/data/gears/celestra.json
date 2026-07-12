@@ -138,12 +138,6 @@
         "name": "Celestia",
         "grade": "Legendary",
         "atk": 200
-      },
-      {
-        "id": "wpn_cor_sen_5",
-        "name": "Elysium",
-        "grade": "Mythic",
-        "atk": 300
       }
     ],
     "shields": [
@@ -170,12 +164,6 @@
         "name": "Divine Aegis",
         "grade": "Legendary",
         "def": 150
-      },
-      {
-        "id": "shd_cor_5",
-        "name": "Eternal Bulwark",
-        "grade": "Mythic",
-        "def": 220
       }
     ]
   },
@@ -204,12 +192,6 @@
         "name": "Starlight Bow",
         "grade": "Legendary",
         "atk": 200
-      },
-      {
-        "id": "wpn_cor_pat_5",
-        "name": "Eternity Bow",
-        "grade": "Mythic",
-        "atk": 300
       }
     ]
   },
@@ -238,12 +220,6 @@
         "name": "Celestial Relic",
         "grade": "Legendary",
         "atk": 195
-      },
-      {
-        "id": "wpn_cor_ora_5",
-        "name": "Eternal Relic",
-        "grade": "Mythic",
-        "atk": 290
       }
     ]
   },
@@ -272,12 +248,6 @@
         "name": "Celestial Staff",
         "grade": "Legendary",
         "atk": 200
-      },
-      {
-        "id": "wpn_cor_arc_5",
-        "name": "Genesis Staff",
-        "grade": "Mythic",
-        "atk": 300
       }
     ]
   },

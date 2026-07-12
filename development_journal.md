@@ -2111,7 +2111,7 @@ fdatabase.net/crafting/ 3-column UI layout.
 ### ?? Hotfix: Target Specificity for Noctyrna Neon Glow [DEPLOYED]
 - **Issue**: The previous CSS update indiscriminately targeted all instances of 
 octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense drop-shadow glow and the scale(1.2) transform, resulting in bloated / swollen sprites ("gajah bengkak").
-- **Fix**: Restricted the .game-sprite-noctyrna CSS class, 	ransform: scale(1.15), and dark background injection strictly to nimusKey === 'noctyrna' && lv === 65. Removed the heavy brightness/contrast filters from index.css to make the glow much thinner ("tuipis") as requested.
+- **Fix**: Restricted the .game-sprite-noctyrna CSS class, 	ransform: scale(1.15), and dark background injection strictly to  nimusKey === 'noctyrna' && lv === 65. Removed the heavy brightness/contrast filters from index.css to make the glow much thinner ("tuipis") as requested.
 
 
 ---
@@ -2125,13 +2125,26 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 
 ---
 
-### 🔧 Milestone 157: Fix Missing Gear Images, Reorganize Faction Accessories & Filter Duplicates [PENDING DEPLOYMENT]
+### 🔧 Milestone 157: Fix Missing Gear Images, Reorganize Faction Accessories, Filter Duplicates & Fix Staff Matching Bug [PENDING DEPLOYMENT]
 - **Auditor Room Image Mappings (`src/screens/AuditorRoom.jsx`)**:
-  - Fixed a logic bug where generic path resolution (`genericPath`) for weapons, shields, armors, and accessories was never assigned to `preview`.
-  - Added assignment `if (genericPath) preview = genericPath;` at the end of the image resolution block to restore all missing gear images.
-- **Faction Accessories Reorganization (`src/screens/AuditorRoom.jsx` & `server.js`)**:
-  - Automatically filters out faction-specific amulets and rings from the faction-specific sub-tabs under the Gears tab, merging them into the unified `Accessories` sub-tab.
-  - Implemented `resolveGearFile` in the backend (`server.js`) to parse mecha item IDs dynamically and write direct saves (`/api/audit/save_item_direct`) or draft publishes (`/api/audit/publish_draft`) to their respective faction gear database JSON files (`arctron.json`, `bionex.json`, `celestra.json`, `accessories.json`), regardless of which tab they are saved from.
+   - Fixed a logic bug where generic path resolution (`genericPath`) for weapons, shields, armors, and accessories was never assigned to `preview`.
+   - Added assignment `if (genericPath) preview = genericPath;` at the end of the image resolution block to restore all missing gear images.
+- **Faction Accessories Reorganization (`src/screens/AuditorRoom.jsx` & `server.js` & `src/store/gameStore.js`)**:
+   - Automatically filters out faction-specific amulets and rings from the faction-specific sub-tabs under the Gears tab, merging them into the unified `Accessories` sub-tab.
+   - Implemented `resolveGearFile` in the backend (`server.js`) to parse mecha item IDs dynamically and write direct saves (`/api/audit/save_item_direct`) or draft publishes (`/api/audit/publish_draft`) to their respective faction gear database JSON files (`arctron.json`, `bionex.json`, `celestra.json`, `accessories.json`), regardless of which tab they are saved from.
 - **Duplicate Gear Filtering (`src/screens/AuditorRoom.jsx`)**:
-  - Added name-based duplicate filtering in `getActiveArray()` for all mecha equipment categories (weapons, shields, accessories, and armor pieces) in the crafting and enhancement database pickers, preventing items with identical names/levels (like shared staves or bows) from showing up multiple times.
+   - Added name-based duplicate filtering in `getActiveArray()` for all mecha equipment categories (weapons, shields, accessories, and armor pieces) in the crafting and enhancement database pickers, preventing items with identical names/levels (like shared staves or bows) from showing up multiple times.
+- **Celestra Arcanist Staff Matching Fix (`src/screens/AuditorRoom.jsx` & `server.js` & `src/store/gameStore.js`)**:
+   - Fixed a bug where Celestra Arcanist staves (containing `_cor_arc_` in their IDs) were matched as Arctron weapons (due to the presence of `_arc_` in `_cor_arc_`).
+   - Added exclusion rules `!idStr.includes('_cor_arc_')` and `!idLower.includes('_cor_arc_')` to all Arctron `_arc_` matching logic in the frontend filter, backend file resolver, and accessory resolver.
+- **Armor Sets Lineage Expansion (`src/screens/AuditorRoom.jsx` & `server.js`)**:
+   - Expanded `flattenGears` to split each mecha armor set piece (Helmet, Armor, Pants, Gloves, Boots) into separate entries for each of the faction job class paths:
+     - **Celestra** (4 paths * 5 tiers = 20 of each piece): `sentinel` (Warrior), `pathfinder` (Ranger), `oracle` (Mage), and `arcanist` (Mage).
+     - **Bionex** (4 paths * 5 tiers = 20 of each piece): `guardian` (Warrior), `marksman` (Ranger), `engineer` (Ranger/Marksman), and `psion` (Mage).
+     - **Arctron** (3 paths * 4 tiers = 12 of each piece): `warrior` (Warrior), `ranger` (Ranger), and `technician` (Technician).
+   - This correctly exposes all unique sets (52 sets, 260 pieces) in the Auditor Room with their corresponding unique sprite images (e.g. mapping Bionex Engineer to Marksman asset path, and Celestra Arcanist to Mage asset path).
+   - Added support in `server.js` (`save_item_direct` and `publish_draft` endpoints) to map updates to these job-specific items back to their parent set's `stats` object in the database JSON files.
+- **Mythic Level 65 Gears Cleanup (`src/data/gears/arctron.json` & `bionex.json` & `celestra.json`)**:
+   - Deleted all mythic level 65 (suffix `_5`) mecha weapons and shields from the faction JSON databases since they do not have sprite assets implemented yet.
+   - Kept/restored level 66 armor sets (`set_cor_5` for Celestra and `set_bio_5` for Bionex) since their corresponding helmet, armor, pants, gloves, and boots sprites are fully present on disk.
 - **Verification**: Verified React build compiles cleanly (`npm run build`).
