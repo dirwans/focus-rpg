@@ -18,41 +18,22 @@ const itemsData = {
 }
 import enemiesData from '../data/enemies.json'
 
-import spriteF1 from '../assets/1F-SentryDementor_rembg.png'
-import spriteF2 from '../assets/2F-BorgDementor_rembg.png'
-import spriteF3 from '../assets/3F-MutationDementor_rembg.png'
-import spriteF4 from '../assets/4F-OrcDementor_rembg.png'
-import spriteF5 from '../assets/5F-GhostDementor_rembg.png'
-import spriteF6 from '../assets/6F-Kaelgorath_rembg.png'
 
-import miningToolArctron  from '../assets/mining_tool_arctron_rembg.png'
-import miningToolBionex   from '../assets/mining_tool_bionex_rembg.png'
-import miningToolCelestra from '../assets/mining_tool_celestra_rembg.png'
 
 const MINING_TOOLS = {
-  arctron:  miningToolArctron,
-  bionex:   miningToolBionex,
-  celestra: miningToolCelestra,
+  arctron:  "/assets/mining_tool_arctron_rembg.png",
+  bionex:   "/assets/mining_tool_bionex_rembg.png",
+  celestra: "/assets/mining_tool_celestra_rembg.png",
 }
 
-import shardIgnis from '../assets/ignis_shard.png'
-import shardVirel from '../assets/virel_shard.png'
-import shardKryos from '../assets/kryos_shard.png'
-import shardZephra from '../assets/zephra_shard.png'
-import shardUmbrix from '../assets/umbrix_shard.png'
 
-import oreIgnis from '../assets/ignis_ore.png'
-import oreVirel from '../assets/virel_ore.png'
-import oreKryos from '../assets/kryos_ore.png'
-import oreZephra from '../assets/zephra_ore.png'
-import oreUmbrix from '../assets/umbrix_ore.png'
 
 const ORE_TYPES = [
-  { key: 'ignis',  name: 'Ignis',  color: '#ff4444', emoji: '🟥', shardEmoji: '🔴', shardSprite: shardIgnis, oreSprite: oreIgnis },
-  { key: 'virel',  name: 'Virel',  color: '#4488ff', emoji: '🟦', shardEmoji: '🔵', shardSprite: shardVirel, oreSprite: oreVirel },
-  { key: 'kryos',  name: 'Kryos',  color: '#44ff88', emoji: '🟩', shardEmoji: '🟢', shardSprite: shardKryos, oreSprite: oreKryos },
-  { key: 'zephra', name: 'Zephra', color: '#ffcc00', emoji: '🟨', shardEmoji: '🟡', shardSprite: shardZephra, oreSprite: oreZephra },
-  { key: 'umbrix', name: 'Umbrix', color: '#888888', emoji: '⬛', shardEmoji: '⚫', shardSprite: shardUmbrix, oreSprite: oreUmbrix },
+  { key: 'ignis',  name: 'Ignis',  color: '#ff4444', emoji: '🟥', shardEmoji: '🔴', shardSprite: "/assets/ignis_shard.png", oreSprite: "/assets/ignis_ore.png" },
+  { key: 'virel',  name: 'Virel',  color: '#4488ff', emoji: '🟦', shardEmoji: '🔵', shardSprite: "/assets/virel_shard.png", oreSprite: "/assets/virel_ore.png" },
+  { key: 'kryos',  name: 'Kryos',  color: '#44ff88', emoji: '🟩', shardEmoji: '🟢', shardSprite: "/assets/kryos_shard.png", oreSprite: "/assets/kryos_ore.png" },
+  { key: 'zephra', name: 'Zephra', color: '#ffcc00', emoji: '🟨', shardEmoji: '🟡', shardSprite: "/assets/zephra_shard.png", oreSprite: "/assets/zephra_ore.png" },
+  { key: 'umbrix', name: 'Umbrix', color: '#888888', emoji: '⬛', shardEmoji: '⚫', shardSprite: "/assets/umbrix_shard.png", oreSprite: "/assets/umbrix_ore.png" },
 ]
 
 const MINE_FLOORS = [
@@ -63,7 +44,7 @@ const MINE_FLOORS = [
     durationLabel: '10 MENIT',
     yieldLabel: '1–3 Ore',
     baseRates: { common: 100, rare: 0, epic: 0 },
-    sprite: spriteF1,
+    sprite: "/assets/1F-SentryDementor_rembg.png",
     boss: false,
   },
   {
@@ -73,7 +54,7 @@ const MINE_FLOORS = [
     durationLabel: '30 MENIT',
     yieldLabel: '3–5 Ore',
     baseRates: { common: 80, rare: 20, epic: 0 },
-    sprite: spriteF2,
+    sprite: "/assets/2F-BorgDementor_rembg.png",
     boss: false,
   },
   {
@@ -83,7 +64,7 @@ const MINE_FLOORS = [
     durationLabel: '1 JAM',
     yieldLabel: '5–8 Ore',
     baseRates: { common: 60, rare: 35, epic: 5 },
-    sprite: spriteF3,
+    sprite: "/assets/3F-MutationDementor_rembg.png",
     boss: false,
   },
   {
@@ -93,7 +74,7 @@ const MINE_FLOORS = [
     durationLabel: '2 JAM',
     yieldLabel: '8–12 Ore',
     baseRates: { common: 45, rare: 45, epic: 10 },
-    sprite: spriteF4,
+    sprite: "/assets/4F-OrcDementor_rembg.png",
     boss: false,
   },
   {
@@ -103,7 +84,7 @@ const MINE_FLOORS = [
     durationLabel: '4 JAM',
     yieldLabel: '12–18 Ore',
     baseRates: { common: 30, rare: 50, epic: 20 },
-    sprite: spriteF5,
+    sprite: "/assets/5F-GhostDementor_rembg.png",
     boss: false,
   },
   {
@@ -113,7 +94,7 @@ const MINE_FLOORS = [
     durationLabel: '8 JAM',
     yieldLabel: '20–30 Ore',
     baseRates: { common: 15, rare: 35, epic: 50 },
-    sprite: spriteF6,
+    sprite: "/assets/6F-Kaelgorath_rembg.png",
     boss: true,
   },
 ]

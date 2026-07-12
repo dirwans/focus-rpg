@@ -23,9 +23,6 @@ import { t } from '../lib/translate'
 import { getWeaponRarityDisplayName, getWeaponRarityColor } from '../lib/rarity'
 import upgradesConfig from '../data/upgrades.json'
 import ascensionData from '../data/ascensionArms.json'
-import miningToolArctron from '../assets/mining_tool_arctron_rembg.png'
-import miningToolBionex from '../assets/mining_tool_bionex_rembg.png'
-import miningToolCelestra from '../assets/mining_tool_celestra_rembg.png'
 const PROMO_COSTS = {
   1: 0,
   2: 0,
@@ -1427,7 +1424,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                     id: 'tool_mining_pickaxe', 
                     label: player.race === 'arctron' ? 'Arctron Mining Tool' : player.race === 'bionex' ? 'Bionex Mining Tool' : 'Celestra Mining Tool', 
                     price: 50000,
-                    img: player.race === 'arctron' ? miningToolArctron : player.race === 'bionex' ? miningToolBionex : miningToolCelestra
+                    img: player.race === 'arctron' ? "/assets/mining_tool_arctron_rembg.png" : player.race === 'bionex' ? "/assets/mining_tool_bionex_rembg.png" : "/assets/mining_tool_celestra_rembg.png"
                   },
                   { 
                     id: 'tool_auto_mining', 

@@ -4,14 +4,11 @@ import { useGameStore } from '../store/gameStore'
 import jobs from '../data/jobs.json'
 import { PilotSprite } from '../components/PilotSprites'
 
-import arctronTowerImg from '../assets/arctron_tower.png'
-import bionexTowerImg from '../assets/bionex_tower.png'
-import celestraTowerImg from '../assets/celestra_tower.png'
 
 const TOWER_IMAGES = {
-  arctron: arctronTowerImg,
-  bionex: bionexTowerImg,
-  celestra: celestraTowerImg
+  arctron: "/assets/arctron_tower.png",
+  bionex: "/assets/bionex_tower.png",
+  celestra: "/assets/celestra_tower.png"
 }
 
 function getJobName(raceId, jobId) {

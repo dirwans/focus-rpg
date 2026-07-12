@@ -1,36 +1,6 @@
 import TransparentSprite from './TransparentSprite'
-import arctronWarriorImg from '../assets/arctron_warrior.png'
-import arctronWarriorBattleImg from '../assets/arctron_warrior_battle.png'
-import arctronRangerImg from '../assets/arctron_ranger.png'
-import arctronSpecialistImg from '../assets/arctron_specialist.png'
 
-import bionexPilotImg from '../assets/bionex_pilot_v3.png'
-import bionexPilotMaleImg from '../assets/bionex_pilot.png'
-import bionexPortraitImg from '../assets/bionex_pilot_portrait.png'
-import bionexGuardianFemaleImg from '../assets/bionex_guardian_female.png'
-import bionexGuardianMaleImg from '../assets/bionex_guardian_male.png'
-import bionexMarksmanFemaleImg from '../assets/bionex_marksman_female.png'
-import bionexMarksmanMaleImg from '../assets/bionex_marksman_male.png'
-import bionexEngineerFemaleImg from '../assets/bionex_engineer_female.png'
-import bionexEngineerMaleImg from '../assets/bionex_engineer_male.png'
-import bionexTitanPilotImg from '../assets/bionex_titan_pilot.png'
-import bionexMechanistImg from '../assets/bionex_mechanist.png'
-import bionexRailgunEliteImg from '../assets/bionex_railgun_elite.png'
-import bionexWarEngineerImg from '../assets/bionex_war_engineer.png'
 
-import celestraPilotImg from '../assets/celestra_pilot_v2.png'
-import celestraPilotMaleImg from '../assets/celestra_pilot.png'
-import celestraWarriorImg from '../assets/celestra_warrior_female.png'
-import celestraWarriorMaleImg from '../assets/celestra_warrior_male.png'
-import celestraRangerImg from '../assets/celestra_ranger_female.png'
-import celestraRangerMaleImg from '../assets/celestra_ranger_male.png'
-import celestraRangerPortraitImg from '../assets/celestra_ranger_portrait.png'
-import celestraSpecialistImg from '../assets/celestra_specialist_female.png'
-import celestraSpecialistMaleImg from '../assets/celestra_specialist_male.png'
-import celestraSpecialistPortraitImg from '../assets/celestra_specialist_portrait.png'
-import celestraMysticImg from '../assets/celestra_mystic_female.png'
-import celestraMysticMaleImg from '../assets/celestra_mystic_male.png'
-import celestraMysticPortraitImg from '../assets/celestra_mystic_portrait.png'
 
 function getJobLane(jobId) {
   if (!jobId) return 'warrior'
@@ -82,9 +52,9 @@ function TieredSpriteImg({ src, alt, size, width, height, glow, extraStyle }) {
 
 export function ArctronSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false, isBattle = false, style: extraStyle }) {
   const lane = getJobLane(job)
-  let img = isBattle ? arctronWarriorBattleImg : arctronWarriorImg
-  if (lane === 'ranger') img = arctronRangerImg
-  else if (lane === 'specialist') img = arctronSpecialistImg
+  let img = isBattle ? "/assets/arctron_warrior_battle.png" : "/assets/arctron_warrior.png"
+  if (lane === 'ranger') img = "/assets/arctron_ranger.png"
+  else if (lane === 'specialist') img = "/assets/arctron_specialist.png"
 
   const glow = '#00e5ff'
 
@@ -101,22 +71,22 @@ export function BionexSprite({ job, size = 60, width, height, upperBodyOnly = fa
   const isFemale = gender === 'female';
 
   if (guardianJobs.includes(job)) {
-    if (job === 'imperator' || job === 'protector') img = bionexTitanPilotImg;
-    else img = isFemale ? bionexGuardianFemaleImg : bionexGuardianMaleImg;
+    if (job === 'imperator' || job === 'protector') img = "/assets/bionex_titan_pilot.png";
+    else img = isFemale ? "/assets/bionex_guardian_female.png" : "/assets/bionex_guardian_male.png";
   } else if (marksmanJobs.includes(job)) {
-    if (job === 'predator' || job === 'deadeye') img = bionexRailgunEliteImg;
-    else img = isFemale ? bionexMarksmanFemaleImg : bionexMarksmanMaleImg;
+    if (job === 'predator' || job === 'deadeye') img = "/assets/bionex_railgun_elite.png";
+    else img = isFemale ? "/assets/bionex_marksman_female.png" : "/assets/bionex_marksman_male.png";
   } else if (engineerJobs.includes(job)) {
-    if (job === 'overseer' || job === 'techmaster') img = bionexWarEngineerImg;
-    else if (job === 'mechanist') img = bionexMechanistImg;
-    else img = isFemale ? bionexEngineerFemaleImg : bionexEngineerMaleImg;
+    if (job === 'overseer' || job === 'techmaster') img = "/assets/bionex_war_engineer.png";
+    else if (job === 'mechanist') img = "/assets/bionex_mechanist.png";
+    else img = isFemale ? "/assets/bionex_engineer_female.png" : "/assets/bionex_engineer_male.png";
   } else if (psionJobs.includes(job)) {
-    img = isFemale ? bionexPilotImg : bionexPilotMaleImg;
+    img = isFemale ? "/assets/bionex_pilot_v3.png" : "/assets/bionex_pilot.png";
   }
 
   if (!img) {
-    if (fill) img = bionexPortraitImg;
-    else img = gender === 'female' ? bionexPilotImg : bionexPilotMaleImg;
+    if (fill) img = "/assets/bionex_pilot_portrait.png";
+    else img = gender === 'female' ? "/assets/bionex_pilot_v3.png" : "/assets/bionex_pilot.png";
   }
 
   const glow = '#39ff14'
@@ -126,17 +96,17 @@ export function BionexSprite({ job, size = 60, width, height, upperBodyOnly = fa
 
 export function CelestraSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false, gender = 'female', style: extraStyle }) {
   const lane = getJobLane(job)
-  let srcImg = gender === 'female' ? celestraPilotImg : celestraPilotMaleImg
+  let srcImg = gender === 'female' ? "/assets/celestra_pilot_v2.png" : "/assets/celestra_pilot.png"
   
   if (job) {
     if (lane === 'warrior') {
-      srcImg = gender === 'female' ? celestraWarriorImg : celestraWarriorMaleImg
+      srcImg = gender === 'female' ? "/assets/celestra_warrior_female.png" : "/assets/celestra_warrior_male.png"
     } else if (lane === 'ranger') {
-      srcImg = gender === 'female' ? (fill ? celestraRangerPortraitImg : celestraRangerImg) : celestraRangerMaleImg
+      srcImg = gender === 'female' ? (fill ? "/assets/celestra_ranger_portrait.png" : "/assets/celestra_ranger_female.png") : "/assets/celestra_ranger_male.png"
     } else if (lane === 'specialist') {
-      srcImg = gender === 'female' ? (fill ? celestraSpecialistPortraitImg : celestraSpecialistImg) : celestraSpecialistMaleImg
+      srcImg = gender === 'female' ? (fill ? "/assets/celestra_specialist_portrait.png" : "/assets/celestra_specialist_female.png") : "/assets/celestra_specialist_male.png"
     } else if (lane === 'mystic') {
-      srcImg = gender === 'female' ? (fill ? celestraMysticPortraitImg : celestraMysticImg) : celestraMysticMaleImg
+      srcImg = gender === 'female' ? (fill ? "/assets/celestra_mystic_portrait.png" : "/assets/celestra_mystic_female.png") : "/assets/celestra_mystic_male.png"
     }
   }
   

@@ -7,9 +7,6 @@ import { PilotSprite } from '../components/PilotSprites'
 import { t } from '../lib/translate'
 
 // Import Faction Bag Icons
-import arctronBagIcon from '../assets/arctron_bag_icon_rembg.png'
-import bionexBagIcon from '../assets/bionex_bag_icon_rembg.png'
-import celestraBagIcon from '../assets/celestra_bag_icon_rembg.png'
 
 const BIONEX_SPRITES = {
   guardian:     '/ref/Bellterra/Class-sprites-cleaned/Bellterra-warrior-cleaned.png',
@@ -19,9 +16,9 @@ const BIONEX_SPRITES = {
 }
 
 const BAG_ICONS = {
-  arctron: arctronBagIcon,
-  bionex: bionexBagIcon,
-  celestra: celestraBagIcon,
+  arctron: "/assets/arctron_bag_icon_rembg.png",
+  bionex: "/assets/bionex_bag_icon_rembg.png",
+  celestra: "/assets/celestra_bag_icon_rembg.png",
 }
 
 function getBionexJobSprite(jobId) {

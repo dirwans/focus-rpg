@@ -8,14 +8,11 @@ import { t } from '../lib/translate'
 import { PilotSprite } from './PilotSprites'
 
 // Import faction hero art assets
-import celestraLogo from '../assets/celestra_logo.png'
-import arctronLogo from '../assets/arctron_logo.png'
-import bionexLogo from '../assets/bionex_logo.png'
 
 const HERO_IMAGES = {
-  arctron: arctronLogo,
-  bionex: bionexLogo,
-  celestra: celestraLogo
+  arctron: "/assets/arctron_logo.png",
+  bionex: "/assets/bionex_logo.png",
+  celestra: "/assets/celestra_logo.png"
 }
 
 // Races that render as a glowing emblem (rings + recolor animation) instead of

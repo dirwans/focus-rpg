@@ -128,7 +128,7 @@ const ARMOR_SET_LINEAGES = {
   celestra: ['warrior', 'ranger', 'mage']
 }
 
-// Resolves the sprite for a bespoke default armor-set piece (armor/helmet/gloves/boots/pants),
+// Resolves the sprite for a bespoke default armor-set piece (arctron/helmet/gloves/boots/pants),
 // keyed by race + job lineage + level tier. Returns null if no bespoke set exists yet for
 // that race/lineage — callers should fall back to `item.image` in that case.
 function resolveArmorSetImage(slot, playerRace, playerJob, level) {
@@ -161,11 +161,11 @@ function resolveArmorSetImage(slot, playerRace, playerJob, level) {
   }
 
   if (playerRace === 'bionex') {
-    return `/assets/bionex_gears/defbionex${lineage}lv${tier}${slot}.png?v=5`
+    return `/assets/bionex/defbionex${lineage}lv${tier}${slot}.png?v=5`
   } else if (playerRace === 'celestra') {
-    return `/assets/celestra_gears/defcelestra${lineage}lv${tier}${slot}.png?v=14`
+    return `/assets/celestra/defcelestra${lineage}lv${tier}${slot}.png?v=14`
   }
-  return `/assets/arctron_gears/def${playerRace}${lineage}lv${tier}${slot}.png?v=5`
+  return `/assets/arctron/def${playerRace}${lineage}lv${tier}${slot}.png?v=5`
 }
 
 export function resolveItemImage(item, playerRace, playerJob) {
@@ -298,39 +298,39 @@ export function resolveItemImage(item, playerRace, playerJob) {
   }
   if (item.type === 'ascension_arms') {
     // Bionex M.E.U. Attacker
-    if (item.id === 'meu_atk_32') return '/assets/bionex_gears/MEUattacklv32.png'
-    if (item.id === 'meu_atk_42') return '/assets/bionex_gears/MEUattacklv42.png'
-    if (item.id === 'meu_atk_55') return '/assets/bionex_gears/MEUattacklv55.png'
-    if (item.id === 'meu_atk_65') return '/assets/bionex_gears/MEUattacklv65.png'
+    if (item.id === 'meu_atk_32') return '/assets/bionex/MEUattacklv32.png'
+    if (item.id === 'meu_atk_42') return '/assets/bionex/MEUattacklv42.png'
+    if (item.id === 'meu_atk_55') return '/assets/bionex/MEUattacklv55.png'
+    if (item.id === 'meu_atk_65') return '/assets/bionex/MEUattacklv65.png'
     // Bionex M.E.U. Defender
-    if (item.id === 'meu_def_32') return '/assets/bionex_gears/MEUdevlv32.png'
-    if (item.id === 'meu_def_42') return '/assets/bionex_gears/MEUdevlv42.png'
-    if (item.id === 'meu_def_55') return '/assets/bionex_gears/MEUdevlv55.png'
-    if (item.id === 'meu_def_65') return '/assets/bionex_gears/MEUdevlv65.png'
+    if (item.id === 'meu_def_32') return '/assets/bionex/MEUdevlv32.png'
+    if (item.id === 'meu_def_42') return '/assets/bionex/MEUdevlv42.png'
+    if (item.id === 'meu_def_55') return '/assets/bionex/MEUdevlv55.png'
+    if (item.id === 'meu_def_65') return '/assets/bionex/MEUdevlv65.png'
     // Arctron A.R.E.S.
-    if (item.id === 'ares_x') return '/assets/arctron_gears/ARESlv32arctron.png'
-    if (item.id === 'ares_nemesis') return '/assets/arctron_gears/ARESlv42arctron.png'
-    if (item.id === 'ares_dominator') return '/assets/arctron_gears/ARESlv55arctron.png'
-    if (item.id === 'ares_apocalypse') return '/assets/arctron_gears/ARESlv65arctron.png'
+    if (item.id === 'ares_x') return '/assets/arctron/ARESlv32arctron.png'
+    if (item.id === 'ares_nemesis') return '/assets/arctron/ARESlv42arctron.png'
+    if (item.id === 'ares_dominator') return '/assets/arctron/ARESlv55arctron.png'
+    if (item.id === 'ares_apocalypse') return '/assets/arctron/ARESlv65arctron.png'
     // Celestra Ancient Spirit - Seraphys
-    if (item.id === 'spirit_seraphys_32') return '/assets/celestra_gears/spirit_seraphys_32.png?v=4'
-    if (item.id === 'spirit_seraphys_42') return '/assets/celestra_gears/spirit_seraphys_42.png?v=4'
-    if (item.id === 'spirit_seraphys_55') return '/assets/celestra_gears/spirit_seraphys_55.png?v=4'
-    if (item.id === 'spirit_seraphys_65') return '/assets/celestra_gears/spirit_seraphys_65.png?v=4'
+    if (item.id === 'spirit_seraphys_32') return '/assets/celestra/spirit_seraphys_32.png?v=4'
+    if (item.id === 'spirit_seraphys_42') return '/assets/celestra/spirit_seraphys_42.png?v=4'
+    if (item.id === 'spirit_seraphys_55') return '/assets/celestra/spirit_seraphys_55.png?v=4'
+    if (item.id === 'spirit_seraphys_65') return '/assets/celestra/spirit_seraphys_65.png?v=4'
     // Celestra Ancient Spirit - Noctyrna
-    if (item.id === 'spirit_noctyrna_32') return '/assets/celestra_gears/spirit_noctyrna_32.png?v=4'
-    if (item.id === 'spirit_noctyrna_42') return '/assets/celestra_gears/spirit_noctyrna_42.png?v=4'
-    if (item.id === 'spirit_noctyrna_55') return '/assets/celestra_gears/spirit_noctyrna_55.png?v=7'
-    if (item.id === 'spirit_noctyrna_65') return '/assets/celestra_gears/spirit_noctyrna_65.png?v=17'
+    if (item.id === 'spirit_noctyrna_32') return '/assets/celestra/spirit_noctyrna_32.png?v=4'
+    if (item.id === 'spirit_noctyrna_42') return '/assets/celestra/spirit_noctyrna_42.png?v=4'
+    if (item.id === 'spirit_noctyrna_55') return '/assets/celestra/spirit_noctyrna_55.png?v=7'
+    if (item.id === 'spirit_noctyrna_65') return '/assets/celestra/spirit_noctyrna_65.png?v=17'
   }
   let imgPath = item.image;
   if (imgPath && typeof imgPath === 'string') {
-    if (imgPath.startsWith('/assets/armor_bionex/')) {
-      imgPath = imgPath.replace('/assets/armor_bionex/', '/assets/bionex_gears/');
-    } else if (imgPath.startsWith('/assets/armor_celestra/')) {
-      imgPath = imgPath.replace('/assets/armor_celestra/', '/assets/celestra_gears/');
-    } else if (imgPath.startsWith('/assets/armor/')) {
-      imgPath = imgPath.replace('/assets/armor/', '/assets/arctron_gears/');
+    if (imgPath.startsWith('/assets/bionex/')) {
+      imgPath = imgPath.replace('/assets/bionex/', '/assets/bionex/');
+    } else if (imgPath.startsWith('/assets/celestra/')) {
+      imgPath = imgPath.replace('/assets/celestra/', '/assets/celestra/');
+    } else if (imgPath.startsWith('/assets/arctron/')) {
+      imgPath = imgPath.replace('/assets/arctron/', '/assets/arctron/');
     }
   }
   return imgPath;
@@ -452,7 +452,7 @@ export function verifyStarterWeapon(player) {
   return player
 }
 
-// Auto-equips the Lv.1 bespoke armor-set (armor/helmet/gloves/boots/pants) for a fresh
+// Auto-equips the Lv.1 bespoke armor-set (arctron/helmet/gloves/boots/pants) for a fresh
 // character, if their race+job-lineage has one illustrated yet (see ARMOR_SET_LINEAGES).
 // Mirrors verifyStarterShield but equips directly instead of just granting to inventory,
 // since a brand-new character otherwise looks completely bare in the Gears tab.

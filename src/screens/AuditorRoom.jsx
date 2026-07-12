@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import arctronLogo from '../assets/arctron_logo.png'
-import bionexLogo from '../assets/bionex_logo.png'
-import celestraLogo from '../assets/celestra_logo.png'
 
 export default function AuditorRoom() {
   const [pin, setPin] = useState(() => localStorage.getItem('audit_pin') || '')
@@ -265,21 +262,21 @@ export default function AuditorRoom() {
                     let isRanger = idStr.includes('ran') || idStr.includes('mar') || idStr.includes('pat') || (item.type && (item.type.toLowerCase().includes('ranger') || item.type.toLowerCase().includes('marksman') || item.type.toLowerCase().includes('pathfinder')));
                     let isSpecialist = idStr.includes('spe') || idStr.includes('mys') || idStr.includes('psi') || idStr.includes('mage') || idStr.includes('eng') || idStr.includes('ora') || (item.type && (item.type.toLowerCase().includes('specialist') || item.type.toLowerCase().includes('mystic') || item.type.toLowerCase().includes('force') || item.type.toLowerCase().includes('engineer') || item.type.toLowerCase().includes('oracle') || item.type.toLowerCase().includes('arcanist')));
                     
-                    let folder = 'arctron_gears';
+                    let folder = 'arctron';
                     let imgPrefix = 'defarctron';
                     let job = 'warrior';
                     
                     if (category === 'gears_arctron') {
-                        folder = 'arctron_gears';
+                        folder = 'arctron';
                         imgPrefix = 'defarctron';
                         job = isRanger ? 'ranger' : (isSpecialist ? 'technician' : 'warrior');
                     } else if (category === 'gears_bionex') {
-                        folder = 'bionex_gears';
+                        folder = 'bionex';
                         imgPrefix = 'defbionex';
                         // Map: guardian=guardian, marksman=marksman, engineer→guardian(no engineer sprite), psion=psion
                         job = isRanger ? 'marksman' : (isSpecialist ? (idStr.includes('psi') ? 'psion' : 'psion') : 'guardian');
                     } else if (category === 'gears_celestra') {
-                        folder = 'celestra_gears';
+                        folder = 'celestra';
                         imgPrefix = 'defcelestra';
                         // Map: sentinel→warrior, pathfinder→ranger, oracle→mage, arcanist→mage
                         job = isRanger ? 'ranger' : (isSpecialist ? 'mage' : 'warrior');
@@ -295,7 +292,7 @@ export default function AuditorRoom() {
                     }
                     genericPath = `/assets/${folder}/${imgPrefix}${job}lv${level}${piece}.png`;
                 } else {
-                    genericPath = `/assets/arctron_gears/defarctronwarriorlv32armor.png`;
+                    genericPath = `/assets/arctron/defarctronwarriorlv32armor.png`;
                 }
                 preview = genericPath;
              } else if (category === 'gears_accessories') {
@@ -334,20 +331,20 @@ export default function AuditorRoom() {
                 preview = genericPath;
              } else {
                 const idLower = item.id ? item.id.toLowerCase() : '';
-                if (idLower === 'ares_x') preview = '/assets/arctron_gears/ARESlv32arctron.png';
-                else if (idLower === 'ares_nemesis') preview = '/assets/arctron_gears/ARESlv42arctron.png';
-                else if (idLower === 'ares_dominator') preview = '/assets/arctron_gears/ARESlv55arctron.png';
-                else if (idLower === 'ares_apocalypse') preview = '/assets/arctron_gears/ARESlv65arctron.png';
-                else if (idLower === 'meu_atk_32') preview = '/assets/bionex_gears/MEUattacklv32.png';
-                else if (idLower === 'meu_atk_42') preview = '/assets/bionex_gears/MEUattacklv42.png';
-                else if (idLower === 'meu_atk_55') preview = '/assets/bionex_gears/MEUattacklv55.png';
-                else if (idLower === 'meu_atk_65') preview = '/assets/bionex_gears/MEUattacklv65.png';
-                else if (idLower === 'meu_def_32') preview = '/assets/bionex_gears/MEUdevlv32.png';
-                else if (idLower === 'meu_def_42') preview = '/assets/bionex_gears/MEUdevlv42.png';
-                else if (idLower === 'meu_def_55') preview = '/assets/bionex_gears/MEUdevlv55.png';
-                else if (idLower === 'meu_def_65') preview = '/assets/bionex_gears/MEUdevlv65.png';
-                else if (idLower.startsWith('spirit_seraphys_')) preview = `/assets/celestra_gears/${item.id}.png`;
-                else if (idLower.startsWith('spirit_noctyrna_')) preview = `/assets/celestra_gears/${item.id}.png`;
+                if (idLower === 'ares_x') preview = '/assets/arctron/ARESlv32arctron.png';
+                else if (idLower === 'ares_nemesis') preview = '/assets/arctron/ARESlv42arctron.png';
+                else if (idLower === 'ares_dominator') preview = '/assets/arctron/ARESlv55arctron.png';
+                else if (idLower === 'ares_apocalypse') preview = '/assets/arctron/ARESlv65arctron.png';
+                else if (idLower === 'meu_atk_32') preview = '/assets/bionex/MEUattacklv32.png';
+                else if (idLower === 'meu_atk_42') preview = '/assets/bionex/MEUattacklv42.png';
+                else if (idLower === 'meu_atk_55') preview = '/assets/bionex/MEUattacklv55.png';
+                else if (idLower === 'meu_atk_65') preview = '/assets/bionex/MEUattacklv65.png';
+                else if (idLower === 'meu_def_32') preview = '/assets/bionex/MEUdevlv32.png';
+                else if (idLower === 'meu_def_42') preview = '/assets/bionex/MEUdevlv42.png';
+                else if (idLower === 'meu_def_55') preview = '/assets/bionex/MEUdevlv55.png';
+                else if (idLower === 'meu_def_65') preview = '/assets/bionex/MEUdevlv65.png';
+                else if (idLower.startsWith('spirit_seraphys_')) preview = `/assets/celestra/${item.id}.png`;
+                else if (idLower.startsWith('spirit_noctyrna_')) preview = `/assets/celestra/${item.id}.png`;
                 else preview = `/assets/${item.id}.png`;
              }
           }
@@ -936,21 +933,21 @@ export default function AuditorRoom() {
                                   </button>
                                   <button onClick={() => setCraftRaceFilter(p => p === 'celestra' ? 'all' : 'celestra')} style={{ background: craftRaceFilter === 'celestra' ? '#121c22' : '#0c1018', border: craftRaceFilter === 'celestra' ? '1px solid #00e5ff' : '1px solid #2a3a5a', padding: '8px 12px', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', transition: 'all 0.2s', opacity: craftRaceFilter === 'celestra' || craftRaceFilter === 'all' ? 1 : 0.35 }} title="Celestra Faction">
                                       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                          <img src={celestraLogo} className="celestra-logo-img" style={{ height: '24px', objectFit: 'contain' }} />
+                                          <img src="/assets/celestra_logo.png" className="celestra-logo-img" style={{ height: '24px', objectFit: 'contain' }} />
                                           <span style={{ color: '#00e5ff', fontWeight: 'bold', fontSize: '12px', textShadow: '0 0 8px rgba(0,229,255,0.7)', letterSpacing: '0.5px' }}>CELESTRA</span>
                                       </div>
                                       {craftRaceFilter === 'celestra' && <span style={{ color: '#00e5ff', fontSize: '10px', fontWeight: 'bold' }}>ACTIVE</span>}
                                   </button>
                                   <button onClick={() => setCraftRaceFilter(p => p === 'bionex' ? 'all' : 'bionex')} style={{ background: craftRaceFilter === 'bionex' ? '#1c1b12' : '#0c1018', border: craftRaceFilter === 'bionex' ? '1px solid #ffcc00' : '1px solid #2a3a5a', padding: '8px 12px', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', transition: 'all 0.2s', opacity: craftRaceFilter === 'bionex' || craftRaceFilter === 'all' ? 1 : 0.35 }} title="Bionex Faction">
                                       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                          <img src={bionexLogo} className="bionex-logo-img" style={{ height: '24px', objectFit: 'contain' }} />
+                                          <img src="/assets/bionex_logo.png" className="bionex-logo-img" style={{ height: '24px', objectFit: 'contain' }} />
                                           <span style={{ color: '#ffcc00', fontWeight: 'bold', fontSize: '12px', textShadow: '0 0 8px rgba(255,204,0,0.7)', letterSpacing: '0.5px' }}>BIONEX</span>
                                       </div>
                                       {craftRaceFilter === 'bionex' && <span style={{ color: '#ffcc00', fontSize: '10px', fontWeight: 'bold' }}>ACTIVE</span>}
                                   </button>
                                   <button onClick={() => setCraftRaceFilter(p => p === 'arctron' ? 'all' : 'arctron')} style={{ background: craftRaceFilter === 'arctron' ? '#1c1512' : '#0c1018', border: craftRaceFilter === 'arctron' ? '1px solid #ff6400' : '1px solid #2a3a5a', padding: '8px 12px', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', transition: 'all 0.2s', opacity: craftRaceFilter === 'arctron' || craftRaceFilter === 'all' ? 1 : 0.35 }} title="Arctron Faction">
                                       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                          <img src={arctronLogo} className="arctron-logo-img" style={{ height: '24px', objectFit: 'contain' }} />
+                                          <img src="/assets/arctron_logo.png" className="arctron-logo-img" style={{ height: '24px', objectFit: 'contain' }} />
                                           <span style={{ color: '#ff6400', fontWeight: 'bold', fontSize: '12px', textShadow: '0 0 8px rgba(255,100,0,0.7)', letterSpacing: '0.5px' }}>ARCTRON</span>
                                       </div>
                                       {craftRaceFilter === 'arctron' && <span style={{ color: '#ff6400', fontSize: '10px', fontWeight: 'bold' }}>ACTIVE</span>}
