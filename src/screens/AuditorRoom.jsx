@@ -949,12 +949,34 @@ export default function AuditorRoom() {
                                   <div style={{ padding: '14px', display: 'grid', gridTemplateColumns: 'repeat(5, 56px)', gap: '10px', minHeight: '230px', alignContent: 'start', justifyContent: 'center' }}>
                                       {paginatedData.map((item, idx) => (
                                           <div key={idx} onClick={() => {
+                                             const idLower = (item.id || '').toLowerCase();
+                                             const nameLower = (item.name || '').toLowerCase();
+                                             const isArcaniteOrSpecial = nameLower.includes('arcanite') || idLower === 'mat_divine_crest' || idLower === 'mat_lucky_relic';
+                                             const isOreOrShardOrCore = idLower.includes('ore') || idLower.includes('shard') || idLower.includes('core') || nameLower.includes('ore') || nameLower.includes('shard') || nameLower.includes('core');
+
                                              if (activeSlotIndex !== null) {
+                                                 if (tab === 'crafting' && isArcaniteOrSpecial) {
+                                                     alert('❌ Arcanites & Specials hanya boleh digunakan untuk Enhancement!');
+                                                     return;
+                                                 }
+                                                 if (tab === 'enhance' && isOreOrShardOrCore) {
+                                                     alert('❌ Ores, Shards, & Cores hanya boleh digunakan untuk Crafting!');
+                                                     return;
+                                                 }
+                                                 
                                                  const newSlots = [...recipeSlots];
                                                  newSlots[activeSlotIndex] = item;
                                                  setRecipeSlots(newSlots);
                                                  setActiveSlotIndex(null); 
                                              } else {
+                                                 if (tab === 'enhance') {
+                                                     const isEquipment = ['weapon', 'shield', 'helmet', 'armor', 'pants', 'gloves', 'boots', 'accessories'].includes(item.type) || 
+                                                                         idLower.startsWith('wpn_') || idLower.startsWith('arm_') || idLower.startsWith('set_') || idLower.startsWith('rng_') || idLower.startsWith('amu_') || idLower.startsWith('gw_') || idLower.startsWith('meu_') || idLower.startsWith('ares_') || idLower.startsWith('spirit_');
+                                                     if (!isEquipment) {
+                                                         alert('❌ Hanya equipment (Senjata, Tameng, Armor, Aksesoris) yang bisa di-enhance!');
+                                                         return;
+                                                     }
+                                                 }
                                                  setTargetItem(item);
                                              }
                                           }} style={{ 
