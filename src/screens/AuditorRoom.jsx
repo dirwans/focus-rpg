@@ -151,6 +151,7 @@ export default function AuditorRoom() {
           if (preview && !preview.startsWith('http') && !preview.startsWith('/')) {
             preview = '/' + preview;
           }
+          let resolvedLevel = null;
           if (!preview && item.id) {
              const idStr = item.id.toLowerCase();
              let genericPath = null;
@@ -186,6 +187,7 @@ export default function AuditorRoom() {
                 if (category === 'gears_arctron' && level === '66') {
                     level = '55';
                 }
+                resolvedLevel = level;
 
                 if (idStr.includes('wpn_') || idStr.includes('gw_')) {
                     // WEAPONS
@@ -230,20 +232,20 @@ export default function AuditorRoom() {
                     let isRanger = idStr.includes('ran') || (item.type && item.type.toLowerCase().includes('ranger'));
                     let isSpecialist = idStr.includes('spe') || idStr.includes('mys') || idStr.includes('psi') || idStr.includes('mage') || (item.type && (item.type.toLowerCase().includes('specialist') || item.type.toLowerCase().includes('mystic') || item.type.toLowerCase().includes('force')));
                     
-                    let folder = 'armor';
+                    let folder = 'arctron_gears';
                     let prefix = 'defarctron';
                     let job = 'warrior';
                     
                     if (category === 'gears_arctron') {
-                        folder = 'armor';
+                        folder = 'arctron_gears';
                         prefix = 'defarctron';
                         job = isRanger ? 'ranger' : (isSpecialist ? 'technician' : 'warrior');
                     } else if (category === 'gears_bionex') {
-                        folder = 'armor_bionex';
+                        folder = 'bionex_gears';
                         prefix = 'defbionex';
                         job = isRanger ? 'marksman' : (isSpecialist ? 'psion' : 'guardian');
                     } else if (category === 'gears_celestra') {
-                        folder = 'armor_celestra';
+                        folder = 'celestra_gears';
                         prefix = 'defcelestra';
                         job = isRanger ? 'ranger' : (isSpecialist ? 'mage' : 'warrior');
                     }
@@ -258,7 +260,7 @@ export default function AuditorRoom() {
                     }
                     genericPath = `/assets/${folder}/${prefix}${job}lv${level}${piece}.png`;
                 } else {
-                    genericPath = '/assets/armor/defarctronwarriorlv32armor.png';
+                    genericPath = `/assets/arctron_gears/defarctronwarriorlv32armor.png`;
                 }
                 preview = genericPath;
              } else if (category === 'gears_accessories') {
@@ -272,6 +274,7 @@ export default function AuditorRoom() {
                 if (['0','1','2','3','4'].includes(lastChar)) {
                     level = lastChar;
                 }
+                resolvedLevel = level;
                 
                 if (idStr.includes('shd_') || idStr.includes('shield')) {
                     if (level === '0' || level === '1') {
@@ -306,6 +309,7 @@ export default function AuditorRoom() {
             _howToUse: item.description || '',
             _imageFile: null,
             _imagePreview: preview,
+            _level: resolvedLevel,
             _isDirty: false
           }
         })
@@ -1029,6 +1033,28 @@ export default function AuditorRoom() {
                                               transition: 'all 0.2s ease'
                                           }} title={item.name || item.id}>
                                               {item._imagePreview && <img src={item._imagePreview} style={{ width: '92%', height: '92%', objectFit: 'contain', filter: 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.85)) brightness(1.35) contrast(1.2)' }} />}
+                                              {/* Level / Tier Label Overlay */}
+                                              <div style={{
+                                                  position: 'absolute',
+                                                  bottom: '2px',
+                                                  right: '2px',
+                                                  background: 'rgba(0, 0, 0, 0.8)',
+                                                  color: '#00e5ff',
+                                                  fontSize: '8px',
+                                                  padding: '1px 3px',
+                                                  borderRadius: '3px',
+                                                  fontWeight: 'bold',
+                                                  pointerEvents: 'none',
+                                                  border: '1px solid rgba(0, 229, 255, 0.35)',
+                                                  textTransform: 'uppercase',
+                                                  zIndex: 2
+                                              }}>
+                                                  {item.type && ['helmet', 'armor', 'pants', 'gloves', 'boots', 'weapon', 'shield'].some(t => item.type.toLowerCase().includes(t)) || (item.id && (item.id.includes('wpn_') || item.id.includes('shd_') || item.id.includes('set_') || item.id.includes('gw_'))) ? (
+                                                      `Lv.${item._level || '32'}`
+                                                  ) : (
+                                                      item.id && (item.id.includes('rng_') || item.id.includes('amu_')) ? `T${(parseInt(item._level || '0', 10) + 1)}` : (item.grade ? item.grade.substring(0, 3) : '')
+                                                  )}
+                                              </div>
                                           </div>
                                       ))}
                                       {Array.from({length: Math.max(0, 20 - paginatedData.length)}).map((_, i) => (
