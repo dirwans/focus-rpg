@@ -253,8 +253,16 @@ export default function AuditorRoom() {
         }
 
         setRawEnemies(data.enemies)
+        
+        const rawItems = data.items?.items || (Array.isArray(data.items) ? data.items : []);
+        const rawMaterials = data.items?.materials || [];
+        const mergedItemsMap = new Map();
+        rawItems.forEach(it => { if (it && it.id) mergedItemsMap.set(it.id, it) });
+        rawMaterials.forEach(it => { if (it && it.id) mergedItemsMap.set(it.id, it) });
+        const finalItems = Array.from(mergedItemsMap.values());
+
         setAllData({
-          items: formatRows(data.items?.items || data.items || [], 'items'),
+          items: formatRows(finalItems, 'items'),
           enemies: formatRows(flattenEnemies(data.enemies), 'enemies'),
           races: formatRows(flattenRaces(data.races), 'races'),
           jobs: formatRows(flattenJobs(data.jobs), 'jobs'),
