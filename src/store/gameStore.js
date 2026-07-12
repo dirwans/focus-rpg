@@ -247,7 +247,7 @@ export function resolveItemImage(item, playerRace, playerJob) {
       }
     }
 
-    const isCaster = STAFF_JOBS.includes(playerJob)
+    const isCaster = STAFF_JOBS.includes(playerJob) || idStr.includes('_psi_') || idStr.includes('_ora_') || (idStr.includes('_arc_') && !idStr.includes('_cor_arc_'))
     const seed = item.uid || (item.id ? item.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) : 0)
 
     if (isCaster) {
@@ -259,7 +259,7 @@ export function resolveItemImage(item, playerRace, playerJob) {
       return `/assets/weapons/defbioncelestralv${tier}staff.png?v=2`;
     }
 
-    const isRanger = BOW_JOBS.includes(playerJob)
+    const isRanger = BOW_JOBS.includes(playerJob) || TECHNICIAN_JOBS.includes(playerJob) || idStr.includes('_ran_') || idStr.includes('_pat_') || idStr.includes('_mar_') || idStr.includes('_eng_')
     if (isRanger) {
       const weaponKind = playerRace === 'celestra' ? 'bow' : 'gun'
       const tier = lvl >= 55 ? '55' : (lvl >= 42 ? '42' : (lvl >= 32 ? '32' : '1'));

@@ -2147,4 +2147,7 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 - **Mythic Level 65 Gears Cleanup (`src/data/gears/arctron.json` & `bionex.json` & `celestra.json`)**:
    - Deleted all mythic level 65 (suffix `_5`) mecha weapons and shields from the faction JSON databases since they do not have sprite assets implemented yet.
    - Kept/restored level 66 armor sets (`set_cor_5` for Celestra and `set_bio_5` for Bionex) since their corresponding helmet, armor, pants, gloves, and boots sprites are fully present on disk.
+- **Game Store Weapon Mappings Hotfix (`src/store/gameStore.js`)**:
+   - Fixed a bug in the in-game weapon image resolver where Bionex Engineer (`engineer`) and Celestra Arcanist (`arcanist`) mecha weapons resolved to generic sword sprites instead of their respective gun/staff sprites.
+   - Updated `isCaster` and `isRanger` checks in `resolveItemImage` to look at both `playerJob` and item ID patterns (`_eng_`, `_mar_`, `_ran_`, `_pat_` for guns/bows, and `_psi_`, `_ora_`, `_cor_arc_` for staves).
 - **Verification**: Verified React build compiles cleanly (`npm run build`).
