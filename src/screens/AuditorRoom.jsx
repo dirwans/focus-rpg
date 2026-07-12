@@ -1059,12 +1059,13 @@ export default function AuditorRoom() {
                                                       setActiveSlotIndex(null); 
                                                   } else {
                                                       if (tab === 'enhance') {
-                                                          const isEquipment = ['weapon', 'shield', 'helmet', 'armor', 'pants', 'gloves', 'boots', 'accessories'].includes(item.type) || 
-                                                                              idLower.startsWith('wpn_') || idLower.startsWith('arm_') || idLower.startsWith('set_') || idLower.startsWith('rng_') || idLower.startsWith('amu_') || idLower.startsWith('gw_') || idLower.startsWith('meu_') || idLower.startsWith('ares_') || idLower.startsWith('spirit_');
-                                                          if (!isEquipment) {
-                                                              alert('❌ Hanya equipment (Senjata, Tameng, Armor, Aksesoris) yang bisa di-enhance!');
-                                                              return;
-                                                          }
+                                                           const typeLower = (item.type || '').toLowerCase();
+                                                           const isEquipment = ['weapon', 'shield', 'helmet', 'armor', 'pants', 'gloves', 'boots', 'accessories', 'ring', 'amulet'].some(t => typeLower.includes(t)) || 
+                                                                               idLower.startsWith('wpn_') || idLower.startsWith('shd_') || idLower.startsWith('arm_') || idLower.startsWith('set_') || idLower.startsWith('rng_') || idLower.startsWith('amu_') || idLower.startsWith('gw_') || idLower.startsWith('meu_') || idLower.startsWith('ares_') || idLower.startsWith('spirit_');
+                                                           if (!isEquipment) {
+                                                               alert('❌ Hanya equipment (Senjata, Tameng, Armor, Aksesoris) yang bisa di-enhance!');
+                                                               return;
+                                                           }
                                                       }
                                                       setTargetItem(item);
                                                   }
@@ -1138,12 +1139,13 @@ export default function AuditorRoom() {
                                               const dragItem = JSON.parse(e.dataTransfer.getData('application/json'));
                                               const dragIdLower = (dragItem.id || '').toLowerCase();
                                               if (tab === 'enhance') {
-                                                  const isEquipment = ['weapon', 'shield', 'helmet', 'armor', 'pants', 'gloves', 'boots', 'accessories'].includes(dragItem.type) || 
-                                                                      dragIdLower.startsWith('wpn_') || dragIdLower.startsWith('arm_') || dragIdLower.startsWith('set_') || dragIdLower.startsWith('rng_') || dragIdLower.startsWith('amu_') || dragIdLower.startsWith('gw_') || dragIdLower.startsWith('meu_') || dragIdLower.startsWith('ares_') || dragIdLower.startsWith('spirit_');
-                                                  if (!isEquipment) {
-                                                      alert('❌ Hanya equipment (Senjata, Tameng, Armor, Aksesoris) yang bisa di-enhance!');
-                                                      return;
-                                                  }
+                                                   const typeLower = (dragItem.type || '').toLowerCase();
+                                                   const isEquipment = ['weapon', 'shield', 'helmet', 'armor', 'pants', 'gloves', 'boots', 'accessories', 'ring', 'amulet'].some(t => typeLower.includes(t)) || 
+                                                                       dragIdLower.startsWith('wpn_') || dragIdLower.startsWith('shd_') || dragIdLower.startsWith('arm_') || dragIdLower.startsWith('set_') || dragIdLower.startsWith('rng_') || dragIdLower.startsWith('amu_') || dragIdLower.startsWith('gw_') || dragIdLower.startsWith('meu_') || dragIdLower.startsWith('ares_') || dragIdLower.startsWith('spirit_');
+                                                   if (!isEquipment) {
+                                                       alert('❌ Hanya equipment (Senjata, Tameng, Armor, Aksesoris) yang bisa di-enhance!');
+                                                       return;
+                                                   }
                                               }
                                               setTargetItem(dragItem);
                                           } catch {}
