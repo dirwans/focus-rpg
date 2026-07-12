@@ -22,12 +22,6 @@
   "warrior": {
     "weapons": [
       {
-        "id": "wpn_arc_war_0",
-        "name": "Iron Blade",
-        "grade": "Common",
-        "atk": 20
-      },
-      {
         "id": "wpn_arc_war_1",
         "name": "Steel Saber",
         "grade": "Uncommon",
@@ -59,14 +53,6 @@
       }
     ],
     "shields": [
-      {
-        "id": "shd_arc_0",
-        "name": "Nano-Grid Buckler",
-        "grade": "Common",
-        "def": 58,
-        "defPct": 5,
-        "dmgShieldRate": 35
-      },
       {
         "id": "shd_arc_1",
         "name": "Titan Guard",
@@ -102,12 +88,6 @@
   "ranger": {
     "weapons": [
       {
-        "id": "wpn_arc_ran_0",
-        "name": "Hunter Bow",
-        "grade": "Common",
-        "atk": 20
-      },
-      {
         "id": "wpn_arc_ran_1",
         "name": "Falcon Bow",
         "grade": "Uncommon",
@@ -142,12 +122,6 @@
   "technician": {
     "weapons": [
       {
-        "id": "wpn_arc_tec_0",
-        "name": "Pulse Controller",
-        "grade": "Common",
-        "atk": 18
-      },
-      {
         "id": "wpn_arc_tec_1",
         "name": "Vector Controller",
         "grade": "Uncommon",
@@ -180,14 +154,6 @@
     ]
   },
   "amulets": [
-    {
-      "id": "amu_arc_0",
-      "name": "Quantum Spark Core",
-      "grade": "Common",
-      "image": "/assets/arctron/amulets/amu_arc_0.png",
-      "dodgeMin": 5,
-      "dodgeMax": 10
-    },
     {
       "id": "amu_arc_1",
       "name": "Crimson Node Amulet",
@@ -230,14 +196,6 @@
     }
   ],
   "rings": [
-    {
-      "id": "rng_arc_0",
-      "name": "Nano Pulse Ring",
-      "grade": "Common",
-      "image": "/assets/arctron/rings/rng_arc_0.png",
-      "defMin": 5,
-      "defMax": 10
-    },
     {
       "id": "rng_arc_1",
       "name": "Arc Capacitor Band",

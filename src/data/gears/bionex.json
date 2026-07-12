@@ -1,14 +1,6 @@
 {
   "amulets": [
     {
-      "id": "amu_bio_0",
-      "name": "Vanguard Prism Amulet",
-      "grade": "Common",
-      "image": "/assets/bionex/amulets/amu_bio_0.png",
-      "dodgeMin": 5,
-      "dodgeMax": 10
-    },
-    {
       "id": "amu_bio_1",
       "name": "Biohazard Core Pendant",
       "grade": "Uncommon",
@@ -50,14 +42,6 @@
     }
   ],
   "rings": [
-    {
-      "id": "rng_bio_0",
-      "name": "Field Operative Ring",
-      "grade": "Common",
-      "image": "/assets/bionex/rings/rng_bio_0.png",
-      "defPctMin": 5,
-      "defPctMax": 10
-    },
     {
       "id": "rng_bio_1",
       "name": "Bioweapon Signet",
@@ -155,12 +139,6 @@
   "guardian": {
     "weapons": [
       {
-        "id": "wpn_bio_gua_0",
-        "name": "Guardian Blade",
-        "grade": "Common",
-        "atk": 20
-      },
-      {
         "id": "wpn_bio_gua_1",
         "name": "Aegis Saber",
         "grade": "Uncommon",
@@ -192,14 +170,6 @@
       }
     ],
     "shields": [
-      {
-        "id": "shd_bio_0",
-        "name": "Tactical Riot Shield",
-        "grade": "Common",
-        "def": 58,
-        "defPct": 5,
-        "dmgShieldRate": 35
-      },
       {
         "id": "shd_bio_1",
         "name": "Bulwark Shield",
@@ -235,12 +205,6 @@
   "marksman": {
     "weapons": [
       {
-        "id": "wpn_bio_mar_0",
-        "name": "Falcon Rifle",
-        "grade": "Common",
-        "atk": 20
-      },
-      {
         "id": "wpn_bio_mar_1",
         "name": "Viper Rifle",
         "grade": "Uncommon",
@@ -275,12 +239,6 @@
   "engineer": {
     "weapons": [
       {
-        "id": "wpn_bio_eng_0",
-        "name": "Pulse Wrench",
-        "grade": "Common",
-        "atk": 18
-      },
-      {
         "id": "wpn_bio_eng_1",
         "name": "Fusion Driver",
         "grade": "Uncommon",
@@ -314,12 +272,6 @@
   },
   "psion": {
     "weapons": [
-      {
-        "id": "wpn_bio_psi_0",
-        "name": "Psi Rod",
-        "grade": "Common",
-        "atk": 20
-      },
       {
         "id": "wpn_bio_psi_1",
         "name": "Mind Scepter",

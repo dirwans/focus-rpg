@@ -1,14 +1,6 @@
 {
   "amulets": [
     {
-      "id": "amu_all_0",
-      "name": "Nexus Wanderer Amulet",
-      "grade": "Common",
-      "image": "/assets/accessories/amulets/amu_all_0.png",
-      "atkPctMin": 5,
-      "atkPctMax": 10
-    },
-    {
       "id": "amu_all_1",
       "name": "Conflict Survivor Charm",
       "grade": "Uncommon",
@@ -42,14 +34,6 @@
     }
   ],
   "rings": [
-    {
-      "id": "rng_all_0",
-      "name": "Nexus Wanderer Ring",
-      "grade": "Common",
-      "image": "/assets/accessories/rings/rng_all_0.png",
-      "defPct": 10,
-      "dodge": 10
-    },
     {
       "id": "rng_all_1",
       "name": "Conflict Survivor Band",
@@ -159,14 +143,6 @@
   ],
   "shields": [
     {
-      "id": "shd_all_0",
-      "name": "Survivor's Scrapshield",
-      "grade": "Common",
-      "def": 58,
-      "defPct": 5,
-      "dmgShieldRate": 35
-    },
-    {
       "id": "shd_all_1",
       "name": "Heavy Carbon Shield",
       "grade": "Uncommon",
@@ -193,37 +169,6 @@
     }
   ],
   "capes": [
-    {
-      "id": "cap_0",
-      "name": "Storm Booster",
-      "grade": "Common",
-      "hp": 1000,
-      "def": 50,
-      "dodge": 3,
-      "craft_cost": 10000000,
-      "materials": [
-        {
-          "name": "Booster Frame",
-          "qty": 30
-        },
-        {
-          "name": "Flux Engine",
-          "qty": 20
-        },
-        {
-          "name": "Stabilizer Wing",
-          "qty": 40
-        },
-        {
-          "name": "Nexus Core",
-          "qty": 15
-        },
-        {
-          "name": "Flight Module",
-          "qty": 25
-        }
-      ]
-    },
     {
       "id": "cap_1",
       "name": "Skybreaker Booster",
