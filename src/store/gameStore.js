@@ -160,6 +160,30 @@ export function resolveItemImage(item, playerRace, playerJob) {
     const race = playerRace || 'arctron'
     return `/assets/auto_mining_tool_${race}.png`
   }
+  const idStr = (item.id || '').toLowerCase();
+  if (item.type === 'ring' || item.type === 'amulet' || idStr.startsWith('rng_') || idStr.startsWith('amu_')) {
+    let race = 'all';
+    if (idStr.includes('_arc_') || idStr.includes('arctron')) race = 'arctron';
+    else if (idStr.includes('_bio_') || idStr.includes('bionex')) race = 'bionex';
+    else if (idStr.includes('_cor_') || idStr.includes('_cel_') || idStr.includes('celestra') || idStr.includes('cora')) race = 'celestra';
+    
+    let level = '0';
+    const lastChar = idStr.substring(idStr.length - 1);
+    if (['0','1','2','3','4'].includes(lastChar)) {
+        level = lastChar;
+    }
+    
+    if (idStr.includes('rng') || idStr.includes('ring') || item.type === 'ring') {
+        if (race === 'all') return `/assets/accessories/rings/rng_all_${level}.png`;
+        if (race === 'bionex') return `/assets/bionex/rings/rng_bio_${level}.png`;
+        if (race === 'celestra') return `/assets/celestra/rings/rng_cor_${level}.png`;
+        return `/assets/arctron/rings/rng_arc_${level}.png`;
+    } else {
+        if (race === 'all') return `/assets/accessories/amulets/amu_all_${level}.png`;
+        if (race === 'celestra') return `/assets/celestra/amulets/amu_cor_${level}.png`;
+        return `/assets/arctron/amulets/amu_arc_${level}.png`;
+    }
+  }
   if (item.type === 'shield' && item.id && item.id.startsWith('arm_All_')) {
     const lvl = item.level || 1
     const race = playerRace || 'arctron'
@@ -185,7 +209,6 @@ export function resolveItemImage(item, playerRace, playerJob) {
   }
   if (item.type === 'weapon') {
     let lvl = item.level || 1
-    const idStr = (item.id || '').toLowerCase();
     
     // Parse level from ID suffix if level is not explicitly defined (e.g. wpn_arc_war_3)
     if (!item.level && item.id) {
