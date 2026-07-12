@@ -298,7 +298,22 @@ export default function AuditorRoom() {
                 }
                 preview = genericPath;
              } else {
-               preview = `/assets/${item.id}.png`;
+                const idLower = item.id ? item.id.toLowerCase() : '';
+                if (idLower === 'ares_x') preview = '/assets/arctron_gears/ARESlv32arctron.png';
+                else if (idLower === 'ares_nemesis') preview = '/assets/arctron_gears/ARESlv42arctron.png';
+                else if (idLower === 'ares_dominator') preview = '/assets/arctron_gears/ARESlv55arctron.png';
+                else if (idLower === 'ares_apocalypse') preview = '/assets/arctron_gears/ARESlv65arctron.png';
+                else if (idLower === 'meu_atk_32') preview = '/assets/bionex_gears/MEUattacklv32.png';
+                else if (idLower === 'meu_atk_42') preview = '/assets/bionex_gears/MEUattacklv42.png';
+                else if (idLower === 'meu_atk_55') preview = '/assets/bionex_gears/MEUattacklv55.png';
+                else if (idLower === 'meu_atk_65') preview = '/assets/bionex_gears/MEUattacklv65.png';
+                else if (idLower === 'meu_def_32') preview = '/assets/bionex_gears/MEUdevlv32.png';
+                else if (idLower === 'meu_def_42') preview = '/assets/bionex_gears/MEUdevlv42.png';
+                else if (idLower === 'meu_def_55') preview = '/assets/bionex_gears/MEUdevlv55.png';
+                else if (idLower === 'meu_def_65') preview = '/assets/bionex_gears/MEUdevlv65.png';
+                else if (idLower.startsWith('spirit_seraphys_')) preview = `/assets/celestra_gears/${item.id}.png`;
+                else if (idLower.startsWith('spirit_noctyrna_')) preview = `/assets/celestra_gears/${item.id}.png`;
+                else preview = `/assets/${item.id}.png`;
              }
           }
           return {

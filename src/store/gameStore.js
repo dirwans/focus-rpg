@@ -296,30 +296,30 @@ export function resolveItemImage(item, playerRace, playerJob) {
   }
   if (item.type === 'ascension_arms') {
     // Bionex M.E.U. Attacker
-    if (item.id === 'meu_atk_32') return '/assets/MEUattacklv32.png'
-    if (item.id === 'meu_atk_42') return '/assets/MEUattacklv42.png'
-    if (item.id === 'meu_atk_55') return '/assets/MEUattacklv55.png'
-    if (item.id === 'meu_atk_65') return '/assets/MEUattacklv65.png'
+    if (item.id === 'meu_atk_32') return '/assets/bionex_gears/MEUattacklv32.png'
+    if (item.id === 'meu_atk_42') return '/assets/bionex_gears/MEUattacklv42.png'
+    if (item.id === 'meu_atk_55') return '/assets/bionex_gears/MEUattacklv55.png'
+    if (item.id === 'meu_atk_65') return '/assets/bionex_gears/MEUattacklv65.png'
     // Bionex M.E.U. Defender
-    if (item.id === 'meu_def_32') return '/assets/MEUdevlv32.png'
-    if (item.id === 'meu_def_42') return '/assets/MEUdevlv42.png'
-    if (item.id === 'meu_def_55') return '/assets/MEUdevlv55.png'
-    if (item.id === 'meu_def_65') return '/assets/MEUdevlv65.png'
+    if (item.id === 'meu_def_32') return '/assets/bionex_gears/MEUdevlv32.png'
+    if (item.id === 'meu_def_42') return '/assets/bionex_gears/MEUdevlv42.png'
+    if (item.id === 'meu_def_55') return '/assets/bionex_gears/MEUdevlv55.png'
+    if (item.id === 'meu_def_65') return '/assets/bionex_gears/MEUdevlv65.png'
     // Arctron A.R.E.S.
-    if (item.id === 'ares_x') return '/assets/ARESlv32arctron.png'
-    if (item.id === 'ares_nemesis') return '/assets/ARESlv42arctron.png'
-    if (item.id === 'ares_dominator') return '/assets/ARESlv55arctron.png'
-    if (item.id === 'ares_apocalypse') return '/assets/ARESlv65arctron.png'
+    if (item.id === 'ares_x') return '/assets/arctron_gears/ARESlv32arctron.png'
+    if (item.id === 'ares_nemesis') return '/assets/arctron_gears/ARESlv42arctron.png'
+    if (item.id === 'ares_dominator') return '/assets/arctron_gears/ARESlv55arctron.png'
+    if (item.id === 'ares_apocalypse') return '/assets/arctron_gears/ARESlv65arctron.png'
     // Celestra Ancient Spirit - Seraphys
-    if (item.id === 'spirit_seraphys_32') return '/assets/spirit_seraphys_32.png?v=4'
-    if (item.id === 'spirit_seraphys_42') return '/assets/spirit_seraphys_42.png?v=4'
-    if (item.id === 'spirit_seraphys_55') return '/assets/spirit_seraphys_55.png?v=4'
-    if (item.id === 'spirit_seraphys_65') return '/assets/spirit_seraphys_65.png?v=4'
+    if (item.id === 'spirit_seraphys_32') return '/assets/celestra_gears/spirit_seraphys_32.png?v=4'
+    if (item.id === 'spirit_seraphys_42') return '/assets/celestra_gears/spirit_seraphys_42.png?v=4'
+    if (item.id === 'spirit_seraphys_55') return '/assets/celestra_gears/spirit_seraphys_55.png?v=4'
+    if (item.id === 'spirit_seraphys_65') return '/assets/celestra_gears/spirit_seraphys_65.png?v=4'
     // Celestra Ancient Spirit - Noctyrna
-    if (item.id === 'spirit_noctyrna_32') return '/assets/spirit_noctyrna_32.png?v=4'
-    if (item.id === 'spirit_noctyrna_42') return '/assets/spirit_noctyrna_42.png?v=4'
-    if (item.id === 'spirit_noctyrna_55') return '/assets/spirit_noctyrna_55.png?v=7'
-    if (item.id === 'spirit_noctyrna_65') return '/assets/spirit_noctyrna_65.png?v=17'
+    if (item.id === 'spirit_noctyrna_32') return '/assets/celestra_gears/spirit_noctyrna_32.png?v=4'
+    if (item.id === 'spirit_noctyrna_42') return '/assets/celestra_gears/spirit_noctyrna_42.png?v=4'
+    if (item.id === 'spirit_noctyrna_55') return '/assets/celestra_gears/spirit_noctyrna_55.png?v=7'
+    if (item.id === 'spirit_noctyrna_65') return '/assets/celestra_gears/spirit_noctyrna_65.png?v=17'
   }
   let imgPath = item.image;
   if (imgPath && typeof imgPath === 'string') {
