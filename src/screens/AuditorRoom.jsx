@@ -183,42 +183,72 @@ export default function AuditorRoom() {
                     else if (val === 60 || val === 65 || val === 66) level = '66';
                 }
 
-                // Clamp level 66 to 55 for Arctron since Arctron has no lv66 files
-                if (category === 'gears_arctron' && level === '66') {
-                    level = '55';
-                }
-                resolvedLevel = level;
+                 const isWeapon = idStr.includes('wpn_') || idStr.includes('gw_');
 
-                if (idStr.includes('wpn_') || idStr.includes('gw_')) {
-                    // WEAPONS
-                    const isBow = idStr.includes('ran') || idStr.includes('bow') || idStr.includes('arrow');
-                    const isStaff = idStr.includes('mys') || idStr.includes('staff') || idStr.includes('force');
-                    const isGun = idStr.includes('spe') || idStr.includes('gun') || idStr.includes('launcher');
-                    const isAxe = idStr.includes('axe') || idStr.includes('reaver') || idStr.includes('cleaver') || idStr.includes('scythe') || idStr.includes('hatchet');
-                    
-                    if (isBow) {
-                        genericPath = `/assets/weapons/defallfactionslv${level}bow.png`;
-                    } else if (isGun) {
-                        if (category === 'gears_arctron') {
-                            genericPath = `/assets/weapons/defarctronlv${level}special.png`;
-                        } else {
-                            genericPath = `/assets/weapons/defallfactionslv${level}gun.png`;
-                        }
-                    } else if (isStaff) {
-                        genericPath = `/assets/weapons/defbioncelestralv${level}staff.png`;
-                    } else if (isAxe && level !== '1') {
-                        genericPath = `/assets/weapons/defallfactionslv${level}axe.png`;
-                    } else {
-                        // Sword
-                        if (level === '1') {
-                            const charCodeSum = idStr.split('').reduce((sum, ch) => sum + ch.charCodeAt(0), 0);
-                            const swordIndex = (charCodeSum % 4) + 1;
-                            genericPath = `/assets/weapons/defallfactionslv1sword${swordIndex}.png`;
-                        } else {
-                            genericPath = `/assets/weapons/defallfactionslv${level}sword.png`;
-                        }
-                    }
-                } else if (idStr.includes('shd_') || idStr.includes('shield')) {
+                 // Clamp level 66 to 55 for weapons (all factions) or Arctron armors since there are no level 66 weapon/Arctron files
+                 if (level === '66' && (isWeapon || category === 'gears_arctron')) {
+                     level = '55';
+                 }
+                 resolvedLevel = level;
+
+                 if (isWeapon) {
+                     // WEAPONS
+                     let isBow = false;
+                     let isStaff = false;
+                     let isGun = false;
+                     let isAxe = idStr.includes('axe') || idStr.includes('reaver') || idStr.includes('cleaver') || idStr.includes('scythe') || idStr.includes('hatchet');
+                     let isSpecial = false;
+
+                     // Determine weapon type based on job prefixes in IDs
+                     if (idStr.includes('_ran_')) {
+                         isGun = true; // Arctron ranger uses guns
+                     } else if (idStr.includes('_tec_')) {
+                         isGun = true; // Arctron technician uses guns
+                         isSpecial = true;
+                     } else if (idStr.includes('_mar_') || idStr.includes('_eng_')) {
+                         isGun = true; // Bionex marksman/engineer use guns
+                     } else if (idStr.includes('_psi_') || idStr.includes('_ora_') || idStr.includes('_arc_')) {
+                         isStaff = true; // Bionex psion, Celestra oracle/arcanist use staffs
+                     } else if (idStr.includes('_pat_')) {
+                         isBow = true; // Celestra pathfinder uses bows
+                     } else if (idStr.includes('bow')) {
+                         if (category === 'gears_bionex') isGun = true; // Bionex generic bows are rendered as guns
+                         else isBow = true;
+                     } else if (idStr.includes('staff') || idStr.includes('scepter') || idStr.includes('force')) {
+                         isStaff = true;
+                     } else if (idStr.includes('gun') || idStr.includes('launcher')) {
+                         isGun = true;
+                     }
+
+                     if (isBow) {
+                         genericPath = `/assets/weapons/defallfactionslv${level}bow.png`;
+                     } else if (isGun) {
+                         if (isSpecial || category === 'gears_arctron') {
+                             genericPath = `/assets/weapons/defarctronlv${level}special.png`;
+                         } else {
+                             genericPath = `/assets/weapons/defallfactionslv${level}gun.png`;
+                         }
+                     } else if (isStaff) {
+                         if (level === '1') {
+                             const charCodeSum = idStr.split('').reduce((sum, ch) => sum + ch.charCodeAt(0), 0);
+                             const staffIndex = (charCodeSum % 2) + 1;
+                             genericPath = `/assets/weapons/defbioncelestralv1staff${staffIndex}.png`;
+                         } else {
+                             genericPath = `/assets/weapons/defbioncelestralv${level}staff.png`;
+                         }
+                     } else if (isAxe && level !== '1') {
+                         genericPath = `/assets/weapons/defallfactionslv${level}axe.png`;
+                     } else {
+                         // Sword (defaults here for warrior/guardian/sentinel classes and generic swords)
+                         if (level === '1') {
+                             const charCodeSum = idStr.split('').reduce((sum, ch) => sum + ch.charCodeAt(0), 0);
+                             const swordIndex = (charCodeSum % 4) + 1;
+                             genericPath = `/assets/weapons/defallfactionslv1sword${swordIndex}.png`;
+                         } else {
+                             genericPath = `/assets/weapons/defallfactionslv${level}sword.png`;
+                         }
+                     }
+                 } else if (idStr.includes('shd_') || idStr.includes('shield')) {
                     // SHIELDS
                     if (level === '1') {
                         genericPath = '/assets/arctron_shield_1_rembg.png';

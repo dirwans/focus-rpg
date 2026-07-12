@@ -94,7 +94,8 @@ export function addToInventory(inventory, item, count = 1) {
 const STAFF_JOBS = [
   'mage', 'rune_caster', 'mystic', 'archmage',
   'oracle', 'celestial_oracle', 'conjurer', 'divine_summoner',
-  'psion', 'esper', 'ascendant', 'transcendent'
+  'psion', 'esper', 'ascendant', 'transcendent',
+  'arcanist'
 ]
 
 // Ranger-lineage jobs (agility/ranged attacker) across all 3 factions use bows.
@@ -114,7 +115,8 @@ const WARRIOR_JOBS = [
 // Technician/specialist-lineage jobs (used for bespoke armor-set art lookup).
 const TECHNICIAN_JOBS = [
   'technician', 'architect', 'core_engineer', 'cybermancer',
-  'mechanist', 'techmaster', 'overseer'
+  'mechanist', 'techmaster', 'overseer',
+  'engineer'
 ]
 
 // Which race+lineage combos have a bespoke 5-piece armor set illustrated so far.
