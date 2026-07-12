@@ -2112,3 +2112,12 @@ fdatabase.net/crafting/ 3-column UI layout.
 - **Issue**: The previous CSS update indiscriminately targeted all instances of 
 octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense drop-shadow glow and the scale(1.2) transform, resulting in bloated / swollen sprites ("gajah bengkak").
 - **Fix**: Restricted the .game-sprite-noctyrna CSS class, 	ransform: scale(1.15), and dark background injection strictly to nimusKey === 'noctyrna' && lv === 65. Removed the heavy brightness/contrast filters from index.css to make the glow much thinner ("tuipis") as requested.
+
+
+---
+
+### 🔧 Milestone 156: Fix Missing Sprite Paths for Ascension & Spirit Modals [PENDING DEPLOYMENT]
+- **Image Path Corrections (`src/screens/Ascension.jsx` & `src/components/AscensionSpiritShopModal.jsx`)**:
+  - Restored broken image path references for ARES (Arctron), M.E.U. (Bionex), and Spirit (Celestra) assets to their correct organized subfolders (`/assets/arctron/`, `/assets/bionex/`, and `/assets/celestra/`).
+  - Fixed fallback path mappings to prevent broken image placeholders on compiled builds.
+- **Verification**: Verified React build compiles cleanly (`npm run build`).

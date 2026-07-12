@@ -112,7 +112,7 @@ export default function AscensionSpiritShopModal({ player, raceData }) {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'center', textAlign: 'center' }}>
                   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '8px 0', width: '100%' }}>
                     <img
-                      src={`/assets/spirit_${activeSlot}_${currentLv >= 65 ? 65 : currentLv >= 55 ? 55 : currentLv >= 42 ? 42 : 32}.png?v=1`}
+                      src={`/assets/celestra/spirit_${activeSlot}_${currentLv >= 65 ? 65 : currentLv >= 55 ? 55 : currentLv >= 42 ? 42 : 32}.png?v=1`}
                       alt={aData.name}
                       style={{
                         width: '100%',

@@ -8,30 +8,30 @@ import { t } from '../lib/translate'
 // Peta gambar per evolution ID dengan cache-buster ?v=2
 const EVO_IMAGES = {
   // Bionex M.E.U. Attacker
-  meu_atk_32: '/assets/MEUattacklv32.png?v=2',
-  meu_atk_42: '/assets/MEUattacklv42.png?v=2',
-  meu_atk_55: '/assets/MEUattacklv55.png?v=2',
-  meu_atk_65: '/assets/MEUattacklv65.png?v=2',
+  meu_atk_32: '/assets/bionex/MEUattacklv32.png?v=2',
+  meu_atk_42: '/assets/bionex/MEUattacklv42.png?v=2',
+  meu_atk_55: '/assets/bionex/MEUattacklv55.png?v=2',
+  meu_atk_65: '/assets/bionex/MEUattacklv65.png?v=2',
   // Bionex M.E.U. Defender
-  meu_def_32: '/assets/MEUdevlv32.png?v=2',
-  meu_def_42: '/assets/MEUdevlv42.png?v=2',
-  meu_def_55: '/assets/MEUdevlv55.png?v=2',
-  meu_def_65: '/assets/MEUdevlv65.png?v=2',
+  meu_def_32: '/assets/bionex/MEUdevlv32.png?v=2',
+  meu_def_42: '/assets/bionex/MEUdevlv42.png?v=2',
+  meu_def_55: '/assets/bionex/MEUdevlv55.png?v=2',
+  meu_def_65: '/assets/bionex/MEUdevlv65.png?v=2',
   // Arctron A.R.E.S.
-  ares_x: '/assets/ARESlv32arctron.png?v=2',
-  ares_nemesis: '/assets/ARESlv42arctron.png?v=2',
-  ares_dominator: '/assets/ARESlv55arctron.png?v=2',
-  ares_apocalypse: '/assets/ARESlv65arctron.png?v=2',
+  ares_x: '/assets/arctron/ARESlv32arctron.png?v=2',
+  ares_nemesis: '/assets/arctron/ARESlv42arctron.png?v=2',
+  ares_dominator: '/assets/arctron/ARESlv55arctron.png?v=2',
+  ares_apocalypse: '/assets/arctron/ARESlv65arctron.png?v=2',
   // Celestra Ancient Spirit - Seraphys
-  spirit_seraphys_32: '/assets/spirit_seraphys_32.png?v=4',
-  spirit_seraphys_42: '/assets/spirit_seraphys_42.png?v=4',
-  spirit_seraphys_55: '/assets/spirit_seraphys_55.png?v=4',
-  spirit_seraphys_65: '/assets/spirit_seraphys_65.png?v=4',
+  spirit_seraphys_32: '/assets/celestra/spirit_seraphys_32.png?v=4',
+  spirit_seraphys_42: '/assets/celestra/spirit_seraphys_42.png?v=4',
+  spirit_seraphys_55: '/assets/celestra/spirit_seraphys_55.png?v=4',
+  spirit_seraphys_65: '/assets/celestra/spirit_seraphys_65.png?v=4',
   // Celestra Ancient Spirit - Noctyrna
-  spirit_noctyrna_32: '/assets/spirit_noctyrna_32.png?v=4',
-  spirit_noctyrna_42: '/assets/spirit_noctyrna_42.png?v=4',
-  spirit_noctyrna_55: '/assets/spirit_noctyrna_55.png?v=5',
-  spirit_noctyrna_65: '/assets/spirit_noctyrna_65.png?v=17',
+  spirit_noctyrna_32: '/assets/celestra/spirit_noctyrna_32.png?v=4',
+  spirit_noctyrna_42: '/assets/celestra/spirit_noctyrna_42.png?v=4',
+  spirit_noctyrna_55: '/assets/celestra/spirit_noctyrna_55.png?v=5',
+  spirit_noctyrna_65: '/assets/celestra/spirit_noctyrna_65.png?v=17',
 }
 
 const RACE_COLORS = {
@@ -231,7 +231,7 @@ export default function Ascension() {
                                 pointerEvents: 'none'
                               }} />
                               <img
-                                src={EVO_IMAGES[`spirit_${animusKey}_${lv}`] || `/assets/spirit_${animusKey}_${lv}.png?v=6`}
+                                src={EVO_IMAGES[`spirit_${animusKey}_${lv}`] || `/assets/celestra/spirit_${animusKey}_${lv}.png?v=6`}
                                 alt={`${aData.name} Lv.${lv}`}
                                 className={animusKey === 'noctyrna' && lv === 65 ? 'game-sprite-noctyrna' : ''}
                                 style={{
