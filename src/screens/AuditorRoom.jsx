@@ -1028,12 +1028,21 @@ export default function AuditorRoom() {
                               </div>
 
                               <div>
-                                  <div className="simulator-title" style={{ fontSize: '10px', color: '#00e5ff', marginBottom: '8px', textTransform: 'uppercase', fontWeight: 'bold' }}>Required Materials</div>
+                                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                                      <div className="simulator-title" style={{ fontSize: '10px', color: '#00e5ff', textTransform: 'uppercase', fontWeight: 'bold' }}>Required Materials</div>
+                                      <button onClick={() => setRecipeSlots([null, null, null, null, null])} className="simulator-title" style={{ background: '#311', border: '1px solid #ff3333', color: '#ff3333', padding: '3px 8px', borderRadius: '4px', cursor: 'pointer', fontSize: '10px', fontWeight: 'bold', transition: 'all 0.2s' }}>🗑️ Clear All</button>
+                                  </div>
                                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
                                       {recipeSlots.slice(0, tab === 'enhance' ? 3 : 5).map((slot, idx) => (
-                                          <div key={idx} onClick={() => setActiveSlotIndex(idx === activeSlotIndex ? null : idx)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: activeSlotIndex === idx ? 'radial-gradient(circle, #244368 0%, #162840 100%)' : 'radial-gradient(circle, #182436 0%, #0c121e 100%)', border: activeSlotIndex === idx ? '1px solid #00ff88' : '1px solid rgba(0, 229, 255, 0.35)', padding: '8px', borderRadius: '6px', cursor: 'pointer', minHeight: '58px', boxShadow: activeSlotIndex === idx ? '0 0 10px rgba(0, 255, 136, 0.2)' : 'none', gridColumn: (tab === 'crafting' && idx === 3) ? 'span 1' : undefined }}>
+                                          <div key={idx} onClick={() => setActiveSlotIndex(idx === activeSlotIndex ? null : idx)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: activeSlotIndex === idx ? 'radial-gradient(circle, #244368 0%, #162840 100%)' : 'radial-gradient(circle, #182436 0%, #0c121e 100%)', border: activeSlotIndex === idx ? '1px solid #00ff88' : '1px solid rgba(0, 229, 255, 0.35)', padding: '8px', borderRadius: '6px', cursor: 'pointer', minHeight: '58px', boxShadow: activeSlotIndex === idx ? '0 0 10px rgba(0, 255, 136, 0.2)' : 'none', gridColumn: (tab === 'crafting' && idx === 3) ? 'span 1' : undefined, position: 'relative' }}>
                                              {slot ? (
                                                  <>
+                                                   <button onClick={(e) => {
+                                                       e.stopPropagation();
+                                                       const newSlots = [...recipeSlots];
+                                                       newSlots[idx] = null;
+                                                       setRecipeSlots(newSlots);
+                                                   }} style={{ position: 'absolute', top: '-4px', right: '-4px', width: '16px', height: '16px', borderRadius: '50%', background: '#ff3333', border: '1px solid #ff7777', color: '#fff', fontSize: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontWeight: 'bold', boxShadow: '0 0 4px rgba(255,0,0,0.5)', zIndex: 10 }}>×</button>
                                                    {slot._imagePreview && <img src={slot._imagePreview} style={{ width: '34px', height: '34px', objectFit: 'contain', marginBottom: '4px', filter: 'drop-shadow(0 0 5px rgba(255, 255, 255, 0.85)) brightness(1.3)' }} />}
                                                    <div style={{ color: '#fff', fontSize: '10px', textAlign: 'center', fontWeight: 'bold', lineHeight: '1.2' }}>{slot.name || slot.id}</div>
                                                  </>
@@ -1083,11 +1092,11 @@ export default function AuditorRoom() {
                                               <span style={{ color: '#aaa', fontSize: '12px' }}>Bonus Stats</span>
                                               <button onClick={() => setOutputStats([...outputStats, {stat: 'Max HP', val: ''}])} className="simulator-title" style={{ background: '#18283c', border: '1px solid #00e5ff', color: '#00e5ff', padding: '3px 8px', borderRadius: '4px', cursor: 'pointer', fontSize: '10px', fontWeight: 'bold' }}>+ Add Stat</button>
                                           </div>
-                                          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                                              {outputStats.length === 0 && <div style={{ color: '#666', fontSize: '11px', fontStyle: 'italic' }}>No extra stats.</div>}
+                                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                                              {outputStats.length === 0 && <div style={{ color: '#666', fontSize: '11px', fontStyle: 'italic', padding: '4px 0' }}>No extra stats.</div>}
                                               {outputStats.map((st, i) => (
-                                                  <div key={i} style={{ display: 'flex', gap: '5px' }}>
-                                                      <select value={st.stat} onChange={(e) => { const n = [...outputStats]; n[i].stat = e.target.value; setOutputStats(n); }} style={{ flex: 1, background: '#121622', border: '1px solid #2a3a5a', color: '#ccc', padding: '4px', fontSize: '11px', borderRadius: '4px' }}>
+                                                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '4px', background: '#121622', border: '1px solid #2a3a5a', padding: '4px 8px', borderRadius: '20px' }}>
+                                                      <select value={st.stat} onChange={(e) => { const n = [...outputStats]; n[i].stat = e.target.value; setOutputStats(n); }} style={{ background: 'none', border: 'none', color: '#ccc', fontSize: '11px', outline: 'none', cursor: 'pointer' }}>
                                                           <option value="Max HP">Max HP (%)</option>
                                                           <option value="Max FP">Max FP (%)</option>
                                                           <option value="ATK">Attack (%)</option>
@@ -1100,8 +1109,8 @@ export default function AuditorRoom() {
                                                           <option value="All Resist">All Resist</option>
                                                           <option value="Move Speed">Move Speed</option>
                                                       </select>
-                                                      <input type="text" placeholder="Val (e.g. 15)" value={st.val} onChange={(e) => { const n = [...outputStats]; n[i].val = e.target.value; setOutputStats(n); }} className="simulator-mono" style={{ width: '60px', background: '#121622', border: '1px solid #2a3a5a', color: '#fff', padding: '4px', fontSize: '11px', borderRadius: '4px' }} />
-                                                      <button onClick={() => { const n = [...outputStats]; n.splice(i, 1); setOutputStats(n); }} style={{ background: '#311', border: '1px solid #522', color: '#f55', padding: '0 6px', borderRadius: '4px', cursor: 'pointer' }}>X</button>
+                                                      <input type="text" placeholder="Val" value={st.val} onChange={(e) => { const n = [...outputStats]; n[i].val = e.target.value; setOutputStats(n); }} className="simulator-mono" style={{ width: '40px', background: 'none', border: 'none', borderBottom: '1px solid #444', color: '#fff', padding: '0 2px', fontSize: '11px', textAlign: 'center', outline: 'none' }} />
+                                                      <button onClick={() => { const n = [...outputStats]; n.splice(i, 1); setOutputStats(n); }} style={{ background: '#311', border: 'none', width: '16px', height: '16px', borderRadius: '50%', color: '#f55', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontSize: '10px', fontWeight: 'bold' }}>×</button>
                                                   </div>
                                               ))}
                                           </div>
@@ -1110,7 +1119,10 @@ export default function AuditorRoom() {
                               </div>
 
                               <div>
-                                  <div className="simulator-title" style={{ fontSize: '10px', color: '#aaa', marginBottom: '6px', textTransform: 'uppercase' }}>Set Peluang (%)</div>
+                                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                                      <div className="simulator-title" style={{ fontSize: '10px', color: '#aaa', textTransform: 'uppercase' }}>Set Peluang (%)</div>
+                                      <button onClick={() => setChances({ success: '65', destroy: '20', great: '10', bonus: '5' })} className="simulator-title" style={{ background: '#18283c', border: '1px solid #00e5ff', color: '#00e5ff', padding: '2px 8px', borderRadius: '4px', cursor: 'pointer', fontSize: '10px', fontWeight: 'bold', transition: 'all 0.2s' }}>Reset Defaults</button>
+                                  </div>
                                   <div style={{ background: '#0c1018', border: '1px solid #2a3a5a', borderRadius: '6px', overflow: 'hidden' }}>
                                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 12px', borderBottom: '1px solid #2a3a5a' }}>
                                           <div style={{ color: '#00e5ff', fontSize: '12px', fontWeight: 'bold' }}>Success Base</div>
