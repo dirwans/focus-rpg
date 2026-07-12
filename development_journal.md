@@ -2163,4 +2163,7 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
    - Integrated this sync call into both the direct save route (`/api/audit/save_item_direct`) and the draft publishing route (`/api/audit/publish_draft`) for category `gears`.
 - **Items Tab Armor Set Image Path Fix (`src/screens/AuditorRoom.jsx`)**:
    - Fixed broken mecha armor images in the Items tab by adding string replacement rules in `formatRows` to map `/assets/armor_celestra/` and `/assets/armor_bionex/` to their active locations (`/assets/celestra/` and `/assets/bionex/`).
+- **Database Enhance/Crafting Editors Picker Fix (`src/screens/AuditorRoom.jsx`)**:
+   - Disabled the name-based duplicate filtering check `split(' (')[0]` for armor pieces (helmet, armor, pants, gloves, boots) in `getActiveArray()`.
+   - This ensures that class-specific variants (e.g. Guardian, Marksman, Psion) that share the same base name are not filtered out, allowing all 75 Bionex pieces, 75 Celestra pieces, and 60 Arctron pieces to be selectable in the Enhancement and Crafting database editors.
 - **Verification**: Verified React build compiles cleanly (`npm run build`).
