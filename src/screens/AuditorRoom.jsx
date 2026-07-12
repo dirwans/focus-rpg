@@ -605,9 +605,9 @@ export default function AuditorRoom() {
            const list = allGears.filter(i => i.type && i.type.toLowerCase().includes(craftCategory));
            const seen = new Set();
            return list.filter(i => {
-              const nameLower = (i.name || '').toLowerCase();
-              if (seen.has(nameLower)) return false;
-              seen.add(nameLower);
+              const baseName = (i.name || '').split(' (')[0].trim().toLowerCase();
+              if (seen.has(baseName)) return false;
+              seen.add(baseName);
               return true;
            });
         }

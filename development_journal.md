@@ -2125,7 +2125,7 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 
 ---
 
-### 🔧 Milestone 157: Fix Missing Gear Images, Reorganize Faction Accessories, Filter Duplicates & Fix Staff Matching Bug [PENDING DEPLOYMENT]
+### 🔧 Milestone 157: Fix Missing Gear Images, Reorganize Faction Accessories, Filter Duplicates & Fix Staff Matching Bug [DEPLOYED]
 - **Auditor Room Image Mappings (`src/screens/AuditorRoom.jsx`)**:
    - Fixed a logic bug where generic path resolution (`genericPath`) for weapons, shields, armors, and accessories was never assigned to `preview`.
    - Added assignment `if (genericPath) preview = genericPath;` at the end of the image resolution block to restore all missing gear images.
