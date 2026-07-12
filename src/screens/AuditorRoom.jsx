@@ -147,7 +147,10 @@ export default function AuditorRoom() {
         
         // Helper to format rows with UI states
         const formatRows = (arr, category) => (arr || []).map(item => {
-          let preview = item.image || (item.img ? `/assets/${item.img}` : null);
+          let preview = item.image || (item.img ? (item.img.startsWith('/') || item.img.startsWith('http') ? item.img : `/assets/${item.img}`) : null);
+          if (preview && !preview.startsWith('http') && !preview.startsWith('/')) {
+            preview = '/' + preview;
+          }
           if (!preview && item.id) {
              const idStr = item.id.toLowerCase();
              let genericPath = null;
@@ -287,22 +290,41 @@ export default function AuditorRoom() {
         if (craftRaceFilter !== 'all') {
           base = base.filter(i => !i.faction || i.faction === craftRaceFilter || i.name.toLowerCase().includes(craftRaceFilter) || i.id.toLowerCase().includes(craftRaceFilter))
         }
-        if (craftSubTab === 'Shards') return base.filter(i => i.name.toLowerCase().includes('shard'))
-        if (craftSubTab === 'Ores') return base.filter(i => i.name.toLowerCase().includes('ore'))
-        if (craftSubTab === 'Cores') return base.filter(i => i.name.toLowerCase().includes('core'))
+        if (craftSubTab === 'Shards') return base.filter(i => (i.name && i.name.toLowerCase().includes('shard')) || (i.id && i.id.toLowerCase().includes('shard')))
+        if (craftSubTab === 'Ores') return base.filter(i => ((i.name && i.name.toLowerCase().includes('ore')) || (i.id && i.id.toLowerCase().includes('ore'))) && !i.name.toLowerCase().includes('core') && !i.name.toLowerCase().includes('spore') && !i.name.toLowerCase().includes('store'))
+        if (craftSubTab === 'Cores') return base.filter(i => (i.name && i.name.toLowerCase().includes('core')) || (i.id && i.id.toLowerCase().includes('core')))
         if (craftSubTab === 'Mats') return base.filter(i => i.id.toLowerCase().includes('mat_') && !i.name.toLowerCase().includes('shard') && !i.name.toLowerCase().includes('ore') && !i.name.toLowerCase().includes('core'))
-        if (craftSubTab === 'Misc') return base.filter(i => !i.name.toLowerCase().includes('shard') && !i.name.toLowerCase().includes('ore') && !i.name.toLowerCase().includes('core') && !i.id.toLowerCase().includes('mat_'))
+        if (craftSubTab === 'Misc') return base.filter(i => !i.name.toLowerCase().includes('shard') && !((i.name && i.name.toLowerCase().includes('ore')) && !i.name.toLowerCase().includes('core') && !i.name.toLowerCase().includes('spore')) && !i.name.toLowerCase().includes('core') && !i.id.toLowerCase().includes('mat_'))
         return base
       } else {
-        if (craftCategory === 'gears_arctron') base = allData.gears.arctron || [];
-        if (craftCategory === 'gears_bionex') base = allData.gears.bionex || [];
-        if (craftCategory === 'gears_celestra') base = allData.gears.celestra || [];
-        if (craftCategory === 'accessories') base = allData.gears.accessories || [];
+        if (craftCategory === 'gears_all') {
+          base = [
+            ...(allData.gears?.arctron || []),
+            ...(allData.gears?.bionex || []),
+            ...(allData.gears?.celestra || [])
+          ];
+        } else if (craftCategory === 'gears_arctron') base = allData.gears?.arctron || [];
+        else if (craftCategory === 'gears_bionex') base = allData.gears?.bionex || [];
+        else if (craftCategory === 'gears_celestra') base = allData.gears?.celestra || [];
+        else if (craftCategory === 'accessories') base = allData.gears?.accessories || [];
         
+        if (craftRaceFilter !== 'all') {
+           base = base.filter(i => {
+              const r = (i.faction || i.race || i._providerCat || '').toLowerCase();
+              if (r.includes(craftRaceFilter)) return true;
+              const idStr = (i.id || '').toLowerCase();
+              if (craftRaceFilter === 'arctron' && (idStr.includes('_arc_') || idStr.includes('arctron'))) return true;
+              if (craftRaceFilter === 'bionex' && (idStr.includes('_bio_') || idStr.includes('bionex'))) return true;
+              if (craftRaceFilter === 'celestra' && (idStr.includes('_cel_') || idStr.includes('celestra'))) return true;
+              return false;
+           });
+        }
+
         if (craftSubTab && craftSubTab !== 'All') {
            const sLower = craftSubTab.toLowerCase();
            base = base.filter(i => {
-              if (sLower === 'weapons' || sLower === 'weapon') return i.type && (i.type.toLowerCase().includes('weapon') || (i.id && i.id.startsWith('wpn_')) || (i.id && i.id.startsWith('gw_')));
+              if (sLower === 'weapons' || sLower === 'weapon') return (i.type && i.type.toLowerCase().includes('weapon')) || (i.id && (i.id.startsWith('wpn_') || i.id.startsWith('gw_') || i.id.includes('weapon')));
+              if (sLower === 'shields' || sLower === 'shield') return (i.type && i.type.toLowerCase().includes('shield')) || (i.id && (i.id.startsWith('shd_') || i.id.includes('shield')));
               if (sLower === 'amulet') return i.type && i.type.toLowerCase().includes('amulet');
               if (sLower === 'ring') return i.type && i.type.toLowerCase().includes('ring');
               return i.type && i.type.toLowerCase().includes(sLower);
@@ -671,243 +693,350 @@ export default function AuditorRoom() {
         <div style={{ ...styles.content, padding: (tab === 'crafting' || tab === 'enhance') ? 0 : '15px' }} className="no-scrollbar">
           {(tab === 'crafting' || tab === 'enhance') ? (
               <div className="simulator-container">
-                 {/* LEFT COLUMN - FILTERS & LOGS */}
-                 <div className="simulator-filters" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                     <div style={{ border: '1px solid #333', background: '#141414', borderRadius: '4px' }}>
-                         <div style={{ display: 'flex', justifyContent: 'space-between', padding: '10px', borderBottom: '1px solid #333' }}>
-                             <span style={{ fontWeight: 'bold', color: '#fff', fontSize: '14px' }}>Filter & Logs</span>
-                         </div>
-                         <div style={{ padding: '15px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
-                            <div>
-                                <div style={{ fontSize: '10px', color: '#888', marginBottom: '5px', textTransform: 'uppercase' }}>Race Filter</div>
-                                <div style={{ display: 'flex', gap: '5px' }}>
-                                   <button onClick={() => setCraftRaceFilter(p => p === 'arctron' ? 'all' : 'arctron')} style={{ flex: 1, background: '#1a1a1a', border: craftRaceFilter === 'arctron' ? '1px solid #d18a42' : '1px solid #333', padding: '10px', display: 'flex', justifyContent: 'center', cursor: 'pointer', transition: 'all 0.2s', opacity: craftRaceFilter === 'arctron' || craftRaceFilter === 'all' ? 1 : 0.3 }}><img src={arctronLogo} className="arctron-logo-img" style={{height:'20px', objectFit: 'contain'}}/></button>
-                                   <button onClick={() => setCraftRaceFilter(p => p === 'bionex' ? 'all' : 'bionex')} style={{ flex: 1, background: '#1a1a1a', border: craftRaceFilter === 'bionex' ? '1px solid #d18a42' : '1px solid #333', padding: '10px', display: 'flex', justifyContent: 'center', cursor: 'pointer', transition: 'all 0.2s', opacity: craftRaceFilter === 'bionex' || craftRaceFilter === 'all' ? 1 : 0.3 }}><img src={bionexLogo} className="bionex-logo-img" style={{height:'20px', objectFit: 'contain'}}/></button>
-                                   <button onClick={() => setCraftRaceFilter(p => p === 'celestra' ? 'all' : 'celestra')} style={{ flex: 1, background: '#1a1a1a', border: craftRaceFilter === 'celestra' ? '1px solid #d18a42' : '1px solid #333', padding: '10px', display: 'flex', justifyContent: 'center', cursor: 'pointer', transition: 'all 0.2s', opacity: craftRaceFilter === 'celestra' || craftRaceFilter === 'all' ? 1 : 0.3 }}><img src={celestraLogo} className="celestra-logo-img" style={{height:'20px', objectFit: 'contain'}}/></button>
-                                </div>
-                            </div>
-                         </div>
-                     </div>
-                     <div style={{ border: '1px solid #333', background: '#141414', borderRadius: '4px', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                         <div style={{ padding: '10px', borderBottom: '1px solid #333', color: '#fff', fontSize: '12px', fontWeight: 'bold' }}>📝 LOG PENYIMPANAN</div>
-                         <div style={{ padding: '15px', color: '#888', fontSize: '12px', flex: 1, overflowY: 'auto' }}>
-                             {recipeLogs.length === 0 ? "Belum ada resep yang disimpan." : recipeLogs.map((log, idx) => (
-                               <div key={idx} style={{ marginBottom: '8px', color: '#00ff88' }}>{log}</div>
-                             ))}
-                         </div>
-                     </div>
-                 </div>
+                  {/* GRID 1: RACE & CATEGORY SELECTION */}
+                  <div className="simulator-col-1" style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                      <div style={{ border: '1px solid #2a3a5a', background: '#121622', borderRadius: '6px', padding: '12px', display: 'flex', flexDirection: 'column', height: '100%' }}>
+                          <div className="simulator-title" style={{ fontWeight: 'bold', color: '#00e5ff', fontSize: '13px', borderBottom: '1px solid #2a3a5a', paddingBottom: '10px', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                              <span>🏁 RACE & CATEGORY</span>
+                          </div>
+                          
+                          <div>
+                              <div className="simulator-title" style={{ fontSize: '10px', color: '#aaa', marginBottom: '8px', letterSpacing: '0.5px' }}>FACTION / RACE FILTER</div>
+                              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
+                                  <button onClick={() => setCraftRaceFilter('all')} style={{ background: craftRaceFilter === 'all' ? 'linear-gradient(135deg, #18283c, #0e1a2c)' : '#0c1018', border: craftRaceFilter === 'all' ? '1px solid #00e5ff' : '1px solid #2a3a5a', color: craftRaceFilter === 'all' ? '#00e5ff' : '#888', padding: '8px', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', fontSize: '11px', gridColumn: 'span 2', transition: 'all 0.2s' }}>🌐 ALL RACES</button>
+                                  <button onClick={() => setCraftRaceFilter(p => p === 'arctron' ? 'all' : 'arctron')} style={{ background: craftRaceFilter === 'arctron' ? '#1c1512' : '#0c1018', border: craftRaceFilter === 'arctron' ? '1px solid #ff6400' : '1px solid #2a3a5a', padding: '8px', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', transition: 'all 0.2s', opacity: craftRaceFilter === 'arctron' || craftRaceFilter === 'all' ? 1 : 0.35 }} title="Arctron Faction"><img src={arctronLogo} className="arctron-logo-img" style={{height:'24px', objectFit: 'contain'}}/></button>
+                                  <button onClick={() => setCraftRaceFilter(p => p === 'bionex' ? 'all' : 'bionex')} style={{ background: craftRaceFilter === 'bionex' ? '#1c1b12' : '#0c1018', border: craftRaceFilter === 'bionex' ? '1px solid #ffcc00' : '1px solid #2a3a5a', padding: '8px', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', transition: 'all 0.2s', opacity: craftRaceFilter === 'bionex' || craftRaceFilter === 'all' ? 1 : 0.35 }} title="Bionex Faction"><img src={bionexLogo} className="bionex-logo-img" style={{height:'24px', objectFit: 'contain'}}/></button>
+                                  <button onClick={() => setCraftRaceFilter(p => p === 'celestra' ? 'all' : 'celestra')} style={{ background: craftRaceFilter === 'celestra' ? '#121c22' : '#0c1018', border: craftRaceFilter === 'celestra' ? '1px solid #00e5ff' : '1px solid #2a3a5a', padding: '8px', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', transition: 'all 0.2s', opacity: craftRaceFilter === 'celestra' || craftRaceFilter === 'all' ? 1 : 0.35, gridColumn: 'span 2' }} title="Celestra Faction"><img src={celestraLogo} className="celestra-logo-img" style={{height:'24px', objectFit: 'contain'}}/></button>
+                              </div>
+                          </div>
 
-                 {/* MIDDLE COLUMN - MATERIALS DB */}
-                 <div className="simulator-middle">
-                     <div style={{ border: '1px solid #333', background: '#141414', borderRadius: '4px', display: 'flex', flexDirection: 'column', height: '100%' }}>
-                         <div style={{ padding: '10px', display: 'flex', alignItems: 'center', gap: '15px', borderBottom: '1px solid #333', background: '#1a1a1a' }}>
-                             <img src="/assets/celestra_specialist_portrait.png" style={{ width: '30px', height: '30px', objectFit: 'cover' }} />
-                             <div>
-                                 <div style={{ color: '#fff', fontSize: '14px', fontWeight: 'bold' }}>{tab === 'enhance' ? 'Database Enhance Editor' : 'Database Craft Editor'}</div>
-                                 <div style={{ color: '#888', fontSize: '11px' }}>{tab === 'enhance' ? 'Tool for configuring enhancement rules. Useable only by Admin.' : 'Tool for configuring item crafting requirements and logic. Useable only by the Admin.'}</div>
-                             </div>
-                         </div>
-                         <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1 }}>
-                             <div style={{ width: '100%', maxWidth: '350px', background: '#0a0a0a', border: '1px solid #333', borderRadius: '4px', display: 'flex', flexDirection: 'column' }}>
-                                 <div style={{ textAlign: 'center', padding: '10px', borderBottom: '1px solid #333' }}>
-                                     <select value={craftCategory} onChange={e => {
-                                         setCraftCategory(e.target.value);
-                                         setPage(0);
-                                         setCraftSubTab(e.target.value === 'materials' ? (tab === 'enhance' ? 'All' : 'Shards') : 'All');
-                                     }} style={{ background: '#1a1a1a', border: '1px solid #444', color: '#fff', padding: '5px', borderRadius: '4px', outline: 'none', cursor: 'pointer', fontSize: '12px', width: '90%' }}>
-                                         <option value="materials">{tab === 'enhance' ? 'Enhance Materials' : 'Crafting Materials'}</option>
-                                         <option value="gears_arctron">{tab === 'enhance' ? 'Enhance Armor Arctron' : 'Crafting Armor Arctron'}</option>
-                                         <option value="gears_bionex">{tab === 'enhance' ? 'Enhance Armor Bionex' : 'Crafting Armor Bionex'}</option>
-                                         <option value="gears_celestra">{tab === 'enhance' ? 'Enhance Armor Celestra' : 'Crafting Armor Celestra'}</option>
-                                         <option value="accessories">{tab === 'enhance' ? 'Enhance Accessories' : 'Crafting Accessories'}</option>
-                                     </select>
-                                 </div>
-                                 {craftCategory === 'materials' && tab === 'crafting' && (
-                                   <div style={{ display: 'flex', borderBottom: '1px solid #333' }}>
-                                       {['Shards', 'Ores', 'Cores', 'Mats', 'Misc'].map(cst => (
-                                           <div key={cst} onClick={() => {setCraftSubTab(cst); setPage(0)}} style={{ flex: 1, textAlign: 'center', padding: '8px 0', fontSize: '11px', cursor: 'pointer', color: craftSubTab === cst ? '#d18a42' : '#888', borderBottom: craftSubTab === cst ? '2px solid #d18a42' : '2px solid transparent' }}>{cst}</div>
-                                       ))}
-                                   </div>
-                                 )}
-                                 {craftCategory === 'materials' && tab === 'enhance' && (
-                                   <div style={{ display: 'flex', borderBottom: '1px solid #333' }}>
-                                       {['All', 'Arcanites', 'Specials'].map(cst => (
-                                           <div key={cst} onClick={() => {setCraftSubTab(cst); setPage(0)}} style={{ flex: 1, textAlign: 'center', padding: '8px 0', fontSize: '11px', cursor: 'pointer', color: craftSubTab === cst ? '#d18a42' : '#888', borderBottom: craftSubTab === cst ? '2px solid #d18a42' : '2px solid transparent' }}>{cst}</div>
-                                       ))}
-                                   </div>
-                                 )}
-                                 {craftCategory.startsWith('gears_') && (
-                                   <div style={{ display: 'flex', flexWrap: 'wrap', borderBottom: '1px solid #333' }}>
-                                       {['All', 'Weapons', 'Helmet', 'Armor', 'Pants', 'Gloves', 'Boots', 'Shield'].map(cst => (
-                                           <div key={cst} onClick={() => {setCraftSubTab(cst); setPage(0)}} style={{ flex: '1 1 20%', textAlign: 'center', padding: '6px 0', fontSize: '10px', cursor: 'pointer', color: craftSubTab === cst ? '#d18a42' : '#888', borderBottom: craftSubTab === cst ? '2px solid #d18a42' : '2px solid transparent' }}>{cst}</div>
-                                       ))}
-                                   </div>
-                                 )}
-                                 {craftCategory === 'accessories' && (
-                                   <div style={{ display: 'flex', borderBottom: '1px solid #333' }}>
-                                       {['All', 'Amulet', 'Ring'].map(cst => (
-                                           <div key={cst} onClick={() => {setCraftSubTab(cst); setPage(0)}} style={{ flex: 1, textAlign: 'center', padding: '8px 0', fontSize: '11px', cursor: 'pointer', color: craftSubTab === cst ? '#d18a42' : '#888', borderBottom: craftSubTab === cst ? '2px solid #d18a42' : '2px solid transparent' }}>{cst}</div>
-                                       ))}
-                                   </div>
-                                 )}
-                                 <div style={{ padding: '15px', display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '8px', minHeight: '220px' }}>
-                                     {paginatedData.map((item, idx) => (
-                                         <div key={idx} onClick={() => {
-                                            if (activeSlotIndex !== null) {
-                                                const newSlots = [...recipeSlots];
-                                                newSlots[activeSlotIndex] = item;
-                                                setRecipeSlots(newSlots);
-                                                setActiveSlotIndex(null); 
-                                            } else {
-                                                setTargetItem(item);
-                                            }
-                                         }} style={{ aspectRatio: '1/1', background: '#1a1a1a', border: '1px solid #444', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
-                                             {item._imagePreview && <img src={item._imagePreview} style={{ width: '80%', height: '80%', objectFit: 'contain' }} />}
-                                         </div>
-                                     ))}
-                                     {Array.from({length: Math.max(0, 20 - paginatedData.length)}).map((_, i) => (
-                                         <div key={`empty-${i}`} style={{ aspectRatio: '1/1', border: '1px solid #222' }}></div>
-                                     ))}
-                                 </div>
-                                 <div style={{ display: 'flex', padding: '10px', borderTop: '1px solid #333', color: '#888', fontSize: '12px' }}>
-                                     <button disabled={page === 0} onClick={() => setPage(p => p - 1)} style={{ background: 'none', border: 'none', color: page === 0 ? '#444' : '#888', cursor: page === 0 ? 'default' : 'pointer' }}>Back</button>
-                                     <div style={{ flex: 1, textAlign: 'center', color: '#d18a42' }}>{page + 1} / {totalPages || 1}</div>
-                                     <button disabled={page >= totalPages - 1} onClick={() => setPage(p => p + 1)} style={{ background: 'none', border: 'none', color: page >= totalPages - 1 ? '#444' : '#888', cursor: page >= totalPages - 1 ? 'default' : 'pointer' }}>Next</button>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-
-                 {/* RIGHT COLUMN - RECIPE EDITOR */}
-                 <div className="simulator-right">
-                     <div style={{ border: '1px solid #333', background: '#141414', borderRadius: '4px', height: '100%', display: 'flex', flexDirection: 'column' }}>
-                         <div style={{ padding: '10px', borderBottom: '1px solid #333', color: '#fff', fontSize: '14px', fontWeight: 'bold' }}>{tab === 'enhance' ? 'Enhancement Editor' : 'Recipe Editor'}</div>
-                         <div style={{ padding: '20px', flex: 1, display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                             
-                             <div style={{ display: 'flex', alignItems: 'center', gap: '15px', background: '#1a1a1a', border: '1px solid #333', padding: '15px', borderRadius: '4px' }}>
-                                 <div onClick={() => setTargetItem(null)} style={{ width: '40px', height: '40px', border: '1px solid #444', background: '#0a0a0a', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
-                                     {targetItem ? (targetItem._imagePreview ? <img src={targetItem._imagePreview} style={{ width: '80%', height: '80%', objectFit: 'contain' }} /> : 'X') : <span style={{color: '#444'}}>?</span>}
-                                 </div>
-                                 <div style={{ flex: 1 }}>
-                                     <div style={{ fontSize: '10px', color: '#888', textTransform: 'uppercase' }}>{tab === 'enhance' ? 'Target Item (To Enhance)' : 'Target Item (Hasil)'}</div>
-                                     <div style={{ color: '#fff', fontSize: '16px', fontWeight: 'bold' }}>{targetItem ? targetItem.name || targetItem.id : 'Pilih dari Database'}</div>
-                                 </div>
-                             </div>
-
-                             <div>
-                                 <div style={{ fontSize: '10px', color: '#888', marginBottom: '10px', textTransform: 'uppercase' }}>Required Materials</div>
-                                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-                                     {recipeSlots.slice(0, tab === 'enhance' ? 3 : 5).map((slot, idx) => (
-                                         <div key={idx} onClick={() => setActiveSlotIndex(idx === activeSlotIndex ? null : idx)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: activeSlotIndex === idx ? '#2a2a2a' : '#1a1a1a', border: activeSlotIndex === idx ? '1px solid #00e5ff' : '1px solid #333', padding: '10px', borderRadius: '4px', cursor: 'pointer', minHeight: '60px' }}>
-                                            {slot ? (
-                                                <>
-                                                  {slot._imagePreview && <img src={slot._imagePreview} style={{ width: '25px', height: '25px', objectFit: 'contain', marginBottom: '5px' }} />}
-                                                  <div style={{ color: '#ccc', fontSize: '11px', textAlign: 'center' }}>{slot.name || slot.id}</div>
-                                                </>
-                                            ) : (
-                                                <>
-                                                  <div style={{ color: activeSlotIndex === idx ? '#00e5ff' : '#444', fontSize: '20px', marginBottom: '2px' }}>+</div>
-                                                  <div style={{ color: '#666', fontSize: '11px' }}>Slot {idx + 1}</div>
-                                                </>
-                                            )}
-                                         </div>
-                                     ))}
-                                 </div>
-                             </div>
-
-                             <div>
-                                 <div style={{ fontSize: '10px', color: '#888', marginBottom: '10px', textTransform: 'uppercase' }}>{tab === 'enhance' ? 'Enhancement Target Level' : 'Output Stats & Grade'}</div>
-                                 <div style={{ background: '#1a1a1a', border: '1px solid #333', borderRadius: '4px', padding: '10px' }}>
-                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-                                         <span style={{ color: '#888', fontSize: '12px' }}>{tab === 'enhance' ? 'Target Level' : 'Item Grade'}</span>
-                                         <select value={outputGrade} onChange={e => setOutputGrade(e.target.value)} style={{ background: '#0a0a0a', border: '1px solid #444', color: '#fff', padding: '4px', fontSize: '12px' }}>
-                                             {tab === 'enhance' ? (
-                                                 <>
-                                                     <option value="+1">+1</option>
-                                                     <option value="+2">+2</option>
-                                                     <option value="+3">+3</option>
-                                                     <option value="+4">+4</option>
-                                                     <option value="+5">+5</option>
-                                                     <option value="+6">+6</option>
-                                                     <option value="+7">+7</option>
-                                                     <option value="+8">+8</option>
-                                                 </>
-                                             ) : (
-                                                 <>
-                                                     <option value="Normal">Normal</option>
-                                                     <option value="Rare A">Rare A</option>
-                                                     <option value="Rare B">Rare B</option>
-                                                     <option value="Rare C">Rare C</option>
-                                                     <option value="Rare D">Rare D</option>
-                                                     <option value="Relic">Relic</option>
-                                                     <option value="Hero">Hero</option>
-                                                 </>
-                                             )}
-                                         </select>
-                                     </div>
-                                     <div style={{ borderTop: '1px dashed #333', paddingTop: '10px' }}>
-                                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-                                             <span style={{ color: '#888', fontSize: '12px' }}>Bonus Stats</span>
-                                             <button onClick={() => setOutputStats([...outputStats, {stat: 'Max HP', val: ''}])} style={{ background: '#222', border: '1px solid #444', color: '#00e5ff', padding: '2px 8px', borderRadius: '2px', cursor: 'pointer', fontSize: '11px' }}>+ Add Stat</button>
-                                         </div>
-                                         <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                                             {outputStats.length === 0 && <div style={{ color: '#555', fontSize: '11px', fontStyle: 'italic' }}>No extra stats.</div>}
-                                             {outputStats.map((st, i) => (
-                                                 <div key={i} style={{ display: 'flex', gap: '5px' }}>
-                                                     <select value={st.stat} onChange={(e) => { const n = [...outputStats]; n[i].stat = e.target.value; setOutputStats(n); }} style={{ flex: 1, background: '#0a0a0a', border: '1px solid #444', color: '#ccc', padding: '4px', fontSize: '11px' }}>
-                                                         <option value="Max HP">Max HP (%)</option>
-                                                         <option value="Max FP">Max FP (%)</option>
-                                                         <option value="ATK">Attack (%)</option>
-                                                         <option value="DEF">Defense (%)</option>
-                                                         <option value="Crit Rate">Crit Rate</option>
-                                                         <option value="Dodge">Dodge</option>
-                                                         <option value="Accuracy">Accuracy</option>
-                                                         <option value="Block">Block</option>
-                                                         <option value="Ignore Block">Ignore Block</option>
-                                                         <option value="All Resist">All Resist</option>
-                                                         <option value="Move Speed">Move Speed</option>
-                                                     </select>
-                                                     <input type="text" placeholder="Val (e.g. 15)" value={st.val} onChange={(e) => { const n = [...outputStats]; n[i].val = e.target.value; setOutputStats(n); }} style={{ width: '60px', background: '#0a0a0a', border: '1px solid #444', color: '#fff', padding: '4px', fontSize: '11px' }} />
-                                                     <button onClick={() => { const n = [...outputStats]; n.splice(i, 1); setOutputStats(n); }} style={{ background: '#311', border: '1px solid #522', color: '#f55', padding: '0 5px', cursor: 'pointer' }}>X</button>
-                                                 </div>
-                                             ))}
-                                         </div>
-                                     </div>
-                                 </div>
-                             </div>
-
-                             <div>
-                                 <div style={{ fontSize: '10px', color: '#888', marginBottom: '10px', textTransform: 'uppercase' }}>Set Peluang (%)</div>
-                                 <div style={{ background: '#1a1a1a', border: '1px solid #333', borderRadius: '4px', overflow: 'hidden' }}>
-                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 15px', borderBottom: '1px solid #333' }}>
-                                         <div style={{ color: '#7ab0d0', fontSize: '13px' }}>Success Base</div>
-                                         <input type="number" value={chances.success} onChange={(e) => setChances(p => ({...p, success: e.target.value}))} style={{ background: '#0a0a0a', border: '1px solid #444', color: '#fff', width: '50px', textAlign: 'right', padding: '4px' }} />
-                                     </div>
-                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 15px', borderBottom: '1px solid #333' }}>
-                                         <div style={{ color: '#888', fontSize: '13px' }}>Failure Destroy</div>
-                                         <input type="number" value={chances.destroy} onChange={(e) => setChances(p => ({...p, destroy: e.target.value}))} style={{ background: '#0a0a0a', border: '1px solid #444', color: '#fff', width: '50px', textAlign: 'right', padding: '4px' }} />
-                                     </div>
-                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 15px', borderBottom: '1px solid #333' }}>
-                                         <div style={{ color: '#888', fontSize: '13px' }}>Great Success</div>
-                                         <input type="number" value={chances.great} onChange={(e) => setChances(p => ({...p, great: e.target.value}))} style={{ background: '#0a0a0a', border: '1px solid #444', color: '#fff', width: '50px', textAlign: 'right', padding: '4px' }} />
-                                     </div>
-                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 15px' }}>
-                                         <div style={{ color: '#888', fontSize: '13px' }}>Bonus Roll</div>
-                                         <input type="number" value={chances.bonus} onChange={(e) => setChances(p => ({...p, bonus: e.target.value}))} style={{ background: '#0a0a0a', border: '1px solid #444', color: '#fff', width: '50px', textAlign: 'right', padding: '4px' }} />
-                                     </div>
-                                 </div>
-                             </div>
-
-                             <button onClick={handleSaveRecipe} style={{ background: '#00e5ff', color: '#040915', border: 'none', padding: '15px', borderRadius: '4px', fontWeight: 'bold', fontSize: '14px', cursor: 'pointer', marginTop: 'auto' }}>
-                                 {tab === 'enhance' ? '💾 SAVE ENHANCEMENT' : '💾 SAVE RECIPE'}
-                             </button>
+                          <div style={{ marginTop: '16px', borderTop: '1px solid #2a3a5a', paddingTop: '14px' }}>
+                              <div className="simulator-title" style={{ fontSize: '10px', color: '#aaa', marginBottom: '8px', letterSpacing: '0.5px' }}>PILIH KATEGORI BARANG</div>
+                              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                                  {[
+                                      { val: 'materials', label: tab === 'enhance' ? '🔮 Enhance Materials' : '🔮 Crafting Materials' },
+                                      { val: 'gears_all', label: '⚔️ All Gears (Weapons/Shields)' },
+                                      { val: 'gears_arctron', label: '❄️ Arctron Weapons & Armor' },
+                                      { val: 'gears_bionex', label: '⚙️ Bionex Weapons & Armor' },
+                                      { val: 'gears_celestra', label: '🌀 Celestra Weapons & Armor' },
+                                      { val: 'accessories', label: '💍 Accessories & Shields' }
+                                  ].map(cat => (
+                                      <button key={cat.val} onClick={() => {
+                                          setCraftCategory(cat.val);
+                                          setPage(0);
+                                          setCraftSubTab(cat.val === 'materials' ? (tab === 'enhance' ? 'All' : 'Shards') : 'All');
+                                      }} style={{
+                                          background: craftCategory === cat.val ? 'linear-gradient(90deg, #18283c, #101c2c)' : '#0a0e16',
+                                          border: craftCategory === cat.val ? '1px solid #00e5ff' : '1px solid #223',
+                                          color: craftCategory === cat.val ? '#fff' : '#bbb',
+                                          padding: '8px 10px',
+                                          borderRadius: '4px',
+                                          textAlign: 'left',
+                                          cursor: 'pointer',
+                                          fontSize: '12px',
+                                          fontWeight: craftCategory === cat.val ? 'bold' : 'normal',
+                                          transition: 'all 0.2s',
+                                          display: 'flex',
+                                          alignItems: 'center',
+                                          justifyContent: 'space-between'
+                                      }}>
+                                          <span>{cat.label}</span>
+                                          {craftCategory === cat.val && <span style={{ color: '#00e5ff', fontSize: '10px' }}>●</span>}
+                                      </button>
+                                  ))}
+                              </div>
                           </div>
                       </div>
                   </div>
-               </div>
 
+                  {/* GRID 2: MATERIALS & GEARS DATABASE PICKER */}
+                  <div className="simulator-col-2">
+                      <div style={{ border: '1px solid #2a3a5a', background: '#121622', borderRadius: '6px', display: 'flex', flexDirection: 'column', height: '100%' }}>
+                          <div style={{ padding: '12px', display: 'flex', alignItems: 'center', gap: '12px', borderBottom: '1px solid #2a3a5a', background: '#181e2e' }}>
+                              <img src="/assets/celestra_specialist_portrait.png" style={{ width: '32px', height: '32px', objectFit: 'cover', borderRadius: '4px', border: '1px solid #00e5ff' }} />
+                              <div>
+                                  <div className="simulator-title" style={{ color: '#fff', fontSize: '14px', fontWeight: 'bold' }}>{tab === 'enhance' ? 'Database Enhance Editor' : 'Database Craft Editor'}</div>
+                                  <div style={{ color: '#aaa', fontSize: '11px' }}>{tab === 'enhance' ? 'Pilih bahan & equipment yang akan di-enhance.' : 'Pilih bahan crafting & resep equipment.'}</div>
+                              </div>
+                          </div>
+                          <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1 }}>
+                              <div style={{ width: '100%', background: '#0a0e16', border: '1px solid #2a3a5a', borderRadius: '6px', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                                  <div style={{ textAlign: 'center', padding: '10px', borderBottom: '1px solid #2a3a5a', display: 'flex', justifyContent: 'center', gap: '10px', alignItems: 'center' }}>
+                                      <span style={{ fontSize: '12px', color: '#00e5ff', fontWeight: 'bold' }}>Active Category:</span>
+                                      <select value={craftCategory} onChange={e => {
+                                          setCraftCategory(e.target.value);
+                                          setPage(0);
+                                          setCraftSubTab(e.target.value === 'materials' ? (tab === 'enhance' ? 'All' : 'Shards') : 'All');
+                                      }} style={{ background: '#181e2e', border: '1px solid #00e5ff', color: '#fff', padding: '6px 12px', borderRadius: '4px', outline: 'none', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold' }}>
+                                          <option value="materials">{tab === 'enhance' ? '🔮 Enhance Materials' : '🔮 Crafting Materials'}</option>
+                                          <option value="gears_all">{tab === 'enhance' ? '⚔️ All Gears (Weapons/Shields/Armor)' : '⚔️ All Gears (Weapons/Shields/Armor)'}</option>
+                                          <option value="gears_arctron">{tab === 'enhance' ? '❄️ Arctron Weapons & Armor' : '❄️ Arctron Weapons & Armor'}</option>
+                                          <option value="gears_bionex">{tab === 'enhance' ? '⚙️ Bionex Weapons & Armor' : '⚙️ Bionex Weapons & Armor'}</option>
+                                          <option value="gears_celestra">{tab === 'enhance' ? '🌀 Celestra Weapons & Armor' : '🌀 Celestra Weapons & Armor'}</option>
+                                          <option value="accessories">{tab === 'enhance' ? '💍 Accessories & Shields' : '💍 Accessories & Shields'}</option>
+                                      </select>
+                                  </div>
+                                  {craftCategory === 'materials' && tab === 'crafting' && (
+                                    <div style={{ display: 'flex', borderBottom: '1px solid #2a3a5a', background: '#10141e' }}>
+                                        {['Shards', 'Ores', 'Cores', 'Mats', 'Misc'].map(cst => (
+                                            <div key={cst} onClick={() => {setCraftSubTab(cst); setPage(0)}} className="simulator-title" style={{ flex: 1, textAlign: 'center', padding: '8px 0', fontSize: '11px', cursor: 'pointer', color: craftSubTab === cst ? '#00e5ff' : '#888', borderBottom: craftSubTab === cst ? '2px solid #00e5ff' : '2px solid transparent', background: craftSubTab === cst ? 'rgba(0, 229, 255, 0.08)' : 'transparent' }}>{cst}</div>
+                                        ))}
+                                    </div>
+                                  )}
+                                  {craftCategory === 'materials' && tab === 'enhance' && (
+                                    <div style={{ display: 'flex', borderBottom: '1px solid #2a3a5a', background: '#10141e' }}>
+                                        {['All', 'Arcanites', 'Specials'].map(cst => (
+                                            <div key={cst} onClick={() => {setCraftSubTab(cst); setPage(0)}} className="simulator-title" style={{ flex: 1, textAlign: 'center', padding: '8px 0', fontSize: '11px', cursor: 'pointer', color: craftSubTab === cst ? '#00e5ff' : '#888', borderBottom: craftSubTab === cst ? '2px solid #00e5ff' : '2px solid transparent', background: craftSubTab === cst ? 'rgba(0, 229, 255, 0.08)' : 'transparent' }}>{cst}</div>
+                                        ))}
+                                    </div>
+                                  )}
+                                  {(craftCategory.startsWith('gears_') || craftCategory === 'gears_all') && (
+                                    <div style={{ display: 'flex', flexWrap: 'wrap', borderBottom: '1px solid #2a3a5a', background: '#10141e' }}>
+                                        {['All', 'Weapons', 'Shields', 'Helmet', 'Armor', 'Pants', 'Gloves', 'Boots'].map(cst => (
+                                            <div key={cst} onClick={() => {setCraftSubTab(cst); setPage(0)}} className="simulator-title" style={{ flex: '1 1 24%', textAlign: 'center', padding: '7px 0', fontSize: '11px', cursor: 'pointer', color: craftSubTab === cst ? '#00e5ff' : '#888', borderBottom: craftSubTab === cst ? '2px solid #00e5ff' : '2px solid transparent', background: craftSubTab === cst ? 'rgba(0, 229, 255, 0.08)' : 'transparent' }}>{cst}</div>
+                                        ))}
+                                    </div>
+                                  )}
+                                  {craftCategory === 'accessories' && (
+                                    <div style={{ display: 'flex', borderBottom: '1px solid #2a3a5a', background: '#10141e' }}>
+                                        {['All', 'Amulet', 'Ring'].map(cst => (
+                                            <div key={cst} onClick={() => {setCraftSubTab(cst); setPage(0)}} className="simulator-title" style={{ flex: 1, textAlign: 'center', padding: '8px 0', fontSize: '11px', cursor: 'pointer', color: craftSubTab === cst ? '#00e5ff' : '#888', borderBottom: craftSubTab === cst ? '2px solid #00e5ff' : '2px solid transparent', background: craftSubTab === cst ? 'rgba(0, 229, 255, 0.08)' : 'transparent' }}>{cst}</div>
+                                        ))}
+                                    </div>
+                                  )}
+                                  <div style={{ padding: '16px', display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '12px', minHeight: '260px', alignContent: 'start' }}>
+                                      {paginatedData.map((item, idx) => (
+                                          <div key={idx} onClick={() => {
+                                             if (activeSlotIndex !== null) {
+                                                 const newSlots = [...recipeSlots];
+                                                 newSlots[activeSlotIndex] = item;
+                                                 setRecipeSlots(newSlots);
+                                                 setActiveSlotIndex(null); 
+                                             } else {
+                                                 setTargetItem(item);
+                                             }
+                                          }} style={{ 
+                                              aspectRatio: '1/1', 
+                                              background: 'radial-gradient(circle at center, #18283c 0%, #0a0e16 100%)', 
+                                              border: '1px solid rgba(0, 229, 255, 0.45)', 
+                                              borderRadius: '8px',
+                                              boxShadow: '0 0 10px rgba(0, 229, 255, 0.15), inset 0 0 12px rgba(0, 229, 255, 0.18)',
+                                              display: 'flex', 
+                                              alignItems: 'center', 
+                                              justifyContent: 'center', 
+                                              cursor: 'pointer',
+                                              padding: '4px',
+                                              position: 'relative',
+                                              transition: 'all 0.2s ease'
+                                          }} title={item.name || item.id}>
+                                              {item._imagePreview && <img src={item._imagePreview} style={{ width: '95%', height: '95%', objectFit: 'contain', filter: 'drop-shadow(0 0 7px rgba(255, 255, 255, 0.85)) brightness(1.35) contrast(1.2)' }} />}
+                                          </div>
+                                      ))}
+                                      {Array.from({length: Math.max(0, 20 - paginatedData.length)}).map((_, i) => (
+                                          <div key={`empty-${i}`} style={{ aspectRatio: '1/1', border: '1px dashed #1e2a3a', borderRadius: '8px', background: 'rgba(0,0,0,0.3)' }}></div>
+                                      ))}
+                                  </div>
+                                  <div style={{ display: 'flex', padding: '12px', borderTop: '1px solid #2a3a5a', background: '#10141e', color: '#aaa', fontSize: '12px', marginTop: 'auto' }}>
+                                      <button disabled={page === 0} onClick={() => setPage(p => p - 1)} className="simulator-title" style={{ background: 'none', border: 'none', color: page === 0 ? '#444' : '#00e5ff', cursor: page === 0 ? 'default' : 'pointer', fontWeight: 'bold' }}>◄ Back</button>
+                                      <div className="simulator-mono" style={{ flex: 1, textAlign: 'center', color: '#fff' }}>{page + 1} / {totalPages || 1}</div>
+                                      <button disabled={page >= totalPages - 1} onClick={() => setPage(p => p + 1)} className="simulator-title" style={{ background: 'none', border: 'none', color: page >= totalPages - 1 ? '#444' : '#00e5ff', cursor: page >= totalPages - 1 ? 'default' : 'pointer', fontWeight: 'bold' }}>Next ►</button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  {/* GRID 3: ENHANCEMENT / RECIPE EDITOR */}
+                  <div className="simulator-col-3">
+                      <div style={{ border: '1px solid #2a3a5a', background: '#121622', borderRadius: '6px', height: '100%', display: 'flex', flexDirection: 'column' }}>
+                          <div className="simulator-title" style={{ padding: '12px', borderBottom: '1px solid #2a3a5a', background: '#181e2e', color: '#fff', fontSize: '14px', fontWeight: 'bold' }}>{tab === 'enhance' ? 'Enhancement Editor' : 'Recipe Editor'}</div>
+                          <div style={{ padding: '16px', flex: 1, display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                              
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '14px', background: 'radial-gradient(circle at center, #1a2a40 0%, #0a0e16 100%)', border: '1px solid rgba(0, 229, 255, 0.45)', padding: '14px', borderRadius: '8px', boxShadow: '0 0 15px rgba(0, 229, 255, 0.1)' }}>
+                                  <div onClick={() => setTargetItem(null)} style={{ width: '52px', height: '52px', border: '1px solid rgba(0, 229, 255, 0.6)', background: '#0a101a', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', padding: '3px' }}>
+                                      {targetItem ? (targetItem._imagePreview ? <img src={targetItem._imagePreview} style={{ width: '95%', height: '95%', objectFit: 'contain', filter: 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.85)) brightness(1.35)' }} /> : 'X') : <span style={{color: '#444', fontSize: '20px'}}>?</span>}
+                                  </div>
+                                  <div style={{ flex: 1 }}>
+                                      <div className="simulator-title" style={{ fontSize: '10px', color: '#00e5ff', textTransform: 'uppercase', fontWeight: 'bold' }}>{tab === 'enhance' ? 'Target Item (To Enhance)' : 'Target Item (Hasil)'}</div>
+                                      <div style={{ color: '#fff', fontSize: '15px', fontWeight: 'bold', marginTop: '3px' }}>{targetItem ? targetItem.name || targetItem.id : 'Pilih dari Database'}</div>
+                                  </div>
+                              </div>
+
+                              <div>
+                                  <div className="simulator-title" style={{ fontSize: '10px', color: '#00e5ff', marginBottom: '8px', textTransform: 'uppercase', fontWeight: 'bold' }}>Required Materials</div>
+                                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                                      {recipeSlots.slice(0, tab === 'enhance' ? 3 : 5).map((slot, idx) => (
+                                          <div key={idx} onClick={() => setActiveSlotIndex(idx === activeSlotIndex ? null : idx)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: activeSlotIndex === idx ? 'radial-gradient(circle, #244368 0%, #162840 100%)' : 'radial-gradient(circle, #182436 0%, #0c121e 100%)', border: activeSlotIndex === idx ? '1px solid #00ff88' : '1px solid rgba(0, 229, 255, 0.35)', padding: '10px', borderRadius: '6px', cursor: 'pointer', minHeight: '66px', boxShadow: activeSlotIndex === idx ? '0 0 10px rgba(0, 255, 136, 0.2)' : 'none' }}>
+                                             {slot ? (
+                                                 <>
+                                                   {slot._imagePreview && <img src={slot._imagePreview} style={{ width: '38px', height: '38px', objectFit: 'contain', marginBottom: '6px', filter: 'drop-shadow(0 0 5px rgba(255, 255, 255, 0.85)) brightness(1.3)' }} />}
+                                                   <div style={{ color: '#fff', fontSize: '11px', textAlign: 'center', fontWeight: 'bold' }}>{slot.name || slot.id}</div>
+                                                 </>
+                                             ) : (
+                                                 <>
+                                                   <div style={{ color: activeSlotIndex === idx ? '#00e5ff' : '#444', fontSize: '20px', marginBottom: '2px' }}>+</div>
+                                                   <div style={{ color: '#888', fontSize: '11px' }}>Slot {idx + 1}</div>
+                                                 </>
+                                             )}
+                                          </div>
+                                      ))}
+                                  </div>
+                              </div>
+
+                              <div>
+                                  <div className="simulator-title" style={{ fontSize: '10px', color: '#aaa', marginBottom: '6px', textTransform: 'uppercase' }}>{tab === 'enhance' ? 'Enhancement Target Level' : 'Output Stats & Grade'}</div>
+                                  <div style={{ background: '#0c1018', border: '1px solid #2a3a5a', borderRadius: '6px', padding: '10px' }}>
+                                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                                          <span style={{ color: '#aaa', fontSize: '12px' }}>{tab === 'enhance' ? 'Target Level' : 'Item Grade'}</span>
+                                          <select value={outputGrade} onChange={e => setOutputGrade(e.target.value)} className="simulator-mono" style={{ background: '#121622', border: '1px solid #00e5ff', color: '#fff', padding: '4px 8px', fontSize: '12px', borderRadius: '4px' }}>
+                                              {tab === 'enhance' ? (
+                                                  <>
+                                                      <option value="+1">+1</option>
+                                                      <option value="+2">+2</option>
+                                                      <option value="+3">+3</option>
+                                                      <option value="+4">+4</option>
+                                                      <option value="+5">+5</option>
+                                                      <option value="+6">+6</option>
+                                                      <option value="+7">+7</option>
+                                                      <option value="+8">+8</option>
+                                                  </>
+                                              ) : (
+                                                  <>
+                                                      <option value="Normal">Normal</option>
+                                                      <option value="Rare A">Rare A</option>
+                                                      <option value="Rare B">Rare B</option>
+                                                      <option value="Rare C">Rare C</option>
+                                                      <option value="Rare D">Rare D</option>
+                                                      <option value="Relic">Relic</option>
+                                                      <option value="Hero">Hero</option>
+                                                  </>
+                                              )}
+                                          </select>
+                                      </div>
+                                      <div style={{ borderTop: '1px dashed #2a3a5a', paddingTop: '10px' }}>
+                                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                                              <span style={{ color: '#aaa', fontSize: '12px' }}>Bonus Stats</span>
+                                              <button onClick={() => setOutputStats([...outputStats, {stat: 'Max HP', val: ''}])} className="simulator-title" style={{ background: '#18283c', border: '1px solid #00e5ff', color: '#00e5ff', padding: '3px 8px', borderRadius: '4px', cursor: 'pointer', fontSize: '10px', fontWeight: 'bold' }}>+ Add Stat</button>
+                                          </div>
+                                          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                                              {outputStats.length === 0 && <div style={{ color: '#666', fontSize: '11px', fontStyle: 'italic' }}>No extra stats.</div>}
+                                              {outputStats.map((st, i) => (
+                                                  <div key={i} style={{ display: 'flex', gap: '5px' }}>
+                                                      <select value={st.stat} onChange={(e) => { const n = [...outputStats]; n[i].stat = e.target.value; setOutputStats(n); }} style={{ flex: 1, background: '#121622', border: '1px solid #2a3a5a', color: '#ccc', padding: '4px', fontSize: '11px', borderRadius: '4px' }}>
+                                                          <option value="Max HP">Max HP (%)</option>
+                                                          <option value="Max FP">Max FP (%)</option>
+                                                          <option value="ATK">Attack (%)</option>
+                                                          <option value="DEF">Defense (%)</option>
+                                                          <option value="Crit Rate">Crit Rate</option>
+                                                          <option value="Dodge">Dodge</option>
+                                                          <option value="Accuracy">Accuracy</option>
+                                                          <option value="Block">Block</option>
+                                                          <option value="Ignore Block">Ignore Block</option>
+                                                          <option value="All Resist">All Resist</option>
+                                                          <option value="Move Speed">Move Speed</option>
+                                                      </select>
+                                                      <input type="text" placeholder="Val (e.g. 15)" value={st.val} onChange={(e) => { const n = [...outputStats]; n[i].val = e.target.value; setOutputStats(n); }} className="simulator-mono" style={{ width: '60px', background: '#121622', border: '1px solid #2a3a5a', color: '#fff', padding: '4px', fontSize: '11px', borderRadius: '4px' }} />
+                                                      <button onClick={() => { const n = [...outputStats]; n.splice(i, 1); setOutputStats(n); }} style={{ background: '#311', border: '1px solid #522', color: '#f55', padding: '0 6px', borderRadius: '4px', cursor: 'pointer' }}>X</button>
+                                                  </div>
+                                              ))}
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+
+                              <div>
+                                  <div className="simulator-title" style={{ fontSize: '10px', color: '#aaa', marginBottom: '6px', textTransform: 'uppercase' }}>Set Peluang (%)</div>
+                                  <div style={{ background: '#0c1018', border: '1px solid #2a3a5a', borderRadius: '6px', overflow: 'hidden' }}>
+                                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 12px', borderBottom: '1px solid #2a3a5a' }}>
+                                          <div style={{ color: '#00e5ff', fontSize: '12px', fontWeight: 'bold' }}>Success Base</div>
+                                          <input type="number" value={chances.success} onChange={(e) => setChances(p => ({...p, success: e.target.value}))} className="simulator-mono" style={{ background: '#121622', border: '1px solid #00e5ff', color: '#fff', width: '56px', textAlign: 'right', padding: '4px', borderRadius: '4px' }} />
+                                      </div>
+                                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 12px', borderBottom: '1px solid #2a3a5a' }}>
+                                          <div style={{ color: '#aaa', fontSize: '12px' }}>Failure Destroy</div>
+                                          <input type="number" value={chances.destroy} onChange={(e) => setChances(p => ({...p, destroy: e.target.value}))} className="simulator-mono" style={{ background: '#121622', border: '1px solid #2a3a5a', color: '#fff', width: '56px', textAlign: 'right', padding: '4px', borderRadius: '4px' }} />
+                                      </div>
+                                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 12px', borderBottom: '1px solid #2a3a5a' }}>
+                                          <div style={{ color: '#aaa', fontSize: '12px' }}>Great Success</div>
+                                          <input type="number" value={chances.great} onChange={(e) => setChances(p => ({...p, great: e.target.value}))} className="simulator-mono" style={{ background: '#121622', border: '1px solid #2a3a5a', color: '#fff', width: '56px', textAlign: 'right', padding: '4px', borderRadius: '4px' }} />
+                                      </div>
+                                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 12px' }}>
+                                          <div style={{ color: '#aaa', fontSize: '12px' }}>Bonus Roll</div>
+                                          <input type="number" value={chances.bonus} onChange={(e) => setChances(p => ({...p, bonus: e.target.value}))} className="simulator-mono" style={{ background: '#121622', border: '1px solid #2a3a5a', color: '#fff', width: '56px', textAlign: 'right', padding: '4px', borderRadius: '4px' }} />
+                                      </div>
+                                  </div>
+                              </div>
+
+                              <button onClick={handleSaveRecipe} className="simulator-title" style={{ background: 'linear-gradient(90deg, #00e5ff, #00b8cc)', color: '#040915', border: 'none', padding: '14px', borderRadius: '6px', fontWeight: 'bold', fontSize: '13px', cursor: 'pointer', marginTop: 'auto', boxShadow: '0 0 15px rgba(0, 229, 255, 0.4)', transition: 'all 0.2s' }}>
+                                  {tab === 'enhance' ? '💾 SAVE ENHANCEMENT' : '💾 SAVE RECIPE'}
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+
+                  {/* GRID 4 (GRID AKHIR): LOG PENYIMPANAN & LIVE RECIPE DB */}
+                  <div className="simulator-col-4">
+                      <div style={{ border: '1px solid #2a3a5a', background: '#121622', borderRadius: '6px', height: '100%', display: 'flex', flexDirection: 'column' }}>
+                          <div className="simulator-title" style={{ padding: '12px', borderBottom: '1px solid #2a3a5a', background: '#181e2e', color: '#fff', fontSize: '13px', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                              <span>📝 LOGS & RESEP DB</span>
+                          </div>
+                          <div style={{ padding: '14px', display: 'flex', flexDirection: 'column', flex: 1, gap: '14px', overflowHidden: true }}>
+                              
+                              <div>
+                                  <div className="simulator-title" style={{ fontSize: '10px', color: '#00ff88', marginBottom: '6px', letterSpacing: '0.5px' }}>⚡ LOG PENYIMPANAN SESI INI</div>
+                                  <div className="no-scrollbar" style={{ background: '#0a0e16', border: '1px solid #1a2c3a', borderRadius: '4px', padding: '10px', maxHeight: '160px', overflowY: 'auto' }}>
+                                      {recipeLogs.length === 0 ? (
+                                          <div style={{ color: '#666', fontSize: '11px', fontStyle: 'italic' }}>Belum ada aktivitas penyimpanan di sesi ini.</div>
+                                      ) : (
+                                          recipeLogs.map((log, idx) => (
+                                              <div key={idx} style={{ marginBottom: '6px', color: '#00ff88', fontSize: '11px', borderBottom: idx < recipeLogs.length - 1 ? '1px dashed #142a22' : 'none', paddingBottom: '4px' }}>{log}</div>
+                                          ))
+                                      )}
+                                  </div>
+                              </div>
+
+                              <div style={{ borderTop: '1px solid #2a3a5a', paddingTop: '12px', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                                  <div className="simulator-title" style={{ fontSize: '10px', color: '#00e5ff', marginBottom: '8px', letterSpacing: '0.5px', display: 'flex', justifyContent: 'space-between' }}>
+                                      <span>📁 TERDAFTAR DI LIVE DB</span>
+                                      <span>({allData.recipes?.filter(r => tab === 'enhance' ? (r.category === 'enhance' || r.isEnhancement) : (r.category !== 'enhance' && !r.isEnhancement)).length || 0})</span>
+                                  </div>
+                                  <div className="no-scrollbar" style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '8px', maxHeight: '340px' }}>
+                                      {(!allData.recipes || allData.recipes.filter(r => tab === 'enhance' ? (r.category === 'enhance' || r.isEnhancement) : (r.category !== 'enhance' && !r.isEnhancement)).length === 0) ? (
+                                          <div style={{ background: '#0a0e16', border: '1px solid #1e2a3a', borderRadius: '4px', padding: '12px', textAlign: 'center', color: '#666', fontSize: '11px' }}>Belum ada resep tersimpan untuk kategori ini di Database.</div>
+                                      ) : (
+                                          allData.recipes
+                                            .filter(r => tab === 'enhance' ? (r.category === 'enhance' || r.isEnhancement) : (r.category !== 'enhance' && !r.isEnhancement))
+                                            .map((rec, i) => (
+                                                <div key={rec.id || i} style={{ background: '#0a0e16', border: '1px solid #1e2a3a', borderRadius: '6px', padding: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', transition: 'all 0.2s' }}>
+                                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', flex: 1 }}>
+                                                        <div style={{ color: '#fff', fontSize: '12px', fontWeight: 'bold' }}>{rec.targetItem?.name || rec.targetItem?.id || rec.name || `Recipe #${i+1}`}</div>
+                                                        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                                                            <span className="simulator-mono" style={{ background: 'rgba(0, 229, 255, 0.15)', color: '#00e5ff', padding: '1px 5px', borderRadius: '3px', fontSize: '10px' }}>{rec.outputGrade || '+1'}</span>
+                                                            <span className="simulator-mono" style={{ color: '#aaa', fontSize: '10px' }}>Succ: {rec.chances?.success || 65}%</span>
+                                                        </div>
+                                                    </div>
+                                                    <button onClick={async (e) => {
+                                                        e.stopPropagation();
+                                                        if (window.confirm(`Hapus resep "${rec.targetItem?.name || rec.targetItem?.id || rec.id}" dari Live Database?`)) {
+                                                            try {
+                                                                await fetch('/api/audit/delete_recipe', {
+                                                                    method: 'POST',
+                                                                    headers: { 'Content-Type': 'application/json' },
+                                                                    body: JSON.stringify({ id: rec.id })
+                                                                });
+                                                                fetchData();
+                                                            } catch (err) { console.error(err); }
+                                                        }
+                                                    }} style={{ background: '#2a1118', border: '1px solid #5a2230', color: '#ff5566', borderRadius: '4px', cursor: 'pointer', padding: '5px 8px', fontSize: '11px', transition: 'all 0.2s' }} title="Hapus Resep">🗑️</button>
+                                                </div>
+                                            ))
+                                      )}
+                                  </div>
+                              </div>
+
+                          </div>
+                      </div>
+                  </div>
+              </div>
 ) : tab === 'drafts' ? (
                <div style={{ padding: 20 }}>
                  <h3 style={{ color: '#00e5ff', marginTop: 0 }}>📋 Draft & Staging Review ({allData.drafts?.length || 0} usulan)</h3>
