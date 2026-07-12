@@ -201,7 +201,7 @@ export default function AuditorRoom() {
                      isSpecial = true;
                  } else if (idStr.includes('_mar_') || idStr.includes('_eng_')) {
                      isGun = true;
-                 } else if (idStr.includes('_psi_') || idStr.includes('_ora_') || idStr.includes('_arc_')) {
+                 } else if (idStr.includes('_psi_') || idStr.includes('_ora_') || idStr.includes('_cor_arc_')) {
                      isStaff = true;
                  } else if (idStr.includes('_pat_')) {
                      isBow = true;
