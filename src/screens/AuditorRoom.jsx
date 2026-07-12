@@ -262,8 +262,28 @@ export default function AuditorRoom() {
                 }
                 preview = genericPath;
              } else if (category === 'gears_accessories') {
-               if (idStr.includes('rng') || idStr.includes('ring')) preview = `/assets/arctron/rings/rng_arc_0.png`;
-               else preview = `/assets/arctron/amulets/amu_arc_0.png`;
+                let race = 'all';
+                if (idStr.includes('_arc_') || idStr.includes('arctron')) race = 'arctron';
+                else if (idStr.includes('_bio_') || idStr.includes('bionex')) race = 'bionex';
+                else if (idStr.includes('_cor_') || idStr.includes('_cel_') || idStr.includes('celestra') || idStr.includes('cora')) race = 'celestra';
+                
+                let level = '0';
+                const lastChar = idStr.substring(idStr.length - 1);
+                if (['0','1','2','3','4'].includes(lastChar)) {
+                    level = lastChar;
+                }
+                
+                if (idStr.includes('rng') || idStr.includes('ring')) {
+                    if (race === 'all') genericPath = `/assets/accessories/rings/rng_all_${level}.png`;
+                    else if (race === 'bionex') genericPath = `/assets/bionex/rings/rng_bio_${level}.png`;
+                    else if (race === 'celestra') genericPath = `/assets/celestra/rings/rng_cor_${level}.png`;
+                    else genericPath = `/assets/arctron/rings/rng_arc_${level}.png`;
+                } else {
+                    if (race === 'all') genericPath = `/assets/accessories/amulets/amu_all_${level}.png`;
+                    else if (race === 'celestra') genericPath = `/assets/celestra/amulets/amu_cor_${level}.png`;
+                    else genericPath = `/assets/arctron/amulets/amu_arc_${level}.png`;
+                }
+                preview = genericPath;
              } else {
                preview = `/assets/${item.id}.png`;
              }
