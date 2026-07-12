@@ -297,19 +297,14 @@ export default function AuditorRoom() {
         if (craftSubTab === 'Misc') return base.filter(i => !i.name.toLowerCase().includes('shard') && !((i.name && i.name.toLowerCase().includes('ore')) && !i.name.toLowerCase().includes('core') && !i.name.toLowerCase().includes('spore')) && !i.name.toLowerCase().includes('core') && !i.id.toLowerCase().includes('mat_'))
         return base
       } else {
-        if (craftCategory === 'gears_all') {
-          base = [
-            ...(allData.gears?.arctron || []),
-            ...(allData.gears?.bionex || []),
-            ...(allData.gears?.celestra || [])
-          ];
-        } else if (craftCategory === 'gears_arctron') base = allData.gears?.arctron || [];
-        else if (craftCategory === 'gears_bionex') base = allData.gears?.bionex || [];
-        else if (craftCategory === 'gears_celestra') base = allData.gears?.celestra || [];
-        else if (craftCategory === 'accessories') base = allData.gears?.accessories || [];
-        
+        let allGears = [
+          ...(allData.gears?.arctron || []),
+          ...(allData.gears?.bionex || []),
+          ...(allData.gears?.celestra || [])
+        ];
+
         if (craftRaceFilter !== 'all') {
-           base = base.filter(i => {
+           allGears = allGears.filter(i => {
               const r = (i.faction || i.race || i._providerCat || '').toLowerCase();
               if (r.includes(craftRaceFilter)) return true;
               const idStr = (i.id || '').toLowerCase();
@@ -320,17 +315,37 @@ export default function AuditorRoom() {
            });
         }
 
-        if (craftSubTab && craftSubTab !== 'All') {
-           const sLower = craftSubTab.toLowerCase();
-           base = base.filter(i => {
-              if (sLower === 'weapons' || sLower === 'weapon') return (i.type && i.type.toLowerCase().includes('weapon')) || (i.id && (i.id.startsWith('wpn_') || i.id.startsWith('gw_') || i.id.includes('weapon')));
-              if (sLower === 'shields' || sLower === 'shield') return (i.type && i.type.toLowerCase().includes('shield')) || (i.id && (i.id.startsWith('shd_') || i.id.includes('shield')));
-              if (sLower === 'amulet') return i.type && i.type.toLowerCase().includes('amulet');
-              if (sLower === 'ring') return i.type && i.type.toLowerCase().includes('ring');
-              return i.type && i.type.toLowerCase().includes(sLower);
-           });
+        if (craftCategory === 'weapons' || craftCategory === 'weapon') {
+           return allGears.filter(i => (i.type && i.type.toLowerCase().includes('weapon')) || (i.id && (i.id.startsWith('wpn_') || i.id.startsWith('gw_') || i.id.includes('weapon'))));
         }
-        return base;
+        if (craftCategory === 'shields' || craftCategory === 'shield') {
+           const allShieldsAndAcc = [ ...allGears, ...(allData.gears?.accessories || []) ].filter(i => {
+              if (craftRaceFilter === 'all') return true;
+              const r = (i.faction || i.race || i._providerCat || '').toLowerCase();
+              if (r.includes(craftRaceFilter)) return true;
+              const idStr = (i.id || '').toLowerCase();
+              return idStr.includes(craftRaceFilter);
+           });
+           return allShieldsAndAcc.filter(i => (i.type && i.type.toLowerCase().includes('shield')) || (i.id && (i.id.startsWith('shd_') || i.id.includes('shield'))));
+        }
+        if (craftCategory === 'accessories' || craftCategory === 'accessory') {
+           let accs = allData.gears?.accessories || [];
+           if (craftRaceFilter !== 'all') {
+              accs = accs.filter(i => {
+                 const r = (i.faction || i.race || i._providerCat || '').toLowerCase();
+                 if (r.includes(craftRaceFilter)) return true;
+                 const idStr = (i.id || '').toLowerCase();
+                 return idStr.includes(craftRaceFilter);
+              });
+           }
+           if (craftSubTab === 'Amulet') return accs.filter(i => i.type && i.type.toLowerCase().includes('amulet'));
+           if (craftSubTab === 'Ring') return accs.filter(i => i.type && i.type.toLowerCase().includes('ring'));
+           return accs;
+        }
+        if (['helmet', 'armor', 'pants', 'gloves', 'boots'].includes(craftCategory)) {
+           return allGears.filter(i => i.type && i.type.toLowerCase().includes(craftCategory));
+        }
+        return allGears;
       }
     }
     return allData[tab] || []
@@ -715,11 +730,14 @@ export default function AuditorRoom() {
                               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                                   {[
                                       { val: 'materials', label: tab === 'enhance' ? '🔮 Enhance Materials' : '🔮 Crafting Materials' },
-                                      { val: 'gears_all', label: '⚔️ All Gears (Weapons/Shields)' },
-                                      { val: 'gears_arctron', label: '❄️ Arctron Weapons & Armor' },
-                                      { val: 'gears_bionex', label: '⚙️ Bionex Weapons & Armor' },
-                                      { val: 'gears_celestra', label: '🌀 Celestra Weapons & Armor' },
-                                      { val: 'accessories', label: '💍 Accessories & Shields' }
+                                      { val: 'weapons', label: '⚔️ Weapons (Senjata)' },
+                                      { val: 'shields', label: '🛡️ Shields (Tameng)' },
+                                      { val: 'helmet', label: '🪖 Helmet (Helm)' },
+                                      { val: 'armor', label: '🦺 Armor (Baju Besi)' },
+                                      { val: 'pants', label: '👖 Pants (Celana)' },
+                                      { val: 'gloves', label: '🧤 Gloves (Sarung)' },
+                                      { val: 'boots', label: '👢 Boots (Sepatu)' },
+                                      { val: 'accessories', label: '💍 Accessories' }
                                   ].map(cat => (
                                       <button key={cat.val} onClick={() => {
                                           setCraftCategory(cat.val);
@@ -761,21 +779,6 @@ export default function AuditorRoom() {
                           </div>
                           <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1 }}>
                               <div style={{ width: '100%', background: '#0a0e16', border: '1px solid #2a3a5a', borderRadius: '6px', display: 'flex', flexDirection: 'column', flex: 1 }}>
-                                  <div style={{ textAlign: 'center', padding: '10px', borderBottom: '1px solid #2a3a5a', display: 'flex', justifyContent: 'center', gap: '10px', alignItems: 'center' }}>
-                                      <span style={{ fontSize: '12px', color: '#00e5ff', fontWeight: 'bold' }}>Active Category:</span>
-                                      <select value={craftCategory} onChange={e => {
-                                          setCraftCategory(e.target.value);
-                                          setPage(0);
-                                          setCraftSubTab(e.target.value === 'materials' ? (tab === 'enhance' ? 'All' : 'Shards') : 'All');
-                                      }} style={{ background: '#181e2e', border: '1px solid #00e5ff', color: '#fff', padding: '6px 12px', borderRadius: '4px', outline: 'none', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold' }}>
-                                          <option value="materials">{tab === 'enhance' ? '🔮 Enhance Materials' : '🔮 Crafting Materials'}</option>
-                                          <option value="gears_all">{tab === 'enhance' ? '⚔️ All Gears (Weapons/Shields/Armor)' : '⚔️ All Gears (Weapons/Shields/Armor)'}</option>
-                                          <option value="gears_arctron">{tab === 'enhance' ? '❄️ Arctron Weapons & Armor' : '❄️ Arctron Weapons & Armor'}</option>
-                                          <option value="gears_bionex">{tab === 'enhance' ? '⚙️ Bionex Weapons & Armor' : '⚙️ Bionex Weapons & Armor'}</option>
-                                          <option value="gears_celestra">{tab === 'enhance' ? '🌀 Celestra Weapons & Armor' : '🌀 Celestra Weapons & Armor'}</option>
-                                          <option value="accessories">{tab === 'enhance' ? '💍 Accessories & Shields' : '💍 Accessories & Shields'}</option>
-                                      </select>
-                                  </div>
                                   {craftCategory === 'materials' && tab === 'crafting' && (
                                     <div style={{ display: 'flex', borderBottom: '1px solid #2a3a5a', background: '#10141e' }}>
                                         {['Shards', 'Ores', 'Cores', 'Mats', 'Misc'].map(cst => (
@@ -790,13 +793,6 @@ export default function AuditorRoom() {
                                         ))}
                                     </div>
                                   )}
-                                  {(craftCategory.startsWith('gears_') || craftCategory === 'gears_all') && (
-                                    <div style={{ display: 'flex', flexWrap: 'wrap', borderBottom: '1px solid #2a3a5a', background: '#10141e' }}>
-                                        {['All', 'Weapons', 'Shields', 'Helmet', 'Armor', 'Pants', 'Gloves', 'Boots'].map(cst => (
-                                            <div key={cst} onClick={() => {setCraftSubTab(cst); setPage(0)}} className="simulator-title" style={{ flex: '1 1 24%', textAlign: 'center', padding: '7px 0', fontSize: '11px', cursor: 'pointer', color: craftSubTab === cst ? '#00e5ff' : '#888', borderBottom: craftSubTab === cst ? '2px solid #00e5ff' : '2px solid transparent', background: craftSubTab === cst ? 'rgba(0, 229, 255, 0.08)' : 'transparent' }}>{cst}</div>
-                                        ))}
-                                    </div>
-                                  )}
                                   {craftCategory === 'accessories' && (
                                     <div style={{ display: 'flex', borderBottom: '1px solid #2a3a5a', background: '#10141e' }}>
                                         {['All', 'Amulet', 'Ring'].map(cst => (
@@ -804,7 +800,7 @@ export default function AuditorRoom() {
                                         ))}
                                     </div>
                                   )}
-                                  <div style={{ padding: '16px', display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '12px', minHeight: '260px', alignContent: 'start' }}>
+                                  <div style={{ padding: '14px', display: 'grid', gridTemplateColumns: 'repeat(5, 56px)', gap: '10px', minHeight: '230px', alignContent: 'start', justifyContent: 'center' }}>
                                       {paginatedData.map((item, idx) => (
                                           <div key={idx} onClick={() => {
                                              if (activeSlotIndex !== null) {
@@ -816,24 +812,25 @@ export default function AuditorRoom() {
                                                  setTargetItem(item);
                                              }
                                           }} style={{ 
-                                              aspectRatio: '1/1', 
+                                              width: '56px',
+                                              height: '56px',
                                               background: 'radial-gradient(circle at center, #18283c 0%, #0a0e16 100%)', 
                                               border: '1px solid rgba(0, 229, 255, 0.45)', 
-                                              borderRadius: '8px',
-                                              boxShadow: '0 0 10px rgba(0, 229, 255, 0.15), inset 0 0 12px rgba(0, 229, 255, 0.18)',
+                                              borderRadius: '6px',
+                                              boxShadow: '0 0 8px rgba(0, 229, 255, 0.15), inset 0 0 10px rgba(0, 229, 255, 0.18)',
                                               display: 'flex', 
                                               alignItems: 'center', 
                                               justifyContent: 'center', 
                                               cursor: 'pointer',
-                                              padding: '4px',
+                                              padding: '3px',
                                               position: 'relative',
                                               transition: 'all 0.2s ease'
                                           }} title={item.name || item.id}>
-                                              {item._imagePreview && <img src={item._imagePreview} style={{ width: '95%', height: '95%', objectFit: 'contain', filter: 'drop-shadow(0 0 7px rgba(255, 255, 255, 0.85)) brightness(1.35) contrast(1.2)' }} />}
+                                              {item._imagePreview && <img src={item._imagePreview} style={{ width: '92%', height: '92%', objectFit: 'contain', filter: 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.85)) brightness(1.35) contrast(1.2)' }} />}
                                           </div>
                                       ))}
                                       {Array.from({length: Math.max(0, 20 - paginatedData.length)}).map((_, i) => (
-                                          <div key={`empty-${i}`} style={{ aspectRatio: '1/1', border: '1px dashed #1e2a3a', borderRadius: '8px', background: 'rgba(0,0,0,0.3)' }}></div>
+                                          <div key={`empty-${i}`} style={{ width: '56px', height: '56px', border: '1px dashed #1e2a3a', borderRadius: '6px', background: 'rgba(0,0,0,0.3)' }}></div>
                                       ))}
                                   </div>
                                   <div style={{ display: 'flex', padding: '12px', borderTop: '1px solid #2a3a5a', background: '#10141e', color: '#aaa', fontSize: '12px', marginTop: 'auto' }}>
@@ -864,18 +861,18 @@ export default function AuditorRoom() {
 
                               <div>
                                   <div className="simulator-title" style={{ fontSize: '10px', color: '#00e5ff', marginBottom: '8px', textTransform: 'uppercase', fontWeight: 'bold' }}>Required Materials</div>
-                                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
                                       {recipeSlots.slice(0, tab === 'enhance' ? 3 : 5).map((slot, idx) => (
-                                          <div key={idx} onClick={() => setActiveSlotIndex(idx === activeSlotIndex ? null : idx)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: activeSlotIndex === idx ? 'radial-gradient(circle, #244368 0%, #162840 100%)' : 'radial-gradient(circle, #182436 0%, #0c121e 100%)', border: activeSlotIndex === idx ? '1px solid #00ff88' : '1px solid rgba(0, 229, 255, 0.35)', padding: '10px', borderRadius: '6px', cursor: 'pointer', minHeight: '66px', boxShadow: activeSlotIndex === idx ? '0 0 10px rgba(0, 255, 136, 0.2)' : 'none' }}>
+                                          <div key={idx} onClick={() => setActiveSlotIndex(idx === activeSlotIndex ? null : idx)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: activeSlotIndex === idx ? 'radial-gradient(circle, #244368 0%, #162840 100%)' : 'radial-gradient(circle, #182436 0%, #0c121e 100%)', border: activeSlotIndex === idx ? '1px solid #00ff88' : '1px solid rgba(0, 229, 255, 0.35)', padding: '8px', borderRadius: '6px', cursor: 'pointer', minHeight: '58px', boxShadow: activeSlotIndex === idx ? '0 0 10px rgba(0, 255, 136, 0.2)' : 'none', gridColumn: (tab === 'crafting' && idx === 3) ? 'span 1' : undefined }}>
                                              {slot ? (
                                                  <>
-                                                   {slot._imagePreview && <img src={slot._imagePreview} style={{ width: '38px', height: '38px', objectFit: 'contain', marginBottom: '6px', filter: 'drop-shadow(0 0 5px rgba(255, 255, 255, 0.85)) brightness(1.3)' }} />}
-                                                   <div style={{ color: '#fff', fontSize: '11px', textAlign: 'center', fontWeight: 'bold' }}>{slot.name || slot.id}</div>
+                                                   {slot._imagePreview && <img src={slot._imagePreview} style={{ width: '34px', height: '34px', objectFit: 'contain', marginBottom: '4px', filter: 'drop-shadow(0 0 5px rgba(255, 255, 255, 0.85)) brightness(1.3)' }} />}
+                                                   <div style={{ color: '#fff', fontSize: '10px', textAlign: 'center', fontWeight: 'bold', lineHeight: '1.2' }}>{slot.name || slot.id}</div>
                                                  </>
                                              ) : (
                                                  <>
-                                                   <div style={{ color: activeSlotIndex === idx ? '#00e5ff' : '#444', fontSize: '20px', marginBottom: '2px' }}>+</div>
-                                                   <div style={{ color: '#888', fontSize: '11px' }}>Slot {idx + 1}</div>
+                                                   <div style={{ color: activeSlotIndex === idx ? '#00e5ff' : '#444', fontSize: '18px', marginBottom: '1px' }}>+</div>
+                                                   <div style={{ color: '#888', fontSize: '10px' }}>Slot {idx + 1}</div>
                                                  </>
                                              )}
                                           </div>

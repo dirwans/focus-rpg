@@ -2163,8 +2163,9 @@ body {
 }
 
 .simulator-col-2 {
-  flex: 3 1 400px;
-  min-width: 340px;
+  flex: 2 1 340px;
+  max-width: 380px;
+  min-width: 310px;
   order: 2;
 }
 
