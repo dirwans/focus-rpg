@@ -228,25 +228,30 @@ export default function AuditorRoom() {
                         genericPath = '/assets/arctron_shield_3_rembg.png';
                     }
                 } else if (idStr.includes('set_') || idStr.includes('arm_')) {
-                    // ARMORS
-                    let isRanger = idStr.includes('ran') || (item.type && item.type.toLowerCase().includes('ranger'));
-                    let isSpecialist = idStr.includes('spe') || idStr.includes('mys') || idStr.includes('psi') || idStr.includes('mage') || (item.type && (item.type.toLowerCase().includes('specialist') || item.type.toLowerCase().includes('mystic') || item.type.toLowerCase().includes('force')));
+                    // ARMORS — detect job class from ID patterns
+                    // Arctron: warrior(war), ranger(ran), technician(tec)
+                    // Bionex: guardian(gua), marksman(mar), engineer(eng), psion(psi)
+                    // Celestra: sentinel(sen), pathfinder(pat), oracle(ora), arcanist(arc in celestra context)
+                    let isRanger = idStr.includes('ran') || idStr.includes('mar') || idStr.includes('pat') || (item.type && (item.type.toLowerCase().includes('ranger') || item.type.toLowerCase().includes('marksman') || item.type.toLowerCase().includes('pathfinder')));
+                    let isSpecialist = idStr.includes('spe') || idStr.includes('mys') || idStr.includes('psi') || idStr.includes('mage') || idStr.includes('eng') || idStr.includes('ora') || (item.type && (item.type.toLowerCase().includes('specialist') || item.type.toLowerCase().includes('mystic') || item.type.toLowerCase().includes('force') || item.type.toLowerCase().includes('engineer') || item.type.toLowerCase().includes('oracle') || item.type.toLowerCase().includes('arcanist')));
                     
                     let folder = 'arctron_gears';
-                    let prefix = 'defarctron';
+                    let imgPrefix = 'defarctron';
                     let job = 'warrior';
                     
                     if (category === 'gears_arctron') {
                         folder = 'arctron_gears';
-                        prefix = 'defarctron';
+                        imgPrefix = 'defarctron';
                         job = isRanger ? 'ranger' : (isSpecialist ? 'technician' : 'warrior');
                     } else if (category === 'gears_bionex') {
                         folder = 'bionex_gears';
-                        prefix = 'defbionex';
-                        job = isRanger ? 'marksman' : (isSpecialist ? 'psion' : 'guardian');
+                        imgPrefix = 'defbionex';
+                        // Map: guardian=guardian, marksman=marksman, engineer→guardian(no engineer sprite), psion=psion
+                        job = isRanger ? 'marksman' : (isSpecialist ? (idStr.includes('psi') ? 'psion' : 'psion') : 'guardian');
                     } else if (category === 'gears_celestra') {
                         folder = 'celestra_gears';
-                        prefix = 'defcelestra';
+                        imgPrefix = 'defcelestra';
+                        // Map: sentinel→warrior, pathfinder→ranger, oracle→mage, arcanist→mage
                         job = isRanger ? 'ranger' : (isSpecialist ? 'mage' : 'warrior');
                     }
                     
@@ -258,7 +263,7 @@ export default function AuditorRoom() {
                         else if (tLower.includes('gloves')) piece = 'gloves';
                         else if (tLower.includes('boots')) piece = 'boots';
                     }
-                    genericPath = `/assets/${folder}/${prefix}${job}lv${level}${piece}.png`;
+                    genericPath = `/assets/${folder}/${imgPrefix}${job}lv${level}${piece}.png`;
                 } else {
                     genericPath = `/assets/arctron_gears/defarctronwarriorlv32armor.png`;
                 }
@@ -352,7 +357,7 @@ export default function AuditorRoom() {
           return arr
         }
 
-        const flattenGears = (obj, prefix = '') => {
+        const flattenGears = (obj, prefix = '', factionName = '') => {
           if (!obj) return []
           let arr = []
           if (Array.isArray(obj)) {
@@ -361,24 +366,23 @@ export default function AuditorRoom() {
                 const parts = set.parts || ['Helmet', 'Armor', 'Pants', 'Gloves', 'Boots'];
                 parts.forEach(part => {
                   const partLower = part.toLowerCase();
-                  const faction = prefix.split('_')[0];
                   arr.push({
                     id: `${set.id}_${partLower}`,
                     name: `${set.name.replace(' Set', '')} ${part}`,
                     grade: set.grade,
                     type: partLower,
                     stats: set.stats?.[part] || {},
-                    faction: faction,
+                    faction: factionName,
                     _isPiece: true
                   });
                 });
               });
               return arr;
             }
-            return obj.map(i => ({ ...i, type: prefix || 'gear' }))
+            return obj.map(i => ({ ...i, type: prefix || 'gear', faction: factionName }))
           } else if (typeof obj === 'object') {
             Object.keys(obj).forEach(k => {
-              arr.push(...flattenGears(obj[k], prefix ? prefix + '_' + k : k))
+              arr.push(...flattenGears(obj[k], prefix ? prefix + '_' + k : k, factionName))
             })
           }
           return arr
@@ -419,10 +423,10 @@ export default function AuditorRoom() {
           recipes: data.recipes || [],
           drafts: data.drafts || [],
           gears: {
-            arctron: formatRows(flattenGears(data.gears?.arctron), 'gears_arctron'),
-            bionex: formatRows(flattenGears(data.gears?.bionex), 'gears_bionex'),
-            celestra: formatRows(flattenGears(data.gears?.celestra), 'gears_celestra'),
-            accessories: formatRows(flattenGears(data.gears?.accessories), 'gears_accessories')
+            arctron: formatRows(flattenGears(data.gears?.arctron, '', 'arctron'), 'gears_arctron'),
+            bionex: formatRows(flattenGears(data.gears?.bionex, '', 'bionex'), 'gears_bionex'),
+            celestra: formatRows(flattenGears(data.gears?.celestra, '', 'celestra'), 'gears_celestra'),
+            accessories: formatRows(flattenGears(data.gears?.accessories, '', 'all'), 'gears_accessories')
           }
         })
       }
@@ -484,7 +488,7 @@ export default function AuditorRoom() {
               const idStr = (i.id || '').toLowerCase();
               if (craftRaceFilter === 'arctron' && (idStr.includes('_arc_') || idStr.includes('arctron'))) return true;
               if (craftRaceFilter === 'bionex' && (idStr.includes('_bio_') || idStr.includes('bionex'))) return true;
-              if (craftRaceFilter === 'celestra' && (idStr.includes('_cel_') || idStr.includes('celestra'))) return true;
+              if (craftRaceFilter === 'celestra' && (idStr.includes('_cel_') || idStr.includes('_cor_') || idStr.includes('celestra'))) return true;
               return false;
            });
         }
@@ -496,9 +500,11 @@ export default function AuditorRoom() {
            const allShieldsAndAcc = [ ...allGears, ...(allData.gears?.accessories || []) ].filter(i => {
               if (craftRaceFilter === 'all') return true;
               const r = (i.faction || i.race || i._providerCat || '').toLowerCase();
-              if (r.includes(craftRaceFilter)) return true;
               const idStr = (i.id || '').toLowerCase();
-              return idStr.includes(craftRaceFilter);
+              if (craftRaceFilter === 'arctron') return r.includes('arctron') || idStr.includes('_arc_') || idStr.includes('arctron');
+              if (craftRaceFilter === 'bionex') return r.includes('bionex') || idStr.includes('_bio_') || idStr.includes('bionex');
+              if (craftRaceFilter === 'celestra') return r.includes('celestra') || idStr.includes('_cel_') || idStr.includes('_cor_') || idStr.includes('celestra');
+              return false;
            });
            return allShieldsAndAcc.filter(i => (i.type && i.type.toLowerCase().includes('shield')) || (i.id && (i.id.startsWith('shd_') || i.id.includes('shield'))));
         }
@@ -509,7 +515,10 @@ export default function AuditorRoom() {
                  const r = (i.faction || i.race || i._providerCat || '').toLowerCase();
                  if (r.includes(craftRaceFilter)) return true;
                  const idStr = (i.id || '').toLowerCase();
-                 return idStr.includes(craftRaceFilter);
+                 if (craftRaceFilter === 'arctron' && (idStr.includes('_arc_') || idStr.includes('arctron'))) return true;
+                 if (craftRaceFilter === 'bionex' && (idStr.includes('_bio_') || idStr.includes('bionex'))) return true;
+                 if (craftRaceFilter === 'celestra' && (idStr.includes('_cel_') || idStr.includes('_cor_') || idStr.includes('celestra'))) return true;
+                 return false;
               });
            }
            if (craftSubTab === 'Amulet') return accs.filter(i => i.type && i.type.toLowerCase().includes('amulet'));
