@@ -153,182 +153,183 @@ export default function AuditorRoom() {
              const idStr = item.id.toLowerCase();
              let genericPath = null;
              
-             if (category === 'gears_arctron' || category === 'gears_bionex' || category === 'gears_celestra') {
-                // Determine level/tier (1, 32, 42, 55, 66)
-                let level = '32';
-                const lastChar = idStr.substring(idStr.length - 1);
-                if (lastChar === '0' || lastChar === '1') {
-                    level = '1';
-                } else if (lastChar === '2') {
-                    level = '32';
-                } else if (lastChar === '3') {
-                    level = '42';
-                } else if (lastChar === '4') {
-                    level = '55';
-                } else if (lastChar === '5') {
-                    level = '66';
-                }
-                
-                // Parse numeric suffix if present (e.g. set_arc_0_helmet -> level 1)
-                const numMatch = idStr.match(/_(\d+)/);
-                if (numMatch) {
-                    const val = parseInt(numMatch[1], 10);
-                    if (val === 0 || val === 1) level = '1';
-                    else if (val === 2 || val === 30 || val === 32) level = '32';
-                    else if (val === 3 || val === 40 || val === 42) level = '42';
-                    else if (val === 4 || val === 50 || val === 55) level = '55';
-                    else if (val === 5 || val === 60 || val === 65 || val === 66) level = '66';
-                }
+             // 1. Determine level/tier (1, 32, 42, 55, 66)
+             let level = '32';
+             const lastChar = idStr.substring(idStr.length - 1);
+             if (lastChar === '0' || lastChar === '1') {
+                 level = '1';
+             } else if (lastChar === '2') {
+                 level = '32';
+             } else if (lastChar === '3') {
+                 level = '42';
+             } else if (lastChar === '4') {
+                 level = '55';
+             } else if (lastChar === '5') {
+                 level = '66';
+             }
+             
+             const numMatch = idStr.match(/_(\d+)/);
+             if (numMatch) {
+                 const val = parseInt(numMatch[1], 10);
+                 if (val === 0 || val === 1) level = '1';
+                 else if (val === 2 || val === 30 || val === 32) level = '32';
+                 else if (val === 3 || val === 40 || val === 42) level = '42';
+                 else if (val === 4 || val === 50 || val === 55) level = '55';
+                 else if (val === 5 || val === 60 || val === 65 || val === 66) level = '66';
+             }
+             
+             // Clamp level 66 to 55 for weapons (all factions) or Arctron armors since there are no level 66 weapon/Arctron files
+             const isWeapon = idStr.includes('wpn_') || idStr.includes('gw_');
+             if (level === '66' && (isWeapon || idStr.includes('_arc_') || idStr.includes('arctron'))) {
+                 level = '55';
+             }
+             resolvedLevel = level;
 
-                 const isWeapon = idStr.includes('wpn_') || idStr.includes('gw_');
+             if (isWeapon) {
+                 // WEAPONS
+                 let isBow = false;
+                 let isStaff = false;
+                 let isGun = false;
+                 let isAxe = idStr.includes('axe') || idStr.includes('reaver') || idStr.includes('cleaver') || idStr.includes('scythe') || idStr.includes('hatchet');
+                 let isSpecial = false;
 
-                 // Clamp level 66 to 55 for weapons (all factions) or Arctron armors since there are no level 66 weapon/Arctron files
-                 if (level === '66' && (isWeapon || category === 'gears_arctron')) {
-                     level = '55';
+                 // Determine weapon type based on job prefixes in IDs
+                 if (idStr.includes('_ran_')) {
+                     isGun = true;
+                 } else if (idStr.includes('_tec_')) {
+                     isGun = true;
+                     isSpecial = true;
+                 } else if (idStr.includes('_mar_') || idStr.includes('_eng_')) {
+                     isGun = true;
+                 } else if (idStr.includes('_psi_') || idStr.includes('_ora_') || idStr.includes('_arc_')) {
+                     isStaff = true;
+                 } else if (idStr.includes('_pat_')) {
+                     isBow = true;
+                 } else if (idStr.includes('bow')) {
+                     if (idStr.includes('_bio_') || idStr.includes('bionex')) isGun = true;
+                     else isBow = true;
+                 } else if (idStr.includes('staff') || idStr.includes('scepter') || idStr.includes('force')) {
+                     isStaff = true;
+                 } else if (idStr.includes('gun') || idStr.includes('launcher')) {
+                     isGun = true;
                  }
-                 resolvedLevel = level;
 
-                 if (isWeapon) {
-                     // WEAPONS
-                     let isBow = false;
-                     let isStaff = false;
-                     let isGun = false;
-                     let isAxe = idStr.includes('axe') || idStr.includes('reaver') || idStr.includes('cleaver') || idStr.includes('scythe') || idStr.includes('hatchet');
-                     let isSpecial = false;
-
-                     // Determine weapon type based on job prefixes in IDs
-                     if (idStr.includes('_ran_')) {
-                         isGun = true; // Arctron ranger uses guns
-                     } else if (idStr.includes('_tec_')) {
-                         isGun = true; // Arctron technician uses guns
-                         isSpecial = true;
-                     } else if (idStr.includes('_mar_') || idStr.includes('_eng_')) {
-                         isGun = true; // Bionex marksman/engineer use guns
-                     } else if (idStr.includes('_psi_') || idStr.includes('_ora_') || idStr.includes('_arc_')) {
-                         isStaff = true; // Bionex psion, Celestra oracle/arcanist use staffs
-                     } else if (idStr.includes('_pat_')) {
-                         isBow = true; // Celestra pathfinder uses bows
-                     } else if (idStr.includes('bow')) {
-                         if (category === 'gears_bionex') isGun = true; // Bionex generic bows are rendered as guns
-                         else isBow = true;
-                     } else if (idStr.includes('staff') || idStr.includes('scepter') || idStr.includes('force')) {
-                         isStaff = true;
-                     } else if (idStr.includes('gun') || idStr.includes('launcher')) {
-                         isGun = true;
-                     }
-
-                     if (isBow) {
-                         genericPath = `/assets/weapons/defallfactionslv${level}bow.png`;
-                     } else if (isGun) {
-                         if (isSpecial || category === 'gears_arctron') {
-                             genericPath = `/assets/weapons/defarctronlv${level}special.png`;
-                         } else {
-                             genericPath = `/assets/weapons/defallfactionslv${level}gun.png`;
-                         }
-                     } else if (isStaff) {
-                         if (level === '1') {
-                             const charCodeSum = idStr.split('').reduce((sum, ch) => sum + ch.charCodeAt(0), 0);
-                             const staffIndex = (charCodeSum % 2) + 1;
-                             genericPath = `/assets/weapons/defbioncelestralv1staff${staffIndex}.png`;
-                         } else {
-                             genericPath = `/assets/weapons/defbioncelestralv${level}staff.png`;
-                         }
-                     } else if (isAxe && level !== '1') {
-                         genericPath = `/assets/weapons/defallfactionslv${level}axe.png`;
+                 if (isBow) {
+                     genericPath = `/assets/weapons/defallfactionslv${level}bow.png`;
+                 } else if (isGun) {
+                     if (isSpecial || idStr.includes('_arc_') || idStr.includes('arctron')) {
+                         genericPath = `/assets/weapons/defarctronlv${level}special.png`;
                      } else {
-                         // Sword (defaults here for warrior/guardian/sentinel classes and generic swords)
-                         if (level === '1') {
-                             const charCodeSum = idStr.split('').reduce((sum, ch) => sum + ch.charCodeAt(0), 0);
-                             const swordIndex = (charCodeSum % 4) + 1;
-                             genericPath = `/assets/weapons/defallfactionslv1sword${swordIndex}.png`;
-                         } else {
-                             genericPath = `/assets/weapons/defallfactionslv${level}sword.png`;
-                         }
+                         genericPath = `/assets/weapons/defallfactionslv${level}gun.png`;
                      }
-                 } else if (idStr.includes('shd_') || idStr.includes('shield')) {
-                    // SHIELDS
-                    if (level === '1') {
-                        genericPath = '/assets/arctron_shield_1_rembg.png';
-                    } else if (level === '32' || level === '42') {
-                        genericPath = '/assets/arctron_shield_2_rembg.png';
-                    } else {
-                        genericPath = '/assets/arctron_shield_3_rembg.png';
-                    }
-                } else if (idStr.includes('set_') || idStr.includes('arm_')) {
-                    // ARMORS — detect job class from ID patterns
-                    // Arctron: warrior(war), ranger(ran), technician(tec)
-                    // Bionex: guardian(gua), marksman(mar), engineer(eng), psion(psi)
-                    // Celestra: sentinel(sen), pathfinder(pat), oracle(ora), arcanist(arc in celestra context)
-                    let isRanger = idStr.includes('ran') || idStr.includes('mar') || idStr.includes('pat') || (item.type && (item.type.toLowerCase().includes('ranger') || item.type.toLowerCase().includes('marksman') || item.type.toLowerCase().includes('pathfinder')));
-                    let isSpecialist = idStr.includes('spe') || idStr.includes('mys') || idStr.includes('psi') || idStr.includes('mage') || idStr.includes('eng') || idStr.includes('ora') || (item.type && (item.type.toLowerCase().includes('specialist') || item.type.toLowerCase().includes('mystic') || item.type.toLowerCase().includes('force') || item.type.toLowerCase().includes('engineer') || item.type.toLowerCase().includes('oracle') || item.type.toLowerCase().includes('arcanist')));
-                    
-                    let folder = 'arctron';
-                    let imgPrefix = 'defarctron';
-                    let job = 'warrior';
-                    
-                    if (category === 'gears_arctron') {
-                        folder = 'arctron';
-                        imgPrefix = 'defarctron';
-                        job = isRanger ? 'ranger' : (isSpecialist ? 'technician' : 'warrior');
-                    } else if (category === 'gears_bionex') {
-                        folder = 'bionex';
-                        imgPrefix = 'defbionex';
-                        // Map: guardian=guardian, marksman=marksman, engineer→guardian(no engineer sprite), psion=psion
-                        job = isRanger ? 'marksman' : (isSpecialist ? (idStr.includes('psi') ? 'psion' : 'psion') : 'guardian');
-                    } else if (category === 'gears_celestra') {
-                        folder = 'celestra';
-                        imgPrefix = 'defcelestra';
-                        // Map: sentinel→warrior, pathfinder→ranger, oracle→mage, arcanist→mage
-                        job = isRanger ? 'ranger' : (isSpecialist ? 'mage' : 'warrior');
-                    }
-                    
-                    let piece = 'armor';
-                    if (item.type) {
-                        const tLower = item.type.toLowerCase();
-                        if (tLower.includes('helmet')) piece = 'helmet';
-                        else if (tLower.includes('pants')) piece = 'pants';
-                        else if (tLower.includes('gloves')) piece = 'gloves';
-                        else if (tLower.includes('boots')) piece = 'boots';
-                    }
-                    genericPath = `/assets/${folder}/${imgPrefix}${job}lv${level}${piece}.png`;
-                } else {
-                    genericPath = `/assets/arctron/defarctronwarriorlv32armor.png`;
-                }
-                preview = genericPath;
-             } else if (category === 'gears_accessories') {
-                let race = 'all';
-                if (idStr.includes('_arc_') || idStr.includes('arctron')) race = 'arctron';
-                else if (idStr.includes('_bio_') || idStr.includes('bionex')) race = 'bionex';
-                else if (idStr.includes('_cor_') || idStr.includes('_cel_') || idStr.includes('celestra') || idStr.includes('cora')) race = 'celestra';
-                
-                let level = '0';
-                const lastChar = idStr.substring(idStr.length - 1);
-                if (['0','1','2','3','4'].includes(lastChar)) {
-                    level = lastChar;
-                }
-                resolvedLevel = level;
-                
-                if (idStr.includes('shd_') || idStr.includes('shield')) {
-                    if (level === '0' || level === '1') {
-                        genericPath = '/assets/arctron_shield_1_rembg.png';
-                    } else if (level === '2' || level === '3') {
-                        genericPath = '/assets/arctron_shield_2_rembg.png';
-                    } else {
-                        genericPath = '/assets/arctron_shield_3_rembg.png';
-                    }
-                } else if (idStr.includes('cap_') || idStr.includes('booster') || idStr.includes('cape')) {
-                    genericPath = '/assets/arctron_bag_icon_rembg.png';
-                } else if (idStr.includes('rng') || idStr.includes('ring')) {
-                    if (race === 'all') genericPath = `/assets/accessories/rings/rng_all_${level}.png`;
-                    else if (race === 'bionex') genericPath = `/assets/bionex/rings/rng_bio_${level}.png`;
-                    else if (race === 'celestra') genericPath = `/assets/celestra/rings/rng_cor_${level}.png`;
-                    else genericPath = `/assets/arctron/rings/rng_arc_${level}.png`;
-                } else {
-                    if (race === 'all') genericPath = `/assets/accessories/amulets/amu_all_${level}.png`;
-                    else if (race === 'celestra') genericPath = `/assets/celestra/amulets/amu_cor_${level}.png`;
-                    else genericPath = `/assets/arctron/amulets/amu_arc_${level}.png`;
-                }
-                preview = genericPath;
+                 } else if (isStaff) {
+                     if (level === '1') {
+                         const charCodeSum = idStr.split('').reduce((sum, ch) => sum + ch.charCodeAt(0), 0);
+                         const staffIndex = (charCodeSum % 2) + 1;
+                         genericPath = `/assets/weapons/defbioncelestralv1staff${staffIndex}.png`;
+                     } else {
+                         genericPath = `/assets/weapons/defbioncelestralv${level}staff.png`;
+                     }
+                 } else if (isAxe && level !== '1') {
+                     genericPath = `/assets/weapons/defallfactionslv${level}axe.png`;
+                 } else {
+                     if (level === '1') {
+                         const charCodeSum = idStr.split('').reduce((sum, ch) => sum + ch.charCodeAt(0), 0);
+                         const swordIndex = (charCodeSum % 4) + 1;
+                         genericPath = `/assets/weapons/defallfactionslv1sword${swordIndex}.png`;
+                     } else {
+                         genericPath = `/assets/weapons/defallfactionslv${level}sword.png`;
+                     }
+                 }
+             } else if (idStr.includes('shd_') || idStr.includes('shield')) {
+                 // SHIELDS
+                 let faction = 'arctron';
+                 let factAbbr = 'arctron';
+                 if (idStr.includes('_bio_') || idStr.includes('bionex')) {
+                     faction = 'bionex';
+                     factAbbr = 'bionex';
+                 } else if (idStr.includes('_cor_') || idStr.includes('_cel_') || idStr.includes('celestra') || idStr.includes('cora')) {
+                     faction = 'celestra';
+                     factAbbr = 'celes';
+                 }
+                 
+                 let lvl = level;
+                 if (lvl === '66') lvl = '55'; // clamp since no lvl 66 exists
+
+                 if (idStr.includes('_all_') || idStr.includes('universal')) {
+                     if (lvl === '1') {
+                         genericPath = '/assets/arctron_shield_1_rembg.png';
+                     } else if (lvl === '32' || lvl === '42') {
+                         genericPath = '/assets/arctron_shield_2_rembg.png';
+                     } else {
+                         genericPath = '/assets/arctron_shield_3_rembg.png';
+                     }
+                 } else {
+                     if (lvl === '1') {
+                         genericPath = `/assets/${faction}/shields/lv1${factAbbr}shielddefault.png`;
+                     } else {
+                         genericPath = `/assets/${faction}/shields/lv${lvl}${factAbbr}shielddef.png`;
+                     }
+                 }
+             } else if (idStr.includes('cap_') || idStr.includes('booster') || idStr.includes('cape')) {
+                 genericPath = '/assets/arctron_bag_icon_rembg.png';
+             } else if (idStr.includes('rng') || idStr.includes('ring')) {
+                 let race = 'all';
+                 if (idStr.includes('_arc_') || idStr.includes('arctron')) race = 'arctron';
+                 else if (idStr.includes('_bio_') || idStr.includes('bionex')) race = 'bionex';
+                 else if (idStr.includes('_cor_') || idStr.includes('_cel_') || idStr.includes('celestra') || idStr.includes('cora')) race = 'celestra';
+                 
+                 const suffixMatch = idStr.match(/_(\d)$/);
+                 const idxStr = suffixMatch ? suffixMatch[1] : '1';
+                 
+                 if (race === 'all') genericPath = `/assets/accessories/rings/rng_all_${idxStr}.png`;
+                 else if (race === 'bionex') genericPath = `/assets/bionex/rings/rng_bio_${idxStr}.png`;
+                 else if (race === 'celestra') genericPath = `/assets/celestra/rings/rng_cor_${idxStr}.png`;
+                 else genericPath = `/assets/arctron/rings/rng_arc_${idxStr}.png`;
+             } else if (idStr.includes('amu') || idStr.includes('amulet')) {
+                 let race = 'all';
+                 if (idStr.includes('_arc_') || idStr.includes('arctron')) race = 'arctron';
+                 else if (idStr.includes('_bio_') || idStr.includes('bionex')) race = 'bionex';
+                 else if (idStr.includes('_cor_') || idStr.includes('_cel_') || idStr.includes('celestra') || idStr.includes('cora')) race = 'celestra';
+                 
+                 const suffixMatch = idStr.match(/_(\d)$/);
+                 const idxStr = suffixMatch ? suffixMatch[1] : '1';
+                 
+                 if (race === 'all') genericPath = `/assets/accessories/amulets/amu_all_${idxStr}.png`;
+                 else if (race === 'celestra') genericPath = `/assets/celestra/amulets/amu_cor_${idxStr}.png`;
+                 else genericPath = `/assets/arctron/amulets/amu_arc_${idxStr}.png`;
+             } else if (idStr.includes('set_') || idStr.includes('arm_')) {
+                 // ARMORS — detect job class from ID patterns
+                 let isRanger = idStr.includes('ran') || idStr.includes('mar') || idStr.includes('pat') || (item.type && (item.type.toLowerCase().includes('ranger') || item.type.toLowerCase().includes('marksman') || item.type.toLowerCase().includes('pathfinder')));
+                 let isSpecialist = idStr.includes('spe') || idStr.includes('mys') || idStr.includes('psi') || idStr.includes('mage') || idStr.includes('eng') || idStr.includes('ora') || (item.type && (item.type.toLowerCase().includes('specialist') || item.type.toLowerCase().includes('mystic') || item.type.toLowerCase().includes('force') || item.type.toLowerCase().includes('engineer') || item.type.toLowerCase().includes('oracle') || item.type.toLowerCase().includes('arcanist')));
+                 
+                 let folder = 'arctron';
+                 let imgPrefix = 'defarctron';
+                 let job = 'warrior';
+                 
+                 if (idStr.includes('_arc_') || idStr.includes('arctron')) {
+                     folder = 'arctron';
+                     imgPrefix = 'defarctron';
+                     job = isRanger ? 'ranger' : (isSpecialist ? 'technician' : 'warrior');
+                 } else if (idStr.includes('_bio_') || idStr.includes('bionex')) {
+                     folder = 'bionex';
+                     imgPrefix = 'defbionex';
+                     job = isRanger ? 'marksman' : (isSpecialist ? 'psion' : 'guardian');
+                 } else if (idStr.includes('_cor_') || idStr.includes('_cel_') || idStr.includes('celestra') || idStr.includes('cora')) {
+                     folder = 'celestra';
+                     imgPrefix = 'defcelestra';
+                     job = isRanger ? 'ranger' : (isSpecialist ? 'mage' : 'warrior');
+                 }
+                 
+                 let piece = 'armor';
+                 if (item.type) {
+                     const tLower = item.type.toLowerCase();
+                     if (tLower.includes('helmet')) piece = 'helmet';
+                     else if (tLower.includes('pants')) piece = 'pants';
+                     else if (tLower.includes('gloves')) piece = 'gloves';
+                     else if (tLower.includes('boots')) piece = 'boots';
+                 }
+                 genericPath = `/assets/${folder}/${imgPrefix}${job}lv${level}${piece}.png`;
              } else {
                 const idLower = item.id ? item.id.toLowerCase() : '';
                 if (idLower === 'ares_x') preview = '/assets/arctron/ARESlv32arctron.png';
