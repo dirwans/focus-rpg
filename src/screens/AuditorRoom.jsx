@@ -948,38 +948,43 @@ export default function AuditorRoom() {
                                   )}
                                   <div style={{ padding: '14px', display: 'grid', gridTemplateColumns: 'repeat(5, 56px)', gap: '10px', minHeight: '230px', alignContent: 'start', justifyContent: 'center' }}>
                                       {paginatedData.map((item, idx) => (
-                                          <div key={idx} onClick={() => {
-                                             const idLower = (item.id || '').toLowerCase();
-                                             const nameLower = (item.name || '').toLowerCase();
-                                             const isArcaniteOrSpecial = nameLower.includes('arcanite') || idLower === 'mat_divine_crest' || idLower === 'mat_lucky_relic';
-                                             const isOreOrShardOrCore = idLower.includes('ore') || idLower.includes('shard') || idLower.includes('core') || nameLower.includes('ore') || nameLower.includes('shard') || nameLower.includes('core');
+                                          <div key={idx} 
+                                               draggable="true"
+                                               onDragStart={(e) => {
+                                                   e.dataTransfer.setData('application/json', JSON.stringify(item));
+                                               }}
+                                               onClick={() => {
+                                                  const idLower = (item.id || '').toLowerCase();
+                                                  const nameLower = (item.name || '').toLowerCase();
+                                                  const isArcaniteOrSpecial = nameLower.includes('arcanite') || idLower === 'mat_divine_crest' || idLower === 'mat_lucky_relic';
+                                                  const isOreOrShardOrCore = idLower.includes('ore') || idLower.includes('shard') || idLower.includes('core') || nameLower.includes('ore') || nameLower.includes('shard') || nameLower.includes('core');
 
-                                             if (activeSlotIndex !== null) {
-                                                 if (tab === 'crafting' && isArcaniteOrSpecial) {
-                                                     alert('❌ Arcanites & Specials hanya boleh digunakan untuk Enhancement!');
-                                                     return;
-                                                 }
-                                                 if (tab === 'enhance' && isOreOrShardOrCore) {
-                                                     alert('❌ Ores, Shards, & Cores hanya boleh digunakan untuk Crafting!');
-                                                     return;
-                                                 }
-                                                 
-                                                 const newSlots = [...recipeSlots];
-                                                 newSlots[activeSlotIndex] = item;
-                                                 setRecipeSlots(newSlots);
-                                                 setActiveSlotIndex(null); 
-                                             } else {
-                                                 if (tab === 'enhance') {
-                                                     const isEquipment = ['weapon', 'shield', 'helmet', 'armor', 'pants', 'gloves', 'boots', 'accessories'].includes(item.type) || 
-                                                                         idLower.startsWith('wpn_') || idLower.startsWith('arm_') || idLower.startsWith('set_') || idLower.startsWith('rng_') || idLower.startsWith('amu_') || idLower.startsWith('gw_') || idLower.startsWith('meu_') || idLower.startsWith('ares_') || idLower.startsWith('spirit_');
-                                                     if (!isEquipment) {
-                                                         alert('❌ Hanya equipment (Senjata, Tameng, Armor, Aksesoris) yang bisa di-enhance!');
-                                                         return;
-                                                     }
-                                                 }
-                                                 setTargetItem(item);
-                                             }
-                                          }} style={{ 
+                                                  if (activeSlotIndex !== null) {
+                                                      if (tab === 'crafting' && isArcaniteOrSpecial) {
+                                                          alert('❌ Arcanites & Specials hanya boleh digunakan untuk Enhancement!');
+                                                          return;
+                                                      }
+                                                      if (tab === 'enhance' && isOreOrShardOrCore) {
+                                                          alert('❌ Ores, Shards, & Cores hanya boleh digunakan untuk Crafting!');
+                                                          return;
+                                                      }
+                                                      
+                                                      const newSlots = [...recipeSlots];
+                                                      newSlots[activeSlotIndex] = item;
+                                                      setRecipeSlots(newSlots);
+                                                      setActiveSlotIndex(null); 
+                                                  } else {
+                                                      if (tab === 'enhance') {
+                                                          const isEquipment = ['weapon', 'shield', 'helmet', 'armor', 'pants', 'gloves', 'boots', 'accessories'].includes(item.type) || 
+                                                                              idLower.startsWith('wpn_') || idLower.startsWith('arm_') || idLower.startsWith('set_') || idLower.startsWith('rng_') || idLower.startsWith('amu_') || idLower.startsWith('gw_') || idLower.startsWith('meu_') || idLower.startsWith('ares_') || idLower.startsWith('spirit_');
+                                                          if (!isEquipment) {
+                                                              alert('❌ Hanya equipment (Senjata, Tameng, Armor, Aksesoris) yang bisa di-enhance!');
+                                                              return;
+                                                          }
+                                                      }
+                                                      setTargetItem(item);
+                                                  }
+                                               }} style={{ 
                                               width: '56px',
                                               height: '56px',
                                               background: 'radial-gradient(circle at center, #18283c 0%, #0a0e16 100%)', 
@@ -1011,14 +1016,31 @@ export default function AuditorRoom() {
                       </div>
                   </div>
 
-                  {/* GRID 3: ENHANCEMENT / RECIPE EDITOR */}
                   <div className="simulator-col-3">
                       <div style={{ border: '1px solid #2a3a5a', background: '#121622', borderRadius: '6px', height: '100%', display: 'flex', flexDirection: 'column' }}>
                           <div className="simulator-title" style={{ padding: '12px', borderBottom: '1px solid #2a3a5a', background: '#181e2e', color: '#fff', fontSize: '14px', fontWeight: 'bold' }}>{tab === 'enhance' ? 'Enhancement Editor' : 'Recipe Editor'}</div>
                           <div style={{ padding: '16px', flex: 1, display: 'flex', flexDirection: 'column', gap: '16px' }}>
                               
                               <div style={{ display: 'flex', alignItems: 'center', gap: '14px', background: 'radial-gradient(circle at center, #1a2a40 0%, #0a0e16 100%)', border: '1px solid rgba(0, 229, 255, 0.45)', padding: '14px', borderRadius: '8px', boxShadow: '0 0 15px rgba(0, 229, 255, 0.1)' }}>
-                                  <div onClick={() => setTargetItem(null)} style={{ width: '52px', height: '52px', border: '1px solid rgba(0, 229, 255, 0.6)', background: '#0a101a', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', padding: '3px' }}>
+                                  <div 
+                                      onDragOver={(e) => e.preventDefault()}
+                                      onDrop={(e) => {
+                                          e.preventDefault();
+                                          try {
+                                              const dragItem = JSON.parse(e.dataTransfer.getData('application/json'));
+                                              const dragIdLower = (dragItem.id || '').toLowerCase();
+                                              if (tab === 'enhance') {
+                                                  const isEquipment = ['weapon', 'shield', 'helmet', 'armor', 'pants', 'gloves', 'boots', 'accessories'].includes(dragItem.type) || 
+                                                                      dragIdLower.startsWith('wpn_') || dragIdLower.startsWith('arm_') || dragIdLower.startsWith('set_') || dragIdLower.startsWith('rng_') || dragIdLower.startsWith('amu_') || dragIdLower.startsWith('gw_') || dragIdLower.startsWith('meu_') || dragIdLower.startsWith('ares_') || dragIdLower.startsWith('spirit_');
+                                                  if (!isEquipment) {
+                                                      alert('❌ Hanya equipment (Senjata, Tameng, Armor, Aksesoris) yang bisa di-enhance!');
+                                                      return;
+                                                  }
+                                              }
+                                              setTargetItem(dragItem);
+                                          } catch {}
+                                      }}
+                                      onClick={() => setTargetItem(null)} style={{ width: '52px', height: '52px', border: '1px solid rgba(0, 229, 255, 0.6)', background: '#0a101a', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', padding: '3px' }}>
                                       {targetItem ? (targetItem._imagePreview ? <img src={targetItem._imagePreview} style={{ width: '95%', height: '95%', objectFit: 'contain', filter: 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.85)) brightness(1.35)' }} /> : 'X') : <span style={{color: '#444', fontSize: '20px'}}>?</span>}
                                   </div>
                                   <div style={{ flex: 1 }}>
@@ -1034,7 +1056,32 @@ export default function AuditorRoom() {
                                   </div>
                                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
                                       {recipeSlots.slice(0, tab === 'enhance' ? 3 : 5).map((slot, idx) => (
-                                          <div key={idx} onClick={() => setActiveSlotIndex(idx === activeSlotIndex ? null : idx)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: activeSlotIndex === idx ? 'radial-gradient(circle, #244368 0%, #162840 100%)' : 'radial-gradient(circle, #182436 0%, #0c121e 100%)', border: activeSlotIndex === idx ? '1px solid #00ff88' : '1px solid rgba(0, 229, 255, 0.35)', padding: '8px', borderRadius: '6px', cursor: 'pointer', minHeight: '58px', boxShadow: activeSlotIndex === idx ? '0 0 10px rgba(0, 255, 136, 0.2)' : 'none', gridColumn: (tab === 'crafting' && idx === 3) ? 'span 1' : undefined, position: 'relative' }}>
+                                          <div key={idx} 
+                                               onDragOver={(e) => e.preventDefault()}
+                                               onDrop={(e) => {
+                                                   e.preventDefault();
+                                                   try {
+                                                       const dragItem = JSON.parse(e.dataTransfer.getData('application/json'));
+                                                       const dragIdLower = (dragItem.id || '').toLowerCase();
+                                                       const dragNameLower = (dragItem.name || '').toLowerCase();
+                                                       const isArcaniteOrSpecial = dragNameLower.includes('arcanite') || dragIdLower === 'mat_divine_crest' || dragIdLower === 'mat_lucky_relic';
+                                                       const isOreOrShardOrCore = dragIdLower.includes('ore') || dragIdLower.includes('shard') || dragIdLower.includes('core') || dragNameLower.includes('ore') || dragNameLower.includes('shard') || dragNameLower.includes('core');
+
+                                                       if (tab === 'crafting' && isArcaniteOrSpecial) {
+                                                           alert('❌ Arcanites & Specials hanya boleh digunakan untuk Enhancement!');
+                                                           return;
+                                                       }
+                                                       if (tab === 'enhance' && isOreOrShardOrCore) {
+                                                           alert('❌ Ores, Shards, & Cores hanya boleh digunakan untuk Crafting!');
+                                                           return;
+                                                       }
+
+                                                       const newSlots = [...recipeSlots];
+                                                       newSlots[idx] = dragItem;
+                                                       setRecipeSlots(newSlots);
+                                                   } catch {}
+                                               }}
+                                               onClick={() => setActiveSlotIndex(idx === activeSlotIndex ? null : idx)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: activeSlotIndex === idx ? 'radial-gradient(circle, #244368 0%, #162840 100%)' : 'radial-gradient(circle, #182436 0%, #0c121e 100%)', border: activeSlotIndex === idx ? '1px solid #00ff88' : '1px solid rgba(0, 229, 255, 0.35)', padding: '8px', borderRadius: '6px', cursor: 'pointer', minHeight: '58px', boxShadow: activeSlotIndex === idx ? '0 0 10px rgba(0, 255, 136, 0.2)' : 'none', gridColumn: (tab === 'crafting' && idx === 3) ? 'span 1' : undefined, position: 'relative' }}>
                                              {slot ? (
                                                  <>
                                                    <button onClick={(e) => {
