@@ -348,6 +348,9 @@ export default function AuditorRoom() {
                 else if (idLower.startsWith('spirit_noctyrna_')) preview = `/assets/celestra/${item.id}.png`;
                 else preview = `/assets/${item.id}.png`;
              }
+             if (genericPath) {
+                 preview = genericPath;
+             }
           }
           return {
             ...item,
@@ -443,6 +446,22 @@ export default function AuditorRoom() {
         rawMaterials.forEach(it => { if (it && it.id) mergedItemsMap.set(it.id, it) });
         const finalItems = Array.from(mergedItemsMap.values());
 
+        const flatArctron = flattenGears(data.gears?.arctron, '', 'arctron');
+        const flatBionex = flattenGears(data.gears?.bionex, '', 'bionex');
+        const flatCelestra = flattenGears(data.gears?.celestra, '', 'celestra');
+        const flatAccessories = flattenGears(data.gears?.accessories, '', 'all');
+
+        const factionAccessories = [
+          ...flatArctron.filter(i => i.type === 'amulets' || i.type === 'rings' || (i.id && (i.id.startsWith('amu_') || i.id.startsWith('rng_')))),
+          ...flatBionex.filter(i => i.type === 'amulets' || i.type === 'rings' || (i.id && (i.id.startsWith('amu_') || i.id.startsWith('rng_')))),
+          ...flatCelestra.filter(i => i.type === 'amulets' || i.type === 'rings' || (i.id && (i.id.startsWith('amu_') || i.id.startsWith('rng_'))))
+        ];
+
+        const cleanArctron = flatArctron.filter(i => i.type !== 'amulets' && i.type !== 'rings' && !(i.id && (i.id.startsWith('amu_') || i.id.startsWith('rng_'))));
+        const cleanBionex = flatBionex.filter(i => i.type !== 'amulets' && i.type !== 'rings' && !(i.id && (i.id.startsWith('amu_') || i.id.startsWith('rng_'))));
+        const cleanCelestra = flatCelestra.filter(i => i.type !== 'amulets' && i.type !== 'rings' && !(i.id && (i.id.startsWith('amu_') || i.id.startsWith('rng_'))));
+        const allAccessories = [ ...flatAccessories, ...factionAccessories ];
+
         setAllData({
           items: formatRows(finalItems, 'items'),
           enemies: formatRows(flattenEnemies(data.enemies), 'enemies'),
@@ -451,10 +470,10 @@ export default function AuditorRoom() {
           recipes: data.recipes || [],
           drafts: data.drafts || [],
           gears: {
-            arctron: formatRows(flattenGears(data.gears?.arctron, '', 'arctron'), 'gears_arctron'),
-            bionex: formatRows(flattenGears(data.gears?.bionex, '', 'bionex'), 'gears_bionex'),
-            celestra: formatRows(flattenGears(data.gears?.celestra, '', 'celestra'), 'gears_celestra'),
-            accessories: formatRows(flattenGears(data.gears?.accessories, '', 'all'), 'gears_accessories')
+            arctron: formatRows(cleanArctron, 'gears_arctron'),
+            bionex: formatRows(cleanBionex, 'gears_bionex'),
+            celestra: formatRows(cleanCelestra, 'gears_celestra'),
+            accessories: formatRows(allAccessories, 'gears_accessories')
           }
         })
       }
@@ -522,22 +541,36 @@ export default function AuditorRoom() {
         }
 
         if (craftCategory === 'weapons' || craftCategory === 'weapon') {
-           return allGears.filter(i => (i.type && i.type.toLowerCase().includes('weapon')) || (i.id && (i.id.startsWith('wpn_') || i.id.startsWith('gw_') || i.id.includes('weapon'))));
+           const list = allGears.filter(i => (i.type && i.type.toLowerCase().includes('weapon')) || (i.id && (i.id.startsWith('wpn_') || i.id.startsWith('gw_') || i.id.includes('weapon'))));
+           const seen = new Set();
+           return list.filter(i => {
+              const nameLower = (i.name || '').toLowerCase();
+              if (seen.has(nameLower)) return false;
+              seen.add(nameLower);
+              return true;
+           });
         }
         if (craftCategory === 'shields' || craftCategory === 'shield') {
            const allShieldsAndAcc = [ ...allGears, ...(allData.gears?.accessories || []) ].filter(i => {
-              if (craftRaceFilter === 'all') return true;
-              const r = (i.faction || i.race || i._providerCat || '').toLowerCase();
-              const idStr = (i.id || '').toLowerCase();
-              if (craftRaceFilter === 'arctron') return r.includes('arctron') || idStr.includes('_arc_') || idStr.includes('arctron');
-              if (craftRaceFilter === 'bionex') return r.includes('bionex') || idStr.includes('_bio_') || idStr.includes('bionex');
-              if (craftRaceFilter === 'celestra') return r.includes('celestra') || idStr.includes('_cel_') || idStr.includes('_cor_') || idStr.includes('celestra');
-              return false;
+               if (craftRaceFilter === 'all') return true;
+               const r = (i.faction || i.race || i._providerCat || '').toLowerCase();
+               const idStr = (i.id || '').toLowerCase();
+               if (craftRaceFilter === 'arctron') return r.includes('arctron') || idStr.includes('_arc_') || idStr.includes('arctron');
+               if (craftRaceFilter === 'bionex') return r.includes('bionex') || idStr.includes('_bio_') || idStr.includes('bionex');
+               if (craftRaceFilter === 'celestra') return r.includes('celestra') || idStr.includes('_cel_') || idStr.includes('_cor_') || idStr.includes('celestra');
+               return false;
            });
-           return allShieldsAndAcc.filter(i => (i.type && i.type.toLowerCase().includes('shield')) || (i.id && (i.id.startsWith('shd_') || i.id.includes('shield'))));
+           const list = allShieldsAndAcc.filter(i => (i.type && i.type.toLowerCase().includes('shield')) || (i.id && (i.id.startsWith('shd_') || i.id.includes('shield'))));
+           const seen = new Set();
+           return list.filter(i => {
+              const nameLower = (i.name || '').toLowerCase();
+              if (seen.has(nameLower)) return false;
+              seen.add(nameLower);
+              return true;
+           });
         }
         if (craftCategory === 'accessories' || craftCategory === 'accessory') {
-           let accs = allData.gears?.accessories || [];
+           let accs = [ ...allGears, ...(allData.gears?.accessories || []) ].filter(i => (i.type && (i.type.toLowerCase().includes('amulet') || i.type.toLowerCase().includes('ring'))) || (i.id && (i.id.startsWith('amu_') || i.id.startsWith('rng_'))));
            if (craftRaceFilter !== 'all') {
               accs = accs.filter(i => {
                  const r = (i.faction || i.race || i._providerCat || '').toLowerCase();
@@ -549,12 +582,27 @@ export default function AuditorRoom() {
                  return false;
               });
            }
-           if (craftSubTab === 'Amulet') return accs.filter(i => i.type && i.type.toLowerCase().includes('amulet'));
-           if (craftSubTab === 'Ring') return accs.filter(i => i.type && i.type.toLowerCase().includes('ring'));
-           return accs;
+           let list = accs;
+           if (craftSubTab === 'Amulet') list = accs.filter(i => i.type && i.type.toLowerCase().includes('amulet'));
+           else if (craftSubTab === 'Ring') list = accs.filter(i => i.type && i.type.toLowerCase().includes('ring'));
+           
+           const seen = new Set();
+           return list.filter(i => {
+              const nameLower = (i.name || '').toLowerCase();
+              if (seen.has(nameLower)) return false;
+              seen.add(nameLower);
+              return true;
+           });
         }
         if (['helmet', 'armor', 'pants', 'gloves', 'boots'].includes(craftCategory)) {
-           return allGears.filter(i => i.type && i.type.toLowerCase().includes(craftCategory));
+           const list = allGears.filter(i => i.type && i.type.toLowerCase().includes(craftCategory));
+           const seen = new Set();
+           return list.filter(i => {
+              const nameLower = (i.name || '').toLowerCase();
+              if (seen.has(nameLower)) return false;
+              seen.add(nameLower);
+              return true;
+           });
         }
         return allGears;
       }

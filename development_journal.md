@@ -2121,3 +2121,17 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
   - Restored broken image path references for ARES (Arctron), M.E.U. (Bionex), and Spirit (Celestra) assets to their correct organized subfolders (`/assets/arctron/`, `/assets/bionex/`, and `/assets/celestra/`).
   - Fixed fallback path mappings to prevent broken image placeholders on compiled builds.
 - **Verification**: Verified React build compiles cleanly (`npm run build`).
+
+
+---
+
+### 🔧 Milestone 157: Fix Missing Gear Images, Reorganize Faction Accessories & Filter Duplicates [PENDING DEPLOYMENT]
+- **Auditor Room Image Mappings (`src/screens/AuditorRoom.jsx`)**:
+  - Fixed a logic bug where generic path resolution (`genericPath`) for weapons, shields, armors, and accessories was never assigned to `preview`.
+  - Added assignment `if (genericPath) preview = genericPath;` at the end of the image resolution block to restore all missing gear images.
+- **Faction Accessories Reorganization (`src/screens/AuditorRoom.jsx` & `server.js`)**:
+  - Automatically filters out faction-specific amulets and rings from the faction-specific sub-tabs under the Gears tab, merging them into the unified `Accessories` sub-tab.
+  - Implemented `resolveGearFile` in the backend (`server.js`) to parse mecha item IDs dynamically and write direct saves (`/api/audit/save_item_direct`) or draft publishes (`/api/audit/publish_draft`) to their respective faction gear database JSON files (`arctron.json`, `bionex.json`, `celestra.json`, `accessories.json`), regardless of which tab they are saved from.
+- **Duplicate Gear Filtering (`src/screens/AuditorRoom.jsx`)**:
+  - Added name-based duplicate filtering in `getActiveArray()` for all mecha equipment categories (weapons, shields, accessories, and armor pieces) in the crafting and enhancement database pickers, preventing items with identical names/levels (like shared staves or bows) from showing up multiple times.
+- **Verification**: Verified React build compiles cleanly (`npm run build`).

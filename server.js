@@ -1188,6 +1188,18 @@ const AUDIT_DRAFTS_FILE = join(DATA_DIR, 'audit_drafts.json')
 const DRAFTS_IMG_DIR = join(__dirname, 'public', 'assets', 'drafts')
 try { mkdirSync(DRAFTS_IMG_DIR, { recursive: true }) } catch {}
 
+const resolveGearFile = (id) => {
+  const idLower = (id || '').toLowerCase();
+  if (idLower.includes('_arc_') || idLower.includes('arctron') || idLower.includes('_arc')) {
+    return 'arctron.json';
+  } else if (idLower.includes('_bio_') || idLower.includes('bionex') || idLower.includes('_bio')) {
+    return 'bionex.json';
+  } else if (idLower.includes('_cor_') || idLower.includes('_cel_') || idLower.includes('celestra') || idLower.includes('cora')) {
+    return 'celestra.json';
+  }
+  return 'accessories.json';
+};
+
 app.get('/api/audit/all_data', (req, res) => {
   try {
     const SRC_DATA_DIR = join(__dirname, 'src', 'data')
@@ -1372,7 +1384,10 @@ app.post('/api/audit/save_item_direct', (req, res) => {
         targetFile = join(SRC_DATA_DIR, 'items.json')
       }
     }
-    else if (category === 'gears') targetFile = join(SRC_DATA_DIR, 'gears', `${subCategory}.json`)
+    else if (category === 'gears') {
+      const fileName = resolveGearFile(cleanData.id || cleanData.code || cleanData.name);
+      targetFile = join(SRC_DATA_DIR, 'gears', fileName);
+    }
     else if (category === 'races') targetFile = join(SRC_DATA_DIR, 'races.json')
     else if (category === 'jobs') targetFile = join(SRC_DATA_DIR, 'jobs.json')
     else return res.status(400).json({ error: 'Kategori tidak valid' })
@@ -1479,8 +1494,9 @@ app.post('/api/audit/publish_draft', (req, res) => {
       if (idx >= 0) arr[idx] = { ...arr[idx], ...cleanDef }
       else arr.push(cleanDef)
       writeFileSync(p, JSON.stringify(Array.isArray(obj) ? arr : { ...obj, items: arr }, null, 2))
-    } else if (cat === 'gears' && sub) {
-      const p = join(SRC_DATA_DIR, 'gears', `${sub}.json`)
+    } else if (cat === 'gears') {
+      const fileName = resolveGearFile(cleanDef.id || dData.id || cleanDef.code || cleanDef.name);
+      const p = join(SRC_DATA_DIR, 'gears', fileName)
       const obj = JSON.parse(readFileSync(p, 'utf8'))
       const updateRec = (o) => {
         if (Array.isArray(o)) {
