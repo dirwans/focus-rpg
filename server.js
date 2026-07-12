@@ -1204,7 +1204,21 @@ app.get('/api/audit/all_data', (req, res) => {
     try { drafts = JSON.parse(readFileSync(AUDIT_DRAFTS_FILE, 'utf8')) } catch {}
 
     const data = {
-      items: readJson('items.json'),
+      items: (() => {
+        const raw = readJson('items.json') || {};
+        const weapons = readJson('weapons.json') || [];
+        const armors = readJson('armors.json') || [];
+        const shields = readJson('shields.json') || [];
+        return {
+          items: [
+            ...(raw.items || []),
+            ...weapons,
+            ...armors,
+            ...shields
+          ],
+          materials: raw.materials || []
+        };
+      })(),
       enemies: readJson('enemies.json'),
       races: readJson('races.json'),
       jobs: readJson('jobs.json'),
@@ -1334,16 +1348,29 @@ app.post('/api/audit/save_item_direct', (req, res) => {
 
   try {
     const SRC_DATA_DIR = join(__dirname, 'src', 'data')
+    const cleanData = { ...itemData }
+    Object.keys(cleanData).forEach(k => { if (k.startsWith('_')) delete cleanData[k] })
+
     let targetFile = ''
-    if (category === 'items') targetFile = join(SRC_DATA_DIR, 'items.json')
+    if (category === 'items') {
+      const typeLower = (cleanData.type || '').toLowerCase();
+      const idLower = (cleanData.id || '').toLowerCase();
+      if (typeLower === 'weapon' || idLower.startsWith('wpn_') || idLower.startsWith('gw_')) {
+        targetFile = join(SRC_DATA_DIR, 'weapons.json')
+      } else if (typeLower === 'shield' || idLower.startsWith('shd_')) {
+        targetFile = join(SRC_DATA_DIR, 'shields.json')
+      } else if (['armor', 'helmet', 'boots', 'gloves', 'pants', 'mantle', 'cape'].includes(typeLower) || idLower.startsWith('set_') || idLower.startsWith('arm_')) {
+        targetFile = join(SRC_DATA_DIR, 'armors.json')
+      } else {
+        targetFile = join(SRC_DATA_DIR, 'items.json')
+      }
+    }
     else if (category === 'gears') targetFile = join(SRC_DATA_DIR, 'gears', `${subCategory}.json`)
     else if (category === 'races') targetFile = join(SRC_DATA_DIR, 'races.json')
     else if (category === 'jobs') targetFile = join(SRC_DATA_DIR, 'jobs.json')
     else return res.status(400).json({ error: 'Kategori tidak valid' })
 
     const fileContent = JSON.parse(readFileSync(targetFile, 'utf8'))
-    const cleanData = { ...itemData }
-    Object.keys(cleanData).forEach(k => { if (k.startsWith('_')) delete cleanData[k] })
 
     if (Array.isArray(fileContent)) {
       const idx = fileContent.findIndex(i => (i.id && i.id === cleanData.id) || (i.code && i.code === cleanData.code))
@@ -1422,7 +1449,17 @@ app.post('/api/audit/publish_draft', (req, res) => {
 
     const SRC_DATA_DIR = join(__dirname, 'src', 'data')
     if (cat === 'items') {
-      const p = join(SRC_DATA_DIR, 'items.json')
+      const typeLower = (cleanDef.type || '').toLowerCase();
+      const idLower = ((cleanDef.id || dData.id) || '').toLowerCase();
+      let p = join(SRC_DATA_DIR, 'items.json')
+      if (typeLower === 'weapon' || idLower.startsWith('wpn_') || idLower.startsWith('gw_')) {
+        p = join(SRC_DATA_DIR, 'weapons.json')
+      } else if (typeLower === 'shield' || idLower.startsWith('shd_')) {
+        p = join(SRC_DATA_DIR, 'shields.json')
+      } else if (['armor', 'helmet', 'boots', 'gloves', 'pants', 'mantle', 'cape'].includes(typeLower) || idLower.startsWith('set_') || idLower.startsWith('arm_')) {
+        p = join(SRC_DATA_DIR, 'armors.json')
+      }
+
       const obj = JSON.parse(readFileSync(p, 'utf8'))
       const arr = Array.isArray(obj) ? obj : (obj.items || [])
       const idx = arr.findIndex(i => i.id === (cleanDef.id || dData.id))

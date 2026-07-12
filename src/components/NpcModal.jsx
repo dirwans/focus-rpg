@@ -2,7 +2,20 @@ import React, { useState } from 'react'
 import { useGameStore, addToInventory, resolveItemImage } from '../store/gameStore'
 import races from '../data/races.json'
 import jobs from '../data/jobs.json'
-import itemsData from '../data/items.json'
+import itemsDataRaw from '../data/items.json'
+import weaponsData from '../data/weapons.json'
+import armorsData from '../data/armors.json'
+import shieldsData from '../data/shields.json'
+
+const itemsData = {
+  items: [
+    ...(itemsDataRaw.items || []),
+    ...weaponsData,
+    ...armorsData,
+    ...shieldsData
+  ],
+  materials: itemsDataRaw.materials || []
+}
 import { PilotSprite } from './PilotSprites'
 import { t } from '../lib/translate'
 import { getWeaponRarityDisplayName, getWeaponRarityColor } from '../lib/rarity'

@@ -1,0 +1,1577 @@
+[
+    {
+        "id": "arm_All_1_D",
+        "name": "[D] Lv.1 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "D",
+        "type": "shield",
+        "race": "All",
+        "level": 1,
+        "bonus": {
+            "def": 8
+        },
+        "image": "/assets/arctron_shield_1_rembg.png"
+    },
+    {
+        "id": "arm_All_1_C",
+        "name": "[C] Lv.1 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "C",
+        "type": "shield",
+        "race": "All",
+        "level": 1,
+        "bonus": {
+            "def": 9
+        },
+        "image": "/assets/arctron_shield_1_rembg.png"
+    },
+    {
+        "id": "arm_All_1_B",
+        "name": "[B] Lv.1 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "B",
+        "type": "shield",
+        "race": "All",
+        "level": 1,
+        "bonus": {
+            "def": 12
+        },
+        "image": "/assets/arctron_shield_1_rembg.png"
+    },
+    {
+        "id": "arm_All_1_A",
+        "name": "[A] Lv.1 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "A",
+        "type": "shield",
+        "race": "All",
+        "level": 1,
+        "bonus": {
+            "def": 16
+        },
+        "image": "/assets/arctron_shield_1_rembg.png"
+    },
+    {
+        "id": "arm_All_1_S",
+        "name": "[S] Lv.1 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "S",
+        "type": "shield",
+        "race": "All",
+        "level": 1,
+        "bonus": {
+            "def": 24
+        },
+        "image": "/assets/arctron_shield_1_rembg.png"
+    },
+    {
+        "id": "arm_All_1_SS",
+        "name": "[SS] Lv.1 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SS",
+        "type": "shield",
+        "race": "All",
+        "level": 1,
+        "bonus": {
+            "def": 36
+        },
+        "image": "/assets/arctron_shield_1_rembg.png"
+    },
+    {
+        "id": "arm_All_1_SSS",
+        "name": "[SSS] Lv.1 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SSS",
+        "type": "shield",
+        "race": "All",
+        "level": 1,
+        "bonus": {
+            "def": 56
+        },
+        "image": "/assets/arctron_shield_1_rembg.png"
+    },
+    {
+        "id": "arm_All_1_SR",
+        "name": "[SR] Lv.1 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SR",
+        "type": "shield",
+        "race": "All",
+        "level": 1,
+        "bonus": {
+            "def": 80
+        },
+        "image": "/assets/arctron_shield_1_rembg.png"
+    },
+    {
+        "id": "arm_All_1_SSR",
+        "name": "[SSR] Lv.1 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SSR",
+        "type": "shield",
+        "race": "All",
+        "level": 1,
+        "bonus": {
+            "def": 120
+        },
+        "image": "/assets/arctron_shield_1_rembg.png"
+    },
+    {
+        "id": "arm_All_1_UR",
+        "name": "[UR] Lv.1 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "UR",
+        "type": "shield",
+        "race": "All",
+        "level": 1,
+        "bonus": {
+            "def": 200
+        },
+        "image": "/assets/arctron_shield_1_rembg.png"
+    },
+    {
+        "id": "arm_All_10_D",
+        "name": "[D] Lv.10 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "D",
+        "type": "shield",
+        "race": "All",
+        "level": 10,
+        "bonus": {
+            "def": 80
+        },
+        "image": "/assets/arctron_shield_2_rembg.png"
+    },
+    {
+        "id": "arm_All_10_C",
+        "name": "[C] Lv.10 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "C",
+        "type": "shield",
+        "race": "All",
+        "level": 10,
+        "bonus": {
+            "def": 96
+        },
+        "image": "/assets/arctron_shield_2_rembg.png"
+    },
+    {
+        "id": "arm_All_10_B",
+        "name": "[B] Lv.10 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "B",
+        "type": "shield",
+        "race": "All",
+        "level": 10,
+        "bonus": {
+            "def": 120
+        },
+        "image": "/assets/arctron_shield_2_rembg.png"
+    },
+    {
+        "id": "arm_All_10_A",
+        "name": "[A] Lv.10 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "A",
+        "type": "shield",
+        "race": "All",
+        "level": 10,
+        "bonus": {
+            "def": 160
+        },
+        "image": "/assets/arctron_shield_2_rembg.png"
+    },
+    {
+        "id": "arm_All_10_S",
+        "name": "[S] Lv.10 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "S",
+        "type": "shield",
+        "race": "All",
+        "level": 10,
+        "bonus": {
+            "def": 240
+        },
+        "image": "/assets/arctron_shield_2_rembg.png"
+    },
+    {
+        "id": "arm_All_10_SS",
+        "name": "[SS] Lv.10 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SS",
+        "type": "shield",
+        "race": "All",
+        "level": 10,
+        "bonus": {
+            "def": 360
+        },
+        "image": "/assets/arctron_shield_2_rembg.png"
+    },
+    {
+        "id": "arm_All_10_SSS",
+        "name": "[SSS] Lv.10 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SSS",
+        "type": "shield",
+        "race": "All",
+        "level": 10,
+        "bonus": {
+            "def": 560
+        },
+        "image": "/assets/arctron_shield_2_rembg.png"
+    },
+    {
+        "id": "arm_All_10_SR",
+        "name": "[SR] Lv.10 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SR",
+        "type": "shield",
+        "race": "All",
+        "level": 10,
+        "bonus": {
+            "def": 800
+        },
+        "image": "/assets/arctron_shield_2_rembg.png"
+    },
+    {
+        "id": "arm_All_10_SSR",
+        "name": "[SSR] Lv.10 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SSR",
+        "type": "shield",
+        "race": "All",
+        "level": 10,
+        "bonus": {
+            "def": 1200
+        },
+        "image": "/assets/arctron_shield_2_rembg.png"
+    },
+    {
+        "id": "arm_All_10_UR",
+        "name": "[UR] Lv.10 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "UR",
+        "type": "shield",
+        "race": "All",
+        "level": 10,
+        "bonus": {
+            "def": 2000
+        },
+        "image": "/assets/arctron_shield_2_rembg.png"
+    },
+    {
+        "id": "arm_All_20_D",
+        "name": "[D] Lv.20 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "D",
+        "type": "shield",
+        "race": "All",
+        "level": 20,
+        "bonus": {
+            "def": 160
+        },
+        "image": "/assets/arctron_shield_2_rembg.png"
+    },
+    {
+        "id": "arm_All_20_C",
+        "name": "[C] Lv.20 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "C",
+        "type": "shield",
+        "race": "All",
+        "level": 20,
+        "bonus": {
+            "def": 192
+        },
+        "image": "/assets/arctron_shield_2_rembg.png"
+    },
+    {
+        "id": "arm_All_20_B",
+        "name": "[B] Lv.20 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "B",
+        "type": "shield",
+        "race": "All",
+        "level": 20,
+        "bonus": {
+            "def": 240
+        },
+        "image": "/assets/arctron_shield_2_rembg.png"
+    },
+    {
+        "id": "arm_All_20_A",
+        "name": "[A] Lv.20 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "A",
+        "type": "shield",
+        "race": "All",
+        "level": 20,
+        "bonus": {
+            "def": 320
+        },
+        "image": "/assets/arctron_shield_2_rembg.png"
+    },
+    {
+        "id": "arm_All_20_S",
+        "name": "[S] Lv.20 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "S",
+        "type": "shield",
+        "race": "All",
+        "level": 20,
+        "bonus": {
+            "def": 480
+        },
+        "image": "/assets/arctron_shield_2_rembg.png"
+    },
+    {
+        "id": "arm_All_20_SS",
+        "name": "[SS] Lv.20 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SS",
+        "type": "shield",
+        "race": "All",
+        "level": 20,
+        "bonus": {
+            "def": 720
+        },
+        "image": "/assets/arctron_shield_2_rembg.png"
+    },
+    {
+        "id": "arm_All_20_SSS",
+        "name": "[SSS] Lv.20 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SSS",
+        "type": "shield",
+        "race": "All",
+        "level": 20,
+        "bonus": {
+            "def": 1120
+        },
+        "image": "/assets/arctron_shield_2_rembg.png"
+    },
+    {
+        "id": "arm_All_20_SR",
+        "name": "[SR] Lv.20 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SR",
+        "type": "shield",
+        "race": "All",
+        "level": 20,
+        "bonus": {
+            "def": 1600
+        },
+        "image": "/assets/arctron_shield_2_rembg.png"
+    },
+    {
+        "id": "arm_All_20_SSR",
+        "name": "[SSR] Lv.20 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SSR",
+        "type": "shield",
+        "race": "All",
+        "level": 20,
+        "bonus": {
+            "def": 2400
+        },
+        "image": "/assets/arctron_shield_2_rembg.png"
+    },
+    {
+        "id": "arm_All_20_UR",
+        "name": "[UR] Lv.20 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "UR",
+        "type": "shield",
+        "race": "All",
+        "level": 20,
+        "bonus": {
+            "def": 4000
+        },
+        "image": "/assets/arctron_shield_2_rembg.png"
+    },
+    {
+        "id": "arm_All_32_D",
+        "name": "[D] Lv.32 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "D",
+        "type": "shield",
+        "race": "All",
+        "level": 32,
+        "bonus": {
+            "def": 240
+        },
+        "image": "/assets/arctron_shield_2_rembg.png"
+    },
+    {
+        "id": "arm_All_32_C",
+        "name": "[C] Lv.32 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "C",
+        "type": "shield",
+        "race": "All",
+        "level": 32,
+        "bonus": {
+            "def": 288
+        },
+        "image": "/assets/arctron_shield_2_rembg.png"
+    },
+    {
+        "id": "arm_All_32_B",
+        "name": "[B] Lv.32 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "B",
+        "type": "shield",
+        "race": "All",
+        "level": 32,
+        "bonus": {
+            "def": 360
+        },
+        "image": "/assets/arctron_shield_2_rembg.png"
+    },
+    {
+        "id": "arm_All_32_A",
+        "name": "[A] Lv.32 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "A",
+        "type": "shield",
+        "race": "All",
+        "level": 32,
+        "bonus": {
+            "def": 480
+        },
+        "image": "/assets/arctron_shield_2_rembg.png"
+    },
+    {
+        "id": "arm_All_32_S",
+        "name": "[S] Lv.32 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "S",
+        "type": "shield",
+        "race": "All",
+        "level": 32,
+        "bonus": {
+            "def": 720
+        },
+        "image": "/assets/arctron_shield_2_rembg.png"
+    },
+    {
+        "id": "arm_All_32_SS",
+        "name": "[SS] Lv.32 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SS",
+        "type": "shield",
+        "race": "All",
+        "level": 32,
+        "bonus": {
+            "def": 1080
+        },
+        "image": "/assets/arctron_shield_2_rembg.png"
+    },
+    {
+        "id": "arm_All_32_SSS",
+        "name": "[SSS] Lv.32 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SSS",
+        "type": "shield",
+        "race": "All",
+        "level": 32,
+        "bonus": {
+            "def": 1680
+        },
+        "image": "/assets/arctron_shield_2_rembg.png"
+    },
+    {
+        "id": "arm_All_32_SR",
+        "name": "[SR] Lv.32 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SR",
+        "type": "shield",
+        "race": "All",
+        "level": 32,
+        "bonus": {
+            "def": 2400
+        },
+        "image": "/assets/arctron_shield_2_rembg.png"
+    },
+    {
+        "id": "arm_All_32_SSR",
+        "name": "[SSR] Lv.32 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SSR",
+        "type": "shield",
+        "race": "All",
+        "level": 32,
+        "bonus": {
+            "def": 3600
+        },
+        "image": "/assets/arctron_shield_2_rembg.png"
+    },
+    {
+        "id": "arm_All_32_UR",
+        "name": "[UR] Lv.32 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "UR",
+        "type": "shield",
+        "race": "All",
+        "level": 32,
+        "bonus": {
+            "def": 6000
+        },
+        "image": "/assets/arctron_shield_2_rembg.png"
+    },
+    {
+        "id": "arm_All_42_D",
+        "name": "[D] Lv.42 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "D",
+        "type": "shield",
+        "race": "All",
+        "level": 42,
+        "bonus": {
+            "def": 320
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_42_C",
+        "name": "[C] Lv.42 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "C",
+        "type": "shield",
+        "race": "All",
+        "level": 42,
+        "bonus": {
+            "def": 384
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_42_B",
+        "name": "[B] Lv.42 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "B",
+        "type": "shield",
+        "race": "All",
+        "level": 42,
+        "bonus": {
+            "def": 480
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_42_A",
+        "name": "[A] Lv.42 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "A",
+        "type": "shield",
+        "race": "All",
+        "level": 42,
+        "bonus": {
+            "def": 640
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_42_S",
+        "name": "[S] Lv.42 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "S",
+        "type": "shield",
+        "race": "All",
+        "level": 42,
+        "bonus": {
+            "def": 960
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_42_SS",
+        "name": "[SS] Lv.42 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SS",
+        "type": "shield",
+        "race": "All",
+        "level": 42,
+        "bonus": {
+            "def": 1440
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_42_SSS",
+        "name": "[SSS] Lv.42 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SSS",
+        "type": "shield",
+        "race": "All",
+        "level": 42,
+        "bonus": {
+            "def": 2240
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_42_SR",
+        "name": "[SR] Lv.42 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SR",
+        "type": "shield",
+        "race": "All",
+        "level": 42,
+        "bonus": {
+            "def": 3200
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_42_SSR",
+        "name": "[SSR] Lv.42 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SSR",
+        "type": "shield",
+        "race": "All",
+        "level": 42,
+        "bonus": {
+            "def": 4800
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_42_UR",
+        "name": "[UR] Lv.42 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "UR",
+        "type": "shield",
+        "race": "All",
+        "level": 42,
+        "bonus": {
+            "def": 8000
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_55_D",
+        "name": "[D] Lv.55 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "D",
+        "type": "shield",
+        "race": "All",
+        "level": 55,
+        "bonus": {
+            "def": 400
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_55_C",
+        "name": "[C] Lv.55 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "C",
+        "type": "shield",
+        "race": "All",
+        "level": 55,
+        "bonus": {
+            "def": 480
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_55_B",
+        "name": "[B] Lv.55 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "B",
+        "type": "shield",
+        "race": "All",
+        "level": 55,
+        "bonus": {
+            "def": 600
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_55_A",
+        "name": "[A] Lv.55 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "A",
+        "type": "shield",
+        "race": "All",
+        "level": 55,
+        "bonus": {
+            "def": 800
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_55_S",
+        "name": "[S] Lv.55 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "S",
+        "type": "shield",
+        "race": "All",
+        "level": 55,
+        "bonus": {
+            "def": 1200
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_55_SS",
+        "name": "[SS] Lv.55 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SS",
+        "type": "shield",
+        "race": "All",
+        "level": 55,
+        "bonus": {
+            "def": 1800
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_55_SSS",
+        "name": "[SSS] Lv.55 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SSS",
+        "type": "shield",
+        "race": "All",
+        "level": 55,
+        "bonus": {
+            "def": 2800
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_55_SR",
+        "name": "[SR] Lv.55 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SR",
+        "type": "shield",
+        "race": "All",
+        "level": 55,
+        "bonus": {
+            "def": 4000
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_55_SSR",
+        "name": "[SSR] Lv.55 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SSR",
+        "type": "shield",
+        "race": "All",
+        "level": 55,
+        "bonus": {
+            "def": 6000
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_55_UR",
+        "name": "[UR] Lv.55 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "UR",
+        "type": "shield",
+        "race": "All",
+        "level": 55,
+        "bonus": {
+            "def": 10000
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_60_D",
+        "name": "[D] Lv.60 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "D",
+        "type": "shield",
+        "race": "All",
+        "level": 60,
+        "bonus": {
+            "def": 480
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_60_C",
+        "name": "[C] Lv.60 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "C",
+        "type": "shield",
+        "race": "All",
+        "level": 60,
+        "bonus": {
+            "def": 576
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_60_B",
+        "name": "[B] Lv.60 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "B",
+        "type": "shield",
+        "race": "All",
+        "level": 60,
+        "bonus": {
+            "def": 720
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_60_A",
+        "name": "[A] Lv.60 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "A",
+        "type": "shield",
+        "race": "All",
+        "level": 60,
+        "bonus": {
+            "def": 960
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_60_S",
+        "name": "[S] Lv.60 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "S",
+        "type": "shield",
+        "race": "All",
+        "level": 60,
+        "bonus": {
+            "def": 1440
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_60_SS",
+        "name": "[SS] Lv.60 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SS",
+        "type": "shield",
+        "race": "All",
+        "level": 60,
+        "bonus": {
+            "def": 2160
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_60_SSS",
+        "name": "[SSS] Lv.60 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SSS",
+        "type": "shield",
+        "race": "All",
+        "level": 60,
+        "bonus": {
+            "def": 3360
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_60_SR",
+        "name": "[SR] Lv.60 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SR",
+        "type": "shield",
+        "race": "All",
+        "level": 60,
+        "bonus": {
+            "def": 4800
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_60_SSR",
+        "name": "[SSR] Lv.60 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SSR",
+        "type": "shield",
+        "race": "All",
+        "level": 60,
+        "bonus": {
+            "def": 7200
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_60_UR",
+        "name": "[UR] Lv.60 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "UR",
+        "type": "shield",
+        "race": "All",
+        "level": 60,
+        "bonus": {
+            "def": 12000
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_65_D",
+        "name": "[D] Lv.65 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "D",
+        "type": "shield",
+        "race": "All",
+        "level": 65,
+        "bonus": {
+            "def": 520
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_65_C",
+        "name": "[C] Lv.65 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "C",
+        "type": "shield",
+        "race": "All",
+        "level": 65,
+        "bonus": {
+            "def": 624
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_65_B",
+        "name": "[B] Lv.65 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "B",
+        "type": "shield",
+        "race": "All",
+        "level": 65,
+        "bonus": {
+            "def": 780
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_65_A",
+        "name": "[A] Lv.65 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "A",
+        "type": "shield",
+        "race": "All",
+        "level": 65,
+        "bonus": {
+            "def": 1040
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_65_S",
+        "name": "[S] Lv.65 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "S",
+        "type": "shield",
+        "race": "All",
+        "level": 65,
+        "bonus": {
+            "def": 1560
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_65_SS",
+        "name": "[SS] Lv.65 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SS",
+        "type": "shield",
+        "race": "All",
+        "level": 65,
+        "bonus": {
+            "def": 2340
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_65_SSS",
+        "name": "[SSS] Lv.65 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SSS",
+        "type": "shield",
+        "race": "All",
+        "level": 65,
+        "bonus": {
+            "def": 3640
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_65_SR",
+        "name": "[SR] Lv.65 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SR",
+        "type": "shield",
+        "race": "All",
+        "level": 65,
+        "bonus": {
+            "def": 5200
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_65_SSR",
+        "name": "[SSR] Lv.65 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SSR",
+        "type": "shield",
+        "race": "All",
+        "level": 65,
+        "bonus": {
+            "def": 7800
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_65_UR",
+        "name": "[UR] Lv.65 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "UR",
+        "type": "shield",
+        "race": "All",
+        "level": 65,
+        "bonus": {
+            "def": 13000
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_70_D",
+        "name": "[D] Lv.70 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "D",
+        "type": "shield",
+        "race": "All",
+        "level": 70,
+        "bonus": {
+            "def": 560
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_70_C",
+        "name": "[C] Lv.70 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "C",
+        "type": "shield",
+        "race": "All",
+        "level": 70,
+        "bonus": {
+            "def": 672
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_70_B",
+        "name": "[B] Lv.70 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "B",
+        "type": "shield",
+        "race": "All",
+        "level": 70,
+        "bonus": {
+            "def": 840
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_70_A",
+        "name": "[A] Lv.70 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "A",
+        "type": "shield",
+        "race": "All",
+        "level": 70,
+        "bonus": {
+            "def": 1120
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_70_S",
+        "name": "[S] Lv.70 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "S",
+        "type": "shield",
+        "race": "All",
+        "level": 70,
+        "bonus": {
+            "def": 1680
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_70_SS",
+        "name": "[SS] Lv.70 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SS",
+        "type": "shield",
+        "race": "All",
+        "level": 70,
+        "bonus": {
+            "def": 2520
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_70_SSS",
+        "name": "[SSS] Lv.70 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SSS",
+        "type": "shield",
+        "race": "All",
+        "level": 70,
+        "bonus": {
+            "def": 3920
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_70_SR",
+        "name": "[SR] Lv.70 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SR",
+        "type": "shield",
+        "race": "All",
+        "level": 70,
+        "bonus": {
+            "def": 5600
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_70_SSR",
+        "name": "[SSR] Lv.70 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SSR",
+        "type": "shield",
+        "race": "All",
+        "level": 70,
+        "bonus": {
+            "def": 8400
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_70_UR",
+        "name": "[UR] Lv.70 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "UR",
+        "type": "shield",
+        "race": "All",
+        "level": 70,
+        "bonus": {
+            "def": 14000
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_80_D",
+        "name": "[D] Lv.80 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "D",
+        "type": "shield",
+        "race": "All",
+        "level": 80,
+        "bonus": {
+            "def": 640
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_80_C",
+        "name": "[C] Lv.80 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "C",
+        "type": "shield",
+        "race": "All",
+        "level": 80,
+        "bonus": {
+            "def": 768
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_80_B",
+        "name": "[B] Lv.80 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "B",
+        "type": "shield",
+        "race": "All",
+        "level": 80,
+        "bonus": {
+            "def": 960
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_80_A",
+        "name": "[A] Lv.80 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "A",
+        "type": "shield",
+        "race": "All",
+        "level": 80,
+        "bonus": {
+            "def": 1280
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_80_S",
+        "name": "[S] Lv.80 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "S",
+        "type": "shield",
+        "race": "All",
+        "level": 80,
+        "bonus": {
+            "def": 1920
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_80_SS",
+        "name": "[SS] Lv.80 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SS",
+        "type": "shield",
+        "race": "All",
+        "level": 80,
+        "bonus": {
+            "def": 2880
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_80_SSS",
+        "name": "[SSS] Lv.80 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SSS",
+        "type": "shield",
+        "race": "All",
+        "level": 80,
+        "bonus": {
+            "def": 4480
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_80_SR",
+        "name": "[SR] Lv.80 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SR",
+        "type": "shield",
+        "race": "All",
+        "level": 80,
+        "bonus": {
+            "def": 6400
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_80_SSR",
+        "name": "[SSR] Lv.80 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SSR",
+        "type": "shield",
+        "race": "All",
+        "level": 80,
+        "bonus": {
+            "def": 9600
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_80_UR",
+        "name": "[UR] Lv.80 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "UR",
+        "type": "shield",
+        "race": "All",
+        "level": 80,
+        "bonus": {
+            "def": 16000
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_90_D",
+        "name": "[D] Lv.90 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "D",
+        "type": "shield",
+        "race": "All",
+        "level": 90,
+        "bonus": {
+            "def": 720
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_90_C",
+        "name": "[C] Lv.90 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "C",
+        "type": "shield",
+        "race": "All",
+        "level": 90,
+        "bonus": {
+            "def": 864
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_90_B",
+        "name": "[B] Lv.90 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "B",
+        "type": "shield",
+        "race": "All",
+        "level": 90,
+        "bonus": {
+            "def": 1080
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_90_A",
+        "name": "[A] Lv.90 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "A",
+        "type": "shield",
+        "race": "All",
+        "level": 90,
+        "bonus": {
+            "def": 1440
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_90_S",
+        "name": "[S] Lv.90 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "S",
+        "type": "shield",
+        "race": "All",
+        "level": 90,
+        "bonus": {
+            "def": 2160
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_90_SS",
+        "name": "[SS] Lv.90 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SS",
+        "type": "shield",
+        "race": "All",
+        "level": 90,
+        "bonus": {
+            "def": 3240
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_90_SSS",
+        "name": "[SSS] Lv.90 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SSS",
+        "type": "shield",
+        "race": "All",
+        "level": 90,
+        "bonus": {
+            "def": 5040
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_90_SR",
+        "name": "[SR] Lv.90 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SR",
+        "type": "shield",
+        "race": "All",
+        "level": 90,
+        "bonus": {
+            "def": 7200
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_90_SSR",
+        "name": "[SSR] Lv.90 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SSR",
+        "type": "shield",
+        "race": "All",
+        "level": 90,
+        "bonus": {
+            "def": 10800
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_90_UR",
+        "name": "[UR] Lv.90 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "UR",
+        "type": "shield",
+        "race": "All",
+        "level": 90,
+        "bonus": {
+            "def": 18000
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_100_D",
+        "name": "[D] Lv.100 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "D",
+        "type": "shield",
+        "race": "All",
+        "level": 100,
+        "bonus": {
+            "def": 800
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_100_C",
+        "name": "[C] Lv.100 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "C",
+        "type": "shield",
+        "race": "All",
+        "level": 100,
+        "bonus": {
+            "def": 960
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_100_B",
+        "name": "[B] Lv.100 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "B",
+        "type": "shield",
+        "race": "All",
+        "level": 100,
+        "bonus": {
+            "def": 1200
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_100_A",
+        "name": "[A] Lv.100 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "A",
+        "type": "shield",
+        "race": "All",
+        "level": 100,
+        "bonus": {
+            "def": 1600
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_100_S",
+        "name": "[S] Lv.100 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "S",
+        "type": "shield",
+        "race": "All",
+        "level": 100,
+        "bonus": {
+            "def": 2400
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_100_SS",
+        "name": "[SS] Lv.100 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SS",
+        "type": "shield",
+        "race": "All",
+        "level": 100,
+        "bonus": {
+            "def": 3600
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_100_SSS",
+        "name": "[SSS] Lv.100 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SSS",
+        "type": "shield",
+        "race": "All",
+        "level": 100,
+        "bonus": {
+            "def": 5600
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_100_SR",
+        "name": "[SR] Lv.100 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SR",
+        "type": "shield",
+        "race": "All",
+        "level": 100,
+        "bonus": {
+            "def": 8000
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_100_SSR",
+        "name": "[SSR] Lv.100 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "SSR",
+        "type": "shield",
+        "race": "All",
+        "level": 100,
+        "bonus": {
+            "def": 12000
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "arm_All_100_UR",
+        "name": "[UR] Lv.100 Carbon Shield",
+        "emoji": "🛡️",
+        "rarity": "UR",
+        "type": "shield",
+        "race": "All",
+        "level": 100,
+        "bonus": {
+            "def": 20000
+        },
+        "image": "/assets/arctron_shield_3_rembg.png"
+    },
+    {
+        "id": "leg_shield",
+        "name": "Legendary Shield",
+        "emoji": "🛡️",
+        "rarity": "legendary",
+        "type": "shield",
+        "race": "All",
+        "level": 55,
+        "bonus": {
+            "def": 120,
+            "hp": 2500
+        },
+        "description": "DEF+120 | HP+2500",
+        "image": "/assets/arctron_shield_3_rembg.png"
+    }
+]

@@ -1,6 +1,19 @@
 import { useState, useEffect } from 'react'
 import { useGameStore } from '../store/gameStore'
-import itemsData from '../data/items.json'
+import itemsDataRaw from '../data/items.json'
+import weaponsData from '../data/weapons.json'
+import armorsData from '../data/armors.json'
+import shieldsData from '../data/shields.json'
+
+const itemsData = {
+  items: [
+    ...(itemsDataRaw.items || []),
+    ...weaponsData,
+    ...armorsData,
+    ...shieldsData
+  ],
+  materials: itemsDataRaw.materials || []
+}
 import enemiesData from '../data/enemies.json'
 
 import spriteF1 from '../assets/1F-SentryDementor_rembg.png'

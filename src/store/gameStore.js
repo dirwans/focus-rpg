@@ -4,7 +4,21 @@ import races from '../data/races.json'
 import jobs from '../data/jobs.json'
 import enemies from '../data/enemies.json'
 import upgradesConfig from '../data/upgrades.json'
-import itemsData from '../data/items.json'
+import itemsDataRaw from '../data/items.json'
+import weaponsData from '../data/weapons.json'
+import armorsData from '../data/armors.json'
+import shieldsData from '../data/shields.json'
+
+const itemsData = {
+  items: [
+    ...(itemsDataRaw.items || []),
+    ...weaponsData,
+    ...armorsData,
+    ...shieldsData
+  ],
+  materials: itemsDataRaw.materials || []
+}
+
 import archonData from '../data/archon.json'
 import titlesData from '../data/titles.json'
 import { getWeaponRarityBonus } from '../lib/rarity'
