@@ -176,11 +176,11 @@ export default function AuditorRoom() {
                 const numMatch = idStr.match(/_(\d+)/);
                 if (numMatch) {
                     const val = parseInt(numMatch[1], 10);
-                    if (val === 1 || val === 0) level = '1';
-                    else if (val === 30 || val === 32) level = '32';
-                    else if (val === 40 || val === 42) level = '42';
-                    else if (val === 50 || val === 55) level = '55';
-                    else if (val === 60 || val === 65 || val === 66) level = '66';
+                    if (val === 0 || val === 1) level = '1';
+                    else if (val === 2 || val === 30 || val === 32) level = '32';
+                    else if (val === 3 || val === 40 || val === 42) level = '42';
+                    else if (val === 4 || val === 50 || val === 55) level = '55';
+                    else if (val === 5 || val === 60 || val === 65 || val === 66) level = '66';
                 }
 
                  const isWeapon = idStr.includes('wpn_') || idStr.includes('gw_');
