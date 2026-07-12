@@ -1519,6 +1519,14 @@ app.post('/api/audit/delete_draft', (req, res) => {
 
 // ── Serve React build ─────────────────────────────────────────────────────────
 // Hashed assets (JS/CSS) can be cached forever; index.html must revalidate
+// Serve public assets (gear images, sprites, materials) from public/assets
+app.use('/assets', express.static(join(__dirname, 'public', 'assets'), {
+  maxAge: '1d',
+  setHeaders: (res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+  }
+}))
+// Hashed assets (JS/CSS) can be cached forever; index.html must revalidate
 app.use('/assets', express.static(join(__dirname, 'dist', 'assets'), {
   maxAge: '1y',
   immutable: true,
