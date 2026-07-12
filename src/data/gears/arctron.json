@@ -277,40 +277,6 @@
   ],
   "armorSets": [
     {
-      "id": "set_arc_0",
-      "name": "Sentinel Set",
-      "grade": "Common",
-      "parts": [
-        "Helmet",
-        "Armor",
-        "Pants",
-        "Gloves",
-        "Boots"
-      ],
-      "stats": {
-        "Helmet": {
-          "hp": 80,
-          "def": 8
-        },
-        "Armor": {
-          "hp": 180,
-          "def": 18
-        },
-        "Pants": {
-          "hp": 140,
-          "def": 14
-        },
-        "Gloves": {
-          "hp": 60,
-          "def": 6
-        },
-        "Boots": {
-          "hp": 70,
-          "def": 7
-        }
-      }
-    },
-    {
       "id": "set_arc_1",
       "name": "Vanguard Set",
       "grade": "Uncommon",

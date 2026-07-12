@@ -335,40 +335,6 @@
   },
   "armorSets": [
     {
-      "id": "set_cor_0",
-      "name": "Moonveil Set",
-      "grade": "Common",
-      "parts": [
-        "Helmet",
-        "Armor",
-        "Pants",
-        "Gloves",
-        "Boots"
-      ],
-      "stats": {
-        "Helmet": {
-          "hp": 80,
-          "def": 8
-        },
-        "Armor": {
-          "hp": 180,
-          "def": 18
-        },
-        "Pants": {
-          "hp": 140,
-          "def": 14
-        },
-        "Gloves": {
-          "hp": 60,
-          "def": 6
-        },
-        "Boots": {
-          "hp": 70,
-          "def": 7
-        }
-      }
-    },
-    {
       "id": "set_cor_1",
       "name": "Sylvan Set",
       "grade": "Uncommon",
