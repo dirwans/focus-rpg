@@ -20218,333 +20218,333 @@
         },
         {
             "id": "ore_ignis_common",
-            "name": "Common Ignis Ore",
+            "name": "Common Ore (C)",
             "emoji": "🟥",
             "rarity": "common",
             "type": "material",
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_ignis_ore.png?v=3"
+            "image": "/assets/materials/common_ore.png?v=5"
         },
         {
             "id": "ore_ignis_rare",
-            "name": "Rare Ignis Ore",
+            "name": "Rare Ore (R)",
             "emoji": "🟥",
             "rarity": "rare",
             "type": "material",
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_ignis_ore.png?v=3"
+            "image": "/assets/materials/rare_ore.png?v=5"
         },
         {
             "id": "ore_ignis_epic",
-            "name": "Epic Ignis Ore",
+            "name": "Epic Ore (E)",
             "emoji": "🟥",
             "rarity": "epic",
             "type": "material",
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_ignis_ore.png?v=3"
+            "image": "/assets/materials/epic_ore.png?v=5"
         },
         {
             "id": "ore_virel_common",
-            "name": "Common Virel Ore",
+            "name": "Common Ore (C)",
             "emoji": "🟦",
             "rarity": "common",
             "type": "material",
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_virel_ore.png?v=3"
+            "image": "/assets/materials/common_ore.png?v=5"
         },
         {
             "id": "ore_virel_rare",
-            "name": "Rare Virel Ore",
+            "name": "Rare Ore (R)",
             "emoji": "🟦",
             "rarity": "rare",
             "type": "material",
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_virel_ore.png?v=3"
+            "image": "/assets/materials/rare_ore.png?v=5"
         },
         {
             "id": "ore_virel_epic",
-            "name": "Epic Virel Ore",
+            "name": "Epic Ore (E)",
             "emoji": "🟦",
             "rarity": "epic",
             "type": "material",
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_virel_ore.png?v=3"
+            "image": "/assets/materials/epic_ore.png?v=5"
         },
         {
             "id": "ore_kryos_common",
-            "name": "Common Kryos Ore",
+            "name": "Common Ore (C)",
             "emoji": "🟩",
             "rarity": "common",
             "type": "material",
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_kryos_ore.png?v=3"
+            "image": "/assets/materials/common_ore.png?v=5"
         },
         {
             "id": "ore_kryos_rare",
-            "name": "Rare Kryos Ore",
+            "name": "Rare Ore (R)",
             "emoji": "🟩",
             "rarity": "rare",
             "type": "material",
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_kryos_ore.png?v=3"
+            "image": "/assets/materials/rare_ore.png?v=5"
         },
         {
             "id": "ore_kryos_epic",
-            "name": "Epic Kryos Ore",
+            "name": "Epic Ore (E)",
             "emoji": "🟩",
             "rarity": "epic",
             "type": "material",
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_kryos_ore.png?v=3"
+            "image": "/assets/materials/epic_ore.png?v=5"
         },
         {
             "id": "ore_zephra_common",
-            "name": "Common Zephra Ore",
+            "name": "Common Ore (C)",
             "emoji": "🟨",
             "rarity": "common",
             "type": "material",
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_zephra_ore.png?v=3"
+            "image": "/assets/materials/common_ore.png?v=5"
         },
         {
             "id": "ore_zephra_rare",
-            "name": "Rare Zephra Ore",
+            "name": "Rare Ore (R)",
             "emoji": "🟨",
             "rarity": "rare",
             "type": "material",
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_zephra_ore.png?v=3"
+            "image": "/assets/materials/rare_ore.png?v=5"
         },
         {
             "id": "ore_zephra_epic",
-            "name": "Epic Zephra Ore",
+            "name": "Epic Ore (E)",
             "emoji": "🟨",
             "rarity": "epic",
             "type": "material",
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_zephra_ore.png?v=3"
+            "image": "/assets/materials/epic_ore.png?v=5"
         },
         {
             "id": "ore_umbrix_common",
-            "name": "Common Umbrix Ore",
+            "name": "Common Ore (C)",
             "emoji": "⬛",
             "rarity": "common",
             "type": "material",
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_umbrix_ore.png?v=3"
+            "image": "/assets/materials/common_ore.png?v=5"
         },
         {
             "id": "ore_umbrix_rare",
-            "name": "Rare Umbrix Ore",
+            "name": "Rare Ore (R)",
             "emoji": "⬛",
             "rarity": "rare",
             "type": "material",
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_umbrix_ore.png?v=3"
+            "image": "/assets/materials/rare_ore.png?v=5"
         },
         {
             "id": "ore_umbrix_epic",
-            "name": "Epic Umbrix Ore",
+            "name": "Epic Ore (E)",
             "emoji": "⬛",
             "rarity": "epic",
             "type": "material",
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_umbrix_ore.png?v=3"
+            "image": "/assets/materials/epic_ore.png?v=5"
         },
         {
             "id": "shard_ignis_common",
-            "name": "Common Ignis Shard",
+            "name": "Common Shard (C)",
             "emoji": "🔴",
             "rarity": "common",
             "type": "material",
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_ignis_shard.png?v=3"
+            "image": "/assets/materials/common_shard.png?v=5"
         },
         {
             "id": "shard_ignis_rare",
-            "name": "Rare Ignis Shard",
+            "name": "Rare Shard (R)",
             "emoji": "🔴",
             "rarity": "rare",
             "type": "material",
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_ignis_shard.png?v=3"
+            "image": "/assets/materials/rare_shard.png?v=5"
         },
         {
             "id": "shard_ignis_epic",
-            "name": "Epic Ignis Shard",
+            "name": "Epic Shard (E)",
             "emoji": "🔴",
             "rarity": "epic",
             "type": "material",
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_ignis_shard.png?v=3"
+            "image": "/assets/materials/epic_shard.png?v=5"
         },
         {
             "id": "shard_virel_common",
-            "name": "Common Virel Shard",
+            "name": "Common Shard (C)",
             "emoji": "🔵",
             "rarity": "common",
             "type": "material",
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_virel_shard.png?v=3"
+            "image": "/assets/materials/common_shard.png?v=5"
         },
         {
             "id": "shard_virel_rare",
-            "name": "Rare Virel Shard",
+            "name": "Rare Shard (R)",
             "emoji": "🔵",
             "rarity": "rare",
             "type": "material",
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_virel_shard.png?v=3"
+            "image": "/assets/materials/rare_shard.png?v=5"
         },
         {
             "id": "shard_virel_epic",
-            "name": "Epic Virel Shard",
+            "name": "Epic Shard (E)",
             "emoji": "🔵",
             "rarity": "epic",
             "type": "material",
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_virel_shard.png?v=3"
+            "image": "/assets/materials/epic_shard.png?v=5"
         },
         {
             "id": "shard_kryos_common",
-            "name": "Common Kryos Shard",
+            "name": "Common Shard (C)",
             "emoji": "🟢",
             "rarity": "common",
             "type": "material",
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_kryos_shard.png?v=3"
+            "image": "/assets/materials/common_shard.png?v=5"
         },
         {
             "id": "shard_kryos_rare",
-            "name": "Rare Kryos Shard",
+            "name": "Rare Shard (R)",
             "emoji": "🟢",
             "rarity": "rare",
             "type": "material",
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_kryos_shard.png?v=3"
+            "image": "/assets/materials/rare_shard.png?v=5"
         },
         {
             "id": "shard_kryos_epic",
-            "name": "Epic Kryos Shard",
+            "name": "Epic Shard (E)",
             "emoji": "🟢",
             "rarity": "epic",
             "type": "material",
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_kryos_shard.png?v=3"
+            "image": "/assets/materials/epic_shard.png?v=5"
         },
         {
             "id": "shard_zephra_common",
-            "name": "Common Zephra Shard",
+            "name": "Common Shard (C)",
             "emoji": "🟡",
             "rarity": "common",
             "type": "material",
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_zephra_shard.png?v=3"
+            "image": "/assets/materials/common_shard.png?v=5"
         },
         {
             "id": "shard_zephra_rare",
-            "name": "Rare Zephra Shard",
+            "name": "Rare Shard (R)",
             "emoji": "🟡",
             "rarity": "rare",
             "type": "material",
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_zephra_shard.png?v=3"
+            "image": "/assets/materials/rare_shard.png?v=5"
         },
         {
             "id": "shard_zephra_epic",
-            "name": "Epic Zephra Shard",
+            "name": "Epic Shard (E)",
             "emoji": "🟡",
             "rarity": "epic",
             "type": "material",
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_zephra_shard.png?v=3"
+            "image": "/assets/materials/epic_shard.png?v=5"
         },
         {
             "id": "shard_umbrix_common",
-            "name": "Common Umbrix Shard",
+            "name": "Common Shard (C)",
             "emoji": "⚫",
             "rarity": "common",
             "type": "material",
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_umbrix_shard.png?v=3"
+            "image": "/assets/materials/common_shard.png?v=5"
         },
         {
             "id": "shard_umbrix_rare",
-            "name": "Rare Umbrix Shard",
+            "name": "Rare Shard (R)",
             "emoji": "⚫",
             "rarity": "rare",
             "type": "material",
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_umbrix_shard.png?v=3"
+            "image": "/assets/materials/rare_shard.png?v=5"
         },
         {
             "id": "shard_umbrix_epic",
-            "name": "Epic Umbrix Shard",
+            "name": "Epic Shard (E)",
             "emoji": "⚫",
             "rarity": "epic",
             "type": "material",
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_umbrix_shard.png?v=3"
+            "image": "/assets/materials/epic_shard.png?v=5"
         },
         {
             "id": "mat_epic_weapon",
@@ -25089,663 +25089,663 @@
     "materials": [
         {
             "id": "ore_ignis_common",
-            "name": "Common Ignis Ore",
+            "name": "Common Ore (C)",
             "emoji": "🟥",
             "rarity": "common",
             "type": "material",
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_ignis_ore.png?v=3"
+            "image": "/assets/materials/common_ore.png?v=5"
         },
         {
             "id": "ore_ignis_uncommon",
-            "name": "Uncommon Ignis Ore",
+            "name": "Uncommon Ore (UC)",
             "emoji": "🟥",
             "rarity": "uncommon",
             "type": "material",
             "race": "All",
             "level": 15,
             "bonus": {},
-            "image": "/assets/materials/uncommon_ignis_ore.png?v=3"
+            "image": "/assets/materials/uncommon_ore.png?v=5"
         },
         {
             "id": "ore_ignis_rare",
-            "name": "Rare Ignis Ore",
+            "name": "Rare Ore (R)",
             "emoji": "🟥",
             "rarity": "rare",
             "type": "material",
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_ignis_ore.png?v=3"
+            "image": "/assets/materials/rare_ore.png?v=5"
         },
         {
             "id": "ore_ignis_epic",
-            "name": "Epic Ignis Ore",
+            "name": "Epic Ore (E)",
             "emoji": "🟥",
             "rarity": "epic",
             "type": "material",
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_ignis_ore.png?v=3"
+            "image": "/assets/materials/epic_ore.png?v=5"
         },
         {
             "id": "ore_ignis_legendary",
-            "name": "Legendary Ignis Ore",
+            "name": "Legendary Ore (L)",
             "emoji": "🟥",
             "rarity": "legendary",
             "type": "material",
             "race": "All",
             "level": 60,
             "bonus": {},
-            "image": "/assets/materials/legendary_ignis_ore.png?v=3"
+            "image": "/assets/materials/legendary_ore.png?v=5"
         },
         {
             "id": "ore_ignis_mythic",
-            "name": "Mythic Ignis Ore",
+            "name": "Mythic Ore (M)",
             "emoji": "🟥",
             "rarity": "mythic",
             "type": "material",
             "race": "All",
             "level": 65,
             "bonus": {},
-            "image": "/assets/materials/mythic_ignis_ore.png?v=3"
+            "image": "/assets/materials/mythic_ore.png?v=5"
         },
         {
             "id": "shard_ignis_common",
-            "name": "Common Ignis Shard",
+            "name": "Common Shard (C)",
             "emoji": "🟥",
             "rarity": "common",
             "type": "material",
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_ignis_shard.png?v=3"
+            "image": "/assets/materials/common_shard.png?v=5"
         },
         {
             "id": "shard_ignis_uncommon",
-            "name": "Uncommon Ignis Shard",
+            "name": "Uncommon Shard (UC)",
             "emoji": "🟥",
             "rarity": "uncommon",
             "type": "material",
             "race": "All",
             "level": 15,
             "bonus": {},
-            "image": "/assets/materials/uncommon_ignis_shard.png?v=3"
+            "image": "/assets/materials/uncommon_shard.png?v=5"
         },
         {
             "id": "shard_ignis_rare",
-            "name": "Rare Ignis Shard",
+            "name": "Rare Shard (R)",
             "emoji": "🟥",
             "rarity": "rare",
             "type": "material",
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_ignis_shard.png?v=3"
+            "image": "/assets/materials/rare_shard.png?v=5"
         },
         {
             "id": "shard_ignis_epic",
-            "name": "Epic Ignis Shard",
+            "name": "Epic Shard (E)",
             "emoji": "🟥",
             "rarity": "epic",
             "type": "material",
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_ignis_shard.png?v=3"
+            "image": "/assets/materials/epic_shard.png?v=5"
         },
         {
             "id": "shard_ignis_legendary",
-            "name": "Legendary Ignis Shard",
+            "name": "Legendary Shard (L)",
             "emoji": "🟥",
             "rarity": "legendary",
             "type": "material",
             "race": "All",
             "level": 60,
             "bonus": {},
-            "image": "/assets/materials/legendary_ignis_shard.png?v=3"
+            "image": "/assets/materials/legendary_shard.png?v=5"
         },
         {
             "id": "shard_ignis_mythic",
-            "name": "Mythic Ignis Shard",
+            "name": "Mythic Shard (M)",
             "emoji": "🟥",
             "rarity": "mythic",
             "type": "material",
             "race": "All",
             "level": 65,
             "bonus": {},
-            "image": "/assets/materials/mythic_ignis_shard.png?v=3"
+            "image": "/assets/materials/mythic_shard.png?v=5"
         },
         {
             "id": "ore_kryos_common",
-            "name": "Common Kryos Ore",
+            "name": "Common Ore (C)",
             "emoji": "🟦",
             "rarity": "common",
             "type": "material",
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_kryos_ore.png?v=3"
+            "image": "/assets/materials/common_ore.png?v=5"
         },
         {
             "id": "ore_kryos_uncommon",
-            "name": "Uncommon Kryos Ore",
+            "name": "Uncommon Ore (UC)",
             "emoji": "🟦",
             "rarity": "uncommon",
             "type": "material",
             "race": "All",
             "level": 15,
             "bonus": {},
-            "image": "/assets/materials/uncommon_kryos_ore.png?v=3"
+            "image": "/assets/materials/uncommon_ore.png?v=5"
         },
         {
             "id": "ore_kryos_rare",
-            "name": "Rare Kryos Ore",
+            "name": "Rare Ore (R)",
             "emoji": "🟦",
             "rarity": "rare",
             "type": "material",
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_kryos_ore.png?v=3"
+            "image": "/assets/materials/rare_ore.png?v=5"
         },
         {
             "id": "ore_kryos_epic",
-            "name": "Epic Kryos Ore",
+            "name": "Epic Ore (E)",
             "emoji": "🟦",
             "rarity": "epic",
             "type": "material",
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_kryos_ore.png?v=3"
+            "image": "/assets/materials/epic_ore.png?v=5"
         },
         {
             "id": "ore_kryos_legendary",
-            "name": "Legendary Kryos Ore",
+            "name": "Legendary Ore (L)",
             "emoji": "🟦",
             "rarity": "legendary",
             "type": "material",
             "race": "All",
             "level": 60,
             "bonus": {},
-            "image": "/assets/materials/legendary_kryos_ore.png?v=3"
+            "image": "/assets/materials/legendary_ore.png?v=5"
         },
         {
             "id": "ore_kryos_mythic",
-            "name": "Mythic Kryos Ore",
+            "name": "Mythic Ore (M)",
             "emoji": "🟦",
             "rarity": "mythic",
             "type": "material",
             "race": "All",
             "level": 65,
             "bonus": {},
-            "image": "/assets/materials/mythic_kryos_ore.png?v=3"
+            "image": "/assets/materials/mythic_ore.png?v=5"
         },
         {
             "id": "shard_kryos_common",
-            "name": "Common Kryos Shard",
+            "name": "Common Shard (C)",
             "emoji": "🟦",
             "rarity": "common",
             "type": "material",
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_kryos_shard.png?v=3"
+            "image": "/assets/materials/common_shard.png?v=5"
         },
         {
             "id": "shard_kryos_uncommon",
-            "name": "Uncommon Kryos Shard",
+            "name": "Uncommon Shard (UC)",
             "emoji": "🟦",
             "rarity": "uncommon",
             "type": "material",
             "race": "All",
             "level": 15,
             "bonus": {},
-            "image": "/assets/materials/uncommon_kryos_shard.png?v=3"
+            "image": "/assets/materials/uncommon_shard.png?v=5"
         },
         {
             "id": "shard_kryos_rare",
-            "name": "Rare Kryos Shard",
+            "name": "Rare Shard (R)",
             "emoji": "🟦",
             "rarity": "rare",
             "type": "material",
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_kryos_shard.png?v=3"
+            "image": "/assets/materials/rare_shard.png?v=5"
         },
         {
             "id": "shard_kryos_epic",
-            "name": "Epic Kryos Shard",
+            "name": "Epic Shard (E)",
             "emoji": "🟦",
             "rarity": "epic",
             "type": "material",
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_kryos_shard.png?v=3"
+            "image": "/assets/materials/epic_shard.png?v=5"
         },
         {
             "id": "shard_kryos_legendary",
-            "name": "Legendary Kryos Shard",
+            "name": "Legendary Shard (L)",
             "emoji": "🟦",
             "rarity": "legendary",
             "type": "material",
             "race": "All",
             "level": 60,
             "bonus": {},
-            "image": "/assets/materials/legendary_kryos_shard.png?v=3"
+            "image": "/assets/materials/legendary_shard.png?v=5"
         },
         {
             "id": "shard_kryos_mythic",
-            "name": "Mythic Kryos Shard",
+            "name": "Mythic Shard (M)",
             "emoji": "🟦",
             "rarity": "mythic",
             "type": "material",
             "race": "All",
             "level": 65,
             "bonus": {},
-            "image": "/assets/materials/mythic_kryos_shard.png?v=3"
+            "image": "/assets/materials/mythic_shard.png?v=5"
         },
         {
             "id": "ore_virel_common",
-            "name": "Common Virel Ore",
+            "name": "Common Ore (C)",
             "emoji": "🟨",
             "rarity": "common",
             "type": "material",
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_virel_ore.png?v=3"
+            "image": "/assets/materials/common_ore.png?v=5"
         },
         {
             "id": "ore_virel_uncommon",
-            "name": "Uncommon Virel Ore",
+            "name": "Uncommon Ore (UC)",
             "emoji": "🟨",
             "rarity": "uncommon",
             "type": "material",
             "race": "All",
             "level": 15,
             "bonus": {},
-            "image": "/assets/materials/uncommon_virel_ore.png?v=3"
+            "image": "/assets/materials/uncommon_ore.png?v=5"
         },
         {
             "id": "ore_virel_rare",
-            "name": "Rare Virel Ore",
+            "name": "Rare Ore (R)",
             "emoji": "🟨",
             "rarity": "rare",
             "type": "material",
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_virel_ore.png?v=3"
+            "image": "/assets/materials/rare_ore.png?v=5"
         },
         {
             "id": "ore_virel_epic",
-            "name": "Epic Virel Ore",
+            "name": "Epic Ore (E)",
             "emoji": "🟨",
             "rarity": "epic",
             "type": "material",
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_virel_ore.png?v=3"
+            "image": "/assets/materials/epic_ore.png?v=5"
         },
         {
             "id": "ore_virel_legendary",
-            "name": "Legendary Virel Ore",
+            "name": "Legendary Ore (L)",
             "emoji": "🟨",
             "rarity": "legendary",
             "type": "material",
             "race": "All",
             "level": 60,
             "bonus": {},
-            "image": "/assets/materials/legendary_virel_ore.png?v=3"
+            "image": "/assets/materials/legendary_ore.png?v=5"
         },
         {
             "id": "ore_virel_mythic",
-            "name": "Mythic Virel Ore",
+            "name": "Mythic Ore (M)",
             "emoji": "🟨",
             "rarity": "mythic",
             "type": "material",
             "race": "All",
             "level": 65,
             "bonus": {},
-            "image": "/assets/materials/mythic_virel_ore.png?v=3"
+            "image": "/assets/materials/mythic_ore.png?v=5"
         },
         {
             "id": "shard_virel_common",
-            "name": "Common Virel Shard",
+            "name": "Common Shard (C)",
             "emoji": "🟨",
             "rarity": "common",
             "type": "material",
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_virel_shard.png?v=3"
+            "image": "/assets/materials/common_shard.png?v=5"
         },
         {
             "id": "shard_virel_uncommon",
-            "name": "Uncommon Virel Shard",
+            "name": "Uncommon Shard (UC)",
             "emoji": "🟨",
             "rarity": "uncommon",
             "type": "material",
             "race": "All",
             "level": 15,
             "bonus": {},
-            "image": "/assets/materials/uncommon_virel_shard.png?v=3"
+            "image": "/assets/materials/uncommon_shard.png?v=5"
         },
         {
             "id": "shard_virel_rare",
-            "name": "Rare Virel Shard",
+            "name": "Rare Shard (R)",
             "emoji": "🟨",
             "rarity": "rare",
             "type": "material",
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_virel_shard.png?v=3"
+            "image": "/assets/materials/rare_shard.png?v=5"
         },
         {
             "id": "shard_virel_epic",
-            "name": "Epic Virel Shard",
+            "name": "Epic Shard (E)",
             "emoji": "🟨",
             "rarity": "epic",
             "type": "material",
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_virel_shard.png?v=3"
+            "image": "/assets/materials/epic_shard.png?v=5"
         },
         {
             "id": "shard_virel_legendary",
-            "name": "Legendary Virel Shard",
+            "name": "Legendary Shard (L)",
             "emoji": "🟨",
             "rarity": "legendary",
             "type": "material",
             "race": "All",
             "level": 60,
             "bonus": {},
-            "image": "/assets/materials/legendary_virel_shard.png?v=3"
+            "image": "/assets/materials/legendary_shard.png?v=5"
         },
         {
             "id": "shard_virel_mythic",
-            "name": "Mythic Virel Shard",
+            "name": "Mythic Shard (M)",
             "emoji": "🟨",
             "rarity": "mythic",
             "type": "material",
             "race": "All",
             "level": 65,
             "bonus": {},
-            "image": "/assets/materials/mythic_virel_shard.png?v=3"
+            "image": "/assets/materials/mythic_shard.png?v=5"
         },
         {
             "id": "ore_zephra_common",
-            "name": "Common Zephra Ore",
+            "name": "Common Ore (C)",
             "emoji": "🟩",
             "rarity": "common",
             "type": "material",
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_zephra_ore.png?v=3"
+            "image": "/assets/materials/common_ore.png?v=5"
         },
         {
             "id": "ore_zephra_uncommon",
-            "name": "Uncommon Zephra Ore",
+            "name": "Uncommon Ore (UC)",
             "emoji": "🟩",
             "rarity": "uncommon",
             "type": "material",
             "race": "All",
             "level": 15,
             "bonus": {},
-            "image": "/assets/materials/uncommon_zephra_ore.png?v=3"
+            "image": "/assets/materials/uncommon_ore.png?v=5"
         },
         {
             "id": "ore_zephra_rare",
-            "name": "Rare Zephra Ore",
+            "name": "Rare Ore (R)",
             "emoji": "🟩",
             "rarity": "rare",
             "type": "material",
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_zephra_ore.png?v=3"
+            "image": "/assets/materials/rare_ore.png?v=5"
         },
         {
             "id": "ore_zephra_epic",
-            "name": "Epic Zephra Ore",
+            "name": "Epic Ore (E)",
             "emoji": "🟩",
             "rarity": "epic",
             "type": "material",
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_zephra_ore.png?v=3"
+            "image": "/assets/materials/epic_ore.png?v=5"
         },
         {
             "id": "ore_zephra_legendary",
-            "name": "Legendary Zephra Ore",
+            "name": "Legendary Ore (L)",
             "emoji": "🟩",
             "rarity": "legendary",
             "type": "material",
             "race": "All",
             "level": 60,
             "bonus": {},
-            "image": "/assets/materials/legendary_zephra_ore.png?v=3"
+            "image": "/assets/materials/legendary_ore.png?v=5"
         },
         {
             "id": "ore_zephra_mythic",
-            "name": "Mythic Zephra Ore",
+            "name": "Mythic Ore (M)",
             "emoji": "🟩",
             "rarity": "mythic",
             "type": "material",
             "race": "All",
             "level": 65,
             "bonus": {},
-            "image": "/assets/materials/mythic_zephra_ore.png?v=3"
+            "image": "/assets/materials/mythic_ore.png?v=5"
         },
         {
             "id": "shard_zephra_common",
-            "name": "Common Zephra Shard",
+            "name": "Common Shard (C)",
             "emoji": "🟩",
             "rarity": "common",
             "type": "material",
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_zephra_shard.png?v=3"
+            "image": "/assets/materials/common_shard.png?v=5"
         },
         {
             "id": "shard_zephra_uncommon",
-            "name": "Uncommon Zephra Shard",
+            "name": "Uncommon Shard (UC)",
             "emoji": "🟩",
             "rarity": "uncommon",
             "type": "material",
             "race": "All",
             "level": 15,
             "bonus": {},
-            "image": "/assets/materials/uncommon_zephra_shard.png?v=3"
+            "image": "/assets/materials/uncommon_shard.png?v=5"
         },
         {
             "id": "shard_zephra_rare",
-            "name": "Rare Zephra Shard",
+            "name": "Rare Shard (R)",
             "emoji": "🟩",
             "rarity": "rare",
             "type": "material",
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_zephra_shard.png?v=3"
+            "image": "/assets/materials/rare_shard.png?v=5"
         },
         {
             "id": "shard_zephra_epic",
-            "name": "Epic Zephra Shard",
+            "name": "Epic Shard (E)",
             "emoji": "🟩",
             "rarity": "epic",
             "type": "material",
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_zephra_shard.png?v=3"
+            "image": "/assets/materials/epic_shard.png?v=5"
         },
         {
             "id": "shard_zephra_legendary",
-            "name": "Legendary Zephra Shard",
+            "name": "Legendary Shard (L)",
             "emoji": "🟩",
             "rarity": "legendary",
             "type": "material",
             "race": "All",
             "level": 60,
             "bonus": {},
-            "image": "/assets/materials/legendary_zephra_shard.png?v=3"
+            "image": "/assets/materials/legendary_shard.png?v=5"
         },
         {
             "id": "shard_zephra_mythic",
-            "name": "Mythic Zephra Shard",
+            "name": "Mythic Shard (M)",
             "emoji": "🟩",
             "rarity": "mythic",
             "type": "material",
             "race": "All",
             "level": 65,
             "bonus": {},
-            "image": "/assets/materials/mythic_zephra_shard.png?v=3"
+            "image": "/assets/materials/mythic_shard.png?v=5"
         },
         {
             "id": "ore_umbrix_common",
-            "name": "Common Umbrix Ore",
+            "name": "Common Ore (C)",
             "emoji": "🟪",
             "rarity": "common",
             "type": "material",
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_umbrix_ore.png?v=3"
+            "image": "/assets/materials/common_ore.png?v=5"
         },
         {
             "id": "ore_umbrix_uncommon",
-            "name": "Uncommon Umbrix Ore",
+            "name": "Uncommon Ore (UC)",
             "emoji": "🟪",
             "rarity": "uncommon",
             "type": "material",
             "race": "All",
             "level": 15,
             "bonus": {},
-            "image": "/assets/materials/uncommon_umbrix_ore.png?v=3"
+            "image": "/assets/materials/uncommon_ore.png?v=5"
         },
         {
             "id": "ore_umbrix_rare",
-            "name": "Rare Umbrix Ore",
+            "name": "Rare Ore (R)",
             "emoji": "🟪",
             "rarity": "rare",
             "type": "material",
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_umbrix_ore.png?v=3"
+            "image": "/assets/materials/rare_ore.png?v=5"
         },
         {
             "id": "ore_umbrix_epic",
-            "name": "Epic Umbrix Ore",
+            "name": "Epic Ore (E)",
             "emoji": "🟪",
             "rarity": "epic",
             "type": "material",
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_umbrix_ore.png?v=3"
+            "image": "/assets/materials/epic_ore.png?v=5"
         },
         {
             "id": "ore_umbrix_legendary",
-            "name": "Legendary Umbrix Ore",
+            "name": "Legendary Ore (L)",
             "emoji": "🟪",
             "rarity": "legendary",
             "type": "material",
             "race": "All",
             "level": 60,
             "bonus": {},
-            "image": "/assets/materials/legendary_umbrix_ore.png?v=3"
+            "image": "/assets/materials/legendary_ore.png?v=5"
         },
         {
             "id": "ore_umbrix_mythic",
-            "name": "Mythic Umbrix Ore",
+            "name": "Mythic Ore (M)",
             "emoji": "🟪",
             "rarity": "mythic",
             "type": "material",
             "race": "All",
             "level": 65,
             "bonus": {},
-            "image": "/assets/materials/mythic_umbrix_ore.png?v=3"
+            "image": "/assets/materials/mythic_ore.png?v=5"
         },
         {
             "id": "shard_umbrix_common",
-            "name": "Common Umbrix Shard",
+            "name": "Common Shard (C)",
             "emoji": "🟪",
             "rarity": "common",
             "type": "material",
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_umbrix_shard.png?v=3"
+            "image": "/assets/materials/common_shard.png?v=5"
         },
         {
             "id": "shard_umbrix_uncommon",
-            "name": "Uncommon Umbrix Shard",
+            "name": "Uncommon Shard (UC)",
             "emoji": "🟪",
             "rarity": "uncommon",
             "type": "material",
             "race": "All",
             "level": 15,
             "bonus": {},
-            "image": "/assets/materials/uncommon_umbrix_shard.png?v=3"
+            "image": "/assets/materials/uncommon_shard.png?v=5"
         },
         {
             "id": "shard_umbrix_rare",
-            "name": "Rare Umbrix Shard",
+            "name": "Rare Shard (R)",
             "emoji": "🟪",
             "rarity": "rare",
             "type": "material",
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_umbrix_shard.png?v=3"
+            "image": "/assets/materials/rare_shard.png?v=5"
         },
         {
             "id": "shard_umbrix_epic",
-            "name": "Epic Umbrix Shard",
+            "name": "Epic Shard (E)",
             "emoji": "🟪",
             "rarity": "epic",
             "type": "material",
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_umbrix_shard.png?v=3"
+            "image": "/assets/materials/epic_shard.png?v=5"
         },
         {
             "id": "shard_umbrix_legendary",
-            "name": "Legendary Umbrix Shard",
+            "name": "Legendary Shard (L)",
             "emoji": "🟪",
             "rarity": "legendary",
             "type": "material",
             "race": "All",
             "level": 60,
             "bonus": {},
-            "image": "/assets/materials/legendary_umbrix_shard.png?v=3"
+            "image": "/assets/materials/legendary_shard.png?v=5"
         },
         {
             "id": "shard_umbrix_mythic",
-            "name": "Mythic Umbrix Shard",
+            "name": "Mythic Shard (M)",
             "emoji": "🟪",
             "rarity": "mythic",
             "type": "material",
             "race": "All",
             "level": 65,
             "bonus": {},
-            "image": "/assets/materials/mythic_umbrix_shard.png?v=3"
+            "image": "/assets/materials/mythic_shard.png?v=5"
         }
     ]
 }
