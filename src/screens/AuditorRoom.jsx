@@ -1052,7 +1052,9 @@ export default function AuditorRoom() {
                                                   {item.type && ['helmet', 'armor', 'pants', 'gloves', 'boots', 'weapon', 'shield'].some(t => item.type.toLowerCase().includes(t)) || (item.id && (item.id.includes('wpn_') || item.id.includes('shd_') || item.id.includes('set_') || item.id.includes('gw_'))) ? (
                                                       `Lv.${item._level || '32'}`
                                                   ) : (
-                                                      item.id && (item.id.includes('rng_') || item.id.includes('amu_')) ? `T${(parseInt(item._level || '0', 10) + 1)}` : (item.grade ? item.grade.substring(0, 3) : '')
+                                                      item.id && (item.id.includes('rng_') || item.id.includes('amu_')) ? (
+                                                          `Lv.${{ '0': '1', '1': '30', '2': '40', '3': '50', '4': '55' }[item._level] || '1'}`
+                                                      ) : (item.grade ? item.grade.substring(0, 3) : '')
                                                   )}
                                               </div>
                                           </div>
