@@ -792,14 +792,14 @@ export default function AuditorRoom() {
         </div>
 
         <div style={styles.tabs} className="no-scrollbar">
-          <button style={tab === 'items' ? styles.tabActive : styles.tab} onClick={() => {setTab('items'); setPage(0); setSimItem(null)}}>Items</button>
-          <button style={tab === 'enemies' ? styles.tabActive : styles.tab} onClick={() => {setTab('enemies'); setPage(0); setSimItem(null)}}>Enemies</button>
-          <button style={tab === 'gears' ? styles.tabActive : styles.tab} onClick={() => {setTab('gears'); setPage(0); setSimItem(null)}}>Gears</button>
-          <button style={tab === 'races' ? styles.tabActive : styles.tab} onClick={() => {setTab('races'); setPage(0); setSimItem(null)}}>Races</button>
-          <button style={tab === 'jobs' ? styles.tabActive : styles.tab} onClick={() => {setTab('jobs'); setPage(0); setSimItem(null)}}>Jobs</button>
-          <button style={tab === 'crafting' ? styles.tabActive : styles.tab} onClick={() => {setTab('crafting'); setPage(0); setSimItem(null); setCraftCategory('materials'); setCraftSubTab('Shards');}}>Crafting</button>
-          <button style={tab === 'enhance' ? styles.tabActive : styles.tab} onClick={() => {setTab('enhance'); setPage(0); setSimItem(null); setCraftCategory('materials'); setCraftSubTab('All');}}>Enhance</button>
-          <button style={tab === 'drafts' ? styles.tabActive : styles.tab} onClick={() => {setTab('drafts'); setPage(0); setSimItem(null)}}>📋 Review Drafts ({allData.drafts?.length || 0})</button>
+          <button style={tab === 'items' ? styles.tabActive : styles.tab} onClick={() => {setTab('items'); setPage(0); setSimItem(null); setRecipeSlots([null, null, null, null, null]); setTargetItem(null); setActiveSlotIndex(null); setOutputStats([]);}}>Items</button>
+          <button style={tab === 'enemies' ? styles.tabActive : styles.tab} onClick={() => {setTab('enemies'); setPage(0); setSimItem(null); setRecipeSlots([null, null, null, null, null]); setTargetItem(null); setActiveSlotIndex(null); setOutputStats([]);}}>Enemies</button>
+          <button style={tab === 'gears' ? styles.tabActive : styles.tab} onClick={() => {setTab('gears'); setPage(0); setSimItem(null); setRecipeSlots([null, null, null, null, null]); setTargetItem(null); setActiveSlotIndex(null); setOutputStats([]);}}>Gears</button>
+          <button style={tab === 'races' ? styles.tabActive : styles.tab} onClick={() => {setTab('races'); setPage(0); setSimItem(null); setRecipeSlots([null, null, null, null, null]); setTargetItem(null); setActiveSlotIndex(null); setOutputStats([]);}}>Races</button>
+          <button style={tab === 'jobs' ? styles.tabActive : styles.tab} onClick={() => {setTab('jobs'); setPage(0); setSimItem(null); setRecipeSlots([null, null, null, null, null]); setTargetItem(null); setActiveSlotIndex(null); setOutputStats([]);}}>Jobs</button>
+          <button style={tab === 'crafting' ? styles.tabActive : styles.tab} onClick={() => {setTab('crafting'); setPage(0); setSimItem(null); setCraftCategory('materials'); setCraftSubTab('Shards'); setRecipeSlots([null, null, null, null, null]); setTargetItem(null); setActiveSlotIndex(null); setOutputStats([]); setOutputGrade('Normal');}}>Crafting</button>
+          <button style={tab === 'enhance' ? styles.tabActive : styles.tab} onClick={() => {setTab('enhance'); setPage(0); setSimItem(null); setCraftCategory('materials'); setCraftSubTab('All'); setRecipeSlots([null, null, null, null, null]); setTargetItem(null); setActiveSlotIndex(null); setOutputStats([]); setOutputGrade('+1');}}>Enhance</button>
+          <button style={tab === 'drafts' ? styles.tabActive : styles.tab} onClick={() => {setTab('drafts'); setPage(0); setSimItem(null); setRecipeSlots([null, null, null, null, null]); setTargetItem(null); setActiveSlotIndex(null); setOutputStats([]);}}>📋 Review Drafts ({allData.drafts?.length || 0})</button>
         </div>
 
         {tab === 'gears' && (
