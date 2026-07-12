@@ -171,8 +171,8 @@ export default function AuditorRoom() {
                     level = '66';
                 }
                 
-                // Parse numeric suffix if present (e.g. gw_arc_launcher_30)
-                const numMatch = idStr.match(/_(\d+)$/);
+                // Parse numeric suffix if present (e.g. set_arc_0_helmet -> level 1)
+                const numMatch = idStr.match(/_(\d+)/);
                 if (numMatch) {
                     const val = parseInt(numMatch[1], 10);
                     if (val === 1 || val === 0) level = '1';
@@ -273,7 +273,17 @@ export default function AuditorRoom() {
                     level = lastChar;
                 }
                 
-                if (idStr.includes('rng') || idStr.includes('ring')) {
+                if (idStr.includes('shd_') || idStr.includes('shield')) {
+                    if (level === '0' || level === '1') {
+                        genericPath = '/assets/arctron_shield_1_rembg.png';
+                    } else if (level === '2' || level === '3') {
+                        genericPath = '/assets/arctron_shield_2_rembg.png';
+                    } else {
+                        genericPath = '/assets/arctron_shield_3_rembg.png';
+                    }
+                } else if (idStr.includes('cap_') || idStr.includes('booster') || idStr.includes('cape')) {
+                    genericPath = '/assets/arctron_bag_icon_rembg.png';
+                } else if (idStr.includes('rng') || idStr.includes('ring')) {
                     if (race === 'all') genericPath = `/assets/accessories/rings/rng_all_${level}.png`;
                     else if (race === 'bionex') genericPath = `/assets/bionex/rings/rng_bio_${level}.png`;
                     else if (race === 'celestra') genericPath = `/assets/celestra/rings/rng_cor_${level}.png`;
@@ -327,6 +337,25 @@ export default function AuditorRoom() {
           if (!obj) return []
           let arr = []
           if (Array.isArray(obj)) {
+            if (prefix.endsWith('armorSets')) {
+              obj.forEach(set => {
+                const parts = set.parts || ['Helmet', 'Armor', 'Pants', 'Gloves', 'Boots'];
+                parts.forEach(part => {
+                  const partLower = part.toLowerCase();
+                  const faction = prefix.split('_')[0];
+                  arr.push({
+                    id: `${set.id}_${partLower}`,
+                    name: `${set.name.replace(' Set', '')} ${part}`,
+                    grade: set.grade,
+                    type: partLower,
+                    stats: set.stats?.[part] || {},
+                    faction: faction,
+                    _isPiece: true
+                  });
+                });
+              });
+              return arr;
+            }
             return obj.map(i => ({ ...i, type: prefix || 'gear' }))
           } else if (typeof obj === 'object') {
             Object.keys(obj).forEach(k => {
