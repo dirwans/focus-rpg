@@ -2166,4 +2166,7 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 - **Database Enhance/Crafting Editors Picker Fix (`src/screens/AuditorRoom.jsx`)**:
    - Disabled the name-based duplicate filtering check `split(' (')[0]` for armor pieces (helmet, armor, pants, gloves, boots) in `getActiveArray()`.
    - This ensures that class-specific variants (e.g. Guardian, Marksman, Psion) that share the same base name are not filtered out, allowing all 75 Bionex pieces, 75 Celestra pieces, and 60 Arctron pieces to be selectable in the Enhancement and Crafting database editors.
+- **Bionex Specialist/Engineer Job Tree Alignment (`src/data/bionex_gears.json` & `server.js`)**:
+   - Fixed a bug where the newly created Bionex Engineer mecha armor sets were missing the `techmaster` (Tier 3) and `overseer` (Tier 4) job classes in their restrictions, which caused high-level Bionex Specialist players to not see their armor sets.
+   - Updated all 100 Bionex mecha items' job arrays in `bionex_gears.json` to exactly match their path subclasses: Guardian (`["guardian", "centurion", "protector", "imperator"]`), Marksman (`["marksman", "revenant", "deadeye", "predator"]`), Engineer (`["engineer", "mechanist", "techmaster", "overseer"]`), and Psion (`["psion", "esper", "ascendant", "transcendent"]`).
 - **Verification**: Verified React build compiles cleanly (`npm run build`).
