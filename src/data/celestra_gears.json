@@ -1,0 +1,6156 @@
+[
+    {
+        "id": "wep_celestra_1_D",
+        "name": "[D] Lv.1 Force Wand",
+        "emoji": "🔮",
+        "rarity": "D",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 1,
+        "bonus": {
+            "atk": 14
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_celestra_1_C",
+        "name": "[C] Lv.1 Force Wand",
+        "emoji": "🔮",
+        "rarity": "C",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 1,
+        "bonus": {
+            "atk": 16
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_celestra_1_B",
+        "name": "[B] Lv.1 Force Wand",
+        "emoji": "🔮",
+        "rarity": "B",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 1,
+        "bonus": {
+            "atk": 21
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_celestra_1_A",
+        "name": "[A] Lv.1 Force Wand",
+        "emoji": "🔮",
+        "rarity": "A",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 1,
+        "bonus": {
+            "atk": 28
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_celestra_1_S",
+        "name": "[S] Lv.1 Force Wand",
+        "emoji": "🔮",
+        "rarity": "S",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 1,
+        "bonus": {
+            "atk": 42
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_celestra_1_SS",
+        "name": "[SS] Lv.1 Force Wand",
+        "emoji": "🔮",
+        "rarity": "SS",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 1,
+        "bonus": {
+            "atk": 63
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_celestra_1_SSS",
+        "name": "[SSS] Lv.1 Force Wand",
+        "emoji": "🔮",
+        "rarity": "SSS",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 1,
+        "bonus": {
+            "atk": 98
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_celestra_1_SR",
+        "name": "[SR] Lv.1 Force Wand",
+        "emoji": "🔮",
+        "rarity": "SR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 1,
+        "bonus": {
+            "atk": 140
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_celestra_1_SSR",
+        "name": "[SSR] Lv.1 Force Wand",
+        "emoji": "🔮",
+        "rarity": "SSR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 1,
+        "bonus": {
+            "atk": 210
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_celestra_1_UR",
+        "name": "[UR] Lv.1 Force Wand",
+        "emoji": "🔮",
+        "rarity": "UR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 1,
+        "bonus": {
+            "atk": 350
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_celestra_10_D",
+        "name": "[D] Lv.10 Force Wand",
+        "emoji": "🔮",
+        "rarity": "D",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 10,
+        "bonus": {
+            "atk": 140
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_celestra_10_C",
+        "name": "[C] Lv.10 Force Wand",
+        "emoji": "🔮",
+        "rarity": "C",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 10,
+        "bonus": {
+            "atk": 168
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_celestra_10_B",
+        "name": "[B] Lv.10 Force Wand",
+        "emoji": "🔮",
+        "rarity": "B",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 10,
+        "bonus": {
+            "atk": 210
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_celestra_10_A",
+        "name": "[A] Lv.10 Force Wand",
+        "emoji": "🔮",
+        "rarity": "A",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 10,
+        "bonus": {
+            "atk": 280
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_celestra_10_S",
+        "name": "[S] Lv.10 Force Wand",
+        "emoji": "🔮",
+        "rarity": "S",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 10,
+        "bonus": {
+            "atk": 420
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_celestra_10_SS",
+        "name": "[SS] Lv.10 Force Wand",
+        "emoji": "🔮",
+        "rarity": "SS",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 10,
+        "bonus": {
+            "atk": 630
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_celestra_10_SSS",
+        "name": "[SSS] Lv.10 Force Wand",
+        "emoji": "🔮",
+        "rarity": "SSS",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 10,
+        "bonus": {
+            "atk": 980
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_celestra_10_SR",
+        "name": "[SR] Lv.10 Force Wand",
+        "emoji": "🔮",
+        "rarity": "SR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 10,
+        "bonus": {
+            "atk": 1400
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_celestra_10_SSR",
+        "name": "[SSR] Lv.10 Force Wand",
+        "emoji": "🔮",
+        "rarity": "SSR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 10,
+        "bonus": {
+            "atk": 2100
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_celestra_10_UR",
+        "name": "[UR] Lv.10 Force Wand",
+        "emoji": "🔮",
+        "rarity": "UR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 10,
+        "bonus": {
+            "atk": 3500
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_celestra_20_D",
+        "name": "[D] Lv.20 Force Wand",
+        "emoji": "🔮",
+        "rarity": "D",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 20,
+        "bonus": {
+            "atk": 280
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_celestra_20_C",
+        "name": "[C] Lv.20 Force Wand",
+        "emoji": "🔮",
+        "rarity": "C",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 20,
+        "bonus": {
+            "atk": 336
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_celestra_20_B",
+        "name": "[B] Lv.20 Force Wand",
+        "emoji": "🔮",
+        "rarity": "B",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 20,
+        "bonus": {
+            "atk": 420
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_celestra_20_A",
+        "name": "[A] Lv.20 Force Wand",
+        "emoji": "🔮",
+        "rarity": "A",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 20,
+        "bonus": {
+            "atk": 560
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_celestra_20_S",
+        "name": "[S] Lv.20 Force Wand",
+        "emoji": "🔮",
+        "rarity": "S",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 20,
+        "bonus": {
+            "atk": 840
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_celestra_20_SS",
+        "name": "[SS] Lv.20 Force Wand",
+        "emoji": "🔮",
+        "rarity": "SS",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 20,
+        "bonus": {
+            "atk": 1260
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_celestra_20_SSS",
+        "name": "[SSS] Lv.20 Force Wand",
+        "emoji": "🔮",
+        "rarity": "SSS",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 20,
+        "bonus": {
+            "atk": 1960
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_celestra_20_SR",
+        "name": "[SR] Lv.20 Force Wand",
+        "emoji": "🔮",
+        "rarity": "SR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 20,
+        "bonus": {
+            "atk": 2800
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_celestra_20_SSR",
+        "name": "[SSR] Lv.20 Force Wand",
+        "emoji": "🔮",
+        "rarity": "SSR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 20,
+        "bonus": {
+            "atk": 4200
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_celestra_20_UR",
+        "name": "[UR] Lv.20 Force Wand",
+        "emoji": "🔮",
+        "rarity": "UR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 20,
+        "bonus": {
+            "atk": 7000
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_celestra_32_D",
+        "name": "[D] Lv.32 Arch Wand",
+        "emoji": "🔮",
+        "rarity": "D",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 32,
+        "bonus": {
+            "atk": 420
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
+    },
+    {
+        "id": "wep_celestra_32_C",
+        "name": "[C] Lv.32 Arch Wand",
+        "emoji": "🔮",
+        "rarity": "C",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 32,
+        "bonus": {
+            "atk": 504
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
+    },
+    {
+        "id": "wep_celestra_32_B",
+        "name": "[B] Lv.32 Arch Wand",
+        "emoji": "🔮",
+        "rarity": "B",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 32,
+        "bonus": {
+            "atk": 630
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
+    },
+    {
+        "id": "wep_celestra_32_A",
+        "name": "[A] Lv.32 Arch Wand",
+        "emoji": "🔮",
+        "rarity": "A",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 32,
+        "bonus": {
+            "atk": 840
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
+    },
+    {
+        "id": "wep_celestra_32_S",
+        "name": "[S] Lv.32 Arch Wand",
+        "emoji": "🔮",
+        "rarity": "S",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 32,
+        "bonus": {
+            "atk": 1260
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
+    },
+    {
+        "id": "wep_celestra_32_SS",
+        "name": "[SS] Lv.32 Arch Wand",
+        "emoji": "🔮",
+        "rarity": "SS",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 32,
+        "bonus": {
+            "atk": 1890
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
+    },
+    {
+        "id": "wep_celestra_32_SSS",
+        "name": "[SSS] Lv.32 Arch Wand",
+        "emoji": "🔮",
+        "rarity": "SSS",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 32,
+        "bonus": {
+            "atk": 2940
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
+    },
+    {
+        "id": "wep_celestra_32_SR",
+        "name": "[SR] Lv.32 Arch Wand",
+        "emoji": "🔮",
+        "rarity": "SR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 32,
+        "bonus": {
+            "atk": 4200
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
+    },
+    {
+        "id": "wep_celestra_32_SSR",
+        "name": "[SSR] Lv.32 Arch Wand",
+        "emoji": "🔮",
+        "rarity": "SSR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 32,
+        "bonus": {
+            "atk": 6300
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
+    },
+    {
+        "id": "wep_celestra_32_UR",
+        "name": "[UR] Lv.32 Arch Wand",
+        "emoji": "🔮",
+        "rarity": "UR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 32,
+        "bonus": {
+            "atk": 10500
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
+    },
+    {
+        "id": "wep_celestra_42_D",
+        "name": "[D] Lv.42 Arch Wand",
+        "emoji": "🔮",
+        "rarity": "D",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 42,
+        "bonus": {
+            "atk": 560
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
+    },
+    {
+        "id": "wep_celestra_42_C",
+        "name": "[C] Lv.42 Arch Wand",
+        "emoji": "🔮",
+        "rarity": "C",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 42,
+        "bonus": {
+            "atk": 672
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
+    },
+    {
+        "id": "wep_celestra_42_B",
+        "name": "[B] Lv.42 Arch Wand",
+        "emoji": "🔮",
+        "rarity": "B",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 42,
+        "bonus": {
+            "atk": 840
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
+    },
+    {
+        "id": "wep_celestra_42_A",
+        "name": "[A] Lv.42 Arch Wand",
+        "emoji": "🔮",
+        "rarity": "A",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 42,
+        "bonus": {
+            "atk": 1120
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
+    },
+    {
+        "id": "wep_celestra_42_S",
+        "name": "[S] Lv.42 Arch Wand",
+        "emoji": "🔮",
+        "rarity": "S",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 42,
+        "bonus": {
+            "atk": 1680
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
+    },
+    {
+        "id": "wep_celestra_42_SS",
+        "name": "[SS] Lv.42 Arch Wand",
+        "emoji": "🔮",
+        "rarity": "SS",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 42,
+        "bonus": {
+            "atk": 2520
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
+    },
+    {
+        "id": "wep_celestra_42_SSS",
+        "name": "[SSS] Lv.42 Arch Wand",
+        "emoji": "🔮",
+        "rarity": "SSS",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 42,
+        "bonus": {
+            "atk": 3920
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
+    },
+    {
+        "id": "wep_celestra_42_SR",
+        "name": "[SR] Lv.42 Arch Wand",
+        "emoji": "🔮",
+        "rarity": "SR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 42,
+        "bonus": {
+            "atk": 5600
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
+    },
+    {
+        "id": "wep_celestra_42_SSR",
+        "name": "[SSR] Lv.42 Arch Wand",
+        "emoji": "🔮",
+        "rarity": "SSR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 42,
+        "bonus": {
+            "atk": 8400
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
+    },
+    {
+        "id": "wep_celestra_42_UR",
+        "name": "[UR] Lv.42 Arch Wand",
+        "emoji": "🔮",
+        "rarity": "UR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 42,
+        "bonus": {
+            "atk": 14000
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_WarWand.gif"
+    },
+    {
+        "id": "wep_celestra_55_D",
+        "name": "[D] Lv.55 Relic Staff",
+        "emoji": "🔮",
+        "rarity": "D",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 55,
+        "bonus": {
+            "atk": 700
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
+    },
+    {
+        "id": "wep_celestra_55_C",
+        "name": "[C] Lv.55 Relic Staff",
+        "emoji": "🔮",
+        "rarity": "C",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 55,
+        "bonus": {
+            "atk": 840
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
+    },
+    {
+        "id": "wep_celestra_55_B",
+        "name": "[B] Lv.55 Relic Staff",
+        "emoji": "🔮",
+        "rarity": "B",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 55,
+        "bonus": {
+            "atk": 1050
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
+    },
+    {
+        "id": "wep_celestra_55_A",
+        "name": "[A] Lv.55 Relic Staff",
+        "emoji": "🔮",
+        "rarity": "A",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 55,
+        "bonus": {
+            "atk": 1400
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
+    },
+    {
+        "id": "wep_celestra_55_S",
+        "name": "[S] Lv.55 Relic Staff",
+        "emoji": "🔮",
+        "rarity": "S",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 55,
+        "bonus": {
+            "atk": 2100
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
+    },
+    {
+        "id": "wep_celestra_55_SS",
+        "name": "[SS] Lv.55 Relic Staff",
+        "emoji": "🔮",
+        "rarity": "SS",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 55,
+        "bonus": {
+            "atk": 3150
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
+    },
+    {
+        "id": "wep_celestra_55_SSS",
+        "name": "[SSS] Lv.55 Relic Staff",
+        "emoji": "🔮",
+        "rarity": "SSS",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 55,
+        "bonus": {
+            "atk": 4900
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
+    },
+    {
+        "id": "wep_celestra_55_SR",
+        "name": "[SR] Lv.55 Relic Staff",
+        "emoji": "🔮",
+        "rarity": "SR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 55,
+        "bonus": {
+            "atk": 7000
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
+    },
+    {
+        "id": "wep_celestra_55_SSR",
+        "name": "[SSR] Lv.55 Relic Staff",
+        "emoji": "🔮",
+        "rarity": "SSR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 55,
+        "bonus": {
+            "atk": 10500
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
+    },
+    {
+        "id": "wep_celestra_55_UR",
+        "name": "[UR] Lv.55 Relic Staff",
+        "emoji": "🔮",
+        "rarity": "UR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 55,
+        "bonus": {
+            "atk": 17500
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
+    },
+    {
+        "id": "wep_celestra_60_D",
+        "name": "[D] Lv.60 Relic Staff",
+        "emoji": "🔮",
+        "rarity": "D",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 60,
+        "bonus": {
+            "atk": 840
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
+    },
+    {
+        "id": "wep_celestra_60_C",
+        "name": "[C] Lv.60 Relic Staff",
+        "emoji": "🔮",
+        "rarity": "C",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 60,
+        "bonus": {
+            "atk": 1008
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
+    },
+    {
+        "id": "wep_celestra_60_B",
+        "name": "[B] Lv.60 Relic Staff",
+        "emoji": "🔮",
+        "rarity": "B",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 60,
+        "bonus": {
+            "atk": 1260
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
+    },
+    {
+        "id": "wep_celestra_60_A",
+        "name": "[A] Lv.60 Relic Staff",
+        "emoji": "🔮",
+        "rarity": "A",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 60,
+        "bonus": {
+            "atk": 1680
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
+    },
+    {
+        "id": "wep_celestra_60_S",
+        "name": "[S] Lv.60 Relic Staff",
+        "emoji": "🔮",
+        "rarity": "S",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 60,
+        "bonus": {
+            "atk": 2520
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
+    },
+    {
+        "id": "wep_celestra_60_SS",
+        "name": "[SS] Lv.60 Relic Staff",
+        "emoji": "🔮",
+        "rarity": "SS",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 60,
+        "bonus": {
+            "atk": 3780
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
+    },
+    {
+        "id": "wep_celestra_60_SSS",
+        "name": "[SSS] Lv.60 Relic Staff",
+        "emoji": "🔮",
+        "rarity": "SSS",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 60,
+        "bonus": {
+            "atk": 5880
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
+    },
+    {
+        "id": "wep_celestra_60_SR",
+        "name": "[SR] Lv.60 Relic Staff",
+        "emoji": "🔮",
+        "rarity": "SR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 60,
+        "bonus": {
+            "atk": 8400
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
+    },
+    {
+        "id": "wep_celestra_60_SSR",
+        "name": "[SSR] Lv.60 Relic Staff",
+        "emoji": "🔮",
+        "rarity": "SSR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 60,
+        "bonus": {
+            "atk": 12600
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
+    },
+    {
+        "id": "wep_celestra_60_UR",
+        "name": "[UR] Lv.60 Relic Staff",
+        "emoji": "🔮",
+        "rarity": "UR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 60,
+        "bonus": {
+            "atk": 21000
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv50_HoraStaff.gif"
+    },
+    {
+        "id": "wep_celestra_65_D",
+        "name": "[D] Lv.65 Soul Sickle",
+        "emoji": "🔮",
+        "rarity": "D",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 65,
+        "bonus": {
+            "atk": 910
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_celestra_65_C",
+        "name": "[C] Lv.65 Soul Sickle",
+        "emoji": "🔮",
+        "rarity": "C",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 65,
+        "bonus": {
+            "atk": 1092
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_celestra_65_B",
+        "name": "[B] Lv.65 Soul Sickle",
+        "emoji": "🔮",
+        "rarity": "B",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 65,
+        "bonus": {
+            "atk": 1365
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_celestra_65_A",
+        "name": "[A] Lv.65 Soul Sickle",
+        "emoji": "🔮",
+        "rarity": "A",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 65,
+        "bonus": {
+            "atk": 1820
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_celestra_65_S",
+        "name": "[S] Lv.65 Soul Sickle",
+        "emoji": "🔮",
+        "rarity": "S",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 65,
+        "bonus": {
+            "atk": 2730
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_celestra_65_SS",
+        "name": "[SS] Lv.65 Soul Sickle",
+        "emoji": "🔮",
+        "rarity": "SS",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 65,
+        "bonus": {
+            "atk": 4095
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_celestra_65_SSS",
+        "name": "[SSS] Lv.65 Soul Sickle",
+        "emoji": "🔮",
+        "rarity": "SSS",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 65,
+        "bonus": {
+            "atk": 6370
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_celestra_65_SR",
+        "name": "[SR] Lv.65 Soul Sickle",
+        "emoji": "🔮",
+        "rarity": "SR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 65,
+        "bonus": {
+            "atk": 9100
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_celestra_65_SSR",
+        "name": "[SSR] Lv.65 Soul Sickle",
+        "emoji": "🔮",
+        "rarity": "SSR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 65,
+        "bonus": {
+            "atk": 13650
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_celestra_65_UR",
+        "name": "[UR] Lv.65 Soul Sickle",
+        "emoji": "🔮",
+        "rarity": "UR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 65,
+        "bonus": {
+            "atk": 22750
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_celestra_70_D",
+        "name": "[D] Lv.70 Soul Sickle",
+        "emoji": "🔮",
+        "rarity": "D",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 70,
+        "bonus": {
+            "atk": 980
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_celestra_70_C",
+        "name": "[C] Lv.70 Soul Sickle",
+        "emoji": "🔮",
+        "rarity": "C",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 70,
+        "bonus": {
+            "atk": 1176
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_celestra_70_B",
+        "name": "[B] Lv.70 Soul Sickle",
+        "emoji": "🔮",
+        "rarity": "B",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 70,
+        "bonus": {
+            "atk": 1470
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_celestra_70_A",
+        "name": "[A] Lv.70 Soul Sickle",
+        "emoji": "🔮",
+        "rarity": "A",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 70,
+        "bonus": {
+            "atk": 1960
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_celestra_70_S",
+        "name": "[S] Lv.70 Soul Sickle",
+        "emoji": "🔮",
+        "rarity": "S",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 70,
+        "bonus": {
+            "atk": 2940
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_celestra_70_SS",
+        "name": "[SS] Lv.70 Soul Sickle",
+        "emoji": "🔮",
+        "rarity": "SS",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 70,
+        "bonus": {
+            "atk": 4410
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_celestra_70_SSS",
+        "name": "[SSS] Lv.70 Soul Sickle",
+        "emoji": "🔮",
+        "rarity": "SSS",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 70,
+        "bonus": {
+            "atk": 6860
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_celestra_70_SR",
+        "name": "[SR] Lv.70 Soul Sickle",
+        "emoji": "🔮",
+        "rarity": "SR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 70,
+        "bonus": {
+            "atk": 9800
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_celestra_70_SSR",
+        "name": "[SSR] Lv.70 Soul Sickle",
+        "emoji": "🔮",
+        "rarity": "SSR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 70,
+        "bonus": {
+            "atk": 14700
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_celestra_70_UR",
+        "name": "[UR] Lv.70 Soul Sickle",
+        "emoji": "🔮",
+        "rarity": "UR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 70,
+        "bonus": {
+            "atk": 24500
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_celestra_80_D",
+        "name": "[D] Lv.80 Soul Sickle",
+        "emoji": "🔮",
+        "rarity": "D",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 80,
+        "bonus": {
+            "atk": 1120
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_celestra_80_C",
+        "name": "[C] Lv.80 Soul Sickle",
+        "emoji": "🔮",
+        "rarity": "C",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 80,
+        "bonus": {
+            "atk": 1344
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_celestra_80_B",
+        "name": "[B] Lv.80 Soul Sickle",
+        "emoji": "🔮",
+        "rarity": "B",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 80,
+        "bonus": {
+            "atk": 1680
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_celestra_80_A",
+        "name": "[A] Lv.80 Soul Sickle",
+        "emoji": "🔮",
+        "rarity": "A",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 80,
+        "bonus": {
+            "atk": 2240
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_celestra_80_S",
+        "name": "[S] Lv.80 Soul Sickle",
+        "emoji": "🔮",
+        "rarity": "S",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 80,
+        "bonus": {
+            "atk": 3360
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_celestra_80_SS",
+        "name": "[SS] Lv.80 Soul Sickle",
+        "emoji": "🔮",
+        "rarity": "SS",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 80,
+        "bonus": {
+            "atk": 5040
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_celestra_80_SSS",
+        "name": "[SSS] Lv.80 Soul Sickle",
+        "emoji": "🔮",
+        "rarity": "SSS",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 80,
+        "bonus": {
+            "atk": 7840
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_celestra_80_SR",
+        "name": "[SR] Lv.80 Soul Sickle",
+        "emoji": "🔮",
+        "rarity": "SR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 80,
+        "bonus": {
+            "atk": 11200
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_celestra_80_SSR",
+        "name": "[SSR] Lv.80 Soul Sickle",
+        "emoji": "🔮",
+        "rarity": "SSR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 80,
+        "bonus": {
+            "atk": 16800
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_celestra_80_UR",
+        "name": "[UR] Lv.80 Soul Sickle",
+        "emoji": "🔮",
+        "rarity": "UR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 80,
+        "bonus": {
+            "atk": 28000
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_celestra_90_D",
+        "name": "[D] Lv.90 Salamander",
+        "emoji": "🔮",
+        "rarity": "D",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 90,
+        "bonus": {
+            "atk": 1260
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+        "id": "wep_celestra_90_C",
+        "name": "[C] Lv.90 Salamander",
+        "emoji": "🔮",
+        "rarity": "C",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 90,
+        "bonus": {
+            "atk": 1512
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+        "id": "wep_celestra_90_B",
+        "name": "[B] Lv.90 Salamander",
+        "emoji": "🔮",
+        "rarity": "B",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 90,
+        "bonus": {
+            "atk": 1890
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+        "id": "wep_celestra_90_A",
+        "name": "[A] Lv.90 Salamander",
+        "emoji": "🔮",
+        "rarity": "A",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 90,
+        "bonus": {
+            "atk": 2520
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+        "id": "wep_celestra_90_S",
+        "name": "[S] Lv.90 Salamander",
+        "emoji": "🔮",
+        "rarity": "S",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 90,
+        "bonus": {
+            "atk": 3780
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+        "id": "wep_celestra_90_SS",
+        "name": "[SS] Lv.90 Salamander",
+        "emoji": "🔮",
+        "rarity": "SS",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 90,
+        "bonus": {
+            "atk": 5670
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+        "id": "wep_celestra_90_SSS",
+        "name": "[SSS] Lv.90 Salamander",
+        "emoji": "🔮",
+        "rarity": "SSS",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 90,
+        "bonus": {
+            "atk": 8820
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+        "id": "wep_celestra_90_SR",
+        "name": "[SR] Lv.90 Salamander",
+        "emoji": "🔮",
+        "rarity": "SR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 90,
+        "bonus": {
+            "atk": 12600
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+        "id": "wep_celestra_90_SSR",
+        "name": "[SSR] Lv.90 Salamander",
+        "emoji": "🔮",
+        "rarity": "SSR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 90,
+        "bonus": {
+            "atk": 18900
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+        "id": "wep_celestra_90_UR",
+        "name": "[UR] Lv.90 Salamander",
+        "emoji": "🔮",
+        "rarity": "UR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 90,
+        "bonus": {
+            "atk": 31500
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+        "id": "wep_celestra_100_D",
+        "name": "[D] Lv.100 Salamander",
+        "emoji": "🔮",
+        "rarity": "D",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 100,
+        "bonus": {
+            "atk": 1400
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+        "id": "wep_celestra_100_C",
+        "name": "[C] Lv.100 Salamander",
+        "emoji": "🔮",
+        "rarity": "C",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 100,
+        "bonus": {
+            "atk": 1680
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+        "id": "wep_celestra_100_B",
+        "name": "[B] Lv.100 Salamander",
+        "emoji": "🔮",
+        "rarity": "B",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 100,
+        "bonus": {
+            "atk": 2100
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+        "id": "wep_celestra_100_A",
+        "name": "[A] Lv.100 Salamander",
+        "emoji": "🔮",
+        "rarity": "A",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 100,
+        "bonus": {
+            "atk": 2800
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+        "id": "wep_celestra_100_S",
+        "name": "[S] Lv.100 Salamander",
+        "emoji": "🔮",
+        "rarity": "S",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 100,
+        "bonus": {
+            "atk": 4200
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+        "id": "wep_celestra_100_SS",
+        "name": "[SS] Lv.100 Salamander",
+        "emoji": "🔮",
+        "rarity": "SS",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 100,
+        "bonus": {
+            "atk": 6300
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+        "id": "wep_celestra_100_SSS",
+        "name": "[SSS] Lv.100 Salamander",
+        "emoji": "🔮",
+        "rarity": "SSS",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 100,
+        "bonus": {
+            "atk": 9800
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+        "id": "wep_celestra_100_SR",
+        "name": "[SR] Lv.100 Salamander",
+        "emoji": "🔮",
+        "rarity": "SR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 100,
+        "bonus": {
+            "atk": 14000
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+        "id": "wep_celestra_100_SSR",
+        "name": "[SSR] Lv.100 Salamander",
+        "emoji": "🔮",
+        "rarity": "SSR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 100,
+        "bonus": {
+            "atk": 21000
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+        "id": "wep_celestra_100_UR",
+        "name": "[UR] Lv.100 Salamander",
+        "emoji": "🔮",
+        "rarity": "UR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 100,
+        "bonus": {
+            "atk": 35000
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2022/07/item-1-6_359.png"
+    },
+    {
+        "id": "wep_job_acolyte_D",
+        "name": "[D] Lumina Staff",
+        "emoji": "🔮",
+        "rarity": "D",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "acolyte",
+        "level": 1,
+        "bonus": {
+            "atk": 65
+        },
+        "description": "Efek: +5 Mana (Damage: 45-85)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+        "id": "wep_job_acolyte_C",
+        "name": "[C] Lumina Staff",
+        "emoji": "🔮",
+        "rarity": "C",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "acolyte",
+        "level": 1,
+        "bonus": {
+            "atk": 78
+        },
+        "description": "Efek: +5 Mana (Damage: 45-85)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+        "id": "wep_job_acolyte_B",
+        "name": "[B] Lumina Staff",
+        "emoji": "🔮",
+        "rarity": "B",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "acolyte",
+        "level": 1,
+        "bonus": {
+            "atk": 97
+        },
+        "description": "Efek: +5 Mana (Damage: 45-85)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+        "id": "wep_job_acolyte_A",
+        "name": "[A] Lumina Staff",
+        "emoji": "🔮",
+        "rarity": "A",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "acolyte",
+        "level": 1,
+        "bonus": {
+            "atk": 130
+        },
+        "description": "Efek: +5 Mana (Damage: 45-85)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+        "id": "wep_job_acolyte_S",
+        "name": "[S] Lumina Staff",
+        "emoji": "🔮",
+        "rarity": "S",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "acolyte",
+        "level": 1,
+        "bonus": {
+            "atk": 195
+        },
+        "description": "Efek: +5 Mana (Damage: 45-85)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+        "id": "wep_job_acolyte_SS",
+        "name": "[SS] Lumina Staff",
+        "emoji": "🔮",
+        "rarity": "SS",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "acolyte",
+        "level": 1,
+        "bonus": {
+            "atk": 292
+        },
+        "description": "Efek: +5 Mana (Damage: 45-85)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+        "id": "wep_job_acolyte_SSS",
+        "name": "[SSS] Lumina Staff",
+        "emoji": "🔮",
+        "rarity": "SSS",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "acolyte",
+        "level": 1,
+        "bonus": {
+            "atk": 455
+        },
+        "description": "Efek: +5 Mana (Damage: 45-85)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+        "id": "wep_job_acolyte_SR",
+        "name": "[SR] Lumina Staff",
+        "emoji": "🔮",
+        "rarity": "SR",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "acolyte",
+        "level": 1,
+        "bonus": {
+            "atk": 650
+        },
+        "description": "Efek: +5 Mana (Damage: 45-85)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+        "id": "wep_job_acolyte_SSR",
+        "name": "[SSR] Lumina Staff",
+        "emoji": "🔮",
+        "rarity": "SSR",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "acolyte",
+        "level": 1,
+        "bonus": {
+            "atk": 975
+        },
+        "description": "Efek: +5 Mana (Damage: 45-85)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+        "id": "wep_job_acolyte_UR",
+        "name": "[UR] Lumina Staff",
+        "emoji": "🔮",
+        "rarity": "UR",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "acolyte",
+        "level": 1,
+        "bonus": {
+            "atk": 1625
+        },
+        "description": "Efek: +5 Mana (Damage: 45-85)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Staff_Lv45_SickleStaff.gif"
+    },
+    {
+        "id": "wep_job_guardian_D",
+        "name": "[D] Crystal Spear",
+        "emoji": "🔮",
+        "rarity": "D",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "guardian",
+        "level": 1,
+        "bonus": {
+            "atk": 67
+        },
+        "description": "Efek: +3% Block (Damage: 55-80)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Spear_Lv50_HoraSpear.gif"
+    },
+    {
+        "id": "wep_job_guardian_C",
+        "name": "[C] Crystal Spear",
+        "emoji": "🔮",
+        "rarity": "C",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "guardian",
+        "level": 1,
+        "bonus": {
+            "atk": 80
+        },
+        "description": "Efek: +3% Block (Damage: 55-80)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Spear_Lv50_HoraSpear.gif"
+    },
+    {
+        "id": "wep_job_guardian_B",
+        "name": "[B] Crystal Spear",
+        "emoji": "🔮",
+        "rarity": "B",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "guardian",
+        "level": 1,
+        "bonus": {
+            "atk": 100
+        },
+        "description": "Efek: +3% Block (Damage: 55-80)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Spear_Lv50_HoraSpear.gif"
+    },
+    {
+        "id": "wep_job_guardian_A",
+        "name": "[A] Crystal Spear",
+        "emoji": "🔮",
+        "rarity": "A",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "guardian",
+        "level": 1,
+        "bonus": {
+            "atk": 134
+        },
+        "description": "Efek: +3% Block (Damage: 55-80)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Spear_Lv50_HoraSpear.gif"
+    },
+    {
+        "id": "wep_job_guardian_S",
+        "name": "[S] Crystal Spear",
+        "emoji": "🔮",
+        "rarity": "S",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "guardian",
+        "level": 1,
+        "bonus": {
+            "atk": 201
+        },
+        "description": "Efek: +3% Block (Damage: 55-80)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Spear_Lv50_HoraSpear.gif"
+    },
+    {
+        "id": "wep_job_guardian_SS",
+        "name": "[SS] Crystal Spear",
+        "emoji": "🔮",
+        "rarity": "SS",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "guardian",
+        "level": 1,
+        "bonus": {
+            "atk": 301
+        },
+        "description": "Efek: +3% Block (Damage: 55-80)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Spear_Lv50_HoraSpear.gif"
+    },
+    {
+        "id": "wep_job_guardian_SSS",
+        "name": "[SSS] Crystal Spear",
+        "emoji": "🔮",
+        "rarity": "SSS",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "guardian",
+        "level": 1,
+        "bonus": {
+            "atk": 469
+        },
+        "description": "Efek: +3% Block (Damage: 55-80)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Spear_Lv50_HoraSpear.gif"
+    },
+    {
+        "id": "wep_job_guardian_SR",
+        "name": "[SR] Crystal Spear",
+        "emoji": "🔮",
+        "rarity": "SR",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "guardian",
+        "level": 1,
+        "bonus": {
+            "atk": 670
+        },
+        "description": "Efek: +3% Block (Damage: 55-80)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Spear_Lv50_HoraSpear.gif"
+    },
+    {
+        "id": "wep_job_guardian_SSR",
+        "name": "[SSR] Crystal Spear",
+        "emoji": "🔮",
+        "rarity": "SSR",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "guardian",
+        "level": 1,
+        "bonus": {
+            "atk": 1005
+        },
+        "description": "Efek: +3% Block (Damage: 55-80)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Spear_Lv50_HoraSpear.gif"
+    },
+    {
+        "id": "wep_job_guardian_UR",
+        "name": "[UR] Crystal Spear",
+        "emoji": "🔮",
+        "rarity": "UR",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "guardian",
+        "level": 1,
+        "bonus": {
+            "atk": 1675
+        },
+        "description": "Efek: +3% Block (Damage: 55-80)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/Ancient_Spear_Lv50_HoraSpear.gif"
+    },
+    {
+        "id": "wep_job_mystic_archer_D",
+        "name": "[D] Spirit Bow",
+        "emoji": "🔮",
+        "rarity": "D",
+        "type": "weapon",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 1,
+        "bonus": {
+            "atk": 75
+        },
+        "description": "Efek: +2% Crit (Damage: 60-90)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+        "id": "wep_job_mystic_archer_C",
+        "name": "[C] Spirit Bow",
+        "emoji": "🔮",
+        "rarity": "C",
+        "type": "weapon",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 1,
+        "bonus": {
+            "atk": 90
+        },
+        "description": "Efek: +2% Crit (Damage: 60-90)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+        "id": "wep_job_mystic_archer_B",
+        "name": "[B] Spirit Bow",
+        "emoji": "🔮",
+        "rarity": "B",
+        "type": "weapon",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 1,
+        "bonus": {
+            "atk": 112
+        },
+        "description": "Efek: +2% Crit (Damage: 60-90)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+        "id": "wep_job_mystic_archer_A",
+        "name": "[A] Spirit Bow",
+        "emoji": "🔮",
+        "rarity": "A",
+        "type": "weapon",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 1,
+        "bonus": {
+            "atk": 150
+        },
+        "description": "Efek: +2% Crit (Damage: 60-90)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+        "id": "wep_job_mystic_archer_S",
+        "name": "[S] Spirit Bow",
+        "emoji": "🔮",
+        "rarity": "S",
+        "type": "weapon",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 1,
+        "bonus": {
+            "atk": 225
+        },
+        "description": "Efek: +2% Crit (Damage: 60-90)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+        "id": "wep_job_mystic_archer_SS",
+        "name": "[SS] Spirit Bow",
+        "emoji": "🔮",
+        "rarity": "SS",
+        "type": "weapon",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 1,
+        "bonus": {
+            "atk": 337
+        },
+        "description": "Efek: +2% Crit (Damage: 60-90)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+        "id": "wep_job_mystic_archer_SSS",
+        "name": "[SSS] Spirit Bow",
+        "emoji": "🔮",
+        "rarity": "SSS",
+        "type": "weapon",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 1,
+        "bonus": {
+            "atk": 525
+        },
+        "description": "Efek: +2% Crit (Damage: 60-90)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+        "id": "wep_job_mystic_archer_SR",
+        "name": "[SR] Spirit Bow",
+        "emoji": "🔮",
+        "rarity": "SR",
+        "type": "weapon",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 1,
+        "bonus": {
+            "atk": 750
+        },
+        "description": "Efek: +2% Crit (Damage: 60-90)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+        "id": "wep_job_mystic_archer_SSR",
+        "name": "[SSR] Spirit Bow",
+        "emoji": "🔮",
+        "rarity": "SSR",
+        "type": "weapon",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 1,
+        "bonus": {
+            "atk": 1125
+        },
+        "description": "Efek: +2% Crit (Damage: 60-90)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+        "id": "wep_job_mystic_archer_UR",
+        "name": "[UR] Spirit Bow",
+        "emoji": "🔮",
+        "rarity": "UR",
+        "type": "weapon",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 1,
+        "bonus": {
+            "atk": 1875
+        },
+        "description": "Efek: +2% Crit (Damage: 60-90)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+        "id": "wep_job_eidolon_caller_D",
+        "name": "[D] Soul Wand",
+        "emoji": "🔮",
+        "rarity": "D",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "eidolon_caller",
+        "level": 32,
+        "bonus": {
+            "atk": 180
+        },
+        "description": "Efek: Summon Boost (Damage: 140-220)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_job_eidolon_caller_C",
+        "name": "[C] Soul Wand",
+        "emoji": "🔮",
+        "rarity": "C",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "eidolon_caller",
+        "level": 32,
+        "bonus": {
+            "atk": 216
+        },
+        "description": "Efek: Summon Boost (Damage: 140-220)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_job_eidolon_caller_B",
+        "name": "[B] Soul Wand",
+        "emoji": "🔮",
+        "rarity": "B",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "eidolon_caller",
+        "level": 32,
+        "bonus": {
+            "atk": 270
+        },
+        "description": "Efek: Summon Boost (Damage: 140-220)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_job_eidolon_caller_A",
+        "name": "[A] Soul Wand",
+        "emoji": "🔮",
+        "rarity": "A",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "eidolon_caller",
+        "level": 32,
+        "bonus": {
+            "atk": 360
+        },
+        "description": "Efek: Summon Boost (Damage: 140-220)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_job_eidolon_caller_S",
+        "name": "[S] Soul Wand",
+        "emoji": "🔮",
+        "rarity": "S",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "eidolon_caller",
+        "level": 32,
+        "bonus": {
+            "atk": 540
+        },
+        "description": "Efek: Summon Boost (Damage: 140-220)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_job_eidolon_caller_SS",
+        "name": "[SS] Soul Wand",
+        "emoji": "🔮",
+        "rarity": "SS",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "eidolon_caller",
+        "level": 32,
+        "bonus": {
+            "atk": 810
+        },
+        "description": "Efek: Summon Boost (Damage: 140-220)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_job_eidolon_caller_SSS",
+        "name": "[SSS] Soul Wand",
+        "emoji": "🔮",
+        "rarity": "SSS",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "eidolon_caller",
+        "level": 32,
+        "bonus": {
+            "atk": 1260
+        },
+        "description": "Efek: Summon Boost (Damage: 140-220)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_job_eidolon_caller_SR",
+        "name": "[SR] Soul Wand",
+        "emoji": "🔮",
+        "rarity": "SR",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "eidolon_caller",
+        "level": 32,
+        "bonus": {
+            "atk": 1800
+        },
+        "description": "Efek: Summon Boost (Damage: 140-220)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_job_eidolon_caller_SSR",
+        "name": "[SSR] Soul Wand",
+        "emoji": "🔮",
+        "rarity": "SSR",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "eidolon_caller",
+        "level": 32,
+        "bonus": {
+            "atk": 2700
+        },
+        "description": "Efek: Summon Boost (Damage: 140-220)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_job_eidolon_caller_UR",
+        "name": "[UR] Soul Wand",
+        "emoji": "🔮",
+        "rarity": "UR",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "eidolon_caller",
+        "level": 32,
+        "bonus": {
+            "atk": 4500
+        },
+        "description": "Efek: Summon Boost (Damage: 140-220)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_job_spirit_knight_D",
+        "name": "[D] Moonblade",
+        "emoji": "🔮",
+        "rarity": "D",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "spirit_knight",
+        "level": 32,
+        "bonus": {
+            "atk": 200
+        },
+        "description": "Efek: Life Steal (Damage: 160-240)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_job_spirit_knight_C",
+        "name": "[C] Moonblade",
+        "emoji": "🔮",
+        "rarity": "C",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "spirit_knight",
+        "level": 32,
+        "bonus": {
+            "atk": 240
+        },
+        "description": "Efek: Life Steal (Damage: 160-240)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_job_spirit_knight_B",
+        "name": "[B] Moonblade",
+        "emoji": "🔮",
+        "rarity": "B",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "spirit_knight",
+        "level": 32,
+        "bonus": {
+            "atk": 300
+        },
+        "description": "Efek: Life Steal (Damage: 160-240)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_job_spirit_knight_A",
+        "name": "[A] Moonblade",
+        "emoji": "🔮",
+        "rarity": "A",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "spirit_knight",
+        "level": 32,
+        "bonus": {
+            "atk": 400
+        },
+        "description": "Efek: Life Steal (Damage: 160-240)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_job_spirit_knight_S",
+        "name": "[S] Moonblade",
+        "emoji": "🔮",
+        "rarity": "S",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "spirit_knight",
+        "level": 32,
+        "bonus": {
+            "atk": 600
+        },
+        "description": "Efek: Life Steal (Damage: 160-240)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_job_spirit_knight_SS",
+        "name": "[SS] Moonblade",
+        "emoji": "🔮",
+        "rarity": "SS",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "spirit_knight",
+        "level": 32,
+        "bonus": {
+            "atk": 900
+        },
+        "description": "Efek: Life Steal (Damage: 160-240)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_job_spirit_knight_SSS",
+        "name": "[SSS] Moonblade",
+        "emoji": "🔮",
+        "rarity": "SSS",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "spirit_knight",
+        "level": 32,
+        "bonus": {
+            "atk": 1400
+        },
+        "description": "Efek: Life Steal (Damage: 160-240)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_job_spirit_knight_SR",
+        "name": "[SR] Moonblade",
+        "emoji": "🔮",
+        "rarity": "SR",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "spirit_knight",
+        "level": 32,
+        "bonus": {
+            "atk": 2000
+        },
+        "description": "Efek: Life Steal (Damage: 160-240)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_job_spirit_knight_SSR",
+        "name": "[SSR] Moonblade",
+        "emoji": "🔮",
+        "rarity": "SSR",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "spirit_knight",
+        "level": 32,
+        "bonus": {
+            "atk": 3000
+        },
+        "description": "Efek: Life Steal (Damage: 160-240)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_job_spirit_knight_UR",
+        "name": "[UR] Moonblade",
+        "emoji": "🔮",
+        "rarity": "UR",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "spirit_knight",
+        "level": 32,
+        "bonus": {
+            "atk": 5000
+        },
+        "description": "Efek: Life Steal (Damage: 160-240)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Knife_SickleKnife.gif"
+    },
+    {
+        "id": "wep_job_moon_ranger_D",
+        "name": "[D] Lunar Bow",
+        "emoji": "🔮",
+        "rarity": "D",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "moon_ranger",
+        "level": 32,
+        "bonus": {
+            "atk": 210
+        },
+        "description": "Efek: Bleed (Damage: 170-250)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+        "id": "wep_job_moon_ranger_C",
+        "name": "[C] Lunar Bow",
+        "emoji": "🔮",
+        "rarity": "C",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "moon_ranger",
+        "level": 32,
+        "bonus": {
+            "atk": 252
+        },
+        "description": "Efek: Bleed (Damage: 170-250)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+        "id": "wep_job_moon_ranger_B",
+        "name": "[B] Lunar Bow",
+        "emoji": "🔮",
+        "rarity": "B",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "moon_ranger",
+        "level": 32,
+        "bonus": {
+            "atk": 315
+        },
+        "description": "Efek: Bleed (Damage: 170-250)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+        "id": "wep_job_moon_ranger_A",
+        "name": "[A] Lunar Bow",
+        "emoji": "🔮",
+        "rarity": "A",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "moon_ranger",
+        "level": 32,
+        "bonus": {
+            "atk": 420
+        },
+        "description": "Efek: Bleed (Damage: 170-250)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+        "id": "wep_job_moon_ranger_S",
+        "name": "[S] Lunar Bow",
+        "emoji": "🔮",
+        "rarity": "S",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "moon_ranger",
+        "level": 32,
+        "bonus": {
+            "atk": 630
+        },
+        "description": "Efek: Bleed (Damage: 170-250)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+        "id": "wep_job_moon_ranger_SS",
+        "name": "[SS] Lunar Bow",
+        "emoji": "🔮",
+        "rarity": "SS",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "moon_ranger",
+        "level": 32,
+        "bonus": {
+            "atk": 945
+        },
+        "description": "Efek: Bleed (Damage: 170-250)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+        "id": "wep_job_moon_ranger_SSS",
+        "name": "[SSS] Lunar Bow",
+        "emoji": "🔮",
+        "rarity": "SSS",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "moon_ranger",
+        "level": 32,
+        "bonus": {
+            "atk": 1470
+        },
+        "description": "Efek: Bleed (Damage: 170-250)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+        "id": "wep_job_moon_ranger_SR",
+        "name": "[SR] Lunar Bow",
+        "emoji": "🔮",
+        "rarity": "SR",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "moon_ranger",
+        "level": 32,
+        "bonus": {
+            "atk": 2100
+        },
+        "description": "Efek: Bleed (Damage: 170-250)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+        "id": "wep_job_moon_ranger_SSR",
+        "name": "[SSR] Lunar Bow",
+        "emoji": "🔮",
+        "rarity": "SSR",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "moon_ranger",
+        "level": 32,
+        "bonus": {
+            "atk": 3150
+        },
+        "description": "Efek: Bleed (Damage: 170-250)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+        "id": "wep_job_moon_ranger_UR",
+        "name": "[UR] Lunar Bow",
+        "emoji": "🔮",
+        "rarity": "UR",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "moon_ranger",
+        "level": 32,
+        "bonus": {
+            "atk": 5250
+        },
+        "description": "Efek: Bleed (Damage: 170-250)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+        "id": "wep_job_high_summoner_D",
+        "name": "[D] Astral Scepter",
+        "emoji": "🔮",
+        "rarity": "D",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "high_summoner",
+        "level": 55,
+        "bonus": {
+            "atk": 350
+        },
+        "description": "Efek: Eidolon Power (Damage: 280-420)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_job_high_summoner_C",
+        "name": "[C] Astral Scepter",
+        "emoji": "🔮",
+        "rarity": "C",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "high_summoner",
+        "level": 55,
+        "bonus": {
+            "atk": 420
+        },
+        "description": "Efek: Eidolon Power (Damage: 280-420)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_job_high_summoner_B",
+        "name": "[B] Astral Scepter",
+        "emoji": "🔮",
+        "rarity": "B",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "high_summoner",
+        "level": 55,
+        "bonus": {
+            "atk": 525
+        },
+        "description": "Efek: Eidolon Power (Damage: 280-420)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_job_high_summoner_A",
+        "name": "[A] Astral Scepter",
+        "emoji": "🔮",
+        "rarity": "A",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "high_summoner",
+        "level": 55,
+        "bonus": {
+            "atk": 700
+        },
+        "description": "Efek: Eidolon Power (Damage: 280-420)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_job_high_summoner_S",
+        "name": "[S] Astral Scepter",
+        "emoji": "🔮",
+        "rarity": "S",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "high_summoner",
+        "level": 55,
+        "bonus": {
+            "atk": 1050
+        },
+        "description": "Efek: Eidolon Power (Damage: 280-420)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_job_high_summoner_SS",
+        "name": "[SS] Astral Scepter",
+        "emoji": "🔮",
+        "rarity": "SS",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "high_summoner",
+        "level": 55,
+        "bonus": {
+            "atk": 1575
+        },
+        "description": "Efek: Eidolon Power (Damage: 280-420)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_job_high_summoner_SSS",
+        "name": "[SSS] Astral Scepter",
+        "emoji": "🔮",
+        "rarity": "SSS",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "high_summoner",
+        "level": 55,
+        "bonus": {
+            "atk": 2450
+        },
+        "description": "Efek: Eidolon Power (Damage: 280-420)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_job_high_summoner_SR",
+        "name": "[SR] Astral Scepter",
+        "emoji": "🔮",
+        "rarity": "SR",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "high_summoner",
+        "level": 55,
+        "bonus": {
+            "atk": 3500
+        },
+        "description": "Efek: Eidolon Power (Damage: 280-420)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_job_high_summoner_SSR",
+        "name": "[SSR] Astral Scepter",
+        "emoji": "🔮",
+        "rarity": "SSR",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "high_summoner",
+        "level": 55,
+        "bonus": {
+            "atk": 5250
+        },
+        "description": "Efek: Eidolon Power (Damage: 280-420)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_job_high_summoner_UR",
+        "name": "[UR] Astral Scepter",
+        "emoji": "🔮",
+        "rarity": "UR",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "high_summoner",
+        "level": 55,
+        "bonus": {
+            "atk": 8750
+        },
+        "description": "Efek: Eidolon Power (Damage: 280-420)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_BlueWand.gif"
+    },
+    {
+        "id": "wep_job_lumina_paladin_D",
+        "name": "[D] Sacred Halberd",
+        "emoji": "🔮",
+        "rarity": "D",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "lumina_paladin",
+        "level": 55,
+        "bonus": {
+            "atk": 395
+        },
+        "description": "Efek: Holy Shield (Damage: 320-470)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/weapon-baalzebub-halberd.png"
+    },
+    {
+        "id": "wep_job_lumina_paladin_C",
+        "name": "[C] Sacred Halberd",
+        "emoji": "🔮",
+        "rarity": "C",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "lumina_paladin",
+        "level": 55,
+        "bonus": {
+            "atk": 474
+        },
+        "description": "Efek: Holy Shield (Damage: 320-470)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/weapon-baalzebub-halberd.png"
+    },
+    {
+        "id": "wep_job_lumina_paladin_B",
+        "name": "[B] Sacred Halberd",
+        "emoji": "🔮",
+        "rarity": "B",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "lumina_paladin",
+        "level": 55,
+        "bonus": {
+            "atk": 592
+        },
+        "description": "Efek: Holy Shield (Damage: 320-470)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/weapon-baalzebub-halberd.png"
+    },
+    {
+        "id": "wep_job_lumina_paladin_A",
+        "name": "[A] Sacred Halberd",
+        "emoji": "🔮",
+        "rarity": "A",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "lumina_paladin",
+        "level": 55,
+        "bonus": {
+            "atk": 790
+        },
+        "description": "Efek: Holy Shield (Damage: 320-470)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/weapon-baalzebub-halberd.png"
+    },
+    {
+        "id": "wep_job_lumina_paladin_S",
+        "name": "[S] Sacred Halberd",
+        "emoji": "🔮",
+        "rarity": "S",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "lumina_paladin",
+        "level": 55,
+        "bonus": {
+            "atk": 1185
+        },
+        "description": "Efek: Holy Shield (Damage: 320-470)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/weapon-baalzebub-halberd.png"
+    },
+    {
+        "id": "wep_job_lumina_paladin_SS",
+        "name": "[SS] Sacred Halberd",
+        "emoji": "🔮",
+        "rarity": "SS",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "lumina_paladin",
+        "level": 55,
+        "bonus": {
+            "atk": 1777
+        },
+        "description": "Efek: Holy Shield (Damage: 320-470)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/weapon-baalzebub-halberd.png"
+    },
+    {
+        "id": "wep_job_lumina_paladin_SSS",
+        "name": "[SSS] Sacred Halberd",
+        "emoji": "🔮",
+        "rarity": "SSS",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "lumina_paladin",
+        "level": 55,
+        "bonus": {
+            "atk": 2765
+        },
+        "description": "Efek: Holy Shield (Damage: 320-470)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/weapon-baalzebub-halberd.png"
+    },
+    {
+        "id": "wep_job_lumina_paladin_SR",
+        "name": "[SR] Sacred Halberd",
+        "emoji": "🔮",
+        "rarity": "SR",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "lumina_paladin",
+        "level": 55,
+        "bonus": {
+            "atk": 3950
+        },
+        "description": "Efek: Holy Shield (Damage: 320-470)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/weapon-baalzebub-halberd.png"
+    },
+    {
+        "id": "wep_job_lumina_paladin_SSR",
+        "name": "[SSR] Sacred Halberd",
+        "emoji": "🔮",
+        "rarity": "SSR",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "lumina_paladin",
+        "level": 55,
+        "bonus": {
+            "atk": 5925
+        },
+        "description": "Efek: Holy Shield (Damage: 320-470)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/weapon-baalzebub-halberd.png"
+    },
+    {
+        "id": "wep_job_lumina_paladin_UR",
+        "name": "[UR] Sacred Halberd",
+        "emoji": "🔮",
+        "rarity": "UR",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "lumina_paladin",
+        "level": 55,
+        "bonus": {
+            "atk": 9875
+        },
+        "description": "Efek: Holy Shield (Damage: 320-470)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2021/03/weapon-baalzebub-halberd.png"
+    },
+    {
+        "id": "wep_job_star_seeker_D",
+        "name": "[D] Celestial Bow",
+        "emoji": "🔮",
+        "rarity": "D",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "star_seeker",
+        "level": 55,
+        "bonus": {
+            "atk": 420
+        },
+        "description": "Efek: Star Shot (Damage: 340-500)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+        "id": "wep_job_star_seeker_C",
+        "name": "[C] Celestial Bow",
+        "emoji": "🔮",
+        "rarity": "C",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "star_seeker",
+        "level": 55,
+        "bonus": {
+            "atk": 504
+        },
+        "description": "Efek: Star Shot (Damage: 340-500)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+        "id": "wep_job_star_seeker_B",
+        "name": "[B] Celestial Bow",
+        "emoji": "🔮",
+        "rarity": "B",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "star_seeker",
+        "level": 55,
+        "bonus": {
+            "atk": 630
+        },
+        "description": "Efek: Star Shot (Damage: 340-500)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+        "id": "wep_job_star_seeker_A",
+        "name": "[A] Celestial Bow",
+        "emoji": "🔮",
+        "rarity": "A",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "star_seeker",
+        "level": 55,
+        "bonus": {
+            "atk": 840
+        },
+        "description": "Efek: Star Shot (Damage: 340-500)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+        "id": "wep_job_star_seeker_S",
+        "name": "[S] Celestial Bow",
+        "emoji": "🔮",
+        "rarity": "S",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "star_seeker",
+        "level": 55,
+        "bonus": {
+            "atk": 1260
+        },
+        "description": "Efek: Star Shot (Damage: 340-500)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+        "id": "wep_job_star_seeker_SS",
+        "name": "[SS] Celestial Bow",
+        "emoji": "🔮",
+        "rarity": "SS",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "star_seeker",
+        "level": 55,
+        "bonus": {
+            "atk": 1890
+        },
+        "description": "Efek: Star Shot (Damage: 340-500)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+        "id": "wep_job_star_seeker_SSS",
+        "name": "[SSS] Celestial Bow",
+        "emoji": "🔮",
+        "rarity": "SSS",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "star_seeker",
+        "level": 55,
+        "bonus": {
+            "atk": 2940
+        },
+        "description": "Efek: Star Shot (Damage: 340-500)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+        "id": "wep_job_star_seeker_SR",
+        "name": "[SR] Celestial Bow",
+        "emoji": "🔮",
+        "rarity": "SR",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "star_seeker",
+        "level": 55,
+        "bonus": {
+            "atk": 4200
+        },
+        "description": "Efek: Star Shot (Damage: 340-500)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+        "id": "wep_job_star_seeker_SSR",
+        "name": "[SSR] Celestial Bow",
+        "emoji": "🔮",
+        "rarity": "SSR",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "star_seeker",
+        "level": 55,
+        "bonus": {
+            "atk": 6300
+        },
+        "description": "Efek: Star Shot (Damage: 340-500)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+        "id": "wep_job_star_seeker_UR",
+        "name": "[UR] Celestial Bow",
+        "emoji": "🔮",
+        "rarity": "UR",
+        "type": "weapon",
+        "race": "celestra",
+        "job": "star_seeker",
+        "level": 55,
+        "bonus": {
+            "atk": 10500
+        },
+        "description": "Efek: Star Shot (Damage: 340-500)",
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/07/Bow_BeamBow.gif"
+    },
+    {
+        "id": "archon_celestra_weapon",
+        "name": "Starfall Scepter",
+        "emoji": "🔮",
+        "rarity": "UR",
+        "type": "weapon",
+        "race": "celestra",
+        "level": 55,
+        "bonus": {
+            "atkPercent": 25,
+            "description": "Memanggil hujan meteor astral."
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2020/06/Staff_Lv55_DarkStaff.gif"
+    },
+    {
+        "id": "arm_celestra_1_D",
+        "name": "[D] Lv.1 Summoner Robe",
+        "emoji": "👘",
+        "rarity": "D",
+        "type": "armor",
+        "race": "celestra",
+        "level": 1,
+        "bonus": {
+            "def": 8
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile002.png"
+    },
+    {
+        "id": "arm_celestra_1_C",
+        "name": "[C] Lv.1 Summoner Robe",
+        "emoji": "👘",
+        "rarity": "C",
+        "type": "armor",
+        "race": "celestra",
+        "level": 1,
+        "bonus": {
+            "def": 9
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile002.png"
+    },
+    {
+        "id": "arm_celestra_1_B",
+        "name": "[B] Lv.1 Summoner Robe",
+        "emoji": "👘",
+        "rarity": "B",
+        "type": "armor",
+        "race": "celestra",
+        "level": 1,
+        "bonus": {
+            "def": 12
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile002.png"
+    },
+    {
+        "id": "arm_celestra_1_A",
+        "name": "[A] Lv.1 Summoner Robe",
+        "emoji": "👘",
+        "rarity": "A",
+        "type": "armor",
+        "race": "celestra",
+        "level": 1,
+        "bonus": {
+            "def": 16
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile002.png"
+    },
+    {
+        "id": "arm_celestra_1_S",
+        "name": "[S] Lv.1 Summoner Robe",
+        "emoji": "👘",
+        "rarity": "S",
+        "type": "armor",
+        "race": "celestra",
+        "level": 1,
+        "bonus": {
+            "def": 24
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile002.png"
+    },
+    {
+        "id": "arm_celestra_1_SS",
+        "name": "[SS] Lv.1 Summoner Robe",
+        "emoji": "👘",
+        "rarity": "SS",
+        "type": "armor",
+        "race": "celestra",
+        "level": 1,
+        "bonus": {
+            "def": 36
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile002.png"
+    },
+    {
+        "id": "arm_celestra_1_SSS",
+        "name": "[SSS] Lv.1 Summoner Robe",
+        "emoji": "👘",
+        "rarity": "SSS",
+        "type": "armor",
+        "race": "celestra",
+        "level": 1,
+        "bonus": {
+            "def": 56
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile002.png"
+    },
+    {
+        "id": "arm_celestra_1_SR",
+        "name": "[SR] Lv.1 Summoner Robe",
+        "emoji": "👘",
+        "rarity": "SR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 1,
+        "bonus": {
+            "def": 80
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile002.png"
+    },
+    {
+        "id": "arm_celestra_1_SSR",
+        "name": "[SSR] Lv.1 Summoner Robe",
+        "emoji": "👘",
+        "rarity": "SSR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 1,
+        "bonus": {
+            "def": 120
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile002.png"
+    },
+    {
+        "id": "arm_celestra_1_UR",
+        "name": "[UR] Lv.1 Summoner Robe",
+        "emoji": "👘",
+        "rarity": "UR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 1,
+        "bonus": {
+            "def": 200
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile002.png"
+    },
+    {
+        "id": "arm_celestra_10_D",
+        "name": "[D] Lv.10 Summoner Robe",
+        "emoji": "👘",
+        "rarity": "D",
+        "type": "armor",
+        "race": "celestra",
+        "level": 10,
+        "bonus": {
+            "def": 80
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile002.png"
+    },
+    {
+        "id": "arm_celestra_10_C",
+        "name": "[C] Lv.10 Summoner Robe",
+        "emoji": "👘",
+        "rarity": "C",
+        "type": "armor",
+        "race": "celestra",
+        "level": 10,
+        "bonus": {
+            "def": 96
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile002.png"
+    },
+    {
+        "id": "arm_celestra_10_B",
+        "name": "[B] Lv.10 Summoner Robe",
+        "emoji": "👘",
+        "rarity": "B",
+        "type": "armor",
+        "race": "celestra",
+        "level": 10,
+        "bonus": {
+            "def": 120
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile002.png"
+    },
+    {
+        "id": "arm_celestra_10_A",
+        "name": "[A] Lv.10 Summoner Robe",
+        "emoji": "👘",
+        "rarity": "A",
+        "type": "armor",
+        "race": "celestra",
+        "level": 10,
+        "bonus": {
+            "def": 160
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile002.png"
+    },
+    {
+        "id": "arm_celestra_10_S",
+        "name": "[S] Lv.10 Summoner Robe",
+        "emoji": "👘",
+        "rarity": "S",
+        "type": "armor",
+        "race": "celestra",
+        "level": 10,
+        "bonus": {
+            "def": 240
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile002.png"
+    },
+    {
+        "id": "arm_celestra_10_SS",
+        "name": "[SS] Lv.10 Summoner Robe",
+        "emoji": "👘",
+        "rarity": "SS",
+        "type": "armor",
+        "race": "celestra",
+        "level": 10,
+        "bonus": {
+            "def": 360
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile002.png"
+    },
+    {
+        "id": "arm_celestra_10_SSS",
+        "name": "[SSS] Lv.10 Summoner Robe",
+        "emoji": "👘",
+        "rarity": "SSS",
+        "type": "armor",
+        "race": "celestra",
+        "level": 10,
+        "bonus": {
+            "def": 560
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile002.png"
+    },
+    {
+        "id": "arm_celestra_10_SR",
+        "name": "[SR] Lv.10 Summoner Robe",
+        "emoji": "👘",
+        "rarity": "SR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 10,
+        "bonus": {
+            "def": 800
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile002.png"
+    },
+    {
+        "id": "arm_celestra_10_SSR",
+        "name": "[SSR] Lv.10 Summoner Robe",
+        "emoji": "👘",
+        "rarity": "SSR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 10,
+        "bonus": {
+            "def": 1200
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile002.png"
+    },
+    {
+        "id": "arm_celestra_10_UR",
+        "name": "[UR] Lv.10 Summoner Robe",
+        "emoji": "👘",
+        "rarity": "UR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 10,
+        "bonus": {
+            "def": 2000
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile002.png"
+    },
+    {
+        "id": "arm_celestra_20_D",
+        "name": "[D] Lv.20 Summoner Robe",
+        "emoji": "👘",
+        "rarity": "D",
+        "type": "armor",
+        "race": "celestra",
+        "level": 20,
+        "bonus": {
+            "def": 160
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile002.png"
+    },
+    {
+        "id": "arm_celestra_20_C",
+        "name": "[C] Lv.20 Summoner Robe",
+        "emoji": "👘",
+        "rarity": "C",
+        "type": "armor",
+        "race": "celestra",
+        "level": 20,
+        "bonus": {
+            "def": 192
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile002.png"
+    },
+    {
+        "id": "arm_celestra_20_B",
+        "name": "[B] Lv.20 Summoner Robe",
+        "emoji": "👘",
+        "rarity": "B",
+        "type": "armor",
+        "race": "celestra",
+        "level": 20,
+        "bonus": {
+            "def": 240
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile002.png"
+    },
+    {
+        "id": "arm_celestra_20_A",
+        "name": "[A] Lv.20 Summoner Robe",
+        "emoji": "👘",
+        "rarity": "A",
+        "type": "armor",
+        "race": "celestra",
+        "level": 20,
+        "bonus": {
+            "def": 320
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile002.png"
+    },
+    {
+        "id": "arm_celestra_20_S",
+        "name": "[S] Lv.20 Summoner Robe",
+        "emoji": "👘",
+        "rarity": "S",
+        "type": "armor",
+        "race": "celestra",
+        "level": 20,
+        "bonus": {
+            "def": 480
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile002.png"
+    },
+    {
+        "id": "arm_celestra_20_SS",
+        "name": "[SS] Lv.20 Summoner Robe",
+        "emoji": "👘",
+        "rarity": "SS",
+        "type": "armor",
+        "race": "celestra",
+        "level": 20,
+        "bonus": {
+            "def": 720
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile002.png"
+    },
+    {
+        "id": "arm_celestra_20_SSS",
+        "name": "[SSS] Lv.20 Summoner Robe",
+        "emoji": "👘",
+        "rarity": "SSS",
+        "type": "armor",
+        "race": "celestra",
+        "level": 20,
+        "bonus": {
+            "def": 1120
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile002.png"
+    },
+    {
+        "id": "arm_celestra_20_SR",
+        "name": "[SR] Lv.20 Summoner Robe",
+        "emoji": "👘",
+        "rarity": "SR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 20,
+        "bonus": {
+            "def": 1600
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile002.png"
+    },
+    {
+        "id": "arm_celestra_20_SSR",
+        "name": "[SSR] Lv.20 Summoner Robe",
+        "emoji": "👘",
+        "rarity": "SSR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 20,
+        "bonus": {
+            "def": 2400
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile002.png"
+    },
+    {
+        "id": "arm_celestra_20_UR",
+        "name": "[UR] Lv.20 Summoner Robe",
+        "emoji": "👘",
+        "rarity": "UR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 20,
+        "bonus": {
+            "def": 4000
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/tile002.png"
+    },
+    {
+        "id": "arm_celestra_32_D",
+        "name": "[D] Lv.32 Archon Robe",
+        "emoji": "👘",
+        "rarity": "D",
+        "type": "armor",
+        "race": "celestra",
+        "level": 32,
+        "bonus": {
+            "def": 240
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
+    },
+    {
+        "id": "arm_celestra_32_C",
+        "name": "[C] Lv.32 Archon Robe",
+        "emoji": "👘",
+        "rarity": "C",
+        "type": "armor",
+        "race": "celestra",
+        "level": 32,
+        "bonus": {
+            "def": 288
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
+    },
+    {
+        "id": "arm_celestra_32_B",
+        "name": "[B] Lv.32 Archon Robe",
+        "emoji": "👘",
+        "rarity": "B",
+        "type": "armor",
+        "race": "celestra",
+        "level": 32,
+        "bonus": {
+            "def": 360
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
+    },
+    {
+        "id": "arm_celestra_32_A",
+        "name": "[A] Lv.32 Archon Robe",
+        "emoji": "👘",
+        "rarity": "A",
+        "type": "armor",
+        "race": "celestra",
+        "level": 32,
+        "bonus": {
+            "def": 480
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
+    },
+    {
+        "id": "arm_celestra_32_S",
+        "name": "[S] Lv.32 Archon Robe",
+        "emoji": "👘",
+        "rarity": "S",
+        "type": "armor",
+        "race": "celestra",
+        "level": 32,
+        "bonus": {
+            "def": 720
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
+    },
+    {
+        "id": "arm_celestra_32_SS",
+        "name": "[SS] Lv.32 Archon Robe",
+        "emoji": "👘",
+        "rarity": "SS",
+        "type": "armor",
+        "race": "celestra",
+        "level": 32,
+        "bonus": {
+            "def": 1080
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
+    },
+    {
+        "id": "arm_celestra_32_SSS",
+        "name": "[SSS] Lv.32 Archon Robe",
+        "emoji": "👘",
+        "rarity": "SSS",
+        "type": "armor",
+        "race": "celestra",
+        "level": 32,
+        "bonus": {
+            "def": 1680
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
+    },
+    {
+        "id": "arm_celestra_32_SR",
+        "name": "[SR] Lv.32 Archon Robe",
+        "emoji": "👘",
+        "rarity": "SR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 32,
+        "bonus": {
+            "def": 2400
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
+    },
+    {
+        "id": "arm_celestra_32_SSR",
+        "name": "[SSR] Lv.32 Archon Robe",
+        "emoji": "👘",
+        "rarity": "SSR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 32,
+        "bonus": {
+            "def": 3600
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
+    },
+    {
+        "id": "arm_celestra_32_UR",
+        "name": "[UR] Lv.32 Archon Robe",
+        "emoji": "👘",
+        "rarity": "UR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 32,
+        "bonus": {
+            "def": 6000
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
+    },
+    {
+        "id": "arm_celestra_42_D",
+        "name": "[D] Lv.42 Archon Robe",
+        "emoji": "👘",
+        "rarity": "D",
+        "type": "armor",
+        "race": "celestra",
+        "level": 42,
+        "bonus": {
+            "def": 320
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
+    },
+    {
+        "id": "arm_celestra_42_C",
+        "name": "[C] Lv.42 Archon Robe",
+        "emoji": "👘",
+        "rarity": "C",
+        "type": "armor",
+        "race": "celestra",
+        "level": 42,
+        "bonus": {
+            "def": 384
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
+    },
+    {
+        "id": "arm_celestra_42_B",
+        "name": "[B] Lv.42 Archon Robe",
+        "emoji": "👘",
+        "rarity": "B",
+        "type": "armor",
+        "race": "celestra",
+        "level": 42,
+        "bonus": {
+            "def": 480
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
+    },
+    {
+        "id": "arm_celestra_42_A",
+        "name": "[A] Lv.42 Archon Robe",
+        "emoji": "👘",
+        "rarity": "A",
+        "type": "armor",
+        "race": "celestra",
+        "level": 42,
+        "bonus": {
+            "def": 640
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
+    },
+    {
+        "id": "arm_celestra_42_S",
+        "name": "[S] Lv.42 Archon Robe",
+        "emoji": "👘",
+        "rarity": "S",
+        "type": "armor",
+        "race": "celestra",
+        "level": 42,
+        "bonus": {
+            "def": 960
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
+    },
+    {
+        "id": "arm_celestra_42_SS",
+        "name": "[SS] Lv.42 Archon Robe",
+        "emoji": "👘",
+        "rarity": "SS",
+        "type": "armor",
+        "race": "celestra",
+        "level": 42,
+        "bonus": {
+            "def": 1440
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
+    },
+    {
+        "id": "arm_celestra_42_SSS",
+        "name": "[SSS] Lv.42 Archon Robe",
+        "emoji": "👘",
+        "rarity": "SSS",
+        "type": "armor",
+        "race": "celestra",
+        "level": 42,
+        "bonus": {
+            "def": 2240
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
+    },
+    {
+        "id": "arm_celestra_42_SR",
+        "name": "[SR] Lv.42 Archon Robe",
+        "emoji": "👘",
+        "rarity": "SR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 42,
+        "bonus": {
+            "def": 3200
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
+    },
+    {
+        "id": "arm_celestra_42_SSR",
+        "name": "[SSR] Lv.42 Archon Robe",
+        "emoji": "👘",
+        "rarity": "SSR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 42,
+        "bonus": {
+            "def": 4800
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
+    },
+    {
+        "id": "arm_celestra_42_UR",
+        "name": "[UR] Lv.42 Archon Robe",
+        "emoji": "👘",
+        "rarity": "UR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 42,
+        "bonus": {
+            "def": 8000
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwk73.png"
+    },
+    {
+        "id": "arm_celestra_55_D",
+        "name": "[D] Lv.55 Dark Robe",
+        "emoji": "👘",
+        "rarity": "D",
+        "type": "armor",
+        "race": "celestra",
+        "level": 55,
+        "bonus": {
+            "def": 400
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_55_C",
+        "name": "[C] Lv.55 Dark Robe",
+        "emoji": "👘",
+        "rarity": "C",
+        "type": "armor",
+        "race": "celestra",
+        "level": 55,
+        "bonus": {
+            "def": 480
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_55_B",
+        "name": "[B] Lv.55 Dark Robe",
+        "emoji": "👘",
+        "rarity": "B",
+        "type": "armor",
+        "race": "celestra",
+        "level": 55,
+        "bonus": {
+            "def": 600
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_55_A",
+        "name": "[A] Lv.55 Dark Robe",
+        "emoji": "👘",
+        "rarity": "A",
+        "type": "armor",
+        "race": "celestra",
+        "level": 55,
+        "bonus": {
+            "def": 800
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_55_S",
+        "name": "[S] Lv.55 Dark Robe",
+        "emoji": "👘",
+        "rarity": "S",
+        "type": "armor",
+        "race": "celestra",
+        "level": 55,
+        "bonus": {
+            "def": 1200
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_55_SS",
+        "name": "[SS] Lv.55 Dark Robe",
+        "emoji": "👘",
+        "rarity": "SS",
+        "type": "armor",
+        "race": "celestra",
+        "level": 55,
+        "bonus": {
+            "def": 1800
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_55_SSS",
+        "name": "[SSS] Lv.55 Dark Robe",
+        "emoji": "👘",
+        "rarity": "SSS",
+        "type": "armor",
+        "race": "celestra",
+        "level": 55,
+        "bonus": {
+            "def": 2800
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_55_SR",
+        "name": "[SR] Lv.55 Dark Robe",
+        "emoji": "👘",
+        "rarity": "SR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 55,
+        "bonus": {
+            "def": 4000
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_55_SSR",
+        "name": "[SSR] Lv.55 Dark Robe",
+        "emoji": "👘",
+        "rarity": "SSR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 55,
+        "bonus": {
+            "def": 6000
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_55_UR",
+        "name": "[UR] Lv.55 Dark Robe",
+        "emoji": "👘",
+        "rarity": "UR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 55,
+        "bonus": {
+            "def": 10000
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_60_D",
+        "name": "[D] Lv.60 Dark Robe",
+        "emoji": "👘",
+        "rarity": "D",
+        "type": "armor",
+        "race": "celestra",
+        "level": 60,
+        "bonus": {
+            "def": 480
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_60_C",
+        "name": "[C] Lv.60 Dark Robe",
+        "emoji": "👘",
+        "rarity": "C",
+        "type": "armor",
+        "race": "celestra",
+        "level": 60,
+        "bonus": {
+            "def": 576
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_60_B",
+        "name": "[B] Lv.60 Dark Robe",
+        "emoji": "👘",
+        "rarity": "B",
+        "type": "armor",
+        "race": "celestra",
+        "level": 60,
+        "bonus": {
+            "def": 720
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_60_A",
+        "name": "[A] Lv.60 Dark Robe",
+        "emoji": "👘",
+        "rarity": "A",
+        "type": "armor",
+        "race": "celestra",
+        "level": 60,
+        "bonus": {
+            "def": 960
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_60_S",
+        "name": "[S] Lv.60 Dark Robe",
+        "emoji": "👘",
+        "rarity": "S",
+        "type": "armor",
+        "race": "celestra",
+        "level": 60,
+        "bonus": {
+            "def": 1440
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_60_SS",
+        "name": "[SS] Lv.60 Dark Robe",
+        "emoji": "👘",
+        "rarity": "SS",
+        "type": "armor",
+        "race": "celestra",
+        "level": 60,
+        "bonus": {
+            "def": 2160
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_60_SSS",
+        "name": "[SSS] Lv.60 Dark Robe",
+        "emoji": "👘",
+        "rarity": "SSS",
+        "type": "armor",
+        "race": "celestra",
+        "level": 60,
+        "bonus": {
+            "def": 3360
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_60_SR",
+        "name": "[SR] Lv.60 Dark Robe",
+        "emoji": "👘",
+        "rarity": "SR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 60,
+        "bonus": {
+            "def": 4800
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_60_SSR",
+        "name": "[SSR] Lv.60 Dark Robe",
+        "emoji": "👘",
+        "rarity": "SSR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 60,
+        "bonus": {
+            "def": 7200
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_60_UR",
+        "name": "[UR] Lv.60 Dark Robe",
+        "emoji": "👘",
+        "rarity": "UR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 60,
+        "bonus": {
+            "def": 12000
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_65_D",
+        "name": "[D] Lv.65 Twilight Suit",
+        "emoji": "👘",
+        "rarity": "D",
+        "type": "armor",
+        "race": "celestra",
+        "level": 65,
+        "bonus": {
+            "def": 520
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iscrc50.png"
+    },
+    {
+        "id": "arm_celestra_65_C",
+        "name": "[C] Lv.65 Twilight Suit",
+        "emoji": "👘",
+        "rarity": "C",
+        "type": "armor",
+        "race": "celestra",
+        "level": 65,
+        "bonus": {
+            "def": 624
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iscrc50.png"
+    },
+    {
+        "id": "arm_celestra_65_B",
+        "name": "[B] Lv.65 Twilight Suit",
+        "emoji": "👘",
+        "rarity": "B",
+        "type": "armor",
+        "race": "celestra",
+        "level": 65,
+        "bonus": {
+            "def": 780
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iscrc50.png"
+    },
+    {
+        "id": "arm_celestra_65_A",
+        "name": "[A] Lv.65 Twilight Suit",
+        "emoji": "👘",
+        "rarity": "A",
+        "type": "armor",
+        "race": "celestra",
+        "level": 65,
+        "bonus": {
+            "def": 1040
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iscrc50.png"
+    },
+    {
+        "id": "arm_celestra_65_S",
+        "name": "[S] Lv.65 Twilight Suit",
+        "emoji": "👘",
+        "rarity": "S",
+        "type": "armor",
+        "race": "celestra",
+        "level": 65,
+        "bonus": {
+            "def": 1560
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iscrc50.png"
+    },
+    {
+        "id": "arm_celestra_65_SS",
+        "name": "[SS] Lv.65 Twilight Suit",
+        "emoji": "👘",
+        "rarity": "SS",
+        "type": "armor",
+        "race": "celestra",
+        "level": 65,
+        "bonus": {
+            "def": 2340
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iscrc50.png"
+    },
+    {
+        "id": "arm_celestra_65_SSS",
+        "name": "[SSS] Lv.65 Twilight Suit",
+        "emoji": "👘",
+        "rarity": "SSS",
+        "type": "armor",
+        "race": "celestra",
+        "level": 65,
+        "bonus": {
+            "def": 3640
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iscrc50.png"
+    },
+    {
+        "id": "arm_celestra_65_SR",
+        "name": "[SR] Lv.65 Twilight Suit",
+        "emoji": "👘",
+        "rarity": "SR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 65,
+        "bonus": {
+            "def": 5200
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iscrc50.png"
+    },
+    {
+        "id": "arm_celestra_65_SSR",
+        "name": "[SSR] Lv.65 Twilight Suit",
+        "emoji": "👘",
+        "rarity": "SSR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 65,
+        "bonus": {
+            "def": 7800
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iscrc50.png"
+    },
+    {
+        "id": "arm_celestra_65_UR",
+        "name": "[UR] Lv.65 Twilight Suit",
+        "emoji": "👘",
+        "rarity": "UR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 65,
+        "bonus": {
+            "def": 13000
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iscrc50.png"
+    },
+    {
+        "id": "arm_celestra_70_D",
+        "name": "[D] Lv.70 Twilight Suit",
+        "emoji": "👘",
+        "rarity": "D",
+        "type": "armor",
+        "race": "celestra",
+        "level": 70,
+        "bonus": {
+            "def": 560
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iscrc50.png"
+    },
+    {
+        "id": "arm_celestra_70_C",
+        "name": "[C] Lv.70 Twilight Suit",
+        "emoji": "👘",
+        "rarity": "C",
+        "type": "armor",
+        "race": "celestra",
+        "level": 70,
+        "bonus": {
+            "def": 672
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iscrc50.png"
+    },
+    {
+        "id": "arm_celestra_70_B",
+        "name": "[B] Lv.70 Twilight Suit",
+        "emoji": "👘",
+        "rarity": "B",
+        "type": "armor",
+        "race": "celestra",
+        "level": 70,
+        "bonus": {
+            "def": 840
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iscrc50.png"
+    },
+    {
+        "id": "arm_celestra_70_A",
+        "name": "[A] Lv.70 Twilight Suit",
+        "emoji": "👘",
+        "rarity": "A",
+        "type": "armor",
+        "race": "celestra",
+        "level": 70,
+        "bonus": {
+            "def": 1120
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iscrc50.png"
+    },
+    {
+        "id": "arm_celestra_70_S",
+        "name": "[S] Lv.70 Twilight Suit",
+        "emoji": "👘",
+        "rarity": "S",
+        "type": "armor",
+        "race": "celestra",
+        "level": 70,
+        "bonus": {
+            "def": 1680
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iscrc50.png"
+    },
+    {
+        "id": "arm_celestra_70_SS",
+        "name": "[SS] Lv.70 Twilight Suit",
+        "emoji": "👘",
+        "rarity": "SS",
+        "type": "armor",
+        "race": "celestra",
+        "level": 70,
+        "bonus": {
+            "def": 2520
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iscrc50.png"
+    },
+    {
+        "id": "arm_celestra_70_SSS",
+        "name": "[SSS] Lv.70 Twilight Suit",
+        "emoji": "👘",
+        "rarity": "SSS",
+        "type": "armor",
+        "race": "celestra",
+        "level": 70,
+        "bonus": {
+            "def": 3920
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iscrc50.png"
+    },
+    {
+        "id": "arm_celestra_70_SR",
+        "name": "[SR] Lv.70 Twilight Suit",
+        "emoji": "👘",
+        "rarity": "SR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 70,
+        "bonus": {
+            "def": 5600
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iscrc50.png"
+    },
+    {
+        "id": "arm_celestra_70_SSR",
+        "name": "[SSR] Lv.70 Twilight Suit",
+        "emoji": "👘",
+        "rarity": "SSR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 70,
+        "bonus": {
+            "def": 8400
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iscrc50.png"
+    },
+    {
+        "id": "arm_celestra_70_UR",
+        "name": "[UR] Lv.70 Twilight Suit",
+        "emoji": "👘",
+        "rarity": "UR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 70,
+        "bonus": {
+            "def": 14000
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iscrc50.png"
+    },
+    {
+        "id": "arm_celestra_80_D",
+        "name": "[D] Lv.80 Twilight Suit",
+        "emoji": "👘",
+        "rarity": "D",
+        "type": "armor",
+        "race": "celestra",
+        "level": 80,
+        "bonus": {
+            "def": 640
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iscrc50.png"
+    },
+    {
+        "id": "arm_celestra_80_C",
+        "name": "[C] Lv.80 Twilight Suit",
+        "emoji": "👘",
+        "rarity": "C",
+        "type": "armor",
+        "race": "celestra",
+        "level": 80,
+        "bonus": {
+            "def": 768
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iscrc50.png"
+    },
+    {
+        "id": "arm_celestra_80_B",
+        "name": "[B] Lv.80 Twilight Suit",
+        "emoji": "👘",
+        "rarity": "B",
+        "type": "armor",
+        "race": "celestra",
+        "level": 80,
+        "bonus": {
+            "def": 960
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iscrc50.png"
+    },
+    {
+        "id": "arm_celestra_80_A",
+        "name": "[A] Lv.80 Twilight Suit",
+        "emoji": "👘",
+        "rarity": "A",
+        "type": "armor",
+        "race": "celestra",
+        "level": 80,
+        "bonus": {
+            "def": 1280
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iscrc50.png"
+    },
+    {
+        "id": "arm_celestra_80_S",
+        "name": "[S] Lv.80 Twilight Suit",
+        "emoji": "👘",
+        "rarity": "S",
+        "type": "armor",
+        "race": "celestra",
+        "level": 80,
+        "bonus": {
+            "def": 1920
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iscrc50.png"
+    },
+    {
+        "id": "arm_celestra_80_SS",
+        "name": "[SS] Lv.80 Twilight Suit",
+        "emoji": "👘",
+        "rarity": "SS",
+        "type": "armor",
+        "race": "celestra",
+        "level": 80,
+        "bonus": {
+            "def": 2880
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iscrc50.png"
+    },
+    {
+        "id": "arm_celestra_80_SSS",
+        "name": "[SSS] Lv.80 Twilight Suit",
+        "emoji": "👘",
+        "rarity": "SSS",
+        "type": "armor",
+        "race": "celestra",
+        "level": 80,
+        "bonus": {
+            "def": 4480
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iscrc50.png"
+    },
+    {
+        "id": "arm_celestra_80_SR",
+        "name": "[SR] Lv.80 Twilight Suit",
+        "emoji": "👘",
+        "rarity": "SR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 80,
+        "bonus": {
+            "def": 6400
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iscrc50.png"
+    },
+    {
+        "id": "arm_celestra_80_SSR",
+        "name": "[SSR] Lv.80 Twilight Suit",
+        "emoji": "👘",
+        "rarity": "SSR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 80,
+        "bonus": {
+            "def": 9600
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iscrc50.png"
+    },
+    {
+        "id": "arm_celestra_80_UR",
+        "name": "[UR] Lv.80 Twilight Suit",
+        "emoji": "👘",
+        "rarity": "UR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 80,
+        "bonus": {
+            "def": 16000
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2023/07/iscrc50.png"
+    },
+    {
+        "id": "arm_celestra_90_D",
+        "name": "[D] Lv.90 Eclipse Robe",
+        "emoji": "👘",
+        "rarity": "D",
+        "type": "armor",
+        "race": "celestra",
+        "level": 90,
+        "bonus": {
+            "def": 720
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_90_C",
+        "name": "[C] Lv.90 Eclipse Robe",
+        "emoji": "👘",
+        "rarity": "C",
+        "type": "armor",
+        "race": "celestra",
+        "level": 90,
+        "bonus": {
+            "def": 864
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_90_B",
+        "name": "[B] Lv.90 Eclipse Robe",
+        "emoji": "👘",
+        "rarity": "B",
+        "type": "armor",
+        "race": "celestra",
+        "level": 90,
+        "bonus": {
+            "def": 1080
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_90_A",
+        "name": "[A] Lv.90 Eclipse Robe",
+        "emoji": "👘",
+        "rarity": "A",
+        "type": "armor",
+        "race": "celestra",
+        "level": 90,
+        "bonus": {
+            "def": 1440
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_90_S",
+        "name": "[S] Lv.90 Eclipse Robe",
+        "emoji": "👘",
+        "rarity": "S",
+        "type": "armor",
+        "race": "celestra",
+        "level": 90,
+        "bonus": {
+            "def": 2160
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_90_SS",
+        "name": "[SS] Lv.90 Eclipse Robe",
+        "emoji": "👘",
+        "rarity": "SS",
+        "type": "armor",
+        "race": "celestra",
+        "level": 90,
+        "bonus": {
+            "def": 3240
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_90_SSS",
+        "name": "[SSS] Lv.90 Eclipse Robe",
+        "emoji": "👘",
+        "rarity": "SSS",
+        "type": "armor",
+        "race": "celestra",
+        "level": 90,
+        "bonus": {
+            "def": 5040
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_90_SR",
+        "name": "[SR] Lv.90 Eclipse Robe",
+        "emoji": "👘",
+        "rarity": "SR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 90,
+        "bonus": {
+            "def": 7200
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_90_SSR",
+        "name": "[SSR] Lv.90 Eclipse Robe",
+        "emoji": "👘",
+        "rarity": "SSR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 90,
+        "bonus": {
+            "def": 10800
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_90_UR",
+        "name": "[UR] Lv.90 Eclipse Robe",
+        "emoji": "👘",
+        "rarity": "UR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 90,
+        "bonus": {
+            "def": 18000
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_100_D",
+        "name": "[D] Lv.100 Eclipse Robe",
+        "emoji": "👘",
+        "rarity": "D",
+        "type": "armor",
+        "race": "celestra",
+        "level": 100,
+        "bonus": {
+            "def": 800
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_100_C",
+        "name": "[C] Lv.100 Eclipse Robe",
+        "emoji": "👘",
+        "rarity": "C",
+        "type": "armor",
+        "race": "celestra",
+        "level": 100,
+        "bonus": {
+            "def": 960
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_100_B",
+        "name": "[B] Lv.100 Eclipse Robe",
+        "emoji": "👘",
+        "rarity": "B",
+        "type": "armor",
+        "race": "celestra",
+        "level": 100,
+        "bonus": {
+            "def": 1200
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_100_A",
+        "name": "[A] Lv.100 Eclipse Robe",
+        "emoji": "👘",
+        "rarity": "A",
+        "type": "armor",
+        "race": "celestra",
+        "level": 100,
+        "bonus": {
+            "def": 1600
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_100_S",
+        "name": "[S] Lv.100 Eclipse Robe",
+        "emoji": "👘",
+        "rarity": "S",
+        "type": "armor",
+        "race": "celestra",
+        "level": 100,
+        "bonus": {
+            "def": 2400
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_100_SS",
+        "name": "[SS] Lv.100 Eclipse Robe",
+        "emoji": "👘",
+        "rarity": "SS",
+        "type": "armor",
+        "race": "celestra",
+        "level": 100,
+        "bonus": {
+            "def": 3600
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_100_SSS",
+        "name": "[SSS] Lv.100 Eclipse Robe",
+        "emoji": "👘",
+        "rarity": "SSS",
+        "type": "armor",
+        "race": "celestra",
+        "level": 100,
+        "bonus": {
+            "def": 5600
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_100_SR",
+        "name": "[SR] Lv.100 Eclipse Robe",
+        "emoji": "👘",
+        "rarity": "SR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 100,
+        "bonus": {
+            "def": 8000
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_100_SSR",
+        "name": "[SSR] Lv.100 Eclipse Robe",
+        "emoji": "👘",
+        "rarity": "SSR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 100,
+        "bonus": {
+            "def": 12000
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "arm_celestra_100_UR",
+        "name": "[UR] Lv.100 Eclipse Robe",
+        "emoji": "👘",
+        "rarity": "UR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 100,
+        "bonus": {
+            "def": 20000
+        },
+        "image": "https://rfdb.rfdatabase.net/wp-content/uploads/2024/05/ihcwd75.png"
+    },
+    {
+        "id": "archon_celestra_helmet",
+        "name": "Tiara Celestia",
+        "emoji": "👑",
+        "rarity": "UR",
+        "type": "helmet",
+        "race": "celestra",
+        "level": 55,
+        "bonus": {
+            "hpPercent": 15,
+            "defPercent": 10,
+            "description": "+15% Mana, +10% Magic Defense"
+        },
+        "image": "https://img.rfdatabase.net/items/ihcwd40.png"
+    },
+    {
+        "id": "archon_celestra_mantle",
+        "name": "Astral Veil",
+        "emoji": "🧥",
+        "rarity": "UR",
+        "type": "mantle",
+        "race": "celestra",
+        "level": 55,
+        "bonus": {
+            "description": "Aura regenerasi mana."
+        },
+        "image": "/assets/cape_celestra_dont_delete.jpg"
+    },
+    {
+        "id": "archon_celestra_armor",
+        "name": "Robe of Eternal Stars",
+        "emoji": "🥋",
+        "rarity": "UR",
+        "type": "armor",
+        "race": "celestra",
+        "level": 55,
+        "bonus": {
+            "atkPercent": 20,
+            "description": "+20% Magic Power"
+        },
+        "image": "https://img.rfdatabase.net/items/iucwd40.png"
+    },
+    {
+        "id": "archon_celestra_gloves",
+        "name": "Gauntlet of Moondust",
+        "emoji": "🧤",
+        "rarity": "UR",
+        "type": "gloves",
+        "race": "celestra",
+        "level": 55,
+        "bonus": {
+            "description": "+15% Critical Magic"
+        },
+        "image": "https://img.rfdatabase.net/items/igcwc40.png"
+    },
+    {
+        "id": "archon_celestra_boots",
+        "name": "Boots of Lunar Path",
+        "emoji": "🥾",
+        "rarity": "UR",
+        "type": "boots",
+        "race": "celestra",
+        "level": 55,
+        "bonus": {
+            "description": "+20% Evasion"
+        },
+        "image": "https://img.rfdatabase.net/items/iscwd40.png"
+    },
+    {
+        "id": "helmet_armorset_celestra_lv1",
+        "name": "[C] Lv.1 Celestra Warrior Helm",
+        "emoji": "🪖",
+        "rarity": "C",
+        "type": "helmet",
+        "race": "celestra",
+        "job": [
+            "sentinel",
+            "warden",
+            "knight",
+            "blademaster"
+        ],
+        "level": 1,
+        "bonus": {
+            "def": 5
+        },
+        "image": "/assets/armor_celestra/defcelestrawarriorlv1helmet.png"
+    },
+    {
+        "id": "armor_armorset_celestra_lv1",
+        "name": "[C] Lv.1 Celestra Warrior Plate",
+        "emoji": "🦾",
+        "rarity": "C",
+        "type": "armor",
+        "race": "celestra",
+        "job": [
+            "sentinel",
+            "warden",
+            "knight",
+            "blademaster"
+        ],
+        "level": 1,
+        "bonus": {
+            "def": 6
+        },
+        "image": "/assets/armor_celestra/defcelestrawarriorlv1armor.png"
+    },
+    {
+        "id": "pants_armorset_celestra_lv1",
+        "name": "[C] Lv.1 Celestra Warrior Legguard",
+        "emoji": "👖",
+        "rarity": "C",
+        "type": "pants",
+        "race": "celestra",
+        "job": [
+            "sentinel",
+            "warden",
+            "knight",
+            "blademaster"
+        ],
+        "level": 1,
+        "bonus": {
+            "def": 5
+        },
+        "image": "/assets/armor_celestra/defcelestrawarriorlv1pants.png"
+    },
+    {
+        "id": "gloves_armorset_celestra_lv1",
+        "name": "[C] Lv.1 Celestra Warrior Gauntlets",
+        "emoji": "🧤",
+        "rarity": "C",
+        "type": "gloves",
+        "race": "celestra",
+        "job": [
+            "sentinel",
+            "warden",
+            "knight",
+            "blademaster"
+        ],
+        "level": 1,
+        "bonus": {
+            "def": 4,
+            "atk": 3
+        },
+        "image": "/assets/armor_celestra/defcelestrawarriorlv1gloves.png"
+    },
+    {
+        "id": "boots_armorset_celestra_lv1",
+        "name": "[C] Lv.1 Celestra Warrior Greaves",
+        "emoji": "👢",
+        "rarity": "C",
+        "type": "boots",
+        "race": "celestra",
+        "job": [
+            "sentinel",
+            "warden",
+            "knight",
+            "blademaster"
+        ],
+        "level": 1,
+        "bonus": {
+            "def": 4
+        },
+        "image": "/assets/armor_celestra/defcelestrawarriorlv1boots.png"
+    },
+    {
+        "id": "helmet_armorset_celestra_lv32",
+        "name": "[C] Lv.32 Celestra Warrior Helm",
+        "emoji": "🪖",
+        "rarity": "C",
+        "type": "helmet",
+        "race": "celestra",
+        "job": [
+            "sentinel",
+            "warden",
+            "knight",
+            "blademaster"
+        ],
+        "level": 32,
+        "bonus": {
+            "def": 149
+        },
+        "image": "/assets/armor_celestra/defcelestrawarriorlv32helmet.png"
+    },
+    {
+        "id": "armor_armorset_celestra_lv32",
+        "name": "[C] Lv.32 Celestra Warrior Plate",
+        "emoji": "🦾",
+        "rarity": "C",
+        "type": "armor",
+        "race": "celestra",
+        "job": [
+            "sentinel",
+            "warden",
+            "knight",
+            "blademaster"
+        ],
+        "level": 32,
+        "bonus": {
+            "def": 181
+        },
+        "image": "/assets/armor_celestra/defcelestrawarriorlv32armor.png"
+    },
+    {
+        "id": "pants_armorset_celestra_lv32",
+        "name": "[C] Lv.32 Celestra Warrior Legguard",
+        "emoji": "👖",
+        "rarity": "C",
+        "type": "pants",
+        "race": "celestra",
+        "job": [
+            "sentinel",
+            "warden",
+            "knight",
+            "blademaster"
+        ],
+        "level": 32,
+        "bonus": {
+            "def": 159,
+            "hp": 1988
+        },
+        "image": "/assets/armor_celestra/defcelestrawarriorlv32pants.png"
+    },
+    {
+        "id": "gloves_armorset_celestra_lv32",
+        "name": "[C] Lv.32 Celestra Warrior Gauntlets",
+        "emoji": "🧤",
+        "rarity": "C",
+        "type": "gloves",
+        "race": "celestra",
+        "job": [
+            "sentinel",
+            "warden",
+            "knight",
+            "blademaster"
+        ],
+        "level": 32,
+        "bonus": {
+            "def": 129,
+            "atk": 57
+        },
+        "image": "/assets/armor_celestra/defcelestrawarriorlv32gloves.png"
+    },
+    {
+        "id": "boots_armorset_celestra_lv32",
+        "name": "[C] Lv.32 Celestra Warrior Greaves",
+        "emoji": "👢",
+        "rarity": "C",
+        "type": "boots",
+        "race": "celestra",
+        "job": [
+            "sentinel",
+            "warden",
+            "knight",
+            "blademaster"
+        ],
+        "level": 32,
+        "bonus": {
+            "def": 122
+        },
+        "image": "/assets/armor_celestra/defcelestrawarriorlv32boots.png"
+    },
+    {
+        "id": "helmet_armorset_celestra_lv42",
+        "name": "[C] Lv.42 Celestra Warrior Helm",
+        "emoji": "🪖",
+        "rarity": "C",
+        "type": "helmet",
+        "race": "celestra",
+        "job": [
+            "sentinel",
+            "warden",
+            "knight",
+            "blademaster"
+        ],
+        "level": 42,
+        "bonus": {
+            "def": 197
+        },
+        "image": "/assets/armor_celestra/defcelestrawarriorlv42helmet.png"
+    },
+    {
+        "id": "armor_armorset_celestra_lv42",
+        "name": "[C] Lv.42 Celestra Warrior Plate",
+        "emoji": "🦾",
+        "rarity": "C",
+        "type": "armor",
+        "race": "celestra",
+        "job": [
+            "sentinel",
+            "warden",
+            "knight",
+            "blademaster"
+        ],
+        "level": 42,
+        "bonus": {
+            "def": 239
+        },
+        "image": "/assets/armor_celestra/defcelestrawarriorlv42armor.png"
+    },
+    {
+        "id": "pants_armorset_celestra_lv42",
+        "name": "[C] Lv.42 Celestra Warrior Legguard",
+        "emoji": "👖",
+        "rarity": "C",
+        "type": "pants",
+        "race": "celestra",
+        "job": [
+            "sentinel",
+            "warden",
+            "knight",
+            "blademaster"
+        ],
+        "level": 42,
+        "bonus": {
+            "def": 211,
+            "hp": 2638
+        },
+        "image": "/assets/armor_celestra/defcelestrawarriorlv42pants.png"
+    },
+    {
+        "id": "gloves_armorset_celestra_lv42",
+        "name": "[C] Lv.42 Celestra Warrior Gauntlets",
+        "emoji": "🧤",
+        "rarity": "C",
+        "type": "gloves",
+        "race": "celestra",
+        "job": [
+            "sentinel",
+            "warden",
+            "knight",
+            "blademaster"
+        ],
+        "level": 42,
+        "bonus": {
+            "def": 171,
+            "atk": 78
+        },
+        "image": "/assets/armor_celestra/defcelestrawarriorlv42gloves.png"
+    },
+    {
+        "id": "boots_armorset_celestra_lv42",
+        "name": "[C] Lv.42 Celestra Warrior Greaves",
+        "emoji": "👢",
+        "rarity": "C",
+        "type": "boots",
+        "race": "celestra",
+        "job": [
+            "sentinel",
+            "warden",
+            "knight",
+            "blademaster"
+        ],
+        "level": 42,
+        "bonus": {
+            "def": 161
+        },
+        "image": "/assets/armor_celestra/defcelestrawarriorlv42boots.png"
+    },
+    {
+        "id": "helmet_armorset_celestra_lv55",
+        "name": "[C] Lv.55 Celestra Warrior Helm",
+        "emoji": "🪖",
+        "rarity": "C",
+        "type": "helmet",
+        "race": "celestra",
+        "job": [
+            "sentinel",
+            "warden",
+            "knight",
+            "blademaster"
+        ],
+        "level": 55,
+        "bonus": {
+            "def": 260
+        },
+        "image": "/assets/armor_celestra/defcelestrawarriorlv55helmet.png"
+    },
+    {
+        "id": "armor_armorset_celestra_lv55",
+        "name": "[C] Lv.55 Celestra Warrior Plate",
+        "emoji": "🦾",
+        "rarity": "C",
+        "type": "armor",
+        "race": "celestra",
+        "job": [
+            "sentinel",
+            "warden",
+            "knight",
+            "blademaster"
+        ],
+        "level": 55,
+        "bonus": {
+            "def": 315
+        },
+        "image": "/assets/armor_celestra/defcelestrawarriorlv55armor.png"
+    },
+    {
+        "id": "pants_armorset_celestra_lv55",
+        "name": "[C] Lv.55 Celestra Warrior Legguard",
+        "emoji": "👖",
+        "rarity": "C",
+        "type": "pants",
+        "race": "celestra",
+        "job": [
+            "sentinel",
+            "warden",
+            "knight",
+            "blademaster"
+        ],
+        "level": 55,
+        "bonus": {
+            "def": 278,
+            "hp": 3442
+        },
+        "image": "/assets/armor_celestra/defcelestrawarriorlv55pants.png"
+    },
+    {
+        "id": "gloves_armorset_celestra_lv55",
+        "name": "[C] Lv.55 Celestra Warrior Gauntlets",
+        "emoji": "🧤",
+        "rarity": "C",
+        "type": "gloves",
+        "race": "celestra",
+        "job": [
+            "sentinel",
+            "warden",
+            "knight",
+            "blademaster"
+        ],
+        "level": 55,
+        "bonus": {
+            "def": 225,
+            "atk": 105
+        },
+        "image": "/assets/armor_celestra/defcelestrawarriorlv55gloves.png"
+    },
+    {
+        "id": "boots_armorset_celestra_lv55",
+        "name": "[C] Lv.55 Celestra Warrior Greaves",
+        "emoji": "👢",
+        "rarity": "C",
+        "type": "boots",
+        "race": "celestra",
+        "job": [
+            "sentinel",
+            "warden",
+            "knight",
+            "blademaster"
+        ],
+        "level": 55,
+        "bonus": {
+            "def": 213
+        },
+        "image": "/assets/armor_celestra/defcelestrawarriorlv55boots.png"
+    },
+    {
+        "id": "helmet_armorset_celestra_lv66",
+        "name": "[C] Lv.66 Celestra Warrior Helm",
+        "emoji": "🪖",
+        "rarity": "C",
+        "type": "helmet",
+        "race": "celestra",
+        "job": [
+            "sentinel",
+            "warden",
+            "knight",
+            "blademaster"
+        ],
+        "level": 66,
+        "bonus": {
+            "def": 322
+        },
+        "image": "/assets/armor_celestra/defcelestrawarriorlv66helmet.png"
+    },
+    {
+        "id": "armor_armorset_celestra_lv66",
+        "name": "[C] Lv.66 Celestra Warrior Plate",
+        "emoji": "🦾",
+        "rarity": "C",
+        "type": "armor",
+        "race": "celestra",
+        "job": [
+            "sentinel",
+            "warden",
+            "knight",
+            "blademaster"
+        ],
+        "level": 66,
+        "bonus": {
+            "def": 391
+        },
+        "image": "/assets/armor_celestra/defcelestrawarriorlv66armor.png"
+    },
+    {
+        "id": "pants_armorset_celestra_lv66",
+        "name": "[C] Lv.66 Celestra Warrior Legguard",
+        "emoji": "👖",
+        "rarity": "C",
+        "type": "pants",
+        "race": "celestra",
+        "job": [
+            "sentinel",
+            "warden",
+            "knight",
+            "blademaster"
+        ],
+        "level": 66,
+        "bonus": {
+            "def": 345,
+            "hp": 4246
+        },
+        "image": "/assets/armor_celestra/defcelestrawarriorlv66pants.png"
+    },
+    {
+        "id": "gloves_armorset_celestra_lv66",
+        "name": "[C] Lv.66 Celestra Warrior Gauntlets",
+        "emoji": "🧤",
+        "rarity": "C",
+        "type": "gloves",
+        "race": "celestra",
+        "job": [
+            "sentinel",
+            "warden",
+            "knight",
+            "blademaster"
+        ],
+        "level": 66,
+        "bonus": {
+            "def": 279,
+            "atk": 133
+        },
+        "image": "/assets/armor_celestra/defcelestrawarriorlv66gloves.png"
+    },
+    {
+        "id": "boots_armorset_celestra_lv66",
+        "name": "[C] Lv.66 Celestra Warrior Greaves",
+        "emoji": "👢",
+        "rarity": "C",
+        "type": "boots",
+        "race": "celestra",
+        "job": [
+            "sentinel",
+            "warden",
+            "knight",
+            "blademaster"
+        ],
+        "level": 66,
+        "bonus": {
+            "def": 264
+        },
+        "image": "/assets/armor_celestra/defcelestrawarriorlv66boots.png"
+    },
+    {
+        "id": "helmet_armorset_celestra_ranger_lv1",
+        "name": "[C] Lv.1 Celestra Ranger Helm",
+        "emoji": "🪖",
+        "rarity": "C",
+        "type": "helmet",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 1,
+        "bonus": {
+            "def": 5
+        },
+        "image": "/assets/armor_celestra/defcelestrarangerlv1helmet.png"
+    },
+    {
+        "id": "armor_armorset_celestra_ranger_lv1",
+        "name": "[C] Lv.1 Celestra Ranger Plate",
+        "emoji": "🦾",
+        "rarity": "C",
+        "type": "armor",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 1,
+        "bonus": {
+            "def": 6
+        },
+        "image": "/assets/armor_celestra/defcelestrarangerlv1armor.png"
+    },
+    {
+        "id": "pants_armorset_celestra_ranger_lv1",
+        "name": "[C] Lv.1 Celestra Ranger Legguard",
+        "emoji": "👖",
+        "rarity": "C",
+        "type": "pants",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 1,
+        "bonus": {
+            "def": 5
+        },
+        "image": "/assets/armor_celestra/defcelestrarangerlv1pants.png"
+    },
+    {
+        "id": "gloves_armorset_celestra_ranger_lv1",
+        "name": "[C] Lv.1 Celestra Ranger Gauntlets",
+        "emoji": "🧤",
+        "rarity": "C",
+        "type": "gloves",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 1,
+        "bonus": {
+            "def": 4,
+            "atk": 3
+        },
+        "image": "/assets/armor_celestra/defcelestrarangerlv1gloves.png"
+    },
+    {
+        "id": "boots_armorset_celestra_ranger_lv1",
+        "name": "[C] Lv.1 Celestra Ranger Greaves",
+        "emoji": "👢",
+        "rarity": "C",
+        "type": "boots",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 1,
+        "bonus": {
+            "def": 4
+        },
+        "image": "/assets/armor_celestra/defcelestrarangerlv1boots.png"
+    },
+    {
+        "id": "helmet_armorset_celestra_ranger_lv32",
+        "name": "[C] Lv.32 Celestra Ranger Helm",
+        "emoji": "🪖",
+        "rarity": "C",
+        "type": "helmet",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 32,
+        "bonus": {
+            "def": 148
+        },
+        "image": "/assets/armor_celestra/defcelestrarangerlv32helmet.png"
+    },
+    {
+        "id": "armor_armorset_celestra_ranger_lv32",
+        "name": "[C] Lv.32 Celestra Ranger Plate",
+        "emoji": "🦾",
+        "rarity": "C",
+        "type": "armor",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 32,
+        "bonus": {
+            "def": 170
+        },
+        "image": "/assets/armor_celestra/defcelestrarangerlv32armor.png"
+    },
+    {
+        "id": "pants_armorset_celestra_ranger_lv32",
+        "name": "[C] Lv.32 Celestra Ranger Legguard",
+        "emoji": "👖",
+        "rarity": "C",
+        "type": "pants",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 32,
+        "bonus": {
+            "def": 163,
+            "hp": 2038
+        },
+        "image": "/assets/armor_celestra/defcelestrarangerlv32pants.png"
+    },
+    {
+        "id": "gloves_armorset_celestra_ranger_lv32",
+        "name": "[C] Lv.32 Celestra Ranger Gauntlets",
+        "emoji": "🧤",
+        "rarity": "C",
+        "type": "gloves",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 32,
+        "bonus": {
+            "def": 133,
+            "atk": 59
+        },
+        "image": "/assets/armor_celestra/defcelestrarangerlv32gloves.png"
+    },
+    {
+        "id": "boots_armorset_celestra_ranger_lv32",
+        "name": "[C] Lv.32 Celestra Ranger Greaves",
+        "emoji": "👢",
+        "rarity": "C",
+        "type": "boots",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 32,
+        "bonus": {
+            "def": 126
+        },
+        "image": "/assets/armor_celestra/defcelestrarangerlv32boots.png"
+    },
+    {
+        "id": "helmet_armorset_celestra_ranger_lv42",
+        "name": "[C] Lv.42 Celestra Ranger Helm",
+        "emoji": "🪖",
+        "rarity": "C",
+        "type": "helmet",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 42,
+        "bonus": {
+            "def": 196
+        },
+        "image": "/assets/armor_celestra/defcelestrarangerlv42helmet.png"
+    },
+    {
+        "id": "armor_armorset_celestra_ranger_lv42",
+        "name": "[C] Lv.42 Celestra Ranger Plate",
+        "emoji": "🦾",
+        "rarity": "C",
+        "type": "armor",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 42,
+        "bonus": {
+            "def": 225
+        },
+        "image": "/assets/armor_celestra/defcelestrarangerlv42armor.png"
+    },
+    {
+        "id": "pants_armorset_celestra_ranger_lv42",
+        "name": "[C] Lv.42 Celestra Ranger Legguard",
+        "emoji": "👖",
+        "rarity": "C",
+        "type": "pants",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 42,
+        "bonus": {
+            "def": 215,
+            "hp": 2688
+        },
+        "image": "/assets/armor_celestra/defcelestrarangerlv42pants.png"
+    },
+    {
+        "id": "gloves_armorset_celestra_ranger_lv42",
+        "name": "[C] Lv.42 Celestra Ranger Gauntlets",
+        "emoji": "🧤",
+        "rarity": "C",
+        "type": "gloves",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 42,
+        "bonus": {
+            "def": 176,
+            "atk": 81
+        },
+        "image": "/assets/armor_celestra/defcelestrarangerlv42gloves.png"
+    },
+    {
+        "id": "boots_armorset_celestra_ranger_lv42",
+        "name": "[C] Lv.42 Celestra Ranger Greaves",
+        "emoji": "👢",
+        "rarity": "C",
+        "type": "boots",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 42,
+        "bonus": {
+            "def": 167
+        },
+        "image": "/assets/armor_celestra/defcelestrarangerlv42boots.png"
+    },
+    {
+        "id": "helmet_armorset_celestra_ranger_lv55",
+        "name": "[C] Lv.55 Celestra Ranger Helm",
+        "emoji": "🪖",
+        "rarity": "C",
+        "type": "helmet",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 55,
+        "bonus": {
+            "def": 258
+        },
+        "image": "/assets/armor_celestra/defcelestrarangerlv55helmet.png"
+    },
+    {
+        "id": "armor_armorset_celestra_ranger_lv55",
+        "name": "[C] Lv.55 Celestra Ranger Plate",
+        "emoji": "🦾",
+        "rarity": "C",
+        "type": "armor",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 55,
+        "bonus": {
+            "def": 297
+        },
+        "image": "/assets/armor_celestra/defcelestrarangerlv55armor.png"
+    },
+    {
+        "id": "pants_armorset_celestra_ranger_lv55",
+        "name": "[C] Lv.55 Celestra Ranger Legguard",
+        "emoji": "👖",
+        "rarity": "C",
+        "type": "pants",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 55,
+        "bonus": {
+            "def": 284,
+            "hp": 3516
+        },
+        "image": "/assets/armor_celestra/defcelestrarangerlv55pants.png"
+    },
+    {
+        "id": "gloves_armorset_celestra_ranger_lv55",
+        "name": "[C] Lv.55 Celestra Ranger Gauntlets",
+        "emoji": "🧤",
+        "rarity": "C",
+        "type": "gloves",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 55,
+        "bonus": {
+            "def": 232,
+            "atk": 109
+        },
+        "image": "/assets/armor_celestra/defcelestrarangerlv55gloves.png"
+    },
+    {
+        "id": "boots_armorset_celestra_ranger_lv55",
+        "name": "[C] Lv.55 Celestra Ranger Greaves",
+        "emoji": "👢",
+        "rarity": "C",
+        "type": "boots",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 55,
+        "bonus": {
+            "def": 219
+        },
+        "image": "/assets/armor_celestra/defcelestrarangerlv55boots.png"
+    },
+    {
+        "id": "helmet_armorset_celestra_ranger_lv66",
+        "name": "[C] Lv.66 Celestra Ranger Helm",
+        "emoji": "🪖",
+        "rarity": "C",
+        "type": "helmet",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 66,
+        "bonus": {
+            "def": 320
+        },
+        "image": "/assets/armor_celestra/defcelestrarangerlv66helmet.png"
+    },
+    {
+        "id": "armor_armorset_celestra_ranger_lv66",
+        "name": "[C] Lv.66 Celestra Ranger Plate",
+        "emoji": "🦾",
+        "rarity": "C",
+        "type": "armor",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 66,
+        "bonus": {
+            "def": 368
+        },
+        "image": "/assets/armor_celestra/defcelestrarangerlv66armor.png"
+    },
+    {
+        "id": "pants_armorset_celestra_ranger_lv66",
+        "name": "[C] Lv.66 Celestra Ranger Legguard",
+        "emoji": "👖",
+        "rarity": "C",
+        "type": "pants",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 66,
+        "bonus": {
+            "def": 352,
+            "hp": 4332
+        },
+        "image": "/assets/armor_celestra/defcelestrarangerlv66pants.png"
+    },
+    {
+        "id": "gloves_armorset_celestra_ranger_lv66",
+        "name": "[C] Lv.66 Celestra Ranger Gauntlets",
+        "emoji": "🧤",
+        "rarity": "C",
+        "type": "gloves",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 66,
+        "bonus": {
+            "def": 288,
+            "atk": 137
+        },
+        "image": "/assets/armor_celestra/defcelestrarangerlv66gloves.png"
+    },
+    {
+        "id": "boots_armorset_celestra_ranger_lv66",
+        "name": "[C] Lv.66 Celestra Ranger Greaves",
+        "emoji": "👢",
+        "rarity": "C",
+        "type": "boots",
+        "race": "celestra",
+        "job": [
+            "pathfinder",
+            "windrunner",
+            "shadow_hunter",
+            "stargazer"
+        ],
+        "level": 66,
+        "bonus": {
+            "def": 272
+        },
+        "image": "/assets/armor_celestra/defcelestrarangerlv66boots.png"
+    },
+    {
+        "id": "helmet_armorset_celestra_mage_lv1",
+        "name": "[C] Lv.1 Celestra Mage Helm",
+        "emoji": "🪖",
+        "rarity": "C",
+        "type": "helmet",
+        "race": "celestra",
+        "job": [
+            "oracle",
+            "arcanist",
+            "celestial_oracle",
+            "rune_caster",
+            "conjurer",
+            "mystic",
+            "divine_summoner",
+            "archmage"
+        ],
+        "level": 1,
+        "bonus": {
+            "def": 5
+        },
+        "image": "/assets/armor_celestra/defcelestramagelv1helmet.png"
+    },
+    {
+        "id": "armor_armorset_celestra_mage_lv1",
+        "name": "[C] Lv.1 Celestra Mage Plate",
+        "emoji": "🦾",
+        "rarity": "C",
+        "type": "armor",
+        "race": "celestra",
+        "job": [
+            "oracle",
+            "arcanist",
+            "celestial_oracle",
+            "rune_caster",
+            "conjurer",
+            "mystic",
+            "divine_summoner",
+            "archmage"
+        ],
+        "level": 1,
+        "bonus": {
+            "def": 6
+        },
+        "image": "/assets/armor_celestra/defcelestramagelv1armor.png"
+    },
+    {
+        "id": "pants_armorset_celestra_mage_lv1",
+        "name": "[C] Lv.1 Celestra Mage Legguard",
+        "emoji": "👖",
+        "rarity": "C",
+        "type": "pants",
+        "race": "celestra",
+        "job": [
+            "oracle",
+            "arcanist",
+            "celestial_oracle",
+            "rune_caster",
+            "conjurer",
+            "mystic",
+            "divine_summoner",
+            "archmage"
+        ],
+        "level": 1,
+        "bonus": {
+            "def": 6
+        },
+        "image": "/assets/armor_celestra/defcelestramagelv1pants.png"
+    },
+    {
+        "id": "gloves_armorset_celestra_mage_lv1",
+        "name": "[C] Lv.1 Celestra Mage Gauntlets",
+        "emoji": "🧤",
+        "rarity": "C",
+        "type": "gloves",
+        "race": "celestra",
+        "job": [
+            "oracle",
+            "arcanist",
+            "celestial_oracle",
+            "rune_caster",
+            "conjurer",
+            "mystic",
+            "divine_summoner",
+            "archmage"
+        ],
+        "level": 1,
+        "bonus": {
+            "def": 4,
+            "atk": 3
+        },
+        "image": "/assets/armor_celestra/defcelestramagelv1gloves.png"
+    },
+    {
+        "id": "boots_armorset_celestra_mage_lv1",
+        "name": "[C] Lv.1 Celestra Mage Greaves",
+        "emoji": "👢",
+        "rarity": "C",
+        "type": "boots",
+        "race": "celestra",
+        "job": [
+            "oracle",
+            "arcanist",
+            "celestial_oracle",
+            "rune_caster",
+            "conjurer",
+            "mystic",
+            "divine_summoner",
+            "archmage"
+        ],
+        "level": 1,
+        "bonus": {
+            "def": 4
+        },
+        "image": "/assets/armor_celestra/defcelestramagelv1boots.png"
+    },
+    {
+        "id": "helmet_armorset_celestra_mage_lv32",
+        "name": "[C] Lv.32 Celestra Mage Helm",
+        "emoji": "🪖",
+        "rarity": "C",
+        "type": "helmet",
+        "race": "celestra",
+        "job": [
+            "oracle",
+            "arcanist",
+            "celestial_oracle",
+            "rune_caster",
+            "conjurer",
+            "mystic",
+            "divine_summoner",
+            "archmage"
+        ],
+        "level": 32,
+        "bonus": {
+            "def": 148
+        },
+        "image": "/assets/armor_celestra/defcelestramagelv32helmet.png"
+    },
+    {
+        "id": "armor_armorset_celestra_mage_lv32",
+        "name": "[C] Lv.32 Celestra Mage Plate",
+        "emoji": "🦾",
+        "rarity": "C",
+        "type": "armor",
+        "race": "celestra",
+        "job": [
+            "oracle",
+            "arcanist",
+            "celestial_oracle",
+            "rune_caster",
+            "conjurer",
+            "mystic",
+            "divine_summoner",
+            "archmage"
+        ],
+        "level": 32,
+        "bonus": {
+            "def": 175
+        },
+        "image": "/assets/armor_celestra/defcelestramagelv32armor.png"
+    },
+    {
+        "id": "pants_armorset_celestra_mage_lv32",
+        "name": "[C] Lv.32 Celestra Mage Legguard",
+        "emoji": "👖",
+        "rarity": "C",
+        "type": "pants",
+        "race": "celestra",
+        "job": [
+            "oracle",
+            "arcanist",
+            "celestial_oracle",
+            "rune_caster",
+            "conjurer",
+            "mystic",
+            "divine_summoner",
+            "archmage"
+        ],
+        "level": 32,
+        "bonus": {
+            "def": 163,
+            "hp": 2038
+        },
+        "image": "/assets/armor_celestra/defcelestramagelv32pants.png"
+    },
+    {
+        "id": "gloves_armorset_celestra_mage_lv32",
+        "name": "[C] Lv.32 Celestra Mage Gauntlets",
+        "emoji": "🧤",
+        "rarity": "C",
+        "type": "gloves",
+        "race": "celestra",
+        "job": [
+            "oracle",
+            "arcanist",
+            "celestial_oracle",
+            "rune_caster",
+            "conjurer",
+            "mystic",
+            "divine_summoner",
+            "archmage"
+        ],
+        "level": 32,
+        "bonus": {
+            "def": 131,
+            "atk": 58
+        },
+        "image": "/assets/armor_celestra/defcelestramagelv32gloves.png"
+    },
+    {
+        "id": "boots_armorset_celestra_mage_lv32",
+        "name": "[C] Lv.32 Celestra Mage Greaves",
+        "emoji": "👢",
+        "rarity": "C",
+        "type": "boots",
+        "race": "celestra",
+        "job": [
+            "oracle",
+            "arcanist",
+            "celestial_oracle",
+            "rune_caster",
+            "conjurer",
+            "mystic",
+            "divine_summoner",
+            "archmage"
+        ],
+        "level": 32,
+        "bonus": {
+            "def": 123
+        },
+        "image": "/assets/armor_celestra/defcelestramagelv32boots.png"
+    },
+    {
+        "id": "helmet_armorset_celestra_mage_lv42",
+        "name": "[C] Lv.42 Celestra Mage Helm",
+        "emoji": "🪖",
+        "rarity": "C",
+        "type": "helmet",
+        "race": "celestra",
+        "job": [
+            "oracle",
+            "arcanist",
+            "celestial_oracle",
+            "rune_caster",
+            "conjurer",
+            "mystic",
+            "divine_summoner",
+            "archmage"
+        ],
+        "level": 42,
+        "bonus": {
+            "def": 196
+        },
+        "image": "/assets/armor_celestra/defcelestramagelv42helmet.png"
+    },
+    {
+        "id": "armor_armorset_celestra_mage_lv42",
+        "name": "[C] Lv.42 Celestra Mage Plate",
+        "emoji": "🦾",
+        "rarity": "C",
+        "type": "armor",
+        "race": "celestra",
+        "job": [
+            "oracle",
+            "arcanist",
+            "celestial_oracle",
+            "rune_caster",
+            "conjurer",
+            "mystic",
+            "divine_summoner",
+            "archmage"
+        ],
+        "level": 42,
+        "bonus": {
+            "def": 232
+        },
+        "image": "/assets/armor_celestra/defcelestramagelv42armor.png"
+    },
+    {
+        "id": "pants_armorset_celestra_mage_lv42",
+        "name": "[C] Lv.42 Celestra Mage Legguard",
+        "emoji": "👖",
+        "rarity": "C",
+        "type": "pants",
+        "race": "celestra",
+        "job": [
+            "oracle",
+            "arcanist",
+            "celestial_oracle",
+            "rune_caster",
+            "conjurer",
+            "mystic",
+            "divine_summoner",
+            "archmage"
+        ],
+        "level": 42,
+        "bonus": {
+            "def": 216,
+            "hp": 2700
+        },
+        "image": "/assets/armor_celestra/defcelestramagelv42pants.png"
+    },
+    {
+        "id": "gloves_armorset_celestra_mage_lv42",
+        "name": "[C] Lv.42 Celestra Mage Gauntlets",
+        "emoji": "🧤",
+        "rarity": "C",
+        "type": "gloves",
+        "race": "celestra",
+        "job": [
+            "oracle",
+            "arcanist",
+            "celestial_oracle",
+            "rune_caster",
+            "conjurer",
+            "mystic",
+            "divine_summoner",
+            "archmage"
+        ],
+        "level": 42,
+        "bonus": {
+            "def": 173,
+            "atk": 79
+        },
+        "image": "/assets/armor_celestra/defcelestramagelv42gloves.png"
+    },
+    {
+        "id": "boots_armorset_celestra_mage_lv42",
+        "name": "[C] Lv.42 Celestra Mage Greaves",
+        "emoji": "👢",
+        "rarity": "C",
+        "type": "boots",
+        "race": "celestra",
+        "job": [
+            "oracle",
+            "arcanist",
+            "celestial_oracle",
+            "rune_caster",
+            "conjurer",
+            "mystic",
+            "divine_summoner",
+            "archmage"
+        ],
+        "level": 42,
+        "bonus": {
+            "def": 163
+        },
+        "image": "/assets/armor_celestra/defcelestramagelv42boots.png"
+    },
+    {
+        "id": "helmet_armorset_celestra_mage_lv55",
+        "name": "[C] Lv.55 Celestra Mage Helm",
+        "emoji": "🪖",
+        "rarity": "C",
+        "type": "helmet",
+        "race": "celestra",
+        "job": [
+            "oracle",
+            "arcanist",
+            "celestial_oracle",
+            "rune_caster",
+            "conjurer",
+            "mystic",
+            "divine_summoner",
+            "archmage"
+        ],
+        "level": 55,
+        "bonus": {
+            "def": 258
+        },
+        "image": "/assets/armor_celestra/defcelestramagelv55helmet.png"
+    },
+    {
+        "id": "armor_armorset_celestra_mage_lv55",
+        "name": "[C] Lv.55 Celestra Mage Plate",
+        "emoji": "🦾",
+        "rarity": "C",
+        "type": "armor",
+        "race": "celestra",
+        "job": [
+            "oracle",
+            "arcanist",
+            "celestial_oracle",
+            "rune_caster",
+            "conjurer",
+            "mystic",
+            "divine_summoner",
+            "archmage"
+        ],
+        "level": 55,
+        "bonus": {
+            "def": 305
+        },
+        "image": "/assets/armor_celestra/defcelestramagelv55armor.png"
+    },
+    {
+        "id": "pants_armorset_celestra_mage_lv55",
+        "name": "[C] Lv.55 Celestra Mage Legguard",
+        "emoji": "👖",
+        "rarity": "C",
+        "type": "pants",
+        "race": "celestra",
+        "job": [
+            "oracle",
+            "arcanist",
+            "celestial_oracle",
+            "rune_caster",
+            "conjurer",
+            "mystic",
+            "divine_summoner",
+            "archmage"
+        ],
+        "level": 55,
+        "bonus": {
+            "def": 284,
+            "hp": 3516
+        },
+        "image": "/assets/armor_celestra/defcelestramagelv55pants.png"
+    },
+    {
+        "id": "gloves_armorset_celestra_mage_lv55",
+        "name": "[C] Lv.55 Celestra Mage Gauntlets",
+        "emoji": "🧤",
+        "rarity": "C",
+        "type": "gloves",
+        "race": "celestra",
+        "job": [
+            "oracle",
+            "arcanist",
+            "celestial_oracle",
+            "rune_caster",
+            "conjurer",
+            "mystic",
+            "divine_summoner",
+            "archmage"
+        ],
+        "level": 55,
+        "bonus": {
+            "def": 228,
+            "atk": 107
+        },
+        "image": "/assets/armor_celestra/defcelestramagelv55gloves.png"
+    },
+    {
+        "id": "boots_armorset_celestra_mage_lv55",
+        "name": "[C] Lv.55 Celestra Mage Greaves",
+        "emoji": "👢",
+        "rarity": "C",
+        "type": "boots",
+        "race": "celestra",
+        "job": [
+            "oracle",
+            "arcanist",
+            "celestial_oracle",
+            "rune_caster",
+            "conjurer",
+            "mystic",
+            "divine_summoner",
+            "archmage"
+        ],
+        "level": 55,
+        "bonus": {
+            "def": 215
+        },
+        "image": "/assets/armor_celestra/defcelestramagelv55boots.png"
+    },
+    {
+        "id": "helmet_armorset_celestra_mage_lv66",
+        "name": "[C] Lv.66 Celestra Mage Helm",
+        "emoji": "🪖",
+        "rarity": "C",
+        "type": "helmet",
+        "race": "celestra",
+        "job": [
+            "oracle",
+            "arcanist",
+            "celestial_oracle",
+            "rune_caster",
+            "conjurer",
+            "mystic",
+            "divine_summoner",
+            "archmage"
+        ],
+        "level": 66,
+        "bonus": {
+            "def": 320
+        },
+        "image": "/assets/armor_celestra/defcelestramagelv66helmet.png"
+    },
+    {
+        "id": "armor_armorset_celestra_mage_lv66",
+        "name": "[C] Lv.66 Celestra Mage Plate",
+        "emoji": "🦾",
+        "rarity": "C",
+        "type": "armor",
+        "race": "celestra",
+        "job": [
+            "oracle",
+            "arcanist",
+            "celestial_oracle",
+            "rune_caster",
+            "conjurer",
+            "mystic",
+            "divine_summoner",
+            "archmage"
+        ],
+        "level": 66,
+        "bonus": {
+            "def": 379
+        },
+        "image": "/assets/armor_celestra/defcelestramagelv66armor.png"
+    },
+    {
+        "id": "pants_armorset_celestra_mage_lv66",
+        "name": "[C] Lv.66 Celestra Mage Legguard",
+        "emoji": "👖",
+        "rarity": "C",
+        "type": "pants",
+        "race": "celestra",
+        "job": [
+            "oracle",
+            "arcanist",
+            "celestial_oracle",
+            "rune_caster",
+            "conjurer",
+            "mystic",
+            "divine_summoner",
+            "archmage"
+        ],
+        "level": 66,
+        "bonus": {
+            "def": 352,
+            "hp": 4332
+        },
+        "image": "/assets/armor_celestra/defcelestramagelv66pants.png"
+    },
+    {
+        "id": "gloves_armorset_celestra_mage_lv66",
+        "name": "[C] Lv.66 Celestra Mage Gauntlets",
+        "emoji": "🧤",
+        "rarity": "C",
+        "type": "gloves",
+        "race": "celestra",
+        "job": [
+            "oracle",
+            "arcanist",
+            "celestial_oracle",
+            "rune_caster",
+            "conjurer",
+            "mystic",
+            "divine_summoner",
+            "archmage"
+        ],
+        "level": 66,
+        "bonus": {
+            "def": 282,
+            "atk": 134
+        },
+        "image": "/assets/armor_celestra/defcelestramagelv66gloves.png"
+    },
+    {
+        "id": "boots_armorset_celestra_mage_lv66",
+        "name": "[C] Lv.66 Celestra Mage Greaves",
+        "emoji": "👢",
+        "rarity": "C",
+        "type": "boots",
+        "race": "celestra",
+        "job": [
+            "oracle",
+            "arcanist",
+            "celestial_oracle",
+            "rune_caster",
+            "conjurer",
+            "mystic",
+            "divine_summoner",
+            "archmage"
+        ],
+        "level": 66,
+        "bonus": {
+            "def": 267
+        },
+        "image": "/assets/armor_celestra/defcelestramagelv66boots.png"
+    }
+]

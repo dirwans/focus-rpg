@@ -752,35 +752,6 @@
             "description": "Base material for Legendary Cape crafting."
         },
         {
-            "id": "leg_ring",
-            "name": "Legendary Ring",
-            "emoji": "💍",
-            "rarity": "legendary",
-            "type": "ring",
-            "race": "All",
-            "level": 50,
-            "bonus": {
-                "atk": 100,
-                "hp": 1500,
-                "crit": 3
-            },
-            "description": "ATK+100 | HP+1500 | Critical+3% (per piece)"
-        },
-        {
-            "id": "leg_amulet",
-            "name": "Legendary Amulet",
-            "emoji": "📿",
-            "rarity": "legendary",
-            "type": "amulet",
-            "race": "All",
-            "level": 50,
-            "bonus": {
-                "def": 100,
-                "hp": 2000
-            },
-            "description": "DEF+100 | HP+2000 (per piece)"
-        },
-        {
             "id": "tool_mining_pickaxe",
             "name": "Standard Mining Pickaxe",
             "emoji": "⛏️",

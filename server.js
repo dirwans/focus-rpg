@@ -1206,15 +1206,17 @@ app.get('/api/audit/all_data', (req, res) => {
     const data = {
       items: (() => {
         const raw = readJson('items.json') || {};
-        const weapons = readJson('weapons.json') || [];
-        const armors = readJson('armors.json') || [];
-        const shields = readJson('shields.json') || [];
+        const arctron = readJson('arctron_gears.json') || [];
+        const bionex = readJson('bionex_gears.json') || [];
+        const celestra = readJson('celestra_gears.json') || [];
+        const universal = readJson('universal_gears.json') || [];
         return {
           items: [
             ...(raw.items || []),
-            ...weapons,
-            ...armors,
-            ...shields
+            ...arctron,
+            ...bionex,
+            ...celestra,
+            ...universal
           ],
           materials: raw.materials || []
         };
@@ -1354,13 +1356,18 @@ app.post('/api/audit/save_item_direct', (req, res) => {
     let targetFile = ''
     if (category === 'items') {
       const typeLower = (cleanData.type || '').toLowerCase();
-      const idLower = (cleanData.id || '').toLowerCase();
-      if (typeLower === 'weapon' || idLower.startsWith('wpn_') || idLower.startsWith('gw_')) {
-        targetFile = join(SRC_DATA_DIR, 'weapons.json')
-      } else if (typeLower === 'shield' || idLower.startsWith('shd_')) {
-        targetFile = join(SRC_DATA_DIR, 'shields.json')
-      } else if (['armor', 'helmet', 'boots', 'gloves', 'pants', 'mantle', 'cape'].includes(typeLower) || idLower.startsWith('set_') || idLower.startsWith('arm_')) {
-        targetFile = join(SRC_DATA_DIR, 'armors.json')
+      const raceLower = (cleanData.race || '').toLowerCase();
+      const isGear = ['weapon', 'shield', 'armor', 'helmet', 'pants', 'gloves', 'boots', 'cape', 'mantle', 'ring', 'amulet'].includes(typeLower);
+      if (isGear) {
+        if (raceLower === 'arctron') {
+          targetFile = join(SRC_DATA_DIR, 'arctron_gears.json')
+        } else if (raceLower === 'bionex') {
+          targetFile = join(SRC_DATA_DIR, 'bionex_gears.json')
+        } else if (raceLower === 'celestra') {
+          targetFile = join(SRC_DATA_DIR, 'celestra_gears.json')
+        } else {
+          targetFile = join(SRC_DATA_DIR, 'universal_gears.json')
+        }
       } else {
         targetFile = join(SRC_DATA_DIR, 'items.json')
       }
@@ -1450,14 +1457,20 @@ app.post('/api/audit/publish_draft', (req, res) => {
     const SRC_DATA_DIR = join(__dirname, 'src', 'data')
     if (cat === 'items') {
       const typeLower = (cleanDef.type || '').toLowerCase();
-      const idLower = ((cleanDef.id || dData.id) || '').toLowerCase();
+      const raceLower = (cleanDef.race || '').toLowerCase();
+      const isGear = ['weapon', 'shield', 'armor', 'helmet', 'pants', 'gloves', 'boots', 'cape', 'mantle', 'ring', 'amulet'].includes(typeLower);
       let p = join(SRC_DATA_DIR, 'items.json')
-      if (typeLower === 'weapon' || idLower.startsWith('wpn_') || idLower.startsWith('gw_')) {
-        p = join(SRC_DATA_DIR, 'weapons.json')
-      } else if (typeLower === 'shield' || idLower.startsWith('shd_')) {
-        p = join(SRC_DATA_DIR, 'shields.json')
-      } else if (['armor', 'helmet', 'boots', 'gloves', 'pants', 'mantle', 'cape'].includes(typeLower) || idLower.startsWith('set_') || idLower.startsWith('arm_')) {
-        p = join(SRC_DATA_DIR, 'armors.json')
+      
+      if (isGear) {
+        if (raceLower === 'arctron') {
+          p = join(SRC_DATA_DIR, 'arctron_gears.json')
+        } else if (raceLower === 'bionex') {
+          p = join(SRC_DATA_DIR, 'bionex_gears.json')
+        } else if (raceLower === 'celestra') {
+          p = join(SRC_DATA_DIR, 'celestra_gears.json')
+        } else {
+          p = join(SRC_DATA_DIR, 'universal_gears.json')
+        }
       }
 
       const obj = JSON.parse(readFileSync(p, 'utf8'))

@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react'
 import { useGameStore } from '../store/gameStore'
 import itemsDataRaw from '../data/items.json'
-import weaponsData from '../data/weapons.json'
-import armorsData from '../data/armors.json'
-import shieldsData from '../data/shields.json'
+import arctronGears from '../data/arctron_gears.json'
+import bionexGears from '../data/bionex_gears.json'
+import celestraGears from '../data/celestra_gears.json'
+import universalGears from '../data/universal_gears.json'
 
 const itemsData = {
   items: [
     ...(itemsDataRaw.items || []),
-    ...weaponsData,
-    ...armorsData,
-    ...shieldsData
+    ...arctronGears,
+    ...bionexGears,
+    ...celestraGears,
+    ...universalGears
   ],
   materials: itemsDataRaw.materials || []
 }
