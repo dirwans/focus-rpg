@@ -867,7 +867,7 @@ export default function Main() {
       {/* Simplified Player Status HUD */}
       <div className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.statusStrip}>
         <div style={{ ...styles.avatarRing, border: `1.5px solid ${activeColor}80` }}>
-          <PilotSprite race={player.race} job={player.job} gender={player.gender} size={36} />
+          <PilotSprite race={player.race} job={player.job} gender={player.gender} size={36} showGears={false} upperBodyOnly={true} />
         </div>
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6, minWidth: 0 }}>

@@ -2356,3 +2356,8 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 ### Milestone 179: AuditorRoom Material Badge — Rarity Label Fix [PENDING DEPLOYMENT]
 - **Problem**: Badge strip di bawah setiap item card di craft editor menampilkan LV.X COMM/RARE/EPIC/... untuk semua items termasuk materials (shards/ores) yang tidak punya konsep level bermakna.
 - **Fix** (src/screens/AuditorRoom.jsx line ~1286): Tambah branch if (isMat) — material items kini tampilkan rarity name lengkap (COMMON, UNCOMMON, RARE, EPIC, LEGENDARY, MYTHIC) dengan rarity color (gray/green/blue/purple/gold/red), centered. Gear items tetap LV.X + PATH seperti semula.
+
+### Milestone 175: Profile Pic Fix (Main.jsx) [PENDING DEPLOYMENT]
+- **Bug**: The avatar ring in the BASE tab was stacking all equipped gears (Paper Doll) into a 36x36 bubble, resulting in a squished/broken image icon if gears were missing or too detailed.
+- **Fix**: Added \showGears={false}\ and \upperBodyOnly={true}\ to the \PilotSprite\ call inside \Main.jsx\ so the profile pic only shows the clean base character headshot across all factions.
+
