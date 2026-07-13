@@ -2333,6 +2333,10 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 - **Note**: Gem shape asli user adalah nearly square (bukan portrait seperti shard lain). Jika tetap terlihat "gendut" relatif terhadap shard lain, itu karena art-nya memang square — perlu artwork dengan diamond lebih tinggi/ramping.
 - **Cache bust** (`src/data/items.json`): `?v=11` → `?v=12`.
 
+### Milestone 178: Common Shard — rembg + Fit-Center [PENDING DEPLOYMENT]
+- **Fix**: Backup `_backup_orig/common_shard.png` diproses dengan rembg (AI background removal) terlebih dahulu, menghasilkan alpha channel yang proper (frost 164K semi-transparent pixels). Setelah rembg, crop → content 538×716 (ratio=0.75, portrait — slim seperti shard lain), fit-within 320×320 → 240×320 centered.
+- **Cache bust** (`src/data/items.json`): `?v=12` → `?v=13`.
+
 ### Milestone 173: Paper Doll Broken Image & Scaling Fixes + APK Hydration Safety [DEPLOYED]
 - **Bug 1 (Broken Image)**: Weapon and Shield sprites on the Paper Doll threw 404 broken image icons because \PilotSprites.jsx\ incorrectly used a hardcoded fallback string if \item.image\ was null. 
 - **Fix 1 (\PilotSprites.jsx\)**: Imported \esolveItemImage\ from \gameStore.js\ to dynamically resolve accurate weapon/shield URLs, fixing the broken image bug.
