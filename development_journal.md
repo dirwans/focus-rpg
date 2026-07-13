@@ -2218,3 +2218,31 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
   - Added `TOP_ROW_SLOTS = new Set(['helmet', 'amulet1', 'amulet2', 'ascension_arms'])` constant.
   - Tooltip positioning now flips direction: top-row slots use `top: '110%'` (opens downward, clears container), all other slots keep `bottom: '110%'` (opens upward).
   - Header `padding` adjusted from `'12px 16px'` → `'16px 16px 12px'` — extra 4px top breathing room so "GEAR & INVENTORY" title is no longer cramped against the top edge.
+
+---
+
+### 🛠️ Milestone 162: Arctron Technician Armor Sets Normalization [DEPLOYED]
+- **Problem**: Arctron technician gear sprites (`defarctrontechnicianlv*` armor, helmet, pants, boots) were rendering very small in-game and in the auditroom. This occurred because multiple files were saved with horizontal border guides and multiple mecha components (width 576), causing `objectFit: contain` to shrink them down to a fraction of the gear slot size.
+- **Fix**:
+  - Processed all 20 `defarctrontechnician` asset files in `public/assets/arctron/`.
+  - Wrote a python normalization script that zeroed out the top and bottom 8 rows of the alpha channel (stripping horizontal line guides), cropped the mecha parts to their combined bounding box, padded them to square with a 10% safety margin, and resized them to 320x320 using LANCZOS.
+  - Bumped the Arctron armor sprite cache-busting version from `?v=5` to `?v=6` in `src/store/gameStore.js` to force client browsers and PWAs to fetch the updated, clean square-padded sprites immediately.
+- **Verification**: Verified all 20 assets are transparent, centered, and exactly 320x320. Local client build succeeds.
+
+---
+
+### 🛠️ Milestone 163: Celestra Bow Weapon Sprites Normalization [DEPLOYED]
+- **Problem**: Celestra bow weapon sprites (`defallfactionslv*bow.png`) were rendering very small (kecil) in the gear slots and had an ugly black background inside their bounding boxes. This was because the original assets were drawn on solid black blocks, which caused `objectFit: contain` to scale the entire black block down inside the slot, making the bows look tiny and dark.
+- **Fix**:
+  - Reverted the bows to their original, unique mecha shapes (preserving design identity).
+  - Wrote and executed `scratch/clean_bows_threshold.py` to process the 4 original bow assets in `public/assets/weapons/`:
+    - Applied a color threshold filter (`max(R,G,B) < 28`) to set the black background pixels (both the outer border and the enclosed space between the bow string and limbs) to fully transparent.
+    - Tight-cropped the image to the actual mecha bow boundaries.
+    - Enhanced contrast by **1.5x** (making colors like the Level 32 red look incredibly vibrant / "cetar").
+    - Enhanced sharpness by **2.0x** to make outlines and textures pop out clearly.
+    - Padded the cropped content to a square canvas with a **6%** safety margin (matching other weapon styles) and resized to 320x320 using LANCZOS.
+  - Bumped the bow asset cache-busting query parameter in `src/store/gameStore.js` to `?v=3` to force client browsers and PWAs to load the clean transparent assets immediately.
+- **Verification**: Verified all 4 bow files have transparent backgrounds (dark pixels reduced by ~85% on Level 55), are centered, fill the slot correctly, and exactly 320x320. Local client build succeeds.
+
+
+

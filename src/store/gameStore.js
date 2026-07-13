@@ -263,7 +263,8 @@ export function resolveItemImage(item, playerRace, playerJob) {
     if (isRanger) {
       const weaponKind = playerRace === 'celestra' ? 'bow' : 'gun'
       const tier = lvl >= 55 ? '55' : (lvl >= 42 ? '42' : (lvl >= 32 ? '32' : '1'));
-      return `/assets/weapons/defallfactionslv${tier}${weaponKind}.png?v=2`
+      const ver = weaponKind === 'bow' ? '3' : '2'
+      return `/assets/weapons/defallfactionslv${tier}${weaponKind}.png?v=${ver}`
     }
 
     // Arctron warrior/technician exclusive special launcher at Lv.32+
