@@ -36,11 +36,11 @@ const EVO_IMAGES = {
 
 const RACE_COLORS = {
   celestra: {
-    accent: '#8b00ff', // purple title
-    glow: 'rgba(139, 0, 255, 0.5)',
-    border: '#8b00ff', // purple frame
-    bg: 'rgba(139, 0, 255, 0.15)',
-    bgLight: 'rgba(139, 0, 255, 0.08)'
+    accent: '#a855f7', // purple title (orchid/neon purple matching Unit.jsx)
+    glow: 'rgba(168, 85, 247, 0.5)',
+    border: '#a855f7', // purple frame
+    bg: 'rgba(168, 85, 247, 0.15)',
+    bgLight: 'rgba(168, 85, 247, 0.08)'
   },
   arctron: {
     accent: '#ff8c00', // orange title
@@ -59,6 +59,15 @@ const RACE_COLORS = {
 }
 
 export default function Ascension() {
+  if (typeof document !== 'undefined' && !document.getElementById('ascension-kf')) {
+    const s = document.createElement('style')
+    s.id = 'ascension-kf'
+    s.textContent = `
+      @keyframes heroRune  { from{transform:translate(-50%,-50%) rotate(0deg);} to{transform:translate(-50%,-50%) rotate(360deg);} }
+      @keyframes heroRuneRev { from{transform:translate(-50%,-50%) rotate(0deg);} to{transform:translate(-50%,-50%) rotate(-360deg);} }
+    `
+    document.head.appendChild(s)
+  }
   const player = useGameStore((s) => s.player)
   const craftAscensionArms = useGameStore((s) => s.craftAscensionArms)
   const buySiegeKit = useGameStore((s) => s.buySiegeKit)
@@ -100,9 +109,9 @@ export default function Ascension() {
         <span style={styles.chip('#f5a623')}>◈ {player.resources.crd.toLocaleString()} CRD</span>
       </div>
 
-      <div style={{ padding: '16px 16px 80px' }}>
-        <div className={`glass-panel cyber-panel panel-${player.race}`} style={{ padding: 16, border: `1px solid ${colors.border}`, boxShadow: `inset 0 0 20px ${colors.bg}` }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12, borderBottom: `1px solid ${colors.border}4d`, paddingBottom: 10 }}>
+      <div style={{ padding: player.race === 'celestra' ? '16px 8px 80px' : '16px 16px 80px' }}>
+        <div className={player.race === 'celestra' ? '' : `glass-panel cyber-panel panel-${player.race}`} style={player.race === 'celestra' ? { padding: 0 } : { padding: 16, border: `1px solid ${colors.border}`, boxShadow: `inset 0 0 20px ${colors.bg}` }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12, borderBottom: `1px solid ${colors.border}4d`, paddingBottom: 10, paddingLeft: player.race === 'celestra' ? 8 : 0, paddingRight: player.race === 'celestra' ? 8 : 0 }}>
             <div style={{ fontSize: 40 }}>{data.icon}</div>
             <div>
               <div style={{ fontFamily: 'var(--font-title)', fontSize: 22, fontWeight: 900, color: colors.accent, letterSpacing: 1, textShadow: `0 0 10px ${colors.glow}` }}>{data.name}</div>
@@ -113,7 +122,7 @@ export default function Ascension() {
 
 
           {/* MAIN TABS (HANGAR vs PARTS SHOP) */}
-          <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
+          <div style={{ display: 'flex', gap: 8, marginBottom: 16, paddingLeft: player.race === 'celestra' ? 8 : 0, paddingRight: player.race === 'celestra' ? 8 : 0 }}>
             <button
               onClick={() => setActiveTab('hangar')}
               style={{
@@ -140,19 +149,19 @@ export default function Ascension() {
 
           {activeTab === 'hangar' ? (
             <>
-              <div style={{ fontFamily: 'var(--font-title)', fontSize: 16, color: colors.accent, marginBottom: 12, fontWeight: 800, borderBottom: `1px solid ${colors.border}4d`, paddingBottom: 6 }}>
+              <div style={{ fontFamily: 'var(--font-title)', fontSize: 16, color: colors.accent, marginBottom: 12, fontWeight: 800, borderBottom: `1px solid ${colors.border}4d`, paddingBottom: 6, paddingLeft: player.race === 'celestra' ? 8 : 0, paddingRight: player.race === 'celestra' ? 8 : 0 }}>
                 {data.name} Evolution
               </div>
 
               {player.race === 'celestra' && (() => {
                 if (!player.activeAnimus) {
-                  return <div style={{ color: '#ff4444', fontFamily: 'var(--font-mono)', fontSize: 13, marginTop: 12 }}>Tidak ada Ascension Spirit yang dipanggil.</div>
+                  return <div style={{ color: '#ff4444', fontFamily: 'var(--font-mono)', fontSize: 13, marginTop: 12, paddingLeft: 8, paddingRight: 8 }}>Tidak ada Ascension Spirit yang dipanggil.</div>
                 }
                 const aData = data.animus[player.activeAnimus]
                 const currentLv = player.celestraAnimus?.[player.activeAnimus] || 1
                 const lvBonus = Math.max(0, currentLv - 1)
                 return (
-                  <div style={{ marginTop: 16, background: 'rgba(0,0,0,0.4)', padding: 12, borderRadius: 8, border: `1px solid ${colors.border}4d` }}>
+                  <div style={{ marginTop: 16, background: 'rgba(0,0,0,0.4)', padding: 12, borderRadius: 8, border: `1px solid ${colors.border}4d`, marginLeft: player.race === 'celestra' ? 8 : 0, marginRight: player.race === 'celestra' ? 8 : 0 }}>
                     <div style={{ fontFamily: 'var(--font-title)', fontSize: 14, color: '#44ff88', marginBottom: 8 }}>✨ ACTIVE SPIRIT: {aData.name} (Lv.{currentLv})</div>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, fontFamily: 'var(--font-mono)', fontSize: 13, color: '#fff' }}>
                       {player.activeAnimus === 'seraphys' ? (
@@ -189,13 +198,15 @@ export default function Ascension() {
                     textAlign: 'center',
                     textShadow: `0 0 12px ${colors.glow}, 0 0 24px ${colors.glow}`,
                     borderBottom: `2px solid ${colors.accent}44`,
-                    paddingBottom: 8
+                    paddingBottom: 8,
+                    marginLeft: 8,
+                    marginRight: 8
                   }}>
                     ✦ ANCIENT SPIRIT EVOLUTION ✦
                   </div>
 
                   {/* Spirits grid - all levels shown */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 14, paddingLeft: 8, paddingRight: 8 }}>
                     {Object.keys(data.animus).map(animusKey => {
                       const aData = data.animus[animusKey]
                       const currentLv = player.celestraAnimus?.[animusKey] || 1
@@ -206,8 +217,8 @@ export default function Ascension() {
                         const isUnlocked = currentLv >= lv
 
                         return (
-                          <div key={`${animusKey}-${lv}`} style={{ padding: 12, border: `1px solid ${colors.border}4d`, borderRadius: 8, background: 'rgba(255,255,255,0.02)' }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+                          <div key={`${animusKey}-${lv}`} style={{ position: 'relative', padding: '12px 12px 24px', border: `1px solid ${colors.border}24`, borderRadius: 16, background: `radial-gradient(90% 70% at 50% 28%, ${colors.accent}17, transparent 70%)`, overflow: 'hidden' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8, position: 'relative', zIndex: 3 }}>
                               <div style={{ fontFamily: 'var(--font-title)', fontSize: 14, color: '#fff' }}>
                                 {aData.name} Lv.{lv}
                               </div>
@@ -216,37 +227,44 @@ export default function Ascension() {
                               </div>
                             </div>
 
-                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '16px 0', background: 'transparent', position: 'relative' }}>
-                              {/* Cahaya dari bawah */}
+                            <div style={{ position: 'relative', height: 320, margin: '16px -12px 20px', width: 'calc(100% + 24px)', overflow: 'visible', pointerEvents: 'none' }}>
+                              {/* Glowing Rotating Rune Background */}
+                              <div style={{ position: 'absolute', top: '47%', left: '50%', transform: 'translate(-50%, -50%)', width: 210, height: 210, animation: 'heroRune 24s linear infinite', opacity: 0.3, zIndex: 0 }}>
+                                <svg width="210" height="210" viewBox="0 0 210 210">
+                                  <circle cx="105" cy="105" r="100" fill="none" stroke={`${colors.border}59`} strokeWidth="1"/>
+                                  <circle cx="105" cy="105" r="86" fill="none" stroke="rgba(232,192,122,0.22)" strokeWidth="1" stroke-dasharray="3 9"/>
+                                  <polygon points="105,10 168,142 42,142" fill="none" stroke="rgba(217,179,255,0.2)" strokeWidth="1"/>
+                                </svg>
+                              </div>
+
+                              {/* 3D Floor Perspective Grid */}
                               <div style={{
-                                position: 'absolute',
-                                bottom: 0,
-                                left: '50%',
-                                transform: 'translateX(-50%)',
-                                width: '100%',
-                                height: 120,
-                                background: `radial-gradient(ellipse at bottom, ${isSeraphys ? 'rgba(0, 255, 255, 0.25)' : 'rgba(192, 38, 211, 0.25)'}, transparent 70%)`,
-                                filter: 'blur(15px)',
-                                zIndex: 0,
-                                pointerEvents: 'none'
-                              }} />
-                              <img
-                                src={EVO_IMAGES[`spirit_${animusKey}_${lv}`] || `/assets/celestra/spirit_${animusKey}_${lv}.png?v=6`}
-                                alt={`${aData.name} Lv.${lv}`}
-                                className={animusKey === 'noctyrna' && lv === 65 ? 'game-sprite-noctyrna' : ''}
-                                style={{
-                                  imageRendering: animusKey === 'noctyrna' && lv === 65 ? 'pixelated' : 'auto',
-                                  width: '100%',
-                                  maxWidth: 320,
-                                  height: 320,
-                                  objectFit: 'contain',
-                                  margin: '0 auto',
-                                  display: 'block',
-                                  position: 'relative',
-                                  zIndex: 1,
-                                  transform: animusKey === 'noctyrna' && lv === 65 ? 'scale(1.15)' : 'none'
-                                }}
-                              />
+                                position: 'absolute', bottom: 0, left: 0, right: 0, height: 60,
+                                backgroundImage: `linear-gradient(${colors.accent}1f 1px,transparent 1px),linear-gradient(90deg,${colors.accent}17 1px,transparent 1px)`,
+                                backgroundSize: '18px 18px',
+                                transform: 'perspective(220px) rotateX(64deg)', transformOrigin: 'bottom',
+                                WebkitMaskImage: 'linear-gradient(to top,#000,transparent)',
+                                maskImage: 'linear-gradient(to top,#000,transparent)',
+                                zIndex: 1
+                              }}></div>
+
+                              {/* Floating Spirit Sprite */}
+                              <div style={{ position: 'absolute', bottom: 6, left: '50%', transform: 'translateX(-50%)', animation: 'heroFloat 5.4s ease-in-out infinite', zIndex: 2 }}>
+                                <img
+                                  src={EVO_IMAGES[`spirit_${animusKey}_${lv}`] || `/assets/celestra/spirit_${animusKey}_${lv}.png?v=6`}
+                                  alt={`${aData.name} Lv.${lv}`}
+                                  className={animusKey === 'noctyrna' && lv === 65 ? 'game-sprite-noctyrna' : ''}
+                                  style={{
+                                    imageRendering: animusKey === 'noctyrna' && lv === 65 ? 'pixelated' : 'auto',
+                                    height: 298,
+                                    width: 'auto',
+                                    display: 'block',
+                                    filter: `drop-shadow(0 18px 24px rgba(0,0,0,0.6)) drop-shadow(0 0 30px ${colors.accent}33)`,
+                                    transform: animusKey === 'noctyrna' && lv === 65 ? 'scale(1.15)' : 'none',
+                                    transformOrigin: 'bottom center'
+                                  }}
+                                />
+                              </div>
                             </div>
 
                             <div style={{

@@ -1,8 +1,17 @@
 import React, { useState } from 'react'
 import { useGameStore } from '../store/gameStore'
-const colors = { accent: '#8b00ff', border: '#8b00ff', bg: 'rgba(139, 0, 255, 0.15)', text: '#fff', bgLight: 'rgba(139, 0, 255, 0.25)' }
+const colors = { accent: '#a855f7', border: '#a855f7', bg: 'rgba(168, 85, 247, 0.15)', text: '#fff', bgLight: 'rgba(168, 85, 247, 0.25)' }
 
 export default function AscensionSpiritShopModal({ player, raceData }) {
+  if (typeof document !== 'undefined' && !document.getElementById('ascension-shop-kf')) {
+    const s = document.createElement('style')
+    s.id = 'ascension-shop-kf'
+    s.textContent = `
+      @keyframes heroRune  { from{transform:translate(-50%,-50%) rotate(0deg);} to{transform:translate(-50%,-50%) rotate(360deg);} }
+      @keyframes heroRuneRev { from{transform:translate(-50%,-50%) rotate(0deg);} to{transform:translate(-50%,-50%) rotate(-360deg);} }
+    `
+    document.head.appendChild(s)
+  }
   const buyAnimusReaver = useGameStore((s) => s.buyAnimusReaver)
   const upgradeAnimus = useGameStore((s) => s.upgradeAnimus)
   const buyAnimusUnseal = useGameStore((s) => s.buyAnimusUnseal)
@@ -45,7 +54,7 @@ export default function AscensionSpiritShopModal({ player, raceData }) {
   ]
 
   return (
-    <div style={{ padding: 16, background: 'rgba(0,0,0,0.4)', borderRadius: 8, border: `1px solid ${colors.border}` }}>
+    <div style={{ padding: '16px 8px', background: 'rgba(0,0,0,0.4)', borderRadius: 8, border: `1px solid ${colors.border}4d` }}>
       
       <div style={{ textAlign: 'center', marginBottom: 24 }}>
         <div style={{ fontFamily: 'var(--font-title)', fontSize: 18, color: colors.accent, fontWeight: 900 }}>
@@ -97,7 +106,7 @@ export default function AscensionSpiritShopModal({ player, raceData }) {
         </div>
 
         {/* MAIN PANEL */}
-        <div style={{ background: 'rgba(0,0,0,0.3)', border: `1px solid ${colors.border}`, borderRadius: 8, padding: 16 }}>
+        <div style={{ position: 'relative', background: `radial-gradient(90% 70% at 50% 28%, ${colors.accent}17, transparent 70%)`, border: `1px solid ${colors.border}24`, borderRadius: 16, padding: '16px 16px 24px', overflow: 'hidden' }}>
           {activeSlot && raceData.animus[activeSlot] ? (() => {
             const aData = raceData.animus[activeSlot]
             const currentLv = player.celestraAnimus?.[activeSlot] || 0
@@ -109,21 +118,41 @@ export default function AscensionSpiritShopModal({ player, raceData }) {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
                 
                 {/* HEADER INFO */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'center', textAlign: 'center' }}>
-                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '8px 0', width: '100%' }}>
-                    <img
-                      src={`/assets/celestra/spirit_${activeSlot}_${currentLv >= 65 ? 65 : currentLv >= 55 ? 55 : currentLv >= 42 ? 42 : 32}.png?v=1`}
-                      alt={aData.name}
-                      style={{
-                        width: '100%',
-                        maxWidth: 320,
-                        height: 320,
-                        objectFit: 'contain',
-                        margin: '0 auto',
-                        display: 'block',
-                        filter: `drop-shadow(0 0 10px ${activeSlot === 'seraphys' ? 'rgba(68, 255, 136, 0.22)' : 'rgba(255, 68, 68, 0.22)'}) drop-shadow(0 0 2px ${activeSlot === 'seraphys' ? 'rgba(68, 255, 136, 0.45)' : 'rgba(255, 68, 68, 0.45)'})`
-                      }}
-                    />
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'center', textAlign: 'center', position: 'relative', zIndex: 2 }}>
+                  <div style={{ position: 'relative', height: 320, margin: '8px -16px 12px', width: 'calc(100% + 32px)', overflow: 'visible', pointerEvents: 'none' }}>
+                    {/* Glowing Rotating Rune Background */}
+                    <div style={{ position: 'absolute', top: '47%', left: '50%', transform: 'translate(-50%, -50%)', width: 210, height: 210, animation: 'heroRune 24s linear infinite', opacity: 0.3, zIndex: 0 }}>
+                      <svg width="210" height="210" viewBox="0 0 210 210">
+                        <circle cx="105" cy="105" r="100" fill="none" stroke={`${colors.border}59`} strokeWidth="1"/>
+                        <circle cx="105" cy="105" r="86" fill="none" stroke="rgba(232,192,122,0.22)" strokeWidth="1" stroke-dasharray="3 9"/>
+                        <polygon points="105,10 168,142 42,142" fill="none" stroke="rgba(217,179,255,0.2)" strokeWidth="1"/>
+                      </svg>
+                    </div>
+
+                    {/* 3D Floor Perspective Grid */}
+                    <div style={{
+                      position: 'absolute', bottom: 0, left: 0, right: 0, height: 60,
+                      backgroundImage: `linear-gradient(${colors.accent}1f 1px,transparent 1px),linear-gradient(90deg,${colors.accent}17 1px,transparent 1px)`,
+                      backgroundSize: '18px 18px',
+                      transform: 'perspective(220px) rotateX(64deg)', transformOrigin: 'bottom',
+                      WebkitMaskImage: 'linear-gradient(to top,#000,transparent)',
+                      maskImage: 'linear-gradient(to top,#000,transparent)',
+                      zIndex: 1
+                    }}></div>
+
+                    {/* Floating Spirit Sprite */}
+                    <div style={{ position: 'absolute', bottom: 6, left: '50%', transform: 'translateX(-50%)', animation: 'heroFloat 5.4s ease-in-out infinite', zIndex: 2 }}>
+                      <img
+                        src={`/assets/celestra/spirit_${activeSlot}_${currentLv >= 65 ? 65 : currentLv >= 55 ? 55 : currentLv >= 42 ? 42 : 32}.png?v=1`}
+                        alt={aData.name}
+                        style={{
+                          width: 'auto',
+                          height: 298,
+                          display: 'block',
+                          filter: `drop-shadow(0 18px 24px rgba(0,0,0,0.6)) drop-shadow(0 0 30px ${colors.accent}33)`
+                        }}
+                      />
+                    </div>
                   </div>
                   <div>
                     <div style={{ fontFamily: 'var(--font-title)', fontSize: 22, color: '#fff', fontWeight: 900 }}>{aData.name}</div>

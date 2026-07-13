@@ -2116,7 +2116,7 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 
 ---
 
-### 🔧 Milestone 156: Fix Missing Sprite Paths for Ascension & Spirit Modals [PENDING DEPLOYMENT]
+### 🔧 Milestone 156: Fix Missing Sprite Paths for Ascension & Spirit Modals [DEPLOYED]
 - **Image Path Corrections (`src/screens/Ascension.jsx` & `src/components/AscensionSpiritShopModal.jsx`)**:
   - Restored broken image path references for ARES (Arctron), M.E.U. (Bionex), and Spirit (Celestra) assets to their correct organized subfolders (`/assets/arctron/`, `/assets/bionex/`, and `/assets/celestra/`).
   - Fixed fallback path mappings to prevent broken image placeholders on compiled builds.
@@ -2154,7 +2154,7 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 
 ---
 
-### 🔧 Milestone 158: Fix Auditor Room Gear Pagination Clamping & Implement Live Game Data Sync [PENDING DEPLOYMENT]
+### 🔧 Milestone 158: Fix Auditor Room Gear Pagination Clamping & Implement Live Game Data Sync [DEPLOYED]
 - **Auditor Room Gear Pagination Fix (`src/screens/AuditorRoom.jsx`)**:
    - Increased the `PAGE_SIZE` specifically for the `Gears` tab in the Master Console / Auditor Room to `250` (up from `100`).
    - This ensures all 128 mecha gear items (including weapons, shields, and the 100 job-specific armor pieces) for Bionex and Celestra fit entirely on the first page, preventing the level 66 sets (Genesis and Elysian) and parts of level 55 sets from being cut off or hidden on Page 2.
@@ -2169,4 +2169,19 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 - **Bionex Specialist/Engineer Job Tree Alignment (`src/data/bionex_gears.json` & `server.js`)**:
    - Fixed a bug where the newly created Bionex Engineer mecha armor sets were missing the `techmaster` (Tier 3) and `overseer` (Tier 4) job classes in their restrictions, which caused high-level Bionex Specialist players to not see their armor sets.
    - Updated all 100 Bionex mecha items' job arrays in `bionex_gears.json` to exactly match their path subclasses: Guardian (`["guardian", "centurion", "protector", "imperator"]`), Marksman (`["marksman", "revenant", "deadeye", "predator"]`), Engineer (`["engineer", "mechanist", "techmaster", "overseer"]`), and Psion (`["psion", "esper", "ascendant", "transcendent"]`).
+- **Verification**: Verified React build compiles cleanly (`npm run build`).
+
+---
+
+### 🔧 Milestone 159: Remove Celestra Ascension Panel Frame & Align Spirit Cards with Character View [DEPLOYED]
+- **Celestra Faction Ascension Frame Removal (`src/screens/Ascension.jsx`)**:
+  - Removed the outer container classes (`glass-panel cyber-panel panel-celestra`), border, and box-shadow styles specifically when the active player's faction is Celestra.
+  - Adjusted the outer container side padding from 16px to 8px for Celestra, providing a cleaner look while maximizing horizontal screen space.
+  - Injected custom horizontal offsets (left/right padding/margin of 8px) into internal text elements (headers, tabs, active spirit stats block) to align cleanly without touching the screen edges.
+- **Celestra Tone Color Matching (`src/screens/Ascension.jsx` & `src/components/AscensionSpiritShopModal.jsx`)**:
+  - Updated Celestra's accent and border colors from Indigo (`#8b00ff`) to Orchid Purple (`#a855f7`) to match the color theme used for character portraits in the unit stats view.
+- **Spirit Card Sprite Bounding, Rune & 3D Grid Alignment (`src/screens/Ascension.jsx` & `src/components/AscensionSpiritShopModal.jsx`)**:
+  - Remapped the milestone cards and shop details panels to use a `1px solid ${colors.border}24` border and `radial-gradient` background.
+  - Injected the rotating SVG rune and a 3D floor perspective grid underneath the spirit characters.
+  - Sized the spirit image element to `height: 298px` (width `auto`) and wrapped it in a floating animation container (`heroFloat 5.4s ease-in-out infinite`) with drop-shadow filters matching the character stats view exactly.
 - **Verification**: Verified React build compiles cleanly (`npm run build`).
