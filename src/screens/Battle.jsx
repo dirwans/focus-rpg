@@ -66,7 +66,7 @@ export default function Battle() {
       const res = await apiChipWar()
       // Transform server's {arctron:{hp,maxHp},...} → [{towerId,race,hp,maxHp,...},...]
       const TOWER_ORDER = ['arctron', 'bionex', 'celestra']
-      const RACE_COLORS = { arctron: '#ff6400', bionex: '#00e5ff', celestra: '#d000ff' }
+      const RACE_COLORS = { arctron: '#ff6400', bionex: '#00e5ff', celestra: '#a855f7' }
       const towers = TOWER_ORDER.map((race) => {
         const serverTower = (res.towers && res.towers[race]) || { hp: 500_000_000, maxHp: 500_000_000 }
         const hpPct = serverTower.hp / serverTower.maxHp

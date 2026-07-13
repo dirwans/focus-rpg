@@ -124,7 +124,7 @@ export default function AscensionSpiritShopModal({ player, raceData }) {
                     <div style={{ position: 'absolute', top: '47%', left: '50%', transform: 'translate(-50%, -50%)', width: 210, height: 210, animation: 'heroRune 24s linear infinite', opacity: 0.3, zIndex: 0 }}>
                       <svg width="210" height="210" viewBox="0 0 210 210">
                         <circle cx="105" cy="105" r="100" fill="none" stroke={`${colors.border}59`} strokeWidth="1"/>
-                        <circle cx="105" cy="105" r="86" fill="none" stroke="rgba(232,192,122,0.22)" strokeWidth="1" stroke-dasharray="3 9"/>
+                        <circle cx="105" cy="105" r="86" fill="none" stroke={`${colors.border}38`} strokeWidth="1" strokeDasharray="3 9"/>
                         <polygon points="105,10 168,142 42,142" fill="none" stroke="rgba(217,179,255,0.2)" strokeWidth="1"/>
                       </svg>
                     </div>

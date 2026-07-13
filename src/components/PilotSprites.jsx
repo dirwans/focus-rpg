@@ -110,7 +110,7 @@ export function CelestraSprite({ job, size = 60, width, height, upperBodyOnly = 
     }
   }
   
-  const glow = '#d000ff'
+  const glow = '#a855f7'
 
   return <TieredSpriteImg src={srcImg} alt={`Celestra ${lane}`} size={size} width={width} height={height} glow={glow} extraStyle={extraStyle} />
 }

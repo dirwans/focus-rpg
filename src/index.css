@@ -52,14 +52,14 @@
 }
 
 :root[data-faction="celestra"] {
-  --bg-color: #12061e;
-  --neon-glow: #d000ff;
-  --grid-color: rgba(208, 0, 255, 0.15);
-  --border-neon: rgba(208, 0, 255, 0.35);
-  /* Secondary accent: gold */
-  --neon-secondary-1: #e8c07a;
-  --neon-secondary-2: #b5883a;
-  --on-secondary: #2c1f08;
+  --bg-color: #07061a;
+  --neon-glow: #a855f7;
+  --grid-color: rgba(168, 85, 247, 0.15);
+  --border-neon: rgba(168, 85, 247, 0.35);
+  /* Secondary accent: lavender */
+  --neon-secondary-1: #d9acff;
+  --neon-secondary-2: #8188c2;
+  --on-secondary: #1a0a3e;
 }
 
 * {

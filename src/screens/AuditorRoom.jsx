@@ -609,7 +609,14 @@ export default function AuditorRoom() {
            });
         }
         if (['helmet', 'armor', 'pants', 'gloves', 'boots'].includes(craftCategory)) {
-           return allGears.filter(i => i.type && i.type.toLowerCase().includes(craftCategory));
+           const list = allGears.filter(i => i.type && i.type.toLowerCase().includes(craftCategory));
+           const seen = new Set();
+           return list.filter(i => {
+              const baseName = (i.name || '').split(' (')[0].trim().toLowerCase();
+              if (seen.has(baseName)) return false;
+              seen.add(baseName);
+              return true;
+           });
         }
         return allGears;
       }

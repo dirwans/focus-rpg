@@ -51,7 +51,7 @@ export default function PrologueModal({ onClose }) {
           {Object.entries(lore.factions).map(([key, f]) => {
             const colors = {
               bionex: '#00e5ff',
-              celestra: '#d000ff',
+              celestra: '#a855f7',
               arctron: '#ff6400'
             }
             return (

@@ -2185,3 +2185,27 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
   - Injected the rotating SVG rune and a 3D floor perspective grid underneath the spirit characters.
   - Sized the spirit image element to `height: 298px` (width `auto`) and wrapped it in a floating animation container (`heroFloat 5.4s ease-in-out infinite`) with drop-shadow filters matching the character stats view exactly.
 - **Verification**: Verified React build compiles cleanly (`npm run build`).
+
+---
+
+### 🎨 Milestone 160: Celestra Faction Design Unification (All Screens) [PENDING DEPLOYMENT]
+- **Problem**: Three conflicting "Celestra" color palettes existed in the codebase, causing visual inconsistency across screens:
+  - `index.css` CSS vars used `#d000ff` (harsh electric magenta) + gold secondary (`#e8c07a`)
+  - `Main.jsx` WorldMapModal used `#00e5ff` (cyan — completely wrong faction color)
+  - `EventModal.jsx` used `#00e5ff` (cyan)
+  - `NpcModal.jsx` used `#9b4dff` + `#c9aeff` (different purple variant)
+  - `CharacterCreate.jsx` used `#9b4dff` + gold secondary gradient
+  - `Battle.jsx` RACE_COLORS used `#d000ff`
+  - Only `Unit.jsx` and `Inventory.jsx` already used the correct tokens (`#a855f7`, `#d9acff`)
+- **Fix**: Unified all Celestra faction colors to match `Unit.jsx`'s established design language:
+  - **`src/index.css`** `[data-faction="celestra"]`: `--neon-glow` → `#a855f7`, `--neon-secondary-1` → `#d9acff` (lavender), `--neon-secondary-2` → `#8188c2` (muted indigo), `--bg-color` → `#07061a`, updated border/grid colors to match.
+  - **`src/screens/Main.jsx`**: Fixed `activeColor.celestra` from `#00e5ff` → `#a855f7` (WorldMapModal node selection, deploy button, sector badge).
+  - **`src/screens/Battle.jsx`**: Fixed `RACE_COLORS.celestra` from `#d000ff` → `#a855f7` (war leaderboard faction bar).
+  - **`src/components/NpcModal.jsx`**: `primary` → `#a855f7`, `light` → `#d9acff`, glow/border RGBA updated to match.
+  - **`src/components/CharacterCreate.jsx`**: `primary` → `#a855f7`, `dark` → `#7e22ce`, `light` → `#d9acff`, `secondary` gradient → purple (`#a855f7` → `#7e22ce`), `onSecondary` → `#f5e8ff`.
+  - **`src/components/EventModal.jsx`**: `celestra.primary` → `#a855f7`, glow RGBA updated.
+- **Cascade effect**: All screens using `var(--neon-glow)` under `data-faction="celestra"` automatically update — including EXP bar, timer glow, combat stats, battle log border, focus card ring, `--neon-secondary-1` timer ring stroke (from gold to lavender).
+- **Also included in this batch** — `AuditorRoom.jsx` armor dedup fix: Restored name-based deduplication for armor categories (helmet/armor/pants/gloves/boots) in `getActiveArray()`, stripping `(Lineage)` suffix before seen-set check. This was removed in commit `cdfc339` and caused 3 identical-looking armor cards per piece (Warrior/Ranger/Technician variants all sharing the same image).
+- **Verification**: CSS variables confirmed live in browser (`--neon-glow: #a855f7`, `--neon-secondary-1: #d9acff`, `--neon-secondary-2: #8188c2`, `--bg-color: #07061a`).
+
+- **Additional files fixed (second scan)**: `Unit.jsx` rune gold→`${fp}38`; `Ascension.jsx` + `AscensionSpiritShopModal.jsx` rune gold→`${colors.border}38`; `PrologueModal.jsx` celestra `#d000ff`→`#a855f7`; `PilotSprites.jsx` CelestraSprite glow `#d000ff`→`#a855f7`. Total 11 files unified.

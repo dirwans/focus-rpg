@@ -145,15 +145,15 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
       )
     },
     celestra: {
-      primary: '#9b4dff',
-      light: '#c9aeff',
-      glowColor: 'rgba(155, 77, 255, 0.5)',
+      primary: '#a855f7',
+      light: '#d9acff',
+      glowColor: 'rgba(168, 85, 247, 0.5)',
       tabInactiveColor: '#8188c2',
       bgGradient: 'radial-gradient(120% 65% at 50% -5%, #1a1642 0%, #100e2c 50%, #07061a 100%)',
-      glowBorder: 'rgba(155, 77, 255, 0.22)',
-      bgDotColor: 'rgba(155, 77, 255, 0.06)',
+      glowBorder: 'rgba(168, 85, 247, 0.22)',
+      bgDotColor: 'rgba(168, 85, 247, 0.06)',
       weaponSmithSvg: (
-        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#c9aeff" strokeWidth="1.7">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#d9acff" strokeWidth="1.7">
           <path d="M12 2l2.5 6.5L21 11l-6.5 2.5L12 20l-2.5-6.5L3 11l6.5-2.5z" />
         </svg>
       )

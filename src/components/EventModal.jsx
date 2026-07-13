@@ -9,7 +9,7 @@ export default function EventModal({ onClose }) {
   const factionColors = {
     arctron: { primary: '#ff5222', glow: 'rgba(255, 82, 34, 0.5)', text: '#eef3fb' },
     bionex:  { primary: '#ffd600', glow: 'rgba(255, 214, 0, 0.5)',  text: '#eef3fb' },
-    celestra: { primary: '#00e5ff', glow: 'rgba(0, 229, 255, 0.5)', text: '#eef3fb' },
+    celestra: { primary: '#a855f7', glow: 'rgba(168, 85, 247, 0.5)', text: '#eef3fb' },
   }
   const fc = factionColors[player.race] || factionColors.celestra
 
