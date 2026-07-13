@@ -2188,7 +2188,7 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 
 ---
 
-### 🎨 Milestone 160: Celestra Faction Design Unification (All Screens) [PENDING DEPLOYMENT]
+### 🎨 Milestone 160: Celestra Faction Design Unification (All Screens) [DEPLOYED]
 - **Problem**: Three conflicting "Celestra" color palettes existed in the codebase, causing visual inconsistency across screens:
   - `index.css` CSS vars used `#d000ff` (harsh electric magenta) + gold secondary (`#e8c07a`)
   - `Main.jsx` WorldMapModal used `#00e5ff` (cyan — completely wrong faction color)
