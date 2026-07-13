@@ -100,7 +100,9 @@ function WorldMapModal({ onClose }) {
   
   const [selectedNode, setSelectedNode] = useState(defaultIdx)
 
-  const activeColor = { arctron: '#ff5222', bionex: '#ffd600', celestra: '#a855f7' }[player.race] || '#00e5ff'
+  const activeColor  = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
+  const accentColor  = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
+  const screenBg     = { arctron: 'radial-gradient(circle at 30% 0%, #201a18 0%, #0a0807 60%)', bionex: 'radial-gradient(circle at 30% 0%, #13243a 0%, #060b12 60%)', celestra: 'radial-gradient(circle at 30% 0%, #1a1642 0%, #07061a 60%)' }[player.race] || '#08080d'
 
   const mapCoordinates = [
     { name: 'Lumora Fields', left: '30%', top: '20%', minLevel: 1 },
@@ -827,7 +829,7 @@ export default function Main() {
   const focusModeLabel = FOCUS_MODE_LABEL[player.race] || 'FOCUS'
 
   return (
-    <div className="no-scrollbar" style={styles.screen}>
+    <div className="no-scrollbar" style={{ ...styles.screen, background: screenBg }}>
       {/* Ambient decorative layer — pure CSS/SVG, no image assets */}
       <div className="ambient-layer">
         <div className="ambient-topglow" />
@@ -858,19 +860,19 @@ export default function Main() {
 
       {/* Simplified Player Status HUD */}
       <div className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.statusStrip}>
-        <div style={styles.avatarRing}>
+        <div style={{ ...styles.avatarRing, border: `1.5px solid ${activeColor}80` }}>
           <PilotSprite race={player.race} job={player.job} gender={player.gender} size={36} />
         </div>
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6, minWidth: 0 }}>
-            <span style={{ fontFamily: 'var(--font-title)', fontSize: 15, fontWeight: 'bold', color: '#e0f4ff', letterSpacing: 0.5, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0 }}>{player.name.toUpperCase()}</span>
+            <span style={{ fontFamily: 'var(--font-title)', fontSize: 15, fontWeight: 'bold', color: '#fff', letterSpacing: 0.5, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0 }}>{player.name.toUpperCase()}</span>
             {stats.title && (
-              <span style={{ fontSize: 9, background: 'rgba(0, 229, 255, 0.1)', color: 'var(--neon-glow)', border: '1px solid var(--neon-glow)', borderRadius: 4, padding: '1px 4px', fontFamily: 'var(--font-title)', fontWeight: 800, flexShrink: 0 }}>
+              <span style={{ fontSize: 9, background: `${activeColor}18`, color: accentColor, border: `1px solid ${activeColor}66`, borderRadius: 4, padding: '1px 4px', fontFamily: 'var(--font-title)', fontWeight: 800, flexShrink: 0 }}>
                 {stats.title.toUpperCase()}
               </span>
             )}
           </div>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: '#7ec8e3', marginTop: 2, fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: accentColor, marginTop: 2, fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', opacity: 0.85 }}>
             {jobInfo ? jobInfo.name.toUpperCase() : 'NOVICE'} · LV.{player.level}
           </div>
         </div>
@@ -921,11 +923,11 @@ export default function Main() {
 
         return (
           <div className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.combatStats}>
-            <div style={styles.cstat}><div style={styles.cstatLabel}>{atkLabel}</div><div style={{ ...styles.cstatVal, color: 'var(--neon-glow)' }}>{activeAtk}</div></div>
+            <div style={styles.cstat}><div style={styles.cstatLabel}>{atkLabel}</div><div style={{ ...styles.cstatVal, color: activeColor }}>{activeAtk}</div></div>
             <div style={styles.statDivider} />
             <div style={styles.cstat}><div style={styles.cstatLabel}>{t('armor')}</div><div style={{ ...styles.cstatVal, color: '#eef3fb' }}>{stats.def}</div></div>
             <div style={styles.statDivider} />
-            <div style={styles.cstat}><div style={styles.cstatLabel}>{t('shield_hp')}</div><div style={{ ...styles.cstatVal, color: '#ff5f7a' }}>{stats.hp.toLocaleString()}</div></div>
+            <div style={styles.cstat}><div style={styles.cstatLabel}>{t('shield_hp')}</div><div style={{ ...styles.cstatVal, color: accentColor }}>{stats.hp.toLocaleString()}</div></div>
           </div>
         )
       })()}
@@ -1118,29 +1120,29 @@ const styles = {
   statusStrip: { margin: '0 16px 12px', padding: '10px 14px', display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 },
   avatarRing: { width: 44, height: 44, borderRadius: '50%', border: '1.5px solid var(--neon-glow)', background: 'radial-gradient(circle, rgba(255,255,255,0.08), rgba(0,0,0,0.4))', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', flexShrink: 0 },
   expSection: { padding: '0 16px 12px', flexShrink: 0 },
-  expLabelRow: { display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-title)', fontSize: 13, color: '#7ab0d0', letterSpacing: 1, marginBottom: 5, fontWeight: 800 },
-  expBg: { height: 8, background: 'color-mix(in srgb, var(--neon-glow) 14%, transparent)', borderRadius: 4, overflow: 'hidden', border: '1px solid rgba(0, 229, 255, 0.25)' },
-  expFill: { height: '100%', background: 'linear-gradient(90deg, color-mix(in srgb, var(--neon-glow) 60%, black), var(--neon-glow))', borderRadius: 4, transition: 'width 0.5s', boxShadow: '0 0 8px var(--neon-glow)' },
-  expText: { fontFamily: 'var(--font-mono)', fontSize: 13, color: '#7ab0d0', marginTop: 4, textAlign: 'right', fontWeight: 800 },
-  statDivider: { width: 1, background: '#0d2a50' },
+  expLabelRow: { display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-title)', fontSize: 13, color: '#8a94a3', letterSpacing: 1, marginBottom: 5, fontWeight: 800 },
+  expBg: { height: 8, background: 'rgba(255,255,255,0.06)', borderRadius: 4, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)' },
+  expFill: { height: '100%', background: 'linear-gradient(90deg, color-mix(in srgb, var(--neon-glow) 60%, black), var(--neon-glow))', borderRadius: 4, transition: 'width 0.5s', boxShadow: '0 0 6px var(--neon-glow)' },
+  expText: { fontFamily: 'var(--font-mono)', fontSize: 11, color: '#8a94a3', marginTop: 4, textAlign: 'right', fontWeight: 700 },
+  statDivider: { width: 1, background: 'rgba(255,255,255,0.08)' },
   focusCard: { margin: '0 16px 10px', padding: 12, flexShrink: 0 },
   focusTopRow: { display: 'flex', gap: 12, alignItems: 'center' },
   ringWrap: { position: 'relative', width: 64, height: 64, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' },
   ringText: { position: 'absolute', fontFamily: 'var(--font-mono)', fontSize: 13, fontWeight: 800, color: '#fff' },
-  focusLabel: { fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 800, letterSpacing: 1.5, color: '#7ab0d0', marginBottom: 8 },
+  focusLabel: { fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 800, letterSpacing: 1.5, color: '#8a94a3', marginBottom: 8 },
   pillRow: { display: 'flex', gap: 6 },
-  divider: { height: 1, background: 'color-mix(in srgb, var(--neon-glow) 16%, transparent)', margin: '10px 0' },
+  divider: { height: 1, background: 'rgba(255,255,255,0.07)', margin: '10px 0' },
   deployRow: { margin: '0 16px 12px', display: 'flex', gap: 8, alignItems: 'center', flexShrink: 0 },
   arena: { margin: '0 16px 12px', padding: '22px 12px 12px', position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', overflow: 'hidden', flexShrink: 0 },
   arenaActive: { margin: '16px', padding: '44px 16px 20px', position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', overflow: 'hidden', flex: 1, justifyContent: 'center' },
   arenaBadge: { position: 'absolute', top: 12, left: 12, background: 'rgba(26, 8, 0, 0.8)', border: '1px solid #ff6400', borderRadius: 6, padding: '3px 8px', fontFamily: 'var(--font-title)', fontSize: 13, color: '#ff8c40', fontWeight: 800, boxShadow: '0 0 10px rgba(255, 100, 0, 0.3)', zIndex: 2 },
-  arenaRight: { position: 'absolute', top: 12, right: 12, fontFamily: 'var(--font-title)', fontSize: 13, color: '#00e5ff', textAlign: 'right', fontWeight: 800, textShadow: '0 0 6px rgba(0, 229, 255, 0.3)', zIndex: 2 },
+  arenaRight: { position: 'absolute', top: 12, right: 12, fontFamily: 'var(--font-title)', fontSize: 11, color: '#8a94a3', textAlign: 'right', fontWeight: 800, zIndex: 2 },
   arenaVisualContainer: { width: '100%', margin: '6px 0 0 0', padding: '16px 16px 0 16px', position: 'relative', minHeight: 130, display: 'flex', alignItems: 'flex-end', justifyContent: 'center', overflow: 'hidden', background: 'transparent', border: 'none' },
   arenaVisualContainerActive: { width: '100%', margin: '16px 0 10px 0', padding: '32px 16px 0 16px', position: 'relative', minHeight: 240, display: 'flex', alignItems: 'flex-end', justifyContent: 'space-around', overflow: 'visible', background: 'transparent', border: 'none' },
-  arenaGridOverlay: { position: 'absolute', bottom: 0, left: 0, right: 0, height: '40px', backgroundImage: 'linear-gradient(rgba(0, 229, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 229, 255, 0.1) 1px, transparent 1px)', backgroundSize: '12px 12px', transform: 'perspective(40px) rotateX(60deg)', transformOrigin: 'bottom center', opacity: 0.8, pointerEvents: 'none' },
+  arenaGridOverlay: { position: 'absolute', bottom: 0, left: 0, right: 0, height: '40px', backgroundImage: 'linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px)', backgroundSize: '12px 12px', transform: 'perspective(40px) rotateX(60deg)', transformOrigin: 'bottom center', opacity: 0.8, pointerEvents: 'none' },
   playerSprite: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, zIndex: 1, paddingBottom: 6 },
   enemySprite: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, zIndex: 1, paddingBottom: 6 },
-  spriteLabel: { fontFamily: 'var(--font-title)', fontSize: 13, letterSpacing: 0.5, color: '#7ab0d0', textTransform: 'uppercase', fontWeight: 800, background: 'rgba(3, 8, 20, 0.65)', padding: '1px 6px', borderRadius: 4, border: '1px solid rgba(0, 229, 255, 0.15)' },
+  spriteLabel: { fontFamily: 'var(--font-title)', fontSize: 11, letterSpacing: 0.5, color: '#8a94a3', textTransform: 'uppercase', fontWeight: 800, background: 'rgba(3, 8, 20, 0.65)', padding: '1px 6px', borderRadius: 4, border: '1px solid rgba(255,255,255,0.1)' },
   timerDisplay: { display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', zIndex: 2, marginTop: 12 },
   timerDisplayActiveCompact: { display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', zIndex: 2, margin: '12px 0 6px 0', justifyContent: 'center', flexShrink: 0 },
   activeTimerDigits: { fontSize: 44, fontFamily: 'var(--font-mono)', fontWeight: 900, color: '#fff', textShadow: '0 0 10px var(--neon-glow), 0 0 20px var(--neon-glow)' },
@@ -1148,8 +1150,8 @@ const styles = {
   battleLogActive: { width: '90%', display: 'flex', flexDirection: 'column', gap: 6, background: 'rgba(3, 8, 20, 0.9)', padding: 12, borderRadius: 10, border: '1.5px solid var(--neon-glow)', margin: '12px auto', boxShadow: '0 0 10px rgba(0,0,0,0.5)', flexShrink: 0 },
   combatStats: { margin: '0 16px 6px', padding: 8, display: 'flex', justifyContent: 'space-around', flexShrink: 0 },
   cstat: { textAlign: 'center' },
-  cstatLabel: { fontFamily: 'var(--font-title)', fontSize: 13, letterSpacing: 1, color: '#7ab0d0', marginBottom: 2, fontWeight: 800 },
-  cstatVal: { fontFamily: 'var(--font-mono)', fontSize: 18, fontWeight: 900, textShadow: '0 0 6px rgba(0, 229, 255, 0.2)' },
+  cstatLabel: { fontFamily: 'var(--font-title)', fontSize: 11, letterSpacing: 1, color: '#8a94a3', marginBottom: 2, fontWeight: 800, textTransform: 'uppercase' },
+  cstatVal: { fontFamily: 'var(--font-mono)', fontSize: 18, fontWeight: 900 },
   sessionSummary: { textAlign: 'center', padding: '0 16px 10px' },
   sessionSummaryActive: { textAlign: 'center', padding: '12px 16px', borderTop: '1px solid rgba(255, 255, 255, 0.05)', background: 'rgba(3, 8, 20, 0.95)', border: '1.5px solid rgba(0, 229, 255, 0.25)', boxShadow: '0 0 10px rgba(0,0,0,0.5)', margin: '12px 16px 16px 16px', borderRadius: 8, flexShrink: 0 },
   // Abandon

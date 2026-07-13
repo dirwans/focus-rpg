@@ -1852,7 +1852,12 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                                 />
                               ) : (
                                 <div style={{ position: 'relative', zIndex: 1, height: 200, display: 'flex', alignItems: 'flex-end' }}>
-                                  <PilotSprite race={player.race} job={j.id} gender={player.gender} size={200} />
+                                  <PilotSprite
+                                    race={player.race}
+                                    job={tier > 0 && getPlayerLaneIndex(player.race, player.job) === activeLaneIdx ? player.job : j.id}
+                                    gender={player.gender}
+                                    size={200}
+                                  />
                                 </div>
                               )}
                             </div>

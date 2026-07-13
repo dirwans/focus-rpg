@@ -2262,3 +2262,52 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 - **Verification**: Verified all 36 ore files are 320×320 transparent PNGs. Local client build succeeds.
 
 
+
+
+### Milestone 166: AuditorRoom Material Card Bottom Strip Fix [PENDING DEPLOYMENT]
+- **Problem**: Shard/ore material cards in the AuditorRoom Crafting tab showed a blank bottom strip because `_level` is only computed for items without a preview image (the level resolution block is skipped when `item.image` is set). Both the LV label and the right-side path label were empty for all material-type items.
+- **Fix** (`src/screens/AuditorRoom.jsx`):
+  - LV label now falls through to `item.level` as final fallback, showing e.g. `LV.1`, `LV.30`, `LV.50` for Common/Rare/Epic shards & ores.
+  - Right-side label: when no path badge exists, renders `item.rarity` abbreviated (COMM, RARE, EPIC, LEGE, MYTH) in gray instead of nothing.
+
+
+### Milestone 167: Excel Import/Export System di AuditorRoom [PENDING DEPLOYMENT]
+- **Fitur baru**: AuditorRoom sekarang punya dua tombol di toolbar atas:
+  - **📥 Download Template** — generate file  berisi 5 sheet (ITEMS, GEARS, MOBS, DROPS, SELL_PRICES) pre-filled dengan data eksisting dari JSON
+  - **📤 Import Excel** — upload file  yang sudah diisi → otomatis merge/update ke semua JSON yang relevan tanpa redeploy
+- **Server** (): tambah , dua endpoint baru:
+  -  — build workbook dari data live, kirim sebagai file download
+  -  — parse base64 xlsx, upsert ke , ,  (mobs + drops)
+- **AuditorRoom.jsx**: state , handler  + , toolbar strip Excel I/O di bawah tab buttons
+- **Drop table baru**: Sheet DROPS menambah field  ke  — struktur baru yang sebelumnya tidak ada
+- **Dependency baru**:  di 
+
+### Milestone 167: Excel Import/Export System di AuditorRoom [PENDING DEPLOYMENT]
+- **Fitur baru**: AuditorRoom sekarang punya dua tombol di toolbar atas:
+  - **Download Template** - generate file .xlsx berisi 5 sheet (ITEMS, GEARS, MOBS, DROPS, SELL_PRICES) pre-filled dengan data eksisting
+  - **Import Excel** - upload file .xlsx yang sudah diisi, otomatis merge/update ke semua JSON tanpa redeploy
+- **server.js**: tambah xlsx import, dua endpoint GET /api/audit/excel_template dan POST /api/audit/import_excel
+- **AuditorRoom.jsx**: state xlsxStatus, handler download+import, toolbar strip Excel I/O di bawah tab buttons
+- **Drop table baru**: Sheet DROPS menambah field mob.drops[] ke enemies.json (struktur baru)
+- **Dependency baru**: xlsx@0.18.5
+
+### Milestone 168: main.jsx BASE Tab Design Alignment ke unit.jsx Style [PENDING DEPLOYMENT]
+- **Tujuan**: BASE tab (main.jsx) terlihat inconsistent vs CHAR tab (unit.jsx) yang lebih elegant
+- **Perubahan main.jsx**:
+  - Tambah color tokens: activeColor (faction primary), accentColor (faction lighter), screenBg (per-race radial gradient)
+  - Bionex color fix: #ffd600 -> #3b82f6 (sama dengan unit.jsx)
+  - Semua label warna #7ab0d0 teal -> #8a94a3 neutral grey
+  - Screen background: pakai screenBg radial gradient per race
+  - avatarRing: border faction-colored
+  - Title badge + job subtitle: pakai accentColor
+  - ATK value: activeColor; HP value: accentColor
+  - Arena grid overlay: cyan -> white opacity rendah
+
+### Milestone 169: NpcModal Sprite Fix + Unit.jsx Temporal Dead Zone Bug Fix [PENDING DEPLOYMENT]
+- **Bug ditemukan**: Unit.jsx punya useEffect (paper doll calibration) yang referensi player?.race/job/gender di dependency array SEBELUM const player = useGameStore() dideklarasi. Ini ReferenceError temporal dead zone (TDZ) yang bikin Vite HMR failed to reload Unit.jsx dan PilotSprites.jsx.
+- **Fix Unit.jsx**: Pindah const player = useGameStore() (dan useGameStore hooks lainnya) ke ATAS sebelum useEffect — sehingga player sudah ada ketika dependency array dievaluasi.
+- **Fix NpcModal.jsx**: Hero sprite di class tree view (specialist subView) sebelumnya selalu render tier1 job sprite dari lane yang aktif. Sekarang: kalau player tier > 0 dan sedang di lane yang sama, tampilkan player.job sprite (tier-appropriate — Bionex tier3+ otomatis tampil titan_pilot/railgun_elite). Lane lain: tetap tampil tier1 sprite sebagai preview.
+
+### Milestone 170: SPRITE_CALIBRATIONS Refactor ke File Terpisah [PENDING DEPLOYMENT]
+- **Masalah**: SPRITE_CALIBRATIONS (plain object constant) di-export dari PilotSprites.jsx yang juga export React components — bikin Vite Fast Refresh incompatible warning, menyebabkan setiap edit PilotSprites.jsx trigger full page reload bukan hot update.
+- **Fix**: Pindah SPRITE_CALIBRATIONS ke src/data/spriteCalibrations.js (file data murni, bukan component). PilotSprites.jsx sekarang hanya export React components + hooks -> Fast Refresh berjalan normal. Unit.jsx diupdate import SPRITE_CALIBRATIONS langsung dari src/data/spriteCalibrations.js.

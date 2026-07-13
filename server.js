@@ -1,4 +1,5 @@
 import express from 'express'
+import XLSX from 'xlsx'
 import fs, { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
 import { writeFile } from 'node:fs/promises'
 import { join, dirname } from 'node:path'
@@ -1622,6 +1623,230 @@ app.post('/api/audit/delete_draft', (req, res) => {
     res.json({ ok: true })
   } catch (e) {
     res.status(500).json({ error: 'Gagal menghapus draft' })
+  }
+})
+
+// ── Excel Template Download ───────────────────────────────────────────────────
+app.get('/api/audit/excel_template', (req, res) => {
+  if (req.query.pin !== '12345') return res.status(401).json({ error: 'PIN Salah!' })
+  try {
+    const SRC_DATA_DIR = join(__dirname, 'src', 'data')
+    const readJson = (f) => { try { return JSON.parse(readFileSync(join(SRC_DATA_DIR, f), 'utf8')) } catch { return null } }
+    const readGear = (f) => { try { return JSON.parse(readFileSync(join(SRC_DATA_DIR, 'gears', f), 'utf8')) } catch { return null } }
+
+    const wb = XLSX.utils.book_new()
+
+    // ── Sheet 1: ITEMS ──
+    const itemsRaw = readJson('items.json') || []
+    const itemsList = Array.isArray(itemsRaw) ? itemsRaw : (itemsRaw.items || [])
+    const itemRows = itemsList.map(it => ({
+      id: it.id || '', name: it.name || '', emoji: it.emoji || '',
+      type: it.type || '', rarity: it.rarity || '', race: it.race || '',
+      level: it.level || 1, image: it.image || '', description: it.description || '',
+      bonus_atk: it.bonus?.atk || '', bonus_def: it.bonus?.def || '',
+      bonus_hp: it.bonus?.hp || '', bonus_dodge: it.bonus?.dodge || ''
+    }))
+    if (!itemRows.length) itemRows.push({ id:'', name:'', emoji:'', type:'material', rarity:'common', race:'All', level:1, image:'', description:'', bonus_atk:'', bonus_def:'', bonus_hp:'', bonus_dodge:'' })
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(itemRows), 'ITEMS')
+
+    // ── Sheet 2: GEARS ──
+    const gearRows = []
+    for (const [faction, file] of [['arctron','arctron.json'],['bionex','bionex.json'],['celestra','celestra.json']]) {
+      const g = readGear(file) || {}
+      const paths = ['warrior','ranger','technician','guardian','marksman','engineer','psion','sentinel','pathfinder','oracle','arcanist','mage','summoner']
+      for (const path of paths) {
+        const pathData = g[path]
+        if (!pathData) continue
+        const weapons = pathData.weapons || (Array.isArray(pathData) ? pathData : [])
+        for (const w of weapons) {
+          gearRows.push({ id: w.id||'', name: w.name||'', faction, path, level:'', type:'weapon', grade: w.grade||'', atk: w.atk||'', def:'', hp:'', dodge:'', image: w.image||'', race_lock: faction, job_lock: path })
+        }
+        const armors = pathData.armors || []
+        for (const a of armors) {
+          gearRows.push({ id: a.id||'', name: a.name||'', faction, path, level: a.level||'', type:'armor', grade: a.grade||'', atk: a.atk||'', def: a.def||'', hp: a.hp||'', dodge:'', image: a.image||'', race_lock: faction, job_lock: path })
+        }
+      }
+      for (const sh of (g.shields||[])) {
+        gearRows.push({ id: sh.id||'', name: sh.name||'', faction, path:'', level: sh.level||'', type:'shield', grade: sh.grade||'', atk:'', def: sh.def||'', hp:'', dodge:'', image: sh.image||'', race_lock: faction, job_lock:'' })
+      }
+    }
+    if (!gearRows.length) gearRows.push({ id:'', name:'', faction:'arctron', path:'warrior', level:32, type:'weapon', grade:'Rare', atk:'', def:'', hp:'', dodge:'', image:'', race_lock:'', job_lock:'' })
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(gearRows), 'GEARS')
+
+    // ── Sheet 3: MOBS ──
+    const enemies = readJson('enemies.json') || {}
+    const mobRows = []
+    for (const sector of (enemies.sectors||[])) {
+      for (const mob of (sector.mobs||[])) {
+        mobRows.push({ zone_id: sector.id, zone_name: sector.name, zone_minlv: sector.minLevel, zone_maxlv: sector.maxLevel, mob_name: mob.name||'', emoji: mob.emoji||'', hp: mob.hp||'', atk: mob.atk||'', def: mob.def||'', exp: mob.expReward||'', crd: mob.crdReward||'', image: mob.image||'', critical: mob.critical||0, is_boss: false })
+      }
+      for (const boss of (sector.boss||[])) {
+        mobRows.push({ zone_id: sector.id, zone_name: sector.name, zone_minlv: sector.minLevel, zone_maxlv: sector.maxLevel, mob_name: boss.name||'', emoji: boss.emoji||'', hp: boss.hp||'', atk: boss.atk||'', def: boss.def||'', exp: boss.expReward||'', crd: boss.crdReward||'', image: boss.image||'', critical: boss.critical||0, is_boss: true })
+      }
+    }
+    if (!mobRows.length) mobRows.push({ zone_id:1, zone_name:'Lumora Fields', zone_minlv:1, zone_maxlv:12, mob_name:'', emoji:'', hp:'', atk:'', def:'', exp:'', crd:'', image:'', critical:0, is_boss:false })
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(mobRows), 'MOBS')
+
+    // ── Sheet 4: DROPS ──
+    const dropRows = []
+    for (const sector of (enemies.sectors||[])) {
+      for (const mob of [...(sector.mobs||[]),...(sector.boss||[])]) {
+        for (const drop of (mob.drops||[])) {
+          dropRows.push({ zone_id: sector.id, mob_name: mob.name, item_id: drop.item_id||drop.id||'', drop_rate: drop.rate||drop.drop_rate||'', min_qty: drop.min_qty||1, max_qty: drop.max_qty||1 })
+        }
+      }
+    }
+    if (!dropRows.length) dropRows.push({ zone_id:1, mob_name:'Puffling', item_id:'mat_scrap', drop_rate:0.15, min_qty:1, max_qty:3 })
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(dropRows), 'DROPS')
+
+    // ── Sheet 5: SELL_PRICES ──
+    const priceRows = [
+      { rarity:'C', type:'weapon',  sell_price:50000,   buy_s1:125000, buy_s2:225000, buy_s3:450000, buy_s4:900000, buy_s5:1800000 },
+      { rarity:'C', type:'armor',   sell_price:40000,   buy_s1:125000, buy_s2:225000, buy_s3:450000, buy_s4:900000, buy_s5:1800000 },
+      { rarity:'C', type:'shield',  sell_price:40000,   buy_s1:100000, buy_s2:180000, buy_s3:360000, buy_s4:720000, buy_s5:1440000 },
+      { rarity:'C', type:'helmet',  sell_price:40000,   buy_s1:62500,  buy_s2:112500, buy_s3:225000, buy_s4:450000, buy_s5:900000 },
+      { rarity:'C', type:'ring',    sell_price:100000,  buy_s1:'—', buy_s2:'—', buy_s3:'—', buy_s4:'—', buy_s5:'—' },
+      { rarity:'C', type:'amulet',  sell_price:100000,  buy_s1:'—', buy_s2:'—', buy_s3:'—', buy_s4:'—', buy_s5:'—' },
+      { rarity:'B', type:'weapon',  sell_price:150000,  buy_s1:'—', buy_s2:'—', buy_s3:'—', buy_s4:'—', buy_s5:'—' },
+      { rarity:'B', type:'armor',   sell_price:120000,  buy_s1:'—', buy_s2:'—', buy_s3:'—', buy_s4:'—', buy_s5:'—' },
+      { rarity:'A', type:'weapon',  sell_price:500000,  buy_s1:'—', buy_s2:'—', buy_s3:'—', buy_s4:'—', buy_s5:'—' },
+      { rarity:'S', type:'weapon',  sell_price:2000000, buy_s1:'—', buy_s2:'—', buy_s3:'—', buy_s4:'—', buy_s5:'—' },
+    ]
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(priceRows), 'SELL_PRICES')
+
+    const buf = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx' })
+    res.setHeader('Content-Disposition', 'attachment; filename="focus_rpg_template.xlsx"')
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    res.send(buf)
+  } catch (e) {
+    console.error('[audit] excel_template fail', e)
+    res.status(500).json({ error: 'Gagal generate template' })
+  }
+})
+
+// ── Excel Import ──────────────────────────────────────────────────────────────
+app.post('/api/audit/import_excel', (req, res) => {
+  const { pin, fileBase64 } = req.body
+  if (pin !== '12345') return res.status(401).json({ error: 'PIN Salah!' })
+  if (!fileBase64) return res.status(400).json({ error: 'File tidak valid!' })
+
+  try {
+    const SRC_DATA_DIR = join(__dirname, 'src', 'data')
+    const readJson = (f) => { try { return JSON.parse(readFileSync(join(SRC_DATA_DIR, f), 'utf8')) } catch { return null } }
+    const readGear = (f) => { try { return JSON.parse(readFileSync(join(SRC_DATA_DIR, 'gears', f), 'utf8')) } catch { return null } }
+    const saveJson = (f, data) => writeFileSync(join(SRC_DATA_DIR, f), JSON.stringify(data, null, 2), 'utf8')
+    const saveGear = (f, data) => writeFileSync(join(SRC_DATA_DIR, 'gears', f), JSON.stringify(data, null, 2), 'utf8')
+
+    const buf = Buffer.from(fileBase64.replace(/^data:[^;]+;base64,/, ''), 'base64')
+    const wb = XLSX.read(buf, { type: 'buffer' })
+    const sheetToRows = (name) => {
+      const ws = wb.Sheets[name]
+      return ws ? XLSX.utils.sheet_to_json(ws, { defval: '' }) : []
+    }
+
+    const report = { items: 0, gears: 0, mobs: 0, drops: 0, errors: [] }
+
+    // ── ITEMS sheet ──
+    const itemRows = sheetToRows('ITEMS')
+    if (itemRows.length) {
+      const existing = readJson('items.json') || []
+      const existList = Array.isArray(existing) ? existing : (existing.items || [])
+      const map = Object.fromEntries(existList.map(i => [i.id, i]))
+      for (const r of itemRows) {
+        if (!r.id) continue
+        const bonus = {}
+        if (r.bonus_atk) bonus.atk = Number(r.bonus_atk)
+        if (r.bonus_def) bonus.def = Number(r.bonus_def)
+        if (r.bonus_hp)  bonus.hp  = Number(r.bonus_hp)
+        if (r.bonus_dodge) bonus.dodge = Number(r.bonus_dodge)
+        map[r.id] = { ...(map[r.id]||{}), id: r.id, name: r.name, emoji: r.emoji||'', type: r.type, rarity: r.rarity, race: r.race||'All', level: Number(r.level)||1, image: r.image||'', description: r.description||'', bonus }
+        report.items++
+      }
+      saveJson('items.json', Object.values(map))
+    }
+
+    // ── GEARS sheet ──
+    const gearRows = sheetToRows('GEARS')
+    if (gearRows.length) {
+      const gearFiles = { arctron: 'arctron.json', bionex: 'bionex.json', celestra: 'celestra.json' }
+      const gearData = {}
+      for (const [fac, file] of Object.entries(gearFiles)) gearData[fac] = readGear(file) || {}
+
+      for (const r of gearRows) {
+        if (!r.id || !r.faction || !gearData[r.faction]) continue
+        const g = gearData[r.faction]
+        const item = { id: r.id, name: r.name, grade: r.grade||'Common' }
+        if (r.atk)   item.atk   = Number(r.atk)
+        if (r.def)   item.def   = Number(r.def)
+        if (r.hp)    item.hp    = Number(r.hp)
+        if (r.image) item.image = r.image
+        if (r.level) item.level = Number(r.level)
+        if (r.race_lock) item.race = r.race_lock
+        if (r.job_lock)  item.job  = r.job_lock
+
+        if (r.type === 'shield') {
+          if (!g.shields) g.shields = []
+          const idx = g.shields.findIndex(x => x.id === r.id)
+          if (idx >= 0) g.shields[idx] = { ...g.shields[idx], ...item }
+          else g.shields.push(item)
+        } else if (r.path) {
+          if (!g[r.path]) g[r.path] = { weapons: [], armors: [] }
+          const arr = r.type === 'weapon' ? (g[r.path].weapons||=[]) : (g[r.path].armors||=[])
+          const idx = arr.findIndex(x => x.id === r.id)
+          if (idx >= 0) arr[idx] = { ...arr[idx], ...item }
+          else arr.push(item)
+        }
+        report.gears++
+      }
+      for (const [fac, file] of Object.entries(gearFiles)) saveGear(file, gearData[fac])
+    }
+
+    // ── MOBS sheet ──
+    const mobRows = sheetToRows('MOBS')
+    if (mobRows.length) {
+      const enemies = readJson('enemies.json') || { sectors: [], dungeons: [] }
+      const sectorMap = Object.fromEntries((enemies.sectors||[]).map(s => [s.id, s]))
+      for (const r of mobRows) {
+        if (!r.zone_id || !r.mob_name) continue
+        if (!sectorMap[r.zone_id]) {
+          sectorMap[r.zone_id] = { id: Number(r.zone_id), name: r.zone_name||`Zone ${r.zone_id}`, emoji:'🗺️', type:'map', minLevel: Number(r.zone_minlv)||1, maxLevel: Number(r.zone_maxlv)||99, mobs:[], boss:[] }
+        }
+        const sec = sectorMap[r.zone_id]
+        const mob = { name: r.mob_name, emoji: r.emoji||'👾', hp: Number(r.hp)||100, atk: Number(r.atk)||10, def: Number(r.def)||5, expReward: Number(r.exp)||10, crdReward: Number(r.crd)||5, image: r.image||'', critical: Number(r.critical)||0 }
+        const arr = r.is_boss === true || r.is_boss === 'true' || r.is_boss === 1 ? sec.boss : sec.mobs
+        const idx = arr.findIndex(x => x.name === r.mob_name)
+        if (idx >= 0) arr[idx] = { ...arr[idx], ...mob }
+        else arr.push(mob)
+        report.mobs++
+      }
+      enemies.sectors = Object.values(sectorMap).sort((a,b) => a.id - b.id)
+      saveJson('enemies.json', enemies)
+    }
+
+    // ── DROPS sheet ──
+    const dropRows = sheetToRows('DROPS')
+    if (dropRows.length) {
+      const enemies = readJson('enemies.json') || { sectors: [] }
+      for (const r of dropRows) {
+        if (!r.mob_name || !r.item_id) continue
+        const sector = (enemies.sectors||[]).find(s => s.id == r.zone_id)
+        if (!sector) continue
+        const mob = [...(sector.mobs||[]),...(sector.boss||[])].find(m => m.name === r.mob_name)
+        if (!mob) continue
+        if (!mob.drops) mob.drops = []
+        const didx = mob.drops.findIndex(d => d.item_id === r.item_id)
+        const drop = { item_id: r.item_id, rate: Number(r.drop_rate)||0.1, min_qty: Number(r.min_qty)||1, max_qty: Number(r.max_qty)||1 }
+        if (didx >= 0) mob.drops[didx] = drop
+        else mob.drops.push(drop)
+        report.drops++
+      }
+      saveJson('enemies.json', enemies)
+    }
+
+    res.json({ ok: true, report })
+  } catch (e) {
+    console.error('[audit] import_excel fail', e)
+    res.status(500).json({ error: `Import gagal: ${e.message}` })
   }
 })
 

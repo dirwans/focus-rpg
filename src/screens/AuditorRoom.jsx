@@ -70,6 +70,40 @@ export default function AuditorRoom() {
   const [outputGrade, setOutputGrade] = useState('Common')
   const [outputStats, setOutputStats] = useState([])
   const [recipeLogs, setRecipeLogs] = useState([])
+  const [xlsxStatus, setXlsxStatus] = useState(null) // null | 'loading' | {ok, report} | {error}
+
+  const handleDownloadTemplate = () => {
+    window.open(`/api/audit/excel_template?pin=12345`, '_blank')
+  }
+
+  const handleImportExcel = async (e) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    e.target.value = ''
+    setXlsxStatus('loading')
+    try {
+      const b64 = await new Promise((res, rej) => {
+        const reader = new FileReader()
+        reader.onload = () => res(reader.result)
+        reader.onerror = rej
+        reader.readAsDataURL(file)
+      })
+      const resp = await fetch('/api/audit/import_excel', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ pin: '12345', fileBase64: b64 })
+      })
+      const data = await resp.json()
+      if (data.ok) {
+        setXlsxStatus({ ok: true, report: data.report })
+        fetchData()
+      } else {
+        setXlsxStatus({ error: data.error || 'Import gagal' })
+      }
+    } catch (err) {
+      setXlsxStatus({ error: err.message })
+    }
+  }
 
   React.useEffect(() => {
     setRecipeName(targetItem ? (targetItem.id || targetItem.name || '') : '')
@@ -94,17 +128,63 @@ export default function AuditorRoom() {
 
   const generateFancyName = (id = '') => {
     const s = id.toLowerCase()
-    let race = ''
-    if (s.includes('arc') && !s.includes('_cor_arc_')) race = 'Arctron'
-    else if (s.includes('bio')) race = 'Bionex'
-    else if (s.includes('cel') || (s.includes('cor') && !s.includes('arc'))) race = 'Celestra'
+    // deterministic pick: hash id into index
+    const pick = (arr, salt = 0) => {
+      let h = salt
+      for (let i = 0; i < s.length; i++) h = (Math.imul(31, h) + s.charCodeAt(i)) | 0
+      return arr[Math.abs(h) % arr.length]
+    }
+    const WORDS = {
+      race: {
+        arctron:  ['Ironclad','Titan','Apex','Siege','Vanguard','Bulwark','Warden','Core'],
+        bionex:   ['Quantum','Neural','Pulse','Cipher','Vortex','Prismatic','Resonance','Nexus'],
+        celestra: ['Moonveil','Starweave','Sylvan','Astral','Eldritch','Sacred','Runic','Thornweave'],
+      },
+      path: {
+        warrior:    ['Battle','Ironheart','Warborn','Bloodsteel','Fury','Dreadnaught','Ironwill'],
+        ranger:     ['Swiftmark','Phantom','Windshot','Silencer','Hawkeye','Shadowpiercer'],
+        technician: ['Overclock','Synthetic','Neural','Hardwired','Schematic','ByteForge'],
+        guardian:   ['Sentinel','Ironward','Bulwark','Rampart','Shieldwall','Bastion'],
+        marksman:   ['Deadeye','Longshot','Precursor','Railblast','Sharpshot','Bullseye'],
+        engineer:   ['Machinist','Overload','Bluepulse','Schemata','Turbine','Arcforge'],
+        psion:      ['Mindbend','Echoburst','Psiwave','Thoughtform','Neuroveil','Psycore'],
+        sentinel:   ['Lastwall','Ironvow','Vigil','Undying','Oathbound','Rampart'],
+        pathfinder: ['Trailblaze','Wander','Vanguard','Expedient','Scouted','Frontline'],
+        oracle:     ['Prophetic','Foresight','Visionary','All-Seeing','Seer','Omenbound'],
+        arcanist:   ['Runebound','Arcwoven','Hexblade','Spellforged','Sigil','Glyph'],
+        mage:       ['Spellcast','Arcane','Spireborn','Cosmoglyph','Starfall','Ethereal'],
+        summoner:   ['Invoker','Soulcall','Covenant','Pact','Spiritbound','Eldritch'],
+      },
+      part: {
+        helmet:  ['Crown','Circlet','Visage','Crest','Cowl','Visor','Warhelm','Faceguard'],
+        armor:   ['Vestment','Cuirass','Carapace','Shroud','Mantle','Plate','Breastplate'],
+        pants:   ['Legguard','Greaves','Tassets','Leggings','Vambrace','Warlegs'],
+        gloves:  ['Gauntlet','Grips','Fist','Vambrace','Palm','Irongrip','Claws'],
+        boots:   ['Sabatons','Striders','Treads','Warboots','Soles','Ironfoot'],
+        weapon:  ['Edge','Fang','Reaper','Devastator','Cleaver','Harbinger','Annihilator'],
+        shield:  ['Bulwark','Aegis','Bastion','Paragon','Rampart','Warden'],
+        amulet:  ['Pendant','Talisman','Relic','Emblem','Token','Sigil'],
+        ring:    ['Band','Seal','Crest','Insignia','Circuit','Covenant'],
+      }
+    }
+    let raceKey = ''
+    if (s.includes('arc') && !s.includes('_cor_arc_')) raceKey = 'arctron'
+    else if (s.includes('bio')) raceKey = 'bionex'
+    else if (s.includes('cel') || (s.includes('cor') && !s.includes('arc'))) raceKey = 'celestra'
+
     const lvMatch = s.match(/lv(\d+)/); const lv = lvMatch ? `Lv.${lvMatch[1]}` : ''
-    const paths = ['warrior','ranger','technician','guardian','marksman','engineer','psion','sentinel','pathfinder','oracle','arcanist','mage','summoner']
-    const path = paths.find(p => s.includes(p)) || ''
-    const parts = ['helmet','armor','pants','gloves','boots','weapon','shield','amulet','ring']
-    const part = parts.find(p => s.includes(p)) || ''
-    const cap = w => w.charAt(0).toUpperCase() + w.slice(1)
-    return [race, lv, cap(path), cap(part)].filter(Boolean).join(' ')
+
+    const pathKeys = ['warrior','ranger','technician','guardian','marksman','engineer','psion','sentinel','pathfinder','oracle','arcanist','mage','summoner']
+    const pathKey = pathKeys.find(p => s.includes(p)) || ''
+
+    const partKeys = ['helmet','armor','pants','gloves','boots','weapon','shield','amulet','ring']
+    const partKey = partKeys.find(p => s.includes(p)) || ''
+
+    const raceWord  = raceKey  ? pick(WORDS.race[raceKey],   1) : ''
+    const pathWord  = pathKey  ? pick(WORDS.path[pathKey],   2) : ''
+    const partWord  = partKey  ? pick(WORDS.part[partKey],   3) : ''
+
+    return [raceWord, lv, pathWord, partWord].filter(Boolean).join(' ')
   }
 
   const handleSaveRecipe = async () => {
@@ -979,6 +1059,27 @@ export default function AuditorRoom() {
           <button style={tab === 'drafts' ? styles.tabActive : styles.tab} onClick={() => {setTab('drafts'); setPage(0); setSimItem(null); setRecipeSlots([null, null, null, null, null]); setTargetItem(null); setActiveSlotIndex(null); setOutputStats([]);}}>📋 Review Drafts ({allData.drafts?.length || 0})</button>
         </div>
 
+        {/* Excel Import / Export toolbar */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 12px', background: '#0d1220', borderBottom: '1px solid #1e2a3a', flexWrap: 'wrap' }}>
+          <span style={{ color: '#555', fontSize: '10px', fontFamily: 'monospace', letterSpacing: 1 }}>EXCEL I/O</span>
+          <button
+            onClick={handleDownloadTemplate}
+            style={{ background: '#0a1a10', border: '1px solid #00ff88', color: '#00ff88', padding: '3px 10px', borderRadius: 4, fontSize: '11px', cursor: 'pointer', fontWeight: 700 }}
+          >📥 Download Template</button>
+          <label style={{ background: '#0a0f1a', border: '1px solid #3b82f6', color: '#3b82f6', padding: '3px 10px', borderRadius: 4, fontSize: '11px', cursor: 'pointer', fontWeight: 700 }}>
+            📤 Import Excel
+            <input type="file" accept=".xlsx,.xls" onChange={handleImportExcel} style={{ display: 'none' }} />
+          </label>
+          {xlsxStatus === 'loading' && <span style={{ color: '#aaa', fontSize: '11px' }}>⏳ Importing...</span>}
+          {xlsxStatus?.ok && (
+            <span style={{ color: '#00ff88', fontSize: '11px' }}>
+              ✅ Done — Items: {xlsxStatus.report.items} | Gears: {xlsxStatus.report.gears} | Mobs: {xlsxStatus.report.mobs} | Drops: {xlsxStatus.report.drops}
+            </span>
+          )}
+          {xlsxStatus?.error && <span style={{ color: '#ff5555', fontSize: '11px' }}>❌ {xlsxStatus.error}</span>}
+          {xlsxStatus && <button onClick={() => setXlsxStatus(null)} style={{ background: 'none', border: 'none', color: '#555', cursor: 'pointer', fontSize: '12px' }}>✕</button>}
+        </div>
+
         {tab === 'gears' && (
           <div className="no-scrollbar" style={{ display: 'flex', flexWrap: 'nowrap', overflowX: 'auto', WebkitOverflowScrolling: 'touch', gap: '8px', padding: '10px 20px', background: 'rgba(255,255,255,0.02)' }}>
             <button style={subTab === 'arctron' ? styles.subTabActive : styles.subTab} onClick={() => {setSubTab('arctron'); setPage(0)}}>Arctron</button>
@@ -1190,8 +1291,8 @@ export default function AuditorRoom() {
                                                 const bc = rc ? rc.color : '#00e5ff'
                                                 return (
                                                   <div style={{ background: 'rgba(0,0,0,0.82)', borderTop: `1px solid ${bc}30`, display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '2px 5px', height: '20px', flexShrink: 0 }}>
-                                                    <span style={{ color: '#00e5ff', fontSize: '10px', fontWeight: 800, fontFamily: 'monospace', letterSpacing: 0.5 }}>{lv ? lv.label : (item._level ? `LV.${item._level}` : '')}</span>
-                                                    {path && <span style={{ color: path.color, fontSize: '9px', fontWeight: 700, fontFamily: 'monospace', opacity: 0.9 }}>{path.label.slice(0,4)}</span>}
+                                                    <span style={{ color: '#00e5ff', fontSize: '10px', fontWeight: 800, fontFamily: 'monospace', letterSpacing: 0.5 }}>{lv ? lv.label : (item._level ? `LV.${item._level}` : (item.level ? `LV.${item.level}` : ''))}</span>
+                                                    {path ? <span style={{ color: path.color, fontSize: '9px', fontWeight: 700, fontFamily: 'monospace', opacity: 0.9 }}>{path.label.slice(0,4)}</span> : (item.rarity ? <span style={{ color: '#aaa', fontSize: '9px', fontWeight: 700, fontFamily: 'monospace', opacity: 0.8, textTransform: 'uppercase' }}>{item.rarity.slice(0,4)}</span> : null)}
                                                   </div>
                                                 )
                                               })()}
