@@ -2353,6 +2353,16 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 - **Fix**: Added bounds-checking \Math.max(0, ...)\ and a fallback mechanism (\if (!enemy) enemy = enemies.sectors[0]\) in \Main.jsx\ to ensure the UI always gracefully defaults to Map 1 (Lumora Fields) if the save data contains invalid/stale map indexes.
 
 
+### Milestone 180: Ore Image Processing — Solid Texture, Legendary Size, Common Gray [PENDING DEPLOYMENT]
+- **Problem 1 (holes)**: Previous ore processing (M174 global threshold, then rembg/BFS attempts) created transparent holes in ore interior texture — crevice pixels were being mistakenly removed.
+- **Root Cause**: Ore art uses pure #000000 for background AND for interior dark shadows/crevices that form connected paths to the edge. BFS with any non-zero tolerance floods through crevices into interior. rembg also misclassifies dark interior as background.
+- **Fix**: Ultra-tight BFS (`sum==0`, only remove exact [0,0,0] pixels from edges). Interior crevice pixels like [2,2,0], [0,2,1] (sum≥1) act as natural flood blockers, keeping them opaque. Interior isolated black patches (630 px total, orphaned from bg) stay opaque. All 6 ores now show solid crystalline texture without transparent gaps.
+- **Problem 2 (legendary size)**: Legendary ore backup (2263×1446) has content bbox 2223×1425 (ratio=1.56, very wide). Fit-within-320×320 scaled by width → only 320×206, visually tiny vs other ores (320×255+).
+- **Fix**: Detect wide ores (ratio>1.38): scale to 88% height (281px), then center-crop width to 320. Result: 320×281 — now comparable in visual size to other ores.
+- **Problem 3 (common ore too white)**: Common ore backup is bright white/silver (avg lum=195.2). User wants "abu metalik" — dirty gray metallic like rough stone.
+- **Fix**: Strong grayscale blend (80% desaturate) + cool gray tint (slight blue channel) + 65% brightness reduction + 1.2x contrast. White highlights → medium blue-gray (148,152,165); shadows → dark blue-gray (74,76,83). Now looks like rough metallic stone.
+- **Cache bust** (`src/data/items.json`): `?v=13` → `?v=14`, 90 references updated.
+
 ### Milestone 179: AuditorRoom Material Badge — Rarity Label Fix [PENDING DEPLOYMENT]
 - **Problem**: Badge strip di bawah setiap item card di craft editor menampilkan LV.X COMM/RARE/EPIC/... untuk semua items termasuk materials (shards/ores) yang tidak punya konsep level bermakna.
 - **Fix** (src/screens/AuditorRoom.jsx line ~1286): Tambah branch if (isMat) — material items kini tampilkan rarity name lengkap (COMMON, UNCOMMON, RARE, EPIC, LEGENDARY, MYTHIC) dengan rarity color (gray/green/blue/purple/gold/red), centered. Gear items tetap LV.X + PATH seperti semula.
