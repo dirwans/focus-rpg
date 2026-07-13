@@ -2244,21 +2244,6 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
   - Bumped the bow asset cache-busting query parameter in `src/store/gameStore.js` to `?v=3` to force client browsers and PWAs to load the clean transparent assets immediately.
 - **Verification**: Verified all 4 bow files have transparent backgrounds (dark pixels reduced by ~85% on Level 55), are centered, fill the slot correctly, and exactly 320x320. Local client build succeeds.
 
----
-
-### 🛠️ Milestone 164: Material Shard Icon Redesign — Slim Elegant Crystal Style
-- **Problem**: The material shard icons in `public/assets/materials/` (used in Database Craft Editor, Cargo, and crafting UIs) had a fat, stiff diamond shape ("lemu2 kaku") that looked ugly and unprofessional. The heavy photorealistic texture was too noisy for small icon slots.
-- **Fix**:
-  - Regenerated all 6 base rarity shard images (Common, Uncommon, Rare, Epic, Legendary, Mythic) with a new **slim elongated crystal** design featuring:
-    - **Slender proportions** — height ~1.5x width, elegant pointed tips
-    - **Thin black outline** — clean facet lines defining the crystal texture
-    - **Minimalist premium aesthetic** — flat stylized 2D game icon style, not tacky
-    - **Rarity badge** — small circular badge with letter (C/U/R/E/L/M) in corner
-  - Mythic shard created programmatically by hue-tinting the Rare shard to red (image generation quota was exhausted).
-  - Processed all raw images through `rembg` background removal, tight-crop, pad to square (6% margin), and resize to 320×320.
-  - Copied each base rarity shard to all 5 element variants (ignis, virel, kryos, zephra, umbrix) — **36 files total** updated.
-  - Bumped shard cache-busting version in `src/data/items.json` from `?v=7` to `?v=8` (45 references updated).
-- **Verification**: Verified all 36 shard files are 320×320 transparent PNGs. Local client build succeeds.
 
 ---
 
@@ -2275,3 +2260,5 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
   - Replicated each base rarity ore to all 5 element variants (ignis, virel, kryos, zephra, umbrix) — **36 files total** updated.
   - Bumped ore cache-busting version in `src/data/items.json` from `?v=7` to `?v=8` (45 references updated).
 - **Verification**: Verified all 36 ore files are 320×320 transparent PNGs. Local client build succeeds.
+
+
