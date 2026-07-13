@@ -1282,8 +1282,19 @@ export default function AuditorRoom() {
                                               <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '4px' }}>
                                                 {item._imagePreview && <img src={item._imagePreview} style={{ width: '72px', height: '68px', objectFit: 'contain', filter: 'drop-shadow(0 0 6px rgba(255,255,255,0.75)) brightness(1.3) contrast(1.1)' }} />}
                                               </div>
-                                              {/* Bottom strip — LV + PATH */}
+                                              {/* Bottom strip — rarity for materials, LV+PATH for gear */}
                                               {(() => {
+                                                const isMat = item.type === 'material'
+                                                if (isMat) {
+                                                  const rarityColorMap = { common: '#9ca3af', uncommon: '#22c55e', rare: '#3b82f6', epic: '#a855f7', legendary: '#f59e0b', mythic: '#ef4444' }
+                                                  const rar = (item.rarity || '').toLowerCase()
+                                                  const rc = rarityColorMap[rar] || '#aaa'
+                                                  return (
+                                                    <div style={{ background: 'rgba(0,0,0,0.82)', borderTop: `1px solid ${rc}40`, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '2px 5px', height: '20px', flexShrink: 0 }}>
+                                                      <span style={{ color: rc, fontSize: '9px', fontWeight: 800, fontFamily: 'monospace', letterSpacing: 0.5, textTransform: 'uppercase' }}>{item.rarity || ''}</span>
+                                                    </div>
+                                                  )
+                                                }
                                                 const pb = parsePetunjuk(item.id || '')
                                                 const lv = pb.find(b => b.label.startsWith('LV.'))
                                                 const path = pb.find(b => ['WARRIOR','RANGER','TECHNICIAN','GUARDIAN','MARKSMAN','ENGINEER','PSION','SENTINEL','PATHFINDER','ORACLE','ARCANIST','MAGE','SUMMONER'].includes(b.label))

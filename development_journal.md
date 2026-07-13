@@ -2352,3 +2352,7 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 - **Root Cause**: The transition from a 10-Sector structure to the new 5-Sector map (Milestone 5) caused old saves with out-of-bounds \selectedMapIdx\ or \sector\ values to crash when \Main.jsx\ tried to access \enemies.sectors[sectorIdx].name\. The \enemy\ object became \undefined\, triggering a \TypeError\ that unmounted the React tree.
 - **Fix**: Added bounds-checking \Math.max(0, ...)\ and a fallback mechanism (\if (!enemy) enemy = enemies.sectors[0]\) in \Main.jsx\ to ensure the UI always gracefully defaults to Map 1 (Lumora Fields) if the save data contains invalid/stale map indexes.
 
+
+### Milestone 179: AuditorRoom Material Badge — Rarity Label Fix [PENDING DEPLOYMENT]
+- **Problem**: Badge strip di bawah setiap item card di craft editor menampilkan LV.X COMM/RARE/EPIC/... untuk semua items termasuk materials (shards/ores) yang tidak punya konsep level bermakna.
+- **Fix** (src/screens/AuditorRoom.jsx line ~1286): Tambah branch if (isMat) — material items kini tampilkan rarity name lengkap (COMMON, UNCOMMON, RARE, EPIC, LEGENDARY, MYTHIC) dengan rarity color (gray/green/blue/purple/gold/red), centered. Gear items tetap LV.X + PATH seperti semula.
