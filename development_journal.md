@@ -2327,6 +2327,12 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 - **Fix** (`public/assets/materials/*_shard.png`, kecuali `common_shard` — user sudah ganti sendiri): Resize dengan fit-within 320×320 maintaining aspect ratio, lalu pad ke 320×320 canvas transparan (center-aligned). Content kini 238–256px wide × 320px tall.
 - **Cache bust** (`src/data/items.json`): `?v=10` → `?v=11`, 90 referensi diupdate.
 
+### Milestone 177: Common Shard — Black BG Removal dari Backup User [PENDING DEPLOYMENT]
+- **Source**: `_backup_orig/common_shard.png` (1184×896, fully opaque, background hitam) — user mengganti file ini sebagai referensi art baru.
+- **Fix**: BFS flood-fill dari edge hapus background hitam (R+G+B < 35), crop ke content bbox (817×807, ratio=1.01 nearly square), fit-within 320×320 maintaining aspect ratio → 320×316.
+- **Note**: Gem shape asli user adalah nearly square (bukan portrait seperti shard lain). Jika tetap terlihat "gendut" relatif terhadap shard lain, itu karena art-nya memang square — perlu artwork dengan diamond lebih tinggi/ramping.
+- **Cache bust** (`src/data/items.json`): `?v=11` → `?v=12`.
+
 ### Milestone 173: Paper Doll Broken Image & Scaling Fixes + APK Hydration Safety [DEPLOYED]
 - **Bug 1 (Broken Image)**: Weapon and Shield sprites on the Paper Doll threw 404 broken image icons because \PilotSprites.jsx\ incorrectly used a hardcoded fallback string if \item.image\ was null. 
 - **Fix 1 (\PilotSprites.jsx\)**: Imported \esolveItemImage\ from \gameStore.js\ to dynamically resolve accurate weapon/shield URLs, fixing the broken image bug.
