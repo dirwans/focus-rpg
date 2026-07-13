@@ -2309,7 +2309,12 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 - **Bug kritis**: APK blank screen setelah login. Root cause: Antigravity's commit (a1dd28b) memindahkan deklarasi `screenBg`, `activeColor`, `accentColor` ke dalam `WorldMapModal()` (line 103-105) tapi LUPA mendeklarasikan ulang variabel-variabel ini di dalam `Main()`. Main() tetap menggunakan ketiga variabel tersebut (line 832, 863, 870, 875, 926, 930) tapi tanpa deklarasi lokal. Di desktop Chrome (non-strict bundle), undeclared variable = `undefined` (silent, background jadi transparan). Di Android WebView (strict mode), undeclared variable = `ReferenceError` → React tree unmount → blank screen.
 - **Fix** (`src/screens/Main.jsx`): Tambah deklarasi `activeColor`, `accentColor`, `screenBg` di dalam `Main()` setelah `const race = ...` (line 431).
 
-### Milestone 173: Paper Doll Broken Image & Scaling Fixes + APK Hydration Safety [PENDING DEPLOYMENT]
+### Milestone 174: Material Ore & Shard Background Removal + Cache Bump [PENDING DEPLOYMENT]
+- **Problem**: Semua ore images (`*_ore.png`) punya background **hitam pekat** — rembg dari sesi sebelumnya gagal karena background gelap. Shard images (`*_shard.png`) punya background **putih** opak. Keduanya tampil sebagai kotak berwarna di game UI.
+- **Fix** (`public/assets/materials/`): Python PIL script — replace near-black pixels (R/G/B < 30) → alpha 0 untuk ores; replace near-white pixels (R/G/B > 228) → alpha 0 untuk shards. Crop ke bounding box konten, pad 6%, resize ke 320×320, compress PNG. File size turun drastis: 1–3MB → 95–150KB per file. Original files di-backup ke `_backup_orig/` (tidak di-commit).
+- **Cache bust** (`src/data/items.json`): `?v=8` → `?v=9`, 90 referensi diupdate.
+
+### Milestone 173: Paper Doll Broken Image & Scaling Fixes + APK Hydration Safety [DEPLOYED]
 - **Bug 1 (Broken Image)**: Weapon and Shield sprites on the Paper Doll threw 404 broken image icons because \PilotSprites.jsx\ incorrectly used a hardcoded fallback string if \item.image\ was null. 
 - **Fix 1 (\PilotSprites.jsx\)**: Imported \esolveItemImage\ from \gameStore.js\ to dynamically resolve accurate weapon/shield URLs, fixing the broken image bug.
 - **Bug 2 (Misaligned/Scaled Armor)**: The user reported armor/pants/boots were "pating pecototan" (messy/out of place) on the Celestra Warrior.
