@@ -2323,3 +2323,9 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 - **Fix 4 (\PilotSprites.jsx\)**: Segregated styling rules using an \isStandalone\ flag to ensure weapons and shields (which are not composites) still receive center-weighted default coordinates.
 - **Fix 5 (\App.jsx\)**: Hardened \player.inventory\ hydration mapping with a null/truthy check (\i && raceMap[i.race]\) to prevent silent sparse-array TypeErrors that crash the Android WebView (blank screen) upon login.
 
+
+### Milestone 174: Old Save Migration Crash Fix (Main.jsx) [PENDING DEPLOYMENT]
+- **Bug**: Older accounts (like \cel-war\) experienced a blank screen on login, while new accounts (\celes-war-m\) worked fine.
+- **Root Cause**: The transition from a 10-Sector structure to the new 5-Sector map (Milestone 5) caused old saves with out-of-bounds \selectedMapIdx\ or \sector\ values to crash when \Main.jsx\ tried to access \enemies.sectors[sectorIdx].name\. The \enemy\ object became \undefined\, triggering a \TypeError\ that unmounted the React tree.
+- **Fix**: Added bounds-checking \Math.max(0, ...)\ and a fallback mechanism (\if (!enemy) enemy = enemies.sectors[0]\) in \Main.jsx\ to ensure the UI always gracefully defaults to Map 1 (Lumora Fields) if the save data contains invalid/stale map indexes.
+

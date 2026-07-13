@@ -96,7 +96,7 @@ function WorldMapModal({ onClose }) {
   // Default selected node index
   const defaultIdx = (player.selectedMapIdx !== undefined && player.selectedMapIdx !== null)
     ? player.selectedMapIdx
-    : Math.min(player.sector - 1, enemies.sectors.length - 1)
+    : Math.max(0, Math.min((player.sector || 1) - 1, enemies.sectors.length - 1))
   
   const [selectedNode, setSelectedNode] = useState(defaultIdx)
 
@@ -112,7 +112,8 @@ function WorldMapModal({ onClose }) {
     { name: 'Trinity Nexus', left: '50%', top: '80%', minLevel: 53 }
   ]
 
-  const selectedSector = enemies.sectors[selectedNode]
+  const safeNode = isNaN(selectedNode) ? 0 : selectedNode
+  const selectedSector = enemies.sectors[safeNode] || enemies.sectors[0]
   const isUnderleveled = player.level < mapCoordinates[selectedNode].minLevel
   const isLocked = false // player.level < mapCoordinates[selectedNode].minLevel
   const isActive = player.selectedMapIdx === selectedNode || (player.selectedMapIdx === null && selectedNode === defaultIdx)
@@ -435,7 +436,7 @@ export default function Main() {
   const isDungeon = timer.selectedZone && timer.selectedZone.startsWith('dungeon_')
   const sectorIdx = (player.selectedMapIdx !== undefined && player.selectedMapIdx !== null)
     ? player.selectedMapIdx
-    : (Math.min(player.sector, enemies.sectors.length) - 1)
+    : Math.max(0, Math.min((player.sector || 1), enemies.sectors.length) - 1)
 
   let enemy
   if (isDungeon) {
@@ -444,6 +445,8 @@ export default function Main() {
   } else {
     enemy = enemies.sectors[sectorIdx]
   }
+  
+  if (!enemy) enemy = enemies.sectors[0]
   const isRunning = timer.state === 'running'
   const isDone    = timer.state === 'completed'
 
