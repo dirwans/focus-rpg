@@ -2273,17 +2273,6 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 
 ### Milestone 167: Excel Import/Export System di AuditorRoom [PENDING DEPLOYMENT]
 - **Fitur baru**: AuditorRoom sekarang punya dua tombol di toolbar atas:
-  - **📥 Download Template** — generate file  berisi 5 sheet (ITEMS, GEARS, MOBS, DROPS, SELL_PRICES) pre-filled dengan data eksisting dari JSON
-  - **📤 Import Excel** — upload file  yang sudah diisi → otomatis merge/update ke semua JSON yang relevan tanpa redeploy
-- **Server** (): tambah , dua endpoint baru:
-  -  — build workbook dari data live, kirim sebagai file download
-  -  — parse base64 xlsx, upsert ke , ,  (mobs + drops)
-- **AuditorRoom.jsx**: state , handler  + , toolbar strip Excel I/O di bawah tab buttons
-- **Drop table baru**: Sheet DROPS menambah field  ke  — struktur baru yang sebelumnya tidak ada
-- **Dependency baru**:  di 
-
-### Milestone 167: Excel Import/Export System di AuditorRoom [PENDING DEPLOYMENT]
-- **Fitur baru**: AuditorRoom sekarang punya dua tombol di toolbar atas:
   - **Download Template** - generate file .xlsx berisi 5 sheet (ITEMS, GEARS, MOBS, DROPS, SELL_PRICES) pre-filled dengan data eksisting
   - **Import Excel** - upload file .xlsx yang sudah diisi, otomatis merge/update ke semua JSON tanpa redeploy
 - **server.js**: tambah xlsx import, dua endpoint GET /api/audit/excel_template dan POST /api/audit/import_excel
@@ -2311,3 +2300,7 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 ### Milestone 170: SPRITE_CALIBRATIONS Refactor ke File Terpisah [PENDING DEPLOYMENT]
 - **Masalah**: SPRITE_CALIBRATIONS (plain object constant) di-export dari PilotSprites.jsx yang juga export React components — bikin Vite Fast Refresh incompatible warning, menyebabkan setiap edit PilotSprites.jsx trigger full page reload bukan hot update.
 - **Fix**: Pindah SPRITE_CALIBRATIONS ke src/data/spriteCalibrations.js (file data murni, bukan component). PilotSprites.jsx sekarang hanya export React components + hooks -> Fast Refresh berjalan normal. Unit.jsx diupdate import SPRITE_CALIBRATIONS langsung dari src/data/spriteCalibrations.js.
+
+### Milestone 171: Unit.jsx Celestra Mage Path Tab Overflow Fix [PENDING DEPLOYMENT]
+- **Bug**: Tab MAGE PATH tidak muncul di Job Tree (Unit.jsx) pada layar mobile. Celestra punya 4 lane tabs (Warrior/Pathfinder/Summoner/Mage), tapi container flex dengan `minWidth: 100` per tab menyebabkan 4×100=400px melebihi lebar layar 375px. Tab MAGE tersembunyi di luar viewport (scrollable tapi tanpa scrollbar visible karena `no-scrollbar` class).
+- **Fix** (`src/screens/Unit.jsx`): `minWidth: 100` → `minWidth: 70` dan `padding: '8px 6px'` → `padding: '8px 4px'`. Hasil: 4×70=280px, muat di layar mobile 375px — semua 4 tab terlihat.
