@@ -1,4 +1,4 @@
-import { useGameStore } from '../store/gameStore'
+import { useGameStore, resolveItemImage } from '../store/gameStore'
 import { SPRITE_CALIBRATIONS } from '../data/spriteCalibrations'
 
 function getJobLane(jobId) {
@@ -161,7 +161,8 @@ function PaperDollStack({ baseSprite, player, size, width, height, style: extraS
   
   const getGearImg = (item, slot) => {
     if (!item) return null
-    let img = item.image
+    let img = resolveItemImage(item, player.race, player.job)
+    if (!img) img = item.image
     if (!img) {
       img = `/assets/${player.race}/def${player.race}${lane}lv1${slot}.png`
     }
@@ -169,12 +170,21 @@ function PaperDollStack({ baseSprite, player, size, width, height, style: extraS
   }
 
   const renderLayer = (item, slot) => {
-    if (!item || !config[slot]) return null
+    if (!item) return null
     const src = getGearImg(item, slot)
+    const customConfig = config[slot] || {}
+    const isStandalone = slot === 'weapon' || slot === 'shield'
+    
+    // Body composites perfectly align, standalone items need custom placement
+    const defaultStyle = isStandalone 
+      ? { top: '50%', left: '10%', width: '30%' } 
+      : { top: 0, left: 0, width: '100%', height: '100%' }
+      
     const layerStyle = {
       position: 'absolute',
       pointerEvents: 'none',
-      ...config[slot]
+      ...defaultStyle,
+      ...customConfig
     }
     return <img src={src} style={layerStyle} alt={slot} />
   }

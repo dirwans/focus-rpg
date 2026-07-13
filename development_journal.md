@@ -2308,3 +2308,13 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 ### Milestone 172: Main.jsx APK Blank Screen — ReferenceError screenBg/activeColor/accentColor [HOTFIX — DEPLOYED IMMEDIATELY]
 - **Bug kritis**: APK blank screen setelah login. Root cause: Antigravity's commit (a1dd28b) memindahkan deklarasi `screenBg`, `activeColor`, `accentColor` ke dalam `WorldMapModal()` (line 103-105) tapi LUPA mendeklarasikan ulang variabel-variabel ini di dalam `Main()`. Main() tetap menggunakan ketiga variabel tersebut (line 832, 863, 870, 875, 926, 930) tapi tanpa deklarasi lokal. Di desktop Chrome (non-strict bundle), undeclared variable = `undefined` (silent, background jadi transparan). Di Android WebView (strict mode), undeclared variable = `ReferenceError` → React tree unmount → blank screen.
 - **Fix** (`src/screens/Main.jsx`): Tambah deklarasi `activeColor`, `accentColor`, `screenBg` di dalam `Main()` setelah `const race = ...` (line 431).
+
+### Milestone 173: Paper Doll Broken Image & Scaling Fixes + APK Hydration Safety [PENDING DEPLOYMENT]
+- **Bug 1 (Broken Image)**: Weapon and Shield sprites on the Paper Doll threw 404 broken image icons because \PilotSprites.jsx\ incorrectly used a hardcoded fallback string if \item.image\ was null. 
+- **Fix 1 (\PilotSprites.jsx\)**: Imported \esolveItemImage\ from \gameStore.js\ to dynamically resolve accurate weapon/shield URLs, fixing the broken image bug.
+- **Bug 2 (Misaligned/Scaled Armor)**: The user reported armor/pants/boots were "pating pecototan" (messy/out of place) on the Celestra Warrior.
+- **Fix 2 (\spriteCalibrations.js\)**: Deleted erroneous random coordinates for \helmet, armor, pants, boots, gloves\ for \celestra_warrior_male\ which were causing extreme downscaling.
+- **Fix 3 (\PilotSprites.jsx\)**: Updated \enderLayer()\ to automatically assign \	op: 0, left: 0, width: 100%\ default style to all body composite layers to perfectly overlay the base sprite.
+- **Fix 4 (\PilotSprites.jsx\)**: Segregated styling rules using an \isStandalone\ flag to ensure weapons and shields (which are not composites) still receive center-weighted default coordinates.
+- **Fix 5 (\App.jsx\)**: Hardened \player.inventory\ hydration mapping with a null/truthy check (\i && raceMap[i.race]\) to prevent silent sparse-array TypeErrors that crash the Android WebView (blank screen) upon login.
+

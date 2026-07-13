@@ -100,7 +100,7 @@ export default function App() {
     }
     
     if (nextPlayer.inventory) {
-       nextPlayer.inventory = nextPlayer.inventory.map(i => raceMap[i.race] ? { ...i, race: raceMap[i.race] } : i)
+       nextPlayer.inventory = nextPlayer.inventory.map(i => (i && raceMap[i.race]) ? { ...i, race: raceMap[i.race] } : i)
        dirty = true
     }
     if (nextPlayer.equipment) {
