@@ -67,7 +67,7 @@ export default function AuditorRoom() {
   const [recipeSlots, setRecipeSlots] = useState([null, null, null, null, null])
   const [activeSlotIndex, setActiveSlotIndex] = useState(null)
   const [chances, setChances] = useState({ success: 65, destroy: 20, great: 10, bonus: 5 })
-  const [outputGrade, setOutputGrade] = useState('Normal')
+  const [outputGrade, setOutputGrade] = useState('Common')
   const [outputStats, setOutputStats] = useState([])
   const [recipeLogs, setRecipeLogs] = useState([])
 
@@ -1190,7 +1190,7 @@ export default function AuditorRoom() {
                                                 const bc = rc ? rc.color : '#00e5ff'
                                                 return (
                                                   <div style={{ background: 'rgba(0,0,0,0.82)', borderTop: `1px solid ${bc}30`, display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '2px 5px', height: '20px', flexShrink: 0 }}>
-                                                    <span style={{ color: '#00e5ff', fontSize: '10px', fontWeight: 800, fontFamily: 'monospace', letterSpacing: 0.5 }}>{lv ? lv.label : (item.grade ? item.grade.slice(0,3) : '—')}</span>
+                                                    <span style={{ color: '#00e5ff', fontSize: '10px', fontWeight: 800, fontFamily: 'monospace', letterSpacing: 0.5 }}>{lv ? lv.label : (item._level ? `LV.${item._level}` : '')}</span>
                                                     {path && <span style={{ color: path.color, fontSize: '9px', fontWeight: 700, fontFamily: 'monospace', opacity: 0.9 }}>{path.label.slice(0,4)}</span>}
                                                   </div>
                                                 )
@@ -1343,13 +1343,12 @@ export default function AuditorRoom() {
                                                   </>
                                               ) : (
                                                   <>
-                                                      <option value="Normal">Normal</option>
-                                                      <option value="Rare A">Rare A</option>
-                                                      <option value="Rare B">Rare B</option>
-                                                      <option value="Rare C">Rare C</option>
-                                                      <option value="Rare D">Rare D</option>
-                                                      <option value="Relic">Relic</option>
-                                                      <option value="Hero">Hero</option>
+                                                      <option value="Common">Common</option>
+                                                      <option value="Uncommon">Uncommon</option>
+                                                      <option value="Rare">Rare</option>
+                                                      <option value="Epic">Epic</option>
+                                                      <option value="Legendary">Legendary</option>
+                                                      <option value="Mythic">Mythic</option>
                                                   </>
                                               )}
                                           </select>

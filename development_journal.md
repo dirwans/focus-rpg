@@ -2260,4 +2260,18 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
   - Bumped shard cache-busting version in `src/data/items.json` from `?v=7` to `?v=8` (45 references updated).
 - **Verification**: Verified all 36 shard files are 320×320 transparent PNGs. Local client build succeeds.
 
+---
 
+### 🛠️ Milestone 165: Material Ore Icon Redesign — Slim Elegant Crystal Ore Style
+- **Problem**: The raw ore icons in `public/assets/materials/` (used in Database Craft Editor, Cargo, and crafting UIs) had a fat, noisy rock pile shape ("ginuk2 mbladrah") that did not match the sleek, elegant aesthetic of the newly redesigned shards.
+- **Fix**:
+  - Regenerated 5 base rarity ore images (Common, Uncommon, Rare, Legendary, Mythic) using OpenRouter (google/gemini-3.1-flash-image) with a new **slender crystal cluster** design featuring:
+    - **Slender crystal structure** — tall diamond-faceted crystals embedded inside a rock matrix
+    - **Thin black outline** — clean outlines defining all facet edges
+    - **Minimalist premium aesthetic** — flat stylized 2D game icon style matching the shards
+    - **Rarity badge** — small circular badge with letter (C/U/R/E/L/M) in the top-left corner
+  - Epic ore created programmatically by hue-shifting the Rare ore (blue) to deep violet (280 degrees hue) due to a safety filter block on the "epic" prompt.
+  - Processed all raw images through `rembg` background removal, tight-crop, pad to square (6% margin), and resize to 320×320.
+  - Replicated each base rarity ore to all 5 element variants (ignis, virel, kryos, zephra, umbrix) — **36 files total** updated.
+  - Bumped ore cache-busting version in `src/data/items.json` from `?v=7` to `?v=8` (45 references updated).
+- **Verification**: Verified all 36 ore files are 320×320 transparent PNGs. Local client build succeeds.
