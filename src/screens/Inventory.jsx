@@ -31,7 +31,7 @@ export default function Inventory() {
 
   return (
     <div className="no-scrollbar" style={{ display: 'flex', flexDirection: 'column', flex: 1, fontFamily: "'Saira', sans-serif", background: screenBg, minHeight: '100vh', paddingBottom: 64 }} onClick={() => { setActiveTooltip(null); setSelectedBagItem(null); setPickingSlot(null); }}>
-      <div style={{ padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 12, borderBottom: '1px solid rgba(0, 229, 255, 0.15)', background: 'rgba(3, 8, 20, 0.4)', flexShrink: 0 }}>
+      <div style={{ padding: '16px 16px 12px', display: 'flex', alignItems: 'center', gap: 12, borderBottom: '1px solid rgba(0, 229, 255, 0.15)', background: 'rgba(3, 8, 20, 0.4)', flexShrink: 0 }}>
         <div style={{ flex: 1, textAlign: 'center' }}>
           <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 18, fontWeight: 900, color: '#fff', letterSpacing: 2, textShadow: '0 0 10px #00e5ff' }}>GEAR &amp; INVENTORY</span>
         </div>
@@ -90,6 +90,8 @@ export default function Inventory() {
                  return raceOk && levelOk && jobOk
                })
              }
+
+            const TOP_ROW_SLOTS = new Set(['helmet', 'amulet1', 'amulet2', 'ascension_arms'])
 
             const renderEquipSlot = (slotKey, label, svgIcon, isCircle = false, width = '100%', height = 'auto', aspectRatio = '1 / 1') => {
               const item = player.equipment && player.equipment[slotKey];
@@ -231,10 +233,12 @@ export default function Inventory() {
 
                   {/* Tooltip Popup */}
                   {showTooltip && (
-                    <div 
+                    <div
                       style={{
                         position: 'absolute',
-                        bottom: '110%',
+                        ...(TOP_ROW_SLOTS.has(slotKey)
+                          ? { top: '110%' }
+                          : { bottom: '110%' }),
                         left: '50%',
                         transform: 'translateX(-50%)',
                         background: 'rgba(5, 12, 28, 0.98)',

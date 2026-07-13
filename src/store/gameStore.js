@@ -165,7 +165,7 @@ function resolveArmorSetImage(slot, playerRace, playerJob, level) {
   } else if (playerRace === 'celestra') {
     return `/assets/celestra/defcelestra${lineage}lv${tier}${slot}.png?v=14`
   }
-  return `/assets/arctron/def${playerRace}${lineage}lv${tier}${slot}.png?v=5`
+  return `/assets/arctron/def${playerRace}${lineage}lv${tier}${slot}.png?v=6`
 }
 
 export function resolveItemImage(item, playerRace, playerJob) {

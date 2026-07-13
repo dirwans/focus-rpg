@@ -2209,3 +2209,12 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 - **Verification**: CSS variables confirmed live in browser (`--neon-glow: #a855f7`, `--neon-secondary-1: #d9acff`, `--neon-secondary-2: #8188c2`, `--bg-color: #07061a`).
 
 - **Additional files fixed (second scan)**: `Unit.jsx` rune gold→`${fp}38`; `Ascension.jsx` + `AscensionSpiritShopModal.jsx` rune gold→`${colors.border}38`; `PrologueModal.jsx` celestra `#d000ff`→`#a855f7`; `PilotSprites.jsx` CelestraSprite glow `#d000ff`→`#a855f7`. Total 11 files unified.
+
+---
+
+### 🛠️ Milestone 161: Inventory Tooltip Clipping Fix & Header Spacing [DEPLOYED]
+- **Problem**: On the GEARS screen, tooltip popup from the (i) indicator on top-row equip slots (helmet, amulet1, amulet2, ascension_arms) was clipped by `game-container`'s `overflow: hidden`. Tooltip used `bottom: '110%'` (opens upward) but top-row slots had no room above → visually truncated.
+- **Fix (`src/screens/Inventory.jsx`)**:
+  - Added `TOP_ROW_SLOTS = new Set(['helmet', 'amulet1', 'amulet2', 'ascension_arms'])` constant.
+  - Tooltip positioning now flips direction: top-row slots use `top: '110%'` (opens downward, clears container), all other slots keep `bottom: '110%'` (opens upward).
+  - Header `padding` adjusted from `'12px 16px'` → `'16px 16px 12px'` — extra 4px top breathing room so "GEAR & INVENTORY" title is no longer cramped against the top edge.
