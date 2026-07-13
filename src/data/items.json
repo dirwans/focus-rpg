@@ -375,7 +375,7 @@
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_ore.png?v=10"
+            "image": "/assets/materials/common_ore.png?v=11"
         },
         {
             "id": "ore_ignis_rare",
@@ -386,7 +386,7 @@
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_ore.png?v=10"
+            "image": "/assets/materials/rare_ore.png?v=11"
         },
         {
             "id": "ore_ignis_epic",
@@ -397,7 +397,7 @@
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_ore.png?v=10"
+            "image": "/assets/materials/epic_ore.png?v=11"
         },
         {
             "id": "ore_virel_common",
@@ -408,7 +408,7 @@
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_ore.png?v=10"
+            "image": "/assets/materials/common_ore.png?v=11"
         },
         {
             "id": "ore_virel_rare",
@@ -419,7 +419,7 @@
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_ore.png?v=10"
+            "image": "/assets/materials/rare_ore.png?v=11"
         },
         {
             "id": "ore_virel_epic",
@@ -430,7 +430,7 @@
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_ore.png?v=10"
+            "image": "/assets/materials/epic_ore.png?v=11"
         },
         {
             "id": "ore_kryos_common",
@@ -441,7 +441,7 @@
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_ore.png?v=10"
+            "image": "/assets/materials/common_ore.png?v=11"
         },
         {
             "id": "ore_kryos_rare",
@@ -452,7 +452,7 @@
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_ore.png?v=10"
+            "image": "/assets/materials/rare_ore.png?v=11"
         },
         {
             "id": "ore_kryos_epic",
@@ -463,7 +463,7 @@
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_ore.png?v=10"
+            "image": "/assets/materials/epic_ore.png?v=11"
         },
         {
             "id": "ore_zephra_common",
@@ -474,7 +474,7 @@
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_ore.png?v=10"
+            "image": "/assets/materials/common_ore.png?v=11"
         },
         {
             "id": "ore_zephra_rare",
@@ -485,7 +485,7 @@
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_ore.png?v=10"
+            "image": "/assets/materials/rare_ore.png?v=11"
         },
         {
             "id": "ore_zephra_epic",
@@ -496,7 +496,7 @@
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_ore.png?v=10"
+            "image": "/assets/materials/epic_ore.png?v=11"
         },
         {
             "id": "ore_umbrix_common",
@@ -507,7 +507,7 @@
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_ore.png?v=10"
+            "image": "/assets/materials/common_ore.png?v=11"
         },
         {
             "id": "ore_umbrix_rare",
@@ -518,7 +518,7 @@
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_ore.png?v=10"
+            "image": "/assets/materials/rare_ore.png?v=11"
         },
         {
             "id": "ore_umbrix_epic",
@@ -529,7 +529,7 @@
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_ore.png?v=10"
+            "image": "/assets/materials/epic_ore.png?v=11"
         },
         {
             "id": "shard_ignis_common",
@@ -540,7 +540,7 @@
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_shard.png?v=10"
+            "image": "/assets/materials/common_shard.png?v=11"
         },
         {
             "id": "shard_ignis_rare",
@@ -551,7 +551,7 @@
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_shard.png?v=10"
+            "image": "/assets/materials/rare_shard.png?v=11"
         },
         {
             "id": "shard_ignis_epic",
@@ -562,7 +562,7 @@
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_shard.png?v=10"
+            "image": "/assets/materials/epic_shard.png?v=11"
         },
         {
             "id": "shard_virel_common",
@@ -573,7 +573,7 @@
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_shard.png?v=10"
+            "image": "/assets/materials/common_shard.png?v=11"
         },
         {
             "id": "shard_virel_rare",
@@ -584,7 +584,7 @@
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_shard.png?v=10"
+            "image": "/assets/materials/rare_shard.png?v=11"
         },
         {
             "id": "shard_virel_epic",
@@ -595,7 +595,7 @@
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_shard.png?v=10"
+            "image": "/assets/materials/epic_shard.png?v=11"
         },
         {
             "id": "shard_kryos_common",
@@ -606,7 +606,7 @@
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_shard.png?v=10"
+            "image": "/assets/materials/common_shard.png?v=11"
         },
         {
             "id": "shard_kryos_rare",
@@ -617,7 +617,7 @@
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_shard.png?v=10"
+            "image": "/assets/materials/rare_shard.png?v=11"
         },
         {
             "id": "shard_kryos_epic",
@@ -628,7 +628,7 @@
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_shard.png?v=10"
+            "image": "/assets/materials/epic_shard.png?v=11"
         },
         {
             "id": "shard_zephra_common",
@@ -639,7 +639,7 @@
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_shard.png?v=10"
+            "image": "/assets/materials/common_shard.png?v=11"
         },
         {
             "id": "shard_zephra_rare",
@@ -650,7 +650,7 @@
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_shard.png?v=10"
+            "image": "/assets/materials/rare_shard.png?v=11"
         },
         {
             "id": "shard_zephra_epic",
@@ -661,7 +661,7 @@
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_shard.png?v=10"
+            "image": "/assets/materials/epic_shard.png?v=11"
         },
         {
             "id": "shard_umbrix_common",
@@ -672,7 +672,7 @@
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_shard.png?v=10"
+            "image": "/assets/materials/common_shard.png?v=11"
         },
         {
             "id": "shard_umbrix_rare",
@@ -683,7 +683,7 @@
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_shard.png?v=10"
+            "image": "/assets/materials/rare_shard.png?v=11"
         },
         {
             "id": "shard_umbrix_epic",
@@ -694,7 +694,7 @@
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_shard.png?v=10"
+            "image": "/assets/materials/epic_shard.png?v=11"
         },
         {
             "id": "mat_epic_weapon",
@@ -822,7 +822,7 @@
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_ore.png?v=10"
+            "image": "/assets/materials/common_ore.png?v=11"
         },
         {
             "id": "ore_ignis_uncommon",
@@ -833,7 +833,7 @@
             "race": "All",
             "level": 15,
             "bonus": {},
-            "image": "/assets/materials/uncommon_ore.png?v=10"
+            "image": "/assets/materials/uncommon_ore.png?v=11"
         },
         {
             "id": "ore_ignis_rare",
@@ -844,7 +844,7 @@
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_ore.png?v=10"
+            "image": "/assets/materials/rare_ore.png?v=11"
         },
         {
             "id": "ore_ignis_epic",
@@ -855,7 +855,7 @@
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_ore.png?v=10"
+            "image": "/assets/materials/epic_ore.png?v=11"
         },
         {
             "id": "ore_ignis_legendary",
@@ -866,7 +866,7 @@
             "race": "All",
             "level": 60,
             "bonus": {},
-            "image": "/assets/materials/legendary_ore.png?v=10"
+            "image": "/assets/materials/legendary_ore.png?v=11"
         },
         {
             "id": "ore_ignis_mythic",
@@ -877,7 +877,7 @@
             "race": "All",
             "level": 65,
             "bonus": {},
-            "image": "/assets/materials/mythic_ore.png?v=10"
+            "image": "/assets/materials/mythic_ore.png?v=11"
         },
         {
             "id": "shard_ignis_common",
@@ -888,7 +888,7 @@
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_shard.png?v=10"
+            "image": "/assets/materials/common_shard.png?v=11"
         },
         {
             "id": "shard_ignis_uncommon",
@@ -899,7 +899,7 @@
             "race": "All",
             "level": 15,
             "bonus": {},
-            "image": "/assets/materials/uncommon_shard.png?v=10"
+            "image": "/assets/materials/uncommon_shard.png?v=11"
         },
         {
             "id": "shard_ignis_rare",
@@ -910,7 +910,7 @@
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_shard.png?v=10"
+            "image": "/assets/materials/rare_shard.png?v=11"
         },
         {
             "id": "shard_ignis_epic",
@@ -921,7 +921,7 @@
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_shard.png?v=10"
+            "image": "/assets/materials/epic_shard.png?v=11"
         },
         {
             "id": "shard_ignis_legendary",
@@ -932,7 +932,7 @@
             "race": "All",
             "level": 60,
             "bonus": {},
-            "image": "/assets/materials/legendary_shard.png?v=10"
+            "image": "/assets/materials/legendary_shard.png?v=11"
         },
         {
             "id": "shard_ignis_mythic",
@@ -943,7 +943,7 @@
             "race": "All",
             "level": 65,
             "bonus": {},
-            "image": "/assets/materials/mythic_shard.png?v=10"
+            "image": "/assets/materials/mythic_shard.png?v=11"
         },
         {
             "id": "ore_kryos_common",
@@ -954,7 +954,7 @@
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_ore.png?v=10"
+            "image": "/assets/materials/common_ore.png?v=11"
         },
         {
             "id": "ore_kryos_uncommon",
@@ -965,7 +965,7 @@
             "race": "All",
             "level": 15,
             "bonus": {},
-            "image": "/assets/materials/uncommon_ore.png?v=10"
+            "image": "/assets/materials/uncommon_ore.png?v=11"
         },
         {
             "id": "ore_kryos_rare",
@@ -976,7 +976,7 @@
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_ore.png?v=10"
+            "image": "/assets/materials/rare_ore.png?v=11"
         },
         {
             "id": "ore_kryos_epic",
@@ -987,7 +987,7 @@
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_ore.png?v=10"
+            "image": "/assets/materials/epic_ore.png?v=11"
         },
         {
             "id": "ore_kryos_legendary",
@@ -998,7 +998,7 @@
             "race": "All",
             "level": 60,
             "bonus": {},
-            "image": "/assets/materials/legendary_ore.png?v=10"
+            "image": "/assets/materials/legendary_ore.png?v=11"
         },
         {
             "id": "ore_kryos_mythic",
@@ -1009,7 +1009,7 @@
             "race": "All",
             "level": 65,
             "bonus": {},
-            "image": "/assets/materials/mythic_ore.png?v=10"
+            "image": "/assets/materials/mythic_ore.png?v=11"
         },
         {
             "id": "shard_kryos_common",
@@ -1020,7 +1020,7 @@
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_shard.png?v=10"
+            "image": "/assets/materials/common_shard.png?v=11"
         },
         {
             "id": "shard_kryos_uncommon",
@@ -1031,7 +1031,7 @@
             "race": "All",
             "level": 15,
             "bonus": {},
-            "image": "/assets/materials/uncommon_shard.png?v=10"
+            "image": "/assets/materials/uncommon_shard.png?v=11"
         },
         {
             "id": "shard_kryos_rare",
@@ -1042,7 +1042,7 @@
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_shard.png?v=10"
+            "image": "/assets/materials/rare_shard.png?v=11"
         },
         {
             "id": "shard_kryos_epic",
@@ -1053,7 +1053,7 @@
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_shard.png?v=10"
+            "image": "/assets/materials/epic_shard.png?v=11"
         },
         {
             "id": "shard_kryos_legendary",
@@ -1064,7 +1064,7 @@
             "race": "All",
             "level": 60,
             "bonus": {},
-            "image": "/assets/materials/legendary_shard.png?v=10"
+            "image": "/assets/materials/legendary_shard.png?v=11"
         },
         {
             "id": "shard_kryos_mythic",
@@ -1075,7 +1075,7 @@
             "race": "All",
             "level": 65,
             "bonus": {},
-            "image": "/assets/materials/mythic_shard.png?v=10"
+            "image": "/assets/materials/mythic_shard.png?v=11"
         },
         {
             "id": "ore_virel_common",
@@ -1086,7 +1086,7 @@
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_ore.png?v=10"
+            "image": "/assets/materials/common_ore.png?v=11"
         },
         {
             "id": "ore_virel_uncommon",
@@ -1097,7 +1097,7 @@
             "race": "All",
             "level": 15,
             "bonus": {},
-            "image": "/assets/materials/uncommon_ore.png?v=10"
+            "image": "/assets/materials/uncommon_ore.png?v=11"
         },
         {
             "id": "ore_virel_rare",
@@ -1108,7 +1108,7 @@
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_ore.png?v=10"
+            "image": "/assets/materials/rare_ore.png?v=11"
         },
         {
             "id": "ore_virel_epic",
@@ -1119,7 +1119,7 @@
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_ore.png?v=10"
+            "image": "/assets/materials/epic_ore.png?v=11"
         },
         {
             "id": "ore_virel_legendary",
@@ -1130,7 +1130,7 @@
             "race": "All",
             "level": 60,
             "bonus": {},
-            "image": "/assets/materials/legendary_ore.png?v=10"
+            "image": "/assets/materials/legendary_ore.png?v=11"
         },
         {
             "id": "ore_virel_mythic",
@@ -1141,7 +1141,7 @@
             "race": "All",
             "level": 65,
             "bonus": {},
-            "image": "/assets/materials/mythic_ore.png?v=10"
+            "image": "/assets/materials/mythic_ore.png?v=11"
         },
         {
             "id": "shard_virel_common",
@@ -1152,7 +1152,7 @@
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_shard.png?v=10"
+            "image": "/assets/materials/common_shard.png?v=11"
         },
         {
             "id": "shard_virel_uncommon",
@@ -1163,7 +1163,7 @@
             "race": "All",
             "level": 15,
             "bonus": {},
-            "image": "/assets/materials/uncommon_shard.png?v=10"
+            "image": "/assets/materials/uncommon_shard.png?v=11"
         },
         {
             "id": "shard_virel_rare",
@@ -1174,7 +1174,7 @@
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_shard.png?v=10"
+            "image": "/assets/materials/rare_shard.png?v=11"
         },
         {
             "id": "shard_virel_epic",
@@ -1185,7 +1185,7 @@
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_shard.png?v=10"
+            "image": "/assets/materials/epic_shard.png?v=11"
         },
         {
             "id": "shard_virel_legendary",
@@ -1196,7 +1196,7 @@
             "race": "All",
             "level": 60,
             "bonus": {},
-            "image": "/assets/materials/legendary_shard.png?v=10"
+            "image": "/assets/materials/legendary_shard.png?v=11"
         },
         {
             "id": "shard_virel_mythic",
@@ -1207,7 +1207,7 @@
             "race": "All",
             "level": 65,
             "bonus": {},
-            "image": "/assets/materials/mythic_shard.png?v=10"
+            "image": "/assets/materials/mythic_shard.png?v=11"
         },
         {
             "id": "ore_zephra_common",
@@ -1218,7 +1218,7 @@
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_ore.png?v=10"
+            "image": "/assets/materials/common_ore.png?v=11"
         },
         {
             "id": "ore_zephra_uncommon",
@@ -1229,7 +1229,7 @@
             "race": "All",
             "level": 15,
             "bonus": {},
-            "image": "/assets/materials/uncommon_ore.png?v=10"
+            "image": "/assets/materials/uncommon_ore.png?v=11"
         },
         {
             "id": "ore_zephra_rare",
@@ -1240,7 +1240,7 @@
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_ore.png?v=10"
+            "image": "/assets/materials/rare_ore.png?v=11"
         },
         {
             "id": "ore_zephra_epic",
@@ -1251,7 +1251,7 @@
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_ore.png?v=10"
+            "image": "/assets/materials/epic_ore.png?v=11"
         },
         {
             "id": "ore_zephra_legendary",
@@ -1262,7 +1262,7 @@
             "race": "All",
             "level": 60,
             "bonus": {},
-            "image": "/assets/materials/legendary_ore.png?v=10"
+            "image": "/assets/materials/legendary_ore.png?v=11"
         },
         {
             "id": "ore_zephra_mythic",
@@ -1273,7 +1273,7 @@
             "race": "All",
             "level": 65,
             "bonus": {},
-            "image": "/assets/materials/mythic_ore.png?v=10"
+            "image": "/assets/materials/mythic_ore.png?v=11"
         },
         {
             "id": "shard_zephra_common",
@@ -1284,7 +1284,7 @@
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_shard.png?v=10"
+            "image": "/assets/materials/common_shard.png?v=11"
         },
         {
             "id": "shard_zephra_uncommon",
@@ -1295,7 +1295,7 @@
             "race": "All",
             "level": 15,
             "bonus": {},
-            "image": "/assets/materials/uncommon_shard.png?v=10"
+            "image": "/assets/materials/uncommon_shard.png?v=11"
         },
         {
             "id": "shard_zephra_rare",
@@ -1306,7 +1306,7 @@
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_shard.png?v=10"
+            "image": "/assets/materials/rare_shard.png?v=11"
         },
         {
             "id": "shard_zephra_epic",
@@ -1317,7 +1317,7 @@
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_shard.png?v=10"
+            "image": "/assets/materials/epic_shard.png?v=11"
         },
         {
             "id": "shard_zephra_legendary",
@@ -1328,7 +1328,7 @@
             "race": "All",
             "level": 60,
             "bonus": {},
-            "image": "/assets/materials/legendary_shard.png?v=10"
+            "image": "/assets/materials/legendary_shard.png?v=11"
         },
         {
             "id": "shard_zephra_mythic",
@@ -1339,7 +1339,7 @@
             "race": "All",
             "level": 65,
             "bonus": {},
-            "image": "/assets/materials/mythic_shard.png?v=10"
+            "image": "/assets/materials/mythic_shard.png?v=11"
         },
         {
             "id": "ore_umbrix_common",
@@ -1350,7 +1350,7 @@
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_ore.png?v=10"
+            "image": "/assets/materials/common_ore.png?v=11"
         },
         {
             "id": "ore_umbrix_uncommon",
@@ -1361,7 +1361,7 @@
             "race": "All",
             "level": 15,
             "bonus": {},
-            "image": "/assets/materials/uncommon_ore.png?v=10"
+            "image": "/assets/materials/uncommon_ore.png?v=11"
         },
         {
             "id": "ore_umbrix_rare",
@@ -1372,7 +1372,7 @@
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_ore.png?v=10"
+            "image": "/assets/materials/rare_ore.png?v=11"
         },
         {
             "id": "ore_umbrix_epic",
@@ -1383,7 +1383,7 @@
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_ore.png?v=10"
+            "image": "/assets/materials/epic_ore.png?v=11"
         },
         {
             "id": "ore_umbrix_legendary",
@@ -1394,7 +1394,7 @@
             "race": "All",
             "level": 60,
             "bonus": {},
-            "image": "/assets/materials/legendary_ore.png?v=10"
+            "image": "/assets/materials/legendary_ore.png?v=11"
         },
         {
             "id": "ore_umbrix_mythic",
@@ -1405,7 +1405,7 @@
             "race": "All",
             "level": 65,
             "bonus": {},
-            "image": "/assets/materials/mythic_ore.png?v=10"
+            "image": "/assets/materials/mythic_ore.png?v=11"
         },
         {
             "id": "shard_umbrix_common",
@@ -1416,7 +1416,7 @@
             "race": "All",
             "level": 1,
             "bonus": {},
-            "image": "/assets/materials/common_shard.png?v=10"
+            "image": "/assets/materials/common_shard.png?v=11"
         },
         {
             "id": "shard_umbrix_uncommon",
@@ -1427,7 +1427,7 @@
             "race": "All",
             "level": 15,
             "bonus": {},
-            "image": "/assets/materials/uncommon_shard.png?v=10"
+            "image": "/assets/materials/uncommon_shard.png?v=11"
         },
         {
             "id": "shard_umbrix_rare",
@@ -1438,7 +1438,7 @@
             "race": "All",
             "level": 30,
             "bonus": {},
-            "image": "/assets/materials/rare_shard.png?v=10"
+            "image": "/assets/materials/rare_shard.png?v=11"
         },
         {
             "id": "shard_umbrix_epic",
@@ -1449,7 +1449,7 @@
             "race": "All",
             "level": 50,
             "bonus": {},
-            "image": "/assets/materials/epic_shard.png?v=10"
+            "image": "/assets/materials/epic_shard.png?v=11"
         },
         {
             "id": "shard_umbrix_legendary",
@@ -1460,7 +1460,7 @@
             "race": "All",
             "level": 60,
             "bonus": {},
-            "image": "/assets/materials/legendary_shard.png?v=10"
+            "image": "/assets/materials/legendary_shard.png?v=11"
         },
         {
             "id": "shard_umbrix_mythic",
@@ -1471,7 +1471,7 @@
             "race": "All",
             "level": 65,
             "bonus": {},
-            "image": "/assets/materials/mythic_shard.png?v=10"
+            "image": "/assets/materials/mythic_shard.png?v=11"
         }
     ]
 }

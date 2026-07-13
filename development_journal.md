@@ -2321,6 +2321,12 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 - **Fix** (`public/assets/materials/*_shard.png`): BFS flood-fill dari seed opaque pixels yang bright — hanya menghapus fully opaque (alpha=255) background pixels yang connected. Semi-transparent frost (alpha 1–254) tidak disentuh sama sekali. Common shard kini preserves 470K frost pixels vs 111K background removed.
 - **Cache bust** (`src/data/items.json`): `?v=9` → `?v=10`, 90 referensi diupdate.
 
+### Milestone 176: Shard Aspect Ratio Fix — Anti-Gendut [PENDING DEPLOYMENT]
+- **Problem**: Semua shard portrait (ratio 0.73–0.80, lebih tinggi dari lebar) dipaksa resize ke 320×320 square → horizontal stretch → tampil melebar/gendut di AuditorRoom.
+- **Root Cause**: `out.resize((320, 320), Image.LANCZOS)` tidak mempertahankan aspect ratio. Shard portrait + forced square = melebar.
+- **Fix** (`public/assets/materials/*_shard.png`, kecuali `common_shard` — user sudah ganti sendiri): Resize dengan fit-within 320×320 maintaining aspect ratio, lalu pad ke 320×320 canvas transparan (center-aligned). Content kini 238–256px wide × 320px tall.
+- **Cache bust** (`src/data/items.json`): `?v=10` → `?v=11`, 90 referensi diupdate.
+
 ### Milestone 173: Paper Doll Broken Image & Scaling Fixes + APK Hydration Safety [DEPLOYED]
 - **Bug 1 (Broken Image)**: Weapon and Shield sprites on the Paper Doll threw 404 broken image icons because \PilotSprites.jsx\ incorrectly used a hardcoded fallback string if \item.image\ was null. 
 - **Fix 1 (\PilotSprites.jsx\)**: Imported \esolveItemImage\ from \gameStore.js\ to dynamically resolve accurate weapon/shield URLs, fixing the broken image bug.
