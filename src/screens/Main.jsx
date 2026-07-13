@@ -429,6 +429,9 @@ export default function Main() {
   const expMax  = getExpToNext()
   const expPct  = Math.floor((player.exp / expMax) * 100)
   const race    = player.race ? races[player.race] : null
+  const activeColor = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
+  const accentColor = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
+  const screenBg    = { arctron: 'radial-gradient(circle at 30% 0%, #201a18 0%, #0a0807 60%)', bionex: 'radial-gradient(circle at 30% 0%, #13243a 0%, #060b12 60%)', celestra: 'radial-gradient(circle at 30% 0%, #1a1642 0%, #07061a 60%)' }[player.race] || '#08080d'
   const isDungeon = timer.selectedZone && timer.selectedZone.startsWith('dungeon_')
   const sectorIdx = (player.selectedMapIdx !== undefined && player.selectedMapIdx !== null)
     ? player.selectedMapIdx
