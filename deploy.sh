@@ -3,7 +3,9 @@
 # This script is executed on the VPS to pull, build, and restart the PM2 process.
 
 echo "--- Pulling from GitHub ---"
+git stash
 git pull origin main
+git stash pop || true
 
 echo "--- Removing old dist (fix permissions) ---"
 rm -rf dist
