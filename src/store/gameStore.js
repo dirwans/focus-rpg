@@ -131,7 +131,7 @@ const ARMOR_SET_LINEAGES = {
 // Resolves the sprite for a bespoke default armor-set piece (arctron/helmet/gloves/boots/pants),
 // keyed by race + job lineage + level tier. Returns null if no bespoke set exists yet for
 // that race/lineage — callers should fall back to `item.image` in that case.
-function resolveArmorSetImage(slot, playerRace, playerJob, level) {
+function resolveArmorSetImage(slot, playerRace, playerJob, level, playerGender) {
   let lineage = WARRIOR_JOBS.includes(playerJob) ? 'warrior'
     : TECHNICIAN_JOBS.includes(playerJob) ? 'technician'
     : BOW_JOBS.includes(playerJob) ? 'ranger'
@@ -163,12 +163,15 @@ function resolveArmorSetImage(slot, playerRace, playerJob, level) {
   if (playerRace === 'bionex') {
     return `/assets/bionex/defbionex${lineage}lv${tier}${slot}.png?v=5`
   } else if (playerRace === 'celestra') {
+    if (playerGender === 'male') {
+      return `/assets/celestra/male/defcelestra${lineage}lv${tier}${slot}_male.png?v=14`
+    }
     return `/assets/celestra/defcelestra${lineage}lv${tier}${slot}.png?v=14`
   }
   return `/assets/arctron/def${playerRace}${lineage}lv${tier}${slot}.png?v=6`
 }
 
-export function resolveItemImage(item, playerRace, playerJob) {
+export function resolveItemImage(item, playerRace, playerJob, playerGender) {
   if (!item) return null
   if (item.id === 'tool_mining_pickaxe') {
     const race = playerRace || 'arctron'
@@ -294,7 +297,7 @@ export function resolveItemImage(item, playerRace, playerJob) {
   // `armor_armorset_arctron_lv1`) resolve dynamically by race/job/level tier;
   // pre-existing per-race armor items (e.g. `arm_arctron_1_C`) are untouched.
   if (['armor', 'helmet', 'gloves', 'boots', 'pants'].includes(item.type) && item.id && item.id.includes('_armorset_')) {
-    const bespoke = resolveArmorSetImage(item.type, playerRace, playerJob, item.level)
+    const bespoke = resolveArmorSetImage(item.type, playerRace, playerJob, item.level, playerGender)
     if (bespoke) return bespoke
   }
   if (item.type === 'ascension_arms') {

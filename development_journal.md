@@ -2361,3 +2361,9 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 - **Bug**: The avatar ring in the BASE tab was stacking all equipped gears (Paper Doll) into a 36x36 bubble, resulting in a squished/broken image icon if gears were missing or too detailed.
 - **Fix**: Added \showGears={false}\ and \upperBodyOnly={true}\ to the \PilotSprite\ call inside \Main.jsx\ so the profile pic only shows the clean base character headshot across all factions.
 
+
+### Milestone 176: Male-Specific Gear AI Generation [PENDING DEPLOYMENT]
+- **Generation**: Utilized AI Image Generator to create 5 hyperrealistic 2.5D anime mecha gear assets (Helmet, Armor, Pants, Boots, Gloves) specifically for the Celestra Male Warrior Lv1.
+- **Processing**: Used a new Python script (\process_composite.py\) to strip backgrounds without cropping the bounding box, preserving perfect 320x320 alignment.
+- **Integration**: Updated \gameStore.js\ (\esolveItemImage\ & \esolveArmorSetImage\) and \PilotSprites.jsx\ to intelligently detect \playerGender\ and route Male Celestra Warriors to a new isolated asset directory: \public/assets/celestra/male/\ using the \_male.png\ suffix, ensuring the original default assets remain 100% untouched.
+

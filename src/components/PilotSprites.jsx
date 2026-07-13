@@ -161,10 +161,14 @@ function PaperDollStack({ baseSprite, player, size, width, height, style: extraS
   
   const getGearImg = (item, slot) => {
     if (!item) return null
-    let img = resolveItemImage(item, player.race, player.job)
+    let img = resolveItemImage(item, player.race, player.job, player.gender)
     if (!img) img = item.image
     if (!img) {
-      img = `/assets/${player.race}/def${player.race}${lane}lv1${slot}.png`
+      if (player.race === 'celestra' && player.gender === 'male') {
+        img = `/assets/celestra/male/defcelestra${lane}lv1${slot}_male.png`
+      } else {
+        img = `/assets/${player.race}/def${player.race}${lane}lv1${slot}.png`
+      }
     }
     return img.split('?')[0]
   }
