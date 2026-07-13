@@ -63,6 +63,7 @@ export default function AuditorRoom() {
   const [simItem, setSimItem] = useState(null)
   
   const [targetItem, setTargetItem] = useState(null)
+  const [recipeName, setRecipeName] = useState('')
   const [recipeSlots, setRecipeSlots] = useState([null, null, null, null, null])
   const [activeSlotIndex, setActiveSlotIndex] = useState(null)
   const [chances, setChances] = useState({ success: 65, destroy: 20, great: 10, bonus: 5 })
@@ -70,14 +71,50 @@ export default function AuditorRoom() {
   const [outputStats, setOutputStats] = useState([])
   const [recipeLogs, setRecipeLogs] = useState([])
 
+  React.useEffect(() => {
+    setRecipeName(targetItem ? (targetItem.id || targetItem.name || '') : '')
+  }, [targetItem])
+
+  const parsePetunjuk = (id = '') => {
+    const s = id.toLowerCase()
+    const badges = []
+    if (s.includes('arc') && !s.includes('_cor_arc_')) badges.push({ label: 'ARCTRON', color: '#ff6400' })
+    else if (s.includes('bio')) badges.push({ label: 'BIONEX', color: '#3b82f6' })
+    else if (s.includes('cel') || (s.includes('cor') && !s.includes('arc'))) badges.push({ label: 'CELESTRA', color: '#a855f7' })
+    const lvMatch = s.match(/lv(\d+)/)
+    if (lvMatch) badges.push({ label: `LV.${lvMatch[1]}`, color: '#00e5ff' })
+    const paths = ['warrior','ranger','technician','guardian','marksman','engineer','psion','sentinel','pathfinder','oracle','arcanist','mage','summoner']
+    const foundPath = paths.find(p => s.includes(p))
+    if (foundPath) badges.push({ label: foundPath.toUpperCase(), color: '#00ff88' })
+    const parts = ['helmet','armor','pants','gloves','boots','weapon','shield','amulet','ring']
+    const foundPart = parts.find(p => s.includes(p))
+    if (foundPart) badges.push({ label: foundPart.toUpperCase(), color: '#f59e0b' })
+    return badges
+  }
+
+  const generateFancyName = (id = '') => {
+    const s = id.toLowerCase()
+    let race = ''
+    if (s.includes('arc') && !s.includes('_cor_arc_')) race = 'Arctron'
+    else if (s.includes('bio')) race = 'Bionex'
+    else if (s.includes('cel') || (s.includes('cor') && !s.includes('arc'))) race = 'Celestra'
+    const lvMatch = s.match(/lv(\d+)/); const lv = lvMatch ? `Lv.${lvMatch[1]}` : ''
+    const paths = ['warrior','ranger','technician','guardian','marksman','engineer','psion','sentinel','pathfinder','oracle','arcanist','mage','summoner']
+    const path = paths.find(p => s.includes(p)) || ''
+    const parts = ['helmet','armor','pants','gloves','boots','weapon','shield','amulet','ring']
+    const part = parts.find(p => s.includes(p)) || ''
+    const cap = w => w.charAt(0).toUpperCase() + w.slice(1)
+    return [race, lv, cap(path), cap(part)].filter(Boolean).join(' ')
+  }
+
   const handleSaveRecipe = async () => {
     if (!targetItem) return alert("Pilih Target Item dulu di kotak kanan atas!");
     const statsSummary = outputStats.length > 0 ? ` [${outputStats.map(s => `${s.stat} +${s.val}`).join(', ')}]` : '';
-    setRecipeLogs(prev => [`> Resep ${targetItem.name || targetItem.id} (${outputGrade}) disimpan!${statsSummary}`, ...prev].slice(0, 5));
-    
+    setRecipeLogs(prev => [`> Resep ${recipeName || targetItem.id} (${outputGrade}) disimpan!${statsSummary}`, ...prev].slice(0, 5));
+
     const recPayload = {
       id: targetItem.id || targetItem.code || targetItem.name,
-      name: targetItem.name || targetItem.id,
+      name: recipeName || targetItem.id,
       category: tab,
       grade: outputGrade,
       chances,
@@ -412,7 +449,7 @@ export default function AuditorRoom() {
                     const linLabel = lin.charAt(0).toUpperCase() + lin.slice(1);
                     arr.push({
                       id: `${set.id}_${partLower}_${lin}`,
-                      name: `${set.name.replace(' Set', '')} ${part} (${linLabel})`,
+                      name: `${set.id}_${partLower}_${lin}`,
                       grade: set.grade,
                       type: partLower,
                       stats: set.stats?.[part] || {},
@@ -609,14 +646,7 @@ export default function AuditorRoom() {
            });
         }
         if (['helmet', 'armor', 'pants', 'gloves', 'boots'].includes(craftCategory)) {
-           const list = allGears.filter(i => i.type && i.type.toLowerCase().includes(craftCategory));
-           const seen = new Set();
-           return list.filter(i => {
-              const baseName = (i.name || '').split(' (')[0].trim().toLowerCase();
-              if (seen.has(baseName)) return false;
-              seen.add(baseName);
-              return true;
-           });
+           return allGears.filter(i => i.type && i.type.toLowerCase().includes(craftCategory));
         }
         return allGears;
       }
@@ -917,7 +947,7 @@ export default function AuditorRoom() {
 
   const activeData = getActiveArray()
   const filteredData = activeData.filter(i => !searchTerm || (i.name && i.name.toLowerCase().includes(searchTerm.toLowerCase())) || (i.id && i.id.toLowerCase().includes(searchTerm.toLowerCase())))
-  const PAGE_SIZE = tab === 'crafting' ? 20 : (tab === 'gears' ? 250 : 100)
+  const PAGE_SIZE = tab === 'crafting' ? 16 : (tab === 'gears' ? 250 : 100)
   const totalPages = Math.ceil(filteredData.length / PAGE_SIZE)
   const paginatedData = filteredData.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)
 
@@ -1093,7 +1123,7 @@ export default function AuditorRoom() {
                                         ))}
                                     </div>
                                   )}
-                                  <div style={{ padding: '14px', display: 'grid', gridTemplateColumns: 'repeat(5, 56px)', gap: '10px', minHeight: '230px', alignContent: 'start', justifyContent: 'center' }}>
+                                  <div style={{ padding: '12px', display: 'grid', gridTemplateColumns: 'repeat(4, 84px)', gap: '8px', alignContent: 'start', justifyContent: 'center' }}>
                                       {paginatedData.map((item, idx) => (
                                           <div key={idx} 
                                                draggable="true"
@@ -1132,50 +1162,43 @@ export default function AuditorRoom() {
                                                       }
                                                       setTargetItem(item);
                                                   }
-                                               }} style={{ 
-                                              width: '56px',
-                                              height: '56px',
-                                              background: 'radial-gradient(circle at center, #18283c 0%, #0a0e16 100%)', 
-                                              border: '1px solid rgba(0, 229, 255, 0.45)', 
-                                              borderRadius: '6px',
-                                              boxShadow: '0 0 8px rgba(0, 229, 255, 0.15), inset 0 0 10px rgba(0, 229, 255, 0.18)',
-                                              display: 'flex', 
-                                              alignItems: 'center', 
-                                              justifyContent: 'center', 
-                                              cursor: 'pointer',
-                                              padding: '3px',
-                                              position: 'relative',
-                                              transition: 'all 0.2s ease'
-                                          }} title={item.name || item.id}>
-                                              {item._imagePreview && <img src={item._imagePreview} style={{ width: '92%', height: '92%', objectFit: 'contain', filter: 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.85)) brightness(1.35) contrast(1.2)' }} />}
-                                              {/* Level / Tier Label Overlay */}
-                                              <div style={{
-                                                  position: 'absolute',
-                                                  bottom: '2px',
-                                                  right: '2px',
-                                                  background: 'rgba(0, 0, 0, 0.8)',
-                                                  color: '#00e5ff',
-                                                  fontSize: '8px',
-                                                  padding: '1px 3px',
-                                                  borderRadius: '3px',
-                                                  fontWeight: 'bold',
-                                                  pointerEvents: 'none',
-                                                  border: '1px solid rgba(0, 229, 255, 0.35)',
-                                                  textTransform: 'uppercase',
-                                                  zIndex: 2
-                                              }}>
-                                                  {item.type && ['helmet', 'armor', 'pants', 'gloves', 'boots', 'weapon', 'shield'].some(t => item.type.toLowerCase().includes(t)) || (item.id && (item.id.includes('wpn_') || item.id.includes('shd_') || item.id.includes('set_') || item.id.includes('gw_'))) ? (
-                                                      `Lv.${item._level || '32'}`
-                                                  ) : (
-                                                      item.id && (item.id.includes('rng_') || item.id.includes('amu_')) ? (
-                                                          `Lv.${{ '0': '1', '1': '30', '2': '40', '3': '50', '4': '55' }[item._level] || '1'}`
-                                                      ) : (item.grade ? item.grade.substring(0, 3) : '')
-                                                  )}
+                                               }} style={(() => {
+                                                const pb = parsePetunjuk(item.id || '')
+                                                const rc = pb.find(b => ['ARCTRON','BIONEX','CELESTRA'].includes(b.label))
+                                                const bc = rc ? rc.color : '#00e5ff'
+                                                return {
+                                                  width: '84px', height: '98px',
+                                                  background: 'radial-gradient(circle at center, #18283c 0%, #0a0e16 100%)',
+                                                  border: `1.5px solid ${bc}55`,
+                                                  borderRadius: '8px',
+                                                  boxShadow: `0 0 6px ${bc}18`,
+                                                  display: 'flex', flexDirection: 'column',
+                                                  cursor: 'pointer', overflow: 'hidden',
+                                                  position: 'relative', transition: 'all 0.2s ease'
+                                                }
+                                              })()} title={item.name || item.id}>
+                                              {/* Image */}
+                                              <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '4px' }}>
+                                                {item._imagePreview && <img src={item._imagePreview} style={{ width: '72px', height: '68px', objectFit: 'contain', filter: 'drop-shadow(0 0 6px rgba(255,255,255,0.75)) brightness(1.3) contrast(1.1)' }} />}
                                               </div>
+                                              {/* Bottom strip — LV + PATH */}
+                                              {(() => {
+                                                const pb = parsePetunjuk(item.id || '')
+                                                const lv = pb.find(b => b.label.startsWith('LV.'))
+                                                const path = pb.find(b => ['WARRIOR','RANGER','TECHNICIAN','GUARDIAN','MARKSMAN','ENGINEER','PSION','SENTINEL','PATHFINDER','ORACLE','ARCANIST','MAGE','SUMMONER'].includes(b.label))
+                                                const rc = pb.find(b => ['ARCTRON','BIONEX','CELESTRA'].includes(b.label))
+                                                const bc = rc ? rc.color : '#00e5ff'
+                                                return (
+                                                  <div style={{ background: 'rgba(0,0,0,0.82)', borderTop: `1px solid ${bc}30`, display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '2px 5px', height: '20px', flexShrink: 0 }}>
+                                                    <span style={{ color: '#00e5ff', fontSize: '10px', fontWeight: 800, fontFamily: 'monospace', letterSpacing: 0.5 }}>{lv ? lv.label : (item.grade ? item.grade.slice(0,3) : '—')}</span>
+                                                    {path && <span style={{ color: path.color, fontSize: '9px', fontWeight: 700, fontFamily: 'monospace', opacity: 0.9 }}>{path.label.slice(0,4)}</span>}
+                                                  </div>
+                                                )
+                                              })()}
                                           </div>
                                       ))}
-                                      {Array.from({length: Math.max(0, 20 - paginatedData.length)}).map((_, i) => (
-                                          <div key={`empty-${i}`} style={{ width: '56px', height: '56px', border: '1px dashed #1e2a3a', borderRadius: '6px', background: 'rgba(0,0,0,0.3)' }}></div>
+                                      {Array.from({length: Math.max(0, 16 - paginatedData.length)}).map((_, i) => (
+                                          <div key={`empty-${i}`} style={{ width: '84px', height: '98px', border: '1px dashed #1e2a3a', borderRadius: '8px', background: 'rgba(0,0,0,0.2)' }}></div>
                                       ))}
                                   </div>
                                   <div style={{ display: 'flex', padding: '12px', borderTop: '1px solid #2a3a5a', background: '#10141e', color: '#aaa', fontSize: '12px', marginTop: 'auto' }}>
@@ -1216,9 +1239,33 @@ export default function AuditorRoom() {
                                       onClick={() => setTargetItem(null)} style={{ width: '52px', height: '52px', border: '1px solid rgba(0, 229, 255, 0.6)', background: '#0a101a', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', padding: '3px' }}>
                                       {targetItem ? (targetItem._imagePreview ? <img src={targetItem._imagePreview} style={{ width: '95%', height: '95%', objectFit: 'contain', filter: 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.85)) brightness(1.35)' }} /> : 'X') : <span style={{color: '#444', fontSize: '20px'}}>?</span>}
                                   </div>
-                                  <div style={{ flex: 1 }}>
+                                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '5px' }}>
                                       <div className="simulator-title" style={{ fontSize: '10px', color: '#00e5ff', textTransform: 'uppercase', fontWeight: 'bold' }}>{tab === 'enhance' ? 'Target Item (To Enhance)' : 'Target Item (Hasil)'}</div>
-                                      <div style={{ color: '#fff', fontSize: '15px', fontWeight: 'bold', marginTop: '3px' }}>{targetItem ? targetItem.name || targetItem.id : 'Pilih dari Database'}</div>
+                                      {targetItem ? (
+                                        <>
+                                          <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
+                                            {parsePetunjuk(targetItem.id).map((b, i) => (
+                                              <span key={i} style={{ fontSize: '9px', fontWeight: 700, padding: '1px 5px', borderRadius: 3, background: `${b.color}22`, border: `1px solid ${b.color}66`, color: b.color, fontFamily: 'monospace', letterSpacing: 0.5 }}>{b.label}</span>
+                                            ))}
+                                          </div>
+                                          <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
+                                            <input
+                                              value={recipeName}
+                                              onChange={e => setRecipeName(e.target.value)}
+                                              placeholder={targetItem.id}
+                                              onClick={e => e.stopPropagation()}
+                                              style={{ flex: 1, background: '#0c1018', border: '1px solid #2a3a5a', color: '#fff', padding: '3px 7px', borderRadius: 4, fontSize: 12, fontFamily: 'monospace' }}
+                                            />
+                                            <button
+                                              onClick={e => { e.stopPropagation(); setRecipeName(generateFancyName(targetItem.id)) }}
+                                              title="Auto-generate fancy name"
+                                              style={{ background: '#1a1030', border: '1px solid #a855f7', color: '#d9acff', borderRadius: 4, padding: '3px 6px', fontSize: 11, cursor: 'pointer', whiteSpace: 'nowrap' }}
+                                            >✨ Script</button>
+                                          </div>
+                                        </>
+                                      ) : (
+                                        <div style={{ color: '#555', fontSize: '13px', marginTop: 2 }}>Pilih dari Database</div>
+                                      )}
                                   </div>
                               </div>
 
@@ -1362,6 +1409,39 @@ export default function AuditorRoom() {
                                       </div>
                                   </div>
                               </div>
+
+                              {/* Live Description Preview */}
+                              {targetItem && (
+                                <div style={{ background: '#070c14', border: '1px solid #1e2d44', borderRadius: 6, padding: '8px 10px', fontSize: 11, lineHeight: 1.6 }}>
+                                  <div style={{ color: '#00e5ff', fontWeight: 700, fontFamily: 'monospace', marginBottom: 4, fontSize: 10, letterSpacing: 1 }}>📋 LIVE PREVIEW</div>
+                                  <div style={{ color: '#fff', fontFamily: 'monospace', fontWeight: 700 }}>{recipeName || targetItem.id}</div>
+                                  <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', margin: '3px 0' }}>
+                                    {parsePetunjuk(targetItem.id).map((b, i) => (
+                                      <span key={i} style={{ fontSize: 9, padding: '0 4px', borderRadius: 2, background: `${b.color}18`, border: `1px solid ${b.color}44`, color: b.color, fontFamily: 'monospace' }}>{b.label}</span>
+                                    ))}
+                                  </div>
+                                  <div style={{ borderTop: '1px dashed #1e2d44', marginTop: 5, paddingTop: 5 }}>
+                                    <span style={{ color: '#888', fontSize: 10 }}>Materials: </span>
+                                    {recipeSlots.filter(Boolean).length === 0
+                                      ? <span style={{ color: '#444', fontStyle: 'italic' }}>—</span>
+                                      : recipeSlots.filter(Boolean).map((s, i) => (
+                                          <span key={i} style={{ color: '#a0c8ff' }}>{i > 0 ? ' + ' : ''}{s.name || s.id}</span>
+                                        ))
+                                    }
+                                  </div>
+                                  <div style={{ color: '#888', fontSize: 10, marginTop: 3 }}>
+                                    Grade: <span style={{ color: '#f59e0b' }}>{outputGrade}</span>
+                                    {'  '}Succ: <span style={{ color: '#00ff88' }}>{chances.success}%</span>
+                                    {'  '}Destroy: <span style={{ color: '#ff5566' }}>{chances.destroy}%</span>
+                                    {'  '}Great: <span style={{ color: '#a855f7' }}>{chances.great}%</span>
+                                  </div>
+                                  {outputStats.length > 0 && (
+                                    <div style={{ color: '#888', fontSize: 10, marginTop: 2 }}>
+                                      Stats: {outputStats.map((s, i) => <span key={i} style={{ color: '#00ff88' }}>{i > 0 ? ', ' : ''}{s.stat} +{s.val}</span>)}
+                                    </div>
+                                  )}
+                                </div>
+                              )}
 
                               <button onClick={handleSaveRecipe} className="simulator-title" style={{ background: 'linear-gradient(90deg, #00e5ff, #00b8cc)', color: '#040915', border: 'none', padding: '14px', borderRadius: '6px', fontWeight: 'bold', fontSize: '13px', cursor: 'pointer', marginTop: 'auto', boxShadow: '0 0 15px rgba(0, 229, 255, 0.4)', transition: 'all 0.2s' }}>
                                   {tab === 'enhance' ? '💾 SAVE ENHANCEMENT' : '💾 SAVE RECIPE'}
