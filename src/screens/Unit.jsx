@@ -4,7 +4,6 @@ import races from '../data/races.json'
 import jobs from '../data/jobs.json'
 import archonData from '../data/archon.json'
 import { PilotSprite } from '../components/PilotSprites'
-import { SPRITE_CALIBRATIONS } from '../data/spriteCalibrations'
 import { t } from '../lib/translate'
 import { useEffect } from 'react'
 

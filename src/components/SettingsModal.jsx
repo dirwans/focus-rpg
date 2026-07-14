@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useGameStore } from '../store/gameStore'
 import { t } from '../lib/translate'
+import DragonBonesTest from './DragonBonesTest'
 
 export default function SettingsModal({ onClose }) {
   const [tab, setTab] = useState('game')
@@ -45,6 +46,7 @@ export default function SettingsModal({ onClose }) {
           <button style={tab === 'game' ? styles.tabActive : styles.tab} onClick={() => setTab('game')}>Game</button>
           <button style={tab === 'alerts' ? styles.tabActive : styles.tab} onClick={() => setTab('alerts')}>Alerts</button>
           <button style={tab === 'system' ? styles.tabActive : styles.tab} onClick={() => setTab('system')}>System</button>
+          <button style={tab === 'prototype' ? styles.tabActive : styles.tab} onClick={() => setTab('prototype')}>🧪 Prototype</button>
         </div>
 
         {tab === 'game' && (
@@ -293,6 +295,12 @@ export default function SettingsModal({ onClose }) {
               </div>
             </div>
 
+          </div>
+        )}
+
+        {tab === 'prototype' && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+            <DragonBonesTest />
           </div>
         )}
 
