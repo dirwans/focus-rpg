@@ -129,39 +129,13 @@ export default function Unit() {
   const [activeBag, setActiveBag] = useState(null)
   const [selectedBagItem, setSelectedBagItem] = useState(null)
 
-  // Paper-Doll Calibration State
-  const [calOpen, setCalOpen] = useState(false)
-  const [calSlot, setCalSlot] = useState('helmet')
-  const [calX, setCalX] = useState(33)
-  const [calY, setCalY] = useState(3)
-  const [calScale, setCalScale] = useState(34)
-  const [calRotate, setCalRotate] = useState(0)
-  const [showGears, setShowGears] = useState(true)
+
 
   const unequipItem = useGameStore((s) => s.unequipItem)
   const equipItem = useGameStore((s) => s.equipItem)
   const player = useGameStore((s) => s.player)
 
-  useEffect(() => {
-    if (!player) return
-    const warriorJobs = ['cadet', 'iron_trooper', 'iron_vanguard', 'recruit', 'vanguard', 'titan_pilot', 'guardian', 'spirit_knight', 'lumina_paladin', 'sentinel', 'warden', 'knight', 'blademaster', 'warrior', 'juggernaut', 'dreadnought']
-    const rangerJobs = ['ranger', 'siege_gunner', 'nova_destroyer', 'sharpshooter', 'railgun_elite', 'mystic_archer', 'moon_ranger', 'star_seeker', 'pathfinder', 'windrunner', 'shadow_hunter', 'stargazer', 'marksman', 'railgunner', 'annihilator']
-    const mysticJobs = ['caster', 'warlock', 'dark_priest', 'grazier', 'arcanist', 'rune_caster', 'mystic', 'archmage']
 
-    let lane = 'specialist'
-    if (warriorJobs.includes(player.job)) lane = 'warrior'
-    else if (rangerJobs.includes(player.job)) lane = 'ranger'
-    else if (mysticJobs.includes(player.job)) lane = 'mystic'
-
-    const defaults = { top: '0%', left: '0%', width: '100%', transform: 'rotate(0deg)' }
-
-    setCalX(parseInt(defaults.left || '0'))
-    setCalY(parseInt(defaults.top || '0'))
-    setCalScale(parseInt(defaults.width || '100'))
-
-    const rotMatch = (defaults.transform || '').match(/rotate\(([-\d]+)deg\)/)
-    setCalRotate(rotMatch ? parseInt(rotMatch[1]) : 0)
-  }, [calSlot, player?.race, player?.job, player?.gender])
   const archons = useGameStore((s) => s.archons)
   const getStats = useGameStore((s) => s.getStats)
   const getExpToNext = useGameStore((s) => s.getExpToNext)
@@ -738,57 +712,6 @@ export default function Unit() {
                   <svg width="15" height="17" viewBox="0 0 16 18"><polygon points="8,0 16,4.5 16,13.5 8,18 0,13.5 0,4.5" fill={fp} fillOpacity="0.85" stroke={fp} strokeWidth="1"/></svg>
                   <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 800, letterSpacing: 2, color: fa }}>{label}</span>
                 </div>
-                <button
-                  onClick={() => setCalOpen(o => !o)}
-                  style={{
-                    position: 'absolute',
-                    top: 52,
-                    left: 12,
-                    zIndex: 5,
-                    background: 'rgba(8,22,36,0.65)',
-                    backdropFilter: 'blur(4px)',
-                    border: `1px solid ${fp}80`,
-                    color: '#fff',
-                    borderRadius: '12px',
-                    padding: '3px 8px',
-                    fontSize: '10px',
-                    fontWeight: 'bold',
-                    fontFamily: "'Orbitron', sans-serif",
-                    cursor: 'pointer'
-                  }}
-                >
-                  {calOpen ? 'CLOSE CAL' : 'CALIBRATE ⚙️'}
-                </button>
-                <button
-                  onClick={() => setShowGears(g => !g)}
-                  style={{
-                    position: 'absolute',
-                    top: 52,
-                    right: 12,
-                    zIndex: 5,
-                    background: showGears 
-                      ? `linear-gradient(135deg, ${fp}, #6366f1)` 
-                      : 'linear-gradient(135deg, #2a2a2e, #141416)',
-                    border: showGears 
-                      ? `1px solid ${fa}` 
-                      : '1px solid #4b5563',
-                    color: showGears ? '#ffffff' : '#9ca3af',
-                    borderRadius: '16px',
-                    padding: '4px 12px',
-                    fontSize: '9px',
-                    fontWeight: 'bold',
-                    fontFamily: "'Orbitron', sans-serif",
-                    letterSpacing: '1.2px',
-                    textTransform: 'uppercase',
-                    cursor: 'pointer',
-                    boxShadow: showGears 
-                      ? `0 0 12px ${fp}66, inset 0 0 4px rgba(255,255,255,0.4)` 
-                      : '0 4px 8px rgba(0,0,0,0.3)',
-                    transition: 'all 0.3s ease',
-                  }}
-                >
-                  {showGears ? 'GEAR ON' : 'GEAR OFF'}
-                </button>
                 <div style={{ position: 'absolute', bottom: 6, left: '50%', transform: 'translateX(-50%)', animation: 'heroFloat 5.4s ease-in-out infinite', zIndex: 2 }}>
                   {bionexSprite ? (
                     <img src={bionexSprite} alt={player.job} style={{ height: 298, width: 'auto', filter: `drop-shadow(0 18px 24px rgba(0,0,0,0.6)) drop-shadow(0 0 30px ${fp}33)` }} />
@@ -801,96 +724,9 @@ export default function Unit() {
                       height={298} 
                       fill={false} 
                       style={{ filter: `drop-shadow(0 18px 24px rgba(0,0,0,0.6)) drop-shadow(0 0 30px ${fp}33)` }} 
-                      showGears={showGears}
-                      calibrationOverride={calOpen ? {
-                        [calSlot]: {
-                          top: `${calY}%`,
-                          left: `${calX}%`,
-                          width: `${calScale}%`,
-                          transform: `rotate(${calRotate}deg)`
-                        }
-                      } : null}
                     />
                   )}
                 </div>
-                {calOpen && (
-                  <div style={{
-                    position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    background: 'rgba(15, 12, 18, 0.95)',
-                    borderTop: `2px solid ${fp}`,
-                    padding: '8px 12px',
-                    zIndex: 10,
-                    fontSize: '11px',
-                    fontFamily: 'monospace',
-                    color: '#fff',
-                    borderRadius: '0 0 14px 14px'
-                  }} onClick={(e) => e.stopPropagation()}>
-                    <div style={{ display: 'flex', gap: 5, marginBottom: 5, overflowX: 'auto', paddingBottom: 3 }}>
-                      {['helmet', 'armor', 'pants', 'boots', 'gloves', 'weapon', 'shield', 'mantle', 'amulet1', 'amulet2', 'ring1', 'ring2'].map(slot => (
-                        <button
-                          key={slot}
-                          onClick={() => setCalSlot(slot)}
-                          style={{
-                            background: calSlot === slot ? fp : 'rgba(255,255,255,0.1)',
-                            border: 'none',
-                            color: '#fff',
-                            padding: '2px 6px',
-                            borderRadius: 3,
-                            fontSize: '9px',
-                            textTransform: 'uppercase',
-                            fontWeight: 'bold',
-                            cursor: 'pointer'
-                          }}
-                        >
-                          {slot}
-                        </button>
-                      ))}
-                    </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                      <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <span style={{ width: 60, color: fa }}>X (Left):</span>
-                        <input type="range" min="-100" max="150" value={calX} onChange={(e) => setCalX(parseInt(e.target.value))} style={{ flex: 1 }} />
-                        <span style={{ width: 35, textAlign: 'right' }}>{calX}%</span>
-                      </div>
-                      <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <span style={{ width: 60, color: fa }}>Y (Top):</span>
-                        <input type="range" min="-100" max="150" value={calY} onChange={(e) => setCalY(parseInt(e.target.value))} style={{ flex: 1 }} />
-                        <span style={{ width: 35, textAlign: 'right' }}>{calY}%</span>
-                      </div>
-                      <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <span style={{ width: 60, color: fa }}>Width:</span>
-                        <input type="range" min="5" max="200" value={calScale} onChange={(e) => setCalScale(parseInt(e.target.value))} style={{ flex: 1 }} />
-                        <span style={{ width: 35, textAlign: 'right' }}>{calScale}%</span>
-                      </div>
-                      <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <span style={{ width: 60, color: fa }}>Rotate:</span>
-                        <input type="range" min="-180" max="180" value={calRotate} onChange={(e) => setCalRotate(parseInt(e.target.value))} style={{ flex: 1 }} />
-                        <span style={{ width: 35, textAlign: 'right' }}>{calRotate}°</span>
-                      </div>
-                    </div>
-                    <div style={{ marginTop: 6, display: 'flex', alignItems: 'center', gap: 5 }}>
-                      <span style={{ color: '#aaa', fontSize: '9px' }}>JSON:</span>
-                      <input
-                        readOnly
-                        value={`"${calSlot}": { top: "${calY}%", left: "${calX}%", width: "${calScale}%", transform: "rotate(${calRotate}deg)" }`}
-                        style={{
-                          flex: 1,
-                          background: 'rgba(0,0,0,0.5)',
-                          border: 'none',
-                          color: '#00ffcc',
-                          fontSize: '9px',
-                          padding: '2px 4px',
-                          fontFamily: 'monospace',
-                          borderRadius: 2
-                        }}
-                        onClick={(e) => e.target.select()}
-                      />
-                    </div>
-                  </div>
-                )}
 
               </div>
             )

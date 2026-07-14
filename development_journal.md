@@ -2395,3 +2395,4 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
   - Supports switching animations (`idle`, `walk`, `attack_01`, `aim`, `death`, etc.) and testing slot swaps (`replaceSlotDisplay`) via runtime texture replacements.
   - Mounted the prototype in a new dedicated tab under [SettingsModal.jsx](file:///c:/projects/focus-rpg/src/components/SettingsModal.jsx) for local testing.
 - **ReferenceError Hotfix**: Fixed a console crash in [Unit.jsx](file:///c:/projects/focus-rpg/src/screens/Unit.jsx) where a lingering reference to `SPRITE_CALIBRATIONS` threw an `Uncaught ReferenceError`. Replaced it with static default values.
+- **Obsolete UI Cleanup**: Removed the obsolete `CALIBRATE` and `GEAR ON/OFF` buttons, state variables (`calOpen`, `calSlot`, etc.), `useEffect` hook, and the bottom calibration range sliders overlay panel from [Unit.jsx](file:///c:/projects/focus-rpg/src/screens/Unit.jsx).
