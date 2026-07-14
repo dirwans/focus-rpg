@@ -3,8 +3,8 @@ import DragonBonesCharacter from './DragonBonesCharacter'
 
 const RACE_DEFAULTS = {
   arctron: {
-    weapon: { top: '38%', left: '5%', width: '38%', height: 'auto', transform: 'rotate(-10deg)', zIndex: 3 },
-    shield: { top: '32%', left: '55%', width: '38%', height: 'auto', transform: 'rotate(10deg)', zIndex: 1 }
+    weapon: { top: '42%', left: '-8%', width: '48%', height: 'auto', transform: 'rotate(-20deg)', zIndex: 3 },
+    shield: { top: '38%', left: '60%', width: '45%', height: 'auto', transform: 'rotate(15deg)', zIndex: 1 }
   },
   bionex: {
     weapon: { top: '45%', left: '10%', width: '30%', height: 'auto', transform: 'rotate(-15deg)', zIndex: 3 },
@@ -250,11 +250,7 @@ function PaperDollStack({ baseSprite, player, size, width, height, style: extraS
   )
 }
 
-export function PilotSprite({ race, job, size = 60, width, height, upperBodyOnly = false, fill = false, isBattle = false, gender = 'male', style, calibrationOverride, showGears = true, isLarge }) {
-  if (race === 'arctron' && (height >= 200 || isLarge)) {
-    return <DragonBonesCharacter size={size} width={width} height={height} style={style} />
-  }
-
+export function PilotSprite({ race, job, size = 60, width, height, upperBodyOnly = false, fill = false, isBattle = false, gender = 'male', style, calibrationOverride, showGears = true }) {
   const player = useGameStore((s) => s.player)
   const isSelf = player && player.race === race && player.gender === gender && player.job === job
 
