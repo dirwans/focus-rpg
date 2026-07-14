@@ -724,6 +724,7 @@ export default function Unit() {
                       height={298} 
                       fill={false} 
                       style={{ filter: `drop-shadow(0 18px 24px rgba(0,0,0,0.6)) drop-shadow(0 0 30px ${fp}33)` }} 
+                      isLarge={true}
                     />
                   )}
                 </div>

@@ -1,4 +1,5 @@
 import { useGameStore } from '../store/gameStore'
+import DragonBonesCharacter from './DragonBonesCharacter'
 
 function getJobLane(jobId) {
   if (!jobId) return 'warrior'
@@ -144,7 +145,11 @@ export function EnemySprite({ size = 60, isBoss = false }) {
   )
 }
 
-export function PilotSprite({ race, job, size = 60, width, height, upperBodyOnly = false, fill = false, isBattle = false, gender = 'male', style }) {
+export function PilotSprite({ race, job, size = 60, width, height, upperBodyOnly = false, fill = false, isBattle = false, gender = 'male', style, isLarge }) {
+  if (race === 'arctron' && (height >= 200 || isLarge)) {
+    return <DragonBonesCharacter size={size} width={width} height={height} style={style} />
+  }
+
   let baseSprite = null
   if (race === 'arctron') {
     baseSprite = <ArctronSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} isBattle={isBattle} style={style} />
