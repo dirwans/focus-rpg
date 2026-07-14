@@ -92,15 +92,11 @@ export default function DragonBonesCharacter({ size, width, height, style }) {
 
       // 1. Right Hand Weapon Swap
       const weaponSlot = armatureDisplay.armature.getSlot("weapon_r")
-      if (weaponSlot) {
+      if (weaponSlot && weaponSlot.display) {
         if (weaponItem) {
           const weaponUrl = resolveItemImage(weaponItem, player.race, player.job, player.gender)
           if (weaponUrl) {
-            const texture = PIXI.Texture.from(weaponUrl)
-            const weaponSprite = new PIXI.Sprite(texture)
-            weaponSprite.anchor.set(0.5, 0.7) // Pivot anchor at robot's fist
-            weaponSprite.scale.set(2.0, 2.0)  // Scaled up to be proportional to robot frame
-            weaponSlot.display = weaponSprite
+            weaponSlot.display.texture = PIXI.Texture.from(weaponUrl)
           }
         } else {
           // Fallback to default skeletal mecha weapon
@@ -110,15 +106,11 @@ export default function DragonBonesCharacter({ size, width, height, style }) {
 
       // 2. Left Hand Shield Swap
       const shieldSlot = armatureDisplay.armature.getSlot("weapon_l")
-      if (shieldSlot) {
+      if (shieldSlot && shieldSlot.display) {
         if (shieldItem) {
           const shieldUrl = resolveItemImage(shieldItem, player.race, player.job, player.gender)
           if (shieldUrl) {
-            const texture = PIXI.Texture.from(shieldUrl)
-            const shieldSprite = new PIXI.Sprite(texture)
-            shieldSprite.anchor.set(0.5, 0.5) // Center anchor
-            shieldSprite.scale.set(2.0, 2.0)
-            shieldSlot.display = shieldSprite
+            shieldSlot.display.texture = PIXI.Texture.from(shieldUrl)
           }
         } else {
           // Fallback to default skeletal mecha shield/arm display

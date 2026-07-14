@@ -250,7 +250,11 @@ function PaperDollStack({ baseSprite, player, size, width, height, style: extraS
   )
 }
 
-export function PilotSprite({ race, job, size = 60, width, height, upperBodyOnly = false, fill = false, isBattle = false, gender = 'male', style, calibrationOverride, showGears = true }) {
+export function PilotSprite({ race, job, size = 60, width, height, upperBodyOnly = false, fill = false, isBattle = false, gender = 'male', style, calibrationOverride, showGears = true, isLarge }) {
+  if (race === 'arctron' && (height >= 200 || isLarge)) {
+    return <DragonBonesCharacter size={size} width={width} height={height} style={style} />
+  }
+
   const player = useGameStore((s) => s.player)
   const isSelf = player && player.race === race && player.gender === gender && player.job === job
 
