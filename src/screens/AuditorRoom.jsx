@@ -1286,6 +1286,18 @@ export default function AuditorRoom() {
                                               {(() => {
                                                 const isMat = item.type === 'material'
                                                 if (isMat) {
+                                                  const isArcanite = item.name && item.name.includes('Arcanite')
+                                                  if (isArcanite) {
+                                                    const arcColorMap = { fury: '#f59e0b', ruin: '#ef4444', spirit: '#a855f7', vital: '#22c55e', guard: '#3b82f6', precision: '#e5e7eb', agility: '#06b6d4', focus: '#f97316' }
+                                                    const typePart = item.name.replace(' Arcanite', '').trim().toLowerCase()
+                                                    const ac = arcColorMap[typePart] || '#aaa'
+                                                    const label = typePart === 'arcanite' ? 'ARC' : typePart.toUpperCase()
+                                                    return (
+                                                      <div style={{ background: 'rgba(0,0,0,0.82)', borderTop: `1px solid ${ac}50`, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '2px 3px', height: '20px', flexShrink: 0 }}>
+                                                        <span style={{ color: ac, fontSize: '8px', fontWeight: 800, fontFamily: 'monospace', letterSpacing: 0.3, textTransform: 'uppercase' }}>{label}</span>
+                                                      </div>
+                                                    )
+                                                  }
                                                   const rarityColorMap = { common: '#9ca3af', uncommon: '#22c55e', rare: '#3b82f6', epic: '#a855f7', legendary: '#f59e0b', mythic: '#ef4444' }
                                                   const rar = (item.rarity || '').toLowerCase()
                                                   const rc = rarityColorMap[rar] || '#aaa'

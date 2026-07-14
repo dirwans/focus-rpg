@@ -1,4 +1,4 @@
-# Focus-RPG Development Journal & Log
+﻿# Focus-RPG Development Journal & Log
 
 This journal tracks all major development milestones, technical optimizations, bug fixes, security enhancements, and gameplay feature refactorings implemented for **Focus-RPG**.
 
@@ -2315,25 +2315,25 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 - **Cache bust** (`src/data/items.json`): `?v=8` → `?v=9`, 90 referensi diupdate.
 - **Note**: Shard processing ditemukan masalah setelah deploy — frost/glow effect terhapus. Diperbaiki di M175.
 
-### Milestone 175: Shard Frost Preservation Fix [PENDING DEPLOYMENT]
+### Milestone 175: Shard Frost Preservation Fix [DEPLOYED]
 - **Problem**: M174 shard processing pakai global threshold `R>228 AND G>228 AND B>228 → alpha=0` yang juga menghapus semi-transparent frost/glow pixels (alpha 1–254) karena RGB-nya juga terang (white).
 - **Root Cause**: Backup shard files sudah punya alpha channel dari rembg (frost = semi-transparent, bukan fully opaque). Script lama tidak membedakan alpha=255 (background) vs alpha<255 (frost) saat apply threshold.
 - **Fix** (`public/assets/materials/*_shard.png`): BFS flood-fill dari seed opaque pixels yang bright — hanya menghapus fully opaque (alpha=255) background pixels yang connected. Semi-transparent frost (alpha 1–254) tidak disentuh sama sekali. Common shard kini preserves 470K frost pixels vs 111K background removed.
 - **Cache bust** (`src/data/items.json`): `?v=9` → `?v=10`, 90 referensi diupdate.
 
-### Milestone 176: Shard Aspect Ratio Fix — Anti-Gendut [PENDING DEPLOYMENT]
+### Milestone 176: Shard Aspect Ratio Fix — Anti-Gendut [DEPLOYED]
 - **Problem**: Semua shard portrait (ratio 0.73–0.80, lebih tinggi dari lebar) dipaksa resize ke 320×320 square → horizontal stretch → tampil melebar/gendut di AuditorRoom.
 - **Root Cause**: `out.resize((320, 320), Image.LANCZOS)` tidak mempertahankan aspect ratio. Shard portrait + forced square = melebar.
 - **Fix** (`public/assets/materials/*_shard.png`, kecuali `common_shard` — user sudah ganti sendiri): Resize dengan fit-within 320×320 maintaining aspect ratio, lalu pad ke 320×320 canvas transparan (center-aligned). Content kini 238–256px wide × 320px tall.
 - **Cache bust** (`src/data/items.json`): `?v=10` → `?v=11`, 90 referensi diupdate.
 
-### Milestone 177: Common Shard — Black BG Removal dari Backup User [PENDING DEPLOYMENT]
+### Milestone 177: Common Shard — Black BG Removal dari Backup User [DEPLOYED]
 - **Source**: `_backup_orig/common_shard.png` (1184×896, fully opaque, background hitam) — user mengganti file ini sebagai referensi art baru.
 - **Fix**: BFS flood-fill dari edge hapus background hitam (R+G+B < 35), crop ke content bbox (817×807, ratio=1.01 nearly square), fit-within 320×320 maintaining aspect ratio → 320×316.
 - **Note**: Gem shape asli user adalah nearly square (bukan portrait seperti shard lain). Jika tetap terlihat "gendut" relatif terhadap shard lain, itu karena art-nya memang square — perlu artwork dengan diamond lebih tinggi/ramping.
 - **Cache bust** (`src/data/items.json`): `?v=11` → `?v=12`.
 
-### Milestone 178: Common Shard — rembg + Fit-Center [PENDING DEPLOYMENT]
+### Milestone 178: Common Shard — rembg + Fit-Center [DEPLOYED]
 - **Fix**: Backup `_backup_orig/common_shard.png` diproses dengan rembg (AI background removal) terlebih dahulu, menghasilkan alpha channel yang proper (frost 164K semi-transparent pixels). Setelah rembg, crop → content 538×716 (ratio=0.75, portrait — slim seperti shard lain), fit-within 320×320 → 240×320 centered.
 - **Cache bust** (`src/data/items.json`): `?v=12` → `?v=13`.
 
@@ -2347,13 +2347,13 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 - **Fix 5 (\App.jsx\)**: Hardened \player.inventory\ hydration mapping with a null/truthy check (\i && raceMap[i.race]\) to prevent silent sparse-array TypeErrors that crash the Android WebView (blank screen) upon login.
 
 
-### Milestone 174: Old Save Migration Crash Fix (Main.jsx) [PENDING DEPLOYMENT]
+### Milestone 174: Old Save Migration Crash Fix (Main.jsx) [DEPLOYED]
 - **Bug**: Older accounts (like \cel-war\) experienced a blank screen on login, while new accounts (\celes-war-m\) worked fine.
 - **Root Cause**: The transition from a 10-Sector structure to the new 5-Sector map (Milestone 5) caused old saves with out-of-bounds \selectedMapIdx\ or \sector\ values to crash when \Main.jsx\ tried to access \enemies.sectors[sectorIdx].name\. The \enemy\ object became \undefined\, triggering a \TypeError\ that unmounted the React tree.
 - **Fix**: Added bounds-checking \Math.max(0, ...)\ and a fallback mechanism (\if (!enemy) enemy = enemies.sectors[0]\) in \Main.jsx\ to ensure the UI always gracefully defaults to Map 1 (Lumora Fields) if the save data contains invalid/stale map indexes.
 
 
-### Milestone 180: Ore Image Processing — Solid Texture, Legendary Size, Common Gray [PENDING DEPLOYMENT]
+### Milestone 180: Ore Image Processing — Solid Texture, Legendary Size, Common Gray [DEPLOYED]
 - **Problem 1 (holes)**: Previous ore processing (M174 global threshold, then rembg/BFS attempts) created transparent holes in ore interior texture — crevice pixels were being mistakenly removed.
 - **Root Cause**: Ore art uses pure #000000 for background AND for interior dark shadows/crevices that form connected paths to the edge. BFS with any non-zero tolerance floods through crevices into interior. rembg also misclassifies dark interior as background.
 - **Fix**: Ultra-tight BFS (`sum==0`, only remove exact [0,0,0] pixels from edges). Interior crevice pixels like [2,2,0], [0,2,1] (sum≥1) act as natural flood blockers, keeping them opaque. Interior isolated black patches (630 px total, orphaned from bg) stay opaque. All 6 ores now show solid crystalline texture without transparent gaps.
@@ -2363,17 +2363,34 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 - **Fix**: Strong grayscale blend (80% desaturate) + cool gray tint (slight blue channel) + 65% brightness reduction + 1.2x contrast. White highlights → medium blue-gray (148,152,165); shadows → dark blue-gray (74,76,83). Now looks like rough metallic stone.
 - **Cache bust** (`src/data/items.json`): `?v=13` → `?v=14`, 90 references updated.
 
-### Milestone 179: AuditorRoom Material Badge — Rarity Label Fix [PENDING DEPLOYMENT]
+### Milestone 181: AuditorRoom Arcanite Badge — Show Type Name Instead of Rarity [DEPLOYED]
+- **Problem**: Enhance tab Arcanites subtab menampilkan "RARE" untuk semua arcanite — tidak informatif karena semua arcanite rarity-nya rare.
+- **Fix** (`src/screens/AuditorRoom.jsx` badge strip): Detect arcanite (`item.name.includes('Arcanite')`), extract type prefix ("Fury Arcanite" → "FURY"), map ke warna khas per tipe: Fury=#f59e0b, Ruin=#ef4444, Spirit=#a855f7, Vital=#22c55e, Guard=#3b82f6, Precision=#e5e7eb, Agility=#06b6d4, Focus=#f97316. Ore/shard/core lainnya tetap tampilkan rarity name (COMMON/UNCOMMON/etc.).
+
+### Milestone 179: AuditorRoom Material Badge — Rarity Label Fix [DEPLOYED]
 - **Problem**: Badge strip di bawah setiap item card di craft editor menampilkan LV.X COMM/RARE/EPIC/... untuk semua items termasuk materials (shards/ores) yang tidak punya konsep level bermakna.
 - **Fix** (src/screens/AuditorRoom.jsx line ~1286): Tambah branch if (isMat) — material items kini tampilkan rarity name lengkap (COMMON, UNCOMMON, RARE, EPIC, LEGENDARY, MYTHIC) dengan rarity color (gray/green/blue/purple/gold/red), centered. Gear items tetap LV.X + PATH seperti semula.
 
-### Milestone 175: Profile Pic Fix (Main.jsx) [PENDING DEPLOYMENT]
+### Milestone 175: Profile Pic Fix (Main.jsx) [DEPLOYED]
 - **Bug**: The avatar ring in the BASE tab was stacking all equipped gears (Paper Doll) into a 36x36 bubble, resulting in a squished/broken image icon if gears were missing or too detailed.
 - **Fix**: Added \showGears={false}\ and \upperBodyOnly={true}\ to the \PilotSprite\ call inside \Main.jsx\ so the profile pic only shows the clean base character headshot across all factions.
 
 
-### Milestone 176: Male-Specific Gear AI Generation [PENDING DEPLOYMENT]
+### Milestone 176: Male-Specific Gear AI Generation [DEPLOYED]
 - **Generation**: Utilized AI Image Generator to create 5 hyperrealistic 2.5D anime mecha gear assets (Helmet, Armor, Pants, Boots, Gloves) specifically for the Celestra Male Warrior Lv1.
 - **Processing**: Used a new Python script (\process_composite.py\) to strip backgrounds without cropping the bounding box, preserving perfect 320x320 alignment.
 - **Integration**: Updated \gameStore.js\ (\esolveItemImage\ & \esolveArmorSetImage\) and \PilotSprites.jsx\ to intelligently detect \playerGender\ and route Male Celestra Warriors to a new isolated asset directory: \public/assets/celestra/male/\ using the \_male.png\ suffix, ensuring the original default assets remain 100% untouched.
 
+### Milestone 182: DragonBones Integration & Legacy Paper Doll Cleanup [PENDING DEPLOYMENT]
+- **Legacy Cleanup**:
+  - Deleted the legacy [spriteCalibrations.js](file:///c:/projects/focus-rpg/src/data/spriteCalibrations.js) containing old absolute coordinate offsets.
+  - Removed `PaperDollStack` rendering logic and calibrations import from [PilotSprites.jsx](file:///c:/projects/focus-rpg/src/components/PilotSprites.jsx), simplifying character displays to return the clean base mecha/character sprites.
+  - Cleared unused/dangling `SPRITE_CALIBRATIONS` imports from [Unit.jsx](file:///c:/projects/focus-rpg/src/screens/Unit.jsx).
+- **Core Library Integration**:
+  - Added PixiJS (v5) and DragonBones-Pixi runtimes to [index.html](file:///c:/projects/focus-rpg/index.html) via CDN script tags to avoid bundling or dependency mismatches under Vite.
+- **Sample Assets**:
+  - Downloaded official DragonBones `mecha_1502b` skeleton JSON (`mecha_1502b_ske.json`), texture atlas config (`mecha_1502b_tex.json`), and texture sheet (`mecha_1502b_tex.png`) into `public/assets/dragonbones/`.
+- **DragonBones Prototype**:
+  - Created [DragonBonesTest.jsx](file:///c:/projects/focus-rpg/src/components/DragonBonesTest.jsx), an interactive canvas component displaying the animated `mecha_1502b` character.
+  - Supports switching animations (`idle`, `walk`, `attack_01`, `aim`, `death`, etc.) and testing slot swaps (`replaceSlotDisplay`) via runtime texture replacements.
+  - Mounted the prototype in a new dedicated tab under [SettingsModal.jsx](file:///c:/projects/focus-rpg/src/components/SettingsModal.jsx) for local testing.
