@@ -2397,7 +2397,7 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 - **ReferenceError Hotfix**: Fixed a console crash in [Unit.jsx](file:///c:/projects/focus-rpg/src/screens/Unit.jsx) where a lingering reference to `SPRITE_CALIBRATIONS` threw an `Uncaught ReferenceError`. Replaced it with static default values.
 - **Obsolete UI Cleanup**: Removed the obsolete `CALIBRATE` and `GEAR ON/OFF` buttons, state variables (`calOpen`, `calSlot`, etc.), `useEffect` hook, and the bottom calibration range sliders overlay panel from [Unit.jsx](file:///c:/projects/focus-rpg/src/screens/Unit.jsx).
 
-### Milestone 183: Arctron DragonBones Paper Doll Integration [PENDING DEPLOYMENT]
+### Milestone 183: Arctron DragonBones Paper Doll Integration [DEPLOYED]
 - **DragonBones Character Component**: Created [DragonBonesCharacter.jsx](file:///c:/projects/focus-rpg/src/components/DragonBonesCharacter.jsx) to display animated mecha characters and handle dynamic right-hand weapon and left-hand shield texture swapping based on active player store states (`useGameStore`). Resolves paths dynamically using `resolveItemImage`.
 - **Conditional Routing**: Modified [PilotSprites.jsx](file:///c:/projects/focus-rpg/src/components/PilotSprites.jsx) to route large rendering requests (height >= 200px or `isLarge={true}`) for `arctron` race characters through the DragonBones component, while keeping thumbnails and other races (Bionex/Celestra) safe on their original flat rendering logic to avoid WebGL resource limit issues.
 - **Enabled Character Detail Portrait**: Modified [Unit.jsx](file:///c:/projects/focus-rpg/src/screens/Unit.jsx) to explicitly pass `isLarge={true}` to the main `PilotSprite` component.
