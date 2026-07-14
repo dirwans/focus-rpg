@@ -202,9 +202,15 @@ function PaperDollStack({ baseSprite, player, size, width, height, style: extraS
 
   const renderLayer = (item, slot) => {
     if (!item) return null
+    const isStandalone = slot === 'weapon' || slot === 'shield'
+    
+    // For Arctron, we only render weapon and shield overlays, not body armor/helmet composites
+    if (player.race === 'arctron' && !isStandalone) {
+      return null
+    }
+
     const src = getGearImg(item, slot)
     const customConfig = config[slot] || {}
-    const isStandalone = slot === 'weapon' || slot === 'shield'
     
     // Fall back to race defaults for weapon/shield if no custom coordinates
     const defaultStyle = isStandalone 
