@@ -1,5 +1,32 @@
-import { useGameStore } from '../store/gameStore'
+import { useGameStore, resolveItemImage } from '../store/gameStore'
 import DragonBonesCharacter from './DragonBonesCharacter'
+
+const RACE_DEFAULTS = {
+  arctron: {
+    weapon: { top: '38%', left: '5%', width: '38%', height: 'auto', transform: 'rotate(-10deg)', zIndex: 3 },
+    shield: { top: '32%', left: '55%', width: '38%', height: 'auto', transform: 'rotate(10deg)', zIndex: 1 }
+  },
+  bionex: {
+    weapon: { top: '45%', left: '10%', width: '30%', height: 'auto', transform: 'rotate(-15deg)', zIndex: 3 },
+    shield: { top: '40%', left: '55%', width: '30%', height: 'auto', transform: 'rotate(10deg)', zIndex: 1 }
+  },
+  celestra: {
+    weapon: { top: '45%', left: '10%', width: '30%', height: 'auto', transform: 'rotate(-15deg)', zIndex: 3 },
+    shield: { top: '40%', left: '55%', width: '30%', height: 'auto', transform: 'rotate(10deg)', zIndex: 1 }
+  }
+}
+
+const SPRITE_CALIBRATIONS = {
+  celestra_warrior_male: {
+    weapon: { top: '52%', left: '-2%', width: '35%', height: 'auto', transform: 'rotate(-25deg)' },
+    shield: { top: '35%', left: '55%', width: '35%', height: 'auto', transform: 'rotate(5deg)' },
+    helmet: { top: '8%', left: '42%', width: '22%', height: 'auto' },
+    armor: { top: '25%', left: '28%', width: '45%', height: 'auto' },
+    pants: { top: '55%', left: '32%', width: '35%', height: 'auto' },
+    boots: { top: '75%', left: '30%', width: '42%', height: 'auto' },
+    gloves: { top: '45%', left: '25%', width: '50%', height: 'auto' }
+  }
+}
 
 function getJobLane(jobId) {
   if (!jobId) return 'warrior'
@@ -145,10 +172,81 @@ export function EnemySprite({ size = 60, isBoss = false }) {
   )
 }
 
-export function PilotSprite({ race, job, size = 60, width, height, upperBodyOnly = false, fill = false, isBattle = false, gender = 'male', style, isLarge }) {
-  if (race === 'arctron' && (height >= 200 || isLarge)) {
-    return <DragonBonesCharacter size={size} width={width} height={height} style={style} />
+function PaperDollStack({ baseSprite, player, size, width, height, style: extraStyle, calibrationOverride }) {
+  const w = width || size
+  const h = height || size
+  const lane = getJobLane(player.job)
+  const key = `${player.race}_${lane}_${player.gender}`
+  
+  // Merge default calibration with any custom overrides
+  const config = {
+    ...(SPRITE_CALIBRATIONS[key] || {}),
+    ...(calibrationOverride || {})
   }
+
+  const eq = player.equipment || {}
+  
+  const getGearImg = (item, slot) => {
+    if (!item) return null
+    let img = resolveItemImage(item, player.race, player.job, player.gender)
+    if (!img) img = item.image
+    if (!img) {
+      if (player.race === 'celestra' && player.gender === 'male') {
+        img = `/assets/celestra/male/defcelestra${lane}lv1${slot}_male.png`
+      } else {
+        img = `/assets/${player.race}/def${player.race}${lane}lv1${slot}.png`
+      }
+    }
+    return img.split('?')[0]
+  }
+
+  const renderLayer = (item, slot) => {
+    if (!item) return null
+    const src = getGearImg(item, slot)
+    const customConfig = config[slot] || {}
+    const isStandalone = slot === 'weapon' || slot === 'shield'
+    
+    // Fall back to race defaults for weapon/shield if no custom coordinates
+    const defaultStyle = isStandalone 
+      ? (RACE_DEFAULTS[player.race]?.[slot] || { top: '50%', left: '10%', width: '30%' })
+      : { top: 0, left: 0, width: '100%', height: '100%' }
+      
+    const layerStyle = {
+      position: 'absolute',
+      pointerEvents: 'none',
+      ...defaultStyle,
+      ...customConfig
+    }
+    return <img src={src} style={layerStyle} alt={slot} />
+  }
+
+  return (
+    <div className="paper-doll-container" style={{ position: 'relative', width: w, height: h, display: 'inline-block', ...extraStyle }}>
+      {/* Cape/Mantle rendered behind the base body */}
+      {renderLayer(eq.mantle, 'mantle')}
+
+      {/* Base Sprite */}
+      {baseSprite}
+      
+      {/* Layer Stack */}
+      {renderLayer(eq.pants, 'pants')}
+      {renderLayer(eq.boots, 'boots')}
+      {renderLayer(eq.armor, 'armor')}
+      {renderLayer(eq.gloves, 'gloves')}
+      {renderLayer(eq.helmet, 'helmet')}
+      {renderLayer(eq.weapon, 'weapon')}
+      {renderLayer(eq.shield, 'shield')}
+      {renderLayer(eq.amulet1, 'amulet1')}
+      {renderLayer(eq.amulet2, 'amulet2')}
+      {renderLayer(eq.ring1, 'ring1')}
+      {renderLayer(eq.ring2, 'ring2')}
+    </div>
+  )
+}
+
+export function PilotSprite({ race, job, size = 60, width, height, upperBodyOnly = false, fill = false, isBattle = false, gender = 'male', style, calibrationOverride, showGears = true }) {
+  const player = useGameStore((s) => s.player)
+  const isSelf = player && player.race === race && player.gender === gender && player.job === job
 
   let baseSprite = null
   if (race === 'arctron') {
@@ -157,6 +255,20 @@ export function PilotSprite({ race, job, size = 60, width, height, upperBodyOnly
     baseSprite = <BionexSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} gender={gender} style={style} />
   } else if (race === 'celestra') {
     baseSprite = <CelestraSprite job={job} size={size} width={width} height={height} upperBodyOnly={upperBodyOnly} fill={fill} gender={gender} style={style} />
+  }
+
+  if (isSelf && player.equipment && showGears) {
+    return (
+      <PaperDollStack 
+        baseSprite={baseSprite} 
+        player={player} 
+        size={size} 
+        width={width} 
+        height={height} 
+        style={style} 
+        calibrationOverride={calibrationOverride} 
+      />
+    )
   }
 
   return baseSprite
