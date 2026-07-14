@@ -1,4 +1,4 @@
-﻿# Focus-RPG Development Journal & Log
+# Focus-RPG Development Journal & Log
 
 This journal tracks all major development milestones, technical optimizations, bug fixes, security enhancements, and gameplay feature refactorings implemented for **Focus-RPG**.
 
@@ -2381,7 +2381,7 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 - **Processing**: Used a new Python script (\process_composite.py\) to strip backgrounds without cropping the bounding box, preserving perfect 320x320 alignment.
 - **Integration**: Updated \gameStore.js\ (\esolveItemImage\ & \esolveArmorSetImage\) and \PilotSprites.jsx\ to intelligently detect \playerGender\ and route Male Celestra Warriors to a new isolated asset directory: \public/assets/celestra/male/\ using the \_male.png\ suffix, ensuring the original default assets remain 100% untouched.
 
-### Milestone 182: DragonBones Integration & Legacy Paper Doll Cleanup [PENDING DEPLOYMENT]
+### Milestone 182: DragonBones Integration & Legacy Paper Doll Cleanup [DEPLOYED]
 - **Legacy Cleanup**:
   - Deleted the legacy [spriteCalibrations.js](file:///c:/projects/focus-rpg/src/data/spriteCalibrations.js) containing old absolute coordinate offsets.
   - Removed `PaperDollStack` rendering logic and calibrations import from [PilotSprites.jsx](file:///c:/projects/focus-rpg/src/components/PilotSprites.jsx), simplifying character displays to return the clean base mecha/character sprites.
