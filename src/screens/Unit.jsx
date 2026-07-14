@@ -153,8 +153,7 @@ export default function Unit() {
     else if (rangerJobs.includes(player.job)) lane = 'ranger'
     else if (mysticJobs.includes(player.job)) lane = 'mystic'
 
-    const key = `${player.race}_${lane}_${player.gender}`
-    const defaults = SPRITE_CALIBRATIONS[key]?.[calSlot] || { top: '0%', left: '0%', width: '100%', transform: 'rotate(0deg)' }
+    const defaults = { top: '0%', left: '0%', width: '100%', transform: 'rotate(0deg)' }
 
     setCalX(parseInt(defaults.left || '0'))
     setCalY(parseInt(defaults.top || '0'))

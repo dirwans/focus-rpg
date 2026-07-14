@@ -2394,3 +2394,4 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
   - Created [DragonBonesTest.jsx](file:///c:/projects/focus-rpg/src/components/DragonBonesTest.jsx), an interactive canvas component displaying the animated `mecha_1502b` character.
   - Supports switching animations (`idle`, `walk`, `attack_01`, `aim`, `death`, etc.) and testing slot swaps (`replaceSlotDisplay`) via runtime texture replacements.
   - Mounted the prototype in a new dedicated tab under [SettingsModal.jsx](file:///c:/projects/focus-rpg/src/components/SettingsModal.jsx) for local testing.
+- **ReferenceError Hotfix**: Fixed a console crash in [Unit.jsx](file:///c:/projects/focus-rpg/src/screens/Unit.jsx) where a lingering reference to `SPRITE_CALIBRATIONS` threw an `Uncaught ReferenceError`. Replaced it with static default values.
