@@ -2397,7 +2397,7 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 - **ReferenceError Hotfix**: Fixed a console crash in [Unit.jsx](file:///c:/projects/focus-rpg/src/screens/Unit.jsx) where a lingering reference to `SPRITE_CALIBRATIONS` threw an `Uncaught ReferenceError`. Replaced it with static default values.
 - **Obsolete UI Cleanup**: Removed the obsolete `CALIBRATE` and `GEAR ON/OFF` buttons, state variables (`calOpen`, `calSlot`, etc.), `useEffect` hook, and the bottom calibration range sliders overlay panel from [Unit.jsx](file:///c:/projects/focus-rpg/src/screens/Unit.jsx).
 
-### 🎨 Milestone 184: Arctron Warrior Front-View Sprite & Gear Asset Prep (CSS overlay experiment reverted) [PENDING DEPLOYMENT]
+### 🎨 Milestone 184: Arctron Warrior Front-View Sprite & Gear Asset Prep (CSS overlay experiment reverted) [DEPLOYED]
 - **New Front-View Sprite** (`public/assets/arctron_warrior.png`):
   - Replaced old 3/4-angle sprite (515×1316) with symmetric fully front-facing version (394×702, rembg'd by user). Old sprite backed up to `trial-rakit-arctron-war/arctron_warrior_OLD.png`.
 - **CSS Gear Overlay — built, tested, then reverted**:
@@ -2414,7 +2414,14 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 
 ---
 
-### Milestone 183: Arctron DragonBones Paper Doll Integration [DEPLOYED]
+### 📁 Milestone 185: Arctron Armor Set Asset Reorganization — Per-Lineage/Tier Folders [PENDING DEPLOYMENT]
+- **Folder Restructure** (`public/assets/arctron/`):
+  - Moved 65 flat-named armor-set files (`defarctron{lineage}lv{tier}{slot}.png`) into 12 dedicated folders: `def_{warrior|ranger|technician}_armor_set_lv{1|32|42|55}/`, each containing simple slot-named files (`armor.png`, `helmet.png`, `gloves.png`, `gloves_l/r.png`, `boots.png`, `boots_l/r.png`, `pants.png`, `mantle.png` for lv1 only).
+  - `public/assets/arctron/layers/` (full-canvas baked pants/boots from Milestone 184) and `arctron_warrior_mannequin.png` left untouched — separate concept, not part of this reorg.
+- **Path Fix** (`src/data/arctron_gears.json`):
+  - Updated all 60 `image` field references to point at the new folder structure (`/assets/arctron/def_{lineage}_armor_set_lv{tier}/{slot}.png`).
+  - **Also fixes a pre-existing bug**: these 60 paths previously pointed at stale `/assets/armor/defarctron...` (a prefix that never matched the real `/assets/arctron/` file location), meaning these item icons were likely already 404'ing in the Gears tab inventory grid before this fix — unrelated to the folder move itself.
+- **Scope**: Arctron only. Bionex/Celestra armor sets (101 image refs each) intentionally left untouched for a future pass.
 - **DragonBones Character Component**: Created [DragonBonesCharacter.jsx](file:///c:/projects/focus-rpg/src/components/DragonBonesCharacter.jsx) to display animated mecha characters and handle dynamic right-hand weapon and left-hand shield texture swapping based on active player store states (`useGameStore`). Resolves paths dynamically using `resolveItemImage`.
 - **Conditional Routing**: Modified [PilotSprites.jsx](file:///c:/projects/focus-rpg/src/components/PilotSprites.jsx) to route large rendering requests (height >= 200px or `isLarge={true}`) for `arctron` race characters through the DragonBones component, while keeping thumbnails and other races (Bionex/Celestra) safe on their original flat rendering logic to avoid WebGL resource limit issues.
 - **Enabled Character Detail Portrait**: Modified [Unit.jsx](file:///c:/projects/focus-rpg/src/screens/Unit.jsx) to explicitly pass `isLarge={true}` to the main `PilotSprite` component.

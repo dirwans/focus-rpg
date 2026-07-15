@@ -3003,7 +3003,7 @@
     "bonus": {
       "def": 10
     },
-    "image": "/assets/armor/defarctronwarriorlv1armor.png"
+    "image": "/assets/arctron/def_warrior_armor_set_lv1/armor.png"
   },
   {
     "id": "helmet_armorset_arctron_lv1",
@@ -3022,7 +3022,7 @@
     "bonus": {
       "def": 5
     },
-    "image": "/assets/armor/defarctronwarriorlv1helmet.png"
+    "image": "/assets/arctron/def_warrior_armor_set_lv1/helmet.png"
   },
   {
     "id": "gloves_armorset_arctron_lv1",
@@ -3042,7 +3042,7 @@
       "def": 3,
       "atk": 2
     },
-    "image": "/assets/armor/defarctronwarriorlv1gloves.png"
+    "image": "/assets/arctron/def_warrior_armor_set_lv1/gloves.png"
   },
   {
     "id": "boots_armorset_arctron_lv1",
@@ -3061,7 +3061,7 @@
     "bonus": {
       "def": 3
     },
-    "image": "/assets/armor/defarctronwarriorlv1boots.png"
+    "image": "/assets/arctron/def_warrior_armor_set_lv1/boots.png"
   },
   {
     "id": "pants_armorset_arctron_lv1",
@@ -3080,7 +3080,7 @@
     "bonus": {
       "def": 4
     },
-    "image": "/assets/armor/defarctronwarriorlv1pants.png"
+    "image": "/assets/arctron/def_warrior_armor_set_lv1/pants.png"
   },
   {
     "id": "armor_armorset_arctron_lv32",
@@ -3099,7 +3099,7 @@
     "bonus": {
       "def": 300
     },
-    "image": "/assets/armor/defarctronwarriorlv32armor.png"
+    "image": "/assets/arctron/def_warrior_armor_set_lv32/armor.png"
   },
   {
     "id": "helmet_armorset_arctron_lv32",
@@ -3118,7 +3118,7 @@
     "bonus": {
       "def": 140
     },
-    "image": "/assets/armor/defarctronwarriorlv32helmet.png"
+    "image": "/assets/arctron/def_warrior_armor_set_lv32/helmet.png"
   },
   {
     "id": "gloves_armorset_arctron_lv32",
@@ -3138,7 +3138,7 @@
       "def": 90,
       "atk": 40
     },
-    "image": "/assets/armor/defarctronwarriorlv32gloves.png"
+    "image": "/assets/arctron/def_warrior_armor_set_lv32/gloves.png"
   },
   {
     "id": "boots_armorset_arctron_lv32",
@@ -3157,7 +3157,7 @@
     "bonus": {
       "def": 90
     },
-    "image": "/assets/armor/defarctronwarriorlv32boots.png"
+    "image": "/assets/arctron/def_warrior_armor_set_lv32/boots.png"
   },
   {
     "id": "pants_armorset_arctron_lv32",
@@ -3177,7 +3177,7 @@
       "def": 120,
       "hp": 1500
     },
-    "image": "/assets/armor/defarctronwarriorlv32pants.png"
+    "image": "/assets/arctron/def_warrior_armor_set_lv32/pants.png"
   },
   {
     "id": "armor_armorset_arctron_lv42",
@@ -3196,7 +3196,7 @@
     "bonus": {
       "def": 400
     },
-    "image": "/assets/armor/defarctronwarriorlv42armor.png"
+    "image": "/assets/arctron/def_warrior_armor_set_lv42/armor.png"
   },
   {
     "id": "helmet_armorset_arctron_lv42",
@@ -3215,7 +3215,7 @@
     "bonus": {
       "def": 180
     },
-    "image": "/assets/armor/defarctronwarriorlv42helmet.png"
+    "image": "/assets/arctron/def_warrior_armor_set_lv42/helmet.png"
   },
   {
     "id": "gloves_armorset_arctron_lv42",
@@ -3235,7 +3235,7 @@
       "def": 120,
       "atk": 55
     },
-    "image": "/assets/armor/defarctronwarriorlv42gloves.png"
+    "image": "/assets/arctron/def_warrior_armor_set_lv42/gloves.png"
   },
   {
     "id": "boots_armorset_arctron_lv42",
@@ -3254,7 +3254,7 @@
     "bonus": {
       "def": 120
     },
-    "image": "/assets/armor/defarctronwarriorlv42boots.png"
+    "image": "/assets/arctron/def_warrior_armor_set_lv42/boots.png"
   },
   {
     "id": "pants_armorset_arctron_lv42",
@@ -3274,7 +3274,7 @@
       "def": 160,
       "hp": 2000
     },
-    "image": "/assets/armor/defarctronwarriorlv42pants.png"
+    "image": "/assets/arctron/def_warrior_armor_set_lv42/pants.png"
   },
   {
     "id": "armor_armorset_arctron_lv55",
@@ -3293,7 +3293,7 @@
     "bonus": {
       "def": 520
     },
-    "image": "/assets/armor/defarctronwarriorlv55armor.png"
+    "image": "/assets/arctron/def_warrior_armor_set_lv55/armor.png"
   },
   {
     "id": "helmet_armorset_arctron_lv55",
@@ -3312,7 +3312,7 @@
     "bonus": {
       "def": 240
     },
-    "image": "/assets/armor/defarctronwarriorlv55helmet.png"
+    "image": "/assets/arctron/def_warrior_armor_set_lv55/helmet.png"
   },
   {
     "id": "gloves_armorset_arctron_lv55",
@@ -3332,7 +3332,7 @@
       "def": 160,
       "atk": 75
     },
-    "image": "/assets/armor/defarctronwarriorlv55gloves.png"
+    "image": "/assets/arctron/def_warrior_armor_set_lv55/gloves.png"
   },
   {
     "id": "boots_armorset_arctron_lv55",
@@ -3351,7 +3351,7 @@
     "bonus": {
       "def": 160
     },
-    "image": "/assets/armor/defarctronwarriorlv55boots.png"
+    "image": "/assets/arctron/def_warrior_armor_set_lv55/boots.png"
   },
   {
     "id": "pants_armorset_arctron_lv55",
@@ -3371,7 +3371,7 @@
       "def": 210,
       "hp": 2600
     },
-    "image": "/assets/armor/defarctronwarriorlv55pants.png"
+    "image": "/assets/arctron/def_warrior_armor_set_lv55/pants.png"
   },
   {
     "id": "armor_armorset_arctron_ranger_lv1",
@@ -3390,7 +3390,7 @@
     "bonus": {
       "def": 10
     },
-    "image": "/assets/armor/defarctronrangerlv1armor.png"
+    "image": "/assets/arctron/def_ranger_armor_set_lv1/armor.png"
   },
   {
     "id": "helmet_armorset_arctron_ranger_lv1",
@@ -3409,7 +3409,7 @@
     "bonus": {
       "def": 5
     },
-    "image": "/assets/armor/defarctronrangerlv1helmet.png"
+    "image": "/assets/arctron/def_ranger_armor_set_lv1/helmet.png"
   },
   {
     "id": "gloves_armorset_arctron_ranger_lv1",
@@ -3429,7 +3429,7 @@
       "def": 3,
       "atk": 2
     },
-    "image": "/assets/armor/defarctronrangerlv1gloves.png"
+    "image": "/assets/arctron/def_ranger_armor_set_lv1/gloves.png"
   },
   {
     "id": "boots_armorset_arctron_ranger_lv1",
@@ -3448,7 +3448,7 @@
     "bonus": {
       "def": 3
     },
-    "image": "/assets/armor/defarctronrangerlv1boots.png"
+    "image": "/assets/arctron/def_ranger_armor_set_lv1/boots.png"
   },
   {
     "id": "pants_armorset_arctron_ranger_lv1",
@@ -3467,7 +3467,7 @@
     "bonus": {
       "def": 4
     },
-    "image": "/assets/armor/defarctronrangerlv1pants.png"
+    "image": "/assets/arctron/def_ranger_armor_set_lv1/pants.png"
   },
   {
     "id": "armor_armorset_arctron_ranger_lv32",
@@ -3486,7 +3486,7 @@
     "bonus": {
       "def": 300
     },
-    "image": "/assets/armor/defarctronrangerlv32armor.png"
+    "image": "/assets/arctron/def_ranger_armor_set_lv32/armor.png"
   },
   {
     "id": "helmet_armorset_arctron_ranger_lv32",
@@ -3505,7 +3505,7 @@
     "bonus": {
       "def": 140
     },
-    "image": "/assets/armor/defarctronrangerlv32helmet.png"
+    "image": "/assets/arctron/def_ranger_armor_set_lv32/helmet.png"
   },
   {
     "id": "gloves_armorset_arctron_ranger_lv32",
@@ -3525,7 +3525,7 @@
       "def": 90,
       "atk": 40
     },
-    "image": "/assets/armor/defarctronrangerlv32gloves.png"
+    "image": "/assets/arctron/def_ranger_armor_set_lv32/gloves.png"
   },
   {
     "id": "boots_armorset_arctron_ranger_lv32",
@@ -3544,7 +3544,7 @@
     "bonus": {
       "def": 90
     },
-    "image": "/assets/armor/defarctronrangerlv32boots.png"
+    "image": "/assets/arctron/def_ranger_armor_set_lv32/boots.png"
   },
   {
     "id": "pants_armorset_arctron_ranger_lv32",
@@ -3564,7 +3564,7 @@
       "def": 120,
       "hp": 1500
     },
-    "image": "/assets/armor/defarctronrangerlv32pants.png"
+    "image": "/assets/arctron/def_ranger_armor_set_lv32/pants.png"
   },
   {
     "id": "armor_armorset_arctron_ranger_lv42",
@@ -3583,7 +3583,7 @@
     "bonus": {
       "def": 400
     },
-    "image": "/assets/armor/defarctronrangerlv42armor.png"
+    "image": "/assets/arctron/def_ranger_armor_set_lv42/armor.png"
   },
   {
     "id": "helmet_armorset_arctron_ranger_lv42",
@@ -3602,7 +3602,7 @@
     "bonus": {
       "def": 180
     },
-    "image": "/assets/armor/defarctronrangerlv42helmet.png"
+    "image": "/assets/arctron/def_ranger_armor_set_lv42/helmet.png"
   },
   {
     "id": "gloves_armorset_arctron_ranger_lv42",
@@ -3622,7 +3622,7 @@
       "def": 120,
       "atk": 55
     },
-    "image": "/assets/armor/defarctronrangerlv42gloves.png"
+    "image": "/assets/arctron/def_ranger_armor_set_lv42/gloves.png"
   },
   {
     "id": "boots_armorset_arctron_ranger_lv42",
@@ -3641,7 +3641,7 @@
     "bonus": {
       "def": 120
     },
-    "image": "/assets/armor/defarctronrangerlv42boots.png"
+    "image": "/assets/arctron/def_ranger_armor_set_lv42/boots.png"
   },
   {
     "id": "pants_armorset_arctron_ranger_lv42",
@@ -3661,7 +3661,7 @@
       "def": 160,
       "hp": 2000
     },
-    "image": "/assets/armor/defarctronrangerlv42pants.png"
+    "image": "/assets/arctron/def_ranger_armor_set_lv42/pants.png"
   },
   {
     "id": "armor_armorset_arctron_ranger_lv55",
@@ -3680,7 +3680,7 @@
     "bonus": {
       "def": 520
     },
-    "image": "/assets/armor/defarctronrangerlv55armor.png"
+    "image": "/assets/arctron/def_ranger_armor_set_lv55/armor.png"
   },
   {
     "id": "helmet_armorset_arctron_ranger_lv55",
@@ -3699,7 +3699,7 @@
     "bonus": {
       "def": 240
     },
-    "image": "/assets/armor/defarctronrangerlv55helmet.png"
+    "image": "/assets/arctron/def_ranger_armor_set_lv55/helmet.png"
   },
   {
     "id": "gloves_armorset_arctron_ranger_lv55",
@@ -3719,7 +3719,7 @@
       "def": 160,
       "atk": 75
     },
-    "image": "/assets/armor/defarctronrangerlv55gloves.png"
+    "image": "/assets/arctron/def_ranger_armor_set_lv55/gloves.png"
   },
   {
     "id": "boots_armorset_arctron_ranger_lv55",
@@ -3738,7 +3738,7 @@
     "bonus": {
       "def": 160
     },
-    "image": "/assets/armor/defarctronrangerlv55boots.png"
+    "image": "/assets/arctron/def_ranger_armor_set_lv55/boots.png"
   },
   {
     "id": "pants_armorset_arctron_ranger_lv55",
@@ -3758,7 +3758,7 @@
       "def": 210,
       "hp": 2600
     },
-    "image": "/assets/armor/defarctronrangerlv55pants.png"
+    "image": "/assets/arctron/def_ranger_armor_set_lv55/pants.png"
   },
   {
     "id": "arm_arctron_1_C",
@@ -5391,7 +5391,7 @@
     "bonus": {
       "def": 10
     },
-    "image": "/assets/armor/defarctrontechnicianlv1armor.png"
+    "image": "/assets/arctron/def_technician_armor_set_lv1/armor.png"
   },
   {
     "id": "helmet_armorset_arctron_technician_lv1",
@@ -5410,7 +5410,7 @@
     "bonus": {
       "def": 5
     },
-    "image": "/assets/armor/defarctrontechnicianlv1helmet.png"
+    "image": "/assets/arctron/def_technician_armor_set_lv1/helmet.png"
   },
   {
     "id": "gloves_armorset_arctron_technician_lv1",
@@ -5430,7 +5430,7 @@
       "def": 3,
       "atk": 2
     },
-    "image": "/assets/armor/defarctrontechnicianlv1gloves.png"
+    "image": "/assets/arctron/def_technician_armor_set_lv1/gloves.png"
   },
   {
     "id": "boots_armorset_arctron_technician_lv1",
@@ -5449,7 +5449,7 @@
     "bonus": {
       "def": 3
     },
-    "image": "/assets/armor/defarctrontechnicianlv1boots.png"
+    "image": "/assets/arctron/def_technician_armor_set_lv1/boots.png"
   },
   {
     "id": "pants_armorset_arctron_technician_lv1",
@@ -5468,7 +5468,7 @@
     "bonus": {
       "def": 4
     },
-    "image": "/assets/armor/defarctrontechnicianlv1pants.png"
+    "image": "/assets/arctron/def_technician_armor_set_lv1/pants.png"
   },
   {
     "id": "armor_armorset_arctron_technician_lv32",
@@ -5487,7 +5487,7 @@
     "bonus": {
       "def": 300
     },
-    "image": "/assets/armor/defarctrontechnicianlv32armor.png"
+    "image": "/assets/arctron/def_technician_armor_set_lv32/armor.png"
   },
   {
     "id": "helmet_armorset_arctron_technician_lv32",
@@ -5506,7 +5506,7 @@
     "bonus": {
       "def": 140
     },
-    "image": "/assets/armor/defarctrontechnicianlv32helmet.png"
+    "image": "/assets/arctron/def_technician_armor_set_lv32/helmet.png"
   },
   {
     "id": "gloves_armorset_arctron_technician_lv32",
@@ -5526,7 +5526,7 @@
       "def": 90,
       "atk": 40
     },
-    "image": "/assets/armor/defarctrontechnicianlv32gloves.png"
+    "image": "/assets/arctron/def_technician_armor_set_lv32/gloves.png"
   },
   {
     "id": "boots_armorset_arctron_technician_lv32",
@@ -5545,7 +5545,7 @@
     "bonus": {
       "def": 90
     },
-    "image": "/assets/armor/defarctrontechnicianlv32boots.png"
+    "image": "/assets/arctron/def_technician_armor_set_lv32/boots.png"
   },
   {
     "id": "pants_armorset_arctron_technician_lv32",
@@ -5565,7 +5565,7 @@
       "def": 120,
       "hp": 1500
     },
-    "image": "/assets/armor/defarctrontechnicianlv32pants.png"
+    "image": "/assets/arctron/def_technician_armor_set_lv32/pants.png"
   },
   {
     "id": "armor_armorset_arctron_technician_lv42",
@@ -5584,7 +5584,7 @@
     "bonus": {
       "def": 400
     },
-    "image": "/assets/armor/defarctrontechnicianlv42armor.png"
+    "image": "/assets/arctron/def_technician_armor_set_lv42/armor.png"
   },
   {
     "id": "helmet_armorset_arctron_technician_lv42",
@@ -5603,7 +5603,7 @@
     "bonus": {
       "def": 180
     },
-    "image": "/assets/armor/defarctrontechnicianlv42helmet.png"
+    "image": "/assets/arctron/def_technician_armor_set_lv42/helmet.png"
   },
   {
     "id": "gloves_armorset_arctron_technician_lv42",
@@ -5623,7 +5623,7 @@
       "def": 120,
       "atk": 55
     },
-    "image": "/assets/armor/defarctrontechnicianlv42gloves.png"
+    "image": "/assets/arctron/def_technician_armor_set_lv42/gloves.png"
   },
   {
     "id": "boots_armorset_arctron_technician_lv42",
@@ -5642,7 +5642,7 @@
     "bonus": {
       "def": 120
     },
-    "image": "/assets/armor/defarctrontechnicianlv42boots.png"
+    "image": "/assets/arctron/def_technician_armor_set_lv42/boots.png"
   },
   {
     "id": "pants_armorset_arctron_technician_lv42",
@@ -5662,7 +5662,7 @@
       "def": 160,
       "hp": 2000
     },
-    "image": "/assets/armor/defarctrontechnicianlv42pants.png"
+    "image": "/assets/arctron/def_technician_armor_set_lv42/pants.png"
   },
   {
     "id": "armor_armorset_arctron_technician_lv55",
@@ -5681,7 +5681,7 @@
     "bonus": {
       "def": 520
     },
-    "image": "/assets/armor/defarctrontechnicianlv55armor.png"
+    "image": "/assets/arctron/def_technician_armor_set_lv55/armor.png"
   },
   {
     "id": "helmet_armorset_arctron_technician_lv55",
@@ -5700,7 +5700,7 @@
     "bonus": {
       "def": 240
     },
-    "image": "/assets/armor/defarctrontechnicianlv55helmet.png"
+    "image": "/assets/arctron/def_technician_armor_set_lv55/helmet.png"
   },
   {
     "id": "gloves_armorset_arctron_technician_lv55",
@@ -5720,7 +5720,7 @@
       "def": 160,
       "atk": 75
     },
-    "image": "/assets/armor/defarctrontechnicianlv55gloves.png"
+    "image": "/assets/arctron/def_technician_armor_set_lv55/gloves.png"
   },
   {
     "id": "boots_armorset_arctron_technician_lv55",
@@ -5739,7 +5739,7 @@
     "bonus": {
       "def": 160
     },
-    "image": "/assets/armor/defarctrontechnicianlv55boots.png"
+    "image": "/assets/arctron/def_technician_armor_set_lv55/boots.png"
   },
   {
     "id": "pants_armorset_arctron_technician_lv55",
@@ -5759,6 +5759,6 @@
       "def": 210,
       "hp": 2600
     },
-    "image": "/assets/armor/defarctrontechnicianlv55pants.png"
+    "image": "/assets/arctron/def_technician_armor_set_lv55/pants.png"
   }
 ]
