@@ -24,6 +24,9 @@ dist-ssr
 .env
 .env.local
 
+# Local-only experiment page — dressing/gear calibration sandbox, never deploy
+public/dressing-lab.html
+
 # Server data (user saves, sessions) — jangan di-commit
 # NOTE: /data/ (root only) not src/data/ (game data must be committed)
 /data/

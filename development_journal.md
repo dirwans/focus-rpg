@@ -2397,6 +2397,23 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 - **ReferenceError Hotfix**: Fixed a console crash in [Unit.jsx](file:///c:/projects/focus-rpg/src/screens/Unit.jsx) where a lingering reference to `SPRITE_CALIBRATIONS` threw an `Uncaught ReferenceError`. Replaced it with static default values.
 - **Obsolete UI Cleanup**: Removed the obsolete `CALIBRATE` and `GEAR ON/OFF` buttons, state variables (`calOpen`, `calSlot`, etc.), `useEffect` hook, and the bottom calibration range sliders overlay panel from [Unit.jsx](file:///c:/projects/focus-rpg/src/screens/Unit.jsx).
 
+### 🎨 Milestone 184: Arctron Warrior Front-View Sprite & Gear Asset Prep (CSS overlay experiment reverted) [PENDING DEPLOYMENT]
+- **New Front-View Sprite** (`public/assets/arctron_warrior.png`):
+  - Replaced old 3/4-angle sprite (515×1316) with symmetric fully front-facing version (394×702, rembg'd by user). Old sprite backed up to `trial-rakit-arctron-war/arctron_warrior_OLD.png`.
+- **CSS Gear Overlay — built, tested, then reverted**:
+  - Built a `GearOverlay.jsx` paper-doll component and wired it into `Unit.jsx` (⚙️ calibration toggle, per-slot `x/y/ax/ay/size/rot` positioning).
+  - Root-caused persistent fit issues (boots pinch, floating pants) to a fundamental mismatch: gear art was small standalone crops requiring runtime math, not full-canvas pre-aligned layers (the actual pattern real dress-up implementations use).
+  - Reverted `Unit.jsx` to its original plain `PilotSprite` rendering — **no dressing overlay is active in production**. `GearOverlay.jsx` remains in the repo, unused, for future reference.
+  - **Correction to prior log entry**: the 60-path fix to `src/data/arctron_gears.json` (`/assets/armor/` → `/assets/arctron/`) described here previously was never actually committed — the file still uses the old `/assets/armor/` paths as of this entry. Not corrected, since no current code path depends on it.
+- **Gear Asset Cleanup** (`public/assets/arctron/defarctronwarriorlv1*.png`, mirrored to `src/assets/arctron/`):
+  - Ran `process_gears.py` (rembg + center-crop + square pad) on 5 Arctron Warrior Lv.1 gear pieces: `helmet`, `armor`, `gloves`, `pants`, `boots`. All now 400×400 transparent PNGs (was: opaque grey background).
+  - Split paired `boots.png` and `gloves.png` into `_l`/`_r` variants (`defarctronwarriorlv1boots_l/r.png`, `defarctronwarriorlv1gloves_l/r.png`), sourced from a cleaner front-facing boots asset (`canva-clean-arc-war-front-boots.png`).
+  - Baked validated `pants`/`boots` positioning into full-canvas (394×702) pre-aligned layer PNGs at `public/assets/arctron/layers/` — proof-of-concept for the "correct" full-canvas dress-up pattern, not yet wired into any component.
+- **Local experiment sandbox** (`public/dressing-lab.html`, gitignored, never deployed):
+  - Standalone canvas tool for calibrating gear-layer position/scale/rotation against the sprite outside of the game/VPS — drag-to-position, live coordinate readout, bake-to-PNG export. Kept purely local per `.gitignore`.
+
+---
+
 ### Milestone 183: Arctron DragonBones Paper Doll Integration [DEPLOYED]
 - **DragonBones Character Component**: Created [DragonBonesCharacter.jsx](file:///c:/projects/focus-rpg/src/components/DragonBonesCharacter.jsx) to display animated mecha characters and handle dynamic right-hand weapon and left-hand shield texture swapping based on active player store states (`useGameStore`). Resolves paths dynamically using `resolveItemImage`.
 - **Conditional Routing**: Modified [PilotSprites.jsx](file:///c:/projects/focus-rpg/src/components/PilotSprites.jsx) to route large rendering requests (height >= 200px or `isLarge={true}`) for `arctron` race characters through the DragonBones component, while keeping thumbnails and other races (Bionex/Celestra) safe on their original flat rendering logic to avoid WebGL resource limit issues.
