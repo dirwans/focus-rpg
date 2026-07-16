@@ -336,6 +336,15 @@ export function resolveItemImage(item, playerRace, playerJob, playerGender) {
       imgPath = imgPath.replace('/assets/arctron/', '/assets/arctron/');
     }
   }
+
+  // Force cache-buster for LV1 Arctron shield and weapon masterpieces if resolved via static path
+  if (imgPath && typeof imgPath === 'string') {
+    if (imgPath.includes('lv1arctronshielddefault.png') || imgPath.includes('defallfactionslv1sword')) {
+      const base = imgPath.split('?')[0];
+      return `${base}?v=9`;
+    }
+  }
+
   return imgPath;
 }
 
