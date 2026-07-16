@@ -3,9 +3,9 @@ import { useGameStore, resolveItemImage } from '../store/gameStore'
 import { t } from '../lib/translate'
 
 const BAG_ICONS = {
-  arctron: "/assets/arctron_bag_icon_rembg.png",
-  bionex: "/assets/bionex_bag_icon_rembg.png",
-  celestra: "/assets/celestra_bag_icon_rembg.png",
+  arctron: "/assets/arctron/arctron_bag_icon_rembg.png",
+  bionex: "/assets/bionex/bionex_bag_icon_rembg.png",
+  celestra: "/assets/celestra/celestra_bag_icon_rembg.png",
 }
 
 export default function Inventory() {
@@ -340,84 +340,43 @@ export default function Inventory() {
                 {equipOpen && (
                   <>
                     {/* ── Equipment Grid ─────────────────────────────── */}
+                    {/* ── Equipment Grid ─────────────────────────────── */}
                     <div style={{
                       margin: '0 auto 12px',
-                      padding: '8px',
-                      background: 'rgba(5, 8, 12, 0.95)',
+                      position: 'relative',
+                      width: 'calc(100% - 32px)',
+                      maxWidth: 394,
+                      aspectRatio: '394 / 702',
+                      background: 'rgba(5, 8, 12, 0.9) url("/assets/arctron/arctron_warrior_silhoutte.png") no-repeat center / contain',
                       border: '2px solid rgba(50, 58, 70, 0.8)',
                       borderRadius: 6,
-                      display: 'flex',
-                      justifyContent: 'center',
-                      gap: 3,
-                      overflow: 'visible',
-                      width: 'calc(100% - 32px)',
                       boxShadow: '0 8px 16px rgba(0,0,0,0.6)',
+                      overflow: 'visible',
                     }}>
-                      {/* Left Column */}
-                      <div style={{ display: 'flex', flexDirection: 'column', flex: 1, gap: 3, alignItems: 'center' }}>
-                        <div style={{ display: 'flex', gap: 3, width: '100%', marginBottom: 'calc(50% + 3px)' }}>
-                          {renderEquipSlot('amulet1', 'AM1', amuletSvg, false, 'calc(50% - 1.5px)', 'auto', '1 / 1')}
-                          {renderEquipSlot('amulet2', 'AM2', amuletSvg, false, 'calc(50% - 1.5px)', 'auto', '1 / 1')}
+                      {[
+                        { slotKey: 'amulet1', label: 'AM1', svgIcon: amuletSvg, top: '2%', left: '6%', width: '20%' },
+                        { slotKey: 'amulet2', label: 'AM2', svgIcon: amuletSvg, top: '14%', left: '6%', width: '20%' },
+                        { slotKey: 'gloves_l', label: 'GLV_L', svgIcon: glovesSvg, top: '30%', left: '6%', width: '20%' },
+                        { slotKey: 'shield', label: 'SHD', svgIcon: shieldSvg, top: '46%', left: '6%', width: '20%' },
+                        { slotKey: 'ring1', label: 'RG1', svgIcon: ringSvg, top: '67%', left: '6%', width: '20%' },
+                        
+                        { slotKey: 'mantle', label: 'CPE', svgIcon: mantleSvg, top: '2%', left: '74%', width: '20%' },
+                        { slotKey: 'ascension_arms', label: 'ARES', svgIcon: aresSvg, top: '14%', left: '74%', width: '20%' },
+                        { slotKey: 'gloves_r', label: 'GLV_R', svgIcon: glovesSvg, top: '30%', left: '74%', width: '20%' },
+                        { slotKey: 'weapon', label: 'WPN', svgIcon: weaponSvg, top: '46%', left: '74%', width: '20%' },
+                        { slotKey: 'ring2', label: 'RG2', svgIcon: ringSvg, top: '67%', left: '74%', width: '20%' },
+                        
+                        { slotKey: 'helmet', label: 'HELM', svgIcon: helmetSvg, top: '2%', left: '38%', width: '24%' },
+                        { slotKey: 'armor', label: 'ARM', svgIcon: armorSvg, top: '14%', left: '38%', width: '24%' },
+                        { slotKey: 'pants', label: 'PNT', svgIcon: pantsSvg, top: '35%', left: '38%', width: '24%' },
+                        
+                        { slotKey: 'boots_l', label: 'BTS_L', svgIcon: bootsSvg, top: '72%', left: '22%', width: '20%' },
+                        { slotKey: 'boots_r', label: 'BTS_R', svgIcon: bootsSvg, top: '72%', left: '58%', width: '20%' },
+                      ].map(({ slotKey, label, svgIcon, top, left, width }) => (
+                        <div key={slotKey} style={{ position: 'absolute', top, left, width, aspectRatio: '1 / 1' }}>
+                          {renderEquipSlot(slotKey, label, svgIcon, false, '100%', '100%', '1 / 1')}
                         </div>
-                        <div style={{ width: '100%' }}>
-                          {renderEquipSlot('weapon', 'WPN', weaponSvg, false, '100%', 'auto', '1 / 1')}
-                        </div>
-                        <div style={{ display: 'flex', gap: 3, width: '100%' }}>
-                          {renderEquipSlot('gloves_l', 'GLV_L', glovesSvg, false, 'calc(50% - 1.5px)', 'auto', '1 / 1')}
-                          {renderEquipSlot('gloves_r', 'GLV_R', glovesSvg, false, 'calc(50% - 1.5px)', 'auto', '1 / 1')}
-                        </div>
-                        <div style={{ marginTop: 'calc(20% + 3px)', width: '100%', display: 'flex', justifyContent: 'center' }}>
-                          {renderEquipSlot('ring1', 'RG1', ringSvg, false, '60%', 'auto', '1 / 1')}
-                        </div>
-                      </div>
-
-                      {/* Center Column */}
-                      <div style={{ display: 'flex', flexDirection: 'column', flex: 1, gap: 3, alignItems: 'center' }}>
-                        <div style={{ width: '100%' }}>
-                          {renderEquipSlot('helmet', 'HELM', helmetSvg, false, '100%', 'auto', '1 / 1')}
-                        </div>
-                        <div style={{ width: '100%' }}>
-                          {renderEquipSlot('armor', 'ARM', armorSvg, false, '100%', 'auto', '1 / 1')}
-                        </div>
-                        <div style={{ width: '100%' }}>
-                          {renderEquipSlot('pants', 'PNT', pantsSvg, false, '100%', 'auto', '1 / 1')}
-                        </div>
-                        <div style={{ display: 'flex', gap: 3, width: '100%' }}>
-                          {renderEquipSlot('boots_l', 'BTS_L', bootsSvg, false, 'calc(50% - 1.5px)', 'auto', '1 / 1')}
-                          {renderEquipSlot('boots_r', 'BTS_R', bootsSvg, false, 'calc(50% - 1.5px)', 'auto', '1 / 1')}
-                        </div>
-                      </div>
-
-                      {/* Right Column */}
-                      <div style={{ display: 'flex', flexDirection: 'column', flex: 1, gap: 3, alignItems: 'center' }}>
-                        <div style={{ display: 'flex', gap: 3, width: '100%', marginBottom: 'calc(50% + 3px)' }}>
-                          {renderEquipSlot('ascension_arms', 'ARES', aresSvg, false, 'calc(50% - 1.5px)', 'auto', '1 / 1')}
-                          {/* Decorative lock slot */}
-                          <div style={{
-                            width: 'calc(50% - 1.5px)',
-                            aspectRatio: '1 / 1',
-                            borderRadius: 4,
-                            background: 'rgba(5, 10, 20, 0.85)',
-                            border: '2px solid rgba(55, 65, 80, 0.5)',
-                            boxShadow: 'inset 0 0 6px rgba(0,0,0,0.85)',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            position: 'relative',
-                          }}>
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(138,148,163,0.12)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
-                          </div>
-                        </div>
-                        <div style={{ width: '100%' }}>
-                          {renderEquipSlot('shield', 'SHD', shieldSvg, false, '100%', 'auto', '1 / 1')}
-                        </div>
-                        <div style={{ width: '100%' }}>
-                          {renderEquipSlot('mantle', 'CPE', mantleSvg, false, '100%', 'auto', '1 / 1')}
-                        </div>
-                        <div style={{ marginTop: 'calc(20% + 3px)', width: '100%', display: 'flex', justifyContent: 'center' }}>
-                          {renderEquipSlot('ring2', 'RG2', ringSvg, false, '60%', 'auto', '1 / 1')}
-                        </div>
-                      </div>
+                      ))}
                     </div>
 
                     {/* ── Smart Equip Picker ─────────────────────────── */}

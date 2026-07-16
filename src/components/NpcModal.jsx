@@ -1424,13 +1424,13 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                     id: 'tool_mining_pickaxe', 
                     label: player.race === 'arctron' ? 'Arctron Mining Tool' : player.race === 'bionex' ? 'Bionex Mining Tool' : 'Celestra Mining Tool', 
                     price: 50000,
-                    img: player.race === 'arctron' ? "/assets/mining_tool_arctron_rembg.png" : player.race === 'bionex' ? "/assets/mining_tool_bionex_rembg.png" : "/assets/mining_tool_celestra_rembg.png"
+                    img: player.race === 'arctron' ? "/assets/arctron/mining_tool_arctron_rembg.png" : player.race === 'bionex' ? "/assets/bionex/mining_tool_bionex_rembg.png" : "/assets/celestra/mining_tool_celestra_rembg.png"
                   },
                   { 
                     id: 'tool_auto_mining', 
                     label: player.race === 'arctron' ? 'Arctron Auto Mining Tool' : player.race === 'bionex' ? 'Bionex Auto Mining Tool' : 'Celestra Auto Mining Tool', 
                     price: 150000,
-                    img: player.race === 'arctron' ? '/assets/auto_mining_tool_arctron.png' : player.race === 'bionex' ? '/assets/auto_mining_tool_bionex.png' : '/assets/auto_mining_tool_celestra.png'
+                    img: player.race === 'arctron' ? '/assets/arctron/auto_mining_tool_arctron.png' : player.race === 'bionex' ? '/assets/bionex/auto_mining_tool_bionex.png' : '/assets/celestra/auto_mining_tool_celestra.png'
                   },
                   { id: 'pot_mining_battery_s', label: '🔋 Battery S (Mining Fuel x1)', price: 25000, img: '/assets/mining_battery_s.png' },
                   { id: 'pot_mining_battery_m', label: '🔋 Battery M (Mining Fuel x3)', price: 60000, img: '/assets/mining_battery_m.png' },

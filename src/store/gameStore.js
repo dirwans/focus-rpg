@@ -175,11 +175,11 @@ export function resolveItemImage(item, playerRace, playerJob, playerGender) {
   if (!item) return null
   if (item.id === 'tool_mining_pickaxe') {
     const race = playerRace || 'arctron'
-    return `/assets/mining_tool_${race}_rembg.png`
+    return `/assets/${race}/mining_tool_${race}_rembg.png`
   }
   if (item.id === 'tool_auto_mining') {
     const race = playerRace || 'arctron'
-    return `/assets/auto_mining_tool_${race}.png`
+    return `/assets/${race}/auto_mining_tool_${race}.png`
   }
   const idStr = (item.id || '').toLowerCase();
   if (item.type === 'ring' || item.type === 'amulet' || idStr.startsWith('rng_') || idStr.startsWith('amu_')) {

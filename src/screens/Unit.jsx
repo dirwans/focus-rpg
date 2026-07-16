@@ -17,9 +17,9 @@ const BIONEX_SPRITES = {
 }
 
 const BAG_ICONS = {
-  arctron: "/assets/arctron_bag_icon_rembg.png",
-  bionex: "/assets/bionex_bag_icon_rembg.png",
-  celestra: "/assets/celestra_bag_icon_rembg.png",
+  arctron: "/assets/arctron/arctron_bag_icon_rembg.png",
+  bionex: "/assets/bionex/bionex_bag_icon_rembg.png",
+  celestra: "/assets/celestra/celestra_bag_icon_rembg.png",
 }
 
 function getBionexJobSprite(jobId) {

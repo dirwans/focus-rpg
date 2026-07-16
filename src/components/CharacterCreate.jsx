@@ -10,9 +10,9 @@ import { PilotSprite } from './PilotSprites'
 // Import faction hero art assets
 
 const HERO_IMAGES = {
-  arctron: "/assets/arctron_logo.png",
-  bionex: "/assets/bionex_logo.png",
-  celestra: "/assets/celestra_logo.png"
+  arctron: "/assets/arctron/arctron_logo.png",
+  bionex: "/assets/bionex/bionex_logo.png",
+  celestra: "/assets/celestra/celestra_logo.png"
 }
 
 // Races that render as a glowing emblem (rings + recolor animation) instead of

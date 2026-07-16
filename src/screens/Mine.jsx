@@ -21,9 +21,9 @@ import enemiesData from '../data/enemies.json'
 
 
 const MINING_TOOLS = {
-  arctron:  "/assets/mining_tool_arctron_rembg.png",
-  bionex:   "/assets/mining_tool_bionex_rembg.png",
-  celestra: "/assets/mining_tool_celestra_rembg.png",
+  arctron:  "/assets/arctron/mining_tool_arctron_rembg.png",
+  bionex:   "/assets/bionex/mining_tool_bionex_rembg.png",
+  celestra: "/assets/celestra/mining_tool_celestra_rembg.png",
 }
 
 
@@ -123,9 +123,9 @@ export default function Mine() {
   const [processGrade, setProcessGrade] = useState('common')
 
   const AUTO_MINING_TOOLS = {
-    arctron: '/assets/auto_mining_tool_arctron.png',
-    bionex: '/assets/auto_mining_tool_bionex.png',
-    celestra: '/assets/auto_mining_tool_celestra.png'
+    arctron: '/assets/arctron/auto_mining_tool_arctron.png',
+    bionex: '/assets/bionex/auto_mining_tool_bionex.png',
+    celestra: '/assets/celestra/auto_mining_tool_celestra.png'
   }
   const hasAutoTool = player?.inventory?.some(it => it.id === 'tool_auto_mining')
   const toolImg = hasAutoTool ? AUTO_MINING_TOOLS[player?.race || 'arctron'] : MINING_TOOLS[player?.race || 'arctron']

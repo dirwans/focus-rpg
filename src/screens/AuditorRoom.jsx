@@ -382,21 +382,21 @@ export default function AuditorRoom() {
 
                  if (idStr.includes('_all_') || idStr.includes('universal')) {
                      if (lvl === '1') {
-                         genericPath = '/assets/arctron_shield_1_rembg.png';
-                     } else if (lvl === '32' || lvl === '42') {
-                         genericPath = '/assets/arctron_shield_2_rembg.png';
-                     } else {
-                         genericPath = '/assets/arctron_shield_3_rembg.png';
-                     }
-                 } else {
-                     if (lvl === '1') {
-                         genericPath = `/assets/${faction}/shields/lv1${factAbbr}shielddefault.png`;
-                     } else {
-                         genericPath = `/assets/${faction}/shields/lv${lvl}${factAbbr}shielddef.png`;
-                     }
-                 }
+                          genericPath = '/assets/arctron/arctron_shield_1_rembg.png';
+                      } else if (lvl === '32' || lvl === '42') {
+                          genericPath = '/assets/arctron/arctron_shield_2_rembg.png';
+                      } else {
+                          genericPath = '/assets/arctron/arctron_shield_3_rembg.png';
+                      }
+                  } else {
+                      if (lvl === '1') {
+                          genericPath = `/assets/${faction}/shields/lv1${factAbbr}shielddefault.png`;
+                      } else {
+                          genericPath = `/assets/${faction}/shields/lv${lvl}${factAbbr}shielddef.png`;
+                      }
+                  }
              } else if (idStr.includes('cap_') || idStr.includes('booster') || idStr.includes('cape')) {
-                 genericPath = '/assets/arctron_bag_icon_rembg.png';
+                 genericPath = '/assets/arctron/arctron_bag_icon_rembg.png';
              } else if (idStr.includes('rng') || idStr.includes('ring')) {
                  let race = 'all';
                  if (idStr.includes('_arc_') || idStr.includes('arctron')) race = 'arctron';
@@ -1131,21 +1131,21 @@ export default function AuditorRoom() {
                                   </button>
                                   <button onClick={() => setCraftRaceFilter(p => p === 'celestra' ? 'all' : 'celestra')} style={{ background: craftRaceFilter === 'celestra' ? '#121c22' : '#0c1018', border: craftRaceFilter === 'celestra' ? '1px solid #00e5ff' : '1px solid #2a3a5a', padding: '8px 12px', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', transition: 'all 0.2s', opacity: craftRaceFilter === 'celestra' || craftRaceFilter === 'all' ? 1 : 0.35 }} title="Celestra Faction">
                                       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                          <img src="/assets/celestra_logo.png" className="celestra-logo-img" style={{ height: '24px', objectFit: 'contain' }} />
+                                          <img src="/assets/celestra/celestra_logo.png" className="celestra-logo-img" style={{ height: '24px', objectFit: 'contain' }} />
                                           <span style={{ color: '#00e5ff', fontWeight: 'bold', fontSize: '12px', textShadow: '0 0 8px rgba(0,229,255,0.7)', letterSpacing: '0.5px' }}>CELESTRA</span>
                                       </div>
                                       {craftRaceFilter === 'celestra' && <span style={{ color: '#00e5ff', fontSize: '10px', fontWeight: 'bold' }}>ACTIVE</span>}
                                   </button>
                                   <button onClick={() => setCraftRaceFilter(p => p === 'bionex' ? 'all' : 'bionex')} style={{ background: craftRaceFilter === 'bionex' ? '#1c1b12' : '#0c1018', border: craftRaceFilter === 'bionex' ? '1px solid #ffcc00' : '1px solid #2a3a5a', padding: '8px 12px', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', transition: 'all 0.2s', opacity: craftRaceFilter === 'bionex' || craftRaceFilter === 'all' ? 1 : 0.35 }} title="Bionex Faction">
                                       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                          <img src="/assets/bionex_logo.png" className="bionex-logo-img" style={{ height: '24px', objectFit: 'contain' }} />
+                                          <img src="/assets/bionex/bionex_logo.png" className="bionex-logo-img" style={{ height: '24px', objectFit: 'contain' }} />
                                           <span style={{ color: '#ffcc00', fontWeight: 'bold', fontSize: '12px', textShadow: '0 0 8px rgba(255,204,0,0.7)', letterSpacing: '0.5px' }}>BIONEX</span>
                                       </div>
                                       {craftRaceFilter === 'bionex' && <span style={{ color: '#ffcc00', fontSize: '10px', fontWeight: 'bold' }}>ACTIVE</span>}
                                   </button>
                                   <button onClick={() => setCraftRaceFilter(p => p === 'arctron' ? 'all' : 'arctron')} style={{ background: craftRaceFilter === 'arctron' ? '#1c1512' : '#0c1018', border: craftRaceFilter === 'arctron' ? '1px solid #ff6400' : '1px solid #2a3a5a', padding: '8px 12px', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', transition: 'all 0.2s', opacity: craftRaceFilter === 'arctron' || craftRaceFilter === 'all' ? 1 : 0.35 }} title="Arctron Faction">
                                       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                          <img src="/assets/arctron_logo.png" className="arctron-logo-img" style={{ height: '24px', objectFit: 'contain' }} />
+                                          <img src="/assets/arctron/arctron_logo.png" className="arctron-logo-img" style={{ height: '24px', objectFit: 'contain' }} />
                                           <span style={{ color: '#ff6400', fontWeight: 'bold', fontSize: '12px', textShadow: '0 0 8px rgba(255,100,0,0.7)', letterSpacing: '0.5px' }}>ARCTRON</span>
                                       </div>
                                       {craftRaceFilter === 'arctron' && <span style={{ color: '#ff6400', fontSize: '10px', fontWeight: 'bold' }}>ACTIVE</span>}

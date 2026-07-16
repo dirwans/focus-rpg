@@ -6,9 +6,9 @@ import { PilotSprite } from '../components/PilotSprites'
 
 
 const TOWER_IMAGES = {
-  arctron: "/assets/arctron_tower.png",
-  bionex: "/assets/bionex_tower.png",
-  celestra: "/assets/celestra_tower.png"
+  arctron: "/assets/arctron/arctron_tower.png",
+  bionex: "/assets/bionex/bionex_tower.png",
+  celestra: "/assets/celestra/celestra_tower.png"
 }
 
 function getJobName(raceId, jobId) {
