@@ -93,6 +93,26 @@ export default function Inventory() {
 
             const TOP_ROW_SLOTS = new Set(['helmet', 'amulet1', 'amulet2', 'ascension_arms'])
 
+            const SLOT_BACKDROPS = {
+              amulet1: "/assets/arctron/amulets/amu_arc_0.png",
+              amulet2: "/assets/arctron/amulets/amu_arc_0.png",
+              gloves_l: "/assets/arctron/def_warrior_armor_set_lv1/gloves_l.png",
+              shield: "/assets/arctron/shields/lv1arctronshielddefault.png",
+              ring1: "/assets/arctron/rings/rng_arc_0.png",
+              
+              mantle: "/assets/arctron/def_warrior_armor_set_lv1/mantle.png",
+              ascension_arms: "/assets/arctron/ARESlv32arctron.png",
+              gloves_r: "/assets/arctron/def_warrior_armor_set_lv1/gloves_r.png",
+              weapon: "/assets/weapons/defallfactionslv1sword1.png",
+              ring2: "/assets/arctron/rings/rng_arc_0.png",
+              
+              helmet: "/assets/arctron/def_warrior_armor_set_lv1/helmet.png",
+              armor: "/assets/arctron/def_warrior_armor_set_lv1/armor.png",
+              pants: "/assets/arctron/def_warrior_armor_set_lv1/pants.png",
+              boots_l: "/assets/arctron/def_warrior_armor_set_lv1/boots_l.png",
+              boots_r: "/assets/arctron/def_warrior_armor_set_lv1/boots_r.png",
+            };
+
             const renderEquipSlot = (slotKey, label, svgIcon, isCircle = false, width = '100%', height = 'auto', aspectRatio = '1 / 1') => {
               const item = player.equipment && player.equipment[slotKey];
               const isEmpty = !item;
@@ -132,8 +152,24 @@ export default function Inventory() {
                       }
                     }}
                   >
-                    <div style={{ opacity: isPicking ? 0.7 : 0.16, display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
-                      {svgIcon}
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+                      {SLOT_BACKDROPS[slotKey] ? (
+                        <img 
+                          src={SLOT_BACKDROPS[slotKey]} 
+                          alt={label}
+                          style={{ 
+                            width: '80%', 
+                            height: '80%', 
+                            objectFit: 'contain', 
+                            opacity: isPicking ? 0.65 : 0.22,
+                            filter: 'brightness(0.9) contrast(1.1)'
+                          }} 
+                        />
+                      ) : (
+                        <div style={{ opacity: isPicking ? 0.7 : 0.16, display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+                          {svgIcon}
+                        </div>
+                      )}
                     </div>
                     {/* Pulse indicator if compatible items exist */}
                     {getCompatibleItems(slotKey).length > 0 && !isPicking && (
@@ -356,13 +392,13 @@ export default function Inventory() {
                       {[
                         { slotKey: 'amulet1', label: 'AM1', svgIcon: amuletSvg, top: '2%', left: '6%', width: '20%' },
                         { slotKey: 'amulet2', label: 'AM2', svgIcon: amuletSvg, top: '14%', left: '6%', width: '20%' },
-                        { slotKey: 'gloves_l', label: 'GLV_L', svgIcon: glovesSvg, top: '30%', left: '6%', width: '20%' },
+                        { slotKey: 'gloves_r', label: 'GLV_R', svgIcon: glovesSvg, top: '30%', left: '6%', width: '20%' },
                         { slotKey: 'shield', label: 'SHD', svgIcon: shieldSvg, top: '46%', left: '6%', width: '20%' },
                         { slotKey: 'ring1', label: 'RG1', svgIcon: ringSvg, top: '67%', left: '6%', width: '20%' },
                         
                         { slotKey: 'mantle', label: 'CPE', svgIcon: mantleSvg, top: '2%', left: '74%', width: '20%' },
                         { slotKey: 'ascension_arms', label: 'ARES', svgIcon: aresSvg, top: '14%', left: '74%', width: '20%' },
-                        { slotKey: 'gloves_r', label: 'GLV_R', svgIcon: glovesSvg, top: '30%', left: '74%', width: '20%' },
+                        { slotKey: 'gloves_l', label: 'GLV_L', svgIcon: glovesSvg, top: '30%', left: '74%', width: '20%' },
                         { slotKey: 'weapon', label: 'WPN', svgIcon: weaponSvg, top: '46%', left: '74%', width: '20%' },
                         { slotKey: 'ring2', label: 'RG2', svgIcon: ringSvg, top: '67%', left: '74%', width: '20%' },
                         
@@ -370,8 +406,8 @@ export default function Inventory() {
                         { slotKey: 'armor', label: 'ARM', svgIcon: armorSvg, top: '14%', left: '38%', width: '24%' },
                         { slotKey: 'pants', label: 'PNT', svgIcon: pantsSvg, top: '35%', left: '38%', width: '24%' },
                         
-                        { slotKey: 'boots_l', label: 'BTS_L', svgIcon: bootsSvg, top: '72%', left: '22%', width: '20%' },
-                        { slotKey: 'boots_r', label: 'BTS_R', svgIcon: bootsSvg, top: '72%', left: '58%', width: '20%' },
+                        { slotKey: 'boots_r', label: 'BTS_R', svgIcon: bootsSvg, top: '72%', left: '22%', width: '20%' },
+                        { slotKey: 'boots_l', label: 'BTS_L', svgIcon: bootsSvg, top: '72%', left: '58%', width: '20%' },
                       ].map(({ slotKey, label, svgIcon, top, left, width }) => (
                         <div key={slotKey} style={{ position: 'absolute', top, left, width, aspectRatio: '1 / 1' }}>
                           {renderEquipSlot(slotKey, label, svgIcon, false, '100%', '100%', '1 / 1')}
