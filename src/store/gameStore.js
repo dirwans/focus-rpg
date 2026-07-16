@@ -168,7 +168,7 @@ function resolveArmorSetImage(slot, playerRace, playerJob, level, playerGender) 
     }
     return `/assets/celestra/defcelestra${lineage}lv${tier}${slot}.png?v=14`
   }
-  return `/assets/arctron/def_${lineage}_armor_set_lv${tier}/${slot}.png?v=10`
+  return `/assets/arctron/def_${lineage}_armor_set_lv${tier}/${slot}.png?v=12`
 }
 
 export function resolveItemImage(item, playerRace, playerJob, playerGender) {
