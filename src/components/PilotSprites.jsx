@@ -1,5 +1,6 @@
 import { useGameStore, resolveItemImage } from '../store/gameStore'
 import DragonBonesCharacter from './DragonBonesCharacter'
+import GearOverlay from './GearOverlay'
 
 const RACE_DEFAULTS = {
   arctron: {
@@ -266,6 +267,13 @@ export function PilotSprite({ race, job, size = 60, width, height, upperBodyOnly
   }
 
   if (isSelf && player.equipment && showGears) {
+    if (race === 'arctron') {
+      return (
+        <GearOverlay player={player} height={height || size} style={style}>
+          {baseSprite}
+        </GearOverlay>
+      )
+    }
     return (
       <PaperDollStack 
         baseSprite={baseSprite} 
