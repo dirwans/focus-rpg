@@ -168,7 +168,7 @@ function resolveArmorSetImage(slot, playerRace, playerJob, level, playerGender) 
     }
     return `/assets/celestra/defcelestra${lineage}lv${tier}${slot}.png?v=14`
   }
-  return `/assets/arctron/def_${lineage}_armor_set_lv${tier}/${slot}.png?v=9`
+  return `/assets/arctron/def_${lineage}_armor_set_lv${tier}/${slot}.png?v=10`
 }
 
 export function resolveItemImage(item, playerRace, playerJob, playerGender) {
@@ -223,8 +223,8 @@ export function resolveItemImage(item, playerRace, playerJob, playerGender) {
       if (lvl >= 55) return '/assets/arctron/shields/lv55arctronshielddef.png?v=9'
       if (lvl >= 42) return '/assets/arctron/shields/lv42arctronshielddef.png?v=9'
       if (lvl >= 32) return '/assets/arctron/shields/lv32arctronshielddef.png?v=9'
-      if (lvl >= 10) return '/assets/arctron/shields/lv10arctronshielddefault.png?v=9'
-      return '/assets/arctron/shields/lv1arctronshielddefault.png?v=9'
+      if (lvl >= 10) return '/assets/arctron/shields/lv10arctronshielddefault.png?v=10'
+      return '/assets/arctron/shields/lv1arctronshielddefault.png?v=10'
     }
   }
   if (item.type === 'weapon') {
@@ -288,9 +288,9 @@ export function resolveItemImage(item, playerRace, playerJob, playerGender) {
 
     if (tier === '1') {
       const index = (seed % 4) + 1
-      return `/assets/weapons/defallfactionslv1sword${index}.png?v=9`
+      return `/assets/weapons/defallfactionslv1sword${index}.png?v=10`
     }
-    return `/assets/weapons/defallfactionslv${tier}sword.png?v=9`
+    return `/assets/weapons/defallfactionslv${tier}sword.png?v=10`
   }
   // Bespoke default armor-set pieces (id namespace `*_armorset_*`, e.g.
   // `armor_armorset_arctron_lv1`) resolve dynamically by race/job/level tier;
@@ -341,7 +341,7 @@ export function resolveItemImage(item, playerRace, playerJob, playerGender) {
   if (imgPath && typeof imgPath === 'string') {
     if (imgPath.includes('lv1arctronshielddefault.png') || imgPath.includes('defallfactionslv1sword')) {
       const base = imgPath.split('?')[0];
-      return `${base}?v=9`;
+      return `${base}?v=10`;
     }
   }
 
