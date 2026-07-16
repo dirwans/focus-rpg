@@ -5,7 +5,7 @@ export default function ArctronSprite({ job, size = 60, width, height, upperBody
   const lane = getJobLane(job)
   let img = isBattle ? "/assets/arctron/arctron_warrior_battle.png" : "/assets/arctron/arctron_warrior.png"
   if (lane === 'ranger') img = "/assets/arctron/arctron_ranger.png"
-  else if (lane === 'specialist') img = "/assets/arctron/arctron_specialist.png"
+  else if (lane === 'specialist') img = "/assets/arctron/arctron_technician.png"
 
   const glow = '#00e5ff'
 

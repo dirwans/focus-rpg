@@ -1853,6 +1853,9 @@ app.post('/api/audit/import_excel', (req, res) => {
 // ── Serve React build ─────────────────────────────────────────────────────────
 // Hashed assets (JS/CSS) can be cached forever; index.html must revalidate
 // Serve public assets (gear images, sprites, materials) from public/assets
+// Redirect old dressing-room.html → arctron-dressing.html
+app.get('/dressing-room.html', (_req, res) => res.redirect(301, '/arctron-dressing.html'))
+
 app.use('/assets', express.static(join(__dirname, 'public', 'assets'), {
   maxAge: '1d',
   setHeaders: (res) => {
