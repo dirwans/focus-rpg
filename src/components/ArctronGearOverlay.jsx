@@ -45,7 +45,7 @@ export default function ArctronGearOverlay({ player, width, height = 298, calibr
         }
         if (!item) return
 
-        const rawUrl = item.image || resolveItemImage(item, race, job, gender)
+        const rawUrl = resolveItemImage(item, race, job, gender) || item.image
         if (!rawUrl) return
 
         let url = rawUrl

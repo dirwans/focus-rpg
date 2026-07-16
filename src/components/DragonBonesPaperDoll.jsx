@@ -61,7 +61,7 @@ export default function DragonBonesPaperDoll({ player, width = 320, height = 320
     Object.entries(GEAR_SLOT_MAP).forEach(([gameSlot, dbSlots]) => {
       const item = eq[gameSlot]
       if (!item) return
-      const imgUrl = proxyUrl(item.image || resolveItemImage(item, player?.race, player?.job))
+      const imgUrl = proxyUrl(resolveItemImage(item, player?.race, player?.job) || item.image)
       if (!imgUrl) return
       dbSlots.forEach(({ db, anchor, scale }) => {
         const slot = armature.armature.getSlot(db)
@@ -144,7 +144,7 @@ export default function DragonBonesPaperDoll({ player, width = 320, height = 320
         Object.entries(GEAR_SLOT_MAP).forEach(([gameSlot, dbSlots]) => {
           const item = eq[gameSlot]
           if (!item) return
-          const imgUrl = proxyUrl(item.image || resolveItemImage(item, player?.race, player?.job))
+          const imgUrl = proxyUrl(resolveItemImage(item, player?.race, player?.job) || item.image)
           if (!imgUrl) return
           dbSlots.forEach(({ db, anchor, scale }) => {
             const slotObj = armature.armature.getSlot(db)
