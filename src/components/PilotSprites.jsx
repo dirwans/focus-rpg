@@ -268,11 +268,7 @@ export function PilotSprite({ race, job, size = 60, width, height, upperBodyOnly
 
   if (isSelf && player.equipment && showGears) {
     if (race === 'arctron') {
-      return (
-        <GearOverlay player={player} height={height || size} style={style}>
-          {baseSprite}
-        </GearOverlay>
-      )
+      return baseSprite
     }
     return (
       <PaperDollStack 
