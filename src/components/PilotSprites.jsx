@@ -183,9 +183,10 @@ export function PilotSprite({ race, job, size = 60, width, height, upperBodyOnly
 
   if (isSelf && player.equipment && showGears) {
     if (race === 'arctron') {
+      const overlayBaseSprite = <ArctronSprite job={job} width="100%" height="100%" isBattle={isBattle} />
       return (
-        <GearOverlay player={player} style={style}>
-          {baseSprite}
+        <GearOverlay player={player} width={width || size} height={height || size} style={style}>
+          {overlayBaseSprite}
         </GearOverlay>
       )
     }

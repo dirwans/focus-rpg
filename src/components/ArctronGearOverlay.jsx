@@ -22,7 +22,7 @@ const GEAR_POINTS = {
 
 const SLOT_ORDER = Object.keys(GEAR_POINTS).sort((a, b) => GEAR_POINTS[a][0].z - GEAR_POINTS[b][0].z)
 
-export default function ArctronGearOverlay({ player, height = 298, calibrate = false, style: extraStyle, children }) {
+export default function ArctronGearOverlay({ player, width, height = 298, calibrate = false, style: extraStyle, children }) {
   const eq = player?.equipment || {}
   const race = player?.race
   const job = player?.job
@@ -48,7 +48,13 @@ export default function ArctronGearOverlay({ player, height = 298, calibrate = f
         const rawUrl = item.image || resolveItemImage(item, race, job, gender)
         if (!rawUrl) return
 
-        const url = pt.splitSuffix ? rawUrl.replace(/\.png$/i, `${pt.splitSuffix}.png`) : rawUrl
+        let url = rawUrl
+        if (pt.splitSuffix) {
+          const base = rawUrl.split('?')[0]
+          const search = rawUrl.split('?')[1] || ''
+          const newBase = base.replace(/\.png$/i, `${pt.splitSuffix}.png`)
+          url = search ? `${newBase}?${search}` : newBase
+        }
         const src = proxyUrl(url)
         if (!src) return
         
@@ -78,8 +84,19 @@ export default function ArctronGearOverlay({ player, height = 298, calibrate = f
     return out
   }, [eq, race, job, gender])
 
+  const h = typeof height === 'number' ? height : 298
+  const w = h * (394 / 702)
+
   return (
-    <div style={{ position: 'relative', display: 'inline-block', isolation: 'isolate', ...extraStyle }}>
+    <div style={{
+      position: 'relative',
+      display: 'block',
+      width: w,
+      height: h,
+      margin: '0 auto',
+      isolation: 'isolate',
+      ...extraStyle
+    }}>
       {children}
       {layers.map(({ key, point, src }) => (
         <GearImg key={key} src={src} point={point} />

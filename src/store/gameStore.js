@@ -497,7 +497,15 @@ export function verifyStarterArmorSet(player) {
   slots.forEach((slot, i) => {
     const itemDef = itemsData.items.find((it) => it.id === `${slot}_armorset_${player.race}_${lineageInfix}lv1`)
     if (itemDef) {
-      newEquipment[slot] = { ...itemDef, uid: Date.now() + i, enhancement_level: 0 }
+      if (slot === 'boots') {
+        newEquipment['boots_l'] = { ...itemDef, uid: Date.now() + i, enhancement_level: 0 }
+        newEquipment['boots_r'] = { ...itemDef, uid: Date.now() + i + 10, enhancement_level: 0 }
+      } else if (slot === 'gloves') {
+        newEquipment['gloves_l'] = { ...itemDef, uid: Date.now() + i, enhancement_level: 0 }
+        newEquipment['gloves_r'] = { ...itemDef, uid: Date.now() + i + 10, enhancement_level: 0 }
+      } else {
+        newEquipment[slot] = { ...itemDef, uid: Date.now() + i, enhancement_level: 0 }
+      }
       changed = true
     }
   })
@@ -3037,7 +3045,7 @@ export const useGameStore = create(
             next.player.race = null
             next.player.job = null
             next.player.upgrades = { atk: 0, def: 0, hp: 0 }
-            next.player.equipment = { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null }
+            next.player.equipment = { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves_l: null, gloves_r: null, boots_l: null, boots_r: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null }
           }
 
           if (__session) {

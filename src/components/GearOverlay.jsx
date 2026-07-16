@@ -88,12 +88,12 @@ export function CalibrateDot({ slot, point }) {
 /**
  * GearOverlay — wrapper component routing to the race-specific overlays
  */
-export default function GearOverlay({ player, height = 298, calibrate = false, style: extraStyle, children }) {
+export default function GearOverlay({ player, width, height = 298, calibrate = false, style: extraStyle, children }) {
   const race = player?.race
 
   if (race === 'arctron') {
     return (
-      <ArctronGearOverlay player={player} height={height} calibrate={calibrate} style={extraStyle}>
+      <ArctronGearOverlay player={player} width={width} height={height} calibrate={calibrate} style={extraStyle}>
         {children}
       </ArctronGearOverlay>
     )
