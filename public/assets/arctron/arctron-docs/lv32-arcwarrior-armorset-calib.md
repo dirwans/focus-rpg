@@ -1,6 +1,6 @@
 # Kitab Sakti Kalibrasi Mecha Arctron Warrior (LV32 Set)
 
-> Auto-generated from Arctron Dressing Room on 7/16/2026, 7:31:50 PM
+> Auto-generated from Arctron Dressing Room on 7/16/2026, 9:07:28 PM
 
 ## Master Coordinate Presets
 
@@ -18,7 +18,7 @@ const GEAR_POINTS = {
     { x: -0.195, y: 0.329, ax: 0.5, ay: 0.23, size: 0.228, rot: -1, z: 3, scaleX: 1.035, scaleY: 1.495, label: 'glove_r', splitSuffix: '_r' }
   ],
   shield: [{ x: -0.209, y: 0.447, ax: 0.59, ay: 0.54, size: 0.457, rot: 12, z: 4 }],
-  weapon: [{ x: 0.063, y: 0.599, ax: 0.49, ay: 0.5, size: 0.570, rot: -58, z: 5, scaleX: 1.210, scaleY: 1.345 }],
+  weapon: [{ x: 0.169, y: 0.553, ax: 0.42, ay: 0.52, size: 0.483, rot: 130, z: 5, scaleX: 1.380, scaleY: 1.260 }],
   helmet: [{ x: 0.001, y: 0.066, ax: 0.5, ay: 0.5, size: 0.123, rot: 0, z: 5, scaleX: 0.970, scaleY: 1.045 }]
 };
 ```
