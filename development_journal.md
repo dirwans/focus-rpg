@@ -2439,3 +2439,24 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 - **DragonBones In-Place Texture Swap**: Re-enabled DragonBones character rendering for large Arctron previews on the main screen, but completely redesigned the gear attachment system. Instead of overriding `slot.display` with a new `PIXI.Sprite` (which breaks bone coordinates/rotation/scaling), it directly overwrites `slot.display.texture` with the resolved item texture, keeping the sword and shield perfectly aligned in the mecha's hands according to the skeletal rig metadata.
 - **2D Mecha Weapon Alignment**: Restored the original red/orange `ArctronSprite` as the active character portrait, removing the `DragonBonesCharacter` conditional check. Adjusted default weapon/shield offsets in `RACE_DEFAULTS` to match the exact coordinates of the hands on the static 2D Arctron mecha body.
 
+---
+
+### 📝 Milestone 186: Dressing Room Coordinate System & Architecture Integration Plan [DESIGN]
+- **Dressing Room Sandbox Coordinate Math**:
+  - The standalone sandbox tool (`public/dressing-room.html`) calibrates coordinate points against a standard `780 x 936` canvas.
+  - The mecha base sprite has a calibrated width `SPRITE_W = 523.33` and is centered on the canvas (offset by `128.33` pixels from the left border).
+  - All offset coordinates (`x`, `y`), anchors (`ax`, `ay`), and sizing factors (`size`) are expressed as fractions relative to the canvas height (`936`).
+- **Percentage-Based Responsive Layout Mapping**:
+  - To bridge the dressing room coordinate presets into React's responsive layout (`GearOverlay.jsx`), the absolute pixel coordinates are converted into responsive percentages (%):
+    - `left` = `50% + x * (936 / 523.33) * 100%` = `50% + x * 178.853%`. (This positions the gear relative to the center of the mecha image, scaling width-wise).
+    - `top` = `y * 100%`. (Positions the gear relative to the top of the mecha container).
+    - `height` = `size * 100%` and `width` = `auto`. (Scales the height proportionally to the mecha image, maintaining original image aspect ratio).
+    - `transform` = `translate(-ax * 100%, -ay * 100%) rotate(rot deg) scale(scaleX, scaleY)`. (Applies the anchor point offsets, rotations, and custom stretching parameters).
+- **Interface with GameStore Asset Resolution**:
+  - All mecha gear assets are structured in standardized lineage/tier folders.
+  - In `gameStore.js`, `resolveArmorSetImage` maps player race/job/level attributes directly to these standard directories: `/assets/arctron/def_${lineage}_armor_set_lv${tier}/${slot}.png`.
+  - Added a global fallback cache-buster parameter `?v=9` inside `resolveItemImage` to ensure newly modified assets (such as the promoted masterpiece `pants.png` or weapon/shield replacements) are force-loaded by browsers and Capacitor APKs immediately, bypassing any HTTP cache policies.
+- **Current Integration Status**:
+  - The active character preview in the game's Character Tab (`PilotSprites.jsx`) is currently disconnected from the gear overlay rendering (`return baseSprite` directly) to keep it clean and display only the mecha base chassis, while the Dressing Room sandbox remains fully functional for coordinate tweaking and preset exporting.
+
+
