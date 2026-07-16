@@ -453,7 +453,11 @@ export default function AuditorRoom() {
                      else if (tLower.includes('gloves')) piece = 'gloves';
                      else if (tLower.includes('boots')) piece = 'boots';
                  }
-                 genericPath = `/assets/${folder}/${imgPrefix}${job}lv${level}${piece}.png`;
+                 if (folder === 'arctron') {
+                     genericPath = `/assets/arctron/def_${job}_armor_set_lv${level}/${piece}.png`;
+                 } else {
+                     genericPath = `/assets/${folder}/${imgPrefix}${job}lv${level}${piece}.png`;
+                 }
              } else {
                 const idLower = item.id ? item.id.toLowerCase() : '';
                 if (idLower === 'ares_x') preview = '/assets/arctron/ARESlv32arctron.png';

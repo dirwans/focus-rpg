@@ -4,7 +4,12 @@ import { resolveItemImage } from '../store/gameStore'
 function proxyUrl(url) {
   if (!url) return null
   // Normalize stale /assets/armor/ paths that should be /assets/<race>/
-  if (url.startsWith('/assets/armor/defarctron')) url = url.replace('/assets/armor/defarctron', '/assets/arctron/defarctron')
+  if (url.includes('defarctron')) {
+    url = url.replace(
+      /\/assets\/(?:armor|arctron)\/defarctron(warrior|ranger|technician)lv(\d+)(armor|helmet|gloves|boots|pants)\.png/i,
+      '/assets/arctron/def_$1_armor_set_lv$2/$3.png'
+    )
+  }
   return url.startsWith('http') ? `/api/proxy-image?url=${encodeURIComponent(url)}` : url
 }
 
@@ -20,20 +25,20 @@ function proxyUrl(url) {
 //   z          – z-index: -1 = behind sprite, 1+ = in front
 //   splitSuffix – if set, appended before .png to pick L/R variant (_l / _r)
 const GEAR_POINTS = {
-  mantle: [{ x: 0.00, y: 0.20, ax: 0.5, ay: 0.03, size: 0.70, rot:  0, z: -1, color: '#a78bfa' }],
-  armor:  [{ x: 0.00, y: 0.29, ax: 0.5, ay: 0.45, size: 0.28, rot:  0, z:  1, color: '#60a5fa' }],
+  mantle: [{ x: 0.00, y: 0.18, ax: 0.5, ay: 0.05, size: 0.55, rot:  0, z: -1, color: '#a78bfa' }],
+  armor:  [{ x: 0.00, y: 0.19, ax: 0.5, ay: 0.15, size: 0.30, rot:  0, z:  1, color: '#60a5fa' }],
   pants:  [{ x: 0.00, y: 0.50, ax: 0.5, ay: 0.22, size: 0.24, rot:  0, z:  2, color: '#818cf8' }],
   boots: [
-    { x: -0.09, y: 0.72, ax: 0.5, ay: 0.15, size: 0.36, rot: 0, z: 3, color: '#fbbf24', label: 'boot_l', splitSuffix: '_l' },
-    { x: +0.09, y: 0.72, ax: 0.5, ay: 0.15, size: 0.36, rot: 0, z: 3, color: '#fbbf24', label: 'boot_r', splitSuffix: '_r' },
+    { x: +0.09, y: 0.72, ax: 0.5, ay: 0.15, size: 0.36, rot: 0, z: 3, color: '#fbbf24', label: 'boot_l', splitSuffix: '_l' },
+    { x: -0.09, y: 0.72, ax: 0.5, ay: 0.15, size: 0.36, rot: 0, z: 3, color: '#fbbf24', label: 'boot_r', splitSuffix: '_r' },
   ],
   gloves: [
-    { x: -0.20, y: 0.55, ax: 0.5, ay: 0.05, size: 0.28, rot: 0, z: 3, color: '#34d399', label: 'glove_l', splitSuffix: '_l' },
-    { x: +0.20, y: 0.55, ax: 0.5, ay: 0.05, size: 0.28, rot: 0, z: 3, color: '#34d399', label: 'glove_r', splitSuffix: '_r' },
+    { x: +0.085, y: 0.44, ax: 0.5, ay: 0.05, size: 0.22, rot: 0, z: 3, color: '#34d399', label: 'glove_l', splitSuffix: '_l' },
+    { x: -0.085, y: 0.44, ax: 0.5, ay: 0.05, size: 0.22, rot: 0, z: 3, color: '#34d399', label: 'glove_r', splitSuffix: '_r' },
   ],
-  shield: [{ x: -0.18, y: 0.52, ax: 0.5, ay: 0.50, size: 0.34, rot: -8, z:  4, color: '#fb923c' }],
-  weapon: [{ x: +0.18, y: 0.52, ax: 0.5, ay: 0.82, size: 0.43, rot: 15, z:  5, color: '#f87171' }],
-  helmet: [{ x:  0.00, y: 0.09, ax: 0.5, ay: 0.55, size: 0.20, rot:  0, z:  5, color: '#f472b6' }],
+  shield: [{ x: -0.10, y: 0.56, ax: 0.5, ay: 0.50, size: 0.16, rot:  0, z:  4, color: '#fb923c' }],
+  weapon: [{ x: +0.10, y: 0.56, ax: 0.5, ay: 0.75, size: 0.30, rot: 10, z:  5, color: '#f87171' }],
+  helmet: [{ x:  0.00, y: 0.075, ax: 0.5, ay: 0.50, size: 0.076, rot:  0, z:  5, color: '#f472b6' }],
 }
 
 // Paint order derived from each slot's own z (no second hand-kept list to fall out of sync)

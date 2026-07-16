@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 394 702" width="394" height="702">
+  <!--
+    Real vector blueprint — not a traced illustration, but an exact schematic
+    of the CALIBRATED gear regions currently validated in dressing-lab.html.
+    Every rect below is derived from { x, y, ax, ay, size } used in production
+    calibration (fractions of CANVAS_H=702), converted to absolute pixel boxes:
+      left = 197 + x*702 - ax*(size*702*aspect)
+      top  = y*702 - ay*(size*702)
+    Aspect ratios approximated per asset (most are ~1:1 square crops except
+    boots/gloves which are taller than wide).
+  -->
+  <defs>
+    <style>
+      .slot-box { fill: none; stroke-width: 1.5; }
+      .slot-label { font-family: monospace; font-size: 9px; fill: #fff; }
+      .center-line { stroke: #ffffff33; stroke-width: 1; stroke-dasharray: 4 4; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="394" height="702" fill="#0e1420"/>
+  <line x1="197" y1="0" x2="197" y2="702" class="center-line"/>
+
+  <!-- HELMET: x:0 y:0.075 ax:0.5 ay:0.5 size:0.076 (square) -->
+  <rect class="slot-box" stroke="#f472b6"
+        x="171" y="26.4" width="52.7" height="53.4"/>
+  <text class="slot-label" x="197" y="20" text-anchor="middle" fill="#f472b6">HELMET</text>
+
+  <!-- CHEST ARMOR: x:0 y:0.19 ax:0.5 ay:0.15 size:0.30 (square) -->
+  <rect class="slot-box" stroke="#60a5fa"
+        x="92.4" y="102.9" width="210.6" height="210.6"/>
+  <text class="slot-label" x="197" y="97" text-anchor="middle" fill="#60a5fa">CHEST ARMOR</text>
+
+  <!-- PANTS: x:0 y:0.50 ax:0.5 ay:0.22 size:0.24 (square) -->
+  <rect class="slot-box" stroke="#818cf8"
+        x="113" y="314.6" width="168.5" height="168.5"/>
+  <text class="slot-label" x="197" y="309" text-anchor="middle" fill="#818cf8">PANTS (PELVIS)</text>
+
+  <!-- GLOVE L/R: x:±0.22 y:0.49 ax:0.5 ay:0.15 size:0.16 (square) -->
+  <rect class="slot-box" stroke="#34d399"
+        x="238" y="315.9" width="112.3" height="112.3"/>
+  <text class="slot-label" x="294" y="310" text-anchor="middle" fill="#34d399">GLOVE R</text>
+  <rect class="slot-box" stroke="#34d399"
+        x="43.7" y="315.9" width="112.3" height="112.3"/>
+  <text class="slot-label" x="100" y="310" text-anchor="middle" fill="#34d399">GLOVE L</text>
+
+  <!-- SHIELD: x:-0.10 y:0.56 ax:0.5 ay:0.5 size:0.16 -->
+  <rect class="slot-box" stroke="#fb923c"
+        x="98.8" y="337.7" width="112.3" height="112.3"/>
+  <text class="slot-label" x="155" y="332" text-anchor="middle" fill="#fb923c">SHIELD</text>
+
+  <!-- WEAPON: x:0.10 y:0.56 ax:0.5 ay:0.75 size:0.30 -->
+  <rect class="slot-box" stroke="#f87171"
+        x="127.8" y="288.8" width="210.6" height="210.6"/>
+  <text class="slot-label" x="233" y="283" text-anchor="middle" fill="#f87171">WEAPON</text>
+
+  <!-- BOOTS L (x:+0.09) y:0.72 ax:0.5 ay:0.15 size:0.36 (square) -->
+  <rect class="slot-box" stroke="#fbbf24"
+        x="133.8" y="467.5" width="252.7" height="252.7"/>
+  <text class="slot-label" x="260" y="462" text-anchor="middle" fill="#fbbf24">BOOT L</text>
+  <!-- BOOTS R (x:-0.09) -->
+  <rect class="slot-box" stroke="#fbbf24"
+        x="7.5" y="467.5" width="252.7" height="252.7"/>
+  <text class="slot-label" x="134" y="462" text-anchor="middle" fill="#fbbf24">BOOT R</text>
+
+  <text x="10" y="695" font-family="monospace" font-size="8" fill="#6a7a9a">Vector blueprint — canvas 394×702, matches arctron_warrior.png sprite exactly</text>
+</svg>

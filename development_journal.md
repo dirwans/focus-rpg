@@ -16,6 +16,14 @@ Starting July 7, 2026, the following rules are enforced for all development and 
 
 ## 📅 Session Chronological Logs
 
+### 🛠️ Milestone 186: Arctron Armor Set Path Resolver Fix [DEPLOYED]
+- **Bug Fix (`src/store/gameStore.js`)**: Updated `resolveArmorSetImage` to use folder-based paths `/assets/arctron/def_${lineage}_armor_set_lv${tier}/${slot}.png` for Arctron instead of the old flat path format, resolving broken gear images on UI and paper dolls.
+- **Cache Bust (`src/store/gameStore.js`)**: Bumped cache version query parameter from `v=6` to `v=7` to force immediate reload of the new Arctron armor images.
+- **GM Crafting Editor Fix (`src/screens/AuditorRoom.jsx`)**: Corrected path resolver inside GM Crafting Editor to map Arctron armors correctly to their new subdirectory layout.
+- **Fallback Path Fix (`src/components/PilotSprites.jsx`)**: Updated local fallback path logic inside `getGearImg` to correctly target reorganized Arctron subdirectories.
+- **Sandbox Alignment (`src/components/GearOverlay.jsx`)**: Aligned path translation regex inside `proxyUrl` helper to support the new folder structure.
+- **Release Tracking (`package.json`)**: Bumped project version to `0.1.0`.
+
 ### 🕹️ Milestone 19: No-Code Master Console, Crafting Sync <=> Guides & Anti-Relogin [DEPLOYED]
 - **No-Code Master Console & Asset Studio (`server.js`, `AuditorRoom.jsx`)**:
   - Added REST endpoints `POST /api/audit/upload_asset`, `POST /api/audit/save_monster`, `POST /api/audit/save_item_direct`, `POST /api/audit/save_recipe`, and draft publishing routes (`publish_draft` / `delete_draft`).
@@ -2414,7 +2422,7 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 
 ---
 
-### 📁 Milestone 185: Arctron Armor Set Asset Reorganization — Per-Lineage/Tier Folders [PENDING DEPLOYMENT]
+### 📁 Milestone 185: Arctron Armor Set Asset Reorganization — Per-Lineage/Tier Folders [DEPLOYED]
 - **Folder Restructure** (`public/assets/arctron/`):
   - Moved 65 flat-named armor-set files (`defarctron{lineage}lv{tier}{slot}.png`) into 12 dedicated folders: `def_{warrior|ranger|technician}_armor_set_lv{1|32|42|55}/`, each containing simple slot-named files (`armor.png`, `helmet.png`, `gloves.png`, `gloves_l/r.png`, `boots.png`, `boots_l/r.png`, `pants.png`, `mantle.png` for lv1 only).
   - `public/assets/arctron/layers/` (full-canvas baked pants/boots from Milestone 184) and `arctron_warrior_mannequin.png` left untouched — separate concept, not part of this reorg.

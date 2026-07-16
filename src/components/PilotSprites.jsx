@@ -193,6 +193,8 @@ function PaperDollStack({ baseSprite, player, size, width, height, style: extraS
     if (!img) {
       if (player.race === 'celestra' && player.gender === 'male') {
         img = `/assets/celestra/male/defcelestra${lane}lv1${slot}_male.png`
+      } else if (player.race === 'arctron') {
+        img = `/assets/arctron/def_${lane}_armor_set_lv1/${slot}.png`
       } else {
         img = `/assets/${player.race}/def${player.race}${lane}lv1${slot}.png`
       }
