@@ -9,8 +9,8 @@ const GEAR_POINTS = {
   armor:  [{ x: 0.002, y: 0.050, ax: 0.5, ay: 0.15, size: 0.457, rot: 0, z: 1, color: '#60a5fa' }],
   pants:  [{ x: 0.003, y: 0.341, ax: 0.5, ay: 0.22, size: 0.414, rot: 0, z: 2, color: '#818cf8' }],
   boots: [
-    { x: 0.128, y: 0.649, ax: 0.5, ay: 0.15, size: 0.394, rot: 0, z: 3, scaleX: 1.070, scaleY: 1.105, color: '#fbbf24', label: 'boot_l', splitSuffix: '_l' },
-    { x: -0.132, y: 0.648, ax: 0.5, ay: 0.15, size: 0.424, rot: 0, z: 3, scaleX: 0.940, scaleY: 1.020, color: '#fbbf24', label: 'boot_r', splitSuffix: '_r' }
+    { x: 0.128, y: 0.652, ax: 0.5, ay: 0.15, size: 0.394, rot: 0, z: 3, scaleX: 1.070, scaleY: 1.125, color: '#fbbf24', label: 'boot_l', splitSuffix: '_l' },
+    { x: -0.132, y: 0.651, ax: 0.5, ay: 0.15, size: 0.424, rot: 0, z: 3, scaleX: 0.940, scaleY: 1.045, color: '#fbbf24', label: 'boot_r', splitSuffix: '_r' }
   ],
   gloves: [
     { x: 0.209, y: 0.354, ax: 0.52, ay: 0.22, size: 0.248, rot: 0, z: 6, scaleY: 1.065, color: '#34d399', label: 'glove_l', splitSuffix: '_l' },
