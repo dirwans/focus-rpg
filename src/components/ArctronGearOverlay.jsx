@@ -2,6 +2,7 @@ import React, { useMemo } from 'react'
 import { resolveItemImage } from '../store/gameStore'
 import { proxyUrl, GearImg, CalibrateDot } from './GearOverlay'
 import ArctronSprite from './ArctronSprite'
+import { getJobLane } from './PilotSprites'
 
 // Calibrated for full-body front-view sprite: W=780, H=936.
 // Coords are fractions of the HEIGHT value.
@@ -28,6 +29,7 @@ export default function ArctronGearOverlay({ player, width, height = 298, calibr
   const race = player?.race
   const job = player?.job
   const gender = player?.gender
+  const lane = getJobLane(job)
 
   const layers = useMemo(() => {
     const out = []
@@ -99,7 +101,7 @@ export default function ArctronGearOverlay({ player, width, height = 298, calibr
       ...extraStyle
     }}>
       {children}
-      {!eq.helmet && (
+      {!eq.helmet && lane === 'warrior' && (
         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 4, pointerEvents: 'none' }}>
           <ArctronSprite job={job} width="100%" height="100%" clipHead={true} />
         </div>

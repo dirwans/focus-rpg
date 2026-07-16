@@ -19,7 +19,7 @@ export default function ArctronSprite({ job, size = 60, width, height, upperBody
       glow={glow} 
       extraStyle={{
         ...extraStyle,
-        ...(clipHead ? { clipPath: 'inset(0% 36% 84% 36%)', zIndex: 4 } : {})
+        ...(clipHead && lane === 'warrior' ? { clipPath: 'inset(0% 36% 84% 36%)', zIndex: 4 } : {})
       }} 
     />
   )
