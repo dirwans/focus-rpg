@@ -35,7 +35,7 @@ const GEAR_POINTS = {
 // Paint order derived from each slot's own z
 const SLOT_ORDER = Object.keys(GEAR_POINTS).sort((a, b) => GEAR_POINTS[a][0].z - GEAR_POINTS[b][0].z)
 
-function GearImg({ src, point, height }) {
+function GearImg({ src, point }) {
   return (
     <img
       src={src}
@@ -44,9 +44,9 @@ function GearImg({ src, point, height }) {
       onError={(e) => { e.target.style.display = 'none' }}
       style={{
         position: 'absolute',
-        left: `calc(50% + ${point.x * height}px)`,
-        top: `${point.y * height}px`,
-        height: point.size * height,
+        left: `${50 + point.x * 178.853}%`,
+        top: `${point.y * 100}%`,
+        height: `${point.size * 100}%`,
         width: 'auto',
         maxWidth: 'none',
         transform: `translate(-${point.ax * 100}%, -${point.ay * 100}%) rotate(${point.rot}deg) scale(${point.scaleX || 1.0}, ${point.scaleY || 1.0})`,
@@ -58,13 +58,13 @@ function GearImg({ src, point, height }) {
   )
 }
 
-function CalibrateDot({ slot, point, height }) {
+function CalibrateDot({ slot, point }) {
   const label = point.label || slot
   return (
     <div style={{
       position: 'absolute',
-      left: `calc(50% + ${point.x * height}px)`,
-      top: `${point.y * height}px`,
+      left: `${50 + point.x * 178.853}%`,
+      top: `${point.y * 100}%`,
       transform: 'translate(-50%, -50%)',
       zIndex: 30,
       pointerEvents: 'none',
@@ -145,16 +145,16 @@ export default function GearOverlay({ player, height = 298, calibrate = false, s
 
   return (
     // isolation:isolate forces a stacking context so z=-1 gear paints behind the sprite
-    <div style={{ position: 'relative', display: 'inline-block', height, isolation: 'isolate', ...extraStyle }}>
+    <div style={{ position: 'relative', display: 'inline-block', isolation: 'isolate', ...extraStyle }}>
       {children}
 
       {layers.map(({ key, point, src }) => (
-        <GearImg key={key} src={src} point={point} height={height} />
+        <GearImg key={key} src={src} point={point} />
       ))}
 
       {calibrate && SLOT_ORDER.map(slot =>
         GEAR_POINTS[slot]?.map((pt, i) => (
-          <CalibrateDot key={`cal-${slot}-${i}`} slot={slot} point={pt} height={height} />
+          <CalibrateDot key={`cal-${slot}-${i}`} slot={slot} point={pt} />
         ))
       )}
     </div>
