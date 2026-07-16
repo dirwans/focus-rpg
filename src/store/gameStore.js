@@ -3018,11 +3018,20 @@ export const useGameStore = create(
              // Migrate gloves/boots to gloves_l/boots_l if they exist
              if (next.player.equipment.gloves) {
                next.player.equipment.gloves_l = next.player.equipment.gloves
+               next.player.equipment.gloves_r = { ...next.player.equipment.gloves, uid: next.player.equipment.gloves.uid + '_r' }
                delete next.player.equipment.gloves
              }
              if (next.player.equipment.boots) {
                next.player.equipment.boots_l = next.player.equipment.boots
+               next.player.equipment.boots_r = { ...next.player.equipment.boots, uid: next.player.equipment.boots.uid + '_r' }
                delete next.player.equipment.boots
+             }
+             // Self-healing duplicate for players whose profile already deleted the legacy slots
+             if (next.player.equipment.gloves_l && !next.player.equipment.gloves_r) {
+               next.player.equipment.gloves_r = { ...next.player.equipment.gloves_l, uid: next.player.equipment.gloves_l.uid + '_r' }
+             }
+             if (next.player.equipment.boots_l && !next.player.equipment.boots_r) {
+               next.player.equipment.boots_r = { ...next.player.equipment.boots_l, uid: next.player.equipment.boots_l.uid + '_r' }
              }
              next.player.equipment = {
                weapon: null, armor: null, shield: null,
