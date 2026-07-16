@@ -219,13 +219,12 @@ export function resolveItemImage(item, playerRace, playerJob, playerGender) {
       if (lvl >= 42) return '/assets/celestra/shields/lv42celesshielddef.png?v=2'
       if (lvl >= 32) return '/assets/celestra/shields/lv32celesshielddef.png?v=2'
       return '/assets/celestra/shields/lv1celesshielddefault.png?v=2'
-    } else {
       // Arctron
-      if (lvl >= 55) return '/assets/arctron/shields/lv55arctronshielddef.png?v=2'
-      if (lvl >= 42) return '/assets/arctron/shields/lv42arctronshielddef.png?v=2'
-      if (lvl >= 32) return '/assets/arctron/shields/lv32arctronshielddef.png?v=2'
-      if (lvl >= 10) return '/assets/arctron/shields/lv10arctronshielddefault.png?v=2'
-      return '/assets/arctron/shields/lv1arctronshielddefault.png?v=2'
+      if (lvl >= 55) return '/assets/arctron/shields/lv55arctronshielddef.png?v=9'
+      if (lvl >= 42) return '/assets/arctron/shields/lv42arctronshielddef.png?v=9'
+      if (lvl >= 32) return '/assets/arctron/shields/lv32arctronshielddef.png?v=9'
+      if (lvl >= 10) return '/assets/arctron/shields/lv10arctronshielddefault.png?v=9'
+      return '/assets/arctron/shields/lv1arctronshielddefault.png?v=9'
     }
   }
   if (item.type === 'weapon') {
@@ -289,9 +288,9 @@ export function resolveItemImage(item, playerRace, playerJob, playerGender) {
 
     if (tier === '1') {
       const index = (seed % 4) + 1
-      return `/assets/weapons/defallfactionslv1sword${index}.png?v=2`
+      return `/assets/weapons/defallfactionslv1sword${index}.png?v=9`
     }
-    return `/assets/weapons/defallfactionslv${tier}sword.png?v=2`
+    return `/assets/weapons/defallfactionslv${tier}sword.png?v=9`
   }
   // Bespoke default armor-set pieces (id namespace `*_armorset_*`, e.g.
   // `armor_armorset_arctron_lv1`) resolve dynamically by race/job/level tier;
