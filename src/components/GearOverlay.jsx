@@ -10,7 +10,7 @@ export function proxyUrl(url) {
     return url.split('?')[0] + '?v=9'
   }
   if (url.includes('/assets/arctron/') && url.includes('_armor_set_')) {
-    return url.split('?')[0] + '?v=9'
+    return url.split('?')[0] + '?v=11'
   }
   
   if (url.startsWith('/assets/celestra/') && url.includes('/male/')) {
