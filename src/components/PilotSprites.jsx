@@ -1,8 +1,18 @@
+import React from 'react'
 import { useGameStore, resolveItemImage } from '../store/gameStore'
 import DragonBonesCharacter from './DragonBonesCharacter'
 import GearOverlay from './GearOverlay'
 
-const RACE_DEFAULTS = {
+// Import modular sprites
+import ArctronSprite from './ArctronSprite'
+import BionexSprite from './BionexSprite'
+import CelestraSprite from './CelestraSprite'
+import EnemySprite from './EnemySprite'
+
+// Re-export modular sprites so other files importing from './PilotSprites' don't break
+export { ArctronSprite, BionexSprite, CelestraSprite, EnemySprite }
+
+export const RACE_DEFAULTS = {
   arctron: {
     weapon: { top: '42%', left: '-8%', width: '48%', height: 'auto', transform: 'rotate(-20deg)', zIndex: 3 },
     shield: { top: '38%', left: '60%', width: '45%', height: 'auto', transform: 'rotate(15deg)', zIndex: 1 }
@@ -17,7 +27,7 @@ const RACE_DEFAULTS = {
   }
 }
 
-const SPRITE_CALIBRATIONS = {
+export const SPRITE_CALIBRATIONS = {
   celestra_warrior_male: {
     weapon: { top: '52%', left: '-2%', width: '35%', height: 'auto', transform: 'rotate(-25deg)' },
     shield: { top: '35%', left: '55%', width: '35%', height: 'auto', transform: 'rotate(5deg)' },
@@ -29,7 +39,7 @@ const SPRITE_CALIBRATIONS = {
   }
 }
 
-function getJobLane(jobId) {
+export function getJobLane(jobId) {
   if (!jobId) return 'warrior'
   const warriorJobs = [
     'cadet', 'iron_trooper', 'iron_vanguard',
@@ -56,7 +66,7 @@ function getJobLane(jobId) {
   return 'specialist'
 }
 
-function TieredSpriteImg({ src, alt, size, width, height, glow, extraStyle }) {
+export function TieredSpriteImg({ src, alt, size, width, height, glow, extraStyle }) {
   const w = width || size
   const h = height || size
   return (
@@ -76,110 +86,12 @@ function TieredSpriteImg({ src, alt, size, width, height, glow, extraStyle }) {
   )
 }
 
-export function ArctronSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false, isBattle = false, style: extraStyle }) {
-  const lane = getJobLane(job)
-  let img = isBattle ? "/assets/arctron_warrior_battle.png" : "/assets/arctron_warrior.png"
-  if (lane === 'ranger') img = "/assets/arctron_ranger.png"
-  else if (lane === 'specialist') img = "/assets/arctron_specialist.png"
-
-  const glow = '#00e5ff'
-
-  return <TieredSpriteImg src={img} alt={`Arctron ${lane}`} size={size} width={width} height={height} glow={glow} extraStyle={extraStyle} />
-}
-
-export function BionexSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false, gender = 'male', style: extraStyle }) {
-  const guardianJobs = ['guardian', 'centurion', 'protector', 'imperator'];
-  const marksmanJobs = ['marksman', 'revenant', 'deadeye', 'predator'];
-  const engineerJobs = ['engineer', 'mechanist', 'techmaster', 'overseer'];
-  const psionJobs = ['psion', 'esper', 'ascendant', 'transcendent'];
-
-  let img = null;
-  const isFemale = gender === 'female';
-
-  if (guardianJobs.includes(job)) {
-    if (job === 'imperator' || job === 'protector') img = "/assets/bionex_titan_pilot.png";
-    else img = isFemale ? "/assets/bionex_guardian_female.png" : "/assets/bionex_guardian_male.png";
-  } else if (marksmanJobs.includes(job)) {
-    if (job === 'predator' || job === 'deadeye') img = "/assets/bionex_railgun_elite.png";
-    else img = isFemale ? "/assets/bionex_marksman_female.png" : "/assets/bionex_marksman_male.png";
-  } else if (engineerJobs.includes(job)) {
-    if (job === 'overseer' || job === 'techmaster') img = "/assets/bionex_war_engineer.png";
-    else if (job === 'mechanist') img = "/assets/bionex_mechanist.png";
-    else img = isFemale ? "/assets/bionex_engineer_female.png" : "/assets/bionex_engineer_male.png";
-  } else if (psionJobs.includes(job)) {
-    img = isFemale ? "/assets/bionex_pilot_v3.png" : "/assets/bionex_pilot.png";
-  }
-
-  if (!img) {
-    if (fill) img = "/assets/bionex_pilot_portrait.png";
-    else img = gender === 'female' ? "/assets/bionex_pilot_v3.png" : "/assets/bionex_pilot.png";
-  }
-
-  const glow = '#39ff14'
-
-  return <TieredSpriteImg src={img} alt={`Bionex ${job || 'pilot'}`} size={size} width={width} height={height} glow={glow} extraStyle={extraStyle} />
-}
-
-export function CelestraSprite({ job, size = 60, width, height, upperBodyOnly = false, fill = false, gender = 'female', style: extraStyle }) {
-  const lane = getJobLane(job)
-  let srcImg = gender === 'female' ? "/assets/celestra_pilot_v2.png" : "/assets/celestra_pilot.png"
-  
-  if (job) {
-    if (lane === 'warrior') {
-      srcImg = gender === 'female' ? "/assets/celestra_warrior_female.png" : "/assets/celestra_warrior_male.png"
-    } else if (lane === 'ranger') {
-      srcImg = gender === 'female' ? (fill ? "/assets/celestra_ranger_portrait.png" : "/assets/celestra_ranger_female.png") : "/assets/celestra_ranger_male.png"
-    } else if (lane === 'specialist') {
-      srcImg = gender === 'female' ? (fill ? "/assets/celestra_specialist_portrait.png" : "/assets/celestra_specialist_female.png") : "/assets/celestra_specialist_male.png"
-    } else if (lane === 'mystic') {
-      srcImg = gender === 'female' ? (fill ? "/assets/celestra_mystic_portrait.png" : "/assets/celestra_mystic_female.png") : "/assets/celestra_mystic_male.png"
-    }
-  }
-  
-  const glow = '#a855f7'
-
-  return <TieredSpriteImg src={srcImg} alt={`Celestra ${lane}`} size={size} width={width} height={height} glow={glow} extraStyle={extraStyle} />
-}
-
-export function EnemySprite({ size = 60, isBoss = false }) {
-  let color = '#ef4444'
-  let bodyColor = '#991b1b'
-  let eyeColor = '#ffff00'
-  if (isBoss) {
-    color = '#eab308'
-    bodyColor = '#78350f'
-    eyeColor = '#ff0000'
-  }
-  return (
-    <svg width={size} height={size} viewBox="0 0 16 16" className="pixel-art">
-      {/* Horns */}
-      <rect x="3" y="1" width="2" height="3" fill={color} />
-      <rect x="11" y="1" width="2" height="3" fill={color} />
-      {/* Head */}
-      <rect x="4" y="4" width="8" height="6" fill={bodyColor} />
-      <rect x="5" y="5" width="6" height="4" fill={color} />
-      <rect x="6" y="6" width="1" height="1" fill={eyeColor} />
-      <rect x="9" y="6" width="1" height="1" fill={eyeColor} />
-      {/* Body */}
-      <rect x="3" y="10" width="10" height="4" fill={bodyColor} />
-      <rect x="4" y="11" width="8" height="2" fill={color} />
-      {/* Wings */}
-      <rect x="1" y="8" width="2" height="4" fill={color} />
-      <rect x="13" y="8" width="2" height="4" fill={color} />
-      {/* Feet */}
-      <rect x="4" y="14" width="2" height="2" fill={bodyColor} />
-      <rect x="10" y="14" width="2" height="2" fill={bodyColor} />
-    </svg>
-  )
-}
-
 function PaperDollStack({ baseSprite, player, size, width, height, style: extraStyle, calibrationOverride }) {
   const w = width || size
   const h = height || size
   const lane = getJobLane(player.job)
   const key = `${player.race}_${lane}_${player.gender}`
   
-  // Merge default calibration with any custom overrides
   const config = {
     ...(SPRITE_CALIBRATIONS[key] || {}),
     ...(calibrationOverride || {})
@@ -189,16 +101,24 @@ function PaperDollStack({ baseSprite, player, size, width, height, style: extraS
   
   const getGearImg = (item, slot) => {
     if (!item) return null
+    const normalizedSlot = slot.replace(/_(l|r)$/, '')
     let img = resolveItemImage(item, player.race, player.job, player.gender)
     if (!img) img = item.image
     if (!img) {
       if (player.race === 'celestra' && player.gender === 'male') {
-        img = `/assets/celestra/male/defcelestra${lane}lv1${slot}_male.png`
+        img = `/assets/celestra/male/defcelestra${lane}lv1${normalizedSlot}_male.png`
       } else if (player.race === 'arctron') {
-        img = `/assets/arctron/def_${lane}_armor_set_lv1/${slot}.png`
+        img = `/assets/arctron/def_${lane}_armor_set_lv1/${normalizedSlot}.png`
       } else {
-        img = `/assets/${player.race}/def${player.race}${lane}lv1${slot}.png`
+        img = `/assets/${player.race}/def${player.race}${lane}lv1${normalizedSlot}.png`
       }
+    }
+    if (player.race === 'arctron' && (slot.endsWith('_l') || slot.endsWith('_r'))) {
+      const suffix = slot.endsWith('_l') ? '_l' : '_r'
+      const base = img.split('?')[0]
+      const search = img.split('?')[1] || ''
+      const newBase = base.replace(/\.png$/i, `${suffix}.png`)
+      img = search ? `${newBase}?${search}` : newBase
     }
     return img.split('?')[0]
   }
@@ -207,7 +127,6 @@ function PaperDollStack({ baseSprite, player, size, width, height, style: extraS
     if (!item) return null
     const isStandalone = slot === 'weapon' || slot === 'shield'
     
-    // For Arctron, we only render weapon and shield overlays, not body armor/helmet composites
     if (player.race === 'arctron' && !isStandalone) {
       return null
     }
@@ -215,7 +134,6 @@ function PaperDollStack({ baseSprite, player, size, width, height, style: extraS
     const src = getGearImg(item, slot)
     const customConfig = config[slot] || {}
     
-    // Fall back to race defaults for weapon/shield if no custom coordinates
     const defaultStyle = isStandalone 
       ? (RACE_DEFAULTS[player.race]?.[slot] || { top: '50%', left: '10%', width: '30%' })
       : { top: 0, left: 0, width: '100%', height: '100%' }
@@ -231,17 +149,14 @@ function PaperDollStack({ baseSprite, player, size, width, height, style: extraS
 
   return (
     <div className="paper-doll-container" style={{ position: 'relative', width: w, height: h, display: 'inline-block', ...extraStyle }}>
-      {/* Cape/Mantle rendered behind the base body */}
       {renderLayer(eq.mantle, 'mantle')}
-
-      {/* Base Sprite */}
       {baseSprite}
-      
-      {/* Layer Stack */}
       {renderLayer(eq.pants, 'pants')}
-      {renderLayer(eq.boots, 'boots')}
+      {renderLayer(eq.boots_l, 'boots_l')}
+      {renderLayer(eq.boots_r, 'boots_r')}
       {renderLayer(eq.armor, 'armor')}
-      {renderLayer(eq.gloves, 'gloves')}
+      {renderLayer(eq.gloves_l, 'gloves_l')}
+      {renderLayer(eq.gloves_r, 'gloves_r')}
       {renderLayer(eq.helmet, 'helmet')}
       {renderLayer(eq.weapon, 'weapon')}
       {renderLayer(eq.shield, 'shield')}
@@ -268,7 +183,11 @@ export function PilotSprite({ race, job, size = 60, width, height, upperBodyOnly
 
   if (isSelf && player.equipment && showGears) {
     if (race === 'arctron') {
-      return baseSprite
+      return (
+        <GearOverlay player={player} style={style}>
+          {baseSprite}
+        </GearOverlay>
+      )
     }
     return (
       <PaperDollStack 
@@ -285,4 +204,3 @@ export function PilotSprite({ race, job, size = 60, width, height, upperBodyOnly
 
   return baseSprite
 }
-

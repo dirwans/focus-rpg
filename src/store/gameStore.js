@@ -1049,7 +1049,7 @@ const initialPlayer = {
   },
   resources: { crd: 5000, potions: 5, nxc: 0 },
   upgrades: { atk: 0, def: 0, hp: 0 },
-  equipment: { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null },
+  equipment: { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves_l: null, gloves_r: null, boots_l: null, boots_r: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null },
   ascensionLoadout: { head: null, upper: null, lower: null, arms: null, arms2: null, options: null },
   celestraAnimus: {}, // e.g. { seraphys: 1, noctyrna: 5 }
   celestraAnimusUnseal: {}, // e.g. { seraphys: 32 }
@@ -1959,7 +1959,7 @@ export const useGameStore = create(
             race: raceId,
             job: null,
             upgrades: { atk: 0, def: 0, hp: 0 },
-            equipment: { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null },
+            equipment: { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves_l: null, gloves_r: null, boots_l: null, boots_r: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null },
             ascensionLoadout: { head: null, upper: null, lower: null, arms: null, arms2: null, options: null },
   celestraAnimus: {}, // e.g. { seraphys: 1, noctyrna: 5 }
   celestraAnimusUnseal: {}, // e.g. { seraphys: 32 }
@@ -3007,9 +3007,18 @@ export const useGameStore = create(
              next.player.inventory = next.player.inventory.map(i => raceMap[i.race] ? { ...i, race: raceMap[i.race] } : i)
           }
           if (next.player.equipment) {
+             // Migrate gloves/boots to gloves_l/boots_l if they exist
+             if (next.player.equipment.gloves) {
+               next.player.equipment.gloves_l = next.player.equipment.gloves
+               delete next.player.equipment.gloves
+             }
+             if (next.player.equipment.boots) {
+               next.player.equipment.boots_l = next.player.equipment.boots
+               delete next.player.equipment.boots
+             }
              next.player.equipment = {
                weapon: null, armor: null, shield: null,
-               helmet: null, mantle: null, gloves: null, boots: null,
+               helmet: null, mantle: null, gloves_l: null, gloves_r: null, boots_l: null, boots_r: null,
                pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null,
                ...next.player.equipment
              }
@@ -3018,8 +3027,10 @@ export const useGameStore = create(
              if (next.player.equipment.shield && raceMap[next.player.equipment.shield.race]) next.player.equipment.shield.race = raceMap[next.player.equipment.shield.race]
              if (next.player.equipment.helmet && raceMap[next.player.equipment.helmet.race]) next.player.equipment.helmet.race = raceMap[next.player.equipment.helmet.race]
              if (next.player.equipment.mantle && raceMap[next.player.equipment.mantle.race]) next.player.equipment.mantle.race = raceMap[next.player.equipment.mantle.race]
-             if (next.player.equipment.gloves && raceMap[next.player.equipment.gloves.race]) next.player.equipment.gloves.race = raceMap[next.player.equipment.gloves.race]
-             if (next.player.equipment.boots && raceMap[next.player.equipment.boots.race]) next.player.equipment.boots.race = raceMap[next.player.equipment.boots.race]
+             if (next.player.equipment.gloves_l && raceMap[next.player.equipment.gloves_l.race]) next.player.equipment.gloves_l.race = raceMap[next.player.equipment.gloves_l.race]
+             if (next.player.equipment.gloves_r && raceMap[next.player.equipment.gloves_r.race]) next.player.equipment.gloves_r.race = raceMap[next.player.equipment.gloves_r.race]
+             if (next.player.equipment.boots_l && raceMap[next.player.equipment.boots_l.race]) next.player.equipment.boots_l.race = raceMap[next.player.equipment.boots_l.race]
+             if (next.player.equipment.boots_r && raceMap[next.player.equipment.boots_r.race]) next.player.equipment.boots_r.race = raceMap[next.player.equipment.boots_r.race]
           }
 
           if (next.player.race && !races[next.player.race]) {
@@ -3056,7 +3067,7 @@ export const useGameStore = create(
         const myRaceArchon = archons ? archons[player.race] : null
         const isArchon = myRaceArchon && myRaceArchon.toLowerCase() === player.username?.toLowerCase()
         
-        const eq = player.equipment || { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null }
+        const eq = player.equipment || { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves_l: null, gloves_r: null, boots_l: null, boots_r: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null }
         
         // Base Stats Lookups
         const baseStats = player.job && baseStatsData[player.race] && baseStatsData[player.race][player.job] 
@@ -3072,7 +3083,7 @@ export const useGameStore = create(
            }
         }
 
-        const eqSlots = ['weapon', 'armor', 'shield', 'helmet', 'mantle', 'gloves', 'boots', 'pants', 'amulet1', 'amulet2', 'ring1', 'ring2', 'ascension_arms']
+        const eqSlots = ['weapon', 'armor', 'shield', 'helmet', 'mantle', 'gloves_l', 'gloves_r', 'boots_l', 'boots_r', 'pants', 'amulet1', 'amulet2', 'ring1', 'ring2', 'ascension_arms']
         let flatAtk = jobBonus.atk || 0
         let flatDef = jobBonus.def || 0
         let flatHp = jobBonus.hp || 0
@@ -3315,24 +3326,24 @@ export const useGameStore = create(
           eq.helmet?.id === 'archon_bionex_helmet' &&
           eq.mantle?.id === 'archon_bionex_mantle' &&
           eq.armor?.id === 'archon_bionex_armor' &&
-          eq.gloves?.id === 'archon_bionex_gloves' &&
-          eq.boots?.id === 'archon_bionex_boots' &&
+          (eq.gloves_l?.id === 'archon_bionex_gloves' || eq.gloves_r?.id === 'archon_bionex_gloves') &&
+          (eq.boots_l?.id === 'archon_bionex_boots' || eq.boots_r?.id === 'archon_bionex_boots') &&
           eq.weapon?.id === 'archon_bionex_weapon';
           
         const isCelestraSet = isArchon &&
           eq.helmet?.id === 'archon_celestra_helmet' &&
           eq.mantle?.id === 'archon_celestra_mantle' &&
           eq.armor?.id === 'archon_celestra_armor' &&
-          eq.gloves?.id === 'archon_celestra_gloves' &&
-          eq.boots?.id === 'archon_celestra_boots' &&
+          (eq.gloves_l?.id === 'archon_celestra_gloves' || eq.gloves_r?.id === 'archon_celestra_gloves') &&
+          (eq.boots_l?.id === 'archon_celestra_boots' || eq.boots_r?.id === 'archon_celestra_boots') &&
           eq.weapon?.id === 'archon_celestra_weapon';
 
         const isArctronSet = isArchon &&
           eq.helmet?.id === 'archon_arctron_helmet' &&
           eq.mantle?.id === 'archon_arctron_mantle' &&
           eq.armor?.id === 'archon_arctron_armor' &&
-          eq.gloves?.id === 'archon_arctron_gloves' &&
-          eq.boots?.id === 'archon_arctron_boots' &&
+          (eq.gloves_l?.id === 'archon_arctron_gloves' || eq.gloves_r?.id === 'archon_arctron_gloves') &&
+          (eq.boots_l?.id === 'archon_arctron_boots' || eq.boots_r?.id === 'archon_arctron_boots') &&
           eq.weapon?.id === 'archon_arctron_weapon';
 
         if (isBionexSet && player.race === 'bionex') {
@@ -3349,8 +3360,15 @@ export const useGameStore = create(
         // ── Premium Set Bonus Detection ──
         const allEquipped = Object.values(eq).filter(Boolean)
         const setCountMap = {}
+        const uniqueSetTypes = new Set()
         allEquipped.forEach(item => {
-          if (item.setId) setCountMap[item.setId] = (setCountMap[item.setId] || 0) + 1
+          if (item.setId) {
+            const typeKey = `${item.setId}_${item.type}`
+            if (!uniqueSetTypes.has(typeKey)) {
+              uniqueSetTypes.add(typeKey)
+              setCountMap[item.setId] = (setCountMap[item.setId] || 0) + 1
+            }
+          }
         })
         // Eminence Set 7/7
         if ((setCountMap['eminence'] || 0) >= 7) {
@@ -3588,15 +3606,19 @@ export const useGameStore = create(
         }
 
 
-        const eq = player.equipment || { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null }
+        const eq = player.equipment || { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves_l: null, gloves_r: null, boots_l: null, boots_r: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null }
 
-        // Determine target slot — amulet and ring have dual slots
+        // Determine target slot — amulet, ring, gloves, and boots have dual slots
         let slot = null
         if (item.type === 'amulet') {
           slot = !eq.amulet1 ? 'amulet1' : 'amulet2'
         } else if (item.type === 'ring') {
           slot = !eq.ring1 ? 'ring1' : 'ring2'
-        } else if (['weapon','armor','shield','helmet','mantle','gloves','boots','pants','ascension_arms'].includes(item.type)) {
+        } else if (item.type === 'boots') {
+          slot = !eq.boots_l ? 'boots_l' : 'boots_r'
+        } else if (item.type === 'gloves') {
+          slot = !eq.gloves_l ? 'gloves_l' : 'gloves_r'
+        } else if (['weapon','armor','shield','helmet','mantle','pants','ascension_arms'].includes(item.type)) {
           slot = item.type
         }
         if (!slot) return
@@ -3621,7 +3643,7 @@ export const useGameStore = create(
       },
       unequipItem: (slot) => {
         const { player } = get()
-        const eq = player.equipment || { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null }
+        const eq = player.equipment || { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves_l: null, gloves_r: null, boots_l: null, boots_r: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null }
         const item = eq[slot]
         if (!item) return
 

@@ -66,7 +66,7 @@ export default function Inventory() {
              // Get compatible items from inventory for a given slot key
              const getCompatibleItems = (slotKey) => {
                if (!player.inventory) return []
-               const typeTarget = slotKey.replace(/[12]$/, '') // amulet1→amulet, ring1→ring
+               const typeTarget = slotKey.replace(/[12]$/, '').replace(/_(l|r)$/, '') // amulet1→amulet, boots_l→boots
                return player.inventory.filter(item => {
                  if (item.type !== typeTarget) return false
                  
@@ -182,26 +182,36 @@ export default function Inventory() {
                     }
                   }}
                 >
-                  {resolveItemImage(item, player.race, player.job) ? (
-                    <img
-                      referrerPolicy="no-referrer"
-                      src={resolveItemImage(item, player.race, player.job)}
-                      style={{
-                        width: '92%',
-                        height: '92%',
-                        objectFit: 'contain',
-                        borderRadius: 2,
-                        imageRendering: 'auto',
-                        transform: slotKey === 'weapon' ? 'scale(1.25)' : 'none',
-                        transition: 'transform 0.2s ease',
-                      }}
-                      alt={item.name}
-                    />
-                  ) : item.emoji ? (
-                    <span style={{ fontSize: '2rem' }}>{item.emoji}</span>
-                  ) : (
-                    svgIcon
-                  )}
+                  {(() => {
+                    let imgUrl = resolveItemImage(item, player.race, player.job)
+                    if (imgUrl && player.race === 'arctron' && ['boots_l', 'boots_r', 'gloves_l', 'gloves_r'].includes(slotKey)) {
+                      const suffix = slotKey.endsWith('_l') ? '_l' : '_r'
+                      const base = imgUrl.split('?')[0]
+                      const search = imgUrl.split('?')[1] || ''
+                      const newBase = base.replace(/\.png$/i, `${suffix}.png`)
+                      imgUrl = search ? `${newBase}?${search}` : newBase
+                    }
+                    return imgUrl ? (
+                      <img
+                        referrerPolicy="no-referrer"
+                        src={imgUrl}
+                        style={{
+                          width: '92%',
+                          height: '92%',
+                          objectFit: 'contain',
+                          borderRadius: 2,
+                          imageRendering: 'auto',
+                          transform: slotKey === 'weapon' ? 'scale(1.25)' : 'none',
+                          transition: 'transform 0.2s ease',
+                        }}
+                        alt={item.name}
+                      />
+                    ) : item.emoji ? (
+                      <span style={{ fontSize: '2rem' }}>{item.emoji}</span>
+                    ) : (
+                      svgIcon
+                    )
+                  })()}
                   {(item.enhancement > 0 || item.enhancement_level > 0) && (
                     <span style={{ position: 'absolute', top: 2, right: 3, fontSize: 8, fontWeight: 900, color: '#00ffaa', fontFamily: 'var(--font-mono)' }}>
                       +{item.enhancement || item.enhancement_level}
@@ -352,8 +362,9 @@ export default function Inventory() {
                         <div style={{ width: '100%' }}>
                           {renderEquipSlot('weapon', 'WPN', weaponSvg, false, '100%', 'auto', '1 / 1')}
                         </div>
-                        <div style={{ width: '100%' }}>
-                          {renderEquipSlot('gloves', 'GLV', glovesSvg, false, '100%', 'auto', '1 / 1')}
+                        <div style={{ display: 'flex', gap: 3, width: '100%' }}>
+                          {renderEquipSlot('gloves_l', 'GLV_L', glovesSvg, false, 'calc(50% - 1.5px)', 'auto', '1 / 1')}
+                          {renderEquipSlot('gloves_r', 'GLV_R', glovesSvg, false, 'calc(50% - 1.5px)', 'auto', '1 / 1')}
                         </div>
                         <div style={{ marginTop: 'calc(20% + 3px)', width: '100%', display: 'flex', justifyContent: 'center' }}>
                           {renderEquipSlot('ring1', 'RG1', ringSvg, false, '60%', 'auto', '1 / 1')}
@@ -371,8 +382,9 @@ export default function Inventory() {
                         <div style={{ width: '100%' }}>
                           {renderEquipSlot('pants', 'PNT', pantsSvg, false, '100%', 'auto', '1 / 1')}
                         </div>
-                        <div style={{ width: '100%' }}>
-                          {renderEquipSlot('boots', 'BTS', bootsSvg, false, '100%', 'auto', '1 / 1')}
+                        <div style={{ display: 'flex', gap: 3, width: '100%' }}>
+                          {renderEquipSlot('boots_l', 'BTS_L', bootsSvg, false, 'calc(50% - 1.5px)', 'auto', '1 / 1')}
+                          {renderEquipSlot('boots_r', 'BTS_R', bootsSvg, false, 'calc(50% - 1.5px)', 'auto', '1 / 1')}
                         </div>
                       </div>
 
