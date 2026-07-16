@@ -24,9 +24,14 @@ dist-ssr
 .env
 .env.local
 
-# Local-only experiment page — dressing/gear calibration sandbox, never deploy
+# Local-only calibration tools — dressing/gear sandbox, NEVER deploy to VPS
+# Koordinat kalibrasi diambil dari sini trus di-paste ke JSX component
 public/dressing-lab.html
 public/dressing-room.html
+public/arctron-dressing.html
+public/bionex-dressing.html
+public/celestra-dressing.html
+public/*-dressing.html
 
 # Server data (user saves, sessions) — jangan di-commit
 # NOTE: /data/ (root only) not src/data/ (game data must be committed)
