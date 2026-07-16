@@ -247,8 +247,8 @@ export default function Inventory() {
                       style={{
                         position: 'absolute',
                         ...(TOP_ROW_SLOTS.has(slotKey)
-                          ? { top: '110%' }
-                          : { bottom: '110%' }),
+                          ? { top: '100%' }
+                          : { bottom: '100%' }),
                         left: '50%',
                         transform: 'translateX(-50%)',
                         background: 'rgba(5, 12, 28, 0.98)',

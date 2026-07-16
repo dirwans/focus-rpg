@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 import { resolveItemImage } from '../store/gameStore'
 import { proxyUrl, GearImg, CalibrateDot } from './GearOverlay'
+import ArctronSprite from './ArctronSprite'
 
 // Calibrated for full-body front-view sprite: W=780, H=936.
 // Coords are fractions of the HEIGHT value.
@@ -98,6 +99,11 @@ export default function ArctronGearOverlay({ player, width, height = 298, calibr
       ...extraStyle
     }}>
       {children}
+      {!eq.helmet && (
+        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 4, pointerEvents: 'none' }}>
+          <ArctronSprite job={job} width="100%" height="100%" clipHead={true} />
+        </div>
+      )}
       {layers.map(({ key, point, src }) => (
         <GearImg key={key} src={src} point={point} />
       ))}
