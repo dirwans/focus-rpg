@@ -106,18 +106,24 @@ export default function ArctronGearOverlay({ player, width, height = 298, calibr
         if (slot === 'weapon') {
           const itemId = (item.id || '').toLowerCase()
           const itemName = (item.name || '').toLowerCase()
-          const isGun = itemId.includes('gun') || itemName.includes('gun')
-          const isBow = itemId.includes('bow') || itemName.includes('bow')
-          const isAxe = itemId.includes('axe') || itemName.includes('axe')
+          const isGunOrBow = itemId.includes('gun') || itemName.includes('gun') || itemId.includes('bow') || itemName.includes('bow') || itemId.includes('rifle') || itemName.includes('rifle')
           
-          if (isGun || isBow) {
-            customPt.ax = 0.5
-            customPt.ay = 0.5
-            customPt.rot = 0
-          } else if (isAxe) {
-            customPt.ax = 0.5
-            customPt.ay = 0.70
-            customPt.rot = 10
+          if (isGunOrBow) {
+            const ref = RANGER_POINTS.weapon[0]
+            customPt.x = ref.x
+            customPt.y = ref.y
+            customPt.ax = ref.ax
+            customPt.ay = ref.ay
+            customPt.size = ref.size
+            customPt.rot = ref.rot
+          } else {
+            const ref = WARRIOR_POINTS.weapon[0]
+            customPt.x = ref.x
+            customPt.y = ref.y
+            customPt.ax = ref.ax
+            customPt.ay = ref.ay
+            customPt.size = ref.size
+            customPt.rot = ref.rot
           }
         }
         
