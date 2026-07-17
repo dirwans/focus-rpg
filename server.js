@@ -1343,7 +1343,28 @@ app.post('/api/audit/save_gear_coords', (req, res) => {
     }
     
     if (!current[race]) current[race] = {}
-    current[race][jobLineage] = coords
+    
+    // Smart merge: preserve splitSuffix/label/color from existing data
+    // if incoming data doesn't have them (prevents Dressing Room from
+    // wiping calibration metadata on save)
+    const existing = current[race][jobLineage] || {}
+    const PRESERVE_KEYS = ['splitSuffix', 'label', 'color']
+    const merged = {}
+    for (const [slot, newPoints] of Object.entries(coords)) {
+      if (!Array.isArray(newPoints)) { merged[slot] = newPoints; continue }
+      const oldPoints = existing[slot] || []
+      merged[slot] = newPoints.map((pt, i) => {
+        const old = oldPoints[i] || {}
+        const out = { ...pt }
+        for (const key of PRESERVE_KEYS) {
+          if (out[key] === undefined && old[key] !== undefined) {
+            out[key] = old[key]
+          }
+        }
+        return out
+      })
+    }
+    current[race][jobLineage] = merged
     
     writeFileSync(coordsPath, JSON.stringify(current, null, 2))
     

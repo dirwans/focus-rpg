@@ -1305,16 +1305,7 @@ document.getElementById('saveToKitabBtn').onclick = () => {
       });
     }
   });
-
-  fetch('/api/audit/save_gear_coords', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ race: 'arctron', jobLineage: 'warrior', coords: coordsJson })
-  }).then(res => res.json()).then(res => {
-    console.log('Realtime broadcast success:', res);
-  }).catch(e => console.error('Realtime broadcast failed:', e));
-
-  alert(`Saved as ${filename}, copied to clipboard, and broadcasted to Game!`);
+  alert(`Saved as ${filename} and copied to clipboard!`);
 };
 
 document.querySelectorAll('.tier-sub-btn').forEach(btn => { btn.onclick = () => switchTier(parseInt(btn.dataset.tier)); });
