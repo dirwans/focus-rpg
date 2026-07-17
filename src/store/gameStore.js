@@ -3670,9 +3670,13 @@ export const useGameStore = create(
         const newEquipment = { ...eq }
 
         if (pairSlots) {
+          const oldUids = new Set()
           pairSlots.forEach((s) => {
             const oldItem = eq[s]
-            if (oldItem) newInventory.push(oldItem)
+            if (oldItem && !oldUids.has(oldItem.uid)) {
+              newInventory.push(oldItem)
+              oldUids.add(oldItem.uid)
+            }
             newEquipment[s] = item
           })
         } else {

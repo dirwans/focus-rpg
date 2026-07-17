@@ -1,6 +1,6 @@
 import express from 'express'
 import XLSX from 'xlsx'
-import fs, { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
+import fs, { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs'
 import { writeFile } from 'node:fs/promises'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
