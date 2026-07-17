@@ -498,11 +498,15 @@ export function verifyStarterArmorSet(player) {
     const itemDef = itemsData.items.find((it) => it.id === `${slot}_armorset_${player.race}_${lineageInfix}lv1`)
     if (itemDef) {
       if (slot === 'boots') {
-        newEquipment['boots_l'] = { ...itemDef, uid: Date.now() + i, enhancement_level: 0 }
-        newEquipment['boots_r'] = { ...itemDef, uid: Date.now() + i + 10, enhancement_level: 0 }
+        // Boots are a matched pair — both slots share the SAME item object/uid,
+        // same as equipItem, so unequip returns exactly one item to the bag.
+        const pairItem = { ...itemDef, uid: Date.now() + i, enhancement_level: 0 }
+        newEquipment['boots_l'] = pairItem
+        newEquipment['boots_r'] = pairItem
       } else if (slot === 'gloves') {
-        newEquipment['gloves_l'] = { ...itemDef, uid: Date.now() + i, enhancement_level: 0 }
-        newEquipment['gloves_r'] = { ...itemDef, uid: Date.now() + i + 10, enhancement_level: 0 }
+        const pairItem = { ...itemDef, uid: Date.now() + i, enhancement_level: 0 }
+        newEquipment['gloves_l'] = pairItem
+        newEquipment['gloves_r'] = pairItem
       } else {
         newEquipment[slot] = { ...itemDef, uid: Date.now() + i, enhancement_level: 0 }
       }
