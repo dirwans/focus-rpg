@@ -1290,7 +1290,7 @@ document.getElementById('saveToKitabBtn').onclick = () => {
 
   const coordsJson = {};
   ['armor', 'pants', 'boots', 'gloves', 'shield', 'weapon', 'helmet'].forEach(slot => {
-    const slotLayers = layers.filter(l => l.slot === slot);
+    const slotLayers = layers.filter(l => l.slot === slot || l.slot.startsWith(slot + '_'));
     if (slotLayers.length > 0) {
       coordsJson[slot] = slotLayers.map(l => {
         const pt = { x: l.x, y: l.y, ax: l.ax, ay: l.ay, size: l.size, rot: l.rot, z: l.z || 1 };

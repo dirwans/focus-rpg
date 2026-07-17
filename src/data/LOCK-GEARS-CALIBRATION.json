@@ -34,12 +34,12 @@
       "armor": [{"x": 0.002, "y": 0.050, "ax": 0.5, "ay": 0.15, "size": 0.457, "rot": 0, "z": 1, "color": "#60a5fa"}],
       "pants": [{"x": 0.003, "y": 0.341, "ax": 0.5, "ay": 0.22, "size": 0.414, "rot": 0, "z": 2, "color": "#818cf8"}],
       "boots": [
-        {"x": 0.128, "y": 0.652, "ax": 0.5, "ay": 0.15, "size": 0.394, "rot": 0, "z": 3, "scaleX": 1.070, "scaleY": 1.125, "color": "#fbbf24", "label": "boot_l", "splitSuffix": "_l"},
-        {"x": -0.132, "y": 0.651, "ax": 0.5, "ay": 0.15, "size": 0.424, "rot": 0, "z": 3, "scaleX": 0.940, "scaleY": 1.045, "color": "#fbbf24", "label": "boot_r", "splitSuffix": "_r"}
+        {"x": 0.076, "y": 0.719, "ax": 0.80, "ay": 0.27, "size": 0.321, "rot": 0, "z": 3, "scaleX": 1.110, "scaleY": 1.210, "flipX": true, "color": "#fbbf24", "label": "boot_l", "splitSuffix": "_l"},
+        {"x": -0.106, "y": 0.702, "ax": 0.22, "ay": 0.25, "size": 0.374, "rot": 0, "z": 3, "scaleX": 0.875, "scaleY": 1.045, "flipX": true, "color": "#fbbf24", "label": "boot_r", "splitSuffix": "_r"}
       ],
       "gloves": [
-        {"x": 0.209, "y": 0.354, "ax": 0.52, "ay": 0.22, "size": 0.248, "rot": 0, "z": 6, "scaleY": 1.065, "color": "#34d399", "label": "glove_l", "splitSuffix": "_l"},
-        {"x": -0.181, "y": 0.329, "ax": 0.5, "ay": 0.23, "size": 0.258, "rot": -1, "z": 5, "scaleX": 1.035, "scaleY": 1.200, "color": "#34d399", "label": "glove_r", "splitSuffix": "_r"}
+        {"x": 0.152, "y": 0.424, "ax": 0.49, "ay": 0.38, "size": 0.460, "rot": 7, "z": 6, "scaleX": 0.975, "scaleY": 1.065, "color": "#34d399", "label": "glove_l", "splitSuffix": "_l"},
+        {"x": -0.183, "y": 0.434, "ax": 0.50, "ay": 0.42, "size": 0.318, "rot": 0, "z": 5, "scaleX": 1.230, "scaleY": 1.815, "color": "#34d399", "label": "glove_r", "splitSuffix": "_r"}
       ],
       "shield": [{"x": 0.182, "y": 0.503, "ax": 0.5, "ay": 0.5, "size": 0.457, "rot": 0, "z": 7, "color": "#fb923c"}],
       "weapon": [{"x": 0.013, "y": 0.689, "ax": 0.33, "ay": 0.63, "size": 0.401, "rot": -97, "z": 4, "color": "#f87171"}],
