@@ -47,8 +47,14 @@ export function isStackableItem(item) {
 
 export function addToInventory(inventory, item, count = 1) {
   const newInv = [...inventory]
-  
+
   if (!isStackableItem(item)) {
+    // Defensive guard: never let the exact same uid land in the bag twice.
+    // A genuine duplicate uid can only mean this exact item add already
+    // happened (e.g. a double-fired unequip/sync), not two distinct items.
+    if (item.uid && newInv.some((i) => i.uid === item.uid)) {
+      return newInv
+    }
     for (let i = 0; i < count; i++) {
       const uid = i === 0 && item.uid ? item.uid : Date.now() + Math.floor(Math.random() * 1000000)
       newInv.push({ ...item, uid, count: 1, qty: 1 })
