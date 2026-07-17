@@ -3035,6 +3035,16 @@ export const useGameStore = create(
           // Migrate inventory items
           if (next.player.inventory) {
              next.player.inventory = next.player.inventory.map(i => raceMap[i.race] ? { ...i, race: raceMap[i.race] } : i)
+             
+             // Cleanup legacy duplicated boots/gloves from unequipping un-split items
+             const baseUids = new Set(next.player.inventory.map(i => String(i.uid).replace('_r', '')));
+             next.player.inventory = next.player.inventory.filter(i => {
+               const uidStr = String(i.uid);
+               if (uidStr.endsWith('_r') && baseUids.has(uidStr.replace('_r', ''))) {
+                 return false; // Remove the _r duplicate if the base item exists
+               }
+               return true;
+             });
           }
           if (next.player.equipment) {
              // Migrate gloves/boots to gloves_l/boots_l if they exist
