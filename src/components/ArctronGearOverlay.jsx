@@ -17,8 +17,8 @@ const WARRIOR_POINTS = {
     { x: 0.209, y: 0.354, ax: 0.52, ay: 0.22, size: 0.248, rot: 0, z: 6, scaleY: 1.065, color: '#34d399', label: 'glove_l', splitSuffix: '_l' },
     { x: -0.181, y: 0.329, ax: 0.5, ay: 0.23, size: 0.258, rot: -1, z: 5, scaleX: 1.035, scaleY: 1.200, color: '#34d399', label: 'glove_r', splitSuffix: '_r' }
   ],
-  shield: [{ x: 0.182, y: 0.503, ax: 0.5, ay: 0.5, size: 0.457, rot: 0, z: 7, color: '#fb923c' }],
-  weapon: [{ x: 0.013, y: 0.689, ax: 0.33, ay: 0.63, size: 0.401, rot: -97, z: 4, color: '#f87171' }],
+  shield: [{ x: 0.193, y: 0.535, ax: 0.5, ay: 0.5, size: 0.457, rot: 0, z: 7, color: '#fb923c' }],
+  weapon: [{ x: -0.066, y: 0.615, ax: 0.49, ay: 0.51, size: 0.401, rot: -95, z: 4, color: '#f87171' }],
   helmet: [{ x: 0.001, y: 0.066, ax: 0.5, ay: 0.5, size: 0.123, rot: 0, z: 5, scaleX: 0.970, scaleY: 1.045, color: '#f472b6' }]
 }
 
@@ -34,7 +34,7 @@ const RANGER_POINTS = {
     { x: -0.162, y: 0.417, ax: 0.55, ay: 0.41, size: 0.245, rot: -1, z: 5, scaleX: 1.130, scaleY: 1.220, color: '#34d399', label: 'glove_r', splitSuffix: '_r' }
   ],
   shield: [{ x: 0.182, y: 0.503, ax: 0.5, ay: 0.5, size: 0.457, rot: 0, z: 7, color: '#fb923c' }],
-  weapon: [{ x: 0.100, y: 0.728, ax: 0.5, ay: 0.75, size: 0.401, rot: -1, z: 4, color: '#f87171' }],
+  weapon: [{ x: -0.081, y: 0.556, ax: 0.52, ay: 0.43, size: 0.401, rot: 180, z: 4, color: '#f87171' }],
   helmet: [{ x: -0.003, y: 0.103, ax: 0.49, ay: 0.63, size: 0.123, rot: 0, z: 5, scaleX: 0.900, scaleY: 1.105, color: '#f472b6' }]
 }
 
