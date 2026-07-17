@@ -3037,7 +3037,7 @@ export const useGameStore = create(
              next.player.inventory = next.player.inventory.map(i => raceMap[i.race] ? { ...i, race: raceMap[i.race] } : i)
              
              // Cleanup legacy duplicated boots/gloves from unequipping un-split items
-             const baseUids = new Set(next.player.inventory.map(i => String(i.uid).replace('_r', '')));
+             const baseUids = new Set(next.player.inventory.filter(i => !String(i.uid).endsWith('_r')).map(i => String(i.uid)));
              next.player.inventory = next.player.inventory.filter(i => {
                const uidStr = String(i.uid);
                if (uidStr.endsWith('_r') && baseUids.has(uidStr.replace('_r', ''))) {
