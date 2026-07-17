@@ -3625,35 +3625,45 @@ export const useGameStore = create(
 
         const eq = player.equipment || { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves_l: null, gloves_r: null, boots_l: null, boots_r: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null }
 
-        // Determine target slot — amulet, ring, gloves, and boots have dual slots
+        // Determine target slot — amulet and ring have dual slots (can mix two
+        // different items). Boots/gloves are a matched PAIR: one inventory item
+        // fills both the _l and _r equipment slots together and can never be
+        // split across two different items.
         let slot = null
+        let pairSlots = null
         if (item.type === 'amulet') {
           slot = !eq.amulet1 ? 'amulet1' : 'amulet2'
         } else if (item.type === 'ring') {
           slot = !eq.ring1 ? 'ring1' : 'ring2'
         } else if (item.type === 'boots') {
-          slot = !eq.boots_l ? 'boots_l' : 'boots_r'
+          pairSlots = ['boots_l', 'boots_r']
         } else if (item.type === 'gloves') {
-          slot = !eq.gloves_l ? 'gloves_l' : 'gloves_r'
+          pairSlots = ['gloves_l', 'gloves_r']
         } else if (['weapon','armor','shield','helmet','mantle','pants','ascension_arms'].includes(item.type)) {
           slot = item.type
         }
-        if (!slot) return
-        const oldItem = eq[slot]
+        if (!slot && !pairSlots) return
 
         let newInventory = player.inventory.filter((i) => i.uid !== uid)
-        if (oldItem) {
-          newInventory.push(oldItem)
+        const newEquipment = { ...eq }
+
+        if (pairSlots) {
+          pairSlots.forEach((s) => {
+            const oldItem = eq[s]
+            if (oldItem) newInventory.push(oldItem)
+            newEquipment[s] = item
+          })
+        } else {
+          const oldItem = eq[slot]
+          if (oldItem) newInventory.push(oldItem)
+          newEquipment[slot] = item
         }
 
         set({
           player: {
             ...player,
             inventory: newInventory,
-            equipment: {
-              ...eq,
-              [slot]: item
-            },
+            equipment: newEquipment,
             savedAt: Date.now()
           }
         })
@@ -3664,16 +3674,27 @@ export const useGameStore = create(
         const item = eq[slot]
         if (!item) return
 
-        const newInventory = addToInventory(player.inventory, item)
+        // Boots/gloves are a matched pair — unequipping one foot/hand unequips
+        // both together, since they can never hold two different items.
+        const pairMap = { boots_l: 'boots_r', boots_r: 'boots_l', gloves_l: 'gloves_r', gloves_r: 'gloves_l' }
+        const pairSlot = pairMap[slot]
+
+        let newInventory = addToInventory(player.inventory, item)
+        const newEquipment = { ...eq, [slot]: null }
+
+        // Both slots normally hold the SAME item object (equipped as a pair) —
+        // only return the paired slot's item separately if it's actually a
+        // different item (leftover from old data before this pairing existed).
+        if (pairSlot && eq[pairSlot] && eq[pairSlot].uid !== item.uid) {
+          newInventory = addToInventory(newInventory, eq[pairSlot])
+        }
+        if (pairSlot) newEquipment[pairSlot] = null
 
         set({
           player: {
             ...player,
             inventory: newInventory,
-            equipment: {
-              ...eq,
-              [slot]: null
-            },
+            equipment: newEquipment,
             savedAt: Date.now()
           }
         })
