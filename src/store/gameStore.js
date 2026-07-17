@@ -3046,6 +3046,53 @@ export const useGameStore = create(
                return true;
              });
           }
+
+          // Restore boots/gloves that were accidentally wiped by the legacy cleanup script
+          if (next.player.race === 'arctron' && next.player.inventory && next.player.equipment) {
+            const eq = next.player.equipment
+            const inv = next.player.inventory
+            const hasBootsEquipped = eq.boots_l || eq.boots_r || eq.boots
+            const hasBootsInv = inv.some(i => i.type === 'boots')
+            const hasGlovesEquipped = eq.gloves_l || eq.gloves_r || eq.gloves
+            const hasGlovesInv = inv.some(i => i.type === 'gloves')
+
+            const WARRIOR_LINE = ['warrior', 'vanguard', 'juggernaut', 'dreadnought']
+            const RANGER_LINE = ['ranger', 'sharpshooter', 'deadeye', 'apex_hunter']
+            const TECH_LINE = ['technician', 'architect', 'core_engineer', 'cybermancer']
+            const job = (next.player.job || '').toLowerCase()
+
+            let bootsId = null, glovesId = null
+            if (WARRIOR_LINE.includes(job)) {
+              bootsId = 'boots_armorset_arctron_lv1'
+              glovesId = 'gloves_armorset_arctron_lv1'
+            } else if (RANGER_LINE.includes(job)) {
+              bootsId = 'boots_armorset_arctron_ranger_lv1'
+              glovesId = 'gloves_armorset_arctron_ranger_lv1'
+            } else if (TECH_LINE.includes(job)) {
+              bootsId = 'boots_armorset_arctron_technician_lv1'
+              glovesId = 'gloves_armorset_arctron_technician_lv1'
+            }
+
+            if (bootsId && !hasBootsEquipped && !hasBootsInv) {
+              const bootsDef = itemsData.items.find(it => it.id === bootsId)
+              if (bootsDef) {
+                const restoredBoots = { ...bootsDef, uid: Date.now() + 777, enhancement_level: 0 }
+                next.player.equipment.boots_l = restoredBoots
+                next.player.equipment.boots_r = restoredBoots
+                console.log('[Migration] Restored missing boots:', bootsId)
+              }
+            }
+            if (glovesId && !hasGlovesEquipped && !hasGlovesInv) {
+              const glovesDef = itemsData.items.find(it => it.id === glovesId)
+              if (glovesDef) {
+                const restoredGloves = { ...glovesDef, uid: Date.now() + 888, enhancement_level: 0 }
+                next.player.equipment.gloves_l = restoredGloves
+                next.player.equipment.gloves_r = restoredGloves
+                console.log('[Migration] Restored missing gloves:', glovesId)
+              }
+            }
+          }
+
           if (next.player.equipment) {
              // Migrate gloves/boots to gloves_l/boots_l if they exist
              if (next.player.equipment.gloves) {
