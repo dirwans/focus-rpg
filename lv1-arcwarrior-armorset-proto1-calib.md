@@ -18,11 +18,11 @@ const GEAR_POINTS = {
     { x: -0.132, y: 0.648, ax: 0.5, ay: 0.15, size: 0.424, rot: 0, z: 3, scaleX: 0.940, scaleY: 1.020, label: 'boot_r', splitSuffix: '_r' }
   ],
   gloves: [
-    { x: 0.209, y: 0.354, ax: 0.52, ay: 0.22, size: 0.248, rot: 0, z: 3, scaleY: 1.065, label: 'glove_l', splitSuffix: '_l' },
-    { x: -0.181, y: 0.329, ax: 0.5, ay: 0.23, size: 0.258, rot: -1, z: 3, scaleX: 1.035, scaleY: 1.200, label: 'glove_r', splitSuffix: '_r' }
+    { x: 0.209, y: 0.354, ax: 0.52, ay: 0.22, size: 0.248, rot: 0, z: 6, scaleY: 1.065, label: 'glove_l', splitSuffix: '_l' },
+    { x: -0.181, y: 0.329, ax: 0.5, ay: 0.23, size: 0.258, rot: -1, z: 5, scaleX: 1.035, scaleY: 1.200, label: 'glove_r', splitSuffix: '_r' }
   ],
-  shield: [{ x: -0.174, y: 0.506, ax: 0.5, ay: 0.5, size: 0.450, rot: 0, z: 4 }],
-  weapon: [{ x: 0.100, y: 0.728, ax: 0.5, ay: 0.75, size: 0.401, rot: -1, z: 5 }],
+  shield: [{ x: 0.100, y: 0.728, ax: 0.5, ay: 0.5, size: 0.450, rot: 0, z: 7 }],
+  weapon: [{ x: -0.174, y: 0.506, ax: 0.5, ay: 0.75, size: 0.401, rot: -1, z: 4 }],
   helmet: [{ x: 0.001, y: 0.066, ax: 0.5, ay: 0.5, size: 0.123, rot: 0, z: 5, scaleX: 0.970, scaleY: 1.045 }]
 };
 ```

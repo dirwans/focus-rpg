@@ -19,6 +19,8 @@
     "@capgo/capacitor-social-login": "^8.3.32",
     "express": "^4.21.2",
     "google-auth-library": "^10.9.0",
+    "pixi-dragonbones-runtime": "^8.0.3",
+    "pixi.js": "^8.2.5",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "xlsx": "^0.18.5",

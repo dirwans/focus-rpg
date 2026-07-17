@@ -1,0 +1,14 @@
+{
+  "name": "Arctron",
+  "imagePath": "arctron_texture.png",
+  "width": 256,
+  "height": 256,
+  "SubTexture": [
+    { "name": "body",  "x": 0,   "y": 0,   "width": 60,  "height": 100 },
+    { "name": "head",  "x": 60,  "y": 0,   "width": 50,  "height": 50  },
+    { "name": "armL",  "x": 110, "y": 0,   "width": 20,  "height": 70  },
+    { "name": "armR",  "x": 130, "y": 0,   "width": 20,  "height": 70  },
+    { "name": "legL",  "x": 0,   "y": 100, "width": 25,  "height": 80  },
+    { "name": "legR",  "x": 25,  "y": 100, "width": 25,  "height": 80  }
+  ]
+}

@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>🎬 Animation Lab — Arctron</title>
+<link rel="icon" href="/assets/arctron/arctron_logo.png" type="image/png">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-dark: #070b13;
+    --panel-bg: #0f1726;
+    --accent: #ff5222;
+    --accent-glow: rgba(255, 82, 34, 0.25);
+    --border-color: #22314d;
+    --text-primary: #f0f4f8;
+    --text-secondary: #8e9db5;
+    --btn-hover: #1c2a42;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: 'Outfit', sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background:
+      radial-gradient(130% 90% at 50% 10%, rgba(255, 82, 34, 0.05) 0%, transparent 60%),
+      radial-gradient(60% 50% at 80% 80%, rgba(59, 130, 246, 0.03) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── Header ───────────────────────────────────────── */
+  header {
+    height: 56px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    background: rgba(15, 23, 38, 0.8);
+    backdrop-filter: blur(12px);
+    z-index: 10;
+    flex-shrink: 0;
+  }
+
+  .logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-wrap img {
+    height: 28px;
+    opacity: 0.9;
+  }
+
+  h1 {
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: linear-gradient(to right, #fff, var(--text-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .back-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    background: rgba(22, 31, 48, 0.6);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .back-btn:hover {
+    color: #fff;
+    border-color: var(--accent);
+    background: rgba(255, 82, 34, 0.08);
+    box-shadow: 0 0 12px var(--accent-glow);
+  }
+
+  /* ── Main Layout ──────────────────────────────────── */
+  .main-container {
+    flex: 1;
+    display: flex;
+    z-index: 2;
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  /* ── Canvas Panel (Left) ──────────────────────────── */
+  .canvas-panel {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 24px;
+  }
+
+  .canvas-card {
+    position: relative;
+    width: 620px;
+    height: calc(100vh - 120px);
+    max-height: 800px;
+    border-radius: 24px;
+    background: radial-gradient(90% 70% at 50% 28%, rgba(255, 82, 34, 0.08), transparent 75%), rgba(10, 15, 26, 0.6);
+    border: 1px solid rgba(255, 82, 34, 0.15);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.8), inset 0 0 30px rgba(255, 82, 34, 0.03);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .canvas-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    border: 1px solid transparent;
+    background: linear-gradient(135deg, rgba(255,82,34,0.3) 0%, transparent 20%, transparent 80%, rgba(255,82,34,0.3) 100%) border-box;
+    pointer-events: none;
+  }
+
+  .canvas-badge {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(7, 11, 19, 0.7);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 82, 34, 0.4);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #ffb48f;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  .canvas-badge .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 6px #22c55e;
+    animation: blink 2s infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  #animLabCanvas {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+  }
+
+  /* ── Control Panel (Right) ────────────────────────── */
+  .control-panel {
+    width: 340px;
+    background: rgba(15, 23, 38, 0.95);
+    border-left: 1px solid var(--border-color);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+    z-index: 5;
+  }
+
+  .section-title {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .section-title::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 12px;
+    background: var(--accent);
+    box-shadow: 0 0 6px var(--accent);
+  }
+
+  /* Animation Cards */
+  .anim-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .anim-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: rgba(22, 31, 48, 0.4);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .anim-card:hover {
+    border-color: rgba(255, 82, 34, 0.3);
+    background: rgba(22, 31, 48, 0.6);
+  }
+
+  .anim-card.active {
+    border-color: var(--accent);
+    background: rgba(255, 82, 34, 0.05);
+    box-shadow: inset 0 0 12px rgba(255, 82, 34, 0.03);
+  }
+
+  .anim-card .anim-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    text-transform: capitalize;
+  }
+
+  .anim-card .anim-meta {
+    font-size: 10px;
+    color: var(--text-secondary);
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 1px;
+  }
+
+  .anim-card.active .anim-name {
+    color: var(--accent);
+  }
+
+  /* Playback Controls */
+  .playback-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .play-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), #ff7a52);
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 16px var(--accent-glow);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .play-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 24px rgba(255, 82, 34, 0.4);
+  }
+
+  .speed-controls {
+    display: flex;
+    gap: 4px;
+    flex: 1;
+    justify-content: flex-end;
+  }
+
+  .speed-btn {
+    padding: 6px 10px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    background: #0b1329;
+    border: 1px solid #1e2d52;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.18s ease;
+  }
+
+  .speed-btn:hover { border-color: var(--accent); color: #fff; }
+  .speed-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #03060f;
+    box-shadow: 0 0 8px var(--accent-glow);
+  }
+
+  /* Timeline Slider */
+  .timeline-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .timeline-labels {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--text-secondary);
+  }
+
+  input[type="range"] {
+    -webkit-appearance: none;
+    background: #1e293b;
+    height: 6px;
+    border-radius: 3px;
+    outline: none;
+    width: 100%;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+    box-shadow: 0 0 6px var(--accent);
+  }
+
+  /* Info Card */
+  .info-card {
+    background: rgba(22, 31, 48, 0.3);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 16px;
+  }
+
+  .info-card .info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    font-size: 12px;
+  }
+
+  .info-card .info-label {
+    color: var(--text-secondary);
+    font-size: 11px;
+  }
+
+  .info-card .info-value {
+    color: #fff;
+    font-family: 'Share Tech Mono', monospace;
+    font-weight: 600;
+    font-size: 11px;
+  }
+
+  /* Status bar */
+  .status-bar {
+    margin-top: auto;
+    padding: 12px 0 0;
+    border-top: 1px solid var(--border-color);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: #4a5568;
+    letter-spacing: 0.5px;
+  }
+
+  .status-bar .status-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    margin-right: 6px;
+  }
+
+  .status-dot.ok { background: #22c55e; box-shadow: 0 0 4px #22c55e; }
+  .status-dot.warn { background: #f59e0b; box-shadow: 0 0 4px #f59e0b; }
+  .status-dot.err { background: #ef4444; box-shadow: 0 0 4px #ef4444; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-wrap">
+    <img src="/assets/arctron/arctron_logo.png" alt="Arctron" onerror="this.style.display='none'">
+    <h1>Animation Lab</h1>
+  </div>
+  <a href="/arctron-dressing.html" class="back-btn">← Back to Dressing Room</a>
+</header>
+
+<div class="main-container">
+  <!-- Left: Canvas Viewport -->
+  <div class="canvas-panel">
+    <div class="canvas-card">
+      <div class="canvas-badge"><span class="dot"></span> LIVE PREVIEW</div>
+      <canvas id="animLabCanvas" width="600" height="800"></canvas>
+    </div>
+  </div>
+
+  <!-- Right: Controls -->
+  <div class="control-panel">
+
+    <!-- Playback -->
+    <div>
+      <div class="section-title">Playback</div>
+      <div class="playback-bar">
+        <button class="play-btn" id="playPauseBtn" title="Play / Pause">▶</button>
+        <div class="speed-controls">
+          <button class="speed-btn" data-speed="0.25">0.25×</button>
+          <button class="speed-btn" data-speed="0.5">0.5×</button>
+          <button class="speed-btn active" data-speed="1">1×</button>
+          <button class="speed-btn" data-speed="2">2×</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timeline -->
+    <div>
+      <div class="section-title">Timeline</div>
+      <div class="timeline-wrap">
+        <input type="range" id="timelineSlider" min="0" max="100" value="0">
+        <div class="timeline-labels">
+          <span id="timelineCurrent">0:00</span>
+          <span id="timelineTotal">0:00</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Animations -->
+    <div>
+      <div class="section-title">Animations</div>
+      <div class="anim-grid" id="animGrid">
+        <div class="anim-card active" data-anim="idle">
+          <span class="anim-name">🧍 Idle</span>
+          <span class="anim-meta">LOOP</span>
+        </div>
+        <div class="anim-card" data-anim="walk">
+          <span class="anim-name">🚶 Walk</span>
+          <span class="anim-meta">LOOP</span>
+        </div>
+        <div class="anim-card" data-anim="attack">
+          <span class="anim-name">⚔️ Attack</span>
+          <span class="anim-meta">ONCE</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skeleton Info -->
+    <div>
+      <div class="section-title">Skeleton Info</div>
+      <div class="info-card">
+        <div class="info-row">
+          <span class="info-label">Name</span>
+          <span class="info-value" id="infoName">—</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Bones</span>
+          <span class="info-value" id="infoBones">—</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Slots</span>
+          <span class="info-value" id="infoSlots">—</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Animations</span>
+          <span class="info-value" id="infoAnims">—</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Frame Rate</span>
+          <span class="info-value" id="infoFPS">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Status -->
+    <div class="status-bar" id="statusBar">
+      <span class="status-dot warn"></span> Loading assets…
+    </div>
+
+    <!-- 2.5D Battle Customizer -->
+    <div style="margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 15px; display: flex; flex-direction: column; gap: 8px;">
+      <div class="section-title">Battle Customizer</div>
+      
+      <div style="margin-bottom: 4px;">
+        <label style="font-size: 11px; color: var(--text-secondary); display: block; margin-bottom: 4px;">Equipped Weapon Style:</label>
+        <select id="weaponSelect" style="width: 100%; padding: 6px; background: #0b1329; border: 1px solid #1e2d52; color: #fff; border-radius: 6px; font-family: monospace; font-size: 11px;">
+          <option value="battle_weapon" selected>Green AI Sword (Battle Sliced)</option>
+          <!-- Swords -->
+          <option value="defallfactionslv1sword1.png">[D] Lv.1 Sword 1 (Green)</option>
+          <option value="defallfactionslv1sword2.png">[D] Lv.1 Sword 2 (Bronze)</option>
+          <option value="defallfactionslv1sword3.png">[D] Lv.1 Sword 3 (Steel)</option>
+          <option value="defallfactionslv1sword4.png">[D] Lv.1 Sword 4 (Gold)</option>
+          <option value="defallfactionslv32sword.png">[C] Lv.32 Greatsword</option>
+          <option value="defallfactionslv42sword.png">[B] Lv.42 Greatsword</option>
+          <option value="defallfactionslv55sword.png">[A] Lv.55 Greatsword</option>
+          <!-- Ranger Guns & Bows -->
+          <option value="defallfactionslv1gun.png">[D] Lv.1 Rifle (Default)</option>
+          <option value="defallfactionslv1bow.png">[D] Lv.1 Bow</option>
+          <option value="defallfactionslv32gun.png">[C] Lv.32 Rifle</option>
+          <option value="defallfactionslv32bow.png">[C] Lv.32 Bow</option>
+          <option value="defallfactionslv42gun.png">[B] Lv.42 Rifle</option>
+          <option value="defallfactionslv42bow.png">[B] Lv.42 Bow</option>
+          <option value="defallfactionslv55gun.png">[A] Lv.55 Rifle</option>
+          <option value="defallfactionslv55bow.png">[A] Lv.55 Bow</option>
+          <!-- Special Launchers -->
+          <option value="defarctronlv32special.png">[C] Lv.32 Special Launcher</option>
+          <option value="defarctronlv42special.png">[B] Lv.42 Special Launcher</option>
+          <option value="defarctronlv55special.png">[A] Lv.55 Special Launcher</option>
+          <!-- Staffs -->
+          <option value="defbioncelestralv1staff1.png">[D] Lv.1 Staff 1</option>
+          <option value="defbioncelestralv1staff2.png">[D] Lv.1 Staff 2</option>
+          <option value="defbioncelestralv32staff.png">[C] Lv.32 Staff</option>
+          <option value="defbioncelestralv42staff.png">[B] Lv.42 Staff</option>
+          <option value="defbioncelestralv55staff.png">[A] Lv.55 Staff</option>
+        </select>
+      </div>
+
+      <button class="speed-btn" id="toggleSideViewBtn" style="width: 100%; text-align: center; padding: 10px; font-weight: bold;">📐 2.5D Side View Mode: OFF</button>
+      <button class="speed-btn" id="toggleRefBtn" style="width: 100%; text-align: center; padding: 10px; font-weight: bold;">👁️ Show Battle Reference: OFF</button>
+      <button class="speed-btn" id="exportSkeletonBtn" style="width: 100%; text-align: center; padding: 8px; font-weight: bold; background: #059669; border-color: #047857; color: #fff;">📋 Export Skeleton JSON</button>
+    </div>
+
+    <!-- Sprite Calibration Panel -->
+    <div id="spriteCalibPanel" style="margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 15px; display: flex; flex-direction: column; gap: 8px;">
+      <div class="section-title">Sprite Calibration</div>
+      
+      <div style="margin-bottom: 4px;">
+        <label style="font-size: 11px; color: var(--text-secondary); display: block; margin-bottom: 4px;">Select Slot:</label>
+        <select id="calibSlotSelect" style="width: 100%; padding: 6px; background: #0b1329; border: 1px solid #1e2d52; color: #fff; border-radius: 6px; font-family: monospace; font-size: 11px;">
+          <option value="head">Helmet (Head)</option>
+          <option value="body">Armor (Body)</option>
+          <option value="armL">Gloves L (Arm L)</option>
+          <option value="armR">Gloves R (Arm R)</option>
+          <option value="legL">Boots L (Leg L)</option>
+          <option value="legR">Boots R (Leg R)</option>
+          <option value="weapon">Weapon (Sword)</option>
+          <option value="shield">Shield (Perisai)</option>
+        </select>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 10px; font-size: 11px; color: #a1b0cb;">
+        <div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 2px;">
+            <span>Size Scale</span>
+            <span id="calibVal_scale" style="color: var(--accent); font-family: monospace;">0.35</span>
+          </div>
+          <input type="range" id="calib_scale" min="0.01" max="1.5" step="0.005" value="0.35" style="width: 100%;">
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 2px;">
+            <span>Offset X</span>
+            <span id="calibVal_ox" style="color: var(--accent); font-family: monospace;">0</span>
+          </div>
+          <input type="range" id="calib_ox" min="-150" max="150" step="1" value="0" style="width: 100%;">
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 2px;">
+            <span>Offset Y</span>
+            <span id="calibVal_oy" style="color: var(--accent); font-family: monospace;">0</span>
+          </div>
+          <input type="range" id="calib_oy" min="-150" max="150" step="1" value="0" style="width: 100%;">
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 2px;">
+            <span>Rotation</span>
+            <span id="calibVal_rot" style="color: var(--accent); font-family: monospace;">0</span>
+          </div>
+          <input type="range" id="calib_rot" min="-180" max="180" step="1" value="0" style="width: 100%;">
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 2px;">
+            <span>Stretch Width</span>
+            <span id="calibVal_scaleX" style="color: var(--accent); font-family: monospace;">1.0</span>
+          </div>
+          <input type="range" id="calib_scaleX" min="0.1" max="3.0" step="0.01" value="1.0" style="width: 100%;">
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 2px;">
+            <span>Stretch Height</span>
+            <span id="calibVal_scaleY" style="color: var(--accent); font-family: monospace;">1.0</span>
+          </div>
+          <input type="range" id="calib_scaleY" min="0.1" max="3.0" step="0.01" value="1.0" style="width: 100%;">
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 2px;">
+            <span>Skew X (Horizontal 3D)</span>
+            <span id="calibVal_skewX" style="color: var(--accent); font-family: monospace;">0.00</span>
+          </div>
+          <input type="range" id="calib_skewX" min="-2.0" max="2.0" step="0.01" value="0.0" style="width: 100%;">
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 2px;">
+            <span>Skew Y (Vertical 3D)</span>
+            <span id="calibVal_skewY" style="color: var(--accent); font-family: monospace;">0.00</span>
+          </div>
+          <input type="range" id="calib_skewY" min="-2.0" max="2.0" step="0.01" value="0.0" style="width: 100%;">
+        </div>
+      </div>
+      
+      <button class="speed-btn" id="exportCalibBtn" style="width: 100%; text-align: center; padding: 8px; font-weight: bold; background: #0284c7; border-color: #025a87; color: #fff;">📋 Export Sprite Calib</button>
+    </div>
+  </div>
+</div>
+
+<!-- No external libs needed — pure Canvas 2D renderer -->
+<script>
+(() => {
+  // Global error handler
+  window.onerror = function(message, source, lineno, colno, error) {
+    const bar = document.getElementById('statusBar');
+    if (bar) {
+      bar.innerHTML = `<span class="status-dot err"></span> ⚠️ CRASH: ${message} (Line ${lineno})`;
+      bar.style.color = '#ff5222';
+    }
+    console.error(error);
+    return false;
+  };
+
+  const canvas = document.getElementById('animLabCanvas');
+  const ctx = canvas.getContext('2d');
+  const playPauseBtn = document.getElementById('playPauseBtn');
+  const animGrid = document.getElementById('animGrid');
+  const statusBar = document.getElementById('statusBar');
+  const timelineSlider = document.getElementById('timelineSlider');
+
+  let isPlaying = false;
+  let speed = 1;
+  let currentAnim = 'idle';
+  let skeletonData = null;
+  let textureAtlas = null;
+  let textureImg = null;
+  let animFrame = 0;
+  let lastTime = 0;
+  let armatureData = null;
+
+  // State untuk mode perang 2.5D
+  let isSideView = false;
+  let showReference = false;
+  let referenceImg = null;
+
+  const setStatus = (type, msg) => {
+    const dotClass = type === 'ok' ? 'ok' : type === 'warn' ? 'warn' : 'err';
+    statusBar.innerHTML = `<span class="status-dot ${dotClass}"></span> ${msg}`;
+  };
+
+  const loadJSON = (url) => fetch(url).then(r => {
+    if (!r.ok) throw new Error(`${r.status} ${url}`);
+    return r.json();
+  });
+
+  const loadImage = (url) => new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = () => reject(new Error('Failed to load ' + url));
+    img.src = url;
+  });
+
+  // ── Pure Canvas 2D Skeleton Renderer ────────────────────────
+
+  // Build bone tree from flat array
+  function buildBoneTree(bones) {
+    const map = {};
+    const roots = [];
+    for (const b of bones) {
+      map[b.name] = {
+        name: b.name,
+        x: b.transform?.x || 0,
+        y: b.transform?.y || 0,
+        rotation: b.transform?.rotate || 0,
+        scaleX: b.transform?.scaleX ?? 1,
+        scaleY: b.transform?.scaleY ?? 1,
+        children: [],
+        // Runtime animated values
+        animX: 0, animY: 0, animRot: 0,
+      };
+    }
+    for (const b of bones) {
+      if (b.parent && map[b.parent]) {
+        map[b.parent].children.push(map[b.name]);
+      } else if (!b.parent) {
+        roots.push(map[b.name]);
+      }
+    }
+    return { map, roots };
+  }
+
+  // Get texture region for a slot/display name
+  function getTextureRegion(name) {
+    if (!textureAtlas || !textureAtlas.SubTexture) return null;
+    return textureAtlas.SubTexture.find(s => s.name === name) || null;
+  }
+
+  // Interpolate animation keyframes
+  function getAnimatedValue(frames, totalDuration, currentFrame, defaultVal) {
+    if (!frames || frames.length === 0) return defaultVal;
+    let elapsed = 0;
+    for (let i = 0; i < frames.length; i++) {
+      const f = frames[i];
+      const nextElapsed = elapsed + f.duration;
+      if (currentFrame < nextElapsed || i === frames.length - 1) {
+        const nextFrame = frames[(i + 1) % frames.length];
+        const progress = f.duration > 0 ? (currentFrame - elapsed) / f.duration : 0;
+        const t = Math.max(0, Math.min(1, progress));
+        // Smooth easing
+        const eased = f.tweenEasing !== undefined ? t : 0;
+        const fromVal = f.rotate ?? f.x ?? f.y ?? 0;
+        const toVal = nextFrame.rotate ?? nextFrame.x ?? nextFrame.y ?? 0;
+        return fromVal + (toVal - fromVal) * eased;
+      }
+      elapsed = nextElapsed;
+    }
+    return defaultVal;
+  }
+
+  // Apply animation to bone tree
+  function applyAnimation(boneMap, animData, frame) {
+    // Reset all animated values
+    for (const name in boneMap) {
+      boneMap[name].animX = 0;
+      boneMap[name].animY = 0;
+      boneMap[name].animRot = 0;
+    }
+    if (!animData || !animData.bone) return;
+    const totalDuration = animData.duration || 24;
+    const loopFrame = frame % totalDuration;
+
+    for (const boneAnim of animData.bone) {
+      const bone = boneMap[boneAnim.name];
+      if (!bone) continue;
+      if (boneAnim.rotateFrame) {
+        bone.animRot = getAnimatedValue(boneAnim.rotateFrame, totalDuration, loopFrame, 0);
+      }
+      if (boneAnim.translateFrame) {
+        // translateFrame has x and y
+        let elapsed = 0;
+        for (let i = 0; i < boneAnim.translateFrame.length; i++) {
+          const f = boneAnim.translateFrame[i];
+          const nextElapsed = elapsed + f.duration;
+          if (loopFrame < nextElapsed || i === boneAnim.translateFrame.length - 1) {
+            const next = boneAnim.translateFrame[(i + 1) % boneAnim.translateFrame.length];
+            const progress = f.duration > 0 ? (loopFrame - elapsed) / f.duration : 0;
+            const t = Math.max(0, Math.min(1, progress));
+            bone.animX = (f.x || 0) + ((next.x || 0) - (f.x || 0)) * t;
+            bone.animY = (f.y || 0) + ((next.y || 0) - (f.y || 0)) * t;
+            break;
+          }
+          elapsed = nextElapsed;
+        }
+      }
+    }
+  }
+
+  // Konfigurasi kalibrasi sprite per slot dinamis (Front View / Dressing Room)
+  const frontCalibrations = {
+    head: { scale: 0.08, ox: 0, oy: 0, rot: 0, scaleX: 1.0, scaleY: 1.0, skewX: 0, skewY: 0 },
+    body: { scale: 0.28, ox: 0, oy: 40, rot: 0, scaleX: 1.0, scaleY: 1.0, skewX: 0, skewY: 0 },
+    armL: { scale: 0.18, ox: 15, oy: 25, rot: 0, scaleX: 1.0, scaleY: 1.0, skewX: 0, skewY: 0 },
+    armR: { scale: 0.18, ox: -15, oy: 25, rot: 0, scaleX: 1.0, scaleY: 1.0, skewX: 0, skewY: 0 },
+    legL: { scale: 0.22, ox: 5, oy: 60, rot: 0, scaleX: 1.0, scaleY: 1.0, skewX: 0, skewY: 0 },
+    legR: { scale: 0.22, ox: -5, oy: 60, rot: 0, scaleX: 1.0, scaleY: 1.0, skewX: 0, skewY: 0 },
+    weapon: { scale: 0.18, ox: 0, oy: 0, rot: 0, scaleX: 1.0, scaleY: 1.0, skewX: 0, skewY: 0 },
+    shield: { scale: 0.18, ox: 0, oy: 0, rot: 0, scaleX: 1.0, scaleY: 1.0, skewX: 0, skewY: 0 }
+  };
+
+  // Kalibrasi khusus versi miring 3/4 (Battle Mode) hasil slice presisi gambar tempur AI
+  const sideCalibrations = {
+    head: { scale: 0.25, ox: -10, oy: -20, rot: 0, scaleX: 1.0, scaleY: 1.0, skewX: 0.0, skewY: 0.0 },
+    body: { scale: 0.21, ox: 0, oy: 40, rot: 0, scaleX: 1.0, scaleY: 1.0, skewX: 0.0, skewY: 0.0 },
+    armL: { scale: 0.23, ox: 25, oy: 35, rot: 0, scaleX: 1.0, scaleY: 1.0, skewX: 0.0, skewY: 0.0 }, // Shield hand (Far)
+    armR: { scale: 0.23, ox: -25, oy: 35, rot: 0, scaleX: 1.0, scaleY: 1.0, skewX: 0.0, skewY: 0.0 }, // Weapon hand (Near)
+    legL: { scale: 0.22, ox: 10, oy: 60, rot: 0, scaleX: 1.0, scaleY: 1.0, skewX: 0.0, skewY: 0.0 },
+    legR: { scale: 0.22, ox: -10, oy: 60, rot: 0, scaleX: 1.0, scaleY: 1.0, skewX: 0.0, skewY: 0.0 },
+    weapon: { scale: 0.23, ox: -10, oy: 15, rot: 0, scaleX: 1.0, scaleY: 1.0, skewX: 0.0, skewY: 0.0 },
+    shield: { scale: 0.23, ox: 10, oy: 15, rot: 0, scaleX: 1.0, scaleY: 1.0, skewX: 0.0, skewY: 0.0 }
+  };
+
+  let slotCalibrations = JSON.parse(JSON.stringify(frontCalibrations));
+
+  // Jalur path gambar berdasarkan mode (Front vs Side)
+  const frontPaths = {
+    head: '/assets/arctron/def_warrior_armor_set_lv1/helmet.png',
+    body: '/assets/arctron/def_warrior_armor_set_lv1/armor.png',
+    armL: '/assets/arctron/def_warrior_armor_set_lv1/gloves_l.png',
+    armR: '/assets/arctron/def_warrior_armor_set_lv1/gloves_r.png',
+    legL: '/assets/arctron/def_warrior_armor_set_lv1/boots_l.png',
+    legR: '/assets/arctron/def_warrior_armor_set_lv1/boots_r.png',
+    weapon: '/assets/weapons/defallfactionslv1sword1.png',
+    shield: '/assets/arctron/lv1arctronshielddefault.png'
+  };
+
+  const sidePaths = {
+    head: '/assets/arctron/def_warrior_armor_set_lv1_battle/helmet.png',
+    body: '/assets/arctron/def_warrior_armor_set_lv1_battle/armor.png',
+    armL: '/assets/arctron/def_warrior_armor_set_lv1_battle/gloves_l.png',
+    armR: '/assets/arctron/def_warrior_armor_set_lv1_battle/gloves_r.png',
+    legL: '/assets/arctron/def_warrior_armor_set_lv1_battle/boots_l.png',
+    legR: '/assets/arctron/def_warrior_armor_set_lv1_battle/boots_r.png',
+    weapon: '/assets/arctron/def_warrior_armor_set_lv1_battle/weapon.png',
+    shield: '/assets/arctron/def_warrior_armor_set_lv1_battle/shield.png'
+  };
+
+  const gearImages = {};
+
+  // Pre-load semua sprite gear secara dinamis berdasarkan isSideView
+  const loadGearSprites = async () => {
+    const paths = isSideView ? sidePaths : frontPaths;
+    // Bersihkan database gambar lama
+    for (const key in gearImages) delete gearImages[key];
+
+    const promises = Object.keys(paths).map(async (slot) => {
+      try {
+        gearImages[slot] = await loadImage(paths[slot] + '?t=' + Date.now());
+      } catch (err) {
+        console.warn(`[Animation Lab] Gagal memuat sprite untuk slot: ${slot}`, err);
+      }
+    });
+    await Promise.all(promises);
+  };
+
+  // Render bone tree secara rekursif menggunakan sprite gear asli
+  function renderBone(ctx, bone, slots, depth = 0) {
+    ctx.save();
+
+    // Terapkan translasi dan rotasi dari struktur tulang
+    let tx = bone.x + bone.animX;
+    let ty = bone.y + bone.animY;
+    let rot = bone.rotation + bone.animRot;
+
+    // Jika mode 2.5D aktif, lakukan penyesuaian perspektif miring ke kanan
+    let scaleXFactor = 1.0;
+    let scaleYFactor = 1.0;
+
+    if (isSideView) {
+      // Kompresi badan & kepala secara horizontal untuk efek miring 3/4
+      if (bone.name === 'body' || bone.name === 'head') {
+        scaleXFactor = 0.65; // Pipih horisontal
+        tx = tx * 0.7 + 10;  // Geser koordinat agar padat ke kanan
+      }
+      
+      // Mengatur distorsi sendi tangan kiri/sikil kiri (Far Limbs) agar tampak di belakang
+      if (bone.name === 'armL') {
+        tx -= 20; // Dorong lebih ke belakang
+        scaleXFactor = 0.85;
+        scaleYFactor = 0.85;
+      }
+      // Tangan kanan/sikil kanan (Near Limbs) agak maju ke depan
+      if (bone.name === 'armR') {
+        tx += 10;
+        scaleXFactor = 1.1;
+        scaleYFactor = 1.1;
+      }
+    }
+
+    ctx.translate(tx, ty);
+    ctx.rotate(rot * Math.PI / 180);
+
+    // 1. Render senjata (Weapon) terikat pada tulang tangan kanan (armR) - Digambar di belakang glove
+    if (bone.name === 'armR' && gearImages['weapon']) {
+      const img = gearImages['weapon'];
+      ctx.save();
+      const cal = slotCalibrations['weapon'] || { scale: 0.35, ox: 0, oy: 0, rot: 0, scaleX: 1.0, scaleY: 1.0, skewX: 0, skewY: 0 };
+      ctx.rotate(cal.rot * Math.PI / 180);
+      if (cal.skewX || cal.skewY) {
+        ctx.transform(1, cal.skewY || 0, cal.skewX || 0, 1, 0, 0);
+      }
+      ctx.scale(cal.scale * cal.scaleX * scaleXFactor, cal.scale * cal.scaleY * scaleYFactor);
+      ctx.drawImage(img, -img.width / 2 + cal.ox, -img.height / 2 + cal.oy);
+      ctx.restore();
+    }
+
+    // 2. Cari dan gambar slot dasar (glove, armor, boots, dll.)
+    const slot = slots.find(s => s.parent === bone.name);
+    if (slot && gearImages[slot.name]) {
+      const img = gearImages[slot.name];
+      ctx.save();
+      
+      // Ambil nilai kalibrasi dinamis untuk slot ini
+      const cal = slotCalibrations[slot.name] || { scale: 0.35, ox: 0, oy: 0, rot: 0, scaleX: 1.0, scaleY: 1.0, skewX: 0, skewY: 0 };
+      
+      // Terapkan rotasi tambahan dari kalibrasi
+      ctx.rotate(cal.rot * Math.PI / 180);
+
+      // Terapkan distorsi 3D skewing jika didefinisikan oleh user
+      if (cal.skewX || cal.skewY) {
+        ctx.transform(1, cal.skewY || 0, cal.skewX || 0, 1, 0, 0);
+      }
+
+      // Terapkan scale & stretch gabungan
+      ctx.scale(cal.scale * cal.scaleX * scaleXFactor, cal.scale * cal.scaleY * scaleYFactor);
+      ctx.drawImage(img, -img.width / 2 + cal.ox, -img.height / 2 + cal.oy);
+      ctx.restore();
+    }
+
+    // 3. Render perisai (Shield) terikat pada tulang tangan kiri (armL) - Digambar di depan glove
+    if (bone.name === 'armL' && gearImages['shield']) {
+      const img = gearImages['shield'];
+      ctx.save();
+      const cal = slotCalibrations['shield'] || { scale: 0.35, ox: 0, oy: 0, rot: 0, scaleX: 1.0, scaleY: 1.0, skewX: 0, skewY: 0 };
+      ctx.rotate(cal.rot * Math.PI / 180);
+      if (cal.skewX || cal.skewY) {
+        ctx.transform(1, cal.skewY || 0, cal.skewX || 0, 1, 0, 0);
+      }
+      ctx.scale(cal.scale * cal.scaleX * scaleXFactor, cal.scale * cal.scaleY * scaleYFactor);
+      ctx.drawImage(img, -img.width / 2 + cal.ox, -img.height / 2 + cal.oy);
+      ctx.restore();
+    }
+
+    // Gambar lingkaran titik tulang (opsi debug, bisa dimatikan dengan menyetel alfa = 0)
+    ctx.strokeStyle = 'rgba(255, 82, 34, 0.4)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.arc(0, 0, 3, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // Rekursi untuk menggambar anak tulang (children)
+    // Di mode 2.5D, kita bisa menyortir penggambaran anak tulang agar z-ordering tangan kiri di belakang badan
+    let children = [...bone.children];
+    if (isSideView && bone.name === 'body') {
+      // Pastikan lengan kiri (armL) digambar sebelum/di bawah bagian badan jika rekursif, 
+      // namun karena struktur tree rekursif kita dari root -> body -> limbs:
+      // Kita bisa urutkan pemanggilan anak agar armL (jauh) digambar duluan daripada armR (dekat)
+      children.sort((a, b) => {
+        if (a.name === 'armL') return -1;
+        if (b.name === 'armR') return 1;
+        return 0;
+      });
+    }
+
+    for (const child of children) {
+      // Gambar garis penghubung antar tulang (debug view)
+      ctx.strokeStyle = 'rgba(255, 82, 34, 0.15)';
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(child.x + child.animX, child.y + child.animY);
+      ctx.stroke();
+
+      renderBone(ctx, child, slots, depth + 1);
+    }
+
+    ctx.restore();
+  }
+
+  let boneTree = { map: {}, roots: [] };
+
+  // Hitung letak absolut koordinat layar (global) untuk tiap bone
+  function computeGlobalPositions() {
+    if (!boneTree.roots.length) return;
+    
+    function recurse(bone, px = 0, py = 0, prot = 0) {
+      let tx = bone.x + bone.animX;
+      let ty = bone.y + bone.animY;
+      let rot = bone.rotation + bone.animRot;
+
+      // Integrasi distorsi 2.5D jika mode aktif agar hit-area bulatannya ikut pas
+      if (isSideView) {
+        if (bone.name === 'body' || bone.name === 'head') {
+          tx = tx * 0.7 + 10;
+        }
+        if (bone.name === 'armL') {
+          tx -= 20;
+        }
+        if (bone.name === 'armR') {
+          tx += 10;
+        }
+      }
+
+      const rad = prot * Math.PI / 180;
+      const rx = tx * Math.cos(rad) - ty * Math.sin(rad);
+      const ry = tx * Math.sin(rad) + ty * Math.cos(rad);
+
+      const gx = px + rx;
+      const gy = py + ry;
+      const grot = prot + rot;
+
+      // Simpan koordinat global layar (translate 300, 600 dan scale 1.5)
+      bone.gx = 300 + gx * 1.5;
+      bone.gy = 600 + gy * 1.5;
+      bone.grot = grot;
+      bone.gx_rel = gx; // simpan nilai relatif tanpa translasi layar
+      bone.gy_rel = gy;
+
+      for (const child of bone.children) {
+        recurse(child, gx, gy, grot);
+      }
+    }
+
+    for (const root of boneTree.roots) {
+      recurse(root, 0, 0, 0);
+    }
+  }
+
+  // ── Init ────────────────────────────────────────────────────
+  const init = async () => {
+    try {
+      setStatus('warn', 'Loading skeleton data…');
+
+      // Load skeleton data, gear sprites, dan gambar referensi secara paralel
+      const loads = await Promise.all([
+        loadJSON('/assets/arctron/arctron_skeleton.json'),
+        loadGearSprites(),
+        loadImage('/assets/arctron/arctron_warrior_battle_gen.png?t=' + Date.now()).catch(() => null) // toleransi jika gagal load
+      ]);
+      
+      skeletonData = loads[0];
+      referenceImg = loads[2];
+
+      armatureData = skeletonData.armature?.[0];
+      if (!armatureData) throw new Error('No armature found in skeleton data');
+
+      boneTree = buildBoneTree(armatureData.bone || []);
+
+      // Fill info card
+      document.getElementById('infoName').textContent = skeletonData.name || 'Arctron';
+      document.getElementById('infoBones').textContent = armatureData.bone?.length || 0;
+      document.getElementById('infoSlots').textContent = armatureData.slot?.length || 0;
+      document.getElementById('infoAnims').textContent = armatureData.animation?.length || 0;
+      document.getElementById('infoFPS').textContent = skeletonData.frameRate || 24;
+
+      // Populate animation cards dynamically
+      if (armatureData.animation) {
+        animGrid.innerHTML = '';
+        for (const anim of armatureData.animation) {
+          const card = document.createElement('div');
+          card.className = 'anim-card' + (anim.name === currentAnim ? ' active' : '');
+          card.dataset.anim = anim.name;
+          const icon = anim.name === 'idle' ? '🧍' : anim.name === 'walk' ? '🚶' : anim.name === 'attack' ? '⚔️' : '🎬';
+          card.innerHTML = `<span class="anim-name">${icon} ${anim.name}</span><span class="anim-meta">${anim.playTimes === 0 ? 'LOOP' : 'ONCE'}</span>`;
+          animGrid.appendChild(card);
+        }
+      }
+
+      isPlaying = true;
+      playPauseBtn.textContent = '⏸';
+      lastTime = performance.now();
+      setStatus('ok', 'Animation Lab ready — playing ' + currentAnim);
+      requestAnimationFrame(render);
+
+    } catch (err) {
+      console.error('[Animation Lab]', err);
+      setStatus('err', 'Error: ' + err.message);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#ff5222';
+      ctx.font = 'bold 16px "Outfit", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('⚠️ Could not load animation assets', 300, 380);
+      ctx.fillStyle = '#8e9db5';
+      ctx.font = '12px "Outfit", sans-serif';
+      ctx.fillText(err.message, 300, 410);
+    }
+  };
+
+  // ── Event Handlers ──────────────────────────────────────────
+
+  playPauseBtn.addEventListener('click', () => {
+    isPlaying = !isPlaying;
+    playPauseBtn.textContent = isPlaying ? '⏸' : '▶';
+    if (isPlaying) {
+      lastTime = performance.now();
+      setStatus('ok', 'Playing — ' + currentAnim);
+    } else {
+      setStatus('warn', 'Paused — Drag bones to calibrate setup pose!');
+    }
+  });
+
+  animGrid.addEventListener('click', (e) => {
+    const card = e.target.closest('.anim-card');
+    if (!card) return;
+    const anim = card.dataset.anim;
+    if (!anim) return;
+    currentAnim = anim;
+    animFrame = 0;
+    isPlaying = true;
+    playPauseBtn.textContent = '⏸';
+    lastTime = performance.now();
+    animGrid.querySelectorAll('.anim-card').forEach(c => c.classList.remove('active'));
+    card.classList.add('active');
+    setStatus('ok', 'Playing — ' + anim);
+  });
+
+  document.querySelectorAll('.speed-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      speed = parseFloat(btn.dataset.speed);
+      document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+
+  timelineSlider.addEventListener('input', () => {
+    const currentAnimData = armatureData?.animation?.find(a => a.name === currentAnim);
+    const totalDuration = currentAnimData?.duration || 24;
+    animFrame = (timelineSlider.value / 100) * totalDuration;
+  });
+
+  // ── Drag and Drop Calibration Logic ────────────────────────
+  let draggedBone = null;
+  let mouseX = null;
+  let mouseY = null;
+
+  // Temukan parent dari sebuah bone
+  function findParentBone(boneName) {
+    if (!armatureData) return null;
+    const rawBone = armatureData.bone.find(b => b.name === boneName);
+    if (!rawBone || !rawBone.parent) return null;
+    return boneTree.map[rawBone.parent] || null;
+  }
+
+  canvas.addEventListener('mousedown', (e) => {
+    if (isPlaying) return; // hanya bisa geser saat pause
+
+    const rect = canvas.getBoundingClientRect();
+    const mx = (e.clientX - rect.left) * (canvas.width / rect.width);
+    const my = (e.clientY - rect.top) * (canvas.height / rect.height);
+
+    // Cari bone terdekat dengan kursor (radius 20px agar gampang diklik)
+    let closestBone = null;
+    let minDist = 20;
+
+    for (const name in boneTree.map) {
+      const bone = boneTree.map[name];
+      const dist = Math.hypot(bone.gx - mx, bone.gy - my);
+      if (dist < minDist) {
+        minDist = dist;
+        closestBone = bone;
+      }
+    }
+
+    if (closestBone) {
+      draggedBone = closestBone;
+      setStatus('warn', `Calibrating bone: ${draggedBone.name}`);
+    }
+  });
+
+  canvas.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    mouseX = (e.clientX - rect.left) * (canvas.width / rect.width);
+    mouseY = (e.clientY - rect.top) * (canvas.height / rect.height);
+
+    if (!draggedBone || !armatureData) return;
+
+    // Konversi koordinat mouse layar kembali ke offset relatif lokal bone
+    const gx = (mouseX - 300) / 1.5;
+    const gy = (mouseY - 600) / 1.5;
+
+    const parent = findParentBone(draggedBone.name);
+    if (parent) {
+      // Rotasi terbalik parent agar offset lokalnya akurat terhadap kemiringan parent
+      const dx = gx - parent.gx_rel;
+      const dy = gy - parent.gy_rel;
+      const rad = -parent.grot * Math.PI / 180;
+      
+      draggedBone.x = Math.round(dx * Math.cos(rad) - dy * Math.sin(rad));
+      draggedBone.y = Math.round(dx * Math.sin(rad) + dy * Math.cos(rad));
+    } else {
+      // Root bone langsung mengikuti koordinat relatif
+      draggedBone.x = Math.round(gx);
+      draggedBone.y = Math.round(gy);
+    }
+
+    // Update data skeleton asli
+    const rawBone = armatureData.bone.find(b => b.name === draggedBone.name);
+    if (rawBone) {
+      rawBone.transform = rawBone.transform || {};
+      rawBone.transform.x = draggedBone.x;
+      rawBone.transform.y = draggedBone.y;
+    }
+  });
+
+  window.addEventListener('mouseup', () => {
+    if (draggedBone) {
+      setStatus('ok', `Updated setup pose for ${draggedBone.name}. Click Export to save JSON!`);
+      draggedBone = null;
+    }
+  });
+
+  // Toggle Mode Perang 2.5D
+  toggleSideViewBtn.addEventListener('click', async () => {
+    isSideView = !isSideView;
+    toggleSideViewBtn.textContent = `📐 2.5D Side View Mode: ${isSideView ? 'ON' : 'OFF'}`;
+    toggleSideViewBtn.style.borderColor = isSideView ? 'var(--accent)' : '';
+    toggleSideViewBtn.style.color = isSideView ? '#fff' : '';
+    toggleSideViewBtn.style.background = isSideView ? 'rgba(255, 82, 34, 0.1)' : '';
+
+    // Tukar preset kalibrasi secara dinamis agar sprite tidak lompat-lompat
+    if (isSideView) {
+      slotCalibrations = JSON.parse(JSON.stringify(sideCalibrations));
+    } else {
+      slotCalibrations = JSON.parse(JSON.stringify(frontCalibrations));
+    }
+    
+    // Perbarui UI sliders
+    updateCalibrationUI();
+
+    // Muat ulang gambar dari folder yang sesuai (Front vs Side) secara real-time
+    setStatus('warn', 'Loading ' + (isSideView ? 'Battle (3/4 View)' : 'Front View') + ' sprites…');
+    await loadGearSprites();
+    setStatus('ok', 'Switched to ' + (isSideView ? 'Battle Mode' : 'Dressing Room Mode'));
+  });
+
+  // Toggle Overlay Referensi
+  toggleRefBtn.addEventListener('click', () => {
+    showReference = !showReference;
+    toggleRefBtn.textContent = `👁️ Show Battle Reference: ${showReference ? 'ON' : 'OFF'}`;
+    toggleRefBtn.style.borderColor = showReference ? 'var(--accent)' : '';
+    toggleRefBtn.style.color = showReference ? '#fff' : '';
+    toggleRefBtn.style.background = showReference ? 'rgba(255, 82, 34, 0.1)' : '';
+  });
+
+  // Ganti Gaya Senjata dinamis
+  const weaponSelect = document.getElementById('weaponSelect');
+  weaponSelect.addEventListener('change', async () => {
+    const val = weaponSelect.value;
+    if (val === 'battle_weapon') {
+      sidePaths.weapon = '/assets/arctron/def_warrior_armor_set_lv1_battle/weapon.png';
+      frontPaths.weapon = '/assets/weapons/defallfactionslv1sword1.png';
+    } else {
+      sidePaths.weapon = `/assets/weapons/${val}`;
+      frontPaths.weapon = `/assets/weapons/${val}`;
+    }
+    
+    setStatus('warn', `Loading weapon style: ${val}…`);
+    await loadGearSprites();
+    setStatus('ok', `Equipped weapon style: ${val}`);
+  });
+
+  // ── Sprite Calibration Handlers ──────────────────────────
+  const calibSlotSelect = document.getElementById('calibSlotSelect');
+  const calibScale = document.getElementById('calib_scale');
+  const calibOx = document.getElementById('calib_ox');
+  const calibOy = document.getElementById('calib_oy');
+  const calibRot = document.getElementById('calib_rot');
+  const calibScaleX = document.getElementById('calib_scaleX');
+  const calibScaleY = document.getElementById('calib_scaleY');
+  const calibSkewX = document.getElementById('calib_skewX');
+  const calibSkewY = document.getElementById('calib_skewY');
+
+  const calibValScale = document.getElementById('calibVal_scale');
+  const calibValOx = document.getElementById('calibVal_ox');
+  const calibValOy = document.getElementById('calibVal_oy');
+  const calibValRot = document.getElementById('calibVal_rot');
+  const calibValScaleX = document.getElementById('calibVal_scaleX');
+  const calibValScaleY = document.getElementById('calibVal_scaleY');
+  const calibValSkewX = document.getElementById('calibVal_skewX');
+  const calibValSkewY = document.getElementById('calibVal_skewY');
+
+  // Update UI slider sesuai nilai kalibrasi slot terpilih
+  function updateCalibrationUI() {
+    const slot = calibSlotSelect.value;
+    const cal = slotCalibrations[slot];
+    if (!cal) return;
+
+    calibScale.value = cal.scale;
+    calibOx.value = cal.ox;
+    calibOy.value = cal.oy;
+    calibRot.value = cal.rot;
+    calibScaleX.value = cal.scaleX;
+    calibScaleY.value = cal.scaleY;
+    calibSkewX.value = cal.skewX ?? 0;
+    calibSkewY.value = cal.skewY ?? 0;
+
+    calibValScale.textContent = cal.scale.toFixed(3);
+    calibValOx.textContent = cal.ox;
+    calibValOy.textContent = cal.oy;
+    calibValRot.textContent = cal.rot;
+    calibValScaleX.textContent = cal.scaleX.toFixed(2);
+    calibValScaleY.textContent = cal.scaleY.toFixed(2);
+    calibValSkewX.textContent = (cal.skewX ?? 0).toFixed(2);
+    calibValSkewY.textContent = (cal.skewY ?? 0).toFixed(2);
+  }
+
+  // Event listener saat ganti slot mecha
+  calibSlotSelect.addEventListener('change', updateCalibrationUI);
+
+  // Fungsi pembantu update nilai kalibrasi dari range input
+  function bindSlider(slider, valLabel, key) {
+    slider.addEventListener('input', () => {
+      const slot = calibSlotSelect.value;
+      if (!slotCalibrations[slot]) return;
+      
+      const val = parseFloat(slider.value);
+      slotCalibrations[slot][key] = val;
+      valLabel.textContent = (key === 'ox' || key === 'oy' || key === 'rot') ? val : val.toFixed(key === 'scale' ? 3 : 2);
+    });
+  }
+
+  bindSlider(calibScale, calibValScale, 'scale');
+  bindSlider(calibOx, calibValOx, 'ox');
+  bindSlider(calibOy, calibValOy, 'oy');
+  bindSlider(calibRot, calibValRot, 'rot');
+  bindSlider(calibScaleX, calibValScaleX, 'scaleX');
+  bindSlider(calibScaleY, calibValScaleY, 'scaleY');
+  bindSlider(calibSkewX, calibValSkewX, 'skewX');
+  bindSlider(calibSkewY, calibValSkewY, 'skewY');
+
+  // Inisialisasi awal nilai UI kalibrasi
+  updateCalibrationUI();
+
+  // Export koordinat kalibrasi sprite
+  const exportCalibBtn = document.getElementById('exportCalibBtn');
+  exportCalibBtn.addEventListener('click', () => {
+    const jsonStr = JSON.stringify(slotCalibrations, null, 2);
+    navigator.clipboard.writeText(jsonStr).then(() => {
+      setStatus('ok', '📋 Sprite calibrations copied to clipboard!');
+      alert("Sprite calibrations JSON copied to clipboard!\n\n" + jsonStr);
+    }).catch(err => {
+      console.error('Failed to copy calibration:', err);
+    });
+  });
+
+  // Main render loop
+  function render(timestamp) {
+    if (!armatureData) return;
+
+    // Amankan timestamp dari nilai undefined / NaN
+    if (!timestamp) timestamp = performance.now();
+    let dt = timestamp - lastTime;
+    if (isNaN(dt) || dt < 0 || dt > 1000) dt = 0;
+    lastTime = timestamp;
+
+    if (isPlaying) {
+      if (isNaN(animFrame)) animFrame = 0;
+      animFrame += (dt / 1000) * (skeletonData.frameRate || 24) * speed;
+    }
+
+    const currentAnimData = armatureData.animation?.find(a => a.name === currentAnim);
+    const totalDuration = currentAnimData?.duration || 24;
+
+    // Handle non-looping animations
+    if (currentAnimData?.playTimes === 1 && animFrame >= totalDuration) {
+      animFrame = totalDuration - 0.01;
+      isPlaying = false;
+      playPauseBtn.textContent = '▶';
+    }
+
+    // Update timeline slider
+    const progress = (animFrame % totalDuration) / totalDuration * 100;
+    timelineSlider.value = isNaN(progress) ? 0 : progress;
+    const sec = ((animFrame % totalDuration) / (skeletonData.frameRate || 24));
+    const totalSec = totalDuration / (skeletonData.frameRate || 24);
+    document.getElementById('timelineCurrent').textContent = (isNaN(sec) ? 0 : sec).toFixed(2) + 's';
+    document.getElementById('timelineTotal').textContent = totalSec.toFixed(2) + 's';
+
+    // Terapkan animasi tulang hanya saat bermain. Saat pause, reset ke Setup Pose murni agar kalibrasi akurat.
+    if (isPlaying) {
+      applyAnimation(boneTree.map, currentAnimData, animFrame % totalDuration);
+    } else {
+      for (const name in boneTree.map) {
+        boneTree.map[name].animX = 0;
+        boneTree.map[name].animY = 0;
+        boneTree.map[name].animRot = 0;
+      }
+    }
+
+    // Hitung posisi global setiap sendi bone untuk deteksi drag & drop
+    computeGlobalPositions();
+
+    // Bersihkan canvas setiap frame
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Render Battle Reference Image di belakang (jika aktif)
+    if (showReference && referenceImg) {
+      ctx.save();
+      ctx.globalAlpha = 0.35; // Transparansi
+      // Batasi tinggi gambar referensi ke 520px agar muat penuh di canvas
+      const targetHeight = 520;
+      const scale = targetHeight / referenceImg.height;
+      const rw = referenceImg.width * scale;
+      const rh = targetHeight;
+      // Posisikan bagian bawah mecha (feet) di dekat koordinat Y = 700
+      ctx.drawImage(referenceImg, (canvas.width - rw) / 2, 700 - rh, rw, rh);
+      ctx.restore();
+    }
+
+    // Gambar grid background
+    ctx.strokeStyle = 'rgba(34, 49, 77, 0.3)';
+    ctx.lineWidth = 0.5;
+    for (let x = 0; x < canvas.width; x += 40) {
+      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+    }
+    for (let y = 0; y < canvas.height; y += 40) {
+      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+    }
+
+    // Gambar garis bidik silang tengah
+    ctx.strokeStyle = 'rgba(255, 82, 34, 0.2)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath(); ctx.moveTo(300, 0); ctx.lineTo(300, 800); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(0, 600); ctx.lineTo(600, 600); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Render robot mecha skeletal
+    ctx.save();
+    ctx.translate(300, 600); // Posisi pusat bawah mecha
+    ctx.scale(1.5, 1.5);    // Skala perbesaran
+    for (const root of boneTree.roots) {
+      renderBone(ctx, root, armatureData.slot || []);
+    }
+    ctx.restore();
+
+    // Gambar bulatan merah interaktif untuk sendi bone di mode jeda (agar gampang di-drag)
+    if (!isPlaying) {
+      ctx.save();
+      for (const name in boneTree.map) {
+        const bone = boneTree.map[name];
+        const isHovered = (draggedBone === bone || (mouseX && mouseY && Math.hypot(bone.gx - mouseX, bone.gy - mouseY) < 12));
+        
+        ctx.fillStyle = isHovered ? '#ff5222' : 'rgba(255, 82, 34, 0.7)';
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.arc(bone.gx, bone.gy, isHovered ? 8 : 6, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+
+        // Nama tulang
+        ctx.fillStyle = '#8e9db5';
+        ctx.font = '10px "Share Tech Mono", monospace';
+      }
+      ctx.restore();
+    }
+    // Render debug coordinates on screen (kiri atas)
+    ctx.save();
+    ctx.fillStyle = 'rgba(0, 255, 100, 0.85)';
+    ctx.font = '11px "Share Tech Mono", monospace';
+    ctx.textAlign = 'left';
+    let debugY = 25;
+    ctx.fillText('DEBUG BONE COORDINATES:', 16, debugY);
+    debugY += 16;
+    for (const name in boneTree.map) {
+      const b = boneTree.map[name];
+      const gxVal = b.gx !== undefined ? b.gx.toFixed(1) : 'undef';
+      const gyVal = b.gy !== undefined ? b.gy.toFixed(1) : 'undef';
+      ctx.fillText(`• ${name}: (${gxVal}, ${gyVal})`, 16, debugY);
+      debugY += 14;
+    }
+    ctx.restore();
+
+    // Teks overlay nama animasi
+    ctx.fillStyle = 'rgba(255, 82, 34, 0.6)';
+    ctx.font = 'bold 11px "Share Tech Mono", monospace';
+    ctx.textAlign = 'right';
+    const currentFrameLabel = isNaN(animFrame) ? 0 : Math.floor(animFrame % totalDuration);
+    ctx.fillText(currentAnim.toUpperCase() + ' ▸ F' + currentFrameLabel, canvas.width - 16, canvas.height - 16);
+
+    requestAnimationFrame(render);
+  }
+
+  init();
+})();
+</script>
+</body>
+</html>
+
+

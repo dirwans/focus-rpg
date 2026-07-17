@@ -6,7 +6,7 @@ import { getJobLane } from './PilotSprites'
 
 // Calibrated for full-body front-view sprite: W=780, H=936.
 // Coords are fractions of the HEIGHT value.
-const GEAR_POINTS = {
+const WARRIOR_POINTS = {
   armor:  [{ x: 0.002, y: 0.050, ax: 0.5, ay: 0.15, size: 0.457, rot: 0, z: 1, color: '#60a5fa' }],
   pants:  [{ x: 0.003, y: 0.341, ax: 0.5, ay: 0.22, size: 0.414, rot: 0, z: 2, color: '#818cf8' }],
   boots: [
@@ -15,14 +15,44 @@ const GEAR_POINTS = {
   ],
   gloves: [
     { x: 0.209, y: 0.354, ax: 0.52, ay: 0.22, size: 0.248, rot: 0, z: 6, scaleY: 1.065, color: '#34d399', label: 'glove_l', splitSuffix: '_l' },
-    { x: -0.181, y: 0.329, ax: 0.5, ay: 0.23, size: 0.258, rot: -1, z: 3, scaleX: 1.035, scaleY: 1.200, color: '#34d399', label: 'glove_r', splitSuffix: '_r' }
+    { x: -0.181, y: 0.329, ax: 0.5, ay: 0.23, size: 0.258, rot: -1, z: 5, scaleX: 1.035, scaleY: 1.200, color: '#34d399', label: 'glove_r', splitSuffix: '_r' }
   ],
-  shield: [{ x: -0.182, y: 0.503, ax: 0.5, ay: 0.5, size: 0.457, rot: 0, z: 4, color: '#fb923c' }],
-  weapon: [{ x: 0.100, y: 0.728, ax: 0.5, ay: 0.75, size: 0.401, rot: -1, z: 5, color: '#f87171' }],
+  shield: [{ x: 0.182, y: 0.503, ax: 0.5, ay: 0.5, size: 0.457, rot: 0, z: 7, color: '#fb923c' }],
+  weapon: [{ x: 0.013, y: 0.689, ax: 0.33, ay: 0.63, size: 0.401, rot: -97, z: 4, color: '#f87171' }],
   helmet: [{ x: 0.001, y: 0.066, ax: 0.5, ay: 0.5, size: 0.123, rot: 0, z: 5, scaleX: 0.970, scaleY: 1.045, color: '#f472b6' }]
 }
 
-const SLOT_ORDER = Object.keys(GEAR_POINTS).sort((a, b) => GEAR_POINTS[a][0].z - GEAR_POINTS[b][0].z)
+const RANGER_POINTS = {
+  armor:  [{ x: 0.003, y: 0.228, ax: 0.51, ay: 0.45, size: 0.351, rot: 0, z: 1, color: '#60a5fa' }],
+  pants:  [{ x: 0.003, y: 0.447, ax: 0.5, ay: 0.22, size: 0.248, rot: 0, z: 2, color: '#818cf8' }],
+  boots: [
+    { x: 0.096, y: 0.636, ax: 0.53, ay: 0.15, size: 0.387, rot: -4, z: 3, scaleX: 0.990, scaleY: 1.110, color: '#fbbf24', label: 'boot_l', splitSuffix: '_l' },
+    { x: -0.086, y: 0.633, ax: 0.5, ay: 0.15, size: 0.424, rot: 0, z: 3, scaleX: 0.960, scaleY: 1.015, color: '#fbbf24', label: 'boot_r', splitSuffix: '_r' }
+  ],
+  gloves: [
+    { x: 0.169, y: 0.424, ax: 0.49, ay: 0.43, size: 0.262, rot: -2, z: 6, scaleY: 1.125, color: '#34d399', label: 'glove_l', splitSuffix: '_l' },
+    { x: -0.162, y: 0.417, ax: 0.55, ay: 0.41, size: 0.245, rot: -1, z: 5, scaleX: 1.130, scaleY: 1.220, color: '#34d399', label: 'glove_r', splitSuffix: '_r' }
+  ],
+  shield: [{ x: 0.182, y: 0.503, ax: 0.5, ay: 0.5, size: 0.457, rot: 0, z: 7, color: '#fb923c' }],
+  weapon: [{ x: 0.100, y: 0.728, ax: 0.5, ay: 0.75, size: 0.401, rot: -1, z: 4, color: '#f87171' }],
+  helmet: [{ x: -0.003, y: 0.103, ax: 0.49, ay: 0.63, size: 0.123, rot: 0, z: 5, scaleX: 0.900, scaleY: 1.105, color: '#f472b6' }]
+}
+
+const TECHNICIAN_POINTS = {
+  armor:  [{ x: 0.002, y: 0.050, ax: 0.5, ay: 0.15, size: 0.457, rot: 0, z: 1, color: '#60a5fa' }],
+  pants:  [{ x: 0.003, y: 0.341, ax: 0.5, ay: 0.22, size: 0.414, rot: 0, z: 2, color: '#818cf8' }],
+  boots: [
+    { x: 0.128, y: 0.652, ax: 0.5, ay: 0.15, size: 0.394, rot: 0, z: 3, scaleX: 1.070, scaleY: 1.125, color: '#fbbf24', label: 'boot_l', splitSuffix: '_l' },
+    { x: -0.132, y: 0.651, ax: 0.5, ay: 0.15, size: 0.424, rot: 0, z: 3, scaleX: 0.940, scaleY: 1.045, color: '#fbbf24', label: 'boot_r', splitSuffix: '_r' }
+  ],
+  gloves: [
+    { x: 0.209, y: 0.354, ax: 0.52, ay: 0.22, size: 0.248, rot: 0, z: 6, scaleY: 1.065, color: '#34d399', label: 'glove_l', splitSuffix: '_l' },
+    { x: -0.181, y: 0.329, ax: 0.5, ay: 0.23, size: 0.258, rot: -1, z: 5, scaleX: 1.035, scaleY: 1.200, color: '#34d399', label: 'glove_r', splitSuffix: '_r' }
+  ],
+  shield: [{ x: 0.182, y: 0.503, ax: 0.5, ay: 0.5, size: 0.457, rot: 0, z: 7, color: '#fb923c' }],
+  weapon: [{ x: 0.013, y: 0.689, ax: 0.33, ay: 0.63, size: 0.401, rot: -97, z: 4, color: '#f87171' }],
+  helmet: [{ x: 0.001, y: 0.066, ax: 0.5, ay: 0.5, size: 0.123, rot: 0, z: 5, scaleX: 0.970, scaleY: 1.045, color: '#f472b6' }]
+}
 
 export default function ArctronGearOverlay({ player, width, height = 298, calibrate = false, style: extraStyle, children }) {
   const eq = player?.equipment || {}
@@ -31,10 +61,20 @@ export default function ArctronGearOverlay({ player, width, height = 298, calibr
   const gender = player?.gender
   const lane = getJobLane(job)
 
+  const activePoints = useMemo(() => {
+    if (lane === 'ranger') return RANGER_POINTS
+    if (lane === 'specialist') return TECHNICIAN_POINTS
+    return WARRIOR_POINTS
+  }, [lane])
+
+  const sortedSlots = useMemo(() => {
+    return Object.keys(activePoints).sort((a, b) => activePoints[a][0].z - activePoints[b][0].z)
+  }, [activePoints])
+
   const layers = useMemo(() => {
     const out = []
-    for (const slot of SLOT_ORDER) {
-      const points = GEAR_POINTS[slot]
+    for (const slot of sortedSlots) {
+      const points = activePoints[slot]
       if (!points) continue
 
       points.forEach((pt, i) => {
@@ -85,7 +125,7 @@ export default function ArctronGearOverlay({ player, width, height = 298, calibr
       })
     }
     return out
-  }, [eq, race, job, gender])
+  }, [eq, race, job, gender, activePoints, sortedSlots])
 
   const h = typeof height === 'number' ? height : 298
   const w = h * (394 / 702)
@@ -109,8 +149,8 @@ export default function ArctronGearOverlay({ player, width, height = 298, calibr
       {layers.map(({ key, point, src }) => (
         <GearImg key={key} src={src} point={point} />
       ))}
-      {calibrate && SLOT_ORDER.map(slot =>
-        GEAR_POINTS[slot]?.map((pt, i) => (
+      {calibrate && sortedSlots.map(slot =>
+        activePoints[slot]?.map((pt, i) => (
           <CalibrateDot key={`cal-${slot}-${i}`} slot={slot} point={pt} />
         ))
       )}

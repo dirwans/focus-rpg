@@ -36,6 +36,8 @@ export function proxyUrl(url) {
 
 // Shared helper component exported for child components
 export function GearImg({ src, point }) {
+  const sx = (point.flipX ? -1 : 1) * (point.scaleX || 1.0)
+  const sy = (point.flipY ? -1 : 1) * (point.scaleY || 1.0)
   return (
     <img
       src={src}
@@ -49,7 +51,7 @@ export function GearImg({ src, point }) {
         height: `${point.size * 100}%`,
         width: 'auto',
         maxWidth: 'none',
-        transform: `translate(-${point.ax * 100}%, -${point.ay * 100}%) rotate(${point.rot}deg) scale(${point.scaleX || 1.0}, ${point.scaleY || 1.0})`,
+        transform: `translate(-${point.ax * 100}%, -${point.ay * 100}%) rotate(${point.rot}deg) scale(${sx}, ${sy})`,
         zIndex: point.z,
         pointerEvents: 'none',
         userSelect: 'none',

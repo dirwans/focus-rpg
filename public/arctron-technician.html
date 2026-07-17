@@ -1,0 +1,1768 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>🔧 Arctron Technician Dressing Room</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-dark: #070b13;
+    --panel-bg: #0f1726;
+    --accent: #ff5222;
+    --accent-glow: rgba(255, 82, 34, 0.25);
+    --border-color: #22314d;
+    --text-primary: #f0f4f8;
+    --text-secondary: #8e9db5;
+    --btn-hover: #1c2a42;
+  }
+
+  /* ── Main Job Nav Bar ─────────────────────────────────────── */
+  .job-nav-bar {
+    display: flex;
+    align-items: stretch;
+    border-bottom: 1px solid var(--border-color);
+    background: rgba(7, 11, 19, 0.9);
+    backdrop-filter: blur(12px);
+    z-index: 9;
+    padding: 0 24px;
+    gap: 4px;
+  }
+
+  .job-nav-btn {
+    position: relative;
+    padding: 10px 24px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+
+  .job-nav-btn:hover {
+    color: #fff;
+    background: rgba(255, 82, 34, 0.05);
+  }
+
+  .job-nav-btn.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+    text-shadow: 0 0 12px var(--accent-glow);
+  }
+
+  .job-nav-btn .job-badge {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(255, 82, 34, 0.12);
+    border: 1px solid rgba(255, 82, 34, 0.25);
+    color: var(--accent);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .job-nav-btn.active .job-badge {
+    opacity: 1;
+  }
+
+  /* ── Tier Sub-bar ─────────────────────────────────────────── */
+  .tier-sub-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 24px;
+    background: rgba(11, 19, 41, 0.8);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 8;
+  }
+
+  .tier-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    margin-right: 6px;
+  }
+
+  .tier-sub-btn {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 4px 14px;
+    border-radius: 6px;
+    border: 1px solid #1e2d52;
+    background: #0b1329;
+    color: #a1b0cb;
+    cursor: pointer;
+    transition: all 0.18s ease;
+  }
+
+  .tier-sub-btn:hover {
+    border-color: var(--accent);
+    color: #fff;
+    background: rgba(255, 82, 34, 0.08);
+  }
+
+  .tier-sub-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #03060f;
+    box-shadow: 0 0 10px var(--accent-glow);
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: 'Outfit', sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Starry background animation */
+  body::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(130% 90% at 50% 10%, rgba(255, 82, 34, 0.05) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  header {
+    height: 56px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    background: rgba(15, 23, 38, 0.8);
+    backdrop-filter: blur(12px);
+    z-index: 10;
+    flex-shrink: 0;
+  }
+
+  .logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), #ff8a65);
+    box-shadow: 0 0 12px var(--accent);
+  }
+
+  h1 {
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin: 0;
+    text-transform: uppercase;
+    color: #fff;
+    background: linear-gradient(to right, #fff, var(--text-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  /* Toggle Blueprint Checkbox Switch */
+  .switch-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 38px;
+    height: 20px;
+  }
+
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #1a2436;
+    transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 12px;
+    width: 12px;
+    left: 3px;
+    bottom: 3px;
+    background-color: var(--text-secondary);
+    transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 50%;
+  }
+
+  input:checked + .slider {
+    background-color: rgba(255, 82, 34, 0.2);
+    border-color: var(--accent);
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(18px);
+    background-color: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+  }
+
+  .main-container {
+    flex: 1;
+    display: flex;
+    z-index: 2;
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  /* Left Panel: Preview Card Box */
+  .preview-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 24px;
+    position: relative;
+    padding: 24px;
+    height: calc(100vh - 60px);
+    box-sizing: border-box;
+    overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .preview-panel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .character-card {
+    position: relative;
+    width: 500px;
+    height: 600px;
+    border-radius: 24px;
+    background: radial-gradient(90% 70% at 50% 28%, rgba(255, 82, 34, 0.1), transparent 75%), rgba(10, 15, 26, 0.6);
+    border: 1px solid rgba(255, 82, 34, 0.15);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.8), inset 0 0 30px rgba(255, 82, 34, 0.05);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* Card corner accent borders */
+  .character-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 24px;
+    border: 1px solid transparent;
+    background: linear-gradient(135deg, rgba(255, 82, 34, 0.4), transparent 40%, transparent 60%, rgba(255, 82, 34, 0.15)) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .card-level-badge {
+    position: absolute;
+    top: 20px; left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(7, 11, 19, 0.85);
+    border: 1px solid var(--border-color);
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--text-secondary);
+    z-index: 5;
+  }
+
+  .card-level-badge span:last-child {
+    color: var(--accent);
+    font-weight: 800;
+    font-size: 11px;
+  }
+
+  .card-header-badge {
+    position: absolute;
+    top: 20px; right: 20px;
+    background: rgba(255, 82, 34, 0.1);
+    border: 1px solid rgba(255, 82, 34, 0.25);
+    color: var(--accent);
+    padding: 4px 12px;
+    border-radius: 10px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    z-index: 5;
+    box-shadow: 0 0 10px rgba(255, 82, 34, 0.1);
+  }
+
+  canvas {
+    display: block;
+    width: 500px;
+    height: 600px;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+
+  /* Hotspot calibration control dots overlay */
+  .hotspot-dot {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid #fff;
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px var(--accent), 0 4px 12px rgba(0,0,0,0.6);
+    z-index: 20;
+    transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.15s;
+  }
+
+  .hotspot-dot:hover, .hotspot-dot.active {
+    transform: translate(-50%, -50%) scale(1.35);
+    background: #fff;
+    border-color: var(--accent);
+    box-shadow: 0 0 15px #fff, 0 6px 16px rgba(0,0,0,0.8);
+  }
+
+  /* Right Side: Calibration Settings & Output Controls Panel */
+  .control-panel {
+    width: 380px;
+    border-left: 1px solid var(--border-color);
+    background: rgba(15, 23, 38, 0.95);
+    backdrop-filter: blur(20px);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    z-index: 10;
+    flex-shrink: 0;
+  }
+
+  h2 {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 0 0 16px 0;
+    color: #fff;
+    font-family: 'Share Tech Mono', monospace;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+  }
+
+  /* Equipment slot grid rows */
+  .gear-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 4px;
+  }
+
+  .gear-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background: rgba(26, 36, 54, 0.4);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    user-select: none;
+  }
+
+  .gear-row:hover {
+    background: rgba(26, 36, 54, 0.7);
+    border-color: rgba(255, 82, 34, 0.3);
+  }
+
+  .gear-row.active {
+    background: rgba(255, 82, 34, 0.08);
+    border-color: var(--accent);
+    box-shadow: inset 0 0 12px rgba(255, 82, 34, 0.05);
+  }
+
+  .gear-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .gear-icon {
+    font-size: 14px;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: #0b1329;
+    border: 1px solid #1e2d52;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+  }
+
+  .gear-row.active .gear-icon {
+    color: var(--accent);
+    background: rgba(255, 82, 34, 0.1);
+    border-color: rgba(255, 82, 34, 0.3);
+  }
+
+  .gear-meta {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .gear-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.5px;
+  }
+
+  .gear-status {
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    font-family: 'Share Tech Mono', monospace;
+    margin-top: 2px;
+  }
+
+  .gear-row.active .gear-status {
+    color: var(--accent);
+  }
+
+  /* Visibility eye icon toggle */
+  .visibility-toggle {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--text-secondary);
+    padding: 6px;
+    border-radius: 6px;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .visibility-toggle:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.06);
+  }
+
+  .visibility-toggle.muted {
+    color: #3b4c6b;
+    opacity: 0.5;
+  }
+
+  /* Master copy coordinates button action */
+  .copy-btn {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    background: #111a2e;
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    padding: 10px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.18s;
+    box-sizing: border-box;
+    outline: none;
+  }
+
+  .copy-btn:hover {
+    border-color: var(--accent);
+    color: #fff;
+    background: rgba(255, 82, 34, 0.08);
+    box-shadow: 0 0 12px var(--accent-glow);
+  }
+
+  .equip-btn {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    background: #111a2e;
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    padding: 10px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.18s;
+    box-sizing: border-box;
+    outline: none;
+    margin-bottom: 12px;
+  }
+
+  .equip-btn:hover {
+    border-color: var(--accent);
+    color: #fff;
+    background: rgba(255, 82, 34, 0.08);
+    box-shadow: 0 0 12px var(--accent-glow);
+  }
+
+  /* Custom Tooltip */
+  .tooltip {
+    position: absolute;
+    background: rgba(7, 11, 19, 0.95);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    transform: translate(-50%, -100%);
+    margin-top: -12px;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    white-space: nowrap;
+  }
+
+  .hotspot-dot:hover + .tooltip {
+    opacity: 1;
+  }
+
+  /* Reference Coords display */
+  #coords {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: #6a7a9a;
+    background: #090e18;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #1c273a;
+    margin-top: 12px;
+    white-space: pre-wrap;
+    display: block;
+  }
+
+  /* Custom range sliders styling */
+  input[type="range"] {
+    -webkit-appearance: none;
+    background: #1e293b;
+    height: 6px;
+    border-radius: 3px;
+    outline: none;
+    margin: 8px 0;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+    box-shadow: 0 0 6px var(--accent);
+  }
+  body {
+    flex-direction: column;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-wrap">
+    <img src="/assets/arctron/arctron_logo.png" style="height:28px; opacity:0.9;" alt="Arctron" onerror="this.style.display='none'">
+    <h1 id="pageTitle">Arctron Technician Dressing Room</h1>
+  </div>
+  <div class="header-actions">
+    <div class="switch-container">
+      <span>📐 Blueprint Guide</span>
+      <label class="switch">
+        <input type="checkbox" id="blueprintToggle">
+        <span class="slider"></span>
+      </label>
+    </div>
+  </div>
+</header>
+
+<!-- ── Main Job Nav Bar ──────────────────────────────────── -->
+<nav class="job-nav-bar" id="jobNavBar">
+  <a class="job-nav-btn" href="/arctron-warrior.html">⚔️ Warrior <span class="job-badge">PATH</span></a>
+  <a class="job-nav-btn" href="/arctron-ranger.html">🏹 Ranger <span class="job-badge">PATH</span></a>
+  <a class="job-nav-btn active" href="/arctron-technician.html">🔧 Technician <span class="job-badge">PATH</span></a>
+</nav>
+
+<!-- ── Tier Sub-bar ──────────────────────────────────────── -->
+<div class="tier-sub-bar" id="tierSubBar">
+  <span class="tier-label">Tier:</span>
+  <button class="tier-sub-btn active" data-tier="1">LV 1</button>
+  <button class="tier-sub-btn" data-tier="32">LV 32</button>
+  <button class="tier-sub-btn" data-tier="42">LV 42</button>
+  <button class="tier-sub-btn" data-tier="55">LV 55</button>
+</div>
+
+<div class="main-container">
+  <!-- Left Side: Character Canvas & Hotspot overlays -->
+  <div class="preview-panel">
+    <!-- Standalone Character Preview (Live Fit) -->
+    <div class="character-card" id="charPreviewContainer">
+      <div class="card-level-badge"><span>LV</span><span>1</span></div>
+      <div class="card-header-badge">PREVIEW</div>
+      <canvas id="charPreviewCanvas" width="780" height="936"></canvas>
+    </div>
+
+    <!-- Calibration Canvas -->
+    <div class="character-card" id="cardContainer">
+      <div class="card-level-badge"><span>LV</span><span>1</span></div>
+      <div class="card-header-badge">MANNEQUIN</div>
+      <canvas id="mechaCanvas" width="780" height="936"></canvas>
+    </div>
+  </div>
+
+  <!-- Right Side: Controls with calibration sliders -->
+  <div class="control-panel">
+    <h2>Equipment Slots</h2>
+    
+    <!-- Weapon Selector -->
+    <div style="margin-bottom: 15px; background: #0b1329; border: 1px solid #1e2d52; padding: 10px; border-radius: 8px;">
+      <label style="font-size: 11px; color: var(--text-secondary); display: block; margin-bottom: 4px; font-family: 'Share Tech Mono', monospace; font-weight: bold; letter-spacing: 0.5px;">ACTIVE WEAPON STYLE:</label>
+      <select id="weaponSelect" style="width: 100%; padding: 6px; background: #070c1b; border: 1px solid #1e2d52; color: #fff; border-radius: 6px; font-family: monospace; font-size: 11px; outline: none;">
+        <!-- Will be dynamically populated -->
+      </select>
+    </div>
+
+    <a href="/animation-lab.html" class="equip-btn" style="margin-top:12px; background: var(--accent); border-color: var(--accent); text-decoration:none; text-align:center; display:block;">🎬 Open Animation Lab</a>
+    <div class="gear-list" id="gearListContainer">
+      <!-- Generated Gear Rows will render here -->
+    </div>
+    
+    <!-- Calibration Sliders Panel -->
+    <div id="calibrationPanel" style="margin-top: 20px; border-top: 1px solid var(--border-color); padding-top: 15px; display: none;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <h3 style="margin: 0; color: var(--accent); font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">Calibrate: <span id="calSlotName" style="color: #fff;">None</span></h3>
+        <div style="display: flex; gap: 8px;">
+          <button id="lockBtn" style="background: #1e293b; color: #fff; border: 1px solid #334155; padding: 4px 10px; border-radius: 4px; font-size: 10px; cursor: pointer; font-family: monospace; font-weight: bold; transition: all 0.2s;">🔓 UNLOCKED</button>
+          <button id="resetBtn" style="background: #ef4444; color: #fff; border: 1px solid #dc2626; padding: 4px 10px; border-radius: 4px; font-size: 10px; cursor: pointer; font-family: monospace; font-weight: bold; transition: all 0.2s;">🔄 RESET</button>
+        </div>
+      </div>
+      <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+        <button id="flipHBtn" style="flex:1; background: #1e293b; color: #fff; border: 1px solid #334155; padding: 6px 10px; border-radius: 4px; font-size: 10px; cursor: pointer; font-family: monospace; font-weight: bold; transition: all 0.2s;">↔ FLIP H</button>
+        <button id="flipVBtn" style="flex:1; background: #1e293b; color: #fff; border: 1px solid #334155; padding: 6px 10px; border-radius: 4px; font-size: 10px; cursor: pointer; font-family: monospace; font-weight: bold; transition: all 0.2s;">↕ FLIP V</button>
+      </div>
+      
+      <div style="margin-bottom: 12px;">
+        <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px; color: #a1b0cb;">
+          <span>Horizontal Offset (x)</span>
+          <span id="val_x" style="color: var(--accent); font-family: monospace;">0.000</span>
+        </div>
+        <input type="range" id="slider_x" min="-0.5" max="0.5" step="0.001" style="width: 100%;">
+      </div>
+      
+      <div style="margin-bottom: 12px;">
+        <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px; color: #a1b0cb;">
+          <span>Vertical Offset (y)</span>
+          <span id="val_y" style="color: var(--accent); font-family: monospace;">0.000</span>
+        </div>
+        <input type="range" id="slider_y" min="0" max="1.0" step="0.001" style="width: 100%;">
+      </div>
+
+      <div style="margin-bottom: 12px;">
+        <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px; color: #a1b0cb;">
+          <span>Size Scale (size)</span>
+          <span id="val_size" style="color: var(--accent); font-family: monospace;">0.000</span>
+        </div>
+        <input type="range" id="slider_size" min="0" max="1.0" step="0.001" style="width: 100%;">
+      </div>
+
+      <div style="margin-bottom: 12px;">
+        <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px; color: #a1b0cb;">
+          <span>Rotation (rot)</span>
+          <span id="val_rot" style="color: var(--accent); font-family: monospace;">0</span>
+        </div>
+        <input type="range" id="slider_rot" min="-180" max="180" step="1" style="width: 100%;">
+      </div>
+
+      <div style="margin-bottom: 12px;">
+        <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px; color: #a1b0cb;">
+          <span>Anchor X (ax)</span>
+          <span id="val_ax" style="color: var(--accent); font-family: monospace;">0.00</span>
+        </div>
+        <input type="range" id="slider_ax" min="0" max="1.0" step="0.01" style="width: 100%;">
+      </div>
+
+      <div style="margin-bottom: 12px;">
+        <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px; color: #a1b0cb;">
+          <span>Anchor Y (ay)</span>
+          <span id="val_ay" style="color: var(--accent); font-family: monospace;">0.00</span>
+        </div>
+        <input type="range" id="slider_ay" min="0" max="1.0" step="0.01" style="width: 100%;">
+      </div>
+
+      <div style="margin-bottom: 12px;">
+        <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px; color: #a1b0cb;">
+          <span>Stretching Width (scaleX)</span>
+          <span id="val_scaleX" style="color: var(--accent); font-family: monospace;">1.000</span>
+        </div>
+        <input type="range" id="slider_scaleX" min="0.5" max="2.0" step="0.005" style="width: 100%;">
+      </div>
+
+      <div style="margin-bottom: 12px;">
+        <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px; color: #a1b0cb;">
+          <span>Stretching Height (scaleY)</span>
+          <span id="val_scaleY" style="color: var(--accent); font-family: monospace;">1.000</span>
+        </div>
+        <input type="range" id="slider_scaleY" min="0.5" max="2.0" step="0.005" style="width: 100%;">
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 8px; margin-top: 15px; flex-wrap: wrap;">
+      <button class="copy-btn" id="copyCoordsBtn" style="flex: 1; margin-top: 0; min-width: 100px;">📋 Copy</button>
+      <button class="copy-btn" id="saveToKitabBtn" style="flex: 1; margin-top: 0; min-width: 100px; background: #059669; border-color: #047857; color: #fff;">💾 Save to Kitab</button>
+      <button class="copy-btn" id="importCoordsBtn" style="flex: 1; margin-top: 0; min-width: 100px; background: #0284c7; border-color: #025a87; color: #fff;">📥 Import</button>
+    </div>
+    <div id="coords" style="margin-top: 12px;"></div>
+  </div>
+</div>
+
+<!-- Import Modal Markup -->
+<div id="importModal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(3, 6, 15, 0.85); backdrop-filter: blur(8px); z-index: 9999; align-items: center; justify-content: center;">
+  <div style="background: #0b1329; border: 1px solid #1e2d52; padding: 24px; border-radius: 8px; width: 520px; max-height: 80vh; overflow-y: auto; box-shadow: 0 0 24px rgba(0,0,0,0.5); font-family: 'Share Tech Mono', monospace;">
+    <h3 style="margin-top: 0; color: var(--accent); letter-spacing: 1px; font-size: 16px; text-transform: uppercase;">📥 IMPORT GEAR PRESETS</h3>
+
+    <!-- Search Bar -->
+    <input id="presetSearchInput" type="text" placeholder="🔍 Search presets..." style="width: 100%; padding: 8px 12px; background: #070c1b; border: 1px solid #1e2d52; border-radius: 4px; color: #fff; font-family: monospace; font-size: 11px; box-sizing: border-box; outline: none; margin-bottom: 10px;">
+
+    <!-- Preset List -->
+    <div id="presetListContainer" style="max-height: 200px; overflow-y: auto; margin-bottom: 12px; border: 1px solid #1e2d52; border-radius: 4px;"></div>
+
+    <!-- Manual Paste Fallback -->
+    <details style="margin-bottom: 12px;">
+      <summary style="color: #a1b0cb; font-size: 11px; cursor: pointer; user-select: none;">📋 Or paste coordinates manually...</summary>
+      <textarea id="importTextArea" placeholder="const GEAR_POINTS = { ... };" style="width: 100%; height: 160px; background: #070c1b; border: 1px solid #1e2d52; border-radius: 4px; color: #fff; padding: 10px; font-family: monospace; font-size: 11px; box-sizing: border-box; resize: vertical; outline: none; margin-top: 8px;"></textarea>
+      <button id="applyImportBtn" style="background: var(--accent); color: #03060f; border: 1px solid var(--accent); padding: 6px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; font-family: inherit; font-size: 12px; box-shadow: 0 0 8px var(--accent); margin-top: 8px; width: 100%;">Apply Pasted Coords</button>
+    </details>
+
+    <div style="display: flex; justify-content: flex-end;">
+      <button id="closeImportBtn" style="background: #1c273a; color: #a1b0cb; border: 1px solid #2e3c54; padding: 6px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; font-family: inherit; font-size: 12px;">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const CANVAS_W = 780, CANVAS_H = 936;
+const SPRITE_W = 523.33; // Original sprite width
+const SPRITE_OFFSET = (CANVAS_W - SPRITE_W) / 2;
+const canvas = document.getElementById('mechaCanvas');
+const ctx = canvas.getContext('2d');
+const cardContainer = document.getElementById('cardContainer');
+
+// ─── Active Job / Tier state ────────────────────────────────────────────────
+const activeJob = 'technician';
+let activeTier = 1;
+let selectedLayer = null;
+
+const JOB_SKINS = {
+  technician: '/assets/arctron/arctron_technician.png'
+};
+
+const JOB_BLUEPRINTS = {
+  technician: '/assets/arctron/def_warrior_armor_set_lv1/bw-lv1-arctron-warrior-orig.png'
+};
+
+const JOB_BASE = {
+  technician: '/assets/arctron/def_warrior_armor_set_lv1/bw-lv1-arctron-warrior.png'
+};
+
+function getShieldPath(tier) {
+  if (tier >= 55) return '/assets/arctron/shields/lv55arctronshielddef.png';
+  if (tier >= 42) return '/assets/arctron/shields/lv42arctronshielddef.png';
+  if (tier >= 32) return '/assets/arctron/shields/lv32arctronshielddef.png';
+  return '/assets/arctron/shields/lv1arctronshielddefault.png';
+}
+
+function getWeaponPath(tier) {
+  if (tier >= 55) return '/assets/weapons/defbioncelestralv55staff.png';
+  if (tier >= 42) return '/assets/weapons/defbioncelestralv42staff.png';
+  if (tier >= 32) return '/assets/weapons/defbioncelestralv32staff.png';
+  return '/assets/weapons/defbioncelestralv1staff1.png';
+}
+
+function getGearPath(job, tier, slot) {
+  return `/assets/arctron/def_${job}_armor_set_lv${tier}/${slot}.png`;
+}
+
+function getSlotIcon(slot) {
+  switch (slot) {
+    case 'helmet': return '🪖';
+    case 'armor': return '🧥';
+    case 'pants': return '👖';
+    case 'boots_l': case 'boots_r': return '🥾';
+    case 'gloves_l': case 'gloves_r': return '🧤';
+    case 'weapon': return '🪄';
+    case 'shield': return '🛡️';
+    default: return '⚙️';
+  }
+}
+
+// ─── Preset Registry (Searchable) ───────────────────────────────────────────
+const PRESET_REGISTRY = [];
+
+// Gear layers config - Technician default coordinates (using warrior as baseline starting)
+const layers = [
+  {
+    slot: 'armor',
+    name: 'Chest Armor',
+    path: '/assets/arctron/def_technician_armor_set_lv1/armor.png',
+    x: 0.002, y: 0.050, ax: 0.5, ay: 0.15, size: 0.457, rot: 0, z: 1,
+    scaleX: 1.0, scaleY: 1.0, locked: true, visible: true
+  },
+  {
+    slot: 'pants',
+    name: 'Pants (Pelvis)',
+    path: '/assets/arctron/def_technician_armor_set_lv1/pants.png',
+    x: 0.003, y: 0.341, ax: 0.5, ay: 0.22, size: 0.414, rot: 0, z: 2,
+    scaleX: 1.0, scaleY: 1.0, locked: true, visible: true
+  },
+  {
+    slot: 'boots_l',
+    name: 'Boots (L) - Left Foot',
+    path: '/assets/arctron/def_technician_armor_set_lv1/boots_l.png',
+    x: 0.128, y: 0.652, ax: 0.5, ay: 0.15, size: 0.394, rot: 0, z: 3,
+    scaleX: 1.070, scaleY: 1.125, locked: true, visible: true
+  },
+  {
+    slot: 'boots_r',
+    name: 'Boots (R) - Right Foot',
+    path: '/assets/arctron/def_technician_armor_set_lv1/boots_r.png',
+    x: -0.132, y: 0.651, ax: 0.5, ay: 0.15, size: 0.424, rot: 0, z: 3,
+    scaleX: 0.940, scaleY: 1.045, locked: true, visible: true
+  },
+  {
+    slot: 'gloves_l',
+    name: 'Gloves (L) - Left Hand',
+    path: '/assets/arctron/def_technician_armor_set_lv1/gloves_l.png',
+    x: 0.209, y: 0.354, ax: 0.52, ay: 0.22, size: 0.248, rot: 0, z: 6,
+    scaleX: 1.0, scaleY: 1.065, locked: true, visible: true
+  },
+  {
+    slot: 'gloves_r',
+    name: 'Gloves (R) - Right Hand',
+    path: '/assets/arctron/def_technician_armor_set_lv1/gloves_r.png',
+    x: -0.181, y: 0.329, ax: 0.5, ay: 0.23, size: 0.258, rot: -1, z: 5,
+    scaleX: 1.035, scaleY: 1.200, locked: true, visible: true
+  },
+  {
+    slot: 'helmet',
+    name: 'Helmet (Head)',
+    path: '/assets/arctron/def_technician_armor_set_lv1/helmet.png',
+    x: 0.001, y: 0.066, ax: 0.5, ay: 0.5, size: 0.123, rot: 0, z: 5,
+    scaleX: 0.970, scaleY: 1.045, locked: true, visible: true
+  },
+  {
+    slot: 'weapon',
+    name: 'Weapon (R-Hand)',
+    path: '/assets/weapons/defbioncelestralv1staff1.png',
+    x: 0.013, y: 0.689, ax: 0.33, ay: 0.63, size: 0.401, rot: -97, z: 4,
+    scaleX: 1.0, scaleY: 1.0, locked: true, visible: true
+  },
+  {
+    slot: 'shield',
+    name: 'Shield (L-Hand)',
+    path: '/assets/arctron/shields/lv1arctronshielddefault.png',
+    x: 0.182, y: 0.503, ax: 0.5, ay: 0.5, size: 0.457, rot: 0, z: 7,
+    scaleX: 1.0, scaleY: 1.0, locked: true, visible: true
+  }
+];
+
+// ─── localStorage Persistence ────────────────────────────────────────────────
+const STORAGE_KEY = 'dressingRoom_technician_lv' + activeTier;
+const LAYOUT_VERSION = 'v16';
+
+function saveLayersToStorage() {
+  const key = 'dressingRoom_technician_lv' + activeTier;
+  const data = {
+    version: LAYOUT_VERSION,
+    layers: layers.map(l => ({
+      slot: l.slot, x: l.x, y: l.y, ax: l.ax, ay: l.ay,
+      size: l.size, rot: l.rot, z: l.z,
+      scaleX: l.scaleX, scaleY: l.scaleY,
+      flipX: l.flipX || false, flipY: l.flipY || false,
+      locked: l.locked, visible: l.visible,
+      path: l.path
+    }))
+  };
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
+function loadLayersFromStorage() {
+  const key = 'dressingRoom_technician_lv' + activeTier;
+  const saved = localStorage.getItem(key);
+  if (!saved) return false;
+  try {
+    const parsed = JSON.parse(saved);
+    if (parsed.version !== LAYOUT_VERSION) {
+      localStorage.removeItem(key);
+      return false;
+    }
+    const data = parsed.layers;
+    data.forEach(savedLayer => {
+      const layer = layers.find(l => l.slot === savedLayer.slot);
+      if (layer) {
+        layer.x = savedLayer.x; layer.y = savedLayer.y;
+        layer.ax = savedLayer.ax; layer.ay = savedLayer.ay;
+        layer.size = savedLayer.size; layer.rot = savedLayer.rot;
+        layer.z = savedLayer.z ?? layer.z;
+        layer.scaleX = savedLayer.scaleX ?? 1.0;
+        layer.scaleY = savedLayer.scaleY ?? 1.0;
+        layer.flipX = savedLayer.flipX ?? false;
+        layer.flipY = savedLayer.flipY ?? false;
+        layer.locked = savedLayer.locked ?? false;
+        layer.visible = savedLayer.visible ?? true;
+        if (savedLayer.path && savedLayer.path !== layer.path) {
+          layer.path = savedLayer.path;
+          if (layer.img) {
+            layer.img.src = layer.path + '?v=' + Date.now();
+          }
+        }
+      }
+    });
+    return true;
+  } catch (e) { return false; }
+}
+
+// Sprite Silhouette Masking
+const spriteMaskCanvas = document.createElement('canvas');
+spriteMaskCanvas.width = CANVAS_W; spriteMaskCanvas.height = CANVAS_H;
+const spriteMaskCtx = spriteMaskCanvas.getContext('2d');
+let spriteMaskReady = false;
+
+// Reference images variables
+const charBaseImg = new Image();
+let charBaseLoaded = false;
+
+const blueprintImg = new Image();
+let blueprintLoaded = false;
+
+const baseImg = new Image();
+let baseLoaded = false;
+
+function primeSpriteMask() {
+  if (!baseLoaded) return;
+  spriteMaskCtx.clearRect(0, 0, CANVAS_W, CANVAS_H);
+  const scale = Math.min(CANVAS_W / baseImg.naturalWidth, CANVAS_H / baseImg.naturalHeight);
+  const dw = baseImg.naturalWidth * scale;
+  const dh = baseImg.naturalHeight * scale;
+  const dx = (CANVAS_W - dw) / 2;
+  const dy = (CANVAS_H - dh) / 2;
+  spriteMaskCtx.drawImage(baseImg, dx, dy, dw, dh);
+  spriteMaskReady = true;
+}
+
+function drawMaskedLayer(ctx2, l) {
+  if (!spriteMaskReady) primeSpriteMask();
+  const off = document.createElement('canvas');
+  off.width = CANVAS_W; off.height = CANVAS_H;
+  const offCtx = off.getContext('2d');
+  const h = l.size * CANVAS_H;
+  const w = h * (l.img.naturalWidth / l.img.naturalHeight);
+  const left = CANVAS_W/2 + (l.x * CANVAS_H);
+  const top = l.y * CANVAS_H;
+  offCtx.save();
+  offCtx.translate(left, top);
+  offCtx.rotate(l.rot * Math.PI/180);
+  offCtx.scale(l.scaleX || 1.0, l.scaleY || 1.0);
+  offCtx.drawImage(l.img, -l.ax*w, -l.ay*h, w, h);
+  offCtx.restore();
+
+  const maskData = spriteMaskCtx.getImageData(0, 0, CANVAS_W, CANVAS_H);
+  const gearData = offCtx.getImageData(0, 0, CANVAS_W, CANVAS_H);
+  for (let i = 3; i < gearData.data.length; i += 4) {
+    gearData.data[i] = Math.min(gearData.data[i], maskData.data[i]);
+  }
+  offCtx.putImageData(gearData, 0, 0);
+  ctx2.drawImage(off, 0, 0);
+}
+
+function drawLayer(ctx2, l) {
+  if (!l.img || !l.img.complete || l.img.naturalWidth === 0) return;
+  if (l.maskBox) { drawMaskedLayer(ctx2, l); return; }
+  const h = l.size * CANVAS_H;
+  const w = h * (l.img.naturalWidth / l.img.naturalHeight);
+  const left = CANVAS_W/2 + (l.x * CANVAS_H);
+  const top = l.y * CANVAS_H;
+
+  const isArmor = ['helmet', 'armor', 'pants', 'boots_l', 'boots_r', 'gloves_l', 'gloves_r'].includes(l.slot);
+
+  if (ctx2 === ctx && isArmor) {
+    const maskCanvas = document.createElement('canvas');
+    maskCanvas.width = CANVAS_W; maskCanvas.height = CANVAS_H;
+    const mctx = maskCanvas.getContext('2d');
+    mctx.save();
+    mctx.translate(left, top);
+    mctx.rotate(l.rot * Math.PI/180);
+    const mfx = (l.flipX ? -1 : 1) * (l.scaleX || 1.0);
+    const mfy = (l.flipY ? -1 : 1) * (l.scaleY || 1.0);
+    mctx.scale(mfx, mfy);
+    mctx.drawImage(l.img, -l.ax*w, -l.ay*h, w, h);
+    mctx.restore();
+
+    mctx.globalCompositeOperation = 'source-in';
+    mctx.fillStyle = '#000000';
+    mctx.fillRect(0, 0, CANVAS_W, CANVAS_H);
+
+    ctx2.save();
+    ctx2.globalCompositeOperation = 'destination-out';
+    ctx2.drawImage(maskCanvas, 0, 0);
+    ctx2.restore();
+  }
+
+  ctx2.save();
+  ctx2.translate(left, top);
+  ctx2.rotate(l.rot * Math.PI/180);
+  const fx = (l.flipX ? -1 : 1) * (l.scaleX || 1.0);
+  const fy = (l.flipY ? -1 : 1) * (l.scaleY || 1.0);
+  ctx2.scale(fx, fy);
+  ctx2.drawImage(l.img, -l.ax*w, -l.ay*h, w, h);
+  ctx2.restore();
+}
+
+function drawClippedHead(targetCtx, sourceImg) {
+  const sx = 394 * 0.36;
+  const sy = 0;
+  const sWidth = 394 * 0.28;
+  const sHeight = 702 * 0.16;
+  const scaleX = SPRITE_W / 394;
+  const scaleY = CANVAS_H / 702;
+  const dx = SPRITE_OFFSET + sx * scaleX;
+  const dy = sy * scaleY;
+  const dWidth = sWidth * scaleX;
+  const dHeight = sHeight * scaleY;
+  targetCtx.drawImage(sourceImg, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+}
+
+function drawContain(ctx, img, alpha) {
+  if (!img || !img.naturalWidth) return;
+  const scale = Math.min(CANVAS_W / img.naturalWidth, CANVAS_H / img.naturalHeight);
+  const dw = img.naturalWidth * scale;
+  const dh = img.naturalHeight * scale;
+  const dx = (CANVAS_W - dw) / 2;
+  const dy = (CANVAS_H - dh) / 2;
+  if (alpha !== undefined) {
+    const prev = ctx.globalAlpha;
+    ctx.globalAlpha = alpha;
+    ctx.drawImage(img, dx, dy, dw, dh);
+    ctx.globalAlpha = prev;
+  } else {
+    ctx.drawImage(img, dx, dy, dw, dh);
+  }
+}
+
+function render() {
+  const isHelmetVisible = layers.find(l => l.slot === 'helmet' && l.visible);
+
+  // Preview Canvas
+  const charCanvas = document.getElementById('charPreviewCanvas');
+  if (charCanvas) {
+    const charCtx = charCanvas.getContext('2d');
+    charCtx.clearRect(0, 0, CANVAS_W, CANVAS_H);
+    if (charBaseLoaded) drawContain(charCtx, charBaseImg);
+    
+    const activeLayersLeft = layers.filter(l => l.visible).sort((a, b) => a.z - b.z);
+    let headDrawn = false;
+    activeLayersLeft.forEach(l => {
+      if (!isHelmetVisible && !headDrawn && l.z >= 4) {
+        if (charBaseLoaded) drawClippedHead(charCtx, charBaseImg);
+        headDrawn = true;
+      }
+      drawLayer(charCtx, l);
+    });
+    if (!isHelmetVisible && !headDrawn) {
+      if (charBaseLoaded) drawClippedHead(charCtx, charBaseImg);
+    }
+  }
+
+  // Mannequin Canvas
+  ctx.clearRect(0, 0, CANVAS_W, CANVAS_H);
+  if (baseLoaded) drawContain(ctx, baseImg);
+
+  const activeLayersRight = layers.filter(l => l.visible).sort((a, b) => a.z - b.z);
+  let headDrawnRight = false;
+  activeLayersRight.forEach(l => {
+    if (!isHelmetVisible && !headDrawnRight && l.z >= 4) {
+      if (baseLoaded) drawClippedHead(ctx, baseImg);
+      headDrawnRight = true;
+    }
+    drawLayer(ctx, l);
+  });
+  if (!isHelmetVisible && !headDrawnRight) {
+    if (baseLoaded) drawClippedHead(ctx, baseImg);
+  }
+
+  if (blueprintLoaded && document.getElementById('blueprintToggle').checked) {
+    ctx.globalAlpha = 0.45;
+    ctx.drawImage(blueprintImg, SPRITE_OFFSET, 0, SPRITE_W, CANVAS_H);
+    ctx.globalAlpha = 1.0;
+  }
+
+  updateUI();
+}
+
+function toggleSlot(slotName) {
+  const layer = layers.find(l => l.slot === slotName);
+  if (layer) {
+    layer.visible = !layer.visible;
+    render();
+  }
+}
+
+function updateWeaponDropdownOptions() {
+  const select = document.getElementById('weaponSelect');
+  if (!select) return;
+  
+  select.innerHTML = '';
+  
+  const unequipOpt = document.createElement('option');
+  unequipOpt.value = 'none';
+  unequipOpt.textContent = '❌ Unequip / Hide Weapon';
+  select.appendChild(unequipOpt);
+  
+  const weaponGroups = [
+    {
+      label: '⚔️ Swords & Axes',
+      items: [
+        { value: 'defallfactionslv1sword1.png', label: 'Lv.1 Sword 1 (Green)' },
+        { value: 'defallfactionslv1sword2.png', label: 'Lv.1 Sword 2 (Bronze)' },
+        { value: 'defallfactionslv1sword3.png', label: 'Lv.1 Sword 3 (Steel)' },
+        { value: 'defallfactionslv1sword4.png', label: 'Lv.1 Sword 4 (Gold)' },
+        { value: 'defallfactionslv32sword.png', label: 'Lv.32 Greatsword' },
+        { value: 'defallfactionslv42sword.png', label: 'Lv.42 Greatsword' },
+        { value: 'defallfactionslv55sword.png', label: 'Lv.55 Greatsword' },
+        { value: 'defallfactionslv32axe.png', label: 'Lv.32 Battleaxe' },
+        { value: 'defallfactionslv42axe.png', label: 'Lv.42 Battleaxe' },
+        { value: 'defallfactionslv55axe.png', label: 'Lv.55 Battleaxe' }
+      ]
+    },
+    {
+      label: '🔫 Guns & Bows',
+      items: [
+        { value: 'defallfactionslv1gun.png', label: 'Lv.1 Rifle' },
+        { value: 'defallfactionslv1bow.png', label: 'Lv.1 Bow' },
+        { value: 'defallfactionslv32gun.png', label: 'Lv.32 Rifle' },
+        { value: 'defallfactionslv32bow.png', label: 'Lv.32 Bow' },
+        { value: 'defallfactionslv42gun.png', label: 'Lv.42 Rifle' },
+        { value: 'defallfactionslv42bow.png', label: 'Lv.42 Bow' },
+        { value: 'defallfactionslv55gun.png', label: 'Lv.55 Rifle' },
+        { value: 'defallfactionslv55bow.png', label: 'Lv.55 Bow' }
+      ]
+    },
+    {
+      label: '🚀 Arctron Special Launchers',
+      items: [
+        { value: 'defarctronlv32special.png', label: 'Lv.32 Special Launcher' },
+        { value: 'defarctronlv42special.png', label: 'Lv.42 Special Launcher' },
+        { value: 'defarctronlv55special.png', label: 'Lv.55 Special Launcher' }
+      ]
+    },
+    {
+      label: '🔮 Staffs & Scepters',
+      items: [
+        { value: 'defbioncelestralv1staff1.png', label: 'Lv.1 Staff 1' },
+        { value: 'defbioncelestralv1staff2.png', label: 'Lv.1 Staff 2' },
+        { value: 'defbioncelestralv32staff.png', label: 'Lv.32 Staff' },
+        { value: 'defbioncelestralv42staff.png', label: 'Lv.42 Staff' },
+        { value: 'defbioncelestralv55staff.png', label: 'Lv.55 Staff' }
+      ]
+    }
+  ];
+  
+  weaponGroups.forEach(group => {
+    const optgroup = document.createElement('optgroup');
+    optgroup.label = group.label;
+    group.items.forEach(item => {
+      const el = document.createElement('option');
+      el.value = item.value;
+      el.textContent = item.label;
+      optgroup.appendChild(el);
+    });
+    select.appendChild(optgroup);
+  });
+  
+  const weaponLayer = layers.find(l => l.slot === 'weapon');
+  if (weaponLayer) {
+    if (!weaponLayer.visible) {
+      select.value = 'none';
+    } else {
+      const filename = weaponLayer.path.split('/').pop().split('?')[0];
+      if (select.querySelector(`option[value="${filename}"]`)) {
+        select.value = filename;
+      }
+    }
+  }
+}
+
+function updateUI() {
+  const container = document.getElementById('gearListContainer');
+  if (!container) return;
+  container.innerHTML = '';
+
+  layers.forEach(l => {
+    const row = document.createElement('div');
+    row.className = `gear-row ${selectedLayer === l ? 'active' : ''}`;
+    row.onclick = () => startCalibration(l);
+
+    const info = document.createElement('div');
+    info.className = 'gear-info';
+
+    const icon = document.createElement('div');
+    icon.className = 'gear-icon';
+    icon.textContent = getSlotIcon(l.slot);
+
+    const meta = document.createElement('div');
+    meta.className = 'gear-meta';
+
+    const label = document.createElement('div');
+    label.className = 'gear-label';
+    label.textContent = l.name;
+
+    const status = document.createElement('div');
+    status.className = 'gear-status';
+    status.textContent = l.locked ? '🔒 locked' : '🔓 editing';
+
+    meta.appendChild(label);
+    meta.appendChild(status);
+    info.appendChild(icon);
+    info.appendChild(meta);
+
+    const toggle = document.createElement('button');
+    toggle.className = 'copy-btn';
+    toggle.style.cssText = `margin-top: 0; width: auto; font-size: 10px; padding: 6px 12px; border-radius: 6px; background: ${l.visible ? 'var(--accent)' : '#1c273a'}; color: ${l.visible ? '#03060f' : '#a1b0cb'}; border-color: ${l.visible ? 'var(--accent)' : '#2e3c54'}; font-weight: bold;`;
+    toggle.textContent = l.visible ? 'EQUIPPED' : 'EQUIP';
+    toggle.onclick = (e) => {
+      e.stopPropagation();
+      toggleSlot(l.slot);
+    };
+
+    row.appendChild(info);
+    row.appendChild(toggle);
+    container.appendChild(row);
+  });
+
+  const cardPrev = document.getElementById('charPreviewContainer');
+  if (cardPrev) {
+    const existing = cardPrev.querySelectorAll('.hotspot-dot, .tooltip');
+    existing.forEach(el => el.remove());
+    
+    layers.filter(l => l.visible).forEach(l => {
+      const dot = document.createElement('div');
+      dot.className = `hotspot-dot ${selectedLayer === l ? 'active' : ''}`;
+
+      const leftPercent = 50 + (l.x * 120);
+      const topPercent = (l.y * 100);
+
+      dot.style.left = `${leftPercent}%`;
+      dot.style.top = `${topPercent}%`;
+      
+      dot.onclick = (e) => {
+        e.stopPropagation();
+        startCalibration(l);
+      };
+
+      const tip = document.createElement('div');
+      tip.className = 'tooltip';
+      tip.textContent = `${l.name} (x: ${l.x.toFixed(3)}, y: ${l.y.toFixed(3)})`;
+      
+      dot.style.zIndex = l.z + 10;
+      
+      cardPrev.appendChild(dot);
+      cardPrev.appendChild(tip);
+    });
+  }
+
+  const calibCard = document.getElementById('cardContainer');
+  if (calibCard) {
+    const existing = calibCard.querySelectorAll('.hotspot-dot, .tooltip');
+    existing.forEach(el => el.remove());
+    
+    layers.filter(l => l.visible).forEach(l => {
+      const dot = document.createElement('div');
+      dot.className = `hotspot-dot ${selectedLayer === l ? 'active' : ''}`;
+
+      const leftPercent = 50 + (l.x * 120);
+      const topPercent = (l.y * 100);
+
+      dot.style.left = `${leftPercent}%`;
+      dot.style.top = `${topPercent}%`;
+      dot.style.zIndex = l.z + 10;
+
+      let startX = 0, startY = 0;
+      let hasMoved = false;
+
+      dot.onmousedown = (e) => {
+        if (l.locked) {
+          e.stopPropagation();
+          selectedLayer = l;
+          startCalibration(l);
+          return;
+        }
+        e.stopPropagation();
+        e.preventDefault();
+        startX = e.clientX;
+        startY = e.clientY;
+        hasMoved = false;
+        
+        selectedLayer = l;
+        startCalibration(l);
+        
+        const onMouseMove = (moveEvent) => {
+          const dx = moveEvent.clientX - startX;
+          const dy = moveEvent.clientY - startY;
+          if (Math.abs(dx) > 3 || Math.abs(dy) > 3) hasMoved = true;
+          
+          const rect = calibCard.getBoundingClientRect();
+          let clientX = moveEvent.clientX - rect.left;
+          let clientY = moveEvent.clientY - rect.top;
+          
+          clientX = Math.max(0, Math.min(rect.width, clientX));
+          clientY = Math.max(0, Math.min(rect.height, clientY));
+          
+          l.x = (clientX - rect.width / 2) / rect.height;
+          l.y = clientY / rect.height;
+          
+          dot.style.left = `${clientX}px`;
+          dot.style.top = `${clientY}px`;
+          
+          if (tip) { tip.style.left = `${clientX}px`; tip.style.top = `${clientY}px`; }
+          
+          document.getElementById('slider_x').value = l.x;
+          document.getElementById('slider_y').value = l.y;
+          document.getElementById('val_x').textContent = l.x.toFixed(3);
+          document.getElementById('val_y').textContent = l.y.toFixed(3);
+          
+          render();
+        };
+        
+        const onMouseUp = () => {
+          document.removeEventListener('mousemove', onMouseMove);
+          document.removeEventListener('mouseup', onMouseUp);
+          saveLayersToStorage();
+        };
+        
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
+      };
+
+      const tip = document.createElement('div');
+      tip.className = 'tooltip';
+      tip.textContent = `${l.name} (x: ${l.x.toFixed(3)}, y: ${l.y.toFixed(3)})`;
+      
+      calibCard.appendChild(dot);
+      calibCard.appendChild(tip);
+    });
+  }
+
+  // Display master coordinate output box
+  const coordsBox = document.getElementById('coords');
+  if (coordsBox) {
+    let out = `const GEAR_POINTS = {\n`;
+    out += `  armor:  [{ x: ${layers.find(l => l.slot === 'armor').x.toFixed(3)}, y: ${layers.find(l => l.slot === 'armor').y.toFixed(3)}, ax: ${layers.find(l => l.slot === 'armor').ax.toFixed(2)}, ay: ${layers.find(l => l.slot === 'armor').ay.toFixed(2)}, size: ${layers.find(l => l.slot === 'armor').size.toFixed(3)}, rot: ${layers.find(l => l.slot === 'armor').rot}, z: 1 }],\n`;
+    out += `  pants:  [{ x: ${layers.find(l => l.slot === 'pants').x.toFixed(3)}, y: ${layers.find(l => l.slot === 'pants').y.toFixed(3)}, ax: ${layers.find(l => l.slot === 'pants').ax.toFixed(2)}, ay: ${layers.find(l => l.slot === 'pants').ay.toFixed(2)}, size: ${layers.find(l => l.slot === 'pants').size.toFixed(3)}, rot: ${layers.find(l => l.slot === 'pants').rot}, z: 2 }],\n`;
+    out += `  boots: [\n`;
+    out += `    { x: ${layers.find(l => l.slot === 'boots_l').x.toFixed(3)}, y: ${layers.find(l => l.slot === 'boots_l').y.toFixed(3)}, ax: ${layers.find(l => l.slot === 'boots_l').ax.toFixed(2)}, ay: ${layers.find(l => l.slot === 'boots_l').ay.toFixed(2)}, size: ${layers.find(l => l.slot === 'boots_l').size.toFixed(3)}, rot: ${layers.find(l => l.slot === 'boots_l').rot}, z: ${layers.find(l => l.slot === 'boots_l').z}, scaleX: ${layers.find(l => l.slot === 'boots_l').scaleX.toFixed(3)}, scaleY: ${layers.find(l => l.slot === 'boots_l').scaleY.toFixed(3)}, label: 'boot_l', splitSuffix: '_l' },\n`;
+    out += `    { x: ${layers.find(l => l.slot === 'boots_r').x.toFixed(3)}, y: ${layers.find(l => l.slot === 'boots_r').y.toFixed(3)}, ax: ${layers.find(l => l.slot === 'boots_r').ax.toFixed(2)}, ay: ${layers.find(l => l.slot === 'boots_r').ay.toFixed(2)}, size: ${layers.find(l => l.slot === 'boots_r').size.toFixed(3)}, rot: ${layers.find(l => l.slot === 'boots_r').rot}, z: ${layers.find(l => l.slot === 'boots_r').z}, scaleX: ${layers.find(l => l.slot === 'boots_r').scaleX.toFixed(3)}, scaleY: ${layers.find(l => l.slot === 'boots_r').scaleY.toFixed(3)}, label: 'boot_r', splitSuffix: '_r' }\n`;
+    out += `  ],\n`;
+    out += `  gloves: [\n`;
+    out += `    { x: ${layers.find(l => l.slot === 'gloves_l').x.toFixed(3)}, y: ${layers.find(l => l.slot === 'gloves_l').y.toFixed(3)}, ax: ${layers.find(l => l.slot === 'gloves_l').ax.toFixed(2)}, ay: ${layers.find(l => l.slot === 'gloves_l').ay.toFixed(2)}, size: ${layers.find(l => l.slot === 'gloves_l').size.toFixed(3)}, rot: ${layers.find(l => l.slot === 'gloves_l').rot}, z: ${layers.find(l => l.slot === 'gloves_l').z}, scaleY: ${layers.find(l => l.slot === 'gloves_l').scaleY.toFixed(3)}, label: 'glove_l', splitSuffix: '_l' },\n`;
+    out += `    { x: ${layers.find(l => l.slot === 'gloves_r').x.toFixed(3)}, y: ${layers.find(l => l.slot === 'gloves_r').y.toFixed(3)}, ax: ${layers.find(l => l.slot === 'gloves_r').ax.toFixed(2)}, ay: ${layers.find(l => l.slot === 'gloves_r').ay.toFixed(2)}, size: ${layers.find(l => l.slot === 'gloves_r').size.toFixed(3)}, rot: ${layers.find(l => l.slot === 'gloves_r').rot}, z: ${layers.find(l => l.slot === 'gloves_r').z}, scaleX: ${layers.find(l => l.slot === 'gloves_r').scaleX.toFixed(3)}, scaleY: ${layers.find(l => l.slot === 'gloves_r').scaleY.toFixed(3)}, label: 'glove_r', splitSuffix: '_r' }\n`;
+    out += `  ],\n`;
+    out += `  shield: [{ x: ${layers.find(l => l.slot === 'shield').x.toFixed(3)}, y: ${layers.find(l => l.slot === 'shield').y.toFixed(3)}, ax: ${layers.find(l => l.slot === 'shield').ax.toFixed(2)}, ay: ${layers.find(l => l.slot === 'shield').ay.toFixed(2)}, size: ${layers.find(l => l.slot === 'shield').size.toFixed(3)}, rot: ${layers.find(l => l.slot === 'shield').rot}, z: ${layers.find(l => l.slot === 'shield').z} }],\n`;
+    out += `  weapon: [{ x: ${layers.find(l => l.slot === 'weapon').x.toFixed(3)}, y: ${layers.find(l => l.slot === 'weapon').y.toFixed(3)}, ax: ${layers.find(l => l.slot === 'weapon').ax.toFixed(2)}, ay: ${layers.find(l => l.slot === 'weapon').ay.toFixed(2)}, size: ${layers.find(l => l.slot === 'weapon').size.toFixed(3)}, rot: ${layers.find(l => l.slot === 'weapon').rot}, z: ${layers.find(l => l.slot === 'weapon').z}${layers.find(l => l.slot === 'weapon').scaleX !== 1.0 || layers.find(l => l.slot === 'weapon').scaleY !== 1.0 ? `, scaleX: ${layers.find(l => l.slot === 'weapon').scaleX.toFixed(3)}, scaleY: ${layers.find(l => l.slot === 'weapon').scaleY.toFixed(3)}` : ''} }],\n`;
+    out += `  helmet: [{ x: ${layers.find(l => l.slot === 'helmet').x.toFixed(3)}, y: ${layers.find(l => l.slot === 'helmet').y.toFixed(3)}, ax: ${layers.find(l => l.slot === 'helmet').ax.toFixed(2)}, ay: ${layers.find(l => l.slot === 'helmet').ay.toFixed(2)}, size: ${layers.find(l => l.slot === 'helmet').size.toFixed(3)}, rot: ${layers.find(l => l.slot === 'helmet').rot}, z: ${layers.find(l => l.slot === 'helmet').z}, scaleX: ${layers.find(l => l.slot === 'helmet').scaleX.toFixed(3)}, scaleY: ${layers.find(l => l.slot === 'helmet').scaleY.toFixed(3)} }]\n`;
+    out += `};`;
+    coordsBox.textContent = out;
+  }
+}
+
+function startCalibration(layer) {
+  selectedLayer = layer;
+  
+  document.querySelectorAll('.gear-row').forEach(row => {
+    row.classList.toggle('active', row.querySelector('.gear-label').textContent === layer.name);
+  });
+
+  const panel = document.getElementById('calibrationPanel');
+  panel.style.display = 'block';
+  document.getElementById('calSlotName').textContent = layer.name;
+
+  setupSlider('x', layer, -0.5, 0.5, 0.001);
+  setupSlider('y', layer, 0, 1.0, 0.001);
+  setupSlider('size', layer, 0, 1.0, 0.001);
+  setupSlider('rot', layer, -180, 180, 1);
+  setupSlider('ax', layer, 0, 1.0, 0.01);
+  setupSlider('ay', layer, 0, 1.0, 0.01);
+  setupSlider('scaleX', layer, 0.5, 2.0, 0.005);
+  setupSlider('scaleY', layer, 0.5, 2.0, 0.005);
+
+  updateLockBtn();
+  updateFlipBtns();
+  updateUI();
+  render();
+}
+
+function setupSlider(prop, layer, min, max, step) {
+  const slider = document.getElementById(`slider_${prop}`);
+  const valDisp = document.getElementById(`val_${prop}`);
+  
+  slider.min = min; slider.max = max; slider.step = step;
+  
+  const val = layer[prop] !== undefined ? layer[prop] : (prop === 'scaleX' || prop === 'scaleY' ? 1.0 : 0.0);
+  slider.value = val;
+  
+  const decimals = (prop === 'rot') ? 0 : (prop === 'ax' || prop === 'ay' ? 2 : 3);
+  valDisp.textContent = val.toFixed(decimals);
+
+  slider.oninput = (e) => {
+    if (layer.locked) {
+      slider.value = val;
+      return;
+    }
+    const newVal = parseFloat(e.target.value);
+    layer[prop] = newVal;
+    valDisp.textContent = newVal.toFixed(decimals);
+    render();
+    saveLayersToStorage();
+  };
+}
+
+function updateLockBtn() {
+  const btn = document.getElementById('lockBtn');
+  if (!selectedLayer) return;
+  btn.textContent = selectedLayer.locked ? '🔒 LOCKED' : '🔓 UNLOCKED';
+  btn.style.background = selectedLayer.locked ? '#059669' : '#1e293b';
+  btn.style.borderColor = selectedLayer.locked ? '#047857' : '#334155';
+}
+
+function updateFlipBtns() {
+  if (!selectedLayer) return;
+  const hBtn = document.getElementById('flipHBtn');
+  const vBtn = document.getElementById('flipVBtn');
+  hBtn.style.background = selectedLayer.flipX ? '#0284c7' : '#1e293b';
+  hBtn.style.borderColor = selectedLayer.flipX ? '#0369a1' : '#334155';
+  hBtn.textContent = selectedLayer.flipX ? '↔ FLIP H ✅' : '↔ FLIP H';
+  vBtn.style.background = selectedLayer.flipY ? '#0284c7' : '#1e293b';
+  vBtn.style.borderColor = selectedLayer.flipY ? '#0369a1' : '#334155';
+  vBtn.textContent = selectedLayer.flipY ? '↕ FLIP V ✅' : '↕ FLIP V';
+}
+
+function applyPresetCoords(parsed, silent = false) {
+  let loadedCount = 0;
+  if (parsed.armor && parsed.armor[0]) {
+    const target = layers.find(l => l.slot === 'armor');
+    if (target) { Object.assign(target, parsed.armor[0]); loadedCount++; }
+  }
+  if (parsed.pants && parsed.pants[0]) {
+    const target = layers.find(l => l.slot === 'pants');
+    if (target) { Object.assign(target, parsed.pants[0]); loadedCount++; }
+  }
+  if (parsed.boots) {
+    const boot_l = parsed.boots.find(b => b.label === 'boot_l' || b.splitSuffix === '_l');
+    const boot_r = parsed.boots.find(b => b.label === 'boot_r' || b.splitSuffix === '_r');
+    const target_l = layers.find(l => l.slot === 'boots_l');
+    const target_r = layers.find(l => l.slot === 'boots_r');
+    if (boot_l && target_l) { Object.assign(target_l, boot_l); loadedCount++; }
+    if (boot_r && target_r) { Object.assign(target_r, boot_r); loadedCount++; }
+  }
+  if (parsed.gloves) {
+    const glove_l = parsed.gloves.find(g => g.label === 'glove_l' || g.splitSuffix === '_l');
+    const glove_r = parsed.gloves.find(g => g.label === 'glove_r' || g.splitSuffix === '_r');
+    const target_l = layers.find(l => l.slot === 'gloves_l');
+    const target_r = layers.find(l => l.slot === 'gloves_r');
+    if (glove_l && target_l) { Object.assign(target_l, glove_l); loadedCount++; }
+    if (glove_r && target_r) { Object.assign(target_r, glove_r); loadedCount++; }
+  }
+  if (parsed.shield && parsed.shield[0]) {
+    const target = layers.find(l => l.slot === 'shield');
+    if (target) { Object.assign(target, parsed.shield[0]); loadedCount++; }
+  }
+  if (parsed.weapon && parsed.weapon[0]) {
+    const target = layers.find(l => l.slot === 'weapon');
+    if (target) { Object.assign(target, parsed.weapon[0]); loadedCount++; }
+  }
+  if (parsed.helmet && parsed.helmet[0]) {
+    const target = layers.find(l => l.slot === 'helmet');
+    if (target) { Object.assign(target, parsed.helmet[0]); loadedCount++; }
+  }
+  if (loadedCount === 0) {
+    if (!silent) alert('No matching slot coordinates found.');
+    return;
+  }
+  layers.forEach(l => {
+    if (l.scaleX === undefined) l.scaleX = 1.0;
+    if (l.scaleY === undefined) l.scaleY = 1.0;
+    l.defaultCoords = { x: l.x, y: l.y, ax: l.ax, ay: l.ay, size: l.size, rot: l.rot, scaleX: l.scaleX, scaleY: l.scaleY };
+  });
+  if (selectedLayer) startCalibration(selectedLayer);
+  else { const first = layers.find(l => l.visible); if (first) startCalibration(first); }
+  render();
+  saveLayersToStorage();
+  document.getElementById('importModal').style.display = 'none';
+  if (!silent) alert(`Imported ${loadedCount} slot presets!`);
+}
+
+function renderPresetList(filter) {
+  const container = document.getElementById('presetListContainer');
+  container.innerHTML = '<div style="padding:10px;color:var(--text-secondary);font-size:11px;">No presets found for Technician.</div>';
+}
+
+function switchTier(tier) {
+  saveLayersToStorage();
+  activeTier = tier;
+
+  // Update tier buttons
+  document.querySelectorAll('.tier-sub-btn').forEach(btn => {
+    btn.classList.toggle('active', parseInt(btn.dataset.tier) === tier);
+  });
+
+  // Update level badge on cards
+  document.querySelectorAll('.card-level-badge span:last-child').forEach(el => el.textContent = tier);
+
+  // Update paths
+  layers.forEach(l => {
+    let newPath;
+    if (l.slot === 'weapon') newPath = getWeaponPath(tier);
+    else if (l.slot === 'shield') newPath = getShieldPath(tier);
+    else {
+      const slotBase = l.slot.replace('_l', '').replace('_r', '');
+      const suffix = l.slot.includes('_l') ? '_l' : l.slot.includes('_r') ? '_r' : '';
+      newPath = getGearPath(activeJob, tier, slotBase + suffix);
+    }
+    l.path = newPath;
+    l.img = new Image();
+    l.img.src = newPath + '?v=' + Date.now();
+    l.img.onload = () => render();
+    l.img.onerror = () => render();
+  });
+
+  loadLayersFromStorage();
+  updateWeaponDropdownOptions();
+  updateUI();
+  render();
+}
+
+// ─── INITIALIZATION ON LOAD ──────────────────────────────────────────────────
+// Setup button handlers
+document.getElementById('lockBtn').onclick = () => {
+  if (!selectedLayer) return;
+  selectedLayer.locked = !selectedLayer.locked;
+  if (selectedLayer.locked) {
+    document.getElementById('calibrationPanel').style.display = 'none';
+    selectedLayer = null;
+  } else {
+    updateLockBtn();
+    updateFlipBtns();
+  }
+  updateUI();
+  saveLayersToStorage();
+};
+
+document.getElementById('resetBtn').onclick = () => {
+  if (!selectedLayer) return;
+  if (confirm(`Reset ${selectedLayer.name} coordinates to default?`)) {
+    if (selectedLayer.defaultCoords) {
+      Object.assign(selectedLayer, selectedLayer.defaultCoords);
+    }
+    selectedLayer.flipX = false;
+    selectedLayer.flipY = false;
+    startCalibration(selectedLayer);
+    saveLayersToStorage();
+  }
+};
+
+document.getElementById('flipHBtn').onclick = () => {
+  if (!selectedLayer || selectedLayer.locked) return;
+  selectedLayer.flipX = !selectedLayer.flipX;
+  updateFlipBtns(); render(); saveLayersToStorage();
+};
+
+document.getElementById('flipVBtn').onclick = () => {
+  if (!selectedLayer || selectedLayer.locked) return;
+  selectedLayer.flipY = !selectedLayer.flipY;
+  updateFlipBtns(); render(); saveLayersToStorage();
+};
+
+document.getElementById('copyCoordsBtn').onclick = () => {
+  const text = document.getElementById('coords').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    alert('Coordinates copied to clipboard!');
+  });
+};
+
+document.getElementById('saveToKitabBtn').onclick = () => {
+  const text = document.getElementById('coords').textContent;
+  const filename = `lv${activeTier}-arctechnician-armorset-calib.md`;
+  
+  const fileContent = `# Kitab Sakti Kalibrasi Mecha Arctron Technician (LV${activeTier} Set)\n\n` +
+                      `> Auto-generated from Arctron Dressing Room on ${new Date().toLocaleString()}\n\n` +
+                      `## Master Coordinate Presets\n\n\`\`\`javascript\n${text}\n\`\`\`\n\n` +
+                      `## Metadata\n` +
+                      `- **Job**: Technician\n` +
+                      `- **Tier**: LV${activeTier}\n` +
+                      `- **Race**: Arctron\n` +
+                      `- **Base Skin**: /assets/arctron/arctron_technician.png\n`;
+
+  const blob = new Blob([fileContent], { type: 'text/markdown' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  a.click();
+  
+  navigator.clipboard.writeText(text).catch(() => {});
+  alert(`Saved as ${filename} and copied to clipboard!`);
+};
+
+document.querySelectorAll('.tier-sub-btn').forEach(btn => {
+  btn.onclick = () => switchTier(parseInt(btn.dataset.tier));
+});
+
+document.getElementById('weaponSelect').addEventListener('change', (e) => {
+  const val = e.target.value;
+  const weaponLayer = layers.find(l => l.slot === 'weapon');
+  if (weaponLayer) {
+    if (val === 'none') {
+      weaponLayer.visible = false;
+    } else {
+      weaponLayer.visible = true;
+      weaponLayer.path = `/assets/weapons/${val}`;
+      weaponLayer.img.src = weaponLayer.path + '?v=' + Date.now();
+    }
+    saveLayersToStorage();
+    render();
+  }
+});
+
+document.getElementById('blueprintToggle').onchange = render;
+
+// Import Modal Event Listeners
+const importModal = document.getElementById('importModal');
+const importTextArea = document.getElementById('importTextArea');
+const presetSearchInput = document.getElementById('presetSearchInput');
+
+document.getElementById('importCoordsBtn').onclick = () => {
+  importTextArea.value = '';
+  presetSearchInput.value = '';
+  renderPresetList('');
+  importModal.style.display = 'flex';
+};
+
+presetSearchInput.oninput = (e) => renderPresetList(e.target.value);
+
+document.getElementById('closeImportBtn').onclick = () => {
+  importModal.style.display = 'none';
+};
+
+document.getElementById('applyImportBtn').onclick = () => {
+  const text = importTextArea.value.trim();
+  if (!text) { alert('Please paste some valid presets first!'); return; }
+  try {
+    const startIdx = text.indexOf('{');
+    if (startIdx === -1) throw new Error("Could not find opening brace '{'");
+    const parsed = new Function('return ' + text.substring(startIdx))();
+    if (typeof parsed !== 'object' || parsed === null) throw new Error('Parsed result is not a valid object.');
+    applyPresetCoords(parsed);
+  } catch (err) {
+    alert('Import failed: ' + err.message);
+  }
+};
+
+// Initialize layers and load storage values before firing image loads
+loadLayersFromStorage();
+updateWeaponDropdownOptions();
+
+// Initialize layer image objects
+layers.forEach(l => {
+  l.img = new Image();
+  l.img.onload = () => render();
+  l.img.src = l.path + '?v=' + Date.now();
+});
+
+// Setup and load mecha base, blueprint, and skin
+charBaseImg.onload = () => { charBaseLoaded = true; render(); };
+charBaseImg.src = JOB_SKINS[activeJob];
+
+blueprintImg.onload = () => { blueprintLoaded = true; render(); };
+blueprintImg.src = JOB_BLUEPRINTS[activeJob];
+
+baseImg.onload = () => { baseLoaded = true; primeSpriteMask(); render(); };
+baseImg.src = JOB_BASE[activeJob];
+
+updateUI();
+render();
+</script>
+
+</body>
+</html>

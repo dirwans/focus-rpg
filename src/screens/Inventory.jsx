@@ -393,13 +393,13 @@ export default function Inventory() {
                         { slotKey: 'amulet1', label: 'AM1', svgIcon: amuletSvg, top: '2%', left: '6%', width: 79 },
                         { slotKey: 'amulet2', label: 'AM2', svgIcon: amuletSvg, top: '17%', left: '6%', width: 79 },
                         { slotKey: 'gloves_r', label: 'GLV_R', svgIcon: glovesSvg, top: '32%', left: '6%', width: 79 },
-                        { slotKey: 'shield', label: 'SHD', svgIcon: shieldSvg, top: '47%', left: '6%', width: 79 },
+                        { slotKey: 'weapon', label: 'WPN', svgIcon: weaponSvg, top: '47%', left: '6%', width: 79 },
                         { slotKey: 'ring1', label: 'RG1', svgIcon: ringSvg, top: '62%', left: '6%', width: 63 },
 
                         { slotKey: 'mantle', label: 'CPE', svgIcon: mantleSvg, top: '2%', left: '67.7%', width: 79 },
                         { slotKey: 'ascension_arms', label: 'ARES', svgIcon: aresSvg, top: '17%', left: '67.7%', width: 79 },
                         { slotKey: 'gloves_l', label: 'GLV_L', svgIcon: glovesSvg, top: '32%', left: '67.7%', width: 79 },
-                        { slotKey: 'weapon', label: 'WPN', svgIcon: weaponSvg, top: '47%', left: '67.7%', width: 79 },
+                        { slotKey: 'shield', label: 'SHD', svgIcon: shieldSvg, top: '47%', left: '67.7%', width: 79 },
                         { slotKey: 'ring2', label: 'RG2', svgIcon: ringSvg, top: '62%', left: '73%', width: 63 },
 
                         { slotKey: 'helmet', label: 'HELM', svgIcon: helmetSvg, top: '2%', left: '34.2%', width: 95 },
