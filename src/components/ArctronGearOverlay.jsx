@@ -34,7 +34,7 @@ const RANGER_POINTS = {
     { x: -0.162, y: 0.417, ax: 0.55, ay: 0.41, size: 0.245, rot: -1, z: 5, scaleX: 1.130, scaleY: 1.220, color: '#34d399', label: 'glove_r', splitSuffix: '_r' }
   ],
   shield: [{ x: 0.182, y: 0.503, ax: 0.5, ay: 0.5, size: 0.457, rot: 0, z: 7, color: '#fb923c' }],
-  weapon: [{ x: -0.081, y: 0.556, ax: 0.52, ay: 0.43, size: 0.401, rot: 180, z: 4, color: '#f87171' }],
+  weapon: [{ x: -0.080, y: 0.565, ax: 0.52, ay: 0.43, size: 0.401, rot: 180, z: 4, color: '#f87171' }],
   helmet: [{ x: -0.003, y: 0.103, ax: 0.49, ay: 0.63, size: 0.123, rot: 0, z: 5, scaleX: 0.900, scaleY: 1.105, color: '#f472b6' }]
 }
 
