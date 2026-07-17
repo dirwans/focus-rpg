@@ -1319,6 +1319,49 @@ app.get('/api/audit/all_data', (req, res) => {
   }
 })
 
+app.get('/api/game/gear_coords', (req, res) => {
+  try {
+    const coordsPath = join(__dirname, 'src', 'data', 'LOCK-GEARS-CALIBRATION.json')
+    if (existsSync(coordsPath)) {
+      const data = JSON.parse(readFileSync(coordsPath, 'utf8'))
+      res.json(data)
+    } else {
+      res.json({})
+    }
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to read coords' })
+  }
+})
+
+app.post('/api/audit/save_gear_coords', (req, res) => {
+  const { race, jobLineage, coords } = req.body
+  try {
+    const coordsPath = join(__dirname, 'src', 'data', 'LOCK-GEARS-CALIBRATION.json')
+    let current = {}
+    if (existsSync(coordsPath)) {
+      current = JSON.parse(readFileSync(coordsPath, 'utf8'))
+    }
+    
+    if (!current[race]) current[race] = {}
+    current[race][jobLineage] = coords
+    
+    writeFileSync(coordsPath, JSON.stringify(current, null, 2))
+    
+    // Broadcast via SSE to trigger instant update on all active clients
+    const payload = `data: ${JSON.stringify({ type: 'coord_update' })}\n\n`
+    for (const [username, set] of sseClients.entries()) {
+      for (const c of set) {
+        try { c.res.write(payload) } catch {}
+      }
+    }
+    
+    res.json({ success: true })
+  } catch (err) {
+    console.error('[API] Error saving gear coords:', err)
+    res.status(500).json({ error: 'Failed to save coords' })
+  }
+})
+
 app.post('/api/audit/submit', (req, res) => {
   const { pin, data, imageBase64, imageName } = req.body
   if (pin !== '12345') {

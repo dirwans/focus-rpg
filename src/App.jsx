@@ -265,6 +265,14 @@ export default function App() {
     return () => window.removeEventListener('beforeunload', onUnload)
   }, [user?.username])
 
+  // Fetch live gear calibration coordinates
+  useEffect(() => {
+    useGameStore.getState().fetchGearCoords()
+    const onCoordUpdate = () => useGameStore.getState().fetchGearCoords()
+    window.addEventListener('coord_update', onCoordUpdate)
+    return () => window.removeEventListener('coord_update', onCoordUpdate)
+  }, [])
+
   // Set data-faction dynamically on root element for theme styling
   useEffect(() => {
     if (player?.race) {

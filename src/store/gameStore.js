@@ -1161,12 +1161,24 @@ export const useGameStore = create(
       timer: initialTimer,
       battle: initialBattle,
       archons: null,
+      gearCoords: null,
       winnerRace: 'bionex', // Core War winner
       runnerUpRace: 'arctron',
       lastPlaceRace: 'celestra',
       screen: 'main',
       showRaceSelect: false,
       isScreenActive: true, // Idle/AFK System: true = Active Mode (screen in foreground), false = Idle Mode
+
+      fetchGearCoords: async () => {
+        try {
+          const API_BASE = import.meta.env.VITE_API_URL || ''
+          const res = await fetch(`${API_BASE}/api/game/gear_coords`)
+          if (res.ok) {
+            const data = await res.json()
+            set({ gearCoords: data })
+          }
+        } catch (e) { console.error('Failed to fetch gear coords', e) }
+      },
 
       // ── Navigation ──────────────────────────────────────
       setScreen: (screen) => set({ screen }),

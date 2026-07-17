@@ -1764,8 +1764,37 @@ document.getElementById('saveToKitabBtn').onclick = () => {
   a.download = filename;
   a.click();
   
-  navigator.clipboard.writeText(text).catch(() => {});
-  alert(`Saved as ${filename} and copied to clipboard!`);
+  navigator.clipboard.writeText(text).catch(err => {
+    console.warn("Could not copy to clipboard", err);
+  });
+
+  const coordsJson = {};
+  ['armor', 'pants', 'boots', 'gloves', 'shield', 'weapon', 'helmet'].forEach(slot => {
+    const slotLayers = layers.filter(l => l.slot === slot);
+    if (slotLayers.length > 0) {
+      coordsJson[slot] = slotLayers.map(l => {
+        const pt = { x: l.x, y: l.y, ax: l.ax, ay: l.ay, size: l.size, rot: l.rot, z: l.z || 1 };
+        if (l.scaleX !== undefined && l.scaleX !== 1.0) pt.scaleX = l.scaleX;
+        if (l.scaleY !== undefined && l.scaleY !== 1.0) pt.scaleY = l.scaleY;
+        if (l.flipX) pt.flipX = true;
+        if (l.flipY) pt.flipY = true;
+        if (l.label) pt.label = l.label;
+        if (l.splitSuffix) pt.splitSuffix = l.splitSuffix;
+        if (l.color) pt.color = l.color;
+        return pt;
+      });
+    }
+  });
+
+  fetch('/api/audit/save_gear_coords', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ race: 'arctron', jobLineage: 'ranger', coords: coordsJson })
+  }).then(res => res.json()).then(res => {
+    console.log('Realtime broadcast success:', res);
+  }).catch(e => console.error('Realtime broadcast failed:', e));
+
+  alert(`Saved as ${filename}, copied to clipboard, and broadcasted to Game!`);
 };
 
 document.querySelectorAll('.tier-sub-btn').forEach(btn => {

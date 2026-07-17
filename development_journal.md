@@ -16,7 +16,7 @@ Starting July 7, 2026, the following rules are enforced for all development and 
 
 ## 📅 Session Chronological Logs
 
-### 🎯 Milestone 187: Gear Overlay CSS Transform Sync & Calibration Flip Fixes [PENDING DEPLOYMENT]
+### 🎯 Milestone 187: Gear Overlay CSS Transform Sync & Calibration Flip Fixes [DEPLOYED]
 - **Bug Fix (`src/components/GearOverlay.jsx`)**: Fixed the CSS `transform` logic to match the Canvas rendering logic of the Dressing Room. Set `transformOrigin: '0 0'` and reordered the transform string (`rotate` -> `scale` -> `translate`) so that rotations and flips pivot around the anchor point correctly.
 - **Dressing Room Flip Persistence**:
   - `public/arctron-warrior.html`, `public/arctron-technician.html`, `public/arctron-ranger.html`: Updated `applyPresetCoords` to correctly copy and restore `flipX` and `flipY` properties from presets, preventing them from being reset on reload.
@@ -2107,7 +2107,8 @@ fdatabase.net/crafting/ 3-column UI layout.
 - **Local Material Assets Generation**: Replaced external RF Online hotlinks with AI-generated, high-fidelity 2.5D Mecha Anime style images for all Ore and Shard grades (Ignis, Virel, Kryos, Zephra, Umbrix) across Common, Rare, and Epic tiers. Tinted systematically via Python color matrix. Data structure updated to strictly use local /assets/materials/... paths.
 
 ### ?? Hotfix: Material Background & Tint Calibration [DEPLOYED]
-- **Background Removal**: The previous AI-generated material assets contained a fake checkerboard background which caused the Python script to tint them as solid color blocks. Ran embg on the user's reference sprite sheet (	opisshard-bottomisore.png) to extract pure alpha shard and ore.
+- **Background Removal**: The previous AI-generated material assets contained a fake checkerboard background which caused the Python script to tint them as solid color blocks. Ran 
+embg on the user's reference sprite sheet (	opisshard-bottomisore.png) to extract pure alpha shard and ore.
 - **Re-Generation**: Re-applied the element color tint matrix and grade glow to the true alpha sprites, resolving the opaque square issue and restoring the intended transparent crystal aesthetic for all 30 materials.
 
 ### ? Milestone 36: Neon Sprite Preservation System [DEPLOYED]
@@ -2354,10 +2355,12 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 
 ### Milestone 173: Paper Doll Broken Image & Scaling Fixes + APK Hydration Safety [DEPLOYED]
 - **Bug 1 (Broken Image)**: Weapon and Shield sprites on the Paper Doll threw 404 broken image icons because \PilotSprites.jsx\ incorrectly used a hardcoded fallback string if \item.image\ was null. 
-- **Fix 1 (\PilotSprites.jsx\)**: Imported \esolveItemImage\ from \gameStore.js\ to dynamically resolve accurate weapon/shield URLs, fixing the broken image bug.
+- **Fix 1 (\PilotSprites.jsx\)**: Imported \
+esolveItemImage\ from \gameStore.js\ to dynamically resolve accurate weapon/shield URLs, fixing the broken image bug.
 - **Bug 2 (Misaligned/Scaled Armor)**: The user reported armor/pants/boots were "pating pecototan" (messy/out of place) on the Celestra Warrior.
 - **Fix 2 (\spriteCalibrations.js\)**: Deleted erroneous random coordinates for \helmet, armor, pants, boots, gloves\ for \celestra_warrior_male\ which were causing extreme downscaling.
-- **Fix 3 (\PilotSprites.jsx\)**: Updated \enderLayer()\ to automatically assign \	op: 0, left: 0, width: 100%\ default style to all body composite layers to perfectly overlay the base sprite.
+- **Fix 3 (\PilotSprites.jsx\)**: Updated \
+enderLayer()\ to automatically assign \	op: 0, left: 0, width: 100%\ default style to all body composite layers to perfectly overlay the base sprite.
 - **Fix 4 (\PilotSprites.jsx\)**: Segregated styling rules using an \isStandalone\ flag to ensure weapons and shields (which are not composites) still receive center-weighted default coordinates.
 - **Fix 5 (\App.jsx\)**: Hardened \player.inventory\ hydration mapping with a null/truthy check (\i && raceMap[i.race]\) to prevent silent sparse-array TypeErrors that crash the Android WebView (blank screen) upon login.
 
@@ -2394,7 +2397,9 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
 ### Milestone 176: Male-Specific Gear AI Generation [DEPLOYED]
 - **Generation**: Utilized AI Image Generator to create 5 hyperrealistic 2.5D anime mecha gear assets (Helmet, Armor, Pants, Boots, Gloves) specifically for the Celestra Male Warrior Lv1.
 - **Processing**: Used a new Python script (\process_composite.py\) to strip backgrounds without cropping the bounding box, preserving perfect 320x320 alignment.
-- **Integration**: Updated \gameStore.js\ (\esolveItemImage\ & \esolveArmorSetImage\) and \PilotSprites.jsx\ to intelligently detect \playerGender\ and route Male Celestra Warriors to a new isolated asset directory: \public/assets/celestra/male/\ using the \_male.png\ suffix, ensuring the original default assets remain 100% untouched.
+- **Integration**: Updated \gameStore.js\ (\
+esolveItemImage\ & \
+esolveArmorSetImage\) and \PilotSprites.jsx\ to intelligently detect \playerGender\ and route Male Celestra Warriors to a new isolated asset directory: \public/assets/celestra/male/\ using the \_male.png\ suffix, ensuring the original default assets remain 100% untouched.
 
 ### Milestone 182: DragonBones Integration & Legacy Paper Doll Cleanup [DEPLOYED]
 - **Legacy Cleanup**:
@@ -2467,3 +2472,10 @@ octyrna, causing lower-level versions (Lv.32, 42, 55) to receive the intense dro
   - The active character preview in the game's Character Tab (`PilotSprites.jsx`) is currently disconnected from the gear overlay rendering (`return baseSprite` directly) to keep it clean and display only the mecha base chassis, while the Dressing Room sandbox remains fully functional for coordinate tweaking and preset exporting.
 
 
+
+### ?? Milestone 188: Real-Time Dynamic Calibration Bridge [DEPLOYED]
+- **Centralized Coordinate Storage**: Extracted all hardcoded gear points into src/data/LOCK-GEARS-CALIBRATION.json.
+- **Live Reload Prevention (Anti-Refresh)**: Updated AGENTS.md to protect LOCK-GEARS-CALIBRATION.json and Dressing Room HTML files. AI is restricted to READ-only for the calibration file and WRITE-only for script changes upon explicit permission, ensuring users retain sole ownership of their unsaved calibrations.
+- **Backend API**: Added POST /api/audit/save_gear_coords in server.js with SSE broadcast to push live updates.
+- **Game Client Live Updates**: Modified App.jsx, gameStore.js, and saveSync.js to fetch new coords instantly upon receiving coord_update SSE event, decoupling the game from Vite build requirements for calibration data.
+- **Dressing Room Trigger**: Updated all rctron-*.html files so that clicking 'Save to Kitab Sakti' posts data directly to the server, instantly syncing it across all active Game clients without a PM2 restart.

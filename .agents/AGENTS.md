@@ -11,3 +11,9 @@ Setiap kali melakukan pemeliharaan kode (maintenance), pembersihan file (cleanup
 
 # Communication Rules
 - **Plan Presentation**: Jangan pernah menyuruh User untuk membaca file `.md` (seperti `implementation_plan.md`). Selalu rangkum dan tampilkan isi rencana (plan) atau pertanyaan secara langsung di dalam pesan chat/balasan.
+
+# AI Modification & Anti-Refresh Rules
+- **LOCK-GEARS-CALIBRATION (Anti-Refresh)**: File `src/data/LOCK-GEARS-CALIBRATION.json` dan semua file HTML Dressing Room (`arctron-warrior.html`, `arctron-ranger.html`, dll) **DILARANG KERAS** diedit atau dimodifikasi oleh AI tanpa izin eksplisit dari User.
+- **HAK AKSES**: Semua AI/IDE HANYA DIIZINKAN untuk READ (membaca) `LOCK-GEARS-CALIBRATION.json`. WRITE (menulis/mengedit) hanya diperbolehkan JIKA diberi izin, dan HANYA untuk mengubah logika script/codingan, BUKAN angka kalibrasi.
+- **KEPEMILIKAN KALIBRASI**: Jika ada kesalahan kalibrasi, itu murni kesalahan User. HANYA User yang berhak melakukan UNLOCK dan membenarkan angka kalibrasi tersebut lewat browser.
+- **ALASAN**: Memodifikasi file-file tersebut akan memicu Vite Hot-Reload (hard-refresh) yang dapat MENGHAPUS pekerjaan kalibrasi User yang belum di-save (unsaved work) di dalam browser. Jika ada permintaan perubahan pada sistem kalibrasi, pastikan User sudah selesai melakukan kalibrasi sebelum mengeksekusi edit.

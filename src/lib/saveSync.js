@@ -17,8 +17,13 @@ export function subscribeSave(onUpdate) {
   const es = new EventSource(`${API_BASE}/api/save/stream?token=${encodeURIComponent(token)}&cid=${CLIENT_ID}`)
   es.onmessage = (e) => {
     try {
-      const gameState = JSON.parse(e.data)
-      if (gameState) onUpdate(gameState)
+      const payload = JSON.parse(e.data)
+      if (payload && payload.type === 'coord_update') {
+        // Dispatch custom event to trigger coordinate refetch
+        window.dispatchEvent(new Event('coord_update'))
+        return
+      }
+      if (payload) onUpdate(payload)
     } catch (err) {
       console.warn('[saveSync] SSE parse fail', err)
     }
