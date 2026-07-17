@@ -16,6 +16,13 @@ Starting July 7, 2026, the following rules are enforced for all development and 
 
 ## 📅 Session Chronological Logs
 
+### 🎯 Milestone 187: Gear Overlay CSS Transform Sync & Calibration Flip Fixes [PENDING DEPLOYMENT]
+- **Bug Fix (`src/components/GearOverlay.jsx`)**: Fixed the CSS `transform` logic to match the Canvas rendering logic of the Dressing Room. Set `transformOrigin: '0 0'` and reordered the transform string (`rotate` -> `scale` -> `translate`) so that rotations and flips pivot around the anchor point correctly.
+- **Dressing Room Flip Persistence**:
+  - `public/arctron-warrior.html`, `public/arctron-technician.html`, `public/arctron-ranger.html`: Updated `applyPresetCoords` to correctly copy and restore `flipX` and `flipY` properties from presets, preventing them from being reset on reload.
+- **Game Engine Preset Integration (`src/components/ArctronGearOverlay.jsx`)**: Updated the dynamic weapon overrides (Warrior vs Ranger) to copy `flipX` and `flipY` from the reference preset to the current gear point.
+- **Ranger Weapon Flip Fix (`public/arctron-ranger.html`, `lv1-arcranger-armorset-calib.md`, `ArctronGearOverlay.jsx`)**: Added `flipY: true` to the Ranger weapon preset to ensure the rifle correctly faces right-side up after being rotated 180 degrees.
+
 ### 🛠️ Milestone 186: Arctron Armor Set Path Resolver Fix [DEPLOYED]
 - **Bug Fix (`src/store/gameStore.js`)**: Updated `resolveArmorSetImage` to use folder-based paths `/assets/arctron/def_${lineage}_armor_set_lv${tier}/${slot}.png` for Arctron instead of the old flat path format, resolving broken gear images on UI and paper dolls.
 - **Cache Bust (`src/store/gameStore.js`)**: Bumped cache version query parameter from `v=6` to `v=7` to force immediate reload of the new Arctron armor images.

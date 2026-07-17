@@ -1462,20 +1462,38 @@ function updateUI() {
   // Display master coordinate output box
   const coordsBox = document.getElementById('coords');
   if (coordsBox) {
+    const formatLayer = (l) => {
+      let parts = [];
+      parts.push(`x: ${l.x.toFixed(3)}`);
+      parts.push(`y: ${l.y.toFixed(3)}`);
+      parts.push(`ax: ${l.ax.toFixed(2)}`);
+      parts.push(`ay: ${l.ay.toFixed(2)}`);
+      parts.push(`size: ${l.size.toFixed(3)}`);
+      parts.push(`rot: ${l.rot}`);
+      parts.push(`z: ${l.z || 1}`);
+      if (l.scaleX !== undefined && l.scaleX !== 1.0) parts.push(`scaleX: ${l.scaleX.toFixed(3)}`);
+      if (l.scaleY !== undefined && l.scaleY !== 1.0) parts.push(`scaleY: ${l.scaleY.toFixed(3)}`);
+      if (l.flipX) parts.push(`flipX: true`);
+      if (l.flipY) parts.push(`flipY: true`);
+      if (l.label) parts.push(`label: '${l.label}'`);
+      if (l.splitSuffix) parts.push(`splitSuffix: '${l.splitSuffix}'`);
+      return `{ ${parts.join(', ')} }`;
+    };
+
     let out = `const GEAR_POINTS = {\n`;
-    out += `  armor:  [{ x: ${layers.find(l => l.slot === 'armor').x.toFixed(3)}, y: ${layers.find(l => l.slot === 'armor').y.toFixed(3)}, ax: ${layers.find(l => l.slot === 'armor').ax.toFixed(2)}, ay: ${layers.find(l => l.slot === 'armor').ay.toFixed(2)}, size: ${layers.find(l => l.slot === 'armor').size.toFixed(3)}, rot: ${layers.find(l => l.slot === 'armor').rot}, z: 1 }],\n`;
-    out += `  pants:  [{ x: ${layers.find(l => l.slot === 'pants').x.toFixed(3)}, y: ${layers.find(l => l.slot === 'pants').y.toFixed(3)}, ax: ${layers.find(l => l.slot === 'pants').ax.toFixed(2)}, ay: ${layers.find(l => l.slot === 'pants').ay.toFixed(2)}, size: ${layers.find(l => l.slot === 'pants').size.toFixed(3)}, rot: ${layers.find(l => l.slot === 'pants').rot}, z: 2 }],\n`;
+    out += `  armor:  [${formatLayer(layers.find(l => l.slot === 'armor'))}],\n`;
+    out += `  pants:  [${formatLayer(layers.find(l => l.slot === 'pants'))}],\n`;
     out += `  boots: [\n`;
-    out += `    { x: ${layers.find(l => l.slot === 'boots_l').x.toFixed(3)}, y: ${layers.find(l => l.slot === 'boots_l').y.toFixed(3)}, ax: ${layers.find(l => l.slot === 'boots_l').ax.toFixed(2)}, ay: ${layers.find(l => l.slot === 'boots_l').ay.toFixed(2)}, size: ${layers.find(l => l.slot === 'boots_l').size.toFixed(3)}, rot: ${layers.find(l => l.slot === 'boots_l').rot}, z: ${layers.find(l => l.slot === 'boots_l').z}, scaleX: ${layers.find(l => l.slot === 'boots_l').scaleX.toFixed(3)}, scaleY: ${layers.find(l => l.slot === 'boots_l').scaleY.toFixed(3)}, label: 'boot_l', splitSuffix: '_l' },\n`;
-    out += `    { x: ${layers.find(l => l.slot === 'boots_r').x.toFixed(3)}, y: ${layers.find(l => l.slot === 'boots_r').y.toFixed(3)}, ax: ${layers.find(l => l.slot === 'boots_r').ax.toFixed(2)}, ay: ${layers.find(l => l.slot === 'boots_r').ay.toFixed(2)}, size: ${layers.find(l => l.slot === 'boots_r').size.toFixed(3)}, rot: ${layers.find(l => l.slot === 'boots_r').rot}, z: ${layers.find(l => l.slot === 'boots_r').z}, scaleX: ${layers.find(l => l.slot === 'boots_r').scaleX.toFixed(3)}, scaleY: ${layers.find(l => l.slot === 'boots_r').scaleY.toFixed(3)}, label: 'boot_r', splitSuffix: '_r' }\n`;
+    out += `    ${formatLayer(layers.find(l => l.slot === 'boots_l'))},\n`;
+    out += `    ${formatLayer(layers.find(l => l.slot === 'boots_r'))}\n`;
     out += `  ],\n`;
     out += `  gloves: [\n`;
-    out += `    { x: ${layers.find(l => l.slot === 'gloves_l').x.toFixed(3)}, y: ${layers.find(l => l.slot === 'gloves_l').y.toFixed(3)}, ax: ${layers.find(l => l.slot === 'gloves_l').ax.toFixed(2)}, ay: ${layers.find(l => l.slot === 'gloves_l').ay.toFixed(2)}, size: ${layers.find(l => l.slot === 'gloves_l').size.toFixed(3)}, rot: ${layers.find(l => l.slot === 'gloves_l').rot}, z: ${layers.find(l => l.slot === 'gloves_l').z}, scaleY: ${layers.find(l => l.slot === 'gloves_l').scaleY.toFixed(3)}, label: 'glove_l', splitSuffix: '_l' },\n`;
-    out += `    { x: ${layers.find(l => l.slot === 'gloves_r').x.toFixed(3)}, y: ${layers.find(l => l.slot === 'gloves_r').y.toFixed(3)}, ax: ${layers.find(l => l.slot === 'gloves_r').ax.toFixed(2)}, ay: ${layers.find(l => l.slot === 'gloves_r').ay.toFixed(2)}, size: ${layers.find(l => l.slot === 'gloves_r').size.toFixed(3)}, rot: ${layers.find(l => l.slot === 'gloves_r').rot}, z: ${layers.find(l => l.slot === 'gloves_r').z}, scaleX: ${layers.find(l => l.slot === 'gloves_r').scaleX.toFixed(3)}, scaleY: ${layers.find(l => l.slot === 'gloves_r').scaleY.toFixed(3)}, label: 'glove_r', splitSuffix: '_r' }\n`;
+    out += `    ${formatLayer(layers.find(l => l.slot === 'gloves_l'))},\n`;
+    out += `    ${formatLayer(layers.find(l => l.slot === 'gloves_r'))}\n`;
     out += `  ],\n`;
-    out += `  shield: [{ x: ${layers.find(l => l.slot === 'shield').x.toFixed(3)}, y: ${layers.find(l => l.slot === 'shield').y.toFixed(3)}, ax: ${layers.find(l => l.slot === 'shield').ax.toFixed(2)}, ay: ${layers.find(l => l.slot === 'shield').ay.toFixed(2)}, size: ${layers.find(l => l.slot === 'shield').size.toFixed(3)}, rot: ${layers.find(l => l.slot === 'shield').rot}, z: ${layers.find(l => l.slot === 'shield').z} }],\n`;
-    out += `  weapon: [{ x: ${layers.find(l => l.slot === 'weapon').x.toFixed(3)}, y: ${layers.find(l => l.slot === 'weapon').y.toFixed(3)}, ax: ${layers.find(l => l.slot === 'weapon').ax.toFixed(2)}, ay: ${layers.find(l => l.slot === 'weapon').ay.toFixed(2)}, size: ${layers.find(l => l.slot === 'weapon').size.toFixed(3)}, rot: ${layers.find(l => l.slot === 'weapon').rot}, z: ${layers.find(l => l.slot === 'weapon').z}${layers.find(l => l.slot === 'weapon').scaleX !== 1.0 || layers.find(l => l.slot === 'weapon').scaleY !== 1.0 ? `, scaleX: ${layers.find(l => l.slot === 'weapon').scaleX.toFixed(3)}, scaleY: ${layers.find(l => l.slot === 'weapon').scaleY.toFixed(3)}` : ''} }],\n`;
-    out += `  helmet: [{ x: ${layers.find(l => l.slot === 'helmet').x.toFixed(3)}, y: ${layers.find(l => l.slot === 'helmet').y.toFixed(3)}, ax: ${layers.find(l => l.slot === 'helmet').ax.toFixed(2)}, ay: ${layers.find(l => l.slot === 'helmet').ay.toFixed(2)}, size: ${layers.find(l => l.slot === 'helmet').size.toFixed(3)}, rot: ${layers.find(l => l.slot === 'helmet').rot}, z: ${layers.find(l => l.slot === 'helmet').z}, scaleX: ${layers.find(l => l.slot === 'helmet').scaleX.toFixed(3)}, scaleY: ${layers.find(l => l.slot === 'helmet').scaleY.toFixed(3)} }]\n`;
+    out += `  shield: [${formatLayer(layers.find(l => l.slot === 'shield'))}],\n`;
+    out += `  weapon: [${formatLayer(layers.find(l => l.slot === 'weapon'))}],\n`;
+    out += `  helmet: [${formatLayer(layers.find(l => l.slot === 'helmet'))}]\n`;
     out += `};`;
     coordsBox.textContent = out;
   }
@@ -1554,42 +1572,33 @@ function updateFlipBtns() {
 
 function applyPresetCoords(parsed, silent = false) {
   let loadedCount = 0;
-  if (parsed.armor && parsed.armor[0]) {
-    const target = layers.find(l => l.slot === 'armor');
-    if (target) { Object.assign(target, parsed.armor[0]); loadedCount++; }
-  }
-  if (parsed.pants && parsed.pants[0]) {
-    const target = layers.find(l => l.slot === 'pants');
-    if (target) { Object.assign(target, parsed.pants[0]); loadedCount++; }
-  }
+  const applyToLayer = (target, source) => {
+    if (!target || !source) return;
+    target.flipX = source.flipX || false;
+    target.flipY = source.flipY || false;
+    target.scaleX = source.scaleX !== undefined ? source.scaleX : 1.0;
+    target.scaleY = source.scaleY !== undefined ? source.scaleY : 1.0;
+    Object.assign(target, source);
+    loadedCount++;
+  };
+
+  if (parsed.armor && parsed.armor[0]) { applyToLayer(layers.find(l => l.slot === 'armor'), parsed.armor[0]); }
+  if (parsed.pants && parsed.pants[0]) { applyToLayer(layers.find(l => l.slot === 'pants'), parsed.pants[0]); }
   if (parsed.boots) {
-    const boot_l = parsed.boots.find(b => b.label === 'boot_l' || b.splitSuffix === '_l');
-    const boot_r = parsed.boots.find(b => b.label === 'boot_r' || b.splitSuffix === '_r');
-    const target_l = layers.find(l => l.slot === 'boots_l');
-    const target_r = layers.find(l => l.slot === 'boots_r');
-    if (boot_l && target_l) { Object.assign(target_l, boot_l); loadedCount++; }
-    if (boot_r && target_r) { Object.assign(target_r, boot_r); loadedCount++; }
+    const bl = parsed.boots.find(b => b.label === 'boot_l' || b.splitSuffix === '_l');
+    const br = parsed.boots.find(b => b.label === 'boot_r' || b.splitSuffix === '_r');
+    applyToLayer(layers.find(l => l.slot === 'boots_l'), bl);
+    applyToLayer(layers.find(l => l.slot === 'boots_r'), br);
   }
   if (parsed.gloves) {
-    const glove_l = parsed.gloves.find(g => g.label === 'glove_l' || g.splitSuffix === '_l');
-    const glove_r = parsed.gloves.find(g => g.label === 'glove_r' || g.splitSuffix === '_r');
-    const target_l = layers.find(l => l.slot === 'gloves_l');
-    const target_r = layers.find(l => l.slot === 'gloves_r');
-    if (glove_l && target_l) { Object.assign(target_l, glove_l); loadedCount++; }
-    if (glove_r && target_r) { Object.assign(target_r, glove_r); loadedCount++; }
+    const gl = parsed.gloves.find(g => g.label === 'glove_l' || g.splitSuffix === '_l');
+    const gr = parsed.gloves.find(g => g.label === 'glove_r' || g.splitSuffix === '_r');
+    applyToLayer(layers.find(l => l.slot === 'gloves_l'), gl);
+    applyToLayer(layers.find(l => l.slot === 'gloves_r'), gr);
   }
-  if (parsed.shield && parsed.shield[0]) {
-    const target = layers.find(l => l.slot === 'shield');
-    if (target) { Object.assign(target, parsed.shield[0]); loadedCount++; }
-  }
-  if (parsed.weapon && parsed.weapon[0]) {
-    const target = layers.find(l => l.slot === 'weapon');
-    if (target) { Object.assign(target, parsed.weapon[0]); loadedCount++; }
-  }
-  if (parsed.helmet && parsed.helmet[0]) {
-    const target = layers.find(l => l.slot === 'helmet');
-    if (target) { Object.assign(target, parsed.helmet[0]); loadedCount++; }
-  }
+  if (parsed.shield && parsed.shield[0]) { applyToLayer(layers.find(l => l.slot === 'shield'), parsed.shield[0]); }
+  if (parsed.weapon && parsed.weapon[0]) { applyToLayer(layers.find(l => l.slot === 'weapon'), parsed.weapon[0]); }
+  if (parsed.helmet && parsed.helmet[0]) { applyToLayer(layers.find(l => l.slot === 'helmet'), parsed.helmet[0]); }
   if (loadedCount === 0) {
     if (!silent) alert('No matching slot coordinates found.');
     return;
