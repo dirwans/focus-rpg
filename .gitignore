@@ -32,6 +32,8 @@ public/arctron-dressing.html
 public/bionex-dressing.html
 public/celestra-dressing.html
 public/*-dressing.html
+public/animation-lab.html
+public/arctron-animator.html
 
 # Server data (user saves, sessions) — jangan di-commit
 # NOTE: /data/ (root only) not src/data/ (game data must be committed)

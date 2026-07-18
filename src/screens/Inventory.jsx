@@ -383,31 +383,30 @@ export default function Inventory() {
                       width: 'calc(100% - 32px)',
                       maxWidth: 300,
                       aspectRatio: '394 / 702',
-                      background: 'url("/assets/arctron/arctron_warrior_silhoutte.png") no-repeat center / contain',
+                      background: 'none',
                       overflow: 'visible',
                     }}>
                       {[
-                        // width is a FIXED px value (not a % of the backdrop) so slot frames
-                        // stay the same physical size even as the mannequin backdrop shrinks —
-                        // only top/left (%) track the backdrop's own scale.
-                        { slotKey: 'amulet1', label: 'AM1', svgIcon: amuletSvg, top: '2%', left: '6%', width: 79 },
-                        { slotKey: 'amulet2', label: 'AM2', svgIcon: amuletSvg, top: '17%', left: '6%', width: 79 },
-                        { slotKey: 'gloves_r', label: 'GLV_R', svgIcon: glovesSvg, top: '32%', left: '6%', width: 79 },
-                        { slotKey: 'weapon', label: 'WPN', svgIcon: weaponSvg, top: '47%', left: '6%', width: 79 },
-                        { slotKey: 'ring1', label: 'RG1', svgIcon: ringSvg, top: '62%', left: '6%', width: 63 },
-
-                        { slotKey: 'mantle', label: 'CPE', svgIcon: mantleSvg, top: '2%', left: '67.7%', width: 79 },
-                        { slotKey: 'ascension_arms', label: 'ARES', svgIcon: aresSvg, top: '17%', left: '67.7%', width: 79 },
-                        { slotKey: 'gloves_l', label: 'GLV_L', svgIcon: glovesSvg, top: '32%', left: '67.7%', width: 79 },
-                        { slotKey: 'shield', label: 'SHD', svgIcon: shieldSvg, top: '47%', left: '67.7%', width: 79 },
-                        { slotKey: 'ring2', label: 'RG2', svgIcon: ringSvg, top: '62%', left: '73%', width: 63 },
-
+                        // Row 1 (Top 2% - Amulets, Helm, ARES)
+                        { slotKey: 'amulet1', label: 'AM1', svgIcon: amuletSvg, top: '2%', left: '6%', width: 63 },
+                        { slotKey: 'amulet2', label: 'AM2', svgIcon: amuletSvg, top: '2%', left: '19.5%', width: 63 },
                         { slotKey: 'helmet', label: 'HELM', svgIcon: helmetSvg, top: '2%', left: '34.2%', width: 95 },
-                        { slotKey: 'armor', label: 'ARM', svgIcon: armorSvg, top: '17%', left: '34.2%', width: 95 },
-                        { slotKey: 'pants', label: 'PNT', svgIcon: pantsSvg, top: '35%', left: '34.2%', width: 95 },
+                        { slotKey: 'ascension_arms', label: 'ARES', svgIcon: aresSvg, top: '2%', left: '67.7%', width: 63 },
 
-                        { slotKey: 'boots_r', label: 'BTS_R', svgIcon: bootsSvg, top: '85%', left: '13.2%', width: 79 },
-                        { slotKey: 'boots_l', label: 'BTS_L', svgIcon: bootsSvg, top: '85%', left: '61.7%', width: 79 },
+                        // Row 2 (Top 20% - Weapon, Armor, Shield)
+                        { slotKey: 'weapon', label: 'WPN', svgIcon: weaponSvg, top: '20%', left: '6%', width: 95 },
+                        { slotKey: 'armor', label: 'ARM', svgIcon: armorSvg, top: '20%', left: '34.2%', width: 95 },
+                        { slotKey: 'shield', label: 'SHD', svgIcon: shieldSvg, top: '20%', left: '67.7%', width: 95 },
+
+                        // Row 3 (Top 43% - Gloves, Pants, Cape/Mantle)
+                        { slotKey: 'gloves_l', label: 'GLOVES', svgIcon: glovesSvg, top: '43%', left: '6%', width: 95 },
+                        { slotKey: 'pants', label: 'PNT', svgIcon: pantsSvg, top: '43%', left: '34.2%', width: 95 },
+                        { slotKey: 'mantle', label: 'CAPE', svgIcon: mantleSvg, top: '43%', left: '67.7%', width: 95 },
+
+                        // Row 4 (Top 67% - Rings, Boots)
+                        { slotKey: 'ring1', label: 'RG1', svgIcon: ringSvg, top: '71%', left: '19.5%', width: 63 },
+                        { slotKey: 'boots_l', label: 'BOOTS', svgIcon: bootsSvg, top: '67%', left: '34.2%', width: 95 },
+                        { slotKey: 'ring2', label: 'RG2', svgIcon: ringSvg, top: '71%', left: '67.7%', width: 63 },
                       ].map(({ slotKey, label, svgIcon, top, left, width }) => (
                         <div key={slotKey} style={{ position: 'absolute', top, left, width, height: width }}>
                           {renderEquipSlot(slotKey, label, svgIcon, false, '100%', '100%', '1 / 1')}
