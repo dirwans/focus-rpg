@@ -48,7 +48,16 @@ export default function Inventory() {
             const weaponSvg = <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 17.5L3 6M17.5 14.5L6 3" /><path d="M13 3l8 8M19 19v-4M19 19h-4" /><path d="M5 5v4M5 5h4" /></svg>;
             const armorSvg = <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5L12 2z" /><path d="M12 6v10M8 9h8" /></svg>;
             const shieldSvg = <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>;
-            const glovesSvg = <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 10V8a3 3 0 0 0-6 0v2" /><path d="M14 10V6a2 2 0 0 0-4 0v4" /><path d="M10 10V5a2 2 0 0 0-4 0v5" /><path d="M6 10v7a6 6 0 0 0 12 0v-7" /></svg>;
+            const glovesSvg = <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M6 16V8.5a1.5 1.5 0 0 0-3 0V11" />
+              <path d="M9 16V6.5a1.5 1.5 0 0 0-3 0v9.5" />
+              <path d="M12 16V7.5a1.5 1.5 0 0 0-3 0v8.5" />
+              <path d="M2 13v3a4 4 0 0 0 8 0v-3" />
+              <path d="M18 16V8.5a1.5 1.5 0 0 1 3 0V11" />
+              <path d="M15 16V6.5a1.5 1.5 0 0 1 3 0v9.5" />
+              <path d="M12 16V7.5a1.5 1.5 0 0 1 3 0v8.5" />
+              <path d="M22 13v3a4 4 0 0 1-8 0v-3" />
+            </svg>;
             const pantsSvg = <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M6 2h12v7l-2 1v12h-3v-7h-2v7H8V10L6 9V2z" /></svg>;
             const mantleSvg = <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 3h16l-2 8 2 10-8-3-8 3 2-10L4 3z" /></svg>;
             const ringSvg = <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="14" r="6" /><path d="M9 8l3-5 3 5" /></svg>;
@@ -96,21 +105,19 @@ export default function Inventory() {
             const SLOT_BACKDROPS = {
               amulet1: "/assets/arctron/amulets/amu_arc_0.png",
               amulet2: "/assets/arctron/amulets/amu_arc_0.png",
-              gloves_l: "/assets/arctron/def_warrior_armor_set_lv1/gloves_l.png",
               shield: "/assets/arctron/shields/lv1arctronshielddefault.png",
               ring1: "/assets/arctron/rings/rng_arc_0.png",
               
               mantle: "/assets/arctron/def_warrior_armor_set_lv1/mantle.png",
               ascension_arms: "/assets/arctron/ARESlv32arctron.png",
-              gloves_r: "/assets/arctron/def_warrior_armor_set_lv1/gloves_r.png",
               weapon: "/assets/weapons/defallfactionslv1sword1.png",
               ring2: "/assets/arctron/rings/rng_arc_0.png",
               
               helmet: "/assets/arctron/def_warrior_armor_set_lv1/helmet.png",
               armor: "/assets/arctron/def_warrior_armor_set_lv1/armor.png",
               pants: "/assets/arctron/def_warrior_armor_set_lv1/pants.png",
-              boots_l: "/assets/arctron/def_warrior_armor_set_lv1/boots_l.png",
-              boots_r: "/assets/arctron/def_warrior_armor_set_lv1/boots_r.png",
+              gloves_l: "/assets/arctron/def_warrior_armor_set_lv1/gloves.png",
+              boots_l: "/assets/arctron/def_warrior_armor_set_lv1/boots.png",
             };
 
             const renderEquipSlot = (slotKey, label, svgIcon, isCircle = false, width = '100%', height = 'auto', aspectRatio = '1 / 1') => {
@@ -388,27 +395,27 @@ export default function Inventory() {
                     }}>
                       {[
                         // Row 1 (Top 2% - Amulets, Helm, ARES)
-                        { slotKey: 'amulet1', label: 'AM1', svgIcon: amuletSvg, top: '2%', left: '6%', width: 63 },
-                        { slotKey: 'amulet2', label: 'AM2', svgIcon: amuletSvg, top: '2%', left: '19.5%', width: 63 },
-                        { slotKey: 'helmet', label: 'HELM', svgIcon: helmetSvg, top: '2%', left: '34.2%', width: 95 },
-                        { slotKey: 'ascension_arms', label: 'ARES', svgIcon: aresSvg, top: '2%', left: '67.7%', width: 63 },
+                        { slotKey: 'amulet1', label: 'AM1', svgIcon: amuletSvg, top: '2%', left: '4%', width: '16%' },
+                        { slotKey: 'amulet2', label: 'AM2', svgIcon: amuletSvg, top: '2%', left: '21%', width: '16%' },
+                        { slotKey: 'helmet', label: 'HELM', svgIcon: helmetSvg, top: '2%', left: '38%', width: '24%' },
+                        { slotKey: 'ascension_arms', label: 'ARES', svgIcon: aresSvg, top: '2%', left: '80%', width: '16%' },
 
                         // Row 2 (Top 20% - Weapon, Armor, Shield)
-                        { slotKey: 'weapon', label: 'WPN', svgIcon: weaponSvg, top: '20%', left: '6%', width: 95 },
-                        { slotKey: 'armor', label: 'ARM', svgIcon: armorSvg, top: '20%', left: '34.2%', width: 95 },
-                        { slotKey: 'shield', label: 'SHD', svgIcon: shieldSvg, top: '20%', left: '67.7%', width: 95 },
+                        { slotKey: 'weapon', label: 'WPN', svgIcon: weaponSvg, top: '20%', left: '4%', width: '24%' },
+                        { slotKey: 'armor', label: 'ARM', svgIcon: armorSvg, top: '20%', left: '38%', width: '24%' },
+                        { slotKey: 'shield', label: 'SHD', svgIcon: shieldSvg, top: '20%', left: '72%', width: '24%' },
 
                         // Row 3 (Top 43% - Gloves, Pants, Cape/Mantle)
-                        { slotKey: 'gloves_l', label: 'GLOVES', svgIcon: glovesSvg, top: '43%', left: '6%', width: 95 },
-                        { slotKey: 'pants', label: 'PNT', svgIcon: pantsSvg, top: '43%', left: '34.2%', width: 95 },
-                        { slotKey: 'mantle', label: 'CAPE', svgIcon: mantleSvg, top: '43%', left: '67.7%', width: 95 },
+                        { slotKey: 'gloves_l', label: 'GLOVES', svgIcon: glovesSvg, top: '43%', left: '4%', width: '24%' },
+                        { slotKey: 'pants', label: 'PNT', svgIcon: pantsSvg, top: '43%', left: '38%', width: '24%' },
+                        { slotKey: 'mantle', label: 'CAPE', svgIcon: mantleSvg, top: '43%', left: '72%', width: '24%' },
 
                         // Row 4 (Top 67% - Rings, Boots)
-                        { slotKey: 'ring1', label: 'RG1', svgIcon: ringSvg, top: '71%', left: '19.5%', width: 63 },
-                        { slotKey: 'boots_l', label: 'BOOTS', svgIcon: bootsSvg, top: '67%', left: '34.2%', width: 95 },
-                        { slotKey: 'ring2', label: 'RG2', svgIcon: ringSvg, top: '71%', left: '67.7%', width: 63 },
+                        { slotKey: 'ring1', label: 'RG1', svgIcon: ringSvg, top: '71%', left: '21%', width: '16%' },
+                        { slotKey: 'boots_l', label: 'BOOTS', svgIcon: bootsSvg, top: '67%', left: '38%', width: '24%' },
+                        { slotKey: 'ring2', label: 'RG2', svgIcon: ringSvg, top: '71%', left: '80%', width: '16%' },
                       ].map(({ slotKey, label, svgIcon, top, left, width }) => (
-                        <div key={slotKey} style={{ position: 'absolute', top, left, width, height: width }}>
+                        <div key={slotKey} style={{ position: 'absolute', top, left, width, height: 'auto', aspectRatio: '1 / 1' }}>
                           {renderEquipSlot(slotKey, label, svgIcon, false, '100%', '100%', '1 / 1')}
                         </div>
                       ))}
