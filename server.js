@@ -1488,42 +1488,6 @@ app.post('/api/audit/save_monster', (req, res) => {
   }
 })
 
-function syncOreOrShardGroup(itemsFileContent, updatedItem) {
-  const match = (updatedItem.id || '').match(/^(ore|shard)_([a-z]+)_(common|uncommon|rare|epic|legendary|mythic)$/);
-  if (!match) return;
-
-  const itemType = match[1];      // 'ore' or 'shard'
-  const itemGrade = match[3];     // 'common', 'uncommon', etc.
-  const elements = ['ignis', 'kryos', 'virel', 'zephra', 'umbrix'];
-
-  // Sync in both items and materials arrays
-  const arraysToSync = [];
-  if (itemsFileContent && Array.isArray(itemsFileContent.items)) arraysToSync.push(itemsFileContent.items);
-  if (itemsFileContent && Array.isArray(itemsFileContent.materials)) arraysToSync.push(itemsFileContent.materials);
-  if (Array.isArray(itemsFileContent)) arraysToSync.push(itemsFileContent);
-
-  for (const arr of arraysToSync) {
-    for (const el of elements) {
-      const targetId = `${itemType}_${el}_${itemGrade}`;
-      if (targetId === updatedItem.id) continue;
-
-      const idx = arr.findIndex(i => i.id === targetId);
-      if (idx >= 0) {
-        arr[idx] = {
-          ...arr[idx],
-          name: updatedItem.name,
-          type: updatedItem.type,
-          rarity: updatedItem.rarity,
-          race: updatedItem.race,
-          level: updatedItem.level,
-          image: updatedItem.image,
-          description: updatedItem.description,
-          bonus: updatedItem.bonus
-        };
-      }
-    }
-  }
-}
 
 app.post('/api/audit/save_item_direct', (req, res) => {
   const { pin, category, subCategory, itemData } = req.body
@@ -1626,7 +1590,6 @@ app.post('/api/audit/save_item_direct', (req, res) => {
       updateRecursive(fileContent)
     }
 
-    syncOreOrShardGroup(fileContent, cleanData)
     writeFileSync(targetFile, JSON.stringify(fileContent, null, 2))
     res.json({ ok: true, message: 'Balancing stat berhasil disimpan langsung ke database!' })
   } catch (e) {
@@ -1721,7 +1684,6 @@ app.post('/api/audit/publish_draft', (req, res) => {
             obj.items.push(cleanDef);
           }
         }
-        syncOreOrShardGroup(obj, cleanDef)
         writeFileSync(p, JSON.stringify(obj, null, 2))
       }
     } else if (cat === 'gears') {
@@ -1969,9 +1931,6 @@ app.post('/api/audit/import_excel', (req, res) => {
       const finalResult = {
         items: Object.values(itemsMap),
         materials: Object.values(matsMap)
-      }
-      for (const item of finalResult.materials) {
-        syncOreOrShardGroup(finalResult, item)
       }
       saveJson('items.json', finalResult)
     }

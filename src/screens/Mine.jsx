@@ -29,13 +29,7 @@ const MINING_TOOLS = {
 
 
 
-const ORE_TYPES = [
-  { key: 'ignis',  name: 'Ignis',  color: '#ff4444', emoji: '🟥', shardEmoji: '🔴', shardSprite: "/assets/ignis_shard.png", oreSprite: "/assets/ignis_ore.png" },
-  { key: 'virel',  name: 'Virel',  color: '#4488ff', emoji: '🟦', shardEmoji: '🔵', shardSprite: "/assets/virel_shard.png", oreSprite: "/assets/virel_ore.png" },
-  { key: 'kryos',  name: 'Kryos',  color: '#44ff88', emoji: '🟩', shardEmoji: '🟢', shardSprite: "/assets/kryos_shard.png", oreSprite: "/assets/kryos_ore.png" },
-  { key: 'zephra', name: 'Zephra', color: '#ffcc00', emoji: '🟨', shardEmoji: '🟡', shardSprite: "/assets/zephra_shard.png", oreSprite: "/assets/zephra_ore.png" },
-  { key: 'umbrix', name: 'Umbrix', color: '#888888', emoji: '⬛', shardEmoji: '⚫', shardSprite: "/assets/umbrix_shard.png", oreSprite: "/assets/umbrix_ore.png" },
-]
+
 
 const MINE_FLOORS = [
   {
@@ -697,28 +691,35 @@ export default function Mine() {
               </div>
             </div>
 
-            {ORE_TYPES.map((ore) => {
-              const oreId   = `ore_${ore.key}_${processGrade}`
-              const shardId = `shard_${ore.key}_${processGrade}`
+            {(() => {
+              const oreId   = `ore_${processGrade}`
+              const shardId = `shard_${processGrade}`
               const ownedOre   = countInventoryItem(oreId)
               const ownedShard = countInventoryItem(shardId)
               const isOreEnough     = ownedOre >= 10
               const costCRD         = processGrade === 'common' ? 20000 : processGrade === 'rare' ? 50000 : 100000
               const isCreditsEnough = (player?.resources?.crd || 0) >= costCRD
+              
+              const gradeLabel = processGrade === 'common' ? 'Common' : processGrade === 'rare' ? 'Rare' : 'Epic';
+              const gradeCode = processGrade === 'common' ? 'C' : processGrade === 'rare' ? 'R' : 'E';
+              const color = processGrade === 'common' ? '#aaa' : processGrade === 'rare' ? '#4488ff' : '#8844ff';
+              const oreSprite = `/assets/materials/${processGrade}_ore.png?v=14`;
+              const shardSprite = `/assets/materials/${processGrade}_shard.png?v=14`;
+
               return (
-                <div key={ore.key} className="glass-panel cyber-panel" style={s.recipeCard}>
+                <div key={processGrade} className="glass-panel cyber-panel" style={s.recipeCard}>
                   <div style={s.recipeProduct}>
-                    <img src={ore.shardSprite} alt={ore.name} style={{ width: 42, height: 42, objectFit: 'contain', filter: 'drop-shadow(0 0 5px rgba(255,255,255,0.15))' }} />
+                    <img src={shardSprite} alt={`${gradeLabel} Shard`} style={{ width: 42, height: 42, objectFit: 'contain', filter: 'drop-shadow(0 0 5px rgba(255,255,255,0.15))' }} />
                     <div>
-                      <div style={{ ...s.recipeItemName, color: ore.color }}>{ore.name} Shard [{processGrade === 'common' ? 'C' : processGrade === 'rare' ? 'R' : 'E'}]</div>
+                      <div style={{ ...s.recipeItemName, color: color }}>{gradeLabel} Shard [{gradeCode}]</div>
                       <div style={s.recipeOwned}>Dimiliki: <span style={{ color: '#fff', fontWeight: 700 }}>{ownedShard}</span></div>
                     </div>
                   </div>
                   <div style={s.recipeIngredients}>
                     <div style={s.ingredientRow}>
                       <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                        <img src={ore.oreSprite} alt={ore.name} style={{ width: 20, height: 20, objectFit: 'contain' }} />
-                        {ore.name} Ore
+                        <img src={oreSprite} alt={`${gradeLabel} Ore`} style={{ width: 20, height: 20, objectFit: 'contain' }} />
+                        {gradeLabel} Ore
                       </span>
                       <span style={{ color: isOreEnough ? '#00ff88' : '#ff4444', fontWeight: 700 }}>{ownedOre} / 10</span>
                     </div>
@@ -730,13 +731,13 @@ export default function Mine() {
                   <button
                     disabled={!isOreEnough || !isCreditsEnough}
                     style={{ ...s.processBtn, opacity: (isOreEnough && isCreditsEnough) ? 1 : 0.4, cursor: (isOreEnough && isCreditsEnough) ? 'pointer' : 'not-allowed' }}
-                    onClick={() => processOreToShard(ore.key, processGrade)}
+                    onClick={() => processOreToShard(processGrade)}
                   >
                     PROCESS
                   </button>
                 </div>
               )
-            })}
+            })()}
           </div>
         </div>
       )}

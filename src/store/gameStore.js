@@ -1214,18 +1214,16 @@ export const useGameStore = create(
         const recipe = RECIPES[recipeId]
         if (!recipe) return { ok: false, msg: 'Unknown recipe' }
 
-        const SHARD_IDS = ['shard_ignis_epic','shard_virel_epic','shard_kryos_epic','shard_zephra_epic','shard_umbrix_epic']
         const inv = player.inventory
 
         // Check base material
         const baseCount = inv.filter(i => i.id === recipe.base).length
         if (baseCount < 1) return { ok: false, msg: 'Missing base material' }
 
-        // Check shards (need recipe.shards of EACH type)
-        for (const shardId of SHARD_IDS) {
-          const cnt = inv.filter(i => i.id === shardId).reduce((sum, it) => sum + (it.count || it.qty || 1), 0)
-          if (cnt < recipe.shards) return { ok: false, msg: `Need ${recipe.shards}x ${shardId}` }
-        }
+        // Check shards (need recipe.shards * 5 of generic epic shard)
+        const requiredShards = recipe.shards * 5
+        const cnt = inv.filter(i => i.id === 'shard_epic').reduce((sum, it) => sum + (it.count || it.qty || 1), 0)
+        if (cnt < requiredShards) return { ok: false, msg: `Need ${requiredShards}x Epic Shard (E)` }
 
         // Consume ingredients
         let newInv = [...inv]
@@ -1234,23 +1232,21 @@ export const useGameStore = create(
         newInv.splice(baseIdx, 1)
         
         // Remove shards using stack logic
-        for (const shardId of SHARD_IDS) {
-          let remaining = recipe.shards
-          newInv = newInv.map(i => {
-              if (i.id === shardId && remaining > 0) {
-                  const current = i.count || i.qty || 1
-                  if (current > remaining) {
-                      const updated = { ...i, count: current - remaining }
-                      remaining = 0
-                      return updated
-                  } else {
-                      remaining -= current
-                      return null // stack fully consumed
-                  }
-              }
-              return i
-          }).filter(Boolean)
-        }
+        let remaining = requiredShards
+        newInv = newInv.map(i => {
+            if (i.id === 'shard_epic' && remaining > 0) {
+                const current = i.count || i.qty || 1
+                if (current > remaining) {
+                    const updated = { ...i, count: current - remaining }
+                    remaining = 0
+                    return updated
+                } else {
+                    remaining -= current
+                    return null // stack fully consumed
+                }
+            }
+            return i
+        }).filter(Boolean)
 
         // Add legendary output
         const outputDef = allItems.find(i => i.id === recipeId)
@@ -1263,12 +1259,13 @@ export const useGameStore = create(
       },
 
       craftShard: (element, tier) => {
+         const actualTier = tier || element;
          const { player, addToInventory } = get()
-         const costCrd = tier === 'common' ? 10000 : tier === 'rare' ? 25000 : 50000;
+         const costCrd = actualTier === 'common' ? 10000 : actualTier === 'rare' ? 25000 : 50000;
          if (player.resources.crd < costCrd) return { ok: false, msg: 'Not enough CRD' }
          
-         const reqOreId = `ore_${element}_${tier}`
-         const targetShardId = `shard_${element}_${tier}`
+         const reqOreId = `ore_${actualTier}`
+         const targetShardId = `shard_${actualTier}`
          
          let totalOre = player.inventory.filter(i => i.id === reqOreId).reduce((s, i) => s + (i.count || i.qty || 1), 0)
          if (totalOre < 5) return { ok: false, msg: 'Need 5x Ore' }
@@ -1307,14 +1304,14 @@ export const useGameStore = create(
          if (player.resources.crd < costCrd) return { ok: false, msg: 'Not enough CRD' }
          
          const recipes = {
-             mat_arcanite_fury: [{id: 'shard_ignis_epic', req: 1}, {id: 'shard_virel_epic', req: 1}],
-             mat_arcanite_ruin: [{id: 'shard_ignis_epic', req: 2}],
-             mat_arcanite_spirit: [{id: 'shard_zephra_epic', req: 2}],
-             mat_arcanite_vital: [{id: 'shard_umbrix_epic', req: 2}],
-             mat_arcanite_guard: [{id: 'shard_kryos_epic', req: 2}],
-             mat_arcanite_precision: [{id: 'shard_zephra_epic', req: 1}, {id: 'shard_kryos_epic', req: 1}],
-             mat_arcanite_agility: [{id: 'shard_virel_epic', req: 2}],
-             mat_arcanite_focus: [{id: 'shard_ignis_epic', req: 1}, {id: 'shard_zephra_epic', req: 1}],
+             mat_arcanite_fury: [{id: 'shard_epic', req: 2}],
+             mat_arcanite_ruin: [{id: 'shard_epic', req: 2}],
+             mat_arcanite_spirit: [{id: 'shard_epic', req: 2}],
+             mat_arcanite_vital: [{id: 'shard_epic', req: 2}],
+             mat_arcanite_guard: [{id: 'shard_epic', req: 2}],
+             mat_arcanite_precision: [{id: 'shard_epic', req: 2}],
+             mat_arcanite_agility: [{id: 'shard_epic', req: 2}],
+             mat_arcanite_focus: [{id: 'shard_epic', req: 2}],
          }
          const reqs = recipes[arcaniteType]
          if (!reqs) return { ok: false, msg: 'Unknown arcanite type' }
@@ -1835,7 +1832,6 @@ export const useGameStore = create(
           pEpic   = 50 + epicBonus
         }
 
-        const oreTypes = ['ignis', 'virel', 'kryos', 'zephra', 'umbrix']
         let newInventory = [...player.inventory]
         const invSlots = player.inventorySlots || 100
         const mailbox = player.mailbox ? [...player.mailbox] : []
@@ -1844,7 +1840,6 @@ export const useGameStore = create(
         let mailCount = 0
 
         for (let i = 0; i < oreCount; i++) {
-          const type = oreTypes[Math.floor(Math.random() * oreTypes.length)]
           const roll = Math.random() * 100
           let grade = 'common'
           if (roll < pEpic) {
@@ -1853,7 +1848,7 @@ export const useGameStore = create(
             grade = 'rare'
           }
 
-          const itemId = `ore_${type}_${grade}`
+          const itemId = `ore_${grade}`
           const itemTemplate = itemsData.items.find(it => it.id === itemId)
           if (!itemTemplate) continue
 
@@ -1906,11 +1901,12 @@ export const useGameStore = create(
       }),
 
       processOreToShard: (recipeType, oreGrade) => set((s) => {
+        const actualGrade = oreGrade || recipeType;
         const { player } = s
-        const oreId = `ore_${recipeType}_${oreGrade}`
-        const shardId = `shard_${recipeType}_${oreGrade}`
+        const oreId = `ore_${actualGrade}`
+        const shardId = `shard_${actualGrade}`
 
-        const crdCost = oreGrade === 'common' ? 20000 : oreGrade === 'rare' ? 50000 : 100000
+        const crdCost = actualGrade === 'common' ? 20000 : actualGrade === 'rare' ? 50000 : 100000
         const crd = player.resources.crd || 0
 
         if (crd < crdCost) {

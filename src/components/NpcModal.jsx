@@ -983,41 +983,25 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
             </div>
           )
         })()}
-
-        
             </div>
           )}
 
           {/* ─── CRAFT MASTER ─── */}
           {subView === 'master_artisan' && (() => {
-            const ELEMENTS = [
-              { id: 'ignis', label: 'Ignis', emoji: '🔴', color: '#ff4444' },
-              { id: 'virel', label: 'Virel', emoji: '🔵', color: '#44aaff' },
-              { id: 'kryos', label: 'Kryos', emoji: '🟢', color: '#44ff88' },
-              { id: 'zephra', label: 'Zephra', emoji: '🟡', color: '#ffcc00' },
-              { id: 'umbrix', label: 'Umbrix', emoji: '⚫', color: '#88aadd' }
-            ]
-            const TIERS = [
+          const TIERS = [
               { id: 'common', label: 'Common', reqCount: 5, cost: 10000 },
               { id: 'rare', label: 'Rare', reqCount: 5, cost: 25000 },
               { id: 'epic', label: 'Epic', reqCount: 5, cost: 50000 }
             ]
             const ARCANITES = [
-              { id: 'mat_arcanite_fury', name: 'Fury', color: '#ffcc00', reqs: [{id: 'shard_ignis_epic', emoji:'🔴'}, {id: 'shard_virel_epic', emoji:'🔵'}] },
-              { id: 'mat_arcanite_ruin', name: 'Ruin', color: '#ff4444', reqs: [{id: 'shard_ignis_epic', count:2, emoji:'🔴'}] },
-              { id: 'mat_arcanite_spirit', name: 'Spirit', color: '#8b00ff', reqs: [{id: 'shard_zephra_epic', count:2, emoji:'🟡'}] },
-              { id: 'mat_arcanite_vital', name: 'Vital', color: '#00ff88', reqs: [{id: 'shard_umbrix_epic', count:2, emoji:'⚫'}] },
-              { id: 'mat_arcanite_guard', name: 'Guard', color: '#44aaff', reqs: [{id: 'shard_kryos_epic', count:2, emoji:'🟢'}] },
-              { id: 'mat_arcanite_precision', name: 'Precision', color: '#ffffff', reqs: [{id: 'shard_zephra_epic', emoji:'🟡'}, {id: 'shard_kryos_epic', emoji:'🟢'}] },
-              { id: 'mat_arcanite_agility', name: 'Agility', color: '#00ffff', reqs: [{id: 'shard_virel_epic', count:2, emoji:'🔵'}] },
-              { id: 'mat_arcanite_focus', name: 'Focus', color: '#ff8800', reqs: [{id: 'shard_ignis_epic', emoji:'🔴'}, {id: 'shard_zephra_epic', emoji:'🟡'}] }
-            ]
-            const SHARD_TYPES = [
-              { id: 'shard_ignis_epic',  label: 'Ignis',  emoji: '🔴' },
-              { id: 'shard_virel_epic',  label: 'Virel',  emoji: '🔵' },
-              { id: 'shard_kryos_epic',  label: 'Kryos',  emoji: '🟢' },
-              { id: 'shard_zephra_epic', label: 'Zephra', emoji: '🟡' },
-              { id: 'shard_umbrix_epic', label: 'Umbrix', emoji: '⚫' },
+              { id: 'mat_arcanite_fury', name: 'Fury', color: '#ffcc00', reqs: [{id: 'shard_epic', count: 2, emoji:'🟣'}] },
+              { id: 'mat_arcanite_ruin', name: 'Ruin', color: '#ff4444', reqs: [{id: 'shard_epic', count: 2, emoji:'🟣'}] },
+              { id: 'mat_arcanite_spirit', name: 'Spirit', color: '#8b00ff', reqs: [{id: 'shard_epic', count: 2, emoji:'🟣'}] },
+              { id: 'mat_arcanite_vital', name: 'Vital', color: '#00ff88', reqs: [{id: 'shard_epic', count: 2, emoji:'🟣'}] },
+              { id: 'mat_arcanite_guard', name: 'Guard', color: '#44aaff', reqs: [{id: 'shard_epic', count: 2, emoji:'🟣'}] },
+              { id: 'mat_arcanite_precision', name: 'Precision', color: '#ffffff', reqs: [{id: 'shard_epic', count: 2, emoji:'🟣'}] },
+              { id: 'mat_arcanite_agility', name: 'Agility', color: '#00ffff', reqs: [{id: 'shard_epic', count: 2, emoji:'🟣'}] },
+              { id: 'mat_arcanite_focus', name: 'Focus', color: '#ff8800', reqs: [{id: 'shard_epic', count: 2, emoji:'🟣'}] }
             ]
             const LEGENDARY_RECIPES = [
               { id: 'leg_weapon', label: 'Legendary Weapon',  emoji: '⚔️',  baseId: 'mat_epic_weapon',  baseLabel: 'Epic Weapon',  shards: 6 },
@@ -1031,20 +1015,20 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
               { id: 'leg_amulet', label: 'Legendary Amulet',  emoji: '📿',  baseId: 'mat_epic_amulet',  baseLabel: 'Epic Amulet',  shards: 5 },
               { id: 'leg_cape',   label: 'Legendary Cape',    emoji: '🦸',  baseId: 'mat_epic_cape',    baseLabel: 'Epic Cape',    shards: 5 },
             ]
-
+ 
             const MASTER_RECIPES = [
-              ...ELEMENTS.flatMap(elem => TIERS.map(tier => ({
-                id: `shard_${elem.id}_${tier.id}`,
+              ...TIERS.map(tier => ({
+                id: `shard_${tier.id}`,
                 category: 'Ore Refinement',
-                name: `${tier.label} ${elem.label} Shard`,
-                emoji: elem.emoji,
-                color: elem.color,
-                action: () => craftShard(elem.id, tier.id),
+                name: `${tier.label} Shard (${tier.id === 'common' ? 'C' : tier.id === 'rare' ? 'R' : 'E'})`,
+                emoji: tier.id === 'common' ? '🪨' : tier.id === 'rare' ? '🔵' : '🟣',
+                color: tier.id === 'common' ? '#aaa' : tier.id === 'rare' ? '#4488ff' : '#8844ff',
+                action: () => craftShard(tier.id),
                 materials: [
-                  { id: `ore_${elem.id}_${tier.id}`, count: tier.reqCount, emoji: '🪨', name: `${tier.label} ${elem.label} Ore` }
+                  { id: `ore_${tier.id}`, count: tier.reqCount, emoji: '🪨', name: `${tier.label} Ore` }
                 ],
                 cost: tier.cost
-              }))),
+              })),
               ...ARCANITES.map(arc => ({
                 id: arc.id,
                 category: 'Arcanite Synthesis',
@@ -1052,7 +1036,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                 emoji: '🔮',
                 color: arc.color,
                 action: () => craftArcanite(arc.id),
-                materials: arc.reqs.map(r => ({ id: r.id, count: r.count || 1, emoji: r.emoji, name: `${r.id.split('_')[1]} Shard` })),
+                materials: arc.reqs.map(r => ({ id: r.id, count: r.count || 1, emoji: r.emoji, name: 'Epic Shard' })),
                 cost: 100000
               })),
               ...LEGENDARY_RECIPES.map(rec => ({
@@ -1064,7 +1048,7 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
                 action: () => craftLegendary(rec.id),
                 materials: [
                   { id: rec.baseId, count: 1, emoji: '📦', name: rec.baseLabel },
-                  ...SHARD_TYPES.slice(0, 4).map(s => ({ id: s.id, count: rec.shards, emoji: s.emoji, name: s.label + ' Shard' }))
+                  { id: 'shard_epic', count: rec.shards * 5, emoji: '🟣', name: 'Epic Shard' }
                 ],
                 cost: 0
               }))
