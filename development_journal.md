@@ -16,7 +16,7 @@ Starting July 7, 2026, the following rules are enforced for all development and 
 
 ## 📅 Session Chronological Logs
 
-### 🎯 Milestone 188: Material Ore & Shard Database Cleanup & Sync Security [PENDING DEPLOYMENT]
+### 🎯 Milestone 188: Material Ore & Shard Database Cleanup & Sync Security [DEPLOYED]
 - **Database Sanitization (`src/data/items.json`)**: Removed 30 element-specific Ore & Shard items (grades Common, Rare, Epic) from the `"items"` array where they were incorrectly duplicated. The data now resides strictly inside the `"materials"` array, keeping they generic as intended by the game's core guidelines.
 - **Direct Save Security (`server.js`)**: Updated `/api/audit/save_item_direct` and `/api/audit/publish_draft` logic to intelligently separate items into either `"items"` or `"materials"` depending on item type/prefix, preventing future database duplication/bleeding.
 - **Excel Sync Alignment (`server.js`)**: Updated `/api/audit/excel_export` and `/api/audit/import_excel` routes to preserve the internal `"items"`/`"materials"` separation. Sheet ITEMS now correctly exports both arrays, and sheet import distributes data cleanly to their respective destinations.
