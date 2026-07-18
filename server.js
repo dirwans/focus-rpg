@@ -1530,10 +1530,30 @@ app.post('/api/audit/save_item_direct', (req, res) => {
       const idx = fileContent.findIndex(i => (i.id && i.id === cleanData.id) || (i.code && i.code === cleanData.code))
       if (idx >= 0) fileContent[idx] = { ...fileContent[idx], ...cleanData }
       else fileContent.push(cleanData)
-    } else if (category === 'items' && Array.isArray(fileContent.items)) {
-      const idx = fileContent.items.findIndex(i => i.id === cleanData.id)
-      if (idx >= 0) fileContent.items[idx] = { ...fileContent.items[idx], ...cleanData }
-      else fileContent.items.push(cleanData)
+    } else if (category === 'items') {
+      let updated = false;
+      if (Array.isArray(fileContent.materials)) {
+        const idx = fileContent.materials.findIndex(i => i.id === cleanData.id);
+        if (idx >= 0) {
+          fileContent.materials[idx] = { ...fileContent.materials[idx], ...cleanData };
+          updated = true;
+        }
+      }
+      if (!updated && Array.isArray(fileContent.items)) {
+        const idx = fileContent.items.findIndex(i => i.id === cleanData.id);
+        if (idx >= 0) {
+          fileContent.items[idx] = { ...fileContent.items[idx], ...cleanData };
+          updated = true;
+        }
+      }
+      if (!updated) {
+        const isMaterialType = cleanData.type === 'material' || (cleanData.id && (cleanData.id.startsWith('ore_') || cleanData.id.startsWith('shard_') || cleanData.id.startsWith('mat_')));
+        if (isMaterialType && Array.isArray(fileContent.materials)) {
+          fileContent.materials.push(cleanData);
+        } else if (Array.isArray(fileContent.items)) {
+          fileContent.items.push(cleanData);
+        }
+      }
     } else if (typeof fileContent === 'object') {
       // Find where key is located
       let updated = false
@@ -1634,11 +1654,37 @@ app.post('/api/audit/publish_draft', (req, res) => {
       }
 
       const obj = JSON.parse(readFileSync(p, 'utf8'))
-      const arr = Array.isArray(obj) ? obj : (obj.items || [])
-      const idx = arr.findIndex(i => i.id === (cleanDef.id || dData.id))
-      if (idx >= 0) arr[idx] = { ...arr[idx], ...cleanDef }
-      else arr.push(cleanDef)
-      writeFileSync(p, JSON.stringify(Array.isArray(obj) ? arr : { ...obj, items: arr }, null, 2))
+      if (Array.isArray(obj)) {
+        const idx = obj.findIndex(i => i.id === (cleanDef.id || dData.id))
+        if (idx >= 0) obj[idx] = { ...obj[idx], ...cleanDef }
+        else obj.push(cleanDef)
+        writeFileSync(p, JSON.stringify(obj, null, 2))
+      } else {
+        let updated = false;
+        if (Array.isArray(obj.materials)) {
+          const idx = obj.materials.findIndex(i => i.id === (cleanDef.id || dData.id));
+          if (idx >= 0) {
+            obj.materials[idx] = { ...obj.materials[idx], ...cleanDef };
+            updated = true;
+          }
+        }
+        if (!updated && Array.isArray(obj.items)) {
+          const idx = obj.items.findIndex(i => i.id === (cleanDef.id || dData.id));
+          if (idx >= 0) {
+            obj.items[idx] = { ...obj.items[idx], ...cleanDef };
+            updated = true;
+          }
+        }
+        if (!updated) {
+          const isMaterialType = cleanDef.type === 'material' || (cleanDef.id && (cleanDef.id.startsWith('ore_') || cleanDef.id.startsWith('shard_') || cleanDef.id.startsWith('mat_'))) || (dData.id && (dData.id.startsWith('ore_') || dData.id.startsWith('shard_') || dData.id.startsWith('mat_')));
+          if (isMaterialType && Array.isArray(obj.materials)) {
+            obj.materials.push(cleanDef);
+          } else if (Array.isArray(obj.items)) {
+            obj.items.push(cleanDef);
+          }
+        }
+        writeFileSync(p, JSON.stringify(obj, null, 2))
+      }
     } else if (cat === 'gears') {
       const fileName = resolveGearFile(cleanDef.id || dData.id || cleanDef.code || cleanDef.name);
       const p = join(SRC_DATA_DIR, 'gears', fileName)
@@ -1701,9 +1747,23 @@ app.get('/api/audit/excel_template', (req, res) => {
     const wb = XLSX.utils.book_new()
 
     // ── Sheet 1: ITEMS ──
-    const itemsRaw = readJson('items.json') || []
-    const itemsList = Array.isArray(itemsRaw) ? itemsRaw : (itemsRaw.items || [])
-    const itemRows = itemsList.map(it => ({
+    const itemsRaw = readJson('items.json') || {}
+    let itemsList = []
+    if (Array.isArray(itemsRaw)) {
+      itemsList = itemsRaw
+    } else {
+      itemsList = [
+        ...(itemsRaw.items || []),
+        ...(itemsRaw.materials || [])
+      ]
+    }
+    const itemsMapForExport = new Map();
+    itemsList.forEach(it => {
+      if (it && it.id) itemsMapForExport.set(it.id, it);
+    });
+    const deduplicatedItemsList = Array.from(itemsMapForExport.values());
+
+    const itemRows = deduplicatedItemsList.map(it => ({
       id: it.id || '', name: it.name || '', emoji: it.emoji || '',
       type: it.type || '', rarity: it.rarity || '', race: it.race || '',
       level: it.level || 1, image: it.image || '', description: it.description || '',
@@ -1813,9 +1873,20 @@ app.post('/api/audit/import_excel', (req, res) => {
     // ── ITEMS sheet ──
     const itemRows = sheetToRows('ITEMS')
     if (itemRows.length) {
-      const existing = readJson('items.json') || []
-      const existList = Array.isArray(existing) ? existing : (existing.items || [])
-      const map = Object.fromEntries(existList.map(i => [i.id, i]))
+      const existing = readJson('items.json') || {}
+      let existingItems = []
+      let existingMaterials = []
+      if (Array.isArray(existing)) {
+        existingItems = existing.filter(i => i.type !== 'material' && !(i.id && (i.id.startsWith('ore_') || i.id.startsWith('shard_') || i.id.startsWith('mat_'))))
+        existingMaterials = existing.filter(i => i.type === 'material' || (i.id && (i.id.startsWith('ore_') || i.id.startsWith('shard_') || i.id.startsWith('mat_'))))
+      } else {
+        existingItems = existing.items || []
+        existingMaterials = existing.materials || []
+      }
+
+      const itemsMap = Object.fromEntries(existingItems.map(i => [i.id, i]))
+      const matsMap = Object.fromEntries(existingMaterials.map(i => [i.id, i]))
+
       for (const r of itemRows) {
         if (!r.id) continue
         const bonus = {}
@@ -1823,10 +1894,33 @@ app.post('/api/audit/import_excel', (req, res) => {
         if (r.bonus_def) bonus.def = Number(r.bonus_def)
         if (r.bonus_hp)  bonus.hp  = Number(r.bonus_hp)
         if (r.bonus_dodge) bonus.dodge = Number(r.bonus_dodge)
-        map[r.id] = { ...(map[r.id]||{}), id: r.id, name: r.name, emoji: r.emoji||'', type: r.type, rarity: r.rarity, race: r.race||'All', level: Number(r.level)||1, image: r.image||'', description: r.description||'', bonus }
+
+        const isMaterial = r.type === 'material' || (r.id && (r.id.startsWith('ore_') || r.id.startsWith('shard_') || r.id.startsWith('mat_')));
+        const itemObj = {
+          id: r.id,
+          name: r.name,
+          emoji: r.emoji || '',
+          type: r.type,
+          rarity: r.rarity,
+          race: r.race || 'All',
+          level: Number(r.level) || 1,
+          image: r.image || '',
+          description: r.description || '',
+          bonus
+        }
+
+        if (isMaterial) {
+          matsMap[r.id] = { ...(matsMap[r.id] || {}), ...itemObj }
+        } else {
+          itemsMap[r.id] = { ...(itemsMap[r.id] || {}), ...itemObj }
+        }
         report.items++
       }
-      saveJson('items.json', Object.values(map))
+
+      saveJson('items.json', {
+        items: Object.values(itemsMap),
+        materials: Object.values(matsMap)
+      })
     }
 
     // ── GEARS sheet ──
