@@ -35,6 +35,7 @@ public/*-dressing.html
 public/animation-lab.html
 public/arctron-animator.html
 public/assets/**/*_rig.json
+public/assets/arctron/def_warrior_armor_set_lv1_battle/
 
 # Server data (user saves, sessions) — jangan di-commit
 # NOTE: /data/ (root only) not src/data/ (game data must be committed)
