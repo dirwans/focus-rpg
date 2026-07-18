@@ -1260,9 +1260,20 @@ export default function AuditorRoom() {
                                                           return;
                                                       }
                                                       if (tab === 'enhance' && isOreOrShardOrCore) {
-                                                          alert('❌ Ores, Shards, & Cores hanya boleh digunakan untuk Crafting!');
-                                                          return;
-                                                      }
+                                                            alert('❌ Ores, Shards, & Cores hanya boleh digunakan untuk Crafting!');
+                                                            return;
+                                                        }
+                                                         const currentIdLower = typeof idLower !== 'undefined' ? idLower : dragIdLower;
+                                                         const currentNameLower = typeof nameLower !== 'undefined' ? nameLower : dragNameLower;
+                                                         const isStrictOreCheck = currentIdLower.includes('ore') || (currentNameLower.includes('ore') && !currentNameLower.includes('core') && !currentNameLower.includes('spore') && !currentNameLower.includes('store'));
+                                                         
+                                                         const isTargetShardCheck = targetItem && (targetItem.id || '').toLowerCase().includes('shard');
+                                                         
+                                                         if (tab === 'crafting' && isStrictOreCheck && !isTargetShardCheck) {
+                                                             alert('❌ Ores HANYA boleh digunakan sebagai material untuk membuat Shard!');
+                                                             return;
+                                                         }
+
                                                       
                                                       const isTargetShard = targetItem && ((targetItem.id || '').toLowerCase().includes('shard') || (targetItem.id || '').toLowerCase().includes('ore'));
                                                       if (tab === 'crafting' && isTargetShard && activeSlotIndex === 0) {
@@ -1466,9 +1477,20 @@ export default function AuditorRoom() {
                                                            return;
                                                        }
                                                        if (tab === 'enhance' && isOreOrShardOrCore) {
-                                                           alert('❌ Ores, Shards, & Cores hanya boleh digunakan untuk Crafting!');
-                                                           return;
-                                                       }
+                                                            alert('❌ Ores, Shards, & Cores hanya boleh digunakan untuk Crafting!');
+                                                            return;
+                                                        }
+                                                         const currentIdLower = typeof idLower !== 'undefined' ? idLower : dragIdLower;
+                                                         const currentNameLower = typeof nameLower !== 'undefined' ? nameLower : dragNameLower;
+                                                         const isStrictOreCheck = currentIdLower.includes('ore') || (currentNameLower.includes('ore') && !currentNameLower.includes('core') && !currentNameLower.includes('spore') && !currentNameLower.includes('store'));
+                                                         
+                                                         const isTargetShardCheck = targetItem && (targetItem.id || '').toLowerCase().includes('shard');
+                                                         
+                                                         if (tab === 'crafting' && isStrictOreCheck && !isTargetShardCheck) {
+                                                             alert('❌ Ores HANYA boleh digunakan sebagai material untuk membuat Shard!');
+                                                             return;
+                                                         }
+
 
                                                        const isTargetShard = targetItem && ((targetItem.id || '').toLowerCase().includes('shard') || (targetItem.id || '').toLowerCase().includes('ore'));
                                                        if (tab === 'crafting' && isTargetShard && idx === 0) {
