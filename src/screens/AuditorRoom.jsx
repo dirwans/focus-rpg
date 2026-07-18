@@ -576,9 +576,20 @@ export default function AuditorRoom() {
         
         const rawItems = data.items?.items || (Array.isArray(data.items) ? data.items : []);
         const rawMaterials = data.items?.materials || [];
+
+        const nonGears = rawItems.filter(i => {
+          const typeLower = (i.type || '').toLowerCase();
+          return !['weapon', 'shield', 'armor', 'helmet', 'pants', 'gloves', 'boots', 'cape', 'mantle', 'ring', 'amulet'].includes(typeLower);
+        });
+        const gears = rawItems.filter(i => {
+          const typeLower = (i.type || '').toLowerCase();
+          return ['weapon', 'shield', 'armor', 'helmet', 'pants', 'gloves', 'boots', 'cape', 'mantle', 'ring', 'amulet'].includes(typeLower);
+        });
+
         const mergedItemsMap = new Map();
-        rawItems.forEach(it => { if (it && it.id) mergedItemsMap.set(it.id, it) });
+        nonGears.forEach(it => { if (it && it.id) mergedItemsMap.set(it.id, it) });
         rawMaterials.forEach(it => { if (it && it.id) mergedItemsMap.set(it.id, it) });
+        gears.forEach(it => { if (it && it.id) mergedItemsMap.set(it.id, it) });
         const finalItems = Array.from(mergedItemsMap.values());
 
         const flatArctron = flattenGears(data.gears?.arctron, '', 'arctron');

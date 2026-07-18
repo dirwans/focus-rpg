@@ -9,6 +9,7 @@ import universalGears from '../data/universal_gears.json'
 const itemsData = {
   items: [
     ...(itemsDataRaw.items || []),
+    ...(itemsDataRaw.materials || []),
     ...arctronGears,
     ...bionexGears,
     ...celestraGears,
