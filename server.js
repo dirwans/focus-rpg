@@ -1619,6 +1619,22 @@ app.post('/api/audit/save_recipe', (req, res) => {
   }
 })
 
+app.post('/api/audit/delete_recipe', (req, res) => {
+  const { id } = req.body
+  try {
+    const recipesPath = join(__dirname, 'src', 'data', 'recipes.json')
+    let recipes = []
+    try { recipes = JSON.parse(readFileSync(recipesPath, 'utf8')) } catch {}
+    
+    const newRecipes = recipes.filter(r => r.id !== id)
+    writeFileSync(recipesPath, JSON.stringify(newRecipes, null, 2))
+    res.json({ ok: true, message: 'Resep berhasil dihapus!' })
+  } catch (e) {
+    console.error('[audit] delete_recipe fail', e)
+    res.status(500).json({ error: 'Gagal menghapus resep' })
+  }
+})
+
 app.post('/api/audit/publish_draft', (req, res) => {
   const { pin, draftId } = req.body
   if (pin !== '12345') return res.status(401).json({ error: 'PIN Salah!' })

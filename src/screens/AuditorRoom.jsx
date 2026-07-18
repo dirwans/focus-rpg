@@ -64,12 +64,13 @@ export default function AuditorRoom() {
   
   const [targetItem, setTargetItem] = useState(null)
   const [recipeName, setRecipeName] = useState('')
-  const [recipeSlots, setRecipeSlots] = useState([null, null, null, null, null])
+  const [recipeSlots, setRecipeSlots] = useState([null, null, null, null, null, null])
   const [activeSlotIndex, setActiveSlotIndex] = useState(null)
   const [chances, setChances] = useState({ success: 65, destroy: 20, great: 10, bonus: 5 })
   const [outputGrade, setOutputGrade] = useState('Common')
   const [outputStats, setOutputStats] = useState([])
-  const [recipeLogs, setRecipeLogs] = useState([])
+  const [craftDrafts, setCraftDrafts] = useState([])
+  const [recipeCost, setRecipeCost] = useState({ crd: '', nsx: '' })
   const [xlsxStatus, setXlsxStatus] = useState(null) // null | 'loading' | {ok, report} | {error}
 
   const handleDownloadTemplate = () => {
@@ -189,8 +190,7 @@ export default function AuditorRoom() {
 
   const handleSaveRecipe = async () => {
     if (!targetItem) return alert("Pilih Target Item dulu di kotak kanan atas!");
-    const statsSummary = outputStats.length > 0 ? ` [${outputStats.map(s => `${s.stat} +${s.val}`).join(', ')}]` : '';
-    setRecipeLogs(prev => [`> Resep ${recipeName || targetItem.id} (${outputGrade}) disimpan!${statsSummary}`, ...prev].slice(0, 5));
+    
 
     const recPayload = {
       id: targetItem.id || targetItem.code || targetItem.name,
@@ -205,24 +205,15 @@ export default function AuditorRoom() {
         img: s._imagePreview || s.image || s.img,
         qty: s.qty || 1
       })),
+      cost: { crd: Number(recipeCost.crd) || 0, nsx: Number(recipeCost.nsx) || 0 },
       targetImg: targetItem._imagePreview || targetItem.image || targetItem.img
     };
 
-    try {
-      await fetch('/api/audit/save_recipe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ pin, recipeData: recPayload })
-      });
-    } catch {}
+    setCraftDrafts(prev => [recPayload, ...prev]);
 
     setTargetItem(null);
-    setRecipeSlots([null, null, null, null, null]);
-    setActiveSlotIndex(null);
-    setOutputStats([]);
-    setOutputGrade('Normal');
-    setTargetItem(null);
-    setRecipeSlots([null, null, null, null, null]);
+    setRecipeSlots([null, null, null, null, null, null]);
+    setRecipeCost({ crd: '', nsx: '' });
     setActiveSlotIndex(null);
     setOutputStats([]);
     setOutputGrade('Normal');
@@ -1075,14 +1066,14 @@ export default function AuditorRoom() {
         </div>
 
         <div style={styles.tabs} className="no-scrollbar">
-          <button style={tab === 'items' ? styles.tabActive : styles.tab} onClick={() => {setTab('items'); setPage(0); setSimItem(null); setRecipeSlots([null, null, null, null, null]); setTargetItem(null); setActiveSlotIndex(null); setOutputStats([]);}}>Items</button>
-          <button style={tab === 'enemies' ? styles.tabActive : styles.tab} onClick={() => {setTab('enemies'); setPage(0); setSimItem(null); setRecipeSlots([null, null, null, null, null]); setTargetItem(null); setActiveSlotIndex(null); setOutputStats([]);}}>Enemies</button>
-          <button style={tab === 'gears' ? styles.tabActive : styles.tab} onClick={() => {setTab('gears'); setPage(0); setSimItem(null); setRecipeSlots([null, null, null, null, null]); setTargetItem(null); setActiveSlotIndex(null); setOutputStats([]);}}>Gears</button>
-          <button style={tab === 'races' ? styles.tabActive : styles.tab} onClick={() => {setTab('races'); setPage(0); setSimItem(null); setRecipeSlots([null, null, null, null, null]); setTargetItem(null); setActiveSlotIndex(null); setOutputStats([]);}}>Races</button>
-          <button style={tab === 'jobs' ? styles.tabActive : styles.tab} onClick={() => {setTab('jobs'); setPage(0); setSimItem(null); setRecipeSlots([null, null, null, null, null]); setTargetItem(null); setActiveSlotIndex(null); setOutputStats([]);}}>Jobs</button>
-          <button style={tab === 'crafting' ? styles.tabActive : styles.tab} onClick={() => {setTab('crafting'); setPage(0); setSimItem(null); setCraftCategory('materials'); setCraftSubTab('Shards'); setRecipeSlots([null, null, null, null, null]); setTargetItem(null); setActiveSlotIndex(null); setOutputStats([]); setOutputGrade('Normal');}}>Crafting</button>
-          <button style={tab === 'enhance' ? styles.tabActive : styles.tab} onClick={() => {setTab('enhance'); setPage(0); setSimItem(null); setCraftCategory('materials'); setCraftSubTab('All'); setRecipeSlots([null, null, null, null, null]); setTargetItem(null); setActiveSlotIndex(null); setOutputStats([]); setOutputGrade('+1');}}>Enhance</button>
-          <button style={tab === 'drafts' ? styles.tabActive : styles.tab} onClick={() => {setTab('drafts'); setPage(0); setSimItem(null); setRecipeSlots([null, null, null, null, null]); setTargetItem(null); setActiveSlotIndex(null); setOutputStats([]);}}>📋 Review Drafts ({allData.drafts?.length || 0})</button>
+          <button style={tab === 'items' ? styles.tabActive : styles.tab} onClick={() => {setTab('items'); setPage(0); setSimItem(null); setRecipeSlots([null, null, null, null, null, null]); setTargetItem(null); setActiveSlotIndex(null); setOutputStats([]);}}>Items</button>
+          <button style={tab === 'enemies' ? styles.tabActive : styles.tab} onClick={() => {setTab('enemies'); setPage(0); setSimItem(null); setRecipeSlots([null, null, null, null, null, null]); setTargetItem(null); setActiveSlotIndex(null); setOutputStats([]);}}>Enemies</button>
+          <button style={tab === 'gears' ? styles.tabActive : styles.tab} onClick={() => {setTab('gears'); setPage(0); setSimItem(null); setRecipeSlots([null, null, null, null, null, null]); setTargetItem(null); setActiveSlotIndex(null); setOutputStats([]);}}>Gears</button>
+          <button style={tab === 'races' ? styles.tabActive : styles.tab} onClick={() => {setTab('races'); setPage(0); setSimItem(null); setRecipeSlots([null, null, null, null, null, null]); setTargetItem(null); setActiveSlotIndex(null); setOutputStats([]);}}>Races</button>
+          <button style={tab === 'jobs' ? styles.tabActive : styles.tab} onClick={() => {setTab('jobs'); setPage(0); setSimItem(null); setRecipeSlots([null, null, null, null, null, null]); setTargetItem(null); setActiveSlotIndex(null); setOutputStats([]);}}>Jobs</button>
+          <button style={tab === 'crafting' ? styles.tabActive : styles.tab} onClick={() => {setTab('crafting'); setPage(0); setSimItem(null); setCraftCategory('materials'); setCraftSubTab('Shards'); setRecipeSlots([null, null, null, null, null, null]); setTargetItem(null); setActiveSlotIndex(null); setOutputStats([]); setOutputGrade('Normal');}}>Crafting</button>
+          <button style={tab === 'enhance' ? styles.tabActive : styles.tab} onClick={() => {setTab('enhance'); setPage(0); setSimItem(null); setCraftCategory('materials'); setCraftSubTab('All'); setRecipeSlots([null, null, null, null, null, null]); setTargetItem(null); setActiveSlotIndex(null); setOutputStats([]); setOutputGrade('+1');}}>Enhance</button>
+          <button style={tab === 'drafts' ? styles.tabActive : styles.tab} onClick={() => {setTab('drafts'); setPage(0); setSimItem(null); setRecipeSlots([null, null, null, null, null, null]); setTargetItem(null); setActiveSlotIndex(null); setOutputStats([]);}}>📋 Review Drafts ({allData.drafts?.length || 0})</button>
         </div>
 
         {/* Excel Import / Export toolbar */}
@@ -1273,7 +1264,7 @@ export default function AuditorRoom() {
                                                           return;
                                                       }
                                                       
-                                                      const isTargetShard = targetItem && (targetItem.id || '').toLowerCase().includes('shard');
+                                                      const isTargetShard = targetItem && ((targetItem.id || '').toLowerCase().includes('shard') || (targetItem.id || '').toLowerCase().includes('ore'));
                                                       if (tab === 'crafting' && isTargetShard && activeSlotIndex === 0) {
                                                           const targetIdLower = (targetItem.id || '').toLowerCase();
                                                           const targetGrade = targetIdLower.split('_').pop();
@@ -1307,7 +1298,7 @@ export default function AuditorRoom() {
                                                                return;
                                                            }
                                                       } else if (tab === 'crafting') {
-                                                           const isOre = idLower.includes('ore') || nameLower.includes('ore');
+                                                           const isOre = idLower.includes('ore') || (nameLower.includes('ore') && !nameLower.includes('core') && !nameLower.includes('spore') && !nameLower.includes('store'));
                                                            if (isOre) {
                                                                alert("can't crafting ores.");
                                                                return;
@@ -1354,8 +1345,8 @@ export default function AuditorRoom() {
                                                   const rar = (item.rarity || '').toLowerCase()
                                                   const rc = rarityColorMap[rar] || '#aaa'
                                                   return (
-                                                    <div style={{ background: 'rgba(0,0,0,0.82)', borderTop: `1px solid ${rc}40`, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '2px 5px', height: '20px', flexShrink: 0 }}>
-                                                      <span style={{ color: rc, fontSize: '9px', fontWeight: 800, fontFamily: 'monospace', letterSpacing: 0.5, textTransform: 'uppercase' }}>{item.rarity || ''}</span>
+                                                    <div style={{ background: 'rgba(0,0,0,0.82)', borderTop: `1px solid ${rc}40`, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '2px 5px', height: '20px', flexShrink: 0, overflow: 'hidden' }}>
+                                                      <span style={{ color: rc, fontSize: '9px', fontWeight: 800, fontFamily: 'monospace', letterSpacing: 0.5, textTransform: 'uppercase', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.name || item.id}</span>
                                                     </div>
                                                   )
                                                 }
@@ -1410,7 +1401,7 @@ export default function AuditorRoom() {
                                                        return;
                                                    }
                                               } else if (tab === 'crafting') {
-                                                   const isOre = dragIdLower.includes('ore') || dragNameLower.includes('ore');
+                                                   const isOre = dragIdLower.includes('ore') || (dragNameLower.includes('ore') && !dragNameLower.includes('core') && !dragNameLower.includes('spore') && !dragNameLower.includes('store'));
                                                    if (isOre) {
                                                        alert("can't crafting ores.");
                                                        return;
@@ -1455,10 +1446,10 @@ export default function AuditorRoom() {
                               <div>
                                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
                                       <div className="simulator-title" style={{ fontSize: '10px', color: '#00e5ff', textTransform: 'uppercase', fontWeight: 'bold' }}>Required Materials</div>
-                                      <button onClick={() => setRecipeSlots([null, null, null, null, null])} className="simulator-title" style={{ background: '#311', border: '1px solid #ff3333', color: '#ff3333', padding: '3px 8px', borderRadius: '4px', cursor: 'pointer', fontSize: '10px', fontWeight: 'bold', transition: 'all 0.2s' }}>🗑️ Clear All</button>
+                                      <button onClick={() => setRecipeSlots([null, null, null, null, null, null])} className="simulator-title" style={{ background: '#311', border: '1px solid #ff3333', color: '#ff3333', padding: '3px 8px', borderRadius: '4px', cursor: 'pointer', fontSize: '10px', fontWeight: 'bold', transition: 'all 0.2s' }}>🗑️ Clear All</button>
                                   </div>
                                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
-                                      {recipeSlots.slice(0, tab === 'enhance' ? 3 : (targetItem && (targetItem.id || '').toLowerCase().includes('shard') ? 2 : 5)).map((slot, idx) => (
+                                      {recipeSlots.slice(0, tab === 'enhance' ? 3 : (targetItem && ((targetItem.id || '').toLowerCase().includes('shard') || (targetItem.id || '').toLowerCase().includes('ore')) ? 2 : 6)).map((slot, idx) => (
                                           <div key={idx} 
                                                onDragOver={(e) => e.preventDefault()}
                                                onDrop={(e) => {
@@ -1479,7 +1470,7 @@ export default function AuditorRoom() {
                                                            return;
                                                        }
 
-                                                       const isTargetShard = targetItem && (targetItem.id || '').toLowerCase().includes('shard');
+                                                       const isTargetShard = targetItem && ((targetItem.id || '').toLowerCase().includes('shard') || (targetItem.id || '').toLowerCase().includes('ore'));
                                                        if (tab === 'crafting' && isTargetShard && idx === 0) {
                                                            const targetIdLower = (targetItem.id || '').toLowerCase();
                                                            const targetGrade = targetIdLower.split('_').pop();
@@ -1514,10 +1505,10 @@ export default function AuditorRoom() {
                                                        setRecipeSlots(newSlots);
                                                    }} style={{ position: 'absolute', top: '-4px', right: '-4px', width: '16px', height: '16px', borderRadius: '50%', background: '#ff3333', border: '1px solid #ff7777', color: '#fff', fontSize: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontWeight: 'bold', boxShadow: '0 0 4px rgba(255,0,0,0.5)', zIndex: 10 }}>×</button>
                                                    {slot._imagePreview && <img src={slot._imagePreview} style={{ width: '34px', height: '34px', objectFit: 'contain', marginBottom: '4px', filter: 'drop-shadow(0 0 5px rgba(255, 255, 255, 0.85)) brightness(1.3)' }} />}
-                                                   <div style={{ color: '#fff', fontSize: '10px', textAlign: 'center', fontWeight: 'bold', lineHeight: '1.2' }}>{slot.name || slot.id}</div>
+                                                   <div style={{ color: '#fff', fontSize: '12px', textAlign: 'center', fontWeight: 'bold', lineHeight: '1.2' }}>{slot.name || slot.id}</div>
                                                    {tab === 'crafting' && (
                                                        <div onClick={e => e.stopPropagation()} style={{ marginTop: '4px', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                                                           <span style={{ fontSize: '9px', color: '#888' }}>QTY:</span>
+                                                           <span style={{ fontSize: '12px', color: '#888' }}>QTY:</span>
                                                            <input 
                                                                type="number" 
                                                                min="1"
@@ -1527,7 +1518,7 @@ export default function AuditorRoom() {
                                                                    newSlots[idx] = { ...slot, qty: Number(e.target.value) };
                                                                    setRecipeSlots(newSlots);
                                                                }}
-                                                               style={{ width: '30px', background: '#121622', border: '1px solid #00e5ff', color: '#fff', borderRadius: '3px', fontSize: '10px', textAlign: 'center', padding: '1px' }}
+                                                               style={{ width: '40px', background: '#121622', border: '1px solid #00e5ff', color: '#fff', borderRadius: '3px', fontSize: '12px', textAlign: 'center', padding: '2px' }}
                                                            />
                                                        </div>
                                                    )}
@@ -1543,7 +1534,7 @@ export default function AuditorRoom() {
                                   </div>
                               </div>
 
-                              {!(tab === 'crafting' && targetItem && (targetItem.id || '').toLowerCase().includes('shard')) && (
+                              {!(tab === 'crafting' && targetItem && ((targetItem.id || '').toLowerCase().includes('shard') || (targetItem.id || '').toLowerCase().includes('ore'))) && (
                                 <>
                                   <div>
                                       <div className="simulator-title" style={{ fontSize: '10px', color: '#aaa', marginBottom: '6px', textTransform: 'uppercase' }}>{tab === 'enhance' ? 'Enhancement Target Level' : 'Output Stats & Grade'}</div>
@@ -1634,31 +1625,36 @@ export default function AuditorRoom() {
 
                               {/* Live Description Preview */}
                               {targetItem && (
-                                <div style={{ background: '#070c14', border: '1px solid #1e2d44', borderRadius: 6, padding: '8px 10px', fontSize: 11, lineHeight: 1.6 }}>
-                                  <div style={{ color: '#00e5ff', fontWeight: 700, fontFamily: 'monospace', marginBottom: 4, fontSize: 10, letterSpacing: 1 }}>📋 LIVE PREVIEW</div>
-                                  <div style={{ color: '#fff', fontFamily: 'monospace', fontWeight: 700 }}>{recipeName || targetItem.id}</div>
+                                <div style={{ background: '#070c14', border: '1px solid #1e2d44', borderRadius: 6, padding: '12px 14px', fontSize: 14, lineHeight: 1.6 }}>
+                                  <div style={{ color: '#00e5ff', fontWeight: 700, fontFamily: 'monospace', marginBottom: 4, fontSize: 14, letterSpacing: 1 }}>📋 LIVE PREVIEW</div>
+                                  <div style={{ color: '#fff', fontFamily: 'monospace', fontWeight: 700, fontSize: 16 }}>{recipeName || targetItem.id}</div>
                                   <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', margin: '3px 0' }}>
                                     {parsePetunjuk(targetItem.id).map((b, i) => (
-                                      <span key={i} style={{ fontSize: 9, padding: '0 4px', borderRadius: 2, background: `${b.color}18`, border: `1px solid ${b.color}44`, color: b.color, fontFamily: 'monospace' }}>{b.label}</span>
+                                      <span key={i} style={{ fontSize: 12, padding: '0 4px', borderRadius: 2, background: `${b.color}18`, border: `1px solid ${b.color}44`, color: b.color, fontFamily: 'monospace' }}>{b.label}</span>
                                     ))}
                                   </div>
                                   <div style={{ borderTop: '1px dashed #1e2d44', marginTop: 5, paddingTop: 5 }}>
-                                    <span style={{ color: '#888', fontSize: 10 }}>Materials: </span>
+                                    <span style={{ color: '#888', fontSize: 14 }}>Materials: </span>
                                     {recipeSlots.filter(Boolean).length === 0
                                       ? <span style={{ color: '#444', fontStyle: 'italic' }}>—</span>
                                       : recipeSlots.filter(Boolean).map((s, i) => (
                                           <span key={i} style={{ color: '#a0c8ff' }}>{i > 0 ? ' + ' : ''}{s.qty || 1}x {s.name || s.id}</span>
                                         ))
                                     }
+                                    {(Number(recipeCost.crd) > 0 || Number(recipeCost.nsx) > 0) && (
+                                        <span style={{ color: '#888', marginLeft: '6px' }}>[Cost: {Number(recipeCost.crd)>0 ? `${recipeCost.crd} CRD` : ''}{Number(recipeCost.crd)>0 && Number(recipeCost.nsx)>0 ? ' & ' : ''}{Number(recipeCost.nsx)>0 ? `${recipeCost.nsx} NSX` : ''}]</span>
+                                    )}
                                   </div>
-                                  <div style={{ color: '#888', fontSize: 10, marginTop: 3 }}>
-                                    Grade: <span style={{ color: '#f59e0b' }}>{outputGrade}</span>
-                                    {'  '}Succ: <span style={{ color: '#00ff88' }}>{chances.success}%</span>
-                                    {'  '}Destroy: <span style={{ color: '#ff5566' }}>{chances.destroy}%</span>
-                                    {'  '}Great: <span style={{ color: '#a855f7' }}>{chances.great}%</span>
-                                  </div>
+                                  {!(tab === 'crafting' && targetItem && ((targetItem.id || '').toLowerCase().includes('shard') || (targetItem.id || '').toLowerCase().includes('ore'))) && (
+                                    <div style={{ color: '#888', fontSize: 14, marginTop: 4 }}>
+                                      Grade: <span style={{ color: '#f59e0b' }}>{outputGrade}</span>
+                                      {'  '}Succ: <span style={{ color: '#00ff88' }}>{chances.success}%</span>
+                                      {'  '}Destroy: <span style={{ color: '#ff5566' }}>{chances.destroy}%</span>
+                                      {'  '}Great: <span style={{ color: '#a855f7' }}>{chances.great}%</span>
+                                    </div>
+                                  )}
                                   {outputStats.length > 0 && (
-                                    <div style={{ color: '#888', fontSize: 10, marginTop: 2 }}>
+                                    <div style={{ color: '#888', fontSize: 14, marginTop: 4 }}>
                                       Stats: {outputStats.map((s, i) => <span key={i} style={{ color: '#00ff88' }}>{i > 0 ? ', ' : ''}{s.stat} +{s.val}</span>)}
                                     </div>
                                   )}
@@ -1681,13 +1677,55 @@ export default function AuditorRoom() {
                           <div style={{ padding: '14px', display: 'flex', flexDirection: 'column', flex: 1, gap: '14px', overflowHidden: true }}>
                               
                               <div>
-                                  <div className="simulator-title" style={{ fontSize: '10px', color: '#00ff88', marginBottom: '6px', letterSpacing: '0.5px' }}>⚡ LOG PENYIMPANAN SESI INI</div>
-                                  <div className="no-scrollbar" style={{ background: '#0a0e16', border: '1px solid #1a2c3a', borderRadius: '4px', padding: '10px', maxHeight: '160px', overflowY: 'auto' }}>
-                                      {recipeLogs.length === 0 ? (
-                                          <div style={{ color: '#666', fontSize: '11px', fontStyle: 'italic' }}>Belum ada aktivitas penyimpanan di sesi ini.</div>
+                                  <div className="simulator-title" style={{ fontSize: '12px', color: '#00ff88', marginBottom: '6px', letterSpacing: '0.5px' }}>⚡ DRAFT RECIPE CRAFTING</div>
+                                  <div className="no-scrollbar" style={{ background: '#0a0e16', border: '1px solid #1a2c3a', borderRadius: '4px', padding: '10px', maxHeight: '180px', overflowY: 'auto' }}>
+                                      {craftDrafts.length === 0 ? (
+                                          <div style={{ color: '#666', fontSize: '12px', fontStyle: 'italic' }}>Belum ada draft resep di sesi ini.</div>
                                       ) : (
-                                          recipeLogs.map((log, idx) => (
-                                              <div key={idx} style={{ marginBottom: '6px', color: '#00ff88', fontSize: '11px', borderBottom: idx < recipeLogs.length - 1 ? '1px dashed #142a22' : 'none', paddingBottom: '4px' }}>{log}</div>
+                                          craftDrafts.map((draft, idx) => (
+                                              <div key={idx} style={{ marginBottom: '8px', padding: '8px', background: '#121622', border: '1px solid #2a3a5a', borderRadius: '4px' }}>
+                                                  <div style={{ color: '#00e5ff', fontSize: '12px', fontWeight: 'bold' }}>
+                                                      {draft.name} 
+                                                      {!(draft.category === 'crafting' && ((draft.id || draft.name || '').toLowerCase().includes('shard') || (draft.id || draft.name || '').toLowerCase().includes('ore'))) && (
+                                                          <span style={{ color: '#888', fontSize: '12px', marginLeft: '4px' }}>({draft.grade})</span>
+                                                      )}
+                                                  </div>
+                                                  <div style={{ color: '#aaa', fontSize: '12px', marginTop: '4px' }}>{draft.materials.length} Materials</div>
+                                                  <div style={{ display: 'flex', gap: '6px', marginTop: '8px' }}>
+                                                      <button onClick={() => {
+                                                          setTargetItem({ id: draft.id, name: draft.name, image: draft.targetImg, _imagePreview: draft.targetImg });
+                                                          const newSlots = [null, null, null, null, null, null];
+                                                          draft.materials.forEach((m, i) => {
+                                                              if (i < 6) newSlots[i] = { id: m.id, name: m.name, image: m.img, _imagePreview: m.img, qty: m.qty || 1 };
+                                                          });
+                                                          setRecipeSlots(newSlots);
+                                                          setOutputGrade(draft.grade);
+                                                          setOutputStats(draft.stats || []);
+                                                          setChances(draft.chances || { success: '65', destroy: '20', great: '10', bonus: '5' });
+                                                          setRecipeCost({ crd: draft.cost?.crd || '', nsx: draft.cost?.nsx || '' });
+                                                          setCraftDrafts(prev => prev.filter((_, i) => i !== idx));
+                                                      }} style={{ flex: 1, padding: '4px', background: '#2a3a5a', color: '#fff', border: 'none', borderRadius: '3px', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold' }}>Edit</button>
+                                                      
+                                                      <button onClick={async () => {
+                                                          try {
+                                                              const res = await fetch('/api/audit/save_recipe', {
+                                                                  method: 'POST',
+                                                                  headers: { 'Content-Type': 'application/json' },
+                                                                  body: JSON.stringify({ pin, recipeData: draft })
+                                                              });
+                                                              if (res.ok) {
+                                                                  setCraftDrafts(prev => prev.filter((_, i) => i !== idx));
+                                                                  fetchData();
+                                                              } else {
+                                                                  const dt = await res.json();
+                                                                  alert(dt.error || 'Gagal publish resep.');
+                                                              }
+                                                          } catch (e) {
+                                                              alert("Gagal publish resep.");
+                                                          }
+                                                      }} style={{ flex: 1, padding: '4px', background: '#00ff88', color: '#000', border: 'none', borderRadius: '3px', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold' }}>Publish</button>
+                                                  </div>
+                                              </div>
                                           ))
                                       )}
                                   </div>
@@ -1709,8 +1747,12 @@ export default function AuditorRoom() {
                                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', flex: 1 }}>
                                                         <div style={{ color: '#fff', fontSize: '12px', fontWeight: 'bold' }}>{rec.targetItem?.name || rec.targetItem?.id || rec.name || `Recipe #${i+1}`}</div>
                                                         <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                                                            <span className="simulator-mono" style={{ background: 'rgba(0, 229, 255, 0.15)', color: '#00e5ff', padding: '1px 5px', borderRadius: '3px', fontSize: '10px' }}>{rec.outputGrade || '+1'}</span>
-                                                            <span className="simulator-mono" style={{ color: '#aaa', fontSize: '10px' }}>Succ: {rec.chances?.success || 65}%</span>
+                                                            {!(tab === 'crafting' && ((rec.id || rec.name || '').toLowerCase().includes('shard') || (rec.id || rec.name || '').toLowerCase().includes('ore'))) && (
+                                                                <>
+                                                                    <span className="simulator-mono" style={{ background: 'rgba(0, 229, 255, 0.15)', color: '#00e5ff', padding: '1px 5px', borderRadius: '3px', fontSize: '10px' }}>{rec.outputGrade || '+1'}</span>
+                                                                    <span className="simulator-mono" style={{ color: '#aaa', fontSize: '10px' }}>Succ: {rec.chances?.success || 65}%</span>
+                                                                </>
+                                                            )}
                                                         </div>
                                                     </div>
                                                     <button onClick={async (e) => {

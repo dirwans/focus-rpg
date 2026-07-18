@@ -1,1 +1,29 @@
-[]
+[
+  {
+    "id": "shard_common",
+    "name": "shard_common",
+    "category": "crafting",
+    "grade": "Normal",
+    "chances": {
+      "success": 65,
+      "destroy": 20,
+      "great": 10,
+      "bonus": 5
+    },
+    "stats": [],
+    "materials": [
+      {
+        "id": "ore_common",
+        "name": "Common Ore (C)",
+        "img": "/assets/materials/common_ore.png?v=14",
+        "qty": 10
+      }
+    ],
+    "cost": {
+      "crd": 0,
+      "nsx": 0
+    },
+    "targetImg": "/assets/materials/common_shard.png?v=14",
+    "updatedAt": "2026-07-18T12:34:24.849Z"
+  }
+]
