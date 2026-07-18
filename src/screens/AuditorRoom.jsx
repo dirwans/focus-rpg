@@ -590,7 +590,17 @@ export default function AuditorRoom() {
         nonGears.forEach(it => { if (it && it.id) mergedItemsMap.set(it.id, it) });
         rawMaterials.forEach(it => { if (it && it.id) mergedItemsMap.set(it.id, it) });
         gears.forEach(it => { if (it && it.id) mergedItemsMap.set(it.id, it) });
-        const finalItems = Array.from(mergedItemsMap.values());
+        const rawFinalItems = Array.from(mergedItemsMap.values());
+        const seenNamesForAudit = new Set();
+        const finalItems = rawFinalItems.filter(item => {
+          const nameLower = (item.name || '').toLowerCase();
+          const isOreOrShard = nameLower.includes('ore') || nameLower.includes('shard');
+          if (isOreOrShard) {
+            if (seenNamesForAudit.has(nameLower)) return false;
+            seenNamesForAudit.add(nameLower);
+          }
+          return true;
+        });
 
         const flatArctron = flattenGears(data.gears?.arctron, '', 'arctron');
         const flatBionex = flattenGears(data.gears?.bionex, '', 'bionex');
