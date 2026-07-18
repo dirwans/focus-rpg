@@ -1272,6 +1272,26 @@ export default function AuditorRoom() {
                                                           return;
                                                       }
                                                       
+                                                      const isTargetShard = targetItem && (targetItem.id || '').toLowerCase().includes('shard');
+                                                      if (tab === 'crafting' && isTargetShard && activeSlotIndex === 0) {
+                                                          const targetIdLower = (targetItem.id || '').toLowerCase();
+                                                          const targetGrade = targetIdLower.split('_').pop();
+                                                          if (!idLower.includes('ore') || !idLower.includes(targetGrade)) {
+                                                              alert(`❌ Slot utama (Slot 1) wajib diisi Ore dengan grade ${targetGrade.toUpperCase()}!`);
+                                                              return;
+                                                          }
+                                                      }
+
+                                                      if (activeSlotIndex === 1) {
+                                                          const typeLower = (item.type || '').toLowerCase();
+                                                          const isGear = ['weapon', 'shield', 'helmet', 'armor', 'pants', 'gloves', 'boots', 'accessories', 'ring', 'amulet'].some(t => typeLower.includes(t)) || 
+                                                                         idLower.startsWith('wpn_') || idLower.startsWith('shd_') || idLower.startsWith('arm_') || idLower.startsWith('set_') || idLower.startsWith('rng_') || idLower.startsWith('amu_') || idLower.startsWith('gw_') || idLower.startsWith('meu_') || idLower.startsWith('ares_') || idLower.startsWith('spirit_');
+                                                          if (isGear) {
+                                                              alert("Slot 2 cannot be filled with gears!");
+                                                              return;
+                                                          }
+                                                      }
+
                                                       const newSlots = [...recipeSlots];
                                                       newSlots[activeSlotIndex] = item;
                                                       setRecipeSlots(newSlots);
@@ -1283,6 +1303,12 @@ export default function AuditorRoom() {
                                                                                idLower.startsWith('wpn_') || idLower.startsWith('shd_') || idLower.startsWith('arm_') || idLower.startsWith('set_') || idLower.startsWith('rng_') || idLower.startsWith('amu_') || idLower.startsWith('gw_') || idLower.startsWith('meu_') || idLower.startsWith('ares_') || idLower.startsWith('spirit_');
                                                            if (!isEquipment) {
                                                                alert('❌ Hanya equipment (Senjata, Tameng, Armor, Aksesoris) yang bisa di-enhance!');
+                                                               return;
+                                                           }
+                                                      } else if (tab === 'crafting') {
+                                                           const isOre = idLower.includes('ore') || nameLower.includes('ore');
+                                                           if (isOre) {
+                                                               alert("can't crafting ores.");
                                                                return;
                                                            }
                                                       }
@@ -1373,12 +1399,19 @@ export default function AuditorRoom() {
                                           try {
                                               const dragItem = JSON.parse(e.dataTransfer.getData('application/json'));
                                               const dragIdLower = (dragItem.id || '').toLowerCase();
+                                              const dragNameLower = (dragItem.name || '').toLowerCase();
                                               if (tab === 'enhance') {
                                                    const typeLower = (dragItem.type || '').toLowerCase();
                                                    const isEquipment = ['weapon', 'shield', 'helmet', 'armor', 'pants', 'gloves', 'boots', 'accessories', 'ring', 'amulet'].some(t => typeLower.includes(t)) || 
                                                                        dragIdLower.startsWith('wpn_') || dragIdLower.startsWith('shd_') || dragIdLower.startsWith('arm_') || dragIdLower.startsWith('set_') || dragIdLower.startsWith('rng_') || dragIdLower.startsWith('amu_') || dragIdLower.startsWith('gw_') || dragIdLower.startsWith('meu_') || dragIdLower.startsWith('ares_') || dragIdLower.startsWith('spirit_');
                                                    if (!isEquipment) {
                                                        alert('❌ Hanya equipment (Senjata, Tameng, Armor, Aksesoris) yang bisa di-enhance!');
+                                                       return;
+                                                   }
+                                              } else if (tab === 'crafting') {
+                                                   const isOre = dragIdLower.includes('ore') || dragNameLower.includes('ore');
+                                                   if (isOre) {
+                                                       alert("can't crafting ores.");
                                                        return;
                                                    }
                                               }
@@ -1424,7 +1457,7 @@ export default function AuditorRoom() {
                                       <button onClick={() => setRecipeSlots([null, null, null, null, null])} className="simulator-title" style={{ background: '#311', border: '1px solid #ff3333', color: '#ff3333', padding: '3px 8px', borderRadius: '4px', cursor: 'pointer', fontSize: '10px', fontWeight: 'bold', transition: 'all 0.2s' }}>🗑️ Clear All</button>
                                   </div>
                                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
-                                      {recipeSlots.slice(0, tab === 'enhance' ? 3 : 5).map((slot, idx) => (
+                                      {recipeSlots.slice(0, tab === 'enhance' ? 3 : (targetItem && (targetItem.id || '').toLowerCase().includes('shard') ? 2 : 5)).map((slot, idx) => (
                                           <div key={idx} 
                                                onDragOver={(e) => e.preventDefault()}
                                                onDrop={(e) => {
@@ -1443,6 +1476,26 @@ export default function AuditorRoom() {
                                                        if (tab === 'enhance' && isOreOrShardOrCore) {
                                                            alert('❌ Ores, Shards, & Cores hanya boleh digunakan untuk Crafting!');
                                                            return;
+                                                       }
+
+                                                       const isTargetShard = targetItem && (targetItem.id || '').toLowerCase().includes('shard');
+                                                       if (tab === 'crafting' && isTargetShard && idx === 0) {
+                                                           const targetIdLower = (targetItem.id || '').toLowerCase();
+                                                           const targetGrade = targetIdLower.split('_').pop();
+                                                           if (!dragIdLower.includes('ore') || !dragIdLower.includes(targetGrade)) {
+                                                               alert(`❌ Slot utama (Slot 1) wajib diisi Ore dengan grade ${targetGrade.toUpperCase()}!`);
+                                                               return;
+                                                           }
+                                                       }
+
+                                                       if (idx === 1) {
+                                                           const typeLower = (dragItem.type || '').toLowerCase();
+                                                           const isGear = ['weapon', 'shield', 'helmet', 'armor', 'pants', 'gloves', 'boots', 'accessories', 'ring', 'amulet'].some(t => typeLower.includes(t)) || 
+                                                                          dragIdLower.startsWith('wpn_') || dragIdLower.startsWith('shd_') || dragIdLower.startsWith('arm_') || dragIdLower.startsWith('set_') || dragIdLower.startsWith('rng_') || dragIdLower.startsWith('amu_') || dragIdLower.startsWith('gw_') || dragIdLower.startsWith('meu_') || dragIdLower.startsWith('ares_') || dragIdLower.startsWith('spirit_');
+                                                           if (isGear) {
+                                                               alert("Slot 2 cannot be filled with gears!");
+                                                               return;
+                                                           }
                                                        }
 
                                                        const newSlots = [...recipeSlots];
