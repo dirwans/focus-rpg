@@ -202,7 +202,8 @@ export default function AuditorRoom() {
       materials: recipeSlots.filter(Boolean).map(s => ({
         id: s.id || s.code || s.name,
         name: s.name || s.id,
-        img: s._imagePreview || s.image || s.img
+        img: s._imagePreview || s.image || s.img,
+        qty: s.qty || 1
       })),
       targetImg: targetItem._imagePreview || targetItem.image || targetItem.img
     };
@@ -1514,6 +1515,22 @@ export default function AuditorRoom() {
                                                    }} style={{ position: 'absolute', top: '-4px', right: '-4px', width: '16px', height: '16px', borderRadius: '50%', background: '#ff3333', border: '1px solid #ff7777', color: '#fff', fontSize: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontWeight: 'bold', boxShadow: '0 0 4px rgba(255,0,0,0.5)', zIndex: 10 }}>×</button>
                                                    {slot._imagePreview && <img src={slot._imagePreview} style={{ width: '34px', height: '34px', objectFit: 'contain', marginBottom: '4px', filter: 'drop-shadow(0 0 5px rgba(255, 255, 255, 0.85)) brightness(1.3)' }} />}
                                                    <div style={{ color: '#fff', fontSize: '10px', textAlign: 'center', fontWeight: 'bold', lineHeight: '1.2' }}>{slot.name || slot.id}</div>
+                                                   {tab === 'crafting' && (
+                                                       <div onClick={e => e.stopPropagation()} style={{ marginTop: '4px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                                           <span style={{ fontSize: '9px', color: '#888' }}>QTY:</span>
+                                                           <input 
+                                                               type="number" 
+                                                               min="1"
+                                                               value={slot.qty || 1}
+                                                               onChange={(e) => {
+                                                                   const newSlots = [...recipeSlots];
+                                                                   newSlots[idx] = { ...slot, qty: Number(e.target.value) };
+                                                                   setRecipeSlots(newSlots);
+                                                               }}
+                                                               style={{ width: '30px', background: '#121622', border: '1px solid #00e5ff', color: '#fff', borderRadius: '3px', fontSize: '10px', textAlign: 'center', padding: '1px' }}
+                                                           />
+                                                       </div>
+                                                   )}
                                                  </>
                                              ) : (
                                                  <>
@@ -1526,8 +1543,10 @@ export default function AuditorRoom() {
                                   </div>
                               </div>
 
-                              <div>
-                                  <div className="simulator-title" style={{ fontSize: '10px', color: '#aaa', marginBottom: '6px', textTransform: 'uppercase' }}>{tab === 'enhance' ? 'Enhancement Target Level' : 'Output Stats & Grade'}</div>
+                              {!(tab === 'crafting' && targetItem && (targetItem.id || '').toLowerCase().includes('shard')) && (
+                                <>
+                                  <div>
+                                      <div className="simulator-title" style={{ fontSize: '10px', color: '#aaa', marginBottom: '6px', textTransform: 'uppercase' }}>{tab === 'enhance' ? 'Enhancement Target Level' : 'Output Stats & Grade'}</div>
                                   <div style={{ background: '#0c1018', border: '1px solid #2a3a5a', borderRadius: '6px', padding: '10px' }}>
                                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
                                           <span style={{ color: '#aaa', fontSize: '12px' }}>{tab === 'enhance' ? 'Target Level' : 'Item Grade'}</span>
@@ -1610,6 +1629,8 @@ export default function AuditorRoom() {
                                       </div>
                                   </div>
                               </div>
+                                </>
+                              )}
 
                               {/* Live Description Preview */}
                               {targetItem && (
@@ -1626,7 +1647,7 @@ export default function AuditorRoom() {
                                     {recipeSlots.filter(Boolean).length === 0
                                       ? <span style={{ color: '#444', fontStyle: 'italic' }}>—</span>
                                       : recipeSlots.filter(Boolean).map((s, i) => (
-                                          <span key={i} style={{ color: '#a0c8ff' }}>{i > 0 ? ' + ' : ''}{s.name || s.id}</span>
+                                          <span key={i} style={{ color: '#a0c8ff' }}>{i > 0 ? ' + ' : ''}{s.qty || 1}x {s.name || s.id}</span>
                                         ))
                                     }
                                   </div>
