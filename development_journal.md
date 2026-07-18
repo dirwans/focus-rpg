@@ -16,6 +16,18 @@ Starting July 7, 2026, the following rules are enforced for all development and 
 
 ## 📅 Session Chronological Logs
 
+### 🎯 Milestone 189: Generic Ore & Shard Overhaul — Element Removal [DEPLOYED]
+- **Database Overhaul (`src/data/items.json`)**: Replaced 30 element-specific ores & shards (ignis/kryos/virel/zephra/umbrix × 6 grades) with **12 generic materials**: `ore_common` through `ore_mythic` + `shard_common` through `shard_mythic`. Image paths now point to `/assets/materials/{grade}_ore.png` and `{grade}_shard.png`.
+- **Mining Rewards (`src/store/gameStore.js`)**: `claimMiningRewards` no longer rolls a random element — drops are now direct generic IDs (`ore_common`, `ore_rare`, `ore_epic`). Removed `oreTypes` array entirely.
+- **Ore Processing (`src/store/gameStore.js`, `src/screens/Mine.jsx`)**: `processOreToShard` now builds IDs as `ore_{grade}` / `shard_{grade}` instead of `ore_{element}_{grade}`. Mine.jsx UI collapsed from 5 element cards per grade to **1 generic card per grade** (Common/Rare/Epic).
+- **Shard Crafting (`src/store/gameStore.js`, `src/components/NpcModal.jsx`)**: `craftShard` targets `ore_{tier}` → `shard_{tier}`. NPC Master Artisan recipe list reduced from 15 element-tier combos to **3 generic tier recipes**.
+- **Arcanite Synthesis (`src/store/gameStore.js`, `src/components/NpcModal.jsx`)**: All 8 Arcanite recipes now require `shard_epic` ×2 instead of element-specific epic shards.
+- **Legendary Forge (`src/store/gameStore.js`, `src/components/NpcModal.jsx`)**: Legendary crafting now requires `shard_epic` × (shards×5) instead of each of 5 element shards separately.
+- **Backend Cleanup (`server.js`)**: Removed `syncOreOrShardGroup` helper function and all 3 call sites (save_item_direct, publish_draft, import_excel) — no longer needed since elements don't exist.
+- **Auditor Room Dedup (`src/screens/AuditorRoom.jsx`)**: Added name-based deduplication filter for ores/shards in Items tab display list.
+- **Excel Export Dedup (`server.js`)**: Added name-based deduplication in `/api/audit/excel_template` export to prevent duplicate ore/shard rows.
+- **Asset Preservation**: Element ore PNGs renamed to `raw_{element}_ore.png` (kept for future reference), not deleted.
+
 ### 🎯 Milestone 188: Material Ore & Shard Database Cleanup & Sync Security [DEPLOYED]
 - **Database Sanitization (`src/data/items.json`)**: Removed 30 element-specific Ore & Shard items (grades Common, Rare, Epic) from the `"items"` array where they were incorrectly duplicated. The data now resides strictly inside the `"materials"` array, keeping they generic as intended by the game's core guidelines.
 - **Direct Save Security (`server.js`)**: Updated `/api/audit/save_item_direct` and `/api/audit/publish_draft` logic to intelligently separate items into either `"items"` or `"materials"` depending on item type/prefix, preventing future database duplication/bleeding.
