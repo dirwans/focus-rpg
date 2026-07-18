@@ -1,0 +1,242 @@
+{
+  "name": "arc-lv1-warrior-battle",
+  "imgSize": { "x": 702, "y": 702 },
+  "bones": [
+    {
+      "id": "rbone_hip",
+      "name": "Hip",
+      "parentId": null,
+      "restStart": { "x": 340, "y": 380 },
+      "restEnd": { "x": 340, "y": 340 },
+      "length": 40,
+      "restAngle": -1.5708,
+      "color": "#ff5222"
+    },
+    {
+      "id": "rbone_spine",
+      "name": "Spine",
+      "parentId": "rbone_hip",
+      "restStart": { "x": 340, "y": 340 },
+      "restEnd": { "x": 330, "y": 270 },
+      "length": 71,
+      "restAngle": -1.7132,
+      "color": "#22c55e"
+    },
+    {
+      "id": "rbone_chest",
+      "name": "Chest",
+      "parentId": "rbone_spine",
+      "restStart": { "x": 330, "y": 270 },
+      "restEnd": { "x": 320, "y": 200 },
+      "length": 71,
+      "restAngle": -1.7132,
+      "color": "#3b82f6"
+    },
+    {
+      "id": "rbone_head",
+      "name": "Head",
+      "parentId": "rbone_chest",
+      "restStart": { "x": 320, "y": 200 },
+      "restEnd": { "x": 315, "y": 130 },
+      "length": 70,
+      "restAngle": -1.6423,
+      "color": "#f59e0b"
+    },
+    {
+      "id": "rbone_upper_arm_r",
+      "name": "UpperArm R",
+      "parentId": "rbone_chest",
+      "restStart": { "x": 300, "y": 220 },
+      "restEnd": { "x": 260, "y": 290 },
+      "length": 79,
+      "restAngle": 2.0944,
+      "color": "#8b5cf6"
+    },
+    {
+      "id": "rbone_forearm_r",
+      "name": "Forearm R",
+      "parentId": "rbone_upper_arm_r",
+      "restStart": { "x": 260, "y": 290 },
+      "restEnd": { "x": 220, "y": 370 },
+      "length": 89,
+      "restAngle": 2.0344,
+      "color": "#06b6d4"
+    },
+    {
+      "id": "rbone_hand_r",
+      "name": "Hand R (Sword)",
+      "parentId": "rbone_forearm_r",
+      "restStart": { "x": 220, "y": 370 },
+      "restEnd": { "x": 195, "y": 410 },
+      "length": 47,
+      "restAngle": 2.1112,
+      "color": "#ec4899"
+    },
+    {
+      "id": "rbone_sword",
+      "name": "Sword",
+      "parentId": "rbone_hand_r",
+      "restStart": { "x": 195, "y": 410 },
+      "restEnd": { "x": 120, "y": 570 },
+      "length": 175,
+      "restAngle": 2.0071,
+      "color": "#10b981"
+    },
+    {
+      "id": "rbone_upper_arm_l",
+      "name": "UpperArm L",
+      "parentId": "rbone_chest",
+      "restStart": { "x": 350, "y": 220 },
+      "restEnd": { "x": 400, "y": 280 },
+      "length": 78,
+      "restAngle": 0.8761,
+      "color": "#f97316"
+    },
+    {
+      "id": "rbone_forearm_l",
+      "name": "Forearm L",
+      "parentId": "rbone_upper_arm_l",
+      "restStart": { "x": 400, "y": 280 },
+      "restEnd": { "x": 450, "y": 310 },
+      "length": 56,
+      "restAngle": 0.5404,
+      "color": "#a855f7"
+    },
+    {
+      "id": "rbone_shield",
+      "name": "Shield",
+      "parentId": "rbone_forearm_l",
+      "restStart": { "x": 450, "y": 310 },
+      "restEnd": { "x": 540, "y": 290 },
+      "length": 92,
+      "restAngle": -0.2187,
+      "color": "#ef4444"
+    },
+    {
+      "id": "rbone_thigh_r",
+      "name": "Thigh R",
+      "parentId": "rbone_hip",
+      "restStart": { "x": 320, "y": 390 },
+      "restEnd": { "x": 280, "y": 480 },
+      "length": 98,
+      "restAngle": 1.9896,
+      "color": "#14b8a6"
+    },
+    {
+      "id": "rbone_shin_r",
+      "name": "Shin R",
+      "parentId": "rbone_thigh_r",
+      "restStart": { "x": 280, "y": 480 },
+      "restEnd": { "x": 230, "y": 590 },
+      "length": 121,
+      "restAngle": 2.0071,
+      "color": "#64748b"
+    },
+    {
+      "id": "rbone_foot_r",
+      "name": "Foot R",
+      "parentId": "rbone_shin_r",
+      "restStart": { "x": 230, "y": 590 },
+      "restEnd": { "x": 170, "y": 640 },
+      "length": 76,
+      "restAngle": 2.4469,
+      "color": "#84cc16"
+    },
+    {
+      "id": "rbone_thigh_l",
+      "name": "Thigh L",
+      "parentId": "rbone_hip",
+      "restStart": { "x": 360, "y": 390 },
+      "restEnd": { "x": 400, "y": 475 },
+      "length": 93,
+      "restAngle": 1.3464,
+      "color": "#e879f9"
+    },
+    {
+      "id": "rbone_shin_l",
+      "name": "Shin L",
+      "parentId": "rbone_thigh_l",
+      "restStart": { "x": 400, "y": 475 },
+      "restEnd": { "x": 420, "y": 580 },
+      "length": 107,
+      "restAngle": 1.3809,
+      "color": "#fbbf24"
+    },
+    {
+      "id": "rbone_foot_l",
+      "name": "Foot L",
+      "parentId": "rbone_shin_l",
+      "restStart": { "x": 420, "y": 580 },
+      "restEnd": { "x": 480, "y": 620 },
+      "length": 72,
+      "restAngle": 0.5880,
+      "color": "#38bdf8"
+    }
+  ],
+  "animations": [
+    {
+      "id": "idle_0",
+      "name": "Idle Loop",
+      "duration": 40,
+      "keyframes": [
+        { "frame": 0, "boneTransforms": {
+          "rbone_hip": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_spine": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_chest": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_head": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_upper_arm_r": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_forearm_r": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_hand_r": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_sword": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_upper_arm_l": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_forearm_l": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_shield": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_thigh_r": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_shin_r": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_foot_r": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_thigh_l": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_shin_l": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_foot_l": { "rotation": 0, "translation": { "x": 0, "y": 0 } }
+        }},
+        { "frame": 20, "boneTransforms": {
+          "rbone_hip": { "rotation": 0, "translation": { "x": 0, "y": -3 } },
+          "rbone_spine": { "rotation": 0.02, "translation": { "x": 0, "y": 0 } },
+          "rbone_chest": { "rotation": 0.01, "translation": { "x": 0, "y": 0 } },
+          "rbone_head": { "rotation": -0.03, "translation": { "x": 0, "y": 0 } },
+          "rbone_upper_arm_r": { "rotation": 0.03, "translation": { "x": 0, "y": 0 } },
+          "rbone_forearm_r": { "rotation": -0.02, "translation": { "x": 0, "y": 0 } },
+          "rbone_hand_r": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_sword": { "rotation": 0.02, "translation": { "x": 0, "y": 0 } },
+          "rbone_upper_arm_l": { "rotation": -0.02, "translation": { "x": 0, "y": 0 } },
+          "rbone_forearm_l": { "rotation": 0.02, "translation": { "x": 0, "y": 0 } },
+          "rbone_shield": { "rotation": -0.01, "translation": { "x": 0, "y": 0 } },
+          "rbone_thigh_r": { "rotation": 0.01, "translation": { "x": 0, "y": 0 } },
+          "rbone_shin_r": { "rotation": -0.01, "translation": { "x": 0, "y": 0 } },
+          "rbone_foot_r": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_thigh_l": { "rotation": -0.01, "translation": { "x": 0, "y": 0 } },
+          "rbone_shin_l": { "rotation": 0.01, "translation": { "x": 0, "y": 0 } },
+          "rbone_foot_l": { "rotation": 0, "translation": { "x": 0, "y": 0 } }
+        }},
+        { "frame": 40, "boneTransforms": {
+          "rbone_hip": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_spine": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_chest": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_head": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_upper_arm_r": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_forearm_r": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_hand_r": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_sword": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_upper_arm_l": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_forearm_l": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_shield": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_thigh_r": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_shin_r": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_foot_r": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_thigh_l": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_shin_l": { "rotation": 0, "translation": { "x": 0, "y": 0 } },
+          "rbone_foot_l": { "rotation": 0, "translation": { "x": 0, "y": 0 } }
+        }}
+      ]
+    }
+  ]
+}
