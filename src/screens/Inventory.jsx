@@ -382,7 +382,8 @@ export default function Inventory() {
                 </div>
                 
                 {equipOpen && (
-                  <>
+                  <div className="inv-content-wrapper">
+                    <div className="inv-equip-section">
                     {/* ── Equipment Grid ─────────────────────────────── */}
                         <div className="inv-equip-grid" style={{
                       margin: '0 auto 12px',
@@ -518,7 +519,8 @@ export default function Inventory() {
                         </div>
                       )
                     })()}
-
+                    </div>
+                    <div className="inv-bag-section" style={{ width: '100%', flex: 1 }}>
                     {/* ── Bag Tabs ───────────────────────────────────── */}
                     <div className="inv-bag-tabs" style={{
                       display: 'grid',
@@ -838,7 +840,8 @@ export default function Inventory() {
                         })()}
                       </div>
                     )}
-                  </>
+                    </div>
+                  </div>
                 )}
               </>
             )

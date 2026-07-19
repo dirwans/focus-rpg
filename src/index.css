@@ -2268,24 +2268,32 @@ body {
    LANDSCAPE INVENTORY SPLIT
    ========================================================= */
 .game-container.landscape .inv-layout-wrapper {
-  display: grid !important;
-  grid-template-columns: 1fr 340px;
-  grid-template-rows: auto 1fr auto;
-  grid-template-areas:
-    "toggle toggle"
-    "tabs equip"
-    "contents picker";
-  gap: 16px;
-  align-items: start;
   padding: 16px !important;
   height: calc(100% - 60px);
+  overflow-y: auto;
 }
 
-.game-container.landscape .inv-title-toggle { grid-area: toggle; margin: 0 !important; }
-.game-container.landscape .inv-equip-grid { grid-area: equip; margin: 0 !important; width: 100% !important; max-width: 100% !important; }
-.game-container.landscape .inv-smart-picker { grid-area: picker; margin: 0 !important; width: 100% !important; }
-.game-container.landscape .inv-bag-tabs { grid-area: tabs; margin: 0 !important; width: 100% !important; grid-template-columns: repeat(5, 48px) !important; justify-content: start !important; }
-.game-container.landscape .inv-bag-contents { grid-area: contents; margin: 0 !important; width: 100% !important; }
+.game-container.landscape .inv-content-wrapper {
+  display: flex !important;
+  flex-direction: row-reverse !important;
+  align-items: flex-start;
+  gap: 16px;
+  width: 100%;
+}
+
+.game-container.landscape .inv-bag-section {
+  flex: 1;
+}
+
+.game-container.landscape .inv-equip-section {
+  width: 340px;
+  flex-shrink: 0;
+}
+
+.game-container.landscape .inv-equip-grid { margin: 0 !important; width: 100% !important; max-width: 100% !important; }
+.game-container.landscape .inv-smart-picker { margin: 0 0 12px 0 !important; width: 100% !important; }
+.game-container.landscape .inv-bag-tabs { margin: 0 0 14px 0 !important; width: 100% !important; grid-template-columns: repeat(5, 48px) !important; justify-content: start !important; }
+.game-container.landscape .inv-bag-contents { margin: 0 !important; width: 100% !important; }
 
 /* =========================================================
    LANDSCAPE MAIN SCREEN SPLIT
