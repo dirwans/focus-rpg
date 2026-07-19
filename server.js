@@ -1333,6 +1333,28 @@ app.get('/api/game/gear_coords', (req, res) => {
   }
 })
 
+// Recursive listing of public/assets image files, used by animation-lab.html's
+// Asset Library panel so gear pieces can be loaded by clicking instead of going
+// through the OS file picker every time.
+app.get('/api/asset-library', (req, res) => {
+  try {
+    const baseDir = join(__dirname, 'public', 'assets')
+    const IMAGE_EXT = /\.(png|jpg|jpeg|webp|gif)$/i
+    const files = []
+    function walk(dir, relPath) {
+      for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+        const entryRel = relPath ? `${relPath}/${entry.name}` : entry.name
+        if (entry.isDirectory()) walk(join(dir, entry.name), entryRel)
+        else if (IMAGE_EXT.test(entry.name)) files.push({ path: `/assets/${entryRel}`, name: entry.name, folder: relPath })
+      }
+    }
+    if (existsSync(baseDir)) walk(baseDir, '')
+    res.json({ files })
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to list asset library', message: err.message })
+  }
+})
+
 app.post('/api/audit/save_gear_coords', (req, res) => {
   const { race, jobLineage, coords } = req.body
   try {
