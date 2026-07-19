@@ -46,6 +46,15 @@ Per-user saves stored in `data/save_<username>.json` on VPS. Session tokens expi
 
 `src/components/PilotSprites.jsx` — thin wrappers per race (`ArctronSprite`, `BionexSprite`, `CelestraSprite`). `fill` prop triggers bust portrait mode for the profile card; battle mode uses the full sprite. Job art is grouped by lane (`getJobLane`: warrior/ranger/mystic/specialist) rather than one image per exact job — tier2-4 promotions currently reuse the tier1 lane sprite (no dedicated per-tier character art yet).
 
+### Battle Animation System
+
+`src/components/ArctronBattleIdleSprite.jsx` — canvas-based battle idle animation for Arctron warrior tier1. Uses:
+- `spritesheet_fixed.png` — fixed spritesheet (611x695 per frame, 6 frames)
+- `weapon_shield_layers.json` — per-frame weapon/shield positioning (x, y, scale, rotation)
+- Dynamic weapon/shield loading via `resolveItemImage()` for equipped items
+
+**Note**: Large sprite files (e.g., `spritesheet_fixed.png`) may be gitignored. Use `git add -f <file>` to force-add, then commit+push. VPS needs manual `git pull` after deploy.ps1 if sprite files are in gitignored dirs.
+
 ### Race System
 
 Three races: `arctron` (cybernetic mecha faction), `bionex` (technocratic human alliance), `celestra` (arcane elves). **Note**: older docs/code comments may refer to legacy names `acreton`/`belterra`/`coralis` — those are stale, the actual race ids used everywhere are `arctron`/`bionex`/`celestra`. Equipment can be race-locked and/or job-locked (see below). Race affects base stats, FP regeneration, and which items are equippable. See `src/data/races.json` and `src/data/jobs.json` (per-race `tier1`-`tier4` job arrays).
