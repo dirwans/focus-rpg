@@ -2287,6 +2287,75 @@ body {
 .game-container.landscape .inv-bag-tabs { grid-area: tabs; margin: 0 !important; width: 100% !important; grid-template-columns: repeat(5, 48px) !important; justify-content: start !important; }
 .game-container.landscape .inv-bag-contents { grid-area: contents; margin: 0 !important; width: 100% !important; }
 
+/* =========================================================
+   LANDSCAPE MAIN SCREEN SPLIT
+   ========================================================= */
+.game-container.landscape .main-active-layout {
+  display: grid !important;
+  grid-template-columns: 1fr 340px;
+  grid-template-rows: auto auto auto auto 1fr auto;
+  grid-template-areas:
+    "arena topbar"
+    "arena timer"
+    "arena idle"
+    "arena health"
+    "arena logs"
+    "arena summary";
+  gap: 10px;
+  padding: 16px !important;
+  height: calc(100% - 60px);
+}
+.game-container.landscape .main-active-topbar { grid-area: topbar; margin: 0 !important; width: 100% !important; }
+.game-container.landscape .main-active-timer { grid-area: timer; margin: 0 !important; width: 100% !important; }
+.game-container.landscape .main-active-idle { grid-area: idle; margin: 0 auto !important; }
+.game-container.landscape .main-active-logs { grid-area: logs; margin: 0 !important; width: 100% !important; }
+.game-container.landscape .main-active-health { grid-area: health; margin: 0 !important; width: 100% !important; }
+.game-container.landscape .main-active-arena { grid-area: arena; margin: 0 !important; width: 100% !important; padding: 0 !important; height: 100%; justify-content: center !important; }
+.game-container.landscape .main-active-summary { grid-area: summary; margin: 0 !important; width: 100% !important; }
+
+.game-container.landscape .main-lobby-layout {
+  display: grid !important;
+  grid-template-columns: 1fr 360px;
+  grid-template-rows: auto auto auto 1fr auto;
+  grid-template-areas:
+    "hud hud"
+    "status status"
+    "exp exp"
+    "guild panel"
+    "stats panel";
+  gap: 12px;
+  padding: 16px !important;
+  height: calc(100% - 60px);
+  align-items: start;
+}
+.game-container.landscape .main-lobby-hud { grid-area: hud; margin: 0 !important; padding: 0 !important; }
+.game-container.landscape .main-lobby-status { grid-area: status; margin: 0 !important; width: 100% !important; }
+.game-container.landscape .main-lobby-exp { grid-area: exp; margin: 0 !important; width: 100% !important; padding: 0 !important; }
+.game-container.landscape .main-lobby-guild { grid-area: guild; margin: 0 !important; width: 100% !important; }
+.game-container.landscape .main-lobby-stats { grid-area: stats; margin: 0 !important; width: 100% !important; }
+.game-container.landscape .main-lobby-panel { grid-area: panel; margin: 0 !important; width: 100% !important; height: 100% !important; }
+
+/* =========================================================
+   LANDSCAPE UNIT SCREEN SPLIT
+   ========================================================= */
+.game-container.landscape .unit-landscape-split {
+  flex-direction: row !important;
+  height: calc(100% - 60px);
+}
+.game-container.landscape .unit-left-panel {
+  width: 340px;
+  flex-shrink: 0;
+  border-right: 1px solid rgba(0, 229, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+.game-container.landscape .unit-right-panel {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
 /* Glowing top and bottom bars matching the mockup */
 .cyberpunk-hud-bg::after {
   content: "";

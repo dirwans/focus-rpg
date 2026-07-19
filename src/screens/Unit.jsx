@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useGameStore, getPTCaps } from '../store/gameStore'
+import { useIsLandscape } from '../hooks/useIsLandscape'
 import races from '../data/races.json'
 import jobs from '../data/jobs.json'
 import archonData from '../data/archon.json'
@@ -106,6 +107,7 @@ function AccordionSection({ label, raceClass, defaultOpen = false, children }) {
 }
 
 export default function Unit() {
+  const isLandscape = useIsLandscape()
   if (typeof document !== 'undefined' && !document.getElementById('unit-kf')) {
     const s = document.createElement('style')
     s.id = 'unit-kf'
@@ -345,7 +347,8 @@ export default function Unit() {
   }[player.race] || '#08080d'
 
   return (
-    <div className="no-scrollbar" style={{ ...styles.screen, background: screenBg }} onClick={() => { setActiveTooltip(null); setSelectedBagItem(null); }}>
+    <div className={`no-scrollbar ${isLandscape ? 'unit-landscape-split' : ''}`} style={{ ...styles.screen, background: screenBg }} onClick={() => { setActiveTooltip(null); setSelectedBagItem(null); }}>
+      <div className="unit-left-panel">
       {/* Header */}
       <div style={styles.header}>
         <button onClick={() => useGameStore.getState().setScreen('main')} style={{background:'transparent', border:'none', color:'#00e5ff', fontSize: 20, cursor:'pointer', padding: '0 8px 0 0', display:'flex', alignItems:'center'}}>❮</button>
@@ -393,7 +396,9 @@ export default function Unit() {
           </div>
         )
       })()}
+      </div>
 
+      <div className="unit-right-panel no-scrollbar">
       {tab === 'stats' && (
         showJobsClassTree ? (
           /* ============ JOBS & PROMOTION TREE PANEL ============ */
@@ -1259,7 +1264,7 @@ export default function Unit() {
 
       {/* Bottom spacer */}
       <div style={{ height: 16 }} />
-
+      </div>
     </div>
   )
 }

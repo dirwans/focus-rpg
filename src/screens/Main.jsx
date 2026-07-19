@@ -642,8 +642,9 @@ export default function Main() {
     return (
       <div className="no-scrollbar" style={styles.screen}>
         {/* Top corner discreet abandon button and Stage header */}
-        <div style={styles.activeHeader}>
-          <div style={styles.activeStageBadge}>📍 {enemy.name}</div>
+        <div className="main-active-topbar" style={styles.activeHeader}>
+          <div style={styles.activeStageBadge}>
+            STG.{battle.stage}</div>
           <div style={styles.activeSectorLabel}>
             {isDungeon ? `DUNGEON ${timer.selectedZone.split('_')[1]}` : `MAP ${sectorIdx + 1}`}
           </div>
@@ -653,13 +654,13 @@ export default function Main() {
         </div>
 
         {/* 1. Sleek Compact Text Timer (Top portion) */}
-        <div style={styles.timerDisplayActiveCompact}>
+        <div className="main-active-timer" style={styles.timerDisplayActiveCompact}>
           <span style={styles.activeTimerDigits}>{fmt(timer.secondsLeft)}</span>
           <div style={{ ...styles.activeGatherBadge, color: '#ffaa00', borderColor: 'rgba(255, 170, 0, 0.5)', boxShadow: '0 0 8px rgba(255, 170, 0, 0.3)' }}>{t('focus_active')}</div>
         </div>
 
         {/* Idle/AFK System: live Active/Idle Mode indicator */}
-        <div style={{
+        <div className="main-active-idle" style={{
           display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, margin: '2px auto 6px',
           padding: '4px 12px', borderRadius: 20, width: 'fit-content',
           background: isScreenActive ? 'rgba(0,255,136,0.1)' : 'rgba(138,148,163,0.1)',
@@ -673,7 +674,7 @@ export default function Main() {
 
         {/* 2. Battle logs (Middle portion - framed with solid dark background) */}
         {battle.log.length > 0 && (
-          <div style={styles.battleLogActive}>
+          <div className="main-active-logs" style={styles.battleLogActive}>
             {battle.log.slice(-3).map((l, i, arr) => (
               <div key={i} style={{ fontFamily: 'var(--font-mono)', fontSize: 13, color: l.includes('BOSS') || l.includes('CRIT') || l.includes('Vampire') ? '#ffdd44' : l.includes('✅') || l.includes('🆙') ? '#00ff88' : '#c0dff0', opacity: 0.7 + (i / arr.length) * 0.3, fontWeight: 700 }}>{l}</div>
             ))}
@@ -682,7 +683,7 @@ export default function Main() {
 
         {/* 3. Health & Mana bars (Fight mode details) */}
         {timer.mode === 'fight' && battle.currentMob && (
-          <div style={styles.activeHealthBarWrapper}>
+          <div className="main-active-health" style={styles.activeHealthBarWrapper}>
             {/* Enemy HP */}
             <div style={{ display: 'flex', justifyContent: 'space-between', width: '90%', fontFamily: 'var(--font-mono)', fontSize: 13, color: '#ffaa00', fontWeight: 800, textShadow: '0 0 4px #000' }}>
               <span>{battle.currentMob.emoji} {battle.currentMob.name}</span>
@@ -714,7 +715,7 @@ export default function Main() {
         )}
 
         {/* 4. Battle Arena (Bottom portion - Unboxed sprites standing directly on grid floor!) */}
-        <div className={isCritHit ? 'screen-shake' : ''} style={styles.arenaActiveUnboxed}>
+        <div className={`main-active-arena ${isCritHit ? 'screen-shake' : ''}`} style={styles.arenaActiveUnboxed}>
           <div style={{ ...styles.arenaVisualContainerActive, justifyContent: battle.isBoss ? 'center' : 'space-around', gap: battle.isBoss ? 8 : 0 }}>
             <div style={styles.arenaGridOverlay} />
 
@@ -819,7 +820,7 @@ export default function Main() {
         </div>
 
         {/* 5. Session summary (Bottom-most bar) */}
-        <div style={styles.sessionSummaryActive}>
+        <div className="main-active-summary" style={styles.sessionSummaryActive}>
           <span style={{ color: '#fff', fontFamily: 'var(--font-mono)', fontSize: 13, fontWeight: 700, textShadow: '0 0 4px #000' }}>
             ⚔️ {t('kills_label', { kills: battle.kills })} &nbsp;|&nbsp; <span style={{ color: '#f5a623' }}>+{battle.sessionCrd}⬡</span> &nbsp;|&nbsp; <span style={{ color: '#00e5ff' }}>+{battle.sessionExp} Menit</span>
           </span>
@@ -836,7 +837,7 @@ export default function Main() {
   const focusModeLabel = FOCUS_MODE_LABEL[player.race] || 'FOCUS'
 
   return (
-    <div className="no-scrollbar" style={{ ...styles.screen, background: screenBg }}>
+    <div className={`no-scrollbar ${isLandscape ? 'main-lobby-layout' : ''}`} style={{ ...styles.screen, background: screenBg }}>
       {/* Ambient decorative layer — pure CSS/SVG, no image assets */}
       <div className="ambient-layer">
         <div className="ambient-topglow" />
@@ -847,7 +848,7 @@ export default function Main() {
       </div>
 
       {/* Top HUD bar */}
-      <div style={styles.hudBar}>
+      <div className="main-lobby-hud" style={styles.hudBar}>
         <span className="hud-pill">◈ {player.resources.crd.toLocaleString()} CRD</span>
         <span style={styles.iconRow}>
           {player.race && (
@@ -866,7 +867,7 @@ export default function Main() {
       </div>
 
       {/* Simplified Player Status HUD */}
-      <div className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.statusStrip}>
+      <div className={`main-lobby-status glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.statusStrip}>
         <div style={{ ...styles.avatarRing, border: `1.5px solid ${activeColor}80` }}>
           <PilotSprite race={player.race} job={player.job} gender={player.gender} size={36} showGears={false} upperBodyOnly={true} />
         </div>
@@ -897,7 +898,7 @@ export default function Main() {
       </div>
 
       {/* EXP bar */}
-      <div style={styles.expSection}>
+      <div className="main-lobby-exp" style={styles.expSection}>
         <div style={styles.expLabelRow}>
           <span>LV.{player.level}</span>
           <span>{100 - expPct}% TO NEXT</span>
@@ -907,7 +908,7 @@ export default function Main() {
       </div>
 
       {/* Guild Panel */}
-      <GuildPanel />
+      <div className="main-lobby-guild"><GuildPanel /></div>
 
       {/* Combat stats */}
       {(() => {
@@ -929,7 +930,7 @@ export default function Main() {
         }
 
         return (
-          <div className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.combatStats}>
+          <div className={`main-lobby-stats glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.combatStats}>
             <div style={styles.cstat}><div style={styles.cstatLabel}>{atkLabel}</div><div style={{ ...styles.cstatVal, color: activeColor }}>{activeAtk}</div></div>
             <div style={styles.statDivider} />
             <div style={styles.cstat}><div style={styles.cstatLabel}>{t('armor')}</div><div style={{ ...styles.cstatVal, color: '#eef3fb' }}>{stats.def}</div></div>
@@ -940,7 +941,7 @@ export default function Main() {
       })()}
 
       {/* Focus timer + Target zone + Deploy (Mission Terminal) */}
-      <div className={`glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.focusCard}>
+      <div className={`main-lobby-panel glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.focusCard}>
         {/* Location & Event Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
           <div 
