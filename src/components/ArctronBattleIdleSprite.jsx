@@ -2,8 +2,12 @@ import React, { useEffect, useRef, useState } from 'react'
 import { resolveItemImage } from '../store/gameStore'
 
 // Tier1 Arctron Warrior battle-idle animation, from fixed spritesheet
+// NOTE: For trial, using reference 3/4 view battle sprites (sword/shield).
+// Future: sync with equipped items' 3/4 view equivalents.
 const SHEET_URL = '/assets/arctron/def_warrior_armor_set_lv1_battle/spritesheet_fixed.png'
 const DATA_URL = '/assets/arctron/battle/warrior_lv1_idle/weapon_shield_layers.json'
+const WEAPON_URL = '/assets/arctron/def_warrior_armor_set_lv1_battle/sword_battle.png'
+const SHIELD_URL = '/assets/arctron/def_warrior_armor_set_lv1_battle/shield-battle.png'
 
 function proxyUrl(url) {
   if (!url) return null
@@ -54,15 +58,15 @@ export default function ArctronBattleIdleSprite({ player, width, height, classNa
 
   useEffect(() => {
     let cancelled = false
-    const weaponUrl = weaponItem ? proxyUrl(resolveItemImage(weaponItem, race, job, gender) || weaponItem.image) : null
-    const shieldUrl = shieldItem ? proxyUrl(resolveItemImage(shieldItem, race, job, gender) || shieldItem.image) : null
-    Promise.all([loadImage(weaponUrl), loadImage(shieldUrl)]).then(([w, s]) => {
+    // For trial: use reference 3/4 view battle sprites
+    // Future: load equipped item's 3/4 view equivalent
+    Promise.all([loadImage(WEAPON_URL), loadImage(SHIELD_URL)]).then(([w, s]) => {
       if (cancelled) return
       weaponImgRef.current = w
       shieldImgRef.current = s
     })
     return () => { cancelled = true }
-  }, [weaponItem?.id, shieldItem?.id, race, job, gender])
+  }, [])
 
   useEffect(() => {
     if (!rigData || !sheetImg) return
