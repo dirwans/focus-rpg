@@ -121,9 +121,7 @@ export default function Lv1BattleArctronWarrior({ player, width = 190, height, c
       const targetPivotX = 227.20
       const targetPivotY = 127.92
 
-      if (idx === 0) {
-        console.log(`[Arctron] Drawing frame ${idx} with scale ${scaleCorr.toFixed(3)} and pivot (${cellPivotsX[idx]}, ${cellPivotsY[idx]})`);
-      }
+      // Removed spammy console log
 
       ctx.save()
       

@@ -659,7 +659,7 @@ export default function Unit() {
             let runeSvgElements = (
               <>
                 <circle cx="105" cy="105" r="100" fill="none" stroke={`${fp}4d`} strokeWidth="1"/>
-                <circle cx="105" cy="105" r="86" fill="none" stroke="rgba(199,204,214,0.22)" strokeWidth="1" stroke-dasharray="3 9"/>
+                <circle cx="105" cy="105" r="86" fill="none" stroke="rgba(199,204,214,0.22)" strokeWidth="1" strokeDasharray="3 9"/>
               </>
             )
             
@@ -668,7 +668,7 @@ export default function Unit() {
               runeSvgElements = (
                 <>
                   <circle cx="105" cy="105" r="100" fill="none" stroke={`${fp}4d`} strokeWidth="1"/>
-                  <circle cx="105" cy="105" r="86" fill="none" stroke="rgba(199,204,214,0.22)" strokeWidth="1" stroke-dasharray="3 9"/>
+                  <circle cx="105" cy="105" r="86" fill="none" stroke="rgba(199,204,214,0.22)" strokeWidth="1" strokeDasharray="3 9"/>
                   <line x1="105" y1="5" x2="105" y2="205" stroke={`${fp}26`} strokeWidth="1"/>
                   <line x1="5" y1="105" x2="205" y2="105" stroke={`${fp}26`} strokeWidth="1"/>
                 </>

@@ -354,35 +354,81 @@ function WorldMapModal({ onClose }) {
         </div>
 
         {/* Row 4: Select / Deploy Button */}
-        <button
-          disabled={isLocked}
-          onClick={() => {
-            setSelectedMapIdx(selectedNode)
-            onClose()
-          }}
-          style={{
-            marginTop: 4,
-            padding: '14px',
-            width: '100%',
-            fontFamily: "'Orbitron', sans-serif",
-            fontSize: 14,
-            fontWeight: 900,
-            letterSpacing: 2.5,
-            borderRadius: '10px',
-            cursor: isLocked ? 'not-allowed' : 'pointer',
-            border: 'none',
-            background: isLocked 
-              ? 'rgba(40, 40, 50, 0.5)' 
-              : (isActive ? 'rgba(255,255,255,0.05)' : `linear-gradient(90deg, ${activeColor}, color-mix(in srgb, ${activeColor} 65%, white))`),
-            border: isActive ? `1.5px dashed ${activeColor}` : 'none',
-            color: isLocked ? '#7a8593' : (isActive ? activeColor : '#fff'),
-            boxShadow: isLocked ? 'none' : `0 4px 20px ${activeColor}44`,
-            transition: 'all 0.25s',
-            textAlign: 'center'
-          }}
-        >
-          {isLocked ? '🔒 TRANSMISSION LOCKED' : (isActive ? 'CURRENT LEVELING ZONE' : '⚡ DEPLOY PILOT UNIT HERE')}
-        </button>
+        {isLocked ? (
+          <button
+            disabled={true}
+            style={{
+              marginTop: 4, padding: '14px', width: '100%', fontFamily: "'Orbitron', sans-serif",
+              fontSize: 14, fontWeight: 900, letterSpacing: 2.5, borderRadius: '10px',
+              cursor: 'not-allowed', border: 'none', background: 'rgba(40, 40, 50, 0.5)',
+              color: '#7a8593', textAlign: 'center'
+            }}
+          >
+            🔒 TRANSMISSION LOCKED
+          </button>
+        ) : (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 4 }}>
+            <div style={{ fontSize: 11, fontWeight: 800, color: '#8a94a3', textAlign: 'center', fontFamily: 'var(--font-mono)' }}>
+              CHOOSE COMBAT MODE
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+              {/* Full Auto Button */}
+              <button
+                onClick={() => {
+                  setSelectedMapIdx(selectedNode)
+                  onClose()
+                }}
+                style={{
+                  padding: '12px 8px',
+                  fontFamily: "'Orbitron', sans-serif",
+                  fontSize: 13,
+                  fontWeight: 900,
+                  letterSpacing: 1,
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  border: isActive ? `1.5px dashed ${activeColor}` : 'none',
+                  background: `linear-gradient(135deg, ${activeColor}, color-mix(in srgb, ${activeColor} 50%, #000))`,
+                  color: '#fff',
+                  boxShadow: `0 4px 15px ${activeColor}44`,
+                  textAlign: 'center',
+                  display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4,
+                  transition: 'transform 0.15s, box-shadow 0.15s'
+                }}
+                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 6px 20px ${activeColor}66`; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = `0 4px 15px ${activeColor}44`; }}
+              >
+                <span>⚡ FULL AUTO</span>
+                <span style={{ fontSize: 9, opacity: 0.85, fontFamily: 'var(--font-body)', fontWeight: 600, letterSpacing: 0, textTransform: 'none' }}>
+                  AFK / Idle Grinding
+                </span>
+              </button>
+              
+              {/* Turn Based Button (Locked) */}
+              <button
+                disabled={true}
+                style={{
+                  padding: '12px 8px',
+                  fontFamily: "'Orbitron', sans-serif",
+                  fontSize: 13,
+                  fontWeight: 900,
+                  letterSpacing: 1,
+                  borderRadius: '8px',
+                  cursor: 'not-allowed',
+                  border: '1.5px solid rgba(255,255,255,0.08)',
+                  background: 'rgba(20, 25, 35, 0.6)',
+                  color: '#7a8593',
+                  textAlign: 'center',
+                  display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4
+                }}
+              >
+                <span>🔒 TURN-BASED</span>
+                <span style={{ fontSize: 9, opacity: 0.6, fontFamily: 'var(--font-body)', fontWeight: 600, letterSpacing: 0, textTransform: 'none' }}>
+                  Under Construction
+                </span>
+              </button>
+            </div>
+          </div>
+        )}
       </div>
 
     </div>
@@ -391,6 +437,7 @@ function WorldMapModal({ onClose }) {
 
 
 export default function Main() {
+  const isLandscape = useIsLandscape()
   const player   = useGameStore((s) => s.player)
   const timer    = useGameStore((s) => s.timer)
   const battle   = useGameStore((s) => s.battle)
@@ -1165,7 +1212,7 @@ const styles = {
   // Abandon
   topAbandonBar: { display: 'flex', justifyContent: 'flex-end', padding: '16px 16px 0 16px', zIndex: 10 },
   smallAbandonBtn: { background: 'rgba(255, 49, 49, 0.1)', border: '1px solid rgba(255, 49, 49, 0.4)', borderRadius: 6, color: '#ff4444', fontFamily: 'var(--font-title)', fontSize: 13, fontWeight: 800, padding: '6px 12px', cursor: 'pointer', letterSpacing: 1, transition: 'all 0.2s', boxShadow: '0 0 8px rgba(255, 49, 49, 0.1)' },
-  arenaActiveUnboxed: { margin: '0', padding: '24px 16px 0 16px', position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', overflow: 'visible', flex: 1, justifyContent: 'flex-end', width: '100%', flexShrink: 0 },
+  arenaActiveUnboxed: { margin: '0', padding: '24px 16px 0 16px', position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', overflow: 'visible', flexGrow: 1, justifyContent: 'flex-end', width: '100%', flexShrink: 0 },
   // New Contrast Framed Active Styles
   activeHeader: { display: 'flex', justifyContent: 'space-between', padding: '10px 16px', alignItems: 'center', width: '100%', zIndex: 10, background: 'rgba(3, 8, 20, 0.9)', borderBottom: '2.5px solid rgba(0, 229, 255, 0.35)', boxShadow: '0 0 15px rgba(0, 0, 0, 0.5)', flexShrink: 0 },
   activeStageBadge: { background: 'rgba(3, 8, 20, 0.95)', border: '1.5px solid var(--neon-glow)', borderRadius: '8px', padding: '6px 12px', fontFamily: 'var(--font-title)', fontSize: 13, color: '#fff', fontWeight: 800, boxShadow: '0 0 8px var(--neon-glow)', textShadow: '0 0 4px #000' },
