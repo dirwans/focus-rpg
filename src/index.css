@@ -2254,6 +2254,39 @@ body {
   flex-direction: column !important;
   width: 76px;
   height: 100%;
+  border-top: none !important;
+  border-right: 1px solid rgba(0, 229, 255, 0.3);
+  padding: 8px 4px !important;
+  justify-content: flex-start;
+}
+.game-container.landscape nav button {
+  height: 60px !important;
+  flex: none !important;
+}
+
+/* =========================================================
+   LANDSCAPE INVENTORY SPLIT
+   ========================================================= */
+.game-container.landscape .inv-layout-wrapper {
+  display: grid !important;
+  grid-template-columns: 1fr 340px;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "toggle toggle"
+    "tabs equip"
+    "contents picker";
+  gap: 16px;
+  align-items: start;
+  padding: 16px !important;
+  height: calc(100% - 60px);
+}
+
+.game-container.landscape .inv-title-toggle { grid-area: toggle; margin: 0 !important; }
+.game-container.landscape .inv-equip-grid { grid-area: equip; margin: 0 !important; width: 100% !important; max-width: 100% !important; }
+.game-container.landscape .inv-smart-picker { grid-area: picker; margin: 0 !important; width: 100% !important; }
+.game-container.landscape .inv-bag-tabs { grid-area: tabs; margin: 0 !important; width: 100% !important; grid-template-columns: repeat(5, 48px) !important; justify-content: start !important; }
+.game-container.landscape .inv-bag-contents { grid-area: contents; margin: 0 !important; width: 100% !important; }
+
 /* Glowing top and bottom bars matching the mockup */
 .cyberpunk-hud-bg::after {
   content: "";
