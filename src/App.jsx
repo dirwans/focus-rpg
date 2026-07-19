@@ -3,6 +3,7 @@ import { useGameStore } from './store/gameStore'
 import { useAuthStore } from './store/authStore'
 import { useTimer } from './hooks/useTimer'
 import { useVisibility } from './hooks/useVisibility'
+import { useIsLandscape } from './hooks/useIsLandscape'
 import { loadSave, syncSave, subscribeSave } from './lib/saveSync'
 import { apiGetArchon, apiChipWar } from './lib/api'
 import { t } from './lib/translate'
@@ -30,6 +31,7 @@ const snap = (gs) => JSON.stringify(gs ?? {})
 export default function App() {
   useTimer()
   useVisibility()
+  const isLandscape = useIsLandscape()
 
   const screen         = useGameStore((s) => s.screen)
   const showRaceSelect = useGameStore((s) => s.showRaceSelect)
@@ -300,7 +302,7 @@ export default function App() {
   if (loading || !hydrated || loadingSave) {
     return (
       <div className="game-root">
-        <div className="game-container" style={{ background: containerBg }}>
+        <div className={`game-container ${isLandscape ? 'landscape' : ''}`} data-faction={player?.race || ''} style={{ background: containerBg }}>
           <div style={styles.center}>
             <div style={{ fontSize: 48 }}>⚡</div>
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: 16, color: '#00e5ff', letterSpacing: 3, marginTop: 12 }}>LOADING...</div>
@@ -313,7 +315,7 @@ export default function App() {
   if (!user) {
     return (
       <div className="game-root">
-        <div className="game-container" style={{ background: containerBg }}>
+        <div className={`game-container ${isLandscape ? 'landscape' : ''}`} data-faction={player?.race || ''} style={{ background: containerBg }}>
           <Auth />
         </div>
       </div>
@@ -324,7 +326,7 @@ export default function App() {
   if (!player?.race) {
     return (
       <div className="game-root">
-        <div className="game-container" style={{ background: containerBg }}>
+        <div className={`game-container ${isLandscape ? 'landscape' : ''}`} data-faction={player?.race || ''} style={{ background: containerBg }}>
           <CharacterCreate />
         </div>
       </div>
@@ -335,7 +337,7 @@ export default function App() {
 
   return (
     <div className="game-root">
-      <div className="game-container" style={{ background: containerBg }}>
+      <div className={`game-container ${isLandscape ? 'landscape' : ''}`} data-faction={player?.race || ''} style={{ background: containerBg }}>
         <div className="no-scrollbar" style={styles.content}><Screen /></div>
         <BottomNav />
       </div>

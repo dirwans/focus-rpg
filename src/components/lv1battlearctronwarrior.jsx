@@ -103,13 +103,50 @@ export default function Lv1BattleArctronWarrior({ player, width = 190, height, c
 
     function drawFrame(idx) {
       ctx.clearRect(0, 0, fw, fh)
+
+      const localZooms = [
+        2.566942342472129,
+        1.6512106198034577,
+        2.9252203368296334,
+        1.8532105721699856,
+        2.554504530844912
+      ]
+      // Precision scaled pivots (composited dimensions scaled to 500x316)
+      const cellPivotsX = [227.20, 168.87, 250.01, 181.74, 226.41]
+      const cellPivotsY = [127.92, 108.26, 175.26, 121.96, 132.10]
+
+      const lz = localZooms[idx]
+      const scaleCorr = 2.566942342472129 / lz
+
+      const targetPivotX = 227.20
+      const targetPivotY = 127.92
+
+      if (idx === 0) {
+        console.log(`[Arctron] Drawing frame ${idx} with scale ${scaleCorr.toFixed(3)} and pivot (${cellPivotsX[idx]}, ${cellPivotsY[idx]})`);
+      }
+
+      ctx.save()
+      
+      // Shift target pivot position on canvas, scale, and shift back from the cell's pivot
+      ctx.translate(targetPivotX, targetPivotY)
+      ctx.scale(scaleCorr, scaleCorr)
+      ctx.translate(-cellPivotsX[idx], -cellPivotsY[idx])
+
+      // Draw the mecha body
       ctx.drawImage(sheetImg, idx * fw, 0, fw, fh, 0, 0, fw, fh)
+
       const frameData = frames[idx]
-      if (!frameData) return
+      if (!frameData) {
+        ctx.restore()
+        return
+      }
+
       if (frameData.weapon && !frameData.weapon.front) drawGear(frameData.weapon, weaponImgRef.current, calibrationRefWeaponWidth || 553)
       if (frameData.shield && !frameData.shield.front) drawGear(frameData.shield, shieldImgRef.current, calibrationRefShieldWidth || 390)
       if (frameData.weapon && frameData.weapon.front) drawGear(frameData.weapon, weaponImgRef.current, calibrationRefWeaponWidth || 553)
       if (frameData.shield && frameData.shield.front) drawGear(frameData.shield, shieldImgRef.current, calibrationRefShieldWidth || 390)
+
+      ctx.restore()
     }
 
     function loop(time) {
@@ -127,13 +164,34 @@ export default function Lv1BattleArctronWarrior({ player, width = 190, height, c
   if (unavailable) return fallback
   if (!rigData) return null
 
-  const displayHeight = height || (width * rigData.frameHeight / rigData.frameWidth)
+  // The exported frame carries generous padding around the character (room for the
+  // weapon's swing/rotation across frames — see animation-lab.html's export math),
+  // so the character itself only fills ~55% of the frame's own height.
+  // We scale the canvas up so the character itself ends up at roughly the requested size.
+  const targetCharacterHeight = height || width
+  const characterHeightRatio = 174 / 316 // Character bounding box is 174px out of 316px frame height
+  const displayHeight = targetCharacterHeight / characterHeightRatio
+  const displayWidth = displayHeight * (rigData.frameWidth / rigData.frameHeight)
+
+  // Align feet to the bottom of the container
+  // Raw frame bottom padding is 97px (Frame 0 feet stand at y = 219 out of 316)
+  const rawBottomPadding = 97
+  const scaledBottomPadding = (rawBottomPadding / rigData.frameHeight) * displayHeight
 
   return (
     <canvas
       ref={canvasRef}
       className={className}
-      style={{ width, height: displayHeight, imageRendering: 'auto', ...style }}
+      style={{
+        position: 'absolute',
+        bottom: -scaledBottomPadding,
+        left: '50%',
+        transform: 'translateX(-50%)',
+        width: displayWidth,
+        height: displayHeight,
+        imageRendering: 'auto',
+        ...style
+      }}
     />
   )
 }

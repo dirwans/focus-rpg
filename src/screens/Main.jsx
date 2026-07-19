@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
+import { useIsLandscape } from '../hooks/useIsLandscape'
 import { useGameStore, getPlayerClassGroup } from '../store/gameStore'
 import { useAuthStore } from '../store/authStore'
 import races from '../data/races.json'
@@ -90,6 +91,7 @@ const TWINKLE_DOTS = [
 
 // Full Screen Interactive World Map Modal (Portrait-optimized with clean dynamic HTML/CSS overlay)
 function WorldMapModal({ onClose }) {
+  const isLandscape = useIsLandscape()
   const player = useGameStore((s) => s.player)
   const setSelectedMapIdx = useGameStore((s) => s.setSelectedMapIdx)
   
@@ -160,10 +162,9 @@ function WorldMapModal({ onClose }) {
       <div style={{
         position: 'relative', flex: 1, overflow: 'hidden', background: '#020205'
       }}>
-        {/* Background Image Map - Portrait clean version */}
         <img 
-          src="/assets/world_map_portrait_clean.png" 
-          alt="World Map Portrait Grid" 
+          src={isLandscape ? "/assets/world_map_landscape_clean.png" : "/assets/world_map_portrait_clean.png"} 
+          alt="World Map Grid" 
           style={{
             position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
             objectFit: 'cover', opacity: 0.72, pointerEvents: 'none'

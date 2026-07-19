@@ -105,6 +105,12 @@ export default function BottomNav() {
     }}>
       {NAV_ITEMS.map((n) => {
         const isActive = screen === n.id
+        let displayLabel = n.label
+        if (n.id === 'main') {
+          if (player?.race === 'arctron') displayLabel = 'HQ'
+          else if (player?.race === 'bionex') displayLabel = 'MAINFRAME'
+          else if (player?.race === 'celestra') displayLabel = 'SANCTUARY'
+        }
         return (
           <button
             key={n.id}
@@ -143,7 +149,7 @@ export default function BottomNav() {
                 textAlign:   'center',
                 lineHeight:  1,
               }}>
-                {n.label}
+                {displayLabel}
               </span>
             </div>
             <div style={{

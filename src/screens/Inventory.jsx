@@ -36,7 +36,7 @@ export default function Inventory() {
           <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 18, fontWeight: 900, color: '#fff', letterSpacing: 2, textShadow: '0 0 10px #00e5ff' }}>GEAR &amp; INVENTORY</span>
         </div>
       </div>
-      <div style={{ padding: '16px 0', display: 'flex', flexDirection: 'column' }}>
+      <div className="inv-layout-wrapper" style={{ padding: '16px 0', display: 'flex', flexDirection: 'column', width: '100%', maxWidth: '100%', overflowX: 'hidden' }}>
 {/* ============ EQUIPMENT ============ */}
           {(() => {
             const fp = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
@@ -374,6 +374,7 @@ export default function Inventory() {
             return (
               <>
                 <div 
+                  className="inv-title-toggle"
                   onClick={() => setEquipOpen(!equipOpen)}
                   style={{ margin: '0 16px 8px', fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 700, letterSpacing: 1.5, color: '#8a94a3', cursor: 'pointer', userSelect: 'none' }}
                 >
@@ -383,7 +384,7 @@ export default function Inventory() {
                 {equipOpen && (
                   <>
                     {/* ── Equipment Grid ─────────────────────────────── */}
-                        <div style={{
+                        <div className="inv-equip-grid" style={{
                       margin: '0 auto 12px',
                       position: 'relative',
                       width: 'calc(100% - 32px)',
@@ -426,6 +427,7 @@ export default function Inventory() {
                       const slotLabel = pickingSlot.replace(/[12]$/, '').toUpperCase()
                       return (
                         <div
+                          className="inv-smart-picker"
                           style={{
                             margin: '0 auto 10px',
                             width: 'calc(100% - 32px)',
@@ -518,7 +520,7 @@ export default function Inventory() {
                     })()}
 
                     {/* ── Bag Tabs ───────────────────────────────────── */}
-                    <div style={{
+                    <div className="inv-bag-tabs" style={{
                       display: 'grid',
                       gridTemplateColumns: 'repeat(5, 1fr)',
                       gap: 6,
@@ -613,7 +615,7 @@ export default function Inventory() {
 
                     {/* ── Bag Contents Drawer ─────────────────────────── */}
                     {activeBag !== null && (
-                      <div style={{
+                      <div className="inv-bag-contents" style={{
                         margin: '8px auto 14px',
                         width: 'calc(100% - 32px)',
                         background: 'rgba(6, 9, 14, 0.97)',

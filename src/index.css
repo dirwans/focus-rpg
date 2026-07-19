@@ -2222,3 +2222,262 @@ body {
   filter: brightness(1.05) contrast(1.1) drop-shadow(0 0 3px rgba(168, 85, 247, 0.6)) drop-shadow(0 0 6px rgba(124, 58, 237, 0.4));
 }
 
+/* =========================================================
+   LANDSCAPE HYBRID LAYOUT
+   ========================================================= */
+.game-container.landscape {
+  width: 932px;
+  height: 440px;
+  max-width: 95vw;
+  max-height: 95vh;
+  border-radius: 24px;
+  flex-direction: row; /* Nav sidebar left, content right */
+}
+
+/* Faction Backgrounds for Landscape Panels */
+.game-container.landscape[data-faction="arctron"] {
+  background: url('/assets/arctron/arctron_panel_bg.png') no-repeat center center !important;
+  background-size: cover !important;
+}
+.game-container.landscape[data-faction="bionex"] {
+  background: url('/assets/bionex/bionex_panel_bg.png') no-repeat center center !important;
+  background-size: cover !important;
+}
+.game-container.landscape[data-faction="celestra"] {
+  background: url('/assets/celestra/celestra_panel_bg.png') no-repeat center center !important;
+  background-size: cover !important;
+}
+
+/* Base Nav Sidebar specific overrides */
+.game-container.landscape nav {
+  order: -1;
+  flex-direction: column !important;
+  width: 76px;
+  height: 100%;
+/* Glowing top and bottom bars matching the mockup */
+.cyberpunk-hud-bg::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--neon-glow);
+  box-shadow: 0 0 15px var(--neon-glow);
+  z-index: 20;
+  pointer-events: none;
+}
+
+/* Global brightness, contrast, and saturation enhancements for all sprites, towers, monsters, and bosses */
+.transparent-sprite-img,
+.tower-3d-card img,
+.pixel-art {
+  filter: brightness(1.28) contrast(1.2) saturate(1.1) !important;
+}
+
+/* Reduced brightness and contrast specifically for faction character/pilot sprites */
+.pilot-sprite-img {
+  filter: brightness(1.06) contrast(1.08) saturate(1.02) drop-shadow(0 2px 6px rgba(0,0,0,0.55)) !important;
+  will-change: transform;
+}
+
+/* Trinity Mine Animations */
+@keyframes mineAnimation {
+  0% { transform: rotate(0deg); }
+  15% { transform: rotate(-25deg); }
+  30% { transform: rotate(15deg); }
+  45% { transform: rotate(-20deg); }
+  60% { transform: rotate(10deg); }
+  75% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes pulse {
+  0% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.02); }
+  100% { opacity: 0.7; transform: scale(1); }
+}
+
+/* Forge Redesign Animations */
+@keyframes ledBlink { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+@keyframes runeSpin { from { transform: translate(-50%,-50%) rotate(0deg); } to { transform: translate(-50%,-50%) rotate(360deg); } }
+@keyframes runeSpinRev { from { transform: translate(-50%,-50%) rotate(0deg); } to { transform: translate(-50%,-50%) rotate(-360deg); } }
+@keyframes sparkPulse { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+@keyframes spinFlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes heartbeatPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+
+/* Character Creation Screen Animations */
+@keyframes heroFloat { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-10px); } }
+@keyframes twinkle { 0%,100% { opacity: 0.2; transform:scale(0.8); } 50% { opacity: 1; transform:scale(1.15); } }
+@keyframes emberRise { 0% { transform:translateY(0) translateX(0); opacity:0; } 15% { opacity:1; } 100% { transform:translateY(-160px) translateX(14px); opacity:0; } }
+@keyframes energySweep { 0% { left: -70%; } 60%,100% { left: 130%; } }
+@keyframes glowPulse { 0%,100% { opacity:0.55; } 50% { opacity:1; } }
+@keyframes crestPulse { 0%,100% { filter: drop-shadow(0 0 6px currentColor); } 50% { filter: drop-shadow(0 0 18px currentColor); } }
+
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* =========================================
+   CRAFTING & ENHANCE 4-GRID RESPONSIVE UI
+   ========================================= */
+.simulator-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 15px;
+  background: #060a12;
+  color: #ccc;
+  font-family: var(--font-body), 'Rajdhani', sans-serif;
+  min-height: 650px;
+  align-items: stretch;
+}
+
+.simulator-container * {
+  font-family: inherit;
+}
+
+.simulator-col-1 {
+  flex: 1 1 200px;
+  max-width: 230px;
+  min-width: 190px;
+  order: 1;
+}
+
+.simulator-col-2 {
+  flex: 2 1 340px;
+  max-width: 380px;
+  min-width: 310px;
+  order: 2;
+}
+
+.simulator-col-3 {
+  flex: 2 1 330px;
+  max-width: 360px;
+  min-width: 300px;
+  order: 3;
+}
+
+.simulator-col-4 {
+  flex: 1 1 240px;
+  max-width: 280px;
+  min-width: 220px;
+  order: 4;
+}
+
+.simulator-title {
+  font-family: var(--font-title), 'Orbitron', sans-serif !important;
+  letter-spacing: 0.5px;
+}
+
+.simulator-mono {
+  font-family: var(--font-mono), 'Share Tech Mono', monospace !important;
+}
+
+@media (max-width: 1350px) {
+  .simulator-col-1 { flex: 1 1 200px; max-width: 240px; order: 1; }
+  .simulator-col-2 { flex: 2 1 380px; order: 2; }
+  .simulator-col-3 { flex: 1 1 320px; max-width: 360px; order: 3; }
+  .simulator-col-4 { flex: 1 1 100%; max-width: 100%; order: 4; }
+}
+
+@media (max-width: 900px) {
+  .simulator-container {
+    flex-direction: column;
+    padding: 10px;
+  }
+  .simulator-col-1, .simulator-col-2, .simulator-col-3, .simulator-col-4 {
+    max-width: 100%;
+    width: 100%;
+    flex: 1 1 auto;
+  }
+  .simulator-col-1 { order: 1; }
+  .simulator-col-2 { order: 2; }
+  .simulator-col-3 { order: 3; }
+  .simulator-col-4 { order: 4; }
+}
+
+.game-sprite-noctyrna {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  filter: brightness(1.05) contrast(1.1) drop-shadow(0 0 3px rgba(168, 85, 247, 0.6)) drop-shadow(0 0 6px rgba(124, 58, 237, 0.4));
+}
+
+/* =========================================================
+   LANDSCAPE HYBRID LAYOUT
+   ========================================================= */
+.game-container.landscape {
+  width: 932px;
+  height: 440px;
+  max-width: 95vw;
+  max-height: 95vh;
+  border-radius: 24px;
+  flex-direction: row; /* Nav sidebar left, content right */
+}
+
+/* Faction Backgrounds for Landscape Panels */
+.game-container.landscape[data-faction="arctron"] {
+  background: url('/assets/arctron/arctron_panel_bg.png') no-repeat center center !important;
+  background-size: cover !important;
+}
+.game-container.landscape[data-faction="bionex"] {
+  background: url('/assets/bionex/bionex_panel_bg.png') no-repeat center center !important;
+  background-size: cover !important;
+}
+.game-container.landscape[data-faction="celestra"] {
+  background: url('/assets/celestra/celestra_panel_bg.png') no-repeat center center !important;
+  background-size: cover !important;
+}
+
+/* Base Nav Sidebar specific overrides */
+.game-container.landscape nav {
+  order: -1;
+  flex-direction: column !important;
+  width: 76px;
+  height: 100%;
+  border-top: none !important;
+  border-right: 1px solid rgba(0, 229, 255, 0.3);
+  padding: 8px 4px !important;
+  justify-content: flex-start;
+}
+.game-container.landscape nav button {
+  height: 60px !important;
+  flex: none !important;
+}
+
+/* =========================================================
+   LANDSCAPE INVENTORY SPLIT
+   ========================================================= */
+.game-container.landscape .inv-layout-wrapper {
+  display: grid !important;
+  grid-template-columns: 1fr 340px;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "toggle toggle"
+    "tabs equip"
+    "contents picker";
+  gap: 16px;
+  align-items: start;
+  padding: 16px !important;
+  height: calc(100% - 60px);
+}
+
+.game-container.landscape .inv-title-toggle { grid-area: toggle; margin: 0 !important; }
+.game-container.landscape .inv-equip-grid { grid-area: equip; margin: 0 !important; width: 100% !important; max-width: 100% !important; }
+.game-container.landscape .inv-smart-picker { grid-area: picker; margin: 0 !important; width: 100% !important; }
+.game-container.landscape .inv-bag-tabs { grid-area: tabs; margin: 0 !important; width: 100% !important; grid-template-columns: repeat(5, 48px) !important; justify-content: start !important; }
+.game-container.landscape .inv-bag-contents { grid-area: contents; margin: 0 !important; width: 100% !important; }
