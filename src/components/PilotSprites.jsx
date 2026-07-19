@@ -184,12 +184,8 @@ export function PilotSprite({ race, job, size = 60, width, height, upperBodyOnly
 
   if (isSelf && player.equipment && showGears) {
     if (race === 'arctron') {
-      // Tier1 Warrior lane has an authored battle-idle animation (5-frame loop,
-      // weapon/shield swap live) — everything else still falls back to the
-      // static GearOverlay pose until those lanes/tiers get their own export.
-      if (isBattle && getJobLane(job) === 'warrior') {
-        return <ArctronBattleIdleSprite player={player} width={width || size} height={height} style={style} />
-      }
+      // TODO: Fix Arctron battle animation - spritesheet frames have inconsistent positioning
+      // For now, use GearOverlay static pose
       const overlayBaseSprite = <ArctronSprite job={job} width="100%" height="100%" isBattle={false} />
       return (
         <GearOverlay player={player} width={width || size} height={height || size} style={style}>
