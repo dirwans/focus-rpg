@@ -8,7 +8,7 @@ import ArctronSprite from './ArctronSprite'
 import BionexSprite from './BionexSprite'
 import CelestraSprite from './CelestraSprite'
 import EnemySprite from './EnemySprite'
-import ArctronBattleIdleSprite from './ArctronBattleIdleSprite'
+import Lv1BattleArctronWarrior from './lv1battlearctronwarrior'
 
 // Re-export modular sprites so other files importing from './PilotSprites' don't break
 export { ArctronSprite, BionexSprite, CelestraSprite, EnemySprite }
@@ -183,29 +183,32 @@ export function PilotSprite({ race, job, size = 60, width, height, upperBodyOnly
   }
 
   if (isSelf && player.equipment && showGears) {
-    if (race === 'arctron') {
-      // Tier1 Warrior lane has a battle-idle animation
-      if (isBattle && getJobLane(job) === 'warrior') {
-        return <ArctronBattleIdleSprite player={player} width={width || size} height={height} style={style} />
-      }
-      const overlayBaseSprite = <ArctronSprite job={job} width="100%" height="100%" isBattle={false} />
-      return (
-        <GearOverlay player={player} width={width || size} height={height || size} style={style}>
-          {overlayBaseSprite}
-        </GearOverlay>
-      )
-    }
-    return (
-      <PaperDollStack 
-        baseSprite={baseSprite} 
-        player={player} 
-        size={size} 
-        width={width} 
-        height={height} 
-        style={style} 
-        calibrationOverride={calibrationOverride} 
+    const staticFallback = race === 'arctron' ? (
+      <GearOverlay player={player} width={width || size} height={height || size} style={style}>
+        <ArctronSprite job={job} width="100%" height="100%" isBattle={false} />
+      </GearOverlay>
+    ) : (
+      <PaperDollStack
+        baseSprite={baseSprite}
+        player={player}
+        size={size}
+        width={width}
+        height={height}
+        style={style}
+        calibrationOverride={calibrationOverride}
       />
     )
+
+    // Battle-idle animation: one dedicated component per race+lane+tier (see
+    // lv1battlearctronwarrior.jsx), not a shared generic renderer — add a new
+    // explicit branch + import here as each combo gets authored and exported from
+    // animation-lab.html, following the {tier}{purpose}{race}{lane}.jsx convention
+    // (e.g. lv1battlearctronranger.jsx, lv32battlearctronwarrior.jsx). Each
+    // component falls back to the static pose itself if its own assets 404.
+    if (isBattle && race === 'arctron' && getJobLane(job) === 'warrior') {
+      return <Lv1BattleArctronWarrior player={player} width={width || size} height={height} style={style} fallback={staticFallback} />
+    }
+    return staticFallback
   }
 
   return baseSprite

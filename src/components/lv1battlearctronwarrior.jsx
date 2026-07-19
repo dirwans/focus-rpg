@@ -1,7 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { resolveItemImage } from '../store/gameStore'
 
-// Tier1 Arctron Warrior battle-idle animation
+// Battle-idle animation for Arctron Warrior, tier lv1 only — authored in
+// public/animation-lab.html and exported as a body spritesheet + a JSON of
+// per-frame weapon/shield pixel offsets, so the currently equipped weapon/shield
+// render on top each frame instead of being baked into the body art.
+// Per-combo dedicated file by design (not a shared generic component) — every
+// other race/lane/tier gets its own equivalent file, e.g. lv1battlearctronranger.jsx,
+// lv32battlearctronwarrior.jsx, following the same {tier}{purpose}{race}{lane}.jsx
+// naming convention.
 const BATTLE_DIR = '/assets/arctron/def_warrior_armor_set_lv1/Battle-Sprites-lv1-arctronwarrior'
 const SHEET_URL = `${BATTLE_DIR}/spritesheet_fixed.png`
 const DATA_URL = `${BATTLE_DIR}/weapon_shield_layers.json`
@@ -25,11 +32,11 @@ function loadImage(src) {
   return p
 }
 
-export default function ArctronBattleIdleSprite({ player, width, height, className, style }) {
-  const NATIVE_W = 611, NATIVE_H = 695, TARGET_H = 160
+export default function Lv1BattleArctronWarrior({ player, width = 190, height, className, style, fallback = null }) {
   const canvasRef = useRef(null)
   const [rigData, setRigData] = useState(null)
   const [sheetImg, setSheetImg] = useState(null)
+  const [unavailable, setUnavailable] = useState(false)
   const frameIndexRef = useRef(0)
   const weaponImgRef = useRef(null)
   const shieldImgRef = useRef(null)
@@ -42,20 +49,22 @@ export default function ArctronBattleIdleSprite({ player, width, height, classNa
 
   useEffect(() => {
     let cancelled = false
-    Promise.all([
-      fetch(DATA_URL).then(r => r.json()),
-      loadImage(SHEET_URL)
-    ]).then(([json, img]) => {
-      if (cancelled) return
-      setRigData(json)
-      setSheetImg(img)
-    })
+    fetch(DATA_URL)
+      .then(r => { if (!r.ok) throw new Error('missing rig'); return r.json() })
+      .then(async (json) => {
+        if (cancelled) return
+        const img = await loadImage(SHEET_URL)
+        if (cancelled) return
+        if (!img) { setUnavailable(true); return }
+        setRigData(json)
+        setSheetImg(img)
+      })
+      .catch(() => { if (!cancelled) setUnavailable(true) })
     return () => { cancelled = true }
   }, [])
 
   useEffect(() => {
     let cancelled = false
-    // Load equipped weapon/shield sprites
     const weaponUrl = weaponItem ? proxyUrl(resolveItemImage(weaponItem, race, job, gender) || weaponItem.image) : null
     const shieldUrl = shieldItem ? proxyUrl(resolveItemImage(shieldItem, race, job, gender) || shieldItem.image) : null
     Promise.all([loadImage(weaponUrl), loadImage(shieldUrl)]).then(([w, s]) => {
@@ -81,9 +90,6 @@ export default function ArctronBattleIdleSprite({ player, width, height, classNa
 
     function drawGear(info, img, refWidth) {
       if (!info || !img) return
-      // Calibration was done against a specific reference art asset — normalize by
-      // width ratio so a differently-sized equipped weapon/shield image still lands
-      // at the same effective on-screen footprint instead of the raw calibrated scale.
       const normScale = info.scale * (refWidth / img.naturalWidth)
       ctx.save()
       ctx.translate(info.x, info.y)
@@ -98,11 +104,8 @@ export default function ArctronBattleIdleSprite({ player, width, height, classNa
     function drawFrame(idx) {
       ctx.clearRect(0, 0, fw, fh)
       ctx.drawImage(sheetImg, idx * fw, 0, fw, fh, 0, 0, fw, fh)
-
       const frameData = frames[idx]
       if (!frameData) return
-      // Sandwich order matches the authoring tool: back gear -> (base_front, none
-      // exported yet for this rig) -> front gear.
       if (frameData.weapon && !frameData.weapon.front) drawGear(frameData.weapon, weaponImgRef.current, calibrationRefWeaponWidth || 553)
       if (frameData.shield && !frameData.shield.front) drawGear(frameData.shield, shieldImgRef.current, calibrationRefShieldWidth || 390)
       if (frameData.weapon && frameData.weapon.front) drawGear(frameData.weapon, weaponImgRef.current, calibrationRefWeaponWidth || 553)
@@ -121,16 +124,16 @@ export default function ArctronBattleIdleSprite({ player, width, height, classNa
     return () => cancelAnimationFrame(raf)
   }, [rigData, sheetImg, weaponItem?.id, shieldItem?.id])
 
+  if (unavailable) return fallback
   if (!rigData) return null
 
-  const displayHeight = height || TARGET_H
-  const displayWidth = width || (TARGET_H * NATIVE_W / NATIVE_H)
+  const displayHeight = height || (width * rigData.frameHeight / rigData.frameWidth)
 
   return (
     <canvas
       ref={canvasRef}
       className={className}
-      style={{ width: displayWidth, height: displayHeight, imageRendering: 'auto', ...style }}
+      style={{ width, height: displayHeight, imageRendering: 'auto', ...style }}
     />
   )
 }

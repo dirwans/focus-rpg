@@ -138,26 +138,21 @@ const ARMOR_SET_LINEAGES = {
 // Resolves the sprite for a bespoke default armor-set piece (arctron/helmet/gloves/boots/pants),
 // keyed by race + job lineage + level tier. Returns null if no bespoke set exists yet for
 // that race/lineage — callers should fall back to `item.image` in that case.
-function resolveArmorSetImage(slot, playerRace, playerJob, level, playerGender) {
+// Shared by resolveArmorSetImage (below) and any battle-sprite folder resolution
+// (ArctronBattleIdleSprite etc.) that needs to land in the exact same
+// def_{lineage}_armor_set_lv{tier} bucket as the character's actual equipped-armor art.
+export function getArmorSetLineageAndTier(playerRace, playerJob, level) {
   let lineage = WARRIOR_JOBS.includes(playerJob) ? 'warrior'
     : TECHNICIAN_JOBS.includes(playerJob) ? 'technician'
     : BOW_JOBS.includes(playerJob) ? 'ranger'
     : STAFF_JOBS.includes(playerJob) ? 'mage'
     : null
-  if (playerRace === 'bionex' && lineage === 'mage') {
-    lineage = 'psion'
-  }
-  if (playerRace === 'bionex' && lineage === 'mage') {
-    lineage = 'psion'
-  }
   if (playerRace === 'bionex') {
     if (lineage === 'warrior') lineage = 'guardian'
     else if (lineage === 'technician' || lineage === 'ranger') lineage = 'marksman'
     else if (lineage === 'mage') lineage = 'psion'
   }
-  if (!lineage) return null
-  const available = ARMOR_SET_LINEAGES[playerRace] || []
-  if (!available.includes(lineage)) return null
+  if (!lineage) return { lineage: null, tier: 1 }
 
   const lvl = level || 1
   let tier = 1
@@ -166,6 +161,14 @@ function resolveArmorSetImage(slot, playerRace, playerJob, level, playerGender) 
   } else {
     tier = lvl >= 66 ? 66 : lvl >= 55 ? 55 : lvl >= 42 ? 42 : lvl >= 32 ? 32 : 1
   }
+  return { lineage, tier }
+}
+
+function resolveArmorSetImage(slot, playerRace, playerJob, level, playerGender) {
+  const { lineage, tier } = getArmorSetLineageAndTier(playerRace, playerJob, level)
+  if (!lineage) return null
+  const available = ARMOR_SET_LINEAGES[playerRace] || []
+  if (!available.includes(lineage)) return null
 
   if (playerRace === 'bionex') {
     return `/assets/bionex/defbionex${lineage}lv${tier}${slot}.png?v=5`
