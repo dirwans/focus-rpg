@@ -27,7 +27,8 @@ function loadImage(src) {
   return p
 }
 
-export default function ArctronBattleIdleSprite({ player, width = 190, height, className, style }) {
+export default function ArctronBattleIdleSprite({ player, width, height, className, style }) {
+  const NATIVE_W = 500, NATIVE_H = 284, TARGET_H = 160
   const canvasRef = useRef(null)
   const [rigData, setRigData] = useState(null)
   const [sheetImg, setSheetImg] = useState(null)
@@ -123,13 +124,14 @@ export default function ArctronBattleIdleSprite({ player, width = 190, height, c
 
   if (!rigData) return null
 
-  const displayHeight = height || width // square if height not provided
+  const displayHeight = height || TARGET_H
+  const displayWidth = width || (TARGET_H * NATIVE_W / NATIVE_H)
 
   return (
     <canvas
       ref={canvasRef}
       className={className}
-      style={{ width, height: displayHeight, imageRendering: 'auto', ...style }}
+      style={{ width: displayWidth, height: displayHeight, imageRendering: 'auto', ...style }}
     />
   )
 }
