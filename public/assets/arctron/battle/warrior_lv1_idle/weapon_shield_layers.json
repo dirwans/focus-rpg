@@ -6,11 +6,11 @@
   "calibrationRefWeaponWidth": 553,
   "calibrationRefShieldWidth": 390,
   "frames": [
-    { "index": 0, "weapon": null, "shield": null },
-    { "index": 1, "weapon": null, "shield": null },
-    { "index": 2, "weapon": null, "shield": null },
-    { "index": 3, "weapon": null, "shield": null },
-    { "index": 4, "weapon": null, "shield": null },
-    { "index": 5, "weapon": null, "shield": null }
+    { "index": 0, "weapon": { "x": 420, "y": 250, "scale": 0.5, "rotation": -30, "blendMode": "source-over", "front": false }, "shield": { "x": 180, "y": 280, "scale": 0.6, "rotation": 0, "blendMode": "source-over", "front": false } },
+    { "index": 1, "weapon": { "x": 400, "y": 240, "scale": 0.5, "rotation": -20, "blendMode": "source-over", "front": false }, "shield": { "x": 190, "y": 270, "scale": 0.6, "rotation": 0, "blendMode": "source-over", "front": false } },
+    { "index": 2, "weapon": { "x": 400, "y": 235, "scale": 0.5, "rotation": -15, "blendMode": "source-over", "front": false }, "shield": { "x": 195, "y": 265, "scale": 0.6, "rotation": 0, "blendMode": "source-over", "front": false } },
+    { "index": 3, "weapon": { "x": 410, "y": 230, "scale": 0.5, "rotation": -25, "blendMode": "source-over", "front": false }, "shield": { "x": 185, "y": 275, "scale": 0.6, "rotation": 0, "blendMode": "source-over", "front": false } },
+    { "index": 4, "weapon": { "x": 430, "y": 260, "scale": 0.5, "rotation": -45, "blendMode": "source-over", "front": false }, "shield": { "x": 170, "y": 290, "scale": 0.6, "rotation": 0, "blendMode": "source-over", "front": false } },
+    { "index": 5, "weapon": { "x": 420, "y": 250, "scale": 0.5, "rotation": -30, "blendMode": "source-over", "front": false }, "shield": { "x": 180, "y": 280, "scale": 0.6, "rotation": 0, "blendMode": "source-over", "front": false } }
   ]
 }
