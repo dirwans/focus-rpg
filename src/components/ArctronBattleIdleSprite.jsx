@@ -57,17 +57,13 @@ export default function ArctronBattleIdleSprite({ player, width, height, classNa
 
   useEffect(() => {
     let cancelled = false
-    // Try equipped item first, fallback to reference 3/4 view sprites
-    const weaponUrl = weaponItem
-      ? (proxyUrl(resolveItemImage(weaponItem, race, job, gender) || weaponItem.image) || WEAPON_REF_URL)
-      : WEAPON_REF_URL
-    const shieldUrl = shieldItem
-      ? (proxyUrl(resolveItemImage(shieldItem, race, job, gender) || shieldItem.image) || SHIELD_REF_URL)
-      : SHIELD_REF_URL
+    // Load equipped weapon/shield sprites
+    const weaponUrl = weaponItem ? proxyUrl(resolveItemImage(weaponItem, race, job, gender) || weaponItem.image) : null
+    const shieldUrl = shieldItem ? proxyUrl(resolveItemImage(shieldItem, race, job, gender) || shieldItem.image) : null
     Promise.all([loadImage(weaponUrl), loadImage(shieldUrl)]).then(([w, s]) => {
       if (cancelled) return
-      weaponImgRef.current = w || null
-      shieldImgRef.current = s || null
+      weaponImgRef.current = w
+      shieldImgRef.current = s
     })
     return () => { cancelled = true }
   }, [weaponItem?.id, shieldItem?.id, race, job, gender])
