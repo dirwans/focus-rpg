@@ -1,12 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { resolveItemImage } from '../store/gameStore'
 
-// Tier1 Arctron Warrior battle-idle animation, from fixed spritesheet
-const SHEET_URL = '/assets/arctron/def_warrior_armor_set_lv1_battle/spritesheet_fixed.png'
-const DATA_URL = '/assets/arctron/battle/warrior_lv1_idle/weapon_shield_layers.json'
-// Reference 3/4 view sprites (fallback until equipped items have 3/4 view variants)
-const WEAPON_REF_URL = '/assets/arctron/def_warrior_armor_set_lv1_battle/sword_battle.png'
-const SHIELD_REF_URL = '/assets/arctron/def_warrior_armor_set_lv1_battle/shield-battle.png'
+// Tier1 Arctron Warrior battle-idle animation
+const BATTLE_DIR = '/assets/arctron/def_warrior_armor_set_lv1/Battle-Sprites-lv1-arctronwarrior'
+const SHEET_URL = `${BATTLE_DIR}/spritesheet_fixed.png`
+const DATA_URL = `${BATTLE_DIR}/weapon_shield_layers.json`
 
 function proxyUrl(url) {
   if (!url) return null
