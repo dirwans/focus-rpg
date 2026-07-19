@@ -24,10 +24,10 @@ function fmt(s) {
 
 // Bellterra class lane mapping (matches NpcModal)
 const BIONEX_SPRITES = {
-  guardian:     '/ref/Bellterra/Class-sprites-cleaned/Bellterra-warrior-cleaned.png',
-  marksman:     '/ref/Bellterra/Class-sprites-cleaned/Bellterra-ranger-cleaned.png',
-  psion:        '/ref/Bellterra/Class-sprites-cleaned/Bellterra-Spiritualist-cleaned.png',
-  engineer:     '/ref/Bellterra/Class-sprites-cleaned/Bellterra-specialist-cleaned.png',
+  guardian: '/ref/Bellterra/Class-sprites-cleaned/Bellterra-warrior-cleaned.png',
+  marksman: '/ref/Bellterra/Class-sprites-cleaned/Bellterra-ranger-cleaned.png',
+  psion: '/ref/Bellterra/Class-sprites-cleaned/Bellterra-Spiritualist-cleaned.png',
+  engineer: '/ref/Bellterra/Class-sprites-cleaned/Bellterra-specialist-cleaned.png',
 }
 
 function getBionexJobSprite(jobId) {
@@ -94,17 +94,17 @@ function WorldMapModal({ onClose }) {
   const isLandscape = useIsLandscape()
   const player = useGameStore((s) => s.player)
   const setSelectedMapIdx = useGameStore((s) => s.setSelectedMapIdx)
-  
+
   // Default selected node index
   const defaultIdx = (player.selectedMapIdx !== undefined && player.selectedMapIdx !== null)
     ? player.selectedMapIdx
     : Math.max(0, Math.min((player.sector || 1) - 1, enemies.sectors.length - 1))
-  
+
   const [selectedNode, setSelectedNode] = useState(defaultIdx)
 
-  const activeColor  = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
-  const accentColor  = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
-  const screenBg     = { arctron: 'radial-gradient(circle at 30% 0%, #201a18 0%, #0a0807 60%)', bionex: 'radial-gradient(circle at 30% 0%, #13243a 0%, #060b12 60%)', celestra: 'radial-gradient(circle at 30% 0%, #1a1642 0%, #07061a 60%)' }[player.race] || '#08080d'
+  const activeColor = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
+  const accentColor = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
+  const screenBg = { arctron: 'radial-gradient(circle at 30% 0%, #201a18 0%, #0a0807 60%)', bionex: 'radial-gradient(circle at 30% 0%, #13243a 0%, #060b12 60%)', celestra: 'radial-gradient(circle at 30% 0%, #1a1642 0%, #07061a 60%)' }[player.race] || '#08080d'
 
   const mapCoordinates = [
     { name: 'Lumora Fields', left: '30%', top: '20%', minLevel: 1 },
@@ -127,7 +127,7 @@ function WorldMapModal({ onClose }) {
       display: 'flex', flexDirection: 'column',
       backdropFilter: 'blur(10px)', fontFamily: 'var(--font-body)'
     }}>
-      
+
       {/* Sleek Tactical Header */}
       <div style={{
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
@@ -144,7 +144,7 @@ function WorldMapModal({ onClose }) {
             TACTICAL MAP SCREEN
           </span>
         </div>
-        <button 
+        <button
           onClick={onClose}
           style={{
             width: 32, height: 32, borderRadius: '50%',
@@ -162,9 +162,9 @@ function WorldMapModal({ onClose }) {
       <div style={{
         position: 'relative', flex: 1, overflow: 'hidden', background: '#020205'
       }}>
-        <img 
-          src={isLandscape ? "/assets/world_map_landscape_clean.png" : "/assets/world_map_portrait_clean.png"} 
-          alt="World Map Grid" 
+        <img
+          src={isLandscape ? "/assets/world_map_landscape_clean.png" : "/assets/world_map_portrait_clean.png"}
+          alt="World Map Grid"
           style={{
             position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
             objectFit: 'cover', opacity: 0.72, pointerEvents: 'none'
@@ -172,20 +172,20 @@ function WorldMapModal({ onClose }) {
         />
 
         {/* Dynamic Holographic Connection Lines Path */}
-        <svg 
-          viewBox="0 0 100 100" 
-          preserveAspectRatio="none" 
+        <svg
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
           style={{
             position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
             pointerEvents: 'none', zIndex: 12
           }}
         >
-          <path 
-            d="M 30 20 L 70 35 L 25 50 L 75 65 L 50 80" 
-            stroke="rgba(0, 229, 255, 0.45)" 
-            strokeWidth="0.8" 
-            fill="none" 
-            strokeDasharray="2 1.5" 
+          <path
+            d="M 30 20 L 70 35 L 25 50 L 75 65 L 50 80"
+            stroke="rgba(0, 229, 255, 0.45)"
+            strokeWidth="0.8"
+            fill="none"
+            strokeDasharray="2 1.5"
             style={{ filter: 'drop-shadow(0 0 3px rgba(0,229,255,0.4))' }}
           />
         </svg>
@@ -195,7 +195,7 @@ function WorldMapModal({ onClose }) {
           const mapLocked = false // player.level < coord.minLevel
           const mapActive = player.selectedMapIdx === idx || (player.selectedMapIdx === null && idx === defaultIdx)
           const isSelected = selectedNode === idx
-          
+
           let glowColor = '#5e6875' // locked
           if (!mapLocked) {
             glowColor = mapActive ? activeColor : '#00e5ff'
@@ -215,8 +215,8 @@ function WorldMapModal({ onClose }) {
                 borderRadius: '50%',
                 background: mapLocked ? 'rgba(30,30,40,0.85)' : (isSelected ? 'rgba(255,255,255,0.1)' : 'rgba(0, 229, 255, 0.15)'),
                 border: isSelected ? `2.5px solid ${glowColor}` : `1.8px solid ${glowColor}`,
-                boxShadow: isSelected 
-                  ? `0 0 25px ${glowColor}, inset 0 0 10px ${glowColor}` 
+                boxShadow: isSelected
+                  ? `0 0 25px ${glowColor}, inset 0 0 10px ${glowColor}`
                   : (mapActive ? `0 0 15px ${glowColor}` : 'none'),
                 cursor: 'pointer',
                 zIndex: isSelected ? 50 : 20,
@@ -297,7 +297,7 @@ function WorldMapModal({ onClose }) {
               Level Bracket: Lv. {selectedSector.minLevel} - {selectedSector.maxLevel}
             </div>
           </div>
-          
+
           <span style={{
             fontSize: 12, background: isLocked ? 'rgba(255,255,255,0.06)' : (isActive ? `${activeColor}20` : 'rgba(0, 229, 255, 0.12)'),
             color: isLocked ? '#8a94a3' : (isActive ? activeColor : '#00e5ff'),
@@ -378,48 +378,20 @@ function WorldMapModal({ onClose }) {
                   setSelectedMapIdx(selectedNode)
                   onClose()
                 }}
-                style={{
-                  padding: '12px 8px',
-                  fontFamily: "'Orbitron', sans-serif",
-                  fontSize: 13,
-                  fontWeight: 900,
-                  letterSpacing: 1,
-                  borderRadius: '8px',
-                  cursor: 'pointer',
-                  border: isActive ? `1.5px dashed ${activeColor}` : 'none',
-                  background: `linear-gradient(135deg, ${activeColor}, color-mix(in srgb, ${activeColor} 50%, #000))`,
-                  color: '#fff',
-                  boxShadow: `0 4px 15px ${activeColor}44`,
-                  textAlign: 'center',
-                  display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4,
-                  transition: 'transform 0.15s, box-shadow 0.15s'
-                }}
-                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 6px 20px ${activeColor}66`; }}
-                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = `0 4px 15px ${activeColor}44`; }}
+                className="deploy-btn-auto"
+                style={{ flex: 1, padding: '12px 4px', fontSize: 13, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, background: 'rgba(3,8,20,0.65)' }}
               >
                 <span>⚡ FULL AUTO</span>
                 <span style={{ fontSize: 9, opacity: 0.85, fontFamily: 'var(--font-body)', fontWeight: 600, letterSpacing: 0, textTransform: 'none' }}>
                   AFK / Idle Grinding
                 </span>
               </button>
-              
+
               {/* Turn Based Button (Locked) */}
               <button
+                className="deploy-btn-manual"
                 disabled={true}
-                style={{
-                  padding: '12px 8px',
-                  fontFamily: "'Orbitron', sans-serif",
-                  fontSize: 13,
-                  fontWeight: 900,
-                  letterSpacing: 1,
-                  borderRadius: '8px',
-                  cursor: 'not-allowed',
-                  border: '1.5px solid rgba(255,255,255,0.08)',
-                  background: 'rgba(20, 25, 35, 0.6)',
-                  color: '#7a8593',
-                  textAlign: 'center',
-                  display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4
-                }}
+                style={{ flex: 1, padding: '12px 4px', fontSize: 13, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}
               >
                 <span>🔒 TURN-BASED</span>
                 <span style={{ fontSize: 9, opacity: 0.6, fontFamily: 'var(--font-body)', fontWeight: 600, letterSpacing: 0, textTransform: 'none' }}>
@@ -438,17 +410,17 @@ function WorldMapModal({ onClose }) {
 
 export default function Main() {
   const isLandscape = useIsLandscape()
-  const player   = useGameStore((s) => s.player)
-  const timer    = useGameStore((s) => s.timer)
-  const battle   = useGameStore((s) => s.battle)
+  const player = useGameStore((s) => s.player)
+  const timer = useGameStore((s) => s.timer)
+  const battle = useGameStore((s) => s.battle)
   const isScreenActive = useGameStore((s) => s.isScreenActive)
   const getStats = useGameStore((s) => s.getStats)
   const getExpToNext = useGameStore((s) => s.getExpToNext)
-  const startTimer   = useGameStore((s) => s.startTimer)
-  const stopTimer    = useGameStore((s) => s.stopTimer)
-  const resetTimer   = useGameStore((s) => s.resetTimer)
+  const startTimer = useGameStore((s) => s.startTimer)
+  const stopTimer = useGameStore((s) => s.stopTimer)
+  const resetTimer = useGameStore((s) => s.resetTimer)
   const setTimerMinutes = useGameStore((s) => s.setTimerMinutes)
-  const setMode      = useGameStore((s) => s.setMode)
+  const setMode = useGameStore((s) => s.setMode)
   const setSelectedZone = useGameStore((s) => s.setSelectedZone)
   const openRaceSelect = useGameStore((s) => s.openRaceSelect)
 
@@ -474,13 +446,13 @@ export default function Main() {
     return () => { window.__closeNpcModal = null }
   }, [showNpcModal])
 
-  const stats   = getStats()
-  const expMax  = getExpToNext()
-  const expPct  = Math.floor((player.exp / expMax) * 100)
-  const race    = player.race ? races[player.race] : null
+  const stats = getStats()
+  const expMax = getExpToNext()
+  const expPct = Math.floor((player.exp / expMax) * 100)
+  const race = player.race ? races[player.race] : null
   const activeColor = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
   const accentColor = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
-  const screenBg    = { arctron: 'radial-gradient(circle at 30% 0%, #201a18 0%, #0a0807 60%)', bionex: 'radial-gradient(circle at 30% 0%, #13243a 0%, #060b12 60%)', celestra: 'radial-gradient(circle at 30% 0%, #1a1642 0%, #07061a 60%)' }[player.race] || '#08080d'
+  const screenBg = { arctron: 'radial-gradient(circle at 30% 0%, #201a18 0%, #0a0807 60%)', bionex: 'radial-gradient(circle at 30% 0%, #13243a 0%, #060b12 60%)', celestra: 'radial-gradient(circle at 30% 0%, #1a1642 0%, #07061a 60%)' }[player.race] || '#08080d'
   const isDungeon = timer.selectedZone && timer.selectedZone.startsWith('dungeon_')
   const sectorIdx = (player.selectedMapIdx !== undefined && player.selectedMapIdx !== null)
     ? player.selectedMapIdx
@@ -493,10 +465,10 @@ export default function Main() {
   } else {
     enemy = enemies.sectors[sectorIdx]
   }
-  
+
   if (!enemy) enemy = enemies.sectors[0]
   const isRunning = timer.state === 'running'
-  const isDone    = timer.state === 'completed'
+  const isDone = timer.state === 'completed'
 
   const getJobInfo = (raceId, jobId) => {
     if (!raceId || !jobId || !jobs[raceId]) return { tier: 0, job: null, classIndex: -1 }
@@ -516,8 +488,8 @@ export default function Main() {
   // CLASS names by faction (mapped by job index position in tier arrays)
   const CLASS_NAMES = {
     celestra: ['Warrior', 'Ranger', 'Summoner', 'Mage'],
-    arctron:  ['Warrior', 'Ranger', 'Technician'],
-    bionex:   ['Guardian', 'Marksman', 'Engineer', 'Psion']
+    arctron: ['Warrior', 'Ranger', 'Technician'],
+    bionex: ['Guardian', 'Marksman', 'Engineer', 'Psion']
   }
 
   const { tier, job: jobInfo, classIndex } = getJobInfo(player.race, player.job)
@@ -594,7 +566,7 @@ export default function Main() {
       // Attack and hit animations
       setPlayerAnim('anim-attack-lunge')
       const animPlayerTimer = setTimeout(() => setPlayerAnim(''), 300)
-      
+
       setEnemyAnim('anim-hit-shake')
       const animEnemyTimer = setTimeout(() => setEnemyAnim(''), 250)
 
@@ -646,7 +618,7 @@ export default function Main() {
       // Enemy attacks, player gets hit animations
       setEnemyAnim('anim-attack-lunge-reverse')
       const animEnemyTimer = setTimeout(() => setEnemyAnim(''), 300)
-      
+
       setPlayerAnim('anim-hit-shake')
       const animPlayerTimer = setTimeout(() => setPlayerAnim(''), 250)
 
@@ -778,26 +750,26 @@ export default function Main() {
                 position: 'relative',
                 flexShrink: 0
               }}>
-              {(() => {
-                const bionexSprite = player.race === 'bionex' ? getBionexJobSprite(player.job) : null
-                if (bionexSprite) {
-                  return (
-                    <img
-                      src={bionexSprite}
-                      alt={player.job}
-                      style={{
-                        height: 160,
-                        width: 160,
-                        objectFit: 'contain',
-                        objectPosition: 'center bottom',
-                        display: 'block',
-                        filter: 'brightness(1.15) contrast(1.05)',
-                      }}
-                    />
-                  )
-                }
-                return <PilotSprite race={player.race} job={player.job} gender={player.gender} size={160} isBattle={true} />
-              })()}
+                {(() => {
+                  const bionexSprite = player.race === 'bionex' ? getBionexJobSprite(player.job) : null
+                  if (bionexSprite) {
+                    return (
+                      <img
+                        src={bionexSprite}
+                        alt={player.job}
+                        style={{
+                          height: 160,
+                          width: 160,
+                          objectFit: 'contain',
+                          objectPosition: 'center bottom',
+                          display: 'block',
+                          filter: 'brightness(1.15) contrast(1.05)',
+                        }}
+                      />
+                    )
+                  }
+                  return <PilotSprite race={player.race} job={player.job} gender={player.gender} size={160} isBattle={true} />
+                })()}
               </div>
               <div style={styles.spriteLabel}>{t('pilot_label')}</div>
             </div>
@@ -853,11 +825,11 @@ export default function Main() {
                   left: `${p.x}%`,
                   top: `${p.y - 12}%`,
                   color: p.isPlayerDmg ? '#ff4444' : '#fff',
-                  textShadow: p.isPlayerDmg 
-                    ? '0 0 8px #ff0033, 0 0 15px #ff0000' 
-                    : p.isCrit 
-                    ? '0 0 10px #ff3131, 0 0 20px #ff0000' 
-                    : '0 0 8px var(--neon-glow)'
+                  textShadow: p.isPlayerDmg
+                    ? '0 0 8px #ff0033, 0 0 15px #ff0000'
+                    : p.isCrit
+                      ? '0 0 10px #ff3131, 0 0 20px #ff0000'
+                      : '0 0 8px var(--neon-glow)'
                 }}
               >
                 {p.text}
@@ -991,7 +963,7 @@ export default function Main() {
       <div className={`main-lobby-panel glass-panel cyber-panel ${player.race ? 'panel-' + player.race : ''}`} style={styles.focusCard}>
         {/* Location & Event Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-          <div 
+          <div
             className="location-pill"
             style={{ cursor: 'pointer', transition: 'transform 0.2s', padding: '4px 10px' }}
             onClick={() => setShowMapModal(true)}
@@ -1140,10 +1112,28 @@ export default function Main() {
           {!isRunning && player.race && (
             <button className="npc-circle-btn" onClick={() => setShowNpcModal(true)} title={t('visit_npc')}><UtilIcon id="shop" size={22} /></button>
           )}
-          {!isRunning && !isDone && (
-            <button className="deploy-btn" onClick={player.race ? startTimer : openRaceSelect}>
-              {player.race ? t('deploy_unit') : t('select_race')}
+          {!isRunning && !isDone && !player.race && (
+            <button className="deploy-btn" onClick={openRaceSelect}>
+              {t('select_race')}
             </button>
+          )}
+          {!isRunning && !isDone && player.race && (
+            <div style={{ display: 'flex', gap: 8, width: '100%' }}>
+              <button
+                className={`deploy-btn glass-panel cyber-panel panel-${player.race}`}
+                style={{ flex: 1, padding: '10px 4px', fontSize: 13, background: 'transparent', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}
+                onClick={startTimer}
+              >
+                <span style={{ color: activeColor, textShadow: `0 0 8px ${activeColor}` }}>⚡</span> AUTO DEPLOY
+              </button>
+              <button
+                className="deploy-btn glass-panel cyber-panel"
+                disabled={true}
+                style={{ flex: 1, padding: '10px 4px', fontSize: 13, background: 'rgba(10, 15, 25, 0.4)', color: '#7a8593', opacity: 0.8, cursor: 'not-allowed', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, borderStyle: 'dashed' }}
+              >
+                <span style={{ opacity: 0.5 }}>🔒</span> TURN-BASED
+              </button>
+            </div>
           )}
           {isDone && (
             <button className="deploy-btn" style={{ background: 'linear-gradient(90deg,#006000,#00c840)', color: '#fff' }} onClick={resetTimer}>
