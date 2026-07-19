@@ -1,15 +1,16 @@
 {
-  "frameWidth": 500,
-  "frameHeight": 284,
-  "frameCount": 5,
+  "frameWidth": 945,
+  "frameHeight": 720,
+  "frameCount": 6,
   "fps": 2,
   "calibrationRefWeaponWidth": 553,
   "calibrationRefShieldWidth": 390,
   "frames": [
-    { "index": 0, "name": "ezgif-frame-001.png", "weapon": { "x": 182, "y": 69, "scale": 0.092, "rotation": 80, "blendMode": "source-over", "front": false }, "shield": { "x": 218, "y": 104, "scale": 0.1379, "rotation": 0, "blendMode": "source-over", "front": false } },
-    { "index": 1, "name": "ezgif-frame-006.png", "weapon": { "x": 137, "y": 67, "scale": 0.0662, "rotation": -41, "blendMode": "source-over", "front": false }, "shield": { "x": 159, "y": 87, "scale": 0.0827, "rotation": 0, "blendMode": "source-over", "front": false } },
-    { "index": 2, "name": "ezgif-frame-007.png", "weapon": { "x": 137, "y": 67, "scale": 0.0662, "rotation": -45, "blendMode": "source-over", "front": false }, "shield": { "x": 159, "y": 87, "scale": 0.0827, "rotation": 0, "blendMode": "source-over", "front": false } },
-    { "index": 3, "name": "ezgif-frame-009.png", "weapon": { "x": 137, "y": 59, "scale": 0.0496, "rotation": -54, "blendMode": "source-over", "front": false }, "shield": { "x": 159, "y": 80, "scale": 0.0827, "rotation": 0, "blendMode": "source-over", "front": false } },
-    { "index": 4, "name": "ezgif-frame-010.png", "weapon": { "x": 240, "y": 86, "scale": 0.1542, "rotation": 0, "blendMode": "source-over", "front": false }, "shield": { "x": 295, "y": 137, "scale": 0.2103, "rotation": 0, "blendMode": "source-over", "front": false } }
+    { "index": 0, "weapon": { "x": 182, "y": 69, "scale": 0.092, "rotation": 80, "blendMode": "source-over", "front": false }, "shield": { "x": 218, "y": 104, "scale": 0.1379, "rotation": 0, "blendMode": "source-over", "front": false } },
+    { "index": 1, "weapon": { "x": 137, "y": 67, "scale": 0.0662, "rotation": -41, "blendMode": "source-over", "front": false }, "shield": { "x": 159, "y": 87, "scale": 0.0827, "rotation": 0, "blendMode": "source-over", "front": false } },
+    { "index": 2, "weapon": { "x": 137, "y": 67, "scale": 0.0662, "rotation": -45, "blendMode": "source-over", "front": false }, "shield": { "x": 159, "y": 87, "scale": 0.0827, "rotation": 0, "blendMode": "source-over", "front": false } },
+    { "index": 3, "weapon": { "x": 137, "y": 59, "scale": 0.0496, "rotation": -54, "blendMode": "source-over", "front": false }, "shield": { "x": 159, "y": 80, "scale": 0.0827, "rotation": 0, "blendMode": "source-over", "front": false } },
+    { "index": 4, "weapon": { "x": 240, "y": 86, "scale": 0.1542, "rotation": 0, "blendMode": "source-over", "front": false }, "shield": { "x": 295, "y": 137, "scale": 0.2103, "rotation": 0, "blendMode": "source-over", "front": false } },
+    { "index": 5, "weapon": { "x": 182, "y": 69, "scale": 0.092, "rotation": 80, "blendMode": "source-over", "front": false }, "shield": { "x": 218, "y": 104, "scale": 0.1379, "rotation": 0, "blendMode": "source-over", "front": false } }
   ]
 }

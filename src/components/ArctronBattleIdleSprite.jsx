@@ -3,9 +3,9 @@ import { resolveItemImage } from '../store/gameStore'
 
 // Tier1 Arctron Warrior battle-idle animation, authored in public/animation-lab.html
 // and exported via its "Export Weapon/Shield" button: a flattened body spritesheet
-// (base_back.png) plus a JSON of per-frame weapon/shield pixel offsets so the
-// currently equipped weapon/shield render on top instead of being baked in.
-const SHEET_URL = '/assets/arctron/battle/warrior_lv1_idle/base_back.png'
+// (spritesheet_idle_battle_cropped_clean.png) plus a JSON of per-frame weapon/shield
+// pixel offsets so the currently equipped weapon/shield render on top.
+const SHEET_URL = '/assets/arctron/def_warrior_armor_set_lv1_battle/spritesheet_idle_battle_cropped_clean.png'
 const DATA_URL = '/assets/arctron/battle/warrior_lv1_idle/weapon_shield_layers.json'
 
 function proxyUrl(url) {
@@ -28,7 +28,7 @@ function loadImage(src) {
 }
 
 export default function ArctronBattleIdleSprite({ player, width, height, className, style }) {
-  const NATIVE_W = 500, NATIVE_H = 284, TARGET_H = 160
+  const NATIVE_W = 945, NATIVE_H = 720, TARGET_H = 160
   const canvasRef = useRef(null)
   const [rigData, setRigData] = useState(null)
   const [sheetImg, setSheetImg] = useState(null)
