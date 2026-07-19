@@ -123,7 +123,7 @@ export default function ArctronBattleIdleSprite({ player, width = 190, height, c
 
   if (!rigData) return null
 
-  const displayHeight = height || (width * rigData.frameHeight / rigData.frameWidth)
+  const displayHeight = height || width // square if height not provided
 
   return (
     <canvas

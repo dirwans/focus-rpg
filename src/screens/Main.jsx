@@ -725,7 +725,7 @@ export default function Main() {
                 alignItems: 'flex-end',
                 justifyContent: 'center',
                 width: 160,
-                height: player.race === 'arctron' ? 190 : 160,
+                height: 160,
                 position: 'relative',
                 flexShrink: 0
               }}>
@@ -747,7 +747,7 @@ export default function Main() {
                     />
                   )
                 }
-                return <PilotSprite race={player.race} job={player.job} gender={player.gender} size={player.race === 'arctron' ? 190 : 160} isBattle={true} />
+                return <PilotSprite race={player.race} job={player.job} gender={player.gender} size={160} isBattle={true} />
               })()}
               </div>
               <div style={styles.spriteLabel}>{t('pilot_label')}</div>

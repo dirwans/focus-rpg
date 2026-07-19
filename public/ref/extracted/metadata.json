@@ -1,0 +1,6 @@
+{
+  "name": "2.5D Sprite Bone Rigger & Animator",
+  "description": "An intuitive browser-based drag-and-drop tool for rigging bones and animating 2D character sprites, featuring real-time mesh deformation (skinning), timeline keyframing, preset templates, and JSON exports for web games.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
