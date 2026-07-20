@@ -21,8 +21,6 @@ const NAV_ITEMS = [
   { id: 'ascension', label: 'ASC' },
   { id: 'premium',   label: 'SHOP' },
 ]
-// HQ tab only for Arctron
-const HQ_ITEM = { id: 'hq', label: 'HQ' }
 
 // Exact SVG icons from design handoff
 function NavIcon({ id, active, color }) {
@@ -108,19 +106,15 @@ export default function BottomNav() {
       {NAV_ITEMS.map((n) => {
         const isActive = screen === n.id
         let displayLabel = n.label
-        let targetScreen = n.id
         if (n.id === 'main') {
-          if (player?.race === 'arctron') {
-            displayLabel = 'HQ'
-            targetScreen = 'hq'
-          }
+          if (player?.race === 'arctron') displayLabel = 'HQ'
           else if (player?.race === 'bionex') displayLabel = 'MAINFRAME'
           else if (player?.race === 'celestra') displayLabel = 'SANCTUARY'
         }
         return (
           <button
             key={n.id}
-            onClick={() => setScreen(targetScreen)}
+            onClick={() => setScreen(n.id)}
             style={{
               flex:           1,
               minWidth:       0,
