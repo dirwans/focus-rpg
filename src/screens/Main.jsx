@@ -15,6 +15,11 @@ import SocialModal from '../components/SocialModal'
 import GuildPanel from '../components/GuildPanel'
 import MailboxModal from '../components/MailboxModal'
 import EventModal from '../components/EventModal'
+import TurnOrderHeader from '../components/TurnOrderHeader'
+import BattleArena2D from '../components/BattleArena2D'
+import TacticalHUDPanel from '../components/TacticalHUDPanel'
+import DeployPanel from '../components/DeployPanel'
+
 
 function fmt(s) {
   const m = Math.floor(s / 60).toString().padStart(2, '0')
@@ -387,17 +392,22 @@ function WorldMapModal({ onClose }) {
                 </span>
               </button>
 
-              {/* Turn Based Button (Locked) */}
+              {/* Turn Based Button (Unlocked for local testing) */}
               <button
+                onClick={() => {
+                  setSelectedMapIdx(selectedNode)
+                  setMode('fight')
+                  onClose()
+                }}
                 className="deploy-btn-manual"
-                disabled={true}
-                style={{ flex: 1, padding: '12px 4px', fontSize: 13, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}
+                style={{ flex: 1, padding: '12px 4px', fontSize: 13, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, background: 'rgba(0, 229, 255, 0.15)', border: '1px solid #00e5ff', cursor: 'pointer' }}
               >
-                <span>🔒 TURN-BASED</span>
-                <span style={{ fontSize: 9, opacity: 0.6, fontFamily: 'var(--font-body)', fontWeight: 600, letterSpacing: 0, textTransform: 'none' }}>
-                  Under Construction
+                <span>⚔️ TURN-BASED</span>
+                <span style={{ fontSize: 9, color: '#00e5ff', fontFamily: 'var(--font-body)', fontWeight: 600, letterSpacing: 0, textTransform: 'none' }}>
+                  2.5D Manual Combat
                 </span>
               </button>
+
             </div>
           </div>
         )}
@@ -435,6 +445,17 @@ export default function Main() {
   const [showMapModal, setShowMapModal] = useState(false)
   const [npcInitialView, setNpcInitialView] = useState('lobby')
   const [showEventModal, setShowEventModal] = useState(false)
+  const [isTurnBasedActive, setIsTurnBasedActive] = useState(false)
+  const [showDeployPanel, setShowDeployPanel] = useState(false)
+
+  const [isAutoBattle, setIsAutoBattle] = useState(false)
+  const [selectedUnitId, setSelectedUnitId] = useState('player_main')
+  const [selectedTargetId, setSelectedTargetId] = useState('mob_main')
+  const [squadAllies, setSquadAllies] = useState([
+    { id: 'player_main', name: player.name || 'PILOT', race: player.race || 'arctron', job: player.job || 'warrior', gender: player.gender || 'm', side: 'ally', hp: battle.playerHp !== undefined ? battle.playerHp : 100, maxHp: battle.playerMaxHp || 100, shield: 0, energy: 45, speed: 105, row: 1, col: 0 }
+  ])
+
+
 
   // Register global back-button bridge for Capacitor hardware back key
   useEffect(() => {
@@ -653,7 +674,130 @@ export default function Main() {
     : isDone ? 0 : 100
   const strokeDashoffset = circ - (timerPercent / 100) * circ
 
-  // Spacious Focus Screen Layout
+  // Standalone 2.5D Turn-Based Manual Combat Screen (Independent of Focus Session Auto)
+  if (isTurnBasedActive && !isRunning) {
+    const allArenaUnits = [
+      ...squadAllies.map(a => (a.id === 'player_main' ? {
+        ...a,
+        name: player.name || 'PILOT',
+        race: player.race || 'arctron',
+        job: player.job || 'warrior',
+        gender: player.gender || 'male',
+
+        hp: battle.playerHp > 0 ? battle.playerHp : (stats.hp || 100),
+        maxHp: battle.playerMaxHp || stats.hp || 100,
+        shield: battle.playerShield || 0,
+        energy: battle.playerEnergy || 45,
+        speed: stats.speed || 105,
+      } : a)),
+      ...(battle.currentMob ? [{
+        id: 'mob_main',
+        name: battle.currentMob.name || 'STAGE MOB',
+        side: 'enemy',
+        image: battle.currentMob.image,
+        isBoss: battle.isBoss,
+        hp: battle.enemyHp !== undefined ? battle.enemyHp : 100,
+        maxHp: battle.enemyMaxHp || 100,
+        speed: 92,
+        row: 1,
+        col: 0,
+      }] : [])
+    ]
+
+    const selectedUnitObj = allArenaUnits.find(u => u.id === selectedUnitId) || allArenaUnits[0] || null
+    const selectedTargetObj = allArenaUnits.find(u => u.id === selectedTargetId) || allArenaUnits.find(u => u.side === 'enemy') || null
+
+    return (
+      <div className="no-scrollbar" style={{ ...styles.screen, padding: '8px', background: '#020617' }}>
+        {/* Top Header with Exit button */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 12px', background: 'rgba(15, 23, 42, 0.9)', borderBottom: '1px solid #1e293b', borderRadius: '8px 8px 0 0' }}>
+          <div style={{ fontFamily: 'var(--font-title)', fontSize: '13px', fontWeight: 900, color: '#00e5ff', letterSpacing: '1px' }}>
+            ⚔️ 2.5D TURN-BASED MANUAL COMBAT
+          </div>
+          <button
+            onClick={() => setIsTurnBasedActive(false)}
+            style={{ padding: '4px 12px', borderRadius: '4px', background: 'rgba(239, 68, 68, 0.2)', border: '1px solid #ef4444', color: '#fca5a5', fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 800, cursor: 'pointer' }}
+          >
+            ✕ EXIT MANUAL
+          </button>
+        </div>
+
+        {/* Top Turn Order Timeline */}
+        <TurnOrderHeader
+          units={allArenaUnits}
+          turnOrder={allArenaUnits.map(u => u.id)}
+          currentTurnIndex={0}
+          faction={player.race || 'arctron'}
+        />
+
+        {/* 2.5D Isometric Battle Arena */}
+        <BattleArena2D
+          allies={allArenaUnits.filter(u => u.side === 'ally')}
+          enemies={allArenaUnits.filter(u => u.side === 'enemy')}
+          selectedUnitId={selectedUnitId}
+          selectedTargetId={selectedTargetId}
+          activeUnitId={allArenaUnits[0]?.id || 'player_main'}
+          floatingTexts={[]}
+
+          onSelectUnit={(unit) => {
+            if (unit.side === 'ally') setSelectedUnitId(unit.id)
+            else setSelectedTargetId(unit.id)
+          }}
+          onSelectSlot={(side, row, col) => {
+            if (showDeployPanel && side === 'ally') {
+              setSquadAllies(prev => prev.map(u => u.id === selectedUnitId ? { ...u, row, col } : u))
+            }
+          }}
+          faction={player.race || 'arctron'}
+          isDeployMode={showDeployPanel}
+        />
+
+        {/* Manual Deploy Modal overlay if active */}
+        {showDeployPanel && (
+          <DeployPanel
+            roster={[
+              { id: 'player_main', name: player.name || 'PILOT', job: player.job || 'warrior' },
+              { id: 'squad_unit_2', name: 'Tactical Vanguard', job: 'ranger' },
+              { id: 'squad_unit_3', name: 'Nanite Specialist', job: 'technician' },
+            ]}
+            deployedUnits={squadAllies}
+            onDeployUnit={(newUnit) => {
+              if (squadAllies.length >= 4) return
+              const emptyCol = squadAllies.length
+              setSquadAllies(prev => [...prev, { ...newUnit, side: 'ally', hp: 800, maxHp: 800, shield: 100, energy: 20, speed: 90, row: 1, col: emptyCol }])
+            }}
+            onRemoveUnit={(unitId) => {
+              if (unitId === 'player_main') return
+              setSquadAllies(prev => prev.filter(u => u.id !== unitId))
+            }}
+            onClose={() => setShowDeployPanel(false)}
+            faction={player.race || 'arctron'}
+          />
+        )}
+
+        {/* Bottom Tactical HUD Panel */}
+        <TacticalHUDPanel
+          selectedUnit={selectedUnitObj}
+          selectedTarget={selectedTargetObj}
+          isAllyTurn={true}
+          isAutoBattle={isAutoBattle}
+          onExecuteSkill={(skill) => {
+            console.log('Skill Executed:', skill.name)
+          }}
+          onToggleAuto={() => setIsAutoBattle(!isAutoBattle)}
+          onOpenDeploy={() => setShowDeployPanel(!showDeployPanel)}
+          onResetBattle={() => {
+            setIsAutoBattle(false)
+            setShowDeployPanel(false)
+          }}
+          faction={player.race || 'arctron'}
+          isDeployMode={showDeployPanel}
+        />
+      </div>
+    )
+  }
+
+  // Spacious Focus Screen Layout (Standard Auto Focus Session)
   if (isRunning) {
     const timerPercentActive = (timer.secondsLeft / (timer.selectedMinutes * 60)) * 100
     const strokeDashoffsetActive = circ - (timerPercentActive / 100) * circ
@@ -782,13 +926,8 @@ export default function Main() {
                 <div style={{
                   animation: 'spritePulse 1.5s infinite ease-in-out',
                   display: 'flex',
-                  alignItems: 'flex-end', // Stand on the grid floor
+                  alignItems: 'flex-end',
                   justifyContent: 'center',
-                  // The wrapper width is only a layout footprint (for flex spacing next
-                  // to the pilot) — with bleed mode the art itself scales by height alone
-                  // and is allowed to overflow that footprint, so a landscape-cropped
-                  // boss (e.g. a wide sword swing) still reaches the full 1.6x height
-                  // without shrinking pilot's space or overflowing the phone frame.
                   width: battle.isBoss ? 150 : 160,
                   height: battle.isBoss ? bossSpriteSize : 160,
                   flexShrink: 0
@@ -815,7 +954,6 @@ export default function Main() {
               </div>
             )}
 
-
             {/* Floating damage popups */}
             {particles.map((p) => (
               <div
@@ -837,6 +975,8 @@ export default function Main() {
             ))}
           </div>
         </div>
+
+
 
         {/* 5. Session summary (Bottom-most bar) */}
         <div className="main-active-summary" style={styles.sessionSummaryActive}>
@@ -1127,12 +1267,16 @@ export default function Main() {
                 <span style={{ color: activeColor, textShadow: `0 0 8px ${activeColor}` }}>⚡</span> AUTO DEPLOY
               </button>
               <button
-                className="deploy-btn glass-panel cyber-panel"
-                disabled={true}
-                style={{ flex: 1, padding: '10px 4px', fontSize: 13, background: 'rgba(10, 15, 25, 0.4)', color: '#7a8593', opacity: 0.8, cursor: 'not-allowed', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, borderStyle: 'dashed' }}
+                className={`deploy-btn glass-panel cyber-panel panel-${player.race}`}
+                style={{ flex: 1, padding: '10px 4px', fontSize: 13, background: 'rgba(0, 229, 255, 0.15)', color: '#00e5ff', borderColor: '#00e5ff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}
+                onClick={() => {
+                  setIsTurnBasedActive(true)
+                }}
               >
-                <span style={{ opacity: 0.5 }}>🔒</span> TURN-BASED
+                <span style={{ color: activeColor, textShadow: `0 0 8px ${activeColor}` }}>⚔️</span> TURN-BASED
               </button>
+
+
             </div>
           )}
           {isDone && (

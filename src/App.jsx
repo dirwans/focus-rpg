@@ -23,8 +23,9 @@ import PremiumShop from './screens/PremiumShop'
 import Ascension from './screens/Ascension'
 import Inventory from './screens/Inventory'
 import AuditorRoom from './screens/AuditorRoom'
+import HQScreen from './screens/HQScreen'
 
-const SCREENS = { main: Main, unit: Unit, ranks: Ranks, cargo: Cargo, trade: Trade, battle: Battle, mine: Mine, premium: PremiumShop, ascension: Ascension, inventory: Inventory }
+const SCREENS = { main: Main, hq: HQScreen, unit: Unit, ranks: Ranks, cargo: Cargo, trade: Trade, battle: Battle, mine: Mine, premium: PremiumShop, ascension: Ascension, inventory: Inventory }
 
 const snap = (gs) => JSON.stringify(gs ?? {})
 

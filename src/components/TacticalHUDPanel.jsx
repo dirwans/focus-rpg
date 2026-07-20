@@ -15,7 +15,6 @@ export default function TacticalHUDPanel({
 }) {
   const theme = getFactionTheme(faction)
 
-  // Skill click handler with guards
   const handleSkillClick = (skill) => {
     if (!isAllyTurn || isAutoBattle || !selectedUnit) return
     if (skill.type === 'ultimate' && (selectedUnit.energy || 0) < 100) return
@@ -32,63 +31,91 @@ export default function TacticalHUDPanel({
   const hp = selectedUnit?.hp ?? 100
   const maxHp = selectedUnit?.maxHp ?? 100
   const hpPercent = Math.max(0, Math.min(100, (hp / maxHp) * 100))
-  
   const shield = selectedUnit?.shield ?? 0
   const shieldPercent = Math.max(0, Math.min(100, (shield / maxHp) * 100))
-  
   const energy = selectedUnit?.energy ?? 0
 
   return (
     <div
-      className="w-full p-2 sm:p-3 grid grid-cols-1 md:grid-cols-12 gap-2 relative z-30 select-none border-t backdrop-blur-md"
       style={{
+        width: '100%',
+        padding: '8px 12px',
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        gap: '8px',
+        position: 'relative',
+        zIndex: 30,
+        userSelect: 'none',
+        borderTop: `1px solid ${theme.border}`,
         background: theme.panelBg,
-        borderColor: theme.border,
-        boxShadow: `0 -4px 20px rgba(0,0,0,0.5)`,
+        backdropFilter: 'blur(8px)',
+        boxShadow: '0 -4px 20px rgba(0,0,0,0.5)',
+        boxSizing: 'border-box'
       }}
     >
-      {/* Corner Bracket Accents */}
-      <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 pointer-events-none" style={{ borderColor: theme.primary }} />
-      <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 pointer-events-none" style={{ borderColor: theme.primary }} />
-
-      {/* LEFT PANEL: Active Unit Stats (4 Cols) */}
-      <div className="md:col-span-4 bg-slate-950/70 border rounded-lg p-2 flex gap-2.5 relative" style={{ borderColor: `${theme.primary}30` }}>
+      {/* LEFT PANEL: Active Unit Stats (Flexible width ~35%) */}
+      <div 
+        style={{
+          flex: '1 1 240px',
+          minWidth: '220px',
+          background: 'rgba(2, 6, 23, 0.8)',
+          border: `1px solid ${theme.primary}30`,
+          borderRadius: '8px',
+          padding: '8px',
+          display: 'flex',
+          flexDirection: 'row',
+          gap: '10px',
+          position: 'relative',
+          alignItems: 'center'
+        }}
+      >
         {selectedUnit ? (
           <>
             {/* Unit Portrait */}
             <div 
-              className="w-14 h-14 sm:w-16 sm:h-16 rounded-lg border-2 relative overflow-hidden flex flex-col items-center justify-center flex-shrink-0"
               style={{
-                borderColor: theme.primary,
+                width: '54px',
+                height: '54px',
+                borderRadius: '8px',
+                border: `2px solid ${theme.primary}`,
                 boxShadow: `0 0 10px ${theme.primary}40`,
-                background: 'rgba(0,0,0,0.8)'
+                background: 'rgba(0,0,0,0.8)',
+                position: 'relative',
+                overflow: 'hidden',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0
               }}
             >
               {selectedUnit.avatar ? (
-                <img src={selectedUnit.avatar} alt={selectedUnit.name} className="w-full h-full object-cover" />
+                <img src={selectedUnit.avatar} alt={selectedUnit.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               ) : (
-                <div className="text-center font-mono font-bold text-xs" style={{ color: theme.textPrimary }}>
+                <div style={{ textAlign: 'center', fontFamily: 'var(--font-mono)', fontWeight: 800, fontSize: '11px', color: theme.textPrimary }}>
                   {selectedUnit.race || faction}
                 </div>
               )}
-              <div 
-                className="absolute bottom-1 w-2 h-2 rounded-full animate-ping"
-                style={{ backgroundColor: theme.primary }}
-              />
             </div>
 
             {/* HP & Energy Details */}
-            <div className="flex-1 min-w-0 flex flex-col justify-center">
-              <div className="flex items-center justify-between gap-1 mb-1">
-                <span className="font-mono text-xs font-bold text-slate-100 uppercase truncate">
+            <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '4px', marginBottom: '4px' }}>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 800, color: '#f8fafc', textTransform: 'uppercase', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {selectedUnit.name || 'UNIT'}
                 </span>
                 <span 
-                  className="text-[8px] font-mono font-bold border px-1 rounded uppercase tracking-wider"
                   style={{
-                    borderColor: `${theme.primary}50`,
+                    fontSize: '8px',
+                    fontFamily: 'var(--font-mono)',
+                    fontWeight: 700,
+                    border: `1px solid ${theme.primary}50`,
                     color: theme.primary,
-                    background: `${theme.primary}15`
+                    background: `${theme.primary}15`,
+                    padding: '1px 4px',
+                    borderRadius: '3px',
+                    letterSpacing: '1px'
                   }}
                 >
                   ACTIVE
@@ -96,27 +123,31 @@ export default function TacticalHUDPanel({
               </div>
 
               {/* HP Bar */}
-              <div className="space-y-0.5 mb-1.5">
-                <div className="flex justify-between font-mono text-[9px]">
-                  <span className="text-slate-400 font-semibold">HP</span>
-                  <span className="font-bold" style={{ color: theme.textPrimary }}>
-                    {hp} / {maxHp} {shield > 0 && <span className="text-sky-400">(+{shield})</span>}
+              <div style={{ marginBottom: '4px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-mono)', fontSize: '9px', marginBottom: '2px' }}>
+                  <span style={{ color: '#94a3b8', fontWeight: 600 }}>HP</span>
+                  <span style={{ fontWeight: 700, color: theme.textPrimary }}>
+                    {hp} / {maxHp} {shield > 0 && <span style={{ color: '#38bdf8' }}>(+{shield})</span>}
                   </span>
                 </div>
-                <div className="h-2 bg-slate-900 rounded border border-slate-800 overflow-hidden relative">
+                <div style={{ height: '7px', background: '#020617', borderRadius: '3px', border: '1px solid #1e293b', overflow: 'hidden', position: 'relative' }}>
                   <div
-                    className="h-full transition-all duration-300"
                     style={{
+                      height: '100%',
                       width: `${hpPercent}%`,
-                      background: theme.hpBar
+                      background: theme.hpBar,
+                      transition: 'width 0.3s ease'
                     }}
                   />
                   {shield > 0 && (
                     <div
-                      className="absolute top-0 bottom-0 bg-sky-400/80 animate-pulse"
                       style={{
+                        position: 'absolute',
+                        top: 0,
+                        bottom: 0,
                         left: `${hpPercent}%`,
-                        width: `${shieldPercent}%`
+                        width: `${shieldPercent}%`,
+                        background: 'rgba(56, 189, 248, 0.8)'
                       }}
                     />
                   )}
@@ -124,23 +155,20 @@ export default function TacticalHUDPanel({
               </div>
 
               {/* Energy Bar */}
-              <div className="space-y-0.5">
-                <div className="flex justify-between font-mono text-[9px]">
-                  <span className="text-slate-400 font-semibold">ENERGY</span>
-                  <span 
-                    className={`font-bold ${energy >= 100 ? 'text-amber-400 animate-pulse font-extrabold' : 'text-slate-300'}`}
-                  >
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-mono)', fontSize: '9px', marginBottom: '2px' }}>
+                  <span style={{ color: '#94a3b8', fontWeight: 600 }}>ENERGY</span>
+                  <span style={{ fontWeight: 800, color: energy >= 100 ? '#f59e0b' : '#cbd5e1' }}>
                     {energy}%
                   </span>
                 </div>
-                <div className="h-1.5 bg-slate-900 rounded border border-slate-800 overflow-hidden">
+                <div style={{ height: '6px', background: '#020617', borderRadius: '3px', border: '1px solid #1e293b', overflow: 'hidden' }}>
                   <div
-                    className="h-full transition-all duration-300"
                     style={{
+                      height: '100%',
                       width: `${energy}%`,
-                      background: energy >= 100 
-                        ? 'linear-gradient(90deg, #f59e0b, #fbbf24)' 
-                        : theme.energyBar
+                      background: energy >= 100 ? 'linear-gradient(90deg, #f59e0b, #fbbf24)' : theme.energyBar,
+                      transition: 'width 0.3s ease'
                     }}
                   />
                 </div>
@@ -148,34 +176,46 @@ export default function TacticalHUDPanel({
             </div>
           </>
         ) : (
-          <div className="w-full flex items-center justify-center text-slate-500 font-mono text-[10px] uppercase tracking-wider italic">
+          <div style={{ width: '100%', textAlign: 'center', color: '#64748b', fontFamily: 'var(--font-mono)', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '1px', fontStyle: 'italic' }}>
             [ SELECT UNIT FOR HUD STATS ]
           </div>
         )}
       </div>
 
-      {/* MIDDLE PANEL: Tactical Command Matrix (5 Cols) */}
-      <div className="md:col-span-5 bg-slate-950/70 border rounded-lg p-2 flex flex-col justify-between" style={{ borderColor: `${theme.primary}30` }}>
-        <div className="flex justify-between items-center mb-1 flex-shrink-0">
-          <div className="text-[9px] font-mono font-bold uppercase tracking-wider flex items-center gap-1" style={{ color: theme.primary }}>
-            <span>⚡ TACTICAL COMMAND MATRIX</span>
+      {/* MIDDLE PANEL: Tactical Command Deck */}
+      <div 
+        style={{
+          flex: '2 1 280px',
+          minWidth: '240px',
+          background: 'rgba(2, 6, 23, 0.8)',
+          border: `1px solid ${theme.primary}30`,
+          borderRadius: '8px',
+          padding: '8px',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          gap: '6px'
+        }}
+      >
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div style={{ fontSize: '9px', fontFamily: 'var(--font-mono)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1px', color: theme.primary }}>
+            ⚡ TACTICAL COMMAND MATRIX
           </div>
 
-          {/* Current Target */}
           {selectedTarget ? (
-            <div className="bg-rose-950/60 border border-rose-500/50 px-1.5 py-0.5 rounded flex items-center gap-1 font-mono text-[8px] text-rose-300 uppercase tracking-wider">
-              <span className="w-1.5 h-1.5 bg-rose-500 rounded-full animate-ping" />
+            <div style={{ background: 'rgba(136, 19, 55, 0.6)', border: '1px solid rgba(244, 63, 94, 0.5)', padding: '2px 6px', borderRadius: '4px', display: 'flex', alignItems: 'center', gap: '4px', fontFamily: 'var(--font-mono)', fontSize: '8px', color: '#fda4af', textTransform: 'uppercase', letterSpacing: '1px' }}>
+              <span style={{ width: '5px', height: '5px', background: '#f43f5e', borderRadius: '50%' }} />
               <span>Target: {selectedTarget.name?.split(' ')[0] || 'MOB'}</span>
             </div>
           ) : (
-            <div className="bg-slate-900 border border-slate-800 px-1.5 py-0.5 rounded font-mono text-[8px] text-slate-500 uppercase tracking-widest">
+            <div style={{ background: '#020617', border: '1px solid #1e293b', padding: '2px 6px', borderRadius: '4px', fontFamily: 'var(--font-mono)', fontSize: '8px', color: '#64748b', textTransform: 'uppercase', letterSpacing: '1px' }}>
               [ AUTO TARGETING ]
             </div>
           )}
         </div>
 
         {selectedUnit && isAllyTurn && !isAutoBattle ? (
-          <div className="grid grid-cols-3 gap-1.5 flex-1 items-center">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px', width: '100%', flex: 1 }}>
             {defaultSkills.map((skill) => {
               const isOnCd = (skill.cooldown || 0) > 0
               const isUlt = skill.type === 'ultimate'
@@ -187,48 +227,50 @@ export default function TacticalHUDPanel({
                   key={skill.id}
                   onClick={() => handleSkillClick(skill)}
                   disabled={disabled}
-                  className={`relative flex flex-col items-center justify-center p-1.5 rounded-lg border transition-all select-none h-full ${
-                    disabled
-                      ? 'bg-slate-900/40 border-slate-800 text-slate-600 opacity-50 cursor-not-allowed'
-                      : isUlt
-                      ? 'bg-gradient-to-b from-amber-950/80 to-amber-900/30 border-amber-400 text-amber-200 hover:scale-105 shadow-[0_0_12px_rgba(245,158,11,0.4)]'
-                      : 'bg-slate-900/80 border-slate-700 hover:border-cyan-400 text-slate-200 hover:scale-105'
-                  }`}
                   style={{
-                    borderColor: !disabled && !isUlt ? theme.border : undefined
+                    position: 'relative',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '6px 4px',
+                    borderRadius: '6px',
+                    border: `1px solid ${disabled ? '#1e293b' : isUlt ? '#f59e0b' : theme.border}`,
+                    background: disabled
+                      ? 'rgba(2, 6, 23, 0.4)'
+                      : isUlt
+                      ? 'linear-gradient(180deg, rgba(120, 53, 15, 0.6), rgba(69, 26, 3, 0.3))'
+                      : 'rgba(15, 23, 42, 0.8)',
+                    color: disabled ? '#475569' : isUlt ? '#fef08a' : '#f8fafc',
+                    cursor: disabled ? 'not-allowed' : 'pointer',
+                    opacity: disabled ? 0.5 : 1,
+                    transition: 'all 0.2s ease-out'
                   }}
                 >
-                  <span className="text-[9px] font-mono font-bold uppercase tracking-wide truncate w-full text-center">
+                  <span style={{ fontSize: '9px', fontFamily: 'var(--font-mono)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.5px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', width: '100%', textAlign: 'center' }}>
                     {skill.name}
                   </span>
-                  <span className="text-[7px] font-mono text-slate-400 uppercase mt-0.5">
+                  <span style={{ fontSize: '7px', fontFamily: 'var(--font-mono)', color: '#94a3b8', textTransform: 'uppercase', marginTop: '2px' }}>
                     {isUlt ? 'ULTIMATE' : skill.type === 'skill' ? 'SPECIAL' : 'ATTACK'}
                   </span>
 
-                  {/* Cooldown Overlay */}
                   {isOnCd && (
-                    <div className="absolute inset-0 bg-slate-950/90 rounded-lg flex items-center justify-center font-mono text-[9px] text-rose-400 font-bold uppercase">
+                    <div style={{ position: 'absolute', inset: 0, background: 'rgba(2, 6, 23, 0.9)', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyCenter: 'center', fontFamily: 'var(--font-mono)', fontSize: '9px', color: '#f43f5e', fontWeight: 800 }}>
                       CD {skill.cooldown}T
                     </div>
-                  )}
-
-                  {isUlt && isUltReady && (
-                    <span className="absolute -top-1 -right-1 text-[6px] font-mono font-black uppercase px-1 rounded bg-amber-400 text-slate-950 animate-pulse">
-                      READY
-                    </span>
                   )}
                 </button>
               )
             })}
           </div>
         ) : (
-          <div className="flex-1 flex items-center justify-center text-center p-2 bg-slate-900/40 rounded border border-slate-800/40">
+          <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyCenter: 'center', padding: '6px', background: 'rgba(2, 6, 23, 0.4)', borderRadius: '4px', border: '1px solid rgba(30, 41, 59, 0.5)' }}>
             {isAutoBattle ? (
-              <span className="font-mono text-[10px] text-amber-400 animate-pulse uppercase tracking-widest font-bold">
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#f59e0b', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1px' }}>
                 ⚡ AUTO COMBAT ACTIVE ⚡
               </span>
             ) : (
-              <span className="font-mono text-[9px] text-slate-500 uppercase tracking-wider">
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: '#64748b', textTransform: 'uppercase', letterSpacing: '1px' }}>
                 [ WAITING FOR TURN ]
               </span>
             )}
@@ -236,38 +278,82 @@ export default function TacticalHUDPanel({
         )}
       </div>
 
-      {/* RIGHT PANEL: Controls (3 Cols) */}
-      <div className="md:col-span-3 bg-slate-950/70 border rounded-lg p-2 flex flex-row md:flex-col justify-between gap-1.5" style={{ borderColor: `${theme.primary}30` }}>
+      {/* RIGHT PANEL: Controls (Auto, Deploy, Restart) */}
+      <div 
+        style={{
+          flex: '1 1 180px',
+          minWidth: '160px',
+          background: 'rgba(2, 6, 23, 0.8)',
+          border: `1px solid ${theme.primary}30`,
+          borderRadius: '8px',
+          padding: '8px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '6px',
+          justifyContent: 'space-between'
+        }}
+      >
         {/* Toggle Auto Combat */}
         <button
           onClick={onToggleAuto}
-          className={`flex-1 md:flex-initial py-1.5 px-2 rounded font-mono text-[10px] font-bold uppercase tracking-wider border transition-all cursor-pointer flex items-center justify-center gap-1 ${
-            isAutoBattle
-              ? 'bg-amber-500 text-slate-950 border-amber-300 shadow-[0_0_10px_rgba(245,158,11,0.5)] font-extrabold animate-pulse'
-              : 'bg-slate-900 text-slate-300 border-slate-700 hover:border-slate-500'
-          }`}
+          style={{
+            padding: '6px 8px',
+            borderRadius: '4px',
+            fontFamily: 'var(--font-mono)',
+            fontSize: '10px',
+            fontWeight: 800,
+            textTransform: 'uppercase',
+            letterSpacing: '1px',
+            cursor: 'pointer',
+            border: `1px solid ${isAutoBattle ? '#f59e0b' : '#334155'}`,
+            background: isAutoBattle ? '#f59e0b' : '#0f172a',
+            color: isAutoBattle ? '#020617' : '#e2e8f0',
+            transition: 'all 0.2s ease'
+          }}
         >
-          <span>{isAutoBattle ? '🤖 AUTO ON' : '🎮 AUTO OFF'}</span>
+          {isAutoBattle ? '🤖 AUTO ON' : '🎮 AUTO OFF'}
         </button>
 
         {/* Manual Deploy Mode Toggle */}
         <button
           onClick={onOpenDeploy}
-          className={`flex-1 md:flex-initial py-1.5 px-2 rounded font-mono text-[10px] font-bold uppercase tracking-wider border transition-all cursor-pointer flex items-center justify-center gap-1 ${
-            isDeployMode
-              ? 'bg-emerald-500 text-slate-950 border-emerald-300 shadow-[0_0_10px_rgba(16,185,129,0.5)] font-extrabold'
-              : 'bg-slate-900 text-emerald-400 border-emerald-500/40 hover:border-emerald-400'
-          }`}
+          style={{
+            padding: '6px 8px',
+            borderRadius: '4px',
+            fontFamily: 'var(--font-mono)',
+            fontSize: '10px',
+            fontWeight: 800,
+            textTransform: 'uppercase',
+            letterSpacing: '1px',
+            cursor: 'pointer',
+            border: `1px solid ${isDeployMode ? '#10b981' : 'rgba(16, 185, 129, 0.4)'}`,
+            background: isDeployMode ? '#10b981' : '#0f172a',
+            color: isDeployMode ? '#020617' : '#34d399',
+            transition: 'all 0.2s ease'
+          }}
         >
-          <span>{isDeployMode ? '✅ LOCK FORMATION' : '♟️ MANUAL DEPLOY'}</span>
+          {isDeployMode ? '✅ LOCK FORMATION' : '♟️ MANUAL DEPLOY'}
         </button>
 
         {/* Restart Battle */}
         <button
           onClick={onResetBattle}
-          className="flex-1 md:flex-initial py-1.5 px-2 bg-slate-900 text-rose-400 border border-rose-500/40 hover:border-rose-400 rounded font-mono text-[10px] font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-1"
+          style={{
+            padding: '6px 8px',
+            borderRadius: '4px',
+            fontFamily: 'var(--font-mono)',
+            fontSize: '10px',
+            fontWeight: 800,
+            textTransform: 'uppercase',
+            letterSpacing: '1px',
+            cursor: 'pointer',
+            border: '1px solid rgba(244, 63, 94, 0.4)',
+            background: '#0f172a',
+            color: '#fb7185',
+            transition: 'all 0.2s ease'
+          }}
         >
-          <span>🔄 RESTART</span>
+          🔄 RESTART
         </button>
       </div>
     </div>

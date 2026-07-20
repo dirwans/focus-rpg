@@ -171,7 +171,11 @@ function PaperDollStack({ baseSprite, player, size, width, height, style: extraS
 
 export function PilotSprite({ race, job, size = 60, width, height, upperBodyOnly = false, fill = false, isBattle = false, gender = 'male', style, calibrationOverride, showGears = true }) {
   const player = useGameStore((s) => s.player)
-  const isSelf = player && player.race === race && player.gender === gender && player.job === job
+  const normGender = (g) => (g === 'm' ? 'male' : g === 'f' ? 'female' : g)
+  const isSelf = player && player.race === race && normGender(player.gender) === normGender(gender) && player.job === job
+
+
+
 
   let baseSprite = null
   if (race === 'arctron') {

@@ -11,97 +11,158 @@ export default function TurnOrderHeader({ units = [], turnOrder = [], currentTur
 
   return (
     <div 
-      className="w-full px-3 py-1.5 flex items-center justify-between gap-2 relative z-20 border-b backdrop-blur-md select-none"
       style={{
-        background: 'rgba(5, 10, 18, 0.75)',
-        borderColor: theme.border,
+        width: '100%',
+        padding: '6px 12px',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: '8px',
+        position: 'relative',
+        zIndex: 20,
+        borderBottom: `1px solid ${theme.border}`,
+        background: 'rgba(5, 10, 18, 0.85)',
+        backdropFilter: 'blur(8px)',
+        userSelect: 'none',
+        boxSizing: 'border-box'
       }}
     >
-      {/* Scanline overlay */}
-      <div className="absolute inset-0 pointer-events-none opacity-20 bg-[linear-gradient(rgba(255,255,255,0)_50%,_rgba(0,0,0,0.4)_50%)] bg-[size:100%_4px]" />
-
       {/* Label Badge */}
-      <div className="flex items-center gap-1.5 flex-shrink-0">
+      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0 }}>
         <div 
-          className="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-wider flex items-center gap-1 border"
           style={{
-            borderColor: theme.primary,
+            padding: '2px 8px',
+            borderRadius: '4px',
+            fontSize: '10px',
+            fontFamily: 'var(--font-mono)',
+            fontWeight: 800,
+            textTransform: 'uppercase',
+            letterSpacing: '1px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '5px',
+            border: `1px solid ${theme.primary}`,
             color: theme.primary,
-            background: 'rgba(0,0,0,0.5)',
+            background: 'rgba(0,0,0,0.6)',
             boxShadow: `0 0 8px ${theme.primary}40`,
           }}
         >
           <span 
-            className="w-2 h-2 rounded-full animate-ping" 
-            style={{ backgroundColor: theme.primary }} 
+            style={{
+              width: '6px',
+              height: '6px',
+              borderRadius: '50%',
+              backgroundColor: theme.primary,
+              display: 'inline-block'
+            }} 
           />
           <span>TIMELINE</span>
         </div>
       </div>
 
-      {/* Queue Bar */}
-      <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 px-1 max-w-[85%]">
+      {/* Queue Bar (Horizontal Scroll) */}
+      <div 
+        className="no-scrollbar"
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: '6px',
+          overflowX: 'auto',
+          padding: '2px 4px',
+          maxWidth: '85%',
+          flex: 1
+        }}
+      >
         {orderedList.map((unit, idx) => {
           const isCurrent = idx === 0
           const isAlly = unit.side === 'ally' || unit.isAlly !== false
           const hpPercent = Math.max(0, Math.min(100, ((unit.hp || 0) / (unit.maxHp || 1)) * 100))
 
           return (
-            <div key={`${unit.id}-${idx}`} className="flex items-center gap-1 flex-shrink-0">
-              {idx > 0 && <span className="text-[10px] font-mono text-slate-600">›</span>}
+            <div key={`${unit.id}-${idx}`} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '4px', flexShrink: 0 }}>
+              {idx > 0 && <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: '#64748b' }}>›</span>}
 
               <div
-                className={`relative flex items-center gap-1.5 rounded border px-2 py-1 transition-all ${
-                  isCurrent
-                    ? 'scale-105 shadow-md'
-                    : 'opacity-75 hover:opacity-100'
-                }`}
                 style={{
+                  position: 'relative',
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  gap: '6px',
+                  borderRadius: '6px',
+                  border: `1px solid ${
+                    isCurrent
+                      ? (isAlly ? theme.primary : '#ef4444')
+                      : (isAlly ? `${theme.primary}40` : 'rgba(239, 68, 68, 0.3)')
+                  }`,
+                  padding: '3px 8px',
                   background: isCurrent 
                     ? (isAlly ? `${theme.primary}25` : 'rgba(239, 68, 68, 0.25)')
                     : 'rgba(15, 23, 42, 0.6)',
-                  borderColor: isCurrent
-                    ? (isAlly ? theme.primary : '#ef4444')
-                    : (isAlly ? `${theme.primary}40` : 'rgba(239, 68, 68, 0.3)'),
                   boxShadow: isCurrent ? `0 0 10px ${isAlly ? theme.primary : '#ef4444'}50` : 'none',
+                  transform: isCurrent ? 'scale(1.05)' : 'none',
+                  transition: 'all 0.2s ease-out'
                 }}
               >
                 {/* Avatar / Icon */}
                 <div 
-                  className="w-5 h-5 rounded flex items-center justify-center text-[10px] font-mono font-bold border flex-shrink-0 overflow-hidden"
                   style={{
-                    borderColor: isAlly ? theme.primary : '#ef4444',
+                    width: '20px',
+                    height: '20px',
+                    borderRadius: '4px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '10px',
+                    fontFamily: 'var(--font-mono)',
+                    fontWeight: 700,
+                    border: `1px solid ${isAlly ? theme.primary : '#ef4444'}`,
                     background: 'rgba(0,0,0,0.6)',
-                    color: isAlly ? theme.textPrimary : '#fca5a5'
+                    color: isAlly ? theme.textPrimary : '#fca5a5',
+                    flexShrink: 0,
+                    overflow: 'hidden'
                   }}
                 >
                   {unit.avatar ? (
-                    <img src={unit.avatar} alt={unit.name} className="w-full h-full object-cover" />
+                    <img src={unit.avatar} alt={unit.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   ) : (
                     unit.name?.charAt(0) || 'U'
                   )}
                 </div>
 
                 {/* Name & SPD */}
-                <div className="flex flex-col min-w-0">
+                <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
                   <span 
-                    className="text-[9px] font-mono font-bold truncate max-w-[65px] uppercase tracking-wide"
-                    style={{ color: isCurrent ? '#ffffff' : '#cbd5e1' }}
+                    style={{
+                      fontSize: '9px',
+                      fontFamily: 'var(--font-mono)',
+                      fontWeight: 800,
+                      color: isCurrent ? '#ffffff' : '#cbd5e1',
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      maxWidth: '65px',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.5px'
+                    }}
                   >
                     {unit.name ? unit.name.split(' ')[0] : 'UNIT'}
                   </span>
-                  <span className="text-[7px] font-mono text-slate-400 uppercase tracking-widest leading-none">
+                  <span style={{ fontSize: '7px', fontFamily: 'var(--font-mono)', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '1px', lineHeight: 1 }}>
                     SPD {unit.speed || unit.spd || 100}
                   </span>
                 </div>
 
                 {/* Mini Bottom HP Bar */}
-                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-slate-950 rounded-b overflow-hidden">
+                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '2px', background: '#020617', borderBottomLeftRadius: '6px', borderBottomRightRadius: '6px', overflow: 'hidden' }}>
                   <div
-                    className="h-full transition-all duration-300"
                     style={{
+                      height: '100%',
                       width: `${hpPercent}%`,
-                      backgroundColor: isAlly ? theme.primary : '#ef4444'
+                      backgroundColor: isAlly ? theme.primary : '#ef4444',
+                      transition: 'width 0.3s ease'
                     }}
                   />
                 </div>
@@ -109,10 +170,22 @@ export default function TurnOrderHeader({ units = [], turnOrder = [], currentTur
                 {/* Current Unit Badge */}
                 {isCurrent && (
                   <span 
-                    className="absolute -top-1.5 left-1/2 -translate-x-1/2 text-[7px] font-mono font-black uppercase px-1 rounded border tracking-widest text-slate-950"
                     style={{
+                      position: 'absolute',
+                      top: '-7px',
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      fontSize: '7px',
+                      fontFamily: 'var(--font-mono)',
+                      fontWeight: 900,
+                      textTransform: 'uppercase',
+                      padding: '0 4px',
+                      borderRadius: '3px',
+                      border: '1px solid #ffffff',
+                      letterSpacing: '1px',
+                      color: '#020617',
                       backgroundColor: isAlly ? theme.primary : '#ef4444',
-                      borderColor: '#ffffff',
+                      boxShadow: `0 0 6px ${isAlly ? theme.primary : '#ef4444'}`
                     }}
                   >
                     TURN

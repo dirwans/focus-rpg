@@ -13,33 +13,44 @@ export default function DeployPanel({
 
   return (
     <div 
-      className="w-full p-3 rounded-lg border backdrop-blur-md bg-slate-950/90 font-mono select-none"
-      style={{ borderColor: theme.border, boxShadow: `0 0 20px ${theme.primary}20` }}
+      style={{
+        width: '100%',
+        padding: '12px',
+        borderRadius: '8px',
+        border: `1px solid ${theme.border}`,
+        background: 'rgba(2, 6, 23, 0.95)',
+        backdropFilter: 'blur(10px)',
+        fontFamily: 'var(--font-mono)',
+        userSelect: 'none',
+        boxShadow: `0 0 20px ${theme.primary}20`,
+        boxSizing: 'border-box',
+        marginTop: '6px'
+      }}
     >
-      <div className="flex items-center justify-between border-b pb-2 mb-3" style={{ borderColor: `${theme.primary}40` }}>
-        <div className="flex items-center gap-2">
-          <span className="text-sm font-black uppercase tracking-wider" style={{ color: theme.textPrimary }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: `1px solid ${theme.primary}40`, paddingBottom: '8px', marginBottom: '12px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <span style={{ fontSize: '13px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '1px', color: theme.textPrimary }}>
             ♟️ MANUAL UNIT FORMATION DEPLOYMENT
           </span>
-          <span className="text-[10px] text-slate-400">
+          <span style={{ fontSize: '10px', color: '#94a3b8' }}>
             ({deployedUnits.length}/4 Units Deployed)
           </span>
         </div>
         <button
           onClick={onClose}
-          className="px-2 py-0.5 rounded text-xs font-bold bg-slate-900 border border-slate-700 text-slate-300 hover:text-white"
+          style={{ padding: '4px 8px', borderRadius: '4px', fontSize: '11px', fontWeight: 800, background: '#0f172a', border: '1px solid #334155', color: '#cbd5e1', cursor: 'pointer' }}
         >
           ✕ CLOSE
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '12px' }}>
         {/* Available Roster */}
-        <div>
-          <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">
+        <div style={{ flex: '1 1 240px', minWidth: '220px' }}>
+          <div style={{ fontSize: '10px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1px', color: '#94a3b8', marginBottom: '6px' }}>
             AVAILABLE SQUAD ROSTER
           </div>
-          <div className="grid grid-cols-2 gap-2 max-h-48 overflow-y-auto pr-1">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: '6px', maxHeight: '180px', overflowY: 'auto' }}>
             {roster.map((unit) => {
               const isDeployed = deployedUnits.some(d => d.id === unit.id)
 
@@ -47,17 +58,24 @@ export default function DeployPanel({
                 <div
                   key={unit.id}
                   onClick={() => !isDeployed && onDeployUnit(unit)}
-                  className={`p-2 rounded border flex items-center justify-between transition-all cursor-pointer ${
-                    isDeployed
-                      ? 'bg-slate-900/40 border-slate-800 opacity-40 cursor-not-allowed'
-                      : 'bg-slate-900 border-slate-700 hover:border-emerald-400'
-                  }`}
+                  style={{
+                    padding: '8px',
+                    borderRadius: '6px',
+                    border: `1px solid ${isDeployed ? '#1e293b' : '#334155'}`,
+                    background: isDeployed ? 'rgba(15, 23, 42, 0.4)' : '#0f172a',
+                    opacity: isDeployed ? 0.4 : 1,
+                    cursor: isDeployed ? 'not-allowed' : 'pointer',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    gap: '4px'
+                  }}
                 >
-                  <div className="flex flex-col min-w-0">
-                    <span className="text-xs font-bold text-slate-100 truncate">{unit.name}</span>
-                    <span className="text-[8px] text-slate-400 uppercase">{unit.job || unit.role || 'Combatant'}</span>
+                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    <span style={{ fontSize: '11px', fontWeight: 800, color: '#f8fafc' }}>{unit.name}</span>
+                    <span style={{ fontSize: '8px', color: '#94a3b8', textTransform: 'uppercase' }}>{unit.job || unit.role || 'Combatant'}</span>
                   </div>
-                  <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded ${isDeployed ? 'bg-slate-800 text-slate-500' : 'bg-emerald-950 text-emerald-300 border border-emerald-500/40'}`}>
+                  <span style={{ fontSize: '8px', fontWeight: 800, padding: '2px 6px', borderRadius: '3px', textAlign: 'center', background: isDeployed ? '#1e293b' : 'rgba(6, 78, 59, 0.8)', color: isDeployed ? '#64748b' : '#6ee7b7', border: `1px solid ${isDeployed ? 'transparent' : 'rgba(16, 185, 129, 0.4)'}` }}>
                     {isDeployed ? 'DEPLOYED' : '+ DEPLOY'}
                   </span>
                 </div>
@@ -67,33 +85,40 @@ export default function DeployPanel({
         </div>
 
         {/* Current Formation Positions */}
-        <div>
-          <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">
+        <div style={{ flex: '1 1 240px', minWidth: '220px' }}>
+          <div style={{ fontSize: '10px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1px', color: '#94a3b8', marginBottom: '6px' }}>
             ACTIVE FORMATION GRID (FRONT / BACK ROW)
           </div>
-          <div className="space-y-1.5 max-h-48 overflow-y-auto pr-1">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', maxHeight: '180px', overflowY: 'auto' }}>
             {deployedUnits.map((unit) => (
               <div
                 key={unit.id}
-                className="p-2 rounded border bg-slate-900/80 flex items-center justify-between"
-                style={{ borderColor: `${theme.primary}40` }}
+                style={{
+                  padding: '6px 10px',
+                  borderRadius: '6px',
+                  border: `1px solid ${theme.primary}40`,
+                  background: 'rgba(15, 23, 42, 0.8)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between'
+                }}
               >
-                <div className="flex items-center gap-2 min-w-0">
-                  <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-slate-950 border border-slate-800 text-slate-300">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span style={{ fontSize: '9px', fontWeight: 800, padding: '2px 6px', borderRadius: '3px', background: '#020617', border: '1px solid #1e293b', color: '#cbd5e1' }}>
                     Row {unit.row || 1} • Col {(unit.col || 0) + 1}
                   </span>
-                  <span className="text-xs font-bold text-slate-200 truncate">{unit.name}</span>
+                  <span style={{ fontSize: '11px', fontWeight: 800, color: '#f1f5f9' }}>{unit.name}</span>
                 </div>
                 <button
                   onClick={() => onRemoveUnit(unit.id)}
-                  className="text-[9px] font-bold text-rose-400 bg-rose-950/60 border border-rose-500/40 hover:border-rose-400 px-1.5 py-0.5 rounded"
+                  style={{ fontSize: '8px', fontWeight: 800, color: '#f43f5e', background: 'rgba(136, 19, 55, 0.6)', border: '1px solid rgba(244, 63, 94, 0.4)', padding: '2px 6px', borderRadius: '3px', cursor: 'pointer' }}
                 >
                   REMOVE
                 </button>
               </div>
             ))}
             {deployedUnits.length === 0 && (
-              <div className="p-4 text-center text-[10px] text-slate-500 italic border border-dashed border-slate-800 rounded">
+              <div style={{ padding: '16px', textAlign: 'center', fontSize: '10px', color: '#64748b', fontStyle: 'italic', border: '1px dashed #1e293b', borderRadius: '6px' }}>
                 No units deployed yet. Tap a unit on the left to deploy onto the 2.5D arena.
               </div>
             )}

@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@500;600;700;800&family=Chakra+Petch:wght@400;500;600;700&family=Saira:wght@300;400;500;600;700;800&family=Cinzel:wght@500;600;700;800&family=Orbitron:wght@500;600;700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #08080d; -webkit-font-smoothing: antialiased; }
+  .fg-scroll::-webkit-scrollbar { width: 0; height: 0; }
+  @keyframes ledBlink { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+  @keyframes runeSpin { from { transform: translate(-50%,-50%) rotate(0deg); } to { transform: translate(-50%,-50%) rotate(360deg); } }
+  @keyframes runeSpinRev { from { transform: translate(-50%,-50%) rotate(0deg); } to { transform: translate(-50%,-50%) rotate(-360deg); } }
+  @keyframes sparkPulse { 0%,100% { opacity:0.5; } 50% { opacity:1; } }
+  @keyframes spinFlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+</style>
+</helmet>
+
+<div style="min-height:100vh; background:radial-gradient(circle at 30% 0%, #12121c 0%, #08080d 60%); padding:56px 40px 90px; font-family:'Saira',sans-serif;">
+
+  <div style="max-width:1400px; margin:0 auto 44px; text-align:center;">
+    <div style="font-family:'Orbitron',sans-serif; font-size:13px; letter-spacing:6px; color:#5a6b82; text-transform:uppercase;">Focus RPG · Forge tab redesign</div>
+    <div style="font-family:'Orbitron',sans-serif; font-size:40px; font-weight:800; letter-spacing:2px; color:#eef3fb; margin-top:10px;">FORGE SCREEN — FORGE.JSX</div>
+    <div style="font-family:'Saira',sans-serif; font-size:16px; color:#8595ab; margin-top:12px; max-width:860px; margin-left:auto; margin-right:auto; line-height:1.6;">Same HUD language as the Character screen redesign — glass panels, faction accent glow, tactical corner treatment. Five sub-tabs kept from the real <b>Forge.jsx</b>: Upgrade Stats, Weapon Smith, Item Enhancement, Legendary Crafting, Set Shop. Sebut kode <a href="#5a" style="color:#ff6b6b; text-decoration:none;">5a</a> / <a href="#5b" style="color:#6ba3ff; text-decoration:none;">5b</a> / <a href="#5c" style="color:#c9aeff; text-decoration:none;">5c</a> nèk arep menehi masukan.</div>
+  </div>
+
+  <section>
+    <div style="display:flex; flex-wrap:wrap; gap:56px; justify-content:center; align-items:flex-start;">
+
+      <!-- ==================== 5A · ARCTRON ==================== -->
+      <div id="5a" style="display:flex; flex-direction:column; gap:16px; align-items:center;">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div style="font-family:'Orbitron',sans-serif; font-weight:800; font-size:15px; letter-spacing:2px; color:#0a0a0d; background:linear-gradient(135deg,#ffb48f,#ff5222); padding:5px 14px; border-radius:8px;">5A</div>
+          <div style="font-family:'Orbitron',sans-serif; font-weight:700; font-size:20px; letter-spacing:1px; color:#eef3fb;">FORGE — Arctron skin</div>
+        </div>
+
+        <div style="position:relative; width:390px; border-radius:44px; padding:11px; background:linear-gradient(160deg,#2b2f38 0%,#101216 60%); box-shadow:0 40px 90px -30px rgba(0,0,0,0.9), inset 0 2px 3px rgba(255,82,34,0.22);">
+          <div style="position:relative; height:844px; border-radius:34px; overflow:hidden; background:radial-gradient(120% 65% at 50% -5%, #201f22 0%, #141317 50%, #0a0a0c 100%); display:flex; flex-direction:column;">
+            <div style="position:absolute; inset:0; background-image:radial-gradient(rgba(255,82,34,0.06) 1px,transparent 1px); background-size:20px 20px; pointer-events:none;"></div>
+            <div style="position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,#ff5222,transparent); box-shadow:0 0 12px #ff5222; z-index:5;"></div>
+
+            <!-- header -->
+            <div style="position:relative; z-index:4; display:flex; align-items:center; gap:10px; padding:14px 16px 8px;">
+              <div style="width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:rgba(8,22,36,0.5); border:1px solid rgba(255,82,34,0.35); cursor:pointer; color:#ffb48f; font-size:16px; flex-shrink:0;">❮</div>
+              <div style="flex:1; text-align:center; margin-right:32px; font-family:'Orbitron',sans-serif; font-size:18px; font-weight:800; letter-spacing:2px; color:#fff; text-shadow:0 0 10px rgba(255,82,34,0.5);">FORGE</div>
+            </div>
+
+            <!-- resources -->
+            <div style="position:relative; z-index:4; display:flex; gap:8px; padding:0 16px 8px;">
+              <div style="display:flex; align-items:center; gap:6px; background:rgba(8,22,36,0.5); backdrop-filter:blur(8px); border:1px solid rgba(255,82,34,0.35); border-radius:20px; padding:4px 12px 4px 9px;"><svg width="13" height="15" viewBox="0 0 14 16"><polygon points="7,0 14,4 14,12 7,16 0,12 0,4" fill="none" stroke="#ff5222" stroke-width="1.4"/></svg><span style="font-family:'Orbitron',sans-serif; font-size:13px; font-weight:700; color:#ffb48f;">1,450,220</span></div>
+              <div style="display:flex; align-items:center; gap:6px; background:rgba(8,22,36,0.5); backdrop-filter:blur(8px); border:1px solid rgba(199,204,214,0.4); border-radius:20px; padding:4px 12px 4px 9px;"><svg width="12" height="12" viewBox="0 0 13 13"><rect x="1.5" y="1.5" width="10" height="10" transform="rotate(45 6.5 6.5)" fill="none" stroke="#c7ccd6" stroke-width="1.4"/></svg><span style="font-family:'Orbitron',sans-serif; font-size:13px; font-weight:700; color:#c7ccd6;">890,340</span></div>
+            </div>
+
+            <!-- sub-tabs -->
+            <div style="position:relative; z-index:4; display:flex; gap:3px; padding:2px 12px 8px;">
+              <div onClick="{{ upgA }}" style="flex:1; text-align:center; padding:7px 2px; border-radius:7px; cursor:pointer; font-family:'Orbitron',sans-serif; font-size:10px; font-weight:800; letter-spacing:0.3px; color:{{ tabUpgColorA }}; background:{{ tabUpgBgA }}; border:1px solid rgba(255,82,34,0.3);">UPGRADE</div>
+              <div onClick="{{ smithA }}" style="flex:1; text-align:center; padding:7px 2px; border-radius:7px; cursor:pointer; font-family:'Orbitron',sans-serif; font-size:10px; font-weight:800; letter-spacing:0.3px; color:{{ tabSmithColorA }}; background:{{ tabSmithBgA }}; border:1px solid rgba(255,82,34,0.3);">SMITH</div>
+              <div onClick="{{ enhA }}" style="flex:1; text-align:center; padding:7px 2px; border-radius:7px; cursor:pointer; font-family:'Orbitron',sans-serif; font-size:10px; font-weight:800; letter-spacing:0.3px; color:{{ tabEnhColorA }}; background:{{ tabEnhBgA }}; border:1px solid rgba(255,82,34,0.3);">ENHANCE</div>
+              <div onClick="{{ legA }}" style="flex:1; text-align:center; padding:7px 2px; border-radius:7px; cursor:pointer; font-family:'Orbitron',sans-serif; font-size:10px; font-weight:800; letter-spacing:0.3px; color:{{ tabLegColorA }}; background:{{ tabLegBgA }}; border:1px solid rgba(255,82,34,0.3);">LEGEND</div>
+              <div onClick="{{ setA }}" style="flex:1; text-align:center; padding:7px 2px; border-radius:7px; cursor:pointer; font-family:'Orbitron',sans-serif; font-size:10px; font-weight:800; letter-spacing:0.3px; color:{{ tabSetColorA }}; background:{{ tabSetBgA }}; border:1px solid rgba(255,82,34,0.3);">SET SHOP</div>
+            </div>
+
+            <!-- scroll -->
+            <div class="fg-scroll" style="position:relative; z-index:3; flex:1; overflow-y:auto; padding:2px 0 6px;">
+
+              <!-- ============ UPGRADE STATS ============ -->
+              <sc-if value="{{ isUpgA }}" hint-placeholder-val="{{ true }}">
+              <div style="padding:2px 16px;">
+                <div style="font-family:'Orbitron',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.5px; color:#8a94a3; margin:2px 0 10px;">CORE STAT UPGRADES</div>
+                <div style="display:flex; flex-direction:column; gap:10px;">
+                  <div style="padding:12px 14px; border-radius:12px; background:rgba(6,9,14,0.72); border:1.5px solid rgba(255,82,34,0.32);">
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;"><span style="font-family:'Orbitron',sans-serif; font-size:13px; font-weight:800; color:#ffb48f; letter-spacing:1px;">⚔ ATTACK POWER</span><span style="font-family:'Orbitron',sans-serif; font-size:11px; color:#8a94a3;">LV 14</span></div>
+                    <div style="font-family:'Share Tech Mono',monospace; font-size:13px; color:#cdd5e0; margin-bottom:10px;">Current: <b style="color:#fff;">4,280 ATK</b> · +30 per level</div>
+                    <div style="width:100%; padding:9px 0; text-align:center; border-radius:9px; background:linear-gradient(135deg,#ff5222,#b32c0d); box-shadow:0 0 12px rgba(255,82,34,0.4); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:#fff; letter-spacing:0.5px;">UPGRADE · 12,000 ⬡</div>
+                  </div>
+                  <div style="padding:12px 14px; border-radius:12px; background:rgba(6,9,14,0.72); border:1.5px solid rgba(199,204,214,0.32);">
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;"><span style="font-family:'Orbitron',sans-serif; font-size:13px; font-weight:800; color:#eef3fb; letter-spacing:1px;">🛡 DEFENSE</span><span style="font-family:'Orbitron',sans-serif; font-size:11px; color:#8a94a3;">LV 9</span></div>
+                    <div style="font-family:'Share Tech Mono',monospace; font-size:13px; color:#cdd5e0; margin-bottom:10px;">Current: <b style="color:#fff;">3,150 DEF</b> · +20 per level</div>
+                    <div style="width:100%; padding:9px 0; text-align:center; border-radius:9px; background:linear-gradient(135deg,#dde2ea,#9aa2ae); box-shadow:0 0 12px rgba(199,204,214,0.3); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:#16181c; letter-spacing:0.5px;">UPGRADE · 8,000 ⬡</div>
+                  </div>
+                  <div style="padding:12px 14px; border-radius:12px; background:rgba(6,9,14,0.72); border:1.5px solid rgba(255,110,60,0.34);">
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;"><span style="font-family:'Orbitron',sans-serif; font-size:13px; font-weight:800; color:#ff6a4d; letter-spacing:1px;">♥ HULL HP</span><span style="font-family:'Orbitron',sans-serif; font-size:11px; color:#8a94a3;">LV 21</span></div>
+                    <div style="font-family:'Share Tech Mono',monospace; font-size:13px; color:#cdd5e0; margin-bottom:10px;">Current: <b style="color:#fff;">14,500 HP</b> · +250 per level</div>
+                    <div style="width:100%; padding:9px 0; text-align:center; border-radius:9px; background:rgba(30,20,20,0.8); border:1px solid rgba(255,95,122,0.3); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:rgba(255,110,60,0.6); letter-spacing:0.5px;">NEED 4,200 MORE ⬡</div>
+                  </div>
+                </div>
+              </div>
+              </sc-if>
+
+              <!-- ============ WEAPON SMITH ============ -->
+              <sc-if value="{{ isSmithA }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:2px 16px;">
+                <div style="font-family:'Orbitron',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.5px; color:#8a94a3; margin:2px 0 10px;">WEAPON RARITY REFINEMENT</div>
+                <div style="padding:16px 14px 14px; border-radius:14px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(255,82,34,0.35); box-shadow:0 8px 24px rgba(0,0,0,0.5);">
+                  <div style="position:relative; width:220px; height:220px; margin:0 auto;">
+                    <svg width="220" height="220" style="position:absolute; top:0; left:0; animation:runeSpinRev 14s linear infinite;"><circle cx="110" cy="110" r="100" fill="none" stroke="rgba(255,82,34,0.3)" stroke-width="1.5" stroke-dasharray="6,4"/></svg>
+                    <div style="position:absolute; top:14px; left:14px; width:192px; height:192px; border-radius:50%; background:conic-gradient(from 0deg, transparent 0deg, #ff5222 55deg, transparent 130deg, transparent 360deg); animation:spinFlow 4s linear infinite;"></div>
+                    <div style="position:absolute; top:25px; left:25px; width:170px; height:170px; border-radius:50%; background:rgba(6,9,14,0.97);"></div>
+                    <svg width="220" height="220" style="position:absolute; top:0; left:0; animation:runeSpin 20s linear infinite;"><circle cx="110" cy="110" r="85" fill="none" stroke="rgba(199,204,214,0.3)" stroke-width="1" stroke-dasharray="20,6"/></svg>
+
+                    <div style="position:absolute; top:0px; left:88px; width:44px; height:44px; border-radius:9px; background:rgba(10,15,25,0.95); border:2px solid rgba(245,166,35,0.6); box-shadow:0 0 8px rgba(0,0,0,0.6); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:3;"><span style="font-family:'Orbitron',sans-serif; font-size:7px; font-weight:800; color:#8a94a3; letter-spacing:0.3px;">NEXT</span><span style="font-family:'Share Tech Mono',monospace; font-size:9px; font-weight:800; color:#f5a623;">LEGEND</span></div>
+
+                    <div style="position:absolute; top:132px; left:164px; width:44px; height:44px; border-radius:9px; background:rgba(10,15,25,0.95); border:2px solid rgba(95,224,138,0.6); box-shadow:0 0 8px rgba(0,0,0,0.6); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:3;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5fe08a" stroke-width="1.8"><path d="M12 2C8 8 5 12 5 15a7 7 0 0 0 14 0c0-3-3-7-7-13z"/></svg><span style="font-family:'Share Tech Mono',monospace; font-size:8px; font-weight:800; color:#5fe08a;">5/5</span></div>
+
+                    <div style="position:absolute; top:132px; left:12px; width:44px; height:44px; border-radius:9px; background:rgba(10,15,25,0.95); border:2px solid rgba(255,95,122,0.6); box-shadow:0 0 8px rgba(0,0,0,0.6); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:3;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff8080" stroke-width="1.8"><polygon points="7,0 14,4 14,12 7,16 0,12 0,4" transform="translate(5,4)"/></svg><span style="font-family:'Share Tech Mono',monospace; font-size:7px; font-weight:800; color:#ff8080;">100K</span></div>
+
+                    <div style="position:absolute; top:74px; left:74px; width:72px; height:72px; border-radius:14px; background:linear-gradient(135deg,rgba(255,82,34,0.28),rgba(0,0,0,0.65)); border:2.5px solid rgba(255,82,34,0.7); box-shadow:0 0 16px rgba(255,82,34,0.4); display:flex; align-items:center; justify-content:center; z-index:4;"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#ffb48f" stroke-width="1.7"><path d="M14.5 17.5L3 6M17.5 14.5L6 3M19 19v-4M19 19h-4M5 5v4M5 5h4"/></svg></div>
+                  </div>
+                  <div style="text-align:center; margin-top:8px;">
+                    <div style="font-family:'Orbitron',sans-serif; font-size:15px; font-weight:800; color:#fff;">EARTH BREAKER</div>
+                    <div style="font-family:'Share Tech Mono',monospace; font-size:12px; color:#f5a623; margin-top:2px;">Grade: EPIC</div>
+                  </div>
+                  <div style="height:1px; background:rgba(255,82,34,0.2); margin:14px 0;"></div>
+                  <div style="font-family:'Orbitron',sans-serif; font-size:12px; font-weight:700; color:#ffb48f; letter-spacing:0.5px; margin-bottom:12px;">NEXT GRADE: LEGENDARY (+20%)</div>
+                  <div style="width:100%; padding:11px 0; text-align:center; border-radius:10px; background:linear-gradient(135deg,#ff5222,#b32c0d); box-shadow:0 0 14px rgba(255,82,34,0.4); font-family:'Orbitron',sans-serif; font-size:13px; font-weight:800; color:#fff; letter-spacing:1px;">REFINE WEAPON</div>
+                </div>
+
+                <div style="font-family:'Orbitron',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.5px; color:#8a94a3; margin:16px 0 10px;">CRAFT VAMPIRIC WEAPON</div>
+                <div style="padding:14px; border-radius:14px; background:rgba(6,9,14,0.72); border:1.5px solid rgba(255,82,34,0.3);">
+                  <div style="font-family:'Saira',sans-serif; font-size:13px; color:#a8b4c4; line-height:1.5; margin-bottom:12px;">Sacrifice an Epic+ weapon to imbue Earth Breaker with a lifesteal property.</div>
+                  <div style="padding:10px 12px; border-radius:8px; background:rgba(3,8,20,0.6); border:1px solid rgba(255,82,34,0.35); font-family:'Share Tech Mono',monospace; font-size:12px; color:#8a94a3; margin-bottom:10px;">SACRIFICE: Void Cleaver (Lv.38) ▾</div>
+                  <div style="display:flex; flex-direction:column; gap:6px; margin-bottom:12px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 11px; border-radius:8px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.35);"><span style="font-family:'Saira',sans-serif; font-size:13px; color:#cdd5e0;">Sacrifice Weapon</span><span style="font-family:'Share Tech Mono',monospace; font-size:13px; color:#5fe08a; font-weight:700;">1 / 1</span></div>
+                    <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 11px; border-radius:8px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.35);"><span style="font-family:'Saira',sans-serif; font-size:13px; color:#cdd5e0;">Talic of Favor</span><span style="font-family:'Share Tech Mono',monospace; font-size:13px; color:#5fe08a; font-weight:700;">1 / 1</span></div>
+                  </div>
+                  <div style="width:100%; padding:11px 0; text-align:center; border-radius:10px; background:linear-gradient(135deg,#ff5222,#b32c0d); box-shadow:0 0 14px rgba(255,82,34,0.4); font-family:'Orbitron',sans-serif; font-size:13px; font-weight:800; color:#fff; letter-spacing:1px;">FORGE VAMPIRIC WEAPON</div>
+                </div>
+              </div>
+              </sc-if>
+
+              <!-- ============ ITEM ENHANCEMENT ============ -->
+              <sc-if value="{{ isEnhA }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:2px 16px;">
+                <div style="font-family:'Orbitron',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.5px; color:#8a94a3; margin:2px 0 10px;">SELECT EQUIPMENT TO ENHANCE</div>
+                <div style="padding:10px 12px; border-radius:8px; background:rgba(3,8,20,0.6); border:1px solid rgba(255,82,34,0.35); font-family:'Share Tech Mono',monospace; font-size:12px; color:#ffb48f; margin-bottom:14px;">WEAPON: Earth Breaker (+5) ▾</div>
+
+                <div style="padding:16px 14px 14px; border-radius:14px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(255,82,34,0.35); box-shadow:0 8px 24px rgba(0,0,0,0.5);">
+                  <div style="position:relative; width:260px; height:260px; margin:0 auto;">
+                    <svg width="260" height="260" style="position:absolute; top:0; left:0; animation:runeSpinRev 14s linear infinite;"><circle cx="130" cy="130" r="120" fill="none" stroke="rgba(255,82,34,0.3)" stroke-width="1.5" stroke-dasharray="6,4"/></svg>
+                    <div style="position:absolute; top:20px; left:20px; width:220px; height:220px; border-radius:50%; background:conic-gradient(from 0deg, transparent 0deg, #ff5222 55deg, transparent 130deg, transparent 360deg); animation:spinFlow 4s linear infinite;"></div>
+                    <div style="position:absolute; top:32px; left:32px; width:196px; height:196px; border-radius:50%; background:rgba(6,9,14,0.97);"></div>
+                    <svg width="260" height="260" style="position:absolute; top:0; left:0; animation:runeSpin 20s linear infinite;"><circle cx="130" cy="130" r="100" fill="none" stroke="rgba(199,204,214,0.3)" stroke-width="1" stroke-dasharray="20,6"/></svg>
+
+                    <div style="position:absolute; top:10px; left:108px; width:44px; height:44px; border-radius:9px; background:rgba(10,15,25,0.95); border:2px solid rgba(95,224,138,0.6); box-shadow:0 0 8px rgba(0,0,0,0.6); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:3;"><span style="font-family:'Share Tech Mono',monospace; font-size:11px; font-weight:800; color:#5fe08a;">35%</span><span style="font-family:'Orbitron',sans-serif; font-size:6px; font-weight:800; color:#8a94a3; letter-spacing:0.3px;">RATE</span></div>
+
+                    <div style="position:absolute; top:78px; left:201px; width:44px; height:44px; border-radius:9px; background:rgba(10,15,25,0.95); border:2px solid rgba(255,95,122,0.6); box-shadow:0 0 8px rgba(0,0,0,0.6); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:3;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff8080" stroke-width="1.8"><polygon points="12 2 20 7 20 17 12 22 4 17 4 7"/></svg><span style="font-family:'Share Tech Mono',monospace; font-size:8px; font-weight:800; color:#ff8080;">80/120</span></div>
+
+                    <div style="position:absolute; top:187px; left:166px; width:44px; height:44px; border-radius:9px; background:rgba(10,15,25,0.95); border:2px solid rgba(95,224,138,0.6); box-shadow:0 0 8px rgba(0,0,0,0.6); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:3;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5fe08a" stroke-width="1.8"><path d="M12 2C8 8 5 12 5 15a7 7 0 0 0 14 0c0-3-3-7-7-13z"/></svg><span style="font-family:'Share Tech Mono',monospace; font-size:8px; font-weight:800; color:#5fe08a;">1/1</span></div>
+
+                    <div style="position:absolute; top:187px; left:50px; width:44px; height:44px; border-radius:9px; background:rgba(10,15,25,0.95); border:2px solid rgba(255,82,34,0.5); box-shadow:0 0 8px rgba(0,0,0,0.6); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:3;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffb48f" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg><span style="font-family:'Orbitron',sans-serif; font-size:6px; font-weight:800; color:#ffb48f; letter-spacing:0.2px;">RELIC</span></div>
+
+                    <div style="position:absolute; top:78px; left:15px; width:44px; height:44px; border-radius:9px; background:rgba(10,15,25,0.95); border:2px solid rgba(199,204,214,0.5); box-shadow:0 0 8px rgba(0,0,0,0.6); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:3;"><span style="font-family:'Share Tech Mono',monospace; font-size:11px; font-weight:900; color:#c7ccd6;">+5</span><span style="font-family:'Orbitron',sans-serif; font-size:6px; font-weight:800; color:#8a94a3;">LEVEL</span></div>
+
+                    <div style="position:absolute; top:90px; left:90px; width:80px; height:80px; border-radius:14px; background:linear-gradient(135deg,rgba(255,82,34,0.28),rgba(0,0,0,0.65)); border:2.5px solid rgba(255,82,34,0.7); box-shadow:0 0 16px rgba(255,82,34,0.4); display:flex; align-items:center; justify-content:center; z-index:4;"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#ffb48f" stroke-width="1.7"><path d="M14.5 17.5L3 6M17.5 14.5L6 3M19 19v-4M19 19h-4M5 5v4M5 5h4"/></svg></div>
+                  </div>
+                  <div style="text-align:center; margin-top:8px;">
+                    <div style="font-family:'Orbitron',sans-serif; font-size:15px; font-weight:800; color:#fff;">EARTH BREAKER <span style="color:#5fe08a;">+5 → +6</span></div>
+                  </div>
+                  <div style="padding:10px 12px; border-radius:8px; background:rgba(255,82,34,0.06); border:1px solid rgba(255,82,34,0.28); margin:14px 0 12px;">
+                    <div style="font-family:'Orbitron',sans-serif; font-size:11px; font-weight:800; color:#ffb48f; letter-spacing:0.5px; margin-bottom:6px;">STATS PREVIEW (+5 → +6)</div>
+                    <div style="display:flex; justify-content:space-between; font-family:'Share Tech Mono',monospace; font-size:13px; color:#cdd5e0;"><span>ATK Bonus</span><span>620 → <b style="color:#5fe08a;">682</b></span></div>
+                  </div>
+                  <div style="padding:10px 12px; border-radius:8px; background:rgba(255,68,68,0.12); border:1.5px dashed #ff4444; font-family:'Share Tech Mono',monospace; font-size:11px; color:#ff8080; text-align:center; line-height:1.4; margin-bottom:12px;">⚠ +5 AND ABOVE RISKS ITEM DESTRUCTION ON FAILURE</div>
+                  <div style="width:100%; padding:11px 0; text-align:center; border-radius:10px; background:rgba(30,20,20,0.8); border:1px solid rgba(255,95,122,0.3); font-family:'Orbitron',sans-serif; font-size:13px; font-weight:800; color:rgba(255,110,60,0.6); letter-spacing:1px;">NEED MORE DIVINE CREST</div>
+                </div>
+              </div>
+              </sc-if>
+
+              <!-- ============ LEGENDARY CRAFTING ============ -->
+              <sc-if value="{{ isLegA }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:2px 16px;">
+                <div style="text-align:center; padding:8px 0 14px; border-bottom:1px solid rgba(245,166,35,0.3); margin-bottom:14px; font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; letter-spacing:1px; color:#f5a623;">⚔ LEGENDARY FORGE</div>
+                <div style="display:flex; flex-direction:column; gap:12px;">
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(245,166,35,0.4); box-shadow:0 0 14px rgba(245,166,35,0.14);">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><div style="width:40px; height:40px; border-radius:9px; background:rgba(245,166,35,0.15); border:1.5px solid rgba(245,166,35,0.5); display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="1.8"><path d="M14.5 17.5L3 6M17.5 14.5L6 3M19 19v-4M19 19h-4M5 5v4M5 5h4"/></svg></div><div><div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#f5a623;">Legendary Weapon</div><div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-top:2px;">ATK+200 · HP+2000 · Crit+5%</div></div></div>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Epic Weapon ×1 (1/1)</div>
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Ignis Shard ×6 (6/6)</div>
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,95,122,0.3); font-family:'Share Tech Mono',monospace; font-size:11px; color:#ff6a4d; font-weight:700;">Umbrix Shard ×6 (2/6)</div>
+                    </div>
+                    <div style="width:100%; padding:10px 0; text-align:center; border-radius:9px; background:rgba(30,20,20,0.8); border:1px solid rgba(255,95,122,0.3); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:rgba(255,110,60,0.6); letter-spacing:0.5px;">🔒 MATERIALS MISSING</div>
+                  </div>
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(245,166,35,0.4); box-shadow:0 0 14px rgba(245,166,35,0.14);">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><div style="width:40px; height:40px; border-radius:9px; background:rgba(245,166,35,0.15); border:1.5px solid rgba(245,166,35,0.5); display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="1.8"><path d="M12 2L3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5L12 2z"/></svg></div><div><div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#f5a623;">Legendary Armor</div><div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-top:2px;">DEF+120 · HP+2500</div></div></div>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Epic Armor ×1 (1/1)</div>
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Kryos Shard ×4 (4/4)</div>
+                    </div>
+                    <div style="width:100%; padding:10px 0; text-align:center; border-radius:9px; background:linear-gradient(135deg,#f5a623,#ff6b35); box-shadow:0 0 12px rgba(245,166,35,0.4); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:#1a0f00; letter-spacing:0.5px;">⚡ CRAFT LEGENDARY ARMOR</div>
+                  </div>
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(245,166,35,0.4); box-shadow:0 0 14px rgba(245,166,35,0.14);">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><div style="width:40px; height:40px; border-radius:9px; background:rgba(245,166,35,0.15); border:1.5px solid rgba(245,166,35,0.5); display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="1.8"><path d="M12 2a10 10 0 0 0-10 10c0 5.5 6 8 10 10 4-2 10-4.5 10-10A10 10 0 0 0 12 2z"/><path d="M12 6a4 4 0 0 0-4 4h8a4 4 0 0 0-4-4z"/></svg></div><div><div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#f5a623;">Legendary Helmet</div><div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-top:2px;">DEF+120 · HP+2500 (per piece)</div></div></div>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Epic Armor ×1 (1/1)</div>
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,95,122,0.3); font-family:'Share Tech Mono',monospace; font-size:11px; color:#ff6a4d; font-weight:700;">Ignis Shard ×4 (3/4)</div>
+                    </div>
+                    <div style="width:100%; padding:10px 0; text-align:center; border-radius:9px; background:rgba(30,20,20,0.8); border:1px solid rgba(255,95,122,0.3); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:rgba(255,110,60,0.6); letter-spacing:0.5px;">🔒 MATERIALS MISSING</div>
+                  </div>
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(245,166,35,0.4); box-shadow:0 0 14px rgba(245,166,35,0.14);">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><div style="width:40px; height:40px; border-radius:9px; background:rgba(245,166,35,0.15); border:1.5px solid rgba(245,166,35,0.5); display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="1.8"><path d="M4 3h16l-2 8 2 10-8-3-8 3 2-10L4 3z"/></svg></div><div><div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#f5a623;">Legendary Mantle</div><div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-top:2px;">DEF+120 · HP+2500 (per piece)</div></div></div>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Epic Armor ×1 (1/1)</div>
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Zephra Shard ×4 (4/4)</div>
+                    </div>
+                    <div style="width:100%; padding:10px 0; text-align:center; border-radius:9px; background:linear-gradient(135deg,#f5a623,#ff6b35); box-shadow:0 0 12px rgba(245,166,35,0.4); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:#1a0f00; letter-spacing:0.5px;">⚡ CRAFT LEGENDARY MANTLE</div>
+                  </div>
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(245,166,35,0.4); box-shadow:0 0 14px rgba(245,166,35,0.14);">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><div style="width:40px; height:40px; border-radius:9px; background:rgba(245,166,35,0.15); border:1.5px solid rgba(245,166,35,0.5); display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="1.8"><path d="M18 10V8a3 3 0 0 0-6 0v2M14 10V6a2 2 0 0 0-4 0v4M10 10V5a2 2 0 0 0-4 0v5M6 10v7a6 6 0 0 0 12 0v-7"/></svg></div><div><div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#f5a623;">Legendary Gloves</div><div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-top:2px;">DEF+120 · HP+2500 (per piece)</div></div></div>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,95,122,0.3); font-family:'Share Tech Mono',monospace; font-size:11px; color:#ff6a4d; font-weight:700;">Epic Armor ×1 (0/1)</div>
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,95,122,0.3); font-family:'Share Tech Mono',monospace; font-size:11px; color:#ff6a4d; font-weight:700;">Virel Shard ×4 (2/4)</div>
+                    </div>
+                    <div style="width:100%; padding:10px 0; text-align:center; border-radius:9px; background:rgba(30,20,20,0.8); border:1px solid rgba(255,95,122,0.3); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:rgba(255,110,60,0.6); letter-spacing:0.5px;">🔒 MATERIALS MISSING</div>
+                  </div>
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(245,166,35,0.4); box-shadow:0 0 14px rgba(245,166,35,0.14);">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><div style="width:40px; height:40px; border-radius:9px; background:rgba(245,166,35,0.15); border:1.5px solid rgba(245,166,35,0.5); display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="1.8"><path d="M7 4h3v10l3 2v4H5v-4l2-2V4z"/><path d="M14 4h3v10l3 2v4h-8v-4l2-2V4z"/></svg></div><div><div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#f5a623;">Legendary Boots</div><div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-top:2px;">DEF+120 · HP+2500 (per piece)</div></div></div>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Epic Armor ×1 (1/1)</div>
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Umbrix Shard ×4 (4/4)</div>
+                    </div>
+                    <div style="width:100%; padding:10px 0; text-align:center; border-radius:9px; background:linear-gradient(135deg,#f5a623,#ff6b35); box-shadow:0 0 12px rgba(245,166,35,0.4); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:#1a0f00; letter-spacing:0.5px;">⚡ CRAFT LEGENDARY BOOTS</div>
+                  </div>
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(245,166,35,0.4); box-shadow:0 0 14px rgba(245,166,35,0.14);">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><div style="width:40px; height:40px; border-radius:9px; background:rgba(245,166,35,0.15); border:1.5px solid rgba(245,166,35,0.5); display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#f5a623;">Legendary Shield</div><div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-top:2px;">DEF+120 · HP+2500</div></div></div>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Epic Armor ×1 (1/1)</div>
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,95,122,0.3); font-family:'Share Tech Mono',monospace; font-size:11px; color:#ff6a4d; font-weight:700;">Kryos Shard ×4 (1/4)</div>
+                    </div>
+                    <div style="width:100%; padding:10px 0; text-align:center; border-radius:9px; background:rgba(30,20,20,0.8); border:1px solid rgba(255,95,122,0.3); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:rgba(255,110,60,0.6); letter-spacing:0.5px;">🔒 MATERIALS MISSING</div>
+                  </div>
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(245,166,35,0.4); box-shadow:0 0 14px rgba(245,166,35,0.14);">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><div style="width:40px; height:40px; border-radius:9px; background:rgba(245,166,35,0.15); border:1.5px solid rgba(245,166,35,0.5); display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="1.8"><circle cx="12" cy="14" r="6"/><path d="M9 8l3-5 3 5"/></svg></div><div><div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#f5a623;">Legendary Ring</div><div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-top:2px;">ATK+100 · HP+1500 · Crit+3% (per piece)</div></div></div>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Epic Ring ×1 (1/1)</div>
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Zephra Shard ×5 (5/5)</div>
+                    </div>
+                    <div style="width:100%; padding:10px 0; text-align:center; border-radius:9px; background:linear-gradient(135deg,#f5a623,#ff6b35); box-shadow:0 0 12px rgba(245,166,35,0.4); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:#1a0f00; letter-spacing:0.5px;">⚡ CRAFT LEGENDARY RING</div>
+                  </div>
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(245,166,35,0.4); box-shadow:0 0 14px rgba(245,166,35,0.14);">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><div style="width:40px; height:40px; border-radius:9px; background:rgba(245,166,35,0.15); border:1.5px solid rgba(245,166,35,0.5); display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="1.8"><path d="M6 3c0 6 3 10 6 13 3-3 6-7 6-13"/><polygon points="12,15 9,19 12,22 15,19" fill="#f5a623" fill-opacity="0.3"/></svg></div><div><div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#f5a623;">Legendary Amulet</div><div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-top:2px;">DEF+100 · HP+2000 (per piece)</div></div></div>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,95,122,0.3); font-family:'Share Tech Mono',monospace; font-size:11px; color:#ff6a4d; font-weight:700;">Epic Amulet ×1 (0/1)</div>
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,95,122,0.3); font-family:'Share Tech Mono',monospace; font-size:11px; color:#ff6a4d; font-weight:700;">Virel Shard ×5 (3/5)</div>
+                    </div>
+                    <div style="width:100%; padding:10px 0; text-align:center; border-radius:9px; background:rgba(30,20,20,0.8); border:1px solid rgba(255,95,122,0.3); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:rgba(255,110,60,0.6); letter-spacing:0.5px;">🔒 MATERIALS MISSING</div>
+                  </div>
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(245,166,35,0.4); box-shadow:0 0 14px rgba(245,166,35,0.14);">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><div style="width:40px; height:40px; border-radius:9px; background:rgba(245,166,35,0.15); border:1.5px solid rgba(245,166,35,0.5); display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="1.8"><path d="M4 3h16l-2 8 2 10-8-3-8 3 2-10L4 3z"/></svg></div><div><div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#f5a623;">Legendary Cape</div><div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-top:2px;">ATK+80 · DEF+80 · HP+2000 · Crit+2%</div></div></div>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Epic Cape ×1 (1/1)</div>
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Ignis Shard ×5 (5/5)</div>
+                    </div>
+                    <div style="width:100%; padding:10px 0; text-align:center; border-radius:9px; background:linear-gradient(135deg,#f5a623,#ff6b35); box-shadow:0 0 12px rgba(245,166,35,0.4); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:#1a0f00; letter-spacing:0.5px;">⚡ CRAFT LEGENDARY CAPE</div>
+                  </div>
+                </div>
+              </div>
+              </sc-if>
+
+              <!-- ============ SET SHOP ============ -->
+              <sc-if value="{{ isSetA }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:2px 16px;">
+                <div style="font-family:'Orbitron',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.5px; color:#8a94a3; margin:2px 0 10px;">SET SHOP</div>
+                <div style="display:flex; flex-direction:column; gap:12px;">
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(245,166,35,0.4);">
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;"><span style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#f5a623;">👑 Eminence Set</span><span style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#8a94a3;">3 / 7</span></div>
+                    <div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-bottom:10px;">Full Set: ATK+100 · DEF+100 · HP+2000 · Crit+2%</div>
+                    <div style="display:flex; flex-direction:column; gap:6px;">
+                      <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 11px; border-radius:8px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.3);"><span style="font-family:'Saira',sans-serif; font-size:13px; color:#cdd5e0;">Helmet</span><span style="font-family:'Share Tech Mono',monospace; font-size:12px; color:#5fe08a; font-weight:700;">OWNED</span></div>
+                      <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 11px; border-radius:8px; background:rgba(0,0,0,0.3); border:1px solid rgba(245,166,35,0.35);"><span style="font-family:'Saira',sans-serif; font-size:13px; color:#cdd5e0;">Armor</span><span style="font-family:'Share Tech Mono',monospace; font-size:12px; color:#f5a623; font-weight:700;">100M ⬡</span></div>
+                    </div>
+                  </div>
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(255,68,68,0.35);">
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;"><span style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#ff6a4d;">⚔ Attack Council Set</span><span style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#8a94a3;">0 / 6</span></div>
+                    <div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-bottom:10px;">Full Set: ATK+100 · DEF+50 · HP+1200</div>
+                    <div style="display:flex; flex-direction:column; gap:6px;">
+                      <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 11px; border-radius:8px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,95,122,0.3);"><span style="font-family:'Saira',sans-serif; font-size:13px; color:#cdd5e0;">Helmet</span><span style="font-family:'Share Tech Mono',monospace; font-size:12px; color:#ff6a4d; font-weight:700;">50M ⬡</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </sc-if>
+
+              <div style="height:16px;"></div>
+            </div>
+
+            <!-- nav (FORGE active) -->
+            <div style="position:relative; z-index:3; display:flex; gap:2px; background:rgba(14,14,16,0.9); backdrop-filter:blur(10px); border-top:1px solid rgba(255,82,34,0.25); padding:9px 4px 11px;">
+              <div style="flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; gap:3px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8a94a3" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M12 2v9M8 5h8M10 8h4"/></svg><span style="font-family:'Orbitron',sans-serif; font-size:9px; font-weight:800; color:#8a94a3;">BASE</span></div>
+              <div style="flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; gap:3px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8a94a3" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg><span style="font-family:'Orbitron',sans-serif; font-size:9px; font-weight:800; color:#8a94a3;">CHAR</span></div>
+              <div style="flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; gap:3px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8a94a3" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span style="font-family:'Orbitron',sans-serif; font-size:9px; font-weight:800; color:#8a94a3;">RANKS</span></div>
+              <div style="flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; gap:3px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8a94a3" stroke-width="2"><path d="M14.5 17.5L3 6M17.5 14.5L6 3M19 19v-4M19 19h-4M5 5v4M5 5h4"/></svg><span style="font-family:'Orbitron',sans-serif; font-size:9px; font-weight:800; color:#8a94a3;">BATTLE</span></div>
+              <div style="flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; gap:3px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8a94a3" stroke-width="2"><path d="M14.5 2L22 9.5m-5.5-4L11 11M3 21l8-8m-5.5.5l5 5"/></svg><span style="font-family:'Orbitron',sans-serif; font-size:9px; font-weight:800; color:#8a94a3;">MINE</span></div>
+              <div style="flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; gap:3px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffb48f" stroke-width="2" style="filter:drop-shadow(0 0 6px #ffb48f);"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg><span style="font-family:'Orbitron',sans-serif; font-size:9px; font-weight:800; color:#fff; text-shadow:0 0 8px rgba(255,82,34,0.6);">FORGE</span></div>
+              <div style="flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; gap:3px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8a94a3" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span style="font-family:'Orbitron',sans-serif; font-size:9px; font-weight:800; color:#8a94a3;">ASC</span></div>
+              <div style="flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; gap:3px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8a94a3" stroke-width="2"><path d="M6 3h12l4 6-10 12L2 9z"/></svg><span style="font-family:'Orbitron',sans-serif; font-size:9px; font-weight:800; color:#8a94a3;">SHOP</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 5B · BIONEX ==================== -->
+      <div id="5b" style="display:flex; flex-direction:column; gap:16px; align-items:center;">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div style="font-family:'Orbitron',sans-serif; font-weight:800; font-size:15px; letter-spacing:2px; color:#071633; background:linear-gradient(135deg,#a9c8ff,#3b82f6); padding:5px 14px; border-radius:8px;">5B</div>
+          <div style="font-family:'Orbitron',sans-serif; font-weight:700; font-size:20px; letter-spacing:1px; color:#eef3fb;">FORGE — Bionex skin</div>
+        </div>
+
+        <div style="position:relative; width:390px; border-radius:44px; padding:11px; background:linear-gradient(160deg,#2b2f38 0%,#101216 60%); box-shadow:0 40px 90px -30px rgba(0,0,0,0.9), inset 0 2px 3px rgba(59,130,246,0.22);">
+          <div style="position:relative; height:844px; border-radius:34px; overflow:hidden; background:radial-gradient(120% 65% at 50% -5%, #0c1f48 0%, #07132c 50%, #040a1c 100%); display:flex; flex-direction:column;">
+            <div style="position:absolute; inset:0; background-image:radial-gradient(rgba(59,130,246,0.06) 1px,transparent 1px); background-size:20px 20px; pointer-events:none;"></div>
+            <div style="position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,#3b82f6,transparent); box-shadow:0 0 12px #3b82f6; z-index:5;"></div>
+
+            <!-- header -->
+            <div style="position:relative; z-index:4; display:flex; align-items:center; gap:10px; padding:14px 16px 8px;">
+              <div style="width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:rgba(8,22,36,0.5); border:1px solid rgba(59,130,246,0.35); cursor:pointer; color:#a9c8ff; font-size:16px; flex-shrink:0;">❮</div>
+              <div style="flex:1; text-align:center; margin-right:32px; font-family:'Orbitron',sans-serif; font-size:18px; font-weight:800; letter-spacing:2px; color:#fff; text-shadow:0 0 10px rgba(59,130,246,0.5);">FORGE</div>
+            </div>
+
+            <!-- resources -->
+            <div style="position:relative; z-index:4; display:flex; gap:8px; padding:0 16px 8px;">
+              <div style="display:flex; align-items:center; gap:6px; background:rgba(8,22,36,0.5); backdrop-filter:blur(8px); border:1px solid rgba(59,130,246,0.35); border-radius:20px; padding:4px 12px 4px 9px;"><svg width="13" height="15" viewBox="0 0 14 16"><polygon points="7,0 14,4 14,12 7,16 0,12 0,4" fill="none" stroke="#3b82f6" stroke-width="1.4"/></svg><span style="font-family:'Orbitron',sans-serif; font-size:13px; font-weight:700; color:#a9c8ff;">1,450,220</span></div>
+              <div style="display:flex; align-items:center; gap:6px; background:rgba(8,22,36,0.5); backdrop-filter:blur(8px); border:1px solid rgba(199,204,214,0.4); border-radius:20px; padding:4px 12px 4px 9px;"><svg width="12" height="12" viewBox="0 0 13 13"><rect x="1.5" y="1.5" width="10" height="10" transform="rotate(45 6.5 6.5)" fill="none" stroke="#c7ccd6" stroke-width="1.4"/></svg><span style="font-family:'Orbitron',sans-serif; font-size:13px; font-weight:700; color:#c7ccd6;">890,340</span></div>
+            </div>
+
+            <!-- sub-tabs -->
+            <div style="position:relative; z-index:4; display:flex; gap:3px; padding:2px 12px 8px;">
+              <div onClick="{{ upgB }}" style="flex:1; text-align:center; padding:7px 2px; border-radius:7px; cursor:pointer; font-family:'Orbitron',sans-serif; font-size:10px; font-weight:800; letter-spacing:0.3px; color:{{ tabUpgColorB }}; background:{{ tabUpgBgB }}; border:1px solid rgba(59,130,246,0.3);">UPGRADE</div>
+              <div onClick="{{ smithB }}" style="flex:1; text-align:center; padding:7px 2px; border-radius:7px; cursor:pointer; font-family:'Orbitron',sans-serif; font-size:10px; font-weight:800; letter-spacing:0.3px; color:{{ tabSmithColorB }}; background:{{ tabSmithBgB }}; border:1px solid rgba(59,130,246,0.3);">SMITH</div>
+              <div onClick="{{ enhB }}" style="flex:1; text-align:center; padding:7px 2px; border-radius:7px; cursor:pointer; font-family:'Orbitron',sans-serif; font-size:10px; font-weight:800; letter-spacing:0.3px; color:{{ tabEnhColorB }}; background:{{ tabEnhBgB }}; border:1px solid rgba(59,130,246,0.3);">ENHANCE</div>
+              <div onClick="{{ legB }}" style="flex:1; text-align:center; padding:7px 2px; border-radius:7px; cursor:pointer; font-family:'Orbitron',sans-serif; font-size:10px; font-weight:800; letter-spacing:0.3px; color:{{ tabLegColorB }}; background:{{ tabLegBgB }}; border:1px solid rgba(59,130,246,0.3);">LEGEND</div>
+              <div onClick="{{ setB }}" style="flex:1; text-align:center; padding:7px 2px; border-radius:7px; cursor:pointer; font-family:'Orbitron',sans-serif; font-size:10px; font-weight:800; letter-spacing:0.3px; color:{{ tabSetColorB }}; background:{{ tabSetBgB }}; border:1px solid rgba(59,130,246,0.3);">SET SHOP</div>
+            </div>
+
+            <!-- scroll -->
+            <div class="fg-scroll" style="position:relative; z-index:3; flex:1; overflow-y:auto; padding:2px 0 6px;">
+
+              <!-- ============ UPGRADE STATS ============ -->
+              <sc-if value="{{ isUpgB }}" hint-placeholder-val="{{ true }}">
+              <div style="padding:2px 16px;">
+                <div style="font-family:'Orbitron',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.5px; color:#7d92a3; margin:2px 0 10px;">CORE STAT UPGRADES</div>
+                <div style="display:flex; flex-direction:column; gap:10px;">
+                  <div style="padding:12px 14px; border-radius:12px; background:rgba(6,9,14,0.72); border:1.5px solid rgba(59,130,246,0.32);">
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;"><span style="font-family:'Orbitron',sans-serif; font-size:13px; font-weight:800; color:#a9c8ff; letter-spacing:1px;">⚔ ATTACK POWER</span><span style="font-family:'Orbitron',sans-serif; font-size:11px; color:#7d92a3;">LV 14</span></div>
+                    <div style="font-family:'Share Tech Mono',monospace; font-size:13px; color:#cdd5e0; margin-bottom:10px;">Current: <b style="color:#fff;">4,280 ATK</b> · +30 per level</div>
+                    <div style="width:100%; padding:9px 0; text-align:center; border-radius:9px; background:linear-gradient(135deg,#3b82f6,#b32c0d); box-shadow:0 0 12px rgba(59,130,246,0.4); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:#fff; letter-spacing:0.5px;">UPGRADE · 12,000 ⬡</div>
+                  </div>
+                  <div style="padding:12px 14px; border-radius:12px; background:rgba(6,9,14,0.72); border:1.5px solid rgba(199,204,214,0.32);">
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;"><span style="font-family:'Orbitron',sans-serif; font-size:13px; font-weight:800; color:#eef3fb; letter-spacing:1px;">🛡 DEFENSE</span><span style="font-family:'Orbitron',sans-serif; font-size:11px; color:#7d92a3;">LV 9</span></div>
+                    <div style="font-family:'Share Tech Mono',monospace; font-size:13px; color:#cdd5e0; margin-bottom:10px;">Current: <b style="color:#fff;">3,150 DEF</b> · +20 per level</div>
+                    <div style="width:100%; padding:9px 0; text-align:center; border-radius:9px; background:linear-gradient(135deg,#dde2ea,#9aa2ae); box-shadow:0 0 12px rgba(199,204,214,0.3); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:#16181c; letter-spacing:0.5px;">UPGRADE · 8,000 ⬡</div>
+                  </div>
+                  <div style="padding:12px 14px; border-radius:12px; background:rgba(6,9,14,0.72); border:1.5px solid rgba(255,110,60,0.34);">
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;"><span style="font-family:'Orbitron',sans-serif; font-size:13px; font-weight:800; color:#ff6a4d; letter-spacing:1px;">♥ HULL HP</span><span style="font-family:'Orbitron',sans-serif; font-size:11px; color:#7d92a3;">LV 21</span></div>
+                    <div style="font-family:'Share Tech Mono',monospace; font-size:13px; color:#cdd5e0; margin-bottom:10px;">Current: <b style="color:#fff;">14,500 HP</b> · +250 per level</div>
+                    <div style="width:100%; padding:9px 0; text-align:center; border-radius:9px; background:rgba(30,20,20,0.8); border:1px solid rgba(255,95,122,0.3); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:rgba(255,110,60,0.6); letter-spacing:0.5px;">NEED 4,200 MORE ⬡</div>
+                  </div>
+                </div>
+              </div>
+              </sc-if>
+
+              <!-- ============ WEAPON SMITH ============ -->
+              <sc-if value="{{ isSmithB }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:2px 16px;">
+                <div style="font-family:'Orbitron',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.5px; color:#7d92a3; margin:2px 0 10px;">WEAPON RARITY REFINEMENT</div>
+                <div style="padding:16px 14px 14px; border-radius:14px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(59,130,246,0.35); box-shadow:0 8px 24px rgba(0,0,0,0.5);">
+                  <div style="position:relative; width:220px; height:220px; margin:0 auto;">
+                    <svg width="220" height="220" style="position:absolute; top:0; left:0; animation:runeSpinRev 14s linear infinite;"><circle cx="110" cy="110" r="100" fill="none" stroke="rgba(59,130,246,0.3)" stroke-width="1.5" stroke-dasharray="6,4"/></svg>
+                    <div style="position:absolute; top:14px; left:14px; width:192px; height:192px; border-radius:50%; background:conic-gradient(from 0deg, transparent 0deg, #3b82f6 55deg, transparent 130deg, transparent 360deg); animation:spinFlow 4s linear infinite;"></div>
+                    <div style="position:absolute; top:25px; left:25px; width:170px; height:170px; border-radius:50%; background:rgba(6,9,14,0.97);"></div>
+                    <svg width="220" height="220" style="position:absolute; top:0; left:0; animation:runeSpin 20s linear infinite;"><circle cx="110" cy="110" r="85" fill="none" stroke="rgba(199,204,214,0.3)" stroke-width="1" stroke-dasharray="20,6"/></svg>
+
+                    <div style="position:absolute; top:0px; left:88px; width:44px; height:44px; border-radius:9px; background:rgba(10,15,25,0.95); border:2px solid rgba(245,166,35,0.6); box-shadow:0 0 8px rgba(0,0,0,0.6); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:3;"><span style="font-family:'Orbitron',sans-serif; font-size:7px; font-weight:800; color:#7d92a3; letter-spacing:0.3px;">NEXT</span><span style="font-family:'Share Tech Mono',monospace; font-size:9px; font-weight:800; color:#f5a623;">LEGEND</span></div>
+
+                    <div style="position:absolute; top:132px; left:164px; width:44px; height:44px; border-radius:9px; background:rgba(10,15,25,0.95); border:2px solid rgba(95,224,138,0.6); box-shadow:0 0 8px rgba(0,0,0,0.6); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:3;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5fe08a" stroke-width="1.8"><path d="M12 2C8 8 5 12 5 15a7 7 0 0 0 14 0c0-3-3-7-7-13z"/></svg><span style="font-family:'Share Tech Mono',monospace; font-size:8px; font-weight:800; color:#5fe08a;">5/5</span></div>
+
+                    <div style="position:absolute; top:132px; left:12px; width:44px; height:44px; border-radius:9px; background:rgba(10,15,25,0.95); border:2px solid rgba(255,95,122,0.6); box-shadow:0 0 8px rgba(0,0,0,0.6); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:3;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff8080" stroke-width="1.8"><polygon points="7,0 14,4 14,12 7,16 0,12 0,4" transform="translate(5,4)"/></svg><span style="font-family:'Share Tech Mono',monospace; font-size:7px; font-weight:800; color:#ff8080;">100K</span></div>
+
+                    <div style="position:absolute; top:74px; left:74px; width:72px; height:72px; border-radius:14px; background:linear-gradient(135deg,rgba(59,130,246,0.28),rgba(0,0,0,0.65)); border:2.5px solid rgba(59,130,246,0.7); box-shadow:0 0 16px rgba(59,130,246,0.4); display:flex; align-items:center; justify-content:center; z-index:4;"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#a9c8ff" stroke-width="1.7"><path d="M12 2v20M4 12h16"/><circle cx="12" cy="12" r="4"/></svg></div>
+                  </div>
+                  <div style="text-align:center; margin-top:8px;">
+                    <div style="font-family:'Orbitron',sans-serif; font-size:15px; font-weight:800; color:#fff;">RAILGUN MK-7</div>
+                    <div style="font-family:'Share Tech Mono',monospace; font-size:12px; color:#f5a623; margin-top:2px;">Grade: EPIC</div>
+                  </div>
+                  <div style="height:1px; background:rgba(59,130,246,0.2); margin:14px 0;"></div>
+                  <div style="font-family:'Orbitron',sans-serif; font-size:12px; font-weight:700; color:#a9c8ff; letter-spacing:0.5px; margin-bottom:12px;">NEXT GRADE: LEGENDARY (+20%)</div>
+                  <div style="width:100%; padding:11px 0; text-align:center; border-radius:10px; background:linear-gradient(135deg,#3b82f6,#b32c0d); box-shadow:0 0 14px rgba(59,130,246,0.4); font-family:'Orbitron',sans-serif; font-size:13px; font-weight:800; color:#fff; letter-spacing:1px;">REFINE WEAPON</div>
+                </div>
+
+                <div style="font-family:'Orbitron',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.5px; color:#7d92a3; margin:16px 0 10px;">CRAFT VAMPIRIC WEAPON</div>
+                <div style="padding:14px; border-radius:14px; background:rgba(6,9,14,0.72); border:1.5px solid rgba(59,130,246,0.3);">
+                  <div style="font-family:'Saira',sans-serif; font-size:13px; color:#a8b4c4; line-height:1.5; margin-bottom:12px;">Sacrifice an Epic+ weapon to imbue RAILGUN MK-7 with a lifesteal property.</div>
+                  <div style="padding:10px 12px; border-radius:8px; background:rgba(3,8,20,0.6); border:1px solid rgba(59,130,246,0.35); font-family:'Share Tech Mono',monospace; font-size:12px; color:#7d92a3; margin-bottom:10px;">SACRIFICE: Void Cleaver (Lv.38) ▾</div>
+                  <div style="display:flex; flex-direction:column; gap:6px; margin-bottom:12px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 11px; border-radius:8px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.35);"><span style="font-family:'Saira',sans-serif; font-size:13px; color:#cdd5e0;">Sacrifice Weapon</span><span style="font-family:'Share Tech Mono',monospace; font-size:13px; color:#5fe08a; font-weight:700;">1 / 1</span></div>
+                    <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 11px; border-radius:8px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.35);"><span style="font-family:'Saira',sans-serif; font-size:13px; color:#cdd5e0;">Talic of Favor</span><span style="font-family:'Share Tech Mono',monospace; font-size:13px; color:#5fe08a; font-weight:700;">1 / 1</span></div>
+                  </div>
+                  <div style="width:100%; padding:11px 0; text-align:center; border-radius:10px; background:linear-gradient(135deg,#3b82f6,#b32c0d); box-shadow:0 0 14px rgba(59,130,246,0.4); font-family:'Orbitron',sans-serif; font-size:13px; font-weight:800; color:#fff; letter-spacing:1px;">FORGE VAMPIRIC WEAPON</div>
+                </div>
+              </div>
+              </sc-if>
+
+              <!-- ============ ITEM ENHANCEMENT ============ -->
+              <sc-if value="{{ isEnhB }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:2px 16px;">
+                <div style="font-family:'Orbitron',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.5px; color:#7d92a3; margin:2px 0 10px;">SELECT EQUIPMENT TO ENHANCE</div>
+                <div style="padding:10px 12px; border-radius:8px; background:rgba(3,8,20,0.6); border:1px solid rgba(59,130,246,0.35); font-family:'Share Tech Mono',monospace; font-size:12px; color:#a9c8ff; margin-bottom:14px;">WEAPON: Railgun Mk-7 (+5) ▾</div>
+
+                <div style="padding:16px 14px 14px; border-radius:14px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(59,130,246,0.35); box-shadow:0 8px 24px rgba(0,0,0,0.5);">
+                  <div style="position:relative; width:260px; height:260px; margin:0 auto;">
+                    <svg width="260" height="260" style="position:absolute; top:0; left:0; animation:runeSpinRev 14s linear infinite;"><circle cx="130" cy="130" r="120" fill="none" stroke="rgba(59,130,246,0.3)" stroke-width="1.5" stroke-dasharray="6,4"/></svg>
+                    <div style="position:absolute; top:20px; left:20px; width:220px; height:220px; border-radius:50%; background:conic-gradient(from 0deg, transparent 0deg, #3b82f6 55deg, transparent 130deg, transparent 360deg); animation:spinFlow 4s linear infinite;"></div>
+                    <div style="position:absolute; top:32px; left:32px; width:196px; height:196px; border-radius:50%; background:rgba(6,9,14,0.97);"></div>
+                    <svg width="260" height="260" style="position:absolute; top:0; left:0; animation:runeSpin 20s linear infinite;"><circle cx="130" cy="130" r="100" fill="none" stroke="rgba(199,204,214,0.3)" stroke-width="1" stroke-dasharray="20,6"/></svg>
+
+                    <div style="position:absolute; top:10px; left:108px; width:44px; height:44px; border-radius:9px; background:rgba(10,15,25,0.95); border:2px solid rgba(95,224,138,0.6); box-shadow:0 0 8px rgba(0,0,0,0.6); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:3;"><span style="font-family:'Share Tech Mono',monospace; font-size:11px; font-weight:800; color:#5fe08a;">35%</span><span style="font-family:'Orbitron',sans-serif; font-size:6px; font-weight:800; color:#7d92a3; letter-spacing:0.3px;">RATE</span></div>
+
+                    <div style="position:absolute; top:78px; left:201px; width:44px; height:44px; border-radius:9px; background:rgba(10,15,25,0.95); border:2px solid rgba(255,95,122,0.6); box-shadow:0 0 8px rgba(0,0,0,0.6); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:3;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff8080" stroke-width="1.8"><polygon points="12 2 20 7 20 17 12 22 4 17 4 7"/></svg><span style="font-family:'Share Tech Mono',monospace; font-size:8px; font-weight:800; color:#ff8080;">80/120</span></div>
+
+                    <div style="position:absolute; top:187px; left:166px; width:44px; height:44px; border-radius:9px; background:rgba(10,15,25,0.95); border:2px solid rgba(95,224,138,0.6); box-shadow:0 0 8px rgba(0,0,0,0.6); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:3;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5fe08a" stroke-width="1.8"><path d="M12 2C8 8 5 12 5 15a7 7 0 0 0 14 0c0-3-3-7-7-13z"/></svg><span style="font-family:'Share Tech Mono',monospace; font-size:8px; font-weight:800; color:#5fe08a;">1/1</span></div>
+
+                    <div style="position:absolute; top:187px; left:50px; width:44px; height:44px; border-radius:9px; background:rgba(10,15,25,0.95); border:2px solid rgba(59,130,246,0.5); box-shadow:0 0 8px rgba(0,0,0,0.6); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:3;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a9c8ff" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg><span style="font-family:'Orbitron',sans-serif; font-size:6px; font-weight:800; color:#a9c8ff; letter-spacing:0.2px;">RELIC</span></div>
+
+                    <div style="position:absolute; top:78px; left:15px; width:44px; height:44px; border-radius:9px; background:rgba(10,15,25,0.95); border:2px solid rgba(199,204,214,0.5); box-shadow:0 0 8px rgba(0,0,0,0.6); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:3;"><span style="font-family:'Share Tech Mono',monospace; font-size:11px; font-weight:900; color:#c7ccd6;">+5</span><span style="font-family:'Orbitron',sans-serif; font-size:6px; font-weight:800; color:#7d92a3;">LEVEL</span></div>
+
+                    <div style="position:absolute; top:90px; left:90px; width:80px; height:80px; border-radius:14px; background:linear-gradient(135deg,rgba(59,130,246,0.28),rgba(0,0,0,0.65)); border:2.5px solid rgba(59,130,246,0.7); box-shadow:0 0 16px rgba(59,130,246,0.4); display:flex; align-items:center; justify-content:center; z-index:4;"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#a9c8ff" stroke-width="1.7"><path d="M12 2v20M4 12h16"/><circle cx="12" cy="12" r="4"/></svg></div>
+                  </div>
+                  <div style="text-align:center; margin-top:8px;">
+                    <div style="font-family:'Orbitron',sans-serif; font-size:15px; font-weight:800; color:#fff;">RAILGUN MK-7 <span style="color:#5fe08a;">+5 → +6</span></div>
+                  </div>
+                  <div style="padding:10px 12px; border-radius:8px; background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.28); margin:14px 0 12px;">
+                    <div style="font-family:'Orbitron',sans-serif; font-size:11px; font-weight:800; color:#a9c8ff; letter-spacing:0.5px; margin-bottom:6px;">STATS PREVIEW (+5 → +6)</div>
+                    <div style="display:flex; justify-content:space-between; font-family:'Share Tech Mono',monospace; font-size:13px; color:#cdd5e0;"><span>ATK Bonus</span><span>620 → <b style="color:#5fe08a;">682</b></span></div>
+                  </div>
+                  <div style="padding:10px 12px; border-radius:8px; background:rgba(255,68,68,0.12); border:1.5px dashed #ff4444; font-family:'Share Tech Mono',monospace; font-size:11px; color:#ff8080; text-align:center; line-height:1.4; margin-bottom:12px;">⚠ +5 AND ABOVE RISKS ITEM DESTRUCTION ON FAILURE</div>
+                  <div style="width:100%; padding:11px 0; text-align:center; border-radius:10px; background:rgba(30,20,20,0.8); border:1px solid rgba(255,95,122,0.3); font-family:'Orbitron',sans-serif; font-size:13px; font-weight:800; color:rgba(255,110,60,0.6); letter-spacing:1px;">NEED MORE DIVINE CREST</div>
+                </div>
+              </div>
+              </sc-if>
+
+              <!-- ============ LEGENDARY CRAFTING ============ -->
+              <sc-if value="{{ isLegB }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:2px 16px;">
+                <div style="text-align:center; padding:8px 0 14px; border-bottom:1px solid rgba(245,166,35,0.3); margin-bottom:14px; font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; letter-spacing:1px; color:#f5a623;">⚔ LEGENDARY FORGE</div>
+                <div style="display:flex; flex-direction:column; gap:12px;">
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(245,166,35,0.4); box-shadow:0 0 14px rgba(245,166,35,0.14);">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><div style="width:40px; height:40px; border-radius:9px; background:rgba(245,166,35,0.15); border:1.5px solid rgba(245,166,35,0.5); display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="1.8"><path d="M14.5 17.5L3 6M17.5 14.5L6 3M19 19v-4M19 19h-4M5 5v4M5 5h4"/></svg></div><div><div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#f5a623;">Legendary Weapon</div><div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-top:2px;">ATK+200 · HP+2000 · Crit+5%</div></div></div>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Epic Weapon ×1 (1/1)</div>
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Ignis Shard ×6 (6/6)</div>
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,95,122,0.3); font-family:'Share Tech Mono',monospace; font-size:11px; color:#ff6a4d; font-weight:700;">Umbrix Shard ×6 (2/6)</div>
+                    </div>
+                    <div style="width:100%; padding:10px 0; text-align:center; border-radius:9px; background:rgba(30,20,20,0.8); border:1px solid rgba(255,95,122,0.3); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:rgba(255,110,60,0.6); letter-spacing:0.5px;">🔒 MATERIALS MISSING</div>
+                  </div>
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(245,166,35,0.4); box-shadow:0 0 14px rgba(245,166,35,0.14);">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><div style="width:40px; height:40px; border-radius:9px; background:rgba(245,166,35,0.15); border:1.5px solid rgba(245,166,35,0.5); display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="1.8"><path d="M12 2L3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5L12 2z"/></svg></div><div><div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#f5a623;">Legendary Armor</div><div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-top:2px;">DEF+120 · HP+2500</div></div></div>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Epic Armor ×1 (1/1)</div>
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Kryos Shard ×4 (4/4)</div>
+                    </div>
+                    <div style="width:100%; padding:10px 0; text-align:center; border-radius:9px; background:linear-gradient(135deg,#f5a623,#ff6b35); box-shadow:0 0 12px rgba(245,166,35,0.4); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:#1a0f00; letter-spacing:0.5px;">⚡ CRAFT LEGENDARY ARMOR</div>
+                  </div>
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(245,166,35,0.4); box-shadow:0 0 14px rgba(245,166,35,0.14);">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><div style="width:40px; height:40px; border-radius:9px; background:rgba(245,166,35,0.15); border:1.5px solid rgba(245,166,35,0.5); display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="1.8"><path d="M12 2a10 10 0 0 0-10 10c0 5.5 6 8 10 10 4-2 10-4.5 10-10A10 10 0 0 0 12 2z"/><path d="M12 6a4 4 0 0 0-4 4h8a4 4 0 0 0-4-4z"/></svg></div><div><div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#f5a623;">Legendary Helmet</div><div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-top:2px;">DEF+120 · HP+2500 (per piece)</div></div></div>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Epic Armor ×1 (1/1)</div>
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,95,122,0.3); font-family:'Share Tech Mono',monospace; font-size:11px; color:#ff6a4d; font-weight:700;">Ignis Shard ×4 (3/4)</div>
+                    </div>
+                    <div style="width:100%; padding:10px 0; text-align:center; border-radius:9px; background:rgba(30,20,20,0.8); border:1px solid rgba(255,95,122,0.3); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:rgba(255,110,60,0.6); letter-spacing:0.5px;">🔒 MATERIALS MISSING</div>
+                  </div>
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(245,166,35,0.4); box-shadow:0 0 14px rgba(245,166,35,0.14);">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><div style="width:40px; height:40px; border-radius:9px; background:rgba(245,166,35,0.15); border:1.5px solid rgba(245,166,35,0.5); display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="1.8"><path d="M4 3h16l-2 8 2 10-8-3-8 3 2-10L4 3z"/></svg></div><div><div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#f5a623;">Legendary Mantle</div><div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-top:2px;">DEF+120 · HP+2500 (per piece)</div></div></div>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Epic Armor ×1 (1/1)</div>
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Zephra Shard ×4 (4/4)</div>
+                    </div>
+                    <div style="width:100%; padding:10px 0; text-align:center; border-radius:9px; background:linear-gradient(135deg,#f5a623,#ff6b35); box-shadow:0 0 12px rgba(245,166,35,0.4); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:#1a0f00; letter-spacing:0.5px;">⚡ CRAFT LEGENDARY MANTLE</div>
+                  </div>
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(245,166,35,0.4); box-shadow:0 0 14px rgba(245,166,35,0.14);">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><div style="width:40px; height:40px; border-radius:9px; background:rgba(245,166,35,0.15); border:1.5px solid rgba(245,166,35,0.5); display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="1.8"><path d="M18 10V8a3 3 0 0 0-6 0v2M14 10V6a2 2 0 0 0-4 0v4M10 10V5a2 2 0 0 0-4 0v5M6 10v7a6 6 0 0 0 12 0v-7"/></svg></div><div><div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#f5a623;">Legendary Gloves</div><div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-top:2px;">DEF+120 · HP+2500 (per piece)</div></div></div>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,95,122,0.3); font-family:'Share Tech Mono',monospace; font-size:11px; color:#ff6a4d; font-weight:700;">Epic Armor ×1 (0/1)</div>
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,95,122,0.3); font-family:'Share Tech Mono',monospace; font-size:11px; color:#ff6a4d; font-weight:700;">Virel Shard ×4 (2/4)</div>
+                    </div>
+                    <div style="width:100%; padding:10px 0; text-align:center; border-radius:9px; background:rgba(30,20,20,0.8); border:1px solid rgba(255,95,122,0.3); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:rgba(255,110,60,0.6); letter-spacing:0.5px;">🔒 MATERIALS MISSING</div>
+                  </div>
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(245,166,35,0.4); box-shadow:0 0 14px rgba(245,166,35,0.14);">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><div style="width:40px; height:40px; border-radius:9px; background:rgba(245,166,35,0.15); border:1.5px solid rgba(245,166,35,0.5); display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="1.8"><path d="M7 4h3v10l3 2v4H5v-4l2-2V4z"/><path d="M14 4h3v10l3 2v4h-8v-4l2-2V4z"/></svg></div><div><div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#f5a623;">Legendary Boots</div><div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-top:2px;">DEF+120 · HP+2500 (per piece)</div></div></div>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Epic Armor ×1 (1/1)</div>
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Umbrix Shard ×4 (4/4)</div>
+                    </div>
+                    <div style="width:100%; padding:10px 0; text-align:center; border-radius:9px; background:linear-gradient(135deg,#f5a623,#ff6b35); box-shadow:0 0 12px rgba(245,166,35,0.4); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:#1a0f00; letter-spacing:0.5px;">⚡ CRAFT LEGENDARY BOOTS</div>
+                  </div>
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(245,166,35,0.4); box-shadow:0 0 14px rgba(245,166,35,0.14);">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><div style="width:40px; height:40px; border-radius:9px; background:rgba(245,166,35,0.15); border:1.5px solid rgba(245,166,35,0.5); display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#f5a623;">Legendary Shield</div><div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-top:2px;">DEF+120 · HP+2500</div></div></div>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Epic Armor ×1 (1/1)</div>
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,95,122,0.3); font-family:'Share Tech Mono',monospace; font-size:11px; color:#ff6a4d; font-weight:700;">Kryos Shard ×4 (1/4)</div>
+                    </div>
+                    <div style="width:100%; padding:10px 0; text-align:center; border-radius:9px; background:rgba(30,20,20,0.8); border:1px solid rgba(255,95,122,0.3); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:rgba(255,110,60,0.6); letter-spacing:0.5px;">🔒 MATERIALS MISSING</div>
+                  </div>
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(245,166,35,0.4); box-shadow:0 0 14px rgba(245,166,35,0.14);">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><div style="width:40px; height:40px; border-radius:9px; background:rgba(245,166,35,0.15); border:1.5px solid rgba(245,166,35,0.5); display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="1.8"><circle cx="12" cy="14" r="6"/><path d="M9 8l3-5 3 5"/></svg></div><div><div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#f5a623;">Legendary Ring</div><div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-top:2px;">ATK+100 · HP+1500 · Crit+3% (per piece)</div></div></div>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Epic Ring ×1 (1/1)</div>
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Zephra Shard ×5 (5/5)</div>
+                    </div>
+                    <div style="width:100%; padding:10px 0; text-align:center; border-radius:9px; background:linear-gradient(135deg,#f5a623,#ff6b35); box-shadow:0 0 12px rgba(245,166,35,0.4); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:#1a0f00; letter-spacing:0.5px;">⚡ CRAFT LEGENDARY RING</div>
+                  </div>
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(245,166,35,0.4); box-shadow:0 0 14px rgba(245,166,35,0.14);">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><div style="width:40px; height:40px; border-radius:9px; background:rgba(245,166,35,0.15); border:1.5px solid rgba(245,166,35,0.5); display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="1.8"><path d="M6 3c0 6 3 10 6 13 3-3 6-7 6-13"/><polygon points="12,15 9,19 12,22 15,19" fill="#f5a623" fill-opacity="0.3"/></svg></div><div><div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#f5a623;">Legendary Amulet</div><div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-top:2px;">DEF+100 · HP+2000 (per piece)</div></div></div>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,95,122,0.3); font-family:'Share Tech Mono',monospace; font-size:11px; color:#ff6a4d; font-weight:700;">Epic Amulet ×1 (0/1)</div>
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,95,122,0.3); font-family:'Share Tech Mono',monospace; font-size:11px; color:#ff6a4d; font-weight:700;">Virel Shard ×5 (3/5)</div>
+                    </div>
+                    <div style="width:100%; padding:10px 0; text-align:center; border-radius:9px; background:rgba(30,20,20,0.8); border:1px solid rgba(255,95,122,0.3); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:rgba(255,110,60,0.6); letter-spacing:0.5px;">🔒 MATERIALS MISSING</div>
+                  </div>
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(245,166,35,0.4); box-shadow:0 0 14px rgba(245,166,35,0.14);">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><div style="width:40px; height:40px; border-radius:9px; background:rgba(245,166,35,0.15); border:1.5px solid rgba(245,166,35,0.5); display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="1.8"><path d="M4 3h16l-2 8 2 10-8-3-8 3 2-10L4 3z"/></svg></div><div><div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#f5a623;">Legendary Cape</div><div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-top:2px;">ATK+80 · DEF+80 · HP+2000 · Crit+2%</div></div></div>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Epic Cape ×1 (1/1)</div>
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Ignis Shard ×5 (5/5)</div>
+                    </div>
+                    <div style="width:100%; padding:10px 0; text-align:center; border-radius:9px; background:linear-gradient(135deg,#f5a623,#ff6b35); box-shadow:0 0 12px rgba(245,166,35,0.4); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:#1a0f00; letter-spacing:0.5px;">⚡ CRAFT LEGENDARY CAPE</div>
+                  </div>
+                </div>
+              </div>
+              </sc-if>
+
+              <!-- ============ SET SHOP ============ -->
+              <sc-if value="{{ isSetB }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:2px 16px;">
+                <div style="font-family:'Orbitron',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.5px; color:#7d92a3; margin:2px 0 10px;">SET SHOP</div>
+                <div style="display:flex; flex-direction:column; gap:12px;">
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(245,166,35,0.4);">
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;"><span style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#f5a623;">👑 Eminence Set</span><span style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#7d92a3;">3 / 7</span></div>
+                    <div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-bottom:10px;">Full Set: ATK+100 · DEF+100 · HP+2000 · Crit+2%</div>
+                    <div style="display:flex; flex-direction:column; gap:6px;">
+                      <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 11px; border-radius:8px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.3);"><span style="font-family:'Saira',sans-serif; font-size:13px; color:#cdd5e0;">Helmet</span><span style="font-family:'Share Tech Mono',monospace; font-size:12px; color:#5fe08a; font-weight:700;">OWNED</span></div>
+                      <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 11px; border-radius:8px; background:rgba(0,0,0,0.3); border:1px solid rgba(245,166,35,0.35);"><span style="font-family:'Saira',sans-serif; font-size:13px; color:#cdd5e0;">Armor</span><span style="font-family:'Share Tech Mono',monospace; font-size:12px; color:#f5a623; font-weight:700;">100M ⬡</span></div>
+                    </div>
+                  </div>
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(255,68,68,0.35);">
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;"><span style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#ff6a4d;">⚔ Attack Council Set</span><span style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#7d92a3;">0 / 6</span></div>
+                    <div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-bottom:10px;">Full Set: ATK+100 · DEF+50 · HP+1200</div>
+                    <div style="display:flex; flex-direction:column; gap:6px;">
+                      <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 11px; border-radius:8px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,95,122,0.3);"><span style="font-family:'Saira',sans-serif; font-size:13px; color:#cdd5e0;">Helmet</span><span style="font-family:'Share Tech Mono',monospace; font-size:12px; color:#ff6a4d; font-weight:700;">50M ⬡</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </sc-if>
+
+              <div style="height:16px;"></div>
+            </div>
+
+            <!-- nav (FORGE active) -->
+            <div style="position:relative; z-index:3; display:flex; gap:2px; background:rgba(14,14,16,0.9); backdrop-filter:blur(10px); border-top:1px solid rgba(59,130,246,0.25); padding:9px 4px 11px;">
+              <div style="flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; gap:3px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7d92a3" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M12 2v9M8 5h8M10 8h4"/></svg><span style="font-family:'Orbitron',sans-serif; font-size:9px; font-weight:800; color:#7d92a3;">BASE</span></div>
+              <div style="flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; gap:3px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7d92a3" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg><span style="font-family:'Orbitron',sans-serif; font-size:9px; font-weight:800; color:#7d92a3;">CHAR</span></div>
+              <div style="flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; gap:3px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7d92a3" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span style="font-family:'Orbitron',sans-serif; font-size:9px; font-weight:800; color:#7d92a3;">RANKS</span></div>
+              <div style="flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; gap:3px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7d92a3" stroke-width="2"><path d="M14.5 17.5L3 6M17.5 14.5L6 3M19 19v-4M19 19h-4M5 5v4M5 5h4"/></svg><span style="font-family:'Orbitron',sans-serif; font-size:9px; font-weight:800; color:#7d92a3;">BATTLE</span></div>
+              <div style="flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; gap:3px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7d92a3" stroke-width="2"><path d="M14.5 2L22 9.5m-5.5-4L11 11M3 21l8-8m-5.5.5l5 5"/></svg><span style="font-family:'Orbitron',sans-serif; font-size:9px; font-weight:800; color:#7d92a3;">MINE</span></div>
+              <div style="flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; gap:3px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a9c8ff" stroke-width="2" style="filter:drop-shadow(0 0 6px #a9c8ff);"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg><span style="font-family:'Orbitron',sans-serif; font-size:9px; font-weight:800; color:#fff; text-shadow:0 0 8px rgba(59,130,246,0.6);">FORGE</span></div>
+              <div style="flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; gap:3px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7d92a3" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span style="font-family:'Orbitron',sans-serif; font-size:9px; font-weight:800; color:#7d92a3;">ASC</span></div>
+              <div style="flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; gap:3px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7d92a3" stroke-width="2"><path d="M6 3h12l4 6-10 12L2 9z"/></svg><span style="font-family:'Orbitron',sans-serif; font-size:9px; font-weight:800; color:#7d92a3;">SHOP</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 5C · CELESTRA ==================== -->
+      <div id="5c" style="display:flex; flex-direction:column; gap:16px; align-items:center;">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div style="font-family:'Orbitron',sans-serif; font-weight:800; font-size:15px; letter-spacing:2px; color:#150620; background:linear-gradient(135deg,#c9aeff,#9b4dff); padding:5px 14px; border-radius:8px;">5C</div>
+          <div style="font-family:'Orbitron',sans-serif; font-weight:700; font-size:20px; letter-spacing:1px; color:#eef3fb;">FORGE — Celestra skin</div>
+        </div>
+
+        <div style="position:relative; width:390px; border-radius:44px; padding:11px; background:linear-gradient(160deg,#2b2f38 0%,#101216 60%); box-shadow:0 40px 90px -30px rgba(0,0,0,0.9), inset 0 2px 3px rgba(155,77,255,0.22);">
+          <div style="position:relative; height:844px; border-radius:34px; overflow:hidden; background:radial-gradient(120% 65% at 50% -5%, #1a1642 0%, #100e2c 50%, #07061a 100%); display:flex; flex-direction:column;">
+            <div style="position:absolute; inset:0; background-image:radial-gradient(rgba(155,77,255,0.06) 1px,transparent 1px); background-size:20px 20px; pointer-events:none;"></div>
+            <div style="position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,#9b4dff,transparent); box-shadow:0 0 12px #9b4dff; z-index:5;"></div>
+
+            <!-- header -->
+            <div style="position:relative; z-index:4; display:flex; align-items:center; gap:10px; padding:14px 16px 8px;">
+              <div style="width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:rgba(8,22,36,0.5); border:1px solid rgba(155,77,255,0.35); cursor:pointer; color:#c9aeff; font-size:16px; flex-shrink:0;">❮</div>
+              <div style="flex:1; text-align:center; margin-right:32px; font-family:'Orbitron',sans-serif; font-size:18px; font-weight:800; letter-spacing:2px; color:#fff; text-shadow:0 0 10px rgba(155,77,255,0.5);">FORGE</div>
+            </div>
+
+            <!-- resources -->
+            <div style="position:relative; z-index:4; display:flex; gap:8px; padding:0 16px 8px;">
+              <div style="display:flex; align-items:center; gap:6px; background:rgba(8,22,36,0.5); backdrop-filter:blur(8px); border:1px solid rgba(155,77,255,0.35); border-radius:20px; padding:4px 12px 4px 9px;"><svg width="13" height="15" viewBox="0 0 14 16"><polygon points="7,0 14,4 14,12 7,16 0,12 0,4" fill="none" stroke="#9b4dff" stroke-width="1.4"/></svg><span style="font-family:'Orbitron',sans-serif; font-size:13px; font-weight:700; color:#c9aeff;">1,450,220</span></div>
+              <div style="display:flex; align-items:center; gap:6px; background:rgba(8,22,36,0.5); backdrop-filter:blur(8px); border:1px solid rgba(199,204,214,0.4); border-radius:20px; padding:4px 12px 4px 9px;"><svg width="12" height="12" viewBox="0 0 13 13"><rect x="1.5" y="1.5" width="10" height="10" transform="rotate(45 6.5 6.5)" fill="none" stroke="#c7ccd6" stroke-width="1.4"/></svg><span style="font-family:'Orbitron',sans-serif; font-size:13px; font-weight:700; color:#c7ccd6;">890,340</span></div>
+            </div>
+
+            <!-- sub-tabs -->
+            <div style="position:relative; z-index:4; display:flex; gap:3px; padding:2px 12px 8px;">
+              <div onClick="{{ upgC }}" style="flex:1; text-align:center; padding:7px 2px; border-radius:7px; cursor:pointer; font-family:'Orbitron',sans-serif; font-size:10px; font-weight:800; letter-spacing:0.3px; color:{{ tabUpgColorC }}; background:{{ tabUpgBgC }}; border:1px solid rgba(155,77,255,0.3);">UPGRADE</div>
+              <div onClick="{{ smithC }}" style="flex:1; text-align:center; padding:7px 2px; border-radius:7px; cursor:pointer; font-family:'Orbitron',sans-serif; font-size:10px; font-weight:800; letter-spacing:0.3px; color:{{ tabSmithColorC }}; background:{{ tabSmithBgC }}; border:1px solid rgba(155,77,255,0.3);">SMITH</div>
+              <div onClick="{{ enhC }}" style="flex:1; text-align:center; padding:7px 2px; border-radius:7px; cursor:pointer; font-family:'Orbitron',sans-serif; font-size:10px; font-weight:800; letter-spacing:0.3px; color:{{ tabEnhColorC }}; background:{{ tabEnhBgC }}; border:1px solid rgba(155,77,255,0.3);">ENHANCE</div>
+              <div onClick="{{ legC }}" style="flex:1; text-align:center; padding:7px 2px; border-radius:7px; cursor:pointer; font-family:'Orbitron',sans-serif; font-size:10px; font-weight:800; letter-spacing:0.3px; color:{{ tabLegColorC }}; background:{{ tabLegBgC }}; border:1px solid rgba(155,77,255,0.3);">LEGEND</div>
+              <div onClick="{{ setC }}" style="flex:1; text-align:center; padding:7px 2px; border-radius:7px; cursor:pointer; font-family:'Orbitron',sans-serif; font-size:10px; font-weight:800; letter-spacing:0.3px; color:{{ tabSetColorC }}; background:{{ tabSetBgC }}; border:1px solid rgba(155,77,255,0.3);">SET SHOP</div>
+            </div>
+
+            <!-- scroll -->
+            <div class="fg-scroll" style="position:relative; z-index:3; flex:1; overflow-y:auto; padding:2px 0 6px;">
+
+              <!-- ============ UPGRADE STATS ============ -->
+              <sc-if value="{{ isUpgC }}" hint-placeholder-val="{{ true }}">
+              <div style="padding:2px 16px;">
+                <div style="font-family:'Orbitron',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.5px; color:#8188c2; margin:2px 0 10px;">CORE STAT UPGRADES</div>
+                <div style="display:flex; flex-direction:column; gap:10px;">
+                  <div style="padding:12px 14px; border-radius:12px; background:rgba(6,9,14,0.72); border:1.5px solid rgba(155,77,255,0.32);">
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;"><span style="font-family:'Orbitron',sans-serif; font-size:13px; font-weight:800; color:#c9aeff; letter-spacing:1px;">⚔ ATTACK POWER</span><span style="font-family:'Orbitron',sans-serif; font-size:11px; color:#8188c2;">LV 14</span></div>
+                    <div style="font-family:'Share Tech Mono',monospace; font-size:13px; color:#cdd5e0; margin-bottom:10px;">Current: <b style="color:#fff;">4,280 ATK</b> · +30 per level</div>
+                    <div style="width:100%; padding:9px 0; text-align:center; border-radius:9px; background:linear-gradient(135deg,#9b4dff,#b32c0d); box-shadow:0 0 12px rgba(155,77,255,0.4); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:#fff; letter-spacing:0.5px;">UPGRADE · 12,000 ⬡</div>
+                  </div>
+                  <div style="padding:12px 14px; border-radius:12px; background:rgba(6,9,14,0.72); border:1.5px solid rgba(199,204,214,0.32);">
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;"><span style="font-family:'Orbitron',sans-serif; font-size:13px; font-weight:800; color:#eef3fb; letter-spacing:1px;">🛡 DEFENSE</span><span style="font-family:'Orbitron',sans-serif; font-size:11px; color:#8188c2;">LV 9</span></div>
+                    <div style="font-family:'Share Tech Mono',monospace; font-size:13px; color:#cdd5e0; margin-bottom:10px;">Current: <b style="color:#fff;">3,150 DEF</b> · +20 per level</div>
+                    <div style="width:100%; padding:9px 0; text-align:center; border-radius:9px; background:linear-gradient(135deg,#dde2ea,#9aa2ae); box-shadow:0 0 12px rgba(199,204,214,0.3); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:#16181c; letter-spacing:0.5px;">UPGRADE · 8,000 ⬡</div>
+                  </div>
+                  <div style="padding:12px 14px; border-radius:12px; background:rgba(6,9,14,0.72); border:1.5px solid rgba(255,110,60,0.34);">
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;"><span style="font-family:'Orbitron',sans-serif; font-size:13px; font-weight:800; color:#ff6a4d; letter-spacing:1px;">♥ HULL HP</span><span style="font-family:'Orbitron',sans-serif; font-size:11px; color:#8188c2;">LV 21</span></div>
+                    <div style="font-family:'Share Tech Mono',monospace; font-size:13px; color:#cdd5e0; margin-bottom:10px;">Current: <b style="color:#fff;">14,500 HP</b> · +250 per level</div>
+                    <div style="width:100%; padding:9px 0; text-align:center; border-radius:9px; background:rgba(30,20,20,0.8); border:1px solid rgba(255,95,122,0.3); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:rgba(255,110,60,0.6); letter-spacing:0.5px;">NEED 4,200 MORE ⬡</div>
+                  </div>
+                </div>
+              </div>
+              </sc-if>
+
+              <!-- ============ WEAPON SMITH ============ -->
+              <sc-if value="{{ isSmithC }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:2px 16px;">
+                <div style="font-family:'Orbitron',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.5px; color:#8188c2; margin:2px 0 10px;">WEAPON RARITY REFINEMENT</div>
+                <div style="padding:16px 14px 14px; border-radius:14px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(155,77,255,0.35); box-shadow:0 8px 24px rgba(0,0,0,0.5);">
+                  <div style="position:relative; width:220px; height:220px; margin:0 auto;">
+                    <svg width="220" height="220" style="position:absolute; top:0; left:0; animation:runeSpinRev 14s linear infinite;"><circle cx="110" cy="110" r="100" fill="none" stroke="rgba(155,77,255,0.3)" stroke-width="1.5" stroke-dasharray="6,4"/></svg>
+                    <div style="position:absolute; top:14px; left:14px; width:192px; height:192px; border-radius:50%; background:conic-gradient(from 0deg, transparent 0deg, #9b4dff 55deg, transparent 130deg, transparent 360deg); animation:spinFlow 4s linear infinite;"></div>
+                    <div style="position:absolute; top:25px; left:25px; width:170px; height:170px; border-radius:50%; background:rgba(6,9,14,0.97);"></div>
+                    <svg width="220" height="220" style="position:absolute; top:0; left:0; animation:runeSpin 20s linear infinite;"><circle cx="110" cy="110" r="85" fill="none" stroke="rgba(199,204,214,0.3)" stroke-width="1" stroke-dasharray="20,6"/></svg>
+
+                    <div style="position:absolute; top:0px; left:88px; width:44px; height:44px; border-radius:9px; background:rgba(10,15,25,0.95); border:2px solid rgba(245,166,35,0.6); box-shadow:0 0 8px rgba(0,0,0,0.6); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:3;"><span style="font-family:'Orbitron',sans-serif; font-size:7px; font-weight:800; color:#8188c2; letter-spacing:0.3px;">NEXT</span><span style="font-family:'Share Tech Mono',monospace; font-size:9px; font-weight:800; color:#f5a623;">LEGEND</span></div>
+
+                    <div style="position:absolute; top:132px; left:164px; width:44px; height:44px; border-radius:9px; background:rgba(10,15,25,0.95); border:2px solid rgba(95,224,138,0.6); box-shadow:0 0 8px rgba(0,0,0,0.6); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:3;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5fe08a" stroke-width="1.8"><path d="M12 2C8 8 5 12 5 15a7 7 0 0 0 14 0c0-3-3-7-7-13z"/></svg><span style="font-family:'Share Tech Mono',monospace; font-size:8px; font-weight:800; color:#5fe08a;">5/5</span></div>
+
+                    <div style="position:absolute; top:132px; left:12px; width:44px; height:44px; border-radius:9px; background:rgba(10,15,25,0.95); border:2px solid rgba(255,95,122,0.6); box-shadow:0 0 8px rgba(0,0,0,0.6); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:3;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff8080" stroke-width="1.8"><polygon points="7,0 14,4 14,12 7,16 0,12 0,4" transform="translate(5,4)"/></svg><span style="font-family:'Share Tech Mono',monospace; font-size:7px; font-weight:800; color:#ff8080;">100K</span></div>
+
+                    <div style="position:absolute; top:74px; left:74px; width:72px; height:72px; border-radius:14px; background:linear-gradient(135deg,rgba(155,77,255,0.28),rgba(0,0,0,0.65)); border:2.5px solid rgba(155,77,255,0.7); box-shadow:0 0 16px rgba(155,77,255,0.4); display:flex; align-items:center; justify-content:center; z-index:4;"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#c9aeff" stroke-width="1.7"><path d="M12 2l2.5 6.5L21 11l-6.5 2.5L12 20l-2.5-6.5L3 11l6.5-2.5z"/></svg></div>
+                  </div>
+                  <div style="text-align:center; margin-top:8px;">
+                    <div style="font-family:'Orbitron',sans-serif; font-size:15px; font-weight:800; color:#fff;">AETHER LANCE</div>
+                    <div style="font-family:'Share Tech Mono',monospace; font-size:12px; color:#f5a623; margin-top:2px;">Grade: EPIC</div>
+                  </div>
+                  <div style="height:1px; background:rgba(155,77,255,0.2); margin:14px 0;"></div>
+                  <div style="font-family:'Orbitron',sans-serif; font-size:12px; font-weight:700; color:#c9aeff; letter-spacing:0.5px; margin-bottom:12px;">NEXT GRADE: LEGENDARY (+20%)</div>
+                  <div style="width:100%; padding:11px 0; text-align:center; border-radius:10px; background:linear-gradient(135deg,#9b4dff,#b32c0d); box-shadow:0 0 14px rgba(155,77,255,0.4); font-family:'Orbitron',sans-serif; font-size:13px; font-weight:800; color:#fff; letter-spacing:1px;">REFINE WEAPON</div>
+                </div>
+
+                <div style="font-family:'Orbitron',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.5px; color:#8188c2; margin:16px 0 10px;">CRAFT VAMPIRIC WEAPON</div>
+                <div style="padding:14px; border-radius:14px; background:rgba(6,9,14,0.72); border:1.5px solid rgba(155,77,255,0.3);">
+                  <div style="font-family:'Saira',sans-serif; font-size:13px; color:#a8b4c4; line-height:1.5; margin-bottom:12px;">Sacrifice an Epic+ weapon to imbue AETHER LANCE with a lifesteal property.</div>
+                  <div style="padding:10px 12px; border-radius:8px; background:rgba(3,8,20,0.6); border:1px solid rgba(155,77,255,0.35); font-family:'Share Tech Mono',monospace; font-size:12px; color:#8188c2; margin-bottom:10px;">SACRIFICE: Void Cleaver (Lv.38) ▾</div>
+                  <div style="display:flex; flex-direction:column; gap:6px; margin-bottom:12px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 11px; border-radius:8px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.35);"><span style="font-family:'Saira',sans-serif; font-size:13px; color:#cdd5e0;">Sacrifice Weapon</span><span style="font-family:'Share Tech Mono',monospace; font-size:13px; color:#5fe08a; font-weight:700;">1 / 1</span></div>
+                    <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 11px; border-radius:8px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.35);"><span style="font-family:'Saira',sans-serif; font-size:13px; color:#cdd5e0;">Talic of Favor</span><span style="font-family:'Share Tech Mono',monospace; font-size:13px; color:#5fe08a; font-weight:700;">1 / 1</span></div>
+                  </div>
+                  <div style="width:100%; padding:11px 0; text-align:center; border-radius:10px; background:linear-gradient(135deg,#9b4dff,#b32c0d); box-shadow:0 0 14px rgba(155,77,255,0.4); font-family:'Orbitron',sans-serif; font-size:13px; font-weight:800; color:#fff; letter-spacing:1px;">FORGE VAMPIRIC WEAPON</div>
+                </div>
+              </div>
+              </sc-if>
+
+              <!-- ============ ITEM ENHANCEMENT ============ -->
+              <sc-if value="{{ isEnhC }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:2px 16px;">
+                <div style="font-family:'Orbitron',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.5px; color:#8188c2; margin:2px 0 10px;">SELECT EQUIPMENT TO ENHANCE</div>
+                <div style="padding:10px 12px; border-radius:8px; background:rgba(3,8,20,0.6); border:1px solid rgba(155,77,255,0.35); font-family:'Share Tech Mono',monospace; font-size:12px; color:#c9aeff; margin-bottom:14px;">WEAPON: Aether Lance (+5) ▾</div>
+
+                <div style="padding:16px 14px 14px; border-radius:14px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(155,77,255,0.35); box-shadow:0 8px 24px rgba(0,0,0,0.5);">
+                  <div style="position:relative; width:260px; height:260px; margin:0 auto;">
+                    <svg width="260" height="260" style="position:absolute; top:0; left:0; animation:runeSpinRev 14s linear infinite;"><circle cx="130" cy="130" r="120" fill="none" stroke="rgba(155,77,255,0.3)" stroke-width="1.5" stroke-dasharray="6,4"/></svg>
+                    <div style="position:absolute; top:20px; left:20px; width:220px; height:220px; border-radius:50%; background:conic-gradient(from 0deg, transparent 0deg, #9b4dff 55deg, transparent 130deg, transparent 360deg); animation:spinFlow 4s linear infinite;"></div>
+                    <div style="position:absolute; top:32px; left:32px; width:196px; height:196px; border-radius:50%; background:rgba(6,9,14,0.97);"></div>
+                    <svg width="260" height="260" style="position:absolute; top:0; left:0; animation:runeSpin 20s linear infinite;"><circle cx="130" cy="130" r="100" fill="none" stroke="rgba(199,204,214,0.3)" stroke-width="1" stroke-dasharray="20,6"/></svg>
+
+                    <div style="position:absolute; top:10px; left:108px; width:44px; height:44px; border-radius:9px; background:rgba(10,15,25,0.95); border:2px solid rgba(95,224,138,0.6); box-shadow:0 0 8px rgba(0,0,0,0.6); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:3;"><span style="font-family:'Share Tech Mono',monospace; font-size:11px; font-weight:800; color:#5fe08a;">35%</span><span style="font-family:'Orbitron',sans-serif; font-size:6px; font-weight:800; color:#8188c2; letter-spacing:0.3px;">RATE</span></div>
+
+                    <div style="position:absolute; top:78px; left:201px; width:44px; height:44px; border-radius:9px; background:rgba(10,15,25,0.95); border:2px solid rgba(255,95,122,0.6); box-shadow:0 0 8px rgba(0,0,0,0.6); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:3;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff8080" stroke-width="1.8"><polygon points="12 2 20 7 20 17 12 22 4 17 4 7"/></svg><span style="font-family:'Share Tech Mono',monospace; font-size:8px; font-weight:800; color:#ff8080;">80/120</span></div>
+
+                    <div style="position:absolute; top:187px; left:166px; width:44px; height:44px; border-radius:9px; background:rgba(10,15,25,0.95); border:2px solid rgba(95,224,138,0.6); box-shadow:0 0 8px rgba(0,0,0,0.6); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:3;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5fe08a" stroke-width="1.8"><path d="M12 2C8 8 5 12 5 15a7 7 0 0 0 14 0c0-3-3-7-7-13z"/></svg><span style="font-family:'Share Tech Mono',monospace; font-size:8px; font-weight:800; color:#5fe08a;">1/1</span></div>
+
+                    <div style="position:absolute; top:187px; left:50px; width:44px; height:44px; border-radius:9px; background:rgba(10,15,25,0.95); border:2px solid rgba(155,77,255,0.5); box-shadow:0 0 8px rgba(0,0,0,0.6); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:3;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c9aeff" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg><span style="font-family:'Orbitron',sans-serif; font-size:6px; font-weight:800; color:#c9aeff; letter-spacing:0.2px;">RELIC</span></div>
+
+                    <div style="position:absolute; top:78px; left:15px; width:44px; height:44px; border-radius:9px; background:rgba(10,15,25,0.95); border:2px solid rgba(199,204,214,0.5); box-shadow:0 0 8px rgba(0,0,0,0.6); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:3;"><span style="font-family:'Share Tech Mono',monospace; font-size:11px; font-weight:900; color:#c7ccd6;">+5</span><span style="font-family:'Orbitron',sans-serif; font-size:6px; font-weight:800; color:#8188c2;">LEVEL</span></div>
+
+                    <div style="position:absolute; top:90px; left:90px; width:80px; height:80px; border-radius:14px; background:linear-gradient(135deg,rgba(155,77,255,0.28),rgba(0,0,0,0.65)); border:2.5px solid rgba(155,77,255,0.7); box-shadow:0 0 16px rgba(155,77,255,0.4); display:flex; align-items:center; justify-content:center; z-index:4;"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#c9aeff" stroke-width="1.7"><path d="M12 2l2.5 6.5L21 11l-6.5 2.5L12 20l-2.5-6.5L3 11l6.5-2.5z"/></svg></div>
+                  </div>
+                  <div style="text-align:center; margin-top:8px;">
+                    <div style="font-family:'Orbitron',sans-serif; font-size:15px; font-weight:800; color:#fff;">AETHER LANCE <span style="color:#5fe08a;">+5 → +6</span></div>
+                  </div>
+                  <div style="padding:10px 12px; border-radius:8px; background:rgba(155,77,255,0.06); border:1px solid rgba(155,77,255,0.28); margin:14px 0 12px;">
+                    <div style="font-family:'Orbitron',sans-serif; font-size:11px; font-weight:800; color:#c9aeff; letter-spacing:0.5px; margin-bottom:6px;">STATS PREVIEW (+5 → +6)</div>
+                    <div style="display:flex; justify-content:space-between; font-family:'Share Tech Mono',monospace; font-size:13px; color:#cdd5e0;"><span>ATK Bonus</span><span>620 → <b style="color:#5fe08a;">682</b></span></div>
+                  </div>
+                  <div style="padding:10px 12px; border-radius:8px; background:rgba(255,68,68,0.12); border:1.5px dashed #ff4444; font-family:'Share Tech Mono',monospace; font-size:11px; color:#ff8080; text-align:center; line-height:1.4; margin-bottom:12px;">⚠ +5 AND ABOVE RISKS ITEM DESTRUCTION ON FAILURE</div>
+                  <div style="width:100%; padding:11px 0; text-align:center; border-radius:10px; background:rgba(30,20,20,0.8); border:1px solid rgba(255,95,122,0.3); font-family:'Orbitron',sans-serif; font-size:13px; font-weight:800; color:rgba(255,110,60,0.6); letter-spacing:1px;">NEED MORE DIVINE CREST</div>
+                </div>
+              </div>
+              </sc-if>
+
+              <!-- ============ LEGENDARY CRAFTING ============ -->
+              <sc-if value="{{ isLegC }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:2px 16px;">
+                <div style="text-align:center; padding:8px 0 14px; border-bottom:1px solid rgba(245,166,35,0.3); margin-bottom:14px; font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; letter-spacing:1px; color:#f5a623;">⚔ LEGENDARY FORGE</div>
+                <div style="display:flex; flex-direction:column; gap:12px;">
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(245,166,35,0.4); box-shadow:0 0 14px rgba(245,166,35,0.14);">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><div style="width:40px; height:40px; border-radius:9px; background:rgba(245,166,35,0.15); border:1.5px solid rgba(245,166,35,0.5); display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="1.8"><path d="M14.5 17.5L3 6M17.5 14.5L6 3M19 19v-4M19 19h-4M5 5v4M5 5h4"/></svg></div><div><div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#f5a623;">Legendary Weapon</div><div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-top:2px;">ATK+200 · HP+2000 · Crit+5%</div></div></div>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Epic Weapon ×1 (1/1)</div>
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Ignis Shard ×6 (6/6)</div>
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,95,122,0.3); font-family:'Share Tech Mono',monospace; font-size:11px; color:#ff6a4d; font-weight:700;">Umbrix Shard ×6 (2/6)</div>
+                    </div>
+                    <div style="width:100%; padding:10px 0; text-align:center; border-radius:9px; background:rgba(30,20,20,0.8); border:1px solid rgba(255,95,122,0.3); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:rgba(255,110,60,0.6); letter-spacing:0.5px;">🔒 MATERIALS MISSING</div>
+                  </div>
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(245,166,35,0.4); box-shadow:0 0 14px rgba(245,166,35,0.14);">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><div style="width:40px; height:40px; border-radius:9px; background:rgba(245,166,35,0.15); border:1.5px solid rgba(245,166,35,0.5); display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="1.8"><path d="M12 2L3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5L12 2z"/></svg></div><div><div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#f5a623;">Legendary Armor</div><div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-top:2px;">DEF+120 · HP+2500</div></div></div>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Epic Armor ×1 (1/1)</div>
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Kryos Shard ×4 (4/4)</div>
+                    </div>
+                    <div style="width:100%; padding:10px 0; text-align:center; border-radius:9px; background:linear-gradient(135deg,#f5a623,#ff6b35); box-shadow:0 0 12px rgba(245,166,35,0.4); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:#1a0f00; letter-spacing:0.5px;">⚡ CRAFT LEGENDARY ARMOR</div>
+                  </div>
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(245,166,35,0.4); box-shadow:0 0 14px rgba(245,166,35,0.14);">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><div style="width:40px; height:40px; border-radius:9px; background:rgba(245,166,35,0.15); border:1.5px solid rgba(245,166,35,0.5); display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="1.8"><path d="M12 2a10 10 0 0 0-10 10c0 5.5 6 8 10 10 4-2 10-4.5 10-10A10 10 0 0 0 12 2z"/><path d="M12 6a4 4 0 0 0-4 4h8a4 4 0 0 0-4-4z"/></svg></div><div><div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#f5a623;">Legendary Helmet</div><div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-top:2px;">DEF+120 · HP+2500 (per piece)</div></div></div>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Epic Armor ×1 (1/1)</div>
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,95,122,0.3); font-family:'Share Tech Mono',monospace; font-size:11px; color:#ff6a4d; font-weight:700;">Ignis Shard ×4 (3/4)</div>
+                    </div>
+                    <div style="width:100%; padding:10px 0; text-align:center; border-radius:9px; background:rgba(30,20,20,0.8); border:1px solid rgba(255,95,122,0.3); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:rgba(255,110,60,0.6); letter-spacing:0.5px;">🔒 MATERIALS MISSING</div>
+                  </div>
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(245,166,35,0.4); box-shadow:0 0 14px rgba(245,166,35,0.14);">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><div style="width:40px; height:40px; border-radius:9px; background:rgba(245,166,35,0.15); border:1.5px solid rgba(245,166,35,0.5); display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="1.8"><path d="M4 3h16l-2 8 2 10-8-3-8 3 2-10L4 3z"/></svg></div><div><div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#f5a623;">Legendary Mantle</div><div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-top:2px;">DEF+120 · HP+2500 (per piece)</div></div></div>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Epic Armor ×1 (1/1)</div>
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Zephra Shard ×4 (4/4)</div>
+                    </div>
+                    <div style="width:100%; padding:10px 0; text-align:center; border-radius:9px; background:linear-gradient(135deg,#f5a623,#ff6b35); box-shadow:0 0 12px rgba(245,166,35,0.4); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:#1a0f00; letter-spacing:0.5px;">⚡ CRAFT LEGENDARY MANTLE</div>
+                  </div>
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(245,166,35,0.4); box-shadow:0 0 14px rgba(245,166,35,0.14);">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><div style="width:40px; height:40px; border-radius:9px; background:rgba(245,166,35,0.15); border:1.5px solid rgba(245,166,35,0.5); display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="1.8"><path d="M18 10V8a3 3 0 0 0-6 0v2M14 10V6a2 2 0 0 0-4 0v4M10 10V5a2 2 0 0 0-4 0v5M6 10v7a6 6 0 0 0 12 0v-7"/></svg></div><div><div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#f5a623;">Legendary Gloves</div><div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-top:2px;">DEF+120 · HP+2500 (per piece)</div></div></div>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,95,122,0.3); font-family:'Share Tech Mono',monospace; font-size:11px; color:#ff6a4d; font-weight:700;">Epic Armor ×1 (0/1)</div>
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,95,122,0.3); font-family:'Share Tech Mono',monospace; font-size:11px; color:#ff6a4d; font-weight:700;">Virel Shard ×4 (2/4)</div>
+                    </div>
+                    <div style="width:100%; padding:10px 0; text-align:center; border-radius:9px; background:rgba(30,20,20,0.8); border:1px solid rgba(255,95,122,0.3); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:rgba(255,110,60,0.6); letter-spacing:0.5px;">🔒 MATERIALS MISSING</div>
+                  </div>
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(245,166,35,0.4); box-shadow:0 0 14px rgba(245,166,35,0.14);">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><div style="width:40px; height:40px; border-radius:9px; background:rgba(245,166,35,0.15); border:1.5px solid rgba(245,166,35,0.5); display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="1.8"><path d="M7 4h3v10l3 2v4H5v-4l2-2V4z"/><path d="M14 4h3v10l3 2v4h-8v-4l2-2V4z"/></svg></div><div><div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#f5a623;">Legendary Boots</div><div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-top:2px;">DEF+120 · HP+2500 (per piece)</div></div></div>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Epic Armor ×1 (1/1)</div>
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Umbrix Shard ×4 (4/4)</div>
+                    </div>
+                    <div style="width:100%; padding:10px 0; text-align:center; border-radius:9px; background:linear-gradient(135deg,#f5a623,#ff6b35); box-shadow:0 0 12px rgba(245,166,35,0.4); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:#1a0f00; letter-spacing:0.5px;">⚡ CRAFT LEGENDARY BOOTS</div>
+                  </div>
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(245,166,35,0.4); box-shadow:0 0 14px rgba(245,166,35,0.14);">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><div style="width:40px; height:40px; border-radius:9px; background:rgba(245,166,35,0.15); border:1.5px solid rgba(245,166,35,0.5); display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#f5a623;">Legendary Shield</div><div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-top:2px;">DEF+120 · HP+2500</div></div></div>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Epic Armor ×1 (1/1)</div>
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,95,122,0.3); font-family:'Share Tech Mono',monospace; font-size:11px; color:#ff6a4d; font-weight:700;">Kryos Shard ×4 (1/4)</div>
+                    </div>
+                    <div style="width:100%; padding:10px 0; text-align:center; border-radius:9px; background:rgba(30,20,20,0.8); border:1px solid rgba(255,95,122,0.3); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:rgba(255,110,60,0.6); letter-spacing:0.5px;">🔒 MATERIALS MISSING</div>
+                  </div>
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(245,166,35,0.4); box-shadow:0 0 14px rgba(245,166,35,0.14);">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><div style="width:40px; height:40px; border-radius:9px; background:rgba(245,166,35,0.15); border:1.5px solid rgba(245,166,35,0.5); display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="1.8"><circle cx="12" cy="14" r="6"/><path d="M9 8l3-5 3 5"/></svg></div><div><div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#f5a623;">Legendary Ring</div><div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-top:2px;">ATK+100 · HP+1500 · Crit+3% (per piece)</div></div></div>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Epic Ring ×1 (1/1)</div>
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Zephra Shard ×5 (5/5)</div>
+                    </div>
+                    <div style="width:100%; padding:10px 0; text-align:center; border-radius:9px; background:linear-gradient(135deg,#f5a623,#ff6b35); box-shadow:0 0 12px rgba(245,166,35,0.4); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:#1a0f00; letter-spacing:0.5px;">⚡ CRAFT LEGENDARY RING</div>
+                  </div>
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(245,166,35,0.4); box-shadow:0 0 14px rgba(245,166,35,0.14);">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><div style="width:40px; height:40px; border-radius:9px; background:rgba(245,166,35,0.15); border:1.5px solid rgba(245,166,35,0.5); display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="1.8"><path d="M6 3c0 6 3 10 6 13 3-3 6-7 6-13"/><polygon points="12,15 9,19 12,22 15,19" fill="#f5a623" fill-opacity="0.3"/></svg></div><div><div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#f5a623;">Legendary Amulet</div><div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-top:2px;">DEF+100 · HP+2000 (per piece)</div></div></div>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,95,122,0.3); font-family:'Share Tech Mono',monospace; font-size:11px; color:#ff6a4d; font-weight:700;">Epic Amulet ×1 (0/1)</div>
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,95,122,0.3); font-family:'Share Tech Mono',monospace; font-size:11px; color:#ff6a4d; font-weight:700;">Virel Shard ×5 (3/5)</div>
+                    </div>
+                    <div style="width:100%; padding:10px 0; text-align:center; border-radius:9px; background:rgba(30,20,20,0.8); border:1px solid rgba(255,95,122,0.3); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:rgba(255,110,60,0.6); letter-spacing:0.5px;">🔒 MATERIALS MISSING</div>
+                  </div>
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(245,166,35,0.4); box-shadow:0 0 14px rgba(245,166,35,0.14);">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;"><div style="width:40px; height:40px; border-radius:9px; background:rgba(245,166,35,0.15); border:1.5px solid rgba(245,166,35,0.5); display:flex; align-items:center; justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="1.8"><path d="M4 3h16l-2 8 2 10-8-3-8 3 2-10L4 3z"/></svg></div><div><div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#f5a623;">Legendary Cape</div><div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-top:2px;">ATK+80 · DEF+80 · HP+2000 · Crit+2%</div></div></div>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Epic Cape ×1 (1/1)</div>
+                      <div style="padding:4px 9px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.4); font-family:'Share Tech Mono',monospace; font-size:11px; color:#5fe08a; font-weight:700;">Ignis Shard ×5 (5/5)</div>
+                    </div>
+                    <div style="width:100%; padding:10px 0; text-align:center; border-radius:9px; background:linear-gradient(135deg,#f5a623,#ff6b35); box-shadow:0 0 12px rgba(245,166,35,0.4); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:800; color:#1a0f00; letter-spacing:0.5px;">⚡ CRAFT LEGENDARY CAPE</div>
+                  </div>
+                </div>
+              </div>
+              </sc-if>
+
+              <!-- ============ SET SHOP ============ -->
+              <sc-if value="{{ isSetC }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:2px 16px;">
+                <div style="font-family:'Orbitron',sans-serif; font-size:12px; font-weight:700; letter-spacing:1.5px; color:#8188c2; margin:2px 0 10px;">SET SHOP</div>
+                <div style="display:flex; flex-direction:column; gap:12px;">
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(245,166,35,0.4);">
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;"><span style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#f5a623;">👑 Eminence Set</span><span style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#8188c2;">3 / 7</span></div>
+                    <div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-bottom:10px;">Full Set: ATK+100 · DEF+100 · HP+2000 · Crit+2%</div>
+                    <div style="display:flex; flex-direction:column; gap:6px;">
+                      <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 11px; border-radius:8px; background:rgba(0,0,0,0.3); border:1px solid rgba(95,224,138,0.3);"><span style="font-family:'Saira',sans-serif; font-size:13px; color:#cdd5e0;">Helmet</span><span style="font-family:'Share Tech Mono',monospace; font-size:12px; color:#5fe08a; font-weight:700;">OWNED</span></div>
+                      <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 11px; border-radius:8px; background:rgba(0,0,0,0.3); border:1px solid rgba(245,166,35,0.35);"><span style="font-family:'Saira',sans-serif; font-size:13px; color:#cdd5e0;">Armor</span><span style="font-family:'Share Tech Mono',monospace; font-size:12px; color:#f5a623; font-weight:700;">100M ⬡</span></div>
+                    </div>
+                  </div>
+                  <div style="padding:14px; border-radius:12px; background:rgba(6,9,14,0.75); border:1.5px solid rgba(255,68,68,0.35);">
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;"><span style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:#ff6a4d;">⚔ Attack Council Set</span><span style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#8188c2;">0 / 6</span></div>
+                    <div style="font-family:'Share Tech Mono',monospace; font-size:11px; color:#a8b4c4; margin-bottom:10px;">Full Set: ATK+100 · DEF+50 · HP+1200</div>
+                    <div style="display:flex; flex-direction:column; gap:6px;">
+                      <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 11px; border-radius:8px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,95,122,0.3);"><span style="font-family:'Saira',sans-serif; font-size:13px; color:#cdd5e0;">Helmet</span><span style="font-family:'Share Tech Mono',monospace; font-size:12px; color:#ff6a4d; font-weight:700;">50M ⬡</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </sc-if>
+
+              <div style="height:16px;"></div>
+            </div>
+
+            <!-- nav (FORGE active) -->
+            <div style="position:relative; z-index:3; display:flex; gap:2px; background:rgba(14,14,16,0.9); backdrop-filter:blur(10px); border-top:1px solid rgba(155,77,255,0.25); padding:9px 4px 11px;">
+              <div style="flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; gap:3px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8188c2" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M12 2v9M8 5h8M10 8h4"/></svg><span style="font-family:'Orbitron',sans-serif; font-size:9px; font-weight:800; color:#8188c2;">BASE</span></div>
+              <div style="flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; gap:3px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8188c2" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg><span style="font-family:'Orbitron',sans-serif; font-size:9px; font-weight:800; color:#8188c2;">CHAR</span></div>
+              <div style="flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; gap:3px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8188c2" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span style="font-family:'Orbitron',sans-serif; font-size:9px; font-weight:800; color:#8188c2;">RANKS</span></div>
+              <div style="flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; gap:3px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8188c2" stroke-width="2"><path d="M14.5 17.5L3 6M17.5 14.5L6 3M19 19v-4M19 19h-4M5 5v4M5 5h4"/></svg><span style="font-family:'Orbitron',sans-serif; font-size:9px; font-weight:800; color:#8188c2;">BATTLE</span></div>
+              <div style="flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; gap:3px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8188c2" stroke-width="2"><path d="M14.5 2L22 9.5m-5.5-4L11 11M3 21l8-8m-5.5.5l5 5"/></svg><span style="font-family:'Orbitron',sans-serif; font-size:9px; font-weight:800; color:#8188c2;">MINE</span></div>
+              <div style="flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; gap:3px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c9aeff" stroke-width="2" style="filter:drop-shadow(0 0 6px #c9aeff);"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg><span style="font-family:'Orbitron',sans-serif; font-size:9px; font-weight:800; color:#fff; text-shadow:0 0 8px rgba(155,77,255,0.6);">FORGE</span></div>
+              <div style="flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; gap:3px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8188c2" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span style="font-family:'Orbitron',sans-serif; font-size:9px; font-weight:800; color:#8188c2;">ASC</span></div>
+              <div style="flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; gap:3px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8188c2" stroke-width="2"><path d="M6 3h12l4 6-10 12L2 9z"/></svg><span style="font-family:'Orbitron',sans-serif; font-size:9px; font-weight:800; color:#8188c2;">SHOP</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    sub: { a: 'upgrade', b: 'upgrade', c: 'upgrade' },
+  };
+
+  setSub(f, tab) {
+    this.setState(s => ({ sub: { ...s.sub, [f]: tab } }));
+  }
+
+  renderVals() {
+    const s = this.state.sub;
+    const mk = (fac, accentColor) => {
+      const cur = s[fac];
+      const TABS = ['upgrade', 'smith', 'enh', 'leg', 'set'];
+      const out = {};
+      TABS.forEach(tab => {
+        const on = cur === tab;
+        out[tab + 'Color'] = on ? '#fff' : (fac === 'a' ? '#8a94a3' : fac === 'b' ? '#7d92a3' : '#8188c2');
+        out[tab + 'Bg'] = on ? `${accentColor}33` : 'transparent';
+      });
+      return out;
+    };
+    const a = mk('a', '#ff5222'), b = mk('b', '#3b82f6'), c = mk('c', '#9b4dff');
+    return {
+      upgA: () => this.setSub('a', 'upgrade'), smithA: () => this.setSub('a', 'smith'), enhA: () => this.setSub('a', 'enh'), legA: () => this.setSub('a', 'leg'), setA: () => this.setSub('a', 'set'),
+      upgB: () => this.setSub('b', 'upgrade'), smithB: () => this.setSub('b', 'smith'), enhB: () => this.setSub('b', 'enh'), legB: () => this.setSub('b', 'leg'), setB: () => this.setSub('b', 'set'),
+      upgC: () => this.setSub('c', 'upgrade'), smithC: () => this.setSub('c', 'smith'), enhC: () => this.setSub('c', 'enh'), legC: () => this.setSub('c', 'leg'), setC: () => this.setSub('c', 'set'),
+      isUpgA: s.a === 'upgrade', isSmithA: s.a === 'smith', isEnhA: s.a === 'enh', isLegA: s.a === 'leg', isSetA: s.a === 'set',
+      isUpgB: s.b === 'upgrade', isSmithB: s.b === 'smith', isEnhB: s.b === 'enh', isLegB: s.b === 'leg', isSetB: s.b === 'set',
+      isUpgC: s.c === 'upgrade', isSmithC: s.c === 'smith', isEnhC: s.c === 'enh', isLegC: s.c === 'leg', isSetC: s.c === 'set',
+      tabUpgColorA: a.upgradeColor, tabUpgBgA: a.upgradeBg, tabSmithColorA: a.smithColor, tabSmithBgA: a.smithBg, tabEnhColorA: a.enhColor, tabEnhBgA: a.enhBg, tabLegColorA: a.legColor, tabLegBgA: a.legBg, tabSetColorA: a.setColor, tabSetBgA: a.setBg,
+      tabUpgColorB: b.upgradeColor, tabUpgBgB: b.upgradeBg, tabSmithColorB: b.smithColor, tabSmithBgB: b.smithBg, tabEnhColorB: b.enhColor, tabEnhBgB: b.enhBg, tabLegColorB: b.legColor, tabLegBgB: b.legBg, tabSetColorB: b.setColor, tabSetBgB: b.setBg,
+      tabUpgColorC: c.upgradeColor, tabUpgBgC: c.upgradeBg, tabSmithColorC: c.smithColor, tabSmithBgC: c.smithBg, tabEnhColorC: c.enhColor, tabEnhBgC: c.enhBg, tabLegColorC: c.legColor, tabLegBgC: c.legBg, tabSetColorC: c.setColor, tabSetBgC: c.setBg,
+    };
+  }
+}
+</script>
+</body>
+</html>
