@@ -1,0 +1,6 @@
+{
+  "name": "Anime Sci-Fi RPG Battle Arena",
+  "description": "An interactive 8 vs 8 mobile landscape turn-based sci-fi RPG battle simulator featuring Elves, Humans, and Robots with high-tech HUD panels and customizable attacks.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -107,17 +107,18 @@ export default function Auth() {
           100% { transform: translateY(-160px) translateX(12px); opacity: 0; }
         }
         .auth-root-bg {
-          min-height: 100%;
+          height: 100%;
           width: 100%;
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 24px;
+          padding: 16px;
           background: radial-gradient(circle at center, #0a172e 0%, #030710 100%);
           font-family: var(--font-body);
           position: relative;
-          overflow: hidden;
+          overflow-y: auto;
         }
+
         .auth-ambient-glow {
           position: absolute;
           left: 50%;

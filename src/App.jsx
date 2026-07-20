@@ -315,12 +315,13 @@ export default function App() {
   if (!user) {
     return (
       <div className="game-root">
-        <div className={`game-container ${isLandscape ? 'landscape' : ''}`} data-faction={player?.race || ''} style={{ background: containerBg }}>
+        <div className="game-container" data-faction={player?.race || ''} style={{ background: containerBg }}>
           <Auth />
         </div>
       </div>
     )
   }
+
 
   // Lock user in Character Creator if no active character exists
   if (!player?.race) {
