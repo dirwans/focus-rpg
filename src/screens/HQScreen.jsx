@@ -574,7 +574,7 @@ export default function HQScreen() {
                   marginLeft: 'auto',
                   background: 'rgba(19,20,21,0.45)',
                   backdropFilter: 'blur(14px)',
-                  border: '1px solid 'rgba(255,140,60,0.4)',
+                  border: "1px solid 'rgba(255,140,60,0.4)'",
                   borderRadius: 20,
                   padding: '6px 14px',
                   fontSize: 13,
