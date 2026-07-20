@@ -1,14 +1,12 @@
 import { useGameStore } from '../store/gameStore'
+import { getFactionTheme } from '../styles/factionThemes'
 
 const API_BASE = import.meta.env.VITE_API_URL || ''
 
-// Faction primary colors
-const FACTION_PRIMARY = {
-  arctron:  '#ff5222',
-  bionex:   '#ffd600',
-  celestra: '#00e5ff',
-}
-const getFactionPrimary = (race) => FACTION_PRIMARY[race] || '#00e5ff'
+// Faction primary colors - single source of truth (factionThemes.js), so
+// this never drifts out of sync with the colors used everywhere else
+// (HQScreen, BattleArena2D, TacticalHUDPanel, etc).
+const getFactionPrimary = (race) => getFactionTheme(race).primary
 
 // Original tabs — TIDAK DIUBAH
 const NAV_ITEMS = [
@@ -104,17 +102,20 @@ export default function BottomNav() {
       gap:                   4,
     }}>
       {NAV_ITEMS.map((n) => {
-        const isActive = screen === n.id
         let displayLabel = n.label
+        let targetScreen = n.id
         if (n.id === 'main') {
-          if (player?.race === 'arctron') displayLabel = 'HQ'
-          else if (player?.race === 'bionex') displayLabel = 'MAINFRAME'
+          // All 3 factions now use the landscape HQScreen, just re-themed/re-labelled per race.
+          targetScreen = 'hq'
+          if (player?.race === 'bionex') displayLabel = 'MAINFRAME'
           else if (player?.race === 'celestra') displayLabel = 'SANCTUARY'
+          else displayLabel = 'HQ'
         }
+        const isActive = screen === targetScreen
         return (
           <button
             key={n.id}
-            onClick={() => setScreen(n.id)}
+            onClick={() => setScreen(targetScreen)}
             style={{
               flex:           1,
               minWidth:       0,

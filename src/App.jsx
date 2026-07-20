@@ -8,6 +8,7 @@ import { loadSave, syncSave, subscribeSave } from './lib/saveSync'
 import { apiGetArchon, apiChipWar } from './lib/api'
 import { t } from './lib/translate'
 import { App as CapApp } from '@capacitor/app'
+import { Capacitor } from '@capacitor/core'
 import BottomNav from './components/BottomNav'
 import races from './data/races.json'
 import CharacterCreate from './components/CharacterCreate'
@@ -23,8 +24,9 @@ import PremiumShop from './screens/PremiumShop'
 import Ascension from './screens/Ascension'
 import Inventory from './screens/Inventory'
 import AuditorRoom from './screens/AuditorRoom'
+import HQScreen from './screens/HQScreen'
 
-const SCREENS = { main: Main, unit: Unit, ranks: Ranks, cargo: Cargo, trade: Trade, battle: Battle, mine: Mine, premium: PremiumShop, ascension: Ascension, inventory: Inventory }
+const SCREENS = { main: Main, hq: HQScreen, unit: Unit, ranks: Ranks, cargo: Cargo, trade: Trade, battle: Battle, mine: Mine, premium: PremiumShop, ascension: Ascension, inventory: Inventory }
 
 const snap = (gs) => JSON.stringify(gs ?? {})
 
@@ -57,13 +59,14 @@ export default function App() {
         return
       }
       const state = useGameStore.getState()
-      // 2. Lek dudu main screen → balik ke main
-      if (state.screen !== 'main') {
-        state.setScreen('main')
+      // 2. Lek dudu home screen (HQScreen, kabeh race saiki liwat kene -
+      // cocog karo BottomNav.jsx punya routing) → balik ke home dhisik
+      if (state.screen !== 'hq') {
+        state.setScreen('hq')
       } else {
         // 3. Wes nang main → tanya confirm exit
         const confirmExit = window.confirm(t('confirm_exit', 'Are you sure you want to logout / exit app?', state.player))
-        if (confirmExit) {
+        if (confirmExit && Capacitor.isNativePlatform()) {
           CapApp.exitApp()
         }
       }

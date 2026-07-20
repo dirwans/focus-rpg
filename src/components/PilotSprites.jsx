@@ -1,6 +1,5 @@
 import React from 'react'
 import { useGameStore, resolveItemImage } from '../store/gameStore'
-import DragonBonesCharacter from './DragonBonesCharacter'
 import GearOverlay from './GearOverlay'
 
 // Import modular sprites

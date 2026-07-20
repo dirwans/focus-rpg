@@ -141,6 +141,44 @@ export default function Auth() {
           z-index: 2;
           position: relative;
         }
+        /* Landscape (phones rotated, matches .game-container.landscape used
+           everywhere else) - the login form was still rendering as a narrow
+           portrait card floating in a sea of empty space either side. Split
+           into two columns instead: branding on the left, the actual form
+           on the right, so the wide frame gets used. */
+        .game-container.landscape .auth-root-bg {
+          padding: 10px 28px;
+          overflow-y: hidden;
+        }
+        .game-container.landscape .auth-card {
+          max-width: 720px;
+          flex-direction: row;
+          align-items: center;
+          gap: 36px;
+          padding: 10px 0;
+          max-height: 100%;
+        }
+        .game-container.landscape .auth-brand-col {
+          flex: 0 0 42%;
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+          align-items: center;
+          justify-content: center;
+        }
+        .game-container.landscape .auth-form-col {
+          flex: 1 1 auto;
+          min-width: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          max-height: 100%;
+          overflow-y: auto;
+          padding-right: 4px;
+        }
+        .game-container.landscape .auth-logo-icon { font-size: 32px; margin-bottom: 0; }
+        .game-container.landscape .auth-logo-text { font-size: 20px; letter-spacing: 2.5px; }
+        .game-container.landscape .auth-hint { font-size: 11px; }
         .auth-logo-icon {
           font-size: 42px;
           margin-bottom: 6px;
@@ -395,20 +433,23 @@ export default function Auth() {
       <div className="auth-ambient-glow" />
 
       <div className="auth-card">
-        <div style={{ textAlign: 'center' }}>
-          <div className="auth-logo-icon">⚡</div>
-          <div className="auth-logo-text">RISING FANTASY CHRONICLES</div>
-          <div className="auth-logo-sub">IDLE BATTLE SYSTEM</div>
+        <div className="auth-brand-col">
+          <div style={{ textAlign: 'center' }}>
+            <div className="auth-logo-icon">⚡</div>
+            <div className="auth-logo-text">RISING FANTASY CHRONICLES</div>
+            <div className="auth-logo-sub">IDLE BATTLE SYSTEM</div>
+          </div>
+
+          <button
+            type="button"
+            className="auth-lore-btn"
+            onClick={() => setShowPrologue(true)}
+          >
+            📖 BACA SEJARAH DUNIA (LORE PROLOGUE)
+          </button>
         </div>
 
-        <button
-          type="button"
-          className="auth-lore-btn"
-          onClick={() => setShowPrologue(true)}
-        >
-          📖 BACA SEJARAH DUNIA (LORE PROLOGUE)
-        </button>
-
+        <div className="auth-form-col">
         {/* Google Sign-In Button */}
         {GOOGLE_CLIENT_ID && (
           <div className="auth-google-btn-wrap">
@@ -497,6 +538,7 @@ export default function Auth() {
 
         <div className="auth-hint">
           {mode === 'login' ? 'Belum punya akun? Pilih REGISTER' : 'Progress tersimpan di server — sync semua device'}
+        </div>
         </div>
       </div>
       {showPrologue && <PrologueModal onClose={() => setShowPrologue(false)} />}

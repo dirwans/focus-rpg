@@ -95,7 +95,7 @@ function getPlayerLaneIndex(raceId, jobId) {
   return 0
 }
 
-export default function NpcModal({ onClose, initialView = 'lobby' }) {
+export default function NpcModal({ onClose, initialView = 'lobby', hideLobby = false }) {
   const player = useGameStore((s) => s.player)
   const getStats = useGameStore((s) => s.getStats)
   const reclassJob = useGameStore((s) => s.reclassJob)
@@ -371,8 +371,8 @@ export default function NpcModal({ onClose, initialView = 'lobby' }) {
       <div className={`glass-panel cyber-panel ${raceClass}`} style={styles.modal}>
         {/* Modal Header */}
         <div style={styles.modalHeader}>
-          <button 
-            onClick={() => subView === 'lobby' ? onClose() : setSubView('lobby')} 
+          <button
+            onClick={() => (hideLobby || subView === 'lobby') ? onClose() : setSubView('lobby')}
             style={{background:'transparent', border:'none', color:'#00e5ff', fontSize: 20, cursor:'pointer', padding: '0 8px 0 0', display:'flex', alignItems:'center'}}
           >
             ❮
