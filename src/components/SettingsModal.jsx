@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import { useGameStore } from '../store/gameStore'
 import { t } from '../lib/translate'
 import DragonBonesTest from './DragonBonesTest'
+import { useBackHandler } from '../hooks/useBackHandler'
 
 export default function SettingsModal({ onClose }) {
+  useBackHandler(onClose)
   const [tab, setTab] = useState('game')
   const language = useGameStore(s => s.player.language || 'en')
   const settings = useGameStore(s => s.player.settings || { autoHpPotion: 'OFF', autoFpPotion: 'OFF', autoSkill: false, autoLoot: false, alertWorldBoss: true, alertCoreWar: true, alertDungeon: true })

@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { useGameStore } from '../store/gameStore'
+import { useBackHandler } from '../hooks/useBackHandler'
 
 export default function AscensionShopModal({ onClose, colors, raceData, player, bionexTab }) {
+  useBackHandler(onClose)
   const buyAscensionPart = useGameStore((s) => s.buyAscensionPart)
   const [activeSlot, setActiveSlot] = useState('head')
 

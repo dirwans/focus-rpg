@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react'
 import { useIsLandscape } from '../hooks/useIsLandscape'
 import { useGameStore, getPlayerClassGroup } from '../store/gameStore'
 import { useAuthStore } from '../store/authStore'
+import { useBackHandler } from '../hooks/useBackHandler'
 import races from '../data/races.json'
 import enemies from '../data/enemies.json'
 import jobs from '../data/jobs.json'
@@ -447,6 +448,16 @@ export default function Main() {
   const [showEventModal, setShowEventModal] = useState(false)
   const [isTurnBasedActive, setIsTurnBasedActive] = useState(false)
   const [showDeployPanel, setShowDeployPanel] = useState(false)
+
+  // Register hardware back handlers for open modals in Main screen
+  useBackHandler(() => setShowSettings(false), showSettings)
+  useBackHandler(() => setShowLibrary(false), showLibrary)
+  useBackHandler(() => setShowSocialModal(false), showSocialModal)
+  useBackHandler(() => setShowNpcModal(false), showNpcModal)
+  useBackHandler(() => setShowMailbox(false), showMailbox)
+  useBackHandler(() => setShowMapModal(false), showMapModal)
+  useBackHandler(() => setShowEventModal(false), showEventModal)
+  useBackHandler(() => setShowDeployPanel(false), showDeployPanel)
 
   const [isAutoBattle, setIsAutoBattle] = useState(false)
   const [selectedUnitId, setSelectedUnitId] = useState('player_main')

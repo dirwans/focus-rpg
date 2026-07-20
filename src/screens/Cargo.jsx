@@ -1,9 +1,8 @@
-// v2: faction filter
 import { useState } from 'react'
 import { useGameStore, resolveItemImage } from '../store/gameStore'
 import { getWeaponRarityColor, getWeaponRarityDisplayName } from '../lib/rarity'
 import { t } from '../lib/translate'
-
+import { useBackHandler } from '../hooks/useBackHandler'
 
 const RARITY_COLOR = {
   common: '#6a9ab8',
@@ -44,6 +43,9 @@ export default function Cargo() {
   const [slotFilter, setSlotFilter] = useState(null)
   const [activeBag, setActiveBag] = useState('bag1')
   const [tooltipItem, setTooltipItem] = useState(null)
+
+  useBackHandler(() => setSelectedItem(null), !!selectedItem)
+  useBackHandler(() => setTooltipItem(null), !!tooltipItem)
 
   const eq = player.equipment || { weapon: null, armor: null, shield: null, helmet: null, mantle: null, gloves: null, boots: null, pants: null, amulet1: null, amulet2: null, ring1: null, ring2: null, ascension_arms: null }
 

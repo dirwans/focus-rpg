@@ -7,6 +7,7 @@ import archonData from '../data/archon.json'
 import { PilotSprite } from '../components/PilotSprites'
 import { t } from '../lib/translate'
 import { useEffect } from 'react'
+import { useBackHandler } from '../hooks/useBackHandler'
 
 // Import Faction Bag Icons
 
@@ -151,6 +152,12 @@ export default function Unit() {
 
   const [showJobsClassTree, setShowJobsClassTree] = useState(false)
   const [activeLaneIdx, setActiveLaneIdx] = useState(0)
+
+  useBackHandler(() => setSelectedBagItem(null), !!selectedBagItem)
+  useBackHandler(() => setActiveBag(null), !!activeBag)
+  useBackHandler(() => setShowJobsClassTree(false), showJobsClassTree)
+  useBackHandler(() => setActiveTooltip(null), !!activeTooltip)
+
   const fp = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
   const fa = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
 

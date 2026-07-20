@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { useGameStore } from '../store/gameStore'
 import { t } from '../lib/translate'
+import { useBackHandler } from '../hooks/useBackHandler'
 
 export default function SocialModal({ onClose }) {
+  useBackHandler(onClose)
   const [searchId, setSearchId] = useState('')
   const player = useGameStore(s => s.player)
   const addFriend = useGameStore(s => s.addFriend)

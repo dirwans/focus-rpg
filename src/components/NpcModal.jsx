@@ -95,7 +95,10 @@ function getPlayerLaneIndex(raceId, jobId) {
   return 0
 }
 
+import { useBackHandler } from '../hooks/useBackHandler'
+
 export default function NpcModal({ onClose, initialView = 'lobby', hideLobby = false }) {
+  useBackHandler(onClose)
   const player = useGameStore((s) => s.player)
   const getStats = useGameStore((s) => s.getStats)
   const reclassJob = useGameStore((s) => s.reclassJob)

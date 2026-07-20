@@ -1,7 +1,9 @@
 import React from 'react'
 import { useGameStore } from '../store/gameStore'
+import { useBackHandler } from '../hooks/useBackHandler'
 
 export default function EventModal({ onClose }) {
+  useBackHandler(onClose)
   const player = useGameStore((s) => s.player)
   const setScreen = useGameStore((s) => s.setScreen)
 

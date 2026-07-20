@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { useGameStore } from '../store/gameStore'
 import { apiClaimMail } from '../lib/api'
+import { useBackHandler } from '../hooks/useBackHandler'
 
 export default function MailboxModal({ onClose }) {
+  useBackHandler(onClose)
   const player = useGameStore((s) => s.player)
   const applySyncState = useGameStore((s) => s.applySyncState)
   const mailbox = player.mailbox || []

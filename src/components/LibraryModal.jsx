@@ -3,8 +3,10 @@ import arctronGears from '../data/gears/arctron.json'
 import bionexGears from '../data/gears/bionex.json'
 import celestraGears from '../data/gears/celestra.json'
 import accessoriesData from '../data/gears/accessories.json'
+import { useBackHandler } from '../hooks/useBackHandler'
 
 export default function LibraryModal({ onClose }) {
+  useBackHandler(onClose)
   const [tab, setTab] = useState('growth')
   const [equipFaction, setEquipFaction] = useState('arctron')
   const [liveData, setLiveData] = useState(null)

@@ -26,6 +26,8 @@ import Inventory from './screens/Inventory'
 import AuditorRoom from './screens/AuditorRoom'
 import HQScreen from './screens/HQScreen'
 
+import { handleBackButtonStack } from './lib/backButtonManager'
+
 const SCREENS = { main: Main, hq: HQScreen, unit: Unit, ranks: Ranks, cargo: Cargo, trade: Trade, battle: Battle, mine: Mine, premium: PremiumShop, ascension: Ascension, inventory: Inventory }
 
 const snap = (gs) => JSON.stringify(gs ?? {})
@@ -49,26 +51,45 @@ export default function App() {
 
   const [hydrated, setHydrated] = useState(() => useGameStore.persist.hasHydrated())
   const [loadingSave, setLoadingSave] = useState(false)
+  const [backExitToast, setBackExitToast] = useState(false)
+  const lastBackPressRef = useRef(0)
 
   // Capacitor hardware back button handler
   useEffect(() => {
     const listener = CapApp.addListener('backButton', () => {
-      // 1. Lek NPC modal lagi terbuka → tutup dhisik
+      // 1. Lek ana modal / pop-up terdaftar ing stack → tutup dhisik modal paling ndhuwur
+      if (handleBackButtonStack()) {
+        return
+      }
+
+      // Fallback lek ana legacy __closeNpcModal
       if (typeof window.__closeNpcModal === 'function') {
         window.__closeNpcModal()
         return
       }
+
       const state = useGameStore.getState()
-      // 2. Lek dudu home screen (HQScreen, kabeh race saiki liwat kene -
-      // cocog karo BottomNav.jsx punya routing) → balik ke home dhisik
+      // 2. Lek dudu home screen (hq) → balik ke home dhisik
       if (state.screen !== 'hq') {
         state.setScreen('hq')
-      } else {
-        // 3. Wes nang main → tanya confirm exit
-        const confirmExit = window.confirm(t('confirm_exit', 'Are you sure you want to logout / exit app?', state.player))
-        if (confirmExit && Capacitor.isNativePlatform()) {
+        return
+      }
+
+      // 3. Wes nang home screen (hq) lan ora ana modal → Double-Tap back button to exit
+      const now = Date.now()
+      if (now - lastBackPressRef.current < 2000) {
+        if (Capacitor.isNativePlatform()) {
           CapApp.exitApp()
+        } else {
+          const confirmExit = window.confirm(t('confirm_exit', 'Are you sure you want to logout / exit app?', state.player))
+          if (confirmExit && Capacitor.isNativePlatform()) {
+            CapApp.exitApp()
+          }
         }
+      } else {
+        lastBackPressRef.current = now
+        setBackExitToast(true)
+        setTimeout(() => setBackExitToast(false), 2000)
       }
     })
     return () => {
@@ -343,6 +364,29 @@ export default function App() {
       <div className={`game-container ${isLandscape ? 'landscape' : ''}`} data-faction={player?.race || ''} style={{ background: containerBg }}>
         <div className="no-scrollbar" style={styles.content}><Screen /></div>
         <BottomNav />
+        {backExitToast && (
+          <div style={{
+            position: 'fixed',
+            bottom: 80,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            background: 'rgba(10, 20, 35, 0.95)',
+            color: '#00e5ff',
+            border: '1px solid #00e5ff',
+            boxShadow: '0 0 15px rgba(0,229,255,0.4)',
+            padding: '8px 18px',
+            borderRadius: 20,
+            fontSize: 13,
+            fontWeight: 'bold',
+            zIndex: 99999,
+            pointerEvents: 'none',
+            textAlign: 'center',
+            letterSpacing: 0.5,
+            whiteSpace: 'nowrap'
+          }}>
+            {t('press_back_again_to_exit', 'Tekan sekali lagi untuk keluar', player)}
+          </div>
+        )}
       </div>
     </div>
   )
