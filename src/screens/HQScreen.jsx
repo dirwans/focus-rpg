@@ -422,20 +422,20 @@ export default function HQScreen() {
               hatchJustOpenedByTouchRef.current = !hatchOpen
               setHatchOpen(true)
             }}
-            style={{ width: 340, maxWidth: '80vw', cursor: 'pointer' }}
+            style={{ width: 'clamp(190px, 34vw, 320px)', cursor: 'pointer' }}
           >
             <div style={{
               position: 'relative',
-              height: 90,
-              borderRadius: 10,
+              height: 'clamp(38px, 8vh, 66px)',
+              borderRadius: 'clamp(6px, 1.4vh, 10px)',
               overflow: 'hidden',
-              boxShadow: '0 0 30px rgba(255,140,60,0.35)',
+              boxShadow: '0 0 24px rgba(255,140,60,0.3)',
             }}>
               {/* Glow pit */}
               <div style={{
                 position: 'absolute',
-                inset: 6,
-                borderRadius: 6,
+                inset: 5,
+                borderRadius: 'clamp(4px, 1vh, 6px)',
                 background: 'radial-gradient(ellipse at 50% 30%, rgba(255,140,60,0.55), #0a0a0c 75%)',
                 display: 'flex',
                 alignItems: 'center',
@@ -447,12 +447,13 @@ export default function HQScreen() {
                 <div style={{
                   fontFamily: "'Orbitron', sans-serif",
                   fontWeight: 800,
-                  fontSize: 15,
-                  letterSpacing: 2,
+                  fontSize: 'clamp(9px, 1.9vh, 14px)',
+                  letterSpacing: 1.5,
                   color: '#ffab5e',
                   textShadow: '0 0 12px rgba(255,140,60,0.8)',
                   opacity: hatchOpen ? 1 : 0,
                   transition: hatchOpen ? 'opacity 0.5s ease-out 0.45s' : 'opacity 0.2s ease-in',
+                  whiteSpace: 'nowrap',
                 }}>
                   DEPLOY ➜ WORLD MAP
                 </div>
