@@ -16,6 +16,10 @@ Starting July 7, 2026, the following rules are enforced for all development and 
 
 ## 📅 Session Chronological Logs
 
+### 📱 Milestone 199: Complete PNG/WebP Asset Restoration & Maestro Top Bezel HUD [DEPLOYED] (2026-07-21)
+- **All Faction & Map Asset Restoration (`public/assets/`)**: Restored all 229 missing PNG/WebP sprites for Bionex, Celestra, World Map, Dungeons, and Weapons, providing 100% dual-format (`.png` & `.webp`) fallback availability for VPS & Android APK streaming.
+- **HQ Screen Maestro Top Bezel HUD (`src/screens/HQScreen.jsx`)**: Integrated exact metallic top bezel frame overlay from `top-bezel-hq-arctron.png` with vector glowing orange `HEADQUARTER` title plate, mobile notch safety padding (`env(safe-area-inset-top)`), and 2-tap DEPLOY TO MISSION arming physics.
+
 ### 📱 Milestone 198: WebP Lossless Asset Optimization & 27.4 MB Release APK [DEPLOYED] (2026-07-21)
 - **Dev Asset Cleanup & Parallel WebP Conversion (`public/assets/`)**: Moved 241 orphan verification files (83 MB) out of `public/assets/` to `ref/` and converted 383 active in-game PNG sprites/textures to WebP, reducing static assets from 221 MB to 21 MB (90.5% size reduction).
 - **ZipAligned & Signed Release APK (`risingfantasy-v1.0-release.apk`)**: Built `assembleRelease` with ZipAlign 4-byte memory boundary and `apksigner v2+v3`, yielding a tiny 27.4 MB APK.
