@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import { App as CapApp } from '@capacitor/app'
 import { Capacitor } from '@capacitor/core'
 import { useGameStore } from '../store/gameStore'
@@ -18,25 +18,22 @@ const EXIT_LABEL = {
 }
 
 // NPC Roster - same roster/order/colors/glow/dim as the design reference
-// (public/ref/.../HQ Screen - Arctron Directions.dc.html), but laid out in a
-// uniform-size grid beside the nav sidebar instead of the reference's
-// scattered varying-scale placement (icons all the same size, bigger).
-const LEFT_NPC_ROSTER = [
+// (public/ref/.../HQ Screen - Arctron Directions.dc.html), all 12 roles laid out in one
+// centered grid (matches the "clean centered badge grid" reference the user asked to match,
+// while keeping every real role - not just the 9 the mockup happened to show).
+const NPC_ROSTER = [
   { name: 'Weapon Master', subView: 'arsenal_keeper', icon: 'sword', color: '#ff8c3c', glow: 'rgba(255,140,60,0.9)' },
   { name: 'Armor Master', subView: 'armory_keeper', icon: 'shield', color: '#5fb0e0', glow: 'rgba(95,176,224,0.9)' },
+  { name: 'Mining Supplier', subView: 'mining_supplier', icon: 'pick', color: '#c7ccd6', glow: 'rgba(199,204,214,0.8)' },
   { name: 'Potion Merchant', subView: 'potion_merchant', icon: 'potion', color: '#5fe08a', glow: 'rgba(95,224,138,0.9)' },
   { name: 'Warehouse Keeper', subView: 'vault_keeper', icon: 'box', color: '#a9c8ff', glow: 'rgba(169,200,255,0.8)' },
-  { name: 'Quest Manager', subView: 'grand_warden', icon: 'scroll', color: '#d9acff', glow: 'rgba(217,172,255,0.8)', dim: true },
-  { name: 'Auction Manager', subView: 'trade_broker', icon: 'coin', color: '#ffd166', glow: 'rgba(255,209,102,0.9)' },
-]
-
-const RIGHT_NPC_ROSTER = [
-  { name: 'Mining Supplier', subView: 'mining_supplier', icon: 'pick', color: '#c7ccd6', glow: 'rgba(199,204,214,0.8)' },
-  { name: 'Eminence QM', subView: 'eminence_qm', icon: 'medal', color: '#ffd166', glow: 'rgba(255,209,102,0.8)', dim: true },
   { name: 'Enchantment Master', subView: 'forge_master', icon: 'sparkle', color: '#ff8c3c', glow: 'rgba(255,140,60,0.9)' },
   { name: 'Craft Master', subView: 'master_artisan', icon: 'hammer', color: '#ff5f7a', glow: 'rgba(255,95,122,0.8)' },
   { name: 'Guild Manager', subView: 'guild_steward', icon: 'castle', color: '#ffab5e', glow: 'rgba(255,171,94,1)' },
   { name: 'Premium Shop', subView: 'premium_shop_mgr', icon: 'gem', color: '#d9acff', glow: 'rgba(217,172,255,0.9)' },
+  { name: 'Quest Manager', subView: 'grand_warden', icon: 'scroll', color: '#d9acff', glow: 'rgba(217,172,255,0.8)', dim: true },
+  { name: 'Auction Manager', subView: 'trade_broker', icon: 'coin', color: '#ffd166', glow: 'rgba(255,209,102,0.9)' },
+  { name: 'Eminence QM', subView: 'eminence_qm', icon: 'medal', color: '#ffd166', glow: 'rgba(255,209,102,0.8)', dim: true },
 ]
 
 // NPC Icon
@@ -65,33 +62,14 @@ export default function HQScreen() {
   const [showNpcModal, setShowNpcModal] = useState(false)
   useBackHandler(() => setShowNpcModal(false), showNpcModal)
   const [npcSubView, setNpcSubView] = useState('lobby')
-  const [hatchOpen, setHatchOpen] = useState(false)
-  const [hangarOpen, setHangarOpen] = useState(false)
-  // activeNpcKey tracks currently zoomed/focused NPC (e.g. 'left_0' or 'right_1')
+  // activeNpcKey tracks currently zoomed/focused NPC (e.g. 'npc_0')
   const [activeNpcKey, setActiveNpcKey] = useState(null)
-  // On touch, a single tap fires touchstart *and* click back-to-back - without
-  // this flag the first tap would open the hatch and immediately navigate in
-  // the same gesture. First tap on a closed hatch should only open it; a
-  // second tap (hatch already open) is what confirms/deploys.
-  const hatchJustOpenedByTouchRef = useRef(false)
 
   const [showTacticalMap, setShowTacticalMap] = useState(false)
 
-  const handleCloseTacticalMap = () => {
-    setShowTacticalMap(false)
-    setHangarOpen(false)
-    setHatchOpen(false)
-  }
+  const handleCloseTacticalMap = () => setShowTacticalMap(false)
 
   useBackHandler(handleCloseTacticalMap, showTacticalMap)
-
-  const handleDeploySequence = () => {
-    setHangarOpen(true)
-    setHatchOpen(true)
-    setTimeout(() => {
-      setShowTacticalMap(true)
-    }, 800)
-  }
 
   const race = player?.race || 'arctron'
   const theme = getFactionTheme(race)
