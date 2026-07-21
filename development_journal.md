@@ -16,6 +16,11 @@ Starting July 7, 2026, the following rules are enforced for all development and 
 
 ## 📅 Session Chronological Logs
 
+### 📱 Milestone 201: Separated Faction Home Screens (`HQScreen.jsx`, `BionexPanel.jsx`, `Sanctuary.jsx`) [DEPLOYED] (2026-07-21)
+- **Dedicated Faction Home Screen Modular Architecture (`src/screens/`)**: Separated home screen components into 3 independent, clean faction files: `HQScreen.jsx` for Arctron (Industrial Hangar), `BionexPanel.jsx` for Bionex (Cybernetic Mainframe), and `Sanctuary.jsx` for Celestra (Arc-Sanctuary). Removed top bezel image overlay from all 3 screens.
+- **Dynamic Race Routing (`src/App.jsx`, `src/components/Navmenu.jsx`)**: Configured `App.jsx` to dynamically route home screen based on `player.race` (`arctron` ➔ `HQScreen`, `bionex` ➔ `BionexPanel`, `celestra` ➔ `Sanctuary`) and updated `Navmenu.jsx` to hide bottom nav bar on all 3 home screens.
+- **Production VPS Deployment (`https://103.189.234.206.nip.io/`)**: Successfully deployed the clean separated 3-faction screen architecture to production VPS.
+
 ### 📱 Milestone 200: Dynamic Faction Background Integration & VPS Deployment [DEPLOYED] (2026-07-21)
 - **Dynamic Faction Background Selector (`src/screens/HQScreen.jsx`)**: Updated `bgImage` variable logic to dynamically select Bionex Cybernetic Mainframe (`bionex_panel_bg.png`) and Celestra Arc-Sanctuary (`celestra_panel_bg.png`) while keeping Arctron Mecha Hangar (`hq_industrial_hangar_bg.png`), ensuring each race displays its authentic faction artwork.
 - **Production VPS Pipeline Deployment (`https://103.189.234.206.nip.io/`)**: Successfully deployed dynamic backgrounds and complete asset fallback pipeline to production VPS.
