@@ -54,6 +54,20 @@ export default function App() {
   const [backExitToast, setBackExitToast] = useState(false)
   const lastBackPressRef = useRef(0)
 
+  // Enforce screen orientation lock to landscape in Web View / Browser
+  useEffect(() => {
+    const lockLandscape = () => {
+      try {
+        if (typeof screen !== 'undefined' && screen.orientation && screen.orientation.lock) {
+          screen.orientation.lock('landscape').catch(() => {})
+        }
+      } catch (e) {}
+    }
+    lockLandscape()
+    window.addEventListener('resize', lockLandscape)
+    return () => window.removeEventListener('resize', lockLandscape)
+  }, [])
+
   // Capacitor hardware back button handler
   useEffect(() => {
     const listener = CapApp.addListener('backButton', () => {
