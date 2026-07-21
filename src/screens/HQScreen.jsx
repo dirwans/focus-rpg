@@ -7,6 +7,7 @@ import { useAuthStore } from '../store/authStore'
 import { getFactionTheme } from '../styles/factionThemes'
 import { t } from '../lib/translate'
 import NpcModal from '../components/NpcModal'
+import { WorldMapModal } from './Main'
 import { useBackHandler } from '../hooks/useBackHandler'
 
 // Exit-portal label, themed per faction instead of a generic "LOGOUT".
@@ -34,7 +35,7 @@ const RIGHT_NPC_ROSTER = [
   { name: 'Eminence QM', subView: 'eminence_qm', icon: 'medal', color: '#ffd166', glow: 'rgba(255,209,102,0.8)', dim: true },
   { name: 'Enchantment Master', subView: 'forge_master', icon: 'sparkle', color: '#ff8c3c', glow: 'rgba(255,140,60,0.9)' },
   { name: 'Craft Master', subView: 'master_artisan', icon: 'hammer', color: '#ff5f7a', glow: 'rgba(255,95,122,0.8)' },
-  { name: 'Guild Manager', subView: 'guild_steward', icon: 'castle', color: '#ffab5e', glow: 'rgba(255,171,94,1)', dim: true },
+  { name: 'Guild Manager', subView: 'guild_steward', icon: 'castle', color: '#ffab5e', glow: 'rgba(255,171,94,1)' },
   { name: 'Premium Shop', subView: 'premium_shop_mgr', icon: 'gem', color: '#d9acff', glow: 'rgba(217,172,255,0.9)' },
 ]
 
@@ -74,12 +75,22 @@ export default function HQScreen() {
   // second tap (hatch already open) is what confirms/deploys.
   const hatchJustOpenedByTouchRef = useRef(false)
 
+  const [showTacticalMap, setShowTacticalMap] = useState(false)
+
+  const handleCloseTacticalMap = () => {
+    setShowTacticalMap(false)
+    setHangarOpen(false)
+    setHatchOpen(false)
+  }
+
+  useBackHandler(handleCloseTacticalMap, showTacticalMap)
+
   const handleDeploySequence = () => {
     setHangarOpen(true)
     setHatchOpen(true)
     setTimeout(() => {
-      setScreen('main')
-    }, 1000)
+      setShowTacticalMap(true)
+    }, 800)
   }
 
   const race = player?.race || 'arctron'
@@ -865,6 +876,11 @@ export default function HQScreen() {
           initialView={npcSubView}
           hideLobby
         />
+      )}
+
+      {/* Direct Deploy Tactical Map Screen */}
+      {showTacticalMap && (
+        <WorldMapModal onClose={handleCloseTacticalMap} />
       )}
     </div>
   )

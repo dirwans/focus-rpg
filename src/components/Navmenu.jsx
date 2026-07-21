@@ -82,11 +82,14 @@ function NavIcon({ id, active, color }) {
   }
 }
 
-export default function BottomNav() {
+export default function Navmenu() {
   const screen    = useGameStore((s) => s.screen)
   const setScreen = useGameStore((s) => s.setScreen)
   const player    = useGameStore((s) => s.player)
   const primary   = getFactionPrimary(player?.race)
+
+  // HQScreen has its own embedded station sidebar (with Stand Down / Exit portal)
+  if (screen === 'hq') return null
 
   return (
     <nav style={{

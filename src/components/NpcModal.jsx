@@ -24,6 +24,7 @@ import { t } from '../lib/translate'
 import { getWeaponRarityDisplayName, getWeaponRarityColor } from '../lib/rarity'
 import upgradesConfig from '../data/upgrades.json'
 import ascensionData from '../data/ascensionArms.json'
+import GuildPanel from './GuildPanel'
 const PROMO_COSTS = {
   1: 0,
   2: 0,
@@ -367,6 +368,20 @@ export default function NpcModal({ onClose, initialView = 'lobby', hideLobby = f
     if (tier === 2) return jobs[player.race].tier2
     if (tier === 3) return jobs[player.race].tier3
     return []
+  }
+
+  if (subView === 'guild_steward') {
+    return (
+      <div style={styles.overlay} className="cyberpunk-hud-bg" onClick={onClose}>
+        <div className={`glass-panel cyber-panel ${raceClass}`} style={{ ...styles.modal, width: '90%', maxWidth: 780, maxHeight: '90vh', overflowY: 'auto' }} onClick={(e) => e.stopPropagation()}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12, borderBottom: '1.5px solid rgba(0,229,255,0.3)', paddingBottom: 8 }}>
+            <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, fontWeight: 900, color: '#00e5ff', letterSpacing: 1 }}>🏰 GUILD MANAGER TERMINAL</span>
+            <button onClick={onClose} style={{ background: 'rgba(255,60,60,0.15)', border: '1px solid #ff4444', color: '#ff4444', borderRadius: '50%', width: 28, height: 28, cursor: 'pointer', fontWeight: 'bold' }}>✕</button>
+          </div>
+          <GuildPanel />
+        </div>
+      </div>
+    )
   }
 
   return (

@@ -95,11 +95,14 @@ const TWINKLE_DOTS = [
   { top: '92%', left: '55%', size: 2, delay: '1.7s' },
 ]
 
-// Full Screen Interactive World Map Modal (Portrait-optimized with clean dynamic HTML/CSS overlay)
-function WorldMapModal({ onClose }) {
+// Full Screen Interactive Tactical Map Modal (Supports World Sectors & Dungeons)
+export function WorldMapModal({ onClose }) {
   const isLandscape = useIsLandscape()
   const player = useGameStore((s) => s.player)
   const setSelectedMapIdx = useGameStore((s) => s.setSelectedMapIdx)
+  const setMode = useGameStore((s) => s.setMode)
+
+  const [targetType, setTargetType] = useState('world') // 'world' | 'dungeon'
 
   // Default selected node index
   const defaultIdx = (player.selectedMapIdx !== undefined && player.selectedMapIdx !== null)
@@ -107,12 +110,11 @@ function WorldMapModal({ onClose }) {
     : Math.max(0, Math.min((player.sector || 1) - 1, enemies.sectors.length - 1))
 
   const [selectedNode, setSelectedNode] = useState(defaultIdx)
+  const [selectedDungeonIdx, setSelectedDungeonIdx] = useState(0)
 
   const activeColor = { arctron: '#ff5222', bionex: '#3b82f6', celestra: '#a855f7' }[player.race] || '#00e5ff'
-  const accentColor = { arctron: '#ffb48f', bionex: '#a9c8ff', celestra: '#d9acff' }[player.race] || '#7ec8e3'
-  const screenBg = { arctron: 'radial-gradient(circle at 30% 0%, #201a18 0%, #0a0807 60%)', bionex: 'radial-gradient(circle at 30% 0%, #13243a 0%, #060b12 60%)', celestra: 'radial-gradient(circle at 30% 0%, #1a1642 0%, #07061a 60%)' }[player.race] || '#08080d'
 
-  const mapCoordinates = [
+  const worldCoordinates = [
     { name: 'Lumora Fields', left: '30%', top: '20%', minLevel: 1 },
     { name: 'Sylvaris Wilds', left: '70%', top: '35%', minLevel: 13 },
     { name: 'Ferrum Expanse', left: '25%', top: '50%', minLevel: 26 },
@@ -120,11 +122,24 @@ function WorldMapModal({ onClose }) {
     { name: 'Trinity Nexus', left: '50%', top: '80%', minLevel: 53 }
   ]
 
-  const safeNode = isNaN(selectedNode) ? 0 : selectedNode
-  const selectedSector = enemies.sectors[safeNode] || enemies.sectors[0]
-  const isUnderleveled = player.level < mapCoordinates[selectedNode].minLevel
-  const isLocked = false // player.level < mapCoordinates[selectedNode].minLevel
-  const isActive = player.selectedMapIdx === selectedNode || (player.selectedMapIdx === null && selectedNode === defaultIdx)
+  const dungeonCoordinates = [
+    { name: 'Echo Burrow', left: '35%', top: '32%', minLevel: 30, bossName: 'Burrow King', bossEmoji: '🏗️' },
+    { name: 'Infernal Forge', left: '68%', top: '48%', minLevel: 40, bossName: 'Inferno Colossus', bossEmoji: '🔥' },
+    { name: 'Trinity Core Chamber', left: '50%', top: '72%', minLevel: 55, bossName: 'Trinity Guardian', bossEmoji: '☢️' }
+  ]
+
+  const isWorld = targetType === 'world'
+  const safeNode = isWorld
+    ? (isNaN(selectedNode) ? 0 : Math.min(selectedNode, enemies.sectors.length - 1))
+    : (isNaN(selectedDungeonIdx) ? 0 : Math.min(selectedDungeonIdx, (enemies.dungeons?.length || 1) - 1))
+
+  const selectedTarget = isWorld ? enemies.sectors[safeNode] : enemies.dungeons[safeNode]
+  const currentCoords = isWorld ? worldCoordinates : dungeonCoordinates
+  const activeMinLevel = isWorld ? worldCoordinates[safeNode]?.minLevel || 1 : dungeonCoordinates[safeNode]?.minLevel || 30
+
+  const isUnderleveled = player.level < activeMinLevel
+  const isLocked = false
+  const isActive = isWorld && (player.selectedMapIdx === safeNode || (player.selectedMapIdx === null && safeNode === defaultIdx))
 
   return (
     <div style={{
@@ -134,22 +149,55 @@ function WorldMapModal({ onClose }) {
       backdropFilter: 'blur(10px)', fontFamily: 'var(--font-body)'
     }}>
 
-      {/* Sleek Tactical Header */}
+      {/* Sleek Tactical Header with Category Tabs */}
       <div style={{
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-        padding: '16px 20px', background: 'rgba(5, 10, 25, 0.9)',
+        padding: '12px 20px', background: 'rgba(5, 10, 25, 0.92)',
         borderBottom: '2.5px solid rgba(0, 229, 255, 0.35)',
         boxShadow: '0 4px 15px rgba(0,0,0,0.5)', zIndex: 10
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <span style={{ fontSize: 18 }}>🗺️</span>
-          <span style={{
-            fontFamily: "'Orbitron', sans-serif", fontSize: 14, fontWeight: 900,
-            letterSpacing: 2, color: '#00e5ff', textShadow: '0 0 10px rgba(0, 229, 255, 0.4)'
-          }}>
-            TACTICAL MAP SCREEN
-          </span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <span style={{ fontSize: 18 }}>🗺️</span>
+            <span style={{
+              fontFamily: "'Orbitron', sans-serif", fontSize: 14, fontWeight: 900,
+              letterSpacing: 2, color: '#00e5ff', textShadow: '0 0 10px rgba(0, 229, 255, 0.4)'
+            }}>
+              TACTICAL MAP SCREEN
+            </span>
+          </div>
+
+          {/* Category Switcher: World Sectors vs Dungeons */}
+          <div style={{ display: 'flex', background: 'rgba(0,0,0,0.4)', borderRadius: 6, padding: 3, border: '1px solid rgba(0,229,255,0.2)' }}>
+            <button
+              onClick={() => setTargetType('world')}
+              style={{
+                background: isWorld ? activeColor : 'transparent',
+                color: isWorld ? '#fff' : '#8a94a3',
+                border: 'none', borderRadius: 4, padding: '4px 12px',
+                fontFamily: "'Orbitron', sans-serif", fontSize: 11, fontWeight: 800,
+                cursor: 'pointer', transition: 'all 0.2s ease-in-out',
+                boxShadow: isWorld ? `0 0 10px ${activeColor}80` : 'none'
+              }}
+            >
+              🗺️ WORLD SECTORS
+            </button>
+            <button
+              onClick={() => setTargetType('dungeon')}
+              style={{
+                background: !isWorld ? '#ff4466' : 'transparent',
+                color: !isWorld ? '#fff' : '#8a94a3',
+                border: 'none', borderRadius: 4, padding: '4px 12px',
+                fontFamily: "'Orbitron', sans-serif", fontSize: 11, fontWeight: 800,
+                cursor: 'pointer', transition: 'all 0.2s ease-in-out',
+                boxShadow: !isWorld ? '0 0 10px rgba(255,68,102,0.8)' : 'none'
+              }}
+            >
+              🏰 DUNGEONS (RAID)
+            </button>
+          </div>
         </div>
+
         <button
           onClick={onClose}
           style={{
@@ -164,228 +212,264 @@ function WorldMapModal({ onClose }) {
         </button>
       </div>
 
-      {/* Main Map Viewport */}
+      {/* Main Map Body Container (2-Column in Landscape, Stacked in Portrait) */}
       <div style={{
-        position: 'relative', flex: 1, overflow: 'hidden', background: '#020205'
+        flex: 1,
+        display: 'flex',
+        flexDirection: isLandscape ? 'row' : 'column',
+        overflow: 'hidden',
+        position: 'relative'
       }}>
-        <img
-          src={isLandscape ? "/assets/world_map_landscape_clean.png" : "/assets/world_map_portrait_clean.png"}
-          alt="World Map Grid"
-          style={{
-            position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
-            objectFit: 'cover', opacity: 0.72, pointerEvents: 'none'
-          }}
-        />
-
-        {/* Dynamic Holographic Connection Lines Path */}
-        <svg
-          viewBox="0 0 100 100"
-          preserveAspectRatio="none"
-          style={{
-            position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
-            pointerEvents: 'none', zIndex: 12
-          }}
-        >
-          <path
-            d="M 30 20 L 70 35 L 25 50 L 75 65 L 50 80"
-            stroke="rgba(0, 229, 255, 0.45)"
-            strokeWidth="0.8"
-            fill="none"
-            strokeDasharray="2 1.5"
-            style={{ filter: 'drop-shadow(0 0 3px rgba(0,229,255,0.4))' }}
-          />
-        </svg>
-
-        {/* Interactive Hotspot Map Nodes */}
-        {mapCoordinates.map((coord, idx) => {
-          const mapLocked = false // player.level < coord.minLevel
-          const mapActive = player.selectedMapIdx === idx || (player.selectedMapIdx === null && idx === defaultIdx)
-          const isSelected = selectedNode === idx
-
-          let glowColor = '#5e6875' // locked
-          if (!mapLocked) {
-            glowColor = mapActive ? activeColor : '#00e5ff'
-          }
-
-          return (
-            <button
-              key={idx}
-              onClick={() => setSelectedNode(idx)}
-              style={{
-                position: 'absolute',
-                left: coord.left,
-                top: coord.top,
-                transform: 'translate(-50%, -50%)',
-                width: isSelected ? '44px' : '34px',
-                height: isSelected ? '44px' : '34px',
-                borderRadius: '50%',
-                background: mapLocked ? 'rgba(30,30,40,0.85)' : (isSelected ? 'rgba(255,255,255,0.1)' : 'rgba(0, 229, 255, 0.15)'),
-                border: isSelected ? `2.5px solid ${glowColor}` : `1.8px solid ${glowColor}`,
-                boxShadow: isSelected
-                  ? `0 0 25px ${glowColor}, inset 0 0 10px ${glowColor}`
-                  : (mapActive ? `0 0 15px ${glowColor}` : 'none'),
-                cursor: 'pointer',
-                zIndex: isSelected ? 50 : 20,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                transition: 'all 0.2s ease-out'
-              }}
-            >
-              {mapLocked ? (
-                <span style={{ fontSize: 12 }}>🔒</span>
-              ) : (
-                <div style={{
-                  width: isSelected ? '12px' : '8px',
-                  height: isSelected ? '12px' : '8px',
-                  borderRadius: '50%',
-                  background: isSelected ? '#fff' : glowColor,
-                  boxShadow: isSelected ? '0 0 10px #fff' : 'none',
-                  animation: mapActive ? 'spritePulse 1.2s infinite ease-in-out' : 'none'
-                }} />
-              )}
-            </button>
-          )
-        })}
-
-        {/* Small floating HUD labels next to nodes */}
-        {mapCoordinates.map((coord, idx) => {
-          const mapLocked = false // player.level < coord.minLevel
-          const isSelected = selectedNode === idx
-          return (
-            <div
-              key={`lbl-${idx}`}
-              onClick={() => setSelectedNode(idx)}
-              style={{
-                position: 'absolute',
-                left: `calc(${coord.left} + ${coord.left.startsWith('7') ? '-65px' : '26px'})`,
-                top: `calc(${coord.top} - 10px)`,
-                background: isSelected ? 'rgba(3, 8, 20, 0.92)' : 'rgba(3, 8, 20, 0.72)',
-                border: isSelected ? `1.5px solid ${activeColor}` : '1px solid rgba(255,255,255,0.15)',
-                borderRadius: '4px',
-                padding: '2px 6px',
-                fontFamily: 'var(--font-mono)',
-                fontSize: 12,
-                fontWeight: isSelected ? 'bold' : 'normal',
-                color: mapLocked ? '#7a8593' : '#fff',
-                textShadow: isSelected ? `0 0 5px ${activeColor}` : 'none',
-                cursor: 'pointer',
-                zIndex: 30,
-                pointerEvents: 'auto',
-                boxShadow: isSelected ? `0 0 8px ${activeColor}40` : 'none'
-              }}
-            >
-              M{idx + 1}: {coord.name.split(' ')[0]}
-            </div>
-          )
-        })}
-      </div>
-
-      {/* Holographic Tactical Info Panel Overlay - Portrait Dynamic Grid Terminal */}
-      <div style={{
-        background: 'rgba(3, 8, 20, 0.96)',
-        borderTop: `3px solid ${isLocked ? '#8a94a3' : activeColor}`,
-        boxShadow: `0 -10px 30px rgba(0,0,0,0.85), 0 0 20px ${isLocked ? 'rgba(0,0,0,0)' : activeColor}18`,
-        padding: '18px 20px 24px', zIndex: 10,
-        display: 'flex', flexDirection: 'column', gap: 14,
-        flexShrink: 0
-      }}>
-        {/* Row 1: Title and Lock status */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div>
-            <div style={{
-              fontFamily: "'Orbitron', sans-serif", fontSize: 15, fontWeight: 900,
-              color: isLocked ? '#8a94a3' : '#fff', letterSpacing: 1, textTransform: 'uppercase'
-            }}>
-              MAP {selectedNode + 1} — {selectedSector.name}
-            </div>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#7ab0d0', marginTop: 2 }}>
-              Level Bracket: Lv. {selectedSector.minLevel} - {selectedSector.maxLevel}
-            </div>
-          </div>
-
-          <span style={{
-            fontSize: 12, background: isLocked ? 'rgba(255,255,255,0.06)' : (isActive ? `${activeColor}20` : 'rgba(0, 229, 255, 0.12)'),
-            color: isLocked ? '#8a94a3' : (isActive ? activeColor : '#00e5ff'),
-            border: `1.5px solid ${isLocked ? '#8a94a3' : (isActive ? activeColor : '#00e5ff')}`,
-            borderRadius: '6px', padding: '3px 10px', fontWeight: 900, fontFamily: 'var(--font-mono)'
+        {/* Left/Main Map Viewport Stage */}
+        <div style={{
+          position: 'relative',
+          flex: 1,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflow: 'hidden',
+          background: '#020205',
+          minHeight: 0,
+          minWidth: 0,
+          padding: 12
+        }}>
+          {/* Aspect Ratio Constrained Map Stage to prevent cropping ("ojo ketrim") */}
+          <div style={{
+            position: 'relative',
+            width: isLandscape ? 'auto' : '100%',
+            height: isLandscape ? '100%' : 'auto',
+            aspectRatio: '16/9',
+            maxWidth: '100%',
+            maxHeight: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxShadow: '0 0 35px rgba(0, 229, 255, 0.15)',
+            border: '1px solid rgba(0, 229, 255, 0.2)',
+            borderRadius: 8,
+            overflow: 'hidden'
           }}>
-            {isLocked ? '🔒 LOCKED' : (isActive ? 'ACTIVE' : 'SELECTABLE')}
-          </span>
+            <img
+              src={isLandscape ? "/assets/world_map_landscape_clean.png" : "/assets/world_map_portrait_clean.png"}
+              onError={(e) => { e.currentTarget.src = "/assets/world_map_portrait_clean.png" }}
+              alt="World Map Grid"
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'contain',
+                opacity: isWorld ? 0.88 : 0.45,
+                filter: isWorld ? 'none' : 'hue-rotate(280deg) saturate(1.8)',
+                pointerEvents: 'none',
+                transition: 'all 0.3s ease'
+              }}
+            />
+
+            {/* Dynamic Holographic Connection Lines Path */}
+            <svg
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
+              style={{
+                position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
+                pointerEvents: 'none', zIndex: 12
+              }}
+            >
+              <path
+                d={isWorld ? "M 30 20 L 70 35 L 25 50 L 75 65 L 50 80" : "M 35 32 L 68 48 L 50 72"}
+                stroke={isWorld ? "rgba(0, 229, 255, 0.55)" : "rgba(255, 68, 102, 0.65)"}
+                strokeWidth="0.8"
+                fill="none"
+                strokeDasharray="2 1.5"
+                style={{ filter: `drop-shadow(0 0 4px ${isWorld ? 'rgba(0,229,255,0.6)' : 'rgba(255,68,102,0.8)'})` }}
+              />
+            </svg>
+
+            {/* Interactive Hotspot Map Nodes */}
+            {currentCoords.map((coord, idx) => {
+              const mapLocked = player.level < coord.minLevel
+              const isSelected = isWorld ? selectedNode === idx : selectedDungeonIdx === idx
+
+              let glowColor = '#5e6875'
+              if (!mapLocked) {
+                glowColor = isWorld ? (isSelected ? activeColor : '#00e5ff') : '#ff4466'
+              }
+
+              return (
+                <button
+                  key={idx}
+                  onClick={() => isWorld ? setSelectedNode(idx) : setSelectedDungeonIdx(idx)}
+                  style={{
+                    position: 'absolute',
+                    left: coord.left,
+                    top: coord.top,
+                    transform: 'translate(-50%, -50%)',
+                    width: isSelected ? '44px' : '34px',
+                    height: isSelected ? '44px' : '34px',
+                    borderRadius: '50%',
+                    background: mapLocked ? 'rgba(30,30,40,0.85)' : (isSelected ? 'rgba(255,255,255,0.1)' : (isWorld ? 'rgba(0, 229, 255, 0.15)' : 'rgba(255, 68, 102, 0.2)')),
+                    border: isSelected ? `2.5px solid ${glowColor}` : `1.8px solid ${glowColor}`,
+                    boxShadow: isSelected
+                      ? `0 0 25px ${glowColor}, inset 0 0 10px ${glowColor}`
+                      : 'none',
+                    cursor: 'pointer',
+                    zIndex: isSelected ? 50 : 20,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    transition: 'all 0.2s ease-out'
+                  }}
+                >
+                  {mapLocked ? (
+                    <span style={{ fontSize: 12 }}>🔒</span>
+                  ) : (
+                    <div style={{
+                      width: isSelected ? '12px' : '8px',
+                      height: isSelected ? '12px' : '8px',
+                      borderRadius: '50%',
+                      background: isSelected ? '#fff' : glowColor,
+                      boxShadow: isSelected ? '0 0 10px #fff' : 'none'
+                    }} />
+                  )}
+                </button>
+              )
+            })}
+
+            {/* Small floating HUD labels next to nodes */}
+            {currentCoords.map((coord, idx) => {
+              const mapLocked = player.level < coord.minLevel
+              const isSelected = isWorld ? selectedNode === idx : selectedDungeonIdx === idx
+              const tagPrefix = isWorld ? `M${idx + 1}` : `D${idx + 1}`
+              return (
+                <div
+                  key={`lbl-${idx}`}
+                  onClick={() => isWorld ? setSelectedNode(idx) : setSelectedDungeonIdx(idx)}
+                  style={{
+                    position: 'absolute',
+                    left: `calc(${coord.left} + ${coord.left.startsWith('7') || coord.left.startsWith('6') ? '-75px' : '26px'})`,
+                    top: `calc(${coord.top} - 10px)`,
+                    background: isSelected ? 'rgba(3, 8, 20, 0.92)' : 'rgba(3, 8, 20, 0.72)',
+                    border: isSelected ? `1.5px solid ${isWorld ? activeColor : '#ff4466'}` : '1px solid rgba(255,255,255,0.15)',
+                    borderRadius: '4px',
+                    padding: '2px 6px',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: 12,
+                    fontWeight: isSelected ? 'bold' : 'normal',
+                    color: mapLocked ? '#7a8593' : '#fff',
+                    textShadow: isSelected ? `0 0 5px ${isWorld ? activeColor : '#ff4466'}` : 'none',
+                    cursor: 'pointer',
+                    zIndex: 30,
+                    pointerEvents: 'auto',
+                    boxShadow: isSelected ? `0 0 8px ${isWorld ? activeColor : '#ff4466'}40` : 'none'
+                  }}
+                >
+                  {tagPrefix}: {coord.name.split(' ')[0]}
+                </div>
+              )
+            })}
+          </div>
         </div>
 
-        {/* Row 2: Level Requirements */}
-        {isUnderleveled && (
-          <div style={{
-            background: 'rgba(255, 160, 60, 0.1)', border: '1px solid rgba(255, 160, 60, 0.3)',
-            borderRadius: '8px', padding: '8px 12px', color: '#ffcc66', fontSize: 12,
-            fontFamily: 'var(--font-mono)', display: 'flex', alignItems: 'center', gap: 8
-          }}>
-            <span>⚠️</span>
-            <span>Recommended Level is {mapCoordinates[selectedNode].minLevel} (Current: Level {player.level}). You can enter, but enemies are dangerous!</span>
-          </div>
-        )}
-
-        {/* Row 3: Monsters list (Dynamic layout) */}
-        <div>
-          <div style={{
-            fontSize: 13, fontWeight: 800, color: '#5f8da3',
-            textTransform: 'uppercase', letterSpacing: 1, marginBottom: 6,
-            fontFamily: 'var(--font-title)'
-          }}>
-            Zone Inhabitants
-          </div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-            {selectedSector.mobs.map((m, idx) => (
-              <span key={idx} style={{
-                fontSize: 13, background: 'rgba(255,255,255,0.03)',
-                padding: '5px 10px', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.06)',
-                color: isLocked ? '#7a8593' : '#dde2ea', display: 'inline-flex', alignItems: 'center', gap: 6,
-                fontFamily: 'var(--font-mono)'
+        {/* Right/Bottom Holographic Tactical Info Panel Overlay */}
+        <div style={{
+          background: 'rgba(3, 8, 20, 0.96)',
+          width: isLandscape ? '380px' : '100%',
+          borderLeft: isLandscape ? `2.5px solid ${isWorld ? activeColor : '#ff4466'}` : 'none',
+          borderTop: isLandscape ? 'none' : `2.5px solid ${isWorld ? activeColor : '#ff4466'}`,
+          boxShadow: isLandscape ? `-10px 0 30px rgba(0,0,0,0.85)` : `0 -10px 30px rgba(0,0,0,0.85)`,
+          padding: isLandscape ? '20px 24px' : '18px 20px 24px',
+          zIndex: 20,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          gap: 14,
+          flexShrink: 0,
+          overflowY: 'auto'
+        }}>
+          {/* Row 1: Title and Lock status */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div>
+              <div style={{
+                fontFamily: "'Orbitron', sans-serif", fontSize: 15, fontWeight: 900,
+                color: isWorld ? '#fff' : '#ff4466', letterSpacing: 1, textTransform: 'uppercase'
               }}>
-                <span>{m.emoji}</span>
-                <span>{m.name}</span>
-              </span>
-            ))}
+                {isWorld ? `MAP ${safeNode + 1} — ${selectedTarget.name}` : `DUNGEON ${safeNode + 1} — ${selectedTarget.name}`}
+              </div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#7ab0d0', marginTop: 2 }}>
+                Level Requirement: Lv. {activeMinLevel}+
+              </div>
+            </div>
+
             <span style={{
-              fontSize: 13, background: 'rgba(255, 100, 0, 0.05)',
-              padding: '5px 10px', borderRadius: '6px', border: '1px solid rgba(255, 100, 0, 0.25)',
-              color: isLocked ? '#7a8593' : '#ff985a', display: 'inline-flex', alignItems: 'center', gap: 6,
-              fontFamily: 'var(--font-mono)', fontWeight: 'bold'
+              fontSize: 12, background: player.level < activeMinLevel ? 'rgba(255,60,60,0.15)' : (isActive ? `${activeColor}20` : 'rgba(0, 229, 255, 0.12)'),
+              color: player.level < activeMinLevel ? '#ff4444' : (isActive ? activeColor : '#00e5ff'),
+              border: `1.5px solid ${player.level < activeMinLevel ? '#ff4444' : (isActive ? activeColor : '#00e5ff')}`,
+              borderRadius: '6px', padding: '3px 10px', fontWeight: 900, fontFamily: 'var(--font-mono)'
             }}>
-              <span>💀</span>
-              <span>{selectedSector.boss.name} (Boss)</span>
+              {player.level < activeMinLevel ? '🔒 LEVEL REQ' : (isActive ? 'ACTIVE' : 'READY')}
             </span>
           </div>
-        </div>
 
-        {/* Row 4: Select / Deploy Button */}
-        {isLocked ? (
-          <button
-            disabled={true}
-            style={{
-              marginTop: 4, padding: '14px', width: '100%', fontFamily: "'Orbitron', sans-serif",
-              fontSize: 14, fontWeight: 900, letterSpacing: 2.5, borderRadius: '10px',
-              cursor: 'not-allowed', border: 'none', background: 'rgba(40, 40, 50, 0.5)',
-              color: '#7a8593', textAlign: 'center'
-            }}
-          >
-            🔒 TRANSMISSION LOCKED
-          </button>
-        ) : (
+          {/* Row 2: Level Requirements */}
+          {isUnderleveled && (
+            <div style={{
+              background: 'rgba(255, 160, 60, 0.1)', border: '1px solid rgba(255, 160, 60, 0.3)',
+              borderRadius: '8px', padding: '8px 12px', color: '#ffcc66', fontSize: 12,
+              fontFamily: 'var(--font-mono)', display: 'flex', alignItems: 'center', gap: 8
+            }}>
+              <span>⚠️</span>
+              <span>Recommended Level is {activeMinLevel} (Current: Level {player.level}). You can enter, but enemies are dangerous!</span>
+            </div>
+          )}
+
+          {/* Row 3: Monsters / Boss details */}
+          <div>
+            <div style={{
+              fontSize: 13, fontWeight: 800, color: '#5f8da3',
+              textTransform: 'uppercase', letterSpacing: 1, marginBottom: 6,
+              fontFamily: 'var(--font-title)'
+            }}>
+              {isWorld ? 'Zone Inhabitants & Boss' : 'Dungeon Guardian Boss'}
+            </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+              {isWorld && selectedTarget.mobs.map((m, idx) => (
+                <span key={idx} style={{
+                  fontSize: 13, background: 'rgba(255,255,255,0.03)',
+                  padding: '5px 10px', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.06)',
+                  color: '#dde2ea', display: 'inline-flex', alignItems: 'center', gap: 6,
+                  fontFamily: 'var(--font-mono)'
+                }}>
+                  <span>{m.emoji}</span>
+                  <span>{m.name}</span>
+                </span>
+              ))}
+              <span style={{
+                fontSize: 13, background: isWorld ? 'rgba(255, 100, 0, 0.05)' : 'rgba(255, 68, 102, 0.1)',
+                padding: '6px 12px', borderRadius: '6px', border: `1px solid ${isWorld ? 'rgba(255, 100, 0, 0.25)' : 'rgba(255, 68, 102, 0.4)'}`,
+                color: isWorld ? '#ff985a' : '#ff4466', display: 'inline-flex', alignItems: 'center', gap: 6,
+                fontFamily: 'var(--font-mono)', fontWeight: 'bold'
+              }}>
+                <span>💀</span>
+                <span>{selectedTarget.boss?.name || 'Unknown Boss'} (Boss)</span>
+              </span>
+            </div>
+          </div>
+
+          {/* Row 4: Combat Mode Selection (FULL AUTO vs TURN-BASED) */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 4 }}>
-            <div style={{ fontSize: 11, fontWeight: 800, color: '#8a94a3', textAlign: 'center', fontFamily: 'var(--font-mono)' }}>
+            <div style={{ fontSize: 11, fontWeight: 800, color: '#8a94a3', textAlign: 'center', fontFamily: 'var(--font-mono)', letterSpacing: 1 }}>
               CHOOSE COMBAT MODE
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
               {/* Full Auto Button */}
               <button
                 onClick={() => {
-                  setSelectedMapIdx(selectedNode)
+                  if (isWorld) setSelectedMapIdx(safeNode)
                   onClose()
                 }}
                 className="deploy-btn-auto"
-                style={{ flex: 1, padding: '12px 4px', fontSize: 13, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, background: 'rgba(3,8,20,0.65)' }}
+                style={{
+                  padding: '12px 6px', fontSize: 13, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4,
+                  background: 'rgba(3,8,20,0.8)', border: '1.5px solid #ff8c3c', borderRadius: 6, color: '#ff8c3c', cursor: 'pointer'
+                }}
               >
                 <span>⚡ FULL AUTO</span>
                 <span style={{ fontSize: 9, opacity: 0.85, fontFamily: 'var(--font-body)', fontWeight: 600, letterSpacing: 0, textTransform: 'none' }}>
@@ -393,27 +477,29 @@ function WorldMapModal({ onClose }) {
                 </span>
               </button>
 
-              {/* Turn Based Button (Unlocked for local testing) */}
+              {/* Turn Based Button */}
               <button
                 onClick={() => {
-                  setSelectedMapIdx(selectedNode)
+                  if (isWorld) setSelectedMapIdx(safeNode)
                   setMode('fight')
                   onClose()
                 }}
                 className="deploy-btn-manual"
-                style={{ flex: 1, padding: '12px 4px', fontSize: 13, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, background: 'rgba(0, 229, 255, 0.15)', border: '1px solid #00e5ff', cursor: 'pointer' }}
+                style={{
+                  padding: '12px 6px', fontSize: 13, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4,
+                  background: 'rgba(0, 229, 255, 0.15)', border: '1.5px solid #00e5ff', borderRadius: 6, color: '#00e5ff', cursor: 'pointer'
+                }}
               >
                 <span>⚔️ TURN-BASED</span>
                 <span style={{ fontSize: 9, color: '#00e5ff', fontFamily: 'var(--font-body)', fontWeight: 600, letterSpacing: 0, textTransform: 'none' }}>
                   2.5D Manual Combat
                 </span>
               </button>
-
             </div>
           </div>
-        )}
-      </div>
 
+        </div>
+      </div>
     </div>
   )
 }
