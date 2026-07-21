@@ -13,6 +13,11 @@
         window.PIXI.mesh.Mesh = window.PIXI.mesh.Mesh || window.PIXI.SimpleMesh || {};
         window.PIXI.mesh.Mesh.DRAW_MODES = window.PIXI.mesh.Mesh.DRAW_MODES || window.PIXI.DRAW_MODES || { TRIANGLES: 4 };
       }
+      try {
+        if (screen && screen.orientation && screen.orientation.lock) {
+          screen.orientation.lock('landscape').catch(function() {});
+        }
+      } catch (e) {}
     </script>
     <script src="https://cdn.jsdelivr.net/npm/pixi-dragonbones@5.7.0-1/dragonBones.min.js"></script>
   </head>

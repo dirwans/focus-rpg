@@ -128,7 +128,7 @@ export default function HQScreen() {
           -webkit-tap-highlight-color: transparent !important;
           outline: none !important;
           display: grid !important;
-          grid-template-columns: repeat(4, 1fr) !important;
+          grid-template-columns: repeat(auto-fit, minmax(64px, 1fr)) !important;
           gap: 18px 22px !important;
           box-sizing: border-box !important;
           position: absolute;
@@ -142,6 +142,10 @@ export default function HQScreen() {
           -webkit-tap-highlight-color: transparent !important;
           outline: none !important;
         }
+        /* auto-fit + minmax (not a hardcoded column count) so the grid self-adjusts
+           without the width and height breakpoints fighting over grid-template-columns
+           when both match at once (narrow AND short - a real combination, not just an
+           edge case, since this app's viewport commonly lands in that range). */
         @media (max-width: 640px) {
           .hq-sidebar { width: 54px !important; }
           .hq-sidebar button svg { width: 16px !important; height: 16px !important; }
@@ -149,7 +153,7 @@ export default function HQScreen() {
           .hq-ops-console { display: none !important; }
           .hq-npc-grid {
             width: calc(100% - 24px) !important;
-            grid-template-columns: repeat(3, 1fr) !important;
+            grid-template-columns: repeat(auto-fit, minmax(52px, 1fr)) !important;
             gap: 12px 10px !important;
           }
           .npc-circle { width: 52px !important; height: 52px !important; }
@@ -159,7 +163,7 @@ export default function HQScreen() {
           .hq-header { padding: 6px 12px !important; }
           .hq-ops-console { display: none !important; }
           .hq-npc-grid {
-            grid-template-columns: repeat(6, 1fr) !important;
+            grid-template-columns: repeat(auto-fit, minmax(40px, 1fr)) !important;
             gap: 8px !important;
           }
           .npc-circle { width: 40px !important; height: 40px !important; }
