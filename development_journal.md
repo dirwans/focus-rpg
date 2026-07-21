@@ -16,6 +16,9 @@ Starting July 7, 2026, the following rules are enforced for all development and 
 
 ## 📅 Session Chronological Logs
 
+### 📱 Milestone 197: Hard CSS Landscape Auto-Rotation Guard [DEPLOYED] (2026-07-21)
+- **Hard CSS Landscape Lock (`src/index.css`, `src/App.jsx`)**: Implemented `@media screen and (orientation: portrait)` CSS rule with `transform: translate(-50%, -50%) rotate(90deg)` on `.game-container`, guaranteeing the UI renders in full landscape orientation even if held vertically on physical phone hardware.
+
 ### 📱 Milestone 196: JS Screen Orientation Lock & Auto-Enforce Hook [DEPLOYED] (2026-07-21)
 - **Automatic Web View Orientation Lock (`src/App.jsx`, `index.html`)**: Added `screen.orientation.lock('landscape')` hooks in `index.html` and `App.jsx` `useEffect` to automatically enforce landscape mode across browser and native Web View sessions without requiring APK re-installation.
 
