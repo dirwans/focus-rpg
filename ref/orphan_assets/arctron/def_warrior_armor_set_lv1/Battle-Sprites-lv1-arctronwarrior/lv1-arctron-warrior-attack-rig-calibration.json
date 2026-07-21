@@ -1,0 +1,192 @@
+{
+  "projectName": "lv1-arctron-warrior-attack",
+  "pivots": {
+    "torsoAnchor": {
+      "x": 85,
+      "y": 190
+    },
+    "neck": {
+      "x": 85,
+      "y": 75
+    },
+    "rShoulder": {
+      "x": 7.025345060798166,
+      "y": 41.77853991120639
+    },
+    "lShoulder": {
+      "x": 147.16384271260793,
+      "y": 73.98940787372129
+    },
+    "rBoot": {
+      "x": 104.85308250442966,
+      "y": 257.8442545109212
+    },
+    "lBoot": {
+      "x": 196.19373219373222,
+      "y": 263.1623931623932
+    }
+  },
+  "limbs": {
+    "helmet": {
+      "src": "lv1_arc_war_battle_helmet.png",
+      "natW": 180,
+      "natH": 180,
+      "dispW": 76,
+      "dispH": 85,
+      "offX": -17.083911286551356,
+      "offY": -94.6947746537989,
+      "scale": 0.7,
+      "flipH": false,
+      "flipV": false,
+      "rotation": 12
+    },
+    "torso": {
+      "src": "torax-torso-battle.png",
+      "natW": 343,
+      "natH": 453,
+      "dispW": 197,
+      "dispH": 260,
+      "offX": -98.5,
+      "offY": -169,
+      "scale": 1,
+      "flipH": false,
+      "flipV": false,
+      "rotation": 0
+    },
+    "leftArm": {
+      "src": "lv1_arc_war_battle_left_arm.png",
+      "natW": 137,
+      "natH": 289,
+      "dispW": 71.1,
+      "dispH": 150,
+      "offX": -21.157442094477833,
+      "offY": -2.227766982521601,
+      "scale": 1,
+      "flipH": false,
+      "flipV": false,
+      "rotation": 16
+    },
+    "upperRightArm": {
+      "src": "lv1_arc_war_battle_upper_right_arm.png",
+      "natW": 474,
+      "natH": 733,
+      "dispW": 94.8,
+      "dispH": 146.6,
+      "offX": -48,
+      "offY": -30,
+      "scale": 0.65,
+      "flipH": false,
+      "flipV": false,
+      "rotation": 0
+    },
+    "joinElbow": {
+      "src": "lv1_arc_war_battle_join_elbow_right_arm.png",
+      "natW": 702,
+      "natH": 702,
+      "dispW": 45,
+      "dispH": 45,
+      "offX": -22.5,
+      "offY": -22.5,
+      "scale": 1.43,
+      "flipH": false,
+      "flipV": false,
+      "rotation": 0
+    },
+    "lowerRightArm": {
+      "src": "lv1_arc_war_battle_lower_right_arm.png",
+      "natW": 702,
+      "natH": 702,
+      "dispW": 140.4,
+      "dispH": 140.4,
+      "offX": -129.04220015932782,
+      "offY": -25.273530304469503,
+      "scale": 1,
+      "flipH": false,
+      "flipV": false,
+      "rotation": 0
+    },
+    "rightArm": {
+      "src": "lv1_arc_war_battle_upper_right_arm.png",
+      "natW": 474,
+      "natH": 733,
+      "dispW": 94.8,
+      "dispH": 146.6,
+      "offX": -32,
+      "offY": -20,
+      "scale": 1,
+      "flipH": false,
+      "flipV": false,
+      "rotation": 0
+    },
+    "bootLeft": {
+      "src": "lv1_arc_war_battle_left_boot.png",
+      "natW": 186,
+      "natH": 248,
+      "dispW": 82.5,
+      "dispH": 110,
+      "offX": -41,
+      "offY": -10,
+      "scale": 1,
+      "flipH": false,
+      "flipV": false,
+      "rotation": 0
+    },
+    "bootRight": {
+      "src": "lv1_arc_war_battle_right_boot.png",
+      "natW": 168,
+      "natH": 239,
+      "dispW": 77.4,
+      "dispH": 110,
+      "offX": -172.41320037986708,
+      "offY": -6.961063627730294,
+      "scale": 1,
+      "flipH": false,
+      "flipV": false,
+      "rotation": 0
+    },
+    "shield": {
+      "src": "shield-battle.png",
+      "natW": 390,
+      "natH": 626,
+      "dispW": 74.7,
+      "dispH": 120,
+      "offX": -25.909189586496506,
+      "offY": -2.471125380539937,
+      "scale": 2.03,
+      "flipH": false,
+      "flipV": false,
+      "rotation": 0
+    },
+    "sword": {
+      "src": "sword_battle.png",
+      "natW": 553,
+      "natH": 595,
+      "dispW": 185.9,
+      "dispH": 200,
+      "offX": -171.367701867726,
+      "offY": -95.76964425336841,
+      "nestOffX": 53,
+      "nestOffY": 116,
+      "extraRotate": -18,
+      "scale": 1,
+      "flipH": false,
+      "flipV": false,
+      "rotation": 109
+    }
+  },
+  "scenes": [
+    {
+      "name": "Ready",
+      "dur": 1.6
+    },
+    {
+      "name": "Strike",
+      "dur": 3.4
+    },
+    {
+      "name": "JumpSlash",
+      "dur": 3
+    }
+  ],
+  "note": "Scenes are code (readyPose/strikePose/jumpSlashPose in animation-rig-lab.html), not data — this JSON is the CALIBRATION (pivots + limb offsets/sizes + weapon grip) only. Consuming component must port the pose functions verbatim."
+}

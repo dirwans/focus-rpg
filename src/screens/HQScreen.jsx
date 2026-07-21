@@ -128,24 +128,34 @@ export default function HQScreen() {
           -webkit-tap-highlight-color: transparent !important;
           outline: none !important;
           display: grid !important;
-          grid-template-columns: repeat(auto-fit, minmax(64px, 1fr)) !important;
-          gap: 18px 22px !important;
+          grid-template-columns: repeat(4, 1fr) !important;
+          gap: 28px 14px !important;
           box-sizing: border-box !important;
           position: absolute;
           left: 50%;
           top: 50%;
           transform: translate(-50%, -50%);
-          width: min(560px, calc(100% - 320px));
+          width: min(620px, calc(100% - 300px));
           z-index: 4;
         }
         .hq-npc-grid * {
           -webkit-tap-highlight-color: transparent !important;
           outline: none !important;
         }
-        /* auto-fit + minmax (not a hardcoded column count) so the grid self-adjusts
-           without the width and height breakpoints fighting over grid-template-columns
-           when both match at once (narrow AND short - a real combination, not just an
-           edge case, since this app's viewport commonly lands in that range). */
+        .hq-npc-grid > div { min-width: 0; }
+        .npc-label { width: 100%; overflow-wrap: break-word; }
+        /* Column COUNT only ever changes on width breakpoints (12 roles = even 4x3 or
+           3x4 rows, never a lopsided split). The height breakpoint below only shrinks
+           circle/gap/font size, never touches column count - that's what caused the
+           previous bug where the width and height rules fought over grid-template-columns
+           and produced uneven, overlapping columns when both matched at once (a real
+           combination for this app: landscape phones are commonly both narrow-ish and
+           short). One axis of breakpoints owns column count, the other only owns size.
+           Labels are width:100% of their own grid cell (not their own natural text
+           width) so a long name like "Enchantment Master" wraps within its column
+           instead of overflowing sideways into the next one - min-width:0 on the grid
+           item is required for this, since a flex/grid child's default min-width:auto
+           would otherwise keep it as wide as its longest unbreakable content. */
         @media (max-width: 640px) {
           .hq-sidebar { width: 54px !important; }
           .hq-sidebar button svg { width: 16px !important; height: 16px !important; }
@@ -153,8 +163,8 @@ export default function HQScreen() {
           .hq-ops-console { display: none !important; }
           .hq-npc-grid {
             width: calc(100% - 24px) !important;
-            grid-template-columns: repeat(auto-fit, minmax(52px, 1fr)) !important;
-            gap: 12px 10px !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 18px 10px !important;
           }
           .npc-circle { width: 52px !important; height: 52px !important; }
           .npc-label { font-size: 11px !important; }
@@ -163,11 +173,10 @@ export default function HQScreen() {
           .hq-header { padding: 6px 12px !important; }
           .hq-ops-console { display: none !important; }
           .hq-npc-grid {
-            grid-template-columns: repeat(auto-fit, minmax(40px, 1fr)) !important;
-            gap: 8px !important;
+            gap: 14px 8px !important;
           }
-          .npc-circle { width: 40px !important; height: 40px !important; }
-          .npc-label { font-size: 9px !important; }
+          .npc-circle { width: 44px !important; height: 44px !important; }
+          .npc-label { font-size: 9.5px !important; }
         }
         @media (max-width: 768px) {
           .hq-bg { background-size: contain !important; background-position: top center !important; }
@@ -321,7 +330,14 @@ export default function HQScreen() {
         position: 'relative',
         flex: '1 1 auto',
         minWidth: 0,
-        margin: 10,
+        // Top/right use safe-area-inset so the frame's own border/corner-bolts never
+        // render underneath a phone's status bar (time/signal/battery) in fullscreen
+        // landscape - env() resolves to 0 on devices that don't need it (desktop, most
+        // phones), so this is a no-op there and only kicks in where it's actually needed.
+        marginTop: 'max(10px, env(safe-area-inset-top, 0px))',
+        marginRight: 'max(10px, env(safe-area-inset-right, 0px))',
+        marginBottom: 10,
+        marginLeft: 10,
         borderRadius: 18,
         border: `2px solid ${primary}`,
         overflow: 'hidden',
@@ -417,6 +433,7 @@ export default function HQScreen() {
                 onMouseEnter={() => setActiveNpcKey(key)}
                 onMouseLeave={() => setActiveNpcKey((cur) => (cur === key ? null : cur))}
                 style={{
+                  minWidth: 0,
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
