@@ -83,7 +83,7 @@ export default function BionexPanel() {
 
   const theme = getFactionTheme('bionex')
   const primary = theme.primary || '#3b82f6'
-  const bgImage = '/assets/bionex/bionex_panel_bg.png'
+  const bgImage = '/assets/bionex/bionex_panel_bg.png?v=10'
   const crd = player?.resources?.crd?.toLocaleString() || '0'
   const jobName = player?.job?.toUpperCase() || 'PILOT'
   const level = player?.level || 1
