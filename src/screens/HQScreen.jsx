@@ -357,8 +357,7 @@ export default function HQScreen() {
           }} />
         ))}
 
-        {/* Background layers - brightened (was reading very dark/moody): lighter overlay
-            gradient + a mild brightness/contrast filter on the art itself. */}
+        {/* Background layers */}
         <div className="hq-bg" style={{
           position: 'absolute',
           inset: 0,
@@ -374,39 +373,56 @@ export default function HQScreen() {
           background: 'linear-gradient(180deg, rgba(8,7,6,0.32), rgba(8,7,6,0.46) 55%, rgba(8,7,6,0.6))',
         }} />
 
+        {/* Top Bezel Frame Overlay (Maestro Asset) */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: 64,
+          zIndex: 12,
+          backgroundImage: "url('/assets/top_bezel_hq_arctron.webp')",
+          backgroundSize: '100% 100%',
+          backgroundRepeat: 'no-repeat',
+          pointerEvents: 'none',
+        }} />
+
         {/* Header Bar */}
         <div className="hq-header" style={{
           position: 'relative',
-          zIndex: 10,
+          zIndex: 14,
           display: 'flex',
           alignItems: 'center',
           gap: 8,
-          padding: '10px 16px',
+          padding: '8px 16px',
+          paddingTop: 'max(8px, env(safe-area-inset-top, 0px))',
         }}>
           <div style={{
             display: 'flex',
             alignItems: 'center',
             gap: 6,
-            background: 'rgba(19,20,21,0.7)',
+            background: 'rgba(19,20,21,0.82)',
             backdropFilter: 'blur(14px)',
             border: '1px solid #ff8c3c',
             borderRadius: 20,
-            padding: '6px 14px 6px 10px',
+            padding: '5px 14px 5px 10px',
+            boxShadow: '0 0 10px rgba(255,140,60,0.35)',
           }}>
-            <span style={{ color: '#ff8c3c', fontSize: 14 }}>◈</span>
-            <span style={{ fontSize: 14, fontWeight: 700, color: '#eef3fb' }}>{crd} CRD</span>
+            <span style={{ color: '#ff8c3c', fontSize: 13 }}>◈</span>
+            <span style={{ fontSize: 13, fontWeight: 700, color: '#eef3fb' }}>{crd} CRD</span>
           </div>
           <div style={{
             marginLeft: 'auto',
-            background: 'rgba(19,20,21,0.7)',
+            background: 'rgba(19,20,21,0.82)',
             backdropFilter: 'blur(14px)',
             border: '1px solid rgba(255,140,60,0.4)',
             borderRadius: 20,
-            padding: '6px 14px',
-            fontSize: 13,
+            padding: '5px 14px',
+            fontSize: 12,
             fontWeight: 700,
             color: '#ffab5e',
             whiteSpace: 'nowrap',
+            boxShadow: '0 0 10px rgba(255,140,60,0.25)',
           }}>
             {raceName}-{jobName} · LV.{level}
           </div>
