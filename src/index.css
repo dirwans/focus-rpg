@@ -103,15 +103,24 @@ body {
 }
 
 .game-container {
-  width: 390px;
-  height: 844px;
-  max-height: 95vh;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
   background: var(--bg-darker);
-  border-radius: 36px;
+  border-radius: 0;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   position: relative;
+}
+
+.game-container.landscape {
+  width: 100vw;
+  height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
+  border-radius: 0;
 }
 
 /* CRT Scanline Overlay Effect - Disabled to prevent screen-wide blurring & Moiré */

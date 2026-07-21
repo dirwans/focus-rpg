@@ -96,7 +96,7 @@ export default function HQScreen() {
   const race = player?.race || 'arctron'
   const theme = getFactionTheme(race)
   const primary = theme.primary
-  const bgImage = `/assets/${race}/${race}_panel_bg.png`
+  const bgImage = '/assets/hq_industrial_hangar_bg.png'
   const homeLabel = race === 'bionex' ? 'MAINFRAME' : race === 'celestra' ? 'SANCTUARY' : 'HQ'
   const exitLabel = EXIT_LABEL[race] || EXIT_LABEL.arctron
   const crd = player?.resources?.crd?.toLocaleString() || '0'
