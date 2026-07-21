@@ -25,10 +25,12 @@ import Ascension from './screens/Ascension'
 import Inventory from './screens/Inventory'
 import AuditorRoom from './screens/AuditorRoom'
 import HQScreen from './screens/HQScreen'
+import BionexPanel from './screens/BionexPanel'
+import Sanctuary from './screens/Sanctuary'
 
 import { handleBackButtonStack } from './lib/backButtonManager'
 
-const SCREENS = { main: Main, hq: HQScreen, unit: Unit, ranks: Ranks, cargo: Cargo, trade: Trade, battle: Battle, mine: Mine, premium: PremiumShop, ascension: Ascension, inventory: Inventory }
+const SCREENS = { main: Main, hq: HQScreen, bionex_panel: BionexPanel, sanctuary: Sanctuary, unit: Unit, ranks: Ranks, cargo: Cargo, trade: Trade, battle: Battle, mine: Mine, premium: PremiumShop, ascension: Ascension, inventory: Inventory }
 
 const snap = (gs) => JSON.stringify(gs ?? {})
 
@@ -371,7 +373,15 @@ export default function App() {
     )
   }
 
-  const Screen = SCREENS[screen] || HQScreen
+  const getFactionHomeScreen = () => {
+    if (player?.race === 'bionex') return BionexPanel
+    if (player?.race === 'celestra') return Sanctuary
+    return HQScreen
+  }
+
+  const Screen = (screen === 'hq' || !SCREENS[screen])
+    ? getFactionHomeScreen()
+    : SCREENS[screen]
 
   return (
     <div className="game-root">

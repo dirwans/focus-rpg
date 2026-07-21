@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { App as CapApp } from '@capacitor/app'
 import { Capacitor } from '@capacitor/core'
 import { useGameStore } from '../store/gameStore'
@@ -10,26 +9,23 @@ import NpcModal from '../components/NpcModal'
 import { WorldMapModal } from './Main'
 import { useBackHandler } from '../hooks/useBackHandler'
 
-// Exit-portal label for Arctron
-const EXIT_LABEL = 'STAND DOWN'
+const EXIT_LABEL = 'DISCONNECT'
 
-// NPC Roster for Arctron HQ
 const NPC_ROSTER = [
-  { name: 'Weapon Master', subView: 'arsenal_keeper', icon: 'sword', color: '#ff8c3c', glow: 'rgba(255,140,60,0.9)' },
-  { name: 'Armor Master', subView: 'armory_keeper', icon: 'shield', color: '#5fb0e0', glow: 'rgba(95,176,224,0.9)' },
-  { name: 'Mining Supplier', subView: 'mining_supplier', icon: 'pick', color: '#c7ccd6', glow: 'rgba(199,204,214,0.8)' },
-  { name: 'Potion Merchant', subView: 'potion_merchant', icon: 'potion', color: '#5fe08a', glow: 'rgba(95,224,138,0.9)' },
-  { name: 'Warehouse Keeper', subView: 'vault_keeper', icon: 'box', color: '#a9c8ff', glow: 'rgba(169,200,255,0.8)' },
-  { name: 'Enchantment Master', subView: 'forge_master', icon: 'sparkle', color: '#ff8c3c', glow: 'rgba(255,140,60,0.9)' },
-  { name: 'Craft Master', subView: 'master_artisan', icon: 'hammer', color: '#ff5f7a', glow: 'rgba(255,95,122,0.8)' },
-  { name: 'Guild Manager', subView: 'guild_steward', icon: 'castle', color: '#ffab5e', glow: 'rgba(255,171,94,1)' },
-  { name: 'Premium Shop', subView: 'premium_shop_mgr', icon: 'gem', color: '#d9acff', glow: 'rgba(217,172,255,0.9)' },
-  { name: 'Quest Manager', subView: 'grand_warden', icon: 'scroll', color: '#d9acff', glow: 'rgba(217,172,255,0.8)', dim: true },
-  { name: 'Auction Manager', subView: 'trade_broker', icon: 'coin', color: '#ffd166', glow: 'rgba(255,209,102,0.9)' },
-  { name: 'Eminence QM', subView: 'eminence_qm', icon: 'medal', color: '#ffd166', glow: 'rgba(255,209,102,0.8)', dim: true },
+  { name: 'Weapon Master', subView: 'arsenal_keeper', icon: 'sword', color: '#3b82f6', glow: 'rgba(59,130,246,0.9)' },
+  { name: 'Armor Master', subView: 'armory_keeper', icon: 'shield', color: '#60a5fa', glow: 'rgba(96,165,250,0.9)' },
+  { name: 'Mining Supplier', subView: 'mining_supplier', icon: 'pick', color: '#93c5fd', glow: 'rgba(147,197,253,0.8)' },
+  { name: 'Potion Merchant', subView: 'potion_merchant', icon: 'potion', color: '#34d399', glow: 'rgba(52,211,153,0.9)' },
+  { name: 'Warehouse Keeper', subView: 'vault_keeper', icon: 'box', color: '#a78bfa', glow: 'rgba(167,139,250,0.8)' },
+  { name: 'Enchantment Master', subView: 'forge_master', icon: 'sparkle', color: '#60a5fa', glow: 'rgba(96,165,250,0.9)' },
+  { name: 'Craft Master', subView: 'master_artisan', icon: 'hammer', color: '#f472b6', glow: 'rgba(244,114,182,0.8)' },
+  { name: 'Guild Manager', subView: 'guild_steward', icon: 'castle', color: '#fbbf24', glow: 'rgba(251,191,36,1)' },
+  { name: 'Premium Shop', subView: 'premium_shop_mgr', icon: 'gem', color: '#c084fc', glow: 'rgba(192,132,252,0.9)' },
+  { name: 'Quest Manager', subView: 'grand_warden', icon: 'scroll', color: '#c084fc', glow: 'rgba(192,132,252,0.8)', dim: true },
+  { name: 'Auction Manager', subView: 'trade_broker', icon: 'coin', color: '#fde047', glow: 'rgba(253,224,71,0.9)' },
+  { name: 'Eminence QM', subView: 'eminence_qm', icon: 'medal', color: '#fde047', glow: 'rgba(253,224,71,0.8)', dim: true },
 ]
 
-// NPC Icon
 function NpcIcon({ type, color }) {
   const s = { width: '52%', height: '52%', fill: 'none', stroke: color, strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round' }
   const paths = {
@@ -49,7 +45,7 @@ function NpcIcon({ type, color }) {
   return <svg viewBox="0 0 24 24" style={s}><path d={paths[type] || paths.box} /></svg>
 }
 
-export default function HQScreen() {
+export default function BionexPanel() {
   const player = useGameStore(s => s.player)
   const setScreen = useGameStore(s => s.setScreen)
   const [showNpcModal, setShowNpcModal] = useState(false)
@@ -58,9 +54,8 @@ export default function HQScreen() {
   const [activeNpcKey, setActiveNpcKey] = useState(null)
   const [showTacticalMap, setShowTacticalMap] = useState(false)
 
-  // 2-Tap Deploy State
   const [deployArmed, setDeployArmed] = useState(false)
-  const armTimerRef = React.useRef(null)
+  const armTimerRef = useRef(null)
 
   const handleCloseTacticalMap = () => setShowTacticalMap(false)
 
@@ -86,11 +81,11 @@ export default function HQScreen() {
 
   useBackHandler(handleCloseTacticalMap, showTacticalMap)
 
-  const theme = getFactionTheme('arctron')
-  const primary = theme.primary
-  const bgImage = '/assets/hq_industrial_hangar_bg.png'
+  const theme = getFactionTheme('bionex')
+  const primary = theme.primary || '#3b82f6'
+  const bgImage = '/assets/bionex/bionex_panel_bg.png'
   const crd = player?.resources?.crd?.toLocaleString() || '0'
-  const jobName = player?.job?.toUpperCase() || 'WARRIOR'
+  const jobName = player?.job?.toUpperCase() || 'PILOT'
   const level = player?.level || 1
 
   const handleExitClick = async () => {
@@ -103,7 +98,7 @@ export default function HQScreen() {
   }
 
   const NAV_ITEMS = [
-    { id: 'hq', label: 'HQ', path: 'M3 11h18v11H3z' },
+    { id: 'hq', label: 'MAINFRAME', path: 'M3 11h18v11H3z' },
     { id: 'unit', label: 'CHAR', path: 'M12 12a4 4 0 100-8 4 4 0 000 8z' },
     { id: 'inventory', label: 'GEARS', path: 'M4 7h16M4 12h16M4 17h10' },
     { id: 'ranks', label: 'RANKS', path: 'M4 20V10M10 20V4M16 20v-7' },
@@ -116,33 +111,21 @@ export default function HQScreen() {
     <div style={{
       position: 'fixed',
       inset: 0,
-      background: '#08090b',
+      background: '#060b14',
       fontFamily: "'Share Tech Mono', monospace",
-      color: '#eef3fb',
+      color: '#e0f2fe',
       overflow: 'hidden',
       display: 'flex',
       flexDirection: 'row',
     }}>
       <style>{`
-        @keyframes ledOrangePulse {
-          0%, 100% { box-shadow: 0 0 6px #ff6600, inset 0 0 3px #ff6600; opacity: 0.85; }
-          50% { box-shadow: 0 0 16px #ff9900, 0 0 25px #ff5500, inset 0 0 6px #ff9900; opacity: 1; }
+        @keyframes bionexPulse {
+          0%, 100% { box-shadow: 0 0 6px #3b82f6, inset 0 0 3px #3b82f6; opacity: 0.85; }
+          50% { box-shadow: 0 0 16px #60a5fa, 0 0 25px #2563eb, inset 0 0 6px #60a5fa; opacity: 1; }
         }
-        @keyframes ledWarningPulse {
-          0% { box-shadow: 0 0 12px #ff3300, 0 0 20px #ff6600; opacity: 0.7; transform: scale(1); }
-          100% { box-shadow: 0 0 28px #ffaa00, 0 0 50px #ff3300; opacity: 1; transform: scale(1.25); }
-        }
-        @keyframes armedGlowPulse {
-          0%, 100% {
-            background: linear-gradient(180deg, rgba(255, 102, 0, 0.95), rgba(200, 50, 0, 0.95));
-            box-shadow: 0 0 30px rgba(255, 102, 0, 0.9), inset 0 0 15px rgba(255, 200, 100, 0.6);
-            border-color: #ffa500;
-          }
-          50% {
-            background: linear-gradient(180deg, rgba(255, 150, 0, 1), rgba(230, 80, 0, 1));
-            box-shadow: 0 0 45px rgba(255, 150, 0, 1), inset 0 0 22px rgba(255, 230, 150, 0.8);
-            border-color: #fff;
-          }
+        @keyframes bionexWarningPulse {
+          0% { box-shadow: 0 0 12px #ef4444; opacity: 0.7; transform: scale(1); }
+          100% { box-shadow: 0 0 28px #3b82f6, 0 0 50px #60a5fa; opacity: 1; transform: scale(1.25); }
         }
         .hq-npc-grid {
           -webkit-tap-highlight-color: transparent !important;
@@ -186,24 +169,6 @@ export default function HQScreen() {
           .npc-circle { width: 44px !important; height: 44px !important; }
           .npc-label { font-size: 9.5px !important; }
         }
-        @media (max-width: 768px) {
-          .hq-bg { background-size: contain !important; background-position: top center !important; }
-        }
-        .arctron-deploy-btn {
-          animation: deployBtnPulse 2s infinite ease-in-out;
-          -webkit-tap-highlight-color: transparent !important;
-          outline: none !important;
-        }
-        @keyframes deployBtnPulse {
-          0%, 100% { box-shadow: 0 0 15px rgba(255,140,60,0.45), inset 0 0 8px rgba(255,140,60,0.2); border-color: #ff8c3c; }
-          50% { box-shadow: 0 0 25px rgba(255,140,60,0.7), inset 0 0 12px rgba(255,140,60,0.4); border-color: #ffb48f; }
-        }
-        @media (max-width: 640px) {
-          .arctron-deploy-btn {
-            padding: 8px 20px !important;
-            font-size: 11px !important;
-          }
-        }
       `}</style>
 
       {/* Sidebar Nav */}
@@ -211,11 +176,10 @@ export default function HQScreen() {
         flex: '0 0 auto',
         width: 80,
         zIndex: 20,
-        background: 'rgba(12,14,20,0.55)',
+        background: 'rgba(10,18,32,0.65)',
         backdropFilter: 'blur(14px) saturate(180%)',
-        WebkitBackdropFilter: 'blur(14px) saturate(180%)',
-        borderRight: `1px solid ${primary}55`,
-        boxShadow: `inset 0 1px 0 rgba(255,255,255,0.08), 0 -6px 24px ${primary}22`,
+        borderRight: '1px solid rgba(59,130,246,0.35)',
+        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08), 0 -6px 24px rgba(59,130,246,0.2)',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -232,8 +196,6 @@ export default function HQScreen() {
           alignItems: 'center',
           gap: 4,
           overflowY: 'auto',
-          overscrollBehavior: 'contain',
-          WebkitOverflowScrolling: 'touch',
         }}>
           {NAV_ITEMS.map((n) => (
             <button
@@ -243,7 +205,6 @@ export default function HQScreen() {
                 flex: '0 0 auto',
                 width: '100%',
                 minHeight: 46,
-                minWidth: 0,
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
@@ -255,7 +216,7 @@ export default function HQScreen() {
                 padding: '4px 2px',
               }}
             >
-              <svg width={21} height={21} viewBox="0 0 24 24" fill="none" stroke={n.id === 'hq' ? primary : '#8a94a3'} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+              <svg width={21} height={21} viewBox="0 0 24 24" fill="none" stroke={n.id === 'hq' ? primary : '#64748b'} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
                 <path d={n.path} />
               </svg>
               <span style={{
@@ -263,30 +224,16 @@ export default function HQScreen() {
                 fontStyle: 'italic',
                 fontSize: 10.5,
                 fontWeight: 800,
-                letterSpacing: 0.5,
-                color: n.id === 'hq' ? '#fff' : '#8a94a3',
-                textShadow: n.id === 'hq' ? `0 0 8px ${primary}99` : 'none',
+                color: n.id === 'hq' ? '#fff' : '#64748b',
+                textShadow: n.id === 'hq' ? `0 0 8px ${primary}` : 'none',
                 whiteSpace: 'nowrap',
-                textAlign: 'center',
               }}>
                 {n.label}
               </span>
-              <div style={{
-                width: 4,
-                height: 4,
-                borderRadius: '50%',
-                background: primary,
-                boxShadow: `0 0 6px ${primary}`,
-                marginTop: -2,
-                opacity: n.id === 'hq' ? 1 : 0,
-                transform: n.id === 'hq' ? 'scale(1)' : 'scale(0)',
-                transition: 'opacity 0.2s ease, transform 0.2s ease',
-              }} />
             </button>
           ))}
         </div>
 
-        {/* Exit portal */}
         <button
           onClick={handleExitClick}
           style={{
@@ -311,23 +258,12 @@ export default function HQScreen() {
             <path d="M16 17l5-5-5-5" />
             <path d="M21 12H9" />
           </svg>
-          <span style={{
-            fontFamily: "'Oxanium', sans-serif",
-            fontStyle: 'italic',
-            fontSize: 8.5,
-            fontWeight: 800,
-            letterSpacing: 0.3,
-            color: '#f87171',
-            whiteSpace: 'nowrap',
-            textAlign: 'center',
-          }}>
-            {EXIT_LABEL}
-          </span>
+          <span style={{ fontSize: 8.5, fontWeight: 800, color: '#f87171' }}>{EXIT_LABEL}</span>
         </button>
       </nav>
 
-      {/* Main Arctron Stage */}
-      <div className="hq-mecha-frame" style={{
+      {/* Main Bionex Stage */}
+      <div style={{
         position: 'relative',
         flex: '1 1 auto',
         minWidth: 0,
@@ -341,34 +277,19 @@ export default function HQScreen() {
         boxShadow: `0 0 30px ${primary}44, inset 0 0 40px rgba(0,0,0,0.55)`,
       }} onClick={() => setActiveNpcKey(null)}>
 
-        {/* Corner bolt accents */}
-        {[
-          { top: -6, left: -6 }, { top: -6, right: -6 },
-          { bottom: -6, left: -6 }, { bottom: -6, right: -6 },
-        ].map((pos, i) => (
-          <div key={i} style={{
-            position: 'absolute', ...pos, zIndex: 15,
-            width: 12, height: 12, borderRadius: '50%',
-            background: `radial-gradient(circle, #fff 0%, ${primary} 55%, ${theme.accent} 100%)`,
-            boxShadow: `0 0 10px 3px ${primary}aa`,
-            pointerEvents: 'none',
-          }} />
-        ))}
-
-        {/* Arctron Hangar Mecha Background */}
-        <div className="hq-bg" style={{
+        {/* Bionex Cybernetic Mainframe Background */}
+        <div style={{
           position: 'absolute',
           inset: 0,
           background: `url('${bgImage}')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          filter: 'brightness(1.3) contrast(1.05)',
+          filter: 'brightness(1.2) contrast(1.05)',
         }} />
         <div style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(180deg, rgba(8,7,6,0.32), rgba(8,7,6,0.46) 55%, rgba(8,7,6,0.6))',
+          background: 'linear-gradient(180deg, rgba(6,11,20,0.4), rgba(6,11,20,0.65))',
         }} />
 
         {/* Header Bar */}
@@ -385,63 +306,63 @@ export default function HQScreen() {
             display: 'flex',
             alignItems: 'center',
             gap: 6,
-            background: 'rgba(19,20,21,0.85)',
+            background: 'rgba(10,18,32,0.85)',
             backdropFilter: 'blur(14px)',
-            border: '1px solid #ff8c3c',
+            border: '1px solid #3b82f6',
             borderRadius: 20,
             padding: '5px 14px 5px 10px',
-            boxShadow: '0 0 12px rgba(255,140,60,0.3)',
+            boxShadow: '0 0 12px rgba(59,130,246,0.35)',
           }}>
             <div style={{
               width: 8,
               height: 8,
               borderRadius: '50%',
-              background: '#ff6600',
-              animation: 'ledOrangePulse 1.8s infinite alternate',
+              background: '#3b82f6',
+              animation: 'bionexPulse 1.8s infinite alternate',
             }} />
-            <span style={{ fontSize: 13, fontWeight: 700, color: '#eef3fb' }}>{crd} CRD</span>
+            <span style={{ fontSize: 13, fontWeight: 700, color: '#e0f2fe' }}>{crd} CRD</span>
           </div>
 
-          {/* Centered Arctron HQ Badge */}
+          {/* Centered Bionex Mainframe Badge */}
           <div style={{
             margin: '0 auto',
             fontFamily: "'Share Tech Mono', monospace",
             fontSize: 14,
             fontWeight: 900,
             letterSpacing: 3,
-            color: '#ff8c3c',
-            textShadow: '0 0 10px #ff6600',
+            color: '#60a5fa',
+            textShadow: '0 0 10px #3b82f6',
           }}>
-            ARCTRON · HEADQUARTER
+            BIONEX · MAINFRAME
           </div>
 
           <div style={{
             display: 'flex',
             alignItems: 'center',
             gap: 6,
-            background: 'rgba(19,20,21,0.85)',
+            background: 'rgba(10,18,32,0.85)',
             backdropFilter: 'blur(14px)',
-            border: '1px solid rgba(255,140,60,0.5)',
+            border: '1px solid rgba(59,130,246,0.5)',
             borderRadius: 20,
             padding: '5px 14px',
             fontSize: 12,
             fontWeight: 700,
-            color: '#ffab5e',
+            color: '#93c5fd',
             whiteSpace: 'nowrap',
-            boxShadow: '0 0 12px rgba(255,140,60,0.25)',
+            boxShadow: '0 0 12px rgba(59,130,246,0.25)',
           }}>
             <div style={{
               width: 8,
               height: 8,
               borderRadius: '50%',
-              background: '#ff6600',
-              animation: 'ledOrangePulse 1.8s infinite alternate',
+              background: '#3b82f6',
+              animation: 'bionexPulse 1.8s infinite alternate',
             }} />
-            ARCTRON-{jobName} · LV.{level}
+            BIONEX-{jobName} · LV.{level}
           </div>
         </div>
 
-        {/* NPC Terminals Grid */}
+        {/* NPC Grid */}
         <div className="hq-npc-grid" onClick={(e) => e.stopPropagation()}>
           {NPC_ROSTER.map((npc, i) => {
             const key = `npc_${i}`
@@ -473,28 +394,23 @@ export default function HQScreen() {
                   width: 68,
                   height: 68,
                   borderRadius: '50%',
-                  background: 'rgba(19,20,21,0.55)',
+                  background: 'rgba(10,18,32,0.6)',
                   backdropFilter: 'blur(10px)',
                   border: `2px solid ${isActive ? '#fff' : npc.color}`,
-                  boxShadow: isActive
-                    ? `0 0 24px ${npc.glow}, inset 0 0 14px ${npc.glow}`
-                    : `0 0 12px ${npc.glow}`,
+                  boxShadow: isActive ? `0 0 24px ${npc.glow}` : `0 0 12px ${npc.glow}`,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   transform: isActive ? 'scale(1.1)' : 'scale(1)',
-                  transition: 'transform 0.2s cubic-bezier(0.2,0.8,0.2,1), border-color 0.2s, box-shadow 0.2s',
+                  transition: 'all 0.2s ease',
                 }}>
                   <NpcIcon type={npc.icon} color={isActive ? '#fff' : npc.color} />
                 </div>
                 <div className="npc-label" style={{
-                  fontFamily: "'Share Tech Mono', monospace",
                   fontSize: 12,
                   fontWeight: 700,
-                  color: isActive ? '#fff' : '#c7ccd6',
-                  textShadow: isActive ? `0 0 8px ${npc.glow}` : '0 1px 3px rgba(0,0,0,0.9)',
+                  color: isActive ? '#fff' : '#94a3b8',
                   textAlign: 'center',
-                  lineHeight: 1.15,
                 }}>
                   {npc.name}
                 </div>
@@ -503,7 +419,7 @@ export default function HQScreen() {
           })}
         </div>
 
-        {/* Bottom Console Deck: 2-Tap DEPLOY Button */}
+        {/* Bottom Deploy CTA */}
         <div style={{
           position: 'absolute',
           bottom: 14,
@@ -514,120 +430,39 @@ export default function HQScreen() {
           alignItems: 'center',
           gap: 12,
         }}>
-          <div style={{
-            width: 10,
-            height: 10,
-            borderRadius: '50%',
-            background: '#ff6600',
-            animation: deployArmed ? 'ledWarningPulse 0.4s infinite alternate' : 'ledOrangePulse 1.8s infinite alternate',
-          }} />
-
           <button
-            className={`arctron-deploy-btn ${deployArmed ? 'armed-active' : ''}`}
             onClick={handleDeployClick}
             style={{
               position: 'relative',
               background: deployArmed
-                ? 'linear-gradient(180deg, #ff6600 0%, #d93800 100%)'
-                : 'rgba(19,20,21,0.88)',
+                ? 'linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%)'
+                : 'rgba(10,18,32,0.9)',
               backdropFilter: 'blur(16px)',
-              border: deployArmed ? '2px solid #ffe17d' : '2px solid #ff8c3c',
+              border: deployArmed ? '2px solid #93c5fd' : '2px solid #3b82f6',
               borderRadius: 20,
               padding: '10px 28px',
-              color: deployArmed ? '#ffffff' : '#ffab5e',
+              color: '#e0f2fe',
               fontFamily: "'Share Tech Mono', monospace",
               fontSize: 13,
               fontWeight: 900,
               letterSpacing: 2,
               cursor: 'pointer',
-              textShadow: deployArmed ? '0 0 10px #ffffff, 0 2px 4px rgba(0,0,0,0.8)' : `0 0 5px ${primary}`,
+              boxShadow: deployArmed ? '0 0 30px rgba(59,130,246,0.9)' : '0 0 15px rgba(59,130,246,0.4)',
               display: 'flex',
               alignItems: 'center',
               gap: 8,
-              animation: deployArmed ? 'armedGlowPulse 0.5s infinite alternate' : 'deployBtnPulse 2s infinite ease-in-out',
-              transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
             }}
           >
-            <span style={{ fontSize: 12, color: deployArmed ? '#fff' : '#ff8c3c' }}>
-              {deployArmed ? '⚡' : '◈'}
-            </span>
+            <span style={{ fontSize: 12, color: '#60a5fa' }}>{deployArmed ? '⚡' : '◈'}</span>
             {deployArmed ? 'SYSTEM ARMED: TAP AGAIN TO DEPLOY' : 'DEPLOY TO MISSION'}
           </button>
-
-          <div style={{
-            width: 10,
-            height: 10,
-            borderRadius: '50%',
-            background: '#ff6600',
-            animation: deployArmed ? 'ledWarningPulse 0.4s infinite alternate' : 'ledOrangePulse 1.8s infinite alternate',
-          }} />
         </div>
 
-        {/* Ops Console */}
-        <div className="hq-ops-console" style={{
-          position: 'absolute',
-          right: 'max(16px, env(safe-area-inset-right, 0px))',
-          top: 70,
-          zIndex: 6,
-          width: 260,
-          background: 'rgba(19,20,21,0.8)',
-          backdropFilter: 'blur(16px)',
-          border: '1px solid #3a3d40',
-          borderRadius: 12,
-          padding: 14,
-        }}>
-          <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: 1, color: '#8a94a3', marginBottom: 10 }}>
-            FOCUS SESSION · FIGHT
-          </div>
-          <div style={{ display: 'flex', gap: 4, marginBottom: 10 }}>
-            {['10', '25', '60'].map((t, i) => (
-              <div key={i} style={{
-                flex: 1,
-                textAlign: 'center',
-                padding: '6px 0',
-                fontSize: 12,
-                fontWeight: 700,
-                borderRadius: 6,
-                background: i === 0 ? '#ff8c3c' : '#131415',
-                color: i === 0 ? '#101112' : '#8a94a3',
-              }}>
-                {t}
-              </div>
-            ))}
-          </div>
-          <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
-            {[
-              { label: 'WORLD', bg: '#ff8c3c', fg: '#101112' },
-              { label: 'ECHO L30', bg: '#131415', fg: '#ff8c3c' },
-              { label: 'FORGE L50', bg: '#131415', fg: '#8a94a3', op: 0.4 },
-              { label: 'CORE L65', bg: '#131415', fg: '#8a94a3', op: 0.4 },
-            ].map((z, i) => (
-              <div key={i} style={{
-                padding: '5px 9px',
-                fontSize: 11,
-                fontWeight: 700,
-                background: z.bg,
-                color: z.fg,
-                borderRadius: 4,
-                opacity: z.op || 1,
-              }}>
-                {z.label}
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
 
-      {/* NPC Modal */}
       {showNpcModal && (
-        <NpcModal
-          onClose={() => setShowNpcModal(false)}
-          initialView={npcSubView}
-          hideLobby
-        />
+        <NpcModal onClose={() => setShowNpcModal(false)} initialView={npcSubView} hideLobby />
       )}
-
-      {/* Direct Deploy Tactical Map Screen */}
       {showTacticalMap && (
         <WorldMapModal onClose={handleCloseTacticalMap} />
       )}

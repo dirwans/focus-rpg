@@ -16,6 +16,10 @@ Starting July 7, 2026, the following rules are enforced for all development and 
 
 ## 📅 Session Chronological Logs
 
+### 📱 Milestone 200: Dynamic Faction Background Integration & VPS Deployment [DEPLOYED] (2026-07-21)
+- **Dynamic Faction Background Selector (`src/screens/HQScreen.jsx`)**: Updated `bgImage` variable logic to dynamically select Bionex Cybernetic Mainframe (`bionex_panel_bg.png`) and Celestra Arc-Sanctuary (`celestra_panel_bg.png`) while keeping Arctron Mecha Hangar (`hq_industrial_hangar_bg.png`), ensuring each race displays its authentic faction artwork.
+- **Production VPS Pipeline Deployment (`https://103.189.234.206.nip.io/`)**: Successfully deployed dynamic backgrounds and complete asset fallback pipeline to production VPS.
+
 ### 📱 Milestone 199: Complete PNG/WebP Asset Restoration & Maestro Top Bezel HUD [DEPLOYED] (2026-07-21)
 - **All Faction & Map Asset Restoration (`public/assets/`)**: Restored all 229 missing PNG/WebP sprites for Bionex, Celestra, World Map, Dungeons, and Weapons, providing 100% dual-format (`.png` & `.webp`) fallback availability for VPS & Android APK streaming.
 - **HQ Screen Maestro Top Bezel HUD (`src/screens/HQScreen.jsx`)**: Integrated exact metallic top bezel frame overlay from `top-bezel-hq-arctron.png` with vector glowing orange `HEADQUARTER` title plate, mobile notch safety padding (`env(safe-area-inset-top)`), and 2-tap DEPLOY TO MISSION arming physics.

@@ -88,8 +88,8 @@ export default function Navmenu() {
   const player    = useGameStore((s) => s.player)
   const primary   = getFactionPrimary(player?.race)
 
-  // HQScreen has its own embedded station sidebar (with Stand Down / Exit portal)
-  if (screen === 'hq') return null
+  // Dedicated faction home screens have their own embedded station sidebars
+  if (screen === 'hq' || screen === 'bionex_panel' || screen === 'sanctuary') return null
 
   return (
     <nav style={{
