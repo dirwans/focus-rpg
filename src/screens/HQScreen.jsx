@@ -36,6 +36,9 @@ const NPC_ROSTER = [
   { name: 'Eminence QM', subView: 'eminence_qm', icon: 'medal', color: '#ffd166', glow: 'rgba(255,209,102,0.8)', dim: true },
 ]
 
+const LEFT_NPC_ROSTER = NPC_ROSTER.slice(0, 6)
+const RIGHT_NPC_ROSTER = NPC_ROSTER.slice(6)
+
 // NPC Icon
 function NpcIcon({ type, color }) {
   const s = { width: '52%', height: '52%', fill: 'none', stroke: color, strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round' }
@@ -124,54 +127,33 @@ export default function HQScreen() {
       flexDirection: 'row',
     }}>
       <style>{`
-        .hq-npc-left-grid, .hq-npc-right-grid {
+        .hq-npc-grid {
           -webkit-tap-highlight-color: transparent !important;
           outline: none !important;
           display: grid !important;
-          grid-template-columns: repeat(3, 1fr) !important;
-          grid-auto-rows: minmax(0, 1fr) !important;
-          align-content: center !important;
-          justify-items: center !important;
-          gap: 14px 8px !important;
-          height: 100% !important;
+          grid-template-columns: repeat(4, 1fr) !important;
+          gap: 18px 22px !important;
           box-sizing: border-box !important;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          width: min(560px, calc(100% - 320px));
+          z-index: 4;
         }
-        .hq-npc-left-grid * , .hq-npc-right-grid * {
+        .hq-npc-grid * {
           -webkit-tap-highlight-color: transparent !important;
           outline: none !important;
-        }
-        .hq-npc-left-grid {
-          position: absolute;
-          top: 62px;
-          left: 16px;
-          bottom: 118px;
-          width: 320px;
-          z-index: 4;
-        }
-        .hq-npc-right-grid {
-          position: absolute;
-          top: 62px;
-          right: 292px;
-          bottom: 118px;
-          width: 320px;
-          z-index: 4;
         }
         @media (max-width: 640px) {
           .hq-sidebar { width: 54px !important; }
           .hq-sidebar button svg { width: 16px !important; height: 16px !important; }
           .hq-sidebar button span { font-size: 7px !important; }
           .hq-ops-console { display: none !important; }
-          .hq-npc-left-grid {
-            left: 8px !important;
-            width: 140px !important;
-            bottom: 96px !important;
-            grid-template-columns: repeat(2, 1fr) !important;
-          }
-          .hq-npc-right-grid {
-            right: 8px !important;
-            width: 140px !important;
-            bottom: 96px !important;
-            grid-template-columns: repeat(2, 1fr) !important;
+          .hq-npc-grid {
+            width: calc(100% - 24px) !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 12px 10px !important;
           }
           .npc-circle { width: 52px !important; height: 52px !important; }
           .npc-label { font-size: 11px !important; }
@@ -179,18 +161,12 @@ export default function HQScreen() {
         @media (max-height: 480px) {
           .hq-header { padding: 6px 12px !important; }
           .hq-ops-console { display: none !important; }
-          .hq-npc-left-grid {
-            left: 8px !important;
-            bottom: 96px !important;
-            grid-template-columns: repeat(2, 1fr) !important;
+          .hq-npc-grid {
+            grid-template-columns: repeat(6, 1fr) !important;
+            gap: 8px !important;
           }
-          .hq-npc-right-grid {
-            right: 8px !important;
-            bottom: 96px !important;
-            grid-template-columns: repeat(2, 1fr) !important;
-          }
-          .npc-circle { width: 44px !important; height: 44px !important; }
-          .npc-label { font-size: 10px !important; }
+          .npc-circle { width: 40px !important; height: 40px !important; }
+          .npc-label { font-size: 9px !important; }
         }
         @media (max-width: 768px) {
           .hq-bg { background-size: contain !important; background-position: top center !important; }
@@ -204,62 +180,10 @@ export default function HQScreen() {
           0%, 100% { box-shadow: 0 0 15px rgba(255,140,60,0.45), inset 0 0 8px rgba(255,140,60,0.2); border-color: #ff8c3c; }
           50% { box-shadow: 0 0 25px rgba(255,140,60,0.7), inset 0 0 12px rgba(255,140,60,0.4); border-color: #ffb48f; }
         }
-        @keyframes laserScan {
-          0% { top: 5%; opacity: 0.25; }
-          50% { top: 95%; opacity: 0.95; }
-          100% { top: 5%; opacity: 0.25; }
-        }
-        @keyframes steamRelease {
-          0% { opacity: 0; backdrop-filter: blur(0px); }
-          20% { opacity: 0.9; backdrop-filter: blur(3px); }
-          100% { opacity: 0; backdrop-filter: blur(0px); }
-        }
-        .hangar-door-left {
-          position: absolute;
-          inset: 0;
-          z-index: 3;
-          clip-path: inset(62px 50% 118px calc(50% - 170px));
-          transform: translateX(0);
-          transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
-          pointer-events: none;
-        }
-        .hangar-door-left.open {
-          transform: translateX(-100%);
-        }
-        .hangar-door-right {
-          position: absolute;
-          inset: 0;
-          z-index: 3;
-          clip-path: inset(62px calc(50% - 170px) 118px 50%);
-          transform: translateX(0);
-          transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
-          pointer-events: none;
-        }
-        .hangar-door-right.open {
-          transform: translateX(100%);
-        }
         @media (max-width: 640px) {
-          .hangar-door-left {
-            clip-path: inset(62px 50% 96px calc(50% - 76px)) !important;
-          }
-          .hangar-door-right {
-            clip-path: inset(62px calc(50% - 76px) 96px 50%) !important;
-          }
-          .hangar-bay-bg {
-            width: 152px !important;
-            margin-left: -76px !important;
-          }
           .arctron-deploy-btn {
-            padding: 6px 14px !important;
-            font-size: 10px !important;
-          }
-        }
-        @media (max-height: 480px) {
-          .hangar-door-left {
-            clip-path: inset(42px 50% 96px calc(50% - 76px)) !important;
-          }
-          .hangar-door-right {
-            clip-path: inset(42px calc(50% - 76px) 96px 50%) !important;
+            padding: 8px 20px !important;
+            font-size: 11px !important;
           }
         }
       `}</style>
@@ -387,12 +311,37 @@ export default function HQScreen() {
         </button>
       </nav>
 
-      {/* Main column: everything to the right of the sidebar. Matches the
-          reference's structure - one relative-positioned stage, header in
-          normal flow at the top, everything else (NPCs, hatch, ops console)
-          absolutely positioned overlays on top of the background art. */}
-      <div style={{ position: 'relative', flex: '1 1 auto', minWidth: 0 }} onClick={() => { setActiveNpcKey(null); setHatchOpen(false); }}>
-        {/* Background layers */}
+      {/* Main column: everything to the right of the sidebar. A clean CSS-only ornate
+          frame (rounded border + glow + corner bolts, no image assets - the generated
+          mecha_frame_*.png set was a busier/mechanical style than what was wanted here)
+          wraps a relative-positioned stage; header in normal flow at the top, everything
+          else (NPC grid, deploy button, ops console) absolutely positioned overlays. */}
+      <div className="hq-mecha-frame" style={{
+        position: 'relative',
+        flex: '1 1 auto',
+        minWidth: 0,
+        margin: 10,
+        borderRadius: 18,
+        border: `2px solid ${primary}`,
+        overflow: 'hidden',
+        boxShadow: `0 0 30px ${primary}44, inset 0 0 40px rgba(0,0,0,0.55)`,
+      }} onClick={() => setActiveNpcKey(null)}>
+        {/* Corner bolt accents - plain glowing dots, no image assets */}
+        {[
+          { top: -6, left: -6 }, { top: -6, right: -6 },
+          { bottom: -6, left: -6 }, { bottom: -6, right: -6 },
+        ].map((pos, i) => (
+          <div key={i} style={{
+            position: 'absolute', ...pos, zIndex: 15,
+            width: 12, height: 12, borderRadius: '50%',
+            background: `radial-gradient(circle, #fff 0%, ${primary} 55%, ${theme.accent} 100%)`,
+            boxShadow: `0 0 10px 3px ${primary}aa`,
+            pointerEvents: 'none',
+          }} />
+        ))}
+
+        {/* Background layers - brightened (was reading very dark/moody): lighter overlay
+            gradient + a mild brightness/contrast filter on the art itself. */}
         <div className="hq-bg" style={{
           position: 'absolute',
           inset: 0,
@@ -400,11 +349,12 @@ export default function HQScreen() {
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
+          filter: 'brightness(1.3) contrast(1.05)',
         }} />
         <div style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(180deg, rgba(8,7,6,0.5), rgba(8,7,6,0.68) 55%, rgba(8,7,6,0.8))',
+          background: 'linear-gradient(180deg, rgba(8,7,6,0.32), rgba(8,7,6,0.46) 55%, rgba(8,7,6,0.6))',
         }} />
 
         {/* Header Bar */}
