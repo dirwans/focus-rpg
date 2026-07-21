@@ -381,7 +381,7 @@ export default function HQScreen() {
           right: 0,
           height: 64,
           zIndex: 12,
-          backgroundImage: "url('/assets/top_bezel_hq_arctron.webp?v=3')",
+          backgroundImage: "url('/assets/top_bezel_hq_arctron.webp?v=4')",
           backgroundSize: '100% 100%',
           backgroundRepeat: 'no-repeat',
           pointerEvents: 'none',
@@ -390,12 +390,12 @@ export default function HQScreen() {
         {/* Glowing Orange HEADQUARTER Plate Title Overlay */}
         <div style={{
           position: 'absolute',
-          top: 14,
+          top: 22,
           left: '50%',
           transform: 'translateX(-50%)',
           zIndex: 15,
           fontFamily: "'Orbitron', 'Share Tech Mono', sans-serif",
-          fontSize: 15,
+          fontSize: 14,
           fontWeight: 900,
           letterSpacing: 4,
           color: '#ff8c3c',
