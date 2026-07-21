@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Focus RPG - 3D Isometric Sci-Fi Console Demo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cyan-glow: #00f0ff;
+      --orange-glow: #ff8800;
+      --green-glow: #00ff66;
+      --dark-bg: #090c15;
+      --panel-bg: #101625;
+      --panel-border: #1e293b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle at center, #111a2e 0%, var(--dark-bg) 100%);
+      font-family: 'Share Tech Mono', monospace;
+      color: #94a3b8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      perspective: 2500px;
+    }
+
+    .header-info {
+      position: absolute;
+      top: 25px;
+      text-align: center;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .header-info h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--cyan-glow);
+      letter-spacing: 2px;
+      text-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+    }
+
+    .header-info p {
+      font-size: 13px;
+      color: #64748b;
+      margin-top: 4px;
+    }
+
+    /* 3D Isometric View Container */
+    .scene {
+      position: relative;
+      width: 550px;
+      height: 480px;
+      transform-style: preserve-3d;
+      transform: rotateX(55deg) rotateZ(-30deg) translateY(-20px);
+      transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .scene:hover {
+      transform: rotateX(50deg) rotateZ(-25deg) translateY(-30px);
+    }
+
+    /* 3D Extruded Console Base Deck */
+    .console-deck {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: #0d1322;
+      border-radius: 24px;
+      padding: 24px;
+      transform-style: preserve-3d;
+      box-shadow: 
+        /* 20-Layer 3D Depth Extrusion Shadow */
+        0px 1px 0 #080c16,
+        1px 2px 0 #070a13,
+        2px 3px 0 #060810,
+        3px 4px 0 #05070d,
+        4px 5px 0 #04050a,
+        5px 6px 0 #030407,
+        6px 7px 0 #020305,
+        7px 8px 0 #010203,
+        8px 9px 0 #000102,
+        9px 10px 0 #000000,
+        15px 25px 40px rgba(0, 0, 0, 0.8),
+        0 0 50px rgba(0, 240, 255, 0.15);
+      border: 2px solid rgba(0, 240, 255, 0.3);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Top Display Screen Plate */
+    .display-screen {
+      position: relative;
+      width: 100%;
+      height: 160px;
+      background: rgba(10, 18, 35, 0.85);
+      border-radius: 14px;
+      border: 1px solid rgba(0, 240, 255, 0.4);
+      box-shadow: inset 0 0 20px rgba(0, 240, 255, 0.2);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transform: translateZ(15px);
+    }
+
+    .display-screen::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .screen-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+      padding-bottom: 8px;
+    }
+
+    .screen-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--cyan-glow);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--green-glow);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--green-glow);
+      animation: pulse 1.5s infinite alternate;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.4; }
+      100% { opacity: 1; }
+    }
+
+    .screen-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .metric-box {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 8px;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .metric-val {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .metric-lbl {
+      font-size: 10px;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    /* 3D Interactive Buttons Grid */
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      transform-style: preserve-3d;
+    }
+
+    /* 3D Extruded Key Base */
+    .btn-3d {
+      position: relative;
+      height: 75px;
+      background: #1e293b;
+      border-radius: 12px;
+      cursor: pointer;
+      user-select: none;
+      transform-style: preserve-3d;
+      transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+
+      /* 3D Side Thickness Shadow */
+      box-shadow: 
+        0 1px 0 #0f172a,
+        1px 2px 0 #0f172a,
+        2px 3px 0 #0f172a,
+        3px 4px 0 #0f172a,
+        4px 5px 0 #0f172a,
+        5px 6px 0 #0f172a,
+        6px 7px 0 #0f172a,
+        7px 8px 15px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Top Cap of the 3D Key */
+    .btn-3d .btn-top {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(180deg, #334155 0%, #1e293b 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 10px;
+      transform: translateZ(12px);
+      transition: all 0.15s ease;
+    }
+
+    .btn-3d .btn-icon {
+      font-size: 20px;
+    }
+
+    .btn-3d .btn-label {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: #e2e8f0;
+      letter-spacing: 1px;
+    }
+
+    /* Hover State (Elevate in 3D) */
+    .btn-3d:hover {
+      transform: translateZ(4px);
+    }
+
+    .btn-3d:hover .btn-top {
+      border-color: var(--cyan-glow);
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+    }
+
+    .btn-3d:hover .btn-label {
+      color: var(--cyan-glow);
+    }
+
+    /* Active State (Press Down 3D Physics) */
+    .btn-3d:active {
+      transform: translate(4px, 4px) translateZ(-6px);
+      box-shadow: 
+        0 1px 0 #0f172a,
+        1px 2px 0 #0f172a,
+        1px 2px 5px rgba(0, 0, 0, 0.8);
+    }
+
+    .btn-3d:active .btn-top {
+      background: #0f172a;
+      transform: translateZ(2px);
+    }
+
+    /* Special 3D Main Action Button (DEPLOY) */
+    .btn-3d.btn-primary {
+      grid-column: span 3;
+      height: 65px;
+      background: #9a3412;
+      box-shadow: 
+        0 1px 0 #431407,
+        1px 2px 0 #431407,
+        2px 3px 0 #431407,
+        3px 4px 0 #431407,
+        4px 5px 0 #431407,
+        5px 6px 0 #431407,
+        6px 7px 0 #431407,
+        7px 8px 20px rgba(237, 137, 54, 0.4);
+    }
+
+    .btn-3d.btn-primary .btn-top {
+      background: linear-gradient(180deg, #f97316 0%, #ea580c 100%);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-3d.btn-primary .btn-label {
+      font-size: 15px;
+      color: #fff;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .btn-3d.btn-primary:hover .btn-top {
+      border-color: #ffedd5;
+      box-shadow: 0 0 25px rgba(249, 115, 22, 0.6);
+    }
+
+    /* Footer Hint */
+    .footer-hint {
+      position: absolute;
+      bottom: 25px;
+      font-size: 12px;
+      color: #475569;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-info">
+    <h1>3D ISOMETRIC SCI-FI CONSOLE DEMO</h1>
+    <p>Pure CSS 3D Extrusion & Physics — Coba Click / Hover Tombol Di Bawah!</p>
+  </div>
+
+  <!-- 3D Scene Wrapper -->
+  <div class="scene">
+    <div class="console-deck">
+      
+      <!-- Screen Monitor Plate -->
+      <div class="display-screen">
+        <div class="screen-header">
+          <div class="screen-title">
+            <div class="status-dot"></div>
+            HQ COMMAND TERMINAL V3.4
+          </div>
+          <span style="font-size: 11px; color: var(--cyan-glow);">SYSTEM ONLINE</span>
+        </div>
+
+        <div class="screen-metrics">
+          <div class="metric-box">
+            <div class="metric-val" style="color: var(--cyan-glow);">LVL 14</div>
+            <div class="metric-lbl">ARCTRON WARRIOR</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-val" style="color: var(--orange-glow);">98.4%</div>
+            <div class="metric-lbl">MECHA INTEGRITY</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-val" style="color: var(--green-glow);">READY</div>
+            <div class="metric-lbl">MISSION STATUS</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3D Extruded Buttons Grid -->
+      <div class="button-grid">
+        
+        <div class="btn-3d" onclick="alert('Navigating to Gear Master...')">
+          <div class="btn-top">
+            <span class="btn-icon">🛡️</span>
+            <span class="btn-label">GEARS</span>
+          </div>
+        </div>
+
+        <div class="btn-3d" onclick="alert('Navigating to Weapon Forge...')">
+          <div class="btn-top">
+            <span class="btn-icon">⚔️</span>
+            <span class="btn-label">FORGE</span>
+          </div>
+        </div>
+
+        <div class="btn-3d" onclick="alert('Navigating to T-Mine Reactor...')">
+          <div class="btn-top">
+            <span class="btn-icon">💎</span>
+            <span class="btn-label">T-MINE</span>
+          </div>
+        </div>
+
+        <div class="btn-3d" onclick="alert('Navigating to Mecha Ascension...')">
+          <div class="btn-top">
+            <span class="btn-icon">⚡</span>
+            <span class="btn-label">ASCEND</span>
+          </div>
+        </div>
+
+        <div class="btn-3d" onclick="alert('Navigating to Guild Hall...')">
+          <div class="btn-top">
+            <span class="btn-icon">🏰</span>
+            <span class="btn-label">GUILD</span>
+          </div>
+        </div>
+
+        <div class="btn-3d" onclick="alert('Navigating to Auction QM...')">
+          <div class="btn-top">
+            <span class="btn-icon">⚖️</span>
+            <span class="btn-label">AUCTION</span>
+          </div>
+        </div>
+
+        <!-- 3D Primary Action Button -->
+        <div class="btn-3d btn-primary" onclick="alert('Deploying Arctron Warrior to Tactical Mission!')">
+          <div class="btn-top">
+            <span class="btn-label">🚀 DEPLOY TO MISSION</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer-hint">
+    💡 Interactive Demo — Pure CSS 3D Box Shadows (0 Bytes Image Download)
+  </div>
+
+</body>
+</html>

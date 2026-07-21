@@ -16,7 +16,7 @@ Starting July 7, 2026, the following rules are enforced for all development and 
 
 ## 📅 Session Chronological Logs
 
-### 📱 Milestone 198: WebP Lossless Asset Optimization & 27.4 MB Release APK [LOCAL] (2026-07-21)
+### 📱 Milestone 198: WebP Lossless Asset Optimization & 27.4 MB Release APK [DEPLOYED] (2026-07-21)
 - **Dev Asset Cleanup & Parallel WebP Conversion (`public/assets/`)**: Moved 241 orphan verification files (83 MB) out of `public/assets/` to `ref/` and converted 383 active in-game PNG sprites/textures to WebP, reducing static assets from 221 MB to 21 MB (90.5% size reduction).
 - **ZipAligned & Signed Release APK (`risingfantasy-v1.0-release.apk`)**: Built `assembleRelease` with ZipAlign 4-byte memory boundary and `apksigner v2+v3`, yielding a tiny 27.4 MB APK.
 
