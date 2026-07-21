@@ -36,9 +36,6 @@ const NPC_ROSTER = [
   { name: 'Eminence QM', subView: 'eminence_qm', icon: 'medal', color: '#ffd166', glow: 'rgba(255,209,102,0.8)', dim: true },
 ]
 
-const LEFT_NPC_ROSTER = NPC_ROSTER.slice(0, 6)
-const RIGHT_NPC_ROSTER = NPC_ROSTER.slice(6)
-
 // NPC Icon
 function NpcIcon({ type, color }) {
   const s = { width: '52%', height: '52%', fill: 'none', stroke: color, strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round' }
@@ -71,6 +68,12 @@ export default function HQScreen() {
   const [showTacticalMap, setShowTacticalMap] = useState(false)
 
   const handleCloseTacticalMap = () => setShowTacticalMap(false)
+
+  const handleNpcClick = (npc) => {
+    if (npc.dim) return
+    setNpcSubView(npc.subView)
+    setShowNpcModal(true)
+  }
 
   useBackHandler(handleCloseTacticalMap, showTacticalMap)
 
@@ -108,12 +111,6 @@ export default function HQScreen() {
     { id: 'mine', label: 'T-MINE', path: 'M12 3v6l4 2-4 10-4-10 4-2z' },
     { id: 'ascension', label: 'ASC', path: 'M12 2l3 7h7l-5.5 5 2 8-6.5-5-6.5 5 2-8L2 9h7z' },
   ]
-
-  const handleNpcClick = (npc) => {
-    if (npc.dim) return
-    setNpcSubView(npc.subView)
-    setShowNpcModal(true)
-  }
 
   return (
     <div style={{
@@ -395,13 +392,12 @@ export default function HQScreen() {
           </div>
         </div>
 
-        {/* NPC Terminals - uniform-size grid, tidy beside the sidebar (not
-            scattered/varying-scale like the reference). right edge reserves
-            space for the ops console when it's visible (hq-npc-grid-wrap). */}
-        {/* Left NPC Grid */}
-        <div className="hq-npc-left-grid" onClick={(e) => e.stopPropagation()}>
-          {LEFT_NPC_ROSTER.map((npc, i) => {
-            const key = `left_${i}`
+        {/* NPC Terminals - single centered grid (all 12 real roles - matches the
+            reference's clean centered badge-grid look without cutting the roster
+            down to the 9 the mockup happened to show). */}
+        <div className="hq-npc-grid" onClick={(e) => e.stopPropagation()}>
+          {NPC_ROSTER.map((npc, i) => {
+            const key = `npc_${i}`
             const isActive = activeNpcKey === key
             return (
               <div
@@ -459,285 +455,37 @@ export default function HQScreen() {
           })}
         </div>
 
-        {/* Right NPC Grid */}
-        <div className="hq-npc-right-grid" onClick={(e) => e.stopPropagation()}>
-          {RIGHT_NPC_ROSTER.map((npc, i) => {
-            const key = `right_${i}`
-            const isActive = activeNpcKey === key
-            return (
-              <div
-                key={key}
-                onClick={(e) => {
-                  e.stopPropagation()
-                  if (activeNpcKey === key) {
-                    handleNpcClick(npc)
-                  } else {
-                    setActiveNpcKey(key)
-                  }
-                }}
-                onMouseEnter={() => setActiveNpcKey(key)}
-                onMouseLeave={() => setActiveNpcKey((cur) => (cur === key ? null : cur))}
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  gap: 6,
-                  opacity: npc.dim ? 0.55 : 1,
-                  cursor: npc.dim ? 'default' : 'pointer',
-                }}
-              >
-                <div className="npc-circle" style={{
-                  width: 68,
-                  height: 68,
-                  borderRadius: '50%',
-                  background: 'rgba(19,20,21,0.55)',
-                  backdropFilter: 'blur(10px)',
-                  border: `2px solid ${npc.color}`,
-                  boxShadow: isActive ? `0 0 34px ${npc.glow}` : `0 0 16px ${npc.glow}`,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexShrink: 0,
-                  transform: isActive ? 'scale(1.18)' : 'scale(1)',
-                  transition: 'transform 0.18s ease, box-shadow 0.18s ease',
-                }}>
-                  <NpcIcon type={npc.icon} color={npc.color} />
-                </div>
-                <div className="npc-label" style={{
-                  fontFamily: "'Orbitron', sans-serif",
-                  fontSize: 13,
-                  fontWeight: 800,
-                  letterSpacing: 0.5,
-                  color: '#eef3fb',
-                  textShadow: '0 1px 3px rgba(0,0,0,0.9), 0 0 6px rgba(0,0,0,0.7)',
-                  textAlign: 'center',
-                  lineHeight: 1.2,
-                }}>
-                  {npc.name}
-                </div>
-              </div>
-            )
-          })}
-        </div>
-
-        {/* Hangar Bay Background (Behind Doors) */}
-        <div className="hangar-bay-bg" style={{
-          position: 'absolute',
-          left: '50%',
-          marginLeft: -170,
-          width: 340,
-          top: 62,
-          bottom: 118,
-          zIndex: 2,
-          background: '#040507',
-          border: '1px solid rgba(255,140,60,0.15)',
-          boxShadow: 'inset 0 0 30px rgba(255,140,60,0.25)',
-          overflow: 'hidden',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
-          {/* Laser lines / Grid dots */}
-          <div style={{
-            position: 'absolute',
-            inset: 0,
-            backgroundImage: 'radial-gradient(circle, rgba(255,140,60,0.15) 1px, transparent 1px)',
-            backgroundSize: '16px 16px',
-            opacity: 0.8,
-          }} />
-          {/* Scanning Laser Line */}
-          <div style={{
-            position: 'absolute',
-            width: '90%',
-            height: 2,
-            background: 'linear-gradient(90deg, transparent, #ff8c3c, transparent)',
-            boxShadow: '0 0 10px #ff8c3c',
-            animation: 'laserScan 3s infinite ease-in-out',
-          }} />
-          
-          {/* Hangar status metrics overlay */}
-          <div style={{
-            fontFamily: "'Share Tech Mono', monospace",
-            fontSize: 9,
-            color: '#ff8c3c',
-            opacity: 0.45,
-            position: 'absolute',
-            bottom: 8,
-            left: 8,
-            pointerEvents: 'none'
-          }}>
-            BAY_01 // SECURE_GRID
-          </div>
-          <div style={{
-            fontFamily: "'Share Tech Mono', monospace",
-            fontSize: 9,
-            color: '#ff8c3c',
-            opacity: 0.45,
-            position: 'absolute',
-            top: 8,
-            right: 8,
-            pointerEvents: 'none'
-          }}>
-            ENG_LAUNCH_ACTIVE: 100%
-          </div>
-
-          {/* Steam particle release when deploying */}
-          {hangarOpen && (
-            <div style={{
-              position: 'absolute',
-              inset: 0,
-              background: 'rgba(255, 140, 60, 0.08)',
-              animation: 'steamRelease 1s ease-out forwards',
-              zIndex: 5,
-              pointerEvents: 'none',
-            }} />
-          )}
-        </div>
-
-        {/* Hangar Door Left Panel (Background Image Clip) */}
-        <div className={`hangar-door-left ${hangarOpen ? 'open' : ''}`}>
-          <div style={{
-            position: 'absolute',
-            inset: 0,
-            background: `url('${bgImage}')`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            borderRight: '1.5px solid #ff8c3c',
-            boxShadow: 'inset -5px 0 15px rgba(0,0,0,0.9)',
-          }} />
-          <div style={{ position: 'absolute', top: '12%', left: 'calc(50% - 150px)', zIndex: 4, fontFamily: "'Share Tech Mono', monospace", fontSize: 8, color: '#ff8c3c', opacity: 0.35, transform: 'rotate(-90deg)', transformOrigin: 'left center' }}>DOCK_BAY_01</div>
-        </div>
-
-        {/* Hangar Door Right Panel (Background Image Clip) */}
-        <div className={`hangar-door-right ${hangarOpen ? 'open' : ''}`}>
-          <div style={{
-            position: 'absolute',
-            inset: 0,
-            background: `url('${bgImage}')`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            borderLeft: '1.5px solid #ff8c3c',
-            boxShadow: 'inset 5px 0 15px rgba(0,0,0,0.9)',
-          }} />
-          <div style={{ position: 'absolute', bottom: '12%', right: 'calc(50% - 150px)', zIndex: 4, fontFamily: "'Share Tech Mono', monospace", fontSize: 8, color: '#ff8c3c', opacity: 0.35, transform: 'rotate(90deg)', transformOrigin: 'right center' }}>LAUNCH_INIT</div>
-        </div>
-
-        {/* Sci-Fi Deploy Button (Placed in the center of the door gap) */}
+        {/* Deploy - single direct button, no hangar-door/hatch animation sequence. */}
         <button
           className="arctron-deploy-btn"
           onClick={(e) => {
             e.stopPropagation()
-            handleDeploySequence()
+            setShowTacticalMap(true)
           }}
           style={{
             position: 'absolute',
             left: '50%',
-            top: '50%',
-            transform: hangarOpen
-              ? 'translate(-50%, -50%) scale(0.6)'
-              : 'translate(-50%, -50%) scale(1)',
-            opacity: hangarOpen ? 0 : 1,
-            transition: 'transform 0.5s ease, opacity 0.4s ease',
-            pointerEvents: hangarOpen ? 'none' : 'auto',
+            bottom: 'max(24px, env(safe-area-inset-bottom, 0px))',
+            transform: 'translateX(-50%)',
             zIndex: 10,
-            
-            // Premium styling
             background: '#0a0c10',
-            border: '2px solid #ff8c3c',
-            color: '#ff8c3c',
-            padding: '10px 24px',
-            borderRadius: 4,
+            border: `2px solid ${primary}`,
+            color: primary,
+            padding: '12px 36px',
+            borderRadius: 999,
             fontFamily: "'Orbitron', sans-serif",
             fontSize: 14,
             fontWeight: 900,
             letterSpacing: 2,
             cursor: 'pointer',
-            textShadow: '0 0 5px #ff8c3c',
+            textShadow: `0 0 5px ${primary}`,
             display: 'flex',
             alignItems: 'center',
             gap: 8,
           }}
         >
-          <span style={{ fontSize: 10 }}>◈</span> DEPLOY
+          <span style={{ fontSize: 10 }}>◈</span> DEPLOY TO MISSION
         </button>
-
-        {/* Narrowed Bottom Hatch Indicator */}
-        <div className="hq-hatch-wrap" style={{
-          position: 'absolute',
-          left: '50%',
-          bottom: 'max(30px, env(safe-area-inset-bottom, 0px))',
-          transform: 'translateX(-50%)',
-          zIndex: 3
-        }}>
-          <div
-            className="hq-hatch"
-            style={{ width: '130px', cursor: hangarOpen ? 'default' : 'pointer' }}
-          >
-            <div style={{
-              position: 'relative',
-              height: '38px',
-              borderRadius: '6px',
-              overflow: 'hidden',
-              boxShadow: '0 0 15px rgba(255,140,60,0.2)',
-            }}>
-              {/* Glow status pit */}
-              <div style={{
-                position: 'absolute',
-                inset: 3,
-                borderRadius: '4px',
-                background: 'radial-gradient(ellipse at 50% 30%, rgba(255,140,60,0.45), #0a0a0c 80%)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                zIndex: 1,
-                opacity: hatchOpen ? 1 : 0.6,
-                transition: 'opacity 0.3s ease',
-              }}>
-                <div style={{
-                  fontFamily: "'Orbitron', sans-serif",
-                  fontWeight: 800,
-                  fontSize: 10,
-                  letterSpacing: 1.5,
-                  color: '#ffab5e',
-                  textShadow: '0 0 8px rgba(255,140,60,0.6)',
-                  opacity: hatchOpen ? 1 : 0.6,
-                  transition: 'opacity 0.3s ease',
-                  whiteSpace: 'nowrap',
-                }}>
-                  {hatchOpen ? 'OPENED' : 'SECURE'}
-                </div>
-              </div>
-              {/* Sliding hatch left panel */}
-              <div style={{
-                position: 'absolute',
-                left: 0,
-                top: 0,
-                width: '50%',
-                height: '100%',
-                background: 'repeating-linear-gradient(45deg,#ffab5e,#ffab5e 6px,#101112 6px,#101112 12px)',
-                boxShadow: '1px 0 6px rgba(0,0,0,0.6)',
-                zIndex: 2,
-                transform: hatchOpen ? 'translateX(-100%)' : 'translateX(0)',
-                transition: hatchOpen ? 'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)' : 'transform 0.28s ease-in',
-              }} />
-              {/* Sliding hatch right panel */}
-              <div style={{
-                position: 'absolute',
-                right: 0,
-                top: 0,
-                width: '50%',
-                height: '100%',
-                background: 'repeating-linear-gradient(-45deg,#ffab5e,#ffab5e 6px,#101112 6px,#101112 12px)',
-                boxShadow: '-1px 0 6px rgba(0,0,0,0.6)',
-                zIndex: 2,
-                transform: hatchOpen ? 'translateX(100%)' : 'translateX(0)',
-                transition: hatchOpen ? 'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)' : 'transform 0.28s ease-in',
-              }} />
-            </div>
-          </div>
-        </div>
 
         {/* Ops Console - same right:16px/top:70px/width:260px placement as the reference */}
         <div className="hq-ops-console" style={{

@@ -16,6 +16,9 @@ Starting July 7, 2026, the following rules are enforced for all development and 
 
 ## 📅 Session Chronological Logs
 
+### 🐛 Milestone 195: HQScreen NPC Roster ReferenceError Hotfix [DEPLOYED] (2026-07-21)
+- **HQScreen NPC Grid Roster Slices (`src/screens/HQScreen.jsx`)**: Fixed `Uncaught ReferenceError: LEFT_NPC_ROSTER is not defined` crash by defining `LEFT_NPC_ROSTER = NPC_ROSTER.slice(0, 6)` and `RIGHT_NPC_ROSTER = NPC_ROSTER.slice(6)`.
+
 ### 📱 Milestone 194: Fullscreen Landscape Lock & Industrial Hangar Background Rollout [DEPLOYED] (2026-07-21)
 - **Fullscreen Landscape CSS Lock (`src/index.css`)**: Defined `.game-container` and `.game-container.landscape` as full-viewport `width: 100vw; height: 100vh; border-radius: 0;` to prevent portrait card rendering on mobile viewports.
 - **Android OS Native Landscape Guard (`android/app/src/main/AndroidManifest.xml`, `MainActivity.java`)**: Configured `android:screenOrientation="sensorLandscape"` and Java `setRequestedOrientation` to enforce landscape orientation at the native Android OS level.
