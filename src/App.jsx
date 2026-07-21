@@ -376,33 +376,6 @@ export default function App() {
   return (
     <div className="game-root">
       <div className="game-container landscape" data-faction={player?.race || ''} style={{ background: containerBg }}>
-        {/* Subtle rotate prompt overlay if mobile user holds screen vertically */}
-        {!isLandscape && (
-          <div style={{
-            position: 'fixed',
-            top: 10,
-            left: '50%',
-            transform: 'translateX(-50%)',
-            background: 'rgba(12, 16, 26, 0.92)',
-            border: '1px solid rgba(0, 229, 255, 0.4)',
-            boxShadow: '0 4px 20px rgba(0,229,255,0.25)',
-            color: '#00e5ff',
-            padding: '6px 16px',
-            borderRadius: 20,
-            fontSize: 11,
-            fontWeight: 'bold',
-            fontFamily: "'Share Tech Mono', monospace",
-            zIndex: 9999,
-            display: 'flex',
-            alignItems: 'center',
-            gap: 8,
-            pointerEvents: 'none',
-            letterSpacing: 0.5
-          }}>
-            <span>🔄 Rotate device to Landscape for optimal MMORPG view</span>
-          </div>
-        )}
-
         <div className="no-scrollbar" style={styles.content}><Screen /></div>
         <Navmenu />
         {backExitToast && (

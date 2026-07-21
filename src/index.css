@@ -123,6 +123,21 @@ body {
   border-radius: 0;
 }
 
+/* Hard CSS Landscape Lock: Auto-rotate 90deg if phone is held in Portrait orientation */
+@media screen and (max-width: 900px) and (orientation: portrait) {
+  .game-container {
+    width: 100vh !important;
+    height: 100vw !important;
+    max-width: 100vh !important;
+    max-height: 100vw !important;
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) rotate(90deg) !important;
+    transform-origin: center center !important;
+  }
+}
+
 /* CRT Scanline Overlay Effect - Disabled to prevent screen-wide blurring & Moiré */
 .game-container::before {
   content: " ";

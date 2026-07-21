@@ -16,6 +16,9 @@ Starting July 7, 2026, the following rules are enforced for all development and 
 
 ## 📅 Session Chronological Logs
 
+### 📱 Milestone 196: JS Screen Orientation Lock & Auto-Enforce Hook [DEPLOYED] (2026-07-21)
+- **Automatic Web View Orientation Lock (`src/App.jsx`, `index.html`)**: Added `screen.orientation.lock('landscape')` hooks in `index.html` and `App.jsx` `useEffect` to automatically enforce landscape mode across browser and native Web View sessions without requiring APK re-installation.
+
 ### 🐛 Milestone 195: HQScreen NPC Roster ReferenceError Hotfix [DEPLOYED] (2026-07-21)
 - **HQScreen NPC Grid Roster Slices (`src/screens/HQScreen.jsx`)**: Fixed `Uncaught ReferenceError: LEFT_NPC_ROSTER is not defined` crash by defining `LEFT_NPC_ROSTER = NPC_ROSTER.slice(0, 6)` and `RIGHT_NPC_ROSTER = NPC_ROSTER.slice(6)`.
 
