@@ -88,7 +88,7 @@ export default function HQScreen() {
 
   const theme = getFactionTheme('arctron')
   const primary = theme.primary
-  const bgImage = '/assets/hq_industrial_hangar_bg.png'
+  const bgImage = '/assets/hq_industrial_hangar_bg.png?v=10'
   const crd = player?.resources?.crd?.toLocaleString() || '0'
   const jobName = player?.job?.toUpperCase() || 'WARRIOR'
   const level = player?.level || 1
